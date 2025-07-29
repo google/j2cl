@@ -1,0 +1,53 @@
+goog.module('nestedgenericclass.NestedGenericClassKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RecursiveTypeVariable = goog.forwardDeclare('nestedgenericclass.RecursiveTypeVariable$impl');
+let Inner = goog.forwardDeclare('nestedgenericclass.RecursiveTypeVariable.Inner$impl');
+
+/**
+ * @final
+ */
+class NestedGenericClassKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NestedGenericClassKt} */
+ static $create__() {
+  NestedGenericClassKt.$clinit();
+  let $instance = new NestedGenericClassKt();
+  $instance.$ctor__nestedgenericclass_NestedGenericClassKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nestedgenericclass_NestedGenericClassKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T */
+ static m_test__nestedgenericclass_RecursiveTypeVariable__void(/** T */ t) {
+  NestedGenericClassKt.$clinit();
+  Inner.$create__nestedgenericclass_RecursiveTypeVariable(/**@type {!RecursiveTypeVariable<?>}*/ (t));
+ }
+ /** @nodts */
+ static $clinit() {
+  NestedGenericClassKt.$clinit = () =>{};
+  NestedGenericClassKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NestedGenericClassKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Inner = goog.module.get('nestedgenericclass.RecursiveTypeVariable.Inner$impl');
+ }
+}
+$Util.$setClassMetadata(NestedGenericClassKt, 'nestedgenericclass.NestedGenericClassKt');
+
+exports = NestedGenericClassKt;
+
+//# sourceMappingURL=NestedGenericClassKt.js.map

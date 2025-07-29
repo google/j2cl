@@ -1,0 +1,45 @@
+goog.module('subclassgenericclass.GenericSubclassGenericClass$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const GenericClass = goog.require('subclassgenericclass.GenericClass$impl');
+
+/**
+ * @final
+ * @template T
+ * @extends {GenericClass<T>}
+ */
+class GenericSubclassGenericClass extends GenericClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!GenericSubclassGenericClass<T>} */
+ static $create__() {
+  GenericSubclassGenericClass.$clinit();
+  let $instance = new GenericSubclassGenericClass();
+  $instance.$ctor__subclassgenericclass_GenericSubclassGenericClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subclassgenericclass_GenericSubclassGenericClass__void() {
+  this.$ctor__subclassgenericclass_GenericClass__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericSubclassGenericClass.$clinit = () =>{};
+  GenericSubclassGenericClass.$loadModules();
+  GenericClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericSubclassGenericClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericSubclassGenericClass, 'subclassgenericclass.GenericSubclassGenericClass');
+
+exports = GenericSubclassGenericClass;
+
+//# sourceMappingURL=GenericSubclassGenericClass.js.map

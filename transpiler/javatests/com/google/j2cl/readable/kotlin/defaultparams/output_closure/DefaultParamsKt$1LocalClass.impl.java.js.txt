@@ -1,0 +1,73 @@
+goog.module('defaultparams.DefaultParamsKt.$1LocalClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
+
+/**
+ * @final
+ */
+class $1LocalClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_b__defaultparams_DefaultParamsKt_1LocalClass_ = 0;
+  /**@type {Integer} @nodts*/
+  this.$captured_a__defaultparams_DefaultParamsKt_1LocalClass;
+ }
+ //Factory method corresponding to constructor 'LocalClass(Integer, int)'.
+ /** @nodts @return {!$1LocalClass} */
+ static $create__java_lang_Integer__int(/** Integer */ $captured_a, /** number */ b) {
+  let $instance = new $1LocalClass();
+  $instance.$ctor__defaultparams_DefaultParamsKt_1LocalClass__java_lang_Integer__int__void($captured_a, b);
+  return $instance;
+ }
+ //Initialization from constructor 'LocalClass(Integer, int)'.
+ /** @nodts */
+ $ctor__defaultparams_DefaultParamsKt_1LocalClass__java_lang_Integer__int__void(/** Integer */ $captured_a, /** number */ b) {
+  this.$captured_a__defaultparams_DefaultParamsKt_1LocalClass = $captured_a;
+  this.$ctor__java_lang_Object__void();
+  this.f_b__defaultparams_DefaultParamsKt_1LocalClass_ = b;
+ }
+ //Factory method corresponding to constructor 'LocalClass(Integer, int, int, DefaultConstructorMarker)'.
+ /** @nodts @return {!$1LocalClass} */
+ static $create__java_lang_Integer__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** Integer */ $captured_a, /** number */ b, /** number */ _mask0, /** DefaultConstructorMarker */ _marker) {
+  $1LocalClass.$clinit();
+  let $instance = new $1LocalClass();
+  $instance.$ctor__defaultparams_DefaultParamsKt_1LocalClass__java_lang_Integer__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void($captured_a, b, _mask0, _marker);
+  return $instance;
+ }
+ //Initialization from constructor 'LocalClass(Integer, int, int, DefaultConstructorMarker)'.
+ /** @nodts */
+ $ctor__defaultparams_DefaultParamsKt_1LocalClass__java_lang_Integer__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** Integer */ $captured_a, /** number */ b, /** number */ _mask0, /** DefaultConstructorMarker */ _marker) {
+  if ((_mask0 & 1) != 0) {
+   b = $captured_a.m_intValue__int();
+  }
+  this.$ctor__defaultparams_DefaultParamsKt_1LocalClass__java_lang_Integer__int__void($captured_a, b);
+ }
+ /** @final @nodts @return {number} */
+ m_getB__int() {
+  return this.f_b__defaultparams_DefaultParamsKt_1LocalClass_;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1LocalClass.$clinit = () =>{};
+  $1LocalClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1LocalClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1LocalClass, 'defaultparams.DefaultParamsKt$1LocalClass');
+
+exports = $1LocalClass;
+
+//# sourceMappingURL=DefaultParamsKt$1LocalClass.js.map

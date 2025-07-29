@@ -1,0 +1,81 @@
+goog.module('statementasexpressions.ClassForFieldInitialization$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class ClassForFieldInitialization extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_witnessField__statementasexpressions_ClassForFieldInitialization_ = 0;
+  /**@type {number} @nodts*/
+  this.f_observerPreField__statementasexpressions_ClassForFieldInitialization_ = 0;
+  /**@type {number} @nodts*/
+  this.f_fieldInitializedWithStatement__statementasexpressions_ClassForFieldInitialization_ = 0;
+  /**@type {number} @nodts*/
+  this.f_observerPostField__statementasexpressions_ClassForFieldInitialization_ = 0;
+ }
+ /** @nodts @return {!ClassForFieldInitialization} */
+ static $create__() {
+  ClassForFieldInitialization.$clinit();
+  let $instance = new ClassForFieldInitialization();
+  $instance.$ctor__statementasexpressions_ClassForFieldInitialization__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__statementasexpressions_ClassForFieldInitialization__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_witnessField__statementasexpressions_ClassForFieldInitialization_ = 1;
+  this.f_observerPreField__statementasexpressions_ClassForFieldInitialization_ = this.m_getWitnessField__int();
+  let tmp = this;
+  let /** number */ tmp_1;
+  {
+   this.m_setWitnessField__int__void(2);
+   tmp_1 = 3;
+  }
+  tmp.f_fieldInitializedWithStatement__statementasexpressions_ClassForFieldInitialization_ = tmp_1;
+  this.f_observerPostField__statementasexpressions_ClassForFieldInitialization_ = this.m_getWitnessField__int();
+ }
+ /** @final @nodts @return {number} */
+ m_getWitnessField__int() {
+  return this.f_witnessField__statementasexpressions_ClassForFieldInitialization_;
+ }
+ /** @final @nodts */
+ m_setWitnessField__int__void(/** number */ set__) {
+  this.f_witnessField__statementasexpressions_ClassForFieldInitialization_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getObserverPreField__int() {
+  return this.f_observerPreField__statementasexpressions_ClassForFieldInitialization_;
+ }
+ /** @final @nodts @return {number} */
+ m_getFieldInitializedWithStatement__int() {
+  return this.f_fieldInitializedWithStatement__statementasexpressions_ClassForFieldInitialization_;
+ }
+ /** @final @nodts @return {number} */
+ m_getObserverPostField__int() {
+  return this.f_observerPostField__statementasexpressions_ClassForFieldInitialization_;
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassForFieldInitialization.$clinit = () =>{};
+  ClassForFieldInitialization.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassForFieldInitialization;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ClassForFieldInitialization, 'statementasexpressions.ClassForFieldInitialization');
+
+exports = ClassForFieldInitialization;
+
+//# sourceMappingURL=ClassForFieldInitialization.js.map

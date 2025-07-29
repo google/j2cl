@@ -1,0 +1,67 @@
+goog.module('sealedclasses.SealedClassesKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+let Shape = goog.forwardDeclare('sealedclasses.Shape$impl');
+let Circle = goog.forwardDeclare('sealedclasses.Shape.Circle$impl');
+let Rectangle = goog.forwardDeclare('sealedclasses.Shape.Rectangle$impl');
+
+/**
+ * @final
+ */
+class SealedClassesKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SealedClassesKt} */
+ static $create__() {
+  SealedClassesKt.$clinit();
+  let $instance = new SealedClassesKt();
+  $instance.$ctor__sealedclasses_SealedClassesKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_SealedClassesKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {string} */
+ static m_checkShape__sealedclasses_Shape__java_lang_String(/** !Shape */ e) {
+  let tmp0_subject = e;
+  let /** string */ tmp;
+  if (Circle.$isInstance(tmp0_subject)) {
+   tmp = 'Circle';
+  } else if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(tmp0_subject, Rectangle.f_INSTANCE__sealedclasses_Shape_Rectangle)) {
+   tmp = 'Rectangle';
+  } else {
+   return Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
+  }
+  return tmp;
+ }
+ /** @nodts */
+ static $clinit() {
+  SealedClassesKt.$clinit = () =>{};
+  SealedClassesKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SealedClassesKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Objects = goog.module.get('java.util.Objects$impl');
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+  Circle = goog.module.get('sealedclasses.Shape.Circle$impl');
+  Rectangle = goog.module.get('sealedclasses.Shape.Rectangle$impl');
+ }
+}
+$Util.$setClassMetadata(SealedClassesKt, 'sealedclasses.SealedClassesKt');
+
+exports = SealedClassesKt;
+
+//# sourceMappingURL=SealedClassesKt.js.map

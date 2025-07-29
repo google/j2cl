@@ -1,0 +1,43 @@
+goog.module('unreachablecode.SomeProvider$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('unreachablecode.SomeProvider.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class SomeProvider {
+ /** @abstract @nodts @return {T} */
+ m_provide__java_lang_Object() {}
+ /** @nodts @template T @return {!SomeProvider<T>} */
+ static $adapt(/** ?function():T */ fn) {
+  SomeProvider.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeProvider.$clinit = () =>{};
+  SomeProvider.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__unreachablecode_SomeProvider = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__unreachablecode_SomeProvider;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('unreachablecode.SomeProvider.$LambdaAdaptor$impl');
+ }
+}
+SomeProvider.$markImplementor(/**@type {Function}*/ (SomeProvider));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (SomeProvider), 'unreachablecode.SomeProvider');
+
+exports = SomeProvider;
+
+//# sourceMappingURL=SomeProvider.js.map

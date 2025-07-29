@@ -1,0 +1,65 @@
+goog.module('assertsimple.AssertSimple$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+
+/**
+ * @final
+ */
+class AssertSimple extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AssertSimple} */
+ static $create__() {
+  AssertSimple.$clinit();
+  let $instance = new AssertSimple();
+  $instance.$ctor__assertsimple_AssertSimple__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__assertsimple_AssertSimple__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_main__arrayOf_java_lang_String__void(/** !Array<string> */ args) {
+  let tmp0_value = (1 + 2 | 0) == 3;
+  let value = tmp0_value;
+  $Asserts.$assertWithMessage(value, 'Assertion failed');
+  let tmp1_value = (1 + 2 | 0) == 3;
+  let value_1 = tmp1_value;
+  $Asserts.$assertWithMessage(value_1, 'Error!');
+  let tmp2_value = (1 + 2 | 0) == 3;
+  let value_2 = tmp2_value;
+  $Asserts.$assertWithMessage(value_2, args);
+  let tmp3_value = (1 + 2 | 0) == 3;
+  let value_3 = tmp3_value;
+  $Asserts.$assertWithMessage(value_3, args[0]);
+  let tmp4_value = (1 + 2 | 0) == 3;
+  let value_4 = tmp4_value;
+  $Asserts.$assertWithMessage(value_4, j_l_Object.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  AssertSimple.$clinit = () =>{};
+  AssertSimple.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AssertSimple;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+ }
+}
+$Util.$setClassMetadata(AssertSimple, 'assertsimple.AssertSimple');
+
+exports = AssertSimple;
+
+//# sourceMappingURL=AssertSimple.js.map

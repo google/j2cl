@@ -1,0 +1,99 @@
+goog.module('devirtualizedsupermethodcall.SubNumber$impl');
+
+const Number = goog.require('java.lang.Number$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+
+/**
+ * @final
+ */
+class SubNumber extends Number {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubNumber} */
+ static $create__() {
+  SubNumber.$clinit();
+  let $instance = new SubNumber();
+  $instance.$ctor__devirtualizedsupermethodcall_SubNumber__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__devirtualizedsupermethodcall_SubNumber__void() {
+  this.$ctor__java_lang_Number__void();
+ }
+ /** @nodts @return {number} */
+ m_toInt__int() {
+  return 0;
+ }
+ /** @nodts @return {!$Long} */
+ m_toLong__long() {
+  return $Long.fromInt(0);
+ }
+ /** @nodts @return {number} */
+ m_toFloat__float() {
+  return 0;
+ }
+ /** @nodts @return {number} */
+ m_toDouble__double() {
+  return 0;
+ }
+ /** @nodts @return {number} */
+ m_toChar__char() {
+  return 48 /* '0' */;
+ }
+ /** @nodts @return {number} */
+ m_toShort__short() {
+  return 0;
+ }
+ /** @nodts @return {number} */
+ m_toByte__byte() {
+  return 0;
+ }
+ /** @final @override @nodts @return {number} */
+ m_intValue__int() {
+  return this.m_toInt__int();
+ }
+ /** @final @override @nodts @return {!$Long} */
+ m_longValue__long() {
+  return this.m_toLong__long();
+ }
+ /** @final @override @nodts @return {number} */
+ m_floatValue__float() {
+  return this.m_toFloat__float();
+ }
+ /** @final @override @nodts @return {number} */
+ m_doubleValue__double() {
+  return this.m_toDouble__double();
+ }
+ /** @final @override @nodts @return {number} */
+ m_shortValue__short() {
+  return this.m_toShort__short();
+ }
+ /** @final @override @nodts @return {number} */
+ m_byteValue__byte() {
+  return this.m_toByte__byte();
+ }
+ /** @nodts */
+ static $clinit() {
+  SubNumber.$clinit = () =>{};
+  SubNumber.$loadModules();
+  Number.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubNumber;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+ }
+}
+$Util.$setClassMetadata(SubNumber, 'devirtualizedsupermethodcall.SubNumber');
+
+exports = SubNumber;
+
+//# sourceMappingURL=SubNumber.js.map

@@ -1,0 +1,69 @@
+goog.module('sourcemap.SourceMap.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SourceMap = goog.forwardDeclare('sourcemap.SourceMap$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__sourcemap_SourceMap_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sourcemap_SourceMap_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getUninitializedStaticField__double() {
+  return SourceMap.m_getUninitializedStaticField__double();
+ }
+ /** @final @nodts */
+ m_setUninitializedStaticField__double__void(/** number */ arg0) {
+  SourceMap.m_setUninitializedStaticField__double__void(arg0);
+ }
+ /** @final @nodts @return {string} */
+ m_getInitializedStaticField__java_lang_String() {
+  return SourceMap.m_getInitializedStaticField__java_lang_String();
+ }
+ /** @final @nodts */
+ m_setInitializedStaticField__java_lang_String__void(/** string */ arg0) {
+  SourceMap.m_setInitializedStaticField__java_lang_String__void(arg0);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__sourcemap_SourceMap_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__sourcemap_SourceMap_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__sourcemap_SourceMap_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SourceMap = goog.module.get('sourcemap.SourceMap$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__sourcemap_SourceMap_Companion;
+$Util.$setClassMetadata(Companion, 'sourcemap.SourceMap$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=SourceMap$Companion.js.map

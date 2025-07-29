@@ -1,0 +1,65 @@
+goog.module('enums.Enum2.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Enum2 = goog.forwardDeclare('enums.Enum2$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__enums_Enum2_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__enums_Enum2_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {Enum2} */
+ m_getC__enums_Enum2() {
+  return Enum2.m_getC__enums_Enum2();
+ }
+ /** @final @nodts */
+ m_setC__enums_Enum2__void(/** Enum2 */ arg0) {
+  Enum2.m_setC__enums_Enum2__void(arg0);
+ }
+ /** @final @nodts @return {Enum2} */
+ m_f__java_lang_Object__enums_Enum2(/** !* */ arg0) {
+  return Enum2.m_f__java_lang_Object__enums_Enum2(arg0);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__enums_Enum2_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__enums_Enum2_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__enums_Enum2_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Enum2 = goog.module.get('enums.Enum2$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__enums_Enum2_Companion;
+$Util.$setClassMetadata(Companion, 'enums.Enum2$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Enum2$Companion.js.map

@@ -1,0 +1,61 @@
+goog.module('collisions.bar$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let foo = goog.forwardDeclare('collisions.foo$impl');
+let collisions_goog = goog.forwardDeclare('collisions.goog$impl');
+
+/**
+ * @final
+ */
+class bar extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!bar} */
+ static $create__() {
+  bar.$clinit();
+  let $instance = new bar();
+  $instance.$ctor__collisions_bar__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__collisions_bar__void() {
+  this.$ctor__java_lang_Object__void();
+  let /** number */ foo_1;
+  let /** number */ bar_1;
+  let /** number */ goog_1;
+  let /** number */ flip;
+  let /** number */ window_1;
+  Math.random();
+  String.prototype.length;
+  new String();
+  collisions_goog.$create__();
+  foo.$create__();
+  let delete_1 = 1;
+  let undefined_1 = 3;
+ }
+ /** @nodts */
+ static $clinit() {
+  bar.$clinit = () =>{};
+  bar.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof bar;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  foo = goog.module.get('collisions.foo$impl');
+  collisions_goog = goog.module.get('collisions.goog$impl');
+ }
+}
+$Util.$setClassMetadata(bar, 'collisions.bar');
+
+exports = bar;
+
+//# sourceMappingURL=bar.js.map

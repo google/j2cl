@@ -1,0 +1,162 @@
+goog.module('inlineclass.InlineClassKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('inlineclass.Foo$impl');
+let FooFactory = goog.forwardDeclare('inlineclass.FooFactory$impl');
+let FooNullable = goog.forwardDeclare('inlineclass.FooNullable$impl');
+let FooReference = goog.forwardDeclare('inlineclass.FooReference$impl');
+let FooReferenceNullable = goog.forwardDeclare('inlineclass.FooReferenceNullable$impl');
+let I = goog.forwardDeclare('inlineclass.I$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class InlineClassKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InlineClassKt} */
+ static $create__() {
+  InlineClassKt.$clinit();
+  let $instance = new InlineClassKt();
+  $instance.$ctor__inlineclass_InlineClassKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlineclass_InlineClassKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T */
+ static m_asGeneric__java_lang_Object__void(/** T */ x) {
+  InlineClassKt.$clinit();
+  if (Foo.$isInstance(x)) {
+   let r = (/**@type {!Foo}*/ (x)).m_getI__int() + 1 | 0;
+  }
+ }
+ /** @nodts */
+ static m_asObject__java_lang_Object__void(/** !* */ x) {
+  InlineClassKt.$clinit();
+  if (Foo.$isInstance(x)) {
+   let r = (/**@type {!Foo}*/ (x)).m_getI__int() + 1 | 0;
+  }
+ }
+ /** @nodts */
+ static m_asInterface__inlineclass_I__void(/** !I */ i) {
+  InlineClassKt.$clinit();
+  let r = i.m_getI__int() + 1 | 0;
+ }
+ /** @nodts @return {!Foo} */
+ static m_getFoo__int__inlineclass_Foo(/** number */ i) {
+  InlineClassKt.$clinit();
+  return Foo.$create__int(i);
+ }
+ /** @nodts @template T @return {T} */
+ static m_id__java_lang_Object__java_lang_Object(/** T */ x) {
+  InlineClassKt.$clinit();
+  return x;
+ }
+ /** @nodts */
+ static m_primitiveNonnullFieldNonnullParam$WYkBwDI__inlineclass_Foo__void(/** !Foo */ f) {
+  InlineClassKt.$clinit();
+  let r = f.m_getI__int() + 1 | 0;
+ }
+ /** @nodts */
+ static m_primitiveNonnullFieldNullParam$1vb_N_E__inlineclass_Foo__void(/** Foo */ f) {
+  InlineClassKt.$clinit();
+  if (!$Equality.$same(f, null)) {
+   let r = f.m_getI__int() + 1 | 0;
+  }
+ }
+ /** @nodts */
+ static m_primitiveNullableFieldNonnullParam$TeqZzQw__inlineclass_FooNullable__void(/** !FooNullable */ f) {
+  InlineClassKt.$clinit();
+  let r = f.m_getI__java_lang_Integer();
+ }
+ /** @nodts */
+ static m_primitiveNullableFieldNullableParam$hxpI7yM__inlineclass_FooNullable__void(/** FooNullable */ f) {
+  InlineClassKt.$clinit();
+  if (!$Equality.$same(f, null)) {
+   let r = f.m_getI__java_lang_Integer();
+  }
+ }
+ /** @nodts */
+ static m_referenceNonnullFieldNonnullParam$i0kgksk__inlineclass_FooReference__void(/** !FooReference */ f) {
+  InlineClassKt.$clinit();
+  let r = j_l_String.m_valueOf__java_lang_Object__java_lang_String(f.m_getS__java_lang_String()) + '1';
+ }
+ /** @nodts */
+ static m_referenceNonnullFieldNullParam$nMSoT98__inlineclass_FooReference__void(/** FooReference */ f) {
+  InlineClassKt.$clinit();
+  if (!$Equality.$same(f, null)) {
+   let r = j_l_String.m_valueOf__java_lang_Object__java_lang_String(f.m_getS__java_lang_String()) + '1';
+  }
+ }
+ /** @nodts */
+ static m_referenceNullableFieldNonnullParam$an16OSM__inlineclass_FooReferenceNullable__void(/** !FooReferenceNullable */ f) {
+  InlineClassKt.$clinit();
+  let r = f.m_getS__java_lang_String();
+ }
+ /** @nodts */
+ static m_referenceNullableFieldNullableParam$reaBkv4__inlineclass_FooReferenceNullable__void(/** FooReferenceNullable */ f) {
+  InlineClassKt.$clinit();
+  if (!$Equality.$same(f, null)) {
+   let r = f.m_getS__java_lang_String();
+  }
+ }
+ /** @nodts */
+ static m_main__void() {
+  InlineClassKt.$clinit();
+  let f = Foo.$create__int(42);
+  let f2 = FooNullable.$create__java_lang_Integer(null);
+  let f3 = FooReference.$create__java_lang_String('1234');
+  let f4 = FooReferenceNullable.$create__java_lang_String(null);
+  InlineClassKt.m_asGeneric__java_lang_Object__void(f);
+  InlineClassKt.m_asObject__java_lang_Object__void(f);
+  InlineClassKt.m_asInterface__inlineclass_I__void(f);
+  let g = InlineClassKt.m_getFoo__int__inlineclass_Foo(1);
+  let c = /**@type {!Foo}*/ ($Casts.$to(InlineClassKt.m_id__java_lang_Object__java_lang_Object(f), Foo));
+  InlineClassKt.m_primitiveNonnullFieldNonnullParam$WYkBwDI__inlineclass_Foo__void(f);
+  InlineClassKt.m_primitiveNonnullFieldNullParam$1vb_N_E__inlineclass_Foo__void(f);
+  InlineClassKt.m_primitiveNullableFieldNonnullParam$TeqZzQw__inlineclass_FooNullable__void(f2);
+  InlineClassKt.m_primitiveNullableFieldNullableParam$hxpI7yM__inlineclass_FooNullable__void(f2);
+  InlineClassKt.m_referenceNonnullFieldNonnullParam$i0kgksk__inlineclass_FooReference__void(f3);
+  InlineClassKt.m_referenceNonnullFieldNullParam$nMSoT98__inlineclass_FooReference__void(f3);
+  InlineClassKt.m_referenceNullableFieldNonnullParam$an16OSM__inlineclass_FooReferenceNullable__void(f4);
+  InlineClassKt.m_referenceNullableFieldNullableParam$reaBkv4__inlineclass_FooReferenceNullable__void(f4);
+  let ff = FooFactory.$create__();
+  let h = ff.m_create__int__inlineclass_Foo(1);
+ }
+ /** @nodts */
+ static $clinit() {
+  InlineClassKt.$clinit = () =>{};
+  InlineClassKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InlineClassKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Foo = goog.module.get('inlineclass.Foo$impl');
+  FooFactory = goog.module.get('inlineclass.FooFactory$impl');
+  FooNullable = goog.module.get('inlineclass.FooNullable$impl');
+  FooReference = goog.module.get('inlineclass.FooReference$impl');
+  FooReferenceNullable = goog.module.get('inlineclass.FooReferenceNullable$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(InlineClassKt, 'inlineclass.InlineClassKt');
+
+exports = InlineClassKt;
+
+//# sourceMappingURL=InlineClassKt.js.map

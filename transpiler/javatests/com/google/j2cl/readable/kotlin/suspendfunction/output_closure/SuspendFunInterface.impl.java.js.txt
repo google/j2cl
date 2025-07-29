@@ -1,0 +1,46 @@
+goog.module('suspendfunction.SuspendFunInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const GenericSuspendFunInterface = goog.require('suspendfunction.GenericSuspendFunInterface$impl');
+
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+let $LambdaAdaptor = goog.forwardDeclare('suspendfunction.SuspendFunInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {GenericSuspendFunInterface<string>}
+ */
+class SuspendFunInterface {
+ /** @abstract @nodts @return {!Generator<*, string>} */
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(/** Continuation<?> */ $continuation, /** string */ param) {}
+ /** @nodts @return {!SuspendFunInterface} */
+ static $adapt(/** ?function(Continuation<?>, string):!Generator<*, string> */ fn) {
+  SuspendFunInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  SuspendFunInterface.$clinit = () =>{};
+  SuspendFunInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  GenericSuspendFunInterface.$markImplementor(ctor);
+  ctor.prototype.$implements__suspendfunction_SuspendFunInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__suspendfunction_SuspendFunInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('suspendfunction.SuspendFunInterface.$LambdaAdaptor$impl');
+ }
+}
+SuspendFunInterface.$markImplementor(/**@type {Function}*/ (SuspendFunInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (SuspendFunInterface), 'suspendfunction.SuspendFunInterface');
+
+exports = SuspendFunInterface;
+
+//# sourceMappingURL=SuspendFunInterface.js.map

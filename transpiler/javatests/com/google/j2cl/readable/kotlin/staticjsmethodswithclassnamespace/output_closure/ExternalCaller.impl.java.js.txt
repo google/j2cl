@@ -1,0 +1,51 @@
+goog.module('staticjsmethodswithclassnamespace.ExternalCaller$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let StaticJsMethodsWithClassNamespace = goog.forwardDeclare('woo.StaticJsMethodsWithClassNamespace$impl');
+
+/**
+ * @final
+ */
+class ExternalCaller extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ExternalCaller} */
+ static $create__() {
+  ExternalCaller.$clinit();
+  let $instance = new ExternalCaller();
+  $instance.$ctor__staticjsmethodswithclassnamespace_ExternalCaller__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticjsmethodswithclassnamespace_ExternalCaller__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  StaticJsMethodsWithClassNamespace.replacedName();
+ }
+ /** @nodts */
+ static $clinit() {
+  ExternalCaller.$clinit = () =>{};
+  ExternalCaller.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExternalCaller;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  StaticJsMethodsWithClassNamespace = goog.module.get('woo.StaticJsMethodsWithClassNamespace$impl');
+ }
+}
+$Util.$setClassMetadata(ExternalCaller, 'staticjsmethodswithclassnamespace.ExternalCaller');
+
+exports = ExternalCaller;
+
+//# sourceMappingURL=ExternalCaller.js.map

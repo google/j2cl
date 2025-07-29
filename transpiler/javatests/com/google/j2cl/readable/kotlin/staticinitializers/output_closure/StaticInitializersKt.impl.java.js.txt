@@ -1,0 +1,81 @@
+goog.module('staticinitializers.StaticInitializersKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class StaticInitializersKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StaticInitializersKt} */
+ static $create__() {
+  StaticInitializersKt.$clinit();
+  let $instance = new StaticInitializersKt();
+  $instance.$ctor__staticinitializers_StaticInitializersKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticinitializers_StaticInitializersKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getA__int() {
+  StaticInitializersKt.$clinit();
+  return StaticInitializersKt.f_a__staticinitializers_StaticInitializersKt_;
+ }
+ /** @nodts */
+ static m_setA__int__void(/** number */ set__) {
+  StaticInitializersKt.$clinit();
+  StaticInitializersKt.f_a__staticinitializers_StaticInitializersKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_getB__int() {
+  StaticInitializersKt.$clinit();
+  return StaticInitializersKt.f_b__staticinitializers_StaticInitializersKt_;
+ }
+ /** @nodts */
+ static m_setB__int__void(/** number */ set__) {
+  StaticInitializersKt.$clinit();
+  StaticInitializersKt.f_b__staticinitializers_StaticInitializersKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_getC__int() {
+  StaticInitializersKt.$clinit();
+  return StaticInitializersKt.f_c__staticinitializers_StaticInitializersKt_;
+ }
+ /** @nodts */
+ static m_setC__int__void(/** number */ set__) {
+  StaticInitializersKt.$clinit();
+  StaticInitializersKt.f_c__staticinitializers_StaticInitializersKt_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  StaticInitializersKt.$clinit = () =>{};
+  StaticInitializersKt.$loadModules();
+  j_l_Object.$clinit();
+  StaticInitializersKt.f_a__staticinitializers_StaticInitializersKt_ = 5;
+  StaticInitializersKt.f_b__staticinitializers_StaticInitializersKt_ = Math.imul(StaticInitializersKt.m_getA__int(), 2);
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticInitializersKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {number} @nodts*/
+StaticInitializersKt.f_a__staticinitializers_StaticInitializersKt_ = 0;
+/**@type {number} @nodts*/
+StaticInitializersKt.f_b__staticinitializers_StaticInitializersKt_ = 0;
+/**@type {number} @nodts*/
+StaticInitializersKt.f_c__staticinitializers_StaticInitializersKt_ = 0;
+$Util.$setClassMetadata(StaticInitializersKt, 'staticinitializers.StaticInitializersKt');
+
+exports = StaticInitializersKt;
+
+//# sourceMappingURL=StaticInitializersKt.js.map

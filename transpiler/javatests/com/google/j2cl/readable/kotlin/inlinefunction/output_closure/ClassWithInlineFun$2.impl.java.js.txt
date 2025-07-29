@@ -1,0 +1,56 @@
+goog.module('inlinefunction.ClassWithInlineFun.$2$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClassWithInlineFun = goog.forwardDeclare('inlinefunction.ClassWithInlineFun$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class $2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!ClassWithInlineFun} @nodts*/
+  this.$outer_this__inlinefunction_ClassWithInlineFun_2;
+  /**@type {T} @nodts*/
+  this.f_$t__inlinefunction_ClassWithInlineFun_2_;
+ }
+ /** @nodts @template T @return {!$2<T>} */
+ static $create__inlinefunction_ClassWithInlineFun__java_lang_Object(/** !ClassWithInlineFun */ $outer_this, /** T */ _t) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__inlinefunction_ClassWithInlineFun_2__inlinefunction_ClassWithInlineFun__java_lang_Object__void($outer_this, _t);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_ClassWithInlineFun_2__inlinefunction_ClassWithInlineFun__java_lang_Object__void(/** !ClassWithInlineFun */ $outer_this, /** T */ _t) {
+  this.$outer_this__inlinefunction_ClassWithInlineFun_2 = $outer_this;
+  this.f_$t__inlinefunction_ClassWithInlineFun_2_ = _t;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {T} */
+ m_compute__java_lang_Object() {
+  return this.f_$t__inlinefunction_ClassWithInlineFun_2_;
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2, 'inlinefunction.ClassWithInlineFun$2');
+
+exports = $2;
+
+//# sourceMappingURL=ClassWithInlineFun$2.js.map

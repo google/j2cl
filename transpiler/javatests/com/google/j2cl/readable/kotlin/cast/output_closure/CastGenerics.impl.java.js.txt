@@ -1,0 +1,216 @@
+goog.module('cast.CastGenerics$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('cast.CastGenerics.$1$impl');
+let $2 = goog.forwardDeclare('cast.CastGenerics.$2$impl');
+let $3 = goog.forwardDeclare('cast.CastGenerics.$3$impl');
+let A = goog.forwardDeclare('cast.CastGenerics.A$impl');
+let A1 = goog.forwardDeclare('cast.CastGenerics.A1$impl');
+let A2 = goog.forwardDeclare('cast.CastGenerics.A2$impl');
+let B = goog.forwardDeclare('cast.CastGenerics.B$impl');
+let BaseImplementor = goog.forwardDeclare('cast.CastGenerics.BaseImplementor$impl');
+let C = goog.forwardDeclare('cast.CastGenerics.C$impl');
+let Container = goog.forwardDeclare('cast.CastGenerics.Container$impl');
+let Empty1 = goog.forwardDeclare('cast.CastGenerics.Empty1$impl');
+let Empty2 = goog.forwardDeclare('cast.CastGenerics.Empty2$impl');
+let Foo = goog.forwardDeclare('cast.CastGenerics.Foo$impl');
+let Implementor = goog.forwardDeclare('cast.CastGenerics.Implementor$impl');
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T, E
+ */
+class CastGenerics extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?T} @nodts*/
+  this.f_field__cast_CastGenerics_;
+ }
+ /** @nodts @template T, E @return {!CastGenerics<T, E>} */
+ static $create__() {
+  CastGenerics.$clinit();
+  let $instance = new CastGenerics();
+  $instance.$ctor__cast_CastGenerics__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cast_CastGenerics__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?T} */
+ m_getField__java_lang_Object() {
+  return this.f_field__cast_CastGenerics_;
+ }
+ /** @final @nodts */
+ m_setField__java_lang_Object__void(/** ?T */ set__) {
+  this.f_field__cast_CastGenerics_ = set__;
+ }
+ /** @final @nodts @return {?T} */
+ m_method__java_lang_Object() {
+  return null;
+ }
+ /** @final @nodts @template T_1, U */
+ m_testErasureCast__void_$p_cast_CastGenerics() {
+  let str = /**@type {?string}*/ ($Casts.$to((/**@type {!CastGenerics<string, !(Number|number)>}*/ (CastGenerics.$create__())).m_getField__java_lang_Object(), j_l_String));
+  str = (/**@type {?string}*/ ($Casts.$to((/**@type {!CastGenerics<string, !(Number|number)>}*/ (CastGenerics.$create__())).m_method__java_lang_Object(), j_l_String)));
+  let containerT = /**@type {!Container<T_1>}*/ (Container.$create__());
+  (/**@type {!A}*/ ($Casts.$to(containerT.m_get__java_lang_Object(), /**@type {Function}*/ (A)))).m_mA__void();
+  (/**@type {!B}*/ ($Casts.$to(containerT.m_get__java_lang_Object(), /**@type {Function}*/ (B)))).m_mB__void();
+  let containerU = /**@type {!Container<U>}*/ (Container.$create__());
+  (/**@type {!A}*/ ($Casts.$to(containerU.m_get__java_lang_Object(), /**@type {Function}*/ (A)))).m_mA__void();
+  (/**@type {!B}*/ ($Casts.$to(containerU.m_get__java_lang_Object(), /**@type {Function}*/ (B)))).m_mB__void();
+  let containerArrT = /**@type {!Container<!Array<T_1>>}*/ (Container.$create__());
+  let arrT = /**@type {!Array<T_1>}*/ ($Arrays.$castTo(containerArrT.m_get__java_lang_Object(), /**@type {Function}*/ (A), 1));
+  (/**@type {!A}*/ (arrT[0])).m_mA__void();
+  (/**@type {!B}*/ ($Casts.$to(arrT[0], /**@type {Function}*/ (B)))).m_mB__void();
+  let arrA = /**@type {!Array<!A>}*/ ($Arrays.$castTo(containerArrT.m_get__java_lang_Object(), /**@type {Function}*/ (A), 1));
+  let arrB = /**@type {!Array<!B>}*/ ($Arrays.$castTo(containerArrT.m_get__java_lang_Object(), /**@type {Function}*/ (B), 1));
+  let containerArrU = /**@type {!Container<!Array<U>>}*/ (Container.$create__());
+  let arrU = /**@type {!Array<U>}*/ ($Arrays.$castTo(containerArrU.m_get__java_lang_Object(), /**@type {Function}*/ (A), 1));
+  (/**@type {!A}*/ (arrU[0])).m_mA__void();
+  (/**@type {!B}*/ ($Casts.$to(arrU[0], /**@type {Function}*/ (B)))).m_mB__void();
+  arrA = (/**@type {!Array<!A>}*/ ($Arrays.$castTo(containerArrU.m_get__java_lang_Object(), /**@type {Function}*/ (A), 1)));
+  arrB = (/**@type {!Array<!B>}*/ ($Arrays.$castTo(containerArrU.m_get__java_lang_Object(), /**@type {Function}*/ (B), 1)));
+  let containerBase = /**@type {!Container<!BaseImplementor>}*/ (Container.$create__());
+  (/**@type {!BaseImplementor}*/ ($Casts.$to(containerBase.m_get__java_lang_Object(), BaseImplementor))).m_mA__void();
+  (/**@type {!BaseImplementor}*/ ($Casts.$to(containerBase.m_get__java_lang_Object(), BaseImplementor))).m_mB__void();
+  let containerImplementor = /**@type {!Container<!Implementor>}*/ (Container.$create__());
+  (/**@type {!Implementor}*/ ($Casts.$to(containerImplementor.m_get__java_lang_Object(), Implementor))).m_mA__void();
+  (/**@type {!Implementor}*/ ($Casts.$to(containerImplementor.m_get__java_lang_Object(), Implementor))).m_mB__void();
+  let strictlyA = /**@type {!Container<!A>}*/ (Container.$create__());
+  let oA = /**@type {!A}*/ ($Casts.$to(strictlyA.m_get__java_lang_Object(), /**@type {Function}*/ (A)));
+  let a = /**@type {!A}*/ ($Casts.$to(strictlyA.m_get__java_lang_Object(), /**@type {Function}*/ (A)));
+  let extendsA = /**@type {!Container<!A>}*/ (Container.$create__());
+  oA = extendsA.m_get__java_lang_Object();
+  a = (/**@type {!A}*/ ($Casts.$to(extendsA.m_get__java_lang_Object(), /**@type {Function}*/ (A))));
+  let superA = /**@type {!Container<!A>}*/ (Container.$create__());
+  oA = superA.m_get__java_lang_Object();
+  let strictlyString = /**@type {!Container<string>}*/ (Container.$create__());
+  let s = /**@type {string}*/ ($Casts.$to(strictlyString.m_get__java_lang_Object(), j_l_String));
+  let extendsString = /**@type {!Container<string>}*/ (Container.$create__());
+  s = (/**@type {string}*/ ($Casts.$to(extendsString.m_get__java_lang_Object(), j_l_String)));
+  let superString = /**@type {!Container<string>}*/ (Container.$create__());
+  let o = superString.m_get__java_lang_Object();
+  let nullableValue = /**@type {!Container<Implementor>}*/ (Container.$create__());
+  let i = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {Implementor}*/ ($Casts.$to(nullableValue.m_get__java_lang_Object(), Implementor)));
+ }
+ /** @final @nodts */
+ m_testCastToParameterizedType__void() {
+  let o = Integer.m_valueOf__int__java_lang_Integer(1);
+  let cc = /**@type {!CastGenerics<Error, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
+  let cc2 = /**@type {!CastGenerics<*, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
+ }
+ /** @final @nodts */
+ m_testCastToTypeVariable__void() {
+  let o = Integer.m_valueOf__int__java_lang_Integer(1);
+  let e = /**@type {?E}*/ ($Casts.$to(o, Number));
+  let t = /**@type {?T}*/ (o);
+  let es = /**@type {Array<E>}*/ ($Arrays.$castTo(o, Number, 1));
+  let ts = /**@type {Array<T>}*/ ($Arrays.$castTo(o, j_l_Object, 1));
+ }
+ /** @final @nodts @template S, V */
+ m_testCastToMethodTypeVariable__void() {
+  let o = Integer.m_valueOf__int__java_lang_Integer(1);
+  let s = /**@type {S}*/ (o);
+  let c = /**@type {CastGenerics<S, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
+  c = (/**@type {Array<S>}*/ ($Arrays.$castTo(o, j_l_Object, 1)));
+  c = (/**@type {?V}*/ ($Casts.$to(o, Enum)));
+ }
+ /** @final @nodts @template TT */
+ m_outerGenericMethod__void() {}
+ /** @final @nodts @template EE @return {?EE} */
+ m_method__java_lang_Object__cast_CastGenerics_Empty1(/** * */ o) {
+  if (Empty1.$isInstance(o)) {
+   return /**@type {?EE}*/ ($Casts.$to($Casts.$to(o, /**@type {Function}*/ (Empty1)), /**@type {Function}*/ (Empty2)));
+  } else {
+   return null;
+  }
+ }
+ /** @final @nodts @template T_1 @return {!Foo<T_1>} */
+ m_doSomething__cast_CastGenerics_Foo() {
+  return /**@type {!$1<T_1, T, E>}*/ ($1.$create__cast_CastGenerics(this));
+ }
+ /** @final @nodts */
+ m_testSafeCastToTypeVariable__void() {
+  let a = this.m_safeCastToTypeWithPrimitiveUpperBound__java_lang_Object__java_lang_Integer_$p_cast_CastGenerics(Integer.m_valueOf__int__java_lang_Integer(1));
+  let b = this.m_safeCastToTypeWithPrimitiveUpperBound__java_lang_Object__java_lang_Integer_$p_cast_CastGenerics(j_l_Object.$create__());
+  let c = /**@type {A1}*/ ($Casts.$to(this.m_safeCastToTypeWithUpperBound__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(j_l_Object.$create__()), A1));
+  let d = /**@type {A1}*/ ($Casts.$to(this.m_safeCastToTypeWithUpperBound__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(/**@type {!$2<T, E>}*/ ($2.$create__cast_CastGenerics(this))), A1));
+  let e = /**@type {A1}*/ ($Casts.$to(this.m_safeCastToTypeWithUpperBound__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(A1.$create__()), A1));
+  let f = /**@type {A1}*/ ($Casts.$to(this.m_safeCastToTypeWithUpperBound__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(A2.$create__()), A1));
+  let g = /**@type {A1}*/ ($Casts.$to(this.m_safeCastWithUnboundType__java_lang_Object__java_lang_Object_$p_cast_CastGenerics(j_l_Object.$create__()), A1));
+  let h = /**@type {A1}*/ ($Casts.$to(this.m_safeCastWithUnboundType__java_lang_Object__java_lang_Object_$p_cast_CastGenerics(/**@type {!$3<T, E>}*/ ($3.$create__cast_CastGenerics(this))), A1));
+  let i = /**@type {A1}*/ ($Casts.$to(this.m_safeCastWithUnboundType__java_lang_Object__java_lang_Object_$p_cast_CastGenerics(A1.$create__()), A1));
+  let j = /**@type {C}*/ ($Casts.$to(this.m_safeCastToIntersectionType__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(A1.$create__()), C));
+  let k = /**@type {C}*/ ($Casts.$to(this.m_safeCastToIntersectionType__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(A2.$create__()), C));
+  let l = /**@type {C}*/ ($Casts.$to(this.m_safeCastToIntersectionType__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(C.$create__()), C));
+ }
+ /** @final @nodts @template T_1 @return {?T_1} */
+ m_safeCastToTypeWithPrimitiveUpperBound__java_lang_Object__java_lang_Integer_$p_cast_CastGenerics(/** !* */ a) {
+  return Integer.$isInstance(a) ? /**@type {T_1}*/ (a) : null;
+ }
+ /** @final @nodts @template T_1 @return {?T_1} */
+ m_safeCastToTypeWithUpperBound__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(/** !* */ a) {
+  return Empty1.$isInstance(a) ? /**@type {T_1}*/ (a) : null;
+ }
+ /** @final @nodts @template T_1 @return {?T_1} */
+ m_safeCastWithUnboundType__java_lang_Object__java_lang_Object_$p_cast_CastGenerics(/** !* */ a) {
+  return !$Equality.$same(a, null) ? /**@type {T_1}*/ (a) : null;
+ }
+ /** @final @nodts @template T_1 @return {?T_1} */
+ m_safeCastToIntersectionType__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(/** !* */ o) {
+  return Empty1.$isInstance(o) ? /**@type {T_1}*/ (o) : null;
+ }
+ /** @nodts */
+ static $clinit() {
+  CastGenerics.$clinit = () =>{};
+  CastGenerics.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CastGenerics;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('cast.CastGenerics.$1$impl');
+  $2 = goog.module.get('cast.CastGenerics.$2$impl');
+  $3 = goog.module.get('cast.CastGenerics.$3$impl');
+  A = goog.module.get('cast.CastGenerics.A$impl');
+  A1 = goog.module.get('cast.CastGenerics.A1$impl');
+  A2 = goog.module.get('cast.CastGenerics.A2$impl');
+  B = goog.module.get('cast.CastGenerics.B$impl');
+  BaseImplementor = goog.module.get('cast.CastGenerics.BaseImplementor$impl');
+  C = goog.module.get('cast.CastGenerics.C$impl');
+  Container = goog.module.get('cast.CastGenerics.Container$impl');
+  Empty1 = goog.module.get('cast.CastGenerics.Empty1$impl');
+  Empty2 = goog.module.get('cast.CastGenerics.Empty2$impl');
+  Implementor = goog.module.get('cast.CastGenerics.Implementor$impl');
+  Enum = goog.module.get('java.lang.Enum$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Number = goog.module.get('java.lang.Number$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(CastGenerics, 'cast.CastGenerics');
+
+exports = CastGenerics;
+
+//# sourceMappingURL=CastGenerics.js.map

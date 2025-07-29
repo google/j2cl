@@ -1,0 +1,46 @@
+goog.module('staticnestedclass.StaticNestedClassParent.StaticNestedClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class StaticNestedClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StaticNestedClass} */
+ static $create__() {
+  let $instance = new StaticNestedClass();
+  $instance.$ctor__staticnestedclass_StaticNestedClassParent_StaticNestedClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticnestedclass_StaticNestedClassParent_StaticNestedClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_foo__void() {
+  StaticNestedClass.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  StaticNestedClass.$clinit = () =>{};
+  StaticNestedClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticNestedClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(StaticNestedClass, 'staticnestedclass.StaticNestedClassParent$StaticNestedClass');
+
+exports = StaticNestedClass;
+
+//# sourceMappingURL=StaticNestedClassParent$StaticNestedClass.js.map

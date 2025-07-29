@@ -1,0 +1,143 @@
+goog.module('dataclass.PolymorphicDataType$impl');
+
+const AbstractType = goog.require('dataclass.AbstractType$impl');
+const InterfaceType = goog.require('dataclass.InterfaceType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ * @implements {InterfaceType}
+ */
+class PolymorphicDataType extends AbstractType {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__dataclass_PolymorphicDataType_ = 0;
+  /**@type {number} @nodts*/
+  this.f_b__dataclass_PolymorphicDataType_ = 0;
+  /**@type {number} @nodts*/
+  this.f_c__dataclass_PolymorphicDataType_ = 0;
+ }
+ /** @nodts @return {!PolymorphicDataType} */
+ static $create__int__int__int(/** number */ a, /** number */ b, /** number */ c) {
+  PolymorphicDataType.$clinit();
+  let $instance = new PolymorphicDataType();
+  $instance.$ctor__dataclass_PolymorphicDataType__int__int__int__void(a, b, c);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_PolymorphicDataType__int__int__int__void(/** number */ a, /** number */ b, /** number */ c) {
+  this.$ctor__dataclass_AbstractType__void();
+  this.f_a__dataclass_PolymorphicDataType_ = a;
+  this.f_b__dataclass_PolymorphicDataType_ = b;
+  this.f_c__dataclass_PolymorphicDataType_ = c;
+ }
+ /** @override @nodts @return {number} */
+ m_getA__int() {
+  return this.f_a__dataclass_PolymorphicDataType_;
+ }
+ /** @override @nodts @return {number} */
+ m_getB__int() {
+  return this.f_b__dataclass_PolymorphicDataType_;
+ }
+ /** @override @nodts @return {number} */
+ m_getC__int() {
+  return this.f_c__dataclass_PolymorphicDataType_;
+ }
+ /** @override @nodts */
+ m_doSomethingElse__void() {}
+ /** @override @nodts */
+ m_oneOtherThing__void() {}
+ /** @final @nodts @return {number} */
+ m_component1__int() {
+  return this.f_a__dataclass_PolymorphicDataType_;
+ }
+ /** @final @nodts @return {number} */
+ m_component2__int() {
+  return this.f_b__dataclass_PolymorphicDataType_;
+ }
+ /** @final @nodts @return {number} */
+ m_component3__int() {
+  return this.f_c__dataclass_PolymorphicDataType_;
+ }
+ /** @final @nodts @return {!PolymorphicDataType} */
+ m_copy__int__int__int__dataclass_PolymorphicDataType(/** number */ a, /** number */ b, /** number */ c) {
+  return PolymorphicDataType.$create__int__int__int(a, b, c);
+ }
+ /** @final @nodts @return {!PolymorphicDataType} */
+ m_copy$default__int__int__int__int__java_lang_Object__dataclass_PolymorphicDataType(/** number */ a, /** number */ b, /** number */ c, /** number */ _mask0, /** * */ _handler) {
+  if ((_mask0 & 1) != 0) {
+   a = this.f_a__dataclass_PolymorphicDataType_;
+  }
+  if ((_mask0 & 2) != 0) {
+   b = this.f_b__dataclass_PolymorphicDataType_;
+  }
+  if ((_mask0 & 4) != 0) {
+   c = this.f_c__dataclass_PolymorphicDataType_;
+  }
+  return this.m_copy__int__int__int__dataclass_PolymorphicDataType(a, b, c);
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'PolymorphicDataType(' + 'a=' + this.f_a__dataclass_PolymorphicDataType_ + ', ' + 'b=' + this.f_b__dataclass_PolymorphicDataType_ + ', ' + 'c=' + this.f_c__dataclass_PolymorphicDataType_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let result = $Objects.m_hashCode__java_lang_Object__int(Integer.m_valueOf__int__java_lang_Integer(this.f_a__dataclass_PolymorphicDataType_));
+  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(Integer.m_valueOf__int__java_lang_Integer(this.f_b__dataclass_PolymorphicDataType_)) | 0;
+  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(Integer.m_valueOf__int__java_lang_Integer(this.f_c__dataclass_PolymorphicDataType_)) | 0;
+  return result;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!PolymorphicDataType.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!PolymorphicDataType}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), PolymorphicDataType));
+  if (this.f_a__dataclass_PolymorphicDataType_ != tmp0_other_with_cast.f_a__dataclass_PolymorphicDataType_) {
+   return false;
+  }
+  if (this.f_b__dataclass_PolymorphicDataType_ != tmp0_other_with_cast.f_b__dataclass_PolymorphicDataType_) {
+   return false;
+  }
+  if (this.f_c__dataclass_PolymorphicDataType_ != tmp0_other_with_cast.f_c__dataclass_PolymorphicDataType_) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  PolymorphicDataType.$clinit = () =>{};
+  PolymorphicDataType.$loadModules();
+  AbstractType.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PolymorphicDataType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+InterfaceType.$markImplementor(PolymorphicDataType);
+$Util.$setClassMetadata(PolymorphicDataType, 'dataclass.PolymorphicDataType');
+
+exports = PolymorphicDataType;
+
+//# sourceMappingURL=PolymorphicDataType.js.map

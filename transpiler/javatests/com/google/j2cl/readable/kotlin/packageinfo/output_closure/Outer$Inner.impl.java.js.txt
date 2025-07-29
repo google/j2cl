@@ -1,0 +1,43 @@
+goog.module('readable.packageinfo.Outer.Inner$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Outer = goog.forwardDeclare('readable.packageinfo.Outer$impl');
+
+/**
+ * @final
+ */
+class Inner extends j_l_Object {
+ 
+ constructor(/** !Outer */ $outer_this) {
+  Inner.$clinit();
+  super();
+  /**@type {!Outer} @nodts*/
+  this.$outer_this__packageinfo_Outer_Inner;
+  this.$ctor__packageinfo_Outer_Inner__packageinfo_Outer__void($outer_this);
+ }
+ /** @nodts */
+ $ctor__packageinfo_Outer_Inner__packageinfo_Outer__void(/** !Outer */ $outer_this) {
+  this.$outer_this__packageinfo_Outer_Inner = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Inner.$clinit = () =>{};
+  Inner.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Inner;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Inner, 'packageinfo.Outer$Inner');
+
+exports = Inner;
+
+//# sourceMappingURL=Outer$Inner.js.map

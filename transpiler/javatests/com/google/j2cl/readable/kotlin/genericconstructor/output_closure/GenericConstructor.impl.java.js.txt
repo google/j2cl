@@ -1,0 +1,52 @@
+goog.module('genericconstructor.GenericConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Exception = goog.forwardDeclare('java.lang.Exception$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class GenericConstructor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!GenericConstructor<T>} */
+ static $create__java_lang_Object(/** T */ t) {
+  GenericConstructor.$clinit();
+  let $instance = new GenericConstructor();
+  $instance.$ctor__genericconstructor_GenericConstructor__java_lang_Object__void(t);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericconstructor_GenericConstructor__java_lang_Object__void(/** T */ t) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  GenericConstructor.$create__java_lang_Object(Exception.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericConstructor.$clinit = () =>{};
+  GenericConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Exception = goog.module.get('java.lang.Exception$impl');
+ }
+}
+$Util.$setClassMetadata(GenericConstructor, 'genericconstructor.GenericConstructor');
+
+exports = GenericConstructor;
+
+//# sourceMappingURL=GenericConstructor.js.map

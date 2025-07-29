@@ -1,0 +1,74 @@
+goog.module('companion.CompanionWithLambdas.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CompanionWithLambdas = goog.forwardDeclare('companion.CompanionWithLambdas$impl');
+let IntToIntFunction = goog.forwardDeclare('companion.IntToIntFunction$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__companion_CompanionWithLambdas_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_CompanionWithLambdas_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getIntProperty__int() {
+  return CompanionWithLambdas.m_getIntProperty__int();
+ }
+ /** @final @nodts */
+ m_setIntProperty__int__void(/** number */ arg0) {
+  CompanionWithLambdas.m_setIntProperty__int__void(arg0);
+ }
+ /** @final @nodts @return {!IntToIntFunction} */
+ m_lambdaWithThisReference__companion_IntToIntFunction() {
+  return CompanionWithLambdas.m_lambdaWithThisReference__companion_IntToIntFunction();
+ }
+ /** @final @nodts @return {!IntToIntFunction} */
+ m_lambdaWithSuperReference__companion_IntToIntFunction() {
+  return CompanionWithLambdas.m_lambdaWithSuperReference__companion_IntToIntFunction();
+ }
+ /** @final @nodts @return {!IntToIntFunction} */
+ m_lambdaWithLocalClassAndThisAndSuperReferences__companion_IntToIntFunction() {
+  return CompanionWithLambdas.m_lambdaWithLocalClassAndThisAndSuperReferences__companion_IntToIntFunction();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__companion_CompanionWithLambdas_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__companion_CompanionWithLambdas_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__companion_CompanionWithLambdas_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  CompanionWithLambdas = goog.module.get('companion.CompanionWithLambdas$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__companion_CompanionWithLambdas_Companion;
+$Util.$setClassMetadata(Companion, 'companion.CompanionWithLambdas$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=CompanionWithLambdas$Companion.js.map

@@ -1,0 +1,173 @@
+goog.module('enums.Enum2$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Enum1 = goog.forwardDeclare('enums.Enum1$impl');
+let VALUE4 = goog.forwardDeclare('enums.Enum2.VALUE4$impl');
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @extends {Enum<!Enum2>}
+ */
+class Enum2 extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_foo__enums_Enum2_ = 0;
+ }
+ //Factory method corresponding to constructor 'Enum2(String, int, int)'.
+ /** @nodts @return {!Enum2} */
+ static $create__java_lang_String__int__int(/** ?string */ $name, /** number */ $ordinal, /** number */ foo) {
+  let $instance = new Enum2();
+  $instance.$ctor__enums_Enum2__java_lang_String__int__int__void($name, $ordinal, foo);
+  return $instance;
+ }
+ //Initialization from constructor 'Enum2(String, int, int)'.
+ /** @nodts */
+ $ctor__enums_Enum2__java_lang_String__int__int__void(/** ?string */ $name, /** number */ $ordinal, /** number */ foo) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+  this.f_foo__enums_Enum2_ = Enum1.f_V1__enums_Enum1.ordinal();
+  this.m_setFoo__int__void(foo);
+ }
+ /** @final @nodts @return {number} */
+ m_getFoo__int() {
+  return this.f_foo__enums_Enum2_;
+ }
+ /** @final @nodts */
+ m_setFoo__int__void(/** number */ set__) {
+  this.f_foo__enums_Enum2_ = set__;
+ }
+ //Factory method corresponding to constructor 'Enum2(String, int, Enum1)'.
+ /** @nodts @return {!Enum2} */
+ static $create__java_lang_String__int__enums_Enum1(/** ?string */ $name, /** number */ $ordinal, /** !Enum1 */ foo) {
+  let $instance = new Enum2();
+  $instance.$ctor__enums_Enum2__java_lang_String__int__enums_Enum1__void($name, $ordinal, foo);
+  return $instance;
+ }
+ //Initialization from constructor 'Enum2(String, int, Enum1)'.
+ /** @nodts */
+ $ctor__enums_Enum2__java_lang_String__int__enums_Enum1__void(/** ?string */ $name, /** number */ $ordinal, /** !Enum1 */ foo) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__enums_Enum2__java_lang_String__int__int__void($name, $ordinal, foo.ordinal());
+ }
+ //Factory method corresponding to constructor 'Enum2(String, int, Object...)'.
+ /** @nodts @return {!Enum2} */
+ static $create__java_lang_String__int__arrayOf_java_lang_Object(/** ?string */ $name, /** number */ $ordinal, /** !Array<!*> */ somePars) {
+  let $instance = new Enum2();
+  $instance.$ctor__enums_Enum2__java_lang_String__int__arrayOf_java_lang_Object__void($name, $ordinal, somePars);
+  return $instance;
+ }
+ //Initialization from constructor 'Enum2(String, int, Object...)'.
+ /** @nodts */
+ $ctor__enums_Enum2__java_lang_String__int__arrayOf_java_lang_Object__void(/** ?string */ $name, /** number */ $ordinal, /** !Array<!*> */ somePars) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__enums_Enum2__java_lang_String__int__int__void($name, $ordinal, somePars.length);
+ }
+ /** @nodts @return {number} */
+ m_bar__int() {
+  return this.ordinal();
+ }
+ /** @nodts @return {Enum2} */
+ static m_getC__enums_Enum2() {
+  Enum2.$clinit();
+  return Enum2.f_C__enums_Enum2_;
+ }
+ /** @nodts */
+ static m_setC__enums_Enum2__void(/** Enum2 */ set__) {
+  Enum2.$clinit();
+  Enum2.f_C__enums_Enum2_ = set__;
+ }
+ /** @nodts @return {Enum2} */
+ static m_f__java_lang_Object__enums_Enum2(/** !* */ o) {
+  Enum2.$clinit();
+  return null;
+ }
+ /** @nodts @return {!Enum2} */
+ static m_valueOf__java_lang_String__enums_Enum2(/** string */ name) {
+  Enum2.$clinit();
+  if ($Equality.$same(Enum2.f_namesToValuesMap__enums_Enum2_, null)) {
+   Enum2.f_namesToValuesMap__enums_Enum2_ = (/**@type {Map<?string, !Enum2>}*/ ($Enums.createMapFromValues(Enum2.m_values__arrayOf_enums_Enum2())));
+  }
+  return /**@type {Enum2}*/ ($Enums.getValueFromNameAndMap(name, Enum2.f_namesToValuesMap__enums_Enum2_));
+ }
+ /** @nodts @return {!Array<!Enum2>} */
+ static m_values__arrayOf_enums_Enum2() {
+  Enum2.$clinit();
+  return /**@type {!Array<!Enum2>}*/ ($Arrays.$stampType([Enum2.$static_VALUE1__enums_Enum2, Enum2.$static_VALUE2__enums_Enum2, Enum2.$static_VALUE3__enums_Enum2, Enum2.$static_VALUE4__enums_Enum2], Enum2));
+ }
+ /** @nodts @return {!Enum2} */
+ static get f_VALUE1__enums_Enum2() {
+  return (Enum2.$clinit(), Enum2.$static_VALUE1__enums_Enum2);
+ }
+ /** @nodts @return {!Enum2} */
+ static get f_VALUE2__enums_Enum2() {
+  return (Enum2.$clinit(), Enum2.$static_VALUE2__enums_Enum2);
+ }
+ /** @nodts @return {!Enum2} */
+ static get f_VALUE3__enums_Enum2() {
+  return (Enum2.$clinit(), Enum2.$static_VALUE3__enums_Enum2);
+ }
+ /** @nodts @return {!Enum2} */
+ static get f_VALUE4__enums_Enum2() {
+  return (Enum2.$clinit(), Enum2.$static_VALUE4__enums_Enum2);
+ }
+ /** @nodts */
+ static $clinit() {
+  Enum2.$clinit = () =>{};
+  Enum2.$loadModules();
+  Enum.$clinit();
+  Enum2.$static_VALUE1__enums_Enum2 = Enum2.$create__java_lang_String__int__int($Util.$makeEnumName('VALUE1'), Enum2.$ordinal_VALUE1__enums_Enum2, 2);
+  Enum2.$static_VALUE2__enums_Enum2 = Enum2.$create__java_lang_String__int__enums_Enum1($Util.$makeEnumName('VALUE2'), Enum2.$ordinal_VALUE2__enums_Enum2, Enum1.f_V1__enums_Enum1);
+  Enum2.$static_VALUE3__enums_Enum2 = Enum2.$create__java_lang_String__int__arrayOf_java_lang_Object($Util.$makeEnumName('VALUE3'), Enum2.$ordinal_VALUE3__enums_Enum2, new Array(0));
+  Enum2.$static_VALUE4__enums_Enum2 = VALUE4.$create__java_lang_String__int($Util.$makeEnumName('VALUE4'), Enum2.$ordinal_VALUE4__enums_Enum2);
+  Enum2.f_C__enums_Enum2_ = Enum2.m_f__java_lang_Object__enums_Enum2(j_l_Object.$create__());
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Enum2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Enum1 = goog.module.get('enums.Enum1$impl');
+  VALUE4 = goog.module.get('enums.Enum2.VALUE4$impl');
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+Enum2.$ordinal_VALUE1__enums_Enum2 = 0;
+/**@const {number} @nodts*/
+Enum2.$ordinal_VALUE2__enums_Enum2 = 1;
+/**@const {number} @nodts*/
+Enum2.$ordinal_VALUE3__enums_Enum2 = 2;
+/**@const {number} @nodts*/
+Enum2.$ordinal_VALUE4__enums_Enum2 = 3;
+/**@private {!Enum2} @nodts*/
+Enum2.$static_VALUE1__enums_Enum2;
+/**@private {!Enum2} @nodts*/
+Enum2.$static_VALUE2__enums_Enum2;
+/**@private {!Enum2} @nodts*/
+Enum2.$static_VALUE3__enums_Enum2;
+/**@private {!Enum2} @nodts*/
+Enum2.$static_VALUE4__enums_Enum2;
+/**@type {Enum2} @nodts*/
+Enum2.f_C__enums_Enum2_;
+/**@type {Map<?string, !Enum2>} @nodts*/
+Enum2.f_namesToValuesMap__enums_Enum2_;
+$Util.$setClassMetadataForEnum(Enum2, 'enums.Enum2');
+
+exports = Enum2;
+
+//# sourceMappingURL=Enum2.js.map

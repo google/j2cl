@@ -1,0 +1,50 @@
+goog.module('importglobaljstypes.RegExp$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class importglobaljstypes_RegExp extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!importglobaljstypes_RegExp} */
+ static $create__() {
+  importglobaljstypes_RegExp.$clinit();
+  let $instance = new importglobaljstypes_RegExp();
+  $instance.$ctor__importglobaljstypes_RegExp__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__importglobaljstypes_RegExp__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_test__void() {
+  importglobaljstypes_RegExp.$clinit();
+  let regExp = new RegExp('teststring');
+  regExp.test('restString');
+  let str = regExp.toString();
+ }
+ /** @nodts */
+ static $clinit() {
+  importglobaljstypes_RegExp.$clinit = () =>{};
+  importglobaljstypes_RegExp.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof importglobaljstypes_RegExp;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(importglobaljstypes_RegExp, 'importglobaljstypes.RegExp');
+
+exports = importglobaljstypes_RegExp;
+
+//# sourceMappingURL=RegExp.js.map

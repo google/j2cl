@@ -1,0 +1,50 @@
+goog.module('primitivespecialization.JoiningOverrides$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Overloads = goog.require('primitivespecialization.Overloads$impl');
+const Setter = goog.require('primitivespecialization.Setter$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+/**
+ * @final
+ * @implements {Setter<!Integer>}
+ */
+class JoiningOverrides extends Overloads {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JoiningOverrides} */
+ static $create__() {
+  JoiningOverrides.$clinit();
+  let $instance = new JoiningOverrides();
+  $instance.$ctor__primitivespecialization_JoiningOverrides__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_JoiningOverrides__void() {
+  this.$ctor__primitivespecialization_Overloads__void();
+ }
+ /** @override @nodts */
+ m_set__int__void(/** number */ i) {}
+ /** @nodts */
+ static $clinit() {
+  JoiningOverrides.$clinit = () =>{};
+  JoiningOverrides.$loadModules();
+  Overloads.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JoiningOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Setter.$markImplementor(JoiningOverrides);
+$Util.$setClassMetadata(JoiningOverrides, 'primitivespecialization.JoiningOverrides');
+
+exports = JoiningOverrides;
+
+//# sourceMappingURL=JoiningOverrides.js.map

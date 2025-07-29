@@ -1,0 +1,107 @@
+goog.module('genericmethod.GenericMethod$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Content = goog.forwardDeclare('genericmethod.Content$impl');
+let $1 = goog.forwardDeclare('genericmethod.GenericMethod.$1$impl');
+let $1LocalClass = goog.forwardDeclare('genericmethod.GenericMethod.$1LocalClass$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Exception = goog.forwardDeclare('java.lang.Exception$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template T
+ */
+class GenericMethod extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!GenericMethod<T>} */
+ static $create__() {
+  GenericMethod.$clinit();
+  let $instance = new GenericMethod();
+  $instance.$ctor__genericmethod_GenericMethod__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericmethod_GenericMethod__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @template T_1, S */
+ m_foo__java_lang_Object__java_lang_Object__void(/** T_1 */ f, /** S */ s) {}
+ /** @final @nodts */
+ m_f__java_lang_Object__void(/** * */ o) {}
+ /** @final @nodts @template T_1 */
+ m_f__java_lang_Exception__void(/** T_1 */ t) {}
+ /** @final @nodts @template T_1 */
+ m_f__java_lang_Error__void(/** T_1 */ t) {
+  $1.$create__genericmethod_GenericMethod(this);
+  $1LocalClass.$create__genericmethod_GenericMethod(this);
+ }
+ /** @final @nodts @template T_1 @return {GenericMethod<T_1>} */
+ m_bar__genericmethod_GenericMethod() {
+  return null;
+ }
+ /** @final @nodts @template T_1 @return {!Array<T_1>} */
+ m_f__arrayOf_java_lang_Object__arrayOf_java_lang_Object(/** !Array<T_1> */ array) {
+  return array;
+ }
+ /** @final @nodts @template T_1 @return {T_1} */
+ m_checked__java_lang_Object() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @final @nodts @template T_1 @return {T_1} */
+ m_unchecked__java_lang_Object() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let g = /**@type {!GenericMethod<!(Number|number)>}*/ (GenericMethod.$create__());
+  g.m_foo__java_lang_Object__java_lang_Object__void(g, g);
+  g.m_foo__java_lang_Object__java_lang_Object__void(Error.$create__(), Exception.$create__());
+  g.m_f__java_lang_Object__void(j_l_Object.$create__());
+  g.m_f__java_lang_Exception__void(Exception.$create__());
+  g.m_f__java_lang_Error__void(Error.$create__());
+  g.m_f__arrayOf_java_lang_Object__arrayOf_java_lang_Object(/**@type {!Array<string>}*/ ($Arrays.$createWithInitializer(1, j_l_String, /**  @return {string}*/ ((/** number */ it) =>{
+   return 'asdf';
+  }))));
+  let s = /**@type {string}*/ ($Casts.$to(this.m_checked__java_lang_Object(), j_l_String));
+  s = (/**@type {string}*/ (this.m_unchecked__java_lang_Object()));
+  (/**@type {!Content}*/ ($Casts.$to(this.m_checked__java_lang_Object(), Content))).m_getProp__java_lang_String();
+  (/**@type {!Content}*/ (this.m_unchecked__java_lang_Object())).m_getProp__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericMethod.$clinit = () =>{};
+  GenericMethod.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Content = goog.module.get('genericmethod.Content$impl');
+  $1 = goog.module.get('genericmethod.GenericMethod.$1$impl');
+  $1LocalClass = goog.module.get('genericmethod.GenericMethod.$1LocalClass$impl');
+  Error = goog.module.get('java.lang.Error$impl');
+  Exception = goog.module.get('java.lang.Exception$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(GenericMethod, 'genericmethod.GenericMethod');
+
+exports = GenericMethod;
+
+//# sourceMappingURL=GenericMethod.js.map

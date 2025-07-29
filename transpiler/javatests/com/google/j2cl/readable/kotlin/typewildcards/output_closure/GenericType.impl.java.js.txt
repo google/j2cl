@@ -1,0 +1,54 @@
+goog.module('typewildcards.GenericType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class GenericType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_field__typewildcards_GenericType_;
+ }
+ /** @nodts @template T @return {!GenericType<T>} */
+ static $create__java_lang_Object(/** T */ field) {
+  GenericType.$clinit();
+  let $instance = new GenericType();
+  $instance.$ctor__typewildcards_GenericType__java_lang_Object__void(field);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typewildcards_GenericType__java_lang_Object__void(/** T */ field) {
+  this.$ctor__java_lang_Object__void();
+  this.f_field__typewildcards_GenericType_ = field;
+ }
+ /** @final @nodts @return {T} */
+ m_getField__java_lang_Object() {
+  return this.f_field__typewildcards_GenericType_;
+ }
+ /** @final @nodts */
+ m_setField__java_lang_Object__void(/** T */ set__) {
+  this.f_field__typewildcards_GenericType_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericType.$clinit = () =>{};
+  GenericType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericType, 'typewildcards.GenericType');
+
+exports = GenericType;
+
+//# sourceMappingURL=GenericType.js.map

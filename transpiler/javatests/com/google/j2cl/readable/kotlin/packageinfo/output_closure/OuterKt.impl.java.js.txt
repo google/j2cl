@@ -1,0 +1,55 @@
+goog.module('readable.packageinfo.OuterKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Bar = goog.forwardDeclare('readable.thirdpartyjavalib.Bar$impl');
+let OtherKotlinLibrary = goog.forwardDeclare('readable.thirdpartylib.OtherKotlinLibrary$impl');
+
+/**
+ * @final
+ */
+class OuterKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!OuterKt} */
+ static $create__() {
+  OuterKt.$clinit();
+  let $instance = new OuterKt();
+  $instance.$ctor__packageinfo_OuterKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__packageinfo_OuterKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  OuterKt.$clinit();
+  Bar.bar();
+  OtherKotlinLibrary.$create__().m_getProperty__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  OuterKt.$clinit = () =>{};
+  OuterKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Bar = goog.module.get('readable.thirdpartyjavalib.Bar$impl');
+  OtherKotlinLibrary = goog.module.get('readable.thirdpartylib.OtherKotlinLibrary$impl');
+ }
+}
+$Util.$setClassMetadata(OuterKt, 'packageinfo.OuterKt');
+
+exports = OuterKt;
+
+//# sourceMappingURL=OuterKt.js.map

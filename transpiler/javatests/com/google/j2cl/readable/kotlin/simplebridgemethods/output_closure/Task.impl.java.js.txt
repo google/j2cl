@@ -1,0 +1,49 @@
+goog.module('simplebridgemethods.Task$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Callable = goog.require('simplebridgemethods.Callable$impl');
+
+/**
+ * @final
+ * @template T
+ * @implements {Callable<T>}
+ */
+class Task extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!Task<T>} */
+ static $create__() {
+  Task.$clinit();
+  let $instance = new Task();
+  $instance.$ctor__simplebridgemethods_Task__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__simplebridgemethods_Task__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts */
+ m_call__java_lang_Object__void(/** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  Task.$clinit = () =>{};
+  Task.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Task;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Callable.$markImplementor(Task);
+$Util.$setClassMetadata(Task, 'simplebridgemethods.Task');
+
+exports = Task;
+
+//# sourceMappingURL=Task.js.map

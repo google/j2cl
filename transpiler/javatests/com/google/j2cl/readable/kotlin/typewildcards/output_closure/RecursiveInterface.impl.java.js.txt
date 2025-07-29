@@ -1,0 +1,34 @@
+goog.module('typewildcards.RecursiveInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T, C
+ */
+class RecursiveInterface {
+ /** @abstract @nodts @return {T} */
+ m_m__typewildcards_RecursiveInterface() {}
+ /** @nodts */
+ static $clinit() {
+  RecursiveInterface.$clinit = () =>{};
+  RecursiveInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__typewildcards_RecursiveInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__typewildcards_RecursiveInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+RecursiveInterface.$markImplementor(/**@type {Function}*/ (RecursiveInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (RecursiveInterface), 'typewildcards.RecursiveInterface');
+
+exports = RecursiveInterface;
+
+//# sourceMappingURL=RecursiveInterface.js.map

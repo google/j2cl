@@ -1,0 +1,33 @@
+goog.module('instancejsmethods.MyInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class MyInterface {
+ /** @abstract @nodts @return {number} */
+ m_intfFoo__int() {}
+ /** @nodts */
+ static $clinit() {
+  MyInterface.$clinit = () =>{};
+  MyInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__instancejsmethods_MyInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__instancejsmethods_MyInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+MyInterface.$markImplementor(/**@type {Function}*/ (MyInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (MyInterface), 'instancejsmethods.MyInterface');
+
+exports = MyInterface;
+
+//# sourceMappingURL=MyInterface.js.map

@@ -1,0 +1,59 @@
+goog.module('inlinefunction.InlineFunctionKt.$4$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Sequence = goog.require('kotlin.sequences.Sequence$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let ArrayIteratorKt = goog.forwardDeclare('kotlin.jvm.internal.ArrayIteratorKt$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @final
+ * @implements {Sequence<!Integer>}
+ */
+class $4 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!$4} */
+ static $create__() {
+  $4.$clinit();
+  let $instance = new $4();
+  $instance.$ctor__inlinefunction_InlineFunctionKt_4__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionKt_4__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {
+  return ArrayIteratorKt.m_iterator__arrayOf_java_lang_Object__java_util_Iterator(/**@type {!Array<!Integer>}*/ ($Arrays.$stampType([Integer.m_valueOf__int__java_lang_Integer(1)], Integer)));
+ }
+ /** @nodts */
+ static $clinit() {
+  $4.$clinit = () =>{};
+  $4.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $4;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  ArrayIteratorKt = goog.module.get('kotlin.jvm.internal.ArrayIteratorKt$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+Sequence.$markImplementor($4);
+$Util.$setClassMetadata($4, 'inlinefunction.InlineFunctionKt$4');
+
+exports = $4;
+
+//# sourceMappingURL=InlineFunctionKt$4.js.map

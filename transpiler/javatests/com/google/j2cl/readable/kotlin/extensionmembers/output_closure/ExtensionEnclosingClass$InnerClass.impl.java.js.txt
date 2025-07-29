@@ -1,0 +1,64 @@
+goog.module('extensionmembers.ExtensionEnclosingClass.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ExtensionEnclosingClass = goog.forwardDeclare('extensionmembers.ExtensionEnclosingClass$impl');
+let ReceiverClass = goog.forwardDeclare('extensionmembers.ReceiverClass$impl');
+
+/**
+ * @final
+ */
+class InnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!ExtensionEnclosingClass} @nodts*/
+  this.$outer_this__extensionmembers_ExtensionEnclosingClass_InnerClass;
+  /**@type {number} @nodts*/
+  this.f_innerClassProperty__extensionmembers_ExtensionEnclosingClass_InnerClass_ = 0;
+ }
+ /** @nodts @return {!InnerClass} */
+ static $create__extensionmembers_ExtensionEnclosingClass__int(/** !ExtensionEnclosingClass */ $outer_this, /** number */ innerClassProperty) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__extensionmembers_ExtensionEnclosingClass_InnerClass__extensionmembers_ExtensionEnclosingClass__int__void($outer_this, innerClassProperty);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__extensionmembers_ExtensionEnclosingClass_InnerClass__extensionmembers_ExtensionEnclosingClass__int__void(/** !ExtensionEnclosingClass */ $outer_this, /** number */ innerClassProperty) {
+  this.$outer_this__extensionmembers_ExtensionEnclosingClass_InnerClass = $outer_this;
+  this.$ctor__java_lang_Object__void();
+  this.f_innerClassProperty__extensionmembers_ExtensionEnclosingClass_InnerClass_ = innerClassProperty;
+ }
+ /** @final @nodts @return {number} */
+ m_getInnerClassProperty__int() {
+  return this.f_innerClassProperty__extensionmembers_ExtensionEnclosingClass_InnerClass_;
+ }
+ /** @final @nodts @return {number} */
+ m_extensionFunctionFromInnerClass__extensionmembers_ReceiverClass__int__int(/** !ReceiverClass */ this_1, /** number */ valueParameter) {
+  return this.$outer_this__extensionmembers_ExtensionEnclosingClass_InnerClass.m_getAProperty__int() + this.m_getInnerClassProperty__int() + this_1.m_getInstanceProperty__int() + valueParameter | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_callExtensionFunctionFromInnerClass__extensionmembers_ReceiverClass__int__int(/** !ReceiverClass */ receiver, /** number */ extensionFunctionParam) {
+  return this.m_extensionFunctionFromInnerClass__extensionmembers_ReceiverClass__int__int(receiver, extensionFunctionParam);
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClass, 'extensionmembers.ExtensionEnclosingClass$InnerClass');
+
+exports = InnerClass;
+
+//# sourceMappingURL=ExtensionEnclosingClass$InnerClass.js.map

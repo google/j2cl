@@ -1,0 +1,65 @@
+goog.module('dowhilestatement.DoWhileStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class DoWhileStatement extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!DoWhileStatement} */
+ static $create__() {
+  DoWhileStatement.$clinit();
+  let $instance = new DoWhileStatement();
+  $instance.$ctor__dowhilestatement_DoWhileStatement__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dowhilestatement_DoWhileStatement__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let cdt = true;
+  do {
+   cdt = false;
+  } while (cdt);
+  do {} while (cdt);
+  if (cdt) {
+   let /** boolean */ foo;
+   do {
+    foo = false;
+   } while (foo);
+  }
+  let /** boolean */ foo_1;
+  do {
+   if (cdt) {
+    foo_1 = false;
+   } else {
+    foo_1 = true;
+   }
+  } while (foo_1);
+ }
+ /** @nodts */
+ static $clinit() {
+  DoWhileStatement.$clinit = () =>{};
+  DoWhileStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DoWhileStatement;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(DoWhileStatement, 'dowhilestatement.DoWhileStatement');
+
+exports = DoWhileStatement;
+
+//# sourceMappingURL=DoWhileStatement.js.map

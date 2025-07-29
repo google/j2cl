@@ -1,0 +1,73 @@
+goog.module('companion.InterfaceWithCompanion.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InterfaceWithCompanion = goog.forwardDeclare('companion.InterfaceWithCompanion$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__companion_InterfaceWithCompanion_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_InterfaceWithCompanion_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!*} */
+ m_getNonCompileTimeConstant__java_lang_Object() {
+  return InterfaceWithCompanion.m_getNonCompileTimeConstant__java_lang_Object();
+ }
+ /** @final @nodts @return {!*} */
+ m_getProperty__java_lang_Object() {
+  return InterfaceWithCompanion.m_getProperty__java_lang_Object();
+ }
+ /** @final @nodts */
+ m_setProperty__java_lang_Object__void(/** !* */ arg0) {
+  InterfaceWithCompanion.m_setProperty__java_lang_Object__void(arg0);
+ }
+ /** @final @nodts @return {string} */
+ m_publicFunction__java_lang_String() {
+  return InterfaceWithCompanion.m_publicFunction__java_lang_String();
+ }
+ /** @final @nodts @return {string} */
+ m_privateFunction__java_lang_String_$p_companion_InterfaceWithCompanion_Companion() {
+  return InterfaceWithCompanion.m_privateFunction__java_lang_String();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__companion_InterfaceWithCompanion_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__companion_InterfaceWithCompanion_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__companion_InterfaceWithCompanion_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InterfaceWithCompanion = goog.module.get('companion.InterfaceWithCompanion$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__companion_InterfaceWithCompanion_Companion;
+$Util.$setClassMetadata(Companion, 'companion.InterfaceWithCompanion$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=InterfaceWithCompanion$Companion.js.map

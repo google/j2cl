@@ -1,0 +1,38 @@
+goog.module('variance.Out$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Container = goog.forwardDeclare('variance.Container$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Out {
+ /** @abstract @nodts @return {T} */
+ m_m__java_lang_Object() {}
+ /** @abstract @nodts @return {!Container<?>} */
+ m_mListOut__variance_Container__variance_Container(/** !Container<?> */ c) {}
+ /** @nodts */
+ static $clinit() {
+  Out.$clinit = () =>{};
+  Out.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__variance_Out = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__variance_Out;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Out.$markImplementor(/**@type {Function}*/ (Out));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Out), 'variance.Out');
+
+exports = Out;
+
+//# sourceMappingURL=Out.js.map

@@ -1,0 +1,59 @@
+goog.module('inlineclass.FooFactory$impl');
+
+const Factory = goog.require('inlineclass.Factory$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('inlineclass.Foo$impl');
+
+/**
+ * @final
+ * @implements {Factory<!Foo>}
+ */
+class FooFactory extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!FooFactory} */
+ static $create__() {
+  FooFactory.$clinit();
+  let $instance = new FooFactory();
+  $instance.$ctor__inlineclass_FooFactory__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlineclass_FooFactory__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!Foo} */
+ m_create__int__inlineclass_Foo(/** number */ i) {
+  return Foo.$create__int(i);
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Foo} */
+ m_create__int__java_lang_Object(/** number */ arg0) {
+  return this.m_create__int__inlineclass_Foo(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  FooFactory.$clinit = () =>{};
+  FooFactory.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FooFactory;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Foo = goog.module.get('inlineclass.Foo$impl');
+ }
+}
+Factory.$markImplementor(FooFactory);
+$Util.$setClassMetadata(FooFactory, 'inlineclass.FooFactory');
+
+exports = FooFactory;
+
+//# sourceMappingURL=FooFactory.js.map

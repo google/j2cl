@@ -1,0 +1,34 @@
+goog.module('bridgemethods.BridgeMethodDefault.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class I {
+ /** @abstract @nodts */
+ m_m__java_lang_Object__void(/** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  I.$clinit = () =>{};
+  I.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_BridgeMethodDefault_I = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_BridgeMethodDefault_I;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (I), 'bridgemethods.BridgeMethodDefault$I');
+
+exports = I;
+
+//# sourceMappingURL=BridgeMethodDefault$I.js.map

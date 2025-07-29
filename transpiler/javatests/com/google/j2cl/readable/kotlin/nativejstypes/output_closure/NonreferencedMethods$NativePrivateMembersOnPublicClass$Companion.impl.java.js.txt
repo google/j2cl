@@ -1,0 +1,57 @@
+goog.module('nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NativePrivateMembersOnPublicClass = goog.forwardDeclare('nativejstypes.NativeNonreferencedMethods');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__nativejstypes_NonreferencedMethods_NativePrivateMembersOnPublicClass_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_NonreferencedMethods_NativePrivateMembersOnPublicClass_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getStatic__int_$p_nativejstypes_NonreferencedMethods_NativePrivateMembersOnPublicClass_Companion() {
+  return NativePrivateMembersOnPublicClass.getStatic();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__nativejstypes_NonreferencedMethods_NativePrivateMembersOnPublicClass_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__nativejstypes_NonreferencedMethods_NativePrivateMembersOnPublicClass_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__nativejstypes_NonreferencedMethods_NativePrivateMembersOnPublicClass_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  NativePrivateMembersOnPublicClass = goog.module.get('nativejstypes.NativeNonreferencedMethods');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__nativejstypes_NonreferencedMethods_NativePrivateMembersOnPublicClass_Companion;
+$Util.$setClassMetadata(Companion, 'nativejstypes.NonreferencedMethods$NativePrivateMembersOnPublicClass$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=NonreferencedMethods$NativePrivateMembersOnPublicClass$Companion.js.map

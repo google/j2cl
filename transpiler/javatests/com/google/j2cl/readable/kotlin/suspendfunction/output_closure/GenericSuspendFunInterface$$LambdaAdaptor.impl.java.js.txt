@@ -1,0 +1,51 @@
+goog.module('suspendfunction.GenericSuspendFunInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const GenericSuspendFunInterface = goog.require('suspendfunction.GenericSuspendFunInterface$impl');
+
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+
+/**
+ * @template T
+ * @implements {GenericSuspendFunInterface<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(Continuation<?>, T):!Generator<*, T> */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(Continuation<?>, T):!Generator<*, T>} @nodts*/
+  this.f_fn__suspendfunction_GenericSuspendFunInterface_$LambdaAdaptor;
+  this.$ctor__suspendfunction_GenericSuspendFunInterface_$LambdaAdaptor__suspendfunction_GenericSuspendFunInterface_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__suspendfunction_GenericSuspendFunInterface_$LambdaAdaptor__suspendfunction_GenericSuspendFunInterface_$JsFunction__void(/** ?function(Continuation<?>, T):!Generator<*, T> */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__suspendfunction_GenericSuspendFunInterface_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {!Generator<*, T>} */
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_(/** Continuation<?> */ arg0, /** T */ arg1) {
+  let /** ?function(Continuation<?>, T):!Generator<*, T> */ $function;
+  return ($function = this.f_fn__suspendfunction_GenericSuspendFunInterface_$LambdaAdaptor, (yield* $function(arg0, arg1)));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+GenericSuspendFunInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'suspendfunction.GenericSuspendFunInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=GenericSuspendFunInterface$$LambdaAdaptor.js.map

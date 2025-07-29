@@ -1,0 +1,54 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.$1AddNumber$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder$impl');
+
+/**
+ * @abstract
+ */
+class $1AddNumber extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!InnerClassInitOrder} @nodts*/
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_1AddNumber;
+  /**@type {number} @nodts*/
+  this.f_num__innerclassinitorder_InnerClassInitOrder_1AddNumber_ = 0;
+ }
+ /** @nodts */
+ $ctor__innerclassinitorder_InnerClassInitOrder_1AddNumber__innerclassinitorder_InnerClassInitOrder__int__void(/** !InnerClassInitOrder */ $outer_this, /** number */ num) {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_1AddNumber = $outer_this;
+  this.$ctor__java_lang_Object__void();
+  this.f_num__innerclassinitorder_InnerClassInitOrder_1AddNumber_ = num;
+ }
+ /** @final @nodts @return {number} */
+ m_getNum__int() {
+  return this.f_num__innerclassinitorder_InnerClassInitOrder_1AddNumber_;
+ }
+ /** @final @nodts */
+ m_setNum__int__void(/** number */ set__) {
+  this.f_num__innerclassinitorder_InnerClassInitOrder_1AddNumber_ = set__;
+ }
+ /** @abstract @nodts */
+ m_act__void() {}
+ /** @nodts */
+ static $clinit() {
+  $1AddNumber.$clinit = () =>{};
+  $1AddNumber.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1AddNumber;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1AddNumber, 'innerclassinitorder.InnerClassInitOrder$1AddNumber');
+
+exports = $1AddNumber;
+
+//# sourceMappingURL=InnerClassInitOrder$1AddNumber.js.map

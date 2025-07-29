@@ -1,0 +1,34 @@
+goog.module('jsenum.Supplier$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Supplier {
+ /** @abstract @nodts @return {T} */
+ m_get__java_lang_Object() {}
+ /** @nodts */
+ static $clinit() {
+  Supplier.$clinit = () =>{};
+  Supplier.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsenum_Supplier = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsenum_Supplier;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Supplier.$markImplementor(/**@type {Function}*/ (Supplier));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Supplier), 'jsenum.Supplier');
+
+exports = Supplier;
+
+//# sourceMappingURL=Supplier.js.map

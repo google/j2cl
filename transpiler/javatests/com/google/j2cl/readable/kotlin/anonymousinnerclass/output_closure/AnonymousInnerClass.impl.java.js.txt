@@ -1,0 +1,57 @@
+goog.module('anonymousinnerclass.AnonymousInnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let A = goog.forwardDeclare('anonymousinnerclass.A$impl');
+let $1 = goog.forwardDeclare('anonymousinnerclass.AnonymousInnerClass.$1$impl');
+let $2 = goog.forwardDeclare('anonymousinnerclass.AnonymousInnerClass.$2$impl');
+
+/**
+ * @final
+ */
+class AnonymousInnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AnonymousInnerClass} */
+ static $create__() {
+  AnonymousInnerClass.$clinit();
+  let $instance = new AnonymousInnerClass();
+  $instance.$ctor__anonymousinnerclass_AnonymousInnerClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousinnerclass_AnonymousInnerClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__int__void(/** number */ arg) {
+  let ic = $1.$create__anonymousinnerclass_AnonymousInnerClass(this);
+  let a = A.$create__();
+  let c = $2.$create__anonymousinnerclass_AnonymousInnerClass__int(this, arg);
+ }
+ /** @nodts */
+ static $clinit() {
+  AnonymousInnerClass.$clinit = () =>{};
+  AnonymousInnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AnonymousInnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  A = goog.module.get('anonymousinnerclass.A$impl');
+  $1 = goog.module.get('anonymousinnerclass.AnonymousInnerClass.$1$impl');
+  $2 = goog.module.get('anonymousinnerclass.AnonymousInnerClass.$2$impl');
+ }
+}
+$Util.$setClassMetadata(AnonymousInnerClass, 'anonymousinnerclass.AnonymousInnerClass');
+
+exports = AnonymousInnerClass;
+
+//# sourceMappingURL=AnonymousInnerClass.js.map

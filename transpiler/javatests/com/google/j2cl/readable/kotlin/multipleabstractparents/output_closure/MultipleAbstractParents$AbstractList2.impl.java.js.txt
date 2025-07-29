@@ -1,0 +1,42 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.AbstractList2$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const List = goog.require('multipleabstractparents.MultipleAbstractParents.List$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template T
+ * @implements {List<T>}
+ */
+class AbstractList2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__multipleabstractparents_MultipleAbstractParents_AbstractList2__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractList2.$clinit = () =>{};
+  AbstractList2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractList2;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {?string} */
+ m_getFoo__java_lang_Object__java_lang_String(/** ?T */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+List.$markImplementor(AbstractList2);
+$Util.$setClassMetadata(AbstractList2, 'multipleabstractparents.MultipleAbstractParents$AbstractList2');
+
+exports = AbstractList2;
+
+//# sourceMappingURL=MultipleAbstractParents$AbstractList2.js.map

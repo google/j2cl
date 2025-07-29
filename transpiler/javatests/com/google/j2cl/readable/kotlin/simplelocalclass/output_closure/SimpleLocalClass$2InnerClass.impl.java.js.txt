@@ -1,0 +1,61 @@
+goog.module('simplelocalclass.SimpleLocalClass.$2InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SimpleLocalClass = goog.forwardDeclare('simplelocalclass.SimpleLocalClass$impl');
+
+/**
+ * @final
+ */
+class $2InnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!SimpleLocalClass} @nodts*/
+  this.$outer_this__simplelocalclass_SimpleLocalClass_2InnerClass;
+  /**@type {number} @nodts*/
+  this.f_field__simplelocalclass_SimpleLocalClass_2InnerClass_ = 0;
+  /**@type {number} @nodts*/
+  this.$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass = 0;
+ }
+ /** @nodts @return {!$2InnerClass} */
+ static $create__simplelocalclass_SimpleLocalClass__int(/** !SimpleLocalClass */ $outer_this, /** number */ $captured_localVar) {
+  let $instance = new $2InnerClass();
+  $instance.$ctor__simplelocalclass_SimpleLocalClass_2InnerClass__simplelocalclass_SimpleLocalClass__int__void($outer_this, $captured_localVar);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__simplelocalclass_SimpleLocalClass_2InnerClass__simplelocalclass_SimpleLocalClass__int__void(/** !SimpleLocalClass */ $outer_this, /** number */ $captured_localVar) {
+  this.$outer_this__simplelocalclass_SimpleLocalClass_2InnerClass = $outer_this;
+  this.$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass = $captured_localVar;
+  this.$ctor__java_lang_Object__void();
+  this.f_field__simplelocalclass_SimpleLocalClass_2InnerClass_ = $captured_localVar;
+ }
+ /** @final @nodts @return {number} */
+ m_getField__int() {
+  return this.f_field__simplelocalclass_SimpleLocalClass_2InnerClass_;
+ }
+ /** @final @nodts */
+ m_setField__int__void(/** number */ set__) {
+  this.f_field__simplelocalclass_SimpleLocalClass_2InnerClass_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  $2InnerClass.$clinit = () =>{};
+  $2InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2InnerClass, 'simplelocalclass.SimpleLocalClass$2InnerClass');
+
+exports = $2InnerClass;
+
+//# sourceMappingURL=SimpleLocalClass$2InnerClass.js.map

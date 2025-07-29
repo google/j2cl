@@ -1,0 +1,41 @@
+goog.module('jsconstructor.JsConstructorSubclass$impl');
+
+const JsConstructorClassWithExplicitConstructor = goog.require('jsconstructor.JsConstructorClassWithExplicitConstructor$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JsConstructorSubclass extends JsConstructorClassWithExplicitConstructor {
+ 
+ constructor() {
+  JsConstructorSubclass.$clinit();
+  super(1);
+  this.$ctor__jsconstructor_JsConstructorSubclass__void();
+ }
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorSubclass__void() {
+  let /** number */ i;
+  do {
+   i = 0;
+  } while (i == 0);
+ }
+ /** @nodts */
+ static $clinit() {
+  JsConstructorSubclass.$clinit = () =>{};
+  JsConstructorSubclass.$loadModules();
+  JsConstructorClassWithExplicitConstructor.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsConstructorSubclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsConstructorSubclass, 'jsconstructor.JsConstructorSubclass');
+
+exports = JsConstructorSubclass;
+
+//# sourceMappingURL=JsConstructorSubclass.js.map

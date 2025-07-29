@@ -1,0 +1,46 @@
+goog.module('abstractmethodoverridedefault.AbstractMethodOverrideDefault.B$impl');
+
+const A = goog.require('abstractmethodoverridedefault.AbstractMethodOverrideDefault.A$impl');
+const J = goog.require('abstractmethodoverridedefault.AbstractMethodOverrideDefault.J$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @implements {J}
+ */
+class B extends A {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B__void() {
+  this.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__void();
+ }
+ /** @override @nodts */
+ m_bar__void() {
+  if (false) {
+   this.m_bar__void();
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  A.$clinit();
+  J.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+J.$markImplementor(B);
+$Util.$setClassMetadata(B, 'abstractmethodoverridedefault.AbstractMethodOverrideDefault$B');
+
+exports = B;
+
+//# sourceMappingURL=AbstractMethodOverrideDefault$B.js.map

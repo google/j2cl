@@ -1,0 +1,49 @@
+goog.module('bridgejsmethod.Main.A$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class A extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!A<T>} */
+ static $create__() {
+  A.$clinit();
+  let $instance = new A();
+  $instance.$ctor__bridgejsmethod_Main_A__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_A__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {T} */
+ f(/** T */ t) {
+  return t;
+ }
+ /** @nodts */
+ m_bar__java_lang_Object__void(/** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  A.$clinit = () =>{};
+  A.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(A, 'bridgejsmethod.Main$A');
+
+exports = A;
+
+//# sourceMappingURL=Main$A.js.map

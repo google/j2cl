@@ -1,0 +1,101 @@
+goog.module('jsproperties.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Bar = goog.forwardDeclare('jsproperties.Bar$impl');
+let ClassWithJvmField = goog.forwardDeclare('jsproperties.ClassWithJvmField$impl');
+let HasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.HasFieldAndGetterSetterFuns$impl');
+let JavaFoo = goog.forwardDeclare('jsproperties.JavaFoo$impl');
+let MainKt = goog.forwardDeclare('jsproperties.MainKt$impl');
+let NativeFoo = goog.forwardDeclare('jsproperties.NativeFoo$impl');
+let OtherHasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');
+
+/**
+ * @final
+ */
+class Main extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__jsproperties_Main__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_Main__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_testNativeJsProperty__void() {
+  NativeFoo.$create__().hasOwnProperty;
+  NativeFoo.$create__().hasOwnProperty;
+  Math.PI;
+  Math.E;
+ }
+ /** @final @nodts */
+ m_testStaticJsProperty__void() {
+  MainKt.a;
+  MainKt.a = 10;
+  MainKt.abc;
+  MainKt.abc = 10;
+ }
+ /** @final @nodts */
+ m_testInstanceJsProperty__void() {
+  let bar = Bar.$create__int(0);
+  bar.a;
+  bar.a = 10;
+  bar.abc;
+  bar.abc = 10;
+ }
+ /** @final @nodts */
+ m_testFromJava__void() {
+  JavaFoo.$create__().whatever;
+  JavaFoo.$create__().buzz;
+ }
+ /** @final @nodts */
+ m_testJvmField__void() {
+  let z = ClassWithJvmField.$create__().f_f__jsproperties_ClassWithJvmField;
+  z = ClassWithJvmField.f_x__jsproperties_ClassWithJvmField;
+  z = ClassWithJvmField.f_x__jsproperties_ClassWithJvmField;
+ }
+ /** @final @nodts */
+ m_testHasExplicitGetterSetterFuns__void() {
+  let x = HasFieldAndGetterSetterFuns.$create__();
+  x.m_setValue__java_lang_Object__void('a');
+  x.m_getValue__java_lang_Object();
+  let y = OtherHasFieldAndGetterSetterFuns.$create__();
+  y.m_setValue__java_lang_Object__void('a');
+  y.m_getValue__java_lang_Object();
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Bar = goog.module.get('jsproperties.Bar$impl');
+  ClassWithJvmField = goog.module.get('jsproperties.ClassWithJvmField$impl');
+  HasFieldAndGetterSetterFuns = goog.module.get('jsproperties.HasFieldAndGetterSetterFuns$impl');
+  JavaFoo = goog.module.get('jsproperties.JavaFoo$impl');
+  MainKt = goog.module.get('jsproperties.MainKt$impl');
+  NativeFoo = goog.module.get('jsproperties.NativeFoo$impl');
+  OtherHasFieldAndGetterSetterFuns = goog.module.get('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');
+ }
+}
+$Util.$setClassMetadata(Main, 'jsproperties.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

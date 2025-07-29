@@ -1,0 +1,36 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.IStringList$impl');
+
+const List = goog.require('multipleabstractparents.MultipleAbstractParents.List$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {List<?string>}
+ */
+class IStringList {
+ /** @abstract @nodts @return {?string} */
+ m_getFoo__java_lang_String__java_lang_String(/** ?string */ string_1) {}
+ /** @nodts */
+ static $clinit() {
+  IStringList.$clinit = () =>{};
+  IStringList.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  List.$markImplementor(ctor);
+  ctor.prototype.$implements__multipleabstractparents_MultipleAbstractParents_IStringList = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__multipleabstractparents_MultipleAbstractParents_IStringList;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IStringList.$markImplementor(/**@type {Function}*/ (IStringList));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (IStringList), 'multipleabstractparents.MultipleAbstractParents$IStringList');
+
+exports = IStringList;
+
+//# sourceMappingURL=MultipleAbstractParents$IStringList.js.map

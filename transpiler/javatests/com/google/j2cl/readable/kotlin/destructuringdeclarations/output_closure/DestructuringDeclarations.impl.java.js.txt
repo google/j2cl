@@ -1,0 +1,129 @@
+goog.module('destructuringdeclarations.DestructuringDeclarations$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CustomData = goog.forwardDeclare('destructuringdeclarations.CustomData$impl');
+let Data = goog.forwardDeclare('destructuringdeclarations.Data$impl');
+let DataToString = goog.forwardDeclare('destructuringdeclarations.DestructuringDeclarations.DataToString$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Map = goog.forwardDeclare('java.util.Map$impl');
+let Entry = goog.forwardDeclare('java.util.Map.Entry$impl');
+let TuplesKt = goog.forwardDeclare('kotlin.TuplesKt$impl');
+let MapsKt = goog.forwardDeclare('kotlin.collections.MapsKt$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class DestructuringDeclarations extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!DestructuringDeclarations} */
+ static $create__() {
+  DestructuringDeclarations.$clinit();
+  let $instance = new DestructuringDeclarations();
+  $instance.$ctor__destructuringdeclarations_DestructuringDeclarations__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__destructuringdeclarations_DestructuringDeclarations__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!Data} */
+ m_getPersonInfo__destructuringdeclarations_Data_$p_destructuringdeclarations_DestructuringDeclarations() {
+  return Data.$create__java_lang_String__int('Ma', 50);
+ }
+ /** @final @nodts */
+ m_testDestructuringDeclarationsInAssignment__arrayOf_java_lang_String__void_$p_destructuringdeclarations_DestructuringDeclarations(/** !Array<string> */ args) {
+  let person = Data.$create__java_lang_String__int('Jack', 30);
+  let destruct = person;
+  let name = destruct.m_component1__java_lang_String();
+  let age = destruct.m_component2__int();
+  let customPerson = CustomData.$create__java_lang_String__int('Ma', 50);
+  let destruct_1 = customPerson;
+  let name2 = destruct_1.m_component1__java_lang_String();
+  let age2 = destruct_1.m_component2__int();
+ }
+ /** @final @nodts */
+ m_testReturnValuesFromFunction__void_$p_destructuringdeclarations_DestructuringDeclarations() {
+  let destruct = this.m_getPersonInfo__destructuringdeclarations_Data_$p_destructuringdeclarations_DestructuringDeclarations();
+  let name = destruct.m_component1__java_lang_String();
+  let age = destruct.m_component2__int();
+ }
+ /** @final @nodts */
+ m_testDestructuringDeclarationsInForLoops__void_$p_destructuringdeclarations_DestructuringDeclarations() {
+  let persons = /**@type {!Array<!Data>}*/ ($Arrays.$stampType([Data.$create__java_lang_String__int('Jack', 30), Data.$create__java_lang_String__int('Ma', 50)], Data));
+  for (let indexedObject = persons, inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
+   let destruct = /**@type {!Data}*/ (indexedObject[inductionVariable]);
+   let name = destruct.m_component1__java_lang_String();
+   let age = destruct.m_component2__int();
+   let a = name;
+   let b = age;
+  }
+  for (let indexedObject_1 = persons, inductionVariable_1 = 0, last_1 = indexedObject_1.length; inductionVariable_1 < last_1; inductionVariable_1 = inductionVariable_1 + 1 | 0) {
+   let index = inductionVariable_1;
+   let value = /**@type {!Data}*/ (indexedObject_1[inductionVariable_1]);
+  }
+ }
+ /** @final @nodts */
+ m_testUnderscoreForUnusedVariable__void_$p_destructuringdeclarations_DestructuringDeclarations() {
+  let destruct = Data.$create__java_lang_String__int('Jane', 28);
+  let age = destruct.m_component2__int();
+ }
+ /** @final @nodts */
+ m_testDestructuringDeclarationsInMaps__void_$p_destructuringdeclarations_DestructuringDeclarations() {
+  let map = /**@type {!Map<!Integer, ?string>}*/ (MapsKt.m_mapOf__kotlin_Pair__java_util_Map(TuplesKt.m_to__java_lang_Object__java_lang_Object__kotlin_Pair(Integer.m_valueOf__int__java_lang_Integer(1), 'world')));
+  for (let $iterator = (/**@type {!Map<Integer, ?string>}*/ (map)).entrySet().m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+   let destruct = /**@type {!Entry<Integer, ?string>}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), /**@type {Function}*/ (Entry)));
+   {
+    let key = (/**@type {!Integer}*/ ($Casts.$to(destruct.getKey(), Integer))).m_intValue__int();
+    let value = /**@type {string}*/ ($Casts.$to(destruct.getValue(), j_l_String));
+    let a = key;
+    let b = value;
+   }
+  }
+ }
+ /** @final @nodts */
+ m_testDestructuringDeclarationsInLambdas__void_$p_destructuringdeclarations_DestructuringDeclarations() {
+  let createPerson = DataToString.$adapt(/**  @return {string}*/ ((/** !Data */ destruct) =>{
+   let name = destruct.m_component1__java_lang_String();
+   let age = destruct.m_component2__int();
+   return j_l_String.m_valueOf__java_lang_Object__java_lang_String(name) + ' is ' + age;
+  }));
+  let person = createPerson.m_apply__destructuringdeclarations_Data__java_lang_String(Data.$create__java_lang_String__int('Jack', 30));
+ }
+ /** @nodts */
+ static $clinit() {
+  DestructuringDeclarations.$clinit = () =>{};
+  DestructuringDeclarations.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DestructuringDeclarations;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  CustomData = goog.module.get('destructuringdeclarations.CustomData$impl');
+  Data = goog.module.get('destructuringdeclarations.Data$impl');
+  DataToString = goog.module.get('destructuringdeclarations.DestructuringDeclarations.DataToString$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Entry = goog.module.get('java.util.Map.Entry$impl');
+  TuplesKt = goog.module.get('kotlin.TuplesKt$impl');
+  MapsKt = goog.module.get('kotlin.collections.MapsKt$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(DestructuringDeclarations, 'destructuringdeclarations.DestructuringDeclarations');
+
+exports = DestructuringDeclarations;
+
+//# sourceMappingURL=DestructuringDeclarations.js.map

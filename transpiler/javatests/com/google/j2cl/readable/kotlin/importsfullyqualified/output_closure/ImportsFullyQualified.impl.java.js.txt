@@ -1,0 +1,46 @@
+goog.module('importsfullyqualified.ImportsFullyQualified$impl');
+
+const Serializable = goog.require('java.io.Serializable$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {Serializable}
+ */
+class ImportsFullyQualified extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ImportsFullyQualified} */
+ static $create__() {
+  ImportsFullyQualified.$clinit();
+  let $instance = new ImportsFullyQualified();
+  $instance.$ctor__importsfullyqualified_ImportsFullyQualified__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__importsfullyqualified_ImportsFullyQualified__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ImportsFullyQualified.$clinit = () =>{};
+  ImportsFullyQualified.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ImportsFullyQualified;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Serializable.$markImplementor(ImportsFullyQualified);
+$Util.$setClassMetadata(ImportsFullyQualified, 'importsfullyqualified.ImportsFullyQualified');
+
+exports = ImportsFullyQualified;
+
+//# sourceMappingURL=ImportsFullyQualified.js.map

@@ -1,0 +1,75 @@
+goog.module('stringtemplate.SomeValueType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class SomeValueType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_i__stringtemplate_SomeValueType_ = 0;
+ }
+ /** @nodts @return {!SomeValueType} */
+ static $create__int(/** number */ i) {
+  SomeValueType.$clinit();
+  let $instance = new SomeValueType();
+  $instance.$ctor__stringtemplate_SomeValueType__int__void(i);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__stringtemplate_SomeValueType__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+  this.f_i__stringtemplate_SomeValueType_ = i;
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'SomeValueType(' + 'i=' + this.f_i__stringtemplate_SomeValueType_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Objects.m_hashCode__java_lang_Object__int(Integer.m_valueOf__int__java_lang_Integer(this.f_i__stringtemplate_SomeValueType_));
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if (!SomeValueType.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!SomeValueType}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), SomeValueType));
+  if (this.f_i__stringtemplate_SomeValueType_ != tmp0_other_with_cast.f_i__stringtemplate_SomeValueType_) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeValueType.$clinit = () =>{};
+  SomeValueType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeValueType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(SomeValueType, 'stringtemplate.SomeValueType');
+
+exports = SomeValueType;
+
+//# sourceMappingURL=SomeValueType.js.map

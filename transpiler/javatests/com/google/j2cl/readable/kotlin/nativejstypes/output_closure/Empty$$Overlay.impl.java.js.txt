@@ -1,0 +1,25 @@
+goog.module('nativejstypes.Empty.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Empty = goog.require('nativejstypes.MyEmpty');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Empty;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'nativejstypes.MyEmpty');
+
+exports = $Overlay;
+
+//# sourceMappingURL=Empty$$Overlay.js.map

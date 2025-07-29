@@ -1,0 +1,77 @@
+goog.module('devirtualizedcalls.ObjectCalls$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class ObjectCalls extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ObjectCalls} */
+ static $create__() {
+  ObjectCalls.$clinit();
+  let $instance = new ObjectCalls();
+  $instance.$ctor__devirtualizedcalls_ObjectCalls__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__devirtualizedcalls_ObjectCalls__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_main__void() {
+  let o = j_l_Object.$create__();
+  $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(o, o);
+  $Objects.m_hashCode__java_lang_Object__int(o);
+  $Objects.m_toString__java_lang_Object__java_lang_String(o);
+  $Objects.m_getClass__java_lang_Object__java_lang_Class(o);
+  let objectCalls = /**@type {!Array<ObjectCalls>}*/ ($Arrays.$create([1], ObjectCalls));
+  $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(objectCalls, objectCalls);
+  $Objects.m_hashCode__java_lang_Object__int(objectCalls);
+  $Objects.m_toString__java_lang_Object__java_lang_String(objectCalls);
+  $Objects.m_getClass__java_lang_Object__java_lang_Class(objectCalls);
+ }
+ /** @final @nodts */
+ m_test__void() {
+  this.equals(j_l_Object.$create__());
+  this.hashCode();
+  this.toString();
+  this.m_getClass__java_lang_Class();
+  this.equals(j_l_Object.$create__());
+  this.hashCode();
+  this.toString();
+  this.m_getClass__java_lang_Class();
+ }
+ /** @final @nodts @return {boolean} */
+ m_testNotEquals__boolean() {
+  return !this.equals(j_l_Object.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  ObjectCalls.$clinit = () =>{};
+  ObjectCalls.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ObjectCalls;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(ObjectCalls, 'devirtualizedcalls.ObjectCalls');
+
+exports = ObjectCalls;
+
+//# sourceMappingURL=ObjectCalls.js.map

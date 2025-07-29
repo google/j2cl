@@ -1,0 +1,81 @@
+goog.module('inlineclass.FooReferenceNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class FooReferenceNullable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?string} @nodts*/
+  this.f_s__inlineclass_FooReferenceNullable_;
+ }
+ /** @nodts @return {!FooReferenceNullable} */
+ static $create__java_lang_String(/** ?string */ s) {
+  FooReferenceNullable.$clinit();
+  let $instance = new FooReferenceNullable();
+  $instance.$ctor__inlineclass_FooReferenceNullable__java_lang_String__void(s);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlineclass_FooReferenceNullable__java_lang_String__void(/** ?string */ s) {
+  this.$ctor__java_lang_Object__void();
+  this.f_s__inlineclass_FooReferenceNullable_ = s;
+ }
+ /** @final @nodts @return {?string} */
+ m_getS__java_lang_String() {
+  return this.f_s__inlineclass_FooReferenceNullable_;
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'FooReferenceNullable(' + 's=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_s__inlineclass_FooReferenceNullable_) + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Equality.$same(this.f_s__inlineclass_FooReferenceNullable_, null) ? 0 : $Objects.m_hashCode__java_lang_Object__int(this.f_s__inlineclass_FooReferenceNullable_);
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if (!FooReferenceNullable.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!FooReferenceNullable}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), FooReferenceNullable));
+  if (!$Equality.$same(this.f_s__inlineclass_FooReferenceNullable_, tmp0_other_with_cast.f_s__inlineclass_FooReferenceNullable_)) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  FooReferenceNullable.$clinit = () =>{};
+  FooReferenceNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FooReferenceNullable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(FooReferenceNullable, 'inlineclass.FooReferenceNullable');
+
+exports = FooReferenceNullable;
+
+//# sourceMappingURL=FooReferenceNullable.js.map

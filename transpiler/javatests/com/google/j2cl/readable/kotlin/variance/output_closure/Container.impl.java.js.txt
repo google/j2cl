@@ -1,0 +1,55 @@
+goog.module('variance.Container$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Container extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_t__variance_Container_;
+ }
+ /** @nodts @template T @return {!Container<T>} */
+ static $create__java_lang_Object(/** T */ t) {
+  Container.$clinit();
+  let $instance = new Container();
+  $instance.$ctor__variance_Container__java_lang_Object__void(t);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__variance_Container__java_lang_Object__void(/** T */ t) {
+  this.$ctor__java_lang_Object__void();
+  this.f_t__variance_Container_ = t;
+ }
+ /** @final @nodts @return {T} */
+ m_getT__java_lang_Object() {
+  return this.f_t__variance_Container_;
+ }
+ /** @final @nodts */
+ m_setT__java_lang_Object__void(/** T */ set__) {
+  this.f_t__variance_Container_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  Container.$clinit = () =>{};
+  Container.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Container;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Container, 'variance.Container');
+
+exports = Container;
+
+//# sourceMappingURL=Container.js.map

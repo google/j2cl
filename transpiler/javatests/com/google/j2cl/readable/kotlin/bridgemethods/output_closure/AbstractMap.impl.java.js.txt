@@ -1,0 +1,50 @@
+goog.module('bridgemethods.AbstractMap$impl');
+
+const Map = goog.require('bridgemethods.Map$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template K, V
+ * @implements {Map<K, V>}
+ */
+class AbstractMap extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template K, V @return {!AbstractMap<K, V>} */
+ static $create__() {
+  AbstractMap.$clinit();
+  let $instance = new AbstractMap();
+  $instance.$ctor__bridgemethods_AbstractMap__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_AbstractMap__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {V} */
+ m_put__java_lang_Object__java_lang_Object__java_lang_Object(/** K */ key, /** V */ value) {
+  return value;
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractMap.$clinit = () =>{};
+  AbstractMap.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractMap;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Map.$markImplementor(AbstractMap);
+$Util.$setClassMetadata(AbstractMap, 'bridgemethods.AbstractMap');
+
+exports = AbstractMap;
+
+//# sourceMappingURL=AbstractMap.js.map

@@ -1,0 +1,40 @@
+goog.module('variance.Constrained$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let Container = goog.forwardDeclare('variance.Container$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Constrained {
+ /** @abstract @nodts @return {T} */
+ m_m__java_lang_Comparable__java_lang_Comparable(/** T */ t) {}
+ /** @abstract @nodts @return {!Container<T>} */
+ m_mList__variance_Container__variance_Container(/** !Container<T> */ c) {}
+ /** @nodts */
+ static $clinit() {
+  Constrained.$clinit = () =>{};
+  Constrained.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__variance_Constrained = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__variance_Constrained;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Constrained.$markImplementor(/**@type {Function}*/ (Constrained));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Constrained), 'variance.Constrained');
+
+exports = Constrained;
+
+//# sourceMappingURL=Constrained.js.map

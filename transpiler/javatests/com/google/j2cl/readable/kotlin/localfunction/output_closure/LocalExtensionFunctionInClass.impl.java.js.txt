@@ -1,0 +1,54 @@
+goog.module('localfunction.LocalExtensionFunctionInClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+/**
+ * @final
+ */
+class LocalExtensionFunctionInClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LocalExtensionFunctionInClass} */
+ static $create__() {
+  LocalExtensionFunctionInClass.$clinit();
+  let $instance = new LocalExtensionFunctionInClass();
+  $instance.$ctor__localfunction_LocalExtensionFunctionInClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localfunction_LocalExtensionFunctionInClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {string} */
+ m_m__java_lang_String() {
+  let localFunctionWithImplicitQualifier = /**  @return {string}*/ ((/** !LocalExtensionFunctionInClass */ this_1) =>{
+   return 'LocalExtensionFunctionInClass' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this_1);
+  });
+  return localFunctionWithImplicitQualifier(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalExtensionFunctionInClass.$clinit = () =>{};
+  LocalExtensionFunctionInClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalExtensionFunctionInClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(LocalExtensionFunctionInClass, 'localfunction.LocalExtensionFunctionInClass');
+
+exports = LocalExtensionFunctionInClass;
+
+//# sourceMappingURL=LocalExtensionFunctionInClass.js.map

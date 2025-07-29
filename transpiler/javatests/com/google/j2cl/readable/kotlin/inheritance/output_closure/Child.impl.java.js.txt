@@ -1,0 +1,49 @@
+goog.module('inheritance.Child$impl');
+
+const Parent = goog.require('inheritance.Parent$impl');
+const ParentInterface1 = goog.require('inheritance.ParentInterface1$impl');
+const ParentInterface2 = goog.require('inheritance.ParentInterface2$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {ParentInterface1}
+ * @implements {ParentInterface2}
+ */
+class Child extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Child} */
+ static $create__() {
+  Child.$clinit();
+  let $instance = new Child();
+  $instance.$ctor__inheritance_Child__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inheritance_Child__void() {
+  this.$ctor__inheritance_Parent__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Child.$clinit = () =>{};
+  Child.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Child;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ParentInterface1.$markImplementor(Child);
+ParentInterface2.$markImplementor(Child);
+$Util.$setClassMetadata(Child, 'inheritance.Child');
+
+exports = Child;
+
+//# sourceMappingURL=Child.js.map

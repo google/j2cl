@@ -1,0 +1,57 @@
+goog.module('jsconstructor.ElvisOperatorInSuperCall$impl');
+
+const BaseJsConstructorType = goog.require('jsconstructor.BaseJsConstructorType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class ElvisOperatorInSuperCall extends BaseJsConstructorType {
+ //JsConstructor 'ElvisOperatorInSuperCall(Object)'.
+ 
+ constructor(/** * */ obj) {
+  ElvisOperatorInSuperCall.$clinit();
+  let tmp0_elvis_lhs = obj;
+  super($Equality.$same(tmp0_elvis_lhs, null) ? j_l_Object.$create__() : tmp0_elvis_lhs);
+  this.$ctor__jsconstructor_ElvisOperatorInSuperCall__java_lang_Object__void(obj);
+ }
+ //Initialization from constructor 'ElvisOperatorInSuperCall(Object)'.
+ /** @nodts */
+ $ctor__jsconstructor_ElvisOperatorInSuperCall__java_lang_Object__void(/** * */ obj) {}
+ //Factory method corresponding to constructor 'ElvisOperatorInSuperCall(Object, Object)'.
+ /** @nodts @return {!ElvisOperatorInSuperCall} */
+ static $create__java_lang_Object__java_lang_Object(/** * */ a, /** !* */ b) {
+  ElvisOperatorInSuperCall.$clinit();
+  let tmp0_elvis_lhs = a;
+  let $instance = new ElvisOperatorInSuperCall($Equality.$same(tmp0_elvis_lhs, null) ? b : tmp0_elvis_lhs);
+  $instance.$ctor__jsconstructor_ElvisOperatorInSuperCall__java_lang_Object__java_lang_Object__void(a, b);
+  return $instance;
+ }
+ //Initialization from constructor 'ElvisOperatorInSuperCall(Object, Object)'.
+ /** @nodts */
+ $ctor__jsconstructor_ElvisOperatorInSuperCall__java_lang_Object__java_lang_Object__void(/** * */ a, /** !* */ b) {}
+ /** @nodts */
+ static $clinit() {
+  ElvisOperatorInSuperCall.$clinit = () =>{};
+  ElvisOperatorInSuperCall.$loadModules();
+  BaseJsConstructorType.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ElvisOperatorInSuperCall;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(ElvisOperatorInSuperCall, 'jsconstructor.ElvisOperatorInSuperCall');
+
+exports = ElvisOperatorInSuperCall;
+
+//# sourceMappingURL=ElvisOperatorInSuperCall.js.map

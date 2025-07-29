@@ -1,0 +1,55 @@
+goog.module('interfacejsbridge.InterfaceImpl$impl');
+
+const SubInterface = goog.require('interfacejsbridge.SubInterface$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {SubInterface}
+ */
+class InterfaceImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InterfaceImpl} */
+ static $create__() {
+  InterfaceImpl.$clinit();
+  let $instance = new InterfaceImpl();
+  $instance.$ctor__interfacejsbridge_InterfaceImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfacejsbridge_InterfaceImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {number} */
+ foo(/** number */ a) {
+  return 0;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {number} */
+ m_foo__int__int(/** number */ arg0) {
+  return this.foo(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceImpl.$clinit = () =>{};
+  InterfaceImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InterfaceImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+SubInterface.$markImplementor(InterfaceImpl);
+$Util.$setClassMetadata(InterfaceImpl, 'interfacejsbridge.InterfaceImpl');
+
+exports = InterfaceImpl;
+
+//# sourceMappingURL=InterfaceImpl.js.map

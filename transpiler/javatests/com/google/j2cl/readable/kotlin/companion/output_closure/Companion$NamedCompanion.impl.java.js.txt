@@ -1,0 +1,65 @@
+goog.module('companion.Companion.NamedCompanion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Companion = goog.forwardDeclare('companion.Companion$impl');
+
+/**
+ * @final
+ */
+class NamedCompanion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NamedCompanion} */
+ static $create__() {
+  NamedCompanion.$clinit();
+  let $instance = new NamedCompanion();
+  $instance.$ctor__companion_Companion_NamedCompanion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_Companion_NamedCompanion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!*} */
+ m_getBar__java_lang_Object() {
+  return Companion.f_bar__companion_Companion_;
+ }
+ /** @final @nodts @return {number} */
+ m_getPropertyinitializedFromInitializerBlock__int() {
+  return Companion.f_propertyinitializedFromInitializerBlock__companion_Companion_;
+ }
+ /** @final @nodts */
+ m_setPropertyinitializedFromInitializerBlock__int__void(/** number */ set__) {
+  Companion.f_propertyinitializedFromInitializerBlock__companion_Companion_ = set__;
+ }
+ /** @final @nodts @return {string} */
+ m_getPropertyWithInitializer__java_lang_String() {
+  return Companion.f_propertyWithInitializer__companion_Companion_;
+ }
+ /** @final @nodts */
+ m_companionFunction__java_lang_String__int__void(/** string */ p1, /** number */ p2) {}
+ /** @nodts */
+ static $clinit() {
+  NamedCompanion.$clinit = () =>{};
+  NamedCompanion.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NamedCompanion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Companion = goog.module.get('companion.Companion$impl');
+ }
+}
+$Util.$setClassMetadata(NamedCompanion, 'companion.Companion$NamedCompanion');
+
+exports = NamedCompanion;
+
+//# sourceMappingURL=Companion$NamedCompanion.js.map

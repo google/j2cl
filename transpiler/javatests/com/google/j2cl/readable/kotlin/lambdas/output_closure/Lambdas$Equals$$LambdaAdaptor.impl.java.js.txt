@@ -1,0 +1,55 @@
+goog.module('lambdas.Lambdas.Equals.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Equals = goog.require('lambdas.Lambdas.Equals$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {Equals<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(*):boolean */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(*):boolean} @nodts*/
+  this.f_fn__lambdas_Lambdas_Equals_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_Equals_$LambdaAdaptor__lambdas_Lambdas_Equals_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_Equals_$LambdaAdaptor__lambdas_Lambdas_Equals_$JsFunction__void(/** ?function(*):boolean */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_Equals_$LambdaAdaptor = fn;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ arg0) {
+  let /** ?function(*):boolean */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_Equals_$LambdaAdaptor, $function(arg0));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {?T} */
+ m_get__java_lang_Object() {
+  return Equals.m_get__$default__lambdas_Lambdas_Equals__java_lang_Object(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+  Equals.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Equals.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'lambdas.Lambdas$Equals$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Lambdas$Equals$$LambdaAdaptor.js.map

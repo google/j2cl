@@ -1,0 +1,146 @@
+goog.module('varargs.Varargs$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
+let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let CollectionsKt = goog.forwardDeclare('kotlin.collections.CollectionsKt$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let FunctionalInterface = goog.forwardDeclare('varargs.Varargs.FunctionalInterface$impl');
+let VarargsKt = goog.forwardDeclare('varargs.VarargsKt$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+
+class Varargs extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Array<*>} @nodts*/
+  this.f_args__varargs_Varargs_;
+ }
+ //Factory method corresponding to constructor 'Varargs(int...)'.
+ /** @nodts @return {!Varargs} */
+ static $create__arrayOf_int(/** !Array<number> */ args) {
+  Varargs.$clinit();
+  let $instance = new Varargs();
+  $instance.$ctor__varargs_Varargs__arrayOf_int__void(args);
+  return $instance;
+ }
+ //Initialization from constructor 'Varargs(int...)'.
+ /** @nodts */
+ $ctor__varargs_Varargs__arrayOf_int__void(/** !Array<number> */ args) {
+  this.$ctor__java_lang_Object__void();
+  this.f_args__varargs_Varargs_ = new Array(0);
+ }
+ //Factory method corresponding to constructor 'Varargs()'.
+ /** @nodts @return {!Varargs} */
+ static $create__() {
+  Varargs.$clinit();
+  let $instance = new Varargs();
+  $instance.$ctor__varargs_Varargs__void();
+  return $instance;
+ }
+ //Initialization from constructor 'Varargs()'.
+ /** @nodts */
+ $ctor__varargs_Varargs__void() {
+  this.$ctor__varargs_Varargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([1], $$int)));
+ }
+ /** @final @nodts */
+ m_test__int__arrayOf_java_lang_Object__void(/** number */ a, /** !Array<*> */ args) {}
+ /** @final @nodts */
+ m_testCloneable__arrayOf_java_lang_Cloneable__void(/** !Array<(Cloneable|Array)> */ args) {}
+ /** @final @nodts */
+ m_testSerializable__arrayOf_java_io_Serializable__void(/** !Array<(Serializable|Array)> */ args) {}
+ /** @final @nodts */
+ m_testAssignment__arrayOf_java_lang_Object__void(/** !Array<!*> */ args) {
+  this.f_args__varargs_Varargs_ = args;
+ }
+ /** @final @nodts */
+ m_testLambda__varargs_Varargs_FunctionalInterface__void(/** !FunctionalInterface */ functionalInterface) {}
+ /** @final @nodts */
+ m_testNonTrailingVararg__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number */ b) {}
+ /** @final @nodts */
+ m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number */ b) {}
+ /** @final @nodts */
+ m_testNonTrailingVarargWithDefault$default__int__arrayOf_int__int__int__java_lang_Object__void(/** number */ a, /** !Array<number> */ args, /** number */ b, /** number */ _mask0, /** * */ _handler) {
+  if ((_mask0 & 4) != 0) {
+   b = 0;
+  }
+  this.m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(a, args, b);
+  return;
+ }
+ /** @final @nodts */
+ m_testOverloaded__java_lang_Object__void(/** * */ o) {}
+ /** @final @nodts */
+ m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void(/** ?string */ o, /** !Array<*> */ rest) {}
+ /** @final @nodts */
+ m_testOverloaded__long__void(/** !$Long */ o) {}
+ /** @final @nodts */
+ m_testOverloaded__long__arrayOf_long__void(/** !$Long */ o, /** !Array<!$Long> */ test) {}
+ /** @final @nodts */
+ m_main__void() {
+  let v = Varargs.$create__();
+  v.m_test__int__arrayOf_java_lang_Object__void(1, new Array(0));
+  v.m_test__int__arrayOf_java_lang_Object__void(1, [j_l_Object.$create__()]);
+  v.m_test__int__arrayOf_java_lang_Object__void(1, [j_l_Object.$create__()]);
+  v.m_test__int__arrayOf_java_lang_Object__void(1, [j_l_Object.$create__(), ...[j_l_Object.$create__()], j_l_Object.$create__()]);
+  v.m_test__int__arrayOf_java_lang_Object__void(1, new Array(0));
+  v.m_test__int__arrayOf_java_lang_Object__void(1, /**@type {!Array<!Array<!*>>}*/ ($Arrays.$create([0, null], j_l_Object)));
+  let tmp0_list = CollectionsKt.m_listOf__java_lang_Object__java_util_List(j_l_Object.$create__());
+  let list = tmp0_list;
+  v.m_test__int__arrayOf_java_lang_Object__void(1, [...(/**@type {!Array<!*>}*/ ($Arrays.$createNativeWithInitializer(list.size(), /**  @return {!*}*/ ((/** number */ it) =>{
+   return list.getAtIndex(it);
+  }))))]);
+  v.m_test__int__arrayOf_java_lang_Object__void(1, [...VarargsKt.m_passthrough__java_lang_Object__java_lang_Object(/**@type {!Array<string>}*/ ($Arrays.$stampType(['a'], j_l_String)))]);
+  v.m_testCloneable__arrayOf_java_lang_Cloneable__void(/**@type {!Array<!Array<!*>>}*/ ($Arrays.$create([0, null], j_l_Object)));
+  v.m_testSerializable__arrayOf_java_io_Serializable__void(/**@type {!Array<!Array<!*>>}*/ ($Arrays.$create([0, null], j_l_Object)));
+  v.m_testLambda__varargs_Varargs_FunctionalInterface__void(FunctionalInterface.$adapt((/** !Array<string> */ strings) =>{
+   this.f_args__varargs_Varargs_ = strings;
+  }));
+  v.m_testNonTrailingVararg__int__arrayOf_int__int__void(1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), 4);
+  v.m_testNonTrailingVararg__int__arrayOf_int__int__void(1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), 4);
+  v.m_testNonTrailingVarargWithDefault$default__int__arrayOf_int__int__int__java_lang_Object__void(1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), 0, 4, null);
+  let tmp = /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int));
+  v.m_testNonTrailingVarargWithDefault$default__int__arrayOf_int__int__int__java_lang_Object__void(1, tmp, 0, 4, null);
+  v.m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void('foo', new Array(0));
+  v.m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void('foo', ['bar']);
+  v.m_testOverloaded__java_lang_Object__void('');
+  v.m_testOverloaded__long__void($Long.fromInt(1));
+  v.m_testOverloaded__java_lang_Object__void(Long.m_valueOf__long__java_lang_Long($Long.fromInt(1)));
+  v.m_testOverloaded__long__void($Long.fromInt(1));
+  v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $$long)));
+  v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $$long)));
+ }
+ /** @nodts */
+ static $clinit() {
+  Varargs.$clinit = () =>{};
+  Varargs.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Varargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Long = goog.module.get('java.lang.Long$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  CollectionsKt = goog.module.get('kotlin.collections.CollectionsKt$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  FunctionalInterface = goog.module.get('varargs.Varargs.FunctionalInterface$impl');
+  VarargsKt = goog.module.get('varargs.VarargsKt$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
+ }
+}
+$Util.$setClassMetadata(Varargs, 'varargs.Varargs');
+
+exports = Varargs;
+
+//# sourceMappingURL=Varargs.js.map

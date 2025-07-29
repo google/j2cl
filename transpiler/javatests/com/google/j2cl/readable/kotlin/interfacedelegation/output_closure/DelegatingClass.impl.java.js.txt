@@ -1,0 +1,85 @@
+goog.module('interfacedelegation.DelegatingClass$impl');
+
+const I = goog.require('interfacedelegation.I$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Implementor = goog.forwardDeclare('interfacedelegation.Implementor$impl');
+
+/**
+ * @final
+ * @implements {I}
+ */
+class DelegatingClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Implementor} @nodts*/
+  this.f_$$delegate_0__interfacedelegation_DelegatingClass_;
+  /**@type {string} @nodts*/
+  this.f_propertyOverridenInDelegatingClass__interfacedelegation_DelegatingClass_;
+ }
+ /** @nodts @return {!DelegatingClass} */
+ static $create__() {
+  DelegatingClass.$clinit();
+  let $instance = new DelegatingClass();
+  $instance.$ctor__interfacedelegation_DelegatingClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfacedelegation_DelegatingClass__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_$$delegate_0__interfacedelegation_DelegatingClass_ = Implementor.$create__();
+  this.f_propertyOverridenInDelegatingClass__interfacedelegation_DelegatingClass_ = 'DelegatingClass';
+ }
+ /** @override @nodts @return {string} */
+ m_getPropertyOverridenInDelegatingClass__java_lang_String() {
+  return this.f_propertyOverridenInDelegatingClass__interfacedelegation_DelegatingClass_;
+ }
+ /** @override @nodts @return {string} */
+ m_methodOverridenInDelegatingClass__java_lang_String() {
+  return 'Overriden in DelegatingClass';
+ }
+ /** @override @nodts @return {string} */
+ m_defaultMethodOverridenInD__java_lang_String() {
+  return 'DefaultMethod overriden in DelegatingClass';
+ }
+ /** @override @nodts @return {string} */
+ m_getMessage__java_lang_String() {
+  return this.f_$$delegate_0__interfacedelegation_DelegatingClass_.m_getMessage__java_lang_String();
+ }
+ /** @override @nodts @return {string} */
+ m_retrieveString__java_lang_String() {
+  return this.f_$$delegate_0__interfacedelegation_DelegatingClass_.m_retrieveString__java_lang_String();
+ }
+ /** @override @nodts @return {string} */
+ m_nonOveriddenfunctionUsingOverridenProperty__java_lang_String() {
+  return this.f_$$delegate_0__interfacedelegation_DelegatingClass_.m_nonOveriddenfunctionUsingOverridenProperty__java_lang_String();
+ }
+ /** @override @nodts @return {string} */
+ m_defaultMethod__java_lang_String() {
+  return this.f_$$delegate_0__interfacedelegation_DelegatingClass_.m_defaultMethod__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  DelegatingClass.$clinit = () =>{};
+  DelegatingClass.$loadModules();
+  j_l_Object.$clinit();
+  I.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DelegatingClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Implementor = goog.module.get('interfacedelegation.Implementor$impl');
+ }
+}
+I.$markImplementor(DelegatingClass);
+$Util.$setClassMetadata(DelegatingClass, 'interfacedelegation.DelegatingClass');
+
+exports = DelegatingClass;
+
+//# sourceMappingURL=DelegatingClass.js.map

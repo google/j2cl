@@ -1,0 +1,42 @@
+goog.module('jsconstructor.Outer.I$impl');
+
+const G = goog.require('jsconstructor.G$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Outer = goog.forwardDeclare('jsconstructor.Outer$impl');
+
+/**
+ * @final
+ */
+class I extends G {
+ 
+ constructor(/** !Outer */ $outer_this) {
+  I.$clinit();
+  super();
+  /**@type {!Outer} @nodts*/
+  this.$outer_this__jsconstructor_Outer_I;
+  this.$ctor__jsconstructor_Outer_I__jsconstructor_Outer__void($outer_this);
+ }
+ /** @nodts */
+ $ctor__jsconstructor_Outer_I__jsconstructor_Outer__void(/** !Outer */ $outer_this) {
+  this.$outer_this__jsconstructor_Outer_I = $outer_this;
+ }
+ /** @nodts */
+ static $clinit() {
+  I.$clinit = () =>{};
+  I.$loadModules();
+  G.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof I;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(I, 'jsconstructor.Outer$I');
+
+exports = I;
+
+//# sourceMappingURL=Outer$I.js.map

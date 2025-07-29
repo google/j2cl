@@ -1,0 +1,68 @@
+goog.module('multipleconstructors.ParentWithoutPrimary$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ParentWithoutPrimary extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'ParentWithoutPrimary(int)'.
+ /** @nodts @return {!ParentWithoutPrimary} */
+ static $create__int(/** number */ id) {
+  ParentWithoutPrimary.$clinit();
+  let $instance = new ParentWithoutPrimary();
+  $instance.$ctor__multipleconstructors_ParentWithoutPrimary__int__void(id);
+  return $instance;
+ }
+ //Initialization from constructor 'ParentWithoutPrimary(int)'.
+ /** @nodts */
+ $ctor__multipleconstructors_ParentWithoutPrimary__int__void(/** number */ id) {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Factory method corresponding to constructor 'ParentWithoutPrimary(boolean)'.
+ /** @nodts @return {!ParentWithoutPrimary} */
+ static $create__boolean(/** boolean */ flag) {
+  ParentWithoutPrimary.$clinit();
+  let $instance = new ParentWithoutPrimary();
+  $instance.$ctor__multipleconstructors_ParentWithoutPrimary__boolean__void(flag);
+  return $instance;
+ }
+ //Initialization from constructor 'ParentWithoutPrimary(boolean)'.
+ /** @nodts */
+ $ctor__multipleconstructors_ParentWithoutPrimary__boolean__void(/** boolean */ flag) {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Factory method corresponding to constructor 'ParentWithoutPrimary(int, boolean)'.
+ /** @nodts @return {!ParentWithoutPrimary} */
+ static $create__int__boolean(/** number */ id, /** boolean */ flag) {
+  ParentWithoutPrimary.$clinit();
+  let $instance = new ParentWithoutPrimary();
+  $instance.$ctor__multipleconstructors_ParentWithoutPrimary__int__boolean__void(id, flag);
+  return $instance;
+ }
+ //Initialization from constructor 'ParentWithoutPrimary(int, boolean)'.
+ /** @nodts */
+ $ctor__multipleconstructors_ParentWithoutPrimary__int__boolean__void(/** number */ id, /** boolean */ flag) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ParentWithoutPrimary.$clinit = () =>{};
+  ParentWithoutPrimary.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParentWithoutPrimary;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ParentWithoutPrimary, 'multipleconstructors.ParentWithoutPrimary');
+
+exports = ParentWithoutPrimary;
+
+//# sourceMappingURL=ParentWithoutPrimary.js.map

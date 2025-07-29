@@ -1,0 +1,61 @@
+goog.module('inlinefunction.InlineFunctionKt.$3$impl');
+
+const NonFun = goog.require('inlinefunction.NonFun$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Container = goog.forwardDeclare('inlinefunction.Container$impl');
+let MyClass = goog.forwardDeclare('inlinefunction.MyClass$impl');
+let OfObject = goog.forwardDeclare('javaemul.internal.Ref.OfObject$impl');
+
+/**
+ * @final
+ * @implements {NonFun<!MyClass>}
+ */
+class $3 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {OfObject<string>} @nodts*/
+  this.$captured_capturedValue__inlinefunction_InlineFunctionKt_3;
+ }
+ /** @nodts @return {!$3} */
+ static $create__javaemul_internal_Ref_OfObject(/** OfObject<string> */ $captured_capturedValue) {
+  $3.$clinit();
+  let $instance = new $3();
+  $instance.$ctor__inlinefunction_InlineFunctionKt_3__javaemul_internal_Ref_OfObject__void($captured_capturedValue);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionKt_3__javaemul_internal_Ref_OfObject__void(/** OfObject<string> */ $captured_capturedValue) {
+  this.$captured_capturedValue__inlinefunction_InlineFunctionKt_3 = $captured_capturedValue;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {!Container<!MyClass>} */
+ m_container__inlinefunction_Container() {
+  this.$captured_capturedValue__inlinefunction_InlineFunctionKt_3.f_element__javaemul_internal_Ref_OfObject = 'Modified by lambda in NonFun';
+  return /**@type {!Container<!MyClass>}*/ (Container.$create__java_lang_Object(MyClass.$create__int(12)));
+ }
+ /** @nodts */
+ static $clinit() {
+  $3.$clinit = () =>{};
+  $3.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $3;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Container = goog.module.get('inlinefunction.Container$impl');
+  MyClass = goog.module.get('inlinefunction.MyClass$impl');
+ }
+}
+NonFun.$markImplementor($3);
+$Util.$setClassMetadata($3, 'inlinefunction.InlineFunctionKt$3');
+
+exports = $3;
+
+//# sourceMappingURL=InlineFunctionKt$3.js.map

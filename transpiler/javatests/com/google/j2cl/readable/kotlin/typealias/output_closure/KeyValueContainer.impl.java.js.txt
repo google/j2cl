@@ -1,0 +1,99 @@
+goog.module('typealias.KeyValueContainer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template K, V
+ */
+class KeyValueContainer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?K} @nodts*/
+  this.f_k__typealias_KeyValueContainer_;
+  /**@type {?V} @nodts*/
+  this.f_v__typealias_KeyValueContainer_;
+ }
+ /** @nodts @template K, V @return {!KeyValueContainer<K, V>} */
+ static $create__() {
+  KeyValueContainer.$clinit();
+  let $instance = new KeyValueContainer();
+  $instance.$ctor__typealias_KeyValueContainer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typealias_KeyValueContainer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?K} */
+ m_getK__java_lang_Object() {
+  return this.f_k__typealias_KeyValueContainer_;
+ }
+ /** @final @nodts */
+ m_setK__java_lang_Object__void(/** ?K */ set__) {
+  this.f_k__typealias_KeyValueContainer_ = set__;
+ }
+ /** @final @nodts @return {?V} */
+ m_getV__java_lang_Object() {
+  return this.f_v__typealias_KeyValueContainer_;
+ }
+ /** @final @nodts */
+ m_setV__java_lang_Object__void(/** ?V */ set__) {
+  this.f_v__typealias_KeyValueContainer_ = set__;
+ }
+ /** @final @nodts */
+ m_set__java_lang_Object__java_lang_Object__void(/** K */ k, /** V */ v) {
+  this.m_setK__java_lang_Object__void(k);
+  this.m_setV__java_lang_Object__void(v);
+ }
+ /** @final @nodts @return {K} */
+ m_getKey__java_lang_Object() {
+  let tmp0_elvis_lhs = this.m_getK__java_lang_Object();
+  let /** K */ tmp;
+  if ($Equality.$same(tmp0_elvis_lhs, null)) {
+   throw $Exceptions.toJs(IllegalStateException.$create__());
+  } else {
+   tmp = tmp0_elvis_lhs;
+  }
+  return tmp;
+ }
+ /** @final @nodts @return {V} */
+ m_getValue__java_lang_Object() {
+  let tmp0_elvis_lhs = this.m_getV__java_lang_Object();
+  let /** V */ tmp;
+  if ($Equality.$same(tmp0_elvis_lhs, null)) {
+   throw $Exceptions.toJs(IllegalStateException.$create__());
+  } else {
+   tmp = tmp0_elvis_lhs;
+  }
+  return tmp;
+ }
+ /** @nodts */
+ static $clinit() {
+  KeyValueContainer.$clinit = () =>{};
+  KeyValueContainer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KeyValueContainer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(KeyValueContainer, 'typealias.KeyValueContainer');
+
+exports = KeyValueContainer;
+
+//# sourceMappingURL=KeyValueContainer.js.map

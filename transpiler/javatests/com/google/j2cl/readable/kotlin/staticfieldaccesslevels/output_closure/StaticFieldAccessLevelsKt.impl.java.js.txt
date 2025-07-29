@@ -1,0 +1,74 @@
+goog.module('staticfieldaccesslevels.StaticFieldAccessLevelsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class StaticFieldAccessLevelsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StaticFieldAccessLevelsKt} */
+ static $create__() {
+  StaticFieldAccessLevelsKt.$clinit();
+  let $instance = new StaticFieldAccessLevelsKt();
+  $instance.$ctor__staticfieldaccesslevels_StaticFieldAccessLevelsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticfieldaccesslevels_StaticFieldAccessLevelsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getA__int() {
+  StaticFieldAccessLevelsKt.$clinit();
+  return StaticFieldAccessLevelsKt.f_a__staticfieldaccesslevels_StaticFieldAccessLevelsKt_;
+ }
+ /** @nodts */
+ static m_setA__int__void(/** number */ set__) {
+  StaticFieldAccessLevelsKt.$clinit();
+  StaticFieldAccessLevelsKt.f_a__staticfieldaccesslevels_StaticFieldAccessLevelsKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_getC__int() {
+  StaticFieldAccessLevelsKt.$clinit();
+  return StaticFieldAccessLevelsKt.f_c__staticfieldaccesslevels_StaticFieldAccessLevelsKt_;
+ }
+ /** @nodts */
+ static m_setC__int__void(/** number */ set__) {
+  StaticFieldAccessLevelsKt.$clinit();
+  StaticFieldAccessLevelsKt.f_c__staticfieldaccesslevels_StaticFieldAccessLevelsKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_test__int() {
+  StaticFieldAccessLevelsKt.$clinit();
+  return StaticFieldAccessLevelsKt.f_b__staticfieldaccesslevels_StaticFieldAccessLevelsKt_ ? StaticFieldAccessLevelsKt.m_getA__int() : StaticFieldAccessLevelsKt.m_getC__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  StaticFieldAccessLevelsKt.$clinit = () =>{};
+  StaticFieldAccessLevelsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticFieldAccessLevelsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {number} @nodts*/
+StaticFieldAccessLevelsKt.f_a__staticfieldaccesslevels_StaticFieldAccessLevelsKt_ = 0;
+/**@type {boolean} @nodts*/
+StaticFieldAccessLevelsKt.f_b__staticfieldaccesslevels_StaticFieldAccessLevelsKt_ = false;
+/**@type {number} @nodts*/
+StaticFieldAccessLevelsKt.f_c__staticfieldaccesslevels_StaticFieldAccessLevelsKt_ = 0;
+$Util.$setClassMetadata(StaticFieldAccessLevelsKt, 'staticfieldaccesslevels.StaticFieldAccessLevelsKt');
+
+exports = StaticFieldAccessLevelsKt;
+
+//# sourceMappingURL=StaticFieldAccessLevelsKt.js.map

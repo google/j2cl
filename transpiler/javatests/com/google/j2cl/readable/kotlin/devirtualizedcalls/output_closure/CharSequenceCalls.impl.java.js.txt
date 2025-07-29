@@ -1,0 +1,57 @@
+goog.module('devirtualizedcalls.CharSequenceCalls$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
+let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
+
+/**
+ * @final
+ */
+class CharSequenceCalls extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CharSequenceCalls} */
+ static $create__() {
+  CharSequenceCalls.$clinit();
+  let $instance = new CharSequenceCalls();
+  $instance.$ctor__devirtualizedcalls_CharSequenceCalls__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__devirtualizedcalls_CharSequenceCalls__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__java_lang_CharSequence__void(/** !(CharSequence|string) */ cs) {
+  $CharSequences.m_charAt__java_lang_CharSequence__int__char(cs, 0);
+ }
+ /** @final @nodts */
+ m_main__void() {
+  let s = 's';
+  this.m_test__java_lang_CharSequence__void(s);
+ }
+ /** @nodts */
+ static $clinit() {
+  CharSequenceCalls.$clinit = () =>{};
+  CharSequenceCalls.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CharSequenceCalls;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
+ }
+}
+$Util.$setClassMetadata(CharSequenceCalls, 'devirtualizedcalls.CharSequenceCalls');
+
+exports = CharSequenceCalls;
+
+//# sourceMappingURL=CharSequenceCalls.js.map

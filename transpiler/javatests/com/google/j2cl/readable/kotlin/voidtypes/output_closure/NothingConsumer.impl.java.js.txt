@@ -1,0 +1,59 @@
+goog.module('voidtypes.NothingConsumer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Consumer = goog.require('voidtypes.Consumer$impl');
+
+let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {Consumer<?>}
+ */
+class NothingConsumer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NothingConsumer} */
+ static $create__() {
+  NothingConsumer.$clinit();
+  let $instance = new NothingConsumer();
+  $instance.$ctor__voidtypes_NothingConsumer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__voidtypes_NothingConsumer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_consume__kotlin_jvm_internal_NothingStub__void(/** ? */ value) {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_consume__java_lang_Object__void(/** ? */ arg0) {
+  this.m_consume__kotlin_jvm_internal_NothingStub__void(/**@type {?}*/ ($Casts.$to(arg0, NothingStub)));
+ }
+ /** @nodts */
+ static $clinit() {
+  NothingConsumer.$clinit = () =>{};
+  NothingConsumer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NothingConsumer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  NothingStub = goog.module.get('kotlin.Nothing$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Consumer.$markImplementor(NothingConsumer);
+$Util.$setClassMetadata(NothingConsumer, 'voidtypes.NothingConsumer');
+
+exports = NothingConsumer;
+
+//# sourceMappingURL=NothingConsumer.js.map

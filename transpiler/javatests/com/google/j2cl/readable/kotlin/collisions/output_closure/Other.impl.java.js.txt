@@ -1,0 +1,52 @@
+goog.module('collisions.Other$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Other extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!Other<T>} */
+ static $create__() {
+  Other.$clinit();
+  let $instance = new Other();
+  $instance.$ctor__collisions_Other__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__collisions_Other__void() {
+  this.$ctor__java_lang_Object__void();
+  let T_1 = 3;
+  let o = /**@type {Other<T>}*/ (null);
+ }
+ /** @final @nodts @template T_2 @return {?T_2} */
+ m_m__java_lang_Object() {
+  let T_1 = 5;
+  let o = /**@type {Other<T_2>}*/ (null);
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  Other.$clinit = () =>{};
+  Other.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Other;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Other, 'collisions.Other');
+
+exports = Other;
+
+//# sourceMappingURL=Other.js.map

@@ -1,0 +1,17 @@
+goog.module('kotlinjavainterop.KotlinSet');
+
+goog.require('java.lang.Iterable');
+goog.require('java.util.Collection');
+goog.require('java.util.Iterator');
+goog.require('java.util.Set');
+goog.require('java.util.Spliterator');
+goog.require('java.util.function.Consumer');
+goog.require('java.util.stream.Stream');
+goog.require('javaemul.internal.InternalPreconditions');
+goog.require('kotlin.NotImplementedError');
+goog.require('kotlin.collections.AbstractSet');
+goog.require('nativebootstrap.Util');
+goog.require('vmbootstrap.Exceptions');
+
+const KotlinSet = goog.require('kotlinjavainterop.KotlinSet$impl');
+exports = KotlinSet;

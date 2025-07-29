@@ -1,0 +1,38 @@
+goog.module('bar.JsTypeWithNamespace$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JsTypeWithNamespace extends j_l_Object {
+ 
+ constructor() {
+  JsTypeWithNamespace.$clinit();
+  super();
+  this.$ctor__jstypewithnamespace_JsTypeWithNamespace__void();
+ }
+ /** @nodts */
+ $ctor__jstypewithnamespace_JsTypeWithNamespace__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  JsTypeWithNamespace.$clinit = () =>{};
+  JsTypeWithNamespace.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsTypeWithNamespace;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsTypeWithNamespace, 'jstypewithnamespace.JsTypeWithNamespace');
+
+exports = JsTypeWithNamespace;
+
+//# sourceMappingURL=JsTypeWithNamespace.js.map

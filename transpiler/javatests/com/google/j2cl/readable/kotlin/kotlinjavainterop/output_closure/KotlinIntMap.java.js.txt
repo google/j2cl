@@ -1,0 +1,18 @@
+goog.module('kotlinjavainterop.KotlinIntMap');
+
+goog.require('java.lang.Integer');
+goog.require('java.util.Collection');
+goog.require('java.util.Map');
+goog.require('java.util.Map.Entry');
+goog.require('java.util.Set');
+goog.require('java.util.function.BiConsumer');
+goog.require('java.util.function.BiFunction');
+goog.require('java.util.function.Function');
+goog.require('javaemul.internal.InternalPreconditions');
+goog.require('kotlinjavainterop.JavaIntMap');
+goog.require('nativebootstrap.Equality');
+goog.require('nativebootstrap.Util');
+goog.require('vmbootstrap.Casts');
+
+const KotlinIntMap = goog.require('kotlinjavainterop.KotlinIntMap$impl');
+exports = KotlinIntMap;

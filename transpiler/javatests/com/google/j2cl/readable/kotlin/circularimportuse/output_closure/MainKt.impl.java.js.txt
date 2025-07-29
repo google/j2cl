@@ -1,0 +1,55 @@
+goog.module('circularimportuse.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Left = goog.forwardDeclare('circularimportuse.Left$impl');
+let Right = goog.forwardDeclare('circularimportuse.Right$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__circularimportuse_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__circularimportuse_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__arrayOf_java_lang_String__void(/** !Array<string> */ args) {
+  MainKt.$clinit();
+  let left = Left.$create__();
+  let right = Right.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Left = goog.module.get('circularimportuse.Left$impl');
+  Right = goog.module.get('circularimportuse.Right$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'circularimportuse.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

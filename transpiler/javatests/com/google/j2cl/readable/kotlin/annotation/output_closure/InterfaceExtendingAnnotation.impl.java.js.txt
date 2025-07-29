@@ -1,0 +1,34 @@
+goog.module('annotation.InterfaceExtendingAnnotation$impl');
+
+const Annotation = goog.require('java.lang.annotation.Annotation$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {Annotation}
+ */
+class InterfaceExtendingAnnotation {
+ /** @nodts */
+ static $clinit() {
+  InterfaceExtendingAnnotation.$clinit = () =>{};
+  InterfaceExtendingAnnotation.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Annotation.$markImplementor(ctor);
+  ctor.prototype.$implements__annotation_InterfaceExtendingAnnotation = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__annotation_InterfaceExtendingAnnotation;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceExtendingAnnotation.$markImplementor(/**@type {Function}*/ (InterfaceExtendingAnnotation));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceExtendingAnnotation), 'annotation.InterfaceExtendingAnnotation');
+
+exports = InterfaceExtendingAnnotation;
+
+//# sourceMappingURL=InterfaceExtendingAnnotation.js.map

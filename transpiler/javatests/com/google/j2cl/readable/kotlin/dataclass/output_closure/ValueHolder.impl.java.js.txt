@@ -1,0 +1,34 @@
+goog.module('dataclass.ValueHolder$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class ValueHolder {
+ /** @abstract @nodts @return {T} */
+ m_getBackingValue__java_lang_Object() {}
+ /** @nodts */
+ static $clinit() {
+  ValueHolder.$clinit = () =>{};
+  ValueHolder.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__dataclass_ValueHolder = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__dataclass_ValueHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ValueHolder.$markImplementor(/**@type {Function}*/ (ValueHolder));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (ValueHolder), 'dataclass.ValueHolder');
+
+exports = ValueHolder;
+
+//# sourceMappingURL=ValueHolder.js.map

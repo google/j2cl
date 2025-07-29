@@ -1,0 +1,57 @@
+goog.module('ifstatement.IfStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class IfStatement extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!IfStatement} */
+ static $create__() {
+  IfStatement.$clinit();
+  let $instance = new IfStatement();
+  $instance.$ctor__ifstatement_IfStatement__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__ifstatement_IfStatement__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let a = true;
+  let b = true;
+  let number_1 = 1;
+  if (a) {
+   number_1 = 2;
+  } else if (b) {
+   number_1 = 3;
+  } else {
+   number_1 = 4;
+  }
+  number_1 = a ? 5 : 6;
+ }
+ /** @nodts */
+ static $clinit() {
+  IfStatement.$clinit = () =>{};
+  IfStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IfStatement;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(IfStatement, 'ifstatement.IfStatement');
+
+exports = IfStatement;
+
+//# sourceMappingURL=IfStatement.js.map

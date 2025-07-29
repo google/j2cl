@@ -1,0 +1,55 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ESInner = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
+
+/**
+ * @final
+ */
+class ESOuter extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ESOuter} */
+ static $create__() {
+  ESOuter.$clinit();
+  let $instance = new ESOuter();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_ESOuter__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinitorder_InnerClassInitOrder_ESOuter__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!ESInner} */
+ m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner() {
+  return ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(this);
+ }
+ /** @final @nodts @return {!ESInner} */
+ m_newESInner__int__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner(/** number */ value) {
+  return ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter__int(this, value);
+ }
+ /** @nodts */
+ static $clinit() {
+  ESOuter.$clinit = () =>{};
+  ESOuter.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ESOuter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ESInner = goog.module.get('innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
+ }
+}
+$Util.$setClassMetadata(ESOuter, 'innerclassinitorder.InnerClassInitOrder$ESOuter');
+
+exports = ESOuter;
+
+//# sourceMappingURL=InnerClassInitOrder$ESOuter.js.map

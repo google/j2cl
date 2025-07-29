@@ -1,0 +1,41 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.AbstractList$impl');
+
+const AbstractCollection = goog.require('multipleabstractparents.MultipleAbstractParents.AbstractCollection$impl');
+const List = goog.require('multipleabstractparents.MultipleAbstractParents.List$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template T
+ * @extends {AbstractCollection<T>}
+ * @implements {List<T>}
+ */
+class AbstractList extends AbstractCollection {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__multipleabstractparents_MultipleAbstractParents_AbstractList__void() {
+  this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractCollection__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractList.$clinit = () =>{};
+  AbstractList.$loadModules();
+  AbstractCollection.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractList;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+List.$markImplementor(AbstractList);
+$Util.$setClassMetadata(AbstractList, 'multipleabstractparents.MultipleAbstractParents$AbstractList');
+
+exports = AbstractList;
+
+//# sourceMappingURL=MultipleAbstractParents$AbstractList.js.map

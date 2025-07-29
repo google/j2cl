@@ -1,0 +1,67 @@
+goog.module('inlinefunction.ExternalClassWithInlineFun$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ExternalInlineFunctionKt = goog.forwardDeclare('inlinefunction.ExternalInlineFunctionKt$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class ExternalClassWithInlineFun extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_e__inlinefunction_ExternalClassWithInlineFun_ = 0;
+ }
+ /** @nodts @return {!ExternalClassWithInlineFun} */
+ static $create__int(/** number */ e) {
+  ExternalClassWithInlineFun.$clinit();
+  let $instance = new ExternalClassWithInlineFun();
+  $instance.$ctor__inlinefunction_ExternalClassWithInlineFun__int__void(e);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_ExternalClassWithInlineFun__int__void(/** number */ e) {
+  this.$ctor__java_lang_Object__void();
+  this.f_e__inlinefunction_ExternalClassWithInlineFun_ = e;
+ }
+ /** @final @nodts @return {number} */
+ m_getE__int() {
+  return this.f_e__inlinefunction_ExternalClassWithInlineFun_;
+ }
+ /** @final @nodts */
+ m_setE__int__void(/** number */ set__) {
+  this.f_e__inlinefunction_ExternalClassWithInlineFun_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_inlineFun__kotlin_jvm_functions_Function1__int(/** !Function1<?, ?> */ action) {
+  return (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(this.m_getE__int())), Integer))).m_intValue__int() + ExternalInlineFunctionKt.f_privateTopProperty__inlinefunction_ExternalInlineFunctionKt_ | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  ExternalClassWithInlineFun.$clinit = () =>{};
+  ExternalClassWithInlineFun.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExternalClassWithInlineFun;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ExternalInlineFunctionKt = goog.module.get('inlinefunction.ExternalInlineFunctionKt$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ExternalClassWithInlineFun, 'inlinefunction.ExternalClassWithInlineFun');
+
+exports = ExternalClassWithInlineFun;
+
+//# sourceMappingURL=ExternalClassWithInlineFun.js.map

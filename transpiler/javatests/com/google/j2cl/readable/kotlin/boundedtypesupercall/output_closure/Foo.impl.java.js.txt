@@ -1,0 +1,39 @@
+goog.module('boundedtypesupercall.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template T
+ */
+class Foo extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__boundedtypesupercall_Foo__java_lang_Object__void(/** ?T */ foo) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @nodts */
+ m_foo__void() {}
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Foo, 'boundedtypesupercall.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

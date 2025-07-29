@@ -1,0 +1,203 @@
+goog.module('xplatforeach.ForEachStatementsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Overlay = goog.forwardDeclare('com.google.gwt.corp.collections.JsArray.$Overlay$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Enums_BoxedLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedLightEnum$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+let NativeJsEnum = goog.forwardDeclare('xplatforeach.NativeJsEnum');
+let SomeJsEnum = goog.forwardDeclare('xplatforeach.SomeJsEnum$impl');
+let SomeJsEnum_$Overlay = goog.forwardDeclare('xplatforeach.SomeJsEnum.$Overlay$impl');
+
+/**
+ * @final
+ */
+class ForEachStatementsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ForEachStatementsKt} */
+ static $create__() {
+  ForEachStatementsKt.$clinit();
+  let $instance = new ForEachStatementsKt();
+  $instance.$ctor__xplatforeach_ForEachStatementsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__xplatforeach_ForEachStatementsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_jsArray__com_google_gwt_corp_collections_JsArray__void(/** !Array<!Throwable> */ array) {
+  ForEachStatementsKt.$clinit();
+  for (let $array = /**@type {Array<?>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = /**@type {Throwable}*/ ($array[$index]);
+   {
+    $Objects.m_toString__java_lang_Object__java_lang_String(element);
+   }
+  }
+ }
+ /** @nodts */
+ static m_jsArrayOfJsEnum__com_google_gwt_corp_collections_JsArray__void(/** !Array<!$Enums_BoxedLightEnum<!SomeJsEnum>> */ array) {
+  ForEachStatementsKt.$clinit();
+  for (let $array = /**@type {Array<?>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = /**@type {?SomeJsEnum}*/ ($Enums.unbox($array[$index], SomeJsEnum_$Overlay));
+   {
+    Integer.m_valueOf__int__java_lang_Integer(/**@type {number}*/ (element)).toString();
+   }
+  }
+ }
+ /** @nodts */
+ static m_jsArrayOfNativeJsEnum__com_google_gwt_corp_collections_JsArray__void(/** !Array<!NativeJsEnum> */ array) {
+  ForEachStatementsKt.$clinit();
+  for (let $array = /**@type {Array<?>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = /**@type {?NativeJsEnum}*/ ($array[$index]);
+   {
+    $Objects.m_toString__java_lang_Object__java_lang_String(element);
+   }
+  }
+ }
+ /** @nodts */
+ static m_immutableJsArray__com_google_gwt_corp_collections_ImmutableJsArray__void(/** !Array<!Throwable> */ array) {
+  ForEachStatementsKt.$clinit();
+  for (let $array = /**@type {Array<?>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = /**@type {Throwable}*/ ($array[$index]);
+   {
+    $Objects.m_toString__java_lang_Object__java_lang_String(element);
+   }
+  }
+ }
+ /** @nodts */
+ static m_unmodifiableJsArray__com_google_gwt_corp_collections_UnmodifiableJsArray__void(/** !Array<!Throwable> */ array) {
+  ForEachStatementsKt.$clinit();
+  for (let $array = /**@type {Array<?>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = /**@type {Throwable}*/ ($array[$index]);
+   {
+    $Objects.m_toString__java_lang_Object__java_lang_String(element);
+   }
+  }
+ }
+ /** @nodts */
+ static m_jsArrayInteger__com_google_apps_docs_xplat_collections_JsArrayInteger__void(/** !Array */ array) {
+  ForEachStatementsKt.$clinit();
+  for (let $array = /**@type {Array<number>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = $array[$index];
+   {
+    Integer.m_valueOf__int__java_lang_Integer(element).toString();
+   }
+  }
+  for (let $array_1 = /**@type {Array<number>}*/ (array), $index_1 = 0; $index_1 < $array_1.length; $index_1++) {
+   let element_1 = Integer.m_valueOf__int__java_lang_Integer($array_1[$index_1]);
+   {
+    j_l_String.m_valueOf__java_lang_Object__java_lang_String(element_1);
+   }
+  }
+ }
+ /** @nodts */
+ static m_serializedJsArray__com_google_apps_docs_xplat_collections_SerializedJsArray__void(/** !Array */ array) {
+  ForEachStatementsKt.$clinit();
+  for (let $array = /**@type {Array<?>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = $array[$index];
+   {
+    $Objects.m_toString__java_lang_Object__java_lang_String(element);
+   }
+  }
+ }
+ /** @nodts */
+ static m_serializedJsMap__com_google_apps_docs_xplat_collections_SerializedJsMap__void(/** !Object */ map) {
+  ForEachStatementsKt.$clinit();
+  let keys = '';
+  for(let /** ?string */ key in map) {
+   keys = j_l_String.m_valueOf__java_lang_Object__java_lang_String(keys) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(key);
+  }
+ }
+ /** @nodts */
+ static m_unsafeJsMap__com_google_apps_docs_xplat_collections_UnsafeJsMap__void(/** !Object<string, ?> */ map) {
+  ForEachStatementsKt.$clinit();
+  let keys = '';
+  for(let /** ?string */ key in map) {
+   keys = j_l_String.m_valueOf__java_lang_Object__java_lang_String(keys) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(key);
+  }
+ }
+ /** @nodts */
+ static m_unsafeJsMapInteger__com_google_apps_docs_xplat_collections_UnsafeJsMapInteger__void(/** !Object */ map) {
+  ForEachStatementsKt.$clinit();
+  let keys = '';
+  for(let /** ?string */ key in map) {
+   keys = j_l_String.m_valueOf__java_lang_Object__java_lang_String(keys) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(key);
+  }
+ }
+ /** @nodts */
+ static m_unsafeJsSet__com_google_apps_docs_xplat_collections_UnsafeJsSet__void(/** !Object */ set) {
+  ForEachStatementsKt.$clinit();
+  let keys = '';
+  for(let /** ?string */ key in set) {
+   keys = j_l_String.m_valueOf__java_lang_Object__java_lang_String(keys) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(key);
+  }
+ }
+ /** @nodts */
+ static m_sparseArray__com_google_apps_docs_xplat_structs_SparseArray__void(/** !Array<?> */ array) {
+  ForEachStatementsKt.$clinit();
+  let sumOfKeys = 0;
+  for(let /** ?string */ property in array) {
+   let key = Integer.m_valueOf__int__java_lang_Integer(/**@type {number}*/ (Number(property)));
+   {
+    sumOfKeys = sumOfKeys + key.m_intValue__int() | 0;
+   }
+  }
+  for(let /** ?string */ property_1 in array) {
+   let key_1 = /**@type {number}*/ (Number(property_1));
+   {
+    sumOfKeys = sumOfKeys + key_1 | 0;
+   }
+  }
+ }
+ /** @nodts */
+ static m_withoutBlock__com_google_gwt_corp_collections_JsArray__com_google_apps_docs_xplat_collections_SerializedJsMap__void(/** !Array<!Throwable> */ array, /** !Object */ map) {
+  ForEachStatementsKt.$clinit();
+  let iterator = $Overlay.m_getIterable__$devirt__com_google_gwt_corp_collections_JsArray__java_lang_Iterable(array).m_iterator__java_util_Iterator();
+  while (iterator.m_hasNext__boolean()) {
+   let element = /**@type {!Throwable}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {?}*/ ($Casts.$to(iterator.m_next__java_lang_Object(), Throwable))));
+   $Objects.m_toString__java_lang_Object__java_lang_String(element);
+  }
+  for(let /** string */ key in map) {
+   InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(j_l_String.m_substring__java_lang_String__int__java_lang_String(/**@type {string}*/ (key), 1));
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  ForEachStatementsKt.$clinit = () =>{};
+  ForEachStatementsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ForEachStatementsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('com.google.gwt.corp.collections.JsArray.$Overlay$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Throwable = goog.module.get('java.lang.Throwable$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+  SomeJsEnum_$Overlay = goog.module.get('xplatforeach.SomeJsEnum.$Overlay$impl');
+ }
+}
+$Util.$setClassMetadata(ForEachStatementsKt, 'xplatforeach.ForEachStatementsKt');
+
+exports = ForEachStatementsKt;
+
+//# sourceMappingURL=ForEachStatementsKt.js.map

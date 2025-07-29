@@ -1,0 +1,55 @@
+goog.module('localclasswithconstructor.LocalClassWithConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
+let $1LocalClass = goog.forwardDeclare('localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');
+
+/**
+ * @final
+ */
+class LocalClassWithConstructor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LocalClassWithConstructor} */
+ static $create__() {
+  LocalClassWithConstructor.$clinit();
+  let $instance = new LocalClassWithConstructor();
+  $instance.$ctor__localclasswithconstructor_LocalClassWithConstructor__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclasswithconstructor_LocalClassWithConstructor__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__int__void(/** number */ p) {
+  let localVar = Ref.m_createRef__int__javaemul_internal_Ref_OfInt(1);
+  let a = $1LocalClass.$create__localclasswithconstructor_LocalClassWithConstructor__int__javaemul_internal_Ref_OfInt__int(this, p, localVar, 1);
+  localVar.f_element__javaemul_internal_Ref_OfInt = a.m_getField__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalClassWithConstructor.$clinit = () =>{};
+  LocalClassWithConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalClassWithConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Ref = goog.module.get('javaemul.internal.Ref$impl');
+  $1LocalClass = goog.module.get('localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');
+ }
+}
+$Util.$setClassMetadata(LocalClassWithConstructor, 'localclasswithconstructor.LocalClassWithConstructor');
+
+exports = LocalClassWithConstructor;
+
+//# sourceMappingURL=LocalClassWithConstructor.js.map

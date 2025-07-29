@@ -1,0 +1,55 @@
+goog.module('extensionmembers.TemplatedReceiverClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class TemplatedReceiverClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_instanceProperty__extensionmembers_TemplatedReceiverClass_;
+ }
+ /** @nodts @template T @return {!TemplatedReceiverClass<T>} */
+ static $create__java_lang_Object(/** T */ instanceProperty) {
+  TemplatedReceiverClass.$clinit();
+  let $instance = new TemplatedReceiverClass();
+  $instance.$ctor__extensionmembers_TemplatedReceiverClass__java_lang_Object__void(instanceProperty);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__extensionmembers_TemplatedReceiverClass__java_lang_Object__void(/** T */ instanceProperty) {
+  this.$ctor__java_lang_Object__void();
+  this.f_instanceProperty__extensionmembers_TemplatedReceiverClass_ = instanceProperty;
+ }
+ /** @final @nodts @return {T} */
+ m_getInstanceProperty__java_lang_Object() {
+  return this.f_instanceProperty__extensionmembers_TemplatedReceiverClass_;
+ }
+ /** @final @nodts */
+ m_setInstanceProperty__java_lang_Object__void(/** T */ set__) {
+  this.f_instanceProperty__extensionmembers_TemplatedReceiverClass_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  TemplatedReceiverClass.$clinit = () =>{};
+  TemplatedReceiverClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TemplatedReceiverClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(TemplatedReceiverClass, 'extensionmembers.TemplatedReceiverClass');
+
+exports = TemplatedReceiverClass;
+
+//# sourceMappingURL=TemplatedReceiverClass.js.map

@@ -1,0 +1,67 @@
+goog.module('genericanddefaultmethods.ConcreteClass$impl');
+
+const GenericClass = goog.require('genericanddefaultmethods.GenericClass$impl');
+const InterfaceWithDefault = goog.require('genericanddefaultmethods.InterfaceWithDefault$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {GenericClass<string>}
+ * @implements {InterfaceWithDefault}
+ */
+class ConcreteClass extends GenericClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ConcreteClass} */
+ static $create__() {
+  ConcreteClass.$clinit();
+  let $instance = new ConcreteClass();
+  $instance.$ctor__genericanddefaultmethods_ConcreteClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericanddefaultmethods_ConcreteClass__void() {
+  this.$ctor__genericanddefaultmethods_GenericClass__void();
+ }
+ /** @override @nodts @return {number} */
+ m_foo__java_lang_String__int(/** string */ value) {
+  return super.m_foo__java_lang_Object__int(value);
+ }
+ /** @final @nodts @return {number} */
+ m_fooFromInterface__java_lang_String__int(/** string */ value) {
+  return InterfaceWithDefault.m_foo__$default__genericanddefaultmethods_InterfaceWithDefault__java_lang_String__int(this, value);
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {number} */
+ m_foo__java_lang_Object__int(/** string */ arg0) {
+  return this.m_foo__java_lang_String__int(/**@type {string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  ConcreteClass.$clinit = () =>{};
+  ConcreteClass.$loadModules();
+  GenericClass.$clinit();
+  InterfaceWithDefault.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ConcreteClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+InterfaceWithDefault.$markImplementor(ConcreteClass);
+$Util.$setClassMetadata(ConcreteClass, 'genericanddefaultmethods.ConcreteClass');
+
+exports = ConcreteClass;
+
+//# sourceMappingURL=ConcreteClass.js.map

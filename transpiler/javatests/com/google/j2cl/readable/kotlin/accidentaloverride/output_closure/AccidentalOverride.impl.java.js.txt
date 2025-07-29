@@ -1,0 +1,63 @@
+goog.module('accidentaloverride.AccidentalOverride$impl');
+
+const Parent = goog.require('accidentaloverride.Parent$impl');
+const SuperInterface = goog.require('accidentaloverride.SuperInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {Parent<Error>}
+ * @implements {SuperInterface<Error>}
+ */
+class AccidentalOverride extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AccidentalOverride} */
+ static $create__() {
+  AccidentalOverride.$clinit();
+  let $instance = new AccidentalOverride();
+  $instance.$ctor__accidentaloverride_AccidentalOverride__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__accidentaloverride_AccidentalOverride__void() {
+  this.$ctor__accidentaloverride_Parent__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__java_lang_Object__void(/** Error */ arg0) {
+  this.m_foo__java_lang_Error__void(/**@type {Error}*/ ($Casts.$to(arg0, Error)));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_bar__java_lang_Object__void(/** Error */ arg0) {
+  this.m_bar__java_lang_Error__void(/**@type {Error}*/ ($Casts.$to(arg0, Error)));
+ }
+ /** @nodts */
+ static $clinit() {
+  AccidentalOverride.$clinit = () =>{};
+  AccidentalOverride.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AccidentalOverride;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Error = goog.module.get('java.lang.Error$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+SuperInterface.$markImplementor(AccidentalOverride);
+$Util.$setClassMetadata(AccidentalOverride, 'accidentaloverride.AccidentalOverride');
+
+exports = AccidentalOverride;
+
+//# sourceMappingURL=AccidentalOverride.js.map

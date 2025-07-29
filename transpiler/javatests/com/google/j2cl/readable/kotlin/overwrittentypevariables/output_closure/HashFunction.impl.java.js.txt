@@ -1,0 +1,35 @@
+goog.module('overwrittentypevariables.HashFunction$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const MyFunction = goog.require('overwrittentypevariables.MyFunction$impl');
+
+/**
+ * @interface
+ * @template T
+ * @extends {MyFunction<T, ?string>}
+ */
+class HashFunction {
+ /** @nodts */
+ static $clinit() {
+  HashFunction.$clinit = () =>{};
+  HashFunction.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  MyFunction.$markImplementor(ctor);
+  ctor.prototype.$implements__overwrittentypevariables_HashFunction = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__overwrittentypevariables_HashFunction;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+HashFunction.$markImplementor(/**@type {Function}*/ (HashFunction));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (HashFunction), 'overwrittentypevariables.HashFunction');
+
+exports = HashFunction;
+
+//# sourceMappingURL=HashFunction.js.map

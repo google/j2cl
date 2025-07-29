@@ -1,0 +1,43 @@
+goog.module('methodreferences.MethodReferences.Producer$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.Producer.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Producer {
+ /** @abstract @nodts @return {T} */
+ m_produce__java_lang_Object() {}
+ /** @nodts @template T @return {!Producer<T>} */
+ static $adapt(/** ?function():T */ fn) {
+  Producer.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  Producer.$clinit = () =>{};
+  Producer.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__methodreferences_MethodReferences_Producer = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__methodreferences_MethodReferences_Producer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('methodreferences.MethodReferences.Producer.$LambdaAdaptor$impl');
+ }
+}
+Producer.$markImplementor(/**@type {Function}*/ (Producer));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Producer), 'methodreferences.MethodReferences$Producer');
+
+exports = Producer;
+
+//# sourceMappingURL=MethodReferences$Producer.js.map

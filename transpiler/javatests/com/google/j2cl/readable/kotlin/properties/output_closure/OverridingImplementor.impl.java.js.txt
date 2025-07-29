@@ -1,0 +1,86 @@
+goog.module('properties.OverridingImplementor$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Base = goog.require('properties.Base$impl');
+const Holder = goog.require('properties.Holder$impl');
+const NumberHolder = goog.require('properties.NumberHolder$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {Holder<!Integer>}
+ * @implements {NumberHolder<!Integer>}
+ */
+class OverridingImplementor extends Base {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_content__properties_OverridingImplementor_ = 0;
+ }
+ /** @nodts @return {!OverridingImplementor} */
+ static $create__() {
+  OverridingImplementor.$clinit();
+  let $instance = new OverridingImplementor();
+  $instance.$ctor__properties_OverridingImplementor__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__properties_OverridingImplementor__void() {
+  this.$ctor__properties_Base__void();
+  this.f_content__properties_OverridingImplementor_ = 2;
+ }
+ /** @override @nodts @return {number} */
+ m_getContent__int() {
+  return this.f_content__properties_OverridingImplementor_;
+ }
+ /** @override @nodts */
+ m_setContent__int__void(/** number */ set__) {
+  this.f_content__properties_OverridingImplementor_ = set__;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Integer} */
+ m_getContent__java_lang_Object() {
+  return Integer.m_valueOf__int__java_lang_Integer(this.m_getContent__int());
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_setContent__java_lang_Object__void(/** !Integer */ arg0) {
+  this.m_setContent__int__void((/**@type {!Integer}*/ ($Casts.$to(arg0, Integer))).m_intValue__int());
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Integer} */
+ m_getContent__java_lang_Number() {
+  return Integer.m_valueOf__int__java_lang_Integer(this.m_getContent__int());
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_setContent__java_lang_Number__void(/** !Integer */ arg0) {
+  this.m_setContent__int__void((/**@type {!Integer}*/ ($Casts.$to(arg0, Integer))).m_intValue__int());
+ }
+ /** @nodts */
+ static $clinit() {
+  OverridingImplementor.$clinit = () =>{};
+  OverridingImplementor.$loadModules();
+  Base.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OverridingImplementor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Holder.$markImplementor(OverridingImplementor);
+NumberHolder.$markImplementor(OverridingImplementor);
+$Util.$setClassMetadata(OverridingImplementor, 'properties.OverridingImplementor');
+
+exports = OverridingImplementor;
+
+//# sourceMappingURL=OverridingImplementor.js.map

@@ -1,0 +1,57 @@
+goog.module('lambdas.IdentityFunction$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+
+/**
+ * @final
+ */
+class IdentityFunction extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {function(*):*} */
+ static $create__() {
+  IdentityFunction.$clinit();
+  let $instance = new IdentityFunction();
+  $instance.$ctor__lambdas_IdentityFunction__void();
+  return $Util.$makeLambdaFunction(IdentityFunction.prototype.m_apply__java_lang_Object__java_lang_Object, $instance, IdentityFunction.$copy);
+ }
+ /** @nodts */
+ $ctor__lambdas_IdentityFunction__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {!*} */
+ m_apply__java_lang_Object__java_lang_Object(/** * */ o) {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
+ }
+ /** @nodts */
+ static $clinit() {
+  IdentityFunction.$clinit = () =>{};
+  IdentityFunction.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__lambdas_IdentityFunction;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__lambdas_IdentityFunction = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+$JavaScriptFunction.$markImplementor(IdentityFunction);
+$Util.$setClassMetadata(IdentityFunction, 'lambdas.IdentityFunction');
+
+exports = IdentityFunction;
+
+//# sourceMappingURL=IdentityFunction.js.map

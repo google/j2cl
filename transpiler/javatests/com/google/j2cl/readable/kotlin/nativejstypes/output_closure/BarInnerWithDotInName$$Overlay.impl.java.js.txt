@@ -1,0 +1,25 @@
+goog.module('nativejstypes.BarInnerWithDotInName.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Bar = goog.require('nativejstypes.Bar');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Bar.Inner;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'nativejstypes.Bar.Inner');
+
+exports = $Overlay;
+
+//# sourceMappingURL=BarInnerWithDotInName$$Overlay.js.map

@@ -1,0 +1,47 @@
+goog.module('enums.Enum2.VALUE4$impl');
+
+const Enum2 = goog.require('enums.Enum2$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class VALUE4 extends Enum2 {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!VALUE4} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  VALUE4.$clinit();
+  let $instance = new VALUE4();
+  $instance.$ctor__enums_Enum2_VALUE4__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__enums_Enum2_VALUE4__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.$ctor__enums_Enum2__java_lang_String__int__int__void($name, $ordinal, 5);
+ }
+ /** @override @nodts @return {number} */
+ m_bar__int() {
+  return 10;
+ }
+ /** @nodts */
+ static $clinit() {
+  VALUE4.$clinit = () =>{};
+  VALUE4.$loadModules();
+  Enum2.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof VALUE4;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(VALUE4, 'enums.Enum2$VALUE4');
+
+exports = VALUE4;
+
+//# sourceMappingURL=Enum2$VALUE4.js.map

@@ -1,0 +1,51 @@
+goog.module('suspendfunction.Conflict$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const IConflict = goog.require('suspendfunction.IConflict$impl');
+
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+
+/**
+ * @abstract
+ * @implements {IConflict<string>}
+ */
+class Conflict extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__suspendfunction_Conflict__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!Generator<*, string>} */
+ *m_multiLevelConflict__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(/** Continuation<?> */ $continuation, /** string */ s) {
+  return s;
+ }
+ /** @final @nodts */
+ m_sameLevelConflict__kotlin_coroutines_Continuation__void(/** !Continuation<?> */ c) {}
+ /** @final @nodts @return {!Generator<*, void>} */
+ *m_sameLevelConflict__kotlin_coroutines_Continuation__void_$s_(/** Continuation<?> */ $continuation) {}
+ /** @nodts */
+ static $clinit() {
+  Conflict.$clinit = () =>{};
+  Conflict.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Conflict;
+ }
+ /** @abstract @override @nodts @suppress{visibility} */
+ m_multiLevelConflict__kotlin_coroutines_Continuation__java_lang_Object__void(/** !Continuation<?> */ arg0, /** string */ arg1) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IConflict.$markImplementor(Conflict);
+$Util.$setClassMetadata(Conflict, 'suspendfunction.Conflict');
+
+exports = Conflict;
+
+//# sourceMappingURL=Conflict.js.map

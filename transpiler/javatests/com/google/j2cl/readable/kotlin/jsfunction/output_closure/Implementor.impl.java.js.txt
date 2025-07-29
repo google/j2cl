@@ -1,0 +1,55 @@
+goog.module('jsfunction.Implementor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const ApiWithMethodReturningParametricJsFunction = goog.require('jsfunction.ApiWithMethodReturningParametricJsFunction$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {ApiWithMethodReturningParametricJsFunction}
+ */
+class Implementor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Implementor} */
+ static $create__() {
+  Implementor.$clinit();
+  let $instance = new Implementor();
+  $instance.$ctor__jsfunction_Implementor__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsfunction_Implementor__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @template T @return {?function(T):void} */
+ anApi() {
+  return /**@type {?function(T):void}*/ (null);
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @template T @return {?function(T):void} */
+ m_anApi__jsfunction_ParametricJsFunction() {
+  return this.anApi();
+ }
+ /** @nodts */
+ static $clinit() {
+  Implementor.$clinit = () =>{};
+  Implementor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Implementor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ApiWithMethodReturningParametricJsFunction.$markImplementor(Implementor);
+$Util.$setClassMetadata(Implementor, 'jsfunction.Implementor');
+
+exports = Implementor;
+
+//# sourceMappingURL=Implementor.js.map

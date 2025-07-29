@@ -1,0 +1,43 @@
+goog.module('newinnerclasswithsameouter.NewInnerClassWithSameOuter$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class NewInnerClassWithSameOuter extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NewInnerClassWithSameOuter} */
+ static $create__() {
+  NewInnerClassWithSameOuter.$clinit();
+  let $instance = new NewInnerClassWithSameOuter();
+  $instance.$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  NewInnerClassWithSameOuter.$clinit = () =>{};
+  NewInnerClassWithSameOuter.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NewInnerClassWithSameOuter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NewInnerClassWithSameOuter, 'newinnerclasswithsameouter.NewInnerClassWithSameOuter');
+
+exports = NewInnerClassWithSameOuter;
+
+//# sourceMappingURL=NewInnerClassWithSameOuter.js.map

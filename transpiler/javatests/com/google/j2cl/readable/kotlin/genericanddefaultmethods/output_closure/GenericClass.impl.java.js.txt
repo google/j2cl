@@ -1,0 +1,47 @@
+goog.module('genericanddefaultmethods.GenericClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class GenericClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!GenericClass<T>} */
+ static $create__() {
+  GenericClass.$clinit();
+  let $instance = new GenericClass();
+  $instance.$ctor__genericanddefaultmethods_GenericClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericanddefaultmethods_GenericClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ m_foo__java_lang_Object__int(/** T */ value) {
+  return 2;
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericClass.$clinit = () =>{};
+  GenericClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericClass, 'genericanddefaultmethods.GenericClass');
+
+exports = GenericClass;
+
+//# sourceMappingURL=GenericClass.js.map

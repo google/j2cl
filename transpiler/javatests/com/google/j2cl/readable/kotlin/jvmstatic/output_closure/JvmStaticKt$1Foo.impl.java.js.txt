@@ -1,0 +1,46 @@
+goog.module('jvmstatic.JvmStaticKt.$1Foo$impl');
+
+const ClassWithCompanion = goog.require('jvmstatic.ClassWithCompanion$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class $1Foo extends ClassWithCompanion {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!$1Foo} */
+ static $create__() {
+  let $instance = new $1Foo();
+  $instance.$ctor__jvmstatic_JvmStaticKt_1Foo__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmstatic_JvmStaticKt_1Foo__void() {
+  this.$ctor__jvmstatic_ClassWithCompanion__void();
+ }
+ /** @final @nodts */
+ m_f__void() {
+  ClassWithCompanion.m_staticProtectedFunction__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Foo.$clinit = () =>{};
+  $1Foo.$loadModules();
+  ClassWithCompanion.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1Foo, 'jvmstatic.JvmStaticKt$1Foo');
+
+exports = $1Foo;
+
+//# sourceMappingURL=JvmStaticKt$1Foo.js.map

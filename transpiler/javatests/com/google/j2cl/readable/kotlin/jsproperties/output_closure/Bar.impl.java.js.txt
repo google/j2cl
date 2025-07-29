@@ -1,0 +1,65 @@
+goog.module('jsproperties.Bar$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Bar extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_f__jsproperties_Bar_ = 0;
+  /**@type {number}*/
+  this.privateField = 0;
+ }
+ /** @nodts @return {!Bar} */
+ static $create__int(/** number */ f) {
+  Bar.$clinit();
+  let $instance = new Bar();
+  $instance.$ctor__jsproperties_Bar__int__void(f);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_Bar__int__void(/** number */ f) {
+  this.$ctor__java_lang_Object__void();
+  this.f_f__jsproperties_Bar_ = f;
+  this.privateField = -1;
+ }
+ /** @return {number} */
+ get a() {
+  return this.f_f__jsproperties_Bar_ + 1 | 0;
+ }
+ 
+ set a(/** number */ x) {
+  this.f_f__jsproperties_Bar_ = x + 2 | 0;
+ }
+ /** @return {number} */
+ get abc() {
+  return this.f_f__jsproperties_Bar_ + 3 | 0;
+ }
+ 
+ set abc(/** number */ x) {
+  this.f_f__jsproperties_Bar_ = x + 4 | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  Bar.$clinit = () =>{};
+  Bar.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Bar;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Bar, 'jsproperties.Bar');
+
+exports = Bar;
+
+//# sourceMappingURL=Bar.js.map

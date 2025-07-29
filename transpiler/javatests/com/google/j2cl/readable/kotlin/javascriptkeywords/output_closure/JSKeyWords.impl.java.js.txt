@@ -1,0 +1,48 @@
+goog.module('javascriptkeywords.JSKeyWords$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JSKeyWords extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JSKeyWords} */
+ static $create__() {
+  JSKeyWords.$clinit();
+  let $instance = new JSKeyWords();
+  $instance.$ctor__javascriptkeywords_JSKeyWords__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__javascriptkeywords_JSKeyWords__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_test__int__int(/** number */ in_1) {
+  let let_1 = 0;
+  return let_1 + in_1 | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  JSKeyWords.$clinit = () =>{};
+  JSKeyWords.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JSKeyWords;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JSKeyWords, 'javascriptkeywords.JSKeyWords');
+
+exports = JSKeyWords;
+
+//# sourceMappingURL=JSKeyWords.js.map

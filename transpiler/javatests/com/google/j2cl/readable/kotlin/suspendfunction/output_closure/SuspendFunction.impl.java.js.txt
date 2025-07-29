@@ -1,0 +1,127 @@
+goog.module('suspendfunction.SuspendFunction$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SuspendFunInterface = goog.require('suspendfunction.SuspendFunInterface$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+let SuspendFunction1 = goog.forwardDeclare('kotlin.internal.j2cl.SuspendFunction1$impl');
+let GenericSuspendFunInterface = goog.forwardDeclare('suspendfunction.GenericSuspendFunInterface$impl');
+let SuspendFunctionKt = goog.forwardDeclare('suspendfunction.SuspendFunctionKt$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {SuspendFunInterface}
+ */
+class SuspendFunction extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SuspendFunction} */
+ static $create__() {
+  SuspendFunction.$clinit();
+  let $instance = new SuspendFunction();
+  $instance.$ctor__suspendfunction_SuspendFunction__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__suspendfunction_SuspendFunction__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_nonSuspendingFunction__java_lang_String__void(/** string */ param) {}
+ /** @final @nodts @return {!Generator<*, string>} */
+ *m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(/** Continuation<?> */ $continuation, /** string */ foo) {
+  return '' + 'Foo' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(foo);
+ }
+ /** @final @nodts @return {!Generator<*, void>} */
+ *m_main__kotlin_coroutines_Continuation__void_$s_(/** Continuation<?> */ $continuation) {
+  let s = (yield* this.m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation, 'Foo'));
+  this.m_nonSuspendingFunction__java_lang_String__void(s);
+  (yield* this.m_testSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__void_$s_($continuation, (yield* this.m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation, s))));
+  s = (yield* this.m_testSuspendFunctionReference__kotlin_coroutines_Continuation__kotlin_internal_j2cl_SuspendFunction1__java_lang_String_$s_($continuation, SuspendFunction1.$adapt(/**  @return {!Generator<*, string>}*/ (function* (/** Continuation<?> */ arg0, /** string */ arg1) {
+   let arg1_1 = /**@type {string}*/ ($Casts.$to(arg1, j_l_String));
+   return (yield* this.m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(arg0, arg1_1));
+  }).bind(this))));
+  let boxedInteger = /**@type {!Integer}*/ ($Casts.$to((yield* GenericSuspendFunInterface.$adapt(/**  @return {!Generator<*, !Integer>}*/ (function* (/** Continuation<?> */ $continuation_1, /** !Integer */ param) {
+   let param_1 = (/**@type {!Integer}*/ ($Casts.$to(param, Integer))).m_intValue__int();
+   return Integer.m_valueOf__int__java_lang_Integer(param_1);
+  })).m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_($continuation, Integer.m_valueOf__int__java_lang_Integer(0))), Integer));
+  s = (yield* (yield* this.m_testChainedSuspendFunction__kotlin_coroutines_Continuation__suspendfunction_SuspendFunInterface_$s_($continuation)).m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation, 'Chain of suspend function calls.'));
+ }
+ /** @final @nodts @return {!Generator<*, void>} */
+ *m_testSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__void_$s_(/** Continuation<?> */ $continuation, /** string */ param) {
+  let lambda = SuspendFunction1.$adapt(/**  @return {!Generator<*, ?>}*/ (function* (/** Continuation<?> */ $continuation_1, /** ? */ it) {
+   let it_1 = /**@type {string}*/ ($Casts.$to(it, j_l_String));
+   let s = (yield* this.m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation_1, it_1));
+   this.m_nonSuspendingFunction__java_lang_String__void(s);
+   return s;
+  }).bind(this));
+  let s_1 = /**@type {string}*/ ($Casts.$to((yield* lambda.m_invoke__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_($continuation, param)), j_l_String));
+  (yield* SuspendFunctionKt.m_consumeSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__kotlin_internal_j2cl_SuspendFunction1__void_$s_($continuation, 'Outer', SuspendFunction1.$adapt(/**  @return {!Generator<*, ?>}*/ (function* (/** Continuation<?> */ $continuation_2, /** ? */ it_2) {
+   let it_3 = /**@type {string}*/ ($Casts.$to(it_2, j_l_String));
+   (yield* SuspendFunctionKt.m_consumeSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__kotlin_internal_j2cl_SuspendFunction1__void_$s_($continuation_2, 'Inner', SuspendFunction1.$adapt(/**  @return {!Generator<*, ?>}*/ (function* (/** Continuation<?> */ $continuation_3, /** ? */ it_4) {
+    let it_5 = /**@type {string}*/ ($Casts.$to(it_4, j_l_String));
+    let s_2 = (yield* this.m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation_3, 'Lambda'));
+    this.m_nonSuspendingFunction__java_lang_String__void(s_2);
+   }).bind(this))));
+  }).bind(this))));
+  (yield* this.m_consumeSuspendFunInterface__kotlin_coroutines_Continuation__java_lang_String__suspendfunction_SuspendFunInterface__java_lang_String_$s_($continuation, 'FunInterface', SuspendFunInterface.$adapt(/**  @return {!Generator<*, string>}*/ (function* (/** Continuation<?> */ $continuation_4, /** string */ param_1) {
+   return param_1;
+  }))));
+  (yield* this.m_consumeSuspendFunInterface__kotlin_coroutines_Continuation__java_lang_String__suspendfunction_SuspendFunInterface__java_lang_String_$s_($continuation, 'FunInterface', SuspendFunInterface.$adapt(/**  @return {!Generator<*, string>}*/ (function* (/** Continuation<?> */ $continuation_5, /** string */ param_2) {
+   return param_2;
+  }))));
+ }
+ /** @final @nodts @return {!Generator<*, string>} */
+ *m_testSuspendFunctionReference__kotlin_coroutines_Continuation__kotlin_internal_j2cl_SuspendFunction1__java_lang_String_$s_(/** Continuation<?> */ $continuation, /** !SuspendFunction1<?, ?> */ suspendFunction) {
+  return /**@type {string}*/ ($Casts.$to((yield* suspendFunction.m_invoke__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_($continuation, 'FunctionReference')), j_l_String));
+ }
+ /** @final @nodts @return {!Generator<*, string>} */
+ *m_consumeSuspendFunInterface__kotlin_coroutines_Continuation__java_lang_String__suspendfunction_SuspendFunInterface__java_lang_String_$s_(/** Continuation<?> */ $continuation, /** string */ param, /** !SuspendFunInterface */ suspendFunInterface) {
+  return (yield* suspendFunInterface.m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation, param));
+ }
+ /** @final @nodts @return {!Generator<*, !SuspendFunInterface>} */
+ *m_testChainedSuspendFunction__kotlin_coroutines_Continuation__suspendfunction_SuspendFunInterface_$s_(/** Continuation<?> */ $continuation) {
+  return this;
+ }
+ /** @override @nodts @return {!Generator<*, string>} */
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(/** Continuation<?> */ $continuation, /** string */ param) {
+  return param;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Generator<*, string>} */
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_(/** Continuation<?> */ arg0, /** string */ arg1) {
+  return (yield* this.m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(arg0, /**@type {string}*/ ($Casts.$to(arg1, j_l_String))));
+ }
+ /** @nodts */
+ static $clinit() {
+  SuspendFunction.$clinit = () =>{};
+  SuspendFunction.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SuspendFunction;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  SuspendFunction1 = goog.module.get('kotlin.internal.j2cl.SuspendFunction1$impl');
+  GenericSuspendFunInterface = goog.module.get('suspendfunction.GenericSuspendFunInterface$impl');
+  SuspendFunctionKt = goog.module.get('suspendfunction.SuspendFunctionKt$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+SuspendFunInterface.$markImplementor(SuspendFunction);
+$Util.$setClassMetadata(SuspendFunction, 'suspendfunction.SuspendFunction');
+
+exports = SuspendFunction;
+
+//# sourceMappingURL=SuspendFunction.js.map

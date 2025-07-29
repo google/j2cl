@@ -1,0 +1,56 @@
+goog.module('localclasswithoutergenerics.LocalClassWithOuterGenerics$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1Bar = goog.forwardDeclare('localclasswithoutergenerics.LocalClassWithOuterGenerics.Companion.$1Bar$impl');
+let $1Baz = goog.forwardDeclare('localclasswithoutergenerics.LocalClassWithOuterGenerics.Companion.$1Baz$impl');
+
+/**
+ * @final
+ * @template A
+ */
+class LocalClassWithOuterGenerics extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template A @return {!LocalClassWithOuterGenerics<A>} */
+ static $create__() {
+  LocalClassWithOuterGenerics.$clinit();
+  let $instance = new LocalClassWithOuterGenerics();
+  $instance.$ctor__localclasswithoutergenerics_LocalClassWithOuterGenerics__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclasswithoutergenerics_LocalClassWithOuterGenerics__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T */
+ static m_foo__void() {
+  LocalClassWithOuterGenerics.$clinit();
+  let bar = /**@type {!$1Bar<T>}*/ ($1Bar.$create__());
+  let baz = /**@type {!$1Baz<!*, T>}*/ ($1Baz.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalClassWithOuterGenerics.$clinit = () =>{};
+  LocalClassWithOuterGenerics.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalClassWithOuterGenerics;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1Bar = goog.module.get('localclasswithoutergenerics.LocalClassWithOuterGenerics.Companion.$1Bar$impl');
+  $1Baz = goog.module.get('localclasswithoutergenerics.LocalClassWithOuterGenerics.Companion.$1Baz$impl');
+ }
+}
+$Util.$setClassMetadata(LocalClassWithOuterGenerics, 'localclasswithoutergenerics.LocalClassWithOuterGenerics');
+
+exports = LocalClassWithOuterGenerics;
+
+//# sourceMappingURL=LocalClassWithOuterGenerics.js.map

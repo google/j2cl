@@ -1,0 +1,72 @@
+goog.module('objectclass.C$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const OpenClass = goog.require('objectclass.OpenClass$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+/**
+ * @final
+ */
+class C extends OpenClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!C} */
+ static $create__() {
+  let $instance = new C();
+  $instance.$ctor__objectclass_C__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objectclass_C__void() {
+  this.$ctor__objectclass_OpenClass__void();
+ }
+ /** @override @nodts @return {string} */
+ m_getAbstractProp__java_lang_String() {
+  return '' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(C.f_abstractProp__objectclass_C_) + 'trailer';
+ }
+ /** @override @nodts */
+ m_setAbstractProp__java_lang_String__void(/** string */ value) {
+  C.f_abstractProp__objectclass_C_ = '' + 'header' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(value);
+ }
+ /** @final @nodts @return {number} */
+ m_add__int__int(/** number */ i) {
+  return i + 1 | 0;
+ }
+ /** @override @nodts @return {string} */
+ m_abstractFn__java_lang_String() {
+  return 'overridden';
+ }
+ /** @nodts @return {!C} */
+ static get f_INSTANCE__objectclass_C() {
+  return (C.$clinit(), C.$static_INSTANCE__objectclass_C);
+ }
+ /** @nodts */
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  OpenClass.$clinit();
+  C.$static_INSTANCE__objectclass_C = C.$create__();
+  C.f_abstractProp__objectclass_C_ = '';
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+/**@private {!C} @nodts*/
+C.$static_INSTANCE__objectclass_C;
+/**@type {string} @nodts*/
+C.f_abstractProp__objectclass_C_;
+$Util.$setClassMetadata(C, 'objectclass.C');
+
+exports = C;
+
+//# sourceMappingURL=C.js.map

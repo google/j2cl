@@ -1,0 +1,70 @@
+goog.module('statementasexpressions.ClassWithInitializer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ */
+class ClassWithInitializer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_field__statementasexpressions_ClassWithInitializer_ = 0;
+ }
+ /** @nodts @return {!ClassWithInitializer} */
+ static $create__() {
+  ClassWithInitializer.$clinit();
+  let $instance = new ClassWithInitializer();
+  $instance.$ctor__statementasexpressions_ClassWithInitializer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__statementasexpressions_ClassWithInitializer__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_field__statementasexpressions_ClassWithInitializer_ = 1;
+  let tmp0_subject = 49 /* '1' */;
+  let /** number */ tmp;
+  if (tmp0_subject == 48 /* '0' */ || tmp0_subject == 49 /* '1' */) {
+   tmp = 1;
+  } else if (tmp0_subject == 50 /* '2' */) {
+   throw $Exceptions.toJs(AssertionError.$create__());
+  } else {
+   tmp = 3;
+  }
+  this.m_setField__int__void(tmp);
+ }
+ /** @final @nodts @return {number} */
+ m_getField__int() {
+  return this.f_field__statementasexpressions_ClassWithInitializer_;
+ }
+ /** @final @nodts */
+ m_setField__int__void(/** number */ set__) {
+  this.f_field__statementasexpressions_ClassWithInitializer_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassWithInitializer.$clinit = () =>{};
+  ClassWithInitializer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassWithInitializer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AssertionError = goog.module.get('java.lang.AssertionError$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(ClassWithInitializer, 'statementasexpressions.ClassWithInitializer');
+
+exports = ClassWithInitializer;
+
+//# sourceMappingURL=ClassWithInitializer.js.map

@@ -1,0 +1,81 @@
+goog.module('nullsafetyoperators.NullSafetyOperatorsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let MyClass = goog.forwardDeclare('nullsafetyoperators.MyClass$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class NullSafetyOperatorsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NullSafetyOperatorsKt} */
+ static $create__() {
+  NullSafetyOperatorsKt.$clinit();
+  let $instance = new NullSafetyOperatorsKt();
+  $instance.$ctor__nullsafetyoperators_NullSafetyOperatorsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullsafetyoperators_NullSafetyOperatorsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  NullSafetyOperatorsKt.$clinit();
+  let a = MyClass.$create__int(1);
+  let tmp0_safe_receiver = a;
+  let b = $Equality.$same(tmp0_safe_receiver, null) ? null : Integer.m_valueOf__int__java_lang_Integer(tmp0_safe_receiver.m_getField__int());
+  let c = a.m_getField__int();
+  a = null;
+  let tmp1_elvis_lhs = a;
+  let d = $Equality.$same(tmp1_elvis_lhs, null) ? MyClass.$create__int(2) : /**@type {?}*/ (tmp1_elvis_lhs);
+  let /** MyClass */ e = null;
+  let tmp2_safe_receiver = e;
+  let tmp3_elvis_lhs = $Equality.$same(tmp2_safe_receiver, null) ? null : Integer.m_valueOf__int__java_lang_Integer(tmp2_safe_receiver.m_getField__int());
+  let f = $Equality.$same(tmp3_elvis_lhs, null) ? d.m_getField__int() : tmp3_elvis_lhs.m_intValue__int();
+  let /** (Number|number) */ g = null;
+  let tmp4_safe_receiver = g;
+  let h = $Equality.$same(tmp4_safe_receiver, null) ? null : Integer.m_valueOf__int__java_lang_Integer($Numbers.m_intValue__java_lang_Number__int(tmp4_safe_receiver));
+  let i = 1;
+  let tmp5_elvis_lhs = 1;
+  let j = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(Integer.m_valueOf__int__java_lang_Integer(tmp5_elvis_lhs), null) ? 2 : tmp5_elvis_lhs;
+  let tmp6_safe_receiver = 1;
+  let k = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(Integer.m_valueOf__int__java_lang_Integer(tmp6_safe_receiver), null) ? null : Integer.m_valueOf__int__java_lang_Integer($Objects.m_hashCode__java_lang_Object__int(Integer.m_valueOf__int__java_lang_Integer(tmp6_safe_receiver)));
+ }
+ /** @nodts */
+ static $clinit() {
+  NullSafetyOperatorsKt.$clinit = () =>{};
+  NullSafetyOperatorsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NullSafetyOperatorsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  MyClass = goog.module.get('nullsafetyoperators.MyClass$impl');
+  $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(NullSafetyOperatorsKt, 'nullsafetyoperators.NullSafetyOperatorsKt');
+
+exports = NullSafetyOperatorsKt;
+
+//# sourceMappingURL=NullSafetyOperatorsKt.js.map

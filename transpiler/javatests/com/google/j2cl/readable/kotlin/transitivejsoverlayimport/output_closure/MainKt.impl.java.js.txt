@@ -1,0 +1,75 @@
+goog.module('transitivejsoverlayimport.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Immediate_$Overlay = goog.forwardDeclare('transitivejsoverlayimport.Immediate.$Overlay$impl');
+let NonNativeLower = goog.forwardDeclare('transitivejsoverlayimport.NonNativeLower$impl');
+let NonNativeUpper = goog.forwardDeclare('transitivejsoverlayimport.NonNativeUpper$impl');
+let $Overlay = goog.forwardDeclare('transitivejsoverlayimport.Transitive.$Overlay$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__transitivejsoverlayimport_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__transitivejsoverlayimport_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  MainKt.$clinit();
+  let transitive = new Object();
+  $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(transitive, 'arg1');
+  transitive.constructor;
+  let immediate = new Object();
+  $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(immediate, 'arg1');
+  immediate.constructor;
+  Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(immediate);
+  let nonNativeUpper = new NonNativeUpper();
+  $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(nonNativeUpper, 'arg1');
+  nonNativeUpper.constructor;
+  Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(nonNativeUpper);
+  nonNativeUpper.m_doNonNativeUpperInstanceMethod__void();
+  let nonNativeLower = new NonNativeLower();
+  $Overlay.m_doTransitiveInstanceMethod__$devirt__transitivejsoverlayimport_Transitive__java_lang_String__void(nonNativeLower, 'arg1');
+  nonNativeLower.constructor;
+  Immediate_$Overlay.m_doImmediateInstanceMethod__$devirt__transitivejsoverlayimport_Immediate__void(nonNativeLower);
+  nonNativeLower.m_doNonNativeUpperInstanceMethod__void();
+  nonNativeLower.m_doNonNativeLowerInstanceMethod__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Immediate_$Overlay = goog.module.get('transitivejsoverlayimport.Immediate.$Overlay$impl');
+  NonNativeLower = goog.module.get('transitivejsoverlayimport.NonNativeLower$impl');
+  NonNativeUpper = goog.module.get('transitivejsoverlayimport.NonNativeUpper$impl');
+  $Overlay = goog.module.get('transitivejsoverlayimport.Transitive.$Overlay$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'transitivejsoverlayimport.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

@@ -1,0 +1,46 @@
+goog.module('primitivespecialization.Overloads$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+class Overloads extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Overloads} */
+ static $create__() {
+  Overloads.$clinit();
+  let $instance = new Overloads();
+  $instance.$ctor__primitivespecialization_Overloads__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_Overloads__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_set__int__void(/** number */ i) {}
+ /** @nodts */
+ m_set__java_lang_Integer__void(/** Integer */ i) {}
+ /** @nodts */
+ static $clinit() {
+  Overloads.$clinit = () =>{};
+  Overloads.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Overloads;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Overloads, 'primitivespecialization.Overloads');
+
+exports = Overloads;
+
+//# sourceMappingURL=Overloads.js.map

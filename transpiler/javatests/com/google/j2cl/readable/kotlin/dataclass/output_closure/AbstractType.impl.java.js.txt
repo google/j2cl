@@ -1,0 +1,51 @@
+goog.module('dataclass.AbstractType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AbstractType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_d__dataclass_AbstractType_ = 0;
+ }
+ /** @nodts */
+ $ctor__dataclass_AbstractType__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_d__dataclass_AbstractType_ = 4;
+ }
+ /** @abstract @nodts @return {number} */
+ m_getA__int() {}
+ /** @abstract @nodts @return {number} */
+ m_getC__int() {}
+ /** @final @nodts @return {number} */
+ m_getD__int() {
+  return this.f_d__dataclass_AbstractType_;
+ }
+ /** @final @nodts */
+ m_doSomething__void() {}
+ /** @abstract @nodts */
+ m_oneOtherThing__void() {}
+ /** @nodts */
+ static $clinit() {
+  AbstractType.$clinit = () =>{};
+  AbstractType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractType, 'dataclass.AbstractType');
+
+exports = AbstractType;
+
+//# sourceMappingURL=AbstractType.js.map

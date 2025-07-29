@@ -1,0 +1,62 @@
+goog.module('localfunction.ParametrizedClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class ParametrizedClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_classT__localfunction_ParametrizedClass_;
+ }
+ /** @nodts @template T @return {!ParametrizedClass<T>} */
+ static $create__java_lang_Object(/** T */ classT) {
+  ParametrizedClass.$clinit();
+  let $instance = new ParametrizedClass();
+  $instance.$ctor__localfunction_ParametrizedClass__java_lang_Object__void(classT);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localfunction_ParametrizedClass__java_lang_Object__void(/** T */ classT) {
+  this.$ctor__java_lang_Object__void();
+  this.f_classT__localfunction_ParametrizedClass_ = classT;
+ }
+ /** @final @nodts @return {T} */
+ m_getClassT__java_lang_Object() {
+  return this.f_classT__localfunction_ParametrizedClass_;
+ }
+ /** @final @nodts @template S @return {string} */
+ m_outerfunction__java_lang_Object__java_lang_String(/** S */ s) {
+  let localFunction = /**  @template U @return {string}*/ ((/** U */ u, /** T */ t) =>{
+   return j_l_String.m_valueOf__java_lang_Object__java_lang_String(j_l_String.m_valueOf__java_lang_Object__java_lang_String(s)) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(j_l_String.m_valueOf__java_lang_Object__java_lang_String(u)) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(j_l_String.m_valueOf__java_lang_Object__java_lang_String(t)) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.m_getClassT__java_lang_Object()));
+  });
+  return localFunction(this.m_getClassT__java_lang_Object(), this.m_getClassT__java_lang_Object());
+ }
+ /** @nodts */
+ static $clinit() {
+  ParametrizedClass.$clinit = () =>{};
+  ParametrizedClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParametrizedClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(ParametrizedClass, 'localfunction.ParametrizedClass');
+
+exports = ParametrizedClass;
+
+//# sourceMappingURL=ParametrizedClass.js.map

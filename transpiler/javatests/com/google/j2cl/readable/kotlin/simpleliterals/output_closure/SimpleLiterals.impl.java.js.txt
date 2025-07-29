@@ -1,0 +1,82 @@
+goog.module('simpleliterals.SimpleLiterals$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let ReflectionFactory = goog.forwardDeclare('kotlin.jvm.internal.ReflectionFactory$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+
+/**
+ * @final
+ */
+class SimpleLiterals extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SimpleLiterals} */
+ static $create__() {
+  SimpleLiterals.$clinit();
+  let $instance = new SimpleLiterals();
+  $instance.$ctor__simpleliterals_SimpleLiterals__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__simpleliterals_SimpleLiterals__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_main__void() {
+  let bool = false;
+  let ch = 97 /* 'a' */;
+  let b = 127;
+  let nb = -128;
+  let s = 32767;
+  let ns = -32768;
+  let i = 101;
+  let ni = -101;
+  let l = $Long.fromInt(101);
+  let nl = $LongUtils.negate($Long.fromInt(101));
+  let f = 101;
+  let nf = - 101;
+  let zf = 0;
+  let nzf = - 0;
+  let d = 101;
+  let nd = - 101;
+  let zd = 0;
+  let nzd = - 0;
+  let /** * */ o = null;
+  let str = 'foo';
+  let c = ReflectionFactory.m_createKClass__java_lang_Class__kotlin_reflect_KClass(Class.$get(SimpleLiterals));
+  let zeroF = 0;
+  let minusZeroF = - 0;
+  let zeroD = 0;
+  let minusZeroD = - 0;
+  let minusMinusZeroD = - - 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  SimpleLiterals.$clinit = () =>{};
+  SimpleLiterals.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SimpleLiterals;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Class = goog.module.get('java.lang.Class$impl');
+  ReflectionFactory = goog.module.get('kotlin.jvm.internal.ReflectionFactory$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+ }
+}
+$Util.$setClassMetadata(SimpleLiterals, 'simpleliterals.SimpleLiterals');
+
+exports = SimpleLiterals;
+
+//# sourceMappingURL=SimpleLiterals.js.map

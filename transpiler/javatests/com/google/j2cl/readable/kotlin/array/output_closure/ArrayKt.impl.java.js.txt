@@ -1,0 +1,72 @@
+goog.module('array.ArrayKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+/**
+ * @final
+ */
+class ArrayKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ArrayKt} */
+ static $create__() {
+  ArrayKt.$clinit();
+  let $instance = new ArrayKt();
+  $instance.$ctor__array_ArrayKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__array_ArrayKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template C @return {number} */
+ static m_getLength__arrayOf_java_lang_Object__int(/** C */ anArray) {
+  ArrayKt.$clinit();
+  let i = anArray[0];
+  return anArray.length;
+ }
+ /** @nodts @return {number} */
+ static m_toNonNullable__java_lang_Integer__int(/** Integer */ x) {
+  ArrayKt.$clinit();
+  return x.m_intValue__int();
+ }
+ /** @nodts @return {number} */
+ static m_doubleIt__int__int(/** number */ x) {
+  ArrayKt.$clinit();
+  return Math.imul(x, 2);
+ }
+ /** @nodts @return {number} */
+ static m_acceptsVararg__arrayOf_int__int(/** !Array<number> */ x) {
+  ArrayKt.$clinit();
+  return Math.imul(x[0], 2);
+ }
+ /** @nodts @return {number} */
+ static m_tailingVararg__int__arrayOf_int__int(/** number */ x, /** !Array<number> */ rest) {
+  ArrayKt.$clinit();
+  return Math.imul(x, 2);
+ }
+ /** @nodts */
+ static $clinit() {
+  ArrayKt.$clinit = () =>{};
+  ArrayKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ArrayKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ArrayKt, 'array.ArrayKt');
+
+exports = ArrayKt;
+
+//# sourceMappingURL=ArrayKt.js.map

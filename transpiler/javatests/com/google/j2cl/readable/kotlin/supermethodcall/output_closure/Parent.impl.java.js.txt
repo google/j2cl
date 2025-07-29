@@ -1,0 +1,59 @@
+goog.module('supermethodcall.Parent$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const GrandParent = goog.require('supermethodcall.GrandParent$impl');
+const ParentInterface = goog.require('supermethodcall.ParentInterface$impl');
+
+/**
+ * @implements {ParentInterface}
+ */
+class Parent extends GrandParent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Parent} */
+ static $create__() {
+  Parent.$clinit();
+  let $instance = new Parent();
+  $instance.$ctor__supermethodcall_Parent__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__supermethodcall_Parent__void() {
+  this.$ctor__supermethodcall_GrandParent__void();
+ }
+ /** @nodts */
+ m_parentSimplest__void() {}
+ /** @nodts */
+ m_parentWithParams__int__void(/** number */ foo) {}
+ /** @nodts @return {*} */
+ m_parentWithChangingReturn__java_lang_Object() {
+  return null;
+ }
+ /** @override @nodts */
+ m_defaultParent__void() {
+  super.m_defaultParent__void();
+  ParentInterface.m_defaultParent__$default__supermethodcall_ParentInterface__void(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  Parent.$clinit = () =>{};
+  Parent.$loadModules();
+  GrandParent.$clinit();
+  ParentInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Parent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ParentInterface.$markImplementor(Parent);
+$Util.$setClassMetadata(Parent, 'supermethodcall.Parent');
+
+exports = Parent;
+
+//# sourceMappingURL=Parent.js.map

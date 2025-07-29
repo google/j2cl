@@ -1,0 +1,69 @@
+goog.module('anonymousclass.AnonymousClassKt.$2$impl');
+
+const Iterable = goog.require('java.lang.Iterable$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('anonymousclass.AnonymousClassKt.$2.$1$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+
+/**
+ * @final
+ * @template S
+ * @implements {Iterable<S>}
+ */
+class $2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template S @return {!$2<S>} */
+ static $create__() {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__anonymousclass_AnonymousClassKt_2__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_AnonymousClassKt_2__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {
+  return /**@type {!$1<S>}*/ ($1.$create__anonymousclass_AnonymousClassKt_2(this));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ arg0) {
+  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {!Spliterator<S>} */
+ m_spliterator__java_util_Spliterator() {
+  return /**@type {!Spliterator<S>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+  Iterable.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('anonymousclass.AnonymousClassKt.$2.$1$impl');
+ }
+}
+Iterable.$markImplementor($2);
+$Util.$setClassMetadata($2, 'anonymousclass.AnonymousClassKt$2');
+
+exports = $2;
+
+//# sourceMappingURL=AnonymousClassKt$2.js.map

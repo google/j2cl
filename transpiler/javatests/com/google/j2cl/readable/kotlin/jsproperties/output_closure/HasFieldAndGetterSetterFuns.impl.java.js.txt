@@ -1,0 +1,53 @@
+goog.module('jsproperties.HasFieldAndGetterSetterFuns$impl');
+
+const ValueHolder = goog.require('jsproperties.ValueHolder$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+
+/**
+ * @final
+ */
+class HasFieldAndGetterSetterFuns extends ValueHolder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!HasFieldAndGetterSetterFuns} */
+ static $create__() {
+  HasFieldAndGetterSetterFuns.$clinit();
+  let $instance = new HasFieldAndGetterSetterFuns();
+  $instance.$ctor__jsproperties_HasFieldAndGetterSetterFuns__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_HasFieldAndGetterSetterFuns__void() {
+  this.$ctor__jsproperties_ValueHolder__void();
+ }
+ /** @final @nodts @return {*} */
+ m_getValue__java_lang_Object() {
+  return j_l_Object.$create__();
+ }
+ /** @final @nodts */
+ m_setValue__java_lang_Object__void(/** * */ v) {}
+ /** @nodts */
+ static $clinit() {
+  HasFieldAndGetterSetterFuns.$clinit = () =>{};
+  HasFieldAndGetterSetterFuns.$loadModules();
+  ValueHolder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof HasFieldAndGetterSetterFuns;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+ }
+}
+$Util.$setClassMetadata(HasFieldAndGetterSetterFuns, 'jsproperties.HasFieldAndGetterSetterFuns');
+
+exports = HasFieldAndGetterSetterFuns;
+
+//# sourceMappingURL=HasFieldAndGetterSetterFuns.js.map

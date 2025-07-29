@@ -1,0 +1,52 @@
+goog.module('bridgemethods.TestCase102.B$impl');
+
+const BI1 = goog.require('bridgemethods.TestCase102.BI1$impl');
+const BI2 = goog.require('bridgemethods.TestCase102.BI2$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template B1
+ * @implements {BI1}
+ * @implements {BI2}
+ */
+class B extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__bridgemethods_TestCase102_B__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @nodts */
+ m_set__java_lang_Object__void(/** B1 */ value) {}
+ //Bridge method.
+ /** @override @suppress{visibility} */
+ set(/** ?string */ arg0) {
+  this.m_set__java_lang_String__void(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ /** @abstract @override @nodts @suppress{visibility} */
+ m_set__java_lang_String__void(/** ?string */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+BI1.$markImplementor(B);
+BI2.$markImplementor(B);
+$Util.$setClassMetadata(B, 'bridgemethods.TestCase102$B');
+
+exports = B;
+
+//# sourceMappingURL=TestCase102$B.js.map

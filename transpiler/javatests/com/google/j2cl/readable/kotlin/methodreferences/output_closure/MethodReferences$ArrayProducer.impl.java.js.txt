@@ -1,0 +1,42 @@
+goog.module('methodreferences.MethodReferences.ArrayProducer$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.ArrayProducer.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class ArrayProducer {
+ /** @abstract @nodts @return {!Array<number>} */
+ m_produce__int__arrayOf_int(/** number */ size) {}
+ /** @nodts @return {!ArrayProducer} */
+ static $adapt(/** ?function(number):!Array<number> */ fn) {
+  ArrayProducer.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  ArrayProducer.$clinit = () =>{};
+  ArrayProducer.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__methodreferences_MethodReferences_ArrayProducer = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__methodreferences_MethodReferences_ArrayProducer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('methodreferences.MethodReferences.ArrayProducer.$LambdaAdaptor$impl');
+ }
+}
+ArrayProducer.$markImplementor(/**@type {Function}*/ (ArrayProducer));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (ArrayProducer), 'methodreferences.MethodReferences$ArrayProducer');
+
+exports = ArrayProducer;
+
+//# sourceMappingURL=MethodReferences$ArrayProducer.js.map

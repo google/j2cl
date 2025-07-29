@@ -1,0 +1,56 @@
+goog.module('jsinnerclass.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Outer = goog.forwardDeclare('jsinnerclass.Main.Outer$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__jsinnerclass_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsinnerclass_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__arrayOf_java_lang_String__void(/** !Array<string> */ args) {
+  MainKt.$clinit();
+  let tmp0_value = Outer.$create__().m_method__int() == 5;
+  let value = tmp0_value;
+  $Asserts.$assertWithMessage(value, 'Assertion failed');
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Outer = goog.module.get('jsinnerclass.Main.Outer$impl');
+  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'jsinnerclass.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

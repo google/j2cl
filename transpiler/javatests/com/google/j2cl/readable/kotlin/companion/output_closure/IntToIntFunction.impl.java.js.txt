@@ -1,0 +1,42 @@
+goog.module('companion.IntToIntFunction$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('companion.IntToIntFunction.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class IntToIntFunction {
+ /** @abstract @nodts @return {number} */
+ m_apply__int__int(/** number */ i) {}
+ /** @nodts @return {!IntToIntFunction} */
+ static $adapt(/** ?function(number):number */ fn) {
+  IntToIntFunction.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  IntToIntFunction.$clinit = () =>{};
+  IntToIntFunction.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__companion_IntToIntFunction = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__companion_IntToIntFunction;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('companion.IntToIntFunction.$LambdaAdaptor$impl');
+ }
+}
+IntToIntFunction.$markImplementor(/**@type {Function}*/ (IntToIntFunction));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (IntToIntFunction), 'companion.IntToIntFunction');
+
+exports = IntToIntFunction;
+
+//# sourceMappingURL=IntToIntFunction.js.map

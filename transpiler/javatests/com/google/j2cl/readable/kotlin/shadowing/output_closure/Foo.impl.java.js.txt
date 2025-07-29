@@ -1,0 +1,64 @@
+goog.module('shadowing.Foo$impl');
+
+const AbstractCollection = goog.require('kotlin.collections.AbstractCollection$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template T
+ * @extends {AbstractCollection<T>}
+ */
+class Foo extends AbstractCollection {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_size__shadowing_Foo_ = 0;
+ }
+ /** @nodts @template T @return {!Foo<T>} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__shadowing_Foo__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__shadowing_Foo__void() {
+  this.$ctor__kotlin_collections_AbstractCollection__void();
+ }
+ /** @override @nodts @return {number} */
+ m_getSize__int() {
+  return this.f_size__shadowing_Foo_;
+ }
+ /** @override @nodts @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @final @nodts */
+ m_add$shadowing_Foo_add__java_lang_Object__void(/** T */ value) {}
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  AbstractCollection.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(Foo, 'shadowing.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

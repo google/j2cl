@@ -1,0 +1,52 @@
+goog.module('superfieldaccess.Child.Inner$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Parent = goog.require('superfieldaccess.Parent$impl');
+
+let Child = goog.forwardDeclare('superfieldaccess.Child$impl');
+
+/**
+ * @final
+ */
+class Inner extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Child} @nodts*/
+  this.$outer_this__superfieldaccess_Child_Inner;
+ }
+ /** @nodts @return {!Inner} */
+ static $create__superfieldaccess_Child(/** !Child */ $outer_this) {
+  Inner.$clinit();
+  let $instance = new Inner();
+  $instance.$ctor__superfieldaccess_Child_Inner__superfieldaccess_Child__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__superfieldaccess_Child_Inner__superfieldaccess_Child__void(/** !Child */ $outer_this) {
+  this.$outer_this__superfieldaccess_Child_Inner = $outer_this;
+  this.$ctor__superfieldaccess_Parent__java_lang_String__void('Inner');
+ }
+ /** @final @nodts @return {string} */
+ m_getOuterParentName__java_lang_String() {
+  return Parent.prototype.m_getName__java_lang_String.call(this.$outer_this__superfieldaccess_Child_Inner);
+ }
+ /** @nodts */
+ static $clinit() {
+  Inner.$clinit = () =>{};
+  Inner.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Inner;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Inner, 'superfieldaccess.Child$Inner');
+
+exports = Inner;
+
+//# sourceMappingURL=Child$Inner.js.map

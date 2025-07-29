@@ -1,0 +1,51 @@
+goog.module('staticinitializers.StaticInitializers$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let StaticInitializersKt = goog.forwardDeclare('staticinitializers.StaticInitializersKt$impl');
+
+/**
+ * @final
+ */
+class StaticInitializers extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StaticInitializers} */
+ static $create__() {
+  StaticInitializers.$clinit();
+  let $instance = new StaticInitializers();
+  $instance.$ctor__staticinitializers_StaticInitializers__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticinitializers_StaticInitializers__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  StaticInitializers.$clinit = () =>{};
+  StaticInitializers.$loadModules();
+  j_l_Object.$clinit();
+  StaticInitializersKt.m_setA__int__void(10);
+  StaticInitializersKt.m_setC__int__void(StaticInitializersKt.m_getA__int() + StaticInitializersKt.m_getB__int() | 0);
+  let duplicated = StaticInitializersKt.m_getC__int();
+  let duplicated_1 = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticInitializers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  StaticInitializersKt = goog.module.get('staticinitializers.StaticInitializersKt$impl');
+ }
+}
+$Util.$setClassMetadata(StaticInitializers, 'staticinitializers.StaticInitializers');
+
+exports = StaticInitializers;
+
+//# sourceMappingURL=StaticInitializers.js.map

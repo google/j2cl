@@ -1,0 +1,41 @@
+goog.module('nobridgemethods.Map$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Entry = goog.forwardDeclare('nobridgemethods.Entry$impl');
+
+/**
+ * @abstract
+ * @template K
+ */
+class Map extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__nobridgemethods_Map__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @nodts @return {Entry<K>} */
+ m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry(/** K */ key) {}
+ /** @nodts */
+ static $clinit() {
+  Map.$clinit = () =>{};
+  Map.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Map;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Map, 'nobridgemethods.Map');
+
+exports = Map;
+
+//# sourceMappingURL=Map.js.map

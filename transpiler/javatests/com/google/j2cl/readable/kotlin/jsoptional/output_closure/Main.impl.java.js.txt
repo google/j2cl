@@ -1,0 +1,73 @@
+goog.module('jsoptional.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @final
+ */
+class Main extends j_l_Object {
+ 
+ constructor(/** ?string= */ a) {
+  Main.$clinit();
+  super();
+  /**@type {function(?string=, ...*):*} @nodts*/
+  this.f_f__jsoptional_Main_;
+  this.$ctor__jsoptional_Main__java_lang_String__void(a);
+ }
+ /** @nodts */
+ $ctor__jsoptional_Main__java_lang_String__void(/** ?string */ a) {
+  this.$ctor__java_lang_Object__void();
+  this.f_f__jsoptional_Main_ = /**  @return {*}*/ ((/** ?string= */ s, .../** ...* */ unused_var) =>{
+   return s;
+  });
+ }
+ /** @final */
+ method1(/** Integer */ i1, /** ?number= */ d, /** Integer= */ i) {}
+ /** @final */
+ method2(/** ?string */ s1, /** ?number= */ d, .../** ...?boolean */ i) {
+  $Arrays.$stampType(i, Boolean);
+ }
+ /** @final @nodts @return {function(?string=, ...*):*} */
+ m_getF__jsoptional_Main_Function() {
+  return this.f_f__jsoptional_Main_;
+ }
+ /** @final @nodts */
+ m_testFunction__jsoptional_Main_Function__void(/** ?function(?string=, ...*):* */ f) {}
+ /** @final */
+ testOptionalFunction(/** ?function(?string=, ...*):*= */ f) {}
+ 
+ static staticMethod1(/** Integer */ i1, /** ?number= */ d, /** Integer= */ i) {
+  Main.$clinit();
+ }
+ 
+ static staticMethod2(/** ?string */ s1, /** ?number= */ d, .../** ...?boolean */ i) {
+  Main.$clinit();
+  $Arrays.$stampType(i, Boolean);
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(Main, 'jsoptional.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

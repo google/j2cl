@@ -1,0 +1,77 @@
+goog.module('staticfieldaccesslevels.StaticFieldAccessLevels.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let StaticFieldAccessLevels = goog.forwardDeclare('staticfieldaccesslevels.StaticFieldAccessLevels$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__staticfieldaccesslevels_StaticFieldAccessLevels_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticfieldaccesslevels_StaticFieldAccessLevels_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getD__int() {
+  return StaticFieldAccessLevels.m_getD__int();
+ }
+ /** @final @nodts */
+ m_setD__int__void(/** number */ arg0) {
+  StaticFieldAccessLevels.m_setD__int__void(arg0);
+ }
+ /** @final @nodts @return {*} */
+ m_getF__java_lang_Object() {
+  return StaticFieldAccessLevels.m_getF__java_lang_Object();
+ }
+ /** @final @nodts */
+ m_setF__java_lang_Object__void(/** * */ arg0) {
+  StaticFieldAccessLevels.m_setF__java_lang_Object__void(arg0);
+ }
+ /** @final @nodts @return {number} */
+ m_getG__int() {
+  return StaticFieldAccessLevels.m_getG__int();
+ }
+ /** @final @nodts */
+ m_setG__int__void(/** number */ arg0) {
+  StaticFieldAccessLevels.m_setG__int__void(arg0);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__staticfieldaccesslevels_StaticFieldAccessLevels_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__staticfieldaccesslevels_StaticFieldAccessLevels_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__staticfieldaccesslevels_StaticFieldAccessLevels_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  StaticFieldAccessLevels = goog.module.get('staticfieldaccesslevels.StaticFieldAccessLevels$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__staticfieldaccesslevels_StaticFieldAccessLevels_Companion;
+$Util.$setClassMetadata(Companion, 'staticfieldaccesslevels.StaticFieldAccessLevels$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=StaticFieldAccessLevels$Companion.js.map

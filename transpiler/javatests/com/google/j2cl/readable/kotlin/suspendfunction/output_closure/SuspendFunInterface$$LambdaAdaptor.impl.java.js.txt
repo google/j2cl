@@ -1,0 +1,60 @@
+goog.module('suspendfunction.SuspendFunInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SuspendFunInterface = goog.require('suspendfunction.SuspendFunInterface$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {SuspendFunInterface}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(Continuation<?>, string):!Generator<*, string> */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(Continuation<?>, string):!Generator<*, string>} @nodts*/
+  this.f_fn__suspendfunction_SuspendFunInterface_$LambdaAdaptor;
+  this.$ctor__suspendfunction_SuspendFunInterface_$LambdaAdaptor__suspendfunction_SuspendFunInterface_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__suspendfunction_SuspendFunInterface_$LambdaAdaptor__suspendfunction_SuspendFunInterface_$JsFunction__void(/** ?function(Continuation<?>, string):!Generator<*, string> */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__suspendfunction_SuspendFunInterface_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {!Generator<*, string>} */
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(/** Continuation<?> */ arg0, /** string */ arg1) {
+  let /** ?function(Continuation<?>, string):!Generator<*, string> */ $function;
+  return ($function = this.f_fn__suspendfunction_SuspendFunInterface_$LambdaAdaptor, (yield* $function(arg0, arg1)));
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {!Generator<*, string>} */
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_(/** Continuation<?> */ arg0, /** string */ arg1) {
+  return (yield* this.m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(arg0, /**@type {string}*/ ($Casts.$to(arg1, j_l_String))));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+SuspendFunInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'suspendfunction.SuspendFunInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=SuspendFunInterface$$LambdaAdaptor.js.map

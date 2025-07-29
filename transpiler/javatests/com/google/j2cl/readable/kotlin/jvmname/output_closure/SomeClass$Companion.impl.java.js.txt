@@ -1,0 +1,57 @@
+goog.module('jvmname.SomeClass.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SomeClass = goog.forwardDeclare('jvmname.SomeClass$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__jvmname_SomeClass_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmname_SomeClass_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_h__void() {
+  SomeClass.m_h__void();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jvmname_SomeClass_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jvmname_SomeClass_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__jvmname_SomeClass_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SomeClass = goog.module.get('jvmname.SomeClass$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__jvmname_SomeClass_Companion;
+$Util.$setClassMetadata(Companion, 'jvmname.SomeClass$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=SomeClass$Companion.js.map

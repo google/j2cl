@@ -1,0 +1,46 @@
+goog.module('jsasync.AsyncInterface$impl');
+
+const BaseInterface = goog.require('jsasync.BaseInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $LambdaAdaptor = goog.forwardDeclare('jsasync.AsyncInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {BaseInterface}
+ */
+class AsyncInterface {
+ /** @abstract @override @nodts @return {!IThenable<!Integer>} */
+ m_asyncCall__jsasync_IThenable() {}
+ /** @nodts @return {!AsyncInterface} */
+ static $adapt(/** ?function():!IThenable<!Integer> */ fn) {
+  AsyncInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  AsyncInterface.$clinit = () =>{};
+  AsyncInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  BaseInterface.$markImplementor(ctor);
+  ctor.prototype.$implements__jsasync_AsyncInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsasync_AsyncInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('jsasync.AsyncInterface.$LambdaAdaptor$impl');
+ }
+}
+AsyncInterface.$markImplementor(/**@type {Function}*/ (AsyncInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (AsyncInterface), 'jsasync.AsyncInterface');
+
+exports = AsyncInterface;
+
+//# sourceMappingURL=AsyncInterface.js.map

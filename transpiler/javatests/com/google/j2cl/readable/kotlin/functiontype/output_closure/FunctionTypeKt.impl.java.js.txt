@@ -1,0 +1,115 @@
+goog.module('functiontype.FunctionTypeKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let IntTransformer = goog.forwardDeclare('functiontype.IntTransformer$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let Function2 = goog.forwardDeclare('kotlin.jvm.functions.Function2$impl');
+let Function3 = goog.forwardDeclare('kotlin.jvm.functions.Function3$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class FunctionTypeKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!FunctionTypeKt} */
+ static $create__() {
+  FunctionTypeKt.$clinit();
+  let $instance = new FunctionTypeKt();
+  $instance.$ctor__functiontype_FunctionTypeKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__functiontype_FunctionTypeKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!Function1<?, ?>} */
+ static m_getIntFunction__kotlin_jvm_functions_Function1() {
+  FunctionTypeKt.$clinit();
+  return FunctionTypeKt.f_intFunction__functiontype_FunctionTypeKt_;
+ }
+ /** @nodts @return {!Function2<?, ?, ?>} */
+ static m_getIntIntFunction__kotlin_jvm_functions_Function2() {
+  FunctionTypeKt.$clinit();
+  return FunctionTypeKt.f_intIntFunction__functiontype_FunctionTypeKt_;
+ }
+ /** @nodts @return {number} */
+ static m_funWithFunctionType__kotlin_jvm_functions_Function1__int(/** !Function1<?, ?> */ f) {
+  FunctionTypeKt.$clinit();
+  return (/**@type {!Integer}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(2)), Integer))).m_intValue__int();
+ }
+ /** @nodts @return {number} */
+ static m_funWithNestedFunctionType__kotlin_jvm_functions_Function1__int(/** !Function1<?, ?> */ f) {
+  FunctionTypeKt.$clinit();
+  return (/**@type {!Integer}*/ ($Casts.$to((/**@type {!Function1<*, Integer>}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object(Function0.$adapt(/**  @return {?}*/ (() =>{
+   return Integer.m_valueOf__int__java_lang_Integer(2);
+  }))), /**@type {Function}*/ (Function1)))).m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(2)), Integer))).m_intValue__int();
+ }
+ /** @nodts @return {string} */
+ static m_funWithExtensionFunctionType__kotlin_jvm_functions_Function3__java_lang_String(/** !Function3<?, ?, ?, ?> */ f) {
+  FunctionTypeKt.$clinit();
+  return /**@type {string}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object__java_lang_Object__java_lang_Object('foo', Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2)), j_l_String));
+ }
+ /** @nodts @return {!(Number|number)} */
+ static m_foo__java_lang_Number__java_lang_Number(/** !(Number|number) */ i) {
+  FunctionTypeKt.$clinit();
+  return i;
+ }
+ /** @nodts @return {!Function1<?, ?>} */
+ static m_getFooRef__kotlin_jvm_functions_Function1() {
+  FunctionTypeKt.$clinit();
+  return FunctionTypeKt.f_fooRef__functiontype_FunctionTypeKt_;
+ }
+ /** @nodts */
+ static $clinit() {
+  FunctionTypeKt.$clinit = () =>{};
+  FunctionTypeKt.$loadModules();
+  j_l_Object.$clinit();
+  FunctionTypeKt.f_intFunction__functiontype_FunctionTypeKt_ = IntTransformer.$create__();
+  FunctionTypeKt.f_intIntFunction__functiontype_FunctionTypeKt_ = Function2.$adapt(/**  @return {?}*/ ((/** ? */ p1, /** ? */ p2) =>{
+   let p1_1 = (/**@type {!Integer}*/ ($Casts.$to(p1, Integer))).m_intValue__int();
+   let p2_1 = (/**@type {!Integer}*/ ($Casts.$to(p2, Integer))).m_intValue__int();
+   return Integer.m_valueOf__int__java_lang_Integer(p1_1 + p2_1 | 0);
+  }));
+  FunctionTypeKt.f_fooRef__functiontype_FunctionTypeKt_ = Function1.$adapt(/**  @return {!(Number|number)}*/ ((/** !(Number|number) */ arg0) =>{
+   let arg0_1 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0, Number));
+   return FunctionTypeKt.m_foo__java_lang_Number__java_lang_Number(arg0_1);
+  }));
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FunctionTypeKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  IntTransformer = goog.module.get('functiontype.IntTransformer$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Number = goog.module.get('java.lang.Number$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  Function2 = goog.module.get('kotlin.jvm.functions.Function2$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+/**@type {!Function1<?, ?>} @nodts*/
+FunctionTypeKt.f_intFunction__functiontype_FunctionTypeKt_;
+/**@type {!Function2<?, ?, ?>} @nodts*/
+FunctionTypeKt.f_intIntFunction__functiontype_FunctionTypeKt_;
+/**@type {!Function1<?, ?>} @nodts*/
+FunctionTypeKt.f_fooRef__functiontype_FunctionTypeKt_;
+$Util.$setClassMetadata(FunctionTypeKt, 'functiontype.FunctionTypeKt');
+
+exports = FunctionTypeKt;
+
+//# sourceMappingURL=FunctionTypeKt.js.map

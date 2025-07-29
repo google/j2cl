@@ -1,0 +1,83 @@
+goog.module('annotation.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClassImplementingAnnotation = goog.forwardDeclare('annotation.ClassImplementingAnnotation$impl');
+let Foo = goog.forwardDeclare('annotation.Foo$impl');
+let InterfaceExtendingAnnotation = goog.forwardDeclare('annotation.InterfaceExtendingAnnotation$impl');
+let Annotation = goog.forwardDeclare('java.lang.annotation.Annotation$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__annotation_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__annotation_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_test__annotation_Foo__void(/** !Foo */ foo) {
+  MainKt.$clinit();
+  let booleanConstant = false;
+  let intConstant = 123;
+  let stringConstant = 'foo';
+  let annotationType = (/**@type {!Annotation}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(foo))).m_annotationType__java_lang_Class();
+  let booleanValue = foo.m_booleanValue__boolean();
+  let intValue = foo.m_intValue__int();
+  let stringValue = foo.m_stringValue__java_lang_String();
+  let classValue = foo.m_classValue__java_lang_Class();
+  let stringClassValue = foo.m_stringClassValue__java_lang_Class();
+  let wildcardClassValue = foo.m_wildcardClassValue__java_lang_Class();
+  let enumValue = foo.m_enumValue__annotation_SomeEnum();
+  let annotationValue = foo.m_annotationValue__annotation_Zoo();
+  let booleanArray = foo.m_booleanArray__arrayOf_boolean();
+  let intArray = foo.m_intArray__arrayOf_int();
+  let stringArray = foo.m_stringArray__arrayOf_java_lang_String();
+  let classArray = foo.m_classArray__arrayOf_java_lang_Class();
+  let enumArray = foo.m_enumArray__arrayOf_annotation_SomeEnum();
+  let annotationArray = foo.m_annotationArray__arrayOf_annotation_Zoo();
+ }
+ /** @nodts @return {!Annotation} */
+ static m_test__annotation_ClassImplementingAnnotation__java_lang_annotation_Annotation(/** !ClassImplementingAnnotation */ classImplementingAnnotation) {
+  MainKt.$clinit();
+  return classImplementingAnnotation;
+ }
+ /** @nodts @return {!Annotation} */
+ static m_test__annotation_InterfaceExtendingAnnotation__java_lang_annotation_Annotation(/** !InterfaceExtendingAnnotation */ interfaceExtendingAnnotation) {
+  MainKt.$clinit();
+  return interfaceExtendingAnnotation;
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'annotation.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

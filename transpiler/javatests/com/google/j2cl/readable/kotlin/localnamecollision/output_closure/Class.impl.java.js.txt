@@ -1,0 +1,51 @@
+goog.module('localnamecollision.Class$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class Class extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Class} */
+ static $create__() {
+  Class.$clinit();
+  let $instance = new Class();
+  $instance.$ctor__localnamecollision_Class__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localnamecollision_Class__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_main__void() {
+  $Objects.m_getClass__java_lang_Object__java_lang_Class(Class.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  Class.$clinit = () =>{};
+  Class.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Class;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(Class, 'localnamecollision.Class');
+
+exports = Class;
+
+//# sourceMappingURL=Class.js.map

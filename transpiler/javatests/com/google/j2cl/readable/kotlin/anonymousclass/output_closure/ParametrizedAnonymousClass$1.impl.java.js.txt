@@ -1,0 +1,57 @@
+goog.module('anonymousclass.ParametrizedAnonymousClass.$1$impl');
+
+const ParametrizedClass = goog.require('anonymousclass.ParametrizedClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ParametrizedAnonymousClass = goog.forwardDeclare('anonymousclass.ParametrizedAnonymousClass$impl');
+
+/**
+ * @final
+ * @template S, T
+ * @extends {ParametrizedClass<S>}
+ */
+class $1 extends ParametrizedClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!ParametrizedAnonymousClass<T>} @nodts*/
+  this.$outer_this__anonymousclass_ParametrizedAnonymousClass_1;
+  /**@type {S} @nodts*/
+  this.$captured_s__anonymousclass_ParametrizedAnonymousClass_1;
+ }
+ /** @nodts @template S, T @return {!$1<S, T>} */
+ static $create__anonymousclass_ParametrizedAnonymousClass__java_lang_Object(/** !ParametrizedAnonymousClass<T> */ $outer_this, /** S */ $captured_s) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__anonymousclass_ParametrizedAnonymousClass_1__anonymousclass_ParametrizedAnonymousClass__java_lang_Object__void($outer_this, $captured_s);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_ParametrizedAnonymousClass_1__anonymousclass_ParametrizedAnonymousClass__java_lang_Object__void(/** !ParametrizedAnonymousClass<T> */ $outer_this, /** S */ $captured_s) {
+  this.$outer_this__anonymousclass_ParametrizedAnonymousClass_1 = $outer_this;
+  this.$captured_s__anonymousclass_ParametrizedAnonymousClass_1 = $captured_s;
+  this.$ctor__anonymousclass_ParametrizedClass__void();
+ }
+ /** @final @nodts @return {S} */
+ m_f__java_lang_Object__java_lang_Object(/** T */ t) {
+  return this.$captured_s__anonymousclass_ParametrizedAnonymousClass_1;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  ParametrizedClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1, 'anonymousclass.ParametrizedAnonymousClass$1');
+
+exports = $1;
+
+//# sourceMappingURL=ParametrizedAnonymousClass$1.js.map

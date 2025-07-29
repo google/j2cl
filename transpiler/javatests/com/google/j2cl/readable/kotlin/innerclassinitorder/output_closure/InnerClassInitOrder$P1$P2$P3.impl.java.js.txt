@@ -1,0 +1,48 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
+
+const P2 = goog.require('innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T3, T2, T1
+ * @extends {P2<T2, T1>}
+ */
+class P3 extends P2 {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!P2<T2, T1>} @nodts*/
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2_P3;
+ }
+ /** @nodts @template T3, T2, T1 @return {!P3<T3, T2, T1>} */
+ static $create__innerclassinitorder_InnerClassInitOrder_P1_P2__int(/** !P2<T2, T1> */ $outer_this, /** number */ i) {
+  P3.$clinit();
+  let $instance = new P3();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_P1_P2_P3__innerclassinitorder_InnerClassInitOrder_P1_P2__int__void($outer_this, i);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinitorder_InnerClassInitOrder_P1_P2_P3__innerclassinitorder_InnerClassInitOrder_P1_P2__int__void(/** !P2<T2, T1> */ $outer_this, /** number */ i) {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2_P3 = $outer_this;
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_P1_P2__innerclassinitorder_InnerClassInitOrder_P1__int__void($outer_this, i);
+ }
+ /** @nodts */
+ static $clinit() {
+  P3.$clinit = () =>{};
+  P3.$loadModules();
+  P2.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof P3;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(P3, 'innerclassinitorder.InnerClassInitOrder$P1$P2$P3');
+
+exports = P3;
+
+//# sourceMappingURL=InnerClassInitOrder$P1$P2$P3.js.map

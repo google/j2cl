@@ -1,0 +1,39 @@
+goog.module('bridgemethods.Consumer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template T
+ */
+class Consumer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__bridgemethods_Consumer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_accept__java_lang_Object__void(/** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  Consumer.$clinit = () =>{};
+  Consumer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Consumer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Consumer, 'bridgemethods.Consumer');
+
+exports = Consumer;
+
+//# sourceMappingURL=Consumer.js.map

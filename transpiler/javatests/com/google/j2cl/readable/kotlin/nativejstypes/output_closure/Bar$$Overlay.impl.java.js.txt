@@ -1,0 +1,30 @@
+goog.module('nativejstypes.Bar.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Bar = goog.require('nativejstypes.Bar');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts @return {number} */
+ static m_product__int() {
+  $Overlay.$clinit();
+  return 2;
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Bar;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'nativejstypes.Bar');
+
+exports = $Overlay;
+
+//# sourceMappingURL=Bar$$Overlay.js.map

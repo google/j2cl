@@ -1,0 +1,53 @@
+goog.module('jsoptional.Main.AFunction$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+/**
+ * @final
+ */
+class AFunction extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {function(?string=, ...*):*} */
+ static $create__() {
+  AFunction.$clinit();
+  let $instance = new AFunction();
+  $instance.$ctor__jsoptional_Main_AFunction__void();
+  return $Util.$makeLambdaFunction(AFunction.prototype.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object, $instance, AFunction.$copy);
+ }
+ /** @nodts */
+ $ctor__jsoptional_Main_AFunction__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {*} */
+ m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object(/** ?string= */ i, .../** ...* */ args) {
+  return args[0];
+ }
+ /** @nodts */
+ static $clinit() {
+  AFunction.$clinit = () =>{};
+  AFunction.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsoptional_Main_AFunction;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsoptional_Main_AFunction = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$JavaScriptFunction.$markImplementor(AFunction);
+$Util.$setClassMetadata(AFunction, 'jsoptional.Main$AFunction');
+
+exports = AFunction;
+
+//# sourceMappingURL=Main$AFunction.js.map

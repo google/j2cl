@@ -1,0 +1,57 @@
+goog.module('typealias.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const IFoo = goog.require('typealias.IFoo$impl');
+
+/**
+ * @final
+ * @implements {IFoo}
+ */
+class Foo extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_i__typealias_Foo_ = 0;
+ }
+ /** @nodts @return {!Foo} */
+ static $create__int(/** number */ i) {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__typealias_Foo__int__void(i);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typealias_Foo__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+  this.f_i__typealias_Foo_ = i;
+ }
+ /** @final @nodts @return {number} */
+ m_getI__int() {
+  return this.f_i__typealias_Foo_;
+ }
+ /** @override @nodts @return {number} */
+ m_f__int() {
+  return this.m_getI__int() + 1 | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IFoo.$markImplementor(Foo);
+$Util.$setClassMetadata(Foo, 'typealias.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

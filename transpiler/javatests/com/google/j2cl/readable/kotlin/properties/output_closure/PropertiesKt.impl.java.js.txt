@@ -1,0 +1,131 @@
+goog.module('properties.PropertiesKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Properties = goog.forwardDeclare('properties.Properties$impl');
+
+/**
+ * @final
+ */
+class PropertiesKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!PropertiesKt} */
+ static $create__() {
+  PropertiesKt.$clinit();
+  let $instance = new PropertiesKt();
+  $instance.$ctor__properties_PropertiesKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__properties_PropertiesKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getReadOnly__int() {
+  PropertiesKt.$clinit();
+  return PropertiesKt.f_readOnly__properties_PropertiesKt_;
+ }
+ /** @nodts @return {number} */
+ static m_getReadWrite__int() {
+  PropertiesKt.$clinit();
+  return PropertiesKt.f_readWrite__properties_PropertiesKt_;
+ }
+ /** @nodts */
+ static m_setReadWrite__int__void(/** number */ set__) {
+  PropertiesKt.$clinit();
+  PropertiesKt.f_readWrite__properties_PropertiesKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_getReadOnlyCustomGetter__int() {
+  PropertiesKt.$clinit();
+  return 1;
+ }
+ /** @nodts @return {number} */
+ static m_getReadWriteCustomGetter__int() {
+  PropertiesKt.$clinit();
+  return PropertiesKt.f_readWriteCustomGetter__properties_PropertiesKt_ + 1 | 0;
+ }
+ /** @nodts */
+ static m_setReadWriteCustomGetter__int__void(/** number */ set__) {
+  PropertiesKt.$clinit();
+  PropertiesKt.f_readWriteCustomGetter__properties_PropertiesKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_getReadWriteCustomSetter__int() {
+  PropertiesKt.$clinit();
+  return PropertiesKt.f_readWriteCustomSetter__properties_PropertiesKt_;
+ }
+ /** @nodts */
+ static m_setReadWriteCustomSetter__int__void(/** number */ value) {
+  PropertiesKt.$clinit();
+  PropertiesKt.f_readWriteCustomSetter__properties_PropertiesKt_ = 3;
+ }
+ /** @nodts @return {number} */
+ static m_getCustomGetterSetterAndBackingField__int() {
+  PropertiesKt.$clinit();
+  return PropertiesKt.f_customGetterSetterAndBackingField__properties_PropertiesKt_ - 1 | 0;
+ }
+ /** @nodts */
+ static m_setCustomGetterSetterAndBackingField__int__void(/** number */ value) {
+  PropertiesKt.$clinit();
+  PropertiesKt.f_customGetterSetterAndBackingField__properties_PropertiesKt_ = value + 1 | 0;
+ }
+ /** @nodts @return {number} */
+ static m_getWithPrivateDSetter__int() {
+  PropertiesKt.$clinit();
+  return PropertiesKt.f_withPrivateDSetter__properties_PropertiesKt_ - 1 | 0;
+ }
+ /** @nodts */
+ static m_setWithPrivateDSetter__int__void(/** number */ value) {
+  PropertiesKt.f_withPrivateDSetter__properties_PropertiesKt_ = value + 1 | 0;
+ }
+ /** @nodts @template E */
+ static m_main__void() {
+  PropertiesKt.$clinit();
+  (/**@type {!Properties<E>}*/ (Properties.$create__int__int__int(1, 2, 3))).m_getParametricProperty__java_lang_Object();
+  (/**@type {!Properties<!Integer>}*/ (Properties.$create__int__int__int(1, 2, 3))).m_getParametricProperty__java_lang_Object();
+ }
+ /** @nodts */
+ static $clinit() {
+  PropertiesKt.$clinit = () =>{};
+  PropertiesKt.$loadModules();
+  j_l_Object.$clinit();
+  PropertiesKt.f_readOnly__properties_PropertiesKt_ = 1;
+  PropertiesKt.f_readWrite__properties_PropertiesKt_ = 2;
+  PropertiesKt.f_readWriteCustomGetter__properties_PropertiesKt_ = 1;
+  PropertiesKt.f_readWriteCustomSetter__properties_PropertiesKt_ = 1;
+  PropertiesKt.f_customGetterSetterAndBackingField__properties_PropertiesKt_ = 1;
+  PropertiesKt.f_withPrivateDSetter__properties_PropertiesKt_ = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PropertiesKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Properties = goog.module.get('properties.Properties$impl');
+ }
+}
+/**@type {number} @nodts*/
+PropertiesKt.f_readOnly__properties_PropertiesKt_ = 0;
+/**@type {number} @nodts*/
+PropertiesKt.f_readWrite__properties_PropertiesKt_ = 0;
+/**@type {number} @nodts*/
+PropertiesKt.f_readWriteCustomGetter__properties_PropertiesKt_ = 0;
+/**@type {number} @nodts*/
+PropertiesKt.f_readWriteCustomSetter__properties_PropertiesKt_ = 0;
+/**@type {number} @nodts*/
+PropertiesKt.f_customGetterSetterAndBackingField__properties_PropertiesKt_ = 0;
+/**@type {number} @nodts*/
+PropertiesKt.f_withPrivateDSetter__properties_PropertiesKt_ = 0;
+$Util.$setClassMetadata(PropertiesKt, 'properties.PropertiesKt');
+
+exports = PropertiesKt;
+
+//# sourceMappingURL=PropertiesKt.js.map

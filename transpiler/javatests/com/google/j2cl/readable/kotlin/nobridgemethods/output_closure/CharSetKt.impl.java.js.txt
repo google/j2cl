@@ -1,0 +1,52 @@
+goog.module('nobridgemethods.CharSetKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('nobridgemethods.CharSetKt.$1$impl');
+
+/**
+ * @final
+ */
+class CharSetKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CharSetKt} */
+ static $create__() {
+  CharSetKt.$clinit();
+  let $instance = new CharSetKt();
+  $instance.$ctor__nobridgemethods_CharSetKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nobridgemethods_CharSetKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__arrayOf_java_lang_String__void(/** !Array<string> */ args) {
+  CharSetKt.$clinit();
+  let treeMap = $1.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  CharSetKt.$clinit = () =>{};
+  CharSetKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CharSetKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('nobridgemethods.CharSetKt.$1$impl');
+ }
+}
+$Util.$setClassMetadata(CharSetKt, 'nobridgemethods.CharSetKt');
+
+exports = CharSetKt;
+
+//# sourceMappingURL=CharSetKt.js.map

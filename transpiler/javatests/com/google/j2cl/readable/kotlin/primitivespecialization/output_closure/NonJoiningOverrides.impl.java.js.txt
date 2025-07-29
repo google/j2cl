@@ -1,0 +1,52 @@
+goog.module('primitivespecialization.NonJoiningOverrides$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Overloads = goog.require('primitivespecialization.Overloads$impl');
+const Setter = goog.require('primitivespecialization.Setter$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+/**
+ * @final
+ * @implements {Setter<Integer>}
+ */
+class NonJoiningOverrides extends Overloads {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NonJoiningOverrides} */
+ static $create__() {
+  NonJoiningOverrides.$clinit();
+  let $instance = new NonJoiningOverrides();
+  $instance.$ctor__primitivespecialization_NonJoiningOverrides__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_NonJoiningOverrides__void() {
+  this.$ctor__primitivespecialization_Overloads__void();
+ }
+ /** @override @nodts */
+ m_set__int__void(/** number */ i) {}
+ /** @override @nodts */
+ m_set__java_lang_Integer__void(/** Integer */ i) {}
+ /** @nodts */
+ static $clinit() {
+  NonJoiningOverrides.$clinit = () =>{};
+  NonJoiningOverrides.$loadModules();
+  Overloads.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonJoiningOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Setter.$markImplementor(NonJoiningOverrides);
+$Util.$setClassMetadata(NonJoiningOverrides, 'primitivespecialization.NonJoiningOverrides');
+
+exports = NonJoiningOverrides;
+
+//# sourceMappingURL=NonJoiningOverrides.js.map

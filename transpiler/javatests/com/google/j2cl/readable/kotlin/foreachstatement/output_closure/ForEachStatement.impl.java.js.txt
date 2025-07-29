@@ -1,0 +1,87 @@
+goog.module('foreachstatement.ForEachStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let IterableReturningTypeVariable = goog.forwardDeclare('foreachstatement.IterableReturningTypeVariable$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class ForEachStatement extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ForEachStatement} */
+ static $create__() {
+  ForEachStatement.$clinit();
+  let $instance = new ForEachStatement();
+  $instance.$ctor__foreachstatement_ForEachStatement__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__foreachstatement_ForEachStatement__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__java_lang_Iterable__void(/** !Iterable<?> */ iterable) {
+  for (let $iterator = iterable.m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+   let t = /**@type {Throwable}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Throwable));
+   {
+    j_l_String.m_valueOf__java_lang_Object__java_lang_String(t);
+   }
+  }
+  for (let indexedObject = /**@type {!Array<Throwable>}*/ ($Arrays.$createWithInitializer(10, Throwable, /**  @return {Throwable}*/ ((/** number */ it) =>{
+   return null;
+  }))), inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
+   let t_1 = /**@type {Throwable}*/ (indexedObject[inductionVariable]);
+   j_l_String.m_valueOf__java_lang_Object__java_lang_String(t_1);
+  }
+ }
+ /** @final @nodts @template T, U, V */
+ m_testTypeVariable__void_$p_foreachstatement_ForEachStatement() {
+  let /** ?U */ iterable = null;
+  for (let $iterator = (/**@type {!Iterable<?string>}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(iterable), /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+   let s = /**@type {?string}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), j_l_String));
+  }
+  let /** IterableReturningTypeVariable<?, ?> */ anotherIterable = null;
+  for (let $iterator_1 = anotherIterable.m_iterator__java_util_Iterator(); (/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_hasNext__boolean(); ) {
+   let s_1 = /**@type {Integer}*/ ($Casts.$to((/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_next__java_lang_Object(), Integer));
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  ForEachStatement.$clinit = () =>{};
+  ForEachStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ForEachStatement;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Iterable = goog.module.get('java.lang.Iterable$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Throwable = goog.module.get('java.lang.Throwable$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ForEachStatement, 'foreachstatement.ForEachStatement');
+
+exports = ForEachStatement;
+
+//# sourceMappingURL=ForEachStatement.js.map

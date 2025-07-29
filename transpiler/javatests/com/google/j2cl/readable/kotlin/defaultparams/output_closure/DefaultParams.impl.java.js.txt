@@ -1,0 +1,97 @@
+goog.module('defaultparams.DefaultParams$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
+
+class DefaultParams extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__defaultparams_DefaultParams_ = 0;
+  /**@type {number} @nodts*/
+  this.f_b__defaultparams_DefaultParams_ = 0;
+ }
+ //Factory method corresponding to constructor 'DefaultParams(int, int)'.
+ /** @nodts @return {!DefaultParams} */
+ static $create__int__int(/** number */ a, /** number */ b) {
+  DefaultParams.$clinit();
+  let $instance = new DefaultParams();
+  $instance.$ctor__defaultparams_DefaultParams__int__int__void(a, b);
+  return $instance;
+ }
+ //Initialization from constructor 'DefaultParams(int, int)'.
+ /** @nodts */
+ $ctor__defaultparams_DefaultParams__int__int__void(/** number */ a, /** number */ b) {
+  this.$ctor__java_lang_Object__void();
+  this.f_a__defaultparams_DefaultParams_ = a;
+  this.f_b__defaultparams_DefaultParams_ = b;
+ }
+ //Factory method corresponding to constructor 'DefaultParams(int, int, int, DefaultConstructorMarker)'.
+ /** @nodts @return {!DefaultParams} */
+ static $create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ a, /** number */ b, /** number */ _mask0, /** DefaultConstructorMarker */ _marker) {
+  DefaultParams.$clinit();
+  let $instance = new DefaultParams();
+  $instance.$ctor__defaultparams_DefaultParams__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(a, b, _mask0, _marker);
+  return $instance;
+ }
+ //Initialization from constructor 'DefaultParams(int, int, int, DefaultConstructorMarker)'.
+ /** @nodts */
+ $ctor__defaultparams_DefaultParams__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ a, /** number */ b, /** number */ _mask0, /** DefaultConstructorMarker */ _marker) {
+  if ((_mask0 & 1) != 0) {
+   a = 1;
+  }
+  this.$ctor__defaultparams_DefaultParams__int__int__void(a, b);
+ }
+ /** @final @nodts @return {number} */
+ m_getA__int() {
+  return this.f_a__defaultparams_DefaultParams_;
+ }
+ /** @final @nodts @return {number} */
+ m_getB__int() {
+  return this.f_b__defaultparams_DefaultParams_;
+ }
+ //Factory method corresponding to constructor 'DefaultParams(int)'.
+ /** @nodts @return {!DefaultParams} */
+ static $create__int(/** number */ a) {
+  DefaultParams.$clinit();
+  let $instance = new DefaultParams();
+  $instance.$ctor__defaultparams_DefaultParams__int__void(a);
+  return $instance;
+ }
+ //Initialization from constructor 'DefaultParams(int)'.
+ /** @nodts */
+ $ctor__defaultparams_DefaultParams__int__void(/** number */ a) {
+  this.$ctor__defaultparams_DefaultParams__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(0, a, 1, null);
+ }
+ /** @nodts */
+ m_foo__int__void(/** number */ c) {}
+ /** @final @nodts */
+ m_foo$default__int__int__java_lang_Object__void(/** number */ c, /** number */ _mask0, /** * */ _handler) {
+  if ((_mask0 & 1) != 0) {
+   c = 20;
+  }
+  this.m_foo__int__void(c);
+  return;
+ }
+ /** @nodts */
+ static $clinit() {
+  DefaultParams.$clinit = () =>{};
+  DefaultParams.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DefaultParams;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(DefaultParams, 'defaultparams.DefaultParams');
+
+exports = DefaultParams;
+
+//# sourceMappingURL=DefaultParams.js.map

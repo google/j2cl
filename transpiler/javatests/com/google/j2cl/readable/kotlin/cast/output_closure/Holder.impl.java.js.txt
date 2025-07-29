@@ -1,0 +1,44 @@
+goog.module('cast.Holder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Holder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!Holder<T>} */
+ static $create__() {
+  Holder.$clinit();
+  let $instance = new Holder();
+  $instance.$ctor__cast_Holder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cast_Holder__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Holder.$clinit = () =>{};
+  Holder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Holder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Holder, 'cast.Holder');
+
+exports = Holder;
+
+//# sourceMappingURL=Holder.js.map

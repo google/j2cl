@@ -1,0 +1,55 @@
+goog.module('jsoptional.Main.TemplatedSubtype$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const I = goog.require('jsoptional.Main.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T
+ * @implements {I<T>}
+ */
+class TemplatedSubtype extends j_l_Object {
+ 
+ constructor() {
+  TemplatedSubtype.$clinit();
+  super();
+  this.$ctor__jsoptional_Main_TemplatedSubtype__void();
+ }
+ /** @nodts */
+ $ctor__jsoptional_Main_TemplatedSubtype__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_m__java_lang_String__java_lang_Object__void(/** T */ t, /** * */ o) {}
+ //Bridge method.
+ /** @override @suppress{visibility} */
+ m(/** T */ arg0, /** *= */ arg1) {
+  this.m_m__java_lang_String__java_lang_Object__void(/**@type {T}*/ ($Casts.$to(arg0, j_l_String)), arg1);
+ }
+ /** @nodts */
+ static $clinit() {
+  TemplatedSubtype.$clinit = () =>{};
+  TemplatedSubtype.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TemplatedSubtype;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+I.$markImplementor(TemplatedSubtype);
+$Util.$setClassMetadata(TemplatedSubtype, 'jsoptional.Main$TemplatedSubtype');
+
+exports = TemplatedSubtype;
+
+//# sourceMappingURL=Main$TemplatedSubtype.js.map

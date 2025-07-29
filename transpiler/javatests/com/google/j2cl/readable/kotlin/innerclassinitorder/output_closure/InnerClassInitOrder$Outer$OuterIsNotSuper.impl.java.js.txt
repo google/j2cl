@@ -1,0 +1,49 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Outer = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.Outer$impl');
+
+class OuterIsNotSuper extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Outer} @nodts*/
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper;
+ }
+ /** @nodts @return {!OuterIsNotSuper} */
+ static $create__innerclassinitorder_InnerClassInitOrder_Outer(/** !Outer */ $outer_this) {
+  OuterIsNotSuper.$clinit();
+  let $instance = new OuterIsNotSuper();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__innerclassinitorder_InnerClassInitOrder_Outer__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__innerclassinitorder_InnerClassInitOrder_Outer__void(/** !Outer */ $outer_this) {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getValue__int() {
+  return this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper.m_getValue__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  OuterIsNotSuper.$clinit = () =>{};
+  OuterIsNotSuper.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterIsNotSuper;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(OuterIsNotSuper, 'innerclassinitorder.InnerClassInitOrder$Outer$OuterIsNotSuper');
+
+exports = OuterIsNotSuper;
+
+//# sourceMappingURL=InnerClassInitOrder$Outer$OuterIsNotSuper.js.map

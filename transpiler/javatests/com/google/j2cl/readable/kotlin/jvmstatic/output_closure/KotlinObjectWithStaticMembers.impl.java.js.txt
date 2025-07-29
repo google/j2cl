@@ -1,0 +1,62 @@
+goog.module('jvmstatic.KotlinObjectWithStaticMembers$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class KotlinObjectWithStaticMembers extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!KotlinObjectWithStaticMembers} */
+ static $create__() {
+  let $instance = new KotlinObjectWithStaticMembers();
+  $instance.$ctor__jvmstatic_KotlinObjectWithStaticMembers__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmstatic_KotlinObjectWithStaticMembers__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getStaticProperty__int() {
+  KotlinObjectWithStaticMembers.$clinit();
+  return KotlinObjectWithStaticMembers.f_staticProperty__jvmstatic_KotlinObjectWithStaticMembers_;
+ }
+ /** @nodts @return {number} */
+ static m_staticFunction__int() {
+  KotlinObjectWithStaticMembers.$clinit();
+  return 2;
+ }
+ /** @nodts @return {!KotlinObjectWithStaticMembers} */
+ static get f_INSTANCE__jvmstatic_KotlinObjectWithStaticMembers() {
+  return (KotlinObjectWithStaticMembers.$clinit(), KotlinObjectWithStaticMembers.$static_INSTANCE__jvmstatic_KotlinObjectWithStaticMembers);
+ }
+ /** @nodts */
+ static $clinit() {
+  KotlinObjectWithStaticMembers.$clinit = () =>{};
+  KotlinObjectWithStaticMembers.$loadModules();
+  j_l_Object.$clinit();
+  KotlinObjectWithStaticMembers.$static_INSTANCE__jvmstatic_KotlinObjectWithStaticMembers = KotlinObjectWithStaticMembers.$create__();
+  KotlinObjectWithStaticMembers.f_staticProperty__jvmstatic_KotlinObjectWithStaticMembers_ = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KotlinObjectWithStaticMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!KotlinObjectWithStaticMembers} @nodts*/
+KotlinObjectWithStaticMembers.$static_INSTANCE__jvmstatic_KotlinObjectWithStaticMembers;
+/**@type {number} @nodts*/
+KotlinObjectWithStaticMembers.f_staticProperty__jvmstatic_KotlinObjectWithStaticMembers_ = 0;
+$Util.$setClassMetadata(KotlinObjectWithStaticMembers, 'jvmstatic.KotlinObjectWithStaticMembers');
+
+exports = KotlinObjectWithStaticMembers;
+
+//# sourceMappingURL=KotlinObjectWithStaticMembers.js.map

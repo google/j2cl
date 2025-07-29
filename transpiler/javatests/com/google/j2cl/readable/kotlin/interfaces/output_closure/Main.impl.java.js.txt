@@ -1,0 +1,69 @@
+goog.module('interfaces.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let EnumImplementor = goog.forwardDeclare('interfaces.Main.EnumImplementor$impl');
+let Implementor = goog.forwardDeclare('interfaces.Main.Implementor$impl');
+let Interface = goog.forwardDeclare('interfaces.Main.Interface$impl');
+
+/**
+ * @final
+ */
+class Main extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__interfaces_Main__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfaces_Main__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_testInterfaceMembers__void() {
+  let i = Implementor.$create__interfaces_Main(this);
+  i.m_interfaceMethod__void();
+  i.m_defaultMethod__java_lang_Object__void(null);
+  i.toString();
+  let impl = Implementor.$create__interfaces_Main(this);
+  impl.m_defaultMethod__java_lang_String__void(null);
+  let enumImpl = EnumImplementor.f_ONE__interfaces_Main_EnumImplementor;
+  enumImpl.m_defaultMethod__java_lang_String__void(null);
+  Interface.m_staticInterfaceMethod__void();
+  Interface.m_staticInterfaceMethod__void();
+  let x = Interface.m_getA__int() + Interface.m_getB__int() | 0;
+  let y = Interface.m_getA__int() + Interface.m_getB__int() | 0;
+  let si = Implementor.$create__interfaces_Main(this);
+  si.m_interfaceMethod__void();
+  si.m_defaultMethod__java_lang_String__void(null);
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  EnumImplementor = goog.module.get('interfaces.Main.EnumImplementor$impl');
+  Implementor = goog.module.get('interfaces.Main.Implementor$impl');
+  Interface = goog.module.get('interfaces.Main.Interface$impl');
+ }
+}
+$Util.$setClassMetadata(Main, 'interfaces.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

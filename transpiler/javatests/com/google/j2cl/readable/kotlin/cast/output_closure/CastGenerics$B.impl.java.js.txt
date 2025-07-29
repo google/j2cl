@@ -1,0 +1,33 @@
+goog.module('cast.CastGenerics.B$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class B {
+ /** @abstract @nodts */
+ m_mB__void() {}
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__cast_CastGenerics_B = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__cast_CastGenerics_B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+B.$markImplementor(/**@type {Function}*/ (B));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (B), 'cast.CastGenerics$B');
+
+exports = B;
+
+//# sourceMappingURL=CastGenerics$B.js.map

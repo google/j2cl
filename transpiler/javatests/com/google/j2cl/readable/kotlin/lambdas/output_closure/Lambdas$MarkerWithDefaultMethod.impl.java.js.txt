@@ -1,0 +1,37 @@
+goog.module('lambdas.Lambdas.MarkerWithDefaultMethod$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class MarkerWithDefaultMethod {
+ /** @abstract @nodts */
+ m_defaultMethod__void() {}
+ /** @nodts */
+ static m_defaultMethod__$default__lambdas_Lambdas_MarkerWithDefaultMethod__void(/** !MarkerWithDefaultMethod */ $thisArg) {
+  MarkerWithDefaultMethod.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  MarkerWithDefaultMethod.$clinit = () =>{};
+  MarkerWithDefaultMethod.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_MarkerWithDefaultMethod = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_MarkerWithDefaultMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+MarkerWithDefaultMethod.$markImplementor(/**@type {Function}*/ (MarkerWithDefaultMethod));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (MarkerWithDefaultMethod), 'lambdas.Lambdas$MarkerWithDefaultMethod');
+
+exports = MarkerWithDefaultMethod;
+
+//# sourceMappingURL=Lambdas$MarkerWithDefaultMethod.js.map

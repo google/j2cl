@@ -1,0 +1,302 @@
+goog.module('statementasexpressions.StatementAsExpressionsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let $1X = goog.forwardDeclare('statementasexpressions.StatementAsExpressionsKt.$1X$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ */
+class StatementAsExpressionsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StatementAsExpressionsKt} */
+ static $create__() {
+  StatementAsExpressionsKt.$clinit();
+  let $instance = new StatementAsExpressionsKt();
+  $instance.$ctor__statementasexpressions_StatementAsExpressionsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__statementasexpressions_StatementAsExpressionsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {boolean} */
+ static m_getTRUE__boolean() {
+  StatementAsExpressionsKt.$clinit();
+  return StatementAsExpressionsKt.f_TRUE__statementasexpressions_StatementAsExpressionsKt_;
+ }
+ /** @nodts */
+ static m_setTRUE__boolean__void(/** boolean */ set__) {
+  StatementAsExpressionsKt.$clinit();
+  StatementAsExpressionsKt.f_TRUE__statementasexpressions_StatementAsExpressionsKt_ = set__;
+ }
+ /** @nodts */
+ static m_testReturnsFromCondition__void() {
+  StatementAsExpressionsKt.$clinit();
+  return;
+ }
+ /** @nodts */
+ static m_testThrowsFromCondition__void() {
+  StatementAsExpressionsKt.$clinit();
+  throw $Exceptions.toJs(IllegalStateException.$create__());
+ }
+ /** @nodts */
+ static m_testConditions__void() {
+  StatementAsExpressionsKt.$clinit();
+  let /** boolean */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = true;
+  } else {
+   throw $Exceptions.toJs(RuntimeException.$create__());
+  }
+  if (tmp) {
+   return;
+  }
+  while (true) {
+   let /** boolean */ tmp_1;
+   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+    tmp_1 = true;
+   } else {
+    throw $Exceptions.toJs(RuntimeException.$create__());
+   }
+   if (!tmp_1) {
+    break;
+   }
+  }
+  let /** boolean */ tmp_2;
+  do {
+   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+    tmp_2 = true;
+   } else {
+    throw $Exceptions.toJs(RuntimeException.$create__());
+   }
+  } while (tmp_2);
+ }
+ /** @nodts */
+ static m_m__int__int__int__void(/** number */ a, /** number */ b, /** number */ c) {
+  StatementAsExpressionsKt.$clinit();
+  return;
+ }
+ /** @nodts */
+ static m_testReturnVoid__void() {
+  StatementAsExpressionsKt.$clinit();
+  StatementAsExpressionsKt.m_m__int__int__int__void(1, 3, 4);
+  return;
+ }
+ /** @nodts */
+ static m_testReturnReturn__void() {
+  StatementAsExpressionsKt.$clinit();
+  StatementAsExpressionsKt.m_m__int__int__int__void(1, 3, 4);
+  return;
+ }
+ /** @nodts */
+ static m_testMemberAccess__void() {
+  StatementAsExpressionsKt.$clinit();
+  let x = $1X.$create__int(0);
+  let /** !$1X */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = $1X.$create__int(0);
+  } else {
+   tmp = x;
+  }
+  let b = tmp.m_getField__int();
+  let /** !$1X */ tmp_1;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp_1 = $1X.$create__int(0);
+  } else {
+   tmp_1 = x;
+  }
+  tmp_1.m_m__int__int__int__void(3, 4, 5);
+  x.m_m__int__int__int__void(3, 4, 5);
+ }
+ /** @nodts */
+ static m_testVariableDeclaration__void() {
+  StatementAsExpressionsKt.$clinit();
+  let /** number */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = 32;
+  } else {
+   throw $Exceptions.toJs(RuntimeException.$create__());
+  }
+  let b = tmp;
+ }
+ /** @nodts @return {number} */
+ static m_getFieldAssignedAStatement__int() {
+  StatementAsExpressionsKt.$clinit();
+  return StatementAsExpressionsKt.f_fieldAssignedAStatement__statementasexpressions_StatementAsExpressionsKt_;
+ }
+ /** @nodts */
+ static m_testUnaryExpression__void() {
+  StatementAsExpressionsKt.$clinit();
+  let /** number */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = 1;
+  } else {
+   throw $Exceptions.toJs(RuntimeException.$create__());
+  }
+  - tmp | 0;
+ }
+ /** @nodts */
+ static m_testBinaryExpression__void() {
+  StatementAsExpressionsKt.$clinit();
+  let /** number */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = 1;
+  } else {
+   throw $Exceptions.toJs(RuntimeException.$create__());
+  }
+  1 - tmp | 0;
+ }
+ /** @nodts */
+ static m_testStatement_inConditionOfWhileStatement__void() {
+  let a = 0;
+  let b = 0;
+  while (true) {
+   let /** boolean */ tmp;
+   if (b < 4) {
+    b = b + 1 | 0;
+    tmp = true;
+   } else {
+    a = a + 100 | 0;
+    tmp = false;
+   }
+   if (!tmp) {
+    break;
+   }
+   a = a + 10 | 0;
+  }
+ }
+ /** @nodts */
+ static m_methodThatReturnsVoid__void() {}
+ /** @nodts */
+ static m_testReturn_withVoidExpression__void() {
+  StatementAsExpressionsKt.m_methodThatReturnsVoid__void();
+  return;
+ }
+ /** @nodts */
+ static m_testStatement_inIsOperator__void() {
+  StatementAsExpressionsKt.$clinit();
+  let /** number */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = 1;
+  } else {
+   throw $Exceptions.toJs(AssertionError.$create__());
+  }
+  let boolean_1 = true;
+ }
+ /** @nodts */
+ static m_acceptsUnitFunction__kotlin_jvm_functions_Function1__void(/** !Function1<?, ?> */ x) {
+  StatementAsExpressionsKt.$clinit();
+ }
+ /** @nodts @return {number} */
+ static m_consumeAndReturnDouble__double__double(/** number */ d) {
+  StatementAsExpressionsKt.$clinit();
+  return d;
+ }
+ /** @nodts */
+ static m_testDecompositionOfIfReturningUnit__java_lang_Object__void(/** !* */ data) {
+  StatementAsExpressionsKt.$clinit();
+  StatementAsExpressionsKt.m_acceptsUnitFunction__kotlin_jvm_functions_Function1__void(Function1.$adapt(/**  @return {?}*/ ((/** ? */ it) =>{
+   if (Double.$isInstance(data)) {
+    StatementAsExpressionsKt.m_consumeAndReturnDouble__double__double(Double.m_doubleValue__java_lang_Double__double(/**@type {number}*/ ($Casts.$to(data, Double))));
+   }
+  })));
+  if (Double.$isInstance(data)) {
+   StatementAsExpressionsKt.m_methodThatReturnsVoid__void();
+  } else {
+   throw $Exceptions.toJs(AssertionError.$create__());
+  }
+  let foo = Unit.f_INSTANCE__kotlin_Unit;
+ }
+ /** @nodts */
+ static m_testDecompositionOfTryReturningUnit__void() {
+  StatementAsExpressionsKt.$clinit();
+  StatementAsExpressionsKt.m_acceptsUnitFunction__kotlin_jvm_functions_Function1__void(Function1.$adapt(/**  @return {?}*/ ((/** ? */ it) =>{
+   let /** number */ tmp;
+   try {
+    tmp = StatementAsExpressionsKt.m_consumeAndReturnDouble__double__double(1);
+   } finally {}
+  })));
+  try {
+   StatementAsExpressionsKt.m_methodThatReturnsVoid__void();
+  } catch (__$jsexc) {
+   let __$exc = $Exceptions.toJava(__$jsexc);
+   if (RuntimeException.$isInstance(__$exc)) {
+    let e = /**@type {!RuntimeException}*/ (__$exc);
+    StatementAsExpressionsKt.m_methodThatReturnsVoid__void();
+   } else {
+    throw $Exceptions.toJs(__$exc);
+   }
+  } finally {}
+  let foo = Unit.f_INSTANCE__kotlin_Unit;
+  let x = 10;
+  let /** number */ tmp_1;
+  try {
+   tmp_1 = StatementAsExpressionsKt.m_consumeAndReturnDouble__double__double(1);
+  } catch (__$jsexc_1) {
+   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   if (RuntimeException.$isInstance(__$exc_1)) {
+    let e_1 = /**@type {!RuntimeException}*/ (__$exc_1);
+    tmp_1 = StatementAsExpressionsKt.m_consumeAndReturnDouble__double__double(2);
+   } else {
+    throw $Exceptions.toJs(__$exc_1);
+   }
+  } finally {
+   let unary = x;
+   x = unary + 1 | 0;
+  }
+  let bar = tmp_1;
+ }
+ /** @nodts */
+ static $clinit() {
+  StatementAsExpressionsKt.$clinit = () =>{};
+  StatementAsExpressionsKt.$loadModules();
+  j_l_Object.$clinit();
+  StatementAsExpressionsKt.f_TRUE__statementasexpressions_StatementAsExpressionsKt_ = true;
+  let /** number */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = 1;
+  } else {
+   throw $Exceptions.toJs(RuntimeException.$create__());
+  }
+  StatementAsExpressionsKt.f_fieldAssignedAStatement__statementasexpressions_StatementAsExpressionsKt_ = tmp;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StatementAsExpressionsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AssertionError = goog.module.get('java.lang.AssertionError$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  $1X = goog.module.get('statementasexpressions.StatementAsExpressionsKt.$1X$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+/**@type {boolean} @nodts*/
+StatementAsExpressionsKt.f_TRUE__statementasexpressions_StatementAsExpressionsKt_ = false;
+/**@type {number} @nodts*/
+StatementAsExpressionsKt.f_fieldAssignedAStatement__statementasexpressions_StatementAsExpressionsKt_ = 0;
+$Util.$setClassMetadata(StatementAsExpressionsKt, 'statementasexpressions.StatementAsExpressionsKt');
+
+exports = StatementAsExpressionsKt;
+
+//# sourceMappingURL=StatementAsExpressionsKt.js.map

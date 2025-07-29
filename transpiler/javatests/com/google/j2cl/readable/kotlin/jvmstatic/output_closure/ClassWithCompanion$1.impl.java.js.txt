@@ -1,0 +1,51 @@
+goog.module('jvmstatic.ClassWithCompanion.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1_$1 = goog.forwardDeclare('jvmstatic.ClassWithCompanion.$1.$1$impl');
+
+/**
+ * @final
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!$1} */
+ static $create__() {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__jvmstatic_ClassWithCompanion_1__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmstatic_ClassWithCompanion_1__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!*} */
+ m_foo__java_lang_Object() {
+  return $1_$1.$create__jvmstatic_ClassWithCompanion_1(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1_$1 = goog.module.get('jvmstatic.ClassWithCompanion.$1.$1$impl');
+ }
+}
+$Util.$setClassMetadata($1, 'jvmstatic.ClassWithCompanion$1');
+
+exports = $1;
+
+//# sourceMappingURL=ClassWithCompanion$1.js.map

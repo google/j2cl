@@ -1,0 +1,38 @@
+goog.module('anonymousclass.SomeClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class SomeClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @abstract @nodts @return {string} */
+ m_foo__java_lang_String() {}
+ /** @nodts */
+ $ctor__anonymousclass_SomeClass__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeClass.$clinit = () =>{};
+  SomeClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SomeClass, 'anonymousclass.SomeClass');
+
+exports = SomeClass;
+
+//# sourceMappingURL=SomeClass.js.map

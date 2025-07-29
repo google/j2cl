@@ -1,0 +1,39 @@
+goog.module('jsfunction.TestJsFunctionInJsOverlayCapturingOuter.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts */
+ static m_test__$devirt__jsfunction_TestJsFunctionInJsOverlayCapturingOuter__void(/** !Array */ $thisArg) {
+  $Overlay.$clinit();
+  $Overlay.m_sort__$devirt__jsfunction_TestJsFunctionInJsOverlayCapturingOuter__jsfunction_JsFunctionInterface__void($thisArg, /**  @return {number}*/ ((/** number */ a) =>{
+   return $Equality.$same($thisArg, null) ? 0 : 1;
+  }));
+ }
+ /** @final @nodts */
+ static m_sort__$devirt__jsfunction_TestJsFunctionInJsOverlayCapturingOuter__jsfunction_JsFunctionInterface__void(/** !Array */ $thisArg, /** ?function(number):number */ func) {
+  $Overlay.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Array;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata($Overlay, 'Array');
+
+exports = $Overlay;
+
+//# sourceMappingURL=TestJsFunctionInJsOverlayCapturingOuter$$Overlay.js.map

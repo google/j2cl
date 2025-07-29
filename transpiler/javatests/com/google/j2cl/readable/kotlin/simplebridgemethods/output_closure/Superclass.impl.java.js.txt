@@ -1,0 +1,47 @@
+goog.module('simplebridgemethods.Superclass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+
+/**
+ * @template T
+ */
+class Superclass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!Superclass<T>} */
+ static $create__() {
+  Superclass.$clinit();
+  let $instance = new Superclass();
+  $instance.$ctor__simplebridgemethods_Superclass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__simplebridgemethods_Superclass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_m1__java_lang_Error__void(/** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  Superclass.$clinit = () =>{};
+  Superclass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Superclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Superclass, 'simplebridgemethods.Superclass');
+
+exports = Superclass;
+
+//# sourceMappingURL=Superclass.js.map

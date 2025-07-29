@@ -1,0 +1,65 @@
+goog.module('defaultparams.FooImplWithDefaultOverride$impl');
+
+const IFoo = goog.require('defaultparams.IFoo$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {IFoo}
+ */
+class FooImplWithDefaultOverride extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!FooImplWithDefaultOverride} */
+ static $create__() {
+  FooImplWithDefaultOverride.$clinit();
+  let $instance = new FooImplWithDefaultOverride();
+  $instance.$ctor__defaultparams_FooImplWithDefaultOverride__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_FooImplWithDefaultOverride__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {number} */
+ m_defaultMethod__int__int(/** number */ a) {
+  return a + 1 | 0;
+ }
+ /** @override @nodts @return {number} */
+ m_interfaceMethod__int__int(/** number */ a) {
+  return a;
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {number} */
+ m_defaultMethod$default__int__int__java_lang_Object__int(/** number */ arg0, /** number */ arg1, /** * */ arg2) {
+  return IFoo.m_defaultMethod$default__$default__defaultparams_IFoo__int__int__java_lang_Object__int(this, arg0, arg1, arg2);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {number} */
+ m_interfaceMethod$default__int__int__java_lang_Object__int(/** number */ arg0, /** number */ arg1, /** * */ arg2) {
+  return IFoo.m_interfaceMethod$default__$default__defaultparams_IFoo__int__int__java_lang_Object__int(this, arg0, arg1, arg2);
+ }
+ /** @nodts */
+ static $clinit() {
+  FooImplWithDefaultOverride.$clinit = () =>{};
+  FooImplWithDefaultOverride.$loadModules();
+  j_l_Object.$clinit();
+  IFoo.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FooImplWithDefaultOverride;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IFoo.$markImplementor(FooImplWithDefaultOverride);
+$Util.$setClassMetadata(FooImplWithDefaultOverride, 'defaultparams.FooImplWithDefaultOverride');
+
+exports = FooImplWithDefaultOverride;
+
+//# sourceMappingURL=FooImplWithDefaultOverride.js.map

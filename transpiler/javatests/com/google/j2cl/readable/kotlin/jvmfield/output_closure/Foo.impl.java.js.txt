@@ -1,0 +1,57 @@
+goog.module('jvmfield.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Foo extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_x__jvmfield_Foo = 0;
+ }
+ /** @nodts @return {!Foo} */
+ static $create__int(/** number */ x) {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__jvmfield_Foo__int__void(x);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmfield_Foo__int__void(/** number */ x) {
+  this.$ctor__java_lang_Object__void();
+  this.f_x__jvmfield_Foo = x;
+ }
+ /** @nodts @return {number} */
+ static get f_y__jvmfield_Foo() {
+  return (Foo.$clinit(), Foo.$static_y__jvmfield_Foo);
+ }
+ /** @nodts */
+ static set f_y__jvmfield_Foo(/** number */ value) {
+  (Foo.$clinit(), Foo.$static_y__jvmfield_Foo = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+  Foo.$static_y__jvmfield_Foo = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {number} @nodts*/
+Foo.$static_y__jvmfield_Foo = 0;
+$Util.$setClassMetadata(Foo, 'jvmfield.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

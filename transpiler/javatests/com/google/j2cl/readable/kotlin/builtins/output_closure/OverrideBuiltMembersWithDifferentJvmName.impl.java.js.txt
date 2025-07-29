@@ -1,0 +1,76 @@
+goog.module('builtins.OverrideBuiltMembersWithDifferentJvmName$impl');
+
+const CharSequence = goog.require('java.lang.CharSequence$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let IntStream = goog.forwardDeclare('java.util.stream.IntStream$impl');
+
+/**
+ * @final
+ * @implements {CharSequence}
+ */
+class OverrideBuiltMembersWithDifferentJvmName extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_length__builtins_OverrideBuiltMembersWithDifferentJvmName_ = 0;
+ }
+ /** @nodts @return {!OverrideBuiltMembersWithDifferentJvmName} */
+ static $create__() {
+  OverrideBuiltMembersWithDifferentJvmName.$clinit();
+  let $instance = new OverrideBuiltMembersWithDifferentJvmName();
+  $instance.$ctor__builtins_OverrideBuiltMembersWithDifferentJvmName__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__builtins_OverrideBuiltMembersWithDifferentJvmName__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ m_getLength__int() {
+  return this.f_length__builtins_OverrideBuiltMembersWithDifferentJvmName_;
+ }
+ /** @nodts @return {number} */
+ m_get__int__char(/** number */ index) {
+  return 97 /* 'a' */;
+ }
+ /** @override @nodts @return {!(CharSequence|string)} */
+ m_subSequence__int__int__java_lang_CharSequence(/** number */ startIndex, /** number */ endIndex) {
+  return 'a';
+ }
+ /** @final @override @nodts @return {number} */
+ m_length__int() {
+  return this.m_getLength__int();
+ }
+ /** @final @override @nodts @return {number} */
+ m_charAt__int__char(/** number */ index) {
+  return this.m_get__int__char(index);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {IntStream} */
+ m_chars__java_util_stream_IntStream() {
+  return CharSequence.m_chars__$default__java_lang_CharSequence__java_util_stream_IntStream(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  OverrideBuiltMembersWithDifferentJvmName.$clinit = () =>{};
+  OverrideBuiltMembersWithDifferentJvmName.$loadModules();
+  j_l_Object.$clinit();
+  CharSequence.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OverrideBuiltMembersWithDifferentJvmName;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+CharSequence.$markImplementor(OverrideBuiltMembersWithDifferentJvmName);
+$Util.$setClassMetadata(OverrideBuiltMembersWithDifferentJvmName, 'builtins.OverrideBuiltMembersWithDifferentJvmName');
+
+exports = OverrideBuiltMembersWithDifferentJvmName;
+
+//# sourceMappingURL=OverrideBuiltMembersWithDifferentJvmName.js.map

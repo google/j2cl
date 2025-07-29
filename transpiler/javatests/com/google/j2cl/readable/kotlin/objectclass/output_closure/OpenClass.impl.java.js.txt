@@ -1,0 +1,70 @@
+goog.module('objectclass.OpenClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class OpenClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_prop__objectclass_OpenClass_;
+  /**@type {string} @nodts*/
+  this.f_abstractProp__objectclass_OpenClass_;
+ }
+ /** @nodts @return {!OpenClass} */
+ static $create__() {
+  OpenClass.$clinit();
+  let $instance = new OpenClass();
+  $instance.$ctor__objectclass_OpenClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objectclass_OpenClass__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_prop__objectclass_OpenClass_ = 'buzz';
+  this.f_abstractProp__objectclass_OpenClass_ = 'default';
+ }
+ /** @final @nodts @return {string} */
+ m_getProp__java_lang_String() {
+  return this.f_prop__objectclass_OpenClass_;
+ }
+ /** @final @nodts */
+ m_setProp__java_lang_String__void(/** string */ set__) {
+  this.f_prop__objectclass_OpenClass_ = set__;
+ }
+ /** @nodts @return {string} */
+ m_getAbstractProp__java_lang_String() {
+  return this.f_abstractProp__objectclass_OpenClass_;
+ }
+ /** @nodts */
+ m_setAbstractProp__java_lang_String__void(/** string */ set__) {
+  this.f_abstractProp__objectclass_OpenClass_ = set__;
+ }
+ /** @final @nodts @return {string} */
+ m_doSomething__java_lang_String() {
+  return 'D';
+ }
+ /** @nodts @return {string} */
+ m_abstractFn__java_lang_String() {
+  return 'default';
+ }
+ /** @nodts */
+ static $clinit() {
+  OpenClass.$clinit = () =>{};
+  OpenClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OpenClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(OpenClass, 'objectclass.OpenClass');
+
+exports = OpenClass;
+
+//# sourceMappingURL=OpenClass.js.map

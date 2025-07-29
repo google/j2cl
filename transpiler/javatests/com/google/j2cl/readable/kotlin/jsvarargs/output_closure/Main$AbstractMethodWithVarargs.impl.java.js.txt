@@ -1,0 +1,40 @@
+goog.module('jsvarargs.Main.AbstractMethodWithVarargs$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AbstractMethodWithVarargs extends j_l_Object {
+ 
+ constructor() {
+  AbstractMethodWithVarargs.$clinit();
+  super();
+  this.$ctor__jsvarargs_Main_AbstractMethodWithVarargs__void();
+ }
+ /** @nodts */
+ $ctor__jsvarargs_Main_AbstractMethodWithVarargs__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract */
+ abstractMethod(.../** ...number */ args) {}
+ /** @nodts */
+ static $clinit() {
+  AbstractMethodWithVarargs.$clinit = () =>{};
+  AbstractMethodWithVarargs.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractMethodWithVarargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractMethodWithVarargs, 'jsvarargs.Main$AbstractMethodWithVarargs');
+
+exports = AbstractMethodWithVarargs;
+
+//# sourceMappingURL=Main$AbstractMethodWithVarargs.js.map

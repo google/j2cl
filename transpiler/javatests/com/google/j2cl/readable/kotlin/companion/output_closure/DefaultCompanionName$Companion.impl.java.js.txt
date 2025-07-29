@@ -1,0 +1,77 @@
+goog.module('companion.DefaultCompanionName.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let DefaultCompanionName = goog.forwardDeclare('companion.DefaultCompanionName$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__companion_DefaultCompanionName_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_DefaultCompanionName_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!*} */
+ m_getNonCompileTimeConstant__java_lang_Object() {
+  return DefaultCompanionName.m_getNonCompileTimeConstant__java_lang_Object();
+ }
+ /** @final @nodts @return {!*} */
+ m_getProperty__java_lang_Object() {
+  return DefaultCompanionName.m_getProperty__java_lang_Object();
+ }
+ /** @final @nodts */
+ m_setProperty__java_lang_Object__void(/** !* */ arg0) {
+  DefaultCompanionName.m_setProperty__java_lang_Object__void(arg0);
+ }
+ /** @final @nodts @return {string} */
+ m_companionFunction__java_lang_Object__java_lang_String(/** !* */ arg0) {
+  return DefaultCompanionName.m_companionFunction__java_lang_Object__java_lang_String(arg0);
+ }
+ /** @final @nodts @return {boolean} */
+ m_clashingWithInstanceMethod__boolean() {
+  return DefaultCompanionName.m_clashingWithInstanceMethod__boolean();
+ }
+ /** @final @nodts @return {number} */
+ m_clashingWithInstanceMethodButDifferentReturnType__int() {
+  return DefaultCompanionName.m_clashingWithInstanceMethodButDifferentReturnType__int();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__companion_DefaultCompanionName_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__companion_DefaultCompanionName_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__companion_DefaultCompanionName_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  DefaultCompanionName = goog.module.get('companion.DefaultCompanionName$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__companion_DefaultCompanionName_Companion;
+$Util.$setClassMetadata(Companion, 'companion.DefaultCompanionName$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=DefaultCompanionName$Companion.js.map

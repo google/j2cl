@@ -1,0 +1,49 @@
+goog.module('jsconstructor.F$impl');
+
+const C = goog.require('jsconstructor.C$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class F extends C {
+ 
+ constructor(/** number */ x) {
+  F.$clinit();
+  super(x + 2 | 0);
+  /**@type {number} @nodts*/
+  this.f_fF__jsconstructor_F_ = 0;
+  this.$ctor__jsconstructor_F__int__void(x);
+ }
+ /** @final @nodts @return {number} */
+ m_getFF__int() {
+  return this.f_fF__jsconstructor_F_;
+ }
+ /** @final @nodts */
+ m_setFF__int__void(/** number */ set__) {
+  this.f_fF__jsconstructor_F_ = set__;
+ }
+ /** @nodts */
+ $ctor__jsconstructor_F__int__void(/** number */ x) {
+  this.f_fF__jsconstructor_F_ = 13;
+  this.m_setFF__int__void(x + 3 | 0);
+ }
+ /** @nodts */
+ static $clinit() {
+  F.$clinit = () =>{};
+  F.$loadModules();
+  C.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof F;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(F, 'jsconstructor.F');
+
+exports = F;
+
+//# sourceMappingURL=F.js.map

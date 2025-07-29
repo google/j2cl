@@ -1,0 +1,51 @@
+goog.module('circularimportuse.Right$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Left = goog.forwardDeclare('circularimportuse.Left$impl');
+
+/**
+ * @final
+ */
+class Right extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Right} */
+ static $create__() {
+  Right.$clinit();
+  let $instance = new Right();
+  $instance.$ctor__circularimportuse_Right__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__circularimportuse_Right__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!Left} */
+ m_createLeft__circularimportuse_Left() {
+  return Left.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  Right.$clinit = () =>{};
+  Right.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Right;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Left = goog.module.get('circularimportuse.Left$impl');
+ }
+}
+$Util.$setClassMetadata(Right, 'circularimportuse.Right');
+
+exports = Right;
+
+//# sourceMappingURL=Right.js.map

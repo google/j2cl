@@ -1,0 +1,114 @@
+goog.module('jsfunction.JsFunctionImplementation$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let $Overlay = goog.forwardDeclare('jsfunction.JsFunctionInterface.$Overlay$impl');
+
+/**
+ * @final
+ */
+class JsFunctionImplementation extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_field__jsfunction_JsFunctionImplementation_ = 0;
+  /**@type {JsFunctionImplementation} @nodts*/
+  this.f_storedThis__jsfunction_JsFunctionImplementation_;
+  /**@type {JsFunctionImplementation} @nodts*/
+  this.f_anotherStoredThis__jsfunction_JsFunctionImplementation_;
+ }
+ /** @nodts @return {function(number):number} */
+ static $create__() {
+  JsFunctionImplementation.$clinit();
+  let $instance = new JsFunctionImplementation();
+  $instance.$ctor__jsfunction_JsFunctionImplementation__void();
+  return $Util.$makeLambdaFunction(JsFunctionImplementation.prototype.m_foo__int__int, $instance, JsFunctionImplementation.$copy);
+ }
+ /** @nodts */
+ $ctor__jsfunction_JsFunctionImplementation__void() {
+  this.$ctor__java_lang_Object__void();
+  JsFunctionImplementation.m_setStoredThis__jsfunction_JsFunctionImplementation__jsfunction_JsFunctionImplementation__void(this, this);
+  JsFunctionImplementation.m_setAnotherStoredThis__jsfunction_JsFunctionImplementation__jsfunction_JsFunctionImplementation__void(this, /**@type {JsFunctionImplementation}*/ (this));
+ }
+ /** @nodts @return {number} */
+ static m_getField__jsfunction_JsFunctionImplementation__int(/** !JsFunctionImplementation */ $thisArg) {
+  JsFunctionImplementation.$clinit();
+  return $thisArg.f_field__jsfunction_JsFunctionImplementation_;
+ }
+ /** @nodts */
+ static m_setField__jsfunction_JsFunctionImplementation__int__void(/** !JsFunctionImplementation */ $thisArg, /** number */ set__) {
+  JsFunctionImplementation.$clinit();
+  $thisArg.f_field__jsfunction_JsFunctionImplementation_ = set__;
+ }
+ /** @nodts @return {JsFunctionImplementation} */
+ static m_getStoredThis__jsfunction_JsFunctionImplementation__jsfunction_JsFunctionImplementation(/** !JsFunctionImplementation */ $thisArg) {
+  JsFunctionImplementation.$clinit();
+  return $thisArg.f_storedThis__jsfunction_JsFunctionImplementation_;
+ }
+ /** @nodts */
+ static m_setStoredThis__jsfunction_JsFunctionImplementation__jsfunction_JsFunctionImplementation__void(/** !JsFunctionImplementation */ $thisArg, /** JsFunctionImplementation */ set__) {
+  JsFunctionImplementation.$clinit();
+  $thisArg.f_storedThis__jsfunction_JsFunctionImplementation_ = set__;
+ }
+ /** @nodts @return {JsFunctionImplementation} */
+ static m_getAnotherStoredThis__jsfunction_JsFunctionImplementation__jsfunction_JsFunctionImplementation(/** !JsFunctionImplementation */ $thisArg) {
+  JsFunctionImplementation.$clinit();
+  return $thisArg.f_anotherStoredThis__jsfunction_JsFunctionImplementation_;
+ }
+ /** @nodts */
+ static m_setAnotherStoredThis__jsfunction_JsFunctionImplementation__jsfunction_JsFunctionImplementation__void(/** !JsFunctionImplementation */ $thisArg, /** JsFunctionImplementation */ set__) {
+  JsFunctionImplementation.$clinit();
+  $thisArg.f_anotherStoredThis__jsfunction_JsFunctionImplementation_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_bar__jsfunction_JsFunctionImplementation__int(/** !JsFunctionImplementation */ $thisArg) {
+  JsFunctionImplementation.$clinit();
+  return 0;
+ }
+ /** @nodts @return {number} */
+ static m_fun__jsfunction_JsFunctionImplementation__int(/** !JsFunctionImplementation */ $thisArg) {
+  JsFunctionImplementation.$clinit();
+  JsFunctionImplementation.m_setField__jsfunction_JsFunctionImplementation__int__void($thisArg, 1);
+  return JsFunctionImplementation.m_bar__jsfunction_JsFunctionImplementation__int($thisArg) + (/**@type {function(number):number}*/ ($thisArg))(1) | 0;
+ }
+ /** @return {number} */
+ m_foo__int__int(/** number */ a) {
+  return a + JsFunctionImplementation.m_bar__jsfunction_JsFunctionImplementation__int(this) + JsFunctionImplementation.m_getField__jsfunction_JsFunctionImplementation__int(this) | 0;
+ }
+ /** @nodts @suppress{visibility} @return {number} */
+ static m_overlayMethod__jsfunction_JsFunctionImplementation__int(/** !JsFunctionImplementation */ $thisArg) {
+  JsFunctionImplementation.$clinit();
+  return $Overlay.m_overlayMethod__$devirt__jsfunction_JsFunctionInterface__int(/**@type {function(number):number}*/ ($thisArg));
+ }
+ /** @nodts */
+ static $clinit() {
+  JsFunctionImplementation.$clinit = () =>{};
+  JsFunctionImplementation.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsfunction_JsFunctionImplementation;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.f_field__jsfunction_JsFunctionImplementation_ = from.f_field__jsfunction_JsFunctionImplementation_;
+  to.f_storedThis__jsfunction_JsFunctionImplementation_ = from.f_storedThis__jsfunction_JsFunctionImplementation_;
+  to.f_anotherStoredThis__jsfunction_JsFunctionImplementation_ = from.f_anotherStoredThis__jsfunction_JsFunctionImplementation_;
+  to.$is__jsfunction_JsFunctionImplementation = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('jsfunction.JsFunctionInterface.$Overlay$impl');
+ }
+}
+$JavaScriptFunction.$markImplementor(JsFunctionImplementation);
+$Util.$setClassMetadata(JsFunctionImplementation, 'jsfunction.JsFunctionImplementation');
+
+exports = JsFunctionImplementation;
+
+//# sourceMappingURL=JsFunctionImplementation.js.map

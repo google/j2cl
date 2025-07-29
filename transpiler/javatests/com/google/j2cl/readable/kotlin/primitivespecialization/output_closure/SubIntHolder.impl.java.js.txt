@@ -1,0 +1,43 @@
+goog.module('primitivespecialization.SubIntHolder$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const IntHolder = goog.require('primitivespecialization.IntHolder$impl');
+
+/**
+ * @final
+ */
+class SubIntHolder extends IntHolder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubIntHolder} */
+ static $create__() {
+  SubIntHolder.$clinit();
+  let $instance = new SubIntHolder();
+  $instance.$ctor__primitivespecialization_SubIntHolder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_SubIntHolder__void() {
+  this.$ctor__primitivespecialization_IntHolder__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SubIntHolder.$clinit = () =>{};
+  SubIntHolder.$loadModules();
+  IntHolder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubIntHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubIntHolder, 'primitivespecialization.SubIntHolder');
+
+exports = SubIntHolder;
+
+//# sourceMappingURL=SubIntHolder.js.map

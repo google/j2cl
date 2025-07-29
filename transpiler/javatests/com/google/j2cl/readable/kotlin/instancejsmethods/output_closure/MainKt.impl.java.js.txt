@@ -1,0 +1,86 @@
+goog.module('instancejsmethods.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Child = goog.forwardDeclare('instancejsmethods.Child$impl');
+let Parent = goog.forwardDeclare('instancejsmethods.Parent$impl');
+let SuperParent = goog.forwardDeclare('instancejsmethods.SuperParent$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__instancejsmethods_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__instancejsmethods_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testCallBySuperParent__void() {
+  MainKt.$clinit();
+  let sp = SuperParent.$create__();
+  let p = Parent.$create__();
+  let c = Child.$create__();
+  let pp = Parent.$create__();
+  let cc = Child.$create__();
+  let intf = Child.$create__();
+  sp.m_f__int__int__int(12, 35);
+  sp.m_bar__int__int__int(6, 7);
+  p.m_f__int__int__int(12, 35);
+  p.m_bar__int__int__int(6, 7);
+  c.m_f__int__int__int(12, 35);
+  c.m_bar__int__int__int(6, 7);
+  pp.myFoo(1);
+  cc.myFoo(1);
+  intf.m_intfFoo__int();
+ }
+ /** @nodts */
+ static m_testCallByConcreteType__void() {
+  MainKt.$clinit();
+  let sp = SuperParent.$create__();
+  let p = Parent.$create__();
+  let c = Child.$create__();
+  sp.m_f__int__int__int(12, 35);
+  sp.m_bar__int__int__int(6, 7);
+  p.sum(12, 35);
+  p.bar(6, 7);
+  p.myFoo(1);
+  c.sum(12, 35);
+  c.bar(6, 7);
+  c.myFoo(1);
+  c.intfFoo();
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Child = goog.module.get('instancejsmethods.Child$impl');
+  Parent = goog.module.get('instancejsmethods.Parent$impl');
+  SuperParent = goog.module.get('instancejsmethods.SuperParent$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'instancejsmethods.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

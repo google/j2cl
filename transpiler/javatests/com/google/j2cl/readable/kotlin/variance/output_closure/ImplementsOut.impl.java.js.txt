@@ -1,0 +1,65 @@
+goog.module('variance.ImplementsOut$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Out = goog.require('variance.Out$impl');
+
+let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Container = goog.forwardDeclare('variance.Container$impl');
+
+/**
+ * @final
+ * @implements {Out<(CharSequence|string)>}
+ */
+class ImplementsOut extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ImplementsOut} */
+ static $create__() {
+  ImplementsOut.$clinit();
+  let $instance = new ImplementsOut();
+  $instance.$ctor__variance_ImplementsOut__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__variance_ImplementsOut__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {(CharSequence|string)} */
+ m_m__java_lang_CharSequence() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @override @nodts @return {!Container<?>} */
+ m_mListOut__variance_Container__variance_Container(/** !Container<?> */ c) {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {(CharSequence|string)} */
+ m_m__java_lang_Object() {
+  return this.m_m__java_lang_CharSequence();
+ }
+ /** @nodts */
+ static $clinit() {
+  ImplementsOut.$clinit = () =>{};
+  ImplementsOut.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ImplementsOut;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+Out.$markImplementor(ImplementsOut);
+$Util.$setClassMetadata(ImplementsOut, 'variance.ImplementsOut');
+
+exports = ImplementsOut;
+
+//# sourceMappingURL=ImplementsOut.js.map

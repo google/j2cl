@@ -1,0 +1,59 @@
+goog.module('localclasswithconstructor.LocalClassWithConstructorKt.$1LocalClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class $1LocalClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_i__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass_ = 0;
+  /**@type {number} @nodts*/
+  this.f_y__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass_ = 0;
+  /**@type {number} @nodts*/
+  this.$captured_x__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass = 0;
+ }
+ /** @nodts @return {!$1LocalClass} */
+ static $create__int__int(/** number */ $captured_x, /** number */ i) {
+  let $instance = new $1LocalClass();
+  $instance.$ctor__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass__int__int__void($captured_x, i);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass__int__int__void(/** number */ $captured_x, /** number */ i) {
+  this.$captured_x__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass = $captured_x;
+  this.$ctor__java_lang_Object__void();
+  this.f_i__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass_ = i;
+  this.f_y__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass_ = $captured_x;
+ }
+ /** @final @nodts @return {number} */
+ m_getI__int() {
+  return this.f_i__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass_;
+ }
+ /** @final @nodts @return {number} */
+ m_getY__int() {
+  return this.f_y__localclasswithconstructor_LocalClassWithConstructorKt_1LocalClass_;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1LocalClass.$clinit = () =>{};
+  $1LocalClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1LocalClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1LocalClass, 'localclasswithconstructor.LocalClassWithConstructorKt$1LocalClass');
+
+exports = $1LocalClass;
+
+//# sourceMappingURL=LocalClassWithConstructorKt$1LocalClass.js.map

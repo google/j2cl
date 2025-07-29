@@ -1,0 +1,74 @@
+goog.module('jsvarargs.Main.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let List = goog.forwardDeclare('java.util.List$impl');
+let Main = goog.forwardDeclare('jsvarargs.Main$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__jsvarargs_Main_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsvarargs_Main_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_f1__int__arrayOf_int__int(/** number */ arg0, /** !Array<number> */ arg1) {
+  return Main.f1(arg0, ...arg1);
+ }
+ /** @final @nodts @return {number} */
+ m_f2__arrayOf_int__int(/** !Array<number> */ arg0) {
+  return Main.f2(...arg0);
+ }
+ /** @final @nodts @template T @return {T} */
+ m_generics__arrayOf_java_lang_Object__java_lang_Object(/** !Array<T> */ arg0) {
+  return Main.generics(...arg0);
+ }
+ /** @final @nodts @return {!Main} */
+ m_parameterizedType__arrayOf_java_util_List__jsvarargs_Main(/** !Array<!List<?>> */ arg0) {
+  return Main.parameterizedType(...arg0);
+ }
+ /** @final @nodts @template T @return {T} */
+ m_parameterizedByT__arrayOf_java_util_List__java_lang_Object(/** !Array<!List<?>> */ arg0) {
+  return Main.parameterizedByT(...arg0);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jsvarargs_Main_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jsvarargs_Main_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__jsvarargs_Main_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Main = goog.module.get('jsvarargs.Main$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__jsvarargs_Main_Companion;
+$Util.$setClassMetadata(Companion, 'jsvarargs.Main$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Main$Companion.js.map

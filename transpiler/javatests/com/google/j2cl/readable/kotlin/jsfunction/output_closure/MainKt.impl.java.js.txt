@@ -1,0 +1,364 @@
+goog.module('jsfunction.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let ClassWithJsFunctionProperty = goog.forwardDeclare('jsfunction.ClassWithJsFunctionProperty$impl');
+let ContainerImpl = goog.forwardDeclare('jsfunction.ContainerImpl$impl');
+let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.DoubleDoubleJsBiFunction$impl');
+let JsFunctionImplementation = goog.forwardDeclare('jsfunction.JsFunctionImplementation$impl');
+let TIntegerJsBiFunction = goog.forwardDeclare('jsfunction.TIntegerJsBiFunction$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__jsfunction_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsfunction_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {function(number):number} */
+ static createNativeFunction() {
+  MainKt.$clinit();
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @nodts @return {number} */
+ static m_callFn__jsfunction_JsFunctionInterface__int__int(/** function(number):number */ fn, /** number */ a) {
+  MainKt.$clinit();
+  return fn(a);
+ }
+ /** @nodts */
+ static m_testJsFunction__void() {
+  MainKt.$clinit();
+  let func = /**@type {!JsFunctionImplementation}*/ (JsFunctionImplementation.$create__());
+  (/**@type {function(number):number}*/ (func))(10);
+  MainKt.m_callFn__jsfunction_JsFunctionInterface__int__int(MainKt.createNativeFunction(), 10);
+  let a = JsFunctionImplementation.m_getField__jsfunction_JsFunctionImplementation__int(func);
+  JsFunctionImplementation.m_bar__jsfunction_JsFunctionImplementation__int(func);
+ }
+ /** @nodts */
+ static m_testJsFunctionsCapturingLocal__void() {
+  MainKt.$clinit();
+  let n = 4;
+  MainKt.m_callFn__jsfunction_JsFunctionInterface__int__int(/**  @return {number}*/ ((/** number */ number_1) =>{
+   return number_1 + n | 0;
+  }), n);
+  MainKt.m_callFn__jsfunction_JsFunctionInterface__int__int(/**  @return {number}*/ ((/** number */ a) =>{
+   return a + n | 0;
+  }), n);
+  (/**  @return {number}*/ ((/** number */ a_1) =>{
+   MainKt.m_instanceMethod__void();
+   return 0;
+  }))(3);
+ }
+ /** @nodts */
+ static m_testJsFunctionThis__void() {
+  MainKt.$clinit();
+  (/**  @return {number}*/ ((/** number */ a) =>{
+   MainKt.m_instanceMethod__void();
+   return 0;
+  }))(3);
+ }
+ /** @nodts */
+ static m_instanceMethod__void() {}
+ /** @nodts */
+ static m_testJsFunctionErasureCasts__void() {
+  MainKt.$clinit();
+  let container = /**@type {!ContainerImpl<function(string):string>}*/ (ContainerImpl.$create__());
+  MainKt.m_acceptsJsFunction__jsfunction_Function__void(/**@type {?function(string):string}*/ ($Casts.$to(container.m_get__java_lang_Object(), $JavaScriptFunction)));
+ }
+ /** @nodts */
+ static m_acceptsJsFunction__jsfunction_Function__void(/** ?function(string):string */ f) {
+  MainKt.$clinit();
+ }
+ /** @nodts @return {function(number, ...number):number} */
+ static m_testJsFunctionVarargs__jsfunction_JsFunctionVarargs() {
+  MainKt.$clinit();
+  return /**  @return {number}*/ ((/** number */ i, .../** ...number */ numbers) =>{
+   $Arrays.$stampType(numbers, $$int);
+   let sum = i;
+   let indexedObject = numbers;
+   let inductionVariable = 0;
+   let last = indexedObject.length;
+   while (inductionVariable < last) {
+    let number_1 = indexedObject[inductionVariable];
+    inductionVariable = inductionVariable + 1 | 0;
+    sum = sum + number_1 | 0;
+   }
+   return sum;
+  });
+ }
+ /** @nodts @return {function(number, ...number):number} */
+ static m_testJsFunctionVarargsInnerClass__jsfunction_JsFunctionVarargs() {
+  MainKt.$clinit();
+  return /**  @return {number}*/ ((/** number */ i, .../** ...number */ numbers) =>{
+   $Arrays.$stampType(numbers, $$int);
+   let sum = i;
+   for (let indexedObject = numbers, inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
+    let number_1 = indexedObject[inductionVariable];
+    sum = sum + number_1 | 0;
+   }
+   return sum;
+  });
+ }
+ /** @nodts */
+ static m_testVarArgsMethodReferenceToJsFuncion__void() {
+  MainKt.$clinit();
+ }
+ /** @nodts @template T */
+ static m_acceptsVarargsJsFunctionWithTypeVariable__jsfunction_JsFunctionVarargsGenerics__void(/** ?function(number, ...T):number */ x) {
+  MainKt.$clinit();
+ }
+ /** @nodts @template T */
+ static m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_JsFunctionVarargsGenerics__void(/** ?function(number, ...Array<T>):number */ x) {
+  MainKt.$clinit();
+ }
+ /** @template T */
+ static acceptsVarargsJsFunctionWithTypeVariableInVarargs(.../** ...?function(number, ...T):number */ x) {
+  MainKt.$clinit();
+  $Arrays.$stampType(x, $JavaScriptFunction);
+ }
+ /** @template T */
+ static acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(.../** ...?function(number, ...Array<T>):number */ x) {
+  MainKt.$clinit();
+  $Arrays.$stampType(x, $JavaScriptFunction);
+ }
+ 
+ static acceptsJsFunctionInVarargs(.../** ...?function():void */ x) {
+  MainKt.$clinit();
+  $Arrays.$stampType(x, $JavaScriptFunction);
+ }
+ /** @nodts */
+ static m_testJsFunctionClassLiterals__void() {
+  MainKt.$clinit();
+  let array = /**@type {!Array<function():void>}*/ ($Arrays.$create([0], $JavaScriptFunction));
+  let o = Class.$get($JavaScriptFunction);
+  o = Class.$get($JavaScriptFunction, 1);
+ }
+ /** @nodts */
+ static m_testJsFunctionOptional__void() {
+  MainKt.$clinit();
+  let f = /**  @return {number}*/ ((/** number */ i, /** ?number= */ n) =>{
+   return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double__double(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(n)));
+  });
+ }
+ /** @nodts @return {function(?):void} */
+ static m_getJsFunctionFieldWildcard__jsfunction_ParametricJsFunction() {
+  MainKt.$clinit();
+  return MainKt.f_jsFunctionFieldWildcard__jsfunction_MainKt_;
+ }
+ /** @nodts */
+ static m_setJsFunctionFieldWildcard__jsfunction_ParametricJsFunction__void(/** function(?):void */ set__) {
+  MainKt.$clinit();
+  MainKt.f_jsFunctionFieldWildcard__jsfunction_MainKt_ = set__;
+ }
+ /** @nodts @return {function(string):void} */
+ static m_getJsFunctionFieldParameterized__jsfunction_ParametricJsFunction() {
+  MainKt.$clinit();
+  return MainKt.f_jsFunctionFieldParameterized__jsfunction_MainKt_;
+ }
+ /** @nodts */
+ static m_setJsFunctionFieldParameterized__jsfunction_ParametricJsFunction__void(/** function(string):void */ set__) {
+  MainKt.$clinit();
+  MainKt.f_jsFunctionFieldParameterized__jsfunction_MainKt_ = set__;
+ }
+ 
+ static set parametricJsFunction(/** ?function(!*):void */ fn) {
+  MainKt.$clinit();
+ }
+ /** @return {?function(!*):void} */
+ static get parametricJsFunction() {
+  MainKt.$clinit();
+  return null;
+ }
+ /** @nodts */
+ static m_testFunctionExpressionTypeReplacement__void() {
+  MainKt.$clinit();
+  let f = (/** string */ unused) =>{
+   let unused_1 = /**@type {?string}*/ ($Casts.$to(unused, j_l_String));
+   let l = /**@type {!Array<Array<*>>}*/ ($Arrays.$create([1, null], j_l_Object));
+   $Arrays.$set(l, 0, /**@type {!Array<string>}*/ ($Arrays.$stampType([''], j_l_String)));
+  };
+ }
+ /** @nodts */
+ static m_testJsFunctionPropertyCall__void() {
+  MainKt.$clinit();
+  let c = ClassWithJsFunctionProperty.$create__();
+  c.m_getFn__jsfunction_ParametricJsFunction()('');
+  c.function('');
+  c.m_getFn__jsfunction_ParametricJsFunction()('');
+  (!$Equality.$same(c, null) ? c.m_getFn__jsfunction_ParametricJsFunction() : null)('');
+ }
+ /** @nodts @return {*} */
+ static m_callInterfaceProjected__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(/** function(?, ?):? */ f, /** * */ o, /** (Number|number) */ n) {
+  MainKt.$clinit();
+  return (/**@type {function(*, (Number|number)):*}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(f)))(o, n);
+ }
+ /** @nodts @return {?string} */
+ static m_callInterfaceParameterized__jsfunction_JsBiFunction__java_lang_String__java_lang_String(/** function(?string, Integer):?string */ f, /** ?string */ s) {
+  MainKt.$clinit();
+  return /**@type {?string}*/ ($Casts.$to(f(s, Integer.m_valueOf__int__java_lang_Integer(1)), j_l_String));
+ }
+ /** @nodts @template U, V @return {U} */
+ static m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(/** function(U, V):U */ f, /** U */ u, /** V */ v) {
+  MainKt.$clinit();
+  return f(u, v);
+ }
+ /** @nodts @return {*} */
+ static m_callImplementorPorjected__jsfunction_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/** !TIntegerJsBiFunction<?> */ f, /** * */ o, /** Integer */ n) {
+  MainKt.$clinit();
+  return TIntegerJsBiFunction.m_apply__jsfunction_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/**@type {!TIntegerJsBiFunction<*>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(f)), o, n);
+ }
+ /** @nodts @return {?string} */
+ static m_callImplementorParameterized__jsfunction_TIntegerJsBiFunction__java_lang_String__java_lang_String(/** !TIntegerJsBiFunction<?string> */ f, /** ?string */ s) {
+  MainKt.$clinit();
+  return /**@type {?string}*/ ($Casts.$to(TIntegerJsBiFunction.m_apply__jsfunction_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(f, s, Integer.m_valueOf__int__java_lang_Integer(1)), j_l_String));
+ }
+ /** @nodts */
+ static m_testParameterTypes__void() {
+  MainKt.$clinit();
+  let tIntegerJsBiFunction = /**@type {function(?string, Integer):?string}*/ (TIntegerJsBiFunction.$create__());
+  let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();
+  MainKt.m_callInterfaceProjected__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
+  MainKt.m_callInterfaceProjected__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
+  MainKt.m_callInterfaceParameterized__jsfunction_JsBiFunction__java_lang_String__java_lang_String(tIntegerJsBiFunction, 'a');
+  MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
+  MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
+  MainKt.m_callImplementorPorjected__jsfunction_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/**@type {!TIntegerJsBiFunction<number>}*/ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int__java_lang_Integer(1));
+  MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
+  MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
+  MainKt.m_callImplementorParameterized__jsfunction_TIntegerJsBiFunction__java_lang_String__java_lang_String(/**@type {!TIntegerJsBiFunction<?string>}*/ (TIntegerJsBiFunction.$create__()), '');
+  tIntegerJsBiFunction('a', Integer.m_valueOf__int__java_lang_Integer(1));
+  doubleDoubleJsBiFunction(1.1, 1.1);
+  MainKt.callOnFunction(DoubleDoubleJsBiFunction.$create__());
+ }
+ /** @return {number} */
+ static callOnFunction(/** ?function(?number, ?number):?number */ f) {
+  MainKt.$clinit();
+  return 0;
+ }
+ /** @nodts */
+ static m_testCast__void() {
+  MainKt.$clinit();
+  let o = /**@type {!TIntegerJsBiFunction<string>}*/ (TIntegerJsBiFunction.$create__());
+  let rawTIntegerJsBiFunction = /**@type {!TIntegerJsBiFunction<*>}*/ ($Casts.$to(o, TIntegerJsBiFunction));
+  let parameterizedTIntegerJsBiFunction = /**@type {!TIntegerJsBiFunction<string>}*/ ($Casts.$to(o, TIntegerJsBiFunction));
+  let anotherRawJsBiFunction = /**@type {function(*, (Number|number)):*}*/ ($Casts.$to(o, $JavaScriptFunction));
+  let anotherParameterizedJsBiFunction = /**@type {function(string, !Integer):string}*/ ($Casts.$to(o, $JavaScriptFunction));
+  let doubleDoubleJsBiFunction = /**@type {!DoubleDoubleJsBiFunction}*/ ($Casts.$to(o, DoubleDoubleJsBiFunction));
+ }
+ /** @nodts */
+ static m_testNewInstance__void() {
+  MainKt.$clinit();
+  let rawTIntegerJsBiFunction = /**@type {!TIntegerJsBiFunction<*>}*/ (TIntegerJsBiFunction.$create__());
+  let parameterizedTIntegerJsBiFunction = /**@type {!TIntegerJsBiFunction<string>}*/ (TIntegerJsBiFunction.$create__());
+  let rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+  MainKt.f_jsFunctionFieldWildcard__jsfunction_MainKt_ = (/** !* */ event) =>{
+   return;
+  };
+  MainKt.f_jsFunctionFieldParameterized__jsfunction_MainKt_ = (/** string */ event_1) =>{
+   let event_2 = /**@type {?string}*/ ($Casts.$to(event_1, j_l_String));
+   return;
+  };
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Class = goog.module.get('java.lang.Class$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  ClassWithJsFunctionProperty = goog.module.get('jsfunction.ClassWithJsFunctionProperty$impl');
+  ContainerImpl = goog.module.get('jsfunction.ContainerImpl$impl');
+  DoubleDoubleJsBiFunction = goog.module.get('jsfunction.DoubleDoubleJsBiFunction$impl');
+  JsFunctionImplementation = goog.module.get('jsfunction.JsFunctionImplementation$impl');
+  TIntegerJsBiFunction = goog.module.get('jsfunction.TIntegerJsBiFunction$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $JavaScriptFunction = goog.module.get('vmbootstrap.JavaScriptFunction$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+/**@type {function(?):void} @nodts*/
+MainKt.f_jsFunctionFieldWildcard__jsfunction_MainKt_;
+/**@type {function(string):void} @nodts*/
+MainKt.f_jsFunctionFieldParameterized__jsfunction_MainKt_;
+$Util.$setClassMetadata(MainKt, 'jsfunction.MainKt');
+
+/* NATIVE.JS EPILOG */
+
+const jsfunction_MainKt = MainKt;
+
+// Copyright 2017 Google Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @return {function(number):number}
+ * @public
+ */
+MainKt.createNativeFunction = function() {
+  return function(a) {
+    return a;
+  };
+};
+
+/**
+ * @param {function(?number, ?number):?number} fn
+ * @return {?number}
+ * @public
+ */
+MainKt.callOnFunction = function(fn) {
+  return fn(1.1, 1.1);
+};
+
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

@@ -1,0 +1,41 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.AbstractCollection$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template T
+ */
+class AbstractCollection extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__multipleabstractparents_MultipleAbstractParents_AbstractCollection__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?string} */
+ m_getFoo__java_lang_Object__java_lang_String(/** ?T */ t) {
+  return 'AbstractCollection';
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractCollection.$clinit = () =>{};
+  AbstractCollection.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractCollection;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractCollection, 'multipleabstractparents.MultipleAbstractParents$AbstractCollection');
+
+exports = AbstractCollection;
+
+//# sourceMappingURL=MultipleAbstractParents$AbstractCollection.js.map

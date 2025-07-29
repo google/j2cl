@@ -1,0 +1,37 @@
+goog.module('overwrittentypevariables.ParameterizedType$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const overwrittentypevariables_otherpkg_ParameterizedType = goog.require('overwrittentypevariables.otherpkg.ParameterizedType$impl');
+
+/**
+ * @interface
+ * @template F, T
+ * @extends {overwrittentypevariables_otherpkg_ParameterizedType<F, T>}
+ */
+class ParameterizedType {
+ /** @abstract @override @nodts @return {T} */
+ m_accept__java_lang_Object__java_lang_Object(/** F */ v) {}
+ /** @nodts */
+ static $clinit() {
+  ParameterizedType.$clinit = () =>{};
+  ParameterizedType.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  overwrittentypevariables_otherpkg_ParameterizedType.$markImplementor(ctor);
+  ctor.prototype.$implements__overwrittentypevariables_ParameterizedType = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__overwrittentypevariables_ParameterizedType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ParameterizedType.$markImplementor(/**@type {Function}*/ (ParameterizedType));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (ParameterizedType), 'overwrittentypevariables.ParameterizedType');
+
+exports = ParameterizedType;
+
+//# sourceMappingURL=ParameterizedType.js.map

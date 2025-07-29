@@ -1,0 +1,128 @@
+goog.module('primitivespecialization.IntList$impl');
+
+const ArrayList = goog.require('java.util.ArrayList$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {ArrayList<!Integer>}
+ */
+class IntList extends ArrayList {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!IntList} */
+ static $create__() {
+  IntList.$clinit();
+  let $instance = new IntList();
+  $instance.$ctor__primitivespecialization_IntList__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_IntList__void() {
+  this.$ctor__java_util_ArrayList__void();
+ }
+ /** @nodts @return {number} */
+ m_removeAt__int__int(/** number */ index) {
+  return super.removeAtIndex(index);
+ }
+ /** @override @return {boolean} */
+ retainAll(/** !Collection<?> */ elements) {
+  return super.retainAll(elements);
+ }
+ /** @override @return {boolean} */
+ removeAll(/** !Collection<?> */ elements) {
+  return super.removeAll(elements);
+ }
+ /** @nodts @return {boolean} */
+ m_remove__java_lang_Integer__boolean(/** Integer */ element) {
+  return super.remove(element);
+ }
+ /** @nodts @return {number} */
+ m_lastIndexOf__int__int(/** number */ element) {
+  return super.lastIndexOf(Integer.m_valueOf__int__java_lang_Integer(element));
+ }
+ /** @nodts @return {number} */
+ m_indexOf__int__int(/** number */ element) {
+  return super.indexOf(Integer.m_valueOf__int__java_lang_Integer(element));
+ }
+ /** @override @return {boolean} */
+ containsAll(/** !Collection<?> */ elements) {
+  return super.containsAll(elements);
+ }
+ /** @nodts @return {boolean} */
+ m_contains__int__boolean(/** number */ element) {
+  return super.contains(Integer.m_valueOf__int__java_lang_Integer(element));
+ }
+ /** @nodts @return {number} */
+ m_remove__int__int(/** number */ index) {
+  return this.m_removeAt__int__int(index);
+ }
+ /** @final @override @return {boolean} */
+ remove(/** * */ element) {
+  if (!Integer.$isInstance(element)) {
+   return false;
+  }
+  return this.m_remove__java_lang_Integer__boolean(Integer.m_valueOf__int__java_lang_Integer((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int()));
+ }
+ /** @final @override @return {number} */
+ lastIndexOf(/** * */ element) {
+  if (!Integer.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_lastIndexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+ }
+ /** @final @override @return {number} */
+ indexOf(/** * */ element) {
+  if (!Integer.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_indexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+ }
+ /** @final @override @return {boolean} */
+ contains(/** * */ element) {
+  if (!Integer.$isInstance(element)) {
+   return false;
+  }
+  return this.m_contains__int__boolean((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+ }
+ /** @nodts @return {number} */
+ m_getSize__int() {
+  return super.size();
+ }
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ //Bridge method.
+ /** @final @override @suppress{visibility} @return {!Integer} */
+ removeAtIndex(/** number */ arg0) {
+  return Integer.m_valueOf__int__java_lang_Integer(this.m_remove__int__int(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  IntList.$clinit = () =>{};
+  IntList.$loadModules();
+  ArrayList.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IntList;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(IntList, 'primitivespecialization.IntList');
+
+exports = IntList;
+
+//# sourceMappingURL=IntList.js.map

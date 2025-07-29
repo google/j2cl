@@ -1,0 +1,133 @@
+goog.module('nativejstypes.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('com.acme.MyFoo');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Bar = goog.forwardDeclare('nativejstypes.Bar');
+let $synthetic_nativejstypes_Bar = goog.forwardDeclare('nativejstypes.Bar');
+let TopLevel = goog.forwardDeclare('toplevel');
+let toplevel = goog.forwardDeclare('toplevel');
+let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__nativejstypes_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_testNativeJsTypeWithNamespace__int() {
+  MainKt.$clinit();
+  let foo = new Foo();
+  return foo.sum();
+ }
+ /** @nodts */
+ static m_testNativeJsTypeWithNamespaceJsProperties__void() {
+  MainKt.$clinit();
+  let foo = new Foo();
+  foo.x = 50;
+  foo.y = 5;
+ }
+ /** @nodts @return {number} */
+ static m_testNativeJsTypeWithoutNamespace__int() {
+  MainKt.$clinit();
+  let bar = new Bar(6, 7);
+  Bar.getStatic();
+  let unused = Unit.f_INSTANCE__kotlin_Unit;
+  return bar.product();
+ }
+ /** @nodts */
+ static m_testNativeJsTypeWithoutNamespaceJsProperties__void() {
+  MainKt.$clinit();
+  let bar = new Bar(6, 7);
+  bar.x = 50;
+  bar.y = 5;
+  Bar.f = 10;
+ }
+ /** @nodts */
+ static m_testInnerNativeJsType__void() {
+  MainKt.$clinit();
+  let barInner = new Bar.Inner(1);
+  let barInnerWithDotInName = new $synthetic_nativejstypes_Bar.Inner(2);
+  barInner.square();
+  barInnerWithDotInName.square();
+  Bar.Inner.getInnerStatic();
+  $synthetic_nativejstypes_Bar.Inner.getInnerStatic();
+ }
+ /** @nodts */
+ static m_testGlobalNativeJsType__void() {
+  MainKt.$clinit();
+  let header = new Headers();
+  header.append('Content-Type', 'text/xml');
+ }
+ /** @nodts */
+ static m_testNativeTypeClassLiteral__void() {
+  MainKt.$clinit();
+  let o1 = Class.$get($JavaScriptObject);
+  o1 = Class.$get(j_l_Object, 1);
+ }
+ /** @nodts */
+ static m_testNativeTypeObjectMethods__void() {
+  MainKt.$clinit();
+  let bar = new Bar(6, 7);
+  let unusedStr = $Objects.m_toString__java_lang_Object__java_lang_String(bar);
+  let unusedHash = $Objects.m_hashCode__java_lang_Object__int(bar);
+  let unusedEq = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(bar, j_l_Object.$create__());
+ }
+ /** @nodts */
+ static m_testTopLevel__void() {
+  MainKt.$clinit();
+  TopLevel.x = 2;
+  let nested = new TopLevel.Nested();
+  nested.x = 3;
+  let topLevelNestedReference = new toplevel.Nested();
+  topLevelNestedReference.x = 4;
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Foo = goog.module.get('com.acme.MyFoo');
+  Class = goog.module.get('java.lang.Class$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
+  Bar = goog.module.get('nativejstypes.Bar');
+  $synthetic_nativejstypes_Bar = goog.module.get('nativejstypes.Bar');
+  TopLevel = goog.module.get('toplevel');
+  toplevel = goog.module.get('toplevel');
+  $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'nativejstypes.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

@@ -1,0 +1,236 @@
+goog.module('rangeoperators.RangeOperatorsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
+let ProgressionUtilKt = goog.forwardDeclare('kotlin.internal.ProgressionUtilKt$impl');
+let CharRange = goog.forwardDeclare('kotlin.ranges.CharRange$impl');
+let RangesKt = goog.forwardDeclare('kotlin.ranges.RangesKt$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
+/**
+ * @final
+ */
+class RangeOperatorsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!RangeOperatorsKt} */
+ static $create__() {
+  RangeOperatorsKt.$clinit();
+  let $instance = new RangeOperatorsKt();
+  $instance.$ctor__rangeoperators_RangeOperatorsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__rangeoperators_RangeOperatorsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  RangeOperatorsKt.$clinit();
+  if (CharRange.$create__char__char(97 /* 'a' */, 122 /* 'z' */).m_contains__char__boolean(97 /* 'a' */)) {}
+  if (RangesKt.m_until__char__char__kotlin_ranges_CharRange(97 /* 'a' */, 122 /* 'z' */).m_contains__char__boolean(97 /* 'a' */)) {}
+  for (let inductionVariable = 97 /* 'a' */; inductionVariable <= 122 /* 'z' */; inductionVariable = $Primitives.narrowIntToChar(inductionVariable + 1 | 0)) {
+   let i = inductionVariable;
+  }
+  for (let inductionVariable_1 = 97 /* 'a' */; inductionVariable_1 < 122 /* 'z' */; inductionVariable_1 = $Primitives.narrowIntToChar(inductionVariable_1 + 1 | 0)) {
+   let i_1 = inductionVariable_1;
+  }
+  for (let inductionVariable_2 = 0; inductionVariable_2 <= 4; inductionVariable_2 = inductionVariable_2 + 1 | 0) {
+   let i_2 = inductionVariable_2;
+  }
+  for (let inductionVariable_3 = 0; inductionVariable_3 < 4; inductionVariable_3 = inductionVariable_3 + 1 | 0) {
+   let i_3 = inductionVariable_3;
+  }
+  for (let inductionVariable_4 = $Long.fromInt(0); $LongUtils.lessEquals(inductionVariable_4, $Long.fromInt(4)); inductionVariable_4 = $LongUtils.plus(inductionVariable_4, $Long.fromInt(1))) {
+   let i_4 = inductionVariable_4;
+  }
+  for (let inductionVariable_5 = $Long.fromInt(0); $LongUtils.less(inductionVariable_5, $Long.fromInt(4)); inductionVariable_5 = $LongUtils.plus(inductionVariable_5, $Long.fromInt(1))) {
+   let i_5 = inductionVariable_5;
+  }
+  for (let inductionVariable_6 = $Long.fromInt(0); $LongUtils.lessEquals(inductionVariable_6, $Long.fromInt(1)); inductionVariable_6 = $LongUtils.plus(inductionVariable_6, $Long.fromInt(1))) {
+   let i_6 = inductionVariable_6;
+  }
+  for (let inductionVariable_7 = $Long.fromInt(0); $LongUtils.lessEquals(inductionVariable_7, $Long.fromInt(1)); inductionVariable_7 = $LongUtils.plus(inductionVariable_7, $Long.fromInt(1))) {
+   let i_7 = inductionVariable_7;
+  }
+  for (let inductionVariable_8 = $Long.fromInt(0); $LongUtils.less(inductionVariable_8, $Long.fromInt(1)); inductionVariable_8 = $LongUtils.plus(inductionVariable_8, $Long.fromInt(1))) {
+   let i_8 = inductionVariable_8;
+  }
+  for (let inductionVariable_9 = $Long.fromInt(0); $LongUtils.less(inductionVariable_9, $Long.fromInt(1)); inductionVariable_9 = $LongUtils.plus(inductionVariable_9, $Long.fromInt(1))) {
+   let i_9 = inductionVariable_9;
+  }
+  let s = 1;
+  let inductionVariable_10 = 1;
+  let last = s;
+  if (inductionVariable_10 <= last) {
+   let /** number */ i_10;
+   do {
+    i_10 = inductionVariable_10;
+    inductionVariable_10 = inductionVariable_10 + 1 | 0;
+   } while (i_10 != last);
+  }
+  for (let inductionVariable_11 = s; inductionVariable_11 <= 1; inductionVariable_11 = inductionVariable_11 + 1 | 0) {
+   let i_11 = inductionVariable_11;
+  }
+  let inductionVariable_12 = $Long.fromInt(1);
+  let last_1 = $Primitives.widenShortToLong(s);
+  if ($LongUtils.lessEquals(inductionVariable_12, last_1)) {
+   let /** !$Long */ i_12;
+   do {
+    i_12 = inductionVariable_12;
+    inductionVariable_12 = $LongUtils.plus(inductionVariable_12, $Long.fromInt(1));
+   } while ($LongUtils.notEquals(i_12, last_1));
+  }
+  for (let inductionVariable_13 = $Primitives.widenShortToLong(s); $LongUtils.lessEquals(inductionVariable_13, $Long.fromInt(1)); inductionVariable_13 = $LongUtils.plus(inductionVariable_13, $Long.fromInt(1))) {
+   let i_13 = inductionVariable_13;
+  }
+  for (let inductionVariable_14 = 1, last_2 = s; inductionVariable_14 < last_2; inductionVariable_14 = inductionVariable_14 + 1 | 0) {
+   let i_14 = inductionVariable_14;
+  }
+  for (let inductionVariable_15 = s; inductionVariable_15 < 1; inductionVariable_15 = inductionVariable_15 + 1 | 0) {
+   let i_15 = inductionVariable_15;
+  }
+  for (let inductionVariable_16 = $Long.fromInt(1), last_3 = $Primitives.widenShortToLong(s); $LongUtils.less(inductionVariable_16, last_3); inductionVariable_16 = $LongUtils.plus(inductionVariable_16, $Long.fromInt(1))) {
+   let i_16 = inductionVariable_16;
+  }
+  for (let inductionVariable_17 = $Primitives.widenShortToLong(s); $LongUtils.less(inductionVariable_17, $Long.fromInt(1)); inductionVariable_17 = $LongUtils.plus(inductionVariable_17, $Long.fromInt(1))) {
+   let i_17 = inductionVariable_17;
+  }
+  let b = 1;
+  let inductionVariable_18 = 1;
+  let last_4 = b;
+  if (inductionVariable_18 <= last_4) {
+   let /** number */ i_18;
+   do {
+    i_18 = inductionVariable_18;
+    inductionVariable_18 = inductionVariable_18 + 1 | 0;
+   } while (i_18 != last_4);
+  }
+  for (let inductionVariable_19 = b; inductionVariable_19 <= 1; inductionVariable_19 = inductionVariable_19 + 1 | 0) {
+   let i_19 = inductionVariable_19;
+  }
+  let inductionVariable_20 = $Long.fromInt(1);
+  let last_5 = $Primitives.widenByteToLong(b);
+  if ($LongUtils.lessEquals(inductionVariable_20, last_5)) {
+   let /** !$Long */ i_20;
+   do {
+    i_20 = inductionVariable_20;
+    inductionVariable_20 = $LongUtils.plus(inductionVariable_20, $Long.fromInt(1));
+   } while ($LongUtils.notEquals(i_20, last_5));
+  }
+  for (let inductionVariable_21 = $Primitives.widenByteToLong(b); $LongUtils.lessEquals(inductionVariable_21, $Long.fromInt(1)); inductionVariable_21 = $LongUtils.plus(inductionVariable_21, $Long.fromInt(1))) {
+   let i_21 = inductionVariable_21;
+  }
+  for (let inductionVariable_22 = 1, last_6 = b; inductionVariable_22 < last_6; inductionVariable_22 = inductionVariable_22 + 1 | 0) {
+   let i_22 = inductionVariable_22;
+  }
+  for (let inductionVariable_23 = b; inductionVariable_23 < 1; inductionVariable_23 = inductionVariable_23 + 1 | 0) {
+   let i_23 = inductionVariable_23;
+  }
+  for (let inductionVariable_24 = $Long.fromInt(1), last_7 = $Primitives.widenByteToLong(b); $LongUtils.less(inductionVariable_24, last_7); inductionVariable_24 = $LongUtils.plus(inductionVariable_24, $Long.fromInt(1))) {
+   let i_24 = inductionVariable_24;
+  }
+  for (let inductionVariable_25 = $Primitives.widenByteToLong(b); $LongUtils.less(inductionVariable_25, $Long.fromInt(1)); inductionVariable_25 = $LongUtils.plus(inductionVariable_25, $Long.fromInt(1))) {
+   let i_25 = inductionVariable_25;
+  }
+  let inductionVariable_26 = 1;
+  let last_8 = ProgressionUtilKt.m_getProgressionLastElement__int__int__int__int(1, 5, 3);
+  if (inductionVariable_26 <= last_8) {
+   let /** number */ i_26;
+   do {
+    i_26 = inductionVariable_26;
+    inductionVariable_26 = inductionVariable_26 + 3 | 0;
+   } while (i_26 != last_8);
+  }
+  let progression = RangesKt.m_step__kotlin_ranges_IntProgression__int__kotlin_ranges_IntProgression(RangesKt.m_until__int__int__kotlin_ranges_IntRange(1, 5), 3);
+  let inductionVariable_27 = progression.m_getFirst__int();
+  let last_9 = progression.m_getLast__int();
+  let step = progression.m_getStep__int();
+  if (step > 0 && inductionVariable_27 <= last_9 || step < 0 && last_9 <= inductionVariable_27) {
+   let /** number */ i_27;
+   do {
+    i_27 = inductionVariable_27;
+    inductionVariable_27 = inductionVariable_27 + step | 0;
+   } while (i_27 != last_9);
+  }
+  for (let inductionVariable_28 = 1; inductionVariable_28 < 5; inductionVariable_28 = inductionVariable_28 + 1 | 0) {
+   let i_28 = inductionVariable_28;
+  }
+  let tmp = -6;
+  let inductionVariable_29 = 5;
+  let last_10 = ProgressionUtilKt.m_getProgressionLastElement__int__int__int__int(5, 1, tmp);
+  if (last_10 <= inductionVariable_29) {
+   let /** number */ i_29;
+   do {
+    i_29 = inductionVariable_29;
+    inductionVariable_29 = inductionVariable_29 + tmp | 0;
+   } while (i_29 != last_10);
+  }
+  for (let inductionVariable_30 = 5; 1 <= inductionVariable_30; inductionVariable_30 = inductionVariable_30 + -1 | 0) {
+   let i_30 = inductionVariable_30;
+  }
+  let progression_1 = RangesKt.m_reversed__kotlin_ranges_IntProgression__kotlin_ranges_IntProgression(RangesKt.m_until__int__int__kotlin_ranges_IntRange(1, 5));
+  let inductionVariable_31 = progression_1.m_getFirst__int();
+  let last_11 = progression_1.m_getLast__int();
+  let step_1 = progression_1.m_getStep__int();
+  if (step_1 > 0 && inductionVariable_31 <= last_11 || step_1 < 0 && last_11 <= inductionVariable_31) {
+   let /** number */ i_31;
+   do {
+    i_31 = inductionVariable_31;
+    inductionVariable_31 = inductionVariable_31 + step_1 | 0;
+   } while (i_31 != last_11);
+  }
+  let from = Short.m_valueOf__short__java_lang_Short(1);
+  let to = Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));
+  if (!$Equality.$same(from, null) && !$Equality.$same(to, null)) {
+   let inductionVariable_32 = $Primitives.widenShortToLong(from.m_shortValue__short());
+   let last_12 = to.m_longValue__long();
+   if ($LongUtils.lessEquals(inductionVariable_32, last_12)) {
+    let /** !$Long */ i_32;
+    do {
+     i_32 = inductionVariable_32;
+     inductionVariable_32 = $LongUtils.plus(inductionVariable_32, $Long.fromInt(1));
+    } while ($LongUtils.notEquals(i_32, last_12));
+   }
+   for (let inductionVariable_33 = $Primitives.widenShortToLong(from.m_shortValue__short()), last_13 = to.m_longValue__long(); $LongUtils.less(inductionVariable_33, last_13); inductionVariable_33 = $LongUtils.plus(inductionVariable_33, $Long.fromInt(1))) {
+    let i_33 = inductionVariable_33;
+   }
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  RangeOperatorsKt.$clinit = () =>{};
+  RangeOperatorsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RangeOperatorsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Long = goog.module.get('java.lang.Long$impl');
+  Short = goog.module.get('java.lang.Short$impl');
+  ProgressionUtilKt = goog.module.get('kotlin.internal.ProgressionUtilKt$impl');
+  CharRange = goog.module.get('kotlin.ranges.CharRange$impl');
+  RangesKt = goog.module.get('kotlin.ranges.RangesKt$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
+}
+$Util.$setClassMetadata(RangeOperatorsKt, 'rangeoperators.RangeOperatorsKt');
+
+exports = RangeOperatorsKt;
+
+//# sourceMappingURL=RangeOperatorsKt.js.map

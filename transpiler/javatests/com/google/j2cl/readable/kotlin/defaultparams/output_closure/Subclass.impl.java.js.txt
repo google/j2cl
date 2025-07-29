@@ -1,0 +1,62 @@
+goog.module('defaultparams.Subclass$impl');
+
+const DefaultParams = goog.require('defaultparams.DefaultParams$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Subclass extends DefaultParams {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'Subclass()'.
+ /** @nodts @return {!Subclass} */
+ static $create__() {
+  Subclass.$clinit();
+  let $instance = new Subclass();
+  $instance.$ctor__defaultparams_Subclass__void();
+  return $instance;
+ }
+ //Initialization from constructor 'Subclass()'.
+ /** @nodts */
+ $ctor__defaultparams_Subclass__void() {
+  this.$ctor__defaultparams_DefaultParams__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(0, 2, 1, null);
+ }
+ //Factory method corresponding to constructor 'Subclass(int, int)'.
+ /** @nodts @return {!Subclass} */
+ static $create__int__int(/** number */ a, /** number */ b) {
+  Subclass.$clinit();
+  let $instance = new Subclass();
+  $instance.$ctor__defaultparams_Subclass__int__int__void(a, b);
+  return $instance;
+ }
+ //Initialization from constructor 'Subclass(int, int)'.
+ /** @nodts */
+ $ctor__defaultparams_Subclass__int__int__void(/** number */ a, /** number */ b) {
+  this.$ctor__defaultparams_DefaultParams__int__int__void(a, b);
+ }
+ /** @override @nodts */
+ m_foo__int__void(/** number */ c) {
+  super.m_foo__int__void(c + 10 | 0);
+ }
+ /** @nodts */
+ static $clinit() {
+  Subclass.$clinit = () =>{};
+  Subclass.$loadModules();
+  DefaultParams.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Subclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Subclass, 'defaultparams.Subclass');
+
+exports = Subclass;
+
+//# sourceMappingURL=Subclass.js.map

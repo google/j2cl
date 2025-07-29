@@ -1,0 +1,34 @@
+goog.module('bridgejsmethod.Main.J$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class J {
+ /** @abstract @nodts */
+ m_bar__java_lang_Object__void(/** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  J.$clinit = () =>{};
+  J.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgejsmethod_Main_J = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgejsmethod_Main_J;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+J.$markImplementor(/**@type {Function}*/ (J));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (J), 'bridgejsmethod.Main$J');
+
+exports = J;
+
+//# sourceMappingURL=Main$J.js.map

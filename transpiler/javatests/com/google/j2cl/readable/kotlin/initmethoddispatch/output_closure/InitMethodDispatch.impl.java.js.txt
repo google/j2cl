@@ -1,0 +1,66 @@
+goog.module('initmethoddispatch.InitMethodDispatch$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class InitMethodDispatch extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_value__initmethoddispatch_InitMethodDispatch_ = 0;
+ }
+ /** @final @nodts @return {number} */
+ m_getValue__int() {
+  return this.f_value__initmethoddispatch_InitMethodDispatch_;
+ }
+ //Factory method corresponding to constructor 'InitMethodDispatch()'.
+ /** @nodts @template T @return {!InitMethodDispatch<T>} */
+ static $create__() {
+  InitMethodDispatch.$clinit();
+  let $instance = new InitMethodDispatch();
+  $instance.$ctor__initmethoddispatch_InitMethodDispatch__void();
+  return $instance;
+ }
+ //Initialization from constructor 'InitMethodDispatch()'.
+ /** @nodts */
+ $ctor__initmethoddispatch_InitMethodDispatch__void() {
+  this.$ctor__initmethoddispatch_InitMethodDispatch__int__void(1);
+ }
+ //Factory method corresponding to constructor 'InitMethodDispatch(int)'.
+ /** @nodts @template T @return {!InitMethodDispatch<T>} */
+ static $create__int(/** number */ i) {
+  InitMethodDispatch.$clinit();
+  let $instance = new InitMethodDispatch();
+  $instance.$ctor__initmethoddispatch_InitMethodDispatch__int__void(i);
+  return $instance;
+ }
+ //Initialization from constructor 'InitMethodDispatch(int)'.
+ /** @nodts */
+ $ctor__initmethoddispatch_InitMethodDispatch__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+  this.f_value__initmethoddispatch_InitMethodDispatch_ = i;
+ }
+ /** @nodts */
+ static $clinit() {
+  InitMethodDispatch.$clinit = () =>{};
+  InitMethodDispatch.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InitMethodDispatch;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InitMethodDispatch, 'initmethoddispatch.InitMethodDispatch');
+
+exports = InitMethodDispatch;
+
+//# sourceMappingURL=InitMethodDispatch.js.map

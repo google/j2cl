@@ -1,0 +1,61 @@
+goog.module('statementasexpressions.EnumWithInitStatement.BAZ$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const EnumWithInitStatement = goog.require('statementasexpressions.EnumWithInitStatement$impl');
+
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let StatementAsExpressionsKt = goog.forwardDeclare('statementasexpressions.StatementAsExpressionsKt$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ */
+class BAZ extends EnumWithInitStatement {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BAZ} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  BAZ.$clinit();
+  let $instance = new BAZ();
+  $instance.$ctor__statementasexpressions_EnumWithInitStatement_BAZ__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__statementasexpressions_EnumWithInitStatement_BAZ__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  let /** string */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = 'BAZ';
+  } else {
+   throw $Exceptions.toJs(AssertionError.$create__());
+  }
+  this.$ctor__statementasexpressions_EnumWithInitStatement__java_lang_String__int__java_lang_String__void($name, $ordinal, tmp);
+ }
+ /** @override @nodts @return {string} */
+ m_foo__java_lang_String() {
+  return 'BAZ';
+ }
+ /** @nodts */
+ static $clinit() {
+  BAZ.$clinit = () =>{};
+  BAZ.$loadModules();
+  EnumWithInitStatement.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BAZ;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AssertionError = goog.module.get('java.lang.AssertionError$impl');
+  StatementAsExpressionsKt = goog.module.get('statementasexpressions.StatementAsExpressionsKt$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(BAZ, 'statementasexpressions.EnumWithInitStatement$BAZ');
+
+exports = BAZ;
+
+//# sourceMappingURL=EnumWithInitStatement$BAZ.js.map

@@ -1,0 +1,46 @@
+goog.module('strings.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Foo extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Foo} */
+ static $create__() {
+  let $instance = new Foo();
+  $instance.$ctor__strings_Foo__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__strings_Foo__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {string} */
+ toString() {
+  return 'bar';
+ }
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Foo, 'strings.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

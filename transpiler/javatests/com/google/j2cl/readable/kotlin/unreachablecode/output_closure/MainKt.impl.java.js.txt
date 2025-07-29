@@ -1,0 +1,174 @@
+goog.module('unreachablecode.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let SomeProvider = goog.forwardDeclare('unreachablecode.SomeProvider$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__unreachablecode_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__unreachablecode_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getI__int() {
+  MainKt.$clinit();
+  return MainKt.f_i__unreachablecode_MainKt_;
+ }
+ /** @nodts */
+ static m_setI__int__void(/** number */ set__) {
+  MainKt.$clinit();
+  MainKt.f_i__unreachablecode_MainKt_ = set__;
+ }
+ /** @nodts @return {?} */
+ static m_alwaysThrows__kotlin_jvm_internal_NothingStub() {
+  MainKt.$clinit();
+  throw $Exceptions.toJs(Error.$create__());
+ }
+ /** @nodts */
+ static m_noReturnRequired__void() {
+  MainKt.$clinit();
+  MainKt.m_setI__int__void(1);
+  MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {number} */
+ static m_requiresPrimitiveReturn__int() {
+  MainKt.$clinit();
+  MainKt.m_setI__int__void(1);
+  return MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {Integer} */
+ static m_requiresNullablePrimitiveReturn__java_lang_Integer() {
+  MainKt.$clinit();
+  MainKt.m_setI__int__void(1);
+  return MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {!*} */
+ static m_requiresNonPrimitiveReturn__java_lang_Object() {
+  MainKt.$clinit();
+  return MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {*} */
+ static m_requiresNullableNonPrimitiveReturn__java_lang_Object() {
+  MainKt.$clinit();
+  return MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {!*} */
+ static m_returnsNothingCall__java_lang_Object() {
+  MainKt.$clinit();
+  return MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {!*} */
+ static m_trailingThrow__java_lang_Object() {
+  MainKt.$clinit();
+  throw $Exceptions.toJs(Error.$create__());
+ }
+ /** @nodts @return {number} */
+ static m_lacksReturnStatement__int() {
+  MainKt.$clinit();
+  MainKt.m_setI__int__void(1);
+  return MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {!*} */
+ static m_branchingAlwaysReturns__boolean__java_lang_Object(/** boolean */ b) {
+  MainKt.$clinit();
+  if (b) {
+   return MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+  } else {
+   MainKt.m_setI__int__void(MainKt.m_getI__int() + 3 | 0);
+  }
+  return Integer.m_valueOf__int__java_lang_Integer(MainKt.m_getI__int());
+ }
+ /** @nodts @return {!*} */
+ static m_branchingSometimesReturns__boolean__java_lang_Object(/** boolean */ b) {
+  MainKt.$clinit();
+  if (b) {
+   return MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+  } else {
+   MainKt.m_setI__int__void(MainKt.m_getI__int() + 3 | 0);
+   return Integer.m_valueOf__int__java_lang_Integer(MainKt.m_getI__int());
+  }
+ }
+ /** @nodts */
+ static m_nullBangBang__void() {
+  MainKt.$clinit();
+  let /** ? */ str = null;
+  let nonNullStr = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(str);
+  nonNullStr = j_l_String.m_valueOf__java_lang_Object__java_lang_String(nonNullStr) + 'abc';
+ }
+ /** @nodts */
+ static m_codeAfterContinue__void() {
+  MainKt.$clinit();
+  let x = 1;
+  while (true) {
+   continue;
+  }
+  Math.imul(x, 2);
+ }
+ /** @nodts */
+ static m_codeAfterBreak__void() {
+  MainKt.$clinit();
+  let x = 1;
+  while (true) {
+   break;
+  }
+  Math.imul(x, 2);
+ }
+ /** @nodts */
+ static m_nestedLambdaWithNothingReturn__void() {
+  MainKt.$clinit();
+  let x = SomeProvider.$adapt(/**  @return {string}*/ (() =>{
+   return /**@type {string}*/ ($Casts.$to(SomeProvider.$adapt(/**  @return {string}*/ (() =>{
+    return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+   })).m_provide__java_lang_Object(), j_l_String));
+  }));
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Error = goog.module.get('java.lang.Error$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  SomeProvider = goog.module.get('unreachablecode.SomeProvider$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+/**@type {number} @nodts*/
+MainKt.f_i__unreachablecode_MainKt_ = 0;
+$Util.$setClassMetadata(MainKt, 'unreachablecode.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

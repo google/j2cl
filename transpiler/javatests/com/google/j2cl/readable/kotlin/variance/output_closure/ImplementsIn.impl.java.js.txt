@@ -1,0 +1,66 @@
+goog.module('variance.ImplementsIn$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const In = goog.require('variance.In$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Container = goog.forwardDeclare('variance.Container$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {In<?string>}
+ */
+class ImplementsIn extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ImplementsIn} */
+ static $create__() {
+  ImplementsIn.$clinit();
+  let $instance = new ImplementsIn();
+  $instance.$ctor__variance_ImplementsIn__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__variance_ImplementsIn__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_m__java_lang_String__void(/** ?string */ t) {}
+ /** @override @nodts @return {!Container<?>} */
+ m_mListIn__variance_Container__variance_Container(/** !Container<?> */ c) {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_m__java_lang_Object__void(/** ?string */ arg0) {
+  this.m_m__java_lang_String__void(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  ImplementsIn.$clinit = () =>{};
+  ImplementsIn.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ImplementsIn;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+In.$markImplementor(ImplementsIn);
+$Util.$setClassMetadata(ImplementsIn, 'variance.ImplementsIn');
+
+exports = ImplementsIn;
+
+//# sourceMappingURL=ImplementsIn.js.map

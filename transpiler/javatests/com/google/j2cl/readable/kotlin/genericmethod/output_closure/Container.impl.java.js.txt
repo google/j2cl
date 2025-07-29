@@ -1,0 +1,53 @@
+goog.module('genericmethod.Container$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Content = goog.forwardDeclare('genericmethod.Content$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+
+/**
+ * @final
+ * @template CT
+ */
+class Container extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template CT @return {!Container<CT>} */
+ static $create__() {
+  Container.$clinit();
+  let $instance = new Container();
+  $instance.$ctor__genericmethod_Container__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericmethod_Container__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {CT} */
+ m_get__genericmethod_Content() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @nodts */
+ static $clinit() {
+  Container.$clinit = () =>{};
+  Container.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Container;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+$Util.$setClassMetadata(Container, 'genericmethod.Container');
+
+exports = Container;
+
+//# sourceMappingURL=Container.js.map

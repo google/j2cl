@@ -1,0 +1,36 @@
+goog.module('jvmstatic.InterfaceWithCompanion$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class InterfaceWithCompanion {
+ /** @nodts @return {number} */
+ static m_staticMethod__int() {
+  InterfaceWithCompanion.$clinit();
+  return 3;
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithCompanion.$clinit = () =>{};
+  InterfaceWithCompanion.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jvmstatic_InterfaceWithCompanion = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jvmstatic_InterfaceWithCompanion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithCompanion.$markImplementor(/**@type {Function}*/ (InterfaceWithCompanion));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceWithCompanion), 'jvmstatic.InterfaceWithCompanion');
+
+exports = InterfaceWithCompanion;
+
+//# sourceMappingURL=InterfaceWithCompanion.js.map

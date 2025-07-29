@@ -1,0 +1,43 @@
+goog.module('methodreferences.MethodReferences.Predicate$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.Predicate.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Predicate {
+ /** @abstract @nodts @return {boolean} */
+ m_apply__java_lang_Object__boolean(/** T */ parameter) {}
+ /** @nodts @template T @return {!Predicate<T>} */
+ static $adapt(/** ?function(T):boolean */ fn) {
+  Predicate.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  Predicate.$clinit = () =>{};
+  Predicate.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__methodreferences_MethodReferences_Predicate = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__methodreferences_MethodReferences_Predicate;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('methodreferences.MethodReferences.Predicate.$LambdaAdaptor$impl');
+ }
+}
+Predicate.$markImplementor(/**@type {Function}*/ (Predicate));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Predicate), 'methodreferences.MethodReferences$Predicate');
+
+exports = Predicate;
+
+//# sourceMappingURL=MethodReferences$Predicate.js.map

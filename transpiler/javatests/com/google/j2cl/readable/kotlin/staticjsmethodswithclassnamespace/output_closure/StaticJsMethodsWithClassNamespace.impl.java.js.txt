@@ -1,0 +1,47 @@
+goog.module('woo.StaticJsMethodsWithClassNamespace$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class StaticJsMethodsWithClassNamespace extends j_l_Object {
+ 
+ constructor() {
+  StaticJsMethodsWithClassNamespace.$clinit();
+  super();
+  this.$ctor__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__void();
+ }
+ /** @nodts */
+ $ctor__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final */
+ test() {
+  StaticJsMethodsWithClassNamespace.replacedName();
+  StaticJsMethodsWithClassNamespace.replacedName();
+ }
+ 
+ static replacedName() {
+  StaticJsMethodsWithClassNamespace.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  StaticJsMethodsWithClassNamespace.$clinit = () =>{};
+  StaticJsMethodsWithClassNamespace.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticJsMethodsWithClassNamespace;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(StaticJsMethodsWithClassNamespace, 'staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace');
+
+exports = StaticJsMethodsWithClassNamespace;
+
+//# sourceMappingURL=StaticJsMethodsWithClassNamespace.js.map

@@ -1,0 +1,57 @@
+goog.module('importglobaljstypes.Date.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Date = goog.forwardDeclare('importglobaljstypes.Date$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__importglobaljstypes_Date_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__importglobaljstypes_Date_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_now__double__double(/** number */ arg0) {
+  return Date.m_now__double__double(arg0);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__importglobaljstypes_Date_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__importglobaljstypes_Date_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__importglobaljstypes_Date_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Date = goog.module.get('importglobaljstypes.Date$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__importglobaljstypes_Date_Companion;
+$Util.$setClassMetadata(Companion, 'importglobaljstypes.Date$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Date$Companion.js.map

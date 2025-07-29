@@ -1,0 +1,52 @@
+goog.module('innerclassinheritance.ParentOuter$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ParentOuter extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_fieldInParentOuter__innerclassinheritance_ParentOuter_ = 0;
+ }
+ /** @nodts @return {!ParentOuter} */
+ static $create__() {
+  ParentOuter.$clinit();
+  let $instance = new ParentOuter();
+  $instance.$ctor__innerclassinheritance_ParentOuter__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinheritance_ParentOuter__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getFieldInParentOuter__int() {
+  return this.f_fieldInParentOuter__innerclassinheritance_ParentOuter_;
+ }
+ /** @final @nodts */
+ m_setFieldInParentOuter__int__void(/** number */ set__) {
+  this.f_fieldInParentOuter__innerclassinheritance_ParentOuter_ = set__;
+ }
+ /** @nodts */
+ m_funInParentOuter__void() {}
+ /** @nodts */
+ static $clinit() {
+  ParentOuter.$clinit = () =>{};
+  ParentOuter.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParentOuter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ParentOuter, 'innerclassinheritance.ParentOuter');
+
+exports = ParentOuter;
+
+//# sourceMappingURL=ParentOuter.js.map

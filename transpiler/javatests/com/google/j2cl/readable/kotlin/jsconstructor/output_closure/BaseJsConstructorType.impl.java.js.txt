@@ -1,0 +1,35 @@
+goog.module('jsconstructor.BaseJsConstructorType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class BaseJsConstructorType extends j_l_Object {
+ 
+ constructor(/** !* */ obj) {
+  BaseJsConstructorType.$clinit();
+  super();
+  this.$ctor__jsconstructor_BaseJsConstructorType__java_lang_Object__void(obj);
+ }
+ /** @nodts */
+ $ctor__jsconstructor_BaseJsConstructorType__java_lang_Object__void(/** !* */ obj) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  BaseJsConstructorType.$clinit = () =>{};
+  BaseJsConstructorType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BaseJsConstructorType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(BaseJsConstructorType, 'jsconstructor.BaseJsConstructorType');
+
+exports = BaseJsConstructorType;
+
+//# sourceMappingURL=BaseJsConstructorType.js.map

@@ -1,0 +1,34 @@
+goog.module('overwrittentypevariables.MyFunction$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template F, T
+ */
+class MyFunction {
+ /** @abstract @nodts @return {T} */
+ m_apply__java_lang_Object__java_lang_Object(/** F */ input) {}
+ /** @nodts */
+ static $clinit() {
+  MyFunction.$clinit = () =>{};
+  MyFunction.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__overwrittentypevariables_MyFunction = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__overwrittentypevariables_MyFunction;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+MyFunction.$markImplementor(/**@type {Function}*/ (MyFunction));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (MyFunction), 'overwrittentypevariables.MyFunction');
+
+exports = MyFunction;
+
+//# sourceMappingURL=MyFunction.js.map

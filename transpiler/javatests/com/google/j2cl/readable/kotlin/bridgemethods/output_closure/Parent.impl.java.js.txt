@@ -1,0 +1,63 @@
+goog.module('bridgemethods.Parent$impl');
+
+const SuperParent = goog.require('bridgemethods.SuperParent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template T
+ * @extends {SuperParent<T, (Number|number)>}
+ */
+class Parent extends SuperParent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!Parent<T>} */
+ static $create__() {
+  Parent.$clinit();
+  let $instance = new Parent();
+  $instance.$ctor__bridgemethods_Parent__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_Parent__void() {
+  this.$ctor__bridgemethods_SuperParent__void();
+ }
+ /** @nodts */
+ m_foo__java_lang_Error__java_lang_Number__void(/** T */ t, /** (Number|number) */ s) {}
+ /** @nodts @template T_1 */
+ m_bar__java_lang_Number__void(/** T_1 */ t) {}
+ /** @final @nodts @template T_1 */
+ m_fun__java_lang_Object__void(/** T_1 */ t) {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__java_lang_Object__java_lang_Object__void(/** T */ arg0, /** (Number|number) */ arg1) {
+  this.m_foo__java_lang_Error__java_lang_Number__void(/**@type {T}*/ ($Casts.$to(arg0, Error)), /**@type {(Number|number)}*/ ($Casts.$to(arg1, Number)));
+ }
+ /** @nodts */
+ static $clinit() {
+  Parent.$clinit = () =>{};
+  Parent.$loadModules();
+  SuperParent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Parent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Error = goog.module.get('java.lang.Error$impl');
+  Number = goog.module.get('java.lang.Number$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(Parent, 'bridgemethods.Parent');
+
+exports = Parent;
+
+//# sourceMappingURL=Parent.js.map

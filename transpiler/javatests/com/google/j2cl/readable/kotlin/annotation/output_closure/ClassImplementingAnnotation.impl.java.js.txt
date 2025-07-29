@@ -1,0 +1,43 @@
+goog.module('annotation.ClassImplementingAnnotation$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Annotation = goog.require('java.lang.annotation.Annotation$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+/**
+ * @abstract
+ * @implements {Annotation}
+ */
+class ClassImplementingAnnotation extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__annotation_ClassImplementingAnnotation__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassImplementingAnnotation.$clinit = () =>{};
+  ClassImplementingAnnotation.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassImplementingAnnotation;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {Class<?>} */
+ m_annotationType__java_lang_Class() {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Annotation.$markImplementor(ClassImplementingAnnotation);
+$Util.$setClassMetadata(ClassImplementingAnnotation, 'annotation.ClassImplementingAnnotation');
+
+exports = ClassImplementingAnnotation;
+
+//# sourceMappingURL=ClassImplementingAnnotation.js.map

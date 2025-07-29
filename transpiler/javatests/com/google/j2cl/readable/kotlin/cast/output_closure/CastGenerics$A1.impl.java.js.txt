@@ -1,0 +1,46 @@
+goog.module('cast.CastGenerics.A1$impl');
+
+const Empty1 = goog.require('cast.CastGenerics.Empty1$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {Empty1}
+ */
+class A1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!A1} */
+ static $create__() {
+  A1.$clinit();
+  let $instance = new A1();
+  $instance.$ctor__cast_CastGenerics_A1__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cast_CastGenerics_A1__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  A1.$clinit = () =>{};
+  A1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Empty1.$markImplementor(A1);
+$Util.$setClassMetadata(A1, 'cast.CastGenerics$A1');
+
+exports = A1;
+
+//# sourceMappingURL=CastGenerics$A1.js.map

@@ -1,0 +1,90 @@
+goog.module('interfacedelegation.Implementor$impl');
+
+const I = goog.require('interfacedelegation.I$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {I}
+ */
+class Implementor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_m__interfacedelegation_Implementor_;
+  /**@type {string} @nodts*/
+  this.f_message__interfacedelegation_Implementor_;
+  /**@type {string} @nodts*/
+  this.f_propertyOverridenInDelegatingClass__interfacedelegation_Implementor_;
+ }
+ /** @nodts @return {!Implementor} */
+ static $create__() {
+  Implementor.$clinit();
+  let $instance = new Implementor();
+  $instance.$ctor__interfacedelegation_Implementor__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfacedelegation_Implementor__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_m__interfacedelegation_Implementor_ = 'Implemented by Implementor';
+  this.f_message__interfacedelegation_Implementor_ = this.m_getM__java_lang_String();
+  this.f_propertyOverridenInDelegatingClass__interfacedelegation_Implementor_ = this.m_getM__java_lang_String();
+ }
+ /** @final @nodts @return {string} */
+ m_getM__java_lang_String() {
+  return this.f_m__interfacedelegation_Implementor_;
+ }
+ /** @override @nodts @return {string} */
+ m_getMessage__java_lang_String() {
+  return this.f_message__interfacedelegation_Implementor_;
+ }
+ /** @override @nodts @return {string} */
+ m_getPropertyOverridenInDelegatingClass__java_lang_String() {
+  return this.f_propertyOverridenInDelegatingClass__interfacedelegation_Implementor_;
+ }
+ /** @override @nodts @return {string} */
+ m_retrieveString__java_lang_String() {
+  return this.m_getM__java_lang_String();
+ }
+ /** @override @nodts @return {string} */
+ m_methodOverridenInDelegatingClass__java_lang_String() {
+  return this.m_getM__java_lang_String();
+ }
+ /** @override @nodts @return {string} */
+ m_nonOveriddenfunctionUsingOverridenProperty__java_lang_String() {
+  return this.m_getPropertyOverridenInDelegatingClass__java_lang_String();
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {string} */
+ m_defaultMethod__java_lang_String() {
+  return I.m_defaultMethod__$default__interfacedelegation_I__java_lang_String(this);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {string} */
+ m_defaultMethodOverridenInD__java_lang_String() {
+  return I.m_defaultMethodOverridenInD__$default__interfacedelegation_I__java_lang_String(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  Implementor.$clinit = () =>{};
+  Implementor.$loadModules();
+  j_l_Object.$clinit();
+  I.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Implementor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I.$markImplementor(Implementor);
+$Util.$setClassMetadata(Implementor, 'interfacedelegation.Implementor');
+
+exports = Implementor;
+
+//# sourceMappingURL=Implementor.js.map

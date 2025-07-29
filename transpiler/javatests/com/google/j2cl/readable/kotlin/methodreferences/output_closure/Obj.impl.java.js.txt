@@ -1,0 +1,64 @@
+goog.module('methodreferences.Obj$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Obj extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Obj} */
+ static $create__() {
+  let $instance = new Obj();
+  $instance.$ctor__methodreferences_Obj__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__methodreferences_Obj__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {string} */
+ m_getObjectProperty__java_lang_String() {
+  return Obj.f_objectProperty__methodreferences_Obj_;
+ }
+ /** @final @nodts */
+ m_setObjectProperty__java_lang_String__void(/** string */ set__) {
+  Obj.f_objectProperty__methodreferences_Obj_ = set__;
+ }
+ /** @final @nodts @return {!*} */
+ m_objectMethod__java_lang_Object() {
+  return j_l_Object.$create__();
+ }
+ /** @nodts @return {!Obj} */
+ static get f_INSTANCE__methodreferences_Obj() {
+  return (Obj.$clinit(), Obj.$static_INSTANCE__methodreferences_Obj);
+ }
+ /** @nodts */
+ static $clinit() {
+  Obj.$clinit = () =>{};
+  Obj.$loadModules();
+  j_l_Object.$clinit();
+  Obj.$static_INSTANCE__methodreferences_Obj = Obj.$create__();
+  Obj.f_objectProperty__methodreferences_Obj_ = 'test';
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Obj;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!Obj} @nodts*/
+Obj.$static_INSTANCE__methodreferences_Obj;
+/**@type {string} @nodts*/
+Obj.f_objectProperty__methodreferences_Obj_;
+$Util.$setClassMetadata(Obj, 'methodreferences.Obj');
+
+exports = Obj;
+
+//# sourceMappingURL=Obj.js.map

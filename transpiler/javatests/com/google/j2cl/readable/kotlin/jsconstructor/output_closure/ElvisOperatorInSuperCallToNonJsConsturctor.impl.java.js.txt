@@ -1,0 +1,59 @@
+goog.module('jsconstructor.ElvisOperatorInSuperCallToNonJsConsturctor$impl');
+
+const BaseNonJsConstructor = goog.require('jsconstructor.BaseNonJsConstructor$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class ElvisOperatorInSuperCallToNonJsConsturctor extends BaseNonJsConstructor {
+ //JsConstructor 'ElvisOperatorInSuperCallToNonJsConsturctor(Object)'.
+ 
+ constructor(/** * */ obj) {
+  ElvisOperatorInSuperCallToNonJsConsturctor.$clinit();
+  super();
+  this.$ctor__jsconstructor_ElvisOperatorInSuperCallToNonJsConsturctor__java_lang_Object__void(obj);
+ }
+ //Initialization from constructor 'ElvisOperatorInSuperCallToNonJsConsturctor(Object)'.
+ /** @nodts */
+ $ctor__jsconstructor_ElvisOperatorInSuperCallToNonJsConsturctor__java_lang_Object__void(/** * */ obj) {
+  let tmp0_elvis_lhs = obj;
+  this.$ctor__jsconstructor_BaseNonJsConstructor__java_lang_Object__void($Equality.$same(tmp0_elvis_lhs, null) ? j_l_Object.$create__() : tmp0_elvis_lhs);
+ }
+ //Factory method corresponding to constructor 'ElvisOperatorInSuperCallToNonJsConsturctor(Object, Object)'.
+ /** @nodts @return {!ElvisOperatorInSuperCallToNonJsConsturctor} */
+ static $create__java_lang_Object__java_lang_Object(/** * */ a, /** !* */ b) {
+  ElvisOperatorInSuperCallToNonJsConsturctor.$clinit();
+  let tmp0_elvis_lhs = a;
+  let $instance = new ElvisOperatorInSuperCallToNonJsConsturctor($Equality.$same(tmp0_elvis_lhs, null) ? b : tmp0_elvis_lhs);
+  $instance.$ctor__jsconstructor_ElvisOperatorInSuperCallToNonJsConsturctor__java_lang_Object__java_lang_Object__void(a, b);
+  return $instance;
+ }
+ //Initialization from constructor 'ElvisOperatorInSuperCallToNonJsConsturctor(Object, Object)'.
+ /** @nodts */
+ $ctor__jsconstructor_ElvisOperatorInSuperCallToNonJsConsturctor__java_lang_Object__java_lang_Object__void(/** * */ a, /** !* */ b) {}
+ /** @nodts */
+ static $clinit() {
+  ElvisOperatorInSuperCallToNonJsConsturctor.$clinit = () =>{};
+  ElvisOperatorInSuperCallToNonJsConsturctor.$loadModules();
+  BaseNonJsConstructor.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ElvisOperatorInSuperCallToNonJsConsturctor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(ElvisOperatorInSuperCallToNonJsConsturctor, 'jsconstructor.ElvisOperatorInSuperCallToNonJsConsturctor');
+
+exports = ElvisOperatorInSuperCallToNonJsConsturctor;
+
+//# sourceMappingURL=ElvisOperatorInSuperCallToNonJsConsturctor.js.map

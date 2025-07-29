@@ -1,0 +1,55 @@
+goog.module('nullability.NullableTemplatedReturnOverride$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NullableTemplatedReturn = goog.require('nullability.NullableTemplatedReturn$impl');
+
+/**
+ * @final
+ * @implements {NullableTemplatedReturn<?string>}
+ */
+class NullableTemplatedReturnOverride extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NullableTemplatedReturnOverride} */
+ static $create__() {
+  NullableTemplatedReturnOverride.$clinit();
+  let $instance = new NullableTemplatedReturnOverride();
+  $instance.$ctor__nullability_NullableTemplatedReturnOverride__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_NullableTemplatedReturnOverride__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {?string} */
+ m_foo__java_lang_String() {
+  return 'foo';
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {?string} */
+ m_foo__java_lang_Object() {
+  return this.m_foo__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  NullableTemplatedReturnOverride.$clinit = () =>{};
+  NullableTemplatedReturnOverride.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NullableTemplatedReturnOverride;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+NullableTemplatedReturn.$markImplementor(NullableTemplatedReturnOverride);
+$Util.$setClassMetadata(NullableTemplatedReturnOverride, 'nullability.NullableTemplatedReturnOverride');
+
+exports = NullableTemplatedReturnOverride;
+
+//# sourceMappingURL=NullableTemplatedReturnOverride.js.map

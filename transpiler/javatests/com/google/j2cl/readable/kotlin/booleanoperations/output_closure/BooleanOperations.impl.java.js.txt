@@ -1,0 +1,97 @@
+goog.module('booleanoperations.BooleanOperations$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1Outer = goog.forwardDeclare('booleanoperations.BooleanOperations.$1Outer$impl');
+
+/**
+ * @final
+ */
+class BooleanOperations extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BooleanOperations} */
+ static $create__() {
+  BooleanOperations.$clinit();
+  let $instance = new BooleanOperations();
+  $instance.$ctor__booleanoperations_BooleanOperations__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__booleanoperations_BooleanOperations__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_acceptBoolean__boolean__void_$p_booleanoperations_BooleanOperations(/** boolean */ b) {}
+ /** @final @nodts */
+ m_test__void() {
+  let ls = true;
+  let rs = true;
+  let r = true;
+  let t = !!!true;
+  r = ls == rs;
+  r = ls != rs;
+  r = !!(+ ls ^ + rs);
+  r = !!(+ ls & + rs);
+  r = !!(+ ls | + rs);
+  r = ls && rs;
+  r = ls || rs;
+  ls = rs;
+  r = ls;
+  this.m_acceptBoolean__boolean__void_$p_booleanoperations_BooleanOperations(ls == rs);
+  this.m_acceptBoolean__boolean__void_$p_booleanoperations_BooleanOperations(ls != rs);
+  this.m_acceptBoolean__boolean__void_$p_booleanoperations_BooleanOperations(!!(+ ls ^ + rs));
+  this.m_acceptBoolean__boolean__void_$p_booleanoperations_BooleanOperations(!!(+ ls & + rs));
+  this.m_acceptBoolean__boolean__void_$p_booleanoperations_BooleanOperations(!!(+ ls | + rs));
+  this.m_acceptBoolean__boolean__void_$p_booleanoperations_BooleanOperations(ls && rs);
+  this.m_acceptBoolean__boolean__void_$p_booleanoperations_BooleanOperations(ls || rs);
+  if (ls == rs) {
+   r = true;
+  }
+  if (ls != rs) {
+   r = true;
+  }
+  if (!!(+ ls ^ + rs)) {
+   r = true;
+  }
+  if (!!(+ ls & + rs)) {
+   r = true;
+  }
+  if (!!(+ ls | + rs)) {
+   r = true;
+  }
+  if (ls && rs) {
+   r = true;
+  }
+  if (ls || rs) {
+   r = true;
+  }
+  let finalOuter = $1Outer.$create__booleanoperations_BooleanOperations(this);
+  let receiver = finalOuter;
+  receiver.m_setB__int__void(receiver.m_getB__int() + 1 | 0);
+  let outer = $1Outer.$create__booleanoperations_BooleanOperations(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  BooleanOperations.$clinit = () =>{};
+  BooleanOperations.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BooleanOperations;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1Outer = goog.module.get('booleanoperations.BooleanOperations.$1Outer$impl');
+ }
+}
+$Util.$setClassMetadata(BooleanOperations, 'booleanoperations.BooleanOperations');
+
+exports = BooleanOperations;
+
+//# sourceMappingURL=BooleanOperations.js.map

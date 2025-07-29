@@ -1,0 +1,62 @@
+goog.module('inoperator.InOperatorKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Holder = goog.forwardDeclare('inoperator.Holder$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+/**
+ * @final
+ */
+class InOperatorKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InOperatorKt} */
+ static $create__() {
+  InOperatorKt.$clinit();
+  let $instance = new InOperatorKt();
+  $instance.$ctor__inoperator_InOperatorKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inoperator_InOperatorKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  InOperatorKt.$clinit();
+  let a = Holder.$create__int(1).m_contains__int__boolean(1);
+  let b = !Holder.$create__int(2).m_contains__int__boolean(1);
+  let tmp0_subject = 1;
+  let c = Holder.$create__int(1).m_contains__int__boolean(tmp0_subject) ? 'In Holder' : !Holder.$create__int(1).m_contains__int__boolean(tmp0_subject) ? 'Out of Holder' : 'In Holder';
+  for (let indexedObject = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)), inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
+   let item = indexedObject[inductionVariable];
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  InOperatorKt.$clinit = () =>{};
+  InOperatorKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InOperatorKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Holder = goog.module.get('inoperator.Holder$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(InOperatorKt, 'inoperator.InOperatorKt');
+
+exports = InOperatorKt;
+
+//# sourceMappingURL=InOperatorKt.js.map

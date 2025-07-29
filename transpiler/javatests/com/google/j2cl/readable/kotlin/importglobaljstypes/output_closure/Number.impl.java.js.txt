@@ -1,0 +1,68 @@
+goog.module('importglobaljstypes.Number$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class importglobaljstypes_Number extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!importglobaljstypes_Number} */
+ static $create__() {
+  importglobaljstypes_Number.$clinit();
+  let $instance = new importglobaljstypes_Number();
+  $instance.$ctor__importglobaljstypes_Number__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__importglobaljstypes_Number__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!Object} */
+ m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType(/** !Object */ a) {
+  return a;
+ }
+ /** @nodts @return {boolean} */
+ static m_test__double__boolean(/** number */ x) {
+  importglobaljstypes_Number.$clinit();
+  return Number.isInteger(x);
+ }
+ /** @nodts @return {string} */
+ static m_getStringAt__int__java_lang_String(/** number */ index) {
+  importglobaljstypes_Number.$clinit();
+  return /**@type {string}*/ ($Casts.$to((/**@type {!Array<string>}*/ (Array())).at(index), j_l_String));
+ }
+ /** @nodts @return {number} */
+ static m_getArrayLength__importglobaljstypes_Number_NativeArray__int(/** !Array<?> */ array) {
+  importglobaljstypes_Number.$clinit();
+  return array.length;
+ }
+ /** @nodts */
+ static $clinit() {
+  importglobaljstypes_Number.$clinit = () =>{};
+  importglobaljstypes_Number.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof importglobaljstypes_Number;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(importglobaljstypes_Number, 'importglobaljstypes.Number');
+
+exports = importglobaljstypes_Number;
+
+//# sourceMappingURL=Number.js.map

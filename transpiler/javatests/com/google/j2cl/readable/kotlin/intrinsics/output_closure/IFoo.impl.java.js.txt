@@ -1,0 +1,36 @@
+goog.module('intrinsics.IFoo$impl');
+
+const Collection = goog.require('java.util.Collection$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ * @extends {Collection<T>}
+ */
+class IFoo {
+ /** @nodts */
+ static $clinit() {
+  IFoo.$clinit = () =>{};
+  IFoo.$loadModules();
+  Collection.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Collection.$markImplementor(ctor);
+  ctor.prototype.$implements__intrinsics_IFoo = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__intrinsics_IFoo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IFoo.$markImplementor(/**@type {Function}*/ (IFoo));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (IFoo), 'intrinsics.IFoo');
+
+exports = IFoo;
+
+//# sourceMappingURL=IFoo.js.map

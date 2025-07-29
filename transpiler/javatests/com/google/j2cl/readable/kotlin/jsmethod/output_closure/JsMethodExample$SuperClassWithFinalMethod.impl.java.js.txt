@@ -1,0 +1,42 @@
+goog.module('jsmethod.JsMethodExample.SuperClassWithFinalMethod$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class SuperClassWithFinalMethod extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SuperClassWithFinalMethod} */
+ static $create__() {
+  SuperClassWithFinalMethod.$clinit();
+  let $instance = new SuperClassWithFinalMethod();
+  $instance.$ctor__jsmethod_JsMethodExample_SuperClassWithFinalMethod__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_SuperClassWithFinalMethod__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_n__void() {}
+ /** @nodts */
+ static $clinit() {
+  SuperClassWithFinalMethod.$clinit = () =>{};
+  SuperClassWithFinalMethod.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SuperClassWithFinalMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SuperClassWithFinalMethod, 'jsmethod.JsMethodExample$SuperClassWithFinalMethod');
+
+exports = SuperClassWithFinalMethod;
+
+//# sourceMappingURL=JsMethodExample$SuperClassWithFinalMethod.js.map

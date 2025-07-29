@@ -1,0 +1,77 @@
+goog.module('typealias.Container$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Container extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?T} @nodts*/
+  this.f_o__typealias_Container_;
+ }
+ /** @nodts @template T @return {!Container<T>} */
+ static $create__() {
+  Container.$clinit();
+  let $instance = new Container();
+  $instance.$ctor__typealias_Container__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typealias_Container__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?T} */
+ m_getO__java_lang_Object() {
+  return this.f_o__typealias_Container_;
+ }
+ /** @final @nodts */
+ m_setO__java_lang_Object__void(/** ?T */ set__) {
+  this.f_o__typealias_Container_ = set__;
+ }
+ /** @final @nodts */
+ m_set__java_lang_Object__void(/** T */ o) {
+  this.m_setO__java_lang_Object__void(o);
+ }
+ /** @final @nodts @return {T} */
+ m_get__java_lang_Object() {
+  let tmp0_elvis_lhs = this.m_getO__java_lang_Object();
+  let /** T */ tmp;
+  if ($Equality.$same(tmp0_elvis_lhs, null)) {
+   throw $Exceptions.toJs(IllegalStateException.$create__());
+  } else {
+   tmp = tmp0_elvis_lhs;
+  }
+  return tmp;
+ }
+ /** @nodts */
+ static $clinit() {
+  Container.$clinit = () =>{};
+  Container.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Container;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(Container, 'typealias.Container');
+
+exports = Container;
+
+//# sourceMappingURL=Container.js.map

@@ -1,0 +1,50 @@
+goog.module('abstractinnerclass.InnerClasses.C$impl');
+
+const A = goog.require('abstractinnerclass.InnerClasses.A$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClasses = goog.forwardDeclare('abstractinnerclass.InnerClasses$impl');
+
+/**
+ * @abstract
+ * @implements {A}
+ */
+class C extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!InnerClasses} @nodts*/
+  this.$outer_this__abstractinnerclass_InnerClasses_C;
+ }
+ /** @nodts */
+ $ctor__abstractinnerclass_InnerClasses_C__abstractinnerclass_InnerClasses__void(/** !InnerClasses */ $outer_this) {
+  this.$outer_this__abstractinnerclass_InnerClasses_C = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_bar__void() {
+  this.m_foo__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ /** @abstract @override @nodts @suppress{visibility} */
+ m_foo__void() {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+A.$markImplementor(C);
+$Util.$setClassMetadata(C, 'abstractinnerclass.InnerClasses$C');
+
+exports = C;
+
+//# sourceMappingURL=InnerClasses$C.js.map

@@ -1,0 +1,49 @@
+goog.module('suspendfunction.Child$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SuspendFunction = goog.require('suspendfunction.SuspendFunction$impl');
+
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+
+/**
+ * @final
+ */
+class Child extends SuspendFunction {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Child} */
+ static $create__() {
+  Child.$clinit();
+  let $instance = new Child();
+  $instance.$ctor__suspendfunction_Child__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__suspendfunction_Child__void() {
+  this.$ctor__suspendfunction_SuspendFunction__void();
+ }
+ /** @override @nodts @return {!Generator<*, string>} */
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(/** Continuation<?> */ $continuation, /** string */ param) {
+  return (yield* super.m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation, param));
+ }
+ /** @nodts */
+ static $clinit() {
+  Child.$clinit = () =>{};
+  Child.$loadModules();
+  SuspendFunction.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Child;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Child, 'suspendfunction.Child');
+
+exports = Child;
+
+//# sourceMappingURL=Child.js.map

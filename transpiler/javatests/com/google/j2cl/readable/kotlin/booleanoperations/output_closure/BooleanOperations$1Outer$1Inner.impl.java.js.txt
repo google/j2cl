@@ -1,0 +1,48 @@
+goog.module('booleanoperations.BooleanOperations.$1Outer.$1Inner$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1Outer = goog.forwardDeclare('booleanoperations.BooleanOperations.$1Outer$impl');
+
+/**
+ * @final
+ */
+class $1Inner extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!$1Outer} @nodts*/
+  this.$outer_this__booleanoperations_BooleanOperations_1Outer_1Inner;
+ }
+ /** @nodts @return {!$1Inner} */
+ static $create__booleanoperations_BooleanOperations_1Outer(/** !$1Outer */ $outer_this) {
+  let $instance = new $1Inner();
+  $instance.$ctor__booleanoperations_BooleanOperations_1Outer_1Inner__booleanoperations_BooleanOperations_1Outer__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__booleanoperations_BooleanOperations_1Outer_1Inner__booleanoperations_BooleanOperations_1Outer__void(/** !$1Outer */ $outer_this) {
+  this.$outer_this__booleanoperations_BooleanOperations_1Outer_1Inner = $outer_this;
+  this.$ctor__java_lang_Object__void();
+  $outer_this.m_setB__int__void($outer_this.m_getB__int() + 1 | 0);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Inner.$clinit = () =>{};
+  $1Inner.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Inner;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1Inner, 'booleanoperations.BooleanOperations$1Outer$1Inner');
+
+exports = $1Inner;
+
+//# sourceMappingURL=BooleanOperations$1Outer$1Inner.js.map

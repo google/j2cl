@@ -1,0 +1,50 @@
+goog.module('destructuringdeclarations.DestructuringDeclarations.DataToString.$LambdaAdaptor$impl');
+
+const DataToString = goog.require('destructuringdeclarations.DestructuringDeclarations.DataToString$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Data = goog.forwardDeclare('destructuringdeclarations.Data$impl');
+
+/**
+ * @implements {DataToString}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(!Data):string */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(!Data):string} @nodts*/
+  this.f_fn__destructuringdeclarations_DestructuringDeclarations_DataToString_$LambdaAdaptor;
+  this.$ctor__destructuringdeclarations_DestructuringDeclarations_DataToString_$LambdaAdaptor__destructuringdeclarations_DestructuringDeclarations_DataToString_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__destructuringdeclarations_DestructuringDeclarations_DataToString_$LambdaAdaptor__destructuringdeclarations_DestructuringDeclarations_DataToString_$JsFunction__void(/** ?function(!Data):string */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__destructuringdeclarations_DestructuringDeclarations_DataToString_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {string} */
+ m_apply__destructuringdeclarations_Data__java_lang_String(/** !Data */ arg0) {
+  let /** ?function(!Data):string */ $function;
+  return ($function = this.f_fn__destructuringdeclarations_DestructuringDeclarations_DataToString_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+DataToString.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'destructuringdeclarations.DestructuringDeclarations$DataToString$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=DestructuringDeclarations$DataToString$$LambdaAdaptor.js.map

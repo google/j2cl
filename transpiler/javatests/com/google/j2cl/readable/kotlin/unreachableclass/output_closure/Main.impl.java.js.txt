@@ -1,0 +1,63 @@
+goog.module('unreachableclass.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let $1 = goog.forwardDeclare('unreachableclass.Main.$1$impl');
+let $1A = goog.forwardDeclare('unreachableclass.Main.$1A$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ */
+class Main extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__unreachableclass_Main__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__unreachableclass_Main__void() {
+  this.$ctor__java_lang_Object__void();
+  try {} catch (__$jsexc) {
+   let __$exc = $Exceptions.toJava(__$jsexc);
+   if (RuntimeException.$isInstance(__$exc)) {
+    let e = /**@type {!RuntimeException}*/ (__$exc);
+    $1A.$create__unreachableclass_Main(this).m_m__void();
+    $1.$create__unreachableclass_Main(this);
+   } else {
+    throw $Exceptions.toJs(__$exc);
+   }
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $1 = goog.module.get('unreachableclass.Main.$1$impl');
+  $1A = goog.module.get('unreachableclass.Main.$1A$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(Main, 'unreachableclass.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

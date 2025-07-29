@@ -1,0 +1,129 @@
+goog.module('voidtypes.NothingIterator$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const ListIterator = goog.require('java.util.ListIterator$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @implements {ListIterator<?>}
+ */
+class NothingIterator extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NothingIterator} */
+ static $create__() {
+  let $instance = new NothingIterator();
+  $instance.$ctor__voidtypes_NothingIterator__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__voidtypes_NothingIterator__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {boolean} */
+ m_hasNext__boolean() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @nodts @return {?} */
+ m_next__kotlin_jvm_internal_NothingStub() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @override @nodts @return {boolean} */
+ m_hasPrevious__boolean() {
+  return false;
+ }
+ /** @override @nodts @return {number} */
+ m_nextIndex__int() {
+  return -1;
+ }
+ /** @nodts @return {?} */
+ m_previous__kotlin_jvm_internal_NothingStub() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @override @nodts @return {number} */
+ m_previousIndex__int() {
+  return -1;
+ }
+ /** @override @nodts */
+ m_remove__void() {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @nodts */
+ m_set__kotlin_jvm_internal_NothingStub__void(/** ? */ element) {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @nodts */
+ m_add__kotlin_jvm_internal_NothingStub__void(/** ? */ element) {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {?} */
+ m_next__java_lang_Object() {
+  return this.m_next__kotlin_jvm_internal_NothingStub();
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_forEachRemaining__java_util_function_Consumer__void(/** !Consumer<?> */ arg0) {
+  Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, arg0);
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_add__java_lang_Object__void(/** ? */ arg0) {
+  this.m_add__kotlin_jvm_internal_NothingStub__void(/**@type {?}*/ ($Casts.$to(arg0, NothingStub)));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {?} */
+ m_previous__java_lang_Object() {
+  return this.m_previous__kotlin_jvm_internal_NothingStub();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_set__java_lang_Object__void(/** ? */ arg0) {
+  this.m_set__kotlin_jvm_internal_NothingStub__void(/**@type {?}*/ ($Casts.$to(arg0, NothingStub)));
+ }
+ /** @nodts @return {!NothingIterator} */
+ static get f_INSTANCE__voidtypes_NothingIterator() {
+  return (NothingIterator.$clinit(), NothingIterator.$static_INSTANCE__voidtypes_NothingIterator);
+ }
+ /** @nodts */
+ static $clinit() {
+  NothingIterator.$clinit = () =>{};
+  NothingIterator.$loadModules();
+  j_l_Object.$clinit();
+  Iterator.$clinit();
+  NothingIterator.$static_INSTANCE__voidtypes_NothingIterator = NothingIterator.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NothingIterator;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Iterator = goog.module.get('java.util.Iterator$impl');
+  NothingStub = goog.module.get('kotlin.Nothing$impl');
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+/**@private {!NothingIterator} @nodts*/
+NothingIterator.$static_INSTANCE__voidtypes_NothingIterator;
+ListIterator.$markImplementor(NothingIterator);
+$Util.$setClassMetadata(NothingIterator, 'voidtypes.NothingIterator');
+
+exports = NothingIterator;
+
+//# sourceMappingURL=NothingIterator.js.map

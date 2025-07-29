@@ -1,0 +1,55 @@
+goog.module('multipleconstructors.ParentWithPrimary$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ParentWithPrimary extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'ParentWithPrimary(boolean)'.
+ /** @nodts @return {!ParentWithPrimary} */
+ static $create__boolean(/** boolean */ f) {
+  ParentWithPrimary.$clinit();
+  let $instance = new ParentWithPrimary();
+  $instance.$ctor__multipleconstructors_ParentWithPrimary__boolean__void(f);
+  return $instance;
+ }
+ //Initialization from constructor 'ParentWithPrimary(boolean)'.
+ /** @nodts */
+ $ctor__multipleconstructors_ParentWithPrimary__boolean__void(/** boolean */ f) {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Factory method corresponding to constructor 'ParentWithPrimary(boolean, String)'.
+ /** @nodts @return {!ParentWithPrimary} */
+ static $create__boolean__java_lang_String(/** boolean */ f, /** string */ s) {
+  ParentWithPrimary.$clinit();
+  let $instance = new ParentWithPrimary();
+  $instance.$ctor__multipleconstructors_ParentWithPrimary__boolean__java_lang_String__void(f, s);
+  return $instance;
+ }
+ //Initialization from constructor 'ParentWithPrimary(boolean, String)'.
+ /** @nodts */
+ $ctor__multipleconstructors_ParentWithPrimary__boolean__java_lang_String__void(/** boolean */ f, /** string */ s) {
+  this.$ctor__multipleconstructors_ParentWithPrimary__boolean__void(f);
+ }
+ /** @nodts */
+ static $clinit() {
+  ParentWithPrimary.$clinit = () =>{};
+  ParentWithPrimary.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParentWithPrimary;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ParentWithPrimary, 'multipleconstructors.ParentWithPrimary');
+
+exports = ParentWithPrimary;
+
+//# sourceMappingURL=ParentWithPrimary.js.map

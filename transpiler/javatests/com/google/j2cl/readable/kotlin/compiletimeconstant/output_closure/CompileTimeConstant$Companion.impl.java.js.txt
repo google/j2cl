@@ -1,0 +1,66 @@
+goog.module('compiletimeconstant.CompileTimeConstant.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CompileTimeConstant = goog.forwardDeclare('compiletimeconstant.CompileTimeConstant$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__compiletimeconstant_CompileTimeConstant_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__compiletimeconstant_CompileTimeConstant_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {*} */
+ m_getOBJ__java_lang_Object() {
+  return CompileTimeConstant.m_getOBJ__java_lang_Object();
+ }
+ /** @final @nodts @return {?string} */
+ m_getK__java_lang_String() {
+  return CompileTimeConstant.m_getK__java_lang_String();
+ }
+ /** @final @nodts @return {!Class<?>} */
+ m_getClassLiteral__java_lang_Class() {
+  return CompileTimeConstant.m_getClassLiteral__java_lang_Class();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__compiletimeconstant_CompileTimeConstant_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__compiletimeconstant_CompileTimeConstant_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__compiletimeconstant_CompileTimeConstant_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  CompileTimeConstant = goog.module.get('compiletimeconstant.CompileTimeConstant$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__compiletimeconstant_CompileTimeConstant_Companion;
+$Util.$setClassMetadata(Companion, 'compiletimeconstant.CompileTimeConstant$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=CompileTimeConstant$Companion.js.map

@@ -1,0 +1,65 @@
+goog.module('unreachablecode.UnreachableCodeInConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MainKt = goog.forwardDeclare('unreachablecode.MainKt$impl');
+
+/**
+ * @final
+ */
+class UnreachableCodeInConstructor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_x__unreachablecode_UnreachableCodeInConstructor_ = 0;
+  /**@type {number} @nodts*/
+  this.f_y__unreachablecode_UnreachableCodeInConstructor_ = 0;
+ }
+ /** @nodts @return {!UnreachableCodeInConstructor} */
+ static $create__int(/** number */ x) {
+  UnreachableCodeInConstructor.$clinit();
+  let $instance = new UnreachableCodeInConstructor();
+  $instance.$ctor__unreachablecode_UnreachableCodeInConstructor__int__void(x);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__unreachablecode_UnreachableCodeInConstructor__int__void(/** number */ x) {
+  this.$ctor__java_lang_Object__void();
+  this.f_x__unreachablecode_UnreachableCodeInConstructor_ = x;
+  MainKt.m_alwaysThrows__kotlin_jvm_internal_NothingStub();
+ }
+ /** @final @nodts @return {number} */
+ m_getX__int() {
+  return this.f_x__unreachablecode_UnreachableCodeInConstructor_;
+ }
+ /** @final @nodts @return {number} */
+ m_getY__int() {
+  return this.f_y__unreachablecode_UnreachableCodeInConstructor_;
+ }
+ /** @final @nodts */
+ m_setY__int__void(/** number */ set__) {
+  this.f_y__unreachablecode_UnreachableCodeInConstructor_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  UnreachableCodeInConstructor.$clinit = () =>{};
+  UnreachableCodeInConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof UnreachableCodeInConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  MainKt = goog.module.get('unreachablecode.MainKt$impl');
+ }
+}
+$Util.$setClassMetadata(UnreachableCodeInConstructor, 'unreachablecode.UnreachableCodeInConstructor');
+
+exports = UnreachableCodeInConstructor;
+
+//# sourceMappingURL=UnreachableCodeInConstructor.js.map

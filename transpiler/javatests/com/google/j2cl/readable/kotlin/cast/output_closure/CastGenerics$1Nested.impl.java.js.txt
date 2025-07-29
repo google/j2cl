@@ -1,0 +1,58 @@
+goog.module('cast.CastGenerics.$1Nested$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CastGenerics = goog.forwardDeclare('cast.CastGenerics$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template SS, TT, T, E
+ */
+class $1Nested extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!CastGenerics<T, E>} @nodts*/
+  this.$outer_this__cast_CastGenerics_1Nested;
+ }
+ /** @nodts @template SS, TT, T, E @return {!$1Nested<SS, TT, T, E>} */
+ static $create__cast_CastGenerics(/** !CastGenerics<T, E> */ $outer_this) {
+  let $instance = new $1Nested();
+  $instance.$ctor__cast_CastGenerics_1Nested__cast_CastGenerics__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cast_CastGenerics_1Nested__cast_CastGenerics__void(/** !CastGenerics<T, E> */ $outer_this) {
+  this.$outer_this__cast_CastGenerics_1Nested = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_nestedGenericMethod__java_lang_Object__void_$p_cast_CastGenerics_1Nested(/** !* */ o) {
+  let t = /**@type {?TT}*/ ($Casts.$to(o, Error));
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Nested.$clinit = () =>{};
+  $1Nested.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Nested;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Error = goog.module.get('java.lang.Error$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata($1Nested, 'cast.CastGenerics$1Nested');
+
+exports = $1Nested;
+
+//# sourceMappingURL=CastGenerics$1Nested.js.map

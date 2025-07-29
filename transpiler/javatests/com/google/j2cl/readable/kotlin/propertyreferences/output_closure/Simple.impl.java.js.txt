@@ -1,0 +1,61 @@
+goog.module('propertyreferences.Simple$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Simple extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_mutableProperty__propertyreferences_Simple_;
+  /**@type {string} @nodts*/
+  this.f_immutableProperty__propertyreferences_Simple_;
+ }
+ /** @nodts @return {!Simple} */
+ static $create__() {
+  Simple.$clinit();
+  let $instance = new Simple();
+  $instance.$ctor__propertyreferences_Simple__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__propertyreferences_Simple__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_mutableProperty__propertyreferences_Simple_ = 'mutable';
+  this.f_immutableProperty__propertyreferences_Simple_ = 'immutable';
+ }
+ /** @final @nodts @return {string} */
+ m_getMutableProperty__java_lang_String() {
+  return this.f_mutableProperty__propertyreferences_Simple_;
+ }
+ /** @final @nodts */
+ m_setMutableProperty__java_lang_String__void(/** string */ set__) {
+  this.f_mutableProperty__propertyreferences_Simple_ = set__;
+ }
+ /** @final @nodts @return {string} */
+ m_getImmutableProperty__java_lang_String() {
+  return this.f_immutableProperty__propertyreferences_Simple_;
+ }
+ /** @nodts */
+ static $clinit() {
+  Simple.$clinit = () =>{};
+  Simple.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Simple;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Simple, 'propertyreferences.Simple');
+
+exports = Simple;
+
+//# sourceMappingURL=Simple.js.map

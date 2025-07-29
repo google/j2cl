@@ -1,0 +1,58 @@
+goog.module('bridgejsmethod.Main.L$impl');
+
+const K = goog.require('bridgejsmethod.Main.K$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template L1
+ * @extends {K<string, L1>}
+ */
+class L extends K {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template L1 @return {!L<L1>} */
+ static $create__() {
+  L.$clinit();
+  let $instance = new L();
+  $instance.$ctor__bridgejsmethod_Main_L__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_L__void() {
+  this.$ctor__bridgejsmethod_Main_K__void();
+ }
+ 
+ f(/** string */ k1, /** L1 */ l1) {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_f__java_lang_Object__java_lang_Object__void(/** string */ arg0, /** L1 */ arg1) {
+  this.f(/**@type {string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
+ }
+ /** @nodts */
+ static $clinit() {
+  L.$clinit = () =>{};
+  L.$loadModules();
+  K.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof L;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(L, 'bridgejsmethod.Main$L');
+
+exports = L;
+
+//# sourceMappingURL=Main$L.js.map

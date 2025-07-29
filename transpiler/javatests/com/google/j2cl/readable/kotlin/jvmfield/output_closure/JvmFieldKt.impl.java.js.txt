@@ -1,0 +1,54 @@
+goog.module('jvmfield.JvmFieldKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JvmFieldKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JvmFieldKt} */
+ static $create__() {
+  JvmFieldKt.$clinit();
+  let $instance = new JvmFieldKt();
+  $instance.$ctor__jvmfield_JvmFieldKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmfield_JvmFieldKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static get f_f__jvmfield_JvmFieldKt() {
+  return (JvmFieldKt.$clinit(), JvmFieldKt.$static_f__jvmfield_JvmFieldKt);
+ }
+ /** @nodts */
+ static set f_f__jvmfield_JvmFieldKt(/** number */ value) {
+  (JvmFieldKt.$clinit(), JvmFieldKt.$static_f__jvmfield_JvmFieldKt = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  JvmFieldKt.$clinit = () =>{};
+  JvmFieldKt.$loadModules();
+  j_l_Object.$clinit();
+  JvmFieldKt.$static_f__jvmfield_JvmFieldKt = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JvmFieldKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {number} @nodts*/
+JvmFieldKt.$static_f__jvmfield_JvmFieldKt = 0;
+$Util.$setClassMetadata(JvmFieldKt, 'jvmfield.JvmFieldKt');
+
+exports = JvmFieldKt;
+
+//# sourceMappingURL=JvmFieldKt.js.map

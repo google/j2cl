@@ -1,0 +1,57 @@
+goog.module('jvmmultifileclass.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let bar = goog.forwardDeclare('jvmmultifileclass.bar$impl');
+let foo = goog.forwardDeclare('jvmmultifileclass.foo$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__jvmmultifileclass_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmmultifileclass_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  MainKt.$clinit();
+  foo.m_a__void();
+  foo.m_b__void();
+  bar.m_x__void();
+  bar.m_y__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  bar = goog.module.get('jvmmultifileclass.bar$impl');
+  foo = goog.module.get('jvmmultifileclass.foo$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'jvmmultifileclass.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

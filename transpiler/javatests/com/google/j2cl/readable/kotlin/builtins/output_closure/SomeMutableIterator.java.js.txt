@@ -1,0 +1,12 @@
+goog.module('builtins.SomeMutableIterator');
+
+goog.require('java.lang.Object');
+goog.require('java.util.Iterator');
+goog.require('java.util.ListIterator');
+goog.require('java.util.function.Consumer');
+goog.require('kotlin.NotImplementedError');
+goog.require('nativebootstrap.Util');
+goog.require('vmbootstrap.Exceptions');
+
+const SomeMutableIterator = goog.require('builtins.SomeMutableIterator$impl');
+exports = SomeMutableIterator;

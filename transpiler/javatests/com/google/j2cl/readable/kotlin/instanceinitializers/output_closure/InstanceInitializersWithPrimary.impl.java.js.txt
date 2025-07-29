@@ -1,0 +1,94 @@
+goog.module('instanceinitializers.InstanceInitializersWithPrimary$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
+
+/**
+ * @final
+ */
+class InstanceInitializersWithPrimary extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_ctorProperty__instanceinitializers_InstanceInitializersWithPrimary_ = 0;
+  /**@type {number} @nodts*/
+  this.f_field__instanceinitializers_InstanceInitializersWithPrimary_ = 0;
+  /**@type {number} @nodts*/
+  this.f_field2__instanceinitializers_InstanceInitializersWithPrimary_ = 0;
+ }
+ //Factory method corresponding to constructor 'InstanceInitializersWithPrimary(int, int)'.
+ /** @nodts @return {!InstanceInitializersWithPrimary} */
+ static $create__int__int(/** number */ ctorProperty, /** number */ ctorParam) {
+  InstanceInitializersWithPrimary.$clinit();
+  let $instance = new InstanceInitializersWithPrimary();
+  $instance.$ctor__instanceinitializers_InstanceInitializersWithPrimary__int__int__void(ctorProperty, ctorParam);
+  return $instance;
+ }
+ //Initialization from constructor 'InstanceInitializersWithPrimary(int, int)'.
+ /** @nodts */
+ $ctor__instanceinitializers_InstanceInitializersWithPrimary__int__int__void(/** number */ ctorProperty, /** number */ ctorParam) {
+  this.$ctor__java_lang_Object__void();
+  this.f_ctorProperty__instanceinitializers_InstanceInitializersWithPrimary_ = ctorProperty;
+  this.f_field__instanceinitializers_InstanceInitializersWithPrimary_ = 1;
+  this.m_setField__int__void(ctorParam);
+  this.f_field2__instanceinitializers_InstanceInitializersWithPrimary_ = this.m_getCtorProperty__int();
+  this.m_setField__int__void(this.m_getField2__int());
+ }
+ //Factory method corresponding to constructor 'InstanceInitializersWithPrimary(int, int, int, DefaultConstructorMarker)'.
+ /** @nodts @return {!InstanceInitializersWithPrimary} */
+ static $create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ ctorProperty, /** number */ ctorParam, /** number */ _mask0, /** DefaultConstructorMarker */ _marker) {
+  InstanceInitializersWithPrimary.$clinit();
+  let $instance = new InstanceInitializersWithPrimary();
+  $instance.$ctor__instanceinitializers_InstanceInitializersWithPrimary__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(ctorProperty, ctorParam, _mask0, _marker);
+  return $instance;
+ }
+ //Initialization from constructor 'InstanceInitializersWithPrimary(int, int, int, DefaultConstructorMarker)'.
+ /** @nodts */
+ $ctor__instanceinitializers_InstanceInitializersWithPrimary__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ ctorProperty, /** number */ ctorParam, /** number */ _mask0, /** DefaultConstructorMarker */ _marker) {
+  if ((_mask0 & 1) != 0) {
+   ctorProperty = 0;
+  }
+  this.$ctor__instanceinitializers_InstanceInitializersWithPrimary__int__int__void(ctorProperty, ctorParam);
+ }
+ /** @final @nodts @return {number} */
+ m_getCtorProperty__int() {
+  return this.f_ctorProperty__instanceinitializers_InstanceInitializersWithPrimary_;
+ }
+ /** @final @nodts @return {number} */
+ m_getField__int() {
+  return this.f_field__instanceinitializers_InstanceInitializersWithPrimary_;
+ }
+ /** @final @nodts */
+ m_setField__int__void(/** number */ set__) {
+  this.f_field__instanceinitializers_InstanceInitializersWithPrimary_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getField2__int() {
+  return this.f_field2__instanceinitializers_InstanceInitializersWithPrimary_;
+ }
+ /** @final @nodts */
+ m_setField2__int__void(/** number */ set__) {
+  this.f_field2__instanceinitializers_InstanceInitializersWithPrimary_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  InstanceInitializersWithPrimary.$clinit = () =>{};
+  InstanceInitializersWithPrimary.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InstanceInitializersWithPrimary;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InstanceInitializersWithPrimary, 'instanceinitializers.InstanceInitializersWithPrimary');
+
+exports = InstanceInitializersWithPrimary;
+
+//# sourceMappingURL=InstanceInitializersWithPrimary.js.map

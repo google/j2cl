@@ -1,0 +1,47 @@
+goog.module('companion.EnumWithCompanion.BANG$impl');
+
+const EnumWithCompanion = goog.require('companion.EnumWithCompanion$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class BANG extends EnumWithCompanion {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BANG} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  BANG.$clinit();
+  let $instance = new BANG();
+  $instance.$ctor__companion_EnumWithCompanion_BANG__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_EnumWithCompanion_BANG__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.$ctor__companion_EnumWithCompanion__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @override @nodts @return {number} */
+ m_function__int() {
+  return 2;
+ }
+ /** @nodts */
+ static $clinit() {
+  BANG.$clinit = () =>{};
+  BANG.$loadModules();
+  EnumWithCompanion.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BANG;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(BANG, 'companion.EnumWithCompanion$BANG');
+
+exports = BANG;
+
+//# sourceMappingURL=EnumWithCompanion$BANG.js.map

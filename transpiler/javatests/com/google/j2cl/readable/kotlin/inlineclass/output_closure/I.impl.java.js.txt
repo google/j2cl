@@ -1,0 +1,33 @@
+goog.module('inlineclass.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class I {
+ /** @abstract @nodts @return {number} */
+ m_getI__int() {}
+ /** @nodts */
+ static $clinit() {
+  I.$clinit = () =>{};
+  I.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__inlineclass_I = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__inlineclass_I;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (I), 'inlineclass.I');
+
+exports = I;
+
+//# sourceMappingURL=I.js.map

@@ -1,0 +1,36 @@
+goog.module('inlinefunction.NonFun$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Container = goog.forwardDeclare('inlinefunction.Container$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class NonFun {
+ /** @abstract @nodts @return {!Container<T>} */
+ m_container__inlinefunction_Container() {}
+ /** @nodts */
+ static $clinit() {
+  NonFun.$clinit = () =>{};
+  NonFun.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__inlinefunction_NonFun = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__inlinefunction_NonFun;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+NonFun.$markImplementor(/**@type {Function}*/ (NonFun));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (NonFun), 'inlinefunction.NonFun');
+
+exports = NonFun;
+
+//# sourceMappingURL=NonFun.js.map

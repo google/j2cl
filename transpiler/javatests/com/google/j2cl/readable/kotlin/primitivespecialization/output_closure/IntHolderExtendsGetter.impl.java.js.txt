@@ -1,0 +1,66 @@
+goog.module('primitivespecialization.IntHolderExtendsGetter$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Holder = goog.require('primitivespecialization.Holder$impl');
+const IntGetter = goog.require('primitivespecialization.IntGetter$impl');
+const IntSetter = goog.require('primitivespecialization.IntSetter$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {Holder<!Integer>}
+ * @implements {IntGetter}
+ * @implements {IntSetter}
+ */
+class IntHolderExtendsGetter extends Holder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!IntHolderExtendsGetter} */
+ static $create__() {
+  IntHolderExtendsGetter.$clinit();
+  let $instance = new IntHolderExtendsGetter();
+  $instance.$ctor__primitivespecialization_IntHolderExtendsGetter__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_IntHolderExtendsGetter__void() {
+  this.$ctor__primitivespecialization_Holder__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(1));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {number} */
+ m_get__int() {
+  return (/**@type {!Integer}*/ ($Casts.$to(this.m_get__java_lang_Object(), Integer))).m_intValue__int();
+ }
+ //Specialized bridge method.
+ /** @override @nodts @suppress{visibility} */
+ m_set__int__void(/** number */ arg0) {
+  super.m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  IntHolderExtendsGetter.$clinit = () =>{};
+  IntHolderExtendsGetter.$loadModules();
+  Holder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IntHolderExtendsGetter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+IntGetter.$markImplementor(IntHolderExtendsGetter);
+IntSetter.$markImplementor(IntHolderExtendsGetter);
+$Util.$setClassMetadata(IntHolderExtendsGetter, 'primitivespecialization.IntHolderExtendsGetter');
+
+exports = IntHolderExtendsGetter;
+
+//# sourceMappingURL=IntHolderExtendsGetter.js.map

@@ -1,0 +1,53 @@
+goog.module('objectmap.ObjectMapKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class ObjectMapKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ObjectMapKt} */
+ static $create__() {
+  ObjectMapKt.$clinit();
+  let $instance = new ObjectMapKt();
+  $instance.$ctor__objectmap_ObjectMapKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objectmap_ObjectMapKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T @return {Object<string, T>} */
+ static m_create__objectmap_ObjectMap() {
+  ObjectMapKt.$clinit();
+  return null;
+ }
+ /** @nodts @return {Object<string, string>} */
+ static m_createForString__objectmap_ObjectMap() {
+  ObjectMapKt.$clinit();
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  ObjectMapKt.$clinit = () =>{};
+  ObjectMapKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ObjectMapKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ObjectMapKt, 'objectmap.ObjectMapKt');
+
+exports = ObjectMapKt;
+
+//# sourceMappingURL=ObjectMapKt.js.map

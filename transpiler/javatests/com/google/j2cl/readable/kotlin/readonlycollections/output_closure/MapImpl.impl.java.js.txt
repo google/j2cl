@@ -1,0 +1,172 @@
+goog.module('readonlycollections.MapImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Map = goog.require('java.util.Map$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let Entry = goog.forwardDeclare('java.util.Map.Entry$impl');
+let Set = goog.forwardDeclare('java.util.Set$impl');
+let BiConsumer = goog.forwardDeclare('java.util.function.BiConsumer$impl');
+let BiFunction = goog.forwardDeclare('java.util.function.BiFunction$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template K, V
+ * @implements {Map<K, V>}
+ */
+class MapImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template K, V @return {!MapImpl<K, V>} */
+ static $create__() {
+  MapImpl.$clinit();
+  let $instance = new MapImpl();
+  $instance.$ctor__readonlycollections_MapImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__readonlycollections_MapImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!Set<?>} */
+ m_getEntries__java_util_Set() {
+  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+ }
+ /** @nodts @return {!Set<?>} */
+ m_getKeys__java_util_Set() {
+  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+ }
+ /** @nodts @return {number} */
+ m_getSize__int() {
+  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+ }
+ /** @nodts @return {!Collection<?>} */
+ m_getValues__java_util_Collection() {
+  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+ }
+ /** @override @return {boolean} */
+ containsKey(/** K */ key) {
+  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+ }
+ /** @override @return {boolean} */
+ containsValue(/** V */ value) {
+  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+ }
+ /** @override @return {?V} */
+ get(/** K */ key) {
+  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+ }
+ /** @override @return {boolean} */
+ isEmpty() {
+  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+ }
+ /** @override @return {?V} */
+ put(/** K */ key, /** V */ value) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {?V} */
+ remove(/** * */ key) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts @return {boolean} */
+ m_remove__java_lang_Object__java_lang_Object__boolean(/** * */ key, /** * */ value) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override */
+ putAll(/** !Map<?, ?> */ from) {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override */
+ clear() {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts @return {?V} */
+ m_compute__java_lang_Object__java_util_function_BiFunction__java_lang_Object(/** K */ key, /** !BiFunction<?, ?, ?> */ remappingFunction) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts @return {V} */
+ m_computeIfAbsent__java_lang_Object__java_util_function_Function__java_lang_Object(/** K */ key, /** !j_u_function_Function<?, ?> */ remappingFunction) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts @return {?V} */
+ m_computeIfPresent__java_lang_Object__java_util_function_BiFunction__java_lang_Object(/** K */ key, /** !BiFunction<?, ?, ?> */ remappingFunction) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts @return {?V} */
+ m_merge__java_lang_Object__java_lang_Object__java_util_function_BiFunction__java_lang_Object(/** K */ key, /** V */ value, /** !BiFunction<?, ?, ?> */ remappingFunction) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {?V} */
+ putIfAbsent(/** K */ key, /** V */ value) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {?V} */
+ replace(/** K */ key, /** V */ value) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts @return {boolean} */
+ m_replace__java_lang_Object__java_lang_Object__java_lang_Object__boolean(/** K */ key, /** V */ oldValue, /** V */ newValue) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts */
+ m_replaceAll__java_util_function_BiFunction__void(/** !BiFunction<?, ?, ?> */ function_1) {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @final @override @return {!Set<?>} */
+ entrySet() {
+  return this.m_getEntries__java_util_Set();
+ }
+ /** @final @override @return {!Set<?>} */
+ keySet() {
+  return this.m_getKeys__java_util_Set();
+ }
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ /** @final @override @return {!Collection<?>} */
+ values() {
+  return this.m_getValues__java_util_Collection();
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_forEach__java_util_function_BiConsumer__void(/** !BiConsumer<?, ?> */ arg0) {
+  Map.m_forEach__$default__java_util_Map__java_util_function_BiConsumer__void(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {V} */
+ getOrDefault(/** * */ arg0, /** V */ arg1) {
+  return Map.m_getOrDefault__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, arg0, arg1);
+ }
+ /** @nodts */
+ static $clinit() {
+  MapImpl.$clinit = () =>{};
+  MapImpl.$loadModules();
+  j_l_Object.$clinit();
+  Map.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MapImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+Map.$markImplementor(MapImpl);
+$Util.$setClassMetadata(MapImpl, 'readonlycollections.MapImpl');
+
+exports = MapImpl;
+
+//# sourceMappingURL=MapImpl.js.map

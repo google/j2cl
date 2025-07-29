@@ -1,0 +1,37 @@
+goog.module('jsmemberinnativetype.MyNativeType.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const MyNativeType = goog.require('test.foo.MyNativeType');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts */
+ static m_useFieldsAndMethods__$devirt__jsmemberinnativetype_MyNativeType__void(/** !MyNativeType */ $thisArg) {
+  $Overlay.$clinit();
+  let jsProperties = $thisArg.publicField + $thisArg.privateField + $thisArg.packageField + $thisArg.protectedField + MyNativeType.staticField | 0;
+  let jsPropertyMethods = $thisArg.publicField + MyNativeType.staticField | 0;
+  $thisArg.publicField = 1;
+  MyNativeType.staticField = 2;
+  $thisArg.publicMethod();
+  $thisArg.privateMethod();
+  $thisArg.packageMethod();
+  $thisArg.protectedMethod();
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyNativeType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'test.foo.MyNativeType');
+
+exports = $Overlay;
+
+//# sourceMappingURL=MyNativeType$$Overlay.js.map

@@ -1,0 +1,64 @@
+goog.module('localfunction.LocalFunInsideConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+/**
+ * @final
+ */
+class LocalFunInsideConstructor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_index__localfunction_LocalFunInsideConstructor_ = 0;
+  /**@type {string} @nodts*/
+  this.f_message__localfunction_LocalFunInsideConstructor_;
+ }
+ /** @final @nodts @return {number} */
+ m_getIndex__int() {
+  return this.f_index__localfunction_LocalFunInsideConstructor_;
+ }
+ /** @final @nodts @return {string} */
+ m_getMessage__java_lang_String() {
+  return this.f_message__localfunction_LocalFunInsideConstructor_;
+ }
+ /** @nodts @return {!LocalFunInsideConstructor} */
+ static $create__int__java_lang_String(/** number */ index, /** string */ data) {
+  LocalFunInsideConstructor.$clinit();
+  let $instance = new LocalFunInsideConstructor();
+  $instance.$ctor__localfunction_LocalFunInsideConstructor__int__java_lang_String__void(index, data);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localfunction_LocalFunInsideConstructor__int__java_lang_String__void(/** number */ index, /** string */ data) {
+  this.$ctor__java_lang_Object__void();
+  this.f_index__localfunction_LocalFunInsideConstructor_ = index;
+  let localFunctionInCtor = /**  @return {string}*/ (() =>{
+   return j_l_String.m_valueOf__java_lang_Object__java_lang_String(data) + '[' + this.m_getIndex__int() + ']';
+  });
+  this.f_message__localfunction_LocalFunInsideConstructor_ = localFunctionInCtor();
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalFunInsideConstructor.$clinit = () =>{};
+  LocalFunInsideConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalFunInsideConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(LocalFunInsideConstructor, 'localfunction.LocalFunInsideConstructor');
+
+exports = LocalFunInsideConstructor;
+
+//# sourceMappingURL=LocalFunInsideConstructor.js.map

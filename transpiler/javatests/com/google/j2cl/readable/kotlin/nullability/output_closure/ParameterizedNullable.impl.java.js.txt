@@ -1,0 +1,58 @@
+goog.module('nullability.ParameterizedNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template N
+ */
+class ParameterizedNullable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template N @return {!ParameterizedNullable<N>} */
+ static $create__() {
+  ParameterizedNullable.$clinit();
+  let $instance = new ParameterizedNullable();
+  $instance.$ctor__nullability_ParameterizedNullable__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_ParameterizedNullable__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?N} */
+ m_getNullable__java_lang_Object() {
+  return null;
+ }
+ /** @final @nodts @return {N} */
+ m_getDefaultNullability__java_lang_Object() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  ParameterizedNullable.$clinit = () =>{};
+  ParameterizedNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParameterizedNullable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(ParameterizedNullable, 'nullability.ParameterizedNullable');
+
+exports = ParameterizedNullable;
+
+//# sourceMappingURL=ParameterizedNullable.js.map

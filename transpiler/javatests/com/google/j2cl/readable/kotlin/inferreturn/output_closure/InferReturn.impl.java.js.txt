@@ -1,0 +1,44 @@
+goog.module('inferreturn.InferReturn$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class InferReturn extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!InferReturn<T>} */
+ static $create__() {
+  InferReturn.$clinit();
+  let $instance = new InferReturn();
+  $instance.$ctor__inferreturn_InferReturn__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inferreturn_InferReturn__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  InferReturn.$clinit = () =>{};
+  InferReturn.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InferReturn;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InferReturn, 'inferreturn.InferReturn');
+
+exports = InferReturn;
+
+//# sourceMappingURL=InferReturn.js.map

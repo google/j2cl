@@ -1,0 +1,61 @@
+goog.module('genericnativetype.BoundedJsArray.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Overlay = goog.forwardDeclare('genericnativetype.BoundedJsArray.$Overlay$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__genericnativetype_BoundedJsArray_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericnativetype_BoundedJsArray_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @template V @return {!Array<V>} */
+ m_create__genericnativetype_BoundedJsArray() {
+  return $Overlay.m_create__genericnativetype_BoundedJsArray();
+ }
+ /** @final @nodts @template V @return {!Array<V>} */
+ m_create__int__genericnativetype_BoundedJsArray(/** number */ arg0) {
+  return $Overlay.m_create__int__genericnativetype_BoundedJsArray(arg0);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__genericnativetype_BoundedJsArray_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__genericnativetype_BoundedJsArray_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__genericnativetype_BoundedJsArray_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('genericnativetype.BoundedJsArray.$Overlay$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__genericnativetype_BoundedJsArray_Companion;
+$Util.$setClassMetadata(Companion, 'genericnativetype.BoundedJsArray$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=BoundedJsArray$Companion.js.map

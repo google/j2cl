@@ -1,0 +1,321 @@
+goog.module('methodreferences.MethodReferences$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let ArrayProducer = goog.forwardDeclare('methodreferences.MethodReferences.ArrayProducer$impl');
+let BiFunction = goog.forwardDeclare('methodreferences.MethodReferences.BiFunction$impl');
+let Companion = goog.forwardDeclare('methodreferences.MethodReferences.Companion$impl');
+let MethodReferences_Function = goog.forwardDeclare('methodreferences.MethodReferences.Function$impl');
+let ObjectCapturingOuter = goog.forwardDeclare('methodreferences.MethodReferences.ObjectCapturingOuter$impl');
+let Predicate = goog.forwardDeclare('methodreferences.MethodReferences.Predicate$impl');
+let Producer = goog.forwardDeclare('methodreferences.MethodReferences.Producer$impl');
+let MethodReferencesKt = goog.forwardDeclare('methodreferences.MethodReferencesKt$impl');
+let Obj = goog.forwardDeclare('methodreferences.Obj$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class MethodReferences extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_property__methodreferences_MethodReferences_;
+ }
+ /** @nodts @template T @return {!MethodReferences<T>} */
+ static $create__() {
+  MethodReferences.$clinit();
+  let $instance = new MethodReferences();
+  $instance.$ctor__methodreferences_MethodReferences__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__methodreferences_MethodReferences__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_property__methodreferences_MethodReferences_ = '123';
+ }
+ /** @final @nodts @return {string} */
+ m_getProperty__java_lang_String() {
+  return this.f_property__methodreferences_MethodReferences_;
+ }
+ /** @final @nodts @return {boolean} */
+ m_isA__boolean() {
+  return true;
+ }
+ /** @final @nodts @return {!MethodReferences<T>} */
+ m_self__methodreferences_MethodReferences() {
+  return this;
+ }
+ /** @final @nodts @return {?T} */
+ m_t__java_lang_Object() {
+  return null;
+ }
+ /** @final @nodts @return {boolean} */
+ m_sameAs__java_lang_Number__boolean(/** !(Number|number) */ n) {
+  return false;
+ }
+ /** @final @nodts */
+ m_main__void() {
+  let a = Function1.$adapt(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0) =>{
+   let arg0_1 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0, Number));
+   return this.m_sameAs__java_lang_Number__boolean(arg0_1);
+  }));
+  a.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(1));
+  a.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(1));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {!*}*/ (() =>{
+   return j_l_Object.$create__();
+  })));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {string}*/ (() =>{
+   return MethodReferencesKt.m_getP__java_lang_String();
+  })));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {!*}*/ (() =>{
+   return MethodReferencesKt.m_m__java_lang_Object();
+  })));
+  let /** Obj */ $$q, /** Obj */ $$q_1, /** Companion */ $$q_2, /** Companion */ $$q_3, /** Companion */ $$q_4, /** Companion */ $$q_5, /** MethodReferences<T> */ $$q_6, /** MethodReferences<T> */ $$q_7, /** MethodReferences<T> */ $$q_8, /** MethodReferences<T> */ $$q_9, /** MethodReferences<T> */ $$q_10, /** Obj */ $$q_11, /** Obj */ $$q_12, /** Companion */ $$q_13, /** Companion */ $$q_14, /** MethodReferences<T> */ $$q_15, /** MethodReferences<T> */ $$q_16, /** MethodReferences<T> */ $$q_17;
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q = Obj.f_INSTANCE__methodreferences_Obj, Producer.$adapt(/**  @return {string}*/ (() =>{
+   return $$q.m_getObjectProperty__java_lang_String();
+  }))));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_1 = Obj.f_INSTANCE__methodreferences_Obj, Producer.$adapt(/**  @return {!*}*/ (() =>{
+   return $$q_1.m_objectMethod__java_lang_Object();
+  }))));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_2 = Companion.f_Companion__methodreferences_MethodReferences_Companion, Producer.$adapt(/**  @return {string}*/ (() =>{
+   return MethodReferences.m_getCompanionObjectProperty__java_lang_String();
+  }))));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_3 = Companion.f_Companion__methodreferences_MethodReferences_Companion, Producer.$adapt(/**  @return {!*}*/ (() =>{
+   return MethodReferences.m_companionObjectMethod__java_lang_Object();
+  }))));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_4 = Companion.f_Companion__methodreferences_MethodReferences_Companion, Producer.$adapt(/**  @return {string}*/ (() =>{
+   return MethodReferences.m_getCompanionObjectProperty__java_lang_String();
+  }))));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_5 = Companion.f_Companion__methodreferences_MethodReferences_Companion, Producer.$adapt(/**  @return {!*}*/ (() =>{
+   return MethodReferences.m_companionObjectMethod__java_lang_Object();
+  }))));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {string}*/ (() =>{
+   return this.m_getProperty__java_lang_String();
+  })));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {boolean}*/ (() =>{
+   return this.m_isA__boolean();
+  })));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {!MethodReferences<T>}*/ (() =>{
+   return this.m_self__methodreferences_MethodReferences();
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0_2) =>{
+   let arg0_3 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_2, Number));
+   return this.m_sameAs__java_lang_Number__boolean(arg0_3);
+  })));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_6 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), Producer.$adapt(/**  @return {string}*/ (() =>{
+   return $$q_6.m_getProperty__java_lang_String();
+  }))));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_7 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), Producer.$adapt(/**  @return {boolean}*/ (() =>{
+   return $$q_7.m_isA__boolean();
+  }))));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_8 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), Producer.$adapt(/**  @return {!MethodReferences<T>}*/ (() =>{
+   return $$q_8.m_self__methodreferences_MethodReferences();
+  }))));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(($$q_9 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0_4) =>{
+   let arg0_5 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_4, Number));
+   return $$q_9.m_sameAs__java_lang_Number__boolean(arg0_5);
+  }))));
+  let parameterizedInstance = /**@type {!MethodReferences<string>}*/ (MethodReferences.$create__());
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {?string}*/ (() =>{
+   return /**@type {?string}*/ ($Casts.$to(parameterizedInstance.m_t__java_lang_Object(), j_l_String));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** !MethodReferences<T> */ arg0_6) =>{
+   let arg0_7 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_6, MethodReferences));
+   return arg0_7.m_getProperty__java_lang_String();
+  })));
+  this.m_acceptPredicate__methodreferences_MethodReferences_Predicate__void(Predicate.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_8) =>{
+   let arg0_9 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_8, MethodReferences));
+   return arg0_9.m_isA__boolean();
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!MethodReferences<T>}*/ ((/** !MethodReferences<T> */ arg0_10) =>{
+   let arg0_11 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_10, MethodReferences));
+   return arg0_11.m_self__methodreferences_MethodReferences();
+  })));
+  this.m_acceptBiFunction__methodreferences_MethodReferences_BiFunction__void(BiFunction.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_12, /** !(Number|number) */ arg1) =>{
+   let arg0_13 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_12, MethodReferences));
+   let arg1_1 = /**@type {!(Number|number)}*/ ($Casts.$to(arg1, Number));
+   return arg0_13.m_sameAs__java_lang_Number__boolean(arg1_1);
+  })));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {string}*/ (() =>{
+   return MethodReferencesKt.m_appendX__methodreferences_MethodReferences__java_lang_String(this);
+  })));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_10 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), Producer.$adapt(/**  @return {string}*/ (() =>{
+   return MethodReferencesKt.m_appendX__methodreferences_MethodReferences__java_lang_String($$q_10);
+  }))));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** !MethodReferences<T> */ arg0_14) =>{
+   let arg0_15 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_14, MethodReferences));
+   return MethodReferencesKt.m_appendX__methodreferences_MethodReferences__java_lang_String(arg0_15);
+  })));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {!ObjectCapturingOuter<T>}*/ (() =>{
+   return /**@type {!ObjectCapturingOuter<T>}*/ (ObjectCapturingOuter.$create__methodreferences_MethodReferences(this));
+  })));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!*}*/ (() =>{
+   return j_l_Object.$create__();
+  }));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
+   return MethodReferencesKt.m_getP__java_lang_String();
+  }));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!*}*/ (() =>{
+   return MethodReferencesKt.m_m__java_lang_Object();
+  }));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(($$q_11 = Obj.f_INSTANCE__methodreferences_Obj, /**  @return {string}*/ (() =>{
+   return $$q_11.m_getObjectProperty__java_lang_String();
+  })));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(($$q_12 = Obj.f_INSTANCE__methodreferences_Obj, /**  @return {!*}*/ (() =>{
+   return $$q_12.m_objectMethod__java_lang_Object();
+  })));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(($$q_13 = Companion.f_Companion__methodreferences_MethodReferences_Companion, /**  @return {string}*/ (() =>{
+   return MethodReferences.m_getCompanionObjectProperty__java_lang_String();
+  })));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(($$q_14 = Companion.f_Companion__methodreferences_MethodReferences_Companion, /**  @return {!*}*/ (() =>{
+   return MethodReferences.m_companionObjectMethod__java_lang_Object();
+  })));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
+   return this.m_getProperty__java_lang_String();
+  }));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!MethodReferences<T>}*/ (() =>{
+   return this.m_self__methodreferences_MethodReferences();
+  }));
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0_16) =>{
+   let arg0_17 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_16, Number));
+   return this.m_sameAs__java_lang_Number__boolean(arg0_17);
+  }));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(($$q_15 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), /**  @return {string}*/ (() =>{
+   return $$q_15.m_getProperty__java_lang_String();
+  })));
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(($$q_16 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), /**  @return {!MethodReferences<T>}*/ (() =>{
+   return $$q_16.m_self__methodreferences_MethodReferences();
+  })));
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(($$q_17 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), /**  @return {boolean}*/ ((/** !(Number|number) */ arg0_18) =>{
+   let arg0_19 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_18, Number));
+   return $$q_17.m_sameAs__java_lang_Number__boolean(arg0_19);
+  })));
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {string}*/ ((/** !MethodReferences<T> */ arg0_20) =>{
+   let arg0_21 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_20, MethodReferences));
+   return arg0_21.m_getProperty__java_lang_String();
+  }));
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {!MethodReferences<T>}*/ ((/** !MethodReferences<T> */ arg0_22) =>{
+   let arg0_23 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_22, MethodReferences));
+   return arg0_23.m_self__methodreferences_MethodReferences();
+  }));
+  this.m_acceptJsBiFunction__methodreferences_MethodReferences_JsBiFunction__void(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_24, /** !(Number|number) */ arg1_2) =>{
+   let arg0_25 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_24, MethodReferences));
+   let arg1_3 = /**@type {!(Number|number)}*/ ($Casts.$to(arg1_2, Number));
+   return arg0_25.m_sameAs__java_lang_Number__boolean(arg1_3);
+  }));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__java_lang_Object__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** string */ arg0_26) =>{
+   let arg0_27 = /**@type {string}*/ ($Casts.$to(arg0_26, j_l_String));
+   return MethodReferencesKt.m_getString__java_lang_Object__java_lang_String(arg0_27);
+  })), '');
+  this.m_acceptFunction1__kotlin_jvm_functions_Function1__java_lang_Object__java_lang_Object(Function1.$adapt(/**  @return {string}*/ ((/** !Integer */ arg0_28) =>{
+   let arg0_29 = /**@type {!Integer}*/ ($Casts.$to(arg0_28, Integer));
+   return arg0_29.toString();
+  })), Integer.m_valueOf__int__java_lang_Integer(1));
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(/**@type {!Producer<!*>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {!Producer<*>}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(Function0.$adapt(/**  @return {!*}*/ (() =>{
+   return MethodReferencesKt.m_m__java_lang_Object();
+  }))), /**@type {Function}*/ (Producer))))));
+  this.m_acceptFunctionInVariance__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!MethodReferences<*>}*/ ((/** !MethodReferences<*> */ arg0_30) =>{
+   let arg0_31 = /**@type {!MethodReferences<*>}*/ ($Casts.$to(arg0_30, MethodReferences));
+   return arg0_31.m_self__methodreferences_MethodReferences();
+  })));
+  let localFunction = /**  @return {string}*/ ((/** number */ p) =>{
+   return '' + 'p' + p;
+  });
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__java_lang_Object__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** !Integer */ arg0_32) =>{
+   let arg0_33 = /**@type {!Integer}*/ ($Casts.$to(arg0_32, Integer));
+   return localFunction(arg0_33.m_intValue__int());
+  })), Integer.m_valueOf__int__java_lang_Integer(1));
+  let localExtensionFunction = /**  @return {string}*/ ((/** string */ this_1) =>{
+   return j_l_String.m_valueOf__java_lang_Object__java_lang_String(this_1) + 'ff';
+  });
+  this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {string}*/ (() =>{
+   return localExtensionFunction('bar');
+  })));
+ }
+ /** @final @nodts @template T_1 */
+ m_acceptProducer__methodreferences_MethodReferences_Producer__void(/** !Producer<T_1> */ f) {}
+ /** @final @nodts @template T_1 */
+ m_acceptPredicate__methodreferences_MethodReferences_Predicate__void(/** !Predicate<T_1> */ f) {}
+ /** @final @nodts */
+ m_acceptArrayProducer__methodreferences_MethodReferences_ArrayProducer__void(/** !ArrayProducer */ f) {}
+ /** @final @nodts @template T_1, U */
+ m_acceptFunction__methodreferences_MethodReferences_Function__void(/** !MethodReferences_Function<T_1, U> */ f) {}
+ /** @final @nodts @template T_1, U */
+ m_acceptFunction__methodreferences_MethodReferences_Function__java_lang_Object__void(/** !MethodReferences_Function<T_1, U> */ f, /** T_1 */ arg) {}
+ /** @final @nodts @template U, V */
+ m_acceptFunctionInVariance__methodreferences_MethodReferences_Function__void(/** !MethodReferences_Function<?, V> */ f) {}
+ /** @final @nodts @template T_1, U, V */
+ m_acceptBiFunction__methodreferences_MethodReferences_BiFunction__void(/** !BiFunction<T_1, U, V> */ f) {}
+ /** @final @nodts @template T_1 */
+ m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/** function():T_1 */ f) {}
+ /** @final @nodts @template T_1, U */
+ m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/** function(T_1):U */ f) {}
+ /** @final @nodts @template T_1, U, V */
+ m_acceptJsBiFunction__methodreferences_MethodReferences_JsBiFunction__void(/** function(T_1, U):V */ f) {}
+ /** @final @nodts @template T_1, V @return {V} */
+ m_acceptFunction1__kotlin_jvm_functions_Function1__java_lang_Object__java_lang_Object(/** !Function1<?, ?> */ f, /** T_1 */ arg) {
+  return f.m_invoke__java_lang_Object__java_lang_Object(arg);
+ }
+ /** @nodts @return {string} */
+ static m_getCompanionObjectProperty__java_lang_String() {
+  MethodReferences.$clinit();
+  return MethodReferences.f_companionObjectProperty__methodreferences_MethodReferences_;
+ }
+ /** @nodts */
+ static m_setCompanionObjectProperty__java_lang_String__void(/** string */ set__) {
+  MethodReferences.$clinit();
+  MethodReferences.f_companionObjectProperty__methodreferences_MethodReferences_ = set__;
+ }
+ /** @nodts @return {!*} */
+ static m_companionObjectMethod__java_lang_Object() {
+  MethodReferences.$clinit();
+  return j_l_Object.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  MethodReferences.$clinit = () =>{};
+  MethodReferences.$loadModules();
+  j_l_Object.$clinit();
+  MethodReferences.f_companionObjectProperty__methodreferences_MethodReferences_ = 'test';
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MethodReferences;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Number = goog.module.get('java.lang.Number$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  BiFunction = goog.module.get('methodreferences.MethodReferences.BiFunction$impl');
+  Companion = goog.module.get('methodreferences.MethodReferences.Companion$impl');
+  MethodReferences_Function = goog.module.get('methodreferences.MethodReferences.Function$impl');
+  ObjectCapturingOuter = goog.module.get('methodreferences.MethodReferences.ObjectCapturingOuter$impl');
+  Predicate = goog.module.get('methodreferences.MethodReferences.Predicate$impl');
+  Producer = goog.module.get('methodreferences.MethodReferences.Producer$impl');
+  MethodReferencesKt = goog.module.get('methodreferences.MethodReferencesKt$impl');
+  Obj = goog.module.get('methodreferences.Obj$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+/**@type {string} @nodts*/
+MethodReferences.f_companionObjectProperty__methodreferences_MethodReferences_;
+$Util.$setClassMetadata(MethodReferences, 'methodreferences.MethodReferences');
+
+exports = MethodReferences;
+
+//# sourceMappingURL=MethodReferences.js.map

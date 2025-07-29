@@ -1,0 +1,49 @@
+goog.module('primitivespecialization.IndependentOverrides$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Overloads = goog.require('primitivespecialization.Overloads$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+/**
+ * @final
+ */
+class IndependentOverrides extends Overloads {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!IndependentOverrides} */
+ static $create__() {
+  IndependentOverrides.$clinit();
+  let $instance = new IndependentOverrides();
+  $instance.$ctor__primitivespecialization_IndependentOverrides__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_IndependentOverrides__void() {
+  this.$ctor__primitivespecialization_Overloads__void();
+ }
+ /** @override @nodts */
+ m_set__int__void(/** number */ i) {}
+ /** @override @nodts */
+ m_set__java_lang_Integer__void(/** Integer */ i) {}
+ /** @nodts */
+ static $clinit() {
+  IndependentOverrides.$clinit = () =>{};
+  IndependentOverrides.$loadModules();
+  Overloads.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IndependentOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(IndependentOverrides, 'primitivespecialization.IndependentOverrides');
+
+exports = IndependentOverrides;
+
+//# sourceMappingURL=IndependentOverrides.js.map

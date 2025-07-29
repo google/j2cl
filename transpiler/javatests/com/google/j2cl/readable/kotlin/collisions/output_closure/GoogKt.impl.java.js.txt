@@ -1,0 +1,43 @@
+goog.module('collisions.GoogKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class GoogKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!GoogKt} */
+ static $create__() {
+  GoogKt.$clinit();
+  let $instance = new GoogKt();
+  $instance.$ctor__collisions_GoogKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__collisions_GoogKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  GoogKt.$clinit = () =>{};
+  GoogKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GoogKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GoogKt, 'collisions.GoogKt');
+
+exports = GoogKt;
+
+//# sourceMappingURL=GoogKt.js.map

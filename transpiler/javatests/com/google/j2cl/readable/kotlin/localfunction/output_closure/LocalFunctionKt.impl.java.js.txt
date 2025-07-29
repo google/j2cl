@@ -1,0 +1,146 @@
+goog.module('localfunction.LocalFunctionKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class LocalFunctionKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LocalFunctionKt} */
+ static $create__() {
+  LocalFunctionKt.$clinit();
+  let $instance = new LocalFunctionKt();
+  $instance.$ctor__localfunction_LocalFunctionKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localfunction_LocalFunctionKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_retrieveArea__int__int__int(/** number */ width, /** number */ height) {
+  LocalFunctionKt.$clinit();
+  let offset = 1;
+  let localFunction = /**  @return {number}*/ (() =>{
+   let nestedLocalFunction = /**  @return {number}*/ (() =>{
+    return 2;
+   });
+   return Math.imul(width, height) + nestedLocalFunction() + offset | 0;
+  });
+  return localFunction();
+ }
+ /** @nodts @return {string} */
+ static m_localFunInForLoop__int__int__java_lang_String(/** number */ start, /** number */ end) {
+  LocalFunctionKt.$clinit();
+  let message = '';
+  let inductionVariable = start;
+  if (inductionVariable <= end) {
+   let /** number */ k;
+   do {
+    k = inductionVariable;
+    inductionVariable = inductionVariable + 1 | 0;
+    let localFunctionInLoop = /**  @return {string}*/ (() =>{
+     return 'Hello';
+    });
+    message = j_l_String.m_valueOf__java_lang_Object__java_lang_String(message) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(localFunctionInLoop());
+   } while (k != end);
+  }
+  return message;
+ }
+ /** @nodts @return {string} */
+ static m_outerFunction__java_lang_String() {
+  let outerFunctionVar = 'outerFunctionVar init';
+  let localFunctionChangingOuterScope = () =>{
+   outerFunctionVar = 'outerFunctionVar modified';
+  };
+  localFunctionChangingOuterScope();
+  return outerFunctionVar;
+ }
+ /** @nodts @return {string} */
+ static m_localExtensionFunction__java_lang_String() {
+  let localFunction = /**  @return {string}*/ ((/** string */ this_1, /** string */ prefix) =>{
+   let nestedLocalFunction = /**  @return {string}*/ ((/** string */ this_2, /** string */ prefix_1) =>{
+    return j_l_String.m_valueOf__java_lang_Object__java_lang_String(prefix_1) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this_1) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this_2) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(nestedLocalFunction('', ''));
+   });
+   return j_l_String.m_valueOf__java_lang_Object__java_lang_String(prefix) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(nestedLocalFunction('bar', 'baz'));
+  });
+  return localFunction('foo', '');
+ }
+ /** @nodts @template T @return {string} */
+ static m_localFunctionWithGenericType__java_lang_Object__java_lang_String(/** T */ t) {
+  let localFunction = /**  @template T @return {string}*/ ((/** T */ t_1) =>{
+   let nestedLocalFunction = /**  @template T @return {string}*/ ((/** T */ t_2) =>{
+    return Integer.m_valueOf__int__java_lang_Integer($Numbers.m_intValue__java_lang_Number__int(/**@type {!(Number|number)}*/ (t_2))).toString();
+   });
+   return j_l_String.m_valueOf__java_lang_Object__java_lang_String($Objects.m_toString__java_lang_Object__java_lang_String(t_1)) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(nestedLocalFunction(1.2));
+  });
+  return j_l_String.m_valueOf__java_lang_Object__java_lang_String(j_l_String.m_valueOf__java_lang_Object__java_lang_String(t)) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(localFunction('Foo'));
+ }
+ /** @nodts */
+ static m_testConflictingLocalFunction__void() {
+  let localFunction1 = () =>{
+   let conflictingInnerLocalFunction = () =>{};
+   conflictingInnerLocalFunction();
+  };
+  let localFunction2 = () =>{
+   let conflictingInnerLocalFunction_1 = () =>{};
+   conflictingInnerLocalFunction_1();
+  };
+  localFunction1();
+  localFunction2();
+ }
+ /** @nodts @return {number} */
+ static m_testLocalFunctionOverloads__int() {
+  let localFunction = /**  @return {number}*/ ((/** number */ i) =>{
+   return i;
+  });
+  let localFunction_1 = /**  @return {number}*/ ((/** number */ i_1, /** number */ j) =>{
+   return i_1 + j | 0;
+  });
+  return localFunction(1) + localFunction_1(1, 2) | 0;
+ }
+ /** @nodts */
+ static m_testBoxingUnboxing__void() {
+  let unboxedBoolean = /**  @return {boolean}*/ (() =>{
+   let boxedBoolean = /**  @return {?boolean}*/ (() =>{
+    return true;
+   });
+   return true;
+  });
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalFunctionKt.$clinit = () =>{};
+  LocalFunctionKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalFunctionKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(LocalFunctionKt, 'localfunction.LocalFunctionKt');
+
+exports = LocalFunctionKt;
+
+//# sourceMappingURL=LocalFunctionKt.js.map

@@ -1,0 +1,43 @@
+goog.module('destructuringdeclarations.DestructuringDeclarations.DataToString$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Data = goog.forwardDeclare('destructuringdeclarations.Data$impl');
+let $LambdaAdaptor = goog.forwardDeclare('destructuringdeclarations.DestructuringDeclarations.DataToString.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class DataToString {
+ /** @abstract @nodts @return {string} */
+ m_apply__destructuringdeclarations_Data__java_lang_String(/** !Data */ i) {}
+ /** @nodts @return {!DataToString} */
+ static $adapt(/** ?function(!Data):string */ fn) {
+  DataToString.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  DataToString.$clinit = () =>{};
+  DataToString.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__destructuringdeclarations_DestructuringDeclarations_DataToString = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__destructuringdeclarations_DestructuringDeclarations_DataToString;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('destructuringdeclarations.DestructuringDeclarations.DataToString.$LambdaAdaptor$impl');
+ }
+}
+DataToString.$markImplementor(/**@type {Function}*/ (DataToString));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (DataToString), 'destructuringdeclarations.DestructuringDeclarations$DataToString');
+
+exports = DataToString;
+
+//# sourceMappingURL=DestructuringDeclarations$DataToString.js.map

@@ -1,0 +1,33 @@
+goog.module('anonymousclass.Foo$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class Foo {
+ /** @abstract @nodts @return {!*} */
+ m_returnAny__java_lang_Object() {}
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__anonymousclass_Foo = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__anonymousclass_Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Foo.$markImplementor(/**@type {Function}*/ (Foo));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Foo), 'anonymousclass.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

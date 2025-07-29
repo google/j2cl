@@ -1,0 +1,75 @@
+goog.module('jsconstructor.B$impl');
+
+const A = goog.require('jsconstructor.A$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class B extends A {
+ //JsConstructor 'B(int)'.
+ 
+ constructor(/** number */ x) {
+  B.$clinit();
+  super();
+  /**@type {number} @nodts*/
+  this.f_fB__jsconstructor_B_ = 0;
+  this.$ctor__jsconstructor_B__int__void(x);
+ }
+ /** @final @nodts @return {number} */
+ m_getFB__int() {
+  return this.f_fB__jsconstructor_B_;
+ }
+ /** @final @nodts */
+ m_setFB__int__void(/** number */ set__) {
+  this.f_fB__jsconstructor_B_ = set__;
+ }
+ //Initialization from constructor 'B(int)'.
+ /** @nodts */
+ $ctor__jsconstructor_B__int__void(/** number */ x) {
+  this.$ctor__jsconstructor_A__int__void(x + 1 | 0);
+  this.f_fB__jsconstructor_B_ = 2;
+  this.m_setFB__int__void(3);
+ }
+ //Factory method corresponding to constructor 'B()'.
+ /** @nodts @return {!B} */
+ static $create__() {
+  B.$clinit();
+  let $instance = new B(10);
+  $instance.$ctor__jsconstructor_B__void();
+  return $instance;
+ }
+ //Initialization from constructor 'B()'.
+ /** @nodts */
+ $ctor__jsconstructor_B__void() {
+  this.m_setFB__int__void(4);
+ }
+ //Factory method corresponding to constructor 'B(int, int)'.
+ /** @nodts @return {!B} */
+ static $create__int__int(/** number */ x, /** number */ y) {
+  B.$clinit();
+  let $instance = new B(x + y | 0);
+  $instance.$ctor__jsconstructor_B__int__int__void(x, y);
+  return $instance;
+ }
+ //Initialization from constructor 'B(int, int)'.
+ /** @nodts */
+ $ctor__jsconstructor_B__int__int__void(/** number */ x, /** number */ y) {
+  this.m_setFB__int__void(Math.imul(x, y));
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  A.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(B, 'jsconstructor.B');
+
+exports = B;
+
+//# sourceMappingURL=B.js.map

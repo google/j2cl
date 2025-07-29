@@ -1,0 +1,58 @@
+goog.module('jsoverlay.NativeJsTypeInterfaceWithOverlayImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Overlay = goog.forwardDeclare('jsoverlay.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+let NativeJsTypeInterfaceWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeInterfaceWithOverlay');
+
+/**
+ * @final
+ * @implements {NativeJsTypeInterfaceWithOverlay}
+ */
+class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NativeJsTypeInterfaceWithOverlayImpl} */
+ static $create__() {
+  NativeJsTypeInterfaceWithOverlayImpl.$clinit();
+  let $instance = new NativeJsTypeInterfaceWithOverlayImpl();
+  $instance.$ctor__jsoverlay_NativeJsTypeInterfaceWithOverlayImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsoverlay_NativeJsTypeInterfaceWithOverlayImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {number} */
+ m() {
+  return 0;
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} @return {number} */
+ m_callM__int() {
+  return $Overlay.m_callM__$devirt__jsoverlay_NativeJsTypeInterfaceWithOverlay__int(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  NativeJsTypeInterfaceWithOverlayImpl.$clinit = () =>{};
+  NativeJsTypeInterfaceWithOverlayImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeJsTypeInterfaceWithOverlayImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('jsoverlay.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+ }
+}
+$Util.$setClassMetadata(NativeJsTypeInterfaceWithOverlayImpl, 'jsoverlay.NativeJsTypeInterfaceWithOverlayImpl');
+
+exports = NativeJsTypeInterfaceWithOverlayImpl;
+
+//# sourceMappingURL=NativeJsTypeInterfaceWithOverlayImpl.js.map

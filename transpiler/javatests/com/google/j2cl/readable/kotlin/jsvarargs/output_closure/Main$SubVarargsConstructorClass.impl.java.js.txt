@@ -1,0 +1,34 @@
+goog.module('jsvarargs.Main.SubVarargsConstructorClass$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class SubVarargsConstructorClass extends Object {
+ 
+ constructor(/** number */ i, .../** ...* */ args) {
+  SubVarargsConstructorClass.$clinit();
+  super(args);
+  this.$ctor__jsvarargs_Main_SubVarargsConstructorClass__int__arrayOf_java_lang_Object__void(i, args);
+ }
+ /** @nodts */
+ $ctor__jsvarargs_Main_SubVarargsConstructorClass__int__arrayOf_java_lang_Object__void(/** number */ i, /** !Array<*> */ args) {}
+ /** @nodts */
+ static $clinit() {
+  SubVarargsConstructorClass.$clinit = () =>{};
+  SubVarargsConstructorClass.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubVarargsConstructorClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubVarargsConstructorClass, 'jsvarargs.Main$SubVarargsConstructorClass');
+
+exports = SubVarargsConstructorClass;
+
+//# sourceMappingURL=Main$SubVarargsConstructorClass.js.map

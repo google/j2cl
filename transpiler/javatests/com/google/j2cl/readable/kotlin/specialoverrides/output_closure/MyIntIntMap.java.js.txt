@@ -1,0 +1,17 @@
+goog.module('specialoverrides.MyIntIntMap');
+
+goog.require('java.lang.Integer');
+goog.require('java.lang.Object');
+goog.require('java.util.Collection');
+goog.require('java.util.Map');
+goog.require('java.util.Map.Entry');
+goog.require('java.util.Set');
+goog.require('java.util.function.BiConsumer');
+goog.require('java.util.function.BiFunction');
+goog.require('java.util.function.Function');
+goog.require('javaemul.internal.InternalPreconditions');
+goog.require('nativebootstrap.Util');
+goog.require('vmbootstrap.Casts');
+
+const MyIntIntMap = goog.require('specialoverrides.MyIntIntMap$impl');
+exports = MyIntIntMap;

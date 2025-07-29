@@ -1,0 +1,123 @@
+goog.module('jsignore.JsIgnoreExample$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JsIgnoreExample extends j_l_Object {
+ 
+ constructor() {
+  JsIgnoreExample.$clinit();
+  super();
+  /**@type {number} @nodts*/
+  this.f_exportedField__jsignore_JsIgnoreExample_ = 0;
+  /**@type {number} @nodts*/
+  this.f_notExportedField__jsignore_JsIgnoreExample_ = 0;
+  /**@type {!*} @nodts*/
+  this.f_CONSTNAME__jsignore_JsIgnoreExample_;
+  /**@type {number} @nodts*/
+  this.f_exportedGetterSetterProperty__jsignore_JsIgnoreExample_ = 0;
+  /**@type {number} @nodts*/
+  this.f_notExportedGetterSetterProperty__jsignore_JsIgnoreExample_ = 0;
+  /**@type {number} @nodts*/
+  this.f_getterOnlyExposedProperty__jsignore_JsIgnoreExample_ = 0;
+  /**@type {number} @nodts*/
+  this.f_setterOnlyExposedProperty__jsignore_JsIgnoreExample_ = 0;
+  this.$ctor__jsignore_JsIgnoreExample__void();
+ }
+ /** @nodts */
+ $ctor__jsignore_JsIgnoreExample__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_exportedField__jsignore_JsIgnoreExample_ = 10;
+  this.f_notExportedField__jsignore_JsIgnoreExample_ = 20;
+  this.f_CONSTNAME__jsignore_JsIgnoreExample_ = j_l_Object.$create__();
+  this.f_exportedGetterSetterProperty__jsignore_JsIgnoreExample_ = 40;
+  this.f_notExportedGetterSetterProperty__jsignore_JsIgnoreExample_ = 50;
+  this.f_getterOnlyExposedProperty__jsignore_JsIgnoreExample_ = 60;
+  this.f_setterOnlyExposedProperty__jsignore_JsIgnoreExample_ = 70;
+ }
+ /** @return {number} */
+ get exportedField() {
+  return this.f_exportedField__jsignore_JsIgnoreExample_;
+ }
+ 
+ set exportedField(/** number */ set__) {
+  this.f_exportedField__jsignore_JsIgnoreExample_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getNotExportedField__int() {
+  return this.f_notExportedField__jsignore_JsIgnoreExample_;
+ }
+ /** @final @nodts */
+ m_setNotExportedField__int__void(/** number */ set__) {
+  this.f_notExportedField__jsignore_JsIgnoreExample_ = set__;
+ }
+ /** @return {!*} */
+ get CONSTNAME() {
+  return this.f_CONSTNAME__jsignore_JsIgnoreExample_;
+ }
+ /** @return {number} */
+ get exportedGetterProperty() {
+  return 30;
+ }
+ /** @final @nodts @return {number} */
+ m_getNotExportedGetterProperty__int() {
+  return 30;
+ }
+ /** @return {number} */
+ get exportedGetterSetterProperty() {
+  return this.f_exportedGetterSetterProperty__jsignore_JsIgnoreExample_ + 1 | 0;
+ }
+ 
+ set exportedGetterSetterProperty(/** number */ value) {
+  this.f_exportedGetterSetterProperty__jsignore_JsIgnoreExample_ = value - 1 | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_getNotExportedGetterSetterProperty__int() {
+  return this.f_notExportedGetterSetterProperty__jsignore_JsIgnoreExample_ + 1 | 0;
+ }
+ /** @final @nodts */
+ m_setNotExportedGetterSetterProperty__int__void(/** number */ value) {
+  this.f_notExportedGetterSetterProperty__jsignore_JsIgnoreExample_ = value - 1 | 0;
+ }
+ /** @return {number} */
+ get getterOnlyExposedProperty() {
+  return this.f_getterOnlyExposedProperty__jsignore_JsIgnoreExample_ + 1 | 0;
+ }
+ /** @final @nodts */
+ m_setGetterOnlyExposedProperty__int__void(/** number */ value) {
+  this.f_getterOnlyExposedProperty__jsignore_JsIgnoreExample_ = value - 1 | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_getSetterOnlyExposedProperty__int() {
+  return this.f_setterOnlyExposedProperty__jsignore_JsIgnoreExample_ + 1 | 0;
+ }
+ 
+ set setterOnlyExposedProperty(/** number */ value) {
+  this.f_setterOnlyExposedProperty__jsignore_JsIgnoreExample_ = value - 1 | 0;
+ }
+ /** @final */
+ exportedFunction() {}
+ /** @final @nodts */
+ m_notExportedFunction__void() {}
+ /** @nodts */
+ static $clinit() {
+  JsIgnoreExample.$clinit = () =>{};
+  JsIgnoreExample.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsIgnoreExample;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsIgnoreExample, 'jsignore.JsIgnoreExample');
+
+exports = JsIgnoreExample;
+
+//# sourceMappingURL=JsIgnoreExample.js.map

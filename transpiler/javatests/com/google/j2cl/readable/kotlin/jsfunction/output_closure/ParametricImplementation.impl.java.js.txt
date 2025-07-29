@@ -1,0 +1,58 @@
+goog.module('jsfunction.ParametricImplementation$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class ParametricImplementation extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {function(T):void} */
+ static $create__() {
+  ParametricImplementation.$clinit();
+  let $instance = new ParametricImplementation();
+  $instance.$ctor__jsfunction_ParametricImplementation__void();
+  return $Util.$makeLambdaFunction(ParametricImplementation.prototype.m_call__java_lang_Object__void, $instance, ParametricImplementation.$copy);
+ }
+ /** @nodts */
+ $ctor__jsfunction_ParametricImplementation__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ 
+ m_call__java_lang_Object__void(/** T */ t) {
+  let o = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(t);
+ }
+ /** @nodts */
+ static $clinit() {
+  ParametricImplementation.$clinit = () =>{};
+  ParametricImplementation.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsfunction_ParametricImplementation;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsfunction_ParametricImplementation = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+$JavaScriptFunction.$markImplementor(ParametricImplementation);
+$Util.$setClassMetadata(ParametricImplementation, 'jsfunction.ParametricImplementation');
+
+exports = ParametricImplementation;
+
+//# sourceMappingURL=ParametricImplementation.js.map

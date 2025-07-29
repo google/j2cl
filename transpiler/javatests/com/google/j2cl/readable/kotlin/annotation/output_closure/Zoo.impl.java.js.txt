@@ -1,0 +1,34 @@
+goog.module('annotation.Zoo$impl');
+
+const Annotation = goog.require('java.lang.annotation.Annotation$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {Annotation}
+ */
+class Zoo {
+ /** @nodts */
+ static $clinit() {
+  Zoo.$clinit = () =>{};
+  Zoo.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Annotation.$markImplementor(ctor);
+  ctor.prototype.$implements__annotation_Zoo = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__annotation_Zoo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Zoo.$markImplementor(/**@type {Function}*/ (Zoo));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Zoo), 'annotation.Zoo');
+
+exports = Zoo;
+
+//# sourceMappingURL=Zoo.js.map

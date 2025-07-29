@@ -1,0 +1,66 @@
+goog.module('anonymousclass.AnonymousClass.$3$impl');
+
+const SomeClassWithStaticMembers = goog.require('anonymousclass.SomeClassWithStaticMembers$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AnonymousClass = goog.forwardDeclare('anonymousclass.AnonymousClass$impl');
+
+/**
+ * @final
+ */
+class $3 extends SomeClassWithStaticMembers {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!AnonymousClass} @nodts*/
+  this.$outer_this__anonymousclass_AnonymousClass_3;
+  /**@type {!$3} @nodts*/
+  this.f_o__anonymousclass_AnonymousClass_3_;
+  /**@type {!AnonymousClass} @nodts*/
+  this.f_outer__anonymousclass_AnonymousClass_3_;
+ }
+ /** @nodts @return {!$3} */
+ static $create__anonymousclass_AnonymousClass(/** !AnonymousClass */ $outer_this) {
+  $3.$clinit();
+  let $instance = new $3();
+  $instance.$ctor__anonymousclass_AnonymousClass_3__anonymousclass_AnonymousClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_AnonymousClass_3__anonymousclass_AnonymousClass__void(/** !AnonymousClass */ $outer_this) {
+  this.$outer_this__anonymousclass_AnonymousClass_3 = $outer_this;
+  this.$ctor__anonymousclass_SomeClassWithStaticMembers__int__void($outer_this.m_getI__int());
+  this.f_o__anonymousclass_AnonymousClass_3_ = this;
+  this.f_outer__anonymousclass_AnonymousClass_3_ = $outer_this;
+ }
+ /** @final @nodts @return {!$3} */
+ m_getO__anonymousclass_AnonymousClass_3() {
+  return this.f_o__anonymousclass_AnonymousClass_3_;
+ }
+ /** @final @nodts @return {!AnonymousClass} */
+ m_getOuter__anonymousclass_AnonymousClass() {
+  return this.f_outer__anonymousclass_AnonymousClass_3_;
+ }
+ /** @override @nodts @return {string} */
+ m_foo__java_lang_String() {
+  return 'a';
+ }
+ /** @nodts */
+ static $clinit() {
+  $3.$clinit = () =>{};
+  $3.$loadModules();
+  SomeClassWithStaticMembers.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $3;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($3, 'anonymousclass.AnonymousClass$3');
+
+exports = $3;
+
+//# sourceMappingURL=AnonymousClass$3.js.map

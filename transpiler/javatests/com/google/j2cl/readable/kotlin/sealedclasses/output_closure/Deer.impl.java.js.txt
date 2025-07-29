@@ -1,0 +1,52 @@
+goog.module('sealedclasses.Deer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Animal = goog.require('sealedclasses.Animal$impl');
+
+/**
+ * @final
+ * @implements {Animal}
+ */
+class Deer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Deer} */
+ static $create__() {
+  let $instance = new Deer();
+  $instance.$ctor__sealedclasses_Deer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_Deer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!Deer} */
+ static get f_INSTANCE__sealedclasses_Deer() {
+  return (Deer.$clinit(), Deer.$static_INSTANCE__sealedclasses_Deer);
+ }
+ /** @nodts */
+ static $clinit() {
+  Deer.$clinit = () =>{};
+  Deer.$loadModules();
+  j_l_Object.$clinit();
+  Deer.$static_INSTANCE__sealedclasses_Deer = Deer.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Deer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!Deer} @nodts*/
+Deer.$static_INSTANCE__sealedclasses_Deer;
+Animal.$markImplementor(Deer);
+$Util.$setClassMetadata(Deer, 'sealedclasses.Deer');
+
+exports = Deer;
+
+//# sourceMappingURL=Deer.js.map

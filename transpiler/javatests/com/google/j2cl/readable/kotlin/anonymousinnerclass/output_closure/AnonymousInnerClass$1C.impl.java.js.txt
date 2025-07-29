@@ -1,0 +1,58 @@
+goog.module('anonymousinnerclass.AnonymousInnerClass.$1C$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AnonymousInnerClass = goog.forwardDeclare('anonymousinnerclass.AnonymousInnerClass$impl');
+
+class $1C extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!AnonymousInnerClass} @nodts*/
+  this.$outer_this__anonymousinnerclass_AnonymousInnerClass_1C;
+  /**@type {number} @nodts*/
+  this.f_fInC__anonymousinnerclass_AnonymousInnerClass_1C_ = 0;
+  /**@type {number} @nodts*/
+  this.$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C = 0;
+ }
+ /** @nodts @return {!$1C} */
+ static $create__anonymousinnerclass_AnonymousInnerClass__int(/** !AnonymousInnerClass */ $outer_this, /** number */ $captured_arg) {
+  let $instance = new $1C();
+  $instance.$ctor__anonymousinnerclass_AnonymousInnerClass_1C__anonymousinnerclass_AnonymousInnerClass__int__void($outer_this, $captured_arg);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousinnerclass_AnonymousInnerClass_1C__anonymousinnerclass_AnonymousInnerClass__int__void(/** !AnonymousInnerClass */ $outer_this, /** number */ $captured_arg) {
+  this.$outer_this__anonymousinnerclass_AnonymousInnerClass_1C = $outer_this;
+  this.$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C = $captured_arg;
+  this.$ctor__java_lang_Object__void();
+  this.f_fInC__anonymousinnerclass_AnonymousInnerClass_1C_ = $captured_arg;
+ }
+ /** @final @nodts @return {number} */
+ m_getFInC__int() {
+  return this.f_fInC__anonymousinnerclass_AnonymousInnerClass_1C_;
+ }
+ /** @final @nodts */
+ m_setFInC__int__void(/** number */ set__) {
+  this.f_fInC__anonymousinnerclass_AnonymousInnerClass_1C_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1C.$clinit = () =>{};
+  $1C.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1C;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1C, 'anonymousinnerclass.AnonymousInnerClass$1C');
+
+exports = $1C;
+
+//# sourceMappingURL=AnonymousInnerClass$1C.js.map

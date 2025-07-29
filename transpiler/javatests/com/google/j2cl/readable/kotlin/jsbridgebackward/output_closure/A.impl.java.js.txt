@@ -1,0 +1,44 @@
+goog.module('jsbridgebackward.A$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class A extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!A} */
+ static $create__() {
+  A.$clinit();
+  let $instance = new A();
+  $instance.$ctor__jsbridgebackward_A__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsbridgebackward_A__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ m_foo__int__int(/** number */ a) {
+  return a;
+ }
+ /** @nodts */
+ static $clinit() {
+  A.$clinit = () =>{};
+  A.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(A, 'jsbridgebackward.A');
+
+exports = A;
+
+//# sourceMappingURL=A.js.map

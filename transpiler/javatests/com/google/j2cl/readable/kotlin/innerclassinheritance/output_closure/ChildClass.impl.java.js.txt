@@ -1,0 +1,60 @@
+goog.module('innerclassinheritance.ChildClass$impl');
+
+const ParentOuter = goog.require('innerclassinheritance.ParentOuter$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1LocalClass = goog.forwardDeclare('innerclassinheritance.ChildClass.$1LocalClass$impl');
+
+class ChildClass extends ParentOuter {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_fieldInOuter__innerclassinheritance_ChildClass_ = 0;
+ }
+ /** @nodts @return {!ChildClass} */
+ static $create__() {
+  ChildClass.$clinit();
+  let $instance = new ChildClass();
+  $instance.$ctor__innerclassinheritance_ChildClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinheritance_ChildClass__void() {
+  this.$ctor__innerclassinheritance_ParentOuter__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getFieldInOuter__int() {
+  return this.f_fieldInOuter__innerclassinheritance_ChildClass_;
+ }
+ /** @final @nodts */
+ m_setFieldInOuter__int__void(/** number */ set__) {
+  this.f_fieldInOuter__innerclassinheritance_ChildClass_ = set__;
+ }
+ /** @final @nodts */
+ m_funInOuter__void() {}
+ /** @final @nodts */
+ m_testLocalClass__void() {
+  $1LocalClass.$create__innerclassinheritance_ChildClass(this).m_test__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ChildClass.$clinit = () =>{};
+  ChildClass.$loadModules();
+  ParentOuter.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ChildClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1LocalClass = goog.module.get('innerclassinheritance.ChildClass.$1LocalClass$impl');
+ }
+}
+$Util.$setClassMetadata(ChildClass, 'innerclassinheritance.ChildClass');
+
+exports = ChildClass;
+
+//# sourceMappingURL=ChildClass.js.map

@@ -1,0 +1,102 @@
+goog.module('jvmstatic.ClassWithCompanion.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClassWithCompanion = goog.forwardDeclare('jvmstatic.ClassWithCompanion$impl');
+let Foo = goog.forwardDeclare('jvmstatic.Foo$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__jvmstatic_ClassWithCompanion_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmstatic_ClassWithCompanion_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!*} */
+ m_getFoo__java_lang_Object() {
+  return ClassWithCompanion.m_getFoo__java_lang_Object();
+ }
+ /** @final @nodts @return {!*} */
+ m_getBar__java_lang_Object() {
+  return ClassWithCompanion.m_getBar__java_lang_Object();
+ }
+ /** @final @nodts @return {number} */
+ m_getStaticProperty__int() {
+  return ClassWithCompanion.m_getStaticProperty__int();
+ }
+ /** @final @nodts @return {number} */
+ m_staticFunction__int() {
+  return ClassWithCompanion.m_staticFunction__int();
+ }
+ /** @final @nodts */
+ m_staticInternalFunction__void() {
+  ClassWithCompanion.m_staticInternalFunction__void();
+ }
+ /** @final @nodts */
+ m_staticProtectedFunction__void() {
+  ClassWithCompanion.m_staticProtectedFunction__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getStaticJsProperty__int() {
+  return ClassWithCompanion.m_getStaticJsProperty__int();
+ }
+ /** @final @nodts @return {number} */
+ m_getStaticJsPropertyWithGetter__int() {
+  return ClassWithCompanion.staticJsPropertyWithGetter;
+ }
+ /** @final @nodts @return {number} */
+ m_getStaticJsPropertyMethod__int() {
+  return ClassWithCompanion.staticJsPropertyMethod;
+ }
+ /** @final @nodts @return {number} */
+ m_staticJsMethod__int() {
+  return ClassWithCompanion.staticJsMethod();
+ }
+ /** @final @nodts @return {number} */
+ m_nonJvmStatic__int() {
+  return ClassWithCompanion.m_nonJvmStatic__int();
+ }
+ /** @final @nodts @template T, V @return {Foo<T, V>} */
+ m_staticMethodWithTypeParameter__jvmstatic_Foo() {
+  return ClassWithCompanion.m_staticMethodWithTypeParameter__jvmstatic_Foo();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jvmstatic_ClassWithCompanion_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jvmstatic_ClassWithCompanion_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__jvmstatic_ClassWithCompanion_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ClassWithCompanion = goog.module.get('jvmstatic.ClassWithCompanion$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__jvmstatic_ClassWithCompanion_Companion;
+$Util.$setClassMetadata(Companion, 'jvmstatic.ClassWithCompanion$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=ClassWithCompanion$Companion.js.map

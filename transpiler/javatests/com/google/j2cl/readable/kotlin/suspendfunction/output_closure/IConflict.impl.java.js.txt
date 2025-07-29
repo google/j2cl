@@ -1,0 +1,36 @@
+goog.module('suspendfunction.IConflict$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class IConflict {
+ /** @abstract @nodts */
+ m_multiLevelConflict__kotlin_coroutines_Continuation__java_lang_Object__void(/** !Continuation<?> */ c, /** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  IConflict.$clinit = () =>{};
+  IConflict.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__suspendfunction_IConflict = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__suspendfunction_IConflict;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IConflict.$markImplementor(/**@type {Function}*/ (IConflict));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (IConflict), 'suspendfunction.IConflict');
+
+exports = IConflict;
+
+//# sourceMappingURL=IConflict.js.map

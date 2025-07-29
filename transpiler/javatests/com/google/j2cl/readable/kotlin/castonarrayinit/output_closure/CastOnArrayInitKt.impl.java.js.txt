@@ -1,0 +1,60 @@
+goog.module('castonarrayinit.CastOnArrayInitKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('castonarrayinit.Foo$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @final
+ */
+class CastOnArrayInitKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CastOnArrayInitKt} */
+ static $create__() {
+  CastOnArrayInitKt.$clinit();
+  let $instance = new CastOnArrayInitKt();
+  $instance.$ctor__castonarrayinit_CastOnArrayInitKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__castonarrayinit_CastOnArrayInitKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template E */
+ static m_f__arrayOf_castonarrayinit_Foo__void(/** !Array<Foo<E>> */ args) {
+  CastOnArrayInitKt.$clinit();
+ }
+ /** @nodts @template E */
+ static m_test__void() {
+  CastOnArrayInitKt.$clinit();
+  let f1 = /**@type {!Foo<E>}*/ (Foo.$create__());
+  let f2 = /**@type {!Foo<E>}*/ (Foo.$create__());
+  CastOnArrayInitKt.m_f__arrayOf_castonarrayinit_Foo__void(/**@type {!Array<Foo<E>>}*/ ($Arrays.$stampType([f1, f2], Foo)));
+ }
+ /** @nodts */
+ static $clinit() {
+  CastOnArrayInitKt.$clinit = () =>{};
+  CastOnArrayInitKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CastOnArrayInitKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Foo = goog.module.get('castonarrayinit.Foo$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(CastOnArrayInitKt, 'castonarrayinit.CastOnArrayInitKt');
+
+exports = CastOnArrayInitKt;
+
+//# sourceMappingURL=CastOnArrayInitKt.js.map

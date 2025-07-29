@@ -1,0 +1,72 @@
+goog.module('foreachstatement.IterableReturningTypeVariable$impl');
+
+const Iterable = goog.require('java.lang.Iterable$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template U, T
+ * @implements {Iterable<Integer>}
+ */
+class IterableReturningTypeVariable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template U, T @return {!IterableReturningTypeVariable<U, T>} */
+ static $create__() {
+  IterableReturningTypeVariable.$clinit();
+  let $instance = new IterableReturningTypeVariable();
+  $instance.$ctor__foreachstatement_IterableReturningTypeVariable__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__foreachstatement_IterableReturningTypeVariable__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {T} */
+ m_iterator__java_util_Iterator() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String__int__kotlin_jvm_internal_DefaultConstructorMarker(null, 1, null));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ arg0) {
+  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {!Spliterator<Integer>} */
+ m_spliterator__java_util_Spliterator() {
+  return /**@type {!Spliterator<Integer>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
+ }
+ /** @nodts */
+ static $clinit() {
+  IterableReturningTypeVariable.$clinit = () =>{};
+  IterableReturningTypeVariable.$loadModules();
+  j_l_Object.$clinit();
+  Iterable.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IterableReturningTypeVariable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  NotImplementedError = goog.module.get('kotlin.NotImplementedError$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+Iterable.$markImplementor(IterableReturningTypeVariable);
+$Util.$setClassMetadata(IterableReturningTypeVariable, 'foreachstatement.IterableReturningTypeVariable');
+
+exports = IterableReturningTypeVariable;
+
+//# sourceMappingURL=IterableReturningTypeVariable.js.map

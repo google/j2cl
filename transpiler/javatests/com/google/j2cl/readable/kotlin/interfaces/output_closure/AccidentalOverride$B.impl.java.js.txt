@@ -1,0 +1,72 @@
+goog.module('interfaces.AccidentalOverride.B$impl');
+
+const A = goog.require('interfaces.AccidentalOverride.A$impl');
+const Bottom = goog.require('interfaces.AccidentalOverride.Bottom$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {A<!B, !B>}
+ * @implements {Bottom<!B>}
+ */
+class B extends A {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!B} */
+ static $create__() {
+  B.$clinit();
+  let $instance = new B();
+  $instance.$ctor__interfaces_AccidentalOverride_B__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfaces_AccidentalOverride_B__void() {
+  this.$ctor__interfaces_AccidentalOverride_A__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__interfaces_AccidentalOverride_Left__void(/** !B */ arg0) {
+  Bottom.m_foo__$default__interfaces_AccidentalOverride_Bottom__interfaces_AccidentalOverride_Bottom__void(this, /**@type {!B}*/ ($Casts.$to(arg0, B)));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__interfaces_AccidentalOverride_Right__void(/** !B */ arg0) {
+  Bottom.m_foo__$default__interfaces_AccidentalOverride_Bottom__interfaces_AccidentalOverride_Bottom__void(this, /**@type {!B}*/ ($Casts.$to(arg0, B)));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__interfaces_AccidentalOverride_Bottom__void(/** !B */ arg0) {
+  Bottom.m_foo__$default__interfaces_AccidentalOverride_Bottom__interfaces_AccidentalOverride_Bottom__void(this, /**@type {!B}*/ ($Casts.$to(arg0, B)));
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} */
+ m_foo__interfaces_AccidentalOverride_B__void(/** !B */ arg0) {
+  Bottom.m_foo__$default__interfaces_AccidentalOverride_Bottom__interfaces_AccidentalOverride_Bottom__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  A.$clinit();
+  Bottom.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Bottom.$markImplementor(B);
+$Util.$setClassMetadata(B, 'interfaces.AccidentalOverride$B');
+
+exports = B;
+
+//# sourceMappingURL=AccidentalOverride$B.js.map

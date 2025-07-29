@@ -1,0 +1,39 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.AbstractStringList3$impl');
+
+const AbstractList2 = goog.require('multipleabstractparents.MultipleAbstractParents.AbstractList2$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @extends {AbstractList2<?string>}
+ */
+class AbstractStringList3 extends AbstractList2 {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__multipleabstractparents_MultipleAbstractParents_AbstractStringList3__void() {
+  this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractList2__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractStringList3.$clinit = () =>{};
+  AbstractStringList3.$loadModules();
+  AbstractList2.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractStringList3;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {?string} */
+ m_getFoo__java_lang_Object__java_lang_String(/** ?string */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractStringList3, 'multipleabstractparents.MultipleAbstractParents$AbstractStringList3');
+
+exports = AbstractStringList3;
+
+//# sourceMappingURL=MultipleAbstractParents$AbstractStringList3.js.map

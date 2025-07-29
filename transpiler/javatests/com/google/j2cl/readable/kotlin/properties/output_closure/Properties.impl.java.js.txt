@@ -1,0 +1,158 @@
+goog.module('properties.Properties$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Properties extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_inConstructorReadOnly__properties_Properties_ = 0;
+  /**@type {number} @nodts*/
+  this.f_inConstructorReadWrite__properties_Properties_ = 0;
+  /**@type {number} @nodts*/
+  this.f_readOnly__properties_Properties_ = 0;
+  /**@type {number} @nodts*/
+  this.f_readWrite__properties_Properties_ = 0;
+  /**@type {?T} @nodts*/
+  this.f_parametricProperty__properties_Properties_;
+  /**@type {number} @nodts*/
+  this.f_complexPropertyInitializer__properties_Properties_ = 0;
+  /**@type {number} @nodts*/
+  this.f_readWriteCustomGetter__properties_Properties_ = 0;
+  /**@type {number} @nodts*/
+  this.f_readWriteCustomSetter__properties_Properties_ = 0;
+  /**@type {number} @nodts*/
+  this.f_customGetterSetterAndBackingField__properties_Properties_ = 0;
+  /**@type {number} @nodts*/
+  this.f_withPrivateDSetter__properties_Properties_ = 0;
+ }
+ /** @nodts @template T @return {!Properties<T>} */
+ static $create__int__int__int(/** number */ inConstructorReadOnly, /** number */ inConstructorReadWrite, /** number */ normalParam) {
+  Properties.$clinit();
+  let $instance = new Properties();
+  $instance.$ctor__properties_Properties__int__int__int__void(inConstructorReadOnly, inConstructorReadWrite, normalParam);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__properties_Properties__int__int__int__void(/** number */ inConstructorReadOnly, /** number */ inConstructorReadWrite, /** number */ normalParam) {
+  this.$ctor__java_lang_Object__void();
+  this.f_inConstructorReadOnly__properties_Properties_ = inConstructorReadOnly;
+  this.f_inConstructorReadWrite__properties_Properties_ = inConstructorReadWrite;
+  this.f_readOnly__properties_Properties_ = 1;
+  this.f_readWrite__properties_Properties_ = 2;
+  let tmp = this;
+  let /** number */ tmp_1;
+  if (normalParam > 0) {
+   tmp_1 = normalParam;
+  } else {
+   throw $Exceptions.toJs(AssertionError.$create__());
+  }
+  tmp.f_complexPropertyInitializer__properties_Properties_ = tmp_1;
+  this.f_readWriteCustomGetter__properties_Properties_ = 1;
+  this.f_readWriteCustomSetter__properties_Properties_ = 1;
+  this.f_customGetterSetterAndBackingField__properties_Properties_ = 1;
+  this.f_withPrivateDSetter__properties_Properties_ = 1;
+ }
+ /** @final @nodts @return {number} */
+ m_getInConstructorReadOnly__int() {
+  return this.f_inConstructorReadOnly__properties_Properties_;
+ }
+ /** @final @nodts @return {number} */
+ m_getInConstructorReadWrite__int() {
+  return this.f_inConstructorReadWrite__properties_Properties_;
+ }
+ /** @final @nodts */
+ m_setInConstructorReadWrite__int__void(/** number */ set__) {
+  this.f_inConstructorReadWrite__properties_Properties_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getReadOnly__int() {
+  return this.f_readOnly__properties_Properties_;
+ }
+ /** @final @nodts @return {number} */
+ m_getReadWrite__int() {
+  return this.f_readWrite__properties_Properties_;
+ }
+ /** @final @nodts */
+ m_setReadWrite__int__void(/** number */ set__) {
+  this.f_readWrite__properties_Properties_ = set__;
+ }
+ /** @final @nodts @return {?T} */
+ m_getParametricProperty__java_lang_Object() {
+  return this.f_parametricProperty__properties_Properties_;
+ }
+ /** @final @nodts */
+ m_setParametricProperty__java_lang_Object__void(/** ?T */ set__) {
+  this.f_parametricProperty__properties_Properties_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getComplexPropertyInitializer__int() {
+  return this.f_complexPropertyInitializer__properties_Properties_;
+ }
+ /** @final @nodts @return {number} */
+ m_getReadOnlyCustomGetter__int() {
+  return 1;
+ }
+ /** @final @nodts @return {number} */
+ m_getReadWriteCustomGetter__int() {
+  return this.f_readWriteCustomGetter__properties_Properties_ + 1 | 0;
+ }
+ /** @final @nodts */
+ m_setReadWriteCustomGetter__int__void(/** number */ set__) {
+  this.f_readWriteCustomGetter__properties_Properties_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getReadWriteCustomSetter__int() {
+  return this.f_readWriteCustomSetter__properties_Properties_;
+ }
+ /** @final @nodts */
+ m_setReadWriteCustomSetter__int__void(/** number */ value) {
+  this.f_readWriteCustomSetter__properties_Properties_ = 3;
+ }
+ /** @final @nodts @return {number} */
+ m_getCustomGetterSetterAndBackingField__int() {
+  return this.f_customGetterSetterAndBackingField__properties_Properties_ - 1 | 0;
+ }
+ /** @final @nodts */
+ m_setCustomGetterSetterAndBackingField__int__void(/** number */ value) {
+  this.f_customGetterSetterAndBackingField__properties_Properties_ = value + 1 | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_getWithPrivateDSetter__int() {
+  return this.f_withPrivateDSetter__properties_Properties_ - 1 | 0;
+ }
+ /** @final @nodts */
+ m_setWithPrivateDSetter__int__void_$p_properties_Properties(/** number */ value) {
+  this.f_withPrivateDSetter__properties_Properties_ = value + 1 | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  Properties.$clinit = () =>{};
+  Properties.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Properties;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AssertionError = goog.module.get('java.lang.AssertionError$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(Properties, 'properties.Properties');
+
+exports = Properties;
+
+//# sourceMappingURL=Properties.js.map

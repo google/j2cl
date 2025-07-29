@@ -1,0 +1,59 @@
+goog.module('bridgejsmethod.Main.C$impl');
+
+const A = goog.require('bridgejsmethod.Main.A$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {A<!Integer>}
+ */
+class C extends A {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!C} */
+ static $create__() {
+  C.$clinit();
+  let $instance = new C();
+  $instance.$ctor__bridgejsmethod_Main_C__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_C__void() {
+  this.$ctor__bridgejsmethod_Main_A__void();
+ }
+ /** @nodts @return {number} */
+ m_f__int__int(/** number */ i) {
+  return i;
+ }
+ //Bridge method.
+ /** @final @override @suppress{visibility} @return {!Integer} */
+ f(/** !Integer */ arg0) {
+  return Integer.m_valueOf__int__java_lang_Integer(this.m_f__int__int((/**@type {!Integer}*/ ($Casts.$to(arg0, Integer))).m_intValue__int()));
+ }
+ /** @nodts */
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  A.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(C, 'bridgejsmethod.Main$C');
+
+exports = C;
+
+//# sourceMappingURL=Main$C.js.map

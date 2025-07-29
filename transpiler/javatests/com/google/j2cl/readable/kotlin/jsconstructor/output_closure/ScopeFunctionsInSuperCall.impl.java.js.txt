@@ -1,0 +1,64 @@
+goog.module('jsconstructor.ScopeFunctionsInSuperCall$impl');
+
+const BaseJsConstructorType = goog.require('jsconstructor.BaseJsConstructorType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let CollectionsKt = goog.forwardDeclare('kotlin.collections.CollectionsKt$impl');
+
+/**
+ * @final
+ */
+class ScopeFunctionsInSuperCall extends BaseJsConstructorType {
+ //JsConstructor 'ScopeFunctionsInSuperCall(List)'.
+ 
+ constructor(/** !List<?> */ defaults) {
+  ScopeFunctionsInSuperCall.$clinit();
+  let tmp0__this_ = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
+  let this_1 = tmp0__this_;
+  this_1.add('a');
+  this_1.add('b');
+  super(CollectionsKt.m_plus__java_util_Collection__java_lang_Iterable__java_util_List(defaults, this_1));
+  this.$ctor__jsconstructor_ScopeFunctionsInSuperCall__java_util_List__void(defaults);
+ }
+ //Initialization from constructor 'ScopeFunctionsInSuperCall(List)'.
+ /** @nodts */
+ $ctor__jsconstructor_ScopeFunctionsInSuperCall__java_util_List__void(/** !List<?> */ defaults) {}
+ //Factory method corresponding to constructor 'ScopeFunctionsInSuperCall()'.
+ /** @nodts @return {!ScopeFunctionsInSuperCall} */
+ static $create__() {
+  ScopeFunctionsInSuperCall.$clinit();
+  let tmp0__this_ = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
+  let this_1 = tmp0__this_;
+  this_1.add('c');
+  this_1.add('d');
+  let $instance = new ScopeFunctionsInSuperCall(this_1);
+  $instance.$ctor__jsconstructor_ScopeFunctionsInSuperCall__void();
+  return $instance;
+ }
+ //Initialization from constructor 'ScopeFunctionsInSuperCall()'.
+ /** @nodts */
+ $ctor__jsconstructor_ScopeFunctionsInSuperCall__void() {}
+ /** @nodts */
+ static $clinit() {
+  ScopeFunctionsInSuperCall.$clinit = () =>{};
+  ScopeFunctionsInSuperCall.$loadModules();
+  BaseJsConstructorType.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ScopeFunctionsInSuperCall;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  CollectionsKt = goog.module.get('kotlin.collections.CollectionsKt$impl');
+ }
+}
+$Util.$setClassMetadata(ScopeFunctionsInSuperCall, 'jsconstructor.ScopeFunctionsInSuperCall');
+
+exports = ScopeFunctionsInSuperCall;
+
+//# sourceMappingURL=ScopeFunctionsInSuperCall.js.map

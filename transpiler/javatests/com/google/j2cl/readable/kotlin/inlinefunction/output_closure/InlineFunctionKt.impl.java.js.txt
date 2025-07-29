@@ -1,0 +1,460 @@
+goog.module('inlinefunction.InlineFunctionKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClassWithCompanion = goog.forwardDeclare('inlinefunction.ClassWithCompanion$impl');
+let Companion = goog.forwardDeclare('inlinefunction.ClassWithCompanion.Companion$impl');
+let ClassWithCompanionKt = goog.forwardDeclare('inlinefunction.ClassWithCompanionKt$impl');
+let ClassWithInlineFun = goog.forwardDeclare('inlinefunction.ClassWithInlineFun$impl');
+let $1 = goog.forwardDeclare('inlinefunction.ClassWithInlineFun.$1$impl');
+let Container = goog.forwardDeclare('inlinefunction.Container$impl');
+let ExternalClassWithInlineFun = goog.forwardDeclare('inlinefunction.ExternalClassWithInlineFun$impl');
+let ExternalInlineFunctionKt = goog.forwardDeclare('inlinefunction.ExternalInlineFunctionKt$impl');
+let HolderInAnotherLibrary = goog.forwardDeclare('inlinefunction.HolderInAnotherLibrary$impl');
+let InlineFunctionKt_$1 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$1$impl');
+let $1Foo = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$1Foo$impl');
+let $2 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$2$impl');
+let $3 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$3$impl');
+let $4 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$4$impl');
+let InlineFunctionsInAnotherLibraryKt = goog.forwardDeclare('inlinefunction.InlineFunctionsInAnotherLibraryKt$impl');
+let MyClass = goog.forwardDeclare('inlinefunction.MyClass$impl');
+let NonFun = goog.forwardDeclare('inlinefunction.NonFun$impl');
+let WithInlineFunction = goog.forwardDeclare('inlinefunction.WithInlineFunction$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
+let OfObject = goog.forwardDeclare('javaemul.internal.Ref.OfObject$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class InlineFunctionKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InlineFunctionKt} */
+ static $create__() {
+  InlineFunctionKt.$clinit();
+  let $instance = new InlineFunctionKt();
+  $instance.$ctor__inlinefunction_InlineFunctionKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_topLevelInlineFunction__inlinefunction_MyClass__kotlin_jvm_functions_Function1__int(/** !MyClass */ myClass, /** !Function1<?, ?> */ action) {
+  InlineFunctionKt.$clinit();
+  return (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(myClass.m_getF__int())), Integer))).m_intValue__int();
+ }
+ /** @nodts @template T */
+ static m_doSomethingOn__java_lang_Object__kotlin_jvm_functions_Function1__void(/** T */ target, /** !Function1<?, ?> */ block) {
+  InlineFunctionKt.$clinit();
+  block.m_invoke__java_lang_Object__java_lang_Object(target);
+  return;
+ }
+ /** @nodts @return {number} */
+ static m_extensionInlineFunction__inlinefunction_MyClass__kotlin_jvm_functions_Function1__int(/** !MyClass */ this_1, /** !Function1<?, ?> */ action) {
+  InlineFunctionKt.$clinit();
+  let sum = this_1.m_getF__int();
+  while (this_1.m_getF__int() > 0) {
+   let tmp = sum;
+   let unary = this_1.m_getF__int();
+   this_1.m_setF__int__void(unary - 1 | 0);
+   sum = tmp + (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(unary)), Integer))).m_intValue__int() | 0;
+  }
+  return sum;
+ }
+ /** @nodts */
+ static m_extensionInlineFunctionNoReturn__inlinefunction_MyClass__kotlin_jvm_functions_Function1__void(/** !MyClass */ this_1, /** !Function1<?, ?> */ action) {
+  InlineFunctionKt.$clinit();
+  this_1.m_setF__int__void((/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(this_1.m_getF__int())), Integer))).m_intValue__int());
+ }
+ /** @nodts */
+ static m_testInlining__void() {
+  InlineFunctionKt.$clinit();
+  let tmp0_myClass = MyClass.$create__int(2);
+  let myClass = tmp0_myClass;
+  let tmp1_it = myClass.m_getF__int();
+  let it = tmp1_it;
+  let a = Math.imul(it, 2);
+  let tmp2__this_ = ClassWithInlineFun.$create__int(5);
+  let /** number */ tmp_ret_0;
+  l$ret$1: {
+   let this_1 = tmp2__this_;
+   let sum = this_1.m_getE__int();
+   while (this_1.m_getE__int() > 0) {
+    let tmp = sum;
+    let unary = this_1.m_getE__int();
+    this_1.m_setE__int__void(unary - 1 | 0);
+    let tmp3_it = unary;
+    let it_1 = tmp3_it;
+    sum = tmp + Math.imul(it_1, 3) | 0;
+    if (sum > 10) {
+     tmp_ret_0 = sum;
+     break l$ret$1;
+    }
+   }
+   tmp_ret_0 = sum;
+  }
+  let b = tmp_ret_0;
+  let tmp4__this_ = ClassWithInlineFun.$create__int(5);
+  let this_2 = tmp4__this_;
+  let delegate = $1.$create__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun(null, this_2);
+  let c = delegate.m_compute__int();
+  let tmp5__this_ = ClassWithInlineFun.$create__int(5);
+  let this_3 = tmp5__this_;
+  let delegate_1 = InlineFunctionKt_$1.$create__int(5);
+  let d = delegate_1.m_compute__int();
+  let tmp6__this_ = MyClass.$create__int(5);
+  let this_4 = tmp6__this_;
+  let sum_1 = this_4.m_getF__int();
+  while (this_4.m_getF__int() > 0) {
+   let tmp_1 = sum_1;
+   let unary_1 = this_4.m_getF__int();
+   this_4.m_setF__int__void(unary_1 - 1 | 0);
+   let tmp7_it = unary_1;
+   let it_2 = tmp7_it;
+   sum_1 = tmp_1 + Math.imul(it_2, 4) | 0;
+  }
+  let e = sum_1;
+  let tmp8__this_ = MyClass.$create__int(5);
+  let this_5 = tmp8__this_;
+  let tmp9_it = this_5.m_getF__int();
+  let it_3 = tmp9_it;
+  this_5.m_setF__int__void(Math.imul(it_3, 5));
+  let tmp10__this_ = MyClass.$create__int(5);
+  let this_6 = tmp10__this_;
+  let sum_2 = this_6.m_getF__int();
+  while (this_6.m_getF__int() > 0) {
+   let tmp_2 = sum_2;
+   let unary_2 = this_6.m_getF__int();
+   this_6.m_setF__int__void(unary_2 - 1 | 0);
+   let tmp11_it = unary_2;
+   let it_4 = tmp11_it;
+   let /** number */ tmp_3;
+   if (it_4 < 10) {
+    return;
+   } else {
+    tmp_3 = Math.imul(it_4, 4);
+   }
+   sum_2 = tmp_2 + tmp_3 | 0;
+  }
+  let tmp12__this_ = MyClass.$create__int(5);
+  let this_7 = tmp12__this_;
+  let sum_3 = this_7.m_getF__int();
+  while (this_7.m_getF__int() > 0) {
+   let tmp_4 = sum_3;
+   let unary_3 = this_7.m_getF__int();
+   this_7.m_setF__int__void(unary_3 - 1 | 0);
+   let tmp13_it = unary_3;
+   let /** number */ tmp_ret_2;
+   l$ret$3: {
+    let it_5 = tmp13_it;
+    let /** number */ tmp_5;
+    if (it_5 < 10) {
+     tmp_ret_2 = 0;
+     break l$ret$3;
+    } else {
+     tmp_5 = Math.imul(it_5, 4);
+    }
+    tmp_ret_2 = tmp_5;
+   }
+   sum_3 = tmp_4 + tmp_ret_2 | 0;
+  }
+ }
+ /** @nodts */
+ static m_testInliningWithPrivateMemberCall__void() {
+  InlineFunctionKt.$clinit();
+  let tmp0__this_ = ExternalClassWithInlineFun.$create__int(2);
+  let this_1 = tmp0__this_;
+  let tmp1_it = this_1.m_getE__int();
+  let it = tmp1_it;
+  it + ExternalInlineFunctionKt.f_privateTopProperty__inlinefunction_ExternalInlineFunctionKt_ | 0;
+ }
+ /** @nodts */
+ static m_testInliningWithLocalClass__void() {
+  InlineFunctionKt.$clinit();
+  let tmp0_myClass = MyClass.$create__int(2);
+  let myClass = tmp0_myClass;
+  let tmp1_it = myClass.m_getF__int();
+  let it = tmp1_it;
+  let d = $1Foo.$create__int(it).m_mulByTwo__int();
+ }
+ /** @nodts */
+ static m_testFunctionRef__void() {
+  InlineFunctionKt.$clinit();
+  let foo = MyClass.$create__int(2);
+  let tmp0_p0 = foo.m_getF__int();
+  let p0 = tmp0_p0;
+  foo.m_addAndReturn__int__int(p0);
+ }
+ /** @nodts */
+ static m_testReifiedParameter__void() {
+  InlineFunctionKt.$clinit();
+  let aStringAsAny = 'foo';
+  let someInt = 1;
+  let tmp0_obj = aStringAsAny;
+  let obj = tmp0_obj;
+  let a = /**@type {string}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(obj), j_l_String));
+  let tmp1_obj = aStringAsAny;
+  let obj_1 = tmp1_obj;
+  let b = /**@type {!Error}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(obj_1), Error));
+  let c = false;
+  someInt = someInt + 1 | 0;
+  let tmp2_i = someInt;
+  let i = tmp2_i;
+  let d = false;
+  let tmp3_obj = aStringAsAny;
+  let obj_2 = tmp3_obj;
+  let e = Double.$isInstance(obj_2);
+  let /** ?string */ tmp_ret_0;
+  l$ret$1: {
+   if (!$Equality.$same('string', null)) {
+    tmp_ret_0 = (/**@type {string}*/ ('string'));
+    break l$ret$1;
+   }
+   tmp_ret_0 = (/**@type {?string}*/ (null));
+  }
+  let f = tmp_ret_0;
+ }
+ /** @nodts @return {!*} */
+ static m_inlineFunWithNoInlineParam__kotlin_jvm_functions_Function0__java_lang_Object(/** !Function0<?> */ notInlined) {
+  InlineFunctionKt.$clinit();
+  return notInlined;
+ }
+ /** @nodts */
+ static m_testNoInline__void() {
+  InlineFunctionKt.$clinit();
+  let tmp0_notInlined = Function0.$adapt(/**  @return {?}*/ (() =>{
+   return Integer.m_valueOf__int__java_lang_Integer(5);
+  }));
+  let notInlined = tmp0_notInlined;
+  let intProducer = /**@type {!Function0<Integer>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(notInlined));
+  let a = (/**@type {!Integer}*/ ($Casts.$to(intProducer.m_invoke__java_lang_Object(), Integer))).m_intValue__int();
+ }
+ /** @nodts */
+ static m_acceptMyClass__inlinefunction_MyClass__void(/** !MyClass */ myClass) {
+  InlineFunctionKt.$clinit();
+ }
+ /** @nodts @return {!MyClass} */
+ static m_getMyClass__inlinefunction_MyClass() {
+  InlineFunctionKt.$clinit();
+  return MyClass.$create__int(12);
+ }
+ /** @nodts */
+ static m_setMyClass__inlinefunction_MyClass__void(/** !MyClass */ v) {
+  InlineFunctionKt.$clinit();
+  InlineFunctionKt.m_acceptMyClass__inlinefunction_MyClass__void(v);
+  return;
+ }
+ /** @nodts */
+ static m_testInlineProperty__void() {
+  InlineFunctionKt.$clinit();
+  let a = MyClass.$create__int(12);
+  let tmp0_v = MyClass.$create__int(5);
+  let v = tmp0_v;
+  InlineFunctionKt.m_acceptMyClass__inlinefunction_MyClass__void(v);
+ }
+ /** @nodts */
+ static m_testInlineFunctionFromAnotherLibrary__void() {
+  InlineFunctionKt.$clinit();
+  let tmp_ret_0 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$1: {
+   if ($Equality.$same(null, null)) {
+    tmp_ret_0 = 'foo';
+    break l$ret$1;
+   }
+   tmp_ret_0 = null;
+  }
+  let a = tmp_ret_0;
+  let tmp_ret_2 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$3: {
+   if ($Equality.$same('gar', null)) {
+    tmp_ret_2 = 'foo';
+    break l$ret$3;
+   }
+   tmp_ret_2 = 'gar';
+  }
+  let b = tmp_ret_2;
+  let c = 'topLevelInlineFunctionOnlyReferencedInAnotherFile';
+  let tmp0__this_ = HolderInAnotherLibrary.$create__int(42);
+  let this_1 = tmp0__this_;
+  let i = this_1.m_getI__int() + 1 | 0;
+ }
+ /** @nodts */
+ static m_testInlineFunctionWithLambda__void() {
+  InlineFunctionKt.$clinit();
+  let tmp_ret_0 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$1: {
+   if ($Equality.$same(null, null)) {
+    tmp_ret_0 = 'foo';
+    break l$ret$1;
+   }
+   tmp_ret_0 = null;
+  }
+  let a = tmp_ret_0;
+  let tmp_ret_2 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$3: {
+   if ($Equality.$same('bar', null)) {
+    tmp_ret_2 = 'foo';
+    break l$ret$3;
+   }
+   tmp_ret_2 = 'bar';
+  }
+  let b = tmp_ret_2;
+  let tmp_ret_4 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$5: {
+   if ($Equality.$same(null, null)) {
+    tmp_ret_4 = 'someDefault';
+    break l$ret$5;
+   }
+   tmp_ret_4 = null;
+  }
+  let c = tmp_ret_4;
+  let tmp_ret_6 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$7: {
+   if ($Equality.$same('buzz', null)) {
+    tmp_ret_6 = 'someDefault';
+    break l$ret$7;
+   }
+   tmp_ret_6 = 'buzz';
+  }
+  let d = tmp_ret_6;
+  let tmp_ret_8 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$9: {
+   if ($Equality.$same(null, null)) {
+    tmp_ret_8 = InlineFunctionsInAnotherLibraryKt.m_getDefaultValue__kotlin_jvm_functions_Function0__java_lang_Object(Function0.$adapt(/**  @return {?}*/ (() =>{
+     return 'foo';
+    })));
+    break l$ret$9;
+   }
+   tmp_ret_8 = null;
+  }
+  let e = tmp_ret_8;
+ }
+ /** @nodts */
+ static m_testNestedInlineFunction__void() {
+  InlineFunctionKt.$clinit();
+  let tmp_ret_0 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$1: {
+   if ($Equality.$same(null, null)) {
+    tmp_ret_0 = 'default';
+    break l$ret$1;
+   }
+   tmp_ret_0 = null;
+  }
+  let a = tmp_ret_0;
+  let tmp_ret_2 = Unit.f_INSTANCE__kotlin_Unit;
+  l$ret$3: {
+   if ($Equality.$same('bar', null)) {
+    tmp_ret_2 = 'default';
+    break l$ret$3;
+   }
+   tmp_ret_2 = 'bar';
+  }
+  let b = tmp_ret_2;
+ }
+ /** @nodts */
+ static m_testMixingInlineAndNonInline__void() {
+  InlineFunctionKt.$clinit();
+  let a = InlineFunctionsInAnotherLibraryKt.m_dontCallMeDirectly__java_lang_Object();
+  let b = InlineFunctionsInAnotherLibraryKt.m_getDontAccessMeDirectly__java_lang_Object();
+  let tmp0__this_ = Companion.f_Companion__inlinefunction_ClassWithCompanion_Companion;
+  let this_1 = tmp0__this_;
+  let c = ClassWithCompanion.$create__java_lang_Object(ClassWithCompanionKt.m_notReferencedOutsideOfThisFile__java_lang_Object__java_lang_String(j_l_Object.$create__()));
+  let tmp0__this__1 = ClassWithCompanion.$create__java_lang_Object(j_l_Object.$create__());
+  let this_2 = tmp0__this__1;
+  let d = ClassWithCompanionKt.m_notReferencedOutsideOfThisFile__java_lang_String();
+  let tmp0__this__2 = ClassWithCompanion.$create__java_lang_Object(j_l_Object.$create__());
+  let this_3 = tmp0__this__2;
+  let tmp0__this__3 = Companion.f_Companion__inlinefunction_ClassWithCompanion_Companion;
+  let this_4 = tmp0__this__3;
+  let e = ClassWithCompanionKt.m_yetAnotherNotReferencedOutsideOfThisFile__java_lang_String();
+  let tmp0__this__4 = ClassWithCompanion.$create__java_lang_Object(j_l_Object.$create__());
+  let this_5 = tmp0__this__4;
+  let f = ClassWithCompanionKt.m_yetYetAnotherNotReferencedOutsideOfThisFile__java_lang_String();
+  let tmp0__this__5 = WithInlineFunction.$create__();
+  let this_6 = tmp0__this__5;
+  let g = Integer.m_valueOf__int__java_lang_Integer(1);
+  let tmp0__this__6 = ClassWithCompanion.$create__java_lang_Object(j_l_Object.$create__());
+  let this_7 = tmp0__this__6;
+  let h = 'RightExtensionProperty';
+  let i = 'funWithJvmName';
+ }
+ /** @nodts @template T @return {!NonFun<T>} */
+ static m_NonFun__kotlin_jvm_functions_Function0__inlinefunction_NonFun(/** !Function0<?> */ container) {
+  InlineFunctionKt.$clinit();
+  return /**@type {!$2<T>}*/ ($2.$create__kotlin_jvm_functions_Function0(container));
+ }
+ /** @nodts */
+ static m_useAdaptor__void() {
+  let capturedValue = /**@type {OfObject<string>}*/ (Ref.m_createRef__java_lang_Object__javaemul_internal_Ref_OfObject('Initial'));
+  let nf = $3.$create__javaemul_internal_Ref_OfObject(capturedValue);
+  let s = $4.$create__();
+ }
+ /** @nodts @return {number} */
+ static m_testNonReifiedIntTypeParameterErasureInInlineFun__int() {
+  return 1 + 1 | 0;
+ }
+ /** @nodts @template R @return {R} */
+ static m_castIntToObj__java_lang_Object() {
+  return Integer.m_valueOf__int__java_lang_Integer(1);
+ }
+ /** @nodts */
+ static $clinit() {
+  InlineFunctionKt.$clinit = () =>{};
+  InlineFunctionKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InlineFunctionKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ClassWithCompanion = goog.module.get('inlinefunction.ClassWithCompanion$impl');
+  Companion = goog.module.get('inlinefunction.ClassWithCompanion.Companion$impl');
+  ClassWithCompanionKt = goog.module.get('inlinefunction.ClassWithCompanionKt$impl');
+  ClassWithInlineFun = goog.module.get('inlinefunction.ClassWithInlineFun$impl');
+  $1 = goog.module.get('inlinefunction.ClassWithInlineFun.$1$impl');
+  ExternalClassWithInlineFun = goog.module.get('inlinefunction.ExternalClassWithInlineFun$impl');
+  ExternalInlineFunctionKt = goog.module.get('inlinefunction.ExternalInlineFunctionKt$impl');
+  HolderInAnotherLibrary = goog.module.get('inlinefunction.HolderInAnotherLibrary$impl');
+  InlineFunctionKt_$1 = goog.module.get('inlinefunction.InlineFunctionKt.$1$impl');
+  $1Foo = goog.module.get('inlinefunction.InlineFunctionKt.$1Foo$impl');
+  $2 = goog.module.get('inlinefunction.InlineFunctionKt.$2$impl');
+  $3 = goog.module.get('inlinefunction.InlineFunctionKt.$3$impl');
+  $4 = goog.module.get('inlinefunction.InlineFunctionKt.$4$impl');
+  InlineFunctionsInAnotherLibraryKt = goog.module.get('inlinefunction.InlineFunctionsInAnotherLibraryKt$impl');
+  MyClass = goog.module.get('inlinefunction.MyClass$impl');
+  WithInlineFunction = goog.module.get('inlinefunction.WithInlineFunction$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Error = goog.module.get('java.lang.Error$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Ref = goog.module.get('javaemul.internal.Ref$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(InlineFunctionKt, 'inlinefunction.InlineFunctionKt');
+
+exports = InlineFunctionKt;
+
+//# sourceMappingURL=InlineFunctionKt.js.map

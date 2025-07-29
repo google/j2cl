@@ -1,0 +1,43 @@
+goog.module('qualifiedsupercall.QualifiedSuperCall$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Parent = goog.require('qualifiedsupercall.Parent$impl');
+
+/**
+ * @final
+ */
+class QualifiedSuperCall extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!QualifiedSuperCall} */
+ static $create__() {
+  QualifiedSuperCall.$clinit();
+  let $instance = new QualifiedSuperCall();
+  $instance.$ctor__qualifiedsupercall_QualifiedSuperCall__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__qualifiedsupercall_QualifiedSuperCall__void() {
+  this.$ctor__qualifiedsupercall_Parent__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  QualifiedSuperCall.$clinit = () =>{};
+  QualifiedSuperCall.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof QualifiedSuperCall;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(QualifiedSuperCall, 'qualifiedsupercall.QualifiedSuperCall');
+
+exports = QualifiedSuperCall;
+
+//# sourceMappingURL=QualifiedSuperCall.js.map

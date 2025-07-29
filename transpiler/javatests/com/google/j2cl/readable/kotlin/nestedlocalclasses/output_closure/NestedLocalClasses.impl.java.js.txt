@@ -1,0 +1,47 @@
+goog.module('nestedlocalclasses.NestedLocalClasses$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class NestedLocalClasses extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NestedLocalClasses} */
+ static $create__() {
+  NestedLocalClasses.$clinit();
+  let $instance = new NestedLocalClasses();
+  $instance.$ctor__nestedlocalclasses_NestedLocalClasses__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nestedlocalclasses_NestedLocalClasses__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__int__void(/** number */ p) {
+  let localVar = 1;
+ }
+ /** @nodts */
+ static $clinit() {
+  NestedLocalClasses.$clinit = () =>{};
+  NestedLocalClasses.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NestedLocalClasses;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NestedLocalClasses, 'nestedlocalclasses.NestedLocalClasses');
+
+exports = NestedLocalClasses;
+
+//# sourceMappingURL=NestedLocalClasses.js.map

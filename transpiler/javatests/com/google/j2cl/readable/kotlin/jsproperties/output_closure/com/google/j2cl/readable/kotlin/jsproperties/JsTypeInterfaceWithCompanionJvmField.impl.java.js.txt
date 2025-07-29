@@ -1,0 +1,38 @@
+goog.module('com.google.j2cl.readable.kotlin.jsproperties.JsTypeInterfaceWithCompanionJvmField$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class JsTypeInterfaceWithCompanionJvmField {
+ /** @return {number} */
+ static get a() {
+  return (JsTypeInterfaceWithCompanionJvmField.$clinit(), JsTypeInterfaceWithCompanionJvmField.$static_a__com_google_j2cl_readable_kotlin_jsproperties_JsTypeInterfaceWithCompanionJvmField);
+ }
+ /** @nodts */
+ static $clinit() {
+  JsTypeInterfaceWithCompanionJvmField.$clinit = () =>{};
+  JsTypeInterfaceWithCompanionJvmField.$loadModules();
+  JsTypeInterfaceWithCompanionJvmField.$static_a__com_google_j2cl_readable_kotlin_jsproperties_JsTypeInterfaceWithCompanionJvmField = 1;
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__com_google_j2cl_readable_kotlin_jsproperties_JsTypeInterfaceWithCompanionJvmField = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__com_google_j2cl_readable_kotlin_jsproperties_JsTypeInterfaceWithCompanionJvmField;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {number} @nodts*/
+JsTypeInterfaceWithCompanionJvmField.$static_a__com_google_j2cl_readable_kotlin_jsproperties_JsTypeInterfaceWithCompanionJvmField = 0;
+JsTypeInterfaceWithCompanionJvmField.$markImplementor(/**@type {Function}*/ (JsTypeInterfaceWithCompanionJvmField));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (JsTypeInterfaceWithCompanionJvmField), 'com.google.j2cl.readable.kotlin.jsproperties.JsTypeInterfaceWithCompanionJvmField');
+
+exports = JsTypeInterfaceWithCompanionJvmField;
+
+//# sourceMappingURL=JsTypeInterfaceWithCompanionJvmField.js.map

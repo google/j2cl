@@ -1,0 +1,34 @@
+goog.module('simplegenericinterface.SimpleGenericInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class SimpleGenericInterface {
+ /** @abstract @nodts @return {T} */
+ m_fun__java_lang_Object__java_lang_Object(/** T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  SimpleGenericInterface.$clinit = () =>{};
+  SimpleGenericInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__simplegenericinterface_SimpleGenericInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__simplegenericinterface_SimpleGenericInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+SimpleGenericInterface.$markImplementor(/**@type {Function}*/ (SimpleGenericInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (SimpleGenericInterface), 'simplegenericinterface.SimpleGenericInterface');
+
+exports = SimpleGenericInterface;
+
+//# sourceMappingURL=SimpleGenericInterface.js.map

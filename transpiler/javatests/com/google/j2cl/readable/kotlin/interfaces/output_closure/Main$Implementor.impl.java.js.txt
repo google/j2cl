@@ -1,0 +1,77 @@
+goog.module('interfaces.Main.Implementor$impl');
+
+const Interface = goog.require('interfaces.Main.Interface$impl');
+const SubInterface = goog.require('interfaces.Main.SubInterface$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('interfaces.Main$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {SubInterface}
+ * @implements {Interface<?string>}
+ */
+class Implementor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Main} @nodts*/
+  this.$outer_this__interfaces_Main_Implementor;
+ }
+ /** @nodts @return {!Implementor} */
+ static $create__interfaces_Main(/** !Main */ $outer_this) {
+  Implementor.$clinit();
+  let $instance = new Implementor();
+  $instance.$ctor__interfaces_Main_Implementor__interfaces_Main__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfaces_Main_Implementor__interfaces_Main__void(/** !Main */ $outer_this) {
+  this.$outer_this__interfaces_Main_Implementor = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts */
+ m_interfaceMethod__void() {}
+ /** @override @return {string} */
+ toString() {
+  return super.toString();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_defaultMethod__java_lang_Object__void(/** ?string */ arg0) {
+  SubInterface.m_defaultMethod__$default__interfaces_Main_SubInterface__java_lang_String__void(this, /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_defaultMethod__java_lang_String__void(/** ?string */ arg0) {
+  SubInterface.m_defaultMethod__$default__interfaces_Main_SubInterface__java_lang_String__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  Implementor.$clinit = () =>{};
+  Implementor.$loadModules();
+  j_l_Object.$clinit();
+  SubInterface.$clinit();
+  Interface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Implementor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+SubInterface.$markImplementor(Implementor);
+Interface.$markImplementor(Implementor);
+$Util.$setClassMetadata(Implementor, 'interfaces.Main$Implementor');
+
+exports = Implementor;
+
+//# sourceMappingURL=Main$Implementor.js.map

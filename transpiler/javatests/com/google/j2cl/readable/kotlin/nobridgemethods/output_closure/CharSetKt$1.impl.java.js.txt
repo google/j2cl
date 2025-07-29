@@ -1,0 +1,44 @@
+goog.module('nobridgemethods.CharSetKt.$1$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const TreeMap = goog.require('nobridgemethods.TreeMap$impl');
+
+/**
+ * @final
+ * @extends {TreeMap<?string>}
+ */
+class $1 extends TreeMap {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!$1} */
+ static $create__() {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__nobridgemethods_CharSetKt_1__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nobridgemethods_CharSetKt_1__void() {
+  this.$ctor__nobridgemethods_TreeMap__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  TreeMap.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1, 'nobridgemethods.CharSetKt$1');
+
+exports = $1;
+
+//# sourceMappingURL=CharSetKt$1.js.map

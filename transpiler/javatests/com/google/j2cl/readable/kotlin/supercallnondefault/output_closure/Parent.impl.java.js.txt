@@ -1,0 +1,51 @@
+goog.module('supercallnondefault.Parent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Parent extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_f__supercallnondefault_Parent_ = 0;
+ }
+ /** @nodts @return {!Parent} */
+ static $create__int(/** number */ f) {
+  Parent.$clinit();
+  let $instance = new Parent();
+  $instance.$ctor__supercallnondefault_Parent__int__void(f);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__supercallnondefault_Parent__int__void(/** number */ f) {
+  this.$ctor__java_lang_Object__void();
+  this.f_f__supercallnondefault_Parent_ = f;
+ }
+ /** @final @nodts @return {number} */
+ m_getF__int() {
+  return this.f_f__supercallnondefault_Parent_;
+ }
+ /** @final @nodts */
+ m_setF__int__void(/** number */ set__) {
+  this.f_f__supercallnondefault_Parent_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  Parent.$clinit = () =>{};
+  Parent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Parent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Parent, 'supercallnondefault.Parent');
+
+exports = Parent;
+
+//# sourceMappingURL=Parent.js.map

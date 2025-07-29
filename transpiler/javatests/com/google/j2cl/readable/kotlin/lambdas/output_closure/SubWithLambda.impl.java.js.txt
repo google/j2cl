@@ -1,0 +1,53 @@
+goog.module('lambdas.SubWithLambda$impl');
+
+const Super = goog.require('lambdas.Super$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Runnable = goog.forwardDeclare('lambdas.Runnable$impl');
+
+/**
+ * @final
+ */
+class SubWithLambda extends Super {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubWithLambda} */
+ static $create__() {
+  SubWithLambda.$clinit();
+  let $instance = new SubWithLambda();
+  $instance.$ctor__lambdas_SubWithLambda__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_SubWithLambda__void() {
+  this.$ctor__lambdas_Super__void();
+ }
+ /** @final @nodts */
+ m_n__void() {
+  let r = Runnable.$adapt(() =>{
+   super.m_m__void();
+  });
+ }
+ /** @nodts */
+ static $clinit() {
+  SubWithLambda.$clinit = () =>{};
+  SubWithLambda.$loadModules();
+  Super.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubWithLambda;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Runnable = goog.module.get('lambdas.Runnable$impl');
+ }
+}
+$Util.$setClassMetadata(SubWithLambda, 'lambdas.SubWithLambda');
+
+exports = SubWithLambda;
+
+//# sourceMappingURL=SubWithLambda.js.map

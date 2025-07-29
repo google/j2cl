@@ -1,0 +1,209 @@
+goog.module('cast.Casts$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('cast.Casts.Foo$impl');
+let Holder = goog.forwardDeclare('cast.Holder$impl');
+let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class Casts extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Casts} */
+ static $create__() {
+  Casts.$clinit();
+  let $instance = new Casts();
+  $instance.$ctor__cast_Casts__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cast_Casts__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_testCastToClass__void() {
+  let o = j_l_Object.$create__();
+  let c = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+ }
+ /** @final @nodts */
+ m_testCasToInterface__void() {
+  let o = j_l_Object.$create__();
+  let s = /**@type {(Serializable|Array)}*/ ($Casts.$to(o, /**@type {Function}*/ (Serializable)));
+ }
+ /** @final @nodts */
+ m_testCastToBoxedType__void() {
+  let /** * */ o = null;
+  let b = /**@type {Byte}*/ ($Casts.$to(o, Byte));
+  let d = /**@type {?number}*/ ($Casts.$to(o, Double));
+  let f = /**@type {Float}*/ ($Casts.$to(o, Float));
+  let i = /**@type {Integer}*/ ($Casts.$to(o, Integer));
+  let l = /**@type {Long}*/ ($Casts.$to(o, Long));
+  let s = /**@type {Short}*/ ($Casts.$to(o, Short));
+  let n = /**@type {(Number|number)}*/ ($Casts.$to(o, Number));
+  let c = /**@type {Character}*/ ($Casts.$to(o, Character));
+  let bool = /**@type {?boolean}*/ ($Casts.$to(o, Boolean));
+ }
+ /** @final @nodts */
+ m_testCastToArray__void() {
+  let foo = /**@type {Array<*>}*/ (null);
+  let bar = /**@type {Array<Array<*>>}*/ (null);
+ }
+ /** @final @nodts */
+ m_functionForInstanceofTest__void_$p_cast_Casts() {}
+ /** @final @nodts */
+ m_testCastVarialeAfterInstanceOf__void() {
+  let o = j_l_Object.$create__();
+  if (Casts.$isInstance(o)) {
+   let c = /**@type {!Casts}*/ (o);
+  }
+  if (Casts.$isInstance(o)) {
+   let cAvoidsCastsTo = /**@type {!Casts}*/ (o);
+   o = j_l_Object.$create__();
+   let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+  }
+  if (Casts.$isInstance(o)) {
+   let cAvoidsCastsTo_1 = /**@type {!Casts}*/ (o);
+   o = Foo.$create__cast_Casts(this);
+   let cNotAvoidCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+  }
+  if (Casts.$isInstance(o)) {
+   let cAvoidsCastsTo_2 = /**@type {!Casts}*/ (o);
+   o = j_l_Object.$create__();
+   let cAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+  }
+  if (Casts.$isInstance(o)) {
+   let cAvoidsCastsTo_3 = /**@type {!Casts}*/ (o);
+   this.m_functionForInstanceofTest__void_$p_cast_Casts();
+   let cNotAvoidCastsTo_2 = /**@type {!Casts}*/ (o);
+  }
+  let c_1 = Casts.$isInstance(o) ? /**@type {!Casts}*/ (o) : null;
+ }
+ /** @final @nodts */
+ m_testCastFieldAfterInstanceOf__void() {
+  let foo = Foo.$create__cast_Casts(this);
+  if (Casts.$isInstance(foo.m_getField__java_lang_Object())) {
+   let c = /**@type {Casts}*/ ($Casts.$to(foo.m_getField__java_lang_Object(), Casts));
+  }
+  if (Casts.$isInstance(foo.m_getField__java_lang_Object())) {
+   let cAvoidsCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.m_getField__java_lang_Object(), Casts));
+   foo.m_setField__java_lang_Object__void(j_l_Object.$create__());
+   let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.m_getField__java_lang_Object(), Casts));
+  }
+  if (Casts.$isInstance(foo.m_getField__java_lang_Object())) {
+   let cAvoidsCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(foo.m_getField__java_lang_Object(), Casts));
+   foo = Foo.$create__cast_Casts(this);
+   let cNotAvoidCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(foo.m_getField__java_lang_Object(), Casts));
+  }
+  if (Casts.$isInstance(foo.m_getField__java_lang_Object())) {
+   let cAvoidsCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.m_getField__java_lang_Object(), Casts));
+   this.m_functionForInstanceofTest__void_$p_cast_Casts();
+   let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.m_getField__java_lang_Object(), Casts));
+  }
+  let c_1 = Casts.$isInstance(foo.m_getField__java_lang_Object()) ? /**@type {!Casts}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(foo.m_getField__java_lang_Object()), Casts)) : null;
+ }
+ /** @final @nodts */
+ m_testCaseMethodAfterInstanceOf__void() {
+  let foo = Foo.$create__cast_Casts(this);
+  if (Casts.$isInstance(foo.m_method__java_lang_Object())) {
+   let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.m_method__java_lang_Object(), Casts));
+  }
+  let c = Casts.$isInstance(foo.m_method__java_lang_Object()) ? /**@type {!Casts}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(foo.m_method__java_lang_Object()), Casts)) : null;
+ }
+ /** @final @nodts */
+ m_testCastNullability__void() {
+  let a = Foo.$create__cast_Casts(this);
+  let aa = /**@type {!Foo}*/ ($Casts.$to(a, Foo));
+  let b = Foo.$create__cast_Casts(this);
+  let bb = /**@type {Foo}*/ ($Casts.$to(b, Foo));
+  let c = Foo.$create__cast_Casts(this);
+  let cc = Foo.$isInstance(c) ? /**@type {!Foo}*/ (c) : null;
+  let d = Foo.$create__cast_Casts(this);
+  let dd = Foo.$isInstance(d) ? /**@type {!Foo}*/ (d) : null;
+ }
+ /** @final @nodts */
+ m_testPrecedence__void() {
+  let foo = 'foo';
+  let bar = 'bar';
+  let notString = 123;
+  let s1 = /**@type {string}*/ ($Casts.$to(false ? foo : bar, j_l_String));
+  let s2 = 'foo' + notString;
+ }
+ /** @final @nodts @return {Foo} */
+ m_testSafeCast__java_lang_Object__cast_Casts_Foo_$p_cast_Casts(/** !* */ a) {
+  return Foo.$isInstance(a) ? /**@type {!Foo}*/ (a) : null;
+ }
+ /** @final @nodts */
+ m_testCastToSameType__void() {
+  let a = 1;
+  let b = true;
+  let c = 98 /* 'b' */;
+  let d = 'Hello World';
+  let f = Foo.$create__cast_Casts(this);
+  let g = Integer.m_valueOf__int__java_lang_Integer(1);
+  let h = g;
+ }
+ /** @final @nodts */
+ m_testRedundantVarianceCasts__cast_Holder__void(/** Holder<!Throwable> */ holder) {
+  let a = holder;
+  let outA = /**@type {Holder<Throwable>}*/ (holder);
+  let inA = /**@type {Holder<*>}*/ (holder);
+  let b = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(holder);
+  let outB = /**@type {!Holder<Throwable>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(holder));
+  let inB = /**@type {!Holder<*>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(holder));
+  let c = /**@type {!Holder<!Throwable>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(holder));
+  let outC = /**@type {!Holder<Throwable>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(holder));
+  let inC = /**@type {!Holder<*>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(holder));
+ }
+ /** @nodts */
+ static $clinit() {
+  Casts.$clinit = () =>{};
+  Casts.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Casts;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Foo = goog.module.get('cast.Casts.Foo$impl');
+  Serializable = goog.module.get('java.io.Serializable$impl');
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  Byte = goog.module.get('java.lang.Byte$impl');
+  Character = goog.module.get('java.lang.Character$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Long = goog.module.get('java.lang.Long$impl');
+  Number = goog.module.get('java.lang.Number$impl');
+  Short = goog.module.get('java.lang.Short$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(Casts, 'cast.Casts');
+
+exports = Casts;
+
+//# sourceMappingURL=Casts.js.map

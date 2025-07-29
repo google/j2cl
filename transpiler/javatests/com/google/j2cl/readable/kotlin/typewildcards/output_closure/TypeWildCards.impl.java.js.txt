@@ -1,0 +1,104 @@
+goog.module('typewildcards.TypeWildCards$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Bar = goog.forwardDeclare('typewildcards.Bar$impl');
+let DeepRecursiveType = goog.forwardDeclare('typewildcards.DeepRecursiveType$impl');
+let typewildcards_Function = goog.forwardDeclare('typewildcards.Function$impl');
+let GenericType = goog.forwardDeclare('typewildcards.GenericType$impl');
+let List = goog.forwardDeclare('typewildcards.List$impl');
+let RecursiveType = goog.forwardDeclare('typewildcards.RecursiveType$impl');
+let Element = goog.forwardDeclare('typewildcards.TypeWildCards.Element$impl');
+let Foo = goog.forwardDeclare('typewildcards.TypeWildCards.Foo$impl');
+let SubOtherElement = goog.forwardDeclare('typewildcards.TypeWildCards.SubOtherElement$impl');
+let TypeWildCardsKt = goog.forwardDeclare('typewildcards.TypeWildCardsKt$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class TypeWildCards extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!TypeWildCards} */
+ static $create__() {
+  TypeWildCards.$clinit();
+  let $instance = new TypeWildCards();
+  $instance.$ctor__typewildcards_TypeWildCards__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typewildcards_TypeWildCards__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!*} */
+ m_unbounded__typewildcards_GenericType__java_lang_Object(/** !GenericType<?> */ g) {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(g.m_getField__java_lang_Object());
+ }
+ /** @final @nodts @return {!Bar} */
+ m_upperBound__typewildcards_GenericType__typewildcards_Bar(/** !GenericType<?> */ g) {
+  return /**@type {!Bar}*/ ($Casts.$to(g.m_getField__java_lang_Object(), Bar));
+ }
+ /** @final @nodts @return {!*} */
+ m_lowerBound__typewildcards_GenericType__java_lang_Object(/** !GenericType<?> */ g) {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(g.m_getField__java_lang_Object());
+ }
+ /** @final @nodts */
+ m_unboundedRecursive__typewildcards_RecursiveType__void(/** !RecursiveType<?> */ g) {}
+ /** @final @nodts */
+ m_upperBoundRecursive__typewildcards_GenericType__void(/** !GenericType<?> */ g) {}
+ /** @final @nodts */
+ m_lowerBoundRecursive__typewildcards_GenericType__void(/** !GenericType<?> */ g) {}
+ /** @final @nodts */
+ m_deepRecursiveType__typewildcards_DeepRecursiveType__void(/** DeepRecursiveType<?> */ t) {}
+ /** @final @nodts */
+ m_test__void() {
+  this.m_unbounded__typewildcards_GenericType__java_lang_Object(/**@type {!GenericType<!Bar>}*/ (GenericType.$create__java_lang_Object(Bar.$create__())));
+  this.m_upperBound__typewildcards_GenericType__typewildcards_Bar(/**@type {!GenericType<!Bar>}*/ (GenericType.$create__java_lang_Object(Bar.$create__())));
+  this.m_lowerBound__typewildcards_GenericType__java_lang_Object(/**@type {!GenericType<!Bar>}*/ (GenericType.$create__java_lang_Object(Bar.$create__())));
+ }
+ /** @final @nodts */
+ m_testInferredGenericIntersection__void() {
+  let /** List<!Element> */ elements = null;
+  let /** List<!SubOtherElement> */ otherElements = null;
+  let integers = /**@type {List<Integer>}*/ (TypeWildCardsKt.m_transform__typewildcards_List__typewildcards_Function__typewildcards_List(TypeWildCardsKt.m_concat__typewildcards_List__typewildcards_List__typewildcards_List(elements, otherElements), typewildcards_Function.$adapt(/**  @return {Integer}*/ ((/** ? */ a) =>{
+   a.m_getKey__java_lang_String();
+   return a.m_get__java_lang_Integer();
+  }))));
+ }
+ /** @final @nodts */
+ m_testRecursiveGeneric__void() {
+  TypeWildCardsKt.m_takesRecursiveGeneric__typewildcards_GenericType__void(Foo.$create__typewildcards_TypeWildCards(this));
+ }
+ /** @nodts */
+ static $clinit() {
+  TypeWildCards.$clinit = () =>{};
+  TypeWildCards.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TypeWildCards;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Bar = goog.module.get('typewildcards.Bar$impl');
+  typewildcards_Function = goog.module.get('typewildcards.Function$impl');
+  GenericType = goog.module.get('typewildcards.GenericType$impl');
+  Foo = goog.module.get('typewildcards.TypeWildCards.Foo$impl');
+  TypeWildCardsKt = goog.module.get('typewildcards.TypeWildCardsKt$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(TypeWildCards, 'typewildcards.TypeWildCards');
+
+exports = TypeWildCards;
+
+//# sourceMappingURL=TypeWildCards.js.map

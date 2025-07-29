@@ -1,0 +1,71 @@
+goog.module('nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let OuterClass = goog.forwardDeclare('nestedinstanceinnerclass.OuterClass$impl');
+let InnerClass = goog.forwardDeclare('nestedinstanceinnerclass.OuterClass.InnerClass$impl');
+
+/**
+ * @final
+ */
+class InnerInnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!InnerClass} @nodts*/
+  this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
+  /**@type {InnerClass} @nodts*/
+  this.f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass_;
+  /**@type {OuterClass} @nodts*/
+  this.f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass_;
+ }
+ /** @nodts @return {!InnerInnerClass} */
+ static $create__nestedinstanceinnerclass_OuterClass_InnerClass(/** !InnerClass */ $outer_this) {
+  InnerInnerClass.$clinit();
+  let $instance = new InnerInnerClass();
+  $instance.$ctor__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass__nestedinstanceinnerclass_OuterClass_InnerClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass__nestedinstanceinnerclass_OuterClass_InnerClass__void(/** !InnerClass */ $outer_this) {
+  this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass = $outer_this;
+  this.$ctor__java_lang_Object__void();
+  this.f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass_ = $outer_this;
+  this.f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass_ = this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass;
+ }
+ /** @final @nodts @return {InnerClass} */
+ m_getX__nestedinstanceinnerclass_OuterClass_InnerClass() {
+  return this.f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass_;
+ }
+ /** @final @nodts */
+ m_setX__nestedinstanceinnerclass_OuterClass_InnerClass__void(/** InnerClass */ set__) {
+  this.f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass_ = set__;
+ }
+ /** @final @nodts @return {OuterClass} */
+ m_getY__nestedinstanceinnerclass_OuterClass() {
+  return this.f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass_;
+ }
+ /** @final @nodts */
+ m_setY__nestedinstanceinnerclass_OuterClass__void(/** OuterClass */ set__) {
+  this.f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerInnerClass.$clinit = () =>{};
+  InnerInnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerInnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerInnerClass, 'nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass');
+
+exports = InnerInnerClass;
+
+//# sourceMappingURL=OuterClass$InnerClass$InnerInnerClass.js.map

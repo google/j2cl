@@ -1,0 +1,52 @@
+goog.module('bridgemethods.StringConsumerImpl$impl');
+
+const Consumer = goog.require('bridgemethods.Consumer$impl');
+const StringConsumer = goog.require('bridgemethods.StringConsumer$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @extends {Consumer<string>}
+ * @implements {StringConsumer}
+ */
+class StringConsumerImpl extends Consumer {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StringConsumerImpl} */
+ static $create__() {
+  StringConsumerImpl.$clinit();
+  let $instance = new StringConsumerImpl();
+  $instance.$ctor__bridgemethods_StringConsumerImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_StringConsumerImpl__void() {
+  this.$ctor__bridgemethods_Consumer__void();
+ }
+ //Specialized bridge method.
+ /** @override @nodts @suppress{visibility} */
+ m_accept__java_lang_String__void(/** string */ arg0) {
+  super.m_accept__java_lang_Object__void(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  StringConsumerImpl.$clinit = () =>{};
+  StringConsumerImpl.$loadModules();
+  Consumer.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringConsumerImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+StringConsumer.$markImplementor(StringConsumerImpl);
+$Util.$setClassMetadata(StringConsumerImpl, 'bridgemethods.StringConsumerImpl');
+
+exports = StringConsumerImpl;
+
+//# sourceMappingURL=StringConsumerImpl.js.map

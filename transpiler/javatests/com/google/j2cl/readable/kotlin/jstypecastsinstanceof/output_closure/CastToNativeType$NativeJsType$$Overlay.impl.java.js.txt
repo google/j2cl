@@ -1,0 +1,25 @@
+goog.module('jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeJsType = goog.require('test.foo.NativeJsType');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'test.foo.NativeJsType');
+
+exports = $Overlay;
+
+//# sourceMappingURL=CastToNativeType$NativeJsType$$Overlay.js.map

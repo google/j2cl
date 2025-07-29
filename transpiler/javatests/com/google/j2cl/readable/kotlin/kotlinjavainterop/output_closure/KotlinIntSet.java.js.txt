@@ -1,0 +1,12 @@
+goog.module('kotlinjavainterop.KotlinIntSet');
+
+goog.require('java.lang.Integer');
+goog.require('java.util.Collection');
+goog.require('java.util.Iterator');
+goog.require('javaemul.internal.InternalPreconditions');
+goog.require('kotlinjavainterop.JavaIntSet');
+goog.require('nativebootstrap.Equality');
+goog.require('nativebootstrap.Util');
+
+const KotlinIntSet = goog.require('kotlinjavainterop.KotlinIntSet$impl');
+exports = KotlinIntSet;

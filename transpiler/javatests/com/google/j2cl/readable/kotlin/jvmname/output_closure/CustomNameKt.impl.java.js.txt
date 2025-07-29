@@ -1,0 +1,63 @@
+goog.module('jvmname.CustomNameKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class CustomNameKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CustomNameKt} */
+ static $create__() {
+  CustomNameKt.$clinit();
+  let $instance = new CustomNameKt();
+  $instance.$ctor__jvmname_CustomNameKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmname_CustomNameKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_customTopLevelFun__void() {
+  CustomNameKt.$clinit();
+ }
+ /** @nodts @return {number} */
+ static m_bar__int() {
+  CustomNameKt.$clinit();
+  return CustomNameKt.f_foo__jvmname_CustomNameKt_;
+ }
+ /** @nodts */
+ static m_buzz__int__void(/** number */ set__) {
+  CustomNameKt.$clinit();
+  CustomNameKt.f_foo__jvmname_CustomNameKt_ = set__;
+ }
+ /** @nodts */
+ static m_name$with_special$chars__void() {
+  CustomNameKt.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  CustomNameKt.$clinit = () =>{};
+  CustomNameKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CustomNameKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {number} @nodts*/
+CustomNameKt.f_foo__jvmname_CustomNameKt_ = 0;
+$Util.$setClassMetadata(CustomNameKt, 'jvmname.CustomNameKt');
+
+exports = CustomNameKt;
+
+//# sourceMappingURL=CustomNameKt.js.map

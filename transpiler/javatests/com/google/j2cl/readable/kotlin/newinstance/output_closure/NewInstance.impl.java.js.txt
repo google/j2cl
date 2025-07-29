@@ -1,0 +1,63 @@
+goog.module('newinstance.NewInstance$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class NewInstance extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'NewInstance()'.
+ /** @nodts @return {!NewInstance} */
+ static $create__() {
+  NewInstance.$clinit();
+  let $instance = new NewInstance();
+  $instance.$ctor__newinstance_NewInstance__void();
+  return $instance;
+ }
+ //Initialization from constructor 'NewInstance()'.
+ /** @nodts */
+ $ctor__newinstance_NewInstance__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Factory method corresponding to constructor 'NewInstance(String)'.
+ /** @nodts @return {!NewInstance} */
+ static $create__java_lang_String(/** string */ foo) {
+  NewInstance.$clinit();
+  let $instance = new NewInstance();
+  $instance.$ctor__newinstance_NewInstance__java_lang_String__void(foo);
+  return $instance;
+ }
+ //Initialization from constructor 'NewInstance(String)'.
+ /** @nodts */
+ $ctor__newinstance_NewInstance__java_lang_String__void(/** string */ foo) {
+  this.$ctor__newinstance_NewInstance__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let a = NewInstance.$create__();
+  let b = NewInstance.$create__java_lang_String('Foo');
+ }
+ /** @nodts */
+ static $clinit() {
+  NewInstance.$clinit = () =>{};
+  NewInstance.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NewInstance;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NewInstance, 'newinstance.NewInstance');
+
+exports = NewInstance;
+
+//# sourceMappingURL=NewInstance.js.map

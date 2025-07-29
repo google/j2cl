@@ -1,0 +1,47 @@
+goog.module('nobridgemethods.TreeMap.InnerEntry$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Entry = goog.require('nobridgemethods.Entry$impl');
+
+/**
+ * @final
+ * @template K
+ * @implements {Entry<K>}
+ */
+class InnerEntry extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template K @return {!InnerEntry<K>} */
+ static $create__() {
+  InnerEntry.$clinit();
+  let $instance = new InnerEntry();
+  $instance.$ctor__nobridgemethods_TreeMap_InnerEntry__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nobridgemethods_TreeMap_InnerEntry__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerEntry.$clinit = () =>{};
+  InnerEntry.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerEntry;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Entry.$markImplementor(InnerEntry);
+$Util.$setClassMetadata(InnerEntry, 'nobridgemethods.TreeMap$InnerEntry');
+
+exports = InnerEntry;
+
+//# sourceMappingURL=TreeMap$InnerEntry.js.map

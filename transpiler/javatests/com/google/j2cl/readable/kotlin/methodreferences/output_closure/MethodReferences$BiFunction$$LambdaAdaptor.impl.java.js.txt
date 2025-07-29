@@ -1,0 +1,49 @@
+goog.module('methodreferences.MethodReferences.BiFunction.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const BiFunction = goog.require('methodreferences.MethodReferences.BiFunction$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T, U, V
+ * @implements {BiFunction<T, U, V>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(T, U):V */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(T, U):V} @nodts*/
+  this.f_fn__methodreferences_MethodReferences_BiFunction_$LambdaAdaptor;
+  this.$ctor__methodreferences_MethodReferences_BiFunction_$LambdaAdaptor__methodreferences_MethodReferences_BiFunction_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__methodreferences_MethodReferences_BiFunction_$LambdaAdaptor__methodreferences_MethodReferences_BiFunction_$JsFunction__void(/** ?function(T, U):V */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__methodreferences_MethodReferences_BiFunction_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {V} */
+ m_apply__java_lang_Object__java_lang_Object__java_lang_Object(/** T */ arg0, /** U */ arg1) {
+  let /** ?function(T, U):V */ $function;
+  return ($function = this.f_fn__methodreferences_MethodReferences_BiFunction_$LambdaAdaptor, $function(arg0, arg1));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+BiFunction.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'methodreferences.MethodReferences$BiFunction$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=MethodReferences$BiFunction$$LambdaAdaptor.js.map

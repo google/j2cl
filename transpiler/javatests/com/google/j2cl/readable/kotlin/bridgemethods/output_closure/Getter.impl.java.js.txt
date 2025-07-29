@@ -1,0 +1,33 @@
+goog.module('bridgemethods.Getter$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class Getter {
+ /** @abstract @nodts @return {?string} */
+ m_get__java_lang_String__java_lang_String(/** ?string */ s) {}
+ /** @nodts */
+ static $clinit() {
+  Getter.$clinit = () =>{};
+  Getter.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_Getter = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_Getter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Getter.$markImplementor(/**@type {Function}*/ (Getter));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Getter), 'bridgemethods.Getter');
+
+exports = Getter;
+
+//# sourceMappingURL=Getter.js.map

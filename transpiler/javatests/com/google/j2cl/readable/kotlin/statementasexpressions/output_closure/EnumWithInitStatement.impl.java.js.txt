@@ -1,0 +1,137 @@
+goog.module('statementasexpressions.EnumWithInitStatement$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let BAZ = goog.forwardDeclare('statementasexpressions.EnumWithInitStatement.BAZ$impl');
+let StatementAsExpressionsKt = goog.forwardDeclare('statementasexpressions.StatementAsExpressionsKt$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @extends {Enum<!EnumWithInitStatement>}
+ */
+class EnumWithInitStatement extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_s__statementasexpressions_EnumWithInitStatement_;
+ }
+ /** @nodts @return {!EnumWithInitStatement} */
+ static $create__java_lang_String__int__java_lang_String(/** ?string */ $name, /** number */ $ordinal, /** string */ s) {
+  let $instance = new EnumWithInitStatement();
+  $instance.$ctor__statementasexpressions_EnumWithInitStatement__java_lang_String__int__java_lang_String__void($name, $ordinal, s);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__statementasexpressions_EnumWithInitStatement__java_lang_String__int__java_lang_String__void(/** ?string */ $name, /** number */ $ordinal, /** string */ s) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+  this.f_s__statementasexpressions_EnumWithInitStatement_ = s;
+ }
+ /** @final @nodts @return {string} */
+ m_getS__java_lang_String() {
+  return this.f_s__statementasexpressions_EnumWithInitStatement_;
+ }
+ /** @nodts @return {string} */
+ m_foo__java_lang_String() {
+  return 'FOO';
+ }
+ /** @nodts @return {!EnumWithInitStatement} */
+ static m_FOO$init$__statementasexpressions_EnumWithInitStatement() {
+  let /** string */ tmp;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp = 'FOO';
+  } else {
+   throw $Exceptions.toJs(AssertionError.$create__());
+  }
+  return EnumWithInitStatement.$create__java_lang_String__int__java_lang_String($Util.$makeEnumName('FOO'), EnumWithInitStatement.$ordinal_FOO__statementasexpressions_EnumWithInitStatement, tmp);
+ }
+ /** @nodts @return {!EnumWithInitStatement} */
+ static m_BAR$init$__statementasexpressions_EnumWithInitStatement() {
+  let /** string */ tmp;
+  if (j_l_String.m_length__java_lang_String__int('BARTOOLONG') > 3) {
+   tmp = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(j_l_String.m_substring__java_lang_String__int__int__java_lang_String(/**@type {string}*/ ('BARTOOLONG'), 0, 3));
+  } else {
+   tmp = 'BARTOOLONG';
+  }
+  return EnumWithInitStatement.$create__java_lang_String__int__java_lang_String($Util.$makeEnumName('BAR'), EnumWithInitStatement.$ordinal_BAR__statementasexpressions_EnumWithInitStatement, tmp);
+ }
+ /** @nodts @return {!EnumWithInitStatement} */
+ static m_valueOf__java_lang_String__statementasexpressions_EnumWithInitStatement(/** string */ name) {
+  EnumWithInitStatement.$clinit();
+  if ($Equality.$same(EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_, null)) {
+   EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_ = (/**@type {Map<?string, !EnumWithInitStatement>}*/ ($Enums.createMapFromValues(EnumWithInitStatement.m_values__arrayOf_statementasexpressions_EnumWithInitStatement())));
+  }
+  return /**@type {EnumWithInitStatement}*/ ($Enums.getValueFromNameAndMap(name, EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_));
+ }
+ /** @nodts @return {!Array<!EnumWithInitStatement>} */
+ static m_values__arrayOf_statementasexpressions_EnumWithInitStatement() {
+  EnumWithInitStatement.$clinit();
+  return /**@type {!Array<!EnumWithInitStatement>}*/ ($Arrays.$stampType([EnumWithInitStatement.$static_FOO__statementasexpressions_EnumWithInitStatement, EnumWithInitStatement.$static_BAR__statementasexpressions_EnumWithInitStatement, EnumWithInitStatement.$static_BAZ__statementasexpressions_EnumWithInitStatement], EnumWithInitStatement));
+ }
+ /** @nodts @return {!EnumWithInitStatement} */
+ static get f_FOO__statementasexpressions_EnumWithInitStatement() {
+  return (EnumWithInitStatement.$clinit(), EnumWithInitStatement.$static_FOO__statementasexpressions_EnumWithInitStatement);
+ }
+ /** @nodts @return {!EnumWithInitStatement} */
+ static get f_BAR__statementasexpressions_EnumWithInitStatement() {
+  return (EnumWithInitStatement.$clinit(), EnumWithInitStatement.$static_BAR__statementasexpressions_EnumWithInitStatement);
+ }
+ /** @nodts @return {!EnumWithInitStatement} */
+ static get f_BAZ__statementasexpressions_EnumWithInitStatement() {
+  return (EnumWithInitStatement.$clinit(), EnumWithInitStatement.$static_BAZ__statementasexpressions_EnumWithInitStatement);
+ }
+ /** @nodts */
+ static $clinit() {
+  EnumWithInitStatement.$clinit = () =>{};
+  EnumWithInitStatement.$loadModules();
+  Enum.$clinit();
+  EnumWithInitStatement.$static_FOO__statementasexpressions_EnumWithInitStatement = EnumWithInitStatement.m_FOO$init$__statementasexpressions_EnumWithInitStatement();
+  EnumWithInitStatement.$static_BAR__statementasexpressions_EnumWithInitStatement = EnumWithInitStatement.m_BAR$init$__statementasexpressions_EnumWithInitStatement();
+  EnumWithInitStatement.$static_BAZ__statementasexpressions_EnumWithInitStatement = BAZ.$create__java_lang_String__int($Util.$makeEnumName('BAZ'), EnumWithInitStatement.$ordinal_BAZ__statementasexpressions_EnumWithInitStatement);
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EnumWithInitStatement;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AssertionError = goog.module.get('java.lang.AssertionError$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  BAZ = goog.module.get('statementasexpressions.EnumWithInitStatement.BAZ$impl');
+  StatementAsExpressionsKt = goog.module.get('statementasexpressions.StatementAsExpressionsKt$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+/**@const {number} @nodts*/
+EnumWithInitStatement.$ordinal_FOO__statementasexpressions_EnumWithInitStatement = 0;
+/**@const {number} @nodts*/
+EnumWithInitStatement.$ordinal_BAR__statementasexpressions_EnumWithInitStatement = 1;
+/**@const {number} @nodts*/
+EnumWithInitStatement.$ordinal_BAZ__statementasexpressions_EnumWithInitStatement = 2;
+/**@private {!EnumWithInitStatement} @nodts*/
+EnumWithInitStatement.$static_FOO__statementasexpressions_EnumWithInitStatement;
+/**@private {!EnumWithInitStatement} @nodts*/
+EnumWithInitStatement.$static_BAR__statementasexpressions_EnumWithInitStatement;
+/**@private {!EnumWithInitStatement} @nodts*/
+EnumWithInitStatement.$static_BAZ__statementasexpressions_EnumWithInitStatement;
+/**@type {Map<?string, !EnumWithInitStatement>} @nodts*/
+EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_;
+$Util.$setClassMetadataForEnum(EnumWithInitStatement, 'statementasexpressions.EnumWithInitStatement');
+
+exports = EnumWithInitStatement;
+
+//# sourceMappingURL=EnumWithInitStatement.js.map

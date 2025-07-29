@@ -1,0 +1,62 @@
+goog.module('exception.MyException$impl');
+
+const Exception = goog.require('java.lang.Exception$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+
+/**
+ * @final
+ */
+class MyException extends Exception {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'MyException(Throwable)'.
+ /** @nodts @return {!MyException} */
+ static $create__java_lang_Throwable(/** Throwable */ cause) {
+  MyException.$clinit();
+  let $instance = new MyException();
+  $instance.$ctor__exception_MyException__java_lang_Throwable__void(cause);
+  $instance.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang(new Error($instance));
+  return $instance;
+ }
+ //Initialization from constructor 'MyException(Throwable)'.
+ /** @nodts */
+ $ctor__exception_MyException__java_lang_Throwable__void(/** Throwable */ cause) {
+  this.$ctor__java_lang_Exception__java_lang_Throwable__void(cause);
+ }
+ //Factory method corresponding to constructor 'MyException()'.
+ /** @nodts @return {!MyException} */
+ static $create__() {
+  MyException.$clinit();
+  let $instance = new MyException();
+  $instance.$ctor__exception_MyException__void();
+  $instance.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang(new Error($instance));
+  return $instance;
+ }
+ //Initialization from constructor 'MyException()'.
+ /** @nodts */
+ $ctor__exception_MyException__void() {
+  this.$ctor__exception_MyException__java_lang_Throwable__void(null);
+ }
+ /** @nodts */
+ static $clinit() {
+  MyException.$clinit = () =>{};
+  MyException.$loadModules();
+  Exception.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyException;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(MyException, 'exception.MyException');
+
+exports = MyException;
+
+//# sourceMappingURL=MyException.js.map

@@ -1,0 +1,51 @@
+goog.module('lambdas.Lambdas.$LambdaAdaptor$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+
+/**
+ * @template T
+ */
+class $LambdaAdaptor$1 extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(function(?T):Unit, function(Throwable):Unit):void */ fn) {
+  $LambdaAdaptor$1.$clinit();
+  super();
+  /**@type {?function(function(?T):Unit, function(Throwable):Unit):void} @nodts*/
+  this.f_fn__lambdas_Lambdas_$LambdaAdaptor$1;
+  this.$ctor__lambdas_Lambdas_$LambdaAdaptor$1__lambdas_Lambdas_Thenable_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_$LambdaAdaptor$1__lambdas_Lambdas_Thenable_$JsFunction__void(/** ?function(function(?T):Unit, function(Throwable):Unit):void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_$LambdaAdaptor$1 = fn;
+ }
+ 
+ then(/** function(?T):Unit */ arg0, /** function(Throwable):Unit */ arg1) {
+  {
+   let $function = this.f_fn__lambdas_Lambdas_$LambdaAdaptor$1;
+   $function(arg0, arg1);
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor$1.$clinit = () =>{};
+  $LambdaAdaptor$1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor$1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($LambdaAdaptor$1, 'lambdas.Lambdas$$LambdaAdaptor$1');
+
+exports = $LambdaAdaptor$1;
+
+//# sourceMappingURL=Lambdas$$LambdaAdaptor$1.js.map

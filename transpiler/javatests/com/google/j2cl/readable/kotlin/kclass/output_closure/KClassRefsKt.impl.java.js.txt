@@ -1,0 +1,75 @@
+goog.module('kclass.KClassRefsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $1ConcreteType = goog.forwardDeclare('kclass.KClassRefsKt.$1ConcreteType$impl');
+let ReflectionFactory = goog.forwardDeclare('kotlin.jvm.internal.ReflectionFactory$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+/**
+ * @final
+ */
+class KClassRefsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!KClassRefsKt} */
+ static $create__() {
+  KClassRefsKt.$clinit();
+  let $instance = new KClassRefsKt();
+  $instance.$ctor__kclass_KClassRefsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__kclass_KClassRefsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  KClassRefsKt.$clinit();
+  let /** * */ c = null;
+  c = ReflectionFactory.m_createKClass__java_lang_Class__kotlin_reflect_KClass(Class.$get($$int));
+  c = ReflectionFactory.m_createKClass__java_lang_Class__kotlin_reflect_KClass(Class.$get($$int));
+  let nullableI = Integer.m_valueOf__int__java_lang_Integer(1);
+  c = ReflectionFactory.m_createKClass__java_lang_Object__kotlin_reflect_KClass(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(nullableI));
+  c = ReflectionFactory.m_createKClass__java_lang_Object__kotlin_reflect_KClass($1ConcreteType.$create__());
+  c = ReflectionFactory.m_createKClass__java_lang_Object__kotlin_reflect_KClass(/**@type {!Array<!Integer>}*/ ($Arrays.$create([0], Integer)));
+  c = ReflectionFactory.m_createKClass__java_lang_Object__kotlin_reflect_KClass(/**@type {!Array<!Array<!$1ConcreteType>>}*/ ($Arrays.$create([0, null], $1ConcreteType)));
+  let i = 0;
+  let unary = i;
+  i = unary + 1 | 0;
+  c = ReflectionFactory.m_createKClass__java_lang_Class__kotlin_reflect_KClass(Class.$get($$int));
+ }
+ /** @nodts */
+ static $clinit() {
+  KClassRefsKt.$clinit = () =>{};
+  KClassRefsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KClassRefsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Class = goog.module.get('java.lang.Class$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $1ConcreteType = goog.module.get('kclass.KClassRefsKt.$1ConcreteType$impl');
+  ReflectionFactory = goog.module.get('kotlin.jvm.internal.ReflectionFactory$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(KClassRefsKt, 'kclass.KClassRefsKt');
+
+exports = KClassRefsKt;
+
+//# sourceMappingURL=KClassRefsKt.js.map

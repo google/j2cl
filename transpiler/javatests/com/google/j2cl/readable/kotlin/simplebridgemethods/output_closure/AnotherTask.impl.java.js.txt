@@ -1,0 +1,61 @@
+goog.module('simplebridgemethods.AnotherTask$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Callable = goog.require('simplebridgemethods.Callable$impl');
+
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let Superclass = goog.forwardDeclare('simplebridgemethods.Superclass$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T
+ * @implements {Callable<!Superclass<T>>}
+ */
+class AnotherTask extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!AnotherTask<T>} */
+ static $create__() {
+  AnotherTask.$clinit();
+  let $instance = new AnotherTask();
+  $instance.$ctor__simplebridgemethods_AnotherTask__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__simplebridgemethods_AnotherTask__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_call__simplebridgemethods_Superclass__void(/** !Superclass<T> */ t) {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_call__java_lang_Object__void(/** !Superclass<T> */ arg0) {
+  this.m_call__simplebridgemethods_Superclass__void(/**@type {!Superclass<T>}*/ ($Casts.$to(arg0, Superclass)));
+ }
+ /** @nodts */
+ static $clinit() {
+  AnotherTask.$clinit = () =>{};
+  AnotherTask.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AnotherTask;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Superclass = goog.module.get('simplebridgemethods.Superclass$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Callable.$markImplementor(AnotherTask);
+$Util.$setClassMetadata(AnotherTask, 'simplebridgemethods.AnotherTask');
+
+exports = AnotherTask;
+
+//# sourceMappingURL=AnotherTask.js.map

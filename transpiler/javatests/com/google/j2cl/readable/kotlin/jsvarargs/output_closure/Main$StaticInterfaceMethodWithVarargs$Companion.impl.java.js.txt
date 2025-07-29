@@ -1,0 +1,57 @@
+goog.module('jsvarargs.Main.StaticInterfaceMethodWithVarargs.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let StaticInterfaceMethodWithVarargs = goog.forwardDeclare('jsvarargs.Main.StaticInterfaceMethodWithVarargs$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__jsvarargs_Main_StaticInterfaceMethodWithVarargs_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsvarargs_Main_StaticInterfaceMethodWithVarargs_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_staticMethod__arrayOf_int__void(/** !Array<number> */ arg0) {
+  StaticInterfaceMethodWithVarargs.staticMethod(...arg0);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jsvarargs_Main_StaticInterfaceMethodWithVarargs_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jsvarargs_Main_StaticInterfaceMethodWithVarargs_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__jsvarargs_Main_StaticInterfaceMethodWithVarargs_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  StaticInterfaceMethodWithVarargs = goog.module.get('jsvarargs.Main.StaticInterfaceMethodWithVarargs$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__jsvarargs_Main_StaticInterfaceMethodWithVarargs_Companion;
+$Util.$setClassMetadata(Companion, 'jsvarargs.Main$StaticInterfaceMethodWithVarargs$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Main$StaticInterfaceMethodWithVarargs$Companion.js.map

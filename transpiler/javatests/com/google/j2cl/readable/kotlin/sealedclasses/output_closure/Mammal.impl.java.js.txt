@@ -1,0 +1,51 @@
+goog.module('sealedclasses.Mammal$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Animal = goog.require('sealedclasses.Animal$impl');
+
+/**
+ * @abstract
+ * @implements {Animal}
+ */
+class Mammal extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Initialization from constructor 'Mammal()'.
+ /** @nodts */
+ $ctor__sealedclasses_Mammal__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Initialization from constructor 'Mammal(String)'.
+ /** @nodts */
+ $ctor__sealedclasses_Mammal__java_lang_String__void(/** string */ name) {
+  this.$ctor__sealedclasses_Mammal__void();
+ }
+ /** @final @nodts @return {string} */
+ m_retrieveName__java_lang_String() {
+  return 'Animal';
+ }
+ /** @abstract @nodts */
+ m_changeName__java_lang_String__void(/** string */ updatedName) {}
+ /** @nodts */
+ static $clinit() {
+  Mammal.$clinit = () =>{};
+  Mammal.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Mammal;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Animal.$markImplementor(Mammal);
+$Util.$setClassMetadata(Mammal, 'sealedclasses.Mammal');
+
+exports = Mammal;
+
+//# sourceMappingURL=Mammal.js.map

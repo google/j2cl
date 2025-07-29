@@ -1,0 +1,65 @@
+goog.module('instancefieldinitializer.InstanceFieldInitializer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class InstanceFieldInitializer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__instancefieldinitializer_InstanceFieldInitializer_ = 0;
+  /**@type {string} @nodts*/
+  this.f_b__instancefieldinitializer_InstanceFieldInitializer_;
+ }
+ /** @nodts @return {!InstanceFieldInitializer} */
+ static $create__java_lang_String(/** string */ foo) {
+  InstanceFieldInitializer.$clinit();
+  let $instance = new InstanceFieldInitializer();
+  $instance.$ctor__instancefieldinitializer_InstanceFieldInitializer__java_lang_String__void(foo);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__instancefieldinitializer_InstanceFieldInitializer__java_lang_String__void(/** string */ foo) {
+  this.$ctor__java_lang_Object__void();
+  this.f_a__instancefieldinitializer_InstanceFieldInitializer_ = 1;
+  this.f_b__instancefieldinitializer_InstanceFieldInitializer_ = foo;
+ }
+ /** @final @nodts @return {number} */
+ m_getA__int() {
+  return this.f_a__instancefieldinitializer_InstanceFieldInitializer_;
+ }
+ /** @final @nodts */
+ m_setA__int__void(/** number */ set__) {
+  this.f_a__instancefieldinitializer_InstanceFieldInitializer_ = set__;
+ }
+ /** @final @nodts @return {string} */
+ m_getB__java_lang_String() {
+  return this.f_b__instancefieldinitializer_InstanceFieldInitializer_;
+ }
+ /** @final @nodts */
+ m_setB__java_lang_String__void(/** string */ set__) {
+  this.f_b__instancefieldinitializer_InstanceFieldInitializer_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  InstanceFieldInitializer.$clinit = () =>{};
+  InstanceFieldInitializer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InstanceFieldInitializer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InstanceFieldInitializer, 'instancefieldinitializer.InstanceFieldInitializer');
+
+exports = InstanceFieldInitializer;
+
+//# sourceMappingURL=InstanceFieldInitializer.js.map

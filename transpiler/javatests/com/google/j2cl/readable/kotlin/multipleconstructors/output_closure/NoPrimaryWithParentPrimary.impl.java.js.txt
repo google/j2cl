@@ -1,0 +1,58 @@
+goog.module('multipleconstructors.NoPrimaryWithParentPrimary$impl');
+
+const ParentWithPrimary = goog.require('multipleconstructors.ParentWithPrimary$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class NoPrimaryWithParentPrimary extends ParentWithPrimary {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'NoPrimaryWithParentPrimary(int)'.
+ /** @nodts @return {!NoPrimaryWithParentPrimary} */
+ static $create__int(/** number */ id) {
+  NoPrimaryWithParentPrimary.$clinit();
+  let $instance = new NoPrimaryWithParentPrimary();
+  $instance.$ctor__multipleconstructors_NoPrimaryWithParentPrimary__int__void(id);
+  return $instance;
+ }
+ //Initialization from constructor 'NoPrimaryWithParentPrimary(int)'.
+ /** @nodts */
+ $ctor__multipleconstructors_NoPrimaryWithParentPrimary__int__void(/** number */ id) {
+  this.$ctor__multipleconstructors_ParentWithPrimary__boolean__void(id == 0);
+ }
+ //Factory method corresponding to constructor 'NoPrimaryWithParentPrimary(boolean)'.
+ /** @nodts @return {!NoPrimaryWithParentPrimary} */
+ static $create__boolean(/** boolean */ flag) {
+  NoPrimaryWithParentPrimary.$clinit();
+  let $instance = new NoPrimaryWithParentPrimary();
+  $instance.$ctor__multipleconstructors_NoPrimaryWithParentPrimary__boolean__void(flag);
+  return $instance;
+ }
+ //Initialization from constructor 'NoPrimaryWithParentPrimary(boolean)'.
+ /** @nodts */
+ $ctor__multipleconstructors_NoPrimaryWithParentPrimary__boolean__void(/** boolean */ flag) {
+  this.$ctor__multipleconstructors_ParentWithPrimary__boolean__java_lang_String__void(flag, 'secondary');
+ }
+ /** @nodts */
+ static $clinit() {
+  NoPrimaryWithParentPrimary.$clinit = () =>{};
+  NoPrimaryWithParentPrimary.$loadModules();
+  ParentWithPrimary.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NoPrimaryWithParentPrimary;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NoPrimaryWithParentPrimary, 'multipleconstructors.NoPrimaryWithParentPrimary');
+
+exports = NoPrimaryWithParentPrimary;
+
+//# sourceMappingURL=NoPrimaryWithParentPrimary.js.map

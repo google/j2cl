@@ -1,0 +1,370 @@
+goog.module('arithmeticexpressions.ArithmeticExpressionsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let A = goog.forwardDeclare('arithmeticexpressions.A$impl');
+let $1Ref = goog.forwardDeclare('arithmeticexpressions.ArithmeticExpressionsKt.$1Ref$impl');
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+let $$short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
+
+/**
+ * @final
+ */
+class ArithmeticExpressionsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ArithmeticExpressionsKt} */
+ static $create__() {
+  ArithmeticExpressionsKt.$clinit();
+  let $instance = new ArithmeticExpressionsKt();
+  $instance.$ctor__arithmeticexpressions_ArithmeticExpressionsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__arithmeticexpressions_ArithmeticExpressionsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testCoercions__void() {
+  ArithmeticExpressionsKt.$clinit();
+  let b = 1;
+  let c = 1 /* '\u0001' */;
+  let s = 1;
+  let i = 1;
+  let f = 1;
+  let d = 1;
+  b = -1;
+  c = 65535 /* '\uFFFF' */;
+  s = -1;
+  i = -1;
+  f = 9.223372036854776E18;
+  d = 9.223372036854776E18;
+  let o = Character.m_valueOf__char__java_lang_Character(c);
+  s = $Primitives.narrowCharToShort((/**@type {!Character}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), Character))).m_charValue__char());
+ }
+ /** @nodts */
+ static m_testPrimitives__void() {
+  ArithmeticExpressionsKt.$clinit();
+  let a = 10;
+  let unary = a;
+  a = unary + 1 | 0;
+  let b = unary;
+  let unary_1 = a;
+  a = unary_1 - 1 | 0;
+  let c = unary_1;
+  a = a + 1 | 0;
+  let d = a;
+  a = a - 1 | 0;
+  let e = a;
+  let f = - a | 0;
+  let g = + a;
+  let h = ~a;
+  let i = 1 + 1 + 2 - 5 | 0;
+  let j = Math.imul(1 + 2, 3 + 4);
+  let p = $Primitives.coerceDivision(Math.imul($Primitives.coerceDivision(1 / 2), 3) % 4);
+  let r = -2147483648;
+  let t = -1;
+  let u = 1;
+  let v = 1;
+  let w = 5 - -4 | 0;
+  let k = !((1 + 2 + 3 | 0) == 4);
+  let l = (1 + 2 | 0) != 4;
+  let m = $LongUtils.notEquals($Long.fromBits(-1, 2147483647) /* 9223372036854775807 */, $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */);
+  let o = $Primitives.coerceDivision((5 + 1 | 0) / 2) - 0;
+  a = a >> 31;
+  a = a >> 1;
+  a = a + 1 | 0;
+  a = $Primitives.coerceDivision(a / 1);
+  a = a + 2147483647 | 0;
+  k = !!(+ k | + true);
+  let s = 10;
+  s = $Primitives.narrowIntToShort(s + 1 | 0);
+  k = s == 10;
+  let q = 3 >> 2;
+  q = 3 >>> 2 | 0;
+  let x = $Primitives.narrowIntToByte(Math.imul($Primitives.narrowIntToShort(a) + $Primitives.narrowIntToByte($Primitives.narrowIntToShort(b)), $Primitives.narrowIntToShort($Primitives.narrowIntToByte(c))));
+  let y = 121 /* 'y' */;
+  let z = $Long.fromInt(121);
+  k = $LongUtils.equals($Primitives.widenCharToLong(y), z);
+ }
+ /** @nodts */
+ static m_testDoubleAssignments__void() {
+  ArithmeticExpressionsKt.$clinit();
+  let a = 1;
+  a += 2;
+  a -= 3;
+  a *= 4;
+  a /= 5;
+  a %= 6;
+ }
+ /** @nodts @return {!$Long} */
+ static m_getOne__long() {
+  ArithmeticExpressionsKt.$clinit();
+  return ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_;
+ }
+ /** @nodts */
+ static m_setOne__long__void(/** !$Long */ set__) {
+  ArithmeticExpressionsKt.$clinit();
+  ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
+ }
+ /** @nodts @return {!$Long} */
+ static m_getFoo__long() {
+  ArithmeticExpressionsKt.$clinit();
+  return ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_;
+ }
+ /** @nodts */
+ static m_setFoo__long__void(/** !$Long */ set__) {
+  ArithmeticExpressionsKt.$clinit();
+  ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
+ }
+ /** @nodts @return {!$Long} */
+ static m_getBar__long() {
+  ArithmeticExpressionsKt.$clinit();
+  return ArithmeticExpressionsKt.f_bar__arithmeticexpressions_ArithmeticExpressionsKt_;
+ }
+ /** @nodts */
+ static m_testCompoundArray__void() {
+  ArithmeticExpressionsKt.$clinit();
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int));
+  let array = ints;
+  let index_0 = 0;
+  $Arrays.$set(array, index_0, array[index_0] + 1 | 0);
+  let array_1 = ints;
+  let index_0_1 = 0;
+  $Arrays.$set(array_1, index_0_1, array_1[index_0_1] - 1 | 0);
+  let array_2 = ints;
+  let index_0_2 = 0;
+  $Arrays.$set(array_2, index_0_2, Math.imul(array_2[index_0_2], 1));
+  let array_3 = ints;
+  let index_0_3 = 0;
+  $Arrays.$set(array_3, index_0_3, $Primitives.coerceDivision(array_3[index_0_3] / 1));
+  let array_4 = ints;
+  let index_0_4 = 0;
+  $Arrays.$set(array_4, index_0_4, $Primitives.coerceDivision(array_4[index_0_4] % 1));
+  let array_5 = ints;
+  let index_0_5 = 0;
+  let unary = array_5[index_0_5];
+  $Arrays.$set(array_5, index_0_5, unary + 1 | 0);
+  let array_6 = ints;
+  let index_0_6 = 0;
+  $Arrays.$set(array_6, index_0_6, array_6[index_0_6] + 1 | 0);
+  array_6[index_0_6];
+  let i = 0;
+  let array_7 = ints;
+  let unary_1 = i;
+  i = unary_1 + 1 | 0;
+  let index_0_7 = unary_1;
+  let unary_2 = array_7[index_0_7];
+  $Arrays.$set(array_7, index_0_7, unary_2 + 1 | 0);
+  let array_8 = ints;
+  i = i + 1 | 0;
+  let index_0_8 = i;
+  $Arrays.$set(array_8, index_0_8, array_8[index_0_8] + 1 | 0);
+  array_8[index_0_8];
+  let array_9 = ints;
+  let unary_3 = i;
+  i = unary_3 + 1 | 0;
+  let index_0_9 = unary_3;
+  $Arrays.$set(array_9, index_0_9, $Primitives.coerceDivision(array_9[index_0_9] / 1));
+  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
+  let array_10 = longs;
+  let index_0_10 = 0;
+  $Arrays.$set(array_10, index_0_10, $LongUtils.plus(array_10[index_0_10], $Long.fromInt(1)));
+  let array_11 = longs;
+  let index_0_11 = 0;
+  let unary_4 = array_11[index_0_11];
+  $Arrays.$set(array_11, index_0_11, $LongUtils.minus(unary_4, $Long.fromInt(1)));
+  let array_12 = longs;
+  let index_0_12 = 0;
+  $Arrays.$set(array_12, index_0_12, $LongUtils.minus(array_12[index_0_12], $Long.fromInt(1)));
+  array_12[index_0_12];
+  let array_13 = ArithmeticExpressionsKt.m_getLongArray__arrayOf_long();
+  let index_0_13 = 0;
+  let unary_5 = array_13[index_0_13];
+  $Arrays.$set(array_13, index_0_13, $LongUtils.plus(unary_5, $Long.fromInt(1)));
+  let strings = /**@type {Array<?string>}*/ (null);
+  let shorts = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$short));
+  let array_14 = shorts;
+  let index_0_14 = 0;
+  $Arrays.$set(array_14, index_0_14, $Primitives.narrowIntToShort(array_14[index_0_14] + 1 | 0));
+  let b = array_14[index_0_14] == 10;
+ }
+ /** @nodts */
+ static m_testCompoundBoxedTypes__void() {
+  ArithmeticExpressionsKt.$clinit();
+  let ref = /**@type {!$1Ref<!Byte>}*/ ($1Ref.$create__java_lang_Object(Byte.m_valueOf__byte__java_lang_Byte(1)));
+  let receiver = ref;
+  let unary = (/**@type {!Byte}*/ ($Casts.$to(receiver.m_getField__java_lang_Object(), Byte))).m_byteValue__byte();
+  receiver.m_setField__java_lang_Object__void(Byte.m_valueOf__byte__java_lang_Byte($Primitives.narrowIntToByte(unary + 1 | 0)));
+  let receiver_1 = ref;
+  receiver_1.m_setField__java_lang_Object__void(Byte.m_valueOf__byte__java_lang_Byte($Primitives.narrowIntToByte((/**@type {!Byte}*/ ($Casts.$to(receiver_1.m_getField__java_lang_Object(), Byte))).m_byteValue__byte() + 1 | 0)));
+  receiver_1.m_getField__java_lang_Object();
+  let n = 1 + (/**@type {!Byte}*/ ($Casts.$to(ref.m_getField__java_lang_Object(), Byte))).m_byteValue__byte() | 0;
+  let longRef = /**@type {!$1Ref<!Long>}*/ ($1Ref.$create__java_lang_Object(Long.m_valueOf__long__java_lang_Long($Long.fromInt(1))));
+  let receiver_2 = longRef;
+  receiver_2.m_setField__java_lang_Object__void(Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ ($Casts.$to(receiver_2.m_getField__java_lang_Object(), Long))).m_longValue__long(), $Long.fromInt(1))));
+ }
+ /** @nodts @return {!Array<!$Long>} */
+ static m_getLongArray__arrayOf_long() {
+  ArithmeticExpressionsKt.$clinit();
+  return /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
+ }
+ /** @nodts @return {Integer} */
+ static m_getInteger__java_lang_Integer() {
+  return null;
+ }
+ /** @nodts */
+ static m_testSideEffect__void() {
+  ArithmeticExpressionsKt.$clinit();
+  let receiver = ArithmeticExpressionsKt.m_getWithSideEffect__arithmeticexpressions_A();
+  receiver.m_setIntField__int__void(receiver.m_getIntField__int() + 5 | 0);
+ }
+ /** @nodts @return {!A} */
+ static m_getWithSideEffect__arithmeticexpressions_A() {
+  ArithmeticExpressionsKt.$clinit();
+  return A.$create__();
+ }
+ /** @nodts @return {number} */
+ static m_getCounter__int() {
+  ArithmeticExpressionsKt.$clinit();
+  return ArithmeticExpressionsKt.f_counter__arithmeticexpressions_ArithmeticExpressionsKt_;
+ }
+ /** @nodts */
+ static m_setCounter__int__void(/** number */ set__) {
+  ArithmeticExpressionsKt.$clinit();
+  ArithmeticExpressionsKt.f_counter__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_incrementCounter__int() {
+  ArithmeticExpressionsKt.$clinit();
+  ArithmeticExpressionsKt.m_setCounter__int__void(ArithmeticExpressionsKt.m_getCounter__int() + 1 | 0);
+  return ArithmeticExpressionsKt.m_getCounter__int();
+ }
+ /** @nodts */
+ static m_testEquals__void() {
+  ArithmeticExpressionsKt.$clinit();
+  let nullableDouble = 1;
+  let double_1 = 1;
+  let nullableFloat = Float.m_valueOf__float__java_lang_Float(1);
+  let float_1 = 1;
+  let b = $Equality.$sameNumber(nullableDouble, double_1);
+  b = $Equality.$sameNumber(double_1, nullableDouble);
+  b = $Equality.$sameNumber(double_1, double_1);
+  b = $Equality.$sameNumber(nullableDouble, nullableDouble);
+  b = $Equality.$sameNumber(Float.m_toDouble__java_lang_Float__java_lang_Double(nullableFloat), float_1);
+  b = $Equality.$sameNumber(float_1, Float.m_toDouble__java_lang_Float__java_lang_Double(nullableFloat));
+  b = $Equality.$sameNumber(float_1, float_1);
+  b = $Equality.$sameNumber(Float.m_toDouble__java_lang_Float__java_lang_Double(nullableFloat), Float.m_toDouble__java_lang_Float__java_lang_Double(nullableFloat));
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(double_1, null);
+  b = $Equality.$same(nullableDouble, null);
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(null, double_1);
+  b = $Equality.$same(null, nullableDouble);
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(Float.m_valueOf__float__java_lang_Float(float_1), null);
+  b = $Equality.$same(nullableFloat, null);
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(null, Float.m_valueOf__float__java_lang_Float(float_1));
+  b = $Equality.$same(null, nullableFloat);
+  let o1 = j_l_Object.$create__();
+  let o2 = 'Hello';
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(o1, o2);
+ }
+ /** @nodts */
+ static m_testTripleEquals__void() {
+  ArithmeticExpressionsKt.$clinit();
+  let nullableDouble = 1;
+  let double_1 = 1;
+  let nullableFloat = Float.m_valueOf__float__java_lang_Float(1);
+  let float_1 = 1;
+  let b = $Equality.$same(nullableDouble, $Casts.$to(double_1, j_l_Object));
+  b = $Equality.$same($Casts.$to(double_1, j_l_Object), nullableDouble);
+  b = double_1 == double_1;
+  b = $Equality.$same(nullableDouble, nullableDouble);
+  b = $Equality.$same(nullableFloat, Float.m_valueOf__float__java_lang_Float(float_1));
+  b = $Equality.$same(Float.m_valueOf__float__java_lang_Float(float_1), nullableFloat);
+  b = float_1 == float_1;
+  b = $Equality.$same(nullableFloat, nullableFloat);
+  b = $Equality.$same($Casts.$to(double_1, j_l_Object), null);
+  b = $Equality.$same(nullableDouble, null);
+  b = $Equality.$same(null, $Casts.$to(double_1, j_l_Object));
+  b = $Equality.$same(null, nullableDouble);
+  b = $Equality.$same(Float.m_valueOf__float__java_lang_Float(float_1), null);
+  b = $Equality.$same(nullableFloat, null);
+  b = $Equality.$same(null, Float.m_valueOf__float__java_lang_Float(float_1));
+  b = $Equality.$same(null, nullableFloat);
+  let o1 = j_l_Object.$create__();
+  let o2 = 'Hello';
+  b = $Equality.$same(o1, o2);
+ }
+ /** @nodts */
+ static $clinit() {
+  ArithmeticExpressionsKt.$clinit = () =>{};
+  ArithmeticExpressionsKt.$loadModules();
+  j_l_Object.$clinit();
+  ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_ = $Long.fromInt(1);
+  let unary = ArithmeticExpressionsKt.m_getOne__long();
+  ArithmeticExpressionsKt.m_setOne__long__void($LongUtils.plus(unary, $Long.fromInt(1)));
+  ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_ = unary;
+  let unary_1 = ArithmeticExpressionsKt.m_getFoo__long();
+  ArithmeticExpressionsKt.m_setFoo__long__void($LongUtils.plus(unary_1, $Long.fromInt(1)));
+  ArithmeticExpressionsKt.f_bar__arithmeticexpressions_ArithmeticExpressionsKt_ = unary_1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ArithmeticExpressionsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  A = goog.module.get('arithmeticexpressions.A$impl');
+  $1Ref = goog.module.get('arithmeticexpressions.ArithmeticExpressionsKt.$1Ref$impl');
+  Byte = goog.module.get('java.lang.Byte$impl');
+  Character = goog.module.get('java.lang.Character$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  Long = goog.module.get('java.lang.Long$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
+  $$short = goog.module.get('vmbootstrap.primitives.$short$impl');
+ }
+}
+/**@const {number} @nodts*/
+ArithmeticExpressionsKt.f_FLOAT_CONSTANT__arithmeticexpressions_ArithmeticExpressionsKt_ = 1.100000023841858;
+/**@const {number} @nodts*/
+ArithmeticExpressionsKt.f_DOUBLE_CONSTANT__arithmeticexpressions_ArithmeticExpressionsKt_ = 1.100000023841858;
+/**@const {number} @nodts*/
+ArithmeticExpressionsKt.f_DOUBLE_CONSTANT_WITH_ARITHMETIC__arithmeticexpressions_ArithmeticExpressionsKt_ = 2.200000047683716;
+/**@type {!$Long} @nodts*/
+ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_ = $Long.fromInt(0);
+/**@type {!$Long} @nodts*/
+ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_ = $Long.fromInt(0);
+/**@type {!$Long} @nodts*/
+ArithmeticExpressionsKt.f_bar__arithmeticexpressions_ArithmeticExpressionsKt_ = $Long.fromInt(0);
+/**@type {number} @nodts*/
+ArithmeticExpressionsKt.f_counter__arithmeticexpressions_ArithmeticExpressionsKt_ = 0;
+$Util.$setClassMetadata(ArithmeticExpressionsKt, 'arithmeticexpressions.ArithmeticExpressionsKt');
+
+exports = ArithmeticExpressionsKt;
+
+//# sourceMappingURL=ArithmeticExpressionsKt.js.map

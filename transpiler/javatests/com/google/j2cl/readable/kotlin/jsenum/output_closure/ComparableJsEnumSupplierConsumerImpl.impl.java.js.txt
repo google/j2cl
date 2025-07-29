@@ -1,0 +1,65 @@
+goog.module('jsenum.ComparableJsEnumSupplierConsumerImpl$impl');
+
+const ComparableJsEnumSupplierConsumer = goog.require('jsenum.ComparableJsEnumSupplierConsumer$impl');
+const SupplierConsumerImpl = goog.require('jsenum.SupplierConsumerImpl$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ComparableJsEnum = goog.forwardDeclare('jsenum.ComparableJsEnum$impl');
+let $Overlay = goog.forwardDeclare('jsenum.ComparableJsEnum.$Overlay$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
+
+/**
+ * @final
+ * @extends {SupplierConsumerImpl<!$Enums_BoxedComparableLightEnum<!ComparableJsEnum>>}
+ * @implements {ComparableJsEnumSupplierConsumer}
+ */
+class ComparableJsEnumSupplierConsumerImpl extends SupplierConsumerImpl {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ComparableJsEnumSupplierConsumerImpl} */
+ static $create__() {
+  ComparableJsEnumSupplierConsumerImpl.$clinit();
+  let $instance = new ComparableJsEnumSupplierConsumerImpl();
+  $instance.$ctor__jsenum_ComparableJsEnumSupplierConsumerImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsenum_ComparableJsEnumSupplierConsumerImpl__void() {
+  this.$ctor__jsenum_SupplierConsumerImpl__void();
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {!ComparableJsEnum} */
+ get() {
+  return /**@type {!ComparableJsEnum}*/ ($Enums.unbox(this.m_get__java_lang_Object(), $Overlay));
+ }
+ //Specialized bridge method.
+ /** @override @nodts @suppress{visibility} */
+ m_accept__jsenum_ComparableJsEnum__void(/** !ComparableJsEnum */ arg0) {
+  super.m_accept__java_lang_Object__void(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(arg0, $Overlay)));
+ }
+ /** @nodts */
+ static $clinit() {
+  ComparableJsEnumSupplierConsumerImpl.$clinit = () =>{};
+  ComparableJsEnumSupplierConsumerImpl.$loadModules();
+  SupplierConsumerImpl.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ComparableJsEnumSupplierConsumerImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('jsenum.ComparableJsEnum.$Overlay$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+ComparableJsEnumSupplierConsumer.$markImplementor(ComparableJsEnumSupplierConsumerImpl);
+$Util.$setClassMetadata(ComparableJsEnumSupplierConsumerImpl, 'jsenum.ComparableJsEnumSupplierConsumerImpl');
+
+exports = ComparableJsEnumSupplierConsumerImpl;
+
+//# sourceMappingURL=ComparableJsEnumSupplierConsumerImpl.js.map

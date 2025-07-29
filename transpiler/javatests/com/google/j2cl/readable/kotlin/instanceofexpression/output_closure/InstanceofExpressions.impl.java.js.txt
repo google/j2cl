@@ -1,0 +1,192 @@
+goog.module('instanceofexpression.InstanceofExpressions$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('instanceofexpression.InstanceofExpressions.$1$impl');
+let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $$byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
+let $$char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
+let $$double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
+let $$float = goog.forwardDeclare('vmbootstrap.primitives.$float$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+let $$short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
+
+/**
+ * @final
+ */
+class InstanceofExpressions extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InstanceofExpressions} */
+ static $create__() {
+  InstanceofExpressions.$clinit();
+  let $instance = new InstanceofExpressions();
+  $instance.$ctor__instanceofexpression_InstanceofExpressions__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__instanceofexpression_InstanceofExpressions__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_testInstanceofClass__void() {
+  let object = InstanceofExpressions.$create__();
+  let /** boolean */ b;
+  b = !$Equality.$same(object, null);
+  b = InstanceofExpressions.$isInstance(object);
+  b = j_l_String.$isInstance(object);
+ }
+ /** @final @nodts */
+ m_testInstanceofInterface__void() {
+  let o = j_l_Object.$create__();
+  let /** boolean */ b;
+  b = Serializable.$isInstance(o);
+  b = !$Equality.$same($1.$create__instanceofexpression_InstanceofExpressions(this), null);
+ }
+ /** @final @nodts */
+ m_testInstanceofBoxedType__void() {
+  let /** * */ b = null;
+  let a = Byte.$isInstance(b);
+  a = $Equality.$same(b, null) || Byte.$isInstance(b);
+  a = Double.$isInstance(b);
+  a = $Equality.$same(b, null) || Double.$isInstance(b);
+  a = Float.$isInstance(b);
+  a = $Equality.$same(b, null) || Float.$isInstance(b);
+  a = Integer.$isInstance(b);
+  a = $Equality.$same(b, null) || Integer.$isInstance(b);
+  a = Long.$isInstance(b);
+  a = $Equality.$same(b, null) || Long.$isInstance(b);
+  a = Short.$isInstance(b);
+  a = $Equality.$same(b, null) || Short.$isInstance(b);
+  a = Number.$isInstance(b);
+  a = $Equality.$same(b, null) || Number.$isInstance(b);
+  a = Character.$isInstance(b);
+  a = $Equality.$same(b, null) || Character.$isInstance(b);
+  a = Boolean.$isInstance(b);
+  a = $Equality.$same(b, null) || Boolean.$isInstance(b);
+  let /** ?number */ d = null;
+  a = !$Equality.$same(d, null);
+  a = $Equality.$same(d, null) || !$Equality.$same(d, null);
+  a = $Equality.$same(d, null) || !$Equality.$same(d, null);
+  let primitiveFloat = 1;
+  a = true;
+  a = true;
+  a = true;
+  a = true;
+  a = true;
+  let primitiveDouble = 1;
+  a = true;
+  a = true;
+  a = true;
+  a = true;
+  a = true;
+  let primitiveBoolean = true;
+  a = true;
+  a = true;
+  a = true;
+ }
+ /** @final @nodts */
+ m_testInstanceOfArray__void() {
+  let obj = j_l_Object.$create__();
+  let objectArray = new Array(0);
+  let objectDoubleArray = /**@type {!Array<!Array<*>>}*/ ($Arrays.$stampType([new Array(0)], j_l_Object, 2));
+  let stringArray = /**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String));
+  let /** boolean */ a;
+  a = $Arrays.$instanceIsOfType(obj, j_l_Object, 1);
+  a = $Arrays.$instanceIsOfType(obj, j_l_Object, 1) && !$Equality.$same(/**@type {!Array<*>}*/ (obj), null);
+  a = $Arrays.$instanceIsOfType(obj, j_l_Object, 1) && $Arrays.$instanceIsOfType(/**@type {!Array<*>}*/ (obj), j_l_String, 1);
+  a = $Arrays.$instanceIsOfType(obj, j_l_Object, 1) && $Arrays.$instanceIsOfType(/**@type {!Array<*>}*/ (obj), j_l_Object, 2);
+  a = $Arrays.$instanceIsOfType(obj, j_l_Object, 1) && $Arrays.$instanceIsOfType(/**@type {!Array<*>}*/ (obj), j_l_String, 2);
+  a = !$Equality.$same(objectArray, null);
+  a = !$Equality.$same(objectArray, null);
+  a = $Arrays.$instanceIsOfType(objectArray, j_l_String, 1);
+  a = $Arrays.$instanceIsOfType(objectArray, j_l_Object, 2);
+  a = $Arrays.$instanceIsOfType(objectArray, j_l_String, 2);
+  a = !$Equality.$same(objectDoubleArray, null);
+  a = !$Equality.$same(objectDoubleArray, null);
+  a = !$Equality.$same(objectDoubleArray, null);
+  a = $Arrays.$instanceIsOfType(objectDoubleArray, j_l_String, 2);
+  a = !$Equality.$same(stringArray, null);
+  a = !$Equality.$same(stringArray, null);
+  a = !$Equality.$same(stringArray, null);
+  a = $Arrays.$instanceIsOfType(obj, $$byte, 1);
+  a = $Arrays.$instanceIsOfType(obj, $$short, 1);
+  a = $Arrays.$instanceIsOfType(obj, $$int, 1);
+  a = $Arrays.$instanceIsOfType(obj, $$long, 1);
+  a = $Arrays.$instanceIsOfType(obj, $$float, 1);
+  a = $Arrays.$instanceIsOfType(obj, $$double, 1);
+  a = $Arrays.$instanceIsOfType(obj, $$char, 1);
+  a = $Arrays.$instanceIsOfType(obj, $$boolean, 1);
+ }
+ /** @final @nodts */
+ m_testNotInstanceOf__void() {
+  let foo = j_l_Object.$create__();
+  let a = !j_l_String.$isInstance(foo);
+  let b = !j_l_String.$isInstance(foo);
+  let /** * */ bar = null;
+  let c = !j_l_String.$isInstance(bar);
+  let d = !($Equality.$same(bar, null) || j_l_String.$isInstance(bar));
+ }
+ /** @final @nodts */
+ m_testPrecedence__void() {
+  let b = !$Equality.$same(false ? 'foo' : 'bar', null);
+ }
+ /** @nodts */
+ static $clinit() {
+  InstanceofExpressions.$clinit = () =>{};
+  InstanceofExpressions.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InstanceofExpressions;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('instanceofexpression.InstanceofExpressions.$1$impl');
+  Serializable = goog.module.get('java.io.Serializable$impl');
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  Byte = goog.module.get('java.lang.Byte$impl');
+  Character = goog.module.get('java.lang.Character$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Long = goog.module.get('java.lang.Long$impl');
+  Number = goog.module.get('java.lang.Number$impl');
+  Short = goog.module.get('java.lang.Short$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+  $$byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
+  $$char = goog.module.get('vmbootstrap.primitives.$char$impl');
+  $$double = goog.module.get('vmbootstrap.primitives.$double$impl');
+  $$float = goog.module.get('vmbootstrap.primitives.$float$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
+  $$short = goog.module.get('vmbootstrap.primitives.$short$impl');
+ }
+}
+$Util.$setClassMetadata(InstanceofExpressions, 'instanceofexpression.InstanceofExpressions');
+
+exports = InstanceofExpressions;
+
+//# sourceMappingURL=InstanceofExpressions.js.map

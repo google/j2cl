@@ -1,0 +1,43 @@
+goog.module('multipletopclasses.MultipleTopClasses$impl');
+
+const AnotherClass = goog.require('multipletopclasses.AnotherClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class MultipleTopClasses extends AnotherClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MultipleTopClasses} */
+ static $create__() {
+  MultipleTopClasses.$clinit();
+  let $instance = new MultipleTopClasses();
+  $instance.$ctor__multipletopclasses_MultipleTopClasses__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__multipletopclasses_MultipleTopClasses__void() {
+  this.$ctor__multipletopclasses_AnotherClass__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  MultipleTopClasses.$clinit = () =>{};
+  MultipleTopClasses.$loadModules();
+  AnotherClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MultipleTopClasses;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(MultipleTopClasses, 'multipletopclasses.MultipleTopClasses');
+
+exports = MultipleTopClasses;
+
+//# sourceMappingURL=MultipleTopClasses.js.map

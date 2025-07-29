@@ -1,0 +1,34 @@
+goog.module('simplebridgemethods.Callable$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template V
+ */
+class Callable {
+ /** @abstract @nodts */
+ m_call__java_lang_Object__void(/** V */ v) {}
+ /** @nodts */
+ static $clinit() {
+  Callable.$clinit = () =>{};
+  Callable.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__simplebridgemethods_Callable = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__simplebridgemethods_Callable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Callable.$markImplementor(/**@type {Function}*/ (Callable));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Callable), 'simplebridgemethods.Callable');
+
+exports = Callable;
+
+//# sourceMappingURL=Callable.js.map

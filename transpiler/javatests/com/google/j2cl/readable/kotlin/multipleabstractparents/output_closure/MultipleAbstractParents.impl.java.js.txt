@@ -1,0 +1,62 @@
+goog.module('multipleabstractparents.MultipleAbstractParents$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArrayList = goog.forwardDeclare('multipleabstractparents.MultipleAbstractParents.ArrayList$impl');
+let IStringList = goog.forwardDeclare('multipleabstractparents.MultipleAbstractParents.IStringList$impl');
+let StringList = goog.forwardDeclare('multipleabstractparents.MultipleAbstractParents.StringList$impl');
+
+/**
+ * @final
+ */
+class MultipleAbstractParents extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MultipleAbstractParents} */
+ static $create__() {
+  let $instance = new MultipleAbstractParents();
+  $instance.$ctor__multipleabstractparents_MultipleAbstractParents__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__multipleabstractparents_MultipleAbstractParents__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_main__arrayOf_java_lang_String__void(/** !Array<string> */ args) {
+  let a = (/**@type {!ArrayList<string>}*/ (ArrayList.$create__())).m_getFoo__java_lang_Object__java_lang_String(null);
+  let b = StringList.$create__().m_getFoo__java_lang_Object__java_lang_String(null);
+  let c = (/**@type {!IStringList}*/ (StringList.$create__())).m_getFoo__java_lang_String__java_lang_String(null);
+ }
+ /** @nodts @return {!MultipleAbstractParents} */
+ static get f_INSTANCE__multipleabstractparents_MultipleAbstractParents() {
+  return (MultipleAbstractParents.$clinit(), MultipleAbstractParents.$static_INSTANCE__multipleabstractparents_MultipleAbstractParents);
+ }
+ /** @nodts */
+ static $clinit() {
+  MultipleAbstractParents.$clinit = () =>{};
+  MultipleAbstractParents.$loadModules();
+  j_l_Object.$clinit();
+  MultipleAbstractParents.$static_INSTANCE__multipleabstractparents_MultipleAbstractParents = MultipleAbstractParents.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MultipleAbstractParents;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ArrayList = goog.module.get('multipleabstractparents.MultipleAbstractParents.ArrayList$impl');
+  StringList = goog.module.get('multipleabstractparents.MultipleAbstractParents.StringList$impl');
+ }
+}
+/**@private {!MultipleAbstractParents} @nodts*/
+MultipleAbstractParents.$static_INSTANCE__multipleabstractparents_MultipleAbstractParents;
+$Util.$setClassMetadata(MultipleAbstractParents, 'multipleabstractparents.MultipleAbstractParents');
+
+exports = MultipleAbstractParents;
+
+//# sourceMappingURL=MultipleAbstractParents.js.map

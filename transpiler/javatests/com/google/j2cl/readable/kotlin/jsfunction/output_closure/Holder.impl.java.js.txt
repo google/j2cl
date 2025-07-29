@@ -1,0 +1,59 @@
+goog.module('jsfunction.Holder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Holder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'Holder(Object)'.
+ /** @nodts @template T @return {!Holder<T>} */
+ static $create__java_lang_Object(/** T */ value) {
+  Holder.$clinit();
+  let $instance = new Holder();
+  $instance.$ctor__jsfunction_Holder__java_lang_Object__void(value);
+  return $instance;
+ }
+ //Initialization from constructor 'Holder(Object)'.
+ /** @nodts */
+ $ctor__jsfunction_Holder__java_lang_Object__void(/** T */ value) {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Factory method corresponding to constructor 'Holder(int, Object...)'.
+ /** @nodts @template T @return {!Holder<T>} */
+ static $create__int__arrayOf_java_lang_Object(/** number */ i, /** !Array<T> */ value) {
+  Holder.$clinit();
+  let $instance = new Holder();
+  $instance.$ctor__jsfunction_Holder__int__arrayOf_java_lang_Object__void(i, value);
+  return $instance;
+ }
+ //Initialization from constructor 'Holder(int, Object...)'.
+ /** @nodts */
+ $ctor__jsfunction_Holder__int__arrayOf_java_lang_Object__void(/** number */ i, /** !Array<T> */ value) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Holder.$clinit = () =>{};
+  Holder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Holder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Holder, 'jsfunction.Holder');
+
+exports = Holder;
+
+//# sourceMappingURL=Holder.js.map

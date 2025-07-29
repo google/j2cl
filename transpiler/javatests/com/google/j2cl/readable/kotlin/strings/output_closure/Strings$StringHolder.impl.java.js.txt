@@ -1,0 +1,54 @@
+goog.module('strings.Strings.StringHolder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class StringHolder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_s__strings_Strings_StringHolder_;
+ }
+ /** @nodts @return {!StringHolder} */
+ static $create__() {
+  StringHolder.$clinit();
+  let $instance = new StringHolder();
+  $instance.$ctor__strings_Strings_StringHolder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__strings_Strings_StringHolder__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_s__strings_Strings_StringHolder_ = 'A';
+ }
+ /** @final @nodts @return {string} */
+ m_getS__java_lang_String() {
+  return this.f_s__strings_Strings_StringHolder_;
+ }
+ /** @final @nodts */
+ m_setS__java_lang_String__void(/** string */ set__) {
+  this.f_s__strings_Strings_StringHolder_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  StringHolder.$clinit = () =>{};
+  StringHolder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(StringHolder, 'strings.Strings$StringHolder');
+
+exports = StringHolder;
+
+//# sourceMappingURL=Strings$StringHolder.js.map

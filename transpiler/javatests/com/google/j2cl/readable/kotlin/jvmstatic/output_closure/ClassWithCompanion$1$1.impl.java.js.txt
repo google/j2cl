@@ -1,0 +1,55 @@
+goog.module('jvmstatic.ClassWithCompanion.$1.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClassWithCompanion = goog.forwardDeclare('jvmstatic.ClassWithCompanion$impl');
+let $1 = goog.forwardDeclare('jvmstatic.ClassWithCompanion.$1$impl');
+
+/**
+ * @final
+ */
+class $1_$1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!$1} @nodts*/
+  this.$outer_this__jvmstatic_ClassWithCompanion_1_1;
+ }
+ /** @nodts @return {!$1_$1} */
+ static $create__jvmstatic_ClassWithCompanion_1(/** !$1 */ $outer_this) {
+  $1_$1.$clinit();
+  let $instance = new $1_$1();
+  $instance.$ctor__jvmstatic_ClassWithCompanion_1_1__jvmstatic_ClassWithCompanion_1__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmstatic_ClassWithCompanion_1_1__jvmstatic_ClassWithCompanion_1__void(/** !$1 */ $outer_this) {
+  this.$outer_this__jvmstatic_ClassWithCompanion_1_1 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_foo__int() {
+  return ClassWithCompanion.m_nonJvmStatic__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  $1_$1.$clinit = () =>{};
+  $1_$1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1_$1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ClassWithCompanion = goog.module.get('jvmstatic.ClassWithCompanion$impl');
+ }
+}
+$Util.$setClassMetadata($1_$1, 'jvmstatic.ClassWithCompanion$1$1');
+
+exports = $1_$1;
+
+//# sourceMappingURL=ClassWithCompanion$1$1.js.map

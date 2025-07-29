@@ -1,0 +1,62 @@
+goog.module('jsbridgeaccidentaloverride.MyJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const OtherInterface = goog.require('jsbridgeaccidentaloverride.OtherInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {OtherInterface}
+ */
+class MyJsType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MyJsType} */
+ static $create__() {
+  MyJsType.$clinit();
+  let $instance = new MyJsType();
+  $instance.$ctor__jsbridgeaccidentaloverride_MyJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsbridgeaccidentaloverride_MyJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {number} */
+ foo(/** number */ a) {
+  return a;
+ }
+ /** @return {number} */
+ bar(/** number */ a) {
+  return a + 1 | 0;
+ }
+ /** @return {number} */
+ f(/** number */ a) {
+  return a - 1 | 0;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {number} */
+ m_f__int__int(/** number */ arg0) {
+  return this.f(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  MyJsType.$clinit = () =>{};
+  MyJsType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+OtherInterface.$markImplementor(MyJsType);
+$Util.$setClassMetadata(MyJsType, 'jsbridgeaccidentaloverride.MyJsType');
+
+exports = MyJsType;
+
+//# sourceMappingURL=MyJsType.js.map

@@ -1,0 +1,42 @@
+goog.module('jsproperties.ValueHolder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ValueHolder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {*}*/
+  this.value;
+ }
+ /** @nodts @return {!ValueHolder} */
+ static $create__() {
+  ValueHolder.$clinit();
+  let $instance = new ValueHolder();
+  $instance.$ctor__jsproperties_ValueHolder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_ValueHolder__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ValueHolder.$clinit = () =>{};
+  ValueHolder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ValueHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ValueHolder, 'jsproperties.ValueHolder');
+
+exports = ValueHolder;
+
+//# sourceMappingURL=ValueHolder.js.map

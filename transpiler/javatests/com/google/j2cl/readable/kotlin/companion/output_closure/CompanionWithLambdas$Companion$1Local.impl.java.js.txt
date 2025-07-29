@@ -1,0 +1,57 @@
+goog.module('companion.CompanionWithLambdas.Companion.$1Local$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CompanionWithLambdas = goog.forwardDeclare('companion.CompanionWithLambdas$impl');
+let Companion = goog.forwardDeclare('companion.CompanionWithLambdas.Companion$impl');
+
+/**
+ * @final
+ */
+class $1Local extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!$1Local} */
+ static $create__() {
+  $1Local.$clinit();
+  let $instance = new $1Local();
+  $instance.$ctor__companion_CompanionWithLambdas_Companion_1Local__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_CompanionWithLambdas_Companion_1Local__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_withSuper__int__int(/** number */ i) {
+  return i + j_l_Object.prototype.hashCode.call(Companion.f_Companion__companion_CompanionWithLambdas_Companion) | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_withThis__int__int(/** number */ i) {
+  return i + CompanionWithLambdas.m_getIntProperty__int() | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Local.$clinit = () =>{};
+  $1Local.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Local;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  CompanionWithLambdas = goog.module.get('companion.CompanionWithLambdas$impl');
+  Companion = goog.module.get('companion.CompanionWithLambdas.Companion$impl');
+ }
+}
+$Util.$setClassMetadata($1Local, 'companion.CompanionWithLambdas$Companion$1Local');
+
+exports = $1Local;
+
+//# sourceMappingURL=CompanionWithLambdas$Companion$1Local.js.map

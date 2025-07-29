@@ -1,0 +1,56 @@
+goog.module('rawstring.RawStringKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+/**
+ * @final
+ */
+class RawStringKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!RawStringKt} */
+ static $create__() {
+  RawStringKt.$clinit();
+  let $instance = new RawStringKt();
+  $instance.$ctor__rawstring_RawStringKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__rawstring_RawStringKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  RawStringKt.$clinit();
+  let rawString = 'Tell me and I forget.\n  Teach me and I remember.\n  Involve me and I learn.';
+  let rawStringWithEscapedCharacters = '\\n will not be substituted.';
+  let rawStringWithSymbol = '' + 'This ' + j_l_String.m_valueOf__char__java_lang_String(36 /* '$' */) + '{variable} will not be substituted.';
+  let variable = 'number';
+  let rawStringWithStringTemplate = '' + 'This ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(variable) + ' will be substituted.';
+ }
+ /** @nodts */
+ static $clinit() {
+  RawStringKt.$clinit = () =>{};
+  RawStringKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RawStringKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(RawStringKt, 'rawstring.RawStringKt');
+
+exports = RawStringKt;
+
+//# sourceMappingURL=RawStringKt.js.map

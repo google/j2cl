@@ -1,0 +1,48 @@
+goog.module('nestedinstanceinnerclass.OuterClass.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let OuterClass = goog.forwardDeclare('nestedinstanceinnerclass.OuterClass$impl');
+
+/**
+ * @final
+ */
+class InnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!OuterClass} @nodts*/
+  this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass;
+ }
+ /** @nodts @return {!InnerClass} */
+ static $create__nestedinstanceinnerclass_OuterClass(/** !OuterClass */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__nestedinstanceinnerclass_OuterClass_InnerClass__nestedinstanceinnerclass_OuterClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nestedinstanceinnerclass_OuterClass_InnerClass__nestedinstanceinnerclass_OuterClass__void(/** !OuterClass */ $outer_this) {
+  this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClass, 'nestedinstanceinnerclass.OuterClass$InnerClass');
+
+exports = InnerClass;
+
+//# sourceMappingURL=OuterClass$InnerClass.js.map

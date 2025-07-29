@@ -1,0 +1,75 @@
+goog.module('toplevelmembers.TopLevelMembersKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class TopLevelMembersKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!TopLevelMembersKt} */
+ static $create__() {
+  TopLevelMembersKt.$clinit();
+  let $instance = new TopLevelMembersKt();
+  $instance.$ctor__toplevelmembers_TopLevelMembersKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__toplevelmembers_TopLevelMembersKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_topLevelFunction__void() {
+  TopLevelMembersKt.$clinit();
+ }
+ /** @nodts @return {number} */
+ static m_getTopLevelField__int() {
+  TopLevelMembersKt.$clinit();
+  return TopLevelMembersKt.f_topLevelField__toplevelmembers_TopLevelMembersKt_;
+ }
+ /** @nodts */
+ static m_setTopLevelField__int__void(/** number */ set__) {
+  TopLevelMembersKt.$clinit();
+  TopLevelMembersKt.f_topLevelField__toplevelmembers_TopLevelMembersKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_getTopLevelPropertyWithJustAGetter__int() {
+  TopLevelMembersKt.$clinit();
+  return TopLevelMembersKt.m_getTopLevelField__int();
+ }
+ /** @nodts @return {number} */
+ static m_getTopLevelProperty__int() {
+  TopLevelMembersKt.$clinit();
+  return TopLevelMembersKt.m_getTopLevelField__int();
+ }
+ /** @nodts */
+ static m_setTopLevelProperty__int__void(/** number */ value) {
+  TopLevelMembersKt.$clinit();
+  TopLevelMembersKt.m_setTopLevelField__int__void(value);
+ }
+ /** @nodts */
+ static $clinit() {
+  TopLevelMembersKt.$clinit = () =>{};
+  TopLevelMembersKt.$loadModules();
+  j_l_Object.$clinit();
+  TopLevelMembersKt.f_topLevelField__toplevelmembers_TopLevelMembersKt_ = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TopLevelMembersKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {number} @nodts*/
+TopLevelMembersKt.f_topLevelField__toplevelmembers_TopLevelMembersKt_ = 0;
+$Util.$setClassMetadata(TopLevelMembersKt, 'toplevelmembers.TopLevelMembersKt');
+
+exports = TopLevelMembersKt;
+
+//# sourceMappingURL=TopLevelMembersKt.js.map

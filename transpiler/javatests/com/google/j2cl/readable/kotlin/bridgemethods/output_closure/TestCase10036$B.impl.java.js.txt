@@ -1,0 +1,58 @@
+goog.module('bridgemethods.TestCase10036.B$impl');
+
+const BI1 = goog.require('bridgemethods.TestCase10036.BI1$impl');
+const BI2 = goog.require('bridgemethods.TestCase10036.BI2$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let BI3 = goog.forwardDeclare('bridgemethods.TestCase10036.BI3$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+
+/**
+ * @abstract
+ * @template B1
+ * @implements {BI1}
+ * @implements {BI2}
+ */
+class B extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__bridgemethods_TestCase10036_B__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @nodts @return {?string} */
+ m_get__java_lang_Comparable__java_lang_String(/** B1 */ value) {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {?string} */
+ m_get__java_lang_String__java_lang_String(/** ?string */ arg0) {
+  return this.get(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  j_l_Object.$clinit();
+  BI3.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ /** @abstract @override @suppress{visibility} @return {?string} */
+ get(/** ?string */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {
+  BI3 = goog.module.get('bridgemethods.TestCase10036.BI3$impl');
+ }
+}
+BI1.$markImplementor(B);
+BI2.$markImplementor(B);
+$Util.$setClassMetadata(B, 'bridgemethods.TestCase10036$B');
+
+exports = B;
+
+//# sourceMappingURL=TestCase10036$B.js.map

@@ -1,0 +1,33 @@
+goog.module('jsenum.ComparableJsEnum.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $Enums = goog.require('vmbootstrap.Enums$impl');
+
+let ComparableJsEnum = goog.forwardDeclare('jsenum.ComparableJsEnum$impl');
+let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts @return {number} */
+ static m_getValue__$devirt__jsenum_ComparableJsEnum__int(/** !ComparableJsEnum */ $thisArg) {
+  $Overlay.$clinit();
+  return /**@type {number}*/ ($thisArg);
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return $Enums.isInstanceOf(instance, $Overlay);
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'jsenum.ComparableJsEnum');
+
+exports = $Overlay;
+
+//# sourceMappingURL=ComparableJsEnum$$Overlay.js.map

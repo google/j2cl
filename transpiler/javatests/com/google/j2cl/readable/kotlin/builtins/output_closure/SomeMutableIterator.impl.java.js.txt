@@ -1,0 +1,98 @@
+goog.module('builtins.SomeMutableIterator$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const ListIterator = goog.require('java.util.ListIterator$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template V
+ * @implements {ListIterator<V>}
+ */
+class SomeMutableIterator extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template V @return {!SomeMutableIterator<V>} */
+ static $create__() {
+  SomeMutableIterator.$clinit();
+  let $instance = new SomeMutableIterator();
+  $instance.$ctor__builtins_SomeMutableIterator__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__builtins_SomeMutableIterator__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts */
+ m_add__java_lang_Object__void(/** V */ element) {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {boolean} */
+ m_hasNext__boolean() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {boolean} */
+ m_hasPrevious__boolean() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {V} */
+ m_next__java_lang_Object() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {number} */
+ m_nextIndex__int() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {V} */
+ m_previous__java_lang_Object() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {number} */
+ m_previousIndex__int() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts */
+ m_remove__void() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts */
+ m_set__java_lang_Object__void(/** V */ element) {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_forEachRemaining__java_util_function_Consumer__void(/** !Consumer<?> */ arg0) {
+  Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeMutableIterator.$clinit = () =>{};
+  SomeMutableIterator.$loadModules();
+  j_l_Object.$clinit();
+  Iterator.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeMutableIterator;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Iterator = goog.module.get('java.util.Iterator$impl');
+  NotImplementedError = goog.module.get('kotlin.NotImplementedError$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+ListIterator.$markImplementor(SomeMutableIterator);
+$Util.$setClassMetadata(SomeMutableIterator, 'builtins.SomeMutableIterator');
+
+exports = SomeMutableIterator;
+
+//# sourceMappingURL=SomeMutableIterator.js.map

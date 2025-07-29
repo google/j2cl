@@ -1,0 +1,59 @@
+goog.module('bridgejsmethod.Main.O$impl');
+
+const N = goog.require('bridgejsmethod.Main.N$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
+let B = goog.forwardDeclare('bridgejsmethod.Main.B$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+
+/**
+ * @final
+ */
+class O extends N {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Main} @nodts*/
+  this.$outer_this__bridgejsmethod_Main_O;
+  /**@type {!B} @nodts*/
+  this.f_b__bridgejsmethod_Main_O_;
+ }
+ /** @nodts @return {!O} */
+ static $create__bridgejsmethod_Main(/** !Main */ $outer_this) {
+  O.$clinit();
+  let $instance = new O();
+  $instance.$ctor__bridgejsmethod_Main_O__bridgejsmethod_Main__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_O__bridgejsmethod_Main__void(/** !Main */ $outer_this) {
+  this.$outer_this__bridgejsmethod_Main_O = $outer_this;
+  this.$ctor__bridgejsmethod_Main_N__bridgejsmethod_Main__void($outer_this);
+  this.f_b__bridgejsmethod_Main_O_ = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @override @return {!B} */
+ get b() {
+  return this.f_b__bridgejsmethod_Main_O_;
+ }
+ /** @nodts */
+ static $clinit() {
+  O.$clinit = () =>{};
+  O.$loadModules();
+  N.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof O;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+$Util.$setClassMetadata(O, 'bridgejsmethod.Main$O');
+
+exports = O;
+
+//# sourceMappingURL=Main$O.js.map

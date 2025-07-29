@@ -1,0 +1,46 @@
+goog.module('jstype.SomeJvmFields$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class SomeJvmFields extends j_l_Object {
+ 
+ constructor() {
+  SomeJvmFields.$clinit();
+  super();
+  /**@type {number}*/
+  this.publicField = 0;
+  /**@type {number} @nodts*/
+  this.f_privateField__jstype_SomeJvmFields_ = 0;
+  /**@type {number} @nodts*/
+  this.f_packageField__jstype_SomeJvmFields = 0;
+  /**@type {number} @nodts*/
+  this.f_protectedField__jstype_SomeJvmFields = 0;
+  this.$ctor__jstype_SomeJvmFields__void();
+ }
+ /** @nodts */
+ $ctor__jstype_SomeJvmFields__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeJvmFields.$clinit = () =>{};
+  SomeJvmFields.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeJvmFields;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SomeJvmFields, 'jstype.SomeJvmFields');
+
+exports = SomeJvmFields;
+
+//# sourceMappingURL=SomeJvmFields.js.map

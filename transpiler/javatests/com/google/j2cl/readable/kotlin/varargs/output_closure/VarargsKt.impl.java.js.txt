@@ -1,0 +1,72 @@
+goog.module('varargs.VarargsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @final
+ */
+class VarargsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!VarargsKt} */
+ static $create__() {
+  VarargsKt.$clinit();
+  let $instance = new VarargsKt();
+  $instance.$ctor__varargs_VarargsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__varargs_VarargsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T */
+ static m_f__arrayOf_java_lang_Number__void(/** !Array<T> */ elements) {
+  VarargsKt.$clinit();
+ }
+ /** @nodts @template E */
+ static m_bar__java_lang_Number__java_lang_Number__void(/** E */ a, /** E */ b) {
+  VarargsKt.$clinit();
+  VarargsKt.m_f__arrayOf_java_lang_Number__void(/**@type {!Array<E>}*/ ($Arrays.$stampType([a, b], Number)));
+ }
+ /** @nodts @template T @return {T} */
+ static m_passthrough__java_lang_Object__java_lang_Object(/** T */ o) {
+  VarargsKt.$clinit();
+  return o;
+ }
+ /** @nodts @template T */
+ static m_indirectSpread__arrayOf_java_lang_Comparable__void(/** !Array<T> */ a) {
+  VarargsKt.m_generics__arrayOf_java_lang_Object__void(/**@type {!Array<T>}*/ ($Arrays.$stampType([...a], /**@type {Function}*/ (Comparable))));
+  return;
+ }
+ /** @nodts @template T */
+ static m_generics__arrayOf_java_lang_Object__void(/** !Array<T> */ element) {}
+ /** @nodts */
+ static $clinit() {
+  VarargsKt.$clinit = () =>{};
+  VarargsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof VarargsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Comparable = goog.module.get('java.lang.Comparable$impl');
+  Number = goog.module.get('java.lang.Number$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(VarargsKt, 'varargs.VarargsKt');
+
+exports = VarargsKt;
+
+//# sourceMappingURL=VarargsKt.js.map

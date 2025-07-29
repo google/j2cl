@@ -1,0 +1,102 @@
+goog.module('primitivespecialization.PrimitiveSpecializationKt.$1$impl');
+
+const AbstractList = goog.require('kotlin.collections.AbstractList$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {AbstractList<!Byte>}
+ */
+class $1 extends AbstractList {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_size__primitivespecialization_PrimitiveSpecializationKt_1_ = 0;
+ }
+ /** @nodts @return {!$1} */
+ static $create__() {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__primitivespecialization_PrimitiveSpecializationKt_1__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_PrimitiveSpecializationKt_1__void() {
+  this.$ctor__kotlin_collections_AbstractList__void();
+ }
+ /** @override @nodts @return {number} */
+ m_getSize__int() {
+  return this.f_size__primitivespecialization_PrimitiveSpecializationKt_1_;
+ }
+ /** @override @return {boolean} */
+ isEmpty() {
+  return true;
+ }
+ /** @nodts @return {boolean} */
+ m_contains__byte__boolean(/** number */ element) {
+  return true;
+ }
+ /** @nodts @return {number} */
+ m_get__int__byte(/** number */ index) {
+  return 0;
+ }
+ /** @nodts @return {number} */
+ m_indexOf__byte__int(/** number */ element) {
+  return 0;
+ }
+ /** @nodts @return {number} */
+ m_lastIndexOf__byte__int(/** number */ element) {
+  return 0;
+ }
+ /** @final @override @return {boolean} */
+ contains(/** * */ element) {
+  if (!Byte.$isInstance(element)) {
+   return false;
+  }
+  return this.m_contains__byte__boolean((/**@type {!Byte}*/ ($Casts.$to(element, Byte))).m_byteValue__byte());
+ }
+ /** @final @override @return {number} */
+ indexOf(/** * */ element) {
+  if (!Byte.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_indexOf__byte__int((/**@type {!Byte}*/ ($Casts.$to(element, Byte))).m_byteValue__byte());
+ }
+ /** @final @override @return {number} */
+ lastIndexOf(/** * */ element) {
+  if (!Byte.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_lastIndexOf__byte__int((/**@type {!Byte}*/ ($Casts.$to(element, Byte))).m_byteValue__byte());
+ }
+ //Bridge method.
+ /** @final @override @suppress{visibility} @return {!Byte} */
+ getAtIndex(/** number */ arg0) {
+  return Byte.m_valueOf__byte__java_lang_Byte(this.m_get__int__byte(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  AbstractList.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Byte = goog.module.get('java.lang.Byte$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata($1, 'primitivespecialization.PrimitiveSpecializationKt$1');
+
+exports = $1;
+
+//# sourceMappingURL=PrimitiveSpecializationKt$1.js.map

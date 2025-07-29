@@ -1,0 +1,68 @@
+goog.module('interfaces.AccidentalOverride.C$impl');
+
+const Bottom = goog.require('interfaces.AccidentalOverride.Bottom$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {Bottom<!C>}
+ */
+class C extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!C} */
+ static $create__() {
+  C.$clinit();
+  let $instance = new C();
+  $instance.$ctor__interfaces_AccidentalOverride_C__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfaces_AccidentalOverride_C__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_foo__interfaces_AccidentalOverride_C__void(/** !C */ c) {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__interfaces_AccidentalOverride_Left__void(/** !C */ arg0) {
+  this.m_foo__interfaces_AccidentalOverride_C__void(/**@type {!C}*/ ($Casts.$to(arg0, C)));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__interfaces_AccidentalOverride_Right__void(/** !C */ arg0) {
+  this.m_foo__interfaces_AccidentalOverride_C__void(/**@type {!C}*/ ($Casts.$to(arg0, C)));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__interfaces_AccidentalOverride_Bottom__void(/** !C */ arg0) {
+  this.m_foo__interfaces_AccidentalOverride_C__void(/**@type {!C}*/ ($Casts.$to(arg0, C)));
+ }
+ /** @nodts */
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  j_l_Object.$clinit();
+  Bottom.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Bottom.$markImplementor(C);
+$Util.$setClassMetadata(C, 'interfaces.AccidentalOverride$C');
+
+exports = C;
+
+//# sourceMappingURL=AccidentalOverride$C.js.map

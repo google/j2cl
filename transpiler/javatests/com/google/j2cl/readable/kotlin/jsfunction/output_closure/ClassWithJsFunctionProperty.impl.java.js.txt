@@ -1,0 +1,57 @@
+goog.module('jsfunction.ClassWithJsFunctionProperty$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class ClassWithJsFunctionProperty extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?function(string):void} @nodts*/
+  this.f_fn__jsfunction_ClassWithJsFunctionProperty_;
+ }
+ /** @nodts @return {!ClassWithJsFunctionProperty} */
+ static $create__() {
+  ClassWithJsFunctionProperty.$clinit();
+  let $instance = new ClassWithJsFunctionProperty();
+  $instance.$ctor__jsfunction_ClassWithJsFunctionProperty__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsfunction_ClassWithJsFunctionProperty__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?function(string):void} */
+ m_getFn__jsfunction_ParametricJsFunction() {
+  return this.f_fn__jsfunction_ClassWithJsFunctionProperty_;
+ }
+ /** @final @nodts */
+ m_setFn__jsfunction_ParametricJsFunction__void(/** ?function(string):void */ set__) {
+  this.f_fn__jsfunction_ClassWithJsFunctionProperty_ = set__;
+ }
+ /** @return {?function(string):void} */
+ get function() {
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassWithJsFunctionProperty.$clinit = () =>{};
+  ClassWithJsFunctionProperty.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassWithJsFunctionProperty;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ClassWithJsFunctionProperty, 'jsfunction.ClassWithJsFunctionProperty');
+
+exports = ClassWithJsFunctionProperty;
+
+//# sourceMappingURL=ClassWithJsFunctionProperty.js.map

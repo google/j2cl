@@ -1,0 +1,67 @@
+goog.module('tailrec.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__tailrec_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__tailrec_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_factorialInvalidTC__int__int(/** number */ i) {
+  MainKt.$clinit();
+  if (i == 0) {
+   return 1;
+  }
+  return Math.imul(i, MainKt.m_factorialInvalidTC__int__int(i - 1 | 0));
+ }
+ /** @nodts @return {number} */
+ static m_factorialTC__int__int__int(/** number */ i, /** number */ result) {
+  MainKt.$clinit();
+  if (i == 0) {
+   return result;
+  }
+  return MainKt.m_factorialTC__int__int__int(i - 1 | 0, Math.imul(i, result));
+ }
+ /** @nodts @return {number} */
+ static m_factorialTC$default__int__int__int__java_lang_Object__int(/** number */ i, /** number */ result, /** number */ _mask0, /** * */ _handler) {
+  MainKt.$clinit();
+  if ((_mask0 & 2) != 0) {
+   result = 1;
+  }
+  return MainKt.m_factorialTC__int__int__int(i, result);
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(MainKt, 'tailrec.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

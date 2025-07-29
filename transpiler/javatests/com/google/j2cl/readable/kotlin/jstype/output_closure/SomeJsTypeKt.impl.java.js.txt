@@ -1,0 +1,55 @@
+goog.module('jstype.SomeJsTypeKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SeparatelyCompiledClass = goog.forwardDeclare('jstype.SeparatelyCompiledClass$impl');
+let SeparatelyCompiledJsType = goog.forwardDeclare('jstype.SeparatelyCompiledJsType$impl');
+
+/**
+ * @final
+ */
+class SomeJsTypeKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SomeJsTypeKt} */
+ static $create__() {
+  SomeJsTypeKt.$clinit();
+  let $instance = new SomeJsTypeKt();
+  $instance.$ctor__jstype_SomeJsTypeKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_SomeJsTypeKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testAccessingSeparatelyCompiledJsProperty__void() {
+  let a = new SeparatelyCompiledJsType('foo').foo;
+  let b = new SeparatelyCompiledJsType('noBackingField').noBackingField;
+  let c = SeparatelyCompiledClass.$create__().f;
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeJsTypeKt.$clinit = () =>{};
+  SomeJsTypeKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeJsTypeKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SeparatelyCompiledClass = goog.module.get('jstype.SeparatelyCompiledClass$impl');
+  SeparatelyCompiledJsType = goog.module.get('jstype.SeparatelyCompiledJsType$impl');
+ }
+}
+$Util.$setClassMetadata(SomeJsTypeKt, 'jstype.SomeJsTypeKt');
+
+exports = SomeJsTypeKt;
+
+//# sourceMappingURL=SomeJsTypeKt.js.map

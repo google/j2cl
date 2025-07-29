@@ -1,0 +1,59 @@
+goog.module('bridgemethods.TestCase102.C$impl');
+
+const B = goog.require('bridgemethods.TestCase102.B$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let TestCase102 = goog.forwardDeclare('bridgemethods.TestCase102$impl');
+
+/**
+ * @final
+ * @template B1
+ * @extends {B<B1>}
+ */
+class C extends B {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!TestCase102} @nodts*/
+  this.$outer_this__bridgemethods_TestCase102_C;
+ }
+ /** @nodts @template B1 @return {!C<B1>} */
+ static $create__bridgemethods_TestCase102(/** !TestCase102 */ $outer_this) {
+  C.$clinit();
+  let $instance = new C();
+  $instance.$ctor__bridgemethods_TestCase102_C__bridgemethods_TestCase102__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_TestCase102_C__bridgemethods_TestCase102__void(/** !TestCase102 */ $outer_this) {
+  this.$outer_this__bridgemethods_TestCase102_C = $outer_this;
+  this.$ctor__bridgemethods_TestCase102_B__void();
+ }
+ /** @override */
+ set(/** ?string */ value) {}
+ /** @override @nodts */
+ m_set__java_lang_Object__void(/** B1 */ value) {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_set__java_lang_String__void(/** ?string */ arg0) {
+  this.set(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  B.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(C, 'bridgemethods.TestCase102$C');
+
+exports = C;
+
+//# sourceMappingURL=TestCase102$C.js.map

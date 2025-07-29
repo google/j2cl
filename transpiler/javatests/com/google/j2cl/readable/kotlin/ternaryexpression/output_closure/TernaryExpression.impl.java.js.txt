@@ -1,0 +1,50 @@
+goog.module('ternaryexpression.TernaryExpression$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class TernaryExpression extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!TernaryExpression} */
+ static $create__() {
+  TernaryExpression.$clinit();
+  let $instance = new TernaryExpression();
+  $instance.$ctor__ternaryexpression_TernaryExpression__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__ternaryexpression_TernaryExpression__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let a = true;
+  let number_1 = a ? 1 : 2;
+  let b = number_1 == 1 ? number_1 == 2 : number_1 == 1;
+  let value = b ? 15 : 30;
+ }
+ /** @nodts */
+ static $clinit() {
+  TernaryExpression.$clinit = () =>{};
+  TernaryExpression.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TernaryExpression;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(TernaryExpression, 'ternaryexpression.TernaryExpression');
+
+exports = TernaryExpression;
+
+//# sourceMappingURL=TernaryExpression.js.map

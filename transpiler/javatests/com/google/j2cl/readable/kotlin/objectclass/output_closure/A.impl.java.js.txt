@@ -1,0 +1,80 @@
+goog.module('objectclass.A$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class A extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!A} */
+ static $create__() {
+  let $instance = new A();
+  $instance.$ctor__objectclass_A__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objectclass_A__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_add__int__int(/** number */ i) {
+  return i + 1 | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_getX__int() {
+  return A.f_x__objectclass_A_;
+ }
+ /** @final @nodts */
+ m_setX__int__void(/** number */ set__) {
+  A.f_x__objectclass_A_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getY__int() {
+  return A.f_y__objectclass_A_;
+ }
+ /** @final @nodts @return {number} */
+ m_getZ__int() {
+  return this.m_getX__int();
+ }
+ /** @final @nodts */
+ m_setZ__int__void(/** number */ value) {
+  this.m_setX__int__void(this.m_getX__int() + value | 0);
+ }
+ /** @nodts @return {!A} */
+ static get f_INSTANCE__objectclass_A() {
+  return (A.$clinit(), A.$static_INSTANCE__objectclass_A);
+ }
+ /** @nodts */
+ static $clinit() {
+  A.$clinit = () =>{};
+  A.$loadModules();
+  j_l_Object.$clinit();
+  A.$static_INSTANCE__objectclass_A = A.$create__();
+  A.f_x__objectclass_A_ = 1;
+  A.$static_INSTANCE__objectclass_A.m_setX__int__void(A.$static_INSTANCE__objectclass_A.m_getX__int() + 2 | 0);
+  A.f_y__objectclass_A_ = A.$static_INSTANCE__objectclass_A.m_getX__int();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!A} @nodts*/
+A.$static_INSTANCE__objectclass_A;
+/**@type {number} @nodts*/
+A.f_x__objectclass_A_ = 0;
+/**@type {number} @nodts*/
+A.f_y__objectclass_A_ = 0;
+$Util.$setClassMetadata(A, 'objectclass.A');
+
+exports = A;
+
+//# sourceMappingURL=A.js.map

@@ -1,0 +1,56 @@
+goog.module('genericnativetype.BoundedJsArrays$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Overlay = goog.forwardDeclare('genericnativetype.BoundedJsArray.$Overlay$impl');
+
+/**
+ * @final
+ */
+class BoundedJsArrays extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BoundedJsArrays} */
+ static $create__() {
+  let $instance = new BoundedJsArrays();
+  $instance.$ctor__genericnativetype_BoundedJsArrays__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericnativetype_BoundedJsArrays__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template V @return {!Array<V>} */
+ static m_create__genericnativetype_BoundedJsArray() {
+  BoundedJsArrays.$clinit();
+  return $Overlay.m_create__genericnativetype_BoundedJsArray();
+ }
+ /** @nodts @template V @return {!Array<V>} */
+ static m_createWithSize__int__genericnativetype_BoundedJsArray(/** number */ size) {
+  BoundedJsArrays.$clinit();
+  return $Overlay.m_create__int__genericnativetype_BoundedJsArray(size);
+ }
+ /** @nodts */
+ static $clinit() {
+  BoundedJsArrays.$clinit = () =>{};
+  BoundedJsArrays.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BoundedJsArrays;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('genericnativetype.BoundedJsArray.$Overlay$impl');
+ }
+}
+$Util.$setClassMetadata(BoundedJsArrays, 'genericnativetype.BoundedJsArrays');
+
+exports = BoundedJsArrays;
+
+//# sourceMappingURL=BoundedJsArrays.js.map

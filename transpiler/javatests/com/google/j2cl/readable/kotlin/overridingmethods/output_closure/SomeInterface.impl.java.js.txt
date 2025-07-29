@@ -1,0 +1,37 @@
+goog.module('overridingmethods.SomeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class SomeInterface {
+ /** @abstract @nodts */
+ m_function__void() {}
+ /** @abstract @nodts @return {number} */
+ m_getProperty__int() {}
+ /** @abstract @nodts */
+ m_setProperty__int__void(/** number */ set__) {}
+ /** @nodts */
+ static $clinit() {
+  SomeInterface.$clinit = () =>{};
+  SomeInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__overridingmethods_SomeInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__overridingmethods_SomeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+SomeInterface.$markImplementor(/**@type {Function}*/ (SomeInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (SomeInterface), 'overridingmethods.SomeInterface');
+
+exports = SomeInterface;
+
+//# sourceMappingURL=SomeInterface.js.map

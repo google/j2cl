@@ -1,0 +1,82 @@
+goog.module('labelstatement.LabeledStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('labelstatement.LabeledStatement.$1$impl');
+
+/**
+ * @final
+ */
+class LabeledStatement extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LabeledStatement} */
+ static $create__() {
+  LabeledStatement.$clinit();
+  let $instance = new LabeledStatement();
+  $instance.$ctor__labelstatement_LabeledStatement__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__labelstatement_LabeledStatement__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_loopStatements__void() {
+  while (true) {
+   break;
+  }
+  do {
+   break;
+  } while (true);
+  for (let inductionVariable = 1; inductionVariable <= 100; inductionVariable = inductionVariable + 1 | 0) {
+   let i = inductionVariable;
+   break;
+  }
+  while (true) {
+   let tmp0_subject = 0;
+   switch (tmp0_subject) {
+    case 0:
+     {
+      continue;
+     }
+   }
+  }
+ }
+ /** @final @nodts */
+ m_simpleStatement__void() {
+  this.m_foo__void_$p_labelstatement_LabeledStatement();
+  return;
+ }
+ /** @final @nodts */
+ m_nestedScopes__void() {
+  {
+   $1.$create__labelstatement_LabeledStatement(this);
+  }
+ }
+ /** @final @nodts */
+ m_foo__void_$p_labelstatement_LabeledStatement() {}
+ /** @nodts */
+ static $clinit() {
+  LabeledStatement.$clinit = () =>{};
+  LabeledStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LabeledStatement;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('labelstatement.LabeledStatement.$1$impl');
+ }
+}
+$Util.$setClassMetadata(LabeledStatement, 'labelstatement.LabeledStatement');
+
+exports = LabeledStatement;
+
+//# sourceMappingURL=LabeledStatement.js.map

@@ -1,0 +1,34 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.Collection$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Collection {
+ /** @abstract @nodts @return {?string} */
+ m_getFoo__java_lang_Object__java_lang_String(/** ?T */ t) {}
+ /** @nodts */
+ static $clinit() {
+  Collection.$clinit = () =>{};
+  Collection.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__multipleabstractparents_MultipleAbstractParents_Collection = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__multipleabstractparents_MultipleAbstractParents_Collection;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Collection.$markImplementor(/**@type {Function}*/ (Collection));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Collection), 'multipleabstractparents.MultipleAbstractParents$Collection');
+
+exports = Collection;
+
+//# sourceMappingURL=MultipleAbstractParents$Collection.js.map

@@ -1,0 +1,126 @@
+goog.module('nullability.Nullability$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let MyFunction = goog.forwardDeclare('nullability.MyFunction$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @final
+ */
+class Nullability extends j_l_Object {
+ 
+ constructor(/** string */ a) {
+  Nullability.$clinit();
+  super();
+  /**@type {string} @nodts*/
+  this.f_f1__nullability_Nullability_;
+  /**@type {?string} @nodts*/
+  this.f_f2__nullability_Nullability_;
+  /**@type {!List<?>} @nodts*/
+  this.f_f4__nullability_Nullability_;
+  /**@type {List<?>} @nodts*/
+  this.f_f5__nullability_Nullability_;
+  /**@type {!List<?>} @nodts*/
+  this.f_f6__nullability_Nullability_;
+  /**@type {List<?>} @nodts*/
+  this.f_f7__nullability_Nullability_;
+  /**@type {!Array<string>} @nodts*/
+  this.f_f8__nullability_Nullability_;
+  /**@type {!Array<?string>} @nodts*/
+  this.f_f9__nullability_Nullability_;
+  /**@type {Array<string>} @nodts*/
+  this.f_f10__nullability_Nullability_;
+  /**@type {List<?>} @nodts*/
+  this.f_f12__nullability_Nullability_;
+  /**@type {!*} @nodts*/
+  this.f_f13__nullability_Nullability_;
+  /**@type {*} @nodts*/
+  this.f_f14__nullability_Nullability_;
+  this.$ctor__nullability_Nullability__java_lang_String__void(a);
+ }
+ /** @nodts */
+ $ctor__nullability_Nullability__java_lang_String__void(/** string */ a) {
+  this.$ctor__java_lang_Object__void();
+  this.f_f1__nullability_Nullability_ = 'Hello';
+  this.f_f4__nullability_Nullability_ = (/**@type {!ArrayList<string>}*/ (ArrayList.$create__()));
+  this.f_f5__nullability_Nullability_ = (/**@type {!ArrayList<string>}*/ (ArrayList.$create__()));
+  this.f_f6__nullability_Nullability_ = (/**@type {!ArrayList<?string>}*/ (ArrayList.$create__()));
+  this.f_f8__nullability_Nullability_ = (/**@type {!Array<string>}*/ ($Arrays.$create([0], j_l_String)));
+  this.f_f9__nullability_Nullability_ = (/**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String)));
+  this.f_f10__nullability_Nullability_ = (/**@type {!Array<string>}*/ ($Arrays.$create([0], j_l_String)));
+  this.f_f12__nullability_Nullability_ = (/**@type {!ArrayList<?string>}*/ (ArrayList.$create__()));
+  this.f_f13__nullability_Nullability_ = j_l_Object.$create__();
+ }
+ /** @final @nodts @return {string} */
+ m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String(/** string */ a, /** !List<?> */ b, /** ?string */ c) {
+  return '';
+ }
+ /** @final @nodts @return {?string} */
+ m_m2__java_lang_String__java_util_List__java_lang_String(/** ?string */ a, /** !List<?> */ b) {
+  return '';
+ }
+ /** @final @nodts @return {?string} */
+ m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String(/** ?string */ a, /** !Array<string> */ args) {
+  return null;
+ }
+ /** @final @nodts */
+ m_m4__nullability_MyFunction__void(/** !MyFunction */ f) {}
+ /** @final */
+ m5(/** string */ a, /** ?string= */ jsOptional) {}
+ /** @final @nodts */
+ m_testPrimitive__void() {
+  let a = true;
+  let b = true;
+  let c = 0;
+  let /** Byte */ d = null;
+  let e = 97 /* 'a' */;
+  let /** Character */ f = null;
+  let g = 0;
+  let /** ?number */ h = null;
+  let i = 0;
+  let /** Float */ j = null;
+  let k = 0;
+  let /** Integer */ l = null;
+  let m = $Long.fromInt(0);
+  let /** Long */ n = null;
+  let o = 0;
+  let /** Short */ p = null;
+  let /** Unit */ q = null;
+ }
+ /** @nodts */
+ static $clinit() {
+  Nullability.$clinit = () =>{};
+  Nullability.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Nullability;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(Nullability, 'nullability.Nullability');
+
+exports = Nullability;
+
+//# sourceMappingURL=Nullability.js.map

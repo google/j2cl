@@ -1,0 +1,35 @@
+goog.module('transitivejsoverlayimport.NonNativeLower$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NonNativeUpper = goog.require('transitivejsoverlayimport.NonNativeUpper$impl');
+
+class NonNativeLower extends NonNativeUpper {
+ 
+ constructor() {
+  NonNativeLower.$clinit();
+  super();
+  this.$ctor__transitivejsoverlayimport_NonNativeLower__void();
+ }
+ /** @nodts */
+ $ctor__transitivejsoverlayimport_NonNativeLower__void() {}
+ /** @final @nodts */
+ m_doNonNativeLowerInstanceMethod__void() {}
+ /** @nodts */
+ static $clinit() {
+  NonNativeLower.$clinit = () =>{};
+  NonNativeLower.$loadModules();
+  NonNativeUpper.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonNativeLower;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NonNativeLower, 'transitivejsoverlayimport.NonNativeLower');
+
+exports = NonNativeLower;
+
+//# sourceMappingURL=NonNativeLower.js.map

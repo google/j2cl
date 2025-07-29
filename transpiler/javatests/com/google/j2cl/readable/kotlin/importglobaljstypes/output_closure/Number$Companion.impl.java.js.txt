@@ -1,0 +1,73 @@
+goog.module('importglobaljstypes.Number.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let importglobaljstypes_Number = goog.forwardDeclare('importglobaljstypes.Number$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__importglobaljstypes_Number_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__importglobaljstypes_Number_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {boolean} */
+ m_f__double__boolean(/** number */ x) {
+  return Number.isInteger(x);
+ }
+ /** @final @nodts @return {boolean} */
+ m_test__double__boolean(/** number */ arg0) {
+  return importglobaljstypes_Number.m_test__double__boolean(arg0);
+ }
+ /** @final @nodts @template T @return {!Array<T>} */
+ m_createArray__importglobaljstypes_Number_NativeArray_$p_importglobaljstypes_Number_Companion() {
+  return /**@type {!Array<T>}*/ (Array());
+ }
+ /** @final @nodts @return {string} */
+ m_getStringAt__int__java_lang_String_$p_importglobaljstypes_Number_Companion(/** number */ arg0) {
+  return importglobaljstypes_Number.m_getStringAt__int__java_lang_String(arg0);
+ }
+ /** @final @nodts @return {number} */
+ m_getArrayLength__importglobaljstypes_Number_NativeArray__int_$p_importglobaljstypes_Number_Companion(/** !Array<?> */ arg0) {
+  return importglobaljstypes_Number.m_getArrayLength__importglobaljstypes_Number_NativeArray__int(arg0);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__importglobaljstypes_Number_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__importglobaljstypes_Number_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__importglobaljstypes_Number_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  importglobaljstypes_Number = goog.module.get('importglobaljstypes.Number$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__importglobaljstypes_Number_Companion;
+$Util.$setClassMetadata(Companion, 'importglobaljstypes.Number$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Number$Companion.js.map

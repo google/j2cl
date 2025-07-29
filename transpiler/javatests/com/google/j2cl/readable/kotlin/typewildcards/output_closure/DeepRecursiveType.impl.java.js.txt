@@ -1,0 +1,45 @@
+goog.module('typewildcards.DeepRecursiveType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let GenericType = goog.forwardDeclare('typewildcards.GenericType$impl');
+
+/**
+ * @template T
+ */
+class DeepRecursiveType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!DeepRecursiveType<T>} */
+ static $create__() {
+  DeepRecursiveType.$clinit();
+  let $instance = new DeepRecursiveType();
+  $instance.$ctor__typewildcards_DeepRecursiveType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typewildcards_DeepRecursiveType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  DeepRecursiveType.$clinit = () =>{};
+  DeepRecursiveType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DeepRecursiveType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(DeepRecursiveType, 'typewildcards.DeepRecursiveType');
+
+exports = DeepRecursiveType;
+
+//# sourceMappingURL=DeepRecursiveType.js.map

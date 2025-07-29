@@ -1,0 +1,135 @@
+goog.module('variance.VarianceKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let Exception = goog.forwardDeclare('java.lang.Exception$impl');
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Bounded = goog.forwardDeclare('variance.Bounded$impl');
+let Constrained = goog.forwardDeclare('variance.Constrained$impl');
+let Container = goog.forwardDeclare('variance.Container$impl');
+let In = goog.forwardDeclare('variance.In$impl');
+let Out = goog.forwardDeclare('variance.Out$impl');
+let $1 = goog.forwardDeclare('variance.VarianceKt.$1$impl');
+let $2 = goog.forwardDeclare('variance.VarianceKt.$2$impl');
+let $3 = goog.forwardDeclare('variance.VarianceKt.$3$impl');
+let $4 = goog.forwardDeclare('variance.VarianceKt.$4$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class VarianceKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!VarianceKt} */
+ static $create__() {
+  VarianceKt.$clinit();
+  let $instance = new VarianceKt();
+  $instance.$ctor__variance_VarianceKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__variance_VarianceKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T @return {T} */
+ static m_returnsT__java_lang_Object() {
+  VarianceKt.$clinit();
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @nodts */
+ static m_testStarProjections__void() {
+  VarianceKt.$clinit();
+  let inStar = /**@type {!In<*>}*/ ($Casts.$to(j_l_Object.$create__(), /**@type {Function}*/ (In)));
+  inStar = (/**@type {!In<*>}*/ ($Casts.$to(VarianceKt.m_returnsT__java_lang_Object(), /**@type {Function}*/ (In))));
+  inStar = $1.$create__();
+  let /** * */ sIn;
+  sIn = (/**@type {!$1}*/ (inStar)).m_mListIn__variance_Container__variance_Container(/**@type {!Container<string>}*/ (Container.$create__java_lang_Object('Content'))).m_getT__java_lang_Object();
+  let outStar = /**@type {!Out<*>}*/ ($Casts.$to(j_l_Object.$create__(), /**@type {Function}*/ (Out)));
+  outStar = (/**@type {!Out<*>}*/ ($Casts.$to(VarianceKt.m_returnsT__java_lang_Object(), /**@type {Function}*/ (Out))));
+  outStar = $2.$create__();
+  let /** string */ sOut;
+  sOut = (/**@type {string}*/ ($Casts.$to((/**@type {!$2}*/ (outStar)).m_mListOut__variance_Container__variance_Container(/**@type {!Container<string>}*/ (Container.$create__java_lang_Object('Initial'))).m_getT__java_lang_Object(), j_l_String)));
+  let boundedStar = /**@type {!Bounded<(CharSequence|string)>}*/ ($Casts.$to(j_l_Object.$create__(), /**@type {Function}*/ (Bounded)));
+  boundedStar = (/**@type {!Bounded<(CharSequence|string)>}*/ ($Casts.$to(VarianceKt.m_returnsT__java_lang_Object(), /**@type {Function}*/ (Bounded))));
+  boundedStar = $3.$create__();
+  let /** string */ sBounded;
+  sBounded = (/**@type {string}*/ ($Casts.$to((/**@type {!$3}*/ (boundedStar)).m_mList__variance_Container__variance_Container(/**@type {!Container<string>}*/ (Container.$create__java_lang_Object('Initial'))).m_getT__java_lang_Object(), j_l_String)));
+  let constrainedStar = /**@type {!Constrained<(Comparable|boolean|number|string)>}*/ ($Casts.$to(j_l_Object.$create__(), /**@type {Function}*/ (Constrained)));
+  constrainedStar = (/**@type {!Constrained<(Comparable|boolean|number|string)>}*/ ($Casts.$to(VarianceKt.m_returnsT__java_lang_Object(), /**@type {Function}*/ (Constrained))));
+  constrainedStar = $4.$create__();
+  let /** !(CharSequence|string) */ sConstrained;
+  sConstrained = (/**@type {string}*/ ($Casts.$to((/**@type {!$4}*/ (constrainedStar)).m_mList__variance_Container__variance_Container(/**@type {!Container<string>}*/ (Container.$create__java_lang_Object('Initial'))).m_getT__java_lang_Object(), j_l_String)));
+ }
+ /** @nodts @return {!In<?>} */
+ static m_returnInCharSequence__variance_In() {
+  VarianceKt.$clinit();
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @nodts @return {!Out<?>} */
+ static m_returnOutString__variance_Out() {
+  VarianceKt.$clinit();
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @nodts */
+ static m_acceptsOutThrowable__java_lang_Iterable__void(/** Iterable<?> */ unused) {
+  VarianceKt.$clinit();
+ }
+ /** @nodts @return {Iterable<?>} */
+ static m_getIterableOfException__java_lang_Iterable() {
+  VarianceKt.$clinit();
+  return null;
+ }
+ /** @nodts */
+ static m_testDeclarationVariancePropagation__void() {
+  VarianceKt.$clinit();
+  let /** In<?> */ inString;
+  inString = VarianceKt.m_returnInCharSequence__variance_In();
+  let /** Out<?> */ outCharSequence;
+  outCharSequence = VarianceKt.m_returnOutString__variance_Out();
+  let s = /**@type {(CharSequence|string)}*/ ($Casts.$to((/**@type {!Out<?string>}*/ (outCharSequence)).m_m__java_lang_Object(), /**@type {Function}*/ (CharSequence)));
+  let m = (/**@type {!In<*>}*/ (inString)).m_mListIn__variance_Container__variance_Container(/**@type {!Container<string>}*/ (Container.$create__java_lang_Object('')));
+  let outException = VarianceKt.m_getIterableOfException__java_lang_Iterable();
+  VarianceKt.m_acceptsOutThrowable__java_lang_Iterable__void(outException);
+ }
+ /** @nodts */
+ static $clinit() {
+  VarianceKt.$clinit = () =>{};
+  VarianceKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof VarianceKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  CharSequence = goog.module.get('java.lang.CharSequence$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Bounded = goog.module.get('variance.Bounded$impl');
+  Constrained = goog.module.get('variance.Constrained$impl');
+  Container = goog.module.get('variance.Container$impl');
+  In = goog.module.get('variance.In$impl');
+  Out = goog.module.get('variance.Out$impl');
+  $1 = goog.module.get('variance.VarianceKt.$1$impl');
+  $2 = goog.module.get('variance.VarianceKt.$2$impl');
+  $3 = goog.module.get('variance.VarianceKt.$3$impl');
+  $4 = goog.module.get('variance.VarianceKt.$4$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(VarianceKt, 'variance.VarianceKt');
+
+exports = VarianceKt;
+
+//# sourceMappingURL=VarianceKt.js.map

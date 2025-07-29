@@ -1,0 +1,112 @@
+goog.module('jsproperties.Buzz$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Buzz extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_f__jsproperties_Buzz_ = 0;
+  /**@type {number} @nodts*/
+  this.f_backingFieldGetter__jsproperties_Buzz_ = 0;
+  /**@type {number} @nodts*/
+  this.f_backingFieldSetter__jsproperties_Buzz_ = 0;
+  /**@type {number} @nodts*/
+  this.f_fieldWithCustomName__jsproperties_Buzz_ = 0;
+  /**@type {number} @nodts*/
+  this.f_getterSetterWithCustomName__jsproperties_Buzz_ = 0;
+ }
+ /** @nodts @return {!Buzz} */
+ static $create__int(/** number */ f) {
+  Buzz.$clinit();
+  let $instance = new Buzz();
+  $instance.$ctor__jsproperties_Buzz__int__void(f);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_Buzz__int__void(/** number */ f) {
+  this.$ctor__java_lang_Object__void();
+  this.f_f__jsproperties_Buzz_ = f;
+  this.f_backingFieldGetter__jsproperties_Buzz_ = 20;
+  this.f_backingFieldSetter__jsproperties_Buzz_ = 30;
+  this.f_fieldWithCustomName__jsproperties_Buzz_ = 70;
+  this.f_getterSetterWithCustomName__jsproperties_Buzz_ = 80;
+ }
+ /** @return {number} */
+ get f() {
+  return this.f_f__jsproperties_Buzz_;
+ }
+ /** @return {number} */
+ get fieldGetter() {
+  return 10;
+ }
+ /** @return {number} */
+ get backingFieldGetter() {
+  return this.f_backingFieldGetter__jsproperties_Buzz_;
+ }
+ /** @final @nodts @return {number} */
+ m_getBackingFieldSetter__int() {
+  return this.f_backingFieldSetter__jsproperties_Buzz_;
+ }
+ 
+ set backingFieldSetter(/** number */ set__) {
+  this.f_backingFieldSetter__jsproperties_Buzz_ = set__;
+ }
+ /** @return {number} */
+ get fieldGetterAndSetter() {
+  return 40;
+ }
+ 
+ set fieldGetterAndSetter(/** number */ x) {}
+ /** @return {number} */
+ get fieldNonJsPropertySetter() {
+  return 50;
+ }
+ /** @final @nodts */
+ m_setFieldNonJsPropertySetter__int__void(/** number */ x) {}
+ /** @final @nodts @return {number} */
+ m_getFieldNonJsPropertyGetter__int() {
+  return 60;
+ }
+ 
+ set fieldNonJsPropertyGetter(/** number */ x) {}
+ /** @return {number} */
+ get otherName() {
+  return this.f_fieldWithCustomName__jsproperties_Buzz_;
+ }
+ 
+ set otherName(/** number */ set__) {
+  this.f_fieldWithCustomName__jsproperties_Buzz_ = set__;
+ }
+ /** @return {number} */
+ get anotherName() {
+  return this.f_getterSetterWithCustomName__jsproperties_Buzz_;
+ }
+ 
+ set mismatchedName(/** number */ set__) {
+  this.f_getterSetterWithCustomName__jsproperties_Buzz_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  Buzz.$clinit = () =>{};
+  Buzz.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Buzz;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Buzz, 'jsproperties.Buzz');
+
+exports = Buzz;
+
+//# sourceMappingURL=Buzz.js.map

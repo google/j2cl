@@ -1,0 +1,235 @@
+goog.module('specialoverrides.MyMap$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Map = goog.require('java.util.Map$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let Entry = goog.forwardDeclare('java.util.Map.Entry$impl');
+let Set = goog.forwardDeclare('java.util.Set$impl');
+let BiConsumer = goog.forwardDeclare('java.util.function.BiConsumer$impl');
+let BiFunction = goog.forwardDeclare('java.util.function.BiFunction$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @abstract
+ * @implements {Map<string, Integer>}
+ */
+class MyMap extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__specialoverrides_MyMap__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ m_getSize__int() {
+  return 1;
+ }
+ /** @nodts @return {boolean} */
+ m_containsKey__java_lang_String__boolean(/** string */ key) {
+  return false;
+ }
+ /** @nodts @return {boolean} */
+ m_containsValue__java_lang_Integer__boolean(/** Integer */ value) {
+  return false;
+ }
+ /** @nodts @return {Integer} */
+ m_get__java_lang_String__java_lang_Integer(/** string */ key) {
+  return null;
+ }
+ /** @nodts @return {Integer} */
+ m_getOrDefault__java_lang_String__java_lang_Integer__java_lang_Integer(/** string */ key, /** Integer */ default_1) {
+  return null;
+ }
+ /** @nodts @return {Integer} */
+ m_remove__java_lang_String__java_lang_Integer(/** string */ key) {
+  return null;
+ }
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ /** @final @override @return {boolean} */
+ containsKey(/** * */ key) {
+  if (!j_l_String.$isInstance(key)) {
+   return false;
+  }
+  return this.m_containsKey__java_lang_String__boolean(/**@type {string}*/ (key));
+ }
+ /** @final @override @return {boolean} */
+ containsValue(/** * */ value) {
+  if (!($Equality.$same(value, null) || Integer.$isInstance(value))) {
+   return false;
+  }
+  return this.m_containsValue__java_lang_Integer__boolean(/**@type {Integer}*/ (value));
+ }
+ /** @final @override @return {Integer} */
+ get(/** * */ key) {
+  if (!j_l_String.$isInstance(key)) {
+   return null;
+  }
+  return this.m_get__java_lang_String__java_lang_Integer(/**@type {string}*/ (key));
+ }
+ /** @final @nodts @return {Integer} */
+ m_getOrDefault__java_lang_Object__java_lang_Integer__java_lang_Integer(/** * */ key, /** Integer */ defaultValue) {
+  if (!j_l_String.$isInstance(key)) {
+   return defaultValue;
+  }
+  return this.m_getOrDefault__java_lang_String__java_lang_Integer__java_lang_Integer(/**@type {string}*/ (key), defaultValue);
+ }
+ /** @final @override @return {Integer} */
+ remove(/** * */ key) {
+  if (!j_l_String.$isInstance(key)) {
+   return null;
+  }
+  return this.m_remove__java_lang_String__java_lang_Integer(/**@type {string}*/ (key));
+ }
+ /** @abstract @nodts @return {!Set<string>} */
+ m_getKeys__java_util_Set() {}
+ /** @final @override @return {!Set<string>} */
+ keySet() {
+  return this.m_getKeys__java_util_Set();
+ }
+ /** @abstract @nodts @return {!Collection<Integer>} */
+ m_getValues__java_util_Collection() {}
+ /** @final @override @return {!Collection<Integer>} */
+ values() {
+  return this.m_getValues__java_util_Collection();
+ }
+ /** @abstract @nodts @return {!Set<!Entry<string, Integer>>} */
+ m_getEntries__java_util_Set() {}
+ /** @final @override @return {!Set<!Entry<string, Integer>>} */
+ entrySet() {
+  return this.m_getEntries__java_util_Set();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {Integer} */
+ m_compute__java_lang_Object__java_util_function_BiFunction__java_lang_Object(/** string */ arg0, /** !BiFunction<?, ?, ?> */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_compute__$default__java_util_Map__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, /**@type {string}*/ ($Casts.$to(arg0, j_l_String)), arg1), Integer));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {Integer} */
+ m_computeIfAbsent__java_lang_Object__java_util_function_Function__java_lang_Object(/** string */ arg0, /** !j_u_function_Function<?, ?> */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_computeIfAbsent__$default__java_util_Map__java_lang_Object__java_util_function_Function__java_lang_Object(this, /**@type {string}*/ ($Casts.$to(arg0, j_l_String)), arg1), Integer));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {Integer} */
+ m_computeIfPresent__java_lang_Object__java_util_function_BiFunction__java_lang_Object(/** string */ arg0, /** !BiFunction<?, ?, ?> */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_computeIfPresent__$default__java_util_Map__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, /**@type {string}*/ ($Casts.$to(arg0, j_l_String)), arg1), Integer));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_forEach__java_util_function_BiConsumer__void(/** !BiConsumer<?, ?> */ arg0) {
+  Map.m_forEach__$default__java_util_Map__java_util_function_BiConsumer__void(this, arg0);
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {Integer} */
+ getOrDefault(/** * */ arg0, /** Integer */ arg1) {
+  return this.m_getOrDefault__java_lang_Object__java_lang_Integer__java_lang_Integer(arg0, /**@type {Integer}*/ ($Casts.$to(arg1, Integer)));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {Integer} */
+ m_merge__java_lang_Object__java_lang_Object__java_util_function_BiFunction__java_lang_Object(/** string */ arg0, /** Integer */ arg1, /** !BiFunction<?, ?, ?> */ arg2) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_merge__$default__java_util_Map__java_lang_Object__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, /**@type {string}*/ ($Casts.$to(arg0, j_l_String)), /**@type {Integer}*/ ($Casts.$to(arg1, Integer)), arg2), Integer));
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {Integer} */
+ putIfAbsent(/** string */ arg0, /** Integer */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_putIfAbsent__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, /**@type {string}*/ ($Casts.$to(arg0, j_l_String)), /**@type {Integer}*/ ($Casts.$to(arg1, Integer))), Integer));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {boolean} */
+ m_remove__java_lang_Object__java_lang_Object__boolean(/** * */ arg0, /** * */ arg1) {
+  return Map.m_remove__$default__java_util_Map__java_lang_Object__java_lang_Object__boolean(this, arg0, arg1);
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {Integer} */
+ replace(/** string */ arg0, /** Integer */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_replace__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, /**@type {string}*/ ($Casts.$to(arg0, j_l_String)), /**@type {Integer}*/ ($Casts.$to(arg1, Integer))), Integer));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {boolean} */
+ m_replace__java_lang_Object__java_lang_Object__java_lang_Object__boolean(/** string */ arg0, /** Integer */ arg1, /** Integer */ arg2) {
+  return Map.m_replace__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object__boolean(this, /**@type {string}*/ ($Casts.$to(arg0, j_l_String)), /**@type {Integer}*/ ($Casts.$to(arg1, Integer)), /**@type {Integer}*/ ($Casts.$to(arg2, Integer)));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_replaceAll__java_util_function_BiFunction__void(/** !BiFunction<?, ?, ?> */ arg0) {
+  Map.m_replaceAll__$default__java_util_Map__java_util_function_BiFunction__void(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} @return {Integer} */
+ m_compute__java_lang_String__java_util_function_BiFunction__java_lang_Integer(/** string */ arg0, /** !BiFunction<?, ?, ?> */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_compute__$default__java_util_Map__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, arg0, arg1), Integer));
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} @return {Integer} */
+ m_computeIfAbsent__java_lang_String__java_util_function_Function__java_lang_Integer(/** string */ arg0, /** !j_u_function_Function<?, ?> */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_computeIfAbsent__$default__java_util_Map__java_lang_Object__java_util_function_Function__java_lang_Object(this, arg0, arg1), Integer));
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} @return {Integer} */
+ m_computeIfPresent__java_lang_String__java_util_function_BiFunction__java_lang_Integer(/** string */ arg0, /** !BiFunction<?, ?, ?> */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_computeIfPresent__$default__java_util_Map__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, arg0, arg1), Integer));
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} @return {Integer} */
+ m_merge__java_lang_String__java_lang_Integer__java_util_function_BiFunction__java_lang_Integer(/** string */ arg0, /** Integer */ arg1, /** !BiFunction<?, ?, ?> */ arg2) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_merge__$default__java_util_Map__java_lang_Object__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, arg0, arg1, arg2), Integer));
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} @return {Integer} */
+ m_putIfAbsent__java_lang_String__java_lang_Integer__java_lang_Integer(/** string */ arg0, /** Integer */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_putIfAbsent__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, arg0, arg1), Integer));
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} @return {Integer} */
+ m_replace__java_lang_String__java_lang_Integer__java_lang_Integer(/** string */ arg0, /** Integer */ arg1) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_replace__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, arg0, arg1), Integer));
+ }
+ //Default method forwarding stub.
+ /** @nodts @suppress{visibility} @return {boolean} */
+ m_replace__java_lang_String__java_lang_Integer__java_lang_Integer__boolean(/** string */ arg0, /** Integer */ arg1, /** Integer */ arg2) {
+  return Map.m_replace__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object__boolean(this, arg0, arg1, arg2);
+ }
+ /** @nodts */
+ static $clinit() {
+  MyMap.$clinit = () =>{};
+  MyMap.$loadModules();
+  j_l_Object.$clinit();
+  Map.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyMap;
+ }
+ /** @abstract @override @suppress{visibility} */
+ clear() {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ isEmpty() {}
+ /** @abstract @override @suppress{visibility} @return {Integer} */
+ put(/** string */ arg0, /** Integer */ arg1) {}
+ /** @abstract @override @suppress{visibility} */
+ putAll(/** Map<?, ?> */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Map.$markImplementor(MyMap);
+$Util.$setClassMetadata(MyMap, 'specialoverrides.MyMap');
+
+exports = MyMap;
+
+//# sourceMappingURL=MyMap.js.map

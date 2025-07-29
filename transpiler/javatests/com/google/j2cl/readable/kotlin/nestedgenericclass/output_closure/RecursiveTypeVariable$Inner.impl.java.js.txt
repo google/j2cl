@@ -1,0 +1,49 @@
+goog.module('nestedgenericclass.RecursiveTypeVariable.Inner$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RecursiveTypeVariable = goog.forwardDeclare('nestedgenericclass.RecursiveTypeVariable$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Inner extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!RecursiveTypeVariable<T>} @nodts*/
+  this.$outer_this__nestedgenericclass_RecursiveTypeVariable_Inner;
+ }
+ /** @nodts @template T @return {!Inner<T>} */
+ static $create__nestedgenericclass_RecursiveTypeVariable(/** !RecursiveTypeVariable<T> */ $outer_this) {
+  Inner.$clinit();
+  let $instance = new Inner();
+  $instance.$ctor__nestedgenericclass_RecursiveTypeVariable_Inner__nestedgenericclass_RecursiveTypeVariable__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nestedgenericclass_RecursiveTypeVariable_Inner__nestedgenericclass_RecursiveTypeVariable__void(/** !RecursiveTypeVariable<T> */ $outer_this) {
+  this.$outer_this__nestedgenericclass_RecursiveTypeVariable_Inner = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Inner.$clinit = () =>{};
+  Inner.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Inner;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Inner, 'nestedgenericclass.RecursiveTypeVariable$Inner');
+
+exports = Inner;
+
+//# sourceMappingURL=RecursiveTypeVariable$Inner.js.map

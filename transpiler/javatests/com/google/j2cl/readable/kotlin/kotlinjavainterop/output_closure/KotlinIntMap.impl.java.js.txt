@@ -1,0 +1,214 @@
+goog.module('kotlinjavainterop.KotlinIntMap$impl');
+
+const JavaIntMap = goog.require('kotlinjavainterop.JavaIntMap$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let Map = goog.forwardDeclare('java.util.Map$impl');
+let Entry = goog.forwardDeclare('java.util.Map.Entry$impl');
+let Set = goog.forwardDeclare('java.util.Set$impl');
+let BiConsumer = goog.forwardDeclare('java.util.function.BiConsumer$impl');
+let BiFunction = goog.forwardDeclare('java.util.function.BiFunction$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class KotlinIntMap extends JavaIntMap {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!KotlinIntMap} */
+ static $create__() {
+  KotlinIntMap.$clinit();
+  let $instance = new KotlinIntMap();
+  $instance.$ctor__kotlinjavainterop_KotlinIntMap__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__kotlinjavainterop_KotlinIntMap__void() {
+  this.$ctor__kotlinjavainterop_JavaIntMap__void();
+ }
+ /** @override */
+ clear() {
+  super.clear();
+ }
+ /** @override @nodts @return {Integer} */
+ m_compute__java_lang_Integer__java_util_function_BiFunction__java_lang_Integer(/** Integer */ key, /** !BiFunction<?, ?, ?> */ remappingFunction) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_compute__$default__java_util_Map__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, key, remappingFunction), Integer));
+ }
+ /** @override @nodts @return {Integer} */
+ m_computeIfPresent__java_lang_Integer__java_util_function_BiFunction__java_lang_Integer(/** Integer */ key, /** !BiFunction<?, ?, ?> */ remappingFunction) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_computeIfPresent__$default__java_util_Map__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, key, remappingFunction), Integer));
+ }
+ /** @nodts @return {number} */
+ m_computeIfAbsent__java_lang_Integer__java_util_function_Function__int(/** Integer */ key, /** !j_u_function_Function<?, ?> */ mappingFunction) {
+  return (/**@type {!Integer}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {?}*/ ($Casts.$to(Map.m_computeIfAbsent__$default__java_util_Map__java_lang_Object__java_util_function_Function__java_lang_Object(this, key, mappingFunction), Integer))))).m_intValue__int();
+ }
+ /** @override @nodts @return {Integer} */
+ m_put__java_lang_Integer__java_lang_Integer__java_lang_Integer(/** Integer */ key, /** Integer */ value) {
+  return super.m_put__java_lang_Integer__java_lang_Integer__java_lang_Integer(key, value);
+ }
+ /** @override */
+ putAll(/** !Map<?, ?> */ from) {
+  super.putAll(from);
+ }
+ /** @nodts @return {Integer} */
+ m_remove__java_lang_Integer__java_lang_Integer(/** Integer */ key) {
+  return super.remove(key);
+ }
+ /** @nodts @return {boolean} */
+ m_containsKey__java_lang_Integer__boolean(/** Integer */ key) {
+  return super.containsKey(key);
+ }
+ /** @nodts @return {boolean} */
+ m_containsValue__java_lang_Integer__boolean(/** Integer */ value) {
+  return super.containsValue(value);
+ }
+ /** @nodts @return {Integer} */
+ m_get__java_lang_Integer__java_lang_Integer(/** Integer */ key) {
+  return super.get(key);
+ }
+ /** @override @return {boolean} */
+ isEmpty() {
+  return super.isEmpty();
+ }
+ /** @nodts @return {Integer} */
+ m_merge__java_lang_Integer__int__java_util_function_BiFunction__java_lang_Integer(/** Integer */ key, /** number */ value, /** !BiFunction<?, ?, ?> */ remappingFunction) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_merge__$default__java_util_Map__java_lang_Object__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, key, Integer.m_valueOf__int__java_lang_Integer(value), remappingFunction), Integer));
+ }
+ /** @override @nodts @return {Integer} */
+ m_replace__java_lang_Integer__java_lang_Integer__java_lang_Integer(/** Integer */ key, /** Integer */ value) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_replace__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, key, value), Integer));
+ }
+ /** @override @nodts @return {boolean} */
+ m_replace__java_lang_Integer__java_lang_Integer__java_lang_Integer__boolean(/** Integer */ key, /** Integer */ oldValue, /** Integer */ newValue) {
+  return Map.m_replace__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object__boolean(this, key, oldValue, newValue);
+ }
+ /** @override @nodts @return {Integer} */
+ m_putIfAbsent__java_lang_Integer__java_lang_Integer__java_lang_Integer(/** Integer */ key, /** Integer */ value) {
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_putIfAbsent__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, key, value), Integer));
+ }
+ /** @override @nodts */
+ m_replaceAll__java_util_function_BiFunction__void(/** !BiFunction<?, ?, ?> */ function_1) {
+  Map.m_replaceAll__$default__java_util_Map__java_util_function_BiFunction__void(this, function_1);
+ }
+ /** @nodts @return {boolean} */
+ m_remove__java_lang_Integer__java_lang_Integer__boolean(/** Integer */ key, /** Integer */ value) {
+  return Map.m_remove__$default__java_util_Map__java_lang_Object__java_lang_Object__boolean(this, key, value);
+ }
+ /** @nodts @return {!Set<!Entry<!Integer, !Integer>>} */
+ m_getEntries__java_util_Set() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(super.entrySet());
+ }
+ /** @nodts @return {!Set<!Integer>} */
+ m_getKeys__java_util_Set() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(super.keySet());
+ }
+ /** @nodts @return {!Collection<!Integer>} */
+ m_getValues__java_util_Collection() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(super.values());
+ }
+ /** @override @nodts */
+ m_forEach__java_util_function_BiConsumer__void(/** !BiConsumer<?, ?> */ action) {
+  Map.m_forEach__$default__java_util_Map__java_util_function_BiConsumer__void(this, action);
+ }
+ /** @nodts @return {number} */
+ m_getOrDefault__java_lang_Integer__java_lang_Integer__int(/** Integer */ key, /** Integer */ defaultValue) {
+  return (/**@type {!Integer}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {?}*/ ($Casts.$to(Map.m_getOrDefault__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, key, defaultValue), Integer))))).m_intValue__int();
+ }
+ /** @nodts @return {number} */
+ m_getSize__int() {
+  return super.size();
+ }
+ /** @final @override @return {Integer} */
+ remove(/** * */ key) {
+  if (!($Equality.$same(key, null) || Integer.$isInstance(key))) {
+   return null;
+  }
+  return this.m_remove__java_lang_Integer__java_lang_Integer(/**@type {Integer}*/ (key));
+ }
+ /** @final @override @return {boolean} */
+ containsKey(/** * */ key) {
+  if (!($Equality.$same(key, null) || Integer.$isInstance(key))) {
+   return false;
+  }
+  return this.m_containsKey__java_lang_Integer__boolean(/**@type {Integer}*/ (key));
+ }
+ /** @final @override @return {boolean} */
+ containsValue(/** * */ value) {
+  if (!($Equality.$same(value, null) || Integer.$isInstance(value))) {
+   return false;
+  }
+  return this.m_containsValue__java_lang_Integer__boolean(/**@type {Integer}*/ (value));
+ }
+ /** @final @override @return {Integer} */
+ get(/** * */ key) {
+  if (!($Equality.$same(key, null) || Integer.$isInstance(key))) {
+   return null;
+  }
+  return this.m_get__java_lang_Integer__java_lang_Integer(/**@type {Integer}*/ (key));
+ }
+ /** @final @override @nodts @return {boolean} */
+ m_remove__java_lang_Object__java_lang_Object__boolean(/** * */ key, /** * */ value) {
+  if (!($Equality.$same(key, null) || Integer.$isInstance(key))) {
+   return false;
+  }
+  if (!($Equality.$same(value, null) || Integer.$isInstance(value))) {
+   return false;
+  }
+  return this.m_remove__java_lang_Integer__java_lang_Integer__boolean(/**@type {Integer}*/ (key), /**@type {Integer}*/ (value));
+ }
+ /** @final @override @return {!Set<!Entry<!Integer, !Integer>>} */
+ entrySet() {
+  return this.m_getEntries__java_util_Set();
+ }
+ /** @final @override @return {!Set<!Integer>} */
+ keySet() {
+  return this.m_getKeys__java_util_Set();
+ }
+ /** @final @override @return {!Collection<!Integer>} */
+ values() {
+  return this.m_getValues__java_util_Collection();
+ }
+ /** @final @nodts @return {number} */
+ m_getOrDefault__java_lang_Object__java_lang_Integer__int(/** * */ key, /** Integer */ defaultValue) {
+  if (!($Equality.$same(key, null) || Integer.$isInstance(key))) {
+   return defaultValue.m_intValue__int();
+  }
+  return this.m_getOrDefault__java_lang_Integer__java_lang_Integer__int(/**@type {Integer}*/ (key), defaultValue);
+ }
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  KotlinIntMap.$clinit = () =>{};
+  KotlinIntMap.$loadModules();
+  JavaIntMap.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KotlinIntMap;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Map = goog.module.get('java.util.Map$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(KotlinIntMap, 'kotlinjavainterop.KotlinIntMap');
+
+exports = KotlinIntMap;
+
+//# sourceMappingURL=KotlinIntMap.js.map

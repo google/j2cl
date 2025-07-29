@@ -1,0 +1,42 @@
+goog.module('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.$1$impl');
+
+/**
+ * @interface
+ */
+class InterfaceWithThisReference {
+ /** @abstract @nodts */
+ m_foo__void() {}
+ /** @nodts */
+ static m_foo__$default__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void(/** !InterfaceWithThisReference */ $thisArg) {
+  InterfaceWithThisReference.$clinit();
+  $1.$create__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference($thisArg);
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithThisReference.$clinit = () =>{};
+  InterfaceWithThisReference.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.$1$impl');
+ }
+}
+InterfaceWithThisReference.$markImplementor(/**@type {Function}*/ (InterfaceWithThisReference));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceWithThisReference), 'nestedlocalclasses.NestedLocalClasses$InterfaceWithThisReference');
+
+exports = InterfaceWithThisReference;
+
+//# sourceMappingURL=NestedLocalClasses$InterfaceWithThisReference.js.map

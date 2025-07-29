@@ -1,0 +1,34 @@
+goog.module('inlineclass.Factory$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Factory {
+ /** @abstract @nodts @return {T} */
+ m_create__int__java_lang_Object(/** number */ i) {}
+ /** @nodts */
+ static $clinit() {
+  Factory.$clinit = () =>{};
+  Factory.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__inlineclass_Factory = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__inlineclass_Factory;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Factory.$markImplementor(/**@type {Function}*/ (Factory));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Factory), 'inlineclass.Factory');
+
+exports = Factory;
+
+//# sourceMappingURL=Factory.js.map

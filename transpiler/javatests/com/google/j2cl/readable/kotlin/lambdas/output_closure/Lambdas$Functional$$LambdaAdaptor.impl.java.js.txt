@@ -1,0 +1,49 @@
+goog.module('lambdas.Lambdas.Functional.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Functional = goog.require('lambdas.Lambdas.Functional$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {Functional<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(!Functional<T>):Functional<T> */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(!Functional<T>):Functional<T>} @nodts*/
+  this.f_fn__lambdas_Lambdas_Functional_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_Functional_$LambdaAdaptor__lambdas_Lambdas_Functional_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_Functional_$LambdaAdaptor__lambdas_Lambdas_Functional_$JsFunction__void(/** ?function(!Functional<T>):Functional<T> */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_Functional_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {Functional<T>} */
+ m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional(/** !Functional<T> */ arg0) {
+  let /** ?function(!Functional<T>):Functional<T> */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_Functional_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Functional.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'lambdas.Lambdas$Functional$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Lambdas$Functional$$LambdaAdaptor.js.map

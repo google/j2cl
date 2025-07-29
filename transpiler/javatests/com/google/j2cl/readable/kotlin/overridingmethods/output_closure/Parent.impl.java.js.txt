@@ -1,0 +1,52 @@
+goog.module('overridingmethods.Parent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Parent extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Parent} */
+ static $create__() {
+  Parent.$clinit();
+  let $instance = new Parent();
+  $instance.$ctor__overridingmethods_Parent__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__overridingmethods_Parent__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_nonFinal__void() {}
+ /** @nodts */
+ m_finalInChild__void() {}
+ /** @final @nodts */
+ m_finalInParent__void() {}
+ /** @nodts @return {number} */
+ m_getProperty__int() {
+  return 1;
+ }
+ /** @nodts */
+ m_setProperty__int__void(/** number */ value) {}
+ /** @nodts */
+ static $clinit() {
+  Parent.$clinit = () =>{};
+  Parent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Parent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Parent, 'overridingmethods.Parent');
+
+exports = Parent;
+
+//# sourceMappingURL=Parent.js.map

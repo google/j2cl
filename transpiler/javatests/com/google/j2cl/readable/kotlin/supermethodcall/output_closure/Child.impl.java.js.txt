@@ -1,0 +1,88 @@
+goog.module('supermethodcall.Child$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const GrandParentInterface = goog.require('supermethodcall.GrandParentInterface$impl');
+const Parent = goog.require('supermethodcall.Parent$impl');
+
+/**
+ * @final
+ * @implements {GrandParentInterface}
+ */
+class Child extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Child} */
+ static $create__() {
+  Child.$clinit();
+  let $instance = new Child();
+  $instance.$ctor__supermethodcall_Child__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__supermethodcall_Child__void() {
+  this.$ctor__supermethodcall_Parent__void();
+ }
+ /** @override @nodts */
+ m_parentSimplest__void() {
+  super.m_parentSimplest__void();
+ }
+ /** @override @nodts */
+ m_parentWithParams__int__void(/** number */ foo) {
+  super.m_parentWithParams__int__void(foo);
+ }
+ /** @nodts @return {!Child} */
+ m_parentWithChangingReturn__supermethodcall_Child() {
+  super.m_parentWithChangingReturn__java_lang_Object();
+  return this;
+ }
+ /** @override @nodts */
+ m_grandParentSimplest__void() {
+  super.m_grandParentSimplest__void();
+ }
+ /** @override @nodts */
+ m_grandParentWithParams__int__void(/** number */ foo) {
+  super.m_grandParentWithParams__int__void(foo);
+ }
+ /** @nodts @return {!Child} */
+ m_grandParentWithChangingReturn__supermethodcall_Child() {
+  super.m_grandParentWithChangingReturn__java_lang_Object();
+  return this;
+ }
+ /** @override @nodts */
+ m_defaultGrandParent__void() {
+  super.m_defaultGrandParent__void();
+  GrandParentInterface.m_defaultGrandParent__$default__supermethodcall_GrandParentInterface__void(this);
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Child} */
+ m_grandParentWithChangingReturn__java_lang_Object() {
+  return this.m_grandParentWithChangingReturn__supermethodcall_Child();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Child} */
+ m_parentWithChangingReturn__java_lang_Object() {
+  return this.m_parentWithChangingReturn__supermethodcall_Child();
+ }
+ /** @nodts */
+ static $clinit() {
+  Child.$clinit = () =>{};
+  Child.$loadModules();
+  Parent.$clinit();
+  GrandParentInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Child;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+GrandParentInterface.$markImplementor(Child);
+$Util.$setClassMetadata(Child, 'supermethodcall.Child');
+
+exports = Child;
+
+//# sourceMappingURL=Child.js.map

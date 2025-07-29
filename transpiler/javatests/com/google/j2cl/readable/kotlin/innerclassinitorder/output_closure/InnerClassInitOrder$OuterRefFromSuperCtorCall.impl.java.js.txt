@@ -1,0 +1,51 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall$impl');
+
+const OuterRefFromSuperCtorBase = goog.require('innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder$impl');
+let $1 = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.$1$impl');
+
+/**
+ * @final
+ */
+class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!InnerClassInitOrder} @nodts*/
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall;
+ }
+ /** @nodts @return {!OuterRefFromSuperCtorCall} */
+ static $create__innerclassinitorder_InnerClassInitOrder(/** !InnerClassInitOrder */ $outer_this) {
+  OuterRefFromSuperCtorCall.$clinit();
+  let $instance = new OuterRefFromSuperCtorCall();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__innerclassinitorder_InnerClassInitOrder__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__innerclassinitorder_InnerClassInitOrder__void(/** !InnerClassInitOrder */ $outer_this) {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall = $outer_this;
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object__void($1.$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall(this));
+ }
+ /** @nodts */
+ static $clinit() {
+  OuterRefFromSuperCtorCall.$clinit = () =>{};
+  OuterRefFromSuperCtorCall.$loadModules();
+  OuterRefFromSuperCtorBase.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterRefFromSuperCtorCall;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.$1$impl');
+ }
+}
+$Util.$setClassMetadata(OuterRefFromSuperCtorCall, 'innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall');
+
+exports = OuterRefFromSuperCtorCall;
+
+//# sourceMappingURL=InnerClassInitOrder$OuterRefFromSuperCtorCall.js.map

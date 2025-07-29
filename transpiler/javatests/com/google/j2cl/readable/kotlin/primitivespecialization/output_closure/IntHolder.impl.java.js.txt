@@ -1,0 +1,69 @@
+goog.module('primitivespecialization.IntHolder$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Holder = goog.require('primitivespecialization.Holder$impl');
+const IntGetter = goog.require('primitivespecialization.IntGetter$impl');
+const IntSetter = goog.require('primitivespecialization.IntSetter$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @extends {Holder<!Integer>}
+ * @implements {IntGetter}
+ * @implements {IntSetter}
+ */
+class IntHolder extends Holder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!IntHolder} */
+ static $create__() {
+  IntHolder.$clinit();
+  let $instance = new IntHolder();
+  $instance.$ctor__primitivespecialization_IntHolder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_IntHolder__void() {
+  this.$ctor__primitivespecialization_Holder__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(1));
+ }
+ /** @final @nodts @return {number} */
+ m_test__int() {
+  return (/**@type {!Integer}*/ ($Casts.$to(this.m_get__java_lang_Object(), Integer))).m_intValue__int();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {number} */
+ m_get__int() {
+  return (/**@type {!Integer}*/ ($Casts.$to(this.m_get__java_lang_Object(), Integer))).m_intValue__int();
+ }
+ //Specialized bridge method.
+ /** @override @nodts @suppress{visibility} */
+ m_set__int__void(/** number */ arg0) {
+  super.m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  IntHolder.$clinit = () =>{};
+  IntHolder.$loadModules();
+  Holder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IntHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+IntGetter.$markImplementor(IntHolder);
+IntSetter.$markImplementor(IntHolder);
+$Util.$setClassMetadata(IntHolder, 'primitivespecialization.IntHolder');
+
+exports = IntHolder;
+
+//# sourceMappingURL=IntHolder.js.map

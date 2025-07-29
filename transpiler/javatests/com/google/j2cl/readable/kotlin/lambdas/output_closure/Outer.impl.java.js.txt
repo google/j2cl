@@ -1,0 +1,55 @@
+goog.module('lambdas.Outer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Runnable = goog.forwardDeclare('lambdas.Runnable$impl');
+
+/**
+ * @final
+ */
+class Outer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Outer} */
+ static $create__() {
+  Outer.$clinit();
+  let $instance = new Outer();
+  $instance.$ctor__lambdas_Outer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_Outer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_m__void() {}
+ /** @final @nodts */
+ m_n__void() {
+  let r = Runnable.$adapt(() =>{
+   this.m_m__void();
+  });
+ }
+ /** @nodts */
+ static $clinit() {
+  Outer.$clinit = () =>{};
+  Outer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Outer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Runnable = goog.module.get('lambdas.Runnable$impl');
+ }
+}
+$Util.$setClassMetadata(Outer, 'lambdas.Outer');
+
+exports = Outer;
+
+//# sourceMappingURL=Outer.js.map

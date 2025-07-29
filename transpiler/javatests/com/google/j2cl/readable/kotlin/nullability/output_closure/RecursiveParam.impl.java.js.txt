@@ -1,0 +1,47 @@
+goog.module('nullability.RecursiveParam$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Marker = goog.forwardDeclare('nullability.Marker$impl');
+let Recursive = goog.forwardDeclare('nullability.Recursive$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class RecursiveParam extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!RecursiveParam<T>} */
+ static $create__() {
+  RecursiveParam.$clinit();
+  let $instance = new RecursiveParam();
+  $instance.$ctor__nullability_RecursiveParam__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_RecursiveParam__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveParam.$clinit = () =>{};
+  RecursiveParam.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecursiveParam;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(RecursiveParam, 'nullability.RecursiveParam');
+
+exports = RecursiveParam;
+
+//# sourceMappingURL=RecursiveParam.js.map

@@ -1,0 +1,52 @@
+goog.module('typewildcards.TypeWildCards.OtherElement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const HasKey = goog.require('typewildcards.TypeWildCards.HasKey$impl');
+const IntegerSupplier = goog.require('typewildcards.TypeWildCards.IntegerSupplier$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let TypeWildCards = goog.forwardDeclare('typewildcards.TypeWildCards$impl');
+
+/**
+ * @abstract
+ * @implements {IntegerSupplier}
+ * @implements {HasKey}
+ */
+class OtherElement extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!TypeWildCards} @nodts*/
+  this.$outer_this__typewildcards_TypeWildCards_OtherElement;
+ }
+ /** @nodts */
+ $ctor__typewildcards_TypeWildCards_OtherElement__typewildcards_TypeWildCards__void(/** !TypeWildCards */ $outer_this) {
+  this.$outer_this__typewildcards_TypeWildCards_OtherElement = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  OtherElement.$clinit = () =>{};
+  OtherElement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OtherElement;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {Integer} */
+ m_get__java_lang_Integer() {}
+ /** @abstract @override @nodts @suppress{visibility} @return {?string} */
+ m_getKey__java_lang_String() {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IntegerSupplier.$markImplementor(OtherElement);
+HasKey.$markImplementor(OtherElement);
+$Util.$setClassMetadata(OtherElement, 'typewildcards.TypeWildCards$OtherElement');
+
+exports = OtherElement;
+
+//# sourceMappingURL=TypeWildCards$OtherElement.js.map

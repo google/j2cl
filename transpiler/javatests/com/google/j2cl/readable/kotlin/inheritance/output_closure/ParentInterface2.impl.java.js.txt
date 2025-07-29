@@ -1,0 +1,31 @@
+goog.module('inheritance.ParentInterface2$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class ParentInterface2 {
+ /** @nodts */
+ static $clinit() {
+  ParentInterface2.$clinit = () =>{};
+  ParentInterface2.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__inheritance_ParentInterface2 = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__inheritance_ParentInterface2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ParentInterface2.$markImplementor(/**@type {Function}*/ (ParentInterface2));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (ParentInterface2), 'inheritance.ParentInterface2');
+
+exports = ParentInterface2;
+
+//# sourceMappingURL=ParentInterface2.js.map

@@ -1,0 +1,46 @@
+goog.module('simplebridgemethods.AnotherSubclass$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Superclass = goog.require('simplebridgemethods.Superclass$impl');
+
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+
+/**
+ * @final
+ * @extends {Superclass<!AssertionError>}
+ */
+class AnotherSubclass extends Superclass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AnotherSubclass} */
+ static $create__() {
+  AnotherSubclass.$clinit();
+  let $instance = new AnotherSubclass();
+  $instance.$ctor__simplebridgemethods_AnotherSubclass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__simplebridgemethods_AnotherSubclass__void() {
+  this.$ctor__simplebridgemethods_Superclass__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AnotherSubclass.$clinit = () =>{};
+  AnotherSubclass.$loadModules();
+  Superclass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AnotherSubclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AnotherSubclass, 'simplebridgemethods.AnotherSubclass');
+
+exports = AnotherSubclass;
+
+//# sourceMappingURL=AnotherSubclass.js.map

@@ -1,0 +1,70 @@
+goog.module('variance.VarianceKt.$2$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Out = goog.require('variance.Out$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Container = goog.forwardDeclare('variance.Container$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {Out<string>}
+ */
+class $2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!$2} */
+ static $create__() {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__variance_VarianceKt_2__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__variance_VarianceKt_2__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {string} */
+ m_m__java_lang_String() {
+  return 'Out';
+ }
+ /** @override @nodts @return {!Container<?>} */
+ m_mListOut__variance_Container__variance_Container(/** !Container<?> */ c) {
+  c.m_setT__java_lang_Object__void('Hi');
+  return /**@type {!Container<string>}*/ (Container.$create__java_lang_Object(/**@type {string}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(c.m_getT__java_lang_Object()), j_l_String))));
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {string} */
+ m_m__java_lang_Object() {
+  return this.m_m__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Container = goog.module.get('variance.Container$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Out.$markImplementor($2);
+$Util.$setClassMetadata($2, 'variance.VarianceKt$2');
+
+exports = $2;
+
+//# sourceMappingURL=VarianceKt$2.js.map

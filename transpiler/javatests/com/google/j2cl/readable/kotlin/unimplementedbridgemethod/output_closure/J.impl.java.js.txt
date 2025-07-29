@@ -1,0 +1,34 @@
+goog.module('unimplementedbridgemethod.J$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const I = goog.require('unimplementedbridgemethod.I$impl');
+
+/**
+ * @interface
+ * @extends {I<?string>}
+ */
+class J {
+ /** @nodts */
+ static $clinit() {
+  J.$clinit = () =>{};
+  J.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  I.$markImplementor(ctor);
+  ctor.prototype.$implements__unimplementedbridgemethod_J = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__unimplementedbridgemethod_J;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+J.$markImplementor(/**@type {Function}*/ (J));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (J), 'unimplementedbridgemethod.J');
+
+exports = J;
+
+//# sourceMappingURL=J.js.map

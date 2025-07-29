@@ -1,0 +1,33 @@
+goog.module('typewildcards.TypeWildCards.HasKey$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class HasKey {
+ /** @abstract @nodts @return {?string} */
+ m_getKey__java_lang_String() {}
+ /** @nodts */
+ static $clinit() {
+  HasKey.$clinit = () =>{};
+  HasKey.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__typewildcards_TypeWildCards_HasKey = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__typewildcards_TypeWildCards_HasKey;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+HasKey.$markImplementor(/**@type {Function}*/ (HasKey));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (HasKey), 'typewildcards.TypeWildCards$HasKey');
+
+exports = HasKey;
+
+//# sourceMappingURL=TypeWildCards$HasKey.js.map

@@ -1,0 +1,51 @@
+goog.module('instanceofexpression.InstanceofExpressions.$1$impl');
+
+const Serializable = goog.require('java.io.Serializable$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InstanceofExpressions = goog.forwardDeclare('instanceofexpression.InstanceofExpressions$impl');
+
+/**
+ * @final
+ * @implements {Serializable}
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!InstanceofExpressions} @nodts*/
+  this.$outer_this__instanceofexpression_InstanceofExpressions_1;
+ }
+ /** @nodts @return {!$1} */
+ static $create__instanceofexpression_InstanceofExpressions(/** !InstanceofExpressions */ $outer_this) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__instanceofexpression_InstanceofExpressions_1__instanceofexpression_InstanceofExpressions__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__instanceofexpression_InstanceofExpressions_1__instanceofexpression_InstanceofExpressions__void(/** !InstanceofExpressions */ $outer_this) {
+  this.$outer_this__instanceofexpression_InstanceofExpressions_1 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Serializable.$markImplementor($1);
+$Util.$setClassMetadata($1, 'instanceofexpression.InstanceofExpressions$1');
+
+exports = $1;
+
+//# sourceMappingURL=InstanceofExpressions$1.js.map

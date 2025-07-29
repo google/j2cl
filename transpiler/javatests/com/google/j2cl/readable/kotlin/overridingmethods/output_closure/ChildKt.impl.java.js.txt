@@ -1,0 +1,54 @@
+goog.module('overridingmethods.ChildKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Child = goog.forwardDeclare('overridingmethods.Child$impl');
+let Parent = goog.forwardDeclare('overridingmethods.Parent$impl');
+
+/**
+ * @final
+ */
+class ChildKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ChildKt} */
+ static $create__() {
+  ChildKt.$clinit();
+  let $instance = new ChildKt();
+  $instance.$ctor__overridingmethods_ChildKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__overridingmethods_ChildKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__arrayOf_java_lang_String__void(/** !Array<string> */ args) {
+  ChildKt.$clinit();
+  Parent.$create__().m_setProperty__int__void(Child.$create__().m_getProperty__int());
+ }
+ /** @nodts */
+ static $clinit() {
+  ChildKt.$clinit = () =>{};
+  ChildKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ChildKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Child = goog.module.get('overridingmethods.Child$impl');
+  Parent = goog.module.get('overridingmethods.Parent$impl');
+ }
+}
+$Util.$setClassMetadata(ChildKt, 'overridingmethods.ChildKt');
+
+exports = ChildKt;
+
+//# sourceMappingURL=ChildKt.js.map

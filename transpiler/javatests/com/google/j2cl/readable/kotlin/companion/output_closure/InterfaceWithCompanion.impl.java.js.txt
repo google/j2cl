@@ -1,0 +1,76 @@
+goog.module('companion.InterfaceWithCompanion$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+/**
+ * @interface
+ */
+class InterfaceWithCompanion {
+ /** @abstract @nodts @return {number} */
+ m_foo__int() {}
+ /** @nodts @return {!*} */
+ static m_getNonCompileTimeConstant__java_lang_Object() {
+  InterfaceWithCompanion.$clinit();
+  return InterfaceWithCompanion.f_nonCompileTimeConstant__companion_InterfaceWithCompanion_;
+ }
+ /** @nodts @return {!*} */
+ static m_getProperty__java_lang_Object() {
+  InterfaceWithCompanion.$clinit();
+  return InterfaceWithCompanion.f_property__companion_InterfaceWithCompanion_;
+ }
+ /** @nodts */
+ static m_setProperty__java_lang_Object__void(/** !* */ set__) {
+  InterfaceWithCompanion.$clinit();
+  InterfaceWithCompanion.f_property__companion_InterfaceWithCompanion_ = set__;
+ }
+ /** @nodts @return {string} */
+ static m_publicFunction__java_lang_String() {
+  InterfaceWithCompanion.$clinit();
+  return InterfaceWithCompanion.m_privateFunction__java_lang_String();
+ }
+ /** @nodts @return {string} */
+ static m_privateFunction__java_lang_String() {
+  InterfaceWithCompanion.$clinit();
+  return 'foo' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(InterfaceWithCompanion.m_getNonCompileTimeConstant__java_lang_Object());
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithCompanion.$clinit = () =>{};
+  InterfaceWithCompanion.$loadModules();
+  InterfaceWithCompanion.f_nonCompileTimeConstant__companion_InterfaceWithCompanion_ = j_l_Object.$create__();
+  InterfaceWithCompanion.f_property__companion_InterfaceWithCompanion_ = j_l_Object.$create__();
+  for (let inductionVariable = 0; inductionVariable <= 10; inductionVariable = inductionVariable + 1 | 0) {
+   let i = inductionVariable;
+   InterfaceWithCompanion.f_property__companion_InterfaceWithCompanion_ = j_l_Object.$create__();
+  }
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__companion_InterfaceWithCompanion = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__companion_InterfaceWithCompanion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+/**@const {string} @nodts*/
+InterfaceWithCompanion.f_compileTimeConstant__companion_InterfaceWithCompanion = 'foo';
+/**@type {!*} @nodts*/
+InterfaceWithCompanion.f_nonCompileTimeConstant__companion_InterfaceWithCompanion_;
+/**@type {!*} @nodts*/
+InterfaceWithCompanion.f_property__companion_InterfaceWithCompanion_;
+InterfaceWithCompanion.$markImplementor(/**@type {Function}*/ (InterfaceWithCompanion));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceWithCompanion), 'companion.InterfaceWithCompanion');
+
+exports = InterfaceWithCompanion;
+
+//# sourceMappingURL=InterfaceWithCompanion.js.map

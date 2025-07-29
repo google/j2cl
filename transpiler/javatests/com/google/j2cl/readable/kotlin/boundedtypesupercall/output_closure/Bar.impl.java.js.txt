@@ -1,0 +1,58 @@
+goog.module('boundedtypesupercall.Bar$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('boundedtypesupercall.Bar.$1$impl');
+let Foo = goog.forwardDeclare('boundedtypesupercall.Foo$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Bar extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!Bar<T>} */
+ static $create__() {
+  Bar.$clinit();
+  let $instance = new Bar();
+  $instance.$ctor__boundedtypesupercall_Bar__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__boundedtypesupercall_Bar__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?T} */
+ m_getSomething__java_lang_Comparable() {
+  return null;
+ }
+ /** @final @nodts @return {Foo<T>} */
+ m_doSomething__boundedtypesupercall_Foo() {
+  return /**@type {!$1<T>}*/ ($1.$create__boundedtypesupercall_Bar(this));
+ }
+ /** @nodts */
+ static $clinit() {
+  Bar.$clinit = () =>{};
+  Bar.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Bar;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('boundedtypesupercall.Bar.$1$impl');
+ }
+}
+$Util.$setClassMetadata(Bar, 'boundedtypesupercall.Bar');
+
+exports = Bar;
+
+//# sourceMappingURL=Bar.js.map

@@ -1,0 +1,48 @@
+goog.module('unsafevariance.StringListSub$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const StringList = goog.require('unsafevariance.StringList$impl');
+
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+
+/**
+ * @abstract
+ */
+class StringListSub extends StringList {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__unsafevariance_StringListSub__void() {
+  this.$ctor__unsafevariance_StringList__void();
+ }
+ /** @override @nodts @return {boolean} */
+ m_contains__java_lang_String__boolean(/** string */ element) {
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  StringListSub.$clinit = () =>{};
+  StringListSub.$loadModules();
+  StringList.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringListSub;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ isEmpty() {}
+ /** @abstract @override @suppress{visibility} @return {string} */
+ getAtIndex(/** number */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(StringListSub, 'unsafevariance.StringListSub');
+
+exports = StringListSub;
+
+//# sourceMappingURL=StringListSub.js.map

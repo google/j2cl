@@ -1,0 +1,69 @@
+goog.module('staticfieldinitializer.StaticFieldInitializerKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class StaticFieldInitializerKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StaticFieldInitializerKt} */
+ static $create__() {
+  StaticFieldInitializerKt.$clinit();
+  let $instance = new StaticFieldInitializerKt();
+  $instance.$ctor__staticfieldinitializer_StaticFieldInitializerKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticfieldinitializer_StaticFieldInitializerKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getA__int() {
+  StaticFieldInitializerKt.$clinit();
+  return StaticFieldInitializerKt.f_a__staticfieldinitializer_StaticFieldInitializerKt_;
+ }
+ /** @nodts */
+ static m_setA__int__void(/** number */ set__) {
+  StaticFieldInitializerKt.$clinit();
+  StaticFieldInitializerKt.f_a__staticfieldinitializer_StaticFieldInitializerKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_getB__int() {
+  StaticFieldInitializerKt.$clinit();
+  return StaticFieldInitializerKt.f_b__staticfieldinitializer_StaticFieldInitializerKt_;
+ }
+ /** @nodts */
+ static m_setB__int__void(/** number */ set__) {
+  StaticFieldInitializerKt.$clinit();
+  StaticFieldInitializerKt.f_b__staticfieldinitializer_StaticFieldInitializerKt_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  StaticFieldInitializerKt.$clinit = () =>{};
+  StaticFieldInitializerKt.$loadModules();
+  j_l_Object.$clinit();
+  StaticFieldInitializerKt.f_a__staticfieldinitializer_StaticFieldInitializerKt_ = 2;
+  StaticFieldInitializerKt.f_b__staticfieldinitializer_StaticFieldInitializerKt_ = Math.imul(StaticFieldInitializerKt.m_getA__int(), 4);
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticFieldInitializerKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {number} @nodts*/
+StaticFieldInitializerKt.f_a__staticfieldinitializer_StaticFieldInitializerKt_ = 0;
+/**@type {number} @nodts*/
+StaticFieldInitializerKt.f_b__staticfieldinitializer_StaticFieldInitializerKt_ = 0;
+$Util.$setClassMetadata(StaticFieldInitializerKt, 'staticfieldinitializer.StaticFieldInitializerKt');
+
+exports = StaticFieldInitializerKt;
+
+//# sourceMappingURL=StaticFieldInitializerKt.js.map

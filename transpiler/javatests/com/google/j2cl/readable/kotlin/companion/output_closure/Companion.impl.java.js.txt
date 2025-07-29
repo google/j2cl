@@ -1,0 +1,85 @@
+goog.module('companion.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('companion.Companion.$1$impl');
+let NamedCompanion = goog.forwardDeclare('companion.Companion.NamedCompanion$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  Companion.$clinit();
+  let $instance = new Companion();
+  $instance.$ctor__companion_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_testCompanionReferencesFromEnclosingClass__void() {
+  Companion.$static_NamedCompanion__companion_Companion.m_companionFunction__java_lang_String__int__void(Companion.$static_propertyWithInitializer__companion_Companion_, Companion.$static_propertyinitializedFromInitializerBlock__companion_Companion_);
+ }
+ /** @nodts @return {!NamedCompanion} */
+ static get f_NamedCompanion__companion_Companion() {
+  return (Companion.$clinit(), Companion.$static_NamedCompanion__companion_Companion);
+ }
+ /** @nodts @return {!*} */
+ static get f_bar__companion_Companion_() {
+  return (Companion.$clinit(), Companion.$static_bar__companion_Companion_);
+ }
+ /** @nodts @return {number} */
+ static get f_propertyinitializedFromInitializerBlock__companion_Companion_() {
+  return (Companion.$clinit(), Companion.$static_propertyinitializedFromInitializerBlock__companion_Companion_);
+ }
+ /** @nodts */
+ static set f_propertyinitializedFromInitializerBlock__companion_Companion_(/** number */ value) {
+  (Companion.$clinit(), Companion.$static_propertyinitializedFromInitializerBlock__companion_Companion_ = value);
+ }
+ /** @nodts @return {string} */
+ static get f_propertyWithInitializer__companion_Companion_() {
+  return (Companion.$clinit(), Companion.$static_propertyWithInitializer__companion_Companion_);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_NamedCompanion__companion_Companion = NamedCompanion.$create__();
+  Companion.$static_bar__companion_Companion_ = $1.$create__();
+  Companion.$static_propertyWithInitializer__companion_Companion_ = 'Foo';
+  Companion.$static_propertyinitializedFromInitializerBlock__companion_Companion_ = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('companion.Companion.$1$impl');
+  NamedCompanion = goog.module.get('companion.Companion.NamedCompanion$impl');
+ }
+}
+/**@private {!NamedCompanion} @nodts*/
+Companion.$static_NamedCompanion__companion_Companion;
+/**@private {!*} @nodts*/
+Companion.$static_bar__companion_Companion_;
+/**@private {number} @nodts*/
+Companion.$static_propertyinitializedFromInitializerBlock__companion_Companion_ = 0;
+/**@private {string} @nodts*/
+Companion.$static_propertyWithInitializer__companion_Companion_;
+$Util.$setClassMetadata(Companion, 'companion.Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Companion.js.map

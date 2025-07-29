@@ -1,0 +1,89 @@
+goog.module('inlinefunction.ClassWithInlineFun$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('inlinefunction.ClassWithInlineFun.$1$impl');
+let $2 = goog.forwardDeclare('inlinefunction.ClassWithInlineFun.$2$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class ClassWithInlineFun extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_e__inlinefunction_ClassWithInlineFun_ = 0;
+ }
+ /** @nodts @return {!ClassWithInlineFun} */
+ static $create__int(/** number */ e) {
+  ClassWithInlineFun.$clinit();
+  let $instance = new ClassWithInlineFun();
+  $instance.$ctor__inlinefunction_ClassWithInlineFun__int__void(e);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_ClassWithInlineFun__int__void(/** number */ e) {
+  this.$ctor__java_lang_Object__void();
+  this.f_e__inlinefunction_ClassWithInlineFun_ = e;
+ }
+ /** @final @nodts @return {number} */
+ m_getE__int() {
+  return this.f_e__inlinefunction_ClassWithInlineFun_;
+ }
+ /** @final @nodts */
+ m_setE__int__void(/** number */ set__) {
+  this.f_e__inlinefunction_ClassWithInlineFun_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_inlineFun__kotlin_jvm_functions_Function1__int(/** !Function1<?, ?> */ action) {
+  let sum = this.m_getE__int();
+  while (this.m_getE__int() > 0) {
+   let tmp = sum;
+   let unary = this.m_getE__int();
+   this.m_setE__int__void(unary - 1 | 0);
+   sum = tmp + (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(unary)), Integer))).m_intValue__int() | 0;
+   if (sum > 10) {
+    return sum;
+   }
+  }
+  return sum;
+ }
+ /** @final @nodts @return {number} */
+ m_inlineFunWithAnonymousObject__int() {
+  let delegate = $1.$create__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun(this, this);
+  return delegate.m_compute__int();
+ }
+ /** @final @nodts @template T @return {T} */
+ m_inlineFunWithAnonymousObjectAndTypeParam__java_lang_Object__java_lang_Object(/** T */ t) {
+  let delegate = /**@type {!$2<T>}*/ ($2.$create__inlinefunction_ClassWithInlineFun__java_lang_Object(this, t));
+  return delegate.m_compute__java_lang_Object();
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassWithInlineFun.$clinit = () =>{};
+  ClassWithInlineFun.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassWithInlineFun;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('inlinefunction.ClassWithInlineFun.$1$impl');
+  $2 = goog.module.get('inlinefunction.ClassWithInlineFun.$2$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ClassWithInlineFun, 'inlinefunction.ClassWithInlineFun');
+
+exports = ClassWithInlineFun;
+
+//# sourceMappingURL=ClassWithInlineFun.js.map

@@ -1,0 +1,62 @@
+goog.module('localclassinstaticcontext.LocalClassInStaticContext.C$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1D = goog.forwardDeclare('localclassinstaticcontext.LocalClassInStaticContext.C.$1D$impl');
+
+/**
+ * @final
+ */
+class C extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_f__localclassinstaticcontext_LocalClassInStaticContext_C_ = 0;
+ }
+ /** @nodts @return {!C} */
+ static $create__() {
+  C.$clinit();
+  let $instance = new C();
+  $instance.$ctor__localclassinstaticcontext_LocalClassInStaticContext_C__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclassinstaticcontext_LocalClassInStaticContext_C__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_f__localclassinstaticcontext_LocalClassInStaticContext_C_ = 1;
+ }
+ /** @final @nodts @return {number} */
+ m_getF__int() {
+  return this.f_f__localclassinstaticcontext_LocalClassInStaticContext_C_;
+ }
+ /** @final @nodts */
+ m_setF__int__void(/** number */ set__) {
+  this.f_f__localclassinstaticcontext_LocalClassInStaticContext_C_ = set__;
+ }
+ /** @final @nodts */
+ m_test__void() {
+  $1D.$create__localclassinstaticcontext_LocalClassInStaticContext_C(this).m_func__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1D = goog.module.get('localclassinstaticcontext.LocalClassInStaticContext.C.$1D$impl');
+ }
+}
+$Util.$setClassMetadata(C, 'localclassinstaticcontext.LocalClassInStaticContext$C');
+
+exports = C;
+
+//# sourceMappingURL=LocalClassInStaticContext$C.js.map

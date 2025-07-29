@@ -1,0 +1,44 @@
+goog.module('typewildcards.MultipleGenerics$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template A, B, C
+ */
+class MultipleGenerics extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template A, B, C @return {!MultipleGenerics<A, B, C>} */
+ static $create__() {
+  MultipleGenerics.$clinit();
+  let $instance = new MultipleGenerics();
+  $instance.$ctor__typewildcards_MultipleGenerics__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typewildcards_MultipleGenerics__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  MultipleGenerics.$clinit = () =>{};
+  MultipleGenerics.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MultipleGenerics;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(MultipleGenerics, 'typewildcards.MultipleGenerics');
+
+exports = MultipleGenerics;
+
+//# sourceMappingURL=MultipleGenerics.js.map

@@ -1,0 +1,53 @@
+goog.module('externs.Main.FooImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class FooImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?string} @nodts*/
+  this.f_foo__externs_Main_FooImpl_;
+ }
+ /** @nodts @return {!FooImpl} */
+ static $create__() {
+  FooImpl.$clinit();
+  let $instance = new FooImpl();
+  $instance.$ctor__externs_Main_FooImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__externs_Main_FooImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {?string} */
+ get foo() {
+  return this.f_foo__externs_Main_FooImpl_;
+ }
+ 
+ set foo(/** ?string */ set__) {
+  this.f_foo__externs_Main_FooImpl_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  FooImpl.$clinit = () =>{};
+  FooImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FooImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(FooImpl, 'externs.Main$FooImpl');
+
+exports = FooImpl;
+
+//# sourceMappingURL=Main$FooImpl.js.map

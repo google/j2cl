@@ -1,0 +1,83 @@
+goog.module('bridgejsmethod.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let A = goog.forwardDeclare('bridgejsmethod.Main.A$impl');
+let B = goog.forwardDeclare('bridgejsmethod.Main.B$impl');
+let C = goog.forwardDeclare('bridgejsmethod.Main.C$impl');
+let D = goog.forwardDeclare('bridgejsmethod.Main.D$impl');
+let E = goog.forwardDeclare('bridgejsmethod.Main.E$impl');
+let H = goog.forwardDeclare('bridgejsmethod.Main.H$impl');
+let L = goog.forwardDeclare('bridgejsmethod.Main.L$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+/**
+ * @final
+ */
+class Main extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__bridgejsmethod_Main__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let a = /**@type {!A<!Integer>}*/ (A.$create__());
+  a.f(Integer.m_valueOf__int__java_lang_Integer(1));
+  a.m_bar__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(1));
+  let b = B.$create__();
+  b.m_f__java_lang_String__java_lang_String('abc');
+  b.bar('abc');
+  let c = C.$create__();
+  c.m_f__int__int(1);
+  c.m_bar__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(1));
+  let d = D.$create__();
+  d.m_f__int__int(1);
+  d.m_bar__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(1));
+  let e = E.$create__();
+  e.m_f__java_lang_String__java_lang_String('abc');
+  e.bar('abc');
+  let h = /**@type {!H<!Integer>}*/ (H.$create__());
+  h.enclose(Integer.m_valueOf__int__java_lang_Integer(1));
+  let l = /**@type {!L<!Integer>}*/ (L.$create__());
+  l.f('foo', Integer.m_valueOf__int__java_lang_Integer(1));
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  A = goog.module.get('bridgejsmethod.Main.A$impl');
+  B = goog.module.get('bridgejsmethod.Main.B$impl');
+  C = goog.module.get('bridgejsmethod.Main.C$impl');
+  D = goog.module.get('bridgejsmethod.Main.D$impl');
+  E = goog.module.get('bridgejsmethod.Main.E$impl');
+  H = goog.module.get('bridgejsmethod.Main.H$impl');
+  L = goog.module.get('bridgejsmethod.Main.L$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+ }
+}
+$Util.$setClassMetadata(Main, 'bridgejsmethod.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

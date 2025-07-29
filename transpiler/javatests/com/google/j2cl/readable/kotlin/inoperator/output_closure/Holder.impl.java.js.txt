@@ -1,0 +1,54 @@
+goog.module('inoperator.Holder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Holder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_content__inoperator_Holder_ = 0;
+ }
+ /** @nodts @return {!Holder} */
+ static $create__int(/** number */ content) {
+  Holder.$clinit();
+  let $instance = new Holder();
+  $instance.$ctor__inoperator_Holder__int__void(content);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inoperator_Holder__int__void(/** number */ content) {
+  this.$ctor__java_lang_Object__void();
+  this.f_content__inoperator_Holder_ = content;
+ }
+ /** @final @nodts @return {number} */
+ m_getContent__int() {
+  return this.f_content__inoperator_Holder_;
+ }
+ /** @final @nodts @return {boolean} */
+ m_contains__int__boolean(/** number */ other) {
+  return this.m_getContent__int() == other;
+ }
+ /** @nodts */
+ static $clinit() {
+  Holder.$clinit = () =>{};
+  Holder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Holder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Holder, 'inoperator.Holder');
+
+exports = Holder;
+
+//# sourceMappingURL=Holder.js.map

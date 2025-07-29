@@ -1,0 +1,240 @@
+goog.module('lambdas.Lambdas$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let $LambdaAdaptor$1 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$1$impl');
+let $LambdaAdaptor$2 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$2$impl');
+let A = goog.forwardDeclare('lambdas.Lambdas.A$impl');
+let BiFunction = goog.forwardDeclare('lambdas.Lambdas.BiFunction$impl');
+let Equals = goog.forwardDeclare('lambdas.Lambdas.Equals$impl');
+let Lambdas_Function = goog.forwardDeclare('lambdas.Lambdas.Function$impl');
+let Functional = goog.forwardDeclare('lambdas.Lambdas.Functional$impl');
+let FunctionalInterface = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterface$impl');
+let FunctionalInterfaceWithMethodReturningVoid = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid$impl');
+let GenericFunctionalInterface = goog.forwardDeclare('lambdas.Lambdas.GenericFunctionalInterface$impl');
+let Wrapper = goog.forwardDeclare('lambdas.Lambdas.Wrapper$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ */
+class Lambdas extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_field__lambdas_Lambdas_ = 0;
+ }
+ /** @nodts @return {!Lambdas} */
+ static $create__() {
+  Lambdas.$clinit();
+  let $instance = new Lambdas();
+  $instance.$ctor__lambdas_Lambdas__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_field__lambdas_Lambdas_ = 100;
+ }
+ /** @final @nodts @return {number} */
+ m_getField__int() {
+  return this.f_field__lambdas_Lambdas_;
+ }
+ /** @final @nodts */
+ m_setField__int__void(/** number */ set__) {
+  this.f_field__lambdas_Lambdas_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_call__lambdas_Lambdas_FunctionalInterface__int__int(/** !FunctionalInterface */ intf, /** number */ n) {
+  return this.m_getField__int() + intf.m_m__int__int(n) | 0;
+ }
+ /** @final @nodts */
+ m_testLambdaExpressionStyle__void() {
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int__int(FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i) =>{
+   return i + 1 | 0;
+  })), 10);
+ }
+ /** @final @nodts */
+ m_testLambdaExpressionImplicitParameterStyle__void() {
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int__int(FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ it) =>{
+   return it + 1 | 0;
+  })), 10);
+ }
+ /** @final @nodts */
+ m_testLambdaFunctionStyle__void() {
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int__int(FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i) =>{
+   return i + 1 | 0;
+  })), 10);
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int__int(FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i_1) =>{
+   return i_1 + 1 | 0;
+  })), 10);
+ }
+ /** @final @nodts */
+ m_testLambdaCaptureField__void() {
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int__int(FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i) =>{
+   return this.m_getField__int() + i + 1 | 0;
+  })), 10);
+ }
+ /** @final @nodts */
+ m_testLambdaCaptureLocal__void() {
+  let x = 1;
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int__int(FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i) =>{
+   x = 10;
+   return x + i + 1 | 0;
+  })), 10);
+ }
+ /** @final @nodts */
+ m_testLambdaCaptureFieldAndLocal__void() {
+  let x = 1;
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int__int(FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i) =>{
+   let y = 1;
+   return x + y + this.m_getField__int() + i + 1 | 0;
+  })), 10);
+ }
+ /** @final @nodts */
+ m_funOuter__void() {}
+ /** @final @nodts */
+ m_testLambdaCallOuterFunction__void() {
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int__int(FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i) =>{
+   this.m_funOuter__void();
+   this.m_funOuter__void();
+   this.m_funOuter__void();
+   return i + 2 | 0;
+  })), 10);
+ }
+ /** @final @nodts */
+ m_testLambdaInStaticContext__void() {
+  let f = FunctionalInterface.$adapt(/**  @return {number}*/ ((/** number */ i) =>{
+   return i;
+  }));
+ }
+ /** @final @nodts @template T */
+ m_testInstanceMethodTypeVariableThroughLambda__void() {
+  let wrapped = Functional.$adapt(/**  @return {Functional<T>}*/ ((/** !Functional<T> */ f) =>{
+   return Functional.$adapt(/**  @return {Functional<T>}*/ ((/** !Functional<T> */ f_1) =>{
+    return null;
+   }));
+  }));
+ }
+ /** @final @nodts @template T @return {?T} */
+ m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object(/** !GenericFunctionalInterface<T> */ intf, /** ?T */ e) {
+  return intf.m_m__java_lang_Object__java_lang_Object(e);
+ }
+ /** @final @nodts @return {A} */
+ m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__lambdas_Lambdas_A__lambdas_Lambdas_A(/** !GenericFunctionalInterface<!A> */ intf, /** A */ e) {
+  return /**@type {A}*/ ($Casts.$to(intf.m_m__java_lang_Object__java_lang_Object(e), A));
+ }
+ /** @final @nodts @template T @return {Enum<T>} */
+ m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum(/** !GenericFunctionalInterface<Enum<T>> */ intf, /** Enum<T> */ e) {
+  return /**@type {Enum<T>}*/ ($Casts.$to(intf.m_m__java_lang_Object__java_lang_Object(e), Enum));
+ }
+ /** @final @nodts @template T @return {GenericFunctionalInterface<T>} */
+ m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface(/** !BiFunction<T, string, number> */ fn) {
+  return null;
+ }
+ /** @final @nodts @template T */
+ m_testLambdaWithGenerics__void() {
+  this.m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object(GenericFunctionalInterface.$adapt(/**  @return {A}*/ ((/** A */ i) =>{
+   let i_1 = /**@type {A}*/ ($Casts.$to(i, A));
+   return i_1;
+  })), A.$create__());
+  this.m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__lambdas_Lambdas_A__lambdas_Lambdas_A(GenericFunctionalInterface.$adapt(/**  @return {A}*/ ((/** A */ i_2) =>{
+   let i_3 = /**@type {A}*/ ($Casts.$to(i_2, A));
+   return i_3;
+  })), A.$create__());
+  this.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum(GenericFunctionalInterface.$adapt(/**  @return {?}*/ ((/** ? */ i_4) =>{
+   let i_5 = /**@type {Enum<Enum>}*/ ($Casts.$to(i_4, Enum));
+   return null;
+  })), null);
+  this.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface(BiFunction.$adapt(/**  @return {number}*/ ((/** T */ x, /** string */ y) =>{
+   let x_1 = /**@type {T}*/ ($Casts.$to(x, Enum));
+   let y_1 = /**@type {string}*/ ($Casts.$to(y, j_l_String));
+   throw $Exceptions.toJs(RuntimeException.$create__());
+  })));
+  this.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface(BiFunction.$adapt(/**  @return {number}*/ ((/** !* */ x_2, /** string */ y_2) =>{
+   let y_3 = /**@type {string}*/ ($Casts.$to(y_2, j_l_String));
+   return 3;
+  })));
+  let f = Lambdas_Function.$adapt(/**  @return {!Long}*/ ((/** T */ item) =>{
+   let item_1 = /**@type {T}*/ ($Casts.$to(item, Enum));
+   return Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));
+  }));
+  let f2 = Lambdas_Function.$adapt(/**  @return {?string}*/ ((/** !Wrapper<string> */ item_2) =>{
+   let item_3 = /**@type {!Wrapper<string>}*/ ($Casts.$to(item_2, Wrapper));
+   return /**@type {?string}*/ ($Casts.$to(item_3.m_getWrapped__java_lang_Object(), j_l_String));
+  }));
+ }
+ /** @final @nodts */
+ m_testLambdaReturningVoidAsExpression__void() {
+  let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() =>{
+   A.$create__();
+  });
+ }
+ /** @final @nodts */
+ m_testAnonymousInsideLambda__void() {
+  let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() =>{
+   A.$create__();
+  });
+ }
+ /** @final @nodts */
+ m_testJsInteropLambdas__void() {
+  let thenable = /**@type {!$LambdaAdaptor$1<string>}*/ (new $LambdaAdaptor$1((/** function(?string):Unit */ f1, /** function(Throwable):Unit */ f2) =>{
+   f1(null);
+  }));
+  let otherThenable = /**@type {!$LambdaAdaptor$2<string>}*/ (new $LambdaAdaptor$2((/** function(?string):Unit */ f1_1, /** function(Throwable):Unit */ f2_1) =>{
+   f1_1(null);
+  }));
+  let equals = Equals.$adapt(/**  @return {boolean}*/ ((/** * */ o) =>{
+   return false;
+  }));
+  equals.equals(null);
+  equals.m_get__java_lang_Object();
+ }
+ /** @nodts */
+ static $clinit() {
+  Lambdas.$clinit = () =>{};
+  Lambdas.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Lambdas;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Enum = goog.module.get('java.lang.Enum$impl');
+  Long = goog.module.get('java.lang.Long$impl');
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $LambdaAdaptor$1 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$1$impl');
+  $LambdaAdaptor$2 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$2$impl');
+  A = goog.module.get('lambdas.Lambdas.A$impl');
+  BiFunction = goog.module.get('lambdas.Lambdas.BiFunction$impl');
+  Equals = goog.module.get('lambdas.Lambdas.Equals$impl');
+  Lambdas_Function = goog.module.get('lambdas.Lambdas.Function$impl');
+  Functional = goog.module.get('lambdas.Lambdas.Functional$impl');
+  FunctionalInterface = goog.module.get('lambdas.Lambdas.FunctionalInterface$impl');
+  FunctionalInterfaceWithMethodReturningVoid = goog.module.get('lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid$impl');
+  GenericFunctionalInterface = goog.module.get('lambdas.Lambdas.GenericFunctionalInterface$impl');
+  Wrapper = goog.module.get('lambdas.Lambdas.Wrapper$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(Lambdas, 'lambdas.Lambdas');
+
+exports = Lambdas;
+
+//# sourceMappingURL=Lambdas.js.map

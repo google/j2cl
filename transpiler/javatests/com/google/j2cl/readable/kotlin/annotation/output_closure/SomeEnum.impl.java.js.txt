@@ -1,0 +1,76 @@
+goog.module('annotation.SomeEnum$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @final
+ * @extends {Enum<!SomeEnum>}
+ */
+class SomeEnum extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SomeEnum} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new SomeEnum();
+  $instance.$ctor__annotation_SomeEnum__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__annotation_SomeEnum__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!SomeEnum} */
+ static m_valueOf__java_lang_String__annotation_SomeEnum(/** string */ name) {
+  SomeEnum.$clinit();
+  if ($Equality.$same(SomeEnum.f_namesToValuesMap__annotation_SomeEnum_, null)) {
+   SomeEnum.f_namesToValuesMap__annotation_SomeEnum_ = (/**@type {Map<?string, !SomeEnum>}*/ ($Enums.createMapFromValues(SomeEnum.m_values__arrayOf_annotation_SomeEnum())));
+  }
+  return /**@type {SomeEnum}*/ ($Enums.getValueFromNameAndMap(name, SomeEnum.f_namesToValuesMap__annotation_SomeEnum_));
+ }
+ /** @nodts @return {!Array<!SomeEnum>} */
+ static m_values__arrayOf_annotation_SomeEnum() {
+  SomeEnum.$clinit();
+  return /**@type {!Array<!SomeEnum>}*/ ($Arrays.$stampType([SomeEnum.f_ZERO__annotation_SomeEnum, SomeEnum.f_ONE__annotation_SomeEnum], SomeEnum));
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeEnum.$clinit = () =>{};
+  SomeEnum.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeEnum;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+SomeEnum.$ordinal_ZERO__annotation_SomeEnum = 0;
+/**@const {number} @nodts*/
+SomeEnum.$ordinal_ONE__annotation_SomeEnum = 1;
+/**@const {!SomeEnum} @nodts*/
+SomeEnum.f_ZERO__annotation_SomeEnum = /**@pureOrBreakMyCode*/ SomeEnum.$create__java_lang_String__int($Util.$makeEnumName('ZERO'), SomeEnum.$ordinal_ZERO__annotation_SomeEnum);
+/**@const {!SomeEnum} @nodts*/
+SomeEnum.f_ONE__annotation_SomeEnum = /**@pureOrBreakMyCode*/ SomeEnum.$create__java_lang_String__int($Util.$makeEnumName('ONE'), SomeEnum.$ordinal_ONE__annotation_SomeEnum);
+/**@type {Map<?string, !SomeEnum>} @nodts*/
+SomeEnum.f_namesToValuesMap__annotation_SomeEnum_;
+$Util.$setClassMetadataForEnum(SomeEnum, 'annotation.SomeEnum');
+
+exports = SomeEnum;
+
+//# sourceMappingURL=SomeEnum.js.map

@@ -1,0 +1,224 @@
+goog.module('unsafevariance.StringList$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const List = goog.require('java.util.List$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let Comparator = goog.forwardDeclare('java.util.Comparator$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let ListIterator = goog.forwardDeclare('java.util.ListIterator$impl');
+let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let Predicate = goog.forwardDeclare('java.util.function.Predicate$impl');
+let UnaryOperator = goog.forwardDeclare('java.util.function.UnaryOperator$impl');
+let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @abstract
+ * @implements {List<string>}
+ */
+class StringList extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__unsafevariance_StringList__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {boolean} */
+ m_contains__java_lang_String__boolean(/** string */ element) {
+  return true;
+ }
+ /** @override @return {boolean} */
+ containsAll(/** !Collection<?> */ elements) {
+  return true;
+ }
+ /** @nodts @return {number} */
+ m_indexOf__java_lang_String__int(/** string */ element) {
+  return -1;
+ }
+ /** @nodts @return {number} */
+ m_lastIndexOf__java_lang_String__int(/** string */ element) {
+  return -1;
+ }
+ /** @nodts @return {boolean} */
+ m_add__java_lang_String__boolean(/** string */ element) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @nodts */
+ m_add__int__java_lang_String__void(/** number */ index, /** string */ element) {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {boolean} */
+ remove(/** * */ element) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {boolean} */
+ addAll(/** !Collection<?> */ elements) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {boolean} */
+ addAllAtIndex(/** number */ index, /** !Collection<?> */ elements) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {boolean} */
+ removeAll(/** !Collection<?> */ elements) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {boolean} */
+ retainAll(/** !Collection<?> */ elements) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override */
+ clear() {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @nodts @return {string} */
+ m_set__int__java_lang_String__java_lang_String(/** number */ index, /** string */ element) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {string} */
+ removeAtIndex(/** number */ index) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts @return {!ListIterator<?>} */
+ m_listIterator__java_util_ListIterator() {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts @return {!ListIterator<?>} */
+ m_listIterator__int__java_util_ListIterator(/** number */ index) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @return {!List<?>} */
+ subList(/** number */ fromIndex, /** number */ toIndex) {
+  return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts */
+ m_replaceAll__java_util_function_UnaryOperator__void(/** !UnaryOperator<string> */ operator) {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @override @nodts */
+ m_sort__java_util_Comparator__void(/** Comparator<?> */ c) {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @final @override @return {boolean} */
+ contains(/** * */ element) {
+  if (!j_l_String.$isInstance(element)) {
+   return false;
+  }
+  return this.m_contains__java_lang_String__boolean(/**@type {string}*/ (element));
+ }
+ /** @final @override @return {number} */
+ indexOf(/** * */ element) {
+  if (!j_l_String.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_indexOf__java_lang_String__int(/**@type {string}*/ (element));
+ }
+ /** @final @override @return {number} */
+ lastIndexOf(/** * */ element) {
+  if (!j_l_String.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_lastIndexOf__java_lang_String__int(/**@type {string}*/ (element));
+ }
+ /** @abstract @nodts @return {number} */
+ m_getSize__int() {}
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ arg0) {
+  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {!Spliterator<string>} */
+ m_spliterator__java_util_Spliterator() {
+  return /**@type {!Spliterator<string>}*/ (List.m_spliterator__$default__java_util_List__java_util_Spliterator(this));
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {boolean} */
+ add(/** string */ arg0) {
+  return this.m_add__java_lang_String__boolean(/**@type {string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {!Stream<string>} */
+ m_parallelStream__java_util_stream_Stream() {
+  return /**@type {!Stream<string>}*/ (Collection.m_parallelStream__$default__java_util_Collection__java_util_stream_Stream(this));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {boolean} */
+ m_removeIf__java_util_function_Predicate__boolean(/** !Predicate<?> */ arg0) {
+  return Collection.m_removeIf__$default__java_util_Collection__java_util_function_Predicate__boolean(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {!Stream<string>} */
+ m_stream__java_util_stream_Stream() {
+  return /**@type {!Stream<string>}*/ (Collection.m_stream__$default__java_util_Collection__java_util_stream_Stream(this));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {Array<*>} */
+ m_toArray__arrayOf_java_lang_Object() {
+  return Collection.m_toArray__$default__java_util_Collection__arrayOf_java_lang_Object(this);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @template T @return {Array<T>} */
+ m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object(/** Array<T> */ arg0) {
+  return Collection.m_toArray__$default__java_util_Collection__arrayOf_java_lang_Object__arrayOf_java_lang_Object(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Array<string>} */
+ toArray() {
+  return /**@type {Array<string>}*/ (Collection.m__private_jsToArray____$default__java_util_Collection__arrayOf_java_lang_Object(this));
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} */
+ addAtIndex(/** number */ arg0, /** string */ arg1) {
+  this.m_add__int__java_lang_String__void(arg0, /**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {string} */
+ setAtIndex(/** number */ arg0, /** string */ arg1) {
+  return this.m_set__int__java_lang_String__java_lang_String(arg0, /**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  StringList.$clinit = () =>{};
+  StringList.$loadModules();
+  j_l_Object.$clinit();
+  List.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringList;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ isEmpty() {}
+ /** @abstract @override @suppress{visibility} @return {string} */
+ getAtIndex(/** number */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {
+  Iterable = goog.module.get('java.lang.Iterable$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Collection = goog.module.get('java.util.Collection$impl');
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+List.$markImplementor(StringList);
+$Util.$setClassMetadata(StringList, 'unsafevariance.StringList');
+
+exports = StringList;
+
+//# sourceMappingURL=StringList.js.map

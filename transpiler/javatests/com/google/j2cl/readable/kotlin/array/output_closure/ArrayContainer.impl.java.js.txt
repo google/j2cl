@@ -1,0 +1,51 @@
+goog.module('array.ArrayContainer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class ArrayContainer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Array<T>} @nodts*/
+  this.f_data__array_ArrayContainer_;
+ }
+ /** @nodts @template T @return {!ArrayContainer<T>} */
+ static $create__arrayOf_java_lang_Object(/** !Array<T> */ data) {
+  ArrayContainer.$clinit();
+  let $instance = new ArrayContainer();
+  $instance.$ctor__array_ArrayContainer__arrayOf_java_lang_Object__void(data);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__array_ArrayContainer__arrayOf_java_lang_Object__void(/** !Array<T> */ data) {
+  this.$ctor__java_lang_Object__void();
+  this.f_data__array_ArrayContainer_ = data;
+ }
+ /** @final @nodts @return {!Array<T>} */
+ m_getData__arrayOf_java_lang_Object() {
+  return this.f_data__array_ArrayContainer_;
+ }
+ /** @nodts */
+ static $clinit() {
+  ArrayContainer.$clinit = () =>{};
+  ArrayContainer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ArrayContainer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ArrayContainer, 'array.ArrayContainer');
+
+exports = ArrayContainer;
+
+//# sourceMappingURL=ArrayContainer.js.map

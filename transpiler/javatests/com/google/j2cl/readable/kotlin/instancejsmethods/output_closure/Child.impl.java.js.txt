@@ -1,0 +1,67 @@
+goog.module('instancejsmethods.Child$impl');
+
+const MyInterface = goog.require('instancejsmethods.MyInterface$impl');
+const Parent = goog.require('instancejsmethods.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {MyInterface}
+ */
+class Child extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Child} */
+ static $create__() {
+  Child.$clinit();
+  let $instance = new Child();
+  $instance.$ctor__instancejsmethods_Child__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__instancejsmethods_Child__void() {
+  this.$ctor__instancejsmethods_Parent__void();
+ }
+ /** @override @return {number} */
+ sum(/** number */ a, /** number */ b) {
+  return a + b + 1 | 0;
+ }
+ /** @override @return {number} */
+ bar(/** number */ a, /** number */ b) {
+  return Math.imul(a, b) + 1 | 0;
+ }
+ /** @override @return {number} */
+ myFoo(/** number */ a) {
+  return a;
+ }
+ /** @return {number} */
+ intfFoo() {
+  return 1;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {number} */
+ m_intfFoo__int() {
+  return this.intfFoo();
+ }
+ /** @nodts */
+ static $clinit() {
+  Child.$clinit = () =>{};
+  Child.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Child;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+MyInterface.$markImplementor(Child);
+$Util.$setClassMetadata(Child, 'instancejsmethods.Child');
+
+exports = Child;
+
+//# sourceMappingURL=Child.js.map

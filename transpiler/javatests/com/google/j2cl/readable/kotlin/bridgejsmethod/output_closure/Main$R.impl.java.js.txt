@@ -1,0 +1,45 @@
+goog.module('bridgejsmethod.Main.R$impl');
+
+const Q = goog.require('bridgejsmethod.Main.Q$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
+
+/**
+ * @abstract
+ */
+class R extends Q {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Main} @nodts*/
+  this.$outer_this__bridgejsmethod_Main_R;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_R__bridgejsmethod_Main__void(/** !Main */ $outer_this) {
+  this.$outer_this__bridgejsmethod_Main_R = $outer_this;
+  this.$ctor__bridgejsmethod_Main_Q__bridgejsmethod_Main__void($outer_this);
+ }
+ /** @override @return {string} */
+ get key() {
+  return '';
+ }
+ /** @nodts */
+ static $clinit() {
+  R.$clinit = () =>{};
+  R.$loadModules();
+  Q.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof R;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(R, 'bridgejsmethod.Main$R');
+
+exports = R;
+
+//# sourceMappingURL=Main$R.js.map

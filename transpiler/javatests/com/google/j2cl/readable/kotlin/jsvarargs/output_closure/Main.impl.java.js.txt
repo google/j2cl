@@ -1,0 +1,181 @@
+goog.module('jsvarargs.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let AFunction = goog.forwardDeclare('jsvarargs.Main.AFunction$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+class Main extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_field__jsvarargs_Main_ = 0;
+ }
+ /** @nodts @return {!Main} */
+ static $create__int(/** number */ f) {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__jsvarargs_Main__int__void(f);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsvarargs_Main__int__void(/** number */ f) {
+  this.$ctor__java_lang_Object__void();
+  this.f_field__jsvarargs_Main_ = f;
+ }
+ /** @final @nodts @return {number} */
+ m_getField__int() {
+  return this.f_field__jsvarargs_Main_;
+ }
+ /** @return {number} */
+ f3(/** number */ m, .../** ...number */ numbers) {
+  $Arrays.$stampType(numbers, $$int);
+  return this.m_getField__int() + m + numbers[1] | 0;
+ }
+ /** @final @return {number} */
+ f4(.../** ...number */ numbers) {
+  $Arrays.$stampType(numbers, $$int);
+  return this.m_getField__int() + numbers[1] | 0;
+ }
+ /** @final @nodts */
+ m_testStaticMethodNotFirst__void() {
+  Main.f1(1, 1, 2);
+  Main.f1(1, 1, 2);
+  Main.f1(1);
+  Main.f1(1);
+  Main.f1(1, 1, 2);
+  Main.f1(1, 1, 2);
+  Main.f1(1);
+  Main.f1(1);
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int));
+  Main.f1(1, ...ints);
+ }
+ /** @final @nodts */
+ m_testStaticMethodFirst__void() {
+  Main.f2(1, 2);
+  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
+  Main.f2(1, 2);
+  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
+  Main.f2();
+  Main.generics();
+  Main.f2();
+  Main.generics();
+  Main.generics();
+  Main.f2(1, 2);
+  Main.f2(1, 2);
+  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
+  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
+  Main.f2();
+  Main.f2();
+  Main.generics(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int));
+  let integers = /**@type {!Array<!Integer>}*/ ($Arrays.$stampType([Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2)], Integer));
+  Main.f2(...ints);
+  Main.f2(...ints);
+  Main.generics(integers);
+ }
+ /** @final @nodts */
+ m_testInstanceMethodNotFirst__void() {
+  let m = Main.$create__int(1);
+  m.f3(1, 1, 2);
+  m.f3(1);
+  m.f3(1, 1, 2);
+  m.f3(1);
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int));
+  m.f3(1, ...ints);
+ }
+ /** @final @nodts */
+ m_testInstanceMethodFirst__void() {
+  let m = Main.$create__int(1);
+  m.f4(1, 2);
+  m.f4();
+  m.f4(1, 2);
+  m.f4();
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int));
+  m.f4(...ints);
+ }
+ /** @final @nodts */
+ m_testJsFunction__void() {
+  let a = /**@type {!AFunction}*/ (AFunction.$create__());
+  let o1 = j_l_Object.$create__();
+  let o2 = j_l_Object.$create__();
+  (/**@type {function(number, ...*):*}*/ (a))(0, o1, o2);
+  (/**@type {function(number, ...*):*}*/ (a))(0);
+  (/**@type {function(number, ...*):*}*/ (a))(0, o1, o2);
+  (/**@type {function(number, ...*):*}*/ (a))(0);
+  (/**@type {function(number, ...*):*}*/ (a))(0);
+  let os = [o1, o2];
+  (/**@type {function(number, ...*):*}*/ (a))(0, ...os);
+ }
+ /** @final @nodts */
+ m_testSideEffect__void() {
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int));
+  Main.$create__int(1).f3(1, ...ints);
+ }
+ /** @final @nodts @template U */
+ m_testGenericJsFunctionWithVarags__void() {
+  let function_1 = /**  @return {*}*/ ((/** U */ n, .../** ...U */ param) =>{
+   return param;
+  });
+ }
+ /** @return {number} */
+ static f1(/** number */ multiplier, .../** ...number */ numbers) {
+  Main.$clinit();
+  $Arrays.$stampType(numbers, $$int);
+  return numbers.length + numbers[0] + multiplier | 0;
+ }
+ /** @return {number} */
+ static f2(.../** ...number */ numbers) {
+  Main.$clinit();
+  $Arrays.$stampType(numbers, $$int);
+  return numbers.length + numbers[0] | 0;
+ }
+ /** @template T @return {T} */
+ static generics(.../** ...T */ elements) {
+  Main.$clinit();
+  return elements[0];
+ }
+ /** @return {!Main} */
+ static parameterizedType(.../** ...!List<?> */ elements) {
+  Main.$clinit();
+  $Arrays.$stampType(elements, /**@type {Function}*/ (List));
+  return /**@type {!Main}*/ ($Casts.$to(elements[0].getAtIndex(0), Main));
+ }
+ /** @template T @return {T} */
+ static parameterizedByT(.../** ...!List<?> */ elements) {
+  Main.$clinit();
+  $Arrays.$stampType(elements, /**@type {Function}*/ (List));
+  return elements[0].getAtIndex(0);
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  List = goog.module.get('java.util.List$impl');
+  AFunction = goog.module.get('jsvarargs.Main.AFunction$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(Main, 'jsvarargs.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

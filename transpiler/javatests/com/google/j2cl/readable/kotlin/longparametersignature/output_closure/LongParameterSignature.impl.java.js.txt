@@ -1,0 +1,47 @@
+goog.module('longparametersignature.LongParameterSignature$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+
+/**
+ * @final
+ */
+class LongParameterSignature extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LongParameterSignature} */
+ static $create__() {
+  LongParameterSignature.$clinit();
+  let $instance = new LongParameterSignature();
+  $instance.$ctor__longparametersignature_LongParameterSignature__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__longparametersignature_LongParameterSignature__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_main__long__void(/** !$Long */ foo) {}
+ /** @nodts */
+ static $clinit() {
+  LongParameterSignature.$clinit = () =>{};
+  LongParameterSignature.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LongParameterSignature;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(LongParameterSignature, 'longparametersignature.LongParameterSignature');
+
+exports = LongParameterSignature;
+
+//# sourceMappingURL=LongParameterSignature.js.map

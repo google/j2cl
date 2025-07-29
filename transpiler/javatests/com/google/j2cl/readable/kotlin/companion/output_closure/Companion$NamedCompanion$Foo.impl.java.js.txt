@@ -1,0 +1,52 @@
+goog.module('companion.Companion.NamedCompanion.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Companion = goog.forwardDeclare('companion.Companion$impl');
+
+/**
+ * @final
+ */
+class Foo extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Foo} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__companion_Companion_NamedCompanion_Foo__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_Companion_NamedCompanion_Foo__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_foo__void() {
+  Companion.f_NamedCompanion__companion_Companion.m_companionFunction__java_lang_String__int__void('', 1);
+  return;
+ }
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Companion = goog.module.get('companion.Companion$impl');
+ }
+}
+$Util.$setClassMetadata(Foo, 'companion.Companion$NamedCompanion$Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Companion$NamedCompanion$Foo.js.map

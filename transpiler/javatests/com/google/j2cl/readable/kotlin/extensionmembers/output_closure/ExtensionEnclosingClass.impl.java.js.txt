@@ -1,0 +1,84 @@
+goog.module('extensionmembers.ExtensionEnclosingClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ExtensionMembersKt = goog.forwardDeclare('extensionmembers.ExtensionMembersKt$impl');
+let ReceiverClass = goog.forwardDeclare('extensionmembers.ReceiverClass$impl');
+
+/**
+ * @final
+ */
+class ExtensionEnclosingClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_aProperty__extensionmembers_ExtensionEnclosingClass_ = 0;
+ }
+ /** @nodts @return {!ExtensionEnclosingClass} */
+ static $create__int(/** number */ aProperty) {
+  ExtensionEnclosingClass.$clinit();
+  let $instance = new ExtensionEnclosingClass();
+  $instance.$ctor__extensionmembers_ExtensionEnclosingClass__int__void(aProperty);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__extensionmembers_ExtensionEnclosingClass__int__void(/** number */ aProperty) {
+  this.$ctor__java_lang_Object__void();
+  this.f_aProperty__extensionmembers_ExtensionEnclosingClass_ = aProperty;
+ }
+ /** @final @nodts @return {number} */
+ m_getAProperty__int() {
+  return this.f_aProperty__extensionmembers_ExtensionEnclosingClass_;
+ }
+ /** @final @nodts */
+ m_setAProperty__int__void(/** number */ set__) {
+  this.f_aProperty__extensionmembers_ExtensionEnclosingClass_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_instanceExtensionFunction__extensionmembers_ReceiverClass__int__int(/** !ReceiverClass */ this_1, /** number */ valueParameter) {
+  return this.m_getAProperty__int() + valueParameter + ExtensionMembersKt.m_getTopLevelExtensionProperty__extensionmembers_ReceiverClass__int(this_1) + this_1.m_getInstanceProperty__int() | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_getInstanceExtensionProperty__extensionmembers_ReceiverClass__int(/** !ReceiverClass */ this_1) {
+  return this.m_getAProperty__int() + ExtensionMembersKt.m_getTopLevelExtensionProperty__extensionmembers_ReceiverClass__int(this_1) + this_1.m_getInstanceProperty__int() | 0;
+ }
+ /** @final @nodts */
+ m_setInstanceExtensionProperty__extensionmembers_ReceiverClass__int__void(/** !ReceiverClass */ this_1, /** number */ value) {
+  this.m_setAProperty__int__void(value);
+  this_1.m_setInstanceProperty__int__void(value);
+ }
+ /** @final @nodts @return {number} */
+ m_callExtensionFunction__extensionmembers_ReceiverClass__int__int(/** !ReceiverClass */ receiver, /** number */ extensionFunctionParam) {
+  return this.m_instanceExtensionFunction__extensionmembers_ReceiverClass__int__int(receiver, extensionFunctionParam);
+ }
+ /** @final @nodts */
+ m_setExtensionProperty__extensionmembers_ReceiverClass__int__void(/** !ReceiverClass */ receiver, /** number */ extensionPropertyValue) {
+  this.m_setInstanceExtensionProperty__extensionmembers_ReceiverClass__int__void(receiver, extensionPropertyValue);
+ }
+ /** @final @nodts @return {number} */
+ m_getExtensionProperty__extensionmembers_ReceiverClass__int(/** !ReceiverClass */ receiver) {
+  return this.m_getInstanceExtensionProperty__extensionmembers_ReceiverClass__int(receiver);
+ }
+ /** @nodts */
+ static $clinit() {
+  ExtensionEnclosingClass.$clinit = () =>{};
+  ExtensionEnclosingClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExtensionEnclosingClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ExtensionMembersKt = goog.module.get('extensionmembers.ExtensionMembersKt$impl');
+ }
+}
+$Util.$setClassMetadata(ExtensionEnclosingClass, 'extensionmembers.ExtensionEnclosingClass');
+
+exports = ExtensionEnclosingClass;
+
+//# sourceMappingURL=ExtensionEnclosingClass.js.map

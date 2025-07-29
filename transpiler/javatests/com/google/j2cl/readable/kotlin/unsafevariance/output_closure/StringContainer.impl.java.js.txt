@@ -1,0 +1,33 @@
+goog.module('unsafevariance.StringContainer$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class StringContainer {
+ /** @abstract @nodts @return {boolean} */
+ m_contains__java_lang_String__boolean(/** string */ s) {}
+ /** @nodts */
+ static $clinit() {
+  StringContainer.$clinit = () =>{};
+  StringContainer.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__unsafevariance_StringContainer = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__unsafevariance_StringContainer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+StringContainer.$markImplementor(/**@type {Function}*/ (StringContainer));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (StringContainer), 'unsafevariance.StringContainer');
+
+exports = StringContainer;
+
+//# sourceMappingURL=StringContainer.js.map

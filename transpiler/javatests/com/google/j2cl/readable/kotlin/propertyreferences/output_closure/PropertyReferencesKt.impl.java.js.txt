@@ -1,0 +1,124 @@
+goog.module('propertyreferences.PropertyReferencesKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let Function2 = goog.forwardDeclare('kotlin.jvm.functions.Function2$impl');
+let MutableKProperty0Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty0Impl$impl');
+let MutableKProperty1Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty1Impl$impl');
+let Simple = goog.forwardDeclare('propertyreferences.Simple$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class PropertyReferencesKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!PropertyReferencesKt} */
+ static $create__() {
+  PropertyReferencesKt.$clinit();
+  let $instance = new PropertyReferencesKt();
+  $instance.$ctor__propertyreferences_PropertyReferencesKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__propertyreferences_PropertyReferencesKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {string} */
+ static m_getTopLevelProperty__java_lang_String() {
+  PropertyReferencesKt.$clinit();
+  return PropertyReferencesKt.f_topLevelProperty__propertyreferences_PropertyReferencesKt_;
+ }
+ /** @nodts */
+ static m_setTopLevelProperty__java_lang_String__void(/** string */ set__) {
+  PropertyReferencesKt.$clinit();
+  PropertyReferencesKt.f_topLevelProperty__propertyreferences_PropertyReferencesKt_ = set__;
+ }
+ /** @nodts @return {string} */
+ static m_getExtensionProperty__propertyreferences_Simple__java_lang_String(/** !Simple */ this_1) {
+  PropertyReferencesKt.$clinit();
+  return 'extensionProperty';
+ }
+ /** @nodts */
+ static m_setExtensionProperty__propertyreferences_Simple__java_lang_String__void(/** !Simple */ this_1, /** string */ value) {
+  PropertyReferencesKt.$clinit();
+ }
+ /** @nodts */
+ static m_test__void() {
+  PropertyReferencesKt.$clinit();
+  let /** Simple */ $propertyReferenceQualifier, /** Simple */ $propertyReferenceQualifier_1, /** Simple */ $propertyReferenceQualifier_2;
+  let valuePropertyReference = /**@type {!MutableKProperty0Impl<string>}*/ (($propertyReferenceQualifier = Simple.$create__(), MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
+   return $propertyReferenceQualifier.m_getMutableProperty__java_lang_String();
+  })), Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+   return $propertyReferenceQualifier.m_setMutableProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg0, j_l_String)));
+  })))));
+  let typePropertyReference = /**@type {!MutableKProperty1Impl<!Simple, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1) =>{
+   return (/**@type {!Simple}*/ ($Casts.$to(arg0_1, Simple))).m_getMutableProperty__java_lang_String();
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_2, /** ? */ arg1) =>{
+   return (/**@type {!Simple}*/ ($Casts.$to(arg0_2, Simple))).m_setMutableProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+  }))));
+  let valueImmutablePropertyReference = /**@type {!MutableKProperty0Impl<string>}*/ (($propertyReferenceQualifier_1 = Simple.$create__(), MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
+   return $propertyReferenceQualifier_1.m_getImmutableProperty__java_lang_String();
+  })), null)));
+  let typeImmutablePropertyReference = /**@type {!MutableKProperty1Impl<!Simple, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0_3) =>{
+   return (/**@type {!Simple}*/ ($Casts.$to(arg0_3, Simple))).m_getImmutableProperty__java_lang_String();
+  })), null));
+  let topLevelReference = /**@type {!MutableKProperty0Impl<string>}*/ (MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
+   return PropertyReferencesKt.m_getTopLevelProperty__java_lang_String();
+  })), Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0_4) =>{
+   return PropertyReferencesKt.m_setTopLevelProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg0_4, j_l_String)));
+  }))));
+  let simpleExtensionPropertyValueRef = /**@type {!MutableKProperty0Impl<string>}*/ (($propertyReferenceQualifier_2 = Simple.$create__(), MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
+   return PropertyReferencesKt.m_getExtensionProperty__propertyreferences_Simple__java_lang_String($propertyReferenceQualifier_2);
+  })), Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0_5) =>{
+   return PropertyReferencesKt.m_setExtensionProperty__propertyreferences_Simple__java_lang_String__void($propertyReferenceQualifier_2, /**@type {string}*/ ($Casts.$to(arg0_5, j_l_String)));
+  })))));
+  let simpleExtensionPropertyClassRef = /**@type {!MutableKProperty1Impl<!Simple, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0_6) =>{
+   return PropertyReferencesKt.m_getExtensionProperty__propertyreferences_Simple__java_lang_String(/**@type {!Simple}*/ ($Casts.$to(arg0_6, Simple)));
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_7, /** ? */ arg1_1) =>{
+   return PropertyReferencesKt.m_setExtensionProperty__propertyreferences_Simple__java_lang_String__void(/**@type {!Simple}*/ ($Casts.$to(arg0_7, Simple)), /**@type {string}*/ ($Casts.$to(arg1_1, j_l_String)));
+  }))));
+  valuePropertyReference.m_set__java_lang_Object__void('foo');
+  let newValue = /**@type {string}*/ ($Casts.$to(valuePropertyReference.m_get__java_lang_Object(), j_l_String));
+  typePropertyReference.m_set__java_lang_Object__java_lang_Object__void(Simple.$create__(), 'foo');
+  newValue = (/**@type {string}*/ ($Casts.$to(typePropertyReference.m_get__java_lang_Object__java_lang_Object(Simple.$create__()), j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  PropertyReferencesKt.$clinit = () =>{};
+  PropertyReferencesKt.$loadModules();
+  j_l_Object.$clinit();
+  PropertyReferencesKt.f_topLevelProperty__propertyreferences_PropertyReferencesKt_ = 'topLevelProperty';
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PropertyReferencesKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  Function2 = goog.module.get('kotlin.jvm.functions.Function2$impl');
+  MutableKProperty0Impl = goog.module.get('kotlin.jvm.internal.MutableKProperty0Impl$impl');
+  MutableKProperty1Impl = goog.module.get('kotlin.jvm.internal.MutableKProperty1Impl$impl');
+  Simple = goog.module.get('propertyreferences.Simple$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+/**@type {string} @nodts*/
+PropertyReferencesKt.f_topLevelProperty__propertyreferences_PropertyReferencesKt_;
+$Util.$setClassMetadata(PropertyReferencesKt, 'propertyreferences.PropertyReferencesKt');
+
+exports = PropertyReferencesKt;
+
+//# sourceMappingURL=PropertyReferencesKt.js.map

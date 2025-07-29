@@ -1,0 +1,45 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.AbstractStringList$impl');
+
+const AbstractList = goog.require('multipleabstractparents.MultipleAbstractParents.AbstractList$impl');
+const IStringList = goog.require('multipleabstractparents.MultipleAbstractParents.IStringList$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @extends {AbstractList<?string>}
+ * @implements {IStringList}
+ */
+class AbstractStringList extends AbstractList {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__multipleabstractparents_MultipleAbstractParents_AbstractStringList__void() {
+  this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractList__void();
+ }
+ //Specialized bridge method.
+ /** @override @nodts @suppress{visibility} @return {?string} */
+ m_getFoo__java_lang_String__java_lang_String(/** ?string */ arg0) {
+  return super.m_getFoo__java_lang_Object__java_lang_String(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractStringList.$clinit = () =>{};
+  AbstractStringList.$loadModules();
+  AbstractList.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractStringList;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IStringList.$markImplementor(AbstractStringList);
+$Util.$setClassMetadata(AbstractStringList, 'multipleabstractparents.MultipleAbstractParents$AbstractStringList');
+
+exports = AbstractStringList;
+
+//# sourceMappingURL=MultipleAbstractParents$AbstractStringList.js.map

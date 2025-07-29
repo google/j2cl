@@ -1,0 +1,82 @@
+goog.module('anonymousclass.AnonymousClassKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('anonymousclass.AnonymousClassKt.$1$impl');
+let $2 = goog.forwardDeclare('anonymousclass.AnonymousClassKt.$2$impl');
+let $3 = goog.forwardDeclare('anonymousclass.AnonymousClassKt.$3$impl');
+let Foo = goog.forwardDeclare('anonymousclass.Foo$impl');
+let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
+
+/**
+ * @final
+ */
+class AnonymousClassKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AnonymousClassKt} */
+ static $create__() {
+  AnonymousClassKt.$clinit();
+  let $instance = new AnonymousClassKt();
+  $instance.$ctor__anonymousclass_AnonymousClassKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_AnonymousClassKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_staticFunc__void() {
+  AnonymousClassKt.$clinit();
+  let a = Ref.m_createRef__int__javaemul_internal_Ref_OfInt(1);
+  let implicitlyStatic = $1.$create__javaemul_internal_Ref_OfInt(a);
+ }
+ /** @nodts @template S */
+ static m_main__java_lang_Object__void(/** S */ s) {
+  AnonymousClassKt.$clinit();
+  $2.$create__();
+ }
+ /** @nodts @return {!Foo} */
+ static m_createFoo__anonymousclass_Foo() {
+  AnonymousClassKt.$clinit();
+  return $3.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static m_getTrueVar__boolean() {
+  AnonymousClassKt.$clinit();
+  return AnonymousClassKt.f_trueVar__anonymousclass_AnonymousClassKt_;
+ }
+ /** @nodts */
+ static m_setTrueVar__boolean__void(/** boolean */ set__) {
+  AnonymousClassKt.$clinit();
+  AnonymousClassKt.f_trueVar__anonymousclass_AnonymousClassKt_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  AnonymousClassKt.$clinit = () =>{};
+  AnonymousClassKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AnonymousClassKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('anonymousclass.AnonymousClassKt.$1$impl');
+  $2 = goog.module.get('anonymousclass.AnonymousClassKt.$2$impl');
+  $3 = goog.module.get('anonymousclass.AnonymousClassKt.$3$impl');
+  Ref = goog.module.get('javaemul.internal.Ref$impl');
+ }
+}
+/**@type {boolean} @nodts*/
+AnonymousClassKt.f_trueVar__anonymousclass_AnonymousClassKt_ = false;
+$Util.$setClassMetadata(AnonymousClassKt, 'anonymousclass.AnonymousClassKt');
+
+exports = AnonymousClassKt;
+
+//# sourceMappingURL=AnonymousClassKt.js.map

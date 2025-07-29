@@ -1,0 +1,83 @@
+goog.module('extensionmembers.InlineReceiverClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class InlineReceiverClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_instanceProperty__extensionmembers_InlineReceiverClass_ = 0;
+ }
+ /** @nodts @return {!InlineReceiverClass} */
+ static $create__int(/** number */ instanceProperty) {
+  InlineReceiverClass.$clinit();
+  let $instance = new InlineReceiverClass();
+  $instance.$ctor__extensionmembers_InlineReceiverClass__int__void(instanceProperty);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__extensionmembers_InlineReceiverClass__int__void(/** number */ instanceProperty) {
+  this.$ctor__java_lang_Object__void();
+  this.f_instanceProperty__extensionmembers_InlineReceiverClass_ = instanceProperty;
+ }
+ /** @final @nodts @return {number} */
+ m_getInstanceProperty__int() {
+  return this.f_instanceProperty__extensionmembers_InlineReceiverClass_;
+ }
+ /** @final @nodts @return {number} */
+ m_instanceMethod__int() {
+  return 1;
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'InlineReceiverClass(' + 'instanceProperty=' + this.f_instanceProperty__extensionmembers_InlineReceiverClass_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Objects.m_hashCode__java_lang_Object__int(Integer.m_valueOf__int__java_lang_Integer(this.f_instanceProperty__extensionmembers_InlineReceiverClass_));
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if (!InlineReceiverClass.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!InlineReceiverClass}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), InlineReceiverClass));
+  if (this.f_instanceProperty__extensionmembers_InlineReceiverClass_ != tmp0_other_with_cast.f_instanceProperty__extensionmembers_InlineReceiverClass_) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  InlineReceiverClass.$clinit = () =>{};
+  InlineReceiverClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InlineReceiverClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(InlineReceiverClass, 'extensionmembers.InlineReceiverClass');
+
+exports = InlineReceiverClass;
+
+//# sourceMappingURL=InlineReceiverClass.js.map

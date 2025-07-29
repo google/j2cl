@@ -1,0 +1,66 @@
+goog.module('jsconstructor.ScopeFunctionsInSuperCallToNonJsConstructor$impl');
+
+const BaseNonJsConstructor = goog.require('jsconstructor.BaseNonJsConstructor$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let CollectionsKt = goog.forwardDeclare('kotlin.collections.CollectionsKt$impl');
+
+/**
+ * @final
+ */
+class ScopeFunctionsInSuperCallToNonJsConstructor extends BaseNonJsConstructor {
+ //JsConstructor 'ScopeFunctionsInSuperCallToNonJsConstructor(List)'.
+ 
+ constructor(/** !List<?> */ defaults) {
+  ScopeFunctionsInSuperCallToNonJsConstructor.$clinit();
+  super();
+  this.$ctor__jsconstructor_ScopeFunctionsInSuperCallToNonJsConstructor__java_util_List__void(defaults);
+ }
+ //Initialization from constructor 'ScopeFunctionsInSuperCallToNonJsConstructor(List)'.
+ /** @nodts */
+ $ctor__jsconstructor_ScopeFunctionsInSuperCallToNonJsConstructor__java_util_List__void(/** !List<?> */ defaults) {
+  let tmp0__this_ = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
+  let this_1 = tmp0__this_;
+  this_1.add('a');
+  this_1.add('b');
+  this.$ctor__jsconstructor_BaseNonJsConstructor__java_lang_Object__void(CollectionsKt.m_plus__java_util_Collection__java_lang_Iterable__java_util_List(defaults, this_1));
+ }
+ //Factory method corresponding to constructor 'ScopeFunctionsInSuperCallToNonJsConstructor()'.
+ /** @nodts @return {!ScopeFunctionsInSuperCallToNonJsConstructor} */
+ static $create__() {
+  ScopeFunctionsInSuperCallToNonJsConstructor.$clinit();
+  let tmp0__this_ = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
+  let this_1 = tmp0__this_;
+  this_1.add('c');
+  this_1.add('d');
+  let $instance = new ScopeFunctionsInSuperCallToNonJsConstructor(this_1);
+  $instance.$ctor__jsconstructor_ScopeFunctionsInSuperCallToNonJsConstructor__void();
+  return $instance;
+ }
+ //Initialization from constructor 'ScopeFunctionsInSuperCallToNonJsConstructor()'.
+ /** @nodts */
+ $ctor__jsconstructor_ScopeFunctionsInSuperCallToNonJsConstructor__void() {}
+ /** @nodts */
+ static $clinit() {
+  ScopeFunctionsInSuperCallToNonJsConstructor.$clinit = () =>{};
+  ScopeFunctionsInSuperCallToNonJsConstructor.$loadModules();
+  BaseNonJsConstructor.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ScopeFunctionsInSuperCallToNonJsConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  CollectionsKt = goog.module.get('kotlin.collections.CollectionsKt$impl');
+ }
+}
+$Util.$setClassMetadata(ScopeFunctionsInSuperCallToNonJsConstructor, 'jsconstructor.ScopeFunctionsInSuperCallToNonJsConstructor');
+
+exports = ScopeFunctionsInSuperCallToNonJsConstructor;
+
+//# sourceMappingURL=ScopeFunctionsInSuperCallToNonJsConstructor.js.map

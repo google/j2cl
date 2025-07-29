@@ -1,0 +1,81 @@
+goog.module('innerclassinheritance.ChildClass.InnerClass$impl');
+
+const ParentInner = goog.require('innerclassinheritance.ParentInner$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ChildClass = goog.forwardDeclare('innerclassinheritance.ChildClass$impl');
+
+/**
+ * @final
+ */
+class InnerClass extends ParentInner {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!ChildClass} @nodts*/
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass;
+  /**@type {number} @nodts*/
+  this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass_ = 0;
+ }
+ /** @nodts @return {!InnerClass} */
+ static $create__innerclassinheritance_ChildClass(/** !ChildClass */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass__void(/** !ChildClass */ $outer_this) {
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass = $outer_this;
+  this.$ctor__innerclassinheritance_ParentInner__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getFieldInInner__int() {
+  return this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass_;
+ }
+ /** @final @nodts */
+ m_setFieldInInner__int__void(/** number */ set__) {
+  this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass_ = set__;
+ }
+ /** @final @nodts */
+ m_funInInner__void() {}
+ /** @final @nodts @return {number} */
+ m_testInnerClass__int() {
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_funInParentOuter__void();
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_funInParentOuter__void();
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_funInOuter__void();
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_funInOuter__void();
+  this.m_funInParentInner__void();
+  this.m_funInParentInner__void();
+  this.m_funInInner__void();
+  this.m_funInInner__void();
+  let /** number */ a;
+  a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_getFieldInParentOuter__int();
+  a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_getFieldInParentOuter__int();
+  a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_getFieldInOuter__int();
+  a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_getFieldInOuter__int();
+  a = this.m_getFieldInParentInner__int();
+  a = this.m_getFieldInParentInner__int();
+  a = this.m_getFieldInInner__int();
+  a = this.m_getFieldInInner__int();
+  return a;
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  ParentInner.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClass, 'innerclassinheritance.ChildClass$InnerClass');
+
+exports = InnerClass;
+
+//# sourceMappingURL=ChildClass$InnerClass.js.map

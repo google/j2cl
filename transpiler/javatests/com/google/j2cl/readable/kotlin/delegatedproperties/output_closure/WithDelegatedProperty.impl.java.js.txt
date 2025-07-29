@@ -1,0 +1,165 @@
+goog.module('delegatedproperties.WithDelegatedProperty$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let DelegateProvider = goog.forwardDeclare('delegatedproperties.DelegateProvider$impl');
+let PropertyDelegate = goog.forwardDeclare('delegatedproperties.PropertyDelegate$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let Function2 = goog.forwardDeclare('kotlin.jvm.functions.Function2$impl');
+let LocalVariableKPropertyImpl = goog.forwardDeclare('kotlin.jvm.internal.LocalVariableKPropertyImpl$impl');
+let MutableKProperty0Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty0Impl$impl');
+let MutableKProperty1Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty1Impl$impl');
+let KMutableProperty0 = goog.forwardDeclare('kotlin.reflect.KMutableProperty0$impl');
+let KProperty0 = goog.forwardDeclare('kotlin.reflect.KProperty0$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class WithDelegatedProperty extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!PropertyDelegate} @nodts*/
+  this.f_delegatedProperty$delegate__delegatedproperties_WithDelegatedProperty_;
+  /**@type {!PropertyDelegate} @nodts*/
+  this.f_withProvideDelegate$delegate__delegatedproperties_WithDelegatedProperty_;
+  /**@type {string} @nodts*/
+  this.f_aProperty__delegatedproperties_WithDelegatedProperty_;
+  /**@type {!KMutableProperty0<string>} @nodts*/
+  this.f_delegatedToAnotherProperty$delegate__delegatedproperties_WithDelegatedProperty_;
+ }
+ /** @nodts @return {!WithDelegatedProperty} */
+ static $create__() {
+  WithDelegatedProperty.$clinit();
+  let $instance = new WithDelegatedProperty();
+  $instance.$ctor__delegatedproperties_WithDelegatedProperty__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__delegatedproperties_WithDelegatedProperty__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_delegatedProperty$delegate__delegatedproperties_WithDelegatedProperty_ = PropertyDelegate.$create__();
+  this.f_withProvideDelegate$delegate__delegatedproperties_WithDelegatedProperty_ = DelegateProvider.$create__().m_provideDelegate__java_lang_Object__kotlin_reflect_KProperty__delegatedproperties_PropertyDelegate(this, /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getWithProvideDelegate__java_lang_String();
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setWithProvideDelegate__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+  })))));
+  this.f_aProperty__delegatedproperties_WithDelegatedProperty_ = 'foo';
+  let /** WithDelegatedProperty */ $propertyReferenceQualifier;
+  this.f_delegatedToAnotherProperty$delegate__delegatedproperties_WithDelegatedProperty_ = (/**@type {!MutableKProperty0Impl<string>}*/ (($propertyReferenceQualifier = this, MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
+   return $propertyReferenceQualifier.m_getAProperty__java_lang_String();
+  })), Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0_2) =>{
+   return $propertyReferenceQualifier.m_setAProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg0_2, j_l_String)));
+  }))))));
+ }
+ /** @final @nodts @return {string} */
+ m_getDelegatedProperty__java_lang_String() {
+  return this.f_delegatedProperty$delegate__delegatedproperties_WithDelegatedProperty_.m_getValue__java_lang_Object__kotlin_reflect_KProperty__java_lang_String(this, /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getDelegatedProperty__java_lang_String();
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setDelegatedProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+  })))));
+ }
+ /** @final @nodts */
+ m_setDelegatedProperty__java_lang_String__void(/** string */ set__) {
+  this.f_delegatedProperty$delegate__delegatedproperties_WithDelegatedProperty_.m_setValue__java_lang_Object__kotlin_reflect_KProperty__java_lang_String__void(this, /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getDelegatedProperty__java_lang_String();
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setDelegatedProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+  })))), set__);
+  return;
+ }
+ /** @final @nodts @return {string} */
+ m_getWithProvideDelegate__java_lang_String() {
+  return this.f_withProvideDelegate$delegate__delegatedproperties_WithDelegatedProperty_.m_getValue__java_lang_Object__kotlin_reflect_KProperty__java_lang_String(this, /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getWithProvideDelegate__java_lang_String();
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setWithProvideDelegate__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+  })))));
+ }
+ /** @final @nodts */
+ m_setWithProvideDelegate__java_lang_String__void(/** string */ set__) {
+  this.f_withProvideDelegate$delegate__delegatedproperties_WithDelegatedProperty_.m_setValue__java_lang_Object__kotlin_reflect_KProperty__java_lang_String__void(this, /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getWithProvideDelegate__java_lang_String();
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setWithProvideDelegate__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+  })))), set__);
+  return;
+ }
+ /** @final @nodts @return {string} */
+ m_getAProperty__java_lang_String() {
+  return this.f_aProperty__delegatedproperties_WithDelegatedProperty_;
+ }
+ /** @final @nodts */
+ m_setAProperty__java_lang_String__void(/** string */ set__) {
+  this.f_aProperty__delegatedproperties_WithDelegatedProperty_ = set__;
+ }
+ /** @final @nodts @return {string} */
+ m_getDelegatedToAnotherProperty__java_lang_String() {
+  let tmp0_property = /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getDelegatedToAnotherProperty__java_lang_String();
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setDelegatedToAnotherProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+  }))));
+  let property = tmp0_property;
+  return /**@type {string}*/ ($Casts.$to((/**@type {!KProperty0<?string>}*/ (this.f_delegatedToAnotherProperty$delegate__delegatedproperties_WithDelegatedProperty_)).m_get__java_lang_Object(), j_l_String));
+ }
+ /** @final @nodts */
+ m_setDelegatedToAnotherProperty__java_lang_String__void(/** string */ set__) {
+  let tmp0_property = /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getDelegatedToAnotherProperty__java_lang_String();
+  })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
+   return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setDelegatedToAnotherProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
+  }))));
+  let property = tmp0_property;
+  this.f_delegatedToAnotherProperty$delegate__delegatedproperties_WithDelegatedProperty_.m_set__java_lang_Object__void(set__);
+  return;
+ }
+ /** @final @nodts */
+ m_testLocalDelegatedVariable__void() {
+  let localDelegatedVariableProperty_delegate = PropertyDelegate.$create__();
+  let get$localDelegatedVariableProperty = /**  @return {string}*/ (() =>{
+   return localDelegatedVariableProperty_delegate.m_getValue__java_lang_Object__kotlin_reflect_KProperty__java_lang_String(null, /**@type {!LocalVariableKPropertyImpl<string>}*/ (LocalVariableKPropertyImpl.$create__()));
+  });
+  let set$localDelegatedVariableProperty = (/** string */ set__) =>{
+   localDelegatedVariableProperty_delegate.m_setValue__java_lang_Object__kotlin_reflect_KProperty__java_lang_String__void(null, /**@type {!LocalVariableKPropertyImpl<string>}*/ (LocalVariableKPropertyImpl.$create__()), set__);
+   return;
+  };
+  let foo = get$localDelegatedVariableProperty();
+  set$localDelegatedVariableProperty('Foo');
+ }
+ /** @nodts */
+ static $clinit() {
+  WithDelegatedProperty.$clinit = () =>{};
+  WithDelegatedProperty.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof WithDelegatedProperty;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  DelegateProvider = goog.module.get('delegatedproperties.DelegateProvider$impl');
+  PropertyDelegate = goog.module.get('delegatedproperties.PropertyDelegate$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  Function2 = goog.module.get('kotlin.jvm.functions.Function2$impl');
+  LocalVariableKPropertyImpl = goog.module.get('kotlin.jvm.internal.LocalVariableKPropertyImpl$impl');
+  MutableKProperty0Impl = goog.module.get('kotlin.jvm.internal.MutableKProperty0Impl$impl');
+  MutableKProperty1Impl = goog.module.get('kotlin.jvm.internal.MutableKProperty1Impl$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(WithDelegatedProperty, 'delegatedproperties.WithDelegatedProperty');
+
+exports = WithDelegatedProperty;
+
+//# sourceMappingURL=WithDelegatedProperty.js.map

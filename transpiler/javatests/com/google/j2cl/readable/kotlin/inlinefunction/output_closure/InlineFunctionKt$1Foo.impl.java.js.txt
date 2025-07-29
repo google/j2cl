@@ -1,0 +1,54 @@
+goog.module('inlinefunction.InlineFunctionKt.$1Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class $1Foo extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_f__inlinefunction_InlineFunctionKt_1Foo_ = 0;
+ }
+ /** @nodts @return {!$1Foo} */
+ static $create__int(/** number */ f) {
+  $1Foo.$clinit();
+  let $instance = new $1Foo();
+  $instance.$ctor__inlinefunction_InlineFunctionKt_1Foo__int__void(f);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionKt_1Foo__int__void(/** number */ f) {
+  this.$ctor__java_lang_Object__void();
+  this.f_f__inlinefunction_InlineFunctionKt_1Foo_ = f;
+ }
+ /** @final @nodts @return {number} */
+ m_getF__int() {
+  return this.f_f__inlinefunction_InlineFunctionKt_1Foo_;
+ }
+ /** @final @nodts @return {number} */
+ m_mulByTwo__int() {
+  return Math.imul(this.m_getF__int(), 2);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Foo.$clinit = () =>{};
+  $1Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1Foo, 'inlinefunction.InlineFunctionKt$1Foo');
+
+exports = $1Foo;
+
+//# sourceMappingURL=InlineFunctionKt$1Foo.js.map

@@ -1,0 +1,99 @@
+goog.module('kotlinjavainterop.KotlinSet$impl');
+
+const AbstractSet = goog.require('kotlin.collections.AbstractSet$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Set = goog.forwardDeclare('java.util.Set$impl');
+let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template V
+ * @extends {AbstractSet<V>}
+ */
+class KotlinSet extends AbstractSet {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template V @return {!KotlinSet<V>} */
+ static $create__() {
+  KotlinSet.$clinit();
+  let $instance = new KotlinSet();
+  $instance.$ctor__kotlinjavainterop_KotlinSet__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__kotlinjavainterop_KotlinSet__void() {
+  this.$ctor__kotlin_collections_AbstractSet__void();
+ }
+ /** @override @nodts @return {number} */
+ m_getSize__int() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @return {boolean} */
+ isEmpty() {
+  return super.isEmpty();
+ }
+ /** @override @return {boolean} */
+ containsAll(/** !Collection<?> */ elements) {
+  return super.containsAll(elements);
+ }
+ /** @override @return {boolean} */
+ contains(/** V */ element) {
+  return super.contains(element);
+ }
+ /** @override @nodts */
+ m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ action) {
+  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, action);
+ }
+ /** @override @nodts @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {!Stream<V>} */
+ m_parallelStream__java_util_stream_Stream() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {!Stream<*>}*/ (Collection.m_parallelStream__$default__java_util_Collection__java_util_stream_Stream(this)));
+ }
+ /** @override @nodts @return {!Spliterator<V>} */
+ m_spliterator__java_util_Spliterator() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {!Spliterator<*>}*/ (Set.m_spliterator__$default__java_util_Set__java_util_Spliterator(this)));
+ }
+ /** @override @nodts @return {!Stream<V>} */
+ m_stream__java_util_stream_Stream() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {!Stream<*>}*/ (Collection.m_stream__$default__java_util_Collection__java_util_stream_Stream(this)));
+ }
+ /** @nodts */
+ static $clinit() {
+  KotlinSet.$clinit = () =>{};
+  KotlinSet.$loadModules();
+  AbstractSet.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KotlinSet;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Iterable = goog.module.get('java.lang.Iterable$impl');
+  Collection = goog.module.get('java.util.Collection$impl');
+  Set = goog.module.get('java.util.Set$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  NotImplementedError = goog.module.get('kotlin.NotImplementedError$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(KotlinSet, 'kotlinjavainterop.KotlinSet');
+
+exports = KotlinSet;
+
+//# sourceMappingURL=KotlinSet.js.map

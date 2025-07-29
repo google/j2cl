@@ -1,0 +1,82 @@
+goog.module('localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let OfInt = goog.forwardDeclare('javaemul.internal.Ref.OfInt$impl');
+let LocalClassWithConstructor = goog.forwardDeclare('localclasswithconstructor.LocalClassWithConstructor$impl');
+
+/**
+ * @final
+ */
+class $1LocalClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!LocalClassWithConstructor} @nodts*/
+  this.$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass;
+  /**@type {number} @nodts*/
+  this.f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass_ = 0;
+  /**@type {number} @nodts*/
+  this.$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass = 0;
+  /**@type {OfInt} @nodts*/
+  this.$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass;
+ }
+ /** @final @nodts @return {number} */
+ m_getField__int() {
+  return this.f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass_;
+ }
+ /** @final @nodts */
+ m_setField__int__void(/** number */ set__) {
+  this.f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass_ = set__;
+ }
+ //Factory method corresponding to constructor 'LocalClass(LocalClassWithConstructor, int, OfInt, int, int)'.
+ /** @nodts @return {!$1LocalClass} */
+ static $create__localclasswithconstructor_LocalClassWithConstructor__int__javaemul_internal_Ref_OfInt__int__int(/** !LocalClassWithConstructor */ $outer_this, /** number */ $captured_p, /** OfInt */ $captured_localVar, /** number */ a, /** number */ b) {
+  let $instance = new $1LocalClass();
+  $instance.$ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__javaemul_internal_Ref_OfInt__int__int__void($outer_this, $captured_p, $captured_localVar, a, b);
+  return $instance;
+ }
+ //Initialization from constructor 'LocalClass(LocalClassWithConstructor, int, OfInt, int, int)'.
+ /** @nodts */
+ $ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__javaemul_internal_Ref_OfInt__int__int__void(/** !LocalClassWithConstructor */ $outer_this, /** number */ $captured_p, /** OfInt */ $captured_localVar, /** number */ a, /** number */ b) {
+  this.$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $outer_this;
+  this.$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $captured_p;
+  this.$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $captured_localVar;
+  this.$ctor__java_lang_Object__void();
+  this.m_setField__int__void($captured_localVar.f_element__javaemul_internal_Ref_OfInt + a + b | 0);
+  $captured_localVar.f_element__javaemul_internal_Ref_OfInt = this.m_getField__int();
+ }
+ //Factory method corresponding to constructor 'LocalClass(LocalClassWithConstructor, int, OfInt, int)'.
+ /** @nodts @return {!$1LocalClass} */
+ static $create__localclasswithconstructor_LocalClassWithConstructor__int__javaemul_internal_Ref_OfInt__int(/** !LocalClassWithConstructor */ $outer_this, /** number */ $captured_p, /** OfInt */ $captured_localVar, /** number */ a) {
+  $1LocalClass.$clinit();
+  let $instance = new $1LocalClass();
+  $instance.$ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__javaemul_internal_Ref_OfInt__int__void($outer_this, $captured_p, $captured_localVar, a);
+  return $instance;
+ }
+ //Initialization from constructor 'LocalClass(LocalClassWithConstructor, int, OfInt, int)'.
+ /** @nodts */
+ $ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__javaemul_internal_Ref_OfInt__int__void(/** !LocalClassWithConstructor */ $outer_this, /** number */ $captured_p, /** OfInt */ $captured_localVar, /** number */ a) {
+  this.$ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__javaemul_internal_Ref_OfInt__int__int__void($outer_this, $captured_p, $captured_localVar, a, $captured_p);
+  this.m_setField__int__void($captured_localVar.f_element__javaemul_internal_Ref_OfInt);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1LocalClass.$clinit = () =>{};
+  $1LocalClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1LocalClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1LocalClass, 'localclasswithconstructor.LocalClassWithConstructor$1LocalClass');
+
+exports = $1LocalClass;
+
+//# sourceMappingURL=LocalClassWithConstructor$1LocalClass.js.map

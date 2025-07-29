@@ -1,0 +1,45 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.AbstractListCollection$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Collection = goog.require('multipleabstractparents.MultipleAbstractParents.Collection$impl');
+const List = goog.require('multipleabstractparents.MultipleAbstractParents.List$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template T
+ * @implements {List<T>}
+ * @implements {Collection<T>}
+ */
+class AbstractListCollection extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__multipleabstractparents_MultipleAbstractParents_AbstractListCollection__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractListCollection.$clinit = () =>{};
+  AbstractListCollection.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractListCollection;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {?string} */
+ m_getFoo__java_lang_Object__java_lang_String(/** ?T */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+List.$markImplementor(AbstractListCollection);
+Collection.$markImplementor(AbstractListCollection);
+$Util.$setClassMetadata(AbstractListCollection, 'multipleabstractparents.MultipleAbstractParents$AbstractListCollection');
+
+exports = AbstractListCollection;
+
+//# sourceMappingURL=MultipleAbstractParents$AbstractListCollection.js.map

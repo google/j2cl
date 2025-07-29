@@ -1,0 +1,71 @@
+goog.module('anonymousclass.AnonymousClass.$2$impl');
+
+const SomeClass = goog.require('anonymousclass.SomeClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AnonymousClass = goog.forwardDeclare('anonymousclass.AnonymousClass$impl');
+let OfInt = goog.forwardDeclare('javaemul.internal.Ref.OfInt$impl');
+
+/**
+ * @final
+ */
+class $2 extends SomeClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!AnonymousClass} @nodts*/
+  this.$outer_this__anonymousclass_AnonymousClass_2;
+  /**@type {!$2} @nodts*/
+  this.f_o__anonymousclass_AnonymousClass_2_;
+  /**@type {!AnonymousClass} @nodts*/
+  this.f_outer__anonymousclass_AnonymousClass_2_;
+  /**@type {OfInt} @nodts*/
+  this.$captured_capturedVar__anonymousclass_AnonymousClass_2;
+ }
+ /** @nodts @return {!$2} */
+ static $create__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt(/** !AnonymousClass */ $outer_this, /** OfInt */ $captured_capturedVar) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt__void($outer_this, $captured_capturedVar);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt__void(/** !AnonymousClass */ $outer_this, /** OfInt */ $captured_capturedVar) {
+  this.$outer_this__anonymousclass_AnonymousClass_2 = $outer_this;
+  this.$captured_capturedVar__anonymousclass_AnonymousClass_2 = $captured_capturedVar;
+  this.$ctor__anonymousclass_SomeClass__int__void($outer_this.m_getI__int());
+  this.f_o__anonymousclass_AnonymousClass_2_ = this;
+  this.f_outer__anonymousclass_AnonymousClass_2_ = $outer_this;
+ }
+ /** @final @nodts @return {!$2} */
+ m_getO__anonymousclass_AnonymousClass_2() {
+  return this.f_o__anonymousclass_AnonymousClass_2_;
+ }
+ /** @final @nodts @return {!AnonymousClass} */
+ m_getOuter__anonymousclass_AnonymousClass() {
+  return this.f_outer__anonymousclass_AnonymousClass_2_;
+ }
+ /** @override @nodts @return {string} */
+ m_foo__java_lang_String() {
+  this.$captured_capturedVar__anonymousclass_AnonymousClass_2.f_element__javaemul_internal_Ref_OfInt = 2;
+  return 'a';
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  SomeClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2, 'anonymousclass.AnonymousClass$2');
+
+exports = $2;
+
+//# sourceMappingURL=AnonymousClass$2.js.map

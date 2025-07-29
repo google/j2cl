@@ -1,0 +1,59 @@
+goog.module('superfieldaccess.Parent$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const GrandParent = goog.require('superfieldaccess.GrandParent$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+class Parent extends GrandParent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_name__superfieldaccess_Parent_;
+ }
+ /** @nodts @return {!Parent} */
+ static $create__java_lang_String(/** string */ from) {
+  Parent.$clinit();
+  let $instance = new Parent();
+  $instance.$ctor__superfieldaccess_Parent__java_lang_String__void(from);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__superfieldaccess_Parent__java_lang_String__void(/** string */ from) {
+  this.$ctor__superfieldaccess_GrandParent__void();
+  this.f_name__superfieldaccess_Parent_ = 'Parent (from ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(from) + ')';
+ }
+ /** @override @nodts @return {string} */
+ m_getName__java_lang_String() {
+  return this.f_name__superfieldaccess_Parent_;
+ }
+ /** @override @nodts */
+ m_setName__java_lang_String__void(/** string */ set__) {
+  this.f_name__superfieldaccess_Parent_ = set__;
+ }
+ /** @nodts @return {string} */
+ m_getParentName__java_lang_String() {
+  return super.m_getName__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  Parent.$clinit = () =>{};
+  Parent.$loadModules();
+  GrandParent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Parent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(Parent, 'superfieldaccess.Parent');
+
+exports = Parent;
+
+//# sourceMappingURL=Parent.js.map

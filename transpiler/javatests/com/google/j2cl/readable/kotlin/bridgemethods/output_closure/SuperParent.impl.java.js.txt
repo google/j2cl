@@ -1,0 +1,45 @@
+goog.module('bridgemethods.SuperParent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T, S
+ */
+class SuperParent extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T, S @return {!SuperParent<T, S>} */
+ static $create__() {
+  SuperParent.$clinit();
+  let $instance = new SuperParent();
+  $instance.$ctor__bridgemethods_SuperParent__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_SuperParent__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_foo__java_lang_Object__java_lang_Object__void(/** T */ t, /** S */ s) {}
+ /** @nodts */
+ static $clinit() {
+  SuperParent.$clinit = () =>{};
+  SuperParent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SuperParent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SuperParent, 'bridgemethods.SuperParent');
+
+exports = SuperParent;
+
+//# sourceMappingURL=SuperParent.js.map

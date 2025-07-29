@@ -1,0 +1,70 @@
+goog.module('jvmstatic.JvmStaticKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClassWithCompanion = goog.forwardDeclare('jvmstatic.ClassWithCompanion$impl');
+let InterfaceWithCompanion = goog.forwardDeclare('jvmstatic.InterfaceWithCompanion$impl');
+let KotlinObjectWithStaticMembers = goog.forwardDeclare('jvmstatic.KotlinObjectWithStaticMembers$impl');
+
+/**
+ * @final
+ */
+class JvmStaticKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JvmStaticKt} */
+ static $create__() {
+  JvmStaticKt.$clinit();
+  let $instance = new JvmStaticKt();
+  $instance.$ctor__jvmstatic_JvmStaticKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmstatic_JvmStaticKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!*} */
+ static m_f__java_lang_Object__java_lang_Object(/** !* */ o) {
+  JvmStaticKt.$clinit();
+  return o;
+ }
+ /** @nodts */
+ static m_testJvmStaticCalls__void() {
+  JvmStaticKt.$clinit();
+  let a = ClassWithCompanion.m_getStaticProperty__int();
+  let b = ClassWithCompanion.m_staticFunction__int();
+  ClassWithCompanion.m_staticInternalFunction__void();
+  let c = ClassWithCompanion.m_getStaticJsProperty__int();
+  let d = ClassWithCompanion.staticJsPropertyWithGetter;
+  let e = ClassWithCompanion.staticJsPropertyMethod;
+  let f = ClassWithCompanion.staticJsMethod();
+  let g = KotlinObjectWithStaticMembers.m_getStaticProperty__int();
+  let h = KotlinObjectWithStaticMembers.m_staticFunction__int();
+  let i = InterfaceWithCompanion.m_staticMethod__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  JvmStaticKt.$clinit = () =>{};
+  JvmStaticKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JvmStaticKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ClassWithCompanion = goog.module.get('jvmstatic.ClassWithCompanion$impl');
+  InterfaceWithCompanion = goog.module.get('jvmstatic.InterfaceWithCompanion$impl');
+  KotlinObjectWithStaticMembers = goog.module.get('jvmstatic.KotlinObjectWithStaticMembers$impl');
+ }
+}
+$Util.$setClassMetadata(JvmStaticKt, 'jvmstatic.JvmStaticKt');
+
+exports = JvmStaticKt;
+
+//# sourceMappingURL=JvmStaticKt.js.map

@@ -1,0 +1,56 @@
+goog.module('nullability.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class Foo extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!Foo<T>} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__nullability_Foo__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_Foo__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_bar__java_lang_Object__void(/** T */ t) {}
+ /** @final @nodts @return {?T} */
+ m_baz__java_lang_Object() {
+  return null;
+ }
+ /** @final */
+ foo(/** string */ a, /** ?T= */ jsOptional) {}
+ /** @override @return {string} */
+ toString() {
+  return 'Foo';
+ }
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Foo, 'nullability.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

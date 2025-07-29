@@ -1,0 +1,31 @@
+goog.module('lambdas.EmptyInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class EmptyInterface {
+ /** @nodts */
+ static $clinit() {
+  EmptyInterface.$clinit = () =>{};
+  EmptyInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_EmptyInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_EmptyInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+EmptyInterface.$markImplementor(/**@type {Function}*/ (EmptyInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (EmptyInterface), 'lambdas.EmptyInterface');
+
+exports = EmptyInterface;
+
+//# sourceMappingURL=EmptyInterface.js.map

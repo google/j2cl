@@ -1,0 +1,63 @@
+goog.module('bridgemethods.AccidentalOverrideBridge$impl');
+
+const ClassWithParameterizedGet = goog.require('bridgemethods.ClassWithParameterizedGet$impl');
+const Getter = goog.require('bridgemethods.Getter$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {ClassWithParameterizedGet<?string>}
+ * @implements {Getter}
+ */
+class AccidentalOverrideBridge extends ClassWithParameterizedGet {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AccidentalOverrideBridge} */
+ static $create__() {
+  AccidentalOverrideBridge.$clinit();
+  let $instance = new AccidentalOverrideBridge();
+  $instance.$ctor__bridgemethods_AccidentalOverrideBridge__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_AccidentalOverrideBridge__void() {
+  this.$ctor__bridgemethods_ClassWithParameterizedGet__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let g = AccidentalOverrideBridge.$create__();
+  let a = g.m_get__java_lang_String__java_lang_String('');
+ }
+ //Specialized bridge method.
+ /** @override @nodts @suppress{visibility} @return {?string} */
+ m_get__java_lang_String__java_lang_String(/** ?string */ arg0) {
+  return /**@type {?string}*/ ($Casts.$to(super.m_get__java_lang_Object__java_lang_Object(arg0), j_l_String));
+ }
+ /** @nodts */
+ static $clinit() {
+  AccidentalOverrideBridge.$clinit = () =>{};
+  AccidentalOverrideBridge.$loadModules();
+  ClassWithParameterizedGet.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AccidentalOverrideBridge;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Getter.$markImplementor(AccidentalOverrideBridge);
+$Util.$setClassMetadata(AccidentalOverrideBridge, 'bridgemethods.AccidentalOverrideBridge');
+
+exports = AccidentalOverrideBridge;
+
+//# sourceMappingURL=AccidentalOverrideBridge.js.map

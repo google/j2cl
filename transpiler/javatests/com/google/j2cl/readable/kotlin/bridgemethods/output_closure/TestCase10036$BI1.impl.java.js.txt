@@ -1,0 +1,37 @@
+goog.module('bridgemethods.TestCase10036.BI1$impl');
+
+const BI3 = goog.require('bridgemethods.TestCase10036.BI3$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {BI3}
+ */
+class BI1 {
+ /** @abstract @override @return {?string} */
+ get(/** ?string */ value) {}
+ /** @nodts */
+ static $clinit() {
+  BI1.$clinit = () =>{};
+  BI1.$loadModules();
+  BI3.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  BI3.$markImplementor(ctor);
+  ctor.prototype.$implements__bridgemethods_TestCase10036_BI1 = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_TestCase10036_BI1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+BI1.$markImplementor(/**@type {Function}*/ (BI1));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (BI1), 'bridgemethods.TestCase10036$BI1');
+
+exports = BI1;
+
+//# sourceMappingURL=TestCase10036$BI1.js.map

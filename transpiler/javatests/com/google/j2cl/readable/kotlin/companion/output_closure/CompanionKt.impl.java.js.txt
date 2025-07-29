@@ -1,0 +1,78 @@
+goog.module('companion.CompanionKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Companion = goog.forwardDeclare('companion.Companion$impl');
+let DefaultCompanionName = goog.forwardDeclare('companion.DefaultCompanionName$impl');
+let EnumWithCompanion = goog.forwardDeclare('companion.EnumWithCompanion$impl');
+let InterfaceWithCompanion = goog.forwardDeclare('companion.InterfaceWithCompanion$impl');
+let ThirdPartyInterface = goog.forwardDeclare('companion.ThirdPartyInterface$impl');
+let ThirdPartyLibClass = goog.forwardDeclare('companion.ThirdPartyLibClass$impl');
+
+/**
+ * @final
+ */
+class CompanionKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CompanionKt} */
+ static $create__() {
+  CompanionKt.$clinit();
+  let $instance = new CompanionKt();
+  $instance.$ctor__companion_CompanionKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_CompanionKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_companionReferencesFromExternal__void() {
+  CompanionKt.$clinit();
+  DefaultCompanionName.m_companionFunction__java_lang_Object__java_lang_String(DefaultCompanionName.m_getProperty__java_lang_Object());
+  DefaultCompanionName.m_companionFunction__java_lang_Object__java_lang_String(DefaultCompanionName.m_getProperty__java_lang_Object());
+  Companion.f_NamedCompanion__companion_Companion.m_companionFunction__java_lang_String__int__void(Companion.f_NamedCompanion__companion_Companion.m_getPropertyWithInitializer__java_lang_String(), Companion.f_NamedCompanion__companion_Companion.m_getPropertyinitializedFromInitializerBlock__int());
+  Companion.f_NamedCompanion__companion_Companion.m_companionFunction__java_lang_String__int__void(Companion.f_NamedCompanion__companion_Companion.m_getPropertyWithInitializer__java_lang_String(), Companion.f_NamedCompanion__companion_Companion.m_getPropertyinitializedFromInitializerBlock__int());
+  for (let indexedObject = EnumWithCompanion.m_getENUM_SET__arrayOf_companion_EnumWithCompanion(), inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
+   let e = /**@type {!EnumWithCompanion}*/ (indexedObject[inductionVariable]);
+  }
+  let a = 'foo';
+  let b = InterfaceWithCompanion.m_getNonCompileTimeConstant__java_lang_Object();
+  let c = InterfaceWithCompanion.m_getProperty__java_lang_Object();
+  let d = InterfaceWithCompanion.m_publicFunction__java_lang_String();
+  ThirdPartyLibClass.m_function__java_lang_Object__java_lang_Object(ThirdPartyLibClass.m_getProperty__java_lang_Object());
+  let e_1 = 1;
+  let f = ThirdPartyLibClass.m_getNonCompileTimeConstant__java_lang_Object();
+  ThirdPartyInterface.m_function__java_lang_Object__java_lang_Object(ThirdPartyInterface.m_getProperty__java_lang_Object());
+  let g = 0;
+  let h = ThirdPartyInterface.m_getNonCompileTimeConstant__java_lang_Object();
+ }
+ /** @nodts */
+ static $clinit() {
+  CompanionKt.$clinit = () =>{};
+  CompanionKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CompanionKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Companion = goog.module.get('companion.Companion$impl');
+  DefaultCompanionName = goog.module.get('companion.DefaultCompanionName$impl');
+  EnumWithCompanion = goog.module.get('companion.EnumWithCompanion$impl');
+  InterfaceWithCompanion = goog.module.get('companion.InterfaceWithCompanion$impl');
+  ThirdPartyInterface = goog.module.get('companion.ThirdPartyInterface$impl');
+  ThirdPartyLibClass = goog.module.get('companion.ThirdPartyLibClass$impl');
+ }
+}
+$Util.$setClassMetadata(CompanionKt, 'companion.CompanionKt');
+
+exports = CompanionKt;
+
+//# sourceMappingURL=CompanionKt.js.map

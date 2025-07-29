@@ -1,0 +1,13 @@
+goog.module('trycatch.TryCatch');
+
+goog.require('java.lang.ClassCastException');
+goog.require('java.lang.Exception');
+goog.require('java.lang.Object');
+goog.require('java.lang.Throwable');
+goog.require('javaemul.internal.InternalPreconditions');
+goog.require('nativebootstrap.Util');
+goog.require('vmbootstrap.Casts');
+goog.require('vmbootstrap.Exceptions');
+
+const TryCatch = goog.require('trycatch.TryCatch$impl');
+exports = TryCatch;

@@ -1,0 +1,54 @@
+goog.module('genericmethod.SuperContainer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Container = goog.forwardDeclare('genericmethod.Container$impl');
+let Content = goog.forwardDeclare('genericmethod.Content$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+
+/**
+ * @final
+ * @template C
+ */
+class SuperContainer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template C @return {!SuperContainer<C>} */
+ static $create__() {
+  SuperContainer.$clinit();
+  let $instance = new SuperContainer();
+  $instance.$ctor__genericmethod_SuperContainer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericmethod_SuperContainer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {C} */
+ m_get__genericmethod_Container() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @nodts */
+ static $clinit() {
+  SuperContainer.$clinit = () =>{};
+  SuperContainer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SuperContainer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+$Util.$setClassMetadata(SuperContainer, 'genericmethod.SuperContainer');
+
+exports = SuperContainer;
+
+//# sourceMappingURL=SuperContainer.js.map

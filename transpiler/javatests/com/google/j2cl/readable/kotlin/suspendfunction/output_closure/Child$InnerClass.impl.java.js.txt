@@ -1,0 +1,56 @@
+goog.module('suspendfunction.Child.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+let Child = goog.forwardDeclare('suspendfunction.Child$impl');
+let SuspendFunction = goog.forwardDeclare('suspendfunction.SuspendFunction$impl');
+
+/**
+ * @final
+ */
+class InnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Child} @nodts*/
+  this.$outer_this__suspendfunction_Child_InnerClass;
+ }
+ /** @nodts @return {!InnerClass} */
+ static $create__suspendfunction_Child(/** !Child */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__suspendfunction_Child_InnerClass__suspendfunction_Child__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__suspendfunction_Child_InnerClass__suspendfunction_Child__void(/** !Child */ $outer_this) {
+  this.$outer_this__suspendfunction_Child_InnerClass = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!Generator<*, void>} */
+ *m_testSuperQualified__kotlin_coroutines_Continuation__void_$s_(/** Continuation<?> */ $continuation) {
+  (yield* SuspendFunction.prototype.m_main__kotlin_coroutines_Continuation__void_$s_.call(this.$outer_this__suspendfunction_Child_InnerClass, $continuation));
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SuspendFunction = goog.module.get('suspendfunction.SuspendFunction$impl');
+ }
+}
+$Util.$setClassMetadata(InnerClass, 'suspendfunction.Child$InnerClass');
+
+exports = InnerClass;
+
+//# sourceMappingURL=Child$InnerClass.js.map

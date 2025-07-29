@@ -1,0 +1,123 @@
+goog.module('kotlinjavainterop.KotlinIntSet$impl');
+
+const JavaIntSet = goog.require('kotlinjavainterop.JavaIntSet$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class KotlinIntSet extends JavaIntSet {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!KotlinIntSet} */
+ static $create__() {
+  KotlinIntSet.$clinit();
+  let $instance = new KotlinIntSet();
+  $instance.$ctor__kotlinjavainterop_KotlinIntSet__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__kotlinjavainterop_KotlinIntSet__void() {
+  this.$ctor__kotlinjavainterop_JavaIntSet__void();
+ }
+ /** @override @nodts @return {boolean} */
+ m_add__java_lang_Integer__boolean(/** Integer */ element) {
+  return super.m_add__java_lang_Integer__boolean(element);
+ }
+ /** @override @return {boolean} */
+ addAll(/** !Collection<?> */ elements) {
+  return super.addAll(elements);
+ }
+ /** @override */
+ clear() {
+  super.clear();
+ }
+ /** @override @nodts @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(super.m_iterator__java_util_Iterator());
+ }
+ /** @nodts @return {boolean} */
+ m_remove__java_lang_Integer__boolean(/** Integer */ o) {
+  return super.remove(o);
+ }
+ /** @override @return {boolean} */
+ removeAll(/** !Collection<?> */ elements) {
+  return super.removeAll(elements);
+ }
+ /** @override @return {boolean} */
+ retainAll(/** !Collection<?> */ elements) {
+  return super.retainAll(elements);
+ }
+ /** @nodts @return {boolean} */
+ m_contains__java_lang_Integer__boolean(/** Integer */ o) {
+  return super.contains(o);
+ }
+ /** @override @return {boolean} */
+ containsAll(/** !Collection<?> */ elements) {
+  return super.containsAll(elements);
+ }
+ /** @override @return {boolean} */
+ isEmpty() {
+  return super.isEmpty();
+ }
+ /** @override @nodts @return {!Array<!*>} */
+ m_toArray__arrayOf_java_lang_Object() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(super.m_toArray__arrayOf_java_lang_Object());
+ }
+ /** @override @nodts @template T @return {!Array<T>} */
+ m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object(/** Array<T> */ a) {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(super.m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object(a));
+ }
+ /** @nodts @return {number} */
+ m_getSize__int() {
+  return super.size();
+ }
+ /** @final @override @return {boolean} */
+ remove(/** * */ element) {
+  if (!($Equality.$same(element, null) || Integer.$isInstance(element))) {
+   return false;
+  }
+  return this.m_remove__java_lang_Integer__boolean(/**@type {Integer}*/ (element));
+ }
+ /** @final @override @return {boolean} */
+ contains(/** * */ element) {
+  if (!($Equality.$same(element, null) || Integer.$isInstance(element))) {
+   return false;
+  }
+  return this.m_contains__java_lang_Integer__boolean(/**@type {Integer}*/ (element));
+ }
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  KotlinIntSet.$clinit = () =>{};
+  KotlinIntSet.$loadModules();
+  JavaIntSet.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KotlinIntSet;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(KotlinIntSet, 'kotlinjavainterop.KotlinIntSet');
+
+exports = KotlinIntSet;
+
+//# sourceMappingURL=KotlinIntSet.js.map

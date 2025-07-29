@@ -1,0 +1,57 @@
+goog.module('nobridgemethods.TreeMap$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Map = goog.require('nobridgemethods.Map$impl');
+
+let InnerEntry = goog.forwardDeclare('nobridgemethods.TreeMap.InnerEntry$impl');
+
+/**
+ * @template K
+ * @extends {Map<K>}
+ */
+class TreeMap extends Map {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template K @return {!TreeMap<K>} */
+ static $create__() {
+  TreeMap.$clinit();
+  let $instance = new TreeMap();
+  $instance.$ctor__nobridgemethods_TreeMap__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nobridgemethods_TreeMap__void() {
+  this.$ctor__nobridgemethods_Map__void();
+ }
+ /** @nodts @return {!InnerEntry<K>} */
+ m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry(/** K */ key) {
+  return /**@type {!InnerEntry<K>}*/ (InnerEntry.$create__());
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!InnerEntry<K>} */
+ m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry(/** K */ arg0) {
+  return this.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  TreeMap.$clinit = () =>{};
+  TreeMap.$loadModules();
+  Map.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TreeMap;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InnerEntry = goog.module.get('nobridgemethods.TreeMap.InnerEntry$impl');
+ }
+}
+$Util.$setClassMetadata(TreeMap, 'nobridgemethods.TreeMap');
+
+exports = TreeMap;
+
+//# sourceMappingURL=TreeMap.js.map

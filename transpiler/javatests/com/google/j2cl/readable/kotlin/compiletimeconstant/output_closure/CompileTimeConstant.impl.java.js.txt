@@ -1,0 +1,260 @@
+goog.module('compiletimeconstant.CompileTimeConstant$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
+/**
+ * @final
+ */
+class CompileTimeConstant extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_A2__compiletimeconstant_CompileTimeConstant_ = 0;
+  /**@type {number} @nodts*/
+  this.f_B2__compiletimeconstant_CompileTimeConstant_ = 0;
+  /**@type {number} @nodts*/
+  this.f_C2__compiletimeconstant_CompileTimeConstant_ = 0;
+  /**@type {string} @nodts*/
+  this.f_D2__compiletimeconstant_CompileTimeConstant_;
+  /**@type {string} @nodts*/
+  this.f_E2__compiletimeconstant_CompileTimeConstant_;
+  /**@type {string} @nodts*/
+  this.f_F2__compiletimeconstant_CompileTimeConstant_;
+  /**@type {!$Long} @nodts*/
+  this.f_G2__compiletimeconstant_CompileTimeConstant_ = $Long.fromInt(0);
+  /**@type {number} @nodts*/
+  this.f_H2__compiletimeconstant_CompileTimeConstant_ = 0 /* '\u0000' */;
+  /**@type {boolean} @nodts*/
+  this.f_I2__compiletimeconstant_CompileTimeConstant_ = false;
+  /**@type {number} @nodts*/
+  this.f_CHAR_MAX_INT__compiletimeconstant_CompileTimeConstant_ = 0;
+  /**@type {number} @nodts*/
+  this.f_CHAR_MIN_INT__compiletimeconstant_CompileTimeConstant_ = 0;
+  /**@type {boolean} @nodts*/
+  this.f_b__compiletimeconstant_CompileTimeConstant_ = false;
+  /**@type {string} @nodts*/
+  this.f_s__compiletimeconstant_CompileTimeConstant_;
+  /**@type {string} @nodts*/
+  this.f_l__compiletimeconstant_CompileTimeConstant_;
+  /**@type {string} @nodts*/
+  this.f_m__compiletimeconstant_CompileTimeConstant_;
+  /**@type {string} @nodts*/
+  this.f_n__compiletimeconstant_CompileTimeConstant_;
+  /**@type {!Class<?>} @nodts*/
+  this.f_c__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @nodts @return {!CompileTimeConstant} */
+ static $create__() {
+  CompileTimeConstant.$clinit();
+  let $instance = new CompileTimeConstant();
+  $instance.$ctor__compiletimeconstant_CompileTimeConstant__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__compiletimeconstant_CompileTimeConstant__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_A2__compiletimeconstant_CompileTimeConstant_ = 10;
+  this.f_B2__compiletimeconstant_CompileTimeConstant_ = 20;
+  this.f_C2__compiletimeconstant_CompileTimeConstant_ = Math.imul(10, 20);
+  this.f_D2__compiletimeconstant_CompileTimeConstant_ = 'Tur\"tle';
+  this.f_E2__compiletimeconstant_CompileTimeConstant_ = 'Do\"ve';
+  this.f_F2__compiletimeconstant_CompileTimeConstant_ = j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.m_getD2__java_lang_String()) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.m_getE2__java_lang_String());
+  this.f_G2__compiletimeconstant_CompileTimeConstant_ = $Long.fromInt(10000);
+  this.f_H2__compiletimeconstant_CompileTimeConstant_ = 65 /* 'A' */;
+  this.f_I2__compiletimeconstant_CompileTimeConstant_ = $LongUtils.greater(this.m_getG2__long(), $Long.fromInt(100));
+  let tmp = this;
+  tmp.f_CHAR_MAX_INT__compiletimeconstant_CompileTimeConstant_ = 65535 /* '\uFFFF' */;
+  this.f_CHAR_MIN_INT__compiletimeconstant_CompileTimeConstant_ = 0 /* '\u0000' */;
+  this.f_c__compiletimeconstant_CompileTimeConstant_ = CompileTimeConstant.f_classLiteral__compiletimeconstant_CompileTimeConstant_;
+  this.f_b__compiletimeconstant_CompileTimeConstant_ = this.m_getI2__boolean();
+  this.f_s__compiletimeconstant_CompileTimeConstant_ = j_l_String.m_valueOf__java_lang_Object__java_lang_String(Long.m_valueOf__long__java_lang_Long($Long.fromInt(10000)).toString()) + 'Tur\"tleDo\'ve';
+  this.f_l__compiletimeconstant_CompileTimeConstant_ = 'ThisIsALongString';
+  this.f_m__compiletimeconstant_CompileTimeConstant_ = 'ThisIsALongStringAlso';
+  this.f_n__compiletimeconstant_CompileTimeConstant_ = 'ThisIsALongStringAlsoButLonger';
+  let intUnaryMinusOverflow = - -2147483648 | 0;
+  let intPlusOverflow = 2147483647 + 1 | 0;
+  let intMinusOverflow = -2147483648 - 1 | 0;
+  let intTimesOverflow = Math.imul(2147483647, 2);
+  let intShlOverflow = 2147483647 << 2;
+ }
+ /** @final @nodts @return {number} */
+ m_getA2__int() {
+  return this.f_A2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {number} */
+ m_getB2__int() {
+  return this.f_B2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {number} */
+ m_getC2__int() {
+  return this.f_C2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {string} */
+ m_getD2__java_lang_String() {
+  return this.f_D2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {string} */
+ m_getE2__java_lang_String() {
+  return this.f_E2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {string} */
+ m_getF2__java_lang_String() {
+  return this.f_F2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {!$Long} */
+ m_getG2__long() {
+  return this.f_G2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {number} */
+ m_getH2__char() {
+  return this.f_H2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {boolean} */
+ m_getI2__boolean() {
+  return this.f_I2__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {number} */
+ m_getCHAR_MAX_INT__int() {
+  return this.f_CHAR_MAX_INT__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {number} */
+ m_getCHAR_MIN_INT__int() {
+  return this.f_CHAR_MIN_INT__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {boolean} */
+ m_getB__boolean() {
+  return this.f_b__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {string} */
+ m_getS__java_lang_String() {
+  return this.f_s__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {string} */
+ m_getL__java_lang_String() {
+  return this.f_l__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {string} */
+ m_getM__java_lang_String() {
+  return this.f_m__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {string} */
+ m_getN__java_lang_String() {
+  return this.f_n__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {!Class<?>} */
+ m_getC__java_lang_Class() {
+  return this.f_c__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @final @nodts @return {number} */
+ m_testInlineIntoNonConstExpressions__int() {
+  return $Equality.$same('Tur\"tle', '' + 10) ? 1 : $Equality.$same('Tur\"tle', 'Do\'ve') ? 2 : $Equality.$same('Tur\"tle', 'Tur\"tleDo\'ve') ? 3 : $Equality.$same('Do\'ve', 'Tur\"tleDo\'ve') ? 4 : $Equality.$same('ThisIsALongStringAlsoButLonger', 'ThisIsALongString') ? 5 : $Equality.$same('ThisIsALongStringAlso', 'ThisIsALongString') ? 6 : $Equality.$same('ThisIsALongStringAlso', 'ThisIsALongStringAlsoButLonger') ? 7 : 8;
+ }
+ /** @final @nodts */
+ m_testExpressionsWithIntrinsicConstEvaluation__int__void(/** number */ code) {
+  let CHAR_MAX_INT_VALUE = 65535 /* '\uFFFF' */;
+  let CHAR_MIN_INT_VALUE = 0 /* '\u0000' */;
+  let CHAR_MAX_BYTE_VALUE = $Primitives.narrowIntToByte(65535 /* '\uFFFF' */);
+  let CHAR_MIN_BYTE_VALUE = $Primitives.narrowIntToByte(0 /* '\u0000' */);
+  let CHAR_MAX_SHORT_VALUE = $Primitives.narrowIntToShort(65535 /* '\uFFFF' */);
+  let CHAR_MIN_SHORT_VALUE = $Primitives.narrowIntToShort(0 /* '\u0000' */);
+  let CHAR_MAX_LONG_VALUE = $Long.fromInt(65535);
+  let CHAR_MIN_LONG_VALUE = $Long.fromInt(0);
+  let CHAR_MAX_FLOAT_VALUE = 0 /* '\u0000' */;
+  let CHAR_MIN_FLOAT_VALUE = 0 /* '\u0000' */;
+  let CHAR_MAX_DOUBLE_VALUE = 65535 /* '\uFFFF' */;
+  let CHAR_MIN_DOUBLE_VALUE = 0 /* '\u0000' */;
+ }
+ /** @nodts @return {*} */
+ static m_getOBJ__java_lang_Object() {
+  CompileTimeConstant.$clinit();
+  return CompileTimeConstant.f_OBJ__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @nodts @return {?string} */
+ static m_getK__java_lang_String() {
+  CompileTimeConstant.$clinit();
+  return CompileTimeConstant.f_K__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @nodts @return {!Class<?>} */
+ static m_getClassLiteral__java_lang_Class() {
+  CompileTimeConstant.$clinit();
+  return CompileTimeConstant.f_classLiteral__compiletimeconstant_CompileTimeConstant_;
+ }
+ /** @nodts */
+ static $clinit() {
+  CompileTimeConstant.$clinit = () =>{};
+  CompileTimeConstant.$loadModules();
+  j_l_Object.$clinit();
+  CompileTimeConstant.f_classLiteral__compiletimeconstant_CompileTimeConstant_ = Class.$get(CompileTimeConstant);
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CompileTimeConstant;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Class = goog.module.get('java.lang.Class$impl');
+  Long = goog.module.get('java.lang.Long$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
+}
+/**@type {*} @nodts*/
+CompileTimeConstant.f_OBJ__compiletimeconstant_CompileTimeConstant_;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_DEFAULT__compiletimeconstant_CompileTimeConstant = 0;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_A__compiletimeconstant_CompileTimeConstant = 10;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_B__compiletimeconstant_CompileTimeConstant = 20;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_C__compiletimeconstant_CompileTimeConstant = 200;
+/**@const {string} @nodts*/
+CompileTimeConstant.f_D__compiletimeconstant_CompileTimeConstant = 'Tur\"tle';
+/**@const {string} @nodts*/
+CompileTimeConstant.f_E__compiletimeconstant_CompileTimeConstant = 'Do\'ve';
+/**@const {string} @nodts*/
+CompileTimeConstant.f_F__compiletimeconstant_CompileTimeConstant = 'Tur\"tleDo\'ve';
+/**@const {string} @nodts*/
+CompileTimeConstant.f_J__compiletimeconstant_CompileTimeConstant = 'Tur\"tleDo\'veTur\"tleDo\'ve';
+/**@type {?string} @nodts*/
+CompileTimeConstant.f_K__compiletimeconstant_CompileTimeConstant_;
+/**@const {string} @nodts*/
+CompileTimeConstant.f_L__compiletimeconstant_CompileTimeConstant = 'ThisIsALongString';
+/**@const {string} @nodts*/
+CompileTimeConstant.f_M__compiletimeconstant_CompileTimeConstant = 'ThisIsALongStringAlso';
+/**@const {string} @nodts*/
+CompileTimeConstant.f_N__compiletimeconstant_CompileTimeConstant = 'ThisIsALongStringAlsoButLonger';
+/**@const {!$Long} @nodts*/
+CompileTimeConstant.f_G__compiletimeconstant_CompileTimeConstant = $Long.fromInt(10000);
+/**@const {number} @nodts*/
+CompileTimeConstant.f_H__compiletimeconstant_CompileTimeConstant = 65 /* 'A' */;
+/**@const {boolean} @nodts*/
+CompileTimeConstant.f_I__compiletimeconstant_CompileTimeConstant = true;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_MIN_BYTE__compiletimeconstant_CompileTimeConstant = -128;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_MIN_SHORT__compiletimeconstant_CompileTimeConstant = -32768;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_MIN_BYTE_WITH_CAST__compiletimeconstant_CompileTimeConstant = -128;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_MIN_SHORT_WITH_CAST__compiletimeconstant_CompileTimeConstant = -32768;
+/**@type {!Class<?>} @nodts*/
+CompileTimeConstant.f_classLiteral__compiletimeconstant_CompileTimeConstant_;
+$Util.$setClassMetadata(CompileTimeConstant, 'compiletimeconstant.CompileTimeConstant');
+
+exports = CompileTimeConstant;
+
+//# sourceMappingURL=CompileTimeConstant.js.map

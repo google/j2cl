@@ -1,0 +1,68 @@
+goog.module('equality.Equality$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+/**
+ * @final
+ */
+class Equality extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Equality} */
+ static $create__() {
+  Equality.$clinit();
+  let $instance = new Equality();
+  $instance.$ctor__equality_Equality__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__equality_Equality__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let a = false == false;
+  let b = 0 != 1;
+  let c = !$Equality.$same(j_l_Object.$create__(), j_l_Object.$create__());
+  let d = $Equality.$same(/**@type {?number}*/ ($Casts.$to(0, Double)), /**@type {?number}*/ ($Casts.$to(0, Double)));
+  let e = $Equality.$same(Float.m_valueOf__float__java_lang_Float(0), Float.m_valueOf__float__java_lang_Float(0));
+  let f = !$Equality.$same(null, j_l_Object.$create__());
+  let g = !$Equality.$same(j_l_Object.$create__(), null);
+  let h = !$Equality.$same(null, /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
+ }
+ /** @nodts */
+ static $clinit() {
+  Equality.$clinit = () =>{};
+  Equality.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Equality;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(Equality, 'equality.Equality');
+
+exports = Equality;
+
+//# sourceMappingURL=Equality.js.map

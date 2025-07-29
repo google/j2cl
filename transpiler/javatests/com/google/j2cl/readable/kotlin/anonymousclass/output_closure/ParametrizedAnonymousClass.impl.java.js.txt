@@ -1,0 +1,52 @@
+goog.module('anonymousclass.ParametrizedAnonymousClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('anonymousclass.ParametrizedAnonymousClass.$1$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class ParametrizedAnonymousClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!ParametrizedAnonymousClass<T>} */
+ static $create__() {
+  ParametrizedAnonymousClass.$clinit();
+  let $instance = new ParametrizedAnonymousClass();
+  $instance.$ctor__anonymousclass_ParametrizedAnonymousClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_ParametrizedAnonymousClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @template S */
+ m_main__java_lang_Object__void(/** S */ s) {
+  let instance = /**@type {!$1<S, T>}*/ ($1.$create__anonymousclass_ParametrizedAnonymousClass__java_lang_Object(this, s));
+ }
+ /** @nodts */
+ static $clinit() {
+  ParametrizedAnonymousClass.$clinit = () =>{};
+  ParametrizedAnonymousClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParametrizedAnonymousClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('anonymousclass.ParametrizedAnonymousClass.$1$impl');
+ }
+}
+$Util.$setClassMetadata(ParametrizedAnonymousClass, 'anonymousclass.ParametrizedAnonymousClass');
+
+exports = ParametrizedAnonymousClass;
+
+//# sourceMappingURL=ParametrizedAnonymousClass.js.map

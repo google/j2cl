@@ -1,0 +1,83 @@
+goog.module('jsoverlay.NativeJsTypeWithOverlay.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeJsTypeWithOverlay = goog.require('test.foo.NativeJsTypeWithOverlay');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts @return {number} */
+ static m_callM__$devirt__jsoverlay_NativeJsTypeWithOverlay__int(/** !NativeJsTypeWithOverlay */ $thisArg) {
+  $Overlay.$clinit();
+  return $thisArg.m();
+ }
+ /** @final @nodts @return {number} */
+ static m_foo__$devirt__jsoverlay_NativeJsTypeWithOverlay__int(/** !NativeJsTypeWithOverlay */ $thisArg) {
+  $Overlay.$clinit();
+  return 1;
+ }
+ /** @final @nodts @return {number} */
+ static m_baz__$devirt__jsoverlay_NativeJsTypeWithOverlay__int(/** !NativeJsTypeWithOverlay */ $thisArg) {
+  $Overlay.$clinit();
+  return 1;
+ }
+ /** @final @nodts */
+ static m_overlayWithJsFunction__$devirt__jsoverlay_NativeJsTypeWithOverlay__void(/** !NativeJsTypeWithOverlay */ $thisArg) {
+  $Overlay.$clinit();
+  (() =>{})();
+ }
+ /** @final @nodts */
+ static m_overlay__$devirt__jsoverlay_NativeJsTypeWithOverlay__void(/** !NativeJsTypeWithOverlay */ $thisArg) {
+  $Overlay.$clinit();
+ }
+ /** @final @nodts @return {number} */
+ static m_fun__int() {
+  $Overlay.$clinit();
+  return 1;
+ }
+ /** @final @nodts @return {number} */
+ static m_bar__int() {
+  $Overlay.$clinit();
+  return 1;
+ }
+ /** @final @nodts @return {number} */
+ static m_varargs__arrayOf_int__int(/** !Array<number> */ a) {
+  $Overlay.$clinit();
+  return a[0];
+ }
+ /** @final @nodts */
+ static m_overlay__jsoverlay_NativeJsTypeWithOverlay__void(/** NativeJsTypeWithOverlay */ o) {
+  $Overlay.$clinit();
+ }
+ /** @nodts @return {*} */
+ static get f_staticField__jsoverlay_NativeJsTypeWithOverlay_$Overlay() {
+  return ($Overlay.$clinit(), $Overlay.$static_staticField__jsoverlay_NativeJsTypeWithOverlay_$Overlay);
+ }
+ /** @nodts */
+ static set f_staticField__jsoverlay_NativeJsTypeWithOverlay_$Overlay(/** * */ value) {
+  ($Overlay.$clinit(), $Overlay.$static_staticField__jsoverlay_NativeJsTypeWithOverlay_$Overlay = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+  $Overlay.$static_staticField__jsoverlay_NativeJsTypeWithOverlay_$Overlay = j_l_Object.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeJsTypeWithOverlay;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+ }
+}
+/**@private {*} @nodts*/
+$Overlay.$static_staticField__jsoverlay_NativeJsTypeWithOverlay_$Overlay;
+$Util.$setClassMetadata($Overlay, 'test.foo.NativeJsTypeWithOverlay');
+
+exports = $Overlay;
+
+//# sourceMappingURL=NativeJsTypeWithOverlay$$Overlay.js.map

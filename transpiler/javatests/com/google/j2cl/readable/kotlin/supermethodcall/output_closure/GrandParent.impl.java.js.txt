@@ -1,0 +1,52 @@
+goog.module('supermethodcall.GrandParent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class GrandParent extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!GrandParent} */
+ static $create__() {
+  GrandParent.$clinit();
+  let $instance = new GrandParent();
+  $instance.$ctor__supermethodcall_GrandParent__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__supermethodcall_GrandParent__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_grandParentSimplest__void() {}
+ /** @nodts */
+ m_grandParentWithParams__int__void(/** number */ foo) {}
+ /** @nodts @return {*} */
+ m_grandParentWithChangingReturn__java_lang_Object() {
+  return null;
+ }
+ /** @nodts */
+ m_defaultParent__void() {}
+ /** @nodts */
+ m_defaultGrandParent__void() {}
+ /** @nodts */
+ static $clinit() {
+  GrandParent.$clinit = () =>{};
+  GrandParent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GrandParent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GrandParent, 'supermethodcall.GrandParent');
+
+exports = GrandParent;
+
+//# sourceMappingURL=GrandParent.js.map

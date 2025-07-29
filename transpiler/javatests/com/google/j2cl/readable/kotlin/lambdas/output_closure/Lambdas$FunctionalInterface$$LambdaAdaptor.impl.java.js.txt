@@ -1,0 +1,48 @@
+goog.module('lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const FunctionalInterface = goog.require('lambdas.Lambdas.FunctionalInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {FunctionalInterface}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(number):number */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(number):number} @nodts*/
+  this.f_fn__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor__lambdas_Lambdas_FunctionalInterface_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor__lambdas_Lambdas_FunctionalInterface_$JsFunction__void(/** ?function(number):number */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {number} */
+ m_m__int__int(/** number */ arg0) {
+  let /** ?function(number):number */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+FunctionalInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'lambdas.Lambdas$FunctionalInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Lambdas$FunctionalInterface$$LambdaAdaptor.js.map

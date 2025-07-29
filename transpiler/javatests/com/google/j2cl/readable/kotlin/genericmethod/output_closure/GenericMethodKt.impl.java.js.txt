@@ -1,0 +1,94 @@
+goog.module('genericmethod.GenericMethodKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Container = goog.forwardDeclare('genericmethod.Container$impl');
+let Content = goog.forwardDeclare('genericmethod.Content$impl');
+let SuperContainer = goog.forwardDeclare('genericmethod.SuperContainer$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class GenericMethodKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!GenericMethodKt} */
+ static $create__() {
+  GenericMethodKt.$clinit();
+  let $instance = new GenericMethodKt();
+  $instance.$ctor__genericmethod_GenericMethodKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericmethod_GenericMethodKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_acceptsContent__genericmethod_Content__void(/** !Content */ content) {
+  GenericMethodKt.$clinit();
+ }
+ /** @nodts */
+ static m_acceptsString__java_lang_String__void(/** ?string */ string_1) {
+  GenericMethodKt.$clinit();
+ }
+ /** @nodts */
+ static m_testErasureCast_wildcard__void() {
+  GenericMethodKt.$clinit();
+  let list = /**@type {!ArrayList<!Container<?>>}*/ (ArrayList.$create__());
+  let content = /**@type {!Content}*/ ((/**@type {!Container<Content>}*/ ($Casts.$to(list.getAtIndex(0), Container))).m_get__genericmethod_Content());
+  GenericMethodKt.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String());
+  GenericMethodKt.m_acceptsContent__genericmethod_Content__void(content);
+  let nestedWildcardList = /**@type {!ArrayList<!SuperContainer<?>>}*/ (ArrayList.$create__());
+  let nestedContent = /**@type {!Content}*/ ((/**@type {!Container<Content>}*/ ((/**@type {!SuperContainer<Container>}*/ ($Casts.$to(nestedWildcardList.getAtIndex(0), SuperContainer))).m_get__genericmethod_Container())).m_get__genericmethod_Content());
+  GenericMethodKt.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String());
+  GenericMethodKt.m_acceptsContent__genericmethod_Content__void(nestedContent);
+  let deepWildcardList = /**@type {!ArrayList<!SuperContainer<!Container<?>>>}*/ (ArrayList.$create__());
+  let deepContent = /**@type {!Content}*/ ((/**@type {!SuperContainer<!Container<?>>}*/ ($Casts.$to(deepWildcardList.getAtIndex(0), SuperContainer))).m_get__genericmethod_Container().m_get__genericmethod_Content());
+  GenericMethodKt.m_acceptsString__java_lang_String__void(deepContent.m_getProp__java_lang_String());
+  GenericMethodKt.m_acceptsContent__genericmethod_Content__void(deepContent);
+ }
+ /** @nodts @template CT, C */
+ static m_testErasureCast_typeVariable__void() {
+  GenericMethodKt.$clinit();
+  let list = /**@type {!ArrayList<!Container<C>>}*/ (ArrayList.$create__());
+  let content = /**@type {!Content}*/ ((/**@type {!Container<C>}*/ ($Casts.$to(list.getAtIndex(0), Container))).m_get__genericmethod_Content());
+  GenericMethodKt.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String());
+  GenericMethodKt.m_acceptsContent__genericmethod_Content__void(content);
+  let nestedTypeVariableList = /**@type {!ArrayList<!SuperContainer<CT>>}*/ (ArrayList.$create__());
+  let nestedContent = /**@type {!Content}*/ ((/**@type {!Container<?>}*/ ((/**@type {!SuperContainer<CT>}*/ ($Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer))).m_get__genericmethod_Container())).m_get__genericmethod_Content());
+  GenericMethodKt.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String());
+  GenericMethodKt.m_acceptsContent__genericmethod_Content__void(nestedContent);
+  let deepTypeVariableList = /**@type {!ArrayList<!SuperContainer<!Container<C>>>}*/ (ArrayList.$create__());
+  let deepContent = /**@type {!Content}*/ ((/**@type {!SuperContainer<!Container<C>>}*/ ($Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer))).m_get__genericmethod_Container().m_get__genericmethod_Content());
+  GenericMethodKt.m_acceptsString__java_lang_String__void(deepContent.m_getProp__java_lang_String());
+  GenericMethodKt.m_acceptsContent__genericmethod_Content__void(deepContent);
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericMethodKt.$clinit = () =>{};
+  GenericMethodKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericMethodKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Container = goog.module.get('genericmethod.Container$impl');
+  SuperContainer = goog.module.get('genericmethod.SuperContainer$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(GenericMethodKt, 'genericmethod.GenericMethodKt');
+
+exports = GenericMethodKt;
+
+//# sourceMappingURL=GenericMethodKt.js.map

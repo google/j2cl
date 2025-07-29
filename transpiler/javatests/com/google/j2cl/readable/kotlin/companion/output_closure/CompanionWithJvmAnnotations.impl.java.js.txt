@@ -1,0 +1,92 @@
+goog.module('companion.CompanionWithJvmAnnotations$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class CompanionWithJvmAnnotations extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CompanionWithJvmAnnotations} */
+ static $create__() {
+  CompanionWithJvmAnnotations.$clinit();
+  let $instance = new CompanionWithJvmAnnotations();
+  $instance.$ctor__companion_CompanionWithJvmAnnotations__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_CompanionWithJvmAnnotations__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getJvmStaticProperty__int() {
+  CompanionWithJvmAnnotations.$clinit();
+  return CompanionWithJvmAnnotations.f_jvmStaticProperty__companion_CompanionWithJvmAnnotations_;
+ }
+ /** @nodts */
+ static m_setJvmStaticProperty__int__void(/** number */ set__) {
+  CompanionWithJvmAnnotations.$clinit();
+  CompanionWithJvmAnnotations.f_jvmStaticProperty__companion_CompanionWithJvmAnnotations_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_getJvmStaticNonCompileTimeConstant__int() {
+  CompanionWithJvmAnnotations.$clinit();
+  return CompanionWithJvmAnnotations.f_jvmStaticNonCompileTimeConstant__companion_CompanionWithJvmAnnotations_;
+ }
+ /** @nodts @return {number} */
+ static m_jvmStaticFunction__int() {
+  CompanionWithJvmAnnotations.$clinit();
+  return Math.imul(CompanionWithJvmAnnotations.m_getJvmStaticNonCompileTimeConstant__int(), CompanionWithJvmAnnotations.$static_jvmFieldNonCompileTimeConstant__companion_CompanionWithJvmAnnotations);
+ }
+ /** @nodts @return {number} */
+ static get f_jvmFieldProperty__companion_CompanionWithJvmAnnotations() {
+  return (CompanionWithJvmAnnotations.$clinit(), CompanionWithJvmAnnotations.$static_jvmFieldProperty__companion_CompanionWithJvmAnnotations);
+ }
+ /** @nodts */
+ static set f_jvmFieldProperty__companion_CompanionWithJvmAnnotations(/** number */ value) {
+  (CompanionWithJvmAnnotations.$clinit(), CompanionWithJvmAnnotations.$static_jvmFieldProperty__companion_CompanionWithJvmAnnotations = value);
+ }
+ /** @nodts @return {number} */
+ static get f_jvmFieldNonCompileTimeConstant__companion_CompanionWithJvmAnnotations() {
+  return (CompanionWithJvmAnnotations.$clinit(), CompanionWithJvmAnnotations.$static_jvmFieldNonCompileTimeConstant__companion_CompanionWithJvmAnnotations);
+ }
+ /** @nodts */
+ static $clinit() {
+  CompanionWithJvmAnnotations.$clinit = () =>{};
+  CompanionWithJvmAnnotations.$loadModules();
+  j_l_Object.$clinit();
+  CompanionWithJvmAnnotations.$static_jvmFieldProperty__companion_CompanionWithJvmAnnotations = 1;
+  CompanionWithJvmAnnotations.$static_jvmFieldNonCompileTimeConstant__companion_CompanionWithJvmAnnotations = 1;
+  CompanionWithJvmAnnotations.f_jvmStaticProperty__companion_CompanionWithJvmAnnotations_ = 1;
+  CompanionWithJvmAnnotations.f_jvmStaticNonCompileTimeConstant__companion_CompanionWithJvmAnnotations_ = 1;
+  for (let inductionVariable = 0; inductionVariable <= 10; inductionVariable = inductionVariable + 1 | 0) {
+   let i = inductionVariable;
+   CompanionWithJvmAnnotations.$static_jvmFieldProperty__companion_CompanionWithJvmAnnotations = Math.imul(CompanionWithJvmAnnotations.$static_jvmFieldProperty__companion_CompanionWithJvmAnnotations, i);
+   CompanionWithJvmAnnotations.f_jvmStaticProperty__companion_CompanionWithJvmAnnotations_ = Math.imul(CompanionWithJvmAnnotations.f_jvmStaticProperty__companion_CompanionWithJvmAnnotations_, i);
+  }
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CompanionWithJvmAnnotations;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {number} @nodts*/
+CompanionWithJvmAnnotations.$static_jvmFieldProperty__companion_CompanionWithJvmAnnotations = 0;
+/**@private {number} @nodts*/
+CompanionWithJvmAnnotations.$static_jvmFieldNonCompileTimeConstant__companion_CompanionWithJvmAnnotations = 0;
+/**@type {number} @nodts*/
+CompanionWithJvmAnnotations.f_jvmStaticProperty__companion_CompanionWithJvmAnnotations_ = 0;
+/**@type {number} @nodts*/
+CompanionWithJvmAnnotations.f_jvmStaticNonCompileTimeConstant__companion_CompanionWithJvmAnnotations_ = 0;
+$Util.$setClassMetadata(CompanionWithJvmAnnotations, 'companion.CompanionWithJvmAnnotations');
+
+exports = CompanionWithJvmAnnotations;
+
+//# sourceMappingURL=CompanionWithJvmAnnotations.js.map

@@ -1,0 +1,58 @@
+goog.module('jsoptional.Main.SpecializedSubtype$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const I = goog.require('jsoptional.Main.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Main = goog.forwardDeclare('jsoptional.Main$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {I<string>}
+ */
+class SpecializedSubtype extends j_l_Object {
+ 
+ constructor(/** !Main */ $outer_this, /** *= */ a) {
+  SpecializedSubtype.$clinit();
+  super();
+  /**@type {!Main} @nodts*/
+  this.$outer_this__jsoptional_Main_SpecializedSubtype;
+  this.$ctor__jsoptional_Main_SpecializedSubtype__jsoptional_Main__java_lang_Object__void($outer_this, a);
+ }
+ /** @nodts */
+ $ctor__jsoptional_Main_SpecializedSubtype__jsoptional_Main__java_lang_Object__void(/** !Main */ $outer_this, /** * */ a) {
+  this.$outer_this__jsoptional_Main_SpecializedSubtype = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_m__java_lang_String__java_lang_Object__void(/** string */ t, /** * */ o) {}
+ //Bridge method.
+ /** @override @suppress{visibility} */
+ m(/** string */ arg0, /** *= */ arg1) {
+  this.m_m__java_lang_String__java_lang_Object__void(/**@type {string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
+ }
+ /** @nodts */
+ static $clinit() {
+  SpecializedSubtype.$clinit = () =>{};
+  SpecializedSubtype.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SpecializedSubtype;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+I.$markImplementor(SpecializedSubtype);
+$Util.$setClassMetadata(SpecializedSubtype, 'jsoptional.Main$SpecializedSubtype');
+
+exports = SpecializedSubtype;
+
+//# sourceMappingURL=Main$SpecializedSubtype.js.map

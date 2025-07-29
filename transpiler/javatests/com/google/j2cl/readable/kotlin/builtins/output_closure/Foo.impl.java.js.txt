@@ -1,0 +1,72 @@
+goog.module('builtins.Foo$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @final
+ * @extends {Enum<!Foo>}
+ */
+class Foo extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Foo} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new Foo();
+  $instance.$ctor__builtins_Foo__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__builtins_Foo__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!Foo} */
+ static m_valueOf__java_lang_String__builtins_Foo(/** string */ name) {
+  Foo.$clinit();
+  if ($Equality.$same(Foo.f_namesToValuesMap__builtins_Foo_, null)) {
+   Foo.f_namesToValuesMap__builtins_Foo_ = (/**@type {Map<?string, !Foo>}*/ ($Enums.createMapFromValues(Foo.m_values__arrayOf_builtins_Foo())));
+  }
+  return /**@type {Foo}*/ ($Enums.getValueFromNameAndMap(name, Foo.f_namesToValuesMap__builtins_Foo_));
+ }
+ /** @nodts @return {!Array<!Foo>} */
+ static m_values__arrayOf_builtins_Foo() {
+  Foo.$clinit();
+  return /**@type {!Array<!Foo>}*/ ($Arrays.$stampType([Foo.f_FOO__builtins_Foo], Foo));
+ }
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+Foo.$ordinal_FOO__builtins_Foo = 0;
+/**@const {!Foo} @nodts*/
+Foo.f_FOO__builtins_Foo = /**@pureOrBreakMyCode*/ Foo.$create__java_lang_String__int($Util.$makeEnumName('FOO'), Foo.$ordinal_FOO__builtins_Foo);
+/**@type {Map<?string, !Foo>} @nodts*/
+Foo.f_namesToValuesMap__builtins_Foo_;
+$Util.$setClassMetadataForEnum(Foo, 'builtins.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

@@ -1,0 +1,120 @@
+goog.module('destructuringdeclarations.Data$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class Data extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_name__destructuringdeclarations_Data_;
+  /**@type {number} @nodts*/
+  this.f_age__destructuringdeclarations_Data_ = 0;
+ }
+ /** @nodts @return {!Data} */
+ static $create__java_lang_String__int(/** string */ name, /** number */ age) {
+  Data.$clinit();
+  let $instance = new Data();
+  $instance.$ctor__destructuringdeclarations_Data__java_lang_String__int__void(name, age);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__destructuringdeclarations_Data__java_lang_String__int__void(/** string */ name, /** number */ age) {
+  this.$ctor__java_lang_Object__void();
+  this.f_name__destructuringdeclarations_Data_ = name;
+  this.f_age__destructuringdeclarations_Data_ = age;
+ }
+ /** @final @nodts @return {string} */
+ m_getName__java_lang_String() {
+  return this.f_name__destructuringdeclarations_Data_;
+ }
+ /** @final @nodts @return {number} */
+ m_getAge__int() {
+  return this.f_age__destructuringdeclarations_Data_;
+ }
+ /** @final @nodts @return {string} */
+ m_component1__java_lang_String() {
+  return this.f_name__destructuringdeclarations_Data_;
+ }
+ /** @final @nodts @return {number} */
+ m_component2__int() {
+  return this.f_age__destructuringdeclarations_Data_;
+ }
+ /** @final @nodts @return {!Data} */
+ m_copy__java_lang_String__int__destructuringdeclarations_Data(/** string */ name, /** number */ age) {
+  return Data.$create__java_lang_String__int(name, age);
+ }
+ /** @final @nodts @return {!Data} */
+ m_copy$default__java_lang_String__int__int__java_lang_Object__destructuringdeclarations_Data(/** ?string */ name, /** number */ age, /** number */ _mask0, /** * */ _handler) {
+  if ((_mask0 & 1) != 0) {
+   name = this.f_name__destructuringdeclarations_Data_;
+  }
+  if ((_mask0 & 2) != 0) {
+   age = this.f_age__destructuringdeclarations_Data_;
+  }
+  return this.m_copy__java_lang_String__int__destructuringdeclarations_Data(/**@type {string}*/ (name), age);
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'Data(' + 'name=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_name__destructuringdeclarations_Data_) + ', ' + 'age=' + this.f_age__destructuringdeclarations_Data_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let result = $Objects.m_hashCode__java_lang_Object__int(this.f_name__destructuringdeclarations_Data_);
+  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(Integer.m_valueOf__int__java_lang_Integer(this.f_age__destructuringdeclarations_Data_)) | 0;
+  return result;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!Data.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!Data}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), Data));
+  if (!$Equality.$same(this.f_name__destructuringdeclarations_Data_, tmp0_other_with_cast.f_name__destructuringdeclarations_Data_)) {
+   return false;
+  }
+  if (this.f_age__destructuringdeclarations_Data_ != tmp0_other_with_cast.f_age__destructuringdeclarations_Data_) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  Data.$clinit = () =>{};
+  Data.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Data;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(Data, 'destructuringdeclarations.Data');
+
+exports = Data;
+
+//# sourceMappingURL=Data.js.map

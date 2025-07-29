@@ -1,0 +1,62 @@
+goog.module('dataclass.DataClassKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let BasicDataClass = goog.forwardDeclare('dataclass.BasicDataClass$impl');
+let IntValueHolder = goog.forwardDeclare('dataclass.IntValueHolder$impl');
+let PolymorphicDataType = goog.forwardDeclare('dataclass.PolymorphicDataType$impl');
+
+/**
+ * @final
+ */
+class DataClassKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!DataClassKt} */
+ static $create__() {
+  DataClassKt.$clinit();
+  let $instance = new DataClassKt();
+  $instance.$ctor__dataclass_DataClassKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_DataClassKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_main__void() {
+  DataClassKt.$clinit();
+  let destruct = BasicDataClass.$create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(1, 0, 2, null);
+  let foo = destruct.m_component1__int();
+  let destruct_1 = PolymorphicDataType.$create__int__int__int(1, 2, 3);
+  let a = destruct_1.m_component1__int();
+  let b = destruct_1.m_component2__int();
+  let c = destruct_1.m_component3__int();
+  IntValueHolder.$create__int(10).m_getBackingValue__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  DataClassKt.$clinit = () =>{};
+  DataClassKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DataClassKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  BasicDataClass = goog.module.get('dataclass.BasicDataClass$impl');
+  IntValueHolder = goog.module.get('dataclass.IntValueHolder$impl');
+  PolymorphicDataType = goog.module.get('dataclass.PolymorphicDataType$impl');
+ }
+}
+$Util.$setClassMetadata(DataClassKt, 'dataclass.DataClassKt');
+
+exports = DataClassKt;
+
+//# sourceMappingURL=DataClassKt.js.map

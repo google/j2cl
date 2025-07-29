@@ -1,0 +1,184 @@
+goog.module('numberintrinsics.NumbersKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
+/**
+ * @final
+ */
+class NumbersKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NumbersKt} */
+ static $create__() {
+  NumbersKt.$clinit();
+  let $instance = new NumbersKt();
+  $instance.$ctor__numberintrinsics_NumbersKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__numberintrinsics_NumbersKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_bytes__void() {
+  NumbersKt.$clinit();
+  let a = 0;
+  let b = 0;
+  let c = 0;
+  let d = $Long.fromInt(0);
+  let e = 0;
+  let f = 0;
+ }
+ /** @nodts */
+ static m_shorts__void() {
+  NumbersKt.$clinit();
+  let a = 0;
+  let b = $Primitives.narrowShortToByte(a);
+  let c = a;
+  let d = a;
+  let e = $Primitives.widenShortToLong(a);
+  let f = a;
+  let g = a;
+ }
+ /** @nodts */
+ static m_ints__void() {
+  NumbersKt.$clinit();
+  let a = 0;
+  let b = 0;
+  let c = 0;
+  let d = $Long.fromInt(0);
+  let e = 0;
+  let f = 0;
+ }
+ /** @nodts */
+ static m_longs__void() {
+  NumbersKt.$clinit();
+  let a = 0;
+  let b = 0;
+  let c = 0;
+  let d = $Long.fromInt(0);
+  let e = 0;
+  let f = 0;
+ }
+ /** @nodts */
+ static m_floats__void() {
+  NumbersKt.$clinit();
+  let a = 0;
+  let b = $Long.fromInt(0);
+  let c = 0;
+  let d = 0;
+ }
+ /** @nodts */
+ static m_double__void() {
+  NumbersKt.$clinit();
+  let a = 0;
+  let b = $Long.fromInt(0);
+  let c = 0;
+  let d = 0;
+ }
+ /** @nodts */
+ static m_numbers__void() {
+  NumbersKt.$clinit();
+  let a = Integer.m_valueOf__int__java_lang_Integer(0);
+  let b = $Numbers.m_byteValue__java_lang_Number__byte(a);
+  let c = $Numbers.m_shortValue__java_lang_Number__short(a);
+  let d = $Numbers.m_intValue__java_lang_Number__int(a);
+  let e = $Numbers.m_longValue__java_lang_Number__long(a);
+  let f = $Numbers.m_floatValue__java_lang_Number__float(a);
+  let g = $Numbers.m_doubleValue__java_lang_Number__double(a);
+ }
+ /** @nodts */
+ static m_compareTo__void() {
+  NumbersKt.$clinit();
+  let i = 0;
+  let d = 0;
+  let f = 0;
+  let b = $Primitives.narrowIntToByte(i);
+  let s = $Primitives.narrowIntToShort(i);
+  let l = $Long.fromInt(0);
+  let x = 0;
+  x = Integer.m_compare__int__int__int(i, i);
+  x = Double.m_compare__double__double__int(i, d);
+  x = Float.m_compare__float__float__int(i, f);
+  x = Integer.m_compare__int__int__int(i, b);
+  x = Integer.m_compare__int__int__int(i, s);
+  x = Long.m_compare__long__long__int($Primitives.widenIntToLong(i), l);
+  x = Double.m_compare__double__double__int(d, d);
+  x = Double.m_compare__double__double__int(d, i);
+  x = Double.m_compare__double__double__int(d, f);
+  x = Double.m_compare__double__double__int(d, b);
+  x = Double.m_compare__double__double__int(d, s);
+  x = Double.m_compare__double__double__int(d, $Primitives.widenLongToDouble(l));
+  x = Float.m_compare__float__float__int(f, f);
+  x = Float.m_compare__float__float__int(f, i);
+  x = Double.m_compare__double__double__int(f, d);
+  x = Float.m_compare__float__float__int(f, b);
+  x = Float.m_compare__float__float__int(f, s);
+  x = Float.m_compare__float__float__int(f, $Primitives.widenLongToFloat(l));
+  x = Byte.m_compare__byte__byte__int(b, b);
+  x = Integer.m_compare__int__int__int(b, i);
+  x = Double.m_compare__double__double__int(b, d);
+  x = Float.m_compare__float__float__int(b, f);
+  x = Integer.m_compare__int__int__int(b, s);
+  x = Long.m_compare__long__long__int($Primitives.widenByteToLong(b), l);
+  x = Short.m_compare__short__short__int(s, s);
+  x = Integer.m_compare__int__int__int(s, i);
+  x = Double.m_compare__double__double__int(s, d);
+  x = Float.m_compare__float__float__int(s, f);
+  x = Integer.m_compare__int__int__int(s, b);
+  x = Long.m_compare__long__long__int($Primitives.widenShortToLong(s), l);
+  x = Long.m_compare__long__long__int(l, l);
+  x = Long.m_compare__long__long__int(l, $Primitives.widenIntToLong(i));
+  x = Double.m_compare__double__double__int($Primitives.widenLongToDouble(l), d);
+  x = Float.m_compare__float__float__int($Primitives.widenLongToFloat(l), f);
+  x = Long.m_compare__long__long__int(l, $Primitives.widenByteToLong(b));
+  x = Long.m_compare__long__long__int(l, $Primitives.widenShortToLong(s));
+  x = Character.m_compare__char__char__int($Primitives.narrowIntToChar(i), $Primitives.narrowIntToChar(i));
+  x = Boolean.m_compare__boolean__boolean__int(false, true);
+ }
+ /** @nodts */
+ static $clinit() {
+  NumbersKt.$clinit = () =>{};
+  NumbersKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NumbersKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  Byte = goog.module.get('java.lang.Byte$impl');
+  Character = goog.module.get('java.lang.Character$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Long = goog.module.get('java.lang.Long$impl');
+  Short = goog.module.get('java.lang.Short$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
+}
+$Util.$setClassMetadata(NumbersKt, 'numberintrinsics.NumbersKt');
+
+exports = NumbersKt;
+
+//# sourceMappingURL=NumbersKt.js.map

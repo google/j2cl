@@ -1,0 +1,66 @@
+goog.module('nullability.NullabilityKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Marker = goog.forwardDeclare('nullability.Marker$impl');
+let Recursive = goog.forwardDeclare('nullability.Recursive$impl');
+let RecursiveChild = goog.forwardDeclare('nullability.RecursiveChild$impl');
+let RecursiveNullable = goog.forwardDeclare('nullability.RecursiveNullable$impl');
+let RecursiveNullableChild = goog.forwardDeclare('nullability.RecursiveNullableChild$impl');
+let RecursiveNullableParam = goog.forwardDeclare('nullability.RecursiveNullableParam$impl');
+let RecursiveParam = goog.forwardDeclare('nullability.RecursiveParam$impl');
+
+/**
+ * @final
+ */
+class NullabilityKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NullabilityKt} */
+ static $create__() {
+  NullabilityKt.$clinit();
+  let $instance = new NullabilityKt();
+  $instance.$ctor__nullability_NullabilityKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_NullabilityKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T */
+ static m_testRecursive__void() {
+  NullabilityKt.$clinit();
+  let generic = /**@type {!RecursiveParam<T>}*/ (RecursiveParam.$create__());
+  let parametrized = /**@type {!RecursiveParam<!RecursiveChild>}*/ (RecursiveParam.$create__());
+ }
+ /** @nodts @template T */
+ static m_testRecursiveNullable__void() {
+  NullabilityKt.$clinit();
+  let generic = /**@type {!RecursiveNullableParam<T>}*/ (RecursiveNullableParam.$create__());
+  let parametrized = /**@type {!RecursiveNullableParam<RecursiveNullableChild>}*/ (RecursiveNullableParam.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  NullabilityKt.$clinit = () =>{};
+  NullabilityKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NullabilityKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RecursiveNullableParam = goog.module.get('nullability.RecursiveNullableParam$impl');
+  RecursiveParam = goog.module.get('nullability.RecursiveParam$impl');
+ }
+}
+$Util.$setClassMetadata(NullabilityKt, 'nullability.NullabilityKt');
+
+exports = NullabilityKt;
+
+//# sourceMappingURL=NullabilityKt.js.map

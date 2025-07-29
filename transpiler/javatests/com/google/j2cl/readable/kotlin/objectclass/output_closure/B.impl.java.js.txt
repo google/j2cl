@@ -1,0 +1,60 @@
+goog.module('objectclass.B$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const InterfaceType = goog.require('objectclass.InterfaceType$impl');
+
+/**
+ * @final
+ * @implements {InterfaceType}
+ */
+class B extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!B} */
+ static $create__() {
+  let $instance = new B();
+  $instance.$ctor__objectclass_B__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objectclass_B__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_add__int__int(/** number */ i) {
+  return i + 1 | 0;
+ }
+ /** @override @nodts @return {string} */
+ m_doSomething__java_lang_String() {
+  return 'C';
+ }
+ /** @nodts @return {!B} */
+ static get f_INSTANCE__objectclass_B() {
+  return (B.$clinit(), B.$static_INSTANCE__objectclass_B);
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  j_l_Object.$clinit();
+  B.$static_INSTANCE__objectclass_B = B.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!B} @nodts*/
+B.$static_INSTANCE__objectclass_B;
+InterfaceType.$markImplementor(B);
+$Util.$setClassMetadata(B, 'objectclass.B');
+
+exports = B;
+
+//# sourceMappingURL=B.js.map

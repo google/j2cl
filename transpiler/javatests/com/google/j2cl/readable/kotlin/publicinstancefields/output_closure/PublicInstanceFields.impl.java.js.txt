@@ -1,0 +1,64 @@
+goog.module('publicinstancefields.PublicInstanceFields$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class PublicInstanceFields extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__publicinstancefields_PublicInstanceFields_ = 0;
+  /**@type {number} @nodts*/
+  this.f_b__publicinstancefields_PublicInstanceFields_ = 0;
+ }
+ /** @nodts @return {!PublicInstanceFields} */
+ static $create__() {
+  PublicInstanceFields.$clinit();
+  let $instance = new PublicInstanceFields();
+  $instance.$ctor__publicinstancefields_PublicInstanceFields__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__publicinstancefields_PublicInstanceFields__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_a__publicinstancefields_PublicInstanceFields_ = 1;
+ }
+ /** @final @nodts @return {number} */
+ m_getA__int() {
+  return this.f_a__publicinstancefields_PublicInstanceFields_;
+ }
+ /** @final @nodts */
+ m_setA__int__void(/** number */ set__) {
+  this.f_a__publicinstancefields_PublicInstanceFields_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getB__int() {
+  return this.f_b__publicinstancefields_PublicInstanceFields_;
+ }
+ /** @final @nodts */
+ m_setB__int__void(/** number */ set__) {
+  this.f_b__publicinstancefields_PublicInstanceFields_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  PublicInstanceFields.$clinit = () =>{};
+  PublicInstanceFields.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PublicInstanceFields;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(PublicInstanceFields, 'publicinstancefields.PublicInstanceFields');
+
+exports = PublicInstanceFields;
+
+//# sourceMappingURL=PublicInstanceFields.js.map

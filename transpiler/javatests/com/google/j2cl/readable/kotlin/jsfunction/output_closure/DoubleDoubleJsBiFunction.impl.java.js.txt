@@ -1,0 +1,65 @@
+goog.module('jsfunction.DoubleDoubleJsBiFunction$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class DoubleDoubleJsBiFunction extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {function(?number, ?number):?number} */
+ static $create__() {
+  DoubleDoubleJsBiFunction.$clinit();
+  let $instance = new DoubleDoubleJsBiFunction();
+  $instance.$ctor__jsfunction_DoubleDoubleJsBiFunction__void();
+  return $Util.$makeLambdaFunction(DoubleDoubleJsBiFunction.prototype.m_apply__java_lang_Object__java_lang_Number__java_lang_Object, $instance, DoubleDoubleJsBiFunction.$copy);
+ }
+ /** @nodts */
+ $ctor__jsfunction_DoubleDoubleJsBiFunction__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {?number} */
+ static m_apply__jsfunction_DoubleDoubleJsBiFunction__java_lang_Double__java_lang_Double__java_lang_Double(/** !DoubleDoubleJsBiFunction */ $thisArg, /** ?number */ d, /** ?number */ i) {
+  DoubleDoubleJsBiFunction.$clinit();
+  return d;
+ }
+ //Bridge method.
+ /** @final @suppress{visibility} @return {?number} */
+ m_apply__java_lang_Object__java_lang_Number__java_lang_Object(/** ?number */ arg0, /** ?number */ arg1) {
+  return DoubleDoubleJsBiFunction.m_apply__jsfunction_DoubleDoubleJsBiFunction__java_lang_Double__java_lang_Double__java_lang_Double(this, /**@type {?number}*/ ($Casts.$to(arg0, Double)), /**@type {?number}*/ ($Casts.$to(arg1, Double)));
+ }
+ /** @nodts */
+ static $clinit() {
+  DoubleDoubleJsBiFunction.$clinit = () =>{};
+  DoubleDoubleJsBiFunction.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsfunction_DoubleDoubleJsBiFunction;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsfunction_DoubleDoubleJsBiFunction = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Double = goog.module.get('java.lang.Double$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$JavaScriptFunction.$markImplementor(DoubleDoubleJsBiFunction);
+$Util.$setClassMetadata(DoubleDoubleJsBiFunction, 'jsfunction.DoubleDoubleJsBiFunction');
+
+exports = DoubleDoubleJsBiFunction;
+
+//# sourceMappingURL=DoubleDoubleJsBiFunction.js.map

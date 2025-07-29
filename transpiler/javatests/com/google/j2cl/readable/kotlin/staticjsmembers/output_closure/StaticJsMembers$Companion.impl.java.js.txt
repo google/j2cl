@@ -1,0 +1,97 @@
+goog.module('staticjsmembers.StaticJsMembers.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Bar = goog.forwardDeclare('foo.Bar');
+let Baz = goog.forwardDeclare('foo.Baz');
+let StaticJsMembers = goog.forwardDeclare('staticjsmembers.StaticJsMembers$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__staticjsmembers_StaticJsMembers_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticjsmembers_StaticJsMembers_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_f1__int__void(/** number */ arg0) {
+  StaticJsMembers.fun(arg0);
+ }
+ /** @final @nodts */
+ m_f2__int__void(/** number */ arg0) {
+  StaticJsMembers.f2(arg0);
+ }
+ /** @final @nodts */
+ m_f3__double__void(/** number */ a) {
+  Math.floor(a);
+  return;
+ }
+ /** @final @nodts */
+ m_f4__double__void(/** number */ a) {
+  isFinite(a);
+  return;
+ }
+ /** @final @nodts */
+ m_f5__void() {
+  Bar.baz();
+  return;
+ }
+ /** @final @nodts */
+ m_f6__void() {
+  Baz.baz();
+  return;
+ }
+ /** @final @nodts @return {number} */
+ m_max__int__int__int(/** number */ a, /** number */ b) {
+  return Math.max(a, b);
+ }
+ /** @final @nodts @return {number} */
+ m_max__int__int__int__int(/** number */ a, /** number */ b, /** number */ c) {
+  return Math.max(a, b, c);
+ }
+ /** @final @nodts @return {number} */
+ m_max__double__double__double(/** number */ a, /** number */ b) {
+  return Math.max(a, b);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__staticjsmembers_StaticJsMembers_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__staticjsmembers_StaticJsMembers_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__staticjsmembers_StaticJsMembers_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Bar = goog.module.get('foo.Bar');
+  Baz = goog.module.get('foo.Baz');
+  StaticJsMembers = goog.module.get('staticjsmembers.StaticJsMembers$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__staticjsmembers_StaticJsMembers_Companion;
+$Util.$setClassMetadata(Companion, 'staticjsmembers.StaticJsMembers$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=StaticJsMembers$Companion.js.map

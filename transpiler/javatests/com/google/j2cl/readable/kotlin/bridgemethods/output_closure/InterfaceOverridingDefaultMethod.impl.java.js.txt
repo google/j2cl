@@ -1,0 +1,37 @@
+goog.module('bridgemethods.InterfaceOverridingDefaultMethod$impl');
+
+const InterfaceWithDefaultMethod = goog.require('bridgemethods.InterfaceWithDefaultMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {InterfaceWithDefaultMethod}
+ */
+class InterfaceOverridingDefaultMethod {
+ /** @abstract @nodts @return {string} */
+ m_foo__java_lang_String() {}
+ /** @nodts */
+ static $clinit() {
+  InterfaceOverridingDefaultMethod.$clinit = () =>{};
+  InterfaceOverridingDefaultMethod.$loadModules();
+  InterfaceWithDefaultMethod.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  InterfaceWithDefaultMethod.$markImplementor(ctor);
+  ctor.prototype.$implements__bridgemethods_InterfaceOverridingDefaultMethod = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_InterfaceOverridingDefaultMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceOverridingDefaultMethod.$markImplementor(/**@type {Function}*/ (InterfaceOverridingDefaultMethod));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceOverridingDefaultMethod), 'bridgemethods.InterfaceOverridingDefaultMethod');
+
+exports = InterfaceOverridingDefaultMethod;
+
+//# sourceMappingURL=InterfaceOverridingDefaultMethod.js.map

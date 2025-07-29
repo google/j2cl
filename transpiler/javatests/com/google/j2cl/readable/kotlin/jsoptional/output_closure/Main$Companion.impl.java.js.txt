@@ -1,0 +1,62 @@
+goog.module('jsoptional.Main.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Main = goog.forwardDeclare('jsoptional.Main$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__jsoptional_Main_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsoptional_Main_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_staticMethod1__java_lang_Integer__java_lang_Double__java_lang_Integer__void(/** Integer */ arg0, /** ?number */ arg1, /** Integer */ arg2) {
+  Main.staticMethod1(arg0, arg1, arg2);
+ }
+ /** @final @nodts */
+ m_staticMethod2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void(/** ?string */ arg0, /** ?number */ arg1, /** !Array<?boolean> */ arg2) {
+  Main.staticMethod2(arg0, arg1, ...arg2);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jsoptional_Main_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jsoptional_Main_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__jsoptional_Main_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Main = goog.module.get('jsoptional.Main$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__jsoptional_Main_Companion;
+$Util.$setClassMetadata(Companion, 'jsoptional.Main$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Main$Companion.js.map

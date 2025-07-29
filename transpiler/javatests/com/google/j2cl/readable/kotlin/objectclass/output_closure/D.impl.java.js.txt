@@ -1,0 +1,56 @@
+goog.module('objectclass.D$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const InterfaceType = goog.require('objectclass.InterfaceType$impl');
+const OpenClass = goog.require('objectclass.OpenClass$impl');
+
+/**
+ * @final
+ * @implements {InterfaceType}
+ */
+class D extends OpenClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!D} */
+ static $create__() {
+  let $instance = new D();
+  $instance.$ctor__objectclass_D__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objectclass_D__void() {
+  this.$ctor__objectclass_OpenClass__void();
+ }
+ /** @final @nodts @return {number} */
+ m_add__int__int(/** number */ i) {
+  return i + 1 | 0;
+ }
+ /** @nodts @return {!D} */
+ static get f_INSTANCE__objectclass_D() {
+  return (D.$clinit(), D.$static_INSTANCE__objectclass_D);
+ }
+ /** @nodts */
+ static $clinit() {
+  D.$clinit = () =>{};
+  D.$loadModules();
+  OpenClass.$clinit();
+  D.$static_INSTANCE__objectclass_D = D.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof D;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!D} @nodts*/
+D.$static_INSTANCE__objectclass_D;
+InterfaceType.$markImplementor(D);
+$Util.$setClassMetadata(D, 'objectclass.D');
+
+exports = D;
+
+//# sourceMappingURL=D.js.map

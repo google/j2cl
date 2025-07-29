@@ -1,0 +1,44 @@
+goog.module('anonymousclass.SomeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SomeClass = goog.forwardDeclare('anonymousclass.SomeClass$impl');
+let $1 = goog.forwardDeclare('anonymousclass.SomeInterface.$1$impl');
+
+/**
+ * @interface
+ */
+class SomeInterface {
+ /** @nodts @return {!SomeClass} */
+ static m_getImplicitlyStatic__anonymousclass_SomeClass() {
+  SomeInterface.$clinit();
+  return SomeInterface.f_implicitlyStatic__anonymousclass_SomeInterface_;
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeInterface.$clinit = () =>{};
+  SomeInterface.$loadModules();
+  SomeInterface.f_implicitlyStatic__anonymousclass_SomeInterface_ = $1.$create__();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__anonymousclass_SomeInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__anonymousclass_SomeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('anonymousclass.SomeInterface.$1$impl');
+ }
+}
+/**@type {!SomeClass} @nodts*/
+SomeInterface.f_implicitlyStatic__anonymousclass_SomeInterface_;
+SomeInterface.$markImplementor(/**@type {Function}*/ (SomeInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (SomeInterface), 'anonymousclass.SomeInterface');
+
+exports = SomeInterface;
+
+//# sourceMappingURL=SomeInterface.js.map

@@ -1,0 +1,36 @@
+goog.module('properties.Holder$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Holder {
+ /** @abstract @nodts @return {T} */
+ m_getContent__java_lang_Object() {}
+ /** @abstract @nodts */
+ m_setContent__java_lang_Object__void(/** T */ set__) {}
+ /** @nodts */
+ static $clinit() {
+  Holder.$clinit = () =>{};
+  Holder.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__properties_Holder = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__properties_Holder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Holder.$markImplementor(/**@type {Function}*/ (Holder));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Holder), 'properties.Holder');
+
+exports = Holder;
+
+//# sourceMappingURL=Holder.js.map

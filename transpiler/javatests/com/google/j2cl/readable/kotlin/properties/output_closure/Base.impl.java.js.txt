@@ -1,0 +1,51 @@
+goog.module('properties.Base$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Base extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_content__properties_Base_ = 0;
+ }
+ /** @nodts @return {!Base} */
+ static $create__() {
+  Base.$clinit();
+  let $instance = new Base();
+  $instance.$ctor__properties_Base__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__properties_Base__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_content__properties_Base_ = 1;
+ }
+ /** @nodts @return {number} */
+ m_getContent__int() {
+  return this.f_content__properties_Base_;
+ }
+ /** @nodts */
+ m_setContent__int__void(/** number */ set__) {
+  this.f_content__properties_Base_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  Base.$clinit = () =>{};
+  Base.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Base;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Base, 'properties.Base');
+
+exports = Base;
+
+//# sourceMappingURL=Base.js.map

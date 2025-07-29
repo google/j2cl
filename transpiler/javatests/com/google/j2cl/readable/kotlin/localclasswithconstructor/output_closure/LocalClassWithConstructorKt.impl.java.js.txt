@@ -1,0 +1,48 @@
+goog.module('localclasswithconstructor.LocalClassWithConstructorKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class LocalClassWithConstructorKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LocalClassWithConstructorKt} */
+ static $create__() {
+  LocalClassWithConstructorKt.$clinit();
+  let $instance = new LocalClassWithConstructorKt();
+  $instance.$ctor__localclasswithconstructor_LocalClassWithConstructorKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclasswithconstructor_LocalClassWithConstructorKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_test__void() {
+  LocalClassWithConstructorKt.$clinit();
+  let x = 3;
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalClassWithConstructorKt.$clinit = () =>{};
+  LocalClassWithConstructorKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalClassWithConstructorKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(LocalClassWithConstructorKt, 'localclasswithconstructor.LocalClassWithConstructorKt');
+
+exports = LocalClassWithConstructorKt;
+
+//# sourceMappingURL=LocalClassWithConstructorKt.js.map

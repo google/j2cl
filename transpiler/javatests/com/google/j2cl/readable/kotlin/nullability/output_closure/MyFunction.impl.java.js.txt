@@ -1,0 +1,33 @@
+goog.module('nullability.MyFunction$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class MyFunction {
+ /** @abstract @nodts @return {string} */
+ m_x__java_lang_String__java_lang_String(/** string */ a) {}
+ /** @nodts */
+ static $clinit() {
+  MyFunction.$clinit = () =>{};
+  MyFunction.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nullability_MyFunction = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nullability_MyFunction;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+MyFunction.$markImplementor(/**@type {Function}*/ (MyFunction));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (MyFunction), 'nullability.MyFunction');
+
+exports = MyFunction;
+
+//# sourceMappingURL=MyFunction.js.map

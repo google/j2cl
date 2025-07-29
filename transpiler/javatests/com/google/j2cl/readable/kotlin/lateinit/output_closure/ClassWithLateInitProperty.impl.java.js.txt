@@ -1,0 +1,73 @@
+goog.module('lateinit.ClassWithLateInitProperty$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class ClassWithLateInitProperty extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {*} @nodts*/
+  this.f_lateInitProperty__lateinit_ClassWithLateInitProperty;
+  /**@type {*} @nodts*/
+  this.f_privateLateinit__lateinit_ClassWithLateInitProperty_;
+ }
+ /** @nodts @return {!ClassWithLateInitProperty} */
+ static $create__() {
+  ClassWithLateInitProperty.$clinit();
+  let $instance = new ClassWithLateInitProperty();
+  $instance.$ctor__lateinit_ClassWithLateInitProperty__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lateinit_ClassWithLateInitProperty__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!*} */
+ m_getLateInitProperty__java_lang_Object() {
+  return Intrinsics.m_checkInitialized__java_lang_Object__java_lang_Object(this.f_lateInitProperty__lateinit_ClassWithLateInitProperty);
+ }
+ /** @final @nodts */
+ m_setLateInitProperty__java_lang_Object__void(/** !* */ set__) {
+  this.f_lateInitProperty__lateinit_ClassWithLateInitProperty = set__;
+ }
+ /** @final @nodts @return {*} */
+ m_safeLateInitPropertyAccess__java_lang_Object() {
+  if (!$Equality.$same(this.f_lateInitProperty__lateinit_ClassWithLateInitProperty, null)) {
+   return this.m_getLateInitProperty__java_lang_Object();
+  }
+  return null;
+ }
+ /** @final @nodts @return {*} */
+ m_setAndGetPrivateLateinit__java_lang_Object() {
+  this.f_privateLateinit__lateinit_ClassWithLateInitProperty_ = j_l_Object.$create__();
+  return Intrinsics.m_checkInitialized__java_lang_Object__java_lang_Object(this.f_privateLateinit__lateinit_ClassWithLateInitProperty_);
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassWithLateInitProperty.$clinit = () =>{};
+  ClassWithLateInitProperty.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassWithLateInitProperty;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(ClassWithLateInitProperty, 'lateinit.ClassWithLateInitProperty');
+
+exports = ClassWithLateInitProperty;
+
+//# sourceMappingURL=ClassWithLateInitProperty.js.map

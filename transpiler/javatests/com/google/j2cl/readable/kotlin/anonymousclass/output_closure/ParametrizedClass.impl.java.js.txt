@@ -1,0 +1,43 @@
+goog.module('anonymousclass.ParametrizedClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class ParametrizedClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!ParametrizedClass<T>} */
+ static $create__() {
+  ParametrizedClass.$clinit();
+  let $instance = new ParametrizedClass();
+  $instance.$ctor__anonymousclass_ParametrizedClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_ParametrizedClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ParametrizedClass.$clinit = () =>{};
+  ParametrizedClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParametrizedClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ParametrizedClass, 'anonymousclass.ParametrizedClass');
+
+exports = ParametrizedClass;
+
+//# sourceMappingURL=ParametrizedClass.js.map

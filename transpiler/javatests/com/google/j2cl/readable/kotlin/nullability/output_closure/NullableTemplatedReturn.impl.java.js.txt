@@ -1,0 +1,34 @@
+goog.module('nullability.NullableTemplatedReturn$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class NullableTemplatedReturn {
+ /** @abstract @nodts @return {?T} */
+ m_foo__java_lang_Object() {}
+ /** @nodts */
+ static $clinit() {
+  NullableTemplatedReturn.$clinit = () =>{};
+  NullableTemplatedReturn.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nullability_NullableTemplatedReturn = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nullability_NullableTemplatedReturn;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+NullableTemplatedReturn.$markImplementor(/**@type {Function}*/ (NullableTemplatedReturn));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (NullableTemplatedReturn), 'nullability.NullableTemplatedReturn');
+
+exports = NullableTemplatedReturn;
+
+//# sourceMappingURL=NullableTemplatedReturn.js.map

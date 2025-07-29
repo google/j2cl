@@ -1,0 +1,229 @@
+goog.module('defaultparams.DefaultParamsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let DefaultParams = goog.forwardDeclare('defaultparams.DefaultParams$impl');
+let $1LocalClass = goog.forwardDeclare('defaultparams.DefaultParamsKt.$1LocalClass$impl');
+let FooImpl = goog.forwardDeclare('defaultparams.FooImpl$impl');
+let FooImplWithDefaultOverride = goog.forwardDeclare('defaultparams.FooImplWithDefaultOverride$impl');
+let Subclass = goog.forwardDeclare('defaultparams.Subclass$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+/**
+ * @final
+ */
+class DefaultParamsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!DefaultParamsKt} */
+ static $create__() {
+  DefaultParamsKt.$clinit();
+  let $instance = new DefaultParamsKt();
+  $instance.$ctor__defaultparams_DefaultParamsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_DefaultParamsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testConstructors__void() {
+  DefaultParamsKt.$clinit();
+  DefaultParams.$create__int(123);
+  DefaultParams.$create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(0, 123, 1, null);
+  DefaultParams.$create__int__int(234, 456);
+  Subclass.$create__();
+  Subclass.$create__int__int(123, 456);
+ }
+ /** @nodts */
+ static m_testMethods__void() {
+  DefaultParamsKt.$clinit();
+  let tmp = DefaultParams.$create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(0, 123, 1, null);
+  tmp.m_foo$default__int__int__java_lang_Object__void(0, 1, null);
+  DefaultParams.$create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(0, 123, 1, null).m_foo__int__void(456);
+  Subclass.$create__().m_foo__int__void(456);
+ }
+ /** @nodts */
+ static m_extFun__defaultparams_DefaultParams__void(/** !DefaultParams */ this_1) {
+  DefaultParamsKt.$clinit();
+  this_1.m_foo$default__int__int__java_lang_Object__void(0, 1, null);
+  return;
+ }
+ /** @nodts */
+ static m_extFunWithDefault__defaultparams_DefaultParams__int__void(/** !DefaultParams */ this_1, /** number */ c) {
+  DefaultParamsKt.$clinit();
+  this_1.m_foo__int__void(c);
+  return;
+ }
+ /** @nodts */
+ static m_extFunWithDefault$default__defaultparams_DefaultParams__int__int__java_lang_Object__void(/** !DefaultParams */ this_1, /** number */ c, /** number */ _mask0, /** * */ _handler) {
+  DefaultParamsKt.$clinit();
+  if ((_mask0 & 1) != 0) {
+   c = -1;
+  }
+  DefaultParamsKt.m_extFunWithDefault__defaultparams_DefaultParams__int__void(this_1, c);
+  return;
+ }
+ /** @nodts */
+ static m_testExtFun__void() {
+  DefaultParamsKt.$clinit();
+  DefaultParamsKt.m_extFun__defaultparams_DefaultParams__void(DefaultParams.$create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(0, 2, 1, null));
+  let tmp = DefaultParams.$create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(0, 2, 1, null);
+  DefaultParamsKt.m_extFunWithDefault$default__defaultparams_DefaultParams__int__int__java_lang_Object__void(tmp, 0, 1, null);
+  DefaultParamsKt.m_extFunWithDefault__defaultparams_DefaultParams__int__void(DefaultParams.$create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(0, 2, 1, null), 123);
+ }
+ /** @nodts @return {number} */
+ static m_complexDefault__int__int__int(/** number */ a, /** number */ b) {
+  DefaultParamsKt.$clinit();
+  return b;
+ }
+ /** @nodts @return {number} */
+ static m_complexDefault$default__int__int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** number */ _mask0, /** * */ _handler) {
+  DefaultParamsKt.$clinit();
+  if ((_mask0 & 2) != 0) {
+   b = a < 0 ? Math.imul(a, -1) : a + 1 | 0;
+  }
+  return DefaultParamsKt.m_complexDefault__int__int__int(a, b);
+ }
+ /** @nodts */
+ static m_testComplexDefault__void() {
+  DefaultParamsKt.$clinit();
+  DefaultParamsKt.m_complexDefault$default__int__int__int__java_lang_Object__int(-1, 0, 2, null);
+  DefaultParamsKt.m_complexDefault$default__int__int__int__java_lang_Object__int(1, 0, 2, null);
+  DefaultParamsKt.m_complexDefault__int__int__int(1, 123);
+ }
+ /** @nodts */
+ static m_boxing__java_lang_Integer__void(/** Integer */ a) {
+  DefaultParamsKt.$clinit();
+ }
+ /** @nodts */
+ static m_boxing$default__java_lang_Integer__int__java_lang_Object__void(/** Integer */ a, /** number */ _mask0, /** * */ _handler) {
+  DefaultParamsKt.$clinit();
+  if ((_mask0 & 1) != 0) {
+   a = Integer.m_valueOf__int__java_lang_Integer(1);
+  }
+  DefaultParamsKt.m_boxing__java_lang_Integer__void(a);
+  return;
+ }
+ /** @nodts @return {number} */
+ static m_capturedBoxing__java_lang_Integer__int(/** Integer */ a) {
+  DefaultParamsKt.$clinit();
+  if (!$Equality.$same(a, null)) {
+   return $1LocalClass.$create__java_lang_Integer__int__int__kotlin_jvm_internal_DefaultConstructorMarker(a, 0, 1, null).m_getB__int();
+  }
+  return -1;
+ }
+ /** @nodts @return {number} */
+ static m_capturedBoxing$default__java_lang_Integer__int__java_lang_Object__int(/** Integer */ a, /** number */ _mask0, /** * */ _handler) {
+  DefaultParamsKt.$clinit();
+  if ((_mask0 & 1) != 0) {
+   a = null;
+  }
+  return DefaultParamsKt.m_capturedBoxing__java_lang_Integer__int(a);
+ }
+ /** @nodts */
+ static m_testBoxing__void() {
+  DefaultParamsKt.$clinit();
+  DefaultParamsKt.m_boxing$default__java_lang_Integer__int__java_lang_Object__void(null, 1, null);
+  DefaultParamsKt.m_boxing__java_lang_Integer__void(Integer.m_valueOf__int__java_lang_Integer(1));
+  DefaultParamsKt.m_boxing__java_lang_Integer__void(null);
+  DefaultParamsKt.m_capturedBoxing$default__java_lang_Integer__int__java_lang_Object__int(null, 1, null);
+  DefaultParamsKt.m_capturedBoxing__java_lang_Integer__int(Integer.m_valueOf__int__java_lang_Integer(1));
+ }
+ /** @nodts */
+ static m_optionalVarargs__arrayOf_int__void(/** !Array<number> */ args) {
+  DefaultParamsKt.$clinit();
+ }
+ /** @nodts */
+ static m_optionalVarargs$default__arrayOf_int__int__java_lang_Object__void(/** Array<number> */ args, /** number */ _mask0, /** * */ _handler) {
+  DefaultParamsKt.$clinit();
+  if ((_mask0 & 1) != 0) {
+   args = (/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)));
+  }
+  DefaultParamsKt.m_optionalVarargs__arrayOf_int__void(/**@type {!Array<number>}*/ (args));
+  return;
+ }
+ /** @nodts */
+ static m_varargsWithTrailingOptional__arrayOf_int__int__void(/** !Array<number> */ args, /** number */ optional) {
+  DefaultParamsKt.$clinit();
+ }
+ /** @nodts */
+ static m_varargsWithTrailingOptional$default__arrayOf_int__int__int__java_lang_Object__void(/** !Array<number> */ args, /** number */ optional, /** number */ _mask0, /** * */ _handler) {
+  DefaultParamsKt.$clinit();
+  if ((_mask0 & 2) != 0) {
+   optional = 10;
+  }
+  DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(args, optional);
+  return;
+ }
+ /** @nodts */
+ static m_varargsWithLeadingOptional__int__arrayOf_int__void(/** number */ optional, /** !Array<number> */ args) {
+  DefaultParamsKt.$clinit();
+ }
+ /** @nodts */
+ static m_varargsWithLeadingOptional$default__int__arrayOf_int__int__java_lang_Object__void(/** number */ optional, /** !Array<number> */ args, /** number */ _mask0, /** * */ _handler) {
+  DefaultParamsKt.$clinit();
+  if ((_mask0 & 1) != 0) {
+   optional = 10;
+  }
+  DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(optional, args);
+  return;
+ }
+ /** @nodts */
+ static m_testVarargs__void() {
+  DefaultParamsKt.$clinit();
+  DefaultParamsKt.m_optionalVarargs$default__arrayOf_int__int__java_lang_Object__void(null, 1, null);
+  DefaultParamsKt.m_optionalVarargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
+  DefaultParamsKt.m_varargsWithTrailingOptional$default__arrayOf_int__int__int__java_lang_Object__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), 0, 2, null);
+  DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), 20);
+  DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)), 20);
+  DefaultParamsKt.m_varargsWithLeadingOptional$default__int__arrayOf_int__int__java_lang_Object__void(0, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), 1, null);
+  DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
+  DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
+ }
+ /** @nodts */
+ static m_testInterface__void() {
+  DefaultParamsKt.$clinit();
+  let tmp = FooImpl.$create__();
+  tmp.m_defaultMethod$default__int__int__java_lang_Object__int(0, 1, null);
+  FooImpl.$create__().m_defaultMethod__int__int(2);
+  let tmp_1 = FooImpl.$create__();
+  tmp_1.m_interfaceMethod$default__int__int__java_lang_Object__int(0, 1, null);
+  FooImpl.$create__().m_interfaceMethod__int__int(2);
+  FooImplWithDefaultOverride.$create__().m_defaultMethod__int__int(2);
+ }
+ /** @nodts */
+ static $clinit() {
+  DefaultParamsKt.$clinit = () =>{};
+  DefaultParamsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DefaultParamsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  DefaultParams = goog.module.get('defaultparams.DefaultParams$impl');
+  $1LocalClass = goog.module.get('defaultparams.DefaultParamsKt.$1LocalClass$impl');
+  FooImpl = goog.module.get('defaultparams.FooImpl$impl');
+  FooImplWithDefaultOverride = goog.module.get('defaultparams.FooImplWithDefaultOverride$impl');
+  Subclass = goog.module.get('defaultparams.Subclass$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(DefaultParamsKt, 'defaultparams.DefaultParamsKt');
+
+exports = DefaultParamsKt;
+
+//# sourceMappingURL=DefaultParamsKt.js.map

@@ -1,0 +1,56 @@
+goog.module('bridgemethods.BridgeMethodDefault.B$impl');
+
+const JJ = goog.require('bridgemethods.BridgeMethodDefault.JJ$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {JJ}
+ */
+class B extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!B} */
+ static $create__() {
+  B.$clinit();
+  let $instance = new B();
+  $instance.$ctor__bridgemethods_BridgeMethodDefault_B__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_BridgeMethodDefault_B__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_m__java_lang_Object__void(/** * */ arg0) {
+  this.m(arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} */
+ m(/** * */ arg0) {
+  JJ.m_m__$default__bridgemethods_BridgeMethodDefault_JJ__java_lang_Object__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  j_l_Object.$clinit();
+  JJ.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+JJ.$markImplementor(B);
+$Util.$setClassMetadata(B, 'bridgemethods.BridgeMethodDefault$B');
+
+exports = B;
+
+//# sourceMappingURL=BridgeMethodDefault$B.js.map

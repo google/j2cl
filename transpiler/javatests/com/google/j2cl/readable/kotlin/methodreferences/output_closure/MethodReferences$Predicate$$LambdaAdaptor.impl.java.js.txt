@@ -1,0 +1,49 @@
+goog.module('methodreferences.MethodReferences.Predicate.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Predicate = goog.require('methodreferences.MethodReferences.Predicate$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {Predicate<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(T):boolean */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(T):boolean} @nodts*/
+  this.f_fn__methodreferences_MethodReferences_Predicate_$LambdaAdaptor;
+  this.$ctor__methodreferences_MethodReferences_Predicate_$LambdaAdaptor__methodreferences_MethodReferences_Predicate_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__methodreferences_MethodReferences_Predicate_$LambdaAdaptor__methodreferences_MethodReferences_Predicate_$JsFunction__void(/** ?function(T):boolean */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__methodreferences_MethodReferences_Predicate_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {boolean} */
+ m_apply__java_lang_Object__boolean(/** T */ arg0) {
+  let /** ?function(T):boolean */ $function;
+  return ($function = this.f_fn__methodreferences_MethodReferences_Predicate_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Predicate.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'methodreferences.MethodReferences$Predicate$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=MethodReferences$Predicate$$LambdaAdaptor.js.map

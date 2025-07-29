@@ -1,0 +1,56 @@
+goog.module('longinitialvalue.LongInitialValueKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class LongInitialValueKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LongInitialValueKt} */
+ static $create__() {
+  LongInitialValueKt.$clinit();
+  let $instance = new LongInitialValueKt();
+  $instance.$ctor__longinitialvalue_LongInitialValueKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__longinitialvalue_LongInitialValueKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!$Long} */
+ static m_getLONG_VALUE__long() {
+  LongInitialValueKt.$clinit();
+  return LongInitialValueKt.f_LONG_VALUE__longinitialvalue_LongInitialValueKt_;
+ }
+ /** @nodts */
+ static m_setLONG_VALUE__long__void(/** !$Long */ set__) {
+  LongInitialValueKt.$clinit();
+  LongInitialValueKt.f_LONG_VALUE__longinitialvalue_LongInitialValueKt_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  LongInitialValueKt.$clinit = () =>{};
+  LongInitialValueKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LongInitialValueKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {!$Long} @nodts*/
+LongInitialValueKt.f_LONG_VALUE__longinitialvalue_LongInitialValueKt_ = $Long.fromInt(0);
+$Util.$setClassMetadata(LongInitialValueKt, 'longinitialvalue.LongInitialValueKt');
+
+exports = LongInitialValueKt;
+
+//# sourceMappingURL=LongInitialValueKt.js.map

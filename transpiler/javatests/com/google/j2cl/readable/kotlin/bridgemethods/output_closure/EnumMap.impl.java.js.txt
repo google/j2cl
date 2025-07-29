@@ -1,0 +1,60 @@
+goog.module('bridgemethods.EnumMap$impl');
+
+const AbstractMap = goog.require('bridgemethods.AbstractMap$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template K, V
+ * @extends {AbstractMap<K, V>}
+ */
+class EnumMap extends AbstractMap {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template K, V @return {!EnumMap<K, V>} */
+ static $create__() {
+  EnumMap.$clinit();
+  let $instance = new EnumMap();
+  $instance.$ctor__bridgemethods_EnumMap__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_EnumMap__void() {
+  this.$ctor__bridgemethods_AbstractMap__void();
+ }
+ /** @nodts @return {V} */
+ m_put__java_lang_Enum__java_lang_Object__java_lang_Object(/** K */ key, /** V */ value) {
+  return value;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {V} */
+ m_put__java_lang_Object__java_lang_Object__java_lang_Object(/** K */ arg0, /** V */ arg1) {
+  return this.m_put__java_lang_Enum__java_lang_Object__java_lang_Object(/**@type {K}*/ ($Casts.$to(arg0, Enum)), arg1);
+ }
+ /** @nodts */
+ static $clinit() {
+  EnumMap.$clinit = () =>{};
+  EnumMap.$loadModules();
+  AbstractMap.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EnumMap;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Enum = goog.module.get('java.lang.Enum$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(EnumMap, 'bridgemethods.EnumMap');
+
+exports = EnumMap;
+
+//# sourceMappingURL=EnumMap.js.map

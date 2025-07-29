@@ -1,0 +1,103 @@
+goog.module('typealias.TypeAliasKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let Container = goog.forwardDeclare('typealias.Container$impl');
+let Foo = goog.forwardDeclare('typealias.Foo$impl');
+let KeyValueContainer = goog.forwardDeclare('typealias.KeyValueContainer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class TypeAliasKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!TypeAliasKt} */
+ static $create__() {
+  TypeAliasKt.$clinit();
+  let $instance = new TypeAliasKt();
+  $instance.$ctor__typealias_TypeAliasKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typealias_TypeAliasKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testMemberAccess__void() {
+  let a = Foo.$create__int(1).m_getI__int();
+  let b = Foo.$create__int(1).m_f__int();
+  let c = j_l_String.m_substring__java_lang_String__int__java_lang_String(j_l_String.$create__java_lang_String('Foo'), 1);
+  (/**@type {!Container<!Foo>}*/ (Container.$create__())).m_set__java_lang_Object__void(Foo.$create__int(2));
+  (/**@type {!KeyValueContainer<string, !Foo>}*/ (KeyValueContainer.$create__())).m_set__java_lang_Object__java_lang_Object__void('a', Foo.$create__int(2));
+ }
+ /** @nodts */
+ static m_testConsumer__void() {
+  TypeAliasKt.m_consumeFoo__typealias_Foo__void(Foo.$create__int(1));
+  TypeAliasKt.m_consumeAliasedFoo__typealias_Foo__void(Foo.$create__int(3));
+  TypeAliasKt.m_consumeString__java_lang_String__void(j_l_String.$create__java_lang_String('Foo'));
+  TypeAliasKt.m_consumeContainer__typealias_Container__void(/**@type {!Container<!Foo>}*/ (Container.$create__()));
+  TypeAliasKt.m_consumeKeyValueContainer__typealias_KeyValueContainer__void(/**@type {!KeyValueContainer<string, !Foo>}*/ (KeyValueContainer.$create__()));
+  TypeAliasKt.m_consumeFooContainer__typealias_Container__void(/**@type {!Container<!Foo>}*/ (Container.$create__()));
+  TypeAliasKt.m_consumeFooValueContainer__typealias_KeyValueContainer__void(/**@type {!KeyValueContainer<!Integer, !Foo>}*/ (KeyValueContainer.$create__()));
+  TypeAliasKt.m_consumeFooProvider__kotlin_jvm_functions_Function1__void(Function1.$adapt(/**  @return {?}*/ ((/** ? */ it) =>{
+   let it_1 = (/**@type {!Integer}*/ ($Casts.$to(it, Integer))).m_intValue__int();
+   return Foo.$create__int(1);
+  })));
+  TypeAliasKt.m_consumeFooToInt__kotlin_jvm_functions_Function1__void(Function1.$adapt(/**  @return {?}*/ ((/** ? */ f) =>{
+   let f_1 = /**@type {!Foo}*/ ($Casts.$to(f, Foo));
+   return Integer.m_valueOf__int__java_lang_Integer(f_1.m_getI__int());
+  })));
+ }
+ /** @nodts */
+ static m_consumeString__java_lang_String__void(/** string */ s) {}
+ /** @nodts */
+ static m_consumeFoo__typealias_Foo__void(/** !Foo */ foo) {}
+ /** @nodts */
+ static m_consumeAliasedFoo__typealias_Foo__void(/** !Foo */ foo) {}
+ /** @nodts @template T */
+ static m_consumeContainer__typealias_Container__void(/** !Container<T> */ c) {}
+ /** @nodts @template K, V */
+ static m_consumeKeyValueContainer__typealias_KeyValueContainer__void(/** !KeyValueContainer<K, V> */ c) {}
+ /** @nodts */
+ static m_consumeFooContainer__typealias_Container__void(/** !Container<!Foo> */ c) {}
+ /** @nodts @template K */
+ static m_consumeFooValueContainer__typealias_KeyValueContainer__void(/** !KeyValueContainer<K, !Foo> */ c) {}
+ /** @nodts */
+ static m_consumeFooProvider__kotlin_jvm_functions_Function1__void(/** !Function1<?, ?> */ f) {}
+ /** @nodts */
+ static m_consumeFooToInt__kotlin_jvm_functions_Function1__void(/** !Function1<?, ?> */ f) {}
+ /** @nodts */
+ static $clinit() {
+  TypeAliasKt.$clinit = () =>{};
+  TypeAliasKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TypeAliasKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  Container = goog.module.get('typealias.Container$impl');
+  Foo = goog.module.get('typealias.Foo$impl');
+  KeyValueContainer = goog.module.get('typealias.KeyValueContainer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(TypeAliasKt, 'typealias.TypeAliasKt');
+
+exports = TypeAliasKt;
+
+//# sourceMappingURL=TypeAliasKt.js.map

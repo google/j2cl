@@ -1,0 +1,43 @@
+goog.module('array.SomeObject$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class SomeObject extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SomeObject} */
+ static $create__() {
+  SomeObject.$clinit();
+  let $instance = new SomeObject();
+  $instance.$ctor__array_SomeObject__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__array_SomeObject__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeObject.$clinit = () =>{};
+  SomeObject.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeObject;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SomeObject, 'array.SomeObject');
+
+exports = SomeObject;
+
+//# sourceMappingURL=SomeObject.js.map

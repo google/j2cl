@@ -1,0 +1,43 @@
+goog.module('bridgemethods.BridgeMethodShadowedSignature$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class BridgeMethodShadowedSignature extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BridgeMethodShadowedSignature} */
+ static $create__() {
+  BridgeMethodShadowedSignature.$clinit();
+  let $instance = new BridgeMethodShadowedSignature();
+  $instance.$ctor__bridgemethods_BridgeMethodShadowedSignature__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_BridgeMethodShadowedSignature__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  BridgeMethodShadowedSignature.$clinit = () =>{};
+  BridgeMethodShadowedSignature.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BridgeMethodShadowedSignature;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(BridgeMethodShadowedSignature, 'bridgemethods.BridgeMethodShadowedSignature');
+
+exports = BridgeMethodShadowedSignature;
+
+//# sourceMappingURL=BridgeMethodShadowedSignature.js.map

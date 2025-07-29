@@ -1,0 +1,52 @@
+goog.module('shadowing.FooKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('shadowing.Foo$impl');
+
+/**
+ * @final
+ */
+class FooKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!FooKt} */
+ static $create__() {
+  FooKt.$clinit();
+  let $instance = new FooKt();
+  $instance.$ctor__shadowing_FooKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__shadowing_FooKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_test__void() {
+  FooKt.$clinit();
+  (/**@type {!Foo<string>}*/ (Foo.$create__())).m_add$shadowing_Foo_add__java_lang_Object__void('');
+ }
+ /** @nodts */
+ static $clinit() {
+  FooKt.$clinit = () =>{};
+  FooKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FooKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Foo = goog.module.get('shadowing.Foo$impl');
+ }
+}
+$Util.$setClassMetadata(FooKt, 'shadowing.FooKt');
+
+exports = FooKt;
+
+//# sourceMappingURL=FooKt.js.map

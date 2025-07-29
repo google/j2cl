@@ -1,0 +1,100 @@
+goog.module('companion.DefaultCompanionName$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Companion = goog.forwardDeclare('companion.DefaultCompanionName.Companion$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+/**
+ * @final
+ */
+class DefaultCompanionName extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!DefaultCompanionName} */
+ static $create__() {
+  DefaultCompanionName.$clinit();
+  let $instance = new DefaultCompanionName();
+  $instance.$ctor__companion_DefaultCompanionName__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_DefaultCompanionName__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {boolean} */
+ m_clashingWithInstanceMethod__boolean() {
+  return true;
+ }
+ /** @final @nodts @return {boolean} */
+ m_clashingWithInstanceMethodButDifferentReturnType__boolean() {
+  return true;
+ }
+ /** @final @nodts */
+ m_testCompanionReferencesFromEnclosingClass__void() {
+  DefaultCompanionName.m_companionFunction__java_lang_Object__java_lang_String(DefaultCompanionName.f_property__companion_DefaultCompanionName_);
+ }
+ /** @nodts @return {!*} */
+ static m_getNonCompileTimeConstant__java_lang_Object() {
+  DefaultCompanionName.$clinit();
+  return DefaultCompanionName.f_nonCompileTimeConstant__companion_DefaultCompanionName_;
+ }
+ /** @nodts @return {!*} */
+ static m_getProperty__java_lang_Object() {
+  DefaultCompanionName.$clinit();
+  return DefaultCompanionName.f_property__companion_DefaultCompanionName_;
+ }
+ /** @nodts */
+ static m_setProperty__java_lang_Object__void(/** !* */ set__) {
+  DefaultCompanionName.$clinit();
+  DefaultCompanionName.f_property__companion_DefaultCompanionName_ = set__;
+ }
+ /** @nodts @return {string} */
+ static m_companionFunction__java_lang_Object__java_lang_String(/** !* */ p) {
+  DefaultCompanionName.$clinit();
+  return 'foo' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(DefaultCompanionName.m_getNonCompileTimeConstant__java_lang_Object()) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(j_l_Object.prototype.toString.call(Companion.f_Companion__companion_DefaultCompanionName_Companion));
+ }
+ /** @nodts @return {boolean} */
+ static m_clashingWithInstanceMethod__boolean() {
+  DefaultCompanionName.$clinit();
+  return false;
+ }
+ /** @nodts @return {number} */
+ static m_clashingWithInstanceMethodButDifferentReturnType__int() {
+  DefaultCompanionName.$clinit();
+  return 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** !* */ o) {
+  DefaultCompanionName.$clinit();
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  DefaultCompanionName.$clinit = () =>{};
+  DefaultCompanionName.$loadModules();
+  j_l_Object.$clinit();
+  DefaultCompanionName.f_nonCompileTimeConstant__companion_DefaultCompanionName_ = j_l_Object.$create__();
+  DefaultCompanionName.f_property__companion_DefaultCompanionName_ = j_l_Object.$create__();
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Companion = goog.module.get('companion.DefaultCompanionName.Companion$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+/**@const {string} @nodts*/
+DefaultCompanionName.f_compileTimeConstant__companion_DefaultCompanionName = 'foo';
+/**@type {!*} @nodts*/
+DefaultCompanionName.f_nonCompileTimeConstant__companion_DefaultCompanionName_;
+/**@type {!*} @nodts*/
+DefaultCompanionName.f_property__companion_DefaultCompanionName_;
+$Util.$setClassMetadata(DefaultCompanionName, 'companion.DefaultCompanionName');
+
+exports = DefaultCompanionName;
+
+//# sourceMappingURL=DefaultCompanionName.js.map

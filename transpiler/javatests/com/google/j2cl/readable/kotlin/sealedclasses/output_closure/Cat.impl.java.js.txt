@@ -1,0 +1,45 @@
+goog.module('sealedclasses.Cat$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Mammal = goog.require('sealedclasses.Mammal$impl');
+
+/**
+ * @final
+ */
+class Cat extends Mammal {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Cat} */
+ static $create__() {
+  Cat.$clinit();
+  let $instance = new Cat();
+  $instance.$ctor__sealedclasses_Cat__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sealedclasses_Cat__void() {
+  this.$ctor__sealedclasses_Mammal__void();
+ }
+ /** @override @nodts */
+ m_changeName__java_lang_String__void(/** string */ updatedName) {}
+ /** @nodts */
+ static $clinit() {
+  Cat.$clinit = () =>{};
+  Cat.$loadModules();
+  Mammal.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Cat;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Cat, 'sealedclasses.Cat');
+
+exports = Cat;
+
+//# sourceMappingURL=Cat.js.map

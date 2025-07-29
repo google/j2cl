@@ -1,0 +1,34 @@
+goog.module('bridgemethods.Map$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template K, V
+ */
+class Map {
+ /** @abstract @nodts @return {V} */
+ m_put__java_lang_Object__java_lang_Object__java_lang_Object(/** K */ key, /** V */ value) {}
+ /** @nodts */
+ static $clinit() {
+  Map.$clinit = () =>{};
+  Map.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_Map = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_Map;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Map.$markImplementor(/**@type {Function}*/ (Map));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Map), 'bridgemethods.Map');
+
+exports = Map;
+
+//# sourceMappingURL=Map.js.map

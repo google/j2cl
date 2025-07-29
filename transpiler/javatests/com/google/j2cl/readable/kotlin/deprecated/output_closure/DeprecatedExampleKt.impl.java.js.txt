@@ -1,0 +1,72 @@
+goog.module('deprecated.DeprecatedExampleKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class DeprecatedExampleKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!DeprecatedExampleKt} */
+ static $create__() {
+  DeprecatedExampleKt.$clinit();
+  let $instance = new DeprecatedExampleKt();
+  $instance.$ctor__deprecated_DeprecatedExampleKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__deprecated_DeprecatedExampleKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {string} @deprecated */
+ static m_getDEPRECATED_STATIC_FIELD__java_lang_String() {
+  DeprecatedExampleKt.$clinit();
+  return DeprecatedExampleKt.f_DEPRECATED_STATIC_FIELD__deprecated_DeprecatedExampleKt_;
+ }
+ /** @nodts @deprecated */
+ static m_setDEPRECATED_STATIC_FIELD__java_lang_String__void(/** string */ set__) {
+  DeprecatedExampleKt.$clinit();
+  DeprecatedExampleKt.f_DEPRECATED_STATIC_FIELD__deprecated_DeprecatedExampleKt_ = set__;
+ }
+ /** @nodts @deprecated */
+ static m_deprecatedStaticMethod__java_lang_Object__void(/** * */ someObject) {
+  DeprecatedExampleKt.$clinit();
+ }
+ /** @nodts @return {number} @deprecated */
+ static m_getFieldWithDeprecatedGetter__int() {
+  DeprecatedExampleKt.$clinit();
+  return 2;
+ }
+ /** @nodts */
+ static m_setFieldWithDeprecatedGetter__int__void(/** number */ set__) {
+  DeprecatedExampleKt.$clinit();
+  DeprecatedExampleKt.f_fieldWithDeprecatedGetter__deprecated_DeprecatedExampleKt_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  DeprecatedExampleKt.$clinit = () =>{};
+  DeprecatedExampleKt.$loadModules();
+  j_l_Object.$clinit();
+  DeprecatedExampleKt.f_DEPRECATED_STATIC_FIELD__deprecated_DeprecatedExampleKt_ = 'deprecated field';
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DeprecatedExampleKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {string} @deprecated @nodts*/
+DeprecatedExampleKt.f_DEPRECATED_STATIC_FIELD__deprecated_DeprecatedExampleKt_;
+/**@type {number} @nodts*/
+DeprecatedExampleKt.f_fieldWithDeprecatedGetter__deprecated_DeprecatedExampleKt_ = 0;
+$Util.$setClassMetadata(DeprecatedExampleKt, 'deprecated.DeprecatedExampleKt');
+
+exports = DeprecatedExampleKt;
+
+//# sourceMappingURL=DeprecatedExampleKt.js.map

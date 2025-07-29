@@ -1,0 +1,62 @@
+goog.module('primitivespecialization.Holder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class Holder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_content__primitivespecialization_Holder_;
+ }
+ /** @nodts @template T @return {!Holder<T>} */
+ static $create__java_lang_Object(/** T */ content) {
+  Holder.$clinit();
+  let $instance = new Holder();
+  $instance.$ctor__primitivespecialization_Holder__java_lang_Object__void(content);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_Holder__java_lang_Object__void(/** T */ content) {
+  this.$ctor__java_lang_Object__void();
+  this.f_content__primitivespecialization_Holder_ = content;
+ }
+ /** @final @nodts @return {T} */
+ m_getContent__java_lang_Object() {
+  return this.f_content__primitivespecialization_Holder_;
+ }
+ /** @final @nodts */
+ m_setContent__java_lang_Object__void(/** T */ set__) {
+  this.f_content__primitivespecialization_Holder_ = set__;
+ }
+ /** @final @nodts @return {T} */
+ m_get__java_lang_Object() {
+  return this.m_getContent__java_lang_Object();
+ }
+ /** @final @nodts */
+ m_set__java_lang_Object__void(/** T */ t) {
+  this.m_setContent__java_lang_Object__void(t);
+ }
+ /** @nodts */
+ static $clinit() {
+  Holder.$clinit = () =>{};
+  Holder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Holder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Holder, 'primitivespecialization.Holder');
+
+exports = Holder;
+
+//# sourceMappingURL=Holder.js.map

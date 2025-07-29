@@ -1,0 +1,58 @@
+goog.module('extensionmembers.ReceiverClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class ReceiverClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_instanceProperty__extensionmembers_ReceiverClass_ = 0;
+ }
+ /** @nodts @return {!ReceiverClass} */
+ static $create__int(/** number */ instanceProperty) {
+  ReceiverClass.$clinit();
+  let $instance = new ReceiverClass();
+  $instance.$ctor__extensionmembers_ReceiverClass__int__void(instanceProperty);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__extensionmembers_ReceiverClass__int__void(/** number */ instanceProperty) {
+  this.$ctor__java_lang_Object__void();
+  this.f_instanceProperty__extensionmembers_ReceiverClass_ = instanceProperty;
+ }
+ /** @final @nodts @return {number} */
+ m_getInstanceProperty__int() {
+  return this.f_instanceProperty__extensionmembers_ReceiverClass_;
+ }
+ /** @final @nodts */
+ m_setInstanceProperty__int__void(/** number */ set__) {
+  this.f_instanceProperty__extensionmembers_ReceiverClass_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_instanceMethod__int() {
+  return 1;
+ }
+ /** @nodts */
+ static $clinit() {
+  ReceiverClass.$clinit = () =>{};
+  ReceiverClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ReceiverClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ReceiverClass, 'extensionmembers.ReceiverClass');
+
+exports = ReceiverClass;
+
+//# sourceMappingURL=ReceiverClass.js.map

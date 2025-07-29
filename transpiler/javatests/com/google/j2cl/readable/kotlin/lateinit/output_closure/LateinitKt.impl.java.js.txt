@@ -1,0 +1,91 @@
+goog.module('lateinit.LateinitKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+let ClassWithLateInitProperty = goog.forwardDeclare('lateinit.ClassWithLateInitProperty$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class LateinitKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LateinitKt} */
+ static $create__() {
+  LateinitKt.$clinit();
+  let $instance = new LateinitKt();
+  $instance.$ctor__lateinit_LateinitKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lateinit_LateinitKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!*} */
+ static m_getLateInitTopLevelProperty__java_lang_Object() {
+  LateinitKt.$clinit();
+  return Intrinsics.m_checkInitialized__java_lang_Object__java_lang_Object(LateinitKt.$static_lateInitTopLevelProperty__lateinit_LateinitKt);
+ }
+ /** @nodts */
+ static m_setLateInitTopLevelProperty__java_lang_Object__void(/** !* */ set__) {
+  LateinitKt.$clinit();
+  LateinitKt.$static_lateInitTopLevelProperty__lateinit_LateinitKt = set__;
+ }
+ /** @nodts @return {*} */
+ static m_safeLateInitTopLevelPropertyAccess__java_lang_Object() {
+  LateinitKt.$clinit();
+  if (!$Equality.$same(LateinitKt.$static_lateInitTopLevelProperty__lateinit_LateinitKt, null)) {
+   return LateinitKt.m_getLateInitTopLevelProperty__java_lang_Object();
+  }
+  return null;
+ }
+ /** @nodts */
+ static m_main__void() {
+  LateinitKt.$clinit();
+  let a = LateinitKt.m_getLateInitTopLevelProperty__java_lang_Object();
+  let b = ClassWithLateInitProperty.$create__().m_getLateInitProperty__java_lang_Object();
+ }
+ /** @nodts */
+ static m_lateInitVariable__void() {
+  LateinitKt.$clinit();
+  let /** * */ a = null;
+  let b = Intrinsics.m_checkInitialized__java_lang_Object__java_lang_Object(a);
+ }
+ /** @nodts @return {*} */
+ static get f_lateInitTopLevelProperty__lateinit_LateinitKt() {
+  return (LateinitKt.$clinit(), LateinitKt.$static_lateInitTopLevelProperty__lateinit_LateinitKt);
+ }
+ /** @nodts */
+ static set f_lateInitTopLevelProperty__lateinit_LateinitKt(/** * */ value) {
+  (LateinitKt.$clinit(), LateinitKt.$static_lateInitTopLevelProperty__lateinit_LateinitKt = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  LateinitKt.$clinit = () =>{};
+  LateinitKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LateinitKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+  ClassWithLateInitProperty = goog.module.get('lateinit.ClassWithLateInitProperty$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+/**@private {*} @nodts*/
+LateinitKt.$static_lateInitTopLevelProperty__lateinit_LateinitKt;
+$Util.$setClassMetadata(LateinitKt, 'lateinit.LateinitKt');
+
+exports = LateinitKt;
+
+//# sourceMappingURL=LateinitKt.js.map

@@ -1,0 +1,40 @@
+goog.module('jsconstructor.BaseNonJsConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class BaseNonJsConstructor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BaseNonJsConstructor} */
+ static $create__java_lang_Object(/** !* */ obj) {
+  BaseNonJsConstructor.$clinit();
+  let $instance = new BaseNonJsConstructor();
+  $instance.$ctor__jsconstructor_BaseNonJsConstructor__java_lang_Object__void(obj);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsconstructor_BaseNonJsConstructor__java_lang_Object__void(/** !* */ obj) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  BaseNonJsConstructor.$clinit = () =>{};
+  BaseNonJsConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BaseNonJsConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(BaseNonJsConstructor, 'jsconstructor.BaseNonJsConstructor');
+
+exports = BaseNonJsConstructor;
+
+//# sourceMappingURL=BaseNonJsConstructor.js.map

@@ -1,0 +1,47 @@
+goog.module('abstractmethodoverridedefault.AbstractMethodOverrideDefault.A$impl');
+
+const I = goog.require('abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @implements {I}
+ */
+class A extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @override @nodts */
+ m_foo__void() {}
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_bar__void() {
+  I.m_bar__$default__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I__void(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  A.$clinit = () =>{};
+  A.$loadModules();
+  j_l_Object.$clinit();
+  I.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I.$markImplementor(A);
+$Util.$setClassMetadata(A, 'abstractmethodoverridedefault.AbstractMethodOverrideDefault$A');
+
+exports = A;
+
+//# sourceMappingURL=AbstractMethodOverrideDefault$A.js.map

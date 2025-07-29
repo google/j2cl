@@ -1,0 +1,64 @@
+goog.module('jsconstructor.SubVarargs$impl');
+
+const Varargs = goog.require('jsconstructor.Varargs$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+/**
+ * @final
+ */
+class SubVarargs extends Varargs {
+ //JsConstructor 'SubVarargs(Object, int...)'.
+ 
+ constructor(/** !* */ i, .../** ...number */ args) {
+  SubVarargs.$clinit();
+  $Arrays.$stampType(args, $$int);
+  super(...args);
+  this.$ctor__jsconstructor_SubVarargs__java_lang_Object__arrayOf_int__void(i, args);
+ }
+ //Initialization from constructor 'SubVarargs(Object, int...)'.
+ /** @nodts */
+ $ctor__jsconstructor_SubVarargs__java_lang_Object__arrayOf_int__void(/** !* */ i, /** !Array<number> */ args) {}
+ //Factory method corresponding to constructor 'SubVarargs(int)'.
+ /** @nodts @return {!SubVarargs} */
+ static $create__int(/** number */ j) {
+  SubVarargs.$clinit();
+  let $instance = new SubVarargs(j_l_Object.$create__(), j);
+  $instance.$ctor__jsconstructor_SubVarargs__int__void(j);
+  return $instance;
+ }
+ //Initialization from constructor 'SubVarargs(int)'.
+ /** @nodts */
+ $ctor__jsconstructor_SubVarargs__int__void(/** number */ j) {}
+ /** @nodts */
+ static m_subNativeInvocation__void() {
+  SubVarargs.$clinit();
+  let unusedS1 = SubVarargs.$create__int(2);
+  let unusedS2 = new SubVarargs(j_l_Object.$create__(), 1, 2, 3);
+ }
+ /** @nodts */
+ static $clinit() {
+  SubVarargs.$clinit = () =>{};
+  SubVarargs.$loadModules();
+  Varargs.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubVarargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(SubVarargs, 'jsconstructor.SubVarargs');
+
+exports = SubVarargs;
+
+//# sourceMappingURL=SubVarargs.js.map

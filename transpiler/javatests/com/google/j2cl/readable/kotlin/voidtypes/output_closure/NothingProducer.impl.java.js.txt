@@ -1,0 +1,61 @@
+goog.module('voidtypes.NothingProducer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Producer = goog.require('voidtypes.Producer$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @implements {Producer<?>}
+ */
+class NothingProducer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NothingProducer} */
+ static $create__() {
+  NothingProducer.$clinit();
+  let $instance = new NothingProducer();
+  $instance.$ctor__voidtypes_NothingProducer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__voidtypes_NothingProducer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {?} */
+ m_provide__kotlin_jvm_internal_NothingStub() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {?} */
+ m_provide__java_lang_Object() {
+  return this.m_provide__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts */
+ static $clinit() {
+  NothingProducer.$clinit = () =>{};
+  NothingProducer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NothingProducer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+Producer.$markImplementor(NothingProducer);
+$Util.$setClassMetadata(NothingProducer, 'voidtypes.NothingProducer');
+
+exports = NothingProducer;
+
+//# sourceMappingURL=NothingProducer.js.map

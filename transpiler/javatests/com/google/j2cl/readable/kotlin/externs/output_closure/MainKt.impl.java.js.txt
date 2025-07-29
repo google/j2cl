@@ -1,0 +1,97 @@
+goog.module('externs.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let FooImpl = goog.forwardDeclare('externs.Main.FooImpl$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__externs_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__externs_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {boolean} */
+ static m_testFooOverlay__externs_Main_FooOverlay__boolean(/** !Foo */ fooOverlay) {
+  return $Equality.$same(fooOverlay.foo, 'Hello');
+ }
+ // 
+ // native static useDirectlyAsFoo(/** !* */ fooOverlay) 
+ /** @nodts */
+ static m_main__arrayOf_java_lang_String__void(/** !Array<string> */ args) {
+  MainKt.$clinit();
+  MainKt.m_testFooOverlay__externs_Main_FooOverlay__boolean(/**@type {!Foo}*/ (FooImpl.$create__()));
+  MainKt.useDirectlyAsFoo(FooImpl.$create__());
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  FooImpl = goog.module.get('externs.Main.FooImpl$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'externs.MainKt');
+
+/* NATIVE.JS EPILOG */
+
+const externs_MainKt = MainKt;
+
+// Copyright 2022 Google Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @param {Foo} foo
+ * @returns {string}
+ */
+function useFoo(foo) {
+  return foo.foo;
+}
+
+/**
+ * @param {*} foo
+ * @return {void}
+ * @public
+ */
+MainKt.useDirectlyAsFoo = function(foo) {
+  useFoo(/** @type {Foo} */ (foo));
+};
+
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

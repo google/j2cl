@@ -1,0 +1,120 @@
+goog.module('builtins.BuiltinsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('builtins.Foo$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let HashMap = goog.forwardDeclare('java.util.HashMap$impl');
+let Map = goog.forwardDeclare('java.util.Map$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let CollectionsKt = goog.forwardDeclare('kotlin.collections.CollectionsKt$impl');
+let MapsKt = goog.forwardDeclare('kotlin.collections.MapsKt$impl');
+let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
+/**
+ * @final
+ */
+class BuiltinsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BuiltinsKt} */
+ static $create__() {
+  BuiltinsKt.$clinit();
+  let $instance = new BuiltinsKt();
+  $instance.$ctor__builtins_BuiltinsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__builtins_BuiltinsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testBuiltinPropertiesWithDifferentNameOnJvm__void() {
+  BuiltinsKt.$clinit();
+  let a = Foo.f_FOO__builtins_Foo.name();
+  let b = Foo.f_FOO__builtins_Foo.ordinal();
+  let collection = CollectionsKt.m_emptyList__java_util_List();
+  let c = collection.size();
+  let list = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
+  let d = list.size();
+  let map = /**@type {!Map<string, ?string>}*/ (MapsKt.m_emptyMap__java_util_Map());
+  let e = map.size();
+  let f = map.keySet();
+  let g = map.values();
+  let h = map.entrySet();
+  let hashMap = /**@type {!HashMap<string, string>}*/ (HashMap.$create__());
+  let i = hashMap.size();
+  let j = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(hashMap.keySet());
+  let k = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(hashMap.values());
+  let l = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(hashMap.entrySet());
+  let charSequence = 'abcd';
+  let m = $CharSequences.m_length__java_lang_CharSequence__int(charSequence);
+  let string_1 = '';
+  let n = j_l_String.m_length__java_lang_String__int(string_1);
+ }
+ /** @nodts */
+ static m_testBuiltinFunctionWithDifferentJvmName__void() {
+  BuiltinsKt.$clinit();
+  let list = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
+  list.removeAtIndex(0);
+  let arrayList = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
+  arrayList.removeAtIndex(0);
+  let number_1 = Integer.m_valueOf__int__java_lang_Integer(1);
+  let a = $Numbers.m_byteValue__java_lang_Number__byte(number_1);
+  let b = $Numbers.m_shortValue__java_lang_Number__short(number_1);
+  let c = $Numbers.m_intValue__java_lang_Number__int(number_1);
+  let d = $Numbers.m_longValue__java_lang_Number__long(number_1);
+  let e = $Numbers.m_floatValue__java_lang_Number__float(number_1);
+  let f = $Numbers.m_doubleValue__java_lang_Number__double(number_1);
+  let int_1 = 1;
+  let g = $Primitives.narrowIntToByte(int_1);
+  let h = $Primitives.narrowIntToShort(int_1);
+  let i = int_1;
+  let j = $Primitives.widenIntToLong(int_1);
+  let k = int_1;
+  let l = int_1;
+  let charSequence = 'abcd';
+  let m = $CharSequences.m_charAt__java_lang_CharSequence__int__char(charSequence, 0);
+  let n = $CharSequences.m_charAt__java_lang_CharSequence__int__char(charSequence, 0);
+  let string_1 = '';
+  let o = j_l_String.m_charAt__java_lang_String__int__char(string_1, 0);
+  let p = j_l_String.m_charAt__java_lang_String__int__char(string_1, 0);
+ }
+ /** @nodts */
+ static $clinit() {
+  BuiltinsKt.$clinit = () =>{};
+  BuiltinsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BuiltinsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Foo = goog.module.get('builtins.Foo$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  HashMap = goog.module.get('java.util.HashMap$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  CollectionsKt = goog.module.get('kotlin.collections.CollectionsKt$impl');
+  MapsKt = goog.module.get('kotlin.collections.MapsKt$impl');
+  $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
+  $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
+}
+$Util.$setClassMetadata(BuiltinsKt, 'builtins.BuiltinsKt');
+
+exports = BuiltinsKt;
+
+//# sourceMappingURL=BuiltinsKt.js.map

@@ -1,0 +1,52 @@
+goog.module('toplevelmembers.TopLevelMembers$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let TopLevelMembersKt = goog.forwardDeclare('toplevelmembers.TopLevelMembersKt$impl');
+
+/**
+ * @final
+ */
+class TopLevelMembers extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!TopLevelMembers} */
+ static $create__() {
+  TopLevelMembers.$clinit();
+  let $instance = new TopLevelMembers();
+  $instance.$ctor__toplevelmembers_TopLevelMembers__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__toplevelmembers_TopLevelMembers__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let a = TopLevelMembersKt.m_getTopLevelField__int();
+  TopLevelMembersKt.m_topLevelFunction__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  TopLevelMembers.$clinit = () =>{};
+  TopLevelMembers.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TopLevelMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  TopLevelMembersKt = goog.module.get('toplevelmembers.TopLevelMembersKt$impl');
+ }
+}
+$Util.$setClassMetadata(TopLevelMembers, 'toplevelmembers.TopLevelMembers');
+
+exports = TopLevelMembers;
+
+//# sourceMappingURL=TopLevelMembers.js.map

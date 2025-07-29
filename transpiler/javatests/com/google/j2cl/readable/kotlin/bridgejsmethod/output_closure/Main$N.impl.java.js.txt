@@ -1,0 +1,52 @@
+goog.module('bridgejsmethod.Main.N$impl');
+
+const M = goog.require('bridgejsmethod.Main.M$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
+let B = goog.forwardDeclare('bridgejsmethod.Main.B$impl');
+
+/**
+ * @abstract
+ * @implements {M}
+ */
+class N extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Main} @nodts*/
+  this.$outer_this__bridgejsmethod_Main_N;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_N__bridgejsmethod_Main__void(/** !Main */ $outer_this) {
+  this.$outer_this__bridgejsmethod_Main_N = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract @return {!B} */
+ get b() {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!B} */
+ m_getB__bridgejsmethod_Main_B() {
+  return this.b;
+ }
+ /** @nodts */
+ static $clinit() {
+  N.$clinit = () =>{};
+  N.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof N;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+M.$markImplementor(N);
+$Util.$setClassMetadata(N, 'bridgejsmethod.Main$N');
+
+exports = N;
+
+//# sourceMappingURL=Main$N.js.map

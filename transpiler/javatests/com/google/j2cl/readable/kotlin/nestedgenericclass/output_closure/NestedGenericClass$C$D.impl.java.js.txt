@@ -1,0 +1,59 @@
+goog.module('nestedgenericclass.NestedGenericClass.C.D$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let C = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.C$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class D extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!C<T>} @nodts*/
+  this.$outer_this__nestedgenericclass_NestedGenericClass_C_D;
+  /**@type {?T} @nodts*/
+  this.f_d__nestedgenericclass_NestedGenericClass_C_D_;
+ }
+ /** @nodts @template T @return {!D<T>} */
+ static $create__nestedgenericclass_NestedGenericClass_C(/** !C<T> */ $outer_this) {
+  D.$clinit();
+  let $instance = new D();
+  $instance.$ctor__nestedgenericclass_NestedGenericClass_C_D__nestedgenericclass_NestedGenericClass_C__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nestedgenericclass_NestedGenericClass_C_D__nestedgenericclass_NestedGenericClass_C__void(/** !C<T> */ $outer_this) {
+  this.$outer_this__nestedgenericclass_NestedGenericClass_C_D = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?T} */
+ m_getD__java_lang_Object() {
+  return this.f_d__nestedgenericclass_NestedGenericClass_C_D_;
+ }
+ /** @final @nodts */
+ m_setD__java_lang_Object__void(/** ?T */ set__) {
+  this.f_d__nestedgenericclass_NestedGenericClass_C_D_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  D.$clinit = () =>{};
+  D.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof D;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(D, 'nestedgenericclass.NestedGenericClass$C$D');
+
+exports = D;
+
+//# sourceMappingURL=NestedGenericClass$C$D.js.map

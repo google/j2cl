@@ -1,0 +1,77 @@
+goog.module('localnamecollision.A$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let B = goog.forwardDeclare('localnamecollision.A.B$impl');
+
+/**
+ * @final
+ */
+class A extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!A} */
+ static $create__() {
+  A.$clinit();
+  let $instance = new A();
+  $instance.$ctor__localnamecollision_A__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localnamecollision_A__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {A} */
+ static m_getA__localnamecollision_A() {
+  A.$clinit();
+  return A.f_A__localnamecollision_A_;
+ }
+ /** @nodts */
+ static m_setA__localnamecollision_A__void(/** A */ set__) {
+  A.$clinit();
+  A.f_A__localnamecollision_A_ = set__;
+ }
+ /** @nodts @return {B} */
+ static m_getB__localnamecollision_A_B() {
+  A.$clinit();
+  return A.f_B__localnamecollision_A_;
+ }
+ /** @nodts */
+ static m_setB__localnamecollision_A_B__void(/** B */ set__) {
+  A.$clinit();
+  A.f_B__localnamecollision_A_ = set__;
+ }
+ /** @nodts */
+ static m_test__void() {
+  A.$clinit();
+  A.m_setA__localnamecollision_A__void(A.m_getA__localnamecollision_A());
+  A.m_setB__localnamecollision_A_B__void(A.m_getB__localnamecollision_A_B());
+  A.m_setA__localnamecollision_A__void(A.m_getA__localnamecollision_A());
+  A.m_setB__localnamecollision_A_B__void(A.m_getB__localnamecollision_A_B());
+ }
+ /** @nodts */
+ static $clinit() {
+  A.$clinit = () =>{};
+  A.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {A} @nodts*/
+A.f_A__localnamecollision_A_;
+/**@type {B} @nodts*/
+A.f_B__localnamecollision_A_;
+$Util.$setClassMetadata(A, 'localnamecollision.A');
+
+exports = A;
+
+//# sourceMappingURL=A.js.map

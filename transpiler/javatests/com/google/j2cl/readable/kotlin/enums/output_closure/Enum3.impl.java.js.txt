@@ -1,0 +1,86 @@
+goog.module('enums.Enum3$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @final
+ * @extends {Enum<!Enum3>}
+ */
+class Enum3 extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Enum3} */
+ static $create__java_lang_String__int__java_util_function_Function(/** ?string */ $name, /** number */ $ordinal, /** !j_u_function_Function<string, string> */ function_1) {
+  let $instance = new Enum3();
+  $instance.$ctor__enums_Enum3__java_lang_String__int__java_util_function_Function__void($name, $ordinal, function_1);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__enums_Enum3__java_lang_String__int__java_util_function_Function__void(/** ?string */ $name, /** number */ $ordinal, /** !j_u_function_Function<string, string> */ function_1) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!Enum3} */
+ static m_valueOf__java_lang_String__enums_Enum3(/** string */ name) {
+  Enum3.$clinit();
+  if ($Equality.$same(Enum3.f_namesToValuesMap__enums_Enum3_, null)) {
+   Enum3.f_namesToValuesMap__enums_Enum3_ = (/**@type {Map<?string, !Enum3>}*/ ($Enums.createMapFromValues(Enum3.m_values__arrayOf_enums_Enum3())));
+  }
+  return /**@type {Enum3}*/ ($Enums.getValueFromNameAndMap(name, Enum3.f_namesToValuesMap__enums_Enum3_));
+ }
+ /** @nodts @return {!Array<!Enum3>} */
+ static m_values__arrayOf_enums_Enum3() {
+  Enum3.$clinit();
+  return /**@type {!Array<!Enum3>}*/ ($Arrays.$stampType([Enum3.$static_VALUE1__enums_Enum3], Enum3));
+ }
+ /** @nodts @return {!Enum3} */
+ static get f_VALUE1__enums_Enum3() {
+  return (Enum3.$clinit(), Enum3.$static_VALUE1__enums_Enum3);
+ }
+ /** @nodts */
+ static $clinit() {
+  Enum3.$clinit = () =>{};
+  Enum3.$loadModules();
+  Enum.$clinit();
+  Enum3.$static_VALUE1__enums_Enum3 = Enum3.$create__java_lang_String__int__java_util_function_Function($Util.$makeEnumName('VALUE1'), Enum3.$ordinal_VALUE1__enums_Enum3, j_u_function_Function.$adapt(/**  @return {string}*/ ((/** string */ unused_var) =>{
+   let unused_var_1 = /**@type {string}*/ ($Casts.$to(unused_var, j_l_String));
+   return 'foo';
+  })));
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Enum3;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  j_u_function_Function = goog.module.get('java.util.function.Function$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+Enum3.$ordinal_VALUE1__enums_Enum3 = 0;
+/**@private {!Enum3} @nodts*/
+Enum3.$static_VALUE1__enums_Enum3;
+/**@type {Map<?string, !Enum3>} @nodts*/
+Enum3.f_namesToValuesMap__enums_Enum3_;
+$Util.$setClassMetadataForEnum(Enum3, 'enums.Enum3');
+
+exports = Enum3;
+
+//# sourceMappingURL=Enum3.js.map

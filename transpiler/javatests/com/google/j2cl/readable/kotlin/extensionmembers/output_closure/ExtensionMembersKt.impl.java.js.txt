@@ -1,0 +1,109 @@
+goog.module('extensionmembers.ExtensionMembersKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InlineReceiverClass = goog.forwardDeclare('extensionmembers.InlineReceiverClass$impl');
+let ReceiverClass = goog.forwardDeclare('extensionmembers.ReceiverClass$impl');
+let TemplatedReceiverClass = goog.forwardDeclare('extensionmembers.TemplatedReceiverClass$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class ExtensionMembersKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ExtensionMembersKt} */
+ static $create__() {
+  ExtensionMembersKt.$clinit();
+  let $instance = new ExtensionMembersKt();
+  $instance.$ctor__extensionmembers_ExtensionMembersKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__extensionmembers_ExtensionMembersKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T */
+ static m_main__extensionmembers_ReceiverClass__void(/** T */ parametrizedReceiver) {
+  ExtensionMembersKt.$clinit();
+  ExtensionMembersKt.m_topLevelExtensionFunction__extensionmembers_ReceiverClass__int__int(ReceiverClass.$create__int(5), 2);
+  ExtensionMembersKt.m_getTopLevelExtensionProperty__extensionmembers_ReceiverClass__int(ReceiverClass.$create__int(5));
+  ExtensionMembersKt.m_topLevelExtensionFunction__extensionmembers_ReceiverClass__int__int(/**@type {!ReceiverClass}*/ (parametrizedReceiver), 2);
+  ExtensionMembersKt.m_getTopLevelExtensionProperty__extensionmembers_ReceiverClass__int(/**@type {!ReceiverClass}*/ (parametrizedReceiver));
+  ExtensionMembersKt.m_topLevelExtensionFunction$kVp4Xho__extensionmembers_InlineReceiverClass__int__int(InlineReceiverClass.$create__int(2), 3);
+  let /** InlineReceiverClass */ foo = null;
+  ExtensionMembersKt.m_topLevelExtensionFunction$xD4fHxg__extensionmembers_InlineReceiverClass__int__int(foo, 3);
+ }
+ /** @nodts @return {number} */
+ static m_topLevelExtensionFunction__extensionmembers_ReceiverClass__int__int(/** !ReceiverClass */ this_1, /** number */ valueParameter) {
+  ExtensionMembersKt.$clinit();
+  return this_1.m_getInstanceProperty__int() + this_1.m_instanceMethod__int() + valueParameter | 0;
+ }
+ /** @nodts @return {number} */
+ static m_getTopLevelExtensionProperty__extensionmembers_ReceiverClass__int(/** !ReceiverClass */ this_1) {
+  ExtensionMembersKt.$clinit();
+  return this_1.m_getInstanceProperty__int() + this_1.m_instanceMethod__int() | 0;
+ }
+ /** @nodts */
+ static m_setTopLevelExtensionProperty__extensionmembers_ReceiverClass__int__void(/** !ReceiverClass */ this_1, /** number */ value) {
+  ExtensionMembersKt.$clinit();
+  this_1.m_setInstanceProperty__int__void(value);
+ }
+ /** @nodts @return {string} */
+ static m_topLevelExtensionFunction__extensionmembers_TemplatedReceiverClass__java_lang_String(/** !TemplatedReceiverClass<string> */ this_1) {
+  ExtensionMembersKt.$clinit();
+  return 'TemplatedReceiverClass<String>: ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(/**@type {string}*/ ($Casts.$to(this_1.m_getInstanceProperty__java_lang_Object(), j_l_String)));
+ }
+ /** @nodts @return {number} */
+ static m_topLevelExtensionFunction__extensionmembers_TemplatedReceiverClass__int(/** !TemplatedReceiverClass<!Integer> */ this_1) {
+  ExtensionMembersKt.$clinit();
+  return 10 + (/**@type {!Integer}*/ ($Casts.$to(this_1.m_getInstanceProperty__java_lang_Object(), Integer))).m_intValue__int() | 0;
+ }
+ /** @nodts @return {number} */
+ static m_topLevelExtensionFunction$kVp4Xho__extensionmembers_InlineReceiverClass__int__int(/** !InlineReceiverClass */ this_1, /** number */ valueParameter) {
+  ExtensionMembersKt.$clinit();
+  return this_1.m_getInstanceProperty__int() + this_1.m_instanceMethod__int() + valueParameter | 0;
+ }
+ /** @nodts @return {number} */
+ static m_topLevelExtensionFunction$xD4fHxg__extensionmembers_InlineReceiverClass__int__int(/** InlineReceiverClass */ this_1, /** number */ valueParameter) {
+  ExtensionMembersKt.$clinit();
+  let tmp0_safe_receiver = this_1;
+  let tmp1_elvis_lhs = $Equality.$same(tmp0_safe_receiver, null) ? null : Integer.m_valueOf__int__java_lang_Integer(tmp0_safe_receiver.m_getInstanceProperty__int());
+  let tmp = $Equality.$same(tmp1_elvis_lhs, null) ? 0 : tmp1_elvis_lhs.m_intValue__int();
+  let tmp2_safe_receiver = this_1;
+  let tmp3_elvis_lhs = $Equality.$same(tmp2_safe_receiver, null) ? null : Integer.m_valueOf__int__java_lang_Integer(tmp2_safe_receiver.m_instanceMethod__int());
+  return tmp + ($Equality.$same(tmp3_elvis_lhs, null) ? 0 : tmp3_elvis_lhs.m_intValue__int()) + valueParameter | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  ExtensionMembersKt.$clinit = () =>{};
+  ExtensionMembersKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExtensionMembersKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InlineReceiverClass = goog.module.get('extensionmembers.InlineReceiverClass$impl');
+  ReceiverClass = goog.module.get('extensionmembers.ReceiverClass$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ExtensionMembersKt, 'extensionmembers.ExtensionMembersKt');
+
+exports = ExtensionMembersKt;
+
+//# sourceMappingURL=ExtensionMembersKt.js.map

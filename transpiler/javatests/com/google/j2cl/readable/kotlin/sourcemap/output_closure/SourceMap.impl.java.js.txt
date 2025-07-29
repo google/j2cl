@@ -1,0 +1,226 @@
+goog.module('sourcemap.SourceMap$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Comparator = goog.require('java.util.Comparator$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let ToDoubleFunction = goog.forwardDeclare('java.util.function.ToDoubleFunction$impl');
+let ToIntFunction = goog.forwardDeclare('java.util.function.ToIntFunction$impl');
+let ToLongFunction = goog.forwardDeclare('java.util.function.ToLongFunction$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let MutableKProperty0Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty0Impl$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $1LocalClass = goog.forwardDeclare('sourcemap.SourceMap.$1LocalClass$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
+/**
+ * @abstract
+ * @template T
+ * @implements {Comparator<T>}
+ */
+class SourceMap extends j_l_Object {
+ //JsConstructor 'SourceMap(int)'.
+ 
+ constructor(/** number */ i) {
+  SourceMap.$clinit();
+  super();
+  /**@type {number} @nodts*/
+  this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 0;
+  /**@type {string} @nodts*/
+  this.f_uninitializedInstanceField2__sourcemap_SourceMap_;
+  /**@type {number} @nodts*/
+  this.f_initializedInstanceField__sourcemap_SourceMap_ = 0;
+  this.$ctor__sourcemap_SourceMap__int__void(i);
+ }
+ //Initialization from constructor 'SourceMap(int)'.
+ /** @nodts */
+ $ctor__sourcemap_SourceMap__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+  this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 1000;
+  if (this.f_uninitializedInstanceField__sourcemap_SourceMap_ == 1000) {
+   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Hello!';
+  } else if (this.f_uninitializedInstanceField__sourcemap_SourceMap_ == 2000) {
+   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'World!';
+  } else {
+   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Universe!';
+  }
+  this.f_initializedInstanceField__sourcemap_SourceMap_ = 2;
+ }
+ //Initialization from constructor 'SourceMap(int, String)'.
+ /** @nodts */
+ $ctor__sourcemap_SourceMap__int__java_lang_String__void(/** number */ uninitializedInstanceField, /** string */ uninitializedInstanceField2) {}
+ /** @final @nodts @return {number} */
+ m_testStatements__int__int__int__int__int_$p_sourcemap_SourceMap(/** number */ a, /** number */ b, /** number */ times, /** number */ number_1) {
+  let value = 0;
+  for (let inductionVariable = 0; inductionVariable < times; inductionVariable = inductionVariable + 1 | 0) {
+   let i = inductionVariable;
+   let unary = value;
+   value = unary + 1 | 0;
+  }
+  if ($Primitives.coerceDivision(number_1 % 2) == 0) {
+   value = value + 1 | 0;
+  } else {
+   value = value + 2 | 0;
+  }
+  let b2 = b;
+  while (b2 > 0 && b2 < 100) {
+   b2 = b2 - 10 | 0;
+  }
+  value = value + (a + b2) | 0;
+  outerLoop: for (let inductionVariable_1 = 0; inductionVariable_1 <= 2; inductionVariable_1 = inductionVariable_1 + 1 | 0) {
+   let i_1 = inductionVariable_1;
+   let tmp0_subject = number_1;
+   switch (tmp0_subject) {
+    case 1:
+     {
+      value = value + 5 | 0;
+      break outerLoop;
+     }
+    case 2:
+     {
+      value = value + 2 | 0;
+      break outerLoop;
+     }
+    case 3:
+     {
+      break outerLoop;
+     }
+   }
+   if (i_1 == 1) {
+    break;
+   }
+  }
+  return value;
+ }
+ /** @final @nodts */
+ m_testLambdaAndMethodReference__int__void_$p_sourcemap_SourceMap(/** number */ n) {
+  let f = Function1.$adapt(/**  @return {?}*/ ((/** ? */ i) =>{
+   let i_1 = (/**@type {!Integer}*/ ($Casts.$to(i, Integer))).m_intValue__int();
+   return Integer.m_valueOf__int__java_lang_Integer(i_1 + 1 | 0);
+  }));
+  let /** ArrayList<!*> */ $propertyReferenceQualifier;
+  let f2 = /**@type {!MutableKProperty0Impl<!Integer>}*/ (($propertyReferenceQualifier = (/**@type {!ArrayList<!*>}*/ (ArrayList.$create__())), MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
+   return Integer.m_valueOf__int__java_lang_Integer($propertyReferenceQualifier.size());
+  })), null)));
+  let f3 = Function0.$adapt(/**  @return {!Integer}*/ (() =>{
+   return Integer.m_valueOf__int__java_lang_Integer(this.m_simpleMethod__int_$p_sourcemap_SourceMap());
+  }));
+ }
+ /** @final @nodts @return {number} */
+ m_simpleMethod__int_$p_sourcemap_SourceMap() {
+  return 1;
+ }
+ /** @final @nodts */
+ m_testLocalClass__void_$p_sourcemap_SourceMap() {
+  $1LocalClass.$create__sourcemap_SourceMap(this);
+ }
+ /** @final @nodts */
+ m_testWhenExpression__void_$p_sourcemap_SourceMap() {
+  let v = 1;
+  let tmp0_subject = v;
+  let r = tmp0_subject == 1 || tmp0_subject == 2 ? 10 : 20;
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {Comparator<T>} */
+ m_reversed__java_util_Comparator() {
+  return /**@type {Comparator<T>}*/ (Comparator.m_reversed__$default__java_util_Comparator__java_util_Comparator(this));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {Comparator<T>} */
+ m_thenComparing__java_util_Comparator__java_util_Comparator(/** Comparator<?> */ arg0) {
+  return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_Comparator__java_util_Comparator(this, arg0));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @template U @return {Comparator<T>} */
+ m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator(/** j_u_function_Function<?, ?> */ arg0, /** Comparator<?> */ arg1) {
+  return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator__java_util_Comparator(this, arg0, arg1));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @template U @return {Comparator<T>} */
+ m_thenComparing__java_util_function_Function__java_util_Comparator(/** j_u_function_Function<?, ?> */ arg0) {
+  return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator(this, arg0));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {Comparator<T>} */
+ m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator(/** ToIntFunction<?> */ arg0) {
+  return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingInt__$default__java_util_Comparator__java_util_function_ToIntFunction__java_util_Comparator(this, arg0));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {Comparator<T>} */
+ m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator(/** ToLongFunction<?> */ arg0) {
+  return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingLong__$default__java_util_Comparator__java_util_function_ToLongFunction__java_util_Comparator(this, arg0));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {Comparator<T>} */
+ m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator(/** ToDoubleFunction<?> */ arg0) {
+  return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingDouble__$default__java_util_Comparator__java_util_function_ToDoubleFunction__java_util_Comparator(this, arg0));
+ }
+ /** @nodts @return {number} */
+ static m_getUninitializedStaticField__double() {
+  SourceMap.$clinit();
+  return SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_;
+ }
+ /** @nodts */
+ static m_setUninitializedStaticField__double__void(/** number */ set__) {
+  SourceMap.$clinit();
+  SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_ = set__;
+ }
+ /** @nodts @return {string} */
+ static m_getInitializedStaticField__java_lang_String() {
+  SourceMap.$clinit();
+  return SourceMap.f_initializedStaticField__sourcemap_SourceMap_;
+ }
+ /** @nodts */
+ static m_setInitializedStaticField__java_lang_String__void(/** string */ set__) {
+  SourceMap.$clinit();
+  SourceMap.f_initializedStaticField__sourcemap_SourceMap_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  SourceMap.$clinit = () =>{};
+  SourceMap.$loadModules();
+  j_l_Object.$clinit();
+  Comparator.$clinit();
+  SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_ = 10;
+  SourceMap.f_initializedStaticField__sourcemap_SourceMap_ = 'Hello';
+  if ($Equality.$sameNumber(SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_, 10)) {
+   SourceMap.f_initializedStaticField__sourcemap_SourceMap_ = 'World';
+  }
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SourceMap;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {number} */
+ m_compare__java_lang_Object__java_lang_Object__int(/** T */ arg0, /** T */ arg1) {}
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  MutableKProperty0Impl = goog.module.get('kotlin.jvm.internal.MutableKProperty0Impl$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $1LocalClass = goog.module.get('sourcemap.SourceMap.$1LocalClass$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
+}
+/**@type {number} @nodts*/
+SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_ = 0;
+/**@type {string} @nodts*/
+SourceMap.f_initializedStaticField__sourcemap_SourceMap_;
+Comparator.$markImplementor(SourceMap);
+$Util.$setClassMetadata(SourceMap, 'sourcemap.SourceMap');
+
+exports = SourceMap;
+
+//# sourceMappingURL=SourceMap.js.map

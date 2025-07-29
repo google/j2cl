@@ -1,0 +1,50 @@
+goog.module('nullsafetyoperators.MyClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class MyClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_field__nullsafetyoperators_MyClass_ = 0;
+ }
+ /** @nodts @return {!MyClass} */
+ static $create__int(/** number */ field) {
+  MyClass.$clinit();
+  let $instance = new MyClass();
+  $instance.$ctor__nullsafetyoperators_MyClass__int__void(field);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullsafetyoperators_MyClass__int__void(/** number */ field) {
+  this.$ctor__java_lang_Object__void();
+  this.f_field__nullsafetyoperators_MyClass_ = field;
+ }
+ /** @final @nodts @return {number} */
+ m_getField__int() {
+  return this.f_field__nullsafetyoperators_MyClass_;
+ }
+ /** @nodts */
+ static $clinit() {
+  MyClass.$clinit = () =>{};
+  MyClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(MyClass, 'nullsafetyoperators.MyClass');
+
+exports = MyClass;
+
+//# sourceMappingURL=MyClass.js.map

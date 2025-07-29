@@ -1,0 +1,65 @@
+goog.module('destructuringdeclarations.CustomData$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class CustomData extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_name__destructuringdeclarations_CustomData_;
+  /**@type {number} @nodts*/
+  this.f_age__destructuringdeclarations_CustomData_ = 0;
+ }
+ /** @nodts @return {!CustomData} */
+ static $create__java_lang_String__int(/** string */ name, /** number */ age) {
+  CustomData.$clinit();
+  let $instance = new CustomData();
+  $instance.$ctor__destructuringdeclarations_CustomData__java_lang_String__int__void(name, age);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__destructuringdeclarations_CustomData__java_lang_String__int__void(/** string */ name, /** number */ age) {
+  this.$ctor__java_lang_Object__void();
+  this.f_name__destructuringdeclarations_CustomData_ = name;
+  this.f_age__destructuringdeclarations_CustomData_ = age;
+ }
+ /** @final @nodts @return {string} */
+ m_getName__java_lang_String() {
+  return this.f_name__destructuringdeclarations_CustomData_;
+ }
+ /** @final @nodts @return {number} */
+ m_getAge__int() {
+  return this.f_age__destructuringdeclarations_CustomData_;
+ }
+ /** @final @nodts @return {string} */
+ m_component1__java_lang_String() {
+  return this.m_getName__java_lang_String();
+ }
+ /** @final @nodts @return {number} */
+ m_component2__int() {
+  return this.m_getAge__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  CustomData.$clinit = () =>{};
+  CustomData.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CustomData;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(CustomData, 'destructuringdeclarations.CustomData');
+
+exports = CustomData;
+
+//# sourceMappingURL=CustomData.js.map

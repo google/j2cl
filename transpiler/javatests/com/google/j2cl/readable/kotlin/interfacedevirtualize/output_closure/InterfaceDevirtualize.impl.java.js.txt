@@ -1,0 +1,91 @@
+goog.module('interfacedevirtualize.InterfaceDevirtualize$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
+
+/**
+ * @final
+ */
+class InterfaceDevirtualize extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InterfaceDevirtualize} */
+ static $create__() {
+  InterfaceDevirtualize.$clinit();
+  let $instance = new InterfaceDevirtualize();
+  $instance.$ctor__interfacedevirtualize_InterfaceDevirtualize__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfacedevirtualize_InterfaceDevirtualize__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @template T @return {number} */
+ m_compare0__java_lang_Comparable__java_lang_Object__int(/** !(Comparable<?>|boolean|number|string) */ c, /** T */ t) {
+  return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, t);
+ }
+ /** @final @nodts @return {number} */
+ m_compare1__java_lang_Comparable__java_lang_Object__int(/** !(Comparable<?>|boolean|number|string) */ c, /** * */ o) {
+  return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, o);
+ }
+ /** @final @nodts @return {number} */
+ m_compare2__java_lang_Comparable__java_lang_Double__int(/** !(Comparable<?>|boolean|number|string) */ c, /** ?number */ d) {
+  return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, d);
+ }
+ /** @final @nodts */
+ m_compare3__double__java_lang_Double__void(/** number */ d1, /** ?number */ d2) {
+  Double.m_compare__double__double__int(d1, Double.m_doubleValue__java_lang_Double__double(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(d2)));
+  Double.m_compare__double__double__int(d1, Double.m_doubleValue__java_lang_Double__double(d2));
+ }
+ /** @final @nodts @return {number} */
+ m_compare2__java_lang_Comparable__java_lang_Boolean__int(/** !(Comparable<?>|boolean|number|string) */ c, /** ?boolean */ d) {
+  return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, d);
+ }
+ /** @final @nodts */
+ m_compare3__boolean__java_lang_Boolean__void(/** boolean */ d1, /** ?boolean */ d2) {
+  Boolean.m_compare__boolean__boolean__int(d1, Boolean.m_booleanValue__java_lang_Boolean__boolean(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(d2)));
+  Boolean.m_compare__boolean__boolean__int(d1, Boolean.m_booleanValue__java_lang_Boolean__boolean(d2));
+ }
+ /** @final @nodts @return {number} */
+ m_compare2__java_lang_Comparable__java_lang_Integer__int(/** !(Comparable<?>|boolean|number|string) */ c, /** Integer */ d) {
+  return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, d);
+ }
+ /** @final @nodts */
+ m_compare3__int__java_lang_Integer__void(/** number */ d1, /** Integer */ d2) {
+  Integer.m_compare__int__int__int(d1, d2.m_intValue__int());
+  Integer.m_compare__int__int__int(d1, d2.m_intValue__int());
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceDevirtualize.$clinit = () =>{};
+  InterfaceDevirtualize.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InterfaceDevirtualize;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Comparables = goog.module.get('vmbootstrap.Comparables$impl');
+ }
+}
+$Util.$setClassMetadata(InterfaceDevirtualize, 'interfacedevirtualize.InterfaceDevirtualize');
+
+exports = InterfaceDevirtualize;
+
+//# sourceMappingURL=InterfaceDevirtualize.js.map

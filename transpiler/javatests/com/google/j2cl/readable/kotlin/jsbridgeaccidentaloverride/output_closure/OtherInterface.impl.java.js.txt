@@ -1,0 +1,33 @@
+goog.module('jsbridgeaccidentaloverride.OtherInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class OtherInterface {
+ /** @abstract @nodts @return {number} */
+ m_f__int__int(/** number */ a) {}
+ /** @nodts */
+ static $clinit() {
+  OtherInterface.$clinit = () =>{};
+  OtherInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsbridgeaccidentaloverride_OtherInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsbridgeaccidentaloverride_OtherInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+OtherInterface.$markImplementor(/**@type {Function}*/ (OtherInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (OtherInterface), 'jsbridgeaccidentaloverride.OtherInterface');
+
+exports = OtherInterface;
+
+//# sourceMappingURL=OtherInterface.js.map

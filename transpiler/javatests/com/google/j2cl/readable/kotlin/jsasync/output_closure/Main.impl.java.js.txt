@@ -1,0 +1,97 @@
+goog.module('jsasync.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let AsyncInterface = goog.forwardDeclare('jsasync.AsyncInterface$impl');
+let $1 = goog.forwardDeclare('jsasync.Main.$1$impl');
+let $3 = goog.forwardDeclare('jsasync.Main.$3$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class Main extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!IThenable<!Integer>} @nodts*/
+  this.f_x__jsasync_Main_;
+ }
+ /** @nodts @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__jsasync_Main__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsasync_Main__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_x__jsasync_Main_ = (/**@type {!Promise<!Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(10))));
+ }
+ /** @final @nodts @return {IThenable<!Unit>} */
+ async m_emptyAsyncMethod__jsasync_IThenable() {
+  return null;
+ }
+ /** @final @nodts @return {!IThenable<!Integer>} */
+ async m_asyncMethod__jsasync_IThenable() {
+  let result = (/**@type {!Integer}*/ ($Casts.$to(await (/**@type {!Promise<!Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(7)))), Integer))).m_intValue__int();
+  return /**@type {!IThenable<!Integer>}*/ (this.m_parametricAsyncMethod__java_lang_Object__jsasync_IThenable(Integer.m_valueOf__int__java_lang_Integer(result)));
+ }
+ /** @final @nodts @template T @return {!IThenable<T>} */
+ async m_parametricAsyncMethod__java_lang_Object__jsasync_IThenable(/** T */ value) {
+  return /**@type {!Promise<T>}*/ (Promise.resolve(await (/**@type {!Promise<T>}*/ (Promise.resolve(value)))));
+ }
+ /** @final @return {IThenable<!Integer>} */
+ async asyncAndJsMethod() {
+  return null;
+ }
+ /** @final @nodts */
+ m_testAsyncLambdas__void() {
+  let i = AsyncInterface.$adapt(/**  @return {!IThenable<!Integer>}*/ (async () =>{
+   return /**@type {!Promise<!Integer>}*/ (Promise.resolve(/**@type {!Integer}*/ ($Casts.$to(await (/**@type {!Promise<!Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5)))), Integer))));
+  }));
+  let o = $1.$create__jsasync_Main(this);
+  let j = /**  @return {!IThenable<!Integer>}*/ (async () =>{
+   return /**@type {!Promise<!Integer>}*/ (Promise.resolve(/**@type {!Integer}*/ ($Casts.$to(await (/**@type {!Promise<!Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5)))), Integer))));
+  });
+  let optimizableJsFunction = /**  @return {!IThenable<!Integer>}*/ (async () =>{
+   return /**@type {!Promise<!Integer>}*/ (Promise.resolve(/**@type {!Integer}*/ ($Casts.$to(await this.f_x__jsasync_Main_, Integer))));
+  });
+  let unoptimizableJsFunction = /**@type {!$3}*/ ($3.$create__jsasync_Main(this));
+ }
+ /** @nodts @return {!IThenable<!Unit>} */
+ static async m_staticAsyncMethod__jsasync_IThenable() {
+  Main.$clinit();
+  await (/**@type {!Promise<!Unit>}*/ (Promise.resolve(Unit.f_INSTANCE__kotlin_Unit)));
+  return /**@type {!Promise<!Unit>}*/ (Promise.resolve(Unit.f_INSTANCE__kotlin_Unit));
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  AsyncInterface = goog.module.get('jsasync.AsyncInterface$impl');
+  $1 = goog.module.get('jsasync.Main.$1$impl');
+  $3 = goog.module.get('jsasync.Main.$3$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(Main, 'jsasync.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

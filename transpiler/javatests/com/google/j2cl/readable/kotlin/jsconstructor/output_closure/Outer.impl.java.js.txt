@@ -1,0 +1,43 @@
+goog.module('jsconstructor.Outer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Outer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Outer} */
+ static $create__() {
+  Outer.$clinit();
+  let $instance = new Outer();
+  $instance.$ctor__jsconstructor_Outer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsconstructor_Outer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Outer.$clinit = () =>{};
+  Outer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Outer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Outer, 'jsconstructor.Outer');
+
+exports = Outer;
+
+//# sourceMappingURL=Outer.js.map

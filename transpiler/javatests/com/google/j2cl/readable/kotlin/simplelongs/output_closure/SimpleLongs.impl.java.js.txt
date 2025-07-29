@@ -1,0 +1,101 @@
+goog.module('simplelongs.SimpleLongs$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+
+/**
+ * @final
+ */
+class SimpleLongs extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!$Long} @nodts*/
+  this.f_foo__simplelongs_SimpleLongs_ = $Long.fromInt(0);
+  /**@type {number} @nodts*/
+  this.f_sideEffect__simplelongs_SimpleLongs_ = 0;
+ }
+ /** @nodts @return {!SimpleLongs} */
+ static $create__() {
+  SimpleLongs.$clinit();
+  let $instance = new SimpleLongs();
+  $instance.$ctor__simplelongs_SimpleLongs__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__simplelongs_SimpleLongs__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!$Long} */
+ m_getFoo__long() {
+  return this.f_foo__simplelongs_SimpleLongs_;
+ }
+ /** @final @nodts */
+ m_setFoo__long__void(/** !$Long */ set__) {
+  this.f_foo__simplelongs_SimpleLongs_ = set__;
+ }
+ /** @final @nodts @return {!$Long} */
+ m_getBar__long() {
+  return $Long.fromInt(0);
+ }
+ /** @final @nodts @return {!SimpleLongs} */
+ m_getWithSideEffect__simplelongs_SimpleLongs() {
+  let unary = this.f_sideEffect__simplelongs_SimpleLongs_;
+  this.f_sideEffect__simplelongs_SimpleLongs_ = unary + 1 | 0;
+  return this;
+ }
+ /** @final @nodts */
+ m_main__void() {
+  let a = $Long.fromInt(0);
+  a = $LongUtils.negate($Long.fromInt(100000));
+  a = $Long.fromInt(100000);
+  let b = $LongUtils.negate($Long.fromBits(-2147483648, 0) /* 2147483648 */);
+  b = $Long.fromBits(-2147483648, 0) /* 2147483648 */;
+  b = $LongUtils.minus($LongUtils.negate($Long.fromBits(-1, 2147483647) /* 9223372036854775807 */), $Long.fromInt(1));
+  b = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
+  let c = $LongUtils.plus(a, b);
+  c = $LongUtils.divide(a, b);
+  a = $LongUtils.plus(a, $Long.fromInt(1));
+  let e = a;
+  this.m_setFoo__long__void($LongUtils.plus(this.m_getFoo__long(), $Long.fromInt(1)));
+  e = this.m_getFoo__long();
+  let receiver = this.m_getWithSideEffect__simplelongs_SimpleLongs();
+  receiver.m_setFoo__long__void($LongUtils.plus(receiver.m_getFoo__long(), $Long.fromInt(1)));
+  e = receiver.m_getFoo__long();
+  let unary = a;
+  a = $LongUtils.plus(unary, $Long.fromInt(1));
+  let f = unary;
+  let unary_1 = this.m_getFoo__long();
+  this.m_setFoo__long__void($LongUtils.plus(unary_1, $Long.fromInt(1)));
+  f = unary_1;
+  let receiver_1 = this.m_getWithSideEffect__simplelongs_SimpleLongs();
+  let unary_2 = receiver_1.m_getFoo__long();
+  receiver_1.m_setFoo__long__void($LongUtils.plus(unary_2, $Long.fromInt(1)));
+  f = unary_2;
+  let g = this.m_getFoo__long();
+  g = this.m_getBar__long();
+ }
+ /** @nodts */
+ static $clinit() {
+  SimpleLongs.$clinit = () =>{};
+  SimpleLongs.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SimpleLongs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+ }
+}
+$Util.$setClassMetadata(SimpleLongs, 'simplelongs.SimpleLongs');
+
+exports = SimpleLongs;
+
+//# sourceMappingURL=SimpleLongs.js.map

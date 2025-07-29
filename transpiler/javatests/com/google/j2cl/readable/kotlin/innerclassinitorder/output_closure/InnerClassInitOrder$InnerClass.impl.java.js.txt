@@ -1,0 +1,57 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder$impl');
+let $1ReallyInnerClass = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.InnerClass.$1ReallyInnerClass$impl');
+
+/**
+ * @final
+ */
+class InnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!InnerClassInitOrder} @nodts*/
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass;
+ }
+ /** @nodts @return {!InnerClass} */
+ static $create__innerclassinitorder_InnerClassInitOrder(/** !InnerClassInitOrder */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_InnerClass__innerclassinitorder_InnerClassInitOrder__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinitorder_InnerClassInitOrder_InnerClass__innerclassinitorder_InnerClassInitOrder__void(/** !InnerClassInitOrder */ $outer_this) {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass = $outer_this;
+  this.$ctor__java_lang_Object__void();
+  this.m_callInner__void();
+ }
+ /** @final @nodts */
+ m_callInner__void() {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass.m_setNumber__int__void(this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass.m_getNumber__int() + 1 | 0);
+  $1ReallyInnerClass.$create__innerclassinitorder_InnerClassInitOrder_InnerClass(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1ReallyInnerClass = goog.module.get('innerclassinitorder.InnerClassInitOrder.InnerClass.$1ReallyInnerClass$impl');
+ }
+}
+$Util.$setClassMetadata(InnerClass, 'innerclassinitorder.InnerClassInitOrder$InnerClass');
+
+exports = InnerClass;
+
+//# sourceMappingURL=InnerClassInitOrder$InnerClass.js.map

@@ -1,0 +1,82 @@
+goog.module('builtins.SomeList$impl');
+
+const AbstractMutableList = goog.require('kotlin.collections.AbstractMutableList$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ * @template T
+ * @extends {AbstractMutableList<T>}
+ */
+class SomeList extends AbstractMutableList {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_size__builtins_SomeList_ = 0;
+ }
+ /** @nodts @template T @return {!SomeList<T>} */
+ static $create__int(/** number */ size) {
+  SomeList.$clinit();
+  let $instance = new SomeList();
+  $instance.$ctor__builtins_SomeList__int__void(size);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__builtins_SomeList__int__void(/** number */ size) {
+  this.$ctor__kotlin_collections_AbstractMutableList__void();
+  this.f_size__builtins_SomeList_ = size;
+ }
+ /** @nodts @return {number} */
+ m_getSize__int() {
+  return this.f_size__builtins_SomeList_;
+ }
+ /** @override */
+ addAtIndex(/** number */ index, /** T */ element) {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @return {T} */
+ getAtIndex(/** number */ index) {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {T} */
+ m_removeAt__int__java_lang_Object(/** number */ index) {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @return {T} */
+ setAtIndex(/** number */ index, /** T */ element) {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @nodts @return {!Array<*>} */
+ m_toArray__arrayOf_java_lang_Object() {
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+ }
+ /** @override @return {T} */
+ removeAtIndex(/** number */ index) {
+  return this.m_removeAt__int__java_lang_Object(index);
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeList.$clinit = () =>{};
+  SomeList.$loadModules();
+  AbstractMutableList.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeList;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  NotImplementedError = goog.module.get('kotlin.NotImplementedError$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(SomeList, 'builtins.SomeList');
+
+exports = SomeList;
+
+//# sourceMappingURL=SomeList.js.map

@@ -1,0 +1,122 @@
+goog.module('companion.EnumWithCompanion$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let BANG = goog.forwardDeclare('companion.EnumWithCompanion.BANG$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @extends {Enum<!EnumWithCompanion>}
+ */
+class EnumWithCompanion extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!EnumWithCompanion} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new EnumWithCompanion();
+  $instance.$ctor__companion_EnumWithCompanion__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__companion_EnumWithCompanion__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {number} */
+ m_function__int() {
+  return 1;
+ }
+ /** @nodts @return {!Array<!EnumWithCompanion>} */
+ static m_getENUM_SET__arrayOf_companion_EnumWithCompanion() {
+  EnumWithCompanion.$clinit();
+  return EnumWithCompanion.f_ENUM_SET__companion_EnumWithCompanion_;
+ }
+ /** @nodts */
+ static m_setENUM_SET__arrayOf_companion_EnumWithCompanion__void(/** !Array<!EnumWithCompanion> */ set__) {
+  EnumWithCompanion.$clinit();
+  EnumWithCompanion.f_ENUM_SET__companion_EnumWithCompanion_ = set__;
+ }
+ /** @nodts @return {!EnumWithCompanion} */
+ static m_valueOf__java_lang_String__companion_EnumWithCompanion(/** string */ name) {
+  EnumWithCompanion.$clinit();
+  if ($Equality.$same(EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_, null)) {
+   EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_ = (/**@type {Map<?string, !EnumWithCompanion>}*/ ($Enums.createMapFromValues(EnumWithCompanion.m_values__arrayOf_companion_EnumWithCompanion())));
+  }
+  return /**@type {EnumWithCompanion}*/ ($Enums.getValueFromNameAndMap(name, EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_));
+ }
+ /** @nodts @return {!Array<!EnumWithCompanion>} */
+ static m_values__arrayOf_companion_EnumWithCompanion() {
+  EnumWithCompanion.$clinit();
+  return /**@type {!Array<!EnumWithCompanion>}*/ ($Arrays.$stampType([EnumWithCompanion.$static_FOO__companion_EnumWithCompanion, EnumWithCompanion.$static_BAR__companion_EnumWithCompanion, EnumWithCompanion.$static_BAZ__companion_EnumWithCompanion, EnumWithCompanion.$static_BANG__companion_EnumWithCompanion], EnumWithCompanion));
+ }
+ /** @nodts @return {!EnumWithCompanion} */
+ static get f_FOO__companion_EnumWithCompanion() {
+  return (EnumWithCompanion.$clinit(), EnumWithCompanion.$static_FOO__companion_EnumWithCompanion);
+ }
+ /** @nodts @return {!EnumWithCompanion} */
+ static get f_BAR__companion_EnumWithCompanion() {
+  return (EnumWithCompanion.$clinit(), EnumWithCompanion.$static_BAR__companion_EnumWithCompanion);
+ }
+ /** @nodts @return {!EnumWithCompanion} */
+ static get f_BAZ__companion_EnumWithCompanion() {
+  return (EnumWithCompanion.$clinit(), EnumWithCompanion.$static_BAZ__companion_EnumWithCompanion);
+ }
+ /** @nodts @return {!EnumWithCompanion} */
+ static get f_BANG__companion_EnumWithCompanion() {
+  return (EnumWithCompanion.$clinit(), EnumWithCompanion.$static_BANG__companion_EnumWithCompanion);
+ }
+ /** @nodts */
+ static $clinit() {
+  EnumWithCompanion.$clinit = () =>{};
+  EnumWithCompanion.$loadModules();
+  Enum.$clinit();
+  EnumWithCompanion.$static_FOO__companion_EnumWithCompanion = EnumWithCompanion.$create__java_lang_String__int($Util.$makeEnumName('FOO'), EnumWithCompanion.$ordinal_FOO__companion_EnumWithCompanion);
+  EnumWithCompanion.$static_BAR__companion_EnumWithCompanion = EnumWithCompanion.$create__java_lang_String__int($Util.$makeEnumName('BAR'), EnumWithCompanion.$ordinal_BAR__companion_EnumWithCompanion);
+  EnumWithCompanion.$static_BAZ__companion_EnumWithCompanion = EnumWithCompanion.$create__java_lang_String__int($Util.$makeEnumName('BAZ'), EnumWithCompanion.$ordinal_BAZ__companion_EnumWithCompanion);
+  EnumWithCompanion.$static_BANG__companion_EnumWithCompanion = BANG.$create__java_lang_String__int($Util.$makeEnumName('BANG'), EnumWithCompanion.$ordinal_BANG__companion_EnumWithCompanion);
+  EnumWithCompanion.f_ENUM_SET__companion_EnumWithCompanion_ = (/**@type {!Array<!EnumWithCompanion>}*/ ($Arrays.$stampType([EnumWithCompanion.$static_FOO__companion_EnumWithCompanion, EnumWithCompanion.$static_BAR__companion_EnumWithCompanion, EnumWithCompanion.$static_BAZ__companion_EnumWithCompanion, EnumWithCompanion.$static_BANG__companion_EnumWithCompanion], EnumWithCompanion)));
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EnumWithCompanion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  BANG = goog.module.get('companion.EnumWithCompanion.BANG$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+EnumWithCompanion.$ordinal_FOO__companion_EnumWithCompanion = 0;
+/**@const {number} @nodts*/
+EnumWithCompanion.$ordinal_BAR__companion_EnumWithCompanion = 1;
+/**@const {number} @nodts*/
+EnumWithCompanion.$ordinal_BAZ__companion_EnumWithCompanion = 2;
+/**@const {number} @nodts*/
+EnumWithCompanion.$ordinal_BANG__companion_EnumWithCompanion = 3;
+/**@private {!EnumWithCompanion} @nodts*/
+EnumWithCompanion.$static_FOO__companion_EnumWithCompanion;
+/**@private {!EnumWithCompanion} @nodts*/
+EnumWithCompanion.$static_BAR__companion_EnumWithCompanion;
+/**@private {!EnumWithCompanion} @nodts*/
+EnumWithCompanion.$static_BAZ__companion_EnumWithCompanion;
+/**@private {!EnumWithCompanion} @nodts*/
+EnumWithCompanion.$static_BANG__companion_EnumWithCompanion;
+/**@type {!Array<!EnumWithCompanion>} @nodts*/
+EnumWithCompanion.f_ENUM_SET__companion_EnumWithCompanion_;
+/**@type {Map<?string, !EnumWithCompanion>} @nodts*/
+EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_;
+$Util.$setClassMetadataForEnum(EnumWithCompanion, 'companion.EnumWithCompanion');
+
+exports = EnumWithCompanion;
+
+//# sourceMappingURL=EnumWithCompanion.js.map

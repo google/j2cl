@@ -1,0 +1,55 @@
+goog.module('bridgemethods.BridgeMethodShadowedSignature.C$impl');
+
+const B = goog.require('bridgemethods.BridgeMethodShadowedSignature.B$impl');
+const I = goog.require('bridgemethods.BridgeMethodShadowedSignature.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+
+/**
+ * @final
+ * @template C1
+ * @extends {B<C1, !Consumer<C1>>}
+ * @implements {I<C1>}
+ */
+class C extends B {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template C1 @return {!C<C1>} */
+ static $create__() {
+  C.$clinit();
+  let $instance = new C();
+  $instance.$ctor__bridgemethods_BridgeMethodShadowedSignature_C__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_BridgeMethodShadowedSignature_C__void() {
+  this.$ctor__bridgemethods_BridgeMethodShadowedSignature_B__void();
+ }
+ //Specialized bridge method.
+ /** @override @nodts @suppress{visibility} @return {string} */
+ m_get__java_util_function_Consumer__java_lang_String(/** !Consumer<C1> */ arg0) {
+  return super.m_get__java_lang_Object__java_lang_String(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  B.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I.$markImplementor(C);
+$Util.$setClassMetadata(C, 'bridgemethods.BridgeMethodShadowedSignature$C');
+
+exports = C;
+
+//# sourceMappingURL=BridgeMethodShadowedSignature$C.js.map

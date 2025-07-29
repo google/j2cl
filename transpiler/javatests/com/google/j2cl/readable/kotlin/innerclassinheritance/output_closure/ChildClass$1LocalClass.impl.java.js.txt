@@ -1,0 +1,67 @@
+goog.module('innerclassinheritance.ChildClass.$1LocalClass$impl');
+
+const ChildClass = goog.require('innerclassinheritance.ChildClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class $1LocalClass extends ChildClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!ChildClass} @nodts*/
+  this.$outer_this__innerclassinheritance_ChildClass_1LocalClass;
+  /**@type {!$1LocalClass} @nodts*/
+  this.f_o__innerclassinheritance_ChildClass_1LocalClass_;
+ }
+ /** @nodts @return {!$1LocalClass} */
+ static $create__innerclassinheritance_ChildClass(/** !ChildClass */ $outer_this) {
+  $1LocalClass.$clinit();
+  let $instance = new $1LocalClass();
+  $instance.$ctor__innerclassinheritance_ChildClass_1LocalClass__innerclassinheritance_ChildClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__innerclassinheritance_ChildClass_1LocalClass__innerclassinheritance_ChildClass__void(/** !ChildClass */ $outer_this) {
+  this.$outer_this__innerclassinheritance_ChildClass_1LocalClass = $outer_this;
+  this.$ctor__innerclassinheritance_ChildClass__void();
+  this.f_o__innerclassinheritance_ChildClass_1LocalClass_ = this;
+ }
+ /** @final @nodts @return {!$1LocalClass} */
+ m_getO__innerclassinheritance_ChildClass_1LocalClass() {
+  return this.f_o__innerclassinheritance_ChildClass_1LocalClass_;
+ }
+ /** @final @nodts */
+ m_setO__innerclassinheritance_ChildClass_1LocalClass__void(/** !$1LocalClass */ set__) {
+  this.f_o__innerclassinheritance_ChildClass_1LocalClass_ = set__;
+ }
+ /** @override @nodts */
+ m_funInParentOuter__void() {}
+ /** @final @nodts */
+ m_test__void() {
+  this.m_funInOuter__void();
+  this.$outer_this__innerclassinheritance_ChildClass_1LocalClass.m_funInOuter__void();
+  this.m_funInParentOuter__void();
+  this.m_funInParentOuter__void();
+  this.$outer_this__innerclassinheritance_ChildClass_1LocalClass.m_funInParentOuter__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  $1LocalClass.$clinit = () =>{};
+  $1LocalClass.$loadModules();
+  ChildClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1LocalClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1LocalClass, 'innerclassinheritance.ChildClass$1LocalClass');
+
+exports = $1LocalClass;
+
+//# sourceMappingURL=ChildClass$1LocalClass.js.map

@@ -1,0 +1,51 @@
+goog.module('lambdas.ProviderHolder.$2$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const EmptyInterface = goog.require('lambdas.EmptyInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ProviderHolder = goog.forwardDeclare('lambdas.ProviderHolder$impl');
+
+/**
+ * @final
+ * @implements {EmptyInterface}
+ */
+class $2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!ProviderHolder} @nodts*/
+  this.$outer_this__lambdas_ProviderHolder_2;
+ }
+ /** @nodts @return {!$2} */
+ static $create__lambdas_ProviderHolder(/** !ProviderHolder */ $outer_this) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__lambdas_ProviderHolder_2__lambdas_ProviderHolder__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_ProviderHolder_2__lambdas_ProviderHolder__void(/** !ProviderHolder */ $outer_this) {
+  this.$outer_this__lambdas_ProviderHolder_2 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+EmptyInterface.$markImplementor($2);
+$Util.$setClassMetadata($2, 'lambdas.ProviderHolder$2');
+
+exports = $2;
+
+//# sourceMappingURL=ProviderHolder$2.js.map

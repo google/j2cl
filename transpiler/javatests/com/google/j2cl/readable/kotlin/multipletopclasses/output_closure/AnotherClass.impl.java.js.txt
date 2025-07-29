@@ -1,0 +1,40 @@
+goog.module('multipletopclasses.AnotherClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class AnotherClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AnotherClass} */
+ static $create__() {
+  AnotherClass.$clinit();
+  let $instance = new AnotherClass();
+  $instance.$ctor__multipletopclasses_AnotherClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__multipletopclasses_AnotherClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AnotherClass.$clinit = () =>{};
+  AnotherClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AnotherClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AnotherClass, 'multipletopclasses.AnotherClass');
+
+exports = AnotherClass;
+
+//# sourceMappingURL=AnotherClass.js.map

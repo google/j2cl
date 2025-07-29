@@ -1,0 +1,58 @@
+goog.module('newinnerclasswithsameouter.NewInnerClassWithSameOuter.A$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NewInnerClassWithSameOuter = goog.forwardDeclare('newinnerclasswithsameouter.NewInnerClassWithSameOuter$impl');
+let B = goog.forwardDeclare('newinnerclasswithsameouter.NewInnerClassWithSameOuter.B$impl');
+let C = goog.forwardDeclare('newinnerclasswithsameouter.NewInnerClassWithSameOuter.C$impl');
+
+/**
+ * @final
+ */
+class A extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!NewInnerClassWithSameOuter} @nodts*/
+  this.$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A;
+ }
+ /** @nodts @return {!A} */
+ static $create__newinnerclasswithsameouter_NewInnerClassWithSameOuter(/** !NewInnerClassWithSameOuter */ $outer_this) {
+  A.$clinit();
+  let $instance = new A();
+  $instance.$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void(/** !NewInnerClassWithSameOuter */ $outer_this) {
+  this.$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  B.$create__newinnerclasswithsameouter_NewInnerClassWithSameOuter(this.$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A);
+  C.$create__newinnerclasswithsameouter_NewInnerClassWithSameOuter(this.$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A);
+ }
+ /** @nodts */
+ static $clinit() {
+  A.$clinit = () =>{};
+  A.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  B = goog.module.get('newinnerclasswithsameouter.NewInnerClassWithSameOuter.B$impl');
+  C = goog.module.get('newinnerclasswithsameouter.NewInnerClassWithSameOuter.C$impl');
+ }
+}
+$Util.$setClassMetadata(A, 'newinnerclasswithsameouter.NewInnerClassWithSameOuter$A');
+
+exports = A;
+
+//# sourceMappingURL=NewInnerClassWithSameOuter$A.js.map

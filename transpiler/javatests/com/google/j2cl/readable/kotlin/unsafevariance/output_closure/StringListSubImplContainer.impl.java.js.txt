@@ -1,0 +1,51 @@
+goog.module('unsafevariance.StringListSubImplContainer$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const StringContainer = goog.require('unsafevariance.StringContainer$impl');
+const StringList = goog.require('unsafevariance.StringList$impl');
+
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+
+/**
+ * @abstract
+ * @implements {StringContainer}
+ */
+class StringListSubImplContainer extends StringList {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__unsafevariance_StringListSubImplContainer__void() {
+  this.$ctor__unsafevariance_StringList__void();
+ }
+ /** @override @nodts @return {boolean} */
+ m_contains__java_lang_String__boolean(/** string */ element) {
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  StringListSubImplContainer.$clinit = () =>{};
+  StringListSubImplContainer.$loadModules();
+  StringList.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringListSubImplContainer;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ isEmpty() {}
+ /** @abstract @override @suppress{visibility} @return {string} */
+ getAtIndex(/** number */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+StringContainer.$markImplementor(StringListSubImplContainer);
+$Util.$setClassMetadata(StringListSubImplContainer, 'unsafevariance.StringListSubImplContainer');
+
+exports = StringListSubImplContainer;
+
+//# sourceMappingURL=StringListSubImplContainer.js.map

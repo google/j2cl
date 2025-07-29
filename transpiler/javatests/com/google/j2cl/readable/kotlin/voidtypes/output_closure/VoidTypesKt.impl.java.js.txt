@@ -1,0 +1,177 @@
+goog.module('voidtypes.VoidTypesKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let NothingIterator = goog.forwardDeclare('voidtypes.NothingIterator$impl');
+let NullableNothingIterator = goog.forwardDeclare('voidtypes.NullableNothingIterator$impl');
+
+/**
+ * @final
+ */
+class VoidTypesKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!VoidTypesKt} */
+ static $create__() {
+  VoidTypesKt.$clinit();
+  let $instance = new VoidTypesKt();
+  $instance.$ctor__voidtypes_VoidTypesKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__voidtypes_VoidTypesKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_f__void() {
+  VoidTypesKt.$clinit();
+ }
+ /** @nodts @return {!Unit} */
+ static m_getW__kotlin_Unit() {
+  VoidTypesKt.$clinit();
+  return VoidTypesKt.f_w__voidtypes_VoidTypesKt_;
+ }
+ /** @nodts */
+ static m_g__void() {
+  VoidTypesKt.$clinit();
+  return;
+ }
+ /** @nodts @return {!Unit} */
+ static m_getX__kotlin_Unit() {
+  VoidTypesKt.$clinit();
+  return VoidTypesKt.f_x__voidtypes_VoidTypesKt_;
+ }
+ /** @nodts @return {!*} */
+ static m_h__java_lang_Object__java_lang_Object(/** !* */ x) {
+  VoidTypesKt.$clinit();
+  return x;
+ }
+ /** @nodts @return {!*} */
+ static m_getY__java_lang_Object() {
+  VoidTypesKt.$clinit();
+  return VoidTypesKt.f_y__voidtypes_VoidTypesKt_;
+ }
+ /** @nodts @return {?} */
+ static m_i__kotlin_jvm_internal_NothingStub() {
+  VoidTypesKt.$clinit();
+  throw $Exceptions.toJs(Error.$create__());
+ }
+ /** @nodts @return {number} */
+ static m_getZ__int() {
+  VoidTypesKt.$clinit();
+  return VoidTypesKt.f_z__voidtypes_VoidTypesKt_;
+ }
+ /** @nodts */
+ static m_boxing__void() {
+  VoidTypesKt.$clinit();
+  VoidTypesKt.m_i__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts */
+ static m_assignmentToLocal__void() {
+  VoidTypesKt.$clinit();
+  VoidTypesKt.m_f__void();
+  let local = Unit.f_INSTANCE__kotlin_Unit;
+ }
+ /** @nodts */
+ static m_assignAndReturn__void() {
+  VoidTypesKt.$clinit();
+  VoidTypesKt.m_g__void();
+  let a = Unit.f_INSTANCE__kotlin_Unit;
+  VoidTypesKt.m_g__void();
+  return;
+ }
+ /** @nodts */
+ static m_returnNothingForUnit__void() {
+  VoidTypesKt.$clinit();
+  VoidTypesKt.m_i__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {!*} */
+ static m_returnNothingForAny__java_lang_Object() {
+  VoidTypesKt.$clinit();
+  return VoidTypesKt.m_i__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts */
+ static m_returnUnitBlock__int__void(/** number */ a) {
+  VoidTypesKt.$clinit();
+  let tmp0_subject = a;
+  if (tmp0_subject == 1) {
+   VoidTypesKt.m_f__void();
+  } else {
+   VoidTypesKt.m_g__void();
+  }
+  return;
+ }
+ /** @nodts */
+ static m_nothingTests__void() {
+  VoidTypesKt.$clinit();
+  let a = 2;
+  if (false) {
+   return;
+  }
+  let b = /**@type {?}*/ ($Casts.$to(Integer.m_valueOf__int__java_lang_Integer(a), NothingStub));
+  if (b == 3) {
+   return;
+  }
+ }
+ /** @nodts @return {!Iterator<?>} */
+ static m_emptyStringIterator__java_util_Iterator() {
+  VoidTypesKt.$clinit();
+  return NothingIterator.f_INSTANCE__voidtypes_NothingIterator;
+ }
+ /** @nodts @return {!Iterator<?>} */
+ static m_nullableNothingIterator__java_util_Iterator() {
+  VoidTypesKt.$clinit();
+  return NullableNothingIterator.f_INSTANCE__voidtypes_NullableNothingIterator;
+ }
+ /** @nodts */
+ static $clinit() {
+  VoidTypesKt.$clinit = () =>{};
+  VoidTypesKt.$loadModules();
+  j_l_Object.$clinit();
+  VoidTypesKt.m_f__void();
+  VoidTypesKt.f_w__voidtypes_VoidTypesKt_ = Unit.f_INSTANCE__kotlin_Unit;
+  VoidTypesKt.m_g__void();
+  VoidTypesKt.f_x__voidtypes_VoidTypesKt_ = Unit.f_INSTANCE__kotlin_Unit;
+  VoidTypesKt.f_y__voidtypes_VoidTypesKt_ = VoidTypesKt.m_h__java_lang_Object__java_lang_Object(Unit.f_INSTANCE__kotlin_Unit);
+  VoidTypesKt.m_i__kotlin_jvm_internal_NothingStub();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof VoidTypesKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Error = goog.module.get('java.lang.Error$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  NothingStub = goog.module.get('kotlin.Nothing$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  NothingIterator = goog.module.get('voidtypes.NothingIterator$impl');
+  NullableNothingIterator = goog.module.get('voidtypes.NullableNothingIterator$impl');
+ }
+}
+/**@type {!Unit} @nodts*/
+VoidTypesKt.f_w__voidtypes_VoidTypesKt_;
+/**@type {!Unit} @nodts*/
+VoidTypesKt.f_x__voidtypes_VoidTypesKt_;
+/**@type {!*} @nodts*/
+VoidTypesKt.f_y__voidtypes_VoidTypesKt_;
+/**@type {number} @nodts*/
+VoidTypesKt.f_z__voidtypes_VoidTypesKt_ = 0;
+$Util.$setClassMetadata(VoidTypesKt, 'voidtypes.VoidTypesKt');
+
+exports = VoidTypesKt;
+
+//# sourceMappingURL=VoidTypesKt.js.map

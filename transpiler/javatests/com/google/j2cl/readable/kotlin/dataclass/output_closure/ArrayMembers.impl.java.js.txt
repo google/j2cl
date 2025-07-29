@@ -1,0 +1,112 @@
+goog.module('dataclass.ArrayMembers$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class ArrayMembers extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Array<number>} @nodts*/
+  this.f_a__dataclass_ArrayMembers_;
+  /**@type {!Array<string>} @nodts*/
+  this.f_b__dataclass_ArrayMembers_;
+ }
+ /** @nodts @return {!ArrayMembers} */
+ static $create__arrayOf_int__arrayOf_java_lang_String(/** !Array<number> */ a, /** !Array<string> */ b) {
+  ArrayMembers.$clinit();
+  let $instance = new ArrayMembers();
+  $instance.$ctor__dataclass_ArrayMembers__arrayOf_int__arrayOf_java_lang_String__void(a, b);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_ArrayMembers__arrayOf_int__arrayOf_java_lang_String__void(/** !Array<number> */ a, /** !Array<string> */ b) {
+  this.$ctor__java_lang_Object__void();
+  this.f_a__dataclass_ArrayMembers_ = a;
+  this.f_b__dataclass_ArrayMembers_ = b;
+ }
+ /** @final @nodts @return {!Array<number>} */
+ m_component1__arrayOf_int_$p_dataclass_ArrayMembers() {
+  return this.f_a__dataclass_ArrayMembers_;
+ }
+ /** @final @nodts @return {!Array<string>} */
+ m_component2__arrayOf_java_lang_String_$p_dataclass_ArrayMembers() {
+  return this.f_b__dataclass_ArrayMembers_;
+ }
+ /** @final @nodts @return {!ArrayMembers} */
+ m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(/** !Array<number> */ a, /** !Array<string> */ b) {
+  return ArrayMembers.$create__arrayOf_int__arrayOf_java_lang_String(a, b);
+ }
+ /** @final @nodts @return {!ArrayMembers} */
+ m_copy$default__arrayOf_int__arrayOf_java_lang_String__int__java_lang_Object__dataclass_ArrayMembers(/** Array<number> */ a, /** Array<string> */ b, /** number */ _mask0, /** * */ _handler) {
+  if ((_mask0 & 1) != 0) {
+   a = this.f_a__dataclass_ArrayMembers_;
+  }
+  if ((_mask0 & 2) != 0) {
+   b = this.f_b__dataclass_ArrayMembers_;
+  }
+  return this.m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(/**@type {!Array<number>}*/ (a), /**@type {!Array<string>}*/ (b));
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'ArrayMembers(' + 'a=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(Arrays.m_toString__arrayOf_int__java_lang_String(this.f_a__dataclass_ArrayMembers_)) + ', ' + 'b=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String(this.f_b__dataclass_ArrayMembers_)) + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let result = Arrays.m_hashCode__arrayOf_int__int(this.f_a__dataclass_ArrayMembers_);
+  result = Math.imul(result, 31) + Arrays.m_hashCode__arrayOf_java_lang_Object__int(this.f_b__dataclass_ArrayMembers_) | 0;
+  return result;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!ArrayMembers.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!ArrayMembers}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), ArrayMembers));
+  if (!Objects.m_equals__java_lang_Object__java_lang_Object__boolean(this.f_a__dataclass_ArrayMembers_, tmp0_other_with_cast.f_a__dataclass_ArrayMembers_)) {
+   return false;
+  }
+  if (!Objects.m_equals__java_lang_Object__java_lang_Object__boolean(this.f_b__dataclass_ArrayMembers_, tmp0_other_with_cast.f_b__dataclass_ArrayMembers_)) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  ArrayMembers.$clinit = () =>{};
+  ArrayMembers.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ArrayMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Arrays = goog.module.get('java.util.Arrays$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ArrayMembers, 'dataclass.ArrayMembers');
+
+exports = ArrayMembers;
+
+//# sourceMappingURL=ArrayMembers.js.map

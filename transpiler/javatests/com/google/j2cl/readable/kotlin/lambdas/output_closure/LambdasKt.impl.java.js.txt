@@ -1,0 +1,154 @@
+goog.module('lambdas.LambdasKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let IdentityFunction = goog.forwardDeclare('lambdas.IdentityFunction$impl');
+let A = goog.forwardDeclare('lambdas.JavaInterfaces.A$impl');
+let B = goog.forwardDeclare('lambdas.JavaInterfaces.B$impl');
+let C = goog.forwardDeclare('lambdas.JavaInterfaces.C$impl');
+let D = goog.forwardDeclare('lambdas.JavaInterfaces.D$impl');
+let E = goog.forwardDeclare('lambdas.JavaInterfaces.E$impl');
+let F = goog.forwardDeclare('lambdas.JavaInterfaces.F$impl');
+let GenericInterfaceWithSam = goog.forwardDeclare('lambdas.JavaInterfaces.GenericInterfaceWithSam$impl');
+let InterfaceWithSamBar = goog.forwardDeclare('lambdas.JavaInterfaces.InterfaceWithSamBar$impl');
+let InterfaceWithSamFoo = goog.forwardDeclare('lambdas.JavaInterfaces.InterfaceWithSamFoo$impl');
+let Functional = goog.forwardDeclare('lambdas.Lambdas.Functional$impl');
+let $2 = goog.forwardDeclare('lambdas.LambdasKt.$2$impl');
+let Supplier = goog.forwardDeclare('lambdas.Supplier$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class LambdasKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LambdasKt} */
+ static $create__() {
+  LambdasKt.$clinit();
+  let $instance = new LambdasKt();
+  $instance.$ctor__lambdas_LambdasKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__lambdas_LambdasKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template E_1 @return {function(?E_1):?E_1} */
+ static m_identity__lambdas_Lambdas_GenericJsFunction() {
+  LambdasKt.$clinit();
+  if ($Equality.$same(LambdasKt.f_identityFunction__lambdas_LambdasKt_, null)) {
+   LambdasKt.f_identityFunction__lambdas_LambdasKt_ = (/**@type {IdentityFunction}*/ (IdentityFunction.$create__()));
+  }
+  return /**@type {function(?E_1):?E_1}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(LambdasKt.f_identityFunction__lambdas_LambdasKt_));
+ }
+ /** @nodts */
+ static m_testStaticMethodTypeVariableThroughLambda__void() {
+  LambdasKt.$clinit();
+  let wrapped = Functional.$adapt(/**  @return {Functional<!Integer>}*/ ((/** !Functional<!Integer> */ f) =>{
+   return Functional.$adapt(/**  @return {Functional<!Integer>}*/ ((/** !Functional<!Integer> */ f_1) =>{
+    return null;
+   }));
+  }));
+ }
+ /** @nodts @return {*} */
+ static m_m__java_lang_Object() {
+  LambdasKt.$clinit();
+  return null;
+ }
+ /** @nodts */
+ static m_testLambdaCallingStaticMethod__void() {
+  LambdasKt.$clinit();
+  let f = Function1.$adapt(/**  @return {?}*/ ((/** ? */ it) =>{
+   return LambdasKt.m_m__java_lang_Object();
+  }));
+ }
+ /** @nodts */
+ static m_testJavaSamInterfaces__void() {
+  LambdasKt.$clinit();
+  GenericInterfaceWithSam.$adapt(/**  @return {string}*/ ((/** string */ s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+   return s_1;
+  }));
+  InterfaceWithSamFoo.$adapt(/**  @return {?string}*/ ((/** ?string */ s_2) =>{
+   return s_2;
+  }));
+  InterfaceWithSamBar.$adapt(/**  @return {?string}*/ ((/** ?string */ s_3) =>{
+   return s_3;
+  }));
+  A.$adapt(/**  @return {?string}*/ ((/** ?string */ s_4) =>{
+   return s_4;
+  }));
+  B.$adapt(/**  @return {?string}*/ ((/** ?string */ s_5) =>{
+   return s_5;
+  }));
+  C.$adapt(/**  @return {?string}*/ ((/** ?string */ s_6) =>{
+   return s_6;
+  }));
+  D.$adapt(/**  @return {?string}*/ ((/** ?string */ s_7) =>{
+   return s_7;
+  }));
+  E.$adapt(/**  @return {?string}*/ ((/** ?string */ s_8) =>{
+   return s_8;
+  }));
+  F.$adapt(/**  @return {?string}*/ ((/** ?string */ s_9) =>{
+   return s_9;
+  }));
+ }
+ /** @nodts @template T */
+ static m_testParameterizedTypeWithUnusedTypeVariable__void() {
+  LambdasKt.$clinit();
+  LambdasKt.m_acceptsSupplier__lambdas_Supplier__void(Supplier.$adapt(/**  @return {$2<T>}*/ (() =>{
+   return /**@type {!$2<T>}*/ ($2.$create__());
+  })));
+ }
+ /** @nodts @template T */
+ static m_acceptsSupplier__lambdas_Supplier__void(/** Supplier<?T> */ supplier) {}
+ /** @nodts */
+ static $clinit() {
+  LambdasKt.$clinit = () =>{};
+  LambdasKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LambdasKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  IdentityFunction = goog.module.get('lambdas.IdentityFunction$impl');
+  A = goog.module.get('lambdas.JavaInterfaces.A$impl');
+  B = goog.module.get('lambdas.JavaInterfaces.B$impl');
+  C = goog.module.get('lambdas.JavaInterfaces.C$impl');
+  D = goog.module.get('lambdas.JavaInterfaces.D$impl');
+  E = goog.module.get('lambdas.JavaInterfaces.E$impl');
+  F = goog.module.get('lambdas.JavaInterfaces.F$impl');
+  GenericInterfaceWithSam = goog.module.get('lambdas.JavaInterfaces.GenericInterfaceWithSam$impl');
+  InterfaceWithSamBar = goog.module.get('lambdas.JavaInterfaces.InterfaceWithSamBar$impl');
+  InterfaceWithSamFoo = goog.module.get('lambdas.JavaInterfaces.InterfaceWithSamFoo$impl');
+  Functional = goog.module.get('lambdas.Lambdas.Functional$impl');
+  $2 = goog.module.get('lambdas.LambdasKt.$2$impl');
+  Supplier = goog.module.get('lambdas.Supplier$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+/**@type {IdentityFunction} @nodts*/
+LambdasKt.f_identityFunction__lambdas_LambdasKt_;
+$Util.$setClassMetadata(LambdasKt, 'lambdas.LambdasKt');
+
+exports = LambdasKt;
+
+//# sourceMappingURL=LambdasKt.js.map

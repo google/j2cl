@@ -1,0 +1,34 @@
+goog.module('jsoptional.Main.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class I {
+ /** @abstract */
+ m(/** T */ t, /** *= */ o) {}
+ /** @nodts */
+ static $clinit() {
+  I.$clinit = () =>{};
+  I.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsoptional_Main_I = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsoptional_Main_I;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (I), 'jsoptional.Main$I');
+
+exports = I;
+
+//# sourceMappingURL=Main$I.js.map

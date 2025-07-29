@@ -1,0 +1,90 @@
+goog.module('jsproperties.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__jsproperties_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getF__int() {
+  MainKt.$clinit();
+  return MainKt.f_f__jsproperties_MainKt_;
+ }
+ /** @nodts */
+ static m_setF__int__void(/** number */ set__) {
+  MainKt.$clinit();
+  MainKt.f_f__jsproperties_MainKt_ = set__;
+ }
+ /** @return {number} */
+ static get g() {
+  MainKt.$clinit();
+  return MainKt.f_g__jsproperties_MainKt_;
+ }
+ 
+ static set g(/** number */ set__) {
+  MainKt.$clinit();
+  MainKt.f_g__jsproperties_MainKt_ = set__;
+ }
+ /** @return {number} */
+ static get a() {
+  MainKt.$clinit();
+  return MainKt.m_getF__int() + 1 | 0;
+ }
+ 
+ static set a(/** number */ x) {
+  MainKt.$clinit();
+  MainKt.m_setF__int__void(x + 2 | 0);
+ }
+ /** @return {number} */
+ static get abc() {
+  MainKt.$clinit();
+  return MainKt.m_getF__int() + 3 | 0;
+ }
+ 
+ static set abc(/** number */ x) {
+  MainKt.$clinit();
+  MainKt.m_setF__int__void(x + 4 | 0);
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+  MainKt.f_g__jsproperties_MainKt_ = 10;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {number} @nodts*/
+MainKt.f_f__jsproperties_MainKt_ = 0;
+/**@type {number} @nodts*/
+MainKt.f_g__jsproperties_MainKt_ = 0;
+/**@type {number} @nodts*/
+MainKt.f_nativeProperty__jsproperties_MainKt_ = 0;
+$Util.$setClassMetadata(MainKt, 'jsproperties.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

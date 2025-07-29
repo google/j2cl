@@ -1,0 +1,74 @@
+goog.module('mixednestings.MixedNestings.A.$1B$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let A = goog.forwardDeclare('mixednestings.MixedNestings.A$impl');
+let MyInterface = goog.forwardDeclare('mixednestings.MyInterface$impl');
+
+/**
+ * @final
+ */
+class $1B extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!A} @nodts*/
+  this.$outer_this__mixednestings_MixedNestings_A_1B;
+ }
+ /** @nodts @return {!$1B} */
+ static $create__mixednestings_MixedNestings_A(/** !A */ $outer_this) {
+  $1B.$clinit();
+  let $instance = new $1B();
+  $instance.$ctor__mixednestings_MixedNestings_A_1B__mixednestings_MixedNestings_A__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__mixednestings_MixedNestings_A_1B__mixednestings_MixedNestings_A__void(/** !A */ $outer_this) {
+  this.$outer_this__mixednestings_MixedNestings_A_1B = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_bb__void() {}
+ /** @final @nodts @return {number} */
+ m_b__int() {
+  let i = MyInterface.$adapt(/**  @return {number}*/ ((/** number */ a) =>{
+   let ii = MyInterface.$adapt(/**  @return {number}*/ ((/** number */ n) =>{
+    this.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__void();
+    this.$outer_this__mixednestings_MixedNestings_A_1B.m_aa__void();
+    this.m_bb__void();
+    let iii = MyInterface.$adapt(/**  @return {number}*/ ((/** number */ m) =>{
+     this.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__void();
+     this.$outer_this__mixednestings_MixedNestings_A_1B.m_aa__void();
+     this.m_bb__void();
+     return MyInterface.$adapt(/**  @return {number}*/ ((/** number */ b) =>{
+      return b;
+     })).m_func__int__int(100);
+    }));
+    return iii.m_func__int__int(200);
+   }));
+   return ii.m_func__int__int(300);
+  }));
+  return i.m_func__int__int(400);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1B.$clinit = () =>{};
+  $1B.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  MyInterface = goog.module.get('mixednestings.MyInterface$impl');
+ }
+}
+$Util.$setClassMetadata($1B, 'mixednestings.MixedNestings$A$1B');
+
+exports = $1B;
+
+//# sourceMappingURL=MixedNestings$A$1B.js.map

@@ -1,0 +1,34 @@
+goog.module('deprecated.DeprecatedExample.DeprecatedInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @deprecated
+ */
+class DeprecatedInterface {
+ /** @abstract @deprecated */
+ doAThing(/** number */ anInt) {}
+ /** @nodts */
+ static $clinit() {
+  DeprecatedInterface.$clinit = () =>{};
+  DeprecatedInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__deprecated_DeprecatedExample_DeprecatedInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__deprecated_DeprecatedExample_DeprecatedInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+DeprecatedInterface.$markImplementor(/**@type {Function}*/ (DeprecatedInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (DeprecatedInterface), 'deprecated.DeprecatedExample$DeprecatedInterface');
+
+exports = DeprecatedInterface;
+
+//# sourceMappingURL=DeprecatedExample$DeprecatedInterface.js.map

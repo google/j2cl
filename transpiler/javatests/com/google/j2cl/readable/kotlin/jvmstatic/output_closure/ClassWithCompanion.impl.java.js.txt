@@ -1,0 +1,131 @@
+goog.module('jvmstatic.ClassWithCompanion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClassWithCompanion_$1 = goog.forwardDeclare('jvmstatic.ClassWithCompanion.$1$impl');
+let Companion = goog.forwardDeclare('jvmstatic.ClassWithCompanion.Companion$impl');
+let $1 = goog.forwardDeclare('jvmstatic.ClassWithCompanion.Companion.$1$impl');
+let Foo = goog.forwardDeclare('jvmstatic.Foo$impl');
+let JvmStaticKt = goog.forwardDeclare('jvmstatic.JvmStaticKt$impl');
+
+class ClassWithCompanion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_instanceProperty__jvmstatic_ClassWithCompanion_ = 0;
+ }
+ /** @nodts @return {!ClassWithCompanion} */
+ static $create__() {
+  ClassWithCompanion.$clinit();
+  let $instance = new ClassWithCompanion();
+  $instance.$ctor__jvmstatic_ClassWithCompanion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jvmstatic_ClassWithCompanion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getInstanceProperty__int() {
+  return this.f_instanceProperty__jvmstatic_ClassWithCompanion_;
+ }
+ /** @nodts @return {!*} */
+ static m_getFoo__java_lang_Object() {
+  ClassWithCompanion.$clinit();
+  return ClassWithCompanion.f_foo__jvmstatic_ClassWithCompanion_;
+ }
+ /** @nodts @return {!*} */
+ static m_getBar__java_lang_Object() {
+  ClassWithCompanion.$clinit();
+  return ClassWithCompanion.f_bar__jvmstatic_ClassWithCompanion_;
+ }
+ /** @nodts @return {number} */
+ static m_getStaticProperty__int() {
+  ClassWithCompanion.$clinit();
+  return ClassWithCompanion.f_staticProperty__jvmstatic_ClassWithCompanion_;
+ }
+ /** @nodts @return {number} */
+ static m_staticFunction__int() {
+  ClassWithCompanion.$clinit();
+  return 2;
+ }
+ /** @nodts */
+ static m_staticInternalFunction__void() {
+  ClassWithCompanion.$clinit();
+  let foo = $1.$create__();
+ }
+ /** @nodts */
+ static m_staticProtectedFunction__void() {
+  ClassWithCompanion.$clinit();
+ }
+ /** @nodts @return {number} */
+ static m_getStaticJsProperty__int() {
+  ClassWithCompanion.$clinit();
+  return ClassWithCompanion.f_staticJsProperty__jvmstatic_ClassWithCompanion_;
+ }
+ /** @return {number} */
+ static get staticJsPropertyWithGetter() {
+  ClassWithCompanion.$clinit();
+  return ClassWithCompanion.f_staticJsPropertyWithGetter__jvmstatic_ClassWithCompanion_;
+ }
+ /** @return {number} */
+ static get staticJsPropertyMethod() {
+  ClassWithCompanion.$clinit();
+  return 4;
+ }
+ /** @return {number} */
+ static staticJsMethod() {
+  ClassWithCompanion.$clinit();
+  return 3;
+ }
+ /** @nodts @return {number} */
+ static m_nonJvmStatic__int() {
+  ClassWithCompanion.$clinit();
+  return 4;
+ }
+ /** @nodts @template T, V @return {Foo<T, V>} */
+ static m_staticMethodWithTypeParameter__jvmstatic_Foo() {
+  ClassWithCompanion.$clinit();
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassWithCompanion.$clinit = () =>{};
+  ClassWithCompanion.$loadModules();
+  j_l_Object.$clinit();
+  ClassWithCompanion.f_foo__jvmstatic_ClassWithCompanion_ = JvmStaticKt.m_f__java_lang_Object__java_lang_Object(Companion.f_Companion__jvmstatic_ClassWithCompanion_Companion);
+  ClassWithCompanion.f_bar__jvmstatic_ClassWithCompanion_ = ClassWithCompanion_$1.$create__();
+  ClassWithCompanion.f_staticProperty__jvmstatic_ClassWithCompanion_ = 1;
+  ClassWithCompanion.f_staticJsProperty__jvmstatic_ClassWithCompanion_ = 2;
+  ClassWithCompanion.f_staticJsPropertyWithGetter__jvmstatic_ClassWithCompanion_ = 2;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassWithCompanion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ClassWithCompanion_$1 = goog.module.get('jvmstatic.ClassWithCompanion.$1$impl');
+  Companion = goog.module.get('jvmstatic.ClassWithCompanion.Companion$impl');
+  $1 = goog.module.get('jvmstatic.ClassWithCompanion.Companion.$1$impl');
+  JvmStaticKt = goog.module.get('jvmstatic.JvmStaticKt$impl');
+ }
+}
+/**@type {!*} @nodts*/
+ClassWithCompanion.f_foo__jvmstatic_ClassWithCompanion_;
+/**@type {!*} @nodts*/
+ClassWithCompanion.f_bar__jvmstatic_ClassWithCompanion_;
+/**@type {number} @nodts*/
+ClassWithCompanion.f_staticProperty__jvmstatic_ClassWithCompanion_ = 0;
+/**@type {number} @nodts*/
+ClassWithCompanion.f_staticJsProperty__jvmstatic_ClassWithCompanion_ = 0;
+/**@type {number} @nodts*/
+ClassWithCompanion.f_staticJsPropertyWithGetter__jvmstatic_ClassWithCompanion_ = 0;
+$Util.$setClassMetadata(ClassWithCompanion, 'jvmstatic.ClassWithCompanion');
+
+exports = ClassWithCompanion;
+
+//# sourceMappingURL=ClassWithCompanion.js.map

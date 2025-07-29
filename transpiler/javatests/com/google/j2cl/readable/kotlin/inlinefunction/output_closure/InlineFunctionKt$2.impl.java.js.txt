@@ -1,0 +1,61 @@
+goog.module('inlinefunction.InlineFunctionKt.$2$impl');
+
+const NonFun = goog.require('inlinefunction.NonFun$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Container = goog.forwardDeclare('inlinefunction.Container$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T
+ * @implements {NonFun<T>}
+ */
+class $2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Function0<?>} @nodts*/
+  this.$captured_container__inlinefunction_InlineFunctionKt_2;
+ }
+ /** @nodts @template T @return {!$2<T>} */
+ static $create__kotlin_jvm_functions_Function0(/** !Function0<?> */ $captured_container) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__inlinefunction_InlineFunctionKt_2__kotlin_jvm_functions_Function0__void($captured_container);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionKt_2__kotlin_jvm_functions_Function0__void(/** !Function0<?> */ $captured_container) {
+  this.$captured_container__inlinefunction_InlineFunctionKt_2 = $captured_container;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {!Container<T>} */
+ m_container__inlinefunction_Container() {
+  return /**@type {!Container<T>}*/ ($Casts.$to(this.$captured_container__inlinefunction_InlineFunctionKt_2.m_invoke__java_lang_Object(), Container));
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Container = goog.module.get('inlinefunction.Container$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+NonFun.$markImplementor($2);
+$Util.$setClassMetadata($2, 'inlinefunction.InlineFunctionKt$2');
+
+exports = $2;
+
+//# sourceMappingURL=InlineFunctionKt$2.js.map

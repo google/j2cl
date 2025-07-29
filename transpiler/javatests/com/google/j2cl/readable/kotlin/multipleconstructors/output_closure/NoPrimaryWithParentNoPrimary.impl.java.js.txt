@@ -1,0 +1,79 @@
+goog.module('multipleconstructors.NoPrimaryWithParentNoPrimary$impl');
+
+const ParentWithoutPrimary = goog.require('multipleconstructors.ParentWithoutPrimary$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class NoPrimaryWithParentNoPrimary extends ParentWithoutPrimary {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_id__multipleconstructors_NoPrimaryWithParentNoPrimary_ = 0;
+  /**@type {boolean} @nodts*/
+  this.f_flag__multipleconstructors_NoPrimaryWithParentNoPrimary_ = false;
+ }
+ //Factory method corresponding to constructor 'NoPrimaryWithParentNoPrimary(int)'.
+ /** @nodts @return {!NoPrimaryWithParentNoPrimary} */
+ static $create__int(/** number */ id) {
+  NoPrimaryWithParentNoPrimary.$clinit();
+  let $instance = new NoPrimaryWithParentNoPrimary();
+  $instance.$ctor__multipleconstructors_NoPrimaryWithParentNoPrimary__int__void(id);
+  return $instance;
+ }
+ //Initialization from constructor 'NoPrimaryWithParentNoPrimary(int)'.
+ /** @nodts */
+ $ctor__multipleconstructors_NoPrimaryWithParentNoPrimary__int__void(/** number */ id) {
+  this.$ctor__multipleconstructors_ParentWithoutPrimary__int__void(id);
+  this.f_id__multipleconstructors_NoPrimaryWithParentNoPrimary_ = id;
+  this.f_flag__multipleconstructors_NoPrimaryWithParentNoPrimary_ = id == 0;
+ }
+ //Factory method corresponding to constructor 'NoPrimaryWithParentNoPrimary(boolean)'.
+ /** @nodts @return {!NoPrimaryWithParentNoPrimary} */
+ static $create__boolean(/** boolean */ flag) {
+  NoPrimaryWithParentNoPrimary.$clinit();
+  let $instance = new NoPrimaryWithParentNoPrimary();
+  $instance.$ctor__multipleconstructors_NoPrimaryWithParentNoPrimary__boolean__void(flag);
+  return $instance;
+ }
+ //Initialization from constructor 'NoPrimaryWithParentNoPrimary(boolean)'.
+ /** @nodts */
+ $ctor__multipleconstructors_NoPrimaryWithParentNoPrimary__boolean__void(/** boolean */ flag) {
+  this.$ctor__multipleconstructors_NoPrimaryWithParentNoPrimary__int__boolean__void(-1, flag);
+ }
+ //Factory method corresponding to constructor 'NoPrimaryWithParentNoPrimary(int, boolean)'.
+ /** @nodts @return {!NoPrimaryWithParentNoPrimary} */
+ static $create__int__boolean(/** number */ id, /** boolean */ flag) {
+  NoPrimaryWithParentNoPrimary.$clinit();
+  let $instance = new NoPrimaryWithParentNoPrimary();
+  $instance.$ctor__multipleconstructors_NoPrimaryWithParentNoPrimary__int__boolean__void(id, flag);
+  return $instance;
+ }
+ //Initialization from constructor 'NoPrimaryWithParentNoPrimary(int, boolean)'.
+ /** @nodts */
+ $ctor__multipleconstructors_NoPrimaryWithParentNoPrimary__int__boolean__void(/** number */ id, /** boolean */ flag) {
+  this.$ctor__multipleconstructors_ParentWithoutPrimary__int__boolean__void(id, flag);
+  this.f_id__multipleconstructors_NoPrimaryWithParentNoPrimary_ = id;
+  this.f_flag__multipleconstructors_NoPrimaryWithParentNoPrimary_ = flag;
+ }
+ /** @nodts */
+ static $clinit() {
+  NoPrimaryWithParentNoPrimary.$clinit = () =>{};
+  NoPrimaryWithParentNoPrimary.$loadModules();
+  ParentWithoutPrimary.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NoPrimaryWithParentNoPrimary;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NoPrimaryWithParentNoPrimary, 'multipleconstructors.NoPrimaryWithParentNoPrimary');
+
+exports = NoPrimaryWithParentNoPrimary;
+
+//# sourceMappingURL=NoPrimaryWithParentNoPrimary.js.map

@@ -1,0 +1,55 @@
+goog.module('interfacedelegation.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class I {
+ /** @abstract @nodts @return {string} */
+ m_getMessage__java_lang_String() {}
+ /** @abstract @nodts @return {string} */
+ m_getPropertyOverridenInDelegatingClass__java_lang_String() {}
+ /** @abstract @nodts @return {string} */
+ m_retrieveString__java_lang_String() {}
+ /** @abstract @nodts @return {string} */
+ m_methodOverridenInDelegatingClass__java_lang_String() {}
+ /** @abstract @nodts @return {string} */
+ m_nonOveriddenfunctionUsingOverridenProperty__java_lang_String() {}
+ /** @abstract @nodts @return {string} */
+ m_defaultMethod__java_lang_String() {}
+ /** @abstract @nodts @return {string} */
+ m_defaultMethodOverridenInD__java_lang_String() {}
+ /** @nodts @return {string} */
+ static m_defaultMethod__$default__interfacedelegation_I__java_lang_String(/** !I */ $thisArg) {
+  I.$clinit();
+  return 'DefaultMethod from interface';
+ }
+ /** @nodts @return {string} */
+ static m_defaultMethodOverridenInD__$default__interfacedelegation_I__java_lang_String(/** !I */ $thisArg) {
+  I.$clinit();
+  return 'DefaultMethod from interface';
+ }
+ /** @nodts */
+ static $clinit() {
+  I.$clinit = () =>{};
+  I.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__interfacedelegation_I = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__interfacedelegation_I;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (I), 'interfacedelegation.I');
+
+exports = I;
+
+//# sourceMappingURL=I.js.map

@@ -1,0 +1,75 @@
+goog.module('genericequals.GenericEquals$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class GenericEquals extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?T} @nodts*/
+  this.f_value__genericequals_GenericEquals_;
+  /**@type {GenericEquals<T>} @nodts*/
+  this.f_value2__genericequals_GenericEquals_;
+ }
+ /** @nodts @template T @return {!GenericEquals<T>} */
+ static $create__java_lang_Object(/** T */ value) {
+  GenericEquals.$clinit();
+  let $instance = new GenericEquals();
+  $instance.$ctor__genericequals_GenericEquals__java_lang_Object__void(value);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__genericequals_GenericEquals__java_lang_Object__void(/** T */ value) {
+  this.$ctor__java_lang_Object__void();
+  this.f_value__genericequals_GenericEquals_ = value;
+  this.f_value2__genericequals_GenericEquals_ = null;
+ }
+ /** @final @nodts @return {*} */
+ m_foo__genericequals_GenericEquals__java_lang_Object(/** GenericEquals<?> */ other) {
+  return other.f_value2__genericequals_GenericEquals_.f_value__genericequals_GenericEquals_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ obj) {
+  if ($Equality.$same(obj, this)) {
+   return true;
+  }
+  if (!GenericEquals.$isInstance(obj)) {
+   return false;
+  }
+  let other = /**@type {!GenericEquals<*>}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(obj), GenericEquals));
+  return Objects.m_equals__java_lang_Object__java_lang_Object__boolean(this.f_value__genericequals_GenericEquals_, other.f_value__genericequals_GenericEquals_);
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericEquals.$clinit = () =>{};
+  GenericEquals.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericEquals;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Objects = goog.module.get('java.util.Objects$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(GenericEquals, 'genericequals.GenericEquals');
+
+exports = GenericEquals;
+
+//# sourceMappingURL=GenericEquals.js.map

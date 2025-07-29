@@ -1,0 +1,33 @@
+goog.module('primitivespecialization.IntSetter$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class IntSetter {
+ /** @abstract @nodts */
+ m_set__int__void(/** number */ i) {}
+ /** @nodts */
+ static $clinit() {
+  IntSetter.$clinit = () =>{};
+  IntSetter.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__primitivespecialization_IntSetter = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__primitivespecialization_IntSetter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IntSetter.$markImplementor(/**@type {Function}*/ (IntSetter));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (IntSetter), 'primitivespecialization.IntSetter');
+
+exports = IntSetter;
+
+//# sourceMappingURL=IntSetter.js.map

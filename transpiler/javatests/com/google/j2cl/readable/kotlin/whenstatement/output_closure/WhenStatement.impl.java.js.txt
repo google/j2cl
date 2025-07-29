@@ -1,0 +1,326 @@
+goog.module('whenstatement.WhenStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let Numbers = goog.forwardDeclare('whenstatement.Numbers$impl');
+
+/**
+ * @final
+ */
+class WhenStatement extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_num__whenstatement_WhenStatement_ = 0;
+ }
+ /** @nodts @return {!WhenStatement} */
+ static $create__() {
+  WhenStatement.$clinit();
+  let $instance = new WhenStatement();
+  $instance.$ctor__whenstatement_WhenStatement__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__whenstatement_WhenStatement__void() {
+  this.$ctor__java_lang_Object__void();
+  let tmp = this;
+  let tmp0_subject = this.m_getEnumNumber__whenstatement_Numbers_$p_whenstatement_WhenStatement();
+  let /** number */ tmp_1;
+  if ($Equality.$same(tmp0_subject, Numbers.f_ONE__whenstatement_Numbers)) {
+   tmp_1 = 1;
+  } else if ($Equality.$same(tmp0_subject, Numbers.f_TWO__whenstatement_Numbers)) {
+   tmp_1 = 2;
+  } else if ($Equality.$same(tmp0_subject, Numbers.f_THREE__whenstatement_Numbers)) {
+   tmp_1 = 3;
+  } else {
+   return Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
+  }
+  tmp.f_num__whenstatement_WhenStatement_ = tmp_1;
+ }
+ /** @final @nodts @return {number} */
+ m_whenExpressionWithString__java_lang_String__int_$p_whenstatement_WhenStatement(/** string */ stringValue) {
+  let tmp0_subject = stringValue;
+  return $Equality.$same(tmp0_subject, 'zero') || $Equality.$same(tmp0_subject, 'one') ? 1 : $Equality.$same(tmp0_subject, 'two') ? 2 : 3;
+ }
+ /** @final @nodts @return {number} */
+ m_whenStatementWithString__java_lang_String__int_$p_whenstatement_WhenStatement(/** string */ stringValue) {
+  let /** number */ value;
+  let tmp0_subject = stringValue;
+  switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(tmp0_subject)) {
+   case 'minus_one':case 'zero':case 'one':
+    {
+     value = 1;
+     break;
+    }
+   case 'two':
+    {
+     value = 2;
+     break;
+    }
+   default:
+    {
+     value = 3;
+     break;
+    }
+  }
+  return value;
+ }
+ /** @final @nodts @return {number} */
+ m_whenExpressionWithChar__char__int(/** number */ charValue) {
+  let tmp0_subject = charValue;
+  return tmp0_subject == 48 /* '0' */ || tmp0_subject == 49 /* '1' */ ? 1 : tmp0_subject == 50 /* '2' */ ? 2 : 3;
+ }
+ /** @final @nodts @return {number} */
+ m_whenStatementWithChar__char__int(/** number */ charValue) {
+  let /** number */ value;
+  let tmp0_subject = charValue;
+  switch (tmp0_subject) {
+   case 48 /* '0' */:case 49 /* '1' */:
+    {
+     value = 1;
+     break;
+    }
+   case 50 /* '2' */:
+    {
+     value = 2;
+     break;
+    }
+   default:
+    {
+     value = 3;
+     break;
+    }
+  }
+  return value;
+ }
+ /** @final @nodts @return {number} */
+ m_whenStatementWithByte__byte__int(/** number */ byteValue) {
+  let tmp0_subject = byteValue;
+  switch (tmp0_subject) {
+   case 0:case 1:
+    {
+     return 1;
+    }
+   case 2:
+    {
+     return 2;
+    }
+   default:
+    {
+     return 3;
+    }
+  }
+ }
+ /** @final @nodts @return {number} */
+ m_whenStatementWithShort__short__int(/** number */ shortValue) {
+  let tmp0_subject = shortValue;
+  switch (tmp0_subject) {
+   case 0:case 1:
+    {
+     return 1;
+    }
+   case 2:
+    {
+     return 2;
+    }
+   default:
+    {
+     return 3;
+    }
+  }
+ }
+ /** @final @nodts @return {number} */
+ m_whenExpressionWithInt__int__int(/** number */ intValue) {
+  let tmp0_subject = intValue;
+  return tmp0_subject == 0 || tmp0_subject == 1 ? 1 : tmp0_subject == 2 ? 2 : 3;
+ }
+ /** @final @nodts @return {number} */
+ m_whenStatementWithInt__int__int(/** number */ intValue) {
+  let foo = Math.imul(intValue, 2);
+  switch (foo) {
+   case 0:case 1:
+    {
+     return 1;
+    }
+   case 2:
+    {
+     return 2;
+    }
+   default:
+    {
+     return foo;
+    }
+  }
+ }
+ /** @final @nodts @return {number} */
+ m_whenWithBooleanValue__int() {
+  let tmp0_subject = true;
+  if (tmp0_subject == true) {
+   return 1;
+  } else {
+   return 2;
+  }
+ }
+ /** @final @nodts @return {number} */
+ m_whenExpressionWithEnumValue__whenstatement_Numbers__int(/** !Numbers */ number_1) {
+  let tmp0_subject = number_1;
+  let /** number */ tmp;
+  if ($Equality.$same(tmp0_subject, Numbers.f_ONE__whenstatement_Numbers)) {
+   tmp = 1;
+  } else if ($Equality.$same(tmp0_subject, Numbers.f_TWO__whenstatement_Numbers)) {
+   tmp = 2;
+  } else if ($Equality.$same(tmp0_subject, Numbers.f_THREE__whenstatement_Numbers)) {
+   tmp = 3;
+  } else {
+   return Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
+  }
+  return tmp;
+ }
+ /** @final @nodts @return {number} */
+ m_whenStatementWithEnumValue__whenstatement_Numbers__int(/** !Numbers */ number_1) {
+  let tmp0_subject = number_1;
+  switch (tmp0_subject.ordinal()) {
+   case Numbers.$ordinal_ONE__whenstatement_Numbers:
+    {
+     return 1;
+    }
+   case Numbers.$ordinal_TWO__whenstatement_Numbers:
+    {
+     return 2;
+    }
+   case Numbers.$ordinal_THREE__whenstatement_Numbers:
+    {
+     return 3;
+    }
+   default:
+    {
+     return Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
+    }
+  }
+ }
+ /** @final @nodts @return {number} */
+ m_whenStatementWithInnerBreakStatement__whenstatement_Numbers__int(/** !Numbers */ numberValue) {
+  let value = 0;
+  $switchLowering$0: for (let inductionVariable = 0; inductionVariable <= 2; inductionVariable = inductionVariable + 1 | 0) {
+   let i = inductionVariable;
+   let tmp0_subject = numberValue;
+   switch (tmp0_subject.ordinal()) {
+    case Numbers.$ordinal_ONE__whenstatement_Numbers:
+     {
+      value = value + 1 | 0;
+      break;
+     }
+    case Numbers.$ordinal_TWO__whenstatement_Numbers:
+     {
+      value = value + 2 | 0;
+      break $switchLowering$0;
+     }
+    case Numbers.$ordinal_THREE__whenstatement_Numbers:
+     {
+      for (let inductionVariable_1 = 0; inductionVariable_1 <= 2; inductionVariable_1 = inductionVariable_1 + 1 | 0) {
+       let j = inductionVariable_1;
+       break;
+      }
+      break $switchLowering$0;
+     }
+    default:
+     {
+      return Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
+     }
+   }
+  }
+  return value;
+ }
+ /** @final @nodts @return {number} */
+ m_whenWithoutElse__int() {
+  let number_1 = 0;
+  let tmp0_subject = 'one';
+  switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(tmp0_subject)) {
+   case 'minusTwo':case 'minusOne':case 'zero':case 'one':
+    {
+     number_1 = 1;
+     break;
+    }
+   case 'two':
+    {
+     number_1 = 2;
+     break;
+    }
+  }
+  return number_1;
+ }
+ /** @final @nodts @return {number} */
+ m_getNum__int() {
+  return this.f_num__whenstatement_WhenStatement_;
+ }
+ /** @final @nodts @return {!Numbers} */
+ m_getEnumNumber__whenstatement_Numbers_$p_whenstatement_WhenStatement() {
+  return Numbers.f_ONE__whenstatement_Numbers;
+ }
+ /** @final @nodts @return {number} */
+ m_getValueWithOperatorIs__int() {
+  let tmp0_subject = '1';
+  if (!$Equality.$same(tmp0_subject, null)) {
+   return 1;
+  } else {
+   return 2;
+  }
+ }
+ /** @final @nodts @return {number} */
+ m_whenWithNoExpressions__int() {
+  let a = 3;
+  if (a < 3) {
+   return 1;
+  } else if (a == 3) {
+   return 2;
+  }
+  return 3;
+ }
+ /** @final @nodts @return {number} */
+ m_whenWithVariableDeclaration__int() {
+  let a = 2;
+  let b = a + 2 | 0;
+  a = b == 4 ? b + 1 | 0 : b - 1 | 0;
+  return a;
+ }
+ /** @final @nodts @return {number} */
+ m_whenWithImplicitEqualsComparison__int() {
+  let o = j_l_Object.$create__();
+  let a = j_l_Object.$create__();
+  let v = 3;
+  let tmp0_subject = o;
+  return Objects.m_equals__java_lang_Object__java_lang_Object__boolean(tmp0_subject, a) ? 1 : Objects.m_equals__java_lang_Object__java_lang_Object__boolean(tmp0_subject, Integer.m_valueOf__int__java_lang_Integer(v)) ? 2 : 3;
+ }
+ /** @nodts */
+ static $clinit() {
+  WhenStatement.$clinit = () =>{};
+  WhenStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof WhenStatement;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  Numbers = goog.module.get('whenstatement.Numbers$impl');
+ }
+}
+$Util.$setClassMetadata(WhenStatement, 'whenstatement.WhenStatement');
+
+exports = WhenStatement;
+
+//# sourceMappingURL=WhenStatement.js.map

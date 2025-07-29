@@ -1,0 +1,44 @@
+goog.module('bridgemethods.LeafChild$impl');
+
+const ReparametrerizedChild = goog.require('bridgemethods.ReparametrerizedChild$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @extends {ReparametrerizedChild<LeafChild>}
+ */
+class LeafChild extends ReparametrerizedChild {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LeafChild} */
+ static $create__() {
+  LeafChild.$clinit();
+  let $instance = new LeafChild();
+  $instance.$ctor__bridgemethods_LeafChild__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_LeafChild__void() {
+  this.$ctor__bridgemethods_ReparametrerizedChild__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  LeafChild.$clinit = () =>{};
+  LeafChild.$loadModules();
+  ReparametrerizedChild.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LeafChild;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(LeafChild, 'bridgemethods.LeafChild');
+
+exports = LeafChild;
+
+//# sourceMappingURL=LeafChild.js.map

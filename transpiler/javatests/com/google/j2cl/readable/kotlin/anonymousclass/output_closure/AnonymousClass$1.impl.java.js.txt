@@ -1,0 +1,69 @@
+goog.module('anonymousclass.AnonymousClass.$1$impl');
+
+const SomeClass = goog.require('anonymousclass.SomeClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AnonymousClass = goog.forwardDeclare('anonymousclass.AnonymousClass$impl');
+
+/**
+ * @final
+ */
+class $1 extends SomeClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!AnonymousClass} @nodts*/
+  this.$outer_this__anonymousclass_AnonymousClass_1;
+  /**@type {!AnonymousClass} @nodts*/
+  this.f_outer__anonymousclass_AnonymousClass_1_;
+  /**@type {!*} @nodts*/
+  this.f_other__anonymousclass_AnonymousClass_1_;
+  /**@type {!*} @nodts*/
+  this.$captured_a__anonymousclass_AnonymousClass_1;
+ }
+ /** @nodts @return {!$1} */
+ static $create__anonymousclass_AnonymousClass__java_lang_Object(/** !AnonymousClass */ $outer_this, /** !* */ $captured_a) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__java_lang_Object__void($outer_this, $captured_a);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__java_lang_Object__void(/** !AnonymousClass */ $outer_this, /** !* */ $captured_a) {
+  this.$outer_this__anonymousclass_AnonymousClass_1 = $outer_this;
+  this.$captured_a__anonymousclass_AnonymousClass_1 = $captured_a;
+  this.$ctor__anonymousclass_SomeClass__int__void(0);
+  this.f_outer__anonymousclass_AnonymousClass_1_ = $outer_this;
+  this.f_other__anonymousclass_AnonymousClass_1_ = $captured_a;
+ }
+ /** @final @nodts @return {!AnonymousClass} */
+ m_getOuter__anonymousclass_AnonymousClass() {
+  return this.f_outer__anonymousclass_AnonymousClass_1_;
+ }
+ /** @final @nodts @return {!*} */
+ m_getOther__java_lang_Object() {
+  return this.f_other__anonymousclass_AnonymousClass_1_;
+ }
+ /** @override @nodts @return {string} */
+ m_foo__java_lang_String() {
+  return '' + this.$outer_this__anonymousclass_AnonymousClass_1.m_getI__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  SomeClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1, 'anonymousclass.AnonymousClass$1');
+
+exports = $1;
+
+//# sourceMappingURL=AnonymousClass$1.js.map

@@ -1,0 +1,57 @@
+goog.module('nativejstypes.Bar.Inner.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Bar = goog.forwardDeclare('nativejstypes.Bar');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__nativejstypes_Bar_Inner_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_Bar_Inner_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getInnerStatic__int() {
+  return Bar.Inner.getInnerStatic();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__nativejstypes_Bar_Inner_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__nativejstypes_Bar_Inner_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__nativejstypes_Bar_Inner_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Bar = goog.module.get('nativejstypes.Bar');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__nativejstypes_Bar_Inner_Companion;
+$Util.$setClassMetadata(Companion, 'nativejstypes.Bar$Inner$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Bar$Inner$Companion.js.map

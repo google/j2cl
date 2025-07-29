@@ -1,0 +1,33 @@
+goog.module('nestednativetype.NativeArray.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('nestednativetype.NativeArray.$1$impl');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts @return {*} */
+ static m_a__$devirt__nestednativetype_NativeArray__java_lang_Object(/** !Array */ $thisArg) {
+  $Overlay.$clinit();
+  return $1.$create__nestednativetype_NativeArray($thisArg);
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Array;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('nestednativetype.NativeArray.$1$impl');
+ }
+}
+$Util.$setClassMetadata($Overlay, 'Array');
+
+exports = $Overlay;
+
+//# sourceMappingURL=NativeArray$$Overlay.js.map

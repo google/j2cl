@@ -1,0 +1,53 @@
+goog.module('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.$1Super$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const InterfaceWithThisReference = goog.require('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference$impl');
+
+/**
+ * @implements {InterfaceWithThisReference}
+ */
+class $1Super extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!InterfaceWithThisReference} @nodts*/
+  this.$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super;
+ }
+ /** @nodts @return {!$1Super} */
+ static $create__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(/** !InterfaceWithThisReference */ $outer_this) {
+  let $instance = new $1Super();
+  $instance.$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void(/** !InterfaceWithThisReference */ $outer_this) {
+  this.$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_foo__void() {
+  InterfaceWithThisReference.m_foo__$default__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Super.$clinit = () =>{};
+  $1Super.$loadModules();
+  j_l_Object.$clinit();
+  InterfaceWithThisReference.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Super;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithThisReference.$markImplementor($1Super);
+$Util.$setClassMetadata($1Super, 'nestedlocalclasses.NestedLocalClasses$InterfaceWithThisReference$1Super');
+
+exports = $1Super;
+
+//# sourceMappingURL=NestedLocalClasses$InterfaceWithThisReference$1Super.js.map

@@ -1,0 +1,34 @@
+goog.module('jvmstatic.Foo$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T, V
+ */
+class Foo {
+ /** @abstract @nodts @return {T} */
+ m_f__java_lang_Object__java_lang_Object(/** V */ o) {}
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jvmstatic_Foo = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jvmstatic_Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Foo.$markImplementor(/**@type {Function}*/ (Foo));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Foo), 'jvmstatic.Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Foo.js.map

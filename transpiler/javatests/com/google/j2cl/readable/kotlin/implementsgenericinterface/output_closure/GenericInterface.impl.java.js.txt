@@ -1,0 +1,32 @@
+goog.module('implementsgenericinterface.GenericInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class GenericInterface {
+ /** @nodts */
+ static $clinit() {
+  GenericInterface.$clinit = () =>{};
+  GenericInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__implementsgenericinterface_GenericInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__implementsgenericinterface_GenericInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+GenericInterface.$markImplementor(/**@type {Function}*/ (GenericInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (GenericInterface), 'implementsgenericinterface.GenericInterface');
+
+exports = GenericInterface;
+
+//# sourceMappingURL=GenericInterface.js.map

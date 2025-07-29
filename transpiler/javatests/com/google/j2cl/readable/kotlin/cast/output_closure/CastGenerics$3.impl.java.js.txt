@@ -1,0 +1,53 @@
+goog.module('cast.CastGenerics.$3$impl');
+
+const Empty1 = goog.require('cast.CastGenerics.Empty1$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CastGenerics = goog.forwardDeclare('cast.CastGenerics$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+
+/**
+ * @final
+ * @template T, E
+ * @implements {Empty1}
+ */
+class $3 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!CastGenerics<T, E>} @nodts*/
+  this.$outer_this__cast_CastGenerics_3;
+ }
+ /** @nodts @template T, E @return {!$3<T, E>} */
+ static $create__cast_CastGenerics(/** !CastGenerics<T, E> */ $outer_this) {
+  $3.$clinit();
+  let $instance = new $3();
+  $instance.$ctor__cast_CastGenerics_3__cast_CastGenerics__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cast_CastGenerics_3__cast_CastGenerics__void(/** !CastGenerics<T, E> */ $outer_this) {
+  this.$outer_this__cast_CastGenerics_3 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  $3.$clinit = () =>{};
+  $3.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $3;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Empty1.$markImplementor($3);
+$Util.$setClassMetadata($3, 'cast.CastGenerics$3');
+
+exports = $3;
+
+//# sourceMappingURL=CastGenerics$3.js.map

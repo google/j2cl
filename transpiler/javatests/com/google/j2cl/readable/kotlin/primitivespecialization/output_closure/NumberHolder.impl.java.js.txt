@@ -1,0 +1,46 @@
+goog.module('primitivespecialization.NumberHolder$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Holder = goog.require('primitivespecialization.Holder$impl');
+
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+
+/**
+ * @template T
+ * @extends {Holder<T>}
+ */
+class NumberHolder extends Holder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!NumberHolder<T>} */
+ static $create__java_lang_Number(/** T */ t) {
+  NumberHolder.$clinit();
+  let $instance = new NumberHolder();
+  $instance.$ctor__primitivespecialization_NumberHolder__java_lang_Number__void(t);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_NumberHolder__java_lang_Number__void(/** T */ t) {
+  this.$ctor__primitivespecialization_Holder__java_lang_Object__void(t);
+ }
+ /** @nodts */
+ static $clinit() {
+  NumberHolder.$clinit = () =>{};
+  NumberHolder.$loadModules();
+  Holder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NumberHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NumberHolder, 'primitivespecialization.NumberHolder');
+
+exports = NumberHolder;
+
+//# sourceMappingURL=NumberHolder.js.map

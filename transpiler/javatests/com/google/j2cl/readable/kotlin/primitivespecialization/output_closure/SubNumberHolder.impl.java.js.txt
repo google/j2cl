@@ -1,0 +1,48 @@
+goog.module('primitivespecialization.SubNumberHolder$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NumberHolder = goog.require('primitivespecialization.NumberHolder$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+/**
+ * @final
+ * @extends {NumberHolder<!Integer>}
+ */
+class SubNumberHolder extends NumberHolder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubNumberHolder} */
+ static $create__() {
+  SubNumberHolder.$clinit();
+  let $instance = new SubNumberHolder();
+  $instance.$ctor__primitivespecialization_SubNumberHolder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_SubNumberHolder__void() {
+  this.$ctor__primitivespecialization_NumberHolder__java_lang_Number__void(Integer.m_valueOf__int__java_lang_Integer(2));
+ }
+ /** @nodts */
+ static $clinit() {
+  SubNumberHolder.$clinit = () =>{};
+  SubNumberHolder.$loadModules();
+  NumberHolder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubNumberHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+ }
+}
+$Util.$setClassMetadata(SubNumberHolder, 'primitivespecialization.SubNumberHolder');
+
+exports = SubNumberHolder;
+
+//# sourceMappingURL=SubNumberHolder.js.map

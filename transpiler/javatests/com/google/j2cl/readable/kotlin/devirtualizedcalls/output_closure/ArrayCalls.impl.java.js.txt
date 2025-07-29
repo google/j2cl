@@ -1,0 +1,55 @@
+goog.module('devirtualizedcalls.ArrayCalls$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @final
+ */
+class ArrayCalls extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ArrayCalls} */
+ static $create__() {
+  ArrayCalls.$clinit();
+  let $instance = new ArrayCalls();
+  $instance.$ctor__devirtualizedcalls_ArrayCalls__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__devirtualizedcalls_ArrayCalls__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_main__void() {
+  let array2d = /**@type {!Array<!Array<*>>}*/ ($Arrays.$createWithInitializer(1, j_l_Object, /**  @return {!Array<*>}*/ ((/** number */ it) =>{
+   return new Array(1);
+  }), 2));
+  let length1 = array2d[0].length;
+  let length2 = array2d.length;
+ }
+ /** @nodts */
+ static $clinit() {
+  ArrayCalls.$clinit = () =>{};
+  ArrayCalls.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ArrayCalls;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(ArrayCalls, 'devirtualizedcalls.ArrayCalls');
+
+exports = ArrayCalls;
+
+//# sourceMappingURL=ArrayCalls.js.map

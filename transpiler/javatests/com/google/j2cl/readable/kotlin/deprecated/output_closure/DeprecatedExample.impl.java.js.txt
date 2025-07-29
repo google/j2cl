@@ -1,0 +1,52 @@
+goog.module('deprecated.DeprecatedExample$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @deprecated
+ */
+class DeprecatedExample extends j_l_Object {
+ /** @deprecated */
+ constructor() {
+  DeprecatedExample.$clinit();
+  super();
+  /**@type {?string} @deprecated @nodts*/
+  this.f_deprecatedInstanceField__deprecated_DeprecatedExample_;
+  this.$ctor__deprecated_DeprecatedExample__void();
+ }
+ /** @nodts @deprecated */
+ $ctor__deprecated_DeprecatedExample__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_deprecatedInstanceField__deprecated_DeprecatedExample_ = 'deprecated field';
+ }
+ /** @return {?string} @deprecated */
+ get deprecatedInstanceField() {
+  return this.f_deprecatedInstanceField__deprecated_DeprecatedExample_;
+ }
+ /** @deprecated */
+ set deprecatedInstanceField(/** ?string */ set__) {
+  this.f_deprecatedInstanceField__deprecated_DeprecatedExample_ = set__;
+ }
+ /** @final @deprecated */
+ deprecatedInstanceMethod(/** ?string */ someArg) {}
+ /** @nodts */
+ static $clinit() {
+  DeprecatedExample.$clinit = () =>{};
+  DeprecatedExample.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DeprecatedExample;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(DeprecatedExample, 'deprecated.DeprecatedExample');
+
+exports = DeprecatedExample;
+
+//# sourceMappingURL=DeprecatedExample.js.map

@@ -1,0 +1,127 @@
+goog.module('specialoverrides.SpecializesMyGeneric$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const MyGenericList = goog.require('specialoverrides.MyGenericList$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let ListIterator = goog.forwardDeclare('java.util.ListIterator$impl');
+
+/**
+ * @abstract
+ * @extends {MyGenericList<string>}
+ */
+class SpecializesMyGeneric extends MyGenericList {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__specialoverrides_SpecializesMyGeneric__void() {
+  this.$ctor__specialoverrides_MyGenericList__void();
+ }
+ /** @override @nodts @return {number} */
+ m_getSize__int() {
+  return 0;
+ }
+ /** @nodts @return {boolean} */
+ m_contains__java_lang_String__boolean(/** string */ element) {
+  return false;
+ }
+ /** @override @return {boolean} */
+ containsAll(/** !Collection<?> */ elements) {
+  return false;
+ }
+ /** @nodts @return {number} */
+ m_indexOf__java_lang_String__int(/** string */ element) {
+  return 0;
+ }
+ /** @nodts @return {number} */
+ m_lastIndexOf__java_lang_String__int(/** string */ element) {
+  return 0;
+ }
+ /** @nodts @return {boolean} */
+ m_remove__java_lang_String__boolean(/** string */ element) {
+  return false;
+ }
+ /** @final @override @return {boolean} */
+ contains(/** * */ element) {
+  if (!j_l_String.$isInstance(element)) {
+   return false;
+  }
+  return this.m_contains__java_lang_String__boolean(/**@type {string}*/ (element));
+ }
+ /** @final @override @return {number} */
+ indexOf(/** * */ element) {
+  if (!j_l_String.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_indexOf__java_lang_String__int(/**@type {string}*/ (element));
+ }
+ /** @final @override @return {number} */
+ lastIndexOf(/** * */ element) {
+  if (!j_l_String.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_lastIndexOf__java_lang_String__int(/**@type {string}*/ (element));
+ }
+ /** @final @override @return {boolean} */
+ remove(/** * */ element) {
+  if (!j_l_String.$isInstance(element)) {
+   return false;
+  }
+  return this.m_remove__java_lang_String__boolean(/**@type {string}*/ (element));
+ }
+ /** @nodts */
+ static $clinit() {
+  SpecializesMyGeneric.$clinit = () =>{};
+  SpecializesMyGeneric.$loadModules();
+  MyGenericList.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SpecializesMyGeneric;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ add(/** string */ arg0) {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ addAll(/** Collection<?> */ arg0) {}
+ /** @abstract @override @suppress{visibility} */
+ clear() {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ isEmpty() {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ removeAll(/** Collection<?> */ arg0) {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ retainAll(/** Collection<?> */ arg0) {}
+ /** @abstract @override @suppress{visibility} */
+ addAtIndex(/** number */ arg0, /** string */ arg1) {}
+ /** @abstract @override @suppress{visibility} @return {boolean} */
+ addAllAtIndex(/** number */ arg0, /** Collection<?> */ arg1) {}
+ /** @abstract @override @suppress{visibility} @return {string} */
+ getAtIndex(/** number */ arg0) {}
+ /** @abstract @override @nodts @suppress{visibility} @return {ListIterator<string>} */
+ m_listIterator__java_util_ListIterator() {}
+ /** @abstract @override @nodts @suppress{visibility} @return {ListIterator<string>} */
+ m_listIterator__int__java_util_ListIterator(/** number */ arg0) {}
+ /** @abstract @override @suppress{visibility} @return {string} */
+ removeAtIndex(/** number */ arg0) {}
+ /** @abstract @override @suppress{visibility} @return {string} */
+ setAtIndex(/** number */ arg0, /** string */ arg1) {}
+ /** @abstract @override @suppress{visibility} @return {List<string>} */
+ subList(/** number */ arg0, /** number */ arg1) {}
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(SpecializesMyGeneric, 'specialoverrides.SpecializesMyGeneric');
+
+exports = SpecializesMyGeneric;
+
+//# sourceMappingURL=SpecializesMyGeneric.js.map

@@ -1,0 +1,96 @@
+goog.module('primitivespecialization.PrimitiveSpecializationKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let Holder = goog.forwardDeclare('primitivespecialization.Holder$impl');
+let IntHolder = goog.forwardDeclare('primitivespecialization.IntHolder$impl');
+let IntHolderExtendsGetter = goog.forwardDeclare('primitivespecialization.IntHolderExtendsGetter$impl');
+let IntList = goog.forwardDeclare('primitivespecialization.IntList$impl');
+let NumberHolder = goog.forwardDeclare('primitivespecialization.NumberHolder$impl');
+let $1 = goog.forwardDeclare('primitivespecialization.PrimitiveSpecializationKt.$1$impl');
+let SubIntHolder = goog.forwardDeclare('primitivespecialization.SubIntHolder$impl');
+let SubNumberHolder = goog.forwardDeclare('primitivespecialization.SubNumberHolder$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class PrimitiveSpecializationKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!PrimitiveSpecializationKt} */
+ static $create__() {
+  PrimitiveSpecializationKt.$clinit();
+  let $instance = new PrimitiveSpecializationKt();
+  $instance.$ctor__primitivespecialization_PrimitiveSpecializationKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_PrimitiveSpecializationKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_test__void() {
+  PrimitiveSpecializationKt.$clinit();
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to((/**@type {!Holder<!Integer>}*/ (Holder.$create__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(1)))).m_get__java_lang_Object(), Integer))).m_intValue__int());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(IntHolder.$create__().m_get__java_lang_Object(), Integer))).m_intValue__int());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(SubIntHolder.$create__().m_get__java_lang_Object(), Integer))).m_intValue__int());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to((/**@type {!NumberHolder<!Integer>}*/ (NumberHolder.$create__java_lang_Number(Integer.m_valueOf__int__java_lang_Integer(3)))).m_get__java_lang_Object(), Integer))).m_intValue__int());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(SubNumberHolder.$create__().m_get__java_lang_Object(), Integer))).m_intValue__int());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(IntHolderExtendsGetter.$create__().m_get__java_lang_Object(), Integer))).m_intValue__int());
+  (/**@type {!Holder<!Integer>}*/ (Holder.$create__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(1)))).m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
+  IntHolder.$create__().m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
+  SubIntHolder.$create__().m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
+  (/**@type {!NumberHolder<!Integer>}*/ (NumberHolder.$create__java_lang_Number(Integer.m_valueOf__int__java_lang_Integer(3)))).m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
+  SubNumberHolder.$create__().m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
+  IntHolderExtendsGetter.$create__().m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
+  let s = IntHolderExtendsGetter.$create__();
+  s.m_set__int__void(2);
+  let l = /**@type {!ArrayList<!Integer>}*/ (ArrayList.$create__());
+  l.remove(Integer.m_valueOf__int__java_lang_Integer(2));
+  l.removeAtIndex(1);
+  let il = IntList.$create__();
+  il.m_remove__java_lang_Integer__boolean(Integer.m_valueOf__int__java_lang_Integer(2));
+  il.m_removeAt__int__int(1);
+  let ba = $1.$create__();
+ }
+ /** @nodts */
+ static m_requireInt__int__void(/** number */ i) {
+  PrimitiveSpecializationKt.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  PrimitiveSpecializationKt.$clinit = () =>{};
+  PrimitiveSpecializationKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PrimitiveSpecializationKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  Holder = goog.module.get('primitivespecialization.Holder$impl');
+  IntHolder = goog.module.get('primitivespecialization.IntHolder$impl');
+  IntHolderExtendsGetter = goog.module.get('primitivespecialization.IntHolderExtendsGetter$impl');
+  IntList = goog.module.get('primitivespecialization.IntList$impl');
+  NumberHolder = goog.module.get('primitivespecialization.NumberHolder$impl');
+  $1 = goog.module.get('primitivespecialization.PrimitiveSpecializationKt.$1$impl');
+  SubIntHolder = goog.module.get('primitivespecialization.SubIntHolder$impl');
+  SubNumberHolder = goog.module.get('primitivespecialization.SubNumberHolder$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(PrimitiveSpecializationKt, 'primitivespecialization.PrimitiveSpecializationKt');
+
+exports = PrimitiveSpecializationKt;
+
+//# sourceMappingURL=PrimitiveSpecializationKt.js.map

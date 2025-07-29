@@ -1,0 +1,67 @@
+goog.module('nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NativeMembersOnPrivateClass = goog.forwardDeclare('nativejstypes.NativeNonreferencedMethods');
+let $Overlay = goog.forwardDeclare('nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__nativejstypes_NonreferencedMethods_NativeMembersOnPrivateClass_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_NonreferencedMethods_NativeMembersOnPrivateClass_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getS__int() {
+  return $Overlay.m_getS__int();
+ }
+ /** @final @nodts */
+ m_setS__int__void(/** number */ arg0) {
+  $Overlay.m_setS__int__void(arg0);
+ }
+ /** @final @nodts @return {number} */
+ m_getStatic__int() {
+  return NativeMembersOnPrivateClass.getStatic();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__nativejstypes_NonreferencedMethods_NativeMembersOnPrivateClass_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__nativejstypes_NonreferencedMethods_NativeMembersOnPrivateClass_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__nativejstypes_NonreferencedMethods_NativeMembersOnPrivateClass_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  NativeMembersOnPrivateClass = goog.module.get('nativejstypes.NativeNonreferencedMethods');
+  $Overlay = goog.module.get('nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass.$Overlay$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__nativejstypes_NonreferencedMethods_NativeMembersOnPrivateClass_Companion;
+$Util.$setClassMetadata(Companion, 'nativejstypes.NonreferencedMethods$NativeMembersOnPrivateClass$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=NonreferencedMethods$NativeMembersOnPrivateClass$Companion.js.map

@@ -1,0 +1,50 @@
+goog.module('whilestatement.WhileStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class WhileStatement extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!WhileStatement} */
+ static $create__() {
+  WhileStatement.$clinit();
+  let $instance = new WhileStatement();
+  $instance.$ctor__whilestatement_WhileStatement__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__whilestatement_WhileStatement__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let cdt = true;
+  while (cdt) {
+   cdt = false;
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  WhileStatement.$clinit = () =>{};
+  WhileStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof WhileStatement;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(WhileStatement, 'whilestatement.WhileStatement');
+
+exports = WhileStatement;
+
+//# sourceMappingURL=WhileStatement.js.map

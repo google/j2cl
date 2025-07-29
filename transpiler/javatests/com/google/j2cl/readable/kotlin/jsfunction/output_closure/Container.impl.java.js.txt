@@ -1,0 +1,34 @@
+goog.module('jsfunction.Container$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Container {
+ /** @abstract @nodts @return {?T} */
+ m_get__java_lang_Object() {}
+ /** @nodts */
+ static $clinit() {
+  Container.$clinit = () =>{};
+  Container.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsfunction_Container = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsfunction_Container;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Container.$markImplementor(/**@type {Function}*/ (Container));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Container), 'jsfunction.Container');
+
+exports = Container;
+
+//# sourceMappingURL=Container.js.map

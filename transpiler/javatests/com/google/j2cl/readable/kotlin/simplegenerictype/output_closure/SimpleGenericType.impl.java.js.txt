@@ -1,0 +1,74 @@
+goog.module('simplegenerictype.SimpleGenericType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+
+/**
+ * @final
+ * @template T, S
+ */
+class SimpleGenericType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_first__simplegenerictype_SimpleGenericType_;
+  /**@type {S} @nodts*/
+  this.f_second__simplegenerictype_SimpleGenericType_;
+ }
+ /** @nodts @template T, S @return {!SimpleGenericType<T, S>} */
+ static $create__java_lang_Object__java_lang_Object(/** T */ first, /** S */ second) {
+  SimpleGenericType.$clinit();
+  let $instance = new SimpleGenericType();
+  $instance.$ctor__simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object__void(first, second);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object__void(/** T */ first, /** S */ second) {
+  this.$ctor__java_lang_Object__void();
+  this.f_first__simplegenerictype_SimpleGenericType_ = first;
+  this.f_second__simplegenerictype_SimpleGenericType_ = second;
+ }
+ /** @final @nodts @return {T} */
+ m_getFirst__java_lang_Object() {
+  return this.f_first__simplegenerictype_SimpleGenericType_;
+ }
+ /** @final @nodts */
+ m_setFirst__java_lang_Object__void(/** T */ set__) {
+  this.f_first__simplegenerictype_SimpleGenericType_ = set__;
+ }
+ /** @final @nodts @return {S} */
+ m_getSecond__java_lang_Object() {
+  return this.f_second__simplegenerictype_SimpleGenericType_;
+ }
+ /** @final @nodts */
+ m_setSecond__java_lang_Object__void(/** S */ set__) {
+  this.f_second__simplegenerictype_SimpleGenericType_ = set__;
+ }
+ /** @final @nodts */
+ m_test__void() {
+  let g = /**@type {!SimpleGenericType<!*, !Error>}*/ (SimpleGenericType.$create__java_lang_Object__java_lang_Object(j_l_Object.$create__(), Error.$create__()));
+ }
+ /** @nodts */
+ static $clinit() {
+  SimpleGenericType.$clinit = () =>{};
+  SimpleGenericType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SimpleGenericType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Error = goog.module.get('java.lang.Error$impl');
+ }
+}
+$Util.$setClassMetadata(SimpleGenericType, 'simplegenerictype.SimpleGenericType');
+
+exports = SimpleGenericType;
+
+//# sourceMappingURL=SimpleGenericType.js.map

@@ -1,0 +1,66 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall$impl');
+
+const OuterRefFromSuperCtorBase = goog.require('innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder$impl');
+let $1 = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.$1$impl');
+
+/**
+ * @final
+ */
+class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!InnerClassInitOrder} @nodts*/
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall;
+ }
+ //Factory method corresponding to constructor 'OuterRefFromThisCtorCall(InnerClassInitOrder, Object)'.
+ /** @nodts @return {!OuterRefFromThisCtorCall} */
+ static $create__innerclassinitorder_InnerClassInitOrder__java_lang_Object(/** !InnerClassInitOrder */ $outer_this, /** !* */ o) {
+  OuterRefFromThisCtorCall.$clinit();
+  let $instance = new OuterRefFromThisCtorCall();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__innerclassinitorder_InnerClassInitOrder__java_lang_Object__void($outer_this, o);
+  return $instance;
+ }
+ //Initialization from constructor 'OuterRefFromThisCtorCall(InnerClassInitOrder, Object)'.
+ /** @nodts */
+ $ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__innerclassinitorder_InnerClassInitOrder__java_lang_Object__void(/** !InnerClassInitOrder */ $outer_this, /** !* */ o) {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall = $outer_this;
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object__void(o);
+ }
+ //Factory method corresponding to constructor 'OuterRefFromThisCtorCall(InnerClassInitOrder)'.
+ /** @nodts @return {!OuterRefFromThisCtorCall} */
+ static $create__innerclassinitorder_InnerClassInitOrder(/** !InnerClassInitOrder */ $outer_this) {
+  OuterRefFromThisCtorCall.$clinit();
+  let $instance = new OuterRefFromThisCtorCall();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__innerclassinitorder_InnerClassInitOrder__void($outer_this);
+  return $instance;
+ }
+ //Initialization from constructor 'OuterRefFromThisCtorCall(InnerClassInitOrder)'.
+ /** @nodts */
+ $ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__innerclassinitorder_InnerClassInitOrder__void(/** !InnerClassInitOrder */ $outer_this) {
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__innerclassinitorder_InnerClassInitOrder__java_lang_Object__void($outer_this, $1.$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall(this));
+ }
+ /** @nodts */
+ static $clinit() {
+  OuterRefFromThisCtorCall.$clinit = () =>{};
+  OuterRefFromThisCtorCall.$loadModules();
+  OuterRefFromSuperCtorBase.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterRefFromThisCtorCall;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.$1$impl');
+ }
+}
+$Util.$setClassMetadata(OuterRefFromThisCtorCall, 'innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall');
+
+exports = OuterRefFromThisCtorCall;
+
+//# sourceMappingURL=InnerClassInitOrder$OuterRefFromThisCtorCall.js.map

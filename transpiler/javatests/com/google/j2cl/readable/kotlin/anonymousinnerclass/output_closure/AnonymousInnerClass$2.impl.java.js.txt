@@ -1,0 +1,51 @@
+goog.module('anonymousinnerclass.AnonymousInnerClass.$2$impl');
+
+const $1C = goog.require('anonymousinnerclass.AnonymousInnerClass.$1C$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AnonymousInnerClass = goog.forwardDeclare('anonymousinnerclass.AnonymousInnerClass$impl');
+
+/**
+ * @final
+ */
+class $2 extends $1C {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!AnonymousInnerClass} @nodts*/
+  this.$outer_this__anonymousinnerclass_AnonymousInnerClass_2;
+  /**@type {number} @nodts*/
+  this.$captured_arg__anonymousinnerclass_AnonymousInnerClass_2 = 0;
+ }
+ /** @nodts @return {!$2} */
+ static $create__anonymousinnerclass_AnonymousInnerClass__int(/** !AnonymousInnerClass */ $outer_this, /** number */ $captured_arg) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__anonymousinnerclass_AnonymousInnerClass_2__anonymousinnerclass_AnonymousInnerClass__int__void($outer_this, $captured_arg);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousinnerclass_AnonymousInnerClass_2__anonymousinnerclass_AnonymousInnerClass__int__void(/** !AnonymousInnerClass */ $outer_this, /** number */ $captured_arg) {
+  this.$outer_this__anonymousinnerclass_AnonymousInnerClass_2 = $outer_this;
+  this.$captured_arg__anonymousinnerclass_AnonymousInnerClass_2 = $captured_arg;
+  this.$ctor__anonymousinnerclass_AnonymousInnerClass_1C__anonymousinnerclass_AnonymousInnerClass__int__void($outer_this, $captured_arg);
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  $1C.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2, 'anonymousinnerclass.AnonymousInnerClass$2');
+
+exports = $2;
+
+//# sourceMappingURL=AnonymousInnerClass$2.js.map

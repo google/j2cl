@@ -1,0 +1,52 @@
+goog.module('delegatedproperties.DelegateProvider$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let PropertyDelegate = goog.forwardDeclare('delegatedproperties.PropertyDelegate$impl');
+let KProperty = goog.forwardDeclare('kotlin.reflect.KProperty$impl');
+
+/**
+ * @final
+ */
+class DelegateProvider extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!DelegateProvider} */
+ static $create__() {
+  DelegateProvider.$clinit();
+  let $instance = new DelegateProvider();
+  $instance.$ctor__delegatedproperties_DelegateProvider__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__delegatedproperties_DelegateProvider__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!PropertyDelegate} */
+ m_provideDelegate__java_lang_Object__kotlin_reflect_KProperty__delegatedproperties_PropertyDelegate(/** * */ thisRef, /** !KProperty<?> */ property) {
+  return PropertyDelegate.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  DelegateProvider.$clinit = () =>{};
+  DelegateProvider.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DelegateProvider;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  PropertyDelegate = goog.module.get('delegatedproperties.PropertyDelegate$impl');
+ }
+}
+$Util.$setClassMetadata(DelegateProvider, 'delegatedproperties.DelegateProvider');
+
+exports = DelegateProvider;
+
+//# sourceMappingURL=DelegateProvider.js.map

@@ -1,0 +1,33 @@
+goog.module('typealias.IFoo$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class IFoo {
+ /** @abstract @nodts @return {number} */
+ m_f__int() {}
+ /** @nodts */
+ static $clinit() {
+  IFoo.$clinit = () =>{};
+  IFoo.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__typealias_IFoo = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__typealias_IFoo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IFoo.$markImplementor(/**@type {Function}*/ (IFoo));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (IFoo), 'typealias.IFoo');
+
+exports = IFoo;
+
+//# sourceMappingURL=IFoo.js.map

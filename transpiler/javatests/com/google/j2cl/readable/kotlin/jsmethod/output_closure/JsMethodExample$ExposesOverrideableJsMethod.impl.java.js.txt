@@ -1,0 +1,62 @@
+goog.module('jsmethod.JsMethodExample.ExposesOverrideableJsMethod$impl');
+
+const InterfaceExposingJsMethods = goog.require('jsmethod.JsMethodExample.InterfaceExposingJsMethods$impl');
+const SuperClassWithFinalMethod = goog.require('jsmethod.JsMethodExample.SuperClassWithFinalMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {InterfaceExposingJsMethods}
+ */
+class ExposesOverrideableJsMethod extends SuperClassWithFinalMethod {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ExposesOverrideableJsMethod} */
+ static $create__() {
+  ExposesOverrideableJsMethod.$clinit();
+  let $instance = new ExposesOverrideableJsMethod();
+  $instance.$ctor__jsmethod_JsMethodExample_ExposesOverrideableJsMethod__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_ExposesOverrideableJsMethod__void() {
+  this.$ctor__jsmethod_JsMethodExample_SuperClassWithFinalMethod__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_m__void() {
+  this.m();
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} */
+ m() {
+  InterfaceExposingJsMethods.m_m__$default__jsmethod_JsMethodExample_InterfaceExposingJsMethods__void(this);
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} */
+ n() {
+  this.m_n__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ExposesOverrideableJsMethod.$clinit = () =>{};
+  ExposesOverrideableJsMethod.$loadModules();
+  SuperClassWithFinalMethod.$clinit();
+  InterfaceExposingJsMethods.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExposesOverrideableJsMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceExposingJsMethods.$markImplementor(ExposesOverrideableJsMethod);
+$Util.$setClassMetadata(ExposesOverrideableJsMethod, 'jsmethod.JsMethodExample$ExposesOverrideableJsMethod');
+
+exports = ExposesOverrideableJsMethod;
+
+//# sourceMappingURL=JsMethodExample$ExposesOverrideableJsMethod.js.map

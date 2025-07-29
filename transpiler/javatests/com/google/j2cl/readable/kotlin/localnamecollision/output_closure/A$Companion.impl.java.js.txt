@@ -1,0 +1,74 @@
+goog.module('localnamecollision.A.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let A = goog.forwardDeclare('localnamecollision.A$impl');
+let B = goog.forwardDeclare('localnamecollision.A.B$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__localnamecollision_A_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localnamecollision_A_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {A} */
+ m_getA__localnamecollision_A() {
+  return A.m_getA__localnamecollision_A();
+ }
+ /** @final @nodts */
+ m_setA__localnamecollision_A__void(/** A */ arg0) {
+  A.m_setA__localnamecollision_A__void(arg0);
+ }
+ /** @final @nodts @return {B} */
+ m_getB__localnamecollision_A_B() {
+  return A.m_getB__localnamecollision_A_B();
+ }
+ /** @final @nodts */
+ m_setB__localnamecollision_A_B__void(/** B */ arg0) {
+  A.m_setB__localnamecollision_A_B__void(arg0);
+ }
+ /** @final @nodts */
+ m_test__void() {
+  A.m_test__void();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__localnamecollision_A_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__localnamecollision_A_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__localnamecollision_A_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  A = goog.module.get('localnamecollision.A$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__localnamecollision_A_Companion;
+$Util.$setClassMetadata(Companion, 'localnamecollision.A$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=A$Companion.js.map

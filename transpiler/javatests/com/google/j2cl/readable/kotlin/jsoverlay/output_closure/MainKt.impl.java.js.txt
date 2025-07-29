@@ -1,0 +1,88 @@
+goog.module('jsoverlay.MainKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let NativeJsTypeInterfaceWithOverlay_$Overlay = goog.forwardDeclare('jsoverlay.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+let NativeJsTypeInterfaceWithOverlayImpl = goog.forwardDeclare('jsoverlay.NativeJsTypeInterfaceWithOverlayImpl$impl');
+let $Overlay = goog.forwardDeclare('jsoverlay.NativeJsTypeWithOverlay.$Overlay$impl');
+let NativeJsTypeInterfaceWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeInterfaceWithOverlay');
+let NativeJsTypeWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeWithOverlay');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+/**
+ * @final
+ */
+class MainKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!MainKt} */
+ static $create__() {
+  MainKt.$clinit();
+  let $instance = new MainKt();
+  $instance.$ctor__jsoverlay_MainKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsoverlay_MainKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_test__void() {
+  MainKt.$clinit();
+  let n = new NativeJsTypeWithOverlay();
+  $Overlay.m_callM__$devirt__jsoverlay_NativeJsTypeWithOverlay__int(n);
+  $Overlay.m_fun__int();
+  NativeJsTypeWithOverlay.n();
+  $Overlay.m_bar__int();
+  $Overlay.m_foo__$devirt__jsoverlay_NativeJsTypeWithOverlay__int(n);
+  let a = 10 + NativeJsTypeWithOverlay.nonJsOverlayField | 0;
+  $Overlay.f_staticField__jsoverlay_NativeJsTypeWithOverlay_$Overlay = null;
+  $Overlay.m_varargs__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)));
+  $Overlay.m_baz__$devirt__jsoverlay_NativeJsTypeWithOverlay__int(n);
+  let b = '10' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(NativeJsTypeInterfaceWithOverlay_$Overlay.f_staticField__jsoverlay_NativeJsTypeInterfaceWithOverlay_$Overlay);
+ }
+ /** @nodts */
+ static m_testOverlayInterface__jsoverlay_NativeJsTypeInterfaceWithOverlay__void(/** !NativeJsTypeInterfaceWithOverlay */ foo) {
+  MainKt.$clinit();
+  foo.m();
+  NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_NativeJsTypeInterfaceWithOverlay__int(foo);
+ }
+ /** @nodts */
+ static m_testOverlayInterfaceImpl__void() {
+  MainKt.$clinit();
+  let foo = NativeJsTypeInterfaceWithOverlayImpl.$create__();
+  foo.m();
+  NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_NativeJsTypeInterfaceWithOverlay__int(foo);
+ }
+ /** @nodts */
+ static $clinit() {
+  MainKt.$clinit = () =>{};
+  MainKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MainKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  NativeJsTypeInterfaceWithOverlay_$Overlay = goog.module.get('jsoverlay.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+  NativeJsTypeInterfaceWithOverlayImpl = goog.module.get('jsoverlay.NativeJsTypeInterfaceWithOverlayImpl$impl');
+  $Overlay = goog.module.get('jsoverlay.NativeJsTypeWithOverlay.$Overlay$impl');
+  NativeJsTypeWithOverlay = goog.module.get('test.foo.NativeJsTypeWithOverlay');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(MainKt, 'jsoverlay.MainKt');
+
+exports = MainKt;
+
+//# sourceMappingURL=MainKt.js.map

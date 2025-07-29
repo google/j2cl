@@ -1,0 +1,25 @@
+goog.module('subnativejstype.MyNativeJsType.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const MyNativeJsType = goog.require('test.foo.MyNativeJsType');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyNativeJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'test.foo.MyNativeJsType');
+
+exports = $Overlay;
+
+//# sourceMappingURL=MyNativeJsType$$Overlay.js.map

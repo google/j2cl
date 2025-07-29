@@ -1,0 +1,50 @@
+goog.module('com.google.test.Inner$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Outer = goog.forwardDeclare('jsinnerclass.Main.Outer$impl');
+
+/**
+ * @final
+ */
+class Inner extends j_l_Object {
+ 
+ constructor(/** !Outer */ $outer_this) {
+  Inner.$clinit();
+  super();
+  /**@type {!Outer} @nodts*/
+  this.$outer_this__jsinnerclass_Main_Outer_Inner;
+  /**@type {number} @nodts*/
+  this.f_b__jsinnerclass_Main_Outer_Inner_ = 0;
+  this.$ctor__jsinnerclass_Main_Outer_Inner__jsinnerclass_Main_Outer__void($outer_this);
+ }
+ /** @nodts */
+ $ctor__jsinnerclass_Main_Outer_Inner__jsinnerclass_Main_Outer__void(/** !Outer */ $outer_this) {
+  this.$outer_this__jsinnerclass_Main_Outer_Inner = $outer_this;
+  this.$ctor__java_lang_Object__void();
+  this.f_b__jsinnerclass_Main_Outer_Inner_ = $outer_this.f_a__jsinnerclass_Main_Outer + 1 | 0;
+ }
+ /** @final @return {number} */
+ getB() {
+  return this.f_b__jsinnerclass_Main_Outer_Inner_;
+ }
+ /** @nodts */
+ static $clinit() {
+  Inner.$clinit = () =>{};
+  Inner.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Inner;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Inner, 'jsinnerclass.Main$Outer$Inner');
+
+exports = Inner;
+
+//# sourceMappingURL=Main$Outer$Inner.js.map

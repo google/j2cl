@@ -1,0 +1,103 @@
+goog.module('staticjsmembers.StaticJsMembers$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Bar = goog.forwardDeclare('foo.Bar');
+let Baz = goog.forwardDeclare('foo.Baz');
+
+/**
+ * @final
+ */
+class StaticJsMembers extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StaticJsMembers} */
+ static $create__() {
+  StaticJsMembers.$clinit();
+  let $instance = new StaticJsMembers();
+  $instance.$ctor__staticjsmembers_StaticJsMembers__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticjsmembers_StaticJsMembers__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_test__void() {
+  StaticJsMembers.fun(1);
+  StaticJsMembers.fun(1);
+  StaticJsMembers.f2(1);
+  StaticJsMembers.f2(1);
+  Math.floor(1.1);
+  Math.floor(1.1);
+  isFinite(1.1);
+  isFinite(1.1);
+  Bar.baz();
+  Bar.baz();
+  Math.max(1, 2);
+  Math.max(1, 2);
+  Math.max(1, 2, 3);
+  Math.max(1, 2, 3);
+  Math.max(1, 2);
+  Math.max(1, 2);
+  let n = StaticJsMembers.$static_field1__staticjsmembers_StaticJsMembers;
+  n = StaticJsMembers.$static_field2__staticjsmembers_StaticJsMembers;
+  n = Math.PI;
+  n = top;
+  n = Bar.field;
+  n = window.top;
+  new Object();
+  new window.Object();
+ }
+ 
+ static fun(/** number */ a) {
+  StaticJsMembers.$clinit();
+ }
+ 
+ static f2(/** number */ a) {
+  StaticJsMembers.$clinit();
+ }
+ /** @return {number} */
+ static get field() {
+  return (StaticJsMembers.$clinit(), StaticJsMembers.$static_field1__staticjsmembers_StaticJsMembers);
+ }
+ 
+ static set field(/** number */ value) {
+  (StaticJsMembers.$clinit(), StaticJsMembers.$static_field1__staticjsmembers_StaticJsMembers = value);
+ }
+ /** @return {number} */
+ static get field2() {
+  return (StaticJsMembers.$clinit(), StaticJsMembers.$static_field2__staticjsmembers_StaticJsMembers);
+ }
+ 
+ static set field2(/** number */ value) {
+  (StaticJsMembers.$clinit(), StaticJsMembers.$static_field2__staticjsmembers_StaticJsMembers = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  StaticJsMembers.$clinit = () =>{};
+  StaticJsMembers.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticJsMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Bar = goog.module.get('foo.Bar');
+ }
+}
+/**@private {number} @nodts*/
+StaticJsMembers.$static_field1__staticjsmembers_StaticJsMembers = 0;
+/**@private {number} @nodts*/
+StaticJsMembers.$static_field2__staticjsmembers_StaticJsMembers = 0;
+$Util.$setClassMetadata(StaticJsMembers, 'staticjsmembers.StaticJsMembers');
+
+exports = StaticJsMembers;
+
+//# sourceMappingURL=StaticJsMembers.js.map

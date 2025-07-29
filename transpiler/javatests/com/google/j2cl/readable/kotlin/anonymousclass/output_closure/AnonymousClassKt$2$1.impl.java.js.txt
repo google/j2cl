@@ -1,0 +1,76 @@
+goog.module('anonymousclass.AnonymousClassKt.$2.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Iterator = goog.require('java.util.Iterator$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $2 = goog.forwardDeclare('anonymousclass.AnonymousClassKt.$2$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+
+/**
+ * @final
+ * @template S
+ * @implements {Iterator<S>}
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!$2<S>} @nodts*/
+  this.$outer_this__anonymousclass_AnonymousClassKt_2_1;
+ }
+ /** @nodts @template S @return {!$1<S>} */
+ static $create__anonymousclass_AnonymousClassKt_2(/** !$2<S> */ $outer_this) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__anonymousclass_AnonymousClassKt_2_1__anonymousclass_AnonymousClassKt_2__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_AnonymousClassKt_2_1__anonymousclass_AnonymousClassKt_2__void(/** !$2<S> */ $outer_this) {
+  this.$outer_this__anonymousclass_AnonymousClassKt_2_1 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {boolean} */
+ m_hasNext__boolean() {
+  return false;
+ }
+ /** @override @nodts @return {S} */
+ m_next__java_lang_Object() {
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null);
+ }
+ /** @override @nodts */
+ m_remove__void() {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} */
+ m_forEachRemaining__java_util_function_Consumer__void(/** !Consumer<?> */ arg0) {
+  Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+  Iterator.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+ }
+}
+Iterator.$markImplementor($1);
+$Util.$setClassMetadata($1, 'anonymousclass.AnonymousClassKt$2$1');
+
+exports = $1;
+
+//# sourceMappingURL=AnonymousClassKt$2$1.js.map
