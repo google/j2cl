@@ -79,6 +79,21 @@ private fun localExtensionFunction(): String {
   return "foo".localFunction("")
 }
 
+private fun localFunctionInInlinedLambda(): String {
+  return StringBuilder()
+    .apply {
+      // TODO(b/434879004): Re-enable when local function is supported inside inlined lambda. The
+      // name of the local function constructed by Kotlinc is `<anonymous>appendTwoDigits`. This
+      // breaks the generated JavaScript.
+      // fun Appendable.appendTwoDigits(number: Int) {
+      //   if (number < 10) append('0')
+      //   append(number)
+      // }
+      // appendTwoDigits(1)
+    }
+    .toString()
+}
+
 class LocalExtensionFunctionInClass {
   fun m(): String {
     fun LocalExtensionFunctionInClass.localFunctionWithImplicitQualifier(): String {
