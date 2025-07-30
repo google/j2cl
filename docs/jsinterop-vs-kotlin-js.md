@@ -4,58 +4,35 @@
 
 ### Exporting to JS
 
-                                            | J2CL JsInterop                                                                       | Kotlin/JS
-:------------------------------------------ | :----------------------------------------------------------------------------------- | :--------
-Export a class/interface to JS              | `@JsType`                                                                            | `@JsExport` (top-level only)
-Export a method to JS                       | `@JsMethod`                                                                          | `@JsExport` (top-level only)
-Export a field to JS                        | `@JsProperty`                                                                        | `@JsExport` (top-level only)
-Don't export a symbol/method/field          | `@JsIgnore`                                                                          | `@JsExport.Ignore`
-Specify a parameter as being optional       | `@JsOptional`                                                                        | Optional argument syntax
-Specify a name for a symbol                 | `name` property on `@JsType`/`@JsMethod`/`@JsProperty`                               | `@JsName`
-Specify the namespace to export a symbol to | A combination of the `namespace` and `name` from `@JsType`/`@JsMethod`/`@JsProperty` | Based on `package` statement, no additional customization allowed
-Define a functional interface               | `@JsFunction`                                                                        | functional type expressions
+|                                             | J2CL JsInterop                                                                       | Kotlin/JS
+| :------------------------------------------ | :----------------------------------------------------------------------------------- | :---------------------------------------------------------------- |
+| Export a class/interface to JS              | `@JsType`                                                                            | `@JsExport` (top-level only)                                      |
+| Export a method to JS                       | `@JsMethod`                                                                          | `@JsExport` (top-level only)                                      |
+| Export a field to JS                        | `@JsProperty`                                                                        | `@JsExport` (top-level only)                                      |
+| Export a field to JS                        | `@JsProperty`                                                                        | `@JsExport` (top-level only)                                      |
+| Don't export a symbol/method/field          | `@JsIgnore`                                                                          | `@JsExport.Ignore`                                                |
+| Specify a parameter as being optional       | `@JsOptional`                                                                        | Optional argument syntax                                          |
+| Specify a name for a symbol                 | `name` property on `@JsType`/`@JsMethod`/`@JsProperty`                               | `@JsName`                                                         |
+| Specify the namespace to export a symbol to | A combination of the `namespace` and `name` from `@JsType`/`@JsMethod`/`@JsProperty` | Based on `package` statement, no additional customization allowed |
+| Define a functional interface               | `@JsFunction`                                                                        | functional type expressions                                       |
 
 ### Calling JS from Java/Kotlin
 
-|                  | J2CL JsInterop                      | Kotlin/JS           |
-| :--------------- | :---------------------------------- | :------------------ |
-| Declare          | `@JsType(isNative = true)`          | `external` keyword  |
-: class/interface  :                                     :                     :
-: that exists in   :                                     :                     :
-: JS               :                                     :                     :
-| Declare method   | `@JsMethod` with `native` keyword   | `external` keyword  |
-: that exists in   :                                     :                     :
-: JS               :                                     :                     :
-| Declare field    | `@JsProperty` with `native` keyword | Assign a property   |
-: that exists in   : on a method, or just a              : to                  :
-: JS               : `@JsProperty` in a `isNative =      : `definedExternally` :
-:                  : true` class.                        : and/or mark the     :
-:                  :                                     : getter and/or       :
-:                  :                                     : setter as           :
-:                  :                                     : `external`          :
-| Specify a        | Add overloads omitting each of the  | Use the optional    |
-: parameter as     : optional arguments                  : argument syntax     :
-: being optional   :                                     : assigning them to   :
-:                  :                                     : `definedExternally` :
-| Specify a        | `name` property on                  | `@JsName`           |
-: different name   : `@JsType`/`@JsMethod`/`@JsProperty` :                     :
-: for a symbol     :                                     :                     :
-| Specify the      | A combination of the `namespace`    | `@JsModule` if      |
-: module to import : and `name` from                     : importing from a    :
-: from             : `@JsType`/`@JsMethod`/`@JsProperty` : CommonJS module, or :
-:                  :                                     : `@JsQualifier` if   :
-:                  :                                     : it exists in the    :
-:                  :                                     : global scope.       :
-| Define an        | `@JsOverlay`                        | Extension functions |
-: overlay method   :                                     :                     :
-: on a JS class    :                                     :                     :
-| Define a         | `@JsFunction`                       | functional type     |
-: functional       :                                     : expressions         :
-: interface        :                                     :                     :
+|                                           | J2CL JsInterop                                                                                 | Kotlin/JS                                                                                        |
+|-------------------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| Declare class/interface that exists in JS | @JsType(isNative = true)                                                                       | external keyword                                                                                 |
+| Declare method that exists in JS          | @JsMethod with native keyword                                                                  | external keyword                                                                                 |
+| Declare field that exists in JS           | @JsProperty with native keyword on a method, or just a @JsProperty in a isNative = true class. | Assign a property to definedExternally and/or mark the getter and/or setter as external          |
+| Specify a parameter as being optional     | Add overloads omitting each of the optional arguments                                          | Use the optional argument syntax assigning them to definedExternally                             |
+| Specify a different name for a symbol     | name property on @JsType/@JsMethod/@JsProperty                                                 | @JsName                                                                                          |
+| Specify the module to import from         | A combination of the namespace and name from @JsType/@JsMethod/@JsProperty                     | @JsModule if importing from a CommonJS module, or @JsQualifier if it exists in the global scope. |
+| Define an overlay method on a JS class    | @JsOverlay                                                                                     | Extension functions                                                                              |
+| Define a functional interface             | @JsFunction                                                                                    | functional type expressions                                                                      |
 
 ## Detailed Comparison
 
-> [!NOTE] Kotlin/JS interop semantics are experimental and may change over time.
+> [!NOTE]
+> Kotlin/JS interop semantics are experimental and may change over time.
 > The analysis here is performed against **Kotlin 2.1.0**.
 
 ### The dynamic type
@@ -97,24 +74,24 @@ to any **top-level** class/interface, property, or function.
 
 It is not allowed to be used on:
 
-*   `expect` declarations
-*   inline functions with reified type parameters
-*   suspend functions
-*   secondary constructors without `@JsName`
-*   extension properties
-*   ~~enum classes~~
-*   annotation classes
+* `expect` declarations
+* inline functions with reified type parameters
+* suspend functions
+* secondary constructors without `@JsName`
+* extension properties
+* ~~enum classes~~
+* annotation classes
 
 And declarations that are exported can only use "exportable" types:
 
-*   `Any`, `String`, `Boolean`, `Byte`, `Short`, `Int`, `Float`, `Double`
-*   `BooleanArray`, `ByteArray`, `ShortArray`, `IntArray`, `FloatArray`,
+* `Any`, `String`, `Boolean`, `Byte`, `Short`, `Int`, `Float`, `Double`
+* `BooleanArray`, `ByteArray`, `ShortArray`, `IntArray`, `FloatArray`,
     `DoubleArray`
-*   `Array<exportable-type>`
-*   Function types with exportable parameters and return types
-*   `external` or `@JsExport` classes and interfaces
-*   Nullable counterparts of types above
-*   `Unit` return type. Must not be nullable
+* `Array<exportable-type>`
+* Function types with exportable parameters and return types
+* `external` or `@JsExport` classes and interfaces
+* Nullable counterparts of types above
+* `Unit` return type. Must not be nullable
 
 #### Constructors
 
@@ -322,9 +299,9 @@ interfaces don't serve much purpose in Java.
 Kotlin does support limited instanceof checks on functional types, namely you
 can perform the following checks:
 
-*   `foo is () -> Unit`
-*   `foo is Function0<Unit>`
-*   `foo is Function0<*>`
+* `foo is () -> Unit`
+* `foo is Function0<Unit>`
+* `foo is Function0<*>`
 
 Any other instanceof check will fail to compile. All of those examples will
 transpile to `typeof foo == 'function'`, so any function will pass the check.
