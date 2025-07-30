@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
-import java.lang.Boolean.getBoolean
 
 /**
  * ObjC annotation renderer.
@@ -124,13 +123,12 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   private fun needsObjCNameAnnotation(
     typeDeclaration: TypeDeclaration,
-    ignoreNewObjcNames: Boolean = false,
+    forceObjCNameAnnotation: Boolean = false,
   ): Boolean =
     environment.ktVisibility(typeDeclaration).needsObjCNameAnnotation &&
       !typeDeclaration.isLocal &&
       !typeDeclaration.isAnonymous &&
-      (!NEW_OBJC_NAMES ||
-        ignoreNewObjcNames ||
+      (forceObjCNameAnnotation ||
         typeDeclaration.objectiveCName != null ||
         typeDeclaration.objectiveCNamePrefix != null)
 
@@ -144,13 +142,13 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
           !enclosingTypeDeclaration.isAnonymous &&
           environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
           !method.isJavaOverride &&
-          (!NEW_OBJC_NAMES || method.descriptor.objectiveCName != null)
+          method.descriptor.objectiveCName != null
       }
 
   private fun needsObjCNameAnnotation(fieldDescriptor: FieldDescriptor): Boolean =
     !hiddenFromObjCMapping.contains(fieldDescriptor) &&
       fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-        needsObjCNameAnnotation(enclosingTypeDeclaration, ignoreNewObjcNames = true) &&
+        needsObjCNameAnnotation(enclosingTypeDeclaration, forceObjCNameAnnotation = true) &&
           environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
       }
 
@@ -162,14 +160,6 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     }
 
   companion object {
-    /**
-     * Controls whether to generate @ObjCName annotations using new semantic designed to be used
-     * with Kotlin compiler plugin.
-     */
-    // TODO(b/413285345): Remove when no longer necessary
-    private val NEW_OBJC_NAMES: Boolean =
-      getBoolean("com.google.j2cl.transpiler.backend.kotlin.newObjCNames")
-
     private fun parameterSource(name: String, valueSource: Source): Source =
       assignment(source(name), valueSource)
   }
