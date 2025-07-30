@@ -59,12 +59,17 @@ public class Main {
   @JsType
   interface I<T> {
     void m(T t, @JsOptional Object o);
+
+    void n(T t, @JsOptional Object o, Object... rest);
   }
 
   @JsType
   static class TemplatedSubtype<T extends String> implements I<T> {
     @Override
     public void m(T t, @JsOptional Object o) {}
+
+    @Override
+    public void n(T t, @JsOptional Object o, Object... rest) {}
   }
 
   @JsType
@@ -75,11 +80,17 @@ public class Main {
 
     @Override
     public void m(String t, @JsOptional Object o) {}
+
+    @Override
+    public void n(String s, @JsOptional Object o, Object... rest) {}
   }
 
   static class NonJsTypeSubtype implements I<String> {
     @Override
     public void m(String t, @JsOptional Object o) {}
+
+    @Override
+    public void n(String s, @JsOptional Object o, Object... rest) {}
   }
 }
 

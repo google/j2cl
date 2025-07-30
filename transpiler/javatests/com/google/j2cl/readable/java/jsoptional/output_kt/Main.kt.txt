@@ -81,21 +81,35 @@ open class Main {
  }
 
  @JsType
- fun interface I<T> {
+ interface I<T> {
   fun m(t: T, @JsOptional o: Any?)
+
+  fun n(t: T, @JsOptional o: Any?, vararg rest: Any?)
  }
 
  @JsType
  open class TemplatedSubtype<T: String?> internal constructor(): I<T> {
   override fun m(t: T, @JsOptional o: Any?) {}
+
+  override fun n(t: T, @JsOptional o: Any?, vararg rest: Any?) {
+   val rest_1: Array<Any?>? = rest as Array<Any?>?
+  }
  }
 
  @JsType
  open inner class SpecializedSubtype constructor(@JsOptional a: Any?): I<String?> {
   override fun m(t: String?, @JsOptional o: Any?) {}
+
+  override fun n(s: String?, @JsOptional o: Any?, vararg rest: Any?) {
+   val rest_1: Array<Any?>? = rest as Array<Any?>?
+  }
  }
 
  open class NonJsTypeSubtype internal constructor(): I<String?> {
   override fun m(t: String?, @JsOptional o: Any?) {}
+
+  override fun n(s: String?, @JsOptional o: Any?, vararg rest: Any?) {
+   val rest_1: Array<Any?>? = rest as Array<Any?>?
+  }
  }
 }

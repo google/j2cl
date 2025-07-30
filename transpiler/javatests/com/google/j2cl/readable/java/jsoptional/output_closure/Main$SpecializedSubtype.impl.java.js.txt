@@ -27,10 +27,17 @@ class SpecializedSubtype extends j_l_Object {
  }
  /** @nodts */
  m_m__java_lang_String__java_lang_Object__void(/** ?string */ t, /** * */ o) {}
+ /** @nodts */
+ m_n__java_lang_String__java_lang_Object__arrayOf_java_lang_Object__void(/** ?string */ s, /** * */ o, /** Array<*> */ rest) {}
  //Bridge method.
  /** @override */
  m(/** ?string */ arg0, /** *= */ arg1) {
   this.m_m__java_lang_String__java_lang_Object__void(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
+ }
+ //Bridge method.
+ /** @override */
+ n(/** ?string */ arg0, /** *= */ arg1, .../** ...* */ arg2) {
+  this.m_n__java_lang_String__java_lang_Object__arrayOf_java_lang_Object__void(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1, arg2);
  }
  /** @nodts */
  static $clinit() {

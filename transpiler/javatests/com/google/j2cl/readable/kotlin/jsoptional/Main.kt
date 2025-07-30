@@ -55,20 +55,28 @@ class Main @JsConstructor constructor(@JsOptional a: String?) {
   @JsType
   interface I<T> {
     fun m(t: T, @JsOptional o: Any?)
+
+    fun n(t: T, @JsOptional o: Any?, vararg rest: Any?)
   }
 
   @JsType
   class TemplatedSubtype<T : String> : I<T> {
     override fun m(t: T, @JsOptional o: Any?) {}
+
+    override fun n(t: T, @JsOptional o: Any?, vararg rest: Any?) {}
   }
 
   @JsType
   @SuppressWarnings("ClassCanBeStatic")
   inner class SpecializedSubtype constructor(@JsOptional a: Any?) : I<String> {
     override fun m(t: String, @JsOptional o: Any?) {}
+
+    override fun n(t: String, @JsOptional o: Any?, vararg rest: Any?) {}
   }
 
   class NonJsTypeSubtype : I<String> {
     override fun m(t: String, @JsOptional o: Any?) {}
+
+    override fun n(t: String, @JsOptional o: Any?, vararg rest: Any?) {}
   }
 }
