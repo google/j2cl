@@ -420,12 +420,20 @@ final class ExpressionTranspiler {
           return false;
         }
 
-        sourceBuilder.append(
-            format(
-                "(struct.new %s (global.get %s) (global.get %s)",
-                environment.getWasmTypeName(newInstance.getTypeDescriptor()),
-                environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor()),
-                environment.getWasmItableGlobalName(newInstance.getTypeDescriptor())));
+        if (environment.isCustomDescriptorsEnabled()) {
+          sourceBuilder.append(
+              format(
+                  "(struct.new %s (global.get %s)",
+                  environment.getWasmTypeName(newInstance.getTypeDescriptor()),
+                  environment.getWasmItableGlobalName(newInstance.getTypeDescriptor())));
+        } else {
+          sourceBuilder.append(
+              format(
+                  "(struct.new %s (global.get %s) (global.get %s)",
+                  environment.getWasmTypeName(newInstance.getTypeDescriptor()),
+                  environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor()),
+                  environment.getWasmItableGlobalName(newInstance.getTypeDescriptor())));
+        }
 
         // TODO(b/178728155): Go back to using struct.new_default once it supports assigning
         //  immutable fields at construction. See b/178738025 for an alternative design
@@ -458,6 +466,12 @@ final class ExpressionTranspiler {
                   render(initialValue);
                 });
 
+        if (environment.isCustomDescriptorsEnabled()) {
+          sourceBuilder.append(
+              format(
+                  " (global.get %s)",
+                  environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor())));
+        }
         sourceBuilder.append(")");
         return false;
       }
@@ -495,12 +509,21 @@ final class ExpressionTranspiler {
                   : TypeDescriptors.get().javaLangObject;
 
           // Retrieve the corresponding class vtable.
-          sourceBuilder.append(
-              format(
-                  "(struct.get %s %s (struct.get %s $vtable",
-                  environment.getWasmVtableTypeName(vtableTypeDescriptor),
-                  environment.getVtableFieldName(target),
-                  environment.getWasmTypeName(vtableTypeDescriptor)));
+          if (environment.isCustomDescriptorsEnabled()) {
+            sourceBuilder.append(
+                format(
+                    "(struct.get %s %s (ref.get_desc %s",
+                    environment.getWasmVtableTypeName(vtableTypeDescriptor),
+                    environment.getVtableFieldName(target),
+                    environment.getWasmTypeName(vtableTypeDescriptor)));
+          } else {
+            sourceBuilder.append(
+                format(
+                    "(struct.get %s %s (struct.get %s $vtable",
+                    environment.getWasmVtableTypeName(vtableTypeDescriptor),
+                    environment.getVtableFieldName(target),
+                    environment.getWasmTypeName(vtableTypeDescriptor)));
+          }
           render(qualifier);
           sourceBuilder.append("))");
         } else {

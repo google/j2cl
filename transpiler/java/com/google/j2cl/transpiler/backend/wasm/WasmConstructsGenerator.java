@@ -275,7 +275,14 @@ public class WasmConstructsGenerator {
   }
 
   private void renderVtableStruct(Type type, Collection<MethodDescriptor> methods) {
-    emitWasmStruct(type, environment::getWasmVtableTypeName, () -> renderVtableEntries(methods));
+    emitWasmStruct(
+        type,
+        environment::getWasmVtableTypeName,
+        // Interface vtables are not custom descriptors.
+        /* descriptorClause= */ type.isInterface()
+            ? null
+            : format("describes %s ", environment.getWasmTypeName(type.getTypeDescriptor())),
+        () -> renderVtableEntries(methods));
   }
 
   private void renderVtableEntries(Collection<MethodDescriptor> methodDescriptors) {
@@ -495,16 +502,26 @@ public class WasmConstructsGenerator {
   }
 
   private void renderTypeStruct(Type type) {
-    emitWasmStruct(type, environment::getWasmTypeName, () -> renderTypeFields(type));
+    emitWasmStruct(
+        type,
+        /* structNamer= */ environment::getWasmTypeName,
+        /* descriptorClause= */ format(
+            "descriptor %s ", environment.getWasmVtableTypeName(type.getTypeDescriptor())),
+        () -> renderTypeFields(type));
   }
 
   private void renderTypeFields(Type type) {
-    // The first field is always the vtable for class dynamic dispatch.
-    builder.newLine();
-    builder.append(
-        format(
-            "(field $vtable (ref %s))",
-            environment.getWasmVtableTypeName(type.getTypeDescriptor())));
+    // Optionally emit a vtable field for class dynamic dispatch.
+    // If custom descriptors are enabled, the vtable is the descriptor for the struct and not
+    // emitted here as a field.
+    if (!environment.isCustomDescriptorsEnabled()) {
+      builder.newLine();
+      builder.append(
+          format(
+              "(field $vtable (ref %s))",
+              environment.getWasmVtableTypeName(type.getTypeDescriptor())));
+    }
+
     // The second field is always the itable for interface method dispatch.
     builder.newLine();
     builder.append(
@@ -574,11 +591,13 @@ public class WasmConstructsGenerator {
 
     emitBeginCodeComment(typeDeclaration, "vtable.init");
     builder.newLine();
-    //  Create the class vtable for this type (which is either a class or an enum) and store it
+    // Create the class vtable for this type (which is either a class or an enum) and store it
     // in a global variable to be able to use it to initialize instance of this class.
     builder.append(
         format(
-            "(global %s (ref %s)",
+            environment.isCustomDescriptorsEnabled()
+                ? "(global %s (ref (exact %s))"
+                : "(global %s (ref %s)",
             environment.getWasmVtableGlobalName(typeDeclaration),
             environment.getWasmVtableTypeName(typeDeclaration)));
     builder.indent();
@@ -813,9 +832,18 @@ public class WasmConstructsGenerator {
     builder.append(")");
   }
 
-  /** Emits a Wasm struct using nominal inheritance. */
+  /**
+   * Emits a Wasm struct using nominal inheritance with an optional descriptor or describes clause.
+   */
   private void emitWasmStruct(
-      Type type, Function<DeclaredTypeDescriptor, String> structNamer, Runnable fieldsRenderer) {
+      Type type,
+      Function<DeclaredTypeDescriptor, String> structNamer,
+      String descriptorClause,
+      Runnable fieldsRenderer) {
+    if (!environment.isCustomDescriptorsEnabled()) {
+      descriptorClause = null;
+    }
+
     WasmTypeLayout wasmType = environment.getWasmTypeLayout(type.getDeclaration());
     boolean hasSuperType = wasmType.getWasmSupertypeLayout() != null;
     builder.newLine();
@@ -824,12 +852,19 @@ public class WasmConstructsGenerator {
       builder.append(
           format("%s ", structNamer.apply(wasmType.getWasmSupertypeLayout().getTypeDescriptor())));
     }
+    if (descriptorClause != null) {
+      builder.append("(");
+      builder.append(descriptorClause);
+    }
     builder.append("(struct");
     builder.indent();
     fieldsRenderer.run();
 
     builder.newLine();
     builder.append(")");
+    if (descriptorClause != null) {
+      builder.append(")");
+    }
     builder.append(")");
     builder.unindent();
     builder.newLine();
