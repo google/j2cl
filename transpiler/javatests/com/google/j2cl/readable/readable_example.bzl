@@ -13,18 +13,17 @@ readable_example(
 """
 
 load("@rules_cc//cc:objc_library.bzl", "objc_library")
+load("//third_party/bazel_rules/rules_kotlin/kotlin/native:kt_ios.bzl", "kt_ios_build_test")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
     "//build_defs:rules.bzl",
     "J2CL_OPTIMIZED_DEFS",
     "j2cl_library",
-    "j2kt_apple_framework",
     "j2wasm_application",
 )
 load("//build_defs/internal_do_not_use:j2cl_common.bzl", "j2cl_common")
 load("//build_defs/internal_do_not_use:j2kt_web_transition.bzl", "j2kt_web_transition")
 load("//build_defs/internal_do_not_use:provider.bzl", "J2clInfo")
-load("@bazel_tools//tools/build_defs/apple:ios.bzl", "ios_build_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@rules_closure//closure:defs.bzl", "closure_js_binary")
 
@@ -145,13 +144,6 @@ def readable_example(
             )
 
         if build_kt_native_readables:
-            j2kt_apple_framework(
-                testonly = 1,
-                name = "readable_j2kt_test_framework",
-                deps = [":readable-j2kt-native"],
-                tags = ["j2kt", "ios", "manual"],
-            )
-
             # Generate a objective library to force parsing of the header file.
             write_file(
                 name = "ParseHeaders_m",
@@ -165,13 +157,13 @@ def readable_example(
                 srcs = ["ParseHeaders.m"],
                 tags = ["j2kt", "ios", "manual"],
                 deps = [
-                    ":readable_j2kt_test_framework",
+                    ":readable-j2kt-native",
                 ],
             )
 
-            ios_build_test(
+            kt_ios_build_test(
                 name = "readable_j2kt_native_build_test",
-                targets = [":readable_j2kt_test_framework", ":ios_parse_headers"],
+                targets = [":ios_parse_headers"],
                 minimum_os_version = "12.0",
                 tags = ["manual", "j2kt", "ios"],
             )
