@@ -1,4 +1,12 @@
 ;;; Code for xplatforeach.NativeJsEnum [type definition]
+(type $xplatforeach.NativeJsEnum (sub $java.lang.Enum (struct
+ (field $vtable (ref $xplatforeach.NativeJsEnum.vtable))
+ (field $itable (ref $xplatforeach.NativeJsEnum.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ ))
+)
 (type $xplatforeach.NativeJsEnum.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -8,25 +16,8 @@
  (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
  ))
 )
-(type $xplatforeach.NativeJsEnum (sub $java.lang.Enum (struct
- (field $vtable (ref $xplatforeach.NativeJsEnum.vtable))
- (field $itable (ref $xplatforeach.NativeJsEnum.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
- (field $ordinal@java.lang.Enum (mut i32))
- ))
-)
 
 ;;; Code for xplatforeach.SomeJsEnum [type definition]
-(type $xplatforeach.SomeJsEnum.vtable (sub $java.lang.Enum.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
- ))
-)
 (type $xplatforeach.SomeJsEnum (sub $java.lang.Enum (struct
  (field $vtable (ref $xplatforeach.SomeJsEnum.vtable))
  (field $itable (ref $xplatforeach.SomeJsEnum.itable))
@@ -36,19 +27,28 @@
  (field $value@xplatforeach.SomeJsEnum (mut i32))
  ))
 )
+(type $xplatforeach.SomeJsEnum.vtable (sub $java.lang.Enum.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ ))
+)
 
 ;;; Code for xplatforeach.ForEachStatements [type definition]
+(type $xplatforeach.ForEachStatements (sub $java.lang.Object (struct
+ (field $vtable (ref $xplatforeach.ForEachStatements.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $xplatforeach.ForEachStatements.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
-(type $xplatforeach.ForEachStatements (sub $java.lang.Object (struct
- (field $vtable (ref $xplatforeach.ForEachStatements.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

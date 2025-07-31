@@ -1,11 +1,4 @@
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [type definition]
-(type $innerclasswithconstructor.InnerClassWithConstructor.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
 (type $innerclasswithconstructor.InnerClassWithConstructor (sub $java.lang.Object (struct
  (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.vtable))
  (field $itable (ref $itable))
@@ -13,15 +6,15 @@
  (field $a@innerclasswithconstructor.InnerClassWithConstructor (mut i32))
  ))
 )
-
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [type definition]
-(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (sub $java.lang.Object.vtable (struct
+(type $innerclasswithconstructor.InnerClassWithConstructor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [type definition]
 (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (sub $java.lang.Object (struct
  (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable))
  (field $itable (ref $itable))
@@ -30,15 +23,15 @@
  (field $b@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (mut i32))
  ))
 )
-
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor [type definition]
-(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.vtable (sub $java.lang.Object.vtable (struct
+(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor [type definition]
 (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor (sub $java.lang.Object (struct
  (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.vtable))
  (field $itable (ref $itable))
@@ -47,21 +40,28 @@
  (field $b@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor (mut i32))
  ))
 )
-
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor [type definition]
-(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor.vtable (sub $java.lang.Object.vtable (struct
+(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithSingleConstructor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor [type definition]
 (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (sub $java.lang.Object (struct
  (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $$outer_this@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor)))
  (field $i@innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor (mut i32))
+ ))
+)
+(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClassWithFieldAfterConstructor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
 

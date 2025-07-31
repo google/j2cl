@@ -18,17 +18,17 @@
 )
 
 ;;; Code for interfaces.AccidentalOverride [type definition]
+(type $interfaces.AccidentalOverride (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.AccidentalOverride.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $interfaces.AccidentalOverride.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
-(type $interfaces.AccidentalOverride (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.AccidentalOverride.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
@@ -41,6 +41,12 @@
 )
 
 ;;; Code for interfaces.AccidentalOverride.A [type definition]
+(type $interfaces.AccidentalOverride.A (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.AccidentalOverride.A.vtable))
+ (field $itable (ref $interfaces.AccidentalOverride.A.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $interfaces.AccidentalOverride.A.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -50,14 +56,14 @@
  (field $m_foo__interfaces_AccidentalOverride_Right__void (ref $function.m_foo__interfaces_AccidentalOverride_Right__void))
  ))
 )
-(type $interfaces.AccidentalOverride.A (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.AccidentalOverride.A.vtable))
- (field $itable (ref $interfaces.AccidentalOverride.A.itable))
+
+;;; Code for interfaces.Main [type definition]
+(type $interfaces.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for interfaces.Main [type definition]
 (type $interfaces.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -66,14 +72,14 @@
  (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
  ))
 )
-(type $interfaces.Main (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.Main.vtable))
- (field $itable (ref $itable))
+
+;;; Code for interfaces.Main.Interface.$LambdaAdaptor [type definition]
+(type $interfaces.Main.Interface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.Interface.$LambdaAdaptor.vtable))
+ (field $itable (ref $interfaces.Main.Interface.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for interfaces.Main.Interface.$LambdaAdaptor [type definition]
 (type $interfaces.Main.Interface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -81,12 +87,6 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
- ))
-)
-(type $interfaces.Main.Interface.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.Main.Interface.$LambdaAdaptor.vtable))
- (field $itable (ref $interfaces.Main.Interface.$LambdaAdaptor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
@@ -99,6 +99,12 @@
 )
 
 ;;; Code for interfaces.AccidentalOverride.B [type definition]
+(type $interfaces.AccidentalOverride.B (sub $interfaces.AccidentalOverride.A (struct
+ (field $vtable (ref $interfaces.AccidentalOverride.B.vtable))
+ (field $itable (ref $interfaces.AccidentalOverride.B.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $interfaces.AccidentalOverride.B.vtable (sub $interfaces.AccidentalOverride.A.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -110,14 +116,14 @@
  (field $m_foo__interfaces_AccidentalOverride_Bottom__void (ref $function.m_foo__interfaces_AccidentalOverride_Bottom__void))
  ))
 )
-(type $interfaces.AccidentalOverride.B (sub $interfaces.AccidentalOverride.A (struct
- (field $vtable (ref $interfaces.AccidentalOverride.B.vtable))
- (field $itable (ref $interfaces.AccidentalOverride.B.itable))
+
+;;; Code for interfaces.AccidentalOverride.C [type definition]
+(type $interfaces.AccidentalOverride.C (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.AccidentalOverride.C.vtable))
+ (field $itable (ref $interfaces.AccidentalOverride.C.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for interfaces.AccidentalOverride.C [type definition]
 (type $interfaces.AccidentalOverride.C.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -129,14 +135,14 @@
  (field $m_foo__interfaces_AccidentalOverride_Right__void (ref $function.m_foo__interfaces_AccidentalOverride_Right__void))
  ))
 )
-(type $interfaces.AccidentalOverride.C (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.AccidentalOverride.C.vtable))
- (field $itable (ref $interfaces.AccidentalOverride.C.itable))
+
+;;; Code for interfaces.Main.SubInterface.$LambdaAdaptor [type definition]
+(type $interfaces.Main.SubInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.SubInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $interfaces.Main.SubInterface.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for interfaces.Main.SubInterface.$LambdaAdaptor [type definition]
 (type $interfaces.Main.SubInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -147,14 +153,15 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-(type $interfaces.Main.SubInterface.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.Main.SubInterface.$LambdaAdaptor.vtable))
- (field $itable (ref $interfaces.Main.SubInterface.$LambdaAdaptor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for interfaces.Main.Implementor [type definition]
+(type $interfaces.Main.Implementor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.Implementor.vtable))
+ (field $itable (ref $interfaces.Main.Implementor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
+ ))
+)
 (type $interfaces.Main.Implementor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -165,15 +172,15 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-(type $interfaces.Main.Implementor (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.Main.Implementor.vtable))
- (field $itable (ref $interfaces.Main.Implementor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
- ))
-)
 
 ;;; Code for interfaces.Main.AbstractImplementor [type definition]
+(type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
+ (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable))
+ (field $itable (ref $interfaces.Main.AbstractImplementor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
+ ))
+)
 (type $interfaces.Main.AbstractImplementor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -184,15 +191,16 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-(type $interfaces.Main.AbstractImplementor (sub $java.lang.Object (struct
- (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable))
- (field $itable (ref $interfaces.Main.AbstractImplementor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
- ))
-)
 
 ;;; Code for interfaces.Main.EnumImplementor [type definition]
+(type $interfaces.Main.EnumImplementor (sub $java.lang.Enum (struct
+ (field $vtable (ref $interfaces.Main.EnumImplementor.vtable))
+ (field $itable (ref $interfaces.Main.EnumImplementor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ ))
+)
 (type $interfaces.Main.EnumImplementor.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -203,14 +211,6 @@
  (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
- ))
-)
-(type $interfaces.Main.EnumImplementor (sub $java.lang.Enum (struct
- (field $vtable (ref $interfaces.Main.EnumImplementor.vtable))
- (field $itable (ref $interfaces.Main.EnumImplementor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
- (field $ordinal@java.lang.Enum (mut i32))
  ))
 )
 

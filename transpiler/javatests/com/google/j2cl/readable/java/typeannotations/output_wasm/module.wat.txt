@@ -7,6 +7,12 @@
 )
 
 ;;; Code for typeannotations.AbstractType [type definition]
+(type $typeannotations.AbstractType (sub $java.lang.Object (struct
+ (field $vtable (ref $typeannotations.AbstractType.vtable))
+ (field $itable (ref $typeannotations.AbstractType.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $typeannotations.AbstractType.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -17,14 +23,14 @@
  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
  ))
 )
-(type $typeannotations.AbstractType (sub $java.lang.Object (struct
- (field $vtable (ref $typeannotations.AbstractType.vtable))
- (field $itable (ref $typeannotations.AbstractType.itable))
+
+;;; Code for typeannotations.AbstractTypeNonNull [type definition]
+(type $typeannotations.AbstractTypeNonNull (sub $java.lang.Object (struct
+ (field $vtable (ref $typeannotations.AbstractTypeNonNull.vtable))
+ (field $itable (ref $typeannotations.AbstractTypeNonNull.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for typeannotations.AbstractTypeNonNull [type definition]
 (type $typeannotations.AbstractTypeNonNull.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -35,14 +41,14 @@
  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
  ))
 )
-(type $typeannotations.AbstractTypeNonNull (sub $java.lang.Object (struct
- (field $vtable (ref $typeannotations.AbstractTypeNonNull.vtable))
- (field $itable (ref $typeannotations.AbstractTypeNonNull.itable))
+
+;;; Code for typeannotations.Parent [type definition]
+(type $typeannotations.Parent (sub $java.lang.Object (struct
+ (field $vtable (ref $typeannotations.Parent.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for typeannotations.Parent [type definition]
 (type $typeannotations.Parent.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -52,14 +58,14 @@
  (field $m_m__java_util_List__typeannotations_Parent__java_util_List (ref $function.m_m__java_util_List__typeannotations_Parent__java_util_List))
  ))
 )
-(type $typeannotations.Parent (sub $java.lang.Object (struct
- (field $vtable (ref $typeannotations.Parent.vtable))
+
+;;; Code for typeannotations.TypeAnnotations [type definition]
+(type $typeannotations.TypeAnnotations (sub $java.lang.Object (struct
+ (field $vtable (ref $typeannotations.TypeAnnotations.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for typeannotations.TypeAnnotations [type definition]
 (type $typeannotations.TypeAnnotations.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -67,14 +73,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-(type $typeannotations.TypeAnnotations (sub $java.lang.Object (struct
- (field $vtable (ref $typeannotations.TypeAnnotations.vtable))
- (field $itable (ref $itable))
+
+;;; Code for typeannotations.ChildWithNullableParent [type definition]
+(type $typeannotations.ChildWithNullableParent (sub $typeannotations.Parent (struct
+ (field $vtable (ref $typeannotations.ChildWithNullableParent.vtable))
+ (field $itable (ref $typeannotations.ChildWithNullableParent.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for typeannotations.ChildWithNullableParent [type definition]
 (type $typeannotations.ChildWithNullableParent.vtable (sub $typeannotations.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -87,14 +93,14 @@
  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
  ))
 )
-(type $typeannotations.ChildWithNullableParent (sub $typeannotations.Parent (struct
- (field $vtable (ref $typeannotations.ChildWithNullableParent.vtable))
- (field $itable (ref $typeannotations.ChildWithNullableParent.itable))
+
+;;; Code for typeannotations.ChildWithNonNullableParent [type definition]
+(type $typeannotations.ChildWithNonNullableParent (sub $typeannotations.Parent (struct
+ (field $vtable (ref $typeannotations.ChildWithNonNullableParent.vtable))
+ (field $itable (ref $typeannotations.ChildWithNonNullableParent.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for typeannotations.ChildWithNonNullableParent [type definition]
 (type $typeannotations.ChildWithNonNullableParent.vtable (sub $typeannotations.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -105,12 +111,6 @@
  (field $m_m__java_lang_String__java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_String__java_lang_Object__java_lang_Object))
  (field $m_m__java_util_List__java_lang_Object__java_util_List (ref $function.m_m__java_util_List__java_lang_Object__java_util_List))
  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
- ))
-)
-(type $typeannotations.ChildWithNonNullableParent (sub $typeannotations.Parent (struct
- (field $vtable (ref $typeannotations.ChildWithNonNullableParent.vtable))
- (field $itable (ref $typeannotations.ChildWithNonNullableParent.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

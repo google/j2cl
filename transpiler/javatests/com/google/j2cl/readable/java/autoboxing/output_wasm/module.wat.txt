@@ -1,4 +1,10 @@
 ;;; Code for autoboxing.AutoBoxing [type definition]
+(type $autoboxing.AutoBoxing (sub $java.lang.Object (struct
+ (field $vtable (ref $autoboxing.AutoBoxing.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $autoboxing.AutoBoxing.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -35,21 +41,8 @@
  (field $m_unbox__java_lang_Short__short (ref $function.m_unbox__java_lang_Short__short))
  ))
 )
-(type $autoboxing.AutoBoxing (sub $java.lang.Object (struct
- (field $vtable (ref $autoboxing.AutoBoxing.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for autoboxing.AutoBoxing.Ref [type definition]
-(type $autoboxing.AutoBoxing.Ref.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
 (type $autoboxing.AutoBoxing.Ref (sub $java.lang.Object (struct
  (field $vtable (ref $autoboxing.AutoBoxing.Ref.vtable))
  (field $itable (ref $itable))
@@ -57,8 +50,21 @@
  (field $field@autoboxing.AutoBoxing.Ref (mut (ref null $java.lang.Object)))
  ))
 )
+(type $autoboxing.AutoBoxing.Ref.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for autoboxing.AutoBoxing.1Local [type definition]
+(type $autoboxing.AutoBoxing.1Local (sub $java.lang.Object (struct
+ (field $vtable (ref $autoboxing.AutoBoxing.1Local.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $autoboxing.AutoBoxing.1Local.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -67,14 +73,14 @@
  (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
  ))
 )
-(type $autoboxing.AutoBoxing.1Local (sub $java.lang.Object (struct
- (field $vtable (ref $autoboxing.AutoBoxing.1Local.vtable))
+
+;;; Code for autoboxing.AutoBoxing.2Local [type definition]
+(type $autoboxing.AutoBoxing.2Local (sub $java.lang.Object (struct
+ (field $vtable (ref $autoboxing.AutoBoxing.2Local.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autoboxing.AutoBoxing.2Local [type definition]
 (type $autoboxing.AutoBoxing.2Local.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -83,27 +89,21 @@
  (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
  ))
 )
-(type $autoboxing.AutoBoxing.2Local (sub $java.lang.Object (struct
- (field $vtable (ref $autoboxing.AutoBoxing.2Local.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for autoboxing.AutoBoxing.1Supplier [type definition]
+(type $autoboxing.AutoBoxing.1Supplier (sub $java.lang.Object (struct
+ (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@autoboxing.AutoBoxing.1Supplier (mut (ref null $autoboxing.AutoBoxing)))
+ ))
+)
 (type $autoboxing.AutoBoxing.1Supplier.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_get__java_lang_Object_$pp_autoboxing (ref $function.m_get__java_lang_Object_$pp_autoboxing))
- ))
-)
-(type $autoboxing.AutoBoxing.1Supplier (sub $java.lang.Object (struct
- (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@autoboxing.AutoBoxing.1Supplier (mut (ref null $autoboxing.AutoBoxing)))
  ))
 )
 

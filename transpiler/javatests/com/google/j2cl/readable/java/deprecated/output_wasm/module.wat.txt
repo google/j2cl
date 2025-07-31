@@ -11,6 +11,13 @@
 )
 
 ;;; Code for deprecated.DeprecatedExample [type definition]
+(type $deprecated.DeprecatedExample (sub $java.lang.Object (struct
+ (field $vtable (ref $deprecated.DeprecatedExample.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $deprecatedInstanceField@deprecated.DeprecatedExample (mut (ref null $java.lang.String)))
+ ))
+)
 (type $deprecated.DeprecatedExample.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -19,15 +26,14 @@
  (field $m_deprecatedInstanceMethod__java_lang_String__void (ref $function.m_deprecatedInstanceMethod__java_lang_String__void))
  ))
 )
-(type $deprecated.DeprecatedExample (sub $java.lang.Object (struct
- (field $vtable (ref $deprecated.DeprecatedExample.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $deprecatedInstanceField@deprecated.DeprecatedExample (mut (ref null $java.lang.String)))
- ))
-)
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor [type definition]
+(type $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -36,14 +42,14 @@
  (field $m_doAThing__int__void (ref $function.m_doAThing__int__void))
  ))
 )
-(type $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor.vtable))
- (field $itable (ref $deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor.itable))
+
+;;; Code for deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor [type definition]
+(type $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor [type definition]
 (type $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -52,14 +58,16 @@
  (field $m_doAThing__java_lang_Object__void (ref $function.m_doAThing__java_lang_Object__void))
  ))
 )
-(type $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor.vtable))
- (field $itable (ref $deprecated.DeprecatedExample.DeprecatedJsFunction.$LambdaAdaptor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [type definition]
+(type $deprecated.DeprecatedExample.DeprecatedEnum (sub $java.lang.Enum (struct
+ (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable))
+ (field $itable (ref $deprecated.DeprecatedExample.DeprecatedEnum.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ ))
+)
 (type $deprecated.DeprecatedExample.DeprecatedEnum.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -69,16 +77,16 @@
  (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
  ))
 )
-(type $deprecated.DeprecatedExample.DeprecatedEnum (sub $java.lang.Enum (struct
- (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable))
- (field $itable (ref $deprecated.DeprecatedExample.DeprecatedEnum.itable))
+
+;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [type definition]
+(type $deprecated.DeprecatedExample.DeprecatedJsEnum (sub $java.lang.Enum (struct
+ (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable))
+ (field $itable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
  (field $ordinal@java.lang.Enum (mut i32))
  ))
 )
-
-;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [type definition]
 (type $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -86,14 +94,6 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
  (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
- ))
-)
-(type $deprecated.DeprecatedExample.DeprecatedJsEnum (sub $java.lang.Enum (struct
- (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable))
- (field $itable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
- (field $ordinal@java.lang.Enum (mut i32))
  ))
 )
 

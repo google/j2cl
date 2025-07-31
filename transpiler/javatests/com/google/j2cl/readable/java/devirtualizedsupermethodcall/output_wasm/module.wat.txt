@@ -1,4 +1,10 @@
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [type definition]
+(type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (sub $java.lang.Object (struct
+ (field $vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -6,14 +12,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-(type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (sub $java.lang.Object (struct
- (field $vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable))
+
+;;; Code for devirtualizedsupermethodcall.Main [type definition]
+(type $devirtualizedsupermethodcall.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $devirtualizedsupermethodcall.Main.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for devirtualizedsupermethodcall.Main [type definition]
 (type $devirtualizedsupermethodcall.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -22,14 +28,14 @@
  (field $m_main__void (ref $function.m_main__void))
  ))
 )
-(type $devirtualizedsupermethodcall.Main (sub $java.lang.Object (struct
- (field $vtable (ref $devirtualizedsupermethodcall.Main.vtable))
- (field $itable (ref $itable))
+
+;;; Code for devirtualizedsupermethodcall.SubNumber [type definition]
+(type $devirtualizedsupermethodcall.SubNumber (sub $java.lang.Number (struct
+ (field $vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable))
+ (field $itable (ref $devirtualizedsupermethodcall.SubNumber.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for devirtualizedsupermethodcall.SubNumber [type definition]
 (type $devirtualizedsupermethodcall.SubNumber.vtable (sub $java.lang.Number.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -41,12 +47,6 @@
  (field $m_intValue__int (ref $function.m_intValue__int))
  (field $m_longValue__long (ref $function.m_longValue__long))
  (field $m_shortValue__short (ref $function.m_shortValue__short))
- ))
-)
-(type $devirtualizedsupermethodcall.SubNumber (sub $java.lang.Number (struct
- (field $vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable))
- (field $itable (ref $devirtualizedsupermethodcall.SubNumber.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

@@ -243,13 +243,16 @@ public class WasmConstructsGenerator {
       return;
     }
 
-    renderTypeVtableStruct(type);
     if (!type.isInterface()) {
       renderTypeStruct(type);
       if (!isModular) {
         renderClassItableStruct(type);
       }
     }
+
+    // Custom descriptors refer to the type struct, so must be rendered afterwards. The forward
+    // reference from the type struct to the descriptor is allowed.
+    renderTypeVtableStruct(type);
   }
 
   private void renderClassItableStruct(Type type) {

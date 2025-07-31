@@ -11,6 +11,12 @@
 )
 
 ;;; Code for autovalue.AutoValueJsType [type definition]
+(type $autovalue.AutoValueJsType (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueJsType.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $autovalue.AutoValueJsType.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -20,14 +26,14 @@
  (field $m_getWithJsMethod__int_$pp_autovalue (ref $function.m_getWithJsMethod__int_$pp_autovalue))
  ))
 )
-(type $autovalue.AutoValueJsType (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.AutoValueJsType.vtable))
+
+;;; Code for autovalue.AutoValueWithBuilder [type definition]
+(type $autovalue.AutoValueWithBuilder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueWithBuilder.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.AutoValueWithBuilder [type definition]
 (type $autovalue.AutoValueWithBuilder.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -38,14 +44,14 @@
  (field $m_toBuilder__autovalue_AutoValueWithBuilder_Builder (ref $function.m_toBuilder__autovalue_AutoValueWithBuilder_Builder))
  ))
 )
-(type $autovalue.AutoValueWithBuilder (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.AutoValueWithBuilder.vtable))
+
+;;; Code for autovalue.AutoValueWithBuilder.Builder [type definition]
+(type $autovalue.AutoValueWithBuilder.Builder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueWithBuilder.Builder.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.AutoValueWithBuilder.Builder [type definition]
 (type $autovalue.AutoValueWithBuilder.Builder.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -56,14 +62,14 @@
  (field $m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder))
  ))
 )
-(type $autovalue.AutoValueWithBuilder.Builder (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.AutoValueWithBuilder.Builder.vtable))
+
+;;; Code for autovalue.AutoValueWithExtensions [type definition]
+(type $autovalue.AutoValueWithExtensions (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueWithExtensions.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.AutoValueWithExtensions [type definition]
 (type $autovalue.AutoValueWithExtensions.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -75,21 +81,8 @@
  (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
  ))
 )
-(type $autovalue.AutoValueWithExtensions (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.AutoValueWithExtensions.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for autovalue.Parent [type definition]
-(type $autovalue.Parent.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
 (type $autovalue.Parent (sub $java.lang.Object (struct
  (field $vtable (ref $autovalue.Parent.vtable))
  (field $itable (ref $itable))
@@ -97,8 +90,21 @@
  (field $userField1@autovalue.Parent (mut i32))
  ))
 )
+(type $autovalue.Parent.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for autovalue.AutoValueWithGenerics [type definition]
+(type $autovalue.AutoValueWithGenerics (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.AutoValueWithGenerics.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $autovalue.AutoValueWithGenerics.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -107,14 +113,14 @@
  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
  ))
 )
-(type $autovalue.AutoValueWithGenerics (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.AutoValueWithGenerics.vtable))
+
+;;; Code for autovalue.BaseClass [type definition]
+(type $autovalue.BaseClass (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.BaseClass.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.BaseClass [type definition]
 (type $autovalue.BaseClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -123,14 +129,14 @@
  (field $m_getBaseField__int (ref $function.m_getBaseField__int))
  ))
 )
-(type $autovalue.BaseClass (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.BaseClass.vtable))
+
+;;; Code for autovalue.DefaultConstructorAutoValue [type definition]
+(type $autovalue.DefaultConstructorAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.DefaultConstructorAutoValue.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.DefaultConstructorAutoValue [type definition]
 (type $autovalue.DefaultConstructorAutoValue.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -139,14 +145,14 @@
  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
  ))
 )
-(type $autovalue.DefaultConstructorAutoValue (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.DefaultConstructorAutoValue.vtable))
+
+;;; Code for autovalue.DefaultConstructorAutoValue.Builder [type definition]
+(type $autovalue.DefaultConstructorAutoValue.Builder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.DefaultConstructorAutoValue.Builder.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.DefaultConstructorAutoValue.Builder [type definition]
 (type $autovalue.DefaultConstructorAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -156,14 +162,15 @@
  (field $m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue (ref $function.m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue))
  ))
 )
-(type $autovalue.DefaultConstructorAutoValue.Builder (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.DefaultConstructorAutoValue.Builder.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue [type definition]
+(type $autovalue.DefaultNonEmptyConstructorAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field@autovalue.DefaultNonEmptyConstructorAutoValue (mut i32))
+ ))
+)
 (type $autovalue.DefaultNonEmptyConstructorAutoValue.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -172,15 +179,15 @@
  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
  ))
 )
-(type $autovalue.DefaultNonEmptyConstructorAutoValue (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $field@autovalue.DefaultNonEmptyConstructorAutoValue (mut i32))
- ))
-)
 
 ;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue.Builder [type definition]
+(type $autovalue.DefaultNonEmptyConstructorAutoValue.Builder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut i32))
+ ))
+)
 (type $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -190,15 +197,14 @@
  (field $m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (ref $function.m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
  ))
 )
-(type $autovalue.DefaultNonEmptyConstructorAutoValue.Builder (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $field@autovalue.DefaultNonEmptyConstructorAutoValue.Builder (mut i32))
- ))
-)
 
 ;;; Code for autovalue.EmptyAutoValue [type definition]
+(type $autovalue.EmptyAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.EmptyAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $autovalue.EmptyAutoValue.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -206,14 +212,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-(type $autovalue.EmptyAutoValue (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.EmptyAutoValue.vtable))
+
+;;; Code for autovalue.EmptyAutoValue.Builder [type definition]
+(type $autovalue.EmptyAutoValue.Builder (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.EmptyAutoValue.Builder.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.EmptyAutoValue.Builder [type definition]
 (type $autovalue.EmptyAutoValue.Builder.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -222,14 +228,14 @@
  (field $m_build__autovalue_EmptyAutoValue (ref $function.m_build__autovalue_EmptyAutoValue))
  ))
 )
-(type $autovalue.EmptyAutoValue.Builder (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.EmptyAutoValue.Builder.vtable))
- (field $itable (ref $itable))
+
+;;; Code for autovalue.ImplementingAutoValue [type definition]
+(type $autovalue.ImplementingAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.ImplementingAutoValue.vtable))
+ (field $itable (ref $autovalue.ImplementingAutoValue.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.ImplementingAutoValue [type definition]
 (type $autovalue.ImplementingAutoValue.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -238,14 +244,14 @@
  (field $m_getFoo__java_lang_String (ref $function.m_getFoo__java_lang_String))
  ))
 )
-(type $autovalue.ImplementingAutoValue (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.ImplementingAutoValue.vtable))
- (field $itable (ref $autovalue.ImplementingAutoValue.itable))
+
+;;; Code for autovalue.SomeInterface.$LambdaAdaptor [type definition]
+(type $autovalue.SomeInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.SomeInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $autovalue.SomeInterface.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.SomeInterface.$LambdaAdaptor [type definition]
 (type $autovalue.SomeInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -254,14 +260,17 @@
  (field $m_getFoo__java_lang_String (ref $function.m_getFoo__java_lang_String))
  ))
 )
-(type $autovalue.SomeInterface.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.SomeInterface.$LambdaAdaptor.vtable))
- (field $itable (ref $autovalue.SomeInterface.$LambdaAdaptor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for autovalue.SimpleAutoValue [type definition]
+(type $autovalue.SimpleAutoValue (sub $java.lang.Object (struct
+ (field $vtable (ref $autovalue.SimpleAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field1@autovalue.SimpleAutoValue (mut (ref null $autovalue.EmptyAutoValue)))
+ (field $field2@autovalue.SimpleAutoValue (mut (ref null $autovalue.EmptyAutoValue)))
+ (field $intField@autovalue.SimpleAutoValue (mut i32))
+ ))
+)
 (type $autovalue.SimpleAutoValue.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -275,17 +284,16 @@
  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
  ))
 )
-(type $autovalue.SimpleAutoValue (sub $java.lang.Object (struct
- (field $vtable (ref $autovalue.SimpleAutoValue.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $field1@autovalue.SimpleAutoValue (mut (ref null $autovalue.EmptyAutoValue)))
- (field $field2@autovalue.SimpleAutoValue (mut (ref null $autovalue.EmptyAutoValue)))
- (field $intField@autovalue.SimpleAutoValue (mut i32))
- ))
-)
 
 ;;; Code for autovalue.$$AutoValue_AutoValueWithExtensions [type definition]
+(type $autovalue.$$AutoValue_AutoValueWithExtensions (sub $autovalue.AutoValueWithExtensions (struct
+ (field $vtable (ref $autovalue.$$AutoValue_AutoValueWithExtensions.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
+ (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
+ ))
+)
 (type $autovalue.$$AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.AutoValueWithExtensions.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -297,16 +305,16 @@
  (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
  ))
 )
-(type $autovalue.$$AutoValue_AutoValueWithExtensions (sub $autovalue.AutoValueWithExtensions (struct
- (field $vtable (ref $autovalue.$$AutoValue_AutoValueWithExtensions.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
- (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_AutoValueJsType [type definition]
+(type $autovalue.AutoValue_AutoValueJsType (sub $autovalue.AutoValueJsType (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueJsType.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $field@autovalue.AutoValue_AutoValueJsType (mut i32))
+ (field $withJsMethod@autovalue.AutoValue_AutoValueJsType (mut i32))
+ ))
+)
 (type $autovalue.AutoValue_AutoValueJsType.vtable (sub $autovalue.AutoValueJsType.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -316,16 +324,16 @@
  (field $m_getWithJsMethod__int_$pp_autovalue (ref $function.m_getWithJsMethod__int_$pp_autovalue))
  ))
 )
-(type $autovalue.AutoValue_AutoValueJsType (sub $autovalue.AutoValueJsType (struct
- (field $vtable (ref $autovalue.AutoValue_AutoValueJsType.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $field@autovalue.AutoValue_AutoValueJsType (mut i32))
- (field $withJsMethod@autovalue.AutoValue_AutoValueJsType (mut i32))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_AutoValueWithBuilder [type definition]
+(type $autovalue.AutoValue_AutoValueWithBuilder (sub $autovalue.AutoValueWithBuilder (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_AutoValueWithBuilder (mut i8))
+ (field $nullableField@autovalue.AutoValue_AutoValueWithBuilder (mut (ref null $java.lang.Double)))
+ ))
+)
 (type $autovalue.AutoValue_AutoValueWithBuilder.vtable (sub $autovalue.AutoValueWithBuilder.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -336,16 +344,17 @@
  (field $m_toBuilder__autovalue_AutoValueWithBuilder_Builder (ref $function.m_toBuilder__autovalue_AutoValueWithBuilder_Builder))
  ))
 )
-(type $autovalue.AutoValue_AutoValueWithBuilder (sub $autovalue.AutoValueWithBuilder (struct
- (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $booleanField@autovalue.AutoValue_AutoValueWithBuilder (mut i8))
- (field $nullableField@autovalue.AutoValue_AutoValueWithBuilder (mut (ref null $java.lang.Double)))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_AutoValueWithBuilder.Builder [type definition]
+(type $autovalue.AutoValue_AutoValueWithBuilder.Builder (sub $autovalue.AutoValueWithBuilder.Builder (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i8))
+ (field $nullableField@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut (ref null $java.lang.Double)))
+ (field $set$0@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i8))
+ ))
+)
 (type $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable (sub $autovalue.AutoValueWithBuilder.Builder.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -356,17 +365,15 @@
  (field $m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder (ref $function.m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder))
  ))
 )
-(type $autovalue.AutoValue_AutoValueWithBuilder.Builder (sub $autovalue.AutoValueWithBuilder.Builder (struct
- (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $booleanField@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i8))
- (field $nullableField@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut (ref null $java.lang.Double)))
- (field $set$0@autovalue.AutoValue_AutoValueWithBuilder.Builder (mut i8))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_AutoValueWithGenerics [type definition]
+(type $autovalue.AutoValue_AutoValueWithGenerics (sub $autovalue.AutoValueWithGenerics (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithGenerics.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_AutoValueWithGenerics (mut i8))
+ ))
+)
 (type $autovalue.AutoValue_AutoValueWithGenerics.vtable (sub $autovalue.AutoValueWithGenerics.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -375,15 +382,15 @@
  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
  ))
 )
-(type $autovalue.AutoValue_AutoValueWithGenerics (sub $autovalue.AutoValueWithGenerics (struct
- (field $vtable (ref $autovalue.AutoValue_AutoValueWithGenerics.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $booleanField@autovalue.AutoValue_AutoValueWithGenerics (mut i8))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue [type definition]
+(type $autovalue.AutoValue_DefaultConstructorAutoValue (sub $autovalue.DefaultConstructorAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue (mut i8))
+ ))
+)
 (type $autovalue.AutoValue_DefaultConstructorAutoValue.vtable (sub $autovalue.DefaultConstructorAutoValue.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -392,15 +399,16 @@
  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
  ))
 )
-(type $autovalue.AutoValue_DefaultConstructorAutoValue (sub $autovalue.DefaultConstructorAutoValue (struct
- (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue (mut i8))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_DefaultConstructorAutoValue.Builder [type definition]
+(type $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (sub $autovalue.DefaultConstructorAutoValue.Builder (struct
+ (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i8))
+ (field $set$0@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i8))
+ ))
+)
 (type $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable (sub $autovalue.DefaultConstructorAutoValue.Builder.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -410,24 +418,8 @@
  (field $m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue (ref $function.m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue))
  ))
 )
-(type $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (sub $autovalue.DefaultConstructorAutoValue.Builder (struct
- (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $booleanField@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i8))
- (field $set$0@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (mut i8))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue [type definition]
-(type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable (sub $autovalue.DefaultNonEmptyConstructorAutoValue.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
- ))
-)
 (type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (sub $autovalue.DefaultNonEmptyConstructorAutoValue (struct
  (field $vtable (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable))
  (field $itable (ref $itable))
@@ -436,17 +428,16 @@
  (field $booleanField@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (mut i8))
  ))
 )
-
-;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [type definition]
-(type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable (sub $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable (struct
+(type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable (sub $autovalue.DefaultNonEmptyConstructorAutoValue.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_build__autovalue_DefaultNonEmptyConstructorAutoValue (ref $function.m_build__autovalue_DefaultNonEmptyConstructorAutoValue))
- (field $m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (ref $function.m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
  ))
 )
+
+;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [type definition]
 (type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (sub $autovalue.DefaultNonEmptyConstructorAutoValue.Builder (struct
  (field $vtable (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable))
  (field $itable (ref $itable))
@@ -456,8 +447,23 @@
  (field $set$0@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (mut i8))
  ))
 )
+(type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable (sub $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_build__autovalue_DefaultNonEmptyConstructorAutoValue (ref $function.m_build__autovalue_DefaultNonEmptyConstructorAutoValue))
+ (field $m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (ref $function.m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder))
+ ))
+)
 
 ;;; Code for autovalue.AutoValue_EmptyAutoValue [type definition]
+(type $autovalue.AutoValue_EmptyAutoValue (sub $autovalue.EmptyAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $autovalue.AutoValue_EmptyAutoValue.vtable (sub $autovalue.EmptyAutoValue.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -465,14 +471,14 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-(type $autovalue.AutoValue_EmptyAutoValue (sub $autovalue.EmptyAutoValue (struct
- (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.vtable))
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [type definition]
+(type $autovalue.AutoValue_EmptyAutoValue.Builder (sub $autovalue.EmptyAutoValue.Builder (struct
+ (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.Builder.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [type definition]
 (type $autovalue.AutoValue_EmptyAutoValue.Builder.vtable (sub $autovalue.EmptyAutoValue.Builder.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -481,14 +487,15 @@
  (field $m_build__autovalue_EmptyAutoValue (ref $function.m_build__autovalue_EmptyAutoValue))
  ))
 )
-(type $autovalue.AutoValue_EmptyAutoValue.Builder (sub $autovalue.EmptyAutoValue.Builder (struct
- (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.Builder.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_ImplementingAutoValue [type definition]
+(type $autovalue.AutoValue_ImplementingAutoValue (sub $autovalue.ImplementingAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_ImplementingAutoValue.vtable))
+ (field $itable (ref $autovalue.AutoValue_ImplementingAutoValue.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $foo@autovalue.AutoValue_ImplementingAutoValue (mut (ref null $java.lang.String)))
+ ))
+)
 (type $autovalue.AutoValue_ImplementingAutoValue.vtable (sub $autovalue.ImplementingAutoValue.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -497,28 +504,8 @@
  (field $m_getFoo__java_lang_String (ref $function.m_getFoo__java_lang_String))
  ))
 )
-(type $autovalue.AutoValue_ImplementingAutoValue (sub $autovalue.ImplementingAutoValue (struct
- (field $vtable (ref $autovalue.AutoValue_ImplementingAutoValue.vtable))
- (field $itable (ref $autovalue.AutoValue_ImplementingAutoValue.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $foo@autovalue.AutoValue_ImplementingAutoValue (mut (ref null $java.lang.String)))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_SimpleAutoValue [type definition]
-(type $autovalue.AutoValue_SimpleAutoValue.vtable (sub $autovalue.SimpleAutoValue.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getArrayField__arrayOf_int (ref $function.m_getArrayField__arrayOf_int))
- (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
- (field $m_getDoubleField__java_lang_Double (ref $function.m_getDoubleField__java_lang_Double))
- (field $m_getIntField__int (ref $function.m_getIntField__int))
- (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
- (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
- ))
-)
 (type $autovalue.AutoValue_SimpleAutoValue (sub $autovalue.SimpleAutoValue (struct
  (field $vtable (ref $autovalue.AutoValue_SimpleAutoValue.vtable))
  (field $itable (ref $itable))
@@ -534,8 +521,29 @@
  (field $stringField@autovalue.AutoValue_SimpleAutoValue (mut (ref null $java.lang.String)))
  ))
 )
+(type $autovalue.AutoValue_SimpleAutoValue.vtable (sub $autovalue.SimpleAutoValue.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getArrayField__arrayOf_int (ref $function.m_getArrayField__arrayOf_int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getDoubleField__java_lang_Double (ref $function.m_getDoubleField__java_lang_Double))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ ))
+)
 
 ;;; Code for autovalue.AutoValueWithFields [type definition]
+(type $autovalue.AutoValueWithFields (sub $autovalue.Parent (struct
+ (field $vtable (ref $autovalue.AutoValueWithFields.vtable))
+ (field $itable (ref $autovalue.AutoValueWithFields.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $userField1@autovalue.Parent (mut i32))
+ (field $userField2@autovalue.AutoValueWithFields (mut i32))
+ ))
+)
 (type $autovalue.AutoValueWithFields.vtable (sub $autovalue.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -545,16 +553,14 @@
  (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
  ))
 )
-(type $autovalue.AutoValueWithFields (sub $autovalue.Parent (struct
- (field $vtable (ref $autovalue.AutoValueWithFields.vtable))
- (field $itable (ref $autovalue.AutoValueWithFields.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $userField1@autovalue.Parent (mut i32))
- (field $userField2@autovalue.AutoValueWithFields (mut i32))
- ))
-)
 
 ;;; Code for autovalue.AutoValueWithOverrides [type definition]
+(type $autovalue.AutoValueWithOverrides (sub $autovalue.BaseClass (struct
+ (field $vtable (ref $autovalue.AutoValueWithOverrides.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $autovalue.AutoValueWithOverrides.vtable (sub $autovalue.BaseClass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -564,14 +570,14 @@
  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
  ))
 )
-(type $autovalue.AutoValueWithOverrides (sub $autovalue.BaseClass (struct
- (field $vtable (ref $autovalue.AutoValueWithOverrides.vtable))
+
+;;; Code for autovalue.ExtendingAutoValue [type definition]
+(type $autovalue.ExtendingAutoValue (sub $autovalue.BaseClass (struct
+ (field $vtable (ref $autovalue.ExtendingAutoValue.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for autovalue.ExtendingAutoValue [type definition]
 (type $autovalue.ExtendingAutoValue.vtable (sub $autovalue.BaseClass.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -582,14 +588,16 @@
  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
  ))
 )
-(type $autovalue.ExtendingAutoValue (sub $autovalue.BaseClass (struct
- (field $vtable (ref $autovalue.ExtendingAutoValue.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for autovalue.$AutoValue_AutoValueWithExtensions [type definition]
+(type $autovalue.$AutoValue_AutoValueWithExtensions (sub $autovalue.$$AutoValue_AutoValueWithExtensions (struct
+ (field $vtable (ref $autovalue.$AutoValue_AutoValueWithExtensions.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
+ (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
+ ))
+)
 (type $autovalue.$AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.$$AutoValue_AutoValueWithExtensions.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -601,25 +609,8 @@
  (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
  ))
 )
-(type $autovalue.$AutoValue_AutoValueWithExtensions (sub $autovalue.$$AutoValue_AutoValueWithExtensions (struct
- (field $vtable (ref $autovalue.$AutoValue_AutoValueWithExtensions.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
- (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
- ))
-)
 
 ;;; Code for autovalue.$AutoValue_AutoValueWithFields [type definition]
-(type $autovalue.$AutoValue_AutoValueWithFields.vtable (sub $autovalue.AutoValueWithFields.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getIntField__int (ref $function.m_getIntField__int))
- (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
- ))
-)
 (type $autovalue.$AutoValue_AutoValueWithFields (sub $autovalue.AutoValueWithFields (struct
  (field $vtable (ref $autovalue.$AutoValue_AutoValueWithFields.vtable))
  (field $itable (ref $autovalue.$AutoValue_AutoValueWithFields.itable))
@@ -629,8 +620,25 @@
  (field $intField@autovalue.$AutoValue_AutoValueWithFields (mut i32))
  ))
 )
+(type $autovalue.$AutoValue_AutoValueWithFields.vtable (sub $autovalue.AutoValueWithFields.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
+ ))
+)
 
 ;;; Code for autovalue.AutoValue_AutoValueWithOverrides [type definition]
+(type $autovalue.AutoValue_AutoValueWithOverrides (sub $autovalue.AutoValueWithOverrides (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithOverrides.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $baseField@autovalue.AutoValue_AutoValueWithOverrides (mut i32))
+ (field $booleanField@autovalue.AutoValue_AutoValueWithOverrides (mut i8))
+ ))
+)
 (type $autovalue.AutoValue_AutoValueWithOverrides.vtable (sub $autovalue.AutoValueWithOverrides.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -640,16 +648,17 @@
  (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
  ))
 )
-(type $autovalue.AutoValue_AutoValueWithOverrides (sub $autovalue.AutoValueWithOverrides (struct
- (field $vtable (ref $autovalue.AutoValue_AutoValueWithOverrides.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $baseField@autovalue.AutoValue_AutoValueWithOverrides (mut i32))
- (field $booleanField@autovalue.AutoValue_AutoValueWithOverrides (mut i8))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_ExtendingAutoValue [type definition]
+(type $autovalue.AutoValue_ExtendingAutoValue (sub $autovalue.ExtendingAutoValue (struct
+ (field $vtable (ref $autovalue.AutoValue_ExtendingAutoValue.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $baseField@autovalue.AutoValue_ExtendingAutoValue (mut i32))
+ (field $booleanField@autovalue.AutoValue_ExtendingAutoValue (mut i8))
+ (field $stringField@autovalue.AutoValue_ExtendingAutoValue (mut (ref null $java.lang.String)))
+ ))
+)
 (type $autovalue.AutoValue_ExtendingAutoValue.vtable (sub $autovalue.ExtendingAutoValue.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -660,17 +669,14 @@
  (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
  ))
 )
-(type $autovalue.AutoValue_ExtendingAutoValue (sub $autovalue.ExtendingAutoValue (struct
- (field $vtable (ref $autovalue.AutoValue_ExtendingAutoValue.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $baseField@autovalue.AutoValue_ExtendingAutoValue (mut i32))
- (field $booleanField@autovalue.AutoValue_ExtendingAutoValue (mut i8))
- (field $stringField@autovalue.AutoValue_ExtendingAutoValue (mut (ref null $java.lang.String)))
- ))
-)
 
 ;;; Code for autovalue.SimpleAutoValue.GenericType [type definition]
+(type $autovalue.SimpleAutoValue.GenericType (sub $java.util.AbstractCollection (struct
+ (field $vtable (ref $autovalue.SimpleAutoValue.GenericType.vtable))
+ (field $itable (ref $autovalue.SimpleAutoValue.GenericType.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $autovalue.SimpleAutoValue.GenericType.vtable (sub $java.util.AbstractCollection.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -698,14 +704,18 @@
  (field $m_foo__java_util_List__java_util_List__autovalue_AutoValue_SimpleAutoValue_$pp_autovalue (ref $function.m_foo__java_util_List__java_util_List__autovalue_AutoValue_SimpleAutoValue_$pp_autovalue))
  ))
 )
-(type $autovalue.SimpleAutoValue.GenericType (sub $java.util.AbstractCollection (struct
- (field $vtable (ref $autovalue.SimpleAutoValue.GenericType.vtable))
- (field $itable (ref $autovalue.SimpleAutoValue.GenericType.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_AutoValueWithExtensions [type definition]
+(type $autovalue.AutoValue_AutoValueWithExtensions (sub $autovalue.$AutoValue_AutoValueWithExtensions (struct
+ (field $vtable (ref $autovalue.AutoValue_AutoValueWithExtensions.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
+ (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
+ (field $getMemoizedNative$Memoized@autovalue.AutoValue_AutoValueWithExtensions (mut i8))
+ (field $getMemoizedNative@autovalue.AutoValue_AutoValueWithExtensions (mut i32))
+ ))
+)
 (type $autovalue.AutoValue_AutoValueWithExtensions.vtable (sub $autovalue.$AutoValue_AutoValueWithExtensions.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -717,27 +727,8 @@
  (field $m_toPrettyString__java_lang_String_$pp_autovalue (ref $function.m_toPrettyString__java_lang_String_$pp_autovalue))
  ))
 )
-(type $autovalue.AutoValue_AutoValueWithExtensions (sub $autovalue.$AutoValue_AutoValueWithExtensions (struct
- (field $vtable (ref $autovalue.AutoValue_AutoValueWithExtensions.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $intField@autovalue.$$AutoValue_AutoValueWithExtensions (mut i32))
- (field $stringField@autovalue.$$AutoValue_AutoValueWithExtensions (mut (ref null $java.lang.String)))
- (field $getMemoizedNative$Memoized@autovalue.AutoValue_AutoValueWithExtensions (mut i8))
- (field $getMemoizedNative@autovalue.AutoValue_AutoValueWithExtensions (mut i32))
- ))
-)
 
 ;;; Code for autovalue.AutoValue_AutoValueWithFields [type definition]
-(type $autovalue.AutoValue_AutoValueWithFields.vtable (sub $autovalue.$AutoValue_AutoValueWithFields.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getIntField__int (ref $function.m_getIntField__int))
- (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
- ))
-)
 (type $autovalue.AutoValue_AutoValueWithFields (sub $autovalue.$AutoValue_AutoValueWithFields (struct
  (field $vtable (ref $autovalue.AutoValue_AutoValueWithFields.vtable))
  (field $itable (ref $autovalue.AutoValue_AutoValueWithFields.itable))
@@ -747,6 +738,15 @@
  (field $intField@autovalue.$AutoValue_AutoValueWithFields (mut i32))
  (field $getMemoizedNative$Memoized@autovalue.AutoValue_AutoValueWithFields (mut i8))
  (field $getMemoizedNative@autovalue.AutoValue_AutoValueWithFields (mut i32))
+ ))
+)
+(type $autovalue.AutoValue_AutoValueWithFields.vtable (sub $autovalue.$AutoValue_AutoValueWithFields.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getMemoizedNative__int_$pp_autovalue (ref $function.m_getMemoizedNative__int_$pp_autovalue))
  ))
 )
 

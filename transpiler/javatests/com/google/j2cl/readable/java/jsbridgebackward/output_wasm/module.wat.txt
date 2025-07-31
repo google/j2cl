@@ -5,6 +5,12 @@
 )
 
 ;;; Code for jsbridgebackward.A [type definition]
+(type $jsbridgebackward.A (sub $java.lang.Object (struct
+ (field $vtable (ref $jsbridgebackward.A.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $jsbridgebackward.A.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -13,14 +19,14 @@
  (field $m_foo__int__int (ref $function.m_foo__int__int))
  ))
 )
-(type $jsbridgebackward.A (sub $java.lang.Object (struct
- (field $vtable (ref $jsbridgebackward.A.vtable))
- (field $itable (ref $itable))
+
+;;; Code for jsbridgebackward.MyJsInterface.$LambdaAdaptor [type definition]
+(type $jsbridgebackward.MyJsInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsbridgebackward.MyJsInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsbridgebackward.MyJsInterface.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsbridgebackward.MyJsInterface.$LambdaAdaptor [type definition]
 (type $jsbridgebackward.MyJsInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -29,14 +35,14 @@
  (field $m_foo__int__int (ref $function.m_foo__int__int))
  ))
 )
-(type $jsbridgebackward.MyJsInterface.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsbridgebackward.MyJsInterface.$LambdaAdaptor.vtable))
- (field $itable (ref $jsbridgebackward.MyJsInterface.$LambdaAdaptor.itable))
+
+;;; Code for jsbridgebackward.InterfaceImpl [type definition]
+(type $jsbridgebackward.InterfaceImpl (sub $jsbridgebackward.A (struct
+ (field $vtable (ref $jsbridgebackward.InterfaceImpl.vtable))
+ (field $itable (ref $jsbridgebackward.InterfaceImpl.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsbridgebackward.InterfaceImpl [type definition]
 (type $jsbridgebackward.InterfaceImpl.vtable (sub $jsbridgebackward.A.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -45,26 +51,20 @@
  (field $m_foo__int__int (ref $function.m_foo__int__int))
  ))
 )
-(type $jsbridgebackward.InterfaceImpl (sub $jsbridgebackward.A (struct
- (field $vtable (ref $jsbridgebackward.InterfaceImpl.vtable))
- (field $itable (ref $jsbridgebackward.InterfaceImpl.itable))
+
+;;; Code for jsbridgebackward.SubInterfaceImpl [type definition]
+(type $jsbridgebackward.SubInterfaceImpl (sub $jsbridgebackward.InterfaceImpl (struct
+ (field $vtable (ref $jsbridgebackward.SubInterfaceImpl.vtable))
+ (field $itable (ref $jsbridgebackward.SubInterfaceImpl.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsbridgebackward.SubInterfaceImpl [type definition]
 (type $jsbridgebackward.SubInterfaceImpl.vtable (sub $jsbridgebackward.InterfaceImpl.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_foo__int__int (ref $function.m_foo__int__int))
- ))
-)
-(type $jsbridgebackward.SubInterfaceImpl (sub $jsbridgebackward.InterfaceImpl (struct
- (field $vtable (ref $jsbridgebackward.SubInterfaceImpl.vtable))
- (field $itable (ref $jsbridgebackward.SubInterfaceImpl.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 

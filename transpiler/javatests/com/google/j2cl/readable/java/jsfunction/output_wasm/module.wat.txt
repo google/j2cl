@@ -72,17 +72,23 @@
 )
 
 ;;; Code for jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay [type definition]
-(type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay.vtable (sub (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- ))
-)
 (type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay (sub (struct
  (field $vtable (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay.vtable))
  (field $itable (ref $itable))
  ))
 )
+(type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 
 ;;; Code for jsfunction.JsFunctionOptimization [type definition]
+(type $jsfunction.JsFunctionOptimization (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.JsFunctionOptimization.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $jsfunction.JsFunctionOptimization.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -91,14 +97,14 @@
  (field $m_main__int__void (ref $function.m_main__int__void))
  ))
 )
-(type $jsfunction.JsFunctionOptimization (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.JsFunctionOptimization.vtable))
- (field $itable (ref $itable))
+
+;;; Code for jsfunction.JsFunctionOptimization.F.$LambdaAdaptor [type definition]
+(type $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.JsFunctionOptimization.F.$LambdaAdaptor [type definition]
 (type $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -107,14 +113,15 @@
  (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
  ))
 )
-(type $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.JsFunctionOptimization.1.1.2.1 [type definition]
+(type $jsfunction.JsFunctionOptimization.1.1.2.1 (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.JsFunctionOptimization.1.1.2.1.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsfunction.JsFunctionOptimization.1.1.2.1 (mut (ref null $jsfunction.JsFunctionOptimization.1.1.2)))
+ ))
+)
 (type $jsfunction.JsFunctionOptimization.1.1.2.1.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -123,23 +130,8 @@
  (field $m_sayHey__java_lang_String (ref $function.m_sayHey__java_lang_String))
  ))
 )
-(type $jsfunction.JsFunctionOptimization.1.1.2.1 (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.JsFunctionOptimization.1.1.2.1.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@jsfunction.JsFunctionOptimization.1.1.2.1 (mut (ref null $jsfunction.JsFunctionOptimization.1.1.2)))
- ))
-)
 
 ;;; Code for jsfunction.JsFunctionOptimization.1.1.2 [type definition]
-(type $jsfunction.JsFunctionOptimization.1.1.2.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
- ))
-)
 (type $jsfunction.JsFunctionOptimization.1.1.2 (sub $java.lang.Object (struct
  (field $vtable (ref $jsfunction.JsFunctionOptimization.1.1.2.vtable))
  (field $itable (ref $jsfunction.JsFunctionOptimization.1.1.2.itable))
@@ -150,16 +142,16 @@
  (field $$outer_this@jsfunction.JsFunctionOptimization.1.1.2 (mut (ref null $jsfunction.JsFunctionOptimization.1.1)))
  ))
 )
-
-;;; Code for jsfunction.JsFunctionOptimization.1.1 [type definition]
-(type $jsfunction.JsFunctionOptimization.1.1.vtable (sub $java.lang.Object.vtable (struct
+(type $jsfunction.JsFunctionOptimization.1.1.2.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_m__void_$pp_jsfunction (ref $function.m_m__void_$pp_jsfunction))
+ (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
  ))
 )
+
+;;; Code for jsfunction.JsFunctionOptimization.1.1 [type definition]
 (type $jsfunction.JsFunctionOptimization.1.1 (sub $java.lang.Object (struct
  (field $vtable (ref $jsfunction.JsFunctionOptimization.1.1.vtable))
  (field $itable (ref $itable))
@@ -169,9 +161,7 @@
  (field $$outer_this@jsfunction.JsFunctionOptimization.1.1 (mut (ref null $jsfunction.JsFunctionOptimization.1)))
  ))
 )
-
-;;; Code for jsfunction.JsFunctionOptimization.1 [type definition]
-(type $jsfunction.JsFunctionOptimization.1.vtable (sub $java.lang.Object.vtable (struct
+(type $jsfunction.JsFunctionOptimization.1.1.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -179,6 +169,8 @@
  (field $m_m__void_$pp_jsfunction (ref $function.m_m__void_$pp_jsfunction))
  ))
 )
+
+;;; Code for jsfunction.JsFunctionOptimization.1 [type definition]
 (type $jsfunction.JsFunctionOptimization.1 (sub $java.lang.Object (struct
  (field $vtable (ref $jsfunction.JsFunctionOptimization.1.vtable))
  (field $itable (ref $itable))
@@ -187,8 +179,23 @@
  (field $$outer_this@jsfunction.JsFunctionOptimization.1 (mut (ref null $jsfunction.JsFunctionOptimization)))
  ))
 )
+(type $jsfunction.JsFunctionOptimization.1.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void_$pp_jsfunction (ref $function.m_m__void_$pp_jsfunction))
+ ))
+)
 
 ;;; Code for jsfunction.JsFunctionOptimization.4 [type definition]
+(type $jsfunction.JsFunctionOptimization.4 (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.JsFunctionOptimization.4.vtable))
+ (field $itable (ref $jsfunction.JsFunctionOptimization.4.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsfunction.JsFunctionOptimization.4 (mut (ref null $jsfunction.JsFunctionOptimization)))
+ ))
+)
 (type $jsfunction.JsFunctionOptimization.4.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -197,15 +204,15 @@
  (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
  ))
 )
-(type $jsfunction.JsFunctionOptimization.4 (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.JsFunctionOptimization.4.vtable))
- (field $itable (ref $jsfunction.JsFunctionOptimization.4.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@jsfunction.JsFunctionOptimization.4 (mut (ref null $jsfunction.JsFunctionOptimization)))
- ))
-)
 
 ;;; Code for jsfunction.JsFunctionOptimization.5 [type definition]
+(type $jsfunction.JsFunctionOptimization.5 (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.JsFunctionOptimization.5.vtable))
+ (field $itable (ref $jsfunction.JsFunctionOptimization.5.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsfunction.JsFunctionOptimization.5 (mut (ref null $jsfunction.JsFunctionOptimization)))
+ ))
+)
 (type $jsfunction.JsFunctionOptimization.5.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -214,22 +221,8 @@
  (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
  ))
 )
-(type $jsfunction.JsFunctionOptimization.5 (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.JsFunctionOptimization.5.vtable))
- (field $itable (ref $jsfunction.JsFunctionOptimization.5.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@jsfunction.JsFunctionOptimization.5 (mut (ref null $jsfunction.JsFunctionOptimization)))
- ))
-)
 
 ;;; Code for jsfunction.JsFunctionOptimization.Holder [type definition]
-(type $jsfunction.JsFunctionOptimization.Holder.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
 (type $jsfunction.JsFunctionOptimization.Holder (sub $java.lang.Object (struct
  (field $vtable (ref $jsfunction.JsFunctionOptimization.Holder.vtable))
  (field $itable (ref $itable))
@@ -237,8 +230,23 @@
  (field $$outer_this@jsfunction.JsFunctionOptimization.Holder (mut (ref null $jsfunction.JsFunctionOptimization)))
  ))
 )
+(type $jsfunction.JsFunctionOptimization.Holder.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for jsfunction.Main [type definition]
+(type $jsfunction.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $jsFunctionFieldParameterized@jsfunction.Main (mut (ref null $java.lang.Object)))
+ (field $jsFunctionFieldWildcard@jsfunction.Main (mut (ref null $java.lang.Object)))
+ ))
+)
 (type $jsfunction.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -262,16 +270,14 @@
  (field $m_testVarArgsMethodReferenceToJsFuncion__void (ref $function.m_testVarArgsMethodReferenceToJsFuncion__void))
  ))
 )
-(type $jsfunction.Main (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $jsFunctionFieldParameterized@jsfunction.Main (mut (ref null $java.lang.Object)))
- (field $jsFunctionFieldWildcard@jsfunction.Main (mut (ref null $java.lang.Object)))
- ))
-)
 
 ;;; Code for jsfunction.Main.Function.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.Function.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.Function.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.Function.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $jsfunction.Main.Function.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -280,14 +286,14 @@
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.Function.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.Function.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.Function.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.JsFunctionInterface.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.JsFunctionInterface.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -297,14 +303,14 @@
  (field $m_overlayMethod__int (ref $function.m_overlayMethod__int))
  ))
 )
-(type $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -313,14 +319,14 @@
  (field $m_m__int__arrayOf_int__int (ref $function.m_m__int__arrayOf_int__int))
  ))
 )
-(type $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.ForEachCallBack.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.ForEachCallBack.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.ForEachCallBack.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.ForEachCallBack.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.ForEachCallBack.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.ForEachCallBack.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -329,14 +335,14 @@
  (field $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.ForEachCallBack.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.ForEachCallBack.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.ForEachCallBack.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.ElementalJsFunction.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.ElementalJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.ElementalJsFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.ElementalJsFunction.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.ElementalJsFunction.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.ElementalJsFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -345,14 +351,14 @@
  (field $m_call__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_call__arrayOf_java_lang_Object__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.ElementalJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.ElementalJsFunction.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.ElementalJsFunction.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -361,14 +367,14 @@
  (field $m_m__int__arrayOf_java_lang_Object__int (ref $function.m_m__int__arrayOf_java_lang_Object__int))
  ))
 )
-(type $jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.JsFunctionVarargsGenerics.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.SimpleJsFunction.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.SimpleJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.SimpleJsFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.SimpleJsFunction.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.SimpleJsFunction.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.SimpleJsFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -377,14 +383,14 @@
  (field $m_m__void (ref $function.m_m__void))
  ))
 )
-(type $jsfunction.Main.SimpleJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.SimpleJsFunction.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.SimpleJsFunction.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.JsFunctionOptional.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.JsFunctionOptional.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -393,14 +399,14 @@
  (field $m_m__int__java_lang_Double__int (ref $function.m_m__int__java_lang_Double__int))
  ))
 )
-(type $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.ParametricJsFunction.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.ParametricJsFunction.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -409,14 +415,14 @@
  (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
  ))
 )
-(type $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -425,14 +431,14 @@
  (field $m_anApi__jsfunction_Main_ParametricJsFunction (ref $function.m_anApi__jsfunction_Main_ParametricJsFunction))
  ))
 )
-(type $jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor.itable))
+
+;;; Code for jsfunction.Main.JsBiFunction.$LambdaAdaptor [type definition]
+(type $jsfunction.Main.JsBiFunction.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.JsBiFunction.$LambdaAdaptor.vtable))
+ (field $itable (ref $jsfunction.Main.JsBiFunction.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.JsBiFunction.$LambdaAdaptor [type definition]
 (type $jsfunction.Main.JsBiFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -441,23 +447,8 @@
  (field $m_apply__java_lang_Object__java_lang_Number__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Number__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.JsBiFunction.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.JsBiFunction.$LambdaAdaptor.vtable))
- (field $itable (ref $jsfunction.Main.JsBiFunction.$LambdaAdaptor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.Main.JsFunctionImplementation [type definition]
-(type $jsfunction.Main.JsFunctionImplementation.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_foo__int__int (ref $function.m_foo__int__int))
- (field $m_overlayMethod__int (ref $function.m_overlayMethod__int))
- ))
-)
 (type $jsfunction.Main.JsFunctionImplementation (sub $java.lang.Object (struct
  (field $vtable (ref $jsfunction.Main.JsFunctionImplementation.vtable))
  (field $itable (ref $jsfunction.Main.JsFunctionImplementation.itable))
@@ -467,8 +458,23 @@
  (field $storedThis@jsfunction.Main.JsFunctionImplementation (mut (ref null $jsfunction.Main.JsFunctionImplementation)))
  ))
 )
+(type $jsfunction.Main.JsFunctionImplementation.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
+ (field $m_overlayMethod__int (ref $function.m_overlayMethod__int))
+ ))
+)
 
 ;;; Code for jsfunction.Main.TestCaptureOuterParametricClass [type definition]
+(type $jsfunction.Main.TestCaptureOuterParametricClass (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.TestCaptureOuterParametricClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $jsfunction.Main.TestCaptureOuterParametricClass.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -477,14 +483,14 @@
  (field $m_test__void (ref $function.m_test__void))
  ))
 )
-(type $jsfunction.Main.TestCaptureOuterParametricClass (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.TestCaptureOuterParametricClass.vtable))
- (field $itable (ref $itable))
+
+;;; Code for jsfunction.Main.JsFunctionOptionalImpl [type definition]
+(type $jsfunction.Main.JsFunctionOptionalImpl (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.JsFunctionOptionalImpl.vtable))
+ (field $itable (ref $jsfunction.Main.JsFunctionOptionalImpl.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.JsFunctionOptionalImpl [type definition]
 (type $jsfunction.Main.JsFunctionOptionalImpl.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -493,14 +499,14 @@
  (field $m_m__int__java_lang_Double__int (ref $function.m_m__int__java_lang_Double__int))
  ))
 )
-(type $jsfunction.Main.JsFunctionOptionalImpl (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.JsFunctionOptionalImpl.vtable))
- (field $itable (ref $jsfunction.Main.JsFunctionOptionalImpl.itable))
+
+;;; Code for jsfunction.Main.Implementor [type definition]
+(type $jsfunction.Main.Implementor (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.Implementor.vtable))
+ (field $itable (ref $jsfunction.Main.Implementor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.Implementor [type definition]
 (type $jsfunction.Main.Implementor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -509,14 +515,14 @@
  (field $m_anApi__jsfunction_Main_ParametricJsFunction (ref $function.m_anApi__jsfunction_Main_ParametricJsFunction))
  ))
 )
-(type $jsfunction.Main.Implementor (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.Implementor.vtable))
- (field $itable (ref $jsfunction.Main.Implementor.itable))
+
+;;; Code for jsfunction.Main.ParamtericImplementation [type definition]
+(type $jsfunction.Main.ParamtericImplementation (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.ParamtericImplementation.vtable))
+ (field $itable (ref $jsfunction.Main.ParamtericImplementation.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.ParamtericImplementation [type definition]
 (type $jsfunction.Main.ParamtericImplementation.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -525,14 +531,15 @@
  (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
  ))
 )
-(type $jsfunction.Main.ParamtericImplementation (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.ParamtericImplementation.vtable))
- (field $itable (ref $jsfunction.Main.ParamtericImplementation.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.Main.ClassWithJsFunctionProperty [type definition]
+(type $jsfunction.Main.ClassWithJsFunctionProperty (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.ClassWithJsFunctionProperty.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $function@jsfunction.Main.ClassWithJsFunctionProperty (mut (ref null $java.lang.Object)))
+ ))
+)
 (type $jsfunction.Main.ClassWithJsFunctionProperty.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -541,15 +548,14 @@
  (field $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (ref $function.m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction))
  ))
 )
-(type $jsfunction.Main.ClassWithJsFunctionProperty (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.ClassWithJsFunctionProperty.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $function@jsfunction.Main.ClassWithJsFunctionProperty (mut (ref null $java.lang.Object)))
- ))
-)
 
 ;;; Code for jsfunction.Main.DoubleDoubleJsBiFunction [type definition]
+(type $jsfunction.Main.DoubleDoubleJsBiFunction (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.DoubleDoubleJsBiFunction.vtable))
+ (field $itable (ref $jsfunction.Main.DoubleDoubleJsBiFunction.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $jsfunction.Main.DoubleDoubleJsBiFunction.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -558,14 +564,14 @@
  (field $m_apply__java_lang_Object__java_lang_Number__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Number__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.DoubleDoubleJsBiFunction (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.DoubleDoubleJsBiFunction.vtable))
- (field $itable (ref $jsfunction.Main.DoubleDoubleJsBiFunction.itable))
+
+;;; Code for jsfunction.Main.TIntegerJsBiFunction [type definition]
+(type $jsfunction.Main.TIntegerJsBiFunction (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.TIntegerJsBiFunction.vtable))
+ (field $itable (ref $jsfunction.Main.TIntegerJsBiFunction.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.TIntegerJsBiFunction [type definition]
 (type $jsfunction.Main.TIntegerJsBiFunction.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -574,16 +580,16 @@
  (field $m_apply__java_lang_Object__java_lang_Number__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Number__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.TIntegerJsBiFunction (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.TIntegerJsBiFunction.vtable))
- (field $itable (ref $jsfunction.Main.TIntegerJsBiFunction.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter [type definition]
 
 ;;; Code for jsfunction.Main.RecursiveParametricJsFunctionImplementation [type definition]
+(type $jsfunction.Main.RecursiveParametricJsFunctionImplementation (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.RecursiveParametricJsFunctionImplementation.vtable))
+ (field $itable (ref $jsfunction.Main.RecursiveParametricJsFunctionImplementation.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $jsfunction.Main.RecursiveParametricJsFunctionImplementation.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -592,14 +598,14 @@
  (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
  ))
 )
-(type $jsfunction.Main.RecursiveParametricJsFunctionImplementation (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.RecursiveParametricJsFunctionImplementation.vtable))
- (field $itable (ref $jsfunction.Main.RecursiveParametricJsFunctionImplementation.itable))
+
+;;; Code for jsfunction.Main.RecursiveJsFunctionImplementation [type definition]
+(type $jsfunction.Main.RecursiveJsFunctionImplementation (sub $java.lang.Object (struct
+ (field $vtable (ref $jsfunction.Main.RecursiveJsFunctionImplementation.vtable))
+ (field $itable (ref $jsfunction.Main.RecursiveJsFunctionImplementation.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.RecursiveJsFunctionImplementation [type definition]
 (type $jsfunction.Main.RecursiveJsFunctionImplementation.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -608,22 +614,8 @@
  (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
  ))
 )
-(type $jsfunction.Main.RecursiveJsFunctionImplementation (sub $java.lang.Object (struct
- (field $vtable (ref $jsfunction.Main.RecursiveJsFunctionImplementation.vtable))
- (field $itable (ref $jsfunction.Main.RecursiveJsFunctionImplementation.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$1 [type definition]
-(type $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$1.vtable (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
- ))
-)
 (type $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$1 (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor (struct
  (field $vtable (ref $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$1.vtable))
  (field $itable (ref $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$1.itable))
@@ -633,9 +625,7 @@
  (field $$captured_x1@jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$1 (mut (ref null $java.lang.String)))
  ))
 )
-
-;;; Code for jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2 [type definition]
-(type $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2.vtable (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable (struct
+(type $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$1.vtable (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -643,6 +633,8 @@
  (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
  ))
 )
+
+;;; Code for jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2 [type definition]
 (type $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2 (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor (struct
  (field $vtable (ref $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2.vtable))
  (field $itable (ref $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2.itable))
@@ -652,8 +644,22 @@
  (field $$captured_x@jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2 (mut (ref null $java.lang.String)))
  ))
 )
+(type $jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2.vtable (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
+ ))
+)
 
 ;;; Code for jsfunction.JsFunctionOptimization.$LambdaImplementor$3 [type definition]
+(type $jsfunction.JsFunctionOptimization.$LambdaImplementor$3 (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$3.vtable))
+ (field $itable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$3.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $jsfunction.JsFunctionOptimization.$LambdaImplementor$3.vtable (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -662,14 +668,14 @@
  (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
  ))
 )
-(type $jsfunction.JsFunctionOptimization.$LambdaImplementor$3 (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$3.vtable))
- (field $itable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$3.itable))
+
+;;; Code for jsfunction.JsFunctionOptimization.$LambdaImplementor$4 [type definition]
+(type $jsfunction.JsFunctionOptimization.$LambdaImplementor$4 (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$4.vtable))
+ (field $itable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$4.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.JsFunctionOptimization.$LambdaImplementor$4 [type definition]
 (type $jsfunction.JsFunctionOptimization.$LambdaImplementor$4.vtable (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -678,14 +684,15 @@
  (field $m_m__java_lang_String__java_lang_String (ref $function.m_m__java_lang_String__java_lang_String))
  ))
 )
-(type $jsfunction.JsFunctionOptimization.$LambdaImplementor$4 (sub $jsfunction.JsFunctionOptimization.F.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$4.vtable))
- (field $itable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$4.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.Main.$LambdaImplementor$1 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$1 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$1.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$1.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$captured_n@jsfunction.Main.$LambdaImplementor$1 (mut i32))
+ ))
+)
 (type $jsfunction.Main.$LambdaImplementor$1.vtable (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -695,15 +702,15 @@
  (field $m_overlayMethod__int (ref $function.m_overlayMethod__int))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$1 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$1.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$1.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$captured_n@jsfunction.Main.$LambdaImplementor$1 (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.Main.$LambdaImplementor$2 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$2 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$2.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$2.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$captured_n@jsfunction.Main.$LambdaImplementor$2 (mut i32))
+ ))
+)
 (type $jsfunction.Main.$LambdaImplementor$2.vtable (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -713,15 +720,15 @@
  (field $m_overlayMethod__int (ref $function.m_overlayMethod__int))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$2 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$2.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$2.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$captured_n@jsfunction.Main.$LambdaImplementor$2 (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.Main.$LambdaImplementor$3 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$3 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$3.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$3.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsfunction.Main.$LambdaImplementor$3 (mut (ref null $jsfunction.Main)))
+ ))
+)
 (type $jsfunction.Main.$LambdaImplementor$3.vtable (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -731,15 +738,15 @@
  (field $m_overlayMethod__int (ref $function.m_overlayMethod__int))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$3 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$3.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$3.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@jsfunction.Main.$LambdaImplementor$3 (mut (ref null $jsfunction.Main)))
- ))
-)
 
 ;;; Code for jsfunction.Main.$LambdaImplementor$4 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$4 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$4.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$4.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsfunction.Main.$LambdaImplementor$4 (mut (ref null $jsfunction.Main)))
+ ))
+)
 (type $jsfunction.Main.$LambdaImplementor$4.vtable (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -749,15 +756,14 @@
  (field $m_overlayMethod__int (ref $function.m_overlayMethod__int))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$4 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$4.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$4.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@jsfunction.Main.$LambdaImplementor$4 (mut (ref null $jsfunction.Main)))
- ))
-)
 
 ;;; Code for jsfunction.Main.$LambdaImplementor$5 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$5 (sub $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$5.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$5.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $jsfunction.Main.$LambdaImplementor$5.vtable (sub $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -766,14 +772,14 @@
  (field $m_m__int__arrayOf_int__int (ref $function.m_m__int__arrayOf_int__int))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$5 (sub $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$5.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$5.itable))
+
+;;; Code for jsfunction.Main.$LambdaImplementor$6 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$6 (sub $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$6.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$6.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.$LambdaImplementor$6 [type definition]
 (type $jsfunction.Main.$LambdaImplementor$6.vtable (sub $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -782,14 +788,14 @@
  (field $m_m__int__arrayOf_int__int (ref $function.m_m__int__arrayOf_int__int))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$6 (sub $jsfunction.Main.JsFunctionVarargs.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$6.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$6.itable))
+
+;;; Code for jsfunction.Main.$LambdaImplementor$7 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$7 (sub $jsfunction.Main.ForEachCallBack.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$7.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$7.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.$LambdaImplementor$7 [type definition]
 (type $jsfunction.Main.$LambdaImplementor$7.vtable (sub $jsfunction.Main.ForEachCallBack.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -799,14 +805,14 @@
  (field $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref $function.m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$7 (sub $jsfunction.Main.ForEachCallBack.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$7.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$7.itable))
+
+;;; Code for jsfunction.Main.$LambdaImplementor$8 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$8 (sub $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$8.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$8.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.$LambdaImplementor$8 [type definition]
 (type $jsfunction.Main.$LambdaImplementor$8.vtable (sub $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -815,14 +821,14 @@
  (field $m_m__int__java_lang_Double__int (ref $function.m_m__int__java_lang_Double__int))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$8 (sub $jsfunction.Main.JsFunctionOptional.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$8.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$8.itable))
+
+;;; Code for jsfunction.Main.$LambdaImplementor$9 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$9 (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$9.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$9.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.$LambdaImplementor$9 [type definition]
 (type $jsfunction.Main.$LambdaImplementor$9.vtable (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -831,14 +837,14 @@
  (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$9 (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$9.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$9.itable))
+
+;;; Code for jsfunction.Main.$LambdaImplementor$10 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$10 (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$10.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$10.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.$LambdaImplementor$10 [type definition]
 (type $jsfunction.Main.$LambdaImplementor$10.vtable (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -848,14 +854,14 @@
  (field $m_call__java_lang_String__void (ref $function.m_call__java_lang_String__void))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$10 (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$10.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$10.itable))
+
+;;; Code for jsfunction.Main.$LambdaImplementor$11 [type definition]
+(type $jsfunction.Main.$LambdaImplementor$11 (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.$LambdaImplementor$11.vtable))
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$11.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.$LambdaImplementor$11 [type definition]
 (type $jsfunction.Main.$LambdaImplementor$11.vtable (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -865,14 +871,14 @@
  (field $m_call__java_lang_String__void (ref $function.m_call__java_lang_String__void))
  ))
 )
-(type $jsfunction.Main.$LambdaImplementor$11 (sub $jsfunction.Main.ParametricJsFunction.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.$LambdaImplementor$11.vtable))
- (field $itable (ref $jsfunction.Main.$LambdaImplementor$11.itable))
+
+;;; Code for jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12 [type definition]
+(type $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12 (sub $jsfunction.Main.Function.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12.vtable))
+ (field $itable (ref $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12 [type definition]
 (type $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12.vtable (sub $jsfunction.Main.Function.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -881,14 +887,15 @@
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12 (sub $jsfunction.Main.Function.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12.vtable))
- (field $itable (ref $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 [type definition]
+(type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
+ (field $vtable (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13.vtable))
+ (field $itable (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 (mut (ref null extern)))
+ ))
+)
 (type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13.vtable (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -896,13 +903,6 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_foo__int__int (ref $function.m_foo__int__int))
  (field $m_overlayMethod__int (ref $function.m_overlayMethod__int))
- ))
-)
-(type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 (sub $jsfunction.Main.JsFunctionInterface.$LambdaAdaptor (struct
- (field $vtable (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13.vtable))
- (field $itable (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 (mut (ref null extern)))
  ))
 )
 

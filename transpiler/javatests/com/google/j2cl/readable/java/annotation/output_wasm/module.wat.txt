@@ -1,15 +1,15 @@
 ;;; Code for annotation.Main [type definition]
+(type $annotation.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $annotation.Main.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $annotation.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
-(type $annotation.Main (sub $java.lang.Object (struct
- (field $vtable (ref $annotation.Main.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
@@ -40,19 +40,19 @@
 )
 
 ;;; Code for annotation.Main.ClassImplementingAnnotation [type definition]
+(type $annotation.Main.ClassImplementingAnnotation (sub $java.lang.Object (struct
+ (field $vtable (ref $annotation.Main.ClassImplementingAnnotation.vtable))
+ (field $itable (ref $annotation.Main.ClassImplementingAnnotation.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@annotation.Main.ClassImplementingAnnotation (mut (ref null $annotation.Main)))
+ ))
+)
 (type $annotation.Main.ClassImplementingAnnotation.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_annotationType__java_lang_Class (ref $function.m_annotationType__java_lang_Class))
- ))
-)
-(type $annotation.Main.ClassImplementingAnnotation (sub $java.lang.Object (struct
- (field $vtable (ref $annotation.Main.ClassImplementingAnnotation.vtable))
- (field $itable (ref $annotation.Main.ClassImplementingAnnotation.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@annotation.Main.ClassImplementingAnnotation (mut (ref null $annotation.Main)))
  ))
 )
 
@@ -63,6 +63,12 @@
 )
 
 ;;; Code for annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor [type definition]
+(type $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor.vtable))
+ (field $itable (ref $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -71,14 +77,16 @@
  (field $m_annotationType__java_lang_Class (ref $function.m_annotationType__java_lang_Class))
  ))
 )
-(type $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor.vtable))
- (field $itable (ref $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for annotation.Main.SomeEnum [type definition]
+(type $annotation.Main.SomeEnum (sub $java.lang.Enum (struct
+ (field $vtable (ref $annotation.Main.SomeEnum.vtable))
+ (field $itable (ref $annotation.Main.SomeEnum.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ ))
+)
 (type $annotation.Main.SomeEnum.vtable (sub $java.lang.Enum.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -86,14 +94,6 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
  (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
- ))
-)
-(type $annotation.Main.SomeEnum (sub $java.lang.Enum (struct
- (field $vtable (ref $annotation.Main.SomeEnum.vtable))
- (field $itable (ref $annotation.Main.SomeEnum.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
- (field $ordinal@java.lang.Enum (mut i32))
  ))
 )
 

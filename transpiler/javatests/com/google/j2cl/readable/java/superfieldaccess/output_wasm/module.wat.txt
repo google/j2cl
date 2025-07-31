@@ -1,4 +1,10 @@
 ;;; Code for superfieldaccess.SuperFieldAccess [type definition]
+(type $superfieldaccess.SuperFieldAccess (sub $java.lang.Object (struct
+ (field $vtable (ref $superfieldaccess.SuperFieldAccess.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $superfieldaccess.SuperFieldAccess.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -6,21 +12,8 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-(type $superfieldaccess.SuperFieldAccess (sub $java.lang.Object (struct
- (field $vtable (ref $superfieldaccess.SuperFieldAccess.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
 
 ;;; Code for superfieldaccess.SuperFieldAccess.GrandParent [type definition]
-(type $superfieldaccess.SuperFieldAccess.GrandParent.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- ))
-)
 (type $superfieldaccess.SuperFieldAccess.GrandParent (sub $java.lang.Object (struct
  (field $vtable (ref $superfieldaccess.SuperFieldAccess.GrandParent.vtable))
  (field $itable (ref $itable))
@@ -28,8 +21,22 @@
  (field $name@superfieldaccess.SuperFieldAccess.GrandParent (mut (ref null $java.lang.String)))
  ))
 )
+(type $superfieldaccess.SuperFieldAccess.GrandParent.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 
 ;;; Code for superfieldaccess.SuperFieldAccess.Child.Inner.InnerInner [type definition]
+(type $superfieldaccess.SuperFieldAccess.Child.Inner.InnerInner (sub $java.lang.Object (struct
+ (field $vtable (ref $superfieldaccess.SuperFieldAccess.Child.Inner.InnerInner.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@superfieldaccess.SuperFieldAccess.Child.Inner.InnerInner (mut (ref null $superfieldaccess.SuperFieldAccess.Child.Inner)))
+ ))
+)
 (type $superfieldaccess.SuperFieldAccess.Child.Inner.InnerInner.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -38,23 +45,8 @@
  (field $m_getOuterParentNameQualified__java_lang_String (ref $function.m_getOuterParentNameQualified__java_lang_String))
  ))
 )
-(type $superfieldaccess.SuperFieldAccess.Child.Inner.InnerInner (sub $java.lang.Object (struct
- (field $vtable (ref $superfieldaccess.SuperFieldAccess.Child.Inner.InnerInner.vtable))
- (field $itable (ref $itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@superfieldaccess.SuperFieldAccess.Child.Inner.InnerInner (mut (ref null $superfieldaccess.SuperFieldAccess.Child.Inner)))
- ))
-)
 
 ;;; Code for superfieldaccess.SuperFieldAccess.Parent [type definition]
-(type $superfieldaccess.SuperFieldAccess.Parent.vtable (sub $superfieldaccess.SuperFieldAccess.GrandParent.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getParentName__java_lang_String (ref $function.m_getParentName__java_lang_String))
- ))
-)
 (type $superfieldaccess.SuperFieldAccess.Parent (sub $superfieldaccess.SuperFieldAccess.GrandParent (struct
  (field $vtable (ref $superfieldaccess.SuperFieldAccess.Parent.vtable))
  (field $itable (ref $itable))
@@ -63,17 +55,16 @@
  (field $name@superfieldaccess.SuperFieldAccess.Parent (mut (ref null $java.lang.String)))
  ))
 )
-
-;;; Code for superfieldaccess.SuperFieldAccess.Child.Inner [type definition]
-(type $superfieldaccess.SuperFieldAccess.Child.Inner.vtable (sub $superfieldaccess.SuperFieldAccess.Parent.vtable (struct
+(type $superfieldaccess.SuperFieldAccess.Parent.vtable (sub $superfieldaccess.SuperFieldAccess.GrandParent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getParentName__java_lang_String (ref $function.m_getParentName__java_lang_String))
- (field $m_getOuterParentName__java_lang_String (ref $function.m_getOuterParentName__java_lang_String))
  ))
 )
+
+;;; Code for superfieldaccess.SuperFieldAccess.Child.Inner [type definition]
 (type $superfieldaccess.SuperFieldAccess.Child.Inner (sub $superfieldaccess.SuperFieldAccess.Parent (struct
  (field $vtable (ref $superfieldaccess.SuperFieldAccess.Child.Inner.vtable))
  (field $itable (ref $itable))
@@ -83,17 +74,17 @@
  (field $$outer_this@superfieldaccess.SuperFieldAccess.Child.Inner (mut (ref null $superfieldaccess.SuperFieldAccess.Child)))
  ))
 )
-
-;;; Code for superfieldaccess.SuperFieldAccess.Child [type definition]
-(type $superfieldaccess.SuperFieldAccess.Child.vtable (sub $superfieldaccess.SuperFieldAccess.Parent.vtable (struct
+(type $superfieldaccess.SuperFieldAccess.Child.Inner.vtable (sub $superfieldaccess.SuperFieldAccess.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getParentName__java_lang_String (ref $function.m_getParentName__java_lang_String))
- (field $m_getGrandParentName__java_lang_String (ref $function.m_getGrandParentName__java_lang_String))
+ (field $m_getOuterParentName__java_lang_String (ref $function.m_getOuterParentName__java_lang_String))
  ))
 )
+
+;;; Code for superfieldaccess.SuperFieldAccess.Child [type definition]
 (type $superfieldaccess.SuperFieldAccess.Child (sub $superfieldaccess.SuperFieldAccess.Parent (struct
  (field $vtable (ref $superfieldaccess.SuperFieldAccess.Child.vtable))
  (field $itable (ref $itable))
@@ -101,6 +92,15 @@
  (field $name@superfieldaccess.SuperFieldAccess.GrandParent (mut (ref null $java.lang.String)))
  (field $name@superfieldaccess.SuperFieldAccess.Parent (mut (ref null $java.lang.String)))
  (field $name@superfieldaccess.SuperFieldAccess.Child (mut (ref null $java.lang.String)))
+ ))
+)
+(type $superfieldaccess.SuperFieldAccess.Child.vtable (sub $superfieldaccess.SuperFieldAccess.Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getParentName__java_lang_String (ref $function.m_getParentName__java_lang_String))
+ (field $m_getGrandParentName__java_lang_String (ref $function.m_getGrandParentName__java_lang_String))
  ))
 )
 

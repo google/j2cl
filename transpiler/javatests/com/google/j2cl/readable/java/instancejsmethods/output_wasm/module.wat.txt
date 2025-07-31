@@ -5,6 +5,12 @@
 )
 
 ;;; Code for instancejsmethods.SuperParent [type definition]
+(type $instancejsmethods.SuperParent (sub $java.lang.Object (struct
+ (field $vtable (ref $instancejsmethods.SuperParent.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
 (type $instancejsmethods.SuperParent.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -14,14 +20,14 @@
  (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
  ))
 )
-(type $instancejsmethods.SuperParent (sub $java.lang.Object (struct
- (field $vtable (ref $instancejsmethods.SuperParent.vtable))
+
+;;; Code for instancejsmethods.Main [type definition]
+(type $instancejsmethods.Main (sub $java.lang.Object (struct
+ (field $vtable (ref $instancejsmethods.Main.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for instancejsmethods.Main [type definition]
 (type $instancejsmethods.Main.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -30,14 +36,14 @@
  (field $m_testCallBySuperParent__void (ref $function.m_testCallBySuperParent__void))
  ))
 )
-(type $instancejsmethods.Main (sub $java.lang.Object (struct
- (field $vtable (ref $instancejsmethods.Main.vtable))
- (field $itable (ref $itable))
+
+;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [type definition]
+(type $instancejsmethods.MyInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $instancejsmethods.MyInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $instancejsmethods.MyInterface.$LambdaAdaptor.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [type definition]
 (type $instancejsmethods.MyInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -46,14 +52,14 @@
  (field $m_intfFoo__int (ref $function.m_intfFoo__int))
  ))
 )
-(type $instancejsmethods.MyInterface.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $instancejsmethods.MyInterface.$LambdaAdaptor.vtable))
- (field $itable (ref $instancejsmethods.MyInterface.$LambdaAdaptor.itable))
+
+;;; Code for instancejsmethods.Parent [type definition]
+(type $instancejsmethods.Parent (sub $instancejsmethods.SuperParent (struct
+ (field $vtable (ref $instancejsmethods.Parent.vtable))
+ (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for instancejsmethods.Parent [type definition]
 (type $instancejsmethods.Parent.vtable (sub $instancejsmethods.SuperParent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -64,14 +70,14 @@
  (field $m_foo__int__int (ref $function.m_foo__int__int))
  ))
 )
-(type $instancejsmethods.Parent (sub $instancejsmethods.SuperParent (struct
- (field $vtable (ref $instancejsmethods.Parent.vtable))
- (field $itable (ref $itable))
+
+;;; Code for instancejsmethods.Child [type definition]
+(type $instancejsmethods.Child (sub $instancejsmethods.Parent (struct
+ (field $vtable (ref $instancejsmethods.Child.vtable))
+ (field $itable (ref $instancejsmethods.Child.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-
-;;; Code for instancejsmethods.Child [type definition]
 (type $instancejsmethods.Child.vtable (sub $instancejsmethods.Parent.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -81,12 +87,6 @@
  (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
  (field $m_foo__int__int (ref $function.m_foo__int__int))
  (field $m_intfFoo__int (ref $function.m_intfFoo__int))
- ))
-)
-(type $instancejsmethods.Child (sub $instancejsmethods.Parent (struct
- (field $vtable (ref $instancejsmethods.Child.vtable))
- (field $itable (ref $instancejsmethods.Child.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
 
