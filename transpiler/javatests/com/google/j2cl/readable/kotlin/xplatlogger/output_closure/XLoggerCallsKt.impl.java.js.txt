@@ -1,0 +1,96 @@
+goog.module('xplatlogger.XLoggerCallsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let LoggingApi = goog.forwardDeclare('com.google.apps.xplat.logging.LoggingApi$impl');
+let XLogLevel = goog.forwardDeclare('com.google.apps.xplat.logging.XLogLevel$impl');
+let XLogger = goog.forwardDeclare('com.google.apps.xplat.logging.XLogger$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+
+/**
+ * @final
+ */
+class XLoggerCallsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!XLoggerCallsKt} */
+ static $create__() {
+  XLoggerCallsKt.$clinit();
+  let $instance = new XLoggerCallsKt();
+  $instance.$ctor__xplatlogger_XLoggerCallsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__xplatlogger_XLoggerCallsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_log__void() {
+  XLoggerCallsKt.$clinit();
+  XLogger.m_getLogger__java_lang_Class__com_google_apps_xplat_logging_XLogger(Class.$get(j_l_Object)).m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
+ }
+ /** @nodts */
+ static m_log__com_google_apps_xplat_logging_XLogger__void(/** !XLogger */ logger) {
+  XLoggerCallsKt.$clinit();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__arrayOf_java_lang_Object__void('X', [Integer.m_valueOf__int__java_lang_Integer(1)]);
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
+ }
+ /** @nodts */
+ static m_isEnabled__com_google_apps_xplat_logging_XLogger__void(/** !XLogger */ logger) {
+  XLoggerCallsKt.$clinit();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_isEnabled__boolean();
+ }
+ /** @nodts */
+ static m_nonTerminating__com_google_apps_xplat_logging_XLogger__void(/** !XLogger */ logger) {
+  XLoggerCallsKt.$clinit();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
+ }
+ /** @nodts */
+ static m_nonOptimizable__com_google_apps_xplat_logging_XLogger__com_google_apps_xplat_logging_XLogLevel__void(/** !XLogger */ logger, /** !XLogLevel */ level) {
+  XLoggerCallsKt.$clinit();
+  XLoggerCallsKt.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
+  logger.m_loggingAt__com_google_apps_xplat_logging_XLogLevel__com_google_apps_xplat_logging_LoggingApi(level).m_log__java_lang_String__void('X');
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(XLoggerCallsKt.m_hasSideEffect__java_lang_Throwable()).m_isEnabled__boolean();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(XLoggerCallsKt.m_hasSideEffect__java_lang_Throwable()).m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
+ }
+ /** @nodts @return {!LoggingApi} */
+ static m_atInfo__com_google_apps_xplat_logging_LoggingApi() {
+  return /**@type {!LoggingApi}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null));
+ }
+ /** @nodts @return {!Throwable} */
+ static m_hasSideEffect__java_lang_Throwable() {
+  return /**@type {!Throwable}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null));
+ }
+ /** @nodts */
+ static $clinit() {
+  XLoggerCallsKt.$clinit = () =>{};
+  XLoggerCallsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof XLoggerCallsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  XLogger = goog.module.get('com.google.apps.xplat.logging.XLogger$impl');
+  Class = goog.module.get('java.lang.Class$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Throwable = goog.module.get('java.lang.Throwable$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+$Util.$setClassMetadata(XLoggerCallsKt, 'xplatlogger.XLoggerCallsKt');
+
+exports = XLoggerCallsKt;
+
+//# sourceMappingURL=XLoggerCallsKt.js.map

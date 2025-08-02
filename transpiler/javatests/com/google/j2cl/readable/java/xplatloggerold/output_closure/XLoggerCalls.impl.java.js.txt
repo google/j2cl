@@ -1,0 +1,61 @@
+goog.module('xplatloggerold.XLoggerCalls$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let XLogger = goog.forwardDeclare('com.google.apps.xplat.logging.XLogger$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+class XLoggerCalls extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!XLoggerCalls} */
+ static $create__() {
+  XLoggerCalls.$clinit();
+  let $instance = new XLoggerCalls();
+  $instance.$ctor__xplatloggerold_XLoggerCalls__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__xplatloggerold_XLoggerCalls__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_log__void() {
+  XLoggerCalls.$clinit();
+  XLogger.m_getLogger__java_lang_Class__com_google_apps_xplat_logging_XLogger(Class.$get(j_l_Object)).m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
+ }
+ /** @nodts */
+ static m_log__com_google_apps_xplat_logging_XLogger__void(/** XLogger */ logger) {
+  XLoggerCalls.$clinit();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
+ }
+ /** @nodts */
+ static m_isEnabled__com_google_apps_xplat_logging_XLogger__void(/** XLogger */ logger) {
+  XLoggerCalls.$clinit();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_isEnabled__boolean();
+ }
+ /** @nodts */
+ static $clinit() {
+  XLoggerCalls.$clinit = () =>{};
+  XLoggerCalls.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof XLoggerCalls;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  XLogger = goog.module.get('com.google.apps.xplat.logging.XLogger$impl');
+  Class = goog.module.get('java.lang.Class$impl');
+ }
+}
+$Util.$setClassMetadata(XLoggerCalls, 'xplatloggerold.XLoggerCalls');
+
+exports = XLoggerCalls;
+
+//# sourceMappingURL=XLoggerCalls.js.map

@@ -1,0 +1,91 @@
+goog.module('xplatlogger.XLoggerCalls$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let LoggingApi = goog.forwardDeclare('com.google.apps.xplat.logging.LoggingApi$impl');
+let XLogLevel = goog.forwardDeclare('com.google.apps.xplat.logging.XLogLevel$impl');
+let XLogger = goog.forwardDeclare('com.google.apps.xplat.logging.XLogger$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+
+class XLoggerCalls extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!XLoggerCalls} */
+ static $create__() {
+  XLoggerCalls.$clinit();
+  let $instance = new XLoggerCalls();
+  $instance.$ctor__xplatlogger_XLoggerCalls__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__xplatlogger_XLoggerCalls__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_log__void() {
+  XLoggerCalls.$clinit();
+  XLogger.m_getLogger__java_lang_Class__com_google_apps_xplat_logging_XLogger(Class.$get(j_l_Object)).m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
+ }
+ /** @nodts */
+ static m_log__com_google_apps_xplat_logging_XLogger__void(/** XLogger */ logger) {
+  XLoggerCalls.$clinit();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__arrayOf_java_lang_Object__void('X', [Integer.m_valueOf__int__java_lang_Integer(1)]);
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
+ }
+ /** @nodts */
+ static m_isEnabled__com_google_apps_xplat_logging_XLogger__void(/** XLogger */ logger) {
+  XLoggerCalls.$clinit();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_isEnabled__boolean();
+ }
+ /** @nodts */
+ static m_nonTerminating__com_google_apps_xplat_logging_XLogger__void(/** XLogger */ logger) {
+  XLoggerCalls.$clinit();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
+ }
+ /** @nodts */
+ static m_nonOptimizable__com_google_apps_xplat_logging_XLogger__com_google_apps_xplat_logging_XLogLevel__void(/** XLogger */ logger, /** XLogLevel */ level) {
+  XLoggerCalls.$clinit();
+  XLoggerCalls.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
+  logger.m_loggingAt__com_google_apps_xplat_logging_XLogLevel__com_google_apps_xplat_logging_LoggingApi(level).m_log__java_lang_String__void('X');
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(XLoggerCalls.m_hasSideEffect__java_lang_Throwable()).m_isEnabled__boolean();
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(XLoggerCalls.m_hasSideEffect__java_lang_Throwable()).m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
+ }
+ /** @nodts @return {LoggingApi} */
+ static m_atInfo__com_google_apps_xplat_logging_LoggingApi() {
+  return null;
+ }
+ /** @nodts @return {Throwable} */
+ static m_hasSideEffect__java_lang_Throwable() {
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  XLoggerCalls.$clinit = () =>{};
+  XLoggerCalls.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof XLoggerCalls;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  XLogger = goog.module.get('com.google.apps.xplat.logging.XLogger$impl');
+  Class = goog.module.get('java.lang.Class$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Throwable = goog.module.get('java.lang.Throwable$impl');
+ }
+}
+$Util.$setClassMetadata(XLoggerCalls, 'xplatlogger.XLoggerCalls');
+
+exports = XLoggerCalls;
+
+//# sourceMappingURL=XLoggerCalls.js.map
