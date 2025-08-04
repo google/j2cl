@@ -127,3 +127,20 @@ open class SuperTypeWithOptionalParams(x: String? = "defaulted") {
 }
 
 fun topLevelFunWithDefaults(str: String? = "defaulted") = str ?: null
+
+object KotlinOptionalVarargs {
+  @JvmStatic fun optionalVarargs(vararg args: Int = intArrayOf(1, 2, 3)) = args
+
+  @JvmStatic
+  fun varargsWithTrailingOptional(vararg args: Int, optional: Int = 10) =
+    intArrayOf(*args, optional)
+
+  @JvmStatic
+  fun varargsWithLeadingOptional(optional: Int = 10, vararg args: Int) = intArrayOf(optional, *args)
+
+  @JvmStatic
+  fun optionalVarargsWithLeadingOptional(
+    optional: Int = 10,
+    vararg args: Int = intArrayOf(1, 2, 3),
+  ) = intArrayOf(optional, *args)
+}

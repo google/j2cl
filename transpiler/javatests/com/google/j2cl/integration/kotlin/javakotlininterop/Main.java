@@ -37,6 +37,7 @@ public class Main {
     testJavaKotlinMixedHierarchyFromKotlinWithExplicitOverride();
     testJavaKotlinMixedHierarchyFromKotlinWithoutExplicitOverride();
     testDefaultArguments();
+    testDefaultArgumentsWithVarargs();
   }
 
   private static void testTopLevelDeclarations() {
@@ -184,5 +185,30 @@ public class Main {
     // assertEquals("overridden: defaulted", javaType.openFunWithDefaults());
     assertEquals("overridden: foo", javaType.openFunWithDefaults("foo"));
     assertEquals("overridden: null", javaType.openFunWithDefaults(getUndefined()));
+  }
+
+  public static void testDefaultArgumentsWithVarargs() {
+    assertEquals(new int[] {4, 5, 6}, KotlinOptionalVarargs.optionalVarargs(4, 5, 6));
+    assertEquals(new int[] {4, 5, 6}, KotlinOptionalVarargs.optionalVarargs(new int[] {4, 5, 6}));
+
+    // Since kotlin has optional after varargs here it generates a non-varargs API.
+    assertEquals(
+        new int[] {4, 5, 6, 20},
+        KotlinOptionalVarargs.varargsWithTrailingOptional(new int[] {4, 5, 6}, 20));
+
+    assertEquals(new int[] {20}, KotlinOptionalVarargs.varargsWithLeadingOptional(20));
+    assertEquals(
+        new int[] {20, 4, 5, 6}, KotlinOptionalVarargs.varargsWithLeadingOptional(20, 4, 5, 6));
+    assertEquals(
+        new int[] {20, 4, 5, 6},
+        KotlinOptionalVarargs.varargsWithLeadingOptional(20, new int[] {4, 5, 6}));
+
+    assertEquals(new int[] {20}, KotlinOptionalVarargs.optionalVarargsWithLeadingOptional(20));
+    assertEquals(
+        new int[] {20, 4, 5, 6},
+        KotlinOptionalVarargs.optionalVarargsWithLeadingOptional(20, 4, 5, 6));
+    assertEquals(
+        new int[] {20, 4, 5, 6},
+        KotlinOptionalVarargs.optionalVarargsWithLeadingOptional(20, new int[] {4, 5, 6}));
   }
 }

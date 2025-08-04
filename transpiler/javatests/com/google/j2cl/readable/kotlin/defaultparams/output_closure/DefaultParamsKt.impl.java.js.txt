@@ -176,6 +176,22 @@ class DefaultParamsKt extends j_l_Object {
   return;
  }
  /** @nodts */
+ static m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(/** number */ optional, /** !Array<number> */ args) {
+  DefaultParamsKt.$clinit();
+ }
+ /** @nodts */
+ static m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__int__java_lang_Object__void(/** number */ optional, /** Array<number> */ args, /** number */ _mask0, /** * */ _handler) {
+  DefaultParamsKt.$clinit();
+  if ((_mask0 & 1) != 0) {
+   optional = 10;
+  }
+  if ((_mask0 & 2) != 0) {
+   args = (/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)));
+  }
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(optional, /**@type {!Array<number>}*/ (args));
+  return;
+ }
+ /** @nodts */
  static m_testVarargs__void() {
   DefaultParamsKt.$clinit();
   DefaultParamsKt.m_optionalVarargs$default__arrayOf_int__int__java_lang_Object__void(null, 1, null);
@@ -186,6 +202,12 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.m_varargsWithLeadingOptional$default__int__arrayOf_int__int__java_lang_Object__void(0, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), 1, null);
   DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
   DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__int__java_lang_Object__void(0, null, 3, null);
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__int__java_lang_Object__void(0, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), 1, null);
+  let tmp0_args = /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int));
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(20, tmp0_args);
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__int__java_lang_Object__void(20, null, 2, null);
  }
  /** @nodts */
  static m_testInterface__void() {

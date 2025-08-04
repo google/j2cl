@@ -134,27 +134,44 @@ fun testBoxing() {
 
 fun optionalVarargs(vararg args: Int = intArrayOf(1, 2, 3)) = args
 
-fun varargsWithTrailingOptional(vararg args: Int, optional: Int = 10) = optional
+fun varargsWithTrailingOptional(vararg args: Int, optional: Int = 10) = intArrayOf(*args, optional)
 
-fun varargsWithLeadingOptional(optional: Int = 10, vararg args: Int) = optional
+fun varargsWithLeadingOptional(optional: Int = 10, vararg args: Int) = intArrayOf(optional, *args)
+
+fun optionalVarargsWithLeadingOptional(optional: Int = 10, vararg args: Int = intArrayOf(1, 2, 3)) =
+  intArrayOf(optional, *args)
 
 fun testVarargs() {
-  var actual = optionalVarargs()
-  assertEquals(1, actual[0])
-  assertEquals(2, actual[1])
-  assertEquals(3, actual[2])
-  actual = optionalVarargs(4, 5, 6)
-  assertEquals(4, actual[0])
-  assertEquals(5, actual[1])
-  assertEquals(6, actual[2])
+  assertEquals(intArrayOf(1, 2, 3), optionalVarargs())
+  assertEquals(intArrayOf(4, 5, 6), optionalVarargs(4, 5, 6))
+  assertEquals(intArrayOf(4, 5, 6), optionalVarargs(args = intArrayOf(4, 5, 6)))
 
-  assertEquals(10, varargsWithTrailingOptional(4, 5, 6))
-  assertEquals(20, varargsWithTrailingOptional(4, 5, 6, optional = 20))
-  assertEquals(20, varargsWithTrailingOptional(optional = 20))
+  assertEquals(intArrayOf(10), varargsWithTrailingOptional())
+  assertEquals(intArrayOf(20), varargsWithTrailingOptional(optional = 20))
+  assertEquals(intArrayOf(1, 2, 3, 20), varargsWithTrailingOptional(1, 2, 3, optional = 20))
+  assertEquals(
+    intArrayOf(1, 2, 3, 20),
+    varargsWithTrailingOptional(args = intArrayOf(1, 2, 3), optional = 20),
+  )
+  assertEquals(intArrayOf(1, 2, 3, 10), varargsWithTrailingOptional(1, 2, 3))
 
-  assertEquals(10, varargsWithLeadingOptional(args = intArrayOf(4, 5, 6)))
-  assertEquals(20, varargsWithLeadingOptional(20, 4, 5, 6))
-  assertEquals(20, varargsWithLeadingOptional(20))
+  assertEquals(intArrayOf(10, 4, 5, 6), varargsWithLeadingOptional(args = intArrayOf(4, 5, 6)))
+  assertEquals(intArrayOf(20, 4, 5, 6), varargsWithLeadingOptional(20, 4, 5, 6))
+  assertEquals(intArrayOf(20, 4, 5, 6), varargsWithLeadingOptional(20, args = intArrayOf(4, 5, 6)))
+  assertEquals(intArrayOf(20), varargsWithLeadingOptional(20))
+
+  assertEquals(intArrayOf(10, 1, 2, 3), optionalVarargsWithLeadingOptional())
+  assertEquals(
+    intArrayOf(10, 4, 5, 6),
+    optionalVarargsWithLeadingOptional(args = intArrayOf(4, 5, 6)),
+  )
+  assertEquals(
+    intArrayOf(20, 4, 5, 6),
+    optionalVarargsWithLeadingOptional(args = intArrayOf(4, 5, 6), optional = 20),
+  )
+  assertEquals(intArrayOf(20, 4, 5, 6), optionalVarargsWithLeadingOptional(20, 4, 5, 6))
+  assertEquals(intArrayOf(20, 4, 5, 6), optionalVarargsWithLeadingOptional(optional = 20, 4, 5, 6))
+  assertEquals(intArrayOf(20, 1, 2, 3), optionalVarargsWithLeadingOptional(20))
 }
 
 interface IFoo {

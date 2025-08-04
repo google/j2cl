@@ -23,6 +23,7 @@ open class DefaultParams(val a: Int = 1, val b: Int) {
 
 class Subclass : DefaultParams {
   constructor() : super(b = 2)
+
   constructor(a: Int, b: Int) : super(a, b)
 
   override fun foo(c: Int) {
@@ -60,7 +61,7 @@ fun complexDefault(
     when {
       a < 0 -> a * -1
       else -> a + 1
-    }
+    },
 ): Int {
   return b
 }
@@ -96,6 +97,11 @@ fun varargsWithTrailingOptional(vararg args: Int, optional: Int = 10) {}
 
 fun varargsWithLeadingOptional(optional: Int = 10, vararg args: Int) {}
 
+fun optionalVarargsWithLeadingOptional(
+  optional: Int = 10,
+  vararg args: Int = intArrayOf(1, 2, 3),
+) {}
+
 fun testVarargs() {
   optionalVarargs()
   optionalVarargs(4, 5, 6)
@@ -105,10 +111,16 @@ fun testVarargs() {
   varargsWithLeadingOptional(args = intArrayOf(4, 5, 6))
   varargsWithLeadingOptional(20, 4, 5, 6)
   varargsWithLeadingOptional(20)
+  optionalVarargsWithLeadingOptional()
+  optionalVarargsWithLeadingOptional(args = intArrayOf(4, 5, 6))
+  optionalVarargsWithLeadingOptional(args = intArrayOf(4, 5, 6), optional = 20)
+  optionalVarargsWithLeadingOptional(20, 4, 5, 6)
+  optionalVarargsWithLeadingOptional(20)
 }
 
 interface IFoo {
   fun defaultMethod(a: Int = 1) = a
+
   fun interfaceMethod(a: Int = 2): Int
 }
 
@@ -118,6 +130,7 @@ class FooImpl : IFoo {
 
 class FooImplWithDefaultOverride : IFoo {
   override fun defaultMethod(a: Int) = a + 1
+
   override fun interfaceMethod(a: Int) = a
 }
 
