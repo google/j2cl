@@ -36,7 +36,7 @@ fun isEnabled(logger: XLogger) {
 
 fun nonTerminating(logger: XLogger) {
   logger.atInfo()
-  logger.atInfo().withCause(Throwable()).log("X")
+  logger.atInfo().withCause(Throwable())
 }
 
 fun nonOptimizable(logger: XLogger, level: XLogLevel) {

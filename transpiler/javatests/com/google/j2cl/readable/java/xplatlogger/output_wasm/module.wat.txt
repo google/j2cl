@@ -135,7 +135,6 @@
  (param $logger (ref null $com.google.apps.xplat.logging.XLogger))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatlogger/readable-j2wasm.js/xplatlogger/XLoggerCalls.java:38:14
  (local $$qualifier (ref null $java.lang.Object))
- (local $$qualifier_1 (ref null $java.lang.Object))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatlogger/readable-j2wasm.js/xplatlogger/XLoggerCalls.java:38:45
   (call $$clinit__void_<once>_@xplatlogger.XLoggerCalls )
@@ -143,12 +142,9 @@
   (drop (call $m_atInfo__com_google_apps_xplat_logging_LoggingApi@com.google.apps.xplat.logging.XLogger (ref.as_non_null (local.get $logger))))
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatlogger/readable-j2wasm.js/xplatlogger/XLoggerCalls.java:40:4
-   (local.set $$qualifier (block (result (ref null $java.lang.Object))
-    (local.set $$qualifier_1 (call $m_atInfo__com_google_apps_xplat_logging_LoggingApi@com.google.apps.xplat.logging.XLogger (ref.as_non_null (local.get $logger))))
-    (call_ref $function.m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi (ref.as_non_null (local.get $$qualifier_1))(call $$create__@java.lang.Throwable )(struct.get $com.google.apps.xplat.logging.LoggingApi.vtable $m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi (ref.cast (ref $com.google.apps.xplat.logging.LoggingApi.vtable) (call $get.itable.$com.google.apps.xplat.logging.LoggingApi (local.get $$qualifier_1)))))
-   ))
+   (local.set $$qualifier (call $m_atInfo__com_google_apps_xplat_logging_LoggingApi@com.google.apps.xplat.logging.XLogger (ref.as_non_null (local.get $logger))))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatlogger/readable-j2wasm.js/xplatlogger/XLoggerCalls.java:40:4
-   (call_ref $function.m_log__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $$getString_|X|__java_lang_String_<once>_@xplatlogger.XLoggerCalls )(struct.get $com.google.apps.xplat.logging.LoggingApi.vtable $m_log__java_lang_String__void (ref.cast (ref $com.google.apps.xplat.logging.LoggingApi.vtable) (call $get.itable.$com.google.apps.xplat.logging.LoggingApi (local.get $$qualifier)))))
+   (drop (call_ref $function.m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi (ref.as_non_null (local.get $$qualifier))(call $$create__@java.lang.Throwable )(struct.get $com.google.apps.xplat.logging.LoggingApi.vtable $m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi (ref.cast (ref $com.google.apps.xplat.logging.LoggingApi.vtable) (call $get.itable.$com.google.apps.xplat.logging.LoggingApi (local.get $$qualifier))))))
   )
  )
 )

@@ -37,7 +37,7 @@ public class XLoggerCalls {
 
   static void nonTerminating(XLogger logger) {
     logger.atInfo();
-    logger.atInfo().withCause(new Throwable()).log("X");
+    logger.atInfo().withCause(new Throwable());
   }
 
   static void nonOptimizable(XLogger logger, XLogLevel level) {
