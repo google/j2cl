@@ -1989,11 +1989,15 @@ public class JsInteropRestrictionsChecker {
     // Check that parameters that are declared JsOptional in overridden methods remain JsOptional.
     for (MethodDescriptor overriddenMethodDescriptor :
         methodDescriptor.getJavaOverriddenMethodDescriptors()) {
-      for (int i = 0; i < overriddenMethodDescriptor.getParameterDescriptors().size(); i++) {
-        if (!overriddenMethodDescriptor.isParameterOptional(i)) {
+      var overriddenMethodParameterDescriptors =
+          overriddenMethodDescriptor.getParameterDescriptors();
+      for (int i = 0; i < overriddenMethodParameterDescriptors.size(); i++) {
+        var overriddenParameter = overriddenMethodParameterDescriptors.get(i);
+        if (!overriddenParameter.isJsOptional()) {
           continue;
         }
-        if (!methodDescriptor.isParameterOptional(i)) {
+        var parameter = methodDescriptor.getParameterDescriptors().get(i);
+        if (!parameter.isJsOptional()) {
           problems.error(
               method.getSourcePosition(),
               "Method '%s' should declare parameter '%s' as JsOptional.",

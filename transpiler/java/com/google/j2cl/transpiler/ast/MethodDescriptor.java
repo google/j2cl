@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject;
+import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -64,6 +65,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     @Override
     public abstract ImmutableList<Annotation> getAnnotations();
 
+    public abstract boolean isOptional();
+
     public abstract boolean isJsOptional();
 
     @Memoized
@@ -77,6 +80,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return new AutoValue_MethodDescriptor_ParameterDescriptor.Builder()
           .setVarargs(false)
           .setAnnotations(ImmutableList.of())
+          .setOptional(false)
           .setJsOptional(false);
     }
 
@@ -90,13 +94,27 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
       public abstract Builder setVarargs(boolean isVarargs);
 
+      abstract boolean isVarargs();
+
       public abstract Builder setAnnotations(List<Annotation> annotations);
 
+      public abstract Builder setOptional(boolean isOptional);
+
+      abstract boolean isOptional();
+
       public abstract Builder setJsOptional(boolean isJsOptional);
+
+      abstract boolean isJsOptional();
 
       abstract ParameterDescriptor autoBuild();
 
       public ParameterDescriptor build() {
+        checkState(!isOptional() || !isVarargs(), "Parameters cannot be both varargs and optional");
+        // TODO(b/236400205): we need to think through the implications of something being both
+        //  optional and explicitly JsOptional. For now we'll prevent frontends from getting us into
+        //  that state.
+        checkState(
+            !isOptional() || !isJsOptional(), "Parameters cannot be both optional and JsOptional");
         return interner.intern(autoBuild());
       }
     }
@@ -366,10 +384,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
 
   public abstract ImmutableList<TypeDescriptor> getTypeArgumentTypeDescriptors();
-
-  public boolean isParameterOptional(int i) {
-    return getParameterDescriptors().get(i).isJsOptional();
-  }
 
   @Memoized
   public ImmutableList<TypeDescriptor> getParameterTypeDescriptors() {
@@ -1659,6 +1673,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         checkState(
             !methodDescriptor.isVarargs()
                 || Iterables.getLast(methodDescriptor.getParameterDescriptors()).isVarargs());
+
+        // Optional parameters must be trailing.
+        checkState(
+            methodDescriptor.getParameterDescriptors().stream()
+                .dropWhile(not(ParameterDescriptor::isOptional))
+                .allMatch(ParameterDescriptor::isOptional));
 
         checkState(
             methodDescriptor.getTypeParameterTypeDescriptors().stream()

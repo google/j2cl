@@ -291,7 +291,7 @@ class ClosureTypesGenerator {
     // This now non-js method would still have the parameter marked as JsOptional (since this is
     // a JsMethod in the source) but it can not be emitted as optional in closure because it might
     // be followed by a regular Java varargs parameter which is not optional nor a js varargs.
-    boolean isOptional =
+    boolean isJsOptional =
         parameterDescriptor.isJsOptional()
             && (methodDescriptor.isJsMember() || methodDescriptor.isJsFunction());
     parameterTypeDescriptor =
@@ -300,7 +300,8 @@ class ClosureTypesGenerator {
             : parameterTypeDescriptor;
 
     ClosureType closureParameterType = getClosureType(parameterTypeDescriptor);
-    return new ClosureFunctionType.Parameter(isJsVarargs, isOptional, closureParameterType);
+    return new ClosureFunctionType.Parameter(
+        isJsVarargs, isJsOptional || parameterDescriptor.isOptional(), closureParameterType);
   }
 
   /** Returns Closure types for collection of type descriptors. */
