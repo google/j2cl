@@ -39,9 +39,12 @@ fun nonTerminating(logger: XLogger) {
   logger.atInfo().withCause(Throwable())
 }
 
-fun nonOptimizable(logger: XLogger, level: XLogLevel) {
+fun nonOptimizable(logger: XLogger, loggingApi: LoggingApi, level: XLogLevel) {
   // Not known fluent chain.
   atInfo().log("X")
+  atInfo().withCause(Throwable()).log("X")
+  loggingApi.log("X")
+  loggingApi.withCause(Throwable()).log("X")
 
   // Dynamic level
   logger.loggingAt(level).log("X")

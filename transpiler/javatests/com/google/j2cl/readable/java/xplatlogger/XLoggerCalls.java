@@ -40,9 +40,12 @@ public class XLoggerCalls {
     logger.atInfo().withCause(new Throwable());
   }
 
-  static void nonOptimizable(XLogger logger, XLogLevel level) {
+  static void nonOptimizable(XLogger logger, LoggingApi loggingApi, XLogLevel level) {
     // Not known fluent chain.
     atInfo().log("X");
+    atInfo().withCause(new Throwable()).log("X");
+    loggingApi.log("X");
+    loggingApi.withCause(new Throwable()).log("X");
 
     // Dynamic level
     logger.loggingAt(level).log("X");
