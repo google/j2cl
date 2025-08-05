@@ -132,9 +132,6 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::CollectionStubMethodLowering)
   // Add static field to hold singleton object instance.
   perFileLowering(::ObjectClassLowering)
-  // Copies static fields from companion objects onto the enclosing interface if a const property
-  // is present.
-  // perFileLowering(::CopyInterfaceCompanionFieldsLowering)
   // Drops field initializers when they initialize the field to it's default value.
   perFileLowering(::RemoveFieldInitializerToDefault)
   // Move code from object init blocks and static field initializers to a new <clinit> function.
