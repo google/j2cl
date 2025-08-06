@@ -12,7 +12,7 @@ repository=${GITHUB_REPOSITORY#*/}
 directory="${repository}-${tag#v}"
 archive="${repository}-${tag}.tar.gz"
 
-git archive --format=tar --prefix=${directory}/ -o "${archive}" ${tag}
+git archive --format="tar.gz" --prefix=${directory}/ -o "${archive}" ${tag}
 
 # Replace hyphens with underscores in the repository name to match our Bazel
 # module naming conventions.
