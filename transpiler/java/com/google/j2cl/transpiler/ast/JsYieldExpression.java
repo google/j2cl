@@ -22,13 +22,13 @@ import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import javax.annotation.Nullable;
 
-/** Class for Yield expression. */
+/** JavaScript 'yield' expression. */
 @Visitable
-public class YieldExpression extends Expression {
+public class JsYieldExpression extends Expression {
   @Visitable @Nullable Expression expression;
   @Visitable TypeDescriptor typeDescriptor;
 
-  private YieldExpression(Expression expression, TypeDescriptor typeDescriptor) {
+  private JsYieldExpression(Expression expression, TypeDescriptor typeDescriptor) {
     this.expression = expression;
     this.typeDescriptor = checkNotNull(typeDescriptor);
   }
@@ -49,7 +49,7 @@ public class YieldExpression extends Expression {
   }
 
   @Override
-  public YieldExpression clone() {
+  public JsYieldExpression clone() {
     return Builder.from(this).build();
   }
 
@@ -59,7 +59,7 @@ public class YieldExpression extends Expression {
 
   @Override
   Node acceptInternal(Processor processor) {
-    return Visitor_YieldExpression.visit(processor, this);
+    return Visitor_JsYieldExpression.visit(processor, this);
   }
 
   /** A builder for YieldExpressions. */
@@ -67,7 +67,7 @@ public class YieldExpression extends Expression {
     private Expression expression;
     private TypeDescriptor typeDescriptor;
 
-    public static Builder from(YieldExpression yieldExpression) {
+    public static Builder from(JsYieldExpression yieldExpression) {
       return new Builder()
           .setExpression(yieldExpression.getExpression())
           .setTypeDescriptor(yieldExpression.getTypeDescriptor());
@@ -85,8 +85,8 @@ public class YieldExpression extends Expression {
       return this;
     }
 
-    public YieldExpression build() {
-      return new YieldExpression(expression, typeDescriptor);
+    public JsYieldExpression build() {
+      return new JsYieldExpression(expression, typeDescriptor);
     }
   }
 }

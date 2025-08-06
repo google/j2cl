@@ -43,6 +43,7 @@ import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.JsDocExpression;
+import com.google.j2cl.transpiler.ast.JsYieldExpression;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -65,7 +66,6 @@ import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
-import com.google.j2cl.transpiler.ast.YieldExpression;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collections;
 import java.util.List;
@@ -114,7 +114,7 @@ public final class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterYieldExpression(YieldExpression yieldExpression) {
+      public boolean enterJsYieldExpression(JsYieldExpression yieldExpression) {
         if (yieldExpression.getExpression() == null) {
           sourceBuilder.append("yield");
         } else {

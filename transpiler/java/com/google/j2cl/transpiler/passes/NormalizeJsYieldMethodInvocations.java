@@ -21,9 +21,9 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.JsYieldExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.YieldExpression;
 
 /** Converts "yield" method call into YieldExpression. */
 public class NormalizeJsYieldMethodInvocations extends NormalizationPass {
@@ -41,7 +41,7 @@ public class NormalizeJsYieldMethodInvocations extends NormalizationPass {
             checkArgument(
                 methodCall.getArguments().size() <= 1, "yield should have 0 or 1 arguments");
 
-            return YieldExpression.newBuilder()
+            return JsYieldExpression.newBuilder()
                 .setTypeDescriptor(methodCall.getTypeDescriptor())
                 .setExpression(Iterables.getOnlyElement(methodCall.getArguments(), null))
                 .build();
