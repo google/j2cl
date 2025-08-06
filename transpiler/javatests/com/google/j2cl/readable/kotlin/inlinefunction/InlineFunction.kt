@@ -208,3 +208,26 @@ private fun useAdaptor() {
 private fun testNonReifiedIntTypeParameterErasureInInlineFun(): Int = castIntToObj<Int>() + 1
 
 private inline fun <R> castIntToObj(): R = 1 as R
+
+inline fun inlineFunWithDefaults(a: Int, b: Int = 2): Int = a + b
+
+inline fun inlineFunWithDefaultsAndVarargs(a: Int, b: Int = 2, vararg c: Int): Int = a + b + c.sum()
+
+inline fun inlineFunWithDefaultsAndDefaultVarargs(
+  a: Int,
+  b: Int = 2,
+  vararg c: Int = intArrayOf(3, 4, 5),
+) = a + b + c.sum()
+
+fun testDefaultParams() {
+  inlineFunWithDefaults(1)
+  inlineFunWithDefaults(1, 20)
+
+  inlineFunWithDefaultsAndVarargs(1)
+  inlineFunWithDefaultsAndVarargs(1, 20)
+  inlineFunWithDefaultsAndVarargs(1, 20, 3, 4, 5)
+
+  inlineFunWithDefaultsAndDefaultVarargs(1)
+  inlineFunWithDefaultsAndDefaultVarargs(1, 20)
+  inlineFunWithDefaultsAndDefaultVarargs(1, 20, 30, 40, 50)
+}

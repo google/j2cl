@@ -29,10 +29,13 @@ let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreco
 let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
 let OfObject = goog.forwardDeclare('javaemul.internal.Ref.OfObject$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let ArraysKt = goog.forwardDeclare('kotlin.collections.ArraysKt$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @final
@@ -412,6 +415,62 @@ class InlineFunctionKt extends j_l_Object {
  static m_castIntToObj__java_lang_Object() {
   return Integer.m_valueOf__int__java_lang_Integer(1);
  }
+ /** @nodts @return {number} */
+ static m_inlineFunWithDefaults__int__int__int(/** number */ a, /** number */ b) {
+  InlineFunctionKt.$clinit();
+  return a + b | 0;
+ }
+ /** @nodts @return {number} */
+ static m_inlineFunWithDefaults$default__int__int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** number */ _mask0, /** * */ _handler) {
+  InlineFunctionKt.$clinit();
+  if ((_mask0 & 2) != 0) {
+   b = 2;
+  }
+  return InlineFunctionKt.m_inlineFunWithDefaults__int__int__int(a, b);
+ }
+ /** @nodts @return {number} */
+ static m_inlineFunWithDefaultsAndVarargs__int__int__arrayOf_int__int(/** number */ a, /** number */ b, /** !Array<number> */ c) {
+  InlineFunctionKt.$clinit();
+  return a + b + ArraysKt.m_sum__arrayOf_int__int(c) | 0;
+ }
+ /** @nodts @return {number} */
+ static m_inlineFunWithDefaultsAndVarargs$default__int__int__arrayOf_int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** !Array<number> */ c, /** number */ _mask0, /** * */ _handler) {
+  InlineFunctionKt.$clinit();
+  if ((_mask0 & 2) != 0) {
+   b = 2;
+  }
+  return InlineFunctionKt.m_inlineFunWithDefaultsAndVarargs__int__int__arrayOf_int__int(a, b, c);
+ }
+ /** @nodts @return {number} */
+ static m_inlineFunWithDefaultsAndDefaultVarargs__int__int__arrayOf_int__int(/** number */ a, /** number */ b, /** !Array<number> */ c) {
+  InlineFunctionKt.$clinit();
+  return a + b + ArraysKt.m_sum__arrayOf_int__int(c) | 0;
+ }
+ /** @nodts @return {number} */
+ static m_inlineFunWithDefaultsAndDefaultVarargs$default__int__int__arrayOf_int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** Array<number> */ c, /** number */ _mask0, /** * */ _handler) {
+  InlineFunctionKt.$clinit();
+  if ((_mask0 & 2) != 0) {
+   b = 2;
+  }
+  if ((_mask0 & 4) != 0) {
+   c = (/**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int)));
+  }
+  return InlineFunctionKt.m_inlineFunWithDefaultsAndDefaultVarargs__int__int__arrayOf_int__int(a, b, /**@type {!Array<number>}*/ (c));
+ }
+ /** @nodts */
+ static m_testDefaultParams__void() {
+  InlineFunctionKt.$clinit();
+  1 + 2 | 0;
+  1 + 20 | 0;
+  1 + 2 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int))) | 0;
+  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int))) | 0;
+  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int))) | 0;
+  let c = /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int));
+  1 + 2 + ArraysKt.m_sum__arrayOf_int__int(c) | 0;
+  let c_1 = /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int));
+  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(c_1) | 0;
+  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([30, 40, 50], $$int))) | 0;
+ }
  /** @nodts */
  static $clinit() {
   InlineFunctionKt.$clinit = () =>{};
@@ -448,9 +507,12 @@ class InlineFunctionKt extends j_l_Object {
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Ref = goog.module.get('javaemul.internal.Ref$impl');
   Unit = goog.module.get('kotlin.Unit$impl');
+  ArraysKt = goog.module.get('kotlin.collections.ArraysKt$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(InlineFunctionKt, 'inlinefunction.InlineFunctionKt');

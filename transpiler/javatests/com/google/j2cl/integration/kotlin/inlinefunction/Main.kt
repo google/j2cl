@@ -44,6 +44,7 @@ fun main(vararg unused: String) {
   testNonReifiedTypeParameterErasureInInlineFun()
   testInlinedLocalClassSemantics()
   testInlineFactoryFunctionWithCrossinlineLambda()
+  testDefaultParams()
 }
 
 class MyClass(var f: Int) {
@@ -404,4 +405,27 @@ private fun testInlineFactoryFunctionWithCrossinlineLambda() {
   sideEffectExecutor.execute(10)
 
   assertTrue(sideEffectVar == 15)
+}
+
+inline fun inlineFunWithDefaults(a: Int, b: Int = 2): Int = a + b
+
+inline fun inlineFunWithDefaultsAndVarargs(a: Int, b: Int = 2, vararg c: Int): Int = a + b + c.sum()
+
+inline fun inlineFunWithDefaultsAndDefaultVarargs(
+  a: Int,
+  b: Int = 2,
+  vararg c: Int = intArrayOf(3, 4, 5),
+) = a + b + c.sum()
+
+private fun testDefaultParams() {
+  assertEquals(3, inlineFunWithDefaults(1))
+  assertEquals(21, inlineFunWithDefaults(1, 20))
+
+  assertEquals(3, inlineFunWithDefaultsAndVarargs(1))
+  assertEquals(21, inlineFunWithDefaultsAndVarargs(1, 20))
+  assertEquals(141, inlineFunWithDefaultsAndVarargs(1, 20, 30, 40, 50))
+
+  assertEquals(15, inlineFunWithDefaultsAndDefaultVarargs(1))
+  assertEquals(33, inlineFunWithDefaultsAndDefaultVarargs(1, 20))
+  assertEquals(141, inlineFunWithDefaultsAndDefaultVarargs(1, 20, 30, 40, 50))
 }
