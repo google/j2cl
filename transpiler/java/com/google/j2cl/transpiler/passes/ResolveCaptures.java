@@ -462,16 +462,15 @@ public class ResolveCaptures extends NormalizationPass {
 
           @Override
           public Expression rewriteThisReference(ThisReference thisReference) {
-            DeclaredTypeDescriptor capturedEnclosingType =
-                constructor
-                    .getDescriptor()
-                    .getEnclosingTypeDescriptor()
-                    .getEnclosingTypeDescriptor();
-            if (enclosingInstanceParameter != null
-                && thisReference.getTypeDescriptor().hasSameRawType(capturedEnclosingType)) {
-              return enclosingInstanceParameter.createReference();
+            DeclaredTypeDescriptor currentTypeDescriptor =
+                constructor.getDescriptor().getEnclosingTypeDescriptor();
+            DeclaredTypeDescriptor targetTypeDescriptor = thisReference.getTypeDescriptor();
+            if (currentTypeDescriptor.hasSameRawType(targetTypeDescriptor)) {
+              return thisReference;
             }
-            return thisReference;
+
+            Expression outerFieldAccess = enclosingInstanceParameter.createReference();
+            return rewriteOuterThisReference(outerFieldAccess, targetTypeDescriptor);
           }
         });
   }
@@ -510,22 +509,30 @@ public class ResolveCaptures extends NormalizationPass {
             }
 
             Expression outerFieldAccess = new ThisReference(currentTypeDescriptor);
-            do {
-              outerFieldAccess =
-                  FieldAccess.newBuilder()
-                      .setTarget(currentTypeDescriptor.getFieldDescriptorForEnclosingInstance())
-                      .setQualifier(outerFieldAccess)
-                      .build();
-              currentTypeDescriptor = currentTypeDescriptor.getEnclosingTypeDescriptor();
-              if (currentTypeDescriptor == null) {
-                checkArgument(targetTypeDescriptor.isInterface());
-                return thisReference;
-              }
-            } while (!currentTypeDescriptor.hasSameRawType(targetTypeDescriptor));
-
-            return outerFieldAccess;
+            return rewriteOuterThisReference(outerFieldAccess, targetTypeDescriptor);
           }
         });
+  }
+
+  /**
+   * Compute the qualified nested expression to access the outer type descriptor for {@code
+   * targetTypeDescriptor} starting from {@code currentExpression},
+   */
+  private static Expression rewriteOuterThisReference(
+      Expression currentExpression, DeclaredTypeDescriptor targetTypeDescriptor) {
+
+    DeclaredTypeDescriptor currentTypeDescriptor =
+        (DeclaredTypeDescriptor) currentExpression.getTypeDescriptor();
+    while (!currentTypeDescriptor.hasSameRawType(targetTypeDescriptor)) {
+      currentExpression =
+          FieldAccess.newBuilder()
+              .setTarget(currentTypeDescriptor.getFieldDescriptorForEnclosingInstance())
+              .setQualifier(currentExpression)
+              .build();
+      currentTypeDescriptor = currentTypeDescriptor.getEnclosingTypeDescriptor();
+    }
+
+    return currentExpression;
   }
 
   /** Returns the FieldDescriptor corresponding to the captured variable. */
