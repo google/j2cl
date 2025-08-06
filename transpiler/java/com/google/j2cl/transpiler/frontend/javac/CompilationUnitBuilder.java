@@ -425,12 +425,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertInitializer(JCStatement statement) {
-    switch (statement.getKind()) {
-      case EXPRESSION_STATEMENT:
-        return convertExpression(((JCExpressionStatement) statement).expr);
-      default:
-        throw new AssertionError();
-    }
+    return switch (statement.getKind()) {
+      case EXPRESSION_STATEMENT -> convertExpression(((JCExpressionStatement) statement).expr);
+      default -> throw new AssertionError();
+    };
   }
 
   private ForEachStatement convertEnhancedForLoop(JCEnhancedForLoop statement) {
@@ -632,51 +630,31 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   @Nullable
   private Statement convertStatement(JCStatement jcStatement) {
-    switch (jcStatement.getKind()) {
-      case ASSERT:
-        return convertAssert((JCAssert) jcStatement);
-      case BLOCK:
-        return convertBlock((JCBlock) jcStatement);
-      case BREAK:
-        return convertBreak((JCBreak) jcStatement);
-      case CLASS:
-        return new LocalClassDeclarationStatement(
-            convertClassDeclaration((JCClassDecl) jcStatement), getSourcePosition(jcStatement));
-      case CONTINUE:
-        return convertContinue((JCContinue) jcStatement);
-      case DO_WHILE_LOOP:
-        return convertDoWhileLoop((JCDoWhileLoop) jcStatement);
-      case EMPTY_STATEMENT:
-        return Statement.createNoopStatement();
-      case ENHANCED_FOR_LOOP:
-        return convertEnhancedForLoop((JCEnhancedForLoop) jcStatement);
-      case EXPRESSION_STATEMENT:
-        return convertExpressionStatement((JCExpressionStatement) jcStatement);
-      case FOR_LOOP:
-        return convertForLoop((JCForLoop) jcStatement);
-      case IF:
-        return convertIf((JCIf) jcStatement);
-      case LABELED_STATEMENT:
-        return convertLabeledStatement((JCLabeledStatement) jcStatement);
-      case RETURN:
-        return convertReturn((JCReturn) jcStatement);
-      case YIELD:
-        return convertYield((JCYield) jcStatement);
-      case SWITCH:
-        return convertSwitch((JCSwitch) jcStatement);
-      case THROW:
-        return convertThrow((JCThrow) jcStatement);
-      case TRY:
-        return convertTry((JCTry) jcStatement);
-      case VARIABLE:
-        return convertVariableDeclaration((JCVariableDecl) jcStatement);
-      case WHILE_LOOP:
-        return convertWhileLoop((JCWhileLoop) jcStatement);
-      case SYNCHRONIZED:
-        return convertSynchronized((JCSynchronized) jcStatement);
-      default:
-        throw new AssertionError("Unknown statement node type: " + jcStatement.getKind());
-    }
+    return switch (jcStatement.getKind()) {
+      case ASSERT -> convertAssert((JCAssert) jcStatement);
+      case BLOCK -> convertBlock((JCBlock) jcStatement);
+      case BREAK -> convertBreak((JCBreak) jcStatement);
+      case CLASS ->
+          new LocalClassDeclarationStatement(
+              convertClassDeclaration((JCClassDecl) jcStatement), getSourcePosition(jcStatement));
+      case CONTINUE -> convertContinue((JCContinue) jcStatement);
+      case DO_WHILE_LOOP -> convertDoWhileLoop((JCDoWhileLoop) jcStatement);
+      case EMPTY_STATEMENT -> Statement.createNoopStatement();
+      case ENHANCED_FOR_LOOP -> convertEnhancedForLoop((JCEnhancedForLoop) jcStatement);
+      case EXPRESSION_STATEMENT -> convertExpressionStatement((JCExpressionStatement) jcStatement);
+      case FOR_LOOP -> convertForLoop((JCForLoop) jcStatement);
+      case IF -> convertIf((JCIf) jcStatement);
+      case LABELED_STATEMENT -> convertLabeledStatement((JCLabeledStatement) jcStatement);
+      case RETURN -> convertReturn((JCReturn) jcStatement);
+      case YIELD -> convertYield((JCYield) jcStatement);
+      case SWITCH -> convertSwitch((JCSwitch) jcStatement);
+      case THROW -> convertThrow((JCThrow) jcStatement);
+      case TRY -> convertTry((JCTry) jcStatement);
+      case VARIABLE -> convertVariableDeclaration((JCVariableDecl) jcStatement);
+      case WHILE_LOOP -> convertWhileLoop((JCWhileLoop) jcStatement);
+      case SYNCHRONIZED -> convertSynchronized((JCSynchronized) jcStatement);
+      default -> throw new AssertionError("Unknown statement node type: " + jcStatement.getKind());
+    };
   }
 
   @Nullable
@@ -1343,26 +1321,20 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private static MethodSymbol getMemberSymbol(JCTree.JCExpression node) {
-    switch (node.getKind()) {
-      case IDENTIFIER:
-        return (MethodSymbol) ((JCTree.JCIdent) node).sym.baseSymbol();
-      case MEMBER_SELECT:
-        return (MethodSymbol) ((JCTree.JCFieldAccess) node).sym;
-      default:
-        throw new AssertionError("Unexpected tree kind: " + node.getKind());
-    }
+    return switch (node.getKind()) {
+      case IDENTIFIER -> (MethodSymbol) ((JCTree.JCIdent) node).sym.baseSymbol();
+      case MEMBER_SELECT -> (MethodSymbol) ((JCTree.JCFieldAccess) node).sym;
+      default -> throw new AssertionError("Unexpected tree kind: " + node.getKind());
+    };
   }
 
   @Nullable
   private static JCExpression getQualifier(JCTree.JCExpression node) {
-    switch (node.getKind()) {
-      case IDENTIFIER:
-        return null;
-      case MEMBER_SELECT:
-        return ((JCTree.JCFieldAccess) node).getExpression();
-      default:
-        throw new AssertionError("Unexpected tree kind: " + node.getKind());
-    }
+    return switch (node.getKind()) {
+      case IDENTIFIER -> null;
+      case MEMBER_SELECT -> ((JCTree.JCFieldAccess) node).getExpression();
+      default -> throw new AssertionError("Unexpected tree kind: " + node.getKind());
+    };
   }
 
   private Expression convertConditionRemovingOuterParentheses(JCExpression expression) {

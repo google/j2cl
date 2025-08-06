@@ -31,26 +31,25 @@ public class RewriteShortcutOperators extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-            switch (binaryExpression.getOperator()) {
-              case CONDITIONAL_OR:
-                // a || b => a ? true : b
-                return ConditionalExpression.newBuilder()
-                    .setConditionExpression(binaryExpression.getLeftOperand())
-                    .setTrueExpression(BooleanLiteral.get(true))
-                    .setFalseExpression(binaryExpression.getRightOperand())
-                    .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
-                    .build();
-              case CONDITIONAL_AND:
-                // a && b => a ? b : true
-                return ConditionalExpression.newBuilder()
-                    .setConditionExpression(binaryExpression.getLeftOperand())
-                    .setTrueExpression(binaryExpression.getRightOperand())
-                    .setFalseExpression(BooleanLiteral.get(false))
-                    .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
-                    .build();
-              default:
-                return binaryExpression;
-            }
+            return switch (binaryExpression.getOperator()) {
+              case CONDITIONAL_OR ->
+                  // a || b => a ? true : b
+                  ConditionalExpression.newBuilder()
+                      .setConditionExpression(binaryExpression.getLeftOperand())
+                      .setTrueExpression(BooleanLiteral.get(true))
+                      .setFalseExpression(binaryExpression.getRightOperand())
+                      .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
+                      .build();
+              case CONDITIONAL_AND ->
+                  // a && b => a ? b : true
+                  ConditionalExpression.newBuilder()
+                      .setConditionExpression(binaryExpression.getLeftOperand())
+                      .setTrueExpression(binaryExpression.getRightOperand())
+                      .setFalseExpression(BooleanLiteral.get(false))
+                      .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
+                      .build();
+              default -> binaryExpression;
+            };
           }
         });
   }

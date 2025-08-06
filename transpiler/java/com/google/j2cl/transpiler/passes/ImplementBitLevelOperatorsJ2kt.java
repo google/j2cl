@@ -36,32 +36,23 @@ public final class ImplementBitLevelOperatorsJ2kt extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-            switch (binaryExpression.getOperator()) {
-              case BIT_AND:
-                return rewriteToMethodCall(binaryExpression, "and");
-              case BIT_OR:
-                return rewriteToMethodCall(binaryExpression, "or");
-              case BIT_XOR:
-                return rewriteToMethodCall(binaryExpression, "xor");
-              case LEFT_SHIFT:
-                return rewriteToMethodCall(binaryExpression, "shl");
-              case RIGHT_SHIFT_SIGNED:
-                return rewriteToMethodCall(binaryExpression, "shr");
-              case RIGHT_SHIFT_UNSIGNED:
-                return rewriteToMethodCall(binaryExpression, "ushr");
-              default:
-                return binaryExpression;
-            }
+            return switch (binaryExpression.getOperator()) {
+              case BIT_AND -> rewriteToMethodCall(binaryExpression, "and");
+              case BIT_OR -> rewriteToMethodCall(binaryExpression, "or");
+              case BIT_XOR -> rewriteToMethodCall(binaryExpression, "xor");
+              case LEFT_SHIFT -> rewriteToMethodCall(binaryExpression, "shl");
+              case RIGHT_SHIFT_SIGNED -> rewriteToMethodCall(binaryExpression, "shr");
+              case RIGHT_SHIFT_UNSIGNED -> rewriteToMethodCall(binaryExpression, "ushr");
+              default -> binaryExpression;
+            };
           }
 
           @Override
           public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
-            switch (prefixExpression.getOperator()) {
-              case COMPLEMENT:
-                return rewriteToMethodCall(prefixExpression, "inv");
-              default:
-                return prefixExpression;
-            }
+            return switch (prefixExpression.getOperator()) {
+              case COMPLEMENT -> rewriteToMethodCall(prefixExpression, "inv");
+              default -> prefixExpression;
+            };
           }
         });
   }

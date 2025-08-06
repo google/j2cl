@@ -296,15 +296,11 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
     @Nullable
     private static String getDescription(NullabilityAnnotation nullabilityAnnotation) {
-      switch (nullabilityAnnotation) {
-        case NULLABLE:
-          return "@Nullable";
-        case NONE:
-          return null;
-        case NOT_NULLABLE:
-          return "@NonNull";
-      }
-      throw new AssertionError();
+      return switch (nullabilityAnnotation) {
+        case NULLABLE -> "@Nullable";
+        case NONE -> null;
+        case NOT_NULLABLE -> "@NonNull";
+      };
     }
 
     private String getDescription(MethodDescriptor methodDescriptor) {

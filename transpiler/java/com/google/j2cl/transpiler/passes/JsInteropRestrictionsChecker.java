@@ -1460,7 +1460,7 @@ public class JsInteropRestrictionsChecker {
     String readableDescription = member.getReadableDescription();
     JsMemberType jsMemberType = memberDescriptor.getJsInfo().getJsMemberType();
     switch (jsMemberType) {
-      case CONSTRUCTOR:
+      case CONSTRUCTOR -> {
         if (!((Method) member).isEmpty()) {
           problems.error(
               member.getSourcePosition(),
@@ -1468,10 +1468,8 @@ public class JsInteropRestrictionsChecker {
               readableDescription);
           return;
         }
-        break;
-      case METHOD:
-      case GETTER:
-      case SETTER:
+      }
+      case METHOD, GETTER, SETTER -> {
         if (!member.isAbstract() && !member.isNative()) {
           problems.error(
               member.getSourcePosition(),
@@ -1479,8 +1477,8 @@ public class JsInteropRestrictionsChecker {
               readableDescription);
           return;
         }
-        break;
-      case PROPERTY:
+      }
+      case PROPERTY -> {
         Field field = (Field) member;
         if (field.getDescriptor().isFinal()) {
           problems.error(
@@ -1495,16 +1493,18 @@ public class JsInteropRestrictionsChecker {
               readableDescription);
           return;
         }
-        break;
-      case NONE:
+      }
+      case NONE -> {
         problems.error(
             member.getSourcePosition(),
             "Native JsType member '%s' cannot have @JsIgnore.",
             readableDescription);
         return;
-      case UNDEFINED_ACCESSOR:
+      }
+      case UNDEFINED_ACCESSOR -> {
         // Nothing to check here. An error will be emitted for UNDEFINED_ACCESSOR elsewhere.
         return;
+      }
     }
 
     if (!checkWasmRestrictions) {
@@ -2144,13 +2144,12 @@ public class JsInteropRestrictionsChecker {
     }
 
     switch (memberType) {
-      case UNDEFINED_ACCESSOR:
-        problems.error(
-            method.getSourcePosition(),
-            "JsProperty '%s' should have a correct setter or getter signature.",
-            method.getReadableDescription());
-        break;
-      case GETTER:
+      case UNDEFINED_ACCESSOR ->
+          problems.error(
+              method.getSourcePosition(),
+              "JsProperty '%s' should have a correct setter or getter signature.",
+              method.getReadableDescription());
+      case GETTER -> {
         TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
         if (methodDescriptor.getName().startsWith("is")
             && !TypeDescriptors.isPrimitiveBoolean(returnTypeDescriptor)) {
@@ -2159,17 +2158,16 @@ public class JsInteropRestrictionsChecker {
               "JsProperty '%s' cannot have a non-boolean return.",
               method.getReadableDescription());
         }
-        break;
-      case SETTER:
+      }
+      case SETTER -> {
         if (methodDescriptor.isVarargs()) {
           problems.error(
               method.getSourcePosition(),
               "JsProperty '%s' cannot have a vararg parameter.",
               method.getReadableDescription());
         }
-        break;
-      default:
-        break;
+      }
+      default -> {}
     }
 
     return true;

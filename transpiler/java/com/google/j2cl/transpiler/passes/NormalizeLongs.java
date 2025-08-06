@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 import com.google.common.base.CaseFormat;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -84,16 +82,11 @@ public class NormalizeLongs extends NormalizationPass {
   // TODO(goktug): Remove this method after RewriteUnaryExpressions start running for all backends.
   @Nullable
   private static String getLongOperationFunctionName(PrefixOperator prefixOperator) {
-    switch (prefixOperator) {
-      case MINUS:
-        return "negate"; // Multiply by -1;
-      case COMPLEMENT:
-        return "not"; // Bitwise not
-      default:
-        checkArgument(
-            false, "The requested binary operator is invalid on Longs " + prefixOperator + ".");
-        return null;
-    }
+    return switch (prefixOperator) {
+      case MINUS -> "negate"; // Multiply by -1;
+      case COMPLEMENT -> "not"; // Bitwise not
+      default -> throw new IllegalStateException("Unexpected binary operator " + prefixOperator);
+    };
   }
 
   private static String getLongOperationFunctionName(BinaryOperator operator) {

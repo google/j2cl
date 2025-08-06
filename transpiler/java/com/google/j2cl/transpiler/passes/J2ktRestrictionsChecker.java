@@ -339,17 +339,12 @@ public final class J2ktRestrictionsChecker {
   }
 
   private static String getDescription(Visibility visibility) {
-    switch (visibility) {
-      case PUBLIC:
-        return "public";
-      case PROTECTED:
-        return "protected";
-      case PACKAGE_PRIVATE:
-        return "default";
-      case PRIVATE:
-        return "private";
-    }
-    throw new AssertionError();
+    return switch (visibility) {
+      case PUBLIC -> "public";
+      case PROTECTED -> "protected";
+      case PACKAGE_PRIVATE -> "default";
+      case PRIVATE -> "private";
+    };
   }
 
   /**

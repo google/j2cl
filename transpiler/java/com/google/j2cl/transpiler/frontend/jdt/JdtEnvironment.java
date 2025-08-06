@@ -125,112 +125,69 @@ public class JdtEnvironment {
 
   @Nullable
   public static BinaryOperator getBinaryOperator(InfixExpression.Operator operator) {
-    switch (operator.toString()) {
-      case "*":
-        return BinaryOperator.TIMES;
-      case "/":
-        return BinaryOperator.DIVIDE;
-      case "%":
-        return BinaryOperator.REMAINDER;
-      case "+":
-        return BinaryOperator.PLUS;
-      case "-":
-        return BinaryOperator.MINUS;
-      case "<<":
-        return BinaryOperator.LEFT_SHIFT;
-      case ">>":
-        return BinaryOperator.RIGHT_SHIFT_SIGNED;
-      case ">>>":
-        return BinaryOperator.RIGHT_SHIFT_UNSIGNED;
-      case "<":
-        return BinaryOperator.LESS;
-      case ">":
-        return BinaryOperator.GREATER;
-      case "<=":
-        return BinaryOperator.LESS_EQUALS;
-      case ">=":
-        return BinaryOperator.GREATER_EQUALS;
-      case "==":
-        return BinaryOperator.EQUALS;
-      case "!=":
-        return BinaryOperator.NOT_EQUALS;
-      case "^":
-        return BinaryOperator.BIT_XOR;
-      case "&":
-        return BinaryOperator.BIT_AND;
-      case "|":
-        return BinaryOperator.BIT_OR;
-      case "&&":
-        return BinaryOperator.CONDITIONAL_AND;
-      case "||":
-        return BinaryOperator.CONDITIONAL_OR;
-      default:
-        return null;
-    }
+    return switch (operator.toString()) {
+      case "*" -> BinaryOperator.TIMES;
+      case "/" -> BinaryOperator.DIVIDE;
+      case "%" -> BinaryOperator.REMAINDER;
+      case "+" -> BinaryOperator.PLUS;
+      case "-" -> BinaryOperator.MINUS;
+      case "<<" -> BinaryOperator.LEFT_SHIFT;
+      case ">>" -> BinaryOperator.RIGHT_SHIFT_SIGNED;
+      case ">>>" -> BinaryOperator.RIGHT_SHIFT_UNSIGNED;
+      case "<" -> BinaryOperator.LESS;
+      case ">" -> BinaryOperator.GREATER;
+      case "<=" -> BinaryOperator.LESS_EQUALS;
+      case ">=" -> BinaryOperator.GREATER_EQUALS;
+      case "==" -> BinaryOperator.EQUALS;
+      case "!=" -> BinaryOperator.NOT_EQUALS;
+      case "^" -> BinaryOperator.BIT_XOR;
+      case "&" -> BinaryOperator.BIT_AND;
+      case "|" -> BinaryOperator.BIT_OR;
+      case "&&" -> BinaryOperator.CONDITIONAL_AND;
+      case "||" -> BinaryOperator.CONDITIONAL_OR;
+      default -> null;
+    };
   }
 
   @Nullable
   public static BinaryOperator getBinaryOperator(Assignment.Operator operator) {
-    switch (operator.toString()) {
-      case "=":
-        return BinaryOperator.ASSIGN;
-      case "+=":
-        return BinaryOperator.PLUS_ASSIGN;
-      case "-=":
-        return BinaryOperator.MINUS_ASSIGN;
-      case "*=":
-        return BinaryOperator.TIMES_ASSIGN;
-      case "/=":
-        return BinaryOperator.DIVIDE_ASSIGN;
-      case "&=":
-        return BinaryOperator.BIT_AND_ASSIGN;
-      case "|=":
-        return BinaryOperator.BIT_OR_ASSIGN;
-      case "^=":
-        return BinaryOperator.BIT_XOR_ASSIGN;
-      case "%=":
-        return BinaryOperator.REMAINDER_ASSIGN;
-      case "<<=":
-        return BinaryOperator.LEFT_SHIFT_ASSIGN;
-      case ">>=":
-        return BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN;
-      case ">>>=":
-        return BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN;
-      default:
-        return null;
-    }
+    return switch (operator.toString()) {
+      case "=" -> BinaryOperator.ASSIGN;
+      case "+=" -> BinaryOperator.PLUS_ASSIGN;
+      case "-=" -> BinaryOperator.MINUS_ASSIGN;
+      case "*=" -> BinaryOperator.TIMES_ASSIGN;
+      case "/=" -> BinaryOperator.DIVIDE_ASSIGN;
+      case "&=" -> BinaryOperator.BIT_AND_ASSIGN;
+      case "|=" -> BinaryOperator.BIT_OR_ASSIGN;
+      case "^=" -> BinaryOperator.BIT_XOR_ASSIGN;
+      case "%=" -> BinaryOperator.REMAINDER_ASSIGN;
+      case "<<=" -> BinaryOperator.LEFT_SHIFT_ASSIGN;
+      case ">>=" -> BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN;
+      case ">>>=" -> BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN;
+      default -> null;
+    };
   }
 
   @Nullable
   public static PrefixOperator getPrefixOperator(PrefixExpression.Operator operator) {
-    switch (operator.toString()) {
-      case "++":
-        return PrefixOperator.INCREMENT;
-      case "--":
-        return PrefixOperator.DECREMENT;
-      case "+":
-        return PrefixOperator.PLUS;
-      case "-":
-        return PrefixOperator.MINUS;
-      case "~":
-        return PrefixOperator.COMPLEMENT;
-      case "!":
-        return PrefixOperator.NOT;
-      default:
-        return null;
-    }
+    return switch (operator.toString()) {
+      case "++" -> PrefixOperator.INCREMENT;
+      case "--" -> PrefixOperator.DECREMENT;
+      case "+" -> PrefixOperator.PLUS;
+      case "-" -> PrefixOperator.MINUS;
+      case "~" -> PrefixOperator.COMPLEMENT;
+      case "!" -> PrefixOperator.NOT;
+      default -> null;
+    };
   }
 
   @Nullable
   public static PostfixOperator getPostfixOperator(PostfixExpression.Operator operator) {
-    switch (operator.toString()) {
-      case "++":
-        return PostfixOperator.INCREMENT;
-      case "--":
-        return PostfixOperator.DECREMENT;
-      default:
-        return null;
-    }
+    return switch (operator.toString()) {
+      case "++" -> PostfixOperator.INCREMENT;
+      case "--" -> PostfixOperator.DECREMENT;
+      default -> null;
+    };
   }
 
   public Variable createVariable(
@@ -505,14 +462,11 @@ public class JdtEnvironment {
       boolean inNullMarkedScope) {
     checkArgument(!typeBinding.isPrimitive());
 
-    switch (getNullabilityAnnotation(typeBinding, elementAnnotations)) {
-      case NULLABLE:
-        return true;
-      case NOT_NULLABLE:
-        return false;
-      default:
-        return !inNullMarkedScope;
-    }
+    return switch (getNullabilityAnnotation(typeBinding, elementAnnotations)) {
+      case NULLABLE -> true;
+      case NOT_NULLABLE -> false;
+      default -> !inNullMarkedScope;
+    };
   }
 
   /** Return whether a type is annotated for nullablility and which type of annotation it has. */

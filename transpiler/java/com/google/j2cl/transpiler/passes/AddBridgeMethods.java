@@ -109,15 +109,11 @@ public class AddBridgeMethods extends NormalizationPass {
   }
 
   private static String getJsDocDescription(MethodDescriptor bridgeMethodDescriptor) {
-    switch (bridgeMethodDescriptor.getOrigin()) {
-      case GENERALIZING_BRIDGE:
-        return "Bridge method.";
-      case SPECIALIZING_BRIDGE:
-        return "Specialized bridge method.";
-      case DEFAULT_METHOD_BRIDGE:
-        return "Default method forwarding stub.";
-      default:
-        throw new IllegalArgumentException();
-    }
+    return switch (bridgeMethodDescriptor.getOrigin()) {
+      case GENERALIZING_BRIDGE -> "Bridge method.";
+      case SPECIALIZING_BRIDGE -> "Specialized bridge method.";
+      case DEFAULT_METHOD_BRIDGE -> "Default method forwarding stub.";
+      default -> throw new IllegalArgumentException();
+    };
   }
 }

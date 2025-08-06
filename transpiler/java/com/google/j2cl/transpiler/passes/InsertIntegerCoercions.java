@@ -47,46 +47,42 @@ public class InsertIntegerCoercions extends NormalizationPass {
               return binaryExpression;
             }
 
-            switch (binaryExpression.getOperator()) {
-              case DIVIDE:
-              case REMAINDER:
-                // Division and remainder in addition to coercion to int they also need to
-                // throw ArithmeticException if the divisor is 0, and both things are handled by
-                // {@link Primitives.coerceDivision}.
-                return RuntimeMethods.createPrimitivesMethodCall(
-                    "coerceDivision", binaryExpression);
-              case TIMES:
-                // Multiplication is implemented using Math.imul which will coerce its operands,
-                // hence the coercion that might have been inserted by this pass can be removed
-                // without changing the semantics.
-                return RuntimeMethods.createMathImulMethodCall(
-                    removeCoercion(binaryExpression.getLeftOperand()),
-                    removeCoercion(binaryExpression.getRightOperand()));
-              case RIGHT_SHIFT_UNSIGNED:
-                // The unsigned right shift operation (>>>) in JavaScript coerces the result to an
-                // unsigned 32-bit integer which is not representable in Java int and needs
-                // coercion. However the coercion of its operands can be removed since the
-                // JavaScript vm will coerce the operands.
-              case PLUS:
-              case MINUS:
-                // As an optimization all coercions on sequences of additive operations can be
-                // removed except for the last enclosing one. That is because JavaScript will
-                // preserve integer semantics with 51 bit precision and to achieve an overflow on 51
-                // by sequence of additive operations starting with 32-bit ints will require an
-                // expression too large that is impractical to write (the compiler will probably
-                // fail before compiling an expression that large).
-                // For example, a + b + c will become (a + b + c) | 0 instead of
-                // ((a + b) | 0) + c) | 0.
-                return coerceToInt(
-                    BinaryExpression.Builder.from(binaryExpression)
-                        .setLeftOperand(removeCoercion(binaryExpression.getLeftOperand()))
-                        .setRightOperand(removeCoercion(binaryExpression.getRightOperand()))
-                        .build());
-              default:
-                // Bit-wise and signed shift operations already coerce their parameters to 32-bit
-                // ints, as described in ECMA262 section 6.1.6.1.
-                return binaryExpression;
-            }
+            return switch (binaryExpression.getOperator()) {
+              case DIVIDE, REMAINDER ->
+                  // Division and remainder in addition to coercion to int they also need to
+                  // throw ArithmeticException if the divisor is 0, and both things are handled by
+                  // {@link Primitives.coerceDivision}.
+                  RuntimeMethods.createPrimitivesMethodCall("coerceDivision", binaryExpression);
+              case TIMES ->
+                  // Multiplication is implemented using Math.imul which will coerce its operands,
+                  // hence the coercion that might have been inserted by this pass can be removed
+                  // without changing the semantics.
+                  RuntimeMethods.createMathImulMethodCall(
+                      removeCoercion(binaryExpression.getLeftOperand()),
+                      removeCoercion(binaryExpression.getRightOperand()));
+              case RIGHT_SHIFT_UNSIGNED, PLUS, MINUS ->
+                  // The unsigned right shift operation (>>>) in JavaScript coerces the result to an
+                  // unsigned 32-bit integer which is not representable in Java int and needs
+                  // coercion. However the coercion of its operands can be removed since the
+                  // JavaScript vm will coerce the operands.
+                  // As an optimization all coercions on sequences of additive operations can be
+                  // removed except for the last enclosing one. That is because JavaScript will
+                  // preserve integer semantics with 51 bit precision and to achieve an overflow on
+                  // 51 by sequence of additive operations starting with 32-bit ints will require an
+                  // expression too large that is impractical to write (the compiler will probably
+                  // fail before compiling an expression that large).
+                  // For example, a + b + c will become (a + b + c) | 0 instead of
+                  // ((a + b) | 0) + c) | 0.
+                  coerceToInt(
+                      BinaryExpression.Builder.from(binaryExpression)
+                          .setLeftOperand(removeCoercion(binaryExpression.getLeftOperand()))
+                          .setRightOperand(removeCoercion(binaryExpression.getRightOperand()))
+                          .build());
+              default ->
+                  // Bit-wise and signed shift operations already coerce their parameters to 32-bit
+                  // ints, as described in ECMA262 section 6.1.6.1.
+                  binaryExpression;
+            };
           }
 
           @Override

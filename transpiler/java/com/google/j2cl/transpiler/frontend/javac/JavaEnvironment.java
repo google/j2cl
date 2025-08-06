@@ -149,104 +149,62 @@ class JavaEnvironment {
 
   @Nullable
   static PrefixOperator getPrefixOperator(com.sun.source.tree.Tree.Kind operator) {
-    switch (operator) {
-      case PREFIX_INCREMENT:
-        return PrefixOperator.INCREMENT;
-      case PREFIX_DECREMENT:
-        return PrefixOperator.DECREMENT;
-      case UNARY_PLUS:
-        return PrefixOperator.PLUS;
-      case UNARY_MINUS:
-        return PrefixOperator.MINUS;
-      case BITWISE_COMPLEMENT:
-        return PrefixOperator.COMPLEMENT;
-      case LOGICAL_COMPLEMENT:
-        return PrefixOperator.NOT;
-      default:
-        return null;
-    }
+    return switch (operator) {
+      case PREFIX_INCREMENT -> PrefixOperator.INCREMENT;
+      case PREFIX_DECREMENT -> PrefixOperator.DECREMENT;
+      case UNARY_PLUS -> PrefixOperator.PLUS;
+      case UNARY_MINUS -> PrefixOperator.MINUS;
+      case BITWISE_COMPLEMENT -> PrefixOperator.COMPLEMENT;
+      case LOGICAL_COMPLEMENT -> PrefixOperator.NOT;
+      default -> null;
+    };
   }
 
   @Nullable
   static PostfixOperator getPostfixOperator(com.sun.source.tree.Tree.Kind operator) {
-    switch (operator) {
-      case POSTFIX_INCREMENT:
-        return PostfixOperator.INCREMENT;
-      case POSTFIX_DECREMENT:
-        return PostfixOperator.DECREMENT;
-      default:
-        return null;
-    }
+    return switch (operator) {
+      case POSTFIX_INCREMENT -> PostfixOperator.INCREMENT;
+      case POSTFIX_DECREMENT -> PostfixOperator.DECREMENT;
+      default -> null;
+    };
   }
 
   @Nullable
   static BinaryOperator getBinaryOperator(com.sun.source.tree.Tree.Kind operator) {
-    switch (operator) {
-      case ASSIGNMENT:
-        return BinaryOperator.ASSIGN;
-      case PLUS_ASSIGNMENT:
-        return BinaryOperator.PLUS_ASSIGN;
-      case MINUS_ASSIGNMENT:
-        return BinaryOperator.MINUS_ASSIGN;
-      case MULTIPLY_ASSIGNMENT:
-        return BinaryOperator.TIMES_ASSIGN;
-      case DIVIDE_ASSIGNMENT:
-        return BinaryOperator.DIVIDE_ASSIGN;
-      case AND_ASSIGNMENT:
-        return BinaryOperator.BIT_AND_ASSIGN;
-      case OR_ASSIGNMENT:
-        return BinaryOperator.BIT_OR_ASSIGN;
-      case XOR_ASSIGNMENT:
-        return BinaryOperator.BIT_XOR_ASSIGN;
-      case REMAINDER_ASSIGNMENT:
-        return BinaryOperator.REMAINDER_ASSIGN;
-      case LEFT_SHIFT_ASSIGNMENT:
-        return BinaryOperator.LEFT_SHIFT_ASSIGN;
-      case RIGHT_SHIFT_ASSIGNMENT:
-        return BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN;
-      case UNSIGNED_RIGHT_SHIFT_ASSIGNMENT:
-        return BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN;
-      case AND:
-        return BinaryOperator.BIT_AND;
-      case CONDITIONAL_AND:
-        return BinaryOperator.CONDITIONAL_AND;
-      case CONDITIONAL_OR:
-        return BinaryOperator.CONDITIONAL_OR;
-      case DIVIDE:
-        return BinaryOperator.DIVIDE;
-      case EQUAL_TO:
-        return BinaryOperator.EQUALS;
-      case GREATER_THAN:
-        return BinaryOperator.GREATER;
-      case GREATER_THAN_EQUAL:
-        return BinaryOperator.GREATER_EQUALS;
-      case LEFT_SHIFT:
-        return BinaryOperator.LEFT_SHIFT;
-      case LESS_THAN:
-        return BinaryOperator.LESS;
-      case LESS_THAN_EQUAL:
-        return BinaryOperator.LESS_EQUALS;
-      case MINUS:
-        return BinaryOperator.MINUS;
-      case MULTIPLY:
-        return BinaryOperator.TIMES;
-      case NOT_EQUAL_TO:
-        return BinaryOperator.NOT_EQUALS;
-      case OR:
-        return BinaryOperator.BIT_OR;
-      case PLUS:
-        return BinaryOperator.PLUS;
-      case REMAINDER:
-        return BinaryOperator.REMAINDER;
-      case RIGHT_SHIFT:
-        return BinaryOperator.RIGHT_SHIFT_SIGNED;
-      case UNSIGNED_RIGHT_SHIFT:
-        return BinaryOperator.RIGHT_SHIFT_UNSIGNED;
-      case XOR:
-        return BinaryOperator.BIT_XOR;
-      default:
-        return null;
-    }
+    return switch (operator) {
+      case ASSIGNMENT -> BinaryOperator.ASSIGN;
+      case PLUS_ASSIGNMENT -> BinaryOperator.PLUS_ASSIGN;
+      case MINUS_ASSIGNMENT -> BinaryOperator.MINUS_ASSIGN;
+      case MULTIPLY_ASSIGNMENT -> BinaryOperator.TIMES_ASSIGN;
+      case DIVIDE_ASSIGNMENT -> BinaryOperator.DIVIDE_ASSIGN;
+      case AND_ASSIGNMENT -> BinaryOperator.BIT_AND_ASSIGN;
+      case OR_ASSIGNMENT -> BinaryOperator.BIT_OR_ASSIGN;
+      case XOR_ASSIGNMENT -> BinaryOperator.BIT_XOR_ASSIGN;
+      case REMAINDER_ASSIGNMENT -> BinaryOperator.REMAINDER_ASSIGN;
+      case LEFT_SHIFT_ASSIGNMENT -> BinaryOperator.LEFT_SHIFT_ASSIGN;
+      case RIGHT_SHIFT_ASSIGNMENT -> BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN;
+      case UNSIGNED_RIGHT_SHIFT_ASSIGNMENT -> BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN;
+      case AND -> BinaryOperator.BIT_AND;
+      case CONDITIONAL_AND -> BinaryOperator.CONDITIONAL_AND;
+      case CONDITIONAL_OR -> BinaryOperator.CONDITIONAL_OR;
+      case DIVIDE -> BinaryOperator.DIVIDE;
+      case EQUAL_TO -> BinaryOperator.EQUALS;
+      case GREATER_THAN -> BinaryOperator.GREATER;
+      case GREATER_THAN_EQUAL -> BinaryOperator.GREATER_EQUALS;
+      case LEFT_SHIFT -> BinaryOperator.LEFT_SHIFT;
+      case LESS_THAN -> BinaryOperator.LESS;
+      case LESS_THAN_EQUAL -> BinaryOperator.LESS_EQUALS;
+      case MINUS -> BinaryOperator.MINUS;
+      case MULTIPLY -> BinaryOperator.TIMES;
+      case NOT_EQUAL_TO -> BinaryOperator.NOT_EQUALS;
+      case OR -> BinaryOperator.BIT_OR;
+      case PLUS -> BinaryOperator.PLUS;
+      case REMAINDER -> BinaryOperator.REMAINDER;
+      case RIGHT_SHIFT -> BinaryOperator.RIGHT_SHIFT_SIGNED;
+      case UNSIGNED_RIGHT_SHIFT -> BinaryOperator.RIGHT_SHIFT_UNSIGNED;
+      case XOR -> BinaryOperator.BIT_XOR;
+      default -> null;
+    };
   }
 
   Variable createVariable(

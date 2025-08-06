@@ -292,14 +292,10 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
   }
 
   private static int getAssignabilityLevel(NullabilityAnnotation nullabilityAnnotation) {
-    switch (nullabilityAnnotation) {
-      case NOT_NULLABLE:
-        return -1;
-      case NONE:
-        return 0;
-      case NULLABLE:
-        return 1;
-    }
-    throw new AssertionError();
+    return switch (nullabilityAnnotation) {
+      case NOT_NULLABLE -> -1;
+      case NONE -> 0;
+      case NULLABLE -> 1;
+    };
   }
 }

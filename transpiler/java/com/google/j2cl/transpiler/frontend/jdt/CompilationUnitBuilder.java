@@ -166,17 +166,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return getCurrentCompilationUnit();
     }
     private Type convert(AbstractTypeDeclaration typeDeclaration) {
-      switch (typeDeclaration.getNodeType()) {
-        case ASTNode.ANNOTATION_TYPE_DECLARATION:
-        case ASTNode.TYPE_DECLARATION:
-          return convertType(typeDeclaration);
-        case ASTNode.ENUM_DECLARATION:
-          return convert((EnumDeclaration) typeDeclaration);
-        default:
-          throw internalCompilerError(
-              "Unexpected node type for AbstractTypeDeclaration: %s  type name: %s ",
-              typeDeclaration.getClass().getName(), typeDeclaration.getName().toString());
-      }
+      return switch (typeDeclaration.getNodeType()) {
+        case ASTNode.ANNOTATION_TYPE_DECLARATION, ASTNode.TYPE_DECLARATION ->
+            convertType(typeDeclaration);
+        case ASTNode.ENUM_DECLARATION -> convert((EnumDeclaration) typeDeclaration);
+        default ->
+            throw internalCompilerError(
+                "Unexpected node type for AbstractTypeDeclaration: %s  type name: %s ",
+                typeDeclaration.getClass().getName(), typeDeclaration.getName().toString());
+      };
     }
 
     private Type convert(EnumDeclaration enumDeclaration) {
@@ -494,75 +492,66 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression expression) {
-      switch (expression.getNodeType()) {
-        case ASTNode.ARRAY_ACCESS:
-          return convert((org.eclipse.jdt.core.dom.ArrayAccess) expression);
-        case ASTNode.ARRAY_CREATION:
-          return convert((org.eclipse.jdt.core.dom.ArrayCreation) expression);
-        case ASTNode.ARRAY_INITIALIZER:
-          return convert((org.eclipse.jdt.core.dom.ArrayInitializer) expression);
-        case ASTNode.ASSIGNMENT:
-          return convert((org.eclipse.jdt.core.dom.Assignment) expression);
-        case ASTNode.BOOLEAN_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.BooleanLiteral) expression);
-        case ASTNode.CAST_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.CastExpression) expression);
-        case ASTNode.CHARACTER_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.CharacterLiteral) expression);
-        case ASTNode.CLASS_INSTANCE_CREATION:
-          return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) expression);
-        case ASTNode.CONDITIONAL_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.ConditionalExpression) expression);
-        case ASTNode.EXPRESSION_METHOD_REFERENCE:
-          return convert((org.eclipse.jdt.core.dom.ExpressionMethodReference) expression);
-        case ASTNode.CREATION_REFERENCE:
-          return convert((org.eclipse.jdt.core.dom.CreationReference) expression);
-        case ASTNode.TYPE_METHOD_REFERENCE:
-          return convert((org.eclipse.jdt.core.dom.TypeMethodReference) expression);
-        case ASTNode.SUPER_METHOD_REFERENCE:
-          return convert((org.eclipse.jdt.core.dom.SuperMethodReference) expression);
-        case ASTNode.FIELD_ACCESS:
-          return convert((org.eclipse.jdt.core.dom.FieldAccess) expression);
-        case ASTNode.INFIX_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.InfixExpression) expression);
-        case ASTNode.INSTANCEOF_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.InstanceofExpression) expression);
-        case ASTNode.LAMBDA_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.LambdaExpression) expression);
-        case ASTNode.METHOD_INVOCATION:
-          return convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
-        case ASTNode.NULL_LITERAL:
-          return environment.createTypeDescriptor(expression.resolveTypeBinding()).getNullValue();
-        case ASTNode.NUMBER_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.NumberLiteral) expression);
-        case ASTNode.PARENTHESIZED_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.ParenthesizedExpression) expression);
-        case ASTNode.POSTFIX_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.PostfixExpression) expression);
-        case ASTNode.PREFIX_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.PrefixExpression) expression);
-        case ASTNode.QUALIFIED_NAME:
-          return convert((org.eclipse.jdt.core.dom.QualifiedName) expression);
-        case ASTNode.SIMPLE_NAME:
-          return convert((org.eclipse.jdt.core.dom.SimpleName) expression);
-        case ASTNode.STRING_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.StringLiteral) expression);
-        case ASTNode.SUPER_FIELD_ACCESS:
-          return convert((org.eclipse.jdt.core.dom.SuperFieldAccess) expression);
-        case ASTNode.SUPER_METHOD_INVOCATION:
-          return convert((org.eclipse.jdt.core.dom.SuperMethodInvocation) expression);
-        case ASTNode.SWITCH_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.SwitchExpression) expression);
-        case ASTNode.THIS_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.ThisExpression) expression);
-        case ASTNode.TYPE_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.TypeLiteral) expression);
-        case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression);
-        default:
-          throw internalCompilerError(
-              "Unexpected type for Expression: %s", expression.getClass().getName());
-      }
+      return switch (expression.getNodeType()) {
+        case ASTNode.ARRAY_ACCESS -> convert((org.eclipse.jdt.core.dom.ArrayAccess) expression);
+        case ASTNode.ARRAY_CREATION -> convert((org.eclipse.jdt.core.dom.ArrayCreation) expression);
+        case ASTNode.ARRAY_INITIALIZER ->
+            convert((org.eclipse.jdt.core.dom.ArrayInitializer) expression);
+        case ASTNode.ASSIGNMENT -> convert((org.eclipse.jdt.core.dom.Assignment) expression);
+        case ASTNode.BOOLEAN_LITERAL ->
+            convert((org.eclipse.jdt.core.dom.BooleanLiteral) expression);
+        case ASTNode.CAST_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.CastExpression) expression);
+        case ASTNode.CHARACTER_LITERAL ->
+            convert((org.eclipse.jdt.core.dom.CharacterLiteral) expression);
+        case ASTNode.CLASS_INSTANCE_CREATION ->
+            convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) expression);
+        case ASTNode.CONDITIONAL_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.ConditionalExpression) expression);
+        case ASTNode.EXPRESSION_METHOD_REFERENCE ->
+            convert((org.eclipse.jdt.core.dom.ExpressionMethodReference) expression);
+        case ASTNode.CREATION_REFERENCE ->
+            convert((org.eclipse.jdt.core.dom.CreationReference) expression);
+        case ASTNode.TYPE_METHOD_REFERENCE ->
+            convert((org.eclipse.jdt.core.dom.TypeMethodReference) expression);
+        case ASTNode.SUPER_METHOD_REFERENCE ->
+            convert((org.eclipse.jdt.core.dom.SuperMethodReference) expression);
+        case ASTNode.FIELD_ACCESS -> convert((org.eclipse.jdt.core.dom.FieldAccess) expression);
+        case ASTNode.INFIX_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.InfixExpression) expression);
+        case ASTNode.INSTANCEOF_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.InstanceofExpression) expression);
+        case ASTNode.LAMBDA_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.LambdaExpression) expression);
+        case ASTNode.METHOD_INVOCATION ->
+            convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
+        case ASTNode.NULL_LITERAL ->
+            environment.createTypeDescriptor(expression.resolveTypeBinding()).getNullValue();
+        case ASTNode.NUMBER_LITERAL -> convert((org.eclipse.jdt.core.dom.NumberLiteral) expression);
+        case ASTNode.PARENTHESIZED_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.ParenthesizedExpression) expression);
+        case ASTNode.POSTFIX_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.PostfixExpression) expression);
+        case ASTNode.PREFIX_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.PrefixExpression) expression);
+        case ASTNode.QUALIFIED_NAME -> convert((org.eclipse.jdt.core.dom.QualifiedName) expression);
+        case ASTNode.SIMPLE_NAME -> convert((org.eclipse.jdt.core.dom.SimpleName) expression);
+        case ASTNode.STRING_LITERAL -> convert((org.eclipse.jdt.core.dom.StringLiteral) expression);
+        case ASTNode.SUPER_FIELD_ACCESS ->
+            convert((org.eclipse.jdt.core.dom.SuperFieldAccess) expression);
+        case ASTNode.SUPER_METHOD_INVOCATION ->
+            convert((org.eclipse.jdt.core.dom.SuperMethodInvocation) expression);
+        case ASTNode.SWITCH_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.SwitchExpression) expression);
+        case ASTNode.THIS_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.ThisExpression) expression);
+        case ASTNode.TYPE_LITERAL -> convert((org.eclipse.jdt.core.dom.TypeLiteral) expression);
+        case ASTNode.VARIABLE_DECLARATION_EXPRESSION ->
+            convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression);
+        default ->
+            throw internalCompilerError(
+                "Unexpected type for Expression: %s", expression.getClass().getName());
+      };
     }
 
     private VariableDeclarationExpression convert(
@@ -602,55 +591,48 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Statement convertStatement(org.eclipse.jdt.core.dom.Statement statement) {
-      switch (statement.getNodeType()) {
-        case ASTNode.ASSERT_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.AssertStatement) statement);
-        case ASTNode.BLOCK:
-          return convert((org.eclipse.jdt.core.dom.Block) statement);
-        case ASTNode.BREAK_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.BreakStatement) statement);
-        case ASTNode.CONSTRUCTOR_INVOCATION:
-          return convert((org.eclipse.jdt.core.dom.ConstructorInvocation) statement);
-        case ASTNode.CONTINUE_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.ContinueStatement) statement);
-        case ASTNode.DO_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.DoStatement) statement);
-        case ASTNode.EMPTY_STATEMENT:
-          return Statement.createNoopStatement();
-        case ASTNode.EXPRESSION_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.ExpressionStatement) statement);
-        case ASTNode.FOR_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.ForStatement) statement);
-        case ASTNode.ENHANCED_FOR_STATEMENT:
-          return convert((EnhancedForStatement) statement);
-        case ASTNode.IF_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.IfStatement) statement);
-        case ASTNode.LABELED_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.LabeledStatement) statement);
-        case ASTNode.RETURN_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.ReturnStatement) statement);
-        case ASTNode.SUPER_CONSTRUCTOR_INVOCATION:
-          return convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) statement);
-        case ASTNode.SWITCH_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.SwitchStatement) statement);
-        case ASTNode.SYNCHRONIZED_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.SynchronizedStatement) statement);
-        case ASTNode.THROW_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.ThrowStatement) statement);
-        case ASTNode.TRY_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.TryStatement) statement);
-        case ASTNode.TYPE_DECLARATION_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.TypeDeclarationStatement) statement);
-        case ASTNode.VARIABLE_DECLARATION_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) statement);
-        case ASTNode.WHILE_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.WhileStatement) statement);
-        case ASTNode.YIELD_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.YieldStatement) statement);
-        default:
-          throw internalCompilerError(
-              "Unexpected type for Statement: %s", statement.getClass().getName());
-      }
+      return switch (statement.getNodeType()) {
+        case ASTNode.ASSERT_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.AssertStatement) statement);
+        case ASTNode.BLOCK -> convert((org.eclipse.jdt.core.dom.Block) statement);
+        case ASTNode.BREAK_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.BreakStatement) statement);
+        case ASTNode.CONSTRUCTOR_INVOCATION ->
+            convert((org.eclipse.jdt.core.dom.ConstructorInvocation) statement);
+        case ASTNode.CONTINUE_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.ContinueStatement) statement);
+        case ASTNode.DO_STATEMENT -> convert((org.eclipse.jdt.core.dom.DoStatement) statement);
+        case ASTNode.EMPTY_STATEMENT -> Statement.createNoopStatement();
+        case ASTNode.EXPRESSION_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.ExpressionStatement) statement);
+        case ASTNode.FOR_STATEMENT -> convert((org.eclipse.jdt.core.dom.ForStatement) statement);
+        case ASTNode.ENHANCED_FOR_STATEMENT -> convert((EnhancedForStatement) statement);
+        case ASTNode.IF_STATEMENT -> convert((org.eclipse.jdt.core.dom.IfStatement) statement);
+        case ASTNode.LABELED_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.LabeledStatement) statement);
+        case ASTNode.RETURN_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.ReturnStatement) statement);
+        case ASTNode.SUPER_CONSTRUCTOR_INVOCATION ->
+            convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) statement);
+        case ASTNode.SWITCH_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.SwitchStatement) statement);
+        case ASTNode.SYNCHRONIZED_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.SynchronizedStatement) statement);
+        case ASTNode.THROW_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.ThrowStatement) statement);
+        case ASTNode.TRY_STATEMENT -> convert((org.eclipse.jdt.core.dom.TryStatement) statement);
+        case ASTNode.TYPE_DECLARATION_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.TypeDeclarationStatement) statement);
+        case ASTNode.VARIABLE_DECLARATION_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) statement);
+        case ASTNode.WHILE_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.WhileStatement) statement);
+        case ASTNode.YIELD_STATEMENT ->
+            convert((org.eclipse.jdt.core.dom.YieldStatement) statement);
+        default ->
+            throw internalCompilerError(
+                "Unexpected type for Statement: %s", statement.getClass().getName());
+      };
     }
 
     public SourcePosition getSourcePosition(ASTNode node) {

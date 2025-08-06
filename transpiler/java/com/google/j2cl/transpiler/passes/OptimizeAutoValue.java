@@ -463,19 +463,13 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         continue;
       }
 
-      switch (method.getDescriptor().getName()) {
-        case "equals":
-          mask |= 1;
-          break;
-        case "hashCode":
-          mask |= 2;
-          break;
-        case "toString":
-          mask |= 4;
-          break;
-        default:
-          throw new AssertionError(method.getDescriptor());
-      }
+      mask |=
+          switch (method.getDescriptor().getName()) {
+            case "equals" -> 1;
+            case "hashCode" -> 2;
+            case "toString" -> 4;
+            default -> throw new AssertionError(method.getDescriptor());
+          };
 
       generatedObjectMethods.add(method);
     }

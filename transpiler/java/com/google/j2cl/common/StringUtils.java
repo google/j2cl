@@ -44,31 +44,19 @@ public final class StringUtils {
         // escape sequence.
         i++;
         switch (charArray[i]) {
-          case 't':
-            unescapedStringBuilder.append('\t');
-            continue;
-          case 'n': // newline
-            unescapedStringBuilder.append('\n');
-            continue;
-          case 'r':
-            unescapedStringBuilder.append('\r');
-            continue;
-          case '"':
-            unescapedStringBuilder.append('\"');
-            continue;
-          case '\'':
-            unescapedStringBuilder.append('\'');
-            continue;
-          case '\\':
-            unescapedStringBuilder.append('\\');
-            continue;
-          case 'u':
+          case 't' -> unescapedStringBuilder.append('\t');
+          case 'n' -> unescapedStringBuilder.append('\n');
+          case 'r' -> unescapedStringBuilder.append('\r');
+          case '"' -> unescapedStringBuilder.append('\"');
+          case '\'' -> unescapedStringBuilder.append('\'');
+          case '\\' -> unescapedStringBuilder.append('\\');
+          case 'u' -> {
             unescapedStringBuilder.append(unescapeUnicode(charArray, i));
             i += 4;
-            continue;
-          default:
-            throw new InternalCompilerError("Bad escaping " + string);
+          }
+          default -> throw new InternalCompilerError("Bad escaping " + string);
         }
+        continue;
       }
       unescapedStringBuilder.append(c);
     }
@@ -130,33 +118,27 @@ public final class StringUtils {
 
   /** Produce a readable encoding of a byte in a String. */
   private static String escape(int c, boolean forUtf8) {
-    switch (c) {
-      case 0x09: // tab
-        return "\\t";
-      case 0x0A: // newline
-        return "\\n";
-      case 0x0D: // return
-        return "\\r";
-      case 0x22: // "
-        return "\\\"";
-      case 0x27: // '
-        return "\\'";
-      case 0x5c: // \
-        return "\\\\";
-      default: // fall out
-    }
+    return switch (c) {
+      case 0x09 -> "\\t"; // tab
+      case 0x0A -> "\\n"; // newline
+      case 0x0D -> "\\r"; // return
+      case 0x22 -> "\\\""; // "
+      case 0x27 -> "\\'"; // '
+      case 0x5c -> "\\\\"; // \
+      default -> {
+        // The rest of the ascii range characters do not need escaping in either representation.
+        if (c >= 0x20 && c < 0x7F) {
+          yield String.valueOf((char) c);
+        }
 
-    // The rest of the ascii range characters do not need escaping in either representation.
-    if (c >= 0x20 && c < 0x7F) {
-      return String.valueOf((char) c);
-    }
-
-    if (forUtf8) {
-      checkArgument(c >= 0 && c <= 0xFF);
-      return String.format("\\%02X", (byte) c);
-    } else {
-      return String.format("\\u%04X", c);
-    }
+        if (forUtf8) {
+          checkArgument(c >= 0 && c <= 0xFF);
+          yield String.format("\\%02X", (byte) c);
+        } else {
+          yield String.format("\\u%04X", c);
+        }
+      }
+    };
   }
 
   private StringUtils() {}

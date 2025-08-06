@@ -1315,17 +1315,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public final String toString() {
     StringBuilder sb = new StringBuilder();
     switch (getJsInfo().getJsMemberType()) {
-      case METHOD:
-        sb.append("@JsMethod ");
-        break;
-      case PROPERTY:
-        sb.append("@JsProperty ");
-        break;
-      case CONSTRUCTOR:
-        sb.append("@JsConstructor ");
-        break;
-      default:
-        break;
+      case METHOD -> sb.append("@JsMethod ");
+      case PROPERTY -> sb.append("@JsProperty ");
+      case CONSTRUCTOR -> sb.append("@JsConstructor ");
+      default -> {}
     }
     if (isSuspendFunction()) {
       sb.append("suspend ");
@@ -1350,22 +1343,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       sb.append(" pp");
     }
     switch (getOrigin()) {
-      case SPECIALIZING_BRIDGE:
-        sb.append(" s-bridge");
-        break;
-      case GENERALIZING_BRIDGE:
-        sb.append(" g-bridge");
-        break;
-      case DEFAULT_METHOD_BRIDGE:
-        sb.append(" d-bridge");
-        break;
-      case ABSTRACT_STUB:
-        sb.append(" stub");
-        break;
-      case SOURCE:
-        break;
-      default:
-        sb.append(" synthetic");
+      case SPECIALIZING_BRIDGE -> sb.append(" s-bridge");
+      case GENERALIZING_BRIDGE -> sb.append(" g-bridge");
+      case DEFAULT_METHOD_BRIDGE -> sb.append(" d-bridge");
+      case ABSTRACT_STUB -> sb.append(" stub");
+      case SOURCE -> {}
+      default -> sb.append(" synthetic");
     }
     return sb.toString();
   }

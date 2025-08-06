@@ -71,14 +71,10 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     @Override
     public String getPrefix() {
-      switch (this) {
-          // User written methods and bridges need to be mangled the same way.
-        case SOURCE:
-          return "f_";
-          // Don't prefix the rest, they all start with "$"
-        default:
-          return "";
-      }
+      return switch (this) {
+        case SOURCE -> "f_"; // User written methods and bridges need to be mangled the same way.
+        default -> ""; // Don't prefix the rest, they all start with "$"
+      };
     }
 
     @Override

@@ -92,14 +92,12 @@ public class OptimizeXplatForEach extends NormalizationPass {
               return forEachStatement;
             }
 
-            switch (wellKnownIterable.get().iterationType()) {
-              case FOR_IN:
-                return convertToForInObject(forEachStatement, iterableMethodCall);
-              case FOR_ARRAY:
-                return convertToArrayForLoop(
-                    forEachStatement, iterableMethodCall, wellKnownIterable.get());
-            }
-            throw new AssertionError("exhaustive switch");
+            return switch (wellKnownIterable.get().iterationType()) {
+              case FOR_IN -> convertToForInObject(forEachStatement, iterableMethodCall);
+              case FOR_ARRAY ->
+                  convertToArrayForLoop(
+                      forEachStatement, iterableMethodCall, wellKnownIterable.get());
+            };
           }
         });
   }

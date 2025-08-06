@@ -111,13 +111,10 @@ public final class AnnotatedNodeCollector extends TreeScanner<Void, Void> {
   }
 
   private static String getLastComponent(Tree name) {
-    switch (name.getKind()) {
-      case IDENTIFIER:
-        return ((IdentifierTree) name).getName().toString();
-      case MEMBER_SELECT:
-        return ((MemberSelectTree) name).getIdentifier().toString();
-      default:
-        return "";
-    }
+    return switch (name.getKind()) {
+      case IDENTIFIER -> ((IdentifierTree) name).getName().toString();
+      case MEMBER_SELECT -> ((MemberSelectTree) name).getIdentifier().toString();
+      default -> "";
+    };
   }
 }
