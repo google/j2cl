@@ -247,11 +247,7 @@ public class JsInteropRestrictionsChecker {
           public void exitMethodCall(MethodCall methodCall) {
             MethodDescriptor target = methodCall.getTarget();
             List<Expression> args = methodCall.getArguments();
-            if (target
-                    .getEnclosingTypeDescriptor()
-                    .getQualifiedBinaryName()
-                    .equals("java.lang.System")
-                && target.getName().equals("getProperty")
+            if (AstUtils.isSystemGetPropertyCall(methodCall)
                 && !(args.get(0) instanceof StringLiteral)) {
               problems.error(
                   methodCall.getSourcePosition(),
