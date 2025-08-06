@@ -168,6 +168,7 @@ import com.google.j2cl.transpiler.passes.OptimizeImplicitConstructors;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.OptimizeKotlinCompanions;
 import com.google.j2cl.transpiler.passes.OptimizeXplatForEach;
+import com.google.j2cl.transpiler.passes.OptimizeXplatLogger;
 import com.google.j2cl.transpiler.passes.PreventSmartCasts;
 import com.google.j2cl.transpiler.passes.ProjectCapturesInLambdaParameters;
 import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
@@ -239,7 +240,8 @@ public enum Backend {
           // Must run after NormalizeForEachIterable.
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
           NormalizeSuperMemberReferences::new,
-          RecoverShortcutBooleanOperator::new);
+          RecoverShortcutBooleanOperator::new,
+          OptimizeXplatLogger::new);
     }
 
     @Override
