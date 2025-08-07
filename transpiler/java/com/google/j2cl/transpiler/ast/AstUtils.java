@@ -438,7 +438,7 @@ public final class AstUtils {
                     .setOriginalJsInfo(JsInfo.RAW_FIELD)
                     .build())
             .setQualifier(
-                new JavaScriptConstructorReference(lambdaType.getTypeDeclaration())
+                new JsConstructorReference(lambdaType.getTypeDeclaration())
                     .getPrototypeFieldAccess())
             .build();
 
@@ -450,7 +450,7 @@ public final class AstUtils {
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setOriginalJsInfo(JsInfo.RAW_FIELD)
                     .build())
-            .setQualifier(new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()))
+            .setQualifier(new JsConstructorReference(lambdaType.getTypeDeclaration()))
             .build();
 
     return RuntimeMethods.createUtilMethodCall(

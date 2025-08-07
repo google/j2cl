@@ -31,7 +31,7 @@ import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InitializerBlock;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.JsForInStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LocalFunctionDeclarationStatement;
@@ -373,7 +373,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
     } else {
       checkState(
           !memberReference.getTarget().isStatic()
-              || memberReference.getQualifier() instanceof JavaScriptConstructorReference);
+              || memberReference.getQualifier() instanceof JsConstructorReference);
     }
   }
 }

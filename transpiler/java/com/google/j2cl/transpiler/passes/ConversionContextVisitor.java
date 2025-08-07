@@ -48,7 +48,7 @@ import com.google.j2cl.transpiler.ast.HasSourcePosition;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Invocation;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.JsDocExpression;
 import com.google.j2cl.transpiler.ast.JsForInStatement;
@@ -569,7 +569,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     //      any rewriting themselves (MultiExpression, ExpressionWithComment, VariableDeclarations)
 
     if (expression instanceof Literal // literals
-        || expression instanceof JavaScriptConstructorReference
+        || expression instanceof JsConstructorReference
         // expressions that needs only subexpressions to be handled
         || expression instanceof MultiExpression
         || expression instanceof ExpressionWithComment

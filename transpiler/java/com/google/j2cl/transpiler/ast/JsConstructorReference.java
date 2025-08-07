@@ -22,10 +22,10 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** Refers a constructor in Javascript. */
 @Visitable
-public class JavaScriptConstructorReference extends Expression {
+public class JsConstructorReference extends Expression {
   private final TypeDeclaration typeDeclaration;
 
-  public JavaScriptConstructorReference(TypeDeclaration typeDeclaration) {
+  public JsConstructorReference(TypeDeclaration typeDeclaration) {
     this.typeDeclaration = checkNotNull(typeDeclaration);
   }
 
@@ -52,8 +52,8 @@ public class JavaScriptConstructorReference extends Expression {
   }
 
   @Override
-  public JavaScriptConstructorReference clone() {
-    return new JavaScriptConstructorReference(typeDeclaration);
+  public JsConstructorReference clone() {
+    return new JsConstructorReference(typeDeclaration);
   }
 
   public TypeDeclaration getReferencedTypeDeclaration() {
@@ -62,6 +62,6 @@ public class JavaScriptConstructorReference extends Expression {
 
   @Override
   Node acceptInternal(Processor processor) {
-    return Visitor_JavaScriptConstructorReference.visit(processor, this);
+    return Visitor_JsConstructorReference.visit(processor, this);
   }
 }

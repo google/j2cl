@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.Type;
@@ -37,7 +37,7 @@ public class ResolveImplicitStaticQualifiers extends NormalizationPass {
             if (target.isStatic() && memberReference.getQualifier() == null) {
               return MemberReference.Builder.from(memberReference)
                   .setQualifier(
-                      new JavaScriptConstructorReference(
+                      new JsConstructorReference(
                           target.getEnclosingTypeDescriptor().getTypeDeclaration()))
                   .build();
             }

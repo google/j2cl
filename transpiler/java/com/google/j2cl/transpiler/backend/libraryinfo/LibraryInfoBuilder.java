@@ -31,7 +31,7 @@ import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDeclarationStatement;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Invocation;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -212,7 +212,7 @@ public final class LibraryInfoBuilder {
     }
 
     // The set of types that are explicitly referenced in this member; these come from
-    // JavaScriptConstructorReferences that appear in the AST from type literals, casts,
+    // JsConstructorReference that appear in the AST from type literals, casts,
     // instanceofs and also the qualifier in every static member reference.
     // References to static members already include the enclosing class, so in order to avoid
     // redundancy in library info these types are tracked separately and removed.
@@ -228,7 +228,7 @@ public final class LibraryInfoBuilder {
     member.accept(
         new AbstractVisitor() {
           @Override
-          public void exitJavaScriptConstructorReference(JavaScriptConstructorReference node) {
+          public void exitJsConstructorReference(JsConstructorReference node) {
             DeclaredTypeDescriptor referencedType =
                 node.getReferencedTypeDeclaration().toDescriptor();
 

@@ -38,7 +38,7 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocExpression;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Library;
@@ -487,8 +487,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     MethodCall mixinCall =
         MethodCall.Builder.from(mixinMethodDescriptor)
             .setArguments(
-                new JavaScriptConstructorReference(autoValue.getDeclaration()),
-                new JavaScriptConstructorReference(
+                new JsConstructorReference(autoValue.getDeclaration()),
+                new JsConstructorReference(
                     TypeDescriptors.get().javaemulInternalValueType.getTypeDeclaration()),
                 NumberLiteral.fromInt(mask),
                 getProperyNameExpressions(autoValue.getDeclaration(), excludedFields))
@@ -576,7 +576,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                 .map(
                     name ->
                         objectPropertyCallBuilder
-                            .setArguments(name, new JavaScriptConstructorReference(type))
+                            .setArguments(name, new JsConstructorReference(type))
                             .build())
                 .toArray(Expression[]::new))
         .build();
@@ -584,8 +584,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
   private static Expression createPrototypeFieldAccess(Type type, FieldDescriptor field) {
     return FieldAccess.Builder.from(field)
-        .setQualifier(
-            new JavaScriptConstructorReference(type.getDeclaration()).getPrototypeFieldAccess())
+        .setQualifier(new JsConstructorReference(type.getDeclaration()).getPrototypeFieldAccess())
         .build();
   }
 }

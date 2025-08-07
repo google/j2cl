@@ -227,8 +227,8 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
    * casts. In most cases it the underlying JavaScript constructor for the class but not in all
    * (such as native @JsTypes and @JsFunctions).
    */
-  public final JavaScriptConstructorReference getMetadataConstructorReference() {
-    return new JavaScriptConstructorReference(getMetadataTypeDeclaration());
+  public final JsConstructorReference getMetadataConstructorReference() {
+    return new JsConstructorReference(getMetadataTypeDeclaration());
   }
 
   /** A function that replaces a TypeDescriptor. */

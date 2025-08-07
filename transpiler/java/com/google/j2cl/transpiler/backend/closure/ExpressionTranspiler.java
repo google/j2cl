@@ -40,7 +40,7 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.JsDocExpression;
 import com.google.j2cl.transpiler.ast.JsYieldExpression;
@@ -356,12 +356,12 @@ public final class ExpressionTranspiler {
       @SuppressWarnings("ReferenceEquality")
       private boolean shouldRenderQualifier(Expression qualifier) {
         checkNotNull(qualifier);
-        if (!(qualifier instanceof JavaScriptConstructorReference constructorReference)) {
+        if (!(qualifier instanceof JsConstructorReference constructorReference)) {
           return true;
         }
 
         // Static members in the global scope are explicitly qualified by a
-        // JavaScriptConstructorReference node to the TypeDescriptor representing the global scope.
+        // JsConstructorReference node to the TypeDescriptor representing the global scope.
         return constructorReference.getReferencedTypeDeclaration()
             != TypeDescriptors.get().globalNamespace.getTypeDeclaration();
       }
@@ -481,8 +481,7 @@ public final class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterJavaScriptConstructorReference(
-          JavaScriptConstructorReference constructorReference) {
+      public boolean enterJsConstructorReference(JsConstructorReference constructorReference) {
         sourceBuilder.append(
             environment.aliasForType(constructorReference.getReferencedTypeDeclaration()));
         return false;

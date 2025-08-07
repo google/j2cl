@@ -28,7 +28,7 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -173,10 +173,9 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
         AstUtils.createParameterVariables(jsFunctionMethodDescriptor.getParameterTypeDescriptors());
 
     // Does the method reference have a qualifier? I.e., the qualifier is not null and is not a
-    // class name (modeled as a JavaScriptConstructorReference). Used in unqualified instance
+    // class name (modeled as a JsConstructorReference). Used in unqualified instance
     // method/Kotlin extension transformations below.
-    boolean hasQualifier =
-        qualifier != null && !(qualifier instanceof JavaScriptConstructorReference);
+    boolean hasQualifier = qualifier != null && !(qualifier instanceof JsConstructorReference);
 
     boolean needsQualifier =
         !targetMethodDescriptor.isStatic() && !targetMethodDescriptor.isLocalFunction();

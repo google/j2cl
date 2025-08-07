@@ -19,7 +19,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
@@ -116,7 +116,7 @@ public class ImplementClassMetadataViaConstructors extends NormalizationPass {
     type.addLoadTimeStatement(
         RuntimeMethods.createUtilMethodCall(
                 getSetMetadataMethodName(targetTypeDeclaration),
-                new JavaScriptConstructorReference(type.getDeclaration()),
+                new JsConstructorReference(type.getDeclaration()),
                 new StringLiteral(name))
             .makeStatement(SourcePosition.NONE));
   }

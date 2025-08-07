@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Type;
@@ -30,8 +30,7 @@ public final class AddInterfaceConstructorCasts extends NormalizationPass {
     type.accept(
         new AbstractRewriter() {
           @Override
-          public Node rewriteJavaScriptConstructorReference(
-              JavaScriptConstructorReference constructorReference) {
+          public Node rewriteJsConstructorReference(JsConstructorReference constructorReference) {
             if (!constructorReference.getReferencedTypeDeclaration().isInterface()) {
               return constructorReference;
             }

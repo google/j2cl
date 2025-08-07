@@ -26,7 +26,7 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -71,7 +71,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
       // Type.$markImplementor(Type);
       type.addLoadTimeStatement(
           createMarkImplementorCall(
-              type.getTypeDescriptor(), new JavaScriptConstructorReference(type.getDeclaration())));
+              type.getTypeDescriptor(), new JsConstructorReference(type.getDeclaration())));
     } else {
       // Call markImplementor on all interfaces that are directly implemented by the class to
       // implement the support instanceOf Interface.
@@ -86,8 +86,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
         // Interface.$markImplementor(Type);
         type.addLoadTimeStatement(
             createMarkImplementorCall(
-                interfaceTypeDescriptor,
-                new JavaScriptConstructorReference(type.getDeclaration())));
+                interfaceTypeDescriptor, new JsConstructorReference(type.getDeclaration())));
       }
     }
   }

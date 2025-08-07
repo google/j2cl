@@ -33,7 +33,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
@@ -217,8 +217,7 @@ class ImportGatherer extends AbstractVisitor {
 
   @SuppressWarnings("ReferenceEquality")
   @Override
-  public void exitJavaScriptConstructorReference(
-      JavaScriptConstructorReference constructorReference) {
+  public void exitJsConstructorReference(JsConstructorReference constructorReference) {
     TypeDeclaration referencedTypeDeclaration = constructorReference.getReferencedTypeDeclaration();
     if (referencedTypeDeclaration == TypeDescriptors.get().globalNamespace.getTypeDeclaration()) {
       // We don't need to record global since it doesn't have a name but we still want the rest of

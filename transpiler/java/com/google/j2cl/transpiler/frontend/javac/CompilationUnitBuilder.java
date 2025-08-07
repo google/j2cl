@@ -53,7 +53,7 @@ import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
@@ -936,7 +936,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
-    if (qualifier instanceof JavaScriptConstructorReference) {
+    if (qualifier instanceof JsConstructorReference) {
       // The qualifier was just the class name, remove it.
       qualifier = null;
     }
@@ -1038,7 +1038,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     Expression qualifier;
     if (fieldAccess.sym instanceof VariableElement variableElement) {
       qualifier = convertExpression(expression);
-      if (qualifier instanceof JavaScriptConstructorReference) {
+      if (qualifier instanceof JsConstructorReference) {
         // Remove qualifier if it a type. A type can only be a qualifier for a static field and
         // in such cases the actual target type is part of the field descriptor.
         checkState(fieldAccess.sym.isStatic());
@@ -1111,7 +1111,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     JCExpression jcQualifier = getExplicitQualifier(methodInvocation);
     Expression qualifier = convertExpressionOrNull(jcQualifier);
     MethodSymbol methodSymbol = getMemberSymbol(methodInvocation.getMethodSelect());
-    if (qualifier instanceof JavaScriptConstructorReference) {
+    if (qualifier instanceof JsConstructorReference) {
       // Remove qualifier if it is a type name. Only allowed for static methods.
       checkState(methodSymbol.isStatic());
       qualifier = null;
@@ -1281,7 +1281,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
     Symbol symbol = identifier.sym;
     if (symbol instanceof ClassSymbol classSymbol) {
-      return new JavaScriptConstructorReference(environment.createTypeDeclaration(classSymbol));
+      return new JsConstructorReference(environment.createTypeDeclaration(classSymbol));
     }
     if (symbol instanceof VarSymbol varSymbol) {
 
