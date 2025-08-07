@@ -133,6 +133,7 @@ import org.eclipse.jdt.core.dom.UnionType;
 import org.eclipse.jdt.core.dom.VariableDeclaration;
 
 /** Creates a J2CL Java AST from the AST provided by JDT. */
+@SuppressWarnings("UnnecessarilyFullyQualified")
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private final JdtEnvironment environment;
