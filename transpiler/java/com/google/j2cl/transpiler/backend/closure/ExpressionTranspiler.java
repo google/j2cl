@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.AwaitExpression;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CastExpression;
@@ -40,6 +39,7 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
+import com.google.j2cl.transpiler.ast.JsAwaitExpression;
 import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.JsDocExpression;
@@ -107,7 +107,7 @@ public final class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterAwaitExpression(AwaitExpression awaitExpression) {
+      public boolean enterJsAwaitExpression(JsAwaitExpression awaitExpression) {
         sourceBuilder.append("await ");
         processRightSubExpression(awaitExpression, awaitExpression.getExpression());
         return false;

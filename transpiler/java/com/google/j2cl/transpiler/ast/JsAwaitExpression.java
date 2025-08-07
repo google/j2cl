@@ -20,13 +20,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
-/** Class for Await expression. */
+/** JavaScript 'await' expression. */
 @Visitable
-public class AwaitExpression extends Expression {
+public class JsAwaitExpression extends Expression {
   @Visitable Expression expression;
   @Visitable TypeDescriptor typeDescriptor;
 
-  private AwaitExpression(Expression expression, TypeDescriptor typeDescriptor) {
+  private JsAwaitExpression(Expression expression, TypeDescriptor typeDescriptor) {
     this.expression = checkNotNull(expression);
     this.typeDescriptor = checkNotNull(typeDescriptor);
   }
@@ -47,8 +47,8 @@ public class AwaitExpression extends Expression {
   }
 
   @Override
-  public AwaitExpression clone() {
-    return new AwaitExpression(expression.clone(), typeDescriptor);
+  public JsAwaitExpression clone() {
+    return new JsAwaitExpression(expression.clone(), typeDescriptor);
   }
 
   public static Builder newBuilder() {
@@ -57,7 +57,7 @@ public class AwaitExpression extends Expression {
 
   @Override
   Node acceptInternal(Processor processor) {
-    return Visitor_AwaitExpression.visit(processor, this);
+    return Visitor_JsAwaitExpression.visit(processor, this);
   }
 
   /** A builder for AwaitExpressions. */
@@ -65,7 +65,7 @@ public class AwaitExpression extends Expression {
     private Expression expression;
     private TypeDescriptor typeDescriptor;
 
-    public static Builder from(AwaitExpression awaitExpression) {
+    public static Builder from(JsAwaitExpression awaitExpression) {
       return new Builder()
           .setExpression(awaitExpression.getExpression())
           .setTypeDescriptor(awaitExpression.getTypeDescriptor());
@@ -81,8 +81,8 @@ public class AwaitExpression extends Expression {
       return this;
     }
 
-    public AwaitExpression build() {
-      return new AwaitExpression(expression, typeDescriptor);
+    public JsAwaitExpression build() {
+      return new JsAwaitExpression(expression, typeDescriptor);
     }
   }
 }

@@ -18,9 +18,9 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.AwaitExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.JsAwaitExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 
@@ -37,7 +37,7 @@ public class NormalizeJsAwaitMethodInvocations extends NormalizationPass {
               checkArgument(
                   methodCall.getArguments().size() == 1,
                   "await should only have a single argument");
-              return AwaitExpression.newBuilder()
+              return JsAwaitExpression.newBuilder()
                   .setExpression(methodCall.getArguments().get(0))
                   .setTypeDescriptor(methodCall.getTypeDescriptor())
                   .build();
