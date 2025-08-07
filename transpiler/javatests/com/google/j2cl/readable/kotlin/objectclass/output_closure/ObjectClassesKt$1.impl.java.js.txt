@@ -1,0 +1,66 @@
+goog.module('objectclass.ObjectClassesKt.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1_$1 = goog.forwardDeclare('objectclass.ObjectClassesKt.$1.$1$impl');
+
+/**
+ * @final
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!*} @nodts*/
+  this.f_y__objectclass_ObjectClassesKt_1_;
+  /**@type {!*} @nodts*/
+  this.$captured_x__objectclass_ObjectClassesKt_1;
+ }
+ /** @nodts @return {!$1} */
+ static $create__java_lang_Object(/** !* */ $captured_x) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__objectclass_ObjectClassesKt_1__java_lang_Object__void($captured_x);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objectclass_ObjectClassesKt_1__java_lang_Object__void(/** !* */ $captured_x) {
+  this.$captured_x__objectclass_ObjectClassesKt_1 = $captured_x;
+  this.$ctor__java_lang_Object__void();
+  this.f_y__objectclass_ObjectClassesKt_1_ = $captured_x;
+ }
+ /** @final @nodts @return {!*} */
+ m_getY__java_lang_Object() {
+  return this.f_y__objectclass_ObjectClassesKt_1_;
+ }
+ /** @final @nodts */
+ m_setY__java_lang_Object__void(/** !* */ set__) {
+  this.f_y__objectclass_ObjectClassesKt_1_ = set__;
+ }
+ /** @final @nodts @return {!*} */
+ m_someFun__java_lang_Object() {
+  let nested = $1_$1.$create__objectclass_ObjectClassesKt_1(this);
+  return nested.m_someOtherFun__java_lang_Object();
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1_$1 = goog.module.get('objectclass.ObjectClassesKt.$1.$1$impl');
+ }
+}
+$Util.$setClassMetadata($1, 'objectclass.ObjectClassesKt$1');
+
+exports = $1;
+
+//# sourceMappingURL=ObjectClassesKt$1.js.map

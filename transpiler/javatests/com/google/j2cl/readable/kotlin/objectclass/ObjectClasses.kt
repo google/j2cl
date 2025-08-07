@@ -39,13 +39,16 @@ interface InterfaceType {
 
 object B : InterfaceType {
   fun add(i: Int): Int = i + 1
+
   override fun doSomething() = "C"
 }
 
 open class OpenClass {
   var prop: String = "buzz"
   open var abstractProp: String = "default"
+
   fun doSomething(): String = "D"
+
   open fun abstractFn(): String = "default"
 }
 
@@ -63,4 +66,21 @@ object C : OpenClass() {
 
 object D : OpenClass(), InterfaceType {
   fun add(i: Int): Int = i + 1
+}
+
+fun objectCapture() {
+  var x = Any()
+  val o =
+    object {
+      var y = x
+
+      fun someFun(): Any {
+        val nested =
+          object {
+            fun someOtherFun() = y
+          }
+        return nested.someOtherFun()
+      }
+    }
+  val result = o.someFun()
 }

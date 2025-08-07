@@ -1,0 +1,54 @@
+goog.module('objectclass.ObjectClassesKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('objectclass.ObjectClassesKt.$1$impl');
+
+/**
+ * @final
+ */
+class ObjectClassesKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ObjectClassesKt} */
+ static $create__() {
+  ObjectClassesKt.$clinit();
+  let $instance = new ObjectClassesKt();
+  $instance.$ctor__objectclass_ObjectClassesKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objectclass_ObjectClassesKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_objectCapture__void() {
+  ObjectClassesKt.$clinit();
+  let x = j_l_Object.$create__();
+  let o = $1.$create__java_lang_Object(x);
+  let result = o.m_someFun__java_lang_Object();
+ }
+ /** @nodts */
+ static $clinit() {
+  ObjectClassesKt.$clinit = () =>{};
+  ObjectClassesKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ObjectClassesKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('objectclass.ObjectClassesKt.$1$impl');
+ }
+}
+$Util.$setClassMetadata(ObjectClassesKt, 'objectclass.ObjectClassesKt');
+
+exports = ObjectClassesKt;
+
+//# sourceMappingURL=ObjectClassesKt.js.map

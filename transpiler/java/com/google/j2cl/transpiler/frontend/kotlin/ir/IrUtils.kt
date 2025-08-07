@@ -100,6 +100,7 @@ import org.jetbrains.kotlin.ir.util.isInterface
 import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isKSuspendFunction
 import org.jetbrains.kotlin.ir.util.isLocal
+import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.isOverridableOrOverrides
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.isReal
@@ -397,9 +398,9 @@ val IrClass.isCapturingEnclosingInstance: Boolean
   get() {
     // Never capture file classes.
     if (parentClassOrNull?.isFileClass == true) return false
-    // Classes defined in a companion object never captures the companion. Any references to the
-    // companion instance is replaced by a reference to the singleton field.
-    if (parentClassOrNull?.isCompanion == true) return false
+    // Classes defined in an object never captures the enclosing object. Any references to the
+    // object instance have already been replaced with references to the singleton instance field.
+    if (parentClassOrNull?.isObject == true) return false
     // companion declarations annotated with JvmStatic may move in the enclosing class and be part
     // of a static function. Field initializers will be part of the static class initializer
     // function.
