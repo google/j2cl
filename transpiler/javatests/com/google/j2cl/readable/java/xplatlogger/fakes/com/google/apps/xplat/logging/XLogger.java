@@ -15,6 +15,10 @@
  */
 package com.google.apps.xplat.logging;
 
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOptional;
+import org.jspecify.annotations.Nullable;
+
 public final class XLogger {
 
   public static XLogger getLogger(Class<?> sourceClass) {
@@ -29,7 +33,11 @@ public final class XLogger {
     return null;
   }
 
-  void log_atInfo(Throwable throwable, String message, Object... args) {}
+  @JsMethod
+  void log_atInfo(
+      String message,
+      @JsOptional Object @Nullable [] args,
+      @JsOptional @Nullable Throwable cause) {}
 
   boolean isEnabled_atInfo() {
     return false;

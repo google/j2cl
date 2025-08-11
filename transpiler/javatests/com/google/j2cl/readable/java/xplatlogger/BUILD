@@ -16,6 +16,10 @@ j2cl_library(
     visibility = [
         "//transpiler/javatests/com/google/j2cl/readable/kotlin/xplatlogger:__pkg__",
     ],
+    deps = [
+        "//third_party:jsinterop-annotations-j2cl",
+        "//third_party:jspecify_annotations-j2cl",
+    ],
 )
 
 readable_example(

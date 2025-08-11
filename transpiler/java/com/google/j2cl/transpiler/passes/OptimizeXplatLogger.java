@@ -20,13 +20,11 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import java.util.List;
 import javax.annotation.Nullable;
 
 /** Rewrites fluent Xplat logger calls to non-polymorphic log method calls. */
@@ -49,7 +47,7 @@ public class OptimizeXplatLogger extends NormalizationPass {
 
   /**
    * Replace calls with the pattern logger.at<Level>().withCause(cause).log(...) with
-   * logger.log_at<Level>(cause, ...) where withCause is optional. And 'isEnabled' is also handled
+   * logger.log_at<Level>(..., cause) where withCause is optional. And 'isEnabled' is also handled
    * similarly if there is no cause in the chain.
    */
   private static MethodCall getReplacementLogCall(String loggingApi, MethodCall methodCall) {
@@ -83,9 +81,18 @@ public class OptimizeXplatLogger extends NormalizationPass {
       return methodCall;
     }
 
+    var replacementArguments = getReplacementArguments(methodCall, cause);
+
+    // Make sure to match arguments in size (due to optional parameters).
+    replacementMethodDescriptor =
+        replacementMethodDescriptor.transform(
+            builder ->
+                builder.setParameterTypeDescriptors(
+                    builder.getParameterTypeDescriptors().subList(0, replacementArguments.size())));
+
     return MethodCall.Builder.from(replacementMethodDescriptor)
         .setQualifier(qualifierMethodCall.getQualifier())
-        .setArguments(getReplacementArguments(methodCall, cause))
+        .setArguments(replacementArguments)
         .build();
   }
 
@@ -115,30 +122,22 @@ public class OptimizeXplatLogger extends NormalizationPass {
 
   private static ImmutableList<Expression> getReplacementArguments(
       MethodCall methodCall, Expression cause) {
-    if (methodCall.getArguments().isEmpty()) {
-      // No arguments. This implies that this is 'isEnabled' and we haven't extracted a cause call.
-      checkState(methodCall.getTarget().getName().equals("isEnabled"));
-      checkState(cause == null);
-      return ImmutableList.of();
-    }
-    return new ImmutableList.Builder<Expression>()
-        .add(cause == null ? TypeDescriptors.get().javaLangThrowable.getNullValue() : cause)
-        .addAll(extractArguments(methodCall))
-        .build();
-  }
+    var builder = new ImmutableList.Builder<Expression>();
+    builder.addAll(methodCall.getArguments());
 
-  private static List<Expression> extractArguments(MethodCall methodCall) {
-    if (methodCall.getTarget().isVarargs()) {
-      return methodCall.getArguments();
+    if (cause != null) {
+      // Having a cause implies that this is 'log' (vs 'isEnabled' which was filtered out earlier).
+      checkState(methodCall.getTarget().getName().equals("log"));
+
+      // To add the cause, need to ensure args argument is added as it was optional.
+      if (methodCall.getArguments().size() == 1) {
+        builder.add(TypeDescriptors.get().javaLangObjectArray.getNullValue());
+      }
+
+      builder.add(cause);
     }
-    // Add missing varargs argument.
-    return ImmutableList.of(
-        methodCall.getArguments().getFirst(),
-        new ArrayLiteral.Builder()
-            .setTypeDescriptor(TypeDescriptors.get().javaLangObjectArray)
-            .setValueExpressions(
-                methodCall.getArguments().subList(1, methodCall.getArguments().size()))
-            .build());
+
+    return builder.build();
   }
 
   private static String getWellKnownLoggingApiMethodName(MethodCall methodCall) {
