@@ -3,11 +3,13 @@ goog.module('whenstatement.WhenStatement$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let Numbers = goog.forwardDeclare('whenstatement.Numbers$impl');
 
 /**
@@ -291,6 +293,22 @@ class WhenStatement extends j_l_Object {
   return a;
  }
  /** @final @nodts @return {number} */
+ m_whenExpressionWithStatements__int__int(/** number */ i) {
+  let tmp0_subject = i;
+  let /** number */ tmp;
+  if (tmp0_subject == 1) {
+   this.m_sideEffect__void_$p_whenstatement_WhenStatement();
+   tmp = 10;
+  } else if (tmp0_subject == 2) {
+   throw $Exceptions.toJs(Exception.$create__());
+  } else {
+   tmp = 20;
+  }
+  return tmp;
+ }
+ /** @final @nodts */
+ m_sideEffect__void_$p_whenstatement_WhenStatement() {}
+ /** @final @nodts @return {number} */
  m_whenWithImplicitEqualsComparison__int() {
   let o = j_l_Object.$create__();
   let a = j_l_Object.$create__();
@@ -311,11 +329,13 @@ class WhenStatement extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Exception = goog.module.get('java.lang.Exception$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   Objects = goog.module.get('java.util.Objects$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   Numbers = goog.module.get('whenstatement.Numbers$impl');
  }
 }

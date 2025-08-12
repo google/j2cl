@@ -16,6 +16,7 @@
 package whenstatement
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
+import com.google.j2cl.integration.testing.Asserts.assertThrows
 import com.google.j2cl.integration.testing.Asserts.fail
 
 /** Test unary operations. */
@@ -28,6 +29,7 @@ fun main(vararg unused: String) {
   testEmptyWhen()
   testOnlyElse()
   testWhenWithOneBranch()
+  testWhenExpressionWithStatements()
 }
 
 private fun testSwitchValues() {
@@ -204,6 +206,35 @@ private fun testOnlyElse() {
       else -> 4
     }
   assertEquals(4, a)
+}
+
+private fun testWhenExpressionWithStatements() {
+  sideEffectCtr = 0
+
+  assertEquals(10, whenExpressionWithStatements(1))
+  assertEquals(1, sideEffectCtr)
+
+  assertThrows(Exception::class.java) { whenExpressionWithStatements(2) }
+  assertEquals(1, sideEffectCtr)
+
+  assertEquals(20, whenExpressionWithStatements(3))
+  assertEquals(1, sideEffectCtr)
+}
+
+private fun whenExpressionWithStatements(i: Int): Int =
+  when (i) {
+    1 -> {
+      sideEffect()
+      10
+    }
+    2 -> throw Exception()
+    else -> 20
+  }
+
+private var sideEffectCtr = 0
+
+private fun sideEffect() {
+  sideEffectCtr++
 }
 
 enum class OneEntry {

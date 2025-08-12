@@ -195,6 +195,19 @@ class WhenStatement {
     return a
   }
 
+  fun whenExpressionWithStatements(i: Int): Int {
+    return when (i) {
+      1 -> {
+        sideEffect()
+        10
+      }
+      2 -> throw Exception()
+      else -> 20
+    }
+  }
+
+  private fun sideEffect() {}
+
   fun whenWithImplicitEqualsComparison(): Int {
     var o: Any? = Any()
     var a = Any()
