@@ -34,19 +34,19 @@ class PrimaryWithParentNoPrimary extends ParentWithoutPrimary {
  }
  //Factory method corresponding to constructor 'PrimaryWithParentNoPrimary(int, boolean, int, DefaultConstructorMarker)'.
  /** @nodts @return {!PrimaryWithParentNoPrimary} */
- static $create__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ id, /** boolean */ flag, /** number */ _mask0, /** DefaultConstructorMarker */ _marker) {
+ static $create__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ id, /** boolean */ flag, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
   PrimaryWithParentNoPrimary.$clinit();
   let $instance = new PrimaryWithParentNoPrimary();
-  $instance.$ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker__void(id, flag, _mask0, _marker);
+  $instance.$ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker__void(id, flag, $mask0, $marker);
   return $instance;
  }
  //Initialization from constructor 'PrimaryWithParentNoPrimary(int, boolean, int, DefaultConstructorMarker)'.
  /** @nodts */
- $ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ id, /** boolean */ flag, /** number */ _mask0, /** DefaultConstructorMarker */ _marker) {
-  if ((_mask0 & 1) != 0) {
+ $ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ id, /** boolean */ flag, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
+  if (($mask0 & 1) != 0) {
    id = 1;
   }
-  if ((_mask0 & 2) != 0) {
+  if (($mask0 & 2) != 0) {
    flag = true;
   }
   this.$ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__void(id, flag);

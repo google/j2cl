@@ -3,6 +3,7 @@ goog.module('localfunction.LocalFunctionKt$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Appendable = goog.forwardDeclare('java.lang.Appendable$impl');
 let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
@@ -82,9 +83,16 @@ class LocalFunctionKt extends j_l_Object {
  }
  /** @nodts @return {string} */
  static m_localFunctionInInlinedLambda__java_lang_String() {
+  let anonymous_$appendTwoDigit = (/** !Appendable */ this_1, /** !StringBuilder */ $this_apply, /** number */ number_1) =>{
+   if (number_1 < 10) {
+    this_1.m_append__char__java_lang_Appendable(48 /* '0' */);
+   }
+   $this_apply.m_append__int__java_lang_StringBuilder(number_1);
+  };
   let tmp0__this_ = StringBuilder.$create__();
-  let this_1 = tmp0__this_;
-  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(this_1.toString());
+  let this_2 = tmp0__this_;
+  anonymous_$appendTwoDigit(this_2, this_2, 1);
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(this_2.toString());
  }
  /** @nodts @template T @return {string} */
  static m_localFunctionWithGenericType__java_lang_Object__java_lang_String(/** T */ t) {

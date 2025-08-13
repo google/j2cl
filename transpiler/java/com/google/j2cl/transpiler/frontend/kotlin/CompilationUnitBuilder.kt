@@ -99,7 +99,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFuncti
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSuperCall
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isUnitInstanceReference
-import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
+import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveLabel
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.unfoldExpression
@@ -1708,7 +1708,7 @@ internal class CompilationUnitBuilder(
   private fun createVariable(irValueDeclaration: IrValueDeclaration): Variable {
     val variable =
       Variable.newBuilder()
-        .setName(irValueDeclaration.javaName)
+        .setName(irValueDeclaration.j2clName)
         .setTypeDescriptor(environment.getTypeDescriptor(irValueDeclaration.type))
         .setParameter(irValueDeclaration is IrValueParameter)
         .setFinal(irValueDeclaration is IrVariable && !irValueDeclaration.isVar)

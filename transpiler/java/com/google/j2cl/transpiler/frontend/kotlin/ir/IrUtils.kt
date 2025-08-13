@@ -17,6 +17,8 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
+import com.google.j2cl.transpiler.ast.JsMemberType
+import com.google.j2cl.transpiler.ast.JsUtils
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.Visibility
 import org.jetbrains.kotlin.backend.jvm.InlineClassAbi
@@ -512,44 +514,47 @@ private val IrFunction.isPropertyGetter: Boolean
 val IrFunction.hasVoidReturn: Boolean
   get() = returnType.isUnit() && !isPropertyGetter
 
-fun IrFunction.javaName(jvmBackendContext: JvmBackendContext): String? =
+fun IrFunction.j2clName(jvmBackendContext: JvmBackendContext): String? =
   when (this) {
     is IrConstructor -> null
-    is IrSimpleFunction -> this.javaName(jvmBackendContext)
-    else -> name.asString()
+    is IrSimpleFunction -> this.j2clName(jvmBackendContext)
   }
 
-fun IrSimpleFunction.javaName(jvmBackendContext: JvmBackendContext): String {
-  val javaName = name.asJavaName()
-
+fun IrSimpleFunction.j2clName(jvmBackendContext: JvmBackendContext): String {
   // Pretend the function is public when mapping the signature. We want to avoid internal name
   // mangling for now.
   // TODO(b/236236685): Revisit this if we decide to mangle internal names.
-  val resolvedName =
-    runAsIfNonInternalFunction {
-        // We don't use resolveFunctionName directly here as that doesn't first resolve special
-        // builtins
-        // to their original JVM function. Instead we'll map the entire signature and then take the
-        // name.
-        jvmBackendContext.defaultMethodSignatureMapper.mapAsmMethod(this).name
-      }
-      .sanitizeJvmName()
-
-  if (javaName != resolvedName) {
-    return resolvedName
+  val jvmName = runAsIfNonInternalFunction {
+    // We don't use resolveFunctionName directly here as that doesn't first resolve special
+    // builtins to their original JVM function. Instead we'll map the entire signature and then take
+    // the name.
+    Name.guessByFirstCharacter(
+      jvmBackendContext.defaultMethodSignatureMapper.mapAsmMethod(this).name
+    )
   }
 
-  // TODO(b/317553886): Signature mangling should be applied during inline class lowering.
-  if (signatureRequiresMangling) {
-    return InlineClassAbi.mangledNameFor(
+  val resolvedName =
+    if (jvmName != name) {
+      jvmName
+    } else if (signatureRequiresMangling) {
+      // TODO(b/317553886): Signature mangling should be applied during inline class lowering.
+      InlineClassAbi.mangledNameFor(
         jvmBackendContext,
         this,
         mangleReturnTypes = true,
         useOldMangleRules = false,
       )
-      .asJavaName()
+    } else {
+      name
+    }
+
+  return if (getJsInfo().jsMemberType != JsMemberType.NONE) {
+    // We don't sanitize name for JsMember. Instead, we pass the original name through to the
+    // backend, and let the JsInteropRestriction checker validate if it's a valid JS identifier.
+    resolvedName.asString()
+  } else {
+    resolvedName.sanitizeName()
   }
-  return javaName
 }
 
 private fun <R> IrSimpleFunction.runAsIfNonInternalFunction(block: IrSimpleFunction.() -> R): R {
@@ -564,6 +569,13 @@ private fun <R> IrSimpleFunction.runAsIfNonInternalFunction(block: IrSimpleFunct
   }
 }
 
+val IrValueDeclaration.j2clName: String
+  get() = name.sanitizeName()
+
+private fun Name.sanitizeName(): String {
+  return JsUtils.sanitizeJsIdentifier(this.asStringStripSpecialMarkers())
+}
+
 /**
  * Returns `true` if the function reference is a reference to a synthetic adapter function created
  * by Kotlin compiler. E.g: function with varargs can be used in a context of a function type
@@ -572,21 +584,6 @@ private fun <R> IrSimpleFunction.runAsIfNonInternalFunction(block: IrSimpleFunct
  */
 val IrFunctionReference.isAdaptedFunctionReference: Boolean
   get() = origin == IrStatementOrigin.ADAPTED_FUNCTION_REFERENCE
-
-val IrValueDeclaration.javaName: String
-  get() = NameUtils.sanitizeAsJavaIdentifier(name.asStringStripSpecialMarkers())
-
-private fun Name.asJavaName() = asString().sanitizeJvmName()
-
-// TODO(b/228454104): There are many more characters that kotlin allows that need to be sanitized.
-//  We should also give IrValueDeclarations the same treatment.
-private fun String.sanitizeJvmName() =
-  if (startsWith('<') && endsWith('>')) {
-      substring(1, length - 1)
-    } else {
-      this
-    }
-    .replace('-', '$')
 
 val IrExpression.isUnitInstanceReference: Boolean
   // There is only one object instance field of type Unit, it's the unique instance of Unit.

@@ -93,7 +93,7 @@ class InlineFunctionKt extends j_l_Object {
   let it = tmp1_it;
   let a = Math.imul(it, 2);
   let tmp2__this_ = ClassWithInlineFun.$create__int(5);
-  let /** number */ tmp_ret_0;
+  let /** number */ tmp$ret$0;
   l$ret$1: {
    let this_1 = tmp2__this_;
    let sum = this_1.m_getE__int();
@@ -105,13 +105,13 @@ class InlineFunctionKt extends j_l_Object {
     let it_1 = tmp3_it;
     sum = tmp + Math.imul(it_1, 3) | 0;
     if (sum > 10) {
-     tmp_ret_0 = sum;
+     tmp$ret$0 = sum;
      break l$ret$1;
     }
    }
-   tmp_ret_0 = sum;
+   tmp$ret$0 = sum;
   }
-  let b = tmp_ret_0;
+  let b = tmp$ret$0;
   let tmp4__this_ = ClassWithInlineFun.$create__int(5);
   let this_2 = tmp4__this_;
   let delegate = $1.$create__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun(null, this_2);
@@ -162,19 +162,19 @@ class InlineFunctionKt extends j_l_Object {
    let unary_3 = this_7.m_getF__int();
    this_7.m_setF__int__void(unary_3 - 1 | 0);
    let tmp13_it = unary_3;
-   let /** number */ tmp_ret_2;
+   let /** number */ tmp$ret$2;
    l$ret$3: {
     let it_5 = tmp13_it;
     let /** number */ tmp_5;
     if (it_5 < 10) {
-     tmp_ret_2 = 0;
+     tmp$ret$2 = 0;
      break l$ret$3;
     } else {
      tmp_5 = Math.imul(it_5, 4);
     }
-    tmp_ret_2 = tmp_5;
+    tmp$ret$2 = tmp_5;
    }
-   sum_3 = tmp_4 + tmp_ret_2 | 0;
+   sum_3 = tmp_4 + tmp$ret$2 | 0;
   }
  }
  /** @nodts */
@@ -222,15 +222,15 @@ class InlineFunctionKt extends j_l_Object {
   let tmp3_obj = aStringAsAny;
   let obj_2 = tmp3_obj;
   let e = Double.$isInstance(obj_2);
-  let /** ?string */ tmp_ret_0;
+  let /** ?string */ tmp$ret$0;
   l$ret$1: {
    if (!$Equality.$same('string', null)) {
-    tmp_ret_0 = (/**@type {string}*/ ('string'));
+    tmp$ret$0 = (/**@type {string}*/ ('string'));
     break l$ret$1;
    }
-   tmp_ret_0 = (/**@type {?string}*/ (null));
+   tmp$ret$0 = (/**@type {?string}*/ (null));
   }
-  let f = tmp_ret_0;
+  let f = tmp$ret$0;
  }
  /** @nodts @return {!*} */
  static m_inlineFunWithNoInlineParam__kotlin_jvm_functions_Function0__java_lang_Object(/** !Function0<?> */ notInlined) {
@@ -273,24 +273,24 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts */
  static m_testInlineFunctionFromAnotherLibrary__void() {
   InlineFunctionKt.$clinit();
-  let tmp_ret_0 = Unit.f_INSTANCE__kotlin_Unit;
+  let tmp$ret$0 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$1: {
    if ($Equality.$same(null, null)) {
-    tmp_ret_0 = 'foo';
+    tmp$ret$0 = 'foo';
     break l$ret$1;
    }
-   tmp_ret_0 = null;
+   tmp$ret$0 = null;
   }
-  let a = tmp_ret_0;
-  let tmp_ret_2 = Unit.f_INSTANCE__kotlin_Unit;
+  let a = tmp$ret$0;
+  let tmp$ret$2 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$3: {
    if ($Equality.$same('gar', null)) {
-    tmp_ret_2 = 'foo';
+    tmp$ret$2 = 'foo';
     break l$ret$3;
    }
-   tmp_ret_2 = 'gar';
+   tmp$ret$2 = 'gar';
   }
-  let b = tmp_ret_2;
+  let b = tmp$ret$2;
   let c = 'topLevelInlineFunctionOnlyReferencedInAnotherFile';
   let tmp0__this_ = HolderInAnotherLibrary.$create__int(42);
   let this_1 = tmp0__this_;
@@ -299,75 +299,75 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts */
  static m_testInlineFunctionWithLambda__void() {
   InlineFunctionKt.$clinit();
-  let tmp_ret_0 = Unit.f_INSTANCE__kotlin_Unit;
+  let tmp$ret$0 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$1: {
    if ($Equality.$same(null, null)) {
-    tmp_ret_0 = 'foo';
+    tmp$ret$0 = 'foo';
     break l$ret$1;
    }
-   tmp_ret_0 = null;
+   tmp$ret$0 = null;
   }
-  let a = tmp_ret_0;
-  let tmp_ret_2 = Unit.f_INSTANCE__kotlin_Unit;
+  let a = tmp$ret$0;
+  let tmp$ret$2 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$3: {
    if ($Equality.$same('bar', null)) {
-    tmp_ret_2 = 'foo';
+    tmp$ret$2 = 'foo';
     break l$ret$3;
    }
-   tmp_ret_2 = 'bar';
+   tmp$ret$2 = 'bar';
   }
-  let b = tmp_ret_2;
-  let tmp_ret_4 = Unit.f_INSTANCE__kotlin_Unit;
+  let b = tmp$ret$2;
+  let tmp$ret$4 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$5: {
    if ($Equality.$same(null, null)) {
-    tmp_ret_4 = 'someDefault';
+    tmp$ret$4 = 'someDefault';
     break l$ret$5;
    }
-   tmp_ret_4 = null;
+   tmp$ret$4 = null;
   }
-  let c = tmp_ret_4;
-  let tmp_ret_6 = Unit.f_INSTANCE__kotlin_Unit;
+  let c = tmp$ret$4;
+  let tmp$ret$6 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$7: {
    if ($Equality.$same('buzz', null)) {
-    tmp_ret_6 = 'someDefault';
+    tmp$ret$6 = 'someDefault';
     break l$ret$7;
    }
-   tmp_ret_6 = 'buzz';
+   tmp$ret$6 = 'buzz';
   }
-  let d = tmp_ret_6;
-  let tmp_ret_8 = Unit.f_INSTANCE__kotlin_Unit;
+  let d = tmp$ret$6;
+  let tmp$ret$8 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$9: {
    if ($Equality.$same(null, null)) {
-    tmp_ret_8 = InlineFunctionsInAnotherLibraryKt.m_getDefaultValue__kotlin_jvm_functions_Function0__java_lang_Object(Function0.$adapt(/**  @return {?}*/ (() =>{
+    tmp$ret$8 = InlineFunctionsInAnotherLibraryKt.m_getDefaultValue__kotlin_jvm_functions_Function0__java_lang_Object(Function0.$adapt(/**  @return {?}*/ (() =>{
      return 'foo';
     })));
     break l$ret$9;
    }
-   tmp_ret_8 = null;
+   tmp$ret$8 = null;
   }
-  let e = tmp_ret_8;
+  let e = tmp$ret$8;
  }
  /** @nodts */
  static m_testNestedInlineFunction__void() {
   InlineFunctionKt.$clinit();
-  let tmp_ret_0 = Unit.f_INSTANCE__kotlin_Unit;
+  let tmp$ret$0 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$1: {
    if ($Equality.$same(null, null)) {
-    tmp_ret_0 = 'default';
+    tmp$ret$0 = 'default';
     break l$ret$1;
    }
-   tmp_ret_0 = null;
+   tmp$ret$0 = null;
   }
-  let a = tmp_ret_0;
-  let tmp_ret_2 = Unit.f_INSTANCE__kotlin_Unit;
+  let a = tmp$ret$0;
+  let tmp$ret$2 = Unit.f_INSTANCE__kotlin_Unit;
   l$ret$3: {
    if ($Equality.$same('bar', null)) {
-    tmp_ret_2 = 'default';
+    tmp$ret$2 = 'default';
     break l$ret$3;
    }
-   tmp_ret_2 = 'bar';
+   tmp$ret$2 = 'bar';
   }
-  let b = tmp_ret_2;
+  let b = tmp$ret$2;
  }
  /** @nodts */
  static m_testMixingInlineAndNonInline__void() {
@@ -421,9 +421,9 @@ class InlineFunctionKt extends j_l_Object {
   return a + b | 0;
  }
  /** @nodts @return {number} */
- static m_inlineFunWithDefaults$default__int__int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** number */ _mask0, /** * */ _handler) {
+ static m_inlineFunWithDefaults$default__int__int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** number */ $mask0, /** * */ $handler) {
   InlineFunctionKt.$clinit();
-  if ((_mask0 & 2) != 0) {
+  if (($mask0 & 2) != 0) {
    b = 2;
   }
   return InlineFunctionKt.m_inlineFunWithDefaults__int__int__int(a, b);
@@ -434,9 +434,9 @@ class InlineFunctionKt extends j_l_Object {
   return a + b + ArraysKt.m_sum__arrayOf_int__int(c) | 0;
  }
  /** @nodts @return {number} */
- static m_inlineFunWithDefaultsAndVarargs$default__int__int__arrayOf_int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** !Array<number> */ c, /** number */ _mask0, /** * */ _handler) {
+ static m_inlineFunWithDefaultsAndVarargs$default__int__int__arrayOf_int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** !Array<number> */ c, /** number */ $mask0, /** * */ $handler) {
   InlineFunctionKt.$clinit();
-  if ((_mask0 & 2) != 0) {
+  if (($mask0 & 2) != 0) {
    b = 2;
   }
   return InlineFunctionKt.m_inlineFunWithDefaultsAndVarargs__int__int__arrayOf_int__int(a, b, c);
@@ -447,12 +447,12 @@ class InlineFunctionKt extends j_l_Object {
   return a + b + ArraysKt.m_sum__arrayOf_int__int(c) | 0;
  }
  /** @nodts @return {number} */
- static m_inlineFunWithDefaultsAndDefaultVarargs$default__int__int__arrayOf_int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** Array<number> */ c, /** number */ _mask0, /** * */ _handler) {
+ static m_inlineFunWithDefaultsAndDefaultVarargs$default__int__int__arrayOf_int__int__java_lang_Object__int(/** number */ a, /** number */ b, /** Array<number> */ c, /** number */ $mask0, /** * */ $handler) {
   InlineFunctionKt.$clinit();
-  if ((_mask0 & 2) != 0) {
+  if (($mask0 & 2) != 0) {
    b = 2;
   }
-  if ((_mask0 & 4) != 0) {
+  if (($mask0 & 4) != 0) {
    c = (/**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int)));
   }
   return InlineFunctionKt.m_inlineFunWithDefaultsAndDefaultVarargs__int__int__arrayOf_int__int(a, b, /**@type {!Array<number>}*/ (c));

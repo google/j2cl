@@ -15,9 +15,15 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
 /** Some JavaScript related utility functions. */
 public final class JsUtils {
-  private static final String VALID_JS_NAME_REGEX = "[a-zA-Z_$][\\w_$]*";
+  private static final String VALID_JS_IDENTIFIER_START_CHARS = "a-zA-Z_$";
+  private static final String VALID_JS_IDENTIFIER_PART_CHARS = "\\w_$";
+  private static final String VALID_JS_NAME_REGEX =
+      "[" + VALID_JS_IDENTIFIER_START_CHARS + "][" + VALID_JS_IDENTIFIER_PART_CHARS + "]*";
   private static final String JAVASCRIPT_VALID_QUALIFIED_NAME_REGEX =
       VALID_JS_NAME_REGEX + "(\\." + VALID_JS_NAME_REGEX + ")*";
 
@@ -28,6 +34,23 @@ public final class JsUtils {
    */
   public static boolean isValidJsIdentifier(String name) {
     return name.matches(VALID_JS_NAME_REGEX);
+  }
+
+  /**
+   * Sanitizes a string to be a valid JavaScript identifier name.
+   *
+   * <p>This method replaces any characters that are not valid with an underscore (`_`).
+   */
+  public static String sanitizeJsIdentifier(String name) {
+    checkNotNull(name);
+    checkState(name.length() > 0);
+
+    if (isValidJsIdentifier(name)) {
+      return name;
+    }
+
+    return name.replaceFirst("^[^" + VALID_JS_IDENTIFIER_START_CHARS + "]", "_")
+        .replaceAll("[^" + VALID_JS_IDENTIFIER_PART_CHARS + "]", "_");
   }
 
   public static boolean isValidJsQualifiedName(String name) {

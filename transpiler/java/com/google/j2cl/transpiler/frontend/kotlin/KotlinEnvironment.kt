@@ -63,8 +63,8 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
+import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
-import com.google.j2cl.transpiler.frontend.kotlin.ir.javaName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.methods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.overriddenSpecialBridgeSignatures
 import com.google.j2cl.transpiler.frontend.kotlin.ir.simpleSourceName
@@ -664,7 +664,7 @@ internal class KotlinEnvironment(
       MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setEnclosingMethodDescriptor(enclosingMethodDescriptor)
-        .setName(irFunction.javaName(jvmBackendContext))
+        .setName(irFunction.j2clName(jvmBackendContext))
         .setParameterDescriptors(parameterDescriptors.build())
         .setReturnTypeDescriptor(
           if (irFunction.hasVoidReturn) {

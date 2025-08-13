@@ -15,20 +15,12 @@
  */
 package exoticidentifiers
 
-fun `foo-bar`() {}
+fun `foo$bar`() {}
 
-// TODO(b/228454104): Conflicts with `foo-bar`
-// fun `foo$bar`() {}
+fun `bar%buzz`() {}
 
-fun `bar$buzz`() {}
+fun `buzz!bar`() {}
 
-fun foo_bar() {}
+fun `2times`() {}
 
-// TODO(b/228454104): Sanitize this identifier
-// fun `2times`() {}
-// TODO(b/228454104): Sanitize this identifier
-// fun `foo!bar`() {}
-// TODO(b/228454104): Sanitize this identifier
-// fun `foo%bar`() {}
-// TODO(b/228454104): Sanitize this identifier
-// fun `¯|_(ツ)_|¯`() {}
+fun `¯|_(ツ)_|¯`() {}
