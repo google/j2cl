@@ -121,7 +121,7 @@ def _diff(original, modified, is_size, is_size_lines, filter_noise):
       modified_targets,
       original.workspace_path,
       modified.workspace_path,
-      ["--define=J2CL_APP_STYLE=PRETTY"],
+      [] if is_size else ["--define=J2CL_APP_STYLE=PRETTY"],
   )
 
   if is_size:
