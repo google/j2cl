@@ -39,7 +39,7 @@ def main(argv):
 
   # Benchs as list of (name1, {j2cl: target1, j2wasm: target1}) pairs
   benchs = [
-      (n, repo_util.get_benchmarks(bench_map[n] + "_local", argv.platforms))
+      (n, repo_util.get_benchmarks(bench_map[n] + "_local", argv))
       for n in bench_names
   ]
 
@@ -48,7 +48,11 @@ def main(argv):
   targets = sum([list(bench.values()) for (_, bench) in benchs], [])
   repo_util.build(targets)
 
-  multi_platform = len(argv.platforms) > 1
+  multi_platform = len(argv.platforms) > 1 or (
+      # For web, not specifying a JS VM also results in multiple platforms.
+      argv.platforms[0] != "JVM" and not argv.js_vm
+  )
+
   if multi_platform:
     print("Starting benchmarks.")
   else:
@@ -99,5 +103,11 @@ def _read_gen_file(file_path):
 
 
 def add_arguments(parser):
+  parser.add_argument(
+      "--js_vm",
+      default="",
+      choices=["v8", "sm"],
+      help="JS VM to run the benchmarks on.",
+  )
   parser.add_argument(
       "bench_names", nargs="+", metavar="<name>", help="Benchmark names")

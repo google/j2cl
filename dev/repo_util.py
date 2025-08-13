@@ -33,18 +33,27 @@ BLAZE_CMD = "bazel"
 BIN_DIR = BLAZE_CMD + "-bin/"
 
 
-def get_benchmarks(bench_name, platforms):
+def get_benchmarks(bench_name, argv):
   """Returns the targets for given benchmark name."""
   benchmarks = {}
+  platforms = argv.platforms
+  js_vm = argv.js_vm
   if "JVM" in platforms:
     benchmarks["JVM"] = JVM_BENCH_PATTERN % bench_name
   if "CLOSURE" in platforms:
-    benchmarks["JS_V8"] = J2CL_BENCH_PATTERN % (bench_name, "v8")
-    benchmarks["JS_SM"] = J2CL_BENCH_PATTERN % (bench_name, "sm")
+    _add_web_benchs(benchmarks, "JS", J2CL_BENCH_PATTERN, bench_name, js_vm)
   if "WASM" in platforms:
-    benchmarks["WASM_V8"] = J2WASM_BENCH_PATTERN % (bench_name, "v8")
-    benchmarks["WASM_SM"] = J2WASM_BENCH_PATTERN % (bench_name, "sm")
+    _add_web_benchs(benchmarks, "WASM", J2WASM_BENCH_PATTERN, bench_name, js_vm)
   return benchmarks
+
+
+def _add_web_benchs(benchmarks, platform_key, bench_pattern, bench_name, js_vm):
+  """Adds benchmarks for platforms that use VM suffixes."""
+  if js_vm:
+    benchmarks[f"{platform_key}_{js_vm}"] = bench_pattern % (bench_name, js_vm)
+  else:
+    benchmarks[f"{platform_key}_v8"] = bench_pattern % (bench_name, "v8")
+    benchmarks[f"{platform_key}_sm"] = bench_pattern % (bench_name, "sm")
 
 
 def build_original_and_modified(original_targets, modified_targets):
