@@ -125,12 +125,13 @@ public class WasmConstructsGenerator {
   /** Emits all wasm type definitions into a single rec group. */
   void emitLibraryRecGroup(Library library, List<ArrayTypeDescriptor> usedNativeArrayTypes) {
     builder.newLine();
+    emitNativeArrayTypes(usedNativeArrayTypes);
+    builder.newLine();
     builder.append("(rec");
     builder.indent();
 
     emitDynamicDispatchMethodTypes();
     emitItableSupportTypes();
-    emitNativeArrayTypes(usedNativeArrayTypes);
     emitForEachType(library, this::renderMonolithicTypeStructs, "type definition");
 
     builder.unindent();
