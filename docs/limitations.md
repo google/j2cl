@@ -23,7 +23,7 @@ overhead for using language primitives to discourage people from writing native
 code for simple stuff only for performance considerations. Having
 JavaScript-like array semantics help that story.
 
-## Float is emulated with extra precission
+## Float is emulated with extra precision
 
 J2CL doesn't emulate 32 bit floating point arithmetic for performance reasons.
 Instead JavaScript `number` is used to emulate `float` without any
@@ -40,9 +40,22 @@ J2CL emulates a substantial portion of the Java Standard Library (a.k.a JRE).
 However it's not feasible nor practical to support all of the APIs in the web
 platform; APIs like `java.net.*` are intentionally left out.
 
-Shared code that uses these APIs can work around this limitation by
+Another common example of this is `String.format` which requires emulation of a
+large set of expensive localization APIs. For this case, Guava provides
+`Strings.lenientFormat` which is a compact cross-platform compatible
+alternative.
+
+The source of truth for the full-set of emulated API can be found in
+`jre/java/`.
+
+Shared code that uses missing APIs can work around this limitation by
 [super-sourcing](best-practices.md#super-sourcing-writing-platform-specific-code)
 the classes and providing an alternative implementation specific for J2CL.
+
+Note that both Web and Java platforms are evolving; in some cases, an emulation
+might have been left out because the Java API is relatively recent or Web didn't
+have a good (fast/correct/compact) way to emulate but now can. In such cases,
+please contact us and/or send proposal for emulation.
 
 ## Minor Semantic Differences
 
