@@ -60,6 +60,10 @@ public final class SummaryBuilder {
     summarizeStringLiterals(library);
   }
 
+  void addNativeArrayTypeSnippet(String key, String snippet) {
+    summary.addNativeArrayTypeSnippets(SharedSnippet.newBuilder().setKey(key).setSnippet(snippet));
+  }
+
   void addSharedTypeSnippet(String key, String snippet) {
     summary.addTypeSnippets(SharedSnippet.newBuilder().setKey(key).setSnippet(snippet));
   }

@@ -12,10 +12,11 @@ message Summary {
   repeated StringLiteralInfo string_literals = 4;
   repeated SystemPropertyInfo system_properties = 5;
   repeated SharedSnippet type_snippets = 6;
-  repeated SharedSnippet global_snippets = 7;
-  repeated SharedSnippet wasm_import_snippets = 8;
-  repeated SharedSnippet js_import_snippets = 9;
-  repeated string js_import_requires = 10;
+  repeated SharedSnippet native_array_type_snippets = 7;
+  repeated SharedSnippet global_snippets = 8;
+  repeated SharedSnippet wasm_import_snippets = 9;
+  repeated SharedSnippet js_import_snippets = 10;
+  repeated string js_import_requires = 11;
 }
 
 message TypeInfo {

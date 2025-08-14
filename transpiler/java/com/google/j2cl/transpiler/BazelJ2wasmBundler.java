@@ -160,7 +160,9 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     ImmutableList<String> moduleContents =
         Streams.concat(
-                Stream.of("(module (rec"),
+                Stream.of("(module "),
+                streamDedupedValues(Summary::getNativeArrayTypeSnippetsList),
+                Stream.of("(rec"),
                 getModuleParts("types"),
                 streamDedupedValues(Summary::getTypeSnippetsList),
                 Stream.of(typeGraph.getTopLevelItableStructDeclaration()),

@@ -21,6 +21,7 @@ import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.StringUtils;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -122,10 +123,16 @@ public class WasmConstructsGenerator {
     return sb.toString();
   }
 
-  /** Emits all wasm type definitions into a single rec group. */
-  void emitLibraryRecGroup(Library library, List<ArrayTypeDescriptor> usedNativeArrayTypes) {
+  /** Emits all wasm type definitions. */
+  void emitLibraryTypes(Library library, List<ArrayTypeDescriptor> usedWasmArrayTypes) {
     builder.newLine();
-    emitNativeArrayTypes(usedNativeArrayTypes);
+    // Emit primitive wasm arrays outside the rec group, since the i16 wasm array is used for
+    // string operations and binaryen expects a particular type of array. Having it in the rec
+    // group would mean that the i16 array used by string operations is not the same as the
+    // one in the rec group.
+    usedWasmArrayTypes.stream()
+        .filter(ArrayTypeDescriptor::isPrimitiveArray)
+        .forEach(this::emitWasmArrayType);
     builder.newLine();
     builder.append("(rec");
     builder.indent();
@@ -133,6 +140,9 @@ public class WasmConstructsGenerator {
     emitDynamicDispatchMethodTypes();
     emitItableSupportTypes();
     emitForEachType(library, this::renderMonolithicTypeStructs, "type definition");
+    usedWasmArrayTypes.stream()
+        .filter(Predicates.not(ArrayTypeDescriptor::isPrimitiveArray))
+        .forEach(this::emitWasmArrayType);
 
     builder.unindent();
     builder.newLine();
@@ -872,13 +882,7 @@ public class WasmConstructsGenerator {
     builder.append(")");
   }
 
-  void emitNativeArrayTypes(List<ArrayTypeDescriptor> arrayTypes) {
-    emitBeginCodeComment("Native Array types");
-    arrayTypes.forEach(this::emitNativeArrayType);
-    emitEndCodeComment("Native Array types");
-  }
-
-  void emitNativeArrayType(ArrayTypeDescriptor arrayTypeDescriptor) {
+  void emitWasmArrayType(ArrayTypeDescriptor arrayTypeDescriptor) {
     String wasmArrayTypeName = environment.getWasmTypeName(arrayTypeDescriptor);
     builder.newLine();
     builder.append(
