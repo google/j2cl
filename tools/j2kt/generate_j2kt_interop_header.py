@@ -20,7 +20,7 @@ def extract_package_from_stream(file_stream) -> str:
   """Extracts the package name from a Java file stream."""
   package_pattern = re.compile(r'^\s*package\s+([a-zA-Z0-9_.]+)\s*;\s*$')
   for line in file_stream:
-    line = line.decode('utf-8')
+    line = line.decode('utf-8', 'ignore')
     match = package_pattern.match(line)
     if match:
       return match.group(1).replace('.', '/')
