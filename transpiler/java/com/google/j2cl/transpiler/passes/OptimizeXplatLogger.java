@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
-import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.ArrayList;
 import javax.annotation.Nullable;
@@ -67,9 +66,7 @@ public class OptimizeXplatLogger extends NormalizationPass {
   private static void rewriteLogMethodCallArguments(MethodCall methodCall) {
     var arguments = methodCall.getArguments();
     var messageArg = arguments.getFirst();
-    if (messageArg instanceof StringLiteral) {
-      arguments.set(0, RuntimeMethods.createUtilMethodCall("$makeLogMessage", messageArg));
-    }
+    arguments.set(0, RuntimeMethods.createUtilMethodCall("$makeLogMessage", messageArg));
   }
 
   /**

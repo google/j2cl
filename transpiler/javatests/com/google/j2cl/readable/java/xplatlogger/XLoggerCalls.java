@@ -28,6 +28,7 @@ public class XLoggerCalls {
   static void log(XLogger logger) {
     logger.atInfo().log("X");
     logger.atInfo().log("X", 1); // varargs overload
+    logger.atInfo().log(("X" + 42).toString(), 1); // non-string-literal message
     logger.atInfo().withCause(new Throwable()).log("X");
   }
 

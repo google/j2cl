@@ -8,6 +8,7 @@ let XLogLevel = goog.forwardDeclare('com.google.apps.xplat.logging.XLogLevel$imp
 let XLogger = goog.forwardDeclare('com.google.apps.xplat.logging.XLogger$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 
 class XLoggerCalls extends j_l_Object {
@@ -36,6 +37,7 @@ class XLoggerCalls extends j_l_Object {
   XLoggerCalls.$clinit();
   logger.log_atInfo($Util.$makeLogMessage('X'));
   logger.log_atInfo($Util.$makeLogMessage('X'), [Integer.m_valueOf__int__java_lang_Integer(1)]);
+  logger.log_atInfo($Util.$makeLogMessage(j_l_String.m_toString__java_lang_String__java_lang_String('X' + 42)), [Integer.m_valueOf__int__java_lang_Integer(1)]);
   logger.log_atInfo($Util.$makeLogMessage('X'), null, Throwable.$create__());
  }
  /** @nodts */
@@ -84,6 +86,7 @@ class XLoggerCalls extends j_l_Object {
   XLogger = goog.module.get('com.google.apps.xplat.logging.XLogger$impl');
   Class = goog.module.get('java.lang.Class$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
   Throwable = goog.module.get('java.lang.Throwable$impl');
  }
 }
