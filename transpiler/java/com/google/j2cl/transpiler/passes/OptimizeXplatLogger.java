@@ -16,15 +16,14 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import java.util.ArrayList;
 import javax.annotation.Nullable;
 
 /** Rewrites fluent Xplat logger calls to non-polymorphic log method calls. */
@@ -56,11 +55,12 @@ public class OptimizeXplatLogger extends NormalizationPass {
       return methodCall;
     }
 
-    // Extract the cause from the chain if present.
-    Expression cause = null;
+    var replacementArguments = new ArrayList<>(methodCall.getArguments());
+
+    // Add the cause to the arguments if present on the chain.
     if (getWellKnownLoggingApiMethodName(qualifierMethodCall).equals("withCause")) {
       // Don't match/rewrite withCause().isEnabled() - only "log" helpers expect a cause and can
-      // preserve its effects.
+      // preserve its side-effects.
       if (loggingApi.equals("isEnabled")) {
         return methodCall;
       }
@@ -69,27 +69,23 @@ public class OptimizeXplatLogger extends NormalizationPass {
         return methodCall;
       }
 
-      cause = qualifierMethodCall.getArguments().getFirst();
+      // To add the cause, need to ensure args argument is added since it is no longer optional.
+      if (methodCall.getArguments().size() == 1) {
+        replacementArguments.add(TypeDescriptors.get().javaLangObjectArray.getNullValue());
+      }
+      // Add the cause argument.
+      replacementArguments.addAll(qualifierMethodCall.getArguments());
+
       qualifierMethodCall = newQualifier;
     }
 
     // Find the replacement method and construct the call.
-
     var replacementMethodDescriptor =
-        getReplacementMethodDescriptor(qualifierMethodCall, loggingApi);
+        getReplacementMethodDescriptor(
+            qualifierMethodCall, loggingApi, replacementArguments.size());
     if (replacementMethodDescriptor == null) {
       return methodCall;
     }
-
-    var replacementArguments = getReplacementArguments(methodCall, cause);
-
-    // Make sure to match arguments in size (due to optional parameters).
-    replacementMethodDescriptor =
-        replacementMethodDescriptor.transform(
-            builder ->
-                builder.setParameterTypeDescriptors(
-                    builder.getParameterTypeDescriptors().subList(0, replacementArguments.size())));
-
     return MethodCall.Builder.from(replacementMethodDescriptor)
         .setQualifier(qualifierMethodCall.getQualifier())
         .setArguments(replacementArguments)
@@ -98,7 +94,7 @@ public class OptimizeXplatLogger extends NormalizationPass {
 
   @Nullable
   private static MethodDescriptor getReplacementMethodDescriptor(
-      MethodCall qualifierMethodCall, String loggerApi) {
+      MethodCall qualifierMethodCall, String loggerApi, int argsCount) {
     var target = qualifierMethodCall.getTarget();
     if (!isMemberOf(target, "com.google.apps.xplat.logging.XLogger")
         || !target.getName().startsWith("at")) {
@@ -117,27 +113,12 @@ public class OptimizeXplatLogger extends NormalizationPass {
     var replacementMethodDescriptor =
         enclosingType.getMethodDescriptorByName(replacementMethodName);
     checkNotNull(replacementMethodDescriptor, "Replacement not found: %s", replacementMethodName);
-    return replacementMethodDescriptor;
-  }
 
-  private static ImmutableList<Expression> getReplacementArguments(
-      MethodCall methodCall, Expression cause) {
-    var builder = new ImmutableList.Builder<Expression>();
-    builder.addAll(methodCall.getArguments());
-
-    if (cause != null) {
-      // Having a cause implies that this is 'log' (vs 'isEnabled' which was filtered out earlier).
-      checkState(methodCall.getTarget().getName().equals("log"));
-
-      // To add the cause, need to ensure args argument is added as it was optional.
-      if (methodCall.getArguments().size() == 1) {
-        builder.add(TypeDescriptors.get().javaLangObjectArray.getNullValue());
-      }
-
-      builder.add(cause);
-    }
-
-    return builder.build();
+    // Make sure to match arguments in size (due to optional parameters).
+    return replacementMethodDescriptor.transform(
+        builder ->
+            builder.setParameterTypeDescriptors(
+                builder.getParameterTypeDescriptors().subList(0, argsCount)));
   }
 
   private static String getWellKnownLoggingApiMethodName(MethodCall methodCall) {
