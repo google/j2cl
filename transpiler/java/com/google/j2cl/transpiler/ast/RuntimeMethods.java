@@ -847,6 +847,12 @@ public final class RuntimeMethods {
                                       .setParameters(TypeDescriptors.get().javaLangString)
                                       .build())
                               .put(
+                                  "$makeLogMessage",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(TypeDescriptors.get().javaLangString)
+                                      .setParameters(TypeDescriptors.get().javaLangString)
+                                      .build())
+                              .put(
                                   "$setClassMetadata",
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.VOID)

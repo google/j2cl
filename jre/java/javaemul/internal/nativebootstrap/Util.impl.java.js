@@ -299,6 +299,17 @@ class Util {
   static $makeEnumName(enumName) {
     return enumName;
   }
+
+  /**
+   * Helper function used for logging obfuscation, string replacement passes
+   * can be targeted at this bottleneck.
+   *
+   * @param {string} message
+   * @return {string}
+   */
+  static $makeLogMessage(message) {
+    return message;
+  }
 }
 
 

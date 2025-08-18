@@ -22,15 +22,31 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.ArrayList;
 import javax.annotation.Nullable;
 
-/** Rewrites fluent Xplat logger calls to non-polymorphic log method calls. */
+/**
+ * Rewrites fluent Xplat logger calls to non-polymorphic log method calls and make log messages
+ * obfuscatable.
+ */
 public class OptimizeXplatLogger extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public MethodCall rewriteMethodCall(MethodCall methodCall) {
+            String methodName = getWellKnownLoggingApiMethodName(methodCall);
+            if (methodName.equals("log")) {
+              rewriteLogMethodCallArguments(methodCall);
+            }
+            return methodCall;
+          }
+        });
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -42,6 +58,18 @@ public class OptimizeXplatLogger extends NormalizationPass {
             };
           }
         });
+  }
+
+  /**
+   * Replace message parameter in log(message) with Util.$makeLogMessage(message) so they can be
+   * intercepted by JsCompiler for obfuscation.
+   */
+  private static void rewriteLogMethodCallArguments(MethodCall methodCall) {
+    var arguments = methodCall.getArguments();
+    var messageArg = arguments.getFirst();
+    if (messageArg instanceof StringLiteral) {
+      arguments.set(0, RuntimeMethods.createUtilMethodCall("$makeLogMessage", messageArg));
+    }
   }
 
   /**

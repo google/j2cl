@@ -29,14 +29,14 @@ class XLoggerCalls extends j_l_Object {
  /** @nodts */
  static m_log__void() {
   XLoggerCalls.$clinit();
-  XLogger.m_getLogger__java_lang_Class__com_google_apps_xplat_logging_XLogger(Class.$get(j_l_Object)).log_atInfo('X');
+  XLogger.m_getLogger__java_lang_Class__com_google_apps_xplat_logging_XLogger(Class.$get(j_l_Object)).log_atInfo($Util.$makeLogMessage('X'));
  }
  /** @nodts */
  static m_log__com_google_apps_xplat_logging_XLogger__void(/** XLogger */ logger) {
   XLoggerCalls.$clinit();
-  logger.log_atInfo('X');
-  logger.log_atInfo('X', [Integer.m_valueOf__int__java_lang_Integer(1)]);
-  logger.log_atInfo('X', null, Throwable.$create__());
+  logger.log_atInfo($Util.$makeLogMessage('X'));
+  logger.log_atInfo($Util.$makeLogMessage('X'), [Integer.m_valueOf__int__java_lang_Integer(1)]);
+  logger.log_atInfo($Util.$makeLogMessage('X'), null, Throwable.$create__());
  }
  /** @nodts */
  static m_isEnabled__com_google_apps_xplat_logging_XLogger__void(/** XLogger */ logger) {
@@ -52,13 +52,13 @@ class XLoggerCalls extends j_l_Object {
  /** @nodts */
  static m_nonOptimizable__com_google_apps_xplat_logging_XLogger__com_google_apps_xplat_logging_LoggingApi__com_google_apps_xplat_logging_XLogLevel__void(/** XLogger */ logger, /** LoggingApi */ loggingApi, /** XLogLevel */ level) {
   XLoggerCalls.$clinit();
-  XLoggerCalls.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void('X');
-  XLoggerCalls.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
-  loggingApi.m_log__java_lang_String__void('X');
-  loggingApi.m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
-  logger.m_loggingAt__com_google_apps_xplat_logging_XLogLevel__com_google_apps_xplat_logging_LoggingApi(level).m_log__java_lang_String__void('X');
+  XLoggerCalls.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_log__java_lang_String__void($Util.$makeLogMessage('X'));
+  XLoggerCalls.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void($Util.$makeLogMessage('X'));
+  loggingApi.m_log__java_lang_String__void($Util.$makeLogMessage('X'));
+  loggingApi.m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void($Util.$makeLogMessage('X'));
+  logger.m_loggingAt__com_google_apps_xplat_logging_XLogLevel__com_google_apps_xplat_logging_LoggingApi(level).m_log__java_lang_String__void($Util.$makeLogMessage('X'));
   logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(XLoggerCalls.m_hasSideEffect__java_lang_Throwable()).m_isEnabled__boolean();
-  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(XLoggerCalls.m_hasSideEffect__java_lang_Throwable()).m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void('X');
+  logger.m_atInfo__com_google_apps_xplat_logging_LoggingApi().m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(XLoggerCalls.m_hasSideEffect__java_lang_Throwable()).m_withCause__java_lang_Throwable__com_google_apps_xplat_logging_LoggingApi(Throwable.$create__()).m_log__java_lang_String__void($Util.$makeLogMessage('X'));
  }
  /** @nodts @return {LoggingApi} */
  static m_atInfo__com_google_apps_xplat_logging_LoggingApi() {
