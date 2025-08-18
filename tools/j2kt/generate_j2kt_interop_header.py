@@ -20,7 +20,7 @@ def extract_package_from_stream(file_stream) -> str:
   """Extracts the package name from a Java file stream."""
   package_pattern = re.compile(r'^\s*package\s+([a-zA-Z0-9_.]+)\s*;\s*$')
   for line in file_stream:
-    line = line.decode('utf-8', 'ignore')
+    line = line.decode('utf-8')
     match = package_pattern.match(line)
     if match:
       return match.group(1).replace('.', '/')
@@ -150,7 +150,9 @@ def main(argv: Sequence[str]) -> None:
   for jar_path_or_srclist, imports_str in zip(*[iter(arg_it)] * 2):
     imports = [x for x in imports_str.split(':') if x]
 
-    if jar_path_or_srclist.endswith('.jar'):
+    if jar_path_or_srclist.endswith('.jar') or jar_path_or_srclist.endswith(
+        '.srcjar'
+    ):
       process_jar(jar_path_or_srclist, imports, output_dir, framework_header)
     else:
       java_files = [x for x in jar_path_or_srclist.split(':') if x]
