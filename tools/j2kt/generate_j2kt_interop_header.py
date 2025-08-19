@@ -85,9 +85,8 @@ def generate_package_header(framework_header: str, imports: list[str]) -> str:
 # TODO(b/254524002): Delete this path once j2kt_apple_framework is removed.
 def process_jar(
     jar_path: str,
-    imports: list[str],
     output_dir: str,
-    framework_header: str,
+    package_header: str,
 ) -> None:
   """Generates Objective-C headers for Java files within a JAR.
 
@@ -102,11 +101,9 @@ def process_jar(
 
   Args:
     jar_path: Path to the input JAR file.
-    imports: List of additional import paths.
     output_dir: Directory where the generated headers will be placed.
-    framework_header: Path to the framework header.
+    package_header: The package header.
   """
-  package_header = generate_package_header(framework_header, imports)
 
   with zipfile.ZipFile(jar_path, 'r') as jar_zip:
     java_files = [name for name in jar_zip.namelist() if name.endswith('.java')]
@@ -119,21 +116,17 @@ def process_jar(
       process_java_file(java_file, java_package, package_header, output_dir)
 
 
-def process_srclist(
-    java_files: list[str],
-    imports: list[str],
+def process_src(
+    java_file: str,
     output_dir: str,
-    framework_header: str,
+    package_header: str,
 ) -> None:
-  """Generates Objective-C headers for Java files within a JAR."""
+  """Generates Objective-C headers for a Java file."""
 
-  package_header = generate_package_header(framework_header, imports)
-
-  for java_file in java_files:
-    with open(java_file, 'rb') as file_stream:
-      java_package = extract_package_from_stream(file_stream)
-    java_file = _strip_blaze_out_prefix(java_file)
-    process_java_file(java_file, java_package, package_header, output_dir)
+  with open(java_file, 'rb') as file_stream:
+    java_package = extract_package_from_stream(file_stream)
+  java_file = _strip_blaze_out_prefix(java_file)
+  process_java_file(java_file, java_package, package_header, output_dir)
 
 
 def main(argv: Sequence[str]) -> None:
@@ -150,14 +143,13 @@ def main(argv: Sequence[str]) -> None:
   for jar_path_or_srclist, imports_str in zip(*[iter(arg_it)] * 2):
     imports = [x for x in imports_str.split(':') if x]
 
-    if jar_path_or_srclist.endswith('.jar') or jar_path_or_srclist.endswith(
-        '.srcjar'
-    ):
-      process_jar(jar_path_or_srclist, imports, output_dir, framework_header)
-    else:
-      java_files = [x for x in jar_path_or_srclist.split(':') if x]
-      process_srclist(java_files, imports, output_dir, framework_header)
+    package_header = generate_package_header(framework_header, imports)
 
+    for element in jar_path_or_srclist.split(':'):
+      if element.endswith('.jar') or element.endswith('.srcjar'):
+        process_jar(element, output_dir, package_header)
+      elif element.endswith('.java'):
+        process_src(element, output_dir, package_header)
 
 if __name__ == '__main__':
   app.run(main)
