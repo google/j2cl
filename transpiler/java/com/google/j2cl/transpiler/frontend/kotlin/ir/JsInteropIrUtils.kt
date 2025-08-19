@@ -42,6 +42,7 @@ import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
+import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.types.isUnit
@@ -205,8 +206,9 @@ fun IrDeclaration.getJsInfo(): JsInfo =
     .setHasJsMemberAnnotation(getJsMemberAnnotationInfo() != null)
     .build()
 
-private fun IrDeclaration.isJsMember(): Boolean =
+fun IrDeclaration.isJsMember(): Boolean =
   when {
+    this is IrVariable -> false
     isJsIgnore -> false
     isCompanionMember -> false
     getJsMemberAnnotationInfo() != null -> true
@@ -279,7 +281,7 @@ private fun IrDeclaration.isPublicMemberOfJsType(): Boolean {
   return when (this) {
     is IrDeclarationWithVisibility -> visibility == DescriptorVisibilities.PUBLIC
     is IrEnumEntry -> true // Enum entries are always public
-    else -> throw AssertionError("Unexpected IrDeclaration")
+    else -> false
   }
 }
 

@@ -1,0 +1,76 @@
+goog.module('exoticidentifiers.exotic_enum$$_name_$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @final
+ * @extends {Enum<!exotic__enum$$__name__>}
+ */
+class exotic__enum$$__name__ extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!exotic__enum$$__name__} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new exotic__enum$$__name__();
+  $instance.$ctor__exoticidentifiers_exotic_enum$$_name___java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__exoticidentifiers_exotic_enum$$_name___java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!exotic__enum$$__name__} */
+ static m_valueOf__java_lang_String__exoticidentifiers_exotic_enum$$_name_(/** string */ name) {
+  exotic__enum$$__name__.$clinit();
+  if ($Equality.$same(exotic__enum$$__name__.f_namesToValuesMap__exoticidentifiers_exotic_enum$$_name__, null)) {
+   exotic__enum$$__name__.f_namesToValuesMap__exoticidentifiers_exotic_enum$$_name__ = (/**@type {Map<?string, !exotic__enum$$__name__>}*/ ($Enums.createMapFromValues(exotic__enum$$__name__.m_values__arrayOf_exoticidentifiers_exotic_enum$$_name_())));
+  }
+  return /**@type {exotic__enum$$__name__}*/ ($Enums.getValueFromNameAndMap(name, exotic__enum$$__name__.f_namesToValuesMap__exoticidentifiers_exotic_enum$$_name__));
+ }
+ /** @nodts @return {!Array<!exotic__enum$$__name__>} */
+ static m_values__arrayOf_exoticidentifiers_exotic_enum$$_name_() {
+  exotic__enum$$__name__.$clinit();
+  return /**@type {!Array<!exotic__enum$$__name__>}*/ ($Arrays.$stampType([exotic__enum$$__name__.f_exotic_enum$$_entry_1___exoticidentifiers_exotic_enum$$_name_, exotic__enum$$__name__.f_exotic_enum$$_entry_2___exoticidentifiers_exotic_enum$$_name_], exotic__enum$$__name__));
+ }
+ /** @nodts */
+ static $clinit() {
+  exotic__enum$$__name__.$clinit = () =>{};
+  exotic__enum$$__name__.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof exotic__enum$$__name__;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+exotic__enum$$__name__.$ordinal_exotic_enum$$_entry_1___exoticidentifiers_exotic_enum$$_name_ = 0;
+/**@const {number} @nodts*/
+exotic__enum$$__name__.$ordinal_exotic_enum$$_entry_2___exoticidentifiers_exotic_enum$$_name_ = 1;
+/**@const {!exotic__enum$$__name__} @nodts*/
+exotic__enum$$__name__.f_exotic_enum$$_entry_1___exoticidentifiers_exotic_enum$$_name_ = /**@pureOrBreakMyCode*/ exotic__enum$$__name__.$create__java_lang_String__int($Util.$makeEnumName('exotic_enum$$_entry_1_'), exotic__enum$$__name__.$ordinal_exotic_enum$$_entry_1___exoticidentifiers_exotic_enum$$_name_);
+/**@const {!exotic__enum$$__name__} @nodts*/
+exotic__enum$$__name__.f_exotic_enum$$_entry_2___exoticidentifiers_exotic_enum$$_name_ = /**@pureOrBreakMyCode*/ exotic__enum$$__name__.$create__java_lang_String__int($Util.$makeEnumName('exotic_enum$$_entry_2_'), exotic__enum$$__name__.$ordinal_exotic_enum$$_entry_2___exoticidentifiers_exotic_enum$$_name_);
+/**@type {Map<?string, !exotic__enum$$__name__>} @nodts*/
+exotic__enum$$__name__.f_namesToValuesMap__exoticidentifiers_exotic_enum$$_name__;
+$Util.$setClassMetadataForEnum(exotic__enum$$__name__, 'exoticidentifiers.exotic_enum$$_name_');
+
+exports = exotic__enum$$__name__;
+
+//# sourceMappingURL=exotic_enum$$_name_.js.map

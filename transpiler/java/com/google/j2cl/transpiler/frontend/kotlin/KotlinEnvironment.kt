@@ -63,10 +63,11 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
-import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
 import com.google.j2cl.transpiler.frontend.kotlin.ir.methods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.overriddenSpecialBridgeSignatures
+import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveName
+import com.google.j2cl.transpiler.frontend.kotlin.ir.sanitizedName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.simpleSourceName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.singleAbstractMethod
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
@@ -342,7 +343,7 @@ internal class KotlinEnvironment(
     }
 
     for (i in 0 until annotationCtorCall.valueArgumentsCount) {
-      val name = annotationCtorCall.symbol.owner.valueParameters[i].name.asString()
+      val name = annotationCtorCall.symbol.owner.valueParameters[i].sanitizedName
       val translatedValue = annotationCtorCall.getValueArgument(i).toAnnotationValue() ?: continue
       addValue(name, translatedValue)
     }
@@ -445,7 +446,7 @@ internal class KotlinEnvironment(
       }
 
     return TypeVariable.newBuilder()
-      .setName(irTypeParameter.name.asString())
+      .setName(irTypeParameter.sanitizedName)
       .setUniqueKey(irTypeParameter.uniqueKey)
       .setUpperBoundTypeDescriptorFactory(upperBoundFactory)
       .setNullabilityAnnotation(
@@ -664,7 +665,7 @@ internal class KotlinEnvironment(
       MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setEnclosingMethodDescriptor(enclosingMethodDescriptor)
-        .setName(irFunction.j2clName(jvmBackendContext))
+        .setName(irFunction.resolveName(jvmBackendContext))
         .setParameterDescriptors(parameterDescriptors.build())
         .setReturnTypeDescriptor(
           if (irFunction.hasVoidReturn) {
@@ -736,7 +737,7 @@ internal class KotlinEnvironment(
 
       FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irField))
-        .setName(irField.name.asString())
+        .setName(irField.sanitizedName)
         .setTypeDescriptor(fieldTypeDescriptor)
         .setVisibility(irField.j2clVisibility)
         .setCompileTimeConstant(constantValue != null)
@@ -757,7 +758,7 @@ internal class KotlinEnvironment(
   fun getDeclaredFieldDescriptor(irEnumEntry: IrEnumEntry): FieldDescriptor =
     FieldDescriptor.newBuilder()
       .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irEnumEntry))
-      .setName(irEnumEntry.name.asString())
+      .setName(irEnumEntry.sanitizedName)
       .setTypeDescriptor(getEnclosingTypeDescriptor(irEnumEntry)!!.toNonNullable())
       .setVisibility(Visibility.PUBLIC)
       .setFinal(true)

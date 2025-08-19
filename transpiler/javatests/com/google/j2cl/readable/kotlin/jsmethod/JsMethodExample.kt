@@ -29,8 +29,6 @@ class JsMethodExample {
   // This would better be handled in a unit test.
   @JsMethod external fun <T : ArrayList<String>> testMethod(): T
 
-  @JsMethod(name = "funWithExoticName") fun `function with exotic name`() {}
-
   abstract class Base<T> {
     @JsMethod open internal fun m(t: T) {}
   }

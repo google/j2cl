@@ -17,7 +17,6 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
-import com.google.j2cl.transpiler.ast.JsMemberType
 import com.google.j2cl.transpiler.ast.JsUtils
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.Visibility
@@ -50,7 +49,6 @@ import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
-import org.jetbrains.kotlin.ir.declarations.IrValueDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrBreakContinue
@@ -514,13 +512,13 @@ private val IrFunction.isPropertyGetter: Boolean
 val IrFunction.hasVoidReturn: Boolean
   get() = returnType.isUnit() && !isPropertyGetter
 
-fun IrFunction.j2clName(jvmBackendContext: JvmBackendContext): String? =
+fun IrFunction.resolveName(jvmBackendContext: JvmBackendContext): String? =
   when (this) {
     is IrConstructor -> null
-    is IrSimpleFunction -> this.j2clName(jvmBackendContext)
+    is IrSimpleFunction -> this.resolveName(jvmBackendContext)
   }
 
-fun IrSimpleFunction.j2clName(jvmBackendContext: JvmBackendContext): String {
+fun IrSimpleFunction.resolveName(jvmBackendContext: JvmBackendContext): String {
   // Pretend the function is public when mapping the signature. We want to avoid internal name
   // mangling for now.
   // TODO(b/236236685): Revisit this if we decide to mangle internal names.
@@ -547,14 +545,7 @@ fun IrSimpleFunction.j2clName(jvmBackendContext: JvmBackendContext): String {
     } else {
       name
     }
-
-  return if (getJsInfo().jsMemberType != JsMemberType.NONE) {
-    // We don't sanitize name for JsMember. Instead, we pass the original name through to the
-    // backend, and let the JsInteropRestriction checker validate if it's a valid JS identifier.
-    resolvedName.asString()
-  } else {
-    resolvedName.sanitizeName()
-  }
+  return sanitizeName(resolvedName)
 }
 
 private fun <R> IrSimpleFunction.runAsIfNonInternalFunction(block: IrSimpleFunction.() -> R): R {
@@ -569,12 +560,24 @@ private fun <R> IrSimpleFunction.runAsIfNonInternalFunction(block: IrSimpleFunct
   }
 }
 
-val IrValueDeclaration.j2clName: String
-  get() = name.sanitizeName()
+val IrDeclarationWithName.sanitizedName: String
+  get() {
+    if (this is IrFunction) {
+      throw IllegalStateException("Use IrFunction.resolveName(jvmBackendContext) instead")
+    }
+    return sanitizeName()
+  }
 
-private fun Name.sanitizeName(): String {
-  return JsUtils.sanitizeJsIdentifier(this.asStringStripSpecialMarkers())
-}
+private fun IrDeclarationWithName.sanitizeName(name: Name = this.name) =
+  if (isJsMember()) {
+    // We don't sanitize name for JsMember. Instead, we pass the original name through to the
+    // backend, and let the JsInteropRestriction checker validate if it's a valid JS identifier.
+    name.asString()
+  } else {
+    name.sanitizeName()
+  }
+
+private fun Name.sanitizeName() = JsUtils.sanitizeJsIdentifier(this.asStringStripSpecialMarkers())
 
 /**
  * Returns `true` if the function reference is a reference to a synthetic adapter function created
