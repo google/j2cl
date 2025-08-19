@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -66,6 +67,7 @@ public class OptimizeXplatLogger extends NormalizationPass {
   private static void rewriteLogMethodCallArguments(MethodCall methodCall) {
     var arguments = methodCall.getArguments();
     var messageArg = arguments.getFirst();
+    checkState(TypeDescriptors.isJavaLangString(messageArg.getTypeDescriptor()));
     arguments.set(0, RuntimeMethods.createUtilMethodCall("$makeLogMessage", messageArg));
   }
 
