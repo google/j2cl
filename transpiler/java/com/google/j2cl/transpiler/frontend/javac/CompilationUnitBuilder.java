@@ -161,6 +161,7 @@ import javax.annotation.Nullable;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ExecutableType;
 import javax.lang.model.type.TypeKind;
@@ -1061,8 +1062,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             : null;
 
     MethodSymbol constructorElement = (MethodSymbol) expression.constructor;
-    DeclaredTypeDescriptor targetType =
-        environment.createDeclaredTypeDescriptor(expression.type, inNullMarkedScope());
+    // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
+    // descriptor and the MethodDescriptor are created in the right context.
+    TypeElement typeElement = (TypeElement) expression.type.asElement();
+    boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        environment.createDeclaredTypeDescriptor(expression.type, inNullMarkedScope);
 
     MethodType methodType = expression.constructor.type.asMethodType();
     var typeArguments =
@@ -1070,11 +1075,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             expression.getTypeArguments(),
             constructorElement,
             methodType,
-            targetType.getTypeDeclaration().isNullMarked());
+            enclosingTypeDescriptor.getTypeDeclaration().isNullMarked());
 
     MethodDescriptor constructorMethodDescriptor =
         environment.createMethodDescriptor(
-            /* enclosingTypeDescriptor= */ targetType,
+            /* enclosingTypeDescriptor= */ enclosingTypeDescriptor,
             /* methodType= */ (ExecutableType)
                 constructorElement.asMemberOf(expression.type, environment.internalTypes).asType(),
             /* declarationMethodElement= */ constructorElement,
@@ -1120,8 +1125,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodType methodType = methodInvocation.meth.type.asMethodType();
     // The type arguments for the method itself. For example `String` in `C.<String>m()`.
 
+    // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
+    // descriptor and the MethodDescriptor are created in the right context.
+    TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement().asType().asElement();
+    boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        environment.createDeclaredTypeDescriptor(methodSymbol.getEnclosingElement().asType());
+        environment.createDeclaredTypeDescriptor(
+            methodSymbol.getEnclosingElement().asType(), inNullMarkedScope);
 
     var typeArguments =
         convertTypeArguments(

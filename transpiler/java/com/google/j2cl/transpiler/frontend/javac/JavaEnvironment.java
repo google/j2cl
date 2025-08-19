@@ -684,8 +684,13 @@ class JavaEnvironment {
 
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
   MethodDescriptor createMethodDescriptor(ExecutableElement methodElement) {
+    // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
+    // descriptor and the MethodDescriptor are created in the right context.
+    TypeElement typeElement = (TypeElement) methodElement.getEnclosingElement();
+    boolean inNullMarkedScope = createTypeDeclaration(typeElement).isNullMarked();
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(methodElement.getEnclosingElement().asType());
+        createDeclaredTypeDescriptor(
+            methodElement.getEnclosingElement().asType(), inNullMarkedScope);
     return createMethodDescriptor(
         enclosingTypeDescriptor,
         (ExecutableType) methodElement.asType(),
