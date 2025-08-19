@@ -111,6 +111,10 @@ common::check_maven_prerequisites() {
     common::error "Maven pom file not found for artifact ${MAVEN_ARTIFACT}."
   fi
 
+  if [[ -n "${COMMON_DEPENDENCIES_FILE:-}" ]] && [[ ! -f "${COMMON_DEPENDENCIES_FILE}" ]]; then
+    common::error "COMMON_DEPENDENCIES_FILE is set but the file '${COMMON_DEPENDENCIES_FILE}' does not exist."
+  fi
+
   # Every project that deploy to sonatype with maven needs to set the
   # deploy_to_sonatype variable to be able to skip the deployment step.
   if [[ -z "${deploy_to_sonatype:-}" ]]; then
@@ -201,9 +205,18 @@ common::_extract_classes(){
 common::_prepare_pom_file() {
   common::info "Generating pom file for ${MAVEN_ARTIFACT}."
   # Replace placeholders and generate the final pom.xml
-  sed -e "s/__VERSION__/${lib_version}/g" \
-    -e "/__BUILD_SECTION__/r ${BUILD_SECTION_FILE}" \
-    -e "/__BUILD_SECTION__/d" \
+  local -a sed_args
+  sed_args+=(-e "s/__VERSION__/${lib_version}/g")
+  sed_args+=(-e "/__BUILD_SECTION__/r ${BUILD_SECTION_FILE}")
+  sed_args+=(-e "/__BUILD_SECTION__/d")
+
+  if [[ -n "${COMMON_DEPENDENCIES_FILE:-}" ]]; then
+    common::info "Adding common dependencies to pom file."
+    sed_args+=(-e "/__COMMON_DEPENDENCIES__/r ${COMMON_DEPENDENCIES_FILE}")
+    sed_args+=(-e "/__COMMON_DEPENDENCIES__/d")
+  fi
+
+  sed "${sed_args[@]}" \
     "${BAZEL_ROOT}/maven/pom-${BAZEL_ARTIFACT}.xml" > "${maven_wd}/pom-${MAVEN_ARTIFACT}.xml"
 }
 
