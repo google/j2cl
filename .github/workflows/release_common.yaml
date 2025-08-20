@@ -163,6 +163,9 @@ jobs:
       attest: true
       author_name: j2cl-github-bot
       author_email: j2cl-github-bot@google.com
+      # The PR is authored by a bot account, which requires team member approval. Therefore, we
+      # don't need to create it as a draft.
+      draft: false
     permissions:
       contents: write
       id-token: write
