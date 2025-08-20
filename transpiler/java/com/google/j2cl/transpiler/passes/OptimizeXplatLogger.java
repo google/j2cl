@@ -128,17 +128,10 @@ public class OptimizeXplatLogger extends NormalizationPass {
       return null;
     }
 
-    // Avoid re-writing calls to old Xplat logger by checking a well-known method in new one.
-    var enclosingType = target.getEnclosingTypeDescriptor();
-    if (enclosingType.getMethodDescriptorByName("log_atInfo") == null) {
-      // TODO(b/435512074): Remove this once the old logger is removed.
-      return null;
-    }
-
     // By convention, replacement method should be provided as <loggerApi>_<atMethodName>.
     var replacementMethodName = loggerApi + "_" + target.getName();
     var replacementMethodDescriptor =
-        enclosingType.getMethodDescriptorByName(replacementMethodName);
+        target.getEnclosingTypeDescriptor().getMethodDescriptorByName(replacementMethodName);
     checkNotNull(replacementMethodDescriptor, "Replacement not found: %s", replacementMethodName);
 
     // Make sure to match arguments in size (due to optional parameters).
