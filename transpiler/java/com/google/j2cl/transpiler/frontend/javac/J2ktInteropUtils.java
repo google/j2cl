@@ -35,7 +35,6 @@ import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
 
 /** Utility functions for Kotlin Interop properties. */
 public class J2ktInteropUtils {
@@ -75,18 +74,7 @@ public class J2ktInteropUtils {
   }
 
   public static KtInfo getJ2ktInfo(Element element) {
-    // Checking for both property annotations and enclosing class annotations for uninitialized
-    // warning suppressions.
-    boolean isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(element);
-    @Nullable TypeElement declaringClass = (TypeElement) element.getEnclosingElement();
-    while (declaringClass != null && !isUninitializedWarningSuppressed) {
-      isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(declaringClass);
-      declaringClass =
-          declaringClass.getEnclosingElement() instanceof TypeElement enclosingElement
-              ? enclosingElement
-              : null;
-    }
-    return getJ2ktInfo(element, isUninitializedWarningSuppressed);
+    return getJ2ktInfo(element, isUninitializedWarningSuppressed(element));
   }
 
   private static KtInfo getJ2ktInfo(
@@ -118,8 +106,13 @@ public class J2ktInteropUtils {
     return getJ2ktThrowsAnnotation(annotatedConstruct) != null;
   }
 
-  public static boolean isUninitializedWarningSuppressed(AnnotatedConstruct annotatedConstruct) {
-    return isWarningSuppressed(annotatedConstruct, "nullness:initialization.field.uninitialized");
+  public static boolean isUninitializedWarningSuppressed(Element element) {
+    for (; element != null; element = element.getEnclosingElement()) {
+      if (isWarningSuppressed(element, "nullness:initialization.field.uninitialized")) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Nullable
