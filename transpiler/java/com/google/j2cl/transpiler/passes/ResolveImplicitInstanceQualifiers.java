@@ -74,7 +74,7 @@ public class ResolveImplicitInstanceQualifiers extends NormalizationPass {
                 .getTarget()
                 .getEnclosingTypeDescriptor()
                 .getTypeDeclaration()
-                .isAnonymous()) {
+                .isCapturingEnclosingInstance()) {
               // This is an anonymous class instantiation with an implicit qualifier
               // happening in a constructor before the super/this call.
               // Pass null as the enclosing instance instead of a this reference.

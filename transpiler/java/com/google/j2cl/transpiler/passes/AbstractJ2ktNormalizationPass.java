@@ -126,7 +126,9 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
           ? descriptor
           : descriptor.withTypeArguments(
               zip(
-                  descriptor.getTypeDeclaration().getTypeParameterDescriptors(),
+                  typeDescriptor.isRaw()
+                      ? ImmutableList.of()
+                      : descriptor.getTypeDeclaration().getTypeParameterDescriptors(),
                   descriptor.getTypeArgumentDescriptors(),
                   (typeParameter, typeArgument) ->
                       projectArgumentCaptures(typeArgument, typeParameter, seen)));
