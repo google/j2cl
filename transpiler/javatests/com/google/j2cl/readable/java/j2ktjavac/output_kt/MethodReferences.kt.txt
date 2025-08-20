@@ -28,9 +28,7 @@ open class MethodReferences {
   fun <T> testImplicitTypeArguments(): BiConsumer<Consumer<T>, T> {
    return MethodReferences.apply<Consumer<T>?, T>(
     BiConsumer { arg0: Consumer<T>?, arg1: T ->
-     arg0!!.accept(
-      arg1 as A,
-     )
+     arg0!!.accept(arg1)
     },
    ) as BiConsumer<Consumer<T>, T>
   }
@@ -39,9 +37,7 @@ open class MethodReferences {
   fun <T> testExplicitTypeArguments(): BiConsumer<Consumer<T>, T> {
    return MethodReferences.apply<Consumer<T>?, T>(
     BiConsumer { arg0: Consumer<T>?, arg1: T ->
-     arg0!!.accept(
-      arg1 as A,
-     )
+     arg0!!.accept(arg1)
     },
    ) as BiConsumer<Consumer<T>, T>
   }

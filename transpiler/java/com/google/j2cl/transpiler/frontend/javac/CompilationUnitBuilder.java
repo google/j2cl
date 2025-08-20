@@ -87,6 +87,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
@@ -925,11 +926,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")) {
       // Arrays member references are seen as references to members on a class Array.
+      // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing
+      // type descriptor and the MethodDescriptor are created in the right context.
+      TypeElement typeElement =
+          (TypeElement) memberReference.getQualifierExpression().type.asElement();
+      boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
       return ArrayCreationReference.newBuilder()
           .setTargetTypeDescriptor(
               environment.createTypeDescriptor(
                   memberReference.getQualifierExpression().type,
-                  inNullMarkedScope(),
+                  inNullMarkedScope,
                   ArrayTypeDescriptor.class))
           .setInterfaceMethodDescriptor(functionalMethodDescriptor)
           .setSourcePosition(getSourcePosition(memberReference))
@@ -942,12 +948,34 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       qualifier = null;
     }
 
-    DeclaredTypeDescriptor enclosingTypeDescriptor =
+    // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
+    // descriptor and the MethodDescriptor are created in the right context.
+    TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement();
+    boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
+    DeclaredTypeDescriptor declarationEnclosingTypeDescriptor =
         getParameterizedEnclosingType(
-            environment.createDeclaredTypeDescriptor(methodSymbol.getEnclosingElement().asType()),
+            environment.createDeclaredTypeDescriptor(
+                methodSymbol.getEnclosingElement().asType(), inNullMarkedScope),
             qualifier);
 
     var methodType = memberReference.referentType;
+
+    Map<TypeVariable, TypeDescriptor> enclosingTypeArguments = new HashMap<>();
+    var mapping =
+        methodSymbol.isConstructor()
+            ? JavaEnvironment.getTypeSubstitution(
+                methodType.getReturnType(), methodType.getReturnType().tsym)
+            : JavaEnvironment.getTypeSubstitution(methodType, methodSymbol);
+    for (var tv : mapping.keySet()) {
+      enclosingTypeArguments.put(
+          (TypeVariable) environment.createTypeDescriptor(tv.asType()),
+          environment.createTypeDescriptor(
+              mapping.get(tv).getFirst(),
+              declarationEnclosingTypeDescriptor.getTypeDeclaration().isNullMarked()));
+    }
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        (DeclaredTypeDescriptor)
+            declarationEnclosingTypeDescriptor.specializeTypeVariables(enclosingTypeArguments);
 
     var typeArguments =
         convertTypeArguments(
@@ -955,6 +983,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             methodSymbol,
             methodType,
             enclosingTypeDescriptor.getTypeDeclaration().isNullMarked());
+
     MethodDescriptor targetMethodDescriptor =
         environment.createMethodDescriptor(
             enclosingTypeDescriptor,
@@ -1127,7 +1156,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
     // descriptor and the MethodDescriptor are created in the right context.
-    TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement().asType().asElement();
+    TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement();
     boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         environment.createDeclaredTypeDescriptor(
