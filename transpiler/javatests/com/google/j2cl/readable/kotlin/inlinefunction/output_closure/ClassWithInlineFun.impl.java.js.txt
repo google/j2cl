@@ -46,7 +46,7 @@ class ClassWithInlineFun extends j_l_Object {
    let tmp = sum;
    let unary = this.m_getE__int();
    this.m_setE__int__void(unary - 1 | 0);
-   sum = tmp + (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(unary)), Integer))).m_intValue__int() | 0;
+   sum = tmp + (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(unary)), Integer))).intValue() | 0;
    if (sum > 10) {
     return sum;
    }

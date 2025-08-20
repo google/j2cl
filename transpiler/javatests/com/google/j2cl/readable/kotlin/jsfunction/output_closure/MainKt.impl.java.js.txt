@@ -220,7 +220,7 @@ class MainKt extends j_l_Object {
  /** @nodts @return {?string} */
  static m_callInterfaceParameterized__jsfunction_JsBiFunction__java_lang_String__java_lang_String(/** function(?string, Integer):?string */ f, /** ?string */ s) {
   MainKt.$clinit();
-  return /**@type {?string}*/ ($Casts.$to(f(s, Integer.m_valueOf__int__java_lang_Integer(1)), j_l_String));
+  return /**@type {?string}*/ ($Casts.$to(f(s, Integer.valueOf(1)), j_l_String));
  }
  /** @nodts @template U, V @return {U} */
  static m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(/** function(U, V):U */ f, /** U */ u, /** V */ v) {
@@ -235,23 +235,23 @@ class MainKt extends j_l_Object {
  /** @nodts @return {?string} */
  static m_callImplementorParameterized__jsfunction_TIntegerJsBiFunction__java_lang_String__java_lang_String(/** !TIntegerJsBiFunction<?string> */ f, /** ?string */ s) {
   MainKt.$clinit();
-  return /**@type {?string}*/ ($Casts.$to(TIntegerJsBiFunction.m_apply__jsfunction_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(f, s, Integer.m_valueOf__int__java_lang_Integer(1)), j_l_String));
+  return /**@type {?string}*/ ($Casts.$to(TIntegerJsBiFunction.m_apply__jsfunction_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(f, s, Integer.valueOf(1)), j_l_String));
  }
  /** @nodts */
  static m_testParameterTypes__void() {
   MainKt.$clinit();
   let tIntegerJsBiFunction = /**@type {function(?string, Integer):?string}*/ (TIntegerJsBiFunction.$create__());
   let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();
-  MainKt.m_callInterfaceProjected__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
+  MainKt.m_callInterfaceProjected__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.valueOf(1));
   MainKt.m_callInterfaceProjected__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
   MainKt.m_callInterfaceParameterized__jsfunction_JsBiFunction__java_lang_String__java_lang_String(tIntegerJsBiFunction, 'a');
-  MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
+  MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.valueOf(1));
   MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
-  MainKt.m_callImplementorPorjected__jsfunction_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/**@type {!TIntegerJsBiFunction<number>}*/ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int__java_lang_Integer(1));
-  MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));
+  MainKt.m_callImplementorPorjected__jsfunction_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/**@type {!TIntegerJsBiFunction<number>}*/ (TIntegerJsBiFunction.$create__()), 1.1, Integer.valueOf(1));
+  MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.valueOf(1));
   MainKt.m_callInterfaceUnparameterized__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);
   MainKt.m_callImplementorParameterized__jsfunction_TIntegerJsBiFunction__java_lang_String__java_lang_String(/**@type {!TIntegerJsBiFunction<?string>}*/ (TIntegerJsBiFunction.$create__()), '');
-  tIntegerJsBiFunction('a', Integer.m_valueOf__int__java_lang_Integer(1));
+  tIntegerJsBiFunction('a', Integer.valueOf(1));
   doubleDoubleJsBiFunction(1.1, 1.1);
   MainKt.callOnFunction(DoubleDoubleJsBiFunction.$create__());
  }

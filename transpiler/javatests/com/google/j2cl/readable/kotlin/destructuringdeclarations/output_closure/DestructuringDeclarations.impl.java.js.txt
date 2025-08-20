@@ -77,11 +77,11 @@ class DestructuringDeclarations extends j_l_Object {
  }
  /** @final @nodts */
  m_testDestructuringDeclarationsInMaps__void_$p_destructuringdeclarations_DestructuringDeclarations() {
-  let map = /**@type {!Map<!Integer, ?string>}*/ (MapsKt.m_mapOf__kotlin_Pair__java_util_Map(TuplesKt.m_to__java_lang_Object__java_lang_Object__kotlin_Pair(Integer.m_valueOf__int__java_lang_Integer(1), 'world')));
+  let map = /**@type {!Map<!Integer, ?string>}*/ (MapsKt.m_mapOf__kotlin_Pair__java_util_Map(TuplesKt.m_to__java_lang_Object__java_lang_Object__kotlin_Pair(Integer.valueOf(1), 'world')));
   for (let $iterator = (/**@type {!Map<Integer, ?string>}*/ (map)).entrySet().m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
    let destruct = /**@type {!Entry<Integer, ?string>}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), /**@type {Function}*/ (Entry)));
    {
-    let key = (/**@type {!Integer}*/ ($Casts.$to(destruct.getKey(), Integer))).m_intValue__int();
+    let key = (/**@type {!Integer}*/ ($Casts.$to(destruct.getKey(), Integer))).intValue();
     let value = /**@type {string}*/ ($Casts.$to(destruct.getValue(), j_l_String));
     let a = key;
     let b = value;

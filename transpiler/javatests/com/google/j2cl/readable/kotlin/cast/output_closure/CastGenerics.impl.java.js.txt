@@ -108,13 +108,13 @@ class CastGenerics extends j_l_Object {
  }
  /** @final @nodts */
  m_testCastToParameterizedType__void() {
-  let o = Integer.m_valueOf__int__java_lang_Integer(1);
+  let o = Integer.valueOf(1);
   let cc = /**@type {!CastGenerics<Error, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
   let cc2 = /**@type {!CastGenerics<*, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
  }
  /** @final @nodts */
  m_testCastToTypeVariable__void() {
-  let o = Integer.m_valueOf__int__java_lang_Integer(1);
+  let o = Integer.valueOf(1);
   let e = /**@type {?E}*/ ($Casts.$to(o, Number));
   let t = /**@type {?T}*/ (o);
   let es = /**@type {Array<E>}*/ ($Arrays.$castTo(o, Number, 1));
@@ -122,7 +122,7 @@ class CastGenerics extends j_l_Object {
  }
  /** @final @nodts @template S, V */
  m_testCastToMethodTypeVariable__void() {
-  let o = Integer.m_valueOf__int__java_lang_Integer(1);
+  let o = Integer.valueOf(1);
   let s = /**@type {S}*/ (o);
   let c = /**@type {CastGenerics<S, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
   c = (/**@type {Array<S>}*/ ($Arrays.$castTo(o, j_l_Object, 1)));
@@ -144,7 +144,7 @@ class CastGenerics extends j_l_Object {
  }
  /** @final @nodts */
  m_testSafeCastToTypeVariable__void() {
-  let a = this.m_safeCastToTypeWithPrimitiveUpperBound__java_lang_Object__java_lang_Integer_$p_cast_CastGenerics(Integer.m_valueOf__int__java_lang_Integer(1));
+  let a = this.m_safeCastToTypeWithPrimitiveUpperBound__java_lang_Object__java_lang_Integer_$p_cast_CastGenerics(Integer.valueOf(1));
   let b = this.m_safeCastToTypeWithPrimitiveUpperBound__java_lang_Object__java_lang_Integer_$p_cast_CastGenerics(j_l_Object.$create__());
   let c = /**@type {A1}*/ ($Casts.$to(this.m_safeCastToTypeWithUpperBound__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(j_l_Object.$create__()), A1));
   let d = /**@type {A1}*/ ($Casts.$to(this.m_safeCastToTypeWithUpperBound__java_lang_Object__cast_CastGenerics_Empty1_$p_cast_CastGenerics(/**@type {!$2<T, E>}*/ ($2.$create__cast_CastGenerics(this))), A1));

@@ -48,7 +48,7 @@ class KotlinIntMap extends JavaIntMap {
  }
  /** @nodts @return {number} */
  m_computeIfAbsent__java_lang_Integer__java_util_function_Function__int(/** Integer */ key, /** !j_u_function_Function<?, ?> */ mappingFunction) {
-  return (/**@type {!Integer}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {?}*/ ($Casts.$to(Map.m_computeIfAbsent__$default__java_util_Map__java_lang_Object__java_util_function_Function__java_lang_Object(this, key, mappingFunction), Integer))))).m_intValue__int();
+  return (/**@type {!Integer}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {?}*/ ($Casts.$to(Map.m_computeIfAbsent__$default__java_util_Map__java_lang_Object__java_util_function_Function__java_lang_Object(this, key, mappingFunction), Integer))))).intValue();
  }
  /** @override @nodts @return {Integer} */
  m_put__java_lang_Integer__java_lang_Integer__java_lang_Integer(/** Integer */ key, /** Integer */ value) {
@@ -80,7 +80,7 @@ class KotlinIntMap extends JavaIntMap {
  }
  /** @nodts @return {Integer} */
  m_merge__java_lang_Integer__int__java_util_function_BiFunction__java_lang_Integer(/** Integer */ key, /** number */ value, /** !BiFunction<?, ?, ?> */ remappingFunction) {
-  return /**@type {Integer}*/ ($Casts.$to(Map.m_merge__$default__java_util_Map__java_lang_Object__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, key, Integer.m_valueOf__int__java_lang_Integer(value), remappingFunction), Integer));
+  return /**@type {Integer}*/ ($Casts.$to(Map.m_merge__$default__java_util_Map__java_lang_Object__java_lang_Object__java_util_function_BiFunction__java_lang_Object(this, key, Integer.valueOf(value), remappingFunction), Integer));
  }
  /** @override @nodts @return {Integer} */
  m_replace__java_lang_Integer__java_lang_Integer__java_lang_Integer(/** Integer */ key, /** Integer */ value) {
@@ -120,7 +120,7 @@ class KotlinIntMap extends JavaIntMap {
  }
  /** @nodts @return {number} */
  m_getOrDefault__java_lang_Integer__java_lang_Integer__int(/** Integer */ key, /** Integer */ defaultValue) {
-  return (/**@type {!Integer}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {?}*/ ($Casts.$to(Map.m_getOrDefault__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, key, defaultValue), Integer))))).m_intValue__int();
+  return (/**@type {!Integer}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {?}*/ ($Casts.$to(Map.m_getOrDefault__$default__java_util_Map__java_lang_Object__java_lang_Object__java_lang_Object(this, key, defaultValue), Integer))))).intValue();
  }
  /** @nodts @return {number} */
  m_getSize__int() {
@@ -179,7 +179,7 @@ class KotlinIntMap extends JavaIntMap {
  /** @final @nodts @return {number} */
  m_getOrDefault__java_lang_Object__java_lang_Integer__int(/** * */ key, /** Integer */ defaultValue) {
   if (!($Equality.$same(key, null) || Integer.$isInstance(key))) {
-   return defaultValue.m_intValue__int();
+   return defaultValue.intValue();
   }
   return this.m_getOrDefault__java_lang_Integer__java_lang_Integer__int(/**@type {Integer}*/ (key), defaultValue);
  }

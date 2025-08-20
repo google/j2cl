@@ -80,7 +80,7 @@ class ForEachStatement extends j_l_Object {
    if (Exception2.$isInstance(__$exc_1) || Exception3.$isInstance(__$exc_1)) {
     let e_2 = /**@type {(Exception2|Exception3)}*/ (__$exc_1);
     for (let $iterator_2 = (/**@type {Iterable<Integer>}*/ ($Casts.$to(e_2, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
-     let o_2 = $Primitives.widenIntToLong((/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).m_intValue__int());
+     let o_2 = $Primitives.widenIntToLong((/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).intValue());
     }
    } else {
     throw $Exceptions.toJs(__$exc_1);
@@ -95,14 +95,14 @@ class ForEachStatement extends j_l_Object {
   }
   let /** IterableReturningTypeVariable<?, ?> */ anotherIterable = null;
   for (let $iterator_1 = anotherIterable.m_iterator__java_util_Iterator(); (/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_hasNext__boolean(); ) {
-   let s_1 = (/**@type {Integer}*/ ($Casts.$to((/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_next__java_lang_Object(), Integer))).m_intValue__int();
+   let s_1 = (/**@type {Integer}*/ ($Casts.$to((/**@type {!Iterator<Integer>}*/ ($iterator_1)).m_next__java_lang_Object(), Integer))).intValue();
   }
   let /** ?V */ integerIterable = null;
   for (let $iterator_2 = (/**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
-   let i = (/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).m_intValue__int();
+   let i = (/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).intValue();
   }
   for (let $iterator_3 = (/**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_3.m_hasNext__boolean(); ) {
-   let i_1 = $Primitives.widenIntToLong((/**@type {Integer}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Integer))).m_intValue__int());
+   let i_1 = $Primitives.widenIntToLong((/**@type {Integer}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Integer))).intValue());
   }
   let /** Iterable<Character> */ charIterable = null;
   for (let $iterator_4 = charIterable.m_iterator__java_util_Iterator(); $iterator_4.m_hasNext__boolean(); ) {
@@ -116,11 +116,11 @@ class ForEachStatement extends j_l_Object {
   for (let $iterator = iterable.m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
    let i = /**@type {Integer}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Integer));
    {
-    i = Integer.m_valueOf__int__java_lang_Integer(4);
+    i = Integer.valueOf(4);
    }
   }
   for (let $iterator_1 = iterable.m_iterator__java_util_Iterator(); $iterator_1.m_hasNext__boolean(); ) {
-   let i_1 = (/**@type {Integer}*/ ($Casts.$to($iterator_1.m_next__java_lang_Object(), Integer))).m_intValue__int();
+   let i_1 = (/**@type {Integer}*/ ($Casts.$to($iterator_1.m_next__java_lang_Object(), Integer))).intValue();
    {
     i_1 = i_1 + 4 | 0;
    }

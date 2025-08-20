@@ -59,7 +59,7 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_topLevelInlineFunction__inlinefunction_MyClass__kotlin_jvm_functions_Function1__int(/** !MyClass */ myClass, /** !Function1<?, ?> */ action) {
   InlineFunctionKt.$clinit();
-  return (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(myClass.m_getF__int())), Integer))).m_intValue__int();
+  return (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(myClass.m_getF__int())), Integer))).intValue();
  }
  /** @nodts @template T */
  static m_doSomethingOn__java_lang_Object__kotlin_jvm_functions_Function1__void(/** T */ target, /** !Function1<?, ?> */ block) {
@@ -75,14 +75,14 @@ class InlineFunctionKt extends j_l_Object {
    let tmp = sum;
    let unary = this_1.m_getF__int();
    this_1.m_setF__int__void(unary - 1 | 0);
-   sum = tmp + (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(unary)), Integer))).m_intValue__int() | 0;
+   sum = tmp + (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(unary)), Integer))).intValue() | 0;
   }
   return sum;
  }
  /** @nodts */
  static m_extensionInlineFunctionNoReturn__inlinefunction_MyClass__kotlin_jvm_functions_Function1__void(/** !MyClass */ this_1, /** !Function1<?, ?> */ action) {
   InlineFunctionKt.$clinit();
-  this_1.m_setF__int__void((/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(this_1.m_getF__int())), Integer))).m_intValue__int());
+  this_1.m_setF__int__void((/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(this_1.m_getF__int())), Integer))).intValue());
  }
  /** @nodts */
  static m_testInlining__void() {
@@ -241,11 +241,11 @@ class InlineFunctionKt extends j_l_Object {
  static m_testNoInline__void() {
   InlineFunctionKt.$clinit();
   let tmp0_notInlined = Function0.$adapt(/**  @return {?}*/ (() =>{
-   return Integer.m_valueOf__int__java_lang_Integer(5);
+   return Integer.valueOf(5);
   }));
   let notInlined = tmp0_notInlined;
   let intProducer = /**@type {!Function0<Integer>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(notInlined));
-  let a = (/**@type {!Integer}*/ ($Casts.$to(intProducer.m_invoke__java_lang_Object(), Integer))).m_intValue__int();
+  let a = (/**@type {!Integer}*/ ($Casts.$to(intProducer.m_invoke__java_lang_Object(), Integer))).intValue();
  }
  /** @nodts */
  static m_acceptMyClass__inlinefunction_MyClass__void(/** !MyClass */ myClass) {
@@ -390,7 +390,7 @@ class InlineFunctionKt extends j_l_Object {
   let f = ClassWithCompanionKt.m_yetYetAnotherNotReferencedOutsideOfThisFile__java_lang_String();
   let tmp0__this__5 = WithInlineFunction.$create__();
   let this_6 = tmp0__this__5;
-  let g = Integer.m_valueOf__int__java_lang_Integer(1);
+  let g = Integer.valueOf(1);
   let tmp0__this__6 = ClassWithCompanion.$create__java_lang_Object(j_l_Object.$create__());
   let this_7 = tmp0__this__6;
   let h = 'RightExtensionProperty';
@@ -413,7 +413,7 @@ class InlineFunctionKt extends j_l_Object {
  }
  /** @nodts @template R @return {R} */
  static m_castIntToObj__java_lang_Object() {
-  return Integer.m_valueOf__int__java_lang_Integer(1);
+  return Integer.valueOf(1);
  }
  /** @nodts @return {number} */
  static m_inlineFunWithDefaults__int__int__int(/** number */ a, /** number */ b) {

@@ -45,11 +45,11 @@ class IntList extends ArrayList {
  }
  /** @nodts @return {number} */
  m_lastIndexOf__int__int(/** number */ element) {
-  return super.lastIndexOf(Integer.m_valueOf__int__java_lang_Integer(element));
+  return super.lastIndexOf(Integer.valueOf(element));
  }
  /** @nodts @return {number} */
  m_indexOf__int__int(/** number */ element) {
-  return super.indexOf(Integer.m_valueOf__int__java_lang_Integer(element));
+  return super.indexOf(Integer.valueOf(element));
  }
  /** @override @return {boolean} */
  containsAll(/** !Collection<?> */ elements) {
@@ -57,7 +57,7 @@ class IntList extends ArrayList {
  }
  /** @nodts @return {boolean} */
  m_contains__int__boolean(/** number */ element) {
-  return super.contains(Integer.m_valueOf__int__java_lang_Integer(element));
+  return super.contains(Integer.valueOf(element));
  }
  /** @nodts @return {number} */
  m_remove__int__int(/** number */ index) {
@@ -68,28 +68,28 @@ class IntList extends ArrayList {
   if (!Integer.$isInstance(element)) {
    return false;
   }
-  return this.m_remove__java_lang_Integer__boolean(Integer.m_valueOf__int__java_lang_Integer((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int()));
+  return this.m_remove__java_lang_Integer__boolean(Integer.valueOf((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue()));
  }
  /** @final @override @return {number} */
  lastIndexOf(/** * */ element) {
   if (!Integer.$isInstance(element)) {
    return -1;
   }
-  return this.m_lastIndexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+  return this.m_lastIndexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
  }
  /** @final @override @return {number} */
  indexOf(/** * */ element) {
   if (!Integer.$isInstance(element)) {
    return -1;
   }
-  return this.m_indexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+  return this.m_indexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
  }
  /** @final @override @return {boolean} */
  contains(/** * */ element) {
   if (!Integer.$isInstance(element)) {
    return false;
   }
-  return this.m_contains__int__boolean((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+  return this.m_contains__int__boolean((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
  }
  /** @nodts @return {number} */
  m_getSize__int() {
@@ -102,7 +102,7 @@ class IntList extends ArrayList {
  //Bridge method.
  /** @final @override @suppress{visibility} @return {!Integer} */
  removeAtIndex(/** number */ arg0) {
-  return Integer.m_valueOf__int__java_lang_Integer(this.m_remove__int__int(arg0));
+  return Integer.valueOf(this.m_remove__int__int(arg0));
  }
  /** @nodts */
  static $clinit() {

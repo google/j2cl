@@ -86,9 +86,9 @@ class Main extends j_l_Object {
  /** @nodts */
  m_testStaticMethodFirst__void() {
   Main.f2(1, 2);
-  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
+  Main.generics(Integer.valueOf(1), Integer.valueOf(2));
   Main.f2(1, 2);
-  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
+  Main.generics(Integer.valueOf(1), Integer.valueOf(2));
   Main.f2();
   Main.generics();
   Main.f2();
@@ -97,12 +97,12 @@ class Main extends j_l_Object {
   Main.f2(1, 2);
   Main.f2(1, 2);
   Main.generics(/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int)));
-  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
+  Main.generics(Integer.valueOf(1), Integer.valueOf(2));
   Main.f2();
   Main.f2();
   Main.generics(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
   let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int));
-  let integers = /**@type {!Array<Integer>}*/ ($Arrays.$stampType([Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2)], Integer));
+  let integers = /**@type {!Array<Integer>}*/ ($Arrays.$stampType([Integer.valueOf(1), Integer.valueOf(2)], Integer));
   Main.f2(...ints);
   Main.f2(...ints);
   Main.generics(...integers);

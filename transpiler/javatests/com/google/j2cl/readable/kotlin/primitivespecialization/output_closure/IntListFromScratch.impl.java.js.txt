@@ -60,16 +60,16 @@ class IntListFromScratch extends j_l_Object {
  }
  /** @nodts */
  m_add__int__int__void(/** number */ index, /** number */ element) {
-  this.f_contents__primitivespecialization_IntListFromScratch_.addAtIndex(index, Integer.m_valueOf__int__java_lang_Integer(element));
+  this.f_contents__primitivespecialization_IntListFromScratch_.addAtIndex(index, Integer.valueOf(element));
   return;
  }
  /** @nodts @return {boolean} */
  m_add__int__boolean(/** number */ element) {
-  return this.f_contents__primitivespecialization_IntListFromScratch_.add(Integer.m_valueOf__int__java_lang_Integer(element));
+  return this.f_contents__primitivespecialization_IntListFromScratch_.add(Integer.valueOf(element));
  }
  /** @nodts @return {number} */
  m_get__int__int(/** number */ index) {
-  return (/**@type {Integer}*/ ($Casts.$to(this.f_contents__primitivespecialization_IntListFromScratch_.getAtIndex(index), Integer))).m_intValue__int();
+  return (/**@type {Integer}*/ ($Casts.$to(this.f_contents__primitivespecialization_IntListFromScratch_.getAtIndex(index), Integer))).intValue();
  }
  /** @override @return {boolean} */
  isEmpty() {
@@ -97,11 +97,11 @@ class IntListFromScratch extends j_l_Object {
  }
  /** @nodts @return {number} */
  m_lastIndexOf__int__int(/** number */ element) {
-  return this.f_contents__primitivespecialization_IntListFromScratch_.lastIndexOf(Integer.m_valueOf__int__java_lang_Integer(element));
+  return this.f_contents__primitivespecialization_IntListFromScratch_.lastIndexOf(Integer.valueOf(element));
  }
  /** @nodts @return {number} */
  m_removeAt__int__int(/** number */ element) {
-  return (/**@type {Integer}*/ ($Casts.$to(this.f_contents__primitivespecialization_IntListFromScratch_.removeAtIndex(element), Integer))).m_intValue__int();
+  return (/**@type {Integer}*/ ($Casts.$to(this.f_contents__primitivespecialization_IntListFromScratch_.removeAtIndex(element), Integer))).intValue();
  }
  /** @override @return {!List<!Integer>} */
  subList(/** number */ fromIndex, /** number */ toIndex) {
@@ -109,7 +109,7 @@ class IntListFromScratch extends j_l_Object {
  }
  /** @nodts @return {number} */
  m_set__int__int__int(/** number */ index, /** number */ element) {
-  return (/**@type {Integer}*/ ($Casts.$to(this.f_contents__primitivespecialization_IntListFromScratch_.setAtIndex(index, Integer.m_valueOf__int__java_lang_Integer(element)), Integer))).m_intValue__int();
+  return (/**@type {Integer}*/ ($Casts.$to(this.f_contents__primitivespecialization_IntListFromScratch_.setAtIndex(index, Integer.valueOf(element)), Integer))).intValue();
  }
  /** @override @return {boolean} */
  retainAll(/** !Collection<?> */ elements) {
@@ -117,7 +117,7 @@ class IntListFromScratch extends j_l_Object {
  }
  /** @nodts @return {number} */
  m_indexOf__int__int(/** number */ element) {
-  return this.f_contents__primitivespecialization_IntListFromScratch_.indexOf(Integer.m_valueOf__int__java_lang_Integer(element));
+  return this.f_contents__primitivespecialization_IntListFromScratch_.indexOf(Integer.valueOf(element));
  }
  /** @override @return {boolean} */
  containsAll(/** !Collection<?> */ elements) {
@@ -125,7 +125,7 @@ class IntListFromScratch extends j_l_Object {
  }
  /** @nodts @return {boolean} */
  m_contains__int__boolean(/** number */ element) {
-  return this.f_contents__primitivespecialization_IntListFromScratch_.contains(Integer.m_valueOf__int__java_lang_Integer(element));
+  return this.f_contents__primitivespecialization_IntListFromScratch_.contains(Integer.valueOf(element));
  }
  /** @final @override @return {number} */
  size() {
@@ -136,14 +136,14 @@ class IntListFromScratch extends j_l_Object {
   if (!Integer.$isInstance(element)) {
    return false;
   }
-  return this.m_remove__java_lang_Integer__boolean(Integer.m_valueOf__int__java_lang_Integer((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int()));
+  return this.m_remove__java_lang_Integer__boolean(Integer.valueOf((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue()));
  }
  /** @final @override @return {number} */
  lastIndexOf(/** * */ element) {
   if (!Integer.$isInstance(element)) {
    return -1;
   }
-  return this.m_lastIndexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+  return this.m_lastIndexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
  }
  /** @nodts @return {number} */
  m_remove__int__int(/** number */ index) {
@@ -154,14 +154,14 @@ class IntListFromScratch extends j_l_Object {
   if (!Integer.$isInstance(element)) {
    return -1;
   }
-  return this.m_indexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+  return this.m_indexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
  }
  /** @final @override @return {boolean} */
  contains(/** * */ element) {
   if (!Integer.$isInstance(element)) {
    return false;
   }
-  return this.m_contains__int__boolean((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).m_intValue__int());
+  return this.m_contains__int__boolean((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
@@ -176,7 +176,7 @@ class IntListFromScratch extends j_l_Object {
  //Bridge method.
  /** @override @suppress{visibility} @return {boolean} */
  add(/** !Integer */ arg0) {
-  return this.m_add__int__boolean((/**@type {!Integer}*/ ($Casts.$to(arg0, Integer))).m_intValue__int());
+  return this.m_add__int__boolean((/**@type {!Integer}*/ ($Casts.$to(arg0, Integer))).intValue());
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} @return {!Stream<!Integer>} */
@@ -211,17 +211,17 @@ class IntListFromScratch extends j_l_Object {
  //Bridge method.
  /** @override @suppress{visibility} */
  addAtIndex(/** number */ arg0, /** !Integer */ arg1) {
-  this.m_add__int__int__void(arg0, (/**@type {!Integer}*/ ($Casts.$to(arg1, Integer))).m_intValue__int());
+  this.m_add__int__int__void(arg0, (/**@type {!Integer}*/ ($Casts.$to(arg1, Integer))).intValue());
  }
  //Bridge method.
  /** @override @suppress{visibility} @return {!Integer} */
  getAtIndex(/** number */ arg0) {
-  return Integer.m_valueOf__int__java_lang_Integer(this.m_get__int__int(arg0));
+  return Integer.valueOf(this.m_get__int__int(arg0));
  }
  //Bridge method.
  /** @override @suppress{visibility} @return {!Integer} */
  removeAtIndex(/** number */ arg0) {
-  return Integer.m_valueOf__int__java_lang_Integer(this.m_remove__int__int(arg0));
+  return Integer.valueOf(this.m_remove__int__int(arg0));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
@@ -231,7 +231,7 @@ class IntListFromScratch extends j_l_Object {
  //Bridge method.
  /** @override @suppress{visibility} @return {!Integer} */
  setAtIndex(/** number */ arg0, /** !Integer */ arg1) {
-  return Integer.m_valueOf__int__java_lang_Integer(this.m_set__int__int__int(arg0, (/**@type {!Integer}*/ ($Casts.$to(arg1, Integer))).m_intValue__int()));
+  return Integer.valueOf(this.m_set__int__int__int(arg0, (/**@type {!Integer}*/ ($Casts.$to(arg1, Integer))).intValue()));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */

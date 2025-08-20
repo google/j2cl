@@ -45,19 +45,19 @@ class FunctionTypeKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_funWithFunctionType__kotlin_jvm_functions_Function1__int(/** !Function1<?, ?> */ f) {
   FunctionTypeKt.$clinit();
-  return (/**@type {!Integer}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(2)), Integer))).m_intValue__int();
+  return (/**@type {!Integer}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(2)), Integer))).intValue();
  }
  /** @nodts @return {number} */
  static m_funWithNestedFunctionType__kotlin_jvm_functions_Function1__int(/** !Function1<?, ?> */ f) {
   FunctionTypeKt.$clinit();
   return (/**@type {!Integer}*/ ($Casts.$to((/**@type {!Function1<*, Integer>}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object(Function0.$adapt(/**  @return {?}*/ (() =>{
-   return Integer.m_valueOf__int__java_lang_Integer(2);
-  }))), /**@type {Function}*/ (Function1)))).m_invoke__java_lang_Object__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(2)), Integer))).m_intValue__int();
+   return Integer.valueOf(2);
+  }))), /**@type {Function}*/ (Function1)))).m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(2)), Integer))).intValue();
  }
  /** @nodts @return {string} */
  static m_funWithExtensionFunctionType__kotlin_jvm_functions_Function3__java_lang_String(/** !Function3<?, ?, ?, ?> */ f) {
   FunctionTypeKt.$clinit();
-  return /**@type {string}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object__java_lang_Object__java_lang_Object('foo', Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2)), j_l_String));
+  return /**@type {string}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object__java_lang_Object__java_lang_Object('foo', Integer.valueOf(1), Integer.valueOf(2)), j_l_String));
  }
  /** @nodts @return {!(Number|number)} */
  static m_foo__java_lang_Number__java_lang_Number(/** !(Number|number) */ i) {
@@ -76,9 +76,9 @@ class FunctionTypeKt extends j_l_Object {
   j_l_Object.$clinit();
   FunctionTypeKt.f_intFunction__functiontype_FunctionTypeKt_ = IntTransformer.$create__();
   FunctionTypeKt.f_intIntFunction__functiontype_FunctionTypeKt_ = Function2.$adapt(/**  @return {?}*/ ((/** ? */ p1, /** ? */ p2) =>{
-   let p1_1 = (/**@type {!Integer}*/ ($Casts.$to(p1, Integer))).m_intValue__int();
-   let p2_1 = (/**@type {!Integer}*/ ($Casts.$to(p2, Integer))).m_intValue__int();
-   return Integer.m_valueOf__int__java_lang_Integer(p1_1 + p2_1 | 0);
+   let p1_1 = (/**@type {!Integer}*/ ($Casts.$to(p1, Integer))).intValue();
+   let p2_1 = (/**@type {!Integer}*/ ($Casts.$to(p2, Integer))).intValue();
+   return Integer.valueOf(p1_1 + p2_1 | 0);
   }));
   FunctionTypeKt.f_fooRef__functiontype_FunctionTypeKt_ = Function1.$adapt(/**  @return {!(Number|number)}*/ ((/** !(Number|number) */ arg0) =>{
    let arg0_1 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0, Number));

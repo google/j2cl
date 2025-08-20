@@ -51,7 +51,7 @@ class ForEachStatementsKt extends j_l_Object {
   for (let $array = /**@type {Array<?>}*/ (array), $index = 0; $index < $array.length; $index++) {
    let element = /**@type {?SomeJsEnum}*/ ($Enums.unbox($array[$index], SomeJsEnum_$Overlay));
    {
-    Integer.m_valueOf__int__java_lang_Integer(/**@type {number}*/ (element)).toString();
+    Integer.valueOf(/**@type {number}*/ (element)).toString();
    }
   }
  }
@@ -91,11 +91,11 @@ class ForEachStatementsKt extends j_l_Object {
   for (let $array = /**@type {Array<number>}*/ (array), $index = 0; $index < $array.length; $index++) {
    let element = $array[$index];
    {
-    Integer.m_valueOf__int__java_lang_Integer(element).toString();
+    Integer.valueOf(element).toString();
    }
   }
   for (let $array_1 = /**@type {Array<number>}*/ (array), $index_1 = 0; $index_1 < $array_1.length; $index_1++) {
-   let element_1 = Integer.m_valueOf__int__java_lang_Integer($array_1[$index_1]);
+   let element_1 = Integer.valueOf($array_1[$index_1]);
    {
     j_l_String.m_valueOf__java_lang_Object__java_lang_String(element_1);
    }
@@ -148,9 +148,9 @@ class ForEachStatementsKt extends j_l_Object {
   ForEachStatementsKt.$clinit();
   let sumOfKeys = 0;
   for(let /** ?string */ property in array) {
-   let key = Integer.m_valueOf__int__java_lang_Integer(/**@type {number}*/ (Number(property)));
+   let key = Integer.valueOf(/**@type {number}*/ (Number(property)));
    {
-    sumOfKeys = sumOfKeys + key.m_intValue__int() | 0;
+    sumOfKeys = sumOfKeys + key.intValue() | 0;
    }
   }
   for(let /** ?string */ property_1 in array) {

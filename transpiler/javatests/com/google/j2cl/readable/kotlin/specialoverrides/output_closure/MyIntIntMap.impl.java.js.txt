@@ -40,14 +40,14 @@ class MyIntIntMap extends j_l_Object {
   if (!Integer.$isInstance(key)) {
    return false;
   }
-  return this.m_containsKey__int__boolean((/**@type {!Integer}*/ ($Casts.$to(key, Integer))).m_intValue__int());
+  return this.m_containsKey__int__boolean((/**@type {!Integer}*/ ($Casts.$to(key, Integer))).intValue());
  }
  /** @final @nodts @return {number} */
  m_getOrDefault__java_lang_Object__int__int(/** * */ key, /** number */ defaultValue) {
   if (!Integer.$isInstance(key)) {
    return defaultValue;
   }
-  return this.m_getOrDefault__int__int__int((/**@type {!Integer}*/ ($Casts.$to(key, Integer))).m_intValue__int(), defaultValue);
+  return this.m_getOrDefault__int__int__int((/**@type {!Integer}*/ ($Casts.$to(key, Integer))).intValue(), defaultValue);
  }
  /** @abstract @nodts @return {Integer} */
  m_remove__int__java_lang_Integer(/** number */ key) {}
@@ -56,7 +56,7 @@ class MyIntIntMap extends j_l_Object {
   if (!Integer.$isInstance(key)) {
    return null;
   }
-  return this.m_remove__int__java_lang_Integer((/**@type {!Integer}*/ ($Casts.$to(key, Integer))).m_intValue__int());
+  return this.m_remove__int__java_lang_Integer((/**@type {!Integer}*/ ($Casts.$to(key, Integer))).intValue());
  }
  /** @abstract @nodts @return {!Set<!Integer>} */
  m_getKeys__java_util_Set() {}
@@ -83,7 +83,7 @@ class MyIntIntMap extends j_l_Object {
   if (!Integer.$isInstance(value)) {
    return false;
   }
-  return this.m_containsValue__int__boolean((/**@type {!Integer}*/ ($Casts.$to(value, Integer))).m_intValue__int());
+  return this.m_containsValue__int__boolean((/**@type {!Integer}*/ ($Casts.$to(value, Integer))).intValue());
  }
  /** @abstract @nodts @return {Integer} */
  m_get__int__java_lang_Integer(/** number */ key) {}
@@ -92,7 +92,7 @@ class MyIntIntMap extends j_l_Object {
   if (!Integer.$isInstance(key)) {
    return null;
   }
-  return this.m_get__int__java_lang_Integer((/**@type {!Integer}*/ ($Casts.$to(key, Integer))).m_intValue__int());
+  return this.m_get__int__java_lang_Integer((/**@type {!Integer}*/ ($Casts.$to(key, Integer))).intValue());
  }
  /** @abstract @nodts @return {number} */
  m_getSize__int() {}
@@ -123,7 +123,7 @@ class MyIntIntMap extends j_l_Object {
  //Bridge method.
  /** @override @suppress{visibility} @return {!Integer} */
  getOrDefault(/** * */ arg0, /** !Integer */ arg1) {
-  return Integer.m_valueOf__int__java_lang_Integer(this.m_getOrDefault__java_lang_Object__int__int(arg0, (/**@type {!Integer}*/ ($Casts.$to(arg1, Integer))).m_intValue__int()));
+  return Integer.valueOf(this.m_getOrDefault__java_lang_Object__int__int(arg0, (/**@type {!Integer}*/ ($Casts.$to(arg1, Integer))).intValue()));
  }
  //Bridge method.
  /** @final @override @nodts @suppress{visibility} @return {!Integer} */

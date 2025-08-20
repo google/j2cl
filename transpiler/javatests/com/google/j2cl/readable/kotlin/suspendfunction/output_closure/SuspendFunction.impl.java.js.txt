@@ -48,9 +48,9 @@ class SuspendFunction extends j_l_Object {
    return (yield* this.m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(arg0, arg1_1));
   }).bind(this))));
   let boxedInteger = /**@type {!Integer}*/ ($Casts.$to((yield* GenericSuspendFunInterface.$adapt(/**  @return {!Generator<*, !Integer>}*/ (function* (/** Continuation<?> */ $continuation_1, /** !Integer */ param) {
-   let param_1 = (/**@type {!Integer}*/ ($Casts.$to(param, Integer))).m_intValue__int();
-   return Integer.m_valueOf__int__java_lang_Integer(param_1);
-  })).m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_($continuation, Integer.m_valueOf__int__java_lang_Integer(0))), Integer));
+   let param_1 = (/**@type {!Integer}*/ ($Casts.$to(param, Integer))).intValue();
+   return Integer.valueOf(param_1);
+  })).m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_($continuation, Integer.valueOf(0))), Integer));
   s = (yield* (yield* this.m_testChainedSuspendFunction__kotlin_coroutines_Continuation__suspendfunction_SuspendFunInterface_$s_($continuation)).m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation, 'Chain of suspend function calls.'));
  }
  /** @final @nodts @return {!Generator<*, void>} */

@@ -14,7 +14,7 @@ class InterfaceWithAsyncDefaultMethod {
  /** @nodts @return {!IThenable<!Integer>} */
  static async m_asyncCall__$default__jsasync_InterfaceWithAsyncDefaultMethod__jsasync_IThenable(/** !InterfaceWithAsyncDefaultMethod */ $thisArg) {
   InterfaceWithAsyncDefaultMethod.$clinit();
-  return /**@type {!Promise<!Integer>}*/ (Promise.resolve(/**@type {!Integer}*/ ($Casts.$to(await (/**@type {!Promise<!Integer>}*/ (Promise.resolve(Integer.m_valueOf__int__java_lang_Integer(5)))), Integer))));
+  return /**@type {!Promise<!Integer>}*/ (Promise.resolve(/**@type {!Integer}*/ ($Casts.$to(await (/**@type {!Promise<!Integer>}*/ (Promise.resolve(Integer.valueOf(5)))), Integer))));
  }
  /** @nodts */
  static $clinit() {

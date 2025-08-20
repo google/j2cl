@@ -37,25 +37,25 @@ class PrimitiveSpecializationKt extends j_l_Object {
  /** @nodts */
  static m_test__void() {
   PrimitiveSpecializationKt.$clinit();
-  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to((/**@type {!Holder<!Integer>}*/ (Holder.$create__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(1)))).m_get__java_lang_Object(), Integer))).m_intValue__int());
-  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(IntHolder.$create__().m_get__java_lang_Object(), Integer))).m_intValue__int());
-  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(SubIntHolder.$create__().m_get__java_lang_Object(), Integer))).m_intValue__int());
-  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to((/**@type {!NumberHolder<!Integer>}*/ (NumberHolder.$create__java_lang_Number(Integer.m_valueOf__int__java_lang_Integer(3)))).m_get__java_lang_Object(), Integer))).m_intValue__int());
-  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(SubNumberHolder.$create__().m_get__java_lang_Object(), Integer))).m_intValue__int());
-  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(IntHolderExtendsGetter.$create__().m_get__java_lang_Object(), Integer))).m_intValue__int());
-  (/**@type {!Holder<!Integer>}*/ (Holder.$create__java_lang_Object(Integer.m_valueOf__int__java_lang_Integer(1)))).m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
-  IntHolder.$create__().m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
-  SubIntHolder.$create__().m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
-  (/**@type {!NumberHolder<!Integer>}*/ (NumberHolder.$create__java_lang_Number(Integer.m_valueOf__int__java_lang_Integer(3)))).m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
-  SubNumberHolder.$create__().m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
-  IntHolderExtendsGetter.$create__().m_set__java_lang_Object__void(Integer.m_valueOf__int__java_lang_Integer(2));
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to((/**@type {!Holder<!Integer>}*/ (Holder.$create__java_lang_Object(Integer.valueOf(1)))).m_get__java_lang_Object(), Integer))).intValue());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(IntHolder.$create__().m_get__java_lang_Object(), Integer))).intValue());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(SubIntHolder.$create__().m_get__java_lang_Object(), Integer))).intValue());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to((/**@type {!NumberHolder<!Integer>}*/ (NumberHolder.$create__java_lang_Number(Integer.valueOf(3)))).m_get__java_lang_Object(), Integer))).intValue());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(SubNumberHolder.$create__().m_get__java_lang_Object(), Integer))).intValue());
+  PrimitiveSpecializationKt.m_requireInt__int__void((/**@type {!Integer}*/ ($Casts.$to(IntHolderExtendsGetter.$create__().m_get__java_lang_Object(), Integer))).intValue());
+  (/**@type {!Holder<!Integer>}*/ (Holder.$create__java_lang_Object(Integer.valueOf(1)))).m_set__java_lang_Object__void(Integer.valueOf(2));
+  IntHolder.$create__().m_set__java_lang_Object__void(Integer.valueOf(2));
+  SubIntHolder.$create__().m_set__java_lang_Object__void(Integer.valueOf(2));
+  (/**@type {!NumberHolder<!Integer>}*/ (NumberHolder.$create__java_lang_Number(Integer.valueOf(3)))).m_set__java_lang_Object__void(Integer.valueOf(2));
+  SubNumberHolder.$create__().m_set__java_lang_Object__void(Integer.valueOf(2));
+  IntHolderExtendsGetter.$create__().m_set__java_lang_Object__void(Integer.valueOf(2));
   let s = IntHolderExtendsGetter.$create__();
   s.m_set__int__void(2);
   let l = /**@type {!ArrayList<!Integer>}*/ (ArrayList.$create__());
-  l.remove(Integer.m_valueOf__int__java_lang_Integer(2));
+  l.remove(Integer.valueOf(2));
   l.removeAtIndex(1);
   let il = IntList.$create__();
-  il.m_remove__java_lang_Integer__boolean(Integer.m_valueOf__int__java_lang_Integer(2));
+  il.m_remove__java_lang_Integer__boolean(Integer.valueOf(2));
   il.m_removeAt__int__int(1);
   let ba = $1.$create__();
  }

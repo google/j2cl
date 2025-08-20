@@ -35,32 +35,32 @@ class ImplicitParenthesis extends j_l_Object {
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = (primitiveInt == 5 ? Integer.$create__int(15) : Integer.$create__int(30)).m_intValue__int();
+   primitiveInt = (primitiveInt == 5 ? Integer.$create__int(15) : Integer.$create__int(30)).intValue();
    $Asserts.$assert(primitiveInt == 15);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = (boxedInt = Integer.m_valueOf__int__java_lang_Integer(boxedInt.m_intValue__int() + primitiveInt | 0)).m_intValue__int();
+   primitiveInt = (boxedInt = Integer.valueOf(boxedInt.intValue() + primitiveInt | 0)).intValue();
    $Asserts.$assert(primitiveInt == 15);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = (boxedInt = Integer.m_valueOf__int__java_lang_Integer(primitiveInt)).m_intValue__int();
+   primitiveInt = (boxedInt = Integer.valueOf(primitiveInt)).intValue();
    $Asserts.$assert(primitiveInt == 5);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
    let /** Integer */ $value;
-   primitiveInt = ($value = boxedInt, boxedInt = Integer.m_valueOf__int__java_lang_Integer(boxedInt.m_intValue__int() + 1 | 0), $value).m_intValue__int();
+   primitiveInt = ($value = boxedInt, boxedInt = Integer.valueOf(boxedInt.intValue() + 1 | 0), $value).intValue();
    $Asserts.$assert(primitiveInt == 10);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = (boxedInt = Integer.m_valueOf__int__java_lang_Integer(boxedInt.m_intValue__int() + 1 | 0)).m_intValue__int();
+   primitiveInt = (boxedInt = Integer.valueOf(boxedInt.intValue() + 1 | 0)).intValue();
    $Asserts.$assert(primitiveInt == 11);
   }
  }
@@ -72,14 +72,14 @@ class ImplicitParenthesis extends j_l_Object {
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = boxedInt.m_intValue__int() - primitiveInt | 0;
+   primitiveInt = boxedInt.intValue() - primitiveInt | 0;
    $Asserts.$assert(primitiveInt == 5);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
    boxedBoolean = true;
-   boxedBoolean = boxedInt.m_intValue__int() == primitiveInt;
+   boxedBoolean = boxedInt.intValue() == primitiveInt;
    $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean__boolean(boxedBoolean) == false);
   }
  }
