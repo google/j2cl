@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktnotpassing;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -57,25 +57,25 @@ public class AnonymousClassWithNullableTypeArgument {
     };
   }
 
-  // TODO(b/440316295): Uncomment when fixed
-  // public static void testImplicitTypeArguments_inferredFromMembers() {
-  //   new Supplier<>() {
-  //     @Override
-  //     public @Nullable Object get() {
-  //       return null;
-  //     }
-  //   };
-  // }
+  // TODO(b/440316295): J2KT renders `new Supplier<Object>`.
+  public static void testImplicitTypeArguments_inferredFromMembers() {
+    new Supplier<>() {
+      @Override
+      public @Nullable Object get() {
+        return null;
+      }
+    };
+  }
 
-  // TODO(b/440316295): Uncomment when fixed
-  // public static void testImplicitTypeArguments_inferredFromMembersAndArgument() {
-  //   new AbstractHolder<>("Supplier") {
-  //     @Override
-  //     public @Nullable String get() {
-  //       return null;
-  //     }
-  //   };
-  // }
+  // TODO(b/440316295): J2KT renders `new AbstractSupplier<String>`.
+  public static void testImplicitTypeArguments_inferredFromMembersAndArgument() {
+    new AbstractHolder<>("Supplier") {
+      @Override
+      public @Nullable String get() {
+        return null;
+      }
+    };
+  }
 
   public static void testImplicitTypeArguments_inferredFromArgument() {
     new Holder<>(nullableString()) {};

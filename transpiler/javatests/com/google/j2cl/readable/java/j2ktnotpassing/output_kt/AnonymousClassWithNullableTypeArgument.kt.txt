@@ -1,4 +1,4 @@
-// Generated from "j2kt/AnonymousClassWithNullableTypeArgument.java"
+// Generated from "j2ktnotpassing/AnonymousClassWithNullableTypeArgument.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -15,7 +15,7 @@
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
  "REDUNDANT_ELSE_IN_WHEN")
 
-package j2kt
+package j2ktnotpassing
 
 import javaemul.lang.*
 import java.lang.RuntimeException
@@ -39,6 +39,24 @@ open class AnonymousClassWithNullableTypeArgument {
   fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> {
    return object : Supplier<Any?> {
     override fun get(): Any? {
+     return null
+    }
+   }
+  }
+
+  @JvmStatic
+  fun testImplicitTypeArguments_inferredFromMembers() {
+   object : Supplier<Any> {
+    override fun get(): Any? {
+     return null
+    }
+   }
+  }
+
+  @JvmStatic
+  fun testImplicitTypeArguments_inferredFromMembersAndArgument() {
+   object : AbstractHolder<String>("Supplier") {
+    override fun get(): String? {
      return null
     }
    }
