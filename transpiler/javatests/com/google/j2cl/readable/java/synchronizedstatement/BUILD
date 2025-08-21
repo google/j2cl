@@ -24,5 +24,7 @@ j2kt_jvm_library(
 
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/439710157): Re-enable once the bug is fixed.
+    build_kt_native_readables = False,
     deps = ["//jre/java:javaemul_internal_annotations-j2cl"],
 )

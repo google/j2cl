@@ -66,6 +66,7 @@ public class SynchronizedStatement {
     staticB--;
   }
 
+  // TODO(b/439710157): This test generates wrong code when compiled with konanc caches.
   public int testReturn() {
     synchronized (this) {
       if (a < 10) {
@@ -89,6 +90,7 @@ public class SynchronizedStatement {
     }
   }
 
+  // TODO(b/439710157): This test generates wrong code when compiled with konanc caches.
   public int testInitialization() {
     int a;
     synchronized (this) {

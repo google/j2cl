@@ -297,21 +297,21 @@
  (type $function.m_testReturn__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:69:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:70:13
  (local $$value i32)
  (local $$value_1 i32)
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:70:4
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:70:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:71:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:71:4
   (drop (local.get $this))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:71:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:72:6
    (if (i32.lt_s (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 10))
     (then
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:72:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:73:8
       (return (block (result i32)
        (local.set $$value (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)))
        (struct.set $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
@@ -321,7 +321,7 @@
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:75:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:76:4
   (return (block (result i32)
    (local.set $$value_1 (struct.get $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this)))
    (struct.set $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.sub (struct.get $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
@@ -335,31 +335,31 @@
 (func $m_testBreakAndContinue__void@synchronizedstatement.SynchronizedStatement
  (type $function.m_testBreakAndContinue__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:80:27
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:81:27
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:81:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:82:4
   (block $LOOP.BREAK
    (loop
     (block $LOOP.CONTINUE
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:82:6
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:82:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:83:6
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:83:6
       (drop (local.get $this))
       (block
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:83:8
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:84:8
        (if (i32.lt_s (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 10))
         (then
          (block
-          ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:84:10
-          (struct.set $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
           ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:85:10
+          (struct.set $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 1)))
+          ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:86:10
           (br $LOOP.CONTINUE)
          )
         )
        )
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:87:8
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:88:8
        (br $LOOP.BREAK)
       )
      )
@@ -376,21 +376,21 @@
  (type $function.m_testInitialization__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:92:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:94:13
  (local $a i32)
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:93:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:95:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:94:4
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:94:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:96:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:96:4
   (drop (local.get $this))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:95:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:97:6
    (local.set $a (i32.const 0))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:98:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:100:4
   (return (local.get $a))
  )
 )
@@ -400,27 +400,27 @@
 (func $m_testIfStatementWithNonVoidBodyWithoutElse__void@synchronizedstatement.SynchronizedStatement
  (type $function.m_testIfStatementWithNonVoidBodyWithoutElse__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:101:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:103:14
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:102:4
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:102:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:104:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:104:4
   (drop (local.get $this))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:103:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:105:6
    (if (i32.lt_s (struct.get $synchronizedstatement.SynchronizedStatement $a@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 10))
     (then
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:104:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:106:8
       (drop (call $m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $this))))
      )
     )(else
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:105:13
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:107:13
      (if (i32.lt_s (struct.get $synchronizedstatement.SynchronizedStatement $b@synchronizedstatement.SynchronizedStatement (local.get $this)) (i32.const 10))
       (then
        (block
-        ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:106:8
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:108:8
         (drop (call $m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $this))))
        )
       )
@@ -436,9 +436,9 @@
 (func $m_intMethod__int_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement
  (param $this (ref null $synchronizedstatement.SynchronizedStatement))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:111:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:113:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:112:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:114:4
   (return (i32.const 0))
  )
 )
@@ -505,16 +505,16 @@
 ;;; ExtendsSynchronized ExtendsSynchronized.$create()
 (func $$create__@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
  (result (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
  (local $$instance (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
   (call $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
   (local.set $$instance (struct.new $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (global.get $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $javaemul.lang.J2ktMonitor) (ref.null $javaemul.lang.J2ktMonitor)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
   (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement_ExtendsSynchronized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
   (return (local.get $$instance))
  )
 )
@@ -522,9 +522,9 @@
 ;;; void ExtendsSynchronized.$ctor()
 (func $$ctor__void_$p_synchronizedstatement_SynchronizedStatement_ExtendsSynchronized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
  (param $this (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
   (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $this)))
  )
 )
@@ -533,7 +533,7 @@
 (func $m_foo__void_$pp_synchronizedstatement@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
  (type $function.m_foo__void_$pp_synchronizedstatement)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:116:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:118:22
  (local $this (ref null $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized))
  (local.set $this (ref.cast (ref $synchronizedstatement.SynchronizedStatement.ExtendsSynchronized) (local.get $this.untyped)))
  (block
@@ -543,18 +543,18 @@
 
 ;;; void ExtendsSynchronized.$clinit()
 (func $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
   (if (global.get $$class-initialized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
   (global.set $$class-initialized@synchronizedstatement.SynchronizedStatement.ExtendsSynchronized (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:115:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:117:22
   (call $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement )
  )
 )
@@ -591,16 +591,16 @@
 ;;; CustomMonitor CustomMonitor.$create()
 (func $$create__@synchronizedstatement.SynchronizedStatement.CustomMonitor
  (result (ref null $synchronizedstatement.SynchronizedStatement.CustomMonitor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
  (local $$instance (ref null $synchronizedstatement.SynchronizedStatement.CustomMonitor))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
   (call $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement.CustomMonitor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
   (local.set $$instance (struct.new $synchronizedstatement.SynchronizedStatement.CustomMonitor (global.get $synchronizedstatement.SynchronizedStatement.CustomMonitor.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
   (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement_CustomMonitor@synchronizedstatement.SynchronizedStatement.CustomMonitor (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
   (return (local.get $$instance))
  )
 )
@@ -608,27 +608,27 @@
 ;;; void CustomMonitor.$ctor()
 (func $$ctor__void_$p_synchronizedstatement_SynchronizedStatement_CustomMonitor@synchronizedstatement.SynchronizedStatement.CustomMonitor
  (param $this (ref null $synchronizedstatement.SynchronizedStatement.CustomMonitor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
   (call $$ctor__void_$p_javaemul_lang_J2ktMonitor@javaemul.lang.J2ktMonitor (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void CustomMonitor.$clinit()
 (func $$clinit__void_<once>_@synchronizedstatement.SynchronizedStatement.CustomMonitor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
   (if (global.get $$class-initialized@synchronizedstatement.SynchronizedStatement.CustomMonitor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
   (global.set $$class-initialized@synchronizedstatement.SynchronizedStatement.CustomMonitor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:119:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/synchronizedstatement/readable-j2wasm.js/synchronizedstatement/SynchronizedStatement.java:121:22
   (call $$clinit__void_<once>_@javaemul.lang.J2ktMonitor )
  )
 )
