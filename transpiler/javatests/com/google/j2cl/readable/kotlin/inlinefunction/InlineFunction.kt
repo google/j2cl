@@ -231,3 +231,17 @@ fun testDefaultParams() {
   inlineFunWithDefaultsAndDefaultVarargs(1, 20)
   inlineFunWithDefaultsAndDefaultVarargs(1, 20, 30, 40, 50)
 }
+
+// This example reproduces a J2CL bug where a local variable declared inside an inlined
+// generic function is incorrectly typed with a generic type parameter (`N`) instead of its
+// concrete type argument (`String`).
+internal abstract class Repro<N> {
+  inline fun get(): N? {
+    var value: N? = null
+    return value
+  }
+}
+
+internal fun Repro<String>.findNext(): String? {
+  return get()
+}

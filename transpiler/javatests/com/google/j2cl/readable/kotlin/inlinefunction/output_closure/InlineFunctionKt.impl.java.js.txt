@@ -20,6 +20,7 @@ let $4 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$4$impl');
 let InlineFunctionsInAnotherLibraryKt = goog.forwardDeclare('inlinefunction.InlineFunctionsInAnotherLibraryKt$impl');
 let MyClass = goog.forwardDeclare('inlinefunction.MyClass$impl');
 let NonFun = goog.forwardDeclare('inlinefunction.NonFun$impl');
+let Repro = goog.forwardDeclare('inlinefunction.Repro$impl');
 let WithInlineFunction = goog.forwardDeclare('inlinefunction.WithInlineFunction$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
@@ -470,6 +471,12 @@ class InlineFunctionKt extends j_l_Object {
   let c_1 = /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int));
   1 + 20 + ArraysKt.m_sum__arrayOf_int__int(c_1) | 0;
   1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([30, 40, 50], $$int))) | 0;
+ }
+ /** @nodts @return {?string} */
+ static m_findNext__inlinefunction_Repro__java_lang_String(/** !Repro<string> */ this_1) {
+  InlineFunctionKt.$clinit();
+  let /** ?N */ value = null;
+  return /**@type {?string}*/ (value);
  }
  /** @nodts */
  static $clinit() {

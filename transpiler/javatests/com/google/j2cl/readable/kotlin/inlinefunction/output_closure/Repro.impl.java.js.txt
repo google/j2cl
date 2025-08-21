@@ -1,0 +1,42 @@
+goog.module('inlinefunction.Repro$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template N
+ */
+class Repro extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__inlinefunction_Repro__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?N} */
+ m_get__java_lang_Object() {
+  let /** ?N */ value = null;
+  return value;
+ }
+ /** @nodts */
+ static $clinit() {
+  Repro.$clinit = () =>{};
+  Repro.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Repro;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Repro, 'inlinefunction.Repro');
+
+exports = Repro;
+
+//# sourceMappingURL=Repro.js.map
