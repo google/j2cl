@@ -26,7 +26,7 @@ import kotlin.jvm.JvmStatic
 open class DependentTypeArguments {
  companion object {
   @JvmStatic
-  fun <TestK, TestV, TestF: Function<TestK, TestV>> testImplicitTypeArguments(function: TestF, mergeFunction: BiFunction<TestV, TestV, TestV>): Collector<*, TestF> {
+  fun <TestK, TestV, TestF: Function<TestK, TestV>> test1_implicitTypeArguments(function: TestF, mergeFunction: BiFunction<TestV, TestV, TestV>): Collector<*, TestF> {
    return Collector.of<TestF>(
     function,
     BiFunction { m1: TestF, m2: TestF ->
@@ -36,7 +36,7 @@ open class DependentTypeArguments {
   }
 
   @JvmStatic
-  fun <TestK, TestV, TestF: Function<TestK, TestV>> testExplicitTypeArguments(function: TestF, mergeFunction: BiFunction<TestV, TestV, TestV>): Collector<*, TestF> {
+  fun <TestK, TestV, TestF: Function<TestK, TestV>> test1_explicitTypeArguments(function: TestF, mergeFunction: BiFunction<TestV, TestV, TestV>): Collector<*, TestF> {
    return Collector.of<TestF>(
     function,
     BiFunction { m1: TestF, m2: TestF ->
@@ -46,9 +46,62 @@ open class DependentTypeArguments {
   }
 
   @JvmStatic
+  private fun <TestE, TestK, TestV, TestF: Function<TestK, TestV>> test2_implicitTypeArguments(acum: Function<TestK, Supplier<TestE>>, map: TestF): Collector<*, TestF> {
+   return Collector.of<Function<TestK, Supplier<TestE>>, TestF>(
+    acum,
+    BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestE>> ->
+     return@BiFunction DependentTypeArguments.mergeAll<Any?, Supplier<TestE>?, Function<TestK, Supplier<TestE>>>(
+      m1,
+      m2,
+      BiFunction { arg0: Supplier<TestE>?, arg1: Supplier<TestE>? ->
+       return@BiFunction DependentTypeArguments.addAll<TestE, Supplier<TestE>?>(
+        arg0,
+        arg1!!,
+       )
+      },
+     )
+    },
+    Function { unused: Function<TestK, Supplier<TestE>> ->
+     return@Function map
+    },
+   )
+  }
+
+  @JvmStatic
+  private fun <TestE, TestK, TestV, TestF: Function<TestK, TestV>> test2_explicitTypeArguments(acum: Function<TestK, Supplier<TestE>>, map: TestF): Collector<*, TestF> {
+   return Collector.of<Function<TestK, Supplier<TestE>>, TestF>(
+    acum,
+    BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestE>> ->
+     return@BiFunction DependentTypeArguments.mergeAll<TestK, Supplier<TestE>?, Function<TestK, Supplier<TestE>>>(
+      m1,
+      m2,
+      BiFunction { arg0: Supplier<TestE>?, arg1: Supplier<TestE>? ->
+       return@BiFunction DependentTypeArguments.addAll<TestE, Supplier<TestE>?>(
+        arg0,
+        arg1!!,
+       )
+      },
+     )
+    },
+    Function { unused: Function<TestK, Supplier<TestE>> ->
+     return@Function map
+    },
+   )
+  }
+
+  @JvmStatic
   private fun <MergeK, MergeV, MergeF: Function<MergeK, MergeV>> mergeAll(m1: MergeF, m2: MergeF, mergeFunction: BiFunction<MergeV, MergeV, MergeV>): MergeF {
    throw RuntimeException()
   }
+
+  @JvmStatic
+  private fun <AddElem, AddSup: Supplier<AddElem>?> addAll(supplier: AddSup, sup2: Supplier<AddElem>): AddSup {
+   throw RuntimeException()
+  }
+ }
+
+ fun interface Supplier<SupOut> {
+  fun get(): SupOut
  }
 
  fun interface Function<FunIn, FunOut> {
@@ -59,10 +112,19 @@ open class DependentTypeArguments {
   fun apply(in1: BiIn1, in2: BiIn2): BiOut
  }
 
+ fun interface BiConsumer<BiIn1, BiIn2> {
+  fun accept(in1: BiIn1, in2: BiIn2)
+ }
+
  interface Collector<CollAcum, CollRes> {
   companion object {
    @JvmStatic
-   fun <OfRes> of(supplier: OfRes, combiner: BiFunction<OfRes, OfRes, OfRes>): Collector<OfRes, OfRes> {
+   fun <OfRes> of(start: OfRes, combiner: BiFunction<OfRes, OfRes, OfRes>): Collector<OfRes, OfRes> {
+    throw RuntimeException()
+   }
+
+   @JvmStatic
+   fun <OfAcum, OfRes> of(start: OfAcum, combiner: BiFunction<OfAcum, OfAcum, OfAcum>, finisher: Function<OfAcum, OfRes>): Collector<OfAcum, OfRes> {
     throw RuntimeException()
    }
   }

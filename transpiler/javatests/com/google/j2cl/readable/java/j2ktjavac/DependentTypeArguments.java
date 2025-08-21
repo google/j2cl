@@ -18,24 +18,14 @@ package j2ktjavac;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/** Tests covering complex cases from {@code java.util.stream.Collectors}. */
 @NullMarked
 public class DependentTypeArguments {
-  // J2KT with javac frontend renders `BiFunction` argument as:
-  //
-  // BiFunction { m1: TestF, m2: TestF ->
-  //   return@BiFunction mergeAll<Any?, TestV, TestF>(m1, m2, mergeFunction)
-  // }
-  //
-  // and should be:
-  //
-  // BiFunction { m1: TestF, m2: TestF ->
-  //   return@BiFunction mergeAll<TestK, TestV, TestF>(m1, m2, mergeFunction)
-  // }
   public static <
           TestK extends @Nullable Object,
           TestV extends @Nullable Object,
           TestF extends Function<TestK, TestV>>
-      Collector<?, TestF> testImplicitTypeArguments(
+      Collector<?, TestF> test1_implicitTypeArguments(
           final TestF function, final BiFunction<TestV, TestV, TestV> mergeFunction) {
     return Collector.of(function, (m1, m2) -> mergeAll(m1, m2, mergeFunction));
   }
@@ -44,11 +34,65 @@ public class DependentTypeArguments {
           TestK extends @Nullable Object,
           TestV extends @Nullable Object,
           TestF extends Function<TestK, TestV>>
-      Collector<?, TestF> testExplicitTypeArguments(
+      Collector<?, TestF> test1_explicitTypeArguments(
           final TestF function, final BiFunction<TestV, TestV, TestV> mergeFunction) {
     return Collector.of(
         function,
         (m1, m2) -> DependentTypeArguments.<TestK, TestV, TestF>mergeAll(m1, m2, mergeFunction));
+  }
+
+  // J2KT with javac frontend renders `BiFunction` argument as:
+  //
+  // BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestE>> ->
+  //   return@BiFunction DependentTypeArguments.mergeAll<Any?, Supplier<TestE>, Function<TestK,
+  // Supplier<TestE>>>(
+  //     m1, m2,
+  //     BiFunction { arg0: Supplier<TestE>, arg1: Supplier<TestE> ->
+  //      return@BiFunction DependentTypeArguments.addAll<TestE, Supplier<TestE>>(arg0, arg1)
+  //     },
+  //   }
+  // }
+  //
+  // and should be:
+  //
+  // BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestT>> ->
+  //   return@BiFunction DependentTypeArguments.mergeAll<TestK, Supplier<TestE>, Function<TestK,
+  // Supplier<TestE>>>(
+  //     m1, m2,
+  //     BiFunction { arg0: Supplier<TestE>, arg1: Supplier<TestE> ->
+  //      return@BiFunction DependentTypeArguments.addAll<TestE, Supplier<TestE>>(arg0, arg1)
+  //     },
+  //   }
+  // }
+  private static <
+          TestE extends @Nullable Object,
+          TestK extends @Nullable Object,
+          TestV extends @Nullable Object,
+          TestF extends Function<TestK, TestV>>
+      Collector<?, TestF> test2_implicitTypeArguments(
+          Function<TestK, Supplier<TestE>> acum, TestF map) {
+    return Collector.of(
+        acum, (m1, m2) -> mergeAll(m1, m2, DependentTypeArguments::addAll), unused -> map);
+  }
+
+  private static <
+          TestE extends @Nullable Object,
+          TestK extends @Nullable Object,
+          TestV extends @Nullable Object,
+          TestF extends Function<TestK, TestV>>
+      Collector<?, TestF> test2_explicitTypeArguments(
+          Function<TestK, Supplier<TestE>> acum, TestF map) {
+    return Collector.of(
+        acum,
+        (m1, m2) ->
+            DependentTypeArguments
+                .<TestK, Supplier<TestE>, Function<TestK, Supplier<TestE>>>mergeAll(
+                    m1, m2, DependentTypeArguments::addAll),
+        unused -> map);
+  }
+
+  public interface Supplier<SupOut extends @Nullable Object> {
+    SupOut get();
   }
 
   public interface Function<FunIn extends @Nullable Object, FunOut extends @Nullable Object> {
@@ -62,9 +106,21 @@ public class DependentTypeArguments {
     BiOut apply(BiIn1 in1, BiIn2 in2);
   }
 
+  public interface BiConsumer<BiIn1 extends @Nullable Object, BiIn2 extends @Nullable Object> {
+    void accept(BiIn1 in1, BiIn2 in2);
+  }
+
   public interface Collector<CollAcum extends @Nullable Object, CollRes extends @Nullable Object> {
     static <OfRes extends @Nullable Object> Collector<OfRes, OfRes> of(
-        OfRes supplier, BiFunction<OfRes, OfRes, OfRes> combiner) {
+        OfRes start, BiFunction<OfRes, OfRes, OfRes> combiner) {
+      throw new RuntimeException();
+    }
+
+    static <OfAcum extends @Nullable Object, OfRes extends @Nullable Object>
+        Collector<OfAcum, OfRes> of(
+            OfAcum start,
+            BiFunction<OfAcum, OfAcum, OfAcum> combiner,
+            Function<OfAcum, OfRes> finisher) {
       throw new RuntimeException();
     }
   }
@@ -74,6 +130,11 @@ public class DependentTypeArguments {
           MergeV extends @Nullable Object,
           MergeF extends Function<MergeK, MergeV>>
       MergeF mergeAll(MergeF m1, MergeF m2, BiFunction<MergeV, MergeV, MergeV> mergeFunction) {
+    throw new RuntimeException();
+  }
+
+  private static <AddElem extends @Nullable Object, AddSup extends Supplier<AddElem>> AddSup addAll(
+      AddSup supplier, Supplier<AddElem> sup2) {
     throw new RuntimeException();
   }
 }
