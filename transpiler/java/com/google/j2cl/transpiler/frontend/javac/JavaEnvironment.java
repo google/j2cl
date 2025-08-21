@@ -27,10 +27,12 @@ import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropUtils.getJ2kt
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
 import static java.util.stream.Collectors.toCollection;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
@@ -1613,6 +1615,9 @@ class JavaEnvironment {
       Type type, Symbol sym) {
     ImmutableListMultimap.Builder<Symbol.TypeVariableSymbol, Type> result =
         ImmutableListMultimap.builder();
+
+    Multimap<Type, Type> visited = HashMultimap.create();
+
     class Visitor extends Types.DefaultTypeVisitor<Void, Type> {
 
       @Override
@@ -1631,7 +1636,16 @@ class JavaEnvironment {
 
       @Override
       public Void visitTypeVar(TypeVar t, Type other) {
+        if (!visited.put(t, other)) {
+          // The pair has been visited before, nothing to do.
+          return null;
+        }
+
         result.put((Symbol.TypeVariableSymbol) t.asElement(), other);
+
+        if (other instanceof TypeVar otherTypeVar) {
+          scan(t.getUpperBound(), otherTypeVar.getUpperBound());
+        }
         return null;
       }
 
@@ -1668,7 +1682,7 @@ class JavaEnvironment {
       }
 
       private void scan(Type from, Type to) {
-        if (from != null) {
+        if (from != null && to != null) {
           from.accept(this, to);
         }
       }

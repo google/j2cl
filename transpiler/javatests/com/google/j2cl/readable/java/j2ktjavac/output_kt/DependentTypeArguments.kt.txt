@@ -30,7 +30,7 @@ open class DependentTypeArguments {
    return Collector.of<TestF>(
     function,
     BiFunction { m1: TestF, m2: TestF ->
-     return@BiFunction DependentTypeArguments.mergeAll<Any?, TestV, TestF>(m1, m2, mergeFunction)
+     return@BiFunction DependentTypeArguments.mergeAll<TestK, TestV, TestF>(m1, m2, mergeFunction)
     },
    )
   }
