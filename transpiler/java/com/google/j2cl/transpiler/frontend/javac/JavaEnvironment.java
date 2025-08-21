@@ -1643,8 +1643,13 @@ class JavaEnvironment {
 
         result.put((Symbol.TypeVariableSymbol) t.asElement(), other);
 
+        // Retrieve potential parameterizations from the bound of the type variable.
         if (other instanceof TypeVar otherTypeVar) {
+          // If the substitution is also a type variable then use the bounds.
           scan(t.getUpperBound(), otherTypeVar.getUpperBound());
+        } else {
+          // Otherwise just use the actual type.
+          scan(t.getUpperBound(), other);
         }
         return null;
       }

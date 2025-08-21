@@ -19,7 +19,6 @@ package j2ktjavac
 
 import javaemul.lang.*
 import java.lang.RuntimeException
-import kotlin.Any
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
@@ -50,7 +49,7 @@ open class DependentTypeArguments {
    return Collector.of<Function<TestK, Supplier<TestE>>, TestF>(
     acum,
     BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestE>> ->
-     return@BiFunction DependentTypeArguments.mergeAll<Any?, Supplier<TestE>?, Function<TestK, Supplier<TestE>>>(
+     return@BiFunction DependentTypeArguments.mergeAll<TestK, Supplier<TestE>?, Function<TestK, Supplier<TestE>>>(
       m1,
       m2,
       BiFunction { arg0: Supplier<TestE>?, arg1: Supplier<TestE>? ->
