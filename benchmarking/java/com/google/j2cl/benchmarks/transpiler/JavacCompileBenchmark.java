@@ -21,7 +21,7 @@ import com.google.j2cl.benchmarking.framework.AbstractBenchmark;
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 
 /** Benchmark for the compiler itself. */
-public class JavaCompileBenchmark extends AbstractBenchmark {
+public class JavacCompileBenchmark extends AbstractBenchmark {
 
   @Override
   public boolean isLongRunning() {
@@ -39,7 +39,8 @@ public class JavaCompileBenchmark extends AbstractBenchmark {
 
   private static TranspileResult compile() throws Exception {
     return newTesterWithDefaults()
-        .addCompilationUnit("org.jspecify.annotations.Nullable", "public @interface Nullable {}")
+        .addArgs("-frontend", "JAVAC")
+        .addNullableAnnotation()
         .addSourcePathArg("samples/box2d/src/main/java/libbox2d_library-j2cl-src.jar")
         .assertTranspileSucceeds();
   }

@@ -339,6 +339,16 @@ public class TranspilerTester {
     return this;
   }
 
+  @CanIgnoreReturnValue
+  public TranspilerTester addNullableAnnotation() {
+    return addCompilationUnit(
+        "org.jspecify.annotations.Nullable",
+        """
+        @java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE)
+        public @interface Nullable {}
+        """);
+  }
+
   public TranspilerTester addNullMarkPackageInfo(String pkg) {
     var unused =
         addCompilationUnit(
