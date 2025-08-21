@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.BreakStatement;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.EmbeddedStatement;
@@ -212,6 +213,13 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
         caseExpressions.set(
             i,
             new NumberLiteral((PrimitiveTypeDescriptor) targetTypeDescriptor, literal.getValue()));
+      } else if (!caseExpression.getTypeDescriptor().isSameBaseType(targetTypeDescriptor)) {
+        caseExpressions.set(
+            i,
+            CastExpression.newBuilder()
+                .setExpression(caseExpression)
+                .setCastTypeDescriptor(targetTypeDescriptor.toNonNullable())
+                .build());
       }
     }
   }
