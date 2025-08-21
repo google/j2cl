@@ -17,6 +17,7 @@ package defaultparams
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertNull
+import com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException
 import com.google.j2cl.integration.testing.TestUtils.getUndefined
 import jsinterop.annotations.JsConstructor
 
@@ -27,6 +28,7 @@ fun main(vararg unused: String) {
   testMethods()
   testExtFun()
   testComplexDefault()
+  testDefaultInitializerCallsWithDefaults()
   testVarargs()
   testInterface()
   testUninitialized()
@@ -111,6 +113,35 @@ private fun testComplexDefault() {
   assertEquals(1, complexDefault(a = -1))
   assertEquals(2, complexDefault(a = 1))
   assertEquals(123, complexDefault(a = 1, b = 123))
+}
+
+fun identityOrCreate(o: Any? = Any(), unused: Any = Any()) = o
+
+fun nestedDefaultCall(
+  str: String?,
+  action: () -> Any? = {
+    // str is non-primitive so this will need to be coerced from undefined to null. Note that we
+    // don't pass the unused parameter to ensure that we'll calling through the default bridge.
+    identityOrCreate(str)
+  },
+) = action()
+
+fun nestedDefaultCallWithNonNullParam(
+  str: String,
+  action: () -> Any? = {
+    // Even though the string is non-null, we should still coerce undefined to null in case a null
+    // has leaked. This should cause an NPE to be thrown rather than the default initializer to be
+    // applied.
+    identityOrCreate(str)
+  },
+) = action()
+
+fun testDefaultInitializerCallsWithDefaults() {
+  assertEquals("foo", nestedDefaultCall("foo"))
+  assertNull(nestedDefaultCall(getUndefined()))
+
+  assertEquals("foo", nestedDefaultCallWithNonNullParam("foo"))
+  assertThrowsNullPointerException { nestedDefaultCallWithNonNullParam(getUndefined()) }
 }
 
 fun boxing(a: Int? = 1) = a

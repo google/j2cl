@@ -9,6 +9,7 @@ let FooImpl = goog.forwardDeclare('defaultparams.FooImpl$impl');
 let FooImplWithDefaultOverride = goog.forwardDeclare('defaultparams.FooImplWithDefaultOverride$impl');
 let Subclass = goog.forwardDeclare('defaultparams.Subclass$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -97,6 +98,52 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.m_complexDefault$default__int__int__int__java_lang_Object__int(-1, 0, 2, null);
   DefaultParamsKt.m_complexDefault$default__int__int__int__java_lang_Object__int(1, 0, 2, null);
   DefaultParamsKt.m_complexDefault__int__int__int(1, 123);
+ }
+ /** @nodts @return {*} */
+ static m_identityOrCreate__java_lang_Object__java_lang_Object__java_lang_Object(/** * */ o, /** !* */ unused) {
+  DefaultParamsKt.$clinit();
+  return o;
+ }
+ /** @nodts @return {*} */
+ static m_identityOrCreate$default__java_lang_Object__java_lang_Object__int__java_lang_Object__java_lang_Object(/** * */ o, /** * */ unused, /** number */ $mask0, /** * */ $handler) {
+  DefaultParamsKt.$clinit();
+  if (($mask0 & 1) != 0) {
+   o = j_l_Object.$create__();
+  }
+  if (($mask0 & 2) != 0) {
+   unused = j_l_Object.$create__();
+  }
+  return DefaultParamsKt.m_identityOrCreate__java_lang_Object__java_lang_Object__java_lang_Object(o, unused);
+ }
+ /** @nodts */
+ static m_nestedDefaultCall__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__void(/** ?string */ str, /** string */ nonNullStr, /** !Function0<?> */ a, /** !Function0<?> */ b, /** !Function0<?> */ c) {
+  DefaultParamsKt.$clinit();
+ }
+ /** @nodts */
+ static m_nestedDefaultCall$default__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__int__java_lang_Object__void(/** ?string */ str, /** string */ nonNullStr, /** Function0<?> */ a, /** Function0<?> */ b, /** Function0<?> */ c, /** number */ $mask0, /** * */ $handler) {
+  DefaultParamsKt.$clinit();
+  if (($mask0 & 4) != 0) {
+   a = Function0.$adapt(/**  @return {?}*/ (() =>{
+    return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__int__java_lang_Object__java_lang_Object(null, null, 3, null);
+   }));
+  }
+  if (($mask0 & 8) != 0) {
+   b = Function0.$adapt(/**  @return {?}*/ (() =>{
+    return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__int__java_lang_Object__java_lang_Object(str, null, 2, null);
+   }));
+  }
+  if (($mask0 & 16) != 0) {
+   c = Function0.$adapt(/**  @return {?}*/ (() =>{
+    return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__int__java_lang_Object__java_lang_Object(nonNullStr, null, 2, null);
+   }));
+  }
+  DefaultParamsKt.m_nestedDefaultCall__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__void(str, nonNullStr, /**@type {!Function0<*>}*/ (a), /**@type {!Function0<*>}*/ (b), /**@type {!Function0<*>}*/ (c));
+  return;
+ }
+ /** @nodts */
+ static m_testDefaultInitializerCallsWithDefaults__void() {
+  DefaultParamsKt.$clinit();
+  DefaultParamsKt.m_nestedDefaultCall$default__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__int__java_lang_Object__void('foo', 'bar', null, null, null, 28, null);
  }
  /** @nodts */
  static m_boxing__java_lang_Integer__void(/** Integer */ a) {
@@ -239,6 +286,7 @@ class DefaultParamsKt extends j_l_Object {
   FooImplWithDefaultOverride = goog.module.get('defaultparams.FooImplWithDefaultOverride$impl');
   Subclass = goog.module.get('defaultparams.Subclass$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');

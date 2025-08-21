@@ -72,6 +72,29 @@ fun testComplexDefault() {
   complexDefault(a = 1, b = 123)
 }
 
+fun identityOrCreate(o: Any? = Any(), unused: Any = Any()) = o
+
+fun nestedDefaultCall(
+  str: String?,
+  nonNullStr: String,
+  a: () -> Any? = { identityOrCreate() },
+  b: () -> Any? = {
+    // str is non-primitive so this will need to be coerced from undefined to null. Note that we
+    // don't pass the unused parameter to ensure that we'll calling through the default bridge.
+    identityOrCreate(str)
+  },
+  c: () -> Any? = {
+    // Even though the string is non-null, we should still coerce undefined to null in case a null
+    // has leaked. This should cause an NPE to be thrown rather than the default initializer to be
+    // applied.
+    identityOrCreate(nonNullStr)
+  },
+) {}
+
+fun testDefaultInitializerCallsWithDefaults() {
+  nestedDefaultCall("foo", "bar")
+}
+
 fun boxing(a: Int? = 1) {}
 
 fun capturedBoxing(a: Int? = null): Int {
