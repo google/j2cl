@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let BasicDataClass = goog.forwardDeclare('dataclass.BasicDataClass$impl');
 let IntValueHolder = goog.forwardDeclare('dataclass.IntValueHolder$impl');
 let PolymorphicDataType = goog.forwardDeclare('dataclass.PolymorphicDataType$impl');
+let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 /**
  * @final
@@ -29,7 +30,7 @@ class DataClassKt extends j_l_Object {
  /** @nodts */
  static m_main__void() {
   DataClassKt.$clinit();
-  let destruct = BasicDataClass.$create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(1, 0, 2, null);
+  let destruct = BasicDataClass.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(1, /**@type {number}*/ (undefined), /**@type {DefaultConstructorMarker}*/ (undefined));
   let foo = destruct.m_component1__int();
   let destruct_1 = PolymorphicDataType.$create__int__int__int(1, 2, 3);
   let a = destruct_1.m_component1__int();

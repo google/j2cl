@@ -742,8 +742,18 @@ internal class CompilationUnitBuilder(
       irCall.isEqualsOperator -> convertEqualsOperator(irCall)
       irCall.isReferenceEqualsOperator -> convertReferenceEqualsOperator(irCall)
       irCall.isIeee754EqualsOperator -> convertIeee754EqualsOperator(irCall)
+      irCall.isGetJsUndefinedCall -> convertGetJsUndefinedCall(irCall)
       else -> convertFunctionCall(irCall)
     }
+
+  private fun convertGetJsUndefinedCall(irCall: IrCall): Expression =
+    // Wrap the original call in an unchecked cast. This is particularly useful when we're using
+    // undefined to stand-in for a primitive type. Otherwise the the boxed type would be used and we
+    // would attempt to auto unbox undefined.
+    JsDocCastExpression.newBuilder()
+      .setCastTypeDescriptor(environment.getTypeDescriptor(irCall.type))
+      .setExpression(convertFunctionCall(irCall))
+      .build()
 
   private fun convertJavaClassPropertyReference(irCall: IrCall): Expression =
     convertToGetClass(
@@ -1776,6 +1786,9 @@ internal class CompilationUnitBuilder(
 
   private val IrCall.isCheckNotNullCall: Boolean
     get() = intrinsicMethods.isCheckNotNull(this)
+
+  private val IrCall.isGetJsUndefinedCall: Boolean
+    get() = intrinsicMethods.isGetJsUndefinedCall(this)
 
   private val IrCall.isJavaClassPropertyReference: Boolean
     get() = intrinsicMethods.isJavaClassProperty(this)

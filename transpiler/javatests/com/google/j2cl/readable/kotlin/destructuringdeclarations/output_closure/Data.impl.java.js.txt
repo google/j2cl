@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -56,14 +57,14 @@ class Data extends j_l_Object {
   return Data.$create__java_lang_String__int(name, age);
  }
  /** @final @nodts @return {!Data} */
- m_copy$default__java_lang_String__int__int__java_lang_Object__destructuringdeclarations_Data(/** ?string */ name, /** number */ age, /** number */ $mask0, /** * */ $handler) {
-  if (($mask0 & 1) != 0) {
+ m_copy$default__java_lang_String__int__destructuringdeclarations_Data(/** string= */ name, /** number= */ age) {
+  if (JsUtils.isUndefined(name)) {
    name = this.f_name__destructuringdeclarations_Data_;
   }
-  if (($mask0 & 2) != 0) {
+  if (JsUtils.isUndefined(age)) {
    age = this.f_age__destructuringdeclarations_Data_;
   }
-  return this.m_copy__java_lang_String__int__destructuringdeclarations_Data(/**@type {string}*/ (name), age);
+  return this.m_copy__java_lang_String__int__destructuringdeclarations_Data(name, age);
  }
  /** @override @return {string} */
  toString() {
@@ -108,6 +109,7 @@ class Data extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');

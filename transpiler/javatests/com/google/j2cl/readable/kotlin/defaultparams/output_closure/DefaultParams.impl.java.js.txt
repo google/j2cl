@@ -3,6 +3,7 @@ goog.module('defaultparams.DefaultParams$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 class DefaultParams extends j_l_Object {
@@ -29,18 +30,18 @@ class DefaultParams extends j_l_Object {
   this.f_a__defaultparams_DefaultParams_ = a;
   this.f_b__defaultparams_DefaultParams_ = b;
  }
- //Factory method corresponding to constructor 'DefaultParams(int, int, int, DefaultConstructorMarker)'.
+ //Factory method corresponding to constructor 'DefaultParams(int, int, DefaultConstructorMarker)'.
  /** @nodts @return {!DefaultParams} */
- static $create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ a, /** number */ b, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
+ static $create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number= */ a, /** number= */ b, /** DefaultConstructorMarker= */ $marker) {
   DefaultParams.$clinit();
   let $instance = new DefaultParams();
-  $instance.$ctor__defaultparams_DefaultParams__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(a, b, $mask0, $marker);
+  $instance.$ctor__defaultparams_DefaultParams__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(a, b, $marker);
   return $instance;
  }
- //Initialization from constructor 'DefaultParams(int, int, int, DefaultConstructorMarker)'.
+ //Initialization from constructor 'DefaultParams(int, int, DefaultConstructorMarker)'.
  /** @nodts */
- $ctor__defaultparams_DefaultParams__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ a, /** number */ b, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
-  if (($mask0 & 1) != 0) {
+ $ctor__defaultparams_DefaultParams__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ a, /** number= */ b, /** DefaultConstructorMarker= */ $marker) {
+  if (JsUtils.isUndefined(a)) {
    a = 1;
   }
   this.$ctor__defaultparams_DefaultParams__int__int__void(a, b);
@@ -64,13 +65,13 @@ class DefaultParams extends j_l_Object {
  //Initialization from constructor 'DefaultParams(int)'.
  /** @nodts */
  $ctor__defaultparams_DefaultParams__int__void(/** number */ a) {
-  this.$ctor__defaultparams_DefaultParams__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(0, a, 1, null);
+  this.$ctor__defaultparams_DefaultParams__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/**@type {number}*/ (undefined), a, /**@type {DefaultConstructorMarker}*/ (undefined));
  }
  /** @nodts */
  m_foo__int__void(/** number */ c) {}
  /** @final @nodts */
- m_foo$default__int__int__java_lang_Object__void(/** number */ c, /** number */ $mask0, /** * */ $handler) {
-  if (($mask0 & 1) != 0) {
+ m_foo$default__int__void(/** number= */ c) {
+  if (JsUtils.isUndefined(c)) {
    c = 20;
   }
   this.m_foo__int__void(c);
@@ -88,7 +89,9 @@ class DefaultParams extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
+ }
 }
 $Util.$setClassMetadata(DefaultParams, 'defaultparams.DefaultParams');
 

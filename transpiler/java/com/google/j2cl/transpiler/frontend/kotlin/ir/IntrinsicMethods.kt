@@ -14,12 +14,13 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
-@file:OptIn(UnsafeDuringIrConstructionAPI::class)
+@file:OptIn(UnsafeDuringIrConstructionAPI::class, InternalSymbolFinderAPI::class)
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.PrefixOperator
+import org.jetbrains.kotlin.backend.jvm.functionByName
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.ir.InternalSymbolFinderAPI
@@ -137,6 +138,27 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
   }
 
   fun isCompareTo(irCall: IrCall): Boolean = irCall.symbol.toKey() in compareToSymbolKeys
+
+  val jsUndefinedSymbol: IrSimpleFunctionSymbol by lazy {
+    irBuiltIns.symbolFinder
+      .findClass(Name.identifier("JsUtils"), FqName("javaemul.internal"))!!
+      .functionByName("undefined")
+  }
+
+  fun isGetJsUndefinedCall(irCall: IrCall): Boolean =
+    irCall.symbol.toKey() == jsUndefinedSymbol.toKey()
+
+  val jsIsUndefinedFunctionSymbol: IrSimpleFunctionSymbol by lazy {
+    irBuiltIns.symbolFinder
+      .findClass(Name.identifier("JsUtils"), FqName("javaemul.internal"))!!
+      .functionByName("isUndefined")
+  }
+
+  val jsCoerceToNullSymbol: IrSimpleFunctionSymbol by lazy {
+    irBuiltIns.symbolFinder
+      .findClass(Name.identifier("JsUtils"), FqName("javaemul.internal"))!!
+      .functionByName("coerceToNull")
+  }
 
   fun getPrefixOperator(symbol: IrFunctionSymbol): PrefixOperator? =
     prefixOperatorByIntrinsicSymbolKey[symbol.toKey()]

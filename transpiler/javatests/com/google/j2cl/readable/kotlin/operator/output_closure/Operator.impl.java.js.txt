@@ -3,6 +3,7 @@ goog.module('operator.Operator$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 /**
@@ -29,18 +30,18 @@ class Operator extends j_l_Object {
   this.$ctor__java_lang_Object__void();
   this.f_i__operator_Operator_ = i;
  }
- //Factory method corresponding to constructor 'Operator(int, int, DefaultConstructorMarker)'.
+ //Factory method corresponding to constructor 'Operator(int, DefaultConstructorMarker)'.
  /** @nodts @return {!Operator} */
- static $create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ i, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
+ static $create__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number= */ i, /** DefaultConstructorMarker= */ $marker) {
   Operator.$clinit();
   let $instance = new Operator();
-  $instance.$ctor__operator_Operator__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(i, $mask0, $marker);
+  $instance.$ctor__operator_Operator__int__kotlin_jvm_internal_DefaultConstructorMarker__void(i, $marker);
   return $instance;
  }
- //Initialization from constructor 'Operator(int, int, DefaultConstructorMarker)'.
+ //Initialization from constructor 'Operator(int, DefaultConstructorMarker)'.
  /** @nodts */
- $ctor__operator_Operator__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ i, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
-  if (($mask0 & 1) != 0) {
+ $ctor__operator_Operator__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ i, /** DefaultConstructorMarker= */ $marker) {
+  if (JsUtils.isUndefined(i)) {
    i = 0;
   }
   this.$ctor__operator_Operator__int__void(i);
@@ -91,7 +92,9 @@ class Operator extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
+ }
 }
 $Util.$setClassMetadata(Operator, 'operator.Operator');
 

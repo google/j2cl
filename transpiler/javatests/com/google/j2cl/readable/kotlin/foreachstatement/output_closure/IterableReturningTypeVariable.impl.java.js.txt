@@ -9,6 +9,7 @@ let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
+let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
@@ -34,7 +35,7 @@ class IterableReturningTypeVariable extends j_l_Object {
  }
  /** @override @nodts @return {T} */
  m_iterator__java_util_Iterator() {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String__int__kotlin_jvm_internal_DefaultConstructorMarker(null, 1, null));
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {string}*/ (undefined), /**@type {DefaultConstructorMarker}*/ (undefined)));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */

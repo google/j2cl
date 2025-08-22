@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -37,18 +38,18 @@ class BasicDataClass extends j_l_Object {
   this.f_foo__dataclass_BasicDataClass_ = foo;
   this.f_bar__dataclass_BasicDataClass_ = bar;
  }
- //Factory method corresponding to constructor 'BasicDataClass(int, int, int, DefaultConstructorMarker)'.
+ //Factory method corresponding to constructor 'BasicDataClass(int, int, DefaultConstructorMarker)'.
  /** @nodts @return {!BasicDataClass} */
- static $create__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ foo, /** number */ bar, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
+ static $create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ foo, /** number= */ bar, /** DefaultConstructorMarker= */ $marker) {
   BasicDataClass.$clinit();
   let $instance = new BasicDataClass();
-  $instance.$ctor__dataclass_BasicDataClass__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(foo, bar, $mask0, $marker);
+  $instance.$ctor__dataclass_BasicDataClass__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(foo, bar, $marker);
   return $instance;
  }
- //Initialization from constructor 'BasicDataClass(int, int, int, DefaultConstructorMarker)'.
+ //Initialization from constructor 'BasicDataClass(int, int, DefaultConstructorMarker)'.
  /** @nodts */
- $ctor__dataclass_BasicDataClass__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ foo, /** number */ bar, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
-  if (($mask0 & 2) != 0) {
+ $ctor__dataclass_BasicDataClass__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ foo, /** number= */ bar, /** DefaultConstructorMarker= */ $marker) {
+  if (JsUtils.isUndefined(bar)) {
    bar = 10;
   }
   this.$ctor__dataclass_BasicDataClass__int__int__void(foo, bar);
@@ -74,11 +75,11 @@ class BasicDataClass extends j_l_Object {
   return BasicDataClass.$create__int__int(foo, bar);
  }
  /** @final @nodts @return {!BasicDataClass} */
- m_copy$default__int__int__int__java_lang_Object__dataclass_BasicDataClass(/** number */ foo, /** number */ bar, /** number */ $mask0, /** * */ $handler) {
-  if (($mask0 & 1) != 0) {
+ m_copy$default__int__int__dataclass_BasicDataClass(/** number= */ foo, /** number= */ bar) {
+  if (JsUtils.isUndefined(foo)) {
    foo = this.f_foo__dataclass_BasicDataClass_;
   }
-  if (($mask0 & 2) != 0) {
+  if (JsUtils.isUndefined(bar)) {
    bar = this.f_bar__dataclass_BasicDataClass_;
   }
   return this.m_copy__int__int__dataclass_BasicDataClass(foo, bar);
@@ -125,6 +126,7 @@ class BasicDataClass extends j_l_Object {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');

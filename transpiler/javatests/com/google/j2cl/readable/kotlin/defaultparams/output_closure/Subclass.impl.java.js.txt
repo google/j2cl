@@ -3,6 +3,8 @@ goog.module('defaultparams.Subclass$impl');
 const DefaultParams = goog.require('defaultparams.DefaultParams$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
+
 /**
  * @final
  */
@@ -22,7 +24,7 @@ class Subclass extends DefaultParams {
  //Initialization from constructor 'Subclass()'.
  /** @nodts */
  $ctor__defaultparams_Subclass__void() {
-  this.$ctor__defaultparams_DefaultParams__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(0, 2, 1, null);
+  this.$ctor__defaultparams_DefaultParams__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/**@type {number}*/ (undefined), 2, /**@type {DefaultConstructorMarker}*/ (undefined));
  }
  //Factory method corresponding to constructor 'Subclass(int, int)'.
  /** @nodts @return {!Subclass} */

@@ -27,7 +27,6 @@ import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
-import org.jetbrains.kotlin.backend.common.lower.DefaultParameterCleaner
 import org.jetbrains.kotlin.backend.common.lower.ExpectDeclarationsRemoveLowering
 import org.jetbrains.kotlin.backend.common.lower.ExpressionBodyTransformer
 import org.jetbrains.kotlin.backend.common.lower.InitializersCleanupLowering
@@ -151,16 +150,11 @@ private val loweringPhase = loweringPhase {
   // Synthesize static proxy functions for JvmStatic functions in companion objects.
   perFileLowering(::JvmStaticInCompanionLowering)
   // Generate synthetic stubs for functions with default parameter values
-  perFileLowering(::JvmDefaultArgumentStubGenerator)
+  perFileLowering(::J2clDefaultArgumentStubGenerator)
   // Transform calls with default arguments into calls to stubs
-  perFileLowering(jvmDefaultParameterInjectorFactory)
+  perFileLowering(::J2clDefaultParameterInjector)
   // Replace default values arguments with stubs
-  perFileLowering { j2clBackendContext: J2clBackendContext ->
-    DefaultParameterCleaner(
-      j2clBackendContext.jvmBackendContext,
-      replaceDefaultValuesWithStubs = true,
-    )
-  }
+  perFileLowering(::J2clDefaultParameterCleaner)
   // TODO(b/377502016): Remove this pass once smart cast's bug is fixed.
   // Cleanup IMPLICIT_CAST introduced by smart casts that cast a expression to a parent type.
   perFileLowering(::SmartCastCleaner)

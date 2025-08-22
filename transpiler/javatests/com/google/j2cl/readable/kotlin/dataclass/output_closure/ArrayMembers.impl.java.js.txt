@@ -7,6 +7,7 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -48,14 +49,14 @@ class ArrayMembers extends j_l_Object {
   return ArrayMembers.$create__arrayOf_int__arrayOf_java_lang_String(a, b);
  }
  /** @final @nodts @return {!ArrayMembers} */
- m_copy$default__arrayOf_int__arrayOf_java_lang_String__int__java_lang_Object__dataclass_ArrayMembers(/** Array<number> */ a, /** Array<string> */ b, /** number */ $mask0, /** * */ $handler) {
-  if (($mask0 & 1) != 0) {
+ m_copy$default__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(/** !Array<number>= */ a, /** !Array<string>= */ b) {
+  if (JsUtils.isUndefined(a)) {
    a = this.f_a__dataclass_ArrayMembers_;
   }
-  if (($mask0 & 2) != 0) {
+  if (JsUtils.isUndefined(b)) {
    b = this.f_b__dataclass_ArrayMembers_;
   }
-  return this.m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(/**@type {!Array<number>}*/ (a), /**@type {!Array<string>}*/ (b));
+  return this.m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(a, b);
  }
  /** @override @return {string} */
  toString() {
@@ -101,6 +102,7 @@ class ArrayMembers extends j_l_Object {
   Arrays = goog.module.get('java.util.Arrays$impl');
   Objects = goog.module.get('java.util.Objects$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

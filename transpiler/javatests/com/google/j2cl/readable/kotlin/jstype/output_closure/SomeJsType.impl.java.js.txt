@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -35,29 +36,29 @@ class SomeJsType extends j_l_Object {
   this.f_packageField__jstype_SomeJsType_ = packageField;
   this.f_protectedField__jstype_SomeJsType_ = protectedField;
  }
- //Factory method corresponding to constructor 'SomeJsType(int, int, int, int, int, DefaultConstructorMarker)'.
+ //Factory method corresponding to constructor 'SomeJsType(int, int, int, int, DefaultConstructorMarker)'.
  /** @nodts @template T @return {!SomeJsType<T>} */
- static $create__int__int__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ publicField, /** number */ privateField, /** number */ packageField, /** number */ protectedField, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
+ static $create__int__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number= */ publicField, /** number= */ privateField, /** number= */ packageField, /** number= */ protectedField, /** DefaultConstructorMarker= */ $marker) {
   SomeJsType.$clinit();
-  if (($mask0 & 1) != 0) {
+  if (JsUtils.isUndefined(publicField)) {
    publicField = 0;
   }
-  if (($mask0 & 2) != 0) {
+  if (JsUtils.isUndefined(privateField)) {
    privateField = 0;
   }
-  if (($mask0 & 4) != 0) {
+  if (JsUtils.isUndefined(packageField)) {
    packageField = 0;
   }
-  if (($mask0 & 8) != 0) {
+  if (JsUtils.isUndefined(protectedField)) {
    protectedField = 0;
   }
   let $instance = new SomeJsType(publicField, privateField, packageField, protectedField);
-  $instance.$ctor__jstype_SomeJsType__int__int__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(publicField, privateField, packageField, protectedField, $mask0, $marker);
+  $instance.$ctor__jstype_SomeJsType__int__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(publicField, privateField, packageField, protectedField, $marker);
   return $instance;
  }
- //Initialization from constructor 'SomeJsType(int, int, int, int, int, DefaultConstructorMarker)'.
+ //Initialization from constructor 'SomeJsType(int, int, int, int, DefaultConstructorMarker)'.
  /** @nodts */
- $ctor__jstype_SomeJsType__int__int__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ publicField, /** number */ privateField, /** number */ packageField, /** number */ protectedField, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {}
+ $ctor__jstype_SomeJsType__int__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ publicField, /** number= */ privateField, /** number= */ packageField, /** number= */ protectedField, /** DefaultConstructorMarker= */ $marker) {}
  /** @return {number} */
  get publicField() {
   return this.f_publicField__jstype_SomeJsType_;
@@ -118,6 +119,7 @@ class SomeJsType extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }

@@ -3,6 +3,7 @@ goog.module('multipleconstructors.PrimaryWithParentNoPrimary$impl');
 const ParentWithoutPrimary = goog.require('multipleconstructors.ParentWithoutPrimary$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 /**
@@ -32,21 +33,21 @@ class PrimaryWithParentNoPrimary extends ParentWithoutPrimary {
   this.f_id__multipleconstructors_PrimaryWithParentNoPrimary_ = id;
   this.f_flag__multipleconstructors_PrimaryWithParentNoPrimary_ = flag;
  }
- //Factory method corresponding to constructor 'PrimaryWithParentNoPrimary(int, boolean, int, DefaultConstructorMarker)'.
+ //Factory method corresponding to constructor 'PrimaryWithParentNoPrimary(int, boolean, DefaultConstructorMarker)'.
  /** @nodts @return {!PrimaryWithParentNoPrimary} */
- static $create__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number */ id, /** boolean */ flag, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
+ static $create__int__boolean__kotlin_jvm_internal_DefaultConstructorMarker(/** number= */ id, /** boolean= */ flag, /** DefaultConstructorMarker= */ $marker) {
   PrimaryWithParentNoPrimary.$clinit();
   let $instance = new PrimaryWithParentNoPrimary();
-  $instance.$ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker__void(id, flag, $mask0, $marker);
+  $instance.$ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__kotlin_jvm_internal_DefaultConstructorMarker__void(id, flag, $marker);
   return $instance;
  }
- //Initialization from constructor 'PrimaryWithParentNoPrimary(int, boolean, int, DefaultConstructorMarker)'.
+ //Initialization from constructor 'PrimaryWithParentNoPrimary(int, boolean, DefaultConstructorMarker)'.
  /** @nodts */
- $ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ id, /** boolean */ flag, /** number */ $mask0, /** DefaultConstructorMarker */ $marker) {
-  if (($mask0 & 1) != 0) {
+ $ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ id, /** boolean= */ flag, /** DefaultConstructorMarker= */ $marker) {
+  if (JsUtils.isUndefined(id)) {
    id = 1;
   }
-  if (($mask0 & 2) != 0) {
+  if (JsUtils.isUndefined(flag)) {
    flag = true;
   }
   this.$ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__void(id, flag);
@@ -105,7 +106,9 @@ class PrimaryWithParentNoPrimary extends ParentWithoutPrimary {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
+ }
 }
 $Util.$setClassMetadata(PrimaryWithParentNoPrimary, 'multipleconstructors.PrimaryWithParentNoPrimary');
 

@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -46,8 +47,8 @@ class IntValueHolder extends j_l_Object {
   return IntValueHolder.$create__int(backingValue);
  }
  /** @final @nodts @return {!IntValueHolder} */
- m_copy$default__int__int__java_lang_Object__dataclass_IntValueHolder(/** number */ backingValue, /** number */ $mask0, /** * */ $handler) {
-  if (($mask0 & 1) != 0) {
+ m_copy$default__int__dataclass_IntValueHolder(/** number= */ backingValue) {
+  if (JsUtils.isUndefined(backingValue)) {
    backingValue = this.f_backingValue__dataclass_IntValueHolder_;
   }
   return this.m_copy__int__dataclass_IntValueHolder(backingValue);
@@ -94,6 +95,7 @@ class IntValueHolder extends j_l_Object {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');

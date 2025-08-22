@@ -19,6 +19,7 @@ import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 
 /** Provides an interface for simple JavaScript idioms that can not be expressed in Java. */
 public final class JsUtils {
@@ -27,7 +28,15 @@ public final class JsUtils {
   public static native String typeOf(Object obj);
 
   @JsMethod
-  public static native boolean isUndefined(Object value);
+  public static native boolean isUndefined(@DoNotAutobox Object value);
+
+  @JsProperty(namespace = JsPackage.GLOBAL, name = "undefined")
+  public static native Object undefined();
+
+  @UncheckedCast
+  public static <T> T coerceToNull(@DoNotAutobox T value) {
+    return isUndefined(value) ? null : value;
+  }
 
   @JsMethod
   @UncheckedCast
