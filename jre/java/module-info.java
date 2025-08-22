@@ -16,6 +16,7 @@ module java.base {
   exports java.lang.annotation;
   exports java.lang.invoke;
   exports java.lang.reflect;
+  exports java.lang.runtime;
   exports java.lang;
   exports java.math;
   exports java.nio.charset;
