@@ -920,7 +920,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodSymbol methodSymbol = (MethodSymbol) memberReference.sym;
 
     TypeDescriptor expressionTypeDescriptor =
-        environment.createTypeDescriptor(memberReference.type);
+        environment.createTypeDescriptor(memberReference.type, inNullMarkedScope());
     MethodDescriptor functionalMethodDescriptor =
         expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
 

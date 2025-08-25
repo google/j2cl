@@ -49,14 +49,11 @@ open class DependentTypeArguments {
    return Collector.of<Function<TestK, Supplier<TestE>>, TestF>(
     acum,
     BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestE>> ->
-     return@BiFunction DependentTypeArguments.mergeAll<TestK, Supplier<TestE>?, Function<TestK, Supplier<TestE>>>(
+     return@BiFunction DependentTypeArguments.mergeAll<TestK, Supplier<TestE>, Function<TestK, Supplier<TestE>>>(
       m1,
       m2,
-      BiFunction { arg0: Supplier<TestE>?, arg1: Supplier<TestE>? ->
-       return@BiFunction DependentTypeArguments.addAll<TestE, Supplier<TestE>?>(
-        arg0,
-        arg1!!,
-       )
+      BiFunction { arg0: Supplier<TestE>, arg1: Supplier<TestE> ->
+       return@BiFunction DependentTypeArguments.addAll<TestE, Supplier<TestE>>(arg0, arg1)
       },
      )
     },
@@ -71,14 +68,11 @@ open class DependentTypeArguments {
    return Collector.of<Function<TestK, Supplier<TestE>>, TestF>(
     acum,
     BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestE>> ->
-     return@BiFunction DependentTypeArguments.mergeAll<TestK, Supplier<TestE>?, Function<TestK, Supplier<TestE>>>(
+     return@BiFunction DependentTypeArguments.mergeAll<TestK, Supplier<TestE>, Function<TestK, Supplier<TestE>>>(
       m1,
       m2,
-      BiFunction { arg0: Supplier<TestE>?, arg1: Supplier<TestE>? ->
-       return@BiFunction DependentTypeArguments.addAll<TestE, Supplier<TestE>?>(
-        arg0,
-        arg1!!,
-       )
+      BiFunction { arg0: Supplier<TestE>, arg1: Supplier<TestE> ->
+       return@BiFunction DependentTypeArguments.addAll<TestE, Supplier<TestE>>(arg0, arg1)
       },
      )
     },
