@@ -126,7 +126,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
               return binaryExpression;
             }
 
-            if (!containsCaptureWithoutLowerBound(fieldAccess.getTypeDescriptor())) {
+            if (!needsCast(fieldAccess.getTypeDescriptor())) {
               return binaryExpression;
             }
 
@@ -145,7 +145,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
             }
 
             if (invocation.getTarget().getParameterTypeDescriptors().stream()
-                .allMatch(it -> !containsCaptureWithoutLowerBound(it))) {
+                .allMatch(it -> !needsCast(it))) {
               return invocation;
             }
 
@@ -221,6 +221,21 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
               .getTypeParameterDescriptors());
     }
     return builder.build();
+  }
+
+  private static boolean needsCast(TypeDescriptor typeDescriptor) {
+    // Javac frontend appears to produce wildcards for recursive types in places where JDT produces
+    // captures, so it requires special treatment.
+    return isWildcardWithoutLowerBound(typeDescriptor)
+        || containsCaptureWithoutLowerBound(typeDescriptor);
+  }
+
+  private static boolean isWildcardWithoutLowerBound(TypeDescriptor typeDescriptor) {
+    return switch (typeDescriptor) {
+      case TypeVariable typeVariable ->
+          typeVariable.isWildcard() && typeVariable.getLowerBoundTypeDescriptor() == null;
+      default -> false;
+    };
   }
 
   private static boolean containsCaptureWithoutLowerBound(TypeDescriptor typeDescriptor) {
