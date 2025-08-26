@@ -948,34 +948,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       qualifier = null;
     }
 
-    // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
-    // descriptor and the MethodDescriptor are created in the right context.
-    TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement();
-    boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
-    DeclaredTypeDescriptor declarationEnclosingTypeDescriptor =
-        getParameterizedEnclosingType(
-            environment.createDeclaredTypeDescriptor(
-                methodSymbol.getEnclosingElement().asType(), inNullMarkedScope),
-            qualifier);
-
-    var methodType = memberReference.referentType;
-
-    Map<TypeVariable, TypeDescriptor> enclosingTypeArguments = new HashMap<>();
-    var mapping =
-        methodSymbol.isConstructor()
-            ? JavaEnvironment.getTypeSubstitution(
-                methodType.getReturnType(), methodType.getReturnType().tsym)
-            : JavaEnvironment.getTypeSubstitution(methodType, methodSymbol);
-    for (var tv : mapping.keySet()) {
-      enclosingTypeArguments.put(
-          (TypeVariable) environment.createTypeDescriptor(tv.asType()),
-          environment.createTypeDescriptor(
-              mapping.get(tv).getFirst(),
-              declarationEnclosingTypeDescriptor.getTypeDeclaration().isNullMarked()));
-    }
+    var methodType = memberReference.referentType.asMethodType();
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        (DeclaredTypeDescriptor)
-            declarationEnclosingTypeDescriptor.specializeTypeVariables(enclosingTypeArguments);
+        getEnclosingTypeDescriptor(methodSymbol, methodType, qualifier);
 
     var typeArguments =
         convertTypeArguments(
@@ -1152,16 +1127,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     MethodType methodType = methodInvocation.meth.type.asMethodType();
-    // The type arguments for the method itself. For example `String` in `C.<String>m()`.
-
-    // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
-    // descriptor and the MethodDescriptor are created in the right context.
-    TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement();
-    boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        environment.createDeclaredTypeDescriptor(
-            methodSymbol.getEnclosingElement().asType(), inNullMarkedScope);
+        getEnclosingTypeDescriptor(methodSymbol, methodType, qualifier);
 
+    // The type arguments for the method itself. For example `String` in `C.<String>m()`.
     var typeArguments =
         convertTypeArguments(
             methodInvocation.getTypeArguments(),
@@ -1292,6 +1261,42 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     return getQualifier(methodInvocation.getMethodSelect());
+  }
+
+  private DeclaredTypeDescriptor getEnclosingTypeDescriptor(
+      MethodSymbol methodSymbol, MethodType methodType, Expression qualifier) {
+    // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
+    // descriptor and the MethodDescriptor are created in the right context.
+    TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement();
+    boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
+    if (methodSymbol.isConstructor()) {
+      // Ignore qualifiers for constructors since those are not related to the class enclosing
+      // the method but to an outer class.
+      // TODO(b/441150061): The qualifier should be ignored for super calls; for instantiation it
+      // might be needed.
+      qualifier = null;
+    }
+    DeclaredTypeDescriptor declarationEnclosingTypeDescriptor =
+        getParameterizedEnclosingType(
+            environment.createDeclaredTypeDescriptor(
+                methodSymbol.getEnclosingElement().asType(), inNullMarkedScope),
+            qualifier);
+
+    Map<TypeVariable, TypeDescriptor> enclosingTypeArguments = new HashMap<>();
+    var mapping =
+        methodSymbol.isConstructor()
+            ? JavaEnvironment.getTypeSubstitution(
+                methodType.getReturnType(), methodType.getReturnType().tsym)
+            : JavaEnvironment.getTypeSubstitution(methodType, methodSymbol);
+    for (var tv : mapping.keySet()) {
+      enclosingTypeArguments.put(
+          (TypeVariable) environment.createTypeDescriptor(tv.asType()),
+          environment.createTypeDescriptor(
+              mapping.get(tv).getFirst(),
+              declarationEnclosingTypeDescriptor.getTypeDeclaration().isNullMarked()));
+    }
+    return (DeclaredTypeDescriptor)
+        declarationEnclosingTypeDescriptor.specializeTypeVariables(enclosingTypeArguments);
   }
 
   private DeclaredTypeDescriptor getParameterizedEnclosingType(

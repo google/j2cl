@@ -83,7 +83,7 @@ open class DependentTypeArguments {
   }
 
   @JvmStatic
-  private fun <MergeK, MergeV, MergeF: Function<MergeK, MergeV>> mergeAll(m1: MergeF, m2: MergeF, mergeFunction: BiFunction<MergeV, MergeV, MergeV>): MergeF {
+  private fun <MergeK, MergeV, MergeF: Function<MergeK, MergeV>?> mergeAll(m1: MergeF, m2: MergeF, mergeFunction: BiFunction<MergeV, MergeV, MergeV>): MergeF {
    throw RuntimeException()
   }
 
