@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.DebugDescriber.newDebugDescriber;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -23,6 +24,7 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DebugDescriber;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -99,11 +101,12 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
               return expression;
             }
 
+            DebugDescriber describer = newDebugDescriber();
             debug(
                 getSourcePosition(this),
                 "Inserting qualifier projection cast from %s to %s",
-                getDescription(typeDescriptor),
-                getDescription(projectedTypeDescriptor));
+                describer.getDescription(typeDescriptor),
+                describer.getDescription(projectedTypeDescriptor));
 
             return CastExpression.newBuilder()
                 .setExpression(expression)

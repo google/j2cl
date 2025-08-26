@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.DebugDescriber.newDebugDescriber;
+
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DebugDescriber;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
@@ -74,13 +77,14 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
                   return expression;
                 }
 
+                DebugDescriber describer = newDebugDescriber();
                 debug(
                     getSourcePosition(),
                     "Inserted nullability mismatch cast to '%s' because of assignment from '%s'"
                         + " to '%s'",
-                    getDescription(castTypeDescriptor),
-                    getDescription(expression.getTypeDescriptor()),
-                    getDescription(inferredTypeDescriptor));
+                    describer.getDescription(castTypeDescriptor),
+                    describer.getDescription(expression.getTypeDescriptor()),
+                    describer.getDescription(inferredTypeDescriptor));
 
                 return CastExpression.newBuilder()
                     .setExpression(expression)
