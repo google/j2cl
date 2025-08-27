@@ -242,6 +242,22 @@ internal abstract class Repro<N> {
   }
 }
 
-internal fun Repro<String>.findNext(): String? {
+internal abstract class StringRepro : Repro<String>()
+
+internal abstract class StringReproChild : StringRepro()
+
+internal fun <S : Repro<String>> S.find0(): String? {
+  return get()
+}
+
+internal fun StringRepro.find1(): String? {
+  return get()
+}
+
+internal fun StringReproChild.find2(): String? {
+  return get()
+}
+
+internal fun <S : StringReproChild> S.find3(): String? {
   return get()
 }

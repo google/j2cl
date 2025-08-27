@@ -1,0 +1,37 @@
+goog.module('inlinefunction.StringRepro$impl');
+
+const Repro = goog.require('inlinefunction.Repro$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @extends {Repro<string>}
+ */
+class StringRepro extends Repro {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__inlinefunction_StringRepro__void() {
+  this.$ctor__inlinefunction_Repro__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  StringRepro.$clinit = () =>{};
+  StringRepro.$loadModules();
+  Repro.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringRepro;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(StringRepro, 'inlinefunction.StringRepro');
+
+exports = StringRepro;
+
+//# sourceMappingURL=StringRepro.js.map

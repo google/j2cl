@@ -21,6 +21,8 @@ let InlineFunctionsInAnotherLibraryKt = goog.forwardDeclare('inlinefunction.Inli
 let MyClass = goog.forwardDeclare('inlinefunction.MyClass$impl');
 let NonFun = goog.forwardDeclare('inlinefunction.NonFun$impl');
 let Repro = goog.forwardDeclare('inlinefunction.Repro$impl');
+let StringRepro = goog.forwardDeclare('inlinefunction.StringRepro$impl');
+let StringReproChild = goog.forwardDeclare('inlinefunction.StringReproChild$impl');
 let WithInlineFunction = goog.forwardDeclare('inlinefunction.WithInlineFunction$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
@@ -473,8 +475,26 @@ class InlineFunctionKt extends j_l_Object {
   1 + 20 + ArraysKt.m_sum__arrayOf_int__int(c_1) | 0;
   1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([30, 40, 50], $$int))) | 0;
  }
+ /** @nodts @template S @return {?string} */
+ static m_find0__inlinefunction_Repro__java_lang_String(/** S */ this_1) {
+  InlineFunctionKt.$clinit();
+  let /** ?N */ value = null;
+  return /**@type {?string}*/ (value);
+ }
  /** @nodts @return {?string} */
- static m_findNext__inlinefunction_Repro__java_lang_String(/** !Repro<string> */ this_1) {
+ static m_find1__inlinefunction_StringRepro__java_lang_String(/** !StringRepro */ this_1) {
+  InlineFunctionKt.$clinit();
+  let /** ?N */ value = null;
+  return /**@type {?string}*/ (value);
+ }
+ /** @nodts @return {?string} */
+ static m_find2__inlinefunction_StringReproChild__java_lang_String(/** !StringReproChild */ this_1) {
+  InlineFunctionKt.$clinit();
+  let /** ?N */ value = null;
+  return /**@type {?string}*/ (value);
+ }
+ /** @nodts @template S @return {?string} */
+ static m_find3__inlinefunction_StringReproChild__java_lang_String(/** S */ this_1) {
   InlineFunctionKt.$clinit();
   let /** ?N */ value = null;
   return /**@type {?string}*/ (value);
