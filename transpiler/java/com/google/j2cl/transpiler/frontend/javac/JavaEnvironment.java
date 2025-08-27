@@ -905,6 +905,7 @@ class JavaEnvironment {
         .setConstructor(isConstructor)
         .setNative(isNative)
         .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
+        .setKtObjcInfo(J2ktInteropUtils.getJ2ktObjcInfo(declarationMethodElement))
         .setFinal(isFinal(declarationMethodElement))
         .setDefaultMethod(isDefault)
         .setAbstract(isAbstract(declarationMethodElement))
