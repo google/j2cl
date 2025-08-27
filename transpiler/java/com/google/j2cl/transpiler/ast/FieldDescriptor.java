@@ -301,6 +301,9 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
+    @Nullable
+    abstract FieldDescriptor getDeclarationDescriptorOrNullIfSelf();
+
     abstract FieldDescriptor autoBuild();
 
     public FieldDescriptor build() {
@@ -310,6 +313,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       boolean isNative = getEnclosingTypeDescriptor().isNative();
       if (!isNative && ignoreNonNativeJsInfo.get()) {
         setOriginalJsInfo(JsInfo.NONE);
+      }
+
+      if (getDeclarationDescriptorOrNullIfSelf() == null) {
+        // Use a canonical version of the enclosing type descriptor in field declarations.
+        setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().getDeclarationDescriptor());
       }
 
       FieldDescriptor fieldDescriptor = autoBuild();
