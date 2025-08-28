@@ -48,7 +48,7 @@ def _tree_artifact_proxy_impl(ctx):
     if J2clInfo in ctx.attr.j2cl_library:
         files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
     elif J2wasmInfo in ctx.attr.j2cl_library:
-        files = ctx.attr.j2cl_library[J2wasmInfo]._private_.wasm_modular_info.provider._private_.output_js
+        files = ctx.attr.j2cl_library[J2wasmInfo]._private_.j2cl_info._private_.output_js
     return DefaultInfo(files = depset([files]), runfiles = ctx.runfiles([files]))
 
 _tree_artifact_proxy = rule(

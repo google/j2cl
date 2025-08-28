@@ -48,16 +48,14 @@ def _create_j2wasm_provider(j2cl_provider, deps):
         _private_ = struct(
             java_info = j2cl_provider._private_.java_info,
             js_info = j2cl_provider._private_.js_info,
-            wasm_modular_info = struct(
-                transitive_modules = depset(
-                    modular_output,
-                    transitive = [
-                        d._private_.wasm_modular_info.transitive_modules
-                        for d in j2wasm_deps
-                    ],
-                    order = "postorder",
-                ),
-                provider = j2cl_provider,
+            j2cl_info = j2cl_provider,
+            transitive_modules = depset(
+                modular_output,
+                transitive = [
+                    d._private_.transitive_modules
+                    for d in j2wasm_deps
+                ],
+                order = "postorder",
             ),
         ),
         _is_j2cl_provider = 1,

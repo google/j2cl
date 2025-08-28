@@ -15,9 +15,7 @@ def _j2wasm_import_impl(ctx):
     java_info = ctx.attr.jar[JavaInfo]
     return [J2wasmInfo(
         _private_ = struct(
-            wasm_modular_info = struct(
-                transitive_modules = depset(),
-            ),
+            transitive_modules = depset(),
             java_info = java_info,
             js_info = j2cl_js_provider(ctx),
         ),
