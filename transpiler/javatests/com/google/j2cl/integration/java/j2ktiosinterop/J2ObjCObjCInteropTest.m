@@ -126,6 +126,9 @@
 
   Custom_customStaticLongMethod(1);
   Custom_customStaticLongStringMethod(2, @"");
+
+  [obj lowercase:@""];
+  Custom_staticlowercase_(@"");
 }
 
 - (void)testEnumNames {

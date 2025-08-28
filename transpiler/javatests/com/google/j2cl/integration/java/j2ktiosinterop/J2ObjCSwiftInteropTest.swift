@@ -94,6 +94,15 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
 
     obj.customLongMethod(withLong: 1)
     obj.customLongStringMethod(withLong: 1, with: "")
+
+    Custom_customStaticMethod()
+    Custom_customStaticIntMethodWithIndex_(1)
+    Custom_customStaticIntStringMethodWithIndex_name_(1, "")
+    Custom_customStaticLongMethod(1)
+    Custom_customStaticLongStringMethod(2, "")
+
+    obj.lowercase("")
+    Custom_staticlowercase_("")
   }
 
   func testEnumNames() {

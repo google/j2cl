@@ -143,6 +143,10 @@
 
   Custom_customStaticLongMethod(1);
   Custom_customStaticLongStringMethod(2, @"");
+
+  // TODO(b/441689301): Should be `lowercase:` and `Custom_staticlowercase`.
+  [obj loweRcase:@""];
+  Custom_staticlOwercase_(@"");
 }
 
 - (void)testEnumNames {

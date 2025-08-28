@@ -75,4 +75,10 @@ public final class CustomNames {
 
   @ObjectiveCName("customStaticLongStringMethod")
   public static void staticLongStringMethod(long i, String s) {}
+
+  @ObjectiveCName("lowercase:")
+  public void lowercase(String t) {}
+
+  @ObjectiveCName("staticlowercase:")
+  public static void staticlowercase(String s) {}
 }
