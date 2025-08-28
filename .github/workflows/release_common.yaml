@@ -60,9 +60,50 @@ on:
         required: false
 
 jobs:
+  create_git_tag:
+    runs-on: ubuntu-latest
+    permissions:
+      # Required for creating and pushing git tags.
+      contents: write
+    steps:
+      - name: Checkout current commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Check and Create Git Tag
+        run: |
+          TAG_NAME="${{ inputs.version }}"
+          # Get all remote refs matching the TAG_NAME
+          ALL_REFS=$(git ls-remote origin "$TAG_NAME")
+
+          # Check if any refs were found and if we should continue
+          if [ -n "${ALL_REFS}" ]; then
+            # Check if this is a tag reference
+            if echo "${ALL_REFS}" | grep -q "refs/tags/${TAG_NAME}"; then
+              echo "Tag '$TAG_NAME' already exists."
+              if [[ "${{ inputs.continue_if_tag_exists }}" == "true" ]]; then
+                echo "Continuing workflow as 'continue_if_tag_exists' is true. Skipping tag creation."
+                exit 0
+              else
+                echo "Error: Tag '$TAG_NAME' already exists and 'continue_if_tag_exists' is false. Aborting."
+                exit 1
+              fi
+            else
+              echo "A ref with name '${TAG_NAME}' exists but is not a tag (e.g., a branch). Aborting."
+              exit 1
+            fi
+          fi
+
+          echo "Creating tag '$TAG_NAME'"
+
+          git config --local user.email "j2cl-github-bot@github.com"
+          git config --local user.name "J2CL GitHub Bot"
+          git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
+          git push origin "$TAG_NAME"
+
   publish_to_sonatype:
     runs-on: ubuntu-latest
     if: ${{ inputs.publish_to_sonatype }}
+    needs: create_git_tag
 
     steps:
       - name: Check secrets are provided
@@ -77,8 +118,10 @@ jobs:
           check_secret "SONATYPE_PASSWORD_TOKEN" "${{ secrets.SONATYPE_PASSWORD_TOKEN }}"
           check_secret "MAVEN_GPG_PRIVATE_KEY" "${{ secrets.MAVEN_GPG_PRIVATE_KEY }}"
           check_secret "MAVEN_GPG_PASSPHRASE" "${{ secrets.MAVEN_GPG_PASSPHRASE }}"
-      - name: Checkout current commit
+      - name: Checkout release tag
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ inputs.version }}
 
       # Maven and Bazel require Java to be available.
       - name: Setup Java
@@ -111,36 +154,11 @@ jobs:
           SONATYPE_PASSWORD_TOKEN: ${{ secrets.SONATYPE_PASSWORD_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-  create_git_tag:
-    runs-on: ubuntu-latest
-    permissions:
-      # Required for creating and pushing git tags.
-      contents: write
-    steps:
-      - name: Checkout current commit
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Check and Create Git Tag
-        run: |
-          TAG_NAME="${{ inputs.version }}"
-          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
-            echo "Tag '$TAG_NAME' already exists."
-            if [[ "${{ inputs.continue_if_tag_exists }}" == "true" ]]; then
-              echo "Continuing workflow as 'continue_if_tag_exists' is true. Skipping tag creation."
-              exit 0
-            else
-              echo "Error: Tag '$TAG_NAME' already exists and 'continue_if_tag_exists' is false. Aborting."
-              exit 1
-            fi
-          fi
-
-          git config --local user.email "j2cl-github-bot@github.com"
-          git config --local user.name "J2CL GitHub Bot"
-          git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
-          git push origin "$TAG_NAME"
-
   run_tests:
     needs: create_git_tag
     uses: ./.github/workflows/ci.yaml
+    with:
+      git_ref: ${{ inputs.version }}
 
   release:
     needs: run_tests
