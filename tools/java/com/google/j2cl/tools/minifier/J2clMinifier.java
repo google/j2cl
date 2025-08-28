@@ -17,27 +17,28 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.Iterables.getLast;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multiset;
+import com.google.j2cl.tools.minifier.Platform.Pattern;
 import com.google.j2cl.tools.rta.CodeRemovalInfo;
 import com.google.j2cl.tools.rta.LineRange;
 import com.google.j2cl.tools.rta.UnusedLines;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nullable;
+import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsOptional;
+import jsinterop.annotations.JsType;
 
 /**
  * A thread-safe, fast and pretty minifier/comment stripper for J2CL generated code.
@@ -57,6 +58,7 @@ import javax.annotation.Nullable;
  * So if some caller wants to optimize their minifier usage they might consider invoking it only on
  * .java.js files.
  */
+@JsType
 public class J2clMinifier {
 
   private interface TransitionFunction {
@@ -140,8 +142,8 @@ public class J2clMinifier {
       return index == -1 ? -1 : index - statementStartIndex;
     }
 
-    Matcher matchLastStatement(Pattern pattern) {
-      return pattern.matcher(contentBuffer).region(statementStartIndex, contentBuffer.length());
+    String matchLastStatement(Pattern pattern) {
+      return pattern.match(contentBuffer, statementStartIndex, contentBuffer.length());
     }
 
     void replaceStatement(String replacement) {
@@ -335,15 +337,15 @@ public class J2clMinifier {
 
     if (index == 0) {
       // Unassigned goog.require is only useful for compiler and bundling.
-      Matcher m = buffer.matchLastStatement(GOOG_REQUIRE);
-      if (m.matches()) {
+      String match = buffer.matchLastStatement(GOOG_REQUIRE);
+      if (match != null) {
         buffer.replaceStatement("");
       }
     } else {
       // goog.forwardDeclare is only useful for compiler except the variable declaration.
-      Matcher m = buffer.matchLastStatement(GOOG_FORWARD_DECLARE);
-      if (m.matches()) {
-        buffer.replaceStatement(m.group(1) + ";");
+      String match = buffer.matchLastStatement(GOOG_FORWARD_DECLARE);
+      if (match != null) {
+        buffer.replaceStatement(match + ";");
       }
     }
   }
@@ -404,7 +406,8 @@ public class J2clMinifier {
    */
   private final Multiset<String> countsByIdentifier = HashMultiset.create();
 
-  private final boolean minifierDisabled = Boolean.getBoolean("j2cl_minifier_disabled");
+  private final boolean minifierDisabled =
+      Boolean.parseBoolean(System.getProperty("j2cl_minifier_disabled"));
 
   /** Set of file paths that are not used by the application. */
   private ImmutableSet<String> unusedFiles;
@@ -423,21 +426,22 @@ public class J2clMinifier {
    * This is a cache of previously minified content (presumably whole files). This makes reloads in
    * fast concatenating uncompiled JS servers extra-extra fast.
    */
-  private final Map<String, String> minifiedContentByContent = new Hashtable<>();
+  private final Map<String, String> minifiedContentByContent = new ConcurrentHashMap<>();
 
   private final TransitionFunction[][] transFn;
 
   @VisibleForTesting Map<String, String> minifiedIdentifiersByIdentifier = new HashMap<>();
 
+  @JsIgnore
   public J2clMinifier() {
     this(null);
   }
 
-  public J2clMinifier(String codeRemovalFilePath) {
+  public J2clMinifier(@JsOptional String codeRemovalFilePath) {
     // TODO(goktug): Rename to j2cl_rta_pruning_manifest
     codeRemovalFilePath =
         System.getProperty("j2cl_rta_removal_code_info_file", codeRemovalFilePath);
-    setupRtaCodeRemoval(readCodeRemovalInfoFile(codeRemovalFilePath));
+    setupRtaCodeRemoval(Platform.readCodeRemovalInfoFile(codeRemovalFilePath));
 
     transFn = new TransitionFunction[numberOfStates][numberOfStates];
 
@@ -508,6 +512,7 @@ public class J2clMinifier {
    * Process the content of a file for converting mangled J2CL names to minified (but still pretty
    * and unique) versions and strips block comments.
    */
+  @JsIgnore
   public String minify(String content) {
     return minify(/* filePath= */ null, content);
   }
@@ -516,7 +521,7 @@ public class J2clMinifier {
    * Process the content of a file for converting mangled J2CL names to minified (but still pretty
    * and unique) versions and strips block comments.
    */
-  public String minify(String filePath, String content) {
+  public @JsNonNull String minify(String filePath, @JsNonNull String content) {
     if (minifierDisabled) {
       return content;
     }
@@ -627,20 +632,6 @@ public class J2clMinifier {
     writeNonIdentifierCharOrReplace(buffer, c);
   }
 
-  @Nullable
-  private static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath) {
-    if (codeRemovalInfoFilePath == null) {
-      return null;
-    }
-
-    try (InputStream inputStream =
-        new BufferedInputStream(new FileInputStream(codeRemovalInfoFilePath))) {
-      return CodeRemovalInfo.parseFrom(inputStream);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
   @VisibleForTesting
   void setupRtaCodeRemoval(CodeRemovalInfo codeRemovalInfo) {
     if (codeRemovalInfo != null) {
@@ -681,6 +672,7 @@ public class J2clMinifier {
    *
    * <p>Outputs results to stdout.
    */
+  @GwtIncompatible
   public static void main(String... args) throws IOException {
     checkState(args.length == 1, "Provide a input file to minify");
     String file = args[0];
