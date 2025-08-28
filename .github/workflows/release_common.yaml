@@ -71,6 +71,8 @@ jobs:
       - name: Check and Create Git Tag
         run: |
           TAG_NAME="${{ inputs.version }}"
+          git status
+          ls -a .git/refs/tags/
           if git show-ref --verify --tags --quiet "refs/tags/${TAG_NAME}" >/dev/null 2>&1; then
             echo "Tag '$TAG_NAME' already exists."
             if [[ "${{ inputs.continue_if_tag_exists }}" == "true" ]]; then
