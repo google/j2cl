@@ -60,9 +60,40 @@ on:
         required: false
 
 jobs:
+  create_git_tag:
+    runs-on: ubuntu-latest
+    permissions:
+      # Required for creating and pushing git tags.
+      contents: write
+    steps:
+      - name: Checkout current commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Check and Create Git Tag
+        run: |
+          TAG_NAME="${{ inputs.version }}"
+          if git show-ref --verify --tags --quiet "refs/tags/${TAG_NAME}" >/dev/null 2>&1; then
+            echo "Tag '$TAG_NAME' already exists."
+            if [[ "${{ inputs.continue_if_tag_exists }}" == "true" ]]; then
+              echo "Continuing workflow as 'continue_if_tag_exists' is true. Skipping tag creation."
+              exit 0
+            else
+              echo "Error: Tag '$TAG_NAME' already exists and 'continue_if_tag_exists' is false. Aborting."
+              exit 1
+            fi
+          elif git rev-parse "${TAG_NAME}" >/dev/null 2>&1; then
+            echo "Error: a ref named '$TAG_NAME' already exists and is not a tag. Aborting."
+            exit 1
+          fi
+
+          git config --local user.email "j2cl-github-bot@github.com"
+          git config --local user.name "J2CL GitHub Bot"
+          git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
+          git push origin "$TAG_NAME"
+
   publish_to_sonatype:
     runs-on: ubuntu-latest
     if: ${{ inputs.publish_to_sonatype }}
+    needs: create_git_tag
 
     steps:
       - name: Check secrets are provided
@@ -77,8 +108,10 @@ jobs:
           check_secret "SONATYPE_PASSWORD_TOKEN" "${{ secrets.SONATYPE_PASSWORD_TOKEN }}"
           check_secret "MAVEN_GPG_PRIVATE_KEY" "${{ secrets.MAVEN_GPG_PRIVATE_KEY }}"
           check_secret "MAVEN_GPG_PASSPHRASE" "${{ secrets.MAVEN_GPG_PASSPHRASE }}"
-      - name: Checkout current commit
+      - name: Checkout release tag
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ inputs.version }}
 
       # Maven and Bazel require Java to be available.
       - name: Setup Java
@@ -111,33 +144,6 @@ jobs:
           SONATYPE_PASSWORD_TOKEN: ${{ secrets.SONATYPE_PASSWORD_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-  create_git_tag:
-    runs-on: ubuntu-latest
-    permissions:
-      # Required for creating and pushing git tags.
-      contents: write
-    steps:
-      - name: Checkout current commit
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Check and Create Git Tag
-        run: |
-          TAG_NAME="${{ inputs.version }}"
-          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
-            echo "Tag '$TAG_NAME' already exists."
-            if [[ "${{ inputs.continue_if_tag_exists }}" == "true" ]]; then
-              echo "Continuing workflow as 'continue_if_tag_exists' is true. Skipping tag creation."
-              exit 0
-            else
-              echo "Error: Tag '$TAG_NAME' already exists and 'continue_if_tag_exists' is false. Aborting."
-              exit 1
-            fi
-          fi
-
-          git config --local user.email "j2cl-github-bot@github.com"
-          git config --local user.name "J2CL GitHub Bot"
-          git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
-          git push origin "$TAG_NAME"
-
   run_tests:
     needs: create_git_tag
     uses: ./.github/workflows/ci.yaml
@@ -145,7 +151,7 @@ jobs:
   release:
     needs: run_tests
     if: ${{ inputs.create_github_release }}
-    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.2
+    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.3
     with:
       prerelease: false
       release_files: ${{ github.event.repository.name }}-*.tar.gz
@@ -163,6 +169,9 @@ jobs:
       attest: true
       author_name: j2cl-github-bot
       author_email: j2cl-github-bot@google.com
+      # The PR is authored by a bot account, which requires team member approval. Therefore, we
+      # don't need to create it as a draft.
+      draft: false
     permissions:
       contents: write
       id-token: write
