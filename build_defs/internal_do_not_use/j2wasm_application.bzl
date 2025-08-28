@@ -97,8 +97,6 @@ exports = {compileStreaming, instantiate, instantiateStreaming, instantiateBlock
 def _impl_j2wasm_application(ctx):
     feature_set = ctx.attr._feature_set[BuildSettingInfo].value
     deps = [ctx.attr._jre] + ctx.attr.deps
-    srcs = _get_transitive_srcs(deps)
-    classpath = _get_transitive_classpath(deps)
     module_outputs = _get_transitive_modules(deps)
 
     # Create a module for exports.
@@ -290,12 +288,6 @@ def _impl_j2wasm_application(ctx):
         ),
         OutputGroupInfo(_validation = _trigger_javac_build(ctx.attr.deps)),
     ]
-
-def _get_transitive_srcs(deps):
-    return depset(transitive = [d[J2wasmInfo]._private_.transitive_srcs for d in deps])
-
-def _get_transitive_classpath(deps):
-    return depset(transitive = [d[J2wasmInfo]._private_.transitive_classpath for d in deps])
 
 def _get_transitive_modules(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.wasm_modular_info.transitive_modules for d in deps], order = "postorder")

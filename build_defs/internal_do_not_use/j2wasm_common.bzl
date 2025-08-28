@@ -46,13 +46,6 @@ def _create_j2wasm_provider(j2cl_provider, deps):
     modular_output = [j2cl_provider._private_.output_js] if j2cl_provider._private_.output_js else []
     return J2wasmInfo(
         _private_ = struct(
-            transitive_srcs = depset(
-                j2cl_provider._private_.java_info.source_jars,
-                transitive = [d._private_.transitive_srcs for d in j2wasm_deps],
-            ),
-            transitive_classpath = depset(
-                transitive = [d._private_.transitive_classpath for d in j2wasm_deps],
-            ),
             java_info = j2cl_provider._private_.java_info,
             js_info = j2cl_provider._private_.js_info,
             wasm_modular_info = struct(
