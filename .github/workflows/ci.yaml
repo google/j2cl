@@ -58,7 +58,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          ref: ${{ inputs.base_ref || github.ref }}
+          ref: ${{ inputs.git_ref || github.ref }}
           
       - name: Cache Bazel repositories
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
