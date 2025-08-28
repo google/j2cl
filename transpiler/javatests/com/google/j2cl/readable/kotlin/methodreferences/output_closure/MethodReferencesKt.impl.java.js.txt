@@ -11,6 +11,7 @@ let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let Function2 = goog.forwardDeclare('kotlin.jvm.functions.Function2$impl');
 let MethodReferences = goog.forwardDeclare('methodreferences.MethodReferences$impl');
 let Producer = goog.forwardDeclare('methodreferences.MethodReferences.Producer$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -66,9 +67,9 @@ class MethodReferencesKt extends j_l_Object {
   }));
   topLevelFunRef.m_invoke__java_lang_Object();
   topLevelFunRef.m_invoke__java_lang_Object();
-  let classFunRef = Function2.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<?> */ arg0, /** !(Number|number) */ arg1) =>{
+  let classFunRef = Function2.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<?> */ arg0, /** !(Number|number|!$Long) */ arg1) =>{
    let arg0_1 = /**@type {!MethodReferences<*>}*/ ($Casts.$to(arg0, MethodReferences));
-   let arg1_1 = /**@type {!(Number|number)}*/ ($Casts.$to(arg1, Number));
+   let arg1_1 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg1, Number));
    return arg0_1.m_sameAs__java_lang_Number__boolean(arg1_1);
   }));
   classFunRef.m_invoke__java_lang_Object__java_lang_Object__java_lang_Object(/**@type {!MethodReferences<!*>}*/ (MethodReferences.$create__()), Integer.valueOf(1));

@@ -33,7 +33,8 @@ class Objects {
     assertEqualsAndHashCodePresentIfExpected(obj);
 
     // Boxed Types: overrides 'equals' but doesn't need special casing as
-    // fallback covers them.
+    // fallback covers them. java.lang.Long is an exception as it's a native overlay of
+    // goog.math.Long which implements equals and thus was already handled above,
 
     // Array Types: doesn't override 'equals'.
 
@@ -52,8 +53,9 @@ class Objects {
     }
     assertEqualsAndHashCodePresentIfExpected(obj);
 
-    // Boxed Types: overrides 'hashCode'  but doesn't need special casing as
-    // fallback covers them.
+    // Boxed Types: overrides 'hashCode' but doesn't need special casing as
+    // fallback covers them; java.lang.Long is an exception as it's a native overlay of
+    // goog.math.Long which implements hashcode and thus was already handled above,
 
     // Array Types: doesn't override 'hashCode' so fall back cover them.
 
@@ -66,7 +68,7 @@ class Objects {
   }
 
   static Class<?> getClass(Object obj) {
-    // We special case 'getClass' for all types as they all corresspond to
+    // We special case 'getClass' for all types as they all correspond to
     // different classes.
     switch (JsUtils.typeOf(obj)) {
       case "number":
@@ -79,7 +81,9 @@ class Objects {
         return JavaScriptFunction.class;
     }
 
-    if (obj instanceof JavaLangObject) {
+    if (obj instanceof Long) {
+      return Long.class;
+    } else if (obj instanceof JavaLangObject) {
       JavaLangObject jlObject = (JavaLangObject) obj;
       return jlObject.getClass();
     } else if (obj instanceof JavaScriptObject[]) {

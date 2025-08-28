@@ -24,6 +24,7 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -63,8 +64,8 @@ class CastGenerics extends j_l_Object {
  }
  /** @final @nodts @template T_1, U */
  m_testErasureCast__void_$p_cast_CastGenerics() {
-  let str = /**@type {?string}*/ ($Casts.$to((/**@type {!CastGenerics<string, !(Number|number)>}*/ (CastGenerics.$create__())).m_getField__java_lang_Object(), j_l_String));
-  str = (/**@type {?string}*/ ($Casts.$to((/**@type {!CastGenerics<string, !(Number|number)>}*/ (CastGenerics.$create__())).m_method__java_lang_Object(), j_l_String)));
+  let str = /**@type {?string}*/ ($Casts.$to((/**@type {!CastGenerics<string, !(Number|number|!$Long)>}*/ (CastGenerics.$create__())).m_getField__java_lang_Object(), j_l_String));
+  str = (/**@type {?string}*/ ($Casts.$to((/**@type {!CastGenerics<string, !(Number|number|!$Long)>}*/ (CastGenerics.$create__())).m_method__java_lang_Object(), j_l_String)));
   let containerT = /**@type {!Container<T_1>}*/ (Container.$create__());
   (/**@type {!A}*/ ($Casts.$to(containerT.m_get__java_lang_Object(), /**@type {Function}*/ (A)))).m_mA__void();
   (/**@type {!B}*/ ($Casts.$to(containerT.m_get__java_lang_Object(), /**@type {Function}*/ (B)))).m_mB__void();
@@ -109,8 +110,8 @@ class CastGenerics extends j_l_Object {
  /** @final @nodts */
  m_testCastToParameterizedType__void() {
   let o = Integer.valueOf(1);
-  let cc = /**@type {!CastGenerics<Error, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
-  let cc2 = /**@type {!CastGenerics<*, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
+  let cc = /**@type {!CastGenerics<Error, (Number|number|!$Long)>}*/ ($Casts.$to(o, CastGenerics));
+  let cc2 = /**@type {!CastGenerics<*, (Number|number|!$Long)>}*/ ($Casts.$to(o, CastGenerics));
  }
  /** @final @nodts */
  m_testCastToTypeVariable__void() {
@@ -124,7 +125,7 @@ class CastGenerics extends j_l_Object {
  m_testCastToMethodTypeVariable__void() {
   let o = Integer.valueOf(1);
   let s = /**@type {S}*/ (o);
-  let c = /**@type {CastGenerics<S, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
+  let c = /**@type {CastGenerics<S, (Number|number|!$Long)>}*/ ($Casts.$to(o, CastGenerics));
   c = (/**@type {Array<S>}*/ ($Arrays.$castTo(o, j_l_Object, 1)));
   c = (/**@type {?V}*/ ($Casts.$to(o, Enum)));
  }

@@ -29,7 +29,10 @@ public interface Comparable<T> {
 
   static boolean $isInstance(HasComparableTypeMarker instance) {
     String type = JsUtils.typeOf(instance);
-    if (type.equals("boolean") || type.equals("number") || type.equals("string")) {
+    if (type.equals("boolean")
+        || type.equals("number")
+        || type.equals("string")
+        || (Object) instance instanceof Long) {
       return true;
     }
 

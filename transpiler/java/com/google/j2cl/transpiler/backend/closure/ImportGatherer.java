@@ -234,8 +234,15 @@ class ImportGatherer extends AbstractVisitor {
       return;
     }
 
+    // Number/Comparable are a type union that always includes Long, add it, but keep going.
+    if (TypeDescriptors.isJavaLangNumber(typeDescriptor)
+        || TypeDescriptors.isJavaLangComparable(typeDescriptor)) {
+      collectForJsDoc(BootstrapType.NATIVE_LONG.getDescriptor());
+    }
+
     // JsDoc for {@code long} uses NATIVE_LONG.
-    if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
+    if (TypeDescriptors.isPrimitiveLong(typeDescriptor)
+        || TypeDescriptors.isJavaLangLong(typeDescriptor)) {
       collectForJsDoc(BootstrapType.NATIVE_LONG.getDescriptor());
       return;
     }

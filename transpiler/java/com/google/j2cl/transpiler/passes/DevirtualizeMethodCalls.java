@@ -38,7 +38,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
    * Mapping from the TypeDeclaration, whose instance methods should be devirtualized, to the
    * TypeDescriptor that contains the devirtualized static methods that should be dispatched to.
    *
-   * <p>The instance methods of unboxed types (Boolean, Double, String) are translated to
+   * <p>The instance methods of unboxed types (Boolean, Double, Long, String) are translated to
    * corresponding static methods that are translated automatically by J2cl. Instance methods of
    * Object and the super classes/interfaces of unboxed types are translated to the trampoline
    * methods which are implemented in corresponding types (Objects, Numbers, etc.).
@@ -55,6 +55,9 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
               .put(
                   TypeDescriptors.get().javaLangDouble.getTypeDeclaration(),
                   TypeDescriptors.get().javaLangDouble)
+              .put(
+                  TypeDescriptors.get().javaLangLong.getTypeDeclaration(),
+                  TypeDescriptors.get().javaLangLong)
               .put(
                   TypeDescriptors.get().javaLangString.getTypeDeclaration(),
                   TypeDescriptors.get().javaLangString)

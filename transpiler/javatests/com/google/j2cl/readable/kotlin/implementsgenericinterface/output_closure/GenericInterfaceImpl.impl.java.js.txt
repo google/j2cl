@@ -5,10 +5,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 /**
  * @final
- * @implements {GenericInterface<(Number|number)>}
+ * @implements {GenericInterface<(Number|number|!$Long)>}
  */
 class GenericInterfaceImpl extends j_l_Object {
  /** @protected @nodts */

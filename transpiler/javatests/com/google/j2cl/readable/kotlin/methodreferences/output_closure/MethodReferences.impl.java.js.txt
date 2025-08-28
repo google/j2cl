@@ -18,6 +18,7 @@ let Predicate = goog.forwardDeclare('methodreferences.MethodReferences.Predicate
 let Producer = goog.forwardDeclare('methodreferences.MethodReferences.Producer$impl');
 let MethodReferencesKt = goog.forwardDeclare('methodreferences.MethodReferencesKt$impl');
 let Obj = goog.forwardDeclare('methodreferences.Obj$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
@@ -60,13 +61,13 @@ class MethodReferences extends j_l_Object {
   return null;
  }
  /** @final @nodts @return {boolean} */
- m_sameAs__java_lang_Number__boolean(/** !(Number|number) */ n) {
+ m_sameAs__java_lang_Number__boolean(/** !(Number|number|!$Long) */ n) {
   return false;
  }
  /** @final @nodts */
  m_main__void() {
-  let a = Function1.$adapt(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0) =>{
-   let arg0_1 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0, Number));
+  let a = Function1.$adapt(/**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0) =>{
+   let arg0_1 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0, Number));
    return this.m_sameAs__java_lang_Number__boolean(arg0_1);
   }));
   a.m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(1));
@@ -108,8 +109,8 @@ class MethodReferences extends j_l_Object {
   this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {!MethodReferences<T>}*/ (() =>{
    return this.m_self__methodreferences_MethodReferences();
   })));
-  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0_2) =>{
-   let arg0_3 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_2, Number));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0_2) =>{
+   let arg0_3 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0_2, Number));
    return this.m_sameAs__java_lang_Number__boolean(arg0_3);
   })));
   this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_6 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), Producer.$adapt(/**  @return {string}*/ (() =>{
@@ -121,8 +122,8 @@ class MethodReferences extends j_l_Object {
   this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(($$q_8 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), Producer.$adapt(/**  @return {!MethodReferences<T>}*/ (() =>{
    return $$q_8.m_self__methodreferences_MethodReferences();
   }))));
-  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(($$q_9 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0_4) =>{
-   let arg0_5 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_4, Number));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(($$q_9 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0_4) =>{
+   let arg0_5 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0_4, Number));
    return $$q_9.m_sameAs__java_lang_Number__boolean(arg0_5);
   }))));
   let parameterizedInstance = /**@type {!MethodReferences<string>}*/ (MethodReferences.$create__());
@@ -141,9 +142,9 @@ class MethodReferences extends j_l_Object {
    let arg0_11 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_10, MethodReferences));
    return arg0_11.m_self__methodreferences_MethodReferences();
   })));
-  this.m_acceptBiFunction__methodreferences_MethodReferences_BiFunction__void(BiFunction.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_12, /** !(Number|number) */ arg1) =>{
+  this.m_acceptBiFunction__methodreferences_MethodReferences_BiFunction__void(BiFunction.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_12, /** !(Number|number|!$Long) */ arg1) =>{
    let arg0_13 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_12, MethodReferences));
-   let arg1_1 = /**@type {!(Number|number)}*/ ($Casts.$to(arg1, Number));
+   let arg1_1 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg1, Number));
    return arg0_13.m_sameAs__java_lang_Number__boolean(arg1_1);
   })));
   this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {string}*/ (() =>{
@@ -186,8 +187,8 @@ class MethodReferences extends j_l_Object {
   this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!MethodReferences<T>}*/ (() =>{
    return this.m_self__methodreferences_MethodReferences();
   }));
-  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0_16) =>{
-   let arg0_17 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_16, Number));
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0_16) =>{
+   let arg0_17 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0_16, Number));
    return this.m_sameAs__java_lang_Number__boolean(arg0_17);
   }));
   this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(($$q_15 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), /**  @return {string}*/ (() =>{
@@ -196,8 +197,8 @@ class MethodReferences extends j_l_Object {
   this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(($$q_16 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), /**  @return {!MethodReferences<T>}*/ (() =>{
    return $$q_16.m_self__methodreferences_MethodReferences();
   })));
-  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(($$q_17 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), /**  @return {boolean}*/ ((/** !(Number|number) */ arg0_18) =>{
-   let arg0_19 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_18, Number));
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(($$q_17 = (/**@type {!MethodReferences<T>}*/ (MethodReferences.$create__())), /**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0_18) =>{
+   let arg0_19 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0_18, Number));
    return $$q_17.m_sameAs__java_lang_Number__boolean(arg0_19);
   })));
   this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {string}*/ ((/** !MethodReferences<T> */ arg0_20) =>{
@@ -208,9 +209,9 @@ class MethodReferences extends j_l_Object {
    let arg0_23 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_22, MethodReferences));
    return arg0_23.m_self__methodreferences_MethodReferences();
   }));
-  this.m_acceptJsBiFunction__methodreferences_MethodReferences_JsBiFunction__void(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_24, /** !(Number|number) */ arg1_2) =>{
+  this.m_acceptJsBiFunction__methodreferences_MethodReferences_JsBiFunction__void(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_24, /** !(Number|number|!$Long) */ arg1_2) =>{
    let arg0_25 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_24, MethodReferences));
-   let arg1_3 = /**@type {!(Number|number)}*/ ($Casts.$to(arg1_2, Number));
+   let arg1_3 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg1_2, Number));
    return arg0_25.m_sameAs__java_lang_Number__boolean(arg1_3);
   }));
   this.m_acceptFunction__methodreferences_MethodReferences_Function__java_lang_Object__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** string */ arg0_26) =>{

@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 /**
@@ -32,7 +33,7 @@ class T extends j_l_Object {
  /** @nodts @return {T_1} */
  m_n__java_lang_Number_$pp_collisions() {
   let t = (/**@type {!T<T_1>}*/ (T.$create__())).m_m__java_lang_Number_$pp_collisions();
-  $Numbers.m_byteValue__java_lang_Number__byte(/**@type {!(Number|number)}*/ (t));
+  $Numbers.m_byteValue__java_lang_Number__byte(/**@type {!(Number|number|!$Long)}*/ (t));
   return t;
  }
  /** @nodts */

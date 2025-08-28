@@ -35,14 +35,14 @@ import java.util.Optional;
  * method invocation, unary numeric promotion or binary numeric promotion conversion contexts.
  */
 public class InsertUnboxingConversions extends NormalizationPass {
-  private final boolean areBooleanAndDoubleBoxed;
+  private final boolean areBooleanAndDoubleAndLongBoxed;
 
   public InsertUnboxingConversions() {
     this(false);
   }
 
-  public InsertUnboxingConversions(boolean areBooleanAndDoubleBoxed) {
-    this.areBooleanAndDoubleBoxed = areBooleanAndDoubleBoxed;
+  public InsertUnboxingConversions(boolean areBooleanAndDoubleAndLongBoxed) {
+    this.areBooleanAndDoubleAndLongBoxed = areBooleanAndDoubleAndLongBoxed;
   }
 
   @Override
@@ -132,7 +132,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
 
     MethodCall methodCall = RuntimeMethods.createUnboxingMethodCall(expression, boxType);
 
-    if (!areBooleanAndDoubleBoxed && TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
+    if (!areBooleanAndDoubleAndLongBoxed && TypeDescriptors.isBoxedBooleanOrDoubleOrLong(boxType)) {
       methodCall = AstUtils.devirtualizeMethodCall(methodCall, boxType);
     }
     return methodCall;

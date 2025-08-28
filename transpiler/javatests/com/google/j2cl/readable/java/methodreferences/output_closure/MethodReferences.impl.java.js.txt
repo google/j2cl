@@ -64,7 +64,7 @@ class MethodReferences extends j_l_Object {
   return null;
  }
  /** @nodts @return {boolean} */
- m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(/** !(Number|number) */ n) {
+ m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(/** !(Number|number|!$Long) */ n) {
   return false;
  }
  /** @nodts @template U, V */
@@ -85,13 +85,13 @@ class MethodReferences extends j_l_Object {
   let parameterizedFactory = Producer.$adapt(/**  @return {string}*/ (() =>{
    return /**@type {string}*/ ($Casts.$to(parameterizedInstance.m_t__java_lang_Object_$pp_methodreferences(), j_l_String));
   }));
-  let biFunction = BiFunction.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0, /** !(Number|number) */ arg1) =>{
+  let biFunction = BiFunction.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0, /** !(Number|number|!$Long) */ arg1) =>{
    let arg0_1 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0, MethodReferences));
-   let arg1_1 = /**@type {!(Number|number)}*/ ($Casts.$to(arg1, Number));
+   let arg1_1 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg1, Number));
    return arg0_1.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg1_1);
   }));
-  let functionWithParameters = MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number) */ arg0_2) =>{
-   let arg0_3 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_2, Number));
+  let functionWithParameters = MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0_2) =>{
+   let arg0_3 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0_2, Number));
    return this.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg0_3);
   }));
   let objectPredicate = Predicate.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_4) =>{
@@ -182,13 +182,13 @@ class MethodReferences extends j_l_Object {
   let jsSuperToStringProducer = /**  @return {?string}*/ (() =>{
    return j_l_Object.prototype.toString.call(this);
   });
-  let jsbiFunction = /**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_37, /** !(Number|number) */ arg1_2) =>{
+  let jsbiFunction = /**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_37, /** !(Number|number|!$Long) */ arg1_2) =>{
    let arg0_38 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_37, MethodReferences));
-   let arg1_3 = /**@type {!(Number|number)}*/ ($Casts.$to(arg1_2, Number));
+   let arg1_3 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg1_2, Number));
    return arg0_38.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg1_3);
   });
-  let jsFunctionWithParameters = /**  @return {boolean}*/ ((/** !(Number|number) */ arg0_39) =>{
-   let arg0_40 = /**@type {!(Number|number)}*/ ($Casts.$to(arg0_39, Number));
+  let jsFunctionWithParameters = /**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0_39) =>{
+   let arg0_40 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0_39, Number));
    return this.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg0_40);
   });
   objectFactory = (/**@type {!Producer<!*>}*/ (Producer.$adapt(/**  @return {?}*/ (() =>{

@@ -10,7 +10,6 @@ let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let Long = goog.forwardDeclare('java.lang.Long$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
@@ -289,9 +288,9 @@ class Arrays extends j_l_Object {
   let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $$long, /**  @return {!$Long}*/ ((/** number */ it_3) =>{
    return $Primitives.widenIntToLong(it_3);
   })));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $$long, ArrayHelpersKt.m_toLongArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_LongArrayInitializer(Function1.$adapt(/**  @return {!Long}*/ ((/** !Integer */ arg0_10) =>{
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $$long, ArrayHelpersKt.m_toLongArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_LongArrayInitializer(Function1.$adapt(/**  @return {!$Long}*/ ((/** !Integer */ arg0_10) =>{
    let arg0_11 = /**@type {!Integer}*/ ($Casts.$to(arg0_10, Integer));
-   return Long.m_valueOf__long__java_lang_Long(arg0_11.m_longValue__long());
+   return arg0_11.m_longValue__long();
   }))))));
  }
  /** @final @nodts @return {number} */
@@ -332,7 +331,6 @@ class Arrays extends j_l_Object {
   SomeObject = goog.module.get('array.SomeObject$impl');
   Boolean = goog.module.get('java.lang.Boolean$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
-  Long = goog.module.get('java.lang.Long$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');

@@ -19,7 +19,7 @@ java.lang.Byte      | java.lang.Byte \| null      |
 java.lang.Character | java.lang.Character \| null |
 java.lang.Short     | java.lang.Short \| null     |
 java.lang.Integer   | java.lang.Integer \| null   |
-java.lang.Long      | java.lang.Long \| null      |
+java.lang.Long      | goog.math.Long \| null      | See Boxing section below
 java.lang.Float     | java.lang.Float \| null     |
 java.lang.Double    | number \| null              | See Boxing section below
 java.lang.String    | string \| null              | See Boxing section below
@@ -30,10 +30,10 @@ java.lang.Object    | \*                          | See Boxing section below
 [Boxed types](https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html)
 add a noticeable amount of performance overhead to JavaScript. To eliminate this
 overhead, J2CL never uses boxed representation for Double, String and Boolean.
-Double becomes a JavaScript number and Boolean becomes a JavaScript boolean.
-It's not possible to use plain numbers for boxed Integers because it leads to
-ambiguity. For example, the instanceof operator wouldn't be able to distinguish
-between Integer and Double:
+Double becomes a JavaScript number, Boolean becomes a JavaScript boolean, and
+Long becomes a `goog.math.Long`. It's not possible to use plain numbers for
+boxed Integers because it leads to ambiguity. For example, the instanceof
+operator wouldn't be able to distinguish between Integer and Double:
 
 ```java
 Object foo = new Double(42)
@@ -73,6 +73,8 @@ JavaScript number type.
 JavaScript does not natively support longs. J2CL emulates longs using the
 Closure long library:
 [goog.math.Long](http://google3/third_party/javascript/closure/math/long.js)
+
+There is a one-to-one mapping between Java Long/long and the JavaScript `goog.math.Long` type.
 
 ### Boolean
 

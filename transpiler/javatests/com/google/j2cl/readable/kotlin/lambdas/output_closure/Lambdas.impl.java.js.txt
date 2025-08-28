@@ -4,7 +4,6 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
-let Long = goog.forwardDeclare('java.lang.Long$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
@@ -165,9 +164,9 @@ class Lambdas extends j_l_Object {
    let y_3 = /**@type {string}*/ ($Casts.$to(y_2, j_l_String));
    return 3;
   })));
-  let f = Lambdas_Function.$adapt(/**  @return {!Long}*/ ((/** T */ item) =>{
+  let f = Lambdas_Function.$adapt(/**  @return {!$Long}*/ ((/** T */ item) =>{
    let item_1 = /**@type {T}*/ ($Casts.$to(item, Enum));
-   return Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));
+   return $Long.fromInt(1);
   }));
   let f2 = Lambdas_Function.$adapt(/**  @return {?string}*/ ((/** !Wrapper<string> */ item_2) =>{
    let item_3 = /**@type {!Wrapper<string>}*/ ($Casts.$to(item_2, Wrapper));
@@ -214,7 +213,6 @@ class Lambdas extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Enum = goog.module.get('java.lang.Enum$impl');
-  Long = goog.module.get('java.lang.Long$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   $LambdaAdaptor$1 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$1$impl');

@@ -17,6 +17,7 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
@@ -61,8 +62,8 @@ class ForEachStatement extends j_l_Object {
    let __$exc = $Exceptions.toJava(__$jsexc);
    if (Exception1.$isInstance(__$exc) || Exception2.$isInstance(__$exc)) {
     let e = /**@type {(Exception1|Exception2)}*/ (__$exc);
-    for (let $iterator = (/**@type {Iterable<(Number|number)>}*/ ($Casts.$to(e, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
-     let o = /**@type {(Number|number)}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Number));
+    for (let $iterator = (/**@type {Iterable<(Number|number|!$Long)>}*/ ($Casts.$to(e, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+     let o = /**@type {(Number|number|!$Long)}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Number));
     }
    } else if (Exception3.$isInstance(__$exc) || Exception4.$isInstance(__$exc)) {
     let e_1 = /**@type {(Exception3|Exception4)}*/ (__$exc);

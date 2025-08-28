@@ -189,10 +189,10 @@ class RangeOperatorsKt extends j_l_Object {
    } while (i_31 != last_11);
   }
   let from = Short.m_valueOf__short__java_lang_Short(1);
-  let to = Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));
+  let to = $Long.fromInt(1);
   if (!$Equality.$same(from, null) && !$Equality.$same(to, null)) {
    let inductionVariable_32 = $Primitives.widenShortToLong(from.m_shortValue__short());
-   let last_12 = to.m_longValue__long();
+   let last_12 = Long.m_longValue__java_lang_Long__long(to);
    if ($LongUtils.lessEquals(inductionVariable_32, last_12)) {
     let /** !$Long */ i_32;
     do {
@@ -200,7 +200,7 @@ class RangeOperatorsKt extends j_l_Object {
      inductionVariable_32 = $LongUtils.plus(inductionVariable_32, $Long.fromInt(1));
     } while ($LongUtils.notEquals(i_32, last_12));
    }
-   for (let inductionVariable_33 = $Primitives.widenShortToLong(from.m_shortValue__short()), last_13 = to.m_longValue__long(); $LongUtils.less(inductionVariable_33, last_13); inductionVariable_33 = $LongUtils.plus(inductionVariable_33, $Long.fromInt(1))) {
+   for (let inductionVariable_33 = $Primitives.widenShortToLong(from.m_shortValue__short()), last_13 = Long.m_longValue__java_lang_Long__long(to); $LongUtils.less(inductionVariable_33, last_13); inductionVariable_33 = $LongUtils.plus(inductionVariable_33, $Long.fromInt(1))) {
     let i_33 = inductionVariable_33;
    }
   }

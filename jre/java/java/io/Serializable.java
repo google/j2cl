@@ -33,6 +33,7 @@ public interface Serializable {
     return type.equals("boolean")
         || type.equals("number")
         || type.equals("string")
+        || (Object) instance instanceof Long
         || instance.getTypeMarker()
         // Arrays are implicitly instances of Serializable (JLS 10.7).
         || ArrayHelper.isArray(instance);

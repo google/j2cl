@@ -72,8 +72,8 @@ class ArithmeticExpressions extends j_l_Object {
   q = 3 >>> 2 | 0;
   let x = $Primitives.narrowIntToByte(Math.imul($Primitives.narrowIntToShort(a) + $Primitives.narrowIntToByte($Primitives.narrowIntToShort(b)), $Primitives.narrowIntToShort($Primitives.narrowIntToByte(c))));
   let y = 121 /* 'y' */;
-  let z = Long.m_valueOf__long__java_lang_Long($Long.fromInt(121));
-  k = $LongUtils.equals($Primitives.widenCharToLong(y), z.m_longValue__long());
+  let z = $Long.fromInt(121);
+  k = $LongUtils.equals($Primitives.widenCharToLong(y), Long.m_longValue__java_lang_Long__long(z));
  }
  /** @nodts */
  m_testDoubleAssignments__void() {

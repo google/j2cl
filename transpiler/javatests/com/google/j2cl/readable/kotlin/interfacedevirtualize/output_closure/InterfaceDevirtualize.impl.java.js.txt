@@ -8,6 +8,7 @@ let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 
 /**
@@ -30,15 +31,15 @@ class InterfaceDevirtualize extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @final @nodts @template T @return {number} */
- m_compare0__java_lang_Comparable__java_lang_Object__int(/** !(Comparable<?>|boolean|number|string) */ c, /** T */ t) {
+ m_compare0__java_lang_Comparable__java_lang_Object__int(/** !(Comparable<?>|boolean|number|string|!$Long) */ c, /** T */ t) {
   return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, t);
  }
  /** @final @nodts @return {number} */
- m_compare1__java_lang_Comparable__java_lang_Object__int(/** !(Comparable<?>|boolean|number|string) */ c, /** * */ o) {
+ m_compare1__java_lang_Comparable__java_lang_Object__int(/** !(Comparable<?>|boolean|number|string|!$Long) */ c, /** * */ o) {
   return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, o);
  }
  /** @final @nodts @return {number} */
- m_compare2__java_lang_Comparable__java_lang_Double__int(/** !(Comparable<?>|boolean|number|string) */ c, /** ?number */ d) {
+ m_compare2__java_lang_Comparable__java_lang_Double__int(/** !(Comparable<?>|boolean|number|string|!$Long) */ c, /** ?number */ d) {
   return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, d);
  }
  /** @final @nodts */
@@ -47,7 +48,7 @@ class InterfaceDevirtualize extends j_l_Object {
   Double.m_compare__double__double__int(d1, Double.m_doubleValue__java_lang_Double__double(d2));
  }
  /** @final @nodts @return {number} */
- m_compare2__java_lang_Comparable__java_lang_Boolean__int(/** !(Comparable<?>|boolean|number|string) */ c, /** ?boolean */ d) {
+ m_compare2__java_lang_Comparable__java_lang_Boolean__int(/** !(Comparable<?>|boolean|number|string|!$Long) */ c, /** ?boolean */ d) {
   return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, d);
  }
  /** @final @nodts */
@@ -56,7 +57,7 @@ class InterfaceDevirtualize extends j_l_Object {
   Boolean.m_compare__boolean__boolean__int(d1, Boolean.m_booleanValue__java_lang_Boolean__boolean(d2));
  }
  /** @final @nodts @return {number} */
- m_compare2__java_lang_Comparable__java_lang_Integer__int(/** !(Comparable<?>|boolean|number|string) */ c, /** Integer */ d) {
+ m_compare2__java_lang_Comparable__java_lang_Integer__int(/** !(Comparable<?>|boolean|number|string|!$Long) */ c, /** Integer */ d) {
   return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(c, d);
  }
  /** @final @nodts */

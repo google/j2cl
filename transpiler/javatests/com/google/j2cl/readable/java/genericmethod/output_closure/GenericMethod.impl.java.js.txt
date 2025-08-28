@@ -15,6 +15,7 @@ let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -66,7 +67,7 @@ class GenericMethod extends j_l_Object {
  }
  /** @nodts */
  m_test__void() {
-  let g = /**@type {!GenericMethod<(Number|number)>}*/ (GenericMethod.$create__());
+  let g = /**@type {!GenericMethod<(Number|number|!$Long)>}*/ (GenericMethod.$create__());
   g.m_foo__java_lang_Object__java_lang_Object__void(g, g);
   g.m_foo__java_lang_Object__java_lang_Object__void(Error.$create__(), Exception.$create__());
   g.m_fun__java_lang_Object__void(j_l_Object.$create__());

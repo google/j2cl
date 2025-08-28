@@ -200,6 +200,7 @@ public final class Long extends Number implements Comparable<Long> {
     return valueOf(parseLong(s, radix));
   }
 
+  // Note that 'value' field is special and used for unboxing by the J2CL transpiler.
   private final long value;
 
   public Long(long value) {
@@ -212,51 +213,55 @@ public final class Long extends Number implements Comparable<Long> {
 
   @Override
   public byte byteValue() {
-    return (byte) value;
+    return (byte) longValue();
   }
 
   @Override
   public int compareTo(Long b) {
-    return compare(value, b.value);
+    return compare(longValue(), b.longValue());
   }
 
   @Override
   public double doubleValue() {
-    return value;
+    return longValue();
   }
 
   @Override
   public boolean equals(Object o) {
-    return (o instanceof Long) && (((Long) o).value == value);
+    return (o instanceof Long) && (((Long) o).longValue() == longValue());
   }
 
   @Override
   public float floatValue() {
-    return value;
+    return longValue();
   }
 
   @Override
   public int hashCode() {
-    return hashCode(value);
+    return hashCode(longValue());
   }
 
   @Override
   public int intValue() {
-    return (int) value;
+    return (int) longValue();
   }
 
   @Override
   public long longValue() {
-    return value;
+    return this.value;
   }
 
   @Override
   public short shortValue() {
-    return (short) value;
+    return (short) longValue();
   }
 
   @Override
   public String toString() {
     return toString(value);
+  }
+
+  public static boolean $isInstance(Object instance) {
+    return LongUtils.isNativeLong(instance);
   }
 }

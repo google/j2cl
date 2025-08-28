@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 /**
@@ -34,7 +35,7 @@ class T extends j_l_Object {
  /** @final @nodts @return {?T_1} */
  m_n__java_lang_Number() {
   let t = (/**@type {!T<T_1>}*/ (T.$create__())).m_m__java_lang_Number();
-  $Numbers.m_byteValue__java_lang_Number__byte(/**@type {!(Number|number)}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(t)));
+  $Numbers.m_byteValue__java_lang_Number__byte(/**@type {!(Number|number|!$Long)}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(t)));
   return t;
  }
  /** @nodts */

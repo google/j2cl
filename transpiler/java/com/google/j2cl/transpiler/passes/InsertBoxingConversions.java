@@ -34,10 +34,10 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
  * assignment or method invocation conversion contexts.
  */
 public class InsertBoxingConversions extends NormalizationPass {
-  private final boolean areBooleanAndDoubleBoxed;
+  private final boolean areBooleanAndDoubleAndLongBoxed;
 
-  public InsertBoxingConversions(boolean areBooleanAndDoubleBoxed) {
-    this.areBooleanAndDoubleBoxed = areBooleanAndDoubleBoxed;
+  public InsertBoxingConversions(boolean areBooleanAndDoubleAndLongBoxed) {
+    this.areBooleanAndDoubleAndLongBoxed = areBooleanAndDoubleAndLongBoxed;
   }
 
   @Override
@@ -120,8 +120,8 @@ public class InsertBoxingConversions extends NormalizationPass {
   private boolean needsBoxing(TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
     return !TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
         && TypeDescriptors.isNonVoidPrimitiveType(fromTypeDescriptor)
-        && (areBooleanAndDoubleBoxed
-            || !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor))
+        && (areBooleanAndDoubleAndLongBoxed
+            || !TypeDescriptors.isPrimitiveBooleanOrDoubleOrLong(fromTypeDescriptor))
         // Boxing/unboxing for JsEnum is done in another pass.
         && !isBoxableJsEnumType(toTypeDescriptor);
   }

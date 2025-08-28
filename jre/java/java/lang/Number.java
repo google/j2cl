@@ -129,7 +129,9 @@ public abstract class Number implements Serializable {
   private static class JavaLangNumber { }
 
   static boolean $isInstance(Object instance) {
-    return "number".equals(JsUtils.typeOf(instance)) || instance instanceof JavaLangNumber;
+    return "number".equals(JsUtils.typeOf(instance))
+        || instance instanceof Long
+        || instance instanceof JavaLangNumber;
   }
 
   /**

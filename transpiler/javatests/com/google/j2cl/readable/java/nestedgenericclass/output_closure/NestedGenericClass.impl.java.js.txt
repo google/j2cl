@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $1E = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.$1E$impl');
 let $1F = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.$1F$impl');
 let $1G = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.$1G$impl');
@@ -44,11 +45,11 @@ class NestedGenericClass extends j_l_Object {
  }
  /** @nodts */
  m_test__void() {
-  let n = /**@type {!NestedGenericClass<(Number|number)>}*/ (NestedGenericClass.$create__());
-  let a = /**@type {!A<Error, (Number|number)>}*/ (A.$create__nestedgenericclass_NestedGenericClass(n));
-  let b = /**@type {!B<Exception, Error, (Number|number)>}*/ (B.$create__nestedgenericclass_NestedGenericClass_A(a));
+  let n = /**@type {!NestedGenericClass<(Number|number|!$Long)>}*/ (NestedGenericClass.$create__());
+  let a = /**@type {!A<Error, (Number|number|!$Long)>}*/ (A.$create__nestedgenericclass_NestedGenericClass(n));
+  let b = /**@type {!B<Exception, Error, (Number|number|!$Long)>}*/ (B.$create__nestedgenericclass_NestedGenericClass_A(a));
   C.$create__nestedgenericclass_NestedGenericClass(n);
-  D.$create__nestedgenericclass_NestedGenericClass_C(/**@type {!C<(Number|number)>}*/ (C.$create__nestedgenericclass_NestedGenericClass(n)));
+  D.$create__nestedgenericclass_NestedGenericClass_C(/**@type {!C<(Number|number|!$Long)>}*/ (C.$create__nestedgenericclass_NestedGenericClass(n)));
  }
  /** @nodts */
  static $clinit() {

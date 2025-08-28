@@ -40,7 +40,6 @@ public class Main {
     assertTrue(new Byte((byte) 1) != new Byte((byte) 1));
     assertTrue(new Short((byte) 1) != new Short((byte) 1));
     assertTrue(new Integer(1) != new Integer(1));
-    assertTrue(new Long(1L) != new Long(1L));
 
     if (!isJavaScript()) {
       // Can't honor in JS; these constructors return native objects in JS.
@@ -48,6 +47,7 @@ public class Main {
       assertTrue(new Boolean(true) != new Boolean(true));
       assertTrue(new Float(1) != new Float(1));
       assertTrue(new Double(1) != new Double(1));
+      assertTrue(new Long(1L) != new Long(1L));
     }
   }
 

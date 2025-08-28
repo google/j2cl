@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
-let Long = goog.forwardDeclare('java.lang.Long$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let CollectionsKt = goog.forwardDeclare('kotlin.collections.CollectionsKt$impl');
@@ -110,7 +109,7 @@ class Varargs extends j_l_Object {
   v.m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void('foo', ['bar']);
   v.m_testOverloaded__java_lang_Object__void('');
   v.m_testOverloaded__long__void($Long.fromInt(1));
-  v.m_testOverloaded__java_lang_Object__void(Long.m_valueOf__long__java_lang_Long($Long.fromInt(1)));
+  v.m_testOverloaded__java_lang_Object__void(/**@type {$Long}*/ ($Long.fromInt(1)));
   v.m_testOverloaded__long__void($Long.fromInt(1));
   v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $$long)));
   v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $$long)));
@@ -128,7 +127,6 @@ class Varargs extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  Long = goog.module.get('java.lang.Long$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   CollectionsKt = goog.module.get('kotlin.collections.CollectionsKt$impl');

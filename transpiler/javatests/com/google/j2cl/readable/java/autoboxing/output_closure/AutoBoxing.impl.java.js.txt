@@ -62,9 +62,9 @@ class AutoBoxing extends j_l_Object {
  m_box__int__java_lang_Integer(/** number */ i) {
   return Integer.valueOf(i);
  }
- /** @nodts @return {Long} */
+ /** @nodts @return {$Long} */
  m_box__long__java_lang_Long(/** !$Long */ l) {
-  return Long.m_valueOf__long__java_lang_Long(l);
+  return l;
  }
  /** @nodts @return {Short} */
  m_box__short__java_lang_Short(/** number */ s) {
@@ -95,8 +95,8 @@ class AutoBoxing extends j_l_Object {
   return i.intValue();
  }
  /** @nodts @return {!$Long} */
- m_unbox__java_lang_Long__long(/** Long */ l) {
-  return l.m_longValue__long();
+ m_unbox__java_lang_Long__long(/** $Long */ l) {
+  return Long.m_longValue__java_lang_Long__long(l);
  }
  /** @nodts @return {number} */
  m_unbox__java_lang_Short__short(/** Short */ s) {
@@ -168,7 +168,7 @@ class AutoBoxing extends j_l_Object {
   let boxB = Byte.m_valueOf__byte__java_lang_Byte(b);
   let boxF = Float.m_valueOf__float__java_lang_Float(f);
   let boxI = Integer.valueOf(i);
-  let boxL = Long.m_valueOf__long__java_lang_Long(l);
+  let boxL = l;
   let boxS = Short.m_valueOf__short__java_lang_Short(s);
   let boxC = Character.m_valueOf__char__java_lang_Character(c);
   boxBool = true;
@@ -176,7 +176,7 @@ class AutoBoxing extends j_l_Object {
   boxB = Byte.m_valueOf__byte__java_lang_Byte(1);
   boxF = Float.m_valueOf__float__java_lang_Float(1.100000023841858);
   boxI = Integer.valueOf(1);
-  boxL = Long.m_valueOf__long__java_lang_Long($Long.fromInt(2));
+  boxL = $Long.fromInt(2);
   boxS = Short.m_valueOf__short__java_lang_Short(1);
   boxC = Character.m_valueOf__char__java_lang_Character(1 /* '\u0001' */);
   boxC = Character.m_valueOf__char__java_lang_Character(97 /* 'a' */);
@@ -185,7 +185,7 @@ class AutoBoxing extends j_l_Object {
   b = this.m_unbox__java_lang_Byte__byte(Byte.m_valueOf__byte__java_lang_Byte(b));
   f = this.m_unbox__java_lang_Float__float(Float.m_valueOf__float__java_lang_Float(f));
   i = this.m_unbox__java_lang_Integer__int(Integer.valueOf(i));
-  l = this.m_unbox__java_lang_Long__long(Long.m_valueOf__long__java_lang_Long(l));
+  l = this.m_unbox__java_lang_Long__long(l);
   s = this.m_unbox__java_lang_Short__short(Short.m_valueOf__short__java_lang_Short(s));
   c = this.m_unbox__java_lang_Character__char(Character.m_valueOf__char__java_lang_Character(c));
   let unusedDouble = this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double(4);
@@ -200,14 +200,14 @@ class AutoBoxing extends j_l_Object {
   boxBool = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool);
   boxD = Double.m_doubleValue__java_lang_Double__double(boxD) + Double.m_doubleValue__java_lang_Double__double(boxD);
   boxI = Integer.valueOf($Primitives.coerceDivision(boxI.intValue() / boxI.intValue()));
-  boxL = Long.m_valueOf__long__java_lang_Long($LongUtils.divide(boxL.m_longValue__long(), boxL.m_longValue__long()));
+  boxL = $LongUtils.divide(Long.m_longValue__java_lang_Long__long(boxL), Long.m_longValue__java_lang_Long__long(boxL));
   boxBool = !Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool);
   boxI = Integer.valueOf(+ boxI.intValue());
   boxI = Integer.valueOf(- boxI.intValue() | 0);
   boxI = Integer.valueOf(boxI.intValue() << boxI.intValue());
-  boxI = Integer.valueOf(boxI.intValue() << $Primitives.narrowLongToInt(boxL.m_longValue__long()));
-  boxL = Long.m_valueOf__long__java_lang_Long($LongUtils.leftShift(boxL.m_longValue__long(), boxI.intValue()));
-  boxL = Long.m_valueOf__long__java_lang_Long($LongUtils.leftShift(boxL.m_longValue__long(), $Primitives.narrowLongToInt(boxL.m_longValue__long())));
+  boxI = Integer.valueOf(boxI.intValue() << $Primitives.narrowLongToInt(Long.m_longValue__java_lang_Long__long(boxL)));
+  boxL = $LongUtils.leftShift(Long.m_longValue__java_lang_Long__long(boxL), boxI.intValue());
+  boxL = $LongUtils.leftShift(Long.m_longValue__java_lang_Long__long(boxL), $Primitives.narrowLongToInt(Long.m_longValue__java_lang_Long__long(boxL)));
   o = Integer.valueOf(15);
  }
  /** @nodts */
@@ -225,7 +225,7 @@ class AutoBoxing extends j_l_Object {
   let b = boxB.m_byteValue__byte();
   let f = boxF.m_floatValue__float();
   let i = boxI.intValue();
-  let l = boxL.m_longValue__long();
+  let l = Long.m_longValue__java_lang_Long__long(boxL);
   let s = boxS.m_shortValue__short();
   let c = boxC.m_charValue__char();
   boxBool = this.m_box__boolean__java_lang_Boolean(Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool));
@@ -233,19 +233,19 @@ class AutoBoxing extends j_l_Object {
   boxB = this.m_box__byte__java_lang_Byte(boxB.m_byteValue__byte());
   boxF = this.m_box__float__java_lang_Float(boxF.m_floatValue__float());
   boxI = this.m_box__int__java_lang_Integer(boxI.intValue());
-  boxL = this.m_box__long__java_lang_Long(boxL.m_longValue__long());
+  boxL = this.m_box__long__java_lang_Long(Long.m_longValue__java_lang_Long__long(boxL));
   boxS = this.m_box__short__java_lang_Short(boxS.m_shortValue__short());
   boxC = this.m_box__char__java_lang_Character(boxC.m_charValue__char());
   d = boxB.m_byteValue__byte();
   d = boxF.m_floatValue__float();
   d = boxI.intValue();
-  d = $Primitives.widenLongToDouble(boxL.m_longValue__long());
+  d = $Primitives.widenLongToDouble(Long.m_longValue__java_lang_Long__long(boxL));
   d = boxS.m_shortValue__short();
   d = boxC.m_charValue__char();
   this.m_takesAndReturnsPrimitiveDouble__double__double(boxB.m_byteValue__byte());
   this.m_takesAndReturnsPrimitiveDouble__double__double(boxF.m_floatValue__float());
   this.m_takesAndReturnsPrimitiveDouble__double__double(boxI.intValue());
-  this.m_takesAndReturnsPrimitiveDouble__double__double($Primitives.widenLongToDouble(boxL.m_longValue__long()));
+  this.m_takesAndReturnsPrimitiveDouble__double__double($Primitives.widenLongToDouble(Long.m_longValue__java_lang_Long__long(boxL)));
   this.m_takesAndReturnsPrimitiveDouble__double__double(boxS.m_shortValue__short());
   this.m_takesAndReturnsPrimitiveDouble__double__double(boxC.m_charValue__char());
   let v = this.m_takesAndReturnsVoid__java_lang_Void__java_lang_Void(this.m_takesAndReturnsVoid__java_lang_Void__java_lang_Void(null));
@@ -253,7 +253,7 @@ class AutoBoxing extends j_l_Object {
   d = Double.m_doubleValue__java_lang_Double__double(boxD) + Double.m_doubleValue__java_lang_Double__double(boxD);
   f = boxF.m_floatValue__float() - boxF.m_floatValue__float();
   i = Math.imul(boxI.intValue(), boxI.intValue());
-  l = $LongUtils.divide(boxL.m_longValue__long(), boxL.m_longValue__long());
+  l = $LongUtils.divide(Long.m_longValue__java_lang_Long__long(boxL), Long.m_longValue__java_lang_Long__long(boxL));
   bool = !Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool);
   i = + boxI.intValue();
   i = - boxI.intValue() | 0;
@@ -265,9 +265,9 @@ class AutoBoxing extends j_l_Object {
   }
   i = i + (boxI = Integer.valueOf(boxI.intValue() + (i = i + boxI.intValue() | 0) | 0)).intValue() | 0;
   i <<= boxI.intValue();
-  i <<= $Primitives.narrowLongToInt(boxL.m_longValue__long());
+  i <<= $Primitives.narrowLongToInt(Long.m_longValue__java_lang_Long__long(boxL));
   l = $LongUtils.leftShift(l, boxI.intValue());
-  l = $LongUtils.leftShift(l, $Primitives.narrowLongToInt(boxL.m_longValue__long()));
+  l = $LongUtils.leftShift(l, $Primitives.narrowLongToInt(Long.m_longValue__java_lang_Long__long(boxL)));
  }
  /** @nodts */
  m_testUnboxingBoolean__void() {
@@ -372,29 +372,29 @@ class AutoBoxing extends j_l_Object {
  /** @nodts @template T */
  static m_testUnboxingFromTypeVariable__void() {
   AutoBoxing.$clinit();
-  let n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($Long.fromInt(10)));
-  let l = (/**@type {!Long}*/ (n)).m_longValue__long();
+  let n = /**@type {T}*/ ($Long.fromInt(10));
+  let l = Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n));
   $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(10)));
-  n = (/**@type {?T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
-  n = (/**@type {?T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
+  n = $LongUtils.plus(Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n)), $Long.fromInt(1));
+  n = $LongUtils.plus(Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n)), $Long.fromInt(1));
   let /** ?T */ $value;
-  n = ($value = n, n = (/**@type {?T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1))))), $value);
-  n = n = (/**@type {?T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
-  l = (/**@type {!$1Local<Long, T>}*/ ($1Local.$create__())).m_toLong__java_lang_Long__long_$pp_autoboxing(Long.m_valueOf__long__java_lang_Long($Long.fromInt(11)));
+  n = ($value = n, n = $LongUtils.plus(Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n)), $Long.fromInt(1)), $value);
+  n = n = $LongUtils.plus(Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n)), $Long.fromInt(1));
+  l = (/**@type {!$1Local<$Long, T>}*/ ($1Local.$create__())).m_toLong__java_lang_Long__long_$pp_autoboxing($Long.fromInt(11));
   $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(11)));
  }
  /** @nodts @template T */
  static m_testUnboxingFromIntersectionType__void() {
   AutoBoxing.$clinit();
-  let n = /**@type {T}*/ (Long.m_valueOf__long__java_lang_Long($Long.fromInt(10)));
-  let l = (/**@type {!Long}*/ (n)).m_longValue__long();
+  let n = /**@type {T}*/ ($Long.fromInt(10));
+  let l = Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n));
   $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(10)));
-  n = (/**@type {?T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
-  n = (/**@type {?T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
+  n = $LongUtils.plus(Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n)), $Long.fromInt(1));
+  n = $LongUtils.plus(Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n)), $Long.fromInt(1));
   let /** ?T */ $value;
-  n = ($value = n, n = (/**@type {?T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1))))), $value);
-  n = n = (/**@type {?T}*/ (Long.m_valueOf__long__java_lang_Long($LongUtils.plus((/**@type {!Long}*/ (n)).m_longValue__long(), $Long.fromInt(1)))));
-  l = (/**@type {!$2Local<Long, T>}*/ ($2Local.$create__())).m_toLong__java_lang_Long__long_$pp_autoboxing(Long.m_valueOf__long__java_lang_Long($Long.fromInt(11)));
+  n = ($value = n, n = $LongUtils.plus(Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n)), $Long.fromInt(1)), $value);
+  n = n = $LongUtils.plus(Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (n)), $Long.fromInt(1));
+  l = (/**@type {!$2Local<$Long, T>}*/ ($2Local.$create__())).m_toLong__java_lang_Long__long_$pp_autoboxing($Long.fromInt(11));
   $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(11)));
   let i = Integer.valueOf(10).intValue();
  }

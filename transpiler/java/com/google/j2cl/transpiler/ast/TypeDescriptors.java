@@ -265,9 +265,10 @@ public class TypeDescriptors {
     return typeDescriptor.isPrimitive() && !isPrimitiveVoid(typeDescriptor);
   }
 
-  public static boolean isBoxedBooleanOrDouble(TypeDescriptor typeDescriptor) {
+  public static boolean isBoxedBooleanOrDoubleOrLong(TypeDescriptor typeDescriptor) {
     return TypeDescriptors.isJavaLangBoolean(typeDescriptor)
-        || TypeDescriptors.isJavaLangDouble(typeDescriptor);
+        || TypeDescriptors.isJavaLangDouble(typeDescriptor)
+        || TypeDescriptors.isJavaLangLong(typeDescriptor);
   }
 
   public static boolean isPrimitiveBoolean(TypeDescriptor typeDescriptor) {
@@ -310,8 +311,10 @@ public class TypeDescriptors {
     return typeDescriptor == PrimitiveTypes.VOID;
   }
 
-  public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
-    return isPrimitiveBoolean(typeDescriptor) || isPrimitiveDouble(typeDescriptor);
+  public static boolean isPrimitiveBooleanOrDoubleOrLong(TypeDescriptor typeDescriptor) {
+    return isPrimitiveBoolean(typeDescriptor)
+        || isPrimitiveDouble(typeDescriptor)
+        || isPrimitiveLong(typeDescriptor);
   }
 
   public static boolean isJavaLangObject(TypeDescriptor typeDescriptor) {
@@ -421,7 +424,7 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
-    return isBoxedBooleanOrDouble(typeDescriptor)
+    return isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || isJavaLangString(typeDescriptor)
         || isJavaLangVoid(typeDescriptor);
   }

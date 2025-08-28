@@ -10,6 +10,7 @@ let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let Bounded = goog.forwardDeclare('variance.Bounded$impl');
 let Constrained = goog.forwardDeclare('variance.Constrained$impl');
 let Container = goog.forwardDeclare('variance.Container$impl');
@@ -63,8 +64,8 @@ class VarianceKt extends j_l_Object {
   boundedStar = $3.$create__();
   let /** string */ sBounded;
   sBounded = (/**@type {string}*/ ($Casts.$to((/**@type {!$3}*/ (boundedStar)).m_mList__variance_Container__variance_Container(/**@type {!Container<string>}*/ (Container.$create__java_lang_Object('Initial'))).m_getT__java_lang_Object(), j_l_String)));
-  let constrainedStar = /**@type {!Constrained<(Comparable|boolean|number|string)>}*/ ($Casts.$to(j_l_Object.$create__(), /**@type {Function}*/ (Constrained)));
-  constrainedStar = (/**@type {!Constrained<(Comparable|boolean|number|string)>}*/ ($Casts.$to(VarianceKt.m_returnsT__java_lang_Object(), /**@type {Function}*/ (Constrained))));
+  let constrainedStar = /**@type {!Constrained<(Comparable|boolean|number|string|!$Long)>}*/ ($Casts.$to(j_l_Object.$create__(), /**@type {Function}*/ (Constrained)));
+  constrainedStar = (/**@type {!Constrained<(Comparable|boolean|number|string|!$Long)>}*/ ($Casts.$to(VarianceKt.m_returnsT__java_lang_Object(), /**@type {Function}*/ (Constrained))));
   constrainedStar = $4.$create__();
   let /** !(CharSequence|string) */ sConstrained;
   sConstrained = (/**@type {string}*/ ($Casts.$to((/**@type {!$4}*/ (constrainedStar)).m_mList__variance_Container__variance_Container(/**@type {!Container<string>}*/ (Container.$create__java_lang_Object('Initial'))).m_getT__java_lang_Object(), j_l_String)));

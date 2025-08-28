@@ -8,9 +8,10 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 /**
- * @implements {Iterable<(Number|number)>}
+ * @implements {Iterable<(Number|number|!$Long)>}
  */
 class Exception1 extends Exception {
  /** @protected @nodts */
@@ -29,7 +30,7 @@ class Exception1 extends Exception {
  $ctor__foreachstatement_ForEachStatement_Exception1__void() {
   this.$ctor__java_lang_Exception__void();
  }
- /** @override @nodts @return {Iterator<(Number|number)>} */
+ /** @override @nodts @return {Iterator<(Number|number|!$Long)>} */
  m_iterator__java_util_Iterator() {
   return null;
  }
@@ -39,9 +40,9 @@ class Exception1 extends Exception {
   Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
  }
  //Default method forwarding stub.
- /** @override @nodts @return {Spliterator<(Number|number)>} */
+ /** @override @nodts @return {Spliterator<(Number|number|!$Long)>} */
  m_spliterator__java_util_Spliterator() {
-  return /**@type {Spliterator<(Number|number)>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
+  return /**@type {Spliterator<(Number|number|!$Long)>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
  }
  /** @nodts */
  static $clinit() {

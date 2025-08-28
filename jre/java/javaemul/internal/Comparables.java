@@ -29,6 +29,9 @@ class Comparables {
       case "string":
         return JsUtils.<String>uncheckedCast(a).compareTo((String) b);
     }
+    if (a instanceof Long) {
+      return JsUtils.<Long>uncheckedCast(a).compareTo((Long) b);
+    }
     return a.compareTo(b);
   }
 }

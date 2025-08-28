@@ -15,6 +15,10 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.annotations.DoNotAutobox;
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
+
 /** Defines utility static functions for long */
 public final class LongUtils {
 
@@ -27,6 +31,10 @@ public final class LongUtils {
   public static int getHighBits(long value) {
     return (int) (value >>> 32);
   }
+
+  @JsMethod
+  @Wasm("nop") // Unused in Wasm.
+  public static native boolean isNativeLong(@DoNotAutobox Object instance);
 
   private LongUtils() {}
 }

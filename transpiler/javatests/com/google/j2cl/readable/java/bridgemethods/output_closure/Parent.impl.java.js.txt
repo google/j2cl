@@ -5,11 +5,12 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @template T
- * @extends {SuperParent<T, (Number|number)>}
+ * @extends {SuperParent<T, (Number|number|!$Long)>}
  */
 class Parent extends SuperParent {
  /** @protected @nodts */
@@ -28,15 +29,15 @@ class Parent extends SuperParent {
   this.$ctor__bridgemethods_SuperParent__void();
  }
  /** @nodts */
- m_foo__java_lang_Error__java_lang_Number__void(/** T */ t, /** (Number|number) */ s) {}
+ m_foo__java_lang_Error__java_lang_Number__void(/** T */ t, /** (Number|number|!$Long) */ s) {}
  /** @nodts @template T_1 */
  m_bar__java_lang_Number__void(/** T_1 */ t) {}
  /** @nodts @template T_1 */
  m_fun__java_lang_Object__void(/** T_1 */ t) {}
  //Bridge method.
  /** @final @override @nodts */
- m_foo__java_lang_Object__java_lang_Object__void(/** T */ arg0, /** (Number|number) */ arg1) {
-  this.m_foo__java_lang_Error__java_lang_Number__void(/**@type {T}*/ ($Casts.$to(arg0, Error)), /**@type {(Number|number)}*/ ($Casts.$to(arg1, Number)));
+ m_foo__java_lang_Object__java_lang_Object__void(/** T */ arg0, /** (Number|number|!$Long) */ arg1) {
+  this.m_foo__java_lang_Error__java_lang_Number__void(/**@type {T}*/ ($Casts.$to(arg0, Error)), /**@type {(Number|number|!$Long)}*/ ($Casts.$to(arg1, Number)));
  }
  /** @nodts */
  static $clinit() {

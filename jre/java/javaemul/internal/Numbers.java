@@ -26,6 +26,9 @@ class Numbers {
     if (obj instanceof Double) {
       Double d = (Double) obj;
       return d.byteValue();
+    } else if (obj instanceof Long) {
+      Long l = (Long) obj;
+      return l.byteValue();
     }
     return obj.byteValue();
   }
@@ -34,6 +37,9 @@ class Numbers {
     if (obj instanceof Double) {
       Double d = (Double) obj;
       return d.doubleValue();
+    } else if (obj instanceof Long) {
+      Long l = (Long) obj;
+      return l.doubleValue();
     }
     return obj.doubleValue();
   }
@@ -42,6 +48,9 @@ class Numbers {
     if (obj instanceof Double) {
       Double d = (Double) obj;
       return d.floatValue();
+    } else if (obj instanceof Long) {
+      Long l = (Long) obj;
+      return l.floatValue();
     }
     return obj.floatValue();
   }
@@ -50,6 +59,9 @@ class Numbers {
     if (obj instanceof Double) {
       Double d = (Double) obj;
       return d.intValue();
+    } else if (obj instanceof Long) {
+      Long l = (Long) obj;
+      return l.intValue();
     }
     return obj.intValue();
   }
@@ -58,6 +70,9 @@ class Numbers {
     if (obj instanceof Double) {
       Double d = (Double) obj;
       return d.longValue();
+    } else if (obj instanceof Long) {
+      Long l = (Long) obj;
+      return l.longValue();
     }
     return obj.longValue();
   }
@@ -66,6 +81,9 @@ class Numbers {
     if (obj instanceof Double) {
       Double d = (Double) obj;
       return d.shortValue();
+    } else if (obj instanceof Long) {
+      Long l = (Long) obj;
+      return l.shortValue();
     }
     return obj.shortValue();
   }

@@ -3,6 +3,7 @@ goog.module('bridgemethods.SomeInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 /**
  * @interface
@@ -12,7 +13,7 @@ class SomeInterface {
  /** @abstract @nodts */
  m_foo__java_lang_Object__java_lang_Object__void(/** T */ t, /** S */ s) {}
  /** @abstract @nodts */
- m_foo__java_lang_Object__java_lang_Number__void(/** T */ t, /** (Number|number) */ n) {}
+ m_foo__java_lang_Object__java_lang_Number__void(/** T */ t, /** (Number|number|!$Long) */ n) {}
  /** @nodts */
  static $clinit() {
   SomeInterface.$clinit = () =>{};

@@ -15,6 +15,7 @@ let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.DoubleDoubleJsBiF
 let JsFunctionImplementation = goog.forwardDeclare('jsfunction.JsFunctionImplementation$impl');
 let TIntegerJsBiFunction = goog.forwardDeclare('jsfunction.TIntegerJsBiFunction$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
@@ -213,9 +214,9 @@ class MainKt extends j_l_Object {
   (!$Equality.$same(c, null) ? c.m_getFn__jsfunction_ParametricJsFunction() : null)('');
  }
  /** @nodts @return {*} */
- static m_callInterfaceProjected__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(/** function(?, ?):? */ f, /** * */ o, /** (Number|number) */ n) {
+ static m_callInterfaceProjected__jsfunction_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(/** function(?, ?):? */ f, /** * */ o, /** (Number|number|!$Long) */ n) {
   MainKt.$clinit();
-  return (/**@type {function(*, (Number|number)):*}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(f)))(o, n);
+  return (/**@type {function(*, (Number|number|!$Long)):*}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(f)))(o, n);
  }
  /** @nodts @return {?string} */
  static m_callInterfaceParameterized__jsfunction_JsBiFunction__java_lang_String__java_lang_String(/** function(?string, Integer):?string */ f, /** ?string */ s) {
@@ -266,7 +267,7 @@ class MainKt extends j_l_Object {
   let o = /**@type {!TIntegerJsBiFunction<string>}*/ (TIntegerJsBiFunction.$create__());
   let rawTIntegerJsBiFunction = /**@type {!TIntegerJsBiFunction<*>}*/ ($Casts.$to(o, TIntegerJsBiFunction));
   let parameterizedTIntegerJsBiFunction = /**@type {!TIntegerJsBiFunction<string>}*/ ($Casts.$to(o, TIntegerJsBiFunction));
-  let anotherRawJsBiFunction = /**@type {function(*, (Number|number)):*}*/ ($Casts.$to(o, $JavaScriptFunction));
+  let anotherRawJsBiFunction = /**@type {function(*, (Number|number|!$Long)):*}*/ ($Casts.$to(o, $JavaScriptFunction));
   let anotherParameterizedJsBiFunction = /**@type {function(string, !Integer):string}*/ ($Casts.$to(o, $JavaScriptFunction));
   let doubleDoubleJsBiFunction = /**@type {!DoubleDoubleJsBiFunction}*/ ($Casts.$to(o, DoubleDoubleJsBiFunction));
  }

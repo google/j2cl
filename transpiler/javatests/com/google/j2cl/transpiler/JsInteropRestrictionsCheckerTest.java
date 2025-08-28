@@ -4370,18 +4370,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'a' in 'B Buggy.f4(B a)' is not usable by but"
                 + " exposed to JavaScript.",
-            "[unusable-by-js] Return type of 'Long Buggy.f5(Long a)' is not usable by but exposed"
-                + " to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'Long Buggy.f5(Long a)' is not usable"
-                + " by but exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'void Buggy.f6(Long... a)' is not"
-                + " usable by but exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'l' in 'void Buggy.f7(List<MyJsEnum> l)' is not "
                 + "usable by but exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'l' in 'void Buggy.f8(List<List<MyJsEnum>> l)' is "
-                + "not usable by but exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'void <anonymous> extends Object.b(Long a)'"
-                + " is not usable by but exposed to JavaScript.")
+                + "not usable by but exposed to JavaScript.")
         .assertLastMessage(
             "Suppress \"[unusable-by-js]\" warnings by adding a "
                 + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the "

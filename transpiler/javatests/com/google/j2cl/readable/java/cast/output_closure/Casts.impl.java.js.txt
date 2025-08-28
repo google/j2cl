@@ -15,6 +15,7 @@ let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Casts extends j_l_Object {
@@ -50,9 +51,9 @@ class Casts extends j_l_Object {
   let d = /**@type {?number}*/ ($Casts.$to(o, Double));
   let f = /**@type {Float}*/ ($Casts.$to(o, Float));
   let i = /**@type {Integer}*/ ($Casts.$to(o, Integer));
-  let l = /**@type {Long}*/ ($Casts.$to(o, Long));
+  let l = /**@type {$Long}*/ ($Casts.$to(o, Long));
   let s = /**@type {Short}*/ ($Casts.$to(o, Short));
-  let n = /**@type {(Number|number)}*/ ($Casts.$to(o, Number));
+  let n = /**@type {(Number|number|!$Long)}*/ ($Casts.$to(o, Number));
   let c = /**@type {Character}*/ ($Casts.$to(o, Character));
   let bool = /**@type {?boolean}*/ ($Casts.$to(o, Boolean));
  }

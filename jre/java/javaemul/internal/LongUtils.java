@@ -148,6 +148,10 @@ public class LongUtils {
     return JsUtils.uncheckedCast(l);
   }
 
+  public static boolean isNativeLong(@DoNotAutobox Object instance) {
+    return instance instanceof NativeLong;
+  }
+
   @JsType(isNative = true, name = "Long", namespace = "nativebootstrap")
   static class NativeLong {
     public static native long fromBits(int lowBits, int highBits);
