@@ -38,17 +38,13 @@ load(":j2kt_common.bzl", "j2kt_common")
 load(":j2kt_library.bzl", "J2KT_JVM_LIB_ATTRS", "J2KT_NATIVE_LIB_ATTRS", "j2kt_jvm_library", "j2kt_native_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
-load(":provider.bzl", "J2clInfo", "J2wasmInfo")
+load(":provider.bzl", "J2clInfo")
 
 _KOTLIN_STDLIB_TARGET = "//build_defs/internal_do_not_use:kotlin_stdlib"
 _JRE_J2KT_TARGET = "//third_party/java_src/xplat/j2kt/jre/java:jre-j2kt-web"
 
 def _tree_artifact_proxy_impl(ctx):
-    files = []
-    if J2clInfo in ctx.attr.j2cl_library:
-        files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
-    elif J2wasmInfo in ctx.attr.j2cl_library:
-        files = ctx.attr.j2cl_library[J2wasmInfo]._private_.j2cl_info._private_.output_js
+    files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
     return DefaultInfo(files = depset([files]), runfiles = ctx.runfiles([files]))
 
 _tree_artifact_proxy = rule(
@@ -156,16 +152,6 @@ def j2cl_library(
             name = j2wasm_library_name,
             tags = auto_generated_targets_tags + ["j2wasm"],
             **j2wasm_args
-        )
-
-        # TODO(b/36549068): remove this workaround when tree artifacts can be
-        # declared as the rule output.
-        _tree_artifact_proxy(
-            name = j2wasm_library_name + ".modular",
-            j2cl_library = ":" + j2wasm_library_name,
-            visibility = ["//visibility:private"],
-            tags = auto_generated_targets_tags,
-            testonly = args.get("testonly", 0),
         )
 
     j2kt_native_library_name = j2kt_common.to_j2kt_native_name(name)
