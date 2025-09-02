@@ -26,7 +26,7 @@ def _impl_j2wasm_library_rule(ctx):
     if ctx.attr.optimize_autovalue:
         extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
 
-    return [j2wasm_common.compile(
+    j2wasm_provider = j2wasm_common.compile(
         ctx = ctx,
         name = ctx.label.name,
         srcs = ctx.files.srcs,
@@ -36,7 +36,14 @@ def _impl_j2wasm_library_rule(ctx):
         exported_plugins = [p[JavaPluginInfo] for p in ctx.attr.exported_plugins],
         output_jar = ctx.outputs.jar,
         javac_opts = extra_javacopts + ctx.attr.javacopts,
-    )]
+    )
+
+    outputs = [ctx.outputs.jar]
+    output = j2wasm_provider._private_.output
+    if output:
+        outputs.append(output)
+
+    return [DefaultInfo(files = depset(outputs)), j2wasm_provider]
 
 def _j2wasm_or_js_providers_of(deps):
     return [_j2wasm_or_js_provider_of(d) for d in deps]
