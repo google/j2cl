@@ -180,8 +180,10 @@ internal interface SpecializingReturnInterface {
   fun foo(): String?
 }
 
-internal abstract class SpecializingReturnAbstractSubClass :
-  SpecializingReturnAbstractClass(), SpecializingReturnInterface
+internal abstract class SpecializingReturnAbstractSubclass :
+  SpecializingReturnAbstractClass(), SpecializingReturnInterface {
+  // foo(Object) should be a bridge method.
+}
 
 // Repro for b/357043910
 interface InterfaceWithDefaultMethod {
@@ -199,8 +201,3 @@ internal abstract class DoesNotInheritDefaultMethod1 :
 
 internal abstract class DoesNotInheritDefaultMethod2 :
   InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod
-
-internal abstract class SpecializingReturnAbstractSubclass :
-  SpecializingReturnAbstractClass(), SpecializingReturnInterface {
-  // foo(Object) should be a bridge method.
-}
