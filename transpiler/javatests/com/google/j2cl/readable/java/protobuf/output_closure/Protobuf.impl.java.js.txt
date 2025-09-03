@@ -3,6 +3,7 @@ goog.module('protobuf.Protobuf$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let ExtensionLite = goog.forwardDeclare('com.google.protobuf.ExtensionLite$impl');
 let GeneratedMessage = goog.forwardDeclare('com.google.protobuf.GeneratedMessage$impl');
 let MyEnum = goog.forwardDeclare('protobuf.MyEnum$impl');
 let MyMessage = goog.forwardDeclare('protobuf.MyMessage$impl');
@@ -52,6 +53,10 @@ class Protobuf extends j_l_Object {
   let generatedMessageParser = (/**@type {GeneratedMessage}*/ (message)).m_getParserForType__com_google_protobuf_Parser();
   let enumOne = MyEnum.f_ONE__protobuf_MyEnum;
   let enumOneNumber = MyEnum.f_ONE__protobuf_MyEnum.m_getNumber__int();
+ }
+ /** @nodts @template T */
+ m_testExtension__com_google_protobuf_ExtensionLite__void(/** !ExtensionLite<T> */ extension) {
+  let i = extension.m_getNumber__int();
  }
  /** @nodts */
  static $clinit() {

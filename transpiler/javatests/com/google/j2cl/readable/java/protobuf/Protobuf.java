@@ -16,6 +16,7 @@
 package protobuf;
 
 import com.google.j2objc.annotations.ObjectiveCName;
+import com.google.protobuf.ExtensionLite;
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Parser;
 import org.jspecify.annotations.NullMarked;
@@ -70,6 +71,10 @@ public class Protobuf {
 
     MyEnum enumOne = MyEnum.ONE;
     int enumOneNumber = MyEnum.ONE.getNumber();
+  }
+
+  public <T> void testExtension(ExtensionLite<T> extension) {
+    int i = extension.getNumber();
   }
 
   public static class Test {
