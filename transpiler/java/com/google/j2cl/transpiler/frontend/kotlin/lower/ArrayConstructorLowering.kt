@@ -243,7 +243,8 @@ private fun escapesScope(irFunction: IrFunction): Boolean {
 /**
  * Rewrites array constructor call by inlining the initializer function in a loop at the call-site.
  *
- * Copied from org.jetbrains.kotlin.backend.common.lower.ArrayConstructorTransformer
+ * Copied from
+ * compiler/ir/backend.common/src/org/jetbrains/kotlin/backend/common/lower/ArrayConstructorLowering.kt
  */
 private class ArrayConstructorTransformer(
   val context: CommonBackendContext,

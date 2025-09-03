@@ -108,16 +108,6 @@ import org.jetbrains.org.objectweb.asm.commons.Method
  * the JVM backend in a few corner cases.
  */
 
-// MODIFIED BY GOOGLE
-//
-// internal val bridgePhase = makeIrFilePhase(
-//   ::BridgeLowering,
-//   name = "Bridge",
-//   description = "Generate bridges",
-//   prerequisite = setOf(jvmInlineClassPhase)
-// )
-//
-
 /**
  * Inserts bridges to implement the semantics of collection methods that are marked with
  *
@@ -127,6 +117,9 @@ import org.jetbrains.org.objectweb.asm.commons.Method
  *
  * The original pass creates all needed bridges for the JVM, so only the relevant part of creating
  * the special bridges is retained here.
+ *
+ * Copied and modified from
+ * compiler/ir/backend.jvm/lower/src/org/jetbrains/kotlin/backend/jvm/lower/BridgeLowering.kt
  */
 internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPass {
   // Represents a synthetic bridge to `overridden` with a precomputed signature

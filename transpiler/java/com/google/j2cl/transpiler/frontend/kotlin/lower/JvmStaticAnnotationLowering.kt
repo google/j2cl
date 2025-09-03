@@ -32,7 +32,8 @@ import org.jetbrains.kotlin.resolve.annotations.JVM_STATIC_ANNOTATION_FQ_NAME
  * Makes `@JvmStatic` functions in non-companion objects static and replaces all call sites in the
  * module.
  *
- * Copied and modified from org.jetbrains.kotlin.backend.common.lower.JvmStaticAnnotationLowering.
+ * Copied and modified from
+ * compiler/ir/backend.jvm/lower/src/org/jetbrains/kotlin/backend/jvm/lower/JvmStaticAnnotationLowering.kt
  */
 internal class JvmStaticInObjectLowering(val context: JvmBackendContext) : FileLoweringPass {
   override fun lower(irFile: IrFile) =

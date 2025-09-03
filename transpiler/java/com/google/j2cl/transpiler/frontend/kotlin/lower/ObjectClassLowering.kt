@@ -30,7 +30,8 @@ import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
  * Adds a static field for object declarations (singletons) to hold the unique instance for the
  * class.
  *
- * Copied and modified from org.jetbrains.kotlin.ir.backend.jvm.lower.ObjectClassLowering.kt
+ * Copied and modified from
+ * compiler/ir/backend.jvm/lower/src/org/jetbrains/kotlin/backend/jvm/lower/ObjectClassLowering.kt
  */
 internal class ObjectClassLowering(val context: JvmBackendContext) : ClassLoweringPass {
   private val pendingTransformations = mutableListOf<Function0<Unit>>()

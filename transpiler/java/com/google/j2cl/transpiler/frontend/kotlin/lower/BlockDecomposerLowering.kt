@@ -37,7 +37,8 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMap
 /**
  * A pass that transforms statement-like-expression nodes into pure-statement.
  *
- * Copied and modified from org.jetbrains.kotlin.ir.backend.js.lower.BlockDecomposerLowering.kt
+ * Copied and modified from
+ * compiler/ir/backend.js/src/org/jetbrains/kotlin/ir/backend/js/lower/BlockDecomposerLowering.kt
  */
 // MODIFIED BY GOOGLE
 // Replace the reference to JsIrBackendContext by JvmBackendContext. We currently run the koltin

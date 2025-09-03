@@ -19,10 +19,12 @@ import kotlin.jvm.functions.Function1;
 import org.jetbrains.kotlin.backend.common.FileLoweringPass;
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext;
 import org.jetbrains.kotlin.backend.jvm.lower.ExternalPackageParentPatcherLowering;
+import org.jetbrains.kotlin.backend.jvm.lower.FileClassLowering;
 import org.jetbrains.kotlin.backend.jvm.lower.JvmInventNamesForLocalClasses;
 import org.jetbrains.kotlin.backend.jvm.lower.JvmLateinitLowering;
 import org.jetbrains.kotlin.backend.jvm.lower.JvmLocalClassPopupLowering;
 import org.jetbrains.kotlin.backend.jvm.lower.JvmPropertiesLowering;
+import org.jetbrains.kotlin.backend.jvm.lower.JvmReturnableBlockLowering;
 import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering;
 
 /**
@@ -34,7 +36,6 @@ import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering;
 final class SmuggledJvmLoweringPasses {
   static final Function1<JvmBackendContext, FileLoweringPass> jvmLocalClassPopupLoweringFactory =
       JvmLocalClassPopupLowering::new;
-
   static final Function1<JvmBackendContext, FileLoweringPass>
       externalPackageParentPatcherLoweringFactory = ExternalPackageParentPatcherLowering::new;
   static final Function1<JvmBackendContext, FileLoweringPass> jvmInventNamesForLocalClassesFactory =
@@ -45,6 +46,10 @@ final class SmuggledJvmLoweringPasses {
       JvmLateinitLowering::new;
   static final Function1<JvmBackendContext, FileLoweringPass> jvmPropertiesLoweringFactory =
       JvmPropertiesLowering::new;
+  static final Function1<JvmBackendContext, FileLoweringPass> fileClassLoweringFactory =
+      FileClassLowering::new;
+  static final Function1<JvmBackendContext, FileLoweringPass> jvmReturnableBlockLoweringFactory =
+      JvmReturnableBlockLowering::new;
 
   private SmuggledJvmLoweringPasses() {}
 }

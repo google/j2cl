@@ -45,7 +45,8 @@ import org.jetbrains.kotlin.types.TypeCheckerState
 /**
  * Inserts stub methods for missing mutable methods on Kotlin read-only collection types.
  *
- * Copied and modified from org.jetbrains.kotlin.backend.jvm.lower.CollectionStubMethodLowering.kt
+ * Copied and modified from
+ * compiler/ir/backend.jvm/lower/src/org/jetbrains/kotlin/backend/jvm/lower/CollectionStubMethodLowering.kt
  */
 internal class CollectionStubMethodLowering(val context: JvmBackendContext) : ClassLoweringPass {
   private val collectionStubComputer = context.collectionStubComputer

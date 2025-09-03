@@ -67,7 +67,7 @@ private val loweringPhase = loweringPhase {
   // Remove typealias declarations from the IR.
   perFileLowering(::StripTypeAliasDeclarationsLowering)
   // Put file level function and property declaration into a class.
-  moduleLowering(::FileClassLowering)
+  moduleLowering(fileClassLoweringFactory)
   // Invent names for local classes and anonymous objects. Later passes may require all classes
   // to have a name for computing function signature.
   perFileLowering(jvmInventNamesForLocalClassesFactory)
@@ -109,7 +109,7 @@ private val loweringPhase = loweringPhase {
   // Inline function bodies are inlined in a IrReturnableBlock that can contain a return
   // statement. Lower IrReturnableBlocks as labelled blocks, introduce a temporary variable for
   // keeping the returned value and lower return statements inside the block to break statement.
-  perFileLowering(::J2CLReturnableBlockLowering)
+  perFileLowering(jvmReturnableBlockLoweringFactory)
   // Optimize for loops on arrays and integer like progressions.
   perFileLowering(::ForLoopsLowering)
   // Replace null varargs with empty array calls.

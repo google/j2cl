@@ -33,6 +33,10 @@ import org.jetbrains.kotlin.ir.visitors.*
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
+/**
+ * Copied and modified from
+ * compiler/ir/ir.inline/src/org/jetbrains/kotlin/ir/inline/FunctionInlining.kt
+ */
 open class FunctionInlining(
   val context: LoweringContext,
   private val inlineFunctionResolver: InlineFunctionResolver,

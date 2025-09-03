@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
-// Copied and modified from org.jetbrains.kotlin.ir.inline.InlineFunctionBodyPreprocessor.
-
+// Copied and modified from
+// compiler/ir/ir.inline/src/org/jetbrains/kotlin/ir/inline/InlineFunctionBodyPreprocessor.kt
 private enum class NonReifiedTypeParameterRemappingMode {
   LEAVE_AS_IS,
   SUBSTITUTE,

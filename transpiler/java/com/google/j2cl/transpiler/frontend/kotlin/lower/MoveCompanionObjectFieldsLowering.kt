@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 /**
  * Move and/or copy companion object fields to static fields of companion's owner.
  *
- * Copied and modified from:
- * org.jetbrains.kotlin.backend.jvm.lower.MoveCompanionObjectFieldsLowering.kt.
+ * Copied and modified from
+ * compiler/ir/backend.jvm/lower/src/org/jetbrains/kotlin/backend/jvm/lower/MoveCompanionObjectFieldsLowering.kt
  */
 // MODIFIED BY GOOGLE
 // Removed compiler phase definition and increased visibility of the lowering class itself.

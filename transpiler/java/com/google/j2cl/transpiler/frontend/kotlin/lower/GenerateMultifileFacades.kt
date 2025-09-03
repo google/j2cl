@@ -66,7 +66,8 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmBackendErrors
  * - Finally, it updates call sites of functions from parts to point to the corresponding function
  *   from the facade.
  *
- * Copied and modified from org.jetbrains.kotlin.backend.jvm.lower.GenerateMultifileFacades.kt.
+ * Copied and modified from
+ * compiler/ir/backend.jvm/lower/src/org/jetbrains/kotlin/backend/jvm/lower/GenerateMultifileFacades.kt
  */
 internal class GenerateMultifileFacades(private val context: JvmBackendContext) :
   ModuleLoweringPass {
