@@ -71,6 +71,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.sanitizedName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.simpleSourceName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.singleAbstractMethod
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
+import org.jetbrains.kotlin.backend.common.defaultArgumentsDispatchFunction
 import org.jetbrains.kotlin.backend.common.defaultArgumentsOriginalFunction
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -646,9 +647,11 @@ internal class KotlinEnvironment(
           MethodDescriptor.ParameterDescriptor.newBuilder()
             .setTypeDescriptor(getTypeDescriptor(type))
             // A parameter is only considered optional if it has a default initializer AND it's
-            // default bridge function.
+            // default bridge function, or is its own dispatch function.
             .setOptional(
-              param.defaultValue != null && irFunction.defaultArgumentsOriginalFunction != null
+              param.defaultValue != null &&
+                (irFunction.defaultArgumentsOriginalFunction != null ||
+                  irFunction == irFunction.defaultArgumentsDispatchFunction)
             )
             .setJsOptional(param.isJsOptional)
             .setAnnotations(createAnnotations(param))

@@ -27,6 +27,7 @@ fun main(vararg unused: String) {
   testJsConstructors()
   testMethods()
   testExtFun()
+  testLocalFun()
   testComplexDefault()
   testDefaultInitializerCallsWithDefaults()
   testVarargs()
@@ -96,6 +97,34 @@ private fun testExtFun() {
   assertEquals(23, DefaultParams(b = 2).extFun())
   assertEquals(6, DefaultParams(b = 2).extFunWithDefault())
   assertEquals(7, DefaultParams(b = 2).extFunWithDefault(4))
+}
+
+fun testLocalFun() {
+  fun localFun(a: Int, b: Int = 1) = a + b
+  assertEquals(11, localFun(10))
+  assertEquals(30, localFun(10, 20))
+
+  fun localFunWithNonPrimitive(o: Any? = "defaulted", unused: Any? = null) = o
+
+  assertEquals("defaulted", localFunWithNonPrimitive())
+  assertEquals("test", localFunWithNonPrimitive("test"))
+
+  object {
+      fun testInNestedObj() {
+        fun nestedLocalFun(a: Int, b: Int = 1) = a + b
+
+        assertEquals(11, nestedLocalFun(10))
+        assertEquals(30, nestedLocalFun(10, 20))
+
+        // Also try calling the local funs from the outer scope
+        assertEquals(11, localFun(10))
+        assertEquals(30, localFun(10, 20))
+
+        assertEquals("defaulted", localFunWithNonPrimitive())
+        assertEquals("test", localFunWithNonPrimitive("test"))
+      }
+    }
+    .testInNestedObj()
 }
 
 fun complexDefault(

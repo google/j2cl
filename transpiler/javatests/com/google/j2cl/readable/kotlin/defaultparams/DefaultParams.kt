@@ -55,6 +55,37 @@ fun testExtFun() {
   DefaultParams(b = 2).extFunWithDefault(123)
 }
 
+fun testLocalFun() {
+  fun localFun(a: Int, b: Int = 1) = a + b
+  localFun(10)
+  localFun(10, 20)
+
+  fun localFunWithNonPrimitive(o: Any? = Any(), unused: Any? = null) = o
+
+  val someValue = Any()
+  localFunWithNonPrimitive()
+  localFunWithNonPrimitive(someValue)
+  localFunWithNonPrimitive("test")
+
+  val nestedObj =
+    object {
+      fun doSomething() {
+        fun nestedLocalFun(a: Int, b: Int = 1) = a + b
+
+        nestedLocalFun(10)
+        nestedLocalFun(10, 20)
+
+        // Also try calling the local funs from the outer scope
+        localFun(10)
+        localFun(10, 20)
+
+        localFunWithNonPrimitive()
+        localFunWithNonPrimitive(someValue)
+        localFunWithNonPrimitive("test")
+      }
+    }
+}
+
 fun complexDefault(
   a: Int,
   b: Int =

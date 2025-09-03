@@ -1,0 +1,87 @@
+goog.module('defaultparams.DefaultParamsKt.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
+
+/**
+ * @final
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?function(number, number=):number} @nodts*/
+  this.$captured_localFun__defaultparams_DefaultParamsKt_1;
+  /**@type {?function(*=, *=):*} @nodts*/
+  this.$captured_localFunWithNonPrimitive__defaultparams_DefaultParamsKt_1;
+  /**@type {!*} @nodts*/
+  this.$captured_someValue__defaultparams_DefaultParamsKt_1;
+ }
+ /** @nodts @return {!$1} */
+ static $create__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction0__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction1__java_lang_Object(/** ?function(number, number=):number */ $captured_localFun, /** ?function(*=, *=):* */ $captured_localFunWithNonPrimitive, /** !* */ $captured_someValue) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__defaultparams_DefaultParamsKt_1__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction0__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction1__java_lang_Object__void($captured_localFun, $captured_localFunWithNonPrimitive, $captured_someValue);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_DefaultParamsKt_1__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction0__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction1__java_lang_Object__void(/** ?function(number, number=):number */ $captured_localFun, /** ?function(*=, *=):* */ $captured_localFunWithNonPrimitive, /** !* */ $captured_someValue) {
+  this.$captured_localFun__defaultparams_DefaultParamsKt_1 = $captured_localFun;
+  this.$captured_localFunWithNonPrimitive__defaultparams_DefaultParamsKt_1 = $captured_localFunWithNonPrimitive;
+  this.$captured_someValue__defaultparams_DefaultParamsKt_1 = $captured_someValue;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_doSomething__void() {
+  let nestedLocalFun = /**  @return {number}*/ ((/** number */ a, /** number= */ b) =>{
+   if (JsUtils.isUndefined(b)) {
+    b = 1;
+   }
+   return a + b | 0;
+  });
+  nestedLocalFun(10, /**@type {number}*/ (undefined));
+  nestedLocalFun(10, 20);
+  {
+   let $function = this.$captured_localFun__defaultparams_DefaultParamsKt_1;
+   $function(10, /**@type {number}*/ (undefined));
+  }
+  {
+   let $function_1 = this.$captured_localFun__defaultparams_DefaultParamsKt_1;
+   $function_1(10, 20);
+  }
+  {
+   let $function_2 = this.$captured_localFunWithNonPrimitive__defaultparams_DefaultParamsKt_1;
+   $function_2(undefined, undefined);
+  }
+  {
+   let $function_3 = this.$captured_localFunWithNonPrimitive__defaultparams_DefaultParamsKt_1;
+   $function_3(JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(this.$captured_someValue__defaultparams_DefaultParamsKt_1), undefined);
+  }
+  {
+   let $function_4 = this.$captured_localFunWithNonPrimitive__defaultparams_DefaultParamsKt_1;
+   $function_4(/**@type {string}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object('test')), undefined);
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
+ }
+}
+$Util.$setClassMetadata($1, 'defaultparams.DefaultParamsKt$1');
+
+exports = $1;
+
+//# sourceMappingURL=DefaultParamsKt$1.js.map

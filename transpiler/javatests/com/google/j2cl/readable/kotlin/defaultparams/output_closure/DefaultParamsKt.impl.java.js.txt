@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let DefaultParams = goog.forwardDeclare('defaultparams.DefaultParams$impl');
+let $1 = goog.forwardDeclare('defaultparams.DefaultParamsKt.$1$impl');
 let $1LocalClass = goog.forwardDeclare('defaultparams.DefaultParamsKt.$1LocalClass$impl');
 let FooImpl = goog.forwardDeclare('defaultparams.FooImpl$impl');
 let FooImplWithDefaultOverride = goog.forwardDeclare('defaultparams.FooImplWithDefaultOverride$impl');
@@ -78,6 +79,32 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.m_extFun__defaultparams_DefaultParams__void(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 2, /**@type {DefaultConstructorMarker}*/ (undefined)));
   DefaultParamsKt.m_extFunWithDefault$default__defaultparams_DefaultParams__int__void(/**@type {!DefaultParams}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 2, /**@type {DefaultConstructorMarker}*/ (undefined)))), /**@type {number}*/ (undefined));
   DefaultParamsKt.m_extFunWithDefault__defaultparams_DefaultParams__int__void(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 2, /**@type {DefaultConstructorMarker}*/ (undefined)), 123);
+ }
+ /** @nodts */
+ static m_testLocalFun__void() {
+  DefaultParamsKt.$clinit();
+  let localFun = /**  @return {number}*/ ((/** number */ a, /** number= */ b) =>{
+   if (JsUtils.isUndefined(b)) {
+    b = 1;
+   }
+   return a + b | 0;
+  });
+  localFun(10, /**@type {number}*/ (undefined));
+  localFun(10, 20);
+  let localFunWithNonPrimitive = /**  @return {*}*/ ((/** *= */ o, /** *= */ unused) =>{
+   if (JsUtils.isUndefined(o)) {
+    o = j_l_Object.$create__();
+   }
+   if (JsUtils.isUndefined(unused)) {
+    unused = null;
+   }
+   return o;
+  });
+  let someValue = j_l_Object.$create__();
+  localFunWithNonPrimitive(undefined, undefined);
+  localFunWithNonPrimitive(JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(someValue), undefined);
+  localFunWithNonPrimitive(/**@type {string}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object('test')), undefined);
+  let nestedObj = $1.$create__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction0__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction1__java_lang_Object(localFun, localFunWithNonPrimitive, someValue);
  }
  /** @nodts @return {number} */
  static m_complexDefault__int__int__int(/** number */ a, /** number */ b) {
@@ -279,6 +306,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   DefaultParams = goog.module.get('defaultparams.DefaultParams$impl');
+  $1 = goog.module.get('defaultparams.DefaultParamsKt.$1$impl');
   $1LocalClass = goog.module.get('defaultparams.DefaultParamsKt.$1LocalClass$impl');
   FooImpl = goog.module.get('defaultparams.FooImpl$impl');
   FooImplWithDefaultOverride = goog.module.get('defaultparams.FooImplWithDefaultOverride$impl');
