@@ -16,4 +16,4 @@
 # Script that can be used by CI server for testing j2cl builds.
 set -ex
 
-go run go/main.go
+bazel run go:my_app
