@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
+import com.google.j2cl.transpiler.ast.AstUtils.createImplicitConstructorDescriptor
 import com.google.j2cl.transpiler.ast.BooleanLiteral
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
@@ -86,6 +87,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
+// TODO(b/442834826): Refactor to use type model instead of AST nodes.
 internal class J2ObjCCompatRenderer(
   private val objCNamePrefix: String,
   private val hiddenFromObjCMapping: HiddenFromObjCMapping,
@@ -129,6 +131,18 @@ internal class J2ObjCCompatRenderer(
     addAll(type.fields.map(::fieldConstantDefineRenderer))
 
     addAll(type.members.flatMap(::functionRenderers))
+
+    // Render implicit constructor
+    if (!type.isInterface && type.constructors.isEmpty()) {
+      addAll(
+        functionRenderers(
+          Method.newBuilder()
+            .setMethodDescriptor(createImplicitConstructorDescriptor(type.typeDescriptor))
+            .setSourcePosition(type.sourcePosition)
+            .build()
+        )
+      )
+    }
   }
 
   private fun aliasDeclarationRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =

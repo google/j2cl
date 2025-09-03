@@ -85,19 +85,15 @@
 - (void)testOnlyImplicitDefaultConstructor {
   J2ktJ2ktiosinteropOnlyImplicitDefaultConstructor *obj;
   obj = [[J2ktJ2ktiosinteropOnlyImplicitDefaultConstructor alloc] init];
-
-  // TODO(b/442826242): These functions are missing in J2ObjCCompat.h
-  // obj = create_J2ktiosinteropOnlyImplicitDefaultConstructor_init();
-  // obj = new_J2ktiosinteropOnlyImplicitDefaultConstructor_init();
+  obj = create_J2ktiosinteropOnlyImplicitDefaultConstructor_init();
+  obj = new_J2ktiosinteropOnlyImplicitDefaultConstructor_init();
 }
 
 - (void)testOnlyExplicitDefaultConstructor {
   J2ktJ2ktiosinteropOnlyExplicitDefaultConstructor *obj;
   obj = [[J2ktJ2ktiosinteropOnlyExplicitDefaultConstructor alloc] init];
-
-  // TODO(b/442826242): These functions are missing in J2ObjCCompat.h
-  // obj = create_J2ktiosinteropOnlyExplicitDefaultConstructor_init();
-  // obj = new_J2ktiosinteropOnlyExplicitDefaultConstructor_init();
+  obj = create_J2ktiosinteropOnlyExplicitDefaultConstructor_init();
+  obj = new_J2ktiosinteropOnlyExplicitDefaultConstructor_init();
 }
 
 - (void)testSpecialNames {
