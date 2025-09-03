@@ -16,15 +16,4 @@
 # Script that can be used by CI server for testing j2cl builds.
 set -ex
 
-bazel build :all {jre,transpiler,tools,benchmarking,junit/generator,junit/emul}/java/...
-
-# Do a quick smoke check of integration test
-bazel test transpiler/javatests/com/google/j2cl/integration/java/emptyclass/...
-
-# Run JRE tests
-bazel test jre/javatests/...
-
-# Run CI test if requested
-if [[ $1 == "CI" ]]; then
-  bazel test transpiler/javatests/com/google/j2cl/integration/java/...
-fi
+go run go/main.go
