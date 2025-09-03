@@ -44,3 +44,15 @@ java_test(
         "//tools/java/com/google/j2cl/tools/rta:code_removal_info_java_proto",
     ],
 )
+
+j2cl_test(
+    name = "CodePruningTest-j2cl",
+    srcs = ["CodePruningTest.java"],
+    deps = [
+        "//third_party:guava-j2cl",
+        "//third_party:junit-j2cl",
+        "//third_party:truth-j2cl",
+        "//tools/java/com/google/j2cl/tools/minifier:minifier-j2cl",
+        "//tools/java/com/google/j2cl/tools/rta:code_removal_info_j2cl_proto",
+    ],
+)
