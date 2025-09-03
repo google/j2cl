@@ -149,3 +149,12 @@ suspend fun testYield() {
 suspend fun testSuspendInlining() {
   suspendCoroutine { continuation -> continuation.resume(Unit) }
 }
+
+class GenericClass<T> {
+  fun <V> testSuspendLambdReferingGenerics(param: V) {
+    val suspendLambdaReferingGeneric: suspend () -> Unit = {
+      val tRef: T? = null
+      val vRef: V? = null
+    }
+  }
+}

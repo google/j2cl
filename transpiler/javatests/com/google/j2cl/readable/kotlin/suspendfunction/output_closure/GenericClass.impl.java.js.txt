@@ -1,0 +1,57 @@
+goog.module('suspendfunction.GenericClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Continuation = goog.forwardDeclare('kotlin.coroutines.Continuation$impl');
+let SuspendFunction0 = goog.forwardDeclare('kotlin.internal.j2cl.SuspendFunction0$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class GenericClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!GenericClass<T>} */
+ static $create__() {
+  GenericClass.$clinit();
+  let $instance = new GenericClass();
+  $instance.$ctor__suspendfunction_GenericClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__suspendfunction_GenericClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @template V */
+ m_testSuspendLambdReferingGenerics__java_lang_Object__void(/** V */ param) {
+  let suspendLambdaReferingGeneric = SuspendFunction0.$adapt(/**  @return {!Generator<*, ?>}*/ (function* (/** Continuation<?> */ $continuation) {
+   let /** ?T */ tRef = null;
+   let /** ?V */ vRef = null;
+  }));
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericClass.$clinit = () =>{};
+  GenericClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SuspendFunction0 = goog.module.get('kotlin.internal.j2cl.SuspendFunction0$impl');
+ }
+}
+$Util.$setClassMetadata(GenericClass, 'suspendfunction.GenericClass');
+
+exports = GenericClass;
+
+//# sourceMappingURL=GenericClass.js.map
