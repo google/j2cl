@@ -83,6 +83,11 @@ jobs:
           echo "build -c opt" >> ~/.bazelrc
           echo "build --verbose_failures" >> ~/.bazelrc
           bazel info
+
+      - name: Set host name
+        if: matrix.os == 'macos-latest'
+        run: sudo scutil --set HostName unknown
+
       - name: Run tests
         if: matrix.test-target == 'default'
         run: ./build_test.sh CI
