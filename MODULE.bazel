@@ -14,6 +14,7 @@ bazel_dep(name = "rules_kotlin", version = "1.9.6")
 bazel_dep(name = "rules_license", version = "1.0.0")
 bazel_dep(name = "rules_python", version = "1.4.1")
 bazel_dep(name = "rules_webtesting", version = "0.4.1")
+bazel_dep(name = "rules_cc", version = "0.0.17")
 
 # Maven dependencies.
 
@@ -54,8 +55,3 @@ http_archive(
 # Dependencies needed for development.
 
 bazel_dep(name = "rules_shell", version = "0.4.1", dev_dependency = True)
-
-# Bump the rules_cc version to work around error "Protobuf only supports C++17
-# and newer." in mac os.
-# TODO(b/427495750): Remove this extra dep once the bug is fixed.
-bazel_dep(name = "rules_cc", version = "0.0.17")
