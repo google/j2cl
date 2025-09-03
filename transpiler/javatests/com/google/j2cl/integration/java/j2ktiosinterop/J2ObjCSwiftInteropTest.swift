@@ -60,6 +60,14 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     // Fields are not exposed in Swift
   }
 
+  func testOnlyImplicitDefaultConstructor() {
+    let _ = J2ktiosinteropOnlyImplicitDefaultConstructor()
+  }
+
+  func testOnlyExplicitDefaultConstructor() {
+    let _ = J2ktiosinteropOnlyExplicitDefaultConstructor()
+  }
+
   func testSpecialNames() {
     J2ktiosinteropSpecialNames_WithBoolean().getWithBoolean(true)
     J2ktiosinteropSpecialNames_WithChar().getWithChar(65)

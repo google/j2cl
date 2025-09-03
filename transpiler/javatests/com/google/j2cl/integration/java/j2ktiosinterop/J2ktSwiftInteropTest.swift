@@ -73,6 +73,14 @@ final class J2ktSwiftInteropTest: XCTestCase {
     J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(with: 1, with: "")
   }
 
+  func testOnlyImplicitDefaultConstructor() {
+    let _ = J2ktiosinteropOnlyImplicitDefaultConstructor()
+  }
+
+  func testOnlyExplicitDefaultConstructor() {
+    let _ = J2ktiosinteropOnlyExplicitDefaultConstructor()
+  }
+
   func testSpecialNames() {
     J2ktiosinteropSpecialNames_WithBoolean().getWithBoolean(true)
     J2ktiosinteropSpecialNames_WithChar().getWithChar(65)

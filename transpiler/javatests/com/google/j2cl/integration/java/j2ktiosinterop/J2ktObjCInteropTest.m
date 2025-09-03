@@ -3,6 +3,8 @@
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/CustomNames.h"
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/DefaultNames.h"
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/EnumNames.h"
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/SpecialNames.h"
 
 /** J2KT interop test for ObjC. */
@@ -78,6 +80,24 @@
   J2ktiosinteropDefaultNames_staticMethod();
   J2ktiosinteropDefaultNames_staticIntMethodWithInt_(1);
   J2ktiosinteropDefaultNames_staticIntStringMethodWithInt_withNSString_(1, @"");
+}
+
+- (void)testOnlyImplicitDefaultConstructor {
+  J2ktJ2ktiosinteropOnlyImplicitDefaultConstructor *obj;
+  obj = [[J2ktJ2ktiosinteropOnlyImplicitDefaultConstructor alloc] init];
+
+  // TODO(b/442826242): These functions are missing in J2ObjCCompat.h
+  // obj = create_J2ktiosinteropOnlyImplicitDefaultConstructor_init();
+  // obj = new_J2ktiosinteropOnlyImplicitDefaultConstructor_init();
+}
+
+- (void)testOnlyExplicitDefaultConstructor {
+  J2ktJ2ktiosinteropOnlyExplicitDefaultConstructor *obj;
+  obj = [[J2ktJ2ktiosinteropOnlyExplicitDefaultConstructor alloc] init];
+
+  // TODO(b/442826242): These functions are missing in J2ObjCCompat.h
+  // obj = create_J2ktiosinteropOnlyExplicitDefaultConstructor_init();
+  // obj = new_J2ktiosinteropOnlyExplicitDefaultConstructor_init();
 }
 
 - (void)testSpecialNames {
