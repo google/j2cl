@@ -7,6 +7,8 @@ Should only be used for importing annotation byte code, otherwise may result
 in hard to debug errors!
 """
 
+load("@rules_cc//cc/common:cc_common.bzl", "cc_common")
+load("@rules_cc//cc/common:cc_info.bzl", "CcInfo")
 load("@rules_java//java:defs.bzl", "JavaInfo")
 load(":provider.bzl", "J2ktInfo")
 
