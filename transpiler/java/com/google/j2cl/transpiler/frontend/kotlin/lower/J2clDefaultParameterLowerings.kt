@@ -237,12 +237,16 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
 
     val blockBody = body as? IrBlockBody
     if (blockBody != null) {
-      blockBody.transformChildren(VariableRemapper(newVariables), null)
+      val variableRemapper = VariableRemapper(newVariables)
       val irBuilder = context.createIrBuilder(symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET)
+      blockBody.transformChildren(variableRemapper, null)
       blockBody.statements.addAll(
         0,
         parameters.mapNotNull {
-          irBuilder.createResolutionStatement(it, it.defaultValue?.expression)
+          irBuilder.createResolutionStatement(
+            it,
+            it.defaultValue?.expression?.transform(variableRemapper, null),
+          )
         },
       )
     }

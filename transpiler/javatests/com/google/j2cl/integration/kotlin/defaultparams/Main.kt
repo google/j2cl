@@ -33,6 +33,7 @@ fun main(vararg unused: String) {
   testVarargs()
   testInterface()
   testUninitialized()
+  testReferencesToPreviousParams()
 }
 
 open class DefaultParams(val a: Int = 1, val b: Int) {
@@ -270,4 +271,18 @@ private fun testUninitialized() {
   assertNull(strOrDefault(getUndefined()))
   assertNull(boxedIntOrDefault(getUndefined()))
   assertNull(boxedDoubleOrDefault(getUndefined()))
+}
+
+fun referencesPreviousParams(a: Int = 1, b: Int = a + 1, c: Int = b + 1) = a + b + c
+
+private fun testReferencesToPreviousParams() {
+  assertEquals(6, referencesPreviousParams())
+  assertEquals(3, referencesPreviousParams(0))
+  assertEquals(2, referencesPreviousParams(b = 0))
+
+  fun localReferencesPreviousParams(a: Int = 1, b: Int = a + 1, c: Int = b + 1) = a + b + c
+
+  assertEquals(6, localReferencesPreviousParams())
+  assertEquals(3, localReferencesPreviousParams(0))
+  assertEquals(2, localReferencesPreviousParams(b = 0))
 }
