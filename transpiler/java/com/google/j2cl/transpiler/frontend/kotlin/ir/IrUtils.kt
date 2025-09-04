@@ -14,6 +14,7 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
+@file:OptIn(org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI::class)
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
@@ -73,6 +74,7 @@ import org.jetbrains.kotlin.ir.types.IrStarProjection
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeArgument
 import org.jetbrains.kotlin.ir.types.IrTypeProjection
+import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.types.defaultType
@@ -82,6 +84,7 @@ import org.jetbrains.kotlin.ir.types.isArray
 import org.jetbrains.kotlin.ir.types.isClassType
 import org.jetbrains.kotlin.ir.types.isNullableArray
 import org.jetbrains.kotlin.ir.types.isUnit
+import org.jetbrains.kotlin.ir.types.typeOrFail
 import org.jetbrains.kotlin.ir.util.allOverridden
 import org.jetbrains.kotlin.ir.util.allTypeParameters
 import org.jetbrains.kotlin.ir.util.deepCopyWithSymbols
@@ -111,6 +114,7 @@ import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.properties
+import org.jetbrains.kotlin.ir.util.superTypes
 import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.FqNameUnsafe
@@ -279,6 +283,54 @@ fun IrMemberAccessExpression<*>.getTypeSubstitutionMap(
     it.value.symbol to makeTypeProjection(getTypeArgument(it.index)!!, it.value.variance)
     // End of modification
   }
+}
+
+/**
+ * Collects all type parameters and their substitutions needed for inlining an `irFunction`.
+ *
+ * Unlike `getTypeSubstitutionMap`, this function also includes type parameter/type argument
+ * mappings derived from the receiver type of the call, which is necessary for proper substitution
+ * within inline functions that are members of generic classes.
+ */
+fun IrFunctionAccessExpression.getTypeSubstitutionMapForInlining(
+  irFunction: IrFunction
+): Map<IrTypeParameterSymbol, IrType> {
+  check(irFunction.isInline)
+
+  val typeSubstitutionMap = mutableMapOf<IrTypeParameterSymbol, IrType>()
+  val receiverType =
+    (this as? IrCall)?.superQualifierSymbol?.defaultType
+      ?: getRealDispatcherReceiverForTypeSubstitution(irFunction)
+
+  if (receiverType != null) {
+    // Traverse the receiver type and its parent to find the type that match the enclosing class of
+    // the inline function.
+    val parameterizedEnclosingType =
+      receiverType.allSuperTypesAndSelf().first {
+        irFunction.parentClassOrNull!! == it.classOrNull?.owner
+      }
+    check(parameterizedEnclosingType is IrSimpleType)
+
+    // Add type parameters and their substitutions from the enclosing type to the map.
+    val typeParameters =
+      parameterizedEnclosingType.classOrFail.owner.getAllTypeParameters().toList()
+    typeSubstitutionMap.putAll(
+      typeParameters.zip(parameterizedEnclosingType.arguments).associate { (typeParam, typeArg) ->
+        typeParam.symbol to typeArg.typeOrFail
+      }
+    )
+  }
+
+  return irFunction.allTypeParameters.withIndex().associateTo(typeSubstitutionMap) {
+    it.value.symbol to typeArguments[it.index]!!
+  }
+}
+
+private fun IrType.allSuperTypesAndSelf(): Set<IrType> {
+  val allSupertypesIncludingSelf = linkedSetOf<IrType>()
+  allSupertypesIncludingSelf.add(this)
+  type.superTypes().forEach { allSupertypesIncludingSelf.addAll(it.allSuperTypesAndSelf()) }
+  return allSupertypesIncludingSelf
 }
 
 // TODO(b/377502016): remove this method when bug on JetBrain side is fixed.

@@ -5,6 +5,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMapForInlining
 import org.jetbrains.kotlin.backend.common.*
 import org.jetbrains.kotlin.backend.common.ir.Symbols
 import org.jetbrains.kotlin.backend.common.ir.isInlineLambdaBlock
@@ -156,20 +157,35 @@ open class FunctionInlining(
     private val elementsWithLocationToPatch = hashSetOf<IrGetValue>()
 
     val inlineFunctionBodyPreprocessor = run {
-      val typeParameters =
-        when (callee) {
-          is IrConstructor -> callee.parentAsClass.typeParameters
-          is IrSimpleFunction -> callee.typeParameters
-        }
-      val typeArguments =
-        callSite.typeArguments.indices.associate {
-          typeParameters[it].symbol to callSite.typeArguments[it]
-        }
+      // MODIFIED BY GOOGLE.
+      // Collects all type parameters and their substitutions that could be referenced by the
+      // inline function, allowing them to be substituted during inlining. The original code failed
+      // to collect type arguments from the receiver of the inline function, which could result in
+      // type parameters not being fully substituted and lead to invalid JavaScript code after
+      // inlining.
+      // original code:
+      // val typeParameters =
+      //   when (callee) {
+      //     is IrConstructor -> callee.parentAsClass.typeParameters
+      //     is IrSimpleFunction -> callee.typeParameters
+      //   }
+      // val typeArguments =
+      //   callSite.typeArguments.indices.associate {
+      //     typeParameters[it].symbol to callSite.typeArguments[it]
+      //   }
+      //
+      // InlineFunctionBodyPreprocessor(
+      //   typeArguments,
+      //   parent,
+      //   inlineFunctionResolver.callInlinerStrategy,
+      // )
+
       InlineFunctionBodyPreprocessor(
-        typeArguments,
+        callSite.getTypeSubstitutionMapForInlining(callee),
         parent,
         inlineFunctionResolver.callInlinerStrategy,
       )
+      // END OF MODIFICATIONS.
     }
 
     val substituteMap = mutableMapOf<IrValueParameter, IrExpression>()
