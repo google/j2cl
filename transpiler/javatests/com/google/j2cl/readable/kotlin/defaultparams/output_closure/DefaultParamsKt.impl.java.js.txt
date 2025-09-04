@@ -95,15 +95,12 @@ class DefaultParamsKt extends j_l_Object {
    if (JsUtils.isUndefined(o)) {
     o = j_l_Object.$create__();
    }
-   if (JsUtils.isUndefined(unused)) {
-    unused = null;
-   }
    return o;
   });
   let someValue = j_l_Object.$create__();
   localFunWithNonPrimitive(undefined, undefined);
   localFunWithNonPrimitive(JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(someValue), undefined);
-  localFunWithNonPrimitive(/**@type {string}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object('test')), undefined);
+  localFunWithNonPrimitive('test', undefined);
   let nestedObj = $1.$create__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction0__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction1__java_lang_Object(localFun, localFunWithNonPrimitive, someValue);
  }
  /** @nodts @return {number} */
@@ -170,7 +167,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_testDefaultInitializerCallsWithDefaults__void() {
   DefaultParamsKt.$clinit();
-  DefaultParamsKt.m_nestedDefaultCall$default__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__void(/**@type {string}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object('foo')), /**@type {string}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object('bar')), /**@type {!Function0<*>}*/ (undefined), /**@type {!Function0<*>}*/ (undefined), /**@type {!Function0<*>}*/ (undefined));
+  DefaultParamsKt.m_nestedDefaultCall$default__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__void('foo', 'bar', /**@type {!Function0<*>}*/ (undefined), /**@type {!Function0<*>}*/ (undefined), /**@type {!Function0<*>}*/ (undefined));
  }
  /** @nodts */
  static m_boxing__java_lang_Integer__void(/** Integer */ a) {
@@ -196,9 +193,6 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_capturedBoxing$default__java_lang_Integer__int(/** Integer= */ a) {
   DefaultParamsKt.$clinit();
-  if (JsUtils.isUndefined(a)) {
-   a = null;
-  }
   return DefaultParamsKt.m_capturedBoxing__java_lang_Integer__int(a);
  }
  /** @nodts */

@@ -128,7 +128,11 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
     toParameter: IrValueParameter,
     defaultExpression: IrExpression?,
   ): IrExpression? {
-    if (defaultExpression == null) return null
+    // If the parameter does not have a default initializer, or the it's just being defaulted to
+    // null, then we don't need to resolve anything.
+    if (defaultExpression == null || defaultExpression.isNullConst()) {
+      return null
+    }
     return irIfThen(
       type = toParameter.type,
       condition =
@@ -411,8 +415,10 @@ internal class J2clDefaultParameterInjector(context: J2clBackendContext) :
   }
 
   private fun IrExpression.maybeCoerceToNull(): IrExpression {
-    // Primitive types should never need coercion to null.
-    if (type.isPrimitiveType()) {
+    // There are trivial cases where we'll never see an undefined value:
+    //   - primitive types
+    //   - literal values
+    if (type.isPrimitiveType() || this is IrConst) {
       return this
     }
     return IrCallImpl.fromSymbolOwner(
