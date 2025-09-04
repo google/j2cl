@@ -84,11 +84,11 @@ jobs:
           echo "build --verbose_failures" >> ~/.bazelrc
           bazel info
 
-     # Fake the host name to cause name lookups fail and fallback to localhost in WTL:
-     # rules_webtesting/go/httphelper/http_helper.go#FQDN()
-     # This prevents potential 'underscore' in resolved name which later used by
-     # WebDriver that inherits a JDK bug (https://bugs.openjdk.org/browse/JDK-8221675).
-     - name: Fake host name
+      # Fake the host name to cause name lookups fail and fallback to localhost in WTL:
+      # rules_webtesting/go/httphelper/http_helper.go#FQDN()
+      # This prevents potential 'underscore' in resolved name which later used by
+      # WebDriver that inherits a JDK bug (https://bugs.openjdk.org/browse/JDK-8221675).
+      - name: Fake host name
         if: matrix.os == 'macos-latest'
         run: sudo scutil --set HostName unknown
 
