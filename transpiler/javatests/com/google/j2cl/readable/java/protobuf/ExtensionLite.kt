@@ -16,6 +16,5 @@
 package com.google.protobuf
 
 interface ExtensionLite<T> {
-  // TODO(b/442844499): Should be a property.
-  fun getNumber(): Int
+  val number: Int
 }

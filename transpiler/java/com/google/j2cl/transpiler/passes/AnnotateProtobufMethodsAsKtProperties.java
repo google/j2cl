@@ -39,9 +39,8 @@ public class AnnotateProtobufMethodsAsKtProperties extends NormalizationPass {
             KtInfo rewrittenKtInfo =
                 methodDescriptor.getOriginalKtInfo().toBuilder().setProperty(true).build();
 
-            return MethodDescriptor.Builder.from(methodDescriptor)
-                .setOriginalKtInfo(rewrittenKtInfo)
-                .build();
+            return methodDescriptor.transform(
+                builder -> builder.setOriginalKtInfo(rewrittenKtInfo));
           }
         });
   }
