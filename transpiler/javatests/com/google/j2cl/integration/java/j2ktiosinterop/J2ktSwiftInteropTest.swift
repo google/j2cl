@@ -129,7 +129,21 @@ final class J2ktSwiftInteropTest: XCTestCase {
   }
 
   func testEnumNames() {
-    let _ = J2ktiosinteropEnumNames.ONE
-    let _ = J2ktiosinteropEnumNames.TWO
+    let _ = J2ktiosinteropEnumNames_get_ONE()
+    let _ = J2ktiosinteropEnumNames_get_TWO()
+
+    // Not exposed in Swift
+    // let _ = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_ONE)
+    // let _ = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_TWO)
+
+    // let _ = J2ktiosinteropEnumNames_Enum_ONE
+    // let _ = J2ktiosinteropEnumNames_Enum_TWO
+
+    // let _ = J2ktiosinteropEnumNames.valueOf(with:"ONE")
+    // let _ = J2ktiosinteropEnumNames.valueOf(with:"TWO")
+
+    let values = J2ktiosinteropEnumNames.values()
+    let _ = values.get(index: 0)
+    let _ = values.get(index: 1)
   }
 }

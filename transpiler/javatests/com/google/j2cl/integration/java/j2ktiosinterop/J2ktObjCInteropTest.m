@@ -173,9 +173,21 @@
   e = J2ktiosinteropEnumNames_get_ONE();
   e = J2ktiosinteropEnumNames_get_TWO();
 
+  // Not supported
+  // e = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_ONE);
+  // e = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_TWO);
+
   J2ktiosinteropEnumNames_Enum e2;
   e2 = J2ktiosinteropEnumNames_Enum_ONE;
   e2 = J2ktiosinteropEnumNames_Enum_TWO;
+
+  // Not supported
+  // e = [J2ktiosinteropEnumNames valueOfWithNSString:@"ONE"];
+  // e = [J2ktiosinteropEnumNames valueOfWithNSString:@"TWO"];
+
+  GKOTKotlinArray<J2ktJ2ktiosinteropEnumNames *> *values = [J2ktiosinteropEnumNames values];
+  e = [values getIndex:0];
+  e = [values getIndex:1];
 }
 
 @end

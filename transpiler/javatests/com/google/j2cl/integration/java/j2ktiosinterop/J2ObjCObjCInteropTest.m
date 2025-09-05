@@ -152,9 +152,19 @@
   e = J2ktiosinteropEnumNames_get_ONE();
   e = J2ktiosinteropEnumNames_get_TWO();
 
+  e = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_ONE);
+  e = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_TWO);
+
   J2ktiosinteropEnumNames_Enum e2;
   e2 = J2ktiosinteropEnumNames_Enum_ONE;
   e2 = J2ktiosinteropEnumNames_Enum_TWO;
+
+  e = [J2ktiosinteropEnumNames valueOfWithNSString:@"ONE"];
+  e = [J2ktiosinteropEnumNames valueOfWithNSString:@"TWO"];
+
+  IOSObjectArray *values = [J2ktiosinteropEnumNames values];
+  e = values[0];
+  e = values[1];
 }
 
 @end
