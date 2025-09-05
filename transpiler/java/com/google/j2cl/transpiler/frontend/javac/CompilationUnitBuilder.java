@@ -1059,7 +1059,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                   JavaEnvironment.getEnclosingType(variableElement).asType()),
               qualifier);
 
-      // TODO(): Annotations
       FieldDescriptor fieldDescriptor =
           environment.createFieldDescriptor(
               parameterizedEnclosingType, variableElement, fieldAccess.type);
