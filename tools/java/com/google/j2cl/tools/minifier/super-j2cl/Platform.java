@@ -14,8 +14,10 @@
 package com.google.j2cl.tools.minifier;
 
 import com.google.j2cl.tools.rta.CodeRemovalInfo;
+import elemental2.core.Uint8Array;
 import java.io.IOException;
 import javax.annotation.Nullable;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -61,9 +63,11 @@ final class Platform {
   @Nullable
   public static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath)
       throws IOException {
-    // For now we won't support reading code removal info file.
-    return null;
+    return CodeRemovalInfo.parseFrom(readFile(codeRemovalInfoFilePath));
   }
+
+  @JsMethod(name = "fs.readFileSync", namespace = JsPackage.GLOBAL)
+  private static native Uint8Array readFile(String path);
 
   private Platform() {}
 }
