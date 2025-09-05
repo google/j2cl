@@ -1290,7 +1290,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             : JavaEnvironment.getTypeSubstitution(methodType, methodSymbol);
     for (var tv : mapping.keySet()) {
       enclosingTypeArguments.put(
-          (TypeVariable) environment.createTypeDescriptor(tv.asType()),
+          (TypeVariable) environment.createTypeDescriptor(tv.asType(), inNullMarkedScope),
           environment.createTypeDescriptor(
               mapping.get(tv).getFirst(),
               declarationEnclosingTypeDescriptor.getTypeDeclaration().isNullMarked()));
