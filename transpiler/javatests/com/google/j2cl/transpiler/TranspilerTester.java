@@ -75,6 +75,9 @@ public class TranspilerTester {
         // Note: For Bazel compilation, this is provided through toolchain defaults.
         .addArgs("-kotlincOptions", "-jvm-target=11")
         .addArgs("-kotlincOptions", "-language-version=2.1")
+        // TODO(b/442786444): Remove this once this flag is no longer included by default for
+        //   Kotlin/JVM builds.
+        .addArgs("-kotlincOptions", "-Xnested-type-aliases")
         .setClassPathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/ktstdlib_bundle_deploy.jar");
   }
