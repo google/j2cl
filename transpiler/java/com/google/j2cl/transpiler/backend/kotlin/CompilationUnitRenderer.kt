@@ -97,6 +97,7 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
             "USELESS_CAST",
             "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
             "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+            "INCOMPATIBLE_OBJC_NAME_OVERRIDE", // Needed for b/440308508
             "REDUNDANT_ELSE_IN_WHEN",
           )
           .map { literal(it) },
