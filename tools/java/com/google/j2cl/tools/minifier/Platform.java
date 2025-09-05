@@ -37,17 +37,11 @@ final class Platform {
     }
   }
 
-  @Nullable
-  public static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath) {
-    if (codeRemovalInfoFilePath == null) {
-      return null;
-    }
-
+  public static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath)
+      throws IOException {
     try (InputStream inputStream =
         new BufferedInputStream(new FileInputStream(codeRemovalInfoFilePath))) {
       return CodeRemovalInfo.parseFrom(inputStream);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
     }
   }
 

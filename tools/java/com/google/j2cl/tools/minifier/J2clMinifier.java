@@ -410,7 +410,7 @@ public class J2clMinifier {
       Boolean.parseBoolean(System.getProperty("j2cl_minifier_disabled"));
 
   /** Set of file paths that are not used by the application. */
-  private ImmutableSet<String> unusedFiles;
+  private ImmutableSet<String> unusedFiles = ImmutableSet.of();
 
   /**
    * Gives per file key the array of line indexes that can be stripped. If the index of the line
@@ -420,7 +420,7 @@ public class J2clMinifier {
   // We choose to use a boolean[] instead of the usual recommended Map<> or Set<> data structure for
   // performance purpose. Please do not change that instead you measure your change doesn't impact
   // the performance.
-  private Map<String, boolean[]> unusedLinesPerFile;
+  private Map<String, boolean[]> unusedLinesPerFile = ImmutableMap.of();
 
   /**
    * This is a cache of previously minified content (presumably whole files). This makes reloads in
@@ -441,7 +441,13 @@ public class J2clMinifier {
     // TODO(goktug): Rename to j2cl_rta_pruning_manifest
     codeRemovalFilePath =
         System.getProperty("j2cl_rta_removal_code_info_file", codeRemovalFilePath);
-    setupRtaCodeRemoval(Platform.readCodeRemovalInfoFile(codeRemovalFilePath));
+    if (codeRemovalFilePath != null) {
+      try {
+        setupRtaCodeRemoval(Platform.readCodeRemovalInfoFile(codeRemovalFilePath));
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
 
     transFn = new TransitionFunction[numberOfStates][numberOfStates];
 
@@ -634,13 +640,8 @@ public class J2clMinifier {
 
   @VisibleForTesting
   void setupRtaCodeRemoval(CodeRemovalInfo codeRemovalInfo) {
-    if (codeRemovalInfo != null) {
-      unusedFiles = ImmutableSet.copyOf(codeRemovalInfo.getUnusedFilesList());
-      unusedLinesPerFile = createUnusedLinesPerFileMap(codeRemovalInfo);
-    } else {
-      unusedFiles = ImmutableSet.of();
-      unusedLinesPerFile = ImmutableMap.of();
-    }
+    unusedFiles = ImmutableSet.copyOf(codeRemovalInfo.getUnusedFilesList());
+    unusedLinesPerFile = createUnusedLinesPerFileMap(codeRemovalInfo);
   }
 
   private static Map<String, boolean[]> createUnusedLinesPerFileMap(

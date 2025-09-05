@@ -14,6 +14,7 @@
 package com.google.j2cl.tools.minifier;
 
 import com.google.j2cl.tools.rta.CodeRemovalInfo;
+import java.io.IOException;
 import javax.annotation.Nullable;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -58,7 +59,8 @@ final class Platform {
   }
 
   @Nullable
-  public static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath) {
+  public static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath)
+      throws IOException {
     // For now we won't support reading code removal info file.
     return null;
   }
