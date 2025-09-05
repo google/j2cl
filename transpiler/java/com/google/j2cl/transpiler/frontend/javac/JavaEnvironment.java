@@ -531,11 +531,18 @@ class JavaEnvironment {
   }
 
   FieldDescriptor createFieldDescriptor(VariableElement variableElement, TypeMirror type) {
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        createDeclaredTypeDescriptor(getEnclosingType(variableElement).asType());
+    return createFieldDescriptor(enclosingTypeDescriptor, variableElement, type);
+  }
+
+  FieldDescriptor createFieldDescriptor(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      VariableElement variableElement,
+      TypeMirror type) {
 
     boolean isStatic = isStatic(variableElement);
     Visibility visibility = getVisibility(variableElement);
-    DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(getEnclosingType(variableElement).asType());
     String fieldName = variableElement.getSimpleName().toString();
 
     boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
@@ -550,10 +557,11 @@ class JavaEnvironment {
     }
 
     FieldDescriptor declarationFieldDescriptor = null;
-    if (!javacTypes.isSameType(variableElement.asType(), type)) {
+    if (!javacTypes.isSameType(variableElement.asType(), type)
+        || isSpecialized(enclosingTypeDescriptor)) {
       // Field references might be parameterized, and when they are we set the declaration
       // descriptor.
-      declarationFieldDescriptor = createFieldDescriptor(variableElement, variableElement.asType());
+      declarationFieldDescriptor = createFieldDescriptor(variableElement);
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
@@ -828,9 +836,13 @@ class JavaEnvironment {
                 declarationMethodElement.getParameters().stream(),
                 (thisType, thatType) -> isSameType(thisType, thatType.asType()))
             .allMatch(equals -> equals)
-        || !enclosingTypeDescriptor
-            .getTypeArgumentDescriptors()
-            .equals(enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors());
+        || isSpecialized(enclosingTypeDescriptor);
+  }
+
+  private static boolean isSpecialized(DeclaredTypeDescriptor enclosingTypeDescriptor) {
+    return !enclosingTypeDescriptor
+        .getTypeArgumentDescriptors()
+        .equals(enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors());
   }
 
   private boolean isSameType(TypeMirror thisType, TypeMirror thatType) {

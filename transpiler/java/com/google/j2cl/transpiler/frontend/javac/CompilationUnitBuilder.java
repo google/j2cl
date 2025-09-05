@@ -1052,8 +1052,17 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       if (fieldAccess.name.contentEquals("length") && qualifier.getTypeDescriptor().isArray()) {
         return ArrayLength.newBuilder().setArrayExpression(qualifier).build();
       }
+
+      DeclaredTypeDescriptor parameterizedEnclosingType =
+          getParameterizedEnclosingType(
+              environment.createDeclaredTypeDescriptor(
+                  JavaEnvironment.getEnclosingType(variableElement).asType()),
+              qualifier);
+
+      // TODO(): Annotations
       FieldDescriptor fieldDescriptor =
-          environment.createFieldDescriptor(variableElement, fieldAccess.type);
+          environment.createFieldDescriptor(
+              parameterizedEnclosingType, variableElement, fieldAccess.type);
       return FieldAccess.newBuilder().setQualifier(qualifier).setTarget(fieldDescriptor).build();
     }
     return null;
