@@ -550,12 +550,6 @@ class JavaEnvironment {
         createTypeDescriptorWithNullability(
             type, variableElement.getAnnotationMirrors(), inNullMarkedScope);
 
-    boolean isEnumConstant = ((VarSymbol) variableElement).isEnum();
-    if (isEnumConstant) {
-      // Enum fields are always non-nullable.
-      thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
-    }
-
     FieldDescriptor declarationFieldDescriptor = null;
     if (!javacTypes.isSameType(variableElement.asType(), type)
         || isSpecialized(enclosingTypeDescriptor)) {
@@ -568,9 +562,13 @@ class JavaEnvironment {
     KtInfo ktInfo = J2ktInteropUtils.getJ2ktInfo(variableElement);
     Object constantValue = variableElement.getConstantValue();
     boolean isCompileTimeConstant = constantValue != null;
-    if (isCompileTimeConstant) {
+    boolean isEnumConstant = ((VarSymbol) variableElement).isEnum();
+
+    if (isCompileTimeConstant || isEnumConstant) {
+      // Enum and compile-time constant fields are always non-nullable.
       thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
     }
+
     boolean isFinal = isFinal(variableElement);
     return FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
