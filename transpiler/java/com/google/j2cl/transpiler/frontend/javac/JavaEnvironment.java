@@ -54,6 +54,7 @@ import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PackageDeclaration;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.DescriptorFactory;
@@ -550,12 +551,16 @@ class JavaEnvironment {
         createTypeDescriptorWithNullability(
             type, variableElement.getAnnotationMirrors(), inNullMarkedScope);
 
+    TypeDescriptor declarationTypeDescriptor =
+        createTypeDescriptorWithNullability(
+            variableElement.asType(), variableElement.getAnnotationMirrors(), inNullMarkedScope);
+
     FieldDescriptor declarationFieldDescriptor = null;
-    if (!javacTypes.isSameType(variableElement.asType(), type)
-        || isSpecialized(enclosingTypeDescriptor)) {
+    if (declarationTypeDescriptor != thisTypeDescriptor || isSpecialized(enclosingTypeDescriptor)) {
       // Field references might be parameterized, and when they are we set the declaration
       // descriptor.
       declarationFieldDescriptor = createFieldDescriptor(variableElement);
+      thisTypeDescriptor = propagateNullability(declarationTypeDescriptor, thisTypeDescriptor);
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
@@ -571,6 +576,7 @@ class JavaEnvironment {
 
     boolean isFinal = isFinal(variableElement);
     return FieldDescriptor.newBuilder()
+        .setDeclarationDescriptor(declarationFieldDescriptor)
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(fieldName)
         .setTypeDescriptor(thisTypeDescriptor)
@@ -583,9 +589,63 @@ class JavaEnvironment {
         .setCompileTimeConstant(isCompileTimeConstant)
         .setConstantValue(
             constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
-        .setDeclarationDescriptor(declarationFieldDescriptor)
         .setEnumConstant(isEnumConstant)
         .build();
+  }
+
+  /**
+   * Applies the nullability annotation present type variables in the declaration to the
+   * corresponding substituted type in the reference.
+   */
+  private TypeDescriptor propagateNullability(
+      TypeDescriptor declarationTypeDescriptor, TypeDescriptor referenceTypeDescriptor) {
+
+    return switch (declarationTypeDescriptor) {
+
+      // If the declaration is type variable, apply its nullability annotation if there is one.
+      case TypeVariable typeVariable -> {
+        if (typeVariable.isAnnotatedNonNullable()) {
+          yield referenceTypeDescriptor.toNonNullable();
+        } else if (typeVariable.isAnnotatedNullable()) {
+          yield referenceTypeDescriptor.toNullable();
+        } else {
+          yield referenceTypeDescriptor;
+        }
+      }
+
+      // If the declaration is an array, propagate the nullability on its component.
+      case ArrayTypeDescriptor declaration -> {
+        var fromRereference = (ArrayTypeDescriptor) referenceTypeDescriptor;
+        var declarationComponentTypeDescriptor = declaration.getComponentTypeDescriptor();
+        var resultingComponentTypeDescriptor =
+            propagateNullability(
+                declarationComponentTypeDescriptor, fromRereference.getComponentTypeDescriptor());
+        yield ArrayTypeDescriptor.Builder.from(fromRereference)
+            .setComponentTypeDescriptor(resultingComponentTypeDescriptor)
+            .build();
+      }
+
+      // If the declaration is a declared type, propagate the nullability on its type arguments.
+      case DeclaredTypeDescriptor declaration -> {
+        var fromReference = (DeclaredTypeDescriptor) referenceTypeDescriptor;
+        var rewrittenArguments =
+            Streams.zip(
+                    declaration.getTypeArgumentDescriptors().stream(),
+                    fromReference.getTypeArgumentDescriptors().stream(),
+                    this::propagateNullability)
+                .collect(toImmutableList());
+        yield ((DeclaredTypeDescriptor) referenceTypeDescriptor)
+            .getTypeDeclaration()
+            .toDescriptor(rewrittenArguments)
+            .toNullable(fromReference.isNullable());
+      }
+
+      // Nothing to propagate for primitives.
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> referenceTypeDescriptor;
+      default ->
+          throw new InternalCompilerError(
+              "Unexpected type in declaration: " + declarationTypeDescriptor.getClass());
+    };
   }
 
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
