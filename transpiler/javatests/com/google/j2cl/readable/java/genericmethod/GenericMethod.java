@@ -148,9 +148,9 @@ public class GenericMethod<T> {
     return supplier.get();
   }
 
-  static <T extends Number> void methodWithBoundTypeVariable() {}
+  static <T extends Number> void methodWithBoundTypeVariable(T unusedForInference) {}
 
   static void testMethodCallsWithCaptureTypeArguments() {
-    methodWithBoundTypeVariable();
+    methodWithBoundTypeVariable(0L);
   }
 }

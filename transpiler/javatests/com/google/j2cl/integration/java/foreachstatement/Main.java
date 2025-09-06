@@ -33,10 +33,10 @@ public class Main {
     testForEachArray_boxed();
     testForEachArray_unboxed();
     testForEachIterable();
-    testForEachIterable_typeVariable();
-    testForEachIterable_intersection();
+    testForEachIterable_typeVariable(0L, (Iterable<Number>) null);
+    testForEachIterable_intersection((MyIterable) null, (MyIterable) null);
     testForEachIterable_union();
-    testForEachIterable_widening();
+    testForEachIterable_widening((MyIterable) null, (MyIterable) null);
   }
 
   static class MyIterable implements Iterable<Integer>, Serializable {
@@ -128,7 +128,8 @@ public class Main {
     assertTrue("LastSeen:<" + lastSeenInteger + "> should be one", lastSeenInteger.intValue() == 1);
   }
 
-  private static <T, C extends Iterable<T>> void testForEachIterable_typeVariable() {
+  private static <T, C extends Iterable<T>> void testForEachIterable_typeVariable(
+      T unusedForInference1, C unusedForInference2) {
     C iterable =
         (C)
             new Iterable<T>() {
@@ -160,7 +161,7 @@ public class Main {
   }
 
   private static <T extends MyIterable & Serializable, S extends T>
-      void testForEachIterable_intersection() {
+      void testForEachIterable_intersection(T unusedForInference1, S unusedForInference2) {
     S iterable = (S) new MyIterable();
     Integer lastSeenInteger = -1;
     int j = 5;
@@ -229,7 +230,8 @@ public class Main {
     }
   }
 
-  private static <T extends MyIterable, S extends T> void testForEachIterable_widening() {
+  private static <T extends MyIterable, S extends T> void testForEachIterable_widening(
+      T unusedForInference1, S unusedForInference2) {
     double lastSeenDouble = -1;
     int j = 5;
     for (double d : new MyIterable()) {

@@ -130,13 +130,13 @@ class GenericMethod extends j_l_Object {
   return supplier.m_get__java_lang_Object();
  }
  /** @nodts @template T_1 */
- static m_methodWithBoundTypeVariable__void() {
+ static m_methodWithBoundTypeVariable__java_lang_Number__void(/** T_1 */ unusedForInference) {
   GenericMethod.$clinit();
  }
  /** @nodts */
  static m_testMethodCallsWithCaptureTypeArguments__void() {
   GenericMethod.$clinit();
-  GenericMethod.m_methodWithBoundTypeVariable__void();
+  GenericMethod.m_methodWithBoundTypeVariable__java_lang_Number__void($Long.fromInt(0));
  }
  /** @nodts */
  static $clinit() {
@@ -160,6 +160,7 @@ class GenericMethod extends j_l_Object {
   Exception = goog.module.get('java.lang.Exception$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

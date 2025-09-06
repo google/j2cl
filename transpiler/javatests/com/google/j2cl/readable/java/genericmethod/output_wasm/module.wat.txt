@@ -813,19 +813,21 @@
  )
 )
 
-;;; void GenericMethod.methodWithBoundTypeVariable()
-(func $m_methodWithBoundTypeVariable__void@genericmethod.GenericMethod
+;;; void GenericMethod.methodWithBoundTypeVariable(T arg0)
+(func $m_methodWithBoundTypeVariable__java_lang_Number__void@genericmethod.GenericMethod
+ (param $arg0 (ref null $java.lang.Number))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:151:33
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:151:33
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:151:33
-  (call $m_methodWithBoundTypeVariable_$private__void@genericmethod.GenericMethod )
+  (call $m_methodWithBoundTypeVariable_$private__java_lang_Number__void@genericmethod.GenericMethod (local.get $arg0))
  )
 )
 
-;;; void GenericMethod.methodWithBoundTypeVariable_$private()
-(func $m_methodWithBoundTypeVariable_$private__void@genericmethod.GenericMethod
+;;; void GenericMethod.methodWithBoundTypeVariable_$private(T unusedForInference)
+(func $m_methodWithBoundTypeVariable_$private__java_lang_Number__void@genericmethod.GenericMethod
+ (param $unusedForInference (ref null $java.lang.Number))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:151:33
  (block
  )
@@ -838,7 +840,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:56
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:4
-  (call $m_methodWithBoundTypeVariable_$private__void@genericmethod.GenericMethod )
+  (call $m_methodWithBoundTypeVariable_$private__java_lang_Number__void@genericmethod.GenericMethod (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 0)))
  )
 )
 

@@ -24,6 +24,7 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Error
 import kotlin.Exception
+import kotlin.Long
 import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
@@ -155,11 +156,11 @@ open class GenericMethod<T> {
   }
 
   @JvmStatic
-  internal fun <T_1: Number?> methodWithBoundTypeVariable_pp_genericmethod() {}
+  internal fun <T_1: Number?> methodWithBoundTypeVariable_pp_genericmethod(unusedForInference: T_1) {}
 
   @JvmStatic
   internal fun testMethodCallsWithCaptureTypeArguments_pp_genericmethod() {
-   GenericMethod.methodWithBoundTypeVariable_pp_genericmethod<Number?>()
+   GenericMethod.methodWithBoundTypeVariable_pp_genericmethod<Long?>(0L)
   }
  }
 

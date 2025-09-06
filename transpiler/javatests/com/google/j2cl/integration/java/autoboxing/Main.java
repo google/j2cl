@@ -52,8 +52,8 @@ public class Main {
     testUnbox_byOperator();
     testUnbox_byOperator_throwsNPE();
     testUnbox_byOperator_throwsCCE();
-    testUnbox_fromTypeVariable();
-    testUnbox_fromIntersectionType();
+    testUnbox_fromTypeVariable(0L);
+    testUnbox_fromIntersectionType(0L);
     testUnbox_conditionals();
     testUnbox_switchExpression();
     testAutoboxing_arithmetic();
@@ -732,7 +732,7 @@ public class Main {
     assertTrue(boxI == 6);
   }
 
-  private static <T extends Long> void testUnbox_fromTypeVariable() {
+  private static <T extends Long> void testUnbox_fromTypeVariable(T unusedForInference) {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
@@ -752,7 +752,8 @@ public class Main {
     assertTrue(l == 11L);
   }
 
-  private static <T extends Long & Comparable<Long>> void testUnbox_fromIntersectionType() {
+  private static <T extends Long & Comparable<Long>> void testUnbox_fromIntersectionType(
+      T unusedForInference) {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;

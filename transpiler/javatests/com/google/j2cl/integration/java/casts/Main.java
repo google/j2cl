@@ -18,6 +18,7 @@ package casts;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2KtJvm;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
@@ -33,7 +34,7 @@ public class Main {
 
   public static void main(String... args) {
     testCasts_basics();
-    testCasts_generics();
+    testCasts_generics(0L, 0L);
     testCasts_typeVariableWithNativeBound();
     testCasts_parameterizedNativeType();
     testCasts_exceptionMessages();
@@ -464,7 +465,8 @@ public class Main {
   }
 
   @SuppressWarnings({"unused", "unchecked"})
-  private static <T, E extends Number> void testCasts_generics() {
+  private static <T, E extends Number> void testCasts_generics(
+      T unusedForInference1, E unusedForInference2) {
     // TODO(b/420648962): Does not throw on Kotlin/Native
     if (isJ2KtNative()) {
       return;
@@ -501,6 +503,9 @@ public class Main {
 
   @Wasm("nop") // Casts to/from native types not yet supported in Wasm.
   @SuppressWarnings({"rawtypes", "unchecked"})
+  // TODO(b/443341543): To enable this test for J2KT, the type variable T should be able
+  // to be assigned a native type.
+  @J2ktIncompatible
   private static <T extends NativeMap<?, ?>> void testCasts_typeVariableWithNativeBound() {
     // Casting Object[] to NativeMap[] is invalid on the JVM.
     if (isJvm()) {
@@ -517,6 +522,14 @@ public class Main {
     {
       Object o = new NativeMap();
       T unused = (T) o;
+    }
+  }
+
+  @interface J2ktIncompatible {}
+
+  private static void testCasts_typeVariableWithNativeBound(Object... unused) {
+    if (!isJ2Kt()) {
+      fail();
     }
   }
 
