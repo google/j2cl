@@ -23,8 +23,7 @@ final class J2ktSwiftInteropTest: XCTestCase {
 
     obj = J2ktiosinteropDefaultNames()
     obj = J2ktiosinteropDefaultNames(int: 1)
-    // TODO(b/374280337): Should be J2ktiosinteropDefaultNames(int:with:)
-    obj = J2ktiosinteropDefaultNames(int: 1, withNSString: "")
+    obj = J2ktiosinteropDefaultNames(int: 1, with: "")
 
     obj.method()
     obj.booleanMethod(withBoolean: true)
