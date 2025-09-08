@@ -30,17 +30,12 @@ on:
         required: true
         default: false
 
-env:
-  publish_to_bcr: ${{ github.event.repository.name != 'jsinterop-annotations' }}
-  publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
-  continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists == 'true' }}
-
 jobs:
   # We need two separate jobs based on whether we are releasing to BCR. Releasing to BCR requires
   # elevated permissions, which cannot be set dynamically within a single job.
   # TODO(dramaix): merge release_common.yaml into this file and remove the need for two jobs. 
   release_with_bcr:
-    if: ${{ env.publish_to_bcr }}
+    if: ${{ github.event.repository.name != 'jsinterop-annotations' }}
     uses: ./.github/workflows/release_common.yaml
 
     permissions:
@@ -53,15 +48,15 @@ jobs:
     # Pass the inputs from the manual trigger to the reusable workflow.
     with:
       version: ${{ github.event.inputs.version }}
-      publish_to_sonatype: ${{ env.publish_to_sonatype }}
-      continue_if_tag_exists: ${{ env.continue_if_tag_exists }}
+      publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
+      continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists }}
       publish_to_bcr: true
 
     # Allow the reusable workflow to access the secrets.
     secrets: inherit
 
   release_without_bcr:
-    if: ${{ !env.publish_to_bcr }}
+    if: ${{ github.event.repository.name == 'jsinterop-annotations' }}
     uses: ./.github/workflows/release_common.yaml
 
     permissions:
@@ -71,8 +66,8 @@ jobs:
     # Pass the inputs from the manual trigger to the reusable workflow.
     with:
       version: ${{ github.event.inputs.version }}
-      publish_to_sonatype: ${{ env.publish_to_sonatype }}
-      continue_if_tag_exists: ${{ env.continue_if_tag_exists }}
+      publish_to_sonatype: true
+      continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists }}
       publish_to_bcr: false
 
     # Allow the reusable workflow to access the secrets.
