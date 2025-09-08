@@ -35,7 +35,7 @@ jobs:
   # elevated permissions, which cannot be set dynamically within a single job.
   # TODO(dramaix): merge release_common.yaml into this file and remove the need for two jobs. 
   release:
-    uses: google/j2cl/.github/workflows/release_common.yaml@master
+    uses: ./.github/workflows/release_common.yaml
 
     permissions:
       # Permissions for creating a github release.
