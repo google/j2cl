@@ -34,8 +34,7 @@ jobs:
   # We need two separate jobs based on whether we are releasing to BCR. Releasing to BCR requires
   # elevated permissions, which cannot be set dynamically within a single job.
   # TODO(dramaix): merge release_common.yaml into this file and remove the need for two jobs. 
-  release_with_bcr:
-    if: ${{ github.event.repository.name != 'jsinterop-annotations' }}
+  release:
     uses: ./.github/workflows/release_common.yaml
 
     permissions:
@@ -50,25 +49,7 @@ jobs:
       version: ${{ github.event.inputs.version }}
       publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
       continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists }}
-      publish_to_bcr: true
-
-    # Allow the reusable workflow to access the secrets.
-    secrets: inherit
-
-  release_without_bcr:
-    if: ${{ github.event.repository.name == 'jsinterop-annotations' }}
-    uses: ./.github/workflows/release_common.yaml
-
-    permissions:
-      # Permissions for creating a github release.
-      contents: write
-
-    # Pass the inputs from the manual trigger to the reusable workflow.
-    with:
-      version: ${{ github.event.inputs.version }}
-      publish_to_sonatype: true
-      continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists }}
-      publish_to_bcr: false
+      publish_to_bcr: ${{ github.event.repository.name != 'jsinterop-annotations' }}
 
     # Allow the reusable workflow to access the secrets.
     secrets: inherit
