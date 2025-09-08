@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.0rg/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,9 @@
 # limitations under the License.
 name: Release Project
 
-# TODO(dramaix): Consider triggering the workflow on git tag creation instead.
+permissions:
+  contents: read
+
 # This workflow is triggered manually from the Actions tab.
 on:
   workflow_dispatch:
@@ -28,8 +30,17 @@ on:
         required: true
         default: false
 
+env:
+  publish_to_bcr: ${{ github.event.repository.name != 'jsinterop-annotations' }}
+  publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
+  continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists == 'true' }}
+
 jobs:
-  release:
+  # We need two separate jobs based on whether we are releasing to BCR. Releasing to BCR requires
+  # elevated permissions, which cannot be set dynamically within a single job.
+  # TODO(dramaix): merge release_common.yaml into this file and remove the need for two jobs.
+  release_with_bcr:
+    if: ${{ env.publish_to_bcr == 'true' }}
     uses: ./.github/workflows/release_common.yaml
 
     permissions:
@@ -42,8 +53,27 @@ jobs:
     # Pass the inputs from the manual trigger to the reusable workflow.
     with:
       version: ${{ github.event.inputs.version }}
-      publish_to_sonatype: false
-      continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists == 'true' }}
+      publish_to_sonatype: ${{ env.publish_to_sonatype }}
+      continue_if_tag_exists: ${{ env.continue_if_tag_exists }}
+      publish_to_bcr: true
+
+    # Allow the reusable workflow to access the secrets.
+    secrets: inherit
+
+  release_without_bcr:
+    if: ${{ env.publish_to_bcr == 'false' }}
+    uses: ./.github/workflows/release_common.yaml
+
+    permissions:
+      # Permissions for creating a github release.
+      contents: write
+
+    # Pass the inputs from the manual trigger to the reusable workflow.
+    with:
+      version: ${{ github.event.inputs.version }}
+      publish_to_sonatype: ${{ env.publish_to_sonatype }}
+      continue_if_tag_exists: ${{ env.continue_if_tag_exists }}
+      publish_to_bcr: false
 
     # Allow the reusable workflow to access the secrets.
     secrets: inherit
