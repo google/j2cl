@@ -215,7 +215,7 @@ public class Main {
     acceptSupplier(() -> null);
   }
 
-  private static <T> void testUnsafeNull() {
+  private static void testUnsafeNull() {
     // This line should not throw NPE, as the bound is nullable.
     Object x = getUnsafeNull();
 
@@ -230,7 +230,7 @@ public class Main {
     return null;
   }
 
-  private static <T> void testDefaultValue(@Nullable Object value) {
+  private static void testDefaultValue(@Nullable Object value) {
     if (value != null) {
       // This line should not throw NPE, even though the return type has non-null bound.
       Object x = getDefaultValue(value.getClass());
