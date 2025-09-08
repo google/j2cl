@@ -766,10 +766,11 @@ class JavaEnvironment {
         ImmutableList.of());
   }
 
-
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Utility methods to process nullability annotations on classes that are compiled separately.
   // Javac does not present TYPE_USE annotation in the returned type instances.
+  // TODO(b/443074477): Debug for which cases this is needed. In theory, the original bug in javac
+  // was fixed (https://bugs.openjdk.org/browse/JDK-8225377).
   private static TypeDescriptor applyParameterNullabilityAnnotations(
       TypeDescriptor typeDescriptor, ExecutableElement declarationMethodElement, int index) {
     return applyNullabilityAnnotations(
@@ -854,10 +855,7 @@ class JavaEnvironment {
         return applyNullabilityAnnotation(
             typeDescriptor, rest.subList(innerCount - 1, rest.size()), isNullable);
       case WILDCARD:
-        TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-        return TypeVariable.createWildcardWithUpperBound(
-            applyNullabilityAnnotation(
-                typeVariable.getUpperBoundTypeDescriptor(), rest, isNullable));
+        // no need fix up wildcards.
     }
     return typeDescriptor;
   }
