@@ -428,7 +428,7 @@ public class J2clMinifier {
    * This is a cache of previously minified content (presumably whole files). This makes reloads in
    * fast concatenating uncompiled JS servers extra-extra fast.
    */
-  private final Map<String, String> minifiedContentByContent = new ConcurrentHashMap<>();
+  private Map<String, String> minifiedContentByContent = new ConcurrentHashMap<>();
 
   private final TransitionFunction[][] transFn;
 
@@ -516,6 +516,10 @@ public class J2clMinifier {
     transFn[S_DOUBLE_QUOTED_STRING_ESCAPE][S_END_STATE] = J2clMinifier::skipChar;
   }
 
+  public void disableContentCache() {
+    minifiedContentByContent = null;
+  }
+
   /**
    * Process the content of a file for converting mangled J2CL names to minified (but still pretty
    * and unique) versions and strips block comments.
@@ -541,6 +545,11 @@ public class J2clMinifier {
       // TODO(dramaix): please document that minifier can completely remove the content of a file
       // when RTA is not experimental anymore.
       return "";
+    }
+
+    // Caching is disabled.
+    if (minifiedContentByContent == null) {
+      return minifyContent(fileKey, content);
     }
 
     // Return a previously cached version of minified output, if possible.
