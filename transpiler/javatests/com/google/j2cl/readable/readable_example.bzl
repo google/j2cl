@@ -14,6 +14,7 @@ readable_example(
 
 load("@rules_cc//cc:objc_library.bzl", "objc_library")
 load("//third_party/bazel_rules/rules_kotlin/kotlin/native:kt_ios.bzl", "kt_ios_build_test")
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
     "//build_defs:rules.bzl",
@@ -224,7 +225,7 @@ def _readable_diff_test(name, target, dir_out, tags):
         target = target,
     )
 
-    native.sh_test(
+    sh_test(
         name = name + "_test",
         srcs = ["//transpiler/javatests/com/google/j2cl/readable:diff_check"],
         data = native.glob(["%s/**" % dir_out]) + [name],
