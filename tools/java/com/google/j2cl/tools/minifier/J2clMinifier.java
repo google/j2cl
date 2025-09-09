@@ -165,7 +165,9 @@ public class J2clMinifier {
 
   private static final int[][] nextState;
 
+  @SuppressWarnings("NonFinalStaticField")
   private static int numberOfStates = 0;
+
   private static final int S_BLOCK_COMMENT = numberOfStates++;
   private static final int S_DOUBLE_QUOTED_STRING = numberOfStates++;
   private static final int S_DOUBLE_QUOTED_STRING_ESCAPE = numberOfStates++;
@@ -542,11 +544,10 @@ public class J2clMinifier {
     }
 
     // Return a previously cached version of minified output, if possible.
-    String minifiedContent = minifiedContentByContent.get(content);
-    if (minifiedContent != null) {
-      return minifiedContent;
-    }
+    return minifiedContentByContent.computeIfAbsent(content, t -> minifyContent(fileKey, t));
+  }
 
+  private String minifyContent(String fileKey, String content) {
     boolean[] unusedLines = unusedLinesPerFile.get(fileKey);
 
     Buffer buffer = new Buffer();
@@ -554,7 +555,7 @@ public class J2clMinifier {
     int lineNumber = 0;
     boolean skippingLine = unusedLines != null && unusedLines[lineNumber];
 
-    /**
+    /*
      * Loop over the chars in the content, keeping track of in/not-in identifier state, copying
      * non-identifier chars immediately and accumulating identifiers chars for minifying and copying
      * when the identifier ends.
@@ -584,12 +585,7 @@ public class J2clMinifier {
 
     // Transition to the end state
     transFn[lastParseState][S_END_STATE].transition(buffer, (char) 0);
-
-    minifiedContent = buffer.toString();
-    // Update the minified content cache for next time.
-    minifiedContentByContent.put(content, minifiedContent);
-
-    return minifiedContent;
+    return buffer.toString();
   }
 
   /**
