@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.0rg/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 name: Release Project
+
+permissions:
+  contents: read
 
 # TODO(dramaix): Consider triggering the workflow on git tag creation instead.
 # This workflow is triggered manually from the Actions tab.
@@ -30,7 +33,7 @@ on:
 
 jobs:
   release:
-    uses: ./.github/workflows/release_common.yaml
+    uses: google/j2cl/.github/workflows/release_common.yaml@master
 
     permissions:
       # Permissions for creating a github release.
@@ -42,8 +45,9 @@ jobs:
     # Pass the inputs from the manual trigger to the reusable workflow.
     with:
       version: ${{ github.event.inputs.version }}
-      publish_to_sonatype: false
+      publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
       continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists == 'true' }}
+      publish_to_bcr: ${{ github.event.repository.name != 'jsinterop-annotations' }}
 
     # Allow the reusable workflow to access the secrets.
     secrets: inherit
