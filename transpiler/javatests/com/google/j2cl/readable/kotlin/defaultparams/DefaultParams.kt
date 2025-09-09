@@ -103,6 +103,14 @@ fun testComplexDefault() {
   complexDefault(a = 1, b = 123)
 }
 
+fun captureDefault(str: String = "defaulted", f: () -> String = { "f: $str" }): String = f()
+
+fun testCapturedDefault() {
+  captureDefault()
+  captureDefault("foo")
+  captureDefault("foo") { "bar" }
+}
+
 fun identityOrCreate(o: Any? = Any(), unused: Any = Any()) = o
 
 fun nestedDefaultCall(

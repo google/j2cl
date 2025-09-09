@@ -29,6 +29,7 @@ fun main(vararg unused: String) {
   testExtFun()
   testLocalFun()
   testComplexDefault()
+  testCapturedDefault()
   testDefaultInitializerCallsWithDefaults()
   testVarargs()
   testInterface()
@@ -143,6 +144,14 @@ private fun testComplexDefault() {
   assertEquals(1, complexDefault(a = -1))
   assertEquals(2, complexDefault(a = 1))
   assertEquals(123, complexDefault(a = 1, b = 123))
+}
+
+fun captureDefault(str: String = "defaulted", f: () -> String = { "f: $str" }): String = f()
+
+private fun testCapturedDefault() {
+  assertEquals("f: defaulted", captureDefault())
+  assertEquals("f: foo", captureDefault("foo"))
+  assertEquals("bar", captureDefault("foo") { "bar" })
 }
 
 fun identityOrCreate(o: Any? = Any(), unused: Any = Any()) = o

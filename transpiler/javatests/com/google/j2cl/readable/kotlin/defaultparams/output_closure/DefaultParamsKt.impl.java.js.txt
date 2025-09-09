@@ -10,11 +10,13 @@ let FooImpl = goog.forwardDeclare('defaultparams.FooImpl$impl');
 let FooImplWithDefaultOverride = goog.forwardDeclare('defaultparams.FooImplWithDefaultOverride$impl');
 let Subclass = goog.forwardDeclare('defaultparams.Subclass$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
@@ -122,6 +124,33 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.m_complexDefault$default__int__int__int(-1, /**@type {number}*/ (undefined));
   DefaultParamsKt.m_complexDefault$default__int__int__int(1, /**@type {number}*/ (undefined));
   DefaultParamsKt.m_complexDefault__int__int__int(1, 123);
+ }
+ /** @nodts @return {string} */
+ static m_captureDefault__java_lang_String__kotlin_jvm_functions_Function0__java_lang_String(/** string */ str, /** !Function0<?> */ f) {
+  DefaultParamsKt.$clinit();
+  return /**@type {string}*/ ($Casts.$to(f.m_invoke__java_lang_Object(), j_l_String));
+ }
+ /** @nodts @return {string} */
+ static m_captureDefault$default__java_lang_String__kotlin_jvm_functions_Function0__java_lang_String(/** string= */ str, /** !Function0<?>= */ f) {
+  DefaultParamsKt.$clinit();
+  if (JsUtils.isUndefined(str)) {
+   str = 'defaulted';
+  }
+  if (JsUtils.isUndefined(f)) {
+   f = Function0.$adapt(/**  @return {?}*/ (() =>{
+    return '' + 'f: ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(str);
+   }));
+  }
+  return DefaultParamsKt.m_captureDefault__java_lang_String__kotlin_jvm_functions_Function0__java_lang_String(str, f);
+ }
+ /** @nodts */
+ static m_testCapturedDefault__void() {
+  DefaultParamsKt.$clinit();
+  DefaultParamsKt.m_captureDefault$default__java_lang_String__kotlin_jvm_functions_Function0__java_lang_String(/**@type {string}*/ (undefined), /**@type {!Function0<?string>}*/ (undefined));
+  DefaultParamsKt.m_captureDefault$default__java_lang_String__kotlin_jvm_functions_Function0__java_lang_String('foo', /**@type {!Function0<?string>}*/ (undefined));
+  DefaultParamsKt.m_captureDefault__java_lang_String__kotlin_jvm_functions_Function0__java_lang_String('foo', Function0.$adapt(/**  @return {?}*/ (() =>{
+   return 'bar';
+  })));
  }
  /** @nodts @return {*} */
  static m_identityOrCreate__java_lang_Object__java_lang_Object__java_lang_Object(/** * */ o, /** !* */ unused) {
@@ -306,10 +335,12 @@ class DefaultParamsKt extends j_l_Object {
   FooImplWithDefaultOverride = goog.module.get('defaultparams.FooImplWithDefaultOverride$impl');
   Subclass = goog.module.get('defaultparams.Subclass$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
   JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
