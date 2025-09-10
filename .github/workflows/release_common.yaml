@@ -179,7 +179,7 @@ jobs:
     if: ${{ inputs.create_github_release }}
     uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.3
     with:
-      prerelease: false
+      prerelease: ${{ contains(inputs.version, '-RC') }}
       release_files: ${{ github.event.repository.name }}-*.tar.gz
       tag_name: ${{ inputs.version }}
       # TODO(dramaix): contribute upstream to allow skipping test.
