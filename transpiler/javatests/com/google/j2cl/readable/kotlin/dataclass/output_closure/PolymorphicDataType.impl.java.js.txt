@@ -74,16 +74,10 @@ class PolymorphicDataType extends AbstractType {
  }
  /** @final @nodts @return {!PolymorphicDataType} */
  m_copy$default__int__int__int__dataclass_PolymorphicDataType(/** number= */ a, /** number= */ b, /** number= */ c) {
-  if (JsUtils.isUndefined(a)) {
-   a = this.f_a__dataclass_PolymorphicDataType_;
-  }
-  if (JsUtils.isUndefined(b)) {
-   b = this.f_b__dataclass_PolymorphicDataType_;
-  }
-  if (JsUtils.isUndefined(c)) {
-   c = this.f_c__dataclass_PolymorphicDataType_;
-  }
-  return this.m_copy__int__int__int__dataclass_PolymorphicDataType(a, b, c);
+  let a$defaulted = JsUtils.isUndefined(a) ? this.f_a__dataclass_PolymorphicDataType_ : a;
+  let b$defaulted = JsUtils.isUndefined(b) ? this.f_b__dataclass_PolymorphicDataType_ : b;
+  let c$defaulted = JsUtils.isUndefined(c) ? this.f_c__dataclass_PolymorphicDataType_ : c;
+  return this.m_copy__int__int__int__dataclass_PolymorphicDataType(a$defaulted, b$defaulted, c$defaulted);
  }
  /** @override @return {string} */
  toString() {

@@ -50,13 +50,9 @@ class ArrayMembers extends j_l_Object {
  }
  /** @final @nodts @return {!ArrayMembers} */
  m_copy$default__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(/** !Array<number>= */ a, /** !Array<string>= */ b) {
-  if (JsUtils.isUndefined(a)) {
-   a = this.f_a__dataclass_ArrayMembers_;
-  }
-  if (JsUtils.isUndefined(b)) {
-   b = this.f_b__dataclass_ArrayMembers_;
-  }
-  return this.m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(a, b);
+  let a$defaulted = JsUtils.isUndefined(a) ? this.f_a__dataclass_ArrayMembers_ : a;
+  let b$defaulted = JsUtils.isUndefined(b) ? this.f_b__dataclass_ArrayMembers_ : b;
+  return this.m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(a$defaulted, b$defaulted);
  }
  /** @override @return {string} */
  toString() {

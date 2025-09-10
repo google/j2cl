@@ -41,10 +41,8 @@ class DefaultParams extends j_l_Object {
  //Initialization from constructor 'DefaultParams(int, int, DefaultConstructorMarker)'.
  /** @nodts */
  $ctor__defaultparams_DefaultParams__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ a, /** number= */ b, /** DefaultConstructorMarker= */ $marker) {
-  if (JsUtils.isUndefined(a)) {
-   a = 1;
-  }
-  this.$ctor__defaultparams_DefaultParams__int__int__void(a, b);
+  let a$defaulted = JsUtils.isUndefined(a) ? 1 : a;
+  this.$ctor__defaultparams_DefaultParams__int__int__void(a$defaulted, b);
  }
  /** @final @nodts @return {number} */
  m_getA__int() {
@@ -71,10 +69,8 @@ class DefaultParams extends j_l_Object {
  m_foo__int__void(/** number */ c) {}
  /** @final @nodts */
  m_foo$default__int__void(/** number= */ c) {
-  if (JsUtils.isUndefined(c)) {
-   c = 20;
-  }
-  this.m_foo__int__void(c);
+  let c$defaulted = JsUtils.isUndefined(c) ? 20 : c;
+  this.m_foo__int__void(c$defaulted);
   return;
  }
  /** @nodts */

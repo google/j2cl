@@ -43,10 +43,8 @@ class MainKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_factorialTC$default__int__int__int(/** number */ i, /** number= */ result) {
   MainKt.$clinit();
-  if (JsUtils.isUndefined(result)) {
-   result = 1;
-  }
-  return MainKt.m_factorialTC__int__int__int(i, result);
+  let result$defaulted = JsUtils.isUndefined(result) ? 1 : result;
+  return MainKt.m_factorialTC__int__int__int(i, result$defaulted);
  }
  /** @nodts */
  static $clinit() {

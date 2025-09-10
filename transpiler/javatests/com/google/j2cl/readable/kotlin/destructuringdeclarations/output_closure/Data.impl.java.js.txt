@@ -58,13 +58,9 @@ class Data extends j_l_Object {
  }
  /** @final @nodts @return {!Data} */
  m_copy$default__java_lang_String__int__destructuringdeclarations_Data(/** string= */ name, /** number= */ age) {
-  if (JsUtils.isUndefined(name)) {
-   name = this.f_name__destructuringdeclarations_Data_;
-  }
-  if (JsUtils.isUndefined(age)) {
-   age = this.f_age__destructuringdeclarations_Data_;
-  }
-  return this.m_copy__java_lang_String__int__destructuringdeclarations_Data(name, age);
+  let name$defaulted = JsUtils.isUndefined(name) ? this.f_name__destructuringdeclarations_Data_ : name;
+  let age$defaulted = JsUtils.isUndefined(age) ? this.f_age__destructuringdeclarations_Data_ : age;
+  return this.m_copy__java_lang_String__int__destructuringdeclarations_Data(name$defaulted, age$defaulted);
  }
  /** @override @return {string} */
  toString() {

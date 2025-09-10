@@ -48,10 +48,8 @@ class IntValueHolder extends j_l_Object {
  }
  /** @final @nodts @return {!IntValueHolder} */
  m_copy$default__int__dataclass_IntValueHolder(/** number= */ backingValue) {
-  if (JsUtils.isUndefined(backingValue)) {
-   backingValue = this.f_backingValue__dataclass_IntValueHolder_;
-  }
-  return this.m_copy__int__dataclass_IntValueHolder(backingValue);
+  let backingValue$defaulted = JsUtils.isUndefined(backingValue) ? this.f_backingValue__dataclass_IntValueHolder_ : backingValue;
+  return this.m_copy__int__dataclass_IntValueHolder(backingValue$defaulted);
  }
  /** @override @return {string} */
  toString() {

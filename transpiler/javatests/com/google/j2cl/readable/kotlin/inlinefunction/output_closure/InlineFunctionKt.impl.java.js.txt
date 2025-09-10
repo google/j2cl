@@ -427,10 +427,8 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_inlineFunWithDefaults$default__int__int__int(/** number */ a, /** number= */ b) {
   InlineFunctionKt.$clinit();
-  if (JsUtils.isUndefined(b)) {
-   b = 2;
-  }
-  return InlineFunctionKt.m_inlineFunWithDefaults__int__int__int(a, b);
+  let b$defaulted = JsUtils.isUndefined(b) ? 2 : b;
+  return InlineFunctionKt.m_inlineFunWithDefaults__int__int__int(a, b$defaulted);
  }
  /** @nodts @return {number} */
  static m_inlineFunWithDefaultsAndVarargs__int__int__arrayOf_int__int(/** number */ a, /** number */ b, /** !Array<number> */ c) {
@@ -440,10 +438,8 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_inlineFunWithDefaultsAndVarargs$default__int__int__arrayOf_int__int(/** number */ a, /** number= */ b, /** !Array<number>= */ c) {
   InlineFunctionKt.$clinit();
-  if (JsUtils.isUndefined(b)) {
-   b = 2;
-  }
-  return InlineFunctionKt.m_inlineFunWithDefaultsAndVarargs__int__int__arrayOf_int__int(a, b, c);
+  let b$defaulted = JsUtils.isUndefined(b) ? 2 : b;
+  return InlineFunctionKt.m_inlineFunWithDefaultsAndVarargs__int__int__arrayOf_int__int(a, b$defaulted, c);
  }
  /** @nodts @return {number} */
  static m_inlineFunWithDefaultsAndDefaultVarargs__int__int__arrayOf_int__int(/** number */ a, /** number */ b, /** !Array<number> */ c) {
@@ -453,13 +449,9 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_inlineFunWithDefaultsAndDefaultVarargs$default__int__int__arrayOf_int__int(/** number */ a, /** number= */ b, /** !Array<number>= */ c) {
   InlineFunctionKt.$clinit();
-  if (JsUtils.isUndefined(b)) {
-   b = 2;
-  }
-  if (JsUtils.isUndefined(c)) {
-   c = (/**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int)));
-  }
-  return InlineFunctionKt.m_inlineFunWithDefaultsAndDefaultVarargs__int__int__arrayOf_int__int(a, b, c);
+  let b$defaulted = JsUtils.isUndefined(b) ? 2 : b;
+  let c$defaulted = JsUtils.isUndefined(c) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int)) : c;
+  return InlineFunctionKt.m_inlineFunWithDefaultsAndDefaultVarargs__int__int__arrayOf_int__int(a, b$defaulted, c$defaulted);
  }
  /** @nodts */
  static m_testDefaultParams__void() {

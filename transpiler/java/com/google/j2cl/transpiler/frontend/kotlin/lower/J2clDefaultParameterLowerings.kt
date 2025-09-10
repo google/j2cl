@@ -62,6 +62,7 @@ import org.jetbrains.kotlin.ir.util.copyTypeParametersFrom
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
+import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.utils.addToStdlib.assignFrom
 
@@ -125,27 +126,33 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
    * ```
    */
   private fun IrBuilderWithScope.createDefaultResolutionExpression(
-    toParameter: IrValueParameter,
-    defaultExpression: IrExpression?,
+    parameter: IrValueParameter,
+    defaultExpression: IrExpression,
   ): IrExpression? {
     // If the parameter does not have a default initializer, or the it's just being defaulted to
     // null, then we don't need to resolve anything.
-    if (defaultExpression == null || defaultExpression.isNullConst()) {
+    if (defaultExpression.isNullConst()) {
       return null
     }
-    return irIfThen(
-      type = toParameter.type,
+
+    return irIfThenElse(
+      type = parameter.type,
       condition =
         irCall(this@J2clDefaultArgumentStubGenerator.context.intrinsics.jsIsUndefinedFunctionSymbol)
-          .apply { putValueArgument(0, irGet(toParameter, toParameter.type)) },
-      thenPart = irSet(toParameter.symbol, defaultExpression),
+          .apply { putValueArgument(0, irGet(parameter)) },
+      thenPart = defaultExpression,
+      elsePart = irGet(parameter),
     )
   }
 
-  private fun IrBuilderWithScope.createResolutionStatement(
+  private fun <T : IrElement> IrStatementsBuilder<T>.createDefaultResolutionToTmpVariable(
     parameter: IrValueParameter,
-    defaultExpression: IrExpression?,
-  ): IrExpression? = createDefaultResolutionExpression(parameter, defaultExpression)
+    defaultExpression: IrExpression,
+  ): IrVariable? {
+    val resolutionExpression =
+      createDefaultResolutionExpression(parameter, defaultExpression) ?: return null
+    return createTmpVariable(resolutionExpression, nameHint = parameter.defaultedTmpVariableName)
+  }
 
   /**
    * Generates the body of a bridge function to handle default parameter resolution.
@@ -176,21 +183,22 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
   override fun IrFunction.generateDefaultStubBody(originalDeclaration: IrFunction): IrBody {
     val newFunction = this
 
-    val variables =
-      originalDeclaration.parameters.associateBy({ it }, { parameters[it.indexInParameters] })
-    val variableRemapper = VariableRemapper(variables)
+    val variables: MutableMap<IrValueParameter, IrValueDeclaration> =
+      originalDeclaration.parameters
+        .associateBy({ it }, { parameters[it.indexInParameters] })
+        .toMutableMap()
+    val parameterRemapper = VariableRemapper(variables)
 
     return context.createIrBuilder(symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET).irBlockBody {
       // For each optional parameter, add a resolution statement to default it if it's undefined.
-      +originalDeclaration.parameters
-        .filter { it.defaultValue != null }
-        .mapNotNull {
-          val newParameter = parameters[it.indexInParameters]
-          createResolutionStatement(
+      for (originalParameter in originalDeclaration.parameters.filter { it.defaultValue != null }) {
+        val newParameter = parameters[originalParameter.indexInParameters]
+        createDefaultResolutionToTmpVariable(
             newParameter,
-            it.defaultValue!!.expression.transform(variableRemapper, null),
+            originalParameter.remapDefaultExpressionReferences(parameterRemapper),
           )
-        }
+          ?.let { variables[originalParameter] = it }
+      }
 
       // If it's a constructor we need a constructing delegating call, otherwise just delegate to
       // the original function via a normal call
@@ -222,33 +230,26 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
     // Ensure that it doesn't already have a bridge or is itself a bridge.
     check(defaultArgumentsDispatchFunction == null && defaultArgumentsOriginalFunction == null)
 
-    val newVariables = hashMapOf<IrValueParameter, IrValueParameter>()
-    parameters =
-      parameters.map { param ->
-        if (param.defaultValue != null) {
-          // Copy the parameter and mark it as reassignable.
-          param.copyTo(this, isAssignable = true).also { new -> newVariables[param] = new }
-        } else {
-          param
-        }
-      }
-
-    check(newVariables.isNotEmpty())
-
-    val blockBody = body as? IrBlockBody
-    if (blockBody != null) {
-      val variableRemapper = VariableRemapper(newVariables)
+    val originalBlockBody = body as? IrBlockBody
+    if (originalBlockBody != null) {
       val irBuilder = context.createIrBuilder(symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET)
-      blockBody.transformChildren(variableRemapper, null)
-      blockBody.statements.addAll(
-        0,
-        parameters.mapNotNull {
-          irBuilder.createResolutionStatement(
-            it,
-            it.defaultValue?.expression?.transform(variableRemapper, null),
-          )
-        },
-      )
+      val newVariables: MutableMap<IrValueParameter, IrValueDeclaration> =
+        parameters.associateWith { it }.toMutableMap()
+      val variableRemapper = VariableRemapper(newVariables)
+      body =
+        irBuilder.irBlockBody {
+          for (parameter in parameters.filter { it.defaultValue != null }) {
+            createDefaultResolutionToTmpVariable(
+                parameter,
+                parameter.remapDefaultExpressionReferences(variableRemapper),
+              )
+              ?.let { newVariables[parameter] = it }
+          }
+
+          // Remap variables from the original body and add the statements to the new body.
+          originalBlockBody.transformChildrenVoid(variableRemapper)
+          +originalBlockBody.statements
+        }
     }
 
     // Mark the function as its own dispatch function.
@@ -267,6 +268,13 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
 
     private fun IrConstructorCall.shouldCopyAnnotationToBridge(): Boolean =
       annotationsToNotCopy.none { isAnnotation(it) }
+
+    private fun IrValueParameter.remapDefaultExpressionReferences(
+      variableRemapper: VariableRemapper
+    ): IrExpression = defaultValue!!.expression.transform(variableRemapper, data = null)
+
+    private val IrValueParameter.defaultedTmpVariableName: String
+      get() = "${name.asString()}\$defaulted"
   }
 }
 

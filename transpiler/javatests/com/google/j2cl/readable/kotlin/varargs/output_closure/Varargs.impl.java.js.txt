@@ -67,10 +67,8 @@ class Varargs extends j_l_Object {
  m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number */ b) {}
  /** @final @nodts */
  m_testNonTrailingVarargWithDefault$default__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number= */ b) {
-  if (JsUtils.isUndefined(b)) {
-   b = 0;
-  }
-  this.m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(a, args, b);
+  let b$defaulted = JsUtils.isUndefined(b) ? 0 : b;
+  this.m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(a, args, b$defaulted);
   return;
  }
  /** @final @nodts */

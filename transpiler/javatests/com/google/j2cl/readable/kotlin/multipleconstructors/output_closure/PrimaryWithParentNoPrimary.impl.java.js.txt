@@ -44,13 +44,9 @@ class PrimaryWithParentNoPrimary extends ParentWithoutPrimary {
  //Initialization from constructor 'PrimaryWithParentNoPrimary(int, boolean, DefaultConstructorMarker)'.
  /** @nodts */
  $ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ id, /** boolean= */ flag, /** DefaultConstructorMarker= */ $marker) {
-  if (JsUtils.isUndefined(id)) {
-   id = 1;
-  }
-  if (JsUtils.isUndefined(flag)) {
-   flag = true;
-  }
-  this.$ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__void(id, flag);
+  let id$defaulted = JsUtils.isUndefined(id) ? 1 : id;
+  let flag$defaulted = JsUtils.isUndefined(flag) || flag;
+  this.$ctor__multipleconstructors_PrimaryWithParentNoPrimary__int__boolean__void(id$defaulted, flag$defaulted);
  }
  /** @final @nodts @return {number} */
  m_getId__int() {

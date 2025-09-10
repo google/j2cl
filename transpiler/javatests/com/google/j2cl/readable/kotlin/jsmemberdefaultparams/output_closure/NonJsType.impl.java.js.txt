@@ -26,10 +26,8 @@ class NonJsType extends j_l_Object {
  /** @nodts @return {!NonJsType} */
  static $create__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number= */ param, /** DefaultConstructorMarker= */ $marker) {
   NonJsType.$clinit();
-  if (JsUtils.isUndefined(param)) {
-   param = 1;
-  }
-  let $instance = new NonJsType(param);
+  let param$defaulted = JsUtils.isUndefined(param) ? 1 : param;
+  let $instance = new NonJsType(param$defaulted);
   $instance.$ctor__jsmemberdefaultparams_NonJsType__int__kotlin_jvm_internal_DefaultConstructorMarker__void(param, $marker);
   return $instance;
  }
@@ -40,10 +38,8 @@ class NonJsType extends j_l_Object {
  jsMethod(/** number */ param) {}
  /** @final @nodts */
  m_jsMethod$default__int__void(/** number= */ param) {
-  if (JsUtils.isUndefined(param)) {
-   param = 2;
-  }
-  this.jsMethod(param);
+  let param$defaulted = JsUtils.isUndefined(param) ? 2 : param;
+  this.jsMethod(param$defaulted);
   return;
  }
  /** @nodts */

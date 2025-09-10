@@ -49,10 +49,8 @@ class BasicDataClass extends j_l_Object {
  //Initialization from constructor 'BasicDataClass(int, int, DefaultConstructorMarker)'.
  /** @nodts */
  $ctor__dataclass_BasicDataClass__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number */ foo, /** number= */ bar, /** DefaultConstructorMarker= */ $marker) {
-  if (JsUtils.isUndefined(bar)) {
-   bar = 10;
-  }
-  this.$ctor__dataclass_BasicDataClass__int__int__void(foo, bar);
+  let bar$defaulted = JsUtils.isUndefined(bar) ? 10 : bar;
+  this.$ctor__dataclass_BasicDataClass__int__int__void(foo, bar$defaulted);
  }
  /** @final @nodts @return {number} */
  m_getFoo__int() {
@@ -76,13 +74,9 @@ class BasicDataClass extends j_l_Object {
  }
  /** @final @nodts @return {!BasicDataClass} */
  m_copy$default__int__int__dataclass_BasicDataClass(/** number= */ foo, /** number= */ bar) {
-  if (JsUtils.isUndefined(foo)) {
-   foo = this.f_foo__dataclass_BasicDataClass_;
-  }
-  if (JsUtils.isUndefined(bar)) {
-   bar = this.f_bar__dataclass_BasicDataClass_;
-  }
-  return this.m_copy__int__int__dataclass_BasicDataClass(foo, bar);
+  let foo$defaulted = JsUtils.isUndefined(foo) ? this.f_foo__dataclass_BasicDataClass_ : foo;
+  let bar$defaulted = JsUtils.isUndefined(bar) ? this.f_bar__dataclass_BasicDataClass_ : bar;
+  return this.m_copy__int__int__dataclass_BasicDataClass(foo$defaulted, bar$defaulted);
  }
  /** @override @return {string} */
  toString() {

@@ -40,19 +40,11 @@ class SomeJsType extends j_l_Object {
  /** @nodts @template T @return {!SomeJsType<T>} */
  static $create__int__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number= */ publicField, /** number= */ privateField, /** number= */ packageField, /** number= */ protectedField, /** DefaultConstructorMarker= */ $marker) {
   SomeJsType.$clinit();
-  if (JsUtils.isUndefined(publicField)) {
-   publicField = 0;
-  }
-  if (JsUtils.isUndefined(privateField)) {
-   privateField = 0;
-  }
-  if (JsUtils.isUndefined(packageField)) {
-   packageField = 0;
-  }
-  if (JsUtils.isUndefined(protectedField)) {
-   protectedField = 0;
-  }
-  let $instance = new SomeJsType(publicField, privateField, packageField, protectedField);
+  let publicField$defaulted = JsUtils.isUndefined(publicField) ? 0 : publicField;
+  let privateField$defaulted = JsUtils.isUndefined(privateField) ? 0 : privateField;
+  let packageField$defaulted = JsUtils.isUndefined(packageField) ? 0 : packageField;
+  let protectedField$defaulted = JsUtils.isUndefined(protectedField) ? 0 : protectedField;
+  let $instance = new SomeJsType(publicField$defaulted, privateField$defaulted, packageField$defaulted, protectedField$defaulted);
   $instance.$ctor__jstype_SomeJsType__int__int__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(publicField, privateField, packageField, protectedField, $marker);
   return $instance;
  }
