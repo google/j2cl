@@ -51,6 +51,15 @@ async function compileStreaming(urlOrResponse) {
 }
 
 /**
+ * @param {!BufferSource} moduleBuffer
+ * @return {!Promise<!WebAssembly.Module>}
+ * @suppress {checkTypes} Externs are missing options parameter (phase 2)
+ */
+async function compile(moduleBuffer) {
+  return WebAssembly.compile(moduleBuffer, options);
+}
+
+/**
  * @param {!WebAssembly.Module} module
  * @return {!Promise<!WebAssembly.Instance>}
  * @suppress {checkTypes} Externs are missing overloads for WebAssembly.instantiate.
@@ -68,12 +77,12 @@ async function instantiate(module) {
  * small threshold, mandating the async functions for all non-trivial apps. This
  * function can be used in other contexts, such as the D8 command line.
  *
- * @param {!BufferSource} moduleObject
+ * @param {!BufferSource} moduleBuffer
  * @return {!WebAssembly.Instance}
  * @suppress {checkTypes} Externs are missing options parameter (phase 2)
  */
-function instantiateBlocking(moduleObject) {
-  const module = new WebAssembly.Module(moduleObject, options);
+function instantiateBlocking(moduleBuffer) {
+  const module = new WebAssembly.Module(moduleBuffer, options);
   return new WebAssembly.Instance(module, prepareImports(module));
 }
 
@@ -91,7 +100,7 @@ function prepareImports(module) {
   return imports;
 }
 
-exports = {compileStreaming, instantiate, instantiateStreaming, instantiateBlocking};
+exports = {compile, compileStreaming, instantiate, instantiateStreaming, instantiateBlocking};
 """
 
 def _impl_j2wasm_application(ctx):

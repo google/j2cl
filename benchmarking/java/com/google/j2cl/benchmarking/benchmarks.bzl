@@ -96,6 +96,7 @@ def benchmark(name, deps = [], data = [], jvm_only = False, perfgate_test_tags =
             "%s.%sLauncher#execute" % (benchmark_java_package, name),
             "%s.%sLauncher#prepareForRunOnce" % (benchmark_java_package, name),
             "%s.%sLauncher#runOnce" % (benchmark_java_package, name),
+            "%s.%sLauncher#runFixedCount" % (benchmark_java_package, name),
         ],
     )
 

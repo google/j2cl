@@ -2,6 +2,7 @@ load("//:benchmarking/java/com/google/j2cl/benchmarking/benchmarks.bzl", "benchm
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
+    default_visibility = ["//benchmarking:__subpackages__"],
     licenses = ["notice"],
 )
 

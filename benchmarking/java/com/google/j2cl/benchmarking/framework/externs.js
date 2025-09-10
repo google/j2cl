@@ -29,3 +29,6 @@ function read(name, format) {}
 
 /** @type {*} */
 Window.prototype.__benchmarking_result;
+
+/** @type {boolean} */
+Window.isJetStreamDriver;

@@ -34,6 +34,17 @@ public class #benchmarkName#Launcher {
     benchmark.run();
     benchmark = null; // Make sure it is only executed once.
   }
+
+  public static void runFixedCount(int count) {
+    AbstractBenchmark bench = new #benchmarkName#();
+    bench.setupOneTime();
+    for (int i = 0; i < count; i++) {
+      bench.setup();
+      bench.run();
+      bench.tearDown();
+    }
+    bench.tearDownOneTime();
+  }
 }
 """
 
@@ -54,13 +65,24 @@ goog.module('#benchmarkName#_launcher')
 
 const j2wasm = goog.require('#wasm_module_name#');
 
-if (typeof read == 'undefined') {
+if (typeof isJetStreamDriver !== 'undefined') {
+  // Running as a JetStream benchmark; expose "instantiateAsync" to JetStream driver.
+  goog.global['instantiateAsync'] = async function(buffer) {
+    return j2wasm.instantiate(await j2wasm.compile(buffer));
+  };
+  addPolyfills();
+} else if (typeof read == 'undefined') {
   // Running on browser, fetch the file from server.
   j2wasm.instantiateStreaming("#wasm_url#")
       .then((instance) => Object.assign(goog.global, instance.exports));
 } else {
   // Running in d8, read the file locally.
   const buffer = read('#wasm_url#', 'binary');
+  addPolyfills();
+  Object.assign(goog.global, j2wasm.instantiateBlocking(buffer).exports);
+}
+
+function addPolyfills() {
   // Add a simple TextDecoder polyfill. Will be removed soon with magic-string imports.
   goog.global['TextDecoder'] = class {
     /** @suppress {checkTypes} JSC_ILLEGAL_PROPERTY_ACCESS */
@@ -75,7 +97,10 @@ if (typeof read == 'undefined') {
   goog.global['btoa'] = (b) => {
     throw new Error('btoa not supported');
   };
-  Object.assign(goog.global, j2wasm.instantiateBlocking(buffer).exports);
+  // Add a placeholder for gc if it is not enabled in the environment.
+  if (typeof gc === 'undefined') {
+    goog.global['gc'] = () => {};
+  }
 }
 
 """
