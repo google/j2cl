@@ -1,0 +1,34 @@
+goog.module('array.Arrays.GwtIncompatible$impl');
+
+const Annotation = goog.require('java.lang.annotation.Annotation$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {Annotation}
+ */
+class GwtIncompatible {
+ /** @nodts */
+ static $clinit() {
+  GwtIncompatible.$clinit = () =>{};
+  GwtIncompatible.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Annotation.$markImplementor(ctor);
+  ctor.prototype.$implements__array_Arrays_GwtIncompatible = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__array_Arrays_GwtIncompatible;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+GwtIncompatible.$markImplementor(/**@type {Function}*/ (GwtIncompatible));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (GwtIncompatible), 'array.Arrays$GwtIncompatible');
+
+exports = GwtIncompatible;
+
+//# sourceMappingURL=Arrays$GwtIncompatible.js.map

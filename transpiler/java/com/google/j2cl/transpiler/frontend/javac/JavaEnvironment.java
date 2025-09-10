@@ -660,8 +660,13 @@ class JavaEnvironment {
     // traverse the supertypes to find the actual enclosing type descriptor without loosing the
     // parameterization.
     DeclaredTypeDescriptor unparameterizedEnclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(
-            ((MethodSymbol) declarationMethodElement).baseSymbol().getEnclosingElement().asType());
+        fixEnclosingTypeDescriptor(
+            createDeclaredTypeDescriptor(
+                ((MethodSymbol) declarationMethodElement)
+                    .baseSymbol()
+                    .getEnclosingElement()
+                    .asType()));
+
     enclosingTypeDescriptor =
         enclosingTypeDescriptor.getAllSuperTypesIncludingSelf().stream()
             .filter(unparameterizedEnclosingTypeDescriptor::isSameBaseType)
@@ -700,6 +705,18 @@ class JavaEnvironment {
         parameterDescriptors,
         returnTypeDescriptor,
         typeArguments);
+  }
+
+  /** Replace non-existent synthetic enclosing classes with the appropriate class. */
+  // TODO(b/443070736): Reconsider whether to just do this in createDeclaredTypeDescriptor.
+  static DeclaredTypeDescriptor fixEnclosingTypeDescriptor(
+      DeclaredTypeDescriptor enclosingTypeDescriptor) {
+    // Methods on array types show an enclosing class of "Array" in the default package.
+    if (enclosingTypeDescriptor.getQualifiedSourceName().equals("Array")) {
+      // Return java.lang.Object since all methods on arrays are defined in it,
+      return TypeDescriptors.get().javaLangObject;
+    }
+    return enclosingTypeDescriptor;
   }
 
   private ImmutableList<ParameterDescriptor> convertParameterDescriptors(

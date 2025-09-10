@@ -198,4 +198,12 @@ public class Arrays {
   public void consumesCloneable(Cloneable cloneable) {}
 
   public void consumesSerializable(Serializable serializable) {}
+
+  @interface GwtIncompatible {}
+
+  @GwtIncompatible
+  // Only compatible with j2kt.
+  <T> T[] testArrayClone(T[] array) {
+    return array.clone();
+  }
 }

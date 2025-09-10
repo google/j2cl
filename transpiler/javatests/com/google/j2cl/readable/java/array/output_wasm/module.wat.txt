@@ -69,6 +69,12 @@
  ))
 )
 
+;;; Code for array.Arrays.GwtIncompatible [type definition]
+(type $array.Arrays.GwtIncompatible.vtable (sub $java.lang.annotation.Annotation.vtable (struct
+ (field $m_annotationType__java_lang_Class (ref $function.m_annotationType__java_lang_Class))
+ ))
+)
+
 ;;; Code for array.Arrays.NativeType.$Overlay [imports]
 
 ;;; Code for array.Arrays [imports]
@@ -78,6 +84,8 @@
 ;;; Code for array.Arrays.NativeType [imports]
 
 ;;; Code for array.Arrays.ArrayContainer [imports]
+
+;;; Code for array.Arrays.GwtIncompatible [imports]
 
 ;;; Code for array.Arrays [static fields]
 (global $$class-initialized@array.Arrays (mut i32)
@@ -100,6 +108,14 @@
  (i32.const 0)
 )
 (global $$class@array.Arrays.ArrayContainer (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for array.Arrays.GwtIncompatible [static fields]
+(global $$class-initialized@array.Arrays.GwtIncompatible (mut i32)
+ (i32.const 0)
+)
+(global $$class@array.Arrays.GwtIncompatible (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -752,3 +768,35 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@array.Arrays.ArrayContainer)
+
+;;; Code for array.Arrays.GwtIncompatible [methods]
+
+;;; void GwtIncompatible.$clinit()
+(func $$clinit__void_<once>_@array.Arrays.GwtIncompatible
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:202:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:202:13
+  (if (global.get $$class-initialized@array.Arrays.GwtIncompatible)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:202:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:202:13
+  (global.set $$class-initialized@array.Arrays.GwtIncompatible (i32.const 1))
+ )
+)
+
+;;; Class<T> GwtIncompatible.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@array.Arrays.GwtIncompatible
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@array.Arrays.GwtIncompatible)))
+   (then
+    (return (global.get $$class@array.Arrays.GwtIncompatible))
+   )
+  )
+  (global.set $$class@array.Arrays.GwtIncompatible (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|array.Arrays...|__java_lang_String_<once>_@array.Arrays.GwtIncompatible )))
+  (return (global.get $$class@array.Arrays.GwtIncompatible))
+ )
+)

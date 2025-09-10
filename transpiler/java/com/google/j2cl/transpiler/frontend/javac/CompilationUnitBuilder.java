@@ -1309,6 +1309,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private DeclaredTypeDescriptor getParameterizedEnclosingType(
       DeclaredTypeDescriptor enclosingTypeDescriptor, Expression qualifier) {
+
+    enclosingTypeDescriptor = JavaEnvironment.fixEnclosingTypeDescriptor(enclosingTypeDescriptor);
     if (qualifier == null) {
       return enclosingTypeDescriptor;
     }

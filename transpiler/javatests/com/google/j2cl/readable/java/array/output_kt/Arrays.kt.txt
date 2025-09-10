@@ -178,6 +178,10 @@ open class Arrays {
 
  open fun consumesSerializable(serializable: Serializable?) {}
 
+ internal open fun <T> testArrayClone_pp_array(array: Array<T>?): Array<T>? {
+  return array!!.clone()
+ }
+
  open inner class SomeObject internal constructor()
 
  @JsType(name = "String", namespace = JsPackage.GLOBAL, isNative = true)
@@ -187,4 +191,6 @@ open class Arrays {
   @JvmField
   internal var data_pp_array: Array<T>? = null
  }
+
+ annotation class GwtIncompatible
 }
