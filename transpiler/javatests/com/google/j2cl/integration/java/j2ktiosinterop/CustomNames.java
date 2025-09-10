@@ -16,6 +16,7 @@
 package j2ktiosinterop;
 
 import com.google.j2objc.annotations.ObjectiveCName;
+import com.google.j2objc.annotations.SwiftName;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -68,6 +69,13 @@ public final class CustomNames {
 
   @ObjectiveCName("customLongStringMethod")
   public void longStringMethod(long i, String s) {}
+
+  @ObjectiveCName("customObjectiveCSwiftStringMethodWithString:")
+  @SwiftName("customObjectiveCSwiftStringMethod(with:)")
+  public void objectiveCSwiftStringMethod(String s) {}
+
+  @SwiftName("customSwiftStringMethod(with:)")
+  public void swiftStringMethod(String s) {}
 
   @ObjectiveCName("customStaticMethod")
   public static void staticMethod() {}

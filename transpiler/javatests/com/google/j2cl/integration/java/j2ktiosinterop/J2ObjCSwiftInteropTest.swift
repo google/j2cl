@@ -103,6 +103,9 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.customLongMethod(withLong: 1)
     obj.customLongStringMethod(withLong: 1, with: "")
 
+    obj.customObjectiveCSwiftStringMethod(with: "")
+    obj.customSwiftStringMethod(with: "")
+
     Custom_customStaticMethod()
     Custom_customStaticIntMethodWithIndex_(1)
     Custom_customStaticIntStringMethodWithIndex_name_(1, "")

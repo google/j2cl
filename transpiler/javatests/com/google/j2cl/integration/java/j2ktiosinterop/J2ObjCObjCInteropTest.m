@@ -136,6 +136,9 @@
   [obj customLongMethodWithLong:1];
   [obj customLongStringMethodWithLong:1 withNSString:@""];
 
+  [obj customObjectiveCSwiftStringMethodWithString:@""];
+  [obj swiftStringMethodWithNSString:@""];
+
   Custom_customStaticMethod();
   Custom_customStaticIntMethodWithIndex_(1);
   Custom_customStaticIntStringMethodWithIndex_name_(1, @"");

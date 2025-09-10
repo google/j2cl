@@ -115,6 +115,12 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.customLongMethod(withLong: 1)
     obj.customLongStringMethod(withLong: 1, with: "")
 
+    // TODO(b/441732853): Should be customObjectiveCSwiftStringMethod(with: "")
+    obj.customObjectiveCSwiftStringMethod(WithString: "")
+
+    // TODO(b/441732853): Should be customSwiftStringMethod(with: "")
+    obj.swiftStringMethod(with: "")
+
     CustomCompanion.shared.customStaticMethod()
     CustomCompanion.shared.customStaticIntMethod(WithIndex: 1)
     CustomCompanion.shared.customStaticIntStringMethod(WithIndex: 1, name: "")
