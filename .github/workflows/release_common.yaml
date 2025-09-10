@@ -68,6 +68,20 @@ jobs:
     steps:
       - name: Checkout current commit
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          # Fetch the entire history to have branch information. This will allow us to check that
+          # the commit we start the release on is part of the master branch.
+          # In our case, fetching the whole history only adds a few seconds to the checkout time for
+          # our larger repository, which is acceptable for a release process that is not run
+          # frequently.
+          fetch-depth: 0
+
+      - name: Check if on Master Branch
+        run: |
+          if ! git merge-base --is-ancestor "${{ github.ref }}" "refs/remotes/origin/master"; then
+            echo "Error: Releases can only be created from commits that are on the 'master' branch."
+            exit 1
+          fi
 
       - name: Check and Create Git Tag
         run: |
