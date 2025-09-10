@@ -69,7 +69,6 @@ public class AddDisambiguatingOverloadResolutionCastsJ2kt extends AbstractJ2ktNo
             // If it's a potentially ambiguous call, explicitly cast every argument to the
             // parameter's type.
             return Invocation.Builder.from(invocation)
-                .setArguments(invocation)
                 .setArguments(
                     zip(
                         invocation.getTarget().getParameterTypeDescriptors(),
