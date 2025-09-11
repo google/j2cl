@@ -74,6 +74,24 @@ class SuspendFunctionKt extends j_l_Object {
   (yield* CoroutineIntrinsicsKt.m_suspendOrReturn__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_($continuation, result));
  }
  /** @nodts */
+ static m_extFunOnSuspendLambda__kotlin_internal_j2cl_SuspendFunction1__void(/** !SuspendFunction1<?, ?> */ this_1) {
+  SuspendFunctionKt.$clinit();
+ }
+ /** @nodts */
+ static m_testSuspendReferenceAsVariable__void() {
+  SuspendFunctionKt.$clinit();
+  let testIsActive = function* (/** Continuation<?> */ $continuation, /** string */ foo) {};
+  SuspendFunctionKt.m_extFunOnSuspendLambda__kotlin_internal_j2cl_SuspendFunction1__void(SuspendFunction1.$adapt(/**  @return {!Generator<*, !Unit>}*/ (function* (/** Continuation<?> */ arg0, /** string */ arg1) {
+   let arg1_1 = /**@type {string}*/ ($Casts.$to(arg1, j_l_String));
+   return (yield* testIsActive(arg0, arg1_1));
+  })));
+  let suspendFunReference = SuspendFunction1.$adapt(/**  @return {!Generator<*, !Unit>}*/ (function* (/** Continuation<?> */ arg0_1, /** string */ arg1_2) {
+   let arg1_3 = /**@type {string}*/ ($Casts.$to(arg1_2, j_l_String));
+   return (yield* testIsActive(arg0_1, arg1_3));
+  }));
+  SuspendFunctionKt.m_extFunOnSuspendLambda__kotlin_internal_j2cl_SuspendFunction1__void(suspendFunReference);
+ }
+ /** @nodts */
  static $clinit() {
   SuspendFunctionKt.$clinit = () =>{};
   SuspendFunctionKt.$loadModules();

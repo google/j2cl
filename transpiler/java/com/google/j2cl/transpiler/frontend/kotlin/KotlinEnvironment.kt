@@ -61,6 +61,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionalInterface
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
@@ -131,7 +132,6 @@ import org.jetbrains.kotlin.ir.util.isAnonymousObject
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isInterface
-import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isLocal
 import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
@@ -895,7 +895,7 @@ internal class KotlinEnvironment(
 
     check(
       (originalTypeParams.size == replacementTypeParams.size &&
-        arguments.size == replacementTypeParams.size) || this.isKFunction()
+        arguments.size == replacementTypeParams.size) || this.isKFunctionOrKSuspendFunction()
     ) {
       """
       |Mismatch in number of parameters for original type ${classSymbol.owner.kotlinFqName} mapped
@@ -912,11 +912,13 @@ internal class KotlinEnvironment(
     val replacementArguments =
       when {
         !useDeclarationVariance -> arguments
-        // KFunction is a special case where there's a mismatch in the number of original type
-        // params,
-        // replacement type params, and number of arguments. We're not going to attempt to rewrite
-        // these.
-        isKFunction() -> arguments
+        // KFunction and KSuspendFunction are special cases where there's a mismatch in the number
+        // of original type params, replacement type params, and number of arguments. We're not
+        // going to attempt to rewrite these.
+        // TODO(b/443226297): Instead of following the JVM mapping and maps K(Suspend)Function{N} to
+        // K(Suspend)Function, we should map them directly to the physical (Suspend)Function{N}
+        // interfaces present in our stdlib.
+        isKFunctionOrKSuspendFunction() -> arguments
         else ->
           remapDeclarationTypeVarianceOntoArguments(
             arguments,

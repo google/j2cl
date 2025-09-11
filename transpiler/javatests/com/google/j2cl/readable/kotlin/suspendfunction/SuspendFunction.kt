@@ -159,3 +159,13 @@ class GenericClass<T> {
     }
   }
 }
+
+fun (suspend (String) -> Unit).extFunOnSuspendLambda() {}
+
+fun testSuspendReferenceAsVariable() {
+  suspend fun testIsActive(foo: String) {}
+  ::testIsActive.extFunOnSuspendLambda()
+
+  val suspendFunReference = ::testIsActive
+  suspendFunReference.extFunOnSuspendLambda()
+}
