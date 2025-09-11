@@ -9,6 +9,7 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let Function2 = goog.forwardDeclare('kotlin.jvm.functions.Function2$impl');
+let KFunction = goog.forwardDeclare('kotlin.reflect.KFunction$impl');
 let MethodReferences = goog.forwardDeclare('methodreferences.MethodReferences$impl');
 let Producer = goog.forwardDeclare('methodreferences.MethodReferences.Producer$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
@@ -82,6 +83,28 @@ class MethodReferencesKt extends j_l_Object {
   extensionFunRef.m_invoke__java_lang_Object__java_lang_Object(/**@type {!MethodReferences<!*>}*/ (MethodReferences.$create__()));
  }
  /** @nodts */
+ static m_acceptFunctionExpression__kotlin_jvm_functions_Function0__void(/** !Function0<?> */ f) {
+  MethodReferencesKt.$clinit();
+ }
+ /** @nodts @return {!KFunction<?>} */
+ static m_getKFunctionVar__kotlin_reflect_KFunction() {
+  MethodReferencesKt.$clinit();
+  return MethodReferencesKt.f_kFunctionVar__methodreferences_MethodReferencesKt_;
+ }
+ /** @nodts @return {!KFunction<?>} */
+ static m_returnKFunction__kotlin_reflect_KFunction() {
+  MethodReferencesKt.$clinit();
+  return Function0.$adapt(/**  @return {!*}*/ (() =>{
+   return MethodReferencesKt.m_m__java_lang_Object();
+  }));
+ }
+ /** @nodts */
+ static m_testKFunctionReference__void() {
+  MethodReferencesKt.$clinit();
+  MethodReferencesKt.m_acceptFunctionExpression__kotlin_jvm_functions_Function0__void(MethodReferencesKt.m_getKFunctionVar__kotlin_reflect_KFunction());
+  MethodReferencesKt.m_acceptFunctionExpression__kotlin_jvm_functions_Function0__void(MethodReferencesKt.m_returnKFunction__kotlin_reflect_KFunction());
+ }
+ /** @nodts */
  static $clinit() {
   MethodReferencesKt.$clinit = () =>{};
   MethodReferencesKt.$loadModules();
@@ -91,6 +114,9 @@ class MethodReferencesKt extends j_l_Object {
   MethodReferencesKt.f_staticStringProducer__methodreferences_MethodReferencesKt_ = ($$q = MethodReferencesKt.m_m__java_lang_Object(), Producer.$adapt(/**  @return {string}*/ (() =>{
    return $Objects.m_toString__java_lang_Object__java_lang_String($$q);
   })));
+  MethodReferencesKt.f_kFunctionVar__methodreferences_MethodReferencesKt_ = Function0.$adapt(/**  @return {!*}*/ (() =>{
+   return MethodReferencesKt.m_m__java_lang_Object();
+  }));
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -115,6 +141,8 @@ class MethodReferencesKt extends j_l_Object {
 MethodReferencesKt.f_p__methodreferences_MethodReferencesKt_;
 /**@type {!Producer<string>} @nodts*/
 MethodReferencesKt.f_staticStringProducer__methodreferences_MethodReferencesKt_;
+/**@type {!KFunction<?>} @nodts*/
+MethodReferencesKt.f_kFunctionVar__methodreferences_MethodReferencesKt_;
 $Util.$setClassMetadata(MethodReferencesKt, 'methodreferences.MethodReferencesKt');
 
 exports = MethodReferencesKt;

@@ -249,3 +249,14 @@ fun testFunctionReferences() {
   // type. See https://youtrack.jetbrains.com/issue/KT-13003
   // val genericTopLevelFunRef = ::getString<String>
 }
+
+fun acceptFunctionExpression(f: () -> Any) {}
+
+val kFunctionVar: kotlin.reflect.KFunction0<Any> = ::m
+
+fun returnKFunction(): kotlin.reflect.KFunction0<Any> = ::m
+
+fun testKFunctionReference() {
+  acceptFunctionExpression(kFunctionVar)
+  acceptFunctionExpression(returnKFunction())
+}

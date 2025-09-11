@@ -1,0 +1,34 @@
+//transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences:readable_binary:
+transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences/readable.js/methodreferences/MethodReferencesKt.impl.java.js 
+Originally at:
+transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences/readable.js/methodreferences/MethodReferences.kt WARNING - [JSC_TYPE_MISMATCH] inconsistent return type
+found   : Function0<*>
+required: KFunction<?>
+fun returnKFunction(): kotlin.reflect.KFunction0<Any> = ::m
+                                                        ^^^
+
+transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences/readable.js/methodreferences/MethodReferencesKt.impl.java.js 
+Originally at:
+transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences/readable.js/methodreferences/MethodReferences.kt WARNING - [JSC_TYPE_MISMATCH] actual parameter 1 of MethodReferencesKt.m_acceptFunctionExpression__kotlin_jvm_functions_Function0__void does not match formal parameter
+found   : KFunction<?>
+required: Function0<?>
+  acceptFunctionExpression(kFunctionVar)
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences/readable.js/methodreferences/MethodReferencesKt.impl.java.js 
+Originally at:
+transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences/readable.js/methodreferences/MethodReferences.kt WARNING - [JSC_TYPE_MISMATCH] actual parameter 1 of MethodReferencesKt.m_acceptFunctionExpression__kotlin_jvm_functions_Function0__void does not match formal parameter
+found   : KFunction<?>
+required: Function0<?>
+  acceptFunctionExpression(returnKFunction())
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences/readable.js/methodreferences/MethodReferencesKt.impl.java.js 
+Originally at:
+transpiler/javatests/com/google/j2cl/readable/kotlin/methodreferences/readable.js/methodreferences/MethodReferences.kt WARNING - [JSC_TYPE_MISMATCH] assignment to property f_kFunctionVar__methodreferences_MethodReferencesKt_ of MethodReferencesKt
+found   : Function0<*>
+required: KFunction<?>
+val kFunctionVar: kotlin.reflect.KFunction0<Any> = ::m
+                                                   ^^^
+
+0 error(s), 4 warning(s)
