@@ -22,7 +22,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 open class SuspendFunction : SuspendFunInterface {
-  fun nonSuspendingFunction(param: String) {}
+  fun nonSuspendingFunction(param: String): String = param
 
   suspend fun anotherSuspendFunction(foo: String): String = "Foo$foo"
 
@@ -33,6 +33,7 @@ open class SuspendFunction : SuspendFunInterface {
     testSuspendLambda(anotherSuspendFunction(s))
 
     s = testSuspendFunctionReference(::anotherSuspendFunction)
+    s = testSuspendFunctionReference(::nonSuspendingFunction)
 
     // Test boxing on return type of suspend function
     val boxedInteger: Int? = GenericSuspendFunInterface<Int> { param -> param }.suspendMe(0)

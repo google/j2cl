@@ -187,7 +187,6 @@ import org.jetbrains.kotlin.ir.types.typeWithArguments
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
-import org.jetbrains.kotlin.ir.util.isFunction
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.parentAsClass
@@ -1510,7 +1509,7 @@ internal class CompilationUnitBuilder(
     //  ```
     val functionNType: IrSimpleType
     if (irExpression.isAdaptedFunctionReference) {
-      check(irExpression.type.isFunction())
+      check(irExpression.type.isFunctionOrSuspendFunction())
       functionNType = irExpression.type as IrSimpleType
     } else {
       check(irExpression.type.isKFunctionOrKSuspendFunction())

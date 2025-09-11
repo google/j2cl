@@ -1,0 +1,18 @@
+//transpiler/javatests/com/google/j2cl/readable/kotlin/suspendfunction:readable_binary:
+transpiler/javatests/com/google/j2cl/readable/kotlin/suspendfunction/readable.js/suspendfunction/SuspendFunction.impl.java.js 
+Originally at:
+transpiler/javatests/com/google/j2cl/readable/kotlin/suspendfunction/readable.js/suspendfunction/SuspendFunction.kt WARNING - [JSC_TYPE_MISMATCH] actual parameter 1 of nonSuspendingFunction does not match formal parameter
+found   : SuspendFunction
+required: (Continuation<?>|null)
+    s = testSuspendFunctionReference(::nonSuspendingFunction)
+                                     ^^^^
+
+transpiler/javatests/com/google/j2cl/readable/kotlin/suspendfunction/readable.js/suspendfunction/SuspendFunction.impl.java.js 
+Originally at:
+transpiler/javatests/com/google/j2cl/readable/kotlin/suspendfunction/readable.js/suspendfunction/SuspendFunction.kt WARNING - [JSC_TYPE_MISMATCH] actual parameter 2 of nonSuspendingFunction does not match formal parameter
+found   : (Continuation<?>|null)
+required: SuspendFunction
+    s = testSuspendFunctionReference(::nonSuspendingFunction)
+                                     ^^^^^^
+
+0 error(s), 2 warning(s)
