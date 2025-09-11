@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.ArrayLiteral
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.BinaryExpression
 import com.google.j2cl.transpiler.ast.BinaryOperator
-import com.google.j2cl.transpiler.ast.BooleanLiteral
 import com.google.j2cl.transpiler.ast.CastExpression
 import com.google.j2cl.transpiler.ast.ConditionalExpression
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
@@ -45,14 +44,12 @@ import com.google.j2cl.transpiler.ast.MultiExpression
 import com.google.j2cl.transpiler.ast.NewArray
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.NullLiteral
-import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PostfixExpression
 import com.google.j2cl.transpiler.ast.PostfixOperator
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.PrefixOperator
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
-import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.SwitchExpression
 import com.google.j2cl.transpiler.ast.ThisReference
@@ -60,7 +57,6 @@ import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
-import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
@@ -85,7 +81,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NEGATE_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_EQUAL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_NULL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NOT_SAME_OPERATOR
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NULL_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OBJECT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OR_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.PLUS_OPERATOR
@@ -100,11 +95,8 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAR_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.asExpression
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.at
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.blockComment
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.isExpression
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.nonNull
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.COLON
@@ -143,6 +135,9 @@ internal data class ExpressionRenderer(
   // TODO(b/252138814): Remove when KT-54349 is fixed
   val renderThisReferenceWithLabel: Boolean = false,
 ) {
+  private val literalRenderer: LiteralRenderer
+    get() = LiteralRenderer(nameRenderer)
+
   private val typeRenderer: TypeRenderer
     get() = TypeRenderer(nameRenderer)
 
@@ -176,7 +171,7 @@ internal data class ExpressionRenderer(
       is InstanceOfExpression -> instanceOfExpressionSource(expression)
       is JsDocExpression -> jsDocExpressionSource(expression)
       is JsDocCastExpression -> jsDocCastExpressionSource(expression)
-      is Literal -> literalSource(expression)
+      is Literal -> literalRenderer.literalSource(expression)
       is MethodCall -> methodCallSource(expression)
       is MultiExpression -> multiExpressionSource(expression)
       is NewArray -> newArraySource(expression)
@@ -364,42 +359,6 @@ internal data class ExpressionRenderer(
         typeDescriptor.toNonNullable(),
         projectRawToWildcards = true,
       )
-    }
-
-  private fun literalSource(literal: Literal): Source =
-    when (literal) {
-      is NullLiteral -> NULL_KEYWORD
-      is BooleanLiteral -> booleanLiteralSource(literal)
-      is StringLiteral -> stringLiteralSource(literal)
-      is TypeLiteral -> typeLiteralSource(literal)
-      is NumberLiteral -> numberLiteralSource(literal)
-      else -> throw InternalCompilerError("renderLiteral($literal)")
-    }
-
-  private fun booleanLiteralSource(booleanLiteral: BooleanLiteral): Source =
-    literal(booleanLiteral.value)
-
-  private fun stringLiteralSource(stringLiteral: StringLiteral): Source =
-    literal(stringLiteral.value)
-
-  private fun typeLiteralSource(typeLiteral: TypeLiteral): Source =
-    dotSeparated(
-      classLiteral(nameRenderer.qualifiedNameSource(typeLiteral.referencedTypeDescriptor)),
-      if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-        nonNull(nameRenderer.extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
-      } else {
-        nameRenderer.extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
-      },
-    )
-
-  private fun numberLiteralSource(numberLiteral: NumberLiteral): Source =
-    when (numberLiteral.typeDescriptor.toUnboxedType()) {
-      PrimitiveTypes.CHAR -> literal(numberLiteral.value.toInt().toChar())
-      PrimitiveTypes.INT -> literal(numberLiteral.value.toInt())
-      PrimitiveTypes.LONG -> literal(numberLiteral.value.toLong())
-      PrimitiveTypes.FLOAT -> literal(numberLiteral.value.toFloat())
-      PrimitiveTypes.DOUBLE -> literal(numberLiteral.value.toDouble())
-      else -> throw InternalCompilerError("renderNumberLiteral($numberLiteral)")
     }
 
   private fun methodCallSource(expression: MethodCall): Source =

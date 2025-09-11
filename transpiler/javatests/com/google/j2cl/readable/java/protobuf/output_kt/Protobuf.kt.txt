@@ -20,6 +20,7 @@
 package protobuf
 
 import javaemul.lang.*
+import com.google.j2objc.annotations.ObjectiveCName
 import com.google.protobuf.ExtensionLite
 import com.google.protobuf.GeneratedMessage
 import com.google.protobuf.Parser
@@ -84,6 +85,7 @@ open class Protobuf {
    fun acceptStatic(myMessage: MyMessage) {}
 
    @JvmStatic
+   @ObjectiveCName("acceptStaticWithMyMessage:")
    @ObjCName("acceptStatic")
    fun acceptStaticWithObjectiveCName(
     @ObjCName("WithMyMessage") myMessage: MyMessage
@@ -95,6 +97,7 @@ open class Protobuf {
    }
 
    @JvmStatic
+   @ObjectiveCName("getStaticWithMyMessage:")
    @ObjCName("getStatic")
    fun getStaticWithObjectiveCName(
     @ObjCName("WithMyMessage") myMessage: MyMessage

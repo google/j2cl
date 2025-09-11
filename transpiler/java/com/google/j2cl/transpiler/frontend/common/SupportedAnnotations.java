@@ -26,6 +26,7 @@ public class SupportedAnnotations {
           "com.google.auto.value.AutoValue",
           "com.google.auto.value.AutoValue.Builder",
           "com.google.j2objc.annotations.ObjectiveCName",
+          "com.google.j2objc.annotations.SwiftName",
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
           "java.lang.SuppressWarnings",

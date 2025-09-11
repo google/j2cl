@@ -73,6 +73,9 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   private val typeRenderer: TypeRenderer
     get() = TypeRenderer(nameRenderer)
 
+  private val annotationRenderer: AnnotationRenderer
+    get() = AnnotationRenderer(nameRenderer)
+
   private val memberDescriptorRenderer: MemberDescriptorRenderer
     get() = MemberDescriptorRenderer(nameRenderer)
 
@@ -225,6 +228,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
   fun annotationsSource(method: Method, methodObjCNames: MethodObjCNames?): Source =
     newLineSeparated(
+      annotationRenderer.annotationsSource(method.descriptor),
       objCNameRenderer.objCAnnotationSource(method.descriptor, methodObjCNames),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(method),
       memberDescriptorRenderer.jvmThrowsAnnotationSource(method.descriptor),
