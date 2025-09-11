@@ -21,7 +21,7 @@ open class DefaultParams(val a: Int = 1, val b: Int) {
   open fun foo(c: Int = 20) {}
 }
 
-class Subclass : DefaultParams {
+class Subclass : DefaultParams, DefaultParamInterface {
   constructor() : super(b = 2)
 
   constructor(a: Int, b: Int) : super(a, b)
@@ -29,6 +29,8 @@ class Subclass : DefaultParams {
   override fun foo(c: Int) {
     super.foo(c + 10)
   }
+
+  override fun parentInterfaceFun(a: Int) {}
 }
 
 fun testConstructors() {

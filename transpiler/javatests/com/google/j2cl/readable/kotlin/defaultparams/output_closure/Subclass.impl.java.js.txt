@@ -1,5 +1,6 @@
 goog.module('defaultparams.Subclass$impl');
 
+const DefaultParamInterface = goog.require('defaultparams.DefaultParamInterface$impl');
 const DefaultParams = goog.require('defaultparams.DefaultParams$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -7,6 +8,7 @@ let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultC
 
 /**
  * @final
+ * @implements {DefaultParamInterface}
  */
 class Subclass extends DefaultParams {
  /** @protected @nodts */
@@ -43,6 +45,8 @@ class Subclass extends DefaultParams {
  m_foo__int__void(/** number */ c) {
   super.m_foo__int__void(c + 10 | 0);
  }
+ /** @override @nodts */
+ m_parentInterfaceFun__int__void(/** number */ a) {}
  /** @nodts */
  static $clinit() {
   Subclass.$clinit = () =>{};
@@ -57,6 +61,7 @@ class Subclass extends DefaultParams {
  /** @nodts */
  static $loadModules() {}
 }
+DefaultParamInterface.$markImplementor(Subclass);
 $Util.$setClassMetadata(Subclass, 'defaultparams.Subclass');
 
 exports = Subclass;
