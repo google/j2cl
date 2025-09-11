@@ -59,22 +59,26 @@ public class J2ktInteropAnnotationUtils {
   }
 
   /** The namespace specified on a package, type, method or field. */
+  // TODO(b/444296932): Remove when no longer needed.
   @Nullable
   public static String getJ2ktObjectiveCName(ITypeBinding typeBinding) {
     return getJ2ktObjectiveCName(getJ2ktObjectiveCNameAnnotation(typeBinding));
   }
 
+  // TODO(b/444296932): Remove when no longer needed.
   @Nullable
   public static String getJ2ktObjectiveCName(IAnnotationBinding annotationBinding) {
     return getStringAttribute(annotationBinding, "value");
   }
 
+  // TODO(b/444296932): Remove when no longer needed.
   @Nullable
   public static String getJ2ktObjectiveCName(PackageDeclaration packageDeclaration) {
     return getJ2ktObjectiveCName(
         getAnnotationBinding(packageDeclaration, J2ktInteropAnnotationUtils::isJ2ktObjectiveCName));
   }
 
+  // TODO(b/444296932): Remove when no longer needed.
   public static boolean isJ2ktObjectiveCName(IAnnotationBinding annotationBinding) {
     return annotationBinding
         .getAnnotationType()

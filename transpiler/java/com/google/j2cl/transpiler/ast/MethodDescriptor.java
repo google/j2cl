@@ -538,9 +538,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return true;
   }
 
-  @Nullable
-  abstract KtObjcInfo getKtObjcInfo();
-
   /** Compute the KtInfo of the function by traversing its overriding chain. */
   @Override
   @Memoized
@@ -695,8 +692,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   @Nullable
   public String getObjectiveCName() {
-    KtObjcInfo ktObjcInfo = getKtObjcInfo();
-    return ktObjcInfo != null ? ktObjcInfo.getObjectiveCName() : null;
+    return J2ktAstUtils.getObjectiveCName(this);
   }
 
   /** Returns true if this descriptor and {@code other} refer to the same method declaration. */
@@ -1458,8 +1454,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
     public abstract Builder setOriginalKtInfo(KtInfo ktInfo);
-
-    public abstract Builder setKtObjcInfo(KtObjcInfo ktObjcInfo);
 
     public abstract Builder setAnnotations(List<Annotation> annotations);
 

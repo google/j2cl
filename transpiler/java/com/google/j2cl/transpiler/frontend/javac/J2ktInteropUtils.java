@@ -21,14 +21,12 @@ import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUti
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktInAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktNativeAnnotation;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktObjectiveCNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktOutAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktPropertyAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktPublicNativeAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktThrowsAnnotation;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
-import com.google.j2cl.transpiler.ast.KtObjcInfo;
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
 import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
@@ -39,17 +37,6 @@ import javax.lang.model.element.Element;
 /** Utility functions for Kotlin Interop properties. */
 public class J2ktInteropUtils {
   private J2ktInteropUtils() {}
-
-  @Nullable
-  public static KtObjcInfo getJ2ktObjcInfo(AnnotatedConstruct annotatedConstruct) {
-    AnnotationMirror annotation = getJ2ktObjectiveCNameAnnotation(annotatedConstruct);
-    if (annotation == null) {
-      return null;
-    }
-    return KtObjcInfo.newBuilder()
-        .setObjectiveCName(getAnnotationParameterString(annotation, "value"))
-        .build();
-  }
 
   @Nullable
   public static KtTypeInfo getJ2ktTypeInfo(AnnotatedConstruct annotatedConstruct) {

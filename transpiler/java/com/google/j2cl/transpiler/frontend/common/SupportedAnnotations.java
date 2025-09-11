@@ -25,6 +25,7 @@ public class SupportedAnnotations {
           "com.google.apps.xplat.testing.parameterized.RunParameterized",
           "com.google.auto.value.AutoValue",
           "com.google.auto.value.AutoValue.Builder",
+          "com.google.j2objc.annotations.ObjectiveCName",
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
           "java.lang.SuppressWarnings",

@@ -990,7 +990,6 @@ class JavaEnvironment {
         .setConstructor(isConstructor)
         .setNative(isNative)
         .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
-        .setKtObjcInfo(J2ktInteropUtils.getJ2ktObjcInfo(declarationMethodElement))
         .setFinal(isFinal(declarationMethodElement))
         .setDefaultMethod(isDefault)
         .setAbstract(isAbstract(declarationMethodElement))
@@ -1373,7 +1372,6 @@ class JavaEnvironment {
         .setCustomizedJsNamespace(getJsNamespace(typeElement))
         .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
         .setKtTypeInfo(J2ktInteropUtils.getJ2ktTypeInfo(typeElement))
-        .setKtObjcInfo(J2ktInteropUtils.getJ2ktObjcInfo(typeElement))
         .setNullMarked(isNullMarked)
         .setOriginalSimpleSourceName(
             typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)

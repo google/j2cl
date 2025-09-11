@@ -53,15 +53,18 @@ public class J2ktInteropAnnotationUtils {
     return findAnnotationByName(annotatedConstruct, J2KT_DISABLED_ANNOTATION_NAME);
   }
 
+  // TODO(b/444296932): Remove when no longer needed.
   public static String getJ2ktObjectiveCName(AnnotationMirror annotation) {
     return getAnnotationParameterString(annotation, "value");
   }
 
+  // TODO(b/444296932): Remove when no longer needed.
   public static String getJ2ktObjectiveCName(AnnotatedConstruct annotatedConstruct) {
     return getJ2ktObjectiveCName(
         getAnnotation(annotatedConstruct, J2ktInteropAnnotationUtils::isJ2ktObjectiveCName));
   }
 
+  // TODO(b/444296932): Remove when no longer needed.
   public static boolean isJ2ktObjectiveCName(AnnotationMirror annotation) {
     return getAnnotationName(annotation).equals(J2KT_OBJECTIVE_C_ANNOTATION_NAME);
   }

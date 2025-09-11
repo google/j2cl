@@ -17,6 +17,8 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject;
 
+import javax.annotation.Nullable;
+
 /** J2KT AST utilities. */
 public class J2ktAstUtils {
   /** Returns whether given type declaration implicitly extends J2ktMonitor. */
@@ -51,6 +53,22 @@ public class J2ktAstUtils {
     return typeDescriptor instanceof DeclaredTypeDescriptor descriptor
         && (descriptor.isSubtypeOf(TypeDescriptors.get().javaLangClass)
             || isSubtypeOfJ2ktMonitor(descriptor));
+  }
+
+  @Nullable
+  public static String getObjectiveCName(HasAnnotations hasAnnotations) {
+    return getAnnotationValueString(hasAnnotations, "com.google.j2objc.annotations.ObjectiveCName");
+  }
+
+  @Nullable
+  private static String getAnnotationValueString(
+      HasAnnotations hasAnnotations, String qualifiedName) {
+    Annotation annotation = hasAnnotations.getAnnotation(qualifiedName);
+    if (annotation == null) {
+      return null;
+    }
+    Literal literal = annotation.getValues().get("value");
+    return literal instanceof StringLiteral stringLiteral ? stringLiteral.getValue() : null;
   }
 
   private J2ktAstUtils() {}

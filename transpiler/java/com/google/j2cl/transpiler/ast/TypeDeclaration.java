@@ -354,9 +354,6 @@ public abstract class TypeDeclaration
   @Nullable
   abstract KtTypeInfo getKtTypeInfo();
 
-  @Nullable
-  abstract KtObjcInfo getKtObjcInfo();
-
   public boolean isProtobuf() {
     return getAllSuperTypesIncludingSelf().stream()
         .map(TypeDeclaration::getPackageName)
@@ -609,8 +606,7 @@ public abstract class TypeDeclaration
   @Nullable
   @Memoized
   public String getObjectiveCName() {
-    KtObjcInfo ktObjcInfo = getKtObjcInfo();
-    return ktObjcInfo != null ? ktObjcInfo.getObjectiveCName() : null;
+    return J2ktAstUtils.getObjectiveCName(this);
   }
 
   @Memoized
@@ -895,8 +891,6 @@ public abstract class TypeDeclaration
     public abstract Builder setNative(boolean isNative);
 
     public abstract Builder setKtTypeInfo(KtTypeInfo ktTypeInfo);
-
-    public abstract Builder setKtObjcInfo(KtObjcInfo ktObjcInfo);
 
     public abstract Builder setTypeParameterDescriptors(
         Iterable<TypeVariable> typeParameterDescriptors);

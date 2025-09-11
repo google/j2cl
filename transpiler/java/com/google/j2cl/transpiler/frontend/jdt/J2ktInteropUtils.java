@@ -19,7 +19,6 @@ import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktInAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktNativeAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktObjectiveCNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktOutAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktPropertyAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktPublicNativeAnnotation;
@@ -28,7 +27,6 @@ import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStri
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.isWarningSuppressed;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
-import com.google.j2cl.transpiler.ast.KtObjcInfo;
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
 import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
@@ -41,17 +39,6 @@ import org.eclipse.jdt.core.dom.IVariableBinding;
 /** Utility functions for Kotlin Interop properties. */
 public class J2ktInteropUtils {
   private J2ktInteropUtils() {}
-
-  @Nullable
-  public static KtObjcInfo getJ2ktObjcInfo(IBinding binding) {
-    IAnnotationBinding annotationBinding = getJ2ktObjectiveCNameAnnotation(binding);
-    if (annotationBinding == null) {
-      return null;
-    }
-    return KtObjcInfo.newBuilder()
-        .setObjectiveCName(getStringAttribute(annotationBinding, "value"))
-        .build();
-  }
 
   @Nullable
   public static KtTypeInfo getJ2ktTypeInfo(IBinding binding) {
