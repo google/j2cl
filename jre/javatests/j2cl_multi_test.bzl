@@ -38,6 +38,8 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
         browsers = [
             "//build_defs/internal_do_not_use/browser:chrome-wasm-linux",
         ],
+        browser_overrides = {
+        },
         **kwargs
     )
 
@@ -73,4 +75,4 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
             **kwargs
         )
 
-    native.test_suite(name = name, tests = tests, tags = kwargs.pop("tags", []))
+    native.test_suite(name = name, tests = tests, tags = ["manual"] + kwargs.get("tags", []))
