@@ -86,11 +86,11 @@ def j2cl_web_test(
         src,
         deps,
         compile,
-        browsers,
         data,
         test_class,
         tags,
         default_browser = None,
+        browsers = [],
         **args):  # @unused
     # TODO(b/259118921): support multiple testsuites.
     fail_multiple_testsuites = """

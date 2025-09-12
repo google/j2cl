@@ -73,6 +73,8 @@ load(":j2wasm_library.bzl", "j2wasm_library")
 
 _JS_UNIT_TEST_PARAMETERS = [
     "args",
+    "browsers",
+    "browser_overrides",
     "compiler",
     "default_browser",
     "deprecation",
@@ -95,6 +97,8 @@ _JS_UNIT_TEST_PARAMETERS = [
 
 _STRIP_JSUNIT_PARAMETERS = [
     "args",
+    "browsers",
+    "browser_overrides",
     "compiler",
     "default_browser",
     "deps_mgmt",
@@ -172,7 +176,6 @@ def j2cl_test_common(
         platform = "CLOSURE",
         optimize_wasm = False,
         wasm_defs = {},
-        browsers = None,
         extra_defs = [],
         jvm_flags = [],
         tags = [],
@@ -294,7 +297,6 @@ def j2cl_test_common(
         name = name,
         src = ":" + generated_suite_name,
         deps = deps,
-        browsers = browsers,
         data = data,
         tags = tags + ["ide-test-intermediate"],
         flaky = flaky,
