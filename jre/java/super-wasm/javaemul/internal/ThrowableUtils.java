@@ -17,8 +17,8 @@ package javaemul.internal;
 
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /** Backend-specific utils for Throwable. */
@@ -52,19 +52,16 @@ public final class ThrowableUtils {
   @JsMethod(name = "getJavaThrowable", namespace = "j2wasm.ExceptionUtils")
   private static native WasmExtern getJavaThrowableImpl(JsObject error);
 
-  public static boolean isError(JsObject error) {
-    return false;
-  }
+  @JsMethod(namespace = "j2wasm.ExceptionUtils")
+  public static native boolean isError(JsObject error);
 
   /** JavaScript {@code Error}. Placeholder in Wasm. */
   @JsType(isNative = true, name = "Error", namespace = JsPackage.GLOBAL)
   public static class NativeError implements JsObject {
-    public static boolean hasCaptureStackTraceProperty;
+    @JsProperty(name = "captureStackTrace")
+    public static native boolean hasCaptureStackTraceProperty();
 
-    @JsOverlay
-    public static void captureStackTrace(NativeError error) {
-      // No op to avoid importing the function which breaks Firefox.
-    }
+    public static native void captureStackTrace(NativeError error);
 
     public String stack;
   }

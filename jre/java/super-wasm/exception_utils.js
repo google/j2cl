@@ -46,8 +46,18 @@ function getJavaThrowable(error) {
   return error["__j2wasm$exception"] ?? null;
 }
 
+/**
+ * @param {?} obj
+ * @return {boolean}
+ * @public
+ */
+function isError(obj) {
+  return obj instanceof Error;
+}
+
 exports = {
   throwException,
   setJavaThrowable,
   getJavaThrowable,
+  isError,
 };

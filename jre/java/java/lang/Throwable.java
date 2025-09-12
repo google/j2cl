@@ -120,7 +120,7 @@ public class Throwable implements Serializable {
       if (ThrowableUtils.isError(backingJsObject)) {
         // The stack property on Error is lazily evaluated in Chrome, so it is better use
         // captureStackTrace if available.
-        if (NativeError.hasCaptureStackTraceProperty) {
+        if (NativeError.hasCaptureStackTraceProperty()) {
           NativeError.captureStackTrace((NativeError) backingJsObject);
         } else {
           ((NativeError) backingJsObject).stack = new NativeError().stack;

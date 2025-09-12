@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-import static com.google.j2cl.jre.testing.TestUtils.isWasm;
-
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import junit.framework.TestCase;
 
@@ -25,11 +23,6 @@ public class ThrowableTest extends TestCase {
 
   @J2ktIncompatible // Currently unsupported
   public static void testStackTrace() {
-    if (isWasm()) {
-      // TODO(b/233263693): Add Throwable.getStackTrace support.
-      return;
-    }
-
     Throwable e = new Throwable("<my msg>");
     assertTrue(e.getStackTrace().length > 0);
 

@@ -46,7 +46,7 @@ public final class ThrowableUtils {
   @JsType(isNative = true, name = "Error", namespace = JsPackage.GLOBAL)
   public static class NativeError implements JsObject {
     @JsProperty(name = "captureStackTrace")
-    public static boolean hasCaptureStackTraceProperty;
+    public static native boolean hasCaptureStackTraceProperty();
 
     public static native void captureStackTrace(NativeError error);
 
