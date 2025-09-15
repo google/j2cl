@@ -24,9 +24,7 @@ import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 import javaemul.internal.JsUtils;
 
-/**
- * Abstracts the notion of a sequence of characters.
- */
+/** Abstracts the notion of a sequence of characters. */
 public interface CharSequence {
   char charAt(int index);
 
@@ -38,23 +36,27 @@ public interface CharSequence {
   String toString();
 
   default IntStream chars() {
-    return  StreamSupport.intStream(() -> {
-      PrimitiveIterator.OfInt it = new PrimitiveIterator.OfInt() {
-        int cursor;
+    return StreamSupport.intStream(
+        () -> {
+          PrimitiveIterator.OfInt it =
+              new PrimitiveIterator.OfInt() {
+                int cursor;
 
-        @Override
-        public int nextInt() {
-          checkElement(hasNext());
-          return charAt(cursor++);
-        }
+                @Override
+                public int nextInt() {
+                  checkElement(hasNext());
+                  return charAt(cursor++);
+                }
 
-        @Override
-        public boolean hasNext() {
-          return cursor < length();
-        }
-      };
-      return Spliterators.spliterator(it, length(), Spliterator.ORDERED);
-    }, Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED, false);
+                @Override
+                public boolean hasNext() {
+                  return cursor < length();
+                }
+              };
+          return Spliterators.spliterator(it, length(), Spliterator.ORDERED);
+        },
+        Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED,
+        false);
   }
 
   static boolean $isInstance(HasCharSequenceTypeMarker instance) {

@@ -19,11 +19,11 @@
 package java.lang;
 
 /**
- * Minimal emulation of {@link java.lang.InterruptedException}, that should
- * only be used in method signatures.
+ * Minimal emulation of {@link java.lang.InterruptedException}, that should only be used in method
+ * signatures.
  */
 public class InterruptedException extends Exception {
-  public InterruptedException() { }
+  public InterruptedException() {}
 
   public InterruptedException(String message) {
     super(message);

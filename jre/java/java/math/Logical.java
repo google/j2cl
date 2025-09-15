@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,23 +21,30 @@
  * licenses this file to You under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * INCLUDES MODIFICATIONS BY RICHARD ZSCHECH AS WELL AS GOOGLE.
  */
 package java.math;
 
 /**
- * The library implements some logical operations over {@code BigInteger}. The
- * operations provided are listed below. <ul type="circle"> <li>not</li> <li>and
- * </li> <li>andNot</li> <li>or</li> <li>xor</li> </ul>
+ * The library implements some logical operations over {@code BigInteger}. The operations provided
+ * are listed below.
+ *
+ * <ul type="circle">
+ *   <li>not
+ *   <li>and
+ *   <li>andNot
+ *   <li>or
+ *   <li>xor
+ * </ul>
  */
 class Logical {
 
@@ -77,6 +84,7 @@ class Logical {
 
   /**
    * Return sign = positive.magnitude & magnitude = -negative.magnitude.
+   *
    * @param positive
    * @param negative
    * @return
@@ -119,6 +127,7 @@ class Logical {
 
   /**
    * Return sign = -1, magnitude = -(-longer.magnitude & -shorter.magnitude).
+   *
    * @param longer
    * @param shorter
    * @return
@@ -146,8 +155,9 @@ class Logical {
       digit = -shorter.digits[i] & -longer.digits[i];
     }
     if (digit == 0) {
-      for (i++; i < shorter.numberLength
-          && (digit = ~(longer.digits[i] | shorter.digits[i])) == 0; i++) {
+      for (i++;
+          i < shorter.numberLength && (digit = ~(longer.digits[i] | shorter.digits[i])) == 0;
+          i++) {
         // digit
       }
       // = ~longer.digits[i] & ~shorter.digits[i]
@@ -221,6 +231,7 @@ class Logical {
 
   /**
    * Return sign = 1, magnitude = -val.magnitude & ~(-that.magnitude).
+   *
    * @param val
    * @param that
    * @return
@@ -282,12 +293,12 @@ class Logical {
 
   /**
    * Return sign = -1, magnitude = -(-negative.magnitude & ~positive.magnitude).
+   *
    * @param negative
    * @param positive
    * @return
    */
-  static BigInteger andNotNegativePositive(BigInteger negative,
-      BigInteger positive) {
+  static BigInteger andNotNegativePositive(BigInteger negative, BigInteger positive) {
     // PRE: negative < 0 && positive > 0
     int resLength;
     int resDigits[];
@@ -321,19 +332,16 @@ class Logical {
       digit = -negative.digits[i] & ~positive.digits[i];
       if (digit == 0) {
         limit = Math.min(positive.numberLength, negative.numberLength);
-        for (i++; i < limit
-            && (digit = ~(negative.digits[i] | positive.digits[i])) == 0; i++) {
+        for (i++; i < limit && (digit = ~(negative.digits[i] | positive.digits[i])) == 0; i++) {
           // digit
         }
         // = ~negative.digits[i] & ~positive.digits[i]
         if (digit == 0) {
           // the shorter has only the remaining virtual sign bits
-          for (; i < positive.numberLength
-              && (digit = ~positive.digits[i]) == 0; i++) {
+          for (; i < positive.numberLength && (digit = ~positive.digits[i]) == 0; i++) {
             // digit = -1 & ~positive.digits[i]
           }
-          for (; i < negative.numberLength
-              && (digit = ~negative.digits[i]) == 0; i++) {
+          for (; i < negative.numberLength && (digit = ~negative.digits[i]) == 0; i++) {
             // empty
           }
           // digit = ~negative.digits[i] & ~0
@@ -371,6 +379,7 @@ class Logical {
 
   /**
    * Return sign = 1, magnitude = val.magnitude & ~that.magnitude.
+   *
    * @param val
    * @param that
    * @return
@@ -395,12 +404,12 @@ class Logical {
 
   /**
    * Return sign = 1, magnitude = positive.magnitude & ~(-negative.magnitude).
+   *
    * @param positive
    * @param negative
    * @return
    */
-  static BigInteger andNotPositiveNegative(BigInteger positive,
-      BigInteger negative) {
+  static BigInteger andNotPositiveNegative(BigInteger positive, BigInteger negative) {
     // PRE: positive > 0 && negative < 0
     int iNeg = negative.getFirstNonzeroDigit();
     int iPos = positive.getFirstNonzeroDigit();
@@ -434,6 +443,7 @@ class Logical {
 
   /**
    * Return sign = 1, magnitude = val.magnitude & that.magnitude.
+   *
    * @param val
    * @param that
    * @return
@@ -545,6 +555,7 @@ class Logical {
 
   /**
    * Return sign = -1, magnitude = -(positive.magnitude | -negative.magnitude).
+   *
    * @param positive
    * @param negative
    * @return
@@ -611,6 +622,7 @@ class Logical {
 
   /**
    * Return sign = -1, magnitude = -(-val.magnitude | -that.magnitude).
+   *
    * @param val
    * @param that
    * @return
@@ -653,6 +665,7 @@ class Logical {
 
   /**
    * Return sign = 1, magnitude = longer.magnitude | shorter.magnitude.
+   *
    * @param longer
    * @param shorter
    * @return
@@ -663,8 +676,7 @@ class Logical {
     int resLength = longer.numberLength;
     int resDigits[] = new int[resLength];
 
-    int i = Math.min(longer.getFirstNonzeroDigit(),
-        shorter.getFirstNonzeroDigit());
+    int i = Math.min(longer.getFirstNonzeroDigit(), shorter.getFirstNonzeroDigit());
     for (i = 0; i < shorter.numberLength; i++) {
       resDigits[i] = longer.digits[i] | shorter.digits[i];
     }
@@ -719,6 +731,7 @@ class Logical {
 
   /**
    * Return sign = 1, magnitude = -(positive.magnitude ^ -negative.magnitude).
+   *
    * @param positive
    * @param negative
    * @return
@@ -786,18 +799,15 @@ class Logical {
       digit = positive.digits[i] ^ -negative.digits[i];
       if (digit == 0) {
         limit = Math.min(positive.numberLength, negative.numberLength);
-        for (i++; i < limit
-            && (digit = positive.digits[i] ^ ~negative.digits[i]) == 0; i++) {
+        for (i++; i < limit && (digit = positive.digits[i] ^ ~negative.digits[i]) == 0; i++) {
           // empty
         }
         if (digit == 0) {
           // shorter has only the remaining virtual sign bits
-          for (; i < positive.numberLength
-              && (digit = ~positive.digits[i]) == 0; i++) {
+          for (; i < positive.numberLength && (digit = ~positive.digits[i]) == 0; i++) {
             // empty
           }
-          for (; i < negative.numberLength
-              && (digit = ~negative.digits[i]) == 0; i++) {
+          for (; i < negative.numberLength && (digit = ~negative.digits[i]) == 0; i++) {
             // empty
           }
           if (digit == 0) {
@@ -835,6 +845,7 @@ class Logical {
 
   /**
    * Return sign = 0, magnitude = -val.magnitude ^ -that.magnitude.
+   *
    * @param val
    * @param that
    * @return
@@ -894,7 +905,7 @@ class Logical {
 
   /**
    * Return sign = 0, magnitude = longer.magnitude | shorter.magnitude.
-   * 
+   *
    * @param longer
    * @param shorter
    * @return
@@ -904,8 +915,7 @@ class Logical {
     // PRE: longer has at least as many digits as shorter
     int resLength = longer.numberLength;
     int resDigits[] = new int[resLength];
-    int i = Math.min(longer.getFirstNonzeroDigit(),
-        shorter.getFirstNonzeroDigit());
+    int i = Math.min(longer.getFirstNonzeroDigit(), shorter.getFirstNonzeroDigit());
     for (; i < shorter.numberLength; i++) {
       resDigits[i] = longer.digits[i] ^ shorter.digits[i];
     }
@@ -918,9 +928,6 @@ class Logical {
     return result;
   }
 
-  /**
-   * Just to denote that this class can't be instantiated.
-   */
-  private Logical() {
-  }
+  /** Just to denote that this class can't be instantiated. */
+  private Logical() {}
 }

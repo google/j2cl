@@ -56,5 +56,4 @@ public interface Deque<E> extends Queue<E> {
   E removeLast();
 
   boolean removeLastOccurrence(Object o);
-
 }

@@ -19,19 +19,16 @@
 
 package java.io;
 
-/**
- * An {@code AutoCloseable} whose close method may throw an {@link IOException}.
- */
+/** An {@code AutoCloseable} whose close method may throw an {@link IOException}. */
 public interface Closeable extends AutoCloseable {
 
-    /**
-     * Closes the object and release any system resources it holds.
-     *
-     * <p>Although only the first call has any effect, it is safe to call close
-     * multiple times on the same object. This is more lenient than the
-     * overridden {@code AutoCloseable.close()}, which may be called at most
-     * once.
-     */
-    @Override
-    void close() throws IOException;
+  /**
+   * Closes the object and release any system resources it holds.
+   *
+   * <p>Although only the first call has any effect, it is safe to call close multiple times on the
+   * same object. This is more lenient than the overridden {@code AutoCloseable.close()}, which may
+   * be called at most once.
+   */
+  @Override
+  void close() throws IOException;
 }

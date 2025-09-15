@@ -25,8 +25,7 @@ import java.util.function.ToLongFunction;
 
 /**
  * An interface used a basis for implementing custom ordering. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Comparator.html">[Sun
- * docs]</a>
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Comparator.html">[Sun docs]</a>
  *
  * @param <T> the type to be compared.
  */
@@ -44,14 +43,15 @@ public interface Comparator<T> {
 
   default Comparator<T> thenComparing(Comparator<? super T> other) {
     checkNotNull(other);
-    return (Comparator<T> & Serializable) (a, b) -> {
-      int c = compare(a, b);
-      return (c != 0) ? c : other.compare(a, b);
-    };
+    return (Comparator<T> & Serializable)
+        (a, b) -> {
+          int c = compare(a, b);
+          return (c != 0) ? c : other.compare(a, b);
+        };
   }
 
-  default <U> Comparator<T> thenComparing(Function<? super T, ? extends U> keyExtractor,
-      Comparator<? super U> keyComparator) {
+  default <U> Comparator<T> thenComparing(
+      Function<? super T, ? extends U> keyExtractor, Comparator<? super U> keyComparator) {
     return thenComparing(comparing(keyExtractor, keyComparator));
   }
 
@@ -72,12 +72,12 @@ public interface Comparator<T> {
     return thenComparing(comparingDouble(keyExtractor));
   }
 
-  static <T, U> Comparator<T> comparing(Function<? super T, ? extends U> keyExtractor,
-      Comparator<? super U> keyComparator) {
+  static <T, U> Comparator<T> comparing(
+      Function<? super T, ? extends U> keyExtractor, Comparator<? super U> keyComparator) {
     checkNotNull(keyExtractor);
     checkNotNull(keyComparator);
-    return (Comparator<T> & Serializable) (a, b) ->
-        keyComparator.compare(keyExtractor.apply(a), keyExtractor.apply(b));
+    return (Comparator<T> & Serializable)
+        (a, b) -> keyComparator.compare(keyExtractor.apply(a), keyExtractor.apply(b));
   }
 
   static <T, U extends Comparable<? super U>> Comparator<T> comparing(
@@ -85,22 +85,22 @@ public interface Comparator<T> {
     return comparing(keyExtractor, naturalOrder());
   }
 
-  static<T> Comparator<T> comparingDouble(ToDoubleFunction<? super T> keyExtractor) {
+  static <T> Comparator<T> comparingDouble(ToDoubleFunction<? super T> keyExtractor) {
     checkNotNull(keyExtractor);
-    return (Comparator<T> & Serializable) (a, b) ->
-        Double.compare(keyExtractor.applyAsDouble(a), keyExtractor.applyAsDouble(b));
+    return (Comparator<T> & Serializable)
+        (a, b) -> Double.compare(keyExtractor.applyAsDouble(a), keyExtractor.applyAsDouble(b));
   }
 
   static <T> Comparator<T> comparingInt(ToIntFunction<? super T> keyExtractor) {
     checkNotNull(keyExtractor);
-    return (Comparator<T> & Serializable) (a, b) ->
-        Integer.compare(keyExtractor.applyAsInt(a), keyExtractor.applyAsInt(b));
+    return (Comparator<T> & Serializable)
+        (a, b) -> Integer.compare(keyExtractor.applyAsInt(a), keyExtractor.applyAsInt(b));
   }
 
   static <T> Comparator<T> comparingLong(ToLongFunction<? super T> keyExtractor) {
     checkNotNull(keyExtractor);
-    return (Comparator<T> & Serializable) (a, b) ->
-        Long.compare(keyExtractor.applyAsLong(a), keyExtractor.applyAsLong(b));
+    return (Comparator<T> & Serializable)
+        (a, b) -> Long.compare(keyExtractor.applyAsLong(a), keyExtractor.applyAsLong(b));
   }
 
   static <T extends Comparable<? super T>> Comparator<T> naturalOrder() {

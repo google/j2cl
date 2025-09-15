@@ -23,8 +23,8 @@ import java.util.function.Supplier;
 import java.util.stream.DoubleStream;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/OptionalDouble.html">
- * the official Java API doc</a> for details.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/OptionalDouble.html">the
+ * official Java API doc</a> for details.
  */
 public final class OptionalDouble {
 

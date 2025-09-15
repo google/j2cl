@@ -23,12 +23,12 @@ import javaemul.internal.JsUtils;
 /**
  * A simple wrapper around JavaScriptObject to provide {@link java.util.Map}-like semantics for any
  * key type.
- * <p>
- * Implementation notes:
- * <p>
- * A key's hashCode is the index in backingMap which should contain that key. Since several keys may
- * have the same hash, each value in hashCodeMap is actually an array containing all entries whose
- * keys share the same hash.
+ *
+ * <p>Implementation notes:
+ *
+ * <p>A key's hashCode is the index in backingMap which should contain that key. Since several keys
+ * may have the same hash, each value in hashCodeMap is actually an array containing all entries
+ * whose keys share the same hash.
  */
 class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
 

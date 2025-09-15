@@ -129,7 +129,7 @@ public class ArrayList<E> extends ArrayListBase<E> {
   public Object[] toArray() {
     return ArrayHelper.clone(array, 0, size);
   }
-  
+
   public void trimToSize() {
     if (size == array.length) {
       return;

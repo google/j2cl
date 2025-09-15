@@ -19,16 +19,13 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * Skeletal implementation of the Collection interface. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractCollection.html">[Sun
- * docs]</a>
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractCollection.html">[Sun docs]</a>
  *
  * @param <E> the element type.
- *
  */
 public abstract class AbstractCollection<E> implements Collection<E> {
 
-  protected AbstractCollection() {
-  }
+  protected AbstractCollection() {}
 
   @Override
   public boolean add(E o) {
@@ -48,7 +45,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
 
   @Override
   public void clear() {
-    for (Iterator<E> iter = iterator(); iter.hasNext();) {
+    for (Iterator<E> iter = iterator(); iter.hasNext(); ) {
       iter.next();
       iter.remove();
     }
@@ -86,7 +83,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
     checkNotNull(c);
 
     boolean changed = false;
-    for (Iterator<?> iter = iterator(); iter.hasNext();) {
+    for (Iterator<?> iter = iterator(); iter.hasNext(); ) {
       Object o = iter.next();
       if (c.contains(o)) {
         iter.remove();
@@ -101,7 +98,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
     checkNotNull(c);
 
     boolean changed = false;
-    for (Iterator<?> iter = iterator(); iter.hasNext();) {
+    for (Iterator<?> iter = iterator(); iter.hasNext(); ) {
       Object o = iter.next();
       if (!c.contains(o)) {
         iter.remove();
@@ -135,7 +132,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
   }
 
   private boolean advanceToFind(Object o, boolean remove) {
-    for (Iterator<E> iter = iterator(); iter.hasNext();) {
+    for (Iterator<E> iter = iterator(); iter.hasNext(); ) {
       E e = iter.next();
       if (Objects.equals(o, e)) {
         if (remove) {

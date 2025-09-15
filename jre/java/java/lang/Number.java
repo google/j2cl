@@ -22,14 +22,10 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-/**
- * Abstract base class for numeric wrapper classes.
- */
+/** Abstract base class for numeric wrapper classes. */
 public abstract class Number implements Serializable {
 
-  /**
-   * Stores a regular expression object to verify the format of float values.
-   */
+  /** Stores a regular expression object to verify the format of float values. */
   private static NativeRegExp floatRegex;
 
   static class __Decode {
@@ -42,39 +38,63 @@ public abstract class Number implements Serializable {
     }
   }
 
-  /**
-   * Use nested class to avoid clinit on outer.
-   */
+  /** Use nested class to avoid clinit on outer. */
   static class __ParseLong {
     /**
-     * The number of digits (excluding minus sign and leading zeros) to process
-     * at a time.  The largest value expressible in maxDigits digits as well as
-     * the factor radix^maxDigits must be strictly less than 2^31.
+     * The number of digits (excluding minus sign and leading zeros) to process at a time. The
+     * largest value expressible in maxDigits digits as well as the factor radix^maxDigits must be
+     * strictly less than 2^31.
      */
-    private static final int[] maxDigitsForRadix = {-1, -1, // unused
+    private static final int[] maxDigitsForRadix = {
+      -1, // unused
+      -1, // unused
       30, // base 2
       19, // base 3
       15, // base 4
       13, // base 5
-      11, 11, // base 6-7
+      11, // base 6
+      11, // base 7
       10, // base 8
-      9, 9, // base 9-10
-      8, 8, 8, 8, // base 11-14
-      7, 7, 7, 7, 7, 7, 7, // base 15-21
-      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, // base 22-35
+      9, // base 9
+      9, // base 10
+      8, // base 11
+      8, // base 12
+      8, // base 13
+      8, // base 14
+      7, // base 15
+      7, // base 16
+      7, // base 17
+      7, // base 18
+      7, // base 19
+      7, // base 20
+      7, // base 21
+      6, // base 22
+      6, // base 23
+      6, // base 24
+      6, // base 25
+      6, // base 26
+      6, // base 27
+      6, // base 28
+      6, // base 29
+      6, // base 30
+      6, // base 31
+      6, // base 32
+      6, // base 33
+      6, // base 34
+      6, // base 35
       5 // base 36
     };
 
-    /**
-     * A table of values radix*maxDigitsForRadix[radix].
-     */
+    /** A table of values radix*maxDigitsForRadix[radix]. */
     private static final int[] maxDigitsRadixPower = new int[37];
 
     /**
-     * The largest number of digits (excluding minus sign and leading zeros) that
-     * can fit into a long for a given radix between 2 and 36, inclusive.
+     * The largest number of digits (excluding minus sign and leading zeros) that can fit into a
+     * long for a given radix between 2 and 36, inclusive.
      */
-    private static final int[] maxLengthForRadix = {-1, -1, // unused
+    private static final int[] maxLengthForRadix = {
+      -1, // unused
+      -1, // unused
       63, // base 2
       40, // base 3
       32, // base 4
@@ -109,12 +129,10 @@ public abstract class Number implements Serializable {
       13, // base 33
       13, // base 34
       13, // base 35
-      13  // base 36
+      13 // base 36
     };
 
-    /**
-     * A table of floor(MAX_VALUE / maxDigitsRadixPower).
-     */
+    /** A table of floor(MAX_VALUE / maxDigitsRadixPower). */
     private static final long[] maxValueForRadix = new long[37];
 
     static {
@@ -126,7 +144,7 @@ public abstract class Number implements Serializable {
   }
 
   @JsType(isNative = true, name = "Number$impl", namespace = "java.lang")
-  private static class JavaLangNumber { }
+  private static class JavaLangNumber {}
 
   static boolean $isInstance(Object instance) {
     return "number".equals(JsUtils.typeOf(instance))
@@ -135,17 +153,14 @@ public abstract class Number implements Serializable {
   }
 
   /**
-   * @skip
-   *
-   * This function will determine the radix that the string is expressed in
-   * based on the parsing rules defined in the Javadocs for Integer.decode() and
-   * invoke __parseAndValidateInt.
+   * @skip This function will determine the radix that the string is expressed in based on the
+   *     parsing rules defined in the Javadocs for Integer.decode() and invoke
+   *     __parseAndValidateInt.
    */
-  protected static int __decodeAndValidateInt(String s, int lowerBound,
-      int upperBound) throws NumberFormatException {
+  protected static int __decodeAndValidateInt(String s, int lowerBound, int upperBound)
+      throws NumberFormatException {
     __Decode decode = __decodeNumberString(s);
-    return __parseAndValidateInt(decode.payload, decode.radix, lowerBound,
-        upperBound);
+    return __parseAndValidateInt(decode.payload, decode.radix, lowerBound, upperBound);
   }
 
   protected static __Decode __decodeNumberString(String s) {
@@ -180,10 +195,8 @@ public abstract class Number implements Serializable {
   }
 
   /**
-   * @skip
-   *
-   * This function contains common logic for parsing a String as a floating-
-   * point number and validating the range.
+   * @skip This function contains common logic for parsing a String as a floating- point number and
+   *     validating the range.
    */
   protected static double __parseAndValidateDouble(String s) throws NumberFormatException {
     if (!__isValidDouble(s)) {
@@ -196,10 +209,8 @@ public abstract class Number implements Serializable {
   private static native double parseFloat(String str);
 
   /**
-   * @skip
-   *
-   * This function contains common logic for parsing a String in a given radix
-   * and validating the result.
+   * @skip This function contains common logic for parsing a String in a given radix and validating
+   *     the result.
    */
   protected static int __parseAndValidateInt(String s, int radix, int lowerBound, int upperBound)
       throws NumberFormatException {
@@ -233,10 +244,8 @@ public abstract class Number implements Serializable {
   }
 
   /**
-   * @skip
-   *
-   * This function contains common logic for parsing a String in a given radix
-   * and validating the result.
+   * @skip This function contains common logic for parsing a String in a given radix and validating
+   *     the result.
    */
   protected static long __parseAndValidateLong(String s, int radix) throws NumberFormatException {
     if (s == null) {
@@ -330,7 +339,6 @@ public abstract class Number implements Serializable {
 
   /**
    * @skip
-   *
    * @param str
    * @return {@code true} if the string matches the float format, {@code false} otherwise
    */

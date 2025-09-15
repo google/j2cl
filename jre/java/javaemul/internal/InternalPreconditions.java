@@ -22,7 +22,9 @@ import java.util.NoSuchElementException;
 
 /**
  * A utility class that provides utility functions to do precondition checks inside GWT-SDK.
+ *
  * <p>Following table summarizes the grouping of the checks:
+ *
  * <pre>
  * ┌────────┬─────────────────────────────────────────────────────┬───────────────────────────────┐
  * │Group   │Description                                          │Common Exception Types         │
@@ -48,7 +50,8 @@ import java.util.NoSuchElementException;
  * └────────┴─────────────────────────────────────────────────────┴───────────────────────────────┘
  * </pre>
  *
- * <p> Following table summarizes predefined check levels:
+ * <p>Following table summarizes predefined check levels:
+ *
  * <pre>
  * ┌────────────────┬──────────┬─────────┬─────────┬─────────┬─────────┐
  * │Check level     │  BOUNDS  │   API   │ NUMERIC |  TYPE   │CRITICAL │
@@ -65,9 +68,9 @@ import java.util.NoSuchElementException;
  *
  * <p>Please note that, in development mode (jre.checkedMode=ENABLED), these checks will always be
  * performed regardless of configuration but will be converted to AssertionError if check is
- * disabled. This so that any reliance on related exceptions could be detected early on.
- * For this detection to work properly; it is important for apps to share the same config in
- * all environments.
+ * disabled. This so that any reliance on related exceptions could be detected early on. For this
+ * detection to work properly; it is important for apps to share the same config in all
+ * environments.
  */
 // Some parts adapted from Guava
 public final class InternalPreconditions {
@@ -110,21 +113,19 @@ public final class InternalPreconditions {
   private static final boolean IS_ASSERTED = getProperty("jre.checkedMode") == "ENABLED";
 
   /**
-   * This method reports if the code is compiled with type checks.
-   * It must be used in places where code can be replaced with a simpler one
-   * when we know that no checks will occur.
-   * See {@link System#arraycopy(Object, int, Object, int, int)} for example.
-   * Please note that {@link #checkType(boolean)} should be preferred where feasible.
+   * This method reports if the code is compiled with type checks. It must be used in places where
+   * code can be replaced with a simpler one when we know that no checks will occur. See {@link
+   * System#arraycopy(Object, int, Object, int, int)} for example. Please note that {@link
+   * #checkType(boolean)} should be preferred where feasible.
    */
   public static boolean isTypeChecked() {
     return IS_TYPE_CHECKED || IS_ASSERTED;
   }
 
   /**
-   * This method reports if the code is compiled with api checks.
-   * It must be used in places where code can be replaced with a simpler one
-   * when we know that no checks will occur.
-   * Please note that {@code #checkXXX(boolean)} should be preferred where feasible.
+   * This method reports if the code is compiled with api checks. It must be used in places where
+   * code can be replaced with a simpler one when we know that no checks will occur. Please note
+   * that {@code #checkXXX(boolean)} should be preferred where feasible.
    */
   public static boolean isApiChecked() {
     return IS_API_CHECKED || IS_ASSERTED;
@@ -156,9 +157,7 @@ public final class InternalPreconditions {
     }
   }
 
-  /**
-   * Ensures the truth of an expression that verifies array type.
-   */
+  /** Ensures the truth of an expression that verifies array type. */
   public static void checkArrayType(boolean expression) {
     if (IS_TYPE_CHECKED) {
       checkCriticalArrayType(expression);
@@ -177,9 +176,7 @@ public final class InternalPreconditions {
     }
   }
 
-  /**
-   * Ensures the truth of an expression that verifies array type.
-   */
+  /** Ensures the truth of an expression that verifies array type. */
   public static void checkArrayType(boolean expression, Object errorMessage) {
     if (IS_TYPE_CHECKED) {
       checkCriticalArrayType(expression, errorMessage);
@@ -216,9 +213,7 @@ public final class InternalPreconditions {
     }
   }
 
-  /**
-   * Ensures the truth of an expression involving existence of an element.
-   */
+  /** Ensures the truth of an expression involving existence of an element. */
   public static void checkElement(boolean expression) {
     if (IS_API_CHECKED) {
       checkCriticalElement(expression);
@@ -233,8 +228,8 @@ public final class InternalPreconditions {
 
   /**
    * Ensures the truth of an expression involving existence of an element.
-   * <p>
-   * For cases where failing fast is pretty important and not failing early could cause bugs that
+   *
+   * <p>For cases where failing fast is pretty important and not failing early could cause bugs that
    * are much harder to debug.
    */
   public static void checkCriticalElement(boolean expression) {
@@ -243,9 +238,7 @@ public final class InternalPreconditions {
     }
   }
 
-  /**
-   * Ensures the truth of an expression involving existence of an element.
-   */
+  /** Ensures the truth of an expression involving existence of an element. */
   public static void checkElement(boolean expression, Object errorMessage) {
     if (IS_API_CHECKED) {
       checkCriticalElement(expression, errorMessage);
@@ -260,8 +253,8 @@ public final class InternalPreconditions {
 
   /**
    * Ensures the truth of an expression involving existence of an element.
-   * <p>
-   * For cases where failing fast is pretty important and not failing early could cause bugs that
+   *
+   * <p>For cases where failing fast is pretty important and not failing early could cause bugs that
    * are much harder to debug.
    */
   public static void checkCriticalElement(boolean expression, Object errorMessage) {
@@ -270,9 +263,7 @@ public final class InternalPreconditions {
     }
   }
 
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   */
+  /** Ensures the truth of an expression involving one or more parameters to the calling method. */
   public static void checkArgument(boolean expression) {
     if (IS_API_CHECKED) {
       checkCriticalArgument(expression);
@@ -287,8 +278,8 @@ public final class InternalPreconditions {
 
   /**
    * Ensures the truth of an expression involving one or more parameters to the calling method.
-   * <p>
-   * For cases where failing fast is pretty important and not failing early could cause bugs that
+   *
+   * <p>For cases where failing fast is pretty important and not failing early could cause bugs that
    * are much harder to debug.
    */
   public static void checkCriticalArgument(boolean expression) {
@@ -297,9 +288,7 @@ public final class InternalPreconditions {
     }
   }
 
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   */
+  /** Ensures the truth of an expression involving one or more parameters to the calling method. */
   public static void checkArgument(boolean expression, Object errorMessage) {
     if (IS_API_CHECKED) {
       checkCriticalArgument(expression, errorMessage);
@@ -314,8 +303,8 @@ public final class InternalPreconditions {
 
   /**
    * Ensures the truth of an expression involving one or more parameters to the calling method.
-   * <p>
-   * For cases where failing fast is pretty important and not failing early could cause bugs that
+   *
+   * <p>For cases where failing fast is pretty important and not failing early could cause bugs that
    * are much harder to debug.
    */
   public static void checkCriticalArgument(boolean expression, Object errorMessage) {
@@ -346,8 +335,8 @@ public final class InternalPreconditions {
   /**
    * Ensures the truth of an expression involving the state of the calling instance, but not
    * involving any parameters to the calling method.
-   * <p>
-   * For cases where failing fast is pretty important and not failing early could cause bugs that
+   *
+   * <p>For cases where failing fast is pretty important and not failing early could cause bugs that
    * are much harder to debug.
    */
   public static void checkCriticalState(boolean expression) {
@@ -382,9 +371,7 @@ public final class InternalPreconditions {
     }
   }
 
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   */
+  /** Ensures that an object reference passed as a parameter to the calling method is not null. */
   public static <T> T checkNotNull(T reference) {
     if (IS_API_CHECKED) {
       checkCriticalNotNull(reference);
@@ -406,9 +393,7 @@ public final class InternalPreconditions {
     return reference;
   }
 
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   */
+  /** Ensures that an object reference passed as a parameter to the calling method is not null. */
   public static void checkNotNull(Object reference, Object errorMessage) {
     if (IS_API_CHECKED) {
       checkCriticalNotNull(reference, errorMessage);
@@ -449,9 +434,7 @@ public final class InternalPreconditions {
     }
   }
 
-  /**
-   * Ensures that {@code size} specifies a valid array size (i.e. non-negative).
-   */
+  /** Ensures that {@code size} specifies a valid array size (i.e. non-negative). */
   public static void checkArraySize(int size) {
     if (IS_API_CHECKED) {
       checkCriticalArraySize(size);
@@ -471,8 +454,8 @@ public final class InternalPreconditions {
   }
 
   /**
-   * Ensures that {@code index} specifies a valid <i>element</i> in a list or string of size
-   * {@code size}. An element index may range from zero, inclusive, to {@code size}, exclusive.
+   * Ensures that {@code index} specifies a valid <i>element</i> in a list or string of size {@code
+   * size}. An element index may range from zero, inclusive, to {@code size}, exclusive.
    */
   public static void checkElementIndex(int index, int size) {
     if (IS_BOUNDS_CHECKED) {
@@ -511,8 +494,8 @@ public final class InternalPreconditions {
   }
 
   /**
-   * Ensures that {@code index} specifies a valid <i>position</i> in a list of
-   * size {@code size}. A position index may range from zero to {@code size}, inclusive.
+   * Ensures that {@code index} specifies a valid <i>position</i> in a list of size {@code size}. A
+   * position index may range from zero to {@code size}, inclusive.
    */
   public static void checkPositionIndex(int index, int size) {
     if (IS_BOUNDS_CHECKED) {
@@ -533,9 +516,9 @@ public final class InternalPreconditions {
   }
 
   /**
-   * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in a list
-   * of size {@code size}, and are in order. A position index may range from zero to
-   * {@code size}, inclusive.
+   * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in a list of size
+   * {@code size}, and are in order. A position index may range from zero to {@code size},
+   * inclusive.
    */
   public static void checkPositionIndexes(int start, int end, int size) {
     if (IS_BOUNDS_CHECKED) {
@@ -550,9 +533,9 @@ public final class InternalPreconditions {
   }
 
   /**
-   * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in a list
-   * of size {@code size}, and are in order. A position index may range from zero to
-   * {@code size}, inclusive.
+   * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in a list of size
+   * {@code size}, and are in order. A position index may range from zero to {@code size},
+   * inclusive.
    */
   public static void checkCriticalPositionIndexes(int start, int end, int size) {
     if (start < 0 || end > size) {
@@ -673,5 +656,5 @@ public final class InternalPreconditions {
   }
 
   // Hides the constructor for this static utility class.
-  private InternalPreconditions() { }
+  private InternalPreconditions() {}
 }

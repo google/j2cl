@@ -21,16 +21,13 @@ import java.io.Serializable;
 
 /**
  * Implements a set using a TreeMap. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/TreeSet.html">[Sun
- * docs]</a>
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/TreeSet.html">[Sun docs]</a>
  *
  * @param <E> element type.
  */
 public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E>, Serializable {
 
-  /**
-   * TreeSet is stored as a TreeMap of the requested type to a constant Boolean.
-   */
+  /** TreeSet is stored as a TreeMap of the requested type to a constant Boolean. */
   private NavigableMap<E, Boolean> map;
 
   public TreeSet() {
@@ -158,8 +155,8 @@ public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E>, Seria
   }
 
   @Override
-  public NavigableSet<E> subSet(E fromElement, boolean fromInclusive,
-      E toElement, boolean toInclusive) {
+  public NavigableSet<E> subSet(
+      E fromElement, boolean fromInclusive, E toElement, boolean toInclusive) {
     return new TreeSet<E>(map.subMap(fromElement, fromInclusive, toElement, toInclusive));
   }
 

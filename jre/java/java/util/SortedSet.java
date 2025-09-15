@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,9 +17,8 @@ package java.util;
 
 /**
  * A set known to be in ascending order. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/SortedSet.html">[Sun
- * docs]</a>
- * 
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/SortedSet.html">[Sun docs]</a>
+ *
  * @param <E> element type.
  */
 public interface SortedSet<E> extends Set<E> {
@@ -38,8 +37,8 @@ public interface SortedSet<E> extends Set<E> {
 
   @Override
   default Spliterator<E> spliterator() {
-    return new Spliterators.IteratorSpliterator<E>(this,
-        Spliterator.DISTINCT | Spliterator.ORDERED | Spliterator.SORTED) {
+    return new Spliterators.IteratorSpliterator<E>(
+        this, Spliterator.DISTINCT | Spliterator.ORDERED | Spliterator.SORTED) {
 
       @Override
       public Comparator<? super E> getComparator() {

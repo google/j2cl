@@ -15,25 +15,18 @@
  */
 package java.io;
 
-/**
- * Reads a stream of characters.
- */
+/** Reads a stream of characters. */
 public abstract class Reader {
-  /**
-   * The maximum buffer size to incrementally read in {@link #skip}.
-   */
+  /** The maximum buffer size to incrementally read in {@link #skip}. */
   private static final int MAX_SKIP_BUFFER_SIZE = 1024;
 
-  /**
-   * Closes the reader, and releases any associated resources.
-   */
+  /** Closes the reader, and releases any associated resources. */
   public abstract void close() throws IOException;
 
   /**
-   * Marks the present position in the stream. Until {@code readAheadLimit} more
-   * characters have been read, the current point in the stream will be stored
-   * as the mark. Calls to {@link #reset} will reposition the point in the
-   * stream to the mark.
+   * Marks the present position in the stream. Until {@code readAheadLimit} more characters have
+   * been read, the current point in the stream will be stored as the mark. Calls to {@link #reset}
+   * will reposition the point in the stream to the mark.
    *
    * @throws IOException If the stream does not support mark().
    */
@@ -41,16 +34,12 @@ public abstract class Reader {
     throw new IOException("Not supported");
   }
 
-  /**
-   * Returns whether {@link #mark} is implemented.
-   */
+  /** Returns whether {@link #mark} is implemented. */
   public boolean markSupported() {
     return false;
   }
 
-  /**
-   * Reads a single character, or -1 if we are at the end of the stream.
-   */
+  /** Reads a single character, or -1 if we are at the end of the stream. */
   public int read() throws IOException {
     char chr[] = new char[1];
     return (read(chr) == -1) ? -1 : chr[0];
@@ -67,23 +56,17 @@ public abstract class Reader {
    */
   public abstract int read(char[] buf, int off, int len) throws IOException;
 
-  /**
-   * Returns whether the stream is ready for reading characters.
-   */
+  /** Returns whether the stream is ready for reading characters. */
   public boolean ready() throws IOException {
     return false;
   }
 
-  /**
-   * Attempts to reset the stream to the previous mark.
-   */
+  /** Attempts to reset the stream to the previous mark. */
   public void reset() throws IOException {
     throw new IOException("Not supported");
   }
 
-  /**
-   * Skips {@code n} characters, returning the number of characters that were actually skipped.
-   */
+  /** Skips {@code n} characters, returning the number of characters that were actually skipped. */
   public long skip(long n) throws IOException {
     long remaining = n;
     int bufferSize = Math.min((int) n, MAX_SKIP_BUFFER_SIZE);

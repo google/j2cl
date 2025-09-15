@@ -31,9 +31,8 @@ import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsProperty;
 
 /**
- * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html">the
- * official Java API doc</a> for details.
+ * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html">the official Java
+ * API doc</a> for details.
  */
 public class Throwable implements Serializable {
 
@@ -70,11 +69,11 @@ public class Throwable implements Serializable {
   }
 
   /**
-   * Constructor that allows subclasses disabling exception suppression and stack traces.
-   * Those features should only be disabled in very specific cases.
+   * Constructor that allows subclasses disabling exception suppression and stack traces. Those
+   * features should only be disabled in very specific cases.
    */
-  protected Throwable(String message, Throwable cause, boolean enableSuppression,
-      boolean writableStackTrace) {
+  protected Throwable(
+      String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
     this.cause = cause;
     this.detailMessage = message;
     this.disableStackTrace = !writableStackTrace;

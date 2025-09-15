@@ -28,14 +28,14 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-/**
- * Used to mark source code that has been generated.
- */
+/** Used to mark source code that has been generated. */
 @Documented
 @Retention(SOURCE)
 @Target({PACKAGE, TYPE, METHOD, CONSTRUCTOR, FIELD, LOCAL_VARIABLE, PARAMETER})
 public @interface Generated {
   String[] value();
+
   String comments() default "";
+
   String date() default "";
 }

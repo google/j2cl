@@ -23,13 +23,12 @@ import java.io.Serializable;
 
 /**
  * Linked list implementation. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/LinkedList.html">[Sun
- * docs]</a>
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/LinkedList.html">[Sun docs]</a>
  *
  * @param <E> element type.
  */
-public class LinkedList<E> extends AbstractSequentialList<E> implements
-    Cloneable, List<E>, Deque<E>, Serializable {
+public class LinkedList<E> extends AbstractSequentialList<E>
+    implements Cloneable, List<E>, Deque<E>, Serializable {
   /*
    * This implementation uses a doubly-linked list with a header/tail node.
    *
@@ -55,25 +54,16 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     }
   }
 
-  /**
-   * Implementation of ListIterator for linked lists.
-   */
+  /** Implementation of ListIterator for linked lists. */
   private final class ListIteratorImpl implements ListIterator<E> {
 
-    /**
-     * The index to the current position.
-     */
+    /** The index to the current position. */
     protected int currentIndex;
 
-    /**
-     * Current node, to be returned from next.
-     */
+    /** Current node, to be returned from next. */
     protected Node<E> currentNode;
 
-    /**
-     * The last node returned from next/previous, or null if deleted or never
-     * called.
-     */
+    /** The last node returned from next/previous, or null if deleted or never called. */
     protected Node<E> lastNode = null;
 
     /**
@@ -167,25 +157,19 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
   }
 
   /**
-   * Ensures that RPC will consider type parameter E to be exposed. It will be
-   * pruned by dead code elimination.
+   * Ensures that RPC will consider type parameter E to be exposed. It will be pruned by dead code
+   * elimination.
    */
   @SuppressWarnings("unused")
   private E exposeElement;
 
-  /**
-   * Header node - header.next is the first element of the list.
-   */
+  /** Header node - header.next is the first element of the list. */
   private final Node<E> header = new Node<E>();
 
-  /**
-   * Tail node - tail.prev is the last element of the list.
-   */
+  /** Tail node - tail.prev is the last element of the list. */
   private final Node<E> tail = new Node<E>();
 
-  /**
-   * Number of nodes currently present in the list.
-   */
+  /** Number of nodes currently present in the list. */
   private int size;
 
   public LinkedList() {

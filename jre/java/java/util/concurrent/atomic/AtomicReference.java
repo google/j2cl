@@ -25,8 +25,7 @@ public class AtomicReference<V> {
 
   private V value;
 
-  public AtomicReference() {
-  }
+  public AtomicReference() {}
 
   public AtomicReference(V initialValue) {
     value = initialValue;

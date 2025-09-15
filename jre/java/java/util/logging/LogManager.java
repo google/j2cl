@@ -21,9 +21,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 
 /**
- *  An emulation of the java.util.logging.LogManager class. See
- *  <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/LogManger.html">
- *  The Java API doc for details</a>
+ * An emulation of the java.util.logging.LogManager class. See <a
+ * href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/LogManger.html">The Java API doc
+ * for details</a>
  */
 public class LogManager {
 
@@ -41,7 +41,7 @@ public class LogManager {
 
   private HashMap<String, Logger> loggerMap = new HashMap<String, Logger>();
 
-  protected LogManager() { }
+  protected LogManager() {}
 
   public boolean addLogger(Logger logger) {
     if (getLogger(logger.getName()) != null) {
@@ -60,12 +60,10 @@ public class LogManager {
   }
 
   /**
-   *  Helper function to add a logger when we have already determined that it
-   *  does not exist.  When we add a logger, we recursively add all of it's
-   *  ancestors. Since loggers do not get removed, logger creation is cheap,
-   *  and there are not usually too many loggers in an ancestry chain,
-   *  this is a simple way to ensure that the parent/child relationships are
-   *  always correctly set up.
+   * Helper function to add a logger when we have already determined that it does not exist. When we
+   * add a logger, we recursively add all of it's ancestors. Since loggers do not get removed,
+   * logger creation is cheap, and there are not usually too many loggers in an ancestry chain, this
+   * is a simple way to ensure that the parent/child relationships are always correctly set up.
    */
   private void addLoggerAndEnsureParents(Logger logger) {
     String name = logger.getName();
@@ -84,9 +82,8 @@ public class LogManager {
   }
 
   /**
-   *  Helper function to create a logger if it does not exist since the public
-   *  APIs for getLogger and addLogger make it difficult to use those functions
-   *  for this.
+   * Helper function to create a logger if it does not exist since the public APIs for getLogger and
+   * addLogger make it difficult to use those functions for this.
    */
   Logger ensureLogger(String name) {
     Logger logger = getLogger(name);

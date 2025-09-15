@@ -16,14 +16,11 @@
 package java.lang;
 
 /**
- * See <a
- * href="http://docs.oracle.com/javase/7/docs/api/java/lang/AutoCloseable.html">the
- * official Java API doc</a> for details.
+ * See <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/AutoCloseable.html">the official
+ * Java API doc</a> for details.
  */
 public interface AutoCloseable {
 
-  /**
-   * Closes this resource.
-   */
+  /** Closes this resource. */
   void close() throws Exception;
 }

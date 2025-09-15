@@ -21,11 +21,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * Used to declare interfaces which must have a single abstract method.
- */
+/** Used to declare interfaces which must have a single abstract method. */
 @Documented
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = ElementType.TYPE)
-public @interface FunctionalInterface {
-}
+public @interface FunctionalInterface {}

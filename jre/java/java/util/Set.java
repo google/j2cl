@@ -15,7 +15,6 @@
  */
 package java.util;
 
-
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;

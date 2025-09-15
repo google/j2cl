@@ -81,20 +81,25 @@ public class DoubleSummaryStatistics implements DoubleConsumer {
 
   @Override
   public String toString() {
-    return "DoubleSummaryStatistics[" +
-        "count = " + count +
-        ", avg = " + getAverage() +
-        ", min = " + min +
-        ", max = " + max +
-        ", sum = " + getSum() +
-        "]";
+    return "DoubleSummaryStatistics["
+        + "count = "
+        + count
+        + ", avg = "
+        + getAverage()
+        + ", min = "
+        + min
+        + ", max = "
+        + max
+        + ", sum = "
+        + getSum()
+        + "]";
   }
 
   /**
-   * Adds a new value to the current sum using Kahan summation
-   * algorithm for improved summation precision.
+   * Adds a new value to the current sum using Kahan summation algorithm for improved summation
+   * precision.
    *
-   * https://en.wikipedia.org/wiki/Kahan_summation_algorithm
+   * <p>https://en.wikipedia.org/wiki/Kahan_summation_algorithm
    *
    * @param value the value being added to the sum
    */

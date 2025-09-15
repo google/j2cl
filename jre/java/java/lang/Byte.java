@@ -17,9 +17,7 @@ package java.lang;
 
 import javaemul.internal.annotations.HasNoSideEffects;
 
-/**
- * Wraps native <code>byte</code> as an object.
- */
+/** Wraps native <code>byte</code> as an object. */
 public final class Byte extends Number implements Comparable<Byte> {
 
   public static final byte MIN_VALUE = (byte) 0x80;
@@ -28,9 +26,7 @@ public final class Byte extends Number implements Comparable<Byte> {
   public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Byte> TYPE = byte.class;
 
-  /**
-   * Use nested class to avoid clinit on outer.
-   */
+  /** Use nested class to avoid clinit on outer. */
   private static class BoxedValues {
     private static final Byte[] boxedValues;
 
@@ -65,8 +61,7 @@ public final class Byte extends Number implements Comparable<Byte> {
     return parseByte(s, 10);
   }
 
-  public static byte parseByte(String s, int radix)
-      throws NumberFormatException {
+  public static byte parseByte(String s, int radix) throws NumberFormatException {
     return (byte) __parseAndValidateInt(s, radix, MIN_VALUE, MAX_VALUE);
   }
 

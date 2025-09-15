@@ -21,8 +21,8 @@ import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.html">
- * the official Java API doc</a> for details.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.html">the official
+ * Java API doc</a> for details.
  *
  * @param <T> the type of elements returned by Spliterator.
  */
@@ -49,7 +49,7 @@ public interface Spliterator<T> {
   long estimateSize();
 
   default void forEachRemaining(Consumer<? super T> consumer) {
-    while (tryAdvance(consumer)) { }
+    while (tryAdvance(consumer)) {}
   }
 
   default Comparator<? super T> getComparator() {
@@ -84,13 +84,13 @@ public interface Spliterator<T> {
     S trySplit();
 
     default void forEachRemaining(C consumer) {
-      while (tryAdvance(consumer)) { }
+      while (tryAdvance(consumer)) {}
     }
   }
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.OfDouble.html">
-   * the official Java API doc</a> for details.
+   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.OfDouble.html">the
+   * official Java API doc</a> for details.
    */
   interface OfDouble extends OfPrimitive<Double, DoubleConsumer, OfDouble> {
     @Override
@@ -113,8 +113,8 @@ public interface Spliterator<T> {
   }
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.OfInt.html">
-   * the official Java API doc</a> for details.
+   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.OfInt.html">the
+   * official Java API doc</a> for details.
    */
   interface OfInt extends OfPrimitive<Integer, IntConsumer, OfInt> {
     @Override
@@ -137,8 +137,8 @@ public interface Spliterator<T> {
   }
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.OfLong.html">
-   * the official Java API doc</a> for details.
+   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.OfLong.html">the
+   * official Java API doc</a> for details.
    */
   interface OfLong extends OfPrimitive<Long, LongConsumer, OfLong> {
     @Override

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,28 +21,25 @@
  * licenses this file to You under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * INCLUDES MODIFICATIONS BY RICHARD ZSCHECH AS WELL AS GOOGLE.
  */
 package java.math;
 
-/**
- * Specifies the rounding behavior for operations whose results cannot be
- * represented exactly.
- */
+/** Specifies the rounding behavior for operations whose results cannot be represented exactly. */
 public enum RoundingMode {
 
   /**
-   * Rounding mode where positive values are rounded towards positive infinity
-   * and negative values towards negative infinity. <br>
+   * Rounding mode where positive values are rounded towards positive infinity and negative values
+   * towards negative infinity. <br>
    * Rule: {@code x.round().abs() >= x.abs()}
    */
   UP,
@@ -54,48 +51,47 @@ public enum RoundingMode {
   DOWN,
 
   /**
-   * Rounding mode to round towards positive infinity. For positive values this
-   * rounding mode behaves as {@link #UP}, for negative values as {@link #DOWN}. <br>
+   * Rounding mode to round towards positive infinity. For positive values this rounding mode
+   * behaves as {@link #UP}, for negative values as {@link #DOWN}. <br>
    * Rule: {@code x.round() >= x}
    */
   CEILING,
 
   /**
-   * Rounding mode to round towards negative infinity. For positive values this
-   * rounding mode behaves as {@link #DOWN}, for negative values as {@link #UP}. <br>
+   * Rounding mode to round towards negative infinity. For positive values this rounding mode
+   * behaves as {@link #DOWN}, for negative values as {@link #UP}. <br>
    * Rule: {@code x.round() <= x}
    */
   FLOOR,
 
   /**
-   * Rounding mode where values are rounded towards the nearest neighbor. Ties
-   * are broken by rounding up.
+   * Rounding mode where values are rounded towards the nearest neighbor. Ties are broken by
+   * rounding up.
    */
   HALF_UP,
 
   /**
-   * Rounding mode where values are rounded towards the nearest neighbor. Ties
-   * are broken by rounding down.
+   * Rounding mode where values are rounded towards the nearest neighbor. Ties are broken by
+   * rounding down.
    */
   HALF_DOWN,
 
   /**
-   * Rounding mode where values are rounded towards the nearest neighbor. Ties
-   * are broken by rounding to the even neighbor.
+   * Rounding mode where values are rounded towards the nearest neighbor. Ties are broken by
+   * rounding to the even neighbor.
    */
   HALF_EVEN,
 
   /**
-   * Rounding mode where the rounding operations throws an ArithmeticException
-   * for the case that rounding is necessary, i.e. for the case that the value
-   * cannot be represented exactly.
+   * Rounding mode where the rounding operations throws an ArithmeticException for the case that
+   * rounding is necessary, i.e. for the case that the value cannot be represented exactly.
    */
   UNNECESSARY;
-  
+
   /**
-   * Converts rounding mode constants from class {@code BigDecimal} into {@code
-   * RoundingMode} values.
-   * 
+   * Converts rounding mode constants from class {@code BigDecimal} into {@code RoundingMode}
+   * values.
+   *
    * @param mode rounding mode constant as defined in class {@code BigDecimal}
    * @return corresponding rounding mode object
    */

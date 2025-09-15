@@ -21,9 +21,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import javaemul.internal.ArrayHelper;
 
 /**
- * See <a
- * href="http://java.sun.com/javase/6/docs/api/java/lang/reflect/Array.html">the
- * official Java API doc</a> for details.
+ * See <a href="http://java.sun.com/javase/6/docs/api/java/lang/reflect/Array.html">the official
+ * Java API doc</a> for details.
  */
 public final class Array {
 
@@ -44,7 +43,7 @@ public final class Array {
       return getLongImpl(array, index);
     } else if (array instanceof short[]) {
       return getShortImpl(array, index);
-    } else  {
+    } else {
       checkArgument(array instanceof Object[]);
       Object[] typedArray = (Object[]) array;
       return typedArray[index];
@@ -280,7 +279,7 @@ public final class Array {
     setDoubleImpl(array, index, value);
   }
 
-  private static void setDoubleImpl(Object array,int index, double value) {
+  private static void setDoubleImpl(Object array, int index, double value) {
     double[] typedArray = (double[]) array;
     typedArray[index] = value;
   }
@@ -376,6 +375,5 @@ public final class Array {
   // public static Object newInstance(Class<?> componentType, int... dimensions)
   // public static Object newInstance(Class<?> componentType, int length)
 
-  private Array() {
-  }
+  private Array() {}
 }

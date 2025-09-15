@@ -20,10 +20,8 @@ import static javaemul.internal.InternalPreconditions.checkCriticalElement;
 import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
- * Hash table implementation of the Map interface with predictable iteration
- * order. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/LinkedHashMap.html">[Sun
- * docs]</a>
+ * Hash table implementation of the Map interface with predictable iteration order. <a
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/LinkedHashMap.html">[Sun docs]</a>
  *
  * @param <K> key type.
  * @param <V> value type.
@@ -31,16 +29,14 @@ import static javaemul.internal.InternalPreconditions.checkState;
 public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
 
   /**
-   * The entry we use includes next/prev pointers for a doubly-linked circular
-   * list with a head node. This reduces the special cases we have to deal with
-   * in the list operations.
+   * The entry we use includes next/prev pointers for a doubly-linked circular list with a head
+   * node. This reduces the special cases we have to deal with in the list operations.
    *
-   * Note that we duplicate the key from the underlying hash map so we can find
-   * the eldest entry. The alternative would have been to modify HashMap so more
-   * of the code was directly usable here, but this would have added some
-   * overhead to HashMap, or to reimplement most of the HashMap code here with
-   * small modifications. Paying a small storage cost only if you use
-   * LinkedHashMap and minimizing code size seemed like a better tradeoff
+   * <p>Note that we duplicate the key from the underlying hash map so we can find the eldest entry.
+   * The alternative would have been to modify HashMap so more of the code was directly usable here,
+   * but this would have added some overhead to HashMap, or to reimplement most of the HashMap code
+   * here with small modifications. Paying a small storage cost only if you use LinkedHashMap and
+   * minimizing code size seemed like a better tradeoff
    */
   private class ChainEntry extends SimpleEntry<K, V> {
     private ChainEntry next;
@@ -54,9 +50,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
       super(key, value);
     }
 
-    /**
-     * Add this node to the end of the chain.
-     */
+    /** Add this node to the end of the chain. */
     public void addToEnd() {
       ChainEntry tail = head.prev;
 
@@ -72,9 +66,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
       tail.next = head.prev = this;
     }
 
-    /**
-     * Remove this node from any list it may be a part of.
-     */
+    /** Remove this node from any list it may be a part of. */
     public void remove() {
       next.prev = prev;
       prev.next = next;

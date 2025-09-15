@@ -189,9 +189,7 @@ abstract class ArrayListBase<E> extends AbstractList<E>
     Arrays.sort(array, 0, sizeImpl(), c);
   }
 
-  /**
-   * Used by Vector.
-   */
+  /** Used by Vector. */
   int indexOf(Object o, int index) {
     for (int size = sizeImpl(); index < size; ++index) {
       if (Objects.equals(o, array[index])) {
@@ -201,9 +199,7 @@ abstract class ArrayListBase<E> extends AbstractList<E>
     return -1;
   }
 
-  /**
-   * Used by Vector.
-   */
+  /** Used by Vector. */
   int lastIndexOf(Object o, int index) {
     for (; index >= 0; --index) {
       if (Objects.equals(o, array[index])) {

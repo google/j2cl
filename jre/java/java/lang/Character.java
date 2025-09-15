@@ -64,8 +64,8 @@ import javaemul.internal.annotations.HasNoSideEffects;
  */
 public final class Character implements Comparable<Character>, Serializable {
   /**
-   * Helper class to share code between implementations, by making a char
-   * array look like a CharSequence.
+   * Helper class to share code between implementations, by making a char array look like a
+   * CharSequence.
    */
   static class CharSequenceAdapter implements CharSequence {
     private char[] charArray;
@@ -94,8 +94,7 @@ public final class Character implements Comparable<Character>, Serializable {
 
     @Override
     public java.lang.CharSequence subSequence(int start, int end) {
-      return new CharSequenceAdapter(charArray, this.start + start,
-          this.start + end);
+      return new CharSequenceAdapter(charArray, this.start + start, this.start + end);
     }
   }
 
@@ -172,13 +171,11 @@ public final class Character implements Comparable<Character>, Serializable {
     return codePointCount(new CharSequenceAdapter(a), offset, offset + count);
   }
 
-  public static int codePointCount(CharSequence seq, int beginIndex,
-      int endIndex) {
+  public static int codePointCount(CharSequence seq, int beginIndex, int endIndex) {
     int count = 0;
     for (int idx = beginIndex; idx < endIndex; ) {
       char ch = seq.charAt(idx++);
-      if (isHighSurrogate(ch) && idx < endIndex
-          && (isLowSurrogate(seq.charAt(idx)))) {
+      if (isHighSurrogate(ch) && idx < endIndex && (isLowSurrogate(seq.charAt(idx)))) {
         // skip the second char of surrogate pairs
         ++idx;
       }
@@ -291,9 +288,7 @@ public final class Character implements Comparable<Character>, Serializable {
     return ch >= MIN_SURROGATE && ch <= MAX_SURROGATE;
   }
 
-  /**
-   * Deprecated - see isWhitespace(char).
-   */
+  /** Deprecated - see isWhitespace(char). */
   @Deprecated
   public static boolean isSpace(char c) {
     switch (c) {
@@ -369,14 +364,12 @@ public final class Character implements Comparable<Character>, Serializable {
     return codePoint >= MIN_CODE_POINT && codePoint <= MAX_CODE_POINT;
   }
 
-  public static int offsetByCodePoints(char[] a, int start, int count, int index,
-      int codePointOffset) {
-    return offsetByCodePoints(new CharSequenceAdapter(a, start, count), index,
-        codePointOffset);
+  public static int offsetByCodePoints(
+      char[] a, int start, int count, int index, int codePointOffset) {
+    return offsetByCodePoints(new CharSequenceAdapter(a, start, count), index, codePointOffset);
   }
 
-  public static int offsetByCodePoints(CharSequence seq, int index,
-      int codePointOffset) {
+  public static int offsetByCodePoints(CharSequence seq, int index, int codePointOffset) {
     if (codePointOffset < 0) {
       // move backwards
       while (codePointOffset < 0) {
@@ -410,7 +403,7 @@ public final class Character implements Comparable<Character>, Serializable {
       };
     } else {
       return new char[] {
-          (char) codePoint,
+        (char) codePoint,
       };
     }
   }
@@ -471,7 +464,8 @@ public final class Character implements Comparable<Character>, Serializable {
   static int codePointAt(CharSequence cs, int index, int limit) {
     char hiSurrogate = cs.charAt(index++);
     char loSurrogate;
-    if (Character.isHighSurrogate(hiSurrogate) && index < limit
+    if (Character.isHighSurrogate(hiSurrogate)
+        && index < limit
         && Character.isLowSurrogate(loSurrogate = cs.charAt(index))) {
       return Character.toCodePoint(hiSurrogate, loSurrogate);
     }
@@ -481,7 +475,8 @@ public final class Character implements Comparable<Character>, Serializable {
   static int codePointBefore(CharSequence cs, int index, int start) {
     char loSurrogate = cs.charAt(--index);
     char highSurrogate;
-    if (isLowSurrogate(loSurrogate) && index > start
+    if (isLowSurrogate(loSurrogate)
+        && index > start
         && isHighSurrogate(highSurrogate = cs.charAt(index - 1))) {
       return toCodePoint(highSurrogate, loSurrogate);
     }
@@ -506,8 +501,8 @@ public final class Character implements Comparable<Character>, Serializable {
    * @return high surrogate character
    */
   public static char highSurrogate(int codePoint) {
-    return (char) (MIN_HIGH_SURROGATE
-        + (((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) >> 10) & 1023));
+    return (char)
+        (MIN_HIGH_SURROGATE + (((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) >> 10) & 1023));
   }
 
   /**

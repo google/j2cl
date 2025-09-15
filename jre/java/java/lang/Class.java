@@ -53,9 +53,7 @@ public final class Class<T> implements Type, Serializable {
    */
   private final Constructor ctor;
 
-  /**
-   * Dimension count for the underlying array type; or {@code 0} if this is not for an array.
-   */
+  /** Dimension count for the underlying array type; or {@code 0} if this is not for an array. */
   private final int dimensionCount;
 
   @JsConstructor

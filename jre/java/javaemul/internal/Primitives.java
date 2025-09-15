@@ -203,9 +203,7 @@ public class Primitives {
     return toInt(value);
   }
 
-  /**
-   * Rounds to an integral value.
-   */
+  /** Rounds to an integral value. */
   private static int roundToInt(int value) {
     return toInt(Math.max(Math.min(value, Integer.MAX_VALUE), Integer.MIN_VALUE));
   }

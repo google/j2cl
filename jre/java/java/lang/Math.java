@@ -21,9 +21,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-/**
- * Math utility methods and constants.
- */
+/** Math utility methods and constants. */
 public final class Math {
   // The following methods are not implemented because JS doesn't provide the
   // necessary pieces:

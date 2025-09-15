@@ -17,9 +17,7 @@ package javaemul.internal;
 
 import java.nio.charset.Charset;
 
-/**
- * Provides Charset implementations.
- */
+/** Provides Charset implementations. */
 public abstract class EmulatedCharset extends Charset {
 
   public static final EmulatedCharset UTF_8 = new UtfCharset("UTF-8");
@@ -199,7 +197,7 @@ public abstract class EmulatedCharset extends Charset {
       // TODO(jat): consider using unescape(encodeURIComponent(bytes)) instead
       int n = str.length();
       PrimitiveLists.Byte bytes = PrimitiveLists.createForByte();
-      for (int i = 0; i < n;) {
+      for (int i = 0; i < n; ) {
         int ch = getCodePointAt(str, i, n, throwOnInvalid);
         i += Character.charCount(ch);
         encodeUtf8(bytes, ch, throwOnInvalid);

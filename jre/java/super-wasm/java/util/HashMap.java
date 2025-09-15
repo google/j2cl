@@ -77,6 +77,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
    * declaration above.
    */
   private int threshold;
+
   // Views - lazily initialized
   private Set<K> keySet;
   private Set<Entry<K, V>> entrySet;

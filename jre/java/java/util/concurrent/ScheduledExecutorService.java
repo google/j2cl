@@ -18,9 +18,7 @@
 
 package java.util.concurrent;
 
-/**
- * Emulation of ScheduledExecutorService.
- */
+/** Emulation of ScheduledExecutorService. */
 public interface ScheduledExecutorService extends ExecutorService {
 
   ScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit);

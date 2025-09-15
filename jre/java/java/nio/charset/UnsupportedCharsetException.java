@@ -16,9 +16,7 @@
 
 package java.nio.charset;
 
-/**
- * GWT emulation of {@link UnsupportedCharsetException}.
- */
+/** GWT emulation of {@link UnsupportedCharsetException}. */
 public class UnsupportedCharsetException extends IllegalArgumentException {
   private final String charsetName;
 

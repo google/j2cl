@@ -24,21 +24,21 @@ import java.util.function.UnaryOperator;
 import jsinterop.annotations.JsNonNull;
 
 /**
- * To keep performance characteristics in line with Java community expectations,
- * <code>Vector</code> is a wrapper around <code>ArrayList</code>.
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html">
- * the official Java API doc</a> for details.
+ * To keep performance characteristics in line with Java community expectations, <code>Vector</code>
+ * is a wrapper around <code>ArrayList</code>. See <a
+ * href="https://docs.oracle.com/javase/8/docs/api/java/util/Vector.html">the official Java API
+ * doc</a> for details.
  *
  * @param <E> element type.
  */
-public class Vector<E> extends AbstractList<E> implements List<E>,
-    RandomAccess, Cloneable, Serializable {
+public class Vector<E> extends AbstractList<E>
+    implements List<E>, RandomAccess, Cloneable, Serializable {
 
   private ArrayList<E> arrayList;
 
   /**
-   * Ensures that RPC will consider type parameter E to be exposed. It will be
-   * pruned by dead code elimination.
+   * Ensures that RPC will consider type parameter E to be exposed. It will be pruned by dead code
+   * elimination.
    */
   @SuppressWarnings("unused")
   private E exposeElement;
@@ -56,9 +56,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
     arrayList = new ArrayList<E>(initialCapacity);
   }
 
-  /**
-   * Capacity increment is ignored.
-   */
+  /** Capacity increment is ignored. */
   @SuppressWarnings("unused")
   public Vector(int initialCapacity, int ignoredCapacityIncrement) {
     this(initialCapacity);

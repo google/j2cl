@@ -25,9 +25,9 @@ import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents a sequence of objects.
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">
- * the official Java API doc</a> for details.
+ * Represents a sequence of objects. See <a
+ * href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">the official Java API
+ * doc</a> for details.
  *
  * @param <E> element type
  */
@@ -167,5 +167,6 @@ public interface List<E> extends Collection<E> {
     return Spliterators.spliterator(this, Spliterator.ORDERED);
   }
 
-  @JsNonNull List<E> subList(int fromIndex, int toIndex);
+  @JsNonNull
+  List<E> subList(int fromIndex, int toIndex);
 }

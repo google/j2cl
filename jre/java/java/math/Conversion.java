@@ -35,32 +35,32 @@
 package java.math;
 
 /**
- * Static library that provides {@link BigInteger} base conversion from/to any
- * integer represented in a {@link java.lang.String} Object.
+ * Static library that provides {@link BigInteger} base conversion from/to any integer represented
+ * in a {@link java.lang.String} Object.
  */
 class Conversion {
 
   /**
-   * bigRadices values are precomputed maximal powers of radices (integer
-   * numbers from 2 to 36) that fit into unsigned int (32 bits). bigRadices[0] =
-   * 2 ^ 31, bigRadices[8] = 10 ^ 9, etc.
+   * bigRadices values are precomputed maximal powers of radices (integer numbers from 2 to 36) that
+   * fit into unsigned int (32 bits). bigRadices[0] = 2 ^ 31, bigRadices[8] = 10 ^ 9, etc.
    */
-
   static final int bigRadices[] = {
-      -2147483648, 1162261467, 1073741824, 1220703125, 362797056, 1977326743,
-      1073741824, 387420489, 1000000000, 214358881, 429981696, 815730721,
-      1475789056, 170859375, 268435456, 410338673, 612220032, 893871739,
-      1280000000, 1801088541, 113379904, 148035889, 191102976, 244140625,
-      308915776, 387420489, 481890304, 594823321, 729000000, 887503681,
-      1073741824, 1291467969, 1544804416, 1838265625, 60466176};
+    -2147483648, 1162261467, 1073741824, 1220703125, 362797056, 1977326743,
+    1073741824, 387420489, 1000000000, 214358881, 429981696, 815730721,
+    1475789056, 170859375, 268435456, 410338673, 612220032, 893871739,
+    1280000000, 1801088541, 113379904, 148035889, 191102976, 244140625,
+    308915776, 387420489, 481890304, 594823321, 729000000, 887503681,
+    1073741824, 1291467969, 1544804416, 1838265625, 60466176
+  };
 
   /**
-   * Holds the maximal exponent for each radix, so that
-   * radix<sup>digitFitInInt[radix]</sup> fit in an {@code int} (32 bits).
+   * Holds the maximal exponent for each radix, so that radix<sup>digitFitInInt[radix]</sup> fit in
+   * an {@code int} (32 bits).
    */
   static final int[] digitFitInInt = {
-      -1, -1, 31, 19, 15, 13, 11, 11, 10, 9, 9, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7,
-      7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5};
+    -1, -1, 31, 19, 15, 13, 11, 11, 10, 9, 9, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7, 6, 6, 6, 6, 6, 6, 6,
+    6, 6, 6, 6, 6, 6, 6, 5
+  };
 
   /**
    * @see BigInteger#toString(int)
@@ -84,14 +84,13 @@ class Conversion {
       }
       return Long.toString(v, radix);
     }
-    if ((radix == 10) || (radix < Character.MIN_RADIX)
-        || (radix > Character.MAX_RADIX)) {
+    if ((radix == 10) || (radix < Character.MIN_RADIX) || (radix > Character.MAX_RADIX)) {
       return val.toString();
     }
     double bitsForRadixDigit;
     bitsForRadixDigit = Math.log(radix) / Math.log(2);
-    int resLengthInChars = (int) (val.abs().bitLength() / bitsForRadixDigit + ((sign < 0)
-        ? 1 : 0)) + 1;
+    int resLengthInChars =
+        (int) (val.abs().bitLength() / bitsForRadixDigit + ((sign < 0) ? 1 : 0)) + 1;
 
     char result[] = new char[resLengthInChars];
     int currentChar = resLengthInChars;
@@ -166,8 +165,8 @@ class Conversion {
   }
 
   /**
-   * Builds the correspondent {@code String} representation of {@code val} being
-   * scaled by {@code scale}.
+   * Builds the correspondent {@code String} representation of {@code val} being scaled by {@code
+   * scale}.
    *
    * @see BigInteger#toString()
    * @see BigDecimal#toString()
@@ -199,9 +198,9 @@ class Conversion {
         default:
           StringBuilder result1 = new StringBuilder();
           if (scale < 0) {
-            result1.append("0E+"); //$NON-NLS-1$
+            result1.append("0E+"); // $NON-NLS-1$
           } else {
-            result1.append("0E"); //$NON-NLS-1$
+            result1.append("0E"); // $NON-NLS-1$
           }
           result1.append(-scale);
           return result1.toString();
@@ -239,7 +238,8 @@ class Conversion {
       int temp[] = new int[numberLength];
       int tempLen = numberLength;
       System.arraycopy(digits, 0, temp, 0, tempLen);
-      BIG_LOOP : while (true) {
+      BIG_LOOP:
+      while (true) {
         // divide the array of digits by bigRadix and convert
         // remainders
         // to characters collecting them in the char array
@@ -290,8 +290,7 @@ class Conversion {
         if (negNumber) {
           result[--currentChar] = '-';
         }
-        return new String(result, currentChar, resLengthInChars - currentChar
-            + 1);
+        return new String(result, currentChar, resLengthInChars - currentChar + 1);
       }
       // special case 2
       for (int j = 2; j < -exponent + 1; j++) {
@@ -313,8 +312,7 @@ class Conversion {
     if (endPoint - startPoint >= 1) {
       result1.append(result[currentChar]);
       result1.append('.');
-      result1.append(result, currentChar + 1, resLengthInChars - currentChar
-          - 1);
+      result1.append(result, currentChar + 1, resLengthInChars - currentChar - 1);
     } else {
       result1.append(result, currentChar, resLengthInChars - currentChar);
     }
@@ -354,12 +352,14 @@ class Conversion {
         default:
           StringBuilder result1 = new StringBuilder();
           if (scale < 0) {
-            result1.append("0E+"); //$NON-NLS-1$
+            result1.append("0E+"); // $NON-NLS-1$
           } else {
-            result1.append("0E"); //$NON-NLS-1$
+            result1.append("0E"); // $NON-NLS-1$
           }
-          result1.append((scale == Integer.MIN_VALUE)
-              ? "2147483648" : Integer.toString(-scale)); //$NON-NLS-1$
+          result1.append(
+              (scale == Integer.MIN_VALUE)
+                  ? "2147483648"
+                  : Integer.toString(-scale)); // $NON-NLS-1$
           return result1.toString();
       }
     }
@@ -398,8 +398,7 @@ class Conversion {
         if (negNumber) {
           result[--currentChar] = '-';
         }
-        return new String(result, currentChar, resLengthInChars - currentChar
-            + 1);
+        return new String(result, currentChar, resLengthInChars - currentChar + 1);
       }
       // special case 2
       for (int j = 2; j < -exponent + 1; j++) {
@@ -421,8 +420,7 @@ class Conversion {
     if (endPoint - startPoint >= 1) {
       result1.append(result[currentChar]);
       result1.append('.');
-      result1.append(result, currentChar + 1, resLengthInChars - currentChar
-          - 1);
+      result1.append(result, currentChar + 1, resLengthInChars - currentChar - 1);
     } else {
       result1.append(result, currentChar, resLengthInChars - currentChar);
     }
@@ -434,15 +432,12 @@ class Conversion {
     return result1.toString();
   }
 
-  /**
-   * Just to denote that this class can't be instantiated.
-   */
-  private Conversion() {
-  }
+  /** Just to denote that this class can't be instantiated. */
+  private Conversion() {}
 
-//   /**
-//    * @see BigInteger#doubleValue()
-//    */
+  //   /**
+  //    * @see BigInteger#doubleValue()
+  //    */
   // static double bigInteger2Double(BigInteger val) {
   // // val.bitLength() < 64
   // if ((val.numberLength < 2)

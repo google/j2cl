@@ -18,9 +18,7 @@ package java.util;
 import java.util.Map.Entry;
 import javaemul.internal.JsUtils;
 
-/**
- * A simple wrapper around JavaScript Map for key type is string.
- */
+/** A simple wrapper around JavaScript Map for key type is string. */
 class InternalStringMap<K, V> implements Iterable<Entry<K, V>> {
 
   private final InternalJsMap<V> backingMap = new InternalJsMap<V>();
@@ -29,9 +27,8 @@ class InternalStringMap<K, V> implements Iterable<Entry<K, V>> {
 
   /**
    * A mod count to track 'value' replacements in map to ensure that the 'value' that we have in the
-   * iterator entry is guaranteed to be still correct.
-   * This is to optimize for the common scenario where the values are not modified during
-   * iterations where the entries are never stale.
+   * iterator entry is guaranteed to be still correct. This is to optimize for the common scenario
+   * where the values are not modified during iterations where the entries are never stale.
    */
   private int valueMod;
 

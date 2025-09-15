@@ -68,11 +68,13 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> {
   private static class LinkedEntry<K, V> extends HashMapEntry<K, V> {
     LinkedEntry<K, V> nxt;
     LinkedEntry<K, V> prv;
+
     /** Create the header entry */
     LinkedEntry() {
       super(null, null, 0, null);
       nxt = prv = this;
     }
+
     /** Create a normal entry */
     LinkedEntry(
         K key,

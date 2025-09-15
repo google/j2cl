@@ -17,27 +17,21 @@ package java.io;
 
 import static javaemul.internal.InternalPreconditions.checkArgument;
 
-/**
- * Reads characters from a string.
- */
+/** Reads characters from a string. */
 public class StringReader extends Reader {
   private final String text;
   private int position;
   private int mark;
 
-  /**
-   * Constructs a reader which will read from the given string.
-   */
+  /** Constructs a reader which will read from the given string. */
   public StringReader(String text) {
     this.text = text;
   }
 
   @Override
-  public void close() throws IOException { }
+  public void close() throws IOException {}
 
-  /**
-   * Reads up to the specified number of characters from the string.
-   */
+  /** Reads up to the specified number of characters from the string. */
   @Override
   public int read(char[] buf, int off, int readLength) {
     if (position >= text.length()) {

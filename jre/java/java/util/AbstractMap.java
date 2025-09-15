@@ -22,17 +22,14 @@ import jsinterop.annotations.JsNullable;
 
 /**
  * Skeletal implementation of the Map interface. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractMap.html">[Sun
- * docs]</a>
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractMap.html">[Sun docs]</a>
  *
  * @param <K> the key type.
  * @param <V> the value type.
  */
 public abstract class AbstractMap<K, V> implements Map<K, V> {
 
-  /**
-   * A mutable {@link Map.Entry} shared by several {@link Map} implementations.
-   */
+  /** A mutable {@link Map.Entry} shared by several {@link Map} implementations. */
   public static class SimpleEntry<K, V> extends AbstractEntry<K, V> {
     public SimpleEntry(K key, V value) {
       super(key, value);
@@ -43,9 +40,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     }
   }
 
-  /**
-   * An immutable {@link Map.Entry} shared by several {@link Map} implementations.
-   */
+  /** An immutable {@link Map.Entry} shared by several {@link Map} implementations. */
   public static class SimpleImmutableEntry<K, V> extends AbstractEntry<K, V> {
     public SimpleImmutableEntry(K key, V value) {
       super(key, value);
@@ -62,8 +57,8 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   /**
-   * Basic {@link Map.Entry} implementation used by {@link SimpleEntry}
-   * and {@link SimpleImmutableEntry}.
+   * Basic {@link Map.Entry} implementation used by {@link SimpleEntry} and {@link
+   * SimpleImmutableEntry}.
    */
   private abstract static class AbstractEntry<K, V> implements Entry<K, V> {
     private final K key;
@@ -97,13 +92,10 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
         return false;
       }
       Entry<?, ?> entry = (Entry<?, ?>) other;
-      return Objects.equals(key, entry.getKey())
-          && Objects.equals(value, entry.getValue());
+      return Objects.equals(key, entry.getKey()) && Objects.equals(value, entry.getValue());
     }
 
-    /**
-     * Calculate the hash code using Sun's specified algorithm.
-     */
+    /** Calculate the hash code using Sun's specified algorithm. */
     @Override
     public int hashCode() {
       return Objects.hashCode(key) ^ Objects.hashCode(value);
@@ -116,8 +108,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     }
   }
 
-  protected AbstractMap() {
-  }
+  protected AbstractMap() {}
 
   @Override
   public void clear() {
@@ -337,7 +328,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   private Entry<K, V> implFindEntry(Object key, boolean remove) {
-    for (Iterator<Entry<K, V>> iter = entrySet().iterator(); iter.hasNext();) {
+    for (Iterator<Entry<K, V>> iter = entrySet().iterator(); iter.hasNext(); ) {
       Entry<K, V> entry = iter.next();
       K k = entry.getKey();
       if (Objects.equals(key, k)) {

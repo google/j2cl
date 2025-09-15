@@ -93,9 +93,9 @@ public class BitSet implements Cloneable {
   }
 
   /**
-   * Computes the offset within a word for a bit index. Within a word, the offset counts from
-   * right to left and caps at 31. This helps leaving the highest bit as zero to ensure that
-   * each word is a tagged small integer in V8.
+   * Computes the offset within a word for a bit index. Within a word, the offset counts from right
+   * to left and caps at 31. This helps leaving the highest bit as zero to ensure that each word is
+   * a tagged small integer in V8.
    *
    * @param bitIndex The bit index.
    * @return The offset of the bit within a word, counting from right to left.
@@ -131,7 +131,6 @@ public class BitSet implements Cloneable {
 
       // Set the bits from the last 31 bit boundary to toIndex.
       maskInWord(array, last, 0, endBit);
-
     }
     if (last >= wordLength) {
       wordLength = last + 1;
@@ -342,7 +341,6 @@ public class BitSet implements Cloneable {
 
       // Clear the bits from the last 31 bit boundary to the toIndex.
       maskOutWord(array, last, 0, endBit);
-
     }
     updateWordLength();
   }
@@ -515,8 +513,8 @@ public class BitSet implements Cloneable {
   }
 
   /**
-   * This hash is different than the one described in Sun's documentation. The
-   * described hash uses 64 bit integers and that's not practical in JavaScript.
+   * This hash is different than the one described in Sun's documentation. The described hash uses
+   * 64 bit integers and that's not practical in JavaScript.
    */
   @Override
   public int hashCode() {

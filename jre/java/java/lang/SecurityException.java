@@ -18,11 +18,11 @@ package java.lang;
 /**
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/SecurityException.html">the
  * official Java API doc</a> for details.
- * 
- * This exception is never thrown by GWT or GWT's libraries, as GWT does not have a SecurityManager.
- * It is provided in GWT only for compatibility with user code that explicitly catches it.
+ *
+ * <p>This exception is never thrown by GWT or GWT's libraries, as GWT does not have a
+ * SecurityManager. It is provided in GWT only for compatibility with user code that explicitly
+ * catches it.
  */
 public class SecurityException extends RuntimeException {
-  private SecurityException() {
-  }
+  private SecurityException() {}
 }

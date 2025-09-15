@@ -20,10 +20,9 @@ import java.lang.annotation.Target;
 
 /**
  * An annotation to mark a given method as side-effect free.
- * <p>
- * Internal SDK use only, might change or disappear at any time.
+ *
+ * <p>Internal SDK use only, might change or disappear at any time.
  */
 @CompilerHint
 @Target(ElementType.METHOD)
-public @interface HasNoSideEffects {
-}
+public @interface HasNoSideEffects {}

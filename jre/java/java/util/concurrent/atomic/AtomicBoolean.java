@@ -18,9 +18,7 @@
 
 package java.util.concurrent.atomic;
 
-/**
- * GWT emulation of AtomicBoolean.
- */
+/** GWT emulation of AtomicBoolean. */
 public class AtomicBoolean implements java.io.Serializable {
   private boolean value;
 
@@ -28,8 +26,7 @@ public class AtomicBoolean implements java.io.Serializable {
     value = initialValue;
   }
 
-  public AtomicBoolean() {
-  }
+  public AtomicBoolean() {}
 
   public final boolean get() {
     return value;

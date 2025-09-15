@@ -20,7 +20,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 /**
  * Provides a series of utilities to be reused between IO classes.
  *
- * TODO(chehayeb): move these checks to InternalPreconditions.
+ * <p>TODO(chehayeb): move these checks to InternalPreconditions.
  */
 final class IOUtils {
 
@@ -65,8 +65,8 @@ final class IOUtils {
    * @param offset Starting offset in the string.
    * @param count Total number of characters to be accessed.
    * @throws NullPointerException if the given reference to the string is null.
-   * @throws IndexOutOfBoundsException if {@code offset} is negative, {@code count} is
-   *     negative or their sum exceeds the string length.
+   * @throws IndexOutOfBoundsException if {@code offset} is negative, {@code count} is negative or
+   *     their sum exceeds the string length.
    */
   public static void checkOffsetAndCount(String str, int offset, int count) {
     // Ensure we throw a NullPointerException instead of a JavascriptException in case the
@@ -90,6 +90,5 @@ final class IOUtils {
     }
   }
 
-  private IOUtils() {
-  }
+  private IOUtils() {}
 }

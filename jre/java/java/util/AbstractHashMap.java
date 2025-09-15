@@ -25,8 +25,7 @@ import javaemul.internal.JsUtils;
 
 /**
  * Implementation of Map interface based on a hash table. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/HashMap.html">[Sun
- * docs]</a>
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/HashMap.html">[Sun docs]</a>
  *
  * @param <K> key type
  * @param <V> value type
@@ -69,9 +68,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     }
   }
 
-  /**
-   * Iterator for <code>EntrySet</code>.
-   */
+  /** Iterator for <code>EntrySet</code>. */
   private final class EntrySetIterator implements Iterator<Entry<K, V>> {
     private Iterator<Entry<K, V>> stringMapEntries = stringMap.iterator();
     private Iterator<Entry<K, V>> current = stringMapEntries;
@@ -222,16 +219,12 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     return hashCodeMap.size() + stringMap.size();
   }
 
-  /**
-   * Subclasses must override to return a whether or not two keys or values are
-   * equal.
-   */
+  /** Subclasses must override to return a whether or not two keys or values are equal. */
   abstract boolean equals(Object value1, Object value2);
 
   /**
-   * Subclasses must override to return a hash code for a given key. The key is
-   * guaranteed to be non-null and not a String.
+   * Subclasses must override to return a hash code for a given key. The key is guaranteed to be
+   * non-null and not a String.
    */
   abstract int getHashCode(Object key);
-
 }

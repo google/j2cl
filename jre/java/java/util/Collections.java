@@ -28,14 +28,13 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 
 /**
- * Utility methods that operate on collections.
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html">
- * the official Java API doc</a> for details.
+ * Utility methods that operate on collections. See <a
+ * href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html">the official Java API
+ * doc</a> for details.
  */
 public class Collections {
 
-  private static final class LifoQueue<E> extends AbstractQueue<E> implements
-      Serializable {
+  private static final class LifoQueue<E> extends AbstractQueue<E> implements Serializable {
 
     private final Deque<E> deque;
 
@@ -69,8 +68,7 @@ public class Collections {
     }
   }
 
-  private static final class EmptyList extends AbstractList implements
-      RandomAccess, Serializable {
+  private static final class EmptyList extends AbstractList implements RandomAccess, Serializable {
     @Override
     public boolean contains(Object object) {
       return false;
@@ -148,8 +146,7 @@ public class Collections {
     }
   }
 
-  private static final class EmptySet extends AbstractSet implements
-      Serializable {
+  private static final class EmptySet extends AbstractSet implements Serializable {
     @Override
     public boolean contains(Object object) {
       return false;
@@ -164,10 +161,9 @@ public class Collections {
     public int size() {
       return 0;
     }
-}
+  }
 
-  private static final class EmptyMap extends AbstractMap implements
-      Serializable {
+  private static final class EmptyMap extends AbstractMap implements Serializable {
     @Override
     public boolean containsKey(Object key) {
       return false;
@@ -205,8 +201,7 @@ public class Collections {
     }
   }
 
-  private static final class SetFromMap<E> extends AbstractSet<E>
-      implements Serializable {
+  private static final class SetFromMap<E> extends AbstractSet<E> implements Serializable {
 
     private final Map<E, Boolean> backingMap;
     private Set<E> keySet;
@@ -260,9 +255,7 @@ public class Collections {
       return keySet().toString();
     }
 
-    /**
-     * Lazy initialize keySet to avoid NPE after deserialization.
-     */
+    /** Lazy initialize keySet to avoid NPE after deserialization. */
     private Set<E> keySet() {
       if (keySet == null) {
         keySet = backingMap.keySet();
@@ -438,8 +431,7 @@ public class Collections {
     }
   }
 
-  static class UnmodifiableList<T> extends UnmodifiableCollection<T> implements
-      List<T> {
+  static class UnmodifiableList<T> extends UnmodifiableCollection<T> implements List<T> {
     private final List<? extends T> list;
 
     public UnmodifiableList(List<? extends T> list) {
@@ -526,8 +518,7 @@ public class Collections {
 
   static class UnmodifiableMap<K, V> implements Map<K, V> {
 
-    static class UnmodifiableEntrySet<K, V> extends
-        UnmodifiableSet<Map.Entry<K, V>> {
+    static class UnmodifiableEntrySet<K, V> extends UnmodifiableSet<Map.Entry<K, V>> {
 
       private static class UnmodifiableEntry<K, V> implements Map.Entry<K, V> {
         private Map.Entry<? extends K, ? extends V> entry;
@@ -568,8 +559,7 @@ public class Collections {
       }
 
       @SuppressWarnings("unchecked")
-      public UnmodifiableEntrySet(
-          Set<? extends Map.Entry<? extends K, ? extends V>> s) {
+      public UnmodifiableEntrySet(Set<? extends Map.Entry<? extends K, ? extends V>> s) {
         super((Set<? extends Entry<K, V>>) s);
       }
 
@@ -729,15 +719,13 @@ public class Collections {
     }
   }
 
-  static class UnmodifiableRandomAccessList<T> extends UnmodifiableList<T>
-      implements RandomAccess {
+  static class UnmodifiableRandomAccessList<T> extends UnmodifiableList<T> implements RandomAccess {
     public UnmodifiableRandomAccessList(List<? extends T> list) {
       super(list);
     }
   }
 
-  static class UnmodifiableSet<T> extends UnmodifiableCollection<T> implements
-      Set<T> {
+  static class UnmodifiableSet<T> extends UnmodifiableCollection<T> implements Set<T> {
     public UnmodifiableSet(Set<? extends T> set) {
       super(set);
     }
@@ -804,8 +792,7 @@ public class Collections {
     }
   }
 
-  static class UnmodifiableSortedSet<E> extends UnmodifiableSet<E> implements
-      SortedSet<E> {
+  static class UnmodifiableSortedSet<E> extends UnmodifiableSet<E> implements SortedSet<E> {
     private SortedSet<E> sortedSet;
 
     @SuppressWarnings("unchecked")
@@ -846,8 +833,7 @@ public class Collections {
 
     @Override
     public SortedSet<E> subSet(E fromElement, E toElement) {
-      return new UnmodifiableSortedSet<E>(sortedSet.subSet(fromElement,
-          toElement));
+      return new UnmodifiableSortedSet<E>(sortedSet.subSet(fromElement, toElement));
     }
 
     @Override
@@ -879,8 +865,8 @@ public class Collections {
     }
   }
 
-  private static class UnmodifiableListIterator<T> extends
-      UnmodifiableCollectionIterator<T> implements ListIterator<T> {
+  private static class UnmodifiableListIterator<T> extends UnmodifiableCollectionIterator<T>
+      implements ListIterator<T> {
     private final ListIterator<? extends T> lit;
 
     private UnmodifiableListIterator(ListIterator<? extends T> lit) {
@@ -947,20 +933,16 @@ public class Collections {
   /**
    * Perform a binary search on a sorted List, using natural ordering.
    *
-   * <p>
-   * Note: The GWT implementation differs from the JDK implementation in that it
-   * does not do an iterator-based binary search for Lists that do not implement
-   * RandomAccess.
-   * </p>
+   * <p>Note: The GWT implementation differs from the JDK implementation in that it does not do an
+   * iterator-based binary search for Lists that do not implement RandomAccess.
    *
    * @param sortedList object array to search
    * @param key value to search for
-   * @return the index of an element with a matching value, or a negative number
-   *         which is the index of the next larger value (or just past the end
-   *         of the array if the searched value is larger than all elements in
-   *         the array) minus 1 (to ensure error returns are negative)
-   * @throws ClassCastException if <code>key</code> is not comparable to
-   *           <code>sortedList</code>'s elements.
+   * @return the index of an element with a matching value, or a negative number which is the index
+   *     of the next larger value (or just past the end of the array if the searched value is larger
+   *     than all elements in the array) minus 1 (to ensure error returns are negative)
+   * @throws ClassCastException if <code>key</code> is not comparable to <code>sortedList</code>'s
+   *     elements.
    */
   public static <T> int binarySearch(
       final List<? extends Comparable<? super T>> sortedList, final T key) {
@@ -1005,29 +987,23 @@ public class Collections {
   // return null;
   // }
   /**
-   * Perform a binary search on a sorted List, using a user-specified comparison
-   * function.
+   * Perform a binary search on a sorted List, using a user-specified comparison function.
    *
-   * <p>
-   * Note: The GWT implementation differs from the JDK implementation in that it
-   * does not do an iterator-based binary search for Lists that do not implement
-   * RandomAccess.
-   * </p>
+   * <p>Note: The GWT implementation differs from the JDK implementation in that it does not do an
+   * iterator-based binary search for Lists that do not implement RandomAccess.
    *
    * @param sortedList List to search
    * @param key value to search for
-   * @param comparator comparision function, <code>null</code> indicates
-   *          <i>natural ordering</i> should be used.
-   * @return the index of an element with a matching value, or a negative number
-   *         which is the index of the next larger value (or just past the end
-   *         of the array if the searched value is larger than all elements in
-   *         the array) minus 1 (to ensure error returns are negative)
-   * @throws ClassCastException if <code>key</code> and
-   *           <code>sortedList</code>'s elements cannot be compared by
-   *           <code>comparator</code>.
+   * @param comparator comparision function, <code>null</code> indicates <i>natural ordering</i>
+   *     should be used.
+   * @return the index of an element with a matching value, or a negative number which is the index
+   *     of the next larger value (or just past the end of the array if the searched value is larger
+   *     than all elements in the array) minus 1 (to ensure error returns are negative)
+   * @throws ClassCastException if <code>key</code> and <code>sortedList</code>'s elements cannot be
+   *     compared by <code>comparator</code>.
    */
-  public static <T> int binarySearch(final List<? extends T> sortedList,
-      final T key, Comparator<? super T> comparator) {
+  public static <T> int binarySearch(
+      final List<? extends T> sortedList, final T key, Comparator<? super T> comparator) {
     /*
      * TODO: This doesn't implement the "iterator-based binary search" described
      * in the JDK docs for non-RandomAccess Lists. Until GWT provides a
@@ -1127,7 +1103,7 @@ public class Collections {
   }
 
   public static <T> void fill(List<? super T> list, T obj) {
-    for (ListIterator<? super T> it = list.listIterator(); it.hasNext();) {
+    for (ListIterator<? super T> it = list.listIterator(); it.hasNext(); ) {
       it.next();
       it.set(obj);
     }
@@ -1151,13 +1127,11 @@ public class Collections {
     return arrayList;
   }
 
-  public static <T extends Object & Comparable<? super T>> T max(
-      Collection<? extends T> coll) {
+  public static <T extends Object & Comparable<? super T>> T max(Collection<? extends T> coll) {
     return max(coll, null);
   }
 
-  public static <T> T max(Collection<? extends T> coll,
-      Comparator<? super T> comp) {
+  public static <T> T max(Collection<? extends T> coll, Comparator<? super T> comp) {
 
     comp = Comparators.nullToNaturalOrder(comp);
 
@@ -1176,13 +1150,11 @@ public class Collections {
     return max;
   }
 
-  public static <T extends Object & Comparable<? super T>> T min(
-      Collection<? extends T> coll) {
+  public static <T extends Object & Comparable<? super T>> T min(Collection<? extends T> coll) {
     return min(coll, null);
   }
 
-  public static <T> T min(Collection<? extends T> coll,
-      Comparator<? super T> comp) {
+  public static <T> T min(Collection<? extends T> coll, Comparator<? super T> comp) {
     return max(coll, reverseOrder(comp));
   }
 
@@ -1201,7 +1173,7 @@ public class Collections {
 
   public static <T> boolean replaceAll(List<T> list, T oldVal, T newVal) {
     boolean modified = false;
-    for (ListIterator<T> it = list.listIterator(); it.hasNext();) {
+    for (ListIterator<T> it = list.listIterator(); it.hasNext(); ) {
       T t = it.next();
       if (Objects.equals(t, oldVal)) {
         it.set(newVal);
@@ -1240,13 +1212,13 @@ public class Collections {
 
   /**
    * Rotates the elements in {@code list} by the distance {@code dist}
-   * <p>
-   * e.g. for a given list with elements [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], calling rotate(list, 3) or
-   * rotate(list, -7) would modify the list to look like this: [8, 9, 0, 1, 2, 3, 4, 5, 6, 7]
+   *
+   * <p>e.g. for a given list with elements [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], calling rotate(list, 3)
+   * or rotate(list, -7) would modify the list to look like this: [8, 9, 0, 1, 2, 3, 4, 5, 6, 7]
    *
    * @param lst the list whose elements are to be rotated.
    * @param dist is the distance the list is rotated. This can be any valid integer. Negative values
-   *          rotate the list backwards.
+   *     rotate the list backwards.
    */
   @SuppressWarnings("unchecked")
   public static void rotate(List<?> lst, int dist) {
@@ -1346,15 +1318,14 @@ public class Collections {
     swapImpl(list, i, j);
   }
 
-  public static <T> Collection<T> unmodifiableCollection(
-      final Collection<? extends T> coll) {
+  public static <T> Collection<T> unmodifiableCollection(final Collection<? extends T> coll) {
     return new UnmodifiableCollection<T>(coll);
   }
 
   public static <T> List<T> unmodifiableList(List<? extends T> list) {
     return (list instanceof RandomAccess)
-        ? new UnmodifiableRandomAccessList<T>(list) : new UnmodifiableList<T>(
-            list);
+        ? new UnmodifiableRandomAccessList<T>(list)
+        : new UnmodifiableList<T>(list);
   }
 
   static <E> List<E> internalListOf(E[] elements) {
@@ -1412,8 +1383,7 @@ public class Collections {
     return Collections.unmodifiableMap(map);
   }
 
-  public static <K, V> Map<K, V> unmodifiableMap(
-      final Map<? extends K, ? extends V> map) {
+  public static <K, V> Map<K, V> unmodifiableMap(final Map<? extends K, ? extends V> map) {
     return new UnmodifiableMap<K, V>(map);
   }
 
@@ -1421,8 +1391,7 @@ public class Collections {
     return new UnmodifiableSet<T>(set);
   }
 
-  public static <K, V> SortedMap<K, V> unmodifiableSortedMap(
-      SortedMap<K, ? extends V> map) {
+  public static <K, V> SortedMap<K, V> unmodifiableSortedMap(SortedMap<K, ? extends V> map) {
     return new UnmodifiableSortedMap<K, V>(map);
   }
 
@@ -1430,9 +1399,7 @@ public class Collections {
     return new UnmodifiableSortedSet<T>(set);
   }
 
-  /**
-   * Computes hash code without preserving elements order (e.g. HashSet).
-   */
+  /** Computes hash code without preserving elements order (e.g. HashSet). */
   static <T> int hashCode(Iterable<T> collection) {
     int hashCode = 0;
     for (T e : collection) {
@@ -1441,9 +1408,7 @@ public class Collections {
     return hashCode;
   }
 
-  /**
-   * Computes hash code preserving collection order (e.g. ArrayList).
-   */
+  /** Computes hash code preserving collection order (e.g. ArrayList). */
   static <T> int hashCode(List<T> list) {
     int hashCode = 1;
     for (T e : list) {
@@ -1464,5 +1429,5 @@ public class Collections {
     a[j] = obj;
   }
 
-  private Collections() { }
+  private Collections() {}
 }

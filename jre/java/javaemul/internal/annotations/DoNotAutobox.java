@@ -18,9 +18,6 @@ package javaemul.internal.annotations;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
-/**
- * An annotation to prevent autoboxing of arguments on method calls.
- */
+/** An annotation to prevent autoboxing of arguments on method calls. */
 @Target(ElementType.PARAMETER)
-public @interface DoNotAutobox {
-}
+public @interface DoNotAutobox {}

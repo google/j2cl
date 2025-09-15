@@ -20,8 +20,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 /**
  * A fast way to create strings using multiple appends.
  *
- * This class is an exact clone of {@link StringBuffer} except for the name.
- * Any change made to one should be mirrored in the other.
+ * <p>This class is an exact clone of {@link StringBuffer} except for the name. Any change made to
+ * one should be mirrored in the other.
  */
 public final class StringBuilder extends AbstractStringBuilder {
 
@@ -34,8 +34,8 @@ public final class StringBuilder extends AbstractStringBuilder {
   }
 
   /**
-   * This implementation does not track capacity; using this constructor is
-   * functionally equivalent to using the zero-argument constructor.
+   * This implementation does not track capacity; using this constructor is functionally equivalent
+   * to using the zero-argument constructor.
    */
   @SuppressWarnings("unused")
   public StringBuilder(int ignoredCapacity) {

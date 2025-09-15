@@ -16,8 +16,8 @@
 package java.util.function;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/IntFunction.html">
- * the official Java API doc</a> for details.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/IntFunction.html">the
+ * official Java API doc</a> for details.
  *
  * @param <R> type of the return value
  */

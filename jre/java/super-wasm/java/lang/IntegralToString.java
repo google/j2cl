@@ -242,6 +242,7 @@ final class IntegralToString {
     }
     return new String(buf, cursor, bufLen - cursor);
   }
+
   /**
    * Inserts the unsigned decimal integer represented by n into the specified character array
    * starting at position cursor. Returns the index after the last character inserted (i.e., the

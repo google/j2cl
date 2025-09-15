@@ -31,8 +31,7 @@ class Comparators {
   private static final Comparator<Comparable<Object>> INTERNAL_NATURAL_ORDER =
       new NaturalOrderComparator();
 
-  private static final Comparator<Comparable<Object>> NATURAL_ORDER =
-      new NaturalOrderComparator();
+  private static final Comparator<Comparable<Object>> NATURAL_ORDER = new NaturalOrderComparator();
 
   private static final Comparator<Comparable<Object>> REVERSE_NATURAL_ORDER =
       new ReverseNaturalOrderComparator();
@@ -111,14 +110,14 @@ class Comparators {
 
     @Override
     public Comparator<T> thenComparing(Comparator<? super T> other) {
-      return new NullComparator<>(nullFirst, delegate == null ?
-          other : delegate.thenComparing(other));
+      return new NullComparator<>(
+          nullFirst, delegate == null ? other : delegate.thenComparing(other));
     }
   }
 
   /**
-   * Returns the natural Comparator which compares two Objects
-   * according to their <i>natural ordering</i>.
+   * Returns the natural Comparator which compares two Objects according to their <i>natural
+   * ordering</i>.
    */
   @SuppressWarnings("unchecked")
   static <T> Comparator<T> naturalOrder() {
@@ -126,8 +125,8 @@ class Comparators {
   }
 
   /**
-   * Returns reversed natural Comparator which compares two Objects
-   * according to their <i>reversed natural ordering</i>.
+   * Returns reversed natural Comparator which compares two Objects according to their <i>reversed
+   * natural ordering</i>.
    */
   @SuppressWarnings("unchecked")
   static <T> Comparator<T> reverseNaturalOrder() {
@@ -135,18 +134,15 @@ class Comparators {
   }
 
   /**
-   * Returns the given comparator if it is non-null; natural order comparator otherwise.
-   * This comparator must not be the same object as {@link Comparators#NATURAL_ORDER} comparator
-   * because it's used to mask out client provided comparators in TreeMap and PriorityQueue
-   * in {@link Comparators#naturalOrderToNull(Comparator)}.
+   * Returns the given comparator if it is non-null; natural order comparator otherwise. This
+   * comparator must not be the same object as {@link Comparators#NATURAL_ORDER} comparator because
+   * it's used to mask out client provided comparators in TreeMap and PriorityQueue in {@link
+   * Comparators#naturalOrderToNull(Comparator)}.
    *
-   * See:
-   * {@link Arrays#binarySearch(Object[], Object, Comparator)}
-   * {@link Arrays#binarySearch(Object[], int, int, Object, Comparator)}
-   * {@link Arrays#sort(Object[], Comparator)}
-   * {@link Arrays#sort(Object[], int, int, Comparator)}
-   * {@link TreeMap#TreeMap(Comparator)}
-   * {@link PriorityQueue#PriorityQueue(Comparator)}
+   * <p>See: {@link Arrays#binarySearch(Object[], Object, Comparator)} {@link
+   * Arrays#binarySearch(Object[], int, int, Object, Comparator)} {@link Arrays#sort(Object[],
+   * Comparator)} {@link Arrays#sort(Object[], int, int, Comparator)} {@link
+   * TreeMap#TreeMap(Comparator)} {@link PriorityQueue#PriorityQueue(Comparator)}
    */
   @SuppressWarnings("unchecked")
   static <T> Comparator<T> nullToNaturalOrder(Comparator<T> cmp) {
@@ -154,12 +150,10 @@ class Comparators {
   }
 
   /**
-   * Return null if the given comparator is natural order comparator returned by
-   * {@link Comparators#nullToNaturalOrder(Comparator)}; given comparator otherwise.
+   * Return null if the given comparator is natural order comparator returned by {@link
+   * Comparators#nullToNaturalOrder(Comparator)}; given comparator otherwise.
    *
-   * See:
-   * {@link TreeMap#comparator()}
-   * {@link PriorityQueue#comparator()}
+   * <p>See: {@link TreeMap#comparator()} {@link PriorityQueue#comparator()}
    */
   static <T> Comparator<T> naturalOrderToNull(Comparator<T> cmp) {
     return cmp == INTERNAL_NATURAL_ORDER ? null : cmp;
@@ -169,5 +163,5 @@ class Comparators {
     return cmp == INTERNAL_NATURAL_ORDER;
   }
 
-  private Comparators() { }
+  private Comparators() {}
 }

@@ -25,11 +25,11 @@ import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.html">
- * the official Java API doc</a> for details.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.html">the official
+ * Java API doc</a> for details.
  *
- * Since it's hard to implement parallel algorithms in the browser environment
- * and to keep code simple, implementation does not provide splitting.
+ * <p>Since it's hard to implement parallel algorithms in the browser environment and to keep code
+ * simple, implementation does not provide splitting.
  */
 public final class Spliterators {
 
@@ -40,8 +40,10 @@ public final class Spliterators {
 
     BaseSpliterator(long size, int characteristics) {
       this.sizeEstimate = size;
-      this.characteristics = (characteristics & Spliterator.SIZED) != 0 ?
-          characteristics | Spliterator.SUBSIZED : characteristics;
+      this.characteristics =
+          (characteristics & Spliterator.SIZED) != 0
+              ? characteristics | Spliterator.SUBSIZED
+              : characteristics;
     }
 
     public int characteristics() {
@@ -59,11 +61,12 @@ public final class Spliterators {
   }
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractSpliterator.html">
+   * See <a
+   * href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractSpliterator.html">
    * the official Java API doc</a> for details.
    */
-  public abstract static class AbstractSpliterator<T>
-      extends BaseSpliterator<T, Spliterator<T>> implements Spliterator<T> {
+  public abstract static class AbstractSpliterator<T> extends BaseSpliterator<T, Spliterator<T>>
+      implements Spliterator<T> {
 
     protected AbstractSpliterator(long size, int characteristics) {
       super(size, characteristics);
@@ -71,7 +74,8 @@ public final class Spliterators {
   }
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractDoubleSpliterator.html">
+   * See <a
+   * href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractDoubleSpliterator.html">
    * the official Java API doc</a> for details.
    */
   public abstract static class AbstractDoubleSpliterator
@@ -83,7 +87,8 @@ public final class Spliterators {
   }
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractIntSpliterator.html">
+   * See <a
+   * href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractIntSpliterator.html">
    * the official Java API doc</a> for details.
    */
   public abstract static class AbstractIntSpliterator
@@ -95,7 +100,8 @@ public final class Spliterators {
   }
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractLongSpliterator.html">
+   * See <a
+   * href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractLongSpliterator.html">
    * the official Java API doc</a> for details.
    */
   public abstract static class AbstractLongSpliterator
@@ -127,8 +133,8 @@ public final class Spliterators {
     return new ArraySpliterator<>(array, characteristics);
   }
 
-  public static <T> Spliterator<T> spliterator(Object[] array, int fromIndex, int toIndex,
-                                               int characteristics) {
+  public static <T> Spliterator<T> spliterator(
+      Object[] array, int fromIndex, int toIndex, int characteristics) {
     checkCriticalArrayBounds(fromIndex, toIndex, array.length);
     return new ArraySpliterator<>(array, fromIndex, toIndex, characteristics);
   }
@@ -137,8 +143,8 @@ public final class Spliterators {
     return new IntArraySpliterator(array, characteristics);
   }
 
-  public static Spliterator.OfInt spliterator(int[] array, int fromIndex, int toIndex,
-                                              int characteristics) {
+  public static Spliterator.OfInt spliterator(
+      int[] array, int fromIndex, int toIndex, int characteristics) {
     checkCriticalArrayBounds(fromIndex, toIndex, array.length);
     return new IntArraySpliterator(array, fromIndex, toIndex, characteristics);
   }
@@ -147,8 +153,8 @@ public final class Spliterators {
     return new LongArraySpliterator(array, characteristics);
   }
 
-  public static Spliterator.OfLong spliterator(long[] array, int fromIndex, int toIndex,
-                                               int characteristics) {
+  public static Spliterator.OfLong spliterator(
+      long[] array, int fromIndex, int toIndex, int characteristics) {
     checkCriticalArrayBounds(fromIndex, toIndex, array.length);
     return new LongArraySpliterator(array, fromIndex, toIndex, characteristics);
   }
@@ -157,8 +163,8 @@ public final class Spliterators {
     return new DoubleArraySpliterator(array, characteristics);
   }
 
-  public static Spliterator.OfDouble spliterator(double[] array, int fromIndex, int toIndex,
-                                                 int characteristics) {
+  public static Spliterator.OfDouble spliterator(
+      double[] array, int fromIndex, int toIndex, int characteristics) {
     checkCriticalArrayBounds(fromIndex, toIndex, array.length);
     return new DoubleArraySpliterator(array, fromIndex, toIndex, characteristics);
   }
@@ -167,43 +173,43 @@ public final class Spliterators {
     return new IteratorSpliterator<>(c, characteristics);
   }
 
-  public static <T> Spliterator<T> spliterator(Iterator<? extends T> it, long size,
-                                               int characteristics) {
+  public static <T> Spliterator<T> spliterator(
+      Iterator<? extends T> it, long size, int characteristics) {
     return new IteratorSpliterator<>(it, size, characteristics);
   }
 
-  public static <T> Spliterator<T> spliteratorUnknownSize(Iterator<? extends T> it,
-                                                          int characteristics) {
+  public static <T> Spliterator<T> spliteratorUnknownSize(
+      Iterator<? extends T> it, int characteristics) {
     return new IteratorSpliterator<>(it, characteristics);
   }
 
-  public static Spliterator.OfInt spliterator(PrimitiveIterator.OfInt it, long size,
-                                              int characteristics) {
+  public static Spliterator.OfInt spliterator(
+      PrimitiveIterator.OfInt it, long size, int characteristics) {
     return new IntIteratorSpliterator(it, size, characteristics);
   }
 
-  public static Spliterator.OfInt spliteratorUnknownSize(PrimitiveIterator.OfInt it,
-                                                         int characteristics) {
+  public static Spliterator.OfInt spliteratorUnknownSize(
+      PrimitiveIterator.OfInt it, int characteristics) {
     return new IntIteratorSpliterator(it, characteristics);
   }
 
-  public static Spliterator.OfLong spliterator(PrimitiveIterator.OfLong it, long size,
-                                               int characteristics) {
+  public static Spliterator.OfLong spliterator(
+      PrimitiveIterator.OfLong it, long size, int characteristics) {
     return new LongIteratorSpliterator(it, size, characteristics);
   }
 
-  public static Spliterator.OfLong spliteratorUnknownSize(PrimitiveIterator.OfLong it,
-                                                          int characteristics) {
+  public static Spliterator.OfLong spliteratorUnknownSize(
+      PrimitiveIterator.OfLong it, int characteristics) {
     return new LongIteratorSpliterator(it, characteristics);
   }
 
-  public static Spliterator.OfDouble spliterator(PrimitiveIterator.OfDouble it, long size,
-                                                 int characteristics) {
+  public static Spliterator.OfDouble spliterator(
+      PrimitiveIterator.OfDouble it, long size, int characteristics) {
     return new DoubleIteratorSpliterator(it, size, characteristics);
   }
 
-  public static Spliterator.OfDouble spliteratorUnknownSize(PrimitiveIterator.OfDouble it,
-                                                            int characteristics) {
+  public static Spliterator.OfDouble spliteratorUnknownSize(
+      PrimitiveIterator.OfDouble it, int characteristics) {
     return new DoubleIteratorSpliterator(it, characteristics);
   }
 
@@ -253,31 +259,30 @@ public final class Spliterators {
     }
 
     private static final class OfRef<T>
-        extends EmptySpliterator<T, Spliterator<T>, Consumer<? super T>>
-        implements Spliterator<T> {
+        extends EmptySpliterator<T, Spliterator<T>, Consumer<? super T>> implements Spliterator<T> {
 
-      OfRef() { }
+      OfRef() {}
     }
 
     private static final class OfDouble
         extends EmptySpliterator<Double, Spliterator.OfDouble, DoubleConsumer>
         implements Spliterator.OfDouble {
 
-      OfDouble() { }
+      OfDouble() {}
     }
 
     private static final class OfInt
         extends EmptySpliterator<Integer, Spliterator.OfInt, IntConsumer>
         implements Spliterator.OfInt {
 
-      OfInt() { }
+      OfInt() {}
     }
 
     private static final class OfLong
         extends EmptySpliterator<Long, Spliterator.OfLong, LongConsumer>
         implements Spliterator.OfLong {
 
-      OfLong() { }
+      OfLong() {}
     }
   }
 
@@ -345,8 +350,7 @@ public final class Spliterators {
     }
   }
 
-  private static final class IntConsumerIterator
-      implements IntConsumer, PrimitiveIterator.OfInt {
+  private static final class IntConsumerIterator implements IntConsumer, PrimitiveIterator.OfInt {
 
     private final Spliterator.OfInt spliterator;
     private int nextElement;
@@ -728,8 +732,9 @@ public final class Spliterators {
   }
 
   private static int sizeKnownIteratorSpliteratorCharacteristics(int characteristics) {
-    return (characteristics & Spliterator.CONCURRENT) == 0 ?
-        sizeKnownSpliteratorCharacteristics(characteristics) : characteristics;
+    return (characteristics & Spliterator.CONCURRENT) == 0
+        ? sizeKnownSpliteratorCharacteristics(characteristics)
+        : characteristics;
   }
 
   private static int sizeUnknownSpliteratorCharacteristics(int characteristics) {
@@ -737,8 +742,8 @@ public final class Spliterators {
   }
 
   /**
-   * We cant use InternalPreconditions.checkCriticalArrayBounds here because
-   * Spliterators must throw only ArrayIndexOutOfBoundsException on range check by contract.
+   * We cant use InternalPreconditions.checkCriticalArrayBounds here because Spliterators must throw
+   * only ArrayIndexOutOfBoundsException on range check by contract.
    */
   private static void checkCriticalArrayBounds(int start, int end, int length) {
     if (start > end || start < 0 || end > length) {
@@ -747,6 +752,5 @@ public final class Spliterators {
     }
   }
 
-  private Spliterators() { }
-
+  private Spliterators() {}
 }

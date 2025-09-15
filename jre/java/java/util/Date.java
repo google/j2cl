@@ -16,25 +16,19 @@
 package java.util;
 
 import java.io.Serializable;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-/**
- * Represents a date and time.
- */
+/** Represents a date and time. */
 public class Date implements Cloneable, Comparable<Date>, Serializable {
 
-  /**
-   * Encapsulates static data to avoid Date itself having a static initializer.
-   */
+  /** Encapsulates static data to avoid Date itself having a static initializer. */
   private static class StringData {
-    public static final String[] DAYS = {
-        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    public static final String[] DAYS = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
     public static final String[] MONTHS = {
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
-        "Nov", "Dec"};
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    };
   }
 
   public static long parse(String s) {
@@ -46,8 +40,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   // CHECKSTYLE_OFF: Matching the spec.
-  public static long UTC(int year, int month, int date, int hrs, int min,
-      int sec) {
+  public static long UTC(int year, int month, int date, int hrs, int min, int sec) {
     return (long) NativeDate.UTC(year + 1900, month, date, hrs, min, sec, 0);
   }
 
@@ -66,9 +59,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     }
   }
 
-  /**
-   * JavaScript Date instance.
-   */
+  /** JavaScript Date instance. */
   private final NativeDate jsdate;
 
   public Date() {
@@ -202,10 +193,18 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   public String toGMTString() {
-    return jsdate.getUTCDate() + " " + StringData.MONTHS[jsdate.getUTCMonth()]
-        + " " + jsdate.getUTCFullYear() + " " + padTwo(jsdate.getUTCHours())
-        + ":" + padTwo(jsdate.getUTCMinutes()) + ":"
-        + padTwo(jsdate.getUTCSeconds()) + " GMT";
+    return jsdate.getUTCDate()
+        + " "
+        + StringData.MONTHS[jsdate.getUTCMonth()]
+        + " "
+        + jsdate.getUTCFullYear()
+        + " "
+        + padTwo(jsdate.getUTCHours())
+        + ":"
+        + padTwo(jsdate.getUTCMinutes())
+        + ":"
+        + padTwo(jsdate.getUTCSeconds())
+        + " GMT";
   }
 
   public String toLocaleString() {
@@ -220,11 +219,22 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     String hourOffset = ((offset >= 0) ? "+" : "") + (offset / 60);
     String minuteOffset = padTwo(Math.abs(offset) % 60);
 
-    return StringData.DAYS[jsdate.getDay()] + " "
-        + StringData.MONTHS[jsdate.getMonth()] + " " + padTwo(jsdate.getDate())
-        + " " + padTwo(jsdate.getHours()) + ":" + padTwo(jsdate.getMinutes())
-        + ":" + padTwo(jsdate.getSeconds()) + " GMT" + hourOffset
-        + minuteOffset + " " + jsdate.getFullYear();
+    return StringData.DAYS[jsdate.getDay()]
+        + " "
+        + StringData.MONTHS[jsdate.getMonth()]
+        + " "
+        + padTwo(jsdate.getDate())
+        + " "
+        + padTwo(jsdate.getHours())
+        + ":"
+        + padTwo(jsdate.getMinutes())
+        + ":"
+        + padTwo(jsdate.getSeconds())
+        + " GMT"
+        + hourOffset
+        + minuteOffset
+        + " "
+        + jsdate.getFullYear();
   }
 
   private static final long ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -280,9 +290,15 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
         if (badHours + timeDiffHours >= 24) {
           day++;
         }
-        NativeDate newTime = new NativeDate(jsdate.getFullYear(), jsdate.getMonth(),
-            day, requestedHours + timeDiffHours, jsdate.getMinutes() + timeDiffMinutes,
-            jsdate.getSeconds(), jsdate.getMilliseconds());
+        NativeDate newTime =
+            new NativeDate(
+                jsdate.getFullYear(),
+                jsdate.getMonth(),
+                day,
+                requestedHours + timeDiffHours,
+                jsdate.getMinutes() + timeDiffMinutes,
+                jsdate.getSeconds(),
+                jsdate.getMilliseconds());
         jsdate.setTime(newTime.getTime());
       }
     }
@@ -301,39 +317,69 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   @JsType(isNative = true, name = "Date", namespace = JsPackage.GLOBAL)
   private static class NativeDate {
     // CHECKSTYLE_OFF: Matching the spec.
-    public static native double UTC(int year, int month, int dayOfMonth, int hours,
-        int minutes, int seconds, int millis);
+    public static native double UTC(
+        int year, int month, int dayOfMonth, int hours, int minutes, int seconds, int millis);
+
     // CHECKSTYLE_ON
     public static native double parse(String dateString);
-    public NativeDate() { }
-    public NativeDate(double milliseconds) { }
-    public NativeDate(int year, int month, int dayOfMonth, int hours,
-        int minutes, int seconds, int millis) { }
+
+    public NativeDate() {}
+
+    public NativeDate(double milliseconds) {}
+
+    public NativeDate(
+        int year, int month, int dayOfMonth, int hours, int minutes, int seconds, int millis) {}
+
     public native int getDate();
+
     public native int getDay();
+
     public native int getFullYear();
+
     public native int getHours();
+
     public native int getMilliseconds();
+
     public native int getMinutes();
+
     public native int getMonth();
+
     public native int getSeconds();
+
     public native double getTime();
+
     public native int getTimezoneOffset();
+
     public native int getUTCDate();
+
     public native int getUTCFullYear();
+
     public native int getUTCHours();
+
     public native int getUTCMinutes();
+
     public native int getUTCMonth();
+
     public native int getUTCSeconds();
+
     public native void setDate(int dayOfMonth);
+
     public native void setFullYear(int year);
+
     public native void setFullYear(int year, int month, int day);
+
     public native void setHours(int hours);
+
     public native void setHours(int hours, int mins, int secs, int ms);
+
     public native void setMinutes(int minutes);
+
     public native void setMonth(int month);
+
     public native void setSeconds(int seconds);
+
     public native void setTime(double milliseconds);
+
     public native String toLocaleString();
   }
 }

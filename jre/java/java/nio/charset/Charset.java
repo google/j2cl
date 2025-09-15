@@ -23,13 +23,12 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import javaemul.internal.EmulatedCharset;
 
-/**
- * A minimal emulation of {@link Charset}.
- */
+/** A minimal emulation of {@link Charset}. */
 public abstract class Charset implements Comparable<Charset> {
 
   private static final class AvailableCharsets {
     private static final SortedMap<String, Charset> CHARSETS;
+
     static {
       SortedMap<String, Charset> map = new TreeMap<>();
       map.put(EmulatedCharset.ISO_8859_1.name(), EmulatedCharset.ISO_8859_1);

@@ -17,8 +17,7 @@ package java.security;
 
 /**
  * Message Digest algorithm - <a href=
- * "http://java.sun.com/j2se/1.4.2/docs/api/java/security/MessageDigest.html"
- * >[Sun's docs]</a>.
+ * "http://java.sun.com/j2se/1.4.2/docs/api/java/security/MessageDigest.html" >[Sun's docs]</a>.
  */
 public abstract class MessageDigest extends MessageDigestSpi {
 
@@ -26,9 +25,71 @@ public abstract class MessageDigest extends MessageDigestSpi {
 
     // 16 * 4 bytes
     static byte padding[] = {
-        (byte) 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+      (byte) 0x80,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    };
 
     /**
      * Converts a long to a 8-byte array using low order first.
@@ -66,8 +127,11 @@ public abstract class MessageDigest extends MessageDigestSpi {
      */
     private static void byte2int(byte[] in, int[] out) {
       for (int inpos = 0, outpos = 0; outpos < 16; outpos++) {
-        out[outpos] = ((in[inpos++] & 0xff) | ((in[inpos++] & 0xff) << 8)
-            | ((in[inpos++] & 0xff) << 16) | ((in[inpos++] & 0xff) << 24));
+        out[outpos] =
+            ((in[inpos++] & 0xff)
+                | ((in[inpos++] & 0xff) << 8)
+                | ((in[inpos++] & 0xff) << 16)
+                | ((in[inpos++] & 0xff) << 24));
       }
     }
 
@@ -266,7 +330,7 @@ public abstract class MessageDigest extends MessageDigestSpi {
     @Override
     protected void engineUpdate(byte input) {
       // TODO(jat): better implementation
-      oneByte [0] = input;
+      oneByte[0] = input;
       engineUpdate(oneByte, 0, 1);
     }
 
@@ -274,8 +338,7 @@ public abstract class MessageDigest extends MessageDigestSpi {
     protected void engineUpdate(byte[] input, int offset, int len) {
       while (true) {
         if (len >= remainder) {
-          System.arraycopy(input, offset, buffer, (int) (counter & 63L),
-              remainder);
+          System.arraycopy(input, offset, buffer, (int) (counter & 63L), remainder);
           transform(buffer);
           counter += remainder;
           offset += remainder;
@@ -380,9 +443,8 @@ public abstract class MessageDigest extends MessageDigestSpi {
     }
   }
 
-  public static MessageDigest getInstance(String algorithm)
-      throws NoSuchAlgorithmException {
-    switch(algorithm) {
+  public static MessageDigest getInstance(String algorithm) throws NoSuchAlgorithmException {
+    switch (algorithm) {
       case "MD5":
         return new Md5Digest();
       case "SHA-256":

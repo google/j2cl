@@ -55,4 +55,3 @@ public final class JsUtils {
 
   private JsUtils() {}
 }
-

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,55 +21,60 @@
  * licenses this file to You under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * INCLUDES MODIFICATIONS BY RICHARD ZSCHECH AS WELL AS GOOGLE.
  */
 package java.math;
 
-/**
- * Static library that provides all multiplication of {@link BigInteger}
- * methods.
- */
+/** Static library that provides all multiplication of {@link BigInteger} methods. */
 class Multiplication {
 
   /**
-   * An array with the first powers of five in {@code BigInteger} version. (
-   * {@code 5^0,5^1,...,5^31})
+   * An array with the first powers of five in {@code BigInteger} version. ( {@code
+   * 5^0,5^1,...,5^31})
    */
   static final BigInteger bigFivePows[] = new BigInteger[32];
 
   /**
-   * An array with the first powers of ten in {@code BigInteger} version. (
-   * {@code 10^0,10^1,...,10^31})
+   * An array with the first powers of ten in {@code BigInteger} version. ( {@code
+   * 10^0,10^1,...,10^31})
    */
   static final BigInteger[] bigTenPows = new BigInteger[32];
 
-  /**
-   * An array with powers of five that fit in the type {@code int}. ({@code
-   * 5^0,5^1,...,5^13})
-   */
+  /** An array with powers of five that fit in the type {@code int}. ({@code 5^0,5^1,...,5^13}) */
   static final int fivePows[] = {
-      1, 5, 25, 125, 625, 3125, 15625, 78125, 390625, 1953125, 9765625,
-      48828125, 244140625, 1220703125};
+    1,
+    5,
+    25,
+    125,
+    625,
+    3125,
+    15625,
+    78125,
+    390625,
+    1953125,
+    9765625,
+    48828125,
+    244140625,
+    1220703125
+  };
 
-  /**
-   * An array with powers of ten that fit in the type {@code int}. ({@code
-   * 10^0,10^1,...,10^9})
-   */
+  /** An array with powers of ten that fit in the type {@code int}. ({@code 10^0,10^1,...,10^9}) */
   static final int tenPows[] = {
-      1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
+    1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
+  };
 
   /**
-   * Break point in digits (number of {@code int} elements) between Karatsuba
-   * and Pencil and Paper multiply.
+   * Break point in digits (number of {@code int} elements) between Karatsuba and Pencil and Paper
+   * multiply.
    */
   static final int whenUseKaratsuba = 63; // an heuristic value
 
@@ -89,16 +94,14 @@ class Multiplication {
   }
 
   /**
-   * Performs the multiplication with the Karatsuba's algorithm. <b>Karatsuba's
-   * algorithm:</b> <tt>
-   *             u = u<sub>1</sub> * B + u<sub>0</sub><br>
-   *             v = v<sub>1</sub> * B + v<sub>0</sub><br>
-   * 
-   * 
-   *  u*v = (u<sub>1</sub> * v<sub>1</sub>) * B<sub>2</sub> + ((u<sub>1</sub> - u<sub>0</sub>) * (v<sub>0</sub> - v<sub>1</sub>) + u<sub>1</sub> * v<sub>1</sub> +
-   *  u<sub>0</sub> * v<sub>0</sub> ) * B + u<sub>0</sub> * v<sub>0</sub><br>
-     *</tt>
-   * 
+   * Performs the multiplication with the Karatsuba's algorithm. <b>Karatsuba's algorithm:</b> <tt>
+   * u = u<sub>1</sub> * B + u<sub>0</sub><br>
+   * v = v<sub>1</sub> * B + v<sub>0</sub><br>
+   * u*v = (u<sub>1</sub> * v<sub>1</sub>) * B<sub>2</sub> + ((u<sub>1</sub> - u<sub>0</sub>) *
+   * (v<sub>0</sub> - v<sub>1</sub>) + u<sub>1</sub> * v<sub>1</sub> + u<sub>0</sub> * v<sub>0</sub>
+   * ) * B + u<sub>0</sub> * v<sub>0</sub><br>
+   * </tt>
+   *
    * @param op1 first factor of the product
    * @param op2 second factor of the product
    * @return {@code op1 * op2}
@@ -127,8 +130,7 @@ class Multiplication {
 
     BigInteger upper = karatsuba(upperOp1, upperOp2);
     BigInteger lower = karatsuba(lowerOp1, lowerOp2);
-    BigInteger middle = karatsuba(upperOp1.subtract(lowerOp1),
-        lowerOp2.subtract(upperOp2));
+    BigInteger middle = karatsuba(upperOp1.subtract(lowerOp1), lowerOp2.subtract(upperOp2));
     middle = middle.add(upper).add(lower);
     middle = middle.shiftLeft(ndiv2);
     upper = upper.shiftLeft(ndiv2 << 1);
@@ -136,8 +138,7 @@ class Multiplication {
     return upper.add(middle).add(lower);
   }
 
-  static void multArraysPAP(int[] aDigits, int aLen, int[] bDigits, int bLen,
-      int[] resDigits) {
+  static void multArraysPAP(int[] aDigits, int aLen, int[] bDigits, int bLen, int[] resDigits) {
     if (aLen == 0 || bLen == 0) {
       return;
     }
@@ -153,7 +154,7 @@ class Multiplication {
 
   /**
    * Performs a multiplication of two BigInteger and hides the algorithm used.
-   * 
+   *
    * @see BigInteger#multiply(BigInteger)
    */
   static BigInteger multiply(BigInteger x, BigInteger y) {
@@ -161,9 +162,8 @@ class Multiplication {
   }
 
   /**
-   * Multiplies a number by a power of five. This method is used in {@code
-   * BigDecimal} class.
-   * 
+   * Multiplies a number by a power of five. This method is used in {@code BigDecimal} class.
+   *
    * @param val the number to be multiplied
    * @param exp a positive {@code int} exponent
    * @return {@code val * 5<sup>exp</sup>}
@@ -182,7 +182,7 @@ class Multiplication {
 
   /**
    * Multiplies an array of integers by an integer value.
-   * 
+   *
    * @param a the array of integers
    * @param aSize the number of elements of intArray to be multiplied
    * @param factor the multiplier
@@ -194,7 +194,7 @@ class Multiplication {
 
   /**
    * Multiplies a number by a positive integer.
-   * 
+   *
    * @param val an arbitrary {@code BigInteger}
    * @param factor a positive {@code int} number
    * @return {@code val * factor}
@@ -211,44 +211,42 @@ class Multiplication {
       long res = unsignedMultAddAdd(aDigits[0], factor, 0, 0);
       int resLo = (int) res;
       int resHi = (int) (res >>> 32);
-      return ((resHi == 0) ? new BigInteger(resSign, resLo) : new BigInteger(
-          resSign, 2, new int[] {resLo, resHi}));
+      return ((resHi == 0)
+          ? new BigInteger(resSign, resLo)
+          : new BigInteger(resSign, 2, new int[] {resLo, resHi}));
     }
     // Common case
     int resLength = aNumberLength + 1;
     int resDigits[] = new int[resLength];
 
-    resDigits[aNumberLength] = multiplyByInt(resDigits, aDigits, aNumberLength,
-        factor);
+    resDigits[aNumberLength] = multiplyByInt(resDigits, aDigits, aNumberLength, factor);
     BigInteger result = new BigInteger(resSign, resLength, resDigits);
     result.cutOffLeadingZeroes();
     return result;
   }
 
   /**
-   * Multiplies a number by a power of ten. This method is used in {@code
-   * BigDecimal} class.
-   * 
+   * Multiplies a number by a power of ten. This method is used in {@code BigDecimal} class.
+   *
    * @param val the number to be multiplied
    * @param exp a positive {@code long} exponent
    * @return {@code val * 10<sup>exp</sup>}
    */
   static BigInteger multiplyByTenPow(BigInteger val, int exp) {
     // PRE: exp >= 0
-    return ((exp < tenPows.length) ? multiplyByPositiveInt(val,
-        tenPows[(int) exp]) : val.multiply(powerOf10(exp)));
+    return ((exp < tenPows.length)
+        ? multiplyByPositiveInt(val, tenPows[(int) exp])
+        : val.multiply(powerOf10(exp)));
   }
 
   /**
-   * Multiplies two BigIntegers. Implements traditional scholar algorithm
-   * described by Knuth.
-   * 
-   * <br>
+   * Multiplies two BigIntegers. Implements traditional scholar algorithm described by Knuth. <br>
    * <tt>
-   *         <table border="0">
+   *
+   * <table border="0">
    * <tbody>
-   * 
-   * 
+   *
+   *
    * <tr>
    * <td align="center">A=</td>
    * <td>a<sub>3</sub></td>
@@ -258,7 +256,7 @@ class Multiplication {
    * <td></td>
    * <td></td>
    * </tr>
-   * 
+   *
    * <tr>
    * <td align="center">B=</td>
    * <td></td>
@@ -268,7 +266,7 @@ class Multiplication {
    * <td></td>
    * <td></td>
    * </tr>
-   * 
+   *
    * <tr>
    * <td></td>
    * <td></td>
@@ -278,7 +276,7 @@ class Multiplication {
    * <td>b<sub>0</sub>*a<sub>1</sub></td>
    * <td>b<sub>0</sub>*a<sub>0</sub></td>
    * </tr>
-   * 
+   *
    * <tr>
    * <td></td>
    * <td></td>
@@ -287,7 +285,7 @@ class Multiplication {
    * <td>b<sub>1</sub>*a1</td>
    * <td>b<sub>1</sub>*a0</td>
    * </tr>
-   * 
+   *
    * <tr>
    * <td>+</td>
    * <td>b<sub>2</sub>*a<sub>3</sub></td>
@@ -295,7 +293,7 @@ class Multiplication {
    * <td>b<sub>2</sub>*a<sub>1</sub></td>
    * <td>b<sub>2</sub>*a<sub>0</sub></td>
    * </tr>
-   * 
+   *
    * <tr>
    * <td></td>
    * <td>______</td>
@@ -305,9 +303,9 @@ class Multiplication {
    * <td>______</td>
    * <td>______</td>
    * </tr>
-   * 
+   *
    * <tr>
-   * 
+   *
    * <td align="center">A*B=R=</td>
    * <td align="center">r<sub>5</sub></td>
    * <td align="center">r<sub>4</sub></td>
@@ -317,12 +315,12 @@ class Multiplication {
    * <td align="center">r<sub>0</sub></td>
    * <td></td>
    * </tr>
-   * 
+   *
    * </tbody>
    * </table>
-     *
-     *</tt>
-   * 
+   *
+   * </tt>
+   *
    * @param op1 first factor of the multiplication {@code op1 >= 0}
    * @param op2 second factor of the multiplication {@code op2 >= 0}
    * @return a {@code BigInteger} of value {@code op1 * op2}
@@ -338,7 +336,8 @@ class Multiplication {
       long val = unsignedMultAddAdd(a.digits[0], b.digits[0], 0, 0);
       int valueLo = (int) val;
       int valueHi = (int) (val >>> 32);
-      return ((valueHi == 0) ? new BigInteger(resSign, valueLo)
+      return ((valueHi == 0)
+          ? new BigInteger(resSign, valueLo)
           : new BigInteger(resSign, 2, new int[] {valueLo, valueHi}));
     }
     int[] aDigits = a.digits;
@@ -385,8 +384,8 @@ class Multiplication {
       if (acc.numberLength == 1) {
         acc = acc.multiply(acc); // square
       } else {
-        acc = new BigInteger(1, square(acc.digits, acc.numberLength,
-            new int[acc.numberLength << 1]));
+        acc =
+            new BigInteger(1, square(acc.digits, acc.numberLength, new int[acc.numberLength << 1]));
       }
     }
     // exponent == 1, multiply one more time
@@ -395,10 +394,10 @@ class Multiplication {
   }
 
   /**
-   * It calculates a power of ten, which exponent could be out of 32-bit range.
-   * Note that internally this method will be used in the worst case with an
-   * exponent equals to: {@code Integer.MAX_VALUE - Integer.MIN_VALUE}.
-   * 
+   * It calculates a power of ten, which exponent could be out of 32-bit range. Note that internally
+   * this method will be used in the worst case with an exponent equals to: {@code Integer.MAX_VALUE
+   * - Integer.MIN_VALUE}.
+   *
    * @param exp the exponent of power of ten, it must be positive.
    * @return a {@code BigInteger} with value {@code 10<sup>exp</sup>}.
    */
@@ -422,7 +421,7 @@ class Multiplication {
      * estimated size, measured in bytes: 1 + [exp / log10(2)]
      */
     if (exp > 1000000) {
-      throw new ArithmeticException("power of ten too big"); //$NON-NLS-1$
+      throw new ArithmeticException("power of ten too big"); // $NON-NLS-1$
     }
 
     if (exp <= Integer.MAX_VALUE) {
@@ -431,7 +430,7 @@ class Multiplication {
     }
     /*
      * "HUGE POWERS"
-     * 
+     *
      * This branch probably won't be executed since the power of ten is too big.
      */
     // To calculate: 5^exp
@@ -458,7 +457,7 @@ class Multiplication {
 
   /**
    * Performs a<sup>2</sup>.
-   * 
+   *
    * @param a The number to square.
    * @param aLen The length of the number to square.
    */
@@ -491,9 +490,9 @@ class Multiplication {
   }
 
   /**
-   * Computes the value unsigned ((uint)a*(uint)b + (uint)c + (uint)d). This
-   * method could improve the readability and performance of the code.
-   * 
+   * Computes the value unsigned ((uint)a*(uint)b + (uint)c + (uint)d). This method could improve
+   * the readability and performance of the code.
+   *
    * @param a parameter 1
    * @param b parameter 2
    * @param c parameter 3
@@ -501,21 +500,18 @@ class Multiplication {
    * @return value of expression
    */
   static long unsignedMultAddAdd(int a, int b, int c, int d) {
-    return (a & 0xFFFFFFFFL) * (b & 0xFFFFFFFFL) + (c & 0xFFFFFFFFL)
-        + (d & 0xFFFFFFFFL);
+    return (a & 0xFFFFFFFFL) * (b & 0xFFFFFFFFL) + (c & 0xFFFFFFFFL) + (d & 0xFFFFFFFFL);
   }
 
   /**
-   * Multiplies an array of integers by an integer value and saves the result in
-   * {@code res}.
-   * 
+   * Multiplies an array of integers by an integer value and saves the result in {@code res}.
+   *
    * @param a the array of integers
    * @param aSize the number of elements of intArray to be multiplied
    * @param factor the multiplier
    * @return the top digit of production
    */
-  private static int multiplyByInt(int res[], int a[], final int aSize,
-      final int factor) {
+  private static int multiplyByInt(int res[], int a[], final int aSize, final int factor) {
     long carry = 0;
     for (int i = 0; i < aSize; i++) {
       carry = unsignedMultAddAdd(a[i], factor, (int) carry, 0);
@@ -525,10 +521,6 @@ class Multiplication {
     return (int) carry;
   }
 
-  /**
-   * Just to denote that this class can't be instantiated.
-   */
-  private Multiplication() {
-  }
-
+  /** Just to denote that this class can't be instantiated. */
+  private Multiplication() {}
 }

@@ -15,21 +15,18 @@
  */
 package java.lang;
 
-
 import javaemul.internal.JsUtils;
 import javaemul.internal.Platform;
 
-/**
- * Wraps a primitive <code>double</code> as an object.
- */
+/** Wraps a primitive <code>double</code> as an object. */
 public final class Double extends Number implements Comparable<Double> {
   public static final double MAX_VALUE = 1.7976931348623157e+308;
   public static final double MIN_VALUE = 4.9e-324;
   public static final double MIN_NORMAL = 2.2250738585072014e-308;
   public static final int MAX_EXPONENT = 1023;
-                             // ==Math.getExponent(Double.MAX_VALUE);
+  // ==Math.getExponent(Double.MAX_VALUE);
   public static final int MIN_EXPONENT = -1022;
-                             // ==Math.getExponent(Double.MIN_NORMAL);
+  // ==Math.getExponent(Double.MIN_NORMAL);
 
   public static final double NaN = 0d / 0d;
   public static final double NEGATIVE_INFINITY = -1d / 0d;
@@ -141,13 +138,12 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   /**
-   * Performance caution: using Double objects as map keys is not recommended.
-   * Using double values as keys is generally a bad idea due to difficulty
-   * determining exact equality. In addition, there is no efficient JavaScript
-   * equivalent of <code>doubleToIntBits</code>. As a result, this method
-   * computes a hash code by truncating the whole number portion of the double,
-   * which may lead to poor performance for certain value sets if Doubles are
-   * used as keys in a {@link java.util.HashMap}.
+   * Performance caution: using Double objects as map keys is not recommended. Using double values
+   * as keys is generally a bad idea due to difficulty determining exact equality. In addition,
+   * there is no efficient JavaScript equivalent of <code>doubleToIntBits</code>. As a result, this
+   * method computes a hash code by truncating the whole number portion of the double, which may
+   * lead to poor performance for certain value sets if Doubles are used as keys in a {@link
+   * java.util.HashMap}.
    */
   @Override
   public int hashCode() {

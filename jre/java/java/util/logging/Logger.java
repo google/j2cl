@@ -21,9 +21,9 @@ import java.util.function.Supplier;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
- *  An emulation of the java.util.logging.Logger class. See
- *  <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html">
- *  The Java API doc for details</a>
+ * An emulation of the java.util.logging.Logger class. See <a
+ * href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/logging/Logger.html">The Java API doc for
+ * details</a>
  */
 public class Logger {
   public static final String GLOBAL_LOGGER_NAME = "global";
@@ -71,7 +71,7 @@ public class Logger {
   private List<Handler> handlers;
   private Level level;
   private String name;
-  private Logger parent;  // Should never be null except in the RootLogger
+  private Logger parent; // Should never be null except in the RootLogger
   private boolean useParentHandlers;
 
   protected Logger(String name, @SuppressWarnings("unused") String resourceName) {
@@ -338,12 +338,19 @@ public class Logger {
   // public void log(Level level, String msg, Object param1) {}
   // public void log(Level level, String msg, Object[] params) {}
   // public void logp(Level level, String sourceClass, String sourceMethod, String msg) {}
-  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Object param1) {}
-  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Object[] params) {}
-  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Throwable thrown) {}
-  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName, String msg) {}
-  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName, String msg, Object param1) {}
-  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName, String msg, Object[] params) {}
-  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName, String msg, Throwable thrown) {}
+  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Object
+  // param1) {}
+  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Object[]
+  // params) {}
+  // public void logp(Level level, String sourceClass, String sourceMethod, String msg, Throwable
+  // thrown) {}
+  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName,
+  // String msg) {}
+  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName,
+  // String msg, Object param1) {}
+  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName,
+  // String msg, Object[] params) {}
+  // public void logrb(Level level, String sourceClass, String sourceMethod, String bundleName,
+  // String msg, Throwable thrown) {}
   // public void throwing(String sourceClass, String sourceMethod, Throwable thrown) {}
 }

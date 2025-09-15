@@ -15,14 +15,11 @@
  */
 package java.lang;
 
-
 import java.io.Serializable;
 import javaemul.internal.JsUtils;
 import javaemul.internal.Platform;
 
-/**
- * Wraps native <code>boolean</code> as an object.
- */
+/** Wraps native <code>boolean</code> as an object. */
 public final class Boolean implements Comparable<Boolean>, Serializable {
 
   public static final Boolean FALSE = new Boolean(false, 0);

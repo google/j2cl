@@ -35,13 +35,16 @@ public final class Class<T> implements Type, Serializable {
   private final boolean isEnum;
   private final boolean isInterface;
   private final boolean isPrimitive;
+
   /** Dimension count for the underlying array type; or {@code 0} if this is not for an array. */
   private final int dimensionCount;
 
   /** The class literal for the super class. */
   private final Class<? super T> superClass;
+
   /** The leaf type for an array. {@code null} if not an array. */
   private final Class<?> leafType;
+
   /** * Class objects for arrays of this type, created lazily. */
   private Class<?>[] arrayTypes;
 

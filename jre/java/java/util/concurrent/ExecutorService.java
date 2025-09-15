@@ -21,9 +21,7 @@ package java.util.concurrent;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Emulation of ExecutorService.
- */
+/** Emulation of ExecutorService. */
 public interface ExecutorService extends Executor {
 
   void shutdown();

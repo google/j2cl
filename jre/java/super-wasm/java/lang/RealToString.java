@@ -31,7 +31,6 @@ final class RealToString {
     return fromNumber(d);
   }
 
-
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Number.prototype.toString.call")
   private static native String fromNumber(double d);
 

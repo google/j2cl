@@ -40,13 +40,10 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-/**
- * Intrinsic string class.
- */
+/** Intrinsic string class. */
 // Needed to have constructors not fail compilation internally at Google
-@SuppressWarnings({ "ReturnValueIgnored", "unusable-by-js" })
-public final class String implements Comparable<String>, CharSequence,
-    Serializable {
+@SuppressWarnings({"ReturnValueIgnored", "unusable-by-js"})
+public final class String implements Comparable<String>, CharSequence, Serializable {
   /* TODO(jat): consider whether we want to support the following methods;
    *
    * <ul>
@@ -99,12 +96,13 @@ public final class String implements Comparable<String>, CharSequence,
    * IMPORTANT NOTE: if newer JREs add new interfaces to String, please update
    * {@link Devirtualizer} and {@link JavaResourceBase}
    */
-  public static final Comparator<String> CASE_INSENSITIVE_ORDER = new Comparator<String>() {
-    @Override
-    public int compare(String a, String b) {
-      return a.compareToIgnoreCase(b);
-    }
-  };
+  public static final Comparator<String> CASE_INSENSITIVE_ORDER =
+      new Comparator<String>() {
+        @Override
+        public int compare(String a, String b) {
+          return a.compareToIgnoreCase(b);
+        }
+      };
 
   public static String copyValueOf(char[] v) {
     return valueOf(v);
@@ -146,7 +144,7 @@ public final class String implements Comparable<String>, CharSequence,
     // Performance: http://jsperf.com/string-fromcharcode-test/13
     int batchSize = ArrayHelper.ARRAY_PROCESS_BATCH_SIZE;
     String s = "";
-    for (int batchStart = offset; batchStart < end;) {
+    for (int batchStart = offset; batchStart < end; ) {
       int batchEnd = Math.min(batchStart + batchSize, end);
       s += fromCharCode(ArrayHelper.unsafeClone(x, batchStart, batchEnd));
       batchStart = batchEnd;
@@ -228,8 +226,7 @@ public final class String implements Comparable<String>, CharSequence,
     this.value = createImpl(bytes, ofs, len, charset);
   }
 
-  public String(byte[] bytes, String charsetName)
-      throws UnsupportedEncodingException {
+  public String(byte[] bytes, String charsetName) throws UnsupportedEncodingException {
     this.value = createImpl(bytes, getCharset(charsetName));
   }
 
@@ -434,12 +431,11 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
+   * Regular expressions vary from the standard implementation. The <code>regex</code> parameter is
+   * interpreted by JavaScript as a JavaScript regular expression. For consistency, use only the
+   * subset of regular expression syntax common to both Java and JavaScript.
    *
-   * TODO(jat): properly handle Java regex syntax
+   * <p>TODO(jat): properly handle Java regex syntax
    */
   public boolean matches(String regex) {
     // We surround the regex with '^' and '$' because it must match the entire string.
@@ -450,8 +446,8 @@ public final class String implements Comparable<String>, CharSequence,
     return Character.offsetByCodePoints(this, index, codePointOffset);
   }
 
-  public boolean regionMatches(boolean ignoreCase, int toffset, String other,
-      int ooffset, int len) {
+  public boolean regionMatches(
+      boolean ignoreCase, int toffset, String other, int ooffset, int len) {
     checkNotNull(other);
     if (toffset < 0 || ooffset < 0) {
       return false;
@@ -486,24 +482,22 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
+   * Regular expressions vary from the standard implementation. The <code>regex</code> parameter is
+   * interpreted by JavaScript as a JavaScript regular expression. For consistency, use only the
+   * subset of regular expression syntax common to both Java and JavaScript.
    *
-   * TODO(jat): properly handle Java regex syntax
+   * <p>TODO(jat): properly handle Java regex syntax
    */
   public String replaceAll(String regex, String replace) {
     return StringUtil.replaceAll(this, regex, replace, /* ignoreCase= */ false);
   }
 
   /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
+   * Regular expressions vary from the standard implementation. The <code>regex</code> parameter is
+   * interpreted by JavaScript as a JavaScript regular expression. For consistency, use only the
+   * subset of regular expression syntax common to both Java and JavaScript.
    *
-   * TODO(jat): properly handle Java regex syntax
+   * <p>TODO(jat): properly handle Java regex syntax
    */
   public String replaceFirst(String regex, String replace) {
     return StringUtil.replaceFirst(this, regex, replace, /* ignoreCase= */ false);
@@ -520,22 +514,20 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
+   * Regular expressions vary from the standard implementation. The <code>regex</code> parameter is
+   * interpreted by JavaScript as a JavaScript regular expression. For consistency, use only the
+   * subset of regular expression syntax common to both Java and JavaScript.
    */
   public String[] split(String regex) {
     return split(regex, 0);
   }
 
   /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
+   * Regular expressions vary from the standard implementation. The <code>regex</code> parameter is
+   * interpreted by JavaScript as a JavaScript regular expression. For consistency, use only the
+   * subset of regular expression syntax common to both Java and JavaScript.
    *
-   * TODO(jat): properly handle Java regex syntax
+   * <p>TODO(jat): properly handle Java regex syntax
    */
   public String[] split(String regex, int maxMatch) {
     // The compiled regular expression created from the string
@@ -620,25 +612,26 @@ public final class String implements Comparable<String>, CharSequence,
 
   /**
    * Transforms the String to lower-case in a locale insensitive way.
-   * <p>
-   * Unlike JRE, we don't do locale specific transformation by default. That is backward compatible
-   * for GWT and in most of the cases that is what the developer actually wants. If you want to make
-   * a transformation based on native locale of the browser, you can do
-   * {@code toLowerCase(Locale.getDefault())} instead.
+   *
+   * <p>Unlike JRE, we don't do locale specific transformation by default. That is backward
+   * compatible for GWT and in most of the cases that is what the developer actually wants. If you
+   * want to make a transformation based on native locale of the browser, you can do {@code
+   * toLowerCase(Locale.getDefault())} instead.
    */
   public String toLowerCase() {
     return asNativeString().toLowerCase();
   }
 
   /**
-   * If provided {@code locale} is {@link Locale#getDefault()}, uses javascript's
-   * {@code toLocaleLowerCase} to do a locale specific transformation. Otherwise, it will fallback
-   * to {@code toLowerCase} which performs the right thing for the limited set of Locale's
-   * predefined in GWT Locale emulation.
+   * If provided {@code locale} is {@link Locale#getDefault()}, uses javascript's {@code
+   * toLocaleLowerCase} to do a locale specific transformation. Otherwise, it will fallback to
+   * {@code toLowerCase} which performs the right thing for the limited set of Locale's predefined
+   * in GWT Locale emulation.
    */
   public String toLowerCase(Locale locale) {
     return locale == Locale.getDefault()
-        ? asNativeString().toLocaleLowerCase() : asNativeString().toLowerCase();
+        ? asNativeString().toLocaleLowerCase()
+        : asNativeString().toLowerCase();
   }
 
   // See the notes in lowerCase pair.
@@ -649,7 +642,8 @@ public final class String implements Comparable<String>, CharSequence,
   // See the notes in lowerCase pair.
   public String toUpperCase(Locale locale) {
     return locale == Locale.getDefault()
-        ? asNativeString().toLocaleUpperCase() : asNativeString().toUpperCase();
+        ? asNativeString().toLocaleUpperCase()
+        : asNativeString().toUpperCase();
   }
 
   @Override

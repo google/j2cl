@@ -16,14 +16,12 @@
 package java.lang;
 
 /**
- * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/NullPointerException.html">the
+ * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/NullPointerException.html">the
  * official Java API doc</a> for details.
  */
 public class NullPointerException extends JsException {
 
-  public NullPointerException() {
-  }
+  public NullPointerException() {}
 
   public NullPointerException(String message) {
     super(message);

@@ -17,9 +17,7 @@ package java.util.logging;
 
 import javaemul.internal.ConsoleLogger;
 
-/**
- * A simple console logger used in super dev mode.
- */
+/** A simple console logger used in super dev mode. */
 class SimpleConsoleLogHandler extends Handler {
 
   @Override

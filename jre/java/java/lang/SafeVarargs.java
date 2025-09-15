@@ -22,12 +22,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Claims to the compiler that the annotation target does nothing potentially unsafe
- * to its varargs argument.
+ * Claims to the compiler that the annotation target does nothing potentially unsafe to its varargs
+ * argument.
  */
 @Documented
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.CONSTRUCTOR, ElementType.METHOD})
-public @interface SafeVarargs {
-}
-
+public @interface SafeVarargs {}

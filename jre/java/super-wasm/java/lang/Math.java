@@ -21,9 +21,7 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
-/**
- * Math utility methods and constants.
- */
+/** Math utility methods and constants. */
 public final class Math {
 
   public static final double E = 2.7182818284590452354;

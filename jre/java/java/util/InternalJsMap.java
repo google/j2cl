@@ -39,12 +39,19 @@ class InternalJsMap<V> {
   interface IteratorEntry<V> {
     @JsProperty
     boolean isDone();
+
     @JsProperty(name = "value")
     Object[] getValueInternal();
+
     @JsOverlay
-    default String getKey() { return JsUtils.uncheckedCast(getValueInternal()[0]); }
+    default String getKey() {
+      return JsUtils.uncheckedCast(getValueInternal()[0]);
+    }
+
     @JsOverlay
-    default V getValue() { return JsUtils.uncheckedCast(getValueInternal()[1]); }
+    default V getValue() {
+      return JsUtils.uncheckedCast(getValueInternal()[1]);
+    }
   }
 
   native V get(int key);

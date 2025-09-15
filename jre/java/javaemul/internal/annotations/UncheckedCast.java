@@ -24,5 +24,4 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @CompilerHint
-public @interface UncheckedCast {
-}
+public @interface UncheckedCast {}

@@ -25,29 +25,27 @@ import javaemul.internal.ArrayHelper;
 /**
  * A {@link Deque} based on circular buffer that is implemented with an array and head/tail
  * pointers. Array deques have no capacity restrictions; they grow as necessary to support usage.
- * Null elements are prohibited. This class is likely to be faster than {@link Stack}
- * when used as a stack, and faster than {@link LinkedList} when used as a queue.
- * <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>
+ * Null elements are prohibited. This class is likely to be faster than {@link Stack} when used as a
+ * stack, and faster than {@link LinkedList} when used as a queue. <a
+ * href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>
  *
  * @param <E> the element type.
  */
 public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cloneable {
 
   private final class IteratorImpl implements Iterator<E> {
-    /**
-     * Index of element to be returned by subsequent call to next.
-     */
+    /** Index of element to be returned by subsequent call to next. */
     private int currentIndex = head;
 
     /**
-     * Tail recorded at construction (also in remove), to stop
-     * iterator and also to check for comodification.
+     * Tail recorded at construction (also in remove), to stop iterator and also to check for
+     * comodification.
      */
     private int fence = tail;
 
     /**
-     * Index of element returned by most recent call to next.
-     * Reset to -1 if element is deleted by a call to remove.
+     * Index of element returned by most recent call to next. Reset to -1 if element is deleted by a
+     * call to remove.
      */
     private int lastIndex = -1;
 
@@ -116,10 +114,7 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
     }
   }
 
-  /**
-   * The minimum capacity that we'll use for a newly created deque.
-   * Must be a power of 2.
-   */
+  /** The minimum capacity that we'll use for a newly created deque. Must be a power of 2. */
   private static final int MIN_INITIAL_CAPACITY = 8;
 
   private static void checkConcurrentModification(boolean expression) {
@@ -139,9 +134,8 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
   }
 
   /**
-   * Returns a number that is greater than {@code num} and is a power of two.
-   * If passed {@code num} is not positive integer or next power of two overflows then
-   * returned value is non-positive.
+   * Returns a number that is greater than {@code num} and is a power of two. If passed {@code num}
+   * is not positive integer or next power of two overflows then returned value is non-positive.
    * E.g., if num == 32, returns 64. if num == 31, returns 32.
    *
    * @param num positive integer.
@@ -153,15 +147,14 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
   private E[] array;
 
   /**
-   * The index of the element at the head of the deque (which is the
-   * element that would be removed by remove() or pop()); or an
-   * arbitrary number equal to tail if the deque is empty.
+   * The index of the element at the head of the deque (which is the element that would be removed
+   * by remove() or pop()); or an arbitrary number equal to tail if the deque is empty.
    */
   private int head;
 
   /**
-   * The index at which the next element would be added to the tail
-   * of the deque (via addLast(E), add(E), or push(E)).
+   * The index at which the next element would be added to the tail of the deque (via addLast(E),
+   * add(E), or push(E)).
    */
   private int tail;
 
@@ -414,10 +407,9 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
   }
 
   /**
-   * Copies {@code count} ArrayDeque's elements to {@code dest} array.
-   * The method is safe to use when ArrayDeque's array has been rolled over,
-   * i.e. {@code head == tail}.
-   * It is assumed that {@code count < size()}.
+   * Copies {@code count} ArrayDeque's elements to {@code dest} array. The method is safe to use
+   * when ArrayDeque's array has been rolled over, i.e. {@code head == tail}. It is assumed that
+   * {@code count < size()}.
    */
   private void copyElements(Object[] dest, int count) {
     final int mask = array.length - 1;
@@ -427,8 +419,8 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
   }
 
   /**
-   * Increase the capacity of this deque when full, i.e.,
-   * when head and tail have wrapped around to become equal.
+   * Increase the capacity of this deque when full, i.e., when head and tail have wrapped around to
+   * become equal.
    */
   private void ensureCapacity() {
     if (head != tail) {
@@ -449,9 +441,8 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
   }
 
   /**
-   * Removes the element at the specified position in the elements array,
-   * adjusting head and tail as necessary. This results in motion of
-   * elements backwards or forwards in the array.
+   * Removes the element at the specified position in the elements array, adjusting head and tail as
+   * necessary. This results in motion of elements backwards or forwards in the array.
    *
    * @return -1 if elements moved backwards (left-shifted); 1 if forwards (right-shifted).
    */

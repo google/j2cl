@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,8 +17,8 @@ package java.sql;
 
 /**
  * An implementation of java.sql.Timestame. Derived from
- * http://java.sun.com/j2se/1.5.0/docs/api/java/sql/Timestamp.html. This is
- * basically just regular Date decorated with a nanoseconds field.
+ * http://java.sun.com/j2se/1.5.0/docs/api/java/sql/Timestamp.html. This is basically just regular
+ * Date decorated with a nanoseconds field.
  */
 public class Timestamp extends java.util.Date {
 
@@ -31,7 +31,7 @@ public class Timestamp extends java.util.Date {
     String[] timeComponents = components[1].split("\\.");
     boolean hasNanos = true;
     int nanos = 0;
- 
+
     if (timeComponents.length == 1) {
       // Allow timestamps without .fffffffff nanoseconds field
       hasNanos = false;
@@ -61,8 +61,14 @@ public class Timestamp extends java.util.Date {
       }
     }
 
-    return new Timestamp(d.getYear(), d.getMonth(), d.getDate(), t.getHours(),
-        t.getMinutes(), t.getSeconds(), nanos);
+    return new Timestamp(
+        d.getYear(),
+        d.getMonth(),
+        d.getDate(),
+        t.getHours(),
+        t.getMinutes(),
+        t.getSeconds(),
+        nanos);
   }
 
   private static String padNine(int value) {
@@ -77,14 +83,13 @@ public class Timestamp extends java.util.Date {
   }
 
   /**
-   * Stores the nanosecond resolution of the timestamp; must be kept in sync
-   * with the sub-second part of Date.millis.
+   * Stores the nanosecond resolution of the timestamp; must be kept in sync with the sub-second
+   * part of Date.millis.
    */
   private int nanos;
 
   @Deprecated
-  public Timestamp(int year, int month, int date, int hour, int minute,
-      int second, int nano) {
+  public Timestamp(int year, int month, int date, int hour, int minute, int second, int nano) {
     super(year, month, date, hour, minute, second);
     setNanos(nano);
   }
@@ -97,13 +102,11 @@ public class Timestamp extends java.util.Date {
   }
 
   public boolean after(Timestamp ts) {
-    return (getTime() > ts.getTime())
-        || (getTime() == ts.getTime() && getNanos() > ts.getNanos());
+    return (getTime() > ts.getTime()) || (getTime() == ts.getTime() && getNanos() > ts.getNanos());
   }
 
   public boolean before(Timestamp ts) {
-    return (getTime() < ts.getTime())
-        || (getTime() == ts.getTime() && getNanos() < ts.getNanos());
+    return (getTime() < ts.getTime()) || (getTime() == ts.getTime() && getNanos() < ts.getNanos());
   }
 
   @Override
@@ -164,9 +167,18 @@ public class Timestamp extends java.util.Date {
 
   @Override
   public String toString() {
-    return String.valueOf(1900 + getYear()) + "-" + padTwo(1 + getMonth())
-        + "-" + padTwo(getDate()) + " " + padTwo(getHours()) + ":"
-        + padTwo(getMinutes()) + ":" + padTwo(getSeconds()) + "."
+    return String.valueOf(1900 + getYear())
+        + "-"
+        + padTwo(1 + getMonth())
+        + "-"
+        + padTwo(getDate())
+        + " "
+        + padTwo(getHours())
+        + ":"
+        + padTwo(getMinutes())
+        + ":"
+        + padTwo(getSeconds())
+        + "."
         + padNine(getNanos());
   }
 }

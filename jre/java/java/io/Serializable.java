@@ -19,9 +19,9 @@ import javaemul.internal.ArrayHelper;
 import javaemul.internal.JsUtils;
 
 /**
- * Provided for interoperability; RPC treats this interface synonymously with
- * {@link com.google.gwt.user.client.rpc.IsSerializable IsSerializable}.
- * The Java serialization protocol is explicitly not supported.
+ * Provided for interoperability; RPC treats this interface synonymously with {@link
+ * com.google.gwt.user.client.rpc.IsSerializable IsSerializable}. The Java serialization protocol is
+ * explicitly not supported.
  */
 public interface Serializable {
   static boolean $isInstance(HasSerializableTypeMarker instance) {

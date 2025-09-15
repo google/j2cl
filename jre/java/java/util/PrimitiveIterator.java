@@ -23,8 +23,8 @@ import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PrimitiveIterator.html">
- * the official Java API doc</a> for details.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PrimitiveIterator.html">the
+ * official Java API doc</a> for details.
  *
  * @param <T> element type
  * @param <C> consumer type
@@ -34,8 +34,9 @@ public interface PrimitiveIterator<T, C> extends Iterator<T> {
   void forEachRemaining(C consumer);
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PrimitiveIterator.OfDouble.html">
-   * the official Java API doc</a> for details.
+   * See <a
+   * href="https://docs.oracle.com/javase/8/docs/api/java/util/PrimitiveIterator.OfDouble.html">the
+   * official Java API doc</a> for details.
    */
   interface OfDouble extends PrimitiveIterator<Double, DoubleConsumer> {
     double nextDouble();
@@ -94,8 +95,9 @@ public interface PrimitiveIterator<T, C> extends Iterator<T> {
   }
 
   /**
-   * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PrimitiveIterator.OfLong.html">
-   * the official Java API doc</a> for details.
+   * See <a
+   * href="https://docs.oracle.com/javase/8/docs/api/java/util/PrimitiveIterator.OfLong.html">the
+   * official Java API doc</a> for details.
    */
   interface OfLong extends PrimitiveIterator<Long, LongConsumer> {
     long nextLong();
@@ -122,5 +124,4 @@ public interface PrimitiveIterator<T, C> extends Iterator<T> {
       }
     }
   }
-
 }

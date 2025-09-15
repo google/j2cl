@@ -16,8 +16,9 @@
 package java.util.function;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/ObjDoubleConsumer.html">
- * the official Java API doc</a> for details.
+ * See <a
+ * href="https://docs.oracle.com/javase/8/docs/api/java/util/function/ObjDoubleConsumer.html">the
+ * official Java API doc</a> for details.
  *
  * @param <T> type of the object argument
  */

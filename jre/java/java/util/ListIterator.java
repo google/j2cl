@@ -17,11 +17,9 @@
 package java.util;
 
 /**
- * Uses Java 1.5 ListIterator for documentation. The methods hasNext, next, and
- * remove are repeated to allow the specialized ListIterator documentation to be
- * associated with them. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/ListIterator.html">[Sun
- * docs]</a>
+ * Uses Java 1.5 ListIterator for documentation. The methods hasNext, next, and remove are repeated
+ * to allow the specialized ListIterator documentation to be associated with them. <a
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/ListIterator.html">[Sun docs]</a>
  *
  * @param <E> element type.
  */

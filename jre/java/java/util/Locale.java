@@ -16,41 +16,45 @@
 package java.util;
 
 /**
- * A very simple emulation of Locale for shared-code patterns like
- * {@code String.toUpperCase(Locale.US)}.
- * <p>
- * Note: Any changes to this class should put into account the assumption that was made in rest of
- * the JRE emulation.
+ * A very simple emulation of Locale for shared-code patterns like {@code
+ * String.toUpperCase(Locale.US)}.
+ *
+ * <p>Note: Any changes to this class should put into account the assumption that was made in rest
+ * of the JRE emulation.
  */
 public class Locale {
 
-  public static final Locale ROOT = new Locale() {
-    @Override
-    public String toString() {
-      return "";
-    }
-  };
+  public static final Locale ROOT =
+      new Locale() {
+        @Override
+        public String toString() {
+          return "";
+        }
+      };
 
-  public static final Locale ENGLISH = new Locale() {
-    @Override
-    public String toString() {
-      return "en";
-    }
-  };
+  public static final Locale ENGLISH =
+      new Locale() {
+        @Override
+        public String toString() {
+          return "en";
+        }
+      };
 
-  public static final Locale US = new Locale() {
-    @Override
-    public String toString() {
-      return "en_US";
-    }
-  };
+  public static final Locale US =
+      new Locale() {
+        @Override
+        public String toString() {
+          return "en_US";
+        }
+      };
 
-  private static Locale defaultLocale = new Locale() {
-    @Override
-    public String toString() {
-      return "unknown";
-    }
-  };
+  private static Locale defaultLocale =
+      new Locale() {
+        @Override
+        public String toString() {
+          return "unknown";
+        }
+      };
 
   /**
    * Returns an instance that represents the browser's default locale (not necessarily the one
@@ -61,5 +65,5 @@ public class Locale {
   }
 
   // Hidden as we don't support manual creation of Locales.
-  private Locale() { }
+  private Locale() {}
 }

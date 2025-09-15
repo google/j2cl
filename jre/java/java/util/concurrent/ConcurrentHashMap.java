@@ -94,33 +94,39 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V> implements Concur
     }
   }
 
-  @Override public boolean containsKey(Object key) {
+  @Override
+  public boolean containsKey(Object key) {
     checkNotNull(key);
     return backingMap.containsKey(key);
   }
 
-  @Override public V get(Object key) {
+  @Override
+  public V get(Object key) {
     checkNotNull(key);
     return backingMap.get(key);
   }
 
-  @Override public V put(K key, V value) {
+  @Override
+  public V put(K key, V value) {
     checkNotNull(key);
     checkNotNull(value);
     return backingMap.put(key, value);
   }
 
-  @Override public boolean containsValue(Object value) {
+  @Override
+  public boolean containsValue(Object value) {
     checkNotNull(value);
     return backingMap.containsValue(value);
   }
 
-  @Override public V remove(Object key) {
+  @Override
+  public V remove(Object key) {
     checkNotNull(key);
     return backingMap.remove(key);
   }
 
-  @Override public Set<Entry<K, V>> entrySet() {
+  @Override
+  public Set<Entry<K, V>> entrySet() {
     return backingMap.entrySet();
   }
 

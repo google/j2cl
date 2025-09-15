@@ -17,9 +17,7 @@ package java.lang;
 
 import javaemul.internal.annotations.HasNoSideEffects;
 
-/**
- * Wraps a primitive <code>short</code> as an object.
- */
+/** Wraps a primitive <code>short</code> as an object. */
 public final class Short extends Number implements Comparable<Short> {
 
   public static final short MIN_VALUE = (short) 0x8000;
@@ -28,9 +26,7 @@ public final class Short extends Number implements Comparable<Short> {
   public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Short> TYPE = short.class;
 
-  /**
-   * Use nested class to avoid clinit on outer.
-   */
+  /** Use nested class to avoid clinit on outer. */
   private static class BoxedValues {
     private static final Short[] boxedValues;
 
@@ -65,8 +61,7 @@ public final class Short extends Number implements Comparable<Short> {
     return parseShort(s, 10);
   }
 
-  public static short parseShort(String s, int radix)
-      throws NumberFormatException {
+  public static short parseShort(String s, int radix) throws NumberFormatException {
     return (short) __parseAndValidateInt(s, radix, MIN_VALUE, MAX_VALUE);
   }
 

@@ -18,9 +18,7 @@ package java.nio.charset;
 
 import javaemul.internal.EmulatedCharset;
 
-/**
- * Constant definitions for the standard Charsets.
- */
+/** Constant definitions for the standard Charsets. */
 public final class StandardCharsets {
   public static final Charset ISO_8859_1 = EmulatedCharset.ISO_8859_1;
   public static final Charset UTF_8 = EmulatedCharset.UTF_8;

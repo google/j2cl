@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,25 +21,31 @@
  * licenses this file to You under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * INCLUDES MODIFICATIONS BY RICHARD ZSCHECH AS WELL AS GOOGLE.
  */
 package java.math;
 
 /**
- * Static library that provides the basic arithmetic mutable operations for
- * {@link BigInteger}. The operations provided are listed below. <ul
- * type="circle"> <li>Addition.</li> <li>Subtraction.</li> <li>Comparison.</li>
- * </ul> In addition to this, some <i><b>Inplace</b></i> (mutable) methods are
- * provided.
+ * Static library that provides the basic arithmetic mutable operations for {@link BigInteger}. The
+ * operations provided are listed below.
+ *
+ * <ul
+ * type="circle">
+ *   <li>Addition.
+ *   <li>Subtraction.
+ *   <li>Comparison.
+ * </ul>
+ *
+ * In addition to this, some <i><b>Inplace</b></i> (mutable) methods are provided.
  */
 class Elementary {
 
@@ -75,18 +81,23 @@ class Elementary {
         res = a + b;
         valueLo = (int) res;
         valueHi = (int) (res >>> 32);
-        return ((valueHi == 0) ? new BigInteger(op1Sign, valueLo)
+        return ((valueHi == 0)
+            ? new BigInteger(op1Sign, valueLo)
             : new BigInteger(op1Sign, 2, new int[] {valueLo, valueHi}));
       }
       return BigInteger.valueOf((op1Sign < 0) ? (b - a) : (a - b));
     } else if (op1Sign == op2Sign) {
       resSign = op1Sign;
       // an augend should not be shorter than addend
-      resDigits = (op1Len >= op2Len) ? add(op1.digits, op1Len, op2.digits,
-          op2Len) : add(op2.digits, op2Len, op1.digits, op1Len);
+      resDigits =
+          (op1Len >= op2Len)
+              ? add(op1.digits, op1Len, op2.digits, op2Len)
+              : add(op2.digits, op2Len, op1.digits, op1Len);
     } else { // signs are different
-      int cmp = ((op1Len != op2Len) ? ((op1Len > op2Len) ? 1 : -1)
-          : compareArrays(op1.digits, op2.digits, op1Len));
+      int cmp =
+          ((op1Len != op2Len)
+              ? ((op1Len > op2Len) ? 1 : -1)
+              : compareArrays(op1.digits, op2.digits, op1Len));
 
       if (cmp == BigInteger.EQUALS) {
         return BigInteger.ZERO;
@@ -106,9 +117,9 @@ class Elementary {
   }
 
   /**
-   * Compares two arrays. All elements are treated as unsigned integers. The
-   * magnitude is the bit chain of elements in big-endian order.
-   * 
+   * Compares two arrays. All elements are treated as unsigned integers. The magnitude is the bit
+   * chain of elements in big-endian order.
+   *
    * @param a the first array
    * @param b the second array
    * @param size the size of arrays
@@ -119,15 +130,15 @@ class Elementary {
     for (i = size - 1; (i >= 0) && (a[i] == b[i]); i--) {
       // empty
     }
-    return ((i < 0) ? BigInteger.EQUALS
-        : (a[i] & 0xFFFFFFFFL) < (b[i] & 0xFFFFFFFFL) ? BigInteger.LESS
-            : BigInteger.GREATER);
+    return ((i < 0)
+        ? BigInteger.EQUALS
+        : (a[i] & 0xFFFFFFFFL) < (b[i] & 0xFFFFFFFFL) ? BigInteger.LESS : BigInteger.GREATER);
   }
 
   /**
-   * Same as @link #inplaceAdd(BigInteger, BigInteger), but without the
-   * restriction of non-positive values.
-   * 
+   * Same as @link #inplaceAdd(BigInteger, BigInteger), but without the restriction of non-positive
+   * values.
+   *
    * @param op1 any number
    * @param op2 any number
    */
@@ -137,17 +148,13 @@ class Elementary {
     } else if (op2.sign == 0) {
       return;
     } else if (op1.sign == op2.sign) {
-      add(op1.digits, op1.digits, op1.numberLength, op2.digits,
-          op2.numberLength);
+      add(op1.digits, op1.digits, op1.numberLength, op2.digits, op2.numberLength);
     } else {
-      int sign = unsignedArraysCompare(op1.digits, op2.digits,
-          op1.numberLength, op2.numberLength);
+      int sign = unsignedArraysCompare(op1.digits, op2.digits, op1.numberLength, op2.numberLength);
       if (sign > 0) {
-        subtract(op1.digits, op1.digits, op1.numberLength, op2.digits,
-            op2.numberLength);
+        subtract(op1.digits, op1.digits, op1.numberLength, op2.digits, op2.numberLength);
       } else {
-        inverseSubtract(op1.digits, op1.digits, op1.numberLength, op2.digits,
-            op2.numberLength);
+        inverseSubtract(op1.digits, op1.digits, op1.numberLength, op2.digits, op2.numberLength);
         op1.sign = -op1.sign;
       }
     }
@@ -157,9 +164,9 @@ class Elementary {
   }
 
   /**
-   * Same as @link #inplaceSubtract(BigInteger, BigInteger), but without the
-   * restriction of non-positive values.
-   * 
+   * Same as @link #inplaceSubtract(BigInteger, BigInteger), but without the restriction of
+   * non-positive values.
+   *
    * @param op1 should have enough space to save the result
    * @param op2
    */
@@ -169,18 +176,24 @@ class Elementary {
       System.arraycopy(op2.digits, 0, op1.digits, 0, op2.numberLength);
       op1.sign = -op2.sign;
     } else if (op1.sign != op2.sign) {
-      add(op1.digits, op1.digits, op1.numberLength, op2.digits,
-          op2.numberLength);
+      add(op1.digits, op1.digits, op1.numberLength, op2.digits, op2.numberLength);
       op1.sign = resultSign;
     } else {
-      int sign = unsignedArraysCompare(op1.digits, op2.digits,
-          op1.numberLength, op2.numberLength);
+      int sign = unsignedArraysCompare(op1.digits, op2.digits, op1.numberLength, op2.numberLength);
       if (sign > 0) {
-        subtract(op1.digits, op1.digits, op1.numberLength, op2.digits,
+        subtract(
+            op1.digits,
+            op1.digits,
+            op1.numberLength,
+            op2.digits,
             op2.numberLength); // op1 = op1 - op2
         // op1.sign remains equal
       } else {
-        inverseSubtract(op1.digits, op1.digits, op1.numberLength, op2.digits,
+        inverseSubtract(
+            op1.digits,
+            op1.digits,
+            op1.numberLength,
+            op2.digits,
             op2.numberLength); // op1 = op2 - op1
         op1.sign = -op1.sign;
       }
@@ -191,26 +204,22 @@ class Elementary {
   }
 
   /**
-   * Performs {@code op1 += op2}. {@code op1} must have enough place to store
-   * the result (i.e. {@code op1.bitLength() >= op2.bitLength()}). Both should
-   * be positive (i.e. {@code op1 >= op2}).
-   * 
+   * Performs {@code op1 += op2}. {@code op1} must have enough place to store the result (i.e.
+   * {@code op1.bitLength() >= op2.bitLength()}). Both should be positive (i.e. {@code op1 >= op2}).
+   *
    * @param op1 the input minuend, and the output result.
    * @param op2 the addend
    */
   static void inplaceAdd(BigInteger op1, BigInteger op2) {
     // PRE: op1 >= op2 > 0
     add(op1.digits, op1.digits, op1.numberLength, op2.digits, op2.numberLength);
-    op1.numberLength = Math.min(
-        Math.max(op1.numberLength, op2.numberLength) + 1, op1.digits.length);
+    op1.numberLength =
+        Math.min(Math.max(op1.numberLength, op2.numberLength) + 1, op1.digits.length);
     op1.cutOffLeadingZeroes();
     op1.unCache();
   }
 
-  /**
-   * Performs: {@code op1 += addend}. The number must to have place to hold a
-   * possible carry.
-   */
+  /** Performs: {@code op1 += addend}. The number must to have place to hold a possible carry. */
   static void inplaceAdd(BigInteger op1, final int addend) {
     int carry = inplaceAdd(op1.digits, op1.numberLength, addend);
     if (carry == 1) {
@@ -222,7 +231,7 @@ class Elementary {
 
   /**
    * Adds an integer value to the array of integers remembering carry.
-   * 
+   *
    * @return a possible generated carry (0 or 1)
    */
   static int inplaceAdd(int a[], final int aSize, final int addend) {
@@ -237,17 +246,16 @@ class Elementary {
   }
 
   /**
-   * Performs {@code op1 -= op2}. {@code op1} must have enough place to store
-   * the result (i.e. {@code op1.bitLength() >= op2.bitLength()}). Both should
-   * be positive (what implies that {@code op1 >= op2}).
-   * 
+   * Performs {@code op1 -= op2}. {@code op1} must have enough place to store the result (i.e.
+   * {@code op1.bitLength() >= op2.bitLength()}). Both should be positive (what implies that {@code
+   * op1 >= op2}).
+   *
    * @param op1 the input minuend, and the output result.
    * @param op2 the subtrahend
    */
   static void inplaceSubtract(BigInteger op1, BigInteger op2) {
     // PRE: op1 >= op2 > 0
-    subtract(op1.digits, op1.digits, op1.numberLength, op2.digits,
-        op2.numberLength);
+    subtract(op1.digits, op1.digits, op1.numberLength, op2.digits, op2.numberLength);
     op1.cutOffLeadingZeroes();
     op1.unCache();
   }
@@ -283,13 +291,17 @@ class Elementary {
       }
       return BigInteger.valueOf(a - b);
     }
-    int cmp = ((op1Len != op2Len) ? ((op1Len > op2Len) ? 1 : -1)
-        : Elementary.compareArrays(op1.digits, op2.digits, op1Len));
+    int cmp =
+        ((op1Len != op2Len)
+            ? ((op1Len > op2Len) ? 1 : -1)
+            : Elementary.compareArrays(op1.digits, op2.digits, op1Len));
 
     if (cmp == BigInteger.LESS) {
       resSign = -op2Sign;
-      resDigits = (op1Sign == op2Sign) ? subtract(op2.digits, op2Len,
-          op1.digits, op1Len) : add(op2.digits, op2Len, op1.digits, op1Len);
+      resDigits =
+          (op1Sign == op2Sign)
+              ? subtract(op2.digits, op2Len, op1.digits, op1Len)
+              : add(op2.digits, op2Len, op1.digits, op1Len);
     } else {
       resSign = op1Sign;
       if (op1Sign == op2Sign) {
@@ -307,10 +319,9 @@ class Elementary {
   }
 
   /**
-   * Addss the value represented by {@code b} to the value represented by
-   * {@code a}. It is assumed the magnitude of a is not less than the magnitude
-   * of b.
-   * 
+   * Addss the value represented by {@code b} to the value represented by {@code a}. It is assumed
+   * the magnitude of a is not less than the magnitude of b.
+   *
    * @return {@code a + b}
    */
   private static int[] add(int a[], int aSize, int b[], int bSize) {
@@ -320,9 +331,7 @@ class Elementary {
     return res;
   }
 
-  /**
-   * Performs {@code res = a + b}.
-   */
+  /** Performs {@code res = a + b}. */
   private static void add(int res[], int a[], int aSize, int b[], int bSize) {
     // PRE: a.length < max(aSize, bSize)
 
@@ -360,11 +369,8 @@ class Elementary {
     }
   }
 
-  /**
-   * Performs {@code res = b - a}.
-   */
-  private static void inverseSubtract(int res[], int a[], int aSize, int b[],
-      int bSize) {
+  /** Performs {@code res = b - a}. */
+  private static void inverseSubtract(int res[], int a[], int aSize, int b[], int bSize) {
     int i;
     long borrow = 0;
     if (aSize < bSize) {
@@ -393,10 +399,9 @@ class Elementary {
   }
 
   /**
-   * Subtracts the value represented by {@code b} from the value represented by
-   * {@code a}. It is assumed the magnitude of a is not less than the magnitude
-   * of b.
-   * 
+   * Subtracts the value represented by {@code b} from the value represented by {@code a}. It is
+   * assumed the magnitude of a is not less than the magnitude of b.
+   *
    * @return {@code a - b}
    */
   private static int[] subtract(int a[], int aSize, int b[], int bSize) {
@@ -407,8 +412,8 @@ class Elementary {
   }
 
   /**
-   * Performs {@code res = a - b}. It is assumed the magnitude of a is not less
-   * than the magnitude of b.
+   * Performs {@code res = a - b}. It is assumed the magnitude of a is not less than the magnitude
+   * of b.
    */
   private static void subtract(int res[], int a[], int aSize, int b[], int bSize) {
     // PRE: a[] >= b[]
@@ -428,11 +433,10 @@ class Elementary {
   }
 
   /**
-   * Compares two arrays, representing unsigned integer in little-endian order.
-   * Returns +1,0,-1 if a is - respective - greater, equal or lesser then b
+   * Compares two arrays, representing unsigned integer in little-endian order. Returns +1,0,-1 if a
+   * is - respective - greater, equal or lesser then b
    */
-  private static int unsignedArraysCompare(int[] a, int[] b, int aSize,
-      int bSize) {
+  private static int unsignedArraysCompare(int[] a, int[] b, int aSize, int bSize) {
     if (aSize > bSize) {
       return 1;
     } else if (aSize < bSize) {
@@ -442,16 +446,12 @@ class Elementary {
       for (i = aSize - 1; i >= 0 && a[i] == b[i]; i--) {
         // empty
       }
-      return i < 0 ? BigInteger.EQUALS
-          : ((a[i] & 0xFFFFFFFFL) < (b[i] & 0xFFFFFFFFL) ? BigInteger.LESS
-              : BigInteger.GREATER);
+      return i < 0
+          ? BigInteger.EQUALS
+          : ((a[i] & 0xFFFFFFFFL) < (b[i] & 0xFFFFFFFFL) ? BigInteger.LESS : BigInteger.GREATER);
     }
   }
 
-  /**
-   * Just to denote that this class can't be instantiated.
-   */
-  private Elementary() {
-  }
-
+  /** Just to denote that this class can't be instantiated. */
+  private Elementary() {}
 }

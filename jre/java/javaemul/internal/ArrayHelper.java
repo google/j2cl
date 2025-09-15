@@ -30,6 +30,7 @@ public final class ArrayHelper {
 
   public static final int ARRAY_PROCESS_BATCH_SIZE = 10000;
 
+
   public static <T> T clone(T array) {
     Object[] result = asNativeArray(array).slice();
     return (T) ArrayStamper.stampJavaTypeInfo(result, array);

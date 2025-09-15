@@ -29,9 +29,9 @@ import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
 
 /**
- * General-purpose interface for storing collections of objects.
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html">
- * the official Java API doc</a> for details.
+ * General-purpose interface for storing collections of objects. See <a
+ * href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html">the official Java API
+ * doc</a> for details.
  *
  * @param <E> element type
  */
@@ -68,7 +68,7 @@ public interface Collection<E> extends Iterable<E> {
   default boolean removeIf(Predicate<? super E> filter) {
     checkNotNull(filter);
     boolean removed = false;
-    for (Iterator<E> it = iterator(); it.hasNext();) {
+    for (Iterator<E> it = iterator(); it.hasNext(); ) {
       if (filter.test(it.next())) {
         it.remove();
         removed = true;

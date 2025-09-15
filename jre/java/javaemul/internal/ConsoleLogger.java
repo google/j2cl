@@ -22,7 +22,8 @@ import jsinterop.annotations.JsType;
 
 /**
  * A helper to print log messages to console.
- * <p> Note that, this is not a public API and can change/disappear in any release.
+ *
+ * <p>Note that, this is not a public API and can change/disappear in any release.
  */
 public class ConsoleLogger {
   public static ConsoleLogger createIfSupported() {

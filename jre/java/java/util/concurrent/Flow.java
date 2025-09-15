@@ -15,12 +15,10 @@
  */
 package java.util.concurrent;
 
-/**
- * Emulation of Flow.
- */
+/** Emulation of Flow. */
 public final class Flow {
 
-  private Flow() { }
+  private Flow() {}
 
   /**
    * Emulation of Publisher.
@@ -47,9 +45,7 @@ public final class Flow {
     void onComplete();
   }
 
-  /**
-   * Emulation of Subscription.
-   */
+  /** Emulation of Subscription. */
   public interface Subscription {
     void request(long n);
 
@@ -62,8 +58,7 @@ public final class Flow {
    * @param <T> the subscribed item type
    * @param <R> the published item type
    */
-  public interface Processor<T,R> extends Subscriber<T>, Publisher<R> {
-  }
+  public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {}
 
   private static final int DEFAULT_BUFFER_SIZE = 256;
 

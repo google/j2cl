@@ -19,8 +19,7 @@ import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 
 /**
- * See <a
- * href="https://docs.oracle.com/javase/8/docs/api/java/util/LongSummaryStatistics.html">the
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LongSummaryStatistics.html">the
  * official Java API doc</a> for details.
  */
 public class LongSummaryStatistics implements LongConsumer, IntConsumer {
@@ -72,12 +71,17 @@ public class LongSummaryStatistics implements LongConsumer, IntConsumer {
 
   @Override
   public String toString() {
-    return "LongSummaryStatistics[" +
-        "count = " + count +
-        ", avg = " + getAverage() +
-        ", min = " + min +
-        ", max = " + max +
-        ", sum = " + sum +
-        "]";
+    return "LongSummaryStatistics["
+        + "count = "
+        + count
+        + ", avg = "
+        + getAverage()
+        + ", min = "
+        + min
+        + ", max = "
+        + max
+        + ", sum = "
+        + sum
+        + "]";
   }
 }

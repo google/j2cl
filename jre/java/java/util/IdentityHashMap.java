@@ -19,31 +19,29 @@ import java.io.Serializable;
 
 /**
  * Map using reference equality on keys. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/IdentityHashMap.html">[Sun
- * docs]</a>
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/IdentityHashMap.html">[Sun docs]</a>
  *
  * @param <K> key type
  * @param <V> value type
  */
-public class IdentityHashMap<K, V> extends AbstractHashMap<K, V> implements
-    Map<K, V>, Cloneable, Serializable {
+public class IdentityHashMap<K, V> extends AbstractHashMap<K, V>
+    implements Map<K, V>, Cloneable, Serializable {
 
   /**
-   * Ensures that RPC will consider type parameter K to be exposed. It will be
-   * pruned by dead code elimination.
+   * Ensures that RPC will consider type parameter K to be exposed. It will be pruned by dead code
+   * elimination.
    */
   @SuppressWarnings("unused")
   private K exposeKey;
 
   /**
-   * Ensures that RPC will consider type parameter V to be exposed. It will be
-   * pruned by dead code elimination.
+   * Ensures that RPC will consider type parameter V to be exposed. It will be pruned by dead code
+   * elimination.
    */
   @SuppressWarnings("unused")
   private V exposeValue;
 
-  public IdentityHashMap() {
-  }
+  public IdentityHashMap() {}
 
   public IdentityHashMap(int ignored) {
     super(ignored);

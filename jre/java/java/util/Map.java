@@ -167,9 +167,7 @@ public interface Map<K, V> {
     return Collections.internalMapFromEntries(map.entrySet());
   }
 
-  /**
-   * Represents an individual map entry.
-   */
+  /** Represents an individual map entry. */
   interface Entry<K, V> {
     @Override
     boolean equals(Object o);
@@ -186,7 +184,7 @@ public interface Map<K, V> {
     @JsMethod
     V setValue(V value);
 
-    static <K extends Comparable<? super K>, V> Comparator<Map.Entry<K,V>> comparingByKey() {
+    static <K extends Comparable<? super K>, V> Comparator<Map.Entry<K, V>> comparingByKey() {
       return comparingByKey(Comparator.naturalOrder());
     }
 
@@ -196,7 +194,7 @@ public interface Map<K, V> {
           (a, b) -> cmp.compare(a.getKey(), b.getKey());
     }
 
-    static <K, V extends Comparable<? super V>> Comparator<Map.Entry<K,V>> comparingByValue() {
+    static <K, V extends Comparable<? super V>> Comparator<Map.Entry<K, V>> comparingByValue() {
       return comparingByValue(Comparator.naturalOrder());
     }
 
@@ -343,7 +341,8 @@ public interface Map<K, V> {
 
   int size();
 
-  @JsNonNull Collection<V> values();
+  @JsNonNull
+  Collection<V> values();
 
   // Note: Explicit equals override helps an experimental JSpecify nullness checker.
   boolean equals(Object o);

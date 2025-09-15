@@ -19,9 +19,10 @@ import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
 
 /**
  * A base class to share implementation between {@link StringBuffer} and {@link StringBuilder}.
- * <p>
- * Most methods will give expected performance results. Exception is {@link #setCharAt(int, char)},
- * which is O(n), and thus should not be used many times on the same <code>StringBuffer</code>.
+ *
+ * <p>Most methods will give expected performance results. Exception is {@link #setCharAt(int,
+ * char)}, which is O(n), and thus should not be used many times on the same <code>StringBuffer
+ * </code>.
  */
 abstract class AbstractStringBuilder implements CharSequence, Appendable {
 

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,10 +22,9 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
- * An unbounded priority queue based on a priority heap.
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html">
- * the official Java API doc</a> for details.
- * A priority queue does not permit {@code null} elements.
+ * An unbounded priority queue based on a priority heap. See <a
+ * href="https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html">the official Java
+ * API doc</a> for details. A priority queue does not permit {@code null} elements.
  *
  * @param <E> element type.
  */
@@ -52,9 +51,9 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   private Comparator<? super E> cmp;
 
   /**
-   * A heap held in an array. heap[0] is the root of the heap (the smallest
-   * element), the subtrees of node i are 2*i+1 (left) and 2*i+2 (right). Node i
-   * is a leaf node if 2*i>=n. Node i's parent, if i>0, is floor((i-1)/2).
+   * A heap held in an array. heap[0] is the root of the heap (the smallest element), the subtrees
+   * of node i are 2*i+1 (left) and 2*i+2 (right). Node i is a leaf node if 2*i>=n. Node i's parent,
+   * if i>0, is floor((i-1)/2).
    */
   private ArrayList<E> heap;
 
@@ -253,9 +252,9 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   /**
    * Merge two subheaps into a single heap. O(log n) time
-   * 
-   * PRECONDITION: both children of <code>node</code> are heaps
-   * 
+   *
+   * <p>PRECONDITION: both children of <code>node</code> are heaps
+   *
    * @param node the parent of the two subtrees to merge
    */
   private void mergeHeaps(int node) {
@@ -279,8 +278,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     int leftChild = getLeftChild(node); // start with left child
     int rightChild = leftChild + 1;
     smallestChild = leftChild;
-    if ((rightChild < heapSize)
-        && (cmp.compare(heap.get(rightChild), heap.get(leftChild)) < 0)) {
+    if ((rightChild < heapSize) && (cmp.compare(heap.get(rightChild), heap.get(leftChild)) < 0)) {
       // right child is smaller, go down that path
       smallestChild = rightChild;
     }
@@ -296,8 +294,8 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   }
 
   /**
-   * This method leaves the elements at up to i-1, inclusive, untouched.
-   * This information is used by PriorityQueue iterator implementation.
+   * This method leaves the elements at up to i-1, inclusive, untouched. This information is used by
+   * PriorityQueue iterator implementation.
    */
   private void removeAtIndex(int index) {
     // Remove the last element; put it in place of the really removed element.
