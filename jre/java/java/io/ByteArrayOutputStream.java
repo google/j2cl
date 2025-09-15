@@ -19,6 +19,8 @@
 
 package java.io;
 
+import java.nio.charset.Charset;
+
 /**
  * A specialized {@link OutputStream} for class for writing content to an (internal) byte array. As
  * bytes are written to this stream, the byte array may be expanded to hold more bytes. When the
@@ -152,6 +154,10 @@ public class ByteArrayOutputStream extends OutputStream {
    */
   public String toString(String charsetName) throws UnsupportedEncodingException {
     return new String(buf, 0, count, charsetName);
+  }
+
+  public String toString(Charset charset) {
+    return new String(buf, 0, count, charset);
   }
 
   /**

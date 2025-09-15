@@ -84,7 +84,7 @@ final class IOUtils {
    * @throws IndexOutOfBoundsException if {@code offset} is negative, {@code count} is negative or
    *     their sum exceeds the given {@code length}.
    */
-  private static void checkOffsetAndCount(int length, int offset, int count) {
+  public static void checkOffsetAndCount(int length, int offset, int count) {
     if ((offset < 0) || (count < 0) || ((offset + count) > length)) {
       throw new IndexOutOfBoundsException();
     }

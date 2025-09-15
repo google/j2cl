@@ -24,6 +24,8 @@ import com.google.j2cl.jre.java.io.InputStreamTest;
 import com.google.j2cl.jre.java.io.OutputStreamTest;
 import com.google.j2cl.jre.java.io.OutputStreamWriterTest;
 import com.google.j2cl.jre.java.io.PrintStreamTest;
+import com.google.j2cl.jre.java.io.PrintWriterTest;
+import com.google.j2cl.jre.java.io.StringWriterTest;
 import com.google.j2cl.jre.java.io.WriterTest;
 import com.google.j2cl.jre.java.math.MathContextTest;
 import com.google.j2cl.jre.java.math.RoundingModeTest;
@@ -50,6 +52,8 @@ import org.junit.runners.Suite.SuiteClasses;
   OutputStreamTest.class,
   OutputStreamWriterTest.class,
   PrintStreamTest.class,
+  PrintWriterTest.class,
+  StringWriterTest.class,
   WriterTest.class,
 
   // -- java.math

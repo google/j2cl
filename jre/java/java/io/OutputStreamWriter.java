@@ -32,6 +32,10 @@ public class OutputStreamWriter extends Writer {
 
   private final char[] surrogateBuffer = new char[2];
 
+  public OutputStreamWriter(OutputStream out) {
+    this(out, Charset.defaultCharset());
+  }
+
   public OutputStreamWriter(OutputStream out, String charsetName) {
     this(out, Charset.forName(charsetName));
   }
