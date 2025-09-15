@@ -165,8 +165,17 @@ public class DoubleTest extends TestCase {
     assertFalse(Double.isInfinite(Double.NaN));
 
     final double[] finiteNumbers = {
-        -Double.MAX_VALUE, Double.MAX_VALUE, Double.MIN_VALUE,
-        -1.0, -0.5, -0.1, -0.0, 0.0, 0.1, 0.5, 1.0,
+      -Double.MAX_VALUE,
+      Double.MAX_VALUE,
+      Double.MIN_VALUE,
+      -1.0,
+      -0.5,
+      -0.1,
+      -0.0,
+      0.0,
+      0.1,
+      0.5,
+      1.0,
     };
     for (double value : finiteNumbers) {
       assertFalse(Double.isInfinite(value));
@@ -263,7 +272,7 @@ public class DoubleTest extends TestCase {
     compareDoubleBits(0x3ffffffffffffffbL, 1.999999999999999);
     compareDoubleBits(0x4000000000000000L, 2.0);
     compareDoubleBits(0x4000000000000002L, 2.000000000000001);
-    
+
     // basic tests
     compareDoubleBits(0x3fb999999999999aL, 0.1);
     compareDoubleBits(0xbfb999999999999aL, -0.1);
@@ -282,7 +291,7 @@ public class DoubleTest extends TestCase {
     // min normalized value
     compareDoubleBits(0x0010000000000000L, 2.2250738585072014E-308);
     compareDoubleBits(0x8010000000000000L, -2.2250738585072014E-308);
-    
+
     // denormalized values
     compareDoubleBits(0x000ff6a8ebe79958L, 2.22E-308);
     compareDoubleBits(0x000199999999999aL, 2.2250738585072014E-309);
@@ -304,7 +313,7 @@ public class DoubleTest extends TestCase {
     compareDoubleBits(0x0000000000000002L, 1.234567E-323);
     compareDoubleBits(0x0000000000000001L, 4.9E-324);
     compareDoubleBits(0x8000000000000001L, -4.9E-324);
-    
+
     // random values between 0 and 1
     compareDoubleBits(0x3fe9b9bcd3c39dabL, 0.8039230476396616);
     compareDoubleBits(0x3fe669d4a374efc4L, 0.700418776752024);

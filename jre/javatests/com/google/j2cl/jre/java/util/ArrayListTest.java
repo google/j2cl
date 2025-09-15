@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-/**
- * Tests ArrayList class (and by extension, AbstractList).
- */
+/** Tests ArrayList class (and by extension, AbstractList). */
 @SuppressWarnings("unchecked")
 public class ArrayListTest extends ListTestBase {
 
@@ -35,17 +33,18 @@ public class ArrayListTest extends ListTestBase {
   }
 
   public void testAbstractListUnmodifiableFailedIteratorAddIndexCorruption() {
-    ListIterator<String> i = new AbstractList<String>() {
-      @Override
-      public int size() {
-        return 0;
-      }
+    ListIterator<String> i =
+        new AbstractList<String>() {
+          @Override
+          public int size() {
+            return 0;
+          }
 
-      @Override
-      public String get(int index) {
-        throw new IndexOutOfBoundsException();
-      }
-    }.listIterator();
+          @Override
+          public String get(int index) {
+            throw new IndexOutOfBoundsException();
+          }
+        }.listIterator();
     try {
       i.add("bar");
       fail();

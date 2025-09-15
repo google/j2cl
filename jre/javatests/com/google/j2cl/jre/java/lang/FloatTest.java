@@ -113,10 +113,10 @@ public class FloatTest extends TestCase {
     // be able to get POSITIVE/NEGATIVE_INFINITY for out-of-range values, and
     // since all math in JS is done in double we can't rely on getting the
     // exact value back.
-//    assertEquals("Can't parse MAX_VALUE", Float.MAX_VALUE,
-//        Float.parseFloat(String.valueOf(Float.MAX_VALUE)), 1e31);
-//    assertEquals("Can't parse MIN_VALUE", Float.MIN_VALUE,
-//        Float.parseFloat(String.valueOf(Float.MIN_VALUE)), Float.MIN_VALUE);
+    //    assertEquals("Can't parse MAX_VALUE", Float.MAX_VALUE,
+    //        Float.parseFloat(String.valueOf(Float.MAX_VALUE)), 1e31);
+    //    assertEquals("Can't parse MIN_VALUE", Float.MIN_VALUE,
+    //        Float.parseFloat(String.valueOf(Float.MIN_VALUE)), Float.MIN_VALUE);
 
     // Test NaN/Infinity - issue 7713
     assertTrue(Float.isNaN(Float.parseFloat("+NaN")));
@@ -408,7 +408,7 @@ public class FloatTest extends TestCase {
     assertEquals(bits, Float.floatToIntBits(Float.intBitsToFloat(bits)));
     compareFloats(value, Float.intBitsToFloat(Float.floatToIntBits(value)));
   }
- 
+
   private void compareFloats(float expected, float actual) {
     if (Float.isNaN(expected) || Float.isNaN(actual)) {
       if (Float.isNaN(expected) && Float.isNaN(actual)) {

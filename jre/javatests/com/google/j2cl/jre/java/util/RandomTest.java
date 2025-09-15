@@ -33,14 +33,14 @@ public class RandomTest extends TestCase {
     assertEquals((byte) 26, b[2]);
     assertEquals((byte) -69, b[3]);
     assertEquals((byte) -40, b[4]);
-    
+
     try {
       r.nextBytes(null);
       fail("Expected NullPointerException");
     } catch (NullPointerException e) {
     }
   }
-  
+
   public void testNextDouble() {
     Random r = new Random(1);
     assertEquals(0.7308781907032909, r.nextDouble());
@@ -49,7 +49,7 @@ public class RandomTest extends TestCase {
     assertEquals(0.3327170559595112, r.nextDouble());
     assertEquals(0.9677559094241207, r.nextDouble());
   }
-  
+
   public void testNextFloat() {
     Random r = new Random(1);
     assertEquals(0.7308782f, r.nextFloat());
@@ -58,7 +58,7 @@ public class RandomTest extends TestCase {
     assertEquals(0.40743977f, r.nextFloat());
     assertEquals(0.2077148f, r.nextFloat());
   }
-  
+
   public void testNextGaussian() {
     Random r = new Random(1);
     assertEquals(1.561581040188955, r.nextGaussian());
@@ -67,7 +67,7 @@ public class RandomTest extends TestCase {
     assertEquals(-0.6245401364066232, r.nextGaussian());
     assertEquals(-1.1182832102556484, r.nextGaussian());
   }
-  
+
   public void testNextInt() {
     Random r = new Random(1);
     assertEquals(-1155869325, r.nextInt());
@@ -75,20 +75,20 @@ public class RandomTest extends TestCase {
     assertEquals(1761283695, r.nextInt());
     assertEquals(1749940626, r.nextInt());
     assertEquals(892128508, r.nextInt());
-    
+
     try {
       r.nextInt(0);
       fail("Expected IlledgalArgumentException");
     } catch (IllegalArgumentException e) {
     }
-    
+
     try {
       r.nextInt(-1);
       fail("Expected IlledgalArgumentException");
     } catch (IllegalArgumentException e) {
     }
   }
-  
+
   public void testNextInt100() {
     Random r = new Random(1);
     assertEquals(85, r.nextInt(100));
@@ -96,8 +96,8 @@ public class RandomTest extends TestCase {
     assertEquals(47, r.nextInt(100));
     assertEquals(13, r.nextInt(100));
     assertEquals(54, r.nextInt(100));
-  }  
-  
+  }
+
   public void testNextInt128() {
     Random r = new Random(1);
     assertEquals(93, r.nextInt(128));
@@ -106,7 +106,7 @@ public class RandomTest extends TestCase {
     assertEquals(52, r.nextInt(128));
     assertEquals(26, r.nextInt(128));
   }
-  
+
   public void testNextLong() {
     Random r = new Random(1);
     assertEquals(-4964420948893066024L, r.nextLong());
@@ -115,33 +115,33 @@ public class RandomTest extends TestCase {
     assertEquals(6137546356583794141L, r.nextLong());
     assertEquals(-594798593157429144L, r.nextLong());
   }
-  
+
   public void testSetSeed() {
     Random r = new Random();
-    
+
     r.setSeed(1);
     byte[] b = new byte[1];
     r.nextBytes(b);
     assertEquals((byte) 115, b[0]);
-    
+
     r.setSeed(1);
     assertEquals(0.7308781907032909, r.nextDouble());
-    
+
     r.setSeed(1);
     assertEquals(0.7308782f, r.nextFloat());
-    
+
     r.setSeed(1);
     assertEquals(1.561581040188955, r.nextGaussian());
-    
+
     r.setSeed(1);
     assertEquals(-1155869325, r.nextInt());
-    
+
     r.setSeed(1);
     assertEquals(85, r.nextInt(100));
-    
+
     r.setSeed(1);
     assertEquals(93, r.nextInt(128));
-    
+
     r.setSeed(1);
     assertEquals(-4964420948893066024L, r.nextLong());
   }

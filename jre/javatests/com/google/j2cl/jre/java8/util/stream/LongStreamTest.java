@@ -30,9 +30,7 @@ import java.util.stream.DoubleStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-/**
- * Tests {@link LongStream}.
- */
+/** Tests {@link LongStream}. */
 public class LongStreamTest extends EmulTestBase {
 
   public void testEmptyStream() {

@@ -38,13 +38,9 @@ package com.google.j2cl.jre.java.math;
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
-/**
- * Class: java.math.BigInteger Methods: modPow, modInverse, and gcd.
- */
+/** Class: java.math.BigInteger Methods: modPow, modInverse, and gcd. */
 public class BigIntegerModPowTest extends EmulTestBase {
-  /**
-   * gcd: both numbers are zeros.
-   */
+  /** gcd: both numbers are zeros. */
   public void testGcdBothZeros() {
     byte rBytes[] = {0};
     BigInteger aNumber = new BigInteger("0");
@@ -59,9 +55,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
 
   /** gcd: the first number is longer. */
   public void testGcdFirstLonger() {
-    byte aBytes[] = {
-        -15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
-        -127};
+    byte aBytes[] = {-15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28, -127};
     byte bBytes[] = {-12, 1, 0, 0, 0, 23, 44, 55, 66};
     int aSign = 1;
     int bSign = 1;
@@ -77,9 +71,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * gcd: the first number is zero.
-   */
+  /** gcd: the first number is zero. */
   public void testGcdFirstZero() {
     byte aBytes[] = {0};
     byte bBytes[] = {15, 24, 123, 57, -15, 24, 123, 57, -15, 24, 123, 57};
@@ -97,9 +89,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * gcd: the first number is ZERO.
-   */
+  /** gcd: the first number is ZERO. */
   public void testGcdFirstZERO() {
     byte bBytes[] = {15, 24, 123, 57, -15, 24, 123, 57, -15, 24, 123, 57};
     int bSign = 1;
@@ -118,9 +108,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /** gcd: the second number is longer. */
   public void testGcdSecondLonger() {
     byte aBytes[] = {-12, 1, 0, 0, 0, 23, 44, 55, 66};
-    byte bBytes[] = {
-        -15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
-        -127};
+    byte bBytes[] = {-15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28, -127};
     int aSign = 1;
     int bSign = 1;
     byte rBytes[] = {7};
@@ -135,9 +123,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * gcd: the second number is zero.
-   */
+  /** gcd: the second number is zero. */
   public void testGcdSecondZero() {
     byte aBytes[] = {15, 24, 123, 57, -15, 24, 123, 57, -15, 24, 123, 57};
     byte bBytes[] = {0};
@@ -155,9 +141,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * modInverse: non-positive modulus.
-   */
+  /** modInverse: non-positive modulus. */
   public void testmodInverseException() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte mBytes[] = {1, 2, 3};
@@ -169,18 +153,14 @@ public class BigIntegerModPowTest extends EmulTestBase {
       aNumber = aNumber.modInverse(modulus);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
-      assertEquals("Improper exception message",
-          "BigInteger: modulus not positive", e.getMessage());
+      assertEquals(
+          "Improper exception message", "BigInteger: modulus not positive", e.getMessage());
     }
   }
 
-  /**
-   * modInverse: negative number.
-   */
+  /** modInverse: negative number. */
   public void testmodInverseNeg1() {
-    byte aBytes[] = {
-        15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
-        -127};
+    byte aBytes[] = {15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28, -127};
     byte mBytes[] = {2, 122, 45, 36, 100};
     int aSign = -1;
     int mSign = 1;
@@ -196,9 +176,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * modInverse: negative number (another case: x < 0).
-   */
+  /** modInverse: negative number (another case: x < 0). */
   public void testmodInverseNeg2() {
     byte aBytes[] = {-15, 24, 123, 57, -15, 24, 123, 57, -15, 24, 123, 57};
     byte mBytes[] = {122, 2, 4, 122, 2, 4};
@@ -214,13 +192,9 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * modInverse: non-invertible number.
-   */
+  /** modInverse: non-invertible number. */
   public void testmodInverseNonInvertible() {
-    byte aBytes[] = {
-        -15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
-        -127};
+    byte aBytes[] = {-15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28, -127};
     byte mBytes[] = {-12, 1, 0, 0, 0, 23, 44, 55, 66};
     int aSign = 1;
     int mSign = 1;
@@ -230,17 +204,13 @@ public class BigIntegerModPowTest extends EmulTestBase {
       aNumber = aNumber.modInverse(modulus);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "BigInteger not invertible.",
-          e.getMessage());
+      assertEquals("Improper exception message", "BigInteger not invertible.", e.getMessage());
     }
   }
 
-  /**
-   * modInverse: positive number.
-   */
+  /** modInverse: positive number. */
   public void testmodInversePos1() {
-    byte aBytes[] = {
-        24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28, -127};
+    byte aBytes[] = {24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28, -127};
     byte mBytes[] = {122, 45, 36, 100, 122, 45};
     int aSign = 1;
     int mSign = 1;
@@ -256,13 +226,9 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * modInverse: positive number (another case: a < 0).
-   */
+  /** modInverse: positive number (another case: a < 0). */
   public void testmodInversePos2() {
-    byte aBytes[] = {
-        15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
-        -127};
+    byte aBytes[] = {15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28, -127};
     byte mBytes[] = {2, 122, 45, 36, 100};
     int aSign = 1;
     int mSign = 1;
@@ -278,9 +244,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * modPow: non-positive modulus.
-   */
+  /** modPow: non-positive modulus. */
   public void testModPowException() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte eBytes[] = {1, 2, 3, 4, 5};
@@ -295,14 +259,12 @@ public class BigIntegerModPowTest extends EmulTestBase {
       aNumber = aNumber.modPow(exp, modulus);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
-      assertEquals("Improper exception message",
-          "BigInteger: modulus not positive", e.getMessage());
+      assertEquals(
+          "Improper exception message", "BigInteger: modulus not positive", e.getMessage());
     }
   }
 
-  /**
-   * modPow: negative exponent.
-   */
+  /** modPow: negative exponent. */
   public void testModPowNegExp() {
     byte aBytes[] = {-127, 100, 56, 7, 98, -1, 39, -128, 127, 75, 48, -7};
     byte eBytes[] = {27, -15, 65, 39};
@@ -323,9 +285,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * modPow: positive exponent.
-   */
+  /** modPow: positive exponent. */
   public void testModPowPosExp() {
     byte aBytes[] = {-127, 100, 56, 7, 98, -1, 39, -128, 127, 75, 48, -7};
     byte eBytes[] = {27, -15, 65, 39};

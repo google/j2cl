@@ -22,9 +22,7 @@ import static java.lang.Integer.MIN_VALUE;
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.IntSummaryStatistics;
 
-/**
- * Tests {@link IntSummaryStatistics}.
- */
+/** Tests {@link IntSummaryStatistics}. */
 public class IntSummaryStatisticsTest extends EmulTestBase {
 
   private IntSummaryStatistics stats;
@@ -61,13 +59,13 @@ public class IntSummaryStatisticsTest extends EmulTestBase {
     assertEquals(0L, stats.getSum());
 
     int[][] testData = {
-        //    anInt,       max,       min,       sum
-        {         1,         1,         1,         1 },
-        {        -1,         1,        -1,         0 },
-        {         2,         2,        -1,         2 },
-        {        -2,         2,        -2,         0 },
-        { MAX_VALUE, MAX_VALUE,        -2, MAX_VALUE },
-        { MIN_VALUE, MAX_VALUE, MIN_VALUE,        -1 },
+      // {anInt, max, min, sum}
+      {1, 1, 1, 1},
+      {-1, 1, -1, 0},
+      {2, 2, -1, 2},
+      {-2, 2, -2, 0},
+      {MAX_VALUE, MAX_VALUE, -2, MAX_VALUE},
+      {MIN_VALUE, MAX_VALUE, MIN_VALUE, -1},
     };
 
     for (int i = 0; i < testData.length; ++i) {

@@ -21,9 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map.Entry;
 
-/**
- * Tests for java.util.Map.Entry Java 8 API emulation.
- */
+/** Tests for java.util.Map.Entry Java 8 API emulation. */
 public class MapEntryTest extends EmulTestBase {
 
   private Entry<String, String> entry1;

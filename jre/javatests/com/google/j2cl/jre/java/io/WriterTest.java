@@ -27,20 +27,16 @@ public class WriterTest extends TestCase {
 
   private TestWriter writer;
 
-  /**
-   * Instatiable version of {@link java.io.Writer} for testing purposes.
-   */
+  /** Instatiable version of {@link java.io.Writer} for testing purposes. */
   private static class TestWriter extends Writer {
 
     private List<Character> outputChars = new ArrayList<>(1024);
 
     @Override
-    public void close() {
-    }
+    public void close() {}
 
     @Override
-    public void flush() {
-    }
+    public void flush() {}
 
     @Override
     public void write(char[] cbuf, int off, int len) {
@@ -49,11 +45,11 @@ public class WriterTest extends TestCase {
       }
     }
 
-   /**
-    * Converts {@code outputChars} to primitive character array.
-    *
-    * @return primitive char array
-    */
+    /**
+     * Converts {@code outputChars} to primitive character array.
+     *
+     * @return primitive char array
+     */
     public char[] toCharArray() {
       if (outputChars.isEmpty()) {
         return null;
@@ -76,15 +72,15 @@ public class WriterTest extends TestCase {
     Writer w = writer.append('a');
     assertEquals(writer, w);
 
-    assertTrue(Arrays.equals(new char[] { 'a' }, writer.toCharArray()));
+    assertTrue(Arrays.equals(new char[] {'a'}, writer.toCharArray()));
 
     w = writer.append('b');
     assertEquals(writer, w);
-    assertTrue(Arrays.equals(new char[] { 'a', 'b' }, writer.toCharArray()));
+    assertTrue(Arrays.equals(new char[] {'a', 'b'}, writer.toCharArray()));
 
     w = writer.append('c');
     assertEquals(writer, w);
-    assertTrue(Arrays.equals(new char[] { 'a', 'b', 'c' }, writer.toCharArray()));
+    assertTrue(Arrays.equals(new char[] {'a', 'b', 'c'}, writer.toCharArray()));
   }
 
   public void testAppendNullCharSequence() throws IOException {
@@ -156,17 +152,17 @@ public class WriterTest extends TestCase {
 
   public void testWriteChar() throws IOException {
     writer.write('a');
-    assertTrue(Arrays.equals(new char[] { 'a' }, writer.toCharArray()));
+    assertTrue(Arrays.equals(new char[] {'a'}, writer.toCharArray()));
 
     writer.write('b');
-    assertTrue(Arrays.equals(new char[] { 'a', 'b' }, writer.toCharArray()));
+    assertTrue(Arrays.equals(new char[] {'a', 'b'}, writer.toCharArray()));
 
     writer.write('c');
-    assertTrue(Arrays.equals(new char[] { 'a', 'b', 'c' }, writer.toCharArray()));
+    assertTrue(Arrays.equals(new char[] {'a', 'b', 'c'}, writer.toCharArray()));
   }
 
   public void testWriteEmptyCharArray() throws IOException {
-    final char[] charArray = new char[] { };
+    final char[] charArray = new char[] {};
     writer.write(charArray);
     assertNull(writer.toCharArray());
   }

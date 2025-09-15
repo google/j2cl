@@ -39,8 +39,8 @@ import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
 /**
- * Class: java.math.BigInteger Methods: intValue, longValue, toByteArray(),
- * valueOf(long val), floatValue(), doubleValue().
+ * Class: java.math.BigInteger Methods: intValue, longValue, toByteArray(), valueOf(long val),
+ * floatValue(), doubleValue().
  */
 public class BigIntegerConvertTest extends EmulTestBase {
 
@@ -63,10 +63,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     }
   }
 
-  /**
-   * Convert a negative number to a double value. The number's bit length is
-   * less than 64 bits.
-   */
+  /** Convert a negative number to a double value. The number's bit length is less than 64 bits. */
   public void testDoubleValueNegative1() {
     String a = "-27467238945";
     double result = -2.7467238945E10;
@@ -74,10 +71,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertTrue(aNumber == result);
   }
 
-  /**
-   * Convert a negative number to a double value. The number's bit length is
-   * inside [63, 1024].
-   */
+  /** Convert a negative number to a double value. The number's bit length is inside [63, 1024]. */
   public void testDoubleValueNegative2() {
     String a = "-2746723894572364578265426346273456972";
     double result = -2.7467238945723645E36;
@@ -85,10 +79,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertTrue(aNumber == result);
   }
 
-  /**
-   * Convert a negative number to a double value. The number's bit length is
-   * greater than 1024.
-   */
+  /** Convert a negative number to a double value. The number's bit length is greater than 1024. */
   public void testDoubleValueNegativeInfinity1() {
     String a =
         "-2746723894572364578265426346273456972283746872364768676747462342342342342342342342323423423423423423426767456345745293762384756238475634563456845634568934568347586346578648576478568456457634875673845678456786587345873645767456834756745763457863485768475678465783456702897830296720476846578634576384567845678346573465786457863";
@@ -97,62 +88,60 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a negative number to a double value. The exponent is 1023 and the
-   * mantissa is all 0s. The rounding bit is 0. The result is
-   * Double.NEGATIVE_INFINITY.
+   * Convert a negative number to a double value. The exponent is 1023 and the mantissa is all 0s.
+   * The rounding bit is 0. The result is Double.NEGATIVE_INFINITY.
    */
   public void testDoubleValueNegativeInfinity2() {
     byte[] a = {
-        -1, -1, -1, -1, -1, -1, -1, -8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+      -1, -1, -1, -1, -1, -1, -1, -8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0
+    };
     int aSign = -1;
     double aNumber = new BigInteger(aSign, a).doubleValue();
     assertTrue(aNumber == Double.NEGATIVE_INFINITY);
   }
 
   /**
-   * Convert a positive number to a double value. The exponent is 1023 and the
-   * mantissa is all 0s but the 54th bit (implicit) is 1.
+   * Convert a positive number to a double value. The exponent is 1023 and the mantissa is all 0s
+   * but the 54th bit (implicit) is 1.
    */
   public void testDoubleValueNegMantissaIsZero() {
     byte[] a = {
-        -128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0};
+      -128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0
+    };
     int aSign = -1;
     double aNumber = new BigInteger(aSign, a).doubleValue();
     assertTrue(aNumber == -8.98846567431158E307);
   }
 
   /**
-   * Convert a negative number to a double value. The exponent is 1023 and the
-   * mantissa is all 1s. The result is -Double.MAX_VALUE.
+   * Convert a negative number to a double value. The exponent is 1023 and the mantissa is all 1s.
+   * The result is -Double.MAX_VALUE.
    */
   public void testDoubleValueNegMaxValue() {
     byte[] a = {
-        0, -1, -1, -1, -1, -1, -1, -8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1};
+      0, -1, -1, -1, -1, -1, -1, -8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1
+    };
     int aSign = -1;
     double aNumber = new BigInteger(aSign, a).doubleValue();
     assertTrue(aNumber == -Double.MAX_VALUE);
   }
 
-  /**
-   * Convert a positive number to a double value. Rounding is NOT needed.
-   */
+  /** Convert a positive number to a double value. Rounding is NOT needed. */
   public void testDoubleValueNegNotRounded() {
     byte[] a = {-128, 1, 2, 3, 4, 5, -128, 23, 1, -3, -5};
     int aSign = -1;
@@ -161,9 +150,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertTrue(aNumber == result);
   }
 
-  /**
-   * Convert a positive number to a double value. Rounding is needed.
-   */
+  /** Convert a positive number to a double value. Rounding is needed. */
   public void testDoubleValueNegRounded1() {
     byte[] a = {-128, 1, 2, 3, 4, 5, 60, 23, 1, -3, -5};
     int aSign = -1;
@@ -173,9 +160,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a double value. Rounding is needed. The
-   * rounding bit is 1 and the next bit to the left is 0 but some of dropped
-   * bits are 1s.
+   * Convert a positive number to a double value. Rounding is needed. The rounding bit is 1 and the
+   * next bit to the left is 0 but some of dropped bits are 1s.
    */
   public void testDoubleValueNegRounded2() {
     byte[] a = {-128, 1, 2, 3, 4, 5, 36, 23, 1, -3, -5};
@@ -185,10 +171,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertTrue(aNumber == result);
   }
 
-  /**
-   * Convert a positive number to a double value. The number's length is less
-   * than 64 bits.
-   */
+  /** Convert a positive number to a double value. The number's length is less than 64 bits. */
   public void testDoubleValuePositive1() {
     String a = "27467238945";
     double result = 2.7467238945E10;
@@ -196,10 +179,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertTrue(aNumber == result);
   }
 
-  /**
-   * Convert a positive number to a double value. The number's bit length is
-   * inside [63, 1024].
-   */
+  /** Convert a positive number to a double value. The number's bit length is inside [63, 1024]. */
   public void testDoubleValuePositive2() {
     String a = "2746723894572364578265426346273456972";
     double result = 2.7467238945723645E36;
@@ -208,27 +188,23 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a double value. The exponent is 1023 and the
-   * mantissa is all 1s. The rounding bit is 1. The result is
-   * Double.POSITIVE_INFINITY.
+   * Convert a positive number to a double value. The exponent is 1023 and the mantissa is all 1s.
+   * The rounding bit is 1. The result is Double.POSITIVE_INFINITY.
    */
   public void testDoubleValuePositiveInfinity1() {
     byte[] a = {
-        -1, -1, -1, -1, -1, -1, -1, -8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+      -1, -1, -1, -1, -1, -1, -1, -8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0
+    };
     int aSign = 1;
     double aNumber = new BigInteger(aSign, a).doubleValue();
     assertTrue(aNumber == Double.POSITIVE_INFINITY);
   }
 
-  /**
-   * Convert a positive number to a double value. The number's bit length is
-   * greater than 1024.
-   */
+  /** Convert a positive number to a double value. The number's bit length is greater than 1024. */
   public void testDoubleValuePositiveInfinity2() {
     String a =
         "2746723894572364578265426346273456972283746872364768676747462342342342342342342342323423423423423423426767456345745293762384756238475634563456845634568934568347586346578648576478568456457634875673845678456786587345873645767456834756745763457863485768475678465783456702897830296720476846578634576384567845678346573465786457863";
@@ -237,17 +213,17 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a double value. The exponent is 1023 and the
-   * mantissa is all 0s but the 54th bit (implicit) is 1.
+   * Convert a positive number to a double value. The exponent is 1023 and the mantissa is all 0s
+   * but the 54th bit (implicit) is 1.
    */
   public void testDoubleValuePosMantissaIsZero() {
     byte[] a = {
-        -128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0};
+      -128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0
+    };
     int aSign = 1;
     double result = 8.98846567431158E307;
     double aNumber = new BigInteger(aSign, a).doubleValue();
@@ -255,27 +231,26 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a double value. The exponent is 1023 and the
-   * mantissa is all 1s. The rounding bit is 0. The result is Double.MAX_VALUE.
+   * Convert a positive number to a double value. The exponent is 1023 and the mantissa is all 1s.
+   * The rounding bit is 0. The result is Double.MAX_VALUE.
    */
   public void testDoubleValuePosMaxValue() {
     byte[] a = {
-        0, -1, -1, -1, -1, -1, -1, -8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        -1, -1, -1};
+      0, -1, -1, -1, -1, -1, -1, -8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+      -1, -1, -1
+    };
     int aSign = 1;
     double aNumber = new BigInteger(aSign, a).doubleValue();
     assertTrue(aNumber == Double.MAX_VALUE);
   }
 
-  /**
-   * Convert a positive number to a double value. Rounding is NOT needed.
-   */
+  /** Convert a positive number to a double value. Rounding is NOT needed. */
   public void testDoubleValuePosNotRounded() {
     byte[] a = {-128, 1, 2, 3, 4, 5, -128, 23, 1, -3, -5};
     int aSign = 1;
@@ -285,8 +260,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a double value. Rounding is needed. The
-   * rounding bit is 1 and the next bit to the left is 1.
+   * Convert a positive number to a double value. Rounding is needed. The rounding bit is 1 and the
+   * next bit to the left is 1.
    */
   public void testDoubleValuePosRounded1() {
     byte[] a = {-128, 1, 2, 3, 4, 5, 60, 23, 1, -3, -5};
@@ -297,9 +272,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a double value. Rounding is needed. The
-   * rounding bit is 1 and the next bit to the left is 0 but some of dropped
-   * bits are 1s.
+   * Convert a positive number to a double value. Rounding is needed. The rounding bit is 1 and the
+   * next bit to the left is 0 but some of dropped bits are 1s.
    */
   public void testDoubleValuePosRounded2() {
     byte[] a = {-128, 1, 2, 3, 4, 5, 36, 23, 1, -3, -5};
@@ -309,9 +283,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertTrue(aNumber == result);
   }
 
-  /**
-   * Return the double value of ZERO.
-   */
+  /** Return the double value of ZERO. */
   public void testDoubleValueZero() {
     String a = "0";
     double result = 0.0;
@@ -319,10 +291,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertTrue(aNumber == result);
   }
 
-  /**
-   * Convert a negative number to a float value. The number's bit length is less
-   * than 32 bits.
-   */
+  /** Convert a negative number to a float value. The number's bit length is less than 32 bits. */
   public void testFloatValueBug2482() {
     String a = "2147483649";
     float result = 2.14748365E9f;
@@ -331,37 +300,30 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a negative number to a float value. The value is near
-   * Float.MAX_VALUE, but since all calculation in JS is done in double
-   * precision, it can't be completely accurate about passing that value
-   * through.
+   * Convert a negative number to a float value. The value is near Float.MAX_VALUE, but since all
+   * calculation in JS is done in double precision, it can't be completely accurate about passing
+   * that value through.
    */
   public void testFloatValueNearNegMaxValue() {
-    byte[] a = {
-        0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    byte[] a = {0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int aSign = -1;
     float aNumber = new BigInteger(aSign, a).floatValue();
     assertEquals(-3.4028235e38, aNumber, 1e31);
   }
 
   /**
-   * Convert a positive number to a float value. The value is near
-   * Float.MAX_VALUE, but since all calculation in JS is done in double
-   * precision, it can't be completely accurate about passing that value
-   * through.
+   * Convert a positive number to a float value. The value is near Float.MAX_VALUE, but since all
+   * calculation in JS is done in double precision, it can't be completely accurate about passing
+   * that value through.
    */
   public void testFloatValueNearPosMaxValue() {
-    byte[] a = {
-        0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    byte[] a = {0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int aSign = 1;
     float aNumber = new BigInteger(aSign, a).floatValue();
     assertEquals(3.4028235e38, aNumber, 1e31);
   }
 
-  /**
-   * Convert a negative number to a float value. The number's bit length is less
-   * than 32 bits.
-   */
+  /** Convert a negative number to a float value. The number's bit length is less than 32 bits. */
   public void testFloatValueNegative1() {
     String a = "-27467238";
     float result = -2.7467238E7f;
@@ -369,10 +331,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals("incorrect value", result, aNumber, 1);
   }
 
-  /**
-   * Convert a negative number to a double value. The number's bit length
-   * is inside [63, 1024].
-   */
+  /** Convert a negative number to a double value. The number's bit length is inside [63, 1024]. */
   public void testFloatValueNegative2() {
     String a = "-27467238945723645782";
     float result = -2.7467239E19f;
@@ -380,10 +339,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals("incorrect value", result, aNumber, 1e12);
   }
 
-  /**
-   * Convert a negative number to a float value. The number's bit length is
-   * greater than 127.
-   */
+  /** Convert a negative number to a float value. The number's bit length is greater than 127. */
   public void testFloatValueNegativeInfinity1() {
     String a =
         "-2746723894572364578265426346273456972283746872364768676747462342342342342342342342323423423423423423426767456345745293762384756238475634563456845634568934568347586346578648576478568456457634875673845678456786587345873645767456834756745763457863485768475678465783456702897830296720476846578634576384567845678346573465786457863";
@@ -392,21 +348,19 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a negative number to a float value. The exponent is 1023 and the
-   * mantissa is all 0s. The rounding bit is 0. The result is
-   * Float.NEGATIVE_INFINITY.
+   * Convert a negative number to a float value. The exponent is 1023 and the mantissa is all 0s.
+   * The rounding bit is 0. The result is Float.NEGATIVE_INFINITY.
    */
   public void testFloatValueNegativeInfinity2() {
-    byte[] a = {
-        0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    byte[] a = {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     int aSign = -1;
     float aNumber = new BigInteger(aSign, a).floatValue();
     assertEquals(Float.NEGATIVE_INFINITY, aNumber);
   }
 
   /**
-   * Convert a positive number to a double value. The exponent is 1023 and the
-   * mantissa is all 0s but the 54th bit (implicit) is 1.
+   * Convert a positive number to a double value. The exponent is 1023 and the mantissa is all 0s
+   * but the 54th bit (implicit) is 1.
    */
   public void testFloatValueNegMantissaIsZero() {
     byte[] a = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -415,9 +369,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(Float.NEGATIVE_INFINITY, aNumber);
   }
 
-  /**
-   * Convert a positive number to a float value. Rounding is NOT needed.
-   */
+  /** Convert a positive number to a float value. Rounding is NOT needed. */
   public void testFloatValueNegNotRounded() {
     byte[] a = {-128, 1, 2, 3, 4, 5, 60, 23, 1, -3, -5};
     int aSign = -1;
@@ -426,9 +378,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber, 1e19);
   }
 
-  /**
-   * Convert a positive number to a float value. Rounding is needed.
-   */
+  /** Convert a positive number to a float value. Rounding is needed. */
   public void testFloatValueNegRounded1() {
     byte[] a = {-128, 1, -1, -4, 4, 5, 60, 23, 1, -3, -5};
     int aSign = -1;
@@ -438,9 +388,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a float value. Rounding is needed. The
-   * rounding bit is 1 and the next bit to the left is 0 but some of dropped
-   * bits are 1s.
+   * Convert a positive number to a float value. Rounding is needed. The rounding bit is 1 and the
+   * next bit to the left is 0 but some of dropped bits are 1s.
    */
   public void testFloatValueNegRounded2() {
     byte[] a = {-128, 1, 2, -128, 4, 5, 60, 23, 1, -3, -5};
@@ -451,33 +400,28 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a negative number beyond Float.MAX_VALUE, ensuring that it is
-   * converted to Float.NEGATIVE_INFINITY.
+   * Convert a negative number beyond Float.MAX_VALUE, ensuring that it is converted to
+   * Float.NEGATIVE_INFINITY.
    */
   public void testFloatValuePastNegMaxValue() {
-    byte[] a = {
-        0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    byte[] a = {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     int aSign = -1;
     float aNumber = new BigInteger(aSign, a).floatValue();
     assertEquals(Float.NEGATIVE_INFINITY, aNumber);
   }
 
   /**
-   * Convert a positive number beyond Float.MAX_VALUE, ensuring that it is
-   * converted to Float.POSITIVE_INFINITY.
+   * Convert a positive number beyond Float.MAX_VALUE, ensuring that it is converted to
+   * Float.POSITIVE_INFINITY.
    */
   public void testFloatValuePastPosMaxValue() {
-    byte[] a = {
-        0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    byte[] a = {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     int aSign = 1;
     float aNumber = new BigInteger(aSign, a).floatValue();
     assertEquals(Float.POSITIVE_INFINITY, aNumber);
   }
 
-  /**
-   * Convert a positive number to a float value. The number's length is less
-   * than 32 bits.
-   */
+  /** Convert a positive number to a float value. The number's length is less than 32 bits. */
   public void testFloatValuePositive1() {
     String a = "27467238";
     float result = 2.7467238E7f;
@@ -485,10 +429,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber);
   }
 
-  /**
-   * Convert a positive number to a float value. The number's bit length is
-   * inside [32, 127].
-   */
+  /** Convert a positive number to a float value. The number's bit length is inside [32, 127]. */
   public void testFloatValuePositive2() {
     String a = "27467238945723645782";
     float result = 2.7467239E19f;
@@ -497,35 +438,31 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a float value. The exponent is 1023 and the
-   * mantissa is all 1s. The rounding bit is 1. The result is
-   * Float.POSITIVE_INFINITY.
+   * Convert a positive number to a float value. The exponent is 1023 and the mantissa is all 1s.
+   * The rounding bit is 1. The result is Float.POSITIVE_INFINITY.
    */
   public void testFloatValuePositiveInfinity1() {
-    byte[] a = {
-        0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    byte[] a = {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     int aSign = 1;
     float aNumber = new BigInteger(aSign, a).floatValue();
     assertEquals(Float.POSITIVE_INFINITY, aNumber);
   }
 
-  /**
-   * Convert a positive number to a float value. The number's bit length is
-   * greater than 127.
-   */
+  /** Convert a positive number to a float value. The number's bit length is greater than 127. */
   public void testFloatValuePositiveInfinity2() {
-    String a = "274672389457236457826542634627345697228374687236476867674746234"
-        + "23423423423423423423234234234234234234267674563457452937623847562384"
-        + "75634563456845634568934568347586346578648576478568456457634875673845"
-        + "67845678658734587364576745683475674576345786348576847567846578345670"
-        + "2897830296720476846578634576384567845678346573465786457863";
+    String a =
+        "274672389457236457826542634627345697228374687236476867674746234"
+            + "23423423423423423423234234234234234234267674563457452937623847562384"
+            + "75634563456845634568934568347586346578648576478568456457634875673845"
+            + "67845678658734587364576745683475674576345786348576847567846578345670"
+            + "2897830296720476846578634576384567845678346573465786457863";
     float aNumber = new BigInteger(a).floatValue();
     assertEquals(Float.POSITIVE_INFINITY, aNumber);
   }
 
   /**
-   * Convert a positive number to a float value. The exponent is 1023 and the
-   * mantissa is all 0s but the 54th bit (implicit) is 1.
+   * Convert a positive number to a float value. The exponent is 1023 and the mantissa is all 0s but
+   * the 54th bit (implicit) is 1.
    */
   public void testFloatValuePosMantissaIsZero() {
     byte[] a = {-128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -535,9 +472,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber, 1e31);
   }
 
-  /**
-   * Convert a positive number to a float value. Rounding is NOT needed.
-   */
+  /** Convert a positive number to a float value. Rounding is NOT needed. */
   public void testFloatValuePosNotRounded() {
     byte[] a = {-128, 1, 2, 3, 4, 5, 60, 23, 1, -3, -5};
     int aSign = 1;
@@ -547,8 +482,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a float value. Rounding is needed. The
-   * rounding bit is 1 and the next bit to the left is 1.
+   * Convert a positive number to a float value. Rounding is needed. The rounding bit is 1 and the
+   * next bit to the left is 1.
    */
   public void testFloatValuePosRounded1() {
     byte[] a = {-128, 1, -1, -4, 4, 5, 60, 23, 1, -3, -5};
@@ -559,9 +494,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * Convert a positive number to a float value. Rounding is needed. The
-   * rounding bit is 1 and the next bit to the left is 0 but some of dropped
-   * bits are 1s.
+   * Convert a positive number to a float value. Rounding is needed. The rounding bit is 1 and the
+   * next bit to the left is 0 but some of dropped bits are 1s.
    */
   public void testFloatValuePosRounded2() {
     byte[] a = {-128, 1, 2, -128, 4, 5, 60, 23, 1, -3, -5};
@@ -571,9 +505,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber, 1e19);
   }
 
-  /**
-   * Return the float value of ZERO.
-   */
+  /** Return the float value of ZERO. */
   public void testFloatValueZero() {
     String a = "0";
     float result = 0.0f;
@@ -581,10 +513,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber);
   }
 
-  /**
-   * Convert a negative BigInteger to an integer value. The low digit is
-   * negative.
-   */
+  /** Convert a negative BigInteger to an integer value. The low digit is negative. */
   public void testIntValueNegative1() {
     byte aBytes[] = {12, 56, 100, -2, -76, -128, 45, 91, 3};
     int sign = -1;
@@ -593,10 +522,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(resInt, aNumber);
   }
 
-  /**
-   * Convert a negative BigInteger to an integer value. The low digit is
-   * negative.
-   */
+  /** Convert a negative BigInteger to an integer value. The low digit is negative. */
   public void testIntValueNegative2() {
     byte aBytes[] = {-12, 56, 100};
     int result = -771996;
@@ -604,10 +530,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber);
   }
 
-  /**
-   * Convert a negative BigInteger to an integer value. The low digit is
-   * positive.
-   */
+  /** Convert a negative BigInteger to an integer value. The low digit is positive. */
   public void testIntValueNegative3() {
     byte aBytes[] = {12, 56, 100, -2, -76, 127, 45, 91, 3};
     int sign = -1;
@@ -620,10 +543,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(Integer.MIN_VALUE, BigInteger.valueOf(Integer.MIN_VALUE).intValue());
   }
 
-  /**
-   * Convert a positive BigInteger to an integer value. The low digit is
-   * positive
-   */
+  /** Convert a positive BigInteger to an integer value. The low digit is positive */
   public void testIntValuePositive1() {
     byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3};
     int resInt = 1496144643;
@@ -631,10 +551,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(resInt, aNumber);
   }
 
-  /**
-   * Convert a positive BigInteger to an integer value. The low digit is
-   * positive
-   */
+  /** Convert a positive BigInteger to an integer value. The low digit is positive */
   public void testIntValuePositive2() {
     byte aBytes[] = {12, 56, 100};
     int resInt = 800868;
@@ -642,10 +559,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(resInt, aNumber);
   }
 
-  /**
-   * Convert a positive BigInteger to an integer value. The low digit is
-   * negative.
-   */
+  /** Convert a positive BigInteger to an integer value. The low digit is negative. */
   public void testIntValuePositive3() {
     byte aBytes[] = {56, 13, 78, -12, -5, 56, 100};
     int sign = 1;
@@ -673,10 +587,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     }
   }
 
-  /**
-   * Convert a number to a negative long value The BigInteger is longer than
-   * int.
-   */
+  /** Convert a number to a negative long value The BigInteger is longer than int. */
   public void testLongValueNegative1() {
     byte aBytes[] = {12, -1, 100, -2, -76, -128, 45, 91, 3};
     long result = -43630045168837885L;
@@ -684,9 +595,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber);
   }
 
-  /**
-   * Convert a number to a negative long value The number fits in a long.
-   */
+  /** Convert a number to a negative long value The number fits in a long. */
   public void testLongValueNegative2() {
     byte aBytes[] = {-12, 56, 100, 45, -101, 45, 98};
     long result = -3315696807498398L;
@@ -694,10 +603,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber);
   }
 
-  /**
-   * Convert a BigInteger to a positive long value The BigInteger is longer than
-   * int.
-   */
+  /** Convert a BigInteger to a positive long value The BigInteger is longer than int. */
   public void testLongValuePositive1() {
     byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, 120, -34, -12, 45, 98};
     long result = 3268209772258930018L;
@@ -705,9 +611,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(result, aNumber);
   }
 
-  /**
-   * Convert a number to a positive long value The number fits in a long.
-   */
+  /** Convert a number to a positive long value The number fits in a long. */
   public void testLongValuePositive2() {
     byte aBytes[] = {12, 56, 100, 18, -105, 34, -18, 45};
     long result = 880563758158769709L;
@@ -753,9 +657,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     }
   }
 
-  /**
-   * valueOf (long val): convert Integer.MAX_VALUE to a BigInteger.
-   */
+  /** valueOf (long val): convert Integer.MAX_VALUE to a BigInteger. */
   public void testValueOfIntegerMax() {
     long longVal = Integer.MAX_VALUE;
     BigInteger aNumber = BigInteger.valueOf(longVal);
@@ -768,9 +670,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, aNumber.signum());
   }
 
-  /**
-   * valueOf (long val): convert Integer.MIN_VALUE to a BigInteger.
-   */
+  /** valueOf (long val): convert Integer.MIN_VALUE to a BigInteger. */
   public void testValueOfIntegerMin() {
     long longVal = Integer.MIN_VALUE;
     BigInteger aNumber = BigInteger.valueOf(longVal);
@@ -783,9 +683,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, aNumber.signum());
   }
 
-  /**
-   * valueOf (long val): convert Long.MAX_VALUE to a BigInteger.
-   */
+  /** valueOf (long val): convert Long.MAX_VALUE to a BigInteger. */
   public void testValueOfLongMax() {
     long longVal = Long.MAX_VALUE;
     BigInteger aNumber = BigInteger.valueOf(longVal);
@@ -798,9 +696,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, aNumber.signum());
   }
 
-  /**
-   * valueOf (long val): convert Long.MIN_VALUE to a BigInteger.
-   */
+  /** valueOf (long val): convert Long.MIN_VALUE to a BigInteger. */
   public void testValueOfLongMin() {
     long longVal = Long.MIN_VALUE;
     BigInteger aNumber = BigInteger.valueOf(longVal);
@@ -813,9 +709,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, aNumber.signum());
   }
 
-  /**
-   * valueOf (long val): convert a negative long value to a BigInteger.
-   */
+  /** valueOf (long val): convert a negative long value to a BigInteger. */
   public void testValueOfLongNegative1() {
     long longVal = -268209772258930018L;
     BigInteger aNumber = BigInteger.valueOf(longVal);
@@ -829,8 +723,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * valueOf (long val): convert a negative long value to a BigInteger. The long
-   * value fits in integer.
+   * valueOf (long val): convert a negative long value to a BigInteger. The long value fits in
+   * integer.
    */
   public void testValueOfLongNegative2() {
     long longVal = -58930018L;
@@ -844,9 +738,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, aNumber.signum());
   }
 
-  /**
-   * valueOf (long val): convert a positive long value to a BigInteger.
-   */
+  /** valueOf (long val): convert a positive long value to a BigInteger. */
   public void testValueOfLongPositive1() {
     long longVal = 268209772258930018L;
     BigInteger aNumber = BigInteger.valueOf(longVal);
@@ -860,8 +752,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   }
 
   /**
-   * valueOf (long val): convert a positive long value to a BigInteger. The long
-   * value fits in integer.
+   * valueOf (long val): convert a positive long value to a BigInteger. The long value fits in
+   * integer.
    */
   public void testValueOfLongPositive2() {
     long longVal = 58930018L;
@@ -875,9 +767,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, aNumber.signum());
   }
 
-  /**
-   * valueOf (long val): convert a zero long value to a BigInteger.
-   */
+  /** valueOf (long val): convert a zero long value to a BigInteger. */
   public void testValueOfLongZero() {
     long longVal = 0L;
     BigInteger aNumber = BigInteger.valueOf(longVal);

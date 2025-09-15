@@ -24,9 +24,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * Test JRE emulation of BigDecimal.
- */
+/** Test JRE emulation of BigDecimal. */
 @RunWith(Suite.class)
 @SuiteClasses({
   BigDecimalArithmeticTest.class,
@@ -35,4 +33,4 @@ import org.junit.runners.Suite.SuiteClasses;
   BigDecimalConvertTest.class,
   BigDecimalScaleOperationsTest.class,
 })
-public class BigDecimalSuite { }
+public class BigDecimalSuite {}

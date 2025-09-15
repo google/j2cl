@@ -55,7 +55,7 @@ public class CollectionsTest extends EmulTestBase {
         list, l -> l.sort((s1, s2) -> Integer.valueOf(s2) - Integer.valueOf(s1)));
     assertUnmodifiableContract(list, l -> l.subList(0, 0).remove(0));
   }
- 
+
   private void doTestModificationsToListViaIterator(List<String> list) {
     assertUnmodifiableContractThroughIterator(list, i -> i.add("4"));
     assertUnmodifiableContractThroughIterator(list, i -> i.remove());

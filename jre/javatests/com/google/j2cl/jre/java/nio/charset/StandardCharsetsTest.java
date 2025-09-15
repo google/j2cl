@@ -20,9 +20,7 @@ import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Unit test for the {@link java.nio.charset.StandardCharsets} emulated class.
- */
+/** Unit test for the {@link java.nio.charset.StandardCharsets} emulated class. */
 public class StandardCharsetsTest extends EmulTestBase {
 
   public void testIso88591() {

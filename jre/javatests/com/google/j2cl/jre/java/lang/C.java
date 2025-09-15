@@ -15,9 +15,7 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-/**
- * Constants shared between various tests.
- */
+/** Constants shared between various tests. */
 public class C {
   public static String FLOAT_STRING = "123.4599";
   public static String DOUBLE_STRING = "123.4599";
@@ -27,8 +25,7 @@ public class C {
   public static String CHAR_STRING = "d";
   public static String CHAR_ARRAY_STRING = "abcdef";
   public static String CHAR_ARRAY_STRING_SUB = "bcde";
-  public static char[] CHAR_ARRAY_VALUE = new char[] {
-      'a', 'b', 'c', 'd', 'e', 'f'};
+  public static char[] CHAR_ARRAY_VALUE = new char[] {'a', 'b', 'c', 'd', 'e', 'f'};
   public static String FALSE_STRING = "false";
   public static boolean FALSE_VALUE = false;
   public static boolean TRUE_VALUE = true;

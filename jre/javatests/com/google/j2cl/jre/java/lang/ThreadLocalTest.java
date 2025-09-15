@@ -17,9 +17,7 @@ package com.google.j2cl.jre.java.lang;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
 
-/**
- * Tests for {@link java.lang.ThreadLocal}.
- */
+/** Tests for {@link java.lang.ThreadLocal}. */
 public class ThreadLocalTest extends EmulTestBase {
 
   public void testGetSet() {

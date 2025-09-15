@@ -61,7 +61,8 @@ public abstract class JsThrowableTestBase extends TestCase {
 
   protected static Thrower createNativeThrower(final Object e) {
     return new Thrower() {
-      @Override public void throwException() {
+      @Override
+      public void throwException() {
         throwNative(e);
       }
     };

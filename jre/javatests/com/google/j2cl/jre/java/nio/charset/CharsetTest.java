@@ -22,9 +22,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
 
-/**
- * Unit test for the {@link java.nio.charset.Charset} emulated class.
- */
+/** Unit test for the {@link java.nio.charset.Charset} emulated class. */
 public class CharsetTest extends EmulTestBase {
 
   public void testIso88591() {

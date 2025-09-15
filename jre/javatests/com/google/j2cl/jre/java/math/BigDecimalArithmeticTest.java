@@ -40,13 +40,9 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-/**
- * Class: java.math.BigDecimal Methods: add, subtract, multiply, divide.
- */
+/** Class: java.math.BigDecimal Methods: add, subtract, multiply, divide. */
 public class BigDecimalArithmeticTest extends EmulTestBase {
-  /**
-   * Add two numbers of different scales; the first is negative.
-   */
+  /** Add two numbers of different scales; the first is negative. */
   public void testAddDiffScaleNegPos() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -15;
@@ -61,9 +57,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Add two numbers of different scales; the first is positive.
-   */
+  /** Add two numbers of different scales; the first is positive. */
   public void testAddDiffScalePosNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -78,9 +72,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Add two numbers of different scales; the first is positive.
-   */
+  /** Add two numbers of different scales; the first is positive. */
   public void testAddDiffScalePosPos() {
     String a = "100";
     int aScale = 15;
@@ -95,9 +87,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Add two zeroes of different scales; the first is negative.
-   */
+  /** Add two zeroes of different scales; the first is negative. */
   public void testAddDiffScaleZeroZero() {
     String a = "0";
     int aScale = -15;
@@ -112,9 +102,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Add two numbers of equal negative scales.
-   */
+  /** Add two numbers of equal negative scales. */
   public void testAddEqualScaleNegNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -10;
@@ -129,9 +117,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Add two numbers of equal positive scales.
-   */
+  /** Add two numbers of equal positive scales. */
   public void testAddEqualScalePosPos() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 10;
@@ -146,10 +132,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Add two numbers of different scales using MathContext; the first is
-   * positive.
-   */
+  /** Add two numbers of different scales using MathContext; the first is positive. */
   public void testAddMathContextDiffScalePosNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -165,9 +148,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Add two numbers of equal negative scales using MathContext.
-   */
+  /** Add two numbers of equal negative scales using MathContext. */
   public void testAddMathContextEqualScaleNegNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -10;
@@ -183,9 +164,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Add two numbers of equal positive scales using MathContext.
-   */
+  /** Add two numbers of equal positive scales using MathContext. */
   public void testAddMathContextEqualScalePosPos() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 10;
@@ -214,8 +193,8 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
 
   /**
    * Test the approximate scale is computed correctly.
-   * <p>
-   * See https://issues.apache.org/jira/browse/HARMONY-6406
+   *
+   * <p>See https://issues.apache.org/jira/browse/HARMONY-6406
    */
   public void testApproxScale() {
     BigDecimal decVal = BigDecimal.TEN.multiply(new BigDecimal("0.1"));
@@ -223,9 +202,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals(0, compare);
   }
 
-  /**
-   * divideAndRemainder(BigDecimal).
-   */
+  /** divideAndRemainder(BigDecimal). */
   public void testDivideAndRemainder1() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -244,16 +221,16 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect remainder scale", remScale, result[1].scale());
   }
 
-  /**
-   * divideAndRemainder(BigDecimal).
-   */
+  /** divideAndRemainder(BigDecimal). */
   public void testDivideAndRemainder2() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = -45;
     String b = "134432345432345748766876876723342238476237823787879183470";
     int bScale = 70;
-    String res = "2779231855146903674747706830969461168692256919247547952"
-        + "2608549363170374005512836303475980101168105698072946555" + "6862849";
+    String res =
+        "2779231855146903674747706830969461168692256919247547952"
+            + "2608549363170374005512836303475980101168105698072946555"
+            + "6862849";
     int resScale = 0;
     String rem = "3.4935796954060524114470681810486417234751682675102093970E-15";
     int remScale = 70;
@@ -266,9 +243,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect remainder scale", remScale, result[1].scale());
   }
 
-  /**
-   * divideAndRemainder(BigDecimal, MathContext).
-   */
+  /** divideAndRemainder(BigDecimal, MathContext). */
   public void testDivideAndRemainderMathContextDOWN() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -290,9 +265,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect remainder scale", remScale, result[1].scale());
   }
 
-  /**
-   * divideAndRemainder(BigDecimal, MathContext).
-   */
+  /** divideAndRemainder(BigDecimal, MathContext). */
   public void testDivideAndRemainderMathContextUP() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -314,9 +287,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect remainder scale", remScale, result[1].scale());
   }
 
-  /**
-   * Divide to BigDecimal.
-   */
+  /** Divide to BigDecimal. */
   public void testDivideBigDecimal1() {
     String a = "-37361671119238118911893939591735";
     int aScale = 10;
@@ -331,9 +302,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide to BigDecimal.
-   */
+  /** Divide to BigDecimal. */
   public void testDivideBigDecimal2() {
     String a = "-37361671119238118911893939591735";
     int aScale = 10;
@@ -348,9 +317,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, MathContext).
-   */
+  /** divide(BigDecimal, MathContext). */
   public void testDivideBigDecimalScaleMathContextCEILING() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 15;
@@ -368,9 +335,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, MathContext).
-   */
+  /** divide(BigDecimal, MathContext). */
   public void testDivideBigDecimalScaleMathContextDOWN() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 15;
@@ -388,9 +353,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, MathContext).
-   */
+  /** divide(BigDecimal, MathContext). */
   public void testDivideBigDecimalScaleMathContextFLOOR() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 15;
@@ -408,9 +371,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, MathContext).
-   */
+  /** divide(BigDecimal, MathContext). */
   public void testDivideBigDecimalScaleMathContextHALF_DOWN() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -428,9 +389,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, MathContext).
-   */
+  /** divide(BigDecimal, MathContext). */
   public void testDivideBigDecimalScaleMathContextHALF_EVEN() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -448,9 +407,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, MathContext).
-   */
+  /** divide(BigDecimal, MathContext). */
   public void testDivideBigDecimalScaleMathContextHALF_UP() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -468,9 +425,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, MathContext).
-   */
+  /** divide(BigDecimal, MathContext). */
   public void testDivideBigDecimalScaleMathContextUP() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 15;
@@ -488,9 +443,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, scale, RoundingMode).
-   */
+  /** divide(BigDecimal, scale, RoundingMode). */
   public void testDivideBigDecimalScaleRoundingModeCEILING() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 100;
@@ -506,9 +459,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", newScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, scale, RoundingMode).
-   */
+  /** divide(BigDecimal, scale, RoundingMode). */
   public void testDivideBigDecimalScaleRoundingModeDOWN() {
     String a = "-37361671119238118911893939591735";
     int aScale = 10;
@@ -524,9 +475,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", newScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, scale, RoundingMode).
-   */
+  /** divide(BigDecimal, scale, RoundingMode). */
   public void testDivideBigDecimalScaleRoundingModeFLOOR() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 100;
@@ -542,9 +491,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", newScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, scale, RoundingMode).
-   */
+  /** divide(BigDecimal, scale, RoundingMode). */
   public void testDivideBigDecimalScaleRoundingModeHALF_DOWN() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 5;
@@ -560,9 +507,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", newScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, scale, RoundingMode).
-   */
+  /** divide(BigDecimal, scale, RoundingMode). */
   public void testDivideBigDecimalScaleRoundingModeHALF_EVEN() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 5;
@@ -578,9 +523,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", newScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, scale, RoundingMode).
-   */
+  /** divide(BigDecimal, scale, RoundingMode). */
   public void testDivideBigDecimalScaleRoundingModeHALF_UP() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = -51;
@@ -588,9 +531,10 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int bScale = 45;
     int newScale = 3;
     RoundingMode rm = RoundingMode.HALF_UP;
-    String c = "50000260373164286401361913262100972218038099522752460421"
-        + "05959924024355721031761947728703598332749334086415670525"
-        + "3761096961.670";
+    String c =
+        "50000260373164286401361913262100972218038099522752460421"
+            + "05959924024355721031761947728703598332749334086415670525"
+            + "3761096961.670";
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
     BigDecimal result = aNumber.divide(bNumber, newScale, rm);
@@ -598,9 +542,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", newScale, result.scale());
   }
 
-  /**
-   * divide(BigDecimal, scale, RoundingMode).
-   */
+  /** divide(BigDecimal, scale, RoundingMode). */
   public void testDivideBigDecimalScaleRoundingModeUP() {
     String a = "-37361671119238118911893939591735";
     int aScale = 10;
@@ -616,9 +558,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", newScale, result.scale());
   }
 
-  /**
-   * Divide by zero.
-   */
+  /** Divide by zero. */
   public void testDivideByZero() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -628,14 +568,11 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
       aNumber = aNumber.divide(bNumber);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Division by zero",
-          e.getMessage());
+      assertEquals("Improper exception message", "Division by zero", e.getMessage());
     }
   }
 
-  /**
-   * Divide with invalid rounding mode.
-   */
+  /** Divide with invalid rounding mode. */
   public void testDivideExceptionInvalidRM() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -647,14 +584,11 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
       aNumber = aNumber.divide(bNumber, 100);
       fail("IllegalArgumentException has not been caught");
     } catch (IllegalArgumentException e) {
-      assertEquals("Improper exception message", "Invalid rounding mode",
-          e.getMessage());
+      assertEquals("Improper exception message", "Invalid rounding mode", e.getMessage());
     }
   }
 
-  /**
-   * Divide with ROUND_UNNECESSARY.
-   */
+  /** Divide with ROUND_UNNECESSARY. */
   public void testDivideExceptionRM() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -666,14 +600,11 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
       aNumber = aNumber.divide(bNumber, BigDecimal.ROUND_UNNECESSARY);
       fail("ArithmeticException has not been caught");
     } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Rounding necessary",
-          e.getMessage());
+      assertEquals("Improper exception message", "Rounding necessary", e.getMessage());
     }
   }
 
-  /**
-   * Divide: local variable exponent is equal to zero.
-   */
+  /** Divide: local variable exponent is equal to zero. */
   public void testDivideExpEqualsZero() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -15;
@@ -683,15 +614,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -5;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_CEILING);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_CEILING);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: local variable exponent is greater than zero.
-   */
+  /** Divide: local variable exponent is greater than zero. */
   public void testDivideExpGreaterZero() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -15;
@@ -701,15 +629,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -5;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_CEILING);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_CEILING);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: local variable exponent is less than zero.
-   */
+  /** Divide: local variable exponent is less than zero. */
   public void testDivideExpLessZero() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -719,16 +644,15 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -5;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_CEILING);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_CEILING);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
   /**
    * BigDecimal.divide with a scale that's too large.
-   * 
-   * Regression test for HARMONY-6271
+   *
+   * <p>Regression test for HARMONY-6271
    */
   public void testDivideLargeScale() {
     BigDecimal arg1 = new BigDecimal("320.0E+2147483647");
@@ -741,9 +665,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     }
   }
 
-  /**
-   * Divide: remainder is zero.
-   */
+  /** Divide: remainder is zero. */
   public void testDivideRemainderIsZero() {
     String a = "8311389578904553209874735431110";
     int aScale = -15;
@@ -753,15 +675,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -5;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_CEILING);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_CEILING);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_CEILING, result is negative.
-   */
+  /** Divide: rounding mode is ROUND_CEILING, result is negative. */
   public void testDivideRoundCeilingNeg() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -771,15 +690,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_CEILING);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_CEILING);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_CEILING, result is positive.
-   */
+  /** Divide: rounding mode is ROUND_CEILING, result is positive. */
   public void testDivideRoundCeilingPos() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -789,15 +705,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_CEILING);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_CEILING);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_DOWN, result is negative.
-   */
+  /** Divide: rounding mode is ROUND_DOWN, result is negative. */
   public void testDivideRoundDownNeg() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -812,9 +725,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_DOWN, result is positive.
-   */
+  /** Divide: rounding mode is ROUND_DOWN, result is positive. */
   public void testDivideRoundDownPos() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -829,9 +740,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_FLOOR, result is negative.
-   */
+  /** Divide: rounding mode is ROUND_FLOOR, result is negative. */
   public void testDivideRoundFloorNeg() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -841,15 +750,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_FLOOR);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_FLOOR);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_FLOOR, result is positive.
-   */
+  /** Divide: rounding mode is ROUND_FLOOR, result is positive. */
   public void testDivideRoundFloorPos() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -859,16 +765,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_FLOOR);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_FLOOR);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_DOWN, result is negative;
-   * distance = -1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_DOWN, result is negative; distance = -1. */
   public void testDivideRoundHalfDownNeg() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -878,15 +780,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_DOWN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_DOWN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_DOWN, result is negative; distance = 1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_DOWN, result is negative; distance = 1. */
   public void testDivideRoundHalfDownNeg1() {
     String a = "-92948782094488478231212478987482988798104576347813847567949855464535634534563456";
     int aScale = -24;
@@ -896,15 +795,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_DOWN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_DOWN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_UP, result is negative; equidistant.
-   */
+  /** Divide: rounding mode is ROUND_HALF_UP, result is negative; equidistant. */
   public void testDivideRoundHalfDownNeg2() {
     String a = "-37361671119238118911893939591735";
     int aScale = 10;
@@ -914,16 +810,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -5;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_DOWN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_DOWN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_DOWN, result is positive;
-   * distance = -1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_DOWN, result is positive; distance = -1. */
   public void testDivideRoundHalfDownPos() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -933,15 +825,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_DOWN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_DOWN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_DOWN, result is positive; distance = 1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_DOWN, result is positive; distance = 1. */
   public void testDivideRoundHalfDownPos1() {
     String a = "92948782094488478231212478987482988798104576347813847567949855464535634534563456";
     int aScale = -24;
@@ -951,16 +840,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_DOWN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_DOWN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_EVEN, result is negative;
-   * distance = -1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_EVEN, result is negative; distance = -1. */
   public void testDivideRoundHalfEvenNeg() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -970,15 +855,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_EVEN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_EVEN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_EVEN, result is negative; distance = 1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_EVEN, result is negative; distance = 1. */
   public void testDivideRoundHalfEvenNeg1() {
     String a = "-92948782094488478231212478987482988798104576347813847567949855464535634534563456";
     int aScale = -24;
@@ -988,15 +870,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_EVEN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_EVEN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_EVEN, result is negative; equidistant.
-   */
+  /** Divide: rounding mode is ROUND_HALF_EVEN, result is negative; equidistant. */
   public void testDivideRoundHalfEvenNeg2() {
     String a = "-37361671119238118911893939591735";
     int aScale = 10;
@@ -1006,15 +885,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -5;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_EVEN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_EVEN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_EVEN, result is positive; distance = -1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_EVEN, result is positive; distance = -1. */
   public void testDivideRoundHalfEvenPos() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -1024,15 +900,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_EVEN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_EVEN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_EVEN, result is positive; distance = 1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_EVEN, result is positive; distance = 1. */
   public void testDivideRoundHalfEvenPos1() {
     String a = "92948782094488478231212478987482988798104576347813847567949855464535634534563456";
     int aScale = -24;
@@ -1042,15 +915,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_EVEN);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_EVEN);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_UP, result is negative; distance = -1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_UP, result is negative; distance = -1. */
   public void testDivideRoundHalfUpNeg() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -1060,15 +930,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_UP);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_UP);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_UP, result is negative; distance = 1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_UP, result is negative; distance = 1. */
   public void testDivideRoundHalfUpNeg1() {
     String a = "-92948782094488478231212478987482988798104576347813847567949855464535634534563456";
     int aScale = -24;
@@ -1078,15 +945,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_UP);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_UP);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_UP, result is negative; equidistant.
-   */
+  /** Divide: rounding mode is ROUND_HALF_UP, result is negative; equidistant. */
   public void testDivideRoundHalfUpNeg2() {
     String a = "-37361671119238118911893939591735";
     int aScale = 10;
@@ -1096,15 +960,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -5;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_UP);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_UP);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_UP, result is positive; distance = -1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_UP, result is positive; distance = -1. */
   public void testDivideRoundHalfUpPos() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -1114,15 +975,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_UP);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_UP);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_HALF_UP, result is positive; distance = 1.
-   */
+  /** Divide: rounding mode is ROUND_HALF_UP, result is positive; distance = 1. */
   public void testDivideRoundHalfUpPos1() {
     String a = "92948782094488478231212478987482988798104576347813847567949855464535634534563456";
     int aScale = -24;
@@ -1132,15 +990,12 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int resScale = -21;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result = aNumber.divide(bNumber, resScale,
-        BigDecimal.ROUND_HALF_UP);
+    BigDecimal result = aNumber.divide(bNumber, resScale, BigDecimal.ROUND_HALF_UP);
     assertEquals("incorrect value", c, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_UP, result is negative.
-   */
+  /** Divide: rounding mode is ROUND_UP, result is negative. */
   public void testDivideRoundUpNeg() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -1155,9 +1010,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * Divide: rounding mode is ROUND_UP, result is positive.
-   */
+  /** Divide: rounding mode is ROUND_UP, result is positive. */
   public void testDivideRoundUpPos() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -1184,10 +1037,8 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     quotient = a.divide(BigDecimal.ONE.negate());
     assertEquals("-6", quotient.toString());
   }
-  
-  /**
-   * divideToIntegralValue(BigDecimal).
-   */
+
+  /** divideToIntegralValue(BigDecimal). */
   public void testDivideToIntegralValue() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -1202,9 +1053,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divideToIntegralValue(BigDecimal, MathContext).
-   */
+  /** divideToIntegralValue(BigDecimal, MathContext). */
   public void testDivideToIntegralValueMathContextDOWN() {
     String a =
         "3736186567876876578956958769675785435673453453653543654354365435675671119238118911893939591735";
@@ -1223,9 +1072,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * divideToIntegralValue(BigDecimal, MathContext).
-   */
+  /** divideToIntegralValue(BigDecimal, MathContext). */
   public void testDivideToIntegralValueMathContextUP() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -1257,18 +1104,16 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     try {
       quotient = BigDecimal.ONE.divide(BigDecimal.ZERO);
       fail("Expected ArithmeticException, divide by zero");
-    } catch (ArithmeticException expected) {      
+    } catch (ArithmeticException expected) {
     }
     try {
       quotient = BigDecimal.ONE.divideToIntegralValue(BigDecimal.ZERO);
       fail("Expected ArithmeticException, divide by zero");
-    } catch (ArithmeticException expected) {      
+    } catch (ArithmeticException expected) {
     }
   }
 
-  /**
-   * Multiply two numbers of different scales.
-   */
+  /** Multiply two numbers of different scales. */
   public void testMultiplyDiffScaleNegPos() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -15;
@@ -1284,9 +1129,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Multiply two numbers of different scales.
-   */
+  /** Multiply two numbers of different scales. */
   public void testMultiplyDiffScalePosNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 10;
@@ -1302,9 +1145,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Multiply two numbers of negative scales.
-   */
+  /** Multiply two numbers of negative scales. */
   public void testMultiplyEqualScaleNegNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -15;
@@ -1320,9 +1161,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Multiply two numbers of different scales using MathContext.
-   */
+  /** Multiply two numbers of different scales using MathContext. */
   public void testMultiplyMathContextDiffScaleNegPos() {
     String a = "488757458676796558668876576576579097029810457634781384756794987";
     int aScale = -63;
@@ -1338,9 +1177,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Multiply two numbers of different scales using MathContext.
-   */
+  /** Multiply two numbers of different scales using MathContext. */
   public void testMultiplyMathContextDiffScalePosNeg() {
     String a = "987667796597975765768768767866756808779810457634781384756794987";
     int aScale = 100;
@@ -1356,9 +1193,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Multiply two numbers of positive scales using MathContext.
-   */
+  /** Multiply two numbers of positive scales using MathContext. */
   public void testMultiplyMathContextScalePosPos() {
     String a = "97665696756578755423325476545428779810457634781384756794987";
     int aScale = -25;
@@ -1374,9 +1209,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Multiply two numbers of positive scales.
-   */
+  /** Multiply two numbers of positive scales. */
   public void testMultiplyScalePosPos() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -1392,17 +1225,16 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * pow(int).
-   */
+  /** pow(int). */
   public void testPow() {
     String a = "123121247898748298842980";
     int aScale = 10;
     int exp = 10;
-    String c = "8004424019039195734129783677098845174704975003788210729597"
-        + "4875206425711159855030832837132149513512555214958035390490"
-        + "798520842025826.594316163502809818340013610490541783276343"
-        + "6514490899700151256484355936102754469438371850240000000000";
+    String c =
+        "8004424019039195734129783677098845174704975003788210729597"
+            + "4875206425711159855030832837132149513512555214958035390490"
+            + "798520842025826.594316163502809818340013610490541783276343"
+            + "6514490899700151256484355936102754469438371850240000000000";
     int cScale = 100;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal result = aNumber.pow(exp);
@@ -1410,9 +1242,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * pow(0).
-   */
+  /** pow(0). */
   public void testPow0() {
     String a = "123121247898748298842980";
     int aScale = 10;
@@ -1425,9 +1255,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * pow(int, MathContext).
-   */
+  /** pow(int, MathContext). */
   public void testPowMathContext() {
     String a = "123121247898748298842980";
     int aScale = 10;
@@ -1441,9 +1269,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * remainder(BigDecimal).
-   */
+  /** remainder(BigDecimal). */
   public void testRemainder1() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -1458,9 +1284,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect quotient scale", resScale, result.scale());
   }
 
-  /**
-   * remainder(BigDecimal).
-   */
+  /** remainder(BigDecimal). */
   public void testRemainder2() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = -45;
@@ -1475,9 +1299,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect quotient scale", resScale, result.scale());
   }
 
-  /**
-   * remainder(BigDecimal, MathContext).
-   */
+  /** remainder(BigDecimal, MathContext). */
   public void testRemainderMathContextHALF_DOWN() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = -45;
@@ -1495,9 +1317,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect quotient scale", resScale, result.scale());
   }
 
-  /**
-   * remainder(BigDecimal, MathContext).
-   */
+  /** remainder(BigDecimal, MathContext). */
   public void testRemainderMathContextHALF_UP() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -1515,38 +1335,34 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect quotient scale", resScale, result.scale());
   }
 
-  /**
-   * Test gwt-java-math issues 4 and 5.
-   */
+  /** Test gwt-java-math issues 4 and 5. */
   public void testRoundMathContextCEILING() {
     BigDecimal val = BigDecimal.valueOf(1.5);
     BigDecimal result = val.round(new MathContext(1, RoundingMode.CEILING));
     assertEquals("2", result.toString());
     assertEquals(0, result.scale());
     assertEquals(1, result.precision());
-    
+
     // 1 digit left of dp, 14 scale + 1
     val = BigDecimal.valueOf(5.43445663479765);
     val =
-        val.setScale(val.scale() + 1, RoundingMode.CEILING).round(new
-        MathContext(1, RoundingMode.CEILING));
+        val.setScale(val.scale() + 1, RoundingMode.CEILING)
+            .round(new MathContext(1, RoundingMode.CEILING));
 
-     // 1 digit left of dp, 13 scale + 2
+    // 1 digit left of dp, 13 scale + 2
     val = BigDecimal.valueOf(5.4344566347976);
     val =
-        val.setScale(val.scale() + 2, RoundingMode.CEILING).round(new
-        MathContext(1, RoundingMode.CEILING));
-    
+        val.setScale(val.scale() + 2, RoundingMode.CEILING)
+            .round(new MathContext(1, RoundingMode.CEILING));
+
     // 2 digits left of dp, 13 scale + 2
     BigDecimal test = BigDecimal.valueOf(12.4344566347976);
     test =
-        test.setScale(test.scale() + 1, RoundingMode.CEILING).round(new
-        MathContext(1, RoundingMode.CEILING));
+        test.setScale(test.scale() + 1, RoundingMode.CEILING)
+            .round(new MathContext(1, RoundingMode.CEILING));
   }
 
-  /**
-   * round(BigDecimal, MathContext).
-   */
+  /** round(BigDecimal, MathContext). */
   public void testRoundMathContextHALF_DOWN() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = -45;
@@ -1561,9 +1377,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect quotient scale", resScale, result.scale());
   }
 
-  /**
-   * round(BigDecimal, MathContext).
-   */
+  /** round(BigDecimal, MathContext). */
   public void testRoundMathContextHALF_UP() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -1578,9 +1392,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect quotient scale", resScale, result.scale());
   }
 
-  /**
-   * round(BigDecimal, MathContext) when precision = 0.
-   */
+  /** round(BigDecimal, MathContext) when precision = 0. */
   public void testRoundMathContextPrecision0() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -1594,9 +1406,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect quotient scale", aScale, result.scale());
   }
 
-  /**
-   * Subtract two numbers of different scales; the first is negative.
-   */
+  /** Subtract two numbers of different scales; the first is negative. */
   public void testSubtractDiffScaleNegPos() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -15;
@@ -1611,9 +1421,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Subtract two numbers of different scales; the first is positive.
-   */
+  /** Subtract two numbers of different scales; the first is positive. */
   public void testSubtractDiffScalePosNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -1628,9 +1436,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Subtract two numbers of equal negative scales.
-   */
+  /** Subtract two numbers of equal negative scales. */
   public void testSubtractEqualScaleNegNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -10;
@@ -1645,9 +1451,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Subtract two numbers of equal positive scales.
-   */
+  /** Subtract two numbers of equal positive scales. */
   public void testSubtractEqualScalePosPos() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 10;
@@ -1662,10 +1466,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Subtract two numbers of different scales using MathContext; the first is
-   * negative.
-   */
+  /** Subtract two numbers of different scales using MathContext; the first is negative. */
   public void testSubtractMathContextDiffScaleNegPos() {
     String a = "986798656676789766678767876078779810457634781384756794987";
     int aScale = -15;
@@ -1681,10 +1482,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Subtract two numbers of different scales using MathContext; the first is
-   * positive.
-   */
+  /** Subtract two numbers of different scales using MathContext; the first is positive. */
   public void testSubtractMathContextDiffScalePosNeg() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 15;
@@ -1700,9 +1498,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * Subtract two numbers of equal positive scales using MathContext.
-   */
+  /** Subtract two numbers of equal positive scales using MathContext. */
   public void testSubtractMathContextEqualScalePosPos() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 10;
@@ -1718,9 +1514,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", cScale, result.scale());
   }
 
-  /**
-   * ulp() of a negative BigDecimal.
-   */
+  /** ulp() of a negative BigDecimal. */
   public void testUlpNeg() {
     String a = "-3736186567876876578956958765675671119238118911893939591735";
     int aScale = 45;
@@ -1732,9 +1526,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * ulp() of a positive BigDecimal.
-   */
+  /** ulp() of a positive BigDecimal. */
   public void testUlpPos() {
     String a = "3736186567876876578956958765675671119238118911893939591735";
     int aScale = -45;
@@ -1746,9 +1538,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * ulp() of a negative BigDecimal.
-   */
+  /** ulp() of a negative BigDecimal. */
   public void testUlpZero() {
     String a = "0";
     int aScale = 2;
@@ -1760,9 +1550,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
-  /**
-   * ZERO.pow(0).
-   */
+  /** ZERO.pow(0). */
   public void testZeroPow0() {
     String c = "1";
     int cScale = 0;

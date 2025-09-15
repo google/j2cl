@@ -19,9 +19,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.LinkedList;
 
-/**
- * Unit test for the {@link java.io.OutputStream} emulated class.
- */
+/** Unit test for the {@link java.io.OutputStream} emulated class. */
 public class OutputStreamTest extends OutputStreamBaseTest {
 
   private static LinkedList<Byte> outputBytes;
@@ -35,7 +33,8 @@ public class OutputStreamTest extends OutputStreamBaseTest {
   @Override
   protected OutputStream createDefaultOutputStream() {
     return new OutputStream() {
-      @Override public void write(int b) {
+      @Override
+      public void write(int b) {
         outputBytes.add((byte) b);
       }
     };

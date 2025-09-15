@@ -25,7 +25,6 @@ public class StackTest extends TestCase {
   private static final int TEST_SEARCH_SIZE = 10;
   private static final int TEST_SIZE = 10;
 
-
   /** Tests clone on Stacks. */
   public void testClone() {
     Stack<Integer> large = createLargeStack();
@@ -36,9 +35,8 @@ public class StackTest extends TestCase {
   }
 
   /**
-   * Tests pushing many elements into a stack, and seeing if they come out in
-   * order. Also verifies that we get the correct exception when we run out of
-   * elements, and tests peek
+   * Tests pushing many elements into a stack, and seeing if they come out in order. Also verifies
+   * that we get the correct exception when we run out of elements, and tests peek
    */
   public void testCountAndOrderWithPeek() {
     Stack<Integer> large = new Stack<Integer>();
@@ -83,14 +81,12 @@ public class StackTest extends TestCase {
     assertTrue(testStack.peek() == item);
   }
 
-  /**
-   * Tests all combinations of search for a stack that attains a max size of
-   * TEST_SEARCH_SIZE.
-   */
+  /** Tests all combinations of search for a stack that attains a max size of TEST_SEARCH_SIZE. */
   public void testSearch() {
     Stack<Integer> searchStack = new Stack<Integer>();
     checkEmptiness(searchStack);
-    for (int stackSizeIncreasing = 0; stackSizeIncreasing < TEST_SEARCH_SIZE;
+    for (int stackSizeIncreasing = 0;
+        stackSizeIncreasing < TEST_SEARCH_SIZE;
         stackSizeIncreasing++) {
       for (int theInt = 0; theInt < stackSizeIncreasing; theInt++) {
         assertEquals(
@@ -101,7 +97,8 @@ public class StackTest extends TestCase {
       }
       searchStack.push(stackSizeIncreasing);
     }
-    for (int stackSizeDecreasing = TEST_SEARCH_SIZE - 1; stackSizeDecreasing >= 0;
+    for (int stackSizeDecreasing = TEST_SEARCH_SIZE - 1;
+        stackSizeDecreasing >= 0;
         stackSizeDecreasing--) {
       for (int theInt = TEST_SEARCH_SIZE - 1; theInt > stackSizeDecreasing; theInt--) {
         assertEquals("Search decreasing not found", -1, searchStack.search(theInt));
@@ -130,7 +127,7 @@ public class StackTest extends TestCase {
     }
     return large;
   }
-  
+
   private Stack<String> createStack() {
     Stack<String> stack = new Stack<String>();
     stack.push("1");

@@ -112,18 +112,10 @@ public class CollectorsTest extends EmulTestBase {
         collectingAndThen(toList(), Function.identity());
     // same test as toList():
     // same items (allow dups)
-    applyItems(
-        Arrays.asList("a", "a"),
-        listIdentityCollector,
-        "a", "a"
-    );
+    applyItems(Arrays.asList("a", "a"), listIdentityCollector, "a", "a");
 
     // ordered
-    applyItems(
-        Arrays.asList("a", "b"),
-        listIdentityCollector,
-        "a", "b"
-    );
+    applyItems(Arrays.asList("a", "b"), listIdentityCollector, "a", "b");
     assertZeroItemsCollectedAs(Collections.emptyList(), listIdentityCollector);
     assertSingleItemCollectedAs(Collections.singletonList("a"), listIdentityCollector, "a");
 
@@ -210,35 +202,19 @@ public class CollectorsTest extends EmulTestBase {
     Collector<String, ?, List<String>> identityMapping = mapping(Function.identity(), toList());
     // same test as toList():
     // same items (allow dups)
-    applyItems(
-        Arrays.asList("a", "a"),
-        identityMapping,
-        "a", "a"
-    );
+    applyItems(Arrays.asList("a", "a"), identityMapping, "a", "a");
 
     // ordered
-    applyItems(
-        Arrays.asList("a", "b"),
-        identityMapping,
-        "a", "b"
-    );
+    applyItems(Arrays.asList("a", "b"), identityMapping, "a", "b");
     assertZeroItemsCollectedAs(Collections.emptyList(), identityMapping);
     assertSingleItemCollectedAs(Collections.singletonList("a"), identityMapping, "a");
 
     Collector<Integer, ?, List<String>> numberMapping = mapping(s -> "#" + s, toList());
     // poke the same tests as list, make sure the mapper is run
-    applyItems(
-        Arrays.asList("#1", "#2"),
-        numberMapping,
-        1, 2
-    );
+    applyItems(Arrays.asList("#1", "#2"), numberMapping, 1, 2);
 
     // ordered
-    applyItems(
-        Arrays.asList("#1", "#2"),
-        numberMapping,
-        1, 2
-    );
+    applyItems(Arrays.asList("#1", "#2"), numberMapping, 1, 2);
     assertZeroItemsCollectedAs(Collections.emptyList(), numberMapping);
     assertSingleItemCollectedAs(Collections.singletonList("#10"), numberMapping, 10);
   }
@@ -354,14 +330,15 @@ public class CollectorsTest extends EmulTestBase {
     DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
     stats.accept(5.1);
     stats.accept(7);
-    BiPredicate<DoubleSummaryStatistics, DoubleSummaryStatistics> equals = (s1, s2) ->
-        s1.getSum() == s2.getSum()
-            && s1.getAverage() == s2.getAverage()
-            && s1.getCount() == s2.getCount()
-            && s1.getMin() == s2.getMin()
-            && s1.getMax() == s2.getMax();
+    BiPredicate<DoubleSummaryStatistics, DoubleSummaryStatistics> equals =
+        (s1, s2) ->
+            s1.getSum() == s2.getSum()
+                && s1.getAverage() == s2.getAverage()
+                && s1.getCount() == s2.getCount()
+                && s1.getMin() == s2.getMin()
+                && s1.getMax() == s2.getMax();
     applyItems(stats, c, 5.1, 7.0, equals);
-    applyItems(stats, c, 7.0, 5.1, equals);//probably unnecessary to run these backward
+    applyItems(stats, c, 7.0, 5.1, equals); // probably unnecessary to run these backward
 
     assertZeroItemsCollectedAs(new DoubleSummaryStatistics(), c, equals);
     stats = new DoubleSummaryStatistics();
@@ -374,12 +351,13 @@ public class CollectorsTest extends EmulTestBase {
     IntSummaryStatistics stats = new IntSummaryStatistics();
     stats.accept(2);
     stats.accept(10);
-    BiPredicate<IntSummaryStatistics, IntSummaryStatistics> equals = (s1, s2) ->
-        s1.getSum() == s2.getSum()
-            && s1.getAverage() == s2.getAverage()
-            && s1.getCount() == s2.getCount()
-            && s1.getMin() == s2.getMin()
-            && s1.getMax() == s2.getMax();
+    BiPredicate<IntSummaryStatistics, IntSummaryStatistics> equals =
+        (s1, s2) ->
+            s1.getSum() == s2.getSum()
+                && s1.getAverage() == s2.getAverage()
+                && s1.getCount() == s2.getCount()
+                && s1.getMin() == s2.getMin()
+                && s1.getMax() == s2.getMax();
     applyItems(stats, c, 2, 10, equals);
     applyItems(stats, c, 10, 2, equals);
 
@@ -394,12 +372,13 @@ public class CollectorsTest extends EmulTestBase {
     LongSummaryStatistics stats = new LongSummaryStatistics();
     stats.accept(2);
     stats.accept(10);
-    BiPredicate<LongSummaryStatistics, LongSummaryStatistics> equals = (s1, s2) ->
-        s1.getSum() == s2.getSum()
-            && s1.getAverage() == s2.getAverage()
-            && s1.getCount() == s2.getCount()
-            && s1.getMin() == s2.getMin()
-            && s1.getMax() == s2.getMax();
+    BiPredicate<LongSummaryStatistics, LongSummaryStatistics> equals =
+        (s1, s2) ->
+            s1.getSum() == s2.getSum()
+                && s1.getAverage() == s2.getAverage()
+                && s1.getCount() == s2.getCount()
+                && s1.getMin() == s2.getMin()
+                && s1.getMax() == s2.getMax();
     applyItems(stats, c, 2L, 10L, equals);
     applyItems(stats, c, 10L, 2L, equals);
 
@@ -437,18 +416,10 @@ public class CollectorsTest extends EmulTestBase {
     Collector<String, ?, List<String>> c = toList();
 
     // same items (allow dups)
-    applyItems(
-        Arrays.asList("a", "a"),
-        c,
-        "a", "a"
-    );
+    applyItems(Arrays.asList("a", "a"), c, "a", "a");
 
     // ordered
-    applyItems(
-        Arrays.asList("a", "b"),
-        c,
-        "a", "b"
-    );
+    applyItems(Arrays.asList("a", "b"), c, "a", "b");
     assertZeroItemsCollectedAs(Collections.emptyList(), c);
     assertSingleItemCollectedAs(Collections.singletonList("a"), c, "a");
   }
@@ -478,11 +449,15 @@ public class CollectorsTest extends EmulTestBase {
     assertSingleItemCollectedAs(Collections.singletonMap("a", "a"), c, "a");
 
     List<String> seen = new ArrayList<>();
-    c = toMap(Function.identity(), Function.identity(), (s, s2) -> {
-      seen.add("first: " + s);
-      seen.add("second: " + s2);
-      return s + "," + s2;
-    });
+    c =
+        toMap(
+            Function.identity(),
+            Function.identity(),
+            (s, s2) -> {
+              seen.add("first: " + s);
+              seen.add("second: " + s2);
+              return s + "," + s2;
+            });
     map = new HashMap<>();
     map.put("a", "a,a");
     applyItems(map, c, "a", "a");
@@ -575,18 +550,10 @@ public class CollectorsTest extends EmulTestBase {
     Collector<String, ?, Set<String>> c = toSet();
 
     // same items (no dups)
-    applyItems(
-        Collections.singleton("a"),
-        c,
-        "a", "a"
-    );
+    applyItems(Collections.singleton("a"), c, "a", "a");
 
     // different items
-    applyItems(
-        new HashSet<>(Arrays.asList("a", "b")),
-        c,
-        "a", "b"
-    );
+    applyItems(new HashSet<>(Arrays.asList("a", "b")), c, "a", "b");
 
     assertZeroItemsCollectedAs(Collections.emptySet(), c);
     assertSingleItemCollectedAs(Collections.singleton("a"), c, "a");

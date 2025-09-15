@@ -26,12 +26,10 @@ import junit.framework.TestCase;
 public class FilterOutputStreamTest extends TestCase {
 
   private static final byte[] BYTES_TO_WRITE = {
-      (byte) 0x10, (byte) 0x20, (byte) 0x30, (byte) 0x40, (byte) 0x50, (byte) 0x60
+    (byte) 0x10, (byte) 0x20, (byte) 0x30, (byte) 0x40, (byte) 0x50, (byte) 0x60
   };
 
-  /**
-   * Mock for {@link OutputStream}.
-   */
+  /** Mock for {@link OutputStream}. */
   private static class MockOutputStream extends OutputStream {
 
     // Flags for knowing whether or not the underlying stream methods have been called.
@@ -39,9 +37,7 @@ public class FilterOutputStreamTest extends TestCase {
     private boolean flushCalled;
     private boolean writeByteCalled;
 
-    /**
-     * Stores all the values written with {@code write(int b)}.
-     */
+    /** Stores all the values written with {@code write(int b)}. */
     private LinkedList<Byte> writtenBytes;
 
     private MockOutputStream() {

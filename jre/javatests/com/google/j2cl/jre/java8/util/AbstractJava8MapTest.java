@@ -45,10 +45,13 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
     assertNull(value);
     assertFalse(map.containsKey("a"));
 
-    value = map.compute("a", (k, v) -> {
-      assertNull(v);
-      return k.toUpperCase();
-    });
+    value =
+        map.compute(
+            "a",
+            (k, v) -> {
+              assertNull(v);
+              return k.toUpperCase();
+            });
     assertEquals("A", value);
     assertTrue(map.containsKey("a"));
     assertEquals("A", map.get("a"));
@@ -57,10 +60,13 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   public void testComputeIfAbsent() {
     Map<String, @Nullable String> map = createTestMap();
 
-    String value = map.computeIfAbsent("a", k -> {
-      fail();
-      return null;
-    });
+    String value =
+        map.computeIfAbsent(
+            "a",
+            k -> {
+              fail();
+              return null;
+            });
     assertEquals("A", value);
     assertTrue(map.containsKey("a"));
     assertEquals("A", map.get("a"));
@@ -89,10 +95,13 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
     assertNull(value);
     assertFalse(map.containsKey("a"));
 
-    value = map.computeIfPresent("a", (k, v) -> {
-      fail();
-      return null;
-    });
+    value =
+        map.computeIfPresent(
+            "a",
+            (k, v) -> {
+              fail();
+              return null;
+            });
     assertNull(value);
     assertFalse(map.containsKey("a"));
   }
@@ -102,11 +111,12 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
     Map<String, String> expected = new HashMap<>(testSample);
 
     assertEquals(expected.size(), map.size());
-    map.forEach((k, v) -> {
-      assertTrue(expected.containsKey(k));
-      assertEquals(expected.get(k), v);
-      expected.remove(k);
-    });
+    map.forEach(
+        (k, v) -> {
+          assertTrue(expected.containsKey(k));
+          assertEquals(expected.get(k), v);
+          expected.remove(k);
+        });
     assertTrue(expected.isEmpty());
   }
 
@@ -134,11 +144,15 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   public void testMerge() {
     Map<String, String> map = createTestMap();
 
-    String newValue = map.merge("a", "a", (currentValue, value) -> {
-      assertEquals("A", currentValue);
-      assertEquals("a", value);
-      return value;
-    });
+    String newValue =
+        map.merge(
+            "a",
+            "a",
+            (currentValue, value) -> {
+              assertEquals("A", currentValue);
+              assertEquals("a", value);
+              return value;
+            });
     assertEquals(newValue, "a");
     assertTrue(map.containsKey("a"));
     assertEquals("a", map.get("a"));
@@ -257,5 +271,4 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
   }
 
   protected abstract Map<String, String> createMap();
-
 }

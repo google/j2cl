@@ -38,24 +38,18 @@ package com.google.j2cl.jre.java.math;
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
-/**
- * Class: java.math.BigInteger Method: and.
- */
+/** Class: java.math.BigInteger Method: and. */
 public class BigIntegerAndTest extends EmulTestBase {
 
-  /**
-   * And for two negative numbers; the first is longer.
-   */
+  /** And for two negative numbers; the first is longer. */
   public void testNegNegFirstLonger() {
-    byte aBytes[] = {
-        -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
-        -25, -75};
+    byte aBytes[] = {-128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87, -25, -75};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     int aSign = -1;
     int bSign = -1;
     byte rBytes[] = {
-        -1, 127, -10, -57, -101, 1, 2, 2, 2, -96, -16, 8, -40, -59, 68, -88,
-        -88, 16, 73};
+      -1, 127, -10, -57, -101, 1, 2, 2, 2, -96, -16, 8, -40, -59, 68, -88, -88, 16, 73
+    };
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     BigInteger result = aNumber.and(bNumber);
@@ -67,19 +61,15 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, result.signum());
   }
 
-  /**
-   * And for two negative numbers; the first is shorter.
-   */
+  /** And for two negative numbers; the first is shorter. */
   public void testNegNegFirstShorter() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
-    byte bBytes[] = {
-        -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
-        -25, -75};
+    byte bBytes[] = {-128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87, -25, -75};
     int aSign = -1;
     int bSign = -1;
     byte rBytes[] = {
-        -1, 127, -10, -57, -101, 1, 2, 2, 2, -96, -16, 8, -40, -59, 68, -88,
-        -88, 16, 73};
+      -1, 127, -10, -57, -101, 1, 2, 2, 2, -96, -16, 8, -40, -59, 68, -88, -88, 16, 73
+    };
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     BigInteger result = aNumber.and(bNumber);
@@ -91,16 +81,13 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, result.signum());
   }
 
-  /**
-   * And for two negative numbers of the same length.
-   */
+  /** And for two negative numbers of the same length. */
   public void testNegNegSameLength() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     int aSign = -1;
     int bSign = -1;
-    byte rBytes[] = {
-        -1, 1, 2, 3, 3, 0, 65, -96, -48, -124, -60, 12, -40, -31, 97};
+    byte rBytes[] = {-1, 1, 2, 3, 3, 0, 65, -96, -48, -124, -60, 12, -40, -31, 97};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     BigInteger result = aNumber.and(bNumber);
@@ -112,9 +99,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, result.signum());
   }
 
-  /**
-   * And for a negative number and zero.
-   */
+  /** And for a negative number and zero. */
   public void testNegPos() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     byte bBytes[] = {0};
@@ -132,13 +117,9 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 0, result.signum());
   }
 
-  /**
-   * And for a negative and a positive numbers; the first is longer.
-   */
+  /** And for a negative and a positive numbers; the first is longer. */
   public void testNegPosFirstLonger() {
-    byte aBytes[] = {
-        -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
-        -25, -75};
+    byte aBytes[] = {-128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87, -25, -75};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     int aSign = -1;
     int bSign = 1;
@@ -154,19 +135,13 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for a negative and a positive numbers; the first is shorter.
-   */
+  /** And for a negative and a positive numbers; the first is shorter. */
   public void testNegPosFirstShorter() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
-    byte bBytes[] = {
-        -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
-        -25, -75};
+    byte bBytes[] = {-128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87, -25, -75};
     int aSign = -1;
     int bSign = 1;
-    byte rBytes[] = {
-        0, -128, 9, 56, 100, 0, 0, 1, 1, 90, 1, -32, 0, 10, -126, 21, 82, -31,
-        -95};
+    byte rBytes[] = {0, -128, 9, 56, 100, 0, 0, 1, 1, 90, 1, -32, 0, 10, -126, 21, 82, -31, -95};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     BigInteger result = aNumber.and(bNumber);
@@ -178,9 +153,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for two numbers of different signs and the same length.
-   */
+  /** And for two numbers of different signs and the same length. */
   public void testNegPosSameLength() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -198,9 +171,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for one and one.
-   */
+  /** And for one and one. */
   public void testOneOne() {
     BigInteger aNumber = BigInteger.ONE;
     BigInteger bNumber = BigInteger.ONE;
@@ -209,19 +180,13 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for a positive and a negative numbers; the first is longer.
-   */
+  /** And for a positive and a negative numbers; the first is longer. */
   public void testPosNegFirstLonger() {
-    byte aBytes[] = {
-        -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
-        -25, -75};
+    byte aBytes[] = {-128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87, -25, -75};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     int aSign = 1;
     int bSign = -1;
-    byte rBytes[] = {
-        0, -128, 9, 56, 100, 0, 0, 1, 1, 90, 1, -32, 0, 10, -126, 21, 82, -31,
-        -95};
+    byte rBytes[] = {0, -128, 9, 56, 100, 0, 0, 1, 1, 90, 1, -32, 0, 10, -126, 21, 82, -31, -95};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     BigInteger result = aNumber.and(bNumber);
@@ -233,14 +198,10 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for a positive and a negative numbers; the first is shorter.
-   */
+  /** And for a positive and a negative numbers; the first is shorter. */
   public void testPosNegFirstShorter() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
-    byte bBytes[] = {
-        -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
-        -25, -75};
+    byte bBytes[] = {-128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87, -25, -75};
     int aSign = 1;
     int bSign = -1;
     byte rBytes[] = {73, -92, -48, 4, 12, 6, 4, 32, 48, 64, 0, 8, 3};
@@ -255,9 +216,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for two numbers of different signs and the same length.
-   */
+  /** And for two numbers of different signs and the same length. */
   public void testPosNegSameLength() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -275,13 +234,9 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for two positive numbers; the first is longer.
-   */
+  /** And for two positive numbers; the first is longer. */
   public void testPosPosFirstLonger() {
-    byte aBytes[] = {
-        -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
-        -25, -75};
+    byte aBytes[] = {-128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87, -25, -75};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     int aSign = 1;
     int bSign = 1;
@@ -297,14 +252,10 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for two positive numbers; the first is shorter.
-   */
+  /** And for two positive numbers; the first is shorter. */
   public void testPosPosFirstShorter() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
-    byte bBytes[] = {
-        -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
-        -25, -75};
+    byte bBytes[] = {-128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87, -25, -75};
     int aSign = 1;
     int bSign = 1;
     byte rBytes[] = {0, -2, -76, 88, 44, 1, 2, 17, 35, 16, 9, 2, 5, 6, 21};
@@ -319,9 +270,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for two positive numbers of the same length.
-   */
+  /** And for two positive numbers of the same length. */
   public void testPosPosSameLength() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -339,9 +288,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for a positive number and zero.
-   */
+  /** And for a positive number and zero. */
   public void testPosZero() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     byte bBytes[] = {0};
@@ -359,9 +306,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 0, result.signum());
   }
 
-  /**
-   * Test for a special case.
-   */
+  /** Test for a special case. */
   public void testSpecialCase1() {
     byte aBytes[] = {-1, -1, -1, -1};
     byte bBytes[] = {5, -4, -3, -2};
@@ -379,9 +324,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, result.signum());
   }
 
-  /**
-   * Test for a special case.
-   */
+  /** Test for a special case. */
   public void testSpecialCase2() {
     byte aBytes[] = {-51};
     byte bBytes[] = {-52, -51, -50, -49, -48};
@@ -399,9 +342,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * And for zero and a negative number.
-   */
+  /** And for zero and a negative number. */
   public void testZeroNeg() {
     byte aBytes[] = {0};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -419,9 +360,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 0, result.signum());
   }
 
-  /**
-   * And for zero and one.
-   */
+  /** And for zero and one. */
   public void testZeroOne() {
     BigInteger aNumber = BigInteger.ZERO;
     BigInteger bNumber = BigInteger.ONE;
@@ -430,9 +369,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 0, result.signum());
   }
 
-  /**
-   * And for zero and a positive number.
-   */
+  /** And for zero and a positive number. */
   public void testZeroPos() {
     byte aBytes[] = {0};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -450,9 +387,7 @@ public class BigIntegerAndTest extends EmulTestBase {
     assertEquals("incorrect sign", 0, result.signum());
   }
 
-  /**
-   * And for zero and zero.
-   */
+  /** And for zero and zero. */
   public void testZeroZero() {
     byte aBytes[] = {0};
     byte bBytes[] = {0};

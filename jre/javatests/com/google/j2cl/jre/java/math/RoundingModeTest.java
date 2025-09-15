@@ -18,14 +18,12 @@ package com.google.j2cl.jre.java.math;
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.RoundingMode;
 
-/**
- * Tests for {@link RoundingMode}.
- */
+/** Tests for {@link RoundingMode}. */
 public class RoundingModeTest extends EmulTestBase {
 
   /**
-   * Check the order of the enum values.  This is important for serialization
-   * with a real JRE implementation.
+   * Check the order of the enum values. This is important for serialization with a real JRE
+   * implementation.
    */
   public void testValues() {
     RoundingMode[] values = RoundingMode.values();

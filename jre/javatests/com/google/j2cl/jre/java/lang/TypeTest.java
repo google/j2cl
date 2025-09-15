@@ -21,9 +21,7 @@ import junit.framework.TestCase;
 /** This is the test-case for {@link java.lang.reflect.Type} and {@link Class}. */
 public class TypeTest extends TestCase {
 
-  /**
-   * Tests that {@link Class} actually implements {@link java.lang.reflect.Type}.
-   */
+  /** Tests that {@link Class} actually implements {@link java.lang.reflect.Type}. */
   public void testClassImplementsType() {
     assertTrue(Object.class instanceof Type);
   }

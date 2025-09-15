@@ -155,10 +155,13 @@ public class OptionalIntTest extends TestCase {
     assertEquals(OTHER_REFERENCE, empty.orElseGet(() -> OTHER_REFERENCE));
 
     // non-empty case
-    assertEquals(REFERENCE, present.orElseGet(() -> {
-      fail("Optional must not execute supplier");
-      return OTHER_REFERENCE;
-    }));
+    assertEquals(
+        REFERENCE,
+        present.orElseGet(
+            () -> {
+              fail("Optional must not execute supplier");
+              return OTHER_REFERENCE;
+            }));
   }
 
   public void testOrElseThrow() {
@@ -183,10 +186,13 @@ public class OptionalIntTest extends TestCase {
     }
 
     // non-empty case
-    assertEquals(REFERENCE, present.orElseThrow(() -> {
-      fail("Optional must not execute supplier");
-      return new RuntimeException("should not execute");
-    }));
+    assertEquals(
+        REFERENCE,
+        present.orElseThrow(
+            () -> {
+              fail("Optional must not execute supplier");
+              return new RuntimeException("should not execute");
+            }));
   }
 
   public void testOrElseThrowNoArgs() {
@@ -224,5 +230,4 @@ public class OptionalIntTest extends TestCase {
     // non empty case
     assertEquals(Integer.hashCode(REFERENCE), present.hashCode());
   }
-
 }

@@ -205,10 +205,11 @@ public class OptionalTest extends TestCase {
       // expected
     }
 
-    empty.map(wrapped -> {
-      fail("Empty Optional must not execute mapper");
-      return "should not execute";
-    });
+    empty.map(
+        wrapped -> {
+          fail("Empty Optional must not execute mapper");
+          return "should not execute";
+        });
 
     // non-empty case
     try {
@@ -238,10 +239,11 @@ public class OptionalTest extends TestCase {
       // expected
     }
 
-    empty.flatMap(wrapped -> {
-      fail("Empty Optional must not execute mapper");
-      return Optional.of("should not execute");
-    });
+    empty.flatMap(
+        wrapped -> {
+          fail("Empty Optional must not execute mapper");
+          return Optional.of("should not execute");
+        });
 
     // non-empty case
     try {
@@ -334,10 +336,13 @@ public class OptionalTest extends TestCase {
     assertSame(OTHER_REFERENCE, empty.orElseGet(() -> OTHER_REFERENCE));
 
     // non-empty case
-    assertSame(REFERENCE, present.orElseGet(() -> {
-      fail("Optional must not execute supplier");
-      return OTHER_REFERENCE;
-    }));
+    assertSame(
+        REFERENCE,
+        present.orElseGet(
+            () -> {
+              fail("Optional must not execute supplier");
+              return OTHER_REFERENCE;
+            }));
   }
 
   @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
@@ -363,10 +368,13 @@ public class OptionalTest extends TestCase {
     }
 
     // non-empty case
-    assertSame(REFERENCE, present.orElseThrow(() -> {
-      fail("Optional must not execute supplier");
-      return new RuntimeException("should not execute");
-    }));
+    assertSame(
+        REFERENCE,
+        present.orElseThrow(
+            () -> {
+              fail("Optional must not execute supplier");
+              return new RuntimeException("should not execute");
+            }));
   }
 
   public void testOrElseThrowNoArgs() {
@@ -404,5 +412,4 @@ public class OptionalTest extends TestCase {
     // non empty case
     assertEquals(REFERENCE.hashCode(), present.hashCode());
   }
-
 }

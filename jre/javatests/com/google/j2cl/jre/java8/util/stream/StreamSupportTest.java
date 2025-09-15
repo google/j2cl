@@ -28,9 +28,7 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-/**
- * Tests {@link java.util.stream.StreamSupport}.
- */
+/** Tests {@link java.util.stream.StreamSupport}. */
 public class StreamSupportTest extends EmulTestBase {
 
   public void testDoubleStream() {

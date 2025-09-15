@@ -20,9 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
-/**
- * Unit test for the {@link java.io.ByteArrayInputStream} emulated class.
- */
+/** Unit test for the {@link java.io.ByteArrayInputStream} emulated class. */
 public class ByteArrayInputStreamTest extends InputStreamBaseTest {
 
   @Override
@@ -57,8 +55,7 @@ public class ByteArrayInputStreamTest extends InputStreamBaseTest {
 
   public void testClose() throws IOException {
     // should do nothing (including not throwing an exception)
-    try (final ByteArrayInputStream inputStream = new ByteArrayInputStream(TEST_BYTES)) {
-    }
+    try (final ByteArrayInputStream inputStream = new ByteArrayInputStream(TEST_BYTES)) {}
   }
 
   public void testMarkSupported() {

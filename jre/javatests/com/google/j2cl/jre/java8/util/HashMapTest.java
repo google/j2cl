@@ -18,9 +18,7 @@ package com.google.j2cl.jre.java8.util;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Tests for java.util.HashMap Java 8 API emulation.
- */
+/** Tests for java.util.HashMap Java 8 API emulation. */
 public class HashMapTest extends AbstractJava8MapTest {
 
   @Override

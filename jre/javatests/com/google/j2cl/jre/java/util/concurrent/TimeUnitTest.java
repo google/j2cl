@@ -12,9 +12,7 @@ package com.google.j2cl.jre.java.util.concurrent;
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Tests for TimeUnit.
- */
+/** Tests for TimeUnit. */
 public class TimeUnitTest extends EmulTestBase {
 
   private static final long SECS_IN_MIN = 60L;

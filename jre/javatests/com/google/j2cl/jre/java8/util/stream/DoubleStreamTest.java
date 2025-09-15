@@ -29,9 +29,7 @@ import java.util.function.Supplier;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
-/**
- * Tests {@link DoubleStream}.
- */
+/** Tests {@link DoubleStream}. */
 public class DoubleStreamTest extends EmulTestBase {
 
   public void testEmptyStream() {

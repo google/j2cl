@@ -26,15 +26,16 @@ public class ThrowableTest extends TestCase {
     Throwable e = new Throwable("<my msg>");
     assertTrue(e.getStackTrace().length > 0);
 
-    e = new Throwable("<my msg>") {
-      public Throwable fillInStackTrace() {
-        // Replace fill in stack trace with no-op.
-        return this;
-      }
-    };
+    e =
+        new Throwable("<my msg>") {
+          public Throwable fillInStackTrace() {
+            // Replace fill in stack trace with no-op.
+            return this;
+          }
+        };
     assertEquals(0, e.getStackTrace().length);
 
-    e = new Throwable("<my msg>", null, true, false) { };
+    e = new Throwable("<my msg>", null, true, false) {};
     assertEquals(0, e.getStackTrace().length);
   }
 

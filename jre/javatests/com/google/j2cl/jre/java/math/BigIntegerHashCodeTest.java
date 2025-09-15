@@ -38,13 +38,9 @@ package com.google.j2cl.jre.java.math;
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
-/**
- * Class: java.math.BigInteger Method: hashCode().
- */
+/** Class: java.math.BigInteger Method: hashCode(). */
 public class BigIntegerHashCodeTest extends EmulTestBase {
-  /**
-   * Test hash codes for equal objects.
-   */
+  /** Test hash codes for equal objects. */
   public void testEqualObjects() {
     String value1 = "12378246728727834290276457386374882976782849";
     String value2 = "12378246728727834290276457386374882976782849";
@@ -74,9 +70,7 @@ public class BigIntegerHashCodeTest extends EmulTestBase {
     assertTrue("hash codes for the same object differ", code1 == code2);
   }
 
-  /**
-   * Test hash codes for unequal objects. The codes are unequal.
-   */
+  /** Test hash codes for unequal objects. The codes are unequal. */
   public void testUnequalObjectsUnequal() {
     String value1 = "12378246728727834290276457386374882976782849";
     String value2 = "-5634562095872038262928728727834290276457386374882976782849";

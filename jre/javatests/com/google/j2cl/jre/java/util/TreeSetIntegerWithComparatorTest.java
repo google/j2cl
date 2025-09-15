@@ -26,18 +26,19 @@ import org.jspecify.annotations.Nullable;
 public class TreeSetIntegerWithComparatorTest extends TreeSetIntegerTest {
   @Override
   protected NavigableSet<Integer> createNavigableSet() {
-    setComparator(new Comparator<Integer>() {
-      @Override
-      public int compare(Integer o1, Integer o2) {
-        if (o1 == null) {
-          return o2 == null ? 0 : -1;
-        }
-        if (o2 == null) {
-          return 1;
-        }
-        return o1.compareTo(o2);
-      }
-    });
+    setComparator(
+        new Comparator<Integer>() {
+          @Override
+          public int compare(Integer o1, Integer o2) {
+            if (o1 == null) {
+              return o2 == null ? 0 : -1;
+            }
+            if (o2 == null) {
+              return 1;
+            }
+            return o1.compareTo(o2);
+          }
+        });
     return super.createNavigableSet();
   }
 

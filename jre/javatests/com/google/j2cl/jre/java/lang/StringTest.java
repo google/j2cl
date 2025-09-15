@@ -52,31 +52,24 @@ public class StringTest extends TestCase {
     String testPlain = hideFromCompiler("CAT");
     String testUnicode = hideFromCompiler("C\uD801\uDF00T");
     assertEquals("CAT", new String(new int[] {'C', 'A', 'T'}, 0, 3));
-    assertEquals("C\uD801\uDF00T",
-        new String(new int[] {'C', 67328, 'T'}, 0, 3));
+    assertEquals("C\uD801\uDF00T", new String(new int[] {'C', 67328, 'T'}, 0, 3));
     assertEquals("\uD801\uDF00", new String(new int[] {'C', 67328, 'T'}, 1, 1));
     assertEquals(65, testPlain.codePointAt(1));
-    assertEquals("codePointAt fails on surrogate pair", 67328,
-        testUnicode.codePointAt(1));
+    assertEquals("codePointAt fails on surrogate pair", 67328, testUnicode.codePointAt(1));
     assertEquals(65, testPlain.codePointBefore(2));
-    assertEquals("codePointBefore fails on surrogate pair", 67328,
-        testUnicode.codePointBefore(3));
+    assertEquals("codePointBefore fails on surrogate pair", 67328, testUnicode.codePointBefore(3));
     assertEquals("codePointCount(plain): ", 3, testPlain.codePointCount(0, 3));
-    assertEquals("codePointCount(unicode): ", 3, testUnicode.codePointCount(0,
-        4));
+    assertEquals("codePointCount(unicode): ", 3, testUnicode.codePointCount(0, 4));
     assertEquals(1, testPlain.codePointCount(1, 2));
     assertEquals(1, testUnicode.codePointCount(1, 2));
     assertEquals(2, testUnicode.codePointCount(2, 4));
     assertEquals(1, testUnicode.offsetByCodePoints(0, 1));
-    assertEquals("offsetByCodePoints(1,1): ", 3,
-        testUnicode.offsetByCodePoints(1, 1));
-    assertEquals("offsetByCodePoints(2,1): ", 3,
-        testUnicode.offsetByCodePoints(2, 1));
+    assertEquals("offsetByCodePoints(1,1): ", 3, testUnicode.offsetByCodePoints(1, 1));
+    assertEquals("offsetByCodePoints(2,1): ", 3, testUnicode.offsetByCodePoints(2, 1));
     assertEquals(4, testUnicode.offsetByCodePoints(3, 1));
     assertEquals(1, testUnicode.offsetByCodePoints(2, -1));
     assertEquals(1, testUnicode.offsetByCodePoints(3, -1));
-    assertEquals("offsetByCodePoints(4.-1): ", 3,
-        testUnicode.offsetByCodePoints(4, -1));
+    assertEquals("offsetByCodePoints(4.-1): ", 3, testUnicode.offsetByCodePoints(4, -1));
     assertEquals(0, testUnicode.offsetByCodePoints(3, -2));
     /*
      * The next line contains a Unicode character outside the base multilingual
@@ -226,8 +219,7 @@ public class StringTest extends TestCase {
     assertEquals(constant, new String(chars), constant);
     assertEquals(shortString, new String(chars, 2, 3), shortString);
     assertEquals("", new String(hideFromCompiler("")));
-    assertEquals("", new String(new String(new String(new String(
-        hideFromCompiler(""))))));
+    assertEquals("", new String(new String(new String(new String(hideFromCompiler(""))))));
     assertEquals("", new String(new char[] {}));
     StringBuilder sb = new StringBuilder();
     sb.append('c');
@@ -703,8 +695,7 @@ public class StringTest extends TestCase {
     byte[] bytes = str.getBytes(encoding);
     assertEquals(str.length(), bytes.length);
     for (int i = 0; i < str.length(); ++i) {
-      assertEquals("latin1 byte " + i + " differs", (byte) str.charAt(i),
-          bytes[i]);
+      assertEquals("latin1 byte " + i + " differs", (byte) str.charAt(i), bytes[i]);
     }
   }
 
@@ -735,8 +726,7 @@ public class StringTest extends TestCase {
       byte first = bytes[2 * i - 128];
       byte second = bytes[2 * i - 127];
       char ch = str.charAt(i);
-      assertEquals("byte " + i + " differs", ch,
-          ((first & 31) << 6) | (second & 63));
+      assertEquals("byte " + i + " differs", ch, ((first & 31) << 6) | (second & 63));
     }
 
     // non-BMP characters, all take 4 UTF8 bytes.
@@ -751,10 +741,8 @@ public class StringTest extends TestCase {
     for (int i = 0; i < numChars; ++i) {
       assertEquals("1st byte of " + i, (byte) 0xF4, bytes[4 * i]);
       assertEquals("2nd byte of " + i, (byte) 0x80, bytes[4 * i + 1]);
-      assertEquals("3rd byte of " + i, (byte) 0x80 + ((i >> 6) & 63),
-          bytes[4 * i + 2]);
-      assertEquals("4th byte of " + i, (byte) 0x80 + (i & 63),
-          bytes[4 * i + 3]);
+      assertEquals("3rd byte of " + i, (byte) 0x80 + ((i >> 6) & 63), bytes[4 * i + 2]);
+      assertEquals("4th byte of " + i, (byte) 0x80 + (i & 63), bytes[4 * i + 3]);
     }
 
     // Invalid unicode code point.
@@ -796,19 +784,29 @@ public class StringTest extends TestCase {
   /**
    * Tests hashing with strings.
    *
-   * The specific strings used in this test used to trigger failures because we
-   * use a JavaScript object as a hash map to cache the computed hash codes.
-   * This conflicts with built-in properties defined on objects -- see issue
-   * #631.
-   *
+   * <p>The specific strings used in this test used to trigger failures because we use a JavaScript
+   * object as a hash map to cache the computed hash codes. This conflicts with built-in properties
+   * defined on objects -- see issue #631.
    */
   public void testHashCode() {
     String[] testStrings = {
-        "watch", "unwatch", "toString", "toSource", "eval", "valueOf",
-        "constructor", "__proto__", "polygenelubricants", "xy", "x", "" };
+      "watch", "unwatch", "toString", "toSource", "eval", "valueOf",
+      "constructor", "__proto__", "polygenelubricants", "xy", "x", ""
+    };
     int[] javaHashes = {
-        112903375, -274141738, -1776922004, -1781441930, 3125404, 231605032,
-        -1588406278, 2139739112, Integer.MIN_VALUE, 3841, 120, 0 };
+      112903375,
+      -274141738,
+      -1776922004,
+      -1781441930,
+      3125404,
+      231605032,
+      -1588406278,
+      2139739112,
+      Integer.MIN_VALUE,
+      3841,
+      120,
+      0
+    };
 
     for (int i = 0; i < testStrings.length; ++i) {
       String testString = testStrings[i];
@@ -816,8 +814,7 @@ public class StringTest extends TestCase {
 
       // verify that the hash codes of these strings match their java
       // counterparts
-      assertEquals("Unexpected hash for string " + testString, expectedHash,
-          testString.hashCode());
+      assertEquals("Unexpected hash for string " + testString, expectedHash, testString.hashCode());
 
       // Verify that the resulting hash code is numeric (might not be if it is collided with a
       // property).
@@ -1044,31 +1041,30 @@ public class StringTest extends TestCase {
       assertEquals(toS(to), toS(from).replace(from, to));
     }
     // issue 1480
-    String exampleXd = String.valueOf(new char[] {
-        'e', 'x', 'a', 'm', 'p', 'l', 'e', ' ', 'x', 'd'});
+    String exampleXd =
+        String.valueOf(new char[] {'e', 'x', 'a', 'm', 'p', 'l', 'e', ' ', 'x', 'd'});
     assertEquals("example xd", exampleXd.replace('\r', ' ').replace('\n', ' '));
     String dotFood = String.valueOf(new char[] {'d', 'o', 't', '\u0120', 'f', 'o', 'o', 'd'});
     assertEquals("dot food", dotFood.replace('\u0120', ' '));
-    String testStr = String.valueOf(new char[] {
-        '\u1111', 'B', '\u1111', 'B', '\u1111', 'B'});
+    String testStr = String.valueOf(new char[] {'\u1111', 'B', '\u1111', 'B', '\u1111', 'B'});
     assertEquals("ABABAB", testStr.replace('\u1111', 'A'));
   }
 
   public void testReplaceAll() {
-    String regex = hideFromCompiler("*[").replaceAll(
-        "([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}])", "\\\\$1");
+    String regex =
+        hideFromCompiler("*[").replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}])", "\\\\$1");
     assertEquals("\\*\\[", regex);
-    String replacement = hideFromCompiler("\\").replaceAll("\\\\", "\\\\\\\\").replaceAll(
-        "\\$", "\\\\$");
+    String replacement =
+        hideFromCompiler("\\").replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
     assertEquals("\\\\", replacement);
     assertEquals("+1", hideFromCompiler("*[1").replaceAll(regex, "+"));
-    String x1 = String.valueOf(new char[] {
-        'x', 'x', 'x', 'a', 'b', 'c', 'x', 'x', 'd', 'e', 'x', 'f'});
+    String x1 =
+        String.valueOf(new char[] {'x', 'x', 'x', 'a', 'b', 'c', 'x', 'x', 'd', 'e', 'x', 'f'});
     assertEquals("abcdef", x1.replaceAll("x*", ""));
-    String x2 = String.valueOf(new char[] {
-        '1', 'a', 'b', 'c', '1', '2', '3', 'd', 'e', '1', '2', '3', '4', 'f'});
-    assertEquals("1\\1abc123\\123de1234\\1234f", x2.replaceAll("([1234]+)",
-        "$1\\\\$1"));
+    String x2 =
+        String.valueOf(
+            new char[] {'1', 'a', 'b', 'c', '1', '2', '3', 'd', 'e', '1', '2', '3', '4', 'f'});
+    assertEquals("1\\1abc123\\123de1234\\1234f", x2.replaceAll("([1234]+)", "$1\\\\$1"));
     String x3 = String.valueOf(new char[] {'x', ' ', ' ', 'x'});
     assertEquals("\n  \n", x3.replaceAll("x", "\n"));
     String x4 = String.valueOf(new char[] {'\n', ' ', ' ', '\n'});
@@ -1097,21 +1093,18 @@ public class StringTest extends TestCase {
   }
 
   public void testSplit() {
-    compareList("fullSplit", new String[] {"abc", "", "", "de", "f"},
+    compareList(
+        "fullSplit",
+        new String[] {"abc", "", "", "de", "f"},
         hideFromCompiler("abcxxxdexfxx").split("x"));
     String booAndFoo = hideFromCompiler("boo:and:foo");
     compareList("2:", new String[] {"boo", "and:foo"}, booAndFoo.split(":", 2));
-    compareList("5:", new String[] {"boo", "and", "foo"}, booAndFoo.split(":",
-        5));
-    compareList("-2:", new String[] {"boo", "and", "foo"}, booAndFoo.split(":",
-        -2));
-    compareList("5o", new String[] {"b", "", ":and:f", "", ""},
-        booAndFoo.split("o", 5));
-    compareList("-2o", new String[] {"b", "", ":and:f", "", ""},
-        booAndFoo.split("o", -2));
+    compareList("5:", new String[] {"boo", "and", "foo"}, booAndFoo.split(":", 5));
+    compareList("-2:", new String[] {"boo", "and", "foo"}, booAndFoo.split(":", -2));
+    compareList("5o", new String[] {"b", "", ":and:f", "", ""}, booAndFoo.split("o", 5));
+    compareList("-2o", new String[] {"b", "", ":and:f", "", ""}, booAndFoo.split("o", -2));
     compareList("0o", new String[] {"b", "", ":and:f"}, booAndFoo.split("o", 0));
-    compareList("0:", new String[] {"boo", "and", "foo"}, booAndFoo.split(":",
-        0));
+    compareList("0:", new String[] {"boo", "and", "foo"}, booAndFoo.split(":", 0));
     // issue 2742
     compareList("issue2742", new String[] {}, hideFromCompiler("/").split("/", 0));
 
@@ -1126,9 +1119,10 @@ public class StringTest extends TestCase {
 
   public void testSplit_emptyExpr() {
     // TODO(rluble):  implement JDK8 string.split semantics and fix test.
-    String[] expected = (TestUtils.getJdkVersion() > 7) ?
-        new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"} :
-        new String[] {"", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
+    String[] expected =
+        (TestUtils.getJdkVersion() > 7)
+            ? new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"}
+            : new String[] {"", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
     compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
   }
 
@@ -1233,11 +1227,16 @@ public class StringTest extends TestCase {
     trimRightAssertEquals("abc \0 a", "    abc \0 a   \0");
     trimRightAssertEquals("abc \0 a", "    abc \0 a   \0   ");
     trimRightAssertEquals("\u0021\u0020abc", "\u0019\u0017\u0021\u0020abc\u0019\u0017\u0018 ");
-    trimRightAssertEquals("\u0021 abc",
-        "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009" +
-        "\n" + "\u000b\u000c" + "\r" + "\u000e\u000f" +
-        "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019" +
-        "\u001A\u001b\u001c\u001d\u001e\u001f\u0020\u0021 " + "abc");
+    trimRightAssertEquals(
+        "\u0021 abc",
+        "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009"
+            + "\n"
+            + "\u000b\u000c"
+            + "\r"
+            + "\u000e\u000f"
+            + "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019"
+            + "\u001A\u001b\u001c\u001d\u001e\u001f\u0020\u0021 "
+            + "abc");
 
     // JavaScript would trim \u2029 and other unicode whitespace type characters; but Java wont
     trimRightAssertEquals("\u2029abc\u00a0", "\u2029abc\u00a0");
@@ -1279,9 +1278,7 @@ public class StringTest extends TestCase {
     assertTrue(String.valueOf(C.DOUBLE_VALUE).startsWith(C.DOUBLE_STRING));
     assertEquals(C.CHAR_STRING, String.valueOf(C.CHAR_VALUE));
     assertEquals(C.CHAR_ARRAY_STRING, String.valueOf(C.CHAR_ARRAY_VALUE));
-    assertEquals(
-        C.CHAR_ARRAY_STRING_SUB, String.valueOf(C.CHAR_ARRAY_VALUE, 1,
-        4));
+    assertEquals(C.CHAR_ARRAY_STRING_SUB, String.valueOf(C.CHAR_ARRAY_VALUE, 1, 4));
     assertEquals(C.FALSE_STRING, String.valueOf(C.FALSE_VALUE));
     assertEquals(C.TRUE_STRING, String.valueOf(C.TRUE_VALUE));
     assertEquals(C.getLargeCharArrayString(), String.valueOf(C.getLargeCharArrayValue()));
@@ -1290,7 +1287,7 @@ public class StringTest extends TestCase {
   /**
    * Helper method for testTrim to avoid compiler optimizations.
    *
-   * TODO: insufficient, compiler now inlines.
+   * <p>TODO: insufficient, compiler now inlines.
    */
   public void trimRightAssertEquals(String left, String right) {
     assertEquals("trimRightAssertEquals", left, right.trim());
@@ -1299,7 +1296,7 @@ public class StringTest extends TestCase {
   /**
    * Helper method for testTrim to avoid compiler optimizations.
    *
-   * TODO: insufficient, compiler now inlines.
+   * <p>TODO: insufficient, compiler now inlines.
    */
   public void trimRightAssertSame(String left, String right) {
     assertSame("trimRightAssertSame", left, right.trim());

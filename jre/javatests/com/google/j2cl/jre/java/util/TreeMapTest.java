@@ -1656,7 +1656,6 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     }
     map.clear();
     assertNull(map.higherEntry(keys[1]));
-
   }
 
   public void testHigherKey() {

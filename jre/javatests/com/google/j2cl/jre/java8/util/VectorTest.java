@@ -18,9 +18,7 @@ package com.google.j2cl.jre.java8.util;
 import java.util.List;
 import java.util.Vector;
 
-/**
- * Java 8 methods to test in java.util.Vector.
- */
+/** Java 8 methods to test in java.util.Vector. */
 public class VectorTest extends AbstractJava8ListTest {
   @Override
   protected List<String> createEmptyList() {

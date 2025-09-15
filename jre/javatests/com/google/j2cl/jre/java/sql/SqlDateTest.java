@@ -51,7 +51,7 @@ public class SqlDateTest extends TestCase {
     Date sqlDate = new Date(2000 - 1900, 1 - 1, 1);
     assertEquals("2000-01-01", sqlDate.toString());
   }
-  
+
   public void testUnimplementedFunctions() {
     Date d = new Date(0);
 
@@ -107,13 +107,13 @@ public class SqlDateTest extends TestCase {
 
     Date d2 = Date.valueOf(d.toString());
     assertEquals(d, d2);
-    
+
     // validate that leading zero's don't trigger octal eval
     d = Date.valueOf("2009-08-08");
     assertEquals(109, d.getYear());
     assertEquals(7, d.getMonth());
     assertEquals(8, d.getDate());
-    
+
     // validate 0x isn't a valid prefix
     try {
       d = Date.valueOf("2009-0xA-0xB");

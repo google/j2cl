@@ -125,22 +125,19 @@ public class CollectionsTest extends EmulTestBase {
   /**
    * Test Collections.binarySearch(List, Object).
    *
-   * Verify the following cases: empty List odd numbers of elements even numbers
-   * of elements not found value larger than all elements not found value
-   * smaller than all elements
+   * <p>Verify the following cases: empty List odd numbers of elements even numbers of elements not
+   * found value larger than all elements not found value smaller than all elements
    */
   public void testBinarySearchObject() {
     List<String> a1 = new ArrayList<String>();
     int ret = Collections.binarySearch(a1, "");
     assertEquals(-1, ret);
-    List<String> a2 = new ArrayList<String>(Arrays.asList(new String[] {
-        "a", "g", "y"}));
+    List<String> a2 = new ArrayList<String>(Arrays.asList(new String[] {"a", "g", "y"}));
     ret = Collections.binarySearch(a2, "c");
     assertEquals(-2, ret);
     ret = Collections.binarySearch(a2, "y");
     assertEquals(2, ret);
-    List<String> a3 = new ArrayList<String>(Arrays.asList(new String[] {
-        "b", "c", "x", "y"}));
+    List<String> a3 = new ArrayList<String>(Arrays.asList(new String[] {"b", "c", "x", "y"}));
     ret = Collections.binarySearch(a3, "z");
     assertEquals(-5, ret);
     ret = Collections.binarySearch(a3, "a");
@@ -152,28 +149,27 @@ public class CollectionsTest extends EmulTestBase {
   /**
    * Test Collections.binarySearch(List, Object, Comparator).
    *
-   * Verify the following cases: empty List odd numbers of elements even numbers
-   * of elements not found value larger than all elements not found value
-   * smaller than all elements null Comparator uses natural ordering
+   * <p>Verify the following cases: empty List odd numbers of elements even numbers of elements not
+   * found value larger than all elements not found value smaller than all elements null Comparator
+   * uses natural ordering
    */
   public void testBinarySearchObjectComparator() {
-    Comparator<String> inverseSort = new Comparator<String>() {
-      @Override
-      public int compare(String o1, String o2) {
-        return o2.compareTo(o1);
-      }
-    };
+    Comparator<String> inverseSort =
+        new Comparator<String>() {
+          @Override
+          public int compare(String o1, String o2) {
+            return o2.compareTo(o1);
+          }
+        };
     List<String> a1 = new ArrayList<String>();
     int ret = Collections.binarySearch(a1, "", inverseSort);
     assertEquals(-1, ret);
-    List<String> a2 = new ArrayList<String>(Arrays.asList(new String[] {
-        "y", "g", "a"}));
+    List<String> a2 = new ArrayList<String>(Arrays.asList(new String[] {"y", "g", "a"}));
     ret = Collections.binarySearch(a2, "c", inverseSort);
     assertEquals(-3, ret);
     ret = Collections.binarySearch(a2, "a", inverseSort);
     assertEquals(2, ret);
-    List<String> a3 = new ArrayList<String>(Arrays.asList(new String[] {
-        "y", "x", "c", "b"}));
+    List<String> a3 = new ArrayList<String>(Arrays.asList(new String[] {"y", "x", "c", "b"}));
     ret = Collections.binarySearch(a3, "a", inverseSort);
     assertEquals(-5, ret);
     ret = Collections.binarySearch(a3, "z", inverseSort);
@@ -181,8 +177,7 @@ public class CollectionsTest extends EmulTestBase {
     ret = Collections.binarySearch(a3, "y", inverseSort);
     assertEquals(0, ret);
 
-    List<String> a4 = new ArrayList<String>(Arrays.asList(new String[] {
-        "a", "b", "c", "d", "e"}));
+    List<String> a4 = new ArrayList<String>(Arrays.asList(new String[] {"a", "b", "c", "d", "e"}));
     ret = Collections.binarySearch(a4, "d", null); // should not NPE
     assertEquals(3, ret);
   }
@@ -198,8 +193,7 @@ public class CollectionsTest extends EmulTestBase {
     oversizedArray[1] = dummyEntry();
     oversizedArray[2] = dummyEntry();
 
-    Entry<String, String>[] result = unmodifiable.entrySet().toArray(
-        oversizedArray);
+    Entry<String, String>[] result = unmodifiable.entrySet().toArray(oversizedArray);
     assertSame(result, oversizedArray);
     assertEquals("key", result[0].getKey());
     assertEquals("value", result[0].getValue());
@@ -228,11 +222,11 @@ public class CollectionsTest extends EmulTestBase {
 
     dest = new ArrayList<Integer>(Arrays.asList(5, 6, 7, 8));
     Collections.copy(dest, src);
-    assertEquals(new Integer[]{1, 2, 3, 8}, dest);
+    assertEquals(new Integer[] {1, 2, 3, 8}, dest);
 
     dest = new ArrayList<Integer>(Arrays.asList(5, 6, 7));
     Collections.copy(dest, src);
-    assertEquals(new Integer[]{1, 2, 3}, dest);
+    assertEquals(new Integer[] {1, 2, 3}, dest);
   }
 
   public void testNewSetFromMap() {
@@ -293,17 +287,19 @@ public class CollectionsTest extends EmulTestBase {
       // Expected
     }
     // Test optimized RandomAccess code path
-    testRotateImpl(new ListImplProvider() {
-      public List<Integer> copyOf(Collection<Integer> data) {
-        return new ArrayList<>(data);
-      }
-    });
+    testRotateImpl(
+        new ListImplProvider() {
+          public List<Integer> copyOf(Collection<Integer> data) {
+            return new ArrayList<>(data);
+          }
+        });
     // Test sequential List code path
-    testRotateImpl(new ListImplProvider() {
-      public List<Integer> copyOf(Collection<Integer> data) {
-        return new LinkedList<>(data);
-      }
-    });
+    testRotateImpl(
+        new ListImplProvider() {
+          public List<Integer> copyOf(Collection<Integer> data) {
+            return new LinkedList<>(data);
+          }
+        });
   }
 
   public void testSort() {
@@ -314,13 +310,14 @@ public class CollectionsTest extends EmulTestBase {
   }
 
   public void testSortWithComparator() {
-    Comparator<String> x = new Comparator<String>() {
-      @Override
-      public int compare(String s1, String s2) {
-        // sort into reverse order
-        return s2.compareTo(s1);
-      }
-    };
+    Comparator<String> x =
+        new Comparator<String>() {
+          @Override
+          public int compare(String s1, String s2) {
+            // sort into reverse order
+            return s2.compareTo(s1);
+          }
+        };
     List<String> a = createSortedList();
     Collections.sort(a, x);
     Object[] expected = {"c", "b", "a"};
@@ -339,7 +336,7 @@ public class CollectionsTest extends EmulTestBase {
 
   private void testRotateImpl(ListImplProvider listImpl) {
     // rotating empty list should not throw exception
-    List<Integer> list = listImpl.copyOf(Collections.<Integer> emptyList());
+    List<Integer> list = listImpl.copyOf(Collections.<Integer>emptyList());
     Collections.rotate(list, 2);
 
     List<Integer> original = Arrays.asList(0, 1, 2, 3, 4);
@@ -366,5 +363,4 @@ public class CollectionsTest extends EmulTestBase {
     Collections.rotate(list, -3);
     assertEquals(original, list);
   }
-
 }

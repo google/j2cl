@@ -13,8 +13,8 @@ import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Tests for {@link java.util.concurrent.atomic.AtomicInteger}.
- * It's adopted from tests from {@code git://android.git.kernel.org/platform/dalvik.git}:
+ * Tests for {@link java.util.concurrent.atomic.AtomicInteger}. It's adopted from tests from {@code
+ * git://android.git.kernel.org/platform/dalvik.git}:
  */
 public class AtomicIntegerTest extends EmulTestBase {
 

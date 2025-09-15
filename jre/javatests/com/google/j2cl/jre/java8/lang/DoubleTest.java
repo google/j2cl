@@ -23,19 +23,27 @@ public class DoubleTest extends TestCase {
 
   public void testIsFinite() {
     final double[] nonfiniteNumbers = {
-        Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, Double.NaN,
+      Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, Double.NaN,
     };
     for (double value : nonfiniteNumbers) {
       assertFalse(Double.isFinite(value));
     }
 
     final double[] finiteNumbers = {
-        -Double.MAX_VALUE, Double.MAX_VALUE, Double.MIN_VALUE,
-        -1.0, -0.5, -0.1, -0.0, 0.0, 0.1, 0.5, 1.0,
+      -Double.MAX_VALUE,
+      Double.MAX_VALUE,
+      Double.MIN_VALUE,
+      -1.0,
+      -0.5,
+      -0.1,
+      -0.0,
+      0.0,
+      0.1,
+      0.5,
+      1.0,
     };
     for (double value : finiteNumbers) {
       assertTrue(Double.isFinite(value));
     }
   }
 }
-

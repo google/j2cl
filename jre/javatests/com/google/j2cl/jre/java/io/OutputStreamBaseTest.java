@@ -24,7 +24,7 @@ import junit.framework.TestCase;
 /** Class for reusing tests that are commong to {@link java.io.OutputStream} and its subclasses. */
 public abstract class OutputStreamBaseTest extends TestCase {
 
-  protected static final byte[] TEST_ARRAY = new byte[] { 10, 20, 30, 40, 50 };
+  protected static final byte[] TEST_ARRAY = new byte[] {10, 20, 30, 40, 50};
 
   /**
    * Factory method for creating a stream object.

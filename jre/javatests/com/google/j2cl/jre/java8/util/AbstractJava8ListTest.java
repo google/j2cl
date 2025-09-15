@@ -124,5 +124,4 @@ abstract class AbstractJava8ListTest extends EmulTestBase {
   }
 
   protected abstract List<String> createEmptyList();
-
 }

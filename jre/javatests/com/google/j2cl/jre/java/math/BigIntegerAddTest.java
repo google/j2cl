@@ -38,14 +38,10 @@ package com.google.j2cl.jre.java.math;
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
-/**
- * Class: java.math.BigInteger Method: add.
- */
+/** Class: java.math.BigInteger Method: add. */
 public class BigIntegerAddTest extends EmulTestBase {
 
-  /**
-   * Add two positive numbers of the same length.
-   */
+  /** Add two positive numbers of the same length. */
   public void testCase1() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -63,9 +59,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add two negative numbers of the same length.
-   */
+  /** Add two negative numbers of the same length. */
   public void testCase2() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -84,8 +78,8 @@ public class BigIntegerAddTest extends EmulTestBase {
   }
 
   /**
-   * Add two numbers of the same length. The first one is positive and the
-   * second is negative. The first one is greater in absolute value.
+   * Add two numbers of the same length. The first one is positive and the second is negative. The
+   * first one is greater in absolute value.
    */
   public void testCase3() {
     byte aBytes[] = {3, 4, 5, 6, 7, 8, 9};
@@ -105,8 +99,8 @@ public class BigIntegerAddTest extends EmulTestBase {
   }
 
   /**
-   * Add two numbers of the same length. The first one is negative and the
-   * second is positive. The first one is greater in absolute value.
+   * Add two numbers of the same length. The first one is negative and the second is positive. The
+   * first one is greater in absolute value.
    */
   public void testCase4() {
     byte aBytes[] = {3, 4, 5, 6, 7, 8, 9};
@@ -126,8 +120,8 @@ public class BigIntegerAddTest extends EmulTestBase {
   }
 
   /**
-   * Add two numbers of the same length. The first is positive and the second is
-   * negative. The first is less in absolute value.
+   * Add two numbers of the same length. The first is positive and the second is negative. The first
+   * is less in absolute value.
    */
   public void testCase5() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -147,8 +141,8 @@ public class BigIntegerAddTest extends EmulTestBase {
   }
 
   /**
-   * Add two numbers of the same length. The first one is negative and the
-   * second is positive. The first one is less in absolute value.
+   * Add two numbers of the same length. The first one is negative and the second is positive. The
+   * first one is less in absolute value.
    */
   public void testCase6() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -167,9 +161,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add two positive numbers of different length. The first is longer.
-   */
+  /** Add two positive numbers of different length. The first is longer. */
   public void testCase7() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -187,9 +179,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add two positive numbers of different length. The second is longer.
-   */
+  /** Add two positive numbers of different length. The second is longer. */
   public void testCase8() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
@@ -205,16 +195,13 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add two negative numbers of different length. The first is longer.
-   */
+  /** Add two negative numbers of different length. The first is longer. */
   public void testCase9() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     int aSign = -1;
     int bSign = -1;
-    byte rBytes[] = {
-        -2, -3, -4, -5, -16, -27, -38, -42, -53, -64, -75, -16, -27, -37};
+    byte rBytes[] = {-2, -3, -4, -5, -16, -27, -38, -42, -53, -64, -75, -16, -27, -37};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     BigInteger result = aNumber.add(bNumber);
@@ -226,16 +213,13 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, result.signum());
   }
 
-  /**
-   * Add two negative numbers of different length. The second is longer.
-   */
+  /** Add two negative numbers of different length. The second is longer. */
   public void testCase10() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     int aSign = -1;
     int bSign = -1;
-    byte rBytes[] = {
-        -2, -3, -4, -5, -16, -27, -38, -42, -53, -64, -75, -16, -27, -37};
+    byte rBytes[] = {-2, -3, -4, -5, -16, -27, -38, -42, -53, -64, -75, -16, -27, -37};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
     BigInteger result = aNumber.add(bNumber);
@@ -247,10 +231,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, result.signum());
   }
 
-  /**
-   * Add two numbers of different length and sign. The first is positive. The
-   * first is longer.
-   */
+  /** Add two numbers of different length and sign. The first is positive. The first is longer. */
   public void testCase11() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -268,10 +249,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add two numbers of different length and sign. The first is positive. The
-   * second is longer.
-   */
+  /** Add two numbers of different length and sign. The first is positive. The second is longer. */
   public void testCase12() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
@@ -289,10 +267,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, result.signum());
   }
 
-  /**
-   * Add two numbers of different length and sign. The first is negative. The
-   * first is longer.
-   */
+  /** Add two numbers of different length and sign. The first is negative. The first is longer. */
   public void testCase13() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -310,10 +285,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", -1, result.signum());
   }
 
-  /**
-   * Add two numbers of different length and sign. The first is negative. The
-   * second is longer.
-   */
+  /** Add two numbers of different length and sign. The first is negative. The second is longer. */
   public void testCase14() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
@@ -331,9 +303,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add two equal numbers of different signs.
-   */
+  /** Add two equal numbers of different signs. */
   public void testCase15() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -350,9 +320,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 0, result.signum());
   }
 
-  /**
-   * Add zero to a number.
-   */
+  /** Add zero to a number. */
   public void testCase16() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {0};
@@ -370,9 +338,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add a number to zero.
-   */
+  /** Add a number to zero. */
   public void testCase17() {
     byte aBytes[] = {0};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -390,9 +356,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add zero to zero.
-   */
+  /** Add zero to zero. */
   public void testCase18() {
     byte aBytes[] = {0};
     byte bBytes[] = {0};
@@ -410,9 +374,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 0, result.signum());
   }
 
-  /**
-   * Add ZERO to a number.
-   */
+  /** Add ZERO to a number. */
   public void testCase19() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte rBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -428,9 +390,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add a number to zero.
-   */
+  /** Add a number to zero. */
   public void testCase20() {
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte rBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -446,9 +406,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add ZERO to ZERO.
-   */
+  /** Add ZERO to ZERO. */
   public void testCase21() {
     byte rBytes[] = {0};
     BigInteger aNumber = BigInteger.ZERO;
@@ -462,9 +420,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 0, result.signum());
   }
 
-  /**
-   * Add ONE to ONE.
-   */
+  /** Add ONE to ONE. */
   public void testCase22() {
     byte rBytes[] = {2};
     BigInteger aNumber = BigInteger.ONE;
@@ -478,9 +434,7 @@ public class BigIntegerAddTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
-  /**
-   * Add two numbers so that carry is 1.
-   */
+  /** Add two numbers so that carry is 1. */
   public void testCase23() {
     byte aBytes[] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     byte bBytes[] = {-1, -1, -1, -1, -1, -1, -1, -1};

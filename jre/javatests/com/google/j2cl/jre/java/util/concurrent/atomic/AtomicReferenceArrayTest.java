@@ -20,9 +20,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import org.jspecify.annotations.Nullable;
 
-/**
- * Tests for {@link java.util.concurrent.atomic.AtomicReferenceArray}.
- */
+/** Tests for {@link java.util.concurrent.atomic.AtomicReferenceArray}. */
 public class AtomicReferenceArrayTest extends EmulTestBase {
 
   public void testArrayConstructor() {

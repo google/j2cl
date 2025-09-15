@@ -25,14 +25,11 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class TreeSetIntegerTest extends TreeSetTest<Integer> {
 
-  /**
-   * Used to test updating a set to make sure it doesn't replace
-   * an equal value.
-   */
+  /** Used to test updating a set to make sure it doesn't replace an equal value. */
   private static class Record {
     public int key;
     public int extra;
-    
+
     public Record(int key, int extra) {
       this.key = key;
       this.extra = extra;
@@ -53,9 +50,7 @@ public class TreeSetIntegerTest extends TreeSetTest<Integer> {
     }
   }
 
-  /**
-   * Verify nulls are handled properly.
-   */
+  /** Verify nulls are handled properly. */
   public void testAdd_null() {
     TreeSet<@Nullable Record> set = new TreeSet<>(new RecordCompare());
     set.add(new Record(10, 1));
@@ -73,10 +68,8 @@ public class TreeSetIntegerTest extends TreeSetTest<Integer> {
     assertEquals(10, it.next().key);
     assertFalse(it.hasNext());
   }
-  
-  /**
-   * Verify that Set.add doesn't replace an existing entry that compares equal.
-   */
+
+  /** Verify that Set.add doesn't replace an existing entry that compares equal. */
   public void testAdd_overwrite() {
     TreeSet<Record> set = new TreeSet<Record>(new RecordCompare());
     assertTrue(set.add(new Record(1, 1)));

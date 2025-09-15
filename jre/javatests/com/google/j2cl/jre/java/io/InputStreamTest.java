@@ -19,9 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
-/**
- * Unit test for the {@link java.io.InputStream} emulated class.
- */
+/** Unit test for the {@link java.io.InputStream} emulated class. */
 public class InputStreamTest extends InputStreamBaseTest {
 
   @Override
@@ -30,7 +28,9 @@ public class InputStreamTest extends InputStreamBaseTest {
       // note that GWT fails here when trying to use clone().
       private final byte[] b = Arrays.copyOf(expectedBytes, expectedBytes.length);
       private int index = 0;
-      @Override public int read() {
+
+      @Override
+      public int read() {
         int c = -1;
         if (index < b.length) {
           c = b[index];

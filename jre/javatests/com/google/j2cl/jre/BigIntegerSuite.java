@@ -33,9 +33,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * Test JRE emulation of BigInteger.
- */
+/** Test JRE emulation of BigInteger. */
 @RunWith(Suite.class)
 @SuiteClasses({
   BigIntegerAddTest.class,
@@ -53,4 +51,4 @@ import org.junit.runners.Suite.SuiteClasses;
   BigIntegerToStringTest.class,
   BigIntegerXorTest.class,
 })
-public class BigIntegerSuite { }
+public class BigIntegerSuite {}

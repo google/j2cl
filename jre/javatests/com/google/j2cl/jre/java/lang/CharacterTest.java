@@ -182,33 +182,39 @@ public class CharacterTest extends TestCase {
   public void testCodePoint() {
     assertEquals("65 is a single character", 1, Character.charCount(65));
     assertEquals(2, Character.charCount(Character.MIN_SUPPLEMENTARY_CODE_POINT));
-    char[] testPlain = new char[] { 'C', 'A', 'T' };
-    char[] testUnicode = new char[] { 'C', '\uD801', '\uDF00', 'T' };
+    char[] testPlain = new char[] {'C', 'A', 'T'};
+    char[] testUnicode = new char[] {'C', '\uD801', '\uDF00', 'T'};
     CharSequence plainSequence = new CharSequenceAdapter(testPlain);
     CharSequence unicodeSequence = new CharSequenceAdapter(testUnicode);
     assertEquals(65, Character.codePointAt(testPlain, 1));
     assertEquals(65, Character.codePointAt(plainSequence, 1));
-    assertEquals("codePointAt fails on surrogate pair", 67328,
-        Character.codePointAt(testUnicode, 1));
-    assertEquals("codePointAt fails on surrogate pair", 67328,
-        Character.codePointAt(unicodeSequence, 1));
-    assertEquals("codePointAt fails on first char of surrogate pair", 0xD801,
+    assertEquals(
+        "codePointAt fails on surrogate pair", 67328, Character.codePointAt(testUnicode, 1));
+    assertEquals(
+        "codePointAt fails on surrogate pair", 67328, Character.codePointAt(unicodeSequence, 1));
+    assertEquals(
+        "codePointAt fails on first char of surrogate pair",
+        0xD801,
         Character.codePointAt(testUnicode, 1, 2));
     assertEquals(65, Character.codePointBefore(testPlain, 2));
     assertEquals(65, Character.codePointBefore(plainSequence, 2));
-    assertEquals("codePointBefore fails on surrogate pair", 67328,
+    assertEquals(
+        "codePointBefore fails on surrogate pair",
+        67328,
         Character.codePointBefore(testUnicode, 3));
-    assertEquals("codePointBefore fails on surrogate pair", 67328,
+    assertEquals(
+        "codePointBefore fails on surrogate pair",
+        67328,
         Character.codePointBefore(unicodeSequence, 3));
-    assertEquals("codePointBefore fails on second char of surrogate pair",
-        0xDF00, Character.codePointBefore(testUnicode, 3, 2));
+    assertEquals(
+        "codePointBefore fails on second char of surrogate pair",
+        0xDF00,
+        Character.codePointBefore(testUnicode, 3, 2));
     assertEquals("codePointCount(testPlain): ", 3, Character.codePointCount(testPlain, 0, 3));
     assertEquals(
         "codePointCount(plainSequence): ", 3, Character.codePointCount(plainSequence, 0, 3));
-    assertEquals("codePointCount(unicode): ", 3,
-        Character.codePointCount(testUnicode, 0, 4));
-    assertEquals("codePointCount(unicode): ", 3,
-        Character.codePointCount(unicodeSequence, 0, 4));
+    assertEquals("codePointCount(unicode): ", 3, Character.codePointCount(testUnicode, 0, 4));
+    assertEquals("codePointCount(unicode): ", 3, Character.codePointCount(unicodeSequence, 0, 4));
     assertEquals("codePointCount(testPlain): ", 1, Character.codePointCount(testPlain, 1, 1));
     assertEquals(
         "codePoinntCount(plainSequence): ", 1, Character.codePointCount(plainSequence, 1, 2));
@@ -218,14 +224,14 @@ public class CharacterTest extends TestCase {
     assertEquals(2, Character.codePointCount(unicodeSequence, 2, 4));
     assertEquals(1, Character.offsetByCodePoints(testUnicode, 0, 4, 0, 1));
     assertEquals(1, Character.offsetByCodePoints(unicodeSequence, 0, 1));
-    assertEquals("offsetByCodePoints(1,1): ", 3,
-        Character.offsetByCodePoints(testUnicode, 0, 4, 1, 1));
-    assertEquals("offsetByCodePoints(1,1): ", 3,
-        Character.offsetByCodePoints(unicodeSequence, 1, 1));
-    assertEquals("offsetByCodePoints(2,1): ", 3,
-        Character.offsetByCodePoints(testUnicode, 0, 4, 2, 1));
-    assertEquals("offsetByCodePoints(2,1): ", 3,
-        Character.offsetByCodePoints(unicodeSequence, 2, 1));
+    assertEquals(
+        "offsetByCodePoints(1,1): ", 3, Character.offsetByCodePoints(testUnicode, 0, 4, 1, 1));
+    assertEquals(
+        "offsetByCodePoints(1,1): ", 3, Character.offsetByCodePoints(unicodeSequence, 1, 1));
+    assertEquals(
+        "offsetByCodePoints(2,1): ", 3, Character.offsetByCodePoints(testUnicode, 0, 4, 2, 1));
+    assertEquals(
+        "offsetByCodePoints(2,1): ", 3, Character.offsetByCodePoints(unicodeSequence, 2, 1));
     assertEquals(
         "offsetByCodePoints(testUnicode, 0, 4, 3, 1)",
         4,
@@ -238,13 +244,13 @@ public class CharacterTest extends TestCase {
     assertEquals(1, Character.offsetByCodePoints(unicodeSequence, 2, -1));
     assertEquals(1, Character.offsetByCodePoints(testUnicode, 0, 4, 3, -1));
     assertEquals(1, Character.offsetByCodePoints(unicodeSequence, 3, -1));
-    assertEquals("offsetByCodePoints(4.-1): ", 3,
-        Character.offsetByCodePoints(testUnicode, 0, 4, 4, -1));
-    assertEquals("offsetByCodePoints(4.-1): ", 3,
-        Character.offsetByCodePoints(unicodeSequence, 4, -1));
+    assertEquals(
+        "offsetByCodePoints(4.-1): ", 3, Character.offsetByCodePoints(testUnicode, 0, 4, 4, -1));
+    assertEquals(
+        "offsetByCodePoints(4.-1): ", 3, Character.offsetByCodePoints(unicodeSequence, 4, -1));
     assertEquals(0, Character.offsetByCodePoints(testUnicode, 0, 4, 3, -2));
     assertEquals(0, Character.offsetByCodePoints(unicodeSequence, 3, -2));
-    char[] nonBmpChar = new char[] { '\uD800', '\uDF46' };
+    char[] nonBmpChar = new char[] {'\uD800', '\uDF46'};
     assertEquals(0x10346, Character.codePointAt(nonBmpChar, 0));
     assertEquals(1, Character.codePointCount(nonBmpChar, 0, 2));
   }
@@ -313,14 +319,14 @@ public class CharacterTest extends TestCase {
   }
 
   public void testLetterOrDigit() {
-    assertEquals("wrong number of letters", 62,
-        letterOrDigitJudge.allPass().length());
+    assertEquals("wrong number of letters", 62, letterOrDigitJudge.allPass().length());
   }
 
   public void testLowerCase() {
-    assertEquals("wrong number of lowercase letters", 26,
-        lowerCaseJudge.allPass().length());
-    assertEquals("wrong number of lowercase letters after toLowerCase", 52,
+    assertEquals("wrong number of lowercase letters", 26, lowerCaseJudge.allPass().length());
+    assertEquals(
+        "wrong number of lowercase letters after toLowerCase",
+        52,
         new LowerCaseJudge(lowerCaseChanger.changed()).allPass().length());
 
     assertEquals('t', Character.toLowerCase((int) 'T'));
@@ -451,28 +457,28 @@ public class CharacterTest extends TestCase {
 
   public void testIsWhitepace() {
     char[] separators = {
-        '\u0020', // SPACE.
-        '\u1680', // OGHAM SPACE MARK.
-        '\u2000', // EN QUAD.
-        '\u2001', // EM QUAD.
-        '\u2002', // EN SPACE.
-        '\u2003', // EM SPACE.
-        '\u2004', // THREE-PER-EM SPACE.
-        '\u2005', // FOUR-PER-EM SPACE.
-        '\u2006', // SIX-PER-EM SPACE.
-        '\u2008', // PUNCTUATION SPACE.
-        '\u2009', // THIN SPACE.
-        '\u200A', // HAIR SPACE.
-        '\u2028', // LINE SEPARATOR.
-        '\u2029', // PARAGRAPH SEPARATOR.
-        '\u205F', // MEDIUM MATHEMATICAL SPACE.
-        '\u3000' // IDEOGRAPHIC SPACE.
+      '\u0020', // SPACE.
+      '\u1680', // OGHAM SPACE MARK.
+      '\u2000', // EN QUAD.
+      '\u2001', // EM QUAD.
+      '\u2002', // EN SPACE.
+      '\u2003', // EM SPACE.
+      '\u2004', // THREE-PER-EM SPACE.
+      '\u2005', // FOUR-PER-EM SPACE.
+      '\u2006', // SIX-PER-EM SPACE.
+      '\u2008', // PUNCTUATION SPACE.
+      '\u2009', // THIN SPACE.
+      '\u200A', // HAIR SPACE.
+      '\u2028', // LINE SEPARATOR.
+      '\u2029', // PARAGRAPH SEPARATOR.
+      '\u205F', // MEDIUM MATHEMATICAL SPACE.
+      '\u3000' // IDEOGRAPHIC SPACE.
     };
 
     char[] nonBreakingSpaceSeparators = {
-        '\u00A0', // NO-BREAK SPACE.
-        '\u2007', // FIGURE SPACE.
-        '\u202F' // NARROW NO-BREAK SPACE.
+      '\u00A0', // NO-BREAK SPACE.
+      '\u2007', // FIGURE SPACE.
+      '\u202F' // NARROW NO-BREAK SPACE.
     };
 
     char[] specialCases = {
@@ -488,16 +494,16 @@ public class CharacterTest extends TestCase {
     };
 
     char[] typicalCounterExamples = {
-        'a', // LATIN SMALL LETTER A.
-        'B', // LATIN CAPITAL LETTER B.
-        '_', // LOW LINE.
-        '\u2500' // BOX DRAWINGS LIGHT HORIZONTAL.
+      'a', // LATIN SMALL LETTER A.
+      'B', // LATIN CAPITAL LETTER B.
+      '_', // LOW LINE.
+      '\u2500' // BOX DRAWINGS LIGHT HORIZONTAL.
     };
 
     int[] supplementaryCounterExamples = {
-        0x2070E, // UNICODE HAN CHARACTER 'to castrate a fowl, a capon'.
-        0x20731, // UNICODE HAN CHARACTER 'to peel, pare'.
-        0x29D98, // UNICODE HAN CHARACTER 'a general name for perch, etc.'.
+      0x2070E, // UNICODE HAN CHARACTER 'to castrate a fowl, a capon'.
+      0x20731, // UNICODE HAN CHARACTER 'to peel, pare'.
+      0x29D98, // UNICODE HAN CHARACTER 'a general name for perch, etc.'.
     };
 
     int[] otherNonWhitespaceInts = {
@@ -604,9 +610,10 @@ public class CharacterTest extends TestCase {
   }
 
   public void testUpperCase() {
-    assertEquals("wrong number of uppercase letters", 26,
-        upperCaseJudge.allPass().length());
-    assertEquals("wrong number of uppercase letters after toUpperCase", 52,
+    assertEquals("wrong number of uppercase letters", 26, upperCaseJudge.allPass().length());
+    assertEquals(
+        "wrong number of uppercase letters after toUpperCase",
+        52,
         new UpperCaseJudge(upperCaseChanger.changed()).allPass().length());
 
     assertEquals('A', Character.toUpperCase((int) 'a'));

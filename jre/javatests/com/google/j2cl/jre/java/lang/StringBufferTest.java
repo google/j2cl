@@ -104,16 +104,12 @@ public class StringBufferTest extends TestCase {
     buf.trimToSize();
   }
 
-  /**
-   * This method tests <code>charAt</code>.
-   */
+  /** This method tests <code>charAt</code>. */
   public void testCharAt() {
     assertEquals('b', new StringBuffer("abc").charAt(1));
   }
 
-  /**
-   * This method tests string creation and equality.
-   */
+  /** This method tests string creation and equality. */
   public void testContructor() {
     String constant = "abcdef";
     assertEquals(new StringBuffer(constant).toString(), constant);
@@ -121,9 +117,7 @@ public class StringBufferTest extends TestCase {
     assertEquals(new StringBuffer((CharSequence) constant).toString(), constant);
   }
 
-  /**
-   * This method tests <code>delete</code>.
-   */
+  /** This method tests <code>delete</code>. */
   public void testDelete() {
     StringBuffer haystack = new StringBuffer("abcdefghi");
     haystack.delete(2, 4);
@@ -146,9 +140,7 @@ public class StringBufferTest extends TestCase {
     }
   }
 
-  /**
-   * This method tests <code>indexOf</code>.
-   */
+  /** This method tests <code>indexOf</code>. */
   public void testIndexOf() {
     String haystack = "abcdefghi";
     assertEquals(-1, haystack.indexOf("q"));
@@ -160,9 +152,7 @@ public class StringBufferTest extends TestCase {
     assertEquals(0, haystack.indexOf(""));
   }
 
-  /**
-   * This method tests <code>insert</code>.
-   */
+  /** This method tests <code>insert</code>. */
   public void testInsert() {
     StringBuffer x = new StringBuffer("!");
     x.insert(1, C.FLOAT_VALUE);
@@ -207,9 +197,7 @@ public class StringBufferTest extends TestCase {
     assertEquals("!nul", x.toString());
   }
 
-  /**
-   * This method does interleaved inserts and deletes.
-   */
+  /** This method does interleaved inserts and deletes. */
   public void testInterleavedInsertAndDelete() {
     StringBuffer x = new StringBuffer();
     for (int i = 0; i < 9; i++) {
@@ -230,10 +218,7 @@ public class StringBufferTest extends TestCase {
     assertEquals(-1, x.lastIndexOf("f", 1));
   }
 
-  /**
-   * This method tests <code>length</code>, and tests moderately long
-   * StringBuffers.
-   */
+  /** This method tests <code>length</code>, and tests moderately long StringBuffers. */
   public void testLength() {
     assertEquals(3, new StringBuffer("abc").length());
     StringBuffer str = new StringBuffer("x");
@@ -243,18 +228,14 @@ public class StringBufferTest extends TestCase {
     assertEquals(1 << 16, str.length());
   }
 
-  /**
-   * This method tests <code>toLowerCase</code>.
-   */
+  /** This method tests <code>toLowerCase</code>. */
   public void testLowerCase() {
     assertEquals("abc", "AbC".toLowerCase(Locale.ROOT));
     assertEquals("abc", "abc".toLowerCase(Locale.ROOT));
     assertEquals("", "".toLowerCase(Locale.ROOT));
   }
 
-  /**
-   * Tests correctness under repeated insertion and append.
-   */
+  /** Tests correctness under repeated insertion and append. */
   public void testRepeatedAppendsAndInserts() {
     StringBuffer x = new StringBuffer();
     final int size = 1000;
@@ -287,9 +268,7 @@ public class StringBufferTest extends TestCase {
     assertEquals("size4", size * 4, x.length());
   }
 
-  /**
-   * This method tests <code>replace</code>.
-   */
+  /** This method tests <code>replace</code>. */
   public void testReplace() {
     StringBuffer x = new StringBuffer("xxyyxx");
     x.replace(2, 4, "YY");
@@ -337,9 +316,7 @@ public class StringBufferTest extends TestCase {
     assertEquals("abcde", x.toString());
   }
 
-  /**
-   * This method tests <code>startsWith</code>.
-   */
+  /** This method tests <code>startsWith</code>. */
   public void testStartsWith() {
     String haystack = "abcdefghi";
     assertTrue(haystack.startsWith("abc"));
@@ -404,12 +381,13 @@ public class StringBufferTest extends TestCase {
     assertEquals("5", bld.toString());
 
     bld = new StringBuilder();
-    bld.append(new Object() {
-      @Override
-      public String toString() {
-        return "obj";
-      }
-    });
+    bld.append(
+        new Object() {
+          @Override
+          public String toString() {
+            return "obj";
+          }
+        });
     assertEquals("obj", bld.toString());
 
     bld = new StringBuilder();
@@ -495,12 +473,14 @@ public class StringBufferTest extends TestCase {
     assertEquals("0199234", bld.toString());
 
     bld = new StringBuilder("01234");
-    bld.insert(2, new Object() {
-      @Override
-      public String toString() {
-        return "obj";
-      }
-    });
+    bld.insert(
+        2,
+        new Object() {
+          @Override
+          public String toString() {
+            return "obj";
+          }
+        });
     assertEquals("01obj234", bld.toString());
 
     bld = new StringBuilder("01234");

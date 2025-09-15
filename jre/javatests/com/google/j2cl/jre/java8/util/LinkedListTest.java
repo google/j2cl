@@ -18,9 +18,7 @@ package com.google.j2cl.jre.java8.util;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Java 8 methods to test in java.util.LinkedList.
- */
+/** Java 8 methods to test in java.util.LinkedList. */
 public class LinkedListTest extends AbstractJava8ListTest {
   @Override
   protected List<String> createEmptyList() {

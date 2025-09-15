@@ -283,8 +283,17 @@ public class MathTest extends TestCase {
   }
 
   public void testToIntExact() {
-    final long[] longs = {0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE,
-        Integer.MIN_VALUE - 1L, Integer.MAX_VALUE + 1L, Long.MIN_VALUE, Long.MAX_VALUE};
+    final long[] longs = {
+      0,
+      -1,
+      1,
+      Integer.MIN_VALUE,
+      Integer.MAX_VALUE,
+      Integer.MIN_VALUE - 1L,
+      Integer.MAX_VALUE + 1L,
+      Long.MIN_VALUE,
+      Long.MAX_VALUE
+    };
     for (long a : longs) {
       boolean expectedSuccess = (int) a == a;
       try {

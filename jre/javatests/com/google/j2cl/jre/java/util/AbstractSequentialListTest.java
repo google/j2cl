@@ -21,9 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-/**
- * Test custom iterators for AbstractSequentialList. Checks issue 3057.
- */
+/** Test custom iterators for AbstractSequentialList. Checks issue 3057. */
 @SuppressWarnings("unchecked")
 public class AbstractSequentialListTest extends EmulTestBase {
 
@@ -68,33 +66,28 @@ public class AbstractSequentialListTest extends EmulTestBase {
 
         @Override
         public int nextIndex() {
-          throw new UnsupportedOperationException(
-              "nextIndex operation not supported");
+          throw new UnsupportedOperationException("nextIndex operation not supported");
         }
 
         @Override
         public E previous() {
-          throw new UnsupportedOperationException(
-              "previous operation not supported");
+          throw new UnsupportedOperationException("previous operation not supported");
         }
 
         @Override
         public int previousIndex() {
-          throw new UnsupportedOperationException(
-              "previousIndex operation not supported");
+          throw new UnsupportedOperationException("previousIndex operation not supported");
         }
 
         @Override
         public void remove() {
-          throw new UnsupportedOperationException(
-              "remove operation not supported");
+          throw new UnsupportedOperationException("remove operation not supported");
         }
 
         @Override
         public void set(E e) {
           throw new UnsupportedOperationException("set operation not supported");
         }
-
       };
     }
 
@@ -128,5 +121,4 @@ public class AbstractSequentialListTest extends EmulTestBase {
     assertEquals(new Integer(7), iterator.next());
     assertEquals(new Integer(11), iterator.next());
   }
-
 }

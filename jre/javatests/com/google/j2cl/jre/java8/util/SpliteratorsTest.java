@@ -49,31 +49,58 @@ public class SpliteratorsTest extends TestCase {
   public void testSpliterator() {
     final String[] original = {"1", "2", "3", "4"};
     testSpliterator(original, () -> Spliterators.spliterator(Arrays.asList(original), 0), true);
-    testSpliterator(original, () -> Spliterators.spliterator(Arrays.asList(original).iterator(), original.length, 0), true);
-    testSpliterator(original, () -> Spliterators.spliteratorUnknownSize(Arrays.asList(original).iterator(), 0), false);
+    testSpliterator(
+        original,
+        () -> Spliterators.spliterator(Arrays.asList(original).iterator(), original.length, 0),
+        true);
+    testSpliterator(
+        original,
+        () -> Spliterators.spliteratorUnknownSize(Arrays.asList(original).iterator(), 0),
+        false);
     testSpliterator(original, () -> Spliterators.spliterator(original, 0), true);
-    testSpliterator(Arrays.copyOfRange(original, 1, 3), () -> Spliterators.spliterator(original, 1, 3, 0), true);
+    testSpliterator(
+        Arrays.copyOfRange(original, 1, 3),
+        () -> Spliterators.spliterator(original, 1, 3, 0),
+        true);
   }
 
   public void testDoubleSpliterator() {
     final double[] original = {1., 2., 3., 4.};
     testDoubleSpliterator(original, () -> Spliterators.spliterator(original, 0), true);
-    testDoubleSpliterator(Arrays.copyOfRange(original, 1, 3), () -> Spliterators.spliterator(original, 1, 3, 0), true);
-    testDoubleSpliterator(original, () -> Spliterators.spliterator(createPrimitiveDoubleIterator(original), original.length, 0), true);
+    testDoubleSpliterator(
+        Arrays.copyOfRange(original, 1, 3),
+        () -> Spliterators.spliterator(original, 1, 3, 0),
+        true);
+    testDoubleSpliterator(
+        original,
+        () -> Spliterators.spliterator(createPrimitiveDoubleIterator(original), original.length, 0),
+        true);
   }
 
   public void testIntSpliterator() {
     final int[] original = {1, 2, 3, 4};
     testIntSpliterator(original, () -> Spliterators.spliterator(original, 0), true);
-    testIntSpliterator(Arrays.copyOfRange(original, 1, 3), () -> Spliterators.spliterator(original, 1, 3, 0), true);
-    testIntSpliterator(original, () -> Spliterators.spliterator(createPrimitiveIntIterator(original), original.length, 0), true);
+    testIntSpliterator(
+        Arrays.copyOfRange(original, 1, 3),
+        () -> Spliterators.spliterator(original, 1, 3, 0),
+        true);
+    testIntSpliterator(
+        original,
+        () -> Spliterators.spliterator(createPrimitiveIntIterator(original), original.length, 0),
+        true);
   }
 
   public void testLongSpliterator() {
     final long[] original = {1, 2, 3, 4};
     testLongSpliterator(original, () -> Spliterators.spliterator(original, 0), true);
-    testLongSpliterator(Arrays.copyOfRange(original, 1, 3), () -> Spliterators.spliterator(original, 1, 3, 0), true);
-    testLongSpliterator(original, () -> Spliterators.spliterator(createPrimitiveLongIterator(original), original.length, 0), true);
+    testLongSpliterator(
+        Arrays.copyOfRange(original, 1, 3),
+        () -> Spliterators.spliterator(original, 1, 3, 0),
+        true);
+    testLongSpliterator(
+        original,
+        () -> Spliterators.spliterator(createPrimitiveLongIterator(original), original.length, 0),
+        true);
   }
 
   public void testIterator() {
@@ -140,7 +167,8 @@ public class SpliteratorsTest extends TestCase {
     assertEquals(0, values.size());
   }
 
-  private <T> void testSpliterator(T[] original, Supplier<Spliterator<T>> supplier, boolean sizeKnown) {
+  private <T> void testSpliterator(
+      T[] original, Supplier<Spliterator<T>> supplier, boolean sizeKnown) {
     Spliterator<T> spliterator = supplier.get();
     if (sizeKnown) {
       assertEquals(original.length, spliterator.estimateSize());
@@ -162,7 +190,8 @@ public class SpliteratorsTest extends TestCase {
     assertFalse(spliterator.tryAdvance(value -> fail()));
   }
 
-  private void testDoubleSpliterator(double[] original, Supplier<Spliterator.OfDouble> supplier, boolean sizeKnown) {
+  private void testDoubleSpliterator(
+      double[] original, Supplier<Spliterator.OfDouble> supplier, boolean sizeKnown) {
     Spliterator.OfDouble spliterator = supplier.get();
     if (sizeKnown) {
       assertEquals(original.length, spliterator.estimateSize());
@@ -184,7 +213,8 @@ public class SpliteratorsTest extends TestCase {
     assertFalse(spliterator.tryAdvance((double value) -> fail()));
   }
 
-  private void testIntSpliterator(int[] original, Supplier<Spliterator.OfInt> supplier, boolean sizeKnown) {
+  private void testIntSpliterator(
+      int[] original, Supplier<Spliterator.OfInt> supplier, boolean sizeKnown) {
     Spliterator.OfInt spliterator = supplier.get();
     if (sizeKnown) {
       assertEquals(original.length, spliterator.estimateSize());
@@ -206,7 +236,8 @@ public class SpliteratorsTest extends TestCase {
     assertFalse(spliterator.tryAdvance((int value) -> fail()));
   }
 
-  private void testLongSpliterator(long[] original, Supplier<Spliterator.OfLong> supplier, boolean sizeKnown) {
+  private void testLongSpliterator(
+      long[] original, Supplier<Spliterator.OfLong> supplier, boolean sizeKnown) {
     Spliterator.OfLong spliterator = supplier.get();
     if (sizeKnown) {
       assertEquals(original.length, spliterator.estimateSize());
@@ -296,5 +327,4 @@ public class SpliteratorsTest extends TestCase {
       }
     };
   }
-
 }

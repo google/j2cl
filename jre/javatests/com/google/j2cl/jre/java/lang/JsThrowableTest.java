@@ -44,12 +44,13 @@ public class JsThrowableTest extends JsThrowableTestBase {
   }
 
   public void testCatchNative_fillInStackTraceOverride() {
-    Throwable e = new Throwable("<my msg>") {
-      public Throwable fillInStackTrace() {
-        // Replace fill in stack trace with no-op.
-        return this;
-      }
-    };
+    Throwable e =
+        new Throwable("<my msg>") {
+          public Throwable fillInStackTrace() {
+            // Replace fill in stack trace with no-op.
+            return this;
+          }
+        };
 
     Object caughtNative = catchNative(createThrower(e));
     assertTrue(caughtNative instanceof JsError);

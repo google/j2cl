@@ -20,9 +20,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 
-/**
- * Unit test for the {@link java.io.ByteArrayOutputStream} emulated class.
- */
+/** Unit test for the {@link java.io.ByteArrayOutputStream} emulated class. */
 public class ByteArrayOutputStreamTest extends OutputStreamBaseTest {
 
   private static ByteArrayOutputStream outputStream;
@@ -35,7 +33,7 @@ public class ByteArrayOutputStreamTest extends OutputStreamBaseTest {
 
   @Override
   protected byte[] getBytesWritten() {
-    return outputStream !=  null ? outputStream.toByteArray() : null;
+    return outputStream != null ? outputStream.toByteArray() : null;
   }
 
   public void testClose() throws IOException {
@@ -57,10 +55,10 @@ public class ByteArrayOutputStreamTest extends OutputStreamBaseTest {
 
     byte[] actualBytes = outputStream.toByteArray();
     assertTrue(Arrays.equals(TEST_ARRAY, actualBytes));
- 
+
     outputStream.reset();
 
-    final byte[] expectedBytes = new byte[] { 101, 102 };
+    final byte[] expectedBytes = new byte[] {101, 102};
     outputStream.write(expectedBytes);
 
     actualBytes = outputStream.toByteArray();
@@ -95,9 +93,8 @@ public class ByteArrayOutputStreamTest extends OutputStreamBaseTest {
 
   public void testToStringUsingNonEmptyStream() throws IOException {
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream(1);
-    final byte[] values = new byte[] {
-        (byte) 0x48, (byte) 0x65, (byte) 0x6c, (byte) 0x6c, (byte) 0x6f
-    };
+    final byte[] values =
+        new byte[] {(byte) 0x48, (byte) 0x65, (byte) 0x6c, (byte) 0x6c, (byte) 0x6f};
     outputStream.write(values);
     final String actualString = outputStream.toString();
     assertEquals("Hello", actualString);
@@ -111,14 +108,13 @@ public class ByteArrayOutputStreamTest extends OutputStreamBaseTest {
 
   public void testToStringWithHighByteAndNonEmptyStream() throws IOException {
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream(1);
-    final byte[] values = new byte[] {
-        (byte) 0x00, (byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x04
-    };
+    final byte[] values =
+        new byte[] {(byte) 0x00, (byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x04};
     outputStream.write(values);
     final String actualString = outputStream.toString(0x01);
-    final String expectedString = new String(new char[] {
-        (char) 0x0100, (char) 0x0101, (char) 0x0102, (char) 0x0103, (char) 0x0104
-    });
+    final String expectedString =
+        new String(
+            new char[] {(char) 0x0100, (char) 0x0101, (char) 0x0102, (char) 0x0103, (char) 0x0104});
     assertEquals(expectedString, actualString);
   }
 

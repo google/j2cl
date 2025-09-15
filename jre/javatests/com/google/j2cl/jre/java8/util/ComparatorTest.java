@@ -35,40 +35,36 @@ public class ComparatorTest extends EmulTestBase {
     String[] f2f1 = {"1,a", "2,a", "1,b"};
 
     // keyextractor
-    assertSortedEquals(f1f2, strings,
+    assertSortedEquals(
+        f1f2,
+        strings,
         Comparator.<String, String>comparing(s -> s.split(",")[0])
-            .thenComparing(s -> s.split(",")[1])
-    );
+            .thenComparing(s -> s.split(",")[1]));
     // keyextractor, keycomparator
-    assertSortedEquals(f1r2, strings,
+    assertSortedEquals(
+        f1r2,
+        strings,
         Comparator.<String, String>comparing(s -> s.split(",")[0])
-            .thenComparing(
-                s -> s.split(",")[1],
-                Comparator.<String>reverseOrder()
-            )
-    );
+            .thenComparing(s -> s.split(",")[1], Comparator.<String>reverseOrder()));
 
     // int key extractor
-    assertSortedEquals(f2f1, strings,
+    assertSortedEquals(
+        f2f1,
+        strings,
         Comparator.<String, String>comparing(s -> s.split(",")[1])
-            .thenComparingInt(
-                s -> Integer.parseInt(s.split(",")[0])
-            )
-    );
+            .thenComparingInt(s -> Integer.parseInt(s.split(",")[0])));
     // long key extractor
-    assertSortedEquals(f2f1, strings,
+    assertSortedEquals(
+        f2f1,
+        strings,
         Comparator.<String, String>comparing(s -> s.split(",")[1])
-            .thenComparingLong(
-                s -> Long.parseLong(s.split(",")[0])
-            )
-    );
+            .thenComparingLong(s -> Long.parseLong(s.split(",")[0])));
     // double key extractor
-    assertSortedEquals(f2f1, strings,
+    assertSortedEquals(
+        f2f1,
+        strings,
         Comparator.<String, String>comparing(s -> s.split(",")[1])
-            .thenComparingDouble(
-                s -> Double.parseDouble(s.split(",")[0])
-            )
-    );
+            .thenComparingDouble(s -> Double.parseDouble(s.split(",")[0])));
   }
 
   public void testComparing() {
@@ -86,7 +82,10 @@ public class ComparatorTest extends EmulTestBase {
     assertSortedEquals(third, strings, Comparator.comparing(a -> a.substring(2)));
 
     // keyextractor, keycomparator
-    assertSortedEquals(reverse(second), strings, Comparator.comparing(a -> a.substring(1), Comparator.reverseOrder()));
+    assertSortedEquals(
+        reverse(second),
+        strings,
+        Comparator.comparing(a -> a.substring(1), Comparator.reverseOrder()));
     comparing = Comparator.comparing(a -> a.substring(1));
     assertSortedEquals(reverse(second), strings, comparing.reversed());
 

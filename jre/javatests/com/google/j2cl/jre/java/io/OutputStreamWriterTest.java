@@ -60,7 +60,7 @@ public class OutputStreamWriterTest extends TestCase {
 
   public void testNullOutputStream() throws UnsupportedEncodingException {
     try {
-      new OutputStreamWriter(/* out = */ null, encodingUTF8Charset);
+      new OutputStreamWriter(/* out= */ null, encodingUTF8Charset);
       fail("should have thrown NullPointerException");
     } catch (NullPointerException expected) {
     }

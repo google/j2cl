@@ -324,8 +324,7 @@ public class StreamTest extends EmulTestBase {
     // make sure we saw it all in order
     List<String> items = asList("a", "b", "c");
     List<String> peeked = new ArrayList<>();
-    items
-        .stream()
+    items.stream()
         .peek(peeked::add)
         .forEach(
             item -> {
@@ -447,8 +446,7 @@ public class StreamTest extends EmulTestBase {
   public void testSorted() {
     List<String> sorted = asList("c", "a", "b").stream().sorted().collect(Collectors.toList());
     List<String> reversed =
-        asList("c", "a", "b")
-            .stream()
+        asList("c", "a", "b").stream()
             .sorted(Comparator.reverseOrder())
             .collect(Collectors.toList());
 

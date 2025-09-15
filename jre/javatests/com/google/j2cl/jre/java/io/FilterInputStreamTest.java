@@ -23,9 +23,7 @@ import junit.framework.TestCase;
 /** Unit test for the {@link java.io.FilterInputStream} emulated class. */
 public class FilterInputStreamTest extends TestCase {
 
-  /**
-   * Mock for {@link InputStream}.
-   */
+  /** Mock for {@link InputStream}. */
   private static class MockInputStream extends InputStream {
     public static final int RETURNED_VALUE_FOR_AVAILABLE = 100;
     public static final int RETURNED_VALUE_FOR_READ_BYTE = 150;

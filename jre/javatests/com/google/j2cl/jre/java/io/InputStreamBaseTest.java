@@ -23,8 +23,7 @@ import junit.framework.TestCase;
 /** Class for reusing tests that are common to {@link java.io.InputStream} and its subclasses. */
 public abstract class InputStreamBaseTest extends TestCase {
 
-  protected static final byte[] TEST_BYTES = new byte[] { 10, 20, 30, 40, 50 };
-
+  protected static final byte[] TEST_BYTES = new byte[] {10, 20, 30, 40, 50};
 
   /**
    * Factory method for creating a stream object.

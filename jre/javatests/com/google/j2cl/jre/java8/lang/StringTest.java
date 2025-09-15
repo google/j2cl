@@ -38,5 +38,4 @@ public class StringTest extends TestCase {
     assertEquals("a,b,c", String.join(",", "a", "b", "c"));
     assertEquals("a,b,c", String.join(",", Arrays.asList("a", "b", "c")));
   }
-
 }

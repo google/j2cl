@@ -19,9 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
-/**
- * Tests Vector.
- */
+/** Tests Vector. */
 public class VectorTest extends ListTestBase {
 
   @Override

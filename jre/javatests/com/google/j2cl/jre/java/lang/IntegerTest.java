@@ -108,8 +108,7 @@ public class IntegerTest extends TestCase {
   public void testBinaryString() {
     assertEquals("11000000111001", Integer.toBinaryString(12345));
     assertEquals("0", Integer.toBinaryString(0));
-    assertEquals("11111111111111111100111111000111",
-        Integer.toBinaryString(-12345));
+    assertEquals("11111111111111111100111111000111", Integer.toBinaryString(-12345));
   }
 
   public void testBitCount() {
@@ -145,10 +144,8 @@ public class IntegerTest extends TestCase {
   }
 
   public void testDecode() {
-    assertEquals(Integer.MAX_VALUE, Integer.decode(
-        String.valueOf(Integer.MAX_VALUE)).intValue());
-    assertEquals(Integer.MIN_VALUE, Integer.decode(
-        String.valueOf(Integer.MIN_VALUE)).intValue());
+    assertEquals(Integer.MAX_VALUE, Integer.decode(String.valueOf(Integer.MAX_VALUE)).intValue());
+    assertEquals(Integer.MIN_VALUE, Integer.decode(String.valueOf(Integer.MIN_VALUE)).intValue());
     assertEquals(12345, Integer.decode("12345").intValue());
     assertEquals(12345, Integer.decode("+12345").intValue());
     assertEquals(-12345, Integer.decode("-12345").intValue());
@@ -257,10 +254,8 @@ public class IntegerTest extends TestCase {
   }
 
   public void testStaticValueOf() {
-    assertEquals(Integer.MIN_VALUE,
-        Integer.valueOf(Integer.MIN_VALUE).intValue());
-    assertEquals(Integer.MAX_VALUE,
-        Integer.valueOf(Integer.MAX_VALUE).intValue());
+    assertEquals(Integer.MIN_VALUE, Integer.valueOf(Integer.MIN_VALUE).intValue());
+    assertEquals(Integer.MAX_VALUE, Integer.valueOf(Integer.MAX_VALUE).intValue());
   }
 
   public void testToBinaryString() {
@@ -275,8 +270,9 @@ public class IntegerTest extends TestCase {
     assertEquals("80000000", Integer.toHexString(Integer.MIN_VALUE));
     assertEquals("ffffffff", Integer.toHexString(-1));
 
-    String[] hexDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-        "a", "b", "c", "d", "e", "f" };
+    String[] hexDigits = {
+      "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"
+    };
     for (int i = 0; i < hexDigits.length; i++) {
       assertEquals(hexDigits[i], Integer.toHexString(i));
     }
@@ -324,10 +320,8 @@ public class IntegerTest extends TestCase {
     assertEquals(-12345, Integer.parseInt("-12345"));
     assertEquals(1865, Integer.parseInt("12345", 6));
     assertEquals(0, Integer.parseInt("0"));
-    assertEquals(Integer.MAX_VALUE,
-        Integer.parseInt(String.valueOf(Integer.MAX_VALUE)));
-    assertEquals(Integer.MIN_VALUE,
-        Integer.parseInt(String.valueOf(Integer.MIN_VALUE)));
+    assertEquals(Integer.MAX_VALUE, Integer.parseInt(String.valueOf(Integer.MAX_VALUE)));
+    assertEquals(Integer.MIN_VALUE, Integer.parseInt(String.valueOf(Integer.MIN_VALUE)));
   }
 
   public void testXValue() {
@@ -337,10 +331,8 @@ public class IntegerTest extends TestCase {
     assertEquals("float", 12345f, new Integer(12345).floatValue(), 0.01);
     assertEquals("byte", (byte) 123, new Integer(123).byteValue());
     assertEquals("integer", 123, new Integer(123).intValue());
-    assertEquals("short overflow", (short) 10713,
-        new Integer(1234512345).shortValue());
-    assertEquals("double2", 1234512345d, new Integer(1234512345).doubleValue(),
-        0.001);
+    assertEquals("short overflow", (short) 10713, new Integer(1234512345).shortValue());
+    assertEquals("double2", 1234512345d, new Integer(1234512345).doubleValue(), 0.001);
     // Invalid test right now; we don't coerce to single precision
     // assertEquals("float2",1234512345f, new
     // Integer(1234512345).floatValue(),0.001);

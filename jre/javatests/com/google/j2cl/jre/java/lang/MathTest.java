@@ -227,12 +227,12 @@ public class MathTest extends TestCase {
     assertEquals(-Math.PI / 2, Math.atan2(-1.0, -0.0), 1e-7);
     assertEquals(-Math.PI / 2, Math.atan2(Double.NEGATIVE_INFINITY, 1.0), 1e-7);
     assertEquals(Math.PI / 4, Math.atan2(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY), 1e-7);
-    assertEquals(Math.PI * 3 / 4,
-        Math.atan2(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY), 1e-7);
-    assertEquals(-Math.PI / 4,
-        Math.atan2(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY), 1e-7);
-    assertEquals(-3 * Math.PI / 4,
-        Math.atan2(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), 1e-7);
+    assertEquals(
+        Math.PI * 3 / 4, Math.atan2(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY), 1e-7);
+    assertEquals(
+        -Math.PI / 4, Math.atan2(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY), 1e-7);
+    assertEquals(
+        -3 * Math.PI / 4, Math.atan2(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), 1e-7);
 
     assertEquals(0.463647609, Math.atan2(1, 2), 1e-7);
   }
@@ -387,30 +387,22 @@ public class MathTest extends TestCase {
   }
 
   public void testHypot() {
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(0, Double.POSITIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(0, Double.NEGATIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.POSITIVE_INFINITY, 0));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.NEGATIVE_INFINITY, 0));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.NaN, Double.POSITIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.NaN, Double.NEGATIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.POSITIVE_INFINITY, Double.NaN));
-    assertEquals(Double.POSITIVE_INFINITY,
-        Math.hypot(Double.NEGATIVE_INFINITY, Double.NaN));
+    assertEquals(
+        Double.POSITIVE_INFINITY, Math.hypot(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
+    assertEquals(
+        Double.POSITIVE_INFINITY, Math.hypot(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    assertEquals(
+        Double.POSITIVE_INFINITY, Math.hypot(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY));
+    assertEquals(
+        Double.POSITIVE_INFINITY, Math.hypot(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(0, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(0, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(Double.POSITIVE_INFINITY, 0));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(Double.NEGATIVE_INFINITY, 0));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(Double.NaN, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(Double.NaN, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(Double.POSITIVE_INFINITY, Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(Double.NEGATIVE_INFINITY, Double.NaN));
     assertNaN(Math.hypot(Double.NaN, 0));
     assertNaN(Math.hypot(0, Double.NaN));
 
@@ -702,43 +694,73 @@ public class MathTest extends TestCase {
     final double twoTo52 = 1L << 52;
     // format: value to be round and expected value
     final double[] testValues = {
-        0.0, 0.0,
-        0.5, 0.0,
-        0.75, 1,
-        1.5, 2,
-        1.75, 2,
-        -0.0, -0.0,
-        -0.5, -0.0,
-        -1.25, -1,
-        -1.5, -2,
-        -2.5, -2,
-        twoTo52, twoTo52,
-        twoTo52 - 0.25, twoTo52,
-        twoTo52 + 0.25, twoTo52,
-        twoTo52 + 0.5, twoTo52,
-        twoTo52 - 0.5, twoTo52,
-        twoTo52 + 0.75, twoTo52 + 1,
-        twoTo52 - 0.75, twoTo52 - 1,
-        -twoTo52, -twoTo52,
-        -twoTo52 + 0.25, -twoTo52,
-        -twoTo52 - 0.25, -twoTo52,
-        -twoTo52 + 0.5, -twoTo52,
-        -twoTo52 - 0.5, -twoTo52,
-        -twoTo52 + 0.75, -twoTo52 + 1,
-        -twoTo52 - 0.75, -twoTo52 - 1,
-        Double.MIN_VALUE, 0.0,
-        Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY,
-        Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY,
-        Double.NaN, Double.NaN,
-        Double.MAX_VALUE, Double.MAX_VALUE,
-        -Double.MAX_VALUE, -Double.MAX_VALUE,
+      0.0,
+      0.0,
+      0.5,
+      0.0,
+      0.75,
+      1,
+      1.5,
+      2,
+      1.75,
+      2,
+      -0.0,
+      -0.0,
+      -0.5,
+      -0.0,
+      -1.25,
+      -1,
+      -1.5,
+      -2,
+      -2.5,
+      -2,
+      twoTo52,
+      twoTo52,
+      twoTo52 - 0.25,
+      twoTo52,
+      twoTo52 + 0.25,
+      twoTo52,
+      twoTo52 + 0.5,
+      twoTo52,
+      twoTo52 - 0.5,
+      twoTo52,
+      twoTo52 + 0.75,
+      twoTo52 + 1,
+      twoTo52 - 0.75,
+      twoTo52 - 1,
+      -twoTo52,
+      -twoTo52,
+      -twoTo52 + 0.25,
+      -twoTo52,
+      -twoTo52 - 0.25,
+      -twoTo52,
+      -twoTo52 + 0.5,
+      -twoTo52,
+      -twoTo52 - 0.5,
+      -twoTo52,
+      -twoTo52 + 0.75,
+      -twoTo52 + 1,
+      -twoTo52 - 0.75,
+      -twoTo52 - 1,
+      Double.MIN_VALUE,
+      0.0,
+      Double.NEGATIVE_INFINITY,
+      Double.NEGATIVE_INFINITY,
+      Double.POSITIVE_INFINITY,
+      Double.POSITIVE_INFINITY,
+      Double.NaN,
+      Double.NaN,
+      Double.MAX_VALUE,
+      Double.MAX_VALUE,
+      -Double.MAX_VALUE,
+      -Double.MAX_VALUE,
     };
-    for (int i = 0; i < testValues.length;) {
+    for (int i = 0; i < testValues.length; ) {
       double v = testValues[i++];
       double expected = testValues[i++];
       double actual = Math.rint(v);
-      assertEquals("value: " + v + ", expected: " + expected + ", actual: " + actual,
-          expected, actual, 0);
+      assertEquals(
+          "value: " + v + ", expected: " + expected + ", actual: " + actual, expected, actual, 0);
     }
   }
 

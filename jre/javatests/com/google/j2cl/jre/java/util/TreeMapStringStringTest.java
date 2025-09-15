@@ -42,7 +42,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     assertEquals("headMap.size", 0, headMap.size());
     assertEquals("headMap.isEmpty", true, headMap.isEmpty());
   }
-    
+
   public void testHeadMapEqualsFirst() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
     SortedMap<String, String> subMap = sortedMap.headMap("aa");
@@ -66,8 +66,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
   }
 
   /**
-   * Perform some tests on submap that are hard to do without specific knowledge
-   * of the keys used.
+   * Perform some tests on submap that are hard to do without specific knowledge of the keys used.
    */
   public void testHeadMapSimple() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
@@ -100,20 +99,17 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     assertEquals("subMap.isEmpty", true, subMap.isEmpty());
   }
 
-  /**
-   * Tests that compositing submap operations function as expected.
-   */
+  /** Tests that compositing submap operations function as expected. */
   public void testSubMapComposite() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
     SortedMap<String, String> subMap1 = sortedMap.headMap("cz").tailMap("bb");
     SortedMap<String, String> subMap2 = sortedMap.tailMap("bb").headMap("cz");
     SortedMap<String, String> subMap3 = sortedMap.subMap("bb", "cz");
-    assertEquals("headMap(tailMap) should equal tailMap(headMap)", subMap1,
-        subMap2);
+    assertEquals("headMap(tailMap) should equal tailMap(headMap)", subMap1, subMap2);
     assertEquals("headMap(tailMap) should equal subMap", subMap1, subMap3);
     assertEquals("headMap(tailMap) size", 2, subMap1.size());
   }
-  
+
   public void testTailMapClear() {
     TreeMap<String, String> map = new TreeMap<String, String>();
     map.put("a", "value a");
@@ -172,8 +168,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     treeMap.put("foo", "fooValue");
     treeMap.put("bar", "barValue");
 
-    Iterator<Entry<String, String>> entryIterator =
-treeMap.entrySet().iterator();
+    Iterator<Entry<String, String>> entryIterator = treeMap.entrySet().iterator();
     Entry<String, String> entry = entryIterator.next();
     assertEquals("entry: " + entry, "bar", entry.getKey());
 
@@ -182,21 +177,20 @@ treeMap.entrySet().iterator();
     entryIterator.remove();
     assertEquals("after remove(): " + entry, "foo", entry.getKey());
   }
-  
+
   // checks for compatibility with real Jre's Entry.toString(): issue 3422
   public void testTreeMapEntryToString() {
     Map<String, String> treeMap = new TreeMap<String, String>();
     treeMap.put("bar", "barValue");
 
-    assertEquals("bar=barValue",
-        treeMap.entrySet().iterator().next().toString());
+    assertEquals("bar=barValue", treeMap.entrySet().iterator().next().toString());
   }
-  
+
   public void testTreeMapRemove() {
     Map<String, String> treeMap = new TreeMap<String, String>();
     treeMap.put("foo", "fooValue");
     treeMap.put("bar", "barValue");
-    
+
     Iterator<Entry<String, String>> entryIterator = treeMap.entrySet().iterator();
     entryIterator.next();
     Entry<String, String> secondEntry = entryIterator.next();
@@ -204,7 +198,7 @@ treeMap.entrySet().iterator();
     treeMap.remove("foo");
     assertEquals("after removeKey: ", "foo", secondEntry.getKey());
   }
-  
+
   @Override
   protected Object getConflictingKey() {
     return new Integer(1);

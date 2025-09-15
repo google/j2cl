@@ -18,9 +18,7 @@ package com.google.j2cl.jre.java8.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Tests for java.util.LinkedHashMap Java 8 API emulation.
- */
+/** Tests for java.util.LinkedHashMap Java 8 API emulation. */
 public class LinkedHashMapTest extends AbstractJava8MapTest {
 
   @Override

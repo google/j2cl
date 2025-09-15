@@ -23,15 +23,24 @@ public class FloatTest extends TestCase {
 
   public void testIsFinite() {
     final float[] nonfiniteNumbers = {
-        Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, Float.NaN,
+      Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, Float.NaN,
     };
     for (float value : nonfiniteNumbers) {
       assertFalse(Float.isFinite(value));
     }
 
     final float[] finiteNumbers = {
-        -Float.MAX_VALUE, Float.MAX_VALUE, Float.MIN_VALUE,
-        -1.0f, -0.5f, -0.1f, -0.0f, 0.0f, 0.1f, 0.5f, 1.0f,
+      -Float.MAX_VALUE,
+      Float.MAX_VALUE,
+      Float.MIN_VALUE,
+      -1.0f,
+      -0.5f,
+      -0.1f,
+      -0.0f,
+      0.0f,
+      0.1f,
+      0.5f,
+      1.0f,
     };
     for (float value : finiteNumbers) {
       assertTrue(Float.isFinite(value));
@@ -45,8 +54,17 @@ public class FloatTest extends TestCase {
     assertFalse(Float.isInfinite(Float.NaN));
 
     final float[] finiteNumbers = {
-        -Float.MAX_VALUE, Float.MAX_VALUE, Float.MIN_VALUE,
-        -1.0f, -0.5f, -0.1f, -0.0f, 0.0f, 0.1f, 0.5f, 1.0f,
+      -Float.MAX_VALUE,
+      Float.MAX_VALUE,
+      Float.MIN_VALUE,
+      -1.0f,
+      -0.5f,
+      -0.1f,
+      -0.0f,
+      0.0f,
+      0.1f,
+      0.5f,
+      1.0f,
     };
     for (float value : finiteNumbers) {
       assertFalse(Float.isInfinite(value));

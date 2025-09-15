@@ -31,9 +31,7 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-/**
- * Tests {@link IntStream}.
- */
+/** Tests {@link IntStream}. */
 public class IntStreamTest extends EmulTestBase {
 
   public void testEmptyStream() {

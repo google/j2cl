@@ -27,9 +27,7 @@ import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
-/**
- * Tests {@link DoubleSummaryStatistics}.
- */
+/** Tests {@link DoubleSummaryStatistics}. */
 public class DoubleSummaryStatisticsTest extends EmulTestBase {
 
   private DoubleSummaryStatistics stats;
@@ -94,15 +92,15 @@ public class DoubleSummaryStatisticsTest extends EmulTestBase {
     assertEquals(POSITIVE_INFINITY, stats.getMin());
 
     double[][] testData = {
-        //          aDouble,               max,               min
-        {               1.0,               1.0,               1.0 },
-        {              -1.0,               1.0,              -1.0 },
-        {               2.5,               2.5,              -1.0 },
-        {              -2.5,               2.5,              -2.5 },
-        {         MAX_VALUE,         MAX_VALUE,              -2.5 },
-        {         MIN_VALUE,         MAX_VALUE,              -2.5 },
-        { POSITIVE_INFINITY, POSITIVE_INFINITY,              -2.5 },
-        { NEGATIVE_INFINITY, POSITIVE_INFINITY, NEGATIVE_INFINITY },
+      //          aDouble,               max,               min
+      {1.0, 1.0, 1.0},
+      {-1.0, 1.0, -1.0},
+      {2.5, 2.5, -1.0},
+      {-2.5, 2.5, -2.5},
+      {MAX_VALUE, MAX_VALUE, -2.5},
+      {MIN_VALUE, MAX_VALUE, -2.5},
+      {POSITIVE_INFINITY, POSITIVE_INFINITY, -2.5},
+      {NEGATIVE_INFINITY, POSITIVE_INFINITY, NEGATIVE_INFINITY},
     };
 
     for (int i = 0; i < testData.length; ++i) {
@@ -149,9 +147,9 @@ public class DoubleSummaryStatisticsTest extends EmulTestBase {
   }
 
   public void testNaN() {
-    List<Double> testData = Arrays.asList(
-        NaN, -1.5d, 2.5d, MAX_VALUE, MIN_VALUE, NaN,
-        NEGATIVE_INFINITY, POSITIVE_INFINITY);
+    List<Double> testData =
+        Arrays.asList(
+            NaN, -1.5d, 2.5d, MAX_VALUE, MIN_VALUE, NaN, NEGATIVE_INFINITY, POSITIVE_INFINITY);
 
     stats.accept(5.0d);
     for (Double aDouble : testData) {

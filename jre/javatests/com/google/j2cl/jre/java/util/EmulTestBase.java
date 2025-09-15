@@ -32,9 +32,7 @@ public class EmulTestBase extends TestCase {
     }
   }
 
-  /**
-   * Easy way to test what should be in a list.
-   */
+  /** Easy way to test what should be in a list. */
   protected static void assertEquals(Object[] array, List target) {
     assertEquals(array.length, target.size());
     for (int i = 0; i < array.length; i++) {
@@ -43,17 +41,20 @@ public class EmulTestBase extends TestCase {
   }
 
   public static void assertEquals(int[] expected, int[] actual) {
-    assertTrue("expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
+    assertTrue(
+        "expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
         Arrays.equals(expected, actual));
   }
 
   public static void assertEquals(long[] expected, long[] actual) {
-    assertTrue("expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
+    assertTrue(
+        "expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
         Arrays.equals(expected, actual));
   }
 
   public static void assertEquals(double[] expected, double[] actual) {
-    assertTrue("expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
+    assertTrue(
+        "expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
         Arrays.equals(expected, actual));
   }
 
