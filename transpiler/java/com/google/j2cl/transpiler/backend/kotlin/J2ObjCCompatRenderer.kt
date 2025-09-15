@@ -51,7 +51,6 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.flatten
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.rendererOf
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
-import com.google.j2cl.transpiler.backend.kotlin.objc.compatibilityAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.defineAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
@@ -147,19 +146,14 @@ internal class J2ObjCCompatRenderer(
 
   private fun aliasDeclarationRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =
     objCNameRenderer(typeDeclaration).map { objCName ->
-      when (typeDeclaration.kind!!) {
-        TypeDeclaration.Kind.CLASS,
-        TypeDeclaration.Kind.ENUM ->
-          semicolonEnded(compatibilityAlias(source(objCAlias(typeDeclaration)), objCName))
-        TypeDeclaration.Kind.INTERFACE -> defineAlias(source(objCAlias(typeDeclaration)), objCName)
-      }
+      defineAlias(source(objCAlias(typeDeclaration)), objCName)
     }
 
   private fun aliasDeclarationRenderer(
     companionDeclaration: CompanionDeclaration
   ): Renderer<Source> =
     objCNameRenderer(companionDeclaration).map { objCName ->
-      semicolonEnded(compatibilityAlias(source(objCAlias(companionDeclaration)), objCName))
+      defineAlias(source(objCAlias(companionDeclaration)), objCName)
     }
 
   private fun objCAlias(typeDeclaration: TypeDeclaration): String =

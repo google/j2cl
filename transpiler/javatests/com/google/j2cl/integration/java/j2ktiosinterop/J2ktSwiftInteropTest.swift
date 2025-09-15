@@ -63,13 +63,14 @@ final class J2ktSwiftInteropTest: XCTestCase {
     i = obj.intField_
     obj.intField_ = i
 
-    i = J2ktiosinteropDefaultNamesCompanion.shared.STATIC_FINAL_INT_FIELD_
-    i = J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
-    J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ = i
+    // Unsupported because of b/441110909.
+    // i = J2ktiosinteropDefaultNamesCompanion.shared.STATIC_FINAL_INT_FIELD_
+    // i = J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
+    // J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ = i
 
-    J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
-    J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(with: 1)
-    J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(with: 1, with: "")
+    // J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
+    // J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(with: 1)
+    // J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(with: 1, with: "")
   }
 
   func testOnlyImplicitDefaultConstructor() {

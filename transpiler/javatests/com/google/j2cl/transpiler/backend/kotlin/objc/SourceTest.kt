@@ -60,12 +60,6 @@ class SourceTest {
   }
 
   @Test
-  fun sourceCompatibilityAlias() {
-    compatibilityAlias(source("alias"), source("target"))
-      .assertBuilds("@compatibility_alias alias target")
-  }
-
-  @Test
   fun sourceDefineAlias() {
     defineAlias(source("alias"), source("target")).assertBuilds("#define alias target")
   }
