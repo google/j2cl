@@ -30,23 +30,8 @@ class SourceTest {
   }
 
   @Test
-  fun sourceSemicolonEnded() {
-    semicolonEnded(source("foo")).assertBuilds("foo;")
-  }
-
-  @Test
-  fun sourceAssignment() {
-    assignment(source("foo"), source("bar")).assertBuilds("foo = bar")
-  }
-
-  @Test
-  fun sourceParameter() {
-    parameter(source("name"), source("value")).assertBuilds("name:value")
-  }
-
-  @Test
-  fun sourcePointer() {
-    pointer(source("foo")).assertBuilds("foo*")
+  fun sourcePlusSemicolon() {
+    source("foo").plusSemicolon().assertBuilds("foo;")
   }
 
   @Test

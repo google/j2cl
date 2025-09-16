@@ -32,6 +32,66 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSe
 
 fun sourceRenderer(string: String): Renderer<Source> = rendererOf(source(string))
 
+fun Renderer<Source>.ifEmpty(fn: () -> Renderer<Source>): Renderer<Source> = bind { source ->
+  if (source.isEmpty()) fn() else rendererOf(source)
+}
+
+fun Renderer<Source>.ifNotEmpty(fn: (Renderer<Source>) -> Renderer<Source>): Renderer<Source> =
+  bind { source ->
+    if (source.isNotEmpty()) fn(rendererOf(source)) else rendererOf(source)
+  }
+
+operator fun Renderer<Source>.plus(renderer: Renderer<Source>): Renderer<Source> =
+  combine(this, renderer) { lhs, rhs -> lhs + rhs }
+
+operator fun Renderer<Source>.plus(source: Source): Renderer<Source> = plus(rendererOf(source))
+
+fun Renderer<Source>.plusSemicolon(): Renderer<Source> = plus(Source.SEMICOLON)
+
+fun Renderer<Source>.plusComma(): Renderer<Source> = plus(Source.COMMA)
+
+fun Renderer<Source>.toPointer() = plus(Source.STAR)
+
+fun Renderer<Source>.plusAssignment(rhs: Renderer<Source>): Renderer<Source> =
+  spaceSeparated(this, sourceRenderer("="), rhs)
+
+fun parameter(name: Renderer<Source>, value: Renderer<Source>): Renderer<Source> =
+  join(name, rendererOf(Source.COLON), value)
+
+fun block(renderer: Renderer<Source>): Renderer<Source> = renderer.map { block(it) }
+
+fun inParentheses(renderer: Renderer<Source>): Renderer<Source> = renderer.map { inParentheses(it) }
+
+fun inSquareBrackets(renderer: Renderer<Source>): Renderer<Source> =
+  renderer.map { inSquareBrackets(it) }
+
+fun join(first: Renderer<Source>, vararg rest: Renderer<Source>): Renderer<Source> =
+  listOf(first, *rest).flatten().map { join(it) }
+
+fun Iterable<Renderer<Source>>.newLineSeparated(): Renderer<Source> =
+  flatten().map { newLineSeparated(it) }
+
+fun Iterable<Renderer<Source>>.spaceSeparated(): Renderer<Source> =
+  flatten().map { spaceSeparated(it) }
+
+fun Iterable<Renderer<Source>>.commaSeparated(): Renderer<Source> =
+  flatten().map { commaSeparated(it) }
+
+fun newLineSeparated(first: Renderer<Source>, vararg rest: Renderer<Source>): Renderer<Source> =
+  listOf(first, *rest).newLineSeparated()
+
+fun spaceSeparated(first: Renderer<Source>, vararg rest: Renderer<Source>): Renderer<Source> =
+  listOf(first, *rest).flatten().map { spaceSeparated(it) }
+
+fun emptyLineSeparated(first: Renderer<Source>, vararg rest: Renderer<Source>): Renderer<Source> =
+  listOf(first, *rest).flatten().map { emptyLineSeparated(it) }
+
+fun commaSeparated(first: Renderer<Source>, vararg rest: Renderer<Source>): Renderer<Source> =
+  listOf(first, *rest).flatten().map { commaSeparated(it) }
+
+fun dotSeparated(first: Renderer<Source>, vararg rest: Renderer<Source>): Renderer<Source> =
+  listOf(first, *rest).flatten().map { dotSeparated(it) }
+
 fun nsObjCRuntimeSourceRenderer(string: String): Renderer<Source> =
   sourceRenderer(string) with nsObjCRuntimeDependency
 
@@ -72,21 +132,18 @@ fun className(name: String): Renderer<Source> = ForwardDeclaration.ofClass(name)
 fun protocolName(name: String): Renderer<Source> = ForwardDeclaration.ofProtocol(name).nameRenderer
 
 fun nsEnumTypedef(name: String, type: Renderer<Source>, values: List<String>): Renderer<Source> =
-  combine(nsEnum, type) { nsEnumSource, typeSource ->
-    semicolonEnded(
-      spaceSeparated(
-        source("typedef"),
-        join(nsEnumSource, inParentheses(commaSeparated(typeSource, source(name)))),
-        block(
-          newLineSeparated(
-            values.mapIndexed { index, name ->
-              assignment(source(name), source("$index")) + Source.COMMA
-            }
-          )
-        ),
-      )
+  spaceSeparated(
+      sourceRenderer("typedef"),
+      join(nsEnum, inParentheses(commaSeparated(type, sourceRenderer(name)))),
+      block(
+        values
+          .mapIndexed { index, name ->
+            sourceRenderer(name).plusAssignment(sourceRenderer("$index")).plus(sourceRenderer(","))
+          }
+          .newLineSeparated()
+      ),
     )
-  }
+    .plusSemicolon()
 
 fun functionDeclaration(
   modifiers: List<Renderer<Source>> = listOf(),
@@ -95,66 +152,49 @@ fun functionDeclaration(
   parameters: List<Renderer<Source>> = listOf(),
   statements: List<Renderer<Source>> = listOf(),
 ): Renderer<Source> =
-  combine(modifiers.flatten(), returnType, parameters.flatten(), statements.flatten()) {
-    modifierSources,
-    returnTypeSource,
-    parameterSources,
-    statementSources ->
-    spaceSeparated(
-      spaceSeparated(modifierSources),
-      returnTypeSource,
-      join(
-        source(name),
-        inParentheses(commaSeparated(parameterSources).ifEmpty { source("void") }),
-      ),
-      block(newLineSeparated(statementSources)),
-    )
-  }
+  spaceSeparated(
+    modifiers.spaceSeparated(),
+    returnType,
+    join(
+      sourceRenderer(name),
+      inParentheses(parameters.commaSeparated().ifEmpty { sourceRenderer("void") }),
+    ),
+    block(statements.newLineSeparated()),
+  )
 
 fun methodCall(
   target: Renderer<Source>,
   name: String,
   arguments: List<Renderer<Source>> = listOf(),
 ): Renderer<Source> =
-  combine(target, arguments.flatten()) { targetSource, argumentSources ->
-    inSquareBrackets(
-      spaceSeparated(
-        targetSource,
-        if (argumentSources.isEmpty()) source(name)
-        else
-          spaceSeparated(
-            name.dropLast(1).split(":").zip(argumentSources).map {
-              parameter(source(it.first), it.second)
-            }
-          ),
-      )
+  inSquareBrackets(
+    spaceSeparated(
+      target,
+      if (arguments.isEmpty()) {
+        sourceRenderer(name)
+      } else {
+        name
+          .dropLast(1)
+          .split(":")
+          .zip(arguments)
+          .map { parameter(sourceRenderer(it.first), it.second) }
+          .spaceSeparated()
+      },
     )
-  }
+  )
 
 fun getProperty(target: Renderer<Source>, name: String): Renderer<Source> =
-  target.map { dotSeparated(it, source(name)) }
+  dotSeparated(target, sourceRenderer(name))
 
 fun block(statements: List<Renderer<Source>> = listOf()): Renderer<Source> =
-  statements.flatten().map { block(newLineSeparated(it)) }
+  block(statements.newLineSeparated())
 
 fun returnStatement(expression: Renderer<Source>): Renderer<Source> =
-  expression.map { semicolonEnded(spaceSeparated(source("return"), it)) }
+  spaceSeparated(sourceRenderer("return"), expression).plusSemicolon()
 
-fun expressionStatement(expression: Renderer<Source>): Renderer<Source> =
-  expression.map { semicolonEnded(it) }
+fun expressionStatement(expression: Renderer<Source>): Renderer<Source> = expression.plusSemicolon()
 
 fun nsAssumeNonnull(body: Renderer<Source>): Renderer<Source> =
-  body.bind {
-    if (it.isEmpty()) {
-      rendererOf(Source.EMPTY)
-    } else {
-      combine(nsAssumeNonnullBegin, nsAssumeNonnullEnd) { begin, end ->
-        emptyLineSeparated(begin, it, end)
-      }
-    }
-  }
+  body.ifNotEmpty { emptyLineSeparated(nsAssumeNonnullBegin, it, nsAssumeNonnullEnd) }
 
-fun Renderer<Source>.toNullable(): Renderer<Source> =
-  combine(this, nullable) { thisSource, nullableSource ->
-    spaceSeparated(thisSource, nullableSource)
-  }
+fun Renderer<Source>.toNullable(): Renderer<Source> = spaceSeparated(this, nullable)

@@ -35,7 +35,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
@@ -52,6 +51,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.rendere
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.objc.defineAlias
+import com.google.j2cl.transpiler.backend.kotlin.objc.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.objc.getProperty
@@ -69,13 +69,14 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.nsNumber
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsObjCRuntimeSourceRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsObject
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsString
-import com.google.j2cl.transpiler.backend.kotlin.objc.pointer
+import com.google.j2cl.transpiler.backend.kotlin.objc.plusAssignment
+import com.google.j2cl.transpiler.backend.kotlin.objc.plusSemicolon
 import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
 import com.google.j2cl.transpiler.backend.kotlin.objc.returnStatement
-import com.google.j2cl.transpiler.backend.kotlin.objc.semicolonEnded
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceWithDependencies
 import com.google.j2cl.transpiler.backend.kotlin.objc.toNullable
+import com.google.j2cl.transpiler.backend.kotlin.objc.toPointer
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
@@ -224,14 +225,12 @@ internal class J2ObjCCompatRenderer(
       fieldDescriptor.name!!.objCName
 
   private fun setStatementRenderer(fieldDescriptor: FieldDescriptor): Renderer<Source> =
-    propertyQualifierRenderer(fieldDescriptor).map {
-      semicolonEnded(
-        assignment(
-          dotSeparated(it, source(setPropertyObjCName(fieldDescriptor))),
-          source(setFunctionParameterName),
-        )
+    dotSeparated(
+        propertyQualifierRenderer(fieldDescriptor),
+        sourceRenderer(setPropertyObjCName(fieldDescriptor)),
       )
-    }
+      .plusAssignment(sourceRenderer(setFunctionParameterName))
+      .plusSemicolon()
 
   private fun setParameterRenderer(fieldDescriptor: FieldDescriptor): Renderer<Source> =
     objCRenderer(fieldDescriptor.typeDescriptor).map {
@@ -490,7 +489,7 @@ internal class J2ObjCCompatRenderer(
     when {
       isJavaLangObject(declaredTypeDescriptor) -> id
       declaredTypeDescriptor.isInterface -> interfaceObjCRenderer(declaredTypeDescriptor)
-      else -> objCNameRenderer(declaredTypeDescriptor.typeDeclaration).map(::pointer)
+      else -> objCNameRenderer(declaredTypeDescriptor.typeDeclaration).toPointer()
     }
 
   private fun interfaceObjCRenderer(

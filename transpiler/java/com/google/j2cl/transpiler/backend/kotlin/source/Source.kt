@@ -81,6 +81,7 @@ private constructor(
     val NEW_LINE = source("\n")
     val SEMICOLON = source(";")
     val SPACE = source(" ")
+    val STAR = source("*")
     val DOUBLE_QUOTE = source("\"")
     val LEFT_PARENTHESIS = source("(")
     val RIGHT_PARENTHESIS = source(")")
