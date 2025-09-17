@@ -406,8 +406,13 @@ internal class J2clDefaultParameterInjector(context: J2clBackendContext) :
         .mapFunctionMfvcStructures(this, stubFunction, declaration) {
           sourceParameter: IrValueParameter,
           targetParameterType: IrType ->
-          expression.arguments[sourceParameter.indexInParameters]?.maybeCoerceToNull()
-            ?: nullConst(startOffset, endOffset, sourceParameter)
+          val originalArgument = expression.arguments[sourceParameter.indexInParameters]
+          if (sourceParameter.hasDefaultValue()) {
+            originalArgument?.maybeCoerceToNull()
+              ?: nullConst(startOffset, endOffset, sourceParameter)
+          } else {
+            originalArgument!!
+          }
         }
 
     return buildMap {

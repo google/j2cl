@@ -50,14 +50,14 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_testMethods__void() {
   DefaultParamsKt.$clinit();
-  (/**@type {!DefaultParams}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 123, /**@type {DefaultConstructorMarker}*/ (undefined))))).m_foo$default__int__void(/**@type {number}*/ (undefined));
+  DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 123, /**@type {DefaultConstructorMarker}*/ (undefined)).m_foo$default__int__void(/**@type {number}*/ (undefined));
   DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 123, /**@type {DefaultConstructorMarker}*/ (undefined)).m_foo__int__void(456);
   Subclass.$create__().m_foo__int__void(456);
  }
  /** @nodts */
  static m_extFun__defaultparams_DefaultParams__void(/** !DefaultParams */ this_1) {
   DefaultParamsKt.$clinit();
-  (/**@type {!DefaultParams}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(this_1))).m_foo$default__int__void(/**@type {number}*/ (undefined));
+  this_1.m_foo$default__int__void(/**@type {number}*/ (undefined));
   return;
  }
  /** @nodts */
@@ -77,7 +77,7 @@ class DefaultParamsKt extends j_l_Object {
  static m_testExtFun__void() {
   DefaultParamsKt.$clinit();
   DefaultParamsKt.m_extFun__defaultparams_DefaultParams__void(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 2, /**@type {DefaultConstructorMarker}*/ (undefined)));
-  DefaultParamsKt.m_extFunWithDefault$default__defaultparams_DefaultParams__int__void(/**@type {!DefaultParams}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 2, /**@type {DefaultConstructorMarker}*/ (undefined)))), /**@type {number}*/ (undefined));
+  DefaultParamsKt.m_extFunWithDefault$default__defaultparams_DefaultParams__int__void(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 2, /**@type {DefaultConstructorMarker}*/ (undefined)), /**@type {number}*/ (undefined));
   DefaultParamsKt.m_extFunWithDefault__defaultparams_DefaultParams__int__void(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 2, /**@type {DefaultConstructorMarker}*/ (undefined)), 123);
  }
  /** @nodts */
@@ -259,10 +259,10 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.$clinit();
   DefaultParamsKt.m_optionalVarargs$default__arrayOf_int__void(/**@type {!Array<number>}*/ (undefined));
   DefaultParamsKt.m_optionalVarargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
-  DefaultParamsKt.m_varargsWithTrailingOptional$default__arrayOf_int__int__void(/**@type {!Array<number>}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)))), /**@type {number}*/ (undefined));
+  DefaultParamsKt.m_varargsWithTrailingOptional$default__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), /**@type {number}*/ (undefined));
   DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), 20);
   DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)), 20);
-  DefaultParamsKt.m_varargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)))));
+  DefaultParamsKt.m_varargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
   DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
   DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ (undefined));
@@ -275,9 +275,9 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_testInterface__void() {
   DefaultParamsKt.$clinit();
-  (/**@type {!FooImpl}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(FooImpl.$create__()))).m_defaultMethod$default__int__int(/**@type {number}*/ (undefined));
+  FooImpl.$create__().m_defaultMethod$default__int__int(/**@type {number}*/ (undefined));
   FooImpl.$create__().m_defaultMethod__int__int(2);
-  (/**@type {!FooImpl}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(FooImpl.$create__()))).m_interfaceMethod$default__int__int(/**@type {number}*/ (undefined));
+  FooImpl.$create__().m_interfaceMethod$default__int__int(/**@type {number}*/ (undefined));
   FooImpl.$create__().m_interfaceMethod__int__int(2);
   FooImplWithDefaultOverride.$create__().m_defaultMethod__int__int(2);
  }
