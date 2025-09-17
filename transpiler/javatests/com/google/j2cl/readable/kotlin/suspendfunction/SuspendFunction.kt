@@ -18,6 +18,7 @@ package suspendfunction
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
 import kotlin.coroutines.Continuation
+import kotlin.coroutines.coroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -168,4 +169,8 @@ fun testSuspendReferenceAsVariable() {
 
   val suspendFunReference = ::testIsActive
   suspendFunReference.extFunOnSuspendLambda()
+}
+
+suspend fun testAccessCoroutineContext() {
+  val context = coroutineContext
 }

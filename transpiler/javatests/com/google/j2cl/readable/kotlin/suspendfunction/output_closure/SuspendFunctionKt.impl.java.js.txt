@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
 let Result = goog.forwardDeclare('kotlin.Result$impl');
 let Companion = goog.forwardDeclare('kotlin.Result.Companion$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
@@ -13,6 +14,7 @@ let CoroutineIntrinsicsKt = goog.forwardDeclare('kotlin.coroutines.intrinsics.Co
 let SuspendFunction1 = goog.forwardDeclare('kotlin.internal.j2cl.SuspendFunction1$impl');
 let SuspendFunInterface = goog.forwardDeclare('suspendfunction.SuspendFunInterface$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -91,6 +93,11 @@ class SuspendFunctionKt extends j_l_Object {
   }));
   SuspendFunctionKt.m_extFunOnSuspendLambda__kotlin_internal_j2cl_SuspendFunction1__void(suspendFunReference);
  }
+ /** @nodts @return {!Generator<*, void>} */
+ static *m_testAccessCoroutineContext__kotlin_coroutines_Continuation__void_$s_(/** Continuation<?> */ $continuation) {
+  SuspendFunctionKt.$clinit();
+  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('Implemented as intrinsic'));
+ }
  /** @nodts */
  static $clinit() {
   SuspendFunctionKt.$clinit = () =>{};
@@ -105,6 +112,7 @@ class SuspendFunctionKt extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
+  NotImplementedError = goog.module.get('kotlin.NotImplementedError$impl');
   Result = goog.module.get('kotlin.Result$impl');
   Companion = goog.module.get('kotlin.Result.Companion$impl');
   Unit = goog.module.get('kotlin.Unit$impl');
@@ -112,6 +120,7 @@ class SuspendFunctionKt extends j_l_Object {
   CoroutineIntrinsicsKt = goog.module.get('kotlin.coroutines.intrinsics.CoroutineIntrinsicsKt$impl');
   SuspendFunction1 = goog.module.get('kotlin.internal.j2cl.SuspendFunction1$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(SuspendFunctionKt, 'suspendfunction.SuspendFunctionKt');
