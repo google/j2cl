@@ -293,7 +293,7 @@ class JavaEnvironment {
     }
 
     if (typeMirror.getKind() == TypeKind.WILDCARD) {
-      return createWildcardTypeVariable((WildcardType) typeMirror, inNullMarkedScope);
+      return createWildcard((WildcardType) typeMirror, inNullMarkedScope);
     }
 
     boolean isNullable = isNullable(typeMirror, elementAnnotations, inNullMarkedScope);
@@ -392,30 +392,53 @@ class JavaEnvironment {
         .build();
   }
 
-
-  private TypeVariable createWildcardTypeVariable(
-      WildcardType wildcardType, boolean inNullMarkedScope) {
-    return createWildcardTypeVariable(
-        wildcardType,
-        wildcardType.getExtendsBound(),
-        wildcardType.getSuperBound(),
-        inNullMarkedScope);
+  private TypeVariable createWildcard(WildcardType wildcardType, boolean inNullMarkedScope) {
+    return createWildcard(wildcardType, null, inNullMarkedScope);
   }
 
-  private TypeVariable createWildcardTypeVariable(
+  private TypeVariable createWildcard(
       WildcardType wildcardType,
-      @Nullable TypeMirror upperBound,
-      @Nullable TypeMirror lowerBound,
+      javax.lang.model.type.TypeVariable declarationTypeVariable,
       boolean inNullMarkedScope) {
+    TypeVariable.DescriptorFactory<TypeDescriptor> upperBoundFactory =
+        self ->
+            wildcardType.getSuperBound() == null
+                ? createTypeDescriptor(wildcardType.getExtendsBound(), inNullMarkedScope)
+                : null;
+    TypeDescriptor lowerBound =
+        createTypeDescriptor(wildcardType.getSuperBound(), inNullMarkedScope);
+    if (isUnboundWildcard(wildcardType)
+        && declarationTypeVariable != null
+        && !isNullOrJavaLangObject(declarationTypeVariable.getUpperBound())) {
+      var typeVariable =
+          createTypeVariable(declarationTypeVariable, ImmutableList.of(), inNullMarkedScope);
+      var unboundedWildcard = TypeVariable.createWildcard();
+      upperBoundFactory =
+          self -> {
+            var upperBoundTypeDescriptor = typeVariable.getUpperBoundTypeDescriptor();
+            return upperBoundTypeDescriptor.specializeTypeVariables(
+                tv ->
+                    // Replace the reference to the type parameter by an unbounded wildcard.
+                    // TODO(b/445725915): To be completely correct it should be replaced by a
+                    // reference to self, i.e. the wildcard in the usage but due to this bug,
+                    // it might trigger a stack overflow. Using the unbound wildcard here result
+                    // in mostly correct behavior avoiding stack overflows in all but a corner case.
+                    (typeVariable.toDeclaration() == tv.toDeclaration()) ? unboundedWildcard : tv);
+          };
+    }
     int id = getTypeVariableId(wildcardType);
     return TypeVariable.newBuilder()
-        .setUpperBoundTypeDescriptorFactory(
-            () -> lowerBound == null ? createTypeDescriptor(upperBound, inNullMarkedScope) : null)
-        .setLowerBoundTypeDescriptor(createTypeDescriptor(lowerBound, inNullMarkedScope))
+        .setUpperBoundTypeDescriptorFactory(upperBoundFactory)
+        .setLowerBoundTypeDescriptor(lowerBound)
         .setWildcard(true)
         .setName("?")
         .setUniqueKey("#" + id + ":" + (inNullMarkedScope ? "+" : "-"))
         .build();
+  }
+
+  private boolean isUnboundWildcard(WildcardType typeMirror) {
+    return isNullOrJavaLangObject(typeMirror.getExtendsBound())
+        && typeMirror.getSuperBound() == null;
   }
 
   private final Map<TypeMirror, Integer> typeVariableIdByTypeVariable = new HashMap<>();
@@ -1127,25 +1150,13 @@ class JavaEnvironment {
     return Streams.zip(
             typeMirrors.stream(),
             declaredTypeParameters.stream(),
-            (typeMirror, typeParameter) -> {
-              javax.lang.model.type.TypeVariable typeVariable =
-                  (javax.lang.model.type.TypeVariable) typeParameter.asType();
-              boolean isUnbound =
-                  typeMirror.getKind() == TypeKind.WILDCARD
-                      && isNullOrJavaLangObject(((WildcardType) typeMirror).getExtendsBound())
-                      && ((WildcardType) typeMirror).getSuperBound() == null;
-              if (isUnbound && !isNullOrJavaLangObject(typeVariable.getUpperBound())) {
-                // Unbounded wildcards in the source inherit the bound from the declaration of
-                // of the variable they replace.
-                // TODO(b/398164480): Fix handling of unbound wildcards and captures.
-                return createWildcardTypeVariable(
-                    (WildcardType) typeMirror,
-                    typeVariable.getUpperBound(),
-                    /* lowerBound= */ null,
-                    inNullMarkedScope);
-              }
-              return createTypeDescriptor(typeMirror, inNullMarkedScope);
-            })
+            (typeArgument, typeParameter) ->
+                typeArgument instanceof WildcardType wildcardType
+                    ? createWildcard(
+                        wildcardType,
+                        (javax.lang.model.type.TypeVariable) typeParameter.asType(),
+                        inNullMarkedScope)
+                    : createTypeDescriptor(typeArgument, inNullMarkedScope))
         .collect(toImmutableList());
   }
 
@@ -1155,7 +1166,8 @@ class JavaEnvironment {
     }
     Element element = asElement(typeMirror);
     return element instanceof TypeElement typeElement
-        && typeElement.getQualifiedName().contentEquals("java.lang.Object");
+        && typeElement.getQualifiedName().contentEquals("java.lang.Object")
+        && typeElement.getAnnotationMirrors().isEmpty();
   }
 
   private final Map<DeclaredType, DeclaredTypeDescriptor>
