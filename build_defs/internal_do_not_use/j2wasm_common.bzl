@@ -13,7 +13,6 @@ def _compile(
         exports = [],
         plugins = [],
         exported_plugins = [],
-        output_jar = None,
         javac_opts = [],
         artifact_suffix = ""):
     internal_transpiler_flags = {}
@@ -28,7 +27,6 @@ def _compile(
         plugins = plugins,
         exported_plugins = exported_plugins,
         backend = "WASM_MODULAR",
-        output_jar = output_jar,
         javac_opts = javac_opts + DEFAULT_J2WASM_JAVAC_OPTS,
         artifact_suffix = artifact_suffix,
         internal_transpiler_flags = internal_transpiler_flags,

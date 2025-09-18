@@ -18,7 +18,6 @@ def _compile(
         plugins = [],
         exported_plugins = [],
         backend = "CLOSURE",
-        output_jar = None,
         javac_opts = [],
         kotlincopts = [],
         internal_transpiler_flags = {},
@@ -43,6 +42,8 @@ def _compile(
 
     jvm_deps, js_deps = split_deps(deps)
     jvm_exports, js_exports = split_deps(exports)
+
+    output_jar = ctx.actions.declare_file("lib%s.jar" % name)
 
     kotlincopts = DEFAULT_J2CL_KOTLINCOPTS + kotlincopts
 

@@ -34,7 +34,6 @@ def _impl_j2wasm_library_rule(ctx):
         exports = _j2wasm_or_js_providers_of(ctx.attr.exports),
         plugins = [p[JavaPluginInfo] for p in ctx.attr.plugins],
         exported_plugins = [p[JavaPluginInfo] for p in ctx.attr.exported_plugins],
-        output_jar = ctx.outputs.jar,
         javac_opts = extra_javacopts + ctx.attr.javacopts,
     )
 
