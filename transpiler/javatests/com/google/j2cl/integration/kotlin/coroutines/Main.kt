@@ -18,10 +18,15 @@
 
 package coroutines
 
+import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertThrows
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.createCoroutine
 import kotlin.coroutines.resume
+import kotlin.coroutines.startCoroutine
 import kotlin.coroutines.suspendCoroutine
 
 fun main(vararg unused: String) {
@@ -33,6 +38,7 @@ fun main(vararg unused: String) {
   testCoroutineWithExceptions()
   testDefaultParametersInCoroutines()
   testCoroutineWithVarargs()
+  testCoroutineInterception()
 }
 
 private suspend fun notActuallySuspendingButReturningString(): String {
@@ -149,4 +155,51 @@ private fun testCoroutineWithVarargs() {
     .resume(10)
     .resume(30)
     .assertSuccess(listOf(0, 10, 20, 30))
+}
+
+private fun testCoroutineInterception() {
+  val eventFlow: ArrayList<String> = arrayListOf()
+  val continuationInterceptor =
+    object : ContinuationInterceptor {
+      override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> {
+        eventFlow.add("interceptContinuation")
+
+        return Continuation<T>(continuation.context) {
+          eventFlow.add("interceptedResumeWithCalled")
+          continuation.resumeWith(it)
+        }
+      }
+
+      override val key: CoroutineContext.Key<*>
+        get() = ContinuationInterceptor
+    }
+  var continuation: Continuation<Unit>? = null
+
+  suspend {
+      eventFlow.add("suspendFunctionCalled")
+      suspendCoroutine { cont: Continuation<Unit> ->
+        eventFlow.add("coroutineSuspended")
+        continuation = cont
+      }
+      eventFlow.add("suspendFunctionDone")
+      Unit
+    }
+    .startCoroutine(
+      Continuation<Unit>(continuationInterceptor) { eventFlow.add("completionCalled") }
+    )
+
+  continuation!!.resumeWith(Result.success(Unit))
+
+  assertEquals(
+    arrayOf(
+      "interceptContinuation",
+      "interceptedResumeWithCalled",
+      "suspendFunctionCalled",
+      "coroutineSuspended",
+      "interceptedResumeWithCalled",
+      "suspendFunctionDone",
+      "completionCalled",
+    ),
+    eventFlow.toArray(),
+  )
 }
