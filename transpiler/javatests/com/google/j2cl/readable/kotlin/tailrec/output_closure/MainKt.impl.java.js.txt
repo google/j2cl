@@ -3,8 +3,6 @@ goog.module('tailrec.MainKt$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
-
 /**
  * @final
  */
@@ -43,7 +41,7 @@ class MainKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_factorialTC$default__int__int__int(/** number */ i, /** number= */ result) {
   MainKt.$clinit();
-  let result$defaulted = JsUtils.isUndefined(result) ? 1 : result;
+  let result$defaulted = $Util.$isUndefined(result) ? 1 : result;
   return MainKt.m_factorialTC__int__int__int(i, result$defaulted);
  }
  /** @nodts */
@@ -58,9 +56,7 @@ class MainKt extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(MainKt, 'tailrec.MainKt');
 

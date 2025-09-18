@@ -3,7 +3,6 @@ goog.module('defaultparams.DefaultParams$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 class DefaultParams extends j_l_Object {
@@ -41,7 +40,7 @@ class DefaultParams extends j_l_Object {
  //Initialization from constructor 'DefaultParams(int, int, DefaultConstructorMarker)'.
  /** @nodts */
  $ctor__defaultparams_DefaultParams__int__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ a, /** number= */ b, /** DefaultConstructorMarker= */ $marker) {
-  let a$defaulted = JsUtils.isUndefined(a) ? 1 : a;
+  let a$defaulted = $Util.$isUndefined(a) ? 1 : a;
   this.$ctor__defaultparams_DefaultParams__int__int__void(a$defaulted, b);
  }
  /** @final @nodts @return {number} */
@@ -69,7 +68,7 @@ class DefaultParams extends j_l_Object {
  m_foo__int__void(/** number */ c) {}
  /** @final @nodts */
  m_foo$default__int__void(/** number= */ c) {
-  let c$defaulted = JsUtils.isUndefined(c) ? 20 : c;
+  let c$defaulted = $Util.$isUndefined(c) ? 20 : c;
   this.m_foo__int__void(c$defaulted);
   return;
  }
@@ -85,9 +84,7 @@ class DefaultParams extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(DefaultParams, 'defaultparams.DefaultParams');
 

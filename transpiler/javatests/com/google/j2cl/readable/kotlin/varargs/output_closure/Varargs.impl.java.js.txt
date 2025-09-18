@@ -6,7 +6,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let CollectionsKt = goog.forwardDeclare('kotlin.collections.CollectionsKt$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let FunctionalInterface = goog.forwardDeclare('varargs.Varargs.FunctionalInterface$impl');
@@ -67,7 +66,7 @@ class Varargs extends j_l_Object {
  m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number */ b) {}
  /** @final @nodts */
  m_testNonTrailingVarargWithDefault$default__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number= */ b) {
-  let b$defaulted = JsUtils.isUndefined(b) ? 0 : b;
+  let b$defaulted = $Util.$isUndefined(b) ? 0 : b;
   this.m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(a, args, b$defaulted);
   return;
  }
@@ -126,7 +125,6 @@ class Varargs extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   CollectionsKt = goog.module.get('kotlin.collections.CollectionsKt$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   FunctionalInterface = goog.module.get('varargs.Varargs.FunctionalInterface$impl');

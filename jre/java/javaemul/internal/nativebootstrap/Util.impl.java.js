@@ -310,6 +310,23 @@ class Util {
   static $makeLogMessage(message) {
     return message;
   }
+
+  /**
+   * @param {T} value
+   * @return {T}
+   * @template T
+   */
+  static $coerceToNull(value) {
+    return value === undefined ? null : value;
+  }
+
+  /**
+   * @param {*} value
+   * @return {boolean}
+   */
+  static $isUndefined(value) {
+    return value === undefined;
+  }
 }
 
 

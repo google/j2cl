@@ -3,8 +3,6 @@ goog.module('defaultparams.DefaultParamsKt.$1$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
-
 /**
  * @final
  */
@@ -36,7 +34,7 @@ class $1 extends j_l_Object {
  /** @final @nodts */
  m_doSomething__void() {
   let nestedLocalFun = /**  @return {number}*/ ((/** number */ a, /** number= */ b) =>{
-   let b$defaulted = JsUtils.isUndefined(b) ? 1 : b;
+   let b$defaulted = $Util.$isUndefined(b) ? 1 : b;
    return a + b$defaulted | 0;
   });
   nestedLocalFun(10, /**@type {number}*/ (undefined));
@@ -55,7 +53,7 @@ class $1 extends j_l_Object {
   }
   {
    let $function_3 = this.$captured_localFunWithNonPrimitive__defaultparams_DefaultParamsKt_1;
-   $function_3(JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(this.$captured_someValue__defaultparams_DefaultParamsKt_1), undefined);
+   $function_3($Util.$coerceToNull(this.$captured_someValue__defaultparams_DefaultParamsKt_1), undefined);
   }
   {
    let $function_4 = this.$captured_localFunWithNonPrimitive__defaultparams_DefaultParamsKt_1;
@@ -74,9 +72,7 @@ class $1 extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata($1, 'defaultparams.DefaultParamsKt$1');
 

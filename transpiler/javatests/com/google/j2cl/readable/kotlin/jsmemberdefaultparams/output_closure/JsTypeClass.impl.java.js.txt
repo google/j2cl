@@ -3,7 +3,6 @@ goog.module('jsmemberdefaultparams.JsTypeClass$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 /**
@@ -26,7 +25,7 @@ class JsTypeClass extends j_l_Object {
  /** @nodts @return {!JsTypeClass} */
  static $create__int__kotlin_jvm_internal_DefaultConstructorMarker(/** number= */ param, /** DefaultConstructorMarker= */ $marker) {
   JsTypeClass.$clinit();
-  let param$defaulted = JsUtils.isUndefined(param) ? 1 : param;
+  let param$defaulted = $Util.$isUndefined(param) ? 1 : param;
   let $instance = new JsTypeClass(param$defaulted);
   $instance.$ctor__jsmemberdefaultparams_JsTypeClass__int__kotlin_jvm_internal_DefaultConstructorMarker__void(param, $marker);
   return $instance;
@@ -38,7 +37,7 @@ class JsTypeClass extends j_l_Object {
  publicMethod(/** number */ param) {}
  /** @final @nodts */
  m_publicMethod$default__int__void(/** number= */ param) {
-  let param$defaulted = JsUtils.isUndefined(param) ? 2 : param;
+  let param$defaulted = $Util.$isUndefined(param) ? 2 : param;
   this.publicMethod(param$defaulted);
   return;
  }
@@ -46,7 +45,7 @@ class JsTypeClass extends j_l_Object {
  m_privateMethod__int__void_$p_jsmemberdefaultparams_JsTypeClass(/** number */ param) {}
  /** @final @nodts */
  m_privateMethod$default__int__void(/** number= */ param) {
-  let param$defaulted = JsUtils.isUndefined(param) ? 3 : param;
+  let param$defaulted = $Util.$isUndefined(param) ? 3 : param;
   this.m_privateMethod__int__void_$p_jsmemberdefaultparams_JsTypeClass(param$defaulted);
   return;
  }
@@ -62,9 +61,7 @@ class JsTypeClass extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(JsTypeClass, 'jsmemberdefaultparams.JsTypeClass');
 

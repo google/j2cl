@@ -3,7 +3,6 @@ goog.module('multipleconstructors.PrimaryWithParentPrimary$impl');
 const ParentWithPrimary = goog.require('multipleconstructors.ParentWithPrimary$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 /**
@@ -44,8 +43,8 @@ class PrimaryWithParentPrimary extends ParentWithPrimary {
  //Initialization from constructor 'PrimaryWithParentPrimary(int, boolean, DefaultConstructorMarker)'.
  /** @nodts */
  $ctor__multipleconstructors_PrimaryWithParentPrimary__int__boolean__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ id, /** boolean= */ flag, /** DefaultConstructorMarker= */ $marker) {
-  let id$defaulted = JsUtils.isUndefined(id) ? 1 : id;
-  let flag$defaulted = JsUtils.isUndefined(flag) || flag;
+  let id$defaulted = $Util.$isUndefined(id) ? 1 : id;
+  let flag$defaulted = $Util.$isUndefined(flag) || flag;
   this.$ctor__multipleconstructors_PrimaryWithParentPrimary__int__boolean__void(id$defaulted, flag$defaulted);
  }
  /** @final @nodts @return {number} */
@@ -102,9 +101,7 @@ class PrimaryWithParentPrimary extends ParentWithPrimary {
  }
  
  /** @nodts */
- static $loadModules() {
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(PrimaryWithParentPrimary, 'multipleconstructors.PrimaryWithParentPrimary');
 

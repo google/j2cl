@@ -11,7 +11,6 @@ let FooImplWithDefaultOverride = goog.forwardDeclare('defaultparams.FooImplWithD
 let Subclass = goog.forwardDeclare('defaultparams.Subclass$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
@@ -69,7 +68,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_extFunWithDefault$default__defaultparams_DefaultParams__int__void(/** !DefaultParams */ this_1, /** number= */ c) {
   DefaultParamsKt.$clinit();
-  let c$defaulted = JsUtils.isUndefined(c) ? -1 : c;
+  let c$defaulted = $Util.$isUndefined(c) ? -1 : c;
   DefaultParamsKt.m_extFunWithDefault__defaultparams_DefaultParams__int__void(this_1, c$defaulted);
   return;
  }
@@ -84,18 +83,18 @@ class DefaultParamsKt extends j_l_Object {
  static m_testLocalFun__void() {
   DefaultParamsKt.$clinit();
   let localFun = /**  @return {number}*/ ((/** number */ a, /** number= */ b) =>{
-   let b$defaulted = JsUtils.isUndefined(b) ? 1 : b;
+   let b$defaulted = $Util.$isUndefined(b) ? 1 : b;
    return a + b$defaulted | 0;
   });
   localFun(10, /**@type {number}*/ (undefined));
   localFun(10, 20);
   let localFunWithNonPrimitive = /**  @return {*}*/ ((/** *= */ o, /** *= */ unused) =>{
-   let o$defaulted = JsUtils.isUndefined(o) ? j_l_Object.$create__() : o;
+   let o$defaulted = $Util.$isUndefined(o) ? j_l_Object.$create__() : o;
    return o$defaulted;
   });
   let someValue = j_l_Object.$create__();
   localFunWithNonPrimitive(undefined, undefined);
-  localFunWithNonPrimitive(JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(someValue), undefined);
+  localFunWithNonPrimitive($Util.$coerceToNull(someValue), undefined);
   localFunWithNonPrimitive('test', undefined);
   let nestedObj = $1.$create__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction0__defaultparams_DefaultParamsKt_$$LocalFunctionJsFunction1__java_lang_Object(localFun, localFunWithNonPrimitive, someValue);
  }
@@ -107,7 +106,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_complexDefault$default__int__int__int(/** number */ a, /** number= */ b) {
   DefaultParamsKt.$clinit();
-  let b$defaulted = JsUtils.isUndefined(b) ? a < 0 ? Math.imul(a, -1) : a + 1 | 0 : b;
+  let b$defaulted = $Util.$isUndefined(b) ? a < 0 ? Math.imul(a, -1) : a + 1 | 0 : b;
   return DefaultParamsKt.m_complexDefault__int__int__int(a, b$defaulted);
  }
  /** @nodts */
@@ -125,8 +124,8 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts @return {string} */
  static m_captureDefault$default__java_lang_String__kotlin_jvm_functions_Function0__java_lang_String(/** string= */ str, /** !Function0<?>= */ f) {
   DefaultParamsKt.$clinit();
-  let str$defaulted = JsUtils.isUndefined(str) ? 'defaulted' : str;
-  let f$defaulted = JsUtils.isUndefined(f) ? Function0.$adapt(/**  @return {?}*/ (() =>{
+  let str$defaulted = $Util.$isUndefined(str) ? 'defaulted' : str;
+  let f$defaulted = $Util.$isUndefined(f) ? Function0.$adapt(/**  @return {?}*/ (() =>{
    return '' + 'f: ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(str$defaulted);
   })) : f;
   return DefaultParamsKt.m_captureDefault__java_lang_String__kotlin_jvm_functions_Function0__java_lang_String(str$defaulted, f$defaulted);
@@ -148,8 +147,8 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts @return {*} */
  static m_identityOrCreate$default__java_lang_Object__java_lang_Object__java_lang_Object(/** *= */ o, /** !*= */ unused) {
   DefaultParamsKt.$clinit();
-  let o$defaulted = JsUtils.isUndefined(o) ? j_l_Object.$create__() : o;
-  let unused$defaulted = JsUtils.isUndefined(unused) ? j_l_Object.$create__() : unused;
+  let o$defaulted = $Util.$isUndefined(o) ? j_l_Object.$create__() : o;
+  let unused$defaulted = $Util.$isUndefined(unused) ? j_l_Object.$create__() : unused;
   return DefaultParamsKt.m_identityOrCreate__java_lang_Object__java_lang_Object__java_lang_Object(o$defaulted, unused$defaulted);
  }
  /** @nodts */
@@ -159,14 +158,14 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_nestedDefaultCall$default__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__void(/** ?string */ str, /** string */ nonNullStr, /** !Function0<?>= */ a, /** !Function0<?>= */ b, /** !Function0<?>= */ c) {
   DefaultParamsKt.$clinit();
-  let a$defaulted = JsUtils.isUndefined(a) ? Function0.$adapt(/**  @return {?}*/ (() =>{
+  let a$defaulted = $Util.$isUndefined(a) ? Function0.$adapt(/**  @return {?}*/ (() =>{
    return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__java_lang_Object(undefined, undefined);
   })) : a;
-  let b$defaulted = JsUtils.isUndefined(b) ? Function0.$adapt(/**  @return {?}*/ (() =>{
-   return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__java_lang_Object(/**@type {?string}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(str)), undefined);
+  let b$defaulted = $Util.$isUndefined(b) ? Function0.$adapt(/**  @return {?}*/ (() =>{
+   return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__java_lang_Object(/**@type {?string}*/ ($Util.$coerceToNull(str)), undefined);
   })) : b;
-  let c$defaulted = JsUtils.isUndefined(c) ? Function0.$adapt(/**  @return {?}*/ (() =>{
-   return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__java_lang_Object(/**@type {string}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(nonNullStr)), undefined);
+  let c$defaulted = $Util.$isUndefined(c) ? Function0.$adapt(/**  @return {?}*/ (() =>{
+   return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__java_lang_Object(/**@type {string}*/ ($Util.$coerceToNull(nonNullStr)), undefined);
   })) : c;
   DefaultParamsKt.m_nestedDefaultCall__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__void(str, nonNullStr, a$defaulted, b$defaulted, c$defaulted);
   return;
@@ -183,7 +182,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_boxing$default__java_lang_Integer__void(/** Integer= */ a) {
   DefaultParamsKt.$clinit();
-  let a$defaulted = JsUtils.isUndefined(a) ? Integer.valueOf(1) : a;
+  let a$defaulted = $Util.$isUndefined(a) ? Integer.valueOf(1) : a;
   DefaultParamsKt.m_boxing__java_lang_Integer__void(a$defaulted);
   return;
  }
@@ -216,7 +215,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_optionalVarargs$default__arrayOf_int__void(/** !Array<number>= */ args) {
   DefaultParamsKt.$clinit();
-  let args$defaulted = JsUtils.isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)) : args;
+  let args$defaulted = $Util.$isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)) : args;
   DefaultParamsKt.m_optionalVarargs__arrayOf_int__void(args$defaulted);
   return;
  }
@@ -227,7 +226,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_varargsWithTrailingOptional$default__arrayOf_int__int__void(/** !Array<number> */ args, /** number= */ optional) {
   DefaultParamsKt.$clinit();
-  let optional$defaulted = JsUtils.isUndefined(optional) ? 10 : optional;
+  let optional$defaulted = $Util.$isUndefined(optional) ? 10 : optional;
   DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(args, optional$defaulted);
   return;
  }
@@ -238,7 +237,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_varargsWithLeadingOptional$default__int__arrayOf_int__void(/** number= */ optional, /** !Array<number>= */ args) {
   DefaultParamsKt.$clinit();
-  let optional$defaulted = JsUtils.isUndefined(optional) ? 10 : optional;
+  let optional$defaulted = $Util.$isUndefined(optional) ? 10 : optional;
   DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(optional$defaulted, args);
   return;
  }
@@ -249,8 +248,8 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/** number= */ optional, /** !Array<number>= */ args) {
   DefaultParamsKt.$clinit();
-  let optional$defaulted = JsUtils.isUndefined(optional) ? 10 : optional;
-  let args$defaulted = JsUtils.isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)) : args;
+  let optional$defaulted = $Util.$isUndefined(optional) ? 10 : optional;
+  let args$defaulted = $Util.$isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)) : args;
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(optional$defaulted, args$defaulted);
   return;
  }
@@ -266,7 +265,7 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
   DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ (undefined));
-  DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ (JsUtils.m_coerceToNull__java_lang_Object__java_lang_Object(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)))));
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ ($Util.$coerceToNull(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)))));
   let tmp0_args = /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int));
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(20, tmp0_args);
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
@@ -302,7 +301,6 @@ class DefaultParamsKt extends j_l_Object {
   Subclass = goog.module.get('defaultparams.Subclass$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

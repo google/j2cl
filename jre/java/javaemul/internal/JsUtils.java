@@ -27,16 +27,15 @@ public final class JsUtils {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "typeof")
   public static native String typeOf(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "nativebootstrap.Util", name = "$isUndefined")
   public static native boolean isUndefined(@DoNotAutobox Object value);
 
   @JsProperty(namespace = JsPackage.GLOBAL, name = "undefined")
   public static native Object undefined();
 
   @UncheckedCast
-  public static <T> T coerceToNull(@DoNotAutobox T value) {
-    return isUndefined(value) ? null : value;
-  }
+  @JsMethod(namespace = "nativebootstrap.Util", name = "$coerceToNull")
+  public static native <T> T coerceToNull(@DoNotAutobox T value);
 
   @JsMethod
   @UncheckedCast

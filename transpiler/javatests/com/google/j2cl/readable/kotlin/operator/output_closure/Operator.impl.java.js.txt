@@ -3,7 +3,6 @@ goog.module('operator.Operator$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 /**
@@ -41,7 +40,7 @@ class Operator extends j_l_Object {
  //Initialization from constructor 'Operator(int, DefaultConstructorMarker)'.
  /** @nodts */
  $ctor__operator_Operator__int__kotlin_jvm_internal_DefaultConstructorMarker__void(/** number= */ i, /** DefaultConstructorMarker= */ $marker) {
-  let i$defaulted = JsUtils.isUndefined(i) ? 0 : i;
+  let i$defaulted = $Util.$isUndefined(i) ? 0 : i;
   this.$ctor__operator_Operator__int__void(i$defaulted);
  }
  /** @final @nodts @return {number} */
@@ -90,9 +89,7 @@ class Operator extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(Operator, 'operator.Operator');
 

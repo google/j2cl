@@ -1,13 +1,5 @@
 /**
  * @param {*} value
- * @return {boolean}
- */
-javaemul_internal_JsUtils.isUndefined = function(value) {
-  return value === undefined;
-};
-
-/**
- * @param {*} value
  * @return {*}
  */
 javaemul_internal_JsUtils.uncheckedCast = function(value) {

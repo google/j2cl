@@ -2,8 +2,6 @@ goog.module('defaultparams.IFoo$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
-
 /**
  * @interface
  */
@@ -24,13 +22,13 @@ class IFoo {
  /** @nodts @return {number} */
  static m_defaultMethod$default__$default__defaultparams_IFoo__int__int(/** !IFoo */ $thisArg, /** number= */ a) {
   IFoo.$clinit();
-  let a$defaulted = JsUtils.isUndefined(a) ? 1 : a;
+  let a$defaulted = $Util.$isUndefined(a) ? 1 : a;
   return $thisArg.m_defaultMethod__int__int(a$defaulted);
  }
  /** @nodts @return {number} */
  static m_interfaceMethod$default__$default__defaultparams_IFoo__int__int(/** !IFoo */ $thisArg, /** number= */ a) {
   IFoo.$clinit();
-  let a$defaulted = JsUtils.isUndefined(a) ? 2 : a;
+  let a$defaulted = $Util.$isUndefined(a) ? 2 : a;
   return $thisArg.m_interfaceMethod__int__int(a$defaulted);
  }
  /** @nodts */
@@ -48,9 +46,7 @@ class IFoo {
  }
  
  /** @nodts */
- static $loadModules() {
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
- }
+ static $loadModules() {}
 }
 IFoo.$markImplementor(/**@type {Function}*/ (IFoo));
 $Util.$setClassMetadataForInterface(/**@type {Function}*/ (IFoo), 'defaultparams.IFoo');

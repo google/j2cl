@@ -30,7 +30,6 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
-let JsUtils = goog.forwardDeclare('javaemul.internal.JsUtils$impl');
 let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
 let OfObject = goog.forwardDeclare('javaemul.internal.Ref.OfObject$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
@@ -428,7 +427,7 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_inlineFunWithDefaults$default__int__int__int(/** number */ a, /** number= */ b) {
   InlineFunctionKt.$clinit();
-  let b$defaulted = JsUtils.isUndefined(b) ? 2 : b;
+  let b$defaulted = $Util.$isUndefined(b) ? 2 : b;
   return InlineFunctionKt.m_inlineFunWithDefaults__int__int__int(a, b$defaulted);
  }
  /** @nodts @return {number} */
@@ -439,7 +438,7 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_inlineFunWithDefaultsAndVarargs$default__int__int__arrayOf_int__int(/** number */ a, /** number= */ b, /** !Array<number>= */ c) {
   InlineFunctionKt.$clinit();
-  let b$defaulted = JsUtils.isUndefined(b) ? 2 : b;
+  let b$defaulted = $Util.$isUndefined(b) ? 2 : b;
   return InlineFunctionKt.m_inlineFunWithDefaultsAndVarargs__int__int__arrayOf_int__int(a, b$defaulted, c);
  }
  /** @nodts @return {number} */
@@ -450,8 +449,8 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {number} */
  static m_inlineFunWithDefaultsAndDefaultVarargs$default__int__int__arrayOf_int__int(/** number */ a, /** number= */ b, /** !Array<number>= */ c) {
   InlineFunctionKt.$clinit();
-  let b$defaulted = JsUtils.isUndefined(b) ? 2 : b;
-  let c$defaulted = JsUtils.isUndefined(c) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int)) : c;
+  let b$defaulted = $Util.$isUndefined(b) ? 2 : b;
+  let c$defaulted = $Util.$isUndefined(c) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int)) : c;
   return InlineFunctionKt.m_inlineFunWithDefaultsAndDefaultVarargs__int__int__arrayOf_int__int(a, b$defaulted, c$defaulted);
  }
  /** @nodts */
@@ -532,7 +531,6 @@ class InlineFunctionKt extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
-  JsUtils = goog.module.get('javaemul.internal.JsUtils$impl');
   Ref = goog.module.get('javaemul.internal.Ref$impl');
   Unit = goog.module.get('kotlin.Unit$impl');
   ArraysKt = goog.module.get('kotlin.collections.ArraysKt$impl');
