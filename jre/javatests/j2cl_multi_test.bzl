@@ -55,7 +55,7 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
     if enable_wasm:
         tests += [name + "-j2wasm", name + "-j2wasm_optimized"]
         j2wasm_deps = [dep + "-j2wasm" for dep in deps]
-        j2wasm_defines = {"jre.checks.checkLevel": "NORMAL"}
+        j2wasm_defines = {"jre.checks.checkLevel": "NORMAL", "jre.classMetadata": "SIMPLE"}
         j2wasm_test(
             name = name + "-j2wasm",
             test_class = test_class,
