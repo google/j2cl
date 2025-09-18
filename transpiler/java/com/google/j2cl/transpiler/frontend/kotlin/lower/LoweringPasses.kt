@@ -102,6 +102,8 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::RemoveInlineDeclarationsWithReifiedTypeParametersLowering)
   // Replace `emptyArray()` calls with `arrayOf()` calls.
   perFileLowering(::EmptyArrayLowering)
+  // Replace `coroutineContext` getter calls with `getContinuation().context` calls.
+  moduleLowering(::CoroutineContextGetterLowering)
   // Remove functions that contain unsigned varargs in the signature as a temporary workaround for
   // b/242573966.
   // TODO(b/242573966): Remove this when we can handle unsigned vararg types.

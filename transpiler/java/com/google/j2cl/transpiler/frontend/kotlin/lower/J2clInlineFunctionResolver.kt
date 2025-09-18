@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.builtins.UnsignedType
@@ -29,7 +28,7 @@ import org.jetbrains.kotlin.ir.util.getPackageFragment
 import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
-internal class J2clInlineFunctionResolver(private val context: CommonBackendContext) :
+internal class J2clInlineFunctionResolver(private val context: J2clBackendContext) :
   InlineFunctionResolver(InlineMode.ALL_INLINE_FUNCTIONS) {
 
   override fun shouldExcludeFunctionFromInlining(symbol: IrFunctionSymbol): Boolean {
@@ -42,11 +41,23 @@ internal class J2clInlineFunctionResolver(private val context: CommonBackendCont
       // String?.plus() functions are inline intrinsic functions in the stdlib and should not be
       // inlined. The calls to these functions are directly handled by our CompilationUnitBuilder.
       // TODO(b/256856926): Remove this code when String?.plus() function is no longer inlineable.
-      symbol.isExtensionStringPlus
+      symbol.isExtensionStringPlus ||
+      // The `coroutineContext` getter is an inline intrinsic function.
+      // In Kotlin/JVM, this is replaced at code generation time.
+      // In Kotlin/JS, calls to this inline function are mapped to a top-level inline suspend
+      // function `getCoroutineContext`, which is then inlined.
+      // J2CL cannot easily adopt the Kotlin/JS approach. The top-level replacement function would
+      // need to be attached to a FileClass,
+      // which would require copying logic from the ExternalPackageParentPatcherLowering pass.
+      // Thus, we opt to skip inlining the getter here and instead lower the call later.
+      symbol.isCoroutineContextGetter()
   }
 
   private val IrFunctionSymbol.isExtensionStringPlus: Boolean
     get() = this == context.irBuiltIns.extensionStringPlus
+
+  private fun IrFunctionSymbol.isCoroutineContextGetter(): Boolean =
+    context.intrinsics.isCoroutineContextGetterCall(this)
 }
 
 private val PRIMITIVE_ARRAY_OF_NAMES: Set<String> =

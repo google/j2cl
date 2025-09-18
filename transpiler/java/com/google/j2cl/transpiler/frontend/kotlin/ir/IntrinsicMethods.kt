@@ -45,6 +45,7 @@ import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.name.StandardClassIds
 
 /**
  * KotlinC uses intrinsics methods for representing some specific operations. The implementations of
@@ -198,6 +199,23 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
         extensionReceiverParameter == null &&
         valueParameters.isEmpty()
     }
+
+  private val coroutineContextGetterSymbol: IrSimpleFunctionSymbol by lazy {
+    irBuiltIns.symbolFinder.findTopLevelPropertyGetter(
+      StandardClassIds.BASE_COROUTINES_PACKAGE,
+      "coroutineContext",
+    )
+  }
+
+  fun isCoroutineContextGetterCall(symbol: IrFunctionSymbol): Boolean =
+    symbol.toKey() == coroutineContextGetterSymbol.toKey()
+
+  val getContinuationSymbol: IrSimpleFunctionSymbol by lazy {
+    irBuiltIns.symbolFinder.topLevelFunction(
+      StandardClassIds.BASE_COROUTINES_INTRINSICS_PACKAGE,
+      "getContinuation",
+    )
+  }
 
   private val prefixOperatorByIntrinsicSymbolKey =
     (mapPrefixOperation("not", PrefixOperator.COMPLEMENT) +

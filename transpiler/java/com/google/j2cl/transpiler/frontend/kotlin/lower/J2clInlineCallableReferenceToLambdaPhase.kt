@@ -15,8 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.ir.inline.InlineCallableReferenceToLambdaPhase
 
-internal class J2clInlineCallableReferenceToLambdaPhase(context: CommonBackendContext) :
+internal class J2clInlineCallableReferenceToLambdaPhase(context: J2clBackendContext) :
   InlineCallableReferenceToLambdaPhase(context, J2clInlineFunctionResolver(context))
