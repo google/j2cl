@@ -1,0 +1,38 @@
+goog.module('inlinefunction.ParametrizedReproChild$impl');
+
+const Repro = goog.require('inlinefunction.Repro$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template T
+ * @extends {Repro<T>}
+ */
+class ParametrizedReproChild extends Repro {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__inlinefunction_ParametrizedReproChild__void() {
+  this.$ctor__inlinefunction_Repro__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ParametrizedReproChild.$clinit = () =>{};
+  ParametrizedReproChild.$loadModules();
+  Repro.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParametrizedReproChild;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ParametrizedReproChild, 'inlinefunction.ParametrizedReproChild');
+
+exports = ParametrizedReproChild;
+
+//# sourceMappingURL=ParametrizedReproChild.js.map
