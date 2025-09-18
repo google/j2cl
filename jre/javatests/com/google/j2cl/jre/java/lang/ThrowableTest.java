@@ -16,6 +16,8 @@
 package com.google.j2cl.jre.java.lang;
 
 import com.google.j2cl.jre.testing.J2ktIncompatible;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import junit.framework.TestCase;
 
 /** Unit tests for the GWT emulation of java.lang.Throwable class. */
@@ -56,6 +58,33 @@ public class ThrowableTest extends TestCase {
     assertEquals(10, trace[0].getLineNumber());
     assertEquals("TestClass.testMethod(fakefile:10)", trace[0].toString());
     assertEquals("TestClass.testCaller(fakefile2:97)", trace[1].toString());
+  }
+
+  @J2ktIncompatible // Different stack trace format
+  public void testPrintStackTrace() {
+    Throwable cause = new Throwable("cause");
+    cause.setStackTrace(
+        new StackTraceElement[] {
+          new StackTraceElement("TestClass", "testMethod", "fakefile", 20),
+          new StackTraceElement("TestClass", "testCaller", "fakefile2", 40)
+        });
+    Throwable throwable = new Throwable("actual", cause);
+    throwable.setStackTrace(
+        new StackTraceElement[] {
+          new StackTraceElement("TestClass", "testMethod", "fakefile", 10),
+          new StackTraceElement("TestClass", "testCaller", "fakefile2", 97)
+        });
+    StringWriter sw = new StringWriter();
+    throwable.printStackTrace(new PrintWriter(sw));
+    sw.flush();
+    assertEquals(
+        "java.lang.Throwable: actual\n"
+            + "\tat TestClass.testMethod(fakefile:10)\n"
+            + "\tat TestClass.testCaller(fakefile2:97)\n"
+            + "Caused by: java.lang.Throwable: cause\n"
+            + "\tat TestClass.testMethod(fakefile:20)\n"
+            + "\tat TestClass.testCaller(fakefile2:40)\n",
+        sw.toString());
   }
 
   public void testExceptionToString() {

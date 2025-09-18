@@ -20,12 +20,14 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkState;
 
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javaemul.internal.ThrowableUtils;
 import javaemul.internal.ThrowableUtils.JsObject;
 import javaemul.internal.ThrowableUtils.NativeError;
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsProperty;
@@ -189,10 +191,19 @@ public class Throwable implements Serializable {
   }
 
   public void printStackTrace(PrintStream out) {
-    printStackTraceImpl(out, "", "");
+    printStackTraceImpl(out::println, "", "");
   }
 
-  private void printStackTraceImpl(PrintStream out, String prefix, String ident) {
+  public void printStackTrace(PrintWriter out) {
+    printStackTraceImpl(out::println, "", "");
+  }
+
+  @JsFunction
+  private interface Printer {
+    void println(String s);
+  }
+
+  private void printStackTraceImpl(Printer out, String prefix, String ident) {
     out.println(ident + prefix + this);
     printStackTraceItems(out, ident);
 
@@ -206,7 +217,7 @@ public class Throwable implements Serializable {
     }
   }
 
-  private void printStackTraceItems(PrintStream out, String ident) {
+  private void printStackTraceItems(Printer out, String ident) {
     for (StackTraceElement element : getStackTrace()) {
       out.println(ident + "\tat " + element);
     }
