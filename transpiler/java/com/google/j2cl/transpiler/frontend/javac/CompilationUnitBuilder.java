@@ -917,19 +917,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
    * <pre> {@code A::m}    into    {@code  (par1, ..., parN) -> A.m(par1, ..., parN) } </pre>
    */
   private Expression convertMemberReference(JCMemberReference memberReference) {
-    MethodSymbol methodSymbol = (MethodSymbol) memberReference.sym;
+    var methodSymbol = (MethodSymbol) memberReference.sym;
 
-    TypeDescriptor expressionTypeDescriptor =
+    var expressionTypeDescriptor =
         environment.createTypeDescriptor(memberReference.type, inNullMarkedScope());
-    MethodDescriptor functionalMethodDescriptor =
+    var functionalMethodDescriptor =
         expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
 
     if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")) {
       // Arrays member references are seen as references to members on a class Array.
       // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing
       // type descriptor and the MethodDescriptor are created in the right context.
-      TypeElement typeElement =
-          (TypeElement) memberReference.getQualifierExpression().type.asElement();
+      var typeElement = (TypeElement) memberReference.getQualifierExpression().type.asElement();
       boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
       return ArrayCreationReference.newBuilder()
           .setTargetTypeDescriptor(
@@ -942,15 +941,24 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
+    var qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
+    var methodType = memberReference.referentType.asMethodType();
+
+    // Retrieve the potentially parameterized type for the qualifier that will be used to infer
+    // type arguments for the enclosing type.
+    var qualifierTypeDescriptor =
+        memberReference.getQualifierExpression() == null
+                || memberReference.getQualifierExpression().type.isRaw()
+            ? null
+            : environment.createTypeDescriptor(memberReference.getQualifierExpression().type);
+
     if (qualifier instanceof JsConstructorReference) {
       // The qualifier was just the class name, remove it.
       qualifier = null;
     }
 
-    var methodType = memberReference.referentType.asMethodType();
-    DeclaredTypeDescriptor enclosingTypeDescriptor =
-        getEnclosingTypeDescriptor(methodSymbol, methodType, qualifier);
+    var enclosingTypeDescriptor =
+        getEnclosingTypeDescriptor(methodSymbol, methodType, qualifierTypeDescriptor);
 
     var typeArguments =
         convertTypeArguments(
@@ -959,7 +967,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             methodType,
             enclosingTypeDescriptor.getTypeDeclaration().isNullMarked());
 
-    MethodDescriptor targetMethodDescriptor =
+    var targetMethodDescriptor =
         environment.createMethodDescriptor(
             enclosingTypeDescriptor,
             /* methodType= */ methodType.asMethodType(),
@@ -1273,6 +1281,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private DeclaredTypeDescriptor getEnclosingTypeDescriptor(
       MethodSymbol methodSymbol, MethodType methodType, Expression qualifier) {
+    return getEnclosingTypeDescriptor(
+        methodSymbol, methodType, qualifier == null ? null : qualifier.getTypeDescriptor());
+  }
+
+  private DeclaredTypeDescriptor getEnclosingTypeDescriptor(
+      MethodSymbol methodSymbol, MethodType methodType, TypeDescriptor qualifierTypeDescriptor) {
     // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
     // descriptor and the MethodDescriptor are created in the right context.
     TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement();
@@ -1282,13 +1296,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       // the method but to an outer class.
       // TODO(b/441150061): The qualifier should be ignored for super calls; for instantiation it
       // might be needed.
-      qualifier = null;
+      qualifierTypeDescriptor = null;
     }
     DeclaredTypeDescriptor declarationEnclosingTypeDescriptor =
         getParameterizedEnclosingType(
             environment.createDeclaredTypeDescriptor(
                 methodSymbol.getEnclosingElement().asType(), inNullMarkedScope),
-            qualifier);
+            qualifierTypeDescriptor);
 
     Map<TypeVariable, TypeDescriptor> enclosingTypeArguments = new HashMap<>();
     var mapping =
@@ -1296,6 +1310,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             ? JavaEnvironment.getTypeSubstitution(
                 methodType.getReturnType(), methodType.getReturnType().tsym)
             : JavaEnvironment.getTypeSubstitution(methodType, methodSymbol);
+
+    // Use the raw upperbound for unparamterized type variables.
+    for (var tv :
+        declarationEnclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors()) {
+      enclosingTypeArguments.put(tv, tv.toRawTypeDescriptor());
+    }
+
+    // ... and use the actual type arguments if they were found.
     for (var tv : mapping.keySet()) {
       enclosingTypeArguments.put(
           (TypeVariable) environment.createTypeDescriptor(tv.asType(), inNullMarkedScope),
@@ -1309,13 +1331,19 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private DeclaredTypeDescriptor getParameterizedEnclosingType(
       DeclaredTypeDescriptor enclosingTypeDescriptor, Expression qualifier) {
+    return getParameterizedEnclosingType(
+        enclosingTypeDescriptor, qualifier == null ? null : qualifier.getTypeDescriptor());
+  }
+
+  private DeclaredTypeDescriptor getParameterizedEnclosingType(
+      DeclaredTypeDescriptor enclosingTypeDescriptor, TypeDescriptor qualifierTypeDescriptor) {
 
     enclosingTypeDescriptor = JavaEnvironment.fixEnclosingTypeDescriptor(enclosingTypeDescriptor);
-    if (qualifier == null) {
+    if (qualifierTypeDescriptor == null) {
       return enclosingTypeDescriptor;
     }
 
-    if (qualifier.getTypeDescriptor().isRaw()) {
+    if (qualifierTypeDescriptor.isRaw()) {
       return enclosingTypeDescriptor.toRawTypeDescriptor();
     }
 
@@ -1323,7 +1351,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // if available. The methodSymbol's enclosing element will not have the necessary type
     // information from javac.
     return checkNotNull(
-        qualifier.getTypeDescriptor().findSupertype(enclosingTypeDescriptor.getTypeDeclaration()));
+        qualifierTypeDescriptor.findSupertype(enclosingTypeDescriptor.getTypeDeclaration()));
   }
 
   private Expression convertIdent(JCIdent identifier) {
