@@ -67,7 +67,7 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
       // Object.class.
       type.getMembers()
           .removeIf(m -> m.getDescriptor().getName().equals(GET_CLASS_IMPL_METHOD_NAME));
-              }
+    }
 
     // return Type.class;
     type.addMember(
