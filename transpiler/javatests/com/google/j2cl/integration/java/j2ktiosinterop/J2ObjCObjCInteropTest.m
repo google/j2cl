@@ -47,6 +47,8 @@
   [obj classMethodWithIOSClass:nil];
   [obj stringIterableMethodWithJavaLangIterable:nil];
   [obj intStringMethodWithInt:1 withNSString:@""];
+  [obj customNamesMethodWithCustom:nil];
+  [obj defaultNamesMethodWithJ2ktiosinteropDefaultNames:nil];
 
   [obj genericMethodWithId:nil];
   [obj genericStringMethodWithNSString:@""];
@@ -135,6 +137,9 @@
 
   [obj customLongMethodWithLong:1];
   [obj customLongStringMethodWithLong:1 withNSString:@""];
+
+  [obj customCustomNamesMethodWithCustom:nil];
+  [obj customDefaultNamesMethodWithJ2ktiosinteropDefaultNames:nil];
 
   [obj customObjectiveCSwiftStringMethodWithString:@""];
   [obj swiftStringMethodWithNSString:@""];

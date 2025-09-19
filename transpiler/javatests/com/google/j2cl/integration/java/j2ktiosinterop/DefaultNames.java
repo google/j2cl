@@ -60,6 +60,10 @@ public final class DefaultNames {
 
   public void intStringMethod(int i, String s) {}
 
+  public void customNamesMethod(CustomNames c) {}
+
+  public void defaultNamesMethod(DefaultNames c) {}
+
   public <T> void genericMethod(T t) {}
 
   public <T extends String> void genericStringMethod(T t) {}

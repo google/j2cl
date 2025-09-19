@@ -45,6 +45,8 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.classMethod(with: nil)
     obj.stringIterableMethod(with: nil)
     obj.intStringMethod(with: 1, with: "")
+    obj.customNamesMethod(with: nil)
+    obj.defaultNamesMethod(with: nil)
 
     obj.genericMethod(withId: nil)
     obj.genericStringMethod(with: "")
@@ -115,6 +117,9 @@ final class J2ktSwiftInteropTest: XCTestCase {
 
     obj.customLongMethod(withLong: 1)
     obj.customLongStringMethod(withLong: 1, with: "")
+
+    obj.customCustomNamesMethod(with: nil)
+    obj.customDefaultNamesMethod(with: nil)
 
     // TODO(b/441732853): Should be customObjectiveCSwiftStringMethod(with: "")
     obj.customObjectiveCSwiftStringMethod(WithString: "")

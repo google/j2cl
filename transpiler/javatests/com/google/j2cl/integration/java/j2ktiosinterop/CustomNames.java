@@ -70,6 +70,12 @@ public final class CustomNames {
   @ObjectiveCName("customLongStringMethod")
   public void longStringMethod(long i, String s) {}
 
+  @ObjectiveCName("customCustomNamesMethod")
+  public void customNamesMethod(CustomNames c) {}
+
+  @ObjectiveCName("customDefaultNamesMethod")
+  public void defaultNamesMethod(DefaultNames c) {}
+
   @ObjectiveCName("customObjectiveCSwiftStringMethodWithString:")
   @SwiftName("customObjectiveCSwiftStringMethod(with:)")
   public void objectiveCSwiftStringMethod(String s) {}
