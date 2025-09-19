@@ -104,8 +104,11 @@ exports = {compile, compileStreaming, instantiate, instantiateStreaming, instant
 """
 
 def _impl_j2wasm_application(ctx):
-    feature_set = ctx.attr._feature_set[BuildSettingInfo].value
-    deps = [ctx.attr._jre] + ctx.attr.deps
+    feature_set = ctx.attr.feature_set
+    if feature_set == J2WASM_FEATURE_SET.DEFAULT:
+        feature_set = ctx.attr._feature_set[BuildSettingInfo].value
+
+    deps = _get_j2cl_infos_for_feature_set([ctx.attr._jre] + ctx.attr.deps, feature_set)
     module_outputs = _get_transitive_modules(deps)
 
     # Create a module for exports.
@@ -280,7 +283,7 @@ def _impl_j2wasm_application(ctx):
     js_info = j2cl_js_provider(
         ctx,
         srcs = [js_module],
-        deps = [d[J2wasmInfo]._private_.js_info for d in deps],
+        deps = [d._private_.js_info for d in deps],
     )
 
     return [
@@ -295,14 +298,17 @@ def _impl_j2wasm_application(ctx):
             ]),
             data_runfiles = ctx.runfiles(files = runfiles, symlinks = symlinks),
         ),
-        OutputGroupInfo(_validation = _trigger_javac_build(ctx.attr.deps)),
+        OutputGroupInfo(_validation = _trigger_javac_build(deps)),
     ]
 
-def _get_transitive_modules(deps):
-    return depset(transitive = [d[J2wasmInfo]._private_.transitive_modules for d in deps], order = "postorder")
+def _get_j2cl_infos_for_feature_set(deps, feature_set):
+    return [d[J2wasmInfo]._private_.feature_set_map[feature_set] for d in deps]
 
-def _get_all_classjars(deps):
-    return depset(transitive = [d[J2wasmInfo]._private_.java_info.transitive_compile_time_jars for d in deps])
+def _get_transitive_modules(j2cl_infos):
+    return depset(transitive = [d._private_.transitive_modules for d in j2cl_infos], order = "postorder")
+
+def _get_all_classjars(j2cl_infos):
+    return depset(transitive = [d._private_.java_info.transitive_compile_time_jars for d in j2cl_infos])
 
 _STAGE_SEPARATOR = "--NEW_STAGE--"
 
@@ -318,8 +324,8 @@ def _extract_stages(args):
     return stages
 
 # Trigger a parallel Javac build to provide better error messages than JDT.
-def _trigger_javac_build(deps):
-    return depset(transitive = [d[J2wasmInfo]._private_.java_info.transitive_runtime_jars for d in deps])
+def _trigger_javac_build(j2cl_infos):
+    return depset(transitive = [d._private_.java_info.transitive_runtime_jars for d in j2cl_infos])
 
 def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
     ctx.actions.run_shell(
@@ -339,16 +345,6 @@ def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
             }' %s/namemap %s > %s""" % (transpile_out.path, binaryen_symbolmap.path, ctx.outputs.symbolmap.path),
         mnemonic = "J2wasmApp",
     )
-
-_j2wasm_app_feature_set_transition = transition(
-    implementation = lambda settings, attr: (
-        {} if attr.feature_set == J2WASM_FEATURE_SET.DEFAULT else {
-            "//build_defs/internal_do_not_use:j2wasm_feature_set": attr.feature_set,
-        }
-    ),
-    inputs = [],
-    outputs = ["//build_defs/internal_do_not_use:j2wasm_feature_set"],
-)
 
 _J2WASM_APP_ATTRS = {
     "deps": attr.label_list(providers = [J2wasmInfo]),
@@ -390,7 +386,6 @@ _J2WASM_APP_ATTRS.update(J2WASM_TOOLCHAIN_ATTRS)
 _j2wasm_application = rule(
     implementation = _impl_j2wasm_application,
     attrs = _J2WASM_APP_ATTRS,
-    cfg = _j2wasm_app_feature_set_transition,
     fragments = ["js"],
     outputs = {
         "wat": "%{name}.wat",

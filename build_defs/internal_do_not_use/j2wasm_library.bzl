@@ -7,7 +7,7 @@ This is an experimental tool and should not be used.
 load("@rules_java//java:defs.bzl", "JavaPluginInfo")
 load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
 load(":j2cl_js_common.bzl", "JsInfo")
-load(":j2wasm_common.bzl", "J2WASM_TOOLCHAIN_ATTRS", "j2wasm_common")
+load(":j2wasm_common.bzl", "J2WASM_FEATURE_SET", "J2WASM_TOOLCHAIN_ATTRS", "j2wasm_common")
 
 J2WASM_LIB_ATTRS = {
     "srcs": attr.label_list(allow_files = [".java", ".srcjar", ".jar", ".js"]),
@@ -37,10 +37,12 @@ def _impl_j2wasm_library_rule(ctx):
         javac_opts = extra_javacopts + ctx.attr.javacopts,
     )
 
+    # Declare default outputs so that bazel build <wasm_target> triggers the compiler and outputs
+    # the artifact.
     outputs = [ctx.outputs.jar]
-    output = j2wasm_provider._private_.output
-    if output:
-        outputs.append(output)
+    default_feature_output = j2wasm_provider._private_.feature_set_map[J2WASM_FEATURE_SET.DEFAULT]._private_.output
+    if default_feature_output:
+        outputs.append(default_feature_output)
 
     return [DefaultInfo(files = depset(outputs)), j2wasm_provider]
 
