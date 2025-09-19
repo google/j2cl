@@ -30,6 +30,7 @@ import static java.util.stream.Collectors.toCollection;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
@@ -93,6 +94,7 @@ import com.sun.tools.javac.util.Context;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -393,12 +395,13 @@ class JavaEnvironment {
   }
 
   private TypeVariable createWildcard(WildcardType wildcardType, boolean inNullMarkedScope) {
-    return createWildcard(wildcardType, null, inNullMarkedScope);
+    return createWildcard(wildcardType, null, ImmutableMap.of(), inNullMarkedScope);
   }
 
   private TypeVariable createWildcard(
       WildcardType wildcardType,
       javax.lang.model.type.TypeVariable declarationTypeVariable,
+      Map<TypeVariable, TypeDescriptor> typingContext,
       boolean inNullMarkedScope) {
     TypeVariable.DescriptorFactory<TypeDescriptor> upperBoundFactory =
         self ->
@@ -416,14 +419,26 @@ class JavaEnvironment {
       upperBoundFactory =
           self -> {
             var upperBoundTypeDescriptor = typeVariable.getUpperBoundTypeDescriptor();
-            return upperBoundTypeDescriptor.specializeTypeVariables(
-                tv ->
-                    // Replace the reference to the type parameter by an unbounded wildcard.
-                    // TODO(b/445725915): To be completely correct it should be replaced by a
-                    // reference to self, i.e. the wildcard in the usage but due to this bug,
-                    // it might trigger a stack overflow. Using the unbound wildcard here result
-                    // in mostly correct behavior avoiding stack overflows in all but a corner case.
-                    (typeVariable.toDeclaration() == tv.toDeclaration()) ? unboundedWildcard : tv);
+            var specializedBound =
+                upperBoundTypeDescriptor.specializeTypeVariables(
+                    tv -> {
+                      // Replace the reference to the type parameter by an unbounded wildcard.
+                      // TODO(b/445725915): To be completely correct it should be replaced by a
+                      // reference to self, i.e. the wildcard in the usage but due to this bug,
+                      // it might trigger a stack overflow. Using the unbound wildcard here result
+                      // in mostly correct behavior avoiding stack overflows in all but a corner
+                      // case.
+                      if (typeVariable.toDeclaration() == tv) {
+                        return unboundedWildcard;
+                      }
+
+                      if (typingContext.containsKey(tv)) {
+                        return typingContext.get(tv);
+                      }
+
+                      return tv;
+                    });
+            return unravelWildCard(specializedBound);
           };
     }
     int id = getTypeVariableId(wildcardType);
@@ -434,6 +449,20 @@ class JavaEnvironment {
         .setName("?")
         .setUniqueKey("#" + id + ":" + (inNullMarkedScope ? "+" : "-"))
         .build();
+  }
+
+  private TypeDescriptor unravelWildCard(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isWildcardOrCapture()) {
+      var wildcard = (TypeVariable) typeDescriptor;
+      var upperbound = wildcard.getUpperBoundTypeDescriptor();
+      return switch (wildcard.getNullabilityAnnotation()) {
+        case NULLABLE -> unravelWildCard(upperbound).toNullable();
+        case NOT_NULLABLE -> unravelWildCard(upperbound).toNonNullable();
+        default -> unravelWildCard(upperbound);
+      };
+    }
+
+    return typeDescriptor;
   }
 
   private boolean isUnboundWildcard(WildcardType typeMirror) {
@@ -1142,22 +1171,28 @@ class JavaEnvironment {
   }
 
   public ImmutableList<TypeDescriptor> createTypeArgumentDescriptors(
-      List<? extends TypeMirror> typeMirrors,
+      List<? extends TypeMirror> typeArguments,
       List<? extends TypeParameterElement> declaredTypeParameters,
       boolean inNullMarkedScope) {
     // TODO(b/246332093): Consider doing this in our type model after cleanup. Currently results in
     // an infinite recursion.
-    return Streams.zip(
-            typeMirrors.stream(),
-            declaredTypeParameters.stream(),
-            (typeArgument, typeParameter) ->
-                typeArgument instanceof WildcardType wildcardType
-                    ? createWildcard(
-                        wildcardType,
-                        (javax.lang.model.type.TypeVariable) typeParameter.asType(),
-                        inNullMarkedScope)
-                    : createTypeDescriptor(typeArgument, inNullMarkedScope))
-        .collect(toImmutableList());
+
+    var typeArgumentByTypeVariable = new LinkedHashMap<TypeVariable, TypeDescriptor>();
+    for (int i = 0; i < typeArguments.size(); i++) {
+      var typeArgument = typeArguments.get(i);
+      var typeParameter =
+          (javax.lang.model.type.TypeVariable) declaredTypeParameters.get(i).asType();
+      var typeArgumentDescriptor =
+          typeArgument instanceof WildcardType wildcardType
+              ? createWildcard(
+                  wildcardType, typeParameter, typeArgumentByTypeVariable, inNullMarkedScope)
+              : createTypeDescriptor(typeArgument, inNullMarkedScope);
+
+      typeArgumentByTypeVariable.put(
+          createTypeVariable(typeParameter, ImmutableList.of(), inNullMarkedScope).toDeclaration(),
+          typeArgumentDescriptor);
+    }
+    return ImmutableList.copyOf(typeArgumentByTypeVariable.values());
   }
 
   private boolean isNullOrJavaLangObject(@Nullable TypeMirror typeMirror) {
