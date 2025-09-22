@@ -1,11 +1,11 @@
 #import <XCTest/XCTest.h>
 
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/CustomNames.h"
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/DefaultNames.h"
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/EnumNames.h"
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/SpecialNames.h"
+#import "j2ktiosinterop/CustomNames.h"
+#import "j2ktiosinterop/DefaultNames.h"
+#import "j2ktiosinterop/EnumNames.h"
+#import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
+#import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
+#import "j2ktiosinterop/SpecialNames.h"
 
 /** J2ObjC interop test for ObjC. */
 @interface J2ObjCObjCInteropTest : XCTestCase
