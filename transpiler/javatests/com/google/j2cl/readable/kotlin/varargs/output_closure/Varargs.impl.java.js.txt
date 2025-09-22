@@ -64,10 +64,11 @@ class Varargs extends j_l_Object {
  m_testNonTrailingVararg__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number */ b) {}
  /** @final @nodts */
  m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number */ b) {}
- /** @final @nodts */
- m_testNonTrailingVarargWithDefault$default__int__arrayOf_int__int__void(/** number */ a, /** !Array<number> */ args, /** number= */ b) {
+ /** @nodts */
+ static m_testNonTrailingVarargWithDefault$default__varargs_Varargs__int__arrayOf_int__int__void(/** !Varargs */ $this, /** number */ a, /** !Array<number> */ args, /** number= */ b) {
+  Varargs.$clinit();
   let b$defaulted = $Util.$isUndefined(b) ? 0 : b;
-  this.m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(a, args, b$defaulted);
+  $this.m_testNonTrailingVarargWithDefault__int__arrayOf_int__int__void(a, args, b$defaulted);
   return;
  }
  /** @final @nodts */
@@ -100,8 +101,8 @@ class Varargs extends j_l_Object {
   }));
   v.m_testNonTrailingVararg__int__arrayOf_int__int__void(1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), 4);
   v.m_testNonTrailingVararg__int__arrayOf_int__int__void(1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), 4);
-  v.m_testNonTrailingVarargWithDefault$default__int__arrayOf_int__int__void(1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), /**@type {number}*/ (undefined));
-  v.m_testNonTrailingVarargWithDefault$default__int__arrayOf_int__int__void(1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), /**@type {number}*/ (undefined));
+  Varargs.m_testNonTrailingVarargWithDefault$default__varargs_Varargs__int__arrayOf_int__int__void(v, 1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), /**@type {number}*/ (undefined));
+  Varargs.m_testNonTrailingVarargWithDefault$default__varargs_Varargs__int__arrayOf_int__int__void(v, 1, /**@type {!Array<number>}*/ ($Arrays.$stampType([2, 3], $$int)), /**@type {number}*/ (undefined));
   v.m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void('foo', new Array(0));
   v.m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void('foo', ['bar']);
   v.m_testOverloaded__java_lang_Object__void('');

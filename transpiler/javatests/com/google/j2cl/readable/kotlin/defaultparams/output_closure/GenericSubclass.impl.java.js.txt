@@ -1,0 +1,55 @@
+goog.module('defaultparams.GenericSubclass$impl');
+
+const DefaultParamInterface = goog.require('defaultparams.DefaultParamInterface$impl');
+const DefaultParams = goog.require('defaultparams.DefaultParams$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template Z
+ * @implements {DefaultParamInterface<Z>}
+ */
+class GenericSubclass extends DefaultParams {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template Z @return {!GenericSubclass<Z>} */
+ static $create__() {
+  GenericSubclass.$clinit();
+  let $instance = new GenericSubclass();
+  $instance.$ctor__defaultparams_GenericSubclass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_GenericSubclass__void() {
+  this.$ctor__defaultparams_DefaultParams__int__void(1);
+ }
+ /** @override @nodts */
+ m_parentInterfaceFun__int__void(/** number */ a) {
+  DefaultParams.m_foo$default__defaultparams_DefaultParams__int__void(this, /**@type {number}*/ (undefined));
+  return;
+ }
+ /** @override @nodts @template V @return {?Z} */
+ m_withTypeParameters__java_lang_Object__java_lang_Object__java_lang_Object(/** ?Z */ a, /** ?V */ b) {
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericSubclass.$clinit = () =>{};
+  GenericSubclass.$loadModules();
+  DefaultParams.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericSubclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+DefaultParamInterface.$markImplementor(GenericSubclass);
+$Util.$setClassMetadata(GenericSubclass, 'defaultparams.GenericSubclass');
+
+exports = GenericSubclass;
+
+//# sourceMappingURL=GenericSubclass.js.map

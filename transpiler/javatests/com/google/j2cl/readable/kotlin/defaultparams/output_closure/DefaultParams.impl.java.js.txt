@@ -66,10 +66,11 @@ class DefaultParams extends j_l_Object {
  }
  /** @nodts */
  m_foo__int__void(/** number */ c) {}
- /** @final @nodts */
- m_foo$default__int__void(/** number= */ c) {
+ /** @nodts */
+ static m_foo$default__defaultparams_DefaultParams__int__void(/** !DefaultParams */ $this, /** number= */ c) {
+  DefaultParams.$clinit();
   let c$defaulted = $Util.$isUndefined(c) ? 20 : c;
-  this.m_foo__int__void(c$defaulted);
+  $this.m_foo__int__void(c$defaulted);
   return;
  }
  /** @nodts */

@@ -4,11 +4,13 @@ const DefaultParamInterface = goog.require('defaultparams.DefaultParamInterface$
 const DefaultParams = goog.require('defaultparams.DefaultParams$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
- * @implements {DefaultParamInterface}
+ * @implements {DefaultParamInterface<string>}
  */
 class Subclass extends DefaultParams {
  /** @protected @nodts */
@@ -47,6 +49,15 @@ class Subclass extends DefaultParams {
  }
  /** @override @nodts */
  m_parentInterfaceFun__int__void(/** number */ a) {}
+ /** @nodts @template V @return {?string} */
+ m_withTypeParameters__java_lang_String__java_lang_Object__java_lang_String(/** ?string */ a, /** ?V */ b) {
+  return a;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @template V @return {?string} */
+ m_withTypeParameters__java_lang_Object__java_lang_Object__java_lang_Object(/** ?string */ arg0, /** ?V */ arg1) {
+  return this.m_withTypeParameters__java_lang_String__java_lang_Object__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
+ }
  /** @nodts */
  static $clinit() {
   Subclass.$clinit = () =>{};
@@ -59,7 +70,10 @@ class Subclass extends DefaultParams {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 DefaultParamInterface.$markImplementor(Subclass);
 $Util.$setClassMetadata(Subclass, 'defaultparams.Subclass');

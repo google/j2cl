@@ -8,28 +8,24 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 class IFoo {
  /** @abstract @nodts @return {number} */
  m_defaultMethod__int__int(/** number */ a) {}
- /** @abstract @nodts @return {number} */
- m_defaultMethod$default__int__int(/** number= */ a) {}
+ /** @nodts @return {number} */
+ static m_defaultMethod$default__defaultparams_IFoo__int__int(/** !IFoo */ $this, /** number= */ a) {
+  IFoo.$clinit();
+  let a$defaulted = $Util.$isUndefined(a) ? 1 : a;
+  return $this.m_defaultMethod__int__int(a$defaulted);
+ }
  /** @abstract @nodts @return {number} */
  m_interfaceMethod__int__int(/** number */ a) {}
- /** @abstract @nodts @return {number} */
- m_interfaceMethod$default__int__int(/** number= */ a) {}
+ /** @nodts @return {number} */
+ static m_interfaceMethod$default__defaultparams_IFoo__int__int(/** !IFoo */ $this, /** number= */ a) {
+  IFoo.$clinit();
+  let a$defaulted = $Util.$isUndefined(a) ? 2 : a;
+  return $this.m_interfaceMethod__int__int(a$defaulted);
+ }
  /** @nodts @return {number} */
  static m_defaultMethod__$default__defaultparams_IFoo__int__int(/** !IFoo */ $thisArg, /** number */ a) {
   IFoo.$clinit();
   return a;
- }
- /** @nodts @return {number} */
- static m_defaultMethod$default__$default__defaultparams_IFoo__int__int(/** !IFoo */ $thisArg, /** number= */ a) {
-  IFoo.$clinit();
-  let a$defaulted = $Util.$isUndefined(a) ? 1 : a;
-  return $thisArg.m_defaultMethod__int__int(a$defaulted);
- }
- /** @nodts @return {number} */
- static m_interfaceMethod$default__$default__defaultparams_IFoo__int__int(/** !IFoo */ $thisArg, /** number= */ a) {
-  IFoo.$clinit();
-  let a$defaulted = $Util.$isUndefined(a) ? 2 : a;
-  return $thisArg.m_interfaceMethod__int__int(a$defaulted);
  }
  /** @nodts */
  static $clinit() {

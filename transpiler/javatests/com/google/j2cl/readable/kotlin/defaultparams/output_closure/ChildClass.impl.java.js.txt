@@ -1,0 +1,44 @@
+goog.module('defaultparams.ChildClass$impl');
+
+const GenericSubclass = goog.require('defaultparams.GenericSubclass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @extends {GenericSubclass<string>}
+ */
+class ChildClass extends GenericSubclass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ChildClass} */
+ static $create__() {
+  ChildClass.$clinit();
+  let $instance = new ChildClass();
+  $instance.$ctor__defaultparams_ChildClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_ChildClass__void() {
+  this.$ctor__defaultparams_GenericSubclass__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ChildClass.$clinit = () =>{};
+  ChildClass.$loadModules();
+  GenericSubclass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ChildClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ChildClass, 'defaultparams.ChildClass');
+
+exports = ChildClass;
+
+//# sourceMappingURL=ChildClass.js.map

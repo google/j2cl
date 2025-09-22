@@ -157,6 +157,8 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::J2clDefaultParameterInjector)
   // Replace default values arguments with stubs
   perFileLowering(::J2clDefaultParameterCleaner)
+  // Makes function adapters for default arguments static.
+  perFileLowering(::StaticDefaultFunctionLowering)
   // TODO(b/377502016): Remove this pass once smart cast's bug is fixed.
   // Cleanup IMPLICIT_CAST introduced by smart casts that cast a expression to a parent type.
   perFileLowering(::SmartCastCleaner)

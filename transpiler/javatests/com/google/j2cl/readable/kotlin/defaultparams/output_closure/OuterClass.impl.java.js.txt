@@ -1,0 +1,44 @@
+goog.module('defaultparams.OuterClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class OuterClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!OuterClass<T>} */
+ static $create__() {
+  OuterClass.$clinit();
+  let $instance = new OuterClass();
+  $instance.$ctor__defaultparams_OuterClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_OuterClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  OuterClass.$clinit = () =>{};
+  OuterClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(OuterClass, 'defaultparams.OuterClass');
+
+exports = OuterClass;
+
+//# sourceMappingURL=OuterClass.js.map

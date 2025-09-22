@@ -3,11 +3,17 @@ goog.module('defaultparams.DefaultParamsKt$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let ChildClass = goog.forwardDeclare('defaultparams.ChildClass$impl');
+let DefaultParamInterface = goog.forwardDeclare('defaultparams.DefaultParamInterface$impl');
 let DefaultParams = goog.forwardDeclare('defaultparams.DefaultParams$impl');
 let $1 = goog.forwardDeclare('defaultparams.DefaultParamsKt.$1$impl');
 let $1LocalClass = goog.forwardDeclare('defaultparams.DefaultParamsKt.$1LocalClass$impl');
 let FooImpl = goog.forwardDeclare('defaultparams.FooImpl$impl');
 let FooImplWithDefaultOverride = goog.forwardDeclare('defaultparams.FooImplWithDefaultOverride$impl');
+let GenericSubclass = goog.forwardDeclare('defaultparams.GenericSubclass$impl');
+let IFoo = goog.forwardDeclare('defaultparams.IFoo$impl');
+let OuterClass = goog.forwardDeclare('defaultparams.OuterClass$impl');
+let InnerClass = goog.forwardDeclare('defaultparams.OuterClass.InnerClass$impl');
 let Subclass = goog.forwardDeclare('defaultparams.Subclass$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
@@ -49,14 +55,14 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_testMethods__void() {
   DefaultParamsKt.$clinit();
-  DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 123, /**@type {DefaultConstructorMarker}*/ (undefined)).m_foo$default__int__void(/**@type {number}*/ (undefined));
+  DefaultParams.m_foo$default__defaultparams_DefaultParams__int__void(DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 123, /**@type {DefaultConstructorMarker}*/ (undefined)), /**@type {number}*/ (undefined));
   DefaultParams.$create__int__int__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {number}*/ (undefined), 123, /**@type {DefaultConstructorMarker}*/ (undefined)).m_foo__int__void(456);
   Subclass.$create__().m_foo__int__void(456);
  }
  /** @nodts */
  static m_extFun__defaultparams_DefaultParams__void(/** !DefaultParams */ this_1) {
   DefaultParamsKt.$clinit();
-  this_1.m_foo$default__int__void(/**@type {number}*/ (undefined));
+  DefaultParams.m_foo$default__defaultparams_DefaultParams__int__void(this_1, /**@type {number}*/ (undefined));
   return;
  }
  /** @nodts */
@@ -274,11 +280,26 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_testInterface__void() {
   DefaultParamsKt.$clinit();
-  FooImpl.$create__().m_defaultMethod$default__int__int(/**@type {number}*/ (undefined));
+  IFoo.m_defaultMethod$default__defaultparams_IFoo__int__int(FooImpl.$create__(), /**@type {number}*/ (undefined));
   FooImpl.$create__().m_defaultMethod__int__int(2);
-  FooImpl.$create__().m_interfaceMethod$default__int__int(/**@type {number}*/ (undefined));
+  IFoo.m_interfaceMethod$default__defaultparams_IFoo__int__int(FooImpl.$create__(), /**@type {number}*/ (undefined));
   FooImpl.$create__().m_interfaceMethod__int__int(2);
   FooImplWithDefaultOverride.$create__().m_defaultMethod__int__int(2);
+ }
+ /** @nodts @template T @return {?string} */
+ static m_callDefault__defaultparams_GenericSubclass__java_lang_String(/** T */ this_1) {
+  DefaultParamsKt.$clinit();
+  return /**@type {?string}*/ (DefaultParamInterface.m_withTypeParameters$default__defaultparams_DefaultParamInterface__java_lang_Object__java_lang_Object__java_lang_Object(/**@type {!DefaultParamInterface<?>}*/ (this_1), /**@type {?}*/ (undefined), /**@type {Integer}*/ ($Casts.$to(undefined, Integer))));
+ }
+ /** @nodts */
+ static m_testGenerics__void() {
+  DefaultParamsKt.$clinit();
+  let result = /**@type {?string}*/ (DefaultParamInterface.m_withTypeParameters$default__defaultparams_DefaultParamInterface__java_lang_Object__java_lang_Object__java_lang_Object(/**@type {!GenericSubclass<string>}*/ (GenericSubclass.$create__()), /**@type {?}*/ (undefined), /**@type {Integer}*/ ($Casts.$to(undefined, Integer))));
+  result = (/**@type {?string}*/ (DefaultParamInterface.m_withTypeParameters$default__defaultparams_DefaultParamInterface__java_lang_Object__java_lang_Object__java_lang_Object(ChildClass.$create__(), /**@type {?string}*/ (undefined), /**@type {Integer}*/ ($Casts.$to(undefined, Integer)))));
+  result = DefaultParamsKt.m_callDefault__defaultparams_GenericSubclass__java_lang_String(/**@type {!GenericSubclass<string>}*/ (GenericSubclass.$create__()));
+  result = DefaultParamsKt.m_callDefault__defaultparams_GenericSubclass__java_lang_String(ChildClass.$create__());
+  let inner = /**@type {!InnerClass<string, !IFoo>}*/ (InnerClass.$create__defaultparams_OuterClass(/**@type {!OuterClass<!IFoo>}*/ (OuterClass.$create__())));
+  let s = /**@type {IFoo}*/ (InnerClass.m_foo$default__defaultparams_OuterClass_InnerClass__java_lang_Object__java_lang_Object(inner, /**@type {?string}*/ ($Casts.$to(undefined, j_l_String))));
  }
  /** @nodts */
  static $clinit() {
@@ -293,11 +314,17 @@ class DefaultParamsKt extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  ChildClass = goog.module.get('defaultparams.ChildClass$impl');
+  DefaultParamInterface = goog.module.get('defaultparams.DefaultParamInterface$impl');
   DefaultParams = goog.module.get('defaultparams.DefaultParams$impl');
   $1 = goog.module.get('defaultparams.DefaultParamsKt.$1$impl');
   $1LocalClass = goog.module.get('defaultparams.DefaultParamsKt.$1LocalClass$impl');
   FooImpl = goog.module.get('defaultparams.FooImpl$impl');
   FooImplWithDefaultOverride = goog.module.get('defaultparams.FooImplWithDefaultOverride$impl');
+  GenericSubclass = goog.module.get('defaultparams.GenericSubclass$impl');
+  IFoo = goog.module.get('defaultparams.IFoo$impl');
+  OuterClass = goog.module.get('defaultparams.OuterClass$impl');
+  InnerClass = goog.module.get('defaultparams.OuterClass.InnerClass$impl');
   Subclass = goog.module.get('defaultparams.Subclass$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');

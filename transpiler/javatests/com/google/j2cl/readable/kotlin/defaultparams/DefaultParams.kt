@@ -21,7 +21,7 @@ open class DefaultParams(val a: Int = 1, val b: Int) {
   open fun foo(c: Int = 20) {}
 }
 
-class Subclass : DefaultParams, DefaultParamInterface {
+class Subclass : DefaultParams, DefaultParamInterface<String> {
   constructor() : super(b = 2)
 
   constructor(a: Int, b: Int) : super(a, b)
@@ -31,6 +31,8 @@ class Subclass : DefaultParams, DefaultParamInterface {
   }
 
   override fun parentInterfaceFun(a: Int) {}
+
+  override fun <V> withTypeParameters(a: String?, b: V?): String? = a
 }
 
 fun testConstructors() {
@@ -204,4 +206,31 @@ fun testInterface() {
   FooImpl().interfaceMethod()
   FooImpl().interfaceMethod(2)
   FooImplWithDefaultOverride().defaultMethod(2)
+}
+
+open class GenericSubclass<Z> : DefaultParams(1), DefaultParamInterface<Z> {
+  override fun parentInterfaceFun(a: Int) = foo()
+
+  override fun <V> withTypeParameters(a: Z?, b: V?): Z? = null
+}
+
+class ChildClass : GenericSubclass<String>()
+
+fun <T : GenericSubclass<String>> T.callDefault() = withTypeParameters<Int>()
+
+class OuterClass<T> {
+  inner class InnerClass<U> {
+    fun foo(a: U? = null): T? = null
+  }
+}
+
+fun testGenerics() {
+  var result = GenericSubclass<String>().withTypeParameters<Int>()
+  result = ChildClass().withTypeParameters<Int>()
+
+  result = GenericSubclass<String>().callDefault()
+  result = ChildClass().callDefault()
+
+  val inner = OuterClass<IFoo>().InnerClass<String>()
+  val s = inner.foo()
 }

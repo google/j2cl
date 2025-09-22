@@ -15,6 +15,8 @@
  */
 package defaultparams
 
-interface DefaultParamInterface {
+interface DefaultParamInterface<T> {
   fun parentInterfaceFun(a: Int = 1)
+
+  fun <V> withTypeParameters(a: T? = null, b: V? = null): T?
 }

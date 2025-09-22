@@ -47,11 +47,12 @@ class ArrayMembers extends j_l_Object {
  m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(/** !Array<number> */ a, /** !Array<string> */ b) {
   return ArrayMembers.$create__arrayOf_int__arrayOf_java_lang_String(a, b);
  }
- /** @final @nodts @return {!ArrayMembers} */
- m_copy$default__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(/** !Array<number>= */ a, /** !Array<string>= */ b) {
-  let a$defaulted = $Util.$isUndefined(a) ? this.f_a__dataclass_ArrayMembers_ : a;
-  let b$defaulted = $Util.$isUndefined(b) ? this.f_b__dataclass_ArrayMembers_ : b;
-  return this.m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(a$defaulted, b$defaulted);
+ /** @nodts @return {!ArrayMembers} */
+ static m_copy$default__dataclass_ArrayMembers__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(/** !ArrayMembers */ $this, /** !Array<number>= */ a, /** !Array<string>= */ b) {
+  ArrayMembers.$clinit();
+  let a$defaulted = $Util.$isUndefined(a) ? $this.f_a__dataclass_ArrayMembers_ : a;
+  let b$defaulted = $Util.$isUndefined(b) ? $this.f_b__dataclass_ArrayMembers_ : b;
+  return $this.m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(a$defaulted, b$defaulted);
  }
  /** @override @return {string} */
  toString() {

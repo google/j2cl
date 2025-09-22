@@ -326,7 +326,7 @@ fun IrFunctionAccessExpression.getTypeSubstitutionMapForInlining(
   }
 }
 
-private fun IrType.allSuperTypesAndSelf(): Set<IrType> {
+public fun IrType.allSuperTypesAndSelf(): Set<IrType> {
   val allSupertypesIncludingSelf = linkedSetOf<IrType>()
   allSupertypesIncludingSelf.add(this)
   type.superTypes().forEach { allSupertypesIncludingSelf.addAll(it.allSuperTypesAndSelf()) }

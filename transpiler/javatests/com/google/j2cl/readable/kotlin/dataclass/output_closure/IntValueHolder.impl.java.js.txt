@@ -45,10 +45,11 @@ class IntValueHolder extends j_l_Object {
  m_copy__int__dataclass_IntValueHolder(/** number */ backingValue) {
   return IntValueHolder.$create__int(backingValue);
  }
- /** @final @nodts @return {!IntValueHolder} */
- m_copy$default__int__dataclass_IntValueHolder(/** number= */ backingValue) {
-  let backingValue$defaulted = $Util.$isUndefined(backingValue) ? this.f_backingValue__dataclass_IntValueHolder_ : backingValue;
-  return this.m_copy__int__dataclass_IntValueHolder(backingValue$defaulted);
+ /** @nodts @return {!IntValueHolder} */
+ static m_copy$default__dataclass_IntValueHolder__int__dataclass_IntValueHolder(/** !IntValueHolder */ $this, /** number= */ backingValue) {
+  IntValueHolder.$clinit();
+  let backingValue$defaulted = $Util.$isUndefined(backingValue) ? $this.f_backingValue__dataclass_IntValueHolder_ : backingValue;
+  return $this.m_copy__int__dataclass_IntValueHolder(backingValue$defaulted);
  }
  /** @override @return {string} */
  toString() {

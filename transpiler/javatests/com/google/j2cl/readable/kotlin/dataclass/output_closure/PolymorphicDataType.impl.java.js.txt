@@ -71,12 +71,13 @@ class PolymorphicDataType extends AbstractType {
  m_copy__int__int__int__dataclass_PolymorphicDataType(/** number */ a, /** number */ b, /** number */ c) {
   return PolymorphicDataType.$create__int__int__int(a, b, c);
  }
- /** @final @nodts @return {!PolymorphicDataType} */
- m_copy$default__int__int__int__dataclass_PolymorphicDataType(/** number= */ a, /** number= */ b, /** number= */ c) {
-  let a$defaulted = $Util.$isUndefined(a) ? this.f_a__dataclass_PolymorphicDataType_ : a;
-  let b$defaulted = $Util.$isUndefined(b) ? this.f_b__dataclass_PolymorphicDataType_ : b;
-  let c$defaulted = $Util.$isUndefined(c) ? this.f_c__dataclass_PolymorphicDataType_ : c;
-  return this.m_copy__int__int__int__dataclass_PolymorphicDataType(a$defaulted, b$defaulted, c$defaulted);
+ /** @nodts @return {!PolymorphicDataType} */
+ static m_copy$default__dataclass_PolymorphicDataType__int__int__int__dataclass_PolymorphicDataType(/** !PolymorphicDataType */ $this, /** number= */ a, /** number= */ b, /** number= */ c) {
+  PolymorphicDataType.$clinit();
+  let a$defaulted = $Util.$isUndefined(a) ? $this.f_a__dataclass_PolymorphicDataType_ : a;
+  let b$defaulted = $Util.$isUndefined(b) ? $this.f_b__dataclass_PolymorphicDataType_ : b;
+  let c$defaulted = $Util.$isUndefined(c) ? $this.f_c__dataclass_PolymorphicDataType_ : c;
+  return $this.m_copy__int__int__int__dataclass_PolymorphicDataType(a$defaulted, b$defaulted, c$defaulted);
  }
  /** @override @return {string} */
  toString() {

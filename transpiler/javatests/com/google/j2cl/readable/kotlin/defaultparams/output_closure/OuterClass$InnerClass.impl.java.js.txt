@@ -1,0 +1,58 @@
+goog.module('defaultparams.OuterClass.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let OuterClass = goog.forwardDeclare('defaultparams.OuterClass$impl');
+
+/**
+ * @final
+ * @template U, T
+ */
+class InnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!OuterClass<T>} @nodts*/
+  this.$outer_this__defaultparams_OuterClass_InnerClass;
+ }
+ /** @nodts @template U, T @return {!InnerClass<U, T>} */
+ static $create__defaultparams_OuterClass(/** !OuterClass<T> */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__defaultparams_OuterClass_InnerClass__defaultparams_OuterClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_OuterClass_InnerClass__defaultparams_OuterClass__void(/** !OuterClass<T> */ $outer_this) {
+  this.$outer_this__defaultparams_OuterClass_InnerClass = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?T} */
+ m_foo__java_lang_Object__java_lang_Object(/** ?U */ a) {
+  return null;
+ }
+ /** @nodts @template U_1, T_1 @return {?T_1} */
+ static m_foo$default__defaultparams_OuterClass_InnerClass__java_lang_Object__java_lang_Object(/** !InnerClass<U_1, T_1> */ $this, /** ?U_1= */ a) {
+  InnerClass.$clinit();
+  return $this.m_foo__java_lang_Object__java_lang_Object(a);
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClass, 'defaultparams.OuterClass$InnerClass');
+
+exports = InnerClass;
+
+//# sourceMappingURL=OuterClass$InnerClass.js.map

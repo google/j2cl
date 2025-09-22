@@ -64,6 +64,7 @@ import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.addToStdlib.assignFrom
 
 /** Generates bridge functions to handle default parameter resolution. */
@@ -189,15 +190,24 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
         .toMutableMap()
     val parameterRemapper = VariableRemapper(variables)
 
+    // If the enclosing class has a type parameter with out variance add casts around all default
+    // expressions. This is to workaround issues when the bridge is devirtualized and the receiver
+    // is passed in; since the type parameter with out variance will become ?, this can generate
+    // JSCompiler conformance errors if we access a property that is now of the unknown type. By
+    // casting we can avoid this error.
+    val castDefaultExpression = parentClassOrNull?.hasOutVarianceTypeParameter() == true
+
     return context.createIrBuilder(symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET).irBlockBody {
       // For each optional parameter, add a resolution statement to default it if it's undefined.
       for (originalParameter in originalDeclaration.parameters.filter { it.defaultValue != null }) {
         val newParameter = parameters[originalParameter.indexInParameters]
-        createDefaultResolutionToTmpVariable(
-            newParameter,
-            originalParameter.remapDefaultExpressionReferences(parameterRemapper),
-          )
-          ?.let { variables[originalParameter] = it }
+        val defaultExpression =
+          originalParameter.remapDefaultExpressionReferences(parameterRemapper).let {
+            if (castDefaultExpression) irImplicitCast(it, newParameter.type) else it
+          }
+        createDefaultResolutionToTmpVariable(newParameter, defaultExpression)?.let {
+          variables[originalParameter] = it
+        }
       }
 
       // If it's a constructor we need a constructing delegating call, otherwise just delegate to
@@ -275,6 +285,9 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
 
     private val IrValueParameter.defaultedTmpVariableName: String
       get() = "${name.asString()}\$defaulted"
+
+    private fun IrClass.hasOutVarianceTypeParameter(): Boolean =
+      typeParameters.any { it.variance == Variance.OUT_VARIANCE }
   }
 }
 

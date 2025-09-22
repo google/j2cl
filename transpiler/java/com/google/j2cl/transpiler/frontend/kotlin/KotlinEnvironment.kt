@@ -73,7 +73,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.simpleSourceName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.singleAbstractMethod
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
 import org.jetbrains.kotlin.backend.common.defaultArgumentsDispatchFunction
-import org.jetbrains.kotlin.backend.common.defaultArgumentsOriginalFunction
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.SpecialBridge
@@ -86,6 +85,7 @@ import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithName
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrField
@@ -650,7 +650,7 @@ internal class KotlinEnvironment(
             // default bridge function, or is its own dispatch function.
             .setOptional(
               param.defaultValue != null &&
-                (irFunction.defaultArgumentsOriginalFunction != null ||
+                (irFunction.origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
                   irFunction == irFunction.defaultArgumentsDispatchFunction)
             )
             .setJsOptional(param.isJsOptional)
