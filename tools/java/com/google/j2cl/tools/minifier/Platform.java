@@ -22,6 +22,11 @@ import javax.annotation.Nullable;
 
 final class Platform {
 
+  public static String forceCopy(String s) {
+    // JVM doesn't need this as "substring" is never a "view".
+    return s;
+  }
+
   record Pattern(java.util.regex.Pattern delegate) {
     public static Pattern compile(String pattern) {
       return new Pattern(java.util.regex.Pattern.compile(pattern));

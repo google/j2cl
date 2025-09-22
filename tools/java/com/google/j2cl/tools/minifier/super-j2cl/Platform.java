@@ -25,6 +25,9 @@ import jsinterop.annotations.JsType;
 
 final class Platform {
 
+  @JsMethod
+  public static native String forceCopy(String s);
+
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
   static class Pattern {
 

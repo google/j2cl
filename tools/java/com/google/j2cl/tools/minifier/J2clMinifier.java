@@ -607,6 +607,8 @@ public class J2clMinifier {
       return minifiedIdentifiersByIdentifier.get(identifier);
     }
 
+    // Ensure key is not a view to avoid leaking the large string.
+    identifier = Platform.forceCopy(identifier);
     String prettyIdentifier = computePrettyIdentifier(identifier);
     if (prettyIdentifier.isEmpty()) {
       // The identifier must contain something strange like triple _'s. Leave the whole thing alone
