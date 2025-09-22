@@ -155,4 +155,12 @@ final class J2ktSwiftInteropTest: XCTestCase {
     let _ = values.get(index: 0)
     let _ = values.get(index: 1)
   }
+
+  func testNativeClass() {
+    let obj = CustomNativeClass()
+    let _ = obj.nativeInstanceMethod()
+    let _ = CustomNativeClass.Companion.shared.nativeStaticMethod()
+    CustomNativeClass.Companion.shared.nativeParameter(with: obj)
+    let _ = CustomNativeClass.Companion.shared.nativeReturnType()
+  }
 }

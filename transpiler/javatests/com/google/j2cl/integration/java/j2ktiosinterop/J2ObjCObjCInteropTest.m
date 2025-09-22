@@ -3,6 +3,7 @@
 #import "j2ktiosinterop/CustomNames.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
+#import "j2ktiosinterop/NativeClass.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
@@ -173,6 +174,22 @@
   IOSObjectArray *values = [J2ktiosinteropEnumNames values];
   e = values[0];
   e = values[1];
+}
+
+- (void)testNativeClass {
+  CustomNativeClass *obj = [[CustomNativeClass alloc] init];
+  obj = create_CustomNativeClass_init();
+  obj = new_CustomNativeClass_init();
+
+  [obj nativeInstanceMethod];
+
+  [CustomNativeClass nativeStaticMethod];
+  [CustomNativeClass nativeParameterWithCustomNativeClass:obj];
+  [CustomNativeClass nativeReturnType];
+
+  CustomNativeClass_nativeStaticMethod();
+  CustomNativeClass_nativeParameterWithCustomNativeClass_(obj);
+  CustomNativeClass_nativeReturnType();
 }
 
 @end

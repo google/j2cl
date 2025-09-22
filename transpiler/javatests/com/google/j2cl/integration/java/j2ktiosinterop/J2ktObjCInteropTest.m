@@ -3,6 +3,7 @@
 #import "j2ktiosinterop/CustomNames.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
+#import "j2ktiosinterop/NativeClass.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
@@ -196,6 +197,24 @@
   GKOTKotlinArray<J2ktJ2ktiosinteropEnumNames *> *values = [J2ktiosinteropEnumNames values];
   e = [values getIndex:0];
   e = [values getIndex:1];
+}
+
+- (void)testNativeClass {
+  CustomNativeClass *obj = [[CustomNativeClass alloc] init];
+  // TODO(b/442826242): Not yet available for @KtNative classes.
+  // obj = create_CustomNativeClass_init();
+  // obj = new_CustomNativeClass_init();
+
+  [obj nativeInstanceMethod];
+
+  [CustomNativeClassCompanion.shared nativeStaticMethod];
+  [CustomNativeClassCompanion.shared nativeParameterWithCustomNativeClass:obj];
+  [CustomNativeClassCompanion.shared nativeReturnType];
+
+  // TODO(b/442826242): Not yet available for @KtNative classes.
+  // CustomNativeClass_nativeStaticMethod();
+  // CustomNativeClass_nativeParameterWithCustomNativeClass_(obj);
+  // CustomNativeClass_nativeReturnType();
 }
 
 @end

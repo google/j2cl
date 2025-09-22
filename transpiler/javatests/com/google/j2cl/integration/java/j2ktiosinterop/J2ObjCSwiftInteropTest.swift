@@ -139,4 +139,12 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     let _ = values[0]
     let _ = values[1]
   }
+
+  func testNativeClass() {
+    let obj = CustomNativeClass()
+    let _ = obj.nativeInstanceMethod()
+    let _ = CustomNativeClass.nativeStaticMethod()
+    CustomNativeClass.nativeParameter(with: obj)
+    let _ = CustomNativeClass.nativeReturnType()
+  }
 }
