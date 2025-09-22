@@ -382,6 +382,21 @@
  ))
 )
 
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor [type definition]
+(type $nullability.Nullability.WithNullableParameterInConstructor (sub $java.lang.Object (struct
+ (field $vtable (ref $nullability.Nullability.WithNullableParameterInConstructor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $nullability.Nullability.WithNullableParameterInConstructor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+
 ;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [type definition]
 (type $nullability.Nullability.1ImplicitlyNullmarkedLocalClass (sub $java.lang.Object (struct
  (field $vtable (ref $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable))
@@ -1088,6 +1103,21 @@
  ))
 )
 
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor.1 [type definition]
+(type $nullability.Nullability.WithNullableParameterInConstructor.1 (sub $nullability.Nullability.WithNullableParameterInConstructor (struct
+ (field $vtable (ref $nullability.Nullability.WithNullableParameterInConstructor.1.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $nullability.Nullability.WithNullableParameterInConstructor.1.vtable (sub $nullability.Nullability.WithNullableParameterInConstructor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+
 ;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 [type definition]
 (type $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 (sub $nullability.defaultnullable.DefaultNullable.NullMarkedConsumer.$LambdaAdaptor (struct
  (field $vtable (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1.vtable))
@@ -1378,6 +1408,8 @@
 
 ;;; Code for nullability.Nullability.RecursiveNullableParam [imports]
 
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor [imports]
+
 ;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [imports]
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [imports]
@@ -1463,6 +1495,8 @@
 ;;; Code for nullability.Nullability.RecursiveChild [imports]
 
 ;;; Code for nullability.Nullability.RecursiveNullableChild [imports]
+
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor.1 [imports]
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 [imports]
 
@@ -1653,6 +1687,22 @@
  (i32.const 0)
 )
 (global $$class@nullability.Nullability.RecursiveNullableParam (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor.1 [static fields]
+(global $$class-initialized@nullability.Nullability.WithNullableParameterInConstructor.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@nullability.Nullability.WithNullableParameterInConstructor.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor [static fields]
+(global $$class-initialized@nullability.Nullability.WithNullableParameterInConstructor (mut i32)
+ (i32.const 0)
+)
+(global $$class@nullability.Nullability.WithNullableParameterInConstructor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -2423,6 +2473,26 @@
  )
 )
 
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor.1 [vtable.init]
+(global $nullability.Nullability.WithNullableParameterInConstructor.1.vtable (ref $nullability.Nullability.WithNullableParameterInConstructor.1.vtable)
+ (struct.new $nullability.Nullability.WithNullableParameterInConstructor.1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nullability.Nullability.WithNullableParameterInConstructor.1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor [vtable.init]
+(global $nullability.Nullability.WithNullableParameterInConstructor.vtable (ref $nullability.Nullability.WithNullableParameterInConstructor.vtable)
+ (struct.new $nullability.Nullability.WithNullableParameterInConstructor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nullability.Nullability.WithNullableParameterInConstructor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
 ;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [vtable.init]
 (global $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable (ref $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable)
  (struct.new $nullability.Nullability.1ImplicitlyNullmarkedLocalClass.vtable
@@ -2887,16 +2957,16 @@
 
 ;;; void Marker.$clinit()
 (func $$clinit__void_<once>_@nullability.Marker
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:266:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:276:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:266:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:276:10
   (if (global.get $$class-initialized@nullability.Marker)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:266:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:276:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:266:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:276:10
   (global.set $$class-initialized@nullability.Marker (i32.const 1))
  )
 )
@@ -5383,6 +5453,94 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability.RecursiveNullableParam)
+
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor [methods]
+
+;;; WithNullableParameterInConstructor WithNullableParameterInConstructor.$create(String s)
+(func $$create__java_lang_String@nullability.Nullability.WithNullableParameterInConstructor
+ (param $s (ref null $java.lang.String))
+ (result (ref null $nullability.Nullability.WithNullableParameterInConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:268:4
+ (local $$instance (ref null $nullability.Nullability.WithNullableParameterInConstructor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:268:4
+  (call $$clinit__void_<once>_@nullability.Nullability.WithNullableParameterInConstructor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:268:4
+  (local.set $$instance (struct.new $nullability.Nullability.WithNullableParameterInConstructor (global.get $nullability.Nullability.WithNullableParameterInConstructor.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:268:4
+  (call $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor@nullability.Nullability.WithNullableParameterInConstructor (ref.as_non_null (local.get $$instance))(local.get $s))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:268:4
+  (return (local.get $$instance))
+ )
+)
+
+;;; void WithNullableParameterInConstructor.$ctor(String s)
+(func $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor@nullability.Nullability.WithNullableParameterInConstructor
+ (param $this (ref null $nullability.Nullability.WithNullableParameterInConstructor))
+ (param $s (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:268:4
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:268:59
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void WithNullableParameterInConstructor.m()
+(func $m_m__void@nullability.Nullability.WithNullableParameterInConstructor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:270:16
+ (local $o (ref null $nullability.Nullability.WithNullableParameterInConstructor.1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:270:20
+  (call $$clinit__void_<once>_@nullability.Nullability.WithNullableParameterInConstructor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:6
+  (local.set $o (call $$create__java_lang_String@nullability.Nullability.WithNullableParameterInConstructor.1 (ref.null $java.lang.String)))
+ )
+)
+
+;;; void WithNullableParameterInConstructor.$clinit()
+(func $$clinit__void_<once>_@nullability.Nullability.WithNullableParameterInConstructor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:267:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:267:15
+  (if (global.get $$class-initialized@nullability.Nullability.WithNullableParameterInConstructor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:267:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:267:15
+  (global.set $$class-initialized@nullability.Nullability.WithNullableParameterInConstructor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:267:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> WithNullableParameterInConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.WithNullableParameterInConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nullability.Nullability.WithNullableParameterInConstructor)))
+   (then
+    (return (global.get $$class@nullability.Nullability.WithNullableParameterInConstructor))
+   )
+  )
+  (global.set $$class@nullability.Nullability.WithNullableParameterInConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nullability....|__java_lang_String_<once>_@nullability.Nullability.WithNullableParameterInConstructor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nullability.Nullability.WithNullableParameterInConstructor))
+ )
+)
+
+;;; Class<?> WithNullableParameterInConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nullability.Nullability.WithNullableParameterInConstructor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.WithNullableParameterInConstructor))
+ (local.set $this (ref.cast (ref $nullability.Nullability.WithNullableParameterInConstructor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.WithNullableParameterInConstructor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability.WithNullableParameterInConstructor)
 
 ;;; Code for nullability.Nullability.1ImplicitlyNullmarkedLocalClass [methods]
 
@@ -11080,6 +11238,82 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability.RecursiveNullableChild)
+
+;;; Code for nullability.Nullability.WithNullableParameterInConstructor.1 [methods]
+
+;;; <anonymous> extends WithNullableParameterInConstructor <anonymous> extends WithNullableParameterInConstructor.$create(String $_0)
+(func $$create__java_lang_String@nullability.Nullability.WithNullableParameterInConstructor.1
+ (param $$_0 (ref null $java.lang.String))
+ (result (ref null $nullability.Nullability.WithNullableParameterInConstructor.1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+ (local $$instance (ref null $nullability.Nullability.WithNullableParameterInConstructor.1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  (call $$clinit__void_<once>_@nullability.Nullability.WithNullableParameterInConstructor.1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  (local.set $$instance (struct.new $nullability.Nullability.WithNullableParameterInConstructor.1 (global.get $nullability.Nullability.WithNullableParameterInConstructor.1.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  (call $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor_1@nullability.Nullability.WithNullableParameterInConstructor.1 (ref.as_non_null (local.get $$instance))(local.get $$_0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends WithNullableParameterInConstructor.$ctor(String $_0)
+(func $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor_1@nullability.Nullability.WithNullableParameterInConstructor.1
+ (param $this (ref null $nullability.Nullability.WithNullableParameterInConstructor.1))
+ (param $$_0 (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  (call $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor@nullability.Nullability.WithNullableParameterInConstructor (ref.as_non_null (local.get $this))(local.get $$_0))
+ )
+)
+
+;;; void <anonymous> extends WithNullableParameterInConstructor.$clinit()
+(func $$clinit__void_<once>_@nullability.Nullability.WithNullableParameterInConstructor.1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  (if (global.get $$class-initialized@nullability.Nullability.WithNullableParameterInConstructor.1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  (global.set $$class-initialized@nullability.Nullability.WithNullableParameterInConstructor.1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  (call $$clinit__void_<once>_@nullability.Nullability.WithNullableParameterInConstructor )
+ )
+)
+
+;;; Class<T> <anonymous> extends WithNullableParameterInConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.WithNullableParameterInConstructor.1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nullability.Nullability.WithNullableParameterInConstructor.1)))
+   (then
+    (return (global.get $$class@nullability.Nullability.WithNullableParameterInConstructor.1))
+   )
+  )
+  (global.set $$class@nullability.Nullability.WithNullableParameterInConstructor.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nullability....|__java_lang_String_<once>_@nullability.Nullability.WithNullableParameterInConstructor.1 )(call $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.WithNullableParameterInConstructor )))
+  (return (global.get $$class@nullability.Nullability.WithNullableParameterInConstructor.1))
+ )
+)
+
+;;; Class<?> <anonymous> extends WithNullableParameterInConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nullability.Nullability.WithNullableParameterInConstructor.1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.WithNullableParameterInConstructor.1))
+ (local.set $this (ref.cast (ref $nullability.Nullability.WithNullableParameterInConstructor.1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.WithNullableParameterInConstructor.1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability.WithNullableParameterInConstructor.1)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 [methods]
 

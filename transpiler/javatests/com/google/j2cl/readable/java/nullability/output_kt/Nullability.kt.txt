@@ -273,6 +273,17 @@ open class Nullability {
  open class RecursiveParam<T> internal constructor() where T: Recursive<T>, T: Marker?
 
  open class RecursiveNullableParam<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
+
+ open class WithNullableParameterInConstructor {
+  internal constructor(s: String?)
+
+  companion object {
+   @JvmStatic
+   internal fun m_pp_nullability() {
+    val o = object : WithNullableParameterInConstructor(null) {}
+   }
+  }
+ }
 }
 
 interface Marker
