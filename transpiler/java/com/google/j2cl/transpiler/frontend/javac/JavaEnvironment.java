@@ -649,7 +649,7 @@ class JavaEnvironment {
    * Applies the nullability annotation present type variables in the declaration to the
    * corresponding substituted type in the reference.
    */
-  private TypeDescriptor propagateNullability(
+  static TypeDescriptor propagateNullability(
       TypeDescriptor declarationTypeDescriptor, TypeDescriptor referenceTypeDescriptor) {
 
     return switch (declarationTypeDescriptor) {
@@ -684,7 +684,7 @@ class JavaEnvironment {
             Streams.zip(
                     declaration.getTypeArgumentDescriptors().stream(),
                     fromReference.getTypeArgumentDescriptors().stream(),
-                    this::propagateNullability)
+                    JavaEnvironment::propagateNullability)
                 .collect(toImmutableList());
         yield ((DeclaredTypeDescriptor) referenceTypeDescriptor)
             .getTypeDeclaration()

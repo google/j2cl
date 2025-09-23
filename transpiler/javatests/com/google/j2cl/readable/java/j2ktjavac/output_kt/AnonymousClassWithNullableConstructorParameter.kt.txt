@@ -29,9 +29,7 @@ open class AnonymousClassWithNullableConstructorParameter {
  companion object {
   @JvmStatic
   fun test() {
-   val unused = object : AnonymousClassWithNullableConstructorParameter(
-    null!!,
-   ) {}
+   val unused = object : AnonymousClassWithNullableConstructorParameter(null) {}
   }
  }
 }
