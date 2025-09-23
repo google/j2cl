@@ -248,6 +248,8 @@ internal abstract class StringReproChild : StringRepro()
 
 internal abstract class ParametrizedReproChild<T> : Repro<T>()
 
+internal abstract class ParametrizedContainerReproChild<T> : Repro<Container<T>>()
+
 internal fun <S : Repro<String>> S.find0(): String? {
   return get()
 }
@@ -266,4 +268,8 @@ internal fun <S : StringReproChild> S.find3(): String? {
 
 internal fun <S : ParametrizedReproChild<String>> S.find4(): String? {
   return get()
+}
+
+internal fun <S : ParametrizedContainerReproChild<String>> S.find5(): String? {
+  return get()?.t
 }

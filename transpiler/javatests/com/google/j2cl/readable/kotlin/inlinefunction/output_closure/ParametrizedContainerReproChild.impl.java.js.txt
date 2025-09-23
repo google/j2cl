@@ -1,0 +1,40 @@
+goog.module('inlinefunction.ParametrizedContainerReproChild$impl');
+
+const Repro = goog.require('inlinefunction.Repro$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Container = goog.forwardDeclare('inlinefunction.Container$impl');
+
+/**
+ * @abstract
+ * @template T
+ * @extends {Repro<!Container<T>>}
+ */
+class ParametrizedContainerReproChild extends Repro {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__inlinefunction_ParametrizedContainerReproChild__void() {
+  this.$ctor__inlinefunction_Repro__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ParametrizedContainerReproChild.$clinit = () =>{};
+  ParametrizedContainerReproChild.$loadModules();
+  Repro.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParametrizedContainerReproChild;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ParametrizedContainerReproChild, 'inlinefunction.ParametrizedContainerReproChild');
+
+exports = ParametrizedContainerReproChild;
+
+//# sourceMappingURL=ParametrizedContainerReproChild.js.map
