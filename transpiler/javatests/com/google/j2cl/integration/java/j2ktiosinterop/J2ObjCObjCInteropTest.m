@@ -75,6 +75,10 @@
   J2ktiosinteropDefaultNames_staticMethod();
   J2ktiosinteropDefaultNames_staticIntMethodWithInt_(1);
   J2ktiosinteropDefaultNames_staticIntStringMethodWithInt_withNSString_(1, @"");
+
+  J2ktiosinteropDefaultNames_staticLongMethodWithJavaLangLong_(nil);
+  J2ktiosinteropDefaultNames_staticTExtendsLongMethodWithJavaLangLong_(nil);
+  J2ktiosinteropDefaultNames_staticTExtendsLongAndComparableLongMethodWithJavaLangLong_(nil);
 }
 
 - (void)testOnlyImplicitDefaultConstructor {

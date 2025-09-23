@@ -15,6 +15,8 @@
  */
 package j2ktiosinterop;
 
+import org.jspecify.annotations.Nullable;
+
 public final class DefaultNames {
   public DefaultNames() {}
 
@@ -98,4 +100,12 @@ public final class DefaultNames {
   public static void staticIntMethod(int i) {}
 
   public static void staticIntStringMethod(int i, String s) {}
+
+  public static void staticLongMethod(@Nullable Long l) {}
+
+  public static <T extends Long> void staticTExtendsLongMethod(@Nullable T t) {}
+
+  public static <T extends Long & Comparable<Long>> void staticTExtendsLongAndComparableLongMethod(
+      @Nullable T t) {}
 }
+

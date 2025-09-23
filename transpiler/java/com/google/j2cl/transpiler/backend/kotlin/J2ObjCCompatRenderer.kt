@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
@@ -34,6 +35,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
+import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
@@ -290,9 +292,12 @@ internal class J2ObjCCompatRenderer(
   private fun shouldRender(typeDescriptor: TypeDescriptor): Boolean =
     !hiddenFromObjCMapping.contains(typeDescriptor) &&
       when (typeDescriptor) {
+        is PrimitiveTypeDescriptor -> true
         is DeclaredTypeDescriptor -> shouldRenderDescriptor(typeDescriptor.typeDeclaration)
         is ArrayTypeDescriptor -> false
-        else -> true
+        is TypeVariable -> shouldRender(typeDescriptor.upperBoundTypeDescriptor)
+        is IntersectionTypeDescriptor -> shouldRender(typeDescriptor.firstType)
+        else -> false
       }
 
   private val collectionTypeDescriptors: Set<TypeDescriptor>
