@@ -233,7 +233,7 @@ def _readable_diff_test(name, target, dir_out, tags):
             '"%s/%s"' % (native.package_name(), dir_out),
             '"$(location %s)"' % name,
         ],
-        tags = tags,
+        tags = tags + ["golden"],
     )
 
 def _golden_output_impl(ctx):
