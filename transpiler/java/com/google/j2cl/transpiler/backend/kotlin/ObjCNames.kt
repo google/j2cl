@@ -19,6 +19,7 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
@@ -176,6 +177,7 @@ internal fun TypeDescriptor.objCName(useId: Boolean): String =
     is ArrayTypeDescriptor -> arrayObjCName
     is DeclaredTypeDescriptor -> declaredObjCName(useId = useId)
     is TypeVariable -> variableObjCName(useId = useId)
+    is IntersectionTypeDescriptor -> intersectionObjCName(useId = useId)
     else -> ID_OBJC_NAME
   }
 
@@ -210,6 +212,9 @@ private val ArrayTypeDescriptor.dimensionsSuffix: String
 private fun TypeVariable.variableObjCName(useId: Boolean): String =
   upperBoundTypeDescriptor.objCName(useId = useId)
 
+private fun IntersectionTypeDescriptor.intersectionObjCName(useId: Boolean): String =
+  firstType.objCName(useId = useId)
+
 internal val Variable.objCName: String
   get() = typeDescriptor.objCName(useId = true).titleCased
 
@@ -223,9 +228,7 @@ internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObj
   copy(
     objCName =
       ObjCName(
-        string =
-          objCName.string
-            .letIf(parameterObjCNames.isEmpty()) { it.escapeObjCKeyword }
+        string = objCName.string.letIf(parameterObjCNames.isEmpty()) { it.escapeObjCKeyword }
       ),
     parameterObjCNames =
       parameterObjCNames.letIf(isConstructor) {

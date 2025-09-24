@@ -52,7 +52,10 @@
   [obj defaultNamesMethodWithJ2ktiosinteropDefaultNames:nil];
 
   [obj genericMethodWithId:nil];
-  [obj genericStringMethodWithNSString:@""];
+  [obj genericStringMethodWithNSString:nil];
+  [obj genericStringAndComparableStringMethodWithNSString:nil];
+  [obj genericLongMethodWithJavaLangLong:nil];
+  [obj genericLongAndComparableLongMethodWithJavaLangLong:nil];
 
   [obj overloadedMethodWithId:nil];
   [obj overloadedMethodWithInt:1];
@@ -76,9 +79,11 @@
   J2ktiosinteropDefaultNames_staticIntMethodWithInt_(1);
   J2ktiosinteropDefaultNames_staticIntStringMethodWithInt_withNSString_(1, @"");
 
-  J2ktiosinteropDefaultNames_staticLongMethodWithJavaLangLong_(nil);
-  J2ktiosinteropDefaultNames_staticTExtendsLongMethodWithJavaLangLong_(nil);
-  J2ktiosinteropDefaultNames_staticTExtendsLongAndComparableLongMethodWithJavaLangLong_(nil);
+  J2ktiosinteropDefaultNames_staticGenericStringMethodWithNSString_(nil);
+  J2ktiosinteropDefaultNames_staticGenericStringAndComparableStringMethodWithNSString_(nil);
+
+  J2ktiosinteropDefaultNames_staticGenericLongMethodWithJavaLangLong_(nil);
+  J2ktiosinteropDefaultNames_staticGenericLongAndComparableLongMethodWithJavaLangLong_(nil);
 }
 
 - (void)testOnlyImplicitDefaultConstructor {

@@ -49,7 +49,10 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.defaultNamesMethod(with: nil)
 
     obj.genericMethod(withId: nil)
-    obj.genericStringMethod(with: "")
+    obj.genericStringMethod(with: nil)
+    obj.genericStringAndComparableStringMethod(with: nil)
+    obj.genericLongMethod(with: nil)
+    obj.genericLongAndComparableLongMethod(with: nil)
 
     obj.overloadedMethod(withId: nil)
     obj.overloadedMethod(with: 1 as jint)

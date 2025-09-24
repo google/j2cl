@@ -68,11 +68,19 @@ public final class DefaultNames {
 
   public <T> void genericMethod(T t) {}
 
-  public <T extends String> void genericStringMethod(T t) {}
+  public <T extends String> void genericStringMethod(@Nullable T t) {}
+
+  public <T extends String & Comparable<String>> void genericStringAndComparableStringMethod(
+      @Nullable T t) {}
 
   public <T> void genericArrayMethod(T[] t) {}
 
   public <T extends String> void genericStringArrayMethod(T[] t) {}
+
+  public <T extends Long> void genericLongMethod(@Nullable T t) {}
+
+  public <T extends Long & Comparable<Long>> void genericLongAndComparableLongMethod(
+      @Nullable T t) {}
 
   public void overloadedMethod(Object o) {}
 
@@ -101,11 +109,16 @@ public final class DefaultNames {
 
   public static void staticIntStringMethod(int i, String s) {}
 
-  public static void staticLongMethod(@Nullable Long l) {}
+  public static void staticStringMethod(@Nullable String l) {}
 
-  public static <T extends Long> void staticTExtendsLongMethod(@Nullable T t) {}
+  public static <T extends String> void staticGenericStringMethod(@Nullable String t) {}
 
-  public static <T extends Long & Comparable<Long>> void staticTExtendsLongAndComparableLongMethod(
+  public static <T extends String & Comparable<String>>
+      void staticGenericStringAndComparableStringMethod(@Nullable T t) {}
+
+  public static <T extends Long> void staticGenericLongMethod(@Nullable T t) {}
+
+  public static <T extends Long & Comparable<Long>> void staticGenericLongAndComparableLongMethod(
       @Nullable T t) {}
 }
 
