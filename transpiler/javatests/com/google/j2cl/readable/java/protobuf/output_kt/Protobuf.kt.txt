@@ -1,5 +1,4 @@
 // Generated from "protobuf/Protobuf.java"
-@file:OptIn(ExperimentalObjCName::class)
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -27,11 +26,8 @@ import com.google.protobuf.Parser
 import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.Int
-import kotlin.OptIn
 import kotlin.Suppress
-import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 import protobuf.MyEnum
 import protobuf.MyMessage
 import protobuf.MyMessage.Builder
@@ -86,10 +82,7 @@ open class Protobuf {
 
    @JvmStatic
    @ObjectiveCName("acceptStaticWithMyMessage:")
-   @ObjCName("acceptStatic")
-   fun acceptStaticWithObjectiveCName(
-    @ObjCName("WithMyMessage") myMessage: MyMessage
-   ) {}
+   fun acceptStaticWithObjectiveCName(myMessage: MyMessage) {}
 
    @JvmStatic
    fun getStatic(myMessage: MyMessage): MyMessage {
@@ -98,10 +91,7 @@ open class Protobuf {
 
    @JvmStatic
    @ObjectiveCName("getStaticWithMyMessage:")
-   @ObjCName("getStatic")
-   fun getStaticWithObjectiveCName(
-    @ObjCName("WithMyMessage") myMessage: MyMessage
-   ): MyMessage {
+   fun getStaticWithObjectiveCName(myMessage: MyMessage): MyMessage {
     throw RuntimeException()
    }
   }

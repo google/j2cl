@@ -124,8 +124,7 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.customCustomNamesMethod(with: nil)
     obj.customDefaultNamesMethod(with: nil)
 
-    // TODO(b/441732853): Should be customObjectiveCSwiftStringMethod(with: "")
-    obj.customObjectiveCSwiftStringMethod(WithString: "")
+    obj.customObjectiveCSwiftStringMethod(with: "")
     obj.customSwiftStringMethod(with: "")
 
     CustomCompanion.shared.customStaticMethod()

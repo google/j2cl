@@ -153,11 +153,13 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       }
 
   internal fun renderedObjCNames(method: Method): MethodObjCNames? =
-    when {
-      !isJ2ObjCInteropEnabled -> null
-      !needsObjCNameAnnotation(method) -> null
-      else -> method.toObjCNames()
-    }
+    if (method.isConstructor) {
+      when {
+        !isJ2ObjCInteropEnabled -> null
+        !needsObjCNameAnnotation(method) -> null
+        else -> method.toObjCNames()
+      }
+    } else null
 
   companion object {
     private fun parameterSource(name: String, valueSource: Source): Source =
