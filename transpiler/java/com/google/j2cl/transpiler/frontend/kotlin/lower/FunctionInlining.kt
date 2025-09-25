@@ -5,7 +5,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMapForInlining
+import com.google.j2cl.transpiler.frontend.kotlin.ir.getCompleteTypeSubstitutionMap
 import org.jetbrains.kotlin.backend.common.*
 import org.jetbrains.kotlin.backend.common.ir.Symbols
 import org.jetbrains.kotlin.backend.common.ir.isInlineLambdaBlock
@@ -181,7 +181,7 @@ open class FunctionInlining(
       // )
 
       InlineFunctionBodyPreprocessor(
-        callSite.getTypeSubstitutionMapForInlining(callee),
+        callSite.getCompleteTypeSubstitutionMap(callee),
         parent,
         inlineFunctionResolver.callInlinerStrategy,
       )

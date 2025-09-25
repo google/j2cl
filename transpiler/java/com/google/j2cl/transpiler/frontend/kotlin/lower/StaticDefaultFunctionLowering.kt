@@ -17,8 +17,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import com.google.j2cl.transpiler.frontend.kotlin.ir.allSuperTypesAndSelf
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
+import com.google.j2cl.transpiler.frontend.kotlin.ir.getCompleteTypeSubstitutionMap
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.ir.moveBodyTo
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -45,10 +44,7 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrReturn
 import org.jetbrains.kotlin.ir.expressions.impl.IrReturnImpl
 import org.jetbrains.kotlin.ir.symbols.impl.IrSimpleFunctionSymbolImpl
-import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.types.classOrFail
-import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.extractTypeParameters
 import org.jetbrains.kotlin.ir.types.typeOrFail
@@ -59,7 +55,6 @@ import org.jetbrains.kotlin.ir.util.copyValueArgumentsFrom
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.parentAsClass
-import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.remapTypeParameters
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.Name
@@ -117,39 +112,24 @@ internal class StaticDefaultFunctionLowering(val context: JvmBackendContext) :
     // Original code:
     // val newCall = irCall(expression, newCallee)
     val extractedTypeParameters = extractTypeParameters(callee.parentAsClass)
-    val typeParameterMapping =
-      (extractedTypeParameters + callee.typeParameters).zip(newCallee.typeParameters).toMap()
-    fun remap(type: IrType): IrType =
-      type.remapTypeParameters(callee, newCallee, typeParameterMapping)
 
     // TODO(b/445955020): There are still cases where we're not resolving all type variables
     //  correctly.
-    val receiverType = expression.dispatchReceiver!!.type as IrSimpleType
-    val parameterizedEnclosingType =
-      receiverType.allSuperTypesAndSelf().first {
-        callee.parentClassOrNull!! == it.classOrNull?.owner
-      } as IrSimpleType
-    val typeParameters =
-      parameterizedEnclosingType.classOrFail.owner.getAllTypeParameters().toList()
-    val dispatchTypeMapping =
-      typeParameters.toList().zip(parameterizedEnclosingType.arguments).toMap()
+    val capturedTypeMapping = expression.getCompleteTypeSubstitutionMap(callee)
 
     val newCall =
-      context
-        .createJvmIrBuilder(callee.symbol, expression)
-        .irCall(newCallee.symbol, remap(expression.type))
-        .apply {
-          copyValueArgumentsFrom(expression, newCallee, receiversAsArguments = true)
-          // Specialize captured type variable using the types from the dispatch receiver.
-          for ((index, typeParameter) in extractedTypeParameters.withIndex()) {
-            typeArguments[index] =
-              dispatchTypeMapping[typeParameter]?.typeOrFail ?: typeParameter.defaultType
-          }
-          // Specialize remaining type parameters using the ones on the original call.
-          for ((index, typeArgument) in expression.typeArguments.withIndex()) {
-            typeArguments[extractedTypeParameters.size + index] = typeArgument
-          }
+      context.createJvmIrBuilder(callee.symbol, expression).irCall(newCallee.symbol).apply {
+        copyValueArgumentsFrom(expression, newCallee, receiversAsArguments = true)
+        // Specialize captured type variable using the types from the dispatch receiver.
+        for ((index, typeParameter) in extractedTypeParameters.withIndex()) {
+          typeArguments[index] =
+            capturedTypeMapping[typeParameter.symbol]?.typeOrFail ?: typeParameter.defaultType
         }
+        // Specialize remaining type parameters using the ones on the original call.
+        for ((index, typeArgument) in expression.typeArguments.withIndex()) {
+          typeArguments[extractedTypeParameters.size + index] = typeArgument
+        }
+      }
     // END OF MODIFICATIONS
     return super.visitCall(newCall)
   }

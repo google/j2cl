@@ -74,17 +74,20 @@ import org.jetbrains.kotlin.ir.types.IrStarProjection
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeArgument
 import org.jetbrains.kotlin.ir.types.IrTypeProjection
-import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classOrNull
+import org.jetbrains.kotlin.ir.types.classifierOrFail
 import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.extractTypeParameters
+import org.jetbrains.kotlin.ir.types.impl.buildSimpleType
 import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
+import org.jetbrains.kotlin.ir.types.impl.toBuilder
 import org.jetbrains.kotlin.ir.types.isArray
 import org.jetbrains.kotlin.ir.types.isClassType
 import org.jetbrains.kotlin.ir.types.isNullableArray
 import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.types.typeOrFail
+import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.allOverridden
 import org.jetbrains.kotlin.ir.util.allTypeParameters
 import org.jetbrains.kotlin.ir.util.deepCopyWithSymbols
@@ -110,6 +113,7 @@ import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.isSuspendFunction
 import org.jetbrains.kotlin.ir.util.isTopLevel
+import org.jetbrains.kotlin.ir.util.isTypeParameter
 import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
@@ -288,37 +292,31 @@ fun IrMemberAccessExpression<*>.getTypeSubstitutionMap(
 /**
  * Collects all type parameters and their substitutions needed for inlining an `irFunction`.
  *
- * Unlike `getTypeSubstitutionMap`, this function also includes type parameter/type argument
- * mappings derived from the receiver type of the call, which is necessary for proper substitution
- * within inline functions that are members of generic classes.
+ * Collects all type parameters and their substitutions for a function call, including those from
+ * the receiver's type hierarchy.
  */
-fun IrFunctionAccessExpression.getTypeSubstitutionMapForInlining(
+fun IrFunctionAccessExpression.getCompleteTypeSubstitutionMap(
   irFunction: IrFunction
 ): Map<IrTypeParameterSymbol, IrType> {
-  check(irFunction.isInline)
-
   val typeSubstitutionMap = mutableMapOf<IrTypeParameterSymbol, IrType>()
   val receiverType =
     (this as? IrCall)?.superQualifierSymbol?.defaultType
       ?: getRealDispatcherReceiverForTypeSubstitution(irFunction)
 
   if (receiverType != null) {
-    // Traverse the receiver type and its parent to find the type that match the enclosing class of
-    // the inline function.
-    val parameterizedEnclosingType =
-      receiverType.allSuperTypesAndSelf().first {
-        irFunction.parentClassOrNull!! == it.classOrNull?.owner
-      }
-    check(parameterizedEnclosingType is IrSimpleType)
-
-    // Add type parameters and their substitutions from the enclosing type to the map.
-    val typeParameters =
-      parameterizedEnclosingType.classOrFail.owner.getAllTypeParameters().toList()
-    typeSubstitutionMap.putAll(
-      typeParameters.zip(parameterizedEnclosingType.arguments).associate { (typeParam, typeArg) ->
+    for (superType in receiverType.allSuperTypesAndSelf().filterIsInstance<IrSimpleType>()) {
+      superType.classOrNull?.owner?.typeParameters?.zip(superType.arguments)?.associateTo(
+        typeSubstitutionMap
+      ) { (typeParam, typeArg) ->
         typeParam.symbol to typeArg.typeOrFail
       }
-    )
+    }
+    // The mapping extracted from the supertypes of the receiver can refer to intermediate type
+    // parameters that also appear in the mapping. We'll "flatten" the mapping by resolving these
+    // intermediate type parameters to their final resolved value.
+    typeSubstitutionMap.replaceAll { typeParameter, type ->
+      type.resolveWithTypeParameterMapping(typeSubstitutionMap)
+    }
   }
 
   return irFunction.allTypeParameters.withIndex().associateTo(typeSubstitutionMap) {
@@ -326,7 +324,31 @@ fun IrFunctionAccessExpression.getTypeSubstitutionMapForInlining(
   }
 }
 
-public fun IrType.allSuperTypesAndSelf(): Set<IrType> {
+private fun IrType.resolveWithTypeParameterMapping(
+  parameterTypeMapping: Map<IrTypeParameterSymbol, IrType>
+): IrType {
+  if (isTypeParameter()) {
+    val resolvedType = parameterTypeMapping.getOrDefault(classifierOrFail, this)
+    if (resolvedType == this) {
+      return this
+    }
+    return resolvedType.resolveWithTypeParameterMapping(parameterTypeMapping)
+  } else if (this is IrSimpleType) {
+    if (arguments.isEmpty()) {
+      return this
+    }
+    val resolvedArguments =
+      arguments.map {
+        it.typeOrNull?.resolveWithTypeParameterMapping(parameterTypeMapping)?.let { type ->
+          makeTypeProjection(type, type.variance)
+        } ?: it
+      }
+    return toBuilder().apply { arguments = resolvedArguments }.buildSimpleType()
+  }
+  return this
+}
+
+fun IrType.allSuperTypesAndSelf(): Set<IrType> {
   val allSupertypesIncludingSelf = linkedSetOf<IrType>()
   allSupertypesIncludingSelf.add(this)
   type.superTypes().forEach { allSupertypesIncludingSelf.addAll(it.allSuperTypesAndSelf()) }
