@@ -67,6 +67,7 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.*
 
+// copied and modified from org/jetbrains/kotlin/ir/declarations/IrFunction.kt
 class IrDeclarationDeserializer(
   builtIns: IrBuiltIns,
   private val symbolTable: SymbolTable,
