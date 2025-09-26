@@ -318,7 +318,11 @@ internal class J2ObjCCompatRenderer(
       !hiddenFromObjCMapping.contains(typeDeclaration)
 
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
-    !typeDeclaration.isKtNative || mappedObjCNameRenderer(typeDeclaration) != null
+    !typeDeclaration.isKtNative ||
+      (typeDeclaration.ktNativeQualifiedName == null &&
+        typeDeclaration.ktBridgeQualifiedName == null &&
+        typeDeclaration.ktCompanionQualifiedName == null) ||
+      mappedObjCNameRenderer(typeDeclaration) != null
 
   private fun functionRenderers(
     method: Method,
