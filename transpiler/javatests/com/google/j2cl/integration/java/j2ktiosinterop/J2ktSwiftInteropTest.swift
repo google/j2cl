@@ -103,12 +103,12 @@ final class J2ktSwiftInteropTest: XCTestCase {
   func testCustomNames() {
     var obj: Custom
 
-    obj = Custom(Index: 1)
-    obj = Custom(Index: 1, name: "")
+    obj = Custom(index: 1)
+    obj = Custom(index: 1, name: "")
 
     obj = Custom()
-    obj = Custom(Long: 1)
-    obj = Custom(Long: 1, withNSString: "")
+    obj = Custom(long: 1)
+    obj = Custom(long: 1, with: "")
 
     obj.customMethod()
     obj.customIntMethod(WithInt: 1)

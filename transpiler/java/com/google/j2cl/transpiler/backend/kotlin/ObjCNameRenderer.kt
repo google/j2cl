@@ -152,14 +152,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
           environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
       }
 
-  internal fun renderedObjCNames(method: Method): MethodObjCNames? =
-    if (method.isConstructor) {
-      when {
-        !isJ2ObjCInteropEnabled -> null
-        !needsObjCNameAnnotation(method) -> null
-        else -> method.toObjCNames()
-      }
-    } else null
+  internal fun renderedObjCNames(method: Method): MethodObjCNames? = null
 
   companion object {
     private fun parameterSource(name: String, valueSource: Source): Source =
