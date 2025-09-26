@@ -85,6 +85,17 @@
 
   J2ktiosinteropDefaultNames_staticGenericLongMethodWithJavaLangLong_(nil);
   J2ktiosinteropDefaultNames_staticGenericLongAndComparableLongMethodWithJavaLangLong_(nil);
+
+  // For methods that throw, J2ObjC generates variants with and without `error:` parameter
+  [obj throwsMethod];
+  [obj throwsMethodWithNSString:@""];
+  [J2ktiosinteropDefaultNames staticThrowsMethod];
+  [J2ktiosinteropDefaultNames staticThrowsMethodWithNSString:@""];
+
+  [obj throwsMethodAndReturnError:nil];
+  [obj throwsMethodWithNSString:@"" error:nil];
+  [J2ktiosinteropDefaultNames staticThrowsMethodAndReturnError:nil];
+  [J2ktiosinteropDefaultNames staticThrowsMethodWithNSString:@"" error:nil];
 }
 
 - (void)testOnlyImplicitDefaultConstructor {

@@ -63,6 +63,17 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.overloadedMethod(with: "")
 
     // Fields are not exposed in Swift
+
+    // For methods that throw, J2ObjC generates variants with and without `error:` parameter
+    obj.throwsMethod()
+    obj.throwsMethod(with: "")
+    J2ktiosinteropDefaultNames.staticThrowsMethod()
+    J2ktiosinteropDefaultNames.staticThrowsMethod(with: "")
+
+    let _: Bool = obj.throwsMethodAndReturnError(nil)
+    let _: Bool = obj.throwsMethod(with: "", error: nil)
+    let _: Bool = J2ktiosinteropDefaultNames.staticThrowsMethodAndReturnError(nil)
+    let _: Bool = J2ktiosinteropDefaultNames.staticThrowsMethod(with: "", error: nil)
   }
 
   func testOnlyImplicitDefaultConstructor() {

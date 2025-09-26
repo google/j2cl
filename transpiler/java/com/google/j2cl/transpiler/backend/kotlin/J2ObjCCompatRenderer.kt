@@ -278,7 +278,8 @@ internal class J2ObjCCompatRenderer(
           !methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isKtInner)) &&
       shouldRender(methodDescriptor.returnTypeDescriptor) &&
       methodDescriptor.parameterTypeDescriptors.all(::shouldRender) &&
-      canInferObjCName(methodDescriptor)
+      canInferObjCName(methodDescriptor) &&
+      !methodDescriptor.ktInfo.isThrows
 
   private fun canInferObjCName(methodDescriptor: MethodDescriptor): Boolean =
     methodDescriptor.objectiveCName != null ||

@@ -94,6 +94,12 @@
   // Not available because of JavaLangLong is not available.
   // J2ktiosinteropDefaultNames_staticGenericLongMethodWithJavaLangLong_(nil);
   // J2ktiosinteropDefaultNames_staticGenericLongAndComparableLongMethodWithJavaLangLong_(nil);
+
+  // For methods that throw, J2KT generates `error:` parameter.
+  [obj throwsMethodAndReturnError:nil];
+  [obj throwsMethodWithNSString:@"" error:nil];
+  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticThrowsMethodAndReturnError:nil];
+  [J2ktJ2ktiosinteropDefaultNamesCompanion.shared staticThrowsMethodWithNSString:@"" error:nil];
 }
 
 - (void)testOnlyImplicitDefaultConstructor {

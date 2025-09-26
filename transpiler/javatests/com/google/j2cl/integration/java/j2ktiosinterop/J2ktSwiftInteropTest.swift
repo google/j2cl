@@ -76,6 +76,13 @@ final class J2ktSwiftInteropTest: XCTestCase {
     // J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
     // J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(with: 1)
     // J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(with: 1, with: "")
+
+    // @Throws-annotated methods (supposedly) throw in Swift and need to be wrapped in `try!`.
+    try! obj.throwsMethod()
+    try! obj.throwsMethod(with: "")
+    // Unsupported because of b/441110909.
+    // try! J2ktiosinteropDefaultNamesCompanion.shared.staticThrowsMethod()
+    // try! J2ktiosinteropDefaultNamesCompanion.shared.staticThrowsMethod(with: "")
   }
 
   func testOnlyImplicitDefaultConstructor() {

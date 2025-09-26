@@ -15,6 +15,7 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2kt.annotations.Throws;
 import org.jspecify.annotations.Nullable;
 
 public final class DefaultNames {
@@ -120,5 +121,17 @@ public final class DefaultNames {
 
   public static <T extends Long & Comparable<Long>> void staticGenericLongAndComparableLongMethod(
       @Nullable T t) {}
+
+  @Throws
+  public void throwsMethod() {}
+
+  @Throws
+  public void throwsMethod(String s) {}
+
+  @Throws
+  public static void staticThrowsMethod() {}
+
+  @Throws
+  public static void staticThrowsMethod(String s) {}
 }
 
