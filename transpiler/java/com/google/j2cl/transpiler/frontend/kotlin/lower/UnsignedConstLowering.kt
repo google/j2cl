@@ -45,7 +45,7 @@ internal class UnsignedConstLowering : FileLoweringPass, IrElementTransformerVoi
     if (!expression.type.isUnsigned()) return super.visitConst(expression)
     val classSymbol = expression.type.classifierOrNull as IrClassSymbol
     val constructor = classSymbol.constructors.single { it.owner.isPrimary }
-    val argType = constructor.owner.valueParameters.first().type
+    val argType = constructor.owner.parameters[0].type
     val valueExpression =
       when (expression.kind) {
         IrConstKind.Byte ->
@@ -79,7 +79,7 @@ internal class UnsignedConstLowering : FileLoweringPass, IrElementTransformerVoi
         else -> compilationException("Unexpected unsigned kind: ${expression.kind}", expression)
       }
     return IrConstructorCallImpl.fromSymbolOwner(classSymbol.defaultType, constructor).apply {
-      putValueArgument(0, valueExpression)
+      arguments[0] = valueExpression
     }
   }
 }

@@ -42,7 +42,6 @@ import org.jetbrains.kotlin.ir.expressions.IrBody
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionExpression
-import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrReturn
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.copyTypeArgumentsFrom
@@ -62,6 +61,7 @@ import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.constructedClass
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.functions
+import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.ir.util.patchDeclarationParents
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
@@ -103,12 +103,12 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
 
     if (
       (!classConstructed.isArrayClass && !classConstructed.isPrimitiveArrayClass) ||
-        irConstructor.valueParameters.size != 2
+        !irConstructor.hasShape(regularParameters = 2)
     ) {
       return expression
     }
 
-    val originalInitializer = expression.getValueArgument(1)!!
+    val originalInitializer = expression.arguments[1]!!
 
     // Since the array constructors are inline functions, the initializer lambda can return out of
     // context of the lambda (ex. return to the function it's being inlined into). In these cases
@@ -154,9 +154,9 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
             if (!classConstructed.isPrimitiveArrayClass) {
               it.putTypeArgument(0, originalInitializerType.arguments[1].typeOrNull)
             }
-            it.putValueArgument(0, originalInitializer)
+            it.arguments[0] = originalInitializer
           }
-      expression.putValueArgument(1, wrapperCall)
+      expression.arguments[1] = wrapperCall
     }
     return expression
   }
@@ -210,11 +210,13 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
       //   2. The function must take a single non-vararg value parameter
       //   3. The first type argument must be a non-nullable Int.
       // TODO(b/286111335): IrFunctionReference should also be eligible for replacement.
-      if (this !is IrFunctionExpression) return false
-      val valueParameters =
-        (this as? IrFunctionExpression)?.function?.valueParameters
-          ?: (this as IrFunctionReference).symbol.owner.valueParameters
-      if (valueParameters.size != 1 || valueParameters[0].isVararg) return false
+      if (
+        this !is IrFunctionExpression ||
+          !function.hasShape(regularParameters = 1) ||
+          function.parameters[0].isVararg
+      )
+        return false
+
       return (type as IrSimpleType).arguments.getOrNull(0)?.typeOrNull ==
         context.irBuiltIns.intType.makeNotNull()
     }
@@ -259,12 +261,17 @@ private class ArrayConstructorTransformer(
     ): IrFunctionSymbol? {
       val clazz = irConstructor.constructedClass.symbol
       return when {
-        irConstructor.valueParameters.size != 2 -> null
+        !irConstructor.hasShape(regularParameters = 2) -> null
         clazz == context.irBuiltIns.arrayClass ->
           context.ir.symbols
             .arrayOfNulls // Array<T> has no unary constructor: it can only exist for Array<T?>
         context.irBuiltIns.primitiveArraysToPrimitiveTypes.contains(clazz) ->
-          clazz.constructors.single { it.owner.valueParameters.size == 1 }
+          clazz.constructors.single {
+            it.owner.hasShape(
+              regularParameters = 1,
+              parameterTypes = listOf(context.irBuiltIns.intType),
+            )
+          }
         else -> null
       }
     }
@@ -282,8 +289,8 @@ private class ArrayConstructorTransformer(
     //     return result as Array<T>
     // }
     // (and similar for primitive arrays)
-    val size = expression.getValueArgument(0)!!.transform(this, null)
-    val invokable = expression.getValueArgument(1)!!.transform(this, null)
+    val size = expression.arguments[0]!!.transform(this, null)
+    val invokable = expression.arguments[1]!!.transform(this, null)
     if (invokable.type.isNothing()) {
       // Expressions of type 'Nothing' don't terminate.
       return invokable
@@ -299,7 +306,7 @@ private class ArrayConstructorTransformer(
         createTmpVariable(
           irCall(sizeConstructor, expression.type).apply {
             copyTypeArgumentsFrom(expression)
-            putValueArgument(0, irGet(sizeVar))
+            arguments[0] = irGet(sizeVar)
           }
         )
 
@@ -307,8 +314,8 @@ private class ArrayConstructorTransformer(
       +irWhile().apply {
         condition =
           irCall(context.irBuiltIns.lessFunByOperandType[index.type.classifierOrFail]!!).apply {
-            putValueArgument(0, irGet(index))
-            putValueArgument(1, irGet(sizeVar))
+            arguments[0] = irGet(index)
+            arguments[1] = irGet(sizeVar)
           }
         body = irBlock {
           val tempIndex = createTmpVariable(irGet(index))
@@ -316,13 +323,13 @@ private class ArrayConstructorTransformer(
               result.type.getClass()!!.functions.single { it.name == OperatorNameConventions.SET }
             )
             .apply {
-              dispatchReceiver = irGet(result)
-              putValueArgument(0, irGet(tempIndex))
+              arguments[0] = irGet(result)
+              arguments[1] = irGet(tempIndex)
               val inlined =
                 generator
                   .inline(parent, listOf(tempIndex))
                   .patchDeclarationParents(scope.getLocalDeclarationParent())
-              putValueArgument(1, inlined)
+              arguments[2] = inlined
             }
           val inc =
             index.type.getClass()!!.functions.single { it.name == OperatorNameConventions.INC }

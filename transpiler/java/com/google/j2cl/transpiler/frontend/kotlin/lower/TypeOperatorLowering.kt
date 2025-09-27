@@ -141,7 +141,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
             irCall(context.irBuiltIns.checkNotNullSymbol).apply {
               this.type = transformedArgument.type.makeNotNull()
               putTypeArgument(0, transformedArgument.type.makeNotNull())
-              putValueArgument(0, transformedArgument)
+              arguments[0] = transformedArgument
             },
             type,
           )
@@ -283,7 +283,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
           irCall(context.irBuiltIns.checkNotNullSymbol).apply {
             type = expression.type
             putTypeArgument(0, argument.type.makeNotNull())
-            putValueArgument(0, argument)
+            arguments[0] = argument
           }
           // END OF MODIFICATIONS
         }

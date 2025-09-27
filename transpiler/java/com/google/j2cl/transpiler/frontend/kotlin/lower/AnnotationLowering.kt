@@ -112,7 +112,7 @@ internal class AnnotationLowering(private val context: JvmBackendContext) :
       }
       .apply {
         parent = kotlinElementAnnotationFunction.parent
-        dispatchReceiverParameter = kotlinElementAnnotationFunction.dispatchReceiverParameter
+        parameters = listOf(kotlinElementAnnotationFunction.dispatchReceiverParameter!!)
       }
   }
 

@@ -14,6 +14,7 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
@@ -49,7 +50,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsEnumInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsMemberAnnotationInfo
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAbstract
@@ -102,6 +102,7 @@ import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrVararg
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
+import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrStarProjection
 import org.jetbrains.kotlin.ir.types.IrType
@@ -139,6 +140,7 @@ import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.isTypeParameter
 import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.ir.util.kotlinFqName
+import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.packageFqName
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
@@ -344,9 +346,10 @@ internal class KotlinEnvironment(
       }
     }
 
-    for (i in 0 until annotationCtorCall.valueArgumentsCount) {
-      val name = annotationCtorCall.symbol.owner.valueParameters[i].sanitizedName
-      val translatedValue = annotationCtorCall.getValueArgument(i).toAnnotationValue() ?: continue
+    val annotationCtor = annotationCtorCall.symbol.owner
+    for ((parameter, argument) in annotationCtor.parameters zip annotationCtorCall.arguments) {
+      val name = parameter.sanitizedName
+      val translatedValue = argument.toAnnotationValue() ?: continue
       addValue(name, translatedValue)
     }
     return this
@@ -631,8 +634,8 @@ internal class KotlinEnvironment(
       }
 
       val parameters =
-        if (specialBridge == null) irFunction.getParameters()
-        else specialBridge.overridden.getParameters()
+        if (specialBridge == null) irFunction.nonDispatchParameters
+        else specialBridge.overridden.nonDispatchParameters
 
       parameters.withIndex().forEach { (index, param) ->
         var type = param.type

@@ -37,6 +37,7 @@ import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.expressions.IrWhileLoop
 import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
 import org.jetbrains.kotlin.ir.util.getSimpleFunction
+import org.jetbrains.kotlin.ir.util.nonDispatchArguments
 import org.jetbrains.kotlin.ir.util.overrides
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
@@ -302,16 +303,16 @@ private class LoopTransformer(
       first !is IrCall ||
         second !is IrCall ||
         first.symbol != second.symbol ||
-        first.valueArgumentsCount != second.valueArgumentsCount
+        first.arguments.size != second.arguments.size
     ) {
       return false
     }
 
     // The conditions created by Kotlin compiler are function calls that take either a variable
     // reference (induction variable, last item of the progression) or a constant as arguments.
-    for (i in 0 until first.valueArgumentsCount) {
-      val firstCallArg = first.getValueArgument(i)!!
-      val secondCallArg = second.getValueArgument(i)!!
+    for (i in 0 until first.nonDispatchArguments.size) {
+      val firstCallArg = first.nonDispatchArguments[i]!!
+      val secondCallArg = second.nonDispatchArguments[i]!!
 
       when (firstCallArg) {
         is IrGetValue -> {

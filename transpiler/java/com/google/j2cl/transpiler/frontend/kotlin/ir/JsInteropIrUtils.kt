@@ -40,6 +40,7 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithVisibility
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFunction
+import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
@@ -232,12 +233,14 @@ private fun IrFunction.getJsMemberType(): JsMemberType =
     this is IrConstructor -> JsMemberType.CONSTRUCTOR
     isGetter -> JsMemberType.GETTER
     isSetter -> JsMemberType.SETTER
-    isJsProperty ->
+    isJsProperty -> {
+      val valueParameters = parameters.filter { it.kind == IrParameterKind.Regular }
       when {
         valueParameters.size == 1 && returnType.isUnit() -> JsMemberType.SETTER
         valueParameters.isEmpty() && !returnType.isUnit() -> JsMemberType.GETTER
         else -> JsMemberType.UNDEFINED_ACCESSOR
       }
+    }
     else -> JsMemberType.METHOD
   }
 

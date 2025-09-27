@@ -27,7 +27,7 @@ class RemoveFunctionsWithUnsignedVarargsLowering : DeclarationTransformer {
   override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
     if (
       declaration is IrFunction &&
-        declaration.valueParameters.any { it.type.isUnsignedArray() && it.isVararg }
+        declaration.parameters.any { it.type.isUnsignedArray() && it.isVararg }
     ) {
       return emptyList()
     }

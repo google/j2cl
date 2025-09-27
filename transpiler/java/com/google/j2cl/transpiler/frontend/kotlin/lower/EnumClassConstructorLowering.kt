@@ -36,6 +36,7 @@ import org.jetbrains.kotlin.ir.expressions.IrSyntheticBodyKind
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.isEnumClass
+import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.statements
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
@@ -101,7 +102,7 @@ internal class EnumClassConstructorLowering(private val context: JvmBackendConte
 }
 
 private fun IrConstructor.isEffectivelyEmpty() =
-  valueParameters.isEmpty() && annotations.isEmpty() && body.isEmpty()
+  nonDispatchParameters.isEmpty() && annotations.isEmpty() && body.isEmpty()
 
 private fun IrBody?.isEmpty() = this == null || statements.all { it is IrBlock && it.isEmpty() }
 

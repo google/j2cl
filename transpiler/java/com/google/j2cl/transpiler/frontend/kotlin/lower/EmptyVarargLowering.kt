@@ -33,14 +33,14 @@ internal class EmptyVarargLowering(val context: JvmBackendContext) :
     val function = expression.symbol
 
     // Replace empty varargs with empty arrays
-    for (i in 0 until expression.valueArgumentsCount) {
-      if (expression.getValueArgument(i) != null) continue
+    val irFunction = function.owner
+    for ((parameter, argument) in irFunction.parameters zip expression.arguments) {
+      if (argument != null) continue
 
-      val parameter = function.owner.valueParameters[i]
       if (parameter.varargElementType != null && !parameter.hasDefaultValue()) {
         // Compute the correct type for the array argument.
         val arrayType = parameter.type.substitute(expression.typeSubstitutionMap).makeNotNull()
-        expression.putValueArgument(i, createBuilder().irArrayOf(arrayType))
+        expression.arguments[parameter.indexInParameters] = createBuilder().irArrayOf(arrayType)
       }
     }
 
@@ -49,6 +49,6 @@ internal class EmptyVarargLowering(val context: JvmBackendContext) :
 
   private fun createBuilder(
     startOffset: Int = UNDEFINED_OFFSET,
-    endOffset: Int = UNDEFINED_OFFSET
+    endOffset: Int = UNDEFINED_OFFSET,
   ) = context.createJvmIrBuilder(currentScope!!, startOffset, endOffset)
 }

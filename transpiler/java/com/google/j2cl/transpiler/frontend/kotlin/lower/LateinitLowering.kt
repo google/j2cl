@@ -106,7 +106,10 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
       )
       .run {
         irCall(checkInitializedSymbol).apply {
-          putValueArgument(0, irGet(irValue))
+          // `checkInitialized` is an object class function. Due to the `@JvmStatic` annotation,
+          // a dispatch receiver is not required for J2CL, so we set it to `null` for simplicity.
+          arguments[0] = null
+          arguments[1] = irGet(irValue)
           typeArguments[0] = irValue.type.makeNotNull()
         }
       }
@@ -171,7 +174,10 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
       .createIrBuilder(expression.symbol, expression.startOffset, expression.endOffset)
       .run {
         irCall(checkInitializedSymbol, expression.type).apply {
-          putValueArgument(0, irGetField(expression.dispatchReceiver!!, backingField, type))
+          // `checkInitialized` is an object class function. Due to the `@JvmStatic` annotation,
+          // a dispatch receiver is not required for J2CL, so we set it to `null` for simplicity.
+          arguments[0] = null
+          arguments[1] = irGetField(expression.dispatchReceiver!!, backingField, type)
           typeArguments[0] = expression.type
         }
       }
@@ -198,10 +204,13 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
         irBlockBody {
           +irReturn(
             irCall(checkInitializedSymbol, type.makeNotNull()).apply {
-              putValueArgument(
-                0,
-                irGetField(getter.dispatchReceiverParameter?.let { irGet(it) }, backingField, type),
-              )
+              // `checkInitialized` is an object class function. Due to the `@JvmStatic` annotation,
+              // a dispatch receiver is not required for J2CL, so we set it to `null` for
+              // simplicity.
+              arguments[0] = null
+              arguments[1] =
+                irGetField(getter.dispatchReceiverParameter?.let { irGet(it) }, backingField, type)
+
               typeArguments[0] = type.makeNotNull()
             }
           )

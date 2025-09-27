@@ -22,7 +22,6 @@ import org.jetbrains.kotlin.backend.jvm.functionByName
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.findEnumValuesFunction
 import org.jetbrains.kotlin.builtins.PrimitiveType
-import org.jetbrains.kotlin.ir.backend.js.utils.valueArguments
 import org.jetbrains.kotlin.ir.builders.irCall
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrCall
@@ -42,6 +41,7 @@ import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.typeOrFail
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.defaultType
+import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
@@ -91,7 +91,7 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
     return context.createJvmIrBuilder(createEnumEntriesSymbol, expression).run {
       irCall(createEnumEntriesSymbol, returnType).apply {
         putTypeArgument(0, enumType)
-        putValueArgument(0, irCall(enumValuesFun))
+        arguments[0] = irCall(enumValuesFun)
       }
     }
   }
@@ -101,21 +101,32 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
   /** Rewrites call to rangeUntil operator to `kotlin.ranges.until` function call. */
   private fun lowerRangeUntilCall(irCall: IrCall): IrExpression {
-    require(irCall.valueArgumentsCount == 1) { "invalid number of arguments" }
-    val argument = irCall.valueArguments[0]!!
-    val dispatchReceiver = requireNotNull(irCall.dispatchReceiver)
+    require(irCall.arguments.size == 2) { "invalid number of arguments " }
+    val dispatchReceiver = irCall.arguments[0]!!
+    val argument = irCall.arguments[1]!!
 
     val kotlinRangesUntilSymbol: IrSimpleFunctionSymbol =
       context.irPluginContext!!.referenceFunctions(kotlinRangesUntilCallableId).first {
-        it.owner.extensionReceiverParameter!!.type == dispatchReceiver.type &&
-          it.owner.valueParameters.size == 1 &&
-          it.owner.valueParameters[0].type == argument.type
+        it.owner.hasShape(
+          dispatchReceiver = false,
+          extensionReceiver = true,
+          regularParameters = 1,
+          parameterTypes =
+            listOf(
+              // expected type of the extension receiver
+              dispatchReceiver.type,
+              // expected type of the only regular parameter
+              argument.type,
+            ),
+        )
       }
 
     return context.createJvmIrBuilder(kotlinRangesUntilSymbol, irCall).run {
       irCall(kotlinRangesUntilSymbol, irCall.type).apply {
-        extensionReceiver = dispatchReceiver
-        putValueArgument(0, argument)
+        // Extension receiver argument
+        arguments[0] = dispatchReceiver
+        // regular argument
+        arguments[1] = argument
       }
     }
   }
@@ -125,15 +136,20 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
   /** Rewrite a call in the form of `arr.iterator()` into `kotlin.jvm.internal.iterator(arr)` */
   private fun lowerArrayIteratorCall(irCall: IrCall): IrExpression {
-    require(irCall.valueArgumentsCount == 0) { "invalid number of arguments" }
-    val dispatchReceiver = requireNotNull(irCall.dispatchReceiver)
+    require(irCall.arguments.size == 1) { "invalid number of arguments" }
+    val dispatchReceiver = irCall.arguments[0]!!
     val dispatchReceiverType = dispatchReceiver.type as IrSimpleType
     val isPrimitive = dispatchReceiverType.isPrimitiveArray()
     val kotlinJvmInternalIterator =
       context.irPluginContext!!.referenceFunctions(kotlinJvmInternalIteratorCallableId).single {
-        function ->
-        function.owner.valueParameters.size == 1 &&
-          with(function.owner.valueParameters[0]) {
+        symbol ->
+        val function = symbol.owner
+        function.hasShape(
+          dispatchReceiver = false,
+          extensionReceiver = false,
+          regularParameters = 1,
+        ) &&
+          with(function.parameters[0]) {
             if (isPrimitive) {
               type == dispatchReceiverType
             } else {
@@ -145,7 +161,7 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
     return context.createJvmIrBuilder(kotlinJvmInternalIterator, irCall).run {
       irCall(kotlinJvmInternalIterator, irCall.type).apply {
-        putValueArgument(0, dispatchReceiver)
+        arguments[0] = dispatchReceiver
         if (!isPrimitive) {
           require(dispatchReceiverType.arguments.size == 1)
           putTypeArgument(0, dispatchReceiverType.arguments[0].typeOrFail)
@@ -156,9 +172,14 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
   private fun lowerCompareToCall(expression: IrCall): IrExpression {
     val callee = expression.symbol.owner
-    val calleeReceiver =
-      checkNotNull(callee.dispatchReceiverParameter ?: callee.extensionReceiverParameter)
-    val calleeParameter = callee.valueParameters.single()
+    // the callee should have either a dispatch receiver or an extension receiver parameter but
+    // not both and one regular parameter.
+    check(
+      callee.hasShape(dispatchReceiver = true, regularParameters = 1) ||
+        callee.hasShape(extensionReceiver = true, regularParameters = 1)
+    )
+    val calleeReceiver = callee.parameters[0]
+    val calleeParameter = callee.parameters[1]
 
     val replacementSymbol =
       when (comparisonType(calleeReceiver.type, calleeParameter.type)) {
@@ -174,11 +195,8 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
     return context.createJvmIrBuilder(replacementSymbol, expression).run {
       irCall(replacementSymbol).apply {
-        putValueArgument(
-          0,
-          checkNotNull(expression.dispatchReceiver ?: expression.extensionReceiver),
-        )
-        putValueArgument(1, expression.getValueArgument(0)!!)
+        arguments[0] = expression.arguments[0]
+        arguments[1] = expression.arguments[1]
       }
     }
   }

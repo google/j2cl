@@ -46,11 +46,11 @@ import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrOverridableMember
+import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
-import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrBreakContinue
 import org.jetbrains.kotlin.ir.expressions.IrCall
@@ -62,6 +62,7 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrGetField
+import org.jetbrains.kotlin.ir.expressions.IrLocalDelegatedPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
@@ -114,6 +115,7 @@ import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.isSuspendFunction
 import org.jetbrains.kotlin.ir.util.isTopLevel
 import org.jetbrains.kotlin.ir.util.isTypeParameter
+import org.jetbrains.kotlin.ir.util.nonDispatchArguments
 import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
@@ -125,7 +127,6 @@ import org.jetbrains.kotlin.name.FqNameUnsafe
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.NameUtils
 import org.jetbrains.kotlin.types.Variance
-import org.jetbrains.kotlin.utils.addIfNotNull
 import org.jetbrains.org.objectweb.asm.commons.Method
 
 /** Returns the actual function expression from inside a nested type operator. */
@@ -197,37 +198,56 @@ val IrField?.isJvmField: Boolean
 val IrClass.enumEntries: List<IrEnumEntry>
   get() = declarations.filterIsInstance<IrEnumEntry>()
 
-fun IrFunctionAccessExpression.getArguments(): List<IrExpression> = buildList {
-  addIfNotNull(extensionReceiver)
+// TODO(dramaix): This function provides a workaround for accessing arguments of an enum constructor
+// call. Callers should eventually be migrated to directly use `call.arguments` or
+// `call.nonDispatchArguments`. Any remaining necessary logic should be moved to
+// CompilationUnitBuilder.
+fun IrFunctionAccessExpression.getArguments(): List<IrExpression> {
   // Enums that take no explicit params don't include the name/ordinal params in the constructor
   // calls. If all the value parameters are null we can simply return.
-  if (
-    this@getArguments is IrEnumConstructorCall &&
-      (0 until valueArgumentsCount).all { getValueArgument(it) == null }
-  ) {
-    return@buildList
+  if (this is IrEnumConstructorCall && arguments.all { it == null }) {
+    return emptyList()
   }
-  for (i in 0 until valueArgumentsCount) {
-    val valueArgument = getValueArgument(i)
-    // Value arguments should never be null at this point as default arguments and varargs have
-    // already been lowered.
-    checkNotNull(valueArgument) { "Unexpected null value argument" }
-    add(valueArgument)
+
+  // The Kotlin IR parameters API assumes a 1-1 mapping between the function's defined parameters
+  // and the arguments in the function call. A mismatch indicates that one of our lowering passes
+  // has modified the function parameters without updating the arguments list.
+  // TODO(b/440381491): Remove this when our lowering passes have been updated with their last
+  // version.
+  if (arguments.size != symbol.owner.parameters.size) {
+    forceUpdateShapeFromTargetSymbol()
+  }
+  // Value arguments should never be null at this point as default arguments and varargs have
+  // already been lowered.
+  return nonDispatchArguments.map { argument ->
+    checkNotNull(argument) { "Unexpected null value argument" }
   }
 }
 
+val IrMemberAccessExpression<*>.extensionReceiverOrNull: IrExpression?
+  get() {
+    val ownerAsFunction: IrFunction =
+      when (symbol.owner) {
+        is IrFunction -> symbol.owner as IrFunction
+        is IrProperty ->
+          when {
+            this is IrPropertyReference -> (getter ?: setter)?.owner
+            this is IrLocalDelegatedPropertyReference -> getter.owner
+            else -> throw IllegalStateException("Unexpected property reference")
+          }
+        else -> throw IllegalStateException("Unexpected owner type: ${symbol.owner}")
+      } ?: return null
+
+    val extensionReceiverIndex =
+      ownerAsFunction.parameters.indexOfFirst { it.kind == IrParameterKind.ExtensionReceiver }
+    return if (extensionReceiverIndex >= 0) arguments[extensionReceiverIndex] else null
+  }
+
+val IrMemberAccessExpression<*>.extensionReceiverOrFail: IrExpression
+  get() = checkNotNull(extensionReceiverOrNull)
+
 val IrFunctionAccessExpression.isSuperCall
   get() = (this as? IrCall)?.superQualifierSymbol != null
-
-fun IrFunction.getParameters(): List<IrValueParameter> =
-  when (this) {
-    is IrSimpleFunction ->
-      buildList {
-        addIfNotNull(extensionReceiverParameter)
-        addAll(valueParameters)
-      }
-    else -> valueParameters
-  }
 
 // Based on org.jetbrains.kotlin.ir.types.typeConstructorParameters, but we collect type parameters
 // defined on parents of anonymous object.

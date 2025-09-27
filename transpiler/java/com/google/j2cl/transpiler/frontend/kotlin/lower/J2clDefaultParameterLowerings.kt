@@ -140,7 +140,7 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
       type = parameter.type,
       condition =
         irCall(this@J2clDefaultArgumentStubGenerator.context.intrinsics.jsIsUndefinedFunctionSymbol)
-          .apply { putValueArgument(0, irGet(parameter)) },
+          .apply { arguments[0] = irGet(parameter) },
       thenPart = defaultExpression,
       elsePart = irGet(parameter),
     )
@@ -221,8 +221,6 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
         val wrappedFunctionCall =
           irCall(originalDeclaration, origin = getOriginForCallToImplementation()).apply {
             passTypeArgumentsFrom(newFunction)
-            dispatchReceiver = newFunction.dispatchReceiverParameter?.let { irGet(it) }
-            extensionReceiver = newFunction.extensionReceiverParameter?.let { irGet(it) }
             arguments.assignFrom(originalDeclaration.parameters) { irGet(variables[it]!!) }
           }
         +irReturn(wrappedFunctionCall)
@@ -311,9 +309,9 @@ private class J2clDefaultArgumentFunctionFactory(context: J2clBackendContext) :
 
     // Remove any varargs from the bridge function. We'll expect an array literal to be passed
     // instead. This will also allow us to support varargs with a default as well.
-    for (valueParameter in valueParameters) {
-      if (valueParameter.isVararg) {
-        valueParameter.varargElementType = null
+    for (parameter in parameters) {
+      if (parameter.isVararg) {
+        parameter.varargElementType = null
       }
     }
 
@@ -321,10 +319,7 @@ private class J2clDefaultArgumentFunctionFactory(context: J2clBackendContext) :
     // we'll make all the intermediate parameters default as well. Kotlin won't attempt to omit them
     // and Java callers are forced to pass them. We'll leave a stub to serve as a marker that the
     // parameter is optional, including for those that already had a default initializer.
-    valueParameters
-      .asSequence()
-      .dropWhile { it.defaultValue == null }
-      .forEach { it.stubDefaultValue() }
+    parameters.asSequence().dropWhile { it.defaultValue == null }.forEach { it.stubDefaultValue() }
 
     if (useConstructorMarker) {
       val markerType = context.ir.symbols.defaultConstructorMarker.defaultType.makeNullable()
@@ -458,7 +453,7 @@ internal class J2clDefaultParameterInjector(context: J2clBackendContext) :
       )
       .apply {
         putTypeArgument(0, this@maybeCoerceToNull.type)
-        putValueArgument(0, this@maybeCoerceToNull)
+        arguments[0] = this@maybeCoerceToNull
       }
   }
 }

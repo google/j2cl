@@ -60,7 +60,7 @@ class BlockDecomposerLowering(val context: JvmBackendContext) :
         context.irBuiltIns.nothingType,
       )
       .apply {
-        putValueArgument(0, JsIrBuilder.buildString(context.irBuiltIns.stringType, "unreachable"))
+        arguments[0] = JsIrBuilder.buildString(context.irBuiltIns.stringType, "unreachable")
       }
     // END OF MODIFICATIONS
   }
@@ -105,11 +105,7 @@ abstract class AbstractBlockDecomposerLowering(private val context: JvmBackendCo
                 visibility = DescriptorVisibilities.PRIVATE
                 origin = JsIrBuilder.SYNTHESIZED_DECLARATION
               }
-              .apply {
-                parent = container.parent
-                // Make the init function static
-                dispatchReceiverParameter = null
-              }
+              .apply { parent = container.parent }
 
           val newBody = this.toBlockBody(initFunction)
           newBody.patchDeclarationParents(initFunction)

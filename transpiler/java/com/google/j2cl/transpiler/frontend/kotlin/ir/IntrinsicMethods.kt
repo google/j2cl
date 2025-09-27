@@ -28,6 +28,7 @@ import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
+import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
@@ -39,6 +40,7 @@ import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.classFqName
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.defaultType
+import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isEnumClass
 import org.jetbrains.kotlin.ir.util.isFileClass
 import org.jetbrains.kotlin.ir.util.kotlinFqName
@@ -177,7 +179,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
   fun getRangeToConstructor(irCall: IrCall): IrConstructorSymbol {
     val fqName = irCall.type.classFqName!!
     val classSymbol = irBuiltIns.symbolFinder.findClass(fqName.shortName(), fqName.parent())!!
-    return classSymbol.constructors.single { it.owner.valueParameters.size == 2 }
+    return classSymbol.constructors.single { it.owner.hasShape(regularParameters = 2) }
   }
 
   fun isRangeTo(irCall: IrCall): Boolean = irCall.symbol.toKey() in rangeToCallByIntrinsicSymbolKey
@@ -195,9 +197,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
     with(irCall.symbol.owner) {
       name == enumGetEntriesName &&
         parentClassOrNull?.isEnumClass == true &&
-        dispatchReceiverParameter == null &&
-        extensionReceiverParameter == null &&
-        valueParameters.isEmpty()
+        hasShape(dispatchReceiver = false, extensionReceiver = false, regularParameters = 0)
     }
 
   private val coroutineContextGetterSymbol: IrSimpleFunctionSymbol by lazy {
@@ -390,7 +390,11 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
   }
 
   private fun IrFunctionSymbol.toKey(receiver: FqName): Key {
-    return Key(receiver, owner.name.asString(), owner.valueParameters.map(::getParameterTypeFqName))
+    return Key(
+      receiver,
+      owner.name.asString(),
+      owner.parameters.filter { it.kind == IrParameterKind.Regular }.map(::getParameterTypeFqName),
+    )
   }
 }
 

@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.ir.inline.InlineFunctionResolver
 import org.jetbrains.kotlin.ir.inline.InlineMode
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.util.getPackageFragment
+import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
@@ -77,8 +78,6 @@ private fun IrFunction.isArrayOf(): Boolean {
     }
   return parent.packageFqName == StandardNames.BUILT_INS_PACKAGE_FQ_NAME &&
     name.asString().let { it in PRIMITIVE_ARRAY_OF_NAMES || it == ARRAY_OF_NAME } &&
-    extensionReceiverParameter == null &&
-    dispatchReceiverParameter == null &&
-    valueParameters.size == 1 &&
-    valueParameters[0].isVararg
+    hasShape(dispatchReceiver = false, extensionReceiver = false, regularParameters = 1) &&
+    parameters[0].isVararg
 }

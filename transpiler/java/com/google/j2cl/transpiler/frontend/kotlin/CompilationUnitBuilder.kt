@@ -14,6 +14,7 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
@@ -85,10 +86,11 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.WhileStatement
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
+import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrFail
+import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrNull
 import com.google.j2cl.transpiler.frontend.kotlin.ir.findFunctionByName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getNameSourcePosition
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
@@ -174,6 +176,7 @@ import org.jetbrains.kotlin.ir.expressions.IrWhileLoop
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
+import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeProjection
@@ -189,6 +192,8 @@ import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.isSuspend
+import org.jetbrains.kotlin.ir.util.nonDispatchArguments
+import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.util.statements
@@ -365,7 +370,7 @@ internal class CompilationUnitBuilder(
           .build()
       )
     }
-    addAll(irFunction.getParameters().map(this@CompilationUnitBuilder::createVariable))
+    addAll(irFunction.nonDispatchParameters.map(this@CompilationUnitBuilder::createVariable))
   }
 
   private fun convertBody(body: IrBody): Block =
@@ -756,7 +761,7 @@ internal class CompilationUnitBuilder(
 
   private fun convertJavaClassPropertyReference(irCall: IrCall): Expression =
     convertToGetClass(
-      requireNotNull(irCall.extensionReceiver),
+      irCall.extensionReceiverOrFail,
       getSourcePosition(irCall),
       wrapPrimitives = false,
     )
@@ -765,7 +770,7 @@ internal class CompilationUnitBuilder(
     irCall: IrCall,
     wrapPrimitives: Boolean,
   ): Expression {
-    val receiver = irCall.extensionReceiver
+    val receiver = irCall.extensionReceiverOrNull
     return when (receiver) {
       // CLASS_REFERENCE is a literal class reference on a type, ex: Foo::class.
       is IrClassReference ->
@@ -832,7 +837,7 @@ internal class CompilationUnitBuilder(
   private fun convertArrayGetCall(irCall: IrCall): Expression =
     ArrayAccess.newBuilder()
       .setArrayExpression(convertQualifier(irCall))
-      .setIndexExpression(convertExpression(irCall.getValueArgument(0)!!))
+      .setIndexExpression(convertExpression(irCall.arguments[1]!!))
       .build()
 
   private fun convertArraySetCall(irCall: IrCall): Expression =
@@ -843,21 +848,21 @@ internal class CompilationUnitBuilder(
         convertArrayGetCall(irCall)
       )
       .setOperator(BinaryOperator.ASSIGN)
-      .setRightOperand(convertExpression(irCall.getValueArgument(1)!!))
+      .setRightOperand(convertExpression(irCall.arguments[2]!!))
       .build()
 
   private fun convertArrayOfCall(irCall: IrCall): Expression {
     // arrayOf method takes a vararg argument. the vararg argument will be converted to an array
     // literal, so we can replace the call to the arrayOf by the array argument itself.
-    check(irCall.valueArgumentsCount == 1)
-    return convertExpression(irCall.getArguments()[0])
+    check(irCall.arguments.size == 1) { "invalid number of arguments" }
+    return convertExpression(irCall.arguments[0]!!)
   }
 
   private fun convertIsArrayOfCall(irCall: IrCall): Expression =
     // Transforms `array.isArrayOf<String>()` to `array instanceof String[]`
     InstanceOfExpression.newBuilder()
       // isArrayOf is defined as an extension method. The qualifier is the extension receiver.
-      .setExpression(convertExpression(requireNotNull(irCall.extensionReceiver)))
+      .setExpression(convertExpression(irCall.extensionReceiverOrFail))
       .setTestTypeDescriptor(
         // Type argument of the isArrayOf call is the component type of the array:
         ArrayTypeDescriptor.newBuilder()
@@ -870,7 +875,7 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertDataClassArrayMemberCall(irCall: IrCall, methodName: String): Expression {
-    val arrayArgument = requireNotNull(irCall.getValueArgument(0))
+    val arrayArgument = requireNotNull(irCall.arguments[0])
     val arrayTypeDescriptor =
       if (arrayArgument.type.isPrimitiveArray()) environment.getTypeDescriptor(arrayArgument.type)
       else TypeDescriptors.get().javaLangObjectArray
@@ -888,13 +893,13 @@ internal class CompilationUnitBuilder(
           .javaLangString
           .getMethodDescriptor("valueOf", TypeDescriptors.get().javaLangObject)
       )
-      .setArguments(convertExpression(requireNotNull(irCall.extensionReceiver)))
+      .setArguments(convertExpression(irCall.extensionReceiverOrFail))
       .setSourcePosition(getSourcePosition(irCall))
       .build()
 
   /** Converts a `a.rangeTo(b)` or `a..b` call. */
   private fun convertRangeToCall(irCall: IrCall): Expression {
-    require(irCall.valueArgumentsCount == 1) { "invalid number of arguments" }
+    require(irCall.arguments.size == 2) { "invalid number of arguments" }
     val constructorSymbol = intrinsicMethods.getRangeToConstructor(irCall)
     val methodDescriptor =
       environment.getMethodDescriptor(constructorSymbol.owner, irCall.typeSubstitutionMap)
@@ -902,15 +907,17 @@ internal class CompilationUnitBuilder(
       .setArguments(
         listOf(
           checkNotNull(convertQualifier(irCall)),
-          convertExpression(checkNotNull(irCall.getValueArgument(0))),
+          convertExpression(checkNotNull(irCall.arguments[1]!!)),
         )
       )
       .build()
   }
 
   private fun convertEqualsOperator(irCall: IrCall): Expression {
-    val lhs = convertExpression(irCall.getValueArgument(0)!!)
-    val rhs = convertExpression(irCall.getValueArgument(1)!!)
+    require(irCall.arguments.size == 2) { "invalid number of arguments" }
+
+    val lhs = convertExpression(irCall.arguments[0]!!)
+    val rhs = convertExpression(irCall.arguments[1]!!)
 
     // Kotlin .equals() operator (==) is a null-safe comparison based on "Object.equals". It has the
     // same semantics as the j.u.Objects.equals which we can delegate to. However if we know the
@@ -937,8 +944,10 @@ internal class CompilationUnitBuilder(
     TypeDescriptors.isBoxedTypeAsJsPrimitives(type) || type.isEnum
 
   private fun convertIeee754EqualsOperator(irCall: IrCall): Expression {
-    var lhs = convertExpression(irCall.getValueArgument(0)!!)
-    var rhs = convertExpression(irCall.getValueArgument(1)!!)
+    require(irCall.arguments.size == 2) { "invalid number of arguments" }
+
+    val lhs = convertExpression(irCall.arguments[0]!!)
+    val rhs = convertExpression(irCall.arguments[1]!!)
 
     // This operation is only applicable to floats and doubles, convert floats to doubles if
     // necessary.
@@ -975,8 +984,10 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertReferenceEqualsOperator(irCall: IrCall): Expression {
-    var lhs = convertExpression(irCall.getValueArgument(0)!!)
-    var rhs = convertExpression(irCall.getValueArgument(1)!!)
+    require(irCall.arguments.size == 2) { "invalid number of arguments" }
+
+    var lhs = convertExpression(irCall.arguments[0]!!)
+    var rhs = convertExpression(irCall.arguments[1]!!)
 
     // Kotlin leaves the semantics of reference equality between boxed and unboxed types as
     // unspecified (KLS §8.9.1), but in practice will box primitive types if the LHS xor RHS side is
@@ -999,9 +1010,9 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertCheckNotNullCall(irCall: IrCall): Expression {
-    require(irCall.getArguments().size == 1)
+    require(irCall.arguments.size == 1) { "invalid number of arguments" }
 
-    val argumentExpression = convertExpression(irCall.getArguments()[0])
+    val argumentExpression = convertExpression(irCall.arguments[0]!!)
 
     return if (argumentExpression.typeDescriptor.isPrimitive) {
       // Do not insert a checkNotNull call on primitives.
@@ -1014,13 +1025,8 @@ internal class CompilationUnitBuilder(
   private fun convertPrefixOperation(irCall: IrCall): Expression {
     val prefixOperator = requireNotNull(intrinsicMethods.getPrefixOperator(irCall.symbol))
 
-    // Intrinsic prefix operators are functions that might come in two flavors, either the
-    // operand is the receiver of a function with no arguments, or it is static function with
-    // just one argument.
-    require(irCall.valueArgumentsCount in 0..1) { "invalid number of arguments" }
-    require(irCall.valueArgumentsCount == 1 || irCall.dispatchReceiver != null)
-
-    val operand = convertQualifier(irCall) ?: convertExpression(irCall.getValueArgument(0)!!)
+    require(irCall.arguments.size == 1) { "invalid number of arguments" }
+    val operand = convertExpression(irCall.arguments[0]!!)
 
     // Kotlin will always represent !== and != as !(===) and !(==), respectively. The origin will
     // tell us if Kotlin internally did this and if so, we can rewrite the operand directly to be
@@ -1060,17 +1066,10 @@ internal class CompilationUnitBuilder(
   private fun convertBinaryOperation(irCall: IrCall): Expression {
     val binaryOperator = requireNotNull(intrinsicMethods.getBinaryOperator(irCall.symbol))
 
-    // Intrinsic binary operators come in two flavors; either the lhs is the receiver and the rhs
-    // is the only argument of the function or the function has no receiver and the lhs and rhs
-    // are its arguments (e.g. comparison operators).
-    require(irCall.valueArgumentsCount in 1..2) { "invalid number of arguments" }
-    val receiver: IrExpression? = irCall.dispatchReceiver ?: irCall.extensionReceiver
-    require(irCall.valueArgumentsCount == 2 || receiver != null)
+    require(irCall.arguments.size == 2) { "invalid number of arguments" }
 
-    var argumentIndex = 0
-
-    val lhs = convertExpression(receiver ?: irCall.getValueArgument(argumentIndex++)!!)
-    val rhs = convertExpression(irCall.getValueArgument(argumentIndex)!!)
+    val lhs = convertExpression(irCall.arguments[0]!!)
+    val rhs = convertExpression(irCall.arguments[1]!!)
 
     // Create the appropriate expression with the same semantic of the intrinsic call.
     return BinaryExpression.newBuilder()
@@ -1115,7 +1114,7 @@ internal class CompilationUnitBuilder(
 
   private fun createNewArray(irCall: IrFunctionAccessExpression): Expression {
     val arrayTypeDescriptor = environment.getTypeDescriptor(irCall.type) as ArrayTypeDescriptor
-    val size = convertExpression(requireNotNull(irCall.getValueArgument(0)))
+    val size = convertExpression(irCall.arguments[0]!!)
     // In Kotlin, there is no way to init all the dimensions of a multi-dimensional array in the
     // same expression.
     // Ex: in java you can do
@@ -1133,8 +1132,8 @@ internal class CompilationUnitBuilder(
       .setDimensionExpressions(dimensionExpressions)
       .setTypeDescriptor(arrayTypeDescriptor)
       .apply {
-        if (irCall.valueArgumentsCount == 2) {
-          setInitializer(convertExpression(irCall.getValueArgument(1)!!))
+        if (irCall.arguments.size == 2) {
+          setInitializer(convertExpression(irCall.arguments[1]!!))
         }
       }
       .build()
@@ -1220,9 +1219,14 @@ internal class CompilationUnitBuilder(
     // Fix inconsistencies in calls to java.lang.Enum constructor calls. Enum constructor has 2
     // implicit parameters (name and ordinal) that are added by a normalization pass. This removes
     // the parameter definition from the descriptor so that they are consistent.
-    check(functionAccess.getValueArgument(0) == null && functionAccess.getValueArgument(1) == null)
+    // First check that no argument are passed for the implicit parameters.
+    check(
+      functionAccess.nonDispatchArguments[0] == null &&
+        functionAccess.nonDispatchArguments[1] == null
+    )
 
     return MethodDescriptor.Builder.from(methodDescriptor)
+      // Fix the inconsistency by removing the implicit parameters from the descriptor.
       .setParameterDescriptors(listOf())
       .makeDeclaration()
       .build()
@@ -1669,7 +1673,7 @@ internal class CompilationUnitBuilder(
 
   private fun convertQualifier(memberAccess: IrMemberAccessExpression<*>): Expression? =
     convertQualifier(
-      memberAccess.dispatchReceiver ?: memberAccess.extensionReceiver,
+      memberAccess.dispatchReceiver ?: memberAccess.extensionReceiverOrNull,
       superQualifierSymbol = null,
     )
 
