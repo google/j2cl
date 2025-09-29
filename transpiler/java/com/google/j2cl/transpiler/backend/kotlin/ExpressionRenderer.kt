@@ -503,7 +503,7 @@ internal data class ExpressionRenderer(
     )
 
   private fun newInstanceSource(expression: NewInstance): Source =
-    expression.typeDescriptor.nonAnonymousTypeDescriptor.toNonNullable().let { typeDescriptor ->
+    expression.nonAnonymousTypeDescriptor.toNonNullable().let { typeDescriptor ->
       dotSeparated(
         qualifierSource(expression),
         spaceSeparated(
@@ -790,12 +790,13 @@ internal data class ExpressionRenderer(
     private val TypeDeclaration.returnLabelIdentifier: String
       get() = ktQualifiedNameAsSuperType.qualifiedNameToSimpleName()
 
-    private val DeclaredTypeDescriptor.nonAnonymousTypeDescriptor: DeclaredTypeDescriptor
+    private val NewInstance.nonAnonymousTypeDescriptor: DeclaredTypeDescriptor
       get() =
-        if (typeDeclaration.isAnonymous) {
-          interfaceTypeDescriptors.firstOrNull() ?: superTypeDescriptor!!
+        if (anonymousInnerClass != null) {
+          anonymousInnerClass.superInterfaceTypeDescriptors.firstOrNull()
+            ?: anonymousInnerClass.superTypeDescriptor!!
         } else {
-          this
+          typeDescriptor
         }
 
     private val PrefixOperator.needsSpace: Boolean
