@@ -17,7 +17,6 @@ integration_library(
 )
 
 integration_test(
-    name = "strictequality",
     srcs = ["Main.java"],
     # TODO(b/312494789): Enable when signature of extension functions in
     #  J2KT-runtime are correct in terms of primitive vs boxed type.

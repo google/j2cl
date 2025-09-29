@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "expectactual",
     srcs = [
         "ActualFoo.kt",
         "Main.kt",

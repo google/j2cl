@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsfunctionbridge",
     srcs = glob(["*.java"]),
     enable_kt_native = False,
     suppress = ["JSC_TYPE_MISMATCH"],

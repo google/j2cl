@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "lambdas",
     srcs = glob(["*.java"]),
     # A crash in Kotlin frontend:
     # Exception in thread "main" java.lang.ClassCastException:

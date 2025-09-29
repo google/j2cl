@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsmethodoverride",
     srcs = glob([
         "*.java",
         "*.js",

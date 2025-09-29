@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "lateinit",
     srcs = glob(["*.kt"]),
     closure_defines = {
         "jre.checks.api": "DISABLED",

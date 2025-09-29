@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsfunction",
     srcs = glob(["*.kt"]),
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,

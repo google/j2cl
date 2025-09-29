@@ -10,7 +10,6 @@ package(
 )
 
 integration_test(
-    name = "selfreferencingnativetype",
     srcs = glob(["*.java"]),
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,

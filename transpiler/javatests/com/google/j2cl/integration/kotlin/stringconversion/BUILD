@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "stringconversion",
     srcs = glob(["*.kt"]),
     enable_kt = False,
 )

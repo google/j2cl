@@ -8,7 +8,4 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(
-    name = "breakstatement",
-    srcs = glob(["*.java"]),
-)
+integration_test(srcs = glob(["*.java"]))

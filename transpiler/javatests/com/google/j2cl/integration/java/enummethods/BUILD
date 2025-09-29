@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "enummethods",
     srcs = glob([
         "*.java",
         "*.js",

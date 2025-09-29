@@ -8,7 +8,4 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(
-    name = "wideningfloatconversion",
-    srcs = ["Main.kt"],
-)
+integration_test(srcs = ["Main.kt"])

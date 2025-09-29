@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsinnerclass",
     srcs = glob([
         "*.kt",
         "*.js",

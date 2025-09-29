@@ -8,7 +8,4 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(
-    name = "importsfullyqualified",
-    srcs = glob(["*.kt"]),
-)
+integration_test(srcs = glob(["*.kt"]))

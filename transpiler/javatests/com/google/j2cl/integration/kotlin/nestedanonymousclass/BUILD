@@ -8,7 +8,4 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(
-    name = "nestedanonymousclass",
-    srcs = glob(["*.kt"]),
-)
+integration_test(srcs = glob(["*.kt"]))

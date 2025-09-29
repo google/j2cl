@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsenum",
     srcs = glob([
         "*.kt",
         "*.js",

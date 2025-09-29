@@ -8,7 +8,4 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(
-    name = "typealias",
-    srcs = glob(["*.kt"]),
-)
+integration_test(srcs = glob(["*.kt"]))

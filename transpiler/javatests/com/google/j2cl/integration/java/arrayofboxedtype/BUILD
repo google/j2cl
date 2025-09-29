@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "arrayofboxedtype",
     srcs = glob(["*.java"]),
     # TODO(b/227554485): Kotlin Native does not throw ArrayStoreException when
     # storing wrong type of object.

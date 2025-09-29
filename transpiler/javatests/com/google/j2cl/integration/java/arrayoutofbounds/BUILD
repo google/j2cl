@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "arrayoutofbounds",
     srcs = glob(["*.java"]),
     # ArrayOutBounds will not throw only for JS output.
     enable_jvm_test = False,

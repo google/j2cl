@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "arithmeticexceptiondisabled",
     srcs = glob(["*.kt"]),
     closure_defines = {
         "jre.checks.numeric": "DISABLED",

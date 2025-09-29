@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "depsdeep",
     srcs = ["Main.kt"],
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/kotlin/depsdeep/bar",

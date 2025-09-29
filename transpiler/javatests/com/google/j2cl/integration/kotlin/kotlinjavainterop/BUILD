@@ -19,7 +19,6 @@ integration_library(
 )
 
 integration_test(
-    name = "kotlinjavainterop",
     srcs = glob(["*.kt"]),
     enable_kt = False,
     enable_wasm = False,

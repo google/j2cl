@@ -39,7 +39,6 @@ j2cl_library(
 )
 
 integration_test(
-    name = "instancejsmethods",
     srcs = [
         "Main.kt",
         "instancejsmethods.MainKt.native.js",

@@ -29,7 +29,6 @@ j2wasm_library(
 )
 
 integration_test(
-    name = "staticjsmethods",
     srcs = glob([
         "*.java",
         "*.js",

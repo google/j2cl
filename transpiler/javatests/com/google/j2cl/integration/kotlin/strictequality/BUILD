@@ -17,7 +17,6 @@ integration_library(
 )
 
 integration_test(
-    name = "strictequality",
     srcs = ["Main.kt"],
     deps = [":constants"],
 )

@@ -27,7 +27,6 @@ java_library(
 )
 
 integration_test(
-    name = "gwtincompatible-with-srcjar",
     srcs = [
         ":libgwtincompatibleMain-src.jar",
         ":libgwtincompatibleOther-src.jar",

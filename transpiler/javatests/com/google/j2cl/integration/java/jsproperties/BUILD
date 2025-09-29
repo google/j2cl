@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsproperties",
     srcs = glob([
         "*.java",
         "*.js",

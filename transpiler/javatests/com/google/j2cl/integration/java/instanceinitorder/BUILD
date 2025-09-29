@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "instanceinitorder",
     srcs = glob(["*.java"]),
     # TODO(b/287350926): Enable when field initialization with default value is
     #  fixed.

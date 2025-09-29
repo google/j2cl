@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "assertsimple",
     srcs = glob(["*.kt"]),
     defs = [
         # Turn on asserts since it is what this test is testing.

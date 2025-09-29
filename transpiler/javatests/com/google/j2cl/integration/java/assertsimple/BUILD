@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "assertsimple",
     srcs = glob(["*.java"]),
     defs = [
         # Turn on asserts since it is what this test is testing.

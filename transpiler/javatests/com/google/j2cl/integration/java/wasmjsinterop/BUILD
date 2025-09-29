@@ -21,7 +21,4 @@ j2wasm_library(
     ],
 )
 
-integration_test(
-    name = "wasmjsinterop",
-    srcs = glob(["*.java"]),
-)
+integration_test(srcs = glob(["*.java"]))

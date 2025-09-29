@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "emptyclass",
     srcs = glob(["*.kt"]),
     enable_bundle_size_report = True,
 )

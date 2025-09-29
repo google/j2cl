@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "overwrittentypevariables",
     srcs = glob(["*.java"]),
     enable_nullability = True,
     deps = ["//third_party:jspecify_annotations"],

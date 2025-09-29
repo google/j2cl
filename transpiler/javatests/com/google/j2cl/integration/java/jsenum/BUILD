@@ -33,7 +33,6 @@ j2wasm_library(
 )
 
 integration_test(
-    name = "jsenum",
     srcs = glob([
         "*.java",
         "*.js",

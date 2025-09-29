@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "strings",
     srcs = glob(["*.kt"]),
     # This test is temporary and not meant to be tested on the JVM.
     enable_jvm_test = False,

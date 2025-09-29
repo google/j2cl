@@ -15,7 +15,6 @@ integration_library(
 )
 
 integration_test(
-    name = "enums",
     srcs = glob(
         ["*.kt"],
         exclude = ["EnumWithOverriddenMethods.kt"],

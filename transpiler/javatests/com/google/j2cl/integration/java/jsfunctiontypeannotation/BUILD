@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsfunctiontypeannotation",
     srcs = glob([
         "*.java",
         "*.js",

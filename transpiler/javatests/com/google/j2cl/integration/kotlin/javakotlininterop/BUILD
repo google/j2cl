@@ -21,7 +21,6 @@ integration_library(
 )
 
 integration_test(
-    name = "javakotlininterop",
     srcs = glob(["Main.java"]),
     enable_kt = False,
     enable_wasm = False,

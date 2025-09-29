@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "enumobfuscation",
     srcs = glob(["*.java"]),
     defs = [
         # TODO(cromwellian): investigate why JSCompiler doesn't preserve original name before ReplaceStrings sees it

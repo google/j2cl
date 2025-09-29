@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "switchexpression",
     srcs = glob(["*.java"]),
     javacopts = [
         "-source 14",

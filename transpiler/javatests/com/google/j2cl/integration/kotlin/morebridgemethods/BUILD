@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "morebridgemethods",
     srcs = glob(["*.kt"]),
     suppress = ["JSC_TYPE_MISMATCH"],
 )

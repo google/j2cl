@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "bridgejsmethod",
     srcs = glob([
         "*.kt",
         "*.js",

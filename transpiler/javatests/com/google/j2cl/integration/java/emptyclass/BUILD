@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "emptyclass",
     srcs = glob(["*.java"]),
     enable_bundle_size_report = True,
 )

@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jstypevarargs",
     srcs = glob([
         "*.java",
         "*.js",

@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "staticinitfailfast",
     srcs = glob([
         "*.java",
         "*.native.js",

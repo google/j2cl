@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "allsimplebridges",
     srcs = glob(["*.java"]),
     # Inconsistent @ObjCName annotation
     enable_kt_native = False,

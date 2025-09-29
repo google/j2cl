@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "allsimplebridges",
     srcs = glob(["*.kt"]),
     suppress = ["JSC_UNKNOWN_OVERRIDE"],
 )

@@ -21,7 +21,6 @@ j2wasm_library(
 )
 
 integration_test(
-    name = "narrowingdoubletofloat",
     srcs = glob(["*.java"]),
     # Code running on the JVM honors float-double precision differences
     enable_jvm_test = False,

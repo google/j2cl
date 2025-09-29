@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "nativeinjectionapt",
     srcs = glob([
         "*.java",
         "super/**/*.java",

@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "xplatforeach",
     srcs = glob([
         "*.kt",
         "*.native.js",

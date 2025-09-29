@@ -15,7 +15,6 @@ integration_library(
 )
 
 integration_test(
-    name = "enums",
     srcs = glob(
         ["*.java"],
         exclude = ["EnumWithOverriddenMethods.java"],

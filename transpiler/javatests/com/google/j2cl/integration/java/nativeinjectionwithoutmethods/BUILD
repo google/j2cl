@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "nativeinjection",
     srcs = glob([
         "*.java",
         "*.js",

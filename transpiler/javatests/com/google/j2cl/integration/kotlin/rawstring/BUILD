@@ -9,6 +9,5 @@ package(
 )
 
 integration_test(
-    name = "stringtemplate",
     srcs = glob(["*.kt"]),
 )

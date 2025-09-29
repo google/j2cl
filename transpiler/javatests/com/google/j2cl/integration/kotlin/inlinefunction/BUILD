@@ -21,7 +21,6 @@ integration_library(
 )
 
 integration_test(
-    name = "inlinefunction",
     srcs = [
         "ClassWithInlineFunc.kt",
         "Main.kt",

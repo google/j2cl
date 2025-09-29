@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsfunction",
     srcs = glob(["*.java"]),
     # Throws ArrayOutOfBoundsException instead of ClassCastException
     enable_kt_native = False,

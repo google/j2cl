@@ -9,6 +9,5 @@ package(
 )
 
 integration_test(
-    name = "localclasswithcaptures",
     srcs = glob(["*.java"]),
 )

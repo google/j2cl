@@ -16,7 +16,6 @@ integration_library(
 )
 
 integration_test(
-    name = "multipleroottypes",
     # Src's JUST the Main class and gets MainRootType as a dependency. Do not
     # change this since this is part of what the test is verifying.
     srcs = ["Main.kt"],

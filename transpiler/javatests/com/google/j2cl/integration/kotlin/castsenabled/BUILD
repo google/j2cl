@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "castsenabled",
     srcs = glob(["*.kt"]),
     closure_defines = {
         "jre.checks.type": "ENABLED",

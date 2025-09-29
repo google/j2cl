@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "autoboxing",
     srcs = glob(["*.java"]),
     # TODO(b/278942389): Enable when TestUtils.isJ2Kt() detects J2KT-web.
     #  The first failing test is testBox_numberAsDouble().

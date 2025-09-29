@@ -33,7 +33,6 @@ integration_library(
 )
 
 integration_test(
-    name = "exports",
     srcs = ["Main.java"],
     deps = [":ExportLayerTwo"],
 )

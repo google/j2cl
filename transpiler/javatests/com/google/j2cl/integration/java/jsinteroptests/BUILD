@@ -14,7 +14,6 @@ alias(
 )
 
 integration_test(
-    name = "jsinteroptests",
     srcs = glob([
         "**/*.java",
         "**/*.js",

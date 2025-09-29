@@ -23,7 +23,6 @@ j2cl_library(
 )
 
 integration_test(
-    name = "nativeinjection",
     srcs = glob([
         "*.kt",
         "*.js",

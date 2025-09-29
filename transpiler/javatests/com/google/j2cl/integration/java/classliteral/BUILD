@@ -24,7 +24,6 @@ j2wasm_library(
 )
 
 integration_test(
-    name = "classliteral",
     srcs = glob(["*.java"]),
     enable_nullability = True,
     deps = ["//third_party:jspecify_annotations"],

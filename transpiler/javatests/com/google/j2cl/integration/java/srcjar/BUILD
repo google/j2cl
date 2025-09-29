@@ -8,7 +8,4 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(
-    name = "srcjar",
-    srcs = ["Main.srcjar"],
-)
+integration_test(srcs = ["Main.srcjar"])

@@ -8,7 +8,4 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(
-    name = "jsbridgemultipleexposing",
-    srcs = glob(["*.java"]),
-)
+integration_test(srcs = glob(["*.java"]))

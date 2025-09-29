@@ -16,7 +16,6 @@ j2cl_library(
 )
 
 integration_test(
-    name = "jsasync",
     srcs = glob(
         ["*.java"],
         exclude = ["Promise.java"],

@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "logging",
     srcs = glob(["*.java"]),
     tags = ["manual"],
 )

@@ -22,7 +22,6 @@ j2wasm_library(
 )
 
 integration_test(
-    name = "wasm",
     srcs = glob(["*.java"]),
     # Contains features which are only applicable for Wasm.
     enable_jvm_test = False,

@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "depsdeep",
     srcs = ["Main.java"],
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/java/depsdeep/bar",

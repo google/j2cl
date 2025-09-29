@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "instanceofs",
     srcs = glob(["*.java"]),
     javacopts = [
         "-source 17",

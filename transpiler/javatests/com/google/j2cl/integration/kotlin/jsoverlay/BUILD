@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "jsoverlay",
     srcs = glob([
         "*.kt",
         "*.js",

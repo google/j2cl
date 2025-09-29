@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "assertremoved",
     srcs = glob(["*.kt"]),
     defs = [
         # Turn off asserts since it is what this test is testing.

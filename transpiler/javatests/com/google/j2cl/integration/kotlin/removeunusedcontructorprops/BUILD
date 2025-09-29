@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "removeunusedcontructorprops",
     srcs = glob([
         "*.kt",
         "*.native.js",

@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "classliteralstripped",
     srcs = glob(["*.java"]),
     closure_defines = {
         "jre.classMetadata": "'STRIPPED'",

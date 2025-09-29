@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "nativejstypes",
     srcs = glob([
         "*.kt",
         "*.js",

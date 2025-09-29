@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "numberobjectcalls",
     srcs = glob(["*.kt"]),
     # TODO(b/242816223): Class.getName() gives different results on JVM and
     # Native for primitive and mapped types.

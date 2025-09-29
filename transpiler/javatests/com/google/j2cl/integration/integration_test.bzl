@@ -27,7 +27,6 @@ JAVAC_FLAGS = [
 
 # TODO(b/119637659): abstract common behaviour and merge with the internal version.
 def integration_test(
-        name,
         srcs,
         deps = [],
         defs = [],
@@ -43,6 +42,9 @@ def integration_test(
     deps are Labels of j2cl_library() rules. NOT labels of
     java_library() rules.
     """
+
+    # Use the name of the director so that the main test target is the impliclit target.
+    _, _, name = native.package_name().rpartition("/")
 
     # figure out the current location
     java_package = get_java_package(native.package_name())

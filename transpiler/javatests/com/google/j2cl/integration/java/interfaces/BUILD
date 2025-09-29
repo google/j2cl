@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "interfaces",
     srcs = glob(["**/*.java"]),
     enable_nullability = True,
     deps = [

@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "morebridgemethods",
     srcs = glob(["*.java"]),
     enable_kt = False,
     suppress = ["JSC_TYPE_MISMATCH"],

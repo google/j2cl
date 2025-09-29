@@ -39,7 +39,6 @@ j2wasm_library(
 
 # TODO(b/264934554): Port this test to Kotlin when AutoValue is supported.
 integration_test(
-    name = "autovalue",
     srcs = glob(
         ["*.java"],
         exclude = ["AutoValueDependency.java"],

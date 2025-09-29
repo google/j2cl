@@ -9,6 +9,5 @@ package(
 )
 
 integration_test(
-    name = "interfacewithfields",
     srcs = glob(["*.java"]),
 )

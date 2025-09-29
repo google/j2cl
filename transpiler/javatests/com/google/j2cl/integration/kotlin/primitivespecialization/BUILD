@@ -9,6 +9,5 @@ package(
 )
 
 integration_test(
-    name = "primitivespecialization",
     srcs = glob(["**/*.kt"]),
 )

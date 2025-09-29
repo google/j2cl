@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "staticjsmethods",
     srcs = glob([
         "*.kt",
         "*.js",

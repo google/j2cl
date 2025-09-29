@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "narrowingdoubletofloat",
     srcs = glob(["*.kt"]),
     # Code running on the JVM honors float-double precision differences
     enable_jvm_test = False,

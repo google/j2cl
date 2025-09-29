@@ -20,7 +20,6 @@ j2cl_library(
 )
 
 integration_test(
-    name = "xplatforeach",
     srcs = glob([
         "*.java",
         "*.native.js",

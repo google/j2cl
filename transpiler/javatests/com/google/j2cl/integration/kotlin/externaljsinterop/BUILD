@@ -18,7 +18,6 @@ integration_library(
 )
 
 integration_test(
-    name = "externaljsinterop",
     srcs = ["Main.kt"],
     deps = [":external_library"],
 )

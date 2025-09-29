@@ -26,7 +26,6 @@ alias(
 )
 
 integration_test(
-    name = "systemgetproperty",
     srcs = glob(
         [
             "*.java",

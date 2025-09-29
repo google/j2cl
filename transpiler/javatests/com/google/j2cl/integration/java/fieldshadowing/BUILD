@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "fieldshadowing",
     srcs = glob(["*.java"]),
     # Field shadowing is not allowed in Kotlin.
     enable_kt = False,

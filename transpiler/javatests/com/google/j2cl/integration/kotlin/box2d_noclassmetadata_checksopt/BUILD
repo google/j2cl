@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "box2d",
     srcs = glob(["*.kt"]),
     closure_defines = {
         "jre.checks.checkLevel": "OPTIMIZED",

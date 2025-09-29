@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "castsdisabled",
     srcs = glob(["*.java"]),
     closure_defines = {
         "jre.checks.type": "DISABLED",

@@ -9,7 +9,6 @@ package(
 )
 
 integration_test(
-    name = "staticcompiletimeconstant",
     srcs = glob(["*.kt"]),
     enable_kt = False,
 )

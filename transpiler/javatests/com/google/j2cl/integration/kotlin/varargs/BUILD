@@ -11,7 +11,4 @@ package(
 # Creates targets
 # blaze build :optimized_js
 # blaze test :readable_js
-integration_test(
-    name = "varargs",
-    srcs = glob(["**/*.kt"]),
-)
+integration_test(srcs = glob(["**/*.kt"]))
