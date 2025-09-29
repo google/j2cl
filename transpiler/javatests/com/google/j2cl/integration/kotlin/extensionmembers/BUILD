@@ -9,6 +9,6 @@ package(
 )
 
 integration_test(
-    name = "extensionsmembers",
+    name = "extensionmembers",
     srcs = glob(["*.kt"]),
 )
