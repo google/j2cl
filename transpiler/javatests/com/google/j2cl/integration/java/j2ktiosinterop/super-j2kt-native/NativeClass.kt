@@ -13,23 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktiosinterop;
+package j2ktiosinterop
 
-import org.jspecify.annotations.NullMarked;
+import kotlin.experimental.ExperimentalObjCName
 
-@NullMarked
-public final class NativeDefaultName {
-  public int nativeInstanceMethod() {
-    return 1;
-  }
+@OptIn(ExperimentalObjCName::class)
+@ObjCName("CustomNativeClass", exact = true)
+class NativeClass {
+  fun nativeInstanceMethod(): Int = 0
 
-  public static int nativeStaticMethod() {
-    return 2;
-  }
+  companion object {
+    fun nativeStaticMethod(): Int = 0
 
-  public static void nativeParameter(NativeDefaultName ktNative) {}
+    fun nativeParameter(nativeClass: NativeClass) {}
 
-  public static NativeDefaultName nativeReturnType() {
-    return new NativeDefaultName();
+    fun nativeReturnType(): NativeClass = NativeClass()
   }
 }

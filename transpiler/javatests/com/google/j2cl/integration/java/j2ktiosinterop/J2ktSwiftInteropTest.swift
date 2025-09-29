@@ -165,20 +165,11 @@ final class J2ktSwiftInteropTest: XCTestCase {
     let _ = values.get(index: 1)
   }
 
-  func testNativeDefaultName() {
-    let obj = J2ktiosinteropNativeDefaultName()
+  func testNativeClass() {
+    let obj = CustomNativeClass()
     let _ = obj.nativeInstanceMethod()
-    let _ = J2ktiosinteropNativeDefaultName.Companion.shared.nativeStaticMethod()
-    J2ktiosinteropNativeDefaultName.Companion.shared.nativeParameter(with: obj)
-    let _ = J2ktiosinteropNativeDefaultName.Companion.shared.nativeReturnType()
-  }
-
-  func testNativeCustomName() {
-    // Unsupported because of b/441110909.
-    // let obj = CustomNativeClass()
-    // let _ = obj.nativeInstanceMethod()
-    // let _ = CustomNativeClass.Companion.shared.nativeStaticMethod()
-    // CustomNativeClass.Companion.shared.nativeParameter(with: obj)
-    // let _ = CustomNativeClass.Companion.shared.nativeReturnType()
+    let _ = CustomNativeClass.Companion.shared.nativeStaticMethod()
+    CustomNativeClass.Companion.shared.nativeParameter(with: obj)
+    let _ = CustomNativeClass.Companion.shared.nativeReturnType()
   }
 }

@@ -22,12 +22,12 @@ import org.jspecify.annotations.NullMarked;
 @ObjectiveCName("CustomNativeClass")
 @KtNative
 @NullMarked
-public final class NativeCustomName {
+public final class NativeClass {
   public native int nativeInstanceMethod();
 
   public static native int nativeStaticMethod();
 
-  public static native void nativeParameter(NativeCustomName obj);
+  public static native void nativeParameter(NativeClass ktNative);
 
-  public static native NativeCustomName nativeReturnType();
+  public static native NativeClass nativeReturnType();
 }

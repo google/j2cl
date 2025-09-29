@@ -3,8 +3,7 @@
 #import "j2ktiosinterop/CustomNames.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
-#import "j2ktiosinterop/NativeCustomName.h"
-#import "j2ktiosinterop/NativeDefaultName.h"
+#import "j2ktiosinterop/NativeClass.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
@@ -216,27 +215,11 @@
   e = [values getIndex:1];
 }
 
-- (void)testNativeDefaultName {
-  J2ktiosinteropNativeDefaultName *obj = [[J2ktiosinteropNativeDefaultName alloc] init];
-  obj = create_J2ktiosinteropNativeDefaultName_init();
-  obj = new_J2ktiosinteropNativeDefaultName_init();
-
-  [obj nativeInstanceMethod];
-
-  [J2ktiosinteropNativeDefaultNameCompanion.shared nativeStaticMethod];
-  [J2ktiosinteropNativeDefaultNameCompanion.shared
-      nativeParameterWithJ2ktiosinteropNativeDefaultName:obj];
-  [J2ktiosinteropNativeDefaultNameCompanion.shared nativeReturnType];
-
-  J2ktiosinteropNativeDefaultName_nativeStaticMethod();
-  J2ktiosinteropNativeDefaultName_nativeParameterWithJ2ktiosinteropNativeDefaultName_(obj);
-  J2ktiosinteropNativeDefaultName_nativeReturnType();
-}
-
-- (void)testNativeCustomName {
+- (void)testNativeClass {
   CustomNativeClass *obj = [[CustomNativeClass alloc] init];
-  obj = create_CustomNativeClass_init();
-  obj = new_CustomNativeClass_init();
+  // TODO(b/442826242): Not yet available for @KtNative classes.
+  // obj = create_CustomNativeClass_init();
+  // obj = new_CustomNativeClass_init();
 
   [obj nativeInstanceMethod];
 
@@ -244,9 +227,10 @@
   [CustomNativeClassCompanion.shared nativeParameterWithCustomNativeClass:obj];
   [CustomNativeClassCompanion.shared nativeReturnType];
 
-  CustomNativeClass_nativeStaticMethod();
-  CustomNativeClass_nativeParameterWithCustomNativeClass_(obj);
-  CustomNativeClass_nativeReturnType();
+  // TODO(b/442826242): Not yet available for @KtNative classes.
+  // CustomNativeClass_nativeStaticMethod();
+  // CustomNativeClass_nativeParameterWithCustomNativeClass_(obj);
+  // CustomNativeClass_nativeReturnType();
 }
 
 @end

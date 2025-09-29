@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 
 @ObjectiveCName("CustomNativeClass")
 @NullMarked
-public final class NativeCustomName {
+public final class NativeClass {
   public int nativeInstanceMethod() {
     return 1;
   }
@@ -29,9 +29,9 @@ public final class NativeCustomName {
     return 2;
   }
 
-  public static void nativeParameter(NativeCustomName obj) {}
+  public static void nativeParameter(NativeClass ktNative) {}
 
-  public static NativeCustomName nativeReturnType() {
-    return new NativeCustomName();
+  public static NativeClass nativeReturnType() {
+    return new NativeClass();
   }
 }
