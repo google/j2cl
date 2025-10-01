@@ -1487,15 +1487,27 @@
  )
 )
 
+;;; void TypeWildCards.testWildcardInRecursiveVariableDeclaration()
+(func $m_testWildcardInRecursiveVariableDeclaration__void@typewildcards.TypeWildCards
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:155:21
+ (local $o (ref null $typewildcards.RecursiveType))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:155:66
+  (call $$clinit__void_<once>_@typewildcards.TypeWildCards )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:156:4
+  (local.set $o (call $$create__typewildcards_RecursiveType@typewildcards.RecursiveType (ref.null $typewildcards.RecursiveType)))
+ )
+)
+
 ;;; MultipleGenerics<D, String, List<D>> TypeWildCards.createMultipleGenerics(List<D> arg0)
 (func $m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:156:50
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:161:50
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:156:50
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:161:50
   (call $$clinit__void_<once>_@typewildcards.TypeWildCards )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:156:50
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:161:50
   (return (call $m_createMultipleGenerics_$private__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (local.get $arg0)))
  )
 )
@@ -1504,9 +1516,9 @@
 (func $m_createMultipleGenerics_$private__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards
  (param $foo (ref null $java.lang.Object))
  (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:156:50
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:161:50
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:157:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:162:4
   (return (call $$create__@typewildcards.TypeWildCards.MultipleGenerics ))
  )
 )
@@ -1526,9 +1538,9 @@
   (global.set $$class-initialized@typewildcards.TypeWildCards (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:44:13
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:160:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:165:2
   (global.set $listWithWildcard@typewildcards.TypeWildCards (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:161:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:166:2
   (global.set $valMultipleGenerics@typewildcards.TypeWildCards (call $m_createMultipleGenerics_$private__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (global.get $listWithWildcard@typewildcards.TypeWildCards)))
  )
 )
@@ -2111,16 +2123,16 @@
 ;;; MultipleGenerics<A, B, C> MultipleGenerics.$create()
 (func $$create__@typewildcards.TypeWildCards.MultipleGenerics
  (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
  (local $$instance (ref null $typewildcards.TypeWildCards.MultipleGenerics))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
   (call $$clinit__void_<once>_@typewildcards.TypeWildCards.MultipleGenerics )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
   (local.set $$instance (struct.new $typewildcards.TypeWildCards.MultipleGenerics (global.get $typewildcards.TypeWildCards.MultipleGenerics.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
   (call $$ctor__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
   (return (local.get $$instance))
  )
 )
@@ -2128,27 +2140,27 @@
 ;;; void MultipleGenerics.$ctor()
 (func $$ctor__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics
  (param $this (ref null $typewildcards.TypeWildCards.MultipleGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void MultipleGenerics.$clinit()
 (func $$clinit__void_<once>_@typewildcards.TypeWildCards.MultipleGenerics
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
   (if (global.get $$class-initialized@typewildcards.TypeWildCards.MultipleGenerics)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
   (global.set $$class-initialized@typewildcards.TypeWildCards.MultipleGenerics (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:154:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:159:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

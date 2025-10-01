@@ -151,6 +151,11 @@ public class TypeWildCards {
     return ri.m();
   }
 
+  // Repro for b/447445848
+  public static void testWildcardInRecursiveVariableDeclaration() {
+    RecursiveType<?> o = new RecursiveType<>(null);
+  }
+
   static class MultipleGenerics<A, B, C> {}
 
   static <D> MultipleGenerics<D, String, List<D>> createMultipleGenerics(List<D> foo) {

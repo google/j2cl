@@ -134,6 +134,11 @@ open class TypeWildCards {
   }
 
   @JvmStatic
+  fun testWildcardInRecursiveVariableDeclaration() {
+   val o: RecursiveType<*> = RecursiveType(null) as RecursiveType<*>
+  }
+
+  @JvmStatic
   internal fun <D> createMultipleGenerics_pp_typewildcards(foo: List<D>?): MultipleGenerics<D, String?, List<D>?>? {
    return MultipleGenerics<D, String?, List<D>?>()
   }

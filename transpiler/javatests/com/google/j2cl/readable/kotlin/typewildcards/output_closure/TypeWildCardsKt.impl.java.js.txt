@@ -11,6 +11,7 @@ let GenericType = goog.forwardDeclare('typewildcards.GenericType$impl');
 let List = goog.forwardDeclare('typewildcards.List$impl');
 let MultipleGenerics = goog.forwardDeclare('typewildcards.MultipleGenerics$impl');
 let RecursiveInterface = goog.forwardDeclare('typewildcards.RecursiveInterface$impl');
+let RecursiveType = goog.forwardDeclare('typewildcards.RecursiveType$impl');
 let A = goog.forwardDeclare('typewildcards.TypeWildCards.A$impl');
 let Foo = goog.forwardDeclare('typewildcards.TypeWildCards.Foo$impl');
 let Y = goog.forwardDeclare('typewildcards.TypeWildCards.Y$impl');
@@ -67,6 +68,11 @@ class TypeWildCardsKt extends j_l_Object {
   TypeWildCardsKt.$clinit();
   return ri.m_m__typewildcards_RecursiveInterface();
  }
+ /** @nodts */
+ static m_testWildcardInRecursiveVariableDeclaration__void() {
+  TypeWildCardsKt.$clinit();
+  let o = /**@type {!RecursiveType<!RecursiveType<?>>}*/ (RecursiveType.$create__typewildcards_RecursiveType(null));
+ }
  /** @nodts @template D @return {!MultipleGenerics<D, string, !List<D>>} */
  static m_createMultipleGenerics__typewildcards_List__typewildcards_MultipleGenerics(/** !List<D> */ foo) {
   TypeWildCardsKt.$clinit();
@@ -114,6 +120,7 @@ class TypeWildCardsKt extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   MultipleGenerics = goog.module.get('typewildcards.MultipleGenerics$impl');
+  RecursiveType = goog.module.get('typewildcards.RecursiveType$impl');
   Y = goog.module.get('typewildcards.TypeWildCards.Y$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

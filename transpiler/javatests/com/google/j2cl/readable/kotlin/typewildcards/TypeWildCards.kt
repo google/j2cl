@@ -24,7 +24,7 @@ interface List<T>
 open class GenericType<T>(var field: T)
 
 open class RecursiveType<T : RecursiveType<T>> {
-  constructor(wildcardParameter: RecursiveType<*>)
+  constructor(wildcardParameter: RecursiveType<*>?)
 }
 
 open class DeepRecursiveType<T : GenericType<in T>>
@@ -101,7 +101,7 @@ class TypeWildCards {
         { a ->
           a.getKey()
           a.get()
-        }
+        },
       )
   }
 
@@ -117,9 +117,8 @@ fun <T : TypeWildCards.A> testBoundedTypeMemberAccess(t: T) {
   t.m()
 }
 
-fun <T> testIntersectionBoundedTypeMemberAccess(t: T) where
-T : TypeWildCards.A,
-T : TypeWildCards.Y {
+fun <T> testIntersectionBoundedTypeMemberAccess(t: T)
+  where T : TypeWildCards.A, T : TypeWildCards.Y {
   val i = t.f
   t.m()
   t.n()
@@ -143,6 +142,10 @@ fun <C : RecursiveInterface<out C, C>> testInferredIntersectionWithTypeVariable(
   ri: RecursiveInterface<out C, C>
 ): C {
   return ri.m()
+}
+
+fun testWildcardInRecursiveVariableDeclaration() {
+  var o: RecursiveType<*> = RecursiveType(null)
 }
 
 class MultipleGenerics<A, B, C>

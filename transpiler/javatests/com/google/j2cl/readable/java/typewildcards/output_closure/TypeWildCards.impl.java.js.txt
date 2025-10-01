@@ -104,6 +104,11 @@ class TypeWildCards extends j_l_Object {
   TypeWildCards.$clinit();
   return ri.m_m__typewildcards_TypeWildCards_RecursiveInterface();
  }
+ /** @nodts */
+ static m_testWildcardInRecursiveVariableDeclaration__void() {
+  TypeWildCards.$clinit();
+  let o = /**@type {!RecursiveType<RecursiveType>}*/ (RecursiveType.$create__typewildcards_RecursiveType(null));
+ }
  /** @nodts @template D @return {MultipleGenerics<D, ?string, List<D>>} */
  static m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics(/** List<D> */ foo) {
   TypeWildCards.$clinit();
@@ -143,6 +148,7 @@ class TypeWildCards extends j_l_Object {
   Bar = goog.module.get('typewildcards.Bar$impl');
   typewildcards_Function = goog.module.get('typewildcards.Function$impl');
   GenericType = goog.module.get('typewildcards.GenericType$impl');
+  RecursiveType = goog.module.get('typewildcards.RecursiveType$impl');
   Foo = goog.module.get('typewildcards.TypeWildCards.Foo$impl');
   HasKey = goog.module.get('typewildcards.TypeWildCards.HasKey$impl');
   IntegerSupplier = goog.module.get('typewildcards.TypeWildCards.IntegerSupplier$impl');
