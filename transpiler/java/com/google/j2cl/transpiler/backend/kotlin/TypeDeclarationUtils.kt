@@ -96,3 +96,9 @@ internal val MemberDescriptor.isInterfaceMethod: Boolean
 
 internal fun TypeDeclaration.equalsOrEnclosedIn(other: TypeDeclaration): Boolean =
   this == other || enclosingTypeDeclaration?.equalsOrEnclosedIn(other) ?: false
+
+internal fun TypeDeclaration.isFromJRE(): Boolean =
+  packageName.startsWith("javaemul.") ||
+    packageName.startsWith("java.") ||
+    packageName.startsWith("javax.") ||
+    packageName.startsWith("kotlin.")

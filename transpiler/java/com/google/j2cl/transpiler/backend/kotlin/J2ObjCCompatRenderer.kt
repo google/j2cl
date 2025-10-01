@@ -319,7 +319,13 @@ internal class J2ObjCCompatRenderer(
       !hiddenFromObjCMapping.contains(typeDeclaration)
 
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
-    !typeDeclaration.isKtNative || mappedObjCNameRenderer(typeDeclaration) != null
+    !typeDeclaration.isKtNative ||
+      (typeDeclaration.ktNativeQualifiedName == null &&
+        typeDeclaration.ktBridgeQualifiedName == null &&
+        typeDeclaration.ktCompanionQualifiedName == null &&
+        // TODO(b/448061854): Remove this once the bug is fixed.
+        !typeDeclaration.isFromJRE()) ||
+      mappedObjCNameRenderer(typeDeclaration) != null
 
   private fun functionRenderers(
     method: Method,
