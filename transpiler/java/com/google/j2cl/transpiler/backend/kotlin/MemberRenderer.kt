@@ -45,7 +45,6 @@ import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorRenderer.Compan
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.NEW_LINE
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
@@ -53,7 +52,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLi
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indentedIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
@@ -192,16 +190,15 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       INIT_KEYWORD
     } else {
       val methodDescriptor = method.descriptor
-      val methodObjCNames = objCNameRenderer.renderedObjCNames(method)
       newLineSeparated(
         Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
-        annotationsSource(method, methodObjCNames),
+        annotationsSource(method),
         spaceSeparated(
           methodModifiersSource(method),
           colonSeparated(
             join(
               memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
-              methodParametersSource(method, methodObjCNames?.parameterObjCNames),
+              methodParametersSource(method),
             ),
             if (methodDescriptor.isConstructor) {
               constructorInvocationSource(method)
@@ -226,10 +223,10 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       Source.emptyUnless(method.isJavaOverride) { KotlinSource.OVERRIDE_KEYWORD },
     )
 
-  fun annotationsSource(method: Method, methodObjCNames: MethodObjCNames?): Source =
+  fun annotationsSource(method: Method): Source =
     newLineSeparated(
       annotationRenderer.annotationsSource(method.descriptor),
-      objCNameRenderer.objCAnnotationSource(method.descriptor, methodObjCNames),
+      objCNameRenderer.objCAnnotationSource(method.descriptor),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(method),
       memberDescriptorRenderer.jvmThrowsAnnotationSource(method.descriptor),
       memberDescriptorRenderer.nativeThrowsAnnotationSource(method.descriptor),
@@ -244,34 +241,16 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       )
     }
 
-  fun methodParametersSource(
-    method: MethodLike,
-    objCParameterNames: List<ObjCName>? = null,
-  ): Source {
+  fun methodParametersSource(method: MethodLike): Source {
     val methodDescriptor = method.descriptor
     val parameterDescriptors = methodDescriptor.parameterDescriptors
     val parameters = method.parameters
-    val renderWithNewLines = objCParameterNames != null && parameters.isNotEmpty()
-    val optionalNewLineSource = Source.emptyUnless(renderWithNewLines) { NEW_LINE }
     return Source.emptyIf(methodDescriptor.isKtProperty) {
       inParentheses(
-        join(
-          indentedIf(
-            renderWithNewLines,
-            commaSeparated(
-              0.until(parameters.size).map { index ->
-                join(
-                  optionalNewLineSource,
-                  parameterSource(
-                    parameterDescriptors[index],
-                    parameters[index],
-                    objCParameterNames?.get(index),
-                  ),
-                )
-              }
-            ),
-          ),
-          optionalNewLineSource,
+        commaSeparated(
+          0.until(parameters.size).map { index ->
+            parameterSource(parameterDescriptors[index], parameters[index])
+          }
         )
       )
     }
@@ -280,7 +259,6 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   private fun parameterSource(
     parameterDescriptor: ParameterDescriptor,
     parameter: Variable,
-    objCParameterName: ObjCName? = null,
   ): Source {
     val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
     val renderedTypeDescriptor =
@@ -290,9 +268,6 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
         (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
       }
     return spaceSeparated(
-      objCParameterName
-        ?.let { objCNameRenderer.objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
-        .orEmpty(),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(parameterDescriptor),
       Source.emptyUnless(isAnnotatedWithDoNotAutobox(parameterDescriptor)) {
         annotation(

@@ -87,10 +87,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       )
     }
 
-  fun objCAnnotationSource(
-    methodDescriptor: MethodDescriptor,
-    methodObjCNames: MethodObjCNames?,
-  ): Source =
+  fun objCAnnotationSource(methodDescriptor: MethodDescriptor): Source =
     Source.emptyIf(
       !isJ2ObjCInteropEnabled ||
         methodDescriptor.isConstructor ||
@@ -98,15 +95,9 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     ) {
       when {
         hiddenFromObjCMapping.contains(methodDescriptor) -> hiddenFromObjCAnnotationSource()
-        else -> objCNameAnnotationSource(methodObjCNames)
+        else -> Source.EMPTY
       }
     }
-
-  fun objCNameAnnotationSource(methodObjCNames: MethodObjCNames?): Source =
-    methodObjCNames
-      ?.objCName
-      ?.let { objCNameAnnotationSource(it.string, swiftName = it.swiftString) }
-      .orEmpty()
 
   fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
     Source.emptyIf(
@@ -151,8 +142,6 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
         needsObjCNameAnnotation(enclosingTypeDeclaration, forceObjCNameAnnotation = true) &&
           environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
       }
-
-  internal fun renderedObjCNames(method: Method): MethodObjCNames? = null
 
   companion object {
     private fun parameterSource(name: String, valueSource: Source): Source =
