@@ -356,7 +356,6 @@ class JavaEnvironment {
       javax.lang.model.type.TypeVariable typeVariable,
       List<? extends AnnotationMirror> elementAnnotations,
       boolean inNullMarkedScope) {
-    boolean isCapture = typeVariable instanceof CapturedType;
 
     Supplier<TypeDescriptor> boundTypeDescriptorFactory =
         () -> createTypeDescriptor(typeVariable.getUpperBound(), inNullMarkedScope);
@@ -369,6 +368,10 @@ class JavaEnvironment {
 
     List<String> classComponents = getClassComponents(typeVariable);
     Symbol baseSymbol = ((TypeVariableSymbol) typeVariable.asElement()).baseSymbol();
+    // For wildcards ocurring in variable declarations, javac creates fresh type variables that are
+    // SYNTHETIC that are not instances of CapturedType. (see b/447445848).
+    boolean isCapture =
+        typeVariable instanceof CapturedType || ((baseSymbol.flags() & Flags.SYNTHETIC) != 0);
     KtVariance ktVariance = getJ2ktVariance(baseSymbol);
     Type baseSymbolType = baseSymbol.asType();
     int id = getTypeVariableId(baseSymbolType);
