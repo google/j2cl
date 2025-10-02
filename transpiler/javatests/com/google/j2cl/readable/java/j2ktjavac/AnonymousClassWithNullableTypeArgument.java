@@ -89,6 +89,20 @@ public class AnonymousClassWithNullableTypeArgument {
     return new Holder<>("Supplier") {};
   }
 
+  static class ParameterizedEmptyClass<T extends @Nullable Object> {}
+
+  interface ParameterizedEmptyInterface<T extends @Nullable Object> {}
+
+  public static <T extends @Nullable Object>
+      ParameterizedEmptyClass<@Nullable T> testExplicitSuperclassTypeArguments() {
+    return new ParameterizedEmptyClass<@Nullable T>() {};
+  }
+
+  public static <T extends @Nullable Object>
+      ParameterizedEmptyInterface<@Nullable T> testExplicitSuperInterfaceTypeArguments() {
+    return new ParameterizedEmptyInterface<@Nullable T>() {};
+  }
+
   public static @Nullable String nullableString() {
     return null;
   }
