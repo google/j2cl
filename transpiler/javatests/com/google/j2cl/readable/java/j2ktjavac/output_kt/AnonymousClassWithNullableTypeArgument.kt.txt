@@ -77,7 +77,7 @@ open class AnonymousClassWithNullableTypeArgument {
 
   @JvmStatic
   fun <T> testExplicitSuperclassTypeArguments(): ParameterizedEmptyClass<T?> {
-   return object : ParameterizedEmptyClass<T>() {} as ParameterizedEmptyClass<T?>
+   return object : ParameterizedEmptyClass<T?>() {}
   }
 
   @JvmStatic

@@ -1392,7 +1392,8 @@ class JavaEnvironment {
                         createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked),
                         typeElement,
                         position ->
-                            position.type == TargetType.CLASS_EXTENDS && position.type_index == -1))
+                            position.type == TargetType.CLASS_EXTENDS
+                                && position.type_index == SUPERCLASS_TYPE_INDEX))
         .setInterfaceTypeDescriptorsFactory(
             () ->
                 createTypeDescriptors(
@@ -1445,6 +1446,10 @@ class JavaEnvironment {
                     .collect(toImmutableList()))
         .build();
   }
+
+  // The value of type_index for the superclass position in the raw type data of a declaration.
+  // Must be in sync with com.sun.tools.javac.code.TypeAnnotationPosition.
+  private static final int SUPERCLASS_TYPE_INDEX = 65535;
 
   @Nullable
   private MethodDescriptor getEnclosingMethodDescriptor(TypeElement typeElement) {
