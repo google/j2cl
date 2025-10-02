@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package j2ktiosinterop;
+
+option java_package = "j2ktiosinterop";
+option java_multiple_files = true;
+
+enum DefaultProtoEnum {
+  DEFAULT_ENUM_UNSPECIFIED = 0;
+  DEFAULT_ENUM_VALUE1 = 1;
+  DEFAULT_ENUM_VALUE2 = 2;
+}
+
+message DefaultProtoMessage {
+  optional string my_string = 1;
+  optional DefaultProtoEnum my_enum = 2;
+}

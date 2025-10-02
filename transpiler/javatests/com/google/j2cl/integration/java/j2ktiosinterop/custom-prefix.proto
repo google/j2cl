@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package j2ktiosinterop;
+
+import "third_party/java_src/j2objc/protobuf/compiler/internal/j2objc-descriptor.proto";
+
+option java_package = "j2ktiosinterop";
+option java_multiple_files = true;
+option (proto2.j2objc_package_prefix) = "CP";
+
+enum CustomPrefixProtoEnum {
+  CUSTOM_PREFIX_ENUM_UNSPECIFIED = 0;
+  CUSTOM_PREFIX_ENUM_VALUE1 = 1;
+  CUSTOM_PREFIX_ENUM_VALUE2 = 2;
+}
+
+message CustomPrefixProtoMessage {
+  optional string my_string = 1;
+  optional CustomPrefixProtoEnum my_enum = 2;
+}
