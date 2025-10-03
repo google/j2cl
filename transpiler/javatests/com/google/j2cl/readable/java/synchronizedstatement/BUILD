@@ -35,7 +35,5 @@ readable_example(
         ["*.java"],
         exclude = ["J2ktMonitor.java"],
     ),
-    # TODO(b/439710157): Re-enable once the bug is fixed.
-    build_kt_native_readables = False,
     deps = [":deps-j2cl"],
 )
