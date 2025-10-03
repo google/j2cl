@@ -44,7 +44,9 @@ import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -261,8 +263,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   /**
-   * Returns all the different type assignments to {@code typeParameterTypeDescriptor} from the
-   * declaration {@code declarationTypeDescriptor} as parameterized in {@code typeDescriptor}.
+   * Returns all the different type assignments to {@code typeParameter} from the declaration {@code
+   * declarationTypeDescriptor} as parameterized in {@code typeDescriptor}.
    *
    * <p>Example:
    *
@@ -282,6 +284,22 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       TypeDescriptor declarationTypeDescriptor,
       TypeVariable typeParameter,
       TypeDescriptor typeDescriptor) {
+    return getParameterizationsIn(
+        declarationTypeDescriptor, typeParameter, typeDescriptor, new HashSet<>());
+  }
+
+  private record DescriptorPair(TypeDescriptor declaration, TypeDescriptor parameterized) {}
+
+  private Stream<TypeDescriptor> getParameterizationsIn(
+      TypeDescriptor declarationTypeDescriptor,
+      TypeVariable typeParameter,
+      TypeDescriptor typeDescriptor,
+      Set<DescriptorPair> seen) {
+
+    if (!seen.add(new DescriptorPair(declarationTypeDescriptor, typeDescriptor))) {
+      // This pair of declaration and descriptor has already been processed.
+      return Stream.of();
+    }
     // TODO(b/406815802): Investigate how is it possible. The problem is reproduced in
     //  PropagateNullabilityProblem readable.
     if (!typeDescriptor.isAssignableTo(declarationTypeDescriptor)) {
@@ -298,7 +316,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                 getParameterizationsIn(
                     declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
                     typeParameter,
-                    arrayTypeDescriptor.getComponentTypeDescriptor());
+                    arrayTypeDescriptor.getComponentTypeDescriptor(),
+                    seen);
 
             // Non-arrays are not assignable to arrays.
             default -> throw new IllegalStateException();
@@ -321,27 +340,33 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                             .getTypeArgumentDescriptors()
                             .stream(),
                         (typeArgument, targetTypeArgument) ->
-                            getParameterizationsIn(typeArgument, typeParameter, targetTypeArgument))
+                            getParameterizationsIn(
+                                typeArgument, typeParameter, targetTypeArgument, seen))
                     .flatMap(it -> it);
 
             case TypeVariable typeVariable ->
                 getParameterizationsIn(
                     declarationTypeDescriptor,
                     typeParameter,
-                    getNormalizedUpperBoundTypeDescriptor(typeVariable));
+                    getNormalizedUpperBoundTypeDescriptor(typeVariable),
+                    seen);
 
             case IntersectionTypeDescriptor intersectionTypeDescriptor ->
                 intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
                     .filter(it -> it.isAssignableTo(declarationTypeDescriptor))
                     .flatMap(
-                        it -> getParameterizationsIn(declarationTypeDescriptor, typeParameter, it));
+                        it ->
+                            getParameterizationsIn(
+                                declarationTypeDescriptor, typeParameter, it, seen));
 
             // For a union to be assignable to a type, all of its components have to be assignable
             // to that type, so collect these parameterizations from all the types in the union
             case UnionTypeDescriptor unionTypeDescriptor ->
                 unionTypeDescriptor.getUnionTypeDescriptors().stream()
                     .flatMap(
-                        it -> getParameterizationsIn(declarationTypeDescriptor, typeParameter, it));
+                        it ->
+                            getParameterizationsIn(
+                                declarationTypeDescriptor, typeParameter, it, seen));
 
             default -> throw new AssertionError();
           };
@@ -354,8 +379,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               typeDescriptor instanceof TypeVariable typeVariable
                       && typeVariable.isWildcardOrCapture()
                   ? getNormalizedUpperBoundTypeDescriptor(typeVariable)
-                  : typeDescriptor);
-
+                  : typeDescriptor,
+              seen);
       case TypeVariable declarationTypeVariable
           when declarationTypeVariable.toDeclaration().equals(typeParameter) ->
           Stream.of(
@@ -368,11 +393,11 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
       case IntersectionTypeDescriptor declarationIntersectionTypeDescriptor ->
           declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-              .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
+              .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor, seen));
 
       case UnionTypeDescriptor declarationUnionTypeDescriptor ->
           declarationUnionTypeDescriptor.getUnionTypeDescriptors().stream()
-              .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor));
+              .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor, seen));
 
       default -> throw new AssertionError();
     };
