@@ -20,6 +20,7 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import java.lang.Void
 import kotlin.Any
 import kotlin.String
 import kotlin.Suppress
@@ -59,11 +60,13 @@ open class AnonymousClassWithNullableTypeArgument {
 
   @JvmStatic
   fun <T> testExplicitSuperclassTypeArguments(): ParameterizedEmptyClass<T?> {
+   object : ParameterizedEmptyClass<Void?>() {}
    return object : ParameterizedEmptyClass<T?>() {}
   }
 
   @JvmStatic
   fun <T> testExplicitSuperInterfaceTypeArguments(): ParameterizedEmptyInterface<T?> {
+   object : ParameterizedEmptyInterface<Void?> {}
    return object : ParameterizedEmptyInterface<T?> {}
   }
 

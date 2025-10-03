@@ -95,11 +95,13 @@ public class AnonymousClassWithNullableTypeArgument {
 
   public static <T extends @Nullable Object>
       ParameterizedEmptyClass<@Nullable T> testExplicitSuperclassTypeArguments() {
+    new ParameterizedEmptyClass<@Nullable Void>() {};
     return new ParameterizedEmptyClass<@Nullable T>() {};
   }
 
   public static <T extends @Nullable Object>
       ParameterizedEmptyInterface<@Nullable T> testExplicitSuperInterfaceTypeArguments() {
+    new ParameterizedEmptyInterface<@Nullable Void>() {};
     return new ParameterizedEmptyInterface<@Nullable T>() {};
   }
 
