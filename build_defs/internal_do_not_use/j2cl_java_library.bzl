@@ -1,6 +1,7 @@
 """J2CL library rules."""
 
 load("@rules_java//java:defs.bzl", "JavaInfo", "JavaPluginInfo")
+load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_srcs")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JsInfo", "j2cl_js_provider")
 load(":j2kt_common.bzl", "j2kt_common")
@@ -47,7 +48,6 @@ def _impl_j2cl_library(ctx):
         # generated package-info.java files.
         srcs = js_srcs + [f for f in jvm_srcs if f.basename == "package-info.java"]
         kt_common_srcs = j2kt_provider._private_.transpile_kt_out
-
     else:
         j2kt_provider = []
         srcs = ctx.files.srcs
@@ -75,6 +75,32 @@ def _impl_j2cl_library(ctx):
         is_j2kt_web_experiment_enabled = ctx.attr.j2kt_web_experiment_enabled,
     )
 
+    # If J2KT is enabled for this the build, but J2KT is not enabled for the
+    # target, we still need to produce a J2ktInfo provider to ensure we keep the
+    # J2ktInfo providers in a separate tree from the J2clInfo providers. This
+    # prevents them from being mixed together, which can downstream lead to
+    # seeing both the pre-J2KT JavaInfo and post-J2KT JavaInfo for a given
+    # target.
+    if ctx.attr._j2kt_web_build_flag[BuildSettingInfo].value and not j2kt_provider:
+        # Backstop to make sure we don't silently cover up a missing J2ktInfo
+        # provider when the target is actually enabled for J2KT.
+        if ctx.attr.j2kt_web_experiment_enabled:
+            fail("Target is enabled for J2KT but J2ktInfo was not produced")
+
+        # Create a new JavaInfo provider with all the same compilation jars,
+        # but swap the deps/exports to the ones from the J2ktInfo tree.
+        java_outputs = j2cl_provider._private_.java_info.java_outputs[0]
+        j2kt_java_info = JavaInfo(
+            output_jar = java_outputs.class_jar,
+            compile_jar = java_outputs.compile_jar,
+            header_compilation_jar = java_outputs.header_compilation_jar,
+            deps = [p._private_.java_info for p in _j2kt_providers_of(ctx.attr.deps)],
+            exports = [p._private_.java_info for p in _j2kt_providers_of(ctx.attr.exports)],
+            exported_plugins = [p[JavaPluginInfo] for p in ctx.attr.exported_plugins],
+        )
+
+        j2kt_provider = create_J2ktInfo_for_java_import(j2kt_java_info)
+
     outputs = [
         ctx.outputs.jar,
     ]
@@ -99,8 +125,7 @@ def _j2kt_provider_or_none(dep):
     if J2ktInfo in dep:
         return dep[J2ktInfo]
     if J2clInfo in dep:
-        # This is a non-j2kt-web j2cl_library. Automatically import the java provider
-        # coming from j2cl transpilation into a new J2KT provider.
+        # This should really only be the case for j2cl_import'd targets.
         return create_J2ktInfo_for_java_import(dep[J2clInfo]._private_.java_info)
 
     # This is a JS dep. This is not needed in the context of J2KT.
@@ -114,6 +139,10 @@ def _j2cl_or_js_provider_of(dep):
 
 _J2KT_WEB_EXPERIMENT_ATTRS = {
     "j2kt_web_experiment_enabled": attr.bool(default = False),
+    "_j2kt_web_build_flag": attr.label(
+        default = Label("//:experimental_enable_j2kt_web"),
+        providers = [BuildSettingInfo],
+    ),
 }
 
 _J2CL_INTERNAL_LIB_ATTRS = {
