@@ -887,9 +887,6 @@ class JavaEnvironment {
   private static TypeDescriptor applyNullabilityAnnotation(
       TypeDescriptor typeDescriptor, List<TypePathEntry> location, boolean isNullable) {
     if (location.isEmpty()) {
-      if (TypeDescriptors.isJavaLangVoid(typeDescriptor)) {
-        return typeDescriptor;
-      }
       return isNullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
     }
     TypePathEntry currentEntry = location.get(0);
