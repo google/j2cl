@@ -1,0 +1,73 @@
+// Generated from "j2ktjavac/TypeWildCards.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN")
+
+package j2ktjavac
+
+import javaemul.lang.*
+import kotlin.Suppress
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+
+open class TypeWildCards internal constructor() {
+ open class WithDependentBounds internal constructor() {
+  companion object {
+   @JvmStatic
+   fun testSetField(holder: Holder<*, out Collection<out Event>>) {
+    (holder as Holder<Event, Collection<out Event>>).observer_pp_j2ktjavac = Observer { e: Collection<out Event> ->
+    }
+   }
+
+   @JvmStatic
+   fun testSetMethod(holder: Holder<*, out Collection<out Event>>) {
+    holder.set_pp_j2ktjavac(
+     Observer { e: Collection<out Event> ->
+     },
+    )
+   }
+
+   @JvmStatic
+   fun testSetStaticMethod(holder: Holder<*, out Collection<out Event>>) {
+    Holder.setStatic_pp_j2ktjavac(
+     holder,
+     Observer { e: Collection<out Event> ->
+     },
+    )
+   }
+  }
+
+  interface Event
+
+  interface Collection<V>
+
+  fun interface Observer<E: Event, C: Collection<E>> {
+   fun on(events: C)
+  }
+
+  open class Holder<E: Event, C: Collection<E>> internal constructor() {
+   @JvmField
+   internal var observer_pp_j2ktjavac: Observer<E, C>? = null
+
+   internal open fun set_pp_j2ktjavac(observer: Observer<E, C>) {}
+
+   companion object {
+    @JvmStatic
+    internal fun <E: Event, C: Collection<E>> setStatic_pp_j2ktjavac(holder: Holder<E, C>, observer: Observer<E, C>) {}
+   }
+  }
+ }
+}
