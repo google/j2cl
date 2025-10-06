@@ -1,0 +1,35 @@
+goog.module('jstype.JsTypeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class JsTypeInterface {
+ /** @abstract */
+ foo() {}
+ /** @abstract */
+ bar() {}
+ /** @nodts */
+ static $clinit() {
+  JsTypeInterface.$clinit = () =>{};
+  JsTypeInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jstype_JsTypeInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jstype_JsTypeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+JsTypeInterface.$markImplementor(/**@type {Function}*/ (JsTypeInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (JsTypeInterface), 'jstype.JsTypeInterface');
+
+exports = JsTypeInterface;
+
+//# sourceMappingURL=JsTypeInterface.js.map

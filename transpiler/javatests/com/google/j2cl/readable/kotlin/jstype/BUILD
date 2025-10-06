@@ -18,7 +18,10 @@ j2cl_library(
 )
 
 readable_example(
-    srcs = ["SomeJsType.kt"],
+    srcs = [
+        "Objects.kt",
+        "SomeJsType.kt",
+    ],
     deps = [
         ":otherlib",
         "//jre/java:javaemul_internal_annotations-j2cl",

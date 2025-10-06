@@ -1,0 +1,64 @@
+goog.module('jstype.NonJsTypeObjectImplementsJsTypeAndNonJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const JsTypeInterface = goog.require('jstype.JsTypeInterface$impl');
+const NonJsTypeInterface = goog.require('jstype.NonJsTypeInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {JsTypeInterface}
+ * @implements {NonJsTypeInterface}
+ */
+class NonJsTypeObjectImplementsJsTypeAndNonJsType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NonJsTypeObjectImplementsJsTypeAndNonJsType} */
+ static $create__() {
+  let $instance = new NonJsTypeObjectImplementsJsTypeAndNonJsType();
+  $instance.$ctor__jstype_NonJsTypeObjectImplementsJsTypeAndNonJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_NonJsTypeObjectImplementsJsTypeAndNonJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override */
+ foo() {}
+ /** @override */
+ bar() {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__void() {
+  this.foo();
+ }
+ /** @nodts @return {!NonJsTypeObjectImplementsJsTypeAndNonJsType} */
+ static get f_INSTANCE__jstype_NonJsTypeObjectImplementsJsTypeAndNonJsType() {
+  return (NonJsTypeObjectImplementsJsTypeAndNonJsType.$clinit(), NonJsTypeObjectImplementsJsTypeAndNonJsType.$static_INSTANCE__jstype_NonJsTypeObjectImplementsJsTypeAndNonJsType);
+ }
+ /** @nodts */
+ static $clinit() {
+  NonJsTypeObjectImplementsJsTypeAndNonJsType.$clinit = () =>{};
+  NonJsTypeObjectImplementsJsTypeAndNonJsType.$loadModules();
+  j_l_Object.$clinit();
+  NonJsTypeObjectImplementsJsTypeAndNonJsType.$static_INSTANCE__jstype_NonJsTypeObjectImplementsJsTypeAndNonJsType = NonJsTypeObjectImplementsJsTypeAndNonJsType.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonJsTypeObjectImplementsJsTypeAndNonJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!NonJsTypeObjectImplementsJsTypeAndNonJsType} @nodts*/
+NonJsTypeObjectImplementsJsTypeAndNonJsType.$static_INSTANCE__jstype_NonJsTypeObjectImplementsJsTypeAndNonJsType;
+JsTypeInterface.$markImplementor(NonJsTypeObjectImplementsJsTypeAndNonJsType);
+NonJsTypeInterface.$markImplementor(NonJsTypeObjectImplementsJsTypeAndNonJsType);
+$Util.$setClassMetadata(NonJsTypeObjectImplementsJsTypeAndNonJsType, 'jstype.NonJsTypeObjectImplementsJsTypeAndNonJsType');
+
+exports = NonJsTypeObjectImplementsJsTypeAndNonJsType;
+
+//# sourceMappingURL=NonJsTypeObjectImplementsJsTypeAndNonJsType.js.map

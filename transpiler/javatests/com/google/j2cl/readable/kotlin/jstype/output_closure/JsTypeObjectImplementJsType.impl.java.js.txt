@@ -1,0 +1,56 @@
+goog.module('jstype.JsTypeObjectImplementJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const JsTypeInterface = goog.require('jstype.JsTypeInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {JsTypeInterface}
+ */
+class JsTypeObjectImplementJsType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JsTypeObjectImplementJsType} */
+ static $create__() {
+  let $instance = new JsTypeObjectImplementJsType();
+  $instance.$ctor__jstype_JsTypeObjectImplementJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_JsTypeObjectImplementJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override */
+ foo() {}
+ /** @override */
+ bar() {}
+ /** @return {!JsTypeObjectImplementJsType} */
+ static get INSTANCE() {
+  return (JsTypeObjectImplementJsType.$clinit(), JsTypeObjectImplementJsType.$static_INSTANCE__jstype_JsTypeObjectImplementJsType);
+ }
+ /** @nodts */
+ static $clinit() {
+  JsTypeObjectImplementJsType.$clinit = () =>{};
+  JsTypeObjectImplementJsType.$loadModules();
+  j_l_Object.$clinit();
+  JsTypeObjectImplementJsType.$static_INSTANCE__jstype_JsTypeObjectImplementJsType = JsTypeObjectImplementJsType.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsTypeObjectImplementJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!JsTypeObjectImplementJsType} @nodts*/
+JsTypeObjectImplementJsType.$static_INSTANCE__jstype_JsTypeObjectImplementJsType;
+JsTypeInterface.$markImplementor(JsTypeObjectImplementJsType);
+$Util.$setClassMetadata(JsTypeObjectImplementJsType, 'jstype.JsTypeObjectImplementJsType');
+
+exports = JsTypeObjectImplementJsType;
+
+//# sourceMappingURL=JsTypeObjectImplementJsType.js.map

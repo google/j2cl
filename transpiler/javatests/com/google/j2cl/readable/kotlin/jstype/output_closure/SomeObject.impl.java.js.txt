@@ -1,0 +1,79 @@
+goog.module('jstype.SomeObject$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class SomeObject extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SomeObject} */
+ static $create__() {
+  let $instance = new SomeObject();
+  $instance.$ctor__jstype_SomeObject__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_SomeObject__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {number} */
+ get publicField() {
+  return SomeObject.f_publicField__jstype_SomeObject_;
+ }
+ 
+ set publicField(/** number */ set__) {
+  SomeObject.f_publicField__jstype_SomeObject_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getPackageField__int() {
+  return SomeObject.f_packageField__jstype_SomeObject_;
+ }
+ /** @final @nodts */
+ m_setPackageField__int__void(/** number */ set__) {
+  SomeObject.f_packageField__jstype_SomeObject_ = set__;
+ }
+ /** @final */
+ publicMethod() {}
+ /** @final @nodts */
+ m_privateMethod__void_$p_jstype_SomeObject() {}
+ /** @final @nodts */
+ m_packageMethod__void() {}
+ /** @return {!SomeObject} */
+ static get INSTANCE() {
+  return (SomeObject.$clinit(), SomeObject.$static_INSTANCE__jstype_SomeObject);
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeObject.$clinit = () =>{};
+  SomeObject.$loadModules();
+  j_l_Object.$clinit();
+  SomeObject.$static_INSTANCE__jstype_SomeObject = SomeObject.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeObject;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!SomeObject} @nodts*/
+SomeObject.$static_INSTANCE__jstype_SomeObject;
+/**@type {number} @nodts*/
+SomeObject.f_publicField__jstype_SomeObject_ = 0;
+/**@type {number} @nodts*/
+SomeObject.f_privateField__jstype_SomeObject_ = 0;
+/**@type {number} @nodts*/
+SomeObject.f_packageField__jstype_SomeObject_ = 0;
+/**@const {number}*/
+SomeObject.publicConst = 0;
+$Util.$setClassMetadata(SomeObject, 'jstype.SomeObject');
+
+exports = SomeObject;
+
+//# sourceMappingURL=SomeObject.js.map

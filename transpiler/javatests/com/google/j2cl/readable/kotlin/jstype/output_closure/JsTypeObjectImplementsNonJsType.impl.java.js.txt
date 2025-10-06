@@ -1,0 +1,59 @@
+goog.module('jstype.JsTypeObjectImplementsNonJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const NonJsTypeInterface = goog.require('jstype.NonJsTypeInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {NonJsTypeInterface}
+ */
+class JsTypeObjectImplementsNonJsType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JsTypeObjectImplementsNonJsType} */
+ static $create__() {
+  let $instance = new JsTypeObjectImplementsNonJsType();
+  $instance.$ctor__jstype_JsTypeObjectImplementsNonJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_JsTypeObjectImplementsNonJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ 
+ foo() {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_foo__void() {
+  this.foo();
+ }
+ /** @return {!JsTypeObjectImplementsNonJsType} */
+ static get INSTANCE() {
+  return (JsTypeObjectImplementsNonJsType.$clinit(), JsTypeObjectImplementsNonJsType.$static_INSTANCE__jstype_JsTypeObjectImplementsNonJsType);
+ }
+ /** @nodts */
+ static $clinit() {
+  JsTypeObjectImplementsNonJsType.$clinit = () =>{};
+  JsTypeObjectImplementsNonJsType.$loadModules();
+  j_l_Object.$clinit();
+  JsTypeObjectImplementsNonJsType.$static_INSTANCE__jstype_JsTypeObjectImplementsNonJsType = JsTypeObjectImplementsNonJsType.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsTypeObjectImplementsNonJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!JsTypeObjectImplementsNonJsType} @nodts*/
+JsTypeObjectImplementsNonJsType.$static_INSTANCE__jstype_JsTypeObjectImplementsNonJsType;
+NonJsTypeInterface.$markImplementor(JsTypeObjectImplementsNonJsType);
+$Util.$setClassMetadata(JsTypeObjectImplementsNonJsType, 'jstype.JsTypeObjectImplementsNonJsType');
+
+exports = JsTypeObjectImplementsNonJsType;
+
+//# sourceMappingURL=JsTypeObjectImplementsNonJsType.js.map

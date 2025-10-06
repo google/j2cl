@@ -1,0 +1,56 @@
+goog.module('jstype.NonJsTypeObjectImplementsJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const JsTypeInterface = goog.require('jstype.JsTypeInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {JsTypeInterface}
+ */
+class NonJsTypeObjectImplementsJsType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NonJsTypeObjectImplementsJsType} */
+ static $create__() {
+  let $instance = new NonJsTypeObjectImplementsJsType();
+  $instance.$ctor__jstype_NonJsTypeObjectImplementsJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_NonJsTypeObjectImplementsJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override */
+ foo() {}
+ /** @override */
+ bar() {}
+ /** @nodts @return {!NonJsTypeObjectImplementsJsType} */
+ static get f_INSTANCE__jstype_NonJsTypeObjectImplementsJsType() {
+  return (NonJsTypeObjectImplementsJsType.$clinit(), NonJsTypeObjectImplementsJsType.$static_INSTANCE__jstype_NonJsTypeObjectImplementsJsType);
+ }
+ /** @nodts */
+ static $clinit() {
+  NonJsTypeObjectImplementsJsType.$clinit = () =>{};
+  NonJsTypeObjectImplementsJsType.$loadModules();
+  j_l_Object.$clinit();
+  NonJsTypeObjectImplementsJsType.$static_INSTANCE__jstype_NonJsTypeObjectImplementsJsType = NonJsTypeObjectImplementsJsType.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonJsTypeObjectImplementsJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!NonJsTypeObjectImplementsJsType} @nodts*/
+NonJsTypeObjectImplementsJsType.$static_INSTANCE__jstype_NonJsTypeObjectImplementsJsType;
+JsTypeInterface.$markImplementor(NonJsTypeObjectImplementsJsType);
+$Util.$setClassMetadata(NonJsTypeObjectImplementsJsType, 'jstype.NonJsTypeObjectImplementsJsType');
+
+exports = NonJsTypeObjectImplementsJsType;
+
+//# sourceMappingURL=NonJsTypeObjectImplementsJsType.js.map
