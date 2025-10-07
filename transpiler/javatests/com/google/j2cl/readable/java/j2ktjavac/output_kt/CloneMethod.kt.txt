@@ -19,6 +19,7 @@
 package j2ktjavac
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Int
 import kotlin.IntArray
 import kotlin.Suppress
@@ -27,11 +28,25 @@ import kotlin.intArrayOf
 open class CloneMethod {
  internal open fun test_pp_j2ktjavac() {
   val a: IntArray = intArrayOf(1, 2)
-  val b: IntArray = a.clone() as IntArray
+  val b: IntArray = a.clone()
   this.m_pp_j2ktjavac(
-   a.clone() as Int,
+   *a.clone(),
+  )
+  this.select_pp_j2ktjavac(
+   Supplier {
+    return@Supplier a.clone()
+   },
+   1,
   )
  }
 
  internal open fun m_pp_j2ktjavac(vararg a: Int) {}
+
+ internal open fun select_pp_j2ktjavac(arraySupplier: Supplier<IntArray>, slot: Int) {
+  val selected: Int = arraySupplier.get()[slot]
+ }
+
+ fun interface Supplier<T: Any> {
+  fun get(): T
+ }
 }

@@ -23,7 +23,16 @@ public class CloneMethod {
     int[] a = {1, 2};
     int[] b = a.clone();
     m(a.clone());
+    select(a::clone, 1);
   }
 
   void m(int... a) {}
+
+  interface Supplier<T> {
+    T get();
+  }
+
+  void select(Supplier<int[]> arraySupplier, int slot) {
+    var selected = arraySupplier.get()[slot];
+  }
 }

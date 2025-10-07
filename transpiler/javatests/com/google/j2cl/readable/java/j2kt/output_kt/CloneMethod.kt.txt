@@ -19,6 +19,7 @@
 package j2kt
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Int
 import kotlin.IntArray
 import kotlin.Suppress
@@ -31,7 +32,21 @@ open class CloneMethod {
   this.m_pp_j2kt(
    *a.clone(),
   )
+  this.select_pp_j2kt(
+   Supplier {
+    return@Supplier a.clone() as IntArray
+   },
+   1,
+  )
  }
 
  internal open fun m_pp_j2kt(vararg a: Int) {}
+
+ internal open fun select_pp_j2kt(arraySupplier: Supplier<IntArray>, slot: Int) {
+  val selected: Int = arraySupplier.get()[slot]
+ }
+
+ fun interface Supplier<T: Any> {
+  fun get(): T
+ }
 }

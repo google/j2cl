@@ -924,7 +924,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     var functionalMethodDescriptor =
         expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
 
-    if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")) {
+    if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")
+        && methodSymbol.isConstructor()) {
       // Arrays member references are seen as references to members on a class Array.
       // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing
       // type descriptor and the MethodDescriptor are created in the right context.
@@ -1173,6 +1174,21 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             /* methodType= */ methodType,
             /* declarationMethodElement= */ methodSymbol,
             typeArguments);
+
+    // Calls to clone() always return the type of the object it is called on but the method type
+    // does not reflect that. So it is fixed here.
+    if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")
+        && methodDescriptor.getSignature().equals("clone()")) {
+      // The return type of the method should be the same as the type of the invocation expression;
+      // but in the case of clone() on an array types, which is a synthetic method, these are not
+      // the same. clone() on array types returns always the same array type it was called on,
+      // but javac presents it just as returning java.lang.Object.
+      methodDescriptor =
+          MethodDescriptor.Builder.from(methodDescriptor)
+              .setReturnTypeDescriptor(
+                  environment.createTypeDescriptor(methodInvocation.type).toNonNullable())
+              .build();
+    }
 
     if (methodDescriptor.isConstructor()
         && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum)) {
