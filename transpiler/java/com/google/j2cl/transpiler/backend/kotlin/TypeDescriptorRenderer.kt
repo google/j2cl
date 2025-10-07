@@ -164,7 +164,7 @@ internal data class TypeDescriptorRenderer(
                 spaceSeparated(IN_KEYWORD, child.source(lowerBound))
               } else {
                 typeVariable.normalizedUpperBoundTypeDescriptor.let { upperBound ->
-                  if (upperBound.isImplicitUpperBound) {
+                  if (typeVariable.isUnbound || upperBound.isImplicitUpperBound) {
                     STAR_OPERATOR
                   } else {
                     spaceSeparated(OUT_KEYWORD, child.source(upperBound))
