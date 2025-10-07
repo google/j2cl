@@ -870,7 +870,9 @@ class JavaEnvironment {
         ((Symbol) declarationMethodElement).getRawTypeAttributes();
     for (TypeCompound methodAnnotation : methodAnnotations) {
       TypeAnnotationPosition position = methodAnnotation.getPosition();
-      if (!positionSelector.test(position)) {
+      if (!positionSelector.test(position)
+          // Skip annotations that are on a lambda in the body.
+          || position.onLambda != null) {
         continue;
       }
       if (isNonNullAnnotation(methodAnnotation)) {
