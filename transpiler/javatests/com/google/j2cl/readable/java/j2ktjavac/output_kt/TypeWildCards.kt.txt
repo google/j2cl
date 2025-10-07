@@ -27,13 +27,13 @@ open class TypeWildCards internal constructor() {
  open class WithDependentBounds internal constructor() {
   companion object {
    @JvmStatic
-   fun testSetField(holder: Holder<*, *>) {
-    (holder as Holder<Event, Collection<*>>).observer_pp_j2ktjavac = Observer { e: Collection<out Event> ->
+   fun testSetField(holder: Holder<*, out Collection<out Event>>) {
+    (holder as Holder<Event, Collection<out Event>>).observer_pp_j2ktjavac = Observer { e: Collection<out Event> ->
     }
    }
 
    @JvmStatic
-   fun testSetMethod(holder: Holder<*, *>) {
+   fun testSetMethod(holder: Holder<*, out Collection<out Event>>) {
     holder.set_pp_j2ktjavac(
      Observer { e: Collection<out Event> ->
      },
@@ -41,7 +41,7 @@ open class TypeWildCards internal constructor() {
    }
 
    @JvmStatic
-   fun testSetStaticMethod(holder: Holder<*, *>) {
+   fun testSetStaticMethod(holder: Holder<*, out Collection<out Event>>) {
     Holder.setStatic_pp_j2ktjavac(
      holder,
      Observer { e: Collection<out Event> ->
