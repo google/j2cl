@@ -59,6 +59,8 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
   public abstract DescriptorFactory<TypeDescriptor> getUpperBoundTypeDescriptorFactory();
 
+  public abstract boolean isUnbound();
+
   @Nullable
   abstract String getUniqueKey();
 
@@ -279,18 +281,23 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     return new AutoValue_TypeVariable.Builder()
         .setWildcard(false)
         .setCapture(false)
+        .setUnbound(false)
         .setNullabilityAnnotation(NullabilityAnnotation.NONE);
   }
 
   /** Creates a wildcard type variable with a specific upper bound. */
   public static TypeVariable createWildcardWithUpperBound(TypeDescriptor bound) {
     return createWildcard(
-        /* upperBound= */ bound, /* lowerBound= */ null, NullabilityAnnotation.NONE);
+        /* isUnbound= */ false,
+        /* upperBound= */ bound,
+        /* lowerBound= */ null,
+        NullabilityAnnotation.NONE);
   }
 
   /** Creates a wildcard type variable with a specific lower bound. */
   public static TypeVariable createWildcardWithLowerBound(TypeDescriptor bound) {
     return createWildcard(
+        /* isUnbound= */ false,
         /* upperBound= */ TypeDescriptors.get().javaLangObject,
         /* lowerBound= */ bound,
         NullabilityAnnotation.NONE);
@@ -298,10 +305,15 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
   /** Creates wildcard type variable with no bound. */
   public static TypeVariable createWildcard() {
-    return createWildcardWithUpperBound(TypeDescriptors.get().javaLangObject);
+    return createWildcard(
+        /* isUnbound= */ true,
+        TypeDescriptors.get().javaLangObject,
+        /* lowerBound= */ null,
+        NullabilityAnnotation.NONE);
   }
 
   private static TypeVariable createWildcard(
+      boolean isUnbound,
       TypeDescriptor upperBound,
       @Nullable TypeDescriptor lowerBound,
       NullabilityAnnotation nullabilityAnnotation) {
@@ -322,6 +334,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
         .setNullabilityAnnotation(nullabilityAnnotation)
         .setUpperBoundTypeDescriptorFactory(() -> upperBound)
         .setLowerBoundTypeDescriptor(lowerBound)
+        .setUnbound(isUnbound)
         // Create an unique key that does not conflict with the keys used for other types nor for
         // type variables coming from JDT, which follow "<declaring_type>:<name>...".
         // {@see org.eclipse.jdt.core.BindingKey}.
@@ -337,7 +350,10 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     }
 
     return createWildcard(
-        getUpperBoundTypeDescriptor(), getLowerBoundTypeDescriptor(), getNullabilityAnnotation());
+        /* isUnbound= */ false,
+        getUpperBoundTypeDescriptor(),
+        getLowerBoundTypeDescriptor(),
+        getNullabilityAnnotation());
   }
 
   /**
@@ -366,7 +382,8 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
       return this;
     }
 
-    return createWildcard(updatedUpperBound, updatedLowerBound, getNullabilityAnnotation());
+    return createWildcard(
+        /* isUnbound= */ false, updatedUpperBound, updatedLowerBound, getNullabilityAnnotation());
   }
 
   @Override
@@ -484,7 +501,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
     public abstract Builder setName(String name);
 
-    public abstract Builder setWildcard(boolean isCapture);
+    public abstract Builder setWildcard(boolean isWildcard);
+
+    public abstract Builder setUnbound(boolean isUnbound);
 
     public abstract Builder setCapture(boolean isCapture);
 

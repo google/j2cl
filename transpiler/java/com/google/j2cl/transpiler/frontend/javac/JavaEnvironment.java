@@ -413,12 +413,12 @@ class JavaEnvironment {
                 : null;
     TypeDescriptor lowerBound =
         createTypeDescriptor(wildcardType.getSuperBound(), inNullMarkedScope);
-    if (isUnboundWildcard(wildcardType)
+    boolean isUnboundWildcard = isUnboundWildcard(wildcardType);
+    if (isUnboundWildcard
         && declarationTypeVariable != null
         && !isNullOrJavaLangObject(declarationTypeVariable.getUpperBound())) {
       var typeVariable =
           createTypeVariable(declarationTypeVariable, ImmutableList.of(), inNullMarkedScope);
-      var unboundedWildcard = TypeVariable.createWildcard();
       upperBoundFactory =
           self -> {
             var upperBoundTypeDescriptor = typeVariable.getUpperBoundTypeDescriptor();
@@ -432,7 +432,7 @@ class JavaEnvironment {
                       // in mostly correct behavior avoiding stack overflows in all but a corner
                       // case.
                       if (typeVariable.toDeclaration() == tv) {
-                        return unboundedWildcard;
+                        return self;
                       }
 
                       if (typingContext.containsKey(tv)) {
@@ -449,6 +449,7 @@ class JavaEnvironment {
         .setUpperBoundTypeDescriptorFactory(upperBoundFactory)
         .setLowerBoundTypeDescriptor(lowerBound)
         .setWildcard(true)
+        .setUnbound(isUnboundWildcard)
         .setName("?")
         .setUniqueKey("#" + id + ":" + (inNullMarkedScope ? "+" : "-"))
         .build();
