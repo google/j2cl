@@ -401,7 +401,11 @@ public class WasmGenerationEnvironment {
   }
 
   boolean isCustomDescriptorsEnabled() {
-    return enableCustomDescriptors;
+    return enableCustomDescriptors || enableCustomDescriptorsJsInterop;
+  }
+
+  boolean isCustomDescriptorsJsInteropEnabled() {
+    return enableCustomDescriptorsJsInterop;
   }
 
   private final boolean isModular;
@@ -410,6 +414,7 @@ public class WasmGenerationEnvironment {
   private final ItableAllocator<TypeDeclaration> itableAllocator;
   private final String sourceMappingPathPrefix;
   private final boolean enableCustomDescriptors;
+  private final boolean enableCustomDescriptorsJsInterop;
 
   WasmGenerationEnvironment(Library library, Imports jsImports) {
     this(
@@ -417,6 +422,7 @@ public class WasmGenerationEnvironment {
         jsImports,
         /* sourceMappingPathPrefix= */ null,
         /* enableCustomDescriptors= */ false,
+        /* enableCustomDescriptorsJsInterop= */ false,
         /* isModular= */ false);
   }
 
@@ -425,11 +431,13 @@ public class WasmGenerationEnvironment {
       Imports jsImports,
       String sourceMappingPathPrefix,
       boolean enableCustomDescriptors,
+      boolean enableCustomDescriptorsJsInterop,
       boolean isModular) {
     this.isModular = isModular;
     this.library = library;
     this.sourceMappingPathPrefix = sourceMappingPathPrefix;
     this.enableCustomDescriptors = enableCustomDescriptors;
+    this.enableCustomDescriptorsJsInterop = enableCustomDescriptorsJsInterop;
 
     // Resolve variable names into unique wasm identifiers.
     library

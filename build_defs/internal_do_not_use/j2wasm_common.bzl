@@ -45,6 +45,8 @@ def _compile(
         internal_transpiler_flags = {}
         if feature_set == J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS:
             internal_transpiler_flags["experimentalEnableWasmCustomDescriptors"] = True
+        elif feature_set == J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP:
+            internal_transpiler_flags["experimentalEnableWasmCustomDescriptorsJsInterop"] = True
 
         return _compile_feature_set(
             ctx = ctx,
@@ -164,6 +166,7 @@ J2WASM_TOOLCHAIN_ATTRS.update({
 J2WASM_FEATURE_SET = struct(
     DEFAULT = "",
     CUSTOM_DESCRIPTORS = "custom_descriptors",
+    CUSTOM_DESCRIPTORS_JSINTEROP = "custom_descriptors_jsinterop",
 )
 
 J2WASM_FEATURE_SET_VALUES = structs.to_dict(J2WASM_FEATURE_SET).values()

@@ -54,17 +54,25 @@ public class WasmGeneratorStage {
   private final Path libraryInfoOutputPath;
   private final String sourceMappingPathPrefix;
   private final boolean enableCustomDescriptors;
+  private final boolean enableCustomDescriptorsJsInterop;
   private WasmGenerationEnvironment environment;
 
   /** Returns a generator stage that can emit code as strings. */
   public WasmGeneratorStage(Library library, Problems problems) {
-    this(null, null, null, false, problems);
+    this(
+        /* output= */ null,
+        /* libraryInfoOutputPath= */ null,
+        /* sourceMappingPathPrefix= */ null,
+        /* enableCustomDescriptors= */ false,
+        /* enableCustomDescriptorsJsInterop= */ false,
+        problems);
     this.environment =
         new WasmGenerationEnvironment(
             library,
             JsImportsGenerator.collectImports(library, problems),
             sourceMappingPathPrefix,
             enableCustomDescriptors,
+            enableCustomDescriptorsJsInterop,
             /* isModular= */ true);
   }
 
@@ -73,11 +81,13 @@ public class WasmGeneratorStage {
       Path libraryInfoOutputPath,
       String sourceMappingPathPrefix,
       boolean enableCustomDescriptors,
+      boolean enableCustomDescriptorsJsInterop,
       Problems problems) {
     this.output = output;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
     this.sourceMappingPathPrefix = sourceMappingPathPrefix;
     this.enableCustomDescriptors = enableCustomDescriptors;
+    this.enableCustomDescriptorsJsInterop = enableCustomDescriptorsJsInterop;
     this.problems = problems;
   }
 
@@ -91,12 +101,14 @@ public class WasmGeneratorStage {
       Path libraryInfoOutputPath,
       String sourceMappingPathPrefix,
       boolean enableCustomDescriptors,
+      boolean enableCustomDescriptorsJsInterop,
       Problems problems) {
     new WasmGeneratorStage(
             output,
             libraryInfoOutputPath,
             sourceMappingPathPrefix,
             enableCustomDescriptors,
+            enableCustomDescriptorsJsInterop,
             problems)
         .generateModularOutput(library);
   }
@@ -113,6 +125,7 @@ public class WasmGeneratorStage {
             jsImports,
             sourceMappingPathPrefix,
             enableCustomDescriptors,
+            enableCustomDescriptorsJsInterop,
             /* isModular= */ true);
     problems.abortIfCancelled();
 
@@ -215,12 +228,14 @@ public class WasmGeneratorStage {
       Path libraryInfoOutputPath,
       String sourceMappingPathPrefix,
       boolean enableCustomDescriptors,
+      boolean enableCustomDescriptorsJsInterop,
       Problems problems) {
     new WasmGeneratorStage(
             output,
             libraryInfoOutputPath,
             sourceMappingPathPrefix,
             enableCustomDescriptors,
+            enableCustomDescriptorsJsInterop,
             problems)
         .generateMonolithicOutput(library);
   }
@@ -286,6 +301,7 @@ public class WasmGeneratorStage {
             /* libraryInfoOutputPath= */ null,
             /* sourceMappingPathPrefix= */ null,
             /* enableCustomDescriptors= */ false,
+            /* enableCustomDescriptorsJsInterop= */ false,
             problems);
     wasmGeneratorStage.generateWasmExportMethods(methods);
 

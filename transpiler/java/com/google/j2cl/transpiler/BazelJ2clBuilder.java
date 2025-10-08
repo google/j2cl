@@ -150,6 +150,14 @@ final class BazelJ2clBuilder extends BazelWorker {
       hidden = true)
   boolean enableWasmCustomDescriptors = false;
 
+  @Option(
+      name = "-experimentalEnableWasmCustomDescriptorsJsInterop",
+      usage =
+          "Enables JsInterop with custom descriptors for Wasm. Setting this also enables general"
+              + " custom descriptors functionality.",
+      hidden = true)
+  boolean enableWasmCustomDescriptorsJsInterop = false;
+
   @Option(name = "-forbiddenAnnotation", hidden = true)
   List<String> forbiddenAnnotations = new ArrayList<>();
 
@@ -243,6 +251,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setBackend(this.backend)
         .setWasmEntryPointStrings(this.wasmEntryPoints)
         .setEnableWasmCustomDescriptors(this.enableWasmCustomDescriptors)
+        .setEnableWasmCustomDescriptorsJsInterop(this.enableWasmCustomDescriptorsJsInterop)
         .setDefinesForWasm(definesForWasm)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setJavacOptions(javacOptions)

@@ -192,7 +192,10 @@ def _impl_j2wasm_application(ctx):
         args.add("--enable-bulk-memory")
         args.add("--closed-world")
         args.add("--traps-never-happen")
-        if feature_set == J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS:
+        if feature_set in [
+            J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS,
+            J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP,
+        ]:
             args.add("--enable-custom-descriptors")
         args.add_all(stage_args)
 

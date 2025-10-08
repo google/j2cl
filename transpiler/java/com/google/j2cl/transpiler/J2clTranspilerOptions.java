@@ -46,7 +46,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
         .setSystem("")
         .setOptimizeAutoValue(false)
         .setNullMarkedSupported(false)
-        .setEnableWasmCustomDescriptors(false);
+        .setEnableWasmCustomDescriptors(false)
+        .setEnableWasmCustomDescriptorsJsInterop(false);
   }
 
   @Override
@@ -100,6 +101,9 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
     public abstract Builder setDefinesForWasm(Map<String, String> definesForWasm);
 
     public abstract Builder setEnableWasmCustomDescriptors(boolean enableWasmCustomDescriptors);
+
+    public abstract Builder setEnableWasmCustomDescriptorsJsInterop(
+        boolean enableWasmCustomDescriptorsJsInterop);
 
     public abstract Builder setNullMarkedSupported(boolean isNullMarkedSupported);
 

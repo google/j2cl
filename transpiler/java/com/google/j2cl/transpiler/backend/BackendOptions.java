@@ -40,6 +40,8 @@ public interface BackendOptions {
 
   boolean getEnableWasmCustomDescriptors();
 
+  boolean getEnableWasmCustomDescriptorsJsInterop();
+
   boolean getOptimizeAutoValue();
 
   boolean getEmitReadableLibraryInfo();
