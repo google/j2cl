@@ -3,12 +3,10 @@ goog.module('xplatforeach.ForEachStatementsKt$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Overlay = goog.forwardDeclare('com.google.gwt.corp.collections.JsArray.$Overlay$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $Enums_BoxedLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedLightEnum$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -163,10 +161,11 @@ class ForEachStatementsKt extends j_l_Object {
  /** @nodts */
  static m_withoutBlock__com_google_gwt_corp_collections_JsArray__com_google_apps_docs_xplat_collections_SerializedJsMap__void(/** !Array<!Throwable> */ array, /** !Object */ map) {
   ForEachStatementsKt.$clinit();
-  let iterator = $Overlay.m_getIterable__$devirt__com_google_gwt_corp_collections_JsArray__java_lang_Iterable(array).m_iterator__java_util_Iterator();
-  while (iterator.m_hasNext__boolean()) {
-   let element = /**@type {!Throwable}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {?}*/ ($Casts.$to(iterator.m_next__java_lang_Object(), Throwable))));
-   $Objects.m_toString__java_lang_Object__java_lang_String(element);
+  for (let $array = /**@type {Array<?>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = /**@type {!Throwable}*/ ($array[$index]);
+   {
+    $Objects.m_toString__java_lang_Object__java_lang_String(element);
+   }
   }
   for(let /** string */ key in map) {
    InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(j_l_String.m_substring__java_lang_String__int__java_lang_String(/**@type {string}*/ (key), 1));
@@ -185,12 +184,9 @@ class ForEachStatementsKt extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  $Overlay = goog.module.get('com.google.gwt.corp.collections.JsArray.$Overlay$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
-  Throwable = goog.module.get('java.lang.Throwable$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
   SomeJsEnum_$Overlay = goog.module.get('xplatforeach.SomeJsEnum.$Overlay$impl');

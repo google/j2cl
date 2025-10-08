@@ -67,13 +67,9 @@ class ForStatement extends j_l_Object {
   }
   for (let inductionVariable_5 = 0; inductionVariable_5 <= 10; inductionVariable_5 = inductionVariable_5 + 1 | 0) {
    let i_4 = inductionVariable_5;
-   let inductionVariable_6 = 0;
-   if (inductionVariable_6 < 10) {
-    do {
-     let j = inductionVariable_6;
-     inductionVariable_6 = inductionVariable_6 + 1 | 0;
-     count = i_4 + j | 0;
-    } while (inductionVariable_6 < 10);
+   for (let inductionVariable_6 = 0; inductionVariable_6 < 10; inductionVariable_6 = inductionVariable_6 + 1 | 0) {
+    let j = inductionVariable_6;
+    count = i_4 + j | 0;
    }
   }
  }

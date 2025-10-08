@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
 import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
+import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
@@ -190,14 +191,7 @@ private class LoopTransformer(
           this.condition = condition
           this.initializers = initializers
           updates = mutableListOf(inductionVariableUpdate)
-          body =
-            IrCompositeImpl(
-              innerLoopBody.originalLoopBody.startOffset,
-              innerLoopBody.originalLoopBody.endOffset,
-              innerLoopBody.originalLoopBody.type,
-              innerLoopBody.originalLoopBody.origin,
-              innerLoopBody.loopVariablesDefinitions + innerLoopBody.originalLoopBody.statements,
-            )
+          body = innerLoopBody.createForLoopBody()
         }
       }
 
@@ -242,14 +236,7 @@ private class LoopTransformer(
         condition = iterableExpression,
       )
       .apply {
-        body =
-          IrCompositeImpl(
-            innerLoopBody.originalLoopBody.startOffset,
-            innerLoopBody.originalLoopBody.endOffset,
-            innerLoopBody.originalLoopBody.type,
-            innerLoopBody.originalLoopBody.origin,
-            innerLoopBody.loopVariablesDefinitions + innerLoopBody.originalLoopBody.statements,
-          )
+        body = innerLoopBody.createForLoopBody()
         label = oldLoop.label
       }
   }
@@ -342,8 +329,17 @@ private class LoopTransformer(
   private data class InnerLoopBody(
     val loopVariablesDefinitions: MutableList<IrVariable>,
     val inductionVariableUpdate: IrSetValue?,
-    val originalLoopBody: IrContainerExpression,
+    val originalLoopBody: IrStatement,
   )
+
+  private fun InnerLoopBody.createForLoopBody() =
+    IrCompositeImpl(
+      originalLoopBody.startOffset,
+      originalLoopBody.endOffset,
+      context.irBuiltIns.unitType,
+      null,
+      loopVariablesDefinitions + listOf(originalLoopBody),
+    )
 
   private fun extractAndSplitInnerLoopBody(enclosingBlock: IrBlock): InnerLoopBody? {
     val innerLoopBody = getInnerLoop(enclosingBlock).body as IrContainerExpression
@@ -383,9 +379,7 @@ private class LoopTransformer(
       }
     }
 
-    val originalLoopBody = statements.last() as? IrContainerExpression ?: return null
-
-    return InnerLoopBody(loopVariablesDefinitions, inductionVariableUpdate, originalLoopBody)
+    return InnerLoopBody(loopVariablesDefinitions, inductionVariableUpdate, statements.last())
   }
 
   private fun getInnerLoop(enclosingBlock: IrBlock): IrLoop {
