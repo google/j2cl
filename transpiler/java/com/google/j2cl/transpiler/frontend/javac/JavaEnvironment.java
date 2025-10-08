@@ -278,7 +278,7 @@ class JavaEnvironment {
     }
 
     if (typeMirror.getKind() == TypeKind.INTERSECTION) {
-      return createIntersectionType((IntersectionClassType) typeMirror);
+      return createIntersectionType((IntersectionClassType) typeMirror, inNullMarkedScope);
     }
 
     if (typeMirror.getKind() == TypeKind.UNION) {
@@ -1137,10 +1137,11 @@ class JavaEnvironment {
     return elements.getPackageOf(element);
   }
 
-  private TypeDescriptor createIntersectionType(IntersectionClassType intersectionType) {
+  private TypeDescriptor createIntersectionType(
+      IntersectionClassType intersectionType, boolean inNullMarkedScope) {
     ImmutableList<TypeDescriptor> intersectedTypeDescriptors =
         createTypeDescriptors(
-            intersectionType.getBounds(), /* inNullMarkedScope= */ false, TypeDescriptor.class);
+            intersectionType.getBounds(), inNullMarkedScope, TypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
         .build();
