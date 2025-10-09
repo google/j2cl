@@ -19,11 +19,28 @@
 package j2ktjavac
 
 import javaemul.lang.*
+import kotlin.Any
+import kotlin.Array
 import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
 open class TypeWildCards internal constructor() {
+ internal open fun <T: Any> consume_pp_j2ktjavac(vararg t: T) {
+  val t_1: Array<T> = t as Array<T>
+ }
+
+ internal open fun testIncosistentBounds_pp_j2ktjavac() {
+  this.consume_pp_j2ktjavac<WithInTypeParameter<out WithInTypeParameter<*>>>(
+   A(),
+   B(),
+  )
+  this.consume_pp_j2ktjavac<WithInTypeParameter<out WithInTypeParameter<*>>>(
+   A(),
+   B(),
+  )
+ }
+
  open class WithDependentBounds internal constructor() {
   companion object {
    @JvmStatic
@@ -70,4 +87,10 @@ open class TypeWildCards internal constructor() {
    }
   }
  }
+
+ interface WithInTypeParameter<in T: Any>
+
+ open inner class A internal constructor(): WithInTypeParameter<TypeWildCards.A>
+
+ open inner class B internal constructor(): WithInTypeParameter<TypeWildCards.B>
 }

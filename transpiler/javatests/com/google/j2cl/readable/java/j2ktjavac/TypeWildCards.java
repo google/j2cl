@@ -15,6 +15,7 @@
  */
 package j2ktjavac;
 
+import javaemul.internal.annotations.KtIn;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -49,5 +50,24 @@ class TypeWildCards {
     public static void testSetStaticMethod(Holder<?, ?> holder) {
       Holder.setStatic(holder, e -> {});
     }
+  }
+
+  interface WithInTypeParameter<@KtIn T> {}
+
+  class A implements WithInTypeParameter<A> {}
+
+  class B implements WithInTypeParameter<B> {}
+
+  <T> void consume(T... t) {}
+
+  /**
+   * A @KtIn type parameter cannot take wildcards with upper bounds; however the frontend my infer a
+   * type for a @KtIn type parameter that has upper bounds because it is the more precise supertype.
+   */
+  void testIncosistentBounds() {
+
+    // The frontend might infer WithInTypeParameter<? extends WithInTypeParameter<?>>
+    consume(new A(), new B());
+    this.<WithInTypeParameter<? extends WithInTypeParameter<?>>>consume(new A(), new B());
   }
 }
