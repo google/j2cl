@@ -31,11 +31,11 @@ open class TypeWildCards internal constructor() {
  }
 
  internal open fun testIncosistentBounds_pp_j2ktjavac() {
-  this.consume_pp_j2ktjavac<WithInTypeParameter<out WithInTypeParameter<*>>>(
+  this.consume_pp_j2ktjavac<WithInTypeParameter<*>>(
    A(),
    B(),
   )
-  this.consume_pp_j2ktjavac<WithInTypeParameter<out WithInTypeParameter<*>>>(
+  this.consume_pp_j2ktjavac<WithInTypeParameter<*>>(
    A(),
    B(),
   )
