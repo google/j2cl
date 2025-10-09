@@ -16,23 +16,29 @@ class $1 extends j_l_Object {
   this.$outer_this__inlinefunction_ClassWithInlineFun_1;
   /**@type {!ClassWithInlineFun} @nodts*/
   this.f_this$0__inlinefunction_ClassWithInlineFun_1_;
+  /**@type {number} @nodts*/
+  this.f_$capture__inlinefunction_ClassWithInlineFun_1_ = 0;
+  /**@type {number} @nodts*/
+  this.f_$captureParam__inlinefunction_ClassWithInlineFun_1_ = 0;
  }
  /** @nodts @return {!$1} */
- static $create__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun(/** !ClassWithInlineFun */ $outer_this, /** !ClassWithInlineFun */ this$0) {
+ static $create__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun__int__int(/** !ClassWithInlineFun */ $outer_this, /** !ClassWithInlineFun */ this$0, /** number */ $capture, /** number */ $captureParam) {
   $1.$clinit();
   let $instance = new $1();
-  $instance.$ctor__inlinefunction_ClassWithInlineFun_1__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun__void($outer_this, this$0);
+  $instance.$ctor__inlinefunction_ClassWithInlineFun_1__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun__int__int__void($outer_this, this$0, $capture, $captureParam);
   return $instance;
  }
  /** @nodts */
- $ctor__inlinefunction_ClassWithInlineFun_1__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun__void(/** !ClassWithInlineFun */ $outer_this, /** !ClassWithInlineFun */ this$0) {
+ $ctor__inlinefunction_ClassWithInlineFun_1__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun__int__int__void(/** !ClassWithInlineFun */ $outer_this, /** !ClassWithInlineFun */ this$0, /** number */ $capture, /** number */ $captureParam) {
   this.$outer_this__inlinefunction_ClassWithInlineFun_1 = $outer_this;
   this.f_this$0__inlinefunction_ClassWithInlineFun_1_ = this$0;
+  this.f_$capture__inlinefunction_ClassWithInlineFun_1_ = $capture;
+  this.f_$captureParam__inlinefunction_ClassWithInlineFun_1_ = $captureParam;
   this.$ctor__java_lang_Object__void();
  }
  /** @final @nodts @return {number} */
  m_compute__int() {
-  return Math.imul(this.f_this$0__inlinefunction_ClassWithInlineFun_1_.m_getE__int(), 2);
+  return Math.imul(this.f_this$0__inlinefunction_ClassWithInlineFun_1_.m_getE__int() + this.f_$capture__inlinefunction_ClassWithInlineFun_1_ + this.f_$captureParam__inlinefunction_ClassWithInlineFun_1_, 2);
  }
  /** @nodts */
  static $clinit() {

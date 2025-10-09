@@ -171,6 +171,17 @@ fun testReifiedParameter() {
   assertEquals(3, someInt)
 }
 
+private inline fun inlineFunWithAnonymousObject(captureParam: Int): Int {
+  val capture = 5
+  val delegate =
+    object {
+      fun compute(): Int {
+        return (capture + captureParam) * 2
+      }
+    }
+  return delegate.compute()
+}
+
 private fun testInliningWithLocalClass() {
   val a =
     topLevelInlineFunction(MyClass(2)) {
@@ -181,6 +192,9 @@ private fun testInliningWithLocalClass() {
     }
 
   assertTrue(a == 4)
+
+  val b = inlineFunWithAnonymousObject(5)
+  assertTrue(b == 20)
 }
 
 private fun testCrossModuleInlining() {

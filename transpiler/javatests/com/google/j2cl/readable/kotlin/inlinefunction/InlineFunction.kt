@@ -41,11 +41,12 @@ class ClassWithInlineFun(var e: Int) {
     return sum
   }
 
-  inline fun inlineFunWithAnonymousObject(): Int {
+  inline fun inlineFunWithAnonymousObject(captureParam: Int): Int {
+    val capture = 5
     val delegate =
       object {
         fun compute(): Int {
-          return e * 2
+          return (e + capture + captureParam) * 2
         }
       }
     return delegate.compute()
@@ -78,7 +79,7 @@ inline fun MyClass.extensionInlineFunctionNoReturn(action: (Int) -> Int) {
 fun testInlining() {
   val a = topLevelInlineFunction(MyClass(2)) { it * 2 }
   val b = ClassWithInlineFun(5).inlineFun { it * 3 }
-  val c = ClassWithInlineFun(5).inlineFunWithAnonymousObject()
+  val c = ClassWithInlineFun(5).inlineFunWithAnonymousObject(5)
   val d = ClassWithInlineFun(5).inlineFunWithAnonymousObjectAndTypeParam(5)
   val e = MyClass(5).extensionInlineFunction { it * 4 }
   MyClass(5).extensionInlineFunctionNoReturn { it * 5 }
