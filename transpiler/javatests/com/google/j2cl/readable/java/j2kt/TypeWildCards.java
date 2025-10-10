@@ -167,4 +167,15 @@ class TypeWildCards {
       Holder.setStatic(holder, e -> {});
     }
   }
+
+  static class Outer<T, V> {
+    interface ParameterizedInterface<T extends @Nullable Object, V extends @Nullable Object> {}
+
+    class Inner {
+      void testNullabilityOnWildcardBounds(
+          ParameterizedInterface<? super @Nullable T, ? extends @Nullable V> p) {
+        testNullabilityOnWildcardBounds(p);
+      }
+    }
+  }
 }

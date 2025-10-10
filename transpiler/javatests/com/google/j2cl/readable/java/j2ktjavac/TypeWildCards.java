@@ -70,4 +70,16 @@ class TypeWildCards {
     consume(new A(), new B());
     this.<WithInTypeParameter<? extends WithInTypeParameter<?>>>consume(new A(), new B());
   }
+
+  // repro for b/450914940
+  static class Outer<T, V> {
+    interface ParameterizedInterface<T extends @Nullable Object, V extends @Nullable Object> {}
+
+    class Inner {
+      void testNullabilityOnWildcardBounds(
+          ParameterizedInterface<? super @Nullable T, ? extends @Nullable V> p) {
+        testNullabilityOnWildcardBounds(p);
+      }
+    }
+  }
 }

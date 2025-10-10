@@ -245,4 +245,14 @@ open class TypeWildCards internal constructor() {
    }
   }
  }
+
+ open class Outer<T: Any, V: Any> internal constructor() {
+  interface ParameterizedInterface<T, V>
+
+  open inner class Inner internal constructor() {
+   internal open fun testNullabilityOnWildcardBounds_pp_j2kt(p: ParameterizedInterface<in T?, out V?>) {
+    this.testNullabilityOnWildcardBounds_pp_j2kt(p)
+   }
+  }
+ }
 }

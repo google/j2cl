@@ -93,4 +93,16 @@ open class TypeWildCards internal constructor() {
  open inner class A internal constructor(): WithInTypeParameter<TypeWildCards.A>
 
  open inner class B internal constructor(): WithInTypeParameter<TypeWildCards.B>
+
+ open class Outer<T: Any, V: Any> internal constructor() {
+  interface ParameterizedInterface<T, V>
+
+  open inner class Inner internal constructor() {
+   internal open fun testNullabilityOnWildcardBounds_pp_j2ktjavac(p: ParameterizedInterface<in T?, out V?>) {
+    this.testNullabilityOnWildcardBounds_pp_j2ktjavac(
+     p as ParameterizedInterface<in T, out V>,
+    )
+   }
+  }
+ }
 }
