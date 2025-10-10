@@ -13,11 +13,11 @@ package(
 custom_browser(
     name = "chrome-wasm-linux",
     browser = "@rules_webtesting//browsers:chromium-local",
-    metadata = "chrome_linux_enable_wasmgc.json",
+    metadata = "chrome_linux_enable_wasm_experiments.json",
 )
 
 custom_browser(
     name = "chrome-wasm-dev-linux",
     browser = "@rules_webtesting//browsers:chromium-local",
-    metadata = "chrome_linux_enable_wasmgc.json",
+    metadata = "chrome_linux_enable_wasm_experiments.json",
 )
