@@ -28,7 +28,8 @@ def _compile(
     jvm_srcs, js_srcs = split_srcs(srcs)
 
     has_srcs_to_transpile = (jvm_srcs or kt_common_srcs)
-    has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"]) or kt_common_srcs
+    kt_srcs = [src for src in jvm_srcs if src.extension == "kt"]
+    has_kotlin_srcs = kt_srcs or kt_common_srcs
 
     # Validate the attributes.
     if not has_srcs_to_transpile:
@@ -91,6 +92,7 @@ def _compile(
             output_library_info,
             backend,
             internal_transpiler_flags,
+            kt_srcs,
             kt_common_srcs,
             javac_opts,
             # Forcefully enable IR serialization. J2CL only needs this to have
@@ -264,6 +266,50 @@ def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotat
 
     return output_file
 
+def _package_kt_stdlib(ctx, kt_common_srcs, kt_srcs):
+    srcjar = ctx.actions.declare_file(ctx.label.name + "-src.jar")
+
+    args = ctx.actions.args()
+    args.add_joined(kt_common_srcs, join_with = ",")
+    args.add_joined(kt_srcs, join_with = ",")
+
+    ctx.actions.run_shell(
+        inputs = kt_srcs + kt_common_srcs,
+        outputs = [srcjar],
+        arguments = [args],
+        command = """
+set -e -o pipefail
+
+IFS="," read -ra common_srcs <<< "$1"
+IFS="," read -ra srcs <<< "$2"
+
+# A collection of strings of the form: "jarFilePath=inputFilePath"
+declare -a mapping
+
+for src in "${{common_srcs[@]}}"; do
+  # Important: ensure the jar file path always starts with common-srcs/ so that
+  # the Kotlin frontend appropriately marks them as common sources.
+  mapping+=("common-srcs/${{src#*/commonMain/}}=${{src}}")
+done
+
+for src in "${{srcs[@]}}"; do
+  # Normalize the file paths a bit to try to make them relative to stdlib src
+  # directory. This isn't mandatory.
+  normalized_src="${{src#*/j2cl/ktstdlib/src/}}"
+  normalized_src="${{normalized_src#*/jvmMain/}}"
+  mapping+=("$normalized_src=$src")
+done
+
+{zip} c {output_srcjar} "${{mapping[@]}}"
+        """.format(
+            output_srcjar = srcjar.path,
+            zip = ctx.executable._zip.path,
+        ),
+        tools = [ctx.executable._zip],
+        mnemonic = "J2clKtStdlibSrcs",
+    )
+    return srcjar
+
 def _j2cl_transpile(
         ctx,
         jvm_provider,
@@ -274,14 +320,20 @@ def _j2cl_transpile(
         library_info_output,
         backend,
         internal_transpiler_flags,
+        kt_srcs,
         kt_common_srcs,
         javac_opts,
         kotlincopts):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
-
-    # Using source_jars from the jvm compilation since that includes APT generated src.
-    # In the Kotlin case, source_jars also include the common sources.
-    srcs = jvm_provider.source_jars + js_srcs
+    if "-Xstdlib-compilation" in kotlincopts:
+        # The stdlib compilation is sensitive to the naming of inputs so we
+        # avoid using the srcjar emitted by the Kotlin/JVM compilation and
+        # instead just package it ourselves.
+        srcs = [_package_kt_stdlib(ctx, kt_common_srcs, kt_srcs)] + js_srcs
+    else:
+        # Using source_jars from the jvm compilation since that includes APT generated src.
+        # In the Kotlin case, source_jars also include the common sources.
+        srcs = jvm_provider.source_jars + js_srcs
 
     bootclasspath = get_bootclasspath(ctx)
     direct_deps = depset(transitive = [bootclasspath] + [d.compile_jars for d in jvm_deps])
@@ -351,10 +403,7 @@ def _j2cl_transpile(
     output_type = "JavaScript" if backend == "CLOSURE" else "Wasm (Modular)"
     ctx.actions.run(
         progress_message = "Transpiling to %s %s" % (output_type, ctx.label),
-        # kt_common_srcs are not read by the transpiler as they are already
-        # included in the srcjars of srcs. However, params.add_all requires them
-        # to be inputs in order to be properly expanded out into params.
-        inputs = depset(srcs + kt_common_srcs + jdk_system, transitive = [classpath]),
+        inputs = depset(srcs + jdk_system, transitive = [classpath]),
         outputs = outputs,
         executable = ctx.executable._j2cl_transpiler,
         arguments = [args],
