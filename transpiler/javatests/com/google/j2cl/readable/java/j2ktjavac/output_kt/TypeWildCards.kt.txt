@@ -99,9 +99,7 @@ open class TypeWildCards internal constructor() {
 
   open inner class Inner internal constructor() {
    internal open fun testNullabilityOnWildcardBounds_pp_j2ktjavac(p: ParameterizedInterface<in T?, out V?>) {
-    this.testNullabilityOnWildcardBounds_pp_j2ktjavac(
-     p as ParameterizedInterface<in T, out V>,
-    )
+    this.testNullabilityOnWildcardBounds_pp_j2ktjavac(p)
    }
   }
  }

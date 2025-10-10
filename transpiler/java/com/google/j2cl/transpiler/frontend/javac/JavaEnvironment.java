@@ -507,8 +507,7 @@ class JavaEnvironment {
         typeVariable, w -> typeVariableIdByTypeVariable.size());
   }
 
-  private static DeclaredTypeDescriptor withNullability(
-      DeclaredTypeDescriptor typeDescriptor, boolean nullable) {
+  private static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
     return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
   }
 
@@ -914,7 +913,7 @@ class JavaEnvironment {
   private static TypeDescriptor applyNullabilityAnnotation(
       TypeDescriptor typeDescriptor, List<TypePathEntry> location, boolean isNullable) {
     if (location.isEmpty()) {
-      return isNullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
+      return withNullability(typeDescriptor, isNullable);
     }
     TypePathEntry currentEntry = location.get(0);
     List<TypePathEntry> rest = location.subList(1, location.size());
@@ -951,7 +950,13 @@ class JavaEnvironment {
         return applyNullabilityAnnotation(
             typeDescriptor, rest.subList(innerCount - 1, rest.size()), isNullable);
       case WILDCARD:
-        // no need fix up wildcards.
+        // TODO(b/450914940): Have a more principled approach for applying nullability annotations
+        // from declarations to inferred types.
+        if (rest.isEmpty()) {
+          // Only apply the annotation that is on the bound to the wildcard to work around the
+          // issue.
+          return withNullability(typeDescriptor, isNullable);
+        }
     }
     return typeDescriptor;
   }
