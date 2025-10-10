@@ -15,7 +15,6 @@ package com.google.j2cl.tools.minifier;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.Iterables.getLast;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.VisibleForTesting;
@@ -684,7 +683,7 @@ public class J2clMinifier {
   public static void main(String... args) throws IOException {
     checkState(args.length == 1, "Provide a input file to minify");
     String file = args[0];
-    String contents = new String(Files.readAllBytes(Paths.get(file)), UTF_8);
+    String contents = Files.readString(Paths.get(file));
     System.out.println(new J2clMinifier().minify(file, contents));
   }
 }
