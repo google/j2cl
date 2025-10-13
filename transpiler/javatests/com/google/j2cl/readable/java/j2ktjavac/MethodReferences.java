@@ -52,4 +52,14 @@ public class MethodReferences {
       BiConsumer<A, B> biConsumer) {
     throw new RuntimeException();
   }
+
+  static class Container<V extends @Nullable Object> {
+    public void apply(Consumer<V> callback) {}
+  }
+
+  static void testMemberReferenceParameterNullabilty() {
+    Consumer<Container<Object>> consumerFn = null;
+    Container<Container<Object>> container = null;
+    container.apply(consumerFn::accept);
+  }
 }

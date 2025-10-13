@@ -20,6 +20,7 @@ package j2ktjavac
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import kotlin.Any
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
@@ -47,6 +48,19 @@ open class MethodReferences {
   fun <A, B> apply(biConsumer: BiConsumer<A, B>): BiConsumer<A, B> {
    throw RuntimeException()
   }
+
+  @JvmStatic
+  internal fun testMemberReferenceParameterNullabilty_pp_j2ktjavac() {
+   val consumerFn: Consumer<Container<Any>>? = null
+   val container: Container<Container<Any>>? = null
+   container!!.apply(
+    Consumer { arg0: Container<Any> ->
+     consumerFn!!.accept(
+      arg0 as Container<Any?>?,
+     )
+    },
+   )
+  }
  }
 
  fun interface Consumer<A> {
@@ -55,5 +69,9 @@ open class MethodReferences {
 
  fun interface BiConsumer<A, B> {
   fun accept(a: A, b: B)
+ }
+
+ open class Container<V> internal constructor() {
+  open fun apply(callback: Consumer<V>) {}
  }
 }
