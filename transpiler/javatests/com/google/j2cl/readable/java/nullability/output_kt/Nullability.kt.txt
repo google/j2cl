@@ -84,6 +84,8 @@ open class Nullability {
 
  open fun m4(f: MyFunction) {}
 
+ internal open fun testNonNullOnType_pp_nullability(unannotated: NonNullInterface, annotatedNonNull: NonNullInterface, annotatedNullable: NonNullInterface?) {}
+
  companion object {
   @JvmStatic
   internal fun <T: String?> testDefaultNullabilityBounds_pp_nullability(defaultNullability: ParameterizedDefaultNullability<T>?) {
@@ -284,6 +286,8 @@ open class Nullability {
    }
   }
  }
+
+ interface NonNullInterface
 }
 
 interface Marker

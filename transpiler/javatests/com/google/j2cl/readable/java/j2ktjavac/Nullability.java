@@ -16,13 +16,27 @@
 package j2ktjavac;
 
 import java.util.function.Consumer;
+import jsinterop.annotations.JsNonNull;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-@NullMarked
 public class Nullability {
-  // Repro for b/450049434
-  void test(String s) {
-    Consumer<?> c = (@Nullable String ss) -> {};
+  @NullMarked
+  class NullMarkedClass {
+
+    // Repro for b/450049434
+    void test(String s) {
+      Consumer<?> c = (@Nullable String ss) -> {};
+    }
   }
+
+  // TODO(b/451682710): Remove this when it becomes a compile error.
+  @JsNonNull
+  interface NonNullInterface {}
+
+  void testNonNullOnType(
+      NonNullInterface unannotated,
+      @NonNull NonNullInterface annotatedNonNull,
+      @Nullable NonNullInterface annotatedNullable) {}
 }

@@ -1,0 +1,31 @@
+goog.module('nullability.Nullability.NonNullInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class NonNullInterface {
+ /** @nodts */
+ static $clinit() {
+  NonNullInterface.$clinit = () =>{};
+  NonNullInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nullability_Nullability_NonNullInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nullability_Nullability_NonNullInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+NonNullInterface.$markImplementor(/**@type {Function}*/ (NonNullInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (NonNullInterface), 'nullability.Nullability$NonNullInterface');
+
+exports = NonNullInterface;
+
+//# sourceMappingURL=Nullability$NonNullInterface.js.map

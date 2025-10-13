@@ -15,6 +15,11 @@
  ))
 )
 
+;;; Code for nullability.Nullability.NonNullInterface [type definition]
+(type $nullability.Nullability.NonNullInterface.vtable (sub (struct
+ ))
+)
+
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface [type definition]
 (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable (sub (struct
  (field $m_add__java_lang_Object__java_lang_Object (ref $function.m_add__java_lang_Object__java_lang_Object))
@@ -135,6 +140,7 @@
  (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
  (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String))
  (field $m_m4__nullability_Nullability_MyFunction__void (ref $function.m_m4__nullability_Nullability_MyFunction__void))
+ (field $m_testNonNullOnType__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__void_$pp_nullability (ref $function.m_testNonNullOnType__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__void_$pp_nullability))
  ))
 )
 
@@ -1346,6 +1352,8 @@
 
 ;;; Code for nullability.Nullability.NullableTemplatedReturn [imports]
 
+;;; Code for nullability.Nullability.NonNullInterface [imports]
+
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface [imports]
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBound [imports]
@@ -1703,6 +1711,14 @@
  (i32.const 0)
 )
 (global $$class@nullability.Nullability.WithNullableParameterInConstructor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for nullability.Nullability.NonNullInterface [static fields]
+(global $$class-initialized@nullability.Nullability.NonNullInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@nullability.Nullability.NonNullInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -2261,6 +2277,7 @@
   (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.Nullability)
   (ref.func $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String@nullability.Nullability)
   (ref.func $m_m4__nullability_Nullability_MyFunction__void@nullability.Nullability)
+  (ref.func $m_testNonNullOnType__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__void_$pp_nullability@nullability.Nullability)
  )
 )
 
@@ -2957,16 +2974,16 @@
 
 ;;; void Marker.$clinit()
 (func $$clinit__void_<once>_@nullability.Marker
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:276:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:285:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:276:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:285:10
   (if (global.get $$class-initialized@nullability.Marker)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:276:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:285:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:276:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:285:10
   (global.set $$class-initialized@nullability.Marker (i32.const 1))
  )
 )
@@ -3046,6 +3063,38 @@
   )
   (global.set $$class@nullability.Nullability.NullableTemplatedReturn (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|nullability....|__java_lang_String_<once>_@nullability.Nullability.NullableTemplatedReturn )))
   (return (global.get $$class@nullability.Nullability.NullableTemplatedReturn))
+ )
+)
+
+;;; Code for nullability.Nullability.NonNullInterface [methods]
+
+;;; void NonNullInterface.$clinit()
+(func $$clinit__void_<once>_@nullability.Nullability.NonNullInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:277:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:277:12
+  (if (global.get $$class-initialized@nullability.Nullability.NonNullInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:277:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:277:12
+  (global.set $$class-initialized@nullability.Nullability.NonNullInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> NonNullInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.NonNullInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nullability.Nullability.NonNullInterface)))
+   (then
+    (return (global.get $$class@nullability.Nullability.NonNullInterface))
+   )
+  )
+  (global.set $$class@nullability.Nullability.NonNullInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|nullability....|__java_lang_String_<once>_@nullability.Nullability.NonNullInterface )))
+  (return (global.get $$class@nullability.Nullability.NonNullInterface))
  )
 )
 
@@ -3859,6 +3908,21 @@
   (call $$clinit__void_<once>_@nullability.Nullability )
  )
 )
+
+;;; void Nullability.testNonNullOnType(NonNullInterface unannotated, NonNullInterface annotatedNonNull, NonNullInterface annotatedNullable)
+(func $m_testNonNullOnType__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__void_$pp_nullability@nullability.Nullability
+ (type $function.m_testNonNullOnType__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__void_$pp_nullability)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $unannotated (ref null $java.lang.Object))
+ (param $annotatedNonNull (ref null $java.lang.Object))
+ (param $annotatedNullable (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:279:7
+ (local $this (ref null $nullability.Nullability))
+ (local.set $this (ref.cast (ref $nullability.Nullability) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_testNonNullOnType__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__void_$pp_nullability@nullability.Nullability)
 
 ;;; void Nullability.$init()
 (func $$init__void_$p_nullability_Nullability@nullability.Nullability

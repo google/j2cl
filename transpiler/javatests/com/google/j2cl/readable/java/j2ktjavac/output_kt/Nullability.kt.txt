@@ -24,8 +24,14 @@ import kotlin.String
 import kotlin.Suppress
 
 open class Nullability {
- internal open fun test_pp_j2ktjavac(s: String) {
-  val c: Consumer<*> = Consumer { ss: String? ->
+ internal open fun testNonNullOnType_pp_j2ktjavac(unannotated: NonNullInterface?, annotatedNonNull: NonNullInterface, annotatedNullable: NonNullInterface?) {}
+
+ open inner class NullMarkedClass internal constructor() {
+  internal open fun test_pp_j2ktjavac(s: String) {
+   val c: Consumer<*> = Consumer { ss: String? ->
+   }
   }
  }
+
+ interface NonNullInterface
 }

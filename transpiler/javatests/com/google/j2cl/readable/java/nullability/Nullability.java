@@ -271,6 +271,15 @@ public class Nullability {
       var o = new WithNullableParameterInConstructor(null) {};
     }
   }
+
+  // TODO(b/451682710): Remove this when it becomes a compile error.
+  @JsNonNull
+  interface NonNullInterface {}
+
+  void testNonNullOnType(
+      NonNullInterface unannotated,
+      @JsNonNull NonNullInterface annotatedNonNull,
+      @Nullable NonNullInterface annotatedNullable) {}
 }
 
 interface Marker {}
