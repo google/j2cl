@@ -9,6 +9,12 @@ load(":provider.bzl", "J2clInfo")
 def _get_jsinfo_provider(j2cl_info):
     return j2cl_info._private_.js_info
 
+def _is_kt_src(src):
+    if src.is_directory:
+        return src.basename == "kotlin"
+    else:
+        return src.extension == "kt"
+
 def _compile(
         ctx,
         srcs = [],
@@ -28,7 +34,7 @@ def _compile(
     jvm_srcs, js_srcs = split_srcs(srcs)
 
     has_srcs_to_transpile = (jvm_srcs or kt_common_srcs)
-    kt_srcs = [src for src in jvm_srcs if src.extension == "kt"]
+    kt_srcs = [src for src in jvm_srcs if _is_kt_src(src)]
     has_kotlin_srcs = kt_srcs or kt_common_srcs
 
     # Validate the attributes.
