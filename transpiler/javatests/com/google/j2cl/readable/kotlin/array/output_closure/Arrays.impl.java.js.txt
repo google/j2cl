@@ -11,7 +11,6 @@ let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let ArrayHelpersKt = goog.forwardDeclare('kotlin.jvm.internal.ArrayHelpersKt$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
@@ -54,7 +53,7 @@ class Arrays extends j_l_Object {
   let anObject = objects[0];
   anObject = objects2d[0][1];
   $Arrays.$set(objects, 0, null);
-  $Arrays.$set(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(objects2d[0]), 1, null);
+  $Arrays.$set(objects2d[0], 1, null);
   let nonNull2dArray = /**@type {!Array<!Array<!*>>}*/ ($Arrays.$createWithInitializer(1, j_l_Object, /**  @return {!Array<!*>}*/ ((/** number */ it_1) =>{
    return /**@type {!Array<!*>}*/ ($Arrays.$createNativeWithInitializer(2, /**  @return {!*}*/ ((/** number */ it_2) =>{
     return j_l_Object.$create__();
@@ -76,7 +75,7 @@ class Arrays extends j_l_Object {
   let someObject = objects[0];
   someObject = objects2d[0][1];
   $Arrays.$set(objects, 0, null);
-  $Arrays.$set(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(objects2d[0]), 1, null);
+  $Arrays.$set(objects2d[0], 1, null);
   let nonNull2dArray = /**@type {!Array<!Array<!SomeObject>>}*/ ($Arrays.$stampType([/**@type {!Array<!SomeObject>}*/ ($Arrays.$createWithInitializer(2, SomeObject, /**  @return {!SomeObject}*/ ((/** number */ it_1) =>{
    return SomeObject.$create__();
   })))], SomeObject, 2));
@@ -96,7 +95,7 @@ class Arrays extends j_l_Object {
   let n = ints[0];
   n = ints2d[0][1];
   $Arrays.$set(ints, 0, 1);
-  $Arrays.$set(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints2d[0]), 1, 1);
+  $Arrays.$set(ints2d[0], 1, 1);
   let nonNull2dArray = /**@type {!Array<!Array<number>>}*/ ($Arrays.$createWithInitializer(1, $$int, /**  @return {!Array<number>}*/ ((/** number */ it_1) =>{
    return /**@type {!Array<number>}*/ ($Arrays.$create([2], $$int));
   }), 2));
@@ -126,7 +125,7 @@ class Arrays extends j_l_Object {
   let n = longs[0];
   n = longs2d[0][1];
   $Arrays.$set(longs, 0, $Long.fromInt(1));
-  $Arrays.$set(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(longs2d[0]), 1, $Long.fromInt(1));
+  $Arrays.$set(longs2d[0], 1, $Long.fromInt(1));
   let nonNull2dArray = /**@type {!Array<!Array<!$Long>>}*/ ($Arrays.$createWithInitializer(1, $$long, /**  @return {!Array<!$Long>}*/ ((/** number */ it_1) =>{
    return /**@type {!Array<!$Long>}*/ ($Arrays.$create([2], $$long));
   }), 2));
@@ -162,7 +161,7 @@ class Arrays extends j_l_Object {
   let b = booleans[0];
   b = booleans2d[0][1];
   $Arrays.$set(booleans, 0, true);
-  $Arrays.$set(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(booleans2d[0]), 1, false);
+  $Arrays.$set(booleans2d[0], 1, false);
   let nonNull2dArray = /**@type {!Array<!Array<boolean>>}*/ ($Arrays.$createWithInitializer(1, Boolean, /**  @return {!Array<boolean>}*/ ((/** number */ it_4) =>{
    return /**@type {!Array<boolean>}*/ ($Arrays.$createWithInitializer(2, Boolean, /**  @return {boolean}*/ ((/** number */ it_5) =>{
     return true;
@@ -186,7 +185,7 @@ class Arrays extends j_l_Object {
   let b = strings[0];
   b = strings2d[0][1];
   $Arrays.$set(strings, 0, null);
-  $Arrays.$set(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(strings2d[0]), 1, null);
+  $Arrays.$set(strings2d[0], 1, null);
   let nonNull2dArray = /**@type {!Array<!Array<string>>}*/ ($Arrays.$createWithInitializer(1, j_l_String, /**  @return {!Array<string>}*/ ((/** number */ it_2) =>{
    return /**@type {!Array<string>}*/ ($Arrays.$createWithInitializer(2, j_l_String, /**  @return {string}*/ ((/** number */ it_3) =>{
     return '';
@@ -208,7 +207,7 @@ class Arrays extends j_l_Object {
   let nativeObject = nativeObjects[0];
   nativeObject = nativeObjects2d[0][1];
   $Arrays.$set(nativeObjects, 0, null);
-  $Arrays.$set(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(nativeObjects2d[0]), 1, null);
+  $Arrays.$set(nativeObjects2d[0], 1, null);
  }
  /** @final @nodts */
  m_testErasureCastsOnArrayAccess__void() {
@@ -332,7 +331,6 @@ class Arrays extends j_l_Object {
   Boolean = goog.module.get('java.lang.Boolean$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
-  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
   ArrayHelpersKt = goog.module.get('kotlin.jvm.internal.ArrayHelpersKt$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');

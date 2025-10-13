@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let StringBuilder = goog.forwardDeclare('java.lang.StringBuilder$impl');
-let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let StringJvmExtensionsKt = goog.forwardDeclare('javaemul.lang.StringJvmExtensionsKt$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -39,7 +38,7 @@ class AutoValue__AutoValueWithExtensions extends AutoValueWithExtensions {
   if ($Equality.$same(value, null)) {
    return 'null';
   }
-  return StringJvmExtensionsKt.m_java_replace__java_lang_String__java_lang_CharSequence__java_lang_CharSequence__java_lang_String($Objects.m_toString__java_lang_Object__java_lang_String(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(value)), '\n', '\n' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(AutoValue__AutoValueWithExtensions.m____indent__int__java_lang_String(indentLevel)));
+  return StringJvmExtensionsKt.m_java_replace__java_lang_String__java_lang_CharSequence__java_lang_CharSequence__java_lang_String($Objects.m_toString__java_lang_Object__java_lang_String(value), '\n', '\n' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(AutoValue__AutoValueWithExtensions.m____indent__int__java_lang_String(indentLevel)));
  }
  /** @nodts @return {?string} */
  static m____indent__int__java_lang_String(/** number */ level) {
@@ -67,7 +66,6 @@ class AutoValue__AutoValueWithExtensions extends AutoValueWithExtensions {
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   StringBuilder = goog.module.get('java.lang.StringBuilder$impl');
-  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   StringJvmExtensionsKt = goog.module.get('javaemul.lang.StringJvmExtensionsKt$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
