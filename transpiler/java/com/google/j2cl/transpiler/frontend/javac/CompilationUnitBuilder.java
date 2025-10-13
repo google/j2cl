@@ -951,7 +951,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         memberReference.getQualifierExpression() == null
                 || memberReference.getQualifierExpression().type.isRaw()
             ? null
-            : environment.createTypeDescriptor(memberReference.getQualifierExpression().type);
+            : environment.createTypeDescriptor(
+                memberReference.getQualifierExpression().type, inNullMarkedScope());
 
     if (qualifier instanceof JsConstructorReference) {
       // The qualifier was just the class name, remove it.

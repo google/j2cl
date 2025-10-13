@@ -55,9 +55,7 @@ open class MethodReferences {
    val container: Container<Container<Any>>? = null
    container!!.apply(
     Consumer { arg0: Container<Any> ->
-     consumerFn!!.accept(
-      arg0 as Container<Any?>?,
-     )
+     consumerFn!!.accept(arg0)
     },
    )
   }
