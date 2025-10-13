@@ -96,7 +96,11 @@ public class ArraysTest extends EmulTestBase {
   }
 
   /** Tests {@link Arrays#asList(Object[])}. */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({
+    "unchecked",
+    // We intentionally call the method wrong to trigger an error.
+    "NullNeedsCastForVarargs",
+  })
   public void testAsList() {
     try {
       Arrays.asList((Object[]) null);
