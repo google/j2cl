@@ -1,0 +1,51 @@
+goog.module('staticfieldimport.staticimports.ClassWithStaticField$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ClassWithStaticField extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ClassWithStaticField} */
+ static $create__() {
+  ClassWithStaticField.$clinit();
+  let $instance = new ClassWithStaticField();
+  $instance.$ctor__staticfieldimport_staticimports_ClassWithStaticField__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticfieldimport_staticimports_ClassWithStaticField__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {?string} */
+ static get f_STATIC_FIELD__staticfieldimport_staticimports_ClassWithStaticField() {
+  return (ClassWithStaticField.$clinit(), ClassWithStaticField.$static_STATIC_FIELD__staticfieldimport_staticimports_ClassWithStaticField);
+ }
+ /** @nodts */
+ static set f_STATIC_FIELD__staticfieldimport_staticimports_ClassWithStaticField(/** ?string */ value) {
+  (ClassWithStaticField.$clinit(), ClassWithStaticField.$static_STATIC_FIELD__staticfieldimport_staticimports_ClassWithStaticField = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassWithStaticField.$clinit = () =>{};
+  ClassWithStaticField.$loadModules();
+  j_l_Object.$clinit();
+  ClassWithStaticField.$static_STATIC_FIELD__staticfieldimport_staticimports_ClassWithStaticField = 'static_field';
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassWithStaticField;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {?string} @nodts*/
+ClassWithStaticField.$static_STATIC_FIELD__staticfieldimport_staticimports_ClassWithStaticField;
+$Util.$setClassMetadata(ClassWithStaticField, 'staticfieldimport.staticimports.ClassWithStaticField');
+
+exports = ClassWithStaticField;
+
+//# sourceMappingURL=ClassWithStaticField.js.map

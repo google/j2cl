@@ -1,0 +1,40 @@
+goog.module('staticfieldimport.staticimports.InheritedStaticField$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const ClassWithStaticField = goog.require('staticfieldimport.staticimports.ClassWithStaticField$impl');
+
+class InheritedStaticField extends ClassWithStaticField {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InheritedStaticField} */
+ static $create__() {
+  InheritedStaticField.$clinit();
+  let $instance = new InheritedStaticField();
+  $instance.$ctor__staticfieldimport_staticimports_InheritedStaticField__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__staticfieldimport_staticimports_InheritedStaticField__void() {
+  this.$ctor__staticfieldimport_staticimports_ClassWithStaticField__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  InheritedStaticField.$clinit = () =>{};
+  InheritedStaticField.$loadModules();
+  ClassWithStaticField.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InheritedStaticField;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InheritedStaticField, 'staticfieldimport.staticimports.InheritedStaticField');
+
+exports = InheritedStaticField;
+
+//# sourceMappingURL=InheritedStaticField.js.map

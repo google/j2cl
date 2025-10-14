@@ -1378,7 +1378,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     if (isSuperExpression(identifier)) {
       return new SuperReference(getCurrentType().getTypeDescriptor());
     }
-    Symbol symbol = identifier.sym;
+    Symbol symbol = identifier.sym.baseSymbol();
     if (symbol instanceof ClassSymbol classSymbol) {
       return new JsConstructorReference(environment.createTypeDeclaration(classSymbol));
     }
