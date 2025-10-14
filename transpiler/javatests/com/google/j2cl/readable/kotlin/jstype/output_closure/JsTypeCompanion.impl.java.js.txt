@@ -1,0 +1,47 @@
+goog.module('jstype.JsTypeCompanion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JsTypeCompanion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JsTypeCompanion} */
+ static $create__() {
+  JsTypeCompanion.$clinit();
+  let $instance = new JsTypeCompanion();
+  $instance.$ctor__jstype_JsTypeCompanion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_JsTypeCompanion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_foo__void() {
+  JsTypeCompanion.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  JsTypeCompanion.$clinit = () =>{};
+  JsTypeCompanion.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsTypeCompanion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsTypeCompanion, 'jstype.JsTypeCompanion');
+
+exports = JsTypeCompanion;
+
+//# sourceMappingURL=JsTypeCompanion.js.map

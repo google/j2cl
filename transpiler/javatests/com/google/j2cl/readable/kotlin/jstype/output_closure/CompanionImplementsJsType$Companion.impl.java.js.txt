@@ -1,0 +1,50 @@
+goog.module('jstype.CompanionImplementsJsType.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const JsTypeInterface = goog.require('jstype.JsTypeInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {JsTypeInterface}
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  Companion.$clinit();
+  let $instance = new Companion();
+  $instance.$ctor__jstype_CompanionImplementsJsType_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_CompanionImplementsJsType_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override */
+ foo() {}
+ /** @override */
+ bar() {}
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+JsTypeInterface.$markImplementor(Companion);
+$Util.$setClassMetadata(Companion, 'jstype.CompanionImplementsJsType$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=CompanionImplementsJsType$Companion.js.map

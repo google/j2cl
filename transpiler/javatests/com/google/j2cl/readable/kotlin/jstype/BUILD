@@ -19,6 +19,7 @@ j2cl_library(
 
 readable_example(
     srcs = [
+        "CompanionObjects.kt",
         "Objects.kt",
         "SomeJsType.kt",
     ],

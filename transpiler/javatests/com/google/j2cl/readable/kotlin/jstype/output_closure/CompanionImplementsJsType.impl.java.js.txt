@@ -1,0 +1,54 @@
+goog.module('jstype.CompanionImplementsJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Companion = goog.forwardDeclare('jstype.CompanionImplementsJsType.Companion$impl');
+
+/**
+ * @final
+ */
+class CompanionImplementsJsType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!CompanionImplementsJsType} */
+ static $create__() {
+  CompanionImplementsJsType.$clinit();
+  let $instance = new CompanionImplementsJsType();
+  $instance.$ctor__jstype_CompanionImplementsJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_CompanionImplementsJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jstype_CompanionImplementsJsType() {
+  return (CompanionImplementsJsType.$clinit(), CompanionImplementsJsType.$static_Companion__jstype_CompanionImplementsJsType);
+ }
+ /** @nodts */
+ static $clinit() {
+  CompanionImplementsJsType.$clinit = () =>{};
+  CompanionImplementsJsType.$loadModules();
+  j_l_Object.$clinit();
+  CompanionImplementsJsType.$static_Companion__jstype_CompanionImplementsJsType = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CompanionImplementsJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Companion = goog.module.get('jstype.CompanionImplementsJsType.Companion$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+CompanionImplementsJsType.$static_Companion__jstype_CompanionImplementsJsType;
+$Util.$setClassMetadata(CompanionImplementsJsType, 'jstype.CompanionImplementsJsType');
+
+exports = CompanionImplementsJsType;
+
+//# sourceMappingURL=CompanionImplementsJsType.js.map
