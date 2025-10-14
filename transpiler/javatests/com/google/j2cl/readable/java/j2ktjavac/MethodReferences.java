@@ -62,4 +62,21 @@ public class MethodReferences {
     Container<Container<Object>> container = null;
     container.apply(consumerFn::accept);
   }
+
+  interface Collection<T> {}
+
+  static class ArrayList<T> implements Collection<T> {}
+
+  interface Supplier<T> {
+    T get();
+  }
+
+  public static <T extends Collection<String>> T toCollection(Supplier<T> collectionConstructor) {
+    return null;
+  }
+
+  public static void testArrayCreationReference() {
+    Collection<String> collection = toCollection(ArrayList<String>::new);
+    collection = toCollection(ArrayList<String>::new);
+  }
 }

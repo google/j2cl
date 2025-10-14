@@ -21,6 +21,7 @@ package j2ktjavac
 import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
+import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
@@ -59,6 +60,25 @@ open class MethodReferences {
     },
    )
   }
+
+  @JvmStatic
+  fun <T: Collection<String>> toCollection(collectionConstructor: Supplier<T>): T {
+   return null!!
+  }
+
+  @JvmStatic
+  fun testArrayCreationReference() {
+   var collection: Collection<String>? = MethodReferences.toCollection<ArrayList<String>>(
+    Supplier {
+     return@Supplier ArrayList<Any>() as ArrayList<String>
+    },
+   )
+   collection = MethodReferences.toCollection<ArrayList<String>>(
+    Supplier {
+     return@Supplier ArrayList<Any>() as ArrayList<String>
+    },
+   )
+  }
  }
 
  fun interface Consumer<A> {
@@ -71,5 +91,13 @@ open class MethodReferences {
 
  open class Container<V> internal constructor() {
   open fun apply(callback: Consumer<V>) {}
+ }
+
+ interface Collection<T: Any>
+
+ open class ArrayList<T: Any> internal constructor(): Collection<T>
+
+ fun interface Supplier<T: Any> {
+  fun get(): T
  }
 }
