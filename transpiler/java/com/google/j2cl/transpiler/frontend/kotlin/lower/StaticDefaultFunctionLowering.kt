@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.backend.common.ir.moveBodyTo
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.staticDefaultStub
+import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.DescriptorVisibility
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.ir.IrStatement
@@ -143,6 +144,8 @@ internal class StaticDefaultFunctionLowering(val context: JvmBackendContext) :
         // MODIFIED BY GOOGLE
         // Copy the type parameters from the enclosing context.
         typeParametersFromContext = extractTypeParameters(function.parentAsClass),
+        // Lie about the visibility of the bridge so that we can elide clinit calls.
+        visibility = DescriptorVisibilities.PRIVATE,
         // END OF MODIFICATIONS
         remapMultiFieldValueClassStructure = context::remapMultiFieldValueClassStructure,
       )
