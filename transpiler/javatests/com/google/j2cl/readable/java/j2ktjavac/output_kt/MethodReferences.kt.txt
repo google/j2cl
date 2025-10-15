@@ -70,12 +70,12 @@ open class MethodReferences {
   fun testArrayCreationReference() {
    var collection: Collection<String>? = MethodReferences.toCollection<ArrayList<String>>(
     Supplier {
-     return@Supplier ArrayList<Any>() as ArrayList<String>
+     return@Supplier ArrayList<String>()
     },
    )
    collection = MethodReferences.toCollection<ArrayList<String>>(
     Supplier {
-     return@Supplier ArrayList<Any>() as ArrayList<String>
+     return@Supplier ArrayList<String>()
     },
    )
   }
