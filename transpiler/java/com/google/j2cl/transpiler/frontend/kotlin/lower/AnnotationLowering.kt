@@ -38,7 +38,7 @@ import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.parentAsClass
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
@@ -53,7 +53,7 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
  */
 @OptIn(UnsafeDuringIrConstructionAPI::class)
 internal class AnnotationLowering(private val context: JvmBackendContext) :
-  FileLoweringPass, IrElementVisitorVoid {
+  FileLoweringPass, IrVisitorVoid() {
   override fun lower(irFile: IrFile) {
     irFile.acceptVoid(this)
   }
@@ -121,13 +121,13 @@ internal class AnnotationLowering(private val context: JvmBackendContext) :
       this.isKClass() -> {
         val argument = (this as IrSimpleType).arguments.single()
         if (argument.typeOrNull == null) {
-          context.ir.symbols.javaLangClass.starProjectedType
+          context.symbols.javaLangClass.starProjectedType
         } else {
-          context.ir.symbols.javaLangClass.typeWith(argument.typeOrFail.kClassToJClassIfNeeded())
+          context.symbols.javaLangClass.typeWith(argument.typeOrFail.kClassToJClassIfNeeded())
         }
       }
       this is IrSimpleType && isArray() && arguments.single().typeOrNull != null ->
-        context.ir.symbols.array.typeWith(arguments.single().typeOrFail.kClassToJClassIfNeeded())
+        context.symbols.array.typeWith(arguments.single().typeOrFail.kClassToJClassIfNeeded())
       else -> this
     }
 }

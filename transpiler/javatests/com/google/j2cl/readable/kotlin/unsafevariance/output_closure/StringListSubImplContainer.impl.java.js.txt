@@ -5,6 +5,8 @@ const StringContainer = goog.require('unsafevariance.StringContainer$impl');
 const StringList = goog.require('unsafevariance.StringList$impl');
 
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let ListIterator = goog.forwardDeclare('java.util.ListIterator$impl');
 
 /**
  * @abstract
@@ -39,6 +41,12 @@ class StringListSubImplContainer extends StringList {
  isEmpty() {}
  /** @abstract @override @suppress{visibility} @return {string} */
  getAtIndex(/** number */ arg0) {}
+ /** @abstract @override @nodts @suppress{visibility} @return {ListIterator<string>} */
+ m_listIterator__java_util_ListIterator() {}
+ /** @abstract @override @nodts @suppress{visibility} @return {ListIterator<string>} */
+ m_listIterator__int__java_util_ListIterator(/** number */ arg0) {}
+ /** @abstract @override @suppress{visibility} @return {List<string>} */
+ subList(/** number */ arg0, /** number */ arg1) {}
  
  /** @nodts */
  static $loadModules() {}

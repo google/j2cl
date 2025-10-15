@@ -48,6 +48,7 @@ import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
+import org.jetbrains.kotlin.util.OperatorNameConventions
 
 /**
  * KotlinC uses intrinsics methods for representing some specific operations. The implementations of
@@ -103,7 +104,15 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
   }
 
   fun isArrayOf(irCall: IrCall): Boolean {
-    return irCall.symbol.toKey() in arrayOfSymbolKeys
+    return isArrayOf(irCall.symbol)
+  }
+
+  fun isArrayOf(symbol: IrFunctionSymbol): Boolean {
+    return symbol.toKey() in arrayOfSymbolKeys
+  }
+
+  fun isEmptyArray(symbol: IrFunctionSymbol): Boolean {
+    return symbol.toKey() == Key(FqName("kotlin"), "emptyArray", emptyList())
   }
 
   fun isIsArrayOf(irCall: IrCall): Boolean {
@@ -118,7 +127,27 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
   fun isDataClassArrayMemberHashCode(irCall: IrCall): Boolean =
     irCall.symbol.toKey() == irBuiltIns.dataClassArrayMemberHashCodeSymbol.toKey()
 
-  fun isAnyToString(irCall: IrCall) = irCall.symbol.toKey() == irBuiltIns.extensionToString.toKey()
+  // TODO(b/448872338): replace with irBuiltIns.extensionToString when bug is fixed.
+  val extensionToStringSymbol: IrSimpleFunctionSymbol by lazy {
+    irBuiltIns.symbolFinder
+      .topLevelFunctions(
+        StandardClassIds.BASE_KOTLIN_PACKAGE,
+        OperatorNameConventions.TO_STRING.asString(),
+      )
+      .single { !it.owner.isExpect }
+  }
+
+  // TODO(b/448872338): replace with irBuiltIns.extensionStringPlus when bug is fixed.
+  val extensionStringPlus: IrSimpleFunctionSymbol by lazy {
+    irBuiltIns.symbolFinder
+      .topLevelFunctions(
+        StandardClassIds.BASE_KOTLIN_PACKAGE,
+        OperatorNameConventions.PLUS.asString(),
+      )
+      .single { !it.owner.isExpect }
+  }
+
+  fun isAnyToString(irCall: IrCall) = irCall.symbol.toKey() == extensionToStringSymbol.toKey()
 
   fun isEqualsOperator(irCall: IrCall): Boolean =
     irCall.symbol.toKey() == irBuiltIns.eqeqSymbol.toKey()
@@ -250,7 +279,7 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
           BinaryOperator.GREATER_EQUALS,
         ) +
         listOf(
-          irBuiltIns.extensionStringPlus.toKey() to BinaryOperator.PLUS,
+          extensionStringPlus.toKey() to BinaryOperator.PLUS,
           irBuiltIns.memberStringPlus.toKey() to BinaryOperator.PLUS,
         ))
       .toMap()

@@ -4,10 +4,8 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
@@ -96,7 +94,7 @@ class BasicDataClass extends j_l_Object {
   if (!BasicDataClass.$isInstance(other)) {
    return false;
   }
-  let tmp0_other_with_cast = /**@type {!BasicDataClass}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), BasicDataClass));
+  let tmp0_other_with_cast = /**@type {!BasicDataClass}*/ (other);
   if (this.f_foo__dataclass_BasicDataClass_ != tmp0_other_with_cast.f_foo__dataclass_BasicDataClass_) {
    return false;
   }
@@ -119,9 +117,7 @@ class BasicDataClass extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
-  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
 }

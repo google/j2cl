@@ -55,7 +55,7 @@ import org.jetbrains.kotlin.ir.visitors.*
  */
 internal class LocalDelegatedPropertiesLowering : IrElementTransformerVoid(), BodyLoweringPass {
   override fun lower(irBody: IrBody, container: IrDeclaration) {
-    irBody.accept(this, null)
+    val unused = irBody.accept(this, null)
   }
 
   override fun visitLocalDelegatedProperty(declaration: IrLocalDelegatedProperty): IrStatement {

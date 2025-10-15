@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.backend.common.overrides.FileLocalAwareLinker
 import org.jetbrains.kotlin.backend.common.overrides.IrLinkerFakeOverrideProvider
 import org.jetbrains.kotlin.backend.common.serialization.*
 import org.jetbrains.kotlin.backend.common.serialization.encodings.BinarySymbolData
+import org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry as ProtoFileEntry
 import org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature as ProtoIdSignature
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration as ProtoDeclaration
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression as ProtoExpression
@@ -28,6 +29,7 @@ import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.impl.PackageFragmentDescriptorImpl
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrElement
+import org.jetbrains.kotlin.ir.IrProvider
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
@@ -38,7 +40,6 @@ import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.impl.IrFileImpl
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
-import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
@@ -46,7 +47,7 @@ import org.jetbrains.kotlin.ir.symbols.impl.IrFileSymbolImpl
 import org.jetbrains.kotlin.ir.types.IrTypeSystemContext
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.util.SymbolTable
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.load.kotlin.FacadeClassSource
@@ -92,10 +93,11 @@ class JvmIrDeserializerImpl : JvmIrDeserializer {
       // END OF MODIFICATIONS
     )
 
-    irClass.transform(
-      SingletonObjectJvmStaticTransformer(irBuiltIns, extensions.cachedFields),
-      null,
-    )
+    val unused =
+      irClass.transform(
+        SingletonObjectJvmStaticTransformer(irBuiltIns, extensions.cachedFields),
+        null,
+      )
 
     return true
   }
@@ -130,6 +132,7 @@ fun deserializeFromByteArray(
       irProto.stringList,
       irProto.bodyList,
       irProto.debugInfoList,
+      irProto.fileEntryList,
     )
 
   // Only needed for local signature computation.
@@ -252,11 +255,11 @@ private fun IrElement.safelyInitializeAllLazyDescendants() {
   // The workaround is to traverse the subtree over snapshots first.
 
   acceptVoid(
-    object : IrElementVisitorVoid {
+    object : IrVisitorVoid() {
       override fun visitElement(element: IrElement) {
         val directChildrenSnapshot = mutableListOf<IrElement>()
         element.acceptChildrenVoid(
-          object : IrElementVisitorVoid {
+          object : IrVisitorVoid() {
             override fun visitElement(element: IrElement) {
               directChildrenSnapshot += element
             }
@@ -277,8 +280,13 @@ private class IrLibraryFileFromAnnotation(
   private val strings: List<String>,
   private val bodies: List<JvmIr.XStatementOrExpression>,
   private val debugInfo: List<String>,
+  private val fileEntries: List<ProtoFileEntry>,
 ) : IrLibraryFile() {
   override fun declaration(index: Int): ProtoDeclaration {
+    error("This method is never supposed to be called")
+  }
+
+  override fun inlineDeclaration(index: Int): ProtoDeclaration {
     error("This method is never supposed to be called")
   }
 
@@ -290,6 +298,8 @@ private class IrLibraryFileFromAnnotation(
 
   override fun debugInfo(index: Int): String = debugInfo[index]
 
+  override fun fileEntry(index: Int): ProtoFileEntry = fileEntries[index]
+
   override fun expressionBody(index: Int): ProtoExpression =
     bodies[index].also { require(it.hasExpression()) }.expression
 
@@ -297,7 +307,6 @@ private class IrLibraryFileFromAnnotation(
     bodies[index].also { require(it.hasStatement()) }.statement
 }
 
-// TODO: try to use plugin context here
 private fun referencePublicSymbol(
   symbolTable: SymbolTable,
   idSig: IdSignature,
@@ -342,7 +351,7 @@ fun makeSimpleFakeOverrideBuilder(
     JvmIrMangler,
     typeSystemContext,
     fakeOverrideDeclarationTable =
-      PrePopulatedDeclarationTable(symbolDeserializer.deserializedSymbols),
+      PrePopulatedDeclarationTable(symbolDeserializer.deserializedSymbolsWithOwnersInCurrentFile),
     friendModules = emptyMap(), // TODO: provide friend modules
     partialLinkageSupport = PartialLinkageSupportForLinker.DISABLED,
   )
@@ -356,7 +365,7 @@ private fun buildFakeOverridesForLocalClasses(
 ) {
   val builder = makeSimpleFakeOverrideBuilder(symbolTable, typeSystemContext, symbolDeserializer)
   toplevel.acceptChildrenVoid(
-    object : IrElementVisitorVoid {
+    object : IrVisitorVoid() {
       override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
       }
@@ -390,7 +399,7 @@ class PrePopulatedDeclarationTable(sig2symbol: Map<IdSignature, IrSymbol>) :
 // would create a dependency cycle.
 private class ExternalPackageParentPatcherLoweringVisitor(
   private val irDeserializer: (IrClass) -> Boolean
-) : IrElementVisitorVoid {
+) : IrVisitorVoid() {
   override fun visitElement(element: IrElement) {
     element.acceptChildrenVoid(this)
   }

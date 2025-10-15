@@ -84,13 +84,13 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
         else -> throw AssertionError("Unexpected call")
       }
     val enumValuesFun = enumType.classOrFail.owner.findEnumValuesFunction(context)
-    val returnType = context.ir.symbols.enumEntries.typeWith(enumType)
-    val createEnumEntriesSymbol = context.ir.symbols.createEnumEntries
+    val returnType = context.symbols.enumEntries.typeWith(enumType)
+    val createEnumEntriesSymbol = context.symbols.createEnumEntries
 
     // enumEntries<SomeEnum>(SomeEnum.values)
     return context.createJvmIrBuilder(createEnumEntriesSymbol, expression).run {
       irCall(createEnumEntriesSymbol, returnType).apply {
-        putTypeArgument(0, enumType)
+        typeArguments[0] = enumType
         arguments[0] = irCall(enumValuesFun)
       }
     }
@@ -164,7 +164,7 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
         arguments[0] = dispatchReceiver
         if (!isPrimitive) {
           require(dispatchReceiverType.arguments.size == 1)
-          putTypeArgument(0, dispatchReceiverType.arguments[0].typeOrFail)
+          typeArguments[0] = dispatchReceiverType.arguments[0].typeOrFail
         }
       }
     }

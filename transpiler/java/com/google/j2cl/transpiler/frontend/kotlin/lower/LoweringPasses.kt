@@ -32,8 +32,6 @@ import org.jetbrains.kotlin.backend.common.lower.ExpressionBodyTransformer
 import org.jetbrains.kotlin.backend.common.lower.InitializersCleanupLowering
 import org.jetbrains.kotlin.backend.common.lower.InitializersLowering
 import org.jetbrains.kotlin.backend.common.lower.StripTypeAliasDeclarationsLowering
-import org.jetbrains.kotlin.backend.common.lower.WrapInlineDeclarationsWithReifiedTypeParametersLowering
-import org.jetbrains.kotlin.backend.common.lower.inline.LocalClassesInInlineFunctionsLowering
 import org.jetbrains.kotlin.backend.common.lower.inline.LocalClassesInInlineLambdasLowering
 import org.jetbrains.kotlin.backend.common.lower.loops.ForLoopsLowering
 import org.jetbrains.kotlin.backend.common.runOnFilePostfix
@@ -42,7 +40,9 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendExtension
 import org.jetbrains.kotlin.backend.jvm.JvmGeneratorExtensionsImpl
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
 import org.jetbrains.kotlin.codegen.state.GenerationState
+import org.jetbrains.kotlin.config.AnalysisFlags
 import org.jetbrains.kotlin.config.CompilerConfiguration
+import org.jetbrains.kotlin.config.languageVersionSettings
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.backend.js.lower.cleanup.CleanupLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.inline.RemoveInlineDeclarationsWithReifiedTypeParametersLowering
@@ -87,6 +87,7 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::LocalClassesExtractionFromInlineFunctionsLowering.asPostfix())
   // Create public bridge for private top level function called from inline functions.
   perFileLowering(::SyntheticAccessorLowering)
+  // TODO(b/449125803) : remove that pass and use `UpgradeCallableReferences` instead.
   // Replace reference to inline function with reified parameter with reference to a synthetic
   // non-inline function where types parameters have been substituted so there is no reference to
   // inline functions anymore.
@@ -246,7 +247,13 @@ private fun createJvmBackendContext(
   // TODO(b/374966022): Remove this once we don't rely on IR serialization anymore for inlining.
   // K2 does not populate the symbolTable but it still is used by the IR deserializer to know if
   // the symbols exists or need to be created. We will manually populate the SymbolTable.
-  symbolTable.populate(pluginContext.irBuiltIns)
+  // Note: This step is skipped during stdlib compilation. This is because the standard library
+  // does not depend on other Kotlin libraries, so no IR deserialization from JAR files will occur.
+  // Additionally, this avoids an issue in when processing builtins, which are loaded from source
+  // during stdlib compilation rather than from JAR files.
+  if (!compilerConfiguration.languageVersionSettings.getFlag(AnalysisFlags.stdlibCompilation)) {
+    symbolTable.populate(pluginContext.irBuiltIns)
+  }
   // During IR deserialization, unbound symbols are created for references to external
   // declarations that haven't been loaded yet. In the K1 frontend, a stub IrProvider relied on
   // the descriptor API to load these symbols. However, we cannot reuse this in K2 due to the
@@ -265,6 +272,7 @@ private fun createJvmBackendContext(
     irDeserializer = jvmIrDeserializerImpl,
     irProviders = listOf(),
     irPluginContext = pluginContext,
+    evaluatorData = null,
   )
 }
 

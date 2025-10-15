@@ -42,13 +42,13 @@ import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
+import org.jetbrains.kotlin.ir.visitors.IrVisitor
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 import org.jetbrains.kotlin.name.JvmStandardClassIds
 import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_SYNTHETIC_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmBackendErrors
+import org.jetbrains.kotlin.utils.addToStdlib.assignFrom
 
 /**
  * Generates [JvmMultifileClass] facades:
@@ -312,7 +312,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
   if (targetProperty != null) {
     val newProperty = correspondingProperties.getOrCopyProperty(targetProperty)
     function.correspondingPropertySymbol = newProperty.symbol
-    when (target.valueParameters.size) {
+    when (target.parameters.count { it.kind == IrParameterKind.Regular }) {
       0 -> newProperty.getter = function
       1 -> newProperty.setter = function
     }
@@ -339,12 +339,7 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
         +irReturn(
           irCall(target).also { call ->
             call.passTypeArgumentsFrom(function)
-            function.extensionReceiverParameter?.let { parameter ->
-              call.extensionReceiver = irGet(parameter)
-            }
-            for (parameter in function.valueParameters) {
-              call.putValueArgument(parameter.indexInOldValueParameters, irGet(parameter))
-            }
+            call.arguments.assignFrom(function.parameters, ::irGet)
           }
         )
       }
@@ -379,7 +374,7 @@ private class CorrespondingPropertyCache(
 
 private class UpdateFunctionCallSites(
   private val functionDelegates: MutableMap<IrSimpleFunction, IrSimpleFunction>
-) : FileLoweringPass, IrElementVisitor<Unit, IrFunction?> {
+) : IrVisitor<Unit, IrFunction?>(), FileLoweringPass {
   override fun lower(irFile: IrFile) {
     irFile.acceptChildren(this, null)
   }

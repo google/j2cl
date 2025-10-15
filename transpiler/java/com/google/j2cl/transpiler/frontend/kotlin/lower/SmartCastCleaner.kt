@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrTypeOperatorCallImpl
 import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.isNullable
+import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.isSubtypeOfClass
 import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
@@ -57,10 +58,22 @@ internal class SmartCastCleaner : FileLoweringPass, IrElementTransformerVoid() {
   private fun IrExpression.isDispatchReceiver() = dispatchReceivers.contains(this)
 
   override fun visitTypeOperator(expression: IrTypeOperatorCall): IrExpression {
-    if (!expression.isDispatchReceiver() && expression.operator == IrTypeOperator.IMPLICIT_CAST) {
-      val argument = expression.argument
-      val originalType = argument.type
-      val targetType = expression.typeOperand
+    if (expression.operator != IrTypeOperator.IMPLICIT_CAST) {
+      return expression
+    }
+
+    val argument = expression.argument
+    val originalType = argument.type
+    val targetType = expression.typeOperand
+
+    // Implicit cast that promotes the nullability of a primitive type is not needed for J2CL and
+    // lead to extra boxing/unboxing operations.
+    if (targetType.isPrimitiveType() && targetType.classOrFail == originalType.classOrNull) {
+      return expression.argument
+    }
+
+    if (!expression.isDispatchReceiver()) {
+
       if (targetType.classOrNull != null && originalType.isSubtypeOfClass(targetType.classOrFail)) {
         if (!originalType.isNullable() || targetType.isNullable()) {
           // Implicit cast to a parent class that does not promote the nullability can be

@@ -84,16 +84,16 @@ class LocalFunctionKt extends j_l_Object {
  }
  /** @nodts @return {string} */
  static m_localFunctionInInlinedLambda__java_lang_String() {
-  let anonymous_$appendTwoDigit = (/** !Appendable */ this_1, /** !StringBuilder */ $this_apply, /** number */ number_1) =>{
-   if (number_1 < 10) {
-    this_1.m_append__char__java_lang_Appendable(48 /* '0' */);
-   }
-   $this_apply.m_append__int__java_lang_StringBuilder(number_1);
-  };
   let tmp0__this_ = StringBuilder.$create__();
-  let this_2 = tmp0__this_;
-  anonymous_$appendTwoDigit(this_2, this_2, 1);
-  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(this_2.toString());
+  let this_1 = tmp0__this_;
+  let appendTwoDigits = (/** !Appendable */ this_2, /** number */ number_1) =>{
+   if (number_1 < 10) {
+    this_2.m_append__char__java_lang_Appendable(48 /* '0' */);
+   }
+   this_1.m_append__int__java_lang_StringBuilder(number_1);
+  };
+  appendTwoDigits(this_1, 1);
+  return InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(this_1.toString());
  }
  /** @nodts @template T @return {string} */
  static m_localFunctionWithGenericType__java_lang_Object__java_lang_String(/** T */ t) {

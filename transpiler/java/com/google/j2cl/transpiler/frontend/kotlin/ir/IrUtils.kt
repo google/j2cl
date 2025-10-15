@@ -209,14 +209,6 @@ fun IrFunctionAccessExpression.getArguments(): List<IrExpression> {
     return emptyList()
   }
 
-  // The Kotlin IR parameters API assumes a 1-1 mapping between the function's defined parameters
-  // and the arguments in the function call. A mismatch indicates that one of our lowering passes
-  // has modified the function parameters without updating the arguments list.
-  // TODO(b/440381491): Remove this when our lowering passes have been updated with their last
-  // version.
-  if (arguments.size != symbol.owner.parameters.size) {
-    forceUpdateShapeFromTargetSymbol()
-  }
   // Value arguments should never be null at this point as default arguments and varargs have
   // already been lowered.
   return nonDispatchArguments.map { argument ->
@@ -304,7 +296,7 @@ fun IrMemberAccessExpression<*>.getTypeSubstitutionMap(
 
   return typeParameters.withIndex().associateTo(result) {
     // Modified to build a IrTypeArgument for member parameters.
-    it.value.symbol to makeTypeProjection(getTypeArgument(it.index)!!, it.value.variance)
+    it.value.symbol to makeTypeProjection(typeArguments[it.index]!!, it.value.variance)
     // End of modification
   }
 }

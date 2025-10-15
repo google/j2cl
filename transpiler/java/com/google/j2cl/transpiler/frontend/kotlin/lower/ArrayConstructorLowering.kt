@@ -57,6 +57,7 @@ import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
 import org.jetbrains.kotlin.ir.types.isNothing
 import org.jetbrains.kotlin.ir.types.isNullable
 import org.jetbrains.kotlin.ir.types.makeNotNull
+import org.jetbrains.kotlin.ir.types.typeOrFail
 import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.constructedClass
 import org.jetbrains.kotlin.ir.util.constructors
@@ -64,7 +65,7 @@ import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isVararg
 import org.jetbrains.kotlin.ir.util.patchDeclarationParents
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.FqName
@@ -152,7 +153,7 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
           )
           .also {
             if (!classConstructed.isPrimitiveArrayClass) {
-              it.putTypeArgument(0, originalInitializerType.arguments[1].typeOrNull)
+              it.typeArguments[0] = originalInitializerType.arguments[1].typeOrFail
             }
             it.arguments[0] = originalInitializer
           }
@@ -225,7 +226,7 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
 private fun escapesScope(irFunction: IrFunction): Boolean {
   var escapesScope = false
   irFunction.acceptChildrenVoid(
-    object : IrElementVisitorVoid {
+    object : IrVisitorVoid() {
       override fun visitElement(element: IrElement) {
         // Stop visiting if we've already found an escape.
         if (escapesScope) return
@@ -263,7 +264,7 @@ private class ArrayConstructorTransformer(
       return when {
         !irConstructor.hasShape(regularParameters = 2) -> null
         clazz == context.irBuiltIns.arrayClass ->
-          context.ir.symbols
+          context.symbols
             .arrayOfNulls // Array<T> has no unary constructor: it can only exist for Array<T?>
         context.irBuiltIns.primitiveArraysToPrimitiveTypes.contains(clazz) ->
           clazz.constructors.single {

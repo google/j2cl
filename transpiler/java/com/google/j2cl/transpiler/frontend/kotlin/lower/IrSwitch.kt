@@ -15,26 +15,26 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.IrElementBase
 import org.jetbrains.kotlin.ir.IrStatement
-import org.jetbrains.kotlin.ir.declarations.IrAttributeContainer
 import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
+import org.jetbrains.kotlin.ir.visitors.IrVisitor
 
 /** Represent a `switch` statement. */
 class IrSwitch(
   val expression: IrExpression,
   val cases: List<IrSwitchCase>,
-  override val startOffset: Int,
-  override val endOffset: Int,
+  override var startOffset: Int,
+  override var endOffset: Int,
 ) : IrElementBase(), IrStatement {
-  override var attributeOwnerId: IrAttributeContainer = this
+  override var attributeOwnerId: IrElement = this
 
-  override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R {
+  override fun <R, D> accept(visitor: IrVisitor<R, D>, data: D): R {
     return visitor.visitElement(this, data)
   }
 
-  override fun <D> acceptChildren(visitor: IrElementVisitor<Unit, D>, data: D) {
+  override fun <D> acceptChildren(visitor: IrVisitor<Unit, D>, data: D) {
     expression.accept(visitor, data)
     cases.forEach { it.accept(visitor, data) }
   }
@@ -44,16 +44,16 @@ class IrSwitch(
 class IrSwitchCase(
   var caseExpressions: List<IrExpression>,
   var body: IrExpression?,
-  override val startOffset: Int,
-  override val endOffset: Int,
+  override var startOffset: Int,
+  override var endOffset: Int,
 ) : IrElementBase() {
-  override var attributeOwnerId: IrAttributeContainer = this
+  override var attributeOwnerId: IrElement = this
 
-  override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R {
+  override fun <R, D> accept(visitor: IrVisitor<R, D>, data: D): R {
     return visitor.visitElement(this, data)
   }
 
-  override fun <D> acceptChildren(visitor: IrElementVisitor<Unit, D>, data: D) {
+  override fun <D> acceptChildren(visitor: IrVisitor<Unit, D>, data: D) {
     caseExpressions.forEach { it.accept(visitor, data) }
     body?.accept(visitor, data)
   }
@@ -65,11 +65,11 @@ class IrSwitchCase(
  */
 class IrSwitchBreak : IrElementBase(), IrStatement {
   // IrSwitchBreak are synthetic node that does not represent anything in the source code.
-  override val endOffset: Int = -1
-  override val startOffset: Int = -1
-  override var attributeOwnerId: IrAttributeContainer = this
+  override var endOffset: Int = -1
+  override var startOffset: Int = -1
+  override var attributeOwnerId: IrElement = this
 
-  override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R {
+  override fun <R, D> accept(visitor: IrVisitor<R, D>, data: D): R {
     return visitor.visitElement(this, data)
   }
 }

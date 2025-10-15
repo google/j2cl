@@ -21,12 +21,13 @@ import java.lang.IllegalArgumentException
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.serialization.mangle.MangleConstant.Companion.ENHANCED_NULLABILITY_MARK
 import org.jetbrains.kotlin.backend.common.serialization.signature.PublicIdSignatureComputer
+import org.jetbrains.kotlin.ir.IrProvider
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrFunction
+import org.jetbrains.kotlin.ir.declarations.IrMemberWithContainerSource
 import org.jetbrains.kotlin.ir.declarations.IrProperty
-import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.symbols.IrBindableSymbol
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrConstructorSymbol
@@ -157,8 +158,8 @@ class IrProviderFromPublicSignature(val pluginContext: IrPluginContext) : IrProv
     return signature.id
   }
 
-  private fun <T : IrDeclaration> Collection<T>.matchingSignature(signature: CommonSignature): T =
-    singleOrNull {
+  private fun <T : IrDeclaration> Collection<T>.matchingSignature(signature: CommonSignature): T {
+    val matchingDeclaration = singleOrNull {
       val declarationSignature = irSignaturer.computeSignature(it).asPublic()!!
       val declarationSignatureId = computeIdWithoutNullabilityAnnotation(declarationSignature)
       val signatureId = computeIdWithoutNullabilityAnnotation(signature)
@@ -174,7 +175,24 @@ class IrProviderFromPublicSignature(val pluginContext: IrPluginContext) : IrProv
         // Signature of declaration that cannot be inherited (like enum entries) does not have id.
         signature == declarationSignature
       }
-    } ?: error("Signature $signature not found")
+    }
+
+    if (matchingDeclaration != null) {
+      return matchingDeclaration
+    }
+
+    // TODO(b/374966022): Remove this hack once we use klibs as dependency.
+    // The `emptyArray()` function is defined in the stdlib and is part of the stdlib builtins.
+    // For unknown reasons, there are two `IrNode`s loaded for its signature. One comes from the
+    // stdlib jar file as expected, and the other from an unknown place. We are only interested
+    // in the former one.
+    if (signature.toString().startsWith("kotlin/emptyArray|emptyArray()")) {
+      check(size == 2)
+      return single { it is IrMemberWithContainerSource && it.containerSource != null }
+    }
+
+    error("Signature $signature not found")
+  }
 
   private fun <T : IrDeclaration> Collection<IrBindableSymbol<*, T>>.matchingDeclarationSignature(
     signature: CommonSignature

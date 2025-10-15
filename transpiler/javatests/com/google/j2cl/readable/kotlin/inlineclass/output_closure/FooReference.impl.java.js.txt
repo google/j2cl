@@ -4,9 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
@@ -48,7 +46,7 @@ class FooReference extends j_l_Object {
   if (!FooReference.$isInstance(other)) {
    return false;
   }
-  let tmp0_other_with_cast = /**@type {!FooReference}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), FooReference));
+  let tmp0_other_with_cast = /**@type {!FooReference}*/ (other);
   if (!$Equality.$same(this.f_s__inlineclass_FooReference_, tmp0_other_with_cast.f_s__inlineclass_FooReference_)) {
    return false;
   }
@@ -68,9 +66,7 @@ class FooReference extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
-  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
 }

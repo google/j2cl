@@ -111,6 +111,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitch
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitchBreak
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitchCase
 import org.jetbrains.kotlin.backend.common.descriptors.synthesizedName
+import org.jetbrains.kotlin.backend.common.ir.isBytecodeGenerationSuppressed
 import org.jetbrains.kotlin.backend.jvm.MultifileFacadeFileEntry
 import org.jetbrains.kotlin.backend.jvm.isMultifileBridge
 import org.jetbrains.kotlin.ir.IrElement
@@ -210,7 +211,7 @@ internal class CompilationUnitBuilder(
   private val labelsInScope: MutableMap<String, ArrayDeque<Label>> = mutableMapOf()
 
   fun convert(irModuleFragment: IrModuleFragment): List<CompilationUnit> =
-    irModuleFragment.files.map(::convertFile)
+    irModuleFragment.files.filter { !it.isBytecodeGenerationSuppressed }.map(::convertFile)
 
   private fun convertFile(irFile: IrFile): CompilationUnit {
     currentIrFile = irFile
@@ -867,7 +868,7 @@ internal class CompilationUnitBuilder(
         // Type argument of the isArrayOf call is the component type of the array:
         ArrayTypeDescriptor.newBuilder()
           .setComponentTypeDescriptor(
-            environment.getTypeDescriptor(requireNotNull(irCall.getTypeArgument(0)))
+            environment.getTypeDescriptor(requireNotNull(irCall.typeArguments[0]))
           )
           .build()
       )

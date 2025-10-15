@@ -16,33 +16,29 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.builtins.PrimitiveType
-import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.builtins.UnsignedType
-import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrFunction
-import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
+import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 import org.jetbrains.kotlin.ir.inline.InlineFunctionResolver
-import org.jetbrains.kotlin.ir.inline.InlineMode
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
-import org.jetbrains.kotlin.ir.util.getPackageFragment
-import org.jetbrains.kotlin.ir.util.hasShape
-import org.jetbrains.kotlin.ir.util.isVararg
+import org.jetbrains.kotlin.ir.util.resolveFakeOverrideOrSelf
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
 internal class J2clInlineFunctionResolver(private val context: J2clBackendContext) :
-  InlineFunctionResolver(InlineMode.ALL_INLINE_FUNCTIONS) {
+  InlineFunctionResolver() {
 
-  override fun shouldExcludeFunctionFromInlining(symbol: IrFunctionSymbol): Boolean {
-    return super.shouldExcludeFunctionFromInlining(symbol) ||
+  override fun getFunctionDeclaration(symbol: IrFunctionSymbol): IrFunction? {
+    return symbol.owner.resolveFakeOverrideOrSelf().takeIf { it.isInline }
+  }
+
+  override fun shouldSkipBecauseOfCallSite(expression: IrFunctionAccessExpression): Boolean {
+    return super.shouldSkipBecauseOfCallSite(expression) ||
       // arrayOf functions are inline intrinsic functions in the jvm stdlib and should not be
-      // inlined.
-      // The calls to these functions are directly handled by our CompilationUnitBuilder.
-      // TODO(b/256856926): Remove this code when arrayOf() functions are no longer inlineable.
-      symbol.owner.isArrayOf() ||
-      // String?.plus() functions are inline intrinsic functions in the stdlib and should not be
       // inlined. The calls to these functions are directly handled by our CompilationUnitBuilder.
-      // TODO(b/256856926): Remove this code when String?.plus() function is no longer inlineable.
-      symbol.isExtensionStringPlus ||
+      context.intrinsics.isArrayOf(expression.symbol) ||
+      // emptyArray is an inline builtin function in stdlib and should not be inlined.
+      // The calls to this function are directly handled by our EmptyArrayLowering pass.
+      context.intrinsics.isEmptyArray(expression.symbol) ||
       // The `coroutineContext` getter is an inline intrinsic function.
       // In Kotlin/JVM, this is replaced at code generation time.
       // In Kotlin/JS, calls to this inline function are mapped to a top-level inline suspend
@@ -51,7 +47,7 @@ internal class J2clInlineFunctionResolver(private val context: J2clBackendContex
       // need to be attached to a FileClass,
       // which would require copying logic from the ExternalPackageParentPatcherLowering pass.
       // Thus, we opt to skip inlining the getter here and instead lower the call later.
-      symbol.isCoroutineContextGetter()
+      expression.symbol.isCoroutineContextGetter()
   }
 
   private val IrFunctionSymbol.isExtensionStringPlus: Boolean
@@ -68,16 +64,3 @@ private val PRIMITIVE_ARRAY_OF_NAMES: Set<String> =
     .toSet()
 
 private const val ARRAY_OF_NAME = "arrayOf"
-
-private fun IrFunction.isArrayOf(): Boolean {
-  val parent =
-    when (val directParent = parent) {
-      is IrClass -> directParent.getPackageFragment() ?: return false
-      is IrPackageFragment -> directParent
-      else -> return false
-    }
-  return parent.packageFqName == StandardNames.BUILT_INS_PACKAGE_FQ_NAME &&
-    name.asString().let { it in PRIMITIVE_ARRAY_OF_NAMES || it == ARRAY_OF_NAME } &&
-    hasShape(dispatchReceiver = false, extensionReceiver = false, regularParameters = 1) &&
-    parameters[0].isVararg
-}

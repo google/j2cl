@@ -51,13 +51,13 @@ import org.jetbrains.kotlin.ir.types.typeOrFail
 import org.jetbrains.kotlin.ir.util.classIfConstructor
 import org.jetbrains.kotlin.ir.util.copyTo
 import org.jetbrains.kotlin.ir.util.copyTypeParametersFrom
-import org.jetbrains.kotlin.ir.util.copyValueArgumentsFrom
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.remapTypeParameters
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.utils.addToStdlib.assignFrom
 import org.jetbrains.kotlin.utils.addToStdlib.getOrSetIfNull
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 import org.jetbrains.kotlin.utils.memoryOptimizedPlus
@@ -71,7 +71,7 @@ import org.jetbrains.kotlin.utils.memoryOptimizedPlus
 internal class StaticDefaultFunctionLowering(val context: JvmBackendContext) :
   IrElementTransformerVoid(), FileLoweringPass {
   override fun lower(irFile: IrFile) {
-    irFile.accept(this, null)
+    val unused = irFile.accept(this, null)
   }
 
   override fun visitSimpleFunction(declaration: IrSimpleFunction): IrStatement =
@@ -119,7 +119,7 @@ internal class StaticDefaultFunctionLowering(val context: JvmBackendContext) :
 
     val newCall =
       context.createJvmIrBuilder(callee.symbol, expression).irCall(newCallee.symbol).apply {
-        copyValueArgumentsFrom(expression, newCallee, receiversAsArguments = true)
+        arguments.assignFrom(expression.arguments)
         // Specialize captured type variable using the types from the dispatch receiver.
         for ((index, typeParameter) in extractedTypeParameters.withIndex()) {
           typeArguments[index] =
@@ -150,7 +150,7 @@ internal class StaticDefaultFunctionLowering(val context: JvmBackendContext) :
 }
 
 // Copied from compiler/ir/ir.tree/src/org/jetbrains/kotlin/ir/util/IrUtils.kt
-private fun IrFactory.createStaticFunctionWithReceivers(
+fun IrFactory.createStaticFunctionWithReceivers(
   irParent: IrDeclarationParent,
   name: Name,
   oldFunction: IrFunction,

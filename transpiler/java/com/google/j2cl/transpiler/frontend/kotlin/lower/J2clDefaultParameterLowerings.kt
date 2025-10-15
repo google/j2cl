@@ -59,7 +59,6 @@ import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.util.copyTypeParametersFrom
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
@@ -304,7 +303,7 @@ private class J2clDefaultArgumentFunctionFactory(context: J2clBackendContext) :
     copyAttributes(original)
     @Suppress("CheckReturnValue") copyTypeParametersFrom(original)
     copyReturnTypeFrom(original)
-    copyReceiversFrom(original)
+    // This method copy all parameters, receiver included.
     copyValueParametersFrom(original)
 
     // Remove any varargs from the bridge function. We'll expect an array literal to be passed
@@ -322,7 +321,7 @@ private class J2clDefaultArgumentFunctionFactory(context: J2clBackendContext) :
     parameters.asSequence().dropWhile { it.defaultValue == null }.forEach { it.stubDefaultValue() }
 
     if (useConstructorMarker) {
-      val markerType = context.ir.symbols.defaultConstructorMarker.defaultType.makeNullable()
+      val markerType = context.symbols.defaultConstructorMarker.defaultType.makeNullable()
       addValueParameter(
           "marker".synthesizedString,
           markerType,
@@ -347,7 +346,7 @@ private class J2clDefaultArgumentFunctionFactory(context: J2clBackendContext) :
  * extracted to statements within the body of the function.
  */
 internal class J2clDefaultParameterCleaner(private val context: J2clBackendContext) :
-  FileLoweringPass, IrElementVisitorVoid {
+  FileLoweringPass, IrVisitorVoid() {
   override fun lower(irFile: IrFile) = visitElement(irFile)
 
   override fun visitElement(element: IrElement) = element.acceptChildrenVoid(this)
@@ -452,7 +451,7 @@ internal class J2clDefaultParameterInjector(context: J2clBackendContext) :
         context.intrinsics.jsCoerceToNullSymbol,
       )
       .apply {
-        putTypeArgument(0, this@maybeCoerceToNull.type)
+        typeArguments[0] = this@maybeCoerceToNull.type
         arguments[0] = this@maybeCoerceToNull
       }
   }

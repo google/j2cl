@@ -23,14 +23,14 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.util.kotlinFqName
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.name.FqName
 
 /** Removes the initializer for any property initialized with definedExternally. */
 internal class DefinedExternallyLowering(private val context: JvmBackendContext) :
-  FileLoweringPass, IrElementVisitorVoid {
+  FileLoweringPass, IrVisitorVoid() {
 
   override fun lower(irFile: IrFile) {
     irFile.acceptVoid(this)

@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.util.dump
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
@@ -392,7 +392,7 @@ private class WhenTransformer(private val context: CommonBackendContext) :
     val enclosedLoops = mutableSetOf<IrLoop>()
     val enclosedBreaks = mutableListOf<IrBreak>()
     irWhen.acceptVoid(
-      object : IrElementVisitorVoid {
+      object : IrVisitorVoid() {
         override fun visitElement(element: IrElement) = element.acceptChildrenVoid(this)
 
         override fun visitLoop(loop: IrLoop) {

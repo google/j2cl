@@ -24,6 +24,7 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
+import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
 
@@ -36,13 +37,12 @@ internal class CoroutineContextGetterLowering(private val context: J2clBackendCo
   FileLoweringPass, IrElementTransformerVoidWithContext() {
   @OptIn(InternalSymbolFinderAPI::class)
   private val continuationContextGetterSymbol: IrSimpleFunctionSymbol by lazy {
-    context.irBuiltIns.symbolFinder.findMemberPropertyGetter(
-      context.irBuiltIns.symbolFinder.findClass(
-        Name.identifier("Continuation"),
-        StandardClassIds.BASE_COROUTINES_PACKAGE,
-      )!!,
-      Name.identifier("context"),
-    )!!
+    context.irBuiltIns.symbolFinder
+      .findProperties(CallableId(StandardClassIds.Continuation, Name.identifier("context")))
+      .single()
+      .owner
+      .getter!!
+      .symbol
   }
 
   override fun lower(irFile: IrFile) {
@@ -61,7 +61,7 @@ internal class CoroutineContextGetterLowering(private val context: J2clBackendCo
     return irBuilder.irCall(continuationContextGetterSymbol).apply {
       dispatchReceiver =
         irBuilder.irCall(context.intrinsics.getContinuationSymbol).apply {
-          putTypeArgument(0, context.irBuiltIns.anyNType)
+          typeArguments[0] = context.irBuiltIns.anyNType
         }
     }
   }

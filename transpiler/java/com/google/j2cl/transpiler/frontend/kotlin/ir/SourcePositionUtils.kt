@@ -33,6 +33,7 @@ import org.jetbrains.kotlin.diagnostics.findChildByType
 import org.jetbrains.kotlin.diagnostics.findDescendantByType
 import org.jetbrains.kotlin.diagnostics.nameIdentifier
 import org.jetbrains.kotlin.fir.backend.FirMetadataSource
+import org.jetbrains.kotlin.fir.declarations.DirectDeclarationsAccess
 import org.jetbrains.kotlin.fir.declarations.FirDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirEnumEntry
 import org.jetbrains.kotlin.fir.declarations.FirRegularClass
@@ -122,7 +123,7 @@ private fun IrElement.getSourceElement() =
 /** Retrieves the sourceElement of the enum entry through the parent enum class. */
 private fun IrEnumEntry.getSourceElement(): KtSourceElement? {
   val firEnclosingClass = parent.firElement as? FirRegularClass ?: return null
-
+  @OptIn(DirectDeclarationsAccess::class)
   return firEnclosingClass.declarations
     .filterIsInstance<FirEnumEntry>()
     .single { it.name == this.name }

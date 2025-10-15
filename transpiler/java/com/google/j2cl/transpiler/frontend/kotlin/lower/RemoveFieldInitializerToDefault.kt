@@ -22,12 +22,12 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstKind
 import org.jetbrains.kotlin.ir.types.isPrimitiveType
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
 /** Drops the field initializer when a property is initialized to its default value. */
-internal class RemoveFieldInitializerToDefault : IrElementVisitorVoid, FileLoweringPass {
+internal class RemoveFieldInitializerToDefault : IrVisitorVoid(), FileLoweringPass {
   override fun lower(irFile: IrFile) = irFile.acceptVoid(this)
 
   override fun visitElement(element: IrElement) = element.acceptChildrenVoid(this)

@@ -36,6 +36,7 @@ import org.jetbrains.kotlin.ir.expressions.IrSetValue
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.expressions.IrWhileLoop
+import org.jetbrains.kotlin.ir.expressions.impl.IrBlockImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
 import org.jetbrains.kotlin.ir.util.getSimpleFunction
 import org.jetbrains.kotlin.ir.util.nonDispatchArguments
@@ -156,20 +157,21 @@ private class LoopTransformer(
 ) : IrElementTransformerVoidWithContext() {
 
   private val iterableIteratorFunction: IrSimpleFunction by lazy {
-    context.ir.symbols.iterable.getSimpleFunction("iterator")!!.owner
+    context.symbols.iterable.getSimpleFunction("iterator")!!.owner
   }
 
   private val iteratorHasNextFunction: IrSimpleFunction by lazy {
-    context.ir.symbols.iterator.getSimpleFunction("hasNext")!!.owner
+    context.symbols.iterator.getSimpleFunction("hasNext")!!.owner
   }
 
   override fun visitBlock(expression: IrBlock): IrExpression {
+    expression.transformChildrenVoid(this)
     // The psi2ir transformer wraps all `for` loop into an `IrBlock` with origin `FOR_LOOP`.
     // After this check, we are sure that we are manipulating `while` and `do while` loop that has
     // been created by the Kotlin compiler to represent a for loop. We can make assumption on them
     // because we will never match a `while` or `do while` loop written by the user.
     if (expression.origin != IrStatementOrigin.FOR_LOOP || expression.statements.size < 2) {
-      return super.visitBlock(expression)
+      return expression
     }
 
     // Extract the different component of the for loop. If we are unable to extract one of the
@@ -198,7 +200,13 @@ private class LoopTransformer(
     // Update mapping from old to new loop, so we can later update references in break/continue.
     oldLoopToNewLoop[oldLoop] = newLoop
 
-    return visitLoop(newLoop)
+    // Wrap the new loop into a new block to not break the IR structure.
+    return IrBlockImpl(
+      startOffset = expression.startOffset,
+      endOffset = expression.endOffset,
+      type = expression.type,
+      statements = listOf(newLoop),
+    )
   }
 
   private fun isForEachLoop(initializers: List<IrVariable>) =

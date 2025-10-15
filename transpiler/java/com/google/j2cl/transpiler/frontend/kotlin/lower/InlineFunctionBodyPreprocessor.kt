@@ -5,47 +5,43 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.ir.Symbols
-import org.jetbrains.kotlin.ir.declarations.IrClass
-import org.jetbrains.kotlin.ir.declarations.IrDeclarationParent
 import org.jetbrains.kotlin.ir.declarations.IrFunction
-import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
+import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.expressions.IrCall
-import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
+import org.jetbrains.kotlin.ir.expressions.IrClassReference
 import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.inline.CallInlinerStrategy
-import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.types.impl.IrStarProjectionImpl
-import org.jetbrains.kotlin.ir.types.impl.buildSimpleType
-import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
-import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
-// Copied and modified from
-// compiler/ir/ir.inline/src/org/jetbrains/kotlin/ir/inline/InlineFunctionBodyPreprocessor.kt
-private enum class NonReifiedTypeParameterRemappingMode {
-  LEAVE_AS_IS,
-  SUBSTITUTE,
-  ERASE,
-}
-
+/**
+ * @property typeArguments A map of type parameter symbols to the corresponding types, used for
+ *   substituting type parameters during inlining. There are 3 cases that can be encountered:
+ *     1. The type parameter symbol exists in the map, but the value is null => ERASE the type.
+ *     2. The type parameter symbol exists in the map, and there is a non-null value => SUBSTITUTE
+ *        the type.
+ *     3. The type parameter symbol does not exist in the map => LEAVE_AS_IS.
+ *
+ * Copied and modified from
+ * compiler/ir/ir.inline/src/org/jetbrains/kotlin/ir/inline/InlineFunctionBodyPreprocessor.kt
+ */
 internal class InlineFunctionBodyPreprocessor(
-  val typeArguments: Map<IrTypeParameterSymbol, IrType?>?,
-  val parent: IrDeclarationParent?,
-  val strategy: CallInlinerStrategy,
+  val typeArguments: Map<IrTypeParameterSymbol, IrType?>
 ) {
+  @Suppress("UNCHECKED_CAST")
+  private val parametersToSubstitute: Map<IrTypeParameterSymbol, IrType> =
+    typeArguments.filterValues { it != null } as Map<IrTypeParameterSymbol, IrType>
+  private val parametersToErase: Set<IrTypeParameterSymbol> =
+    typeArguments.filter { it.value == null }.keys
 
   fun preprocess(irElement: IrFunction): IrFunction {
     // Create new symbols.
     irElement.acceptVoid(symbolRemapper)
-
-    // Make symbol remapper aware of the callsite's type arguments.
-    symbolRemapper.typeArguments = typeArguments
 
     // Copy IR.
     val result =
@@ -57,158 +53,113 @@ internal class InlineFunctionBodyPreprocessor(
         } else {
           it
         }
-      }
+      } as IrFunction
 
-    result.patchDeclarationParents(parent)
-    return result as IrFunction
+    result.patchDeclarationParents(irElement.parent)
+
+    // Make all arguments regular and noinline if needed.
+    for ((originalParameter, newParameter) in irElement.parameters.zip(result.parameters)) {
+      newParameter.kind = IrParameterKind.Regular
+      // It can become inline accidentally because of substitution of type parameter to inline
+      // function
+      // To revert it we mark it as noinline explicitly
+      if (!originalParameter.isInlineParameter() && newParameter.isInlineParameter()) {
+        newParameter.isNoinline = true
+      }
+    }
+
+    return result
   }
 
-  private inner class InlinerTypeRemapper(
-    val symbolRemapper: SymbolRemapper,
-    val typeArguments: Map<IrTypeParameterSymbol, IrType?>?,
-  ) : TypeRemapper {
-
-    override fun enterScope(irTypeParametersContainer: IrTypeParametersContainer) {}
-
-    override fun leaveScope() {}
-
-    private fun remapTypeArguments(
-      arguments: List<IrTypeArgument>,
-      erasedParameters: MutableSet<IrTypeParameterSymbol>?,
-      leaveNonReifiedAsIs: Boolean,
-    ) =
-      arguments.memoryOptimizedMap { argument ->
-        (argument as? IrTypeProjection)?.let { proj ->
-          remapType(proj.type, erasedParameters, leaveNonReifiedAsIs)?.let { newType ->
-            makeTypeProjection(newType, proj.variance)
-          } ?: IrStarProjectionImpl
-        } ?: argument
-      }
-
-    override fun remapType(type: IrType) =
+  private val symbolRemapper =
+    object : DeepCopySymbolRemapper(NullDescriptorsRemapper) {
       // MODIFIED BY GOOGLE
-      // Substitute type parameters rather than erase them.
-      // Original code:
-      // remapType(type, NonReifiedTypeParameterRemappingMode.ERASE)
-      remapType(type, NonReifiedTypeParameterRemappingMode.SUBSTITUTE)
-
-    // END OF MODIFICATIONS.
-
-    fun remapType(type: IrType, mode: NonReifiedTypeParameterRemappingMode): IrType {
-      val erasedParams =
-        if (mode == NonReifiedTypeParameterRemappingMode.ERASE)
-          mutableSetOf<IrTypeParameterSymbol>()
-        else null
-      return remapType(type, erasedParams, mode == NonReifiedTypeParameterRemappingMode.LEAVE_AS_IS)
-        ?: error("Cannot substitute type ${type.render()}")
+      // To workaround duplicate symbols being present during IR deserialization, we'll resolve
+      // function symbols by always using the own attached to the corresponding IR node.
+      override fun getReferencedSimpleFunction(symbol: IrSimpleFunctionSymbol) =
+        super.getReferencedSimpleFunction(symbol.owner.symbol)
+      // END OF MODIFICATIONS
     }
 
-    private fun remapType(
-      type: IrType,
-      erasedParameters: MutableSet<IrTypeParameterSymbol>?,
-      leaveNonReifiedAsIs: Boolean,
-    ): IrType? {
-      if (type !is IrSimpleType) return type
+  private val nonReifiedTypeParameterSubstitutor: AbstractIrTypeSubstitutor =
+    object : BaseIrTypeSubstitutor() {
+      private val inProgress = mutableSetOf<IrTypeParameterSymbol>()
+      // We need to avoid computing erasures for unused parameters, as they still exist in functions
+      // loaded from klibs, but computing erasure would lead to exception because of unbound symbols
+      // in super-types. So we cache them on-demand instead of computing in advance.
+      private val erasureCache = mutableMapOf<IrTypeParameterSymbol, IrType>()
 
-      val classifier = type.classifier
-      val substitutedType = typeArguments?.get(classifier)
-
-      if (
-        leaveNonReifiedAsIs && classifier is IrTypeParameterSymbol && !classifier.owner.isReified
-      ) {
-        return type
-      }
-
-      // Erase non-reified type parameter if asked to.
-      if (
-        erasedParameters != null &&
-          substitutedType != null &&
-          (classifier as? IrTypeParameterSymbol)?.owner?.isReified == false
-      ) {
-
-        if (classifier in erasedParameters) {
-          return null
+      override fun getSubstitutionArgument(typeParameter: IrTypeParameterSymbol): IrTypeArgument {
+        if (typeParameter !in parametersToErase) return typeParameter.defaultType
+        // We have found a type with recursive upper bound. Let's erase it to star at some point.
+        // That's not correct, but the best we can do.
+        if (typeParameter in inProgress) return IrStarProjectionImpl
+        return erasureCache.getOrPut(typeParameter) {
+          // Pick the (necessarily unique) non-interface upper bound if it exists.
+          val superTypes = typeParameter.owner.superTypes
+          val superClass = superTypes.firstOrNull { it.classOrNull?.owner?.isInterface == false }
+          val upperBound = superClass ?: superTypes.first()
+          inProgress.add(typeParameter)
+          // Note: an upper bound can be another type parameter, and it can be reified.
+          // So we need to call [allTypeParameterSubstitutor], not just substitute recursively by
+          // ourselves.
+          // As this remapper is chained, it can call this remapper back if needed.
+          val substitutedUpperBound = allTypeParameterSubstitutor.substitute(upperBound)
+          inProgress.remove(typeParameter)
+          substitutedUpperBound
         }
-
-        erasedParameters.add(classifier)
-
-        // Pick the (necessarily unique) non-interface upper bound if it exists.
-        val superTypes = classifier.owner.superTypes
-        val superClass = superTypes.firstOrNull { it.classOrNull?.owner?.isInterface == false }
-
-        val upperBound = superClass ?: superTypes.first()
-
-        // TODO: Think about how to reduce complexity from k^N to N^k
-        val erasedUpperBound =
-          remapType(upperBound, erasedParameters, leaveNonReifiedAsIs)
-            ?: error("Cannot erase upperbound ${upperBound.render()}")
-
-        erasedParameters.remove(classifier)
-
-        return erasedUpperBound.mergeNullability(type)
       }
 
-      if (substitutedType is IrDynamicType) return substitutedType
-
-      if (substitutedType is IrSimpleType) {
-        return substitutedType.mergeNullability(type)
-      }
-
-      return type.buildSimpleType {
-        kotlinType = null
-        this.classifier = symbolRemapper.getReferencedClassifier(classifier)
-        arguments = remapTypeArguments(type.arguments, erasedParameters, leaveNonReifiedAsIs)
-        annotations =
-          type.annotations.memoryOptimizedMap { it.transform(copier, null) as IrConstructorCall }
+      override fun isEmptySubstitution(): Boolean {
+        return parametersToErase.isEmpty()
       }
     }
-  }
+  private val reifiedTypeParameterSubstitutor =
+    IrTypeSubstitutor(parametersToSubstitute, allowEmptySubstitution = true)
 
-  private class SymbolRemapperImpl(descriptorsRemapper: DescriptorsRemapper) :
-    DeepCopySymbolRemapper(descriptorsRemapper) {
+  /**
+   * There are several types of classifiers that can happen inside the tree:
+   * * Classes defined outside the inline function (should be kept as is, can be unbound)
+   * * Local classes defined inside the inline function (need to be replaced with copied local class
+   *   symbol)
+   * * Type parameters that needs to be substituted (reified type parameters)
+   * * Type parameters that needs to be erased (non-reifed type parameters and some type parameters
+   *   of outer scopes)
+   * * Type parameters that needs to be kept as is (type parameters of common outer scopes of inline
+   *   function and its call-site)
+   * * Type parameters that needs to be remapped to type parameter of copied function (reified in
+   *   case of storing to klib)
+   *
+   * Also, there is a special case -- in typeOf function type argument position type parameters that
+   * are not substituted need to be kept as is.
+   *
+   * To achieve this, we have several type substitutors and use appropriate ones in different
+   * places.
+   * 1. [nonReifiedTypeParameterSubstitutor] substitutes type parameters with their erasure, when
+   *    it's required
+   * 2. [reifiedTypeParameterSubstitutor] substitutes type parameters with their call-site value
+   *    when it's required.
+   * 3. [allTypeParameterSubstitutor] do both 1 and 2 at the same time.
+   * 4. Type remapper within [DeepCopyIrTreeWithSymbols] remaps all kinds of local symbols (both
+   *    type parameters and local classes)
+   *     * [symbolRemapper] is it's part, and can be used separately if needed to do this
+   *       substitution on classifiers.
+   *
+   * These 4 remappers cover everything except the special case with typeOf. With it there is a
+   * problem - we don't have a remaper that replaces local classes but doesn't touch type
+   * parameters. To work around this, there is a
+   * [TypeOfPostProcessor.nonReifiedTypeParameterUnsubsitutor]. It reverts part of the work done by
+   * [symbolRemapper] within [DeepCopyIrTreeWithSymbols].
+   */
+  private val allTypeParameterSubstitutor =
+    reifiedTypeParameterSubstitutor.chainedWith(nonReifiedTypeParameterSubstitutor)
 
-    var typeArguments: Map<IrTypeParameterSymbol, IrType?>? = null
-      set(value) {
-        if (field != null) return
-        field =
-          value?.asSequence()?.associate {
-            (getReferencedClassifier(it.key) as IrTypeParameterSymbol) to it.value
-          }
-      }
-
-    override fun getReferencedClassifier(symbol: IrClassifierSymbol): IrClassifierSymbol {
-      val result = super.getReferencedClassifier(symbol)
-      if (result !is IrTypeParameterSymbol) return result
-      return typeArguments?.get(result)?.classifierOrNull ?: result
-    }
-
-    // MODIFIED BY GOOGLE
-    // To workaround duplicate symbols being present during IR deserialization, we'll resolve
-    // function symbols by always using the own attached to the corresponding IR node.
-    override fun getReferencedSimpleFunction(symbol: IrSimpleFunctionSymbol) =
-      super.getReferencedSimpleFunction(symbol.owner.symbol)
-    // END OF MODIFICATIONS
-  }
-
-  private val symbolRemapper = SymbolRemapperImpl(NullDescriptorsRemapper)
-  private val typeRemapper = InlinerTypeRemapper(symbolRemapper, typeArguments)
   private val copier =
-    object : DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper) {
+    object : DeepCopyIrTreeWithSymbols(symbolRemapper, null) {
       var typeOfNodes = mutableMapOf<IrCall, IrType>()
 
-      private fun IrType.leaveNonReifiedAsIs() =
-        typeRemapper.remapType(this, NonReifiedTypeParameterRemappingMode.LEAVE_AS_IS)
-
-      private fun IrType.substituteAll() =
-        typeRemapper.remapType(this, NonReifiedTypeParameterRemappingMode.SUBSTITUTE)
-
-      override fun visitClass(declaration: IrClass): IrClass {
-        // Substitute type argument to make Class::genericSuperclass work as expected (see
-        // kt52417.kt)
-        // Substitution to the super types does not lead to reification and therefore is safe
-        return super.visitClass(declaration).apply {
-          superTypes = declaration.superTypes.memoryOptimizedMap { it.substituteAll() }
-        }
+      override fun remapTypeImpl(type: IrType): IrType {
+        return super.remapTypeImpl(allTypeParameterSubstitutor.substitute(type))
       }
 
       override fun visitCall(expression: IrCall): IrCall {
@@ -222,20 +173,49 @@ internal class InlineFunctionBodyPreprocessor(
           // significant performance hit,
           // as typeOf calls are rare.
           if (Symbols.isTypeOfIntrinsic(expression.symbol)) {
-            typeOfNodes[it] = expression.getTypeArgument(0)!!.leaveNonReifiedAsIs()
+            // We need to call super.remap here because we need to remap local classes.
+            typeOfNodes[it] =
+              super.remapTypeImpl(
+                reifiedTypeParameterSubstitutor.substitute(expression.typeArguments[0]!!)
+              )
+          }
+        }
+      }
+
+      override fun visitClassReference(expression: IrClassReference): IrClassReference {
+        return super.visitClassReference(expression).also {
+          val symbol = expression.symbol
+          if (symbol is IrTypeParameterSymbol) {
+            val replacement =
+              reifiedTypeParameterSubstitutor
+                .getSubstitutionArgument(symbol)
+                ?.typeOrFail
+                ?.classifierOrFail ?: symbol
+            it.symbol = symbolRemapper.getReferencedClassifier(replacement)
           }
         }
       }
     }
 
   inner class TypeOfPostProcessor : IrElementTransformerVoid() {
+    // See [allTypeParameterSubstitutor] for an explanation why this is needed.
+    private val nonReifiedTypeParameterUnsubsitutor =
+      IrTypeSubstitutor(
+        parametersToErase.associate {
+          (symbolRemapper.getReferencedTypeParameter(it) as IrTypeParameterSymbol) to it.defaultType
+        },
+        allowEmptySubstitution = true,
+      )
+
     override fun visitCall(expression: IrCall): IrExpression {
       expression.transformChildrenVoid(this)
       return copier.typeOfNodes[expression]?.let { oldType ->
         // We should neither erase nor substitute non-reified type parameters in the `typeOf` call
         // so that reflection is able
         // to create a proper KTypeParameter for it. See KT-60175, KT-30279.
-        return strategy.postProcessTypeOf(expression, oldType)
+        expression.apply {
+          typeArguments[0] = nonReifiedTypeParameterUnsubsitutor.substitute(oldType)
+        }
       } ?: expression
     }
   }

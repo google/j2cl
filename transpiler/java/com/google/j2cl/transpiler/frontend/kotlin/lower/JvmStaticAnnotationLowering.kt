@@ -80,12 +80,11 @@ private fun IrMemberAccessExpression<*>.makeStatic(
   irBuiltIns: IrBuiltIns,
   replaceCallee: IrSimpleFunction?,
 ): IrExpression {
-  val receiver = dispatchReceiver ?: return this
-  removeDispatchReceiver()
+  val receiver = arguments.removeAt(0)
   if (replaceCallee != null) {
     (this as IrCall).symbol = replaceCallee.symbol
   }
-  if (receiver.isTrivial()) {
+  if (receiver == null || receiver.isTrivial()) {
     // Receiver has no side effects (aside from maybe class initialization) so discard it.
     return this
   }
@@ -108,7 +107,7 @@ class SingletonObjectJvmStaticTransformer(
     if (function.isJvmStaticInObject()) {
       // dispatch receiver parameter is already null for synthetic property annotation methods
       function.dispatchReceiverParameter?.let { oldDispatchReceiverParameter ->
-        function.dispatchReceiverParameter = null
+        function.parameters -= oldDispatchReceiverParameter
 
         if (function !is IrLazyFunctionBase) {
           function.replaceThisByStaticReference(
@@ -200,9 +199,9 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
         // END OF MODIFICATIONS.
         expression.makeStatic(context.irBuiltIns, staticProxy)
       }
-      callee.symbol == context.ir.symbols.indyLambdaMetafactoryIntrinsic -> {
+      callee.symbol == context.symbols.indyLambdaMetafactoryIntrinsic -> {
         val implFunRef =
-          expression.getValueArgument(1) as? IrFunctionReference
+          expression.arguments[1] as? IrFunctionReference
             ?: throw AssertionError(
               "'implMethodReference' is expected to be 'IrFunctionReference': ${expression.dump()}"
             )
@@ -219,8 +218,7 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
           //     context.cachedDeclarations.getStaticAndCompanionDeclaration(implFun)
           val (staticProxy, _) = getStaticAndCompanionDeclaration(implFun)
           // END OF MODIFICATIONS.
-          expression.putValueArgument(
-            1,
+          expression.arguments[1] =
             IrFunctionReferenceImpl(
               implFunRef.startOffset,
               implFunRef.endOffset,
@@ -229,8 +227,7 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
               staticProxy.typeParameters.size,
               implFunRef.reflectionTarget,
               implFunRef.origin,
-            ),
-          )
+            )
         }
         expression
       }

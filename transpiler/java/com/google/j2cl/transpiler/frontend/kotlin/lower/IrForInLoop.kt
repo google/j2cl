@@ -15,38 +15,37 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import org.jetbrains.kotlin.ir.declarations.IrAttributeContainer
+import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
+import org.jetbrains.kotlin.ir.visitors.IrTransformer
+import org.jetbrains.kotlin.ir.visitors.IrVisitor
 
 /** An AST represention of `for (v in iterable)`. */
 class IrForInLoop(
-  override val startOffset: Int,
-  override val endOffset: Int,
+  override var startOffset: Int,
+  override var endOffset: Int,
   override var type: IrType,
   val variable: IrVariable,
   override var condition: IrExpression,
 ) : IrLoop() {
   override var origin: IrStatementOrigin? = IrStatementOrigin.FOR_LOOP
   override var body: IrExpression? = null
-  override var attributeOwnerId: IrAttributeContainer = this
+  override var attributeOwnerId: IrElement = this
   override var label: String? = null
 
-  override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
-    visitor.visitLoop(this, data)
+  override fun <R, D> accept(visitor: IrVisitor<R, D>, data: D): R = visitor.visitLoop(this, data)
 
-  override fun <D> acceptChildren(visitor: IrElementVisitor<Unit, D>, data: D) {
+  override fun <D> acceptChildren(visitor: IrVisitor<Unit, D>, data: D) {
     variable.accept(visitor, data)
     condition.accept(visitor, data)
     body?.accept(visitor, data)
   }
 
-  override fun <D> transformChildren(transformer: IrElementTransformer<D>, data: D) {
+  override fun <D> transformChildren(transformer: IrTransformer<D>, data: D) {
     variable.transformChildren(transformer, data)
     condition.transformChildren(transformer, data)
     body?.transformChildren(transformer, data)

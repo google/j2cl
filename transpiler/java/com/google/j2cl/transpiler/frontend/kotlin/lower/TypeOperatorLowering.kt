@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.ir.util.isBoxedArray
 import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.util.isSubtypeOf
 import org.jetbrains.kotlin.ir.util.isSubtypeOfClass
-import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.types.Variance
@@ -140,7 +140,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
           irAs(
             irCall(context.irBuiltIns.checkNotNullSymbol).apply {
               this.type = transformedArgument.type.makeNotNull()
-              putTypeArgument(0, transformedArgument.type.makeNotNull())
+              typeArguments[0] = transformedArgument.type.makeNotNull()
               arguments[0] = transformedArgument
             },
             type,
@@ -282,7 +282,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
           val argument = expression.argument.transformVoid()
           irCall(context.irBuiltIns.checkNotNullSymbol).apply {
             type = expression.type
-            putTypeArgument(0, argument.type.makeNotNull())
+            typeArguments[0] = expression.type.makeNotNull()
             arguments[0] = argument
           }
           // END OF MODIFICATIONS
@@ -335,7 +335,7 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
     var startOffset = Int.MAX_VALUE
     var endOffset = 0
     acceptVoid(
-      object : IrElementVisitorVoid {
+      object : IrVisitorVoid() {
         override fun visitElement(element: IrElement) {
           element.acceptChildrenVoid(this)
           if (element.startOffset in 0 until startOffset) startOffset = element.startOffset
@@ -350,10 +350,9 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
     declaration.fileParent.getKtFile()?.viewProvider?.contents
 
   private val throwTypeCastException: IrSimpleFunctionSymbol =
-    backendContext.ir.symbols.throwTypeCastException
+    backendContext.symbols.throwTypeCastException
 
   private val checkExpressionValueIsNotNull: IrSimpleFunctionSymbol =
-    if (backendContext.config.unifiedNullChecks)
-      backendContext.ir.symbols.checkNotNullExpressionValue
-    else backendContext.ir.symbols.checkExpressionValueIsNotNull
+    if (backendContext.config.unifiedNullChecks) backendContext.symbols.checkNotNullExpressionValue
+    else backendContext.symbols.checkExpressionValueIsNotNull
 }

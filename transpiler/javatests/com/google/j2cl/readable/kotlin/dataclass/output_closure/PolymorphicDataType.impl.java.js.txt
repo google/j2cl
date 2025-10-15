@@ -5,9 +5,7 @@ const InterfaceType = goog.require('dataclass.InterfaceType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
@@ -98,7 +96,7 @@ class PolymorphicDataType extends AbstractType {
   if (!PolymorphicDataType.$isInstance(other)) {
    return false;
   }
-  let tmp0_other_with_cast = /**@type {!PolymorphicDataType}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(other), PolymorphicDataType));
+  let tmp0_other_with_cast = /**@type {!PolymorphicDataType}*/ (other);
   if (this.f_a__dataclass_PolymorphicDataType_ != tmp0_other_with_cast.f_a__dataclass_PolymorphicDataType_) {
    return false;
   }
@@ -124,9 +122,7 @@ class PolymorphicDataType extends AbstractType {
  /** @nodts */
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
-  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
 }

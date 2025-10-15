@@ -32,6 +32,9 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMap
  *
  * Copied and modified from
  * org.jetbrains.kotlin.ir.backend.js.lower.inline.LegacySyntheticAccessorLowering.kt
+ *
+ * TODO(b/449153897): This file has been removed in Koltin 2.2.20. Take a look at the new pass and
+ *   try to reuse it.
  */
 class SyntheticAccessorLowering(private val context: LoweringContext) : BodyLoweringPass {
 
