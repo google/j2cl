@@ -21,6 +21,10 @@ on:
         description: 'The version to release'
         required: true
         type: string
+      git_ref:
+        description: 'The git ref to use to create the final release.'
+        type: string
+        required: true
       publish_to_sonatype:
         description: 'Publish the release to Sonatype'
         type: boolean
@@ -75,10 +79,11 @@ jobs:
           # our larger repository, which is acceptable for a release process that is not run
           # frequently.
           fetch-depth: 0
+          ref: ${{ inputs.git_ref }}
 
       - name: Check if on Master Branch
         run: |
-          if ! git merge-base --is-ancestor "${{ github.ref }}" "refs/remotes/origin/master"; then
+          if ! git merge-base --is-ancestor "${{ inputs.git_ref }}" "refs/remotes/origin/master"; then
             echo "Error: Releases can only be created from commits that are on the 'master' branch."
             exit 1
           fi

@@ -25,6 +25,10 @@ on:
         description: 'The version to release'
         required: true
         type: string
+      base_rc_version:
+        description: 'The base RC version to use to create the final release. Should be formatted as X.Y.Z-RC.N'
+        type: string
+        required: false
       continue_if_tag_exists:
         description: 'Continue the workflow even if the GitHub tag already exists'
         type: boolean
@@ -32,7 +36,58 @@ on:
         default: false
 
 jobs:
+  validate_inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate base_rc_version
+        run: |
+          base_rc_version="${{ github.event.inputs.base_rc_version }}"
+          if [[ -z "$base_rc_version" ]]; then
+            echo "The base RC version field is empty, no validation needed."
+            exit 0
+          fi
+
+          version="${{ github.event.inputs.version }}"
+          repo_name="${{ github.event.repository.name }}"
+          RC_REGEX='^([0-9]+\.[0-9]+\.[0-9]+)-RC\.?[0-9]+$'
+          VERSION_REGEX='^[0-9]+\.[0-9]+\.[0-9]+$'
+
+          # Ensure base_rc_version is not set for repositories that do not use RC versions.
+          if [[ "$repo_name" == "jsinterop-generator" || "$repo_name" == "j2cl" ]]; then
+            echo "Error: The base RC version field should not be set for repository '${repo_name}'."
+            exit 1
+          fi
+
+          # Ensure base_rc_version is not set for for RC releases.
+          # RC releases should not be based on another RC version.
+          if [[ "$version" =~ $RC_REGEX ]]; then
+            echo "Error: If the version '${version}' is an RC version, the base RC version field must be empty."
+            exit 1
+          fi
+
+          # Validate base_rc_version format
+          if [[ ! "$base_rc_version" =~ $RC_REGEX ]]; then
+            echo "Error: Invalid base_rc_version format. Expected X.Y.Z-RC.N, but got '${base_rc_version}'."
+            exit 1
+          fi
+
+          # Extract the base version from base_rc_version using the first captured group from the regex match.
+          base_version_from_rc="${BASH_REMATCH[1]}"
+          # Ensure the base version extracted from `base_rc_version` matches the intended release `version`.
+          # This prevents releasing a final version based on an incorrect Release Candidate.
+          if [[ "$base_version_from_rc" != "$version" ]]; then
+            echo "Error: The base_rc_version '${base_rc_version}' does not match the version '${version}'."
+            exit 1
+          fi
+
+          # Check if the base version is an existing git tag
+          if ! git ls-remote ${{ github.server_url }}/${{ github.repository }} "refs/tags/${base_rc_version}" | grep -q "refs/tags/${base_rc_version}"; then
+            echo "Error: The base version '${base_rc_version}' is not a valid tag in the repository."
+            exit 1
+          fi
+
   release:
+    needs: validate_inputs
     uses: google/j2cl/.github/workflows/release_common.yaml@master
 
     permissions:
@@ -45,6 +100,7 @@ jobs:
     # Pass the inputs from the manual trigger to the reusable workflow.
     with:
       version: ${{ github.event.inputs.version }}
+      git_ref: ${{ github.event.inputs.base_rc_version && format('refs/tags/{0}', github.event.inputs.base_rc_version) || github.ref }}
       publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
       continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists == 'true' }}
       publish_to_bcr: ${{ github.event.repository.name != 'jsinterop-annotations' }}
