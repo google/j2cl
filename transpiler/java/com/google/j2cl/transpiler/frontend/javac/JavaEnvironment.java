@@ -1213,11 +1213,16 @@ class JavaEnvironment {
     var typeArgumentByTypeVariable = new LinkedHashMap<TypeVariable, TypeDescriptor>();
     for (int i = 0; i < typeArguments.size(); i++) {
       var typeArgument = typeArguments.get(i);
-      var typeParameter =
-          (javax.lang.model.type.TypeVariable) declaredTypeParameters.get(i).asType();
+      var typeParameter = (Type.TypeVar) declaredTypeParameters.get(i).asType();
 
       var typeArgumentDescriptor =
           switch (typeArgument) {
+            case WildcardType wildcardType
+                when isUnboundWildcard(wildcardType)
+                    && isReferencedInBounds(typeParameter, wildcardType) ->
+                // Detect the peski case of class A<T extends A<?>> which breaks
+                // specializeTypeVariables.
+                TypeVariable.createWildcard();
             case WildcardType wildcardType
                 when wildcardType.getSuperBound() == null
                     && hasAnnotation(
@@ -1237,6 +1242,42 @@ class JavaEnvironment {
           typeArgumentDescriptor);
     }
     return ImmutableList.copyOf(typeArgumentByTypeVariable.values());
+  }
+
+  public static boolean isReferencedInBounds(Type.TypeVar typeVariable, WildcardType wildcardType) {
+    class Visitor extends Types.DefaultTypeVisitor<Boolean, Void> {
+
+      @Override
+      public Boolean visitType(Type t, Void unused) {
+        return false;
+      }
+
+      @Override
+      public Boolean visitClassType(ClassType t, Void unused) {
+        return t.getTypeArguments().stream().anyMatch(ta -> visit(ta, null));
+      }
+
+      @Override
+      public Boolean visitWildcardType(Type.WildcardType t, Void unused) {
+        if (t == wildcardType) {
+          return true;
+        }
+
+        if (t.getExtendsBound() != null) {
+          return visit(t.getExtendsBound(), null);
+        }
+
+        return t.getSuperBound() != null && visit(t.getSuperBound(), null);
+      }
+
+      @Override
+      public Boolean visitArrayType(Type.ArrayType t, Void unused) {
+        return visit(t.elemtype, null);
+      }
+    }
+
+    var upperBound = typeVariable.getUpperBound();
+    return upperBound != null && upperBound.accept(new Visitor(), null);
   }
 
   private boolean isDefaultUpperbound(@Nullable TypeMirror upperbound) {

@@ -191,7 +191,7 @@ public class Main {
     public void method(T t) {}
   }
 
-  class Parent<T extends Parent<T>> extends GrandParent<T> {
+  class Parent<T extends Parent<?>> extends GrandParent<T> {
     @Override
     @JsMethod
     // This method would have the signature jsMethod(Parent) hence it would be mangled as

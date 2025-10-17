@@ -159,7 +159,7 @@ open class Main {
   open fun method(t: T) {}
  }
 
- open inner class Parent<T: Main.Parent<T>?> internal constructor(): Main.GrandParent<T>() {
+ open inner class Parent<T: Main.Parent<*>?> internal constructor(): Main.GrandParent<T>() {
   override fun jsMethod(t: T) {}
 
   override fun method(t: T) {}
