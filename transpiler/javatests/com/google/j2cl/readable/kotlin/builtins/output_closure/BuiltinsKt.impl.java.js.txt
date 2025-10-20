@@ -8,6 +8,7 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let HashMap = goog.forwardDeclare('java.util.HashMap$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
 let Map = goog.forwardDeclare('java.util.Map$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let CollectionsKt = goog.forwardDeclare('kotlin.collections.CollectionsKt$impl');
@@ -62,7 +63,7 @@ class BuiltinsKt extends j_l_Object {
  /** @nodts */
  static m_testBuiltinFunctionWithDifferentJvmName__void() {
   BuiltinsKt.$clinit();
-  let list = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
+  let list = /**@type {!List<string>}*/ (ArrayList.$create__());
   list.removeAtIndex(0);
   let arrayList = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
   arrayList.removeAtIndex(0);

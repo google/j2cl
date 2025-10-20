@@ -38,6 +38,7 @@ let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let ArraysKt = goog.forwardDeclare('kotlin.collections.ArraysKt$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let Sequence = goog.forwardDeclare('kotlin.sequences.Sequence$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -232,7 +233,7 @@ class InlineFunctionKt extends j_l_Object {
   let /** ?string */ tmp$ret$0;
   l$ret$1: {
    if (j_l_String.$isInstance('string')) {
-    tmp$ret$0 = (/**@type {string}*/ ('string'));
+    tmp$ret$0 = (/**@type {?string}*/ ('string'));
     break l$ret$1;
    }
    tmp$ret$0 = (/**@type {?string}*/ (null));
@@ -411,8 +412,8 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts */
  static m_useAdaptor__void() {
   let capturedValue = /**@type {OfObject<string>}*/ (Ref.m_createRef__java_lang_Object__javaemul_internal_Ref_OfObject('Initial'));
-  let nf = $3.$create__javaemul_internal_Ref_OfObject(capturedValue);
-  let s = $4.$create__();
+  let nf = /**@type {!NonFun<!MyClass>}*/ ($3.$create__javaemul_internal_Ref_OfObject(capturedValue));
+  let s = /**@type {!Sequence<Integer>}*/ ($4.$create__());
  }
  /** @nodts @return {number} */
  static m_testNonReifiedIntTypeParameterErasureInInlineFun__int() {

@@ -14,6 +14,7 @@ let LocalVariableKPropertyImpl = goog.forwardDeclare('kotlin.jvm.internal.LocalV
 let MutableKProperty0Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty0Impl$impl');
 let MutableKProperty1Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty1Impl$impl');
 let KMutableProperty0 = goog.forwardDeclare('kotlin.reflect.KMutableProperty0$impl');
+let KProperty = goog.forwardDeclare('kotlin.reflect.KProperty$impl');
 let KProperty0 = goog.forwardDeclare('kotlin.reflect.KProperty0$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -101,7 +102,7 @@ class WithDelegatedProperty extends j_l_Object {
  }
  /** @final @nodts @return {string} */
  m_getDelegatedToAnotherProperty__java_lang_String() {
-  let tmp0_property = /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+  let tmp0_property = /**@type {!KProperty<*>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
    return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getDelegatedToAnotherProperty__java_lang_String();
   })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
    return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setDelegatedToAnotherProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
@@ -111,7 +112,7 @@ class WithDelegatedProperty extends j_l_Object {
  }
  /** @final @nodts */
  m_setDelegatedToAnotherProperty__java_lang_String__void(/** string */ set__) {
-  let tmp0_property = /**@type {!MutableKProperty1Impl<!WithDelegatedProperty, string>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
+  let tmp0_property = /**@type {!KProperty<*>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {?}*/ ((/** ? */ arg0) =>{
    return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0, WithDelegatedProperty))).m_getDelegatedToAnotherProperty__java_lang_String();
   })), Function2.$adapt(/**  @return {?}*/ ((/** ? */ arg0_1, /** ? */ arg1) =>{
    return (/**@type {!WithDelegatedProperty}*/ ($Casts.$to(arg0_1, WithDelegatedProperty))).m_setDelegatedToAnotherProperty__java_lang_String__void(/**@type {string}*/ ($Casts.$to(arg1, j_l_String)));
