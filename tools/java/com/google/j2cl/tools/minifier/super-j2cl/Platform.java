@@ -25,8 +25,57 @@ import jsinterop.annotations.JsType;
 
 final class Platform {
 
-  @JsMethod
-  public static native String forceCopy(String s);
+  public static class CharBuffer {
+    private char[] data = new char[0];
+    private int length = 0;
+
+    void setLength(int length) {
+      this.length = length;
+    }
+
+    int length() {
+      return length;
+    }
+
+    void append(char c) {
+      data[length++] = c;
+    }
+
+    char charAt(int index) {
+      return data[index];
+    }
+
+    void replaceTail(int start, String string) {
+      string.getChars(0, string.length(), data, start);
+      // Adjust the length to trim so we drop the characters that were not replaced.
+      setLength(start + string.length());
+    }
+
+    int indexOf(String subString, int start) {
+      for (int i = start; i <= length - subString.length(); i++) {
+        boolean match = true;
+        for (int j = 0; j < subString.length(); j++) {
+          if (data[i + j] != subString.charAt(j)) {
+            match = false;
+            break;
+          }
+        }
+        if (match) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    String substring(int start) {
+      return new String(data, start, length - start);
+    }
+
+    @Override
+    public String toString() {
+      return new String(data, 0, length);
+    }
+  }
 
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
   static class Pattern {
@@ -43,11 +92,8 @@ final class Platform {
 
     @JsOverlay
     @Nullable
-    public final String match(StringBuilder input, int startIndex, int endIndex) {
-      // This is performance-safe for JS since StringBuilder in J2CL backed by JS String and JS VM
-      // only introduces a view on substring.
-      String region = input.substring(startIndex, endIndex);
-      MatchResult result = this.exec(region);
+    public final String match(CharBuffer input, int startIndex) {
+      MatchResult result = this.exec(input.substring(startIndex));
       if (result == null) {
         return null;
       }

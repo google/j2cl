@@ -22,9 +22,41 @@ import javax.annotation.Nullable;
 
 final class Platform {
 
-  public static String forceCopy(String s) {
-    // JVM doesn't need this as "substring" is never a "view".
-    return s;
+  public static class CharBuffer {
+    private final StringBuilder delegate = new StringBuilder();
+
+    void setLength(int length) {
+      delegate.setLength(length);
+    }
+
+    int length() {
+      return delegate.length();
+    }
+
+    void append(char c) {
+      delegate.append(c);
+    }
+
+    char charAt(int index) {
+      return delegate.charAt(index);
+    }
+
+    void replaceTail(int start, String s) {
+      delegate.replace(start, delegate.length(), s);
+    }
+
+    int indexOf(String s, int start) {
+      return delegate.indexOf(s, start);
+    }
+
+    String substring(int start) {
+      return delegate.substring(start);
+    }
+
+    @Override
+    public String toString() {
+      return delegate.toString();
+    }
   }
 
   record Pattern(java.util.regex.Pattern delegate) {
@@ -33,8 +65,8 @@ final class Platform {
     }
 
     @Nullable
-    public String match(StringBuilder input, int startIndex, int endIndex) {
-      var matcher = delegate.matcher(input).region(startIndex, endIndex);
+    public String match(CharBuffer input, int startIndex) {
+      var matcher = delegate.matcher(input.delegate).region(startIndex, input.length());
       if (!matcher.matches()) {
         return null;
       }

@@ -22,6 +22,7 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multiset;
+import com.google.j2cl.tools.minifier.Platform.CharBuffer;
 import com.google.j2cl.tools.minifier.Platform.Pattern;
 import com.google.j2cl.tools.rta.CodeRemovalInfo;
 import com.google.j2cl.tools.rta.LineRange;
@@ -65,7 +66,7 @@ public class J2clMinifier {
   }
 
   private static class Buffer {
-    private final StringBuilder contentBuffer = new StringBuilder();
+    private final CharBuffer contentBuffer = new CharBuffer();
     private int identifierStartIndex = -1;
     private int whitespaceStartIndex = 0;
     // We essentially want the ability to see if the last meaningful character we saw is something
@@ -127,7 +128,7 @@ public class J2clMinifier {
     }
 
     void replaceIdentifier(String newIdentifier) {
-      contentBuffer.replace(identifierStartIndex, contentBuffer.length(), newIdentifier);
+      contentBuffer.replaceTail(identifierStartIndex, newIdentifier);
       identifierStartIndex = -1;
       whitespaceStartIndex = contentBuffer.length();
     }
@@ -142,11 +143,11 @@ public class J2clMinifier {
     }
 
     String matchLastStatement(Pattern pattern) {
-      return pattern.match(contentBuffer, statementStartIndex, contentBuffer.length());
+      return pattern.match(contentBuffer, statementStartIndex);
     }
 
     void replaceStatement(String replacement) {
-      contentBuffer.replace(statementStartIndex, contentBuffer.length(), replacement);
+      contentBuffer.replaceTail(statementStartIndex, replacement);
       statementStartIndex = contentBuffer.length();
       whitespaceStartIndex = statementStartIndex;
     }
@@ -606,8 +607,6 @@ public class J2clMinifier {
       return minifiedIdentifiersByIdentifier.get(identifier);
     }
 
-    // Ensure key is not a view to avoid leaking the large string.
-    identifier = Platform.forceCopy(identifier);
     String prettyIdentifier = computePrettyIdentifier(identifier);
     if (prettyIdentifier.isEmpty()) {
       // The identifier must contain something strange like triple _'s. Leave the whole thing alone
