@@ -3,6 +3,7 @@
 #import "j2ktiosinterop/CustomNames.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
+#import "j2ktiosinterop/ImmutableList.h"
 #import "j2ktiosinterop/NativeCustomName.h"
 #import "j2ktiosinterop/NativeDefaultName.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
@@ -227,6 +228,26 @@
   CustomNativeClass_nativeStaticMethod();
   CustomNativeClass_nativeParameterWithCustomNativeClass_(obj);
   CustomNativeClass_nativeReturnType();
+}
+
+- (void)testImmutableList {
+  J2ktiosinteropImmutableList *list;
+  list = J2ktiosinteropImmutableList_of();
+  list = J2ktiosinteropImmutableList_ofWithId_(@"foo");
+  list = J2ktiosinteropImmutableList_ofWithId_withId_(@"foo", @"bar");
+  list = J2ktiosinteropImmutableList_copyOfWithJavaLangIterable_(list);
+
+  J2ktiosinteropImmutableList_Builder *builder;
+
+  builder = J2ktiosinteropImmutableList_builder();
+  [builder addWithId:@"foo"];
+  [builder addWithId:@"bar"];
+  list = [builder build];
+
+  builder = [J2ktiosinteropImmutableList builder];
+  [builder addWithId:@"foo"];
+  [builder addWithId:@"bar"];
+  list = [builder build];
 }
 
 @end
