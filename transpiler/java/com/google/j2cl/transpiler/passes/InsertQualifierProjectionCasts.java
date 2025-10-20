@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
@@ -82,12 +81,17 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-            return projectFieldAccessQualifierInLhs(binaryExpression);
+          public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
+            if (getParent() instanceof BinaryExpression binaryExpression
+                && binaryExpression.getLeftOperand() == fieldAccess
+                && binaryExpression.isSimpleAssignment()) {
+              return projectFieldAccessQualifier(fieldAccess);
+            }
+            return fieldAccess;
           }
 
           @Override
-          public Node rewriteInvocation(Invocation invocation) {
+          public Invocation rewriteInvocation(Invocation invocation) {
             return projectInvocationQualifier(invocation);
           }
 
@@ -114,34 +118,22 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
                 .build();
           }
 
-          private Expression projectFieldAccessQualifierInLhs(BinaryExpression binaryExpression) {
-            if (!binaryExpression.getOperator().isSimpleAssignment()) {
-              return binaryExpression;
-            }
-
-            Expression leftOperand = binaryExpression.getLeftOperand();
-            if (!(leftOperand instanceof FieldAccess fieldAccess)) {
-              return binaryExpression;
-            }
-
+          private FieldAccess projectFieldAccessQualifier(FieldAccess fieldAccess) {
             Expression qualifier = fieldAccess.getQualifier();
             if (qualifier == null) {
-              return binaryExpression;
+              return fieldAccess;
             }
 
             if (!needsCast(fieldAccess.getTypeDescriptor())) {
-              return binaryExpression;
+              return fieldAccess;
             }
 
-            return BinaryExpression.Builder.from(binaryExpression)
-                .setLeftOperand(
-                    FieldAccess.Builder.from(fieldAccess)
-                        .setQualifier(projectExpression(fieldAccess.getQualifier()))
-                        .build())
+            return FieldAccess.Builder.from(fieldAccess)
+                .setQualifier(projectExpression(fieldAccess.getQualifier()))
                 .build();
           }
 
-          private Expression projectInvocationQualifier(Invocation invocation) {
+          private Invocation projectInvocationQualifier(Invocation invocation) {
             Expression qualifier = invocation.getQualifier();
             if (qualifier == null) {
               return invocation;
