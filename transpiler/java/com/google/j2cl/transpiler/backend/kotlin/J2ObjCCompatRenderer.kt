@@ -321,11 +321,8 @@ internal class J2ObjCCompatRenderer(
 
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
     !typeDeclaration.isKtNative ||
-      (typeDeclaration.ktNativeQualifiedName == null &&
-        typeDeclaration.ktBridgeQualifiedName == null &&
-        typeDeclaration.ktCompanionQualifiedName == null &&
-        // TODO(b/448061854): Remove this once the bug is fixed.
-        !typeDeclaration.isFromJRE()) ||
+      !typeDeclaration.isFromJRE() ||
+      typeDeclaration.qualifiedSourceName in KT_NATIVE_JRE_ALLOWLIST ||
       mappedObjCNameRenderer(typeDeclaration) != null
 
   private fun functionRenderers(
@@ -435,16 +432,21 @@ internal class J2ObjCCompatRenderer(
     sourceRenderer(variable.name.objCName.escapeObjCKeyword)
 
   private fun objCNameRenderer(companionDeclaration: CompanionDeclaration): Renderer<Source> =
-    className(companionDeclaration.objCName(objCNamePrefix))
+    mappedKtNativeCompanionRenderer(companionDeclaration.enclosingTypeDeclaration)
+      ?: className(companionDeclaration.objCName(objCNamePrefix))
 
   private fun sharedRenderer(companionDeclaration: CompanionDeclaration): Renderer<Source> =
     getProperty(objCNameRenderer(companionDeclaration), "shared")
 
   private fun allocRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =
-    objCNameRenderer(typeDeclaration).map { inSquareBrackets(spaceSeparated(it, source("alloc"))) }
+    (mappedKtNativeBridgeRenderer(typeDeclaration) ?: objCNameRenderer(typeDeclaration)).map {
+      inSquareBrackets(spaceSeparated(it, source("alloc")))
+    }
 
   private fun objCNameRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =
-    mappedObjCNameRenderer(typeDeclaration) ?: nonMappedObjCNameRenderer(typeDeclaration)
+    mappedObjCNameRenderer(typeDeclaration)
+      ?: mappedKtNativeRenderer(typeDeclaration)
+      ?: nonMappedObjCNameRenderer(typeDeclaration)
 
   private fun nameIsMappedInObjC(typeDeclaration: TypeDeclaration): Boolean =
     mappedObjCNameRenderer(typeDeclaration) != null
@@ -460,6 +462,55 @@ internal class J2ObjCCompatRenderer(
       "java.util.Map" -> nsMutableDictionary
       else -> null
     }
+
+  private fun kotlinNameToObjC(name: String) = buildString {
+    if (name.startsWith("kotlin.")) {
+      append("GKOTKotlin")
+      append(name.substring(name.lastIndexOf('.') + 1))
+    } else {
+      append("J2kt")
+      var nextUpper = true
+      for (c in name) {
+        if (c == '.') {
+          nextUpper = true
+        } else if (nextUpper) {
+          append(c.uppercaseChar())
+          nextUpper = false
+        } else {
+          append(c)
+        }
+      }
+    }
+  }
+
+  private fun mappedKtNativeRenderer(
+    typeDeclaration: TypeDeclaration,
+    ktFqName: String?,
+  ): Renderer<Source>? =
+    if (ktFqName == null) {
+      null
+    } else {
+      objCNameRenderer(TypeDeclaration.Kind.CLASS, kotlinNameToObjC(ktFqName))
+    }
+
+  private fun mappedKtNativeRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
+    mappedKtNativeRenderer(typeDeclaration, typeDeclaration.ktNativeQualifiedName)
+
+  private fun mappedKtNativeBridgeRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
+    mappedKtNativeRenderer(
+      typeDeclaration,
+      KT_NATIVE_BRIDGE_NAME_MAP[typeDeclaration.ktBridgeQualifiedName]
+        ?: typeDeclaration.ktBridgeQualifiedName
+        ?: typeDeclaration.ktNativeQualifiedName,
+    )
+
+  private fun mappedKtNativeCompanionRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
+    mappedKtNativeRenderer(
+      typeDeclaration,
+      (typeDeclaration.ktCompanionQualifiedName ?: typeDeclaration.ktNativeQualifiedName)?.plus(
+        "Companion"
+      ),
+    )
 
   private fun nonMappedObjCNameRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =
     objCNameRenderer(typeDeclaration.kind, typeDeclaration.objCName(prefix = objCNamePrefix))
@@ -626,4 +677,19 @@ internal class J2ObjCCompatRenderer(
         Double.MAX_VALUE -> nsObjCRuntimeSourceRenderer("DBL_MAX")
         else -> sourceRenderer("$double")
       }
+
+  companion object {
+    // Java JRE classes where we generate J2ObjC compat headers.
+    // TODO(b/448061854): Replace with a list of unsupported classes or remove.
+    val KT_NATIVE_JRE_ALLOWLIST = setOf("java.lang.Throwable")
+
+    // A map from the bridge name supplied by the KtNative annotation to the bridge name
+    // that should be used for static methods / constructors.
+    val KT_NATIVE_BRIDGE_NAME_MAP =
+      mapOf(
+        // The annotation value for Throwable doesn't match what we'd expect here as
+        // java.lang.Throwable can't be used as the bridge type for Kotlin/JVM or J2cl.
+        "javaemul.lang.ThrowableJvm" to "java.lang.Throwable"
+      )
+  }
 }
