@@ -123,8 +123,35 @@ public class J2clMinifier {
       identifierStartIndex = contentBuffer.length();
     }
 
-    String getIdentifier() {
-      return contentBuffer.substring(identifierStartIndex);
+    View getIdentifier() {
+      return new View(contentBuffer, identifierStartIndex);
+    }
+
+    private static class View {
+      private final CharBuffer delegate;
+      private final int offset;
+
+      View(CharBuffer delegate, int offset) {
+        this.delegate = delegate;
+        this.offset = offset;
+      }
+
+      int length() {
+        return delegate.length() - offset;
+      }
+
+      boolean contains(String s) {
+        return delegate.indexOf(s, offset) >= 0;
+      }
+
+      char charAt(int index) {
+        return delegate.charAt(index + offset);
+      }
+
+      @Override
+      public String toString() {
+        return delegate.substring(offset);
+      }
     }
 
     void replaceIdentifier(String newIdentifier) {
@@ -254,14 +281,14 @@ public class J2clMinifier {
   // identifier forms described in #startsLikeJavaMangledName).
   private static final int MIN_JAVA_IDENTIFIER_SIZE = "f_x__".length();
 
-  private static boolean isMinifiableIdentifier(String identifier) {
+  private static boolean isMinifiableIdentifier(Buffer.View identifier) {
     if (identifier.length() < MIN_JAVA_IDENTIFIER_SIZE) {
       return false;
     }
     return startsLikeJavaMangledName(identifier) && identifier.contains("__");
   }
 
-  private static boolean startsLikeJavaMangledName(String identifier) {
+  private static boolean startsLikeJavaMangledName(Buffer.View identifier) {
     char firstChar = identifier.charAt(0);
     char secondChar = identifier.charAt(1);
 
@@ -627,9 +654,9 @@ public class J2clMinifier {
   }
 
   private void maybeReplaceIdentifier(Buffer buffer, @SuppressWarnings("unused") char c) {
-    String identifier = buffer.getIdentifier();
+    var identifier = buffer.getIdentifier();
     if (isMinifiableIdentifier(identifier)) {
-      buffer.replaceIdentifier(getMinifiedIdentifier(identifier));
+      buffer.replaceIdentifier(getMinifiedIdentifier(identifier.toString()));
     }
   }
 
