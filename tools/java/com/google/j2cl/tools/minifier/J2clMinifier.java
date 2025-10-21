@@ -630,22 +630,19 @@ public class J2clMinifier {
    * mutates class state) is synchronized.
    */
   private synchronized String getMinifiedIdentifier(String identifier) {
-    if (minifiedIdentifiersByIdentifier.containsKey(identifier)) {
-      return minifiedIdentifiersByIdentifier.get(identifier);
+    String minifiedIdentifier = minifiedIdentifiersByIdentifier.get(identifier);
+    if (minifiedIdentifier == null) {
+      String prettyIdentifier = computePrettyIdentifier(identifier);
+      if (prettyIdentifier.isEmpty()) {
+        // The identifier must contain something strange like triple _'s. Leave the whole thing
+        // alone just to be safe.
+        minifiedIdentifier = identifier;
+      } else {
+        minifiedIdentifier = makeUnique(prettyIdentifier);
+      }
+      minifiedIdentifiersByIdentifier.put(identifier, minifiedIdentifier);
     }
-
-    String prettyIdentifier = computePrettyIdentifier(identifier);
-    if (prettyIdentifier.isEmpty()) {
-      // The identifier must contain something strange like triple _'s. Leave the whole thing alone
-      // just to be safe.
-      minifiedIdentifiersByIdentifier.put(identifier, identifier);
-      return identifier;
-    }
-
-    String uniquePrettyIdentifier = makeUnique(prettyIdentifier);
-    minifiedIdentifiersByIdentifier.put(identifier, uniquePrettyIdentifier);
-
-    return uniquePrettyIdentifier;
+    return minifiedIdentifier;
   }
 
   private String makeUnique(String identifier) {
