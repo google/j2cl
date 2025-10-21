@@ -138,14 +138,18 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   public static String valueOf(char x[], int offset, int count) {
     int end = offset + count;
+    // Shortcut for the common case.
+    if (offset == 0 && end == x.length && end < ArrayHelper.ARRAY_PROCESS_BATCH_SIZE) {
+      return fromCharCode(JsUtils.uncheckedCast(x));
+    }
+
     checkCriticalStringBounds(offset, end, x.length);
     // Work around function.prototype.apply call stack size limits:
     // https://code.google.com/p/v8/issues/detail?id=2896
     // Performance: http://jsperf.com/string-fromcharcode-test/13
-    int batchSize = ArrayHelper.ARRAY_PROCESS_BATCH_SIZE;
     String s = "";
     for (int batchStart = offset; batchStart < end; ) {
-      int batchEnd = Math.min(batchStart + batchSize, end);
+      int batchEnd = Math.min(batchStart + ArrayHelper.ARRAY_PROCESS_BATCH_SIZE, end);
       s += fromCharCode(ArrayHelper.unsafeClone(x, batchStart, batchEnd));
       batchStart = batchEnd;
     }
