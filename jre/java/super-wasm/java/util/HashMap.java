@@ -333,6 +333,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
         addNewEntryForNullKey(value);
         size++;
         modCount++;
+        return value;
       }
       return null;
     } else {

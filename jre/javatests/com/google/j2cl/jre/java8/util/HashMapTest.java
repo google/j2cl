@@ -17,6 +17,7 @@ package com.google.j2cl.jre.java8.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.jspecify.annotations.Nullable;
 
 /** Tests for java.util.HashMap Java 8 API emulation. */
 public class HashMapTest extends AbstractJava8MapTest {
@@ -24,5 +25,14 @@ public class HashMapTest extends AbstractJava8MapTest {
   @Override
   protected Map<String, String> createMap() {
     return new HashMap<>();
+  }
+
+  public void testComputeIfAbsent_nullKey() {
+    Map<@Nullable String, String> map = createMap();
+
+    String value = map.computeIfAbsent(null, k -> "A");
+    assertEquals("A", value);
+    assertTrue(map.containsKey(null));
+    assertEquals("A", map.get(null));
   }
 }
