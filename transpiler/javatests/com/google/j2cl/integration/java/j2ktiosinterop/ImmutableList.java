@@ -65,7 +65,7 @@ public final class ImmutableList<T extends @Nullable Object> extends AbstractLis
       return this;
     }
 
-    ImmutableList<T> build() {
+    public ImmutableList<T> build() {
       return new ImmutableList<>();
     }
   }
