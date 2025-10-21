@@ -1,5 +1,6 @@
 #import <XCTest/XCTest.h>
 
+#import "j2ktiosinterop/CollectionTypes.h"
 #import "j2ktiosinterop/CustomNames.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
@@ -248,6 +249,25 @@
   CustomNativeClass_nativeStaticMethod();
   CustomNativeClass_nativeParameterWithCustomNativeClass_(obj);
   CustomNativeClass_nativeReturnType();
+}
+
+- (void)testCollectionTypes {
+  id iterable = [J2ktiosinteropCollectionTypesCompanion.shared getIterable];
+  id<GKOTKotlinMutableIterator> iterator =
+      [J2ktiosinteropCollectionTypesCompanion.shared getIterator];
+  id collection = [J2ktiosinteropCollectionTypesCompanion.shared getCollection];
+  NSMutableArray<id> *list = [J2ktiosinteropCollectionTypesCompanion.shared getList];
+  GKOTMutableSet<id> *set = [J2ktiosinteropCollectionTypesCompanion.shared getSet];
+  GKOTMutableDictionary<id, id> *map = [J2ktiosinteropCollectionTypesCompanion.shared getMap];
+
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptIterableWithJavaLangIterable:iterable];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptIteratorWithKotlinCollectionsMutableIterator:iterator];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCollectionWithKotlinCollectionsMutableCollection:collection];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptListWithJavaUtilList:list];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptSetWithKotlinCollectionsMutableSet:set];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptMapWithJavaUtilMap:map];
 }
 
 // TODO(b/359421566): Uncomment when ImmutableList.Builder is supported.

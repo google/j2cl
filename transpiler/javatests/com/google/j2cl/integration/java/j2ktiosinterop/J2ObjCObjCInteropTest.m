@@ -1,5 +1,6 @@
 #import <XCTest/XCTest.h>
 
+#import "j2ktiosinterop/CollectionTypes.h"
 #import "j2ktiosinterop/CustomNames.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
@@ -228,6 +229,22 @@
   CustomNativeClass_nativeStaticMethod();
   CustomNativeClass_nativeParameterWithCustomNativeClass_(obj);
   CustomNativeClass_nativeReturnType();
+}
+
+- (void)testCollectionTypes {
+  id<JavaLangIterable> iterable = [J2ktiosinteropCollectionTypes getIterable];
+  id<JavaUtilIterator> iterator = [J2ktiosinteropCollectionTypes getIterator];
+  id<JavaUtilCollection> collection = [J2ktiosinteropCollectionTypes getCollection];
+  id<JavaUtilList> list = [J2ktiosinteropCollectionTypes getList];
+  id<JavaUtilSet> set = [J2ktiosinteropCollectionTypes getSet];
+  id<JavaUtilMap> map = [J2ktiosinteropCollectionTypes getMap];
+
+  [J2ktiosinteropCollectionTypes acceptIterableWithJavaLangIterable:iterable];
+  [J2ktiosinteropCollectionTypes acceptIteratorWithJavaUtilIterator:iterator];
+  [J2ktiosinteropCollectionTypes acceptCollectionWithJavaUtilCollection:collection];
+  [J2ktiosinteropCollectionTypes acceptListWithJavaUtilList:list];
+  [J2ktiosinteropCollectionTypes acceptSetWithJavaUtilSet:set];
+  [J2ktiosinteropCollectionTypes acceptMapWithJavaUtilMap:map];
 }
 
 - (void)testImmutableList {
