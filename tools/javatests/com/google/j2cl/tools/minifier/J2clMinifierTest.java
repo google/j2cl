@@ -77,6 +77,10 @@ public class J2clMinifierTest extends TestCase {
     // preserves newlines
     assertChange("/*\n*/", "\n");
     assertChange("/**\n*/", "\n");
+
+    // goog.require/goog.forwardDeclare doesn't change the behavior.
+    assertChange("/*\nlet Byte = goog.forwardDeclare('java.lang.Byte$impl');\n*/", "\n\n");
+    assertChange("/*\ngoog.require('java.lang.Foo');\n*/", "\n\n");
   }
 
   public void testConsistency() {
