@@ -270,24 +270,27 @@
   [J2ktiosinteropCollectionTypesCompanion.shared acceptMapWithJavaUtilMap:map];
 }
 
-// TODO(b/359421566): Uncomment when ImmutableList.Builder is supported.
-// - (void)testImmutableList {
-//   J2ktiosinteropImmutableList *list;
-//   list = J2ktiosinteropImmutableList_of();
-//   list = J2ktiosinteropImmutableList_ofWithId_(@"foo");
-//   list = J2ktiosinteropImmutableList_ofWithId_withId_(@"foo", @"bar");
-//   list = J2ktiosinteropImmutableList_copyOfWithJavaLangIterable_(list);
+- (void)testImmutableList {
+  NSMutableArray *list;
 
-//   J2ktiosinteropImmutableList_Builder *builder;
-//   builder = J2ktiosinteropImmutableList_builder();
-//   [builder addWithId:@"foo"];
-//   [builder addWithId:@"bar"];
-//   list = [builder build];
+  // TODO(b/443300128): Generate J2ObjCCompat.h for collection classes.
+  // list = J2ktiosinteropImmutableList_of();
+  // list = J2ktiosinteropImmutableList_ofWithId_(@"foo");
+  // list = J2ktiosinteropImmutableList_ofWithId_withId_(@"foo", @"bar");
+  // list = J2ktiosinteropImmutableList_copyOfWithJavaLangIterable_(list);
 
-//   builder = [J2ktiosinteropImmutableListCompanion.shared builder];
-//   [builder addWithId:@"foo"];
-//   [builder addWithId:@"bar"];
-//   list = [builder build];
-// }
+  // J2ktiosinteropImmutableList_Builder *builder;
+  // builder = J2ktiosinteropImmutableList_builder();
+  // [builder addWithId:@"foo"];
+  // [builder addWithId:@"bar"];
+  // list = [builder build];
+
+  // TODO(b/443300128): Generate alias without J2kt prefix in J2ObjCCompat.h.
+  J2ktJ2ktiosinteropImmutableList_Builder *builder =
+      [J2ktJ2ktiosinteropImmutableListCompanion.shared builder];
+  [builder addWithId:@"foo"];
+  [builder addWithId:@"bar"];
+  list = [builder build];
+}
 
 @end

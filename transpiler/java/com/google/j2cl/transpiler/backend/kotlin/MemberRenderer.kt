@@ -48,12 +48,14 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -320,4 +322,14 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           ),
         )
       }
+
+  /** Returns source with `val companion: Type.Companion`. */
+  internal fun companionSupplierInterfaceMethodSource(type: Type): Source =
+    spaceSeparated(
+      VAL_KEYWORD,
+      colonSeparated(
+        source("companion"),
+        dotSeparated(nameRenderer.qualifiedNameSource(type.typeDescriptor), source("Companion")),
+      ),
+    )
 }

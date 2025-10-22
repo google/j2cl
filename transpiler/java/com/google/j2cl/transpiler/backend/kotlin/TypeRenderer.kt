@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangAnnotation
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERFACE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -36,6 +37,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParen
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -182,6 +184,23 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
           nameRenderer.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue.Builder")
         )
       else -> Source.EMPTY
+    }
+
+  /**
+   * Returns source with:
+   * ```
+   * interface TypeCompanionSupplier {
+   *   val companion: Type.Companion
+   * }
+   * ```
+   */
+  internal fun companionSupplierInterfaceSource(type: Type): Source =
+    Source.emptyUnless(type.needsCompanionSupplierInterface) {
+      spaceSeparated(
+        INTERFACE_KEYWORD,
+        source(type.declaration.ktSimpleName + "CompanionSupplier"),
+        block(memberRenderer(type).companionSupplierInterfaceMethodSource(type)),
+      )
     }
 
   private companion object {

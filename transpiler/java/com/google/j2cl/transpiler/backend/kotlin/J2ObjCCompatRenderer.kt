@@ -302,12 +302,6 @@ internal class J2ObjCCompatRenderer(
         else -> false
       }
 
-  private val collectionTypeDescriptors: Set<TypeDescriptor>
-    get() = setOf(typeDescriptors.javaUtilCollection, typeDescriptors.javaUtilMap)
-
-  private fun isCollection(typeDeclaration: TypeDeclaration): Boolean =
-    typeDeclaration.toDescriptor().run { collectionTypeDescriptors.any { isAssignableTo(it) } }
-
   private fun shouldRender(typeDeclaration: TypeDeclaration): Boolean =
     shouldRenderDescriptor(typeDeclaration) &&
       !typeDeclaration.isProtobuf &&
@@ -316,7 +310,7 @@ internal class J2ObjCCompatRenderer(
   private fun shouldRenderDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&
       existsInObjC(typeDeclaration) &&
-      !isCollection(typeDeclaration) &&
+      !typeDeclaration.toDescriptor().isCollection &&
       !hiddenFromObjCMapping.contains(typeDeclaration)
 
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =

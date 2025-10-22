@@ -83,3 +83,9 @@ internal val Type.jvmFieldsAreIllegal
 
 internal val Type.needExplicitPrimaryConstructor: Boolean
   get() = isClass && !hasConstructors && !declaration.visibility.defaultMemberKtVisibility.isPublic
+
+internal val Type.needsCompanionSupplierInterface: Boolean
+  get() =
+    typeDescriptor.isCollection &&
+      declaration.visibility.isPublic &&
+      toCompanionObjectOrNull() != null

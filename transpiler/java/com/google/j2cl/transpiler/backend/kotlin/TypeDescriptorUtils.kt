@@ -196,3 +196,9 @@ internal val TypeDescriptor.withoutRedundantNullabilityAnnotation: TypeDescripto
 
 internal val TypeDescriptor.isProtobuf: Boolean
   get() = this is DeclaredTypeDescriptor && typeDeclaration.isProtobuf
+
+internal val TypeDescriptor.isCollection: Boolean
+  get() = collectionTypeDescriptors.any { isAssignableTo(it) }
+
+private val collectionTypeDescriptors: Set<TypeDescriptor>
+  get() = setOf(typeDescriptors.javaUtilCollection, typeDescriptors.javaUtilMap)

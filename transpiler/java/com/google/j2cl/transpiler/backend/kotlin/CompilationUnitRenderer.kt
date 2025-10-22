@@ -60,7 +60,7 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
     emptyLineSeparated(packageSource(compilationUnit), importRenderer.importsSource)
 
   private fun typesSource(compilationUnit: CompilationUnit): Source =
-    emptyLineSeparated(compilationUnit.types.map(::typeSource))
+    emptyLineSeparated(compilationUnit.types.flatMap(::typeSources))
 
   private fun fileCommentSource(compilationUnit: CompilationUnit) =
     source("// Generated from \"${compilationUnit.packageRelativePath}\"")
@@ -109,5 +109,8 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
       ?.let { spaceSeparated(PACKAGE_KEYWORD, qualifiedIdentifierSource(it)) }
       .orEmpty()
 
-  private fun typeSource(type: Type): Source = TypeRenderer(nameRenderer).typeSource(type)
+  private fun typeSources(type: Type): Sequence<Source> =
+    TypeRenderer(nameRenderer).run {
+      sequenceOf(typeSource(type), companionSupplierInterfaceSource(type))
+    }
 }
