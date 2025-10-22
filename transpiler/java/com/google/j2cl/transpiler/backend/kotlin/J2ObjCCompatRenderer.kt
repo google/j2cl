@@ -322,7 +322,7 @@ internal class J2ObjCCompatRenderer(
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
     !typeDeclaration.isKtNative ||
       !typeDeclaration.isFromJRE() ||
-      typeDeclaration.qualifiedSourceName in KT_NATIVE_JRE_ALLOWLIST ||
+      !KT_NATIVE_JRE_EXCLUDE.any { typeDeclaration.qualifiedSourceName.startsWith(it) } ||
       mappedObjCNameRenderer(typeDeclaration) != null
 
   private fun functionRenderers(
@@ -680,8 +680,60 @@ internal class J2ObjCCompatRenderer(
 
   companion object {
     // Java JRE classes where we generate J2ObjC compat headers.
-    // TODO(b/448061854): Replace with a list of unsupported classes or remove.
-    val KT_NATIVE_JRE_ALLOWLIST = setOf("java.lang.Throwable")
+    // TODO(b/448061854): At least enable the primitive types.
+    val KT_NATIVE_JRE_EXCLUDE =
+      setOf(
+        "java.io.EOFException",
+        "java.io.File",
+        "java.io.FileNotFoundException",
+        "java.io.FileOutputStream",
+        "java.io.IOException",
+        "java.lang.ArithmeticException",
+        "java.lang.AutoCloseable",
+        "java.lang.AssertionError",
+        "java.lang.Boolean",
+        "java.lang.Byte",
+        "java.lang.Character",
+        "java.lang.CharSequence",
+        "java.lang.Class",
+        "java.lang.ClassCastException",
+        "java.lang.Double",
+        "java.lang.Enum",
+        "java.lang.Error",
+        "java.lang.Exception",
+        "java.lang.Float",
+        "java.lang.IndexOutOfBoundsException",
+        "java.lang.Integer",
+        "java.lang.IllegalStateException",
+        "java.lang.Iterable",
+        "java.lang.JsException",
+        "java.lang.Long",
+        "java.lang.Math",
+        "java.lang.NullPointerException",
+        "java.lang.NumberFormatException",
+        "java.lang.OutOfMemoryError",
+        "java.lang.RuntimeException",
+        "java.lang.Short",
+        "java.lang.StringIndexOutOfBoundsException",
+        "java.lang.System",
+        "java.lang.UnsupportedOperationException",
+        "java.lang.invoke.",
+        "java.lang.ref.WeakReference",
+        "java.nio.",
+        "java.util.Base64",
+        "java.util.ConcurrentModificationException",
+        "java.util.Iterator",
+        "java.util.ListIterator",
+        "java.util.Locale",
+        "java.util.Map",
+        "java.util.Map.Entry",
+        "java.util.NoSuchElementException",
+        "java.util.regex.",
+        "java.util.concurrent.atomic.",
+        "java.util.concurrent.KotlinExecutor",
+        "javaemul.",
+        "javax.",
+      )
 
     // A map from the bridge name supplied by the KtNative annotation to the bridge name
     // that should be used for static methods / constructors.
