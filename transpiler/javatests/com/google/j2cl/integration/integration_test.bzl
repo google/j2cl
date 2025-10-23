@@ -36,6 +36,7 @@ def integration_test(
         suppress = [],
         javacopts = [],
         tags = [],
+        experimental_java_frontend = "",
         **kwargs):
     """Macro that turns Java files into integration test targets.
 
@@ -86,6 +87,7 @@ def integration_test(
         js_suppress = suppress,
         javacopts = javacopts,
         enable_nullability = enable_nullability,
+        experimental_java_frontend = experimental_java_frontend,
     )
 
     # blaze test :uncompiled_test
