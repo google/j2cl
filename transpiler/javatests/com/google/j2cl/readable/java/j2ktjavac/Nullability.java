@@ -23,11 +23,20 @@ import org.jspecify.annotations.Nullable;
 
 public class Nullability {
   @NullMarked
-  class NullMarkedClass {
+  static class NullMarkedClass {
 
     // Repro for b/450049434
     void test(String s) {
       Consumer<?> c = (@Nullable String ss) -> {};
+    }
+
+    class Holder<T> {
+      void acceptNullableConsumer(Consumer<@Nullable T> consumer) {}
+    }
+
+    // Repro for b/454662844
+    void testBoxedHolder(Holder<Integer> holder) {
+      holder.acceptNullableConsumer(s -> {});
     }
   }
 

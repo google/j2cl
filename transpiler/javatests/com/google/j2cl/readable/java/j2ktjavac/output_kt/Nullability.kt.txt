@@ -20,16 +20,29 @@ package j2ktjavac
 
 import javaemul.lang.*
 import java.util.function.Consumer
+import kotlin.Any
+import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 
 open class Nullability {
  internal open fun testNonNullOnType_pp_j2ktjavac(unannotated: NonNullInterface?, annotatedNonNull: NonNullInterface, annotatedNullable: NonNullInterface?) {}
 
- open inner class NullMarkedClass internal constructor() {
+ open class NullMarkedClass internal constructor() {
   internal open fun test_pp_j2ktjavac(s: String) {
    val c: Consumer<*> = Consumer { ss: String? ->
    }
+  }
+
+  internal open fun testBoxedHolder_pp_j2ktjavac(holder: NullMarkedClass.Holder<Int>) {
+   holder.acceptNullableConsumer_pp_j2ktjavac(
+    Consumer { s: Int ->
+    } as Consumer<Int?>,
+   )
+  }
+
+  open inner class Holder<T: Any> internal constructor() {
+   internal open fun acceptNullableConsumer_pp_j2ktjavac(consumer: Consumer<T?>) {}
   }
  }
 
