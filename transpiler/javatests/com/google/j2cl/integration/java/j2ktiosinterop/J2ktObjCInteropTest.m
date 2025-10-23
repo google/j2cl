@@ -252,22 +252,93 @@
 }
 
 - (void)testCollectionTypes {
-  id iterable = [J2ktiosinteropCollectionTypesCompanion.shared getIterable];
   id<GKOTKotlinMutableIterator> iterator =
       [J2ktiosinteropCollectionTypesCompanion.shared getIterator];
-  id collection = [J2ktiosinteropCollectionTypesCompanion.shared getCollection];
-  NSMutableArray<id> *list = [J2ktiosinteropCollectionTypesCompanion.shared getList];
-  GKOTMutableSet<id> *set = [J2ktiosinteropCollectionTypesCompanion.shared getSet];
-  GKOTMutableDictionary<id, id> *map = [J2ktiosinteropCollectionTypesCompanion.shared getMap];
+  J2ktiosinteropCollectionTypes_CustomIterator *customIterator =
+      [J2ktiosinteropCollectionTypesCompanion.shared getCustomIterator];
 
-  [J2ktiosinteropCollectionTypesCompanion.shared acceptIterableWithJavaLangIterable:iterable];
+  id<GKOTKotlinMutableListIterator> listIterator =
+      [J2ktiosinteropCollectionTypesCompanion.shared getListIterator];
+  J2ktiosinteropCollectionTypes_CustomListIterator *customListIterator =
+      [J2ktiosinteropCollectionTypesCompanion.shared getCustomListIterator];
+
+  id iterable = [J2ktiosinteropCollectionTypesCompanion.shared getIterable];
+  J2ktiosinteropCollectionTypes_CustomIterable *customIterable =
+      [J2ktiosinteropCollectionTypesCompanion.shared getCustomIterable];
+
+  id collection = [J2ktiosinteropCollectionTypesCompanion.shared getCollection];
+  J2ktJavaUtilAbstractCollection<id> *abstractCollection =
+      [J2ktiosinteropCollectionTypesCompanion.shared getAbstractCollection];
+  J2ktJ2ktiosinteropCollectionTypes_CustomCollection<id> *customCollection =
+      [J2ktiosinteropCollectionTypesCompanion.shared getCustomCollection];
+
+  NSMutableArray<id> *list = [J2ktiosinteropCollectionTypesCompanion.shared getList];
+  NSMutableArray<id> *arraylist = [J2ktiosinteropCollectionTypesCompanion.shared getArrayList];
+  NSMutableArray<id> *linkedList = [J2ktiosinteropCollectionTypesCompanion.shared getLinkedList];
+  NSMutableArray<id> *abstractList =
+      [J2ktiosinteropCollectionTypesCompanion.shared getAbstractList];
+  NSMutableArray<id> *customList = [J2ktiosinteropCollectionTypesCompanion.shared getCustomList];
+
+  GKOTMutableSet<id> *set = [J2ktiosinteropCollectionTypesCompanion.shared getSet];
+  GKOTMutableSet<id> *hashSet = [J2ktiosinteropCollectionTypesCompanion.shared getHashSet];
+  GKOTMutableSet<id> *abstractSet = [J2ktiosinteropCollectionTypesCompanion.shared getAbstractSet];
+  GKOTMutableSet<id> *customSet = [J2ktiosinteropCollectionTypesCompanion.shared getCustomSet];
+
+  GKOTMutableDictionary<id, id> *map = [J2ktiosinteropCollectionTypesCompanion.shared getMap];
+  GKOTMutableDictionary<id, id> *hashMap =
+      [J2ktiosinteropCollectionTypesCompanion.shared getHashMap];
+  GKOTMutableDictionary<id, id> *linkedHashMap =
+      [J2ktiosinteropCollectionTypesCompanion.shared getLinkedHashMap];
+  GKOTMutableDictionary<id, id> *abstractMap =
+      [J2ktiosinteropCollectionTypesCompanion.shared getAbstractMap];
+  GKOTMutableDictionary<id, id> *customMap =
+      [J2ktiosinteropCollectionTypesCompanion.shared getCustomMap];
+
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptIteratorWithKotlinCollectionsMutableIterator:iterator];
   [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCustomIteratorWithJ2ktiosinteropCollectionTypes_CustomIterator:customIterator];
+
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptListIteratorWithKotlinCollectionsMutableListIterator:listIterator];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCustomListIteratorWithJ2ktiosinteropCollectionTypes_CustomListIterator:
+          customListIterator];
+
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptIterableWithJavaLangIterable:iterable];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCustomIterableWithJ2ktiosinteropCollectionTypes_CustomIterable:customIterable];
+
+  [J2ktiosinteropCollectionTypesCompanion.shared
       acceptCollectionWithKotlinCollectionsMutableCollection:collection];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptAbstractCollectionWithJavaUtilAbstractCollection:abstractCollection];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCustomCollectionWithJ2ktiosinteropCollectionTypes_CustomCollection:customCollection];
+
   [J2ktiosinteropCollectionTypesCompanion.shared acceptListWithJavaUtilList:list];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptArrayListWithJavaUtilArrayList:arraylist];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptLinkedListWithJavaUtilLinkedList:linkedList];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptAbstractListWithJavaUtilAbstractList:abstractList];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCustomListWithJ2ktiosinteropCollectionTypes_CustomList:customList];
+
   [J2ktiosinteropCollectionTypesCompanion.shared acceptSetWithKotlinCollectionsMutableSet:set];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptHashSetWithKotlinCollectionsHashSet:hashSet];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptAbstractSetWithJavaUtilAbstractSet:abstractSet];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCustomSetWithJ2ktiosinteropCollectionTypes_CustomSet:customSet];
+
   [J2ktiosinteropCollectionTypesCompanion.shared acceptMapWithJavaUtilMap:map];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptHashMapWithJavaUtilHashMap:hashMap];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptLinkedHashMapWithJavaUtilLinkedHashMap:linkedHashMap];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptAbstractMapWithJavaUtilAbstractMap:abstractMap];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCustomMapWithJ2ktiosinteropCollectionTypes_CustomMap:customMap];
 }
 
 - (void)testImmutableList {

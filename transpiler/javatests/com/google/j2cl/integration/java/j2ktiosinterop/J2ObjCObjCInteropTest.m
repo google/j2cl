@@ -232,19 +232,80 @@
 }
 
 - (void)testCollectionTypes {
-  id<JavaLangIterable> iterable = [J2ktiosinteropCollectionTypes getIterable];
   id<JavaUtilIterator> iterator = [J2ktiosinteropCollectionTypes getIterator];
+  J2ktiosinteropCollectionTypes_CustomIterator *customIterator =
+      [J2ktiosinteropCollectionTypes getCustomIterator];
+
+  id<JavaUtilListIterator> listIterator = [J2ktiosinteropCollectionTypes getListIterator];
+  J2ktiosinteropCollectionTypes_CustomListIterator *customListIterator =
+      [J2ktiosinteropCollectionTypes getCustomListIterator];
+
+  id<JavaLangIterable> iterable = [J2ktiosinteropCollectionTypes getIterable];
+  J2ktiosinteropCollectionTypes_CustomIterable *customIterable =
+      [J2ktiosinteropCollectionTypes getCustomIterable];
+
   id<JavaUtilCollection> collection = [J2ktiosinteropCollectionTypes getCollection];
+  JavaUtilAbstractCollection *abstractCollection =
+      [J2ktiosinteropCollectionTypes getAbstractCollection];
+  J2ktiosinteropCollectionTypes_CustomCollection *customCollection =
+      [J2ktiosinteropCollectionTypes getCustomCollection];
+
   id<JavaUtilList> list = [J2ktiosinteropCollectionTypes getList];
+  JavaUtilArrayList *arraylist = [J2ktiosinteropCollectionTypes getArrayList];
+  JavaUtilLinkedList *linkedList = [J2ktiosinteropCollectionTypes getLinkedList];
+  JavaUtilAbstractList *abstractList = [J2ktiosinteropCollectionTypes getAbstractList];
+  J2ktiosinteropCollectionTypes_CustomList *customList =
+      [J2ktiosinteropCollectionTypes getCustomList];
+
   id<JavaUtilSet> set = [J2ktiosinteropCollectionTypes getSet];
+  JavaUtilHashSet *hashSet = [J2ktiosinteropCollectionTypes getHashSet];
+  JavaUtilAbstractSet *abstractSet = [J2ktiosinteropCollectionTypes getAbstractSet];
+  J2ktiosinteropCollectionTypes_CustomSet *customSet = [J2ktiosinteropCollectionTypes getCustomSet];
+
   id<JavaUtilMap> map = [J2ktiosinteropCollectionTypes getMap];
+  JavaUtilHashMap *hashMap = [J2ktiosinteropCollectionTypes getHashMap];
+  JavaUtilLinkedHashMap *linkedHashMap = [J2ktiosinteropCollectionTypes getLinkedHashMap];
+  JavaUtilAbstractMap *abstractMap = [J2ktiosinteropCollectionTypes getAbstractMap];
+  J2ktiosinteropCollectionTypes_CustomMap *customMap = [J2ktiosinteropCollectionTypes getCustomMap];
+
+  [J2ktiosinteropCollectionTypes acceptIteratorWithJavaUtilIterator:iterator];
+  [J2ktiosinteropCollectionTypes
+      acceptCustomIteratorWithJ2ktiosinteropCollectionTypes_CustomIterator:customIterator];
+
+  [J2ktiosinteropCollectionTypes acceptListIteratorWithJavaUtilListIterator:listIterator];
+  [J2ktiosinteropCollectionTypes
+      acceptCustomListIteratorWithJ2ktiosinteropCollectionTypes_CustomListIterator:
+          customListIterator];
 
   [J2ktiosinteropCollectionTypes acceptIterableWithJavaLangIterable:iterable];
-  [J2ktiosinteropCollectionTypes acceptIteratorWithJavaUtilIterator:iterator];
+  [J2ktiosinteropCollectionTypes
+      acceptCustomIterableWithJ2ktiosinteropCollectionTypes_CustomIterable:customIterable];
+
   [J2ktiosinteropCollectionTypes acceptCollectionWithJavaUtilCollection:collection];
+  [J2ktiosinteropCollectionTypes
+      acceptAbstractCollectionWithJavaUtilAbstractCollection:abstractCollection];
+  [J2ktiosinteropCollectionTypes
+      acceptCustomCollectionWithJ2ktiosinteropCollectionTypes_CustomCollection:customCollection];
+
   [J2ktiosinteropCollectionTypes acceptListWithJavaUtilList:list];
+  [J2ktiosinteropCollectionTypes acceptArrayListWithJavaUtilArrayList:arraylist];
+  [J2ktiosinteropCollectionTypes acceptLinkedListWithJavaUtilLinkedList:linkedList];
+  [J2ktiosinteropCollectionTypes acceptAbstractListWithJavaUtilAbstractList:abstractList];
+  [J2ktiosinteropCollectionTypes
+      acceptCustomListWithJ2ktiosinteropCollectionTypes_CustomList:customList];
+
   [J2ktiosinteropCollectionTypes acceptSetWithJavaUtilSet:set];
+  [J2ktiosinteropCollectionTypes acceptHashSetWithJavaUtilHashSet:hashSet];
+  [J2ktiosinteropCollectionTypes acceptAbstractSetWithJavaUtilAbstractSet:abstractSet];
+  [J2ktiosinteropCollectionTypes
+      acceptCustomSetWithJ2ktiosinteropCollectionTypes_CustomSet:customSet];
+
   [J2ktiosinteropCollectionTypes acceptMapWithJavaUtilMap:map];
+  [J2ktiosinteropCollectionTypes acceptHashMapWithJavaUtilHashMap:hashMap];
+  [J2ktiosinteropCollectionTypes acceptLinkedHashMapWithJavaUtilLinkedHashMap:linkedHashMap];
+  [J2ktiosinteropCollectionTypes acceptAbstractMapWithJavaUtilAbstractMap:abstractMap];
+  [J2ktiosinteropCollectionTypes
+      acceptCustomMapWithJ2ktiosinteropCollectionTypes_CustomMap:customMap];
 }
 
 - (void)testImmutableList {
