@@ -41,6 +41,7 @@ import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrParameterKind
+import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
@@ -56,37 +57,39 @@ import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-/** Superset of attributes that can be extracted from JsInterop annotations */
-data class JsAnnotationInfo(
-  val name: String? = null,
-  val namespace: String? = null,
-  val isNative: Boolean,
-  val hasCustomValue: Boolean,
-)
+private fun IrClass.getJsTypeAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_TYPE_ANNOTATION_FQ_NAME)
 
-fun IrDeclaration.getJsMemberAnnotationInfo(): JsAnnotationInfo? {
-  val eligibleAnnotations =
-    when (this) {
-      is IrConstructor -> sequenceOf(JS_CONSTRUCTOR_ANNOTATION_FQ_NAME)
-      is IrSimpleFunction ->
-        sequenceOf(JS_METHOD_ANNOTATION_FQ_NAME, JS_PROPERTY_ANNOTATION_FQ_NAME)
-      is IrField,
-      is IrEnumEntry -> sequenceOf(JS_PROPERTY_ANNOTATION_FQ_NAME)
-      is IrClass ->
-        sequenceOf(
-          JS_TYPE_ANNOTATION_FQ_NAME,
-          JS_ENUM_ANNOTATION_FQ_NAME,
-          JS_FUNCTION_ANNOTATION_FQ_NAME,
-        )
-      else -> emptySequence()
-    }
-  return eligibleAnnotations.firstNotNullOfOrNull { findJsMemberAnnotationInfo(it) }
-}
+private fun IrClass.getJsEnumAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_ENUM_ANNOTATION_FQ_NAME)
 
-private fun IrDeclaration.findJsMemberAnnotationInfo(name: FqName): JsAnnotationInfo? =
-  findJsinteropAnnotation(name)?.jsAnnotationInfo
+private fun IrClass.getJsFunctionAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_FUNCTION_ANNOTATION_FQ_NAME)
 
-private fun IrDeclaration.findJsinteropAnnotation(name: FqName): IrConstructorCall? {
+private fun IrClass.getJsTypeOrJsEnumAnnotation(): IrConstructorCall? =
+  getJsTypeAnnotation() ?: getJsEnumAnnotation()
+
+private fun IrConstructor.getJsConstructorAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_CONSTRUCTOR_ANNOTATION_FQ_NAME)
+
+private fun IrFunction.getJsMethodAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_METHOD_ANNOTATION_FQ_NAME)
+
+private fun IrFunction.getJsPropertyAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
+
+private fun IrProperty.getJsPropertyAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
+
+private fun IrField.getJsPropertyAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
+
+private fun IrEnumEntry.getJsPropertyAnnotation(): IrConstructorCall? =
+  getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
+
+private fun IrClass.getJsInteropAnnotation(name: FqName): IrConstructorCall? = getAnnotation(name)
+
+private fun IrDeclaration.getJsInteropAnnotation(name: FqName): IrConstructorCall? {
   val annotation = getAnnotation(name)
   if (annotation != null) return annotation
   return when {
@@ -119,21 +122,13 @@ private val IrField.canBeJsProperty: Boolean
       isCompanionConstantBackingField ||
       correspondingPropertySymbol?.owner?.hasAccessors == false
 
-private val IrConstructorCall.jsAnnotationInfo: JsAnnotationInfo
-  get() =
-    JsAnnotationInfo(
-      getValueArgumentAsConst<String>(Name.identifier("name")),
-      getValueArgumentAsConst<String>(Name.identifier("namespace")),
-      (getValueArgumentAsConst<Boolean>(Name.identifier("isNative")) ?: false),
-      (getValueArgumentAsConst<Boolean>(Name.identifier("hasCustomValue")) ?: false),
-    )
-
 fun IrClass.getJsEnumInfo(): JsEnumInfo? {
-  val jsEnumAnnotationInfo =
-    findJsinteropAnnotation(JS_ENUM_ANNOTATION_FQ_NAME)?.jsAnnotationInfo ?: return null
+  val annotation = getJsEnumAnnotation() ?: return null
   return JsEnumInfo.newBuilder().run {
-    val hasCustomValue = jsEnumAnnotationInfo.hasCustomValue
-    val isNative = jsEnumAnnotationInfo.isNative
+    val hasCustomValue =
+      annotation.getValueArgumentAsConst<Boolean>(HAS_CUSTOM_VALUE_ANNOTATION_ATTRIBUTE) ?: false
+    val isNative =
+      annotation.getValueArgumentAsConst<Boolean>(IS_NATIVE_ANNOTATION_ATTRIBUTE) ?: false
 
     setHasCustomValue(hasCustomValue)
     setSupportsComparable(!hasCustomValue || isNative)
@@ -142,18 +137,30 @@ fun IrClass.getJsEnumInfo(): JsEnumInfo? {
   }
 }
 
+val IrClass.jsName: String?
+  get() = getJsTypeOrJsEnumAnnotation()?.getValueArgumentAsConst<String>(NAME_ANNOTATION_ATTRIBUTE)
+
+val IrClass.jsNamespace: String?
+  get() =
+    getJsTypeOrJsEnumAnnotation()?.getValueArgumentAsConst<String>(NAMESPACE_ANNOTATION_ATTRIBUTE)
+
+val IrClass.isNative: Boolean
+  get() =
+    getJsTypeOrJsEnumAnnotation()?.getValueArgumentAsConst<Boolean>(IS_NATIVE_ANNOTATION_ATTRIBUTE)
+      ?: false
+
 val IrClass.isJsFunction: Boolean
-  get() = findJsinteropAnnotation(JS_FUNCTION_ANNOTATION_FQ_NAME) != null
+  get() = getJsFunctionAnnotation() != null
 
 val IrClass.isJsType: Boolean
-  get() = findJsinteropAnnotation(JS_TYPE_ANNOTATION_FQ_NAME) != null
+  get() = getJsTypeAnnotation() != null
 
 val IrClass.isJsEnum: Boolean
-  get() = findJsinteropAnnotation(JS_ENUM_ANNOTATION_FQ_NAME) != null
+  get() = getJsEnumAnnotation() != null
 
 val IrDeclaration.isJsIgnore: Boolean
   get() =
-    findJsinteropAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null ||
+    getJsInteropAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null ||
       // Default param function stubs should implicitly be considered as JsIgnore'd as they will
       // otherwise conflict the "real" JS member.
       origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
@@ -166,16 +173,19 @@ private val IrDeclaration.isCompanionInstanceField: Boolean
       type.getClass()?.isCompanion == true &&
       origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE
 
-val IrDeclaration.isJsProperty: Boolean
-  get() = findJsinteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME) != null
+val IrProperty.isJsProperty: Boolean
+  get() = getJsPropertyAnnotation() != null
+
+val IrFunction.isJsProperty: Boolean
+  get() = getJsPropertyAnnotation() != null
 
 val IrValueParameter.isJsOptional: Boolean
   get() =
-    findJsinteropAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null &&
+    getJsInteropAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null &&
       (parent as? IrDeclaration)?.isCompanionMember == false
 
 private val IrFunction.isJsAsync: Boolean
-  get() = findJsinteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
+  get() = getJsInteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
 
 private val IrDeclaration.isJsOverlay: Boolean
   get() =
@@ -188,23 +198,33 @@ private val IrDeclaration.isJsOverlay: Boolean
       this is IrField &&
         (isCompanionFieldOfNativeJsTypeOrJsFunction || isStaticBackingFieldOfJsFunction) -> true
       isCompanionMember -> false
-      else -> findJsinteropAnnotation(JS_OVERLAY_ANNOTATION_FQ_NAME) != null
+      else -> getJsInteropAnnotation(JS_OVERLAY_ANNOTATION_FQ_NAME) != null
     }
+
+private fun IrDeclaration.getJsMemberAnnotation(): IrConstructorCall? =
+  when (this) {
+    is IrConstructor -> getJsConstructorAnnotation()
+    is IrFunction -> getJsMethodAnnotation() ?: getJsPropertyAnnotation()
+    is IrProperty -> getJsPropertyAnnotation()
+    is IrField -> getJsPropertyAnnotation()
+    is IrEnumEntry -> getJsPropertyAnnotation()
+    else -> null
+  }
 
 fun IrDeclaration.getJsInfo(): JsInfo =
   JsInfo.newBuilder()
     .setJsMemberType(getJsMemberType())
     .setJsOverlay(isJsOverlay)
     .setJsAsync(this is IrFunction && isJsAsync)
+    .setHasJsMemberAnnotation(false)
     .apply {
-      if (isJsMember()) {
-        getJsMemberAnnotationInfo()?.let {
-          setJsName(it.name)
-          setJsNamespace(it.namespace)
-        }
+      val jsMemberAnnotation = getJsMemberAnnotation()
+      setHasJsMemberAnnotation(jsMemberAnnotation != null)
+      if (!isCompanionMember && jsMemberAnnotation != null) {
+        setJsName(jsMemberAnnotation.getValueArgumentAsConst(NAME_ANNOTATION_ATTRIBUTE))
+        setJsNamespace(jsMemberAnnotation.getValueArgumentAsConst(NAMESPACE_ANNOTATION_ATTRIBUTE))
       }
     }
-    .setHasJsMemberAnnotation(getJsMemberAnnotationInfo() != null)
     .build()
 
 fun IrDeclaration.isJsMember(): Boolean =
@@ -212,7 +232,7 @@ fun IrDeclaration.isJsMember(): Boolean =
     this is IrVariable -> false
     isJsIgnore -> false
     isCompanionMember -> false
-    getJsMemberAnnotationInfo() != null -> true
+    getJsMemberAnnotation() != null -> true
     isJsEnumEntry() -> true
     isPublicMemberOfJsType() -> !isJsOverlay
     isMemberOfNativeJsType() -> !isMemberOfJsEnum && !isJsOverlay
@@ -267,8 +287,7 @@ private val IrField.isCompanionFieldOfNativeJsTypeOrJsFunction: Boolean
     origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE &&
       (isMemberOfNativeJsType() || isMemberOfJsFunction)
 
-private fun IrDeclaration.isMemberOfNativeJsType(): Boolean =
-  parentClassOrNull?.getJsMemberAnnotationInfo()?.isNative ?: false
+private fun IrDeclaration.isMemberOfNativeJsType(): Boolean = parentClassOrNull?.isNative ?: false
 
 val IrField.isNativeJsField: Boolean
   get() = isMemberOfNativeJsType() && !isJsOverlay
@@ -303,3 +322,8 @@ private val JS_METHOD_ANNOTATION_FQ_NAME: FqName = FqName(JS_METHOD_ANNOTATION_N
 private val JS_PROPERTY_ANNOTATION_FQ_NAME: FqName = FqName(JS_PROPERTY_ANNOTATION_NAME)
 private val JS_OPTIONAL_ANNOTATION_FQ_NAME: FqName = FqName(JS_OPTIONAL_ANNOTATION_NAME)
 private val JS_OVERLAY_ANNOTATION_FQ_NAME: FqName = FqName(JS_OVERLAY_ANNOTATION_NAME)
+
+private val NAME_ANNOTATION_ATTRIBUTE: Name = Name.identifier("name")
+private val NAMESPACE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("namespace")
+private val IS_NATIVE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("isNative")
+private val HAS_CUSTOM_VALUE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("hasCustomValue")

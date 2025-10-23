@@ -37,7 +37,6 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage.KOTLIN
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.SingletonBuilder
-import com.google.j2cl.transpiler.ast.TypeDescriptors.isKotlinNothing
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
@@ -49,7 +48,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllAnnotations
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsEnumInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsInfo
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsMemberAnnotationInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAbstract
@@ -62,9 +60,12 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isNative
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
+import com.google.j2cl.transpiler.frontend.kotlin.ir.jsName
+import com.google.j2cl.transpiler.frontend.kotlin.ir.jsNamespace
 import com.google.j2cl.transpiler.frontend.kotlin.ir.methods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.overriddenSpecialBridgeSignatures
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveName
@@ -276,12 +277,9 @@ internal class KotlinEnvironment(
         .setJsType(irClass.isJsType)
         .setJsFunctionInterface(irClass.isJsFunction)
         .setJsEnumInfo(irClass.getJsEnumInfo())
-        .apply {
-          val jsMemberAnnotation = irClass.getJsMemberAnnotationInfo()
-          setCustomizedJsNamespace(jsMemberAnnotation?.namespace)
-          setSimpleJsName(jsMemberAnnotation?.name)
-          setNative(jsMemberAnnotation?.isNative ?: false)
-        }
+        .setSimpleJsName(irClass.jsName)
+        .setCustomizedJsNamespace(irClass.jsNamespace)
+        .setNative(irClass.isNative)
         .setAnnotationsFactory { createAnnotations(irClass) }
         .build()
     }
@@ -663,13 +661,12 @@ internal class KotlinEnvironment(
         )
       }
 
+      val jsInfo = irFunction.getJsInfo()
       val visibility = irFunction.j2clVisibility
       val isStatic = (irFunction.isStatic || irFunction.parent !is IrDeclaration) && !isConstructor
       val isNative =
         irFunction.isExternal ||
-          (!irFunction.getJsInfo().isJsOverlay &&
-            enclosingTypeDescriptor.isNative &&
-            irFunction.isAbstract)
+          (!jsInfo.isJsOverlay && enclosingTypeDescriptor.isNative && irFunction.isAbstract)
       val isLocal = irFunction.visibility.delegate == Visibilities.Local
       val enclosingMethodDescriptor =
         if (isLocal) getDeclaredMethodDescriptor(irFunction.parent as IrFunction) else null
@@ -707,7 +704,7 @@ internal class KotlinEnvironment(
             !isStatic
         )
         .setTypeParameterTypeDescriptors(irFunction.typeParameters.map(::getTypeVariable))
-        .setOriginalJsInfo(irFunction.getJsInfo())
+        .setOriginalJsInfo(jsInfo)
         .setAnnotations(createAnnotations(irFunction))
         .setSuspendFunction(irFunction.isSuspend)
         .build()
