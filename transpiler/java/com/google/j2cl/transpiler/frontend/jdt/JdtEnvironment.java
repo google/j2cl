@@ -475,11 +475,15 @@ public class JdtEnvironment {
       ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
     checkArgument(!typeBinding.isPrimitive());
 
+    // Note that we are not using typebinding.getAnnotations() since those are the annotations
+    // placed on a declaration.
     Iterable<IAnnotationBinding> allAnnotations =
         Iterables.concat(
+            // Annotations from the context, i.e. parameter or method annotations.
             Arrays.asList(elementAnnotations),
-            Arrays.asList(typeBinding.getTypeAnnotations()),
-            Arrays.asList(typeBinding.getAnnotations()));
+            // TYPE_USE annotations.
+            Arrays.asList(typeBinding.getTypeAnnotations()));
+
     for (IAnnotationBinding annotation : allAnnotations) {
       String annotationName = annotation.getAnnotationType().getQualifiedName();
 
