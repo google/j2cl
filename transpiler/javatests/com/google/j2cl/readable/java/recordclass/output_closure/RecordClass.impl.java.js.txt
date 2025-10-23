@@ -1,0 +1,62 @@
+goog.module('recordclass.RecordClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArrayRecord = goog.forwardDeclare('recordclass.RecordClass.ArrayRecord$impl');
+let RecordWithConstructor = goog.forwardDeclare('recordclass.RecordClass.RecordWithConstructor$impl');
+let SimpleRecord = goog.forwardDeclare('recordclass.RecordClass.SimpleRecord$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+class RecordClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!RecordClass} */
+ static $create__() {
+  RecordClass.$clinit();
+  let $instance = new RecordClass();
+  $instance.$ctor__recordclass_RecordClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_main__void() {
+  let r = SimpleRecord.$create__int(1);
+  r.m_value__int();
+  let ar = ArrayRecord.$create__arrayOf_int(/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int)));
+  let arValueResult = ar.m_value__arrayOf_int()[0];
+  let rwc = RecordWithConstructor.$create__int__int(1, 2);
+  rwc.m_a__int();
+  rwc.m_b__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  RecordClass.$clinit = () =>{};
+  RecordClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecordClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ArrayRecord = goog.module.get('recordclass.RecordClass.ArrayRecord$impl');
+  RecordWithConstructor = goog.module.get('recordclass.RecordClass.RecordWithConstructor$impl');
+  SimpleRecord = goog.module.get('recordclass.RecordClass.SimpleRecord$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
+}
+$Util.$setClassMetadata(RecordClass, 'recordclass.RecordClass');
+
+exports = RecordClass;
+
+//# sourceMappingURL=RecordClass.js.map

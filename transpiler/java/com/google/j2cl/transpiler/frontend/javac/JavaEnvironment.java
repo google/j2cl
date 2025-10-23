@@ -1384,7 +1384,9 @@ class JavaEnvironment {
       // Do not consider the anonymous classes that constitute enum values as Enums, only the
       // enum "class" itself is considered Kind.ENUM.
       return Kind.ENUM;
-    } else if (isClass(typeElement) || (isEnum(typeElement) && isAnonymous(typeElement))) {
+    } else if (isClass(typeElement)
+        || isRecord(typeElement)
+        || (isEnum(typeElement) && isAnonymous(typeElement))) {
       return Kind.CLASS;
     } else if (isInterface(typeElement)) {
       return Kind.INTERFACE;
@@ -1695,6 +1697,10 @@ class JavaEnvironment {
 
   private static boolean isClass(TypeElement typeElement) {
     return typeElement.getKind() == ElementKind.CLASS;
+  }
+
+  private static boolean isRecord(TypeElement typeElement) {
+    return typeElement.getKind() == ElementKind.RECORD;
   }
 
   private static boolean isInterface(TypeElement typeElement) {

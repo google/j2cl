@@ -44,15 +44,24 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private final SourcePosition sourcePosition;
   private boolean isAbstract;
   private DeclaredTypeDescriptor superTypeDescriptor;
+  private final boolean isJavaRecord;
   private boolean isOptimizedEnum;
 
-  public Type(SourcePosition sourcePosition, TypeDeclaration typeDeclaration) {
+  // TODO(b/446955307): Model records as a Kind.RECORD in TypeDeclaration and remove this ctor.
+  public Type(
+      SourcePosition sourcePosition, TypeDeclaration typeDeclaration, boolean isJavaRecord) {
     this.sourcePosition = checkNotNull(sourcePosition);
     checkArgument(
         typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum());
+    checkArgument(!isJavaRecord || typeDeclaration.isClass());
     this.typeDeclaration = typeDeclaration;
     this.isAbstract = typeDeclaration.isAbstract();
     this.superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
+    this.isJavaRecord = isJavaRecord;
+  }
+
+  public Type(SourcePosition sourcePosition, TypeDeclaration typeDeclaration) {
+    this(sourcePosition, typeDeclaration, /* isJavaRecord= */ false);
   }
 
   /**
@@ -102,6 +111,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public boolean isClass() {
     return typeDeclaration.isClass();
+  }
+
+  public boolean isJavaRecord() {
+    return isJavaRecord;
   }
 
   public TypeDeclaration getOverlaidTypeDeclaration() {

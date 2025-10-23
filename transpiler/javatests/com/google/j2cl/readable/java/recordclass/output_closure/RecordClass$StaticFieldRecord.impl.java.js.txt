@@ -1,0 +1,100 @@
+goog.module('recordclass.RecordClass.StaticFieldRecord$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class StaticFieldRecord extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_ = 0;
+ }
+ //Factory method corresponding to constructor 'StaticFieldRecord(boolean)'.
+ /** @nodts @return {!StaticFieldRecord} */
+ static $create__boolean(/** boolean */ initializeWithStaticField) {
+  StaticFieldRecord.$clinit();
+  let $instance = new StaticFieldRecord();
+  $instance.$ctor__recordclass_RecordClass_StaticFieldRecord__boolean__void(initializeWithStaticField);
+  return $instance;
+ }
+ //Initialization from constructor 'StaticFieldRecord(boolean)'.
+ /** @nodts */
+ $ctor__recordclass_RecordClass_StaticFieldRecord__boolean__void(/** boolean */ initializeWithStaticField) {
+  this.$ctor__recordclass_RecordClass_StaticFieldRecord__int__void(initializeWithStaticField ? StaticFieldRecord.$static_staticField__recordclass_RecordClass_StaticFieldRecord : 0);
+ }
+ //Factory method corresponding to constructor 'StaticFieldRecord(int)'.
+ /** @nodts @return {!StaticFieldRecord} */
+ static $create__int(/** number */ arg0) {
+  StaticFieldRecord.$clinit();
+  let $instance = new StaticFieldRecord();
+  $instance.$ctor__recordclass_RecordClass_StaticFieldRecord__int__void(arg0);
+  return $instance;
+ }
+ //Initialization from constructor 'StaticFieldRecord(int)'.
+ /** @nodts */
+ $ctor__recordclass_RecordClass_StaticFieldRecord__int__void(/** number */ arg0) {
+  this.$ctor__java_lang_Record__void();
+  this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_ = arg0;
+ }
+ /** @nodts @return {number} */
+ m_nonstaticField__int() {
+  return this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ arg0) {
+  let /** StaticFieldRecord */ $other;
+  if (!($other = StaticFieldRecord.$isInstance(arg0) ? /**@type {StaticFieldRecord}*/ (arg0) : null, !$Equality.$same($other, null))) {
+   return false;
+  }
+  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([Integer.valueOf(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)], [Integer.valueOf($other.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)]);
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([Integer.valueOf(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)]);
+ }
+ /** @override @return {?string} */
+ toString() {
+  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([Integer.valueOf(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)]);
+ }
+ /** @nodts @return {number} */
+ static get f_staticField__recordclass_RecordClass_StaticFieldRecord() {
+  return (StaticFieldRecord.$clinit(), StaticFieldRecord.$static_staticField__recordclass_RecordClass_StaticFieldRecord);
+ }
+ /** @nodts */
+ static set f_staticField__recordclass_RecordClass_StaticFieldRecord(/** number */ value) {
+  (StaticFieldRecord.$clinit(), StaticFieldRecord.$static_staticField__recordclass_RecordClass_StaticFieldRecord = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  StaticFieldRecord.$clinit = () =>{};
+  StaticFieldRecord.$loadModules();
+  Record.$clinit();
+  StaticFieldRecord.$static_staticField__recordclass_RecordClass_StaticFieldRecord = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticFieldRecord;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Arrays = goog.module.get('java.util.Arrays$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+/**@private {number} @nodts*/
+StaticFieldRecord.$static_staticField__recordclass_RecordClass_StaticFieldRecord = 0;
+$Util.$setClassMetadata(StaticFieldRecord, 'recordclass.RecordClass$StaticFieldRecord');
+
+exports = StaticFieldRecord;
+
+//# sourceMappingURL=RecordClass$StaticFieldRecord.js.map

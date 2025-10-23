@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.common.StringUtils.capitalize;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
@@ -29,6 +30,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
@@ -644,6 +646,45 @@ public final class RuntimeMethods {
 
     return MethodCall.Builder.from(equalsMethodDescriptor)
         .setArguments(firstArgument, secondArgument)
+        .build();
+  }
+
+  /** Create a call to {@link java.util.Arrays#equals}. */
+  public static MethodCall createArraysEqualsMethodCall(
+      List<Expression> arguments, List<Expression> otherArguments) {
+    return createJavaUtilArraysMethodCall("equals", arguments, otherArguments);
+  }
+
+  /** Create a call to {@link java.util.Arrays#hashCode}. */
+  public static MethodCall createArraysHashCodeMethodCall(List<Expression> arguments) {
+    return createJavaUtilArraysMethodCall("hashCode", arguments);
+  }
+
+  /** Create a call to {@link java.util.Arrays#toString}. */
+  public static MethodCall createArraysToStringMethodCall(List<Expression> arguments) {
+    return createJavaUtilArraysMethodCall("toString", arguments);
+  }
+
+  private static MethodCall createJavaUtilArraysMethodCall(
+      String methodName, List<Expression>... listsOfArrayElements) {
+    ArrayTypeDescriptor objectArrayTypeDescriptor =
+        ArrayTypeDescriptor.newBuilder()
+            .setComponentTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .build();
+    TypeDescriptor[] argTypes = new TypeDescriptor[listsOfArrayElements.length];
+    Arrays.fill(argTypes, objectArrayTypeDescriptor);
+    MethodDescriptor methodDescriptor =
+        TypeDescriptors.get().javaUtilArrays.getMethodDescriptor(methodName, argTypes);
+    return MethodCall.Builder.from(methodDescriptor)
+        .setArguments(
+            stream(listsOfArrayElements)
+                .map(
+                    arrayElements ->
+                        ArrayLiteral.newBuilder()
+                            .setTypeDescriptor(objectArrayTypeDescriptor)
+                            .setValueExpressions(arrayElements)
+                            .build())
+                .collect(toImmutableList()))
         .build();
   }
 

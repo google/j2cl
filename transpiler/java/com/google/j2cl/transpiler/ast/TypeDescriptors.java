@@ -88,6 +88,8 @@ public class TypeDescriptors {
 
   public DeclaredTypeDescriptor javaLangThrowable;
 
+  public DeclaredTypeDescriptor javaLangRecord;
+
   public DeclaredTypeDescriptor javaUtilArrays;
   public DeclaredTypeDescriptor javaUtilCollection;
   public DeclaredTypeDescriptor javaUtilMap;

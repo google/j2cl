@@ -210,7 +210,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         typeDeclaration.isAnonymous()
             ? getSourcePosition(sourcePositionNode)
             : getNamePosition(sourcePositionNode),
-        typeDeclaration);
+        typeDeclaration,
+        typeElement.isRecord());
   }
 
   private Type convertClassDeclaration(JCClassDecl classDecl) {
@@ -744,7 +745,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       if (kind == Kind.ANNOTATION_TYPE
           || kind == Kind.CLASS
           || kind == Kind.ENUM
-          || kind == Kind.INTERFACE) {
+          || kind == Kind.INTERFACE
+          || kind == Kind.RECORD) {
         // Skip the class/enum/interface token.
         while (src.charAt(start++) != ' ') {}
       } else if (kind != Kind.METHOD && kind != Kind.VARIABLE) {

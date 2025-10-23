@@ -1,0 +1,62 @@
+goog.module('recordclass.RecordClass.RecordWithOverriddenObjectMethods$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class RecordWithOverriddenObjectMethods extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?string} @nodts*/
+  this.f_value__recordclass_RecordClass_RecordWithOverriddenObjectMethods_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return 0;
+ }
+ /** @override @return {?string} */
+ toString() {
+  return 'foo';
+ }
+ /** @nodts @return {!RecordWithOverriddenObjectMethods} */
+ static $create__java_lang_String(/** ?string */ arg0) {
+  RecordWithOverriddenObjectMethods.$clinit();
+  let $instance = new RecordWithOverriddenObjectMethods();
+  $instance.$ctor__recordclass_RecordClass_RecordWithOverriddenObjectMethods__java_lang_String__void(arg0);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_RecordWithOverriddenObjectMethods__java_lang_String__void(/** ?string */ arg0) {
+  this.$ctor__java_lang_Record__void();
+  this.f_value__recordclass_RecordClass_RecordWithOverriddenObjectMethods_ = arg0;
+ }
+ /** @nodts @return {?string} */
+ m_value__java_lang_String() {
+  return this.f_value__recordclass_RecordClass_RecordWithOverriddenObjectMethods_;
+ }
+ /** @nodts */
+ static $clinit() {
+  RecordWithOverriddenObjectMethods.$clinit = () =>{};
+  RecordWithOverriddenObjectMethods.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecordWithOverriddenObjectMethods;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(RecordWithOverriddenObjectMethods, 'recordclass.RecordClass$RecordWithOverriddenObjectMethods');
+
+exports = RecordWithOverriddenObjectMethods;
+
+//# sourceMappingURL=RecordClass$RecordWithOverriddenObjectMethods.js.map

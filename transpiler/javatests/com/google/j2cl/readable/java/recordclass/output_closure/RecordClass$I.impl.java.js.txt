@@ -1,0 +1,42 @@
+goog.module('recordclass.RecordClass.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('recordclass.RecordClass.I.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class I {
+ /** @abstract @nodts @return {?string} */
+ m_a__java_lang_String() {}
+ /** @nodts @return {!I} */
+ static $adapt(/** ?function():?string */ fn) {
+  I.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  I.$clinit = () =>{};
+  I.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__recordclass_RecordClass_I = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__recordclass_RecordClass_I;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('recordclass.RecordClass.I.$LambdaAdaptor$impl');
+ }
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (I), 'recordclass.RecordClass$I');
+
+exports = I;
+
+//# sourceMappingURL=RecordClass$I.js.map

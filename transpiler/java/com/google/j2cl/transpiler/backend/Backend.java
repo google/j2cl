@@ -59,6 +59,7 @@ import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaImplementorClasses;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaJsFunctionAdaptor;
 import com.google.j2cl.transpiler.passes.ImplementNotNullOperator;
+import com.google.j2cl.transpiler.passes.ImplementRecordClasses;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitFunctionRedirection;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
@@ -231,6 +232,8 @@ public enum Backend {
           // Early run of determining whether variables are effectively final so that passes that
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           MakeVariablesFinal::new,
+          // Must run before DesugarInstanceOfPatterns.
+          ImplementRecordClasses::new,
           DesugarInstanceOfPatterns::new,
           NormalizeSuspendFunctionCalls::new,
           ConvertMethodReferencesToLambdas::new,
@@ -427,6 +430,8 @@ public enum Backend {
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
           // removed.
           MakeVariablesFinal::new,
+          // Must run before DesugarInstanceOfPatterns.
+          ImplementRecordClasses::new,
           DesugarInstanceOfPatterns::new,
           ConvertMethodReferencesToLambdas::new,
           NormalizePackagedJsEnumVarargsLiterals::new,
@@ -580,6 +585,8 @@ public enum Backend {
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
           // removed.
           MakeVariablesFinal::new,
+          // Must run before DesugarInstanceOfPatterns.
+          ImplementRecordClasses::new,
           DesugarInstanceOfPatterns::new,
           ConvertMethodReferencesToLambdas::new,
           NormalizePackagedJsEnumVarargsLiterals::new,

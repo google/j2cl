@@ -1,0 +1,72 @@
+goog.module('recordclass.RecordClass.ObjectRecord$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ */
+class ObjectRecord extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {*} @nodts*/
+  this.f_value__recordclass_RecordClass_ObjectRecord_;
+ }
+ /** @nodts @return {!ObjectRecord} */
+ static $create__java_lang_Object(/** * */ arg0) {
+  ObjectRecord.$clinit();
+  let $instance = new ObjectRecord();
+  $instance.$ctor__recordclass_RecordClass_ObjectRecord__java_lang_Object__void(arg0);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_ObjectRecord__java_lang_Object__void(/** * */ arg0) {
+  this.$ctor__java_lang_Record__void();
+  this.f_value__recordclass_RecordClass_ObjectRecord_ = arg0;
+ }
+ /** @nodts @return {*} */
+ m_value__java_lang_Object() {
+  return this.f_value__recordclass_RecordClass_ObjectRecord_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ arg0) {
+  let /** ObjectRecord */ $other;
+  if (!($other = ObjectRecord.$isInstance(arg0) ? /**@type {ObjectRecord}*/ (arg0) : null, !$Equality.$same($other, null))) {
+   return false;
+  }
+  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_value__recordclass_RecordClass_ObjectRecord_], [$other.f_value__recordclass_RecordClass_ObjectRecord_]);
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_value__recordclass_RecordClass_ObjectRecord_]);
+ }
+ /** @override @return {?string} */
+ toString() {
+  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_value__recordclass_RecordClass_ObjectRecord_]);
+ }
+ /** @nodts */
+ static $clinit() {
+  ObjectRecord.$clinit = () =>{};
+  ObjectRecord.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ObjectRecord;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Arrays = goog.module.get('java.util.Arrays$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(ObjectRecord, 'recordclass.RecordClass$ObjectRecord');
+
+exports = ObjectRecord;
+
+//# sourceMappingURL=RecordClass$ObjectRecord.js.map

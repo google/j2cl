@@ -1,0 +1,75 @@
+goog.module('recordclass.RecordClass.RecordImplementingInterface$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const I = goog.require('recordclass.RecordClass.I$impl');
+
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+/**
+ * @final
+ * @implements {I}
+ */
+class RecordImplementingInterface extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?string} @nodts*/
+  this.f_a__recordclass_RecordClass_RecordImplementingInterface_;
+ }
+ /** @nodts @return {!RecordImplementingInterface} */
+ static $create__java_lang_String(/** ?string */ arg0) {
+  RecordImplementingInterface.$clinit();
+  let $instance = new RecordImplementingInterface();
+  $instance.$ctor__recordclass_RecordClass_RecordImplementingInterface__java_lang_String__void(arg0);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_RecordImplementingInterface__java_lang_String__void(/** ?string */ arg0) {
+  this.$ctor__java_lang_Record__void();
+  this.f_a__recordclass_RecordClass_RecordImplementingInterface_ = arg0;
+ }
+ /** @override @nodts @return {?string} */
+ m_a__java_lang_String() {
+  return this.f_a__recordclass_RecordClass_RecordImplementingInterface_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ arg0) {
+  let /** RecordImplementingInterface */ $other;
+  if (!($other = RecordImplementingInterface.$isInstance(arg0) ? /**@type {RecordImplementingInterface}*/ (arg0) : null, !$Equality.$same($other, null))) {
+   return false;
+  }
+  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_a__recordclass_RecordClass_RecordImplementingInterface_], [$other.f_a__recordclass_RecordClass_RecordImplementingInterface_]);
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_a__recordclass_RecordClass_RecordImplementingInterface_]);
+ }
+ /** @override @return {?string} */
+ toString() {
+  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_a__recordclass_RecordClass_RecordImplementingInterface_]);
+ }
+ /** @nodts */
+ static $clinit() {
+  RecordImplementingInterface.$clinit = () =>{};
+  RecordImplementingInterface.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecordImplementingInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Arrays = goog.module.get('java.util.Arrays$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+I.$markImplementor(RecordImplementingInterface);
+$Util.$setClassMetadata(RecordImplementingInterface, 'recordclass.RecordClass$RecordImplementingInterface');
+
+exports = RecordImplementingInterface;
+
+//# sourceMappingURL=RecordClass$RecordImplementingInterface.js.map
