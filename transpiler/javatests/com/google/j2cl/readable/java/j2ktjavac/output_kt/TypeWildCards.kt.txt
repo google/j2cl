@@ -21,6 +21,7 @@ package j2ktjavac
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Array
+import kotlin.Number
 import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
@@ -39,6 +40,13 @@ open class TypeWildCards internal constructor() {
    A(),
    B(),
   )
+ }
+
+ internal open fun <T: Number> methodWithUnusedTypeParameter_pp_j2ktjavac() {}
+
+ internal open fun testUnusedTypeParameter_pp_j2ktjavac() {
+  this.methodWithUnusedTypeParameter_pp_j2ktjavac()
+  this.methodWithUnusedTypeParameter_pp_j2ktjavac()
  }
 
  open class WithDependentBounds internal constructor() {

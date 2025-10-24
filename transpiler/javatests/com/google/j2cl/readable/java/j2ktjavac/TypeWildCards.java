@@ -82,4 +82,12 @@ class TypeWildCards {
       }
     }
   }
+
+  <T extends Number> void methodWithUnusedTypeParameter() {}
+
+  // repro for b/454726194
+  void testUnusedTypeParameter() {
+    methodWithUnusedTypeParameter();
+    this.<Number>methodWithUnusedTypeParameter();
+  }
 }
