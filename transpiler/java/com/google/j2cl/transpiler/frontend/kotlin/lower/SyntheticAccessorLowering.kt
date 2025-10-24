@@ -24,7 +24,6 @@ import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.withinScope
 import org.jetbrains.kotlin.ir.visitors.*
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.name.NameUtils
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 /**
@@ -98,18 +97,7 @@ class SyntheticAccessorLowering(private val context: LoweringContext) : BodyLowe
     private val copier =
       object : DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper) {
         override fun visitSimpleFunction(declaration: IrSimpleFunction): IrSimpleFunction {
-          // MODIFIED BY GOOGLE.
-          // Use function's sanitized name when building the name of the new function. The name of
-          // property's getter and setter in  Kotlin AST are invalid in javascript.
-          // Original code:
-          // val newName = Name.identifier("${declaration.name.asString()}\$accessor\$$fileHash")
-          // TODO(b/228454104): Remove this code and use the original one when we fully sanitize
-          //  name
-          val newName =
-            Name.identifier(
-              "${NameUtils.sanitizeAsJavaIdentifier(declaration.name.asStringStripSpecialMarkers())}\$accessor\$$fileHash"
-            )
-          // END OF MODIFICATION.
+          val newName = Name.identifier("${declaration.name.asString()}\$accessor\$$fileHash")
           return declaration.factory
             .createSimpleFunction(
               startOffset = declaration.startOffset,
