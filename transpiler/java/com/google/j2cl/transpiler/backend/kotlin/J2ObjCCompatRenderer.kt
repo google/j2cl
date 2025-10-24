@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.TypeVariable
@@ -270,7 +271,8 @@ internal class J2ObjCCompatRenderer(
       ?.let { functionRenderers(method, it) } ?: listOf()
 
   private fun shouldRender(methodDescriptor: MethodDescriptor): Boolean =
-    methodDescriptor.visibility.isPublic &&
+    !methodDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
+      methodDescriptor.visibility.isPublic &&
       // Don't render constructors for inner-classes, because they have implicit `outer`
       // parameter.
       (methodDescriptor.isStatic ||
@@ -287,7 +289,8 @@ internal class J2ObjCCompatRenderer(
       methodDescriptor.parameterTypeDescriptors.all { !it.isProtobuf }
 
   private fun shouldRender(fieldDescriptor: FieldDescriptor): Boolean =
-    fieldDescriptor.visibility.isPublic &&
+    !fieldDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
+      fieldDescriptor.visibility.isPublic &&
       (fieldDescriptor.isStatic || fieldDescriptor.enclosingTypeDescriptor.isInterface) &&
       shouldRender(fieldDescriptor.typeDescriptor)
 
@@ -295,7 +298,9 @@ internal class J2ObjCCompatRenderer(
     !hiddenFromObjCMapping.contains(typeDescriptor) &&
       when (typeDescriptor) {
         is PrimitiveTypeDescriptor -> true
-        is DeclaredTypeDescriptor -> shouldRenderDescriptor(typeDescriptor.typeDeclaration)
+        is DeclaredTypeDescriptor ->
+          shouldRenderDescriptor(typeDescriptor.typeDeclaration) &&
+            (!isBoxedType(typeDescriptor) || typeDescriptor.isNullable)
         is ArrayTypeDescriptor -> false
         is TypeVariable -> shouldRender(typeDescriptor.upperBoundTypeDescriptor)
         is IntersectionTypeDescriptor -> shouldRender(typeDescriptor.firstType)
@@ -458,20 +463,36 @@ internal class J2ObjCCompatRenderer(
     }
 
   private fun kotlinNameToObjC(name: String) = buildString {
-    if (name.startsWith("kotlin.")) {
-      append("GKOTKotlin")
-      append(name.substring(name.lastIndexOf('.') + 1))
-    } else {
-      append("J2kt")
-      var nextUpper = true
-      for (c in name) {
-        if (c == '.') {
-          nextUpper = true
-        } else if (nextUpper) {
-          append(c.uppercaseChar())
-          nextUpper = false
+    when (name) {
+      "kotlin.Boolean",
+      "kotlin.Byte",
+      "kotlin.Char",
+      "kotlin.Double",
+      "kotlin.Float",
+      "kotlin.Int",
+      "kotlin.Long",
+      "kotlin.Number",
+      "kotlin.Short" -> {
+        append("GKOT")
+        append(name.substring(name.lastIndexOf('.') + 1))
+      }
+      else -> {
+        if (name.startsWith("kotlin.")) {
+          append("GKOTKotlin")
+          append(name.substring(name.lastIndexOf('.') + 1))
         } else {
-          append(c)
+          append("J2kt")
+          var nextUpper = true
+          for (c in name) {
+            if (c == '.') {
+              nextUpper = true
+            } else if (nextUpper) {
+              append(c.uppercaseChar())
+              nextUpper = false
+            } else {
+              append(c)
+            }
+          }
         }
       }
     }
@@ -484,7 +505,7 @@ internal class J2ObjCCompatRenderer(
     if (ktFqName == null) {
       null
     } else {
-      objCNameRenderer(TypeDeclaration.Kind.CLASS, kotlinNameToObjC(ktFqName))
+      objCNameRenderer(typeDeclaration.kind, kotlinNameToObjC(ktFqName))
     }
 
   private fun mappedKtNativeRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
@@ -493,7 +514,8 @@ internal class J2ObjCCompatRenderer(
   private fun mappedKtNativeBridgeRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
     mappedKtNativeRenderer(
       typeDeclaration,
-      KT_NATIVE_BRIDGE_NAME_MAP[typeDeclaration.ktBridgeQualifiedName]
+      KT_NATIVE_BRIDGE_NAME_MAP[
+        typeDeclaration.ktBridgeQualifiedName ?: typeDeclaration.ktNativeQualifiedName]
         ?: typeDeclaration.ktBridgeQualifiedName
         ?: typeDeclaration.ktNativeQualifiedName,
     )
@@ -697,7 +719,6 @@ internal class J2ObjCCompatRenderer(
         "java.lang.Exception",
         "java.lang.Float",
         "java.lang.IndexOutOfBoundsException",
-        "java.lang.Integer",
         "java.lang.IllegalStateException",
         "java.lang.Iterable",
         "java.lang.JsException",
