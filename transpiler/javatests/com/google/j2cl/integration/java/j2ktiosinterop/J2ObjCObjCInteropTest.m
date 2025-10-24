@@ -10,6 +10,7 @@
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
+#include "java/lang/Integer.h"
 
 /** J2ObjC interop test for ObjC. */
 @interface J2ObjCObjCInteropTest : XCTestCase
@@ -326,6 +327,12 @@
   [builder addWithId:@"foo"];
   [builder addWithId:@"bar"];
   list = [builder build];
+}
+
+- (void)testPrimitiveConstants {
+  int i;
+  i = JavaLangInteger_get_MAX_VALUE();
+  i = JavaLangInteger_get_MIN_VALUE();
 }
 
 @end

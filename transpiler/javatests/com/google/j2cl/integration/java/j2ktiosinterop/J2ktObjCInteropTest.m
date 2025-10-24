@@ -364,4 +364,11 @@
   list = [builder build];
 }
 
+- (void)testPrimitiveConstants {
+  // TODO(b/448061854): Missing J2ObjCCompat.h header for JavaLangInteger.
+  // int i;
+  // i = JavaLangInteger_get_MAX_VALUE();
+  // i = JavaLangInteger_get_MIN_VALUE();
+}
+
 @end
