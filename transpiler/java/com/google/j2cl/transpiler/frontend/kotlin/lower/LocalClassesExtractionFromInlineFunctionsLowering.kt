@@ -28,7 +28,6 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.expressions.IrBody
 import org.jetbrains.kotlin.ir.expressions.IrGetValue
-import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
@@ -63,8 +62,6 @@ internal class LocalClassesExtractionFromInlineFunctionsLowering(context: Loweri
 
     function.collectExtractableLocalClassesInto(classesToExtract)
     if (classesToExtract.isEmpty()) return
-    println(" Found local classes in inline function: ${function.render()}:")
-    classesToExtract.forEach { println("  ${it.render()}") }
     super.lower(irBody, container)
 
     classesToExtract.clear()
