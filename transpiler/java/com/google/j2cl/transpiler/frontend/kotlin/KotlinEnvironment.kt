@@ -69,6 +69,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.jsNamespace
 import com.google.j2cl.transpiler.frontend.kotlin.ir.methods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.overriddenSpecialBridgeSignatures
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveName
+import com.google.j2cl.transpiler.frontend.kotlin.ir.sanitizeName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.sanitizedName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.simpleSourceName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.singleAbstractMethod
@@ -840,7 +841,7 @@ internal class KotlinEnvironment(
         enclosingParentClassComponent + "${index}$name"
       }
     } else {
-      classId!!.relativeClassName.pathSegments().map { it.asString() }
+      classId!!.relativeClassName.pathSegments().map { it.sanitizeName() }
     }
   }
 

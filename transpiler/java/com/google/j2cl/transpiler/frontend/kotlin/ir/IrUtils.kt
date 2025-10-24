@@ -663,7 +663,7 @@ private fun IrDeclarationWithName.sanitizeName(name: Name = this.name) =
     name.sanitizeName()
   }
 
-private fun Name.sanitizeName() = JsUtils.sanitizeJsIdentifier(this.asStringStripSpecialMarkers())
+fun Name.sanitizeName() = JsUtils.sanitizeJsIdentifier(this.asStringStripSpecialMarkers())
 
 /**
  * Returns `true` if the function reference is a reference to a synthetic adapter function created

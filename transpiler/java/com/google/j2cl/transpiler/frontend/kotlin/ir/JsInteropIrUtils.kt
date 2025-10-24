@@ -138,7 +138,12 @@ fun IrClass.getJsEnumInfo(): JsEnumInfo? {
 }
 
 val IrClass.jsName: String?
-  get() = getJsTypeOrJsEnumAnnotation()?.getValueArgumentAsConst<String>(NAME_ANNOTATION_ATTRIBUTE)
+  get() =
+    getJsTypeOrJsEnumAnnotation()?.let {
+      // If a name attribute is present on the JsInterop annotation, use that. Otherwise use the
+      // unsanitized class name.
+      it.getValueArgumentAsConst<String>(NAME_ANNOTATION_ATTRIBUTE) ?: name.asString()
+    }
 
 val IrClass.jsNamespace: String?
   get() =
