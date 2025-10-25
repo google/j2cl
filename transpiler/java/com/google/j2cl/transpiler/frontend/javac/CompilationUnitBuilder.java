@@ -704,7 +704,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 .setLine(endLine)
                 // TODO(b/92372836): Document which character this should point to
                 .setColumn(endColumn)
-                .setByteOffset(endCharacterPosition + 1)
+                .setByteOffset(endCharacterPosition)
                 .build())
         .build();
   }
