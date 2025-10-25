@@ -45,8 +45,8 @@ open class TypeWildCards internal constructor() {
  internal open fun <T: Number> methodWithUnusedTypeParameter_pp_j2ktjavac() {}
 
  internal open fun testUnusedTypeParameter_pp_j2ktjavac() {
-  this.methodWithUnusedTypeParameter_pp_j2ktjavac()
-  this.methodWithUnusedTypeParameter_pp_j2ktjavac()
+  this.methodWithUnusedTypeParameter_pp_j2ktjavac<Number>()
+  this.methodWithUnusedTypeParameter_pp_j2ktjavac<Number>()
  }
 
  open class WithDependentBounds internal constructor() {

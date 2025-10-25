@@ -758,7 +758,9 @@ class JavaEnvironment {
         methodType.getParameterTypes().stream().collect(toImmutableList());
 
     TypeMirror returnType = methodType.getReturnType();
-    if (isSpecialized(enclosingTypeDescriptor, declarationMethodElement, parameters, returnType)) {
+    if (!typeArguments.isEmpty()
+        || isSpecialized(
+            enclosingTypeDescriptor, declarationMethodElement, parameters, returnType)) {
       declarationMethodDescriptor = createMethodDescriptor(declarationMethodElement);
     } else {
       typeArguments = ImmutableList.of();
