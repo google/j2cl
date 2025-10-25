@@ -224,7 +224,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable,
       ImmutableSet<TypeVariable> seen) {
     if (isWildcardOrCapture()) {
-      if (seen.contains(this)) {
+      if (isUnbound() || seen.contains(this)) {
+        // Unbound wildcards inherit implicitly the bounds from the declaration, it is ok not to
+        // specialize them.
         return this;
       }
 

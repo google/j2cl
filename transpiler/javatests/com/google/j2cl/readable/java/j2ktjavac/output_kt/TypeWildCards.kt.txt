@@ -111,4 +111,8 @@ open class TypeWildCards internal constructor() {
    }
   }
  }
+
+ open inner class View<P: TypeWildCards.Presenter<*>> internal constructor()
+
+ open inner class Presenter<V: TypeWildCards.View<*>> internal constructor()
 }

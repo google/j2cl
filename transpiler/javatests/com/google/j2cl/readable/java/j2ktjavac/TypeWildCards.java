@@ -90,4 +90,9 @@ class TypeWildCards {
     methodWithUnusedTypeParameter();
     this.<Number>methodWithUnusedTypeParameter();
   }
+
+  // repro for b/454921761
+  class View<P extends Presenter<?>> {}
+
+  class Presenter<V extends View<?>> {}
 }
