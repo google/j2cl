@@ -222,7 +222,7 @@ internal val Variable.objCParameterName: String
   get() = "with$objCName"
 
 internal val FieldDescriptor.objCName: String
-  get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant) { it + "_" }
+  get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant && !isStatic) { it + "_" }
 
 internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObjCNames =
   copy(
