@@ -18,12 +18,8 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
-import org.jetbrains.kotlin.ir.types.classOrFail
-import org.jetbrains.kotlin.ir.types.classOrNull
-import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
@@ -37,17 +33,6 @@ internal class SmartCastCleaner : FileLoweringPass, IrElementTransformerVoid() {
 
   override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
 
-  override fun visitMemberAccess(expression: IrMemberAccessExpression<*>): IrExpression {
-    expression.transformChildrenVoid()
-
-    val dispatchReceiver = expression.dispatchReceiver
-    if (dispatchReceiver is IrTypeOperatorCall && dispatchReceiver.isImplicitNonNullCast()) {
-      expression.dispatchReceiver = dispatchReceiver.argument
-    }
-
-    return expression
-  }
-
   override fun visitTypeOperator(expression: IrTypeOperatorCall): IrExpression {
     expression.transformChildrenVoid()
 
@@ -59,15 +44,11 @@ internal class SmartCastCleaner : FileLoweringPass, IrElementTransformerVoid() {
     val originalType = argument.type
     val targetType = expression.typeOperand
 
-    // Implicit cast that promotes the nullability of a primitive type is not needed for J2CL and
-    // lead to extra boxing/unboxing operations.
-    if (targetType.isPrimitiveType() && targetType.classOrFail == originalType.classOrNull) {
+    // Implicit non-null casts are not needed.
+    if (targetType == originalType.makeNotNull()) {
       return expression.argument
     }
 
     return expression
   }
 }
-
-private fun IrTypeOperatorCall.isImplicitNonNullCast(): Boolean =
-  operator == IrTypeOperator.IMPLICIT_CAST && typeOperand == argument.type.makeNotNull()
