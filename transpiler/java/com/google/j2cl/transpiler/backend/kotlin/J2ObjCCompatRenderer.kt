@@ -45,6 +45,7 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
 import com.google.j2cl.transpiler.backend.kotlin.common.backslashEscapedString
 import com.google.j2cl.transpiler.backend.kotlin.common.inSingleQuotes
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
+import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
@@ -462,71 +463,40 @@ internal class J2ObjCCompatRenderer(
       else -> null
     }
 
-  private fun kotlinNameToObjC(name: String) = buildString {
-    when (name) {
-      "kotlin.Boolean",
-      "kotlin.Byte",
-      "kotlin.Char",
-      "kotlin.Double",
-      "kotlin.Float",
-      "kotlin.Int",
-      "kotlin.Long",
-      "kotlin.Number",
-      "kotlin.Short" -> {
-        append("GKOT")
-        append(name.substring(name.lastIndexOf('.') + 1))
-      }
-      else -> {
-        if (name.startsWith("kotlin.")) {
-          append("GKOTKotlin")
-          append(name.substring(name.lastIndexOf('.') + 1))
-        } else {
-          append("J2kt")
-          var nextUpper = true
-          for (c in name) {
-            if (c == '.') {
-              nextUpper = true
-            } else if (nextUpper) {
-              append(c.uppercaseChar())
-              nextUpper = false
-            } else {
-              append(c)
-            }
-          }
-        }
-      }
-    }
-  }
+  private fun ktNativeNameObjCNamePrefix(name: String): String =
+    if (name.startsWith("kotlin.")) "GKOT" else objCNamePrefix
 
-  private fun mappedKtNativeRenderer(
-    typeDeclaration: TypeDeclaration,
-    ktFqName: String?,
-  ): Renderer<Source>? =
-    if (ktFqName == null) {
-      null
+  private fun ktNativeNameToObjCName(name: String): String =
+    ktNativeNameObjCNamePrefix(name) + ktNativeNameObjCNameWithoutPrefix(name)
+
+  private fun ktNativeNameObjCNameWithoutPrefix(name: String): String =
+    if (ktNativeNameUsesSimpleObjCName(name)) {
+      name.substring(name.lastIndexOf('.') + 1)
     } else {
-      objCNameRenderer(typeDeclaration.kind, kotlinNameToObjC(ktFqName))
+      name.qualifiedNameToObjCName
     }
+
+  private fun ktNativeNameUsesSimpleObjCName(name: String): Boolean =
+    KT_NATIVE_SIMPLE_OBJC_NAME_TYPES.contains(name)
+
+  private fun mappedKtNativeRenderer(kind: TypeDeclaration.Kind, name: String): Renderer<Source>? =
+    objCNameRenderer(kind, ktNativeNameToObjCName(name))
 
   private fun mappedKtNativeRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
-    mappedKtNativeRenderer(typeDeclaration, typeDeclaration.ktNativeQualifiedName)
+    typeDeclaration.ktNativeQualifiedName?.let { mappedKtNativeRenderer(typeDeclaration.kind, it) }
 
   private fun mappedKtNativeBridgeRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
-    mappedKtNativeRenderer(
-      typeDeclaration,
-      KT_NATIVE_BRIDGE_NAME_MAP[
-        typeDeclaration.ktBridgeQualifiedName ?: typeDeclaration.ktNativeQualifiedName]
-        ?: typeDeclaration.ktBridgeQualifiedName
-        ?: typeDeclaration.ktNativeQualifiedName,
-    )
+    KT_NATIVE_BRIDGE_NAME_MAP.get(
+        typeDeclaration.ktBridgeQualifiedName ?: typeDeclaration.ktNativeQualifiedName
+      )
+      .orIfNull { typeDeclaration.ktBridgeQualifiedName }
+      .orIfNull { typeDeclaration.ktNativeQualifiedName }
+      ?.let { mappedKtNativeRenderer(typeDeclaration.kind, it) }
 
   private fun mappedKtNativeCompanionRenderer(typeDeclaration: TypeDeclaration): Renderer<Source>? =
-    mappedKtNativeRenderer(
-      typeDeclaration,
-      (typeDeclaration.ktCompanionQualifiedName ?: typeDeclaration.ktNativeQualifiedName)?.plus(
-        "Companion"
-      ),
-    )
+    typeDeclaration.ktCompanionQualifiedName
+      .orIfNull { typeDeclaration.ktNativeQualifiedName }
+      ?.let { mappedKtNativeRenderer(typeDeclaration.kind, it + "Companion") }
 
   private fun nonMappedObjCNameRenderer(typeDeclaration: TypeDeclaration): Renderer<Source> =
     objCNameRenderer(typeDeclaration.kind, typeDeclaration.objCName(prefix = objCNamePrefix))
@@ -695,6 +665,20 @@ internal class J2ObjCCompatRenderer(
       }
 
   companion object {
+    // Kotlin types that use the simple ObjC name for the type.
+    val KT_NATIVE_SIMPLE_OBJC_NAME_TYPES =
+      setOf(
+        "kotlin.Boolean",
+        "kotlin.Char",
+        "kotlin.Byte",
+        "kotlin.Short",
+        "kotlin.Int",
+        "kotlin.Long",
+        "kotlin.Float",
+        "kotlin.Double",
+        "kotlin.Number",
+      )
+
     // Java JRE classes where we generate J2ObjC compat headers.
     // TODO(b/448061854): At least enable the primitive types.
     val KT_NATIVE_JRE_EXCLUDE =

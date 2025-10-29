@@ -164,6 +164,9 @@ private val TypeDeclaration.objCPackagePrefix: String
   get() = packageName?.objCPackagePrefix ?: ""
 
 private val String.objCPackagePrefix: String
+  get() = qualifiedNameToObjCName
+
+internal val String.qualifiedNameToObjCName: String
   get() = split('.').joinToString(separator = "") { it.titleCased.objCName }
 
 internal val String.objCName
