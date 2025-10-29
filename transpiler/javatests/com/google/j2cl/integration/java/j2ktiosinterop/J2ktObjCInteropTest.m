@@ -257,20 +257,40 @@
   J2ktiosinteropCollectionTypes_CustomIterator *customIterator =
       [J2ktiosinteropCollectionTypesCompanion.shared getCustomIterator];
 
+  // TODO(b/454834286): Generate J2ObjCCompat.h for inner collection classes.
+  // J2ktiosinteropCollectionTypes_CustomIterator_Builder *customIteratorBuilder =
+  //     [J2ktiosinteropCollectionTypes_CustomIteratorCompanion.shared builder];
+  // customIterator = [customIteratorBuilder build];
+
   id<GKOTKotlinMutableListIterator> listIterator =
       [J2ktiosinteropCollectionTypesCompanion.shared getListIterator];
   J2ktiosinteropCollectionTypes_CustomListIterator *customListIterator =
       [J2ktiosinteropCollectionTypesCompanion.shared getCustomListIterator];
 
+  // TODO(b/454834286): Generate J2ObjCCompat.h for inner collection classes.
+  // J2ktiosinteropCollectionTypes_CustomListIterator_Builder *customListIteratorBuilder =
+  //     [J2ktiosinteropCollectionTypes_CustomListIteratorCompanion.shared builder];
+  // customListIterator = [customListIteratorBuilder build];
+
   id iterable = [J2ktiosinteropCollectionTypesCompanion.shared getIterable];
   J2ktiosinteropCollectionTypes_CustomIterable *customIterable =
       [J2ktiosinteropCollectionTypesCompanion.shared getCustomIterable];
+
+  // TODO(b/454834286): Generate J2ObjCCompat.h for inner collection classes.
+  // J2ktiosinteropCollectionTypes_CustomIterable_Builder *customIterableBuilder =
+  //     [J2ktiosinteropCollectionTypes_CustomIterableCompanion.shared builder];
+  // customIterable = [customIterableBuilder build];
 
   id collection = [J2ktiosinteropCollectionTypesCompanion.shared getCollection];
   J2ktJavaUtilAbstractCollection<id> *abstractCollection =
       [J2ktiosinteropCollectionTypesCompanion.shared getAbstractCollection];
   J2ktJ2ktiosinteropCollectionTypes_CustomCollection<id> *customCollection =
       [J2ktiosinteropCollectionTypesCompanion.shared getCustomCollection];
+
+  // TODO(b/454834286): Generate J2ObjCCompat.h for inner collection classes.
+  // J2ktiosinteropCollectionTypes_CustomCollection_Builder *customCollectionBuilder =
+  //     [J2ktiosinteropCollectionTypes_CustomCollectionCompanion.shared builder];
+  // customCollection = [customCollectionBuilder build];
 
   NSMutableArray<id> *list = [J2ktiosinteropCollectionTypesCompanion.shared getList];
   NSMutableArray<id> *arraylist = [J2ktiosinteropCollectionTypesCompanion.shared getArrayList];
@@ -279,10 +299,20 @@
       [J2ktiosinteropCollectionTypesCompanion.shared getAbstractList];
   NSMutableArray<id> *customList = [J2ktiosinteropCollectionTypesCompanion.shared getCustomList];
 
+  // TODO(b/454834286): Generate J2ObjCCompat.h for inner collection classes.
+  // J2ktiosinteropCollectionTypes_CustomList_Builder *customListBuilder =
+  //     [J2ktiosinteropCollectionTypes_CustomListCompanion.shared builder];
+  // customList = [customListBuilder build];
+
   GKOTMutableSet<id> *set = [J2ktiosinteropCollectionTypesCompanion.shared getSet];
   GKOTMutableSet<id> *hashSet = [J2ktiosinteropCollectionTypesCompanion.shared getHashSet];
   GKOTMutableSet<id> *abstractSet = [J2ktiosinteropCollectionTypesCompanion.shared getAbstractSet];
   GKOTMutableSet<id> *customSet = [J2ktiosinteropCollectionTypesCompanion.shared getCustomSet];
+
+  // TODO(b/454834286): Generate J2ObjCCompat.h for inner collection classes.
+  // J2ktiosinteropCollectionTypes_CustomSet_Builder *customSetBuilder =
+  //     [J2ktiosinteropCollectionTypes_CustomSetCompanion.shared builder];
+  // customSet = [customSetBuilder build];
 
   GKOTMutableDictionary<id, id> *map = [J2ktiosinteropCollectionTypesCompanion.shared getMap];
   GKOTMutableDictionary<id, id> *hashMap =

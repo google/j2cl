@@ -237,19 +237,35 @@
   J2ktiosinteropCollectionTypes_CustomIterator *customIterator =
       [J2ktiosinteropCollectionTypes getCustomIterator];
 
+  J2ktiosinteropCollectionTypes_CustomIterator_Builder *customIteratorBuilder =
+      [J2ktiosinteropCollectionTypes_CustomIterator builder];
+  customIterator = [customIteratorBuilder build];
+
   id<JavaUtilListIterator> listIterator = [J2ktiosinteropCollectionTypes getListIterator];
   J2ktiosinteropCollectionTypes_CustomListIterator *customListIterator =
       [J2ktiosinteropCollectionTypes getCustomListIterator];
 
+  J2ktiosinteropCollectionTypes_CustomListIterator_Builder *customListIteratorBuilder =
+      [J2ktiosinteropCollectionTypes_CustomListIterator builder];
+  customListIterator = [customListIteratorBuilder build];
+
   id<JavaLangIterable> iterable = [J2ktiosinteropCollectionTypes getIterable];
   J2ktiosinteropCollectionTypes_CustomIterable *customIterable =
       [J2ktiosinteropCollectionTypes getCustomIterable];
+
+  J2ktiosinteropCollectionTypes_CustomIterable_Builder *customIterableBuilder =
+      [J2ktiosinteropCollectionTypes_CustomIterable builder];
+  customIterable = [customIterableBuilder build];
 
   id<JavaUtilCollection> collection = [J2ktiosinteropCollectionTypes getCollection];
   JavaUtilAbstractCollection *abstractCollection =
       [J2ktiosinteropCollectionTypes getAbstractCollection];
   J2ktiosinteropCollectionTypes_CustomCollection *customCollection =
       [J2ktiosinteropCollectionTypes getCustomCollection];
+
+  J2ktiosinteropCollectionTypes_CustomCollection_Builder *customCollectionBuilder =
+      [J2ktiosinteropCollectionTypes_CustomCollection builder];
+  customCollection = [customCollectionBuilder build];
 
   id<JavaUtilList> list = [J2ktiosinteropCollectionTypes getList];
   JavaUtilArrayList *arraylist = [J2ktiosinteropCollectionTypes getArrayList];
@@ -258,16 +274,28 @@
   J2ktiosinteropCollectionTypes_CustomList *customList =
       [J2ktiosinteropCollectionTypes getCustomList];
 
+  J2ktiosinteropCollectionTypes_CustomList_Builder *customListBuilder =
+      [J2ktiosinteropCollectionTypes_CustomList builder];
+  customList = [customListBuilder build];
+
   id<JavaUtilSet> set = [J2ktiosinteropCollectionTypes getSet];
   JavaUtilHashSet *hashSet = [J2ktiosinteropCollectionTypes getHashSet];
   JavaUtilAbstractSet *abstractSet = [J2ktiosinteropCollectionTypes getAbstractSet];
   J2ktiosinteropCollectionTypes_CustomSet *customSet = [J2ktiosinteropCollectionTypes getCustomSet];
+
+  J2ktiosinteropCollectionTypes_CustomSet_Builder *customSetBuilder =
+      [J2ktiosinteropCollectionTypes_CustomSet builder];
+  customSet = [customSetBuilder build];
 
   id<JavaUtilMap> map = [J2ktiosinteropCollectionTypes getMap];
   JavaUtilHashMap *hashMap = [J2ktiosinteropCollectionTypes getHashMap];
   JavaUtilLinkedHashMap *linkedHashMap = [J2ktiosinteropCollectionTypes getLinkedHashMap];
   JavaUtilAbstractMap *abstractMap = [J2ktiosinteropCollectionTypes getAbstractMap];
   J2ktiosinteropCollectionTypes_CustomMap *customMap = [J2ktiosinteropCollectionTypes getCustomMap];
+
+  J2ktiosinteropCollectionTypes_CustomMap_Builder *customMapBuilder =
+      [J2ktiosinteropCollectionTypes_CustomMap builder];
+  customMap = [customMapBuilder build];
 
   [J2ktiosinteropCollectionTypes acceptIteratorWithJavaUtilIterator:iterator];
   [J2ktiosinteropCollectionTypes
