@@ -336,7 +336,6 @@ def _j2cl_transpile(
         srcs = jvm_provider.source_jars + js_srcs
 
     bootclasspath = get_bootclasspath(ctx)
-    direct_deps = depset(transitive = [bootclasspath] + [d.compile_jars for d in jvm_deps])
 
     if jvm_provider.compilation_info:
         compilation_classpath = [jvm_provider.compilation_info.compilation_classpath]
@@ -354,7 +353,6 @@ def _j2cl_transpile(
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
-    args.add_joined("-directdeps", direct_deps, join_with = ctx.configuration.host_path_separator)
     args.add_all("-system", jdk_system, expand_directories = False)
 
     # TODO(b/416084067): Support Javac options with an allowlist.
