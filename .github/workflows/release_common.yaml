@@ -193,7 +193,7 @@ jobs:
   publish_to_bcr:
     if: ${{ inputs.publish_to_bcr }}
     needs: release
-    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v0.2.3
+    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v1.0.0
     with:
       tag_name: ${{ inputs.version }}
       registry_fork: j2cl-github-bot/bazel-central-registry
