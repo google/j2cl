@@ -11,6 +11,7 @@
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Throwable.h"
 
 /** J2KT interop test for ObjC. */
 @interface J2ktObjCInteropTest : XCTestCase
@@ -399,6 +400,12 @@
   int i;
   i = JavaLangInteger_get_MAX_VALUE();
   i = JavaLangInteger_get_MIN_VALUE();
+}
+
+- (void)testThrowable {
+  JavaLangThrowable *throwable;
+  throwable = create_JavaLangThrowable_initWithNSString_(@"foo");
+  throwable = [[JavaLangThrowable alloc] initWithMessage:@"foo"];
 }
 
 @end
