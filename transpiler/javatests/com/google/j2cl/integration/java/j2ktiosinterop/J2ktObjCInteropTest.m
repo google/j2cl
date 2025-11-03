@@ -10,6 +10,7 @@
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
+#include "java/lang/Integer.h"
 
 /** J2KT interop test for ObjC. */
 @interface J2ktObjCInteropTest : XCTestCase
@@ -395,10 +396,9 @@
 }
 
 - (void)testPrimitiveConstants {
-  // TODO(b/448061854): Missing J2ObjCCompat.h header for JavaLangInteger.
-  // int i;
-  // i = JavaLangInteger_get_MAX_VALUE();
-  // i = JavaLangInteger_get_MIN_VALUE();
+  int i;
+  i = JavaLangInteger_get_MAX_VALUE();
+  i = JavaLangInteger_get_MIN_VALUE();
 }
 
 @end

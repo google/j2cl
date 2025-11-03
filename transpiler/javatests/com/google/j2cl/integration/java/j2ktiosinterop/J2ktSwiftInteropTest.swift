@@ -14,7 +14,7 @@
  * the License.
  */
 import XCTest
-import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integration_java_j2ktiosinterop_J2ktSwiftInteropFramework
+import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integration_java_j2ktiosinterop_j2ktiosinterop_j2kt_native
 
 /// J2KT interop test for Swift.
 final class J2ktSwiftInteropTest: XCTestCase {
