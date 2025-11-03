@@ -1288,7 +1288,7 @@ internal class CompilationUnitBuilder(
     // receiver parameters have 'this' as name but their symbol are set in the variableBySymbol map.
     // Kotlinc isn't always consistent with how they name the "this" receiver unforunately so
     // we check for multiple variants here.
-    if (target.name === SpecialNames.THIS || target.name == "this".synthesizedName) {
+    if (target.name == SpecialNames.THIS || target.name == "this".synthesizedName) {
       return ThisReference(environment.getDeclaredTypeDescriptor(irValueAccess.type))
     }
 
