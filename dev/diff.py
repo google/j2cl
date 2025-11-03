@@ -175,7 +175,7 @@ def _diff(original, modified, is_size, is_size_lines, filter_noise):
         "sed",
         "-i",
         "-E",
-        r"s/(\$jscomp\$(inline_)?|JSC\$|((type|call_ref|ref)\ \$))[0-9]+/\1#/g",
+        r"s/(\$(jscomp|gimport)\$(inline_)?|JSC\$|((type|call_ref|ref)\ \$))[0-9]+/\1#/g",
         original.get_formatted_file(),
         modified.get_formatted_file(),
     ])
