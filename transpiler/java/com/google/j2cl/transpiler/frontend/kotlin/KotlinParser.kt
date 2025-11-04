@@ -23,7 +23,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
-import com.google.j2cl.transpiler.frontend.kotlin.ir.JvmIrDeserializerImpl
+import com.google.j2cl.transpiler.frontend.kotlin.ir.J2clIrDeserializer
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.project.Project
@@ -184,7 +184,7 @@ class KotlinParser(private val problems: Problems) {
 
     problems.abortIfCancelled()
 
-    val jvmIrDeserializer = JvmIrDeserializerImpl()
+    val irDeserializer = J2clIrDeserializer()
 
     val compilationUnitBuilderExtension =
       createAndRegisterCompilationUnitBuilder(
@@ -192,13 +192,13 @@ class KotlinParser(private val problems: Problems) {
         environment.project,
         state,
         packageInfoCache,
-        jvmIrDeserializer,
+        irDeserializer,
       )
     problems.abortIfCancelled()
 
     val unused =
       analysisResults.convertToIrAndActualizeForJvm(
-        JvmFir2IrExtensions(compilerConfiguration, jvmIrDeserializer),
+        JvmFir2IrExtensions(compilerConfiguration, irDeserializer),
         compilerConfiguration,
         diagnosticsReporter,
         IrGenerationExtension.getInstances(environment.project),
@@ -214,10 +214,10 @@ class KotlinParser(private val problems: Problems) {
     project: Project,
     state: GenerationState,
     packageInfoCache: PackageInfoCache,
-    jvmIrDeserializerImpl: JvmIrDeserializerImpl,
+    irDeserializer: J2clIrDeserializer,
   ): CompilationUnitBuilderExtension {
     // Lower the IR tree before to convert it to a j2cl ast
-    val lowerings = LoweringPasses(state, compilerConfiguration, jvmIrDeserializerImpl)
+    val lowerings = LoweringPasses(state, compilerConfiguration, irDeserializer)
     IrGenerationExtension.registerExtension(project, lowerings)
 
     val compilationUnitBuilderExtension =

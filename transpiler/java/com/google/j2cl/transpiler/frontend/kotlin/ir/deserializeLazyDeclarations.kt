@@ -58,7 +58,7 @@ import org.jetbrains.kotlin.types.error.ErrorModuleDescriptor
 
 // Copied and modified from org.jetbrains.kotlin.backend.jvm.JvmIrDeserializerImpl and
 // org.jetbrains.kotlin.backend.jvm.serialization.deserializeLazyDeclarations.kt
-class JvmIrDeserializerImpl : JvmIrDeserializer {
+class J2clIrDeserializer : JvmIrDeserializer {
   lateinit var defaultIrProvider: IrProvider
 
   override fun deserializeTopLevelClass(
