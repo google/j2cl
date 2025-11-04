@@ -63,6 +63,25 @@ def _compile(
             javac_opts,
         )
     else:
+        package_info_srcs = [f for f in jvm_srcs if f.basename == "package-info.java"]
+        if package_info_srcs:
+            package_info_java_info = java_common.compile(
+                ctx,
+                source_files = package_info_srcs,
+                # Filter out Kotlin deps; we only support Java references in package-info.java.
+                deps = [d for d in jvm_deps if "_j2cl_kt" not in java_common.get_constraints(d)],
+                output = ctx.actions.declare_file(name + "_package_info.jar"),
+                java_toolchain = java_toolchain,
+                javac_opts = javac_opts,
+                # J2KT already runs APTs so we don't want them to run again.
+                enable_annotation_processing = not is_j2kt_web_experiment_enabled,
+            )
+
+            # Remove package-info.java from the srcs since we handled it here separately.
+            jvm_srcs = [f for f in jvm_srcs if f.basename != "package-info.java"]
+            jvm_deps.append(package_info_java_info)
+            jvm_exports.append(package_info_java_info)
+
         jvm_provider = _kt_compile(
             ctx,
             name,
