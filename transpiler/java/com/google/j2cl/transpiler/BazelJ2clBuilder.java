@@ -118,7 +118,7 @@ final class BazelJ2clBuilder extends BazelWorker {
       name = "-experimentalJavaFrontend",
       usage = "Select the java frontend to use: JDT (default), JAVAC (experimental).",
       hidden = true)
-  Frontend javaFrontend = Frontend.JDT;
+  Frontend javaFrontend = null;
 
   @Option(
       name = "-experimentalBackend",
@@ -185,6 +185,10 @@ final class BazelJ2clBuilder extends BazelWorker {
       problems.warning(
           "Readable source maps are not available when generating Kythe indexing metadata.");
       this.readableSourceMaps = false;
+    }
+
+    if (javaFrontend == null) {
+      javaFrontend = backend.getDefaultFrontend();
     }
 
     if (!javaFrontend.isJavaFrontend()) {

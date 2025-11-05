@@ -93,7 +93,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       metaVar = "(JDT | JAVAC)",
       usage = "Select the frontend to use: JDT (default), JAVAC (experimental).",
       hidden = true)
-  Frontend frontEnd = Frontend.JDT;
+  Frontend frontend = null;
 
   @Option(
       name = "-backend",
@@ -164,6 +164,10 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   private J2clTranspilerOptions createOptions(Output output) {
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar", ".kt");
 
+    if (this.frontend == null) {
+      this.frontend = this.backend.getDefaultFrontend();
+    }
+
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(
           "Readable source maps are not available when generating Kythe indexing metadata.");
@@ -208,7 +212,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
-        .setFrontend(this.frontEnd)
+        .setFrontend(this.frontend)
         .setBackend(this.backend)
         .setWasmEntryPointStrings(wasmEntryPoints)
         .setDefinesForWasm(definesForWasm)

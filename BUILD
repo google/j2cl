@@ -64,8 +64,9 @@ alias(
 # J2CL this will be removed.
 string_flag(
     name = "experimental_java_frontend",
-    build_setting_default = "jdt",
+    build_setting_default = "",
     values = [
+        "",  # Default: let compiler itself decide.
         "jdt",
         "javac",
     ],
