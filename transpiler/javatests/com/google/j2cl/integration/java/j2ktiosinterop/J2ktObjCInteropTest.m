@@ -10,8 +10,17 @@
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
+#import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Throwable.h"
+
+@interface TestImplementation : NSObject <J2ktiosinteropTestInterface>
+@end
+
+@implementation TestImplementation
+- (void)testMethod {
+}
+@end
 
 /** J2KT interop test for ObjC. */
 @interface J2ktObjCInteropTest : XCTestCase
@@ -406,6 +415,17 @@
   JavaLangThrowable *throwable;
   throwable = create_JavaLangThrowable_initWithNSString_(@"foo");
   throwable = [[JavaLangThrowable alloc] initWithMessage:@"foo"];
+}
+
+- (void)testInterface {
+  id<J2ktiosinteropTestInterface> testInterface = [[TestImplementation alloc] init];
+  [testInterface testMethod];
+
+  // TODO(b/284891929): Transpiled interfaces do not conform to NSObject protocol...
+  // XCTAssertTrue([testInterface isKindOfClass:[TestImplementation class]]);
+
+  // ...so explicit cast to id<NSObject> is required.
+  XCTAssertTrue([((id<NSObject>)testInterface) isKindOfClass:[TestImplementation class]]);
 }
 
 @end

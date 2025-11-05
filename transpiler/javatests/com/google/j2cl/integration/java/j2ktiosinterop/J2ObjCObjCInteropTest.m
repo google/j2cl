@@ -10,8 +10,17 @@
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
+#import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Throwable.h"
+
+@interface TestImplementation : NSObject <J2ktiosinteropTestInterface>
+@end
+
+@implementation TestImplementation
+- (void)testMethod {
+}
+@end
 
 /** J2ObjC interop test for ObjC. */
 @interface J2ObjCObjCInteropTest : XCTestCase
@@ -368,6 +377,12 @@
   JavaLangThrowable *throwable;
   throwable = create_JavaLangThrowable_initWithNSString_(@"foo");
   throwable = [[JavaLangThrowable alloc] initWithNSString:@"foo"];
+}
+
+- (void)testInterface {
+  id<J2ktiosinteropTestInterface> testInterface = [[TestImplementation alloc] init];
+  [testInterface testMethod];
+  XCTAssertTrue([testInterface isKindOfClass:[TestImplementation class]]);
 }
 
 @end
