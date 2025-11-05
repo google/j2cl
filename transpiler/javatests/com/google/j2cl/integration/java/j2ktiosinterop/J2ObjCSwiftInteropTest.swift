@@ -55,11 +55,11 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     obj.genericLongAndComparableLongMethod(with: nil)
 
     obj.overloadedMethod(withId: nil)
-    obj.overloadedMethod(with: 1 as jint)
-    obj.overloadedMethod(withLong: 1 as jlong)
+    obj.overloadedMethod(with: 1 as Int32)
+    obj.overloadedMethod(withLong: 1 as Int64)
 
-    obj.overloadedMethod(with: 1 as jfloat)
-    obj.overloadedMethod(with: 1 as jdouble)
+    obj.overloadedMethod(with: 1 as Float)
+    obj.overloadedMethod(with: 1 as Double)
     obj.overloadedMethod(with: "")
 
     // Fields are not exposed in Swift
