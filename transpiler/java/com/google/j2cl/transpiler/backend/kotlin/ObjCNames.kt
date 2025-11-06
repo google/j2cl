@@ -225,6 +225,9 @@ internal val Variable.objCParameterName: String
   get() = "with$objCName"
 
 internal val FieldDescriptor.objCName: String
+  // TODO(b/458058192): Bring back rendering underscore for non-final static fields, because of ObjC
+  // name conflict between field and method of the same name. Static final fields should follow
+  // naming convention and use SNAKE_CASE, which should not conflict with methods.
   get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant && !isStatic) { it + "_" }
 
 internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObjCNames =
