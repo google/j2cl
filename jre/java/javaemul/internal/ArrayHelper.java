@@ -91,6 +91,10 @@ public final class ArrayHelper {
     asNativeArray(array).push(o);
   }
 
+  public static String join(Object[] array, Object separator) {
+    return asNativeArray(array).join(separator);
+  }
+
   public static void fill(Object array, @DoNotAutobox Object value, int fromIndex, int toIndex) {
     checkCriticalArrayBounds(fromIndex, toIndex, getLength(array));
     asNativeArray(array).fill(value, fromIndex, toIndex);
@@ -295,6 +299,8 @@ public final class ArrayHelper {
     NativeArray(int length) {}
 
     native void push(Object item);
+
+    native String join(Object separator);
 
     native Object[] slice();
 

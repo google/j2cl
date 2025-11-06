@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.StringJoiner;
@@ -113,14 +114,17 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public static String join(CharSequence delimiter, CharSequence... elements) {
-    StringJoiner joiner = new StringJoiner(delimiter);
-    for (CharSequence e : elements) {
-      joiner.add(e);
-    }
-    return joiner.toString();
+    return ArrayHelper.join(elements, delimiter);
+  }
+
+  public static String join(CharSequence delimiter, Collection<? extends CharSequence> elements) {
+    return ArrayHelper.join(elements.toArray(), delimiter);
   }
 
   public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements) {
+    if (elements instanceof Collection) {
+      return join(delimiter, (Collection<? extends CharSequence>) elements);
+    }
     StringJoiner joiner = new StringJoiner(delimiter);
     for (CharSequence e : elements) {
       joiner.add(e);
