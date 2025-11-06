@@ -9,6 +9,8 @@ load(":j2kt_import.bzl", "create_J2ktInfo_for_java_import")
 load(":provider.bzl", "J2clInfo", "J2ktInfo")
 
 def _impl_j2cl_library(ctx):
+    j2kt_web_experiment_enabled = ctx.attr.j2kt_web_experiment_enabled
+
     extra_javacopts = [
         # Dagger fast-init is more code size optimal for web, so enable it by default.
         "-Adagger.fastInit=enabled",
@@ -19,7 +21,7 @@ def _impl_j2cl_library(ctx):
     if ctx.attr.optimize_autovalue:
         extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
 
-    if ctx.attr.j2kt_web_experiment_enabled:
+    if j2kt_web_experiment_enabled:
         jvm_srcs, js_srcs = split_srcs(ctx.files.srcs)
 
         # Invoke j2kt transpiler first to transpile Java files to Kotlin.
@@ -72,7 +74,7 @@ def _impl_j2cl_library(ctx):
             k: getattr(ctx.attr, k)
             for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
         },
-        is_j2kt_web_experiment_enabled = ctx.attr.j2kt_web_experiment_enabled,
+        is_j2kt_web_experiment_enabled = j2kt_web_experiment_enabled,
     )
 
     # If J2KT is enabled for this the build, but J2KT is not enabled for the
@@ -84,7 +86,7 @@ def _impl_j2cl_library(ctx):
     if ctx.attr._j2kt_web_build_flag[BuildSettingInfo].value and not j2kt_provider:
         # Backstop to make sure we don't silently cover up a missing J2ktInfo
         # provider when the target is actually enabled for J2KT.
-        if ctx.attr.j2kt_web_experiment_enabled:
+        if j2kt_web_experiment_enabled:
             fail("Target is enabled for J2KT but J2ktInfo was not produced")
 
         # Create a new JavaInfo provider with all the same compilation jars,

@@ -187,23 +187,6 @@ def _java_compile(
     stripped_java_srcs = [_strip_incompatible_annotation(ctx, name, srcs, mnemonic, strip_annotations)] if srcs else []
     javac_opts = DEFAULT_J2CL_JAVAC_OPTS + javac_opts
 
-    if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
-        # An unused JAR that is only generated so that we run javac with the non-stripped sources
-        # that kythe can index. Nothing should depend upon this output as it is not guaranteed
-        # to succeed; it is only best effort for indexing.
-        indexed_output_jar = ctx.actions.declare_file(name + "_j2cl_indexable.jar")
-        java_common.compile(
-            ctx,
-            source_files = srcs,
-            deps = deps,
-            exports = exports,
-            plugins = plugins,
-            exported_plugins = exported_plugins,
-            output = indexed_output_jar,
-            java_toolchain = java_toolchain,
-            javac_opts = javac_opts,
-        )
-
     return java_common.compile(
         ctx,
         source_jars = stripped_java_srcs,
@@ -407,12 +390,7 @@ def _j2cl_transpile(
     for flag, value in internal_transpiler_flags.items():
         if value:
             args.add("-" + flag.replace("_", ""))
-    if ctx.var.get("GROK_ELLIPSIS_BUILD", None) or (
-        # Support Kythe integration testing that required metadata as part
-        # of regular test run that can't use GROK_ELLIPSIS_BUILD.
-        hasattr(ctx.attr, "tags") and "generate_kythe_metadata" in ctx.attr.tags
-    ):
-        args.add("-generatekytheindexingmetadata")
+
     args.add_all(kotlincopts, format_each = "-kotlincOptions=%s")
     args.add("-forbiddenAnnotation", "GwtIncompatible")
     args.add_all(srcs)
