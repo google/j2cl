@@ -38,8 +38,9 @@ public class StringJoinerTest extends TestCase {
     }
 
     try {
-      new StringJoiner(null, null, null);
+      var joiner = new StringJoiner(null, null, null);
       fail("NullPointerException must be thrown if any constructor parameter is null");
+      fail(joiner.toString()); // keep the instance to avoid removal of the constructor call.
     } catch (NullPointerException e) {
       // expected
     }
