@@ -97,25 +97,25 @@ public class J2clMinifierTest extends TestCase {
   }
 
   public void testFindsIdentifiersInContext() {
-    assertChange(" m_foo__ ", " foo_$1 ");
+    assertChange(" m_foo__ ", " foo_$1");
     assertChange(".m_foo__(", ".foo_$1(");
     assertChange(".m_foo__;", ".foo_$1;");
     assertChange("{m_foo__}", "{foo_$1}");
     assertChange("(m_foo__)", "(foo_$1)");
 
-    assertChange(" f_bar__com_google_j2cl_MyClass ", " bar_$1 ");
+    assertChange(" f_bar__com_google_j2cl_MyClass ", " bar_$1");
     assertChange(".f_bar__com_google_j2cl_MyClass(", ".bar_$1(");
     assertChange(".f_bar__com_google_j2cl_MyClass;", ".bar_$1;");
     assertChange("{f_bar__com_google_j2cl_MyClass}", "{bar_$1}");
     assertChange("(f_bar__com_google_j2cl_MyClass)", "(bar_$1)");
 
-    assertChange(" $static_baz__com_google_j2cl_MyClass ", " baz_$1 ");
+    assertChange(" $static_baz__com_google_j2cl_MyClass ", " baz_$1");
     assertChange(".$static_baz__com_google_j2cl_MyClass(", ".baz_$1(");
     assertChange(".$static_baz__com_google_j2cl_MyClass;", ".baz_$1;");
     assertChange("{$static_baz__com_google_j2cl_MyClass}", "{baz_$1}");
     assertChange("($static_baz__com_google_j2cl_MyClass)", "(baz_$1)");
 
-    assertChange(" $implements__java_util_Map$Entry ", " implements_$1 ");
+    assertChange(" $implements__java_util_Map$Entry ", " implements_$1");
     assertChange(".$implements__java_util_Map$Entry(", ".implements_$1(");
     assertChange(".$implements__java_util_Map$Entry;", ".implements_$1;");
     assertChange("{$implements__java_util_Map$Entry}", "{implements_$1}");
@@ -128,9 +128,9 @@ public class J2clMinifierTest extends TestCase {
     assertChange("// m_foo__ ", "");
     assertChange("// foo ", "");
     assertChange("// 'foo' ", "");
-    assertChange("// 'fo\noo' ", "\noo' ");
+    assertChange("// 'fo\noo' ", "\noo'");
     assertChange("// /* */ ", "");
-    assertChange("// /* \n */ ", "\n */ ");
+    assertChange("// /* \n */ ", "\n */");
     assertNoChange("//# sourceMappingURL=/path/to/file.js.map");
 
     assertChange("m_foo__// bar \nm_foo__", "foo_$1\nfoo_$1");
@@ -139,7 +139,7 @@ public class J2clMinifierTest extends TestCase {
     assertChange("alert('hi');// bar \nalert('hi');", "alert('hi');\nalert('hi');");
 
     assertChange("//* */", "");
-    assertChange("/ /* */", "/ ");
+    assertChange("/ /* */", "/");
 
     // preserves trailing newlines
     assertChange("// foo \n", "\n");

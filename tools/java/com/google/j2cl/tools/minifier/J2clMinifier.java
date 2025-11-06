@@ -148,6 +148,7 @@ public class J2clMinifier {
 
     @Override
     public String toString() {
+      trimTrailingWhitespace();
       return contentBuffer.toString();
     }
   }
