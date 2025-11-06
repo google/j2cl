@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -94,7 +95,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
         hiddenFromObjCMapping.contains(methodDescriptor.enclosingTypeDescriptor)
     ) {
       when {
-        hiddenFromObjCMapping.contains(methodDescriptor) -> hiddenFromObjCAnnotationSource()
+        isHiddenFromObjC(methodDescriptor) -> hiddenFromObjCAnnotationSource()
         else -> Source.EMPTY
       }
     }
@@ -105,7 +106,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
         hiddenFromObjCMapping.contains(fieldDescriptor.enclosingTypeDescriptor)
     ) {
       when {
-        hiddenFromObjCMapping.contains(fieldDescriptor) -> hiddenFromObjCAnnotationSource()
+        isHiddenFromObjC(fieldDescriptor) -> hiddenFromObjCAnnotationSource()
         needsObjCNameAnnotation(fieldDescriptor) ->
           objCNameAnnotationSource(fieldDescriptor.objCName)
         else -> Source.EMPTY
@@ -143,8 +144,18 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
           environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
       }
 
+  private fun isHiddenFromObjC(methodDescriptor: MethodDescriptor): Boolean =
+    hiddenFromObjCMapping.contains(methodDescriptor) ||
+      hasHiddenFromObjCAnnotation(methodDescriptor)
+
+  private fun isHiddenFromObjC(fieldDescriptor: FieldDescriptor): Boolean =
+    hiddenFromObjCMapping.contains(fieldDescriptor) || hasHiddenFromObjCAnnotation(fieldDescriptor)
+
   companion object {
     private fun parameterSource(name: String, valueSource: Source): Source =
       assignment(source(name), valueSource)
+
+    private fun hasHiddenFromObjCAnnotation(memberDescriptor: MemberDescriptor): Boolean =
+      memberDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC")
   }
 }
