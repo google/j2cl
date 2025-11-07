@@ -1,4 +1,5 @@
 #import <XCTest/XCTest.h>
+#import <math.h>
 
 #import "j2ktiosinterop/CollectionTypes.h"
 #import "j2ktiosinterop/CompileTimeConstantInitialization.h"
@@ -13,6 +14,8 @@
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Throwable.h"
 
@@ -406,6 +409,22 @@
   XCTAssertEqualObjects(J2ktiosinteropCompileTimeConstants_get_CONSTANT_STRING(), @"foo");
   // Surprisingly, it causes class initialiation.
   XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+}
+
+- (void)testSpecialPrimitiveConstants {
+  XCTAssertTrue(isnan(JavaLangFloat_NaN));
+  XCTAssertTrue(isinf(JavaLangFloat_NEGATIVE_INFINITY));
+  XCTAssertTrue(JavaLangFloat_NEGATIVE_INFINITY < 0);
+  XCTAssertTrue(isinf(JavaLangFloat_POSITIVE_INFINITY));
+  XCTAssertTrue(JavaLangFloat_POSITIVE_INFINITY > 0);
+  XCTAssertEqual(JavaLangFloat_MAX_VALUE, FLT_MAX);
+
+  XCTAssertTrue(isnan(JavaLangDouble_NaN));
+  XCTAssertTrue(isinf(JavaLangDouble_NEGATIVE_INFINITY));
+  XCTAssertTrue(JavaLangDouble_NEGATIVE_INFINITY < 0);
+  XCTAssertTrue(isinf(JavaLangDouble_POSITIVE_INFINITY));
+  XCTAssertTrue(JavaLangDouble_POSITIVE_INFINITY > 0);
+  XCTAssertEqual(JavaLangDouble_MAX_VALUE, DBL_MAX);
 }
 
 @end
