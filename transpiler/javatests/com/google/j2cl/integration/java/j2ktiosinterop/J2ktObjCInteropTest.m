@@ -1,6 +1,8 @@
 #import <XCTest/XCTest.h>
 
 #import "j2ktiosinterop/CollectionTypes.h"
+#import "j2ktiosinterop/CompileTimeConstantInitialization.h"
+#import "j2ktiosinterop/CompileTimeConstants.h"
 #import "j2ktiosinterop/CustomNames.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
@@ -426,6 +428,32 @@
 
   // ...so explicit cast to id<NSObject> is required.
   XCTAssertTrue([((id<NSObject>)testInterface) isKindOfClass:[TestImplementation class]]);
+}
+
+- (void)testCompileTimeConstants {
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstants_CONSTANT_BOOLEAN);
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstants_get_CONSTANT_BOOLEAN());
+  // TODO(b/458647857): Should be false and not cause class initialization.
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertEqual(J2ktiosinteropCompileTimeConstants_CONSTANT_INT, 5);
+  // TODO(b/458647857): Should be false and not cause class initialization.
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertEqual(J2ktiosinteropCompileTimeConstants_get_CONSTANT_INT(), 5);
+  // TODO(b/458647857): Should be false and not cause class initialization.
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  // J2ktiosinteropCompileTimeConstants_CONSTANT_STRING is absent in Compat.h.
+  // XCTAssertEqualObjects(J2ktiosinteropCompileTimeConstants_CONSTANT_STRING, @"foo");
+  // TODO(b/458647857): Should be false and not cause class initialization.
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertEqualObjects(J2ktiosinteropCompileTimeConstants_get_CONSTANT_STRING(), @"foo");
+  // Surprisingly, it causes class initialiation in J2ObjC.
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
 }
 
 @end

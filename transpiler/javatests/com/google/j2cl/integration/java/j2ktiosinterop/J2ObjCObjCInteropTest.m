@@ -1,6 +1,8 @@
 #import <XCTest/XCTest.h>
 
 #import "j2ktiosinterop/CollectionTypes.h"
+#import "j2ktiosinterop/CompileTimeConstantInitialization.h"
+#import "j2ktiosinterop/CompileTimeConstants.h"
 #import "j2ktiosinterop/CustomNames.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
@@ -383,6 +385,27 @@
   id<J2ktiosinteropTestInterface> testInterface = [[TestImplementation alloc] init];
   [testInterface testMethod];
   XCTAssertTrue([testInterface isKindOfClass:[TestImplementation class]]);
+}
+
+- (void)testCompileTimeConstants {
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstants_CONSTANT_BOOLEAN);
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstants_get_CONSTANT_BOOLEAN());
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertEqual(J2ktiosinteropCompileTimeConstants_CONSTANT_INT, 5);
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertEqual(J2ktiosinteropCompileTimeConstants_get_CONSTANT_INT(), 5);
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertEqualObjects(J2ktiosinteropCompileTimeConstants_CONSTANT_STRING, @"foo");
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+
+  XCTAssertEqualObjects(J2ktiosinteropCompileTimeConstants_get_CONSTANT_STRING(), @"foo");
+  // Surprisingly, it causes class initialiation.
+  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
 }
 
 @end
