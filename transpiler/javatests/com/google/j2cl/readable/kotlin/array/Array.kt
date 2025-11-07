@@ -16,6 +16,7 @@
 package array
 
 import java.io.Serializable
+import java.lang.Cloneable
 import javaemul.internal.annotations.Wasm
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
@@ -211,7 +212,9 @@ class Arrays {
 
   // Note: Array is not Cloneable and Serializable in Kotlin Native.
   fun testArraysSupertypeClosureTypes() {
-    consumesCloneable(arrayOfNulls<Any?>(10))
+    // TODO(b/458612609): `kotlin.Cloneable` is not supported and Kotlin Arrays do not implement
+    // `java.lang.Cloneable`.
+    // consumesCloneable(arrayOfNulls<Any?>(10))
     consumesSerializable(arrayOfNulls<Any?>(10))
   }
 

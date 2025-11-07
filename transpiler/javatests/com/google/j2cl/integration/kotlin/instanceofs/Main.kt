@@ -19,6 +19,7 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import java.io.Serializable
+import java.lang.Cloneable
 
 /** Test instanceof array. */
 fun main(vararg unused: String) {

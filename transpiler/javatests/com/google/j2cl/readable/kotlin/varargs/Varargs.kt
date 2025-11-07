@@ -16,6 +16,7 @@
 package varargs
 
 import java.io.Serializable
+import java.lang.Cloneable
 
 open class Varargs(vararg args: Int) {
   fun interface FunctionalInterface {
@@ -60,7 +61,9 @@ open class Varargs(vararg args: Int) {
     v.test(1, *arrayOf<Array<Any>>())
     v.test(1, *listToArray(listOf(Any())))
     v.test(1, *passthrough(arrayOf("a")))
-    v.testCloneable(*arrayOf<Array<Any>>())
+    // TODO(b/458612609): `kotlin.Cloneable` is not supported and Kotlin Arrays do not implement
+    // `java.lang.Cloneable`.
+    // v.testCloneable(*arrayOf<Array<Any>>())
     v.testSerializable(*arrayOf<Array<Any>>())
     v.testLambda { strings: Array<out String> -> args = strings }
     v.testNonTrailingVararg(1, 2, 3, b = 4)
