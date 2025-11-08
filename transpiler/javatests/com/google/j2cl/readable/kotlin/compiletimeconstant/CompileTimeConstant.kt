@@ -30,9 +30,12 @@ class CompileTimeConstant {
     const val L = "ThisIsALongString"
     const val M = "ThisIsALongStringAlso"
     const val N = "ThisIsALongStringAlsoButLonger"
+    // const val O = 1 + " is 1" // Valid in Java, but not in Kotlin.
     const val G = 10000L
     const val H = 'A'
     const val I = G > 100
+    const val P = 3.141592653589793
+    const val Q = (P).toFloat()
     // TODO(b/232419907): Enable when unsigned types are emulated in the stdlib.
     // const val U = 1u
 
@@ -41,9 +44,6 @@ class CompileTimeConstant {
 
     const val MIN_BYTE_WITH_CAST = (-128).toByte()
     const val MIN_SHORT_WITH_CAST = (-32768).toShort()
-
-    // Note that currently this only compile time constant for Wasm purposes, not per JLS.
-    val classLiteral: Class<*> = CompileTimeConstant::class.java
   }
 
   val A2 = 10
@@ -63,7 +63,6 @@ class CompileTimeConstant {
   val l: String
   val m: String
   val n: String
-  val c = classLiteral
 
   init {
     b = I2

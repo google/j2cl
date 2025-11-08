@@ -22,9 +22,6 @@
 (global $K@compiletimeconstant.CompileTimeConstant (mut (ref null $java.lang.String))
  (ref.null $java.lang.String)
 )
-(global $classLiteral@compiletimeconstant.CompileTimeConstant (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
 (global $$class-initialized@compiletimeconstant.CompileTimeConstant (mut i32)
  (i32.const 0)
 )
@@ -82,7 +79,6 @@
  (local $l (ref null $java.lang.String))
  (local $m (ref null $java.lang.String))
  (local $n (ref null $java.lang.String))
- (local $c (ref null $java.lang.Class))
  (local $minByte i32)
  (local $minShort i32)
  (local $minInt i32)
@@ -103,25 +99,23 @@
   (local.set $m (call $$getString_|ThisIsALongS...|_1__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:67:4
   (local.set $n (call $$getString_|ThisIsALongS...|_2__java_lang_String_<once>_@compiletimeconstant.CompileTimeConstant ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:68:4
-  (local.set $c (global.get $classLiteral@compiletimeconstant.CompileTimeConstant))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:70:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:69:4
   (local.set $minByte (i32.sub (i32.const 0) (i32.const 128)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:71:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:70:4
   (local.set $minShort (i32.sub (i32.const 0) (i32.const 32768)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:72:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:71:4
   (local.set $minInt (i32.const -2147483648))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:73:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:72:4
   (local.set $minLong (i64.const -9223372036854775808))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:75:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:74:4
   (local.set $intUnaryMinusOverflow (i32.sub (i32.const 0) (i32.const -2147483648)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:76:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:75:4
   (local.set $intPlusOverflow (i32.add (i32.const 2147483647) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:77:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:76:4
   (local.set $intMinusOverflow (i32.sub (i32.const -2147483648) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:78:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:77:4
   (local.set $intTimesOverflow (i32.mul (i32.const 2147483647) (i32.const 2)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:79:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:78:4
   (local.set $intShlOverflow (i32.shl (i32.const 2147483647) (i32.const 2)))
  )
 )
@@ -145,8 +139,6 @@
   (global.set $OBJ@compiletimeconstant.CompileTimeConstant (ref.null $java.lang.Object))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:30:2
   (global.set $K@compiletimeconstant.CompileTimeConstant (ref.null $java.lang.String))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/compiletimeconstant/readable-j2wasm.js/compiletimeconstant/CompileTimeConstant.java:48:2
-  (global.set $classLiteral@compiletimeconstant.CompileTimeConstant (call $$getClassMetadata__java_lang_Class_<once>_@compiletimeconstant.CompileTimeConstant ))
  )
 )
 

@@ -4,7 +4,6 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 
 /**
@@ -52,7 +51,6 @@ class CompileTimeConstant extends j_l_Object {
   let l = CompileTimeConstant.f_L__compiletimeconstant_CompileTimeConstant;
   let m = CompileTimeConstant.f_M__compiletimeconstant_CompileTimeConstant;
   let n = CompileTimeConstant.f_N__compiletimeconstant_CompileTimeConstant;
-  let c = CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant;
   let minByte = - 128 | 0;
   let minShort = - 32768 | 0;
   let minInt = -2147483648;
@@ -71,10 +69,6 @@ class CompileTimeConstant extends j_l_Object {
  static get f_K__compiletimeconstant_CompileTimeConstant() {
   return (CompileTimeConstant.$clinit(), CompileTimeConstant.$static_K__compiletimeconstant_CompileTimeConstant);
  }
- /** @nodts @return {Class<?>} */
- static get f_classLiteral__compiletimeconstant_CompileTimeConstant() {
-  return (CompileTimeConstant.$clinit(), CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant);
- }
  /** @nodts */
  static $clinit() {
   CompileTimeConstant.$clinit = () =>{};
@@ -82,7 +76,6 @@ class CompileTimeConstant extends j_l_Object {
   j_l_Object.$clinit();
   CompileTimeConstant.$static_OBJ__compiletimeconstant_CompileTimeConstant = null;
   CompileTimeConstant.$static_K__compiletimeconstant_CompileTimeConstant = null;
-  CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant = Class.$get(CompileTimeConstant);
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -91,7 +84,6 @@ class CompileTimeConstant extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  Class = goog.module.get('java.lang.Class$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
  }
 }
@@ -121,12 +113,18 @@ CompileTimeConstant.f_L__compiletimeconstant_CompileTimeConstant = 'ThisIsALongS
 CompileTimeConstant.f_M__compiletimeconstant_CompileTimeConstant = 'ThisIsALongStringAlso';
 /**@const {string} @nodts*/
 CompileTimeConstant.f_N__compiletimeconstant_CompileTimeConstant = 'ThisIsALongStringAlsoButLonger';
+/**@const {string} @nodts*/
+CompileTimeConstant.f_O__compiletimeconstant_CompileTimeConstant = '1 is 1';
 /**@const {!$Long} @nodts*/
 CompileTimeConstant.f_G__compiletimeconstant_CompileTimeConstant = $Long.fromInt(10000);
 /**@const {number} @nodts*/
 CompileTimeConstant.f_H__compiletimeconstant_CompileTimeConstant = 65 /* 'A' */;
 /**@const {boolean} @nodts*/
 CompileTimeConstant.f_I__compiletimeconstant_CompileTimeConstant = true;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_P__compiletimeconstant_CompileTimeConstant = 3.141592653589793;
+/**@const {number} @nodts*/
+CompileTimeConstant.f_Q__compiletimeconstant_CompileTimeConstant = 3.1415927410125732;
 /**@const {number} @nodts*/
 CompileTimeConstant.f_MIN_BYTE__compiletimeconstant_CompileTimeConstant = -128;
 /**@const {number} @nodts*/
@@ -139,8 +137,6 @@ CompileTimeConstant.f_MIN_LONG__compiletimeconstant_CompileTimeConstant = $Long.
 CompileTimeConstant.f_MIN_BYTE_WITH_CAST__compiletimeconstant_CompileTimeConstant = -128;
 /**@const {number} @nodts*/
 CompileTimeConstant.f_MIN_SHORT_WITH_CAST__compiletimeconstant_CompileTimeConstant = -32768;
-/**@private {Class<?>} @nodts*/
-CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant;
 $Util.$setClassMetadata(CompileTimeConstant, 'compiletimeconstant.CompileTimeConstant');
 
 exports = CompileTimeConstant;

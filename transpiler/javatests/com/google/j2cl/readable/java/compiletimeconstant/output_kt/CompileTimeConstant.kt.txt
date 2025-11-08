@@ -19,18 +19,18 @@
 package compiletimeconstant
 
 import javaemul.lang.*
-import java.lang.Class
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
+import kotlin.Double
+import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Short
 import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmField
-import kotlin.jvm.javaObjectType
 
 open class CompileTimeConstant<T> {
  @JvmField
@@ -66,7 +66,6 @@ open class CompileTimeConstant<T> {
   val l: String = CompileTimeConstant.L
   val m: String = CompileTimeConstant.M
   val n: String = CompileTimeConstant.N
-  val c: Class<*>? = CompileTimeConstant.classLiteral
   val minByte: Byte = (- 128).toByte()
   val minShort: Short = (- 32768).toShort()
   val minInt: Int = -2147483647 - 1
@@ -107,11 +106,17 @@ open class CompileTimeConstant<T> {
 
   const val N: String = "ThisIsALongStringAlsoButLonger"
 
+  const val O: String = "1 is 1"
+
   const val G: Long = 10000L
 
   const val H: Char = 'A'
 
   const val I: Boolean = true
+
+  const val P: Double = 3.141592653589793
+
+  const val Q: Float = 3.1415927f
 
   const val MIN_BYTE: Byte = (-128).toByte()
 
@@ -124,8 +129,5 @@ open class CompileTimeConstant<T> {
   const val MIN_BYTE_WITH_CAST: Byte = (-128).toByte()
 
   const val MIN_SHORT_WITH_CAST: Short = (-32768).toShort()
-
-  @JvmField
-  val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType as Class<*>?
  }
 }

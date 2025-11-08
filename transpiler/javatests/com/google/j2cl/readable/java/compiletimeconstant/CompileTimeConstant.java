@@ -31,10 +31,13 @@ public class CompileTimeConstant<T> {
   public static final String L = "ThisIsALongString";
   public static final String M = "ThisIsALongStringAlso";
   public static final String N = "ThisIsALongStringAlsoButLonger";
+  public static final String O = 1 + " is 1";
 
   public static final long G = 10000L;
   public static final char H = 'A';
   public static final boolean I = G > 100;
+  public static final double P = 3.141592653589793;
+  public static final float Q = (float) P;
 
   public static final byte MIN_BYTE = -128;
   public static final short MIN_SHORT = -32768;
@@ -43,9 +46,6 @@ public class CompileTimeConstant<T> {
 
   public static final byte MIN_BYTE_WITH_CAST = (byte) -128;
   public static final short MIN_SHORT_WITH_CAST = (short) -32768;
-
-  // Note that currently this only compile time constant for Wasm purposes, not per JLS.
-  public static final Class<?> classLiteral = CompileTimeConstant.class;
 
   public final int A2 = 10;
   public final int B2 = 20;
@@ -65,7 +65,6 @@ public class CompileTimeConstant<T> {
     String l = L;
     String m = M;
     String n = N;
-    Class<?> c = classLiteral;
 
     byte minByte = -128;
     short minShort = -32768;
