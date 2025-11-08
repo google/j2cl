@@ -52,6 +52,11 @@ public class TypeLiteral extends Literal implements HasSourcePosition {
   }
 
   @Override
+  public boolean isCompileTimeConstant() {
+    return false;
+  }
+
+  @Override
   public String getSourceText() {
     throw new UnsupportedOperationException();
   }
