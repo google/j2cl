@@ -1390,12 +1390,14 @@ class JavaEnvironment {
 
           // Get the actual abstract method from the frontend; which will return the unparameterized
           // declaration possibly from a supertype.
-          var declaration =
-              createMethodDescriptor(getFunctionalInterfaceMethodDecl(typeElement.asType()));
+          var functionalInterfaceMethodDecl =
+              getFunctionalInterfaceMethodDecl(typeElement.asType());
 
-          if (declaration == null) {
+          if (functionalInterfaceMethodDecl == null) {
             return null;
           }
+
+          var declaration = createMethodDescriptor(functionalInterfaceMethodDecl);
 
           // Find the parameterized supertype.
           var parameterizedFunctionalInterface =

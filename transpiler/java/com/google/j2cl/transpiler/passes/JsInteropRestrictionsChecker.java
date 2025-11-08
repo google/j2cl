@@ -28,6 +28,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Ordering;
 import com.google.common.collect.Streams;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.FormatMethod;
@@ -2270,11 +2271,19 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
+    // Emit the colliding method descriptor in way that is independent on the order in which the
+    // frontend provides the methods.
+    var memberDescription = memberDescriptor.getReadableDescription();
+    var potentiallyCollidingMemberDescription = potentiallyCollidingMember.getReadableDescription();
+
+    var first = Ordering.natural().min(memberDescription, potentiallyCollidingMemberDescription);
+    var second = Ordering.natural().max(memberDescription, potentiallyCollidingMemberDescription);
+
     problems.error(
         sourcePosition,
         "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
-        memberDescriptor.getReadableDescription(),
-        potentiallyCollidingMember.getReadableDescription(),
+        first,
+        second,
         memberDescriptor.getSimpleJsName());
   }
 

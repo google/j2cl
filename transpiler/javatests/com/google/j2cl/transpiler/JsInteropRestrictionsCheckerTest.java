@@ -91,9 +91,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             """)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
-            "'void SubBuggy.m()' and 'void Buggy.m()' cannot both use the same JavaScript name"
+            "'void Buggy.m()' and 'void SubBuggy.m()' cannot both use the same JavaScript name"
                 + " 'm'.",
-            "'void SubBuggy.n()' and 'void Buggy.n()' cannot both use the same JavaScript name"
+            "'void Buggy.n()' and 'void SubBuggy.n()' cannot both use the same JavaScript name"
                 + " 'n'.");
   }
 
@@ -187,8 +187,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy extends Parent implements Bar {}
             """)
         .assertErrorsWithoutSourcePosition(
-            "'void Parent.doIt(Foo)' and "
-                + "'void Bar.doIt(Bar)' cannot both use the same JavaScript name 'doIt'.");
+            "'void Bar.doIt(Bar)' and "
+                + "'void Parent.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
   }
 
   public void testOverrideNoNameSucceeds() {
@@ -347,7 +347,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertErrorsWithoutSourcePosition(
-            "'boolean Buggy.isX()' and 'boolean Buggy.getX()' "
+            "'boolean Buggy.getX()' and 'boolean Buggy.isX()' "
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -389,7 +389,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.setX(int)' and 'void Buggy.setX(boolean)' "
+            "'void Buggy.setX(boolean)' and 'void Buggy.setX(int)' "
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -412,7 +412,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             // TODO(b/277967621): This error message is incorrect, in this case there are multiple
             // members colliding on the same name but the error reporter selects the wrong ones to
             // emit the message.
-            "'void Buggy.setY(boolean)' and 'boolean Buggy.getY()' cannot both use the same"
+            "'boolean Buggy.getY()' and 'void Buggy.setY(boolean)' cannot both use the same"
                 + " JavaScript name 'y'.");
   }
 
@@ -475,7 +475,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.setDisplay2(int)' and 'void Buggy.setDisplay(int)' cannot both use the "
+            "'void Buggy.setDisplay(int)' and 'void Buggy.setDisplay2(int)' cannot both use the "
                 + "same JavaScript name 'display'.");
   }
 
@@ -492,7 +492,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.show()' and 'void Buggy.display()' cannot both use the same "
+            "'void Buggy.display()' and 'void Buggy.show()' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
@@ -509,7 +509,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy.show()' and 'void Buggy.setShow(int)' cannot both use the same "
+            "'void Buggy.setShow(int)' and 'void Buggy.show()' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
@@ -631,7 +631,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertErrorsWithoutSourcePosition(
             "'Buggy.foo' and 'ParentBuggy.foo' cannot both use the same "
                 + "JavaScript name 'foo'.",
-            "'void OtherBuggy.foo(int)' and 'ParentBuggy.foo' cannot both use the same "
+            "'ParentBuggy.foo' and 'void OtherBuggy.foo(int)' cannot both use the same "
                 + "JavaScript name 'foo'.");
   }
 
@@ -670,7 +670,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy2.show(boolean)' and 'void Buggy.show()' cannot both use the same "
+            "'void Buggy.show()' and 'void Buggy2.show(boolean)' cannot both use the same "
                 + "JavaScript name 'show'.",
             "'void Buggy3.show(boolean b)' cannot be assigned JavaScript name 'display' that is "
                 + "different from the JavaScript name of a method it overrides "
@@ -771,7 +771,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertErrorsWithoutSourcePosition(
-            "'void Buggy2.show(boolean)' and 'void Buggy.show()' cannot both use the same "
+            "'void Buggy.show()' and 'void Buggy2.show(boolean)' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
