@@ -23,7 +23,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -230,7 +229,7 @@ public class ImplementRecordClasses extends NormalizationPass {
                       InstanceOfExpression.newBuilder()
                           .setTestTypeDescriptor(type.getTypeDescriptor())
                           .setExpression(parameter.createReference())
-                          .setPattern(new BindingPattern(otherVariable))
+                          .setPatternVariable(otherVariable)
                           .build()
                           .prefixNot())
                   .setThenStatement(
