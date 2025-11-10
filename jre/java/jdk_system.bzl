@@ -50,7 +50,7 @@ def _jdk_system(ctx):
             bootclasspath = [bootclasspath],
             auxiliary = deps,
         ),
-        DefaultInfo(files = depset([system, bootclasspath])),
+        DefaultInfo(files = depset([system])),
     ]
 
 jdk_system = rule(
