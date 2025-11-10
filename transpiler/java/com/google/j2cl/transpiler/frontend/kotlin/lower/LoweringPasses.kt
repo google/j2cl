@@ -63,7 +63,7 @@ private val loweringPhase = loweringPhase {
   // members into it. This is needed to ensure the serialized IR for top-level inline functions
   // can be deserialized correctly. (The serialized IR being part of the metadata of the enclosing
   // class after Kotlin/JVM compilation.)
-  moduleLowering(externalPackageParentPatcherLoweringFactory)
+  moduleLowering(::ExternalPackageParentPatcherLowering)
   // Remove assignments to definedExternally.
   moduleLowering(::DefinedExternallyLowering)
   // Remove typealias declarations from the IR.
@@ -207,7 +207,7 @@ private val loweringPhase = loweringPhase {
   // Ensures that any top-level referenced members from another compilation unit have an enclosing
   // class. The inliner can introduce references to top-level members from another compilation unit
   // that were not referenced before.
-  moduleLowering(externalPackageParentPatcherLoweringFactory)
+  moduleLowering(::ExternalPackageParentPatcherLowering)
   // Flattens extra blocks that were added from function inlining.
   moduleLowering { FlattenInlinedBlocks() }
   // Cleanup the unreachable code that exist after the statement-like-expression
