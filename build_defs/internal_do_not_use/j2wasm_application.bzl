@@ -5,7 +5,7 @@ This is an experimental tool and should not be used.
 """
 
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
-load(":j2cl_common.bzl", "get_bootclasspath", "get_bootclasspath_deps")
+load(":j2cl_common.bzl", "get_bootclasspath")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 load(":j2wasm_common.bzl", "J2WASM_FEATURE_SET", "J2WASM_TOOLCHAIN_ATTRS")
 load(":provider.bzl", "J2wasmInfo")
@@ -131,7 +131,7 @@ def _impl_j2wasm_application(ctx):
     )
 
     all_modules = module_outputs.to_list() + [exports_module_output]
-    jre_jars = get_bootclasspath(ctx).to_list() + get_bootclasspath_deps(ctx).to_list()
+    jre_jars = get_bootclasspath(ctx).to_list()
 
     # Bundle the module outputs.
     bundler_args = ctx.actions.args()

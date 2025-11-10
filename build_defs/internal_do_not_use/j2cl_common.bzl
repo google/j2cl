@@ -218,12 +218,8 @@ def _kt_compile(
 def get_bootclasspath(ctx):
     """Returns a depset containing the Java bootclasspath entries."""
 
-    return _get_java_toolchain(ctx).bootclasspath
-
-def get_bootclasspath_deps(ctx):
-    """Returns a depset containing deps needed by the Java bootclasspath."""
-
-    return _get_java_toolchain(ctx)._bootclasspath_info._auxiliary
+    toolchain = _get_java_toolchain(ctx)
+    return depset(transitive = [toolchain.bootclasspath, toolchain._bootclasspath_info._auxiliary])
 
 def _get_java_toolchain(ctx):
     return ctx.attr._j2cl_java_toolchain[java_common.JavaToolchainInfo]
@@ -337,8 +333,6 @@ def _j2cl_transpile(
         # In the Kotlin case, source_jars also include the common sources.
         srcs = jvm_provider.source_jars + js_srcs
 
-    bootclasspath = get_bootclasspath(ctx)
-
     if jvm_provider.compilation_info:
         compilation_classpath = [jvm_provider.compilation_info.compilation_classpath]
     else:
@@ -346,8 +340,7 @@ def _j2cl_transpile(
         # We will compute the classpath manually using transitive_compile_time_jars.
         compilation_classpath = [d.transitive_compile_time_jars for d in jvm_deps]
 
-    bootclasspath_deps = get_bootclasspath_deps(ctx)
-    classpath = depset(transitive = [bootclasspath, bootclasspath_deps] + compilation_classpath)
+    classpath = depset(transitive = [get_bootclasspath(ctx)] + compilation_classpath)
 
     outputs = [output_dir, library_info_output]
 
