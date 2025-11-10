@@ -231,7 +231,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
 
           @Override
           public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
-            checkState(instanceOfExpression.getPatternVariable() == null);
+            checkState(instanceOfExpression.getPattern() == null);
           }
 
           @Override

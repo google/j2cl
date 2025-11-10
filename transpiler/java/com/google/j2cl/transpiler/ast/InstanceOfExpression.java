@@ -29,18 +29,18 @@ import javax.annotation.Nullable;
 public class InstanceOfExpression extends Expression implements HasSourcePosition {
   @Visitable Expression expression;
   @Visitable TypeDescriptor testTypeDescriptor;
-  @Visitable @Nullable Variable patternVariable;
+  @Visitable @Nullable Pattern pattern;
   private final SourcePosition sourcePosition;
 
   private InstanceOfExpression(
       SourcePosition sourcePosition,
       Expression expression,
       TypeDescriptor testTypeDescriptor,
-      Variable patternVariable) {
+      Pattern pattern) {
     this.expression = checkNotNull(expression);
     this.testTypeDescriptor = checkNotNull(testTypeDescriptor);
     this.sourcePosition = sourcePosition;
-    this.patternVariable = patternVariable;
+    this.pattern = pattern;
     checkArgument(
         testTypeDescriptor instanceof DeclaredTypeDescriptor
             || testTypeDescriptor instanceof ArrayTypeDescriptor);
@@ -59,8 +59,8 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
     return PrimitiveTypes.BOOLEAN;
   }
 
-  public Variable getPatternVariable() {
-    return patternVariable;
+  public Pattern getPattern() {
+    return pattern;
   }
 
   @Override
@@ -77,7 +77,7 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   @Override
   public InstanceOfExpression clone() {
     return new InstanceOfExpression(
-        sourcePosition, expression.clone(), testTypeDescriptor, patternVariable);
+        sourcePosition, expression.clone(), testTypeDescriptor, pattern.clone());
   }
 
   @Override
@@ -98,14 +98,14 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   public static class Builder {
     private Expression expression;
     private TypeDescriptor testTypeDescriptor;
-    private Variable patternVariable;
+    private Pattern pattern;
     private SourcePosition sourcePosition;
 
     public static Builder from(InstanceOfExpression instanceOfExpression) {
       return new Builder()
           .setExpression(instanceOfExpression.getExpression())
           .setTestTypeDescriptor(instanceOfExpression.getTestTypeDescriptor())
-          .setPatternVariable(instanceOfExpression.getPatternVariable())
+          .setPattern(instanceOfExpression.getPattern())
           .setSourcePosition(instanceOfExpression.getSourcePosition());
     }
 
@@ -128,14 +128,13 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
     }
 
     @CanIgnoreReturnValue
-    public Builder setPatternVariable(Variable patternVariable) {
-      this.patternVariable = patternVariable;
+    public Builder setPattern(Pattern pattern) {
+      this.pattern = pattern;
       return this;
     }
 
     public InstanceOfExpression build() {
-      return new InstanceOfExpression(
-          sourcePosition, expression, testTypeDescriptor, patternVariable);
+      return new InstanceOfExpression(sourcePosition, expression, testTypeDescriptor, pattern);
     }
   }
 }
