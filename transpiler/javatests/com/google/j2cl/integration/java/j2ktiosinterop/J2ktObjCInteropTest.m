@@ -91,8 +91,8 @@
   obj.intField_ = i;
 
   i = J2ktJ2ktiosinteropDefaultNamesCompanion.shared.STATIC_FINAL_INT_FIELD;
-  i = J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticIntField;
-  J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticIntField = i;
+  i = J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticIntField_;
+  J2ktJ2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ = i;
 
   i = J2ktiosinteropDefaultNames_get_STATIC_FINAL_INT_FIELD();
   i = J2ktiosinteropDefaultNames_get_staticIntField();

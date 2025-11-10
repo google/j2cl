@@ -225,10 +225,13 @@ internal val Variable.objCParameterName: String
   get() = "with$objCName"
 
 internal val FieldDescriptor.objCName: String
-  // TODO(b/458058192): Bring back rendering underscore for non-final static fields, because of ObjC
-  // name conflict between field and method of the same name. Static final fields should follow
-  // naming convention and use SNAKE_CASE, which should not conflict with methods.
-  get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant && !isStatic) { it + "_" }
+  get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(objCNameNeedsUnderscoreSuffix) { it + "_" }
+
+// Enum values and static final fields should follow naming convention and use SNAKE_CASE, so they
+// should not conflict with methods. Other fields require underscore suffix to avoid naming
+// conflict.
+private val FieldDescriptor.objCNameNeedsUnderscoreSuffix: Boolean
+  get() = !isEnumConstant && (!isStatic || !isFinal)
 
 internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObjCNames =
   copy(
