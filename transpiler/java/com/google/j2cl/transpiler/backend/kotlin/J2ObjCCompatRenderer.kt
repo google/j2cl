@@ -57,10 +57,12 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.objc.defineAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
+import com.google.j2cl.transpiler.backend.kotlin.objc.floatSourceRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.objc.getProperty
 import com.google.j2cl.transpiler.backend.kotlin.objc.id
 import com.google.j2cl.transpiler.backend.kotlin.objc.macroDefine
+import com.google.j2cl.transpiler.backend.kotlin.objc.mathSourceRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.methodCall
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsAssumeNonnull
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsCopying
@@ -645,22 +647,22 @@ internal class J2ObjCCompatRenderer(
     }
 
   private fun literalRenderer(float: Float): Renderer<Source> =
-    if (float.isNaN()) nsObjCRuntimeSourceRenderer("NAN")
+    if (float.isNaN()) mathSourceRenderer("NAN")
     else
       when (float) {
-        Float.POSITIVE_INFINITY -> nsObjCRuntimeSourceRenderer("INFINITY")
-        Float.NEGATIVE_INFINITY -> nsObjCRuntimeSourceRenderer("-INFINITY")
-        Float.MAX_VALUE -> nsObjCRuntimeSourceRenderer("FLT_MAX")
+        Float.POSITIVE_INFINITY -> mathSourceRenderer("INFINITY")
+        Float.NEGATIVE_INFINITY -> mathSourceRenderer("-INFINITY")
+        Float.MAX_VALUE -> floatSourceRenderer("FLT_MAX")
         else -> sourceRenderer("${float}f")
       }
 
   private fun literalRenderer(double: Double): Renderer<Source> =
-    if (double.isNaN()) nsObjCRuntimeSourceRenderer("NAN")
+    if (double.isNaN()) mathSourceRenderer("NAN")
     else
       when (double) {
-        Double.POSITIVE_INFINITY -> nsObjCRuntimeSourceRenderer("INFINITY")
-        Double.NEGATIVE_INFINITY -> nsObjCRuntimeSourceRenderer("-INFINITY")
-        Double.MAX_VALUE -> nsObjCRuntimeSourceRenderer("DBL_MAX")
+        Double.POSITIVE_INFINITY -> mathSourceRenderer("INFINITY")
+        Double.NEGATIVE_INFINITY -> mathSourceRenderer("-INFINITY")
+        Double.MAX_VALUE -> floatSourceRenderer("DBL_MAX")
         else -> sourceRenderer("$double")
       }
 

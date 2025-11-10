@@ -95,7 +95,15 @@ fun dotSeparated(first: Renderer<Source>, vararg rest: Renderer<Source>): Render
 fun nsObjCRuntimeSourceRenderer(string: String): Renderer<Source> =
   sourceRenderer(string) with nsObjCRuntimeDependency
 
+fun mathSourceRenderer(string: String): Renderer<Source> =
+  sourceRenderer(string) with mathDependency
+
+fun floatSourceRenderer(string: String): Renderer<Source> =
+  sourceRenderer(string) with floatDependency
+
 val nsObjCRuntimeDependency = Dependency.of(Import.system("Foundation/NSObjCRuntime.h"))
+val mathDependency = Dependency.of(Import.system("math.h"))
+val floatDependency = Dependency.of(Import.system("float.h"))
 
 val nsEnum: Renderer<Source> = nsObjCRuntimeSourceRenderer("NS_ENUM")
 
