@@ -557,7 +557,11 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
-          () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
+          () ->
+              new VerifyNormalizedUnits(
+                  /* verifyForWasm= **/ true,
+                  /* enableCustomDescriptorsJsInterop= */ options
+                      .getEnableWasmCustomDescriptorsJsInterop()));
     }
 
     @Override
@@ -709,7 +713,11 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
-          () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
+          () ->
+              new VerifyNormalizedUnits(
+                  /* verifyForWasm= **/ true,
+                  /* enableCustomDescriptorsJsInterop= */ options
+                      .getEnableWasmCustomDescriptorsJsInterop()));
     }
 
     @Override

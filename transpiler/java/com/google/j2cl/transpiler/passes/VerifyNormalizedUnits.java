@@ -63,13 +63,15 @@ import java.util.Map;
 public class VerifyNormalizedUnits extends NormalizationPass {
 
   private final boolean verifyForWasm;
+  private final boolean enableCustomDescriptorsJsInterop;
 
-  public VerifyNormalizedUnits(boolean verifyForWasm) {
+  public VerifyNormalizedUnits(boolean verifyForWasm, boolean enableCustomDescriptorsJsInterop) {
     this.verifyForWasm = verifyForWasm;
+    this.enableCustomDescriptorsJsInterop = enableCustomDescriptorsJsInterop;
   }
 
   public VerifyNormalizedUnits() {
-    this(false);
+    this(false, false);
   }
 
   @Override
@@ -136,7 +138,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
 
           public void checkMember(Member member) {
             verifyMemberUniqueness(member);
-            if (verifyForWasm) {
+            if (verifyForWasm && !enableCustomDescriptorsJsInterop) {
               boolean isNative =
                   member.isNative()
                       // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative
