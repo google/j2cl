@@ -438,21 +438,18 @@
   XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
 
   XCTAssertTrue(J2ktiosinteropCompileTimeConstants_get_CONSTANT_BOOLEAN());
-  // TODO(b/458647857): Should be false and not cause class initialization.
-  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
 
   XCTAssertEqual(J2ktiosinteropCompileTimeConstants_CONSTANT_INT, 5);
-  // TODO(b/458647857): Should be false and not cause class initialization.
-  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
 
   XCTAssertEqual(J2ktiosinteropCompileTimeConstants_get_CONSTANT_INT(), 5);
-  // TODO(b/458647857): Should be false and not cause class initialization.
-  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
 
   // J2ktiosinteropCompileTimeConstants_CONSTANT_STRING is absent in Compat.h.
   // XCTAssertEqualObjects(J2ktiosinteropCompileTimeConstants_CONSTANT_STRING, @"foo");
   // TODO(b/458647857): Should be false and not cause class initialization.
-  XCTAssertTrue(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
+  XCTAssertFalse(J2ktiosinteropCompileTimeConstantInitialization_get_isInitialized());
 
   XCTAssertEqualObjects(J2ktiosinteropCompileTimeConstants_get_CONSTANT_STRING(), @"foo");
   // Surprisingly, it causes class initialiation in J2ObjC.

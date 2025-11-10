@@ -205,8 +205,12 @@ internal class J2ObjCCompatRenderer(
       fieldDescriptor.name!!.objCName
 
   private fun getExpressionRenderer(fieldDescriptor: FieldDescriptor): Renderer<Source> =
-    propertyQualifierRenderer(fieldDescriptor).map {
-      dotSeparated(it, source(getPropertyObjCName(fieldDescriptor)))
+    if (fieldDescriptor.typeDescriptor.isPrimitive && fieldDescriptor.isCompileTimeConstant) {
+      sourceRenderer(defineConstantName(fieldDescriptor))
+    } else {
+      propertyQualifierRenderer(fieldDescriptor).map {
+        dotSeparated(it, source(getPropertyObjCName(fieldDescriptor)))
+      }
     }
 
   private fun setPropertyObjCName(fieldDescriptor: FieldDescriptor): String =
