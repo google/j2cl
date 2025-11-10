@@ -280,11 +280,21 @@ internal class J2ObjCCompatRenderer(
   private fun shouldRender(methodDescriptor: MethodDescriptor): Boolean =
     !methodDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
       methodDescriptor.visibility.isPublic &&
-      // Don't render constructors for inner-classes, because they have implicit `outer`
-      // parameter.
-      (methodDescriptor.isStatic ||
-        (methodDescriptor.isConstructor &&
-          !methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isKtInner)) &&
+      when {
+        // Static methods are always rendered.
+        methodDescriptor.isStatic -> true
+        // Constructors are rendered except for specific cases.
+        methodDescriptor.isConstructor ->
+          when {
+            // Inner class constructors have implicit `outer` parameter.
+            methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isKtInner -> false
+            // Primitive constructors are not rendered, as they are currently implemented in Kotlin
+            // as `invoke` calls and are deprecated in Java.
+            isBoxedType(methodDescriptor.enclosingTypeDescriptor) -> false
+            else -> true
+          }
+        else -> false
+      } &&
       shouldRender(methodDescriptor.returnTypeDescriptor) &&
       methodDescriptor.parameterTypeDescriptors.all(::shouldRender) &&
       canInferObjCName(methodDescriptor) &&
