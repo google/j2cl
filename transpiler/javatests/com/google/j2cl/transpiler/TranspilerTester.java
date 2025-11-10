@@ -461,6 +461,11 @@ public class TranspilerTester {
     }
 
     @CanIgnoreReturnValue
+    public TranspileResult assertErrorsContainsMatchingSnippet(String regex) {
+      return assertContainsMatchingSnippet(getProblems().getErrors(), regex);
+    }
+
+    @CanIgnoreReturnValue
     public TranspileResult assertInfoMessagesContainsSnippets(String... snippets) {
       return assertContainsSnippets(getProblems().getInfoMessages(), snippets);
     }
@@ -470,6 +475,14 @@ public class TranspilerTester {
       assertThat(problems)
           .comparingElementsUsing(Correspondence.from(String::contains, "contained within"))
           .containsAtLeastElementsIn(Arrays.asList(snippets));
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    private TranspileResult assertContainsMatchingSnippet(List<String> problems, String regex) {
+      assertThat(problems)
+          .comparingElementsUsing(Correspondence.from(String::matches, "matched regex"))
+          .containsAtLeastElementsIn(Arrays.asList(regex));
       return this;
     }
 

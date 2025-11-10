@@ -3459,7 +3459,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   }
 
   public void testJsOverlayOnJsMemberFails() {
-    // JsOverlay in constructors is checked by JDT.
+    // JsOverlay in constructors is checked by the frontend.
     assertTranspileFails(
             "test.Buggy",
             """
@@ -3468,8 +3468,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay public Buggy() { }
             }
             """)
-        .assertErrorsWithoutSourcePosition(
-            "The annotation @JsOverlay is disallowed for this location");
+        .assertErrorsContainsMatchingSnippet(
+            ".*((The annotation @JsOverlay is disallowed for this location)"
+                + "|(annotation interface not applicable to this kind of declaration)).*");
 
     assertTranspileFails(
             "test.Buggy",
