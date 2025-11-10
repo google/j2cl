@@ -2027,7 +2027,10 @@ public class JsInteropRestrictionsChecker {
 
     MethodDescriptor jsConstructorDescriptor = jsConstructorDescriptors.get(0);
     MethodDescriptor primaryConstructorDescriptor = getPrimaryConstructorDescriptor(type);
-    if (primaryConstructorDescriptor != jsConstructorDescriptor) {
+    // Due to b/459533098, we compare constructor descriptors by signature instead of by
+    // reference.
+    if (primaryConstructorDescriptor == null
+        || !primaryConstructorDescriptor.isSameSignature(jsConstructorDescriptor)) {
       problems.error(
           type.getSourcePosition(),
           "JsConstructor '%s' can be a JsConstructor only if all other constructors in the class "
