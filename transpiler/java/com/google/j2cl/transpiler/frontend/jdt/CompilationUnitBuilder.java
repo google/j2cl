@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.AssertStatement;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
+import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.BreakStatement;
@@ -69,6 +70,7 @@ import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.Pattern;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
@@ -772,13 +774,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Expression e = convert(expression.getLeftOperand());
       TypeDescriptor typeDescriptor =
           environment.createTypeDescriptor(expression.getRightOperand().resolveBinding());
-      Variable patternVariable =
-          expression.getPatternVariable() == null ? null : convert(expression.getPatternVariable());
+      Pattern pattern =
+          expression.getPatternVariable() == null
+              ? null
+              : new BindingPattern(convert(expression.getPatternVariable()));
       return InstanceOfExpression.newBuilder()
           .setSourcePosition(getSourcePosition(expression))
           .setExpression(e)
           .setTestTypeDescriptor(typeDescriptor)
-          .setPatternVariable(patternVariable)
+          .setPattern(pattern)
           .build();
     }
 

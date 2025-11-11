@@ -112,4 +112,9 @@ public class InstanceofExpressions {
       int k = n.byteValue();
     }
   }
+
+  private void testReproCloneInstanceof() {
+    Object o = null;
+    new Integer(o instanceof String ? 1 : 2);
+  }
 }

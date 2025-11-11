@@ -148,6 +148,11 @@ class InstanceofExpressions extends j_l_Object {
  m_testPrecedence__void() {
   let b = !$Equality.$same(false ? 'foo' : 'bar', null);
  }
+ /** @final @nodts */
+ m_testReproCloneInstanceof__void() {
+  let /** * */ o = null;
+  Integer.$create__int(j_l_String.$isInstance(o) ? 1 : 2);
+ }
  /** @nodts */
  static $clinit() {
   InstanceofExpressions.$clinit = () =>{};

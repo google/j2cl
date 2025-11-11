@@ -131,4 +131,9 @@ class InstanceofExpressions {
   fun testPrecedence() {
     val b = (if (false) "foo" else "bar") is String
   }
+
+  fun testReproCloneInstanceof() {
+    val o: Any? = null
+    Integer(if (o is String) 1 else 2)
+  }
 }

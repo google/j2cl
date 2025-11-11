@@ -370,6 +370,19 @@
  )
 )
 
+;;; void InstanceofExpressions.testReproCloneInstanceof()
+(func $m_testReproCloneInstanceof__void_$p_instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $instanceofexpression.InstanceofExpressions))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:116:15
+ (local $o (ref null $java.lang.Object))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:117:4
+  (local.set $o (ref.null $java.lang.Object))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:118:4
+  (drop (call $$create__int@java.lang.Integer (if (result i32) (ref.test (ref $java.lang.String) (local.get $o)) (then (i32.const 1)) (else (i32.const 2)))))
+ )
+)
+
 ;;; void InstanceofExpressions.$clinit()
 (func $$clinit__void_<once>_@instanceofexpression.InstanceofExpressions
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:20:13

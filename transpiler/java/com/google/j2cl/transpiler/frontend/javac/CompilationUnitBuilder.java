@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AssertStatement;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.BreakStatement;
@@ -66,6 +67,7 @@ import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.Pattern;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
@@ -138,6 +140,7 @@ import com.sun.tools.javac.tree.JCTree.JCMethodInvocation;
 import com.sun.tools.javac.tree.JCTree.JCNewArray;
 import com.sun.tools.javac.tree.JCTree.JCNewClass;
 import com.sun.tools.javac.tree.JCTree.JCParens;
+import com.sun.tools.javac.tree.JCTree.JCPattern;
 import com.sun.tools.javac.tree.JCTree.JCReturn;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
 import com.sun.tools.javac.tree.JCTree.JCSwitch;
@@ -850,17 +853,21 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private InstanceOfExpression convertInstanceOf(JCInstanceOf expression) {
-    Variable patternVariable = null;
-    if (expression.getPattern() instanceof JCBindingPattern pattern) {
-      patternVariable = createVariable(pattern.var, false);
-    }
-
     return InstanceOfExpression.newBuilder()
         .setSourcePosition(getSourcePosition(expression))
         .setExpression(convertExpression(expression.getExpression()))
-        .setPatternVariable(patternVariable)
+        .setPattern(convertPattern(expression.getPattern()))
         .setTestTypeDescriptor(environment.createTypeDescriptor(expression.getType().type))
         .build();
+  }
+
+  private Pattern convertPattern(JCPattern pattern) {
+    return switch (pattern) {
+      case JCBindingPattern bindingPattern ->
+          new BindingPattern(createVariable(bindingPattern.var, false));
+      case null -> null;
+      default -> throw new IllegalArgumentException("Unexpected pattern: " + pattern);
+    };
   }
 
   private Expression convertLambda(JCLambda expression) {

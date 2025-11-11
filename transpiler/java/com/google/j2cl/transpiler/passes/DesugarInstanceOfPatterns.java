@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
@@ -36,12 +37,13 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
-            if (instanceOfExpression.getPatternVariable() == null) {
+            if (instanceOfExpression.getPattern() == null) {
               return instanceOfExpression;
             }
 
             Expression expression = instanceOfExpression.getExpression();
-            Variable patternVariable = instanceOfExpression.getPatternVariable();
+            Variable patternVariable =
+                ((BindingPattern) instanceOfExpression.getPattern()).getVariable();
             TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
 
             // The instanceof has a pattern and will be represented as a multi expression as
@@ -80,7 +82,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
                     .setConditionExpression(
                         InstanceOfExpression.Builder.from(instanceOfExpression)
                             .setExpression(expressionVariable.createReference())
-                            .setPatternVariable(null)
+                            .setPattern(null)
                             .build())
                     .setTrueExpression(
                         CastExpression.newBuilder()
