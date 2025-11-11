@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.ImmutableList;
@@ -39,7 +41,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
@@ -67,7 +68,7 @@ public class JavacParser {
     // our output would be unstable
     final Map<String, String> targetPathBySourcePath =
         options.getSources().stream()
-            .collect(Collectors.toMap(FileInfo::sourcePath, FileInfo::targetPath));
+            .collect(toImmutableMap(FileInfo::sourcePath, FileInfo::targetPath));
 
     try {
       JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -87,7 +88,9 @@ public class JavacParser {
                   getJavacOptions(options),
                   null,
                   fileManager.getJavaFileObjectsFromFiles(
-                      targetPathBySourcePath.keySet().stream().map(File::new).collect(toList())));
+                      targetPathBySourcePath.keySet().stream()
+                          .map(File::new)
+                          .collect(toImmutableList())));
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList(task.parse());
       task.analyze();
       reportErrors(diagnostics, javacCompilationUnits, options.getForbiddenAnnotations());
