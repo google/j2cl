@@ -55,6 +55,12 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   String classPath = "";
 
   @Option(
+      name = "-system",
+      metaVar = "<path>",
+      usage = "Specifies the location of the system modules.")
+  String system = "";
+
+  @Option(
       name = "-nativesourcepath",
       metaVar = "<path>",
       usage = "Specifies where to find zip files containing native.js files for native methods.")
@@ -206,6 +212,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
+        .setSystem(this.system)
         .setOutput(output)
         .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(false)

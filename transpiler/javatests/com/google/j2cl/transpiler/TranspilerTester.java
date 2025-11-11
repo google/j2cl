@@ -60,7 +60,8 @@ public class TranspilerTester {
    */
   public static TranspilerTester newTesterWithDefaults() {
     return newTester()
-        .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar");
+        .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar")
+        .setSystemPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_system");
   }
 
   /** Creates a new transpiler tester initialized with Kotlin (frontend) defaults. */
@@ -84,7 +85,8 @@ public class TranspilerTester {
     return newTester()
         .addArgs("-backend", "KOTLIN")
         .setClassPathArg(
-            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2kt_deploy.jar");
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2kt_deploy.jar")
+        .setSystemPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2kt_system");
   }
 
   /** Creates a new transpiler tester initialized with WASM defaults. */
@@ -95,6 +97,8 @@ public class TranspilerTester {
         .addArgs("-backend", "WASM")
         .setClassPathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy.jar")
+        .setSystemPathArg(
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_system")
         .addArgs("-defineForWasm", "J2WASM_DEBUG=TRUE")
         .addArgs("-defineForWasm", "jre.strictFpToString=DISABLED")
         .addArgs("-defineForWasm", "jre.checkedMode=ENABLED")
@@ -286,6 +290,10 @@ public class TranspilerTester {
 
   public TranspilerTester setClassPathArg(String path) {
     return this.addArgs("-cp", toTestPath(path));
+  }
+
+  public TranspilerTester setSystemPathArg(String path) {
+    return this.addArgs("-system", toTestPath(path));
   }
 
   public TranspilerTester setNativeSourcePathArg(String path) {
