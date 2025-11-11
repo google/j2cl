@@ -141,6 +141,7 @@ def _compile(
             library_info = library_info,
             output_js = output_js,
             js_info = js_info,
+            j2kt_enabled = is_j2kt_web_experiment_enabled,
         ),
         _is_j2cl_provider = 1,
     )
