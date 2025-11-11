@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import com.google.j2cl.transpiler.ast.Expression.Precedence;
+import javax.annotation.Nullable;
 
 /** A node that represent an expression that will be emitted with an explaining comment. */
 @Visitable
@@ -53,6 +54,12 @@ public class ExpressionWithComment extends Expression {
   @Override
   public boolean isCompileTimeConstant() {
     return expression.isCompileTimeConstant();
+  }
+
+  @Override
+  @Nullable
+  public Literal getConstantValue() {
+    return expression.getConstantValue();
   }
 
   @Override

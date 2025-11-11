@@ -22,6 +22,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /** Base class for expressions. */
 @Visitable
@@ -81,6 +82,15 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   /** Returns true if the expression value can be computed at compile time. */
   public boolean isCompileTimeConstant() {
     return false;
+  }
+
+  /**
+   * Return the compile-time constant as a literal if it is compile-time constant expression, {@code
+   * null} otherwise.
+   */
+  @Nullable
+  public Literal getConstantValue() {
+    return null;
   }
 
   /**

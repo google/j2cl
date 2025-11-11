@@ -61,6 +61,11 @@ public abstract class Literal extends Expression {
   }
 
   @Override
+  public Literal getConstantValue() {
+    return this;
+  }
+
+  @Override
   public boolean canBeNull() {
     return false;
   }

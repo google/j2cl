@@ -41,6 +41,7 @@ import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
 import com.google.j2cl.transpiler.passes.DesugarInstanceOfPatterns;
 import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
+import com.google.j2cl.transpiler.passes.EvaluateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
@@ -228,6 +229,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          EvaluateCompileTimeConstants::new,
           RemoveUnneededNotNullChecks::new,
 
           // Early run of determining whether variables are effectively final so that passes that
@@ -426,6 +428,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          EvaluateCompileTimeConstants::new,
           // Early run of determining whether variables are effectively final so that passes that
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
@@ -585,6 +588,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          EvaluateCompileTimeConstants::new,
           // Early run of determining whether variables are effectively final so that passes that
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
@@ -735,6 +739,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          EvaluateCompileTimeConstants::new,
           NormalizeNullLiterals::new,
           MakeVariablesFinal::new,
           DesugarInstanceOfPatterns::new,

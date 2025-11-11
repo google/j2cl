@@ -267,20 +267,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       FieldDescriptor fieldDescriptor =
           environment.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
 
-      // Since initializing custom values for JsEnum requires literals, we fold constant expressions
-      // to give more options to the user. E.g. -1 is a unary expression but the expression is a
-      // constant that can be evaluated at compile time, hence it makes sense to allow it.
-      boolean foldConstantArguments = fieldDescriptor.getEnclosingTypeDescriptor().isJsEnum();
-
       MethodDescriptor methodDescriptor =
           environment.createMethodDescriptor(enumConstructorBinding);
       Expression initializer =
           NewInstance.Builder.from(methodDescriptor)
               .setArguments(
                   convertArguments(
-                      enumConstructorBinding,
-                      asTypedList(enumConstantDeclaration.arguments()),
-                      foldConstantArguments))
+                      enumConstructorBinding, asTypedList(enumConstantDeclaration.arguments())))
               .setAnonymousInnerClass(anonymousInnerClass)
               .build();
 
@@ -1127,20 +1120,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private List<Expression> convertArguments(
         IMethodBinding methodBinding,
         List<org.eclipse.jdt.core.dom.Expression> argumentExpressions) {
-      return convertArguments(methodBinding, argumentExpressions, false);
-    }
-
-    private List<Expression> convertArguments(
-        IMethodBinding methodBinding,
-        List<org.eclipse.jdt.core.dom.Expression> argumentExpressions,
-        boolean foldConstants) {
       MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
-          argumentExpressions.stream()
-              .map(
-                  expression ->
-                      foldConstants ? convertAndFoldExpression(expression) : convert(expression))
-              .collect(toCollection(ArrayList::new));
+          argumentExpressions.stream().map(this::convert).collect(toCollection(ArrayList::new));
       return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
     }
 
@@ -1310,11 +1292,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               JdtEnvironment.<org.eclipse.jdt.core.dom.Expression>asTypedList(
                       switchCase.expressions())
                   .stream()
-                  // Fold the constant in the switch case to avoid complex expressions. Otherwise
-                  // JDT would represent negative values as unary expressions, e.g - <constant>. The
-                  // Wasm backend relies on switch case constant for switch on integral values to be
-                  // literals.
-                  .map(this::convertAndFoldExpression)
+                  .map(this::convert)
                   .collect(toImmutableList()))
           .setCanFallthrough(!switchCase.isSwitchLabeledRule());
     }
@@ -1424,14 +1402,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               fragments.stream().map(this::convert).collect(toImmutableList()))
           .build()
           .makeStatement(getSourcePosition(statement));
-    }
-
-    private Expression convertAndFoldExpression(org.eclipse.jdt.core.dom.Expression expression) {
-      Object constantValue = expression.resolveConstantExpressionValue();
-      return constantValue != null
-          ? Literal.fromValue(
-              constantValue, environment.createTypeDescriptor(expression.resolveTypeBinding()))
-          : convert(expression);
     }
 
     @Nullable

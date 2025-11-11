@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import javax.annotation.Nullable;
 
 /** Class for field access. */
 @Visitable
@@ -80,6 +81,21 @@ public class FieldAccess extends MemberReference {
   @Override
   public boolean isLValue() {
     return true;
+  }
+
+  @Override
+  public boolean isCompileTimeConstant() {
+    return getTarget().isCompileTimeConstant()
+        && (qualifier == null || qualifier instanceof JsConstructorReference);
+  }
+
+  @Override
+  @Nullable
+  public Literal getConstantValue() {
+    if (!isCompileTimeConstant()) {
+      return null;
+    }
+    return getTarget().getConstantValue();
   }
 
   @Override
