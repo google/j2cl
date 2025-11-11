@@ -28,7 +28,7 @@ j2cl_library(
 load("//build_defs/internal_do_not_use/allowlists:allowlists.bzl", "allowlists")
 load("//build_defs/internal_do_not_use/allowlists:j2kt_jvm.bzl", "J2KT_JVM_ALLOWLIST")
 load("//build_defs/internal_do_not_use/allowlists:j2kt_native.bzl", "J2KT_NATIVE_ALLOWLIST")
-load("//build_defs/internal_do_not_use/allowlists:j2kt_web.bzl", "J2KT_WEB_ALLOWLIST", "J2KT_WEB_DISABLED")
+load("//build_defs/internal_do_not_use/allowlists:j2kt_web.bzl", "J2KT_WEB_DISABLED", "J2KT_WEB_ENABLED", "J2KT_WEB_EXPERIMENT_ENABLED")
 load("//build_defs/internal_do_not_use/allowlists:j2wasm.bzl", "J2WASM_ALLOWLIST")
 load("//build_defs/internal_do_not_use/allowlists:kotlin.bzl", "KOTLIN_ALLOWLIST")
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
@@ -88,30 +88,41 @@ def j2cl_library(
             "See: //build_defs/internal_do_not_use/allowlists/kotlin.bzl",
         )
 
-    is_j2kt_web_allowed = (allowlists.is_package_allowed(native.package_name(), J2KT_WEB_ALLOWLIST) and
-                           not allowlists.is_target_allowed(target_name, J2KT_WEB_DISABLED))
-
-    # These arguments should not be set by the user.
-    args["j2kt_web_experiment_enabled"] = False
-
     if has_kotlin_srcs:
         if target_name != "//ktstdlib:j2cl_kt_stdlib":
             args["deps"] = args.get("deps", []) + [_KOTLIN_STDLIB_TARGET]
 
-    elif is_j2kt_web_allowed:
+    # J2KT Web can be in one of three states for a given target:
+    #  1. enabled: the target is always transpiled through J2KT
+    #  2. experiment enabled: the target is transpiled through J2KT if the blaze flag is set.
+    #  3. disabled: the target is either not in the previous two sets, or is explicitly disabled
+    #               despite being in one of the previous two sets.
+    is_j2kt_web_always_enabled = allowlists.is_package_allowed(native.package_name(), J2KT_WEB_ENABLED)
+    is_j2kt_web_experiment_enabled = allowlists.is_package_allowed(native.package_name(), J2KT_WEB_EXPERIMENT_ENABLED)
+    maybe_enable_j2kt_web = (
+        not has_kotlin_srcs and
+        (is_j2kt_web_always_enabled or is_j2kt_web_experiment_enabled) and
+        not allowlists.is_target_allowed(target_name, J2KT_WEB_DISABLED)
+    )
+
+    # These arguments should not be set by the user.
+    args["j2kt_web_experiment_enabled"] = False
+
+    if maybe_enable_j2kt_web:
         # Enable j2kt-web if the blaze flag is set to True
-        args["j2kt_web_experiment_enabled"] = select({
+        args["j2kt_web_experiment_enabled"] = True if is_j2kt_web_always_enabled else select({
             "//build_defs/internal_do_not_use:j2kt_web_enabled": True,
             "//conditions:default": False,
         })
 
         if has_srcs:
-            # If j2kt-web is enabled, we need to add _JRE_J2KT_TARGET (to resolve calls added by
-            # j2kt) and _KOTLIN_STDLIB_TARGET as dependencies.
-            args["deps"] = args.get("deps", []) + select({
-                "//build_defs/internal_do_not_use:j2kt_web_enabled": [_JRE_J2KT_TARGET, _KOTLIN_STDLIB_TARGET],
-                "//conditions:default": [],
+            # If j2kt-web is enabled, we need to add the J2KT JRE and Kotlin stdlib as deps.
+            j2kt_deps = [_JRE_J2KT_TARGET, _KOTLIN_STDLIB_TARGET]
+            extra_deps = select({
+                "//build_defs/internal_do_not_use:j2kt_web_enabled": j2kt_deps,
+                "//conditions:default": j2kt_deps if is_j2kt_web_always_enabled else [],
             })
+            args["deps"] = args.get("deps", []) + extra_deps
 
     j2cl_library_rule(
         name = name,
