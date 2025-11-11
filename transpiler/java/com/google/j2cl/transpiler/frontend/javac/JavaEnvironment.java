@@ -25,7 +25,6 @@ import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnot
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropUtils.getJ2ktVariance;
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
-import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
@@ -1777,7 +1776,7 @@ class JavaEnvironment {
                               ((ArrayTypeDescriptor) elementType).getComponentTypeDescriptor(),
                               ((AnnotationValue) v).getValue(),
                               inNullMarkedScope))
-                  .collect(toCollection(ArrayList::new));
+                  .collect(toImmutableList());
       // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value
       // types. We don't expect null unless it's an unhandled value type.
       if (values.contains(null)) {

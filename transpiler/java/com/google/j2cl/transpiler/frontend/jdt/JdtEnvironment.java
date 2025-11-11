@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.isSupportedAnnotation;
-import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
@@ -1256,7 +1255,7 @@ public class JdtEnvironment {
                           ((ArrayTypeDescriptor) elementType).getComponentTypeDescriptor(),
                           v,
                           inNullMarkedScope))
-              .collect(toCollection(ArrayList::new));
+              .collect(toImmutableList());
       // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value
       // types. We don't expect null unless it's an unhandled value type.
       if (values.contains(null)) {
