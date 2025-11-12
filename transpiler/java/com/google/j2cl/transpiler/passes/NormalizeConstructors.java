@@ -219,7 +219,7 @@ public class NormalizeConstructors extends NormalizationPass {
                 .count()
             > 1;
     return hasMultipleConstructors
-        ? String.format(message + " '%s'.", constructor.getDescriptor().getReadableDescription())
+        ? String.format("%s '%s'.", message, constructor.getDescriptor().getReadableDescription())
         : null;
   }
 

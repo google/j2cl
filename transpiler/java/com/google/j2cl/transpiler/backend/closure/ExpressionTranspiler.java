@@ -135,7 +135,7 @@ public final class ExpressionTranspiler {
       @Override
       public boolean enterCastExpression(CastExpression castExpression) {
         checkArgument(
-            false, castExpression + " CastExpression should have been normalized to method call.");
+            false, "%s CastExpression should have been normalized to method call.", castExpression);
         return false;
       }
 

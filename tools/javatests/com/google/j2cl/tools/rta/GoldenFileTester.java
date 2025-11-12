@@ -60,7 +60,7 @@ public class GoldenFileTester {
           .that(fromRta.removeIf(x -> x.matches(pattern)))
           .isEqualTo(true);
     }
-    assertWithMessage("Comparing rta result with golden file with for " + fileType)
+    assertWithMessage("Comparing rta result with golden file with for %s", fileType)
         .that(fromRta)
         .containsExactlyElementsIn(fromGoldenFile);
   }
