@@ -516,21 +516,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .build());
     }
 
-    ImmutableList.Builder<Statement> statementsBuilder = ImmutableList.builder();
-    if (body == null) {
-    } else if (body instanceof JCBlock block) {
-      statementsBuilder.addAll(convertBlock(block).getStatements());
-    } else if (body instanceof JCStatement statement) {
-      statementsBuilder.add(convertStatement(statement));
-    } else {
-      throw new AssertionError("Unexpected node type in switch case rule: " + body.getKind());
+    var statementsBuilder = ImmutableList.<Statement>builder();
+
+    checkState(body == null || body instanceof JCStatement);
+    if (body instanceof JCStatement s) {
+      statementsBuilder.add(convertStatement(s));
     }
 
     if (isPrimitiveVoid(resultTypeDescriptor)) {
       // Switch case rules don't fallthrough and this one is in a switch statement,
       // add an explicit break.
       statementsBuilder.add(
-          BreakStatement.newBuilder().setSourcePosition(getSourcePosition(body)).build());
+          BreakStatement.newBuilder().setSourcePosition(SourcePosition.NONE).build());
     }
 
     return statementsBuilder.build();
