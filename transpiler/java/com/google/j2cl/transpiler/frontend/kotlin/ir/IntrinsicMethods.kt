@@ -20,11 +20,11 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.PrefixOperator
+import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.functionByName
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.ir.InternalSymbolFinderAPI
-import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
@@ -32,6 +32,7 @@ import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
+import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
 import org.jetbrains.kotlin.ir.symbols.IrConstructorSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
@@ -45,6 +46,7 @@ import org.jetbrains.kotlin.ir.util.isEnumClass
 import org.jetbrains.kotlin.ir.util.isFileClass
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
@@ -60,7 +62,8 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
  *
  * <p> The list on intrinsic methods in KoltinC can be found in http://shortn/_7YGQ0Kch3v
  */
-class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
+class IntrinsicMethods(private val pluginContext: IrPluginContext) {
+  private val irBuiltIns = pluginContext.irBuiltIns
   private val kotlinFqn = StandardNames.BUILT_INS_PACKAGE_FQ_NAME
   private val intFqn = StandardNames.FqNames._int.toSafe()
   private val arrayFqn = StandardNames.FqNames.array.toSafe()
@@ -171,25 +174,21 @@ class IntrinsicMethods(val irBuiltIns: IrBuiltIns) {
 
   fun isCompareTo(irCall: IrCall): Boolean = irCall.symbol.toKey() in compareToSymbolKeys
 
-  val jsUndefinedSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder
-      .findClass(Name.identifier("JsUtils"), FqName("javaemul.internal"))!!
-      .functionByName("undefined")
+  private val jsUtilsClass: IrClassSymbol by lazy {
+    pluginContext.referenceClass(ClassId(FqName("javaemul.internal"), Name.identifier("JsUtils")))!!
   }
+
+  val jsUndefinedSymbol: IrSimpleFunctionSymbol by lazy { jsUtilsClass.functionByName("undefined") }
 
   fun isGetJsUndefinedCall(irCall: IrCall): Boolean =
     irCall.symbol.toKey() == jsUndefinedSymbol.toKey()
 
   val jsIsUndefinedFunctionSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder
-      .findClass(Name.identifier("JsUtils"), FqName("javaemul.internal"))!!
-      .functionByName("isUndefined")
+    jsUtilsClass.functionByName("isUndefined")
   }
 
   val jsCoerceToNullSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder
-      .findClass(Name.identifier("JsUtils"), FqName("javaemul.internal"))!!
-      .functionByName("coerceToNull")
+    jsUtilsClass.functionByName("coerceToNull")
   }
 
   fun getPrefixOperator(symbol: IrFunctionSymbol): PrefixOperator? =

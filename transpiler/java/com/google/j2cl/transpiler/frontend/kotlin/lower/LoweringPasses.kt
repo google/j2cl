@@ -228,7 +228,7 @@ class LoweringPasses(
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
     jvmBackendContext =
       createJvmBackendContext(state, compilerConfiguration, pluginContext, jvmIrDeserializer)
-    intrinsics = IntrinsicMethods(pluginContext.irBuiltIns)
+    intrinsics = IntrinsicMethods(pluginContext)
 
     val j2clBackendContext = J2clBackendContext(jvmBackendContext, intrinsics)
 

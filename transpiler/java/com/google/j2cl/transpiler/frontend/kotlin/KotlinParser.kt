@@ -204,7 +204,7 @@ class KotlinParser(private val problems: Problems) {
           compilationUnits =
             CompilationUnitBuilder(
                 KotlinEnvironment(pluginContext, packageInfoCache, lowerings.jvmBackendContext),
-                IntrinsicMethods(pluginContext.irBuiltIns),
+                IntrinsicMethods(pluginContext),
               )
               .convert(moduleFragment)
         }
