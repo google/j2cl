@@ -37,6 +37,7 @@ import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.Annotation;
+import com.google.j2cl.transpiler.ast.AnnotationValue;
 import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
@@ -102,7 +103,6 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -1735,13 +1735,13 @@ class JavaEnvironment {
   }
 
   private Annotation.Builder newAnnotationBuilder(
-      Map<? extends ExecutableElement, ? extends AnnotationValue> values,
+      Map<? extends ExecutableElement, ? extends javax.lang.model.element.AnnotationValue> values,
       boolean inNullMarkedScope) {
     Annotation.Builder annotationBuilder = Annotation.newBuilder();
     for (var valuePair : values.entrySet()) {
       TypeDescriptor elementType =
           createTypeDescriptor(valuePair.getKey().getReturnType(), inNullMarkedScope);
-      Literal translatedValue =
+      var translatedValue =
           createAnnotationValue(elementType, valuePair.getValue().getValue(), inNullMarkedScope);
       if (translatedValue == null) {
         continue;
@@ -1758,7 +1758,7 @@ class JavaEnvironment {
    * Remove the null return once we handle all member value types.
    */
   @Nullable
-  private Literal createAnnotationValue(
+  private AnnotationValue createAnnotationValue(
       TypeDescriptor elementType, Object value, boolean inNullMarkedScope) {
     if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
         || TypeDescriptors.isJavaLangString(elementType)) {
@@ -1767,14 +1767,14 @@ class JavaEnvironment {
       return new TypeLiteral(
           SourcePosition.NONE, createTypeDescriptor((TypeMirror) value, inNullMarkedScope));
     } else if (elementType.isArray()) {
-      List<Literal> values =
+      List<AnnotationValue> values =
           ((List<?>) value)
               .stream()
                   .map(
                       v ->
                           createAnnotationValue(
                               ((ArrayTypeDescriptor) elementType).getComponentTypeDescriptor(),
-                              ((AnnotationValue) v).getValue(),
+                              ((javax.lang.model.element.AnnotationValue) v).getValue(),
                               inNullMarkedScope))
                   .collect(toImmutableList());
       // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value

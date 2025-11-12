@@ -67,7 +67,7 @@ public class J2ktAstUtils {
     if (annotation == null) {
       return null;
     }
-    Literal literal = annotation.getValues().get("value");
+    var literal = annotation.getValues().get("value");
     return literal instanceof StringLiteral stringLiteral ? stringLiteral.getValue() : null;
   }
 

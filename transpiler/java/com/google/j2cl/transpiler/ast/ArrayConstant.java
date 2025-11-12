@@ -22,40 +22,26 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.List;
 import java.util.Objects;
 
-// Do not mark ArrayConstant as @Visitable. Currently ArrayConstant is never present in the tree.
-// Before making it @Visitable, we need to ensure that {@link #clone()} is implemented correctly or
-// the class is unmodifiable.
 /** Class for array literals whose values are all literals. */
-public class ArrayConstant extends Literal {
+public class ArrayConstant implements AnnotationValue {
 
   private final ArrayTypeDescriptor typeDescriptor;
-  private final ImmutableList<Literal> valueExpressions;
+  private final ImmutableList<AnnotationValue> valueExpressions;
 
   private ArrayConstant(
-      ArrayTypeDescriptor typeDescriptor, ImmutableList<Literal> valueExpressions) {
+      ArrayTypeDescriptor typeDescriptor, ImmutableList<AnnotationValue> valueExpressions) {
     checkState(typeDescriptor.isArray());
 
     this.typeDescriptor = typeDescriptor;
     this.valueExpressions = valueExpressions;
   }
 
-  @Override
   public ArrayTypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 
-  public ImmutableList<Literal> getValueExpressions() {
+  public ImmutableList<AnnotationValue> getValueExpressions() {
     return valueExpressions;
-  }
-
-  @Override
-  public String getSourceText() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public ArrayConstant clone() {
-    return this;
   }
 
   @Override
@@ -78,7 +64,7 @@ public class ArrayConstant extends Literal {
   /** Builder for {@link ArrayConstant}. */
   public static final class Builder {
     private ArrayTypeDescriptor typeDescriptor = null;
-    private ImmutableList<Literal> valueExpressions = ImmutableList.of();
+    private ImmutableList<AnnotationValue> valueExpressions = ImmutableList.of();
 
     @CanIgnoreReturnValue
     public Builder setTypeDescriptor(ArrayTypeDescriptor typeDescriptor) {
@@ -87,7 +73,7 @@ public class ArrayConstant extends Literal {
     }
 
     @CanIgnoreReturnValue
-    public Builder setValueExpressions(List<Literal> valueExpressions) {
+    public Builder setValueExpressions(List<AnnotationValue> valueExpressions) {
       this.valueExpressions = ImmutableList.copyOf(valueExpressions);
       return this;
     }

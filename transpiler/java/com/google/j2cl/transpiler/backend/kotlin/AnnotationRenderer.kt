@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.Annotation
+import com.google.j2cl.transpiler.ast.AnnotationValue
 import com.google.j2cl.transpiler.ast.HasAnnotations
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
@@ -39,19 +40,19 @@ internal data class AnnotationRenderer(val nameRenderer: NameRenderer) {
     annotation(
       nameRenderer.qualifiedNameSource(annotation.typeDescriptor),
       annotation.singleValueOrNull().let { singleValue ->
-        if (singleValue != null) {
+        if (singleValue is Literal) {
           listOf(literalRenderer.literalSource(singleValue))
         } else {
           // TODO(b/444430700): Filter default values when they are supported.
           annotation.values.entries.map { entry ->
-            assignment(source(entry.key), literalRenderer.literalSource(entry.value))
+            assignment(source(entry.key), literalRenderer.literalSource(entry.value as Literal))
           }
         }
       },
     )
 
   // TODO(b/444430700): Filter default values when they are supported.
-  private fun Annotation.singleValueOrNull(): Literal? =
+  private fun Annotation.singleValueOrNull(): AnnotationValue? =
     values.entries.singleOrNull()?.takeIf { it.key == "value" }?.value
 
   companion object {

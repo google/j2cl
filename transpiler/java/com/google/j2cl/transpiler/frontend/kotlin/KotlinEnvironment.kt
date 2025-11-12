@@ -21,6 +21,7 @@ package com.google.j2cl.transpiler.frontend.kotlin
 import com.google.common.collect.ImmutableList
 import com.google.j2cl.common.SourcePosition
 import com.google.j2cl.transpiler.ast.Annotation
+import com.google.j2cl.transpiler.ast.AnnotationValue
 import com.google.j2cl.transpiler.ast.ArrayConstant
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
@@ -311,7 +312,7 @@ internal class KotlinEnvironment(
   private fun Annotation.Builder.addAnnotationValues(
     annotationCtorCall: IrConstructorCall
   ): Annotation.Builder {
-    fun IrExpression?.toAnnotationValue(): Literal? {
+    fun IrExpression?.toAnnotationValue(): AnnotationValue? {
       fun createArrayConstant(type: IrType, values: List<IrExpression>): ArrayConstant? {
         val translatedValues = values.map { it.toAnnotationValue() }
         // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value

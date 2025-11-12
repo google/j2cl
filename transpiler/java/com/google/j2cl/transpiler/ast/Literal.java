@@ -21,7 +21,7 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** Abstract superclass for value literal expressions. */
 @Visitable
-public abstract class Literal extends Expression {
+public abstract class Literal extends Expression implements AnnotationValue {
 
   public static Literal fromValue(Object constantValue, TypeDescriptor typeDescriptor) {
     if (constantValue instanceof Boolean value) {

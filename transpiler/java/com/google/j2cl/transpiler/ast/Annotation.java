@@ -26,7 +26,7 @@ public abstract class Annotation {
 
   public abstract DeclaredTypeDescriptor getTypeDescriptor();
 
-  public abstract ImmutableMap<String, Literal> getValues();
+  public abstract ImmutableMap<String, AnnotationValue> getValues();
 
   public static Builder newBuilder() {
     return new AutoValue_Annotation.Builder();
@@ -40,18 +40,18 @@ public abstract class Annotation {
     public abstract Builder setTypeDescriptor(DeclaredTypeDescriptor typeDescriptor);
 
     @CanIgnoreReturnValue
-    public Builder addValue(String elementName, Literal value) {
+    public Builder addValue(String elementName, AnnotationValue value) {
       valuesBuilder().put(elementName, value);
       return this;
     }
 
     @CanIgnoreReturnValue
-    public Builder addAllValues(Iterable<? extends Map.Entry<String, Literal>> values) {
+    public Builder addAllValues(Iterable<? extends Map.Entry<String, AnnotationValue>> values) {
       valuesBuilder().putAll(values);
       return this;
     }
 
-    abstract ImmutableMap.Builder<String, Literal> valuesBuilder();
+    abstract ImmutableMap.Builder<String, AnnotationValue> valuesBuilder();
 
     public Annotation build() {
       // TODO(b/399477543): Some annotations are not recognized as annotations by javac. Fix this,

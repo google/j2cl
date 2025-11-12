@@ -28,6 +28,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.Annotation;
+import com.google.j2cl.transpiler.ast.AnnotationValue;
 import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -1221,7 +1222,7 @@ public class JdtEnvironment {
     for (IMemberValuePairBinding valuePair : valuePairs) {
       TypeDescriptor elementType =
           createTypeDescriptor(valuePair.getMethodBinding().getReturnType(), inNullMarkedScope);
-      Literal translatedValue =
+      var translatedValue =
           createAnnotationValue(elementType, valuePair.getValue(), inNullMarkedScope);
       if (translatedValue == null) {
         continue;
@@ -1238,7 +1239,7 @@ public class JdtEnvironment {
    * Remove the null return once we handle all member value types.
    */
   @Nullable
-  private Literal createAnnotationValue(
+  private AnnotationValue createAnnotationValue(
       TypeDescriptor elementType, Object value, boolean inNullMarkedScope) {
     if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
         || TypeDescriptors.isJavaLangString(elementType)) {
@@ -1247,7 +1248,7 @@ public class JdtEnvironment {
       return new TypeLiteral(
           SourcePosition.NONE, createTypeDescriptor((ITypeBinding) value, inNullMarkedScope));
     } else if (elementType.isArray()) {
-      List<Literal> values =
+      List<AnnotationValue> values =
           Arrays.stream((Object[]) value)
               .map(
                   v ->
