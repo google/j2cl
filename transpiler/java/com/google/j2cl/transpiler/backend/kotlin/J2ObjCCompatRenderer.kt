@@ -37,6 +37,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
@@ -321,7 +322,7 @@ internal class J2ObjCCompatRenderer(
         is ArrayTypeDescriptor -> false
         is TypeVariable -> shouldRender(typeDescriptor.upperBoundTypeDescriptor)
         is IntersectionTypeDescriptor -> shouldRender(typeDescriptor.firstType)
-        else -> false
+        is UnionTypeDescriptor -> false
       }
 
   private fun shouldRender(typeDeclaration: TypeDeclaration): Boolean =

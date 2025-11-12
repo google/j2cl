@@ -79,7 +79,8 @@ internal fun TypeDescriptor.contains(
             upperBoundTypeDescriptor.contains(typeVariable, seenTypeVariablesPlusThis) ||
               (lowerBoundTypeDescriptor?.contains(typeVariable, seenTypeVariablesPlusThis) ?: false)
           }
-    else -> false
+    is PrimitiveTypeDescriptor,
+    is UnionTypeDescriptor -> false
   }
 
 internal val TypeDescriptor.isDenotableNonWildcard: Boolean

@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
  */
 @Visitable
 @AutoValue
-public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
+public abstract non-sealed class IntersectionTypeDescriptor extends TypeDescriptor {
 
   public abstract ImmutableList<TypeDescriptor> getIntersectionTypeDescriptors();
 

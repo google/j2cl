@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
@@ -181,7 +182,7 @@ internal fun TypeDescriptor.objCName(useId: Boolean): String =
     is DeclaredTypeDescriptor -> declaredObjCName(useId = useId)
     is TypeVariable -> variableObjCName(useId = useId)
     is IntersectionTypeDescriptor -> intersectionObjCName(useId = useId)
-    else -> ID_OBJC_NAME
+    is UnionTypeDescriptor -> ID_OBJC_NAME
   }
 
 private val PrimitiveTypeDescriptor.primitiveObjCName: String

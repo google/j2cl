@@ -49,7 +49,7 @@ import javax.annotation.Nullable;
  */
 @Visitable
 @AutoValue
-public abstract class UnionTypeDescriptor extends TypeDescriptor {
+public abstract non-sealed class UnionTypeDescriptor extends TypeDescriptor {
 
   public abstract ImmutableList<TypeDescriptor> getUnionTypeDescriptors();
 

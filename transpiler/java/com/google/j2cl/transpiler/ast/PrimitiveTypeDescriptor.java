@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 
 /** A primitive type. */
 @Visitable
-public class PrimitiveTypeDescriptor extends TypeDescriptor {
+public final class PrimitiveTypeDescriptor extends TypeDescriptor {
   private final String name;
   private final String signature;
   private final String boxedClassName;

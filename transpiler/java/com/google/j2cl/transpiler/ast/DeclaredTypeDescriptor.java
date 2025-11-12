@@ -56,7 +56,7 @@ import javax.annotation.Nullable;
 /** A usage-site reference to a declared type, i.e. a class, an interface or an enum. */
 @Visitable
 @AutoValue
-public abstract class DeclaredTypeDescriptor extends TypeDescriptor {
+public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
 
   /** The actual type declaration this descriptor is referencing. */
   public abstract TypeDeclaration getTypeDeclaration();

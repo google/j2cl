@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 /** An array type. */
 @Visitable
 @AutoValue
-public abstract class ArrayTypeDescriptor extends TypeDescriptor {
+public abstract non-sealed class ArrayTypeDescriptor extends TypeDescriptor {
 
   public abstract TypeDescriptor getComponentTypeDescriptor();
 

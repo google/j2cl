@@ -30,7 +30,14 @@ import javax.annotation.Nullable;
 
 /** A usage-site reference to a type. */
 @Visitable
-public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasReadableDescription {
+public abstract sealed class TypeDescriptor
+    implements Comparable<TypeDescriptor>, HasReadableDescription
+    permits PrimitiveTypeDescriptor,
+        DeclaredTypeDescriptor,
+        ArrayTypeDescriptor,
+        TypeVariable,
+        IntersectionTypeDescriptor,
+        UnionTypeDescriptor {
 
   public boolean isJsType() {
     return false;

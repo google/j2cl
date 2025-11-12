@@ -18,12 +18,14 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 
 // TODO(b/407538927): Remove when no longer necessary.
@@ -78,7 +80,8 @@ internal class HiddenFromObjCMapping(
               typeDescriptor.lowerBoundTypeDescriptor?.let { contains(it, seen) }.orIfNull { false }
           }
         }
-      else -> false
+      is UnionTypeDescriptor,
+      is IntersectionTypeDescriptor -> false
     }
 
   companion object {

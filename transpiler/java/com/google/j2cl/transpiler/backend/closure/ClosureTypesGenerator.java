@@ -117,7 +117,6 @@ class ClosureTypesGenerator {
                     getClosureTypes(descriptor.getTypeArgumentDescriptors())),
                 typeDescriptor.isNullable());
       }
-      default -> throw new IllegalArgumentException();
     };
   }
 

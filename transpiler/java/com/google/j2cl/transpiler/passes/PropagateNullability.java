@@ -367,8 +367,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                         it ->
                             getParameterizationsIn(
                                 declarationTypeDescriptor, typeParameter, it, seen));
-
-            default -> throw new AssertionError();
           };
 
       case TypeVariable declarationTypeVariable
@@ -398,8 +396,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       case UnionTypeDescriptor declarationUnionTypeDescriptor ->
           declarationUnionTypeDescriptor.getUnionTypeDescriptors().stream()
               .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor, seen));
-
-      default -> throw new AssertionError();
     };
   }
 

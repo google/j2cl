@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
  * TypeVariable class is a value type. Those properties are set through {@code Supplier}.
  */
 @AutoValue
-public abstract class TypeVariable extends TypeDescriptor implements HasName {
+public abstract non-sealed class TypeVariable extends TypeDescriptor implements HasName {
 
   @Override
   public abstract String getName();

@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CAPTURE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERSECTION_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IN_KEYWORD
@@ -101,7 +102,8 @@ internal data class TypeDescriptorRenderer(
       is PrimitiveTypeDescriptor -> nameRenderer.qualifiedNameSource(typeDescriptor)
       is TypeVariable -> variableSource(typeDescriptor)
       is IntersectionTypeDescriptor -> intersectionSource(typeDescriptor)
-      else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
+      is UnionTypeDescriptor ->
+        throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
     }
 
   /** Returns source for the given list of type bindings. */
