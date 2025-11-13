@@ -30,6 +30,7 @@ import com.google.j2cl.tools.rta.UnusedLines;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,32 +67,61 @@ public class J2clMinifier {
   }
 
   private static class Buffer {
-    private final CharBuffer contentBuffer = new CharBuffer();
+    /**
+     * Committed content that will no longer modified.
+     *
+     * <p>An ArrayList is cheaper to manage (vs. StringBuilder/CharBuffer) while still very fast to
+     * merge to produce the final string.
+     */
+    private final ArrayList<String> committedContent = new ArrayList<>();
+
+    /**
+     * Buffer to keep contents of the current statement that is not committed yet.
+     *
+     * <p>Note the statement tracking is only intended for removal of "goog.require" and
+     * "goog.forwardDeclare" and identifier replacement, which will only appear at individual lines
+     * so we can automatically flush this with new lines.
+     */
+    private final CharBuffer currentStatementBuffer = new CharBuffer();
+
     private int identifierStartIndex = -1;
-    private int lineStartIndex = 0;
 
     void append(char c) {
       if (c == '\n') {
-        trimTrailingWhitespace();
-        lineStartIndex = contentBuffer.length() + 1;
+        flush();
+        committedContent.add("\n");
+      } else {
+        currentStatementBuffer.append(c);
       }
-      contentBuffer.append(c);
     }
 
-    private void trimTrailingWhitespace() {
-      int end = contentBuffer.length();
-      while (end > 0 && contentBuffer.charAt(end - 1) == ' ') {
+    private void flush() {
+      int end = trimTrailingWhitespace();
+      if (end > 0) {
+        addContent(popLastStatement());
+      }
+    }
+
+    private int trimTrailingWhitespace() {
+      int end = currentStatementBuffer.length();
+      while (end > 0 && currentStatementBuffer.charAt(end - 1) == ' ') {
         end--;
       }
-      contentBuffer.setLength(end);
+      currentStatementBuffer.setLength(end);
+      return end;
+    }
+
+    void addContent(String str) {
+      checkState(currentStatementBuffer.length() == 0);
+      committedContent.add(str);
     }
 
     void recordStartOfNewIdentifier() {
-      identifierStartIndex = contentBuffer.length();
+      identifierStartIndex = currentStatementBuffer.length();
     }
 
     View getIdentifier() {
-      return new View(contentBuffer, identifierStartIndex);
+      return new View(currentStatementBuffer, identifierStartIndex);
     }
 
     private static class View {
@@ -107,10 +137,6 @@ public class J2clMinifier {
         return delegate.length() - offset;
       }
 
-      boolean contains(String s) {
-        return delegate.indexOf(s, offset) >= 0;
-      }
-
       char charAt(int index) {
         return delegate.charAt(index + offset);
       }
@@ -122,34 +148,26 @@ public class J2clMinifier {
     }
 
     void replaceIdentifier(String newIdentifier) {
-      contentBuffer.replaceTail(identifierStartIndex, newIdentifier);
+      currentStatementBuffer.replaceTail(identifierStartIndex, newIdentifier);
       identifierStartIndex = -1;
     }
 
     boolean isEndOfStatement() {
-      int length = contentBuffer.length();
-      return length > 0 && contentBuffer.charAt(length - 1) == ';';
+      int length = currentStatementBuffer.length();
+      return length > 0 && currentStatementBuffer.charAt(length - 1) == ';';
     }
 
-    int lastStatementIndexOf(String name) {
-      // Note the statement tracking is only intended for removal of "goog.require" and
-      // "goog.forwardDeclare", which will only appear at individual lines.
-      int index = contentBuffer.indexOf(name, lineStartIndex);
-      return index == -1 ? -1 : index - lineStartIndex;
+    String popLastStatement() {
+      String lastStatement = currentStatementBuffer.toString();
+      currentStatementBuffer.setLength(0);
+      return lastStatement;
     }
 
-    String matchLastStatement(Pattern pattern) {
-      return pattern.match(contentBuffer, lineStartIndex);
-    }
-
-    void replaceStatement(String replacement) {
-      contentBuffer.replaceTail(lineStartIndex, replacement);
-    }
 
     @Override
     public String toString() {
-      trimTrailingWhitespace();
-      return contentBuffer.toString();
+      flush();
+      return String.join("", committedContent);
     }
   }
 
@@ -253,7 +271,7 @@ public class J2clMinifier {
     if (identifier.length() < MIN_JAVA_IDENTIFIER_SIZE) {
       return false;
     }
-    return startsLikeJavaMangledName(identifier) && identifier.contains("__");
+    return startsLikeJavaMangledName(identifier) && containsDoubleUnderscore(identifier);
   }
 
   private static boolean startsLikeJavaMangledName(Buffer.View identifier) {
@@ -270,6 +288,16 @@ public class J2clMinifier {
       return true;
     }
 
+    return false;
+  }
+
+  private static boolean containsDoubleUnderscore(Buffer.View identifier) {
+    // Looks cryptic but it is essentially searching from end for two consecutive underscores.
+    for (int end = identifier.length() - 1; end > 2; end--) {
+      if (identifier.charAt(end) == '_' && identifier.charAt(--end) == '_') {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -316,7 +344,10 @@ public class J2clMinifier {
       writeChar(buffer, c);
     }
     if (buffer.isEndOfStatement()) {
-      maybeReplaceStatement(buffer);
+      String statement = maybeReplaceStatement(buffer.popLastStatement());
+      if (!statement.isEmpty()) {
+        buffer.addContent(statement);
+      }
     }
   }
 
@@ -326,25 +357,22 @@ public class J2clMinifier {
   private static final Pattern GOOG_REQUIRE =
       Pattern.compile("goog.require\\(" + MODULE_NAME + "\\);");
 
-  private static void maybeReplaceStatement(Buffer buffer) {
-    int index = buffer.lastStatementIndexOf("goog.");
-    if (index == -1) {
-      return;
-    }
-
+  private static String maybeReplaceStatement(String statement) {
+    int index = statement.indexOf("goog.");
     if (index == 0) {
       // Unassigned goog.require is only useful for compiler and bundling.
-      String match = buffer.matchLastStatement(GOOG_REQUIRE);
+      String match = GOOG_REQUIRE.match(statement);
       if (match != null) {
-        buffer.replaceStatement("");
+        return "";
       }
-    } else {
+    } else if (index > 0) {
       // goog.forwardDeclare is only useful for compiler except the variable declaration.
-      String match = buffer.matchLastStatement(GOOG_FORWARD_DECLARE);
+      String match = GOOG_FORWARD_DECLARE.match(statement);
       if (match != null) {
-        buffer.replaceStatement(match + ";");
+        return match + ";";
       }
     }
+    return statement;
   }
 
   private static void writeChar(Buffer buffer, char c) {

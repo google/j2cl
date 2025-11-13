@@ -51,22 +51,6 @@ final class Platform {
       setLength(start + string.length());
     }
 
-    int indexOf(String subString, int start) {
-      for (int i = start; i <= length - subString.length(); i++) {
-        boolean match = true;
-        for (int j = 0; j < subString.length(); j++) {
-          if (data[i + j] != subString.charAt(j)) {
-            match = false;
-            break;
-          }
-        }
-        if (match) {
-          return i;
-        }
-      }
-      return -1;
-    }
-
     String substring(int start) {
       return new String(data, start, length - start);
     }
@@ -92,8 +76,8 @@ final class Platform {
 
     @JsOverlay
     @Nullable
-    public final String match(CharBuffer input, int startIndex) {
-      MatchResult result = this.exec(input.substring(startIndex));
+    public final String match(String input) {
+      MatchResult result = this.exec(input);
       if (result == null) {
         return null;
       }

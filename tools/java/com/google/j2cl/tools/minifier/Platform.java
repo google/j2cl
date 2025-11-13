@@ -45,10 +45,6 @@ final class Platform {
       delegate.replace(start, delegate.length(), s);
     }
 
-    int indexOf(String s, int start) {
-      return delegate.indexOf(s, start);
-    }
-
     String substring(int start) {
       return delegate.substring(start);
     }
@@ -65,8 +61,8 @@ final class Platform {
     }
 
     @Nullable
-    public String match(CharBuffer input, int startIndex) {
-      var matcher = delegate.matcher(input.delegate).region(startIndex, input.length());
+    public String match(String input) {
+      var matcher = delegate.matcher(input);
       if (!matcher.matches()) {
         return null;
       }
