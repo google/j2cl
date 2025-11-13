@@ -165,6 +165,22 @@ final class J2ktSwiftInteropTest: XCTestCase {
     let _ = values.get(index: 1)
   }
 
+  func testEnumComparison() {
+    XCTAssertTrue(J2ktiosinteropEnumNames_get_ONE() === J2ktiosinteropEnumNames_get_ONE())
+    XCTAssertTrue(J2ktiosinteropEnumNames_get_ONE() !== J2ktiosinteropEnumNames_get_TWO())
+
+    XCTAssertTrue(J2ktiosinteropEnumNames_get_ONE() == J2ktiosinteropEnumNames_get_ONE())
+    XCTAssertTrue(J2ktiosinteropEnumNames_get_ONE() != J2ktiosinteropEnumNames_get_TWO())
+
+    // Kotlin Enum is not Comparable in Objective-C.
+    // XCTAssertEqual(
+    //   J2ktiosinteropEnumNames_get_ONE().compareTo(withId: J2ktiosinteropEnumNames_get_ONE()), 0)
+    // XCTAssertEqual(
+    //   J2ktiosinteropEnumNames_get_ONE().compareTo(withId: J2ktiosinteropEnumNames_get_TWO()), -1)
+    // XCTAssertEqual(
+    //   J2ktiosinteropEnumNames_get_TWO().compareTo(withId: J2ktiosinteropEnumNames_get_ONE()), 1)
+  }
+
   func testNativeDefaultName() {
     let obj = J2ktiosinteropNativeDefaultName()
     let _ = obj.nativeInstanceMethod()

@@ -215,6 +215,21 @@
   e = values[1];
 }
 
+- (void)testEnumComparison {
+  XCTAssertTrue(J2ktiosinteropEnumNames_get_ONE() == J2ktiosinteropEnumNames_get_ONE());
+  XCTAssertTrue(J2ktiosinteropEnumNames_get_ONE() != J2ktiosinteropEnumNames_get_TWO());
+
+  XCTAssertTrue([J2ktiosinteropEnumNames_get_ONE() isEqual:J2ktiosinteropEnumNames_get_ONE()]);
+  XCTAssertFalse([J2ktiosinteropEnumNames_get_ONE() isEqual:J2ktiosinteropEnumNames_get_TWO()]);
+
+  XCTAssertEqual(
+      [J2ktiosinteropEnumNames_get_ONE() compareToWithId:J2ktiosinteropEnumNames_get_ONE()], 0);
+  XCTAssertEqual(
+      [J2ktiosinteropEnumNames_get_ONE() compareToWithId:J2ktiosinteropEnumNames_get_TWO()], -1);
+  XCTAssertEqual(
+      [J2ktiosinteropEnumNames_get_TWO() compareToWithId:J2ktiosinteropEnumNames_get_ONE()], 1);
+}
+
 - (void)testNativeDefaultName {
   J2ktiosinteropNativeDefaultName *obj = [[J2ktiosinteropNativeDefaultName alloc] init];
   obj = create_J2ktiosinteropNativeDefaultName_init();
