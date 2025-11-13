@@ -803,6 +803,7 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
+ (field $m_apply__methodreferences_MethodReferences__java_lang_Object (ref $function.m_apply__methodreferences_MethodReferences__java_lang_Object))
  ))
 )
 
@@ -1931,6 +1932,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35)
+  (ref.func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35)
  )
 )
 (global $methodreferences.MethodReferences.Function.vtable@$methodreferences.MethodReferences.$LambdaImplementor$35 (ref $methodreferences.MethodReferences.Function.vtable)
@@ -2328,7 +2330,7 @@
 )
 (elem declare func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences)
 
-;;; void MethodReferences.acceptFunctionSuperVariance(Function<? super U, V> f)
+;;; void MethodReferences.acceptFunctionSuperVariance(Function<?, V> f)
 (func $m_acceptFunctionSuperVariance__methodreferences_MethodReferences_Function__void@methodreferences.MethodReferences
  (param $f (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:91:11
@@ -6024,7 +6026,7 @@
 
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$34 [methods]
 
-;;; <anonymous> implements Producer<?> <anonymous> implements Producer<?>.$create()
+;;; <anonymous> implements Producer<Object> <anonymous> implements Producer<Object>.$create()
 (func $$create__@methodreferences.MethodReferences.$LambdaImplementor$34
  (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$34))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:162:64
@@ -6041,7 +6043,7 @@
  )
 )
 
-;;; void <anonymous> implements Producer<?>.$ctor()
+;;; void <anonymous> implements Producer<Object>.$ctor()
 (func $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$34@methodreferences.MethodReferences.$LambdaImplementor$34
  (param $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$34))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:162:64
@@ -6051,7 +6053,7 @@
  )
 )
 
-;;; ? <anonymous> implements Producer<?>.produce()
+;;; Object <anonymous> implements Producer<Object>.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$34
  (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
@@ -6066,7 +6068,7 @@
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$34)
 
-;;; void <anonymous> implements Producer<?>.$clinit()
+;;; void <anonymous> implements Producer<Object>.$clinit()
 (func $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$34
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:162:64
  (block
@@ -6084,7 +6086,7 @@
  )
 )
 
-;;; Class<T> <anonymous> implements Producer<?>.$getClassMetadata()
+;;; Class<T> <anonymous> implements Producer<Object>.$getClassMetadata()
 (func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$34
  (result (ref null $java.lang.Class))
  (block
@@ -6100,7 +6102,7 @@
 
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$35 [methods]
 
-;;; <anonymous> implements Function<? super MethodReferences<Object>, Object> <anonymous> implements Function<? super MethodReferences<Object>, Object>.$create()
+;;; <anonymous> implements Function<MethodReferences<Object>, Object> <anonymous> implements Function<MethodReferences<Object>, Object>.$create()
 (func $$create__@methodreferences.MethodReferences.$LambdaImplementor$35
  (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$35))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
@@ -6117,7 +6119,7 @@
  )
 )
 
-;;; void <anonymous> implements Function<? super MethodReferences<Object>, Object>.$ctor()
+;;; void <anonymous> implements Function<MethodReferences<Object>, Object>.$ctor()
 (func $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$35@methodreferences.MethodReferences.$LambdaImplementor$35
  (param $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$35))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
@@ -6127,26 +6129,39 @@
  )
 )
 
-;;; Object <anonymous> implements Function<? super MethodReferences<Object>, Object>.apply(? super MethodReferences<Object> arg0)
+;;; Object <anonymous> implements Function<MethodReferences<Object>, Object>.apply(MethodReferences<Object> arg0)
+(func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35
+ (type $function.m_apply__methodreferences_MethodReferences__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $methodreferences.MethodReferences))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
+ (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$35))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$35) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
+  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $arg0))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))
+ )
+)
+(elem declare func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35)
+
+;;; Object <anonymous> implements Function<MethodReferences<Object>, Object>.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
- (local $arg0_1 (ref null $methodreferences.MethodReferences))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$35))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$35) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
-  (local.set $arg0_1 (ref.cast (ref null $methodreferences.MethodReferences) (local.get $arg0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
-  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref $function.m_apply__methodreferences_MethodReferences__java_lang_Object (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $arg0))(struct.get $methodreferences.MethodReferences.$LambdaImplementor$35.vtable $m_apply__methodreferences_MethodReferences__java_lang_Object (struct.get $methodreferences.MethodReferences.$LambdaImplementor$35 $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35)
 
-;;; void <anonymous> implements Function<? super MethodReferences<Object>, Object>.$clinit()
+;;; void <anonymous> implements Function<MethodReferences<Object>, Object>.$clinit()
 (func $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$35
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
  (block
@@ -6164,7 +6179,7 @@
  )
 )
 
-;;; Class<T> <anonymous> implements Function<? super MethodReferences<Object>, Object>.$getClassMetadata()
+;;; Class<T> <anonymous> implements Function<MethodReferences<Object>, Object>.$getClassMetadata()
 (func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.$LambdaImplementor$35
  (result (ref null $java.lang.Class))
  (block

@@ -374,10 +374,10 @@
 
 ;;; Code for boundedtypesupercall.Main.Bar.1 [methods]
 
-;;; <anonymous> extends Foo<T><T> <anonymous> extends Foo<T>.$create(Bar<T> $outer_this, T $_0)
+;;; <anonymous> extends Foo<T><T> <anonymous> extends Foo<T>.$create(Bar<T> $outer_this, T foo)
 (func $$create__boundedtypesupercall_Main_Bar__java_lang_Comparable@boundedtypesupercall.Main.Bar.1
  (param $$outer_this (ref null $boundedtypesupercall.Main.Bar))
- (param $$_0 (ref null $java.lang.Object))
+ (param $foo (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Bar.1))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
  (local $$instance (ref null $boundedtypesupercall.Main.Bar.1))
@@ -387,23 +387,23 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
   (local.set $$instance (struct.new $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $boundedtypesupercall.Main.Bar)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
-  (call $$ctor__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$p_boundedtypesupercall_Main_Bar_1@boundedtypesupercall.Main.Bar.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
+  (call $$ctor__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$p_boundedtypesupercall_Main_Bar_1@boundedtypesupercall.Main.Bar.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $foo))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
   (return (local.get $$instance))
  )
 )
 
-;;; void <anonymous> extends Foo<T>.$ctor(Bar<T> $outer_this, T $_0)
+;;; void <anonymous> extends Foo<T>.$ctor(Bar<T> $outer_this, T foo)
 (func $$ctor__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$p_boundedtypesupercall_Main_Bar_1@boundedtypesupercall.Main.Bar.1
  (param $this (ref null $boundedtypesupercall.Main.Bar.1))
  (param $$outer_this (ref null $boundedtypesupercall.Main.Bar))
- (param $$_0 (ref null $java.lang.Object))
+ (param $foo (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:13
   (struct.set $boundedtypesupercall.Main.Bar.1 $$outer_this@boundedtypesupercall.Main.Bar.1 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
-  (call $$ctor__java_lang_Object__void_$p_boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Foo (ref.as_non_null (local.get $this))(local.get $$_0))
+  (call $$ctor__java_lang_Object__void_$p_boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Foo (ref.as_non_null (local.get $this))(local.get $foo))
  )
 )
 
@@ -421,18 +421,18 @@
 
 ;;; void <anonymous> extends Foo<T>.$clinit()
 (func $$clinit__void_<once>_@boundedtypesupercall.Main.Bar.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:13
   (if (global.get $$class-initialized@boundedtypesupercall.Main.Bar.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:13
   (global.set $$class-initialized@boundedtypesupercall.Main.Bar.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:40
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/boundedtypesupercall/readable-j2wasm.js/boundedtypesupercall/Main.java:32:13
   (call $$clinit__void_<once>_@boundedtypesupercall.Main.Foo )
  )
 )

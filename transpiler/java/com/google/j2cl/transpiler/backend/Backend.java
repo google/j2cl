@@ -875,6 +875,9 @@ public enum Backend {
   }
 
   public Frontend getDefaultFrontend() {
-    return Frontend.JDT;
+    return switch (this) {
+      case WASM, WASM_MODULAR -> Frontend.JAVAC;
+      default -> Frontend.JDT;
+    };
   }
 }

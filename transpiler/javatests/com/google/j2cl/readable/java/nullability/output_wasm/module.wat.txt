@@ -3822,7 +3822,7 @@
  )
 )
 
-;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedDefaultNullability<? extends String> nonNullable)
+;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedDefaultNullability<?> nonNullable)
 (func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedDefaultNullability__void@nullability.Nullability
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedDefaultNullability))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:215:14
@@ -3838,7 +3838,7 @@
  )
 )
 
-;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedNullable<? extends String> nonNullable)
+;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedNullable<?> nonNullable)
 (func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNullable__void@nullability.Nullability
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedNullable))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:222:14
@@ -3854,7 +3854,7 @@
  )
 )
 
-;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedNonNullable<? extends String> nonNullable)
+;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedNonNullable<?> nonNullable)
 (func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNonNullable__void@nullability.Nullability
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedNonNullable))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:228:14
@@ -4324,23 +4324,7 @@
 )
 (elem declare func $m_thenComparing__java_util_Comparator__java_util_Comparator@nullability.Nullability.StringComparator)
 
-;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0)
-(func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
- (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
-  (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
- )
-)
-(elem declare func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.StringComparator)
-
-;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
+;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ?> arg0, Comparator<?> arg1)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@nullability.Nullability.StringComparator
  (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator)
  (param $this.untyped (ref $java.lang.Object))
@@ -4357,9 +4341,9 @@
 )
 (elem declare func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@nullability.Nullability.StringComparator)
 
-;;; Comparator<String> StringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
-(func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator)
+;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ?> arg0)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.StringComparator
+ (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -4368,10 +4352,10 @@
  (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
-  (return (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
+  (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
-(elem declare func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.StringComparator)
+(elem declare func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.StringComparator)
 
 ;;; Comparator<String> StringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
 (func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.StringComparator
@@ -4404,6 +4388,22 @@
  )
 )
 (elem declare func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.StringComparator)
+
+;;; Comparator<String> StringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
+(func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.StringComparator
+ (type $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
+ (local $this (ref null $nullability.Nullability.StringComparator))
+ (local.set $this (ref.cast (ref $nullability.Nullability.StringComparator) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:91:22
+  (return (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
+ )
+)
+(elem declare func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.StringComparator)
 
 ;;; void StringComparator.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.StringComparator
@@ -4546,23 +4546,7 @@
 )
 (elem declare func $m_thenComparing__java_util_Comparator__java_util_Comparator@nullability.Nullability.NullableStringComparator)
 
-;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0)
-(func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
- (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
-  (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
- )
-)
-(elem declare func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.NullableStringComparator)
-
-;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
+;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ?> arg0, Comparator<?> arg1)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@nullability.Nullability.NullableStringComparator
  (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator)
  (param $this.untyped (ref $java.lang.Object))
@@ -4579,9 +4563,9 @@
 )
 (elem declare func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@nullability.Nullability.NullableStringComparator)
 
-;;; Comparator<String> NullableStringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
-(func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator)
+;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ?> arg0)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -4590,10 +4574,10 @@
  (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
-  (return (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
+  (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
-(elem declare func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
+(elem declare func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.NullableStringComparator)
 
 ;;; Comparator<String> NullableStringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
 (func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
@@ -4626,6 +4610,22 @@
  )
 )
 (elem declare func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
+
+;;; Comparator<String> NullableStringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
+(func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (type $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
+ (local $this (ref null $nullability.Nullability.NullableStringComparator))
+ (local.set $this (ref.cast (ref $nullability.Nullability.NullableStringComparator) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:99:22
+  (return (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
+ )
+)
+(elem declare func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
 
 ;;; void NullableStringComparator.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.NullableStringComparator
@@ -6112,7 +6112,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardExtendsDefaultNullabilityObject(List<? extends Object> l)
+;;; void DefaultNotNullable.testListOfWildcardExtendsDefaultNullabilityObject(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityObject__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:326:14
@@ -6122,7 +6122,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardExtendsNullableObject(List<? extends Object> l)
+;;; void DefaultNotNullable.testListOfWildcardExtendsNullableObject(List<?> l)
 (func $m_testListOfWildcardExtendsNullableObject__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:328:14
@@ -6132,7 +6132,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardExtendsNonNullObject(List<? extends Object> l)
+;;; void DefaultNotNullable.testListOfWildcardExtendsNonNullObject(List<?> l)
 (func $m_testListOfWildcardExtendsNonNullObject__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:330:14
@@ -6142,7 +6142,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardExtendsDefaultNullabilityString(List<? extends String> l)
+;;; void DefaultNotNullable.testListOfWildcardExtendsDefaultNullabilityString(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityString__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:332:14
@@ -6152,7 +6152,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardExtendsNullableString(List<? extends String> l)
+;;; void DefaultNotNullable.testListOfWildcardExtendsNullableString(List<?> l)
 (func $m_testListOfWildcardExtendsNullableString__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:334:14
@@ -6162,7 +6162,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardExtendsNonNullString(List<? extends String> l)
+;;; void DefaultNotNullable.testListOfWildcardExtendsNonNullString(List<?> l)
 (func $m_testListOfWildcardExtendsNonNullString__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:336:14
@@ -6172,7 +6172,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardExtendsDefaultNullabilityVariable(List<? extends T> l)
+;;; void DefaultNotNullable.testListOfWildcardExtendsDefaultNullabilityVariable(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityVariable__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:338:18
@@ -6182,7 +6182,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardExtendsNullableVariable(List<? extends T> l)
+;;; void DefaultNotNullable.testListOfWildcardExtendsNullableVariable(List<?> l)
 (func $m_testListOfWildcardExtendsNullableVariable__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:340:18
@@ -6192,7 +6192,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardSuperDefaultNullabilityObject(List<? super Object> l)
+;;; void DefaultNotNullable.testListOfWildcardSuperDefaultNullabilityObject(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityObject__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:342:14
@@ -6202,7 +6202,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardSuperNullableObject(List<? super Object> l)
+;;; void DefaultNotNullable.testListOfWildcardSuperNullableObject(List<?> l)
 (func $m_testListOfWildcardSuperNullableObject__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:344:14
@@ -6212,7 +6212,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardSuperNonNullObject(List<? super Object> l)
+;;; void DefaultNotNullable.testListOfWildcardSuperNonNullObject(List<?> l)
 (func $m_testListOfWildcardSuperNonNullObject__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:346:14
@@ -6222,7 +6222,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardSuperDefaultNullabilityString(List<? super String> l)
+;;; void DefaultNotNullable.testListOfWildcardSuperDefaultNullabilityString(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityString__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:348:14
@@ -6232,7 +6232,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardSuperNullableString(List<? super String> l)
+;;; void DefaultNotNullable.testListOfWildcardSuperNullableString(List<?> l)
 (func $m_testListOfWildcardSuperNullableString__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:350:14
@@ -6242,7 +6242,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardSuperNonNullString(List<? super String> l)
+;;; void DefaultNotNullable.testListOfWildcardSuperNonNullString(List<?> l)
 (func $m_testListOfWildcardSuperNonNullString__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:352:14
@@ -6252,7 +6252,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardSuperDefaultNullabilityVariable(List<? super T> l)
+;;; void DefaultNotNullable.testListOfWildcardSuperDefaultNullabilityVariable(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityVariable__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:354:18
@@ -6262,7 +6262,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testListOfWildcardSuperNullableVariable(List<? super T> l)
+;;; void DefaultNotNullable.testListOfWildcardSuperNullableVariable(List<?> l)
 (func $m_testListOfWildcardSuperNullableVariable__java_util_List__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:356:18
@@ -6272,7 +6272,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testCaptureNullabilityCast(List<? super T> l, T t)
+;;; void DefaultNotNullable.testCaptureNullabilityCast(List<?> l, T t)
 (func $m_testCaptureNullabilityCast__java_util_List__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $l (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
@@ -6317,7 +6317,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testParametrizedWildcardNullabilityCast(Consumer<? super String> c, String string)
+;;; void DefaultNotNullable.testParametrizedWildcardNullabilityCast(Consumer<?> c, String string)
 (func $m_testParametrizedWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $c (ref null $java.lang.Object))
  (param $string (ref null $java.lang.String))
@@ -6333,7 +6333,7 @@
  )
 )
 
-;;; void DefaultNotNullable.testGenericWildcardNullabilityCast(Consumer<? super T> c, T element)
+;;; void DefaultNotNullable.testGenericWildcardNullabilityCast(Consumer<?> c, T element)
 (func $m_testGenericWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $c (ref null $java.lang.Object))
  (param $element (ref null $java.lang.Object))
@@ -7937,7 +7937,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardExtendsDefaultNullabilityObject(List<? extends Object> l)
+;;; void DefaultNullable.testListOfWildcardExtendsDefaultNullabilityObject(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:299:14
@@ -7947,7 +7947,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardExtendsNullableObject(List<? extends Object> l)
+;;; void DefaultNullable.testListOfWildcardExtendsNullableObject(List<?> l)
 (func $m_testListOfWildcardExtendsNullableObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:301:14
@@ -7957,7 +7957,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardExtendsNonNullObject(List<? extends Object> l)
+;;; void DefaultNullable.testListOfWildcardExtendsNonNullObject(List<?> l)
 (func $m_testListOfWildcardExtendsNonNullObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:303:14
@@ -7967,7 +7967,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardExtendsDefaultNullabilityString(List<? extends String> l)
+;;; void DefaultNullable.testListOfWildcardExtendsDefaultNullabilityString(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityString__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:305:14
@@ -7977,7 +7977,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardExtendsNullableString(List<? extends String> l)
+;;; void DefaultNullable.testListOfWildcardExtendsNullableString(List<?> l)
 (func $m_testListOfWildcardExtendsNullableString__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:307:14
@@ -7987,7 +7987,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardExtendsNonNullString(List<? extends String> l)
+;;; void DefaultNullable.testListOfWildcardExtendsNonNullString(List<?> l)
 (func $m_testListOfWildcardExtendsNonNullString__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:309:14
@@ -7997,7 +7997,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardExtendsDefaultNullabilityVariable(List<? extends T> l)
+;;; void DefaultNullable.testListOfWildcardExtendsDefaultNullabilityVariable(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityVariable__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:311:18
@@ -8007,7 +8007,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardExtendsNullableVariable(List<? extends T> l)
+;;; void DefaultNullable.testListOfWildcardExtendsNullableVariable(List<?> l)
 (func $m_testListOfWildcardExtendsNullableVariable__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:313:18
@@ -8017,7 +8017,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardSuperDefaultNullabilityObject(List<? super Object> l)
+;;; void DefaultNullable.testListOfWildcardSuperDefaultNullabilityObject(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:315:14
@@ -8027,7 +8027,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardSuperNullableObject(List<? super Object> l)
+;;; void DefaultNullable.testListOfWildcardSuperNullableObject(List<?> l)
 (func $m_testListOfWildcardSuperNullableObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:317:14
@@ -8037,7 +8037,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardSuperNonNullObject(List<? super Object> l)
+;;; void DefaultNullable.testListOfWildcardSuperNonNullObject(List<?> l)
 (func $m_testListOfWildcardSuperNonNullObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:319:14
@@ -8047,7 +8047,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardSuperDefaultNullabilityString(List<? super String> l)
+;;; void DefaultNullable.testListOfWildcardSuperDefaultNullabilityString(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityString__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:321:14
@@ -8057,7 +8057,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardSuperNullableString(List<? super String> l)
+;;; void DefaultNullable.testListOfWildcardSuperNullableString(List<?> l)
 (func $m_testListOfWildcardSuperNullableString__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:323:14
@@ -8067,7 +8067,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardSuperNonNullString(List<? super String> l)
+;;; void DefaultNullable.testListOfWildcardSuperNonNullString(List<?> l)
 (func $m_testListOfWildcardSuperNonNullString__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:325:14
@@ -8077,7 +8077,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardSuperDefaultNullabilityVariable(List<? super T> l)
+;;; void DefaultNullable.testListOfWildcardSuperDefaultNullabilityVariable(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityVariable__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:327:18
@@ -8087,7 +8087,7 @@
  )
 )
 
-;;; void DefaultNullable.testListOfWildcardSuperNullableVariable(List<? super T> l)
+;;; void DefaultNullable.testListOfWildcardSuperNullableVariable(List<?> l)
 (func $m_testListOfWildcardSuperNullableVariable__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:329:18
@@ -9482,7 +9482,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardExtendsDefaultNullabilityObject(List<? extends Object> l)
+;;; void ExplicitNotNullable.testListOfWildcardExtendsDefaultNullabilityObject(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityObject__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:319:14
@@ -9492,7 +9492,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardExtendsNullableObject(List<? extends Object> l)
+;;; void ExplicitNotNullable.testListOfWildcardExtendsNullableObject(List<?> l)
 (func $m_testListOfWildcardExtendsNullableObject__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:321:14
@@ -9502,7 +9502,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardExtendsNonNullObject(List<? extends Object> l)
+;;; void ExplicitNotNullable.testListOfWildcardExtendsNonNullObject(List<?> l)
 (func $m_testListOfWildcardExtendsNonNullObject__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:323:14
@@ -9512,7 +9512,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardExtendsDefaultNullabilityString(List<? extends String> l)
+;;; void ExplicitNotNullable.testListOfWildcardExtendsDefaultNullabilityString(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityString__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:325:14
@@ -9522,7 +9522,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardExtendsNullableString(List<? extends String> l)
+;;; void ExplicitNotNullable.testListOfWildcardExtendsNullableString(List<?> l)
 (func $m_testListOfWildcardExtendsNullableString__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:327:14
@@ -9532,7 +9532,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardExtendsNonNullString(List<? extends String> l)
+;;; void ExplicitNotNullable.testListOfWildcardExtendsNonNullString(List<?> l)
 (func $m_testListOfWildcardExtendsNonNullString__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:329:14
@@ -9542,7 +9542,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardExtendsDefaultNullabilityVariable(List<? extends T> l)
+;;; void ExplicitNotNullable.testListOfWildcardExtendsDefaultNullabilityVariable(List<?> l)
 (func $m_testListOfWildcardExtendsDefaultNullabilityVariable__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:331:18
@@ -9552,7 +9552,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardExtendsNullableVariable(List<? extends T> l)
+;;; void ExplicitNotNullable.testListOfWildcardExtendsNullableVariable(List<?> l)
 (func $m_testListOfWildcardExtendsNullableVariable__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:333:18
@@ -9562,7 +9562,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardSuperDefaultNullabilityObject(List<? super Object> l)
+;;; void ExplicitNotNullable.testListOfWildcardSuperDefaultNullabilityObject(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityObject__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:335:14
@@ -9572,7 +9572,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardSuperNullableObject(List<? super Object> l)
+;;; void ExplicitNotNullable.testListOfWildcardSuperNullableObject(List<?> l)
 (func $m_testListOfWildcardSuperNullableObject__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:337:14
@@ -9582,7 +9582,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardSuperNonNullObject(List<? super Object> l)
+;;; void ExplicitNotNullable.testListOfWildcardSuperNonNullObject(List<?> l)
 (func $m_testListOfWildcardSuperNonNullObject__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:339:14
@@ -9592,7 +9592,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardSuperDefaultNullabilityString(List<? super String> l)
+;;; void ExplicitNotNullable.testListOfWildcardSuperDefaultNullabilityString(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityString__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:341:14
@@ -9602,7 +9602,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardSuperNullableString(List<? super String> l)
+;;; void ExplicitNotNullable.testListOfWildcardSuperNullableString(List<?> l)
 (func $m_testListOfWildcardSuperNullableString__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:343:14
@@ -9612,7 +9612,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardSuperNonNullString(List<? super String> l)
+;;; void ExplicitNotNullable.testListOfWildcardSuperNonNullString(List<?> l)
 (func $m_testListOfWildcardSuperNonNullString__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:345:14
@@ -9622,7 +9622,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardSuperDefaultNullabilityVariable(List<? super T> l)
+;;; void ExplicitNotNullable.testListOfWildcardSuperDefaultNullabilityVariable(List<?> l)
 (func $m_testListOfWildcardSuperDefaultNullabilityVariable__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:347:18
@@ -9632,7 +9632,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.testListOfWildcardSuperNullableVariable(List<? super T> l)
+;;; void ExplicitNotNullable.testListOfWildcardSuperNullableVariable(List<?> l)
 (func $m_testListOfWildcardSuperNullableVariable__java_util_List__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $l (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:349:18
@@ -9676,7 +9676,7 @@
  )
 )
 
-;;; void ExplicitNotNullable.unboundedWildCard(Consumer<?> c, Consumer<? extends Object> nc)
+;;; void ExplicitNotNullable.unboundedWildCard(Consumer<?> c, Consumer<?> nc)
 (func $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable
  (type $function.m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
@@ -9768,7 +9768,7 @@
  )
 )
 
-;;; String ExplicitNotNullable.testParametrizedMethod(Function<? super String, ? extends String> f, String string)
+;;; String ExplicitNotNullable.testParametrizedMethod(Function<?, ?> f, String string)
 (func $m_testParametrizedMethod__nullability_explicitnotnullable_ExplicitNotNullable_Function__java_lang_String__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable
  (param $f (ref null $java.lang.Object))
  (param $string (ref null $java.lang.String))
@@ -11305,9 +11305,9 @@
 
 ;;; Code for nullability.Nullability.WithNullableParameterInConstructor.1 [methods]
 
-;;; <anonymous> extends WithNullableParameterInConstructor <anonymous> extends WithNullableParameterInConstructor.$create(String $_0)
+;;; <anonymous> extends WithNullableParameterInConstructor <anonymous> extends WithNullableParameterInConstructor.$create(String s)
 (func $$create__java_lang_String@nullability.Nullability.WithNullableParameterInConstructor.1
- (param $$_0 (ref null $java.lang.String))
+ (param $s (ref null $java.lang.String))
  (result (ref null $nullability.Nullability.WithNullableParameterInConstructor.1))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
  (local $$instance (ref null $nullability.Nullability.WithNullableParameterInConstructor.1))
@@ -11317,37 +11317,37 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
   (local.set $$instance (struct.new $nullability.Nullability.WithNullableParameterInConstructor.1 (global.get $nullability.Nullability.WithNullableParameterInConstructor.1.vtable) (global.get $itable.empty) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
-  (call $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor_1@nullability.Nullability.WithNullableParameterInConstructor.1 (ref.as_non_null (local.get $$instance))(local.get $$_0))
+  (call $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor_1@nullability.Nullability.WithNullableParameterInConstructor.1 (ref.as_non_null (local.get $$instance))(local.get $s))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
   (return (local.get $$instance))
  )
 )
 
-;;; void <anonymous> extends WithNullableParameterInConstructor.$ctor(String $_0)
+;;; void <anonymous> extends WithNullableParameterInConstructor.$ctor(String s)
 (func $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor_1@nullability.Nullability.WithNullableParameterInConstructor.1
  (param $this (ref null $nullability.Nullability.WithNullableParameterInConstructor.1))
- (param $$_0 (ref null $java.lang.String))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
-  (call $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor@nullability.Nullability.WithNullableParameterInConstructor (ref.as_non_null (local.get $this))(local.get $$_0))
+  (call $$ctor__java_lang_String__void_$p_nullability_Nullability_WithNullableParameterInConstructor@nullability.Nullability.WithNullableParameterInConstructor (ref.as_non_null (local.get $this))(local.get $s))
  )
 )
 
 ;;; void <anonymous> extends WithNullableParameterInConstructor.$clinit()
 (func $$clinit__void_<once>_@nullability.Nullability.WithNullableParameterInConstructor.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:14
   (if (global.get $$class-initialized@nullability.Nullability.WithNullableParameterInConstructor.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:14
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:14
   (global.set $$class-initialized@nullability.Nullability.WithNullableParameterInConstructor.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:59
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:271:14
   (call $$clinit__void_<once>_@nullability.Nullability.WithNullableParameterInConstructor )
  )
 )
@@ -12211,7 +12211,7 @@
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
   (struct.set $nullability.explicitnotnullable.OuterClass.1 $$outer_this@nullability.explicitnotnullable.OuterClass.1 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $this))(local.get $$outer_this))
@@ -12220,18 +12220,18 @@
 
 ;;; void <anonymous> extends InnerClass<E, E>.$clinit()
 (func $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
   (if (global.get $$class-initialized@nullability.explicitnotnullable.OuterClass.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
   (global.set $$class-initialized@nullability.explicitnotnullable.OuterClass.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.InnerClass )
  )
 )
@@ -12289,7 +12289,7 @@
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
   (struct.set $nullability.explicitnotnullable.OuterClass.2 $$outer_this@nullability.explicitnotnullable.OuterClass.2 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $this))(local.get $$outer_this))
@@ -12298,18 +12298,18 @@
 
 ;;; void <anonymous> extends InnerClass<String, E>.$clinit()
 (func $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.2
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
   (if (global.get $$class-initialized@nullability.explicitnotnullable.OuterClass.2)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
   (global.set $$class-initialized@nullability.explicitnotnullable.OuterClass.2 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.InnerClass )
  )
 )

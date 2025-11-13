@@ -1431,7 +1431,7 @@
  (local.set $this (ref.cast (ref $innerclassinitorder.InnerClassInitOrder) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:4
-  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.2 (local.get $this)))
+  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.2 (local.get $this)(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:313:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
@@ -1567,7 +1567,7 @@
  (local.set $this (ref.cast (ref $innerclassinitorder.InnerClassInitOrder) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:4
-  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.4 (local.get $this)))
+  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.4 (local.get $this)(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:347:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
@@ -1742,7 +1742,7 @@
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:10
   (struct.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $$outer_this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
@@ -1768,18 +1768,18 @@
 
 ;;; void <anonymous> extends Object.$clinit()
 (func $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:10
   (if (global.get $$class-initialized@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:10
   (global.set $$class-initialized@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:31:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1837,7 +1837,7 @@
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:10
   (struct.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $$outer_this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
@@ -1863,18 +1863,18 @@
 
 ;;; void <anonymous> extends Object.$clinit()
 (func $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:10
   (if (global.get $$class-initialized@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:10
   (global.set $$class-initialized@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:48:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2912,10 +2912,10 @@
 
 ;;; Code for innerclassinitorder.InnerClassInitOrder.1 [methods]
 
-;;; <anonymous> extends AddNumber <anonymous> extends AddNumber.$create(InnerClassInitOrder $outer_this, int $_0)
+;;; <anonymous> extends AddNumber <anonymous> extends AddNumber.$create(InnerClassInitOrder $outer_this, int i)
 (func $$create__innerclassinitorder_InnerClassInitOrder__int@innerclassinitorder.InnerClassInitOrder.1
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
- (param $$_0 i32)
+ (param $i i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.1))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder.1))
@@ -2925,23 +2925,23 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
   (local.set $$instance (struct.new $innerclassinitorder.InnerClassInitOrder.1 (global.get $innerclassinitorder.InnerClassInitOrder.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder__int__void_$p_innerclassinitorder_InnerClassInitOrder_1@innerclassinitorder.InnerClassInitOrder.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder__int__void_$p_innerclassinitorder_InnerClassInitOrder_1@innerclassinitorder.InnerClassInitOrder.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $i))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
   (return (local.get $$instance))
  )
 )
 
-;;; void <anonymous> extends AddNumber.$ctor(InnerClassInitOrder $outer_this, int $_0)
+;;; void <anonymous> extends AddNumber.$ctor(InnerClassInitOrder $outer_this, int i)
 (func $$ctor__innerclassinitorder_InnerClassInitOrder__int__void_$p_innerclassinitorder_InnerClassInitOrder_1@innerclassinitorder.InnerClassInitOrder.1
  (param $this (ref null $innerclassinitorder.InnerClassInitOrder.1))
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
- (param $$_0 i32)
+ (param $i i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:10
   (struct.set $innerclassinitorder.InnerClassInitOrder.1 $$outer_this@innerclassinitorder.InnerClassInitOrder.1 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder__int__void_$p_innerclassinitorder_InnerClassInitOrder_1AddNumber@innerclassinitorder.InnerClassInitOrder.1AddNumber (ref.as_non_null (local.get $this))(local.get $$outer_this)(local.get $$_0))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder__int__void_$p_innerclassinitorder_InnerClassInitOrder_1AddNumber@innerclassinitorder.InnerClassInitOrder.1AddNumber (ref.as_non_null (local.get $this))(local.get $$outer_this)(local.get $i))
  )
 )
 
@@ -2961,18 +2961,18 @@
 
 ;;; void <anonymous> extends AddNumber.$clinit()
 (func $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:10
   (if (global.get $$class-initialized@innerclassinitorder.InnerClassInitOrder.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:10
   (global.set $$class-initialized@innerclassinitorder.InnerClassInitOrder.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:228:10
   (call $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.1AddNumber )
  )
 )
@@ -3006,9 +3006,10 @@
 
 ;;; Code for innerclassinitorder.InnerClassInitOrder.2 [methods]
 
-;;; <anonymous> extends OuterIsNotSuper <anonymous> extends OuterIsNotSuper.$create(InnerClassInitOrder $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.2
+;;; <anonymous> extends OuterIsNotSuper <anonymous> extends OuterIsNotSuper.$create(InnerClassInitOrder $outer_this, OuterIsSuper x0)
+(func $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.2
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (param $x0 (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.2))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder.2))
@@ -3018,39 +3019,40 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
   (local.set $$instance (struct.new $innerclassinitorder.InnerClassInitOrder.2 (global.get $innerclassinitorder.InnerClassInitOrder.2.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder__void_$p_innerclassinitorder_InnerClassInitOrder_2@innerclassinitorder.InnerClassInitOrder.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$p_innerclassinitorder_InnerClassInitOrder_2@innerclassinitorder.InnerClassInitOrder.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $x0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
   (return (local.get $$instance))
  )
 )
 
-;;; void <anonymous> extends OuterIsNotSuper.$ctor(InnerClassInitOrder $outer_this)
-(func $$ctor__innerclassinitorder_InnerClassInitOrder__void_$p_innerclassinitorder_InnerClassInitOrder_2@innerclassinitorder.InnerClassInitOrder.2
+;;; void <anonymous> extends OuterIsNotSuper.$ctor(InnerClassInitOrder $outer_this, OuterIsSuper x0)
+(func $$ctor__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$p_innerclassinitorder_InnerClassInitOrder_2@innerclassinitorder.InnerClassInitOrder.2
  (param $this (ref null $innerclassinitorder.InnerClassInitOrder.2))
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (param $x0 (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:30
   (struct.set $innerclassinitorder.InnerClassInitOrder.2 $$outer_this@innerclassinitorder.InnerClassInitOrder.2 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder_Outer__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref.as_non_null (local.get $this))(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $$outer_this)))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder_Outer__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref.as_non_null (local.get $this))(local.get $x0))
  )
 )
 
 ;;; void <anonymous> extends OuterIsNotSuper.$clinit()
 (func $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.2
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:30
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:30
   (if (global.get $$class-initialized@innerclassinitorder.InnerClassInitOrder.2)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:30
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:30
   (global.set $$class-initialized@innerclassinitorder.InnerClassInitOrder.2 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:65
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:312:30
   (call $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper )
  )
 )
@@ -3594,10 +3596,10 @@
 
 ;;; Code for innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 [methods]
 
-;;; <anonymous> extends Outer <anonymous> extends Outer.$create(OuterIsSuper $outer_this, int $_0)
+;;; <anonymous> extends Outer <anonymous> extends Outer.$create(OuterIsSuper $outer_this, int i)
 (func $$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
- (param $$_0 i32)
+ (param $i i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
@@ -3607,23 +3609,23 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
   (local.set $$instance (struct.new $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$_0))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $i))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
   (return (local.get $$instance))
  )
 )
 
-;;; void <anonymous> extends Outer.$ctor(OuterIsSuper $outer_this, int $_0)
+;;; void <anonymous> extends Outer.$ctor(OuterIsSuper $outer_this, int i)
 (func $$ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
  (param $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
- (param $$_0 i32)
+ (param $i i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:15
   (struct.set $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 $$outer_this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
-  (call $$ctor__int__void_$p_innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer (ref.as_non_null (local.get $this))(local.get $$_0))
+  (call $$ctor__int__void_$p_innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer (ref.as_non_null (local.get $this))(local.get $i))
  )
 )
 
@@ -3644,18 +3646,18 @@
 
 ;;; void <anonymous> extends Outer.$clinit()
 (func $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:15
   (if (global.get $$class-initialized@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:15
   (global.set $$class-initialized@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:28
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:264:15
   (call $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.Outer )
  )
 )
@@ -4009,7 +4011,7 @@
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:72
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:72
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:37
   (struct.set $innerclassinitorder.InnerClassInitOrder.3 $$outer_this@innerclassinitorder.InnerClassInitOrder.3 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:72
   (call $$ctor__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (ref.as_non_null (local.get $this)))
@@ -4018,18 +4020,18 @@
 
 ;;; void <anonymous> extends TestQualifiedSuperCall.$clinit()
 (func $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.3
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:72
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:37
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:72
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:37
   (if (global.get $$class-initialized@innerclassinitorder.InnerClassInitOrder.3)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:72
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:37
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:72
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:37
   (global.set $$class-initialized@innerclassinitorder.InnerClassInitOrder.3 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:72
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:324:37
   (call $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall )
  )
 )
@@ -4063,9 +4065,10 @@
 
 ;;; Code for innerclassinitorder.InnerClassInitOrder.4 [methods]
 
-;;; <anonymous> extends TestUnqualifiedSuperCall <anonymous> extends TestUnqualifiedSuperCall.$create(InnerClassInitOrder $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.4
+;;; <anonymous> extends TestUnqualifiedSuperCall <anonymous> extends TestUnqualifiedSuperCall.$create(InnerClassInitOrder $outer_this, OuterIsSuper x0)
+(func $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.4
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (param $x0 (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.4))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder.4))
@@ -4075,39 +4078,40 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
   (local.set $$instance (struct.new $innerclassinitorder.InnerClassInitOrder.4 (global.get $innerclassinitorder.InnerClassInitOrder.4.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder__void_$p_innerclassinitorder_InnerClassInitOrder_4@innerclassinitorder.InnerClassInitOrder.4 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$p_innerclassinitorder_InnerClassInitOrder_4@innerclassinitorder.InnerClassInitOrder.4 (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $x0))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
   (return (local.get $$instance))
  )
 )
 
-;;; void <anonymous> extends TestUnqualifiedSuperCall.$ctor(InnerClassInitOrder $outer_this)
-(func $$ctor__innerclassinitorder_InnerClassInitOrder__void_$p_innerclassinitorder_InnerClassInitOrder_4@innerclassinitorder.InnerClassInitOrder.4
+;;; void <anonymous> extends TestUnqualifiedSuperCall.$ctor(InnerClassInitOrder $outer_this, OuterIsSuper x0)
+(func $$ctor__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$p_innerclassinitorder_InnerClassInitOrder_4@innerclassinitorder.InnerClassInitOrder.4
  (param $this (ref null $innerclassinitorder.InnerClassInitOrder.4))
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (param $x0 (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:39
   (struct.set $innerclassinitorder.InnerClassInitOrder.4 $$outer_this@innerclassinitorder.InnerClassInitOrder.4 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder_Outer__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (ref.as_non_null (local.get $this))(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $$outer_this)))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder_Outer__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (ref.as_non_null (local.get $this))(local.get $x0))
  )
 )
 
 ;;; void <anonymous> extends TestUnqualifiedSuperCall.$clinit()
 (func $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.4
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:39
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:39
   (if (global.get $$class-initialized@innerclassinitorder.InnerClassInitOrder.4)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:39
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:39
   (global.set $$class-initialized@innerclassinitorder.InnerClassInitOrder.4 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:83
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:346:39
   (call $$clinit__void_<once>_@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall )
  )
 )

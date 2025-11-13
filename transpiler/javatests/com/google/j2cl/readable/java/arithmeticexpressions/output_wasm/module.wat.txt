@@ -210,38 +210,55 @@
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $a (i32.const 10))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $b (block (result i32)
    (local.set $$value (local.get $a))
    (local.set $a (i32.add (local.get $a) (i32.const 1)))
    (local.get $$value)
   ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $c (block (result i32)
    (local.set $$value_1 (local.get $a))
    (local.set $a (i32.sub (local.get $a) (i32.const 1)))
    (local.get $$value_1)
   ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $d (block (result i32)
    (local.set $a (i32.add (local.get $a) (i32.const 1)))
    (local.get $a)
   ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $e (block (result i32)
    (local.set $a (i32.sub (local.get $a) (i32.const 1)))
    (local.get $a)
   ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $f (i32.sub (i32.const 0) (local.get $a)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $g (local.get $a))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $h (i32.xor (i32.const -1) (local.get $a)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $i (i32.sub (i32.add (i32.add (i32.const 1) (i32.const 1)) (i32.const 2)) (i32.const 5)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $j (i32.mul (i32.add (i32.const 1) (i32.const 2)) (i32.add (i32.const 3) (i32.const 4))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $p (i32.rem_s (i32.mul (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (i32.const 1)(i32.const 2)) (i32.const 3)) (i32.const 4)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $r (i32.sub (i32.const 0) (i32.const -2147483648)))
-  (local.set $t (i32.sub (i32.const 0) (i32.sub (i32.const 0) (i32.sub (i32.const 0) (i32.const 1)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
+  (local.set $t (i32.sub (i32.const 0) (i32.sub (i32.const 0) (i32.const -1))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
   (local.set $u (i32.const 1))
-  (local.set $v (i32.sub (i32.const 0) (i32.sub (i32.const 0) (i32.const 1))))
-  (local.set $w (i32.sub (i32.const 5) (i32.sub (i32.const 0) (i32.const 4))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
+  (local.set $v (i32.sub (i32.const 0) (i32.const -1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:43:4
+  (local.set $w (i32.sub (i32.const 5) (i32.const -4)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:59:4
   (local.set $k (i32.eqz (i32.eq (i32.add (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:59:4
   (local.set $l (i32.ne (i32.add (i32.const 1) (i32.const 2)) (i32.const 4)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:59:4
   (local.set $m (f64.ne (f64.const 9.223372036854776E18) (f64.const 9.223372036854778E18)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:60:4
   (local.set $o (f64.sub (f64.convert_i32_s (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (i32.add (i32.const 5) (i32.const 1))(i32.const 2))) (f64.const 0.0)))

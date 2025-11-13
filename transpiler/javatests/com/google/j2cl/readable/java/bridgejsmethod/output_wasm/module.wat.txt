@@ -2160,21 +2160,6 @@
 )
 (elem declare func $m_bar__java_lang_String__void@bridgejsmethod.Main.B)
 
-;;; void B.bar(T arg0)
-(func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B
- (type $function.m_bar__java_lang_Object__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgejsmethod/readable-j2wasm.js/bridgejsmethod/Main.java:43:22
- (local $this (ref null $bridgejsmethod.Main.B))
- (local.set $this (ref.cast (ref $bridgejsmethod.Main.B) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgejsmethod/readable-j2wasm.js/bridgejsmethod/Main.java:43:22
-  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $this))))
- )
-)
-(elem declare func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
-
 ;;; String B.fun(T arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B
  (type $function.m_fun__java_lang_Object__java_lang_Object)
@@ -2190,6 +2175,21 @@
  )
 )
 (elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B)
+
+;;; void B.bar(T arg0)
+(func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B
+ (type $function.m_bar__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgejsmethod/readable-j2wasm.js/bridgejsmethod/Main.java:43:22
+ (local $this (ref null $bridgejsmethod.Main.B))
+ (local.set $this (ref.cast (ref $bridgejsmethod.Main.B) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgejsmethod/readable-j2wasm.js/bridgejsmethod/Main.java:43:22
+  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
 
 ;;; void B.$clinit()
 (func $$clinit__void_<once>_@bridgejsmethod.Main.B

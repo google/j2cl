@@ -311,21 +311,6 @@
  )
 )
 
-;;; void AnotherAccidentalOverride.bar(T arg0)
-(func $m_bar__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
- (type $function.m_bar__java_lang_Object__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
- (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
- (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
-  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.AssertionError) (local.get $arg0)))
- )
-)
-(elem declare func $m_bar__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
-
 ;;; void AnotherAccidentalOverride.foo(T arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
  (type $function.m_foo__java_lang_Object__void)
@@ -341,20 +326,20 @@
 )
 (elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
 
-;;; void AnotherAccidentalOverride.bar(AssertionError arg0)
-(func $m_bar__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
- (type $function.m_bar__java_lang_AssertionError__void)
+;;; void AnotherAccidentalOverride.bar(T arg0)
+(func $m_bar__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.m_bar__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.AssertionError))
+ (param $arg0 (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
  (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
-  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.AssertionError) (local.get $arg0)))
  )
 )
-(elem declare func $m_bar__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
+(elem declare func $m_bar__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; void AnotherAccidentalOverride.foo(AssertionError arg0)
 (func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
@@ -370,6 +355,21 @@
  )
 )
 (elem declare func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
+
+;;; void AnotherAccidentalOverride.bar(AssertionError arg0)
+(func $m_bar__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.m_bar__java_lang_AssertionError__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.AssertionError))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_bar__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; void AnotherAccidentalOverride.$clinit()
 (func $$clinit__void_<once>_@accidentaloverride.AnotherAccidentalOverride
@@ -445,21 +445,6 @@
  )
 )
 
-;;; void AccidentalOverride.bar(T arg0)
-(func $m_bar__java_lang_Object__void@accidentaloverride.AccidentalOverride
- (type $function.m_bar__java_lang_Object__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
- (local $this (ref null $accidentaloverride.AccidentalOverride))
- (local.set $this (ref.cast (ref $accidentaloverride.AccidentalOverride) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
-  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $arg0)))
- )
-)
-(elem declare func $m_bar__java_lang_Object__void@accidentaloverride.AccidentalOverride)
-
 ;;; void AccidentalOverride.foo(T arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride
  (type $function.m_foo__java_lang_Object__void)
@@ -474,6 +459,21 @@
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
+
+;;; void AccidentalOverride.bar(T arg0)
+(func $m_bar__java_lang_Object__void@accidentaloverride.AccidentalOverride
+ (type $function.m_bar__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+ (local $this (ref null $accidentaloverride.AccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AccidentalOverride) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $arg0)))
+ )
+)
+(elem declare func $m_bar__java_lang_Object__void@accidentaloverride.AccidentalOverride)
 
 ;;; void AccidentalOverride.$clinit()
 (func $$clinit__void_<once>_@accidentaloverride.AccidentalOverride

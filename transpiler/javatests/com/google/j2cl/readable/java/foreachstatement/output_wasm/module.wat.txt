@@ -1189,21 +1189,6 @@
  )
 )
 
-;;; void $LambdaAdaptor.forEach(Consumer<? super String> arg0)
-(func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor
- (type $function.m_forEach__java_util_function_Consumer__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
- (local $this (ref null $foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
-  (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (ref.as_non_null (local.get $this))(local.get $arg0))
- )
-)
-(elem declare func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor)
-
 ;;; StringIterator $LambdaAdaptor.iterator()
 (func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor
  (type $function.m_iterator__java_util_Iterator)
@@ -1218,6 +1203,21 @@
  )
 )
 (elem declare func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.forEach(Consumer<? super String> arg0)
+(func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor
+ (type $function.m_forEach__java_util_function_Consumer__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
+ (local $this (ref null $foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:125:12
+  (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor)
 
 ;;; Spliterator<String> $LambdaAdaptor.spliterator()
 (func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.StringIterable.$LambdaAdaptor

@@ -675,6 +675,22 @@
 )
 (elem declare func $m_exposedAbstractInParent__int__int__int__int@packageprivatemethods.package1.Child)
 
+;;; int Child.overrideInParentExposedInChild(int arg0)
+(func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
+ (type $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Child.java:18:13
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast (ref $packageprivatemethods.package1.Child) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Child.java:18:13
+  (return (call_ref $function.m_overrideInParentExposedInChild__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_overrideInParentExposedInChild__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+
 ;;; int Child.exposedInChild(int arg0, int arg1)
 (func $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
  (type $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1)
@@ -708,22 +724,6 @@
  )
 )
 (elem declare func $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
-
-;;; int Child.overrideInParentExposedInChild(int arg0)
-(func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
- (type $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
- (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Child.java:18:13
- (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast (ref $packageprivatemethods.package1.Child) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageprivatemethods/readable-j2wasm.js/packageprivatemethods/package1/Child.java:18:13
-  (return (call_ref $function.m_overrideInParentExposedInChild__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_overrideInParentExposedInChild__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
- )
-)
-(elem declare func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
 
 ;;; void Child.$clinit()
 (func $$clinit__void_<once>_@packageprivatemethods.package1.Child

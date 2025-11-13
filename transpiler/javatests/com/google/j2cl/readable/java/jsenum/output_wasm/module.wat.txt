@@ -4130,21 +4130,6 @@
  )
 )
 
-;;; void ComparableJsEnumSupplierConsumerImpl.accept(ComparableJsEnum arg0)
-(func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
- (type $function.m_accept__jsenum_Main_ComparableJsEnum__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $jsenum.Main.ComparableJsEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
- (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
- (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImpl) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
-  (call $m_accept__java_lang_Object__void@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this))(local.get $arg0))
- )
-)
-(elem declare func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
-
 ;;; ComparableJsEnum ComparableJsEnumSupplierConsumerImpl.get()
 (func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
  (type $function.m_get__jsenum_Main_ComparableJsEnum)
@@ -4159,6 +4144,21 @@
  )
 )
 (elem declare func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
+
+;;; void ComparableJsEnumSupplierConsumerImpl.accept(ComparableJsEnum arg0)
+(func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
+ (type $function.m_accept__jsenum_Main_ComparableJsEnum__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $jsenum.Main.ComparableJsEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
+ (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
+ (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImpl) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:289:15
+  (call $m_accept__java_lang_Object__void@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
 
 ;;; void ComparableJsEnumSupplierConsumerImpl.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main.ComparableJsEnumSupplierConsumerImpl

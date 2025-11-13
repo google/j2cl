@@ -787,7 +787,7 @@
  )
 )
 
-;;; void GenericMethod.testLowerWildcardBound(Consumer<? super V> consumer, V v)
+;;; void GenericMethod.testLowerWildcardBound(Consumer<?> consumer, V v)
 (func $m_testLowerWildcardBound__genericmethod_GenericMethod_Consumer__java_lang_Object__void@genericmethod.GenericMethod
  (param $consumer (ref null $java.lang.Object))
  (param $v (ref null $java.lang.Object))
@@ -800,7 +800,7 @@
  )
 )
 
-;;; V GenericMethod.testUpperWildcardBound(Supplier<? extends V> supplier)
+;;; V GenericMethod.testUpperWildcardBound(Supplier<?> supplier)
 (func $m_testUpperWildcardBound__genericmethod_GenericMethod_Supplier__java_lang_Object@genericmethod.GenericMethod
  (param $supplier (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1296,7 +1296,7 @@
  (param $$outer_this (ref null $genericmethod.GenericMethod))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:4
   (struct.set $genericmethod.GenericMethod.1 $$outer_this@genericmethod.GenericMethod.1 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
   (call $$ctor__void_$p_genericmethod_GenericMethod@genericmethod.GenericMethod (ref.as_non_null (local.get $this)))
@@ -1331,18 +1331,18 @@
 
 ;;; void <anonymous> extends GenericMethod<T>.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:4
   (if (global.get $$class-initialized@genericmethod.GenericMethod.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:4
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:4
   (global.set $$class-initialized@genericmethod.GenericMethod.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:27
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:30:4
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
  )
 )
