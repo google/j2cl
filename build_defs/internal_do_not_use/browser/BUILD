@@ -11,13 +11,13 @@ package(
 
 # browser configuration enabling wasm features needed for j2wasm.
 custom_browser(
-    name = "chrome-wasm-linux",
+    name = "chrome-linux",
     browser = "@rules_webtesting//browsers:chromium-local",
     metadata = "chrome_linux_enable_wasm_experiments.json",
 )
 
 custom_browser(
-    name = "chrome-wasm-dev-linux",
+    name = "chrome-dev-linux",
     browser = "@rules_webtesting//browsers:chromium-local",
     metadata = "chrome_linux_enable_wasm_experiments.json",
 )

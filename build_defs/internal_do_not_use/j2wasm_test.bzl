@@ -24,7 +24,7 @@ def j2wasm_test(
         enable_rta = False,
         platform = "WASM",
         optimize_wasm = optimize,
-        default_browser = Label("//build_defs/internal_do_not_use/browser:chrome-wasm-linux"),
+        default_browser = Label("//build_defs/internal_do_not_use/browser:chrome-linux"),
         tags = tags + ["j2wasm"],
         **kwargs
     )

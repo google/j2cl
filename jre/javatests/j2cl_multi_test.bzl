@@ -25,7 +25,7 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
         generate_build_test = False,
         runtime_deps = j2cl_deps,
         browsers = [
-            "//build_defs/internal_do_not_use/browser:chrome-wasm-linux",
+            "//build_defs/internal_do_not_use/browser:chrome-linux",
         ],
         **kwargs
     )
@@ -36,7 +36,7 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
         generate_build_test = False,
         runtime_deps = j2cl_deps,
         browsers = [
-            "//build_defs/internal_do_not_use/browser:chrome-wasm-linux",
+            "//build_defs/internal_do_not_use/browser:chrome-linux",
         ],
         browser_overrides = {
         },
@@ -70,7 +70,7 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
             optimize = 1,
             wasm_defs = j2wasm_defines,
             browsers = [
-                "//build_defs/internal_do_not_use/browser:chrome-wasm-linux",
+                "//build_defs/internal_do_not_use/browser:chrome-linux",
             ],
             **kwargs
         )
