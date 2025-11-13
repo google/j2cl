@@ -20,7 +20,7 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** Boolean literal node. */
 @Visitable
-public class BooleanLiteral extends Literal {
+public final class BooleanLiteral extends Literal {
   private static final BooleanLiteral FALSE = new BooleanLiteral(false);
   private static final BooleanLiteral TRUE = new BooleanLiteral(true);
 

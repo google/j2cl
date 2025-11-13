@@ -25,7 +25,7 @@ import java.util.Objects;
 
 /** Number literal node. */
 @Visitable
-public class NumberLiteral extends Literal {
+public final class NumberLiteral extends Literal {
 
   public static NumberLiteral fromByte(byte value) {
     return new NumberLiteral(PrimitiveTypes.BYTE, value);

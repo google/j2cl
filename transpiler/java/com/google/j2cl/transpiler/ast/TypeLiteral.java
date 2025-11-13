@@ -24,7 +24,7 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** Type literal node. */
 @Visitable
-public class TypeLiteral extends Literal implements HasSourcePosition {
+public final class TypeLiteral extends Literal implements HasSourcePosition {
 
   @Visitable TypeDescriptor referencedTypeDescriptor;
   private final SourcePosition sourcePosition;

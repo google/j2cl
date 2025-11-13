@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 /** Class for array literals whose values are all literals. */
-public class ArrayConstant implements AnnotationValue {
+public final class ArrayConstant implements AnnotationValue {
 
   private final ArrayTypeDescriptor typeDescriptor;
   private final ImmutableList<AnnotationValue> valueExpressions;

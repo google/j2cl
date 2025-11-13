@@ -16,4 +16,4 @@
 package com.google.j2cl.transpiler.ast;
 
 /** Represents the value of an annotation instance. */
-public interface AnnotationValue {}
+public sealed interface AnnotationValue permits Literal, ArrayConstant {}

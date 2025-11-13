@@ -124,7 +124,7 @@ class StaticEvaluators {
           String.valueOf((char) n.getValue().intValue());
       case NumberLiteral n -> String.valueOf(n.getValue());
       case NullLiteral n -> "null";
-      default -> throw new InternalCompilerError("Unexpected literal: %s", literal);
+      case TypeLiteral t -> throw new InternalCompilerError("Unexpected literal: %s", literal);
     };
   }
 

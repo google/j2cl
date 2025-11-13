@@ -20,7 +20,7 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** Null literal node. */
 @Visitable
-public class NullLiteral extends Literal {
+public final class NullLiteral extends Literal {
 
   static NullLiteral get(TypeDescriptor typeDescriptor) {
     return new NullLiteral(typeDescriptor.toNullable());

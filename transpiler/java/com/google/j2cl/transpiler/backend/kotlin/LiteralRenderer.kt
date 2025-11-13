@@ -38,7 +38,6 @@ internal data class LiteralRenderer(val nameRenderer: NameRenderer) {
       is StringLiteral -> stringLiteralSource(literal)
       is TypeLiteral -> typeLiteralSource(literal)
       is NumberLiteral -> numberLiteralSource(literal)
-      else -> throw InternalCompilerError("renderLiteral($literal)")
     }
 
   private fun booleanLiteralSource(booleanLiteral: BooleanLiteral): Source =
