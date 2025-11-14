@@ -43,7 +43,6 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
   public static Builder newBuilder() {
     return new AutoValue_J2clTranspilerOptions.Builder()
-        .setSystem("")
         .setOptimizeAutoValue(false)
         .setNullMarkedSupported(false)
         .setEnableWasmCustomDescriptors(false)

@@ -226,6 +226,9 @@ final class BazelJ2clBuilder extends BazelWorker {
         .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
     problems.abortIfCancelled();
 
+    if (!system.isEmpty()) {
+      system = workdir.resolve(system).toString();
+    }
     if (libraryInfoOutput != null) {
       libraryInfoOutput = workdir.resolve(libraryInfoOutput);
     }
