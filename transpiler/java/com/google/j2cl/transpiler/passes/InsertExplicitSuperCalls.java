@@ -68,14 +68,13 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
     constructor
         .getBody()
         .getStatements()
-        .add(
-            0,
+        .addFirst(
             AstUtils.resolveImplicitQualifier(superMethodCall, type.getTypeDescriptor())
                 .makeStatement(constructor.getBody().getSourcePosition()));
   }
 
   /**
-   * Returns the superconstructor method that should be the target of the implicit super() call.
+   * Returns the super-constructor method that should be the target of the implicit super() call.
    *
    * <p>Note: Implicit super constructor calls are inserted when no explicit call to super() or
    * this() appear in the constructor (JLS 8.8.7). Such call, super() with no parameters, is treated
@@ -98,24 +97,24 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
     // that can be called with no parameters.
     // TODO(b/178437774): The implicit constructor for java.lang.Enum has two parameters. Fix the
     // behavior accordingly when we rollback the hack for b/74986525.
-    Optional<MethodDescriptor> superContructor =
+    Optional<MethodDescriptor> superConstructor =
         superTypeDescriptor.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isConstructor)
             .filter(m -> m.isVisibleFrom(type.getTypeDescriptor()))
             .filter(
                 m ->
                     m.getParameterDescriptors().isEmpty()
-                        // The implicit enum constructor targed is defined with two parameters.
+                        // The implicit enum constructor target is defined with two parameters.
                         || (type.isEnum() && m.getParameterDescriptors().size() == 2))
             .collect(toOptional());
 
-    if (!superContructor.isPresent()) {
+    if (superConstructor.isEmpty()) {
       // If no 0-argument constructor find a 1-argument varargs constructor. There might be more
       // than 1 varargs constructor, if so apply the more specific overload rule. At this point
       // there should be no ambiguity and a more specific overload is guaranteed, This is because at
       // this point type checking succeed in the frontend and if there were any ambiguity the
       // compile would have produced an error already.
-      superContructor =
+      superConstructor =
           superTypeDescriptor.getDeclaredMethodDescriptors().stream()
               .filter(MethodDescriptor::isConstructor)
               .filter(m -> m.isVisibleFrom(type.getTypeDescriptor()))
@@ -124,15 +123,15 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
               .min(InsertExplicitSuperCalls::getParameterSpecificityComparator);
     }
 
-    if (superContructor.isPresent()) {
+    if (superConstructor.isPresent()) {
       if (type.isEnum()) {
         // If the super type is java.lang.Enum, remove the implicit parameters from the descriptor
         // which are present in the class, but should be implicit in the constructor invocations.
-        return superContructor
+        return superConstructor
             .get()
             .transform(MethodDescriptor.Builder::removeParameterTypeDescriptors);
       }
-      return superContructor.get();
+      return superConstructor.get();
     }
 
     // No appropriate constructor found, it must be the implicit constructor.

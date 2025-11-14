@@ -57,7 +57,7 @@ public abstract class AbstractCompilationUnitBuilder {
   protected <T> T processEnclosedBy(Type type, Supplier<T> supplier) {
     typeStack.add(type);
     T converted = supplier.get();
-    typeStack.remove(typeStack.size() - 1);
+    typeStack.removeLast();
     return converted;
   }
 

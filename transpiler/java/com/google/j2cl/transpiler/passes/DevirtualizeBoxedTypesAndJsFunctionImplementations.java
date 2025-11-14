@@ -88,19 +88,19 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
             //  Re-write `this.value` with `this`.
             if (fieldAccess.getQualifier() instanceof ThisReference) {
               checkState(fieldAccess.getTarget().getName().equals("value"));
-              Expression thisRerence = fieldAccess.getQualifier();
+              Expression thisReference = fieldAccess.getQualifier();
 
               // For boxed types as JS primitives; the underlying JS value (this.value) can be null
               // to represent the case where the boxed type is null. However whenever a call is made
-              // to boxed type and the underying JS value is read, we need to make sure it is not
-              // null to preverve the correct semantics and throw NPE. An alternative would be
+              // to boxed type and the underlying JS value is read, we need to make sure it is not
+              // null to preserve the correct semantics and throw NPE. An alternative would be
               // devirtualization to add checkNotNull on 'thisArg' however that would result in lots
               // of redundant checks.
               if (AstUtils.isExpressionResultUsed(fieldAccess, getParent())) {
                 // Note that checkNotNull also avoids auto-unboxing.
-                thisRerence = RuntimeMethods.createCheckNotNullCall(thisRerence);
+                thisReference = RuntimeMethods.createCheckNotNullCall(thisReference);
               }
-              return thisRerence;
+              return thisReference;
             }
 
             return fieldAccess;
@@ -122,10 +122,7 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
               return false;
             }
 
-            if (methodDescriptor.isJsFunction()) {
-              return false;
-            }
-            return true;
+            return !methodDescriptor.isJsFunction();
           }
         });
   }

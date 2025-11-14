@@ -137,7 +137,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
     }
     if (node instanceof VariableDeclarationExpression variableDeclarationExpression) {
       VariableDeclarationFragment variableDeclarationFragment =
-          variableDeclarationExpression.getFragments().get(0);
+          variableDeclarationExpression.getFragments().getFirst();
       Expression variableDeclarationInitializer = variableDeclarationFragment.getInitializer();
       return getCast(variableDeclarationInitializer);
     }

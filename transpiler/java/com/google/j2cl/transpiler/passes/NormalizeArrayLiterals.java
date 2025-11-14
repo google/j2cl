@@ -90,7 +90,7 @@ public class NormalizeArrayLiterals extends NormalizationPass {
               return newArray;
             }
 
-            Expression uniqueElement = arrayLiteral.getValueExpressions().get(0);
+            Expression uniqueElement = arrayLiteral.getValueExpressions().getFirst();
             if (!isRedundantSpreadOperator(uniqueElement)) {
               // The element is not on the form `...new int[] {1,2,3}`
               return newArray;
@@ -124,7 +124,7 @@ public class NormalizeArrayLiterals extends NormalizationPass {
     // Spread operation is redundant on new Foo[0] or new Foo[0][][]
     return newArrayExpression.getInitializer() == null
         && !dimensions.isEmpty()
-        && dimensions.get(0) instanceof NumberLiteral numberLiteral
+        && dimensions.getFirst() instanceof NumberLiteral numberLiteral
         && numberLiteral.getValue().intValue() == 0
         && isAllNullLiterals(dimensions.subList(1, dimensions.size()));
   }

@@ -139,8 +139,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
     method
         .getBody()
         .getStatements()
-        .add(
-            0,
+        .addFirst(
             BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
                 .setRightOperand(variableReference)
                 .build()

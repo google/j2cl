@@ -38,7 +38,7 @@ public class NormalizeJsAwaitMethodInvocations extends NormalizationPass {
                   methodCall.getArguments().size() == 1,
                   "await should only have a single argument");
               return JsAwaitExpression.newBuilder()
-                  .setExpression(methodCall.getArguments().get(0))
+                  .setExpression(methodCall.getArguments().getFirst())
                   .setTypeDescriptor(methodCall.getTypeDescriptor())
                   .build();
             }

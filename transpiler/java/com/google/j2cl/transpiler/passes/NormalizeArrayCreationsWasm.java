@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Normalizes array creations for wasm.
  *
- * <p>Ater this pass is run, all array creations are in one of 3 forms:
+ * <p>After this pass is run, all array creations are in one of 3 forms:
  *
  * <ul>
  *   <li>an unidimensional array creation, e.g. {@code new String[3]}
@@ -90,7 +90,7 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
    * WasmArray.createMultiDimensionalArray([2,3,-1], 5)
    * }</pre>
    *
-   * <p>where 5 is the id for the pritimive type int and -1 is used to denote an uninitialized array
+   * <p>where 5 is the id for the primitive type int and -1 is used to denote an uninitialized array
    * dimension.
    */
   private static void normalizeMultidimensionalArrays(CompilationUnit compilationUnit) {

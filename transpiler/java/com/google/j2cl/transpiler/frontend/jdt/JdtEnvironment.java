@@ -470,7 +470,7 @@ public class JdtEnvironment {
     };
   }
 
-  /** Return whether a type is annotated for nullablility and which type of annotation it has. */
+  /** Return whether a type is annotated for nullability and which type of annotation it has. */
   private static NullabilityAnnotation getNullabilityAnnotation(
       ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
     checkArgument(!typeBinding.isPrimitive());
@@ -521,9 +521,9 @@ public class JdtEnvironment {
         String declaringClassPrefix =
             getBinaryNameFromTypeBinding(currentType.getDeclaringClass()) + "$";
         checkState(binaryName.startsWith(declaringClassPrefix));
-        classComponents.add(0, binaryName.substring(declaringClassPrefix.length()));
+        classComponents.addFirst(binaryName.substring(declaringClassPrefix.length()));
       } else {
-        classComponents.add(0, currentType.getName());
+        classComponents.addFirst(currentType.getName());
       }
       currentType = currentType.getDeclaringClass();
     }
@@ -544,11 +544,11 @@ public class JdtEnvironment {
       // The code here is a HACK that relies on the way that JDT synthesizes keys. Keys for
       // unreachable classes have the closest enclosing reachable class key as a prefix (minus the
       // ending semicolon)
-      ITypeBinding closestReachableExclosingClass = typeBinding.getDeclaringClass();
-      while (closestReachableExclosingClass.getBinaryName() == null) {
-        closestReachableExclosingClass = closestReachableExclosingClass.getDeclaringClass();
+      ITypeBinding closestReachableEnclosingClass = typeBinding.getDeclaringClass();
+      while (closestReachableEnclosingClass.getBinaryName() == null) {
+        closestReachableEnclosingClass = closestReachableEnclosingClass.getDeclaringClass();
       }
-      String parentKey = closestReachableExclosingClass.getKey();
+      String parentKey = closestReachableEnclosingClass.getKey();
       String key = typeBinding.getKey();
       return getBinaryNameFromTypeBinding(typeBinding.getDeclaringClass())
           + "$$Unreachable"

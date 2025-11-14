@@ -140,7 +140,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
             }
 
             if (invocation.getTarget().getParameterTypeDescriptors().stream()
-                .allMatch(it -> !needsCast(it))) {
+                .noneMatch(InsertQualifierProjectionCasts::needsCast)) {
               return invocation;
             }
 

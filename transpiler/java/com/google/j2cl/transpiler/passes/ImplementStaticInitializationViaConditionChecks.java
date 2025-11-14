@@ -44,7 +44,7 @@ import java.util.List;
 
 /**
  * Implements static initialization to comply with Java semantics by keeping track of whether a
- * class has been initialized using a static variable for each class and chekcing the condition to
+ * class has been initialized using a static variable for each class and checking the condition to
  * decide whether to execute the initialization code for that class.
  */
 public class ImplementStaticInitializationViaConditionChecks

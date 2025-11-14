@@ -249,7 +249,7 @@ public class JsInteropRestrictionsChecker {
             MethodDescriptor target = methodCall.getTarget();
             List<Expression> args = methodCall.getArguments();
             if (AstUtils.isSystemGetPropertyCall(methodCall)
-                && !(args.get(0) instanceof StringLiteral)) {
+                && !(args.getFirst() instanceof StringLiteral)) {
               problems.error(
                   methodCall.getSourcePosition(),
                   "Method '%s' can only take a string literal as its first parameter",
@@ -516,7 +516,7 @@ public class JsInteropRestrictionsChecker {
       // Not a valid initialization. The code will be rejected.
       return null;
     }
-    return arguments.get(0);
+    return arguments.getFirst();
   }
 
   private void checkJsEnumValueField(Field field) {
@@ -603,7 +603,7 @@ public class JsInteropRestrictionsChecker {
     if (constructorDescriptor.getParameterDescriptors().size() != 1
         || !constructorDescriptor
             .getParameterDescriptors()
-            .get(0)
+            .getFirst()
             .getTypeDescriptor()
             .isSameBaseType(customValueType)) {
       // Method declaration is invalid.
@@ -616,8 +616,8 @@ public class JsInteropRestrictionsChecker {
     return constructor.getBody().getStatements().size() == 1
         && checkJsEnumConstructorStatement(
             constructorDescriptor.getEnclosingTypeDescriptor(),
-            constructor.getBody().getStatements().get(0),
-            constructor.getParameters().get(0));
+            constructor.getBody().getStatements().getFirst(),
+            constructor.getParameters().getFirst());
   }
 
   /**
@@ -1176,8 +1176,7 @@ public class JsInteropRestrictionsChecker {
 
   private void checkJsAsyncMethod(Method method) {
     TypeDescriptor returnType = method.getDescriptor().getReturnTypeDescriptor();
-    if (returnType instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor returnTypeDescriptor = (DeclaredTypeDescriptor) returnType;
+    if (returnType instanceof DeclaredTypeDescriptor returnTypeDescriptor) {
       String qualifiedJsName = returnTypeDescriptor.getQualifiedJsName();
       if (qualifiedJsName.equals("IThenable") || qualifiedJsName.equals("Promise")) {
         return;
@@ -1347,7 +1346,7 @@ public class JsInteropRestrictionsChecker {
     if (jsName == null || !jsName.isEmpty() || !member.isStatic()) {
       return false;
     }
-    // If you're unnammed then you must have an explicit namespace.
+    // If you're unnamed then you must have an explicit namespace.
     if (member.getDescriptor().getJsInfo().getJsNamespace() == null) {
       return false;
     }
@@ -2025,7 +2024,7 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
-    MethodDescriptor jsConstructorDescriptor = jsConstructorDescriptors.get(0);
+    MethodDescriptor jsConstructorDescriptor = jsConstructorDescriptors.getFirst();
     MethodDescriptor primaryConstructorDescriptor = getPrimaryConstructorDescriptor(type);
     // Due to b/459533098, we compare constructor descriptors by signature instead of by
     // reference.
@@ -2074,7 +2073,7 @@ public class JsInteropRestrictionsChecker {
             .collect(toImmutableList());
     return superDelegatingConstructors.size() != 1
         ? null
-        : superDelegatingConstructors.get(0).getDescriptor();
+        : superDelegatingConstructors.getFirst().getDescriptor();
   }
 
   private void checkJsConstructorSubtype(Type type) {
@@ -2102,7 +2101,7 @@ public class JsInteropRestrictionsChecker {
       // The JsConstructor is the implicit constructor and delegates to the default constructor
       // for the super class.
       MethodDescriptor implicitJsConstructorDescriptor =
-          type.getDeclaration().getJsConstructorMethodDescriptors().get(0);
+          type.getDeclaration().getJsConstructorMethodDescriptors().getFirst();
       if (!type.getSuperTypeDescriptor()
           .getDefaultConstructorMethodDescriptor()
           .isJsConstructor()) {
@@ -2110,7 +2109,7 @@ public class JsInteropRestrictionsChecker {
             type.getSourcePosition(),
             "Implicit JsConstructor '%s' can only delegate to super JsConstructor '%s'.",
             implicitJsConstructorDescriptor.getReadableDescription(),
-            superJsConstructorMethodDescriptors.get(0).getReadableDescription());
+            superJsConstructorMethodDescriptors.getFirst().getReadableDescription());
       }
       return;
     }
@@ -2122,7 +2121,7 @@ public class JsInteropRestrictionsChecker {
           jsConstructor.getSourcePosition(),
           "JsConstructor '%s' can only delegate to super JsConstructor '%s'.",
           jsConstructor.getDescriptor().getReadableDescription(),
-          superJsConstructorMethodDescriptors.get(0).getReadableDescription());
+          superJsConstructorMethodDescriptors.getFirst().getReadableDescription());
     }
   }
 
@@ -2184,7 +2183,7 @@ public class JsInteropRestrictionsChecker {
     MethodDescriptor getter = thisMember.isJsPropertyGetter() ? thisMember : thatMember;
 
     ImmutableList<TypeDescriptor> setterParams = setter.getParameterTypeDescriptors();
-    if (!getter.getReturnTypeDescriptor().isSameBaseType(setterParams.get(0))) {
+    if (!getter.getReturnTypeDescriptor().isSameBaseType(setterParams.getFirst())) {
       problems.error(
           sourcePosition,
           "JsProperty setter '%s' and getter '%s' cannot have inconsistent types.",

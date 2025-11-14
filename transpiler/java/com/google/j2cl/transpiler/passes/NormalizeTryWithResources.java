@@ -136,7 +136,8 @@ public class NormalizeTryWithResources extends NormalizationPass {
     List<VariableDeclarationExpression> resourceDeclarations =
         tryStatement.getResourceDeclarations();
     for (VariableDeclarationExpression declaration : resourceDeclarations) {
-      VariableDeclarationFragment originalResourceDeclaration = declaration.getFragments().get(0);
+      VariableDeclarationFragment originalResourceDeclaration =
+          declaration.getFragments().getFirst();
       Variable originalVariable = originalResourceDeclaration.getVariable();
       originalVariable.setFinal(false);
       transformedStatements.add(
@@ -176,7 +177,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
       MethodCall safeCloseCall =
           RuntimeMethods.createExceptionsMethodCall(
               "safeClose",
-              declaration.getFragments().get(0).getVariable().createReference(),
+              declaration.getFragments().getFirst().getVariable().createReference(),
               primaryException.createReference());
 
       Expression assignExceptionFromSafeCloseCall =

@@ -47,7 +47,7 @@ public class NormalizeForEachStatementJ2kt extends NormalizationPass {
             TypeDescriptor loopVariableTypeDescriptor = loopVariable.getTypeDescriptor();
             if (loopVariable.isFinal() && loopVariableTypeDescriptor.canBeNull()) {
               // The variable is not modified by the body of the loop and since it is nullable, it
-              // won't need unboxing/coersions as it cant be a primitive, nor it would need
+              // won't need unboxing/coercions as it cant be a primitive, nor it would need
               // nullability assertions since it is nullable.
               return forEachStatement;
             }

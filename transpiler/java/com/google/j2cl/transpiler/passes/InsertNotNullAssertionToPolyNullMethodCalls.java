@@ -40,7 +40,7 @@ public class InsertNotNullAssertionToPolyNullMethodCalls extends NormalizationPa
           public Node rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor methodDescriptor = methodCall.getTarget();
             if (isOrOverrides(methodDescriptor, javaUtilOptionalOrElse)) {
-              if (!methodCall.getArguments().get(0).canBeNull()) {
+              if (!methodCall.getArguments().getFirst().canBeNull()) {
                 return methodCall.postfixNotNullAssertion();
               }
             }

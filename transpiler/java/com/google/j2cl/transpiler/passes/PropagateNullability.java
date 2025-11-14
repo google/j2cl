@@ -47,6 +47,7 @@ import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -342,7 +343,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                         (typeArgument, targetTypeArgument) ->
                             getParameterizationsIn(
                                 typeArgument, typeParameter, targetTypeArgument, seen))
-                    .flatMap(it -> it);
+                    .flatMap(Function.identity());
 
             case TypeVariable typeVariable ->
                 getParameterizationsIn(

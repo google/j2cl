@@ -41,7 +41,7 @@ public class OptimizeImplicitConstructors extends NormalizationPass {
               return type;
             }
 
-            Method constructor = constructors.get(0);
+            Method constructor = constructors.getFirst();
             MethodDescriptor descriptor = constructor.getDescriptor();
 
             if (!descriptor.getParameterDescriptors().isEmpty()) {
@@ -67,7 +67,7 @@ public class OptimizeImplicitConstructors extends NormalizationPass {
               return type;
             }
 
-            type.getMembers().remove(constructors.get(0));
+            type.getMembers().remove(constructors.getFirst());
 
             return type;
           }

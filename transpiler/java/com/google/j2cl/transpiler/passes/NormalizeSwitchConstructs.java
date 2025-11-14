@@ -51,7 +51,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
   private static void removeSwitchExpressions(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
-          Map<SwitchExpression, Label> assignedLabelBySwitchExpression = new HashMap<>();
+          final Map<SwitchExpression, Label> assignedLabelBySwitchExpression = new HashMap<>();
 
           @Override
           public Expression rewriteSwitchExpression(SwitchExpression switchExpression) {

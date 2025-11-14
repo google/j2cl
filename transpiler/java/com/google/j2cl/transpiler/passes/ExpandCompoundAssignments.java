@@ -115,18 +115,14 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     // - Addition, subtraction and multiplication require 32-bit coercion
     // - Right-shift requires 32-bit coercion
     // - Right-hand-size w/ a wider type requires 32-bit coercion
-    if (TypeDescriptors.isPrimitiveInt(lhsTypeDescriptor)
-        && operator != BinaryOperator.DIVIDE_ASSIGN
-        && operator != BinaryOperator.REMAINDER_ASSIGN
-        && operator != BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN
-        && operator != BinaryOperator.PLUS_ASSIGN
-        && operator != BinaryOperator.MINUS_ASSIGN
-        && operator != BinaryOperator.TIMES_ASSIGN
-        && !rhsTypeDescriptor.toUnboxedType().isWiderThan(PrimitiveTypes.INT)) {
-      return false;
-    }
-
-    return true;
+    return !TypeDescriptors.isPrimitiveInt(lhsTypeDescriptor)
+        || operator == BinaryOperator.DIVIDE_ASSIGN
+        || operator == BinaryOperator.REMAINDER_ASSIGN
+        || operator == BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN
+        || operator == BinaryOperator.PLUS_ASSIGN
+        || operator == BinaryOperator.MINUS_ASSIGN
+        || operator == BinaryOperator.TIMES_ASSIGN
+        || rhsTypeDescriptor.toUnboxedType().isWiderThan(PrimitiveTypes.INT);
   }
 
   private boolean needsExpansion(UnaryExpression expression) {
@@ -141,10 +137,6 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     }
 
     // For floating point, native arithmetic is good enough for unary operations.
-    if (TypeDescriptors.isPrimitiveFloatOrDouble(targetTypeDescriptor)) {
-      return false;
-    }
-
-    return true;
+    return !TypeDescriptors.isPrimitiveFloatOrDouble(targetTypeDescriptor);
   }
 }

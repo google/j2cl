@@ -296,7 +296,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   /**
    * Precedence and associativity of expressions.
    *
-   * <p>Details of Java precednce can be found in <a
+   * <p>Details of Java precedence can be found in <a
    * href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.7">JLS 15.7 -
    * 15.26</a>
    */

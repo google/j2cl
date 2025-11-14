@@ -157,7 +157,7 @@ public class AddEnumImplicitMethods extends NormalizationPass {
             .getMethodDescriptorByName(CREATE_MAP_METHOD_NAME);
     // There should be 1 type variable. It should be specialized to the enum type.
     TypeVariable enumTypeVariable =
-        createMapMethodDescriptor.getTypeParameterTypeDescriptors().get(0);
+        createMapMethodDescriptor.getTypeParameterTypeDescriptors().getFirst();
     return createMapMethodDescriptor
         .getReturnTypeDescriptor()
         .specializeTypeVariables(

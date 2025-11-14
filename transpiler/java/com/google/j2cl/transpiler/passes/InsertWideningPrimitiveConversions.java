@@ -106,7 +106,7 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
   private Expression widenTo(TypeDescriptor toTypeDescriptor, Expression expression) {
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
-    // Don't emit known NOOP widenings.
+    // Don't emit known NOOP widening.
     if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)
         && !needFloatOrDoubleWidening(toTypeDescriptor)) {
       return expression;

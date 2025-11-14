@@ -69,8 +69,7 @@ public class InsertCastForLowerBounds extends NormalizationPass {
   }
 
   private static boolean isWildcardOrCaptureWithLowerBound(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    if (typeDescriptor instanceof TypeVariable typeVariable) {
       return typeVariable.isWildcardOrCapture()
           && typeVariable.getLowerBoundTypeDescriptor() != null;
     }

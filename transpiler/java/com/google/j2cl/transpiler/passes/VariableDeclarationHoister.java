@@ -224,12 +224,8 @@ public class VariableDeclarationHoister extends NormalizationPass {
       i++;
     }
 
-    if (toTrim.size() == i) {
-      // toTrim is already the common prefix.
-      return;
-    }
-    for (int j = toTrim.size() - 1; j >= i; j--) {
-      toTrim.remove(j);
+    if (toTrim.size() > i) {
+      toTrim.subList(i, toTrim.size()).clear();
     }
   }
 

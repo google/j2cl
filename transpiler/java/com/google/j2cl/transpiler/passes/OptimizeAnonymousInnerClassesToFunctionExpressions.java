@@ -193,7 +193,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
   }
 
   /**
-   * Determines whether an inner class that implements a funcitonal interface can be optimized into
+   * Determines whether an inner class that implements a functional interface can be optimized into
    * a function expression (lambda).
    */
   private static boolean canBeOptimized(Type type) {
@@ -207,7 +207,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
       return false;
     }
 
-    if (!typeDeclaration.getInterfaceTypeDescriptors().get(0).isFunctionalInterface()) {
+    if (!typeDeclaration.getInterfaceTypeDescriptors().getFirst().isFunctionalInterface()) {
       return false;
     }
 

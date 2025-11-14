@@ -70,7 +70,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
               .put(
                   TypeDescriptors.get().javaLangCharSequence.getTypeDeclaration(),
                   BootstrapType.CHAR_SEQUENCES.getDescriptor())
-              .build();
+              .buildOrThrow();
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {

@@ -56,7 +56,7 @@ public class NormalizeFieldInitialization extends NormalizationPass {
               return null;
             }
 
-            // Replace the field declaration with an initializer block inplace to preserve
+            // Replace the field declaration with an initializer block in place to preserve
             // ordering.
             DeclaredTypeDescriptor enclosingTypeDescriptor =
                 field.getDescriptor().getEnclosingTypeDescriptor();

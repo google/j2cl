@@ -123,12 +123,12 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
             }
 
             // Replace out of bounds type variables that might have been left by the frontend
-            // if the inferrence was not needed for Java compilation.
+            // if the inference was not needed for Java compilation.
             return JsDocCastExpression.Builder.from(jsDocCastExpression)
                 .setCastTypeDescriptor(
                     castTypeDescriptor.specializeTypeVariables(
                         typeVariable ->
-                            replaceOutofScopeTypeVariable(getCurrentMember(), typeVariable)))
+                            replaceOutOfScopeTypeVariable(getCurrentMember(), typeVariable)))
                 .build();
           }
         });
@@ -142,8 +142,8 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
     return typeVariable.isWildcardOrCapture() ? typeDescriptor.toRawTypeDescriptor() : typeVariable;
   }
 
-  /** Replaces out of scope variables by a wilcard. */
-  private TypeDescriptor replaceOutofScopeTypeVariable(Member member, TypeVariable typeVariable) {
+  /** Replaces out of scope variables by a wildcard. */
+  private TypeDescriptor replaceOutOfScopeTypeVariable(Member member, TypeVariable typeVariable) {
     return typeVariable.isWildcardOrCapture()
             || typeVariablesByMember.containsEntry(member, typeVariable)
         ? typeVariable

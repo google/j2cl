@@ -87,7 +87,7 @@ public class ImplementClassMetadataViaConstructors extends NormalizationPass {
       literalTypeDescriptor = TypeDescriptors.get().javaLangObjectArray;
     }
 
-    // Class.$get(leafConstructor, dimenstions)
+    // Class.$get(leafConstructor, dimensions)
     return RuntimeMethods.createClassGetMethodCall(
         literalTypeDescriptor.getLeafTypeDescriptor().getMetadataConstructorReference(),
         NumberLiteral.fromInt(literalTypeDescriptor.getDimensions()));

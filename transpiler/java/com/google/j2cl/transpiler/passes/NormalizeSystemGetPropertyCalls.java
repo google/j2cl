@@ -47,7 +47,7 @@ public class NormalizeSystemGetPropertyCalls extends NormalizationPass {
             List<Expression> arguments = methodCall.getArguments();
 
             // JsInteropRestrictionChecker enforces the first parameter is a StringLiteral.
-            String propertyKey = ((StringLiteral) arguments.get(0)).getValue();
+            String propertyKey = ((StringLiteral) arguments.getFirst()).getValue();
             boolean isRequired = arguments.size() != 2;
 
             MethodCall propertyGetterCall =

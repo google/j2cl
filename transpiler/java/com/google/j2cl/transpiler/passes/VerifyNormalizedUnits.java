@@ -249,7 +249,6 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             checkState(
                 !(getParent() instanceof ArrayLiteral)
                     || AstUtils.shouldUseUntypedArray(arrayLiteral.getTypeDescriptor()));
-            if (verifyForWasm) {}
           }
 
           @Override
@@ -356,7 +355,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             checkState(!variableDeclarationExpression.getFragments().isEmpty());
             checkState(
                 variableDeclarationExpression.getFragments().stream()
-                    .allMatch(f -> !f.getVariable().isParameter()));
+                    .noneMatch(f -> f.getVariable().isParameter()));
           }
 
           @Override

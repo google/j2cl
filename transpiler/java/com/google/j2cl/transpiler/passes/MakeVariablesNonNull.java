@@ -97,7 +97,7 @@ public class MakeVariablesNonNull extends NormalizationPass {
               TypeDescriptor typeDescriptor = variable.getTypeDescriptor();
 
               if (typeDescriptor.isPrimitive()) {
-                // Variables of primitve types can never be assigned nullable values, but when this
+                // Variables of primitive types can never be assigned nullable values, but when this
                 // pass is run, unboxing passes might not have run yet and we might see a
                 // potentially nullable expression.
                 return;

@@ -84,7 +84,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     Set<TypeDeclaration> inlinableTypes =
         library
             .streamTypes()
-            .filter(t -> canBeInlinedTo(t))
+            .filter(OptimizeAutoValue::canBeInlinedTo)
             .map(Type::getDeclaration)
             .collect(toImmutableSet());
     if (inlinableTypes.isEmpty()) {
@@ -270,8 +270,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       fromCtor
           .getBody()
           .getStatements()
-          .add(
-              0,
+          .addFirst(
               MethodCall.Builder.from(defaultCtor.getDescriptor())
                   .build()
                   .makeStatement(fromCtor.getBody().getSourcePosition()));
@@ -491,7 +490,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                 new JsConstructorReference(
                     TypeDescriptors.get().javaemulInternalValueType.getTypeDeclaration()),
                 NumberLiteral.fromInt(mask),
-                getProperyNameExpressions(autoValue.getDeclaration(), excludedFields))
+                getPropertyNameExpressions(autoValue.getDeclaration(), excludedFields))
             .build();
     autoValue.addLoadTimeStatement(mixinCall.makeStatement(SourcePosition.NONE));
   }
@@ -542,7 +541,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     Expression propertyNameExpressions =
         JsDocExpression.newBuilder()
             .setAnnotation("pureOrBreakMyCode")
-            .setExpression(getProperyNameExpressions(autoValue.getDeclaration(), excludedFields))
+            .setExpression(getPropertyNameExpressions(autoValue.getDeclaration(), excludedFields))
             .build();
 
     // Adds load time statement MyFoo.prototype.$excluded_fields = [ ... ]
@@ -553,7 +552,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             .makeStatement(SourcePosition.NONE));
   }
 
-  private static ArrayLiteral getProperyNameExpressions(
+  private static ArrayLiteral getPropertyNameExpressions(
       TypeDeclaration type, Collection<FieldDescriptor> fields) {
     // Note that ValueType.objectProperty is just a native proxy for goog.reflect.objectProperty.
     MethodCall.Builder objectPropertyCallBuilder =

@@ -108,7 +108,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
             && !(newArrayExpression.getInitializer() instanceof ArrayLiteral));
 
     Expression dimensionLengthExpression =
-        checkNotNull(newArrayExpression.getDimensionExpressions().get(0));
+        checkNotNull(newArrayExpression.getDimensionExpressions().getFirst());
 
     if (AstUtils.shouldUseUntypedArray(newArrayExpression.getTypeDescriptor())) {
       return createNonNullableAnnotation(

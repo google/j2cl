@@ -555,7 +555,7 @@ class JavaEnvironment {
       } else {
         simpleName = asElement(erasure(currentType.asType())).getSimpleName().toString();
       }
-      classComponents.add(0, simpleName);
+      classComponents.addFirst(simpleName);
       Element enclosingElement = currentType.getEnclosingElement();
       while (enclosingElement != null && !(enclosingElement instanceof TypeElement)) {
         enclosingElement = enclosingElement.getEnclosingElement();
@@ -585,7 +585,7 @@ class JavaEnvironment {
   private boolean isValueOfMethod(ExecutableElement methodElement) {
     return methodElement.getSimpleName().contentEquals("valueOf")
         && methodElement.getParameters().size() == 1
-        && asTypeElement(methodElement.getParameters().get(0).asType())
+        && asTypeElement(methodElement.getParameters().getFirst().asType())
             .getQualifiedName()
             .contentEquals("java.lang.String");
   }
@@ -916,7 +916,7 @@ class JavaEnvironment {
     if (location.isEmpty()) {
       return withNullability(typeDescriptor, isNullable);
     }
-    TypePathEntry currentEntry = location.get(0);
+    TypePathEntry currentEntry = location.getFirst();
     List<TypePathEntry> rest = location.subList(1, location.size());
     switch (currentEntry.tag) {
       case TYPE_ARGUMENT:
@@ -963,7 +963,7 @@ class JavaEnvironment {
   }
 
   private static int countInner(List<TypePathEntry> rest) {
-    return !rest.isEmpty() && rest.get(0).tag == TypePathEntryKind.INNER_TYPE
+    return !rest.isEmpty() && rest.getFirst().tag == TypePathEntryKind.INNER_TYPE
         ? countInner(rest.subList(1, rest.size())) + 1
         : 0;
   }

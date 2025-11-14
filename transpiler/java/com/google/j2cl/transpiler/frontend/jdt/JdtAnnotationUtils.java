@@ -199,16 +199,14 @@ public final class JdtAnnotationUtils {
   static boolean shouldReadAnnotations(IBinding binding) {
     // TODO(b/399417397) Determine if we should handle annotations on all annotation types. Remove
     // this method if necessary.
-    if (binding instanceof ITypeBinding typeBinding) {
-      if (typeBinding.isAnnotation() && !typeBinding.isFromSource()) {
-        // Not all annotations are present in all compilations; in particular, Kotlin annotations
-        // that on JsInterop annotations are only present when compiling their sources. As a
-        // workaround here, annotations on annotations are only populated when compiling their
-        // sources.
-        return false;
-      }
-    }
-    return true;
+
+    // Not all annotations are present in all compilations; in particular, Kotlin annotations
+    // that on JsInterop annotations are only present when compiling their sources. As a
+    // workaround here, annotations on annotations are only populated when compiling their
+    // sources.
+    return !(binding instanceof ITypeBinding typeBinding)
+        || !typeBinding.isAnnotation()
+        || typeBinding.isFromSource();
   }
 
   private JdtAnnotationUtils() {}

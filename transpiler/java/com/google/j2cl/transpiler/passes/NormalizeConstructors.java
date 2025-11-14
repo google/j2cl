@@ -251,8 +251,7 @@ public class NormalizeConstructors extends NormalizationPass {
     if (!type.getSuperTypeDescriptor().hasJsConstructor()) {
       superConstructorInvocation = synthesizeEmptySuperCall(type.getSuperTypeDescriptor());
     }
-    body.add(
-        0,
+    body.addFirst(
         AstUtils.replaceDeclarations(
             jsConstructor.getParameters(),
             jsConstructorParameters,
@@ -303,10 +302,10 @@ public class NormalizeConstructors extends NormalizationPass {
     List<Statement> body = generateInstanceFieldDeclarationStatements(type, sourcePosition);
 
     if (type.getSuperTypeDescriptor() != null) {
-      body.add(
-          0, synthesizeEmptySuperCall(type.getSuperTypeDescriptor()).makeStatement(sourcePosition));
+      body.addFirst(
+          synthesizeEmptySuperCall(type.getSuperTypeDescriptor()).makeStatement(sourcePosition));
     } else {
-      body.add(0, synthesizeAssertClinit(type).makeStatement(sourcePosition));
+      body.addFirst(synthesizeAssertClinit(type).makeStatement(sourcePosition));
     }
 
     MethodDescriptor constructorDescriptor =
@@ -479,13 +478,12 @@ public class NormalizeConstructors extends NormalizationPass {
       List<Expression> javascriptConstructorArguments,
       List<Statement> preCtorCallStatements) {
 
-    List<Statement> statements = new ArrayList<>();
-
     List<Variable> factoryMethodParameters = AstUtils.clone(constructor.getParameters());
     List<Expression> relayArguments = AstUtils.getReferences(factoryMethodParameters);
-    statements.addAll(
-        AstUtils.replaceDeclarations(
-            constructor.getParameters(), factoryMethodParameters, preCtorCallStatements));
+    List<Statement> statements =
+        new ArrayList<>(
+            AstUtils.replaceDeclarations(
+                constructor.getParameters(), factoryMethodParameters, preCtorCallStatements));
     javascriptConstructorArguments =
         AstUtils.replaceDeclarations(
             constructor.getParameters(), factoryMethodParameters, javascriptConstructorArguments);

@@ -102,7 +102,8 @@ public class NormalizeJsVarargs extends NormalizationPass {
           RuntimeMethods.createArraysStampTypeMethodCall(
               varargsParameter.createReference(), varargsStampTypeDescriptor);
 
-      body.getStatements().add(0, arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));
+      body.getStatements()
+          .addFirst(arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));
     }
   }
 
@@ -160,7 +161,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       return initializer;
     }
 
-    if (newArray.getDimensionExpressions().get(0) instanceof NumberLiteral numberLiteral) {
+    if (newArray.getDimensionExpressions().getFirst() instanceof NumberLiteral numberLiteral) {
       if (numberLiteral.getValue().intValue() == 0) {
         // This is newArray of zero length, even if it didn't have an initializer we can provide
         // and empty array literal of the right type.

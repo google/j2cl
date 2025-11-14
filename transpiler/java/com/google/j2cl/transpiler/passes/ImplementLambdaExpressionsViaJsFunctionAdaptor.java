@@ -196,7 +196,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     MethodDescriptor adaptorConstructor = adaptorTypeDescriptor.getSingleConstructor();
     // FunctionalInterface$$LambdaAdaptor $adapt(
     //     FunctionalInterface$$LambdaAdaptor$$JsFunctionInterface fn) {
-    //   return new FunctionalInterface$$LambdaAadaptor(fn);
+    //   return new FunctionalInterface$$LambdaAdaptor(fn);
     // }
     functionalInterfaceType.addMember(
         Method.newBuilder()

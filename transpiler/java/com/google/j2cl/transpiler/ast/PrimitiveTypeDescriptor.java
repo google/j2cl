@@ -147,7 +147,7 @@ public final class PrimitiveTypeDescriptor extends TypeDescriptor {
       return true;
     }
 
-    // Note that primitve longs are only assignable to/from primitive longs, so they are completely
+    // Note that primitive longs are only assignable to/from primitive longs, so they are completely
     // absent in the following logic.
     if (TypeDescriptors.isPrimitiveByte(this)) {
       return TypeDescriptors.isPrimitiveShort(that)

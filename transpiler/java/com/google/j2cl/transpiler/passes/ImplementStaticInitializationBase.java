@@ -34,7 +34,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import java.util.HashSet;
 import java.util.Set;
 
-/** Common code for different implementations of static intialization semantics. */
+/** Common code for different implementations of static initialization semantics. */
 public abstract class ImplementStaticInitializationBase extends NormalizationPass {
 
   private final Set<String> privateMembersCalledFromOtherClasses = new HashSet<>();

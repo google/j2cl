@@ -95,7 +95,7 @@ public class InsertExternConversionsWasm extends NormalizationPass {
                     replaceStringWithNativeString(builder.getReturnTypeDescriptor()))
                 .updateParameterTypeDescriptors(
                     builder.getParameterTypeDescriptors().stream()
-                        .map(x -> replaceStringWithNativeString(x))
+                        .map(InsertExternConversionsWasm::replaceStringWithNativeString)
                         .collect(toImmutableList())));
   }
 

@@ -499,7 +499,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       if (!enclosingTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
         return qualifier;
       }
-      // This is a constuctor call of an inner class; hence the qualifier type is the enclosing
+      // This is a constructor call of an inner class; hence the qualifier type is the enclosing
       // class of the class where the method is defined.
       enclosingTypeDescriptor = enclosingTypeDescriptor.getEnclosingTypeDescriptor();
       declaredEnclosingTypeDescriptor =

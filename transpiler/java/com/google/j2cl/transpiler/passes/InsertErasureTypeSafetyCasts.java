@@ -83,14 +83,14 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
 
       @Override
       public Expression rewriteCastContext(CastExpression castExpression) {
-        // Explicit casts are treated specifically because ContextRewriter does't treat them as
-        // a regular type conversion context however they may hide the ereasure. e.g.
+        // Explicit casts are treated specifically because ContextRewriter doesn't treat them as
+        // a regular type conversion context however they may hide the erasure. e.g.
         //
         //   List<Integer> integerList = ....;
         //   int i = (int) integerList.get(0);
         //
         // In this example an erasure cast to Integer needs to be inserted before the unboxing
-        // implied by the explict cast to int.
+        // implied by the explicit cast to int.
         Expression expression = castExpression.getExpression();
         if (castExpression.getCastTypeDescriptor().isPrimitive()
             && !expression.getTypeDescriptor().isPrimitive()) {

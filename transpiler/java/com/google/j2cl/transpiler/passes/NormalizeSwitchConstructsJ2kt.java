@@ -127,7 +127,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
               return switchExpression;
             }
 
-            // Since it has fallthroughs and can not be converted directly to a `when` expression,
+            // Since it has fallthrough and can not be converted directly to a `when` expression,
             // lower it into a `switch` statement with a label (which is necessary since at this
             // point all potential targets of breaks are assumed labeled). At the end it will be
             // enclosed into an embedded statement to handle the return value.
@@ -379,8 +379,8 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
 
   /**
    * For a switch to be directly expressible as a when in Kotlin two conditions have to be met: the
-   * default case needs to be the last one, and there should not be any fallthroughs except for
-   * empty cases.
+   * default case needs to be the last one, and there should not be any fallthrough except for empty
+   * cases.
    */
   private static boolean canConvertDirectlyToWhen(SwitchStatement switchStatement) {
     List<SwitchCase> cases = switchStatement.getCases();

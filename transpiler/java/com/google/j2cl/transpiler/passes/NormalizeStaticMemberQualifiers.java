@@ -33,7 +33,7 @@ public class NormalizeStaticMemberQualifiers extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteMemberReference(MemberReference memberReference) {
-            // If this is a static member referece, split the evaluation of the qualifier to
+            // If this is a static member reference, split the evaluation of the qualifier to
             // preserve
             // potential side effects.
             if (isStaticMemberReferenceWithInstanceQualifier(memberReference)) {

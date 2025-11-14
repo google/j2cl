@@ -44,7 +44,7 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
 
   /**
    * Insert J2ktMonitor as super class for classes with synchronized instance methods. This enables
-   * them to be used in Kotlin synhronized blocks.
+   * them to be used in Kotlin synchronized blocks.
    *
    * <pre>
    * class A {

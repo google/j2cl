@@ -72,7 +72,7 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         } else if (expressions.size() == 1) {
           // Only one expression with side effects in this top level multiexpression, make it
           // an expression statement.
-          return expressions.get(0).makeStatement(statement.getSourcePosition());
+          return expressions.getFirst().makeStatement(statement.getSourcePosition());
         } else {
           // If there are multiple expressions then turn it into a block so that any var creation
           // appears immediately before its use rather than being hoisted to the top of the

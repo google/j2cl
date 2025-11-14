@@ -357,7 +357,7 @@ public abstract class TypeDeclaration
   public boolean isProtobuf() {
     return getAllSuperTypesIncludingSelf().stream()
         .map(TypeDeclaration::getPackageName)
-        .anyMatch(it -> it.equals("com.google.protobuf"));
+        .anyMatch("com.google.protobuf"::equals);
   }
 
   public boolean isJsEnum() {
@@ -757,7 +757,7 @@ public abstract class TypeDeclaration
         return "<anonymous> extends " + getSuperTypeDescriptor().getReadableDescription();
       } else {
         return "<anonymous> implements "
-            + getInterfaceTypeDescriptors().get(0).getReadableDescription();
+            + getInterfaceTypeDescriptors().getFirst().getReadableDescription();
       }
     } else if (isLocal()) {
       return getSimpleSourceName().replaceFirst("\\$\\d+", "");
@@ -972,8 +972,6 @@ public abstract class TypeDeclaration
     abstract Optional<PackageDeclaration> getPackage();
 
     abstract Optional<TypeDeclaration> getEnclosingTypeDeclaration();
-
-    abstract Optional<JsEnumInfo> getJsEnumInfo();
 
     abstract boolean isJsFunctionInterface();
 

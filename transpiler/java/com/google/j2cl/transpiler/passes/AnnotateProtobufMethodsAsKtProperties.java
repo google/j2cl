@@ -59,10 +59,6 @@ public class AnnotateProtobufMethodsAsKtProperties extends NormalizationPass {
     }
 
     String name = methodDescriptor.getName();
-    if (!name.startsWith("get")) {
-      return false;
-    }
-
-    return true;
+    return name.startsWith("get");
   }
 }

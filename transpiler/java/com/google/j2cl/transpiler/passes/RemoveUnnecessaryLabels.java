@@ -68,7 +68,7 @@ public class RemoveUnnecessaryLabels extends NormalizationPass {
     compilationUnit.accept(
         new AbstractRewriter() {
           // Collect the labels associated with `do {...} while (false)` loops to convert any
-          // continue statements targetting the loop into break statements since in this situation
+          // continue statements targeting the loop into break statements since in this situation
           // they are equivalent and the label might end up attached to a non-looping statement.
           private final Set<Label> labelsToConvert = new HashSet<>();
 

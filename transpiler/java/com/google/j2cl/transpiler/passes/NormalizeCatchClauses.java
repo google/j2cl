@@ -92,7 +92,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
   private static CatchClause mergeClauses(List<CatchClause> clauses) {
     checkArgument(!clauses.isEmpty());
 
-    SourcePosition sourcePosition = clauses.get(0).getBody().getSourcePosition();
+    SourcePosition sourcePosition = clauses.getFirst().getBody().getSourcePosition();
     // Create a temporary exception variable.
     Variable exceptionVariable =
         Variable.newBuilder()
@@ -128,7 +128,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
           .build();
     }
 
-    CatchClause clause = clauses.get(0);
+    CatchClause clause = clauses.getFirst();
     Variable catchVariable = clause.getExceptionVariable();
 
     TypeDescriptor exceptionTypeDescriptor = catchVariable.getTypeDescriptor();

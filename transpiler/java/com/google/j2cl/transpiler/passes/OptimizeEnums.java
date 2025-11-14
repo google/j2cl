@@ -139,9 +139,9 @@ public class OptimizeEnums extends NormalizationPass {
 
     // Only optimize the cases where the instantiation appears directly in the initializer. Do not
     // optimize if the initialization was extracted into a method by the Kotlin frontend.
-    if (type.getEnumFields().stream()
+    if (!type.getEnumFields().stream()
         .map(Field::getInitializer)
-        .anyMatch(init -> !(init instanceof NewInstance))) {
+        .allMatch(NewInstance.class::isInstance)) {
       return false;
     }
 

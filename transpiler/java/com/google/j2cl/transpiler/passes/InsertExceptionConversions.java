@@ -83,7 +83,7 @@ public class InsertExceptionConversions extends NormalizationPass {
               newCatchClause
                   .getBody()
                   .getStatements()
-                  .add(0, declaration.makeStatement(catchClause.getBody().getSourcePosition()));
+                  .addFirst(declaration.makeStatement(catchClause.getBody().getSourcePosition()));
             }
             return newCatchClause;
           }

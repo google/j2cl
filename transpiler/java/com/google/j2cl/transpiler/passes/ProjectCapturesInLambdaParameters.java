@@ -39,7 +39,7 @@ public class ProjectCapturesInLambdaParameters extends AbstractJ2ktNormalization
                     .setTypeDescriptor(
                         declaredTypeDescriptor.withTypeArguments(
                             declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-                                .map(it -> projectCaptures(it))
+                                .map(AbstractJ2ktNormalizationPass::projectCaptures)
                                 .collect(toImmutableList())))
                     .build();
             functionExpression

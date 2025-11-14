@@ -299,6 +299,6 @@ public class OptimizeXplatForEach extends NormalizationPass {
 
   enum IterationType {
     FOR_IN,
-    FOR_ARRAY;
+    FOR_ARRAY
   }
 }
