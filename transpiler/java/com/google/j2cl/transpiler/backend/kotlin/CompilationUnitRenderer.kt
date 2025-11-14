@@ -99,6 +99,7 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
             "VARIABLE_WITH_REDUNDANT_INITIALIZER",
             "INCOMPATIBLE_OBJC_NAME_OVERRIDE", // Needed for b/440308508
             "REDUNDANT_ELSE_IN_WHEN",
+            "ACCIDENTAL_OVERRIDE", // Needed for: https://youtrack.jetbrains.com/issue/KT-12993
           )
           .map { literal(it) },
       )
