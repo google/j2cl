@@ -54,6 +54,12 @@ public class CommandLineInvocationTest extends TestCase {
         .assertErrorsContainsSnippets("\"llama\" is not a valid value for \"-frontend");
 
     newTesterWithDefaults()
+        .addArgs("-frontend", "javac")
+        .setOutputPath(Files.createTempFile("output-javac", ".zip"))
+        .addCompilationUnit("Foo", "public class Foo {}")
+        .assertTranspileSucceeds();
+
+    newTesterWithDefaults()
         .addArgs("-frontend", "jdt")
         .setOutputPath(Files.createTempFile("output", ".zip"))
         .addCompilationUnit("Foo", "public class Foo {}")
