@@ -11,7 +11,7 @@ let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
-let $1 = goog.forwardDeclare('lambdas.Lambdas.$1$impl');
+let $3 = goog.forwardDeclare('lambdas.Lambdas.$3$impl');
 let $4 = goog.forwardDeclare('lambdas.Lambdas.$4$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$1$impl');
 let $LambdaAdaptor$2 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$2$impl');
@@ -181,7 +181,7 @@ class Lambdas extends j_l_Object {
    let y_3 = /**@type {?string}*/ ($Casts.$to(y_2, j_l_String));
    return 3;
   })));
-  let f = Lambdas_Function.$adapt(/**  @return {?}*/ ((/** ? */ item) =>{
+  let f = Lambdas_Function.$adapt(/**  @return {*}*/ ((/** T */ item) =>{
    let item_1 = /**@type {T}*/ ($Casts.$to(item, Enum));
    return $Long.fromInt(1);
   }));
@@ -198,7 +198,7 @@ class Lambdas extends j_l_Object {
  /** @nodts */
  static m_testLambdaCallingStaticMethod__void() {
   Lambdas.$clinit();
-  let f = Lambdas_Function.$adapt(/**  @return {?}*/ ((/** * */ l) =>{
+  let f = Lambdas_Function.$adapt(/**  @return {*}*/ ((/** * */ l) =>{
    return Lambdas.m_m__java_lang_Object();
   }));
  }
@@ -211,7 +211,7 @@ class Lambdas extends j_l_Object {
  /** @nodts */
  m_testAnonymousInsideLambda__void() {
   let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() =>{
-   $4.$create__lambdas_Lambdas(this);
+   $3.$create__lambdas_Lambdas(this);
   });
  }
  /** @nodts @template E @return {?function(E):E} */
@@ -271,8 +271,8 @@ class Lambdas extends j_l_Object {
  }
  /** @nodts @template T */
  m_testParameterizedTypeWithUnusedTypeVariable__void() {
-  Lambdas.m_acceptsSupplier__lambdas_Lambdas_Supplier__void(Supplier.$adapt(/**  @return {$1<T>}*/ (() =>{
-   return $1.$create__lambdas_Lambdas(this);
+  Lambdas.m_acceptsSupplier__lambdas_Lambdas_Supplier__void(Supplier.$adapt(/**  @return {$4<T>}*/ (() =>{
+   return /**@type {!$4<T>}*/ ($4.$create__lambdas_Lambdas(this));
   })));
  }
  /** @nodts @template T */
@@ -301,7 +301,7 @@ class Lambdas extends j_l_Object {
   Iterable = goog.module.get('java.lang.Iterable$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
-  $1 = goog.module.get('lambdas.Lambdas.$1$impl');
+  $3 = goog.module.get('lambdas.Lambdas.$3$impl');
   $4 = goog.module.get('lambdas.Lambdas.$4$impl');
   $LambdaAdaptor$1 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$1$impl');
   $LambdaAdaptor$2 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$2$impl');

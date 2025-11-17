@@ -35,8 +35,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 System.getProperty(COMPILE_TIME_CONSTANT);
                 String s="property";
                 System.getProperty(s);
-                System.getProperty("pro"+"perty");
-                System.getProperty(COMPILE_TIME_CONSTANT,"default");}
+                System.getProperty(COMPILE_TIME_CONSTANT,"default");
+              }
             }
             """)
         .assertErrorsWithSourcePosition(
@@ -44,9 +44,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "can only take a string literal as its first parameter",
             "Error:Buggy.java:9: Method 'String System.getProperty(String)' "
                 + "can only take a string literal as its first parameter",
-            "Error:Buggy.java:10: Method 'String System.getProperty(String)' "
-                + "can only take a string literal as its first parameter",
-            "Error:Buggy.java:11: Method 'String System.getProperty(String, String)' "
+            "Error:Buggy.java:10: Method 'String System.getProperty(String, String)' "
                 + "can only take a string literal as its first parameter");
   }
 
@@ -59,7 +57,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class Main {
               public static void main(){
                 System.getProperty("java.runtime.name");
-                System.getProperty("java.runtime.name","default");}
+                System.getProperty("java.runtime.name","default");
+                System.getProperty("pro"+"perty");
+              }
             }
             """)
         .assertNoWarnings();

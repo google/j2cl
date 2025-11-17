@@ -77,9 +77,11 @@ class SwitchStatement extends j_l_Object {
   let /** number */ i;
   switch (3) {
    case 1:
-    let /** number */ unassigned, /** number */ unassigned2;
+    let /** number */ unassigned;
+    let /** number */ unassigned2;
     i = 0;
-    let j = 2, b = j + 1 | 0;
+    let j = 2;
+    let b = j + 1 | 0;
     break;
    case 3:
     i = 3;
@@ -428,13 +430,9 @@ class SwitchStatement extends j_l_Object {
   let o = 0;
   switch (1) {
    default:
-    {
-     break;
-    }
+    break;
    case 2:
-    {
-     break;
-    }
+    break;
   }
  }
  /** @nodts @return {number} */
@@ -448,26 +446,20 @@ class SwitchStatement extends j_l_Object {
       break;
      }
      result = 2;
-     break;
     }
+    break;
    case 2:
-    {
-     break;
-    }
+    break;
    default:
-    {
-     break;
-    }
+    break;
    case 3:
     {
      result = 3;
-     break;
     }
+    break;
    case 4:
-    {
-     SwitchStatement.m_foo__int();
-     break;
-    }
+    SwitchStatement.m_foo__int();
+    break;
   }
   return result;
  }

@@ -32,14 +32,14 @@ class B extends A {
  
  bar(/** ?string */ s) {}
  //Bridge method.
- /** @final @override @nodts */
- m_bar__java_lang_Object__void(/** ?string */ arg0) {
-  this.bar(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
- }
- //Bridge method.
  /** @final @override @return {?string} */
  fun(/** ?string */ arg0) {
   return this.m_fun__java_lang_String__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ //Bridge method.
+ /** @final @override @nodts */
+ m_bar__java_lang_Object__void(/** ?string */ arg0) {
+  this.bar(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
  /** @nodts */
  static $clinit() {

@@ -76,7 +76,8 @@ public class CommandLineInvocationTest extends TestCase {
             }
             """)
         .assertTranspileFails()
-        .assertErrorsContainsSnippets("Syntax error on token \"=\"");
+        .assertErrorsContainsMatchingSnippet(
+            ".*((Syntax error on token \"=\")|(illegal start of type)).*");
   }
 
   public void testInvalidOutputLocation() throws IOException {
@@ -90,7 +91,8 @@ public class CommandLineInvocationTest extends TestCase {
             "Output location '" + outputLocation + "' must be a directory or .zip file.");
   }
 
-  public void testMissingJreDependency() {
+  // TODO(b/459774514): Figure out how to make javac not pickup any jre.
+  public void disabled_testMissingJreDependency() {
     // Create a clean tester so that the JRE dependency is not automatically added.
     newTester()
         .addCompilationUnit("EmptyClass", "public class EmptyClass {}")

@@ -41,6 +41,11 @@ class Child extends Parent {
  }
  //Bridge method.
  /** @final @override @nodts @return {number} */
+ m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1(/** number */ arg0) {
+  return this.m_overrideInParentExposedInChild__int__int(arg0);
+ }
+ //Bridge method.
+ /** @final @override @nodts @return {number} */
  m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1(/** number */ arg0, /** number */ arg1) {
   return this.m_exposedInChild__int__int__int(arg0, arg1);
  }
@@ -48,11 +53,6 @@ class Child extends Parent {
  /** @final @override @nodts @return {number} */
  m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1(/** number */ arg0, /** number */ arg1) {
   return this.m_exposedInChildWithInterface__int__int__int(arg0, arg1);
- }
- //Bridge method.
- /** @final @override @nodts @return {number} */
- m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1(/** number */ arg0) {
-  return this.m_overrideInParentExposedInChild__int__int(arg0);
  }
  /** @nodts */
  static $clinit() {
