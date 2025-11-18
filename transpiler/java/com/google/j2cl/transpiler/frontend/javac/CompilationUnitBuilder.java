@@ -98,6 +98,7 @@ import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.DefaultCaseLabelTree;
 import com.sun.source.tree.Tree;
 import com.sun.source.tree.Tree.Kind;
 import com.sun.tools.javac.code.Flags;
@@ -490,6 +491,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private SwitchCase convertSwitchCase(JCCase caseClause, TypeDescriptor resultType) {
     return SwitchCase.newBuilder()
         .setCaseExpressions(convertCaseExpressions(caseClause))
+        .setDefault(
+            caseClause.getLabels().stream().anyMatch(DefaultCaseLabelTree.class::isInstance))
         .setStatements(getCaseStatements(caseClause, resultType))
         .setCanFallthrough(
             caseClause.getCaseKind() == com.sun.source.tree.CaseTree.CaseKind.STATEMENT)

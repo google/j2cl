@@ -621,6 +621,7 @@ internal class CompilationUnitBuilder(
     return SwitchCase.newBuilder()
       .setCaseExpressions(convertExpressions(irSwitchCase.caseExpressions))
       .setStatements(statements)
+      .setDefault(irSwitchCase.caseExpressions.isEmpty())
       .build()
   }
 

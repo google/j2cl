@@ -379,17 +379,14 @@ final class StatementTranspiler {
             casePosition++) {
           // Emit conditions for each case.
           SwitchCase switchCase = switchStatement.getCases().get(casePosition);
-          if (switchCase.isDefault()) {
-            // Skip the default case, since all the other conditions need to be evaluated before,
-            // and the default case is handled by an unconditional branch after all other conditions
-            // are checked.
-            continue;
+          if (!switchCase.getCaseExpressions().isEmpty()) {
+            // If the condition for this case is met, jump to the start of the case, i.e. jump out
+            // of all of the previous enclosing blocks.
+            Expression condition =
+                createCaseCondition(
+                    switchCase.getCaseExpressions(), switchStatement.getExpression());
+            renderConditionalBranch(switchStatement.getSourcePosition(), condition, casePosition);
           }
-          // If the condition for this case is met, jump to the start of the case, i.e. jump out
-          // of all of the previous enclosing blocks.
-          Expression condition =
-              createCaseCondition(switchCase.getCaseExpressions(), switchStatement.getExpression());
-          renderConditionalBranch(switchStatement.getSourcePosition(), condition, casePosition);
         }
 
         // When no other condition was met, jump to the default case if exists.

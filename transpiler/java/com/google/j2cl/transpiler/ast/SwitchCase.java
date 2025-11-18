@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -28,19 +30,23 @@ import java.util.List;
 public class SwitchCase extends Node implements Cloneable<SwitchCase> {
   @Visitable List<Expression> caseExpressions;
   @Visitable List<Statement> statements;
+  private final boolean isDefault;
   private final boolean canFallthrough;
 
   private SwitchCase(
       Collection<Expression> caseExpressions,
       Collection<Statement> statements,
+      boolean isDefault,
       boolean canFallthrough) {
     this.caseExpressions = new ArrayList<>(caseExpressions);
     this.statements = new ArrayList<>(statements);
+    this.isDefault = isDefault;
     this.canFallthrough = canFallthrough;
+    checkArgument(isDefault == caseExpressions.isEmpty());
   }
 
   public boolean isDefault() {
-    return caseExpressions.isEmpty();
+    return isDefault;
   }
 
   public boolean canFallthrough() {
@@ -60,6 +66,7 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
     return newBuilder()
         .setCaseExpressions(AstUtils.clone(caseExpressions))
         .setStatements(AstUtils.clone(statements))
+        .setDefault(isDefault)
         .setCanFallthrough(canFallthrough)
         .build();
   }
@@ -77,6 +84,7 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
   public static class Builder {
     private List<Expression> caseExpressions = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
+    private boolean isDefault = false;
     // Switch cases may fallthrough by default.
     private boolean canFallthrough = true;
 
@@ -84,6 +92,7 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
       return newBuilder()
           .setCaseExpressions(switchCase.getCaseExpressions())
           .setStatements(switchCase.getStatements())
+          .setDefault(switchCase.isDefault)
           .setCanFallthrough(switchCase.canFallthrough);
     }
 
@@ -117,13 +126,19 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
     }
 
     @CanIgnoreReturnValue
+    public Builder setDefault(boolean isDefault) {
+      this.isDefault = isDefault;
+      return this;
+    }
+
+    @CanIgnoreReturnValue
     public Builder setCanFallthrough(boolean canFallthrough) {
       this.canFallthrough = canFallthrough;
       return this;
     }
 
     public SwitchCase build() {
-      return new SwitchCase(caseExpressions, statements, canFallthrough);
+      return new SwitchCase(caseExpressions, statements, isDefault, canFallthrough);
     }
   }
 }

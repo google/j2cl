@@ -487,11 +487,15 @@ class ToStringRenderer {
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
-        if (switchCase.isDefault()) {
-          print("default");
-        } else {
+        if (!switchCase.getCaseExpressions().isEmpty()) {
           print("case ");
           printSeparated(", ", switchCase.getCaseExpressions());
+          if (switchCase.isDefault()) {
+            print(",");
+          }
+        }
+        if (switchCase.isDefault()) {
+          print("default");
         }
         print(switchCase.canFallthrough() ? ":" : " ->");
         indent();

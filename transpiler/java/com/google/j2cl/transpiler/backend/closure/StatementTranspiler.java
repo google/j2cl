@@ -257,14 +257,23 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
+        // Emit the expressions as a sequence of (fallthrough empty) cases. E.g.
+        //
+        //   case 1, 2, 3:
+        //
+        // will be emitted as:
+        //
+        //   case 1:
+        //   case 2:
+        //   case 3:
+
+        for (Expression expression : switchCase.getCaseExpressions()) {
+          builder.append("case ");
+          renderExpression(expression);
+          builder.append(":");
+        }
         if (switchCase.isDefault()) {
           builder.append("default:");
-        } else {
-          for (Expression expression : switchCase.getCaseExpressions()) {
-            builder.append("case ");
-            renderExpression(expression);
-            builder.append(":");
-          }
         }
         builder.indent();
         renderStatements(switchCase.getStatements());

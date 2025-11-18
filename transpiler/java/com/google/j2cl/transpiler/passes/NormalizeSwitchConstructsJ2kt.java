@@ -230,7 +230,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
       return;
     }
 
-    switchStatement.getCases().add(SwitchCase.newBuilder().build());
+    switchStatement.getCases().add(SwitchCase.newBuilder().setDefault(true).build());
   }
 
   /**

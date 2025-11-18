@@ -1300,6 +1300,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                   .stream()
                   .map(this::convert)
                   .collect(toImmutableList()))
+          .setDefault(switchCase.isDefault())
           .setCanFallthrough(!switchCase.isSwitchLabeledRule());
     }
 

@@ -71,7 +71,11 @@ public class AddSwitchExpressionsExhaustivenessCheck extends NormalizationPass {
                     .makeStatement(sourcePosition);
             switchExpression
                 .getCases()
-                .add(SwitchCase.newBuilder().setStatements(checkMethodCall).build());
+                .add(
+                    SwitchCase.newBuilder()
+                        .setDefault(true)
+                        .setStatements(checkMethodCall)
+                        .build());
           }
         });
   }
