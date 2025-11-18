@@ -19,8 +19,9 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import com.google.j2cl.integration.testing.Asserts.assertUnderlyingTypeEquals
-import com.google.j2cl.integration.testing.AssertsBase.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.TestUtils
+import jsinterop.annotations.JsProperty
+import jsinterop.annotations.JsType
 
 private class ExtendingJavaClass : JavaClass() {
   var fieldUsingSuper: Int
@@ -41,6 +42,7 @@ fun main(vararg unused: String) {
   testMemberReferenceThroughSuper()
   testFakeOverrideSpecialization()
   testNullMarkedCode()
+  testJsInterop()
 }
 
 fun testFieldAccess() {
@@ -100,4 +102,45 @@ fun testNullMarkedCode() {
   assertUnderlyingTypeEquals(Long::class.javaObjectType, NullMarkedClass.getNonNullLong())
   assertUnderlyingTypeEquals(Double::class.javaObjectType, NullMarkedClass.getNonNullDouble())
   assertUnderlyingTypeEquals(Float::class.javaObjectType, NullMarkedClass.getNonNullFloat())
+}
+
+@JsType class KtJsType : SubJsTypeClass()
+
+@JsType class KtJsTypeShadowedFieldInParent : JavaJsTypeShadowsField()
+
+@JsType
+class KtJsTypeShadowsField : SubJsTypeClass() {
+  @JvmField @JsProperty(name = "foo2") var foo = "tuv"
+}
+
+fun testJsInterop() {
+  val ktJsType = KtJsType()
+
+  assertEquals("abc", ktJsType.foo)
+  assertEquals("get:abc", ktJsType.getFoo())
+
+  ktJsType.setFoo("def")
+  assertEquals("was_set:def", ktJsType.foo)
+  assertEquals("get:was_set:def", ktJsType.getFoo())
+
+  assertEquals("xyz", ktJsType.bar)
+  assertEquals("get:xyz", ktJsType.getBar())
+
+  ktJsType.setBar("uvw")
+  assertEquals("was_set:uvw", ktJsType.bar)
+  assertEquals("get:was_set:uvw", ktJsType.getBar())
+
+  val shadowedFieldInParent = KtJsTypeShadowedFieldInParent()
+  assertEquals("ijk", shadowedFieldInParent.foo)
+  assertEquals("get:abc", shadowedFieldInParent.getFoo())
+  shadowedFieldInParent.setFoo("def")
+  assertEquals("ijk", shadowedFieldInParent.foo)
+  assertEquals("get:was_set:def", shadowedFieldInParent.getFoo())
+
+  val overridesField = KtJsTypeShadowsField()
+  assertEquals("tuv", overridesField.foo)
+  assertEquals("get:abc", overridesField.getFoo())
+  overridesField.setFoo("def")
+  assertEquals("tuv", overridesField.foo)
+  assertEquals("get:was_set:def", overridesField.getFoo())
 }

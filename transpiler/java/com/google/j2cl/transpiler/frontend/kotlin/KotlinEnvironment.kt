@@ -940,7 +940,7 @@ internal class KotlinEnvironment(
   }
 
   fun IrClass.getDeclaredFields(): Set<IrField> {
-    var fields = declarations.filterIsInstance<IrField>().filter { it.isReal }.toSet()
+    val fields = declarations.filterIsInstance<IrField>().filter { it.isReal }.toMutableSet()
 
     val companion = declarations.filterIsInstance<IrClass>().firstOrNull(IrClass::isCompanion)
     if (companion != null) {
@@ -953,7 +953,13 @@ internal class KotlinEnvironment(
 
     if (isFromJava()) {
       // Fields from Java class are represented as Kotlin properties.
-      fields += declarations.filterIsInstance<IrProperty>().mapNotNull(IrProperty::backingField)
+      fields +=
+        declarations
+          .filterIsInstance<IrProperty>()
+          // If a field is on a parent type, all the subtypes will have IrProperty declarations that
+          // override from the parent. We can safely ignore these.
+          .filter { it.overriddenSymbols.isEmpty() }
+          .mapNotNull(IrProperty::backingField)
     }
     return fields
   }
