@@ -122,86 +122,87 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
       }
     }
 
-    if (from instanceof PrimitiveTypeDescriptor) {
-      return true;
-    } else if (from instanceof ArrayTypeDescriptor fromArray) {
-      TypeDescriptor toTarget = getAssignableTarget(to);
+    return switch (from) {
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> true;
 
-      if (toTarget instanceof ArrayTypeDescriptor toArray) {
-        return isNullableAssignableTo(from.isNullable(), toArray.isNullable())
-            && isArgumentNullabilityAssignableTo(
-                fromArray.getComponentTypeDescriptor(),
-                toArray.getComponentTypeDescriptor(),
-                seenTo);
-      } else if (toTarget instanceof DeclaredTypeDescriptor) {
-        // Conversion to java.lang.Object, java.lang.Serializable or java.lang.Comparable.
-        return isNullableAssignableTo(from.isNullable(), to.isNullable());
-      } else {
-        return false;
-      }
-    } else if (from instanceof DeclaredTypeDescriptor fromDeclared) {
-      TypeDescriptor toTarget = getAssignableTarget(to);
-      if (toTarget instanceof DeclaredTypeDescriptor toDeclared) {
-        TypeDeclaration toDeclaration = toDeclared.getTypeDeclaration();
-        if (!isNullableAssignableTo(fromDeclared.isNullable(), toDeclared.isNullable())) {
-          return false;
-        }
+      case ArrayTypeDescriptor fromArray ->
+          switch (getAssignableTarget(to)) {
+            case ArrayTypeDescriptor toArray ->
+                isNullableAssignableTo(from.isNullable(), toArray.isNullable())
+                    && isArgumentNullabilityAssignableTo(
+                        fromArray.getComponentTypeDescriptor(),
+                        toArray.getComponentTypeDescriptor(),
+                        seenTo);
+            case DeclaredTypeDescriptor toDescriptor ->
+                // Conversion to java.lang.Object, java.lang.Serializable or java.lang.Comparable.
+                isNullableAssignableTo(from.isNullable(), to.isNullable());
+            default -> false;
+          };
 
-        // Use conservative approach and always require a cast from/to RAW types.
-        if (fromDeclared.isRaw() || toDeclared.isRaw()) {
-          return false;
-        }
-
-        DeclaredTypeDescriptor fromDeclaredBase = fromDeclared.findSupertype(toDeclaration);
-        if (fromDeclaredBase == null) {
-          // For some reason we are still hitting Object -> NonObject case here. Skip these.
-          return false;
-        }
-
-        return Streams.zip(
-                getTypeArgumentDescriptorsWithValidNullability(fromDeclaredBase).stream(),
-                getTypeArgumentDescriptorsWithValidNullability(toDeclared).stream(),
-                (fromArgument, toArgument) ->
-                    isArgumentNullabilityAssignableTo(fromArgument, toArgument, seenTo))
-            .allMatch(Boolean::booleanValue);
-      } else {
-        return false;
-      }
-    } else if (from instanceof TypeVariable fromVariable) {
-      if (to instanceof TypeVariable toVariable) {
-        // TypeVariable -> TypeVariable
-        if (!toVariable.isWildcardOrCapture()) {
-          // TypeVariable -> T
-          if (!fromVariable.isWildcardOrCapture()
-              && fromVariable.toDeclaration().equals(toVariable.toDeclaration())) {
-            // T -> T
-            return isAssignableTo(
-                fromVariable.getNullabilityAnnotation(), toVariable.getNullabilityAnnotation());
-          } else {
-            // wildcard -> T
-            return isNullabilityAssignableTo(
-                getNormalizedUpperBoundTypeDescriptor(fromVariable), toVariable, seenTo);
+      case DeclaredTypeDescriptor fromDeclared -> {
+        TypeDescriptor toTarget = getAssignableTarget(to);
+        if (toTarget instanceof DeclaredTypeDescriptor toDeclared) {
+          TypeDeclaration toDeclaration = toDeclared.getTypeDeclaration();
+          if (!isNullableAssignableTo(fromDeclared.isNullable(), toDeclared.isNullable())) {
+            yield false;
           }
+
+          // Use conservative approach and always require a cast from/to RAW types.
+          if (fromDeclared.isRaw() || toDeclared.isRaw()) {
+            yield false;
+          }
+
+          DeclaredTypeDescriptor fromDeclaredBase = fromDeclared.findSupertype(toDeclaration);
+          if (fromDeclaredBase == null) {
+            // For some reason we are still hitting Object -> NonObject case here. Skip these.
+            yield false;
+          }
+
+          yield Streams.zip(
+                  getTypeArgumentDescriptorsWithValidNullability(fromDeclaredBase).stream(),
+                  getTypeArgumentDescriptorsWithValidNullability(toDeclared).stream(),
+                  (fromArgument, toArgument) ->
+                      isArgumentNullabilityAssignableTo(fromArgument, toArgument, seenTo))
+              .allMatch(Boolean::booleanValue);
         } else {
-          // TypeVariable -> ? extends V
-          return fromVariable.equals(toVariable);
+          yield false;
         }
-      } else {
+      }
+
+      case TypeVariable fromVariable
+          when to instanceof TypeVariable toVariable && toVariable.isWildcardOrCapture() ->
+          // TypeVariable -> ? extends V
+          fromVariable.equals(toVariable);
+
+      case TypeVariable fromVariable when to instanceof TypeVariable toVariable ->
+          // TypeVariable -> T
+          (!fromVariable.isWildcardOrCapture()
+                  && fromVariable.toDeclaration().equals(toVariable.toDeclaration()))
+              // T -> T
+              ? isAssignableTo(
+                  fromVariable.getNullabilityAnnotation(), toVariable.getNullabilityAnnotation())
+              // wildcard -> T
+              : isNullabilityAssignableTo(
+                  getNormalizedUpperBoundTypeDescriptor(fromVariable), toVariable, seenTo);
+
+      case TypeVariable fromVariable -> {
         // TypeVariable -> not TypeVariable
-        return isNullabilityAssignableTo(
+        yield isNullabilityAssignableTo(
             getNormalizedUpperBoundTypeDescriptor(fromVariable), to, seenTo);
       }
-    } else if (from instanceof IntersectionTypeDescriptor fromIntersection) {
-      TypeDescriptor toTarget = getAssignableTarget(to);
-      return fromIntersection.getIntersectionTypeDescriptors().stream()
-          .anyMatch(it -> isNullabilityAssignableTo(it, toTarget, seenTo));
-    } else if (from instanceof UnionTypeDescriptor fromUnion) {
-      TypeDescriptor toTarget = getAssignableTarget(to);
-      return fromUnion.getUnionTypeDescriptors().stream()
-          .allMatch(it -> isNullabilityAssignableTo(it, toTarget, seenTo));
-    } else {
-      throw new AssertionError();
-    }
+
+      case IntersectionTypeDescriptor fromIntersection -> {
+        TypeDescriptor toTarget = getAssignableTarget(to);
+        yield fromIntersection.getIntersectionTypeDescriptors().stream()
+            .anyMatch(it -> isNullabilityAssignableTo(it, toTarget, seenTo));
+      }
+
+      case UnionTypeDescriptor fromUnion -> {
+        TypeDescriptor toTarget = getAssignableTarget(to);
+        yield fromUnion.getUnionTypeDescriptors().stream()
+            .allMatch(it -> isNullabilityAssignableTo(it, toTarget, seenTo));
+      }
+    };
   }
 
   /**
@@ -266,25 +267,22 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
    * </ul>
    */
   private static TypeDescriptor getAssignableTarget(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
-      return typeDescriptor;
-    } else if (typeDescriptor instanceof ArrayTypeDescriptor) {
-      return typeDescriptor;
-    } else if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      return typeDescriptor;
-    } else if (typeDescriptor instanceof TypeVariable typeVariable) {
-      if (typeVariable.isWildcardOrCapture()) {
-        return getAssignableTarget(getNormalizedUpperBoundTypeDescriptor(typeVariable));
-      } else {
-        return typeVariable;
-      }
-    } else if (typeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor) {
-      return getAssignableTarget(intersectionTypeDescriptor.getFirstType());
-    } else if (typeDescriptor instanceof UnionTypeDescriptor unionTypeDescriptor) {
-      return getAssignableTarget(unionTypeDescriptor.getClosestCommonSuperClass());
-    } else {
-      throw new AssertionError();
-    }
+    return switch (typeDescriptor) {
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> typeDescriptor;
+      case ArrayTypeDescriptor arrayTypeDescriptor -> typeDescriptor;
+      case DeclaredTypeDescriptor declaredTypeDescriptor -> typeDescriptor;
+
+      case TypeVariable typeVariable ->
+          typeVariable.isWildcardOrCapture()
+              ? getAssignableTarget(getNormalizedUpperBoundTypeDescriptor(typeVariable))
+              : typeVariable;
+
+      case IntersectionTypeDescriptor intersectionTypeDescriptor ->
+          getAssignableTarget(intersectionTypeDescriptor.getFirstType());
+
+      case UnionTypeDescriptor unionTypeDescriptor ->
+          getAssignableTarget(unionTypeDescriptor.getClosestCommonSuperClass());
+    };
   }
 
   private static boolean isNullableAssignableTo(boolean fromIsNullable, boolean toIsNullable) {

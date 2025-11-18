@@ -88,66 +88,66 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
   private static TypeDescriptor projectCaptures(
       TypeDescriptor typeDescriptor, boolean isTypeArgument, ImmutableSet<TypeVariable> seen) {
-    if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
-      return typeDescriptor;
-    } else if (typeDescriptor instanceof ArrayTypeDescriptor descriptor) {
-      return descriptor.withComponentTypeDescriptor(
-          projectArgumentCaptures(
-              descriptor.getComponentTypeDescriptor(),
-              getArrayComponentTypeParameterDescriptor(),
-              seen));
-    } else if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
-      return descriptor.isRaw()
-          ? descriptor
-          : descriptor.withTypeArguments(
-              zip(
-                  typeDescriptor.isRaw()
-                      ? ImmutableList.of()
-                      : descriptor.getTypeDeclaration().getTypeParameterDescriptors(),
-                  descriptor.getTypeArgumentDescriptors(),
-                  (typeParameter, typeArgument) ->
-                      projectArgumentCaptures(typeArgument, typeParameter, seen)));
-    } else if (typeDescriptor instanceof TypeVariable typeVariable) {
-      if (!typeVariable.isWildcardOrCapture()) {
-        return typeVariable;
-      } else {
-        if (seen.contains(typeVariable)) {
-          return typeVariable;
-        }
+
+    return switch (typeDescriptor) {
+      case PrimitiveTypeDescriptor descriptor -> descriptor;
+
+      case ArrayTypeDescriptor descriptor ->
+          descriptor.withComponentTypeDescriptor(
+              projectArgumentCaptures(
+                  descriptor.getComponentTypeDescriptor(),
+                  getArrayComponentTypeParameterDescriptor(),
+                  seen));
+
+      case DeclaredTypeDescriptor descriptor ->
+          descriptor.isRaw()
+              ? descriptor
+              : descriptor.withTypeArguments(
+                  zip(
+                      typeDescriptor.isRaw()
+                          ? ImmutableList.of()
+                          : descriptor.getTypeDeclaration().getTypeParameterDescriptors(),
+                      descriptor.getTypeArgumentDescriptors(),
+                      (typeParameter, typeArgument) ->
+                          projectArgumentCaptures(typeArgument, typeParameter, seen)));
+
+      case TypeVariable typeVariable when !typeVariable.isWildcardOrCapture() -> typeVariable;
+      case TypeVariable typeVariable when seen.contains(typeVariable) -> typeVariable;
+      case TypeVariable typeVariable -> {
         ImmutableSet<TypeVariable> newSeen =
             ImmutableSet.<TypeVariable>builder().addAll(seen).add(typeVariable).build();
 
         if (!isTypeArgument) {
           TypeDescriptor lowerBound = getNormalizedLowerBoundTypeDescriptor(typeVariable);
           if (lowerBound != null) {
-            return projectCaptures(lowerBound, /* isTypeArgument= */ false, newSeen);
+            yield projectCaptures(lowerBound, /* isTypeArgument= */ false, newSeen);
           } else {
             TypeDescriptor upperBound = getNormalizedUpperBoundTypeDescriptor(typeVariable);
-            return projectCaptures(upperBound, /* isTypeArgument= */ false, newSeen);
+            yield projectCaptures(upperBound, /* isTypeArgument= */ false, newSeen);
           }
         } else {
-          return typeVariable
+          yield typeVariable
               .toWildcard()
               .withRewrittenBounds(it -> projectCaptures(it, /* isTypeArgument= */ false, newSeen));
         }
       }
-    } else if (typeDescriptor instanceof IntersectionTypeDescriptor descriptor) {
-      return IntersectionTypeDescriptor.newBuilder()
-          .setIntersectionTypeDescriptors(
-              descriptor.getIntersectionTypeDescriptors().stream()
-                  .map(it -> projectCaptures(it, /* isTypeArgument= */ false, seen))
-                  .collect(toImmutableList()))
-          .build();
-    } else if (typeDescriptor instanceof UnionTypeDescriptor descriptor) {
-      return UnionTypeDescriptor.newBuilder()
-          .setUnionTypeDescriptors(
-              descriptor.getUnionTypeDescriptors().stream()
-                  .map(it -> projectCaptures(it, /* isTypeArgument= */ false, seen))
-                  .collect(toImmutableList()))
-          .build();
-    } else {
-      throw new AssertionError();
-    }
+
+      case IntersectionTypeDescriptor descriptor ->
+          IntersectionTypeDescriptor.newBuilder()
+              .setIntersectionTypeDescriptors(
+                  descriptor.getIntersectionTypeDescriptors().stream()
+                      .map(it -> projectCaptures(it, /* isTypeArgument= */ false, seen))
+                      .collect(toImmutableList()))
+              .build();
+
+      case UnionTypeDescriptor descriptor ->
+          UnionTypeDescriptor.newBuilder()
+              .setUnionTypeDescriptors(
+                  descriptor.getUnionTypeDescriptors().stream()
+                      .map(it -> projectCaptures(it, /* isTypeArgument= */ false, seen))
+                      .collect(toImmutableList()))
+              .build();
+    };
   }
 
   private static TypeDescriptor projectArgumentCaptures(

@@ -240,40 +240,37 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
   // TODO(b/362475932): Clean-up after type model visitor is implemented.
   private static boolean containsCaptureWithoutLowerBound(
       TypeDescriptor typeDescriptor, ImmutableSet<TypeVariable> seen) {
-    if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
-      return false;
-    } else if (typeDescriptor instanceof ArrayTypeDescriptor descriptor) {
-      return containsCaptureWithoutLowerBound(descriptor.getComponentTypeDescriptor(), seen);
-    } else if (typeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
-      return descriptor.getTypeArgumentDescriptors().stream()
-          .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
-    } else if (typeDescriptor instanceof TypeVariable typeVariable) {
-      if (seen.contains(typeVariable)) {
-        return false;
+    return switch (typeDescriptor) {
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> false;
+
+      case ArrayTypeDescriptor descriptor ->
+          containsCaptureWithoutLowerBound(descriptor.getComponentTypeDescriptor(), seen);
+
+      case DeclaredTypeDescriptor descriptor ->
+          descriptor.getTypeArgumentDescriptors().stream()
+              .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
+
+      case TypeVariable typeVariable
+          when typeVariable.isCapture() && typeVariable.getLowerBoundTypeDescriptor() == null ->
+          true;
+      case TypeVariable typeVariable when !typeVariable.isWildcardOrCapture() -> false;
+      case TypeVariable typeVariable when seen.contains(typeVariable) -> false;
+      case TypeVariable typeVariable -> {
+        ImmutableSet<TypeVariable> newSeen =
+            ImmutableSet.<TypeVariable>builder().addAll(seen).add(typeVariable).build();
+        TypeDescriptor upperBound = typeVariable.getUpperBoundTypeDescriptor();
+        TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
+        yield containsCaptureWithoutLowerBound(upperBound, newSeen)
+            || (lowerBound != null && containsCaptureWithoutLowerBound(lowerBound, newSeen));
       }
 
-      if (!typeVariable.isWildcardOrCapture()) {
-        return false;
-      }
+      case IntersectionTypeDescriptor descriptor ->
+          descriptor.getIntersectionTypeDescriptors().stream()
+              .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
 
-      if (typeVariable.isCapture() && typeVariable.getLowerBoundTypeDescriptor() == null) {
-        return true;
-      }
-
-      ImmutableSet<TypeVariable> newSeen =
-          ImmutableSet.<TypeVariable>builder().addAll(seen).add(typeVariable).build();
-      TypeDescriptor upperBound = typeVariable.getUpperBoundTypeDescriptor();
-      TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
-      return containsCaptureWithoutLowerBound(upperBound, newSeen)
-          || (lowerBound != null && containsCaptureWithoutLowerBound(lowerBound, newSeen));
-    } else if (typeDescriptor instanceof IntersectionTypeDescriptor descriptor) {
-      return descriptor.getIntersectionTypeDescriptors().stream()
-          .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
-    } else if (typeDescriptor instanceof UnionTypeDescriptor descriptor) {
-      return descriptor.getUnionTypeDescriptors().stream()
-          .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
-    } else {
-      throw new AssertionError("Unknown type descriptor: " + typeDescriptor.getClass());
-    }
+      case UnionTypeDescriptor descriptor ->
+          descriptor.getUnionTypeDescriptors().stream()
+              .anyMatch(it -> containsCaptureWithoutLowerBound(it, seen));
+    };
   }
 }

@@ -229,26 +229,32 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private void convertTypeBody(Type type, List<BodyDeclaration> bodyDeclarations) {
       problems.abortIfCancelled();
       for (BodyDeclaration bodyDeclaration : bodyDeclarations) {
-        if (bodyDeclaration instanceof FieldDeclaration fieldDeclaration) {
-          type.addMembers(convert(fieldDeclaration));
-        } else if (bodyDeclaration instanceof MethodDeclaration methodDeclaration) {
-          type.addMember(convert(methodDeclaration));
-        } else if (bodyDeclaration instanceof AnnotationTypeMemberDeclaration memberDeclaration) {
-          type.addMember(convert(memberDeclaration));
-        } else if (bodyDeclaration instanceof Initializer initializer) {
-          Block block = convert(initializer.getBody());
-          if (JdtEnvironment.isStatic(initializer)) {
-            type.addStaticInitializerBlock(block);
-          } else {
-            type.addInstanceInitializerBlock(block);
+        switch (bodyDeclaration) {
+          case FieldDeclaration fieldDeclaration -> type.addMembers(convert(fieldDeclaration));
+
+          case MethodDeclaration methodDeclaration -> type.addMember(convert(methodDeclaration));
+
+          case AnnotationTypeMemberDeclaration memberDeclaration ->
+              type.addMember(convert(memberDeclaration));
+
+          case Initializer initializer -> {
+            Block block = convert(initializer.getBody());
+            if (JdtEnvironment.isStatic(initializer)) {
+              type.addStaticInitializerBlock(block);
+            } else {
+              type.addInstanceInitializerBlock(block);
+            }
           }
-        } else if (bodyDeclaration instanceof AbstractTypeDeclaration nestedTypeDeclaration) {
-          // Nested class
-          type.addType(convert(nestedTypeDeclaration));
-        } else {
-          throw internalCompilerError(
-              "Unexpected type for BodyDeclaration: %s, in type: %s",
-              bodyDeclaration.getClass().getName(), type.getDeclaration().getQualifiedSourceName());
+
+          case AbstractTypeDeclaration nestedTypeDeclaration ->
+              // Nested class
+              type.addType(convert(nestedTypeDeclaration));
+
+          default ->
+              throw internalCompilerError(
+                  "Unexpected type for BodyDeclaration: %s, in type: %s",
+                  bodyDeclaration.getClass().getName(),
+                  type.getDeclaration().getQualifiedSourceName());
         }
         problems.abortIfCancelled();
       }

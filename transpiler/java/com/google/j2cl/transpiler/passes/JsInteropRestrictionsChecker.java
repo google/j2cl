@@ -1702,23 +1702,24 @@ public class JsInteropRestrictionsChecker {
     if (!referencedTypes.add(typeDescriptor)) {
       return;
     }
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-      declaredTypeDescriptor
-          .getTypeArgumentDescriptors()
-          .forEach(t -> addReferencedTypes(t, referencedTypes));
-    } else if (typeDescriptor.isArray()) {
-      addReferencedTypes(
-          ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor(), referencedTypes);
-    } else if (typeDescriptor.isIntersection()) {
-      ((IntersectionTypeDescriptor) typeDescriptor)
-          .getIntersectionTypeDescriptors()
-          .forEach(t -> addReferencedTypes(t, referencedTypes));
-    } else if (typeDescriptor.isTypeVariable()) {
-      addReferencedTypes(
-          ((TypeVariable) typeDescriptor).getUpperBoundTypeDescriptor(), referencedTypes);
-    } else {
-      checkState(typeDescriptor.isPrimitive());
+    switch (typeDescriptor) {
+      case DeclaredTypeDescriptor declaredTypeDescriptor ->
+          declaredTypeDescriptor
+              .getTypeArgumentDescriptors()
+              .forEach(t -> addReferencedTypes(t, referencedTypes));
+
+      case ArrayTypeDescriptor arrayTypeDescriptor ->
+          addReferencedTypes(arrayTypeDescriptor.getLeafTypeDescriptor(), referencedTypes);
+
+      case IntersectionTypeDescriptor intersectionTypeDescriptor ->
+          intersectionTypeDescriptor
+              .getIntersectionTypeDescriptors()
+              .forEach(t -> addReferencedTypes(t, referencedTypes));
+
+      case TypeVariable typeVariable ->
+          addReferencedTypes(typeVariable.getUpperBoundTypeDescriptor(), referencedTypes);
+
+      default -> checkState(typeDescriptor.isPrimitive());
     }
   }
 
