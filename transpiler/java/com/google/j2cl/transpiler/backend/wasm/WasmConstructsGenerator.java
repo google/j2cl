@@ -866,6 +866,7 @@ public class WasmConstructsGenerator {
     if (descriptorClause != null) {
       builder.append("(");
       builder.append(descriptorClause);
+      builder.append(") ");
     }
     builder.append("(struct");
     builder.indent();
@@ -873,9 +874,6 @@ public class WasmConstructsGenerator {
 
     builder.newLine();
     builder.append(")");
-    if (descriptorClause != null) {
-      builder.append(")");
-    }
     builder.append(")");
     builder.unindent();
     builder.newLine();
