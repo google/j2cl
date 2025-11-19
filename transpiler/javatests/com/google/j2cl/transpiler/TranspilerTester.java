@@ -16,7 +16,6 @@ package com.google.j2cl.transpiler;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Throwables;
@@ -24,7 +23,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
-import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.Futures;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.Problems;
 import java.io.FileOutputStream;
@@ -596,14 +595,12 @@ public class TranspilerTester {
     J2clCommandLineRunner runner = new J2clCommandLineRunner(problems);
     // Make sure a new thread is spawned to run the transpiler for Thread locals. See
     // J2clCommandLineRunner.run for the details.
-    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
-    try {
-      executorService.execute(() -> runner.executeForTesting(args));
+    try (ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2)) {
+      var compilation = executorService.submit(() -> runner.executeForTesting(args));
       if (cancelDelayMs != NO_CANCEL) {
         executorService.schedule(problems::requestCancellation, cancelDelayMs, MILLISECONDS);
       }
-    } finally {
-      MoreExecutors.shutdownAndAwaitTermination(executorService, 60, SECONDS);
+      Futures.getUnchecked(compilation); // Wait for compilation and propagate any errors.
     }
     assertThat(Thread.currentThread().isInterrupted()).isFalse();
 
