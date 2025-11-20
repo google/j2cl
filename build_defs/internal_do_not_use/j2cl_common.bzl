@@ -23,7 +23,7 @@ def _compile(
         kotlincopts = [],
         internal_transpiler_flags = {},
         artifact_suffix = "",
-        is_j2kt_web_experiment_enabled = False):
+        is_j2kt_web_enabled = False):
     name = ctx.label.name + artifact_suffix
     java_toolchain = _get_java_toolchain(ctx)
     jvm_srcs, js_srcs = split_srcs(srcs)
@@ -75,7 +75,7 @@ def _compile(
                 java_toolchain = java_toolchain,
                 javac_opts = javac_opts,
                 # J2KT already runs APTs so we don't want them to run again.
-                enable_annotation_processing = not is_j2kt_web_experiment_enabled,
+                enable_annotation_processing = not is_j2kt_web_enabled,
             )
 
             # Remove package-info.java from the srcs since we handled it here separately.
@@ -100,7 +100,7 @@ def _compile(
             output_jar,
             javac_opts,
             kotlincopts = kotlincopts,
-            is_j2kt_web_experiment_enabled = is_j2kt_web_experiment_enabled,
+            is_j2kt_web_enabled = is_j2kt_web_enabled,
         )
 
     klib_provider = klib_common.compile_header_klibs(
@@ -156,7 +156,7 @@ def _compile(
             library_info = library_info,
             output_js = output_js,
             js_info = js_info,
-            j2kt_enabled = is_j2kt_web_experiment_enabled,
+            j2kt_enabled = is_j2kt_web_enabled,
             klib_info = klib_provider,
         ),
         _is_j2cl_provider = 1,
@@ -232,7 +232,7 @@ def _kt_compile(
         output_jar = None,
         javac_opts = [],
         kotlincopts = [],
-        is_j2kt_web_experiment_enabled = False):
+        is_j2kt_web_enabled = False):
     fail("Kotlin frontend is disabled")
 
 def get_bootclasspath(ctx):

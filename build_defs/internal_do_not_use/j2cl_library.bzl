@@ -106,11 +106,11 @@ def j2cl_library(
     )
 
     # These arguments should not be set by the user.
-    args["j2kt_web_experiment_enabled"] = False
+    args["enable_j2kt_web"] = False
 
     if maybe_enable_j2kt_web:
         # Enable j2kt-web if the blaze flag is set to True
-        args["j2kt_web_experiment_enabled"] = True if is_j2kt_web_always_enabled else select({
+        args["enable_j2kt_web"] = True if is_j2kt_web_always_enabled else select({
             "//build_defs/internal_do_not_use:j2kt_web_enabled": True,
             "//conditions:default": False,
         })

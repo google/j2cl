@@ -10,7 +10,7 @@ load(":klib_common.bzl", "klib_common")
 load(":provider.bzl", "J2clInfo", "J2ktInfo")
 
 def _impl_j2cl_library(ctx):
-    j2kt_web_experiment_enabled = ctx.attr.j2kt_web_experiment_enabled
+    enable_j2kt_web = ctx.attr.enable_j2kt_web
 
     extra_javacopts = [
         # Dagger fast-init is more code size optimal for web, so enable it by default.
@@ -22,7 +22,7 @@ def _impl_j2cl_library(ctx):
     if ctx.attr.optimize_autovalue:
         extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
 
-    if j2kt_web_experiment_enabled:
+    if enable_j2kt_web:
         jvm_srcs, js_srcs = split_srcs(ctx.files.srcs)
 
         # Invoke j2kt transpiler first to transpile Java files to Kotlin.
@@ -52,7 +52,7 @@ def _impl_j2cl_library(ctx):
         srcs = js_srcs + [f for f in jvm_srcs if f.basename == "package-info.java"]
         kt_common_srcs = j2kt_provider._private_.transpile_kt_out
     else:
-        j2kt_provider = []
+        j2kt_provider = None
         srcs = ctx.files.srcs
         kt_common_srcs = ctx.files.kt_common_srcs
 
@@ -75,19 +75,18 @@ def _impl_j2cl_library(ctx):
             k: getattr(ctx.attr, k)
             for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
         },
-        is_j2kt_web_experiment_enabled = j2kt_web_experiment_enabled,
+        is_j2kt_web_enabled = enable_j2kt_web,
     )
 
-    # If J2KT is enabled for this the build, but J2KT is not enabled for the
-    # target, we still need to produce a J2ktInfo provider to ensure we keep the
-    # J2ktInfo providers in a separate tree from the J2clInfo providers. This
-    # prevents them from being mixed together, which can downstream lead to
-    # seeing both the pre-J2KT JavaInfo and post-J2KT JavaInfo for a given
-    # target.
-    if ctx.attr._j2kt_web_build_flag[BuildSettingInfo].value and not j2kt_provider:
+    # If there is no J2ktInfo provider then this target and/or build was not enabled for J2KT.
+    # However, we still need to produce a J2ktInfo provider to ensure we keep the J2ktInfo providers
+    # in a separate tree from the J2clInfo providers. This prevents them from being mixed together,
+    # which can downstream lead to seeing both the pre-J2KT JavaInfo and post-J2KT JavaInfo for a
+    # given target.
+    if not j2kt_provider:
         # Backstop to make sure we don't silently cover up a missing J2ktInfo
         # provider when the target is actually enabled for J2KT.
-        if j2kt_web_experiment_enabled:
+        if enable_j2kt_web:
             fail("Target is enabled for J2KT but J2ktInfo was not produced")
 
         # Create a new JavaInfo provider with all the same compilation jars,
@@ -141,10 +140,9 @@ def _j2cl_or_js_provider_of(dep):
     return dep[J2clInfo] if J2clInfo in dep else dep[JsInfo]
 
 _J2KT_WEB_EXPERIMENT_ATTRS = {
-    "j2kt_web_experiment_enabled": attr.bool(default = False),
-    "_j2kt_web_build_flag": attr.label(
-        default = Label("//:experimental_enable_j2kt_web"),
-        providers = [BuildSettingInfo],
+    "enable_j2kt_web": attr.bool(
+        doc = "Whether J2KT Web is enabled for this specific target.",
+        default = False,
     ),
 }
 
