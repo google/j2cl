@@ -6,6 +6,7 @@ load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common", "split_srcs")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JsInfo", "j2cl_js_provider")
 load(":j2kt_common.bzl", "j2kt_common")
 load(":j2kt_import.bzl", "create_J2ktInfo_for_java_import")
+load(":klib_common.bzl", "klib_common")
 load(":provider.bzl", "J2clInfo", "J2ktInfo")
 
 def _impl_j2cl_library(ctx):
@@ -183,12 +184,14 @@ j2cl_library = rule(
 )
 
 def _impl_java_import(ctx):
+    java_info = ctx.attr.jar[JavaInfo]
     return j2cl_common.create_js_lib_struct(
         J2clInfo(
             _private_ = struct(
-                java_info = ctx.attr.jar[JavaInfo],
+                java_info = java_info,
                 js_info = j2cl_js_provider(ctx),
                 library_info = [],
+                klib_info = klib_common.create_klib_info_for_import(java_info),
             ),
             _is_j2cl_provider = 1,
         ),

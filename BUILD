@@ -78,6 +78,12 @@ bool_flag(
     build_setting_default = False,
 )
 
+# Flag to enable klibs experiment. Please talk to j2cl-team@ before using it.
+bool_flag(
+    name = "experimental_enable_klibs",
+    build_setting_default = False,
+)
+
 # Flag to enable profiling for particular targets.
 # Example usage:
 #   blaze build <my_binary> --//:profiling_filter=<target_pattern>

@@ -108,6 +108,10 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setKotlincOptions(List<String> kotlincOptions);
 
+    public abstract Builder setEnableKlibs(boolean enableKlibs);
+
+    public abstract Builder setDependencyKlibs(List<String> dependencyKlibs);
+
     public abstract Builder setForbiddenAnnotations(List<String> forbiddenAnnotations);
 
     public abstract Builder setObjCNamePrefix(String objCNamePrefix);

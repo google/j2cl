@@ -158,6 +158,15 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-forbiddenAnnotation", hidden = true)
   List<String> forbiddenAnnotations = new ArrayList<>();
 
+  @Option(
+      name = "-klibs",
+      metaVar = "<path>",
+      usage = "Paths to cross-platform libraries in the .klib format.")
+  String dependencyKlibs;
+
+  @Option(name = "-experimentalEnableKlibs", usage = "Enable using klibs for the kotlin frontend.")
+  boolean enableKlibs = false;
+
   @Option(name = "-experimentalDefineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
@@ -260,11 +269,16 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
+        .setDependencyKlibs(getPathEntries(dependencyKlibs))
+        .setEnableKlibs(enableKlibs)
         .setObjCNamePrefix(objCNamePrefix)
         .build(problems);
   }
 
   private List<String> getPathEntries(String path) {
+    if (path == null) {
+      return ImmutableList.of();
+    }
     return Lists.transform(
         Splitter.on(File.pathSeparatorChar).omitEmptyStrings().splitToList(path),
         s -> workdir.resolve(s).toString());

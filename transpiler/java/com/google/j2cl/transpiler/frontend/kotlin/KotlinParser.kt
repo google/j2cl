@@ -78,6 +78,10 @@ import org.jetbrains.kotlin.modules.TargetId
 class KotlinParser(private val problems: Problems) {
   /** Returns a list of compilation units after Kotlinc parsing. */
   fun parseFiles(options: FrontendOptions): Library {
+    if (options.enableKlibs) {
+      return KlibsKotlinParser(problems).parseFiles(options)
+    }
+
     val compilerConfiguration = createCompilerConfiguration(options)
     problems.abortIfCancelled()
 

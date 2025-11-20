@@ -46,15 +46,6 @@ public class HeaderKlibCompiler() {
   )
   lateinit var sources: List<String>
 
-  @Option(
-    name = "-targetLabel",
-    metaVar = "<target>",
-    usage =
-      "The Bazel target label that is being transpiled. Used for determining context-dependent" +
-        " behavior, like Kotlin friendship semantics.",
-  )
-  var targetLabel: String? = null
-
   @Option(name = "-kotlincOptions", usage = "Flags passed to the Kotlin compiler.", required = true)
   var kotlincOptions: MutableList<String> = ArrayList()
 

@@ -38,5 +38,9 @@ public interface FrontendOptions {
 
   ImmutableList<String> getKotlincOptions();
 
+  boolean getEnableKlibs();
+
+  ImmutableList<String> getDependencyKlibs();
+
   ImmutableList<String> getForbiddenAnnotations();
 }

@@ -227,6 +227,8 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
+        .setDependencyKlibs(ImmutableList.of())
+        .setEnableKlibs(false)
         .setObjCNamePrefix("J2kt")
         .build(problems);
   }
