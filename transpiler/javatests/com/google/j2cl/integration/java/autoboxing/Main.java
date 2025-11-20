@@ -545,7 +545,15 @@ public class Main {
     assertTrue(zero == boxedMinusZero);
 
     // Object semantics.
-    assertTrue(boxedZero != boxedMinusZero);
+    // TODO(b/462136113): Remove the introduced variables and use `boxedZero` and `boxedMinusZero`
+    // instead when the bug is fixed. In J2KT the above code emits `boxedZero!!` and
+    // `boxedMinusZero!!` as part of the previous comparisons which due to smart casts which turns
+    // the boxed comparison `boxedZero !== boxedMinusZero` into a primitive comparison.
+    // wrong.
+    Double boxedZero2 = Double.valueOf(0.0);
+    Double boxedMinusZero2 = Double.valueOf(-0.0);
+    assertTrue(boxedZero2 != boxedMinusZero2);
+
     assertTrue(asObjectZero != asObjectMinusZero);
 
     assertTrue(undefinedDouble == nullDouble);
