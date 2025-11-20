@@ -9,7 +9,7 @@ def compiler_java_binary(name, runtime_deps = [], extra_jvm_flags = [], **kwargs
         jvm_flags = JVM_FLAGS + extra_jvm_flags + select({
             ":profiling_disabled": [],
             "//conditions:default": [
-                "-XX:GoogleAgentFlags=-contentionz,-codez,-histogram,-gcz,-heapz,-native_heapz," +
+                "-XX:GoogleAgentFlags=-contentionz,-codez,-histogram,-heapz,-native_heapz," +
                 "-perf_map,cpu_profile_stack_limit:256,cpu_samples:200",
             ],
         }),
