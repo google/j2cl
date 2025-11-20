@@ -79,6 +79,10 @@ public class JavacParser {
       List<File> searchpath = options.getClasspaths().stream().map(File::new).collect(toList());
       fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, searchpath);
       fileManager.setLocation(StandardLocation.CLASS_PATH, searchpath);
+      if (!options.getSystem().isEmpty()) {
+        fileManager.setLocation(
+            StandardLocation.SYSTEM_MODULES, ImmutableList.of(new File(options.getSystem())));
+      }
       JavacTaskImpl task =
           (JavacTaskImpl)
               compiler.getTask(
@@ -113,13 +117,7 @@ public class JavacParser {
   }
 
   private static ImmutableList<String> getJavacOptions(FrontendOptions options) {
-    var javacOptions = ImmutableList.<String>builder();
-    if (!options.getSystem().isEmpty()) {
-      // getSystem is provided which specifies the location of our JRE.
-      javacOptions.add("--system").add(options.getSystem());
-    }
-
-    return javacOptions
+    return ImmutableList.<String>builder()
         // Allow JRE classes to depend on internal annotations (in the unnamed module). This is
         // needed for both JRE and non-JRE compilation; some JRE methods are annotated with
         // internal annotations which are then read by some backends.
