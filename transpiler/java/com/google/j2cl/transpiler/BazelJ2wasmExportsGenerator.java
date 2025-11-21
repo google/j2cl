@@ -39,6 +39,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -66,18 +67,17 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
       usage = "A pattern describing entry points to the Wasm module.")
   List<String> wasmEntryPoints = new ArrayList<>();
 
-  private static final Splitter PATH_SPLITTER = Splitter.on(File.pathSeparatorChar);
-
   @Override
   protected void run() {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
       ImmutableList<EntryPointPattern> entryPointPatterns =
           this.wasmEntryPoints.stream().map(EntryPointPattern::from).collect(toImmutableList());
-      List<String> binaryNames =
-          getBinaryNamesOfClassesWithExports(
-              PATH_SPLITTER.split(this.classPath), entryPointPatterns);
-      List<String> classPathEntries =
-          Splitter.on(File.pathSeparatorChar).splitToList(this.classPath);
+      var classPathEntries =
+          Splitter.on(File.pathSeparatorChar)
+              .splitToStream(this.classPath)
+              .map(Path::of)
+              .collect(toImmutableList());
+      var binaryNames = getBinaryNamesOfClassesWithExports(classPathEntries, entryPointPatterns);
 
       // Create a parser just to resolve binary names, with no sources to parse.
       // TODO(b/294284380): Make this independent of the frontend.
@@ -109,13 +109,13 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
   }
 
   private List<String> getBinaryNamesOfClassesWithExports(
-      Iterable<String> classPathEntries, List<EntryPointPattern> wasmEntryPoints) {
+      Collection<Path> classPathEntries, List<EntryPointPattern> wasmEntryPoints) {
 
     List<URL> classPathUrls = new ArrayList<>();
     List<String> binaryClassNames = new ArrayList<>();
-    for (String classPathEntry : classPathEntries) {
+    for (Path classPathEntry : classPathEntries) {
       try {
-        classPathUrls.add(new File(classPathEntry).toURI().toURL());
+        classPathUrls.add(classPathEntry.toUri().toURL());
       } catch (MalformedURLException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       }

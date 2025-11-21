@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
-import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -76,12 +75,12 @@ public class JavacParser {
       JavacFileManager fileManager =
           (JavacFileManager)
               compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8);
-      List<File> searchpath = options.getClasspaths().stream().map(File::new).collect(toList());
-      fileManager.setLocation(StandardLocation.PLATFORM_CLASS_PATH, searchpath);
-      fileManager.setLocation(StandardLocation.CLASS_PATH, searchpath);
-      if (!options.getSystem().isEmpty()) {
-        fileManager.setLocation(
-            StandardLocation.SYSTEM_MODULES, ImmutableList.of(new File(options.getSystem())));
+      var searchpath = options.getClasspaths().stream().collect(toImmutableList());
+      fileManager.setLocationFromPaths(StandardLocation.PLATFORM_CLASS_PATH, searchpath);
+      fileManager.setLocationFromPaths(StandardLocation.CLASS_PATH, searchpath);
+      if (options.getSystem() != null) {
+        fileManager.setLocationFromPaths(
+            StandardLocation.SYSTEM_MODULES, ImmutableList.of(options.getSystem()));
       }
       JavacTaskImpl task =
           (JavacTaskImpl)

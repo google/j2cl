@@ -64,9 +64,9 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setNativeSources(List<FileInfo> files);
 
-    public abstract Builder setClasspaths(List<String> entries);
+    public abstract Builder setClasspaths(List<Path> entries);
 
-    public abstract Builder setSystem(String jdkSystem);
+    public abstract Builder setSystem(@Nullable Path jdkSystem);
 
     public abstract Builder setOutput(Output output);
 
@@ -110,7 +110,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setEnableKlibs(boolean enableKlibs);
 
-    public abstract Builder setDependencyKlibs(List<String> dependencyKlibs);
+    public abstract Builder setDependencyKlibs(List<Path> dependencyKlibs);
 
     public abstract Builder setForbiddenAnnotations(List<String> forbiddenAnnotations);
 

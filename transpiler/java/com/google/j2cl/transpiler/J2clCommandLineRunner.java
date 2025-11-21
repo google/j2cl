@@ -168,7 +168,13 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   }
 
   private J2clTranspilerOptions createOptions(Output output) {
-    checkSourceFiles(problems, files, ".java", ".srcjar", ".jar", ".kt");
+    checkSourceFiles(
+        problems,
+        files.stream().map(Path::of).collect(toImmutableList()),
+        ".java",
+        ".srcjar",
+        ".jar",
+        ".kt");
 
     if (this.frontend == null) {
       this.frontend = this.backend.getDefaultFrontend();
@@ -181,7 +187,8 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     }
 
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSources(this.files.stream(), tempDir.resolve("_source_jars"), problems)
+        SourceUtils.getAllSources(
+                this.files.stream().map(Path::of), tempDir.resolve("_source_jars"), problems)
             .collect(toImmutableList());
     problems.abortIfCancelled();
 
@@ -212,7 +219,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
-        .setSystem(this.system)
+        .setSystem(this.system.isEmpty() ? null : Path.of(this.system))
         .setOutput(output)
         .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(false)
@@ -233,11 +240,11 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .build(problems);
   }
 
-  private static List<String> getPathEntries(String path) {
-    List<String> entries = new ArrayList<>();
+  private static List<Path> getPathEntries(String path) {
+    List<Path> entries = new ArrayList<>();
     for (String entry : Splitter.on(File.pathSeparatorChar).omitEmptyStrings().split(path)) {
       if (new File(entry).exists()) {
-        entries.add(entry);
+        entries.add(Path.of(entry));
       }
     }
     return entries;

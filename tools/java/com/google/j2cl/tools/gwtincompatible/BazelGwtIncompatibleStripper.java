@@ -48,7 +48,7 @@ final class BazelGwtIncompatibleStripper extends BazelWorker {
     }
     Path sourceJarDir = SourceUtils.deriveDirectory(this.outputPath, "_source_jars");
     GwtIncompatibleStripper.strip(
-        files.stream().map(workdir::resolve).map(Path::toString),
+        files.stream().map(workdir::resolve),
         workdir.resolve(outputPath),
         sourceJarDir,
         problems,

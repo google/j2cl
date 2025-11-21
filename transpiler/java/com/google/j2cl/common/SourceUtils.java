@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.common;
 
+import static java.util.Arrays.stream;
+
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.MoreFiles;
@@ -24,8 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import java.util.zip.ZipException;
@@ -80,14 +80,14 @@ public class SourceUtils {
 
   /** Returns all individual sources where source jars extracted and flattened. */
   @Nullable
-  public static Stream<FileInfo> getAllSourcesFromPaths(
+  public static Stream<FileInfo> getAllSources(
       Stream<Path> sources, Path sourceJarDir, Problems problems) {
-    return getAllSources(sources.map(Path::toString), sourceJarDir, problems);
+    return getAllSourcesImpl(sources.map(Path::toString), sourceJarDir, problems);
   }
 
   /** Returns all individual sources where source jars extracted and flattened. */
   @Nullable
-  public static Stream<FileInfo> getAllSources(
+  private static Stream<FileInfo> getAllSourcesImpl(
       Stream<String> sources, Path sourceJarDir, Problems problems) {
     // Make sure the directory is empty. For Bazel workers, we reuse the directory between runs for
     // same targets (predictable directory helps with debugging). However, requires cleaning up
@@ -188,12 +188,12 @@ public class SourceUtils {
   }
 
   public static void checkSourceFiles(
-      Problems problems, List<String> sourceFiles, String... validExtensions) {
-    for (String sourceFile : sourceFiles) {
-      if (Arrays.stream(validExtensions).noneMatch(sourceFile::endsWith)) {
+      Problems problems, List<Path> sourceFiles, String... validExtensions) {
+    for (Path sourceFile : sourceFiles) {
+      if (stream(validExtensions).noneMatch(x -> sourceFile.toString().endsWith(x))) {
         problems.fatal(FatalError.UNKNOWN_INPUT_TYPE, sourceFile);
       }
-      if (!Files.isRegularFile(Paths.get(sourceFile))) {
+      if (!Files.isRegularFile(sourceFile)) {
         problems.fatal(FatalError.FILE_NOT_FOUND, sourceFile);
       }
     }

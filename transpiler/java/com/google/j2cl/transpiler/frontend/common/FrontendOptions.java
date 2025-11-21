@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.frontend.common;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourceUtils.FileInfo;
+import java.nio.file.Path;
 import javax.annotation.Nullable;
 
 /** Configuration for frontend. */
@@ -26,9 +27,10 @@ public interface FrontendOptions {
   @Nullable
   String getTargetLabel();
 
-  ImmutableList<String> getClasspaths();
+  ImmutableList<Path> getClasspaths();
 
-  String getSystem();
+  @Nullable
+  Path getSystem();
 
   boolean getGenerateKytheIndexingMetadata();
 
@@ -40,7 +42,7 @@ public interface FrontendOptions {
 
   boolean getEnableKlibs();
 
-  ImmutableList<String> getDependencyKlibs();
+  ImmutableList<Path> getDependencyKlibs();
 
   ImmutableList<String> getForbiddenAnnotations();
 }

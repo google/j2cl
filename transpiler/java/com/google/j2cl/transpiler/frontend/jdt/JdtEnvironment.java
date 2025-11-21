@@ -58,6 +58,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -111,7 +112,7 @@ public class JdtEnvironment {
   @CanIgnoreReturnValue
   public JdtEnvironment(
       JdtParser jdtParser,
-      List<String> classpathEntries,
+      List<Path> classpathEntries,
       Collection<String> wellKnownTypesBinaryNames) {
     this.packageAnnotationsResolver =
         PackageAnnotationsResolver.create(

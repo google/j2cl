@@ -20,6 +20,7 @@ import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.ZipFiles;
 import com.google.j2cl.transpiler.frontend.common.PackageInfo;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class PackageInfoCache {
   private final Map<String, PackageInfo> packageReportByTypeName = new HashMap<>();
   private final Problems problems;
 
-  public PackageInfoCache(List<String> classPathEntries, Problems problems) {
+  public PackageInfoCache(List<Path> classPathEntries, Problems problems) {
     this.problems = problems;
     indexPackageInfo(classPathEntries);
   }
@@ -77,9 +78,9 @@ public class PackageInfoCache {
     return packageReportByTypeName.getOrDefault(packagePath, PackageInfo.DEFAULT);
   }
 
-  private void indexPackageInfo(List<String> classPathEntries) {
-    for (String classPathEntry : classPathEntries) {
-      try (ZipFile zipFile = new ZipFile(classPathEntry)) {
+  private void indexPackageInfo(List<Path> classPathEntries) {
+    for (Path classPathEntry : classPathEntries) {
+      try (ZipFile zipFile = new ZipFile(classPathEntry.toFile())) {
         for (ZipEntry entry : ZipFiles.entries(zipFile)) {
           if (entry.getName().endsWith("package-info.class")) {
             var packageInfo = PackageInfo.read(zipFile.getInputStream(entry));

@@ -206,8 +206,7 @@ final class BazelJ2clBuilder extends BazelWorker {
 
     Path sourceJarDir = SourceUtils.deriveDirectory(this.output, "_source_jars");
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSourcesFromPaths(
-                sources.stream().map(workdir::resolve), sourceJarDir, problems)
+        SourceUtils.getAllSources(sources.stream().map(workdir::resolve), sourceJarDir, problems)
             .collect(toImmutableList());
     problems.abortIfCancelled();
 
@@ -235,9 +234,8 @@ final class BazelJ2clBuilder extends BazelWorker {
         .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
     problems.abortIfCancelled();
 
-    if (!system.isEmpty()) {
-      system = workdir.resolve(system).toString();
-    }
+    Path systemPath = system.isEmpty() ? null : workdir.resolve(system);
+
     if (libraryInfoOutput != null) {
       libraryInfoOutput = workdir.resolve(libraryInfoOutput);
     }
@@ -250,7 +248,7 @@ final class BazelJ2clBuilder extends BazelWorker {
                 .build())
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
-        .setSystem(this.system)
+        .setSystem(systemPath)
         .setOutput(output)
         .setTargetLabel(targetLabel)
         .setLibraryInfoOutput(libraryInfoOutput)
@@ -275,13 +273,13 @@ final class BazelJ2clBuilder extends BazelWorker {
         .build(problems);
   }
 
-  private List<String> getPathEntries(String path) {
+  private List<Path> getPathEntries(String path) {
     if (path == null) {
       return ImmutableList.of();
     }
     return Lists.transform(
         Splitter.on(File.pathSeparatorChar).omitEmptyStrings().splitToList(path),
-        s -> workdir.resolve(s).toString());
+        s -> workdir.resolve(s));
   }
 
   public static void main(String[] workerArgs) throws Exception {

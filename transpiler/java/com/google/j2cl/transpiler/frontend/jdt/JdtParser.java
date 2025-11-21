@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -102,7 +103,7 @@ public class JdtParser {
   /** Returns a map from file paths to compilation units after JDT parsing. */
   private CompilationUnitsAndTypeBindings parseFiles(
       List<FileInfo> filePaths,
-      List<String> classpathEntries,
+      List<Path> classpathEntries,
       boolean useTargetPath,
       List<String> forbiddenAnnotations,
       Collection<String> binaryNamesToResolve) {
@@ -173,7 +174,7 @@ public class JdtParser {
 
   /** Resolves binary names to type bindings. */
   public List<ITypeBinding> resolveBindings(
-      List<String> classpathEntries, Collection<String> binaryNames) {
+      List<Path> classpathEntries, Collection<String> binaryNames) {
     return parseFiles(
             /* filePaths= */ new ArrayList<>(),
             /* classpathEntries= */ classpathEntries,
@@ -183,7 +184,7 @@ public class JdtParser {
         .getTypeBindings();
   }
 
-  private ASTParser newASTParser(List<String> classpathEntries) {
+  private ASTParser newASTParser(List<Path> classpathEntries) {
     ASTParser parser = ASTParser.newParser(AST_JLS_VERSION);
 
     parser.setCompilerOptions(compilerOptions);
@@ -192,7 +193,10 @@ public class JdtParser {
     // annotation is not fully resolved due to missing dependencies.
     parser.setBindingsRecovery(true);
     parser.setEnvironment(
-        Iterables.toArray(classpathEntries, String.class), new String[0], new String[0], false);
+        classpathEntries.stream().map(Path::toString).toArray(String[]::new),
+        new String[0],
+        new String[0],
+        false);
     return parser;
   }
 

@@ -51,7 +51,7 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
 public final class GwtIncompatibleStripper {
 
   static void strip(
-      Stream<String> files,
+      Stream<Path> files,
       Path outputPath,
       Path tempDir,
       Problems problems,

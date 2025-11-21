@@ -130,7 +130,11 @@ final class BazelJ2wasmBundler extends BazelWorker {
     // Create an environment to initialize the well known type descriptors to be able to synthesize
     // code.
     // TODO(b/294284380): consider removing JDT and manually synthesizing required types.
-    var classPathEntries = Splitter.on(File.pathSeparatorChar).splitToList(this.classPath);
+    var classPathEntries =
+        Splitter.on(File.pathSeparatorChar)
+            .splitToStream(this.classPath)
+            .map(Path::of)
+            .collect(toImmutableList());
     new JdtEnvironment(
         new JdtParser(problems), classPathEntries, TypeDescriptors.getWellKnownTypeNames());
 
