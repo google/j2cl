@@ -37,6 +37,7 @@ ERROR_PRONE_SUPPRESSIONS = [
     "-Xep:SelfEquality:OFF",
     "-Xep:SelfEquals:OFF",
     "-Xep:StringJoin:OFF",
+    "-Xlint:-removal",
 ]
 
 java_library(
