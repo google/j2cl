@@ -75,6 +75,21 @@ class WhenStatement extends j_l_Object {
   return value;
  }
  /** @final @nodts @return {number} */
+ m_whenStatementWithStringWithNull__java_lang_String__int_$p_whenstatement_WhenStatement(/** ?string */ stringValue) {
+  let /** number */ value;
+  let tmp0_subject = stringValue;
+  if ($Equality.$same(tmp0_subject, 'minus_one') || ($Equality.$same(tmp0_subject, 'zero') || $Equality.$same(tmp0_subject, 'one'))) {
+   value = 1;
+  } else if ($Equality.$same(tmp0_subject, 'two')) {
+   value = 2;
+  } else if ($Equality.$same(tmp0_subject, null)) {
+   value = 4;
+  } else {
+   value = 3;
+  }
+  return value;
+ }
+ /** @final @nodts @return {number} */
  m_whenExpressionWithChar__char__int(/** number */ charValue) {
   let tmp0_subject = charValue;
   return tmp0_subject == 48 /* '0' */ || tmp0_subject == 49 /* '1' */ ? 1 : tmp0_subject == 50 /* '2' */ ? 2 : 3;
@@ -186,7 +201,7 @@ class WhenStatement extends j_l_Object {
   return tmp;
  }
  /** @final @nodts @return {number} */
- m_whenStatementWithEnumValue__whenstatement_Numbers__int(/** !Numbers */ number_1) {
+ m_whenStatementWithEnumValue__whenstatement_Numbers__int(/** Numbers */ number_1) {
   let tmp0_subject = number_1;
   switch (tmp0_subject.ordinal()) {
    case Numbers.$ordinal_ONE__whenstatement_Numbers:
@@ -203,7 +218,7 @@ class WhenStatement extends j_l_Object {
     }
    default:
     {
-     return Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
+     return 4;
     }
   }
  }

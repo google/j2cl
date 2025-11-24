@@ -37,30 +37,42 @@ private fun testSwitchValues() {
   assertEquals(1, getStringValue("one"))
   assertEquals(2, getStringValue("two"))
   assertEquals(3, getStringValue("three"))
+  assertEquals(3, getStringValue(null))
+  assertEquals(4, getStringValueWithNull(null))
 
   assertEquals(1, getCharValue('0'))
   assertEquals(1, getCharValue('1'))
   assertEquals(2, getCharValue('2'))
   assertEquals(3, getCharValue('3'))
+  assertEquals(3, getCharValue(null))
 
   assertEquals(1, getIntValue(0))
   assertEquals(1, getIntValue(1))
   assertEquals(2, getIntValue(2))
   assertEquals(3, getIntValue(3))
+  assertEquals(3, getIntValue(null))
 
   assertEquals(1, getBooleanValue(true))
   assertEquals(2, getBooleanValue(false))
+  assertEquals(2, getBooleanValue(null))
+
+  assertEquals(1, getEnumValueExhaustive(Numbers.ONE))
+  assertEquals(2, getEnumValueExhaustive(Numbers.TWO))
+  assertEquals(3, getEnumValueExhaustive(Numbers.THREE))
 
   assertEquals(1, getEnumValue(Numbers.ONE))
   assertEquals(2, getEnumValue(Numbers.TWO))
   assertEquals(3, getEnumValue(Numbers.THREE))
+  // TODO(b/462550130): Uncomment once this bug is fixed.
+  // assertEquals(4, getEnumValue(null))
+  // assertEquals(4, getEnumValueWithNull(null))
 
   assertEquals(10, testBreakStatementInSwitch(Numbers.ONE))
   assertEquals(2, testBreakStatementInSwitch(Numbers.TWO))
   assertEquals(0, testBreakStatementInSwitch(Numbers.THREE))
 }
 
-private fun getStringValue(stringValue: String): Int {
+private fun getStringValue(stringValue: String?): Int {
   return when (stringValue) {
     "zero",
     "one" -> 1
@@ -69,7 +81,17 @@ private fun getStringValue(stringValue: String): Int {
   }
 }
 
-private fun getCharValue(charValue: Char): Int {
+private fun getStringValueWithNull(stringValue: String?): Int {
+  when (stringValue) {
+    "zero",
+    "one" -> return 1
+    "two" -> return 2
+    null -> return 4
+    else -> return 3
+  }
+}
+
+private fun getCharValue(charValue: Char?): Int {
   return when (charValue) {
     '0',
     '1' -> 1
@@ -78,7 +100,7 @@ private fun getCharValue(charValue: Char): Int {
   }
 }
 
-private fun getIntValue(intValue: Int): Int {
+private fun getIntValue(intValue: Int?): Int {
   when (intValue) {
     0,
     1 -> return 1
@@ -87,7 +109,7 @@ private fun getIntValue(intValue: Int): Int {
   }
 }
 
-private fun getBooleanValue(booleanValue: Boolean): Int {
+private fun getBooleanValue(booleanValue: Boolean?): Int {
   return when (booleanValue) {
     true -> 1
     else -> 2
@@ -100,13 +122,32 @@ enum class Numbers {
   THREE,
 }
 
-private fun getEnumValue(numberValue: Numbers): Int {
+private fun getEnumValueExhaustive(numberValue: Numbers): Int {
   when (numberValue) {
     Numbers.ONE -> return 1
     Numbers.TWO -> return 2
     Numbers.THREE -> return 3
   }
 }
+
+private fun getEnumValue(numberValue: Numbers?): Int {
+  when (numberValue) {
+    Numbers.ONE -> return 1
+    Numbers.TWO -> return 2
+    Numbers.THREE -> return 3
+    else -> return 4
+  }
+}
+
+// TODO(b/462550130): Uncomment once this bug is fixed.
+// private fun getEnumValueWithNull(numberValue: Numbers?): Int {
+//   when (numberValue) {
+//     Numbers.ONE -> return 1
+//     Numbers.TWO -> return 2
+//     Numbers.THREE -> return 3
+//     null -> return 4
+//   }
+// }
 
 private fun testBreakStatementInSwitch(numberValue: Numbers): Int {
   var value = 0
