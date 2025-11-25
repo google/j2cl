@@ -236,3 +236,10 @@ fun test() {
 }
 
 fun requireInt(i: Int) {}
+
+class KotlinClassSpecializingAJavaMethod : JsTypeJavaClass<Double>() {
+  override fun parametricJsMethod(v: Double) {}
+
+  // Repro for b/463463843.
+  override fun boxedPrimitiveJsMethod(v: Double) {}
+}

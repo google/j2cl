@@ -1,0 +1,59 @@
+goog.module('primitivespecialization.KotlinClassSpecializingAJavaMethod$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const JsTypeJavaClass = goog.require('primitivespecialization.JsTypeJavaClass$impl');
+
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {JsTypeJavaClass<number>}
+ */
+class KotlinClassSpecializingAJavaMethod extends JsTypeJavaClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!KotlinClassSpecializingAJavaMethod} */
+ static $create__() {
+  KotlinClassSpecializingAJavaMethod.$clinit();
+  let $instance = new KotlinClassSpecializingAJavaMethod();
+  $instance.$ctor__primitivespecialization_KotlinClassSpecializingAJavaMethod__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_KotlinClassSpecializingAJavaMethod__void() {
+  this.$ctor__primitivespecialization_JsTypeJavaClass__void();
+ }
+ /** @nodts */
+ m_parametricJsMethod__double__void(/** number */ v) {}
+ /** @nodts */
+ m_boxedPrimitiveJsMethod__double__void(/** number */ v) {}
+ //Bridge method.
+ /** @final @override @suppress{visibility} */
+ parametricJsMethod(/** number */ arg0) {
+  this.m_parametricJsMethod__double__void(Double.m_doubleValue__java_lang_Double__double(/**@type {number}*/ ($Casts.$to(arg0, Double))));
+ }
+ /** @nodts */
+ static $clinit() {
+  KotlinClassSpecializingAJavaMethod.$clinit = () =>{};
+  KotlinClassSpecializingAJavaMethod.$loadModules();
+  JsTypeJavaClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KotlinClassSpecializingAJavaMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Double = goog.module.get('java.lang.Double$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(KotlinClassSpecializingAJavaMethod, 'primitivespecialization.KotlinClassSpecializingAJavaMethod');
+
+exports = KotlinClassSpecializingAJavaMethod;
+
+//# sourceMappingURL=KotlinClassSpecializingAJavaMethod.js.map

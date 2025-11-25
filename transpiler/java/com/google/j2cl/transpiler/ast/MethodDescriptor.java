@@ -888,7 +888,25 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return false;
     }
 
-    return isSameSignature(that);
+    SourceLanguage overrideSemanticsLanguages = getOverrideSemanticsLanguage(this, that);
+    return getSignature(overrideSemanticsLanguages)
+        .equals(that.getSignature(overrideSemanticsLanguages));
+  }
+
+  /**
+   * Returns the semantics used to determine overrides; if any method is written in Kotlin, kotlin
+   * semantics are used.
+   */
+  private static SourceLanguage getOverrideSemanticsLanguage(
+      MethodDescriptor overridenMethod, MethodDescriptor overridingMethod) {
+    var overridenMethodLang =
+        overridenMethod.getEnclosingTypeDescriptor().getTypeDeclaration().getSourceLanguage();
+    var overridingMethodLang =
+        overridingMethod.getEnclosingTypeDescriptor().getTypeDeclaration().getSourceLanguage();
+    return overridenMethodLang == SourceLanguage.KOTLIN
+            || overridingMethodLang == SourceLanguage.KOTLIN
+        ? SourceLanguage.KOTLIN
+        : SourceLanguage.JAVA;
   }
 
   /** Returns {@code true} is {@code this} has the same signature as {@code that}. */

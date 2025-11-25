@@ -113,6 +113,14 @@ class KtJsTypeShadowsField : SubJsTypeClass() {
   @JvmField @JsProperty(name = "foo2") var foo = "tuv"
 }
 
+class SpecializedPrimitiveParameters : ParametricJsTypeJavaClass<Double>() {
+  override fun parametericJsMethod(value: Double): String? =
+    "SpecializedPrimitiveParameters#parametericJsMethod"
+
+  override fun boxedDoubleJsMethod(value: Double): String? =
+    "SpecializedPrimitiveParameters#boxedDoubleJsMethod"
+}
+
 fun testJsInterop() {
   val ktJsType = KtJsType()
 
@@ -143,4 +151,19 @@ fun testJsInterop() {
   overridesField.setFoo("def")
   assertEquals("tuv", overridesField.foo)
   assertEquals("get:was_set:def", overridesField.getFoo())
+
+  // Use the supertype type to ensure correctness ofthe bridges.
+  val specializesPrimitiveParameters: ParametricJsTypeJavaClass<Double> =
+    SpecializedPrimitiveParameters()
+
+  assertEquals(
+    "SpecializedPrimitiveParameters#parametericJsMethod",
+    specializesPrimitiveParameters.parametericJsMethod(1.0),
+  )
+
+  // TODO(b/463463843): Enable once the bug is fixed.
+  // assertEquals(
+  //   "SpecializedPrimitiveParameters#boxedDoubleJsMethod",
+  //   specializesPrimitiveParameters.boxedDoubleJsMethod(1.0),
+  // )
 }
