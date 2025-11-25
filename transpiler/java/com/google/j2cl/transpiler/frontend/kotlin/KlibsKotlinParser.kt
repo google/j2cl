@@ -162,10 +162,7 @@ class KlibsKotlinParser(private val problems: Problems) {
           .filter { it.originalPath().startsWith("common-srcs/") }
           .map(FileInfo::sourcePath)
           .toTypedArray()
-      arguments.freeArgs =
-        options.sources
-          .filter { !it.originalPath().endsWith("package-info.java") }
-          .map(SourceUtils.FileInfo::sourcePath)
+      arguments.freeArgs = options.sources.map(SourceUtils.FileInfo::sourcePath)
     }
   }
 
