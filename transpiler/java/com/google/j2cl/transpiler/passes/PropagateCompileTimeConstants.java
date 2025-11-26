@@ -35,7 +35,7 @@ public class PropagateCompileTimeConstants extends NormalizationPass {
     rewriteCompileTimeConstantFieldReferences(type);
   }
 
-  /** Removes all compile constant fields and returns their values indexed by them. */
+  /** Removes all compile constant fields since their values are propagated to all usage sites. */
   private void removeCompileTimeConstantFields(Type type) {
     type.accept(
         new AbstractRewriter() {
