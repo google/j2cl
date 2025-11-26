@@ -24,6 +24,7 @@ import com.google.j2cl.integration.testing.Asserts.assertTrue
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.coroutines.createCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.startCoroutine
@@ -39,6 +40,7 @@ fun main(vararg unused: String) {
   testDefaultParametersInCoroutines()
   testCoroutineWithVarargs()
   testCoroutineInterception()
+  testSynchronousResumption()
 }
 
 private suspend fun notActuallySuspendingButReturningString(): String {
@@ -199,6 +201,41 @@ private fun testCoroutineInterception() {
       "interceptedResumeWithCalled",
       "suspendFunctionDone",
       "completionCalled",
+    ),
+    eventFlow.toArray(),
+  )
+}
+
+private fun testSynchronousResumption() {
+  val eventFlow: ArrayList<String> = arrayListOf()
+
+  eventFlow.add("beforeCoroutine")
+  suspend {
+      eventFlow.add("coroutineStarted")
+      val result = suspendCoroutine { cont: Continuation<String> ->
+        eventFlow.add("suspendCoroutineStarted")
+        // Resume the continuation before `suspendCoroutine` completes. This causes the coroutine to
+        // resume synchronously, without ever truly suspending.
+        cont.resume("continuationResumed")
+        eventFlow.add("suspendCoroutineDone")
+      }
+      eventFlow.add(result)
+      eventFlow.add("coroutineDone")
+      Unit
+    }
+    .startCoroutine(Continuation<Unit>(EmptyCoroutineContext) { eventFlow.add("completionCalled") })
+  eventFlow.add("afterCoroutine")
+
+  assertEquals(
+    arrayOf(
+      "beforeCoroutine",
+      "coroutineStarted",
+      "suspendCoroutineStarted",
+      "suspendCoroutineDone",
+      "continuationResumed",
+      "coroutineDone",
+      "completionCalled",
+      "afterCoroutine",
     ),
     eventFlow.toArray(),
   )
