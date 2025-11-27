@@ -95,4 +95,13 @@ class TypeWildCards {
   class View<P extends Presenter<?>> {}
 
   class Presenter<V extends View<?>> {}
+
+  // repro for b/464077965
+  class Content<T> {}
+
+  class SomeContainer<T extends Content<T>> {}
+
+  void testContainer() {
+    SomeContainer<? extends Content<?>> c = null;
+  }
 }

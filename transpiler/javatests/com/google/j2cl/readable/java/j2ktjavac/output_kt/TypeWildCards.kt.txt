@@ -50,6 +50,10 @@ open class TypeWildCards internal constructor() {
   this.methodWithUnusedTypeParameter_pp_j2ktjavac<Number>()
  }
 
+ internal open fun testContainer_pp_j2ktjavac() {
+  val c: TypeWildCards.SomeContainer<out TypeWildCards.Content<*>>? = null
+ }
+
  open class WithDependentBounds internal constructor() {
   companion object {
    @JvmStatic
@@ -116,4 +120,8 @@ open class TypeWildCards internal constructor() {
  open inner class View<P: TypeWildCards.Presenter<*>> internal constructor()
 
  open inner class Presenter<V: TypeWildCards.View<*>> internal constructor()
+
+ open inner class Content<T: Any> internal constructor()
+
+ open inner class SomeContainer<T: TypeWildCards.Content<T>> internal constructor()
 }
