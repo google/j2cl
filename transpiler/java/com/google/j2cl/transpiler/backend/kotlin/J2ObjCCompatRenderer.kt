@@ -487,11 +487,17 @@ internal class J2ObjCCompatRenderer(
     ktNativeNameObjCNamePrefix(name) + ktNativeNameObjCNameWithoutPrefix(name)
 
   private fun ktNativeNameObjCNameWithoutPrefix(name: String): String =
-    if (ktNativeNameUsesSimpleObjCName(name)) {
-      name.substring(name.lastIndexOf('.') + 1)
-    } else {
-      name.qualifiedNameToObjCName
+    ktNativeNameObjCPackagePrefix(name) + ktNativeNameObjCSimpleName(name)
+
+  private fun ktNativeNameObjCPackagePrefix(name: String): String =
+    when {
+      ktNativeNameUsesSimpleObjCName(name) -> ""
+      name.startsWith("kotlin.") -> "Kotlin"
+      else -> name.substring(0, name.lastIndexOf('.')).objCPackagePrefix
     }
+
+  private fun ktNativeNameObjCSimpleName(name: String): String =
+    name.substring(name.lastIndexOf('.') + 1)
 
   private fun ktNativeNameUsesSimpleObjCName(name: String): Boolean =
     KT_NATIVE_SIMPLE_OBJC_NAME_TYPES.contains(name)
@@ -723,6 +729,7 @@ internal class J2ObjCCompatRenderer(
         "java.lang.NumberFormatException",
         "java.lang.OutOfMemoryError",
         "java.lang.RuntimeException",
+        "java.lang.StringBuilder",
         "java.lang.StringIndexOutOfBoundsException",
         "java.lang.System",
         "java.lang.UnsupportedOperationException",

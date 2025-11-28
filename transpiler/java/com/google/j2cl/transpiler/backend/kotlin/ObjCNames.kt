@@ -164,7 +164,7 @@ private val TypeDeclaration.simpleObjCName: String
 private val TypeDeclaration.objCPackagePrefix: String
   get() = packageName?.objCPackagePrefix ?: ""
 
-private val String.objCPackagePrefix: String
+internal val String.objCPackagePrefix: String
   get() = qualifiedNameToObjCName
 
 internal val String.qualifiedNameToObjCName: String

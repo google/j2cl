@@ -28,7 +28,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 
-// TODO(b/407538927): Remove when no longer necessary.
+// TODO(b/464236180): Remove when no longer necessary.
 internal class HiddenFromObjCMapping(
   // Mutable map from `TypeDeclaration` to `Boolean?` value indicating whether it requires
   // `@HiddenFromObjC` annotation, where `null` indicates that it's currently being processed and
@@ -85,6 +85,8 @@ internal class HiddenFromObjCMapping(
     }
 
   companion object {
-    private val HIDDEN_FROM_OBJC_TYPE_NAMES = setOf("java.lang.Appendable")
+    // TODO(b/464236180): This set is currently empty, but can be populated as needed. If it remains
+    // untouched for a prolonged period of time, it can be removed together with the entire class.
+    private val HIDDEN_FROM_OBJC_TYPE_NAMES: Set<String> = setOf()
   }
 }
