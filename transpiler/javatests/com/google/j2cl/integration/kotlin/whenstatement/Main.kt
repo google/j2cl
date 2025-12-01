@@ -233,6 +233,10 @@ private fun testEmptyWhen() {
   var a = 2
   when {}
   assertEquals(2, a)
+
+  // TODO(b/465183958): Uncomment once this bug is fixed.
+  // when (a++) {}
+  // assertEquals(3, a)
 }
 
 private fun testOnlyElse() {
