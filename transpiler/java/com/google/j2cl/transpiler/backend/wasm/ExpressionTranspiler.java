@@ -423,7 +423,7 @@ final class ExpressionTranspiler {
         if (environment.isCustomDescriptorsEnabled()) {
           sourceBuilder.append(
               format(
-                  "(struct.new %s (global.get %s)",
+                  "(struct.new_desc %s (global.get %s)",
                   environment.getWasmTypeName(newInstance.getTypeDescriptor()),
                   environment.getWasmItableGlobalName(newInstance.getTypeDescriptor())));
         } else {
