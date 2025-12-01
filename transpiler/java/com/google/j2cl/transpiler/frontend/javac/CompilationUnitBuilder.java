@@ -716,7 +716,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private int guessEndPosition(JCTree node) {
     int startCharacterPosition = node.getStartPosition();
     int endCharacterPosition = node.getEndPosition(javacUnit.endPositions);
-    if (endCharacterPosition == -1) {
+    if (endCharacterPosition == -1 || endCharacterPosition == startCharacterPosition) {
       try {
         // Scan the source file for the end of an identifier.
         String src = javacUnit.sourcefile.getCharContent(true).toString();
