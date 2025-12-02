@@ -22,11 +22,16 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** Class that represents a binding pattern. */
 @Visitable
-public class BindingPattern extends Pattern {
+public final class BindingPattern extends Pattern {
   @Visitable Variable variable;
 
   public BindingPattern(Variable variable) {
     this.variable = checkNotNull(variable);
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return variable.getTypeDescriptor();
   }
 
   public Variable getVariable() {

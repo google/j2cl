@@ -78,6 +78,14 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterBindingPattern(BindingPattern bindingPattern) {
+        print(bindingPattern.getTypeDescriptor());
+        print(" ");
+        print(bindingPattern.getVariable().getName());
+        return false;
+      }
+
+      @Override
       public boolean enterBlock(Block block) {
         print("{");
         indent();
@@ -296,7 +304,11 @@ class ToStringRenderer {
       public boolean enterInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
         accept(instanceOfExpression.getExpression());
         print(" instanceof ");
-        print(instanceOfExpression.getTestTypeDescriptor());
+        if (instanceOfExpression.getPattern() != null) {
+          accept(instanceOfExpression.getPattern());
+        } else {
+          print(instanceOfExpression.getTestTypeDescriptor());
+        }
         return false;
       }
 
