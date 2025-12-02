@@ -44,5 +44,7 @@ public interface FrontendOptions {
 
   ImmutableList<Path> getDependencyKlibs();
 
+  ImmutableList<Path> getFriendKlibs();
+
   ImmutableList<String> getForbiddenAnnotations();
 }

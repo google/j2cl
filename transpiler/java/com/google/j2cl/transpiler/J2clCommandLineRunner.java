@@ -235,6 +235,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
         .setDependencyKlibs(ImmutableList.of())
+        .setFriendKlibs(ImmutableList.of())
         .setEnableKlibs(false)
         .setObjCNamePrefix("J2kt")
         .build(problems);

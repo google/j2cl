@@ -23,7 +23,9 @@ def _compile(
         kotlincopts = [],
         internal_transpiler_flags = {},
         artifact_suffix = "",
-        is_j2kt_web_enabled = False):
+        is_j2kt_web_enabled = False,
+        klib_friends = depset(),
+        exported_friend_klibs = depset()):
     name = ctx.label.name + artifact_suffix
     java_toolchain = _get_java_toolchain(ctx)
     jvm_srcs, js_srcs = split_srcs(srcs)
@@ -110,6 +112,8 @@ def _compile(
         kt_common_srcs = kt_common_srcs,
         klib_deps = klib_deps,
         klib_exports = klib_exports,
+        klib_friends = klib_friends,
+        exported_friend_klibs = exported_friend_klibs,
         kotlincopts = kotlincopts,
         java_bootclasspath = get_bootclasspath(ctx),
         jvm_provider = jvm_provider,
@@ -133,6 +137,7 @@ def _compile(
             javac_opts,
             kotlincopts,
             klib_provider,
+            klib_friends,
         )
         library_info = [output_library_info]
     else:
@@ -342,7 +347,8 @@ def _j2cl_transpile(
         kt_common_srcs,
         javac_opts,
         kotlincopts,
-        klib_provider):
+        klib_provider,
+        klib_friends):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
     is_klibs_enabled = klib_common.is_klibs_experiment_enabled(ctx) and (kt_srcs or kt_common_srcs)
 
@@ -430,6 +436,14 @@ def _j2cl_transpile(
             join_with = ctx.configuration.host_path_separator,
         )
         transitive_inputs.append(klib_provider.compilation_klibs)
+
+        # Friend modules are passed via a separate flag, not kotlincopts. This is necessary for
+        # correct path resolution when J2clTranspiler runs as a Blaze worker.
+        args.add_joined(
+            "-friendKlibs",
+            klib_friends,
+            join_with = ctx.configuration.host_path_separator,
+        )
 
     args.add_all(srcs)
 

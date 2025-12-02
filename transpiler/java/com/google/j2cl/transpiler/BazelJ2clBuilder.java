@@ -164,6 +164,12 @@ final class BazelJ2clBuilder extends BazelWorker {
       usage = "Paths to cross-platform libraries in the .klib format.")
   String dependencyKlibs;
 
+  @Option(
+      name = "-friendKlibs",
+      metaVar = "<path>",
+      usage = "Paths to cross-platform libraries in the .klib format.")
+  String friendKlibs;
+
   @Option(name = "-experimentalEnableKlibs", usage = "Enable using klibs for the kotlin frontend.")
   boolean enableKlibs = false;
 
@@ -268,6 +274,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
         .setDependencyKlibs(getPathEntries(dependencyKlibs))
+        .setFriendKlibs(getPathEntries(friendKlibs))
         .setEnableKlibs(enableKlibs)
         .setObjCNamePrefix(objCNamePrefix)
         .build(problems);

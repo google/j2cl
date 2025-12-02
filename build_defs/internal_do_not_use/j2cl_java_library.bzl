@@ -76,6 +76,8 @@ def _impl_j2cl_library(ctx):
             for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
         },
         is_j2kt_web_enabled = enable_j2kt_web,
+        klib_friends = klib_common.get_klib_friends(ctx, ctx.attr.deps),
+        exported_friend_klibs = klib_common.get_klib_friends(ctx, ctx.attr.exports),
     )
 
     # If there is no J2ktInfo provider then this target and/or build was not enabled for J2KT.

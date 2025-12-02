@@ -154,9 +154,7 @@ class KlibsKotlinParser(private val problems: Problems) {
       parseCommandLineArguments(options.kotlincOptions, arguments)
       arguments.classpath = options.classpaths.joinToString(File.pathSeparator)
       arguments.klibLibraries = options.dependencyKlibs.joinToString(File.pathSeparator)
-      // TODO(b/460066579): Remove this and compute friend module on starlak side.
-      // Right now mark everything as friends.
-      arguments.friendModules = options.dependencyKlibs.joinToString(File.pathSeparator)
+      arguments.friendModules = options.friendKlibs.joinToString(File.pathSeparator)
       arguments.commonSources =
         options.sources
           .filter { it.originalPath().startsWith("common-srcs/") }
