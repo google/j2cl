@@ -133,4 +133,16 @@ open class RecordClass {
    var staticField: Int = 1
   }
  }
+
+ interface PropertyAccessors<T> {
+  fun parametric(): T
+
+  fun nonParametric(): String?
+ }
+
+ class RecordSpecializingInterface internal constructor(): Record(), PropertyAccessors<String?> {
+  private val parametric: String?
+
+  private val nonParametric: String?
+ }
 }

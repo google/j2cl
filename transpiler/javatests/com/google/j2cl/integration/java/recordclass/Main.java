@@ -32,6 +32,7 @@ public class Main {
     testGeneric();
     testImplementingInterface();
     testStaticFields();
+    testAccessorBridges();
   }
 
   public static void testAccessors() {
@@ -383,5 +384,20 @@ public class Main {
     public StaticFieldRecord(boolean initializeWithStaticField) {
       this(initializeWithStaticField ? StaticFieldRecord.staticField : 0);
     }
+  }
+
+  interface PropertyAccessors<T> {
+    T parametric();
+
+    String nonParametric();
+  }
+
+  record RecordSpecializingInterface(String parametric, String nonParametric)
+      implements PropertyAccessors<String> {}
+
+  private static void testAccessorBridges() {
+    PropertyAccessors<String> propertyAccessors = new RecordSpecializingInterface("abc", "def");
+    assertEquals("abc", propertyAccessors.parametric());
+    assertEquals("def", propertyAccessors.nonParametric());
   }
 }

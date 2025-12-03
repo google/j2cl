@@ -95,4 +95,13 @@ public class RecordClass {
       this(initializeWithStaticField ? StaticFieldRecord.staticField : 0);
     }
   }
+
+  interface PropertyAccessors<T> {
+    T parametric();
+
+    String nonParametric();
+  }
+
+  record RecordSpecializingInterface(String parametric, String nonParametric)
+      implements PropertyAccessors<String> {}
 }

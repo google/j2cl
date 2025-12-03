@@ -4,6 +4,13 @@
  ))
 )
 
+;;; Code for recordclass.RecordClass.PropertyAccessors [type definition]
+(type $recordclass.RecordClass.PropertyAccessors.vtable (sub (struct
+ (field $m_nonParametric__java_lang_String (ref $function.m_nonParametric__java_lang_String))
+ (field $m_parametric__java_lang_Object (ref $function.m_parametric__java_lang_Object))
+ ))
+)
+
 ;;; Code for recordclass.RecordClass [type definition]
 (type $recordclass.RecordClass (sub $java.lang.Object (struct
  (field $vtable (ref $recordclass.RecordClass.vtable))
@@ -215,7 +222,28 @@
  ))
 )
 
+;;; Code for recordclass.RecordClass.RecordSpecializingInterface [type definition]
+(type $recordclass.RecordClass.RecordSpecializingInterface (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordSpecializingInterface.vtable))
+ (field $itable (ref $recordclass.RecordClass.RecordSpecializingInterface.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (mut (ref null $java.lang.String)))
+ (field $parametric@recordclass.RecordClass.RecordSpecializingInterface (mut (ref null $java.lang.String)))
+ ))
+)
+(type $recordclass.RecordClass.RecordSpecializingInterface.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_nonParametric__java_lang_String (ref $function.m_nonParametric__java_lang_String))
+ (field $m_parametric__java_lang_Object (ref $function.m_parametric__java_lang_Object))
+ ))
+)
+
 ;;; Code for recordclass.RecordClass.I [imports]
+
+;;; Code for recordclass.RecordClass.PropertyAccessors [imports]
 
 ;;; Code for recordclass.RecordClass [imports]
 
@@ -242,6 +270,8 @@
 ;;; Code for recordclass.RecordClass.RecordImplementingInterface [imports]
 
 ;;; Code for recordclass.RecordClass.StaticFieldRecord [imports]
+
+;;; Code for recordclass.RecordClass.RecordSpecializingInterface [imports]
 
 ;;; Code for recordclass.RecordClass [static fields]
 (global $$class-initialized@recordclass.RecordClass (mut i32)
@@ -355,6 +385,22 @@
  (i32.const 0)
 )
 (global $$class@recordclass.RecordClass.StaticFieldRecord (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for recordclass.RecordClass.PropertyAccessors [static fields]
+(global $$class-initialized@recordclass.RecordClass.PropertyAccessors (mut i32)
+ (i32.const 0)
+)
+(global $$class@recordclass.RecordClass.PropertyAccessors (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for recordclass.RecordClass.RecordSpecializingInterface [static fields]
+(global $$class-initialized@recordclass.RecordClass.RecordSpecializingInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@recordclass.RecordClass.RecordSpecializingInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 
@@ -485,6 +531,24 @@
  )
 )
 
+;;; Code for recordclass.RecordClass.RecordSpecializingInterface [vtable.init]
+(global $recordclass.RecordClass.RecordSpecializingInterface.vtable (ref $recordclass.RecordClass.RecordSpecializingInterface.vtable)
+ (struct.new $recordclass.RecordClass.RecordSpecializingInterface.vtable
+  (ref.func $$getClassImpl__java_lang_Class@recordclass.RecordClass.RecordSpecializingInterface)
+  (ref.func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.RecordSpecializingInterface)
+  (ref.func $m_hashCode__int@recordclass.RecordClass.RecordSpecializingInterface)
+  (ref.func $m_toString__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface)
+  (ref.func $m_nonParametric__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface)
+  (ref.func $m_parametric__java_lang_Object@recordclass.RecordClass.RecordSpecializingInterface)
+ )
+)
+(global $recordclass.RecordClass.PropertyAccessors.vtable@$recordclass.RecordClass.RecordSpecializingInterface (ref $recordclass.RecordClass.PropertyAccessors.vtable)
+ (struct.new $recordclass.RecordClass.PropertyAccessors.vtable
+  (ref.func $m_nonParametric__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface)
+  (ref.func $m_parametric__java_lang_Object@recordclass.RecordClass.RecordSpecializingInterface)
+ )
+)
+
 ;;; Code for recordclass.RecordClass.I [methods]
 
 ;;; void I.$clinit()
@@ -514,6 +578,38 @@
   )
   (global.set $$class@recordclass.RecordClass.I (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|recordclass....|__java_lang_String_<once>_@recordclass.RecordClass.I )))
   (return (global.get $$class@recordclass.RecordClass.I))
+ )
+)
+
+;;; Code for recordclass.RecordClass.PropertyAccessors [methods]
+
+;;; void PropertyAccessors.$clinit()
+(func $$clinit__void_<once>_@recordclass.RecordClass.PropertyAccessors
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:99:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:99:12
+  (if (global.get $$class-initialized@recordclass.RecordClass.PropertyAccessors)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:99:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:99:12
+  (global.set $$class-initialized@recordclass.RecordClass.PropertyAccessors (i32.const 1))
+ )
+)
+
+;;; Class<T> PropertyAccessors.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.PropertyAccessors
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@recordclass.RecordClass.PropertyAccessors)))
+   (then
+    (return (global.get $$class@recordclass.RecordClass.PropertyAccessors))
+   )
+  )
+  (global.set $$class@recordclass.RecordClass.PropertyAccessors (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|recordclass....|__java_lang_String_<once>_@recordclass.RecordClass.PropertyAccessors )))
+  (return (global.get $$class@recordclass.RecordClass.PropertyAccessors))
  )
 )
 
@@ -2359,3 +2455,180 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.StaticFieldRecord)
+
+;;; Code for recordclass.RecordClass.RecordSpecializingInterface [methods]
+
+;;; RecordSpecializingInterface RecordSpecializingInterface.$create(String arg0, String arg1)
+(func $$create__java_lang_String__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface
+ (param $arg0 (ref null $java.lang.String))
+ (param $arg1 (ref null $java.lang.String))
+ (result (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (local $$instance (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (call $$clinit__void_<once>_@recordclass.RecordClass.RecordSpecializingInterface )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (local.set $$instance (struct.new $recordclass.RecordClass.RecordSpecializingInterface (global.get $recordclass.RecordClass.RecordSpecializingInterface.vtable) (global.get $recordclass.RecordClass.RecordSpecializingInterface.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (call $$ctor__java_lang_String__java_lang_String__void_$p_recordclass_RecordClass_RecordSpecializingInterface@recordclass.RecordClass.RecordSpecializingInterface (ref.as_non_null (local.get $$instance))(local.get $arg0)(local.get $arg1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RecordSpecializingInterface.$ctor(String arg0, String arg1)
+(func $$ctor__java_lang_String__java_lang_String__void_$p_recordclass_RecordClass_RecordSpecializingInterface@recordclass.RecordClass.RecordSpecializingInterface
+ (param $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (param $arg0 (ref null $java.lang.String))
+ (param $arg1 (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (struct.set $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this) (local.get $arg0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (struct.set $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this) (local.get $arg1))
+ )
+)
+
+;;; String RecordSpecializingInterface.parametric()
+(func $m_parametric__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface
+ (type $function.m_parametric__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
+ (block
+  (return (struct.get $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this)))
+ )
+)
+(elem declare func $m_parametric__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface)
+
+;;; String RecordSpecializingInterface.nonParametric()
+(func $m_nonParametric__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface
+ (type $function.m_nonParametric__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
+ (block
+  (return (struct.get $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this)))
+ )
+)
+(elem declare func $m_nonParametric__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface)
+
+;;; boolean RecordSpecializingInterface.equals(Object arg0)
+(func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.RecordSpecializingInterface
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (local $$other (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
+ (block
+  (if (i32.eqz (block (result i32)
+    (local.set $$other (if (result (ref null $recordclass.RecordClass.RecordSpecializingInterface)) (ref.test (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.RecordSpecializingInterface) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.RecordSpecializingInterface))))
+    (i32.eqz (ref.is_null (local.get $$other)))
+   ))
+   (then
+    (return (i32.const 0))
+   )
+  )
+  (return (call $m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))(struct.get $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $$other))(struct.get $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $$other))))))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.RecordSpecializingInterface)
+
+;;; int RecordSpecializingInterface.hashCode()
+(func $m_hashCode__int@recordclass.RecordClass.RecordSpecializingInterface
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
+ (block
+  (return (call $m_hashCode__arrayOf_java_lang_Object__int@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))(struct.get $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))))))
+ )
+)
+(elem declare func $m_hashCode__int@recordclass.RecordClass.RecordSpecializingInterface)
+
+;;; String RecordSpecializingInterface.toString()
+(func $m_toString__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
+ (block
+  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))(struct.get $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))))))
+ )
+)
+(elem declare func $m_toString__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface)
+
+;;; String RecordSpecializingInterface.parametric()
+(func $m_parametric__java_lang_Object@recordclass.RecordClass.RecordSpecializingInterface
+ (type $function.m_parametric__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (return (call $m_parametric__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface (ref.as_non_null (local.get $this))))
+ )
+)
+(elem declare func $m_parametric__java_lang_Object@recordclass.RecordClass.RecordSpecializingInterface)
+
+;;; void RecordSpecializingInterface.$clinit()
+(func $$clinit__void_<once>_@recordclass.RecordClass.RecordSpecializingInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (if (global.get $$class-initialized@recordclass.RecordClass.RecordSpecializingInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (global.set $$class-initialized@recordclass.RecordClass.RecordSpecializingInterface (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:105:9
+  (call $$clinit__void_<once>_@java.lang.Record )
+ )
+)
+
+;;; Class<T> RecordSpecializingInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.RecordSpecializingInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@recordclass.RecordClass.RecordSpecializingInterface)))
+   (then
+    (return (global.get $$class@recordclass.RecordClass.RecordSpecializingInterface))
+   )
+  )
+  (global.set $$class@recordclass.RecordClass.RecordSpecializingInterface (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|recordclass....|__java_lang_String_<once>_@recordclass.RecordClass.RecordSpecializingInterface )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Record )))
+  (return (global.get $$class@recordclass.RecordClass.RecordSpecializingInterface))
+ )
+)
+
+;;; Class<?> RecordSpecializingInterface.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@recordclass.RecordClass.RecordSpecializingInterface
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.RecordSpecializingInterface ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.RecordSpecializingInterface)

@@ -1,0 +1,36 @@
+goog.module('recordclass.RecordClass.PropertyAccessors$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class PropertyAccessors {
+ /** @abstract @nodts @return {T} */
+ m_parametric__java_lang_Object() {}
+ /** @abstract @nodts @return {?string} */
+ m_nonParametric__java_lang_String() {}
+ /** @nodts */
+ static $clinit() {
+  PropertyAccessors.$clinit = () =>{};
+  PropertyAccessors.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__recordclass_RecordClass_PropertyAccessors = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__recordclass_RecordClass_PropertyAccessors;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+PropertyAccessors.$markImplementor(/**@type {Function}*/ (PropertyAccessors));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (PropertyAccessors), 'recordclass.RecordClass$PropertyAccessors');
+
+exports = PropertyAccessors;
+
+//# sourceMappingURL=RecordClass$PropertyAccessors.js.map
