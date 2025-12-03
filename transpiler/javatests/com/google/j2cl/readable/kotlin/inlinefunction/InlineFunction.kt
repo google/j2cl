@@ -273,6 +273,10 @@ internal fun <S : ParametrizedReproChild<String>> S.find4(): String? {
   return get()
 }
 
+internal fun <S : ParametrizedReproChild<*>> S.findWithStarProjection(): String? {
+  return get() as String?
+}
+
 internal fun <S : ParametrizedContainerReproChild<String>> S.find5(): String? {
   return get()?.t
 }
