@@ -24,6 +24,7 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.devtools.build.lib.worker.ProtoWorkerMessageProcessor;
 import com.google.devtools.build.lib.worker.WorkRequestHandler;
+import com.google.j2cl.common.CommandLineParser;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.bazel.profiler.Profiler;
 import java.io.File;
@@ -35,7 +36,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
 /**
@@ -47,7 +47,7 @@ import org.kohsuke.args4j.Option;
 public abstract class BazelWorker {
 
   protected final Problems problems = new Problems();
-  protected Path workdir;
+  private Path workdir;
 
   @Option(name = "-profileOutput", hidden = true)
   Path profileOutput = null;
@@ -59,7 +59,8 @@ public abstract class BazelWorker {
    * via {@link Problems} to avoid interrupting the worker protocol which occurs over stdout.
    */
   private int processRequest(List<String> args, PrintWriter pw, String sandboxDir) {
-    CmdLineParser parser = new CmdLineParser(this);
+    this.workdir = Path.of(sandboxDir);
+    CommandLineParser parser = new CommandLineParser(this, this.workdir);
 
     try {
       parser.parseArgument(args);
@@ -67,7 +68,6 @@ public abstract class BazelWorker {
       problems.error("%s", e.getMessage());
       return problems.reportAndGetExitCode(pw);
     }
-    this.workdir = Path.of(sandboxDir);
 
     var profiler = Profiler.create(workdir, profileOutput);
     try {

@@ -15,9 +15,8 @@ package com.google.j2cl.transpiler;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
+import com.google.j2cl.common.CommandLineParser;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems.FatalError;
@@ -26,7 +25,6 @@ import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
-import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,20 +46,21 @@ final class BazelJ2clBuilder extends BazelWorker {
       metaVar = "<source files>",
       required = true,
       usage = "Specifies individual files and jars/zips of sources (.java, .js, .native.js).")
-  List<String> sources = new ArrayList<>();
+  List<Path> sources = new ArrayList<>();
 
   @Option(
       name = "-classpath",
       required = true,
       metaVar = "<path>",
-      usage = "Specifies where to find user class files and annotation processors.")
-  String classPath;
+      usage = "Specifies where to find user class files and annotation processors.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> classpaths;
 
   @Option(
       name = "-system",
       metaVar = "<path>",
       usage = "Specifies the location of the system modules.")
-  String system = "";
+  Path system;
 
   @Option(
       name = "-output",
@@ -161,14 +160,16 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(
       name = "-klibs",
       metaVar = "<path>",
-      usage = "Paths to cross-platform libraries in the .klib format.")
-  String dependencyKlibs;
+      usage = "Paths to cross-platform libraries in the .klib format.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> dependencyKlibs = new ArrayList<>();
 
   @Option(
       name = "-friendKlibs",
       metaVar = "<path>",
-      usage = "Paths to cross-platform libraries in the .klib format.")
-  String friendKlibs;
+      usage = "Paths to cross-platform libraries in the .klib format.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> friendKlibs = new ArrayList<>();
 
   @Option(name = "-experimentalEnableKlibs", usage = "Enable using klibs for the kotlin frontend.")
   boolean enableKlibs = false;
@@ -182,7 +183,7 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Override
   protected void run() {
     problems.abortIfCancelled();
-    try (Output out = OutputUtils.initOutput(workdir.resolve(output), problems)) {
+    try (Output out = OutputUtils.initOutput(output, problems)) {
       problems.abortIfCancelled();
       try {
         J2clTranspiler.transpile(createOptions(out), problems);
@@ -212,7 +213,7 @@ final class BazelJ2clBuilder extends BazelWorker {
 
     Path sourceJarDir = SourceUtils.deriveDirectory(this.output, "_source_jars");
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSources(sources.stream().map(workdir::resolve), sourceJarDir, problems)
+        SourceUtils.getAllSources(sources.stream(), sourceJarDir, problems)
             .collect(toImmutableList());
     problems.abortIfCancelled();
 
@@ -240,12 +241,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
     problems.abortIfCancelled();
 
-    Path systemPath = system.isEmpty() ? null : workdir.resolve(system);
-
-    if (libraryInfoOutput != null) {
-      libraryInfoOutput = workdir.resolve(libraryInfoOutput);
-    }
-
     return J2clTranspilerOptions.newBuilder()
         .setSources(
             ImmutableList.<FileInfo>builder()
@@ -253,8 +248,8 @@ final class BazelJ2clBuilder extends BazelWorker {
                 .addAll(allKotlinSources)
                 .build())
         .setNativeSources(allNativeSources)
-        .setClasspaths(getPathEntries(this.classPath))
-        .setSystem(systemPath)
+        .setClasspaths(this.classpaths)
+        .setSystem(this.system)
         .setOutput(output)
         .setTargetLabel(targetLabel)
         .setLibraryInfoOutput(libraryInfoOutput)
@@ -273,20 +268,11 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
         .setForbiddenAnnotations(forbiddenAnnotations)
-        .setDependencyKlibs(getPathEntries(dependencyKlibs))
-        .setFriendKlibs(getPathEntries(friendKlibs))
         .setEnableKlibs(enableKlibs)
+        .setDependencyKlibs(dependencyKlibs)
+        .setFriendKlibs(friendKlibs)
         .setObjCNamePrefix(objCNamePrefix)
         .build(problems);
-  }
-
-  private List<Path> getPathEntries(String path) {
-    if (path == null) {
-      return ImmutableList.of();
-    }
-    return Lists.transform(
-        Splitter.on(File.pathSeparatorChar).omitEmptyStrings().splitToList(path),
-        s -> workdir.resolve(s));
   }
 
   public static void main(String[] workerArgs) throws Exception {

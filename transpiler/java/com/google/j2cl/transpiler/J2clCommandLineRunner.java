@@ -17,8 +17,8 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.common.CommandLineParser;
 import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -27,7 +27,6 @@ import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
-import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,26 +44,28 @@ import org.kohsuke.args4j.spi.MapOptionHandler;
 public final class J2clCommandLineRunner extends CommandLineTool {
 
   @Argument(metaVar = "<source files>", required = true)
-  List<String> files = new ArrayList<>();
+  List<Path> files = new ArrayList<>();
 
   @Option(
       name = "-classpath",
       aliases = "-cp",
       metaVar = "<path>",
-      usage = "Specifies where to find user class files and annotation processors.")
-  String classPath = "";
+      usage = "Specifies where to find user class files and annotation processors.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> classPath = new ArrayList<>();
 
   @Option(
       name = "-system",
       metaVar = "<path>",
       usage = "Specifies the location of the system modules.")
-  String system = "";
+  Path system;
 
   @Option(
       name = "-nativesourcepath",
       metaVar = "<path>",
-      usage = "Specifies where to find zip files containing native.js files for native methods.")
-  String nativeSourcePath = "";
+      usage = "Specifies where to find zip files containing native.js files for native methods.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> nativeSourcePath = new ArrayList<>();
 
   @Option(
       name = "-d",
@@ -168,13 +169,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   }
 
   private J2clTranspilerOptions createOptions(Output output) {
-    checkSourceFiles(
-        problems,
-        files.stream().map(Path::of).collect(toImmutableList()),
-        ".java",
-        ".srcjar",
-        ".jar",
-        ".kt");
+    checkSourceFiles(problems, files, ".java", ".srcjar", ".jar", ".kt");
 
     if (this.frontend == null) {
       this.frontend = this.backend.getDefaultFrontend();
@@ -187,8 +182,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     }
 
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSources(
-                this.files.stream().map(Path::of), tempDir.resolve("_source_jars"), problems)
+        SourceUtils.getAllSources(this.files.stream(), tempDir.resolve("_source_jars"), problems)
             .collect(toImmutableList());
     problems.abortIfCancelled();
 
@@ -208,9 +202,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
 
     ImmutableList<FileInfo> allNativeSources =
         SourceUtils.getAllSources(
-                getPathEntries(this.nativeSourcePath).stream(),
-                tempDir.resolve("_naitve_sources"),
-                problems)
+                this.nativeSourcePath.stream(), tempDir.resolve("_naitve_sources"), problems)
             .filter(p -> p.sourcePath().endsWith(".native.js"))
             .collect(toImmutableList());
     problems.abortIfCancelled();
@@ -218,8 +210,8 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     return J2clTranspilerOptions.newBuilder()
         .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
         .setNativeSources(allNativeSources)
-        .setClasspaths(getPathEntries(this.classPath))
-        .setSystem(this.system.isEmpty() ? null : Path.of(this.system))
+        .setClasspaths(this.classPath)
+        .setSystem(this.system)
         .setOutput(output)
         .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(false)
@@ -239,16 +231,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setEnableKlibs(false)
         .setObjCNamePrefix("J2kt")
         .build(problems);
-  }
-
-  private static List<Path> getPathEntries(String path) {
-    List<Path> entries = new ArrayList<>();
-    for (String entry : Splitter.on(File.pathSeparatorChar).omitEmptyStrings().split(path)) {
-      if (new File(entry).exists()) {
-        entries.add(Path.of(entry));
-      }
-    }
-    return entries;
   }
 
   /**

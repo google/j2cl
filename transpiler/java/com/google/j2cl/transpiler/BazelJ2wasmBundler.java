@@ -23,7 +23,6 @@ import static com.google.j2cl.common.StringUtils.unescapeWtf16;
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
@@ -92,7 +91,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
       new FileCache<>(BazelJ2wasmBundler::readSummary, CACHE_SIZE);
 
   @Argument(required = true, usage = "The list of modular output directories", multiValued = true)
-  List<String> inputs = null;
+  List<Path> inputs = null;
 
   @Option(
       name = "-output",
@@ -113,7 +112,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
       required = true,
       metaVar = "<path>",
       usage = "Specifies where to find all the class files for the application.")
-  String classPath;
+  List<Path> classpaths;
 
   @Option(name = "-define", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> defines = new HashMap<>();
@@ -130,13 +129,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
     // Create an environment to initialize the well known type descriptors to be able to synthesize
     // code.
     // TODO(b/294284380): consider removing JDT and manually synthesizing required types.
-    var classPathEntries =
-        Splitter.on(File.pathSeparatorChar)
-            .splitToStream(this.classPath)
-            .map(Path::of)
-            .collect(toImmutableList());
     new JdtEnvironment(
-        new JdtParser(problems), classPathEntries, TypeDescriptors.getWellKnownTypeNames());
+        new JdtParser(problems), classpaths, TypeDescriptors.getWellKnownTypeNames());
 
     var referencedSystemProperties =
         getSummaries()

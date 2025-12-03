@@ -24,7 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
 /** A base class for command line tool. */
@@ -49,7 +48,7 @@ public abstract class CommandLineTool {
   protected abstract void run();
 
   protected final int execute(Collection<String> args, PrintStream pw) {
-    CmdLineParser parser = new CmdLineParser(this);
+    CommandLineParser parser = new CommandLineParser(this, Path.of("."));
 
     final String usage = "Usage: " + toolName + " <options> <source files>";
 

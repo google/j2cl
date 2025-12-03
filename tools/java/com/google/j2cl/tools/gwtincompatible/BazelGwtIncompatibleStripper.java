@@ -26,7 +26,7 @@ import org.kohsuke.args4j.Option;
 /** Runs The @GwtIncompatible stripper as a worker. */
 final class BazelGwtIncompatibleStripper extends BazelWorker {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
-  List<String> files = new ArrayList<>();
+  List<Path> files = new ArrayList<>();
 
   @Option(
       name = "-d",
@@ -47,12 +47,7 @@ final class BazelGwtIncompatibleStripper extends BazelWorker {
       annotations.add("GwtIncompatible");
     }
     Path sourceJarDir = SourceUtils.deriveDirectory(this.outputPath, "_source_jars");
-    GwtIncompatibleStripper.strip(
-        files.stream().map(workdir::resolve),
-        workdir.resolve(outputPath),
-        sourceJarDir,
-        problems,
-        annotations);
+    GwtIncompatibleStripper.strip(files.stream(), outputPath, sourceJarDir, problems, annotations);
   }
 
   public static void main(String[] workerArgs) throws Exception {

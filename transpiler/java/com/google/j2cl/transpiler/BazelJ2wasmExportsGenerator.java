@@ -16,11 +16,11 @@ package com.google.j2cl.transpiler;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.function.Predicate.not;
 
-import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
+import com.google.j2cl.common.CommandLineParser;
 import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.WasmEntryPointBridgesCreator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -52,8 +51,9 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
       name = "-classpath",
       required = true,
       metaVar = "<path>",
-      usage = "Specifies where to find all the class files for the application.")
-  String classPath;
+      usage = "Specifies where to find all the class files for the application.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> classpaths;
 
   @Option(
       name = "-output",
@@ -72,12 +72,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
       ImmutableList<EntryPointPattern> entryPointPatterns =
           this.wasmEntryPoints.stream().map(EntryPointPattern::from).collect(toImmutableList());
-      var classPathEntries =
-          Splitter.on(File.pathSeparatorChar)
-              .splitToStream(this.classPath)
-              .map(Path::of)
-              .collect(toImmutableList());
-      var binaryNames = getBinaryNamesOfClassesWithExports(classPathEntries, entryPointPatterns);
+      List<String> binaryNames = getBinaryNamesOfClassesWithExports(classpaths, entryPointPatterns);
 
       // Create a parser just to resolve binary names, with no sources to parse.
       // TODO(b/294284380): Make this independent of the frontend.
@@ -85,13 +80,13 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
       Set<String> wellKnownTypeNames = TypeDescriptors.getWellKnownTypeNames();
       binaryNames.addAll(wellKnownTypeNames);
       var bindings =
-          parser.resolveBindings(classPathEntries, binaryNames).stream()
+          parser.resolveBindings(classpaths, binaryNames).stream()
               // Methods in annotations can not be exported, and additionally the bindings might
               // not be complete and cannot be fully resolved to descriptors.
               .filter(not(ITypeBinding::isAnnotation))
               .collect(toImmutableList());
       // TODO(b/392756608): Avoid triggering another read of classpath for well-known types.
-      var environment = new JdtEnvironment(parser, classPathEntries, wellKnownTypeNames);
+      var environment = new JdtEnvironment(parser, classpaths, wellKnownTypeNames);
 
       var typeDescriptors = environment.createDescriptorsFromBindings(bindings);
 

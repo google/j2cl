@@ -13,7 +13,6 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
 import com.google.j2cl.common.CommandLineTool;
@@ -33,7 +32,7 @@ import org.kohsuke.args4j.Option;
  */
 public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineTool {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
-  List<String> files = new ArrayList<>();
+  List<Path> files = new ArrayList<>();
 
   @Option(
       name = "-d",
@@ -56,9 +55,8 @@ public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineT
     if (annotations.isEmpty()) {
       annotations.add("GwtIncompatible");
     }
-    var paths = files.stream().map(Paths::get).collect(toImmutableList());
-    checkSourceFiles(problems, paths, ".java", ".srcjar", ".jar");
-    GwtIncompatibleStripper.strip(paths.stream(), outputPath, tempDir, problems, annotations);
+    checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
+    GwtIncompatibleStripper.strip(files.stream(), outputPath, tempDir, problems, annotations);
   }
 
   public static int run(Collection<String> args, PrintStream stdErr) {
