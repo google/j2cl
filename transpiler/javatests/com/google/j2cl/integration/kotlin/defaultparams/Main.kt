@@ -250,8 +250,10 @@ interface IFoo {
   fun interfaceMethod(a: Int = 2): Int
 }
 
-class FooImpl : IFoo {
+class FooImpl : IFoo, InterfaceWithDefaultParams {
   override fun interfaceMethod(a: Int) = a
+
+  override fun functionRequiringInterfaceClinit(a: Int) = a
 }
 
 class FooImplWithDefaultOverride : IFoo {
@@ -266,6 +268,9 @@ private fun testInterface() {
   assertEquals(2, FooImpl().interfaceMethod())
   assertEquals(3, FooImpl().interfaceMethod(3))
   assertEquals(3, FooImplWithDefaultOverride().defaultMethod(2))
+  // TODO(b/465706293): Enable this once parent interface clinit is correctly called on the
+  // bridge method.
+  // assertEquals(2, FooImpl().functionRequiringInterfaceClinit())
 }
 
 fun strOrDefault(str: String? = "defaulted", unused: Any? = null) = str

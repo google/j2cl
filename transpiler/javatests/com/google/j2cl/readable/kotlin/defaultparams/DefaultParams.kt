@@ -184,12 +184,6 @@ fun testVarargs() {
   optionalVarargsWithLeadingOptional(20)
 }
 
-interface IFoo {
-  fun defaultMethod(a: Int = 1) = a
-
-  fun interfaceMethod(a: Int = 2): Int
-}
-
 class FooImpl : IFoo {
   override fun interfaceMethod(a: Int) = a
 }
