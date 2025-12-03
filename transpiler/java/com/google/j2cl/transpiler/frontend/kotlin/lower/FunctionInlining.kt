@@ -186,7 +186,9 @@ private class CallInlining(
       // }
 
       // InlineFunctionBodyPreprocessor(typeArgumentsMap).preprocess(callee)
-      InlineFunctionBodyPreprocessor(callSite.getCompleteTypeSubstitutionMap(callee))
+      InlineFunctionBodyPreprocessor(
+          callSite.getCompleteTypeSubstitutionMap(callee, context.irBuiltIns)
+        )
         .preprocess(callee)
       // END OF MODIFICATIONS.
     }

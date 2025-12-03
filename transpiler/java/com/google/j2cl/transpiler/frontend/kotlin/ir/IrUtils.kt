@@ -32,6 +32,7 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.SourceFile
 import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.java.JavaVisibilities
+import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
@@ -308,7 +309,8 @@ fun IrMemberAccessExpression<*>.getTypeSubstitutionMap(
  * the receiver's type hierarchy.
  */
 fun IrFunctionAccessExpression.getCompleteTypeSubstitutionMap(
-  irFunction: IrFunction
+  irFunction: IrFunction,
+  irBuiltins: IrBuiltIns,
 ): Map<IrTypeParameterSymbol, IrType> {
   val typeSubstitutionMap = mutableMapOf<IrTypeParameterSymbol, IrType>()
   val receiverType =
@@ -320,7 +322,17 @@ fun IrFunctionAccessExpression.getCompleteTypeSubstitutionMap(
       superType.classOrNull?.owner?.typeParameters?.zip(superType.arguments)?.associateTo(
         typeSubstitutionMap
       ) { (typeParam, typeArg) ->
-        typeParam.symbol to typeArg.typeOrFail
+        val type =
+          when (typeArg) {
+            is IrStarProjection ->
+              if (typeParam.variance == Variance.IN_VARIANCE) {
+                irBuiltins.nothingType
+              } else {
+                typeParam.defaultType
+              }
+            else -> typeArg.typeOrFail
+          }
+        typeParam.symbol to type
       }
     }
     // The mapping extracted from the supertypes of the receiver can refer to intermediate type

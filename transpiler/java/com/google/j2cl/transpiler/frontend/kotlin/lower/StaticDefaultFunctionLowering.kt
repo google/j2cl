@@ -116,7 +116,7 @@ internal class StaticDefaultFunctionLowering(val context: JvmBackendContext) :
 
     // TODO(b/445955020): There are still cases where we're not resolving all type variables
     //  correctly.
-    val capturedTypeMapping = expression.getCompleteTypeSubstitutionMap(callee)
+    val capturedTypeMapping = expression.getCompleteTypeSubstitutionMap(callee, context.irBuiltIns)
 
     val newCall =
       context.createJvmIrBuilder(callee.symbol, expression).irCall(newCallee.symbol).apply {

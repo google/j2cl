@@ -234,6 +234,6 @@ fun testGenerics() {
   val inner = OuterClass<IFoo>().InnerClass<String>()
   val s = inner.foo()
 
-  // TODO(b/465078123): Enable this test when bug is fixed.
-  // val i = (ChildClass() as DefaultParamInterface<*>).withTypeParameters<Int>()
+  val i = (ChildClass() as DefaultParamInterface<*>).withTypeParameters<Int>()
+  val j = (ChildClass() as DefaultParamInterface<*>).withTypeParameters<Int>(null)
 }
