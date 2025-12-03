@@ -20,10 +20,8 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment;
@@ -90,9 +88,10 @@ abstract class JsMethodImport {
       ImmutableList<String> jsNameParts = splitQualifiedName(methodDescriptor.getQualifiedJsName());
       return jsNameParts.getFirst();
     } else if (methodDescriptor.hasJsNamespace()) {
-      return computeJsAlias(methodDescriptor.getJsNamespace());
+      return JsTypeNameResolver.computeJsAlias(methodDescriptor.getJsNamespace());
     }
-    return getJsTypeName(methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
+    return JsTypeNameResolver.getJsTypeAlias(
+        methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
   }
 
   /**
@@ -159,23 +158,6 @@ abstract class JsMethodImport {
         && existing.isInstance() == other.isInstance()
         && existing.isPropertyGetter() == other.isPropertyGetter()
         && existing.isPropertySetter() == other.isPropertySetter();
-  }
-
-  static String getJsTypeName(TypeDeclaration typeDeclaration) {
-    return AstUtils.buildQualifiedName(
-        computeJsAlias(typeDeclaration.getEnclosingModule()),
-        typeDeclaration.getInnerTypeQualifier());
-  }
-
-  private static String computeJsAlias(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration.isExtern()) {
-      return typeDeclaration.getQualifiedJsName();
-    }
-    return computeJsAlias(typeDeclaration.getQualifiedJsName());
-  }
-
-  static String computeJsAlias(String name) {
-    return name.replace('.', '_');
   }
 
   public static Builder newBuilder() {
