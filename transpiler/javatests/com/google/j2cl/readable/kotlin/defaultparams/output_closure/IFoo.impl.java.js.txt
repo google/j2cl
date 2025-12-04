@@ -10,6 +10,7 @@ class IFoo {
  m_defaultMethod__int__int(/** number */ a) {}
  /** @nodts @return {number} */
  static m_defaultMethod$default__defaultparams_IFoo__int__int(/** !IFoo */ $this, /** number= */ a) {
+  IFoo.$clinit();
   let a$defaulted = $Util.$isUndefined(a) ? 1 : a;
   return $this.m_defaultMethod__int__int(a$defaulted);
  }
@@ -17,6 +18,7 @@ class IFoo {
  m_interfaceMethod__int__int(/** number */ a) {}
  /** @nodts @return {number} */
  static m_interfaceMethod$default__defaultparams_IFoo__int__int(/** !IFoo */ $this, /** number= */ a) {
+  IFoo.$clinit();
   let a$defaulted = $Util.$isUndefined(a) ? 2 : a;
   return $this.m_interfaceMethod__int__int(a$defaulted);
  }

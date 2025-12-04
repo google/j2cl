@@ -53,8 +53,10 @@ import org.jetbrains.kotlin.ir.util.classIfConstructor
 import org.jetbrains.kotlin.ir.util.copyTo
 import org.jetbrains.kotlin.ir.util.copyTypeParametersFrom
 import org.jetbrains.kotlin.ir.util.isFakeOverride
+import org.jetbrains.kotlin.ir.util.isInterface
 import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.parentAsClass
+import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.remapTypeParameters
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.Name
@@ -144,8 +146,12 @@ internal class StaticDefaultFunctionLowering(val context: JvmBackendContext) :
         // MODIFIED BY GOOGLE
         // Copy the type parameters from the enclosing context.
         typeParametersFromContext = extractTypeParameters(function.parentAsClass),
-        // Lie about the visibility of the bridge so that we can elide clinit calls.
-        visibility = DescriptorVisibilities.PRIVATE,
+        // When the enclosing class is not an interface, we can make the bridge private to allow
+        // eliding clinit calls. We cannot do this for interfaces, as the presence of an
+        // implementing class instance doesn't guarantee the interface's clinit has run.
+        visibility =
+          if (function.parentClassOrNull?.isInterface == true) function.visibility
+          else DescriptorVisibilities.PRIVATE,
         // END OF MODIFICATIONS
         remapMultiFieldValueClassStructure = context::remapMultiFieldValueClassStructure,
       )
