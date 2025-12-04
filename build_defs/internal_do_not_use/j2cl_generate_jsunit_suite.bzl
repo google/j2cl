@@ -84,14 +84,14 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
     # TODO(goktug): use j2cl_library directly from jsunit_test instead of
     # extracting files from jar (output js zip can include all the required
     # files.)
-    out_jar = ":%s_test_artifacts" % name
     native.genrule(
         name = name,
+        srcs = [":%s_test_artifacts" % name],
         outs = [name + ".js.zip"],
         cmd = "\n".join([
             "TMP=$$(mktemp -d)",
             "WD=$$(pwd)",
-            "unzip -q $(location %s) *.testsuite *.json -d $$TMP" % out_jar,
+            "unzip -q $< *.testsuite *.json -d $$TMP",
             "cd $$TMP",
             "for f in $$(find . -name *.testsuite); do mv $$f $${f/.testsuite/.js}; done",
             "zip -q -r $$WD/$@ .",
@@ -99,5 +99,4 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         ]),
         testonly = 1,
         tags = ["manual", "notap"],
-        tools = [out_jar],
     )
