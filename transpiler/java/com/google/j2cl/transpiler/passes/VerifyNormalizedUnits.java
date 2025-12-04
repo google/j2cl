@@ -44,6 +44,7 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
@@ -313,7 +314,8 @@ public class VerifyNormalizedUnits extends NormalizationPass {
                 checkState(
                     switchCase.isDefault()
                         || TypeDescriptors.isJavaLangString(caseExpression.getTypeDescriptor())
-                        || caseExpression instanceof NumberLiteral);
+                        || caseExpression instanceof NumberLiteral
+                        || caseExpression instanceof NullLiteral);
               }
             }
           }

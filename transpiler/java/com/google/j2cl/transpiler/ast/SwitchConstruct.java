@@ -39,6 +39,9 @@ public interface SwitchConstruct<T extends SwitchConstruct<T>> extends HasSource
     return getCases().stream().anyMatch(SwitchCase::isDefault);
   }
 
+  /** Returns true if the expression evaluating to null is handled by any of the cases. */
+  boolean allowsNulls();
+
   /** Returns true if the switch construct has a case that might fallthrough the next. */
   default boolean canFallthrough() {
     return getCases().stream().anyMatch(SwitchCase::canFallthrough);
@@ -53,6 +56,9 @@ public interface SwitchConstruct<T extends SwitchConstruct<T>> extends HasSource
 
     @CanIgnoreReturnValue
     Builder<T> setCases(List<SwitchCase> switchCases);
+
+    @CanIgnoreReturnValue
+    Builder<T> setAllowsNulls(boolean allowsNulls);
 
     @CanIgnoreReturnValue
     Builder<T> setSourcePosition(SourcePosition sourcePosition);

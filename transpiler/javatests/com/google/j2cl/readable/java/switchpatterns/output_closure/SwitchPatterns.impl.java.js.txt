@@ -1,0 +1,113 @@
+goog.module('switchpatterns.SwitchPatterns$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let Color = goog.forwardDeclare('switchpatterns.SwitchPatterns.Color$impl');
+let Digit = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit$impl');
+let $Overlay = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit.$Overlay$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
+
+class SwitchPatterns extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SwitchPatterns} */
+ static $create__() {
+  SwitchPatterns.$clinit();
+  let $instance = new SwitchPatterns();
+  $instance.$ctor__switchpatterns_SwitchPatterns__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__switchpatterns_SwitchPatterns__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_fail__void_$pp_switchpatterns() {}
+ /** @nodts */
+ m_testNullPatterns__void_$pp_switchpatterns() {
+  let /** Color */ color = null;
+  switch ($Equality.$same(color, null) ? -1 : color.ordinal()) {
+   case Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color:
+    this.m_fail__void_$pp_switchpatterns();
+    break;
+   case -1:
+    break;
+   default:
+    this.m_fail__void_$pp_switchpatterns();
+  }
+  switch ($Equality.$same(color, null) ? -1 : color.ordinal()) {
+   case Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color:
+    this.m_fail__void_$pp_switchpatterns();
+    break;
+   default:
+    {
+     let variable = 0;
+     break;
+    }
+  }
+  let /** Color */ $switchExpression;
+  switch (($switchExpression = Color.m_valueOf__java_lang_String__switchpatterns_SwitchPatterns_Color('BLUE'), $Equality.$same($switchExpression, null) ? -1 : $switchExpression.ordinal())) {
+   case Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color:
+    this.m_fail__void_$pp_switchpatterns();
+    break;
+   default:
+    break;
+  }
+  let digit = /**@type {?Digit}*/ ($Enums.unbox(null, $Overlay));
+  switch ($Util.$coerceToNull(digit)) {
+   case Digit.ZERO:
+    this.m_fail__void_$pp_switchpatterns();
+    break;
+   case null:
+    break;
+   default:
+    this.m_fail__void_$pp_switchpatterns();
+  }
+  let s = 'Hi';
+  switch ($Util.$coerceToNull(s)) {
+   case 'Hi':
+    this.m_fail__void_$pp_switchpatterns();
+    break;
+   case null:
+    break;
+   default:
+    this.m_fail__void_$pp_switchpatterns();
+  }
+  switch (s) {
+   case 'Hi':
+    this.m_fail__void_$pp_switchpatterns();
+    break;
+   default:
+    break;
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  SwitchPatterns.$clinit = () =>{};
+  SwitchPatterns.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SwitchPatterns;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  Color = goog.module.get('switchpatterns.SwitchPatterns.Color$impl');
+  Digit = goog.module.get('switchpatterns.SwitchPatterns.Digit$impl');
+  $Overlay = goog.module.get('switchpatterns.SwitchPatterns.Digit.$Overlay$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+$Util.$setClassMetadata(SwitchPatterns, 'switchpatterns.SwitchPatterns');
+
+exports = SwitchPatterns;
+
+//# sourceMappingURL=SwitchPatterns.js.map

@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
+import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
@@ -407,7 +408,9 @@ final class StatementTranspiler {
             caseCondition =
                 RuntimeMethods.createStringEqualsMethodCall(switchCaseExpression, expression);
           } else {
-            checkState(switchCaseExpression.getTypeDescriptor().isPrimitive());
+            checkState(
+                switchCaseExpression.getTypeDescriptor().isPrimitive()
+                    || switchCaseExpression instanceof NullLiteral);
             caseCondition = expression.infixEquals(switchCaseExpression);
           }
           // Transform cases with more that one label short-circuit explicitly, since the backend

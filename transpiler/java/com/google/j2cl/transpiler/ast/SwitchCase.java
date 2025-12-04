@@ -38,11 +38,12 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
       Collection<Statement> statements,
       boolean isDefault,
       boolean canFallthrough) {
+    // A default case does not have expressions.
+    checkArgument(isDefault == caseExpressions.isEmpty());
     this.caseExpressions = new ArrayList<>(caseExpressions);
     this.statements = new ArrayList<>(statements);
     this.isDefault = isDefault;
     this.canFallthrough = canFallthrough;
-    checkArgument(isDefault == caseExpressions.isEmpty());
   }
 
   public boolean isDefault() {

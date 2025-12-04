@@ -63,9 +63,8 @@ private fun testSwitchValues() {
   assertEquals(1, getEnumValue(Numbers.ONE))
   assertEquals(2, getEnumValue(Numbers.TWO))
   assertEquals(3, getEnumValue(Numbers.THREE))
-  // TODO(b/462550130): Uncomment once this bug is fixed.
-  // assertEquals(4, getEnumValue(null))
-  // assertEquals(4, getEnumValueWithNull(null))
+  assertEquals(4, getEnumValue(null))
+  assertEquals(4, getEnumValueWithNull(null))
 
   assertEquals(10, testBreakStatementInSwitch(Numbers.ONE))
   assertEquals(2, testBreakStatementInSwitch(Numbers.TWO))
@@ -139,15 +138,14 @@ private fun getEnumValue(numberValue: Numbers?): Int {
   }
 }
 
-// TODO(b/462550130): Uncomment once this bug is fixed.
-// private fun getEnumValueWithNull(numberValue: Numbers?): Int {
-//   when (numberValue) {
-//     Numbers.ONE -> return 1
-//     Numbers.TWO -> return 2
-//     Numbers.THREE -> return 3
-//     null -> return 4
-//   }
-// }
+private fun getEnumValueWithNull(numberValue: Numbers?): Int {
+  when (numberValue) {
+    Numbers.ONE -> return 1
+    Numbers.TWO -> return 2
+    Numbers.THREE -> return 3
+    null -> return 4
+  }
+}
 
 private fun testBreakStatementInSwitch(numberValue: Numbers): Int {
   var value = 0

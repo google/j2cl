@@ -128,7 +128,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       }
 
       @Override
-      public Expression rewriteSwitchSubjectContext(Expression expression) {
+      public Expression rewriteSwitchSubjectContext(Expression expression, boolean allowsNulls) {
         return maybeInsertErasureTypeSafetyCast(expression);
       }
     };

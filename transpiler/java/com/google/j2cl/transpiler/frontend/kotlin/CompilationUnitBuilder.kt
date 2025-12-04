@@ -610,6 +610,7 @@ internal class CompilationUnitBuilder(
       .setExpression(convertExpression(irSwitch.expression))
       .setSourcePosition(getSourcePosition(irSwitch))
       .setCases(irSwitch.cases.map { convertCaseStatement(it) })
+      .setAllowsNulls(true)
       .build()
 
   private fun convertCaseStatement(irSwitchCase: IrSwitchCase): SwitchCase {

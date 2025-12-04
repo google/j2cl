@@ -472,6 +472,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             switchStatement.getCases().stream()
                 .map(c -> convertSwitchCase(c, PrimitiveTypes.VOID))
                 .collect(toImmutableList()))
+        .setAllowsNulls(allowsNulls(switchStatement.getCases()))
         .build();
   }
 
@@ -485,14 +486,22 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             expression.getCases().stream()
                 .map(c -> convertSwitchCase(c, typeDescriptor))
                 .collect(toImmutableList()))
+        .setAllowsNulls(allowsNulls(expression.getCases()))
         .build();
   }
 
+  private static boolean allowsNulls(List<JCCase> cases) {
+    return cases.stream()
+        .flatMap(c -> c.getExpressions().stream().map(JCExpression::getKind))
+        .anyMatch(Kind.NULL_LITERAL::equals);
+  }
+
   private SwitchCase convertSwitchCase(JCCase caseClause, TypeDescriptor resultType) {
+    boolean isDefault =
+        caseClause.getLabels().stream().anyMatch(DefaultCaseLabelTree.class::isInstance);
     return SwitchCase.newBuilder()
-        .setCaseExpressions(convertCaseExpressions(caseClause))
-        .setDefault(
-            caseClause.getLabels().stream().anyMatch(DefaultCaseLabelTree.class::isInstance))
+        .setCaseExpressions(isDefault ? ImmutableList.of() : convertCaseExpressions(caseClause))
+        .setDefault(isDefault)
         .setStatements(getCaseStatements(caseClause, resultType))
         .setCanFallthrough(
             caseClause.getCaseKind() == com.sun.source.tree.CaseTree.CaseKind.STATEMENT)

@@ -1,0 +1,80 @@
+goog.module('switchpatterns.SwitchPatterns.Color$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @final
+ * @extends {Enum<Color>}
+ */
+class Color extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Color} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new Color();
+  $instance.$ctor__switchpatterns_SwitchPatterns_Color__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__switchpatterns_SwitchPatterns_Color__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!Color} */
+ static m_valueOf__java_lang_String__switchpatterns_SwitchPatterns_Color(/** string */ name) {
+  Color.$clinit();
+  if ($Equality.$same(Color.f_namesToValuesMap__switchpatterns_SwitchPatterns_Color_, null)) {
+   Color.f_namesToValuesMap__switchpatterns_SwitchPatterns_Color_ = (/**@type {Map<?string, !Color>}*/ ($Enums.createMapFromValues(Color.m_values__arrayOf_switchpatterns_SwitchPatterns_Color())));
+  }
+  return /**@type {Color}*/ ($Enums.getValueFromNameAndMap(name, Color.f_namesToValuesMap__switchpatterns_SwitchPatterns_Color_));
+ }
+ /** @nodts @return {!Array<!Color>} */
+ static m_values__arrayOf_switchpatterns_SwitchPatterns_Color() {
+  Color.$clinit();
+  return /**@type {!Array<!Color>}*/ ($Arrays.$stampType([Color.f_RED__switchpatterns_SwitchPatterns_Color, Color.f_BLUE__switchpatterns_SwitchPatterns_Color, Color.f_GREEN__switchpatterns_SwitchPatterns_Color], Color));
+ }
+ /** @nodts */
+ static $clinit() {
+  Color.$clinit = () =>{};
+  Color.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Color;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color = 0;
+/**@const {number} @nodts*/
+Color.$ordinal_BLUE__switchpatterns_SwitchPatterns_Color = 1;
+/**@const {number} @nodts*/
+Color.$ordinal_GREEN__switchpatterns_SwitchPatterns_Color = 2;
+/**@const {!Color} @nodts*/
+Color.f_RED__switchpatterns_SwitchPatterns_Color = /**@pureOrBreakMyCode*/ Color.$create__java_lang_String__int($Util.$makeEnumName('RED'), Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color);
+/**@const {!Color} @nodts*/
+Color.f_BLUE__switchpatterns_SwitchPatterns_Color = /**@pureOrBreakMyCode*/ Color.$create__java_lang_String__int($Util.$makeEnumName('BLUE'), Color.$ordinal_BLUE__switchpatterns_SwitchPatterns_Color);
+/**@const {!Color} @nodts*/
+Color.f_GREEN__switchpatterns_SwitchPatterns_Color = /**@pureOrBreakMyCode*/ Color.$create__java_lang_String__int($Util.$makeEnumName('GREEN'), Color.$ordinal_GREEN__switchpatterns_SwitchPatterns_Color);
+/**@type {Map<?string, !Color>} @nodts*/
+Color.f_namesToValuesMap__switchpatterns_SwitchPatterns_Color_;
+$Util.$setClassMetadataForEnum(Color, 'switchpatterns.SwitchPatterns$Color');
+
+exports = Color;
+
+//# sourceMappingURL=SwitchPatterns$Color.js.map

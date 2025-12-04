@@ -24,6 +24,13 @@ import jsinterop.annotations.JsType;
 @JsType
 public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializable {
 
+  /** Exists solely to make javac happy. */
+  public static final class EnumDesc<E extends Enum<E>> {
+    public static <E extends Enum<E>> Enum.EnumDesc<E> of(Object... args) {
+      throw new UnsupportedOperationException();
+    }
+  }
+
   // TODO(b/74986525): make final when fixed.
   private String name;
   private int ordinal;

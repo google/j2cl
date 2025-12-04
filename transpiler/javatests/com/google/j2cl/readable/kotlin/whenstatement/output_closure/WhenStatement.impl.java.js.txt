@@ -6,7 +6,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
-let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
@@ -55,7 +54,7 @@ class WhenStatement extends j_l_Object {
  m_whenStatementWithString__java_lang_String__int_$p_whenstatement_WhenStatement(/** string */ stringValue) {
   let /** number */ value;
   let tmp0_subject = stringValue;
-  switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(tmp0_subject)) {
+  switch (tmp0_subject) {
    case 'minus_one':case 'zero':case 'one':
     {
      value = 1;
@@ -203,7 +202,7 @@ class WhenStatement extends j_l_Object {
  /** @final @nodts @return {number} */
  m_whenStatementWithEnumValue__whenstatement_Numbers__int(/** Numbers */ number_1) {
   let tmp0_subject = number_1;
-  switch (tmp0_subject.ordinal()) {
+  switch ($Equality.$same(tmp0_subject, null) ? -1 : tmp0_subject.ordinal()) {
    case Numbers.$ordinal_ONE__whenstatement_Numbers:
     {
      return 1;
@@ -228,7 +227,7 @@ class WhenStatement extends j_l_Object {
   $switchLowering$0: for (let inductionVariable = 0; inductionVariable <= 2; inductionVariable = inductionVariable + 1 | 0) {
    let i = inductionVariable;
    let tmp0_subject = numberValue;
-   switch (tmp0_subject.ordinal()) {
+   switch ($Equality.$same(tmp0_subject, null) ? -1 : tmp0_subject.ordinal()) {
     case Numbers.$ordinal_ONE__whenstatement_Numbers:
      {
       value = value + 1 | 0;
@@ -259,7 +258,7 @@ class WhenStatement extends j_l_Object {
  m_whenWithoutElse__int() {
   let number_1 = 0;
   let tmp0_subject = 'one';
-  switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(tmp0_subject)) {
+  switch (tmp0_subject) {
    case 'minusTwo':case 'minusOne':case 'zero':case 'one':
     {
      number_1 = 1;
@@ -347,7 +346,6 @@ class WhenStatement extends j_l_Object {
   Exception = goog.module.get('java.lang.Exception$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   Objects = goog.module.get('java.util.Objects$impl');
-  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');

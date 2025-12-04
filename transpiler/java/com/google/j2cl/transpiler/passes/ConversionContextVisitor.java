@@ -191,11 +191,15 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     /** An {@code expression} that is subject of a switch statement. */
-    protected Expression rewriteSwitchSubjectContext(Expression expression) {
+    protected Expression rewriteSwitchSubjectContext(Expression expression, boolean allowsNulls) {
       TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
+
       if (!TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor)) {
-        return rewriteNonNullTypeConversionContext(
-            typeDescriptor, expression.getDeclaredTypeDescriptor(), expression);
+        return allowsNulls
+            ? rewriteTypeConversionContext(
+                typeDescriptor, expression.getDeclaredTypeDescriptor(), expression)
+            : rewriteNonNullTypeConversionContext(
+                typeDescriptor, expression.getDeclaredTypeDescriptor(), expression);
       }
       return (TypeDescriptors.isJavaLangBoolean(typeDescriptor.toRawTypeDescriptor())
               || TypeDescriptors.isPrimitiveBoolean(typeDescriptor))
@@ -770,7 +774,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   private <T extends SwitchConstruct<T>> T rewriteSwitchConstruct(T switchConstruct) {
     Expression expression =
-        contextRewriter.rewriteSwitchSubjectContext(switchConstruct.getExpression());
+        contextRewriter.rewriteSwitchSubjectContext(
+            switchConstruct.getExpression(), switchConstruct.allowsNulls());
 
     if (expression == switchConstruct.getExpression()) {
       return switchConstruct;

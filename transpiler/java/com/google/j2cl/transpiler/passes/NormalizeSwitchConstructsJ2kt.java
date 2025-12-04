@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
@@ -216,10 +217,12 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
       } else if (!caseExpression.getTypeDescriptor().isSameBaseType(targetTypeDescriptor)) {
         caseExpressions.set(
             i,
-            CastExpression.newBuilder()
-                .setExpression(caseExpression)
-                .setCastTypeDescriptor(targetTypeDescriptor.toNonNullable())
-                .build());
+            caseExpression instanceof NullLiteral
+                ? caseExpression
+                : CastExpression.newBuilder()
+                    .setExpression(caseExpression)
+                    .setCastTypeDescriptor(targetTypeDescriptor.toNonNullable())
+                    .build());
       }
     }
   }

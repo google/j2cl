@@ -1267,16 +1267,27 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .setTypeDescriptor(environment.createTypeDescriptor(expression.resolveTypeBinding()))
           .setExpression(convert(expression.getExpression()))
           .setCases(createSwitchCases(asTypedList(expression.statements())))
+          .setAllowsNulls(allowsNulls(asTypedList(expression.statements())))
           .setSourcePosition(getSourcePosition(expression))
           .build();
     }
 
     private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement switchStatement) {
       return SwitchStatement.newBuilder()
-          .setSourcePosition(getSourcePosition(switchStatement))
           .setExpression(convert(switchStatement.getExpression()))
           .setCases(createSwitchCases(asTypedList(switchStatement.statements())))
+          .setAllowsNulls(allowsNulls(asTypedList(switchStatement.statements())))
+          .setSourcePosition(getSourcePosition(switchStatement))
           .build();
+    }
+
+    private static boolean allowsNulls(List<Object> cases) {
+      return cases.stream()
+          .anyMatch(
+              s ->
+                  s instanceof org.eclipse.jdt.core.dom.SwitchCase switchCase
+                      && asTypedList(switchCase.expressions()).stream()
+                          .anyMatch(org.eclipse.jdt.core.dom.NullLiteral.class::isInstance));
     }
 
     private List<SwitchCase> createSwitchCases(
