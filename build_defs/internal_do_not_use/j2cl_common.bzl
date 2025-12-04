@@ -120,7 +120,12 @@ def _compile(
     )
 
     if has_srcs_to_transpile:
-        output_js = ctx.actions.declare_directory("%s.js" % name)
+        # Apply an output suffix to the JS tree artifacts to ensure that J2KT transitioned libraries
+        # don't collide with the non-transitioned equivalent libraries.
+        # TODO(b/465827986): Rely upon artifact instead once j2cl_library can actually set that
+        #   param.
+        output_js_suffix = "" if not is_j2kt_web_enabled else "-j2kt"
+        output_js = ctx.actions.declare_directory("%s%s.js" % (name, output_js_suffix))
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
         _j2cl_transpile(
             ctx,
