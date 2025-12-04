@@ -117,6 +117,12 @@ def _impl_j2cl_library(ctx):
     if j2kt_provider:
         extra_providers.append(j2kt_provider)
 
+    # TODO(b/465873783): Remove this when J2KT persists junit annotations.
+    if "j2cl_generate_jsunit_suite" in ctx.attr.tags:
+        # The jar output of j2kt compile (if enabled) or j2cl compile contains test artifacts
+        jar = j2kt_provider._private_.java_info.java_outputs[0].class_jar
+        extra_providers.append(OutputGroupInfo(test_artifacts = depset([jar])))
+
     return j2cl_common.create_js_lib_struct(
         j2cl_info = j2cl_provider,
         extra_providers = extra_providers,

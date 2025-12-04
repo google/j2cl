@@ -63,8 +63,16 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
             # Disable error prone checks since this is a generated code.
             "-Xep:PackageLocation:OFF",
         ],
-        tags = tags,
+        tags = ["j2cl_generate_jsunit_suite"] + (tags or []),
         generate_build_test = False,
+    )
+
+    native.filegroup(
+        name = name + "_test_artifacts",
+        srcs = [":%s_lib" % name],
+        output_group = "test_artifacts",
+        testonly = True,
+        visibility = ["//visibility:private"],
     )
 
     # The Java annotation processor on the above target generates jsunit suites
@@ -76,7 +84,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
     # TODO(goktug): use j2cl_library directly from jsunit_test instead of
     # extracting files from jar (output js zip can include all the required
     # files.)
-    out_jar = ":lib" + name + "_lib.jar"
+    out_jar = ":%s_test_artifacts" % name
     native.genrule(
         name = name,
         outs = [name + ".js.zip"],
