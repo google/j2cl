@@ -112,30 +112,33 @@ open class InstanceofExpressions {
  }
 
  private fun testPatternMatch() {
-  var exp: Any? = null
   var s: String? = null
-  var exp_1: Any? = null
   var i: Int? = null
-  var exp_2: Any? = null
   var n: Number? = null
   if (!run {
-   exp = Any()
-   s = if (exp is String) exp as String? else null
-   s != null
+   val exp: Any = Any()
+   exp is String && run {
+    s = (exp)
+    true
+   }
   } || s!!.length == 2) {
    return
   }
   if (run {
-   exp_1 = Any()
-   i = if (exp_1 is Int) exp_1 as Int? else null
-   i != null
+   val exp_1: Any = Any()
+   exp_1 is Int && run {
+    i = (exp_1)
+    true
+   }
   } && i!!.toInt() == 2) {
    val l: Int = i!!.toInt()
   }
   if (!run {
-   exp_2 = Any()
-   n = if (exp_2 is Number) exp_2 as Number? else null
-   n != null
+   val exp_2: Any = Any()
+   exp_2 is Number && run {
+    n = (exp_2)
+    true
+   }
   }) {
    val j: Int = s!!.length
   } else {

@@ -776,7 +776,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return InstanceOfExpression.newBuilder()
           .setSourcePosition(getSourcePosition(expression))
           .setExpression(e)
-          .setTestTypeDescriptor(typeDescriptor)
+          .setTestTypeDescriptor(pattern == null ? typeDescriptor : null)
           .setPattern(pattern)
           .build();
     }

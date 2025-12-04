@@ -878,10 +878,10 @@
  (local $this (ref null $recordclass.RecordClass.SimpleRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.SimpleRecord) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.SimpleRecord)) (ref.test (ref $recordclass.RecordClass.SimpleRecord) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.SimpleRecord) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.SimpleRecord))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.SimpleRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.SimpleRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -1022,10 +1022,10 @@
  (local $this (ref null $recordclass.RecordClass.StringRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.StringRecord) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.StringRecord)) (ref.test (ref $recordclass.RecordClass.StringRecord) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.StringRecord) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.StringRecord))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.StringRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.StringRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -1166,10 +1166,10 @@
  (local $this (ref null $recordclass.RecordClass.ArrayRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.ArrayRecord) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.ArrayRecord)) (ref.test (ref $recordclass.RecordClass.ArrayRecord) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.ArrayRecord) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.ArrayRecord))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.ArrayRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.ArrayRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -1310,10 +1310,10 @@
  (local $this (ref null $recordclass.RecordClass.ObjectRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.ObjectRecord) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.ObjectRecord)) (ref.test (ref $recordclass.RecordClass.ObjectRecord) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.ObjectRecord) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.ObjectRecord))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.ObjectRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.ObjectRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -1472,10 +1472,10 @@
  (local $this (ref null $recordclass.RecordClass.RecordWithConstructor))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordWithConstructor) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.RecordWithConstructor)) (ref.test (ref $recordclass.RecordClass.RecordWithConstructor) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.RecordWithConstructor) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.RecordWithConstructor))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.RecordWithConstructor) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.RecordWithConstructor) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -1643,10 +1643,10 @@
  (local $this (ref null $recordclass.RecordClass.RecordWithCompactConstructor))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordWithCompactConstructor) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.RecordWithCompactConstructor)) (ref.test (ref $recordclass.RecordClass.RecordWithCompactConstructor) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.RecordWithCompactConstructor) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.RecordWithCompactConstructor))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.RecordWithCompactConstructor) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.RecordWithCompactConstructor) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -1814,10 +1814,10 @@
  (local $this (ref null $recordclass.RecordClass.RecordWithDeferringConstructor))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordWithDeferringConstructor) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.RecordWithDeferringConstructor)) (ref.test (ref $recordclass.RecordClass.RecordWithDeferringConstructor) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.RecordWithDeferringConstructor) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.RecordWithDeferringConstructor))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.RecordWithDeferringConstructor) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.RecordWithDeferringConstructor) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -2097,10 +2097,10 @@
  (local $this (ref null $recordclass.RecordClass.RecordWithOverriddenAccessor))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordWithOverriddenAccessor) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.RecordWithOverriddenAccessor)) (ref.test (ref $recordclass.RecordClass.RecordWithOverriddenAccessor) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.RecordWithOverriddenAccessor) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.RecordWithOverriddenAccessor))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.RecordWithOverriddenAccessor) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.RecordWithOverriddenAccessor) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -2241,10 +2241,10 @@
  (local $this (ref null $recordclass.RecordClass.RecordImplementingInterface))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordImplementingInterface) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.RecordImplementingInterface)) (ref.test (ref $recordclass.RecordClass.RecordImplementingInterface) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.RecordImplementingInterface) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.RecordImplementingInterface))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.RecordImplementingInterface) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.RecordImplementingInterface) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -2414,10 +2414,10 @@
  (local $this (ref null $recordclass.RecordClass.StaticFieldRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.StaticFieldRecord) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.StaticFieldRecord)) (ref.test (ref $recordclass.RecordClass.StaticFieldRecord) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.StaticFieldRecord) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.StaticFieldRecord))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.StaticFieldRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.StaticFieldRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -2578,10 +2578,10 @@
  (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.RecordSpecializingInterface)) (ref.test (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.RecordSpecializingInterface) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.RecordSpecializingInterface))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.RecordSpecializingInterface) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )
@@ -2737,10 +2737,10 @@
  (local $this (ref null $recordclass.RecordClass.1LocalRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.1LocalRecord) (local.get $this.untyped)))
  (block
-  (if (i32.eqz (block (result i32)
-    (local.set $$other (if (result (ref null $recordclass.RecordClass.1LocalRecord)) (ref.test (ref $recordclass.RecordClass.1LocalRecord) (local.get $arg0)) (then (ref.cast (ref null $recordclass.RecordClass.1LocalRecord) (local.get $arg0))) (else (ref.null $recordclass.RecordClass.1LocalRecord))))
-    (i32.eqz (ref.is_null (local.get $$other)))
-   ))
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.1LocalRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.1LocalRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
    (then
     (return (i32.const 0))
    )

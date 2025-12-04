@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 /**
  * @final
@@ -51,7 +50,7 @@ class StaticFieldRecord extends Record {
  /** @override @return {boolean} */
  equals(/** * */ arg0) {
   let /** StaticFieldRecord */ $other;
-  if (!($other = StaticFieldRecord.$isInstance(arg0) ? /**@type {StaticFieldRecord}*/ (arg0) : null, !$Equality.$same($other, null))) {
+  if (!(StaticFieldRecord.$isInstance(arg0) && ($other = (/**@type {StaticFieldRecord}*/ (arg0)), true))) {
    return false;
   }
   return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([Integer.valueOf(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)], [Integer.valueOf($other.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)]);
@@ -88,7 +87,6 @@ class StaticFieldRecord extends Record {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   Arrays = goog.module.get('java.util.Arrays$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
  }
 }
 /**@private {number} @nodts*/

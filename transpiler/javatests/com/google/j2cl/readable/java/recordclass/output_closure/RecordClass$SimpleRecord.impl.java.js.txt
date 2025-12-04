@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 /**
  * @final
@@ -36,7 +35,7 @@ class SimpleRecord extends Record {
  /** @override @return {boolean} */
  equals(/** * */ arg0) {
   let /** SimpleRecord */ $other;
-  if (!($other = SimpleRecord.$isInstance(arg0) ? /**@type {SimpleRecord}*/ (arg0) : null, !$Equality.$same($other, null))) {
+  if (!(SimpleRecord.$isInstance(arg0) && ($other = (/**@type {SimpleRecord}*/ (arg0)), true))) {
    return false;
   }
   return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([Integer.valueOf(this.f_value__recordclass_RecordClass_SimpleRecord_)], [Integer.valueOf($other.f_value__recordclass_RecordClass_SimpleRecord_)]);
@@ -64,7 +63,6 @@ class SimpleRecord extends Record {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   Arrays = goog.module.get('java.util.Arrays$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
  }
 }
 $Util.$setClassMetadata(SimpleRecord, 'recordclass.RecordClass$SimpleRecord');

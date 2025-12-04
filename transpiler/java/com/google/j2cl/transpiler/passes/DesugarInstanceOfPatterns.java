@@ -15,16 +15,17 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BindingPattern;
-import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.Pattern;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableReference;
@@ -37,68 +38,88 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
-            if (instanceOfExpression.getPattern() == null) {
+            Pattern pattern = instanceOfExpression.getPattern();
+            if (pattern == null) {
               return instanceOfExpression;
             }
 
-            Expression expression = instanceOfExpression.getExpression();
-            Variable patternVariable =
-                ((BindingPattern) instanceOfExpression.getPattern()).getVariable();
-            TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-
-            // The instanceof has a pattern and will be represented as a multi expression as
-            // follows:
-            //   ( ExpType exp = expression,               // avoid double evaluation of expression
-            //     PatternVarType v =
-            //         exp instanceof T ? (T) exp : null, // Cast exp and assign to pattern variable
-            //     v != null)                             // return the result of instanceof.
-
-            var variableDeclarationBuilder = VariableDeclarationExpression.newBuilder();
-
-            // Always use a variable for the expression that needs to be evaluated twice to
-            // prevent increasing code size and make the code more readable.
-            Variable expressionVariable;
-            if (expression instanceof VariableReference variableReference) {
-              // If it is already a variable just use it.
-              expressionVariable = variableReference.getTarget();
-            } else {
-              // Create a new variable to avoid evaluating expression twice.
-              expressionVariable =
-                  Variable.newBuilder()
-                      .setName("exp")
-                      .setFinal(true)
-                      .setTypeDescriptor(expression.getTypeDescriptor())
-                      .build();
-              variableDeclarationBuilder.addVariableDeclaration(expressionVariable, expression);
-            }
-            // Declare and initialize the pattern variable.
-            //
-            //     PatternVarType patternVariable =
-            //         exp instanceof T ? (T) exp : null
-            variableDeclarationBuilder.addVariableDeclaration(
-                patternVariable,
-                ConditionalExpression.newBuilder()
-                    .setTypeDescriptor(patternVariable.getTypeDescriptor())
-                    .setConditionExpression(
-                        InstanceOfExpression.Builder.from(instanceOfExpression)
-                            .setExpression(expressionVariable.createReference())
-                            .setPattern(null)
-                            .build())
-                    .setTrueExpression(
-                        CastExpression.newBuilder()
-                            .setExpression(expressionVariable.createReference())
-                            .setCastTypeDescriptor(testTypeDescriptor)
-                            .build())
-                    .setFalseExpression(testTypeDescriptor.getNullValue())
-                    .build());
-
-            return MultiExpression.newBuilder()
-                .addExpressions(
-                    variableDeclarationBuilder.build(),
-                    // patternVariable != null is the actual value of this multiexpression.
-                    patternVariable.createReference().infixNotEqualsNull())
-                .build();
+            return desugarPattern(
+                instanceOfExpression.getSourcePosition(),
+                instanceOfExpression.getExpression(),
+                pattern);
           }
         });
+  }
+
+  private static Expression desugarPattern(
+      SourcePosition sourcePosition, Expression expression, Pattern pattern) {
+    return switch (pattern) {
+      case BindingPattern bindingPattern ->
+          desugarBindingPattern(sourcePosition, expression, bindingPattern);
+    };
+  }
+
+  private static Expression desugarBindingPattern(
+      SourcePosition sourcePosition, Expression expression, BindingPattern pattern) {
+    Variable patternVariable = pattern.getVariable();
+
+    // The instanceof has a pattern and will be represented as a multi expression as
+    // follows:
+    //    (ExpType exp = expression,               // avoid double evaluation of expression
+    //       exp instanceof T &&                   // perform the instance of operation and
+    //       (patternVariable = (T) exp, true),    // cast exp and assign to pattern variable
+    //    )
+
+    var resultBuilder = MultiExpression.newBuilder();
+    // Always use a variable for the expression that needs to be evaluated twice to
+    // prevent increasing code size and make the code more readable.
+    Variable expressionVariable;
+    if (expression instanceof VariableReference variableReference) {
+      // If it is already a variable just use it.
+      expressionVariable = variableReference.getTarget();
+    } else {
+      // Create a new variable to avoid evaluating expression twice.
+      expressionVariable =
+          Variable.newBuilder()
+              .setName("exp")
+              .setFinal(true)
+              .setTypeDescriptor(expression.getTypeDescriptor())
+              .build();
+      resultBuilder.addExpressions(
+          VariableDeclarationExpression.newBuilder()
+              .addVariableDeclaration(expressionVariable, expression)
+              .build());
+    }
+
+    //  exp instanceof T && (T patternVariable = (T) exp, true)
+    resultBuilder.addExpressions(
+        InstanceOfExpression.newBuilder()
+            .setExpression(expressionVariable.createReference())
+            .setTestTypeDescriptor(patternVariable.getTypeDescriptor())
+            .setPattern(null)
+            .setSourcePosition(sourcePosition)
+            .build()
+            .infixAnd(
+                assignPatternVariableReturningTrue(
+                    patternVariable,
+                    JsDocCastExpression.newBuilder()
+                        .setExpression(expressionVariable.createReference())
+                        .setCastTypeDescriptor(patternVariable.getTypeDescriptor())
+                        .build())));
+
+    return resultBuilder.build();
+  }
+
+  /** Declares and assigns the pattern variable in an expression that is true. */
+  private static Expression assignPatternVariableReturningTrue(
+      Variable patternVariable, Expression expression) {
+    // (Type var = (Type) expression, true)
+    return MultiExpression.newBuilder()
+        .addExpressions(
+            VariableDeclarationExpression.newBuilder()
+                .addVariableDeclaration(patternVariable, expression)
+                .build(),
+            BooleanLiteral.get(true))
+        .build();
   }
 }

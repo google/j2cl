@@ -864,7 +864,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .setSourcePosition(getSourcePosition(expression))
         .setExpression(convertExpression(expression.getExpression()))
         .setPattern(convertPattern(expression.getPattern()))
-        .setTestTypeDescriptor(environment.createTypeDescriptor(expression.getType().type))
+        .setTestTypeDescriptor(
+            expression.getPattern() != null
+                ? null
+                : environment.createTypeDescriptor(expression.getType().type))
         .build();
   }
 

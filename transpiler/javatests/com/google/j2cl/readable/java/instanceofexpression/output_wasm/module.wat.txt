@@ -326,8 +326,10 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:95:4
   (if (if (result i32) (i32.eqz (block (result i32)
     (local.set $exp (call $$create__@java.lang.Object ))
-    (local.set $s (if (result (ref null $java.lang.String)) (ref.test (ref $java.lang.String) (local.get $exp)) (then (ref.cast (ref null $java.lang.String) (local.get $exp))) (else (ref.null $java.lang.String))))
-    (i32.eqz (ref.is_null (local.get $s)))
+    (if (result i32) (ref.test (ref $java.lang.String) (local.get $exp)) (then (block (result i32)
+     (local.set $s (ref.cast (ref null $java.lang.String) (local.get $exp)))
+     (i32.const 1)
+    )) (else (i32.const 0)))
    )) (then (i32.const 1)) (else (i32.eq (call $m_length__int@java.lang.String (ref.as_non_null (local.get $s))) (i32.const 2))))
    (then
     (block
@@ -339,8 +341,10 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:101:4
   (if (if (result i32) (block (result i32)
     (local.set $exp_1 (call $$create__@java.lang.Object ))
-    (local.set $i (if (result (ref null $java.lang.Integer)) (ref.test (ref $java.lang.Integer) (local.get $exp_1)) (then (ref.cast (ref null $java.lang.Integer) (local.get $exp_1))) (else (ref.null $java.lang.Integer))))
-    (i32.eqz (ref.is_null (local.get $i)))
+    (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $exp_1)) (then (block (result i32)
+     (local.set $i (ref.cast (ref null $java.lang.Integer) (local.get $exp_1)))
+     (i32.const 1)
+    )) (else (i32.const 0)))
    ) (then (i32.eq (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $i))) (i32.const 2))) (else (i32.const 0)))
    (then
     (block
@@ -352,8 +356,10 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:107:4
   (if (i32.eqz (block (result i32)
     (local.set $exp_2 (call $$create__@java.lang.Object ))
-    (local.set $n (if (result (ref null $java.lang.Number)) (ref.test (ref $java.lang.Number) (local.get $exp_2)) (then (ref.cast (ref null $java.lang.Number) (local.get $exp_2))) (else (ref.null $java.lang.Number))))
-    (i32.eqz (ref.is_null (local.get $n)))
+    (if (result i32) (ref.test (ref $java.lang.Number) (local.get $exp_2)) (then (block (result i32)
+     (local.set $n (ref.cast (ref null $java.lang.Number) (local.get $exp_2)))
+     (i32.const 1)
+    )) (else (i32.const 0)))
    ))
    (then
     (block

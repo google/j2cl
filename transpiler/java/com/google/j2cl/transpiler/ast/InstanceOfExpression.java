@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 @Visitable
 public class InstanceOfExpression extends Expression implements HasSourcePosition {
   @Visitable Expression expression;
-  @Visitable TypeDescriptor testTypeDescriptor;
+  @Visitable @Nullable TypeDescriptor testTypeDescriptor;
   @Visitable @Nullable Pattern pattern;
   private final SourcePosition sourcePosition;
 
@@ -37,13 +37,16 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
       Expression expression,
       TypeDescriptor testTypeDescriptor,
       Pattern pattern) {
+    // Either the pattern is null or the test type is null.
+    checkArgument((pattern == null) == (testTypeDescriptor != null));
+    checkArgument(
+        pattern != null
+            || testTypeDescriptor instanceof DeclaredTypeDescriptor
+            || testTypeDescriptor instanceof ArrayTypeDescriptor);
     this.expression = checkNotNull(expression);
-    this.testTypeDescriptor = checkNotNull(testTypeDescriptor);
+    this.testTypeDescriptor = testTypeDescriptor;
     this.sourcePosition = sourcePosition;
     this.pattern = pattern;
-    checkArgument(
-        testTypeDescriptor instanceof DeclaredTypeDescriptor
-            || testTypeDescriptor instanceof ArrayTypeDescriptor);
   }
 
   public Expression getExpression() {

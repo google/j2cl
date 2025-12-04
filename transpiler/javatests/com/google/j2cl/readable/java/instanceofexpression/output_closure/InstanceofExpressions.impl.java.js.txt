@@ -112,13 +112,13 @@ class InstanceofExpressions extends j_l_Object {
  /** @nodts */
  m_testPatternMatch__void_$p_instanceofexpression_InstanceofExpressions() {
   let /** * */ exp, /** ?string */ s, /** * */ exp_1, /** Integer */ i, /** * */ exp_2, /** (Number|number|!$Long) */ n;
-  if (!((exp = j_l_Object.$create__(), s = j_l_String.$isInstance(exp) ? /**@type {?string}*/ (exp) : null), !$Equality.$same(s, null)) || j_l_String.m_length__java_lang_String__int(s) == 2) {
+  if (!(exp = j_l_Object.$create__(), j_l_String.$isInstance(exp) && (s = (/**@type {?string}*/ (exp)), true)) || j_l_String.m_length__java_lang_String__int(s) == 2) {
    return;
   }
-  if (((exp_1 = j_l_Object.$create__(), i = Integer.$isInstance(exp_1) ? /**@type {Integer}*/ (exp_1) : null), !$Equality.$same(i, null)) && i.intValue() == 2) {
+  if ((exp_1 = j_l_Object.$create__(), Integer.$isInstance(exp_1) && (i = (/**@type {Integer}*/ (exp_1)), true)) && i.intValue() == 2) {
    let l = i.intValue();
   }
-  if (!((exp_2 = j_l_Object.$create__(), n = Number.$isInstance(exp_2) ? /**@type {(Number|number|!$Long)}*/ (exp_2) : null), !$Equality.$same(n, null))) {
+  if (!(exp_2 = j_l_Object.$create__(), Number.$isInstance(exp_2) && (n = (/**@type {(Number|number|!$Long)}*/ (exp_2)), true))) {
    let j = j_l_String.m_length__java_lang_String__int(s);
   } else {
    let k = $Numbers.m_byteValue__java_lang_Number__byte(n);

@@ -4,7 +4,6 @@ const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 /**
  * @final
@@ -35,7 +34,7 @@ class ArrayRecord extends Record {
  /** @override @return {boolean} */
  equals(/** * */ arg0) {
   let /** ArrayRecord */ $other;
-  if (!($other = ArrayRecord.$isInstance(arg0) ? /**@type {ArrayRecord}*/ (arg0) : null, !$Equality.$same($other, null))) {
+  if (!(ArrayRecord.$isInstance(arg0) && ($other = (/**@type {ArrayRecord}*/ (arg0)), true))) {
    return false;
   }
   return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_value__recordclass_RecordClass_ArrayRecord_], [$other.f_value__recordclass_RecordClass_ArrayRecord_]);
@@ -62,7 +61,6 @@ class ArrayRecord extends Record {
  /** @nodts */
  static $loadModules() {
   Arrays = goog.module.get('java.util.Arrays$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
  }
 }
 $Util.$setClassMetadata(ArrayRecord, 'recordclass.RecordClass$ArrayRecord');

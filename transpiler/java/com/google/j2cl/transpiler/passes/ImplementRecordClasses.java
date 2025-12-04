@@ -228,7 +228,6 @@ public class ImplementRecordClasses extends NormalizationPass {
               IfStatement.newBuilder()
                   .setConditionExpression(
                       InstanceOfExpression.newBuilder()
-                          .setTestTypeDescriptor(type.getTypeDescriptor())
                           .setExpression(parameter.createReference())
                           .setPattern(new BindingPattern(otherVariable))
                           .build()
