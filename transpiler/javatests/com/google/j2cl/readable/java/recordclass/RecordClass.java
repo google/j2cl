@@ -104,4 +104,9 @@ public class RecordClass {
 
   record RecordSpecializingInterface(String parametric, String nonParametric)
       implements PropertyAccessors<String> {}
+
+  private static void testLocalRecordClas() {
+    record LocalRecord(int value) {}
+    LocalRecord lr = new LocalRecord(1);
+  }
 }

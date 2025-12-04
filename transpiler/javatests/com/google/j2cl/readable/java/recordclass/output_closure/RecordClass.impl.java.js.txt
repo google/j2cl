@@ -3,6 +3,7 @@ goog.module('recordclass.RecordClass$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1LocalRecord = goog.forwardDeclare('recordclass.RecordClass.$1LocalRecord$impl');
 let ArrayRecord = goog.forwardDeclare('recordclass.RecordClass.ArrayRecord$impl');
 let RecordWithConstructor = goog.forwardDeclare('recordclass.RecordClass.RecordWithConstructor$impl');
 let SimpleRecord = goog.forwardDeclare('recordclass.RecordClass.SimpleRecord$impl');
@@ -36,6 +37,10 @@ class RecordClass extends j_l_Object {
   rwc.m_b__int();
  }
  /** @nodts */
+ static m_testLocalRecordClas__void() {
+  let lr = $1LocalRecord.$create__int(1);
+ }
+ /** @nodts */
  static $clinit() {
   RecordClass.$clinit = () =>{};
   RecordClass.$loadModules();
@@ -48,6 +53,7 @@ class RecordClass extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  $1LocalRecord = goog.module.get('recordclass.RecordClass.$1LocalRecord$impl');
   ArrayRecord = goog.module.get('recordclass.RecordClass.ArrayRecord$impl');
   RecordWithConstructor = goog.module.get('recordclass.RecordClass.RecordWithConstructor$impl');
   SimpleRecord = goog.module.get('recordclass.RecordClass.SimpleRecord$impl');
