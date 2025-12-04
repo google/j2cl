@@ -287,18 +287,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       parameters.add(createVariable(parameter, true));
     }
 
-    // If a method has no body, initialize the body with an empty list of statements.
-    Block body =
-        methodDeclaration.getBody() == null
-            ? Block.newBuilder().setSourcePosition(getSourcePosition(methodDeclaration)).build()
-            : convertBlock(methodDeclaration.getBody());
+    Method.Builder builder =
+        newMethodBuilder(methodDeclaration.sym)
+            .setSourcePosition(getNamePosition(methodDeclaration))
+            .setParameters(parameters);
 
-    return newMethodBuilder(methodDeclaration.sym)
-        .setBodySourcePosition(body.getSourcePosition())
-        .setSourcePosition(getNamePosition(methodDeclaration))
-        .setParameters(parameters)
-        .addStatements(body.getStatements())
-        .build();
+    if (methodDeclaration.getBody() != null) {
+      builder.setBody(convertBlock(methodDeclaration.getBody()));
+    }
+
+    return builder.build();
   }
 
   private Block convertBlock(JCBlock block) {

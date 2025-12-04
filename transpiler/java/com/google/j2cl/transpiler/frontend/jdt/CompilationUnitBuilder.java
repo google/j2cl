@@ -328,18 +328,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodDescriptor methodDescriptor =
           environment.createMethodDescriptor(methodDeclaration.resolveBinding());
 
-      // If a method has no body, initialize the body with an empty list of statements.
-      Block body =
-          methodDeclaration.getBody() == null
-              ? Block.newBuilder().setSourcePosition(getSourcePosition(methodDeclaration)).build()
-              : convert(methodDeclaration.getBody());
-
-      return newMethodBuilder(methodDescriptor)
-          .setBodySourcePosition(body.getSourcePosition())
-          .setSourcePosition(getSourcePosition(methodDeclaration.getName()))
-          .setParameters(parameters)
-          .addStatements(body.getStatements())
-          .build();
+      Method.Builder builder =
+          newMethodBuilder(methodDescriptor)
+              .setSourcePosition(getSourcePosition(methodDeclaration.getName()))
+              .setParameters(parameters);
+      if (methodDeclaration.getBody() != null) {
+        builder.setBody(convert(methodDeclaration.getBody()));
+      }
+      return builder.build();
     }
 
     private Method convert(AnnotationTypeMemberDeclaration memberDeclaration) {

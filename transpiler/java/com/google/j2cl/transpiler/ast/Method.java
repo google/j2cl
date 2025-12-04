@@ -243,6 +243,7 @@ public class Method extends Member implements MethodLike {
 
     @CanIgnoreReturnValue
     public Builder setBody(Block body) {
+      setBodySourcePosition(body.getSourcePosition());
       return setStatements(body.getStatements());
     }
 

@@ -350,8 +350,11 @@ internal class CompilationUnitBuilder(
       .setMethodDescriptor(methodDescriptor)
       .setSourcePosition(getNameSourcePosition(irFunction))
       .setParameters(parameters)
-      .setBodySourcePosition(body.sourcePosition)
-      .addStatements(body.statements)
+      .apply {
+        if (irFunction.body != null && !irFunction.isExternal) {
+          setBody(convertBody(irFunction.body!!))
+        }
+      }
       .build()
   }
 
