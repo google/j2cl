@@ -2,7 +2,8 @@
 
 JVM_FLAGS = [
     "-XX:+TieredCompilation",
-    "-Xss3M",
+    # This should match the javac constant since we compile the same files.
+    "-Xss7M",
     # Disable bytecode verification to save from class-loading time.
     "-Xverify:none",
 ]
