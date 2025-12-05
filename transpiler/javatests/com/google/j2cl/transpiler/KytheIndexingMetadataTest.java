@@ -43,7 +43,7 @@ public class KytheIndexingMetadataTest extends TestCase {
     String kytheMetadataLine = lines.get(lines.size() - 1);
     assertTrue(
         kytheMetadataLine.startsWith(
-            "// {\"type\":\"kythe0\",\"meta\":[{\"type\":\"anchor_anchor\",\"source_begin\":"));
+            "// {\"type\":\"KYTHE0\",\"meta\":[{\"type\":\"ANCHOR_ANCHOR\",\"source_begin\":"));
     assertTrue(
         kytheMetadataLine.contains(
             "\"edge\":\"/kythe/edge/imputes\",\"source_vname\":{\"corpus\":\"google3\",\"path\":"));

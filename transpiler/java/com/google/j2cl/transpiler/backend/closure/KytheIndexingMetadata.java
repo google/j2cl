@@ -20,7 +20,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Representation of Kythe indexing metadata */
+/**
+ * Representation of Kythe indexing metadata.
+ *
+ * <p>This proto should be subset of `GeneratedCodeInfo` proto field-by-field.
+ * https://github.com/kythe/kythe/blob/master/kythe/proto/metadata.proto so that JSON representation
+ * of this class is compatible with `GeneratedCodeInfo` proto
+ */
 @SuppressWarnings("unused") // Fields are accessed through reflection by GSON.
 public class KytheIndexingMetadata {
 
@@ -44,7 +50,7 @@ public class KytheIndexingMetadata {
    * things like class, method, field and similar.
    */
   private static class AnchorAnchorMetadata {
-    private final String type = "anchor_anchor";
+    private final String type = "ANCHOR_ANCHOR";
 
     /** Byte offset of the start position of the identifier in .java file. */
     @SerializedName("source_begin")
@@ -84,7 +90,7 @@ public class KytheIndexingMetadata {
     }
   }
 
-  private final String type = "kythe0";
+  private final String type = "KYTHE0";
 
   private final List<AnchorAnchorMetadata> meta = new ArrayList<>();
 
