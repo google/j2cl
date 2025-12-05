@@ -12,6 +12,7 @@
 #import "j2ktiosinterop/NativeDefaultName.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
+#import "j2ktiosinterop/PackageNames.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Double.h"
@@ -114,6 +115,20 @@
   [obj throwsMethodWithNSString:@"" error:nil];
   [J2ktiosinteropDefaultNames staticThrowsMethodAndReturnError:nil];
   [J2ktiosinteropDefaultNames staticThrowsMethodWithNSString:@"" error:nil];
+}
+
+- (void)testPackageNames {
+  J2ktiosinteropPackageNames *obj = create_J2ktiosinteropPackageNames_init();
+
+  [obj methodWithSRCDefaultFromSrc:nil];
+  [obj methodWithNewCustomFromSrc:nil];
+  [obj methodWithDEPDefaultFromDep:nil];
+  [obj methodWithNewCustomFromDep:nil];
+
+  J2ktiosinteropPackageNames_staticMethodWithSRCDefaultFromSrc_(nil);
+  J2ktiosinteropPackageNames_staticMethodWithNewCustomFromSrc_(nil);
+  J2ktiosinteropPackageNames_staticMethodWithDEPDefaultFromDep_(nil);
+  J2ktiosinteropPackageNames_staticMethodWithNewCustomFromDep_(nil);
 }
 
 - (void)testOnlyImplicitDefaultConstructor {
