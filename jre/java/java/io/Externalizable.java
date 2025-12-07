@@ -19,6 +19,6 @@
 
 package java.io;
 
-public interface Externalizable extends java.io.Serializable {
+public interface Externalizable extends Serializable {
 
 }
