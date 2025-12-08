@@ -568,13 +568,16 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       DeclaredTypeDescriptor toDeclared, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
     switch (from) {
       case DeclaredTypeDescriptor fromDeclared -> {
+
+        // TODO(b/466683008): This should *always* find a supertype, but in some convoluted
+        // situations it doesn't. Move this down and checkNotNull once the bug is fixed.
+        DeclaredTypeDescriptor fromDeclaredSuper =
+            fromDeclared.findSupertype(toDeclared.getTypeDeclaration());
+
         // For RAW type descriptors, propagate outer nullability only without type arguments.
-        if (toDeclared.isRaw()) {
+        if (toDeclared.isRaw() || fromDeclaredSuper == null) {
           return toDeclared.toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
         }
-
-        DeclaredTypeDescriptor fromDeclaredSuper =
-            checkNotNull(fromDeclared.findSupertype(toDeclared.getTypeDeclaration()));
 
         return toDeclared
             .withTypeArguments(

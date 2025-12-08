@@ -104,4 +104,22 @@ class TypeWildCards {
   void testContainer() {
     SomeContainer<? extends Content<?>> c = null;
   }
+
+  // repro for b/466683008.
+  @NullMarked
+  public interface OtTester<O extends OtTester<O, T>, T extends @Nullable Object> {
+    O applyCommands(T... command);
+  }
+
+  @NullMarked
+  public abstract class IndexBasedTestCase<M> {
+    protected abstract OtTester<?, M> newOtTester();
+  }
+
+  public abstract class AbstractAnimationCommandTransformerTestCases
+      extends IndexBasedTestCase<String> {
+    public void testAddAnimation_noTransformAgainstMissingPage() {
+      newOtTester().applyCommands().applyCommands();
+    }
+  }
 }

@@ -23,6 +23,7 @@ import javaemul.lang.*
 import kotlin.Any
 import kotlin.Array
 import kotlin.Number
+import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
@@ -124,4 +125,18 @@ open class TypeWildCards internal constructor() {
  open inner class Content<T: Any> internal constructor()
 
  open inner class SomeContainer<T: TypeWildCards.Content<T>> internal constructor()
+
+ fun interface OtTester<O: OtTester<O, T>, T> {
+  fun applyCommands(vararg command: T): O
+ }
+
+ abstract inner class IndexBasedTestCase<M: Any> {
+  abstract fun newOtTester(): OtTester<*, M>
+ }
+
+ abstract inner class AbstractAnimationCommandTransformerTestCases: TypeWildCards.IndexBasedTestCase<String>() {
+  open fun testAddAnimation_noTransformAgainstMissingPage() {
+   this.newOtTester().applyCommands().applyCommands()
+  }
+ }
 }
