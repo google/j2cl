@@ -8,6 +8,8 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let MutableKProperty0Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty0Impl$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let NothingIterator = goog.forwardDeclare('voidtypes.NothingIterator$impl');
@@ -112,6 +114,32 @@ class VoidTypesKt extends j_l_Object {
   return;
  }
  /** @nodts */
+ static m_unitLambdas__void() {
+  VoidTypesKt.$clinit();
+  let a = Function0.$adapt(/**  @return {?}*/ (() =>{
+   VoidTypesKt.m_f__void();
+  }));
+  let b = Function0.$adapt(/**  @return {!Unit}*/ (() =>{
+   return VoidTypesKt.m_f__void();
+  }));
+  let c = /**@type {!MutableKProperty0Impl<!Unit>}*/ (MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
+   return VoidTypesKt.m_getW__kotlin_Unit();
+  })), null));
+  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
+   VoidTypesKt.m_f__void();
+  }));
+  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
+   return VoidTypesKt.m_f__void();
+  }));
+  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
+   return VoidTypesKt.m_getW__kotlin_Unit();
+  }));
+ }
+ /** @nodts @template T */
+ static m_consumeUnitJsFunction__voidtypes_GenericJsFunction__void(/** function():T */ f) {
+  VoidTypesKt.$clinit();
+ }
+ /** @nodts */
  static m_nothingTests__void() {
   VoidTypesKt.$clinit();
   let a = 2;
@@ -156,6 +184,8 @@ class VoidTypesKt extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   NothingStub = goog.module.get('kotlin.Nothing$impl');
   Unit = goog.module.get('kotlin.Unit$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  MutableKProperty0Impl = goog.module.get('kotlin.jvm.internal.MutableKProperty0Impl$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   NothingIterator = goog.module.get('voidtypes.NothingIterator$impl');

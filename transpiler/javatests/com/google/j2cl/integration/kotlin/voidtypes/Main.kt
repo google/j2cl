@@ -19,11 +19,13 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
+import jsinterop.annotations.JsFunction
 
 fun main(vararg unused: String) {
   testUnitVariable()
   testUnitVariable()
   testUnitGetterWithSideEffects()
+  testGenericUnitLambdas()
   testNothingCast()
   testNothingIs()
 }
@@ -60,6 +62,30 @@ val foo: Unit
 fun testUnitGetterWithSideEffects() {
   val unused = foo
   assertEquals(1, counter)
+}
+
+fun testGenericUnitLambdas() {
+  // TODO(b/466125631): enable these tests once the bug is fixed.
+  // genericFunExpectingUnitBlock {}
+  // genericFunExpectingUnitBlock(::unitFun)
+  genericFunExpectingUnitBlock(::unitField)
+  // TODO(b/466125631): enable these tests once the bug is fixed.
+  // genericFunExpectingJsFunctionReturningUnit {}
+  // genericFunExpectingJsFunctionReturningUnit(::unitFun)*/
+  genericFunExpectingJsFunctionReturningUnit(::unitField)
+}
+
+private fun <T> genericFunExpectingUnitBlock(block: () -> T) {
+  assertSame(Unit, block())
+}
+
+@JsFunction
+fun interface GenericJsFunction<T> {
+  fun execute(): T
+}
+
+private fun <T> genericFunExpectingJsFunctionReturningUnit(returnUnit: GenericJsFunction<T>) {
+  assertSame(Unit, returnUnit.execute())
 }
 
 fun returnUnitBlock(a: Int): Unit =
