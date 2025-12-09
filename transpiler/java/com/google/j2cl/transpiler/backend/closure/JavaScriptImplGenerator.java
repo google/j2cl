@@ -17,8 +17,8 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment.isDeprecated;
 import static java.lang.String.format;
-import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
@@ -30,17 +30,10 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.HasAnnotations;
-import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.TypeVariable;
-import com.google.j2cl.transpiler.ast.Visibility;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -198,72 +191,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeAnnotation() {
-    if (type.isOverlayImplementation()) {
-      // Overlays do not need any other JsDoc.
-      sourceBuilder.appendln("/** @nodts */");
+    String classJsDoc = environment.getJsDocForType(type);
+    if (classJsDoc.isEmpty()) {
       return;
     }
-    StringBuilder sb = new StringBuilder();
-    if (type.isInterface()) {
-      appendWithNewLine(sb, " * @interface");
-    } else if (type.isAbstract()
-        || TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
-      appendWithNewLine(sb, " * @abstract");
-    }
-    if (type.getDeclaration().isFinal()) {
-      appendWithNewLine(sb, " * @final");
-    }
-    if (type.getDeclaration().hasTypeParameters()) {
-      appendWithNewLine(
-          sb,
-          " *"
-              + getJsDocDeclarationForTypeVariable(
-                  type.getDeclaration().getTypeParameterDescriptors()));
-    }
-    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null && superTypeDescriptor.hasTypeArguments()) {
-      // No need to render if it does not have type arguments as it will also appear in the
-      // extends clause of the class definition.
-      renderClauseIfTypeExistsInJavaScript("extends", superTypeDescriptor, sb);
-    }
-    String extendsOrImplementsString = type.isInterface() ? "extends" : "implements";
-    type.getSuperInterfaceTypeDescriptors()
-        .forEach(t -> renderClauseIfTypeExistsInJavaScript(extendsOrImplementsString, t, sb));
-
-    if (isDeprecated(type.getDeclaration())) {
-      appendWithNewLine(sb, " * @deprecated");
-    }
-
-    String classJsDoc = sb.toString();
-    if (!classJsDoc.isEmpty()) {
-      sourceBuilder.appendln("/**");
-      sourceBuilder.append(classJsDoc);
-      sourceBuilder.appendln(" */");
-    }
-  }
-
-  /*** Renders a JsDoc clause only if the type is an actual class in JavaScript. */
-  private void renderClauseIfTypeExistsInJavaScript(
-      String extendsOrImplementsString, DeclaredTypeDescriptor typeDescriptor, StringBuilder sb) {
-    if (!typeDescriptor.isJavaScriptClass()) {
+    if (!classJsDoc.contains("\n")) {
+      sourceBuilder.appendln("/**" + classJsDoc + " */");
       return;
     }
-
-    // Don't render the supertype name using the ClosureTypesGenerator to avoid replacement of types
-    // like {@code Number} by {@code (Number|number)} in supertype declarations.
-    String superTypeString = environment.aliasForType(typeDescriptor.getTypeDeclaration());
-
-    if (typeDescriptor.hasTypeArguments()) {
-      superTypeString +=
-          typeDescriptor.getTypeArgumentDescriptors().stream()
-              // Replace non-native JsEnums with the boxed counterpart since the type
-              // arguments on classes that appear in @implements and @extends clauses are
-              // rendered explicitly.
-              .map(t -> AstUtils.isNonNativeJsEnum(t) ? TypeDescriptors.getEnumBoxType(t) : t)
-              .map(closureTypesGenerator::getClosureTypeString)
-              .collect(joining(", ", "<", ">"));
-    }
-    appendWithNewLine(sb, format(" * @%s {%s}", extendsOrImplementsString, superTypeString));
+    sourceBuilder.appendln("/**");
+    sourceBuilder.append(classJsDoc);
+    sourceBuilder.appendln(" */");
   }
 
   private void renderClassBody() {
@@ -321,82 +259,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (!Strings.isNullOrEmpty(method.getJsDocDescription())) {
       sourceBuilder.appendln("//" + method.getJsDocDescription());
     }
-    String jsDoc = getJsDoc(method);
+    String jsDoc = environment.getJsDocForMethod(method);
     sourceBuilder.appendln(jsDoc.isEmpty() ? "" : "/**" + jsDoc + " */");
-  }
-
-  private String getJsDoc(Method method) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
-    boolean isKotlinSource =
-        methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().getSourceLanguage()
-            == SourceLanguage.KOTLIN;
-
-    StringBuilder jsDocBuilder = new StringBuilder();
-
-    if (methodDescriptor.getJsVisibility() != Visibility.PUBLIC) {
-      jsDocBuilder.append(" @").append(methodDescriptor.getJsVisibility().jsText);
-    }
-
-    if (methodDescriptor.isFinal()
-        // Don't emit @final on static methods since this are always dispatched statically via
-        // collapse properties and j2cl allows the name to be reused. This situation might arise
-        // from the use of JsMethod or from Kotlin sources.
-        // TODO(b/280321528): remove the special handling for kotlin once this is fixed.
-        && !(methodDescriptor.isStatic() && (methodDescriptor.isJsMember() || isKotlinSource))
-        // TODO(b/280160727): Remove this when the bug in jscompiler is fixed.
-        && !methodDescriptor.isPropertyGetter()
-        && !methodDescriptor.isPropertySetter()) {
-      jsDocBuilder.append(" @final");
-    }
-    if (methodDescriptor.isAbstract()) {
-      jsDocBuilder.append(" @abstract");
-    }
-    if (method.getDescriptor().isJsOverride()) {
-      jsDocBuilder.append(" @override");
-    }
-    if (!methodDescriptor.canBeReferencedExternally()
-        // TODO(b/193252533): Remove special casing of markImplementor.
-        && !methodDescriptor.equals(
-            methodDescriptor.getEnclosingTypeDescriptor().getMarkImplementorMethodDescriptor())) {
-      jsDocBuilder.append(" @nodts");
-    }
-    if (methodDescriptor.isSideEffectFree()) {
-      jsDocBuilder.append(" @nosideeffects");
-    }
-
-    // TODO(b/280315375): Remove the kotlin special case due to disagreement between how we the
-    //  classes in the type model vs their implementation.
-    if (methodDescriptor.isBridge()
-        && (isKotlinSource
-            || methodDescriptor.getJsOverriddenMethodDescriptors().stream()
-                .anyMatch(MemberDescriptor::isFinal))) {
-      // Allow bridges to override final methods.
-      jsDocBuilder.append(" @suppress{visibility}");
-    }
-
-    if (!methodDescriptor.getTypeParameterTypeDescriptors().isEmpty()) {
-      jsDocBuilder.append(
-          getJsDocDeclarationForTypeVariable(methodDescriptor.getTypeParameterTypeDescriptors()));
-    }
-
-    if (needsReturnJsDoc(methodDescriptor)) {
-      String returnTypeName = closureTypesGenerator.getJsDocForReturnType(methodDescriptor);
-      jsDocBuilder.append(" @return {").append(returnTypeName).append("}");
-    }
-
-    if (isDeprecated(methodDescriptor)) {
-      jsDocBuilder.append(" @deprecated");
-    }
-
-    return jsDocBuilder.toString();
-  }
-
-  private boolean needsReturnJsDoc(MethodDescriptor methodDescriptor) {
-    return !methodDescriptor.isConstructor()
-        && (!TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor())
-            // Suspend functions are tranpiled to JS Generator functions which always require
-            // to declare the return type even if the generator does not yield any value.
-            || methodDescriptor.isSuspendFunction());
   }
 
   private void renderLoadModules() {
@@ -486,25 +350,5 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void renderExports() {
     sourceBuilder.newLine();
     sourceBuilder.appendln("exports = " + environment.aliasForType(type.getDeclaration()) + ";");
-  }
-
-  /** Returns the JsDoc declaration clause for a collection of type variables. */
-  private String getJsDocDeclarationForTypeVariable(Collection<TypeVariable> typeDescriptors) {
-    return format(
-        " @template %s",
-        typeDescriptors.stream()
-            .map(closureTypesGenerator::getClosureTypeString)
-            .collect(joining(", ")));
-  }
-
-  /** Returns true if the given node is annotated with @Deprecated. */
-  private static boolean isDeprecated(HasAnnotations hasAnnotations) {
-    return hasAnnotations.hasAnnotation("java.lang.Deprecated")
-        || hasAnnotations.hasAnnotation("kotlin.Deprecated");
-  }
-
-  private static void appendWithNewLine(StringBuilder sb, String string) {
-    sb.append(string);
-    sb.append("\n");
   }
 }
