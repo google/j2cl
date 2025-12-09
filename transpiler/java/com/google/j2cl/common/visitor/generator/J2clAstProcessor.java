@@ -217,13 +217,9 @@ public class J2clAstProcessor extends AbstractProcessor {
 
     @Override
     public boolean equals(Object other) {
-      if (!(other instanceof VisitableClass)) {
-        return false;
-      }
-      VisitableClass testClass = (VisitableClass) other;
-      boolean simpleNameEquals = Objects.equal(simpleName, testClass.simpleName);
-      boolean packageNameEquals = Objects.equal(packageName, testClass.packageName);
-      return simpleNameEquals && packageNameEquals;
+      return other instanceof VisitableClass testClass
+          && Objects.equal(simpleName, testClass.simpleName)
+          && Objects.equal(packageName, testClass.packageName);
     }
 
     public String getSimpleName() {

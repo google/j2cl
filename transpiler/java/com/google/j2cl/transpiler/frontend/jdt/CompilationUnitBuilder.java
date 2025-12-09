@@ -1230,8 +1230,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           "Unexpected binding class for SimpleName: %s", binding.getClass().getName());
     }
 
-    private Variable convert(
-        org.eclipse.jdt.core.dom.SingleVariableDeclaration variableDeclaration) {
+    private Variable convert(SingleVariableDeclaration variableDeclaration) {
       boolean inNullMarkedScope = inNullMarkedScope();
       Variable variable = createVariable(variableDeclaration, inNullMarkedScope);
       if (variableDeclaration.getType() instanceof UnionType unionType) {
@@ -1378,7 +1377,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    private TypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {
+    private TypeDescriptor convert(UnionType unionType) {
       return UnionTypeDescriptor.newBuilder()
           .setUnionTypeDescriptors(
               JdtEnvironment.<org.eclipse.jdt.core.dom.Type>asTypedList(unionType.types()).stream()

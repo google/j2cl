@@ -52,8 +52,8 @@ public final class JsInteropUtils {
 
   public static JsInfo getJsInfo(VariableElement member) {
     AnnotationMirror annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(member);
-    if (member.getEnclosingElement() instanceof TypeElement) {
-      return getJsInfo(member, (TypeElement) member.getEnclosingElement(), annotation, false);
+    if (member.getEnclosingElement() instanceof TypeElement typeElement) {
+      return getJsInfo(member, typeElement, annotation, false);
     }
     return JsInfo.newBuilder()
         .setJsMemberType(JsMemberType.NONE)

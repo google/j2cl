@@ -107,16 +107,14 @@ public final class JdtAnnotationUtils {
   }
 
   private static Object convertValue(Object value) {
-    if (value instanceof StringConstant constant) {
-      return constant.stringValue();
-    } else if (value instanceof BooleanConstant constant) {
-      return constant.booleanValue();
-    } else if (value instanceof IntConstant constant) {
-      return constant.intValue();
-    } else if (value instanceof Object[] constant) {
-      return Arrays.stream(constant).map(JdtAnnotationUtils::convertValue).toArray(Object[]::new);
-    }
-    throw new IllegalStateException("Unexpected annotation attribute value type.");
+    return switch (value) {
+      case StringConstant constant -> constant.stringValue();
+      case BooleanConstant constant -> constant.booleanValue();
+      case IntConstant constant -> constant.intValue();
+      case Object[] constant ->
+          Arrays.stream(constant).map(JdtAnnotationUtils::convertValue).toArray(Object[]::new);
+      default -> throw new IllegalStateException("Unexpected annotation attribute value type.");
+    };
   }
 
   /**

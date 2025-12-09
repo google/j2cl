@@ -52,9 +52,8 @@ public class NormalizeStaticMemberQualifiers extends NormalizationPass {
 
   /*** Returns true if a member reference to a static member is qualified by an expression.  */
   private static boolean isStaticMemberReferenceWithInstanceQualifier(Expression expression) {
-    if (!(expression instanceof MemberReference memberReference)) {
-      return false;
-    }
-    return memberReference.getTarget().isStatic() && memberReference.getQualifier() != null;
+    return expression instanceof MemberReference memberReference
+        && memberReference.getTarget().isStatic()
+        && memberReference.getQualifier() != null;
   }
 }

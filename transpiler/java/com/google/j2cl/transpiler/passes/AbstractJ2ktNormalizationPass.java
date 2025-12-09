@@ -172,15 +172,13 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
   static boolean isUnboundWildcardWithRecursiveDeclaration(
       TypeDescriptor typeDescriptor, TypeVariable typeParameter) {
-    if (typeDescriptor instanceof TypeVariable typeVariable) {
-      return typeParameter.hasRecursiveDefinition()
-          && typeVariable.isWildcardOrCapture()
-          && typeVariable
-              .getUpperBoundTypeDescriptor()
-              .toNullable()
-              .equals(typeParameter.getUpperBoundTypeDescriptor().toNullable());
-    }
-    return false;
+    return typeDescriptor instanceof TypeVariable typeVariable
+        && typeParameter.hasRecursiveDefinition()
+        && typeVariable.isWildcardOrCapture()
+        && typeVariable
+            .getUpperBoundTypeDescriptor()
+            .toNullable()
+            .equals(typeParameter.getUpperBoundTypeDescriptor().toNullable());
   }
 
   /** Returns synthetic type parameter for kotlin.Array class. */

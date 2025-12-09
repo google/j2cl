@@ -107,7 +107,7 @@ public class NormalizeJsFunctionPropertyInvocations extends NormalizationPass {
         || qualifier instanceof MultiExpression
         || qualifier instanceof ConditionalExpression
         || qualifier instanceof JsDocCastExpression
-        || (qualifier instanceof MethodCall
-            && ((MethodCall) qualifier).getTarget().isJsPropertyGetter());
+        || (qualifier instanceof MethodCall methodCall
+            && methodCall.getTarget().isJsPropertyGetter());
   }
 }

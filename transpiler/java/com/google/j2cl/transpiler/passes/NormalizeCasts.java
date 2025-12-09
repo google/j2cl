@@ -121,18 +121,13 @@ public class NormalizeCasts extends NormalizationPass {
   }
 
   private static Expression skipPassThroughExpressions(Expression expression) {
-    if (expression instanceof MultiExpression) {
-      return skipPassThroughExpressions(
-          Iterables.getLast(((MultiExpression) expression).getExpressions()));
-    }
-    if (expression instanceof JsDocCastExpression) {
-      return skipPassThroughExpressions(((JsDocCastExpression) expression).getExpression());
-    }
-    if (expression instanceof PostfixExpression
-        && ((PostfixExpression) expression).getOperator() == PostfixOperator.NOT_NULL_ASSERTION) {
-      return skipPassThroughExpressions(((PostfixExpression) expression).getOperand());
-    }
-    return expression;
+    return switch (expression) {
+      case MultiExpression e -> skipPassThroughExpressions(Iterables.getLast(e.getExpressions()));
+      case JsDocCastExpression e -> skipPassThroughExpressions(e.getExpression());
+      case PostfixExpression e when e.getOperator() == PostfixOperator.NOT_NULL_ASSERTION ->
+          skipPassThroughExpressions(e.getOperand());
+      default -> expression;
+    };
   }
 
   /**
