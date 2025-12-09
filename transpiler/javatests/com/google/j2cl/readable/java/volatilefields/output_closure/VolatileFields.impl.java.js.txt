@@ -1,0 +1,47 @@
+goog.module('volatilefields.VolatileFields$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class VolatileFields extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_volatileField__volatilefields_VolatileFields = 0;
+ }
+ /** @nodts @return {!VolatileFields} */
+ static $create__() {
+  VolatileFields.$clinit();
+  let $instance = new VolatileFields();
+  $instance.$ctor__volatilefields_VolatileFields__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__volatilefields_VolatileFields__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_volatilefields_VolatileFields();
+ }
+ /** @private @nodts */
+ $init__void_$p_volatilefields_VolatileFields() {
+  this.f_volatileField__volatilefields_VolatileFields = 1;
+ }
+ /** @nodts */
+ static $clinit() {
+  VolatileFields.$clinit = () =>{};
+  VolatileFields.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof VolatileFields;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(VolatileFields, 'volatilefields.VolatileFields');
+
+exports = VolatileFields;
+
+//# sourceMappingURL=VolatileFields.js.map

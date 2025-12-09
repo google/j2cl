@@ -1,0 +1,121 @@
+;;; Code for volatilefields.VolatileFields [type definition]
+(type $volatilefields.VolatileFields (sub $java.lang.Object (struct
+ (field $vtable (ref $volatilefields.VolatileFields.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $volatileField@volatilefields.VolatileFields (mut i32))
+ ))
+)
+(type $volatilefields.VolatileFields.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+
+;;; Code for volatilefields.VolatileFields [imports]
+
+;;; Code for volatilefields.VolatileFields [static fields]
+(global $$class-initialized@volatilefields.VolatileFields (mut i32)
+ (i32.const 0)
+)
+(global $$class@volatilefields.VolatileFields (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+
+;;; Code for volatilefields.VolatileFields [vtable.init]
+(global $volatilefields.VolatileFields.vtable (ref $volatilefields.VolatileFields.vtable)
+ (struct.new $volatilefields.VolatileFields.vtable
+  (ref.func $$getClassImpl__java_lang_Class@volatilefields.VolatileFields)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+
+;;; Code for volatilefields.VolatileFields [methods]
+
+;;; VolatileFields VolatileFields.$create()
+(func $$create__@volatilefields.VolatileFields
+ (result (ref null $volatilefields.VolatileFields))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+ (local $$instance (ref null $volatilefields.VolatileFields))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (call $$clinit__void_<once>_@volatilefields.VolatileFields )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (local.set $$instance (struct.new $volatilefields.VolatileFields (global.get $volatilefields.VolatileFields.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (call $$ctor__void_$p_volatilefields_VolatileFields@volatilefields.VolatileFields (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void VolatileFields.$ctor()
+(func $$ctor__void_$p_volatilefields_VolatileFields@volatilefields.VolatileFields
+ (param $this (ref null $volatilefields.VolatileFields))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (call $$init__void_$p_volatilefields_VolatileFields@volatilefields.VolatileFields (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void VolatileFields.$init()
+(func $$init__void_$p_volatilefields_VolatileFields@volatilefields.VolatileFields
+ (param $this (ref null $volatilefields.VolatileFields))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:19:2
+  (struct.set $volatilefields.VolatileFields $volatileField@volatilefields.VolatileFields (local.get $this) (i32.const 1))
+ )
+)
+
+;;; void VolatileFields.$clinit()
+(func $$clinit__void_<once>_@volatilefields.VolatileFields
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (if (global.get $$class-initialized@volatilefields.VolatileFields)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (global.set $$class-initialized@volatilefields.VolatileFields (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/volatilefields/readable-j2wasm.js/volatilefields/VolatileFields.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> VolatileFields.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@volatilefields.VolatileFields
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@volatilefields.VolatileFields)))
+   (then
+    (return (global.get $$class@volatilefields.VolatileFields))
+   )
+  )
+  (global.set $$class@volatilefields.VolatileFields (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|volatilefiel...|__java_lang_String_<once>_@volatilefields.VolatileFields )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@volatilefields.VolatileFields))
+ )
+)
+
+;;; Class<?> VolatileFields.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@volatilefields.VolatileFields
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $volatilefields.VolatileFields))
+ (local.set $this (ref.cast (ref $volatilefields.VolatileFields) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@volatilefields.VolatileFields ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@volatilefields.VolatileFields)
