@@ -3,7 +3,11 @@ goog.module('recordclass.RecordClass$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $1LocalRecord = goog.forwardDeclare('recordclass.RecordClass.$1LocalRecord$impl');
+let $1R1 = goog.forwardDeclare('recordclass.RecordClass.$1R1$impl');
+let $1R2 = goog.forwardDeclare('recordclass.RecordClass.$1R2$impl');
 let ArrayRecord = goog.forwardDeclare('recordclass.RecordClass.ArrayRecord$impl');
 let RecordWithConstructor = goog.forwardDeclare('recordclass.RecordClass.RecordWithConstructor$impl');
 let SimpleRecord = goog.forwardDeclare('recordclass.RecordClass.SimpleRecord$impl');
@@ -41,6 +45,14 @@ class RecordClass extends j_l_Object {
   let lr = $1LocalRecord.$create__int(1);
  }
  /** @nodts */
+ static m_testRecordPatterns__void() {
+  let r = $1R1.$create__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2($1R2.$create__int__java_lang_Object(1, 'a'), 'b', $1R2.$create__int__java_lang_Object(3, 'c'));
+  let /** $1R1 */ pattern$1R1, /** * */ exp, /** $1R2 */ pattern$1R2, /** number */ i1, /** * */ exp_1, /** ?string */ s1, /** * */ s2, /** $1R2 */ n, /** $1R1 */ pattern$1R1_1, /** * */ exp_2, /** $1R2 */ pattern$1R2_1, /** number */ i1_1, /** * */ exp_3, /** ?string */ s1_1, /** * */ s2_1, /** $1R2 */ n_1;
+  let b = !$Equality.$same(r, null) && (pattern$1R1 = (/**@type {$1R1}*/ (r)), true) && ((exp = pattern$1R1.m_o__java_lang_Object(), $1R2.$isInstance(exp) && (pattern$1R2 = (/**@type {$1R2}*/ (exp)), true)) && (i1 = pattern$1R2.m_i__int(), true) && (exp_1 = pattern$1R2.m_o__java_lang_Object(), j_l_String.$isInstance(exp_1) && (s1 = (/**@type {?string}*/ (exp_1)), true))) && (s2 = pattern$1R1.m_s__java_lang_String(), true) && (n = pattern$1R1.m_n__recordclass_RecordClass_1R2(), true);
+  let o = $1R1.$create__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2($1R2.$create__int__java_lang_Object(1, 'a'), 'b', $1R2.$create__int__java_lang_Object(3, 'c'));
+  let b1 = $1R1.$isInstance(o) && (pattern$1R1_1 = (/**@type {$1R1}*/ (o)), true) && ((exp_2 = pattern$1R1_1.m_o__java_lang_Object(), $1R2.$isInstance(exp_2) && (pattern$1R2_1 = (/**@type {$1R2}*/ (exp_2)), true)) && (i1_1 = pattern$1R2_1.m_i__int(), true) && (exp_3 = pattern$1R2_1.m_o__java_lang_Object(), j_l_String.$isInstance(exp_3) && (s1_1 = (/**@type {?string}*/ (exp_3)), true))) && (s2_1 = pattern$1R1_1.m_s__java_lang_String(), true) && (n_1 = pattern$1R1_1.m_n__recordclass_RecordClass_1R2(), true);
+ }
+ /** @nodts */
  static $clinit() {
   RecordClass.$clinit = () =>{};
   RecordClass.$loadModules();
@@ -53,7 +65,11 @@ class RecordClass extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $1LocalRecord = goog.module.get('recordclass.RecordClass.$1LocalRecord$impl');
+  $1R1 = goog.module.get('recordclass.RecordClass.$1R1$impl');
+  $1R2 = goog.module.get('recordclass.RecordClass.$1R2$impl');
   ArrayRecord = goog.module.get('recordclass.RecordClass.ArrayRecord$impl');
   RecordWithConstructor = goog.module.get('recordclass.RecordClass.RecordWithConstructor$impl');
   SimpleRecord = goog.module.get('recordclass.RecordClass.SimpleRecord$impl');

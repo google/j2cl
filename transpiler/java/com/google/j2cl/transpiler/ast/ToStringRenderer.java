@@ -456,6 +456,15 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterRecordPattern(RecordPattern recordPattern) {
+        print(recordPattern.getTypeDescriptor());
+        print("(");
+        printSeparated(",", recordPattern.getNestedPatterns());
+        print(")");
+        return false;
+      }
+
+      @Override
       public boolean enterReturnStatement(ReturnStatement returnStatement) {
         print("return");
         if (returnStatement.getExpression() != null) {

@@ -21,7 +21,7 @@ import com.google.j2cl.common.visitor.Visitable;
 /** Class that represents a pattern. */
 @Visitable
 public abstract sealed class Pattern extends Node implements Cloneable<Pattern>
-    permits BindingPattern {
+    permits BindingPattern, RecordPattern {
 
   public abstract TypeDescriptor getTypeDescriptor();
 

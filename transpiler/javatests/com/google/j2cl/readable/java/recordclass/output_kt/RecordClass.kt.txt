@@ -30,6 +30,7 @@ import kotlin.Suppress
 import kotlin.intArrayOf
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class RecordClass {
  open fun main() {
@@ -51,6 +52,86 @@ open class RecordClass {
     private val value: Int
    }
    val lr: LocalRecord = LocalRecord(1)
+  }
+
+  @JvmStatic
+  private fun testRecordPatterns() {
+   class R2 internal constructor(): Record() {
+    private val i: Int
+
+    private val o: Any?
+   }
+   class R1 internal constructor(): Record() {
+    private val o: Any?
+
+    private val s: String?
+
+    private val n: R2?
+   }
+   val r: R1 = R1(
+    R2(1, "a"),
+    "b",
+    R2(3, "c"),
+   )
+   var pattern___1R1: R1? = null
+   var pattern___1R2: R2? = null
+   var pattern___1R1_1: R1? = null
+   var pattern___1R2_1: R2? = null
+   val b: Boolean = r is R1 && run {
+    pattern___1R1 = (r)
+    true
+   } && (run {
+    val exp: Any? = pattern___1R1!!.o()
+    exp is R2 && run {
+     pattern___1R2 = (exp)
+     true
+    }
+   } && run {
+    val i1: Int = pattern___1R2!!.i()
+    true
+   } && run {
+    val exp_1: Any? = pattern___1R2!!.o()
+    exp_1 is String && run {
+     val s1: String? = exp_1
+     true
+    }
+   }) && run {
+    val s2: Any? = pattern___1R1!!.s()
+    true
+   } && run {
+    val n: R2? = pattern___1R1!!.n()
+    true
+   }
+   val o: Any = R1(
+    R2(1, "a"),
+    "b",
+    R2(3, "c"),
+   )
+   val b1: Boolean = o is R1 && run {
+    pattern___1R1_1 = (o)
+    true
+   } && (run {
+    val exp_2: Any? = pattern___1R1_1!!.o()
+    exp_2 is R2 && run {
+     pattern___1R2_1 = (exp_2)
+     true
+    }
+   } && run {
+    val i1_1: Int = pattern___1R2_1!!.i()
+    true
+   } && run {
+    val exp_3: Any? = pattern___1R2_1!!.o()
+    exp_3 is String && run {
+     val s1_1: String? = exp_3
+     true
+    }
+   }) && run {
+    val s2_1: Any? = pattern___1R1_1!!.s()
+    true
+   } && run {
+    val n_1: R2? = pattern___1R1_1!!.n()
+    true
+   }
   }
  }
 

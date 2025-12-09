@@ -109,4 +109,15 @@ public class RecordClass {
     record LocalRecord(int value) {}
     LocalRecord lr = new LocalRecord(1);
   }
+
+  private static void testRecordPatterns() {
+    record R2(int i, Object o) {}
+    record R1(Object o, String s, R2 n) {}
+
+    R1 r = new R1(new R2(1, "a"), "b", new R2(3, "c"));
+    boolean b = r instanceof R1(R2(var i1, String s1), Object s2, R2 n);
+
+    Object o = new R1(new R2(1, "a"), "b", new R2(3, "c"));
+    boolean b1 = o instanceof R1(R2(var i1, String s1), Object s2, R2 n);
+  }
 }

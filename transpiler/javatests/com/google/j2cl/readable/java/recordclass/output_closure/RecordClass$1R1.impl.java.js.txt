@@ -1,0 +1,85 @@
+goog.module('recordclass.RecordClass.$1R1$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $1R2 = goog.forwardDeclare('recordclass.RecordClass.$1R2$impl');
+
+/**
+ * @final
+ */
+class $1R1 extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {*} @nodts*/
+  this.f_o__recordclass_RecordClass_1R1_;
+  /**@type {?string} @nodts*/
+  this.f_s__recordclass_RecordClass_1R1_;
+  /**@type {$1R2} @nodts*/
+  this.f_n__recordclass_RecordClass_1R1_;
+ }
+ /** @nodts @return {!$1R1} */
+ static $create__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2(/** * */ arg0, /** ?string */ arg1, /** $1R2 */ arg2) {
+  $1R1.$clinit();
+  let $instance = new $1R1();
+  $instance.$ctor__recordclass_RecordClass_1R1__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2__void(arg0, arg1, arg2);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_1R1__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2__void(/** * */ arg0, /** ?string */ arg1, /** $1R2 */ arg2) {
+  this.$ctor__java_lang_Record__void();
+  this.f_o__recordclass_RecordClass_1R1_ = arg0;
+  this.f_s__recordclass_RecordClass_1R1_ = arg1;
+  this.f_n__recordclass_RecordClass_1R1_ = arg2;
+ }
+ /** @nodts @return {*} */
+ m_o__java_lang_Object() {
+  return this.f_o__recordclass_RecordClass_1R1_;
+ }
+ /** @nodts @return {?string} */
+ m_s__java_lang_String() {
+  return this.f_s__recordclass_RecordClass_1R1_;
+ }
+ /** @nodts @return {$1R2} */
+ m_n__recordclass_RecordClass_1R2() {
+  return this.f_n__recordclass_RecordClass_1R1_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ arg0) {
+  let /** $1R1 */ $other;
+  if (!($1R1.$isInstance(arg0) && ($other = (/**@type {$1R1}*/ (arg0)), true))) {
+   return false;
+  }
+  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_o__recordclass_RecordClass_1R1_, this.f_s__recordclass_RecordClass_1R1_, this.f_n__recordclass_RecordClass_1R1_], [$other.f_o__recordclass_RecordClass_1R1_, $other.f_s__recordclass_RecordClass_1R1_, $other.f_n__recordclass_RecordClass_1R1_]);
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_o__recordclass_RecordClass_1R1_, this.f_s__recordclass_RecordClass_1R1_, this.f_n__recordclass_RecordClass_1R1_]);
+ }
+ /** @override @return {?string} */
+ toString() {
+  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_o__recordclass_RecordClass_1R1_, this.f_s__recordclass_RecordClass_1R1_, this.f_n__recordclass_RecordClass_1R1_]);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1R1.$clinit = () =>{};
+  $1R1.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1R1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Arrays = goog.module.get('java.util.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata($1R1, 'recordclass.RecordClass$1R1');
+
+exports = $1R1;
+
+//# sourceMappingURL=RecordClass$1R1.js.map

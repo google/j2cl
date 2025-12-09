@@ -14,7 +14,7 @@ integration_test(
     enable_kt = False,
     experimental_java_frontend = "javac",
     javacopts = [
-        "-source 16",
-        "-target 16",
+        "-source 21",
+        "-target 21",
     ],
 )

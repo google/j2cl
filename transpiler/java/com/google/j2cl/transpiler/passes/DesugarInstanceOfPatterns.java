@@ -23,9 +23,13 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Pattern;
+import com.google.j2cl.transpiler.ast.RecordPattern;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableReference;
@@ -56,6 +60,8 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
     return switch (pattern) {
       case BindingPattern bindingPattern ->
           desugarBindingPattern(sourcePosition, expression, bindingPattern);
+      case RecordPattern recordPattern ->
+          desugarRecordPattern(sourcePosition, expression, recordPattern);
     };
   }
 
@@ -121,5 +127,58 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
                 .build(),
             BooleanLiteral.get(true))
         .build();
+  }
+
+  private static Expression desugarRecordPattern(
+      SourcePosition sourcePosition, Expression expression, RecordPattern recordPattern) {
+    // Transform the record pattern `e instanceof R(p1, ...)` into the desugared from of
+    // `e instanceof R r &&  <nested pattern expressions>`.
+
+    Variable patternVariable =
+        Variable.newBuilder()
+            .setName("pattern" + recordPattern.getTypeDescriptor().getSimpleSourceName())
+            .setTypeDescriptor(recordPattern.getTypeDescriptor())
+            .setFinal(true)
+            .build();
+
+    // Say we are translating something like exp instanceof Record(T t,...)
+
+    // exp instanceof Record r && ...
+    Expression condition =
+        desugarPattern(sourcePosition, expression, new BindingPattern(patternVariable));
+
+    for (int i = 0; i < recordPattern.getNestedPatterns().size(); i++) {
+      MethodDescriptor accessor = recordPattern.getComponentAccessorsDescriptors().get(i);
+      Pattern nestedPattern = recordPattern.getNestedPatterns().get(i);
+      MethodCall accessorCall =
+          MethodCall.Builder.from(accessor).setQualifier(patternVariable.createReference()).build();
+
+      // Match the record property using its accessor to the corresponding pattern form.
+      condition =
+          condition.infixAnd(
+              isUnconditionalPattern(accessorCall, nestedPattern)
+                  // An unconditional pattern does not perform an instanceof, just assigns directly
+                  // the pattern variable since they are compatible types. Unconditional patterns
+                  // allow nulls.
+                  //
+                  // (t = r.px(), true)
+                  ? assignPatternVariableReturningTrue(
+                      ((BindingPattern) nestedPattern).getVariable(), accessorCall)
+                  // Or a regular pattern which we desugar immediately.
+                  // r.px() instanceof T t
+                  : desugarPattern(sourcePosition, accessorCall, nestedPattern));
+    }
+    return condition;
+  }
+
+  /** Whether the pattern is always matched and allows nulls (JLS 14.30.3). */
+  private static boolean isUnconditionalPattern(Expression expression, Pattern nestedPattern) {
+    // Per JLS 14.30.3 record patterns cannot be unconditional
+    TypeDescriptor patternTypeDescriptor = nestedPattern.getTypeDescriptor();
+    return nestedPattern instanceof BindingPattern
+        // And the variable they declare has to be either a primitive or a supertype of the
+        // expression type (only considering their erasures)
+        && (patternTypeDescriptor.isPrimitive()
+            || expression.getTypeDescriptor().isAssignableTo(patternTypeDescriptor));
   }
 }

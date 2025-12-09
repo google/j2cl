@@ -72,6 +72,7 @@ import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.RecordPattern;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -105,6 +106,7 @@ import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
+import com.sun.tools.javac.code.Symbol.RecordComponent;
 import com.sun.tools.javac.code.Symbol.TypeVariableSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
 import com.sun.tools.javac.code.Type.MethodType;
@@ -142,6 +144,7 @@ import com.sun.tools.javac.tree.JCTree.JCNewArray;
 import com.sun.tools.javac.tree.JCTree.JCNewClass;
 import com.sun.tools.javac.tree.JCTree.JCParens;
 import com.sun.tools.javac.tree.JCTree.JCPattern;
+import com.sun.tools.javac.tree.JCTree.JCRecordPattern;
 import com.sun.tools.javac.tree.JCTree.JCReturn;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
 import com.sun.tools.javac.tree.JCTree.JCSwitch;
@@ -878,9 +881,30 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return switch (pattern) {
       case JCBindingPattern bindingPattern ->
           new BindingPattern(createVariable(bindingPattern.var, false));
+      case JCRecordPattern recordPattern ->
+          new RecordPattern(
+              environment.createDeclaredTypeDescriptor(getRecordType(recordPattern)),
+              getAccessorsMethodDescriptor(recordPattern),
+              recordPattern.getNestedPatterns().stream()
+                  .map(this::convertPattern)
+                  .collect(toCollection(ArrayList::new)));
       case null -> null;
       default -> throw new IllegalArgumentException("Unexpected pattern: " + pattern);
     };
+  }
+
+  // TODO(b/465778762): Consider whether the accessors, which are members of the type descriptor,
+  // can be be provided in order by an api on DeclaredTypeDescriptor.
+  private List<MethodDescriptor> getAccessorsMethodDescriptor(JCRecordPattern recordPattern) {
+    return ((ClassSymbol) getRecordType(recordPattern).tsym)
+        .getRecordComponents().stream()
+            .map(RecordComponent::getAccessor)
+            .map(environment::createMethodDescriptor)
+            .collect(toCollection(ArrayList::new));
+  }
+
+  private static com.sun.tools.javac.code.Type getRecordType(JCRecordPattern recordPattern) {
+    return ((JCExpression) recordPattern.getDeconstructor()).type;
   }
 
   private Expression convertLambda(JCLambda expression) {
