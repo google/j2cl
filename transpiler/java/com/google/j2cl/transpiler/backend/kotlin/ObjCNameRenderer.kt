@@ -45,6 +45,21 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private val isJ2ObjCInteropEnabled: Boolean
     get() = nameRenderer.environment.isJ2ObjCInteropEnabled
 
+  fun objectiveCNameAnnotationSource(name: String): Source =
+    annotation(
+      nameRenderer.topLevelQualifiedNameSource("com.google.j2objc.annotations.ObjectiveCName"),
+      literal(name),
+    )
+
+  fun objectiveCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+    when {
+      !isJ2ObjCInteropEnabled -> Source.EMPTY
+      hiddenFromObjCMapping.contains(typeDeclaration) -> hiddenFromObjCAnnotationSource()
+      needsObjCNameAnnotation(typeDeclaration) ->
+        objectiveCNameAnnotationSource(typeDeclaration.objCNameWithoutPrefix)
+      else -> Source.EMPTY
+    }
+
   fun hiddenFromObjCAnnotationSource(): Source =
     annotation(
       nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
