@@ -20,8 +20,10 @@ import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertSame;
+import static com.google.j2cl.integration.testing.Asserts.assertThrows;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 public class Main {
 
@@ -38,6 +40,8 @@ public class Main {
     testAccessorBridges();
     testRecordPatterns();
     testUnconditionalPatterns();
+    testRecordPatternEvaluationOrder();
+    testExceptionInPattern();
   }
 
   public static void testAccessors() {
@@ -411,6 +415,16 @@ public class Main {
   }
 
   private static void testUnconditionalPatterns() {
+    // TODO(b/466212492): Remove the stripping once the bug is fixed.
+  }
+
+  private static String sideEffectAccumulator;
+
+  private static void testRecordPatternEvaluationOrder() {
+    // TODO(b/466212492): Remove the stripping once the bug is fixed.
+  }
+
+  private static void testExceptionInPattern() {
     // TODO(b/466212492): Remove the stripping once the bug is fixed.
   }
 }
