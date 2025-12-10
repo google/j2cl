@@ -6,4 +6,7 @@ JVM_FLAGS = [
     "-Xss7M",
     # Disable bytecode verification to save from class-loading time.
     "-Xverify:none",
+    # Disable UL logging to stdout, which would break the worker protocol.
+    "-Xlog:disable",
+    "-Xlog:all=warning:stderr",
 ]
