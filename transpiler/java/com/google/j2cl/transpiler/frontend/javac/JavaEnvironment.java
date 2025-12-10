@@ -653,6 +653,7 @@ class JavaEnvironment {
     }
 
     boolean isFinal = isFinal(variableElement);
+    boolean isVolatile = isVolatile(variableElement);
     return FieldDescriptor.newBuilder()
         .setDeclarationDescriptor(declarationFieldDescriptor)
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
@@ -668,6 +669,7 @@ class JavaEnvironment {
         .setConstantValue(
             constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
         .setEnumConstant(isEnumConstant)
+        .setVolatile(isVolatile)
         .build();
   }
 
@@ -1695,6 +1697,10 @@ class JavaEnvironment {
 
   private static boolean isFinal(Element element) {
     return element.getModifiers().contains(Modifier.FINAL);
+  }
+
+  private static boolean isVolatile(Element element) {
+    return element.getModifiers().contains(Modifier.VOLATILE);
   }
 
   public static boolean isStatic(Element element) {

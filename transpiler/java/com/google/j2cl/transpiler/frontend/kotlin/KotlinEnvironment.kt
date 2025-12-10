@@ -745,6 +745,7 @@ internal class KotlinEnvironment(
         // type.
         constantValue = fieldTypeDescriptor.defaultValue
       }
+      val isVolatile = irField.annotations.hasAnnotation(FqName("kotlin.concurrent.Volatile"))
 
       FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irField))
@@ -762,6 +763,7 @@ internal class KotlinEnvironment(
         .setStatic(irField.isStatic || irField.parent !is IrDeclaration)
         .setOriginalJsInfo(irField.getJsInfo())
         .setAnnotations(createAnnotations(irField))
+        .setVolatile(isVolatile)
         .build()
     }
   }

@@ -625,6 +625,10 @@ public class JdtEnvironment {
     return Modifier.isFinal(binding.getModifiers());
   }
 
+  private static boolean isVolatile(IBinding binding) {
+    return Modifier.isVolatile(binding.getModifiers());
+  }
+
   public static boolean isStatic(IBinding binding) {
     if (binding instanceof IVariableBinding variableBinding) {
       if (!variableBinding.isField() || variableBinding.getDeclaringClass().isInterface()) {
@@ -753,6 +757,7 @@ public class JdtEnvironment {
       thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
     }
     boolean isFinal = isFinal(variableBinding);
+    boolean isVolatile = isVolatile(variableBinding);
     fieldDescriptor =
         FieldDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
@@ -769,6 +774,7 @@ public class JdtEnvironment {
                 constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
             .setDeclarationDescriptor(declarationFieldDescriptor)
             .setEnumConstant(variableBinding.isEnumConstant())
+            .setVolatile(isVolatile)
             .build();
     cachedFieldDescriptorByVariableBinding.put(variableBinding, fieldDescriptor);
     return fieldDescriptor;

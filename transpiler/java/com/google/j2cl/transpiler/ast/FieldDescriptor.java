@@ -56,6 +56,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   @Override
   public abstract boolean isEnumConstant();
 
+  public abstract boolean isVolatile();
+
   @Override
   public abstract FieldOrigin getOrigin();
 
@@ -233,6 +235,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setCompileTimeConstant(false)
         .setStatic(false)
         .setFinal(false)
+        .setVolatile(false)
         .setSynthetic(false)
         .setEnumConstant(false)
         .setOrigin(FieldOrigin.SOURCE);
@@ -262,6 +265,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);
+
+    public abstract Builder setVolatile(boolean isVolatile);
 
     public abstract Builder setName(String name);
 
