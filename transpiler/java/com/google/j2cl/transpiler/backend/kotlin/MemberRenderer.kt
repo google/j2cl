@@ -153,6 +153,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
     return newLineSeparated(
       Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
+      memberDescriptorRenderer.volatileAnnotationSource(fieldDescriptor),
       objCNameRenderer.objCAnnotationSource(fieldDescriptor),
       jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field),
       spaceSeparated(

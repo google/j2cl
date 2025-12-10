@@ -51,6 +51,9 @@ internal data class AnnotationRenderer(val nameRenderer: NameRenderer) {
       },
     )
 
+  fun volatileAnnotationSource(): Source =
+    annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.concurrent.Volatile"))
+
   // TODO(b/444430700): Filter default values when they are supported.
   private fun Annotation.singleValueOrNull(): AnnotationValue? =
     values.entries.singleOrNull()?.takeIf { it.key == "value" }?.value

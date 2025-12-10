@@ -37,6 +37,9 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
   private val environment: Environment
     get() = nameRenderer.environment
 
+  private val annotationRenderer: AnnotationRenderer
+    get() = AnnotationRenderer(nameRenderer)
+
   fun methodKindAndNameSource(methodDescriptor: MethodDescriptor): Source =
     if (methodDescriptor.isConstructor) {
       CONSTRUCTOR_KEYWORD
@@ -82,6 +85,12 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
           ),
         )
       }
+      .orEmpty()
+
+  fun volatileAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
+    fieldDescriptor
+      .takeIf { it.isVolatile }
+      ?.let { annotationRenderer.volatileAnnotationSource() }
       .orEmpty()
 
   fun visibilityModifierSource(memberDescriptor: MemberDescriptor): Source =

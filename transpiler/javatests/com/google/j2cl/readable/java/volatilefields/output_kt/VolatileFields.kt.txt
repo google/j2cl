@@ -22,9 +22,11 @@ package volatilefields
 import javaemul.lang.*
 import kotlin.Int
 import kotlin.Suppress
+import kotlin.concurrent.Volatile
 import kotlin.jvm.JvmField
 
 open class VolatileFields {
  @JvmField
+ @Volatile
  var volatileField: Int = 1
 }
