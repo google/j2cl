@@ -66,9 +66,9 @@ import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitF
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.ImplementStringConcatenation;
-import com.google.j2cl.transpiler.passes.ImplementSwitchExpressionsViaIifes;
 import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
 import com.google.j2cl.transpiler.passes.ImplementSystemGetProperty;
+import com.google.j2cl.transpiler.passes.ImplementYieldStatement;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
 import com.google.j2cl.transpiler.passes.InsertCastForLowerBounds;
@@ -318,6 +318,11 @@ public enum Backend {
           // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
           ExpandCompoundAssignments::new,
           InsertErasureTypeSafetyCasts::new,
+
+          // Normalize switch constructs before coersions and conversions.
+          AddSwitchExpressionsExhaustivenessCheck::new,
+          NormalizeSwitchConstructs::new,
+
           // Runs before unboxing conversion.
           InsertStringConversions::new,
           InsertNarrowingReferenceConversions::new,
@@ -334,12 +339,10 @@ public enum Backend {
           InsertJsEnumBoxingAndUnboxingConversions::new,
           NormalizeArrayLiterals::new, // Needs to run after conversions and coercions.
           RemoveUnneededCasts::new,
-          AddSwitchExpressionsExhaustivenessCheck::new,
-          ImplementSwitchExpressionsViaIifes::new,
-          NormalizeSwitchConstructs::new,
           NormalizeArrayAccesses::new,
           ImplementAssertStatements::new,
           ImplementSynchronizedStatements::new,
+          ImplementYieldStatement::new,
           NormalizeFieldInitialization::new,
           ImplementInstanceInitialization::new,
           NormalizeConstructors::new,

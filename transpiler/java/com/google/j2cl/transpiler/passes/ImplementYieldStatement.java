@@ -17,24 +17,24 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.EmbeddedStatement;
-import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
-import com.google.j2cl.transpiler.ast.SwitchExpression;
-import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 
 /**
- * Implements switch expressions using EmbeddedStatements which are emitted as IIFEs.
+ * Implements {@code yield} statements that return values from IIFEs resulting from enclosing {@code
+ * EmbeddedStatements}.
  *
- * <p>In JavaScript switch constructs are only allowed as statements. This pass converts the switch
- * expression into switch statement and wraps it into an IIFE which allows us to execute a statement
- * as if it were an expression.
+ * <p>These are the result of translating switch constructs, which n JavaScript are only allowed as
+ * statements, to embedded statements. This pass is the final step which converts the {@code yield}
+ * statement into the {@code return} for the IIFE.
  */
-public class ImplementSwitchExpressionsViaIifes extends NormalizationPass {
+public class ImplementYieldStatement extends NormalizationPass {
 
-  // Since there is no construct that is equivalent to a switch expression in JavaScript,
-  // expressions like
+  // For constructs where we need to have statements embedded in expression, the statements are
+  // enclosed by `EmbeddedStatement` and the resulting value is returned using `yield`. And since
+  // in JS `EmbeddedStatements` are emitted as IIFE the `yield` statement just needs to be converted
+  // to `return`. This translation is used, for example, for switch constructs where expressions
+  // like:
   //
   //    int x = switch(x) {
   //        case 1, 3 -> 3;
@@ -63,17 +63,6 @@ public class ImplementSwitchExpressionsViaIifes extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
-
-          @Override
-          public Node rewriteSwitchExpression(SwitchExpression switchExpression) {
-            return EmbeddedStatement.newBuilder()
-                .setTypeDescriptor(switchExpression.getTypeDescriptor())
-                .setStatement(
-                    SwitchStatement.Builder.from(switchExpression)
-                        .setSourcePosition(switchExpression.getSourcePosition())
-                        .build())
-                .build();
-          }
 
           @Override
           public ReturnStatement rewriteYieldStatement(YieldStatement yieldStatement) {

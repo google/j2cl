@@ -15,13 +15,13 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.EmbeddedStatement;
@@ -103,24 +103,36 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
             Expression expression = switchStatement.getExpression();
             TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
-            if ((TypeDescriptors.isJavaLangString(expressionTypeDescriptor)
-                || (AstUtils.isJsEnumBoxingSupported() && expressionTypeDescriptor.isJsEnum()))) {
+            boolean isBoxableJsEnum =
+                AstUtils.isJsEnumBoxingSupported() && expressionTypeDescriptor.isJsEnum();
+
+            if (!switchStatement.allowsNulls()
+                && (TypeDescriptors.isJavaLangString(expressionTypeDescriptor)
+                    || isBoxableJsEnum
+                    || TypeDescriptors.isBoxedType(expressionTypeDescriptor))) {
               // Switch on strings and unboxed JsEnums should throw on null, unless they are
               // explicitly handled.
-              return !switchStatement.allowsNulls()
-                  ? switchStatement.toBuilder()
-                      .setExpression(
-                          RuntimeMethods.createCheckNotNullCall(switchStatement.getExpression()))
-                      .build()
-                  : switchStatement;
+              return switchStatement.toBuilder()
+                  .setExpression(
+                      TypeDescriptors.isBoxedType(expressionTypeDescriptor)
+                              && TypeDescriptors.isNumericPrimitive(
+                                  expressionTypeDescriptor.toUnboxedType())
+                          // Trigger unboxing which will also implicitly accomplish the null check.
+                          ? CastExpression.newBuilder()
+                              .setCastTypeDescriptor(PrimitiveTypes.INT)
+                              .setExpression(expression)
+                              .build()
+                          : RuntimeMethods.createCheckNotNullCall(switchStatement.getExpression()))
+                  .build();
             }
 
-            if (expressionTypeDescriptor.isEnum()) {
+            // Boxable JsEnums are left untouched since they are handled directly in JavaScript
+            // (which is the only backend that currently supports them). Regular enum switches are
+            // converted to integer switches on their ordinals.
+            if (expressionTypeDescriptor.isEnum() && !isBoxableJsEnum) {
               return convertEnumSwitchStatement(switchStatement);
             }
 
-            checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(expressionTypeDescriptor));
-            // Switch on primitives do not require conversions.
             return switchStatement;
           }
         });

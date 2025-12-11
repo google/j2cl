@@ -41,7 +41,6 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
@@ -212,8 +211,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
 
       if (caseExpression instanceof NumberLiteral literal) {
         caseExpressions.set(
-            i,
-            new NumberLiteral((PrimitiveTypeDescriptor) targetTypeDescriptor, literal.getValue()));
+            i, new NumberLiteral(targetTypeDescriptor.toUnboxedType(), literal.getValue()));
       } else if (!caseExpression.getTypeDescriptor().isSameBaseType(targetTypeDescriptor)) {
         caseExpressions.set(
             i,

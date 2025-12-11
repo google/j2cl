@@ -194,17 +194,11 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     protected Expression rewriteSwitchSubjectContext(Expression expression, boolean allowsNulls) {
       TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
 
-      if (!TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor)) {
-        return allowsNulls
-            ? rewriteTypeConversionContext(
-                typeDescriptor, expression.getDeclaredTypeDescriptor(), expression)
-            : rewriteNonNullTypeConversionContext(
-                typeDescriptor, expression.getDeclaredTypeDescriptor(), expression);
-      }
-      return (TypeDescriptors.isJavaLangBoolean(typeDescriptor.toRawTypeDescriptor())
-              || TypeDescriptors.isPrimitiveBoolean(typeDescriptor))
-          ? rewriteBooleanConversionContext(expression)
-          : rewriteUnaryNumericPromotionContext(expression);
+      return allowsNulls
+          ? rewriteTypeConversionContext(
+              typeDescriptor, expression.getDeclaredTypeDescriptor(), expression)
+          : rewriteNonNullTypeConversionContext(
+              typeDescriptor, expression.getDeclaredTypeDescriptor(), expression);
     }
 
     /** An {@code expression} that is used as a qualifier of a member of a particular type. */
