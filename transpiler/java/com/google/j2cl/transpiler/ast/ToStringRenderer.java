@@ -304,11 +304,7 @@ class ToStringRenderer {
       public boolean enterInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
         accept(instanceOfExpression.getExpression());
         print(" instanceof ");
-        if (instanceOfExpression.getPattern() != null) {
-          accept(instanceOfExpression.getPattern());
-        } else {
-          print(instanceOfExpression.getTestTypeDescriptor());
-        }
+        print(instanceOfExpression.getTestTypeDescriptor());
         return false;
       }
 
@@ -438,6 +434,14 @@ class ToStringRenderer {
       @Override
       public boolean enterNode(Node node) {
         print("<node>");
+        return false;
+      }
+
+      @Override
+      public boolean enterPatternMatchExpression(PatternMatchExpression patternMatchExpression) {
+        accept(patternMatchExpression.getExpression());
+        print(" instanceof ");
+        accept(patternMatchExpression.getPattern());
         return false;
       }
 

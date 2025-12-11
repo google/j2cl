@@ -32,10 +32,10 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IfStatement;
-import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.PatternMatchExpression;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -227,7 +227,7 @@ public class ImplementRecordClasses extends NormalizationPass {
               // if (!(other instanceof RecordClassType $other)) return false;
               IfStatement.newBuilder()
                   .setConditionExpression(
-                      InstanceOfExpression.newBuilder()
+                      PatternMatchExpression.newBuilder()
                           .setExpression(parameter.createReference())
                           .setPattern(new BindingPattern(otherVariable))
                           .build()

@@ -22,26 +22,26 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
-/** Class for instanceof Expression. */
+/** Class for matching an expression against a pattern. */
 @Visitable
-public class InstanceOfExpression extends Expression implements HasSourcePosition {
+public class PatternMatchExpression extends Expression implements HasSourcePosition {
   @Visitable Expression expression;
-  @Visitable TypeDescriptor testTypeDescriptor;
+  @Visitable Pattern pattern;
   private final SourcePosition sourcePosition;
 
-  private InstanceOfExpression(
-      SourcePosition sourcePosition, Expression expression, TypeDescriptor testTypeDescriptor) {
+  private PatternMatchExpression(
+      SourcePosition sourcePosition, Expression expression, Pattern pattern) {
     this.sourcePosition = sourcePosition;
     this.expression = checkNotNull(expression);
-    this.testTypeDescriptor = checkNotNull(testTypeDescriptor);
+    this.pattern = checkNotNull(pattern);
   }
 
   public Expression getExpression() {
     return expression;
   }
 
-  public TypeDescriptor getTestTypeDescriptor() {
-    return testTypeDescriptor;
+  public Pattern getPattern() {
+    return pattern;
   }
 
   @Override
@@ -61,13 +61,13 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   }
 
   @Override
-  public InstanceOfExpression clone() {
-    return new InstanceOfExpression(sourcePosition, expression.clone(), testTypeDescriptor);
+  public PatternMatchExpression clone() {
+    return new PatternMatchExpression(sourcePosition, expression.clone(), AstUtils.clone(pattern));
   }
 
   @Override
   Node acceptInternal(Processor processor) {
-    return Visitor_InstanceOfExpression.visit(processor, this);
+    return Visitor_PatternMatchExpression.visit(processor, this);
   }
 
   @Override
@@ -82,16 +82,16 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   /** A Builder for InstanceOfExpression. */
   public static class Builder {
     private Expression expression;
-    private TypeDescriptor testTypeDescriptor;
+    private Pattern pattern;
     private SourcePosition sourcePosition;
 
-    public static Builder from(InstanceOfExpression instanceOfExpression) {
+    public static Builder from(PatternMatchExpression patternMatchExpression) {
       return new Builder()
-          .setExpression(instanceOfExpression.getExpression())
-          .setTestTypeDescriptor(instanceOfExpression.getTestTypeDescriptor())
-          .setSourcePosition(instanceOfExpression.getSourcePosition());
+          .setExpression(patternMatchExpression.getExpression())
+          .setPattern(patternMatchExpression.getPattern())
+          .setSourcePosition(patternMatchExpression.getSourcePosition());
     }
-    
+
     @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
@@ -105,13 +105,13 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
     }
 
     @CanIgnoreReturnValue
-    public Builder setTestTypeDescriptor(TypeDescriptor testTypeDescriptor) {
-      this.testTypeDescriptor = testTypeDescriptor;
+    public Builder setPattern(Pattern pattern) {
+      this.pattern = pattern;
       return this;
     }
 
-    public InstanceOfExpression build() {
-      return new InstanceOfExpression(sourcePosition, expression, testTypeDescriptor);
+    public PatternMatchExpression build() {
+      return new PatternMatchExpression(sourcePosition, expression, pattern);
     }
   }
 }

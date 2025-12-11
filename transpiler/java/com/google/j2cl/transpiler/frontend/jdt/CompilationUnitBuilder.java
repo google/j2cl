@@ -70,7 +70,7 @@ import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.Pattern;
+import com.google.j2cl.transpiler.ast.PatternMatchExpression;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
@@ -765,20 +765,22 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    private Expression convert(org.eclipse.jdt.core.dom.InstanceofExpression expression) {
-      Expression e = convert(expression.getLeftOperand());
-      TypeDescriptor typeDescriptor =
-          environment.createTypeDescriptor(expression.getRightOperand().resolveBinding());
-      Pattern pattern =
-          expression.getPatternVariable() == null
-              ? null
-              : new BindingPattern(convert(expression.getPatternVariable()));
-      return InstanceOfExpression.newBuilder()
-          .setSourcePosition(getSourcePosition(expression))
-          .setExpression(e)
-          .setTestTypeDescriptor(pattern == null ? typeDescriptor : null)
-          .setPattern(pattern)
-          .build();
+    private Expression convert(org.eclipse.jdt.core.dom.InstanceofExpression instanceofExpression) {
+      SourcePosition sourcePosition = getSourcePosition(instanceofExpression);
+      Expression expression = convert(instanceofExpression.getLeftOperand());
+      return instanceofExpression.getPatternVariable() == null
+          ? InstanceOfExpression.newBuilder()
+              .setSourcePosition(sourcePosition)
+              .setExpression(expression)
+              .setTestTypeDescriptor(
+                  environment.createTypeDescriptor(
+                      instanceofExpression.getRightOperand().resolveBinding()))
+              .build()
+          : PatternMatchExpression.newBuilder()
+              .setSourcePosition(sourcePosition)
+              .setExpression(expression)
+              .setPattern(new BindingPattern(convert(instanceofExpression.getPatternVariable())))
+              .build();
     }
 
     private Expression convert(LambdaExpression expression) {

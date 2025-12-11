@@ -68,6 +68,7 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Pattern;
+import com.google.j2cl.transpiler.ast.PatternMatchExpression;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
@@ -865,16 +866,21 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .build();
   }
 
-  private InstanceOfExpression convertInstanceOf(JCInstanceOf expression) {
-    return InstanceOfExpression.newBuilder()
-        .setSourcePosition(getSourcePosition(expression))
-        .setExpression(convertExpression(expression.getExpression()))
-        .setPattern(convertPattern(expression.getPattern()))
-        .setTestTypeDescriptor(
-            expression.getPattern() != null
-                ? null
-                : environment.createTypeDescriptor(expression.getType().type))
-        .build();
+  private Expression convertInstanceOf(JCInstanceOf instanceofExpression) {
+    SourcePosition sourcePosition = getSourcePosition(instanceofExpression);
+    Expression expression = convertExpression(instanceofExpression.getExpression());
+    return instanceofExpression.getPattern() == null
+        ? InstanceOfExpression.newBuilder()
+            .setSourcePosition(sourcePosition)
+            .setExpression(expression)
+            .setTestTypeDescriptor(
+                environment.createTypeDescriptor(instanceofExpression.getType().type))
+            .build()
+        : PatternMatchExpression.newBuilder()
+            .setSourcePosition(sourcePosition)
+            .setExpression(expression)
+            .setPattern(convertPattern(instanceofExpression.getPattern()))
+            .build();
   }
 
   private Pattern convertPattern(JCPattern pattern) {
