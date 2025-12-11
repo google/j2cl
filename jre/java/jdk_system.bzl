@@ -25,20 +25,21 @@ VERSION=$("$JAVABASE/bin/jlink" --version)
 rm -rf "$MODULE_DIR"
 mkdir "$TMP/classes" "$TMP/jmod"
 (cd $TMP/classes && "$WD/{zip_tool_path}" x "$WD/{bootclasspath_path}")
+
+RELEASE="$JAVABASE/release"
+IMPLEMENTOR="$(sed -n -E 's/IMPLEMENTOR="(.*)"/\\1/p' "$RELEASE")"
+JAVA_RUNTIME_VERSION="$(sed -n -E 's/JAVA_RUNTIME_VERSION="(.*)"/\\1/p' "$RELEASE")"
+JAVA_VERSION_DATE="$(sed -n -E 's/JAVA_VERSION_DATE="(.*)"/\\1/p' "$RELEASE")"
+
+RESOURCE_DIR="$TMP/classes/jdk/internal/misc/resources"
+mkdir -p "$RESOURCE_DIR"
+echo "$IMPLEMENTOR-$JAVA_RUNTIME_VERSION-$JAVA_VERSION_DATE" > "$RESOURCE_DIR/release.txt"
+
 "$JAVABASE/bin/jmod" create \\
   --module-version $VERSION \\
   --target-platform linux-amd64 \\
   --class-path "$TMP/classes" \\
   "$TMP/jmod/module.jmod"
-
-RELEASE="$JAVABASE/release"
-IMPLEMENTOR="$(sed -n -E 's/IMPLEMENTOR="(.*)"/\1/p' "$RELEASE")"
-JAVA_RUNTIME_VERSION="$(sed -n -E 's/JAVA_RUNTIME_VERSION="(.*)"/\1/p' "$RELEASE")"
-JAVA_VERSION_DATE="$(sed -n -E 's/JAVA_VERSION_DATE="(.*)"/\1/p' "$RELEASE")"
-
-RESOURCE_DIR="$TMP/classes/jdk/internal/misc/resources"
-mkdir -p "$RESOURCE_DIR"
-echo "$IMPLEMENTOR-$JAVA_RUNTIME_VERSION-$JAVA_VERSION_DATE" > "$RESOURCE_DIR/release.txt"
 
 "$JAVABASE/bin/jlink" \\
     --module-path "$TMP/jmod" \\
