@@ -165,12 +165,4 @@ public class Asserts extends AssertsBase {
   private static String getNotEqualsDefaultFailureMessage(Object expected, Object actual) {
     return getFailureMessage(expected, actual, "should not be equal to");
   }
-  
-  public static void assertThrowsArithmeticException(JsRunnable runnable) {
-    assertThrows(ArithmeticException.class, runnable);
-  }
-
-  public static void assertThrowsArrayStoreException(JsRunnable runnable) {
-    assertThrows(ArrayStoreException.class, runnable);
-  }
 }

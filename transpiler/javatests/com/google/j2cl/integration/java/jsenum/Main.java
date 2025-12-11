@@ -17,7 +17,6 @@ package jsenum;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
-import static com.google.j2cl.integration.testing.Asserts.assertThrows;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
@@ -99,8 +98,7 @@ public class Main {
         break;
     }
 
-    assertThrows(
-        NullPointerException.class,
+    assertThrowsNullPointerException(
         () -> {
           NativeEnum nullJsEnum = null;
           switch (nullJsEnum) {
@@ -190,8 +188,7 @@ public class Main {
         break;
     }
 
-    assertThrows(
-        NullPointerException.class,
+    assertThrowsNullPointerException(
         () -> {
           StringNativeEnum nullJsEnum = null;
           switch (nullJsEnum) {
@@ -358,8 +355,7 @@ public class Main {
     assertFalse(v.equals(ONE_DOUBLE));
     assertFalse(PlainJsEnum.ZERO.equals(OtherPlainJsEnum.NONE));
 
-    assertThrows(
-        NullPointerException.class,
+    assertThrowsNullPointerException(
         () -> {
           PlainJsEnum nullJsEnum = null;
           nullJsEnum.equals(PlainJsEnum.ZERO);
@@ -378,8 +374,7 @@ public class Main {
     assertTrue(v.ordinal() == 1);
     assertTrue(PlainJsEnum.ONE.compareTo(v) == 0);
     assertTrue(PlainJsEnum.ZERO.compareTo(v) < 0);
-    assertThrows(
-        NullPointerException.class,
+    assertThrowsNullPointerException(
         () -> {
           PlainJsEnum nullJsEnum = null;
           nullJsEnum.compareTo(PlainJsEnum.ZERO);
@@ -520,8 +515,7 @@ public class Main {
     assertTrue(v.equals(StringJsEnum.HELLO));
     assertFalse(v.equals(HELLO_STRING));
 
-    assertThrows(
-        NullPointerException.class,
+    assertThrowsNullPointerException(
         () -> {
           StringJsEnum nullJsEnum = null;
           nullJsEnum.equals(StringJsEnum.HELLO);

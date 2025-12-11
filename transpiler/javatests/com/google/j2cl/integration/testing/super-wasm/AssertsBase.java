@@ -50,11 +50,24 @@ class AssertsBase {
   public static void assertThrowsClassCastException(
       JsRunnable runnable, String qualifiedBinaryName) {}
 
-  public static void assertThrows(Class<? extends Exception> exceptionClass, JsRunnable runnable) {}
-
   public static void assertThrowsClassCastException(JsRunnable runnable, Class<?> toClass) {}
 
   public static void assertThrowsNullPointerException(JsRunnable runnable) {}
+
+  public static void assertThrowsArithmeticException(JsRunnable runnable) {}
+
+  public static void assertThrowsArrayStoreException(JsRunnable runnable) {}
+
+  public static void assertThrows(Class<? extends Exception> exceptionClass, JsRunnable runnable) {
+    try {
+      runnable.run();
+    } catch (Throwable e) {
+      if (e.getClass() == exceptionClass) {
+        return;
+      }
+    }
+    fail("Should have thrown " + exceptionClass);
+  }
 
   static String getFailureMessage(Object expected, Object actual, String msg) {
     return "<" + actual + "> " + msg + " <" + expected + ">";

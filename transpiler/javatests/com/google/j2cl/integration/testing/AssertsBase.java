@@ -93,6 +93,14 @@ public class AssertsBase {
     assertThrows(NullPointerException.class, runnable);
   }
 
+  public static void assertThrowsArithmeticException(JsRunnable runnable) {
+    assertThrows(ArithmeticException.class, runnable);
+  }
+
+  public static void assertThrowsArrayStoreException(JsRunnable runnable) {
+    assertThrows(ArrayStoreException.class, runnable);
+  }
+
   public static void assertThrows(Class<? extends Exception> exceptionClass, JsRunnable runnable) {
     try {
       runnable.run();
