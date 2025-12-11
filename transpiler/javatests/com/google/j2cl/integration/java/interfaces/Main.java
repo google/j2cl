@@ -291,7 +291,7 @@ public class Main {
   }
 
   private static void testDefaultMethods_diamondProperty() {
-    A<? extends DiamondLeft<?>, ? extends DiamondRight<?>> a = new A<>();
+    var a = (A<? extends DiamondLeft<?>, ? extends DiamondRight<?>>) new A<>();
     DiamondLeft<?> dl = a;
     assertEquals(DiamondLeft.NAME, dl.name(null));
     DiamondRight<?> dr = a;
@@ -314,8 +314,8 @@ public class Main {
   abstract static class NullableIterator<E extends @Nullable Object> implements Iterator<E> {}
 
   private static void testCallWithDifferentNullMarking() {
-    NullableIterator<@Nullable String> x =
-        new NullableIterator<>() {
+    var x =
+        new NullableIterator<@Nullable String>() {
           public boolean hasNext() {
             return false;
           }

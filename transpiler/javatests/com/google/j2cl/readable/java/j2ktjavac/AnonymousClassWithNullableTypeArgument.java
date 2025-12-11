@@ -59,6 +59,7 @@ public class AnonymousClassWithNullableTypeArgument {
   }
 
   public static void testImplicitTypeArguments_inferredFromMembers() {
+    // rerpo for b/408237089
     // In javac frontend it's inferred as Supplier<Object>
     new Supplier<>() {
       @Override
@@ -69,6 +70,7 @@ public class AnonymousClassWithNullableTypeArgument {
   }
 
   public static void testImplicitTypeArguments_inferredFromMembersAndArgument() {
+    // rerpo for b/408237089
     // In javac frontend it's inferred as AbstractHolder<String>
     new AbstractHolder<>("Supplier") {
       @Override
