@@ -73,6 +73,8 @@ import com.google.j2cl.transpiler.ast.Statement.createNoopStatement
 import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.SwitchCase
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault
+import com.google.j2cl.transpiler.ast.SwitchCaseExpressions
 import com.google.j2cl.transpiler.ast.SwitchStatement
 import com.google.j2cl.transpiler.ast.ThisReference
 import com.google.j2cl.transpiler.ast.ThrowStatement
@@ -622,11 +624,14 @@ internal class CompilationUnitBuilder(
       statements.add(convertStatement(irSwitchCase.body!!))
     }
 
-    return SwitchCase.newBuilder()
-      .setCaseExpressions(convertExpressions(irSwitchCase.caseExpressions))
-      .setStatements(statements)
-      .setDefault(irSwitchCase.caseExpressions.isEmpty())
-      .build()
+    if (irSwitchCase.caseExpressions.isEmpty()) {
+      return SwitchCaseDefault.newBuilder().setStatements(statements).build()
+    } else {
+      return SwitchCaseExpressions.newBuilder()
+        .setCaseExpressions(convertExpressions(irSwitchCase.caseExpressions))
+        .setStatements(statements)
+        .build()
+    }
   }
 
   private fun convertSwitchBreakStatement(irSwitchBreak: IrSwitchBreak) =

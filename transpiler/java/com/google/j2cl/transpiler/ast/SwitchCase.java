@@ -15,10 +15,8 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
+import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,27 +25,16 @@ import java.util.List;
 
 /** Switch case. */
 @Visitable
-public class SwitchCase extends Node implements Cloneable<SwitchCase> {
-  @Visitable List<Expression> caseExpressions;
-  @Visitable List<Statement> statements;
-  private final boolean isDefault;
+public abstract sealed class SwitchCase extends Node implements Cloneable<SwitchCase>
+    permits SwitchCaseDefault, SwitchCaseExpressions {
   private final boolean canFallthrough;
 
-  private SwitchCase(
-      Collection<Expression> caseExpressions,
-      Collection<Statement> statements,
-      boolean isDefault,
-      boolean canFallthrough) {
-    // A default case does not have expressions.
-    checkArgument(isDefault == caseExpressions.isEmpty());
-    this.caseExpressions = new ArrayList<>(caseExpressions);
-    this.statements = new ArrayList<>(statements);
-    this.isDefault = isDefault;
+  protected SwitchCase(boolean canFallthrough) {
     this.canFallthrough = canFallthrough;
   }
 
   public boolean isDefault() {
-    return isDefault;
+    return false;
   }
 
   public boolean canFallthrough() {
@@ -55,91 +42,57 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
   }
 
   public List<Expression> getCaseExpressions() {
-    return caseExpressions;
+    return ImmutableList.of();
   }
 
-  public List<Statement> getStatements() {
-    return statements;
-  }
-
-  @Override
-  public SwitchCase clone() {
-    return newBuilder()
-        .setCaseExpressions(AstUtils.clone(caseExpressions))
-        .setStatements(AstUtils.clone(statements))
-        .setDefault(isDefault)
-        .setCanFallthrough(canFallthrough)
-        .build();
-  }
-
-  public static Builder newBuilder() {
-    return new Builder();
-  }
+  /**
+   * Returns the statements to be executed if the switch case is selected.
+   *
+   * <p>Even though the "statements" are common to all subclasses, they need to be provided by
+   * subclasses explicitly so that the visitor processes them in the right order (e.g. after the
+   * case expressions, etc).
+   */
+  public abstract List<Statement> getStatements();
 
   @Override
-  Node acceptInternal(Processor processor) {
-    return Visitor_SwitchCase.visit(processor, this);
-  }
+  public abstract SwitchCase clone();
+
+  public abstract Builder<?, ?> toBuilder();
 
   /** A Builder for SwitchCase. */
-  public static class Builder {
-    private List<Expression> caseExpressions = new ArrayList<>();
-    private List<Statement> statements = new ArrayList<>();
-    private boolean isDefault = false;
+  public abstract static class Builder<B extends Builder<B, S>, S extends SwitchCase> {
+    protected List<Statement> statements = new ArrayList<>();
     // Switch cases may fallthrough by default.
-    private boolean canFallthrough = true;
-
-    public static Builder from(SwitchCase switchCase) {
-      return newBuilder()
-          .setCaseExpressions(switchCase.getCaseExpressions())
-          .setStatements(switchCase.getStatements())
-          .setDefault(switchCase.isDefault)
-          .setCanFallthrough(switchCase.canFallthrough);
-    }
+    protected boolean canFallthrough = true;
 
     @CanIgnoreReturnValue
-    public Builder setCaseExpressions(Collection<Expression> caseExpressions) {
-      this.caseExpressions = new ArrayList<>(caseExpressions);
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addCaseExpressions(List<Expression> caseExpressions) {
-      this.caseExpressions.addAll(caseExpressions);
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setStatements(Collection<Statement> statements) {
+    public B setStatements(Collection<Statement> statements) {
       this.statements = new ArrayList<>(statements);
-      return this;
+      return getThis();
     }
 
     @CanIgnoreReturnValue
-    public Builder setStatements(Statement... statements) {
+    public B setStatements(Statement... statements) {
       return setStatements(Arrays.asList(statements));
     }
 
     @CanIgnoreReturnValue
-    public Builder addStatement(Statement statement) {
+    public B addStatement(Statement statement) {
       this.statements.add(statement);
-      return this;
+      return getThis();
     }
 
     @CanIgnoreReturnValue
-    public Builder setDefault(boolean isDefault) {
-      this.isDefault = isDefault;
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setCanFallthrough(boolean canFallthrough) {
+    public B setCanFallthrough(boolean canFallthrough) {
       this.canFallthrough = canFallthrough;
-      return this;
+      return getThis();
     }
 
-    public SwitchCase build() {
-      return new SwitchCase(caseExpressions, statements, isDefault, canFallthrough);
+    @SuppressWarnings("unchecked")
+    private B getThis() {
+      return (B) this;
     }
+
+    public abstract S build();
   }
 }

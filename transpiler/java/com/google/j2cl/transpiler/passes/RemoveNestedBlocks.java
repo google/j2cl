@@ -40,7 +40,7 @@ public class RemoveNestedBlocks extends NormalizationPass {
 
           @Override
           public Node rewriteSwitchCase(SwitchCase switchCase) {
-            return SwitchCase.Builder.from(switchCase)
+            return switchCase.toBuilder()
                 .setStatements(flatten(switchCase.getStatements()))
                 .build();
           }

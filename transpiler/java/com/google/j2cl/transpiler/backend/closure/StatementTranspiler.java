@@ -34,6 +34,8 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
+import com.google.j2cl.transpiler.ast.SwitchCaseExpressions;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
@@ -256,7 +258,16 @@ public class StatementTranspiler {
       }
 
       @Override
-      public boolean enterSwitchCase(SwitchCase switchCase) {
+      public boolean enterSwitchCaseDefault(SwitchCaseDefault switchCase) {
+        builder.append("default:");
+        builder.indent();
+        renderStatements(switchCase.getStatements());
+        builder.unindent();
+        return false;
+      }
+
+      @Override
+      public boolean enterSwitchCaseExpressions(SwitchCaseExpressions switchCase) {
         // Emit the expressions as a sequence of (fallthrough empty) cases. E.g.
         //
         //   case 1, 2, 3:
@@ -271,9 +282,6 @@ public class StatementTranspiler {
           builder.append("case ");
           renderExpression(expression);
           builder.append(":");
-        }
-        if (switchCase.isDefault()) {
-          builder.append("default:");
         }
         builder.indent();
         renderStatements(switchCase.getStatements());

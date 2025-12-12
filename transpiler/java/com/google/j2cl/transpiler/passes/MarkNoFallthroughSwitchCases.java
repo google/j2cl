@@ -41,7 +41,7 @@ public class MarkNoFallthroughSwitchCases extends NormalizationPass {
             if (!switchCase.canFallthrough()) {
               return switchCase;
             }
-            return SwitchCase.Builder.from(switchCase)
+            return switchCase.toBuilder()
                 .setCanFallthrough(canFallthrough(switchCase.getStatements()))
                 .build();
           }

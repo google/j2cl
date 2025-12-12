@@ -44,6 +44,7 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
@@ -231,7 +232,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
       return;
     }
 
-    switchStatement.getCases().add(SwitchCase.newBuilder().setDefault(true).build());
+    switchStatement.getCases().add(SwitchCaseDefault.newBuilder().build());
   }
 
   /**
@@ -331,7 +332,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
    */
   private static SwitchCase createCaseWithBreak(
       SwitchCase switchCase, Label label, SourcePosition sourcePosition) {
-    return SwitchCase.Builder.from(switchCase)
+    return switchCase.toBuilder()
         .setStatements(
             BreakStatement.newBuilder()
                 .setLabelReference(label.createReference())

@@ -39,7 +39,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchCaseExpressions;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
@@ -403,7 +403,7 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
       int exitSelectorValue = 1;
       for (Statement exitStatement : exitStatements) {
         dispatchStatementBuilder.addCases(
-            SwitchCase.newBuilder()
+            SwitchCaseExpressions.newBuilder()
                 .setCaseExpressions(ImmutableList.of(NumberLiteral.fromInt(exitSelectorValue)))
                 .setStatements(exitStatement)
                 .build());

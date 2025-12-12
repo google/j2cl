@@ -79,6 +79,8 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
+import com.google.j2cl.transpiler.ast.SwitchCaseExpressions;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
@@ -1301,15 +1303,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private SwitchCase.Builder convert(org.eclipse.jdt.core.dom.SwitchCase switchCase) {
-      return SwitchCase.newBuilder()
-          .setCaseExpressions(
-              JdtEnvironment.<org.eclipse.jdt.core.dom.Expression>asTypedList(
-                      switchCase.expressions())
-                  .stream()
-                  .map(this::convert)
-                  .collect(toImmutableList()))
-          .setDefault(switchCase.isDefault())
-          .setCanFallthrough(!switchCase.isSwitchLabeledRule());
+      return switchCase.isDefault()
+          ? SwitchCaseDefault.newBuilder().setCanFallthrough(!switchCase.isSwitchLabeledRule())
+          : SwitchCaseExpressions.newBuilder()
+              .setCaseExpressions(
+                  JdtEnvironment.<org.eclipse.jdt.core.dom.Expression>asTypedList(
+                          switchCase.expressions())
+                      .stream()
+                      .map(this::convert)
+                      .collect(toImmutableList()))
+              .setCanFallthrough(!switchCase.isSwitchLabeledRule());
     }
 
     private SynchronizedStatement convert(

@@ -80,6 +80,8 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
+import com.google.j2cl.transpiler.ast.SwitchCaseExpressions;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
@@ -99,6 +101,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
+import com.sun.source.tree.CaseTree.CaseKind;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.DefaultCaseLabelTree;
 import com.sun.source.tree.Tree;
@@ -504,13 +507,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private SwitchCase convertSwitchCase(JCCase caseClause, TypeDescriptor resultType) {
     boolean isDefault =
         caseClause.getLabels().stream().anyMatch(DefaultCaseLabelTree.class::isInstance);
-    return SwitchCase.newBuilder()
-        .setCaseExpressions(isDefault ? ImmutableList.of() : convertCaseExpressions(caseClause))
-        .setDefault(isDefault)
-        .setStatements(getCaseStatements(caseClause, resultType))
-        .setCanFallthrough(
-            caseClause.getCaseKind() == com.sun.source.tree.CaseTree.CaseKind.STATEMENT)
-        .build();
+
+    boolean canFallthrough = caseClause.getCaseKind() == CaseKind.STATEMENT;
+    return isDefault
+        ? SwitchCaseDefault.newBuilder()
+            .setStatements(getCaseStatements(caseClause, resultType))
+            .setCanFallthrough(canFallthrough)
+            .build()
+        : SwitchCaseExpressions.newBuilder()
+            .setCaseExpressions(convertCaseExpressions(caseClause))
+            .setStatements(getCaseStatements(caseClause, resultType))
+            .setCanFallthrough(canFallthrough)
+            .build();
   }
 
   private List<Statement> getCaseStatements(JCCase caseClause, TypeDescriptor resultType) {

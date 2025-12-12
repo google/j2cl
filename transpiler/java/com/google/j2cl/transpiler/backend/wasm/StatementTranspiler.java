@@ -46,6 +46,8 @@ import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
+import com.google.j2cl.transpiler.ast.SwitchCaseExpressions;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
@@ -224,14 +226,16 @@ final class StatementTranspiler {
         // Emit the code for each of the cases.
         for (SwitchCase switchCase : switchStatement.getCases()) {
           builder.newLine();
-          builder.append(
-              switchCase.isDefault()
-                  ? ";; default:"
-                  : ";; case "
-                      + switchCase.getCaseExpressions().stream()
-                          .map(Expression::toString)
-                          .collect(joining(","))
-                      + ":");
+          switch (switchCase) {
+            case SwitchCaseDefault s -> builder.append(";; default:");
+            case SwitchCaseExpressions s ->
+                builder.append(
+                    ";; case "
+                        + switchCase.getCaseExpressions().stream()
+                            .map(Expression::toString)
+                            .collect(joining(","))
+                        + ":");
+          }
           renderStatements(switchCase.getStatements());
           builder.closeParens();
         }

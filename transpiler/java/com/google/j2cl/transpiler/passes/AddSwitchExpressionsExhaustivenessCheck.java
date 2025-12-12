@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
-import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 
 /**
@@ -71,11 +71,7 @@ public class AddSwitchExpressionsExhaustivenessCheck extends NormalizationPass {
                     .makeStatement(sourcePosition);
             switchExpression
                 .getCases()
-                .add(
-                    SwitchCase.newBuilder()
-                        .setDefault(true)
-                        .setStatements(checkMethodCall)
-                        .build());
+                .add(SwitchCaseDefault.newBuilder().setStatements(checkMethodCall).build());
           }
         });
   }
