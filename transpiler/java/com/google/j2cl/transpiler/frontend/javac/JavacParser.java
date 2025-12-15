@@ -105,7 +105,12 @@ public class JavacParser {
 
       ImmutableList.Builder<CompilationUnit> compilationUnits = ImmutableList.builder();
       for (var cu : javacCompilationUnits) {
-        compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(cu));
+        String sourcePath = cu.getSourceFile().getName();
+        if (options.getGenerateKytheIndexingMetadata()) {
+          // If Kythe metadata is being requested, use the target path.
+          sourcePath = targetPathBySourcePath.get(sourcePath);
+        }
+        compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(sourcePath, cu));
         problems.abortIfCancelled();
       }
       return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();

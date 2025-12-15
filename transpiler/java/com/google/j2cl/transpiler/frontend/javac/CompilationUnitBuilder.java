@@ -715,7 +715,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     int endLine = javacUnit.getLineMap().getLineNumber(endCharacterPosition) - 1;
     int endColumn = javacUnit.getLineMap().getColumnNumber(endCharacterPosition) - 1;
     return SourcePosition.newBuilder()
-        .setFilePath(javacUnit.getSourceFile().getName())
+        .setFilePath(getCurrentCompilationUnit().getFilePath())
         .setPackageRelativePath(getCurrentCompilationUnit().getPackageRelativePath())
         .setName(name)
         .setStartFilePosition(
@@ -1615,11 +1615,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return expressions.stream().map(this::convertExpression).collect(toCollection(ArrayList::new));
   }
 
-  public CompilationUnit buildCompilationUnit(CompilationUnitTree javacUnit) {
+  public CompilationUnit buildCompilationUnit(String sourcePath, CompilationUnitTree javacUnit) {
     this.javacUnit = (JCCompilationUnit) javacUnit;
     setCurrentCompilationUnit(
         CompilationUnit.createForFile(
-            javacUnit.getSourceFile().getName(),
+            sourcePath,
             javacUnit.getPackageName() == null ? "" : javacUnit.getPackageName().toString()));
     for (Tree tree : javacUnit.getTypeDecls()) {
       if (tree instanceof JCClassDecl classDeclaration) {
