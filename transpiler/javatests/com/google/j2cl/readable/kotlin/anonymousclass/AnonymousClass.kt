@@ -51,6 +51,7 @@ class AnonymousClass {
 
   fun main() {
     var capturedVar = 1
+    var capturedVarModifiedinOuterScope = "initial"
 
     val instance =
       object : SomeClass(i) {
@@ -59,11 +60,12 @@ class AnonymousClass {
 
         override fun foo(): String {
           capturedVar = 2
-          return "a"
+          return capturedVarModifiedinOuterScope
         }
       }
 
     capturedVar++
+    capturedVarModifiedinOuterScope = "modified"
 
     val instanceWithStaticMembers =
       object : SomeClassWithStaticMembers(this@AnonymousClass.i) {

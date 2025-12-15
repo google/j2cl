@@ -27,6 +27,7 @@ fun main(vararg unused: String) {
   testVariableCapture_nameClashes_inheritance()
   testVariableCapture_nameClashes_nested()
   testVariableCapture_mutation()
+  testVariableCapture_mutation_outerScope()
   testParameterCapture()
   testOuterCapture()
   testOuterCapture_nested()
@@ -163,6 +164,28 @@ private fun testVariableCapture_mutation() {
 
   assertEquals("modified", s.toString())
   assertTrue(10 == i)
+}
+
+private fun testVariableCapture_mutation_outerScope() {
+  var i = 0
+  var s: CharSequence = "initial"
+
+  class Supplier {
+    fun getInt(): Int = i
+
+    fun getCharSequence(): CharSequence = s
+  }
+
+  val supplier = Supplier()
+  assertEquals(0, supplier.getInt())
+  assertEquals("initial", supplier.getCharSequence().toString())
+
+  i = 10
+  s = StringBuilder().append("modified")
+
+  // TODO(b/468966706): Re-enable once the bug is fixed.
+  // assertEquals(10, supplier.getInt())
+  // assertEquals("modified", supplier.getCharSequence().toString())
 }
 
 private fun testCaptures_constructor() {

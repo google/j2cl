@@ -19,19 +19,22 @@ class $2 extends SomeClass {
   this.f_o__anonymousclass_AnonymousClass_2_;
   /**@type {!AnonymousClass} @nodts*/
   this.f_outer__anonymousclass_AnonymousClass_2_;
+  /**@type {string} @nodts*/
+  this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2;
   /**@type {OfInt} @nodts*/
   this.$captured_capturedVar__anonymousclass_AnonymousClass_2;
  }
  /** @nodts @return {!$2} */
- static $create__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt(/** !AnonymousClass */ $outer_this, /** OfInt */ $captured_capturedVar) {
+ static $create__anonymousclass_AnonymousClass__java_lang_String__javaemul_internal_Ref_OfInt(/** !AnonymousClass */ $outer_this, /** string */ $captured_capturedVarModifiedinOuterScope, /** OfInt */ $captured_capturedVar) {
   $2.$clinit();
   let $instance = new $2();
-  $instance.$ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt__void($outer_this, $captured_capturedVar);
+  $instance.$ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__java_lang_String__javaemul_internal_Ref_OfInt__void($outer_this, $captured_capturedVarModifiedinOuterScope, $captured_capturedVar);
   return $instance;
  }
  /** @nodts */
- $ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt__void(/** !AnonymousClass */ $outer_this, /** OfInt */ $captured_capturedVar) {
+ $ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__java_lang_String__javaemul_internal_Ref_OfInt__void(/** !AnonymousClass */ $outer_this, /** string */ $captured_capturedVarModifiedinOuterScope, /** OfInt */ $captured_capturedVar) {
   this.$outer_this__anonymousclass_AnonymousClass_2 = $outer_this;
+  this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2 = $captured_capturedVarModifiedinOuterScope;
   this.$captured_capturedVar__anonymousclass_AnonymousClass_2 = $captured_capturedVar;
   this.$ctor__anonymousclass_SomeClass__int__void($outer_this.m_getI__int());
   this.f_o__anonymousclass_AnonymousClass_2_ = this;
@@ -48,7 +51,7 @@ class $2 extends SomeClass {
  /** @override @nodts @return {string} */
  m_foo__java_lang_String() {
   this.$captured_capturedVar__anonymousclass_AnonymousClass_2.f_element__javaemul_internal_Ref_OfInt = 2;
-  return 'a';
+  return this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2;
  }
  /** @nodts */
  static $clinit() {
