@@ -19,12 +19,14 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertNotEquals
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.TestUtils.isJvm
 
 fun main(vararg unused: String) {
   val captures = Captures()
   captures.testLambdaNoCapture()
   captures.testInstanceofLambda()
   captures.testLambdaCaptureField()
+  captures.testCapturedVariableScoping()
   captures.testLambdaCaptureLocal()
   captures.testLambdaCaptureFieldAndLocal()
   // fun interfaces must have exactly one abstract method and SubEquals becomes a fun interface if
@@ -106,6 +108,39 @@ private class Captures {
       )
     assertTrue(result == 121)
     assertTrue(x == 10)
+  }
+
+  fun interface IntSupplier {
+    fun get(): Int
+  }
+
+  internal fun testCapturedVariableScoping() {
+    val suppliers = mutableListOf<IntSupplier>()
+
+    var x = 0
+    do {
+      var i = x++
+      // The variable `i` is captured by the Supplier lambda.
+      suppliers.add { i }
+      // and modified here, which should be reflected in the lambda above when
+      // evaluating.
+      i++
+      if (x == 1) {
+        continue
+      }
+      // This modification will be seen only in the second supplier.
+      i++
+      // Condition on a variable that is declared in the body.
+    } while (i < 2)
+
+    // At the end suppliers[0] = () -> 1 and suppliers[1] = () -> 3
+    assertTrue(suppliers.size == 2)
+    // TODO(b/468336770): Remove the condition `isJvm()` once the bug is fixed and the lambda
+    // capture behavior matches Kotlin/JVM.
+    if (isJvm()) {
+      assertEquals(1, suppliers[0].get())
+    }
+    assertEquals(3, suppliers[1].get())
   }
 
   internal fun testLambdaCaptureFieldAndLocal() {
