@@ -8,6 +8,9 @@
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
 #import "j2ktiosinterop/ImmutableList.h"
+#import "j2ktiosinterop/InterfaceDefaultMethod.h"
+#import "j2ktiosinterop/InterfaceDefaultMethodImpl.h"
+#import "j2ktiosinterop/InterfaceDefaultMethodOverrideImpl.h"
 #import "j2ktiosinterop/NativeCustomName.h"
 #import "j2ktiosinterop/NativeDefaultName.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
@@ -455,6 +458,27 @@
   XCTAssertTrue(isinf(JavaLangDouble_POSITIVE_INFINITY));
   XCTAssertTrue(JavaLangDouble_POSITIVE_INFINITY > 0);
   XCTAssertEqual(JavaLangDouble_MAX_VALUE, DBL_MAX);
+}
+
+- (void)testInterfaceDefaultMethod {
+  J2ktiosinteropInterfaceDefaultMethodImpl *interfaceDefaultMethod =
+      create_J2ktiosinteropInterfaceDefaultMethodImpl_init();
+  XCTAssertEqual([interfaceDefaultMethod getInt], 1);
+  XCTAssertEqual([interfaceDefaultMethod getDefaultLong], 1);
+  XCTAssertEqual([interfaceDefaultMethod getSuperDefaultLong], 1);
+  // This function is designed to support `super` calls to default methods, but for the purpose of
+  // this test can be used as a regular method.
+  XCTAssertEqual(J2ktiosinteropInterfaceDefaultMethod_getDefaultLong(interfaceDefaultMethod), 1);
+
+  J2ktiosinteropInterfaceDefaultMethodOverrideImpl *interfaceDefaultMethodOverride =
+      create_J2ktiosinteropInterfaceDefaultMethodOverrideImpl_init();
+  XCTAssertEqual([interfaceDefaultMethodOverride getInt], 1);
+  XCTAssertEqual([interfaceDefaultMethodOverride getDefaultLong], 2);
+  XCTAssertEqual([interfaceDefaultMethodOverride getSuperDefaultLong], 1);
+  // This function is designed to support `super` calls to default methods, but for the purpose of
+  // this test can be used as a regular method.
+  XCTAssertEqual(
+      J2ktiosinteropInterfaceDefaultMethod_getDefaultLong(interfaceDefaultMethodOverride), 1);
 }
 
 @end
