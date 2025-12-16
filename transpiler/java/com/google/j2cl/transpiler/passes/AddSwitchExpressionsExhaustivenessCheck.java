@@ -15,11 +15,15 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
+import java.util.List;
 
 /**
  * Instruments exhaustive switch expressions with no default to handle unexpected values.
@@ -58,9 +62,13 @@ public class AddSwitchExpressionsExhaustivenessCheck extends NormalizationPass {
             if (switchExpression.hasDefaultCase()) {
               return;
             }
-
             // The switch expression does not have a default case; that means that the frontend
             // deemed it exhaustive, hence add a default case with a runtime check.
+            List<SwitchCase> cases = switchExpression.getCases();
+            // Make sure we don't change the semantics of the last case by falling through an
+            // exception instead of just flowing out.
+            checkState(!cases.getLast().canFallthrough());
+
             // TODO(b/395953418): Reject switch expressions with no default on native jsenums.
             var expressionType = switchExpression.getTypeDescriptor().toRawTypeDescriptor();
             var isCritical = expressionType.isNative() && expressionType.isJsEnum();
@@ -69,9 +77,7 @@ public class AddSwitchExpressionsExhaustivenessCheck extends NormalizationPass {
             var checkMethodCall =
                 RuntimeMethods.createCheckCriticalExhaustiveCall(isCritical)
                     .makeStatement(sourcePosition);
-            switchExpression
-                .getCases()
-                .add(SwitchCaseDefault.newBuilder().setStatements(checkMethodCall).build());
+            cases.add(SwitchCaseDefault.newBuilder().setStatements(checkMethodCall).build());
           }
         });
   }
