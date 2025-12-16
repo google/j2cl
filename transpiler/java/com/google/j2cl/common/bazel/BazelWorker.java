@@ -18,7 +18,6 @@ package com.google.j2cl.common.bazel;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.Splitter;
-import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
@@ -73,11 +72,7 @@ public abstract class BazelWorker {
     try {
       run();
     } catch (RuntimeException | Error e) {
-      // The exceptions might be wrapped in another exception to provide more context. However
-      // if the root cause is a Problems.Exit then either the Program aborted due to errors that
-      // were already recorded in problems or it was due to cancellation. Either way we should not
-      // crash the worker if the root cause is a Problems.Exit.
-      if (!(Throwables.getRootCause(e) instanceof Problems.Exit)) {
+      if (!Problems.Exit.isRootCause(e)) {
         throw e;
       }
     } finally {

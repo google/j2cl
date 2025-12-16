@@ -24,6 +24,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.Problems;
@@ -41,6 +42,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -598,10 +600,11 @@ public class TranspilerTester {
     // J2clCommandLineRunner.run for the details.
     ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
     try {
-      executorService.execute(() -> runner.executeForTesting(args));
+      var compilation = executorService.submit(() -> runner.executeForTesting(args));
       if (cancelDelayMs != NO_CANCEL) {
         executorService.schedule(problems::requestCancellation, cancelDelayMs, MILLISECONDS);
       }
+      waitCompilation(compilation);
     } finally {
       MoreExecutors.shutdownAndAwaitTermination(executorService, 60, SECONDS);
     }
@@ -686,6 +689,17 @@ public class TranspilerTester {
           outputPath);
     } catch (IOException e) {
       throw new AssertionError(e);
+    }
+  }
+
+  /** Wait for compilation and propagate potential exceptions. */
+  private static void waitCompilation(Future<?> future) {
+    try {
+      Futures.getUnchecked(future);
+    } catch (RuntimeException | Error e) {
+      if (!Problems.Exit.isRootCause(e)) {
+        throw e;
+      }
     }
   }
 

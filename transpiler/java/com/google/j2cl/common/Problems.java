@@ -18,6 +18,7 @@ package com.google.j2cl.common;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.getBoolean;
 
+import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
@@ -292,5 +293,17 @@ public class Problems {
    *
    * <p>Note: It should never be caught except on the top level.
    */
-  public static class Exit extends Error {}
+  public static class Exit extends Error {
+    /**
+     * Returns true if Problems.Exit is the root cause of the given exception.
+     *
+     * <p>The exceptions might be wrapped in another exception to provide more context. However if
+     * the root cause is a Problems.Exit then either the Program aborted due to errors that were
+     * already recorded in problems or it was due to cancellation. Either way we should not crash
+     * the worker if the root cause is a Problems.Exit.
+     */
+    public static boolean isRootCause(Throwable e) {
+      return Throwables.getRootCause(e) instanceof Exit;
+    }
+  }
 }
