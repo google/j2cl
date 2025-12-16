@@ -4,7 +4,10 @@ const SomeClass = goog.require('anonymousclass.SomeClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AnonymousClass = goog.forwardDeclare('anonymousclass.AnonymousClass$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let OfInt = goog.forwardDeclare('javaemul.internal.Ref.OfInt$impl');
+let OfObject = goog.forwardDeclare('javaemul.internal.Ref.OfObject$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
@@ -19,23 +22,23 @@ class $2 extends SomeClass {
   this.f_o__anonymousclass_AnonymousClass_2_;
   /**@type {!AnonymousClass} @nodts*/
   this.f_outer__anonymousclass_AnonymousClass_2_;
-  /**@type {string} @nodts*/
-  this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2;
   /**@type {OfInt} @nodts*/
   this.$captured_capturedVar__anonymousclass_AnonymousClass_2;
+  /**@type {OfObject<string>} @nodts*/
+  this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2;
  }
  /** @nodts @return {!$2} */
- static $create__anonymousclass_AnonymousClass__java_lang_String__javaemul_internal_Ref_OfInt(/** !AnonymousClass */ $outer_this, /** string */ $captured_capturedVarModifiedinOuterScope, /** OfInt */ $captured_capturedVar) {
+ static $create__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt__javaemul_internal_Ref_OfObject(/** !AnonymousClass */ $outer_this, /** OfInt */ $captured_capturedVar, /** OfObject<string> */ $captured_capturedVarModifiedinOuterScope) {
   $2.$clinit();
   let $instance = new $2();
-  $instance.$ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__java_lang_String__javaemul_internal_Ref_OfInt__void($outer_this, $captured_capturedVarModifiedinOuterScope, $captured_capturedVar);
+  $instance.$ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt__javaemul_internal_Ref_OfObject__void($outer_this, $captured_capturedVar, $captured_capturedVarModifiedinOuterScope);
   return $instance;
  }
  /** @nodts */
- $ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__java_lang_String__javaemul_internal_Ref_OfInt__void(/** !AnonymousClass */ $outer_this, /** string */ $captured_capturedVarModifiedinOuterScope, /** OfInt */ $captured_capturedVar) {
+ $ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt__javaemul_internal_Ref_OfObject__void(/** !AnonymousClass */ $outer_this, /** OfInt */ $captured_capturedVar, /** OfObject<string> */ $captured_capturedVarModifiedinOuterScope) {
   this.$outer_this__anonymousclass_AnonymousClass_2 = $outer_this;
-  this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2 = $captured_capturedVarModifiedinOuterScope;
   this.$captured_capturedVar__anonymousclass_AnonymousClass_2 = $captured_capturedVar;
+  this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2 = $captured_capturedVarModifiedinOuterScope;
   this.$ctor__anonymousclass_SomeClass__int__void($outer_this.m_getI__int());
   this.f_o__anonymousclass_AnonymousClass_2_ = this;
   this.f_outer__anonymousclass_AnonymousClass_2_ = $outer_this;
@@ -51,7 +54,7 @@ class $2 extends SomeClass {
  /** @override @nodts @return {string} */
  m_foo__java_lang_String() {
   this.$captured_capturedVar__anonymousclass_AnonymousClass_2.f_element__javaemul_internal_Ref_OfInt = 2;
-  return this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2;
+  return /**@type {string}*/ ($Casts.$to(this.$captured_capturedVarModifiedinOuterScope__anonymousclass_AnonymousClass_2.f_element__javaemul_internal_Ref_OfObject, j_l_String));
  }
  /** @nodts */
  static $clinit() {
@@ -65,7 +68,10 @@ class $2 extends SomeClass {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 $Util.$setClassMetadata($2, 'anonymousclass.AnonymousClass$2');
 

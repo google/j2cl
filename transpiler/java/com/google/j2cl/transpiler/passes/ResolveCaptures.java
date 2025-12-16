@@ -15,8 +15,11 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.j2cl.common.SourcePosition;
@@ -45,7 +48,7 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -67,9 +70,6 @@ public class ResolveCaptures extends NormalizationPass {
       LinkedHashMultimap.create();
   /** Maps variables to the types they are declared in. */
   private final Map<Variable, TypeDeclaration> declaringTypeByVariable = new HashMap<>();
-
-  /** Collects all the variables that are modified within their capturing scope. */
-  private final Set<Variable> modifiedCapturedVariables = new HashSet<>();
 
   /**
    * Collects information to be able to resolve captures.
@@ -122,18 +122,7 @@ public class ResolveCaptures extends NormalizationPass {
 
           @Override
           public boolean enterVariableReference(VariableReference variableReference) {
-            Variable variable = variableReference.getTarget();
-            recordCapture(variable);
-
-            // Check if the captured variable is modified in a capturing scope.
-            if (AstUtils.isAssignmentTarget(variableReference, getParent())
-                && declaringTypeByVariable.get(variable) != getCurrentType().getDeclaration()) {
-              // The pass assumes that parameters are final; and they are in Kotlin which is the
-              // only frontend language that allows modifying a variable defined in an enclosing
-              // scope.
-              checkState(!variable.isParameter());
-              modifiedCapturedVariables.add(variable);
-            }
+            recordCapture(variableReference.getTarget());
 
             return true;
           }
@@ -187,12 +176,17 @@ public class ResolveCaptures extends NormalizationPass {
    * `Ref.OfInt x = createRef(10); x.element = 11;`.
    */
   private void replaceMutableCapturedVariablesWithReference(CompilationUnit compilationUnit) {
-    if (modifiedCapturedVariables.isEmpty()) {
+    ImmutableSet<Variable> mutableCapturedVariables =
+        capturedVariablesByTypeDeclaration.values().stream()
+            .filter(not(Variable::isFinal))
+            .collect(toImmutableSet());
+
+    if (mutableCapturedVariables.isEmpty()) {
       // Nothing to rewrite.
       return;
     }
     // Maps the variable to the reference variable that will be used to replace it.
-    Map<Variable, Variable> referenceVariableByVariable = new HashMap<>();
+    Map<Variable, Variable> referenceVariableByVariable = new LinkedHashMap<>();
 
     // Rewrite the variable declaration to use the reference variable.
     compilationUnit.accept(
@@ -202,7 +196,7 @@ public class ResolveCaptures extends NormalizationPass {
               VariableDeclarationFragment variableDeclarationFragment) {
             Variable originalVariable = variableDeclarationFragment.getVariable();
 
-            if (!modifiedCapturedVariables.contains(originalVariable)) {
+            if (!mutableCapturedVariables.contains(originalVariable)) {
               return variableDeclarationFragment;
             }
 
@@ -236,7 +230,7 @@ public class ResolveCaptures extends NormalizationPass {
           @Override
           public Expression rewriteVariableReference(VariableReference variableReference) {
             Variable originalVariable = variableReference.getTarget();
-            if (!modifiedCapturedVariables.contains(originalVariable)) {
+            if (!mutableCapturedVariables.contains(originalVariable)) {
               return variableReference;
             }
             Variable referenceWrapperVariable = referenceVariableByVariable.get(originalVariable);

@@ -183,9 +183,8 @@ private fun testVariableCapture_mutation_outerScope() {
   i = 10
   s = StringBuilder().append("modified")
 
-  // TODO(b/468966706): Re-enable once the bug is fixed.
-  // assertEquals(10, supplier.getInt())
-  // assertEquals("modified", supplier.getCharSequence().toString())
+  assertEquals(10, supplier.getInt())
+  assertEquals("modified", supplier.getCharSequence().toString())
 }
 
 private fun testCaptures_constructor() {
