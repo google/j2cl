@@ -206,12 +206,13 @@ def _diff_size(original, modified, is_size_lines):
 
   if original.is_wasm():
     # go/bloaty
+    bloaty_domain = "inlines" if is_size_lines else "compileunits"
     subprocess.call(
         [
             "/google/bin/releases/protobuf-team/bloaty/bloaty",
             "--allow_unsafe_non_google3_input",
             "--domain=file",
-            "-d", "inlines" if is_size_lines else "compileunits",
+            "-d", "sections," + bloaty_domain,
             "-n", "0",  # No limit on number of rows
             "--source-map="
             + f"{original.get_output_file()}={original.get_output_file()}.map",
