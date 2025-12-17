@@ -16,6 +16,8 @@
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/PackageNames.h"
+#import "j2ktiosinterop/PropertyClass.h"
+#import "j2ktiosinterop/PropertyMethod.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Double.h"
@@ -527,6 +529,22 @@
   // TODO(b/402759930): Not supported in J2KT.
   // XCTAssertEqual(
   //   J2ktiosinteropInterfaceDefaultMethod_getDefaultLong(interfaceDefaultMethodOverride), 1);
+}
+
+- (void)testProperties {
+  J2ktiosinteropPropertyClass *propertyClass = create_J2ktiosinteropPropertyClass_init();
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyClass intMethod], 0);
+  XCTAssertEqual([propertyClass intSuppressMethod], 0);
+  XCTAssertEqual([propertyClass intMethodWithParamWithInt:1], 1);
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyClass getLongMethod], 0);
+
+  J2ktiosinteropPropertyMethod *propertyMethod = create_J2ktiosinteropPropertyMethod_init();
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyMethod intMethod], 0);
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyMethod getLongMethod], 0);
 }
 
 @end
