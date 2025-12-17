@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
@@ -29,10 +30,11 @@ public final class SwitchCaseExpressions extends SwitchCase {
   @Visitable List<Statement> statements;
 
   private SwitchCaseExpressions(
+      SourcePosition sourcePosition,
       Collection<Expression> caseExpressions,
       Collection<Statement> statements,
       boolean canFallthrough) {
-    super(canFallthrough);
+    super(sourcePosition, canFallthrough);
     this.caseExpressions = new ArrayList<>(caseExpressions);
     this.statements = new ArrayList<>(statements);
   }
@@ -53,6 +55,7 @@ public final class SwitchCaseExpressions extends SwitchCase {
         .setCaseExpressions(AstUtils.clone(caseExpressions))
         .setStatements(AstUtils.clone(getStatements()))
         .setCanFallthrough(canFallthrough())
+        .setSourcePosition(getSourcePosition())
         .build();
   }
 
@@ -95,7 +98,7 @@ public final class SwitchCaseExpressions extends SwitchCase {
 
     @Override
     public SwitchCaseExpressions build() {
-      return new SwitchCaseExpressions(caseExpressions, statements, canFallthrough);
+      return new SwitchCaseExpressions(sourcePosition, caseExpressions, statements, canFallthrough);
     }
   }
 }

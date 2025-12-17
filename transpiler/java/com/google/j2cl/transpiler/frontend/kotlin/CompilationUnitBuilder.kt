@@ -625,11 +625,15 @@ internal class CompilationUnitBuilder(
     }
 
     if (irSwitchCase.caseExpressions.isEmpty()) {
-      return SwitchCaseDefault.newBuilder().setStatements(statements).build()
+      return SwitchCaseDefault.newBuilder()
+        .setStatements(statements)
+        .setSourcePosition(getSourcePosition(irSwitchCase))
+        .build()
     } else {
       return SwitchCaseExpressions.newBuilder()
         .setCaseExpressions(convertExpressions(irSwitchCase.caseExpressions))
         .setStatements(statements)
+        .setSourcePosition(getSourcePosition(irSwitchCase))
         .build()
     }
   }

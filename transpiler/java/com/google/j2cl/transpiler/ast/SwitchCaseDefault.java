@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
@@ -26,8 +27,9 @@ import java.util.List;
 public final class SwitchCaseDefault extends SwitchCase {
   @Visitable List<Statement> statements;
 
-  private SwitchCaseDefault(Collection<Statement> statements, boolean canFallthrough) {
-    super(canFallthrough);
+  private SwitchCaseDefault(
+      SourcePosition sourcePosition, Collection<Statement> statements, boolean canFallthrough) {
+    super(sourcePosition, canFallthrough);
     this.statements = new ArrayList<>(statements);
   }
 
@@ -46,6 +48,7 @@ public final class SwitchCaseDefault extends SwitchCase {
     return newBuilder()
         .setStatements(AstUtils.clone(statements))
         .setCanFallthrough(canFallthrough())
+        .setSourcePosition(getSourcePosition())
         .build();
   }
 
@@ -74,7 +77,7 @@ public final class SwitchCaseDefault extends SwitchCase {
 
     @Override
     public SwitchCaseDefault build() {
-      return new SwitchCaseDefault(statements, canFallthrough);
+      return new SwitchCaseDefault(sourcePosition, statements, canFallthrough);
     }
   }
 }

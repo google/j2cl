@@ -1294,7 +1294,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       List<SwitchCase.Builder> caseBuilders = new ArrayList<>();
       for (org.eclipse.jdt.core.dom.Statement statement : statements) {
         if (statement instanceof org.eclipse.jdt.core.dom.SwitchCase switchCase) {
-          caseBuilders.add(convert(switchCase));
+          caseBuilders.add(convert(switchCase).setSourcePosition(getSourcePosition(statement)));
         } else {
           Iterables.getLast(caseBuilders).addStatement(convertStatement(statement));
         }

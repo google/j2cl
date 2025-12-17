@@ -513,11 +513,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         ? SwitchCaseDefault.newBuilder()
             .setStatements(getCaseStatements(caseClause, resultType))
             .setCanFallthrough(canFallthrough)
+            .setSourcePosition(getSourcePosition(caseClause))
             .build()
         : SwitchCaseExpressions.newBuilder()
             .setCaseExpressions(convertCaseExpressions(caseClause))
             .setStatements(getCaseStatements(caseClause, resultType))
             .setCanFallthrough(canFallthrough)
+            .setSourcePosition(getSourcePosition(caseClause))
             .build();
   }
 

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,9 +29,11 @@ import java.util.List;
 public abstract sealed class SwitchCase extends Node implements Cloneable<SwitchCase>
     permits SwitchCaseDefault, SwitchCaseExpressions {
   private final boolean canFallthrough;
+  private final SourcePosition sourcePosition;
 
-  protected SwitchCase(boolean canFallthrough) {
+  protected SwitchCase(SourcePosition sourcePosition, boolean canFallthrough) {
     this.canFallthrough = canFallthrough;
+    this.sourcePosition = sourcePosition;
   }
 
   public boolean isDefault() {
@@ -54,6 +57,10 @@ public abstract sealed class SwitchCase extends Node implements Cloneable<Switch
    */
   public abstract List<Statement> getStatements();
 
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
   @Override
   public abstract SwitchCase clone();
 
@@ -64,6 +71,7 @@ public abstract sealed class SwitchCase extends Node implements Cloneable<Switch
     protected List<Statement> statements = new ArrayList<>();
     // Switch cases may fallthrough by default.
     protected boolean canFallthrough = true;
+    protected SourcePosition sourcePosition = SourcePosition.NONE;
 
     @CanIgnoreReturnValue
     public B setStatements(Collection<Statement> statements) {
@@ -85,6 +93,12 @@ public abstract sealed class SwitchCase extends Node implements Cloneable<Switch
     @CanIgnoreReturnValue
     public B setCanFallthrough(boolean canFallthrough) {
       this.canFallthrough = canFallthrough;
+      return getThis();
+    }
+
+    @CanIgnoreReturnValue
+    public B setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
       return getThis();
     }
 
