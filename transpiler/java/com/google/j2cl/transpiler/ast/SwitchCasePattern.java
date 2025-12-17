@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
@@ -24,27 +24,33 @@ import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.annotation.Nullable;
 
-/** Switch case with case expressions. */
+/** Switch case with a pattern and optionally a guard. */
 @Visitable
-public final class SwitchCaseExpressions extends SwitchCase {
-  @Visitable List<Expression> caseExpressions;
+public final class SwitchCasePattern extends SwitchCase {
+  @Visitable Pattern pattern;
+  @Visitable @Nullable Expression guard;
   @Visitable List<Statement> statements;
 
-  private SwitchCaseExpressions(
+  private SwitchCasePattern(
       SourcePosition sourcePosition,
-      Collection<Expression> caseExpressions,
+      Pattern pattern,
+      Expression guard,
       Collection<Statement> statements,
       boolean canFallthrough) {
     super(sourcePosition, canFallthrough);
-    checkArgument(!caseExpressions.isEmpty());
-    this.caseExpressions = new ArrayList<>(caseExpressions);
+    this.pattern = checkNotNull(pattern);
+    this.guard = guard;
     this.statements = new ArrayList<>(statements);
   }
 
-  @Override
-  public List<Expression> getCaseExpressions() {
-    return caseExpressions;
+  public Pattern getPattern() {
+    return pattern;
+  }
+
+  public Expression getGuard() {
+    return guard;
   }
 
   @Override
@@ -53,10 +59,11 @@ public final class SwitchCaseExpressions extends SwitchCase {
   }
 
   @Override
-  public SwitchCaseExpressions clone() {
+  public SwitchCasePattern clone() {
     return newBuilder()
-        .setCaseExpressions(AstUtils.clone(caseExpressions))
-        .setStatements(AstUtils.clone(getStatements()))
+        .setPattern(AstUtils.clone(pattern))
+        .setGuard(AstUtils.clone(guard))
+        .setStatements(AstUtils.clone(statements))
         .setCanFallthrough(canFallthrough())
         .setSourcePosition(getSourcePosition())
         .build();
@@ -73,36 +80,38 @@ public final class SwitchCaseExpressions extends SwitchCase {
 
   @Override
   Node acceptInternal(Processor processor) {
-    return Visitor_SwitchCaseExpressions.visit(processor, this);
+    return Visitor_SwitchCasePattern.visit(processor, this);
   }
 
-  /** A Builder for ExpressionsSwitchCase. */
-  public static class Builder extends SwitchCase.Builder<Builder, SwitchCaseExpressions> {
-    private List<Expression> caseExpressions = new ArrayList<>();
+  /** A Builder for SwitchCasePattern. */
+  public static class Builder extends SwitchCase.Builder<Builder, SwitchCasePattern> {
+    private Pattern pattern;
+    private Expression guard;
 
-    public static Builder from(SwitchCaseExpressions switchCase) {
+    public static Builder from(SwitchCasePattern switchCase) {
       return newBuilder()
-          .setCaseExpressions(switchCase.getCaseExpressions())
+          .setPattern(switchCase.getPattern())
+          .setGuard(switchCase.getGuard())
           .setStatements(switchCase.getStatements())
           .setCanFallthrough(switchCase.canFallthrough())
           .setSourcePosition(switchCase.getSourcePosition());
     }
 
     @CanIgnoreReturnValue
-    public Builder setCaseExpressions(Collection<Expression> caseExpressions) {
-      this.caseExpressions = new ArrayList<>(caseExpressions);
+    public Builder setPattern(Pattern pattern) {
+      this.pattern = pattern;
       return this;
     }
 
     @CanIgnoreReturnValue
-    public Builder addCaseExpressions(List<Expression> caseExpressions) {
-      this.caseExpressions.addAll(caseExpressions);
+    public Builder setGuard(Expression guard) {
+      this.guard = guard;
       return this;
     }
 
     @Override
-    public SwitchCaseExpressions build() {
-      return new SwitchCaseExpressions(sourcePosition, caseExpressions, statements, canFallthrough);
+    public SwitchCasePattern build() {
+      return new SwitchCasePattern(sourcePosition, pattern, guard, statements, canFallthrough);
     }
   }
 }

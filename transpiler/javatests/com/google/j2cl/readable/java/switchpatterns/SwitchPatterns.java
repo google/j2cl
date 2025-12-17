@@ -19,7 +19,47 @@ package switchpatterns;
 import jsinterop.annotations.JsEnum;
 
 public class SwitchPatterns {
-  void fail() {}
+
+  void testPatternsWithGuards() {
+    Object o = "Hello";
+
+    switch (o) {
+      case String s when s.length() == 1 -> {}
+      case String s -> {}
+      default -> {}
+    }
+
+    // Integer switch with expressions that does not allow nulls.
+    Integer i = null;
+    switch (i) {
+      case 23, 32 -> {}
+      case Integer j when j > 2 -> {}
+      case Number n -> {}
+    }
+
+    // Integer switch with expressions that does allow nulls.
+    switch (i) {
+      case 23, 32 -> {}
+      case Integer j when j > 2 -> {}
+      case null -> {}
+      default -> {}
+    }
+  }
+
+  sealed interface Sealed {
+    final class A implements Sealed {}
+
+    final class B implements Sealed {}
+  }
+
+  void testExhaustivePatternsWithNoDefault() {
+    Sealed o = null;
+    int i =
+        switch (o) {
+          case Sealed.A a -> 1;
+          case Sealed.B b -> 2;
+        };
+  }
 
   enum Color {
     RED,
@@ -35,7 +75,7 @@ public class SwitchPatterns {
     THREE
   }
 
-  void testNullPatterns() {
+  void testPatternsWithNull() {
     Color color = null;
     // Enum switch. Case null that is not a default case.
     switch (color) {
@@ -102,4 +142,6 @@ public class SwitchPatterns {
         break;
     }
   }
+
+  static void fail() {}
 }

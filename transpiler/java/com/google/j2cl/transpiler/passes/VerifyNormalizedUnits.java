@@ -47,7 +47,8 @@ import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PatternMatchExpression;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchCaseExpressions;
+import com.google.j2cl.transpiler.ast.SwitchCasePattern;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.Type;
@@ -308,17 +309,22 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           }
 
           @Override
-          public void exitSwitchCase(SwitchCase switchCase) {
+          public void exitSwitchCaseExpressions(SwitchCaseExpressions switchCase) {
             if (verifyForWasm) {
               for (Expression caseExpression : switchCase.getCaseExpressions()) {
                 // The only expressions allowed in a switch case are strings and number literals.
                 checkState(
-                    switchCase.isDefault()
-                        || TypeDescriptors.isJavaLangString(caseExpression.getTypeDescriptor())
+                    TypeDescriptors.isJavaLangString(caseExpression.getTypeDescriptor())
                         || caseExpression instanceof NumberLiteral
                         || caseExpression instanceof NullLiteral);
               }
             }
+          }
+
+          @Override
+          public void exitSwitchCasePattern(SwitchCasePattern switchCase) {
+            // Switch case patterns are expected to be normalized away.
+            throw new IllegalStateException();
           }
 
           @Override

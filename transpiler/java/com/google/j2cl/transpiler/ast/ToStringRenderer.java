@@ -511,17 +511,33 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterSwitchCase(SwitchCase switchCase) {
-        if (!switchCase.getCaseExpressions().isEmpty()) {
-          print("case ");
-          printSeparated(", ", switchCase.getCaseExpressions());
-          if (switchCase.isDefault()) {
-            print(",");
-          }
+      public boolean enterSwitchCaseDefault(SwitchCaseDefault switchCase) {
+        print("default");
+        printSwitchCaseBody(switchCase);
+        return false;
+      }
+
+      @Override
+      public boolean enterSwitchCaseExpressions(SwitchCaseExpressions switchCase) {
+        print("case ");
+        printSeparated(", ", switchCase.getCaseExpressions());
+        printSwitchCaseBody(switchCase);
+        return false;
+      }
+
+      @Override
+      public boolean enterSwitchCasePattern(SwitchCasePattern switchCase) {
+        print("case ");
+        accept(switchCase.getPattern());
+        if (switchCase.getGuard() != null) {
+          print(" when ");
+          accept(switchCase.getGuard());
         }
-        if (switchCase.isDefault()) {
-          print("default");
-        }
+        printSwitchCaseBody(switchCase);
+        return false;
+      }
+
+      private void printSwitchCaseBody(SwitchCase switchCase) {
         print(switchCase.canFallthrough() ? ":" : " ->");
         indent();
         for (Statement statement : switchCase.getStatements()) {
@@ -529,8 +545,6 @@ class ToStringRenderer {
           accept(statement);
         }
         unIndent();
-
-        return false;
       }
 
       @Override

@@ -72,7 +72,8 @@ public final class SwitchCaseDefault extends SwitchCase {
     public static Builder from(SwitchCase switchCase) {
       return newBuilder()
           .setStatements(switchCase.getStatements())
-          .setCanFallthrough(switchCase.canFallthrough());
+          .setCanFallthrough(switchCase.canFallthrough())
+          .setSourcePosition(switchCase.getSourcePosition());
     }
 
     @Override

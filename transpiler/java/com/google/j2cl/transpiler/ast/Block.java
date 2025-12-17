@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -72,30 +73,41 @@ public class Block extends Statement {
           .setStatements(block.getStatements());
     }
 
+    @CanIgnoreReturnValue
     public Builder setStatements(Statement... statements) {
       return setStatements(Arrays.asList(statements));
     }
 
+    @CanIgnoreReturnValue
     public Builder setStatements(Collection<Statement> statements) {
       this.statements.clear();
       return addStatements(statements);
     }
 
+    @CanIgnoreReturnValue
     public Builder addStatement(Statement statement) {
       this.statements.add(statement);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder addStatement(int index, Statement statement) {
       this.statements.add(index, statement);
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder addStatements(Statement... statements) {
+      return addStatements(Arrays.asList(statements));
+    }
+
+    @CanIgnoreReturnValue
     public Builder addStatements(Collection<Statement> statements) {
       this.statements.addAll(statements);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;

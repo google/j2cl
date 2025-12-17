@@ -1,0 +1,46 @@
+goog.module('switchpatterns.SwitchPatterns.Sealed.B$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Sealed = goog.require('switchpatterns.SwitchPatterns.Sealed$impl');
+
+/**
+ * @final
+ * @implements {Sealed}
+ */
+class B extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!B} */
+ static $create__() {
+  B.$clinit();
+  let $instance = new B();
+  $instance.$ctor__switchpatterns_SwitchPatterns_Sealed_B__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__switchpatterns_SwitchPatterns_Sealed_B__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Sealed.$markImplementor(B);
+$Util.$setClassMetadata(B, 'switchpatterns.SwitchPatterns$Sealed$B');
+
+exports = B;
+
+//# sourceMappingURL=SwitchPatterns$Sealed$B.js.map

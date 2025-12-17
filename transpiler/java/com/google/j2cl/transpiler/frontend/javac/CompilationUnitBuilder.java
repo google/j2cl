@@ -24,6 +24,7 @@ import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
@@ -82,6 +83,7 @@ import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
 import com.google.j2cl.transpiler.ast.SwitchCaseExpressions;
+import com.google.j2cl.transpiler.ast.SwitchCasePattern;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
@@ -128,6 +130,7 @@ import com.sun.tools.javac.tree.JCTree.JCCatch;
 import com.sun.tools.javac.tree.JCTree.JCClassDecl;
 import com.sun.tools.javac.tree.JCTree.JCCompilationUnit;
 import com.sun.tools.javac.tree.JCTree.JCConditional;
+import com.sun.tools.javac.tree.JCTree.JCConstantCaseLabel;
 import com.sun.tools.javac.tree.JCTree.JCContinue;
 import com.sun.tools.javac.tree.JCTree.JCDoWhileLoop;
 import com.sun.tools.javac.tree.JCTree.JCEnhancedForLoop;
@@ -148,6 +151,7 @@ import com.sun.tools.javac.tree.JCTree.JCNewArray;
 import com.sun.tools.javac.tree.JCTree.JCNewClass;
 import com.sun.tools.javac.tree.JCTree.JCParens;
 import com.sun.tools.javac.tree.JCTree.JCPattern;
+import com.sun.tools.javac.tree.JCTree.JCPatternCaseLabel;
 import com.sun.tools.javac.tree.JCTree.JCRecordPattern;
 import com.sun.tools.javac.tree.JCTree.JCReturn;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
@@ -505,22 +509,39 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private SwitchCase convertSwitchCase(JCCase caseClause, TypeDescriptor resultType) {
+    boolean canFallthrough = caseClause.getCaseKind() == CaseKind.STATEMENT;
+
     boolean isDefault =
         caseClause.getLabels().stream().anyMatch(DefaultCaseLabelTree.class::isInstance);
+    if (isDefault) {
+      return SwitchCaseDefault.newBuilder()
+          .setStatements(getCaseStatements(caseClause, resultType))
+          .setCanFallthrough(canFallthrough)
+          .setSourcePosition(getSourcePosition(caseClause))
+          .build();
+    }
 
-    boolean canFallthrough = caseClause.getCaseKind() == CaseKind.STATEMENT;
-    return isDefault
-        ? SwitchCaseDefault.newBuilder()
-            .setStatements(getCaseStatements(caseClause, resultType))
-            .setCanFallthrough(canFallthrough)
-            .setSourcePosition(getSourcePosition(caseClause))
-            .build()
-        : SwitchCaseExpressions.newBuilder()
-            .setCaseExpressions(convertCaseExpressions(caseClause))
-            .setStatements(getCaseStatements(caseClause, resultType))
-            .setCanFallthrough(canFallthrough)
-            .setSourcePosition(getSourcePosition(caseClause))
-            .build();
+    // If a case has expressions, all the labels are of JCConstantCaseLabel type.
+    if (caseClause.getLabels().stream().allMatch(JCConstantCaseLabel.class::isInstance)) {
+      return SwitchCaseExpressions.newBuilder()
+          .setCaseExpressions(convertCaseExpressions(caseClause))
+          .setStatements(getCaseStatements(caseClause, resultType))
+          .setCanFallthrough(canFallthrough)
+          .setSourcePosition(getSourcePosition(caseClause))
+          .build();
+    }
+
+    // If a case has patterns, it has exactly one label of JCPatternCaseLabel type.
+    JCPattern pattern =
+        ((JCPatternCaseLabel) Iterables.getOnlyElement(caseClause.getLabels())).getPattern();
+
+    return SwitchCasePattern.newBuilder()
+        .setPattern(convertPattern(pattern))
+        .setGuard(convertExpressionOrNull(caseClause.getGuard()))
+        .setStatements(getCaseStatements(caseClause, resultType))
+        .setCanFallthrough(canFallthrough)
+        .setSourcePosition(getSourcePosition(caseClause))
+        .build();
   }
 
   private List<Statement> getCaseStatements(JCCase caseClause, TypeDescriptor resultType) {

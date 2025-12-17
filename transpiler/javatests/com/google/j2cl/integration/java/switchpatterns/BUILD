@@ -10,6 +10,8 @@ package(
 
 integration_test(
     srcs = glob(["*.java"]),
+    # TODO(b/466394693): make the normalization work with j2kt.
+    enable_kt = False,
     experimental_java_frontend = "javac",
     javacopts = [
         "-source 21",

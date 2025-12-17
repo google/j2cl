@@ -21,27 +21,64 @@ package switchpatterns
 
 import javaemul.lang.*
 import jsinterop.annotations.JsEnum
+import kotlin.Any
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class SwitchPatterns {
- internal open fun fail_pp_switchpatterns() {}
+ internal open fun testPatternsWithGuards_pp_switchpatterns() {
+  val o: Any = "Hello"
+  when (o) {
+   -> {}
+   -> {}
+   else -> {}
+  }
+  val i: Int? = null
+  when (i!!) {
+   23, 32 -> {}
+   -> {}
+   -> {}
+   else -> {}
+  }
+  when (i) {
+   23, 32 -> {}
+   -> {}
+   null -> {}
+   else -> {}
+  }
+ }
 
- internal open fun testNullPatterns_pp_switchpatterns() {
+ internal open fun testExhaustivePatternsWithNoDefault_pp_switchpatterns() {
+  val o: Sealed? = null
+  val i: Int = run {
+   when (o!!) {
+    -> {
+     return@run 1
+    }
+    -> {
+     return@run 2
+    }
+   }
+  }
+ }
+
+ internal open fun testPatternsWithNull_pp_switchpatterns() {
   val color: Color? = null
   when (color) {
    Color.RED -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
    null -> {}
    else -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
   }
   when (color) {
    Color.RED -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
    else -> {
     val variable: Int = 0
@@ -49,36 +86,47 @@ open class SwitchPatterns {
   }
   when (Color.valueOf("BLUE")) {
    Color.RED -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
    else -> {}
   }
   val digit: Digit? = null
   when (digit) {
    Digit.ZERO -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
    null -> {}
    else -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
   }
   val s: String = "Hi"
   when (s) {
    "Hi" -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
    null -> {}
    else -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
   }
   when (s) {
    "Hi" -> {
-    this.fail_pp_switchpatterns()
+    SwitchPatterns.fail_pp_switchpatterns()
    }
    else -> {}
   }
+ }
+
+ companion object {
+  @JvmStatic
+  internal fun fail_pp_switchpatterns() {}
+ }
+
+ interface Sealed {
+  class A: Sealed
+
+  class B: Sealed
  }
 
  enum class Color {

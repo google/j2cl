@@ -39,6 +39,11 @@ public interface SwitchConstruct<T extends SwitchConstruct<T>> extends HasSource
     return getCases().stream().anyMatch(SwitchCase::isDefault);
   }
 
+  /** Returns true if the switch construct has a pattern case. */
+  default boolean hasPatterns() {
+    return getCases().stream().anyMatch(SwitchCasePattern.class::isInstance);
+  }
+
   /** Returns true if the expression evaluating to null is handled by any of the cases. */
   boolean allowsNulls();
 

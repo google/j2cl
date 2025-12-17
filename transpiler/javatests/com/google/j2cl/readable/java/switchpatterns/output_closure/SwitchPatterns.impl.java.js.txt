@@ -3,10 +3,19 @@ goog.module('switchpatterns.SwitchPatterns$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let Color = goog.forwardDeclare('switchpatterns.SwitchPatterns.Color$impl');
 let Digit = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit$impl');
 let $Overlay = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit.$Overlay$impl');
+let Sealed = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed$impl');
+let A = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.A$impl');
+let B = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.B$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
 
@@ -27,22 +36,114 @@ class SwitchPatterns extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_fail__void_$pp_switchpatterns() {}
+ m_testPatternsWithGuards__void_$pp_switchpatterns() {
+  let o = 'Hello';
+  {
+   let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
+   let /** number */ $caseIndex;
+   let /** ?string */ s, /** ?string */ s_1;
+   if (j_l_String.$isInstance($selector) && (s = (/**@type {?string}*/ ($selector)), true) && j_l_String.m_length__java_lang_String__int(s) == 1) {
+    $caseIndex = 0;
+   } else if (j_l_String.$isInstance($selector) && (s_1 = (/**@type {?string}*/ ($selector)), true)) {
+    $caseIndex = 1;
+   } else {
+    $caseIndex = 2;
+   }
+   switch ($caseIndex) {
+    case 0:
+     break;
+    case 1:
+     break;
+    default:
+     break;
+   }
+  }
+  let /** Integer */ i = null;
+  {
+   let $selector_1 = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(i);
+   let /** number */ $caseIndex_1;
+   let /** Integer */ j, /** (Number|number|!$Long) */ n;
+   if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean($selector_1, Integer.valueOf(23)) || Objects.m_equals__java_lang_Object__java_lang_Object__boolean($selector_1, Integer.valueOf(32))) {
+    $caseIndex_1 = 0;
+   } else if (Integer.$isInstance($selector_1) && (j = (/**@type {Integer}*/ ($selector_1)), true) && j.intValue() > 2) {
+    $caseIndex_1 = 1;
+   } else if (Number.$isInstance($selector_1) && (n = (/**@type {(Number|number|!$Long)}*/ ($selector_1)), true)) {
+    $caseIndex_1 = 2;
+   } else {
+    $caseIndex_1 = 3;
+   }
+   switch ($caseIndex_1) {
+    case 0:
+     break;
+    case 1:
+     break;
+    case 2:
+     break;
+   }
+  }
+  {
+   let /** number */ $caseIndex_2;
+   let /** Integer */ j_1;
+   if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(i, Integer.valueOf(23)) || Objects.m_equals__java_lang_Object__java_lang_Object__boolean(i, Integer.valueOf(32))) {
+    $caseIndex_2 = 0;
+   } else if (!$Equality.$same(i, null) && (j_1 = (/**@type {Integer}*/ (i)), true) && j_1.intValue() > 2) {
+    $caseIndex_2 = 1;
+   } else if ($Equality.$same(i, null)) {
+    $caseIndex_2 = 2;
+   } else {
+    $caseIndex_2 = 3;
+   }
+   switch ($caseIndex_2) {
+    case 0:
+     break;
+    case 1:
+     break;
+    case 2:
+     break;
+    default:
+     break;
+   }
+  }
+ }
  /** @nodts */
- m_testNullPatterns__void_$pp_switchpatterns() {
+ m_testExhaustivePatternsWithNoDefault__void_$pp_switchpatterns() {
+  let /** Sealed */ o = null;
+  let i = (() =>{
+   let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
+   let /** number */ $caseIndex;
+   let /** A */ a, /** B */ b;
+   if (A.$isInstance($selector) && (a = (/**@type {A}*/ ($selector)), true)) {
+    $caseIndex = 0;
+   } else if (B.$isInstance($selector) && (b = (/**@type {B}*/ ($selector)), true)) {
+    $caseIndex = 1;
+   } else {
+    $caseIndex = 2;
+   }
+   switch ($caseIndex) {
+    case 0:
+     return 1;
+    case 1:
+     return 2;
+    default:
+     InternalPreconditions.m_checkExhaustive__void();
+   }
+  })();
+ }
+ /** @nodts */
+ m_testPatternsWithNull__void_$pp_switchpatterns() {
   let /** Color */ color = null;
   switch ($Equality.$same(color, null) ? -1 : color.ordinal()) {
    case Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color:
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
     break;
    case -1:
     break;
    default:
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
   }
   switch ($Equality.$same(color, null) ? -1 : color.ordinal()) {
    case Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color:
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
     break;
    default:
     {
@@ -53,7 +154,7 @@ class SwitchPatterns extends j_l_Object {
   let /** Color */ $switchExpression;
   switch (($switchExpression = Color.m_valueOf__java_lang_String__switchpatterns_SwitchPatterns_Color('BLUE'), $Equality.$same($switchExpression, null) ? -1 : $switchExpression.ordinal())) {
    case Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color:
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
     break;
    default:
     break;
@@ -61,30 +162,34 @@ class SwitchPatterns extends j_l_Object {
   let digit = /**@type {?Digit}*/ ($Enums.unbox(null, $Overlay));
   switch ($Util.$coerceToNull(digit)) {
    case Digit.ZERO:
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
     break;
    case null:
     break;
    default:
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
   }
   let s = 'Hi';
   switch ($Util.$coerceToNull(s)) {
    case 'Hi':
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
     break;
    case null:
     break;
    default:
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
   }
   switch (s) {
    case 'Hi':
-    this.m_fail__void_$pp_switchpatterns();
+    SwitchPatterns.m_fail__void();
     break;
    default:
     break;
   }
+ }
+ /** @nodts */
+ static m_fail__void() {
+  SwitchPatterns.$clinit();
  }
  /** @nodts */
  static $clinit() {
@@ -99,10 +204,17 @@ class SwitchPatterns extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Number = goog.module.get('java.lang.Number$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   Color = goog.module.get('switchpatterns.SwitchPatterns.Color$impl');
   Digit = goog.module.get('switchpatterns.SwitchPatterns.Digit$impl');
   $Overlay = goog.module.get('switchpatterns.SwitchPatterns.Digit.$Overlay$impl');
+  A = goog.module.get('switchpatterns.SwitchPatterns.Sealed.A$impl');
+  B = goog.module.get('switchpatterns.SwitchPatterns.Sealed.B$impl');
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }

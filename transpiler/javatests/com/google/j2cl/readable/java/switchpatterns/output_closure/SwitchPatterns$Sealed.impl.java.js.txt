@@ -1,0 +1,31 @@
+goog.module('switchpatterns.SwitchPatterns.Sealed$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class Sealed {
+ /** @nodts */
+ static $clinit() {
+  Sealed.$clinit = () =>{};
+  Sealed.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__switchpatterns_SwitchPatterns_Sealed = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__switchpatterns_SwitchPatterns_Sealed;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Sealed.$markImplementor(/**@type {Function}*/ (Sealed));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Sealed), 'switchpatterns.SwitchPatterns$Sealed');
+
+exports = Sealed;
+
+//# sourceMappingURL=SwitchPatterns$Sealed.js.map

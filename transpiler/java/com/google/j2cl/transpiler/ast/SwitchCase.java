@@ -27,7 +27,7 @@ import java.util.List;
 /** Switch case. */
 @Visitable
 public abstract sealed class SwitchCase extends Node implements Cloneable<SwitchCase>
-    permits SwitchCaseDefault, SwitchCaseExpressions {
+    permits SwitchCaseDefault, SwitchCaseExpressions, SwitchCasePattern {
   private final boolean canFallthrough;
   private final SourcePosition sourcePosition;
 

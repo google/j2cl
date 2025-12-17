@@ -16,6 +16,7 @@
 package switchpatterns;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
@@ -26,9 +27,80 @@ import jsinterop.annotations.JsEnum;
 // backends.
 public class Main {
   public static void main(String... args) {
+    testSwitchPatterns();
     testSwitchValues();
     testSwitchSideEffectInExpression();
+    testSwitchCaseEvaluationOrder();
     // TODO(b/465574821):Add tests for jsenums.
+  }
+
+  private static void testSwitchPatterns() {
+    assertTrue(getSwitchPattern("Hello") == 1);
+    assertTrue(getSwitchPattern("Bye") == 2);
+    assertTrue(getSwitchPattern(44) == 3);
+    assertTrue(getSwitchPattern(45) == 4); // default
+    assertTrue(getSwitchPattern(true) == 4); // default
+    assertThrowsNullPointerException(() -> getSwitchPattern(null));
+    assertThrowsNullPointerException(() -> getSwitchPattern(getUndefined()));
+
+    assertTrue(getSwitchPatternWithNull("Hello") == 1);
+    assertTrue(getSwitchPatternWithNull("Bye") == 2);
+    assertTrue(getSwitchPatternWithNull(44) == 3);
+    assertTrue(getSwitchPatternWithNull(45) == 4); // default
+    assertTrue(getSwitchPatternWithNull(true) == 4); // default
+    assertTrue(getSwitchPatternWithNull(null) == 5);
+    assertTrue(getSwitchPatternWithNull(getUndefined()) == 5);
+
+    assertTrue(getSwitchPatternWithExpressions(42) == 1);
+    assertTrue(getSwitchPatternWithExpressions(43) == 1);
+    assertTrue(getSwitchPatternWithExpressions(4) == 2);
+    assertTrue(getSwitchPatternWithExpressions(5) == 4);
+    assertThrowsNullPointerException(() -> getSwitchPatternWithExpressions(null));
+    assertThrowsNullPointerException(() -> getSwitchPatternWithExpressions(getUndefined()));
+
+    assertTrue(getSwitchPatternWithExpressionsAndNull(42) == 1);
+    assertTrue(getSwitchPatternWithExpressionsAndNull(43) == 1);
+    assertTrue(getSwitchPatternWithExpressionsAndNull(4) == 2);
+    assertTrue(getSwitchPatternWithExpressionsAndNull(5) == 4);
+    assertTrue(getSwitchPatternWithExpressionsAndNull(null) == 3);
+    assertTrue(getSwitchPatternWithExpressionsAndNull(getUndefined()) == 3);
+  }
+
+  private static int getSwitchPattern(Object o) {
+    return switch (o) {
+      case String s when s.length() == 5 -> 1;
+      case Integer i when i % 2 == 0 -> 3;
+      case String s -> 2;
+      default -> 4;
+    };
+  }
+
+  private static int getSwitchPatternWithNull(Object o) {
+    return switch (o) {
+      case String s when s.length() == 5 -> 1;
+      case Integer i when i % 2 == 0 -> 3;
+      case null -> 5;
+      case String s -> 2;
+      default -> 4;
+    };
+  }
+
+  private static int getSwitchPatternWithExpressions(Integer i) {
+    return switch (i) {
+      case 42, 43 -> 1;
+      case Integer j when j % 2 == 0 -> 2;
+      case Number n -> 4;
+    };
+  }
+
+  private static int getSwitchPatternWithExpressionsAndNull(Integer i) {
+    return switch (i) {
+      // Note that the comparison to 42 must not NPE if i is null.
+      case 42, 43 -> 1;
+      case Integer j when j % 2 == 0 -> 2;
+      case null -> 3;
+      case Number n -> 4;
+    };
   }
 
   private static void testSwitchValues() {
@@ -166,5 +238,25 @@ public class Main {
       }
       case null, default -> 3;
     };
+  }
+
+  static class SideEffectTracker {
+    String sideEffects = "";
+
+    boolean test(String testString, boolean succeed) {
+      sideEffects += testString;
+      return succeed;
+    }
+  }
+
+  private static void testSwitchCaseEvaluationOrder() {
+    SideEffectTracker s = new SideEffectTracker();
+    switch (s) {
+      case SideEffectTracker st when st.test("1", false) -> {}
+      case SideEffectTracker st when st.test("2", true) -> {}
+      default -> {}
+    }
+
+    assertEquals("12", s.sideEffects);
   }
 }
