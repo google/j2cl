@@ -201,6 +201,12 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "ThrowsInSwitchPattern",
+    extra_defs = ["--inline_functions=false"],
+    deps = [":base"],
+)
+
+j2cl_test_integration_test_data(
     name = "ThrowsInJsConstructorTest",
     extra_defs = ["--inline_functions=false"],
     deps = [

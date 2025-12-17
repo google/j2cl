@@ -62,6 +62,11 @@ public class StacktraceIntegration2Test extends IntegrationTestBase {
   }
 
   @Test
+  public void testThrowsInSwitchPattern() throws Exception {
+    runStacktraceTest("ThrowsInSwitchPattern");
+  }
+
+  @Test
   public void testExceptionWithCause() throws Exception {
     runStacktraceTest("ExceptionWithCauseStacktraceTest");
   }
