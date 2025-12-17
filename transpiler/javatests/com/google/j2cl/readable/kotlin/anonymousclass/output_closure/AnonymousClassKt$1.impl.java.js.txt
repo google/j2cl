@@ -3,7 +3,7 @@ goog.module('anonymousclass.AnonymousClassKt.$1$impl');
 const SomeClass = goog.require('anonymousclass.SomeClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let OfInt = goog.forwardDeclare('javaemul.internal.Ref.OfInt$impl');
+let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
 
 /**
  * @final
@@ -12,25 +12,25 @@ class $1 extends SomeClass {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {OfInt} @nodts*/
+  /**@type {!Ref<number>} @nodts*/
   this.$captured_a__anonymousclass_AnonymousClassKt_1;
  }
  /** @nodts @return {!$1} */
- static $create__javaemul_internal_Ref_OfInt(/** OfInt */ $captured_a) {
+ static $create__javaemul_internal_Ref(/** !Ref<number> */ $captured_a) {
   $1.$clinit();
   let $instance = new $1();
-  $instance.$ctor__anonymousclass_AnonymousClassKt_1__javaemul_internal_Ref_OfInt__void($captured_a);
+  $instance.$ctor__anonymousclass_AnonymousClassKt_1__javaemul_internal_Ref__void($captured_a);
   return $instance;
  }
  /** @nodts */
- $ctor__anonymousclass_AnonymousClassKt_1__javaemul_internal_Ref_OfInt__void(/** OfInt */ $captured_a) {
+ $ctor__anonymousclass_AnonymousClassKt_1__javaemul_internal_Ref__void(/** !Ref<number> */ $captured_a) {
   this.$captured_a__anonymousclass_AnonymousClassKt_1 = $captured_a;
-  $captured_a.f_element__javaemul_internal_Ref_OfInt = $captured_a.f_element__javaemul_internal_Ref_OfInt + 1 | 0;
-  this.$ctor__anonymousclass_SomeClass__int__void($captured_a.f_element__javaemul_internal_Ref_OfInt);
+  $captured_a.f_element__javaemul_internal_Ref = $captured_a.f_element__javaemul_internal_Ref + 1 | 0;
+  this.$ctor__anonymousclass_SomeClass__int__void($captured_a.f_element__javaemul_internal_Ref);
  }
  /** @override @nodts @return {string} */
  m_foo__java_lang_String() {
-  this.$captured_a__anonymousclass_AnonymousClassKt_1.f_element__javaemul_internal_Ref_OfInt = 2;
+  this.$captured_a__anonymousclass_AnonymousClassKt_1.f_element__javaemul_internal_Ref = 2;
   return 'a';
  }
  /** @nodts */
