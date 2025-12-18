@@ -26,6 +26,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayCreationReference;
@@ -186,6 +187,8 @@ import javax.lang.model.type.TypeKind;
 @SuppressWarnings("ASTHelpersSuggestions")
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private final JavaEnvironment environment;
+  private final Problems problems;
+
   private final Map<VariableElement, Variable> variableByVariableElement = new HashMap<>();
   // Keeps track of labels that are currently in scope. Even though labels cannot have the
   // same name if they are nested in the same method body, labels with the same name could
@@ -194,8 +197,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private final Map<String, Deque<Label>> labelsInScope = new HashMap<>();
   private JCCompilationUnit javacUnit;
 
-  CompilationUnitBuilder(JavaEnvironment environment) {
+  CompilationUnitBuilder(JavaEnvironment environment, Problems problems) {
     this.environment = environment;
+    this.problems = problems;
+    this.problems.abortIfCancelled();
   }
 
   /**
@@ -238,6 +243,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private void convertTypeBody(Type type, List<JCTree> bodyDeclarations) {
+    problems.abortIfCancelled();
     for (JCTree bodyDeclaration : bodyDeclarations) {
       switch (bodyDeclaration) {
         case JCVariableDecl fieldDeclaration ->
@@ -274,6 +280,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 "Unimplemented translation for BodyDeclaration type: %s.",
                 bodyDeclaration.getClass().getName());
       }
+      problems.abortIfCancelled();
     }
   }
 

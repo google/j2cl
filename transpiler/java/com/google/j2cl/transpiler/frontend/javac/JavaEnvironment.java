@@ -35,6 +35,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.AnnotationValue;
@@ -126,8 +127,11 @@ class JavaEnvironment {
   JavacTypes javacTypes;
   Types internalTypes;
   JavacElements elements;
+  Problems problems;
 
-  JavaEnvironment(Context context, Collection<String> wellKnownQualifiedBinaryNames) {
+  JavaEnvironment(
+      Context context, Collection<String> wellKnownQualifiedBinaryNames, Problems problems) {
+    this.problems = problems;
     this.javacTypes = JavacTypes.instance(context);
     this.internalTypes = Types.instance(context);
     this.elements = JavacElements.instance(context);
@@ -142,12 +146,14 @@ class JavaEnvironment {
     // Add well-known, non-primitive types.
     wellKnownQualifiedBinaryNames.forEach(
         binaryName -> {
+          this.problems.abortIfCancelled();
           String qualifiedSourceName = binaryName.replace('$', '.');
           TypeElement element = getTypeElement(qualifiedSourceName);
           if (element != null) {
             builder.addReferenceType(createDeclaredTypeDescriptor(element.asType()));
           }
         });
+    this.problems.abortIfCancelled();
     builder.buildSingleton();
   }
 

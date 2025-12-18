@@ -31,6 +31,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.Tree;
+import com.sun.source.util.TaskEvent;
+import com.sun.source.util.TaskListener;
 import com.sun.tools.javac.api.JavacTaskImpl;
 import com.sun.tools.javac.file.JavacFileManager;
 import com.sun.tools.javac.tree.JCTree;
@@ -69,7 +71,10 @@ public class JavacParser {
         options.getSources().stream()
             .collect(toImmutableMap(FileInfo::sourcePath, FileInfo::targetPath));
 
+    problems.abortIfCancelled();
     try {
+      // TODO(b/470163090): Customize the JavaCompiler instance to have more granular control for
+      // cancelation.
       JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
       DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
       JavacFileManager fileManager =
@@ -94,14 +99,28 @@ public class JavacParser {
                       targetPathBySourcePath.keySet().stream()
                           .map(File::new)
                           .collect(toImmutableList())));
+      task.addTaskListener(
+          new TaskListener() {
+            @Override
+            public void started(TaskEvent taskEvent) {
+              problems.abortIfCancelled();
+            }
+
+            @Override
+            public void finished(TaskEvent taskEvent) {
+              problems.abortIfCancelled();
+            }
+          });
+
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList(task.parse());
       task.analyze();
       reportErrors(diagnostics, javacCompilationUnits, options.getForbiddenAnnotations());
       problems.abortIfHasErrors();
 
       JavaEnvironment javaEnvironment =
-          new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames());
-      CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder(javaEnvironment);
+          new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
+      CompilationUnitBuilder compilationUnitBuilder =
+          new CompilationUnitBuilder(javaEnvironment, problems);
 
       ImmutableList.Builder<CompilationUnit> compilationUnits = ImmutableList.builder();
       for (var cu : javacCompilationUnits) {
