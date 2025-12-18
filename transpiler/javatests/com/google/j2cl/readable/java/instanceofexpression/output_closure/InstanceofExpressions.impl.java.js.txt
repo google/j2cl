@@ -18,6 +18,7 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $$boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $$byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
@@ -112,13 +113,13 @@ class InstanceofExpressions extends j_l_Object {
  /** @nodts */
  m_testPatternMatch__void_$p_instanceofexpression_InstanceofExpressions() {
   let /** * */ exp, /** ?string */ s, /** * */ exp_1, /** Integer */ i, /** * */ exp_2, /** (Number|number|!$Long) */ n;
-  if (!(exp = j_l_Object.$create__(), j_l_String.$isInstance(exp) && (s = (/**@type {?string}*/ (exp)), true)) || j_l_String.m_length__java_lang_String__int(s) == 2) {
+  if (!(exp = j_l_Object.$create__(), j_l_String.$isInstance(exp) && (s = (/**@type {?string}*/ ($Casts.$to(exp, j_l_String))), true)) || j_l_String.m_length__java_lang_String__int(s) == 2) {
    return;
   }
-  if ((exp_1 = j_l_Object.$create__(), Integer.$isInstance(exp_1) && (i = (/**@type {Integer}*/ (exp_1)), true)) && i.intValue() == 2) {
+  if ((exp_1 = j_l_Object.$create__(), Integer.$isInstance(exp_1) && (i = (/**@type {Integer}*/ ($Casts.$to(exp_1, Integer))), true)) && i.intValue() == 2) {
    let l = i.intValue();
   }
-  if (!(exp_2 = j_l_Object.$create__(), Number.$isInstance(exp_2) && (n = (/**@type {(Number|number|!$Long)}*/ (exp_2)), true))) {
+  if (!(exp_2 = j_l_Object.$create__(), Number.$isInstance(exp_2) && (n = (/**@type {(Number|number|!$Long)}*/ ($Casts.$to(exp_2, Number))), true))) {
    let j = j_l_String.m_length__java_lang_String__int(s);
   } else {
    let k = $Numbers.m_byteValue__java_lang_Number__byte(n);
@@ -156,6 +157,7 @@ class InstanceofExpressions extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
   $$boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
   $$byte = goog.module.get('vmbootstrap.primitives.$byte$impl');

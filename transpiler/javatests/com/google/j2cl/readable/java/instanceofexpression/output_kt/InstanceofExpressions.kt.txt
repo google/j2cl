@@ -118,7 +118,7 @@ open class InstanceofExpressions {
   if (!run {
    val exp: Any = Any()
    exp is String && run {
-    s = (exp)
+    s = exp as String?
     true
    }
   } || s!!.length == 2) {
@@ -127,7 +127,7 @@ open class InstanceofExpressions {
   if (run {
    val exp_1: Any = Any()
    exp_1 is Int && run {
-    i = (exp_1)
+    i = exp_1 as Int?
     true
    }
   } && i!!.toInt() == 2) {
@@ -136,7 +136,7 @@ open class InstanceofExpressions {
   if (!run {
    val exp_2: Any = Any()
    exp_2 is Number && run {
-    n = (exp_2)
+    n = exp_2 as Number?
     true
    }
   }) {

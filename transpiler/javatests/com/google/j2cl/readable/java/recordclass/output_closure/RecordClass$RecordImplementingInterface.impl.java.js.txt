@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const I = goog.require('recordclass.RecordClass.I$impl');
 
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
@@ -36,7 +37,7 @@ class RecordImplementingInterface extends Record {
  /** @override @return {boolean} */
  equals(/** * */ arg0) {
   let /** RecordImplementingInterface */ $other;
-  if (!(RecordImplementingInterface.$isInstance(arg0) && ($other = (/**@type {RecordImplementingInterface}*/ (arg0)), true))) {
+  if (!(RecordImplementingInterface.$isInstance(arg0) && ($other = (/**@type {RecordImplementingInterface}*/ ($Casts.$to(arg0, RecordImplementingInterface))), true))) {
    return false;
   }
   return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_a__recordclass_RecordClass_RecordImplementingInterface_], [$other.f_a__recordclass_RecordClass_RecordImplementingInterface_]);
@@ -63,6 +64,7 @@ class RecordImplementingInterface extends Record {
  /** @nodts */
  static $loadModules() {
   Arrays = goog.module.get('java.util.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 I.$markImplementor(RecordImplementingInterface);

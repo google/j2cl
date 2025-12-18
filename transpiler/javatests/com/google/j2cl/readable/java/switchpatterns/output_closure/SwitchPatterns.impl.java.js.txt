@@ -16,6 +16,7 @@ let $Overlay = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit.$Overlay
 let Sealed = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed$impl');
 let A = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.A$impl');
 let B = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.B$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
 
@@ -42,9 +43,9 @@ class SwitchPatterns extends j_l_Object {
    let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
    let /** number */ $caseIndex;
    let /** ?string */ s, /** ?string */ s_1;
-   if (j_l_String.$isInstance($selector) && (s = (/**@type {?string}*/ ($selector)), true) && j_l_String.m_length__java_lang_String__int(s) == 1) {
+   if (j_l_String.$isInstance($selector) && (s = (/**@type {?string}*/ ($Casts.$to($selector, j_l_String))), true) && j_l_String.m_length__java_lang_String__int(s) == 1) {
     $caseIndex = 0;
-   } else if (j_l_String.$isInstance($selector) && (s_1 = (/**@type {?string}*/ ($selector)), true)) {
+   } else if (j_l_String.$isInstance($selector) && (s_1 = (/**@type {?string}*/ ($Casts.$to($selector, j_l_String))), true)) {
     $caseIndex = 1;
    } else {
     $caseIndex = 2;
@@ -65,9 +66,9 @@ class SwitchPatterns extends j_l_Object {
    let /** Integer */ j, /** (Number|number|!$Long) */ n;
    if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean($selector_1, Integer.valueOf(23)) || Objects.m_equals__java_lang_Object__java_lang_Object__boolean($selector_1, Integer.valueOf(32))) {
     $caseIndex_1 = 0;
-   } else if (Integer.$isInstance($selector_1) && (j = (/**@type {Integer}*/ ($selector_1)), true) && j.intValue() > 2) {
+   } else if (Integer.$isInstance($selector_1) && (j = (/**@type {Integer}*/ ($Casts.$to($selector_1, Integer))), true) && j.intValue() > 2) {
     $caseIndex_1 = 1;
-   } else if (Number.$isInstance($selector_1) && (n = (/**@type {(Number|number|!$Long)}*/ ($selector_1)), true)) {
+   } else if (Number.$isInstance($selector_1) && (n = (/**@type {(Number|number|!$Long)}*/ ($Casts.$to($selector_1, Number))), true)) {
     $caseIndex_1 = 2;
    } else {
     $caseIndex_1 = 3;
@@ -112,9 +113,9 @@ class SwitchPatterns extends j_l_Object {
    let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
    let /** number */ $caseIndex;
    let /** A */ a, /** B */ b;
-   if (A.$isInstance($selector) && (a = (/**@type {A}*/ ($selector)), true)) {
+   if (A.$isInstance($selector) && (a = (/**@type {A}*/ ($Casts.$to($selector, A))), true)) {
     $caseIndex = 0;
-   } else if (B.$isInstance($selector) && (b = (/**@type {B}*/ ($selector)), true)) {
+   } else if (B.$isInstance($selector) && (b = (/**@type {B}*/ ($Casts.$to($selector, B))), true)) {
     $caseIndex = 1;
    } else {
     $caseIndex = 2;
@@ -215,6 +216,7 @@ class SwitchPatterns extends j_l_Object {
   $Overlay = goog.module.get('switchpatterns.SwitchPatterns.Digit.$Overlay$impl');
   A = goog.module.get('switchpatterns.SwitchPatterns.Sealed.A$impl');
   B = goog.module.get('switchpatterns.SwitchPatterns.Sealed.B$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }

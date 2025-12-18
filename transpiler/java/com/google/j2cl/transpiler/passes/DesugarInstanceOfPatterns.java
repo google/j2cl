@@ -19,10 +19,10 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -103,7 +103,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
             .infixAnd(
                 assignPatternVariableReturningTrue(
                     patternVariable,
-                    JsDocCastExpression.newBuilder()
+                    CastExpression.newBuilder()
                         .setExpression(expressionVariable.createReference())
                         .setCastTypeDescriptor(patternVariable.getTypeDescriptor())
                         .build())));

@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
@@ -35,7 +36,7 @@ class $1LocalRecord extends Record {
  /** @override @return {boolean} */
  equals(/** * */ arg0) {
   let /** $1LocalRecord */ $other;
-  if (!($1LocalRecord.$isInstance(arg0) && ($other = (/**@type {$1LocalRecord}*/ (arg0)), true))) {
+  if (!($1LocalRecord.$isInstance(arg0) && ($other = (/**@type {$1LocalRecord}*/ ($Casts.$to(arg0, $1LocalRecord))), true))) {
    return false;
   }
   return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([Integer.valueOf(this.f_value__recordclass_RecordClass_1LocalRecord_)], [Integer.valueOf($other.f_value__recordclass_RecordClass_1LocalRecord_)]);
@@ -63,6 +64,7 @@ class $1LocalRecord extends Record {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   Arrays = goog.module.get('java.util.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 $Util.$setClassMetadata($1LocalRecord, 'recordclass.RecordClass$1LocalRecord');

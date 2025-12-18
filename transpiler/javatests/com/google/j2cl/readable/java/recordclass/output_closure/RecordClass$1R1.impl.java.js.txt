@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let $1R2 = goog.forwardDeclare('recordclass.RecordClass.$1R2$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
@@ -49,7 +50,7 @@ class $1R1 extends Record {
  /** @override @return {boolean} */
  equals(/** * */ arg0) {
   let /** $1R1 */ $other;
-  if (!($1R1.$isInstance(arg0) && ($other = (/**@type {$1R1}*/ (arg0)), true))) {
+  if (!($1R1.$isInstance(arg0) && ($other = (/**@type {$1R1}*/ ($Casts.$to(arg0, $1R1))), true))) {
    return false;
   }
   return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_o__recordclass_RecordClass_1R1_, this.f_s__recordclass_RecordClass_1R1_, this.f_n__recordclass_RecordClass_1R1_], [$other.f_o__recordclass_RecordClass_1R1_, $other.f_s__recordclass_RecordClass_1R1_, $other.f_n__recordclass_RecordClass_1R1_]);
@@ -76,6 +77,7 @@ class $1R1 extends Record {
  /** @nodts */
  static $loadModules() {
   Arrays = goog.module.get('java.util.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 $Util.$setClassMetadata($1R1, 'recordclass.RecordClass$1R1');

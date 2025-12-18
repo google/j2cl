@@ -4,6 +4,7 @@ const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
@@ -34,7 +35,7 @@ class RecordWithOverriddenAccessor extends Record {
  /** @override @return {boolean} */
  equals(/** * */ arg0) {
   let /** RecordWithOverriddenAccessor */ $other;
-  if (!(RecordWithOverriddenAccessor.$isInstance(arg0) && ($other = (/**@type {RecordWithOverriddenAccessor}*/ (arg0)), true))) {
+  if (!(RecordWithOverriddenAccessor.$isInstance(arg0) && ($other = (/**@type {RecordWithOverriddenAccessor}*/ ($Casts.$to(arg0, RecordWithOverriddenAccessor))), true))) {
    return false;
   }
   return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_value__recordclass_RecordClass_RecordWithOverriddenAccessor_], [$other.f_value__recordclass_RecordClass_RecordWithOverriddenAccessor_]);
@@ -61,6 +62,7 @@ class RecordWithOverriddenAccessor extends Record {
  /** @nodts */
  static $loadModules() {
   Arrays = goog.module.get('java.util.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 $Util.$setClassMetadata(RecordWithOverriddenAccessor, 'recordclass.RecordClass$RecordWithOverriddenAccessor');
