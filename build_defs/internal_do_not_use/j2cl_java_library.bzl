@@ -61,6 +61,8 @@ def _impl_j2cl_library(ctx):
     if (len(ctx.attr.kotlincopts) and not ctx.label.package.startswith("")):
         fail("kotlincopts can only be internally set by J2CL")
 
+    kotlincopts = ctx.attr.kotlincopts
+
     j2cl_provider = j2cl_common.compile(
         ctx,
         srcs = srcs,
@@ -70,7 +72,7 @@ def _impl_j2cl_library(ctx):
         plugins = [p[JavaPluginInfo] for p in ctx.attr.plugins],
         exported_plugins = [p[JavaPluginInfo] for p in ctx.attr.exported_plugins],
         javac_opts = extra_javacopts + ctx.attr.javacopts,
-        kotlincopts = ctx.attr.kotlincopts,
+        kotlincopts = kotlincopts,
         internal_transpiler_flags = {
             k: getattr(ctx.attr, k)
             for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
