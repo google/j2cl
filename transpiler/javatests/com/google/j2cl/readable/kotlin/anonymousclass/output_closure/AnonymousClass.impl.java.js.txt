@@ -7,6 +7,7 @@ let $1 = goog.forwardDeclare('anonymousclass.AnonymousClass.$1$impl');
 let $2 = goog.forwardDeclare('anonymousclass.AnonymousClass.$2$impl');
 let $3 = goog.forwardDeclare('anonymousclass.AnonymousClass.$3$impl');
 let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
+let OfObject = goog.forwardDeclare('javaemul.internal.Ref.OfObject$impl');
 
 /**
  * @final
@@ -50,12 +51,12 @@ class AnonymousClass extends j_l_Object {
  }
  /** @final @nodts */
  m_main__void() {
-  let capturedVar = /**@type {!Ref<number>}*/ (Ref.$create__java_lang_Object(1));
-  let capturedVarModifiedinOuterScope = /**@type {!Ref<string>}*/ (Ref.$create__java_lang_Object('initial'));
-  let instance = $2.$create__anonymousclass_AnonymousClass__javaemul_internal_Ref__javaemul_internal_Ref(this, capturedVar, capturedVarModifiedinOuterScope);
-  let unary = capturedVar.f_element__javaemul_internal_Ref;
-  capturedVar.f_element__javaemul_internal_Ref = unary + 1 | 0;
-  capturedVarModifiedinOuterScope.f_element__javaemul_internal_Ref = 'modified';
+  let capturedVar = Ref.m_createRef__int__javaemul_internal_Ref_OfInt(1);
+  let capturedVarModifiedinOuterScope = /**@type {OfObject<string>}*/ (Ref.m_createRef__java_lang_Object__javaemul_internal_Ref_OfObject('initial'));
+  let instance = $2.$create__anonymousclass_AnonymousClass__javaemul_internal_Ref_OfInt__javaemul_internal_Ref_OfObject(this, capturedVar, capturedVarModifiedinOuterScope);
+  let unary = capturedVar.f_element__javaemul_internal_Ref_OfInt;
+  capturedVar.f_element__javaemul_internal_Ref_OfInt = unary + 1 | 0;
+  capturedVarModifiedinOuterScope.f_element__javaemul_internal_Ref_OfObject = 'modified';
   let instanceWithStaticMembers = $3.$create__anonymousclass_AnonymousClass(this);
  }
  /** @nodts */
