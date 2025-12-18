@@ -12,4 +12,5 @@ KOTLIN_ALLOWLIST = allowlists.of_packages([
     "//third_party/java_src/xplat/j2kt/jre/java/...",
     "//third_party/kotlin/kotlin_kythe_plugin/...",
     "//third_party/kotlin/kmp_stubs/...",
+    "//third_party/kotlin/kotlinx_atomicfu/...",
 ], include = [J2KT_WEB_ENABLED, J2KT_WEB_EXPERIMENT_ENABLED])
