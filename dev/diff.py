@@ -17,6 +17,7 @@ import argparse
 import os
 import shutil
 import subprocess
+import tempfile
 
 import repo_util
 
@@ -103,10 +104,10 @@ def main(argv):
   else:
     modified = _create_target_info(argv.targets[1])
 
-  _diff(original, modified, argv.size, argv.lines, argv.filter_noise)
+  _diff(original, modified, argv.size, argv.group_by, argv.filter_noise)
 
 
-def _diff(original, modified, is_size, is_size_lines, filter_noise):
+def _diff(original, modified, is_size, group_by, filter_noise):
   print(f"Constructing a diff of changes in '{modified.blaze_target}'.")
 
   original_targets = [original.blaze_target]
@@ -125,7 +126,7 @@ def _diff(original, modified, is_size, is_size_lines, filter_noise):
   )
 
   if is_size:
-    _diff_size(original, modified, is_size_lines)
+    _diff_size(original, modified, group_by)
     return
 
   if original.is_wasm():
@@ -188,7 +189,7 @@ def _diff(original, modified, is_size, is_size_lines, filter_noise):
   )
 
 
-def _diff_size(original, modified, is_size_lines):
+def _diff_size(original, modified, group_by):
   """Calculates and outputs the size difference of the original and modified targets."""
   print("  Performing size diff...")
 
@@ -205,24 +206,46 @@ def _diff_size(original, modified, is_size_lines):
   )
 
   if original.is_wasm():
-    # go/bloaty
-    bloaty_domain = "inlines" if is_size_lines else "compileunits"
-    subprocess.call(
-        [
-            "/google/bin/releases/protobuf-team/bloaty/bloaty",
-            "--allow_unsafe_non_google3_input",
-            "--domain=file",
-            "-d", "sections," + bloaty_domain,
-            "-n", "0",  # No limit on number of rows
-            "--source-map="
-            + f"{original.get_output_file()}={original.get_output_file()}.map",
-            "--source-map="
-            + f"{modified.get_output_file()}={modified.get_output_file()}.map",
-            f"{modified.get_output_file()}",
-            "--",
-            f"{original.get_output_file()}",
-        ]
-    )
+    _run_bloaty(original, modified, group_by)
+
+
+def _run_bloaty(original, modified, group_by):
+  """Runs go/bloaty to analyze the size difference of the original and modified targets."""
+  with tempfile.NamedTemporaryFile(suffix=".bloaty", mode="w+t") as config:
+    # Create a custom data source for bloaty to parse packages
+    config.write(r"""custom_data_source: {
+      name: "package"
+      base_data_source: "compileunits"
+      # Names are in the form of <google3-package>/<target>.js/<file>
+      # Extracting text before /<target>.js give us the google3 package name.
+      rewrite: {
+        pattern: "^(.*)/.*\\.js/"
+        replacement: "\\1"
+      }
+    }
+    """)
+    config.flush()
+
+    bloaty_domain_by_group = {
+        "file": "compileunits",
+        "line": "inlines",
+        "package": "package",
+    }
+    subprocess.call([
+        "/google/bin/releases/protobuf-team/bloaty/bloaty",
+        "--allow_unsafe_non_google3_input",
+        "--domain=file",
+        "-c", config.name,
+        "-d", "sections," + bloaty_domain_by_group[group_by],
+        "-n", "0",  # No limit on number of rows
+        "--source-map="
+        + f"{original.get_output_file()}={original.get_output_file()}.map",
+        "--source-map="
+        + f"{modified.get_output_file()}={modified.get_output_file()}.map",
+        f"{modified.get_output_file()}",
+        "--",
+        f"{original.get_output_file()}",
+    ])
 
 
 def _print_size_diff(prefix, original_size, modified_size):
@@ -242,10 +265,10 @@ def add_arguments(parser):
   )
 
   parser.add_argument(
-      "--lines",
-      default=False,
-      action=argparse.BooleanOptionalAction,
-      help="For the size diff, compare by line. Defaults to file. See --size.",
+      "--group_by",
+      default="file",
+      choices=["line", "file", "package"],
+      help="For --size, group by line, file or target. Defaults to file.",
   )
 
   parser.add_argument(
