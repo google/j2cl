@@ -79,6 +79,25 @@ interface SomeInterface {
           return "a";
         }
       };
+
+  static void captures() {
+    // i is effectively final from Java's perspective but our simple analysis in
+    // `MakeVariablesFinal` is not strong enough to infer that.
+    int i;
+    if (implicitlyStatic == null) {
+      i = 1;
+    } else {
+      i = 2;
+    }
+    new SomeClass(1) {
+      // The capture is allowed since i is effectively final.
+      int capturedI = i;
+
+      public String foo() {
+        return "a";
+      }
+    };
+  }
 }
 
 // Test case for b/321755877
@@ -99,3 +118,4 @@ class JsConstructorSubclass extends JsConstructorClass {
     super(trueVar ? new Object() {} : null);
   }
 }
+

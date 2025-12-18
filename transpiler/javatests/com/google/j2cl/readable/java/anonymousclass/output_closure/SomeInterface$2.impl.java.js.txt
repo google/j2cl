@@ -1,0 +1,56 @@
+goog.module('anonymousclass.SomeInterface.$2$impl');
+
+const SomeClass = goog.require('anonymousclass.SomeClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let OfInt = goog.forwardDeclare('javaemul.internal.Ref.OfInt$impl');
+
+class $2 extends SomeClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_capturedI__anonymousclass_SomeInterface_2 = 0;
+  /**@type {OfInt} @nodts*/
+  this.$captured_i__anonymousclass_SomeInterface_2;
+ }
+ /** @nodts @return {!$2} */
+ static $create__javaemul_internal_Ref_OfInt__int(/** OfInt */ $captured_i, /** number */ i) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__anonymousclass_SomeInterface_2__javaemul_internal_Ref_OfInt__int__void($captured_i, i);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_SomeInterface_2__javaemul_internal_Ref_OfInt__int__void(/** OfInt */ $captured_i, /** number */ i) {
+  this.$captured_i__anonymousclass_SomeInterface_2 = $captured_i;
+  this.$ctor__anonymousclass_SomeClass__int__void(i);
+  this.$init__void_$p_anonymousclass_SomeInterface_2();
+ }
+ /** @override @nodts @return {?string} */
+ m_foo__java_lang_String() {
+  return 'a';
+ }
+ /** @private @nodts */
+ $init__void_$p_anonymousclass_SomeInterface_2() {
+  this.f_capturedI__anonymousclass_SomeInterface_2 = this.$captured_i__anonymousclass_SomeInterface_2.f_element__javaemul_internal_Ref_OfInt;
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  SomeClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2, 'anonymousclass.SomeInterface$2');
+
+exports = $2;
+
+//# sourceMappingURL=SomeInterface$2.js.map

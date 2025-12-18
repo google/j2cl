@@ -105,6 +105,24 @@ interface SomeInterface {
     return "a"
    }
   }
+
+  @JvmStatic
+  fun captures() {
+   var i: Int = 0
+   if (SomeInterface.implicitlyStatic == null) {
+    i = 1
+   } else {
+    i = 2
+   }
+   object : SomeClass(1) {
+    @JvmField
+    internal var capturedI_pp_anonymousclass: Int = i
+
+    override fun foo(): String? {
+     return "a"
+    }
+   }
+  }
  }
 }
 
