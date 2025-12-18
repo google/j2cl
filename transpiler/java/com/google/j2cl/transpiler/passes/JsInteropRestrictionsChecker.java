@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.MoreCollectors.onlyElement;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangRecord;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -70,6 +71,7 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.Pattern;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
@@ -996,36 +998,59 @@ public class JsInteropRestrictionsChecker {
           @Override
           public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
             TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-            if (testTypeDescriptor.isNative()
-                && testTypeDescriptor.isInterface()
-                && !((DeclaredTypeDescriptor) testTypeDescriptor).hasCustomIsInstanceMethod()) {
+            checkInstanceOfOperation(
+                testTypeDescriptor, instanceOfExpression, "Cannot do instanceof");
+          }
+
+          @Override
+          public void exitPattern(Pattern pattern) {
+            TypeDescriptor typeDescriptor = pattern.getTypeDescriptor();
+            HasSourcePosition hasSourcePosition =
+                (HasSourcePosition) getParent(HasSourcePosition.class::isInstance);
+
+            // TODO(b/466506644): Allow unconditional patterns on these types since there is no
+            // instanceof check.
+            checkInstanceOfOperation(typeDescriptor, hasSourcePosition, "Cannot pattern match");
+          }
+
+          private void checkInstanceOfOperation(
+              TypeDescriptor typeDescriptor,
+              HasSourcePosition hasSourcePosition,
+              String messagePrefix) {
+            if (typeDescriptor.isNative()
+                && typeDescriptor.isInterface()
+                && !((DeclaredTypeDescriptor) typeDescriptor).hasCustomIsInstanceMethod()) {
               problems.error(
-                  instanceOfExpression.getSourcePosition(),
-                  "Cannot do instanceof against native JsType interface '%s'.",
-                  testTypeDescriptor.getReadableDescription());
-            } else if (checkWasmRestrictions && testTypeDescriptor.isNative()) {
+                  hasSourcePosition.getSourcePosition(),
+                  "%s against native JsType interface '%s'.",
+                  messagePrefix,
+                  typeDescriptor.getReadableDescription());
+            } else if (checkWasmRestrictions && typeDescriptor.isNative()) {
               // We currently do a "ref.test extern" in Wasm for instanceof for all native types,
               // which is not useful.
               problems.error(
-                  instanceOfExpression.getSourcePosition(),
-                  "Cannot do instanceof against native JsType '%s'.",
-                  testTypeDescriptor.getReadableDescription());
-            } else if (AstUtils.isNonNativeJsEnumArray(
-                instanceOfExpression.getTestTypeDescriptor())) {
+                  hasSourcePosition.getSourcePosition(),
+                  "%s against native JsType '%s'.",
+                  messagePrefix,
+                  typeDescriptor.getReadableDescription());
+            } else if (AstUtils.isNonNativeJsEnumArray(typeDescriptor)) {
               problems.error(
-                  instanceOfExpression.getSourcePosition(),
-                  "Cannot do instanceof against JsEnum array '%s'.",
-                  instanceOfExpression.getTestTypeDescriptor().getReadableDescription());
-            } else if (testTypeDescriptor.isJsFunctionImplementation()) {
+                  hasSourcePosition.getSourcePosition(),
+                  "%s against JsEnum array '%s'.",
+                  messagePrefix,
+                  typeDescriptor.getReadableDescription());
+            } else if (typeDescriptor.isJsFunctionImplementation()) {
               problems.error(
-                  instanceOfExpression.getSourcePosition(),
-                  "Cannot do instanceof against JsFunction implementation '%s'.",
-                  testTypeDescriptor.getReadableDescription());
-            } else if (testTypeDescriptor.isJsEnum() && testTypeDescriptor.isNative()) {
+                  hasSourcePosition.getSourcePosition(),
+                  "%s against JsFunction implementation '%s'.",
+                  messagePrefix,
+                  typeDescriptor.getReadableDescription());
+            } else if (typeDescriptor.isJsEnum() && typeDescriptor.isNative()) {
               problems.error(
-                  instanceOfExpression.getSourcePosition(),
-                  "Cannot do instanceof against native JsEnum '%s'.",
-                  testTypeDescriptor.getReadableDescription());
+                  hasSourcePosition.getSourcePosition(),
+                  "%s against native JsEnum '%s'.",
+                  messagePrefix,
+                  typeDescriptor.getReadableDescription());
             }
           }
 
@@ -1048,6 +1073,15 @@ public class JsInteropRestrictionsChecker {
       problems.error(
           type.getSourcePosition(),
           "Local class '%s' cannot be a JsType.",
+          type.getDeclaration().getReadableDescription());
+      return false;
+    }
+
+    if (typeDeclaration.getSuperTypeDescriptor() != null
+        && isJavaLangRecord(typeDeclaration.getSuperTypeDescriptor())) {
+      problems.error(
+          type.getSourcePosition(),
+          "Record class '%s' cannot be a JsType. (b/470146353)",
           type.getDeclaration().getReadableDescription());
       return false;
     }

@@ -26,7 +26,8 @@ import java.util.List;
 
 /** Switch case. */
 @Visitable
-public abstract sealed class SwitchCase extends Node implements Cloneable<SwitchCase>
+public abstract sealed class SwitchCase extends Node
+    implements Cloneable<SwitchCase>, HasSourcePosition
     permits SwitchCaseDefault, SwitchCaseExpressions, SwitchCasePattern {
   private final boolean canFallthrough;
   private final SourcePosition sourcePosition;
@@ -57,6 +58,7 @@ public abstract sealed class SwitchCase extends Node implements Cloneable<Switch
    */
   public abstract List<Statement> getStatements();
 
+  @Override
   public SourcePosition getSourcePosition() {
     return sourcePosition;
   }

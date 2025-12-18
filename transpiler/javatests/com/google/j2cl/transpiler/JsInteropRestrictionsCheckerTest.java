@@ -2005,12 +2005,34 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             """
             import jsinterop.annotations.*;
             @JsType(isNative=true) interface IBuggy {}
-            @JsType public class Buggy {
+            public class Buggy {
               public Buggy() { if (new Object() instanceof IBuggy) {} }
             }
             """)
         .assertErrorsWithoutSourcePosition(
             "Cannot do instanceof against native JsType interface 'IBuggy'.");
+  }
+
+  public void testJsTypeInterfaceInPatternFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            @JsType(isNative=true) interface IBuggy {}
+            record R(IBuggy b) {}
+            public class Buggy {
+              public Buggy() {
+                switch (new Object()) {
+                 case IBuggy b -> {}
+                 case R(IBuggy b) -> {}
+                 default -> {}
+                }
+              }
+            }
+            """)
+        .assertErrorsWithSourcePosition(
+            "Error:Buggy.java:8: Cannot pattern match against native JsType interface 'IBuggy'.",
+            "Error:Buggy.java:9: Cannot pattern match against native JsType interface 'IBuggy'.");
   }
 
   public void testNativeJsTypeEnumFails() {
@@ -2969,6 +2991,21 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class Buggy { void m() { @JsType class Local {} } }
             """)
         .assertErrorsWithoutSourcePosition("Local class 'Local' cannot be a JsType.");
+  }
+
+  public void testRecordJsTypeFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            @JsType
+            public record Buggy() {}
+            @JsType(isNative = true)
+            record NativeBuggy() {}
+            """)
+        .assertErrorsWithoutSourcePosition(
+            "Record class 'Buggy' cannot be a JsType. (b/470146353)",
+            "Record class 'NativeBuggy' cannot be a JsType. (b/470146353)");
   }
 
   public void testNativeJsTypeImplementsNativeJsTypeSucceeds() {

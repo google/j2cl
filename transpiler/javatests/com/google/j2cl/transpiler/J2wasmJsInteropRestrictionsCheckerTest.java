@@ -170,6 +170,43 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "Cannot do instanceof against native JsType interface 'BuggyInterface'.");
   }
 
+  public void testNativeJsTypePatternMatchFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            @JsType(isNative = true)
+            class Buggy {}
+            @JsType(isNative = true)
+            interface BuggyInterface {}
+
+            record R(BuggyInterface b) {}
+            class Main {
+              public Main() {
+                switch (new Object()) {
+                 case BuggyInterface b -> {}
+                 case R(BuggyInterface b) -> {}
+                 case R(Object o) -> {}
+                 case Buggy b -> {}
+                 case Buggy[] b -> {}
+                 default -> {}
+                }
+              }
+            }
+            """)
+        .assertErrorsWithSourcePosition(
+            // TODO(b/466508694): Decide if we can allow these or give a better error message if
+            // not.
+            "Error:Buggy.java:8: Native JsType 'BuggyInterface' cannot be assigned to 'Object'."
+                + " (b/262009761)",
+            "Error:Buggy.java:12: Cannot pattern match against native JsType interface"
+                + " 'BuggyInterface'.",
+            "Error:Buggy.java:13: Cannot pattern match against native JsType interface"
+                + " 'BuggyInterface'.",
+            "Error:Buggy.java:15: Cannot pattern match against native JsType 'Buggy'.",
+            "Error:Buggy.java:16: Variable 'b' cannot be of type 'Buggy[]'. (b/261079024)");
+  }
+
   public void testNativeJsTypeArrayFails() {
     assertTranspileFails(
             "test.Main",
