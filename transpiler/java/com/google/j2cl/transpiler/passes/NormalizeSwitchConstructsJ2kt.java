@@ -25,7 +25,10 @@ import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CastExpression;
@@ -37,20 +40,27 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
+import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.RecordPattern;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
+import com.google.j2cl.transpiler.ast.SwitchCasePattern;
+import com.google.j2cl.transpiler.ast.SwitchConstruct;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.YieldStatement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,11 +116,115 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    normalizeSwitchPatterns(compilationUnit);
     convertFallThroughSwitchExpressionsToSwitchStatements(compilationUnit);
     normalizeSwitchStatements(compilationUnit);
     convertToSwitchExpression(compilationUnit);
     reorderSwitchCases(compilationUnit);
     removeTrailingBreaks(compilationUnit);
+  }
+
+  /**
+   * Normalizes switch patterns to the subset that is directly supported by the Kotlin when
+   * expression.
+   */
+  private void normalizeSwitchPatterns(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+
+          @Override
+          public Statement rewriteSwitchStatement(SwitchStatement switchStatement) {
+            if (!switchStatement.hasPatterns()) {
+              return switchStatement;
+            }
+
+            List<Expression> variableDeclarations = new ArrayList<>();
+            Statement rewrittenSwitch =
+                normalizeSwitchPatterns(switchStatement, variableDeclarations);
+            return Block.newBuilder()
+                .addStatements(
+                    variableDeclarations.stream()
+                        .map(e -> e.makeStatement(switchStatement.getSourcePosition()))
+                        .collect(toImmutableList()))
+                .addStatement(rewrittenSwitch)
+                .build();
+          }
+
+          @Override
+          public Expression rewriteSwitchExpression(SwitchExpression switchExpression) {
+            if (!switchExpression.hasPatterns()) {
+              return switchExpression;
+            }
+
+            List<Expression> variableDeclarations = new ArrayList<>();
+            Expression rewrittenSwitch =
+                normalizeSwitchPatterns(switchExpression, variableDeclarations);
+            return MultiExpression.newBuilder()
+                .addExpressions(variableDeclarations)
+                .addExpressions(rewrittenSwitch)
+                .build();
+          }
+        });
+  }
+
+  private <T extends SwitchConstruct<T>> T normalizeSwitchPatterns(
+      T switchConstruct, List<Expression> variableDeclarations) {
+    // Extract the evaluation of the selector because the implementation of the binding patterns
+    // will need to refer to its value.
+    Expression selectorExpression = switchConstruct.getExpression();
+    Variable selector =
+        Variable.newBuilder()
+            .setName("$selector")
+            .setTypeDescriptor(selectorExpression.getTypeDescriptor())
+            .setFinal(true)
+            .build();
+    variableDeclarations.add(
+        VariableDeclarationExpression.newBuilder()
+            .addVariableDeclaration(selector, selectorExpression)
+            .build());
+
+    var cases = switchConstruct.getCases();
+    for (int i = 0; i < cases.size(); i++) {
+      if (!(cases.get(i) instanceof SwitchCasePattern switchCase)) {
+        continue;
+      }
+      cases.set(
+          i,
+          switch (switchCase.getPattern()) {
+            case BindingPattern pattern -> {
+              Variable variable = pattern.getVariable();
+              // Collect the declaration of the variables that appear in the binding patterns so
+              // that they are declared in a scope accessible by all the references.
+              variableDeclarations.add(
+                  VariableDeclarationExpression.newBuilder()
+                      .addVariableDeclarations(variable)
+                      .build());
+              yield switchCase.toBuilder()
+                  .setPattern(
+                      // Replace the variable by a dummy unnamed variable that will be ignored
+                      // in the backend.
+                      new BindingPattern(Variable.Builder.from(variable).setName("_").build()))
+                  .setGuard(
+                      // Add a trivially true guard that has the assignment of the pattern
+                      // variable.
+                      MultiExpression.newBuilder()
+                          .setExpressions(
+                              BinaryExpression.Builder.asAssignmentTo(variable)
+                                  .setRightOperand(selector.createReference())
+                                  .build(),
+                              switchCase.getGuard() == null
+                                  ? BooleanLiteral.get(true)
+                                  : switchCase.getGuard())
+                          .build())
+                  .build();
+            }
+
+            // TODO(b/469822337): Normalize record pattern.
+            case RecordPattern pattern -> throw new UnsupportedOperationException();
+          });
+    }
+
+    return switchConstruct.toBuilder().setExpression(selector.createReference()).build();
   }
 
   /** Converts switch expressions that have non fallthrough cases into switch statements. */

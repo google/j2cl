@@ -20,32 +20,59 @@
 package switchpatterns
 
 import javaemul.lang.*
+import java.lang.AssertionError
 import jsinterop.annotations.JsEnum
 import kotlin.Any
 import kotlin.Int
+import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 import kotlin.run
+import switchpatterns.SwitchPatterns.Sealed.A
+import switchpatterns.SwitchPatterns.Sealed.B
 
 open class SwitchPatterns {
  internal open fun testPatternsWithGuards_pp_switchpatterns() {
   val o: Any = "Hello"
-  when (o) {
-   -> {}
-   -> {}
+  val ___selector: Any = o
+  val s: String?
+  val s_1: String?
+  when (___selector) {
+   is String if run {
+    s = ___selector as String?
+    s!!.length == 1
+   } -> {}
+   is String if run {
+    s_1 = ___selector as String?
+    true
+   } -> {}
    else -> {}
   }
   val i: Int? = null
-  when (i!!) {
+  val ___selector_1: Int? = i
+  val j: Int?
+  val n: Number?
+  when (___selector_1!!) {
    23, 32 -> {}
-   -> {}
-   -> {}
+   is Int if run {
+    j = ___selector_1
+    j!!.toInt() > 2
+   } -> {}
+   is Number if run {
+    n = ___selector_1
+    true
+   } -> {}
    else -> {}
   }
-  when (i) {
+  val ___selector_2: Int? = i
+  val j_1: Int?
+  when (___selector_2) {
    23, 32 -> {}
-   -> {}
+   is Int if run {
+    j_1 = ___selector_2
+    j_1!!.toInt() > 2
+   } -> {}
    null -> {}
    else -> {}
   }
@@ -54,12 +81,26 @@ open class SwitchPatterns {
  internal open fun testExhaustivePatternsWithNoDefault_pp_switchpatterns() {
   val o: Sealed? = null
   val i: Int = run {
-   when (o!!) {
-    -> {
-     return@run 1
-    }
-    -> {
-     return@run 2
+   val ___selector: Sealed? = o
+   val a: A?
+   val b: B?
+   run {
+    when (___selector!!) {
+     is A if run {
+      a = ___selector as A?
+      true
+     } -> {
+      return@run 1
+     }
+     is B if run {
+      b = ___selector as B?
+      true
+     } -> {
+      return@run 2
+     }
+     else -> {
+      throw AssertionError("Unreachable")
+     }
     }
    }
   }

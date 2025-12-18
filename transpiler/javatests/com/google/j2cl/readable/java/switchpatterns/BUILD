@@ -10,8 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["**/*.java"]),
-    # TODO(b/466394693): make the normalization work with j2kt.
-    build_kt_readables = False,
     experimental_java_frontend = "javac",
     javacopts = [
         "-source 21",

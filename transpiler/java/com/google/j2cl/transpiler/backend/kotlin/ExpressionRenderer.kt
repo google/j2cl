@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.ArrayLiteral
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.BinaryExpression
 import com.google.j2cl.transpiler.ast.BinaryOperator
+import com.google.j2cl.transpiler.ast.BindingPattern
 import com.google.j2cl.transpiler.ast.CastExpression
 import com.google.j2cl.transpiler.ast.ConditionalExpression
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
@@ -51,6 +52,10 @@ import com.google.j2cl.transpiler.ast.PrefixOperator
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.SuperReference
+import com.google.j2cl.transpiler.ast.SwitchCase
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault
+import com.google.j2cl.transpiler.ast.SwitchCaseExpressions
+import com.google.j2cl.transpiler.ast.SwitchCasePattern
 import com.google.j2cl.transpiler.ast.SwitchExpression
 import com.google.j2cl.transpiler.ast.ThisReference
 import com.google.j2cl.transpiler.ast.Type
@@ -73,6 +78,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GREATER_EQUAL_OPER
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GREATER_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IF_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INCREMENT_OPERATOR
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IS_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.IT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.LESS_EQUAL_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.LESS_OPERATOR
@@ -587,24 +593,33 @@ internal data class ExpressionRenderer(
         block(
           newLineSeparated(
             switchExpression.cases.map { case ->
-              if (case.isDefault) {
-                infix(
-                  ELSE_KEYWORD,
-                  ARROW_OPERATOR,
-                  block(statementRenderer.statementsSource(case.statements)),
-                )
-              } else {
-                infix(
-                  commaSeparated(case.caseExpressions.map(::expressionSource)),
-                  ARROW_OPERATOR,
-                  block(statementRenderer.statementsSource(case.statements)),
-                )
-              }
+              infix(
+                caseSource(case),
+                ARROW_OPERATOR,
+                block(statementRenderer.statementsSource(case.statements)),
+              )
             }
           )
         ),
       )
     }
+
+  private fun caseSource(case: SwitchCase): Source =
+    when (case) {
+      is SwitchCaseExpressions -> commaSeparated(case.caseExpressions.map(::expressionSource))
+      is SwitchCasePattern ->
+        spaceSeparated(
+          // Only binding patterns remain in the tree after normalization.
+          patternSource(case.pattern as BindingPattern),
+          Source.emptyUnless(case.guard != null) {
+            spaceSeparated(IF_KEYWORD, expressionSource(case.guard))
+          },
+        )
+      is SwitchCaseDefault -> ELSE_KEYWORD
+    }
+
+  private fun patternSource(pattern: BindingPattern) =
+    spaceSeparated(IS_KEYWORD, instanceOfTestTypeDescriptorSource(pattern.typeDescriptor))
 
   private fun enclosedByRunIf(condition: Boolean, fn: () -> Source): Source =
     fn().letIf(condition) {

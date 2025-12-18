@@ -122,8 +122,6 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
 
             if (switchStatement.hasPatterns()
                 || (isBoxedType(expressionTypeDescriptor) && switchStatement.allowsNulls())) {
-              // TODO(b/466394693): Consider making this an independent pass that handles both
-              // switch statement and switch expressions to allow its reuse in J2KT.
               return convertToIntegerSwitch(switchStatement);
             }
 

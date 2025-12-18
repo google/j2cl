@@ -19,15 +19,17 @@ import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
-import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.SwitchCaseDefault;
+import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.NoSuchElementException;
@@ -71,7 +73,8 @@ public class InsertUnreachableAssertionErrors extends NormalizationPass {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
+          public FunctionExpression rewriteFunctionExpression(
+              FunctionExpression functionExpression) {
             if (isPrimitiveVoid(functionExpression.getDescriptor().getReturnTypeDescriptor())) {
               return functionExpression;
             }
@@ -88,29 +91,49 @@ public class InsertUnreachableAssertionErrors extends NormalizationPass {
               return functionExpression;
             }
 
-            MethodDescriptor errorConstructor =
-                TypeDescriptors.get()
-                    .javaLangAssertionError
-                    .getMethodDescriptor("<init>", TypeDescriptors.get().javaLangObject);
-
-            Statement throwStatement =
-                ThrowStatement.newBuilder()
-                    .setExpression(
-                        NewInstance.newBuilder()
-                            .setTarget(errorConstructor)
-                            .setArguments(new StringLiteral("Unreachable"))
-                            .build())
-                    .setSourcePosition(functionExpression.getSourcePosition())
-                    .build();
-
             return FunctionExpression.Builder.from(functionExpression)
                 .setStatements(
                     new ImmutableList.Builder<Statement>()
                         .addAll(functionExpression.getBody().getStatements())
-                        .add(throwStatement)
+                        .add(createThrowStatement(functionExpression.getSourcePosition()))
                         .build())
                 .build();
           }
+
+          @Override
+          public SwitchExpression rewriteSwitchExpression(SwitchExpression switchExpression) {
+            if (switchExpression.hasDefaultCase()
+                || switchExpression.getExpression().getTypeDescriptor().isEnum()) {
+              return switchExpression;
+            }
+
+            // Some switches that were deemed exhaustive by Java are no longer exhaustive in
+            // Kotlin.
+            switchExpression
+                .getCases()
+                .add(
+                    SwitchCaseDefault.newBuilder()
+                        .setStatements(createThrowStatement(switchExpression.getSourcePosition()))
+                        .setCanFallthrough(false)
+                        .build());
+            return switchExpression;
+          }
         });
+  }
+
+  private static Statement createThrowStatement(SourcePosition sourcePosition) {
+    MethodDescriptor errorConstructor =
+        TypeDescriptors.get()
+            .javaLangAssertionError
+            .getMethodDescriptor("<init>", TypeDescriptors.get().javaLangObject);
+
+    return ThrowStatement.newBuilder()
+        .setExpression(
+            NewInstance.newBuilder()
+                .setTarget(errorConstructor)
+                .setArguments(new StringLiteral("Unreachable"))
+                .build())
+        .setSourcePosition(sourcePosition)
+        .build();
   }
 }
