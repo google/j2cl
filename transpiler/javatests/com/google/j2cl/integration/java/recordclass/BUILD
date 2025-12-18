@@ -10,8 +10,6 @@ package(
 
 integration_test(
     srcs = glob(["**/*.java"]),
-    # TODO(b/445545563): Support record -> data class transpilation.
-    enable_kt = False,
     experimental_java_frontend = "javac",
     javacopts = [
         "-source 21",

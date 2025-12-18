@@ -10,8 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["**/*.java"]),
-    # TODO(b/445545563): Support record -> data class transpilation.
-    build_kt_readables = False,
     experimental_java_frontend = "javac",
     javacopts = [
         "-source 21",

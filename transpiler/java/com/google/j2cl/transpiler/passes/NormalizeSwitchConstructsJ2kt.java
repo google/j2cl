@@ -45,6 +45,7 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PatternMatchExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RecordPattern;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -165,6 +166,9 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
                 .build();
           }
         });
+
+    // Desugar the newly introduced record pattern matching.
+    new DesugarInstanceOfPatterns().applyTo(compilationUnit);
   }
 
   private <T extends SwitchConstruct<T>> T normalizeSwitchPatterns(
@@ -219,8 +223,40 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
                   .build();
             }
 
-            // TODO(b/469822337): Normalize record pattern.
-            case RecordPattern pattern -> throw new UnsupportedOperationException();
+            case RecordPattern pattern -> {
+              // Rewrite the record pattern into a binding top level pattern and a guard.
+              //
+              //  case R1(R2(....))
+              //
+              // becomes
+              //
+              // case R1 && selector instanceof R1(R2(....))
+              //
+
+              yield switchCase.toBuilder()
+                  .setPattern(
+                      // Replace the variable by a dummy unnamed variable that will be ignored
+                      // in the backend.
+                      new BindingPattern(
+                          Variable.newBuilder()
+                              .setName("_")
+                              .setTypeDescriptor(pattern.getTypeDescriptor())
+                              .build()))
+                  .setGuard(
+                      // Add a trivially true guard that has the assignment of the pattern
+                      // variable.
+                      MultiExpression.newBuilder()
+                          .setExpressions(
+                              PatternMatchExpression.newBuilder()
+                                  .setExpression(selector.createReference())
+                                  .setPattern(pattern)
+                                  .build(),
+                              switchCase.getGuard() == null
+                                  ? BooleanLiteral.get(true)
+                                  : switchCase.getGuard())
+                          .build())
+                  .build();
+            }
           });
     }
 

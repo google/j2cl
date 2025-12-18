@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangAnnotation
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangRecord
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERFACE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
@@ -150,6 +151,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
       .asSequence()
       .filter { !isJavaLangObject(it) }
       .filter { !isJavaLangEnum(it) }
+      .filter { !isJavaLangRecord(it) }
       .filter { !isJavaLangAnnotation(it) || !type.declaration.isAnnotation }
       .map { superTypeSource(type, it) }
       .toList()

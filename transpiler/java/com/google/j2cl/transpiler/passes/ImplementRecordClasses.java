@@ -278,6 +278,7 @@ public class ImplementRecordClasses extends NormalizationPass {
         MethodDescriptor.Builder.from(methodDescriptor)
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setDeclarationDescriptor(null)
+            .setNative(false)
             .setSynthetic(true)
             .build();
     List<Variable> parameters =

@@ -395,6 +395,10 @@ public class TypeDescriptors {
     return typeDescriptor.isSameBaseType(get().javaLangEnum);
   }
 
+  public static boolean isJavaLangRecord(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isSameBaseType(get().javaLangRecord);
+  }
+
   public static boolean isJavaLangAnnotation(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isSameBaseType(get().javaLangAnnotation);
   }

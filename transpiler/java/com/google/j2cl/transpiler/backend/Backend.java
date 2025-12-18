@@ -743,6 +743,8 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           EvaluateCompileTimeConstants::new,
+          // ImplementRecordClasses needs to run before DesugarInstanceOfPatterns.
+          ImplementRecordClasses::new,
           // Desugar instanceof patterns needs to run before any pass that uses
           // ConversionContextVisitor, like NormalizeNullLiterals below.
           DesugarInstanceOfPatterns::new,
