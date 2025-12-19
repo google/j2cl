@@ -1,0 +1,55 @@
+// Generated from "j2ktjdt/NullabilityScopes3.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import kotlin.Any
+import kotlin.String
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class NullabilityScopes3 {
+ internal open fun testNonNullMarked_pp_j2ktjdt() {
+  Optional.of_pp_j2ktjdt<List<String>>(
+   ImmutableList.of_pp_j2ktjdt<String>(),
+  )
+ }
+
+ class Optional<T: Any> internal constructor() {
+  companion object {
+   @JvmStatic
+   internal fun <T: Any> of_pp_j2ktjdt(value: T): Optional<T> {
+    throw RuntimeException()
+   }
+  }
+ }
+
+ interface List<T>
+
+ open class ImmutableList<T: Any> internal constructor(): List<T> {
+  companion object {
+   @JvmStatic
+   internal fun <T: Any> of_pp_j2ktjdt(): ImmutableList<T> {
+    throw RuntimeException()
+   }
+  }
+ }
+}

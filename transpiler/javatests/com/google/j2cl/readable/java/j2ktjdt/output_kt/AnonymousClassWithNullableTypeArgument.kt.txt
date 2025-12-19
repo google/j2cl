@@ -1,4 +1,4 @@
-// Generated from "j2kt/AnonymousClassWithNullableTypeArgument.java"
+// Generated from "j2ktjdt/AnonymousClassWithNullableTypeArgument.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -17,7 +17,7 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2kt
+package j2ktjdt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
@@ -31,6 +31,15 @@ open class AnonymousClassWithNullableTypeArgument {
  companion object {
   @JvmStatic
   fun testExplicitTypeArguments(): Supplier<Any?> {
+   return object : Supplier<Any?> {
+    override fun get(): Any? {
+     return null
+    }
+   }
+  }
+
+  @JvmStatic
+  fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> {
    return object : Supplier<Any?> {
     override fun get(): Any? {
      return null

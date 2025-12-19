@@ -13,27 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class RawTypes {
-
-  class Parent<T> {}
-
-  class Child<T extends Child<T>> extends Parent<T> {}
-
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
-    return child;
+public class NullabilityInferenceProblem4 {
+  @SuppressWarnings("unchecked") // this method may throw CCE
+  public static int compareOrThrow(Comparable left, Comparable right) {
+    return left.compareTo(right);
   }
-
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
-    return a;
-  }
-
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
 }

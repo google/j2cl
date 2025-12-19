@@ -1,0 +1,71 @@
+// Generated from "j2ktjdt/NullabilityInferenceProblem8.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import kotlin.Any
+import kotlin.String
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class NullabilityInferenceProblem8 {
+ companion object {
+  @JvmStatic
+  fun <I: Any, O: Any> nonNullWithLowerBound(fn: Function<in I, O>): Function<I, O> {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  fun acceptParameterized(fn: Function<String, Any>) {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  fun testMethodReference(supplier: NullableSupplier<Any>) {
+   NullabilityInferenceProblem8.acceptParameterized(
+    NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
+     Function { arg0: String ->
+      return@Function supplier.get(arg0)
+     } as Function<in String, Any>,
+    ),
+   )
+  }
+
+  @JvmStatic
+  fun testLambda(supplier: NullableSupplier<Any>) {
+   NullabilityInferenceProblem8.acceptParameterized(
+    NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
+     Function { key: String ->
+      return@Function supplier.get(key)
+     } as Function<in String, Any>,
+    ),
+   )
+  }
+ }
+
+ fun interface NullableSupplier<V> {
+  fun get(key: String): V?
+ }
+
+ fun interface Function<I, O> {
+  fun apply(i: I): O
+ }
+}

@@ -1,0 +1,303 @@
+// Generated from "j2ktjdt/UnboundWildcards.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class UnboundWildcards {
+ companion object {
+  @JvmStatic
+  fun test111(extendsNullableObject: Foo<*>) {
+   UnboundWildcards.acceptTExtendsNullableObject(extendsNullableObject)
+  }
+
+  @JvmStatic
+  fun test112(extendsNullableObject: Foo<*>) {
+   UnboundWildcards.acceptTExtendsObject(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test113(extendsNullableObject: Foo<*>) {
+   UnboundWildcards.acceptTExtendsNonNullObject(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test114(extendsNullableObject: Foo<*>) {
+   UnboundWildcards.acceptT(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test121(extendsNullableObject: Foo<*>) {}
+
+  @JvmStatic
+  fun test122(extendsNullableObject: Foo<*>) {}
+
+  @JvmStatic
+  fun test123(extendsNullableObject: Foo<*>) {}
+
+  @JvmStatic
+  fun test124(extendsNullableObject: Foo<*>) {}
+
+  @JvmStatic
+  fun test131(extendsNullableObject: Foo<*>) {
+   UnboundWildcards.acceptNonNullTExtendsNullableObject(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test132(extendsNullableObject: Foo<*>) {
+   UnboundWildcards.acceptNonNullTExtendsObject(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test133(extendsNullableObject: Foo<*>) {
+   UnboundWildcards.acceptNonNullTExtendsNonNullObject(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test134(extendsNullableObject: Foo<*>) {
+   UnboundWildcards.acceptNonNullT(
+    extendsNullableObject as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test211(extendsObject: Foo<out Any>) {
+   UnboundWildcards.acceptTExtendsNullableObject(extendsObject)
+  }
+
+  @JvmStatic
+  fun test212(extendsObject: Foo<out Any>) {
+   UnboundWildcards.acceptTExtendsObject(extendsObject)
+  }
+
+  @JvmStatic
+  fun test213(extendsObject: Foo<out Any>) {
+   UnboundWildcards.acceptTExtendsNonNullObject(extendsObject)
+  }
+
+  @JvmStatic
+  fun test214(extendsObject: Foo<out Any>) {
+   UnboundWildcards.acceptT(extendsObject)
+  }
+
+  @JvmStatic
+  fun test221(extendsObject: Foo<out Any>) {}
+
+  @JvmStatic
+  fun test222(extendsObject: Foo<out Any>) {}
+
+  @JvmStatic
+  fun test223(extendsObject: Foo<out Any>) {}
+
+  @JvmStatic
+  fun test224(extendsObject: Foo<out Any>) {}
+
+  @JvmStatic
+  fun test231(extendsObject: Foo<out Any>) {
+   UnboundWildcards.acceptNonNullTExtendsNullableObject(extendsObject)
+  }
+
+  @JvmStatic
+  fun test232(extendsObject: Foo<out Any>) {
+   UnboundWildcards.acceptNonNullTExtendsObject(extendsObject)
+  }
+
+  @JvmStatic
+  fun test233(extendsObject: Foo<out Any>) {
+   UnboundWildcards.acceptNonNullTExtendsNonNullObject(extendsObject)
+  }
+
+  @JvmStatic
+  fun test234(extendsObject: Foo<out Any>) {
+   UnboundWildcards.acceptNonNullT(extendsObject)
+  }
+
+  @JvmStatic
+  fun test311(extendsNonNullObject: Foo<out Any>) {
+   UnboundWildcards.acceptTExtendsNullableObject(extendsNonNullObject)
+  }
+
+  @JvmStatic
+  fun test312(extendsNonNullObject: Foo<out Any>) {
+   UnboundWildcards.acceptTExtendsObject(extendsNonNullObject)
+  }
+
+  @JvmStatic
+  fun test313(extendsNonNullObject: Foo<out Any>) {
+   UnboundWildcards.acceptTExtendsNonNullObject(extendsNonNullObject)
+  }
+
+  @JvmStatic
+  fun test314(extendsNonNullObject: Foo<out Any>) {
+   UnboundWildcards.acceptT(extendsNonNullObject)
+  }
+
+  @JvmStatic
+  fun test321(extendsNonNullObject: Foo<out Any>) {}
+
+  @JvmStatic
+  fun test322(extendsNonNullObject: Foo<out Any>) {}
+
+  @JvmStatic
+  fun test323(extendsNonNullObject: Foo<out Any>) {}
+
+  @JvmStatic
+  fun test324(extendsNonNullObject: Foo<out Any>) {}
+
+  @JvmStatic
+  fun test331(extendsNonNullObject: Foo<out Any>) {
+   UnboundWildcards.acceptNonNullTExtendsNullableObject(extendsNonNullObject)
+  }
+
+  @JvmStatic
+  fun test332(extendsNonNullObject: Foo<out Any>) {
+   UnboundWildcards.acceptNonNullTExtendsObject(extendsNonNullObject)
+  }
+
+  @JvmStatic
+  fun test333(extendsNonNullObject: Foo<out Any>) {
+   UnboundWildcards.acceptNonNullTExtendsNonNullObject(extendsNonNullObject)
+  }
+
+  @JvmStatic
+  fun test334(extendsNonNullObject: Foo<out Any>) {
+   UnboundWildcards.acceptNonNullT(extendsNonNullObject)
+  }
+
+  @JvmStatic
+  fun test411(unbound: Foo<*>) {
+   UnboundWildcards.acceptTExtendsNullableObject(unbound)
+  }
+
+  @JvmStatic
+  fun test412(unbound: Foo<*>) {
+   UnboundWildcards.acceptTExtendsObject(
+    unbound as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test413(unbound: Foo<*>) {
+   UnboundWildcards.acceptTExtendsNonNullObject(
+    unbound as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test414(unbound: Foo<*>) {
+   UnboundWildcards.acceptT(
+    unbound as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test421(unbound: Foo<*>) {}
+
+  @JvmStatic
+  fun test422(unbound: Foo<*>) {}
+
+  @JvmStatic
+  fun test423(unbound: Foo<*>) {}
+
+  @JvmStatic
+  fun test424(unbound: Foo<*>) {}
+
+  @JvmStatic
+  fun test431(unbound: Foo<*>) {
+   UnboundWildcards.acceptNonNullTExtendsNullableObject(
+    unbound as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test432(unbound: Foo<*>) {
+   UnboundWildcards.acceptNonNullTExtendsObject(
+    unbound as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test433(unbound: Foo<*>) {
+   UnboundWildcards.acceptNonNullTExtendsNonNullObject(
+    unbound as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun test434(unbound: Foo<*>) {
+   UnboundWildcards.acceptNonNullT(
+    unbound as Foo<out Any>,
+   )
+  }
+
+  @JvmStatic
+  fun <T> acceptTExtendsNullableObject(foo: Foo<T>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptTExtendsObject(foo: Foo<T>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptTExtendsNonNullObject(foo: Foo<T>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptT(foo: Foo<T>) {}
+
+  @JvmStatic
+  fun <T> acceptNullableTExtendsNullableObject(foo: Foo<T?>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptNullableTExtendsObject(foo: Foo<T?>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptNullableTExtendsNonNullObject(foo: Foo<T?>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptNullableT(foo: Foo<T?>) {}
+
+  @JvmStatic
+  fun <T> acceptNonNullTExtendsNullableObject(foo: Foo<T & Any>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptNonNullTExtendsObject(foo: Foo<T>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptNonNullTExtendsNonNullObject(foo: Foo<T>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptNonNullT(foo: Foo<T>) {}
+ }
+
+ interface Foo<T>
+}

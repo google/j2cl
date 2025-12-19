@@ -1,0 +1,99 @@
+// Generated from "j2ktjdt/DefinitelyNotNull.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.String
+import kotlin.Suppress
+import kotlin.collections.MutableIterable
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+
+open class DefinitelyNotNull {
+ companion object {
+  @JvmStatic
+  internal fun testNotNullSupplier_pp_j2ktjdt(supplier: NotNullSupplier<out String?>): String {
+   return supplier.getNotNull()!!
+  }
+
+  @JvmStatic
+  fun <T> testEquivalence(equivalence: Equivalence<in T & Any>, a: T?, b: T?): Boolean {
+   return equivalence.equivalent(a, b)
+  }
+ }
+
+ fun interface NotNullSupplier<T> {
+  fun getNotNull(): T & Any
+ }
+
+ open class Ordering<T> internal constructor() {
+  internal open fun <S: T> reverse_pp_j2ktjdt(): Ordering<S> {
+   throw RuntimeException()
+  }
+
+  internal open fun <S: T> nullsLast_pp_j2ktjdt(): Ordering<S?> {
+   throw RuntimeException()
+  }
+
+  companion object {
+   @JvmStatic
+   internal fun <E> reversed_pp_j2ktjdt(ordering: Ordering<in E>): Ordering<in E> {
+    return ordering.reverse_pp_j2ktjdt<E>()
+   }
+  }
+ }
+
+ inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
+  @JvmField
+  internal val ordering_pp_j2ktjdt: Ordering<in T>
+
+  init {
+   this.ordering_pp_j2ktjdt = ordering
+  }
+ }
+
+ open class ImmutableList<E: Any> {
+  companion object {
+   @JvmStatic
+   fun <E: Any> copyOf(iterable: MutableIterable<E>): ImmutableList<E> {
+    throw RuntimeException()
+   }
+
+   @JvmStatic
+   fun <E> copyOfNullableWithInvalidBounds(iterable: MutableIterable<E>): ImmutableList<E & Any> {
+    return ImmutableList.copyOf<E & Any>(
+     iterable as MutableIterable<E & Any>,
+    )
+   }
+
+   @JvmStatic
+   fun <E> copyOfNullableWithCorrectBounds(iterable: MutableIterable<E & Any>): ImmutableList<E & Any> {
+    return ImmutableList.copyOf<E & Any>(iterable)
+   }
+  }
+ }
+
+ fun interface Equivalence<T: Any> {
+  fun equivalent(a: T?, b: T?): Boolean
+ }
+}

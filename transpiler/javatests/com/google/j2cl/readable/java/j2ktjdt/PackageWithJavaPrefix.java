@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package javapkg;
 
 import org.jspecify.annotations.NullMarked;
 
+// Checks that b/289049603 is fixed.
 @NullMarked
-public class RawTypes {
+public class PackageWithJavaPrefix {
+  public static final int VALUE = 128;
 
-  class Parent<T> {}
-
-  class Child<T extends Child<T>> extends Parent<T> {}
-
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
-    return child;
+  public static int value() {
+    return VALUE;
   }
-
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
-    return a;
-  }
-
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
 }

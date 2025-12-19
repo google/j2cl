@@ -1,0 +1,64 @@
+// Generated from "j2ktjdt/LateInit.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+
+open class LateInit<T: Any> {
+ lateinit var publicField: String
+
+ private lateinit var privateField: String
+
+ private var initializedField: String = "initialized"
+
+ private var nullableField: String? = null
+
+ private val finalField: String = "final"
+
+ private var primitiveField: Int = 0
+
+ private lateinit var genericField: T
+
+ constructor(genericValue: T) {
+  this.init(genericValue)
+ }
+
+ private fun init(genericValue: T) {
+  this.publicField = "public"
+  this.privateField = "private"
+  this.genericField = genericValue
+ }
+
+ open fun test(): Int {
+  return this.publicField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
+ }
+
+ open inner class Inner internal constructor() {
+  private lateinit var unmarkedInnerField: String
+
+  open inner class InnerInner internal constructor() {
+   private lateinit var unmarkedInnerInnerField: String
+  }
+ }
+}

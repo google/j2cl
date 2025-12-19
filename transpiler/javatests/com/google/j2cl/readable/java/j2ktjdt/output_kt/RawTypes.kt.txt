@@ -1,4 +1,4 @@
-// Generated from "j2kt/RawTypes.java"
+// Generated from "j2ktjdt/RawTypes.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -17,19 +17,27 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2kt
+package j2ktjdt
 
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Suppress
 
 open class RawTypes {
- internal open fun <T: RawTypes.Child<T>> copy_pp_j2kt(child: RawTypes.Child<T>): RawTypes.Child<T> {
+ internal open fun <T: RawTypes.Child<T>> copy_pp_j2ktjdt(child: RawTypes.Child<T>): RawTypes.Child<T> {
   return child
  }
 
- internal open fun <T: RawTypes.Child<T>> toParent_pp_j2kt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
+ internal open fun <T: RawTypes.Child<T>> toParent_pp_j2ktjdt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
   return a
+ }
+
+ internal open fun returnsRaw_pp_j2ktjdt(parent: RawTypes.Child<*>): RawTypes.Parent<Any> {
+  return this.toParent_pp_j2ktjdt(
+   this.copy_pp_j2ktjdt(
+    parent as RawTypes.Child<out RawTypes.Child<*>>,
+   ),
+  ) as RawTypes.Parent<Any>
  }
 
  open inner class Parent<T: Any> internal constructor()

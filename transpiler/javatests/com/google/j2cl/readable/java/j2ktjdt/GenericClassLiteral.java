@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class RawTypes {
+public class GenericClassLiteral {
+  public interface Generic<T> {}
 
-  class Parent<T> {}
+  public interface Foo {}
 
-  class Child<T extends Child<T>> extends Parent<T> {}
-
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
-    return child;
+  public void test(Generic<Foo> genericFoo) {
+    accept(genericFoo, Generic.class);
   }
 
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
-    return a;
-  }
-
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
+  public <T> void accept(T foo, Class<T> cls) {}
 }

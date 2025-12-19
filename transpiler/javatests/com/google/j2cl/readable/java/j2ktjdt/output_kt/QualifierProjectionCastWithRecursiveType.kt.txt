@@ -1,4 +1,4 @@
-// Generated from "j2kt/RawTypes.java"
+// Generated from "j2ktjdt/QualifierProjectionCastWithRecursiveType.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -17,22 +17,22 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2kt
+package j2ktjdt
 
 import javaemul.lang.*
-import kotlin.Any
+import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
 
-open class RawTypes {
- internal open fun <T: RawTypes.Child<T>> copy_pp_j2kt(child: RawTypes.Child<T>): RawTypes.Child<T> {
-  return child
+open class QualifierProjectionCastWithRecursiveType {
+ companion object {
+  @JvmStatic
+  fun test(foo: Foo<*>) {
+   (foo as Foo<Foo<*>>).name(null)
+  }
  }
 
- internal open fun <T: RawTypes.Child<T>> toParent_pp_j2kt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
-  return a
+ fun interface Foo<T: Foo<T>> {
+  fun name(s: T?): String
  }
-
- open inner class Parent<T: Any> internal constructor()
-
- open inner class Child<T: RawTypes.Child<T>> internal constructor(): RawTypes.Parent<T>()
 }

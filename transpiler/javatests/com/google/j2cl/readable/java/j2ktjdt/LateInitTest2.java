@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
+import static org.junit.Assert.assertEquals;
+
+import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class RawTypes {
+public final class LateInitTest2 extends TestCase {
 
-  class Parent<T> {}
+  private String uninitialized;
 
-  class Child<T extends Child<T>> extends Parent<T> {}
-
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
-    return child;
+  @Override
+  public void setUp() {
+    uninitialized = "I have been initialized";
   }
 
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
-    return a;
+  public void testLateInit2() {
+    assertEquals(uninitialized, "I have been initialized");
   }
-
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
 }

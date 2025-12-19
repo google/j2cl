@@ -1,4 +1,4 @@
-// Generated from "j2kt/RawTypes.java"
+// Generated from "j2ktjdt/InterfaceWithGenericMethod.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -17,22 +17,11 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2kt
+package j2ktjdt
 
 import javaemul.lang.*
-import kotlin.Any
 import kotlin.Suppress
 
-open class RawTypes {
- internal open fun <T: RawTypes.Child<T>> copy_pp_j2kt(child: RawTypes.Child<T>): RawTypes.Child<T> {
-  return child
- }
-
- internal open fun <T: RawTypes.Child<T>> toParent_pp_j2kt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
-  return a
- }
-
- open inner class Parent<T: Any> internal constructor()
-
- open inner class Child<T: RawTypes.Child<T>> internal constructor(): RawTypes.Parent<T>()
+interface InterfaceWithGenericMethod {
+ fun <T> apply(t: T): T
 }

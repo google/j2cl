@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
 import org.jspecify.annotations.NullMarked;
 
@@ -32,8 +32,7 @@ public class RawTypes {
     return a;
   }
 
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
+  Parent returnsRaw(Child<?> parent) {
+    return toParent(copy((Child) parent));
+  }
 }

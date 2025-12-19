@@ -1,0 +1,283 @@
+// Generated from "j2ktjdt/SmartCasts.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.Suppress
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+
+open class SmartCasts {
+ internal open fun testThisReferenceInConstructor_pp_j2ktjdt() {
+  open class Local<T: Local<T>> {
+   @JvmField
+   internal val fieldInitializedInConstructor_pp_j2ktjdt: Any
+
+   @JvmField
+   internal var t_pp_j2ktjdt: T
+
+   internal constructor() {
+    this.t_pp_j2ktjdt = this as T
+    this.fieldInitializedInConstructor_pp_j2ktjdt = 1
+   }
+  }
+ }
+
+ internal open fun testThisReferenceInInitializer_pp_j2ktjdt() {
+  open class Local<T: Local<T>> internal constructor() {
+   @JvmField
+   internal var fieldInitializedInInitializer_pp_j2ktjdt: Any
+
+   @JvmField
+   internal var t_pp_j2ktjdt: T
+
+   init {
+    this.t_pp_j2ktjdt = this as T
+    this.fieldInitializedInInitializer_pp_j2ktjdt = 1
+   }
+  }
+ }
+
+ companion object {
+  @JvmStatic
+  fun <T: Any> testParameterReference(foo: Foo<T>) {
+   SmartCasts.acceptFooOfObject(
+    foo as Foo<Any>,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    foo as Foo<T>,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testFinalVariableReference(foo: Foo<T>) {
+   val localFoo: Foo<T> = foo
+   SmartCasts.acceptFooOfObject(
+    (localFoo as Foo<Any>?)!!,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    localFoo as Foo<T>,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testNonFinalVariableReference(foo: Foo<T>, foo2: Foo<T>) {
+   var localFoo: Foo<T> = foo
+   localFoo = foo2
+   SmartCasts.acceptFooOfObject(
+    (localFoo as Foo<Any>?)!!,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    localFoo as Foo<T>,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testArguments(foo: Foo<T>) {
+   SmartCasts.acceptFooOfObjectAndT<T>(
+    foo as Foo<Any>,
+    foo as Foo<T>,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testIfStatement(foo: Foo<T>, condition: Boolean) {
+   if (condition) {
+    SmartCasts.acceptT<Foo<Any>>(
+     foo as Foo<Any>,
+    )
+   }
+   SmartCasts.acceptFooOfT<T>(
+    foo as Foo<T>,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testFinalFieldAccess(container: Container<T>) {
+   SmartCasts.acceptFooOfObject(
+    container.foo as Foo<Any>,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    container.foo as Foo<T>,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testFinalFieldAccessThroughCastVariable(container: Container<T>) {
+   SmartCasts.acceptFooOfObject(
+    (container as Container<Any>).foo,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    (container as Container<T>).foo,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testNonFinalFieldAccess(container: Container<T>) {
+   SmartCasts.acceptFooOfObject(
+    container.nonFinalFoo as Foo<Any>,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    container.nonFinalFoo as Foo<T>,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testInvocation(container: Container<T>) {
+   SmartCasts.acceptFooOfObject(
+    container.getFoo() as Foo<Any>,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    container.getFoo(),
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testTypeArgumentInference(foo: Foo<T>) {
+   SmartCasts.acceptFooOfObject(
+    foo as Foo<Any>,
+   )
+   SmartCasts.acceptT<T>(
+    (foo as Foo<T>).get(),
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testArray(a: Array<T>) {
+   SmartCasts.acceptArrayOfObject(
+    a as Array<Any>,
+   )
+   SmartCasts.acceptArrayOfT<T>(
+    a as Array<T>,
+   )
+  }
+
+  @JvmStatic
+  fun <T: Any> testVararg(vararg a: T) {
+   val a_1: Array<T> = a as Array<T>
+   SmartCasts.acceptArrayOfObject(
+    a_1 as Array<Any>,
+   )
+   SmartCasts.acceptArrayOfT<T>(
+    a_1 as Array<T>,
+   )
+  }
+
+  @JvmStatic
+  fun acceptFooOfObject(foo: Foo<Any>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptFooOfT(foo: Foo<T>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptFooOfObjectAndT(foo: Foo<Any>, foo2: Foo<T>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptT(foo: T) {}
+
+  @JvmStatic
+  fun acceptArrayOfObject(a: Array<Any>) {}
+
+  @JvmStatic
+  fun <T: Any> acceptArrayOfT(a: Array<T>) {}
+ }
+
+ fun interface Foo<T: Any> {
+  fun get(): T
+
+  fun testThisReference() {
+   SmartCasts.acceptFooOfObject(
+    this as Foo<Any>,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    this as Foo<T>,
+   )
+  }
+ }
+
+ open class Container<T: Any> {
+  @JvmField
+  val foo: Foo<T>
+
+  @JvmField
+  var nonFinalFoo: Foo<T>
+
+  constructor(foo: Foo<T>) {
+   this.foo = foo
+   this.nonFinalFoo = foo
+  }
+
+  open fun getFoo(): Foo<T> {
+   return this.foo
+  }
+
+  open fun testImplicitThisReference() {
+   SmartCasts.acceptFooOfObject(
+    this.foo as Foo<Any>,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    this.foo as Foo<T>,
+   )
+  }
+
+  open fun testExplicitThisReference() {
+   SmartCasts.acceptFooOfObject(
+    this.foo as Foo<Any>,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    this.foo as Foo<T>,
+   )
+  }
+
+  open fun testMixedThisReference() {
+   SmartCasts.acceptFooOfObject(
+    this.foo as Foo<Any>,
+   )
+   SmartCasts.acceptFooOfT<T>(
+    this.foo as Foo<T>,
+   )
+  }
+
+  open class SubContainer<T: Any>: Container<T> {
+   internal constructor(foo: Foo<T>): super(foo)
+
+   open fun testSuperReference() {
+    SmartCasts.acceptFooOfObject(
+     super.foo as Foo<Any>,
+    )
+    SmartCasts.acceptFooOfT<T>(
+     super.foo as Foo<T>,
+    )
+   }
+
+   open fun testSuperAndThisReference() {
+    SmartCasts.acceptFooOfObject(
+     super.foo as Foo<Any>,
+    )
+    SmartCasts.acceptFooOfT<T>(
+     this.foo as Foo<T>,
+    )
+   }
+  }
+ }
+}

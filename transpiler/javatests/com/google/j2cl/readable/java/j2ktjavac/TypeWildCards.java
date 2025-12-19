@@ -47,6 +47,7 @@ class TypeWildCards {
       holder.set(e -> {});
     }
 
+    // Repro for b/443813558
     public static void testSetStaticMethod(Holder<?, ?> holder) {
       Holder.setStatic(holder, e -> {});
     }

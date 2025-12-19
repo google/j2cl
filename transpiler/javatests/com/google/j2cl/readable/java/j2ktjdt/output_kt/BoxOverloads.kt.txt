@@ -1,0 +1,184 @@
+// Generated from "j2ktjdt/BoxOverloads.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import java.lang.Integer
+import kotlin.Any
+import kotlin.Comparable
+import kotlin.Double
+import kotlin.Int
+import kotlin.Number
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class BoxOverloads {
+ constructor(d: Double): this(
+  java.lang.Double.valueOf(d) as Double?,
+ )
+
+ constructor(d: Double?)
+
+ companion object {
+  @JvmStatic
+  fun nullableBoxedOverload(d: Double) {}
+
+  @JvmStatic
+  fun nullableBoxedOverload(d: Double?) {}
+
+  @JvmStatic
+  fun testNullableBoxedOverload() {
+   BoxOverloads.nullableBoxedOverload(1.25)
+   BoxOverloads.nullableBoxedOverload(
+    java.lang.Double.valueOf(1.25) as Double?,
+   )
+   BoxOverloads.nullableBoxedOverload(
+    Double(1.25) as Double?,
+   )
+   BoxOverloads.nullableBoxedOverload(1.0)
+  }
+
+  @JvmStatic
+  fun nullableNumberOverload(d: Double) {}
+
+  @JvmStatic
+  fun nullableNumberOverload(n: Number?) {}
+
+  @JvmStatic
+  fun testNullableNumberOverload() {
+   BoxOverloads.nullableNumberOverload(1.25)
+   BoxOverloads.nullableNumberOverload(
+    java.lang.Double.valueOf(1.25) as Number?,
+   )
+   BoxOverloads.nullableNumberOverload(
+    Double(1.25) as Number?,
+   )
+   BoxOverloads.nullableNumberOverload(1.0)
+   BoxOverloads.nullableNumberOverload(
+    Integer.valueOf(1) as Number?,
+   )
+   BoxOverloads.nullableNumberOverload(
+    Int(1) as Number?,
+   )
+  }
+
+  @JvmStatic
+  fun numberOverload(d: Double) {}
+
+  @JvmStatic
+  fun numberOverload(n: Number) {}
+
+  @JvmStatic
+  fun testNumberOverload() {
+   BoxOverloads.numberOverload(1.25)
+   BoxOverloads.numberOverload(
+    java.lang.Double.valueOf(1.25) as Number,
+   )
+   BoxOverloads.numberOverload(
+    Double(1.25) as Number,
+   )
+   BoxOverloads.numberOverload(1.0)
+   BoxOverloads.numberOverload(
+    Integer.valueOf(1) as Number,
+   )
+   BoxOverloads.numberOverload(
+    Int(1) as Number,
+   )
+  }
+
+  @JvmStatic
+  fun nullableObjectOverload(d: Double) {}
+
+  @JvmStatic
+  fun nullableObjectOverload(o: Any?) {}
+
+  @JvmStatic
+  fun testNullableObjectOverload() {
+   BoxOverloads.nullableObjectOverload(1.25)
+   BoxOverloads.nullableObjectOverload(
+    java.lang.Double.valueOf(1.25) as Any?,
+   )
+   BoxOverloads.nullableObjectOverload(
+    Double(1.25) as Any?,
+   )
+   BoxOverloads.nullableObjectOverload(1.0)
+   BoxOverloads.nullableObjectOverload(
+    Integer.valueOf(1) as Any?,
+   )
+   BoxOverloads.nullableObjectOverload(
+    Int(1) as Any?,
+   )
+   BoxOverloads.nullableObjectOverload("foo")
+  }
+
+  @JvmStatic
+  fun objectOverload(d: Double) {}
+
+  @JvmStatic
+  fun objectOverload(o: Any) {}
+
+  @JvmStatic
+  fun testObjectOverload() {
+   BoxOverloads.objectOverload(1.25)
+   BoxOverloads.objectOverload(
+    java.lang.Double.valueOf(1.25) as Any,
+   )
+   BoxOverloads.objectOverload(
+    Double(1.25) as Any,
+   )
+   BoxOverloads.objectOverload(1.0)
+   BoxOverloads.objectOverload(
+    Integer.valueOf(1) as Any,
+   )
+   BoxOverloads.objectOverload(
+    Int(1) as Any,
+   )
+   BoxOverloads.objectOverload("foo")
+  }
+
+  @JvmStatic
+  fun <T: Any> firstNonNull(t1: T?, t2: T): T {
+   return (if (t1 != null) t1 else t2)!!
+  }
+
+  @JvmStatic
+  fun testFirstNonNull(i: Int?) {
+   BoxOverloads.firstNonNull<Int>(i, 0)
+  }
+
+  @JvmStatic
+  fun testComparableOverload(generic: Generic<Double>) {
+   generic.comparableOverload(1.25)
+   generic.comparableOverload(
+    java.lang.Double.valueOf(1.25) as Comparable<Double>,
+   )
+  }
+ }
+
+ interface Generic<T> {
+  fun overload(d: Double)
+
+  fun overload(t: T)
+
+  fun comparableOverload(d: Double)
+
+  fun comparableOverload(comparable: Comparable<T & Any>)
+ }
+}

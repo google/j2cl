@@ -1,4 +1,4 @@
-// Generated from "j2kt/RawTypes.java"
+// Generated from "j2ktjdt/NullabilityInferenceProblem2.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -17,22 +17,28 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2kt
+package j2ktjdt
 
 import javaemul.lang.*
-import kotlin.Any
+import java.lang.RuntimeException
 import kotlin.Suppress
 
-open class RawTypes {
- internal open fun <T: RawTypes.Child<T>> copy_pp_j2kt(child: RawTypes.Child<T>): RawTypes.Child<T> {
-  return child
+open class NullabilityInferenceProblem2 {
+ fun interface Supplier<T> {
+  fun get(): T
  }
 
- internal open fun <T: RawTypes.Child<T>> toParent_pp_j2kt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
-  return a
+ abstract inner class Test<T> {
+  open fun <E: T> foo(supplier: Supplier<E>): E {
+   val local: E? = supplier.get()
+   return this.foo<E>(
+    local as E,
+    supplier.get(),
+   )
+  }
+
+  open fun <E: T> foo(a: E, b: E): E {
+   throw RuntimeException()
+  }
  }
-
- open inner class Parent<T: Any> internal constructor()
-
- open inner class Child<T: RawTypes.Child<T>> internal constructor(): RawTypes.Parent<T>()
 }

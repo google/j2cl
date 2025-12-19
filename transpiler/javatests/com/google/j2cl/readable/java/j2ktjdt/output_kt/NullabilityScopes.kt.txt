@@ -1,0 +1,118 @@
+// Generated from "j2ktjdt/NullabilityScopes.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import j2ktjdt.NullabilityScopes.NullMarkedScope.Array
+import j2ktjdt.NullabilityScopes.NullMarkedScope.Cell
+import j2ktjdt.NullabilityScopes.NullMarkedScope.Table
+import kotlin.Any
+import kotlin.String
+import kotlin.Suppress
+
+open class NullabilityScopes {
+ open class NullMarkedScope {
+  open fun testNullMarkedWildcardConstructorRaw(nullMarkedFoo: Foo<String>) {
+   Foo<Any?>(
+    nullMarkedFoo as Foo<Any?>,
+   )
+  }
+
+  open fun testNullMarkedWildcardConstructorImplicitTypeArguments(nullMarkedFoo: Foo<String>) {
+   Foo<String>(nullMarkedFoo)
+  }
+
+  open fun testNullMarkedWildcardConstructorExplicitTypeArguments(nullMarkedFoo: Foo<String>) {
+   Foo<String>(nullMarkedFoo)
+  }
+
+  open fun testNonNullMarkedWildcardConstructorRaw(nonNullMarkedFoo: j2ktjdt.NullabilityScopes.NonNullMarkedScope.Foo<String>) {
+   j2ktjdt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>(
+    nonNullMarkedFoo as j2ktjdt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>?,
+   )
+  }
+
+  open fun testNonNullMarkedWildcardConstructorImplicitTypeArguemnts(nonNullMarkedFoo: j2ktjdt.NullabilityScopes.NonNullMarkedScope.Foo<String>) {
+   j2ktjdt.NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+  }
+
+  open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(nonNullMarkedFoo: j2ktjdt.NullabilityScopes.NonNullMarkedScope.Foo<String>) {
+   j2ktjdt.NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
+  }
+
+  open class Foo<K> {
+   constructor()
+
+   constructor(foo: Foo<out K>)
+  }
+
+  interface Array<T>
+
+  interface Cell<T: Cell<T>>
+
+  fun interface Table<T: Cell<T>> {
+   fun getNullableCells(): Array<T?>
+  }
+ }
+
+ open class NonNullMarkedScope {
+  open fun testNullMarkedWildcardConstructorRaw(nullMarkedFoo: j2ktjdt.NullabilityScopes.NullMarkedScope.Foo<String?>?) {
+   j2ktjdt.NullabilityScopes.NullMarkedScope.Foo<Any?>(
+    nullMarkedFoo!! as j2ktjdt.NullabilityScopes.NullMarkedScope.Foo<Any?>,
+   )
+  }
+
+  open fun testNullMarkedWildcardConstructorImplicitTypeArguments(nullMarkedFoo: j2ktjdt.NullabilityScopes.NullMarkedScope.Foo<String?>?) {
+   j2ktjdt.NullabilityScopes.NullMarkedScope.Foo<String?>(
+    nullMarkedFoo!!,
+   )
+  }
+
+  open fun testNullMarkedWildcardConstructorExplicitTypeArguments(nullMarkedFoo: j2ktjdt.NullabilityScopes.NullMarkedScope.Foo<String?>?) {
+   j2ktjdt.NullabilityScopes.NullMarkedScope.Foo<String?>(
+    nullMarkedFoo!!,
+   )
+  }
+
+  open fun testNonNullMarkedWildcardConstructorRaw(nonNullMarkedFoo: Foo<String?>?) {
+   Foo<Any?>(
+    nonNullMarkedFoo as Foo<Any?>?,
+   )
+  }
+
+  open fun testNonNullMarkedWildcardConstructorImplicitTypeArguments(nonNullMarkedFoo: Foo<String?>?) {
+   Foo<String?>(nonNullMarkedFoo)
+  }
+
+  open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(nonNullMarkedFoo: Foo<String?>?) {
+   Foo<String?>(nonNullMarkedFoo)
+  }
+
+  open fun testRecursiveWildcardConversion(table: Table<out Cell<*>>?): Array<out Cell<*>?>? {
+   return table!!.getNullableCells() as Array<out Cell<*>?>?
+  }
+
+  open class Foo<K> {
+   constructor()
+
+   constructor(foo: Foo<out K>?)
+  }
+ }
+}

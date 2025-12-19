@@ -13,27 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class RawTypes {
+public class NullabilityInferenceProblem3 {
+  public abstract static class Generic<T extends Generic<T>> {
+    public T concat(Generic<?> generic) {
+      throw new RuntimeException();
+    }
 
-  class Parent<T> {}
-
-  class Child<T extends Child<T>> extends Parent<T> {}
-
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
-    return child;
+    public Concrete toConcrete() {
+      throw new RuntimeException();
+    }
   }
 
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
-    return a;
-  }
+  public static final class Concrete extends Generic<Concrete> {
+    private final Generic<?> delegate;
 
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
+    public Concrete(Generic<?> delegate) {
+      this.delegate = delegate;
+    }
+
+    @Override
+    public Concrete concat(Generic<?> generic) {
+      return delegate.concat(generic).toConcrete();
+    }
+  }
 }

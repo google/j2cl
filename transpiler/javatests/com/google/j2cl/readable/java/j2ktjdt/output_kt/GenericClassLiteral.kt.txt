@@ -1,4 +1,4 @@
-// Generated from "j2kt/RawTypes.java"
+// Generated from "j2ktjdt/GenericClassLiteral.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -17,22 +17,25 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2kt
+package j2ktjdt
 
 import javaemul.lang.*
+import java.lang.Class
 import kotlin.Any
 import kotlin.Suppress
+import kotlin.jvm.javaObjectType
 
-open class RawTypes {
- internal open fun <T: RawTypes.Child<T>> copy_pp_j2kt(child: RawTypes.Child<T>): RawTypes.Child<T> {
-  return child
+open class GenericClassLiteral {
+ open fun test(genericFoo: Generic<Foo>) {
+  this.accept<Generic<Any>>(
+   genericFoo as Generic<Any>,
+   Generic::class.javaObjectType as Class<Generic<Any>>,
+  )
  }
 
- internal open fun <T: RawTypes.Child<T>> toParent_pp_j2kt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
-  return a
- }
+ open fun <T: Any> accept(foo: T, cls: Class<T>) {}
 
- open inner class Parent<T: Any> internal constructor()
+ interface Generic<T: Any>
 
- open inner class Child<T: RawTypes.Child<T>> internal constructor(): RawTypes.Parent<T>()
+ interface Foo
 }

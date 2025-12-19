@@ -1,0 +1,58 @@
+// Generated from "j2ktjdt/LambdaParameterTypeInference.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class LambdaParameterTypeInference {
+ companion object {
+  @JvmStatic
+  fun <T> wrap(consumer: Consumer<T>): Consumer<T> {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  fun <T> add(supplier: Supplier<T>, consumer: Consumer<in T>) {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  fun <T> test(supplier: Supplier<out T>) {
+   LambdaParameterTypeInference.add(
+    supplier,
+    LambdaParameterTypeInference.wrap(
+     Consumer { x: T ->
+     },
+    ),
+   )
+  }
+ }
+
+ fun interface Supplier<T> {
+  fun get(): T
+ }
+
+ fun interface Consumer<T> {
+  fun accept(t: T)
+ }
+}

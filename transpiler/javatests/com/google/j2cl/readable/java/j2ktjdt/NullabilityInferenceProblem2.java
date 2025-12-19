@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public class RawTypes {
-
-  class Parent<T> {}
-
-  class Child<T extends Child<T>> extends Parent<T> {}
-
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
-    return child;
+public class NullabilityInferenceProblem2 {
+  interface Supplier<T extends @Nullable Object> {
+    T get();
   }
 
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
-    return a;
-  }
+  public abstract class Test<T extends @Nullable Object> {
+    public <E extends T> E foo(Supplier<E> supplier) {
+      E local = supplier.get(); // local is E? in Kotlin.
+      return foo(local, supplier.get());
+    }
 
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
+    public <E extends T> E foo(E a, E b) {
+      throw new RuntimeException();
+    }
+  }
 }

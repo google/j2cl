@@ -1,0 +1,74 @@
+// Generated from "j2ktjdt/AccidentalOverride.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import kotlin.String
+import kotlin.Suppress
+
+open class AccidentalOverride {
+ abstract inner class SuperClass internal constructor() {
+  open fun accidentalOverride() {}
+ }
+
+ interface Interface {
+  fun accidentalOverride() {}
+
+  fun abstractAccidentalOverride() {}
+ }
+
+ open inner class TestImplicitOverride internal constructor(): AccidentalOverride.SuperClass(), Interface {
+  override fun accidentalOverride() {
+   super<SuperClass>.accidentalOverride()
+  }
+ }
+
+ open inner class TestExplicitOverride internal constructor(): AccidentalOverride.SuperClass(), Interface {
+  override fun accidentalOverride() {
+   super<SuperClass>.accidentalOverride()
+  }
+ }
+
+ abstract inner class SubClass internal constructor(): AccidentalOverride.SuperClass() {
+  abstract fun abstractAccidentalOverride()
+ }
+
+ abstract inner class TestImplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), Interface {
+  abstract override fun abstractAccidentalOverride()
+
+  override fun accidentalOverride() {
+   super<SubClass>.accidentalOverride()
+  }
+ }
+
+ abstract inner class TestExplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), Interface {
+  override fun accidentalOverride() {
+   super<SubClass>.accidentalOverride()
+  }
+
+  abstract override fun abstractAccidentalOverride()
+ }
+}
+
+interface Parent {
+ fun <T: String> test(t: T)
+}
+
+interface Child: Parent

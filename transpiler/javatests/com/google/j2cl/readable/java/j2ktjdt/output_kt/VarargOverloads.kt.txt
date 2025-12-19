@@ -1,0 +1,187 @@
+// Generated from "j2ktjdt/VarargOverloads.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.arrayOf
+import kotlin.jvm.JvmStatic
+
+open class VarargOverloads internal constructor() {
+ open class NewInstanceOverload {
+  internal constructor(foo: Int, vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
+  }
+
+  internal constructor(foo: Int, vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
+  }
+
+  companion object {
+   @JvmStatic
+   internal fun test_pp_j2ktjdt() {
+    NewInstanceOverload(
+     0,
+     *arrayOf<String>(),
+    )
+   }
+  }
+ }
+
+ open class ThisConstructorCallOverload {
+  internal constructor(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
+  }
+
+  internal constructor(vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
+  }
+
+  internal constructor(foo: Int): this(
+   *arrayOf<String>(),
+  )
+ }
+
+ open class SuperConstructorCallOverload {
+  internal constructor(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
+  }
+
+  internal constructor(vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
+  }
+
+  open class Explicit: SuperConstructorCallOverload {
+   internal constructor(): super(
+    *arrayOf<String>(),
+   )
+  }
+
+  open class Implicit: SuperConstructorCallOverload {
+   internal constructor(): super(
+    *arrayOf<String>(),
+   )
+  }
+
+  open class FromImplicitConstructor: SuperConstructorCallOverload {
+   internal constructor(): super(
+    *arrayOf<String>(),
+   )
+  }
+ }
+
+ open class MethodCallOverload internal constructor() {
+  internal open fun method_pp_j2ktjdt(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
+  }
+
+  internal open fun method_pp_j2ktjdt(vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
+  }
+
+  internal open fun test_pp_j2ktjdt() {
+   this.method_pp_j2ktjdt(
+    *arrayOf<String>(),
+   )
+  }
+ }
+
+ open class MethodCallOverloadInSubtype internal constructor() {
+  internal open fun method_pp_j2ktjdt(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
+  }
+
+  open class Subtype internal constructor(): MethodCallOverloadInSubtype() {
+   internal open fun method_pp_j2ktjdt(vararg strings: String) {
+    val strings_1: Array<String> = strings as Array<String>
+   }
+
+   internal open fun test_pp_j2ktjdt() {
+    this.method_pp_j2ktjdt(
+     *arrayOf<String>(),
+    )
+   }
+  }
+ }
+
+ open class MethodCallVarargAndArrayArgs internal constructor() {
+  internal open fun method_pp_j2ktjdt(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
+  }
+
+  internal open fun method_pp_j2ktjdt(strings: Array<String>) {}
+
+  internal open fun test_pp_j2ktjdt() {
+   this.method_pp_j2ktjdt()
+  }
+ }
+
+ open class StaticMethodOverloadSubtypeCallTarget internal constructor() {
+  internal open fun test_pp_j2ktjdt() {
+   StaticMethodOverloadSubtypeCallTarget.method_pp_j2ktjdt()
+   StaticMethodOverloadSubtypeCallTarget.generalizedInSubtype_pp_j2ktjdt()
+  }
+
+  companion object {
+   @JvmStatic
+   internal fun method_pp_j2ktjdt(vararg objects: Any) {
+    val objects_1: Array<Any> = objects as Array<Any>
+   }
+
+   @JvmStatic
+   internal fun method_pp_j2ktjdt(strings: Array<String>) {}
+
+   @JvmStatic
+   internal fun generalizedInSubtype_pp_j2ktjdt(vararg strings: String) {
+    val strings_1: Array<String> = strings as Array<String>
+   }
+  }
+
+  open class Subtype internal constructor(): StaticMethodOverloadSubtypeCallTarget() {
+   companion object {
+    @JvmStatic
+    internal fun generalizedInSubtype_pp_j2ktjdt(vararg objects: Any) {
+     val objects_1: Array<Any> = objects as Array<Any>
+    }
+   }
+  }
+ }
+
+ enum class EnumWithOverloadedConstructors {
+  CONSTRUCTOR_OVERLOAD(
+   *arrayOf<String>(),
+  ),
+  SUPER_CONSTRUCTOR_OVERLOAD(
+   *arrayOf<String>(),
+  );
+
+  constructor(vararg objects: Any) {
+   val objects_1: Array<Any> = objects as Array<Any>
+  }
+
+  constructor(vararg strings: String) {
+   val strings_1: Array<String> = strings as Array<String>
+  }
+ }
+}

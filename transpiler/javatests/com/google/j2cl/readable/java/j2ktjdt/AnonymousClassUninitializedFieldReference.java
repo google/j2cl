@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class RawTypes {
+public class AnonymousClassUninitializedFieldReference {
+  private final Object obj;
 
-  class Parent<T> {}
+  private final Object anonymous =
+      new Object() {
+        public Object getObj() {
+          return obj;
+        }
+      };
 
-  class Child<T extends Child<T>> extends Parent<T> {}
-
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
-    return child;
+  public AnonymousClassUninitializedFieldReference(Object obj) {
+    this.obj = obj;
   }
-
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
-    return a;
-  }
-
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
 }

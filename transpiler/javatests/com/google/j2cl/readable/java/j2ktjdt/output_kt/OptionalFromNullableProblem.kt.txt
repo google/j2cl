@@ -1,4 +1,4 @@
-// Generated from "j2kt/RawTypes.java"
+// Generated from "j2ktjdt/OptionalFromNullableProblem.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -17,22 +17,28 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2kt
+package j2ktjdt
 
 import javaemul.lang.*
+import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
 
-open class RawTypes {
- internal open fun <T: RawTypes.Child<T>> copy_pp_j2kt(child: RawTypes.Child<T>): RawTypes.Child<T> {
-  return child
+open class OptionalFromNullableProblem {
+ companion object {
+  @JvmStatic
+  internal fun <T> test_pp_j2ktjdt(value: T) {
+   Optional.fromNullable_pp_j2ktjdt<T & Any>(value)
+  }
  }
 
- internal open fun <T: RawTypes.Child<T>> toParent_pp_j2kt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
-  return a
+ open class Optional<T: Any> internal constructor() {
+  companion object {
+   @JvmStatic
+   internal fun <T: Any> fromNullable_pp_j2ktjdt(t: T?): Optional<T> {
+    throw RuntimeException()
+   }
+  }
  }
-
- open inner class Parent<T: Any> internal constructor()
-
- open inner class Child<T: RawTypes.Child<T>> internal constructor(): RawTypes.Parent<T>()
 }

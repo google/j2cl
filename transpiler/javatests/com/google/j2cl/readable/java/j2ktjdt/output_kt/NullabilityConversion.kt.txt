@@ -1,0 +1,833 @@
+// Generated from "j2ktjdt/NullabilityConversion.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import kotlin.Any
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class NullabilityConversion {
+ interface Parent
+
+ interface Child: Parent
+
+ interface Generic<T: Parent?>
+
+ interface ParentNullableBound<T>
+
+ interface ChildNonNullBounds<T: Any>: ParentNullableBound<T>
+
+ fun interface Consumer<T: Parent?> {
+  fun set(t: T)
+ }
+
+ fun interface Supplier<T: Child?> {
+  fun get(): T
+ }
+
+ open class Tests {
+  open class Types {
+   open class SimpleToSimple {
+    companion object {
+     @JvmStatic
+     fun nullableToNullable(it: Child?): Parent? {
+      return it
+     }
+
+     @JvmStatic
+     fun nullableToNonNull(it: Child?): Parent {
+      return it!!
+     }
+
+     @JvmStatic
+     fun nonNullToNullable(it: Child): Parent? {
+      return it
+     }
+
+     @JvmStatic
+     fun nonNullToNonNull(it: Child): Parent {
+      return it
+     }
+    }
+   }
+
+   open class UpperWildcardToSimple {
+    companion object {
+     @JvmStatic
+     fun nullableToNullable(supplier: Supplier<*>): Parent? {
+      return supplier.get()
+     }
+
+     @JvmStatic
+     fun nullableToNonNull(supplier: Supplier<*>): Parent {
+      return supplier.get()!!
+     }
+
+     @JvmStatic
+     fun nonNullToNullable(supplier: Supplier<out Child>): Parent? {
+      return supplier.get()
+     }
+
+     @JvmStatic
+     fun nonNullToNonNull(supplier: Supplier<out Child>): Parent {
+      return supplier.get()
+     }
+    }
+   }
+
+   open class LowerWildcardToSimple {
+    companion object {
+     @JvmStatic
+     fun nullableToNullable(supplier: Supplier<in Child?>): Parent? {
+      return supplier.get() as Parent?
+     }
+
+     @JvmStatic
+     fun nullableToNonNull(supplier: Supplier<in Child?>): Parent {
+      return supplier.get()!! as Parent
+     }
+
+     @JvmStatic
+     fun nonNullToNullable(supplier: Supplier<in Child>): Parent? {
+      return supplier.get() as Parent?
+     }
+
+     @JvmStatic
+     fun nonNullToNonNull(supplier: Supplier<in Child>): Parent {
+      return supplier.get()!! as Parent
+     }
+    }
+   }
+
+   open class SimpleToLowerWildcard {
+    companion object {
+     @JvmStatic
+     fun nullableToNullable(consumer: Consumer<in Parent?>, it: Child?) {
+      consumer.set(it)
+     }
+
+     @JvmStatic
+     fun nullableToNonNull(consumer: Consumer<in Parent>, it: Child?) {
+      consumer.set(
+       it as Parent,
+      )
+     }
+
+     @JvmStatic
+     fun nonNullToNullable(consumer: Consumer<in Parent?>, it: Child) {
+      consumer.set(it)
+     }
+
+     @JvmStatic
+     fun nonNullToNonNull(consumer: Consumer<in Parent>, it: Child) {
+      consumer.set(it)
+     }
+    }
+   }
+
+   open class SimpleUpperWildcardToLowerWildcard {
+    companion object {
+     @JvmStatic
+     fun nullableToNullable(consumer: Consumer<in Parent?>, supplier: Supplier<*>) {
+      consumer.set(
+       supplier.get(),
+      )
+     }
+
+     @JvmStatic
+     fun nullableToNonNull(consumer: Consumer<in Parent>, supplier: Supplier<*>) {
+      consumer.set(
+       supplier.get() as Parent,
+      )
+     }
+
+     @JvmStatic
+     fun nonNullToNullable(consumer: Consumer<in Parent?>, supplier: Supplier<out Child>) {
+      consumer.set(
+       supplier.get(),
+      )
+     }
+
+     @JvmStatic
+     fun nonNullToNonNull(consumer: Consumer<in Parent>, supplier: Supplier<out Child>) {
+      consumer.set(
+       supplier.get(),
+      )
+     }
+    }
+   }
+
+   open class VariableToVariable {
+    companion object {
+     @JvmStatic
+     fun <T: Parent?> defaultToDefault(it: T): T {
+      return it
+     }
+
+     @JvmStatic
+     fun <T: Parent?> defaultToNullable(it: T): T? {
+      return it
+     }
+
+     @JvmStatic
+     fun <T: Parent?> defaultToNonNull(it: T): T & Any {
+      return it!!
+     }
+
+     @JvmStatic
+     fun <T: Parent?> nullableToDefault(it: T?): T {
+      return it as T
+     }
+
+     @JvmStatic
+     fun <T: Parent?> nullableToNullable(it: T?): T? {
+      return it
+     }
+
+     @JvmStatic
+     fun <T: Parent?> nullableToNonNull(it: T?): T & Any {
+      return it!!
+     }
+
+     @JvmStatic
+     fun <T: Parent?> nonNullToDefault(it: T & Any): T {
+      return it
+     }
+
+     @JvmStatic
+     fun <T: Parent?> nonNullToNullable(it: T & Any): T? {
+      return it
+     }
+
+     @JvmStatic
+     fun <T: Parent?> nonNullToNonNull(it: T & Any): T & Any {
+      return it
+     }
+    }
+
+    open class VariableToLowerWildcard {
+     companion object {
+      @JvmStatic
+      fun <T: Child?> defaultToDefault(consumer: Consumer<in T>, t: T) {
+       consumer.set(t)
+      }
+
+      @JvmStatic
+      fun <T: Child?> defaultToNullable(consumer: Consumer<in T?>, t: T) {
+       consumer.set(t)
+      }
+
+      @JvmStatic
+      fun <T: Child?> defaultToNonNull(consumer: Consumer<in T & Any>, t: T) {
+       consumer.set(
+        t as (T & Any),
+       )
+      }
+
+      @JvmStatic
+      fun <T: Child?> nullableToDefault(consumer: Consumer<in T>, t: T?) {
+       consumer.set(
+        t as T,
+       )
+      }
+
+      @JvmStatic
+      fun <T: Child?> nullableToNullable(consumer: Consumer<in T?>, t: T?) {
+       consumer.set(t)
+      }
+
+      @JvmStatic
+      fun <T: Child?> nullableToNonNull(consumer: Consumer<in T & Any>, t: T?) {
+       consumer.set(
+        t as (T & Any),
+       )
+      }
+
+      @JvmStatic
+      fun <T: Child?> nonNullToDefault(consumer: Consumer<in T>, t: T & Any) {
+       consumer.set(t)
+      }
+
+      @JvmStatic
+      fun <T: Child?> nonNullToNullable(consumer: Consumer<in T?>, t: T & Any) {
+       consumer.set(t)
+      }
+
+      @JvmStatic
+      fun <T: Child?> nonNullToNonNull(consumer: Consumer<in T & Any>, t: T & Any) {
+       consumer.set(t)
+      }
+     }
+    }
+
+    open class UpperWildcardToVariable {
+     companion object {
+      @JvmStatic
+      fun <T: Child?> defaultToDefault(supplier: Supplier<out T>): T {
+       return supplier.get()
+      }
+
+      @JvmStatic
+      fun <T: Child?> defaultToNullable(supplier: Supplier<out T>): T? {
+       return supplier.get()
+      }
+
+      @JvmStatic
+      fun <T: Child?> defaultToNonNull(supplier: Supplier<out T>): T & Any {
+       return supplier.get() as (T & Any)
+      }
+
+      @JvmStatic
+      fun <T: Child?> nullableToDefault(supplier: Supplier<out T?>): T {
+       return supplier.get() as T
+      }
+
+      @JvmStatic
+      fun <T: Child?> nullableToNullable(supplier: Supplier<out T?>): T? {
+       return supplier.get()
+      }
+
+      @JvmStatic
+      fun <T: Child?> nullableToNonNull(supplier: Supplier<out T?>): T & Any {
+       return supplier.get()!!
+      }
+
+      @JvmStatic
+      fun <T: Child?> nonNullToDefault(supplier: Supplier<out T & Any>): T {
+       return supplier.get()
+      }
+
+      @JvmStatic
+      fun <T: Child?> nonNullToNullable(supplier: Supplier<out T & Any>): T? {
+       return supplier.get()
+      }
+
+      @JvmStatic
+      fun <T: Child?> nonNullToNonNull(supplier: Supplier<out T & Any>): T & Any {
+       return supplier.get()
+      }
+     }
+    }
+   }
+
+   open class TypeArguments {
+    open class SimpleToSimple {
+     companion object {
+      @JvmStatic
+      fun nullableToNullable(it: Generic<Parent?>): Generic<Parent?> {
+       return it
+      }
+
+      @JvmStatic
+      fun nullableToNonNull(it: Generic<Parent?>): Generic<Parent> {
+       return it as Generic<Parent>
+      }
+
+      @JvmStatic
+      fun nonNullToNullable(it: Generic<Parent>): Generic<Parent?> {
+       return it as Generic<Parent?>
+      }
+
+      @JvmStatic
+      fun nonNullToNonNull(it: Generic<Parent>): Generic<Parent> {
+       return it
+      }
+     }
+    }
+
+    open class SimpleToUpperWildcard {
+     companion object {
+      @JvmStatic
+      fun nullableToNullable(it: Generic<Child?>): Generic<*> {
+       return it
+      }
+
+      @JvmStatic
+      fun nullableToNonNull(it: Generic<Child?>): Generic<out Parent> {
+       return it as Generic<out Parent>
+      }
+
+      @JvmStatic
+      fun nonNullToNullable(it: Generic<Child>): Generic<*> {
+       return it
+      }
+
+      @JvmStatic
+      fun nonNullToNonNull(it: Generic<Child>): Generic<out Parent> {
+       return it
+      }
+     }
+    }
+
+    open class SimpleToLowerWildcard {
+     companion object {
+      @JvmStatic
+      fun nullableToNullable(it: Generic<Parent?>): Generic<in Child?> {
+       return it
+      }
+
+      @JvmStatic
+      fun nullableToNonNull(it: Generic<Parent?>): Generic<in Child> {
+       return it
+      }
+
+      @JvmStatic
+      fun nonNullToNullable(it: Generic<Parent>): Generic<in Child?> {
+       return it as Generic<in Child?>
+      }
+
+      @JvmStatic
+      fun nonNullToNonNull(it: Generic<Parent>): Generic<in Child> {
+       return it
+      }
+     }
+    }
+
+    open class SimpleUpperWildcardToUpperWildcard {
+     companion object {
+      @JvmStatic
+      fun nullableToNullable(it: Generic<out Child?>): Generic<*> {
+       return it
+      }
+
+      @JvmStatic
+      fun nullableToNonNull(it: Generic<out Child?>): Generic<out Parent> {
+       return it as Generic<out Parent>
+      }
+
+      @JvmStatic
+      fun nonNullToNullable(it: Generic<out Child>): Generic<*> {
+       return it
+      }
+
+      @JvmStatic
+      fun nonNullToNonNull(it: Generic<out Child>): Generic<out Parent> {
+       return it
+      }
+     }
+    }
+
+    open class SimpleLowerWildcardToUpperWildcard {
+     companion object {
+      @JvmStatic
+      fun nullableToNullable(it: Generic<in Child?>): Generic<*> {
+       return it
+      }
+
+      @JvmStatic
+      fun nullableToNonNull(it: Generic<in Child?>): Generic<out Parent> {
+       return it as Generic<out Parent>
+      }
+
+      @JvmStatic
+      fun nonNullToNullable(it: Generic<in Child>): Generic<*> {
+       return it
+      }
+
+      @JvmStatic
+      fun nonNullToNonNull(it: Generic<in Child>): Generic<out Parent> {
+       return it as Generic<out Parent>
+      }
+     }
+    }
+
+    open class SimpleLowerWildcardToLowerWildcard {
+     companion object {
+      @JvmStatic
+      fun nullableToNullable(it: Generic<in Parent?>): Generic<in Child?> {
+       return it
+      }
+
+      @JvmStatic
+      fun nullableToNonNull(it: Generic<in Parent?>): Generic<in Child> {
+       return it
+      }
+
+      @JvmStatic
+      fun nonNullToNullable(it: Generic<in Parent>): Generic<in Child?> {
+       return it as Generic<in Child?>
+      }
+
+      @JvmStatic
+      fun nonNullToNonNull(it: Generic<in Parent>): Generic<in Child> {
+       return it
+      }
+     }
+    }
+
+    open class VariableToVariable {
+     companion object {
+      @JvmStatic
+      fun <T: Parent?> defaultToDefault(it: Generic<T>): Generic<T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNullable(it: Generic<T>): Generic<T?> {
+       return it as Generic<T?>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNonNull(it: Generic<T>): Generic<T & Any> {
+       return it as Generic<T & Any>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToDefault(it: Generic<T?>): Generic<T> {
+       return it as Generic<T>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNullable(it: Generic<T?>): Generic<T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNonNull(it: Generic<T?>): Generic<T & Any> {
+       return it as Generic<T & Any>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToDefault(it: Generic<T & Any>): Generic<T> {
+       return it as Generic<T>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNullable(it: Generic<T & Any>): Generic<T?> {
+       return it as Generic<T?>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNonNull(it: Generic<T & Any>): Generic<T & Any> {
+       return it
+      }
+     }
+    }
+
+    open class VariableToUpperWildcard {
+     companion object {
+      @JvmStatic
+      fun <T: Parent?> defaultToDefault(it: Generic<T>): Generic<out T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNullable(it: Generic<T>): Generic<out T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNonNull(it: Generic<T>): Generic<out T & Any> {
+       return it as Generic<out T & Any>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToDefault(it: Generic<T?>): Generic<out T> {
+       return it as Generic<out T>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNullable(it: Generic<T?>): Generic<out T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNonNull(it: Generic<T?>): Generic<out T & Any> {
+       return it as Generic<out T & Any>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToDefault(it: Generic<T & Any>): Generic<out T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNullable(it: Generic<T & Any>): Generic<out T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNonNull(it: Generic<T & Any>): Generic<out T & Any> {
+       return it
+      }
+     }
+    }
+
+    open class VariableToLowerWildcard {
+     companion object {
+      @JvmStatic
+      fun <T: Parent?> defaultToDefault(it: Generic<T>): Generic<in T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNullable(it: Generic<T>): Generic<in T?> {
+       return it as Generic<in T?>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNonNull(it: Generic<T>): Generic<in T & Any> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToDefault(it: Generic<T?>): Generic<in T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNullable(it: Generic<T?>): Generic<in T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNonNull(it: Generic<T?>): Generic<in T & Any> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToDefault(it: Generic<T & Any>): Generic<in T> {
+       return it as Generic<in T>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNullable(it: Generic<T & Any>): Generic<in T?> {
+       return it as Generic<in T?>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNonNull(it: Generic<T & Any>): Generic<in T & Any> {
+       return it
+      }
+     }
+    }
+
+    open class VariableUpperWildcardToUpperWildcard {
+     companion object {
+      @JvmStatic
+      fun <T: Parent?> defaultToDefault(it: Generic<out T>): Generic<out T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNullable(it: Generic<out T>): Generic<out T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNonNull(it: Generic<out T>): Generic<out T & Any> {
+       return it as Generic<out T & Any>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToDefault(it: Generic<out T?>): Generic<out T> {
+       return it as Generic<out T>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNullable(it: Generic<out T?>): Generic<out T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNonNull(it: Generic<out T?>): Generic<out T & Any> {
+       return it as Generic<out T & Any>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToDefault(it: Generic<out T & Any>): Generic<out T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNullable(it: Generic<out T & Any>): Generic<out T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNonNull(it: Generic<out T & Any>): Generic<out T & Any> {
+       return it
+      }
+     }
+    }
+
+    open class VariableLowerWildcardToLowerWildcard {
+     companion object {
+      @JvmStatic
+      fun <T: Parent?> defaultToDefault(it: Generic<in T>): Generic<in T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNullable(it: Generic<in T>): Generic<in T?> {
+       return it as Generic<in T?>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> defaultToNonNull(it: Generic<in T>): Generic<in T & Any> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToDefault(it: Generic<in T?>): Generic<in T> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNullable(it: Generic<in T?>): Generic<in T?> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nullableToNonNull(it: Generic<in T?>): Generic<in T & Any> {
+       return it
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToDefault(it: Generic<in T & Any>): Generic<in T> {
+       return it as Generic<in T>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNullable(it: Generic<in T & Any>): Generic<in T?> {
+       return it as Generic<in T?>
+      }
+
+      @JvmStatic
+      fun <T: Parent?> nonNullToNonNull(it: Generic<in T & Any>): Generic<in T & Any> {
+       return it
+      }
+     }
+    }
+   }
+  }
+
+  open class Unions {
+   companion object {
+    @JvmStatic
+    fun mixedToNonNull(): Supplier<Child> {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNonNull1) {
+      return e as Supplier<Child>
+     } catch (e: ExceptionNullable1) {
+      return e as Supplier<Child>
+     }
+    }
+
+    @JvmStatic
+    fun mixedToNullable(): Supplier<Child?> {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNonNull1) {
+      return e as Supplier<Child?>
+     } catch (e: ExceptionNullable1) {
+      return e as Supplier<Child?>
+     }
+    }
+
+    @JvmStatic
+    fun nonNullToNonNull(): Supplier<Child> {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNonNull1) {
+      return e
+     } catch (e: ExceptionNonNull2) {
+      return e
+     }
+    }
+
+    @JvmStatic
+    fun nullableToNullable(): Supplier<Child?> {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNullable1) {
+      return e
+     } catch (e: ExceptionNullable2) {
+      return e
+     }
+    }
+
+    @JvmStatic
+    fun typeArgumentMixedToNonNull(): Child {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNonNull1) {
+      return e.get()!!
+     } catch (e: ExceptionNullable1) {
+      return e.get()!!
+     }
+    }
+
+    @JvmStatic
+    fun typeArgumentMixedToNullable(): Child? {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNonNull1) {
+      return e.get()
+     } catch (e: ExceptionNullable1) {
+      return e.get()
+     }
+    }
+
+    @JvmStatic
+    fun typeArgumentNonNullToNonNull(): Child {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNonNull1) {
+      return e.get()
+     } catch (e: ExceptionNonNull2) {
+      return e.get()
+     }
+    }
+
+    @JvmStatic
+    fun typeArgumentNullableToNullable(): Child? {
+     try {
+      throw RuntimeException()
+     } catch (e: ExceptionNullable1) {
+      return e.get()
+     } catch (e: ExceptionNullable2) {
+      return e.get()
+     }
+    }
+   }
+
+   abstract class ExceptionNonNull1: RuntimeException(), Supplier<Child>
+
+   abstract class ExceptionNonNull2: RuntimeException(), Supplier<Child>
+
+   abstract class ExceptionNullable1: RuntimeException(), Supplier<Child?>
+
+   abstract class ExceptionNullable2: RuntimeException(), Supplier<Child?>
+  }
+
+  open class Raw {
+   companion object {
+    @JvmStatic
+    fun nonNullToNullable(x: ChildNonNullBounds<Any>): ParentNullableBound<Any?> {
+     return x as ParentNullableBound<Any?>
+    }
+   }
+  }
+ }
+}

@@ -13,27 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public class RawTypes {
-
-  class Parent<T> {}
-
-  class Child<T extends Child<T>> extends Parent<T> {}
-
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
-    return child;
+public class QualifierProjectionCastWithRecursiveType {
+  interface Foo<T extends Foo<T>> {
+    String name(@Nullable T s);
   }
 
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
-    return a;
+  public static void test(Foo<?> foo) {
+    foo.name(null);
   }
-
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(Child<?> parent) {
-  //   return toParent(copy((Child) parent));
-  // }
 }

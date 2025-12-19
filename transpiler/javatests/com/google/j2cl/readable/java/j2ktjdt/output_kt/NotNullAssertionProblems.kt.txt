@@ -1,0 +1,375 @@
+// Generated from "j2ktjdt/NotNullAssertionProblems.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import java.lang.Class
+import kotlin.Any
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.arrayOf
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+
+open class NotNullAssertionProblems {
+ open fun testArrayLiteral(string: String, nullableString: String?) {
+  val array0: Array<String?> = arrayOf<String?>(null)
+  val array1: Array<String?> = arrayOf<String?>(string, null)
+  val array2: Array<String?> = arrayOf<String?>(string, nullableString)
+  val array3: Array<String?> = arrayOf<String?>(null, string)
+  val array4: Array<String?> = arrayOf<String?>(nullableString, string)
+ }
+
+ open fun testNewArray(string: String, nullableString: String?) {
+  val array0: Array<String?> = arrayOf<String?>(null)
+  val array1: Array<String?> = arrayOf<String?>(string, null)
+  val array2: Array<String?> = arrayOf<String?>(string, nullableString)
+  val array3: Array<String?> = arrayOf<String?>(null, string)
+  val array4: Array<String?> = arrayOf<String?>(nullableString, string)
+ }
+
+ open fun testExplicitInvocationTypeArguments(string: String, supplier: Supplier<String>, nullableString: String?) {
+  NotNullAssertionProblems.accept1<String?>(null)
+  NotNullAssertionProblems.accept2<String?>(string, null)
+  NotNullAssertionProblems.accept2<String?>(string, nullableString)
+  NotNullAssertionProblems.accept2<String?>(null, string)
+  NotNullAssertionProblems.accept2<String?>(nullableString, string)
+  NotNullAssertionProblems.acceptVararg<String?>(string, null)
+  NotNullAssertionProblems.acceptVararg<String?>(string, nullableString)
+  NotNullAssertionProblems.acceptVararg<String?>(null, string)
+  NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
+  NotNullAssertionProblems.acceptGeneric<String?>(
+   supplier as Supplier<String?>,
+   nullableString,
+  )
+  NotNullAssertionProblems.acceptUpperBound<String?>(
+   supplier as Supplier<String>,
+   nullableString,
+  )
+ }
+
+ open fun testImplicitInvocationTypeArguments(string: String, supplier: Supplier<String>, nullableString: String?) {
+  NotNullAssertionProblems.accept1<Any?>(null)
+  NotNullAssertionProblems.accept2<String?>(string, null)
+  NotNullAssertionProblems.accept2<String?>(string, nullableString)
+  NotNullAssertionProblems.accept2<String?>(null, string)
+  NotNullAssertionProblems.accept2<String?>(nullableString, string)
+  NotNullAssertionProblems.acceptVararg<String?>(string, null)
+  NotNullAssertionProblems.acceptVararg<String?>(string, nullableString)
+  NotNullAssertionProblems.acceptVararg<String?>(null, string)
+  NotNullAssertionProblems.acceptVararg<String?>(nullableString, string)
+  NotNullAssertionProblems.acceptGeneric<String?>(
+   supplier as Supplier<String?>,
+   nullableString,
+  )
+  NotNullAssertionProblems.acceptUpperBound<String?>(
+   supplier as Supplier<String>,
+   nullableString,
+  )
+ }
+
+ open fun testExplicitConstructorTypeArguments(string: String, supplier: Supplier<String>, nullableString: String?) {
+  Consumer<String?>(null)
+  Consumer<String?>(string, null)
+  Consumer<String?>(string, nullableString)
+  Consumer<String?>(null, string)
+  Consumer<String?>(nullableString, string)
+  VarargConsumer<String?>(string, null)
+  VarargConsumer<String?>(string, nullableString)
+  VarargConsumer<String?>(null, string)
+  VarargConsumer<String?>(nullableString, string)
+  GenericConsumer<String?>(
+   supplier as Supplier<String?>,
+   nullableString,
+  )
+  UpperWildcardConsumer<String?>(
+   supplier as Supplier<String>,
+   nullableString,
+  )
+ }
+
+ open fun testImplicitConstructorTypeArguments(string: String, supplier: Supplier<String>, nullableString: String?) {
+  Consumer<Any?>(null)
+  Consumer<String?>(string, null)
+  Consumer<String?>(string, nullableString)
+  Consumer<String?>(null, string)
+  Consumer<String?>(nullableString, string)
+  VarargConsumer<String?>(string, null)
+  VarargConsumer<String?>(string, nullableString)
+  VarargConsumer<String?>(null, string)
+  VarargConsumer<String?>(nullableString, string)
+  GenericConsumer<String?>(
+   supplier as Supplier<String?>,
+   nullableString,
+  )
+  UpperWildcardConsumer<String?>(
+   supplier as Supplier<String>,
+   nullableString,
+  )
+ }
+
+ open fun testImplicitRawConstructorTypeArguments(string: String, supplier: Supplier<String>, nullableString: String?) {
+  Consumer<Any?>(null)
+  Consumer<Any?>(string, null)
+  Consumer<Any?>(string, nullableString)
+  Consumer<Any?>(null, string)
+  Consumer<Any?>(nullableString, string)
+  VarargConsumer<Any?>(string, null)
+  VarargConsumer<Any?>(string, nullableString)
+  VarargConsumer<Any?>(null, string)
+  VarargConsumer<Any?>(nullableString, string)
+  GenericConsumer<Any?>(
+   supplier as Supplier<Any?>,
+   nullableString,
+  )
+  UpperWildcardConsumer<Any?>(
+   supplier as Supplier<Any?>,
+   nullableString,
+  )
+ }
+
+ companion object {
+  @JvmStatic
+  fun testImplicitInvocationTypeArguments_wildcards(string: String, wildcardSupplier: Supplier<*>) {
+   NotNullAssertionProblems.accept1(
+    wildcardSupplier.getValue(),
+   )
+   NotNullAssertionProblems.accept2<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+   NotNullAssertionProblems.acceptVararg<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+  }
+
+  @JvmStatic
+  fun testImplicitInvocationTypeArguments_rawTypes(nonNull: Supplier<Any?>, nullable: Supplier<Any?>?) {
+   NotNullAssertionProblems.accept2<Supplier<Any?>?>(nonNull, nullable)
+   NotNullAssertionProblems.accept2<Supplier<Any?>?>(nullable, nonNull)
+   NotNullAssertionProblems.acceptVararg<Supplier<Any?>?>(nonNull, nullable)
+   NotNullAssertionProblems.acceptVararg<Supplier<Any?>?>(nullable, nonNull)
+  }
+
+  @JvmStatic
+  fun testImplicitConstructorTypeArguments_wildcards(string: String, wildcardSupplier: Supplier<*>) {
+   Consumer(
+    wildcardSupplier.getValue(),
+   )
+   Consumer<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+   VarargConsumer<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+  }
+
+  @JvmStatic
+  fun testRawConstructorTypeArguments_wildcards(string: String, wildcardSupplier: Supplier<*>) {
+   Consumer<Any?>(
+    wildcardSupplier.getValue(),
+   )
+   Consumer<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+   VarargConsumer<Any?>(
+    string,
+    wildcardSupplier.getValue(),
+   )
+  }
+
+  @JvmStatic
+  fun testImplicitConstructorTypeArguments_inference(string: String) {
+   Consumer<String?>(string, null).accept(null)
+   VarargConsumer<String?>(string, null).accept(null)
+  }
+
+  @JvmStatic
+  fun <T: Any> testUnsafeNull() {
+   val x: Any? = NotNullAssertionProblems.getUnsafeNull<Any>()
+   if (x != null) {
+    NotNullAssertionProblems.accept1<Int>(
+     x!!.hashCode(),
+    )
+   }
+  }
+
+  @JvmStatic
+  fun <C: String?> testNullableAcceptNullable2Vararg(nonNull: C) {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
+  }
+
+  @JvmStatic
+  fun <C: String> testNonNullAcceptNullable2Vararg(nonNull: C) {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
+  }
+
+  @JvmStatic
+  fun <C: String> testNonNullAcceptNonNull2Vararg(nonNull: C) {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNonNull2Vararg<C>(
+    localNonNull!!,
+    nonNull,
+    nonNull,
+   )
+  }
+
+  @JvmStatic
+  fun <U: String, C: U> testNonNullParametericBoundAcceptNullable2Vararg(nonNull: C) {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
+  }
+
+  @JvmStatic
+  fun <C> testNonNullClassInterfaceIntersectionAcceptNullable2Vararg(nonNull: C) where C: Class1, C: Interface1 {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
+  }
+
+  @JvmStatic
+  fun <C> testNonNullInterfaceInterfaceIntersectionAcceptNullable2Vararg(nonNull: C) where C: Interface1, C: Interface2 {
+   val localNonNull: C? = nonNull
+   NotNullAssertionProblems.acceptNullable2Vararg<C?>(localNonNull, nonNull, nonNull)
+  }
+
+  @JvmStatic
+  fun <T> getUnsafeNull(): T {
+   return null as T
+  }
+
+  @JvmStatic
+  fun <T: Any> testDefaultValue(value: Any?) {
+   if (value != null) {
+    val x: Any? = NotNullAssertionProblems.getDefaultValue(
+     value!!.getClass() as Class<*>,
+    )
+    if (x != null) {
+     NotNullAssertionProblems.accept1<Int>(
+      x!!.hashCode(),
+     )
+    }
+   }
+  }
+
+  @JvmStatic
+  fun <T: Any> getDefaultValue(cls: Class<T>): T {
+   return NotNullAssertionProblems.getUnsafeNull<T>()
+  }
+
+  @JvmStatic
+  fun <T> accept1(t: T) {}
+
+  @JvmStatic
+  fun <T> accept2(t1: T, t2: T) {}
+
+  @JvmStatic
+  fun <T> acceptUpperBound(t1: Supplier<out T>, t2: T) {}
+
+  @JvmStatic
+  fun <T> acceptGeneric(t1: Supplier<T>, t2: T) {}
+
+  @JvmStatic
+  fun <T> acceptVararg(vararg varargs: T) {
+   val varargs_1: Array<T> = varargs as Array<T>
+  }
+
+  @JvmStatic
+  fun <T> acceptNullable2Vararg(t1: T, t2: T, vararg varargs: T) {
+   val varargs_1: Array<T> = varargs as Array<T>
+  }
+
+  @JvmStatic
+  fun <T: Any> acceptNonNull2Vararg(t1: T, t2: T, vararg varargs: T) {
+   val varargs_1: Array<T> = varargs as Array<T>
+  }
+
+  @JvmStatic
+  fun testNullWildcardInLambda() {
+   val supplier: Supplier<*> = NotNullAssertionProblems.wrap<Any?>(
+    Supplier {
+     return@Supplier null
+    },
+   )
+   supplier.getValue()
+  }
+
+  @JvmStatic
+  fun <T> wrap(supplier: Supplier<out T>): Supplier<T> {
+   return Supplier {
+    return@Supplier supplier.getValue()
+   }
+  }
+ }
+
+ interface Class1
+
+ interface Interface1
+
+ interface Interface2
+
+ open class Consumer<T> {
+  constructor(t: T)
+
+  constructor(t1: T, t2: T)
+
+  open fun accept(t: T) {}
+ }
+
+ open class VarargConsumer<T> {
+  constructor(vararg ts: T) {
+   val ts_1: Array<T> = ts as Array<T>
+  }
+
+  open fun accept(t: T) {}
+ }
+
+ open class GenericConsumer<T> {
+  constructor(supplier: Supplier<T>, t: T)
+
+  open fun accept(t: T) {}
+ }
+
+ open class UpperWildcardConsumer<T> {
+  constructor(supplier: Supplier<out T>, t: T)
+
+  open fun accept(t: T) {}
+ }
+
+ open class C<V> internal constructor() {
+  @JvmField
+  internal var defaultValue_pp_j2ktjdt: V = null as V
+
+  internal open fun f_pp_j2ktjdt(): V {
+   return (if (true) this.defaultValue_pp_j2ktjdt else this.defaultValue_pp_j2ktjdt) as V
+  }
+ }
+
+ fun interface Supplier<V> {
+  fun getValue(): V
+ }
+}

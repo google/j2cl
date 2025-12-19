@@ -1,0 +1,144 @@
+// Generated from "j2ktjdt/StreamCollectWildcardProblem.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktjdt
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import java.util.Objects
+import java.util.function.Function
+import java.util.function.Predicate
+import java.util.stream.Collector
+import java.util.stream.Collectors
+import java.util.stream.Stream
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.String
+import kotlin.Suppress
+import kotlin.collections.MutableList
+import kotlin.jvm.JvmStatic
+
+open class StreamCollectWildcardProblem {
+ companion object {
+  @JvmStatic
+  fun testCollect(list: Stream<Foo<*>>) {
+   StreamCollectWildcardProblem.accept(
+    list.collect<MutableList<Foo<*>>, Any?>(
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any?, MutableList<Foo<*>>>,
+    ),
+   )
+  }
+
+  @JvmStatic
+  fun testMethodReferenceMapCollect(list: Stream<Foo<*>>) {
+   StreamCollectWildcardProblem.accept(
+    list.map(
+     Function { arg0: Foo<*> ->
+      return@Function arg0.getThis() as Foo<*>
+     } as Function<in Foo<*>, out Foo<*>>,
+    ).collect<MutableList<Foo<*>>, Any?>(
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any?, MutableList<Foo<*>>>,
+    ),
+   )
+  }
+
+  @JvmStatic
+  fun testLambdaMapCollect(list: Stream<Foo<*>>) {
+   StreamCollectWildcardProblem.accept(
+    list.map(
+     Function { it: Foo<*> ->
+      return@Function it.getThis() as Foo<*>
+     } as Function<in Foo<*>, out Foo<*>>,
+    ).collect<MutableList<Foo<*>>, Any?>(
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, Any?, MutableList<Foo<*>>>,
+    ),
+   )
+  }
+
+  @JvmStatic
+  fun testCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
+   StreamCollectWildcardProblem.accept(
+    list.collect(
+     Collectors.toList<Foo<*>>(),
+    ),
+   )
+  }
+
+  @JvmStatic
+  fun testMethodReferenceMapCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
+   StreamCollectWildcardProblem.accept(
+    list.map(
+     Function { arg0: Foo<*> ->
+      return@Function arg0.getThis() as Foo<*>
+     } as Function<in Foo<*>, out Foo<*>>,
+    ).collect(
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, *, MutableList<Foo<*>>>,
+    ),
+   )
+  }
+
+  @JvmStatic
+  fun testLambdaMapCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
+   StreamCollectWildcardProblem.accept(
+    list.map(
+     Function { it: Foo<*> ->
+      return@Function it.getThis() as Foo<*>
+     } as Function<in Foo<*>, out Foo<*>>,
+    ).collect(
+     Collectors.toList<Foo<*>>() as Collector<in Foo<*>, *, MutableList<Foo<*>>>,
+    ),
+   )
+  }
+
+  @JvmStatic
+  fun accept(list: MutableList<Foo<*>>) {
+   throw RuntimeException()
+  }
+
+  @JvmStatic
+  fun testNullabilityInference(stream1: Stream<Foo<Any>>, stream2: Stream<Foo<Any>>, b: Boolean): Stream<String> {
+   return Stream.of<Stream<String>?>(
+    if (b) stream1.map<String>(
+     Function { arg0: Foo<Any> ->
+      return@Function arg0.getString()
+     },
+    ) else null,
+    if (b) stream2.map<String>(
+     Function { arg0_1: Foo<Any> ->
+      return@Function arg0_1.getString()
+     },
+    ) else null,
+   ).filter(
+    Predicate { arg0_2: Stream<String> ->
+     return@Predicate Objects.nonNull(arg0_2)
+    } as Predicate<in Stream<String>?>,
+   ).flatMap<String>(
+    Function { stream: Stream<String> ->
+     return@Function stream
+    } as Function<in Stream<String>?, out Stream<out String>>,
+   )
+  }
+ }
+
+ interface Foo<T: Any> {
+  fun getThis(): Foo<T>
+
+  fun getString(): String
+ }
+}

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2ktjdt;
 
 import javaemul.internal.annotations.KtIn;
 import org.jspecify.annotations.NullMarked;
@@ -156,8 +156,7 @@ class TypeWildCards {
     }
 
     public static void testSetField(Holder<?, ?> holder) {
-      // TODO(b/443813558): Uncomment once fixed.
-      // holder.observer = e -> {};
+      holder.observer = e -> {};
     }
 
     public static void testSetMethod(Holder<?, ?> holder) {
