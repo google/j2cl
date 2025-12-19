@@ -219,27 +219,28 @@ class JavaEnvironment {
 
   Variable createVariable(
       SourcePosition sourcePosition,
-      VariableElement variableElement,
+      VarSymbol variableSymbol,
       boolean isParameter,
       boolean inNullMarkedScope) {
-    TypeMirror type = variableElement.asType();
-    String name = variableElement.getSimpleName().toString();
+    TypeMirror type = variableSymbol.asType();
+    String name = variableSymbol.getSimpleName().toString();
     TypeDescriptor typeDescriptor =
         createTypeDescriptorWithNullability(
-            type, variableElement.getAnnotationMirrors(), inNullMarkedScope);
+            type, variableSymbol.getAnnotationMirrors(), inNullMarkedScope);
     if (!isParameter) {
       // In JSpecify, variables do not inherit the nullability from the scope, instead they are
       // conceptually nullable but their nullability is eventually inferred from the assignments.
       typeDescriptor = typeDescriptor.toNullable();
     }
-    boolean isFinal = isFinal(variableElement);
+    boolean isFinal =
+        isFinal(variableSymbol) || (variableSymbol.flags_field & Flags.EFFECTIVELY_FINAL) != 0L;
     return Variable.newBuilder()
         .setName(name)
         .setTypeDescriptor(typeDescriptor)
         .setFinal(isFinal)
         .setParameter(isParameter)
         .setSourcePosition(sourcePosition)
-        .setAnnotations(createAnnotations(variableElement, inNullMarkedScope))
+        .setAnnotations(createAnnotations(variableSymbol, inNullMarkedScope))
         .build();
   }
 

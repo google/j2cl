@@ -332,7 +332,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Variable createVariable(JCVariableDecl variableDeclaration, boolean isParameter) {
-    VariableElement variableElement = variableDeclaration.sym;
+    VarSymbol variableElement = variableDeclaration.sym;
     Variable variable =
         environment.createVariable(
             getNamePosition(variableElement.getSimpleName().toString(), variableDeclaration),

@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let SomeClass = goog.forwardDeclare('anonymousclass.SomeClass$impl');
 let $1 = goog.forwardDeclare('anonymousclass.SomeInterface.$1$impl');
 let $2 = goog.forwardDeclare('anonymousclass.SomeInterface.$2$impl');
-let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 /**
@@ -15,13 +14,13 @@ class SomeInterface {
  /** @nodts */
  static m_captures__void() {
   SomeInterface.$clinit();
-  let i = Ref.m_createRef__int__javaemul_internal_Ref_OfInt(0);
+  let /** number */ i;
   if ($Equality.$same(SomeInterface.$static_implicitlyStatic__anonymousclass_SomeInterface, null)) {
-   i.f_element__javaemul_internal_Ref_OfInt = 1;
+   i = 1;
   } else {
-   i.f_element__javaemul_internal_Ref_OfInt = 2;
+   i = 2;
   }
-  $2.$create__javaemul_internal_Ref_OfInt__int(i, 1);
+  $2.$create__int__int(i, 1);
  }
  /** @nodts @return {SomeClass} */
  static get f_implicitlyStatic__anonymousclass_SomeInterface() {
@@ -46,7 +45,6 @@ class SomeInterface {
  static $loadModules() {
   $1 = goog.module.get('anonymousclass.SomeInterface.$1$impl');
   $2 = goog.module.get('anonymousclass.SomeInterface.$2$impl');
-  Ref = goog.module.get('javaemul.internal.Ref$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
  }
 }

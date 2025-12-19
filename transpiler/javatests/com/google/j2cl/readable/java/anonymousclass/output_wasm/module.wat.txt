@@ -194,7 +194,7 @@
  (field $vtable (ref $anonymousclass.SomeInterface.2.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$captured_i@anonymousclass.SomeInterface.2 (mut (ref null $javaemul.internal.Ref.OfInt)))
+ (field $$captured_i@anonymousclass.SomeInterface.2 (mut i32))
  (field $capturedI@anonymousclass.SomeInterface.2 (mut i32))
  ))
 )
@@ -454,28 +454,28 @@
 ;;; void SomeInterface.captures()
 (func $m_captures__void@anonymousclass.SomeInterface
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:83:14
- (local $i (ref null $javaemul.internal.Ref.OfInt))
+ (local $i i32)
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:83:25
   (call $$clinit__void_<once>_@anonymousclass.SomeInterface )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:86:4
-  (local.set $i (call $m_createRef__int__javaemul_internal_Ref_OfInt@javaemul.internal.Ref (i32.const 0)))
+  
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:87:4
   (if (ref.is_null (global.get $implicitlyStatic@anonymousclass.SomeInterface))
    (then
     (block
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:88:6
-     (struct.set $javaemul.internal.Ref.OfInt $element@javaemul.internal.Ref.OfInt (local.get $i) (i32.const 1))
+     (local.set $i (i32.const 1))
     )
    )(else
     (block
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:90:6
-     (struct.set $javaemul.internal.Ref.OfInt $element@javaemul.internal.Ref.OfInt (local.get $i) (i32.const 2))
+     (local.set $i (i32.const 2))
     )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:4
-  (drop (call $$create__javaemul_internal_Ref_OfInt__int@anonymousclass.SomeInterface.2 (local.get $i)(i32.const 1)))
+  (drop (call $$create__int__int@anonymousclass.SomeInterface.2 (local.get $i)(i32.const 1)))
  )
 )
 
@@ -1494,9 +1494,9 @@
 
 ;;; Code for anonymousclass.SomeInterface.2 [methods]
 
-;;; <anonymous> extends SomeClass <anonymous> extends SomeClass.$create(OfInt $captured_i, int i)
-(func $$create__javaemul_internal_Ref_OfInt__int@anonymousclass.SomeInterface.2
- (param $$captured_i (ref null $javaemul.internal.Ref.OfInt))
+;;; <anonymous> extends SomeClass <anonymous> extends SomeClass.$create(int $captured_i, int i)
+(func $$create__int__int@anonymousclass.SomeInterface.2
+ (param $$captured_i i32)
  (param $i i32)
  (result (ref null $anonymousclass.SomeInterface.2))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:21
@@ -1505,18 +1505,18 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:21
   (call $$clinit__void_<once>_@anonymousclass.SomeInterface.2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:21
-  (local.set $$instance (struct.new $anonymousclass.SomeInterface.2 (global.get $anonymousclass.SomeInterface.2.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.Ref.OfInt) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousclass.SomeInterface.2 (global.get $anonymousclass.SomeInterface.2.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:21
-  (call $$ctor__javaemul_internal_Ref_OfInt__int__void_$p_anonymousclass_SomeInterface_2@anonymousclass.SomeInterface.2 (ref.as_non_null (local.get $$instance))(local.get $$captured_i)(local.get $i))
+  (call $$ctor__int__int__void_$p_anonymousclass_SomeInterface_2@anonymousclass.SomeInterface.2 (ref.as_non_null (local.get $$instance))(local.get $$captured_i)(local.get $i))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:21
   (return (local.get $$instance))
  )
 )
 
-;;; void <anonymous> extends SomeClass.$ctor(OfInt $captured_i, int i)
-(func $$ctor__javaemul_internal_Ref_OfInt__int__void_$p_anonymousclass_SomeInterface_2@anonymousclass.SomeInterface.2
+;;; void <anonymous> extends SomeClass.$ctor(int $captured_i, int i)
+(func $$ctor__int__int__void_$p_anonymousclass_SomeInterface_2@anonymousclass.SomeInterface.2
  (param $this (ref null $anonymousclass.SomeInterface.2))
- (param $$captured_i (ref null $javaemul.internal.Ref.OfInt))
+ (param $$captured_i i32)
  (param $i i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:21
  (block
@@ -1550,7 +1550,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:4
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:94:6
-  (struct.set $anonymousclass.SomeInterface.2 $capturedI@anonymousclass.SomeInterface.2 (local.get $this) (struct.get $javaemul.internal.Ref.OfInt $element@javaemul.internal.Ref.OfInt (struct.get $anonymousclass.SomeInterface.2 $$captured_i@anonymousclass.SomeInterface.2 (local.get $this))))
+  (struct.set $anonymousclass.SomeInterface.2 $capturedI@anonymousclass.SomeInterface.2 (local.get $this) (struct.get $anonymousclass.SomeInterface.2 $$captured_i@anonymousclass.SomeInterface.2 (local.get $this)))
  )
 )
 
