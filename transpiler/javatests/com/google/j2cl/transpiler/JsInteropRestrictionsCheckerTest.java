@@ -1851,20 +1851,20 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsFunction lambda can only implement the JsFunction interface.",
             "JsFunction 'void MutuallyRecursiveFunctionA.m(MutuallyRecursiveFunctionB f)' cannot "
                 + "refer recursively to itself "
-                + "(via MutuallyRecursiveFunctionA MutuallyRecursiveFunctionB.m()) (b/153591461).",
+                + "(via MutuallyRecursiveFunctionA MutuallyRecursiveFunctionB.m()). (b/153591461)",
             "JsFunction 'MutuallyRecursiveFunctionA MutuallyRecursiveFunctionB.m()' cannot refer "
                 + "recursively to itself "
-                + "(via void MutuallyRecursiveFunctionA.m(MutuallyRecursiveFunctionB)) "
-                + "(b/153591461).",
+                + "(via void MutuallyRecursiveFunctionA.m(MutuallyRecursiveFunctionB)). "
+                + "(b/153591461)",
             "JsFunction 'void IndirectReference.m(List<List<IndirectReference>> f)' cannot refer"
-                + " recursively to itself (b/153591461).",
-            "JsFunction 'void TypeVariableReference.m(T f)' cannot refer recursively to itself "
-                + "(b/153591461).",
+                + " recursively to itself. (b/153591461)",
+            "JsFunction 'void TypeVariableReference.m(T f)' cannot refer recursively to itself. "
+                + "(b/153591461)",
             "JsFunction 'void TypeVariableWithIntersectionBound.m(T f)' cannot refer recursively"
-                + " to itself (b/153591461).",
+                + " to itself. (b/153591461)",
             "JsFunction 'void IndirectReferenceThroughJsFunction.m("
                 + "JsFunctionNotInvolvedInCycle<IndirectReferenceThroughJsFunction> f)' cannot "
-                + "refer recursively to itself (b/153591461).",
+                + "refer recursively to itself. (b/153591461)",
             "JsFunction 'void JsFunctionWithMethodDefinedTypeVariable.m()' cannot declare type"
                 + " parameters. Type parameters must be declared on the enclosing interface"
                 + " instead.");

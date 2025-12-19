@@ -1720,11 +1720,11 @@ public class JsInteropRestrictionsChecker {
       if (foundJsFunctions.contains(type.getDeclaration())) {
         problems.error(
             method.getSourcePosition(),
-            "JsFunction '%s' cannot refer recursively to itself %s(b/153591461).",
+            "JsFunction '%s' cannot refer recursively to itself%s. (b/153591461)",
             method.getReadableDescription(),
             jsFunctionMethod.getEnclosingTypeDescriptor() == type.getTypeDescriptor()
                 ? ""
-                : "(via " + jsFunctionMethod.getReadableDescription() + ") ");
+                : " (via " + jsFunctionMethod.getReadableDescription() + ")");
         return;
       }
     }
