@@ -56,12 +56,7 @@ def _impl_j2cl_library(ctx):
         srcs = ctx.files.srcs
         kt_common_srcs = ctx.files.kt_common_srcs
 
-    # Restrict the usage of kotlincopts to internal-only callers.
-    # TODO(b/240682589): Setup a way for users to safely pass in flags.
-    if (len(ctx.attr.kotlincopts) and not ctx.label.package.startswith("")):
-        fail("kotlincopts can only be internally set by J2CL")
-
-    kotlincopts = ctx.attr.kotlincopts
+    kotlincopts = []
 
     j2cl_provider = j2cl_common.compile(
         ctx,
@@ -172,7 +167,6 @@ _J2CL_LIB_ATTRS = {
     "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "javacopts": attr.string_list(),
-    "kotlincopts": attr.string_list(),
 }
 
 _J2CL_LIB_ATTRS.update(_J2KT_WEB_EXPERIMENT_ATTRS)
