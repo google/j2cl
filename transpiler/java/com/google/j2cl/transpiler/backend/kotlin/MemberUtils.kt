@@ -72,5 +72,6 @@ internal val Field.isKtLateInit: Boolean
     return (descriptor.ktInfo.isUninitializedWarningSuppressed || isTestProperty) &&
       !descriptor.isFinal &&
       !descriptor.typeDescriptor.isNullable &&
+      !TypeDescriptors.isBoxedType(descriptor.typeDescriptor) &&
       !hasInitializer()
   }
