@@ -16,9 +16,12 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.PatternMatchExpression;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -27,6 +30,7 @@ import com.google.j2cl.transpiler.ast.SwitchCasePattern;
 import com.google.j2cl.transpiler.ast.SwitchConstruct;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableReference;
@@ -66,6 +70,9 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
 
     // 2. Desugar the newly introduced pattern matching expressions.
     new DesugarInstanceOfPatterns().applyTo(compilationUnit);
+
+    // 3. Remove redundant instanceof expression introduced by the normalization.
+    removeRedundantInstanceOfExpressions(compilationUnit);
   }
 
   private void normalizeSwitchPatterns(CompilationUnit compilationUnit) {
@@ -129,9 +136,8 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
     //
     //  case PatternType _ when selector instanceof Pattern && guard ->
     //
-
-    // TODO(b/470329542): The desugaring of this simple conversion duplicates the instance of
-    // operation which will be fixed in a post pass.
+    // Note that this simple conversion duplicates the instance of operation which will be fixed in
+    // removeRedundantInstanceOfExpressions below.
 
     // selector instanceof Pattern
     var patternMatchExpression =
@@ -155,5 +161,73 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
                 ? patternMatchExpression
                 : patternMatchExpression.infixAnd(switchCase.getGuard()))
         .build();
+  }
+
+  /**
+   * Removes redundant instanceof evaluation if the desugaring ends up with a case like:
+   *
+   * <pre>{@code
+   * case PatternType _
+   *   when (selector instanceof PatternType
+   *       && <rest of desugared pattern match>) // which is a && of possibly many terms
+   *     && <original guard>                     // which is a general boolean expression
+   *
+   * }</pre>
+   *
+   * <p>Since the pattern is always the result of desugaring its general shape is known. The guard
+   * is guaranteed to be a binary && with its left hand side being a && of many terms where the
+   * leftmost expression is the redundant instanceof operation.
+   */
+  private void removeRedundantInstanceOfExpressions(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public SwitchCasePattern rewriteSwitchCasePattern(SwitchCasePattern switchCasePattern) {
+            SwitchConstruct<?> enclosingSwitchConstruct = (SwitchConstruct<?>) getParent();
+
+            // A switch with patterns is guaranteed to have a variable reference as a selector at
+            // this point.
+            var selectorVariable =
+                ((VariableReference) enclosingSwitchConstruct.getExpression()).getTarget();
+            var patternTypeDescriptor = switchCasePattern.getPattern().getTypeDescriptor();
+
+            return switchCasePattern.toBuilder()
+                .setGuard(
+                    removeLeftmostInstanceOf(
+                        switchCasePattern.getGuard(), selectorVariable, patternTypeDescriptor))
+                .build();
+          }
+        });
+  }
+
+  /**
+   * Removes the first occurrence of {@code variable instanceof Type}.
+   *
+   * <p>This method relies on the fact that the guard does has a general known shape and that
+   * instanceof expression that needs to be removed is the left most subexpression.
+   */
+  private static Expression removeLeftmostInstanceOf(
+      Expression expression, Variable variable, TypeDescriptor type) {
+    return switch (expression) {
+      // Found the redundant expression replace for {@code null} to signal that it must be
+      // removed.
+      //
+      // variable instanceof type => null
+      case InstanceOfExpression e
+          when e.getExpression() instanceof VariableReference varRef
+              && varRef.getTarget() == variable
+              && e.getTestTypeDescriptor().equals(type) ->
+          null;
+      //  A and B => B          if A' == null
+      //          => A' and B   if A' != null
+      //      where A' = removeInstanceOf(A, variable, type)
+      case BinaryExpression e when e.getOperator() == BinaryOperator.CONDITIONAL_AND -> {
+        var lhs = removeLeftmostInstanceOf(e.getLeftOperand(), variable, type);
+        yield lhs == null
+            ? e.getRightOperand()
+            : BinaryExpression.Builder.from(e).setLeftOperand(lhs).build();
+      }
+      default -> expression;
+    };
   }
 }

@@ -42,11 +42,11 @@ open class SwitchPatterns {
   var j: Int? = null
   var j_1: Int? = null
   when (o) {
-   is String if o is String && run {
+   is String if run {
     s = o as String?
     true
    } && s!!.length == 1 -> {}
-   is String if o is String && run {
+   is String if run {
     val s_1: String? = o as String?
     true
    } -> {}
@@ -55,11 +55,11 @@ open class SwitchPatterns {
   val i: Int? = null
   when (i!!) {
    23, 32 -> {}
-   is Int if i is Int && run {
+   is Int if run {
     j = i as Int?
     true
    } && j!!.toInt() > 2 -> {}
-   is Number if i is Number && run {
+   is Number if run {
     val n: Number? = i as Number?
     true
    } -> {}
@@ -67,7 +67,7 @@ open class SwitchPatterns {
   }
   when (i) {
    23, 32 -> {}
-   is Int if i is Int && run {
+   is Int if run {
     j_1 = i as Int?
     true
    } && j_1!!.toInt() > 2 -> {}
@@ -126,7 +126,7 @@ open class SwitchPatterns {
   var s2: String? = null
   var pattern___1R_2: R? = null
   when (r!!) {
-   is R if r is R && run {
+   is R if run {
     pattern___1R = r as R?
     true
    } && (run {
@@ -150,7 +150,7 @@ open class SwitchPatterns {
    } && s1!!.equals("Hello") -> {
     s2!!.length
    }
-   is R if r is R && run {
+   is R if run {
     pattern___1R_2 = r as R?
     true
    } && run {
@@ -168,13 +168,13 @@ open class SwitchPatterns {
   val o: Sealed? = null
   val i: Int = run {
    when (o!!) {
-    is A if o is A && run {
+    is A if run {
      val a: A? = o as A?
      true
     } -> {
      return@run 1
     }
-    is B if o is B && run {
+    is B if run {
      val b: B? = o as B?
      true
     } -> {
