@@ -64,6 +64,12 @@ public class Main {
     assertTrue(getSwitchPatternWithExpressionsAndNull(5) == 4);
     assertTrue(getSwitchPatternWithExpressionsAndNull(null) == 3);
     assertTrue(getSwitchPatternWithExpressionsAndNull(getUndefined()) == 3);
+
+    assertTrue(getSwitchPatternWithRecord(new R(new R("Hello", "Bye"), null)) == 3);
+    assertTrue(getSwitchPatternWithRecord(new R("Hello", "Bye")) == 2);
+    assertTrue(getSwitchPatternWithRecord("Hello") == 42);
+    assertThrowsNullPointerException(() -> getSwitchPatternWithRecord(null));
+    assertThrowsNullPointerException(() -> getSwitchPatternWithRecord(getUndefined()));
   }
 
   private static int getSwitchPattern(Object o) {
@@ -100,6 +106,16 @@ public class Main {
       case Integer j when j % 2 == 0 -> 2;
       case null -> 3;
       case Number n -> 4;
+    };
+  }
+
+  private static record R(Object o, String s) {}
+
+  private static int getSwitchPatternWithRecord(Object o) {
+    return switch (o) {
+      case R(R(String s1, var s2), var s3) when s1.equals("Hello") -> s2.length();
+      case R(var c1, var c2) -> 2;
+      default -> 42;
     };
   }
 

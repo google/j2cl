@@ -46,6 +46,17 @@ public class SwitchPatterns {
     }
   }
 
+  void testRecordPatterns() {
+    // Switch with record patterns.
+    record R(Object o, String s) {}
+    Object r = null;
+    switch (r) {
+      case R(R(String s1, var s2), var s3) when s1.equals("Hello") -> s2.length();
+      case R(var c1, var c2) -> {}
+      default -> {}
+    }
+  }
+
   sealed interface Sealed {
     final class A implements Sealed {}
 

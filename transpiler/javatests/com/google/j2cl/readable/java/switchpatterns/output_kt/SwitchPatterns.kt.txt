@@ -21,12 +21,15 @@ package switchpatterns
 
 import javaemul.lang.*
 import java.lang.AssertionError
+import java.util.Arrays
 import jsinterop.annotations.JsEnum
 import kotlin.Any
+import kotlin.Boolean
 import kotlin.Int
 import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
+import kotlin.arrayOf
 import kotlin.jvm.JvmStatic
 import kotlin.run
 import switchpatterns.SwitchPatterns.Sealed.A
@@ -35,45 +38,128 @@ import switchpatterns.SwitchPatterns.Sealed.B
 open class SwitchPatterns {
  internal open fun testPatternsWithGuards_pp_switchpatterns() {
   val o: Any = "Hello"
-  val ___selector: Any = o
-  val s: String?
-  val s_1: String?
-  when (___selector) {
-   is String if run {
-    s = ___selector as String?
-    s!!.length == 1
-   } -> {}
-   is String if run {
-    s_1 = ___selector as String?
+  var s: String? = null
+  var j: Int? = null
+  var j_1: Int? = null
+  when (o) {
+   is String if o is String && run {
+    s = o as String?
+    true
+   } && s!!.length == 1 -> {}
+   is String if o is String && run {
+    val s_1: String? = o as String?
     true
    } -> {}
    else -> {}
   }
   val i: Int? = null
-  val ___selector_1: Int? = i
-  val j: Int?
-  val n: Number?
-  when (___selector_1!!) {
+  when (i!!) {
    23, 32 -> {}
-   is Int if run {
-    j = ___selector_1
-    j!!.toInt() > 2
-   } -> {}
-   is Number if run {
-    n = ___selector_1
+   is Int if i is Int && run {
+    j = i as Int?
+    true
+   } && j!!.toInt() > 2 -> {}
+   is Number if i is Number && run {
+    val n: Number? = i as Number?
     true
    } -> {}
    else -> {}
   }
-  val ___selector_2: Int? = i
-  val j_1: Int?
-  when (___selector_2) {
+  when (i) {
    23, 32 -> {}
-   is Int if run {
-    j_1 = ___selector_2
-    j_1!!.toInt() > 2
-   } -> {}
+   is Int if i is Int && run {
+    j_1 = i as Int?
+    true
+   } && j_1!!.toInt() > 2 -> {}
    null -> {}
+   else -> {}
+  }
+ }
+
+ internal open fun testRecordPatterns_pp_switchpatterns() {
+  class R {
+   private val o: Any?
+
+   private val s: String?
+
+   constructor(arg0: Any?, arg1: String?) {
+    this.o = arg0
+    this.s = arg1
+   }
+
+   fun o(): Any? {
+    return this.o
+   }
+
+   fun s(): String? {
+    return this.s
+   }
+
+   override fun equals(arg0: Any?): Boolean {
+    var ___other: R? = null
+    if (!(arg0 is R && run {
+     ___other = arg0 as R?
+     true
+    })) return false
+    return Arrays.equals(
+     arrayOf<Any?>(this.o, this.s),
+     arrayOf<Any?>(___other!!.o, ___other!!.s),
+    )
+   }
+
+   override fun hashCode(): Int {
+    return Arrays.hashCode(
+     arrayOf<Any?>(this.o, this.s),
+    )
+   }
+
+   override fun toString(): String {
+    return Arrays.toString(
+     arrayOf<Any?>(this.o, this.s),
+    )
+   }
+  }
+  val r: Any? = null
+  var pattern___1R: R? = null
+  var pattern___1R_1: R? = null
+  var s1: String? = null
+  var s2: String? = null
+  var pattern___1R_2: R? = null
+  when (r!!) {
+   is R if r is R && run {
+    pattern___1R = r as R?
+    true
+   } && (run {
+    val exp: Any? = pattern___1R!!.o()
+    exp is R && run {
+     pattern___1R_1 = exp as R?
+     true
+    }
+   } && run {
+    val exp_1: Any? = pattern___1R_1!!.o()
+    exp_1 is String && run {
+     s1 = exp_1 as String?
+     true
+    }
+   } && run {
+    s2 = pattern___1R_1!!.s()
+    true
+   }) && run {
+    val s3: String? = pattern___1R!!.s()
+    true
+   } && s1!!.equals("Hello") -> {
+    s2!!.length
+   }
+   is R if r is R && run {
+    pattern___1R_2 = r as R?
+    true
+   } && run {
+    val c1: Any? = pattern___1R_2!!.o()
+    true
+   } && run {
+    val c2: String? = pattern___1R_2!!.s()
+    true
+   } -> {}
    else -> {}
   }
  }
@@ -81,26 +167,21 @@ open class SwitchPatterns {
  internal open fun testExhaustivePatternsWithNoDefault_pp_switchpatterns() {
   val o: Sealed? = null
   val i: Int = run {
-   val ___selector: Sealed? = o
-   val a: A?
-   val b: B?
-   run {
-    when (___selector!!) {
-     is A if run {
-      a = ___selector as A?
-      true
-     } -> {
-      return@run 1
-     }
-     is B if run {
-      b = ___selector as B?
-      true
-     } -> {
-      return@run 2
-     }
-     else -> {
-      throw AssertionError("Unreachable")
-     }
+   when (o!!) {
+    is A if o is A && run {
+     val a: A? = o as A?
+     true
+    } -> {
+     return@run 1
+    }
+    is B if o is B && run {
+     val b: B? = o as B?
+     true
+    } -> {
+     return@run 2
+    }
+    else -> {
+     throw AssertionError("Unreachable")
     }
    }
   }

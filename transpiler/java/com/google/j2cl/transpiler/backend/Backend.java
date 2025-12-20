@@ -158,6 +158,7 @@ import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSuspendFunctionCalls;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchConstructs;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchConstructsJ2kt;
+import com.google.j2cl.transpiler.passes.NormalizeSwitchPatternsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeSynchronizedConstructs;
 import com.google.j2cl.transpiler.passes.NormalizeSystemGetPropertyCalls;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
@@ -793,6 +794,9 @@ public enum Backend {
           // Must run after NormalizeForEachIterable and benefits from running
           // after MakeVariablesFinal.
           NormalizeForEachStatementJ2kt::new,
+          // Must run before VariableDeclarationHoister since it produces variable declarations
+          // that need rescoping.
+          NormalizeSwitchPatternsJ2kt::new,
           NormalizeStaticMemberQualifiers::new,
           () -> new VariableDeclarationHoister(/* allowDeclarationsInExpressions= */ true),
           NormalizeMultiExpressions::new,
