@@ -10,7 +10,15 @@ def _j2kt_web_chunk_impl(ctx):
     #   it to become a list even though it'll only ever have one element.
     if len(ctx.attr.target) != 1:
         fail("target must have exactly one element")
+
     target = ctx.attr.target[0]
+
+    if ctx.attr.name != ctx.attr.target[0].label.name:
+        fail(
+            "Name of 'target' must match j2kt_web_chunk name. You may need to move the " +
+            "j2kt_web_chunk into a distinct BUILD file from the underlying web_chunk target.",
+        )
+
     return [
         target[JsInfo],
         target[JsModuleInfo],
