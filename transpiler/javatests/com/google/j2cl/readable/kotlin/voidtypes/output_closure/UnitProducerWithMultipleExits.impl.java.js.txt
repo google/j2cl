@@ -1,0 +1,62 @@
+goog.module('voidtypes.UnitProducerWithMultipleExits$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Producer = goog.require('voidtypes.Producer$impl');
+
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+
+/**
+ * @final
+ * @implements {Producer<!Unit>}
+ */
+class UnitProducerWithMultipleExits extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_i__voidtypes_UnitProducerWithMultipleExits_ = 0;
+ }
+ /** @nodts @return {!UnitProducerWithMultipleExits} */
+ static $create__int(/** number */ i) {
+  UnitProducerWithMultipleExits.$clinit();
+  let $instance = new UnitProducerWithMultipleExits();
+  $instance.$ctor__voidtypes_UnitProducerWithMultipleExits__int__void(i);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__voidtypes_UnitProducerWithMultipleExits__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+  this.f_i__voidtypes_UnitProducerWithMultipleExits_ = i;
+ }
+ /** @nodts */
+ m_provide__void() {
+  if (this.f_i__voidtypes_UnitProducerWithMultipleExits_ == 10) {
+   return;
+  }
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Unit} */
+ m_provide__java_lang_Object() {
+  return this.m_provide__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  UnitProducerWithMultipleExits.$clinit = () =>{};
+  UnitProducerWithMultipleExits.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof UnitProducerWithMultipleExits;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Producer.$markImplementor(UnitProducerWithMultipleExits);
+$Util.$setClassMetadata(UnitProducerWithMultipleExits, 'voidtypes.UnitProducerWithMultipleExits');
+
+exports = UnitProducerWithMultipleExits;
+
+//# sourceMappingURL=UnitProducerWithMultipleExits.js.map

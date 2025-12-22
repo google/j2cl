@@ -72,9 +72,32 @@ fun unitLambdas() {
   val b: () -> Unit = ::f
   val c: () -> Unit = ::w
 
+  consumeGenericJsFunction { f() }
+  consumeGenericJsFunction(::f)
+  consumeGenericJsFunction(::w)
+  consumeGenericJsFunction {
+    when {
+      a == b -> return@consumeGenericJsFunction
+    }
+    return@consumeGenericJsFunction
+  }
+
   consumeUnitJsFunction { f() }
   consumeUnitJsFunction(::f)
   consumeUnitJsFunction(::w)
+  consumeUnitJsFunction {
+    when {
+      a == b -> return@consumeUnitJsFunction
+    }
+    return@consumeUnitJsFunction
+  }
+}
+
+fun unitSpecialization() {
+  val unitProducer: Producer<Unit> = UnitProducer()
+  val unitConsumer: Consumer<Unit> = UnitConsumer()
+
+  unitConsumer.consume(unitProducer.provide())
 }
 
 @JsFunction
@@ -82,7 +105,30 @@ fun interface GenericJsFunction<T> {
   fun execute(): T
 }
 
-fun <T> consumeUnitJsFunction(f: GenericJsFunction<T>) {}
+fun <T> consumeGenericJsFunction(f: GenericJsFunction<T>) {}
+
+@JsFunction
+fun interface UnitJsFunction {
+  fun execute()
+}
+
+fun consumeUnitJsFunction(f: UnitJsFunction) = f()
+
+class UnitProducer : Producer<Unit> {
+  override fun provide() {}
+}
+
+class UnitConsumer : Consumer<Unit> {
+  override fun consume(value: Unit) {}
+}
+
+class UnitProducerWithMultipleExits(private val i: Int) : Producer<Unit> {
+  override fun provide() {
+    when {
+      i == 10 -> return
+    }
+  }
+}
 
 fun nothingTests() {
   val a = 2

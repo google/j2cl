@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
@@ -14,6 +15,8 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let NothingIterator = goog.forwardDeclare('voidtypes.NothingIterator$impl');
 let NullableNothingIterator = goog.forwardDeclare('voidtypes.NullableNothingIterator$impl');
+let UnitConsumer = goog.forwardDeclare('voidtypes.UnitConsumer$impl');
+let UnitProducer = goog.forwardDeclare('voidtypes.UnitProducer$impl');
 
 /**
  * @final
@@ -125,19 +128,54 @@ class VoidTypesKt extends j_l_Object {
   let c = /**@type {!MutableKProperty0Impl<!Unit>}*/ (MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
    return VoidTypesKt.m_getW__kotlin_Unit();
   })), null));
-  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
+  VoidTypesKt.m_consumeGenericJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
    VoidTypesKt.m_f__void();
   }));
-  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
+  VoidTypesKt.m_consumeGenericJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
    return VoidTypesKt.m_f__void();
   }));
-  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
+  VoidTypesKt.m_consumeGenericJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
    return VoidTypesKt.m_getW__kotlin_Unit();
   }));
+  VoidTypesKt.m_consumeGenericJsFunction__voidtypes_GenericJsFunction__void(/**  @return {!Unit}*/ (() =>{
+   if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(a, b)) {
+    return;
+   }
+   return;
+  }));
+  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_UnitJsFunction__void(() =>{
+   VoidTypesKt.m_f__void();
+  });
+  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_UnitJsFunction__void(() =>{
+   VoidTypesKt.m_f__void();
+  });
+  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_UnitJsFunction__void(() =>{
+   VoidTypesKt.m_getW__kotlin_Unit();
+  });
+  VoidTypesKt.m_consumeUnitJsFunction__voidtypes_UnitJsFunction__void(() =>{
+   if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(a, b)) {
+    return;
+   }
+   return;
+  });
+ }
+ /** @nodts */
+ static m_unitSpecialization__void() {
+  VoidTypesKt.$clinit();
+  let unitProducer = UnitProducer.$create__();
+  let unitConsumer = UnitConsumer.$create__();
+  unitProducer.m_provide__java_lang_Object();
+  unitConsumer.m_consume__java_lang_Object__void(Unit.f_INSTANCE__kotlin_Unit);
  }
  /** @nodts @template T */
- static m_consumeUnitJsFunction__voidtypes_GenericJsFunction__void(/** function():T */ f) {
+ static m_consumeGenericJsFunction__voidtypes_GenericJsFunction__void(/** function():T */ f) {
   VoidTypesKt.$clinit();
+ }
+ /** @nodts */
+ static m_consumeUnitJsFunction__voidtypes_UnitJsFunction__void(/** function():void */ f) {
+  VoidTypesKt.$clinit();
+  VoidTypesKt.m_f__void();
+  return;
  }
  /** @nodts */
  static m_nothingTests__void() {
@@ -182,6 +220,7 @@ class VoidTypesKt extends j_l_Object {
  static $loadModules() {
   Error = goog.module.get('java.lang.Error$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
   NothingStub = goog.module.get('kotlin.Nothing$impl');
   Unit = goog.module.get('kotlin.Unit$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
@@ -190,6 +229,8 @@ class VoidTypesKt extends j_l_Object {
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   NothingIterator = goog.module.get('voidtypes.NothingIterator$impl');
   NullableNothingIterator = goog.module.get('voidtypes.NullableNothingIterator$impl');
+  UnitConsumer = goog.module.get('voidtypes.UnitConsumer$impl');
+  UnitProducer = goog.module.get('voidtypes.UnitProducer$impl');
  }
 }
 /**@type {!Unit} @nodts*/

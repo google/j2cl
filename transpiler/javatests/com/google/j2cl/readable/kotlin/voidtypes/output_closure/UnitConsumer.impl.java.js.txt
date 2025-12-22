@@ -1,0 +1,59 @@
+goog.module('voidtypes.UnitConsumer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Consumer = goog.require('voidtypes.Consumer$impl');
+
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {Consumer<!Unit>}
+ */
+class UnitConsumer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!UnitConsumer} */
+ static $create__() {
+  UnitConsumer.$clinit();
+  let $instance = new UnitConsumer();
+  $instance.$ctor__voidtypes_UnitConsumer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__voidtypes_UnitConsumer__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_consume__kotlin_Unit__void(/** !Unit */ value) {}
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} */
+ m_consume__java_lang_Object__void(/** !Unit */ arg0) {
+  this.m_consume__kotlin_Unit__void(/**@type {!Unit}*/ ($Casts.$to(arg0, Unit)));
+ }
+ /** @nodts */
+ static $clinit() {
+  UnitConsumer.$clinit = () =>{};
+  UnitConsumer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof UnitConsumer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Unit = goog.module.get('kotlin.Unit$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Consumer.$markImplementor(UnitConsumer);
+$Util.$setClassMetadata(UnitConsumer, 'voidtypes.UnitConsumer');
+
+exports = UnitConsumer;
+
+//# sourceMappingURL=UnitConsumer.js.map
