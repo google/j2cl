@@ -71,7 +71,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout current commit
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           # Fetch the entire history to have branch information. This will allow us to check that
           # the commit we start the release on is part of the master branch.
@@ -138,13 +138,13 @@ jobs:
           check_secret "MAVEN_GPG_PRIVATE_KEY" "${{ secrets.MAVEN_GPG_PRIVATE_KEY }}"
           check_secret "MAVEN_GPG_PASSPHRASE" "${{ secrets.MAVEN_GPG_PASSPHRASE }}"
       - name: Checkout release tag
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           ref: ${{ inputs.version }}
 
       # Maven and Bazel require Java to be available.
       - name: Setup Java
-        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
+        uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e # v5.1.0
         with:
           java-version: '21'
           distribution: 'zulu'
@@ -182,7 +182,7 @@ jobs:
   release:
     needs: run_tests
     if: ${{ inputs.create_github_release }}
-    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.3
+    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.4
     with:
       prerelease: ${{ contains(inputs.version, '-RC') }}
       release_files: ${{ github.event.repository.name }}-*.tar.gz
@@ -193,7 +193,7 @@ jobs:
   publish_to_bcr:
     if: ${{ inputs.publish_to_bcr }}
     needs: release
-    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v1.0.0
+    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v1.1.0
     with:
       tag_name: ${{ inputs.version }}
       registry_fork: j2cl-github-bot/bazel-central-registry
