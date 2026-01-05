@@ -852,6 +852,7 @@ public enum Backend {
 
           // This needs to run after all passes that can potentially add casts.
           PreventSmartCasts::new,
+          RemoveUnreachableCode::new,
 
           // Verification
           VerifySingleAstReference::new,
