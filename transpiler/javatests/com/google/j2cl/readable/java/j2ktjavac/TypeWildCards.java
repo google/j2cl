@@ -39,6 +39,7 @@ class TypeWildCards {
           Holder<E, C> holder, Observer<E, C> observer) {}
     }
 
+    // repro for b/446215338
     public static void testSetField(Holder<?, ?> holder) {
       holder.observer = e -> {};
     }
