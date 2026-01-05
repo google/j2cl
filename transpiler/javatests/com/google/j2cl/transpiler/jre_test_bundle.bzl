@@ -14,7 +14,7 @@ def jre_test_bundle(name, bootclasspath):
     # JDK system module for the JRE bootclasspath.
     jdk_system(
         name = name + "_system",
-        bootclasspath = "//jre/java:jre_bootclasspath",
+        bootclasspath = bootclasspath,
     )
 
     native.filegroup(
