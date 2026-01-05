@@ -24,6 +24,7 @@ message TypeInfo {
   int32 extends_type = 2;
   repeated int32 implements_types = 3;
   bool abstract = 4;
+  optional JsInfo js_info = 5;
 }
 
 message StringLiteralInfo {
@@ -36,6 +37,26 @@ message SystemPropertyInfo {
   string property_key = 1;
   bool is_required = 2;
 }
+
+message JsInfo {
+  string qualified_js_name = 1;
+  repeated JsMemberInfo js_members = 3;
+}
+
+message JsMemberInfo {
+  enum Kind {
+    UNDEFINED = 0;
+    CONSTRUCTOR = 1;
+    METHOD = 2;
+    GETTER = 3;
+    SETTER = 4;
+  }
+  Kind kind = 1;
+  string js_name = 2;
+  string wasm_name = 3;
+  bool is_static = 4;
+}
+
 message SharedSnippet {
   string key = 1;
   string snippet = 2;

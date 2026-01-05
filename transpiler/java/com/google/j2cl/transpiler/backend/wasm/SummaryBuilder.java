@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.j2cl.common.StringUtils.escapeAsWtf16;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.util.function.Predicate.not;
@@ -27,6 +28,8 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.Member;
+import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.StringLiteral;
@@ -113,6 +116,11 @@ public final class SummaryBuilder {
     if (type.isInterface()) {
       summary.addInterfaces(typeHierarchyInfoBuilder.build());
     } else {
+      if (environment.isCustomDescriptorsJsInteropEnabled()
+          && WasmGenerationEnvironment.isJsExport(type.getDeclaration())) {
+        typeHierarchyInfoBuilder.setJsInfo(getJsInfo(type));
+      }
+
       type.getDeclaration().getAllSuperInterfaces().stream()
           .filter(not(TypeDeclaration::isNative))
           .forEach(t -> typeHierarchyInfoBuilder.addImplementsTypes(getTypeId(t.toDescriptor())));
@@ -125,6 +133,42 @@ public final class SummaryBuilder {
     String typeName = environment.getTypeSignature(typeDescriptor);
     // Note that the IDs start from '1' to reserve '0' for NULL_TYPE.
     return typeIdByTypeName.computeIfAbsent(typeName, x -> typeIdByTypeName.size() + 1);
+  }
+
+  private JsInfo getJsInfo(Type type) {
+    checkArgument(!type.isInterface());
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    JsInfo.Builder jsInfoBuilder =
+        JsInfo.newBuilder().setQualifiedJsName(typeDeclaration.getQualifiedJsName());
+
+    for (Member member : type.getMembers()) {
+      MemberDescriptor memberDescriptor = member.getDescriptor();
+      if (!memberDescriptor.canBeReferencedExternally() || memberDescriptor.isNative()) {
+        continue;
+      }
+
+      // TODO(b/458472428): Support JsProperty/Getter/Setter.
+      if (!(memberDescriptor instanceof MethodDescriptor methodDescriptor
+          && (methodDescriptor.isJsConstructor() || methodDescriptor.isJsMethod()))) {
+        continue;
+      }
+
+      jsInfoBuilder.addJsMembers(
+          JsMemberInfo.newBuilder()
+              .setKind(
+                  switch (memberDescriptor.getJsInfo().getJsMemberType()) {
+                    case CONSTRUCTOR -> JsMemberInfo.Kind.CONSTRUCTOR;
+                    case METHOD -> JsMemberInfo.Kind.METHOD;
+                    // Should not happen, we should be handling all types.
+                    // TODO(b/458472428) Consider removing default when all types are handled.
+                    default -> throw new AssertionError();
+                  })
+              .setWasmName(environment.getMethodImplementationName(methodDescriptor))
+              .setJsName(memberDescriptor.getSimpleJsName())
+              .setIsStatic(memberDescriptor.isStatic()));
+    }
+
+    return jsInfoBuilder.build();
   }
 
   private void summarizeSystemGetPropertyCalls(Library library) {

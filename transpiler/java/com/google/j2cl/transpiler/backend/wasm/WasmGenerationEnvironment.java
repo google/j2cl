@@ -532,4 +532,13 @@ public class WasmGenerationEnvironment {
 
     return typeDeclaration.getSuperTypeDeclaration();
   }
+
+  /**
+   * Returns true if the given type should be exposed to JS with a JS prototype in the descriptor
+   * and configureAll.
+   */
+  public static boolean isJsExport(TypeDeclaration typeDeclaration) {
+    // TODO(b/472552019): Determine what types should be exported.
+    return typeDeclaration.getQualifiedSourceName().equals("java.lang.Object");
+  }
 }
