@@ -397,7 +397,7 @@ public class WasmGeneratorStage {
   private void emitNameMappingFile(List<Method> methods, Output output) {
     SourceBuilder builder = new SourceBuilder();
     methods.forEach(m -> emitMethodMapping(m, builder));
-    output.write("namemap", builder.build());
+    output.write("name.map", builder.build());
   }
 
   private void emitMethodMapping(Method method, SourceBuilder builder) {

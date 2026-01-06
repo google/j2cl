@@ -160,9 +160,9 @@ def _impl_j2wasm_application(ctx):
     ctx.actions.run_shell(
         inputs = all_modules,
         outputs = [transpile_out],
-        command = "mkdir -p %s && cat %s > %s/namemap" % (
+        command = "mkdir -p %s && cat %s > %s/name.map" % (
             transpile_out.path,
-            " ".join([m.path + "/namemap" for m in all_modules]),
+            " ".join([m.path + "/name.map" for m in all_modules]),
             transpile_out.path,
         ),
         mnemonic = "J2wasmApp",
@@ -345,7 +345,7 @@ def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
                 }
             } END {
                 for (i in symbols) print i":"symbols[i]
-            }' %s/namemap %s > %s""" % (transpile_out.path, binaryen_symbolmap.path, ctx.outputs.symbolmap.path),
+            }' %s/name.map %s > %s""" % (transpile_out.path, binaryen_symbolmap.path, ctx.outputs.symbolmap.path),
         mnemonic = "J2wasmApp",
     )
 
