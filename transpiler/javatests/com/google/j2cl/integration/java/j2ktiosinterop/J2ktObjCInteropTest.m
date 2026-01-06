@@ -17,7 +17,9 @@
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/PackageNames.h"
 #import "j2ktiosinterop/PropertyClass.h"
+#import "j2ktiosinterop/PropertyClassOverride.h"
 #import "j2ktiosinterop/PropertyMethod.h"
+#import "j2ktiosinterop/PropertyMethodOverride.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Double.h"
@@ -545,6 +547,22 @@
   XCTAssertEqual([propertyMethod intMethod], 0);
   // TODO(b/467703991): Should be property.
   XCTAssertEqual([propertyMethod getLongMethod], 0);
+
+  J2ktiosinteropPropertyClassOverride *propertyClassOverride =
+      create_J2ktiosinteropPropertyClassOverride_init();
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyClassOverride intMethod], 0);
+  XCTAssertEqual([propertyClassOverride intSuppressMethod], 0);
+  XCTAssertEqual([propertyClassOverride intMethodWithParamWithInt:1], 1);
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyClassOverride getLongMethod], 0);
+
+  J2ktiosinteropPropertyMethodOverride *propertyMethodOverride =
+      create_J2ktiosinteropPropertyMethodOverride_init();
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyMethodOverride intMethod], 0);
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyMethodOverride getLongMethod], 0);
 }
 
 @end

@@ -17,7 +17,9 @@
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/PackageNames.h"
 #import "j2ktiosinterop/PropertyClass.h"
+#import "j2ktiosinterop/PropertyClassOverride.h"
 #import "j2ktiosinterop/PropertyMethod.h"
+#import "j2ktiosinterop/PropertyMethodOverride.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Double.h"
@@ -493,6 +495,18 @@
   J2ktiosinteropPropertyMethod *propertyMethod = create_J2ktiosinteropPropertyMethod_init();
   XCTAssertEqual(propertyMethod.intMethod, 0);
   XCTAssertEqual(propertyMethod.longMethod, 0);
+
+  J2ktiosinteropPropertyClassOverride *propertyClassOverride =
+      create_J2ktiosinteropPropertyClassOverride_init();
+  XCTAssertEqual(propertyClassOverride.intMethod, 0);
+  XCTAssertEqual([propertyClassOverride intSuppressMethod], 0);
+  XCTAssertEqual([propertyClassOverride intMethodWithParamWithInt:1], 1);
+  XCTAssertEqual(propertyClassOverride.longMethod, 0);
+
+  J2ktiosinteropPropertyMethodOverride *propertyMethodOverride =
+      create_J2ktiosinteropPropertyMethodOverride_init();
+  XCTAssertEqual(propertyMethodOverride.intMethod, 0);
+  XCTAssertEqual(propertyMethodOverride.longMethod, 0);
 }
 
 @end

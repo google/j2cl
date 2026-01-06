@@ -18,7 +18,7 @@ package j2ktiosinterop;
 import com.google.j2objc.annotations.Property;
 
 /** Tests for J2ObjC properties on methods. */
-public final class PropertyMethod {
+public class PropertyMethod {
   @Property
   public int intMethod() {
     return 0;

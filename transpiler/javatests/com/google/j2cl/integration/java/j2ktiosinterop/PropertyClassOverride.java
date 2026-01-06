@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Google Inc.
+ * Copyright 2026 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,27 +15,30 @@
  */
 package j2ktiosinterop;
 
-import com.google.j2objc.annotations.Property;
+/** Tests for J2ObjC properties on classes with overrides. */
+public class PropertyClassOverride extends PropertyClass {
+  @Override
+  public void voidMethod() {
+    super.voidMethod();
+  }
 
-/** Tests for J2ObjC properties on classes. */
-@Property
-public class PropertyClass {
-  public void voidMethod() {}
-
+  @Override
   public int intMethod() {
-    return 0;
+    return super.intMethod();
   }
 
-  @Property.Suppress
+  @Override
   public int intSuppressMethod() {
-    return 0;
+    return super.intSuppressMethod();
   }
 
+  @Override
   public int intMethodWithParam(int param) {
-    return param;
+    return super.intMethodWithParam(param);
   }
 
+  @Override
   public long getLongMethod() {
-    return 0;
+    return super.getLongMethod();
   }
 }
