@@ -200,7 +200,6 @@ public class WasmGeneratorStage {
         });
 
     emitNameMappingFile(library, output);
-    generateJsImportsFile();
   }
 
   public String emitToString(Consumer<WasmConstructsGenerator> emitter) {
