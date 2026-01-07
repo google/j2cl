@@ -33,7 +33,6 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
-let OfObject = goog.forwardDeclare('javaemul.internal.Ref.OfObject$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let ArraysKt = goog.forwardDeclare('kotlin.collections.ArraysKt$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
@@ -411,8 +410,8 @@ class InlineFunctionKt extends j_l_Object {
  }
  /** @nodts */
  static m_useAdaptor__void() {
-  let capturedValue = /**@type {OfObject<string>}*/ (Ref.m_createRef__java_lang_Object__javaemul_internal_Ref_OfObject('Initial'));
-  let nf = /**@type {!NonFun<!MyClass>}*/ ($3.$create__javaemul_internal_Ref_OfObject(capturedValue));
+  let capturedValue = /**@type {!Ref<string>}*/ (Ref.$create__java_lang_Object('Initial'));
+  let nf = /**@type {!NonFun<!MyClass>}*/ ($3.$create__javaemul_internal_Ref(capturedValue));
   let s = /**@type {!Sequence<Integer>}*/ ($4.$create__());
  }
  /** @nodts @return {number} */

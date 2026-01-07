@@ -73,6 +73,7 @@ package_sources(
         "javaemul/internal/ArrayStamper.java",  # Unused in Wasm
         "javaemul/internal/Comparables.java",  # Unused in Wasm
         "javaemul/internal/Objects.java",  # Unused in Wasm
+        "javaemul/internal/Ref.java",  # Unused in Wasm
     ],
     super_srcs = glob(["super-wasm/**/*.java"]) + [
         "//jre/java/super-wasm/javaemul/internal/wasmarray",

@@ -744,17 +744,13 @@ public final class RuntimeMethods {
 
   public static Expression createRefWrappingCall(
       TypeDescriptor elementTypeDescriptor, Expression initializer) {
-    MethodDescriptor createRefMethodDescriptor =
-        elementTypeDescriptor.isPrimitive()
-            ? TypeDescriptors.get()
-                .javaemulInternalRef
-                .getMethodDescriptor("createRef", elementTypeDescriptor)
-            : TypeDescriptors.get()
-                .javaemulInternalRef
-                .getMethodDescriptor("createRef", TypeDescriptors.get().javaLangObject)
-                .specializeTypeVariables((TypeVariable unused) -> elementTypeDescriptor);
+    MethodDescriptor ctor =
+        TypeDescriptors.get()
+            .javaemulInternalRef
+            .getSingleConstructor()
+            .specializeTypeVariables((TypeVariable unused) -> elementTypeDescriptor);
 
-    return MethodCall.Builder.from(createRefMethodDescriptor).setArguments(initializer).build();
+    return NewInstance.Builder.from(ctor).setArguments(initializer).build();
   }
 
   /** Creates a method call to BoxedType.xxxValue(). */
