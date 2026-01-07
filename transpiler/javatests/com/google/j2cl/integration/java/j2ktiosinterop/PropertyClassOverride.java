@@ -41,4 +41,8 @@ public class PropertyClassOverride extends PropertyClass {
   public long getLongMethod() {
     return super.getLongMethod();
   }
+
+  public int nonOverrideIntMethod() {
+    return 0;
+  }
 }

@@ -26,4 +26,8 @@ public class PropertyMethodOverride extends PropertyMethod {
   public int getLongMethod() {
     return super.getLongMethod();
   }
+
+  public int nonOverrideIntMethod() {
+    return 0;
+  }
 }
