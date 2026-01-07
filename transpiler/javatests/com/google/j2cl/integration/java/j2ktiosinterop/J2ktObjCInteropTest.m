@@ -16,6 +16,8 @@
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/PackageNames.h"
+#import "j2ktiosinterop/PropertyAutoValueClass.h"
+#import "j2ktiosinterop/PropertyAutoValueMethod.h"
 #import "j2ktiosinterop/PropertyClass.h"
 #import "j2ktiosinterop/PropertyClassOverride.h"
 #import "j2ktiosinterop/PropertyMethod.h"
@@ -563,6 +565,16 @@
   XCTAssertEqual([propertyMethodOverride intMethod], 0);
   // TODO(b/467703991): Should be property.
   XCTAssertEqual([propertyMethodOverride getLongMethod], 0);
+
+  J2ktiosinteropPropertyAutoValueClass *propertyAutoValueClass =
+      [[J2ktiosinteropPropertyAutoValueClass_builder() setNameWithNSString:@"foo"] build];
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyAutoValueClass getName], @"foo");
+
+  J2ktiosinteropPropertyAutoValueMethod *propertyAutoValueMethod =
+      [[J2ktiosinteropPropertyAutoValueMethod_builder() setNameWithNSString:@"foo"] build];
+  // TODO(b/467703991): Should be property.
+  XCTAssertEqual([propertyAutoValueMethod getName], @"foo");
 }
 
 @end
