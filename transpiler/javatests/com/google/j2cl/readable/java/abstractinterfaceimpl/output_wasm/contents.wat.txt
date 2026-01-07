@@ -1,0 +1,172 @@
+
+;;; Code for abstractinterfaceimpl.MyInterface [static fields]
+(global $$class-initialized@abstractinterfaceimpl.MyInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@abstractinterfaceimpl.MyInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for abstractinterfaceimpl.MyInterface [static fields]
+;;; Code for abstractinterfaceimpl.AbstractInterfaceImpl [static fields]
+(global $$class-initialized@abstractinterfaceimpl.AbstractInterfaceImpl (mut i32)
+ (i32.const 0)
+)
+(global $$class@abstractinterfaceimpl.AbstractInterfaceImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for abstractinterfaceimpl.AbstractInterfaceImpl [static fields]
+;;; Code for abstractinterfaceimpl.MyInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@abstractinterfaceimpl.MyInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@abstractinterfaceimpl.MyInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for abstractinterfaceimpl.MyInterface.$LambdaAdaptor [static fields]
+
+;;; Code for abstractinterfaceimpl.MyInterface [methods]
+
+;;; void MyInterface.$clinit()
+(func $$clinit__void_<once>_@abstractinterfaceimpl.MyInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+  (if (global.get $$class-initialized@abstractinterfaceimpl.MyInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+  (global.set $$class-initialized@abstractinterfaceimpl.MyInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> MyInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@abstractinterfaceimpl.MyInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@abstractinterfaceimpl.MyInterface)))
+   (then
+    (return (global.get $$class@abstractinterfaceimpl.MyInterface))
+   )
+  )
+  (global.set $$class@abstractinterfaceimpl.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|abstractinte...|__java_lang_String_<once>_@abstractinterfaceimpl.MyInterface )))
+  (return (global.get $$class@abstractinterfaceimpl.MyInterface))
+ )
+)
+;;; End of code for abstractinterfaceimpl.MyInterface [methods]
+;;; Code for abstractinterfaceimpl.AbstractInterfaceImpl [methods]
+
+;;; void AbstractInterfaceImpl.$ctor()
+(func $$ctor__void_$p_abstractinterfaceimpl_AbstractInterfaceImpl@abstractinterfaceimpl.AbstractInterfaceImpl
+ (param $this (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void AbstractInterfaceImpl.$clinit()
+(func $$clinit__void_<once>_@abstractinterfaceimpl.AbstractInterfaceImpl
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+  (if (global.get $$class-initialized@abstractinterfaceimpl.AbstractInterfaceImpl)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+  (global.set $$class-initialized@abstractinterfaceimpl.AbstractInterfaceImpl (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> AbstractInterfaceImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@abstractinterfaceimpl.AbstractInterfaceImpl
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@abstractinterfaceimpl.AbstractInterfaceImpl)))
+   (then
+    (return (global.get $$class@abstractinterfaceimpl.AbstractInterfaceImpl))
+   )
+  )
+  (global.set $$class@abstractinterfaceimpl.AbstractInterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|abstractinte...|__java_lang_String_<once>_@abstractinterfaceimpl.AbstractInterfaceImpl )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@abstractinterfaceimpl.AbstractInterfaceImpl))
+ )
+)
+
+;;; Class<?> AbstractInterfaceImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@abstractinterfaceimpl.AbstractInterfaceImpl
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
+ (local.set $this (ref.cast (ref $abstractinterfaceimpl.AbstractInterfaceImpl) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@abstractinterfaceimpl.AbstractInterfaceImpl ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@abstractinterfaceimpl.AbstractInterfaceImpl)
+;;; End of code for abstractinterfaceimpl.AbstractInterfaceImpl [methods]
+;;; Code for abstractinterfaceimpl.MyInterface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_abstractinterfaceimpl_MyInterface_$LambdaAdaptor@abstractinterfaceimpl.MyInterface.$LambdaAdaptor
+ (param $this (ref null $abstractinterfaceimpl.MyInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@abstractinterfaceimpl.MyInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+  (if (global.get $$class-initialized@abstractinterfaceimpl.MyInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+  (global.set $$class-initialized@abstractinterfaceimpl.MyInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/abstractinterfaceimpl/readable-j2wasm.js/abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@abstractinterfaceimpl.MyInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@abstractinterfaceimpl.MyInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@abstractinterfaceimpl.MyInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@abstractinterfaceimpl.MyInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|abstractinte...|__java_lang_String_<once>_@abstractinterfaceimpl.MyInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@abstractinterfaceimpl.MyInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@abstractinterfaceimpl.MyInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $abstractinterfaceimpl.MyInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $abstractinterfaceimpl.MyInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@abstractinterfaceimpl.MyInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@abstractinterfaceimpl.MyInterface.$LambdaAdaptor)
+;;; End of code for abstractinterfaceimpl.MyInterface.$LambdaAdaptor [methods]

@@ -1,0 +1,91 @@
+
+;;; Code for nativetype.MyTypedArray.$Overlay [static fields]
+(global $$class-initialized@nativetype.MyTypedArray.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativetype.MyTypedArray.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nativetype.MyTypedArray.$Overlay [static fields]
+;;; Code for nativetype.MyTypedArray.$Overlay [vtable.init]
+(global $nativetype.MyTypedArray.$Overlay.vtable (ref $nativetype.MyTypedArray.$Overlay.vtable)
+ (struct.new $nativetype.MyTypedArray.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativetype.MyTypedArray.$Overlay)
+ )
+)
+;;; End of code for nativetype.MyTypedArray.$Overlay [vtable.init]
+
+;;; Code for nativetype.MyTypedArray.$Overlay [methods]
+
+;;; int $Overlay.size__$devirt(MyTypedArray<T> $thisArg)
+(func $m_size__$devirt__nativetype_MyTypedArray__int@nativetype.MyTypedArray.$Overlay
+ (param $$thisArg (ref null extern))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:27:19
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:27:19
+  (call $$clinit__void_<once>_@nativetype.MyTypedArray.$Overlay )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:28:4
+  (return (call $f_length__int_$p_nativetype_MyTypedArray@nativetype.MyTypedArray (ref.as_non_null (local.get $$thisArg))))
+ )
+)
+
+;;; T $Overlay.get__$devirt(MyTypedArray<T> $thisArg, int index)
+(func $m_get__$devirt__nativetype_MyTypedArray__int__java_lang_Object@nativetype.MyTypedArray.$Overlay
+ (param $$thisArg (ref null extern))
+ (param $index i32)
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:32:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:32:17
+  (call $$clinit__void_<once>_@nativetype.MyTypedArray.$Overlay )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:33:4
+  (return (ref.null $java.lang.Object))
+ )
+)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativetype.MyTypedArray.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:23:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:23:13
+  (if (global.get $$class-initialized@nativetype.MyTypedArray.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:23:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativetype/readable-j2wasm.js/nativetype/MyTypedArray.java:23:13
+  (global.set $$class-initialized@nativetype.MyTypedArray.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativetype.MyTypedArray.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativetype.MyTypedArray.$Overlay)))
+   (then
+    (return (global.get $$class@nativetype.MyTypedArray.$Overlay))
+   )
+  )
+  (global.set $$class@nativetype.MyTypedArray.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativetype.M...|__java_lang_String_<once>_@nativetype.MyTypedArray.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativetype.MyTypedArray.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativetype.MyTypedArray.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativetype.MyTypedArray.$Overlay))
+ (local.set $this (ref.cast (ref $nativetype.MyTypedArray.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativetype.MyTypedArray.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativetype.MyTypedArray.$Overlay)
+;;; End of code for nativetype.MyTypedArray.$Overlay [methods]
+;;; Code for nativetype.MyTypedArray [methods]
+;;; End of code for nativetype.MyTypedArray [methods]

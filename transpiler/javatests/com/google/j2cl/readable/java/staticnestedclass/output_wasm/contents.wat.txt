@@ -1,0 +1,191 @@
+
+;;; Code for staticnestedclass.StaticNestedClassParent [static fields]
+(global $$class-initialized@staticnestedclass.StaticNestedClassParent (mut i32)
+ (i32.const 0)
+)
+(global $$class@staticnestedclass.StaticNestedClassParent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for staticnestedclass.StaticNestedClassParent [static fields]
+;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [static fields]
+(global $$class-initialized@staticnestedclass.StaticNestedClassParent.StaticNestedClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [static fields]
+;;; Code for staticnestedclass.StaticNestedClassParent [vtable.init]
+(global $staticnestedclass.StaticNestedClassParent.vtable (ref $staticnestedclass.StaticNestedClassParent.vtable)
+ (struct.new $staticnestedclass.StaticNestedClassParent.vtable
+  (ref.func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for staticnestedclass.StaticNestedClassParent [vtable.init]
+;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [vtable.init]
+(global $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)
+ (struct.new $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [vtable.init]
+
+;;; Code for staticnestedclass.StaticNestedClassParent [methods]
+
+;;; StaticNestedClassParent StaticNestedClassParent.$create()
+(func $$create__@staticnestedclass.StaticNestedClassParent
+ (result (ref null $staticnestedclass.StaticNestedClassParent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+ (local $$instance (ref null $staticnestedclass.StaticNestedClassParent))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+  (call $$clinit__void_<once>_@staticnestedclass.StaticNestedClassParent )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+  (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent (global.get $staticnestedclass.StaticNestedClassParent.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+  (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent@staticnestedclass.StaticNestedClassParent (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StaticNestedClassParent.$ctor()
+(func $$ctor__void_$p_staticnestedclass_StaticNestedClassParent@staticnestedclass.StaticNestedClassParent
+ (param $this (ref null $staticnestedclass.StaticNestedClassParent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void StaticNestedClassParent.$clinit()
+(func $$clinit__void_<once>_@staticnestedclass.StaticNestedClassParent
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+  (if (global.get $$class-initialized@staticnestedclass.StaticNestedClassParent)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+  (global.set $$class-initialized@staticnestedclass.StaticNestedClassParent (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> StaticNestedClassParent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@staticnestedclass.StaticNestedClassParent
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@staticnestedclass.StaticNestedClassParent)))
+   (then
+    (return (global.get $$class@staticnestedclass.StaticNestedClassParent))
+   )
+  )
+  (global.set $$class@staticnestedclass.StaticNestedClassParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticnested...|__java_lang_String_<once>_@staticnestedclass.StaticNestedClassParent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@staticnestedclass.StaticNestedClassParent))
+ )
+)
+
+;;; Class<?> StaticNestedClassParent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $staticnestedclass.StaticNestedClassParent))
+ (local.set $this (ref.cast (ref $staticnestedclass.StaticNestedClassParent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticnestedclass.StaticNestedClassParent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent)
+;;; End of code for staticnestedclass.StaticNestedClassParent [methods]
+;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [methods]
+
+;;; StaticNestedClass StaticNestedClass.$create()
+(func $$create__@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+ (result (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+ (local $$instance (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+  (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent.StaticNestedClass (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+  (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent_StaticNestedClass@staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StaticNestedClass.$ctor()
+(func $$ctor__void_$p_staticnestedclass_StaticNestedClassParent_StaticNestedClass@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+ (param $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void StaticNestedClass.foo()
+(func $m_foo__void@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:20:23
+ (block
+ )
+)
+
+;;; void StaticNestedClass.$clinit()
+(func $$clinit__void_<once>_@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+  (if (global.get $$class-initialized@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+  (global.set $$class-initialized@staticnestedclass.StaticNestedClassParent.StaticNestedClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticnestedclass/readable-j2wasm.js/staticnestedclass/StaticNestedClassParent.java:19:23
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> StaticNestedClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)))
+   (then
+    (return (global.get $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass))
+   )
+  )
+  (global.set $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticnested...|__java_lang_String_<once>_@staticnestedclass.StaticNestedClassParent.StaticNestedClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@staticnestedclass.StaticNestedClassParent.StaticNestedClass))
+ )
+)
+
+;;; Class<?> StaticNestedClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
+ (local.set $this (ref.cast (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticnestedclass.StaticNestedClassParent.StaticNestedClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
+;;; End of code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [methods]

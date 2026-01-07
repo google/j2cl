@@ -1,0 +1,528 @@
+
+;;; Code for nobridgemethods.Entry [static fields]
+(global $$class-initialized@nobridgemethods.Entry (mut i32)
+ (i32.const 0)
+)
+(global $$class@nobridgemethods.Entry (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nobridgemethods.Entry [static fields]
+;;; Code for nobridgemethods.Map [static fields]
+(global $$class-initialized@nobridgemethods.Map (mut i32)
+ (i32.const 0)
+)
+(global $$class@nobridgemethods.Map (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nobridgemethods.Map [static fields]
+;;; Code for nobridgemethods.TreeMap [static fields]
+(global $$class-initialized@nobridgemethods.TreeMap (mut i32)
+ (i32.const 0)
+)
+(global $$class@nobridgemethods.TreeMap (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nobridgemethods.TreeMap [static fields]
+;;; Code for nobridgemethods.CharSet [static fields]
+(global $$class-initialized@nobridgemethods.CharSet (mut i32)
+ (i32.const 0)
+)
+(global $$class@nobridgemethods.CharSet (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nobridgemethods.CharSet [static fields]
+;;; Code for nobridgemethods.TreeMap.InnerEntry [static fields]
+(global $$class-initialized@nobridgemethods.TreeMap.InnerEntry (mut i32)
+ (i32.const 0)
+)
+(global $$class@nobridgemethods.TreeMap.InnerEntry (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nobridgemethods.TreeMap.InnerEntry [static fields]
+;;; Code for nobridgemethods.CharSet.1 [static fields]
+(global $$class-initialized@nobridgemethods.CharSet.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@nobridgemethods.CharSet.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nobridgemethods.CharSet.1 [static fields]
+;;; Code for nobridgemethods.TreeMap [vtable.init]
+(global $nobridgemethods.TreeMap.vtable (ref $nobridgemethods.TreeMap.vtable)
+ (struct.new $nobridgemethods.TreeMap.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
+  (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
+ )
+)
+;;; End of code for nobridgemethods.TreeMap [vtable.init]
+;;; Code for nobridgemethods.CharSet [vtable.init]
+(global $nobridgemethods.CharSet.vtable (ref $nobridgemethods.CharSet.vtable)
+ (struct.new $nobridgemethods.CharSet.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for nobridgemethods.CharSet [vtable.init]
+;;; Code for nobridgemethods.TreeMap.InnerEntry [vtable.init]
+(global $nobridgemethods.TreeMap.InnerEntry.vtable (ref $nobridgemethods.TreeMap.InnerEntry.vtable)
+ (struct.new $nobridgemethods.TreeMap.InnerEntry.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $nobridgemethods.Entry.vtable@$nobridgemethods.TreeMap.InnerEntry (ref $nobridgemethods.Entry.vtable)
+ (struct.new $nobridgemethods.Entry.vtable
+ )
+)
+;;; End of code for nobridgemethods.TreeMap.InnerEntry [vtable.init]
+;;; Code for nobridgemethods.CharSet.1 [vtable.init]
+(global $nobridgemethods.CharSet.1.vtable (ref $nobridgemethods.CharSet.1.vtable)
+ (struct.new $nobridgemethods.CharSet.1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet.1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
+  (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
+ )
+)
+;;; End of code for nobridgemethods.CharSet.1 [vtable.init]
+
+;;; Code for nobridgemethods.Entry [methods]
+
+;;; void Entry.$clinit()
+(func $$clinit__void_<once>_@nobridgemethods.Entry
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:18:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:18:10
+  (if (global.get $$class-initialized@nobridgemethods.Entry)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:18:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:18:10
+  (global.set $$class-initialized@nobridgemethods.Entry (i32.const 1))
+ )
+)
+
+;;; Class<T> Entry.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.Entry
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nobridgemethods.Entry)))
+   (then
+    (return (global.get $$class@nobridgemethods.Entry))
+   )
+  )
+  (global.set $$class@nobridgemethods.Entry (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|nobridgemeth...|__java_lang_String_<once>_@nobridgemethods.Entry )))
+  (return (global.get $$class@nobridgemethods.Entry))
+ )
+)
+;;; End of code for nobridgemethods.Entry [methods]
+;;; Code for nobridgemethods.Map [methods]
+
+;;; void Map.$ctor()
+(func $$ctor__void_$p_nobridgemethods_Map@nobridgemethods.Map
+ (param $this (ref null $nobridgemethods.Map))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:20:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:20:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Map.$clinit()
+(func $$clinit__void_<once>_@nobridgemethods.Map
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:20:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:20:15
+  (if (global.get $$class-initialized@nobridgemethods.Map)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:20:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:20:15
+  (global.set $$class-initialized@nobridgemethods.Map (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:20:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Map.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.Map
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nobridgemethods.Map)))
+   (then
+    (return (global.get $$class@nobridgemethods.Map))
+   )
+  )
+  (global.set $$class@nobridgemethods.Map (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nobridgemeth...|__java_lang_String_<once>_@nobridgemethods.Map )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nobridgemethods.Map))
+ )
+)
+
+;;; Class<?> Map.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.Map
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nobridgemethods.Map))
+ (local.set $this (ref.cast (ref $nobridgemethods.Map) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.Map ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.Map)
+;;; End of code for nobridgemethods.Map [methods]
+;;; Code for nobridgemethods.CharSet [methods]
+
+;;; CharSet CharSet.$create()
+(func $$create__@nobridgemethods.CharSet
+ (result (ref null $nobridgemethods.CharSet))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+ (local $$instance (ref null $nobridgemethods.CharSet))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+  (call $$clinit__void_<once>_@nobridgemethods.CharSet )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+  (local.set $$instance (struct.new $nobridgemethods.CharSet (global.get $nobridgemethods.CharSet.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+  (call $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void CharSet.$ctor()
+(func $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet
+ (param $this (ref null $nobridgemethods.CharSet))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void CharSet.main(String... args)
+(func $m_main__arrayOf_java_lang_String__void@nobridgemethods.CharSet
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:35:21
+ (local $treeMap (ref null $nobridgemethods.TreeMap))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:35:42
+  (call $$clinit__void_<once>_@nobridgemethods.CharSet )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:4
+  (local.set $treeMap (call $$create__@nobridgemethods.CharSet.1 ))
+ )
+)
+
+;;; void CharSet.$clinit()
+(func $$clinit__void_<once>_@nobridgemethods.CharSet
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+  (if (global.get $$class-initialized@nobridgemethods.CharSet)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+  (global.set $$class-initialized@nobridgemethods.CharSet (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:33:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> CharSet.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.CharSet
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nobridgemethods.CharSet)))
+   (then
+    (return (global.get $$class@nobridgemethods.CharSet))
+   )
+  )
+  (global.set $$class@nobridgemethods.CharSet (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nobridgemeth...|__java_lang_String_<once>_@nobridgemethods.CharSet )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nobridgemethods.CharSet))
+ )
+)
+
+;;; Class<?> CharSet.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nobridgemethods.CharSet))
+ (local.set $this (ref.cast (ref $nobridgemethods.CharSet) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.CharSet ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet)
+;;; End of code for nobridgemethods.CharSet [methods]
+;;; Code for nobridgemethods.TreeMap.InnerEntry [methods]
+
+;;; InnerEntry<K> InnerEntry.$create()
+(func $$create__@nobridgemethods.TreeMap.InnerEntry
+ (result (ref null $nobridgemethods.TreeMap.InnerEntry))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+ (local $$instance (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+  (call $$clinit__void_<once>_@nobridgemethods.TreeMap.InnerEntry )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+  (local.set $$instance (struct.new $nobridgemethods.TreeMap.InnerEntry (global.get $nobridgemethods.TreeMap.InnerEntry.vtable) (global.get $nobridgemethods.TreeMap.InnerEntry.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+  (call $$ctor__void_$p_nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InnerEntry.$ctor()
+(func $$ctor__void_$p_nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry
+ (param $this (ref null $nobridgemethods.TreeMap.InnerEntry))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void InnerEntry.$clinit()
+(func $$clinit__void_<once>_@nobridgemethods.TreeMap.InnerEntry
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+  (if (global.get $$class-initialized@nobridgemethods.TreeMap.InnerEntry)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+  (global.set $$class-initialized@nobridgemethods.TreeMap.InnerEntry (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:25:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> InnerEntry.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.TreeMap.InnerEntry
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nobridgemethods.TreeMap.InnerEntry)))
+   (then
+    (return (global.get $$class@nobridgemethods.TreeMap.InnerEntry))
+   )
+  )
+  (global.set $$class@nobridgemethods.TreeMap.InnerEntry (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nobridgemeth...|__java_lang_String_<once>_@nobridgemethods.TreeMap.InnerEntry )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nobridgemethods.TreeMap.InnerEntry))
+ )
+)
+
+;;; Class<?> InnerEntry.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap.InnerEntry
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (local.set $this (ref.cast (ref $nobridgemethods.TreeMap.InnerEntry) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.TreeMap.InnerEntry ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
+;;; End of code for nobridgemethods.TreeMap.InnerEntry [methods]
+;;; Code for nobridgemethods.TreeMap [methods]
+
+;;; TreeMap<K> TreeMap.$create()
+(func $$create__@nobridgemethods.TreeMap
+ (result (ref null $nobridgemethods.TreeMap))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+ (local $$instance (ref null $nobridgemethods.TreeMap))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (call $$clinit__void_<once>_@nobridgemethods.TreeMap )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (local.set $$instance (struct.new $nobridgemethods.TreeMap (global.get $nobridgemethods.TreeMap.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void TreeMap.$ctor()
+(func $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap
+ (param $this (ref null $nobridgemethods.TreeMap))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (call $$ctor__void_$p_nobridgemethods_Map@nobridgemethods.Map (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; InnerEntry<K> TreeMap.getCeilingEntry(K key)
+(func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap
+ (type $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $key (ref null $java.lang.Object))
+ (result (ref null $nobridgemethods.TreeMap.InnerEntry))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:28:23
+ (local $this (ref null $nobridgemethods.TreeMap))
+ (local.set $this (ref.cast (ref $nobridgemethods.TreeMap) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:29:4
+  (return (call $$create__@nobridgemethods.TreeMap.InnerEntry ))
+ )
+)
+(elem declare func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
+
+;;; InnerEntry<K> TreeMap.getCeilingEntry(K arg0)
+(func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap
+ (type $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+ (local $this (ref null $nobridgemethods.TreeMap))
+ (local.set $this (ref.cast (ref $nobridgemethods.TreeMap) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (return (call_ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $nobridgemethods.TreeMap.vtable $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (struct.get $nobridgemethods.TreeMap $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
+
+;;; void TreeMap.$clinit()
+(func $$clinit__void_<once>_@nobridgemethods.TreeMap
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (if (global.get $$class-initialized@nobridgemethods.TreeMap)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (global.set $$class-initialized@nobridgemethods.TreeMap (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:24:6
+  (call $$clinit__void_<once>_@nobridgemethods.Map )
+ )
+)
+
+;;; Class<T> TreeMap.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.TreeMap
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nobridgemethods.TreeMap)))
+   (then
+    (return (global.get $$class@nobridgemethods.TreeMap))
+   )
+  )
+  (global.set $$class@nobridgemethods.TreeMap (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nobridgemeth...|__java_lang_String_<once>_@nobridgemethods.TreeMap )(call $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.Map )))
+  (return (global.get $$class@nobridgemethods.TreeMap))
+ )
+)
+
+;;; Class<?> TreeMap.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nobridgemethods.TreeMap))
+ (local.set $this (ref.cast (ref $nobridgemethods.TreeMap) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.TreeMap ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.TreeMap)
+;;; End of code for nobridgemethods.TreeMap [methods]
+;;; Code for nobridgemethods.CharSet.1 [methods]
+
+;;; <anonymous> extends TreeMap<String> <anonymous> extends TreeMap<String>.$create()
+(func $$create__@nobridgemethods.CharSet.1
+ (result (ref null $nobridgemethods.CharSet.1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:52
+ (local $$instance (ref null $nobridgemethods.CharSet.1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:52
+  (call $$clinit__void_<once>_@nobridgemethods.CharSet.1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:52
+  (local.set $$instance (struct.new $nobridgemethods.CharSet.1 (global.get $nobridgemethods.CharSet.1.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:52
+  (call $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1 (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:52
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends TreeMap<String>.$ctor()
+(func $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1
+ (param $this (ref null $nobridgemethods.CharSet.1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:52
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:52
+  (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> extends TreeMap<String>.$clinit()
+(func $$clinit__void_<once>_@nobridgemethods.CharSet.1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:30
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:30
+  (if (global.get $$class-initialized@nobridgemethods.CharSet.1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:30
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:30
+  (global.set $$class-initialized@nobridgemethods.CharSet.1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nobridgemethods/readable-j2wasm.js/nobridgemethods/CharSet.java:36:30
+  (call $$clinit__void_<once>_@nobridgemethods.TreeMap )
+ )
+)
+
+;;; Class<T> <anonymous> extends TreeMap<String>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.CharSet.1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nobridgemethods.CharSet.1)))
+   (then
+    (return (global.get $$class@nobridgemethods.CharSet.1))
+   )
+  )
+  (global.set $$class@nobridgemethods.CharSet.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nobridgemeth...|__java_lang_String_<once>_@nobridgemethods.CharSet.1 )(call $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.TreeMap )))
+  (return (global.get $$class@nobridgemethods.CharSet.1))
+ )
+)
+
+;;; Class<?> <anonymous> extends TreeMap<String>.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet.1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nobridgemethods.CharSet.1))
+ (local.set $this (ref.cast (ref $nobridgemethods.CharSet.1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nobridgemethods.CharSet.1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nobridgemethods.CharSet.1)
+;;; End of code for nobridgemethods.CharSet.1 [methods]

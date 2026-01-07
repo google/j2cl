@@ -1,0 +1,325 @@
+
+;;; Code for nestedinstanceinnerclass.OuterClass [static fields]
+(global $$class-initialized@nestedinstanceinnerclass.OuterClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@nestedinstanceinnerclass.OuterClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nestedinstanceinnerclass.OuterClass [static fields]
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [static fields]
+(global $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [static fields]
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [static fields]
+(global $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@nestedinstanceinnerclass.OuterClass.InnerClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nestedinstanceinnerclass.OuterClass.InnerClass [static fields]
+;;; Code for nestedinstanceinnerclass.OuterClass [vtable.init]
+(global $nestedinstanceinnerclass.OuterClass.vtable (ref $nestedinstanceinnerclass.OuterClass.vtable)
+ (struct.new $nestedinstanceinnerclass.OuterClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_test__void@nestedinstanceinnerclass.OuterClass)
+ )
+)
+;;; End of code for nestedinstanceinnerclass.OuterClass [vtable.init]
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [vtable.init]
+(global $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)
+ (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [vtable.init]
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [vtable.init]
+(global $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)
+ (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for nestedinstanceinnerclass.OuterClass.InnerClass [vtable.init]
+
+;;; Code for nestedinstanceinnerclass.OuterClass [methods]
+
+;;; OuterClass OuterClass.$create()
+(func $$create__@nestedinstanceinnerclass.OuterClass
+ (result (ref null $nestedinstanceinnerclass.OuterClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (call $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (return (call $$create_$private__@nestedinstanceinnerclass.OuterClass ))
+ )
+)
+
+;;; OuterClass OuterClass.$create_$private()
+(func $$create_$private__@nestedinstanceinnerclass.OuterClass
+ (result (ref null $nestedinstanceinnerclass.OuterClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+ (local $$instance (ref null $nestedinstanceinnerclass.OuterClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass (global.get $nestedinstanceinnerclass.OuterClass.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (call $$ctor__void_$p_nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void OuterClass.$ctor()
+(func $$ctor__void_$p_nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass
+ (param $this (ref null $nestedinstanceinnerclass.OuterClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void OuterClass.test()
+(func $m_test__void@nestedinstanceinnerclass.OuterClass
+ (type $function.m_test__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:26:14
+ (local $this (ref null $nestedinstanceinnerclass.OuterClass))
+ (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:27:4
+  (drop (call $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass (call $$create_$private__@nestedinstanceinnerclass.OuterClass ))))
+ )
+)
+(elem declare func $m_test__void@nestedinstanceinnerclass.OuterClass)
+
+;;; void OuterClass.$clinit()
+(func $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> OuterClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nestedinstanceinnerclass.OuterClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nestedinstanceinnerclass.OuterClass)))
+   (then
+    (return (global.get $$class@nestedinstanceinnerclass.OuterClass))
+   )
+  )
+  (global.set $$class@nestedinstanceinnerclass.OuterClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nestedinstan...|__java_lang_String_<once>_@nestedinstanceinnerclass.OuterClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nestedinstanceinnerclass.OuterClass))
+ )
+)
+
+;;; Class<?> OuterClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nestedinstanceinnerclass.OuterClass))
+ (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nestedinstanceinnerclass.OuterClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass)
+;;; End of code for nestedinstanceinnerclass.OuterClass [methods]
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [methods]
+
+;;; InnerInnerClass InnerInnerClass.$create(InnerClass $outer_this)
+(func $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+ (local $$instance (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (call $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (call $$ctor__nestedinstanceinnerclass_OuterClass_InnerClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InnerInnerClass.$ctor(InnerClass $outer_this)
+(func $$ctor__nestedinstanceinnerclass_OuterClass_InnerClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (call $$init__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void InnerInnerClass.$init()
+(func $$init__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:21:6
+  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $x@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:22:6
+  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $y@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this))))
+ )
+)
+
+;;; void InnerInnerClass.$clinit()
+(func $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:20:17
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> InnerInnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)))
+   (then
+    (return (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+   )
+  )
+  (global.set $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nestedinstan...|__java_lang_String_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ )
+)
+
+;;; Class<?> InnerInnerClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
+;;; End of code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [methods]
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [methods]
+
+;;; InnerClass InnerClass.$create(OuterClass $outer_this)
+(func $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass
+ (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass))
+ (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+ (local $$instance (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (call $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $nestedinstanceinnerclass.OuterClass)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (call $$ctor__nestedinstanceinnerclass_OuterClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InnerClass.$ctor(OuterClass $outer_this)
+(func $$ctor__nestedinstanceinnerclass_OuterClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass
+ (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this@nestedinstanceinnerclass.OuterClass.InnerClass (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void InnerClass.$clinit()
+(func $$clinit__void_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (if (global.get $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (global.set $$class-initialized@nestedinstanceinnerclass.OuterClass.InnerClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestedinstanceinnerclass/readable-j2wasm.js/nestedinstanceinnerclass/OuterClass.java:19:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass)))
+   (then
+    (return (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass))
+   )
+  )
+  (global.set $$class@nestedinstanceinnerclass.OuterClass.InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nestedinstan...|__java_lang_String_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nestedinstanceinnerclass.OuterClass.InnerClass))
+ )
+)
+
+;;; Class<?> InnerClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (local.set $this (ref.cast (ref $nestedinstanceinnerclass.OuterClass.InnerClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nestedinstanceinnerclass.OuterClass.InnerClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)
+;;; End of code for nestedinstanceinnerclass.OuterClass.InnerClass [methods]

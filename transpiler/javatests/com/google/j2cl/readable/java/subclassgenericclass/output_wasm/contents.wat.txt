@@ -1,0 +1,278 @@
+
+;;; Code for subclassgenericclass.GenericClass [static fields]
+(global $$class-initialized@subclassgenericclass.GenericClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@subclassgenericclass.GenericClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for subclassgenericclass.GenericClass [static fields]
+;;; Code for subclassgenericclass.GenericSubclassGenericClass [static fields]
+(global $$class-initialized@subclassgenericclass.GenericSubclassGenericClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@subclassgenericclass.GenericSubclassGenericClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for subclassgenericclass.GenericSubclassGenericClass [static fields]
+;;; Code for subclassgenericclass.SubclassGenericClass [static fields]
+(global $$class-initialized@subclassgenericclass.SubclassGenericClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@subclassgenericclass.SubclassGenericClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for subclassgenericclass.SubclassGenericClass [static fields]
+;;; Code for subclassgenericclass.GenericClass [vtable.init]
+(global $subclassgenericclass.GenericClass.vtable (ref $subclassgenericclass.GenericClass.vtable)
+ (struct.new $subclassgenericclass.GenericClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for subclassgenericclass.GenericClass [vtable.init]
+;;; Code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
+(global $subclassgenericclass.GenericSubclassGenericClass.vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable)
+ (struct.new $subclassgenericclass.GenericSubclassGenericClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
+;;; Code for subclassgenericclass.SubclassGenericClass [vtable.init]
+(global $subclassgenericclass.SubclassGenericClass.vtable (ref $subclassgenericclass.SubclassGenericClass.vtable)
+ (struct.new $subclassgenericclass.SubclassGenericClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@subclassgenericclass.SubclassGenericClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for subclassgenericclass.SubclassGenericClass [vtable.init]
+
+;;; Code for subclassgenericclass.GenericClass [methods]
+
+;;; GenericClass<T> GenericClass.$create()
+(func $$create__@subclassgenericclass.GenericClass
+ (result (ref null $subclassgenericclass.GenericClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+ (local $$instance (ref null $subclassgenericclass.GenericClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+  (call $$clinit__void_<once>_@subclassgenericclass.GenericClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+  (local.set $$instance (struct.new $subclassgenericclass.GenericClass (global.get $subclassgenericclass.GenericClass.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+  (call $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericClass.$ctor()
+(func $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass
+ (param $this (ref null $subclassgenericclass.GenericClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void GenericClass.$clinit()
+(func $$clinit__void_<once>_@subclassgenericclass.GenericClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+  (if (global.get $$class-initialized@subclassgenericclass.GenericClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+  (global.set $$class-initialized@subclassgenericclass.GenericClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:18:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> GenericClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@subclassgenericclass.GenericClass)))
+   (then
+    (return (global.get $$class@subclassgenericclass.GenericClass))
+   )
+  )
+  (global.set $$class@subclassgenericclass.GenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.GenericClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@subclassgenericclass.GenericClass))
+ )
+)
+
+;;; Class<?> GenericClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $subclassgenericclass.GenericClass))
+ (local.set $this (ref.cast (ref $subclassgenericclass.GenericClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericClass)
+;;; End of code for subclassgenericclass.GenericClass [methods]
+;;; Code for subclassgenericclass.GenericSubclassGenericClass [methods]
+
+;;; GenericSubclassGenericClass<T> GenericSubclassGenericClass.$create()
+(func $$create__@subclassgenericclass.GenericSubclassGenericClass
+ (result (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+ (local $$instance (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+  (call $$clinit__void_<once>_@subclassgenericclass.GenericSubclassGenericClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+  (local.set $$instance (struct.new $subclassgenericclass.GenericSubclassGenericClass (global.get $subclassgenericclass.GenericSubclassGenericClass.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+  (call $$ctor__void_$p_subclassgenericclass_GenericSubclassGenericClass@subclassgenericclass.GenericSubclassGenericClass (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericSubclassGenericClass.$ctor()
+(func $$ctor__void_$p_subclassgenericclass_GenericSubclassGenericClass@subclassgenericclass.GenericSubclassGenericClass
+ (param $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+  (call $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void GenericSubclassGenericClass.$clinit()
+(func $$clinit__void_<once>_@subclassgenericclass.GenericSubclassGenericClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+  (if (global.get $$class-initialized@subclassgenericclass.GenericSubclassGenericClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+  (global.set $$class-initialized@subclassgenericclass.GenericSubclassGenericClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:20:6
+  (call $$clinit__void_<once>_@subclassgenericclass.GenericClass )
+ )
+)
+
+;;; Class<T> GenericSubclassGenericClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericSubclassGenericClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@subclassgenericclass.GenericSubclassGenericClass)))
+   (then
+    (return (global.get $$class@subclassgenericclass.GenericSubclassGenericClass))
+   )
+  )
+  (global.set $$class@subclassgenericclass.GenericSubclassGenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.GenericSubclassGenericClass )(call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericClass )))
+  (return (global.get $$class@subclassgenericclass.GenericSubclassGenericClass))
+ )
+)
+
+;;; Class<?> GenericSubclassGenericClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ (local.set $this (ref.cast (ref $subclassgenericclass.GenericSubclassGenericClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericSubclassGenericClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
+;;; End of code for subclassgenericclass.GenericSubclassGenericClass [methods]
+;;; Code for subclassgenericclass.SubclassGenericClass [methods]
+
+;;; SubclassGenericClass SubclassGenericClass.$create()
+(func $$create__@subclassgenericclass.SubclassGenericClass
+ (result (ref null $subclassgenericclass.SubclassGenericClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+ (local $$instance (ref null $subclassgenericclass.SubclassGenericClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+  (call $$clinit__void_<once>_@subclassgenericclass.SubclassGenericClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+  (local.set $$instance (struct.new $subclassgenericclass.SubclassGenericClass (global.get $subclassgenericclass.SubclassGenericClass.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+  (call $$ctor__void_$p_subclassgenericclass_SubclassGenericClass@subclassgenericclass.SubclassGenericClass (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SubclassGenericClass.$ctor()
+(func $$ctor__void_$p_subclassgenericclass_SubclassGenericClass@subclassgenericclass.SubclassGenericClass
+ (param $this (ref null $subclassgenericclass.SubclassGenericClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+  (call $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void SubclassGenericClass.$clinit()
+(func $$clinit__void_<once>_@subclassgenericclass.SubclassGenericClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+  (if (global.get $$class-initialized@subclassgenericclass.SubclassGenericClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+  (global.set $$class-initialized@subclassgenericclass.SubclassGenericClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/subclassgenericclass/readable-j2wasm.js/subclassgenericclass/SubclassGenericClass.java:22:13
+  (call $$clinit__void_<once>_@subclassgenericclass.GenericClass )
+ )
+)
+
+;;; Class<T> SubclassGenericClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.SubclassGenericClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@subclassgenericclass.SubclassGenericClass)))
+   (then
+    (return (global.get $$class@subclassgenericclass.SubclassGenericClass))
+   )
+  )
+  (global.set $$class@subclassgenericclass.SubclassGenericClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subclassgene...|__java_lang_String_<once>_@subclassgenericclass.SubclassGenericClass )(call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.GenericClass )))
+  (return (global.get $$class@subclassgenericclass.SubclassGenericClass))
+ )
+)
+
+;;; Class<?> SubclassGenericClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@subclassgenericclass.SubclassGenericClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $subclassgenericclass.SubclassGenericClass))
+ (local.set $this (ref.cast (ref $subclassgenericclass.SubclassGenericClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subclassgenericclass.SubclassGenericClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.SubclassGenericClass)
+;;; End of code for subclassgenericclass.SubclassGenericClass [methods]

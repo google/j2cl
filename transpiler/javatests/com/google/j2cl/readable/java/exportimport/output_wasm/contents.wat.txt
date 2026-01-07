@@ -1,0 +1,94 @@
+
+;;; Code for exportimport.Main [static fields]
+(global $$class-initialized@exportimport.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@exportimport.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for exportimport.Main [static fields]
+;;; Code for exportimport.Main [vtable.init]
+(global $exportimport.Main.vtable (ref $exportimport.Main.vtable)
+ (struct.new $exportimport.Main.vtable
+  (ref.func $$getClassImpl__java_lang_Class@exportimport.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for exportimport.Main [vtable.init]
+
+;;; Code for exportimport.Main [methods]
+
+;;; Main Main.$create()
+(func $$create__@exportimport.Main
+ (result (ref null $exportimport.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+ (local $$instance (ref null $exportimport.Main))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+  (call $$clinit__void_<once>_@exportimport.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+  (local.set $$instance (struct.new $exportimport.Main (global.get $exportimport.Main.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+  (call $$ctor__void_$p_exportimport_Main@exportimport.Main (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_exportimport_Main@exportimport.Main
+ (param $this (ref null $exportimport.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void_<once>_@exportimport.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+  (if (global.get $$class-initialized@exportimport.Main)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+  (global.set $$class-initialized@exportimport.Main (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exportimport/readable-j2wasm.js/exportimport/Main.java:19:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@exportimport.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@exportimport.Main)))
+   (then
+    (return (global.get $$class@exportimport.Main))
+   )
+  )
+  (global.set $$class@exportimport.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|exportimport...|__java_lang_String_<once>_@exportimport.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@exportimport.Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@exportimport.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $exportimport.Main))
+ (local.set $this (ref.cast (ref $exportimport.Main) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@exportimport.Main ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@exportimport.Main)
+;;; End of code for exportimport.Main [methods]

@@ -110,7 +110,8 @@ def readable_example(
 
         _readable_diff_test(
             name = "readable_wasm_golden",
-            target = ":readable_wasm.wat",
+            target = ":readable-j2wasm",
+            target_file = "readable-j2wasm.js",
             dir_out = "output_wasm",
             tags = ["j2wasm"],
         )
@@ -218,11 +219,12 @@ def _js_readable_targets(readable_target, dir_out, defs):
         tags = ["j2cl"],
     )
 
-def _readable_diff_test(name, target, dir_out, tags):
+def _readable_diff_test(name, target, dir_out, tags, target_file = ""):
     _golden_output(
         testonly = 1,
         name = name,
         target = target,
+        target_file = target_file,
     )
 
     sh_test(
@@ -237,7 +239,14 @@ def _readable_diff_test(name, target, dir_out, tags):
     )
 
 def _golden_output_impl(ctx):
-    input = ctx.file.target
+    if ctx.attr.target_file:
+        # Find the target file or directory
+        input = [f for f in ctx.files.target if f.basename == ctx.attr.target_file][0]
+    else:
+        if len(ctx.files.target) != 1:
+            fail("target_file is required if not exactly one output: %s" % ctx.attr.target.label)
+        input = ctx.files.target[0]
+
     output = ctx.actions.declare_directory(ctx.label.name)
     readable_name = ctx.label.package.rsplit("/", 1)[1]
 
@@ -268,33 +277,23 @@ def _golden_output_impl(ctx):
                 "mv ./%s/* ./ || true" % readable_name,
             ]),
         )
-    elif input.path.endswith(".wat"):
-        ctx.actions.run_shell(
-            inputs = [input],
-            outputs = [output],
-            command = "".join([
-                "awk 'BEGIN {firstMatch=1} {",
-                " if (match($$0, /\\s*;;; Code for %s/)) {" % readable_name,
-                "  if (firstMatch) { firstMatch=0 } else { printf \"\\n\" }",
-                "  inPackage=1;",
-                " };",
-                " if (match($$0, /\\s*;;; End of /)) {inPackage=0};",
-                " if (inPackage) {print $$0}",
-                "}' < %s > %s/module.wat.txt" % (input.path, output.path),
-            ]),
-        )
     elif input.path.endswith(".imports.js.txt"):
         ctx.actions.run_shell(
             inputs = [input],
             outputs = [output],
             command = "cp -L -f %s %s/module.imports.js.txt" % (input.path, output.path),
         )
+    else:
+        fail("Unsupported input: %s" % input.path)
 
     return DefaultInfo(files = depset([output]), runfiles = ctx.runfiles([output]))
 
 _golden_output = rule(
     implementation = _golden_output_impl,
-    attrs = {"target": attr.label(allow_single_file = True)},
+    attrs = {
+        "target": attr.label(allow_files = True),
+        "target_file": attr.string(default = ""),
+    },
 )
 
 def _j2kt_web_enabled_j2cl_library_impl(ctx):

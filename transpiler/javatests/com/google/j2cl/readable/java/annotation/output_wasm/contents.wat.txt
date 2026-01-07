@@ -1,0 +1,613 @@
+
+;;; Code for annotation.Main [static fields]
+(global $$class-initialized@annotation.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@annotation.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for annotation.Main [static fields]
+;;; Code for annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor [static fields]
+(global $$class-initialized@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor [static fields]
+;;; Code for annotation.Main.Foo [static fields]
+(global $$class-initialized@annotation.Main.Foo (mut i32)
+ (i32.const 0)
+)
+(global $$class@annotation.Main.Foo (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for annotation.Main.Foo [static fields]
+;;; Code for annotation.Main.SomeEnum [static fields]
+(global $ZERO@annotation.Main.SomeEnum (mut (ref null $annotation.Main.SomeEnum))
+ (ref.null $annotation.Main.SomeEnum)
+)
+(global $ONE@annotation.Main.SomeEnum (mut (ref null $annotation.Main.SomeEnum))
+ (ref.null $annotation.Main.SomeEnum)
+)
+(global $namesToValuesMap@annotation.Main.SomeEnum (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@annotation.Main.SomeEnum (mut i32)
+ (i32.const 0)
+)
+(global $$class@annotation.Main.SomeEnum (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for annotation.Main.SomeEnum [static fields]
+;;; Code for annotation.Main.Zoo [static fields]
+(global $$class-initialized@annotation.Main.Zoo (mut i32)
+ (i32.const 0)
+)
+(global $$class@annotation.Main.Zoo (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for annotation.Main.Zoo [static fields]
+;;; Code for annotation.Main.ClassImplementingAnnotation [static fields]
+(global $$class-initialized@annotation.Main.ClassImplementingAnnotation (mut i32)
+ (i32.const 0)
+)
+(global $$class@annotation.Main.ClassImplementingAnnotation (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for annotation.Main.ClassImplementingAnnotation [static fields]
+;;; Code for annotation.Main.InterfaceExtendingAnnotation [static fields]
+(global $$class-initialized@annotation.Main.InterfaceExtendingAnnotation (mut i32)
+ (i32.const 0)
+)
+(global $$class@annotation.Main.InterfaceExtendingAnnotation (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for annotation.Main.InterfaceExtendingAnnotation [static fields]
+;;; Code for annotation.Main [vtable.init]
+(global $annotation.Main.vtable (ref $annotation.Main.vtable)
+ (struct.new $annotation.Main.vtable
+  (ref.func $$getClassImpl__java_lang_Class@annotation.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for annotation.Main [vtable.init]
+;;; Code for annotation.Main.SomeEnum [vtable.init]
+(global $annotation.Main.SomeEnum.vtable (ref $annotation.Main.SomeEnum.vtable)
+ (struct.new $annotation.Main.SomeEnum.vtable
+  (ref.func $$getClassImpl__java_lang_Class@annotation.Main.SomeEnum)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
+  (ref.func $m_hashCode__int@java.lang.Enum)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+ )
+)
+(global $java.lang.Comparable.vtable@$annotation.Main.SomeEnum (ref $java.lang.Comparable.vtable)
+ (struct.new $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+)
+(global $java.io.Serializable.vtable@$annotation.Main.SomeEnum (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+;;; End of code for annotation.Main.SomeEnum [vtable.init]
+
+;;; Code for annotation.Main [methods]
+
+;;; Main Main.$create()
+(func $$create__@annotation.Main
+ (result (ref null $annotation.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+ (local $$instance (ref null $annotation.Main))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+  (call $$clinit__void_<once>_@annotation.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+  (local.set $$instance (struct.new $annotation.Main (global.get $annotation.Main.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+  (call $$ctor__void_$p_annotation_Main@annotation.Main (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_annotation_Main@annotation.Main
+ (param $this (ref null $annotation.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.test(Foo foo)
+(func $m_test__annotation_Main_Foo__void@annotation.Main
+ (param $foo (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:68:14
+ (local $booleanConstant i32)
+ (local $intConstant i32)
+ (local $stringConstant (ref null $java.lang.String))
+ (local $booleanValue i32)
+ (local $intValue i32)
+ (local $stringValue (ref null $java.lang.String))
+ (local $enumValue (ref null $annotation.Main.SomeEnum))
+ (local $annotationValue (ref null $java.lang.Object))
+ (local $booleanArray (ref null $javaemul.internal.WasmArray.OfBoolean))
+ (local $intArray (ref null $javaemul.internal.WasmArray.OfInt))
+ (local $stringArray (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $enumArray (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $annotationArray (ref null $javaemul.internal.WasmArray.OfObject))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:68:28
+  (call $$clinit__void_<once>_@annotation.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:69:4
+  (local.set $booleanConstant (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:70:4
+  (local.set $intConstant (i32.const 123))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:71:4
+  (local.set $stringConstant (call $$getString_|foo|__java_lang_String_<once>_@annotation.Main ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:73:4
+  (local.set $booleanValue (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_booleanValue__boolean (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:74:4
+  (local.set $intValue (call_ref $function.m_intValue__int (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_intValue__int (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:75:4
+  (local.set $stringValue (call_ref $function.m_stringValue__java_lang_String (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_stringValue__java_lang_String (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:76:4
+  (local.set $enumValue (call_ref $function.m_enumValue__annotation_Main_SomeEnum (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_enumValue__annotation_Main_SomeEnum (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:77:4
+  (local.set $annotationValue (call_ref $function.m_annotationValue__annotation_Main_Zoo (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_annotationValue__annotation_Main_Zoo (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:79:4
+  (local.set $booleanArray (call_ref $function.m_booleanArray__arrayOf_boolean (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_booleanArray__arrayOf_boolean (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:80:4
+  (local.set $intArray (call_ref $function.m_intArray__arrayOf_int (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_intArray__arrayOf_int (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:81:4
+  (local.set $stringArray (call_ref $function.m_stringArray__arrayOf_java_lang_String (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_stringArray__arrayOf_java_lang_String (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:82:4
+  (local.set $enumArray (call_ref $function.m_enumArray__arrayOf_annotation_Main_SomeEnum (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_enumArray__arrayOf_annotation_Main_SomeEnum (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:83:4
+  (local.set $annotationArray (call_ref $function.m_annotationArray__arrayOf_annotation_Main_Zoo (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_annotationArray__arrayOf_annotation_Main_Zoo (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+ )
+)
+
+;;; void Main.testClassValues(Foo foo)
+(func $m_testClassValues__annotation_Main_Foo__void@annotation.Main
+ (param $foo (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:88:14
+ (local $annotatationType (ref null $java.lang.Class))
+ (local $classValue (ref null $java.lang.Class))
+ (local $stringClassValue (ref null $java.lang.Class))
+ (local $wildcardClassValue (ref null $java.lang.Class))
+ (local $classArray (ref null $javaemul.internal.WasmArray.OfObject))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:88:39
+  (call $$clinit__void_<once>_@annotation.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:89:4
+  (local.set $annotatationType (call_ref $function.m_annotationType__java_lang_Class (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_annotationType__java_lang_Class (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:90:4
+  (local.set $classValue (call_ref $function.m_classValue__java_lang_Class (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_classValue__java_lang_Class (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:91:4
+  (local.set $stringClassValue (call_ref $function.m_stringClassValue__java_lang_Class (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_stringClassValue__java_lang_Class (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:92:4
+  (local.set $wildcardClassValue (call_ref $function.m_wildcardClassValue__java_lang_Class (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_wildcardClassValue__java_lang_Class (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:93:4
+  (local.set $classArray (call_ref $function.m_classArray__arrayOf_java_lang_Class (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_classArray__arrayOf_java_lang_Class (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
+ )
+)
+
+;;; Annotation Main.test(ClassImplementingAnnotation classImplementingAnnotation)
+(func $m_test__annotation_Main_ClassImplementingAnnotation__java_lang_annotation_Annotation@annotation.Main
+ (param $classImplementingAnnotation (ref null $annotation.Main.ClassImplementingAnnotation))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:98:20
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:98:82
+  (call $$clinit__void_<once>_@annotation.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:99:4
+  (return (local.get $classImplementingAnnotation))
+ )
+)
+
+;;; Annotation Main.test(InterfaceExtendingAnnotation interfaceExtendingAnnotation)
+(func $m_test__annotation_Main_InterfaceExtendingAnnotation__java_lang_annotation_Annotation@annotation.Main
+ (param $interfaceExtendingAnnotation (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:104:20
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:104:84
+  (call $$clinit__void_<once>_@annotation.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:105:4
+  (return (local.get $interfaceExtendingAnnotation))
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void_<once>_@annotation.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+  (if (global.get $$class-initialized@annotation.Main)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+  (global.set $$class-initialized@annotation.Main (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:21:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main)))
+   (then
+    (return (global.get $$class@annotation.Main))
+   )
+  )
+  (global.set $$class@annotation.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.Main|__java_lang_String_<once>_@annotation.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@annotation.Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@annotation.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $annotation.Main))
+ (local.set $this (ref.cast (ref $annotation.Main) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@annotation.Main ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@annotation.Main)
+;;; End of code for annotation.Main [methods]
+;;; Code for annotation.Main.Foo [methods]
+
+;;; void Foo.$clinit()
+(func $$clinit__void_<once>_@annotation.Main.Foo
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:22:13
+  (if (global.get $$class-initialized@annotation.Main.Foo)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:22:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:22:13
+  (global.set $$class-initialized@annotation.Main.Foo (i32.const 1))
+ )
+)
+
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Foo)))
+   (then
+    (return (global.get $$class@annotation.Main.Foo))
+   )
+  )
+  (global.set $$class@annotation.Main.Foo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Foo )))
+  (return (global.get $$class@annotation.Main.Foo))
+ )
+)
+;;; End of code for annotation.Main.Foo [methods]
+;;; Code for annotation.Main.Zoo [methods]
+
+;;; void Zoo.$clinit()
+(func $$clinit__void_<once>_@annotation.Main.Zoo
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:66:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:66:13
+  (if (global.get $$class-initialized@annotation.Main.Zoo)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:66:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:66:13
+  (global.set $$class-initialized@annotation.Main.Zoo (i32.const 1))
+ )
+)
+
+;;; Class<T> Zoo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.Zoo
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.Zoo)))
+   (then
+    (return (global.get $$class@annotation.Main.Zoo))
+   )
+  )
+  (global.set $$class@annotation.Main.Zoo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Zoo )))
+  (return (global.get $$class@annotation.Main.Zoo))
+ )
+)
+;;; End of code for annotation.Main.Zoo [methods]
+;;; Code for annotation.Main.ClassImplementingAnnotation [methods]
+
+;;; void ClassImplementingAnnotation.$ctor(Main $outer_this)
+(func $$ctor__annotation_Main__void_$p_annotation_Main_ClassImplementingAnnotation@annotation.Main.ClassImplementingAnnotation
+ (param $this (ref null $annotation.Main.ClassImplementingAnnotation))
+ (param $$outer_this (ref null $annotation.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:96:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:96:17
+  (struct.set $annotation.Main.ClassImplementingAnnotation $$outer_this@annotation.Main.ClassImplementingAnnotation (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:96:17
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ClassImplementingAnnotation.$clinit()
+(func $$clinit__void_<once>_@annotation.Main.ClassImplementingAnnotation
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:96:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:96:17
+  (if (global.get $$class-initialized@annotation.Main.ClassImplementingAnnotation)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:96:17
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:96:17
+  (global.set $$class-initialized@annotation.Main.ClassImplementingAnnotation (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:96:17
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ClassImplementingAnnotation.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.ClassImplementingAnnotation
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.ClassImplementingAnnotation)))
+   (then
+    (return (global.get $$class@annotation.Main.ClassImplementingAnnotation))
+   )
+  )
+  (global.set $$class@annotation.Main.ClassImplementingAnnotation (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.ClassImplementingAnnotation )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@annotation.Main.ClassImplementingAnnotation))
+ )
+)
+
+;;; Class<?> ClassImplementingAnnotation.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@annotation.Main.ClassImplementingAnnotation
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $annotation.Main.ClassImplementingAnnotation))
+ (local.set $this (ref.cast (ref $annotation.Main.ClassImplementingAnnotation) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.ClassImplementingAnnotation ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@annotation.Main.ClassImplementingAnnotation)
+;;; End of code for annotation.Main.ClassImplementingAnnotation [methods]
+;;; Code for annotation.Main.InterfaceExtendingAnnotation [methods]
+
+;;; void InterfaceExtendingAnnotation.$clinit()
+(func $$clinit__void_<once>_@annotation.Main.InterfaceExtendingAnnotation
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+  (if (global.get $$class-initialized@annotation.Main.InterfaceExtendingAnnotation)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+  (global.set $$class-initialized@annotation.Main.InterfaceExtendingAnnotation (i32.const 1))
+ )
+)
+
+;;; Class<T> InterfaceExtendingAnnotation.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.InterfaceExtendingAnnotation
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.InterfaceExtendingAnnotation)))
+   (then
+    (return (global.get $$class@annotation.Main.InterfaceExtendingAnnotation))
+   )
+  )
+  (global.set $$class@annotation.Main.InterfaceExtendingAnnotation (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.InterfaceExtendingAnnotation )))
+  (return (global.get $$class@annotation.Main.InterfaceExtendingAnnotation))
+ )
+)
+;;; End of code for annotation.Main.InterfaceExtendingAnnotation [methods]
+;;; Code for annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_annotation_Main_InterfaceExtendingAnnotation_$LambdaAdaptor@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor
+ (param $this (ref null $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+  (if (global.get $$class-initialized@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+  (global.set $$class-initialized@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:102:12
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor)
+;;; End of code for annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor [methods]
+;;; Code for annotation.Main.SomeEnum [methods]
+
+;;; SomeEnum SomeEnum.$create(String $name, int $ordinal)
+(func $$create__java_lang_String__int@annotation.Main.SomeEnum
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (result (ref null $annotation.Main.SomeEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+ (local $$instance (ref null $annotation.Main.SomeEnum))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (local.set $$instance (struct.new $annotation.Main.SomeEnum (global.get $annotation.Main.SomeEnum.vtable) (global.get $annotation.Main.SomeEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (call $$ctor__java_lang_String__int__void_$p_annotation_Main_SomeEnum@annotation.Main.SomeEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SomeEnum.$ctor(String $name, int $ordinal)
+(func $$ctor__java_lang_String__int__void_$p_annotation_Main_SomeEnum@annotation.Main.SomeEnum
+ (param $this (ref null $annotation.Main.SomeEnum))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+ )
+)
+
+;;; SomeEnum SomeEnum.valueOf(String name)
+(func $m_valueOf__java_lang_String__annotation_Main_SomeEnum@annotation.Main.SomeEnum
+ (param $name (ref null $java.lang.String))
+ (result (ref null $annotation.Main.SomeEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (call $$clinit__void_<once>_@annotation.Main.SomeEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (if (ref.is_null (global.get $namesToValuesMap@annotation.Main.SomeEnum))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+     (global.set $namesToValuesMap@annotation.Main.SomeEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_annotation_Main_SomeEnum@annotation.Main.SomeEnum )))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (return (ref.cast (ref null $annotation.Main.SomeEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@annotation.Main.SomeEnum))))
+ )
+)
+
+;;; SomeEnum[] SomeEnum.values()
+(func $m_values__arrayOf_annotation_Main_SomeEnum@annotation.Main.SomeEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (call $$clinit__void_<once>_@annotation.Main.SomeEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (return (call $m_values_$private__arrayOf_annotation_Main_SomeEnum@annotation.Main.SomeEnum ))
+ )
+)
+
+;;; SomeEnum[] SomeEnum.values_$private()
+(func $m_values_$private__arrayOf_annotation_Main_SomeEnum@annotation.Main.SomeEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (global.get $ZERO@annotation.Main.SomeEnum)(global.get $ONE@annotation.Main.SomeEnum))))
+ )
+)
+
+;;; void SomeEnum.$clinit()
+(func $$clinit__void_<once>_@annotation.Main.SomeEnum
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (if (global.get $$class-initialized@annotation.Main.SomeEnum)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (global.set $$class-initialized@annotation.Main.SomeEnum (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
+  (call $$clinit__void_<once>_@java.lang.Enum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:59:4
+  (global.set $ZERO@annotation.Main.SomeEnum (call $$create__java_lang_String__int@annotation.Main.SomeEnum (call $$getString_|ZERO|__java_lang_String_<once>_@annotation.Main.SomeEnum )(i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:60:4
+  (global.set $ONE@annotation.Main.SomeEnum (call $$create__java_lang_String__int@annotation.Main.SomeEnum (call $$getString_|ONE|__java_lang_String_<once>_@annotation.Main.SomeEnum )(i32.const 1)))
+ )
+)
+
+;;; Class<T> SomeEnum.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.SomeEnum
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@annotation.Main.SomeEnum)))
+   (then
+    (return (global.get $$class@annotation.Main.SomeEnum))
+   )
+  )
+  (global.set $$class@annotation.Main.SomeEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.SomeEnum )))
+  (return (global.get $$class@annotation.Main.SomeEnum))
+ )
+)
+
+;;; Class<?> SomeEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@annotation.Main.SomeEnum
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $annotation.Main.SomeEnum))
+ (local.set $this (ref.cast (ref $annotation.Main.SomeEnum) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@annotation.Main.SomeEnum ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@annotation.Main.SomeEnum)
+;;; End of code for annotation.Main.SomeEnum [methods]

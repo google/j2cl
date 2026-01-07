@@ -1,0 +1,76 @@
+
+;;; Code for overridingmethods.SomeInterface [type definition]
+(type $overridingmethods.SomeInterface.vtable (sub (struct
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+;;; End of code for overridingmethods.SomeInterface [type definition]
+;;; Code for overridingmethods.Parent [type definition]
+(type $overridingmethods.Parent (sub $java.lang.Object (struct
+ (field $vtable (ref $overridingmethods.Parent.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $overridingmethods.Parent.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_finalInChild__void (ref $function.m_finalInChild__void))
+ (field $m_nonFinal__void (ref $function.m_nonFinal__void))
+ ))
+)
+;;; End of code for overridingmethods.Parent [type definition]
+;;; Code for overridingmethods.SomeInterface.$LambdaAdaptor [type definition]
+(type $overridingmethods.SomeInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $overridingmethods.SomeInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $overridingmethods.SomeInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $overridingmethods.SomeInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+;;; End of code for overridingmethods.SomeInterface.$LambdaAdaptor [type definition]
+;;; Code for overridingmethods.Child [type definition]
+(type $overridingmethods.Child (sub $overridingmethods.Parent (struct
+ (field $vtable (ref $overridingmethods.Child.vtable))
+ (field $itable (ref $overridingmethods.Child.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $overridingmethods.Child.vtable (sub $overridingmethods.Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_finalInChild__void (ref $function.m_finalInChild__void))
+ (field $m_nonFinal__void (ref $function.m_nonFinal__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+;;; End of code for overridingmethods.Child [type definition]
+;;; Code for overridingmethods.FinalChild [type definition]
+(type $overridingmethods.FinalChild (sub $overridingmethods.Parent (struct
+ (field $vtable (ref $overridingmethods.FinalChild.vtable))
+ (field $itable (ref $overridingmethods.FinalChild.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $overridingmethods.FinalChild.vtable (sub $overridingmethods.Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_finalInChild__void (ref $function.m_finalInChild__void))
+ (field $m_nonFinal__void (ref $function.m_nonFinal__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ ))
+)
+;;; End of code for overridingmethods.FinalChild [type definition]

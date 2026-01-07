@@ -1,0 +1,119 @@
+
+;;; Code for ternaryexpression.TernaryExpression [static fields]
+(global $$class-initialized@ternaryexpression.TernaryExpression (mut i32)
+ (i32.const 0)
+)
+(global $$class@ternaryexpression.TernaryExpression (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for ternaryexpression.TernaryExpression [static fields]
+;;; Code for ternaryexpression.TernaryExpression [vtable.init]
+(global $ternaryexpression.TernaryExpression.vtable (ref $ternaryexpression.TernaryExpression.vtable)
+ (struct.new $ternaryexpression.TernaryExpression.vtable
+  (ref.func $$getClassImpl__java_lang_Class@ternaryexpression.TernaryExpression)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_test__void@ternaryexpression.TernaryExpression)
+ )
+)
+;;; End of code for ternaryexpression.TernaryExpression [vtable.init]
+
+;;; Code for ternaryexpression.TernaryExpression [methods]
+
+;;; TernaryExpression TernaryExpression.$create()
+(func $$create__@ternaryexpression.TernaryExpression
+ (result (ref null $ternaryexpression.TernaryExpression))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+ (local $$instance (ref null $ternaryexpression.TernaryExpression))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+  (call $$clinit__void_<once>_@ternaryexpression.TernaryExpression )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+  (local.set $$instance (struct.new $ternaryexpression.TernaryExpression (global.get $ternaryexpression.TernaryExpression.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+  (call $$ctor__void_$p_ternaryexpression_TernaryExpression@ternaryexpression.TernaryExpression (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void TernaryExpression.$ctor()
+(func $$ctor__void_$p_ternaryexpression_TernaryExpression@ternaryexpression.TernaryExpression
+ (param $this (ref null $ternaryexpression.TernaryExpression))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void TernaryExpression.test()
+(func $m_test__void@ternaryexpression.TernaryExpression
+ (type $function.m_test__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:20:14
+ (local $a i32)
+ (local $number i32)
+ (local $b i32)
+ (local $value i32)
+ (local $this (ref null $ternaryexpression.TernaryExpression))
+ (local.set $this (ref.cast (ref $ternaryexpression.TernaryExpression) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:21:4
+  (local.set $a (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:22:4
+  (local.set $number (if (result i32) (local.get $a) (then (i32.const 1)) (else (i32.const 2))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:24:4
+  (local.set $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:26:4
+  (local.set $value (call $m_intValue__int@java.lang.Integer (ref.as_non_null (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $$create__int@java.lang.Integer (i32.const 15))) (else (call $$create__int@java.lang.Integer (i32.const 30)))))))
+ )
+)
+(elem declare func $m_test__void@ternaryexpression.TernaryExpression)
+
+;;; void TernaryExpression.$clinit()
+(func $$clinit__void_<once>_@ternaryexpression.TernaryExpression
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+  (if (global.get $$class-initialized@ternaryexpression.TernaryExpression)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+  (global.set $$class-initialized@ternaryexpression.TernaryExpression (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/ternaryexpression/readable-j2wasm.js/ternaryexpression/TernaryExpression.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> TernaryExpression.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@ternaryexpression.TernaryExpression
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@ternaryexpression.TernaryExpression)))
+   (then
+    (return (global.get $$class@ternaryexpression.TernaryExpression))
+   )
+  )
+  (global.set $$class@ternaryexpression.TernaryExpression (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|ternaryexpre...|__java_lang_String_<once>_@ternaryexpression.TernaryExpression )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@ternaryexpression.TernaryExpression))
+ )
+)
+
+;;; Class<?> TernaryExpression.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@ternaryexpression.TernaryExpression
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $ternaryexpression.TernaryExpression))
+ (local.set $this (ref.cast (ref $ternaryexpression.TernaryExpression) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@ternaryexpression.TernaryExpression ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@ternaryexpression.TernaryExpression)
+;;; End of code for ternaryexpression.TernaryExpression [methods]

@@ -1,0 +1,36 @@
+
+;;; Code for strings.Strings [type definition]
+(type $strings.Strings (sub $java.lang.Object (struct
+ (field $vtable (ref $strings.Strings.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $nonBmpChar@strings.Strings (mut (ref null $java.lang.String)))
+ (field $someString@strings.Strings (mut (ref null $java.lang.String)))
+ (field $wideColon@strings.Strings (mut (ref null $java.lang.String)))
+ ))
+)
+(type $strings.Strings.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
+;;; End of code for strings.Strings [type definition]
+;;; Code for strings.Strings.StringHolder [type definition]
+(type $strings.Strings.StringHolder (sub $java.lang.Object (struct
+ (field $vtable (ref $strings.Strings.StringHolder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $s@strings.Strings.StringHolder (mut (ref null $java.lang.String)))
+ ))
+)
+(type $strings.Strings.StringHolder.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for strings.Strings.StringHolder [type definition]

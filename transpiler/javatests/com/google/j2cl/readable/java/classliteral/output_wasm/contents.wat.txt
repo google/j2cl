@@ -1,0 +1,272 @@
+
+;;; Code for classliteral.ClassLiteral [static fields]
+(global $$class-initialized@classliteral.ClassLiteral (mut i32)
+ (i32.const 0)
+)
+(global $$class@classliteral.ClassLiteral (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for classliteral.ClassLiteral [static fields]
+;;; Code for classliteral.ClassLiteral [vtable.init]
+(global $classliteral.ClassLiteral.vtable (ref $classliteral.ClassLiteral.vtable)
+ (struct.new $classliteral.ClassLiteral.vtable
+  (ref.func $$getClassImpl__java_lang_Class@classliteral.ClassLiteral)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@classliteral.ClassLiteral)
+ )
+)
+;;; End of code for classliteral.ClassLiteral [vtable.init]
+
+;;; Code for classliteral.ClassLiteral [methods]
+
+;;; ClassLiteral ClassLiteral.$create()
+(func $$create__@classliteral.ClassLiteral
+ (result (ref null $classliteral.ClassLiteral))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+ (local $$instance (ref null $classliteral.ClassLiteral))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+  (call $$clinit__void_<once>_@classliteral.ClassLiteral )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+  (local.set $$instance (struct.new $classliteral.ClassLiteral (global.get $classliteral.ClassLiteral.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+  (call $$ctor__void_$p_classliteral_ClassLiteral@classliteral.ClassLiteral (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ClassLiteral.$ctor()
+(func $$ctor__void_$p_classliteral_ClassLiteral@classliteral.ClassLiteral
+ (param $this (ref null $classliteral.ClassLiteral))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ClassLiteral.main()
+(func $m_main__void@classliteral.ClassLiteral
+ (type $function.m_main__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:20:14
+ (local $voidClass (ref null $java.lang.Class))
+ (local $primitiveBooleanClass (ref null $java.lang.Class))
+ (local $primitiveBooleanArrayClass (ref null $java.lang.Class))
+ (local $primitiveBooleanArrayArrayClass (ref null $java.lang.Class))
+ (local $booleanClass (ref null $java.lang.Class))
+ (local $booleanArrayClass (ref null $java.lang.Class))
+ (local $booleanArrayArrayClass (ref null $java.lang.Class))
+ (local $primitiveCharClass (ref null $java.lang.Class))
+ (local $primitiveCharArrayClass (ref null $java.lang.Class))
+ (local $primitiveCharArrayArrayClass (ref null $java.lang.Class))
+ (local $characterClass (ref null $java.lang.Class))
+ (local $characterArrayClass (ref null $java.lang.Class))
+ (local $characterArrayArrayClass (ref null $java.lang.Class))
+ (local $primitiveByteClass (ref null $java.lang.Class))
+ (local $primitiveByteArrayClass (ref null $java.lang.Class))
+ (local $primitiveByteArrayArrayClass (ref null $java.lang.Class))
+ (local $byteClass (ref null $java.lang.Class))
+ (local $byteArrayClass (ref null $java.lang.Class))
+ (local $byteArrayArrayClass (ref null $java.lang.Class))
+ (local $primitiveShortClass (ref null $java.lang.Class))
+ (local $primitiveShortArrayClass (ref null $java.lang.Class))
+ (local $primitiveShortArrayArrayClass (ref null $java.lang.Class))
+ (local $shortClass (ref null $java.lang.Class))
+ (local $shortArrayClass (ref null $java.lang.Class))
+ (local $shortArrayArrayClass (ref null $java.lang.Class))
+ (local $primitiveIntClass (ref null $java.lang.Class))
+ (local $primitiveIntArrayClass (ref null $java.lang.Class))
+ (local $primitiveIntArrayArrayClass (ref null $java.lang.Class))
+ (local $integerClass (ref null $java.lang.Class))
+ (local $integerArrayClass (ref null $java.lang.Class))
+ (local $integerArrayArrayClass (ref null $java.lang.Class))
+ (local $primitiveLongClass (ref null $java.lang.Class))
+ (local $primitiveLongArrayClass (ref null $java.lang.Class))
+ (local $primitiveLongArrayArrayClass (ref null $java.lang.Class))
+ (local $longClass (ref null $java.lang.Class))
+ (local $longArrayClass (ref null $java.lang.Class))
+ (local $longArraArrayClass (ref null $java.lang.Class))
+ (local $primitiveFloatClass (ref null $java.lang.Class))
+ (local $primitiveFloatArrayClass (ref null $java.lang.Class))
+ (local $primitiveFloatArrayArrayClass (ref null $java.lang.Class))
+ (local $floatClass (ref null $java.lang.Class))
+ (local $floatArrayClass (ref null $java.lang.Class))
+ (local $floatArrayArrayClass (ref null $java.lang.Class))
+ (local $primitiveDoubleClass (ref null $java.lang.Class))
+ (local $primitiveDoubleArrayClass (ref null $java.lang.Class))
+ (local $primitiveDoubleArrayArrayClass (ref null $java.lang.Class))
+ (local $doubleClass (ref null $java.lang.Class))
+ (local $doubleArrayClass (ref null $java.lang.Class))
+ (local $doubleArrayArrayClass (ref null $java.lang.Class))
+ (local $objectClass (ref null $java.lang.Class))
+ (local $objectArrayClass (ref null $java.lang.Class))
+ (local $objectArrayArrayClass (ref null $java.lang.Class))
+ (local $nonObjectClass (ref null $java.lang.Class))
+ (local $nonObjectArrayClass (ref null $java.lang.Class))
+ (local $nonObjectArrayArrayClass (ref null $java.lang.Class))
+ (local $this (ref null $classliteral.ClassLiteral))
+ (local.set $this (ref.cast (ref $classliteral.ClassLiteral) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:21:4
+  (local.set $voidClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Void ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:23:4
+  (local.set $primitiveBooleanClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Boolean ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:24:4
+  (local.set $primitiveBooleanArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Boolean ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:25:4
+  (local.set $primitiveBooleanArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Boolean ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:26:4
+  (local.set $booleanClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Boolean ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:27:4
+  (local.set $booleanArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Boolean ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:28:4
+  (local.set $booleanArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Boolean ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:30:4
+  (local.set $primitiveCharClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Character ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:31:4
+  (local.set $primitiveCharArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Character ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:32:4
+  (local.set $primitiveCharArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Character ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:33:4
+  (local.set $characterClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Character ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:34:4
+  (local.set $characterArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Character ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:35:4
+  (local.set $characterArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Character ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:37:4
+  (local.set $primitiveByteClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Byte ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:38:4
+  (local.set $primitiveByteArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Byte ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:39:4
+  (local.set $primitiveByteArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Byte ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:40:4
+  (local.set $byteClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Byte ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:41:4
+  (local.set $byteArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Byte ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:42:4
+  (local.set $byteArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Byte ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:44:4
+  (local.set $primitiveShortClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Short ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:45:4
+  (local.set $primitiveShortArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Short ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:46:4
+  (local.set $primitiveShortArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Short ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:47:4
+  (local.set $shortClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Short ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:48:4
+  (local.set $shortArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Short ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:49:4
+  (local.set $shortArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Short ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:51:4
+  (local.set $primitiveIntClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Integer ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:52:4
+  (local.set $primitiveIntArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Integer ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:53:4
+  (local.set $primitiveIntArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Integer ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:54:4
+  (local.set $integerClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Integer ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:55:4
+  (local.set $integerArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Integer ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:56:4
+  (local.set $integerArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Integer ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:58:4
+  (local.set $primitiveLongClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Long ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:59:4
+  (local.set $primitiveLongArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Long ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:60:4
+  (local.set $primitiveLongArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Long ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:61:4
+  (local.set $longClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Long ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:62:4
+  (local.set $longArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Long ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:63:4
+  (local.set $longArraArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Long ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:65:4
+  (local.set $primitiveFloatClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Float ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:66:4
+  (local.set $primitiveFloatArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Float ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:67:4
+  (local.set $primitiveFloatArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Float ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:68:4
+  (local.set $floatClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Float ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:69:4
+  (local.set $floatArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Float ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:70:4
+  (local.set $floatArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Float ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:72:4
+  (local.set $primitiveDoubleClass (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Double ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:73:4
+  (local.set $primitiveDoubleArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Double ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:74:4
+  (local.set $primitiveDoubleArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadataForPrimitive__java_lang_Class_<once>_@java.lang.Double ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:75:4
+  (local.set $doubleClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Double ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:76:4
+  (local.set $doubleArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Double ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:77:4
+  (local.set $doubleArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Double ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:79:4
+  (local.set $objectClass (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:80:4
+  (local.set $objectArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:81:4
+  (local.set $objectArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:83:4
+  (local.set $nonObjectClass (call $$getClassMetadata__java_lang_Class_<once>_@classliteral.ClassLiteral ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:84:4
+  (local.set $nonObjectArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@classliteral.ClassLiteral ))(i32.const 1)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:85:4
+  (local.set $nonObjectArrayArrayClass (call $function.no.side.effects.m_getArrayType__int__java_lang_Class_$pp_java_lang (ref.as_non_null (call $$getClassMetadata__java_lang_Class_<once>_@classliteral.ClassLiteral ))(i32.const 2)(ref.func $m_getArrayType__int__java_lang_Class_$pp_java_lang@java.lang.Class) ))
+ )
+)
+(elem declare func $m_main__void@classliteral.ClassLiteral)
+
+;;; void ClassLiteral.$clinit()
+(func $$clinit__void_<once>_@classliteral.ClassLiteral
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+  (if (global.get $$class-initialized@classliteral.ClassLiteral)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+  (global.set $$class-initialized@classliteral.ClassLiteral (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/classliteral/readable-j2wasm.js/classliteral/ClassLiteral.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ClassLiteral.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@classliteral.ClassLiteral
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@classliteral.ClassLiteral)))
+   (then
+    (return (global.get $$class@classliteral.ClassLiteral))
+   )
+  )
+  (global.set $$class@classliteral.ClassLiteral (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|classliteral...|__java_lang_String_<once>_@classliteral.ClassLiteral )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@classliteral.ClassLiteral))
+ )
+)
+
+;;; Class<?> ClassLiteral.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@classliteral.ClassLiteral
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $classliteral.ClassLiteral))
+ (local.set $this (ref.cast (ref $classliteral.ClassLiteral) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@classliteral.ClassLiteral ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@classliteral.ClassLiteral)
+;;; End of code for classliteral.ClassLiteral [methods]

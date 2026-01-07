@@ -1,0 +1,394 @@
+
+;;; Code for devirtualizedsupermethodcall.SubNumber [static fields]
+(global $$class-initialized@devirtualizedsupermethodcall.SubNumber (mut i32)
+ (i32.const 0)
+)
+(global $$class@devirtualizedsupermethodcall.SubNumber (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for devirtualizedsupermethodcall.SubNumber [static fields]
+;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [static fields]
+(global $$class-initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (mut i32)
+ (i32.const 0)
+)
+(global $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [static fields]
+;;; Code for devirtualizedsupermethodcall.Main [static fields]
+(global $$class-initialized@devirtualizedsupermethodcall.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@devirtualizedsupermethodcall.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for devirtualizedsupermethodcall.Main [static fields]
+;;; Code for devirtualizedsupermethodcall.SubNumber [vtable.init]
+(global $devirtualizedsupermethodcall.SubNumber.vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable)
+ (struct.new $devirtualizedsupermethodcall.SubNumber.vtable
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.SubNumber)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_byteValue__byte@java.lang.Number)
+  (ref.func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber)
+  (ref.func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber)
+  (ref.func $m_intValue__int@devirtualizedsupermethodcall.SubNumber)
+  (ref.func $m_longValue__long@devirtualizedsupermethodcall.SubNumber)
+  (ref.func $m_shortValue__short@java.lang.Number)
+ )
+)
+(global $java.io.Serializable.vtable@$devirtualizedsupermethodcall.SubNumber (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+;;; End of code for devirtualizedsupermethodcall.SubNumber [vtable.init]
+;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [vtable.init]
+(global $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)
+ (struct.new $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [vtable.init]
+;;; Code for devirtualizedsupermethodcall.Main [vtable.init]
+(global $devirtualizedsupermethodcall.Main.vtable (ref $devirtualizedsupermethodcall.Main.vtable)
+ (struct.new $devirtualizedsupermethodcall.Main.vtable
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@devirtualizedsupermethodcall.Main)
+ )
+)
+;;; End of code for devirtualizedsupermethodcall.Main [vtable.init]
+
+;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [methods]
+
+;;; FooCallsSuperObjectMethod FooCallsSuperObjectMethod.$create()
+(func $$create__@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (result (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+ (local $$instance (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+  (call $$clinit__void_<once>_@devirtualizedsupermethodcall.FooCallsSuperObjectMethod )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+  (local.set $$instance (struct.new $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+  (call $$ctor__void_$p_devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void FooCallsSuperObjectMethod.$ctor()
+(func $$ctor__void_$p_devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (param $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int FooCallsSuperObjectMethod.hashCode()
+(func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:42:13
+ (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:43:4
+  (return (call $m_hashCode__int@java.lang.Object (ref.as_non_null (local.get $this))))
+ )
+)
+(elem declare func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
+
+;;; void FooCallsSuperObjectMethod.$clinit()
+(func $$clinit__void_<once>_@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+  (if (global.get $$class-initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+  (global.set $$class-initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:40:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> FooCallsSuperObjectMethod.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)))
+   (then
+    (return (global.get $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+   )
+  )
+  (global.set $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|devirtualize...|__java_lang_String_<once>_@devirtualizedsupermethodcall.FooCallsSuperObjectMethod )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ )
+)
+
+;;; Class<?> FooCallsSuperObjectMethod.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@devirtualizedsupermethodcall.FooCallsSuperObjectMethod ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
+;;; End of code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [methods]
+;;; Code for devirtualizedsupermethodcall.Main [methods]
+
+;;; Main Main.$create()
+(func $$create__@devirtualizedsupermethodcall.Main
+ (result (ref null $devirtualizedsupermethodcall.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+ (local $$instance (ref null $devirtualizedsupermethodcall.Main))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+  (call $$clinit__void_<once>_@devirtualizedsupermethodcall.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+  (local.set $$instance (struct.new $devirtualizedsupermethodcall.Main (global.get $devirtualizedsupermethodcall.Main.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+  (call $$ctor__void_$p_devirtualizedsupermethodcall_Main@devirtualizedsupermethodcall.Main (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_devirtualizedsupermethodcall_Main@devirtualizedsupermethodcall.Main
+ (param $this (ref null $devirtualizedsupermethodcall.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.main()
+(func $m_main__void@devirtualizedsupermethodcall.Main
+ (type $function.m_main__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:48:14
+ (local $fooCallsSuperObjectMethods (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ (local $sn (ref null $devirtualizedsupermethodcall.SubNumber))
+ (local $this (ref null $devirtualizedsupermethodcall.Main))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.Main) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:49:4
+  (local.set $fooCallsSuperObjectMethods (call $$create__@devirtualizedsupermethodcall.FooCallsSuperObjectMethod ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:50:4
+  (drop (call_ref $function.m_hashCode__int (ref.as_non_null (local.get $fooCallsSuperObjectMethods))(struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable $m_hashCode__int (struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod $vtable(local.get $fooCallsSuperObjectMethods)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:52:4
+  (local.set $sn (call $$create__@devirtualizedsupermethodcall.SubNumber ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:53:4
+  (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $sn))(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_byteValue__byte (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:54:4
+  (drop (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $sn))(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_doubleValue__double (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:55:4
+  (drop (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $sn))(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_floatValue__float (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:56:4
+  (drop (call_ref $function.m_intValue__int (ref.as_non_null (local.get $sn))(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_intValue__int (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:57:4
+  (drop (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $sn))(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_shortValue__short (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
+ )
+)
+(elem declare func $m_main__void@devirtualizedsupermethodcall.Main)
+
+;;; void Main.$clinit()
+(func $$clinit__void_<once>_@devirtualizedsupermethodcall.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+  (if (global.get $$class-initialized@devirtualizedsupermethodcall.Main)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+  (global.set $$class-initialized@devirtualizedsupermethodcall.Main (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:47:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@devirtualizedsupermethodcall.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@devirtualizedsupermethodcall.Main)))
+   (then
+    (return (global.get $$class@devirtualizedsupermethodcall.Main))
+   )
+  )
+  (global.set $$class@devirtualizedsupermethodcall.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|devirtualize...|__java_lang_String_<once>_@devirtualizedsupermethodcall.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@devirtualizedsupermethodcall.Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $devirtualizedsupermethodcall.Main))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.Main) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@devirtualizedsupermethodcall.Main ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.Main)
+;;; End of code for devirtualizedsupermethodcall.Main [methods]
+;;; Code for devirtualizedsupermethodcall.SubNumber [methods]
+
+;;; SubNumber SubNumber.$create()
+(func $$create__@devirtualizedsupermethodcall.SubNumber
+ (result (ref null $devirtualizedsupermethodcall.SubNumber))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+ (local $$instance (ref null $devirtualizedsupermethodcall.SubNumber))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+  (call $$clinit__void_<once>_@devirtualizedsupermethodcall.SubNumber )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+  (local.set $$instance (struct.new $devirtualizedsupermethodcall.SubNumber (global.get $devirtualizedsupermethodcall.SubNumber.vtable) (global.get $devirtualizedsupermethodcall.SubNumber.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+  (call $$ctor__void_$p_devirtualizedsupermethodcall_SubNumber@devirtualizedsupermethodcall.SubNumber (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SubNumber.$ctor()
+(func $$ctor__void_$p_devirtualizedsupermethodcall_SubNumber@devirtualizedsupermethodcall.SubNumber
+ (param $this (ref null $devirtualizedsupermethodcall.SubNumber))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+  (call $$ctor__void_$p_java_lang_Number@java.lang.Number (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int SubNumber.intValue()
+(func $m_intValue__int@devirtualizedsupermethodcall.SubNumber
+ (type $function.m_intValue__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:20:13
+ (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:21:4
+  (return (i32.const 0))
+ )
+)
+(elem declare func $m_intValue__int@devirtualizedsupermethodcall.SubNumber)
+
+;;; long SubNumber.longValue()
+(func $m_longValue__long@devirtualizedsupermethodcall.SubNumber
+ (type $function.m_longValue__long)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i64)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:25:14
+ (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:26:4
+  (return (i64.const 0))
+ )
+)
+(elem declare func $m_longValue__long@devirtualizedsupermethodcall.SubNumber)
+
+;;; float SubNumber.floatValue()
+(func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber
+ (type $function.m_floatValue__float)
+ (param $this.untyped (ref $java.lang.Object))
+ (result f32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:30:15
+ (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:31:4
+  (return (f32.const 0.0))
+ )
+)
+(elem declare func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber)
+
+;;; double SubNumber.doubleValue()
+(func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber
+ (type $function.m_doubleValue__double)
+ (param $this.untyped (ref $java.lang.Object))
+ (result f64)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:35:16
+ (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:36:4
+  (return (f64.const 0.0))
+ )
+)
+(elem declare func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber)
+
+;;; void SubNumber.$clinit()
+(func $$clinit__void_<once>_@devirtualizedsupermethodcall.SubNumber
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+  (if (global.get $$class-initialized@devirtualizedsupermethodcall.SubNumber)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+  (global.set $$class-initialized@devirtualizedsupermethodcall.SubNumber (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedsupermethodcall/readable-j2wasm.js/devirtualizedsupermethodcall/Main.java:18:6
+  (call $$clinit__void_<once>_@java.lang.Number )
+ )
+)
+
+;;; Class<T> SubNumber.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@devirtualizedsupermethodcall.SubNumber
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@devirtualizedsupermethodcall.SubNumber)))
+   (then
+    (return (global.get $$class@devirtualizedsupermethodcall.SubNumber))
+   )
+  )
+  (global.set $$class@devirtualizedsupermethodcall.SubNumber (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|devirtualize...|__java_lang_String_<once>_@devirtualizedsupermethodcall.SubNumber )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Number )))
+  (return (global.get $$class@devirtualizedsupermethodcall.SubNumber))
+ )
+)
+
+;;; Class<?> SubNumber.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.SubNumber
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
+ (local.set $this (ref.cast (ref $devirtualizedsupermethodcall.SubNumber) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@devirtualizedsupermethodcall.SubNumber ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedsupermethodcall.SubNumber)
+;;; End of code for devirtualizedsupermethodcall.SubNumber [methods]

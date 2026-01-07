@@ -1,0 +1,455 @@
+
+;;; Code for accidentaloverride.Parent [static fields]
+(global $$class-initialized@accidentaloverride.Parent (mut i32)
+ (i32.const 0)
+)
+(global $$class@accidentaloverride.Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for accidentaloverride.Parent [static fields]
+;;; Code for accidentaloverride.SuperInterface [static fields]
+(global $$class-initialized@accidentaloverride.SuperInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@accidentaloverride.SuperInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for accidentaloverride.SuperInterface [static fields]
+;;; Code for accidentaloverride.AnotherAccidentalOverride [static fields]
+(global $$class-initialized@accidentaloverride.AnotherAccidentalOverride (mut i32)
+ (i32.const 0)
+)
+(global $$class@accidentaloverride.AnotherAccidentalOverride (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for accidentaloverride.AnotherAccidentalOverride [static fields]
+;;; Code for accidentaloverride.AccidentalOverride [static fields]
+(global $$class-initialized@accidentaloverride.AccidentalOverride (mut i32)
+ (i32.const 0)
+)
+(global $$class@accidentaloverride.AccidentalOverride (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for accidentaloverride.AccidentalOverride [static fields]
+;;; Code for accidentaloverride.Parent [vtable.init]
+(global $accidentaloverride.Parent.vtable (ref $accidentaloverride.Parent.vtable)
+ (struct.new $accidentaloverride.Parent.vtable
+  (ref.func $$getClassImpl__java_lang_Class@accidentaloverride.Parent)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
+ )
+)
+;;; End of code for accidentaloverride.Parent [vtable.init]
+;;; Code for accidentaloverride.AnotherAccidentalOverride [vtable.init]
+(global $accidentaloverride.AnotherAccidentalOverride.vtable (ref $accidentaloverride.AnotherAccidentalOverride.vtable)
+ (struct.new $accidentaloverride.AnotherAccidentalOverride.vtable
+  (ref.func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
+  (ref.func $m_bar__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
+  (ref.func $m_bar__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
+  (ref.func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
+  (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
+ )
+)
+(global $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AnotherAccidentalOverride (ref $accidentaloverride.SuperInterface.vtable)
+ (struct.new $accidentaloverride.SuperInterface.vtable
+  (ref.func $m_bar__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
+  (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
+ )
+)
+;;; End of code for accidentaloverride.AnotherAccidentalOverride [vtable.init]
+;;; Code for accidentaloverride.AccidentalOverride [vtable.init]
+(global $accidentaloverride.AccidentalOverride.vtable (ref $accidentaloverride.AccidentalOverride.vtable)
+ (struct.new $accidentaloverride.AccidentalOverride.vtable
+  (ref.func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
+  (ref.func $m_bar__java_lang_Object__void@accidentaloverride.AccidentalOverride)
+  (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
+ )
+)
+(global $accidentaloverride.SuperInterface.vtable@$accidentaloverride.AccidentalOverride (ref $accidentaloverride.SuperInterface.vtable)
+ (struct.new $accidentaloverride.SuperInterface.vtable
+  (ref.func $m_bar__java_lang_Object__void@accidentaloverride.AccidentalOverride)
+  (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
+ )
+)
+;;; End of code for accidentaloverride.AccidentalOverride [vtable.init]
+
+;;; Code for accidentaloverride.SuperInterface [methods]
+
+;;; void SuperInterface.$clinit()
+(func $$clinit__void_<once>_@accidentaloverride.SuperInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:26:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:26:10
+  (if (global.get $$class-initialized@accidentaloverride.SuperInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:26:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:26:10
+  (global.set $$class-initialized@accidentaloverride.SuperInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> SuperInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.SuperInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@accidentaloverride.SuperInterface)))
+   (then
+    (return (global.get $$class@accidentaloverride.SuperInterface))
+   )
+  )
+  (global.set $$class@accidentaloverride.SuperInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|accidentalov...|__java_lang_String_<once>_@accidentaloverride.SuperInterface )))
+  (return (global.get $$class@accidentaloverride.SuperInterface))
+ )
+)
+;;; End of code for accidentaloverride.SuperInterface [methods]
+;;; Code for accidentaloverride.Parent [methods]
+
+;;; Parent<T> Parent.$create()
+(func $$create__@accidentaloverride.Parent
+ (result (ref null $accidentaloverride.Parent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+ (local $$instance (ref null $accidentaloverride.Parent))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+  (call $$clinit__void_<once>_@accidentaloverride.Parent )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+  (local.set $$instance (struct.new $accidentaloverride.Parent (global.get $accidentaloverride.Parent.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+  (call $$ctor__void_$p_accidentaloverride_Parent@accidentaloverride.Parent (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_accidentaloverride_Parent@accidentaloverride.Parent
+ (param $this (ref null $accidentaloverride.Parent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Parent.foo(T e)
+(func $m_foo__java_lang_Error__void@accidentaloverride.Parent
+ (type $function.m_foo__java_lang_Error__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $e (ref null $java.lang.Error))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:20:14
+ (local $this (ref null $accidentaloverride.Parent))
+ (local.set $this (ref.cast (ref $accidentaloverride.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
+
+;;; void Parent.bar(T e)
+(func $m_bar__java_lang_Error__void@accidentaloverride.Parent
+ (type $function.m_bar__java_lang_Error__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $e (ref null $java.lang.Error))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:23:20
+ (local $this (ref null $accidentaloverride.Parent))
+ (local.set $this (ref.cast (ref $accidentaloverride.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_bar__java_lang_Error__void@accidentaloverride.Parent)
+
+;;; void Parent.$clinit()
+(func $$clinit__void_<once>_@accidentaloverride.Parent
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+  (if (global.get $$class-initialized@accidentaloverride.Parent)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+  (global.set $$class-initialized@accidentaloverride.Parent (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:18:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@accidentaloverride.Parent)))
+   (then
+    (return (global.get $$class@accidentaloverride.Parent))
+   )
+  )
+  (global.set $$class@accidentaloverride.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|accidentalov...|__java_lang_String_<once>_@accidentaloverride.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@accidentaloverride.Parent))
+ )
+)
+
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@accidentaloverride.Parent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $accidentaloverride.Parent))
+ (local.set $this (ref.cast (ref $accidentaloverride.Parent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.Parent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.Parent)
+;;; End of code for accidentaloverride.Parent [methods]
+;;; Code for accidentaloverride.AnotherAccidentalOverride [methods]
+
+;;; AnotherAccidentalOverride AnotherAccidentalOverride.$create()
+(func $$create__@accidentaloverride.AnotherAccidentalOverride
+ (result (ref null $accidentaloverride.AnotherAccidentalOverride))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+ (local $$instance (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call $$clinit__void_<once>_@accidentaloverride.AnotherAccidentalOverride )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (local.set $$instance (struct.new $accidentaloverride.AnotherAccidentalOverride (global.get $accidentaloverride.AnotherAccidentalOverride.vtable) (global.get $accidentaloverride.AnotherAccidentalOverride.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call $$ctor__void_$p_accidentaloverride_AnotherAccidentalOverride@accidentaloverride.AnotherAccidentalOverride (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AnotherAccidentalOverride.$ctor()
+(func $$ctor__void_$p_accidentaloverride_AnotherAccidentalOverride@accidentaloverride.AnotherAccidentalOverride
+ (param $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call $$ctor__void_$p_accidentaloverride_Parent@accidentaloverride.Parent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void AnotherAccidentalOverride.foo(T arg0)
+(func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.m_foo__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call_ref $function.m_foo__java_lang_Error__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.AssertionError) (local.get $arg0))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
+
+;;; void AnotherAccidentalOverride.bar(T arg0)
+(func $m_bar__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.m_bar__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.AssertionError) (local.get $arg0)))
+ )
+)
+(elem declare func $m_bar__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
+
+;;; void AnotherAccidentalOverride.foo(AssertionError arg0)
+(func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.m_foo__java_lang_AssertionError__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.AssertionError))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call $m_foo__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
+
+;;; void AnotherAccidentalOverride.bar(AssertionError arg0)
+(func $m_bar__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.m_bar__java_lang_AssertionError__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.AssertionError))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_bar__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
+
+;;; void AnotherAccidentalOverride.$clinit()
+(func $$clinit__void_<once>_@accidentaloverride.AnotherAccidentalOverride
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (if (global.get $$class-initialized@accidentaloverride.AnotherAccidentalOverride)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (global.set $$class-initialized@accidentaloverride.AnotherAccidentalOverride (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:36:6
+  (call $$clinit__void_<once>_@accidentaloverride.Parent )
+ )
+)
+
+;;; Class<T> AnotherAccidentalOverride.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.AnotherAccidentalOverride
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@accidentaloverride.AnotherAccidentalOverride)))
+   (then
+    (return (global.get $$class@accidentaloverride.AnotherAccidentalOverride))
+   )
+  )
+  (global.set $$class@accidentaloverride.AnotherAccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|accidentalov...|__java_lang_String_<once>_@accidentaloverride.AnotherAccidentalOverride )(call $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.Parent )))
+  (return (global.get $$class@accidentaloverride.AnotherAccidentalOverride))
+ )
+)
+
+;;; Class<?> AnotherAccidentalOverride.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AnotherAccidentalOverride) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.AnotherAccidentalOverride ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
+;;; End of code for accidentaloverride.AnotherAccidentalOverride [methods]
+;;; Code for accidentaloverride.AccidentalOverride [methods]
+
+;;; AccidentalOverride AccidentalOverride.$create()
+(func $$create__@accidentaloverride.AccidentalOverride
+ (result (ref null $accidentaloverride.AccidentalOverride))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+ (local $$instance (ref null $accidentaloverride.AccidentalOverride))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (call $$clinit__void_<once>_@accidentaloverride.AccidentalOverride )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (local.set $$instance (struct.new $accidentaloverride.AccidentalOverride (global.get $accidentaloverride.AccidentalOverride.vtable) (global.get $accidentaloverride.AccidentalOverride.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (call $$ctor__void_$p_accidentaloverride_AccidentalOverride@accidentaloverride.AccidentalOverride (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AccidentalOverride.$ctor()
+(func $$ctor__void_$p_accidentaloverride_AccidentalOverride@accidentaloverride.AccidentalOverride
+ (param $this (ref null $accidentaloverride.AccidentalOverride))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (call $$ctor__void_$p_accidentaloverride_Parent@accidentaloverride.Parent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void AccidentalOverride.foo(T arg0)
+(func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride
+ (type $function.m_foo__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+ (local $this (ref null $accidentaloverride.AccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AccidentalOverride) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (call_ref $function.m_foo__java_lang_Error__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $arg0))(struct.get $accidentaloverride.AccidentalOverride.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.AccidentalOverride $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
+
+;;; void AccidentalOverride.bar(T arg0)
+(func $m_bar__java_lang_Object__void@accidentaloverride.AccidentalOverride
+ (type $function.m_bar__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+ (local $this (ref null $accidentaloverride.AccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AccidentalOverride) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (call $m_bar__java_lang_Error__void@accidentaloverride.Parent (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $arg0)))
+ )
+)
+(elem declare func $m_bar__java_lang_Object__void@accidentaloverride.AccidentalOverride)
+
+;;; void AccidentalOverride.$clinit()
+(func $$clinit__void_<once>_@accidentaloverride.AccidentalOverride
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (if (global.get $$class-initialized@accidentaloverride.AccidentalOverride)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (global.set $$class-initialized@accidentaloverride.AccidentalOverride (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/accidentaloverride/readable-j2wasm.js/accidentaloverride/AccidentalOverride.java:46:13
+  (call $$clinit__void_<once>_@accidentaloverride.Parent )
+ )
+)
+
+;;; Class<T> AccidentalOverride.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.AccidentalOverride
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@accidentaloverride.AccidentalOverride)))
+   (then
+    (return (global.get $$class@accidentaloverride.AccidentalOverride))
+   )
+  )
+  (global.set $$class@accidentaloverride.AccidentalOverride (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|accidentalov...|__java_lang_String_<once>_@accidentaloverride.AccidentalOverride )(call $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.Parent )))
+  (return (global.get $$class@accidentaloverride.AccidentalOverride))
+ )
+)
+
+;;; Class<?> AccidentalOverride.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $accidentaloverride.AccidentalOverride))
+ (local.set $this (ref.cast (ref $accidentaloverride.AccidentalOverride) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@accidentaloverride.AccidentalOverride ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@accidentaloverride.AccidentalOverride)
+;;; End of code for accidentaloverride.AccidentalOverride [methods]

@@ -1,0 +1,94 @@
+
+;;; Code for supercalldefault.SuperCallDefault [static fields]
+(global $$class-initialized@supercalldefault.SuperCallDefault (mut i32)
+ (i32.const 0)
+)
+(global $$class@supercalldefault.SuperCallDefault (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for supercalldefault.SuperCallDefault [static fields]
+;;; Code for supercalldefault.SuperCallDefault [vtable.init]
+(global $supercalldefault.SuperCallDefault.vtable (ref $supercalldefault.SuperCallDefault.vtable)
+ (struct.new $supercalldefault.SuperCallDefault.vtable
+  (ref.func $$getClassImpl__java_lang_Class@supercalldefault.SuperCallDefault)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for supercalldefault.SuperCallDefault [vtable.init]
+
+;;; Code for supercalldefault.SuperCallDefault [methods]
+
+;;; SuperCallDefault SuperCallDefault.$create()
+(func $$create__@supercalldefault.SuperCallDefault
+ (result (ref null $supercalldefault.SuperCallDefault))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
+ (local $$instance (ref null $supercalldefault.SuperCallDefault))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
+  (call $$clinit__void_<once>_@supercalldefault.SuperCallDefault )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
+  (local.set $$instance (struct.new $supercalldefault.SuperCallDefault (global.get $supercalldefault.SuperCallDefault.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
+  (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SuperCallDefault.$ctor()
+(func $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault
+ (param $this (ref null $supercalldefault.SuperCallDefault))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:20:4
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void SuperCallDefault.$clinit()
+(func $$clinit__void_<once>_@supercalldefault.SuperCallDefault
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
+  (if (global.get $$class-initialized@supercalldefault.SuperCallDefault)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
+  (global.set $$class-initialized@supercalldefault.SuperCallDefault (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> SuperCallDefault.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@supercalldefault.SuperCallDefault
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@supercalldefault.SuperCallDefault)))
+   (then
+    (return (global.get $$class@supercalldefault.SuperCallDefault))
+   )
+  )
+  (global.set $$class@supercalldefault.SuperCallDefault (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supercalldef...|__java_lang_String_<once>_@supercalldefault.SuperCallDefault )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@supercalldefault.SuperCallDefault))
+ )
+)
+
+;;; Class<?> SuperCallDefault.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@supercalldefault.SuperCallDefault
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $supercalldefault.SuperCallDefault))
+ (local.set $this (ref.cast (ref $supercalldefault.SuperCallDefault) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supercalldefault.SuperCallDefault ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@supercalldefault.SuperCallDefault)
+;;; End of code for supercalldefault.SuperCallDefault [methods]

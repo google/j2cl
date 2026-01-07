@@ -1,0 +1,94 @@
+
+;;; Code for jstypewithnamespace.JsTypeWithNamespace [static fields]
+(global $$class-initialized@jstypewithnamespace.JsTypeWithNamespace (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstypewithnamespace.JsTypeWithNamespace (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for jstypewithnamespace.JsTypeWithNamespace [static fields]
+;;; Code for jstypewithnamespace.JsTypeWithNamespace [vtable.init]
+(global $jstypewithnamespace.JsTypeWithNamespace.vtable (ref $jstypewithnamespace.JsTypeWithNamespace.vtable)
+ (struct.new $jstypewithnamespace.JsTypeWithNamespace.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for jstypewithnamespace.JsTypeWithNamespace [vtable.init]
+
+;;; Code for jstypewithnamespace.JsTypeWithNamespace [methods]
+
+;;; JsTypeWithNamespace JsTypeWithNamespace.$create()
+(func $$create__@jstypewithnamespace.JsTypeWithNamespace
+ (result (ref null $jstypewithnamespace.JsTypeWithNamespace))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+ (local $$instance (ref null $jstypewithnamespace.JsTypeWithNamespace))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (call $$clinit__void_<once>_@jstypewithnamespace.JsTypeWithNamespace )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (local.set $$instance (struct.new $jstypewithnamespace.JsTypeWithNamespace (global.get $jstypewithnamespace.JsTypeWithNamespace.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (call $$ctor__void_$p_jstypewithnamespace_JsTypeWithNamespace@jstypewithnamespace.JsTypeWithNamespace (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsTypeWithNamespace.$ctor()
+(func $$ctor__void_$p_jstypewithnamespace_JsTypeWithNamespace@jstypewithnamespace.JsTypeWithNamespace
+ (param $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void JsTypeWithNamespace.$clinit()
+(func $$clinit__void_<once>_@jstypewithnamespace.JsTypeWithNamespace
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (if (global.get $$class-initialized@jstypewithnamespace.JsTypeWithNamespace)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (global.set $$class-initialized@jstypewithnamespace.JsTypeWithNamespace (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithnamespace/readable-j2wasm.js/jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> JsTypeWithNamespace.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstypewithnamespace.JsTypeWithNamespace
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstypewithnamespace.JsTypeWithNamespace)))
+   (then
+    (return (global.get $$class@jstypewithnamespace.JsTypeWithNamespace))
+   )
+  )
+  (global.set $$class@jstypewithnamespace.JsTypeWithNamespace (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstypewithna...|__java_lang_String_<once>_@jstypewithnamespace.JsTypeWithNamespace )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jstypewithnamespace.JsTypeWithNamespace))
+ )
+)
+
+;;; Class<?> JsTypeWithNamespace.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
+ (local.set $this (ref.cast (ref $jstypewithnamespace.JsTypeWithNamespace) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstypewithnamespace.JsTypeWithNamespace ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace)
+;;; End of code for jstypewithnamespace.JsTypeWithNamespace [methods]

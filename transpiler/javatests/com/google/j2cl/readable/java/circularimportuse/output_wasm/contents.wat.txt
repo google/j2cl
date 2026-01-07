@@ -1,0 +1,326 @@
+
+;;; Code for circularimportuse.Left [static fields]
+(global $$class-initialized@circularimportuse.Left (mut i32)
+ (i32.const 0)
+)
+(global $$class@circularimportuse.Left (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for circularimportuse.Left [static fields]
+;;; Code for circularimportuse.Main [static fields]
+(global $$class-initialized@circularimportuse.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@circularimportuse.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for circularimportuse.Main [static fields]
+;;; Code for circularimportuse.Right [static fields]
+(global $$class-initialized@circularimportuse.Right (mut i32)
+ (i32.const 0)
+)
+(global $$class@circularimportuse.Right (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for circularimportuse.Right [static fields]
+;;; Code for circularimportuse.Left [vtable.init]
+(global $circularimportuse.Left.vtable (ref $circularimportuse.Left.vtable)
+ (struct.new $circularimportuse.Left.vtable
+  (ref.func $$getClassImpl__java_lang_Class@circularimportuse.Left)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left)
+ )
+)
+;;; End of code for circularimportuse.Left [vtable.init]
+;;; Code for circularimportuse.Main [vtable.init]
+(global $circularimportuse.Main.vtable (ref $circularimportuse.Main.vtable)
+ (struct.new $circularimportuse.Main.vtable
+  (ref.func $$getClassImpl__java_lang_Class@circularimportuse.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for circularimportuse.Main [vtable.init]
+;;; Code for circularimportuse.Right [vtable.init]
+(global $circularimportuse.Right.vtable (ref $circularimportuse.Right.vtable)
+ (struct.new $circularimportuse.Right.vtable
+  (ref.func $$getClassImpl__java_lang_Class@circularimportuse.Right)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right)
+ )
+)
+;;; End of code for circularimportuse.Right [vtable.init]
+
+;;; Code for circularimportuse.Left [methods]
+
+;;; Left Left.$create()
+(func $$create__@circularimportuse.Left
+ (result (ref null $circularimportuse.Left))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+ (local $$instance (ref null $circularimportuse.Left))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+  (call $$clinit__void_<once>_@circularimportuse.Left )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+  (local.set $$instance (struct.new $circularimportuse.Left (global.get $circularimportuse.Left.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+  (call $$ctor__void_$p_circularimportuse_Left@circularimportuse.Left (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Left.$ctor()
+(func $$ctor__void_$p_circularimportuse_Left@circularimportuse.Left
+ (param $this (ref null $circularimportuse.Left))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Right Left.createRight()
+(func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left
+ (type $function.m_createRight__circularimportuse_Right_$pp_circularimportuse)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $circularimportuse.Right))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:19:8
+ (local $this (ref null $circularimportuse.Left))
+ (local.set $this (ref.cast (ref $circularimportuse.Left) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:20:4
+  (return (call $$create__@circularimportuse.Right ))
+ )
+)
+(elem declare func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left)
+
+;;; void Left.$clinit()
+(func $$clinit__void_<once>_@circularimportuse.Left
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+  (if (global.get $$class-initialized@circularimportuse.Left)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+  (global.set $$class-initialized@circularimportuse.Left (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Left.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Left.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@circularimportuse.Left
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@circularimportuse.Left)))
+   (then
+    (return (global.get $$class@circularimportuse.Left))
+   )
+  )
+  (global.set $$class@circularimportuse.Left (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|circularimpo...|__java_lang_String_<once>_@circularimportuse.Left )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@circularimportuse.Left))
+ )
+)
+
+;;; Class<?> Left.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@circularimportuse.Left
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $circularimportuse.Left))
+ (local.set $this (ref.cast (ref $circularimportuse.Left) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@circularimportuse.Left ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Left)
+;;; End of code for circularimportuse.Left [methods]
+;;; Code for circularimportuse.Main [methods]
+
+;;; Main Main.$create()
+(func $$create__@circularimportuse.Main
+ (result (ref null $circularimportuse.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+ (local $$instance (ref null $circularimportuse.Main))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+  (call $$clinit__void_<once>_@circularimportuse.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+  (local.set $$instance (struct.new $circularimportuse.Main (global.get $circularimportuse.Main.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+  (call $$ctor__void_$p_circularimportuse_Main@circularimportuse.Main (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_circularimportuse_Main@circularimportuse.Main
+ (param $this (ref null $circularimportuse.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.main(String... args)
+(func $m_main__arrayOf_java_lang_String__void@circularimportuse.Main
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:20:21
+ (local $left (ref null $circularimportuse.Left))
+ (local $right (ref null $circularimportuse.Right))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:20:42
+  (call $$clinit__void_<once>_@circularimportuse.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:21:4
+  (local.set $left (call $$create__@circularimportuse.Left ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:22:4
+  (local.set $right (call $$create__@circularimportuse.Right ))
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void_<once>_@circularimportuse.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+  (if (global.get $$class-initialized@circularimportuse.Main)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+  (global.set $$class-initialized@circularimportuse.Main (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Main.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@circularimportuse.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@circularimportuse.Main)))
+   (then
+    (return (global.get $$class@circularimportuse.Main))
+   )
+  )
+  (global.set $$class@circularimportuse.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|circularimpo...|__java_lang_String_<once>_@circularimportuse.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@circularimportuse.Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@circularimportuse.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $circularimportuse.Main))
+ (local.set $this (ref.cast (ref $circularimportuse.Main) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@circularimportuse.Main ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Main)
+;;; End of code for circularimportuse.Main [methods]
+;;; Code for circularimportuse.Right [methods]
+
+;;; Right Right.$create()
+(func $$create__@circularimportuse.Right
+ (result (ref null $circularimportuse.Right))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+ (local $$instance (ref null $circularimportuse.Right))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+  (call $$clinit__void_<once>_@circularimportuse.Right )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+  (local.set $$instance (struct.new $circularimportuse.Right (global.get $circularimportuse.Right.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+  (call $$ctor__void_$p_circularimportuse_Right@circularimportuse.Right (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Right.$ctor()
+(func $$ctor__void_$p_circularimportuse_Right@circularimportuse.Right
+ (param $this (ref null $circularimportuse.Right))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Left Right.createLeft()
+(func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right
+ (type $function.m_createLeft__circularimportuse_Left_$pp_circularimportuse)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $circularimportuse.Left))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:19:7
+ (local $this (ref null $circularimportuse.Right))
+ (local.set $this (ref.cast (ref $circularimportuse.Right) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:20:4
+  (return (call $$create__@circularimportuse.Left ))
+ )
+)
+(elem declare func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right)
+
+;;; void Right.$clinit()
+(func $$clinit__void_<once>_@circularimportuse.Right
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+  (if (global.get $$class-initialized@circularimportuse.Right)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+  (global.set $$class-initialized@circularimportuse.Right (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/circularimportuse/readable-j2wasm.js/circularimportuse/Right.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Right.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@circularimportuse.Right
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@circularimportuse.Right)))
+   (then
+    (return (global.get $$class@circularimportuse.Right))
+   )
+  )
+  (global.set $$class@circularimportuse.Right (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|circularimpo...|__java_lang_String_<once>_@circularimportuse.Right )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@circularimportuse.Right))
+ )
+)
+
+;;; Class<?> Right.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@circularimportuse.Right
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $circularimportuse.Right))
+ (local.set $this (ref.cast (ref $circularimportuse.Right) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@circularimportuse.Right ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@circularimportuse.Right)
+;;; End of code for circularimportuse.Right [methods]

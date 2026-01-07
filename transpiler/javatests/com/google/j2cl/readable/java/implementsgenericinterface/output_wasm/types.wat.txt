@@ -1,0 +1,41 @@
+
+;;; Code for implementsgenericinterface.GenericInterface [type definition]
+(type $implementsgenericinterface.GenericInterface.vtable (sub (struct
+ ))
+)
+;;; End of code for implementsgenericinterface.GenericInterface [type definition]
+;;; Code for implementsgenericinterface.GenericSubInterface [type definition]
+(type $implementsgenericinterface.GenericSubInterface.vtable (sub $implementsgenericinterface.GenericInterface.vtable (struct
+ ))
+)
+;;; End of code for implementsgenericinterface.GenericSubInterface [type definition]
+;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [type definition]
+(type $implementsgenericinterface.GenericInterfaceGenericImpl (sub $java.lang.Object (struct
+ (field $vtable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.vtable))
+ (field $itable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for implementsgenericinterface.GenericInterfaceGenericImpl [type definition]
+;;; Code for implementsgenericinterface.GenericInterfaceImpl [type definition]
+(type $implementsgenericinterface.GenericInterfaceImpl (sub $java.lang.Object (struct
+ (field $vtable (ref $implementsgenericinterface.GenericInterfaceImpl.vtable))
+ (field $itable (ref $implementsgenericinterface.GenericInterfaceImpl.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $implementsgenericinterface.GenericInterfaceImpl.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for implementsgenericinterface.GenericInterfaceImpl [type definition]

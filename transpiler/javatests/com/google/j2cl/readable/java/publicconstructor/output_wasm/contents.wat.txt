@@ -1,0 +1,94 @@
+
+;;; Code for publicconstructor.PublicConstructor [static fields]
+(global $$class-initialized@publicconstructor.PublicConstructor (mut i32)
+ (i32.const 0)
+)
+(global $$class@publicconstructor.PublicConstructor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for publicconstructor.PublicConstructor [static fields]
+;;; Code for publicconstructor.PublicConstructor [vtable.init]
+(global $publicconstructor.PublicConstructor.vtable (ref $publicconstructor.PublicConstructor.vtable)
+ (struct.new $publicconstructor.PublicConstructor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@publicconstructor.PublicConstructor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for publicconstructor.PublicConstructor [vtable.init]
+
+;;; Code for publicconstructor.PublicConstructor [methods]
+
+;;; PublicConstructor PublicConstructor.$create()
+(func $$create__@publicconstructor.PublicConstructor
+ (result (ref null $publicconstructor.PublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
+ (local $$instance (ref null $publicconstructor.PublicConstructor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
+  (call $$clinit__void_<once>_@publicconstructor.PublicConstructor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
+  (local.set $$instance (struct.new $publicconstructor.PublicConstructor (global.get $publicconstructor.PublicConstructor.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
+  (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PublicConstructor.$ctor()
+(func $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor
+ (param $this (ref null $publicconstructor.PublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:19:29
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void PublicConstructor.$clinit()
+(func $$clinit__void_<once>_@publicconstructor.PublicConstructor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
+  (if (global.get $$class-initialized@publicconstructor.PublicConstructor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
+  (global.set $$class-initialized@publicconstructor.PublicConstructor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/publicconstructor/readable-j2wasm.js/publicconstructor/PublicConstructor.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> PublicConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@publicconstructor.PublicConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@publicconstructor.PublicConstructor)))
+   (then
+    (return (global.get $$class@publicconstructor.PublicConstructor))
+   )
+  )
+  (global.set $$class@publicconstructor.PublicConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|publicconstr...|__java_lang_String_<once>_@publicconstructor.PublicConstructor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@publicconstructor.PublicConstructor))
+ )
+)
+
+;;; Class<?> PublicConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@publicconstructor.PublicConstructor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $publicconstructor.PublicConstructor))
+ (local.set $this (ref.cast (ref $publicconstructor.PublicConstructor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@publicconstructor.PublicConstructor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@publicconstructor.PublicConstructor)
+;;; End of code for publicconstructor.PublicConstructor [methods]

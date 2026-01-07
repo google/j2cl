@@ -1,0 +1,295 @@
+
+;;; Code for recordclass.RecordClass.I [type definition]
+(type $recordclass.RecordClass.I.vtable (sub (struct
+ (field $m_a__java_lang_String (ref $function.m_a__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.I [type definition]
+;;; Code for recordclass.RecordClass.PropertyAccessors [type definition]
+(type $recordclass.RecordClass.PropertyAccessors.vtable (sub (struct
+ (field $m_nonParametric__java_lang_String (ref $function.m_nonParametric__java_lang_String))
+ (field $m_parametric__java_lang_Object (ref $function.m_parametric__java_lang_Object))
+ ))
+)
+;;; End of code for recordclass.RecordClass.PropertyAccessors [type definition]
+;;; Code for recordclass.RecordClass [type definition]
+(type $recordclass.RecordClass (sub $java.lang.Object (struct
+ (field $vtable (ref $recordclass.RecordClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_main__void (ref $function.m_main__void))
+ ))
+)
+;;; End of code for recordclass.RecordClass [type definition]
+;;; Code for recordclass.RecordClass.I.$LambdaAdaptor [type definition]
+(type $recordclass.RecordClass.I.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $recordclass.RecordClass.I.$LambdaAdaptor.vtable))
+ (field $itable (ref $recordclass.RecordClass.I.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.I.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_a__java_lang_String (ref $function.m_a__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.I.$LambdaAdaptor [type definition]
+;;; Code for recordclass.RecordClass.SimpleRecord [type definition]
+(type $recordclass.RecordClass.SimpleRecord (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.SimpleRecord.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value@recordclass.RecordClass.SimpleRecord (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.SimpleRecord.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.SimpleRecord [type definition]
+;;; Code for recordclass.RecordClass.StringRecord [type definition]
+(type $recordclass.RecordClass.StringRecord (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.StringRecord.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value@recordclass.RecordClass.StringRecord (mut (ref null $java.lang.String)))
+ ))
+)
+(type $recordclass.RecordClass.StringRecord.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.StringRecord [type definition]
+;;; Code for recordclass.RecordClass.ArrayRecord [type definition]
+(type $recordclass.RecordClass.ArrayRecord (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.ArrayRecord.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value@recordclass.RecordClass.ArrayRecord (mut (ref null $javaemul.internal.WasmArray.OfInt)))
+ ))
+)
+(type $recordclass.RecordClass.ArrayRecord.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.ArrayRecord [type definition]
+;;; Code for recordclass.RecordClass.ObjectRecord [type definition]
+(type $recordclass.RecordClass.ObjectRecord (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.ObjectRecord.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value@recordclass.RecordClass.ObjectRecord (mut (ref null $java.lang.Object)))
+ ))
+)
+(type $recordclass.RecordClass.ObjectRecord.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.ObjectRecord [type definition]
+;;; Code for recordclass.RecordClass.RecordWithConstructor [type definition]
+(type $recordclass.RecordClass.RecordWithConstructor (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordWithConstructor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@recordclass.RecordClass.RecordWithConstructor (mut i32))
+ (field $b@recordclass.RecordClass.RecordWithConstructor (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.RecordWithConstructor.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.RecordWithConstructor [type definition]
+;;; Code for recordclass.RecordClass.RecordWithCompactConstructor [type definition]
+(type $recordclass.RecordClass.RecordWithCompactConstructor (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordWithCompactConstructor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@recordclass.RecordClass.RecordWithCompactConstructor (mut i32))
+ (field $b@recordclass.RecordClass.RecordWithCompactConstructor (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.RecordWithCompactConstructor.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.RecordWithCompactConstructor [type definition]
+;;; Code for recordclass.RecordClass.RecordWithDeferringConstructor [type definition]
+(type $recordclass.RecordClass.RecordWithDeferringConstructor (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordWithDeferringConstructor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value@recordclass.RecordClass.RecordWithDeferringConstructor (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.RecordWithDeferringConstructor.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.RecordWithDeferringConstructor [type definition]
+;;; Code for recordclass.RecordClass.RecordWithOverriddenObjectMethods [type definition]
+(type $recordclass.RecordClass.RecordWithOverriddenObjectMethods (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordWithOverriddenObjectMethods.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value@recordclass.RecordClass.RecordWithOverriddenObjectMethods (mut (ref null $java.lang.String)))
+ ))
+)
+(type $recordclass.RecordClass.RecordWithOverriddenObjectMethods.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.RecordWithOverriddenObjectMethods [type definition]
+;;; Code for recordclass.RecordClass.RecordWithOverriddenAccessor [type definition]
+(type $recordclass.RecordClass.RecordWithOverriddenAccessor (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordWithOverriddenAccessor.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value@recordclass.RecordClass.RecordWithOverriddenAccessor (mut (ref null $java.lang.String)))
+ ))
+)
+(type $recordclass.RecordClass.RecordWithOverriddenAccessor.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.RecordWithOverriddenAccessor [type definition]
+;;; Code for recordclass.RecordClass.RecordImplementingInterface [type definition]
+(type $recordclass.RecordClass.RecordImplementingInterface (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordImplementingInterface.vtable))
+ (field $itable (ref $recordclass.RecordClass.RecordImplementingInterface.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@recordclass.RecordClass.RecordImplementingInterface (mut (ref null $java.lang.String)))
+ ))
+)
+(type $recordclass.RecordClass.RecordImplementingInterface.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_a__java_lang_String (ref $function.m_a__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.RecordImplementingInterface [type definition]
+;;; Code for recordclass.RecordClass.StaticFieldRecord [type definition]
+(type $recordclass.RecordClass.StaticFieldRecord (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.StaticFieldRecord.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $nonstaticField@recordclass.RecordClass.StaticFieldRecord (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.StaticFieldRecord.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.StaticFieldRecord [type definition]
+;;; Code for recordclass.RecordClass.RecordSpecializingInterface [type definition]
+(type $recordclass.RecordClass.RecordSpecializingInterface (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordSpecializingInterface.vtable))
+ (field $itable (ref $recordclass.RecordClass.RecordSpecializingInterface.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (mut (ref null $java.lang.String)))
+ (field $parametric@recordclass.RecordClass.RecordSpecializingInterface (mut (ref null $java.lang.String)))
+ ))
+)
+(type $recordclass.RecordClass.RecordSpecializingInterface.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_nonParametric__java_lang_String (ref $function.m_nonParametric__java_lang_String))
+ (field $m_parametric__java_lang_Object (ref $function.m_parametric__java_lang_Object))
+ ))
+)
+;;; End of code for recordclass.RecordClass.RecordSpecializingInterface [type definition]
+;;; Code for recordclass.RecordClass.1LocalRecord [type definition]
+(type $recordclass.RecordClass.1LocalRecord (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.1LocalRecord.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $value@recordclass.RecordClass.1LocalRecord (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.1LocalRecord.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.1LocalRecord [type definition]
+;;; Code for recordclass.RecordClass.1R2 [type definition]
+(type $recordclass.RecordClass.1R2 (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.1R2.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $i@recordclass.RecordClass.1R2 (mut i32))
+ (field $o@recordclass.RecordClass.1R2 (mut (ref null $java.lang.Object)))
+ ))
+)
+(type $recordclass.RecordClass.1R2.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.1R2 [type definition]
+;;; Code for recordclass.RecordClass.1R1 [type definition]
+(type $recordclass.RecordClass.1R1 (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.1R1.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $n@recordclass.RecordClass.1R1 (mut (ref null $recordclass.RecordClass.1R2)))
+ (field $o@recordclass.RecordClass.1R1 (mut (ref null $java.lang.Object)))
+ (field $s@recordclass.RecordClass.1R1 (mut (ref null $java.lang.String)))
+ ))
+)
+(type $recordclass.RecordClass.1R1.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+;;; End of code for recordclass.RecordClass.1R1 [type definition]

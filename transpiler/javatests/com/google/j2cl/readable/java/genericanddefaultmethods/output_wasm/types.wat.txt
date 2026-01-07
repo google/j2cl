@@ -1,0 +1,40 @@
+
+;;; Code for genericanddefaultmethods.InterfaceWithDefault [type definition]
+(type $genericanddefaultmethods.InterfaceWithDefault.vtable (sub (struct
+ (field $m_foo__java_lang_String__void (ref $function.m_foo__java_lang_String__void))
+ ))
+)
+;;; End of code for genericanddefaultmethods.InterfaceWithDefault [type definition]
+;;; Code for genericanddefaultmethods.GenericClass [type definition]
+(type $genericanddefaultmethods.GenericClass (sub $java.lang.Object (struct
+ (field $vtable (ref $genericanddefaultmethods.GenericClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $genericanddefaultmethods.GenericClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+ ))
+)
+;;; End of code for genericanddefaultmethods.GenericClass [type definition]
+;;; Code for genericanddefaultmethods.ConcreteClass [type definition]
+(type $genericanddefaultmethods.ConcreteClass (sub $genericanddefaultmethods.GenericClass (struct
+ (field $vtable (ref $genericanddefaultmethods.ConcreteClass.vtable))
+ (field $itable (ref $genericanddefaultmethods.ConcreteClass.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $genericanddefaultmethods.ConcreteClass.vtable (sub $genericanddefaultmethods.GenericClass.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+ (field $m_foo__java_lang_String__void (ref $function.m_foo__java_lang_String__void))
+ ))
+)
+;;; End of code for genericanddefaultmethods.ConcreteClass [type definition]

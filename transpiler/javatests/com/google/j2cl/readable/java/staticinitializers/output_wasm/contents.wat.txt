@@ -1,0 +1,117 @@
+
+;;; Code for staticinitializers.StaticInitializers [static fields]
+(global $a@staticinitializers.StaticInitializers (mut i32)
+ (i32.const 0)
+)
+(global $b@staticinitializers.StaticInitializers (mut i32)
+ (i32.const 0)
+)
+(global $c@staticinitializers.StaticInitializers (mut i32)
+ (i32.const 0)
+)
+(global $$class-initialized@staticinitializers.StaticInitializers (mut i32)
+ (i32.const 0)
+)
+(global $$class@staticinitializers.StaticInitializers (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for staticinitializers.StaticInitializers [static fields]
+;;; Code for staticinitializers.StaticInitializers [vtable.init]
+(global $staticinitializers.StaticInitializers.vtable (ref $staticinitializers.StaticInitializers.vtable)
+ (struct.new $staticinitializers.StaticInitializers.vtable
+  (ref.func $$getClassImpl__java_lang_Class@staticinitializers.StaticInitializers)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for staticinitializers.StaticInitializers [vtable.init]
+
+;;; Code for staticinitializers.StaticInitializers [methods]
+
+;;; StaticInitializers StaticInitializers.$create()
+(func $$create__@staticinitializers.StaticInitializers
+ (result (ref null $staticinitializers.StaticInitializers))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+ (local $$instance (ref null $staticinitializers.StaticInitializers))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+  (call $$clinit__void_<once>_@staticinitializers.StaticInitializers )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+  (local.set $$instance (struct.new $staticinitializers.StaticInitializers (global.get $staticinitializers.StaticInitializers.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+  (call $$ctor__void_$p_staticinitializers_StaticInitializers@staticinitializers.StaticInitializers (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StaticInitializers.$ctor()
+(func $$ctor__void_$p_staticinitializers_StaticInitializers@staticinitializers.StaticInitializers
+ (param $this (ref null $staticinitializers.StaticInitializers))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void StaticInitializers.$clinit()
+(func $$clinit__void_<once>_@staticinitializers.StaticInitializers
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+ (local $duplicated i32)
+ (local $duplicated_1 i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+  (if (global.get $$class-initialized@staticinitializers.StaticInitializers)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+  (global.set $$class-initialized@staticinitializers.StaticInitializers (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:19:2
+  (global.set $a@staticinitializers.StaticInitializers (i32.const 5))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:21:2
+  (global.set $b@staticinitializers.StaticInitializers (i32.mul (global.get $a@staticinitializers.StaticInitializers) (i32.const 2)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:26:4
+  (global.set $a@staticinitializers.StaticInitializers (i32.const 10))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:27:4
+  (global.set $c@staticinitializers.StaticInitializers (i32.add (global.get $a@staticinitializers.StaticInitializers) (global.get $b@staticinitializers.StaticInitializers)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:28:4
+  (local.set $duplicated (global.get $c@staticinitializers.StaticInitializers))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticinitializers/readable-j2wasm.js/staticinitializers/StaticInitializers.java:32:4
+  (local.set $duplicated_1 (i32.const 1))
+ )
+)
+
+;;; Class<T> StaticInitializers.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@staticinitializers.StaticInitializers
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@staticinitializers.StaticInitializers)))
+   (then
+    (return (global.get $$class@staticinitializers.StaticInitializers))
+   )
+  )
+  (global.set $$class@staticinitializers.StaticInitializers (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticinitia...|__java_lang_String_<once>_@staticinitializers.StaticInitializers )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@staticinitializers.StaticInitializers))
+ )
+)
+
+;;; Class<?> StaticInitializers.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@staticinitializers.StaticInitializers
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $staticinitializers.StaticInitializers))
+ (local.set $this (ref.cast (ref $staticinitializers.StaticInitializers) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticinitializers.StaticInitializers ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@staticinitializers.StaticInitializers)
+;;; End of code for staticinitializers.StaticInitializers [methods]

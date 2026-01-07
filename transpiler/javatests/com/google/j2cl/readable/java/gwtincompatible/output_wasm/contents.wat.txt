@@ -1,0 +1,361 @@
+
+;;; Code for gwtincompatible.Implementor [static fields]
+(global $$class-initialized@gwtincompatible.Implementor (mut i32)
+ (i32.const 0)
+)
+(global $$class@gwtincompatible.Implementor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for gwtincompatible.Implementor [static fields]
+;;; Code for gwtincompatible.Implementor.SomeEnum.1 [static fields]
+(global $$class-initialized@gwtincompatible.Implementor.SomeEnum.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@gwtincompatible.Implementor.SomeEnum.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for gwtincompatible.Implementor.SomeEnum.1 [static fields]
+;;; Code for gwtincompatible.Implementor.SomeEnum [static fields]
+(global $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum))
+ (ref.null $gwtincompatible.Implementor.SomeEnum)
+)
+(global $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@gwtincompatible.Implementor.SomeEnum (mut i32)
+ (i32.const 0)
+)
+(global $$class@gwtincompatible.Implementor.SomeEnum (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for gwtincompatible.Implementor.SomeEnum [static fields]
+;;; Code for gwtincompatible.Implementor [vtable.init]
+(global $gwtincompatible.Implementor.vtable (ref $gwtincompatible.Implementor.vtable)
+ (struct.new $gwtincompatible.Implementor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_compatibleMethod__void@gwtincompatible.Implementor)
+ )
+)
+(global $gwtincompatible.Interface.vtable@$gwtincompatible.Implementor (ref $gwtincompatible.Interface.vtable)
+ (struct.new $gwtincompatible.Interface.vtable
+ )
+)
+(global $gwtincompatible.Interface.NestedInterface.vtable@$gwtincompatible.Implementor (ref $gwtincompatible.Interface.NestedInterface.vtable)
+ (struct.new $gwtincompatible.Interface.NestedInterface.vtable
+ )
+)
+;;; End of code for gwtincompatible.Implementor [vtable.init]
+;;; Code for gwtincompatible.Implementor.SomeEnum.1 [vtable.init]
+(global $gwtincompatible.Implementor.SomeEnum.1.vtable (ref $gwtincompatible.Implementor.SomeEnum.1.vtable)
+ (struct.new $gwtincompatible.Implementor.SomeEnum.1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
+  (ref.func $m_hashCode__int@java.lang.Enum)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+  (ref.func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1)
+ )
+)
+(global $java.lang.Comparable.vtable@$gwtincompatible.Implementor.SomeEnum.1 (ref $java.lang.Comparable.vtable)
+ (struct.new $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+)
+(global $java.io.Serializable.vtable@$gwtincompatible.Implementor.SomeEnum.1 (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+;;; End of code for gwtincompatible.Implementor.SomeEnum.1 [vtable.init]
+
+;;; Code for gwtincompatible.Implementor [methods]
+
+;;; Implementor Implementor.$create()
+(func $$create__@gwtincompatible.Implementor
+ (result (ref null $gwtincompatible.Implementor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+ (local $$instance (ref null $gwtincompatible.Implementor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  (local.set $$instance (struct.new $gwtincompatible.Implementor (global.get $gwtincompatible.Implementor.vtable) (global.get $gwtincompatible.Implementor.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  (call $$ctor__void_$p_gwtincompatible_Implementor@gwtincompatible.Implementor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Implementor.$ctor()
+(func $$ctor__void_$p_gwtincompatible_Implementor@gwtincompatible.Implementor
+ (param $this (ref null $gwtincompatible.Implementor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  (call $$ctor__void_$p_gwtincompatible_Interface_ClassWithAbstractMethod@gwtincompatible.Interface.ClassWithAbstractMethod (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Implementor.compatibleMethod()
+(func $m_compatibleMethod__void@gwtincompatible.Implementor
+ (type $function.m_compatibleMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:32:14
+ (local $a i32)
+ (local $this (ref null $gwtincompatible.Implementor))
+ (local.set $this (ref.cast (ref $gwtincompatible.Implementor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:33:4
+  (local.set $a (i32.const 4))
+ )
+)
+(elem declare func $m_compatibleMethod__void@gwtincompatible.Implementor)
+
+;;; void Implementor.$clinit()
+(func $$clinit__void_<once>_@gwtincompatible.Implementor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  (if (global.get $$class-initialized@gwtincompatible.Implementor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  (global.set $$class-initialized@gwtincompatible.Implementor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  (call $$clinit__void_<once>_@gwtincompatible.Interface.ClassWithAbstractMethod )
+ )
+)
+
+;;; Class<T> Implementor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@gwtincompatible.Implementor)))
+   (then
+    (return (global.get $$class@gwtincompatible.Implementor))
+   )
+  )
+  (global.set $$class@gwtincompatible.Implementor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|gwtincompati...|__java_lang_String_<once>_@gwtincompatible.Implementor )(call $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Interface.ClassWithAbstractMethod )))
+  (return (global.get $$class@gwtincompatible.Implementor))
+ )
+)
+
+;;; Class<?> Implementor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $gwtincompatible.Implementor))
+ (local.set $this (ref.cast (ref $gwtincompatible.Implementor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor)
+;;; End of code for gwtincompatible.Implementor [methods]
+;;; Code for gwtincompatible.Implementor.SomeEnum [methods]
+
+;;; void SomeEnum.$ctor(String $name, int $ordinal)
+(func $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
+ (param $this (ref null $gwtincompatible.Implementor.SomeEnum))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+ )
+)
+
+;;; SomeEnum SomeEnum.valueOf(String name)
+(func $m_valueOf__java_lang_String__gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
+ (param $name (ref null $java.lang.String))
+ (result (ref null $gwtincompatible.Implementor.SomeEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (if (ref.is_null (global.get $namesToValuesMap@gwtincompatible.Implementor.SomeEnum))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+     (global.set $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum )))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (return (ref.cast (ref null $gwtincompatible.Implementor.SomeEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@gwtincompatible.Implementor.SomeEnum))))
+ )
+)
+
+;;; SomeEnum[] SomeEnum.values()
+(func $m_values__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (return (call $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum ))
+ )
+)
+
+;;; SomeEnum[] SomeEnum.values_$private()
+(func $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $COMPATIBLE@gwtincompatible.Implementor.SomeEnum))))
+ )
+)
+
+;;; void SomeEnum.$clinit()
+(func $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (if (global.get $$class-initialized@gwtincompatible.Implementor.SomeEnum)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (global.set $$class-initialized@gwtincompatible.Implementor.SomeEnum (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  (call $$clinit__void_<once>_@java.lang.Enum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  (global.set $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (call $$create__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1 (call $$getString_|COMPATIBLE|__java_lang_String_<once>_@gwtincompatible.Implementor.SomeEnum )(i32.const 0)))
+ )
+)
+
+;;; Class<T> SomeEnum.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor.SomeEnum
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@gwtincompatible.Implementor.SomeEnum)))
+   (then
+    (return (global.get $$class@gwtincompatible.Implementor.SomeEnum))
+   )
+  )
+  (global.set $$class@gwtincompatible.Implementor.SomeEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|gwtincompati...|__java_lang_String_<once>_@gwtincompatible.Implementor.SomeEnum )))
+  (return (global.get $$class@gwtincompatible.Implementor.SomeEnum))
+ )
+)
+
+;;; Class<?> SomeEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $gwtincompatible.Implementor.SomeEnum))
+ (local.set $this (ref.cast (ref $gwtincompatible.Implementor.SomeEnum) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor.SomeEnum ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum)
+;;; End of code for gwtincompatible.Implementor.SomeEnum [methods]
+;;; Code for gwtincompatible.Implementor.SomeEnum.1 [methods]
+
+;;; <anonymous> extends SomeEnum <anonymous> extends SomeEnum.$create(String $name, int $ordinal)
+(func $$create__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (result (ref null $gwtincompatible.Implementor.SomeEnum.1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+ (local $$instance (ref null $gwtincompatible.Implementor.SomeEnum.1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum.1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  (local.set $$instance (struct.new $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (global.get $gwtincompatible.Implementor.SomeEnum.1.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  (call $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum_1@gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends SomeEnum.$ctor(String $name, int $ordinal)
+(func $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum_1@gwtincompatible.Implementor.SomeEnum.1
+ (param $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  (call $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+ )
+)
+
+;;; void <anonymous> extends SomeEnum.method()
+(func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
+ (type $function.m_method__void_$pp_gwtincompatible)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:39:11
+ (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
+ (local.set $this (ref.cast (ref $gwtincompatible.Implementor.SomeEnum.1) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1)
+
+;;; void <anonymous> extends SomeEnum.$clinit()
+(func $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum.1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+  (if (global.get $$class-initialized@gwtincompatible.Implementor.SomeEnum.1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+  (global.set $$class-initialized@gwtincompatible.Implementor.SomeEnum.1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
+ )
+)
+
+;;; Class<T> <anonymous> extends SomeEnum.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor.SomeEnum.1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@gwtincompatible.Implementor.SomeEnum.1)))
+   (then
+    (return (global.get $$class@gwtincompatible.Implementor.SomeEnum.1))
+   )
+  )
+  (global.set $$class@gwtincompatible.Implementor.SomeEnum.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|gwtincompati...|__java_lang_String_<once>_@gwtincompatible.Implementor.SomeEnum.1 )(call $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor.SomeEnum )))
+  (return (global.get $$class@gwtincompatible.Implementor.SomeEnum.1))
+ )
+)
+
+;;; Class<?> <anonymous> extends SomeEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
+ (local.set $this (ref.cast (ref $gwtincompatible.Implementor.SomeEnum.1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor.SomeEnum.1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1)
+;;; End of code for gwtincompatible.Implementor.SomeEnum.1 [methods]

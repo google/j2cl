@@ -1,0 +1,38 @@
+
+;;; Code for instanceinnerclass.InstanceInnerClass [type definition]
+(type $instanceinnerclass.InstanceInnerClass (sub $java.lang.Object (struct
+ (field $vtable (ref $instanceinnerclass.InstanceInnerClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $instanceField@instanceinnerclass.InstanceInnerClass (mut i32))
+ ))
+)
+(type $instanceinnerclass.InstanceInnerClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_funOuter__void (ref $function.m_funOuter__void))
+ (field $m_test__void (ref $function.m_test__void))
+ ))
+)
+;;; End of code for instanceinnerclass.InstanceInnerClass [type definition]
+;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [type definition]
+(type $instanceinnerclass.InstanceInnerClass.InnerClass (sub $java.lang.Object (struct
+ (field $vtable (ref $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
+ (field $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
+ (field $field@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32))
+ ))
+)
+(type $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_funInner__void (ref $function.m_funInner__void))
+ ))
+)
+;;; End of code for instanceinnerclass.InstanceInnerClass.InnerClass [type definition]

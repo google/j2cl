@@ -1,0 +1,42 @@
+
+;;; Code for emptyinterface.EmptyInterface [static fields]
+(global $$class-initialized@emptyinterface.EmptyInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@emptyinterface.EmptyInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for emptyinterface.EmptyInterface [static fields]
+
+;;; Code for emptyinterface.EmptyInterface [methods]
+
+;;; void EmptyInterface.$clinit()
+(func $$clinit__void_<once>_@emptyinterface.EmptyInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyinterface/readable-j2wasm.js/emptyinterface/EmptyInterface.java:18:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyinterface/readable-j2wasm.js/emptyinterface/EmptyInterface.java:18:17
+  (if (global.get $$class-initialized@emptyinterface.EmptyInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyinterface/readable-j2wasm.js/emptyinterface/EmptyInterface.java:18:17
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyinterface/readable-j2wasm.js/emptyinterface/EmptyInterface.java:18:17
+  (global.set $$class-initialized@emptyinterface.EmptyInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> EmptyInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@emptyinterface.EmptyInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@emptyinterface.EmptyInterface)))
+   (then
+    (return (global.get $$class@emptyinterface.EmptyInterface))
+   )
+  )
+  (global.set $$class@emptyinterface.EmptyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|emptyinterfa...|__java_lang_String_<once>_@emptyinterface.EmptyInterface )))
+  (return (global.get $$class@emptyinterface.EmptyInterface))
+ )
+)
+;;; End of code for emptyinterface.EmptyInterface [methods]

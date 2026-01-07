@@ -1,0 +1,92 @@
+
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [static fields]
+(global $$class-initialized@jsmemberinnativetype.MyNativeType.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmemberinnativetype.MyNativeType.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for jsmemberinnativetype.MyNativeType.$Overlay [static fields]
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [vtable.init]
+(global $jsmemberinnativetype.MyNativeType.$Overlay.vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable)
+ (struct.new $jsmemberinnativetype.MyNativeType.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
+ )
+)
+;;; End of code for jsmemberinnativetype.MyNativeType.$Overlay [vtable.init]
+
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [methods]
+
+;;; void $Overlay.useFieldsAndMethods__$devirt(MyNativeType $thisArg)
+(func $m_useFieldsAndMethods__$devirt__jsmemberinnativetype_MyNativeType__void@jsmemberinnativetype.MyNativeType.$Overlay
+ (param $$thisArg (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:52:20
+ (local $jsProperties i32)
+ (local $jsPropertyMethods i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:52:20
+  (call $$clinit__void_<once>_@jsmemberinnativetype.MyNativeType.$Overlay )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:53:4
+  (local.set $jsProperties (i32.add (i32.add (i32.add (i32.add (call $f_publicField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))) (call $f_privateField__int_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_packageField__int_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_protectedField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_staticField__int@jsmemberinnativetype.MyNativeType )))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:55:4
+  (local.set $jsPropertyMethods (i32.add (call $m_getPublicField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))) (call $m_getStaticField__int@jsmemberinnativetype.MyNativeType )))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:56:4
+  (call $m_setPublicField__int__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))(i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:57:4
+  (call $m_setStaticField__int__void@jsmemberinnativetype.MyNativeType (i32.const 2))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:59:4
+  (call $m_publicMethod__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:60:4
+  (call $m_privateMethod__void_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:61:4
+  (call $m_packageMethod__void_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:62:4
+  (call $m_protectedMethod__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
+ )
+)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@jsmemberinnativetype.MyNativeType.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:23:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:23:13
+  (if (global.get $$class-initialized@jsmemberinnativetype.MyNativeType.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:23:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmemberinnativetype/readable-j2wasm.js/jsmemberinnativetype/MyNativeType.java:23:13
+  (global.set $$class-initialized@jsmemberinnativetype.MyNativeType.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmemberinnativetype.MyNativeType.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmemberinnativetype.MyNativeType.$Overlay)))
+   (then
+    (return (global.get $$class@jsmemberinnativetype.MyNativeType.$Overlay))
+   )
+  )
+  (global.set $$class@jsmemberinnativetype.MyNativeType.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmemberinna...|__java_lang_String_<once>_@jsmemberinnativetype.MyNativeType.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@jsmemberinnativetype.MyNativeType.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmemberinnativetype.MyNativeType.$Overlay))
+ (local.set $this (ref.cast (ref $jsmemberinnativetype.MyNativeType.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmemberinnativetype.MyNativeType.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
+;;; End of code for jsmemberinnativetype.MyNativeType.$Overlay [methods]
+;;; Code for jsmemberinnativetype.MyNativeType [methods]
+;;; End of code for jsmemberinnativetype.MyNativeType [methods]

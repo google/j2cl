@@ -1,0 +1,311 @@
+
+;;; Code for qualifiedsupercall.Parent [static fields]
+(global $$class-initialized@qualifiedsupercall.Parent (mut i32)
+ (i32.const 0)
+)
+(global $$class@qualifiedsupercall.Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for qualifiedsupercall.Parent [static fields]
+;;; Code for qualifiedsupercall.QualifiedSuperCall [static fields]
+(global $$class-initialized@qualifiedsupercall.QualifiedSuperCall (mut i32)
+ (i32.const 0)
+)
+(global $$class@qualifiedsupercall.QualifiedSuperCall (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for qualifiedsupercall.QualifiedSuperCall [static fields]
+;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [static fields]
+(global $$class-initialized@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut i32)
+ (i32.const 0)
+)
+(global $$class@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for qualifiedsupercall.QualifiedSuperCall.InnerClass [static fields]
+;;; Code for qualifiedsupercall.Parent [vtable.init]
+(global $qualifiedsupercall.Parent.vtable (ref $qualifiedsupercall.Parent.vtable)
+ (struct.new $qualifiedsupercall.Parent.vtable
+  (ref.func $$getClassImpl__java_lang_Class@qualifiedsupercall.Parent)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_fun__void@qualifiedsupercall.Parent)
+ )
+)
+;;; End of code for qualifiedsupercall.Parent [vtable.init]
+;;; Code for qualifiedsupercall.QualifiedSuperCall [vtable.init]
+(global $qualifiedsupercall.QualifiedSuperCall.vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable)
+ (struct.new $qualifiedsupercall.QualifiedSuperCall.vtable
+  (ref.func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_fun__void@qualifiedsupercall.Parent)
+ )
+)
+;;; End of code for qualifiedsupercall.QualifiedSuperCall [vtable.init]
+;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [vtable.init]
+(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)
+ (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_test__void@qualifiedsupercall.QualifiedSuperCall.InnerClass)
+ )
+)
+;;; End of code for qualifiedsupercall.QualifiedSuperCall.InnerClass [vtable.init]
+
+;;; Code for qualifiedsupercall.Parent [methods]
+
+;;; Parent Parent.$create()
+(func $$create__@qualifiedsupercall.Parent
+ (result (ref null $qualifiedsupercall.Parent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+ (local $$instance (ref null $qualifiedsupercall.Parent))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (call $$clinit__void_<once>_@qualifiedsupercall.Parent )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (local.set $$instance (struct.new $qualifiedsupercall.Parent (global.get $qualifiedsupercall.Parent.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (call $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent
+ (param $this (ref null $qualifiedsupercall.Parent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Parent.fun()
+(func $m_fun__void@qualifiedsupercall.Parent
+ (type $function.m_fun__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:19:14
+ (local $this (ref null $qualifiedsupercall.Parent))
+ (local.set $this (ref.cast (ref $qualifiedsupercall.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_fun__void@qualifiedsupercall.Parent)
+
+;;; void Parent.$clinit()
+(func $$clinit__void_<once>_@qualifiedsupercall.Parent
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (if (global.get $$class-initialized@qualifiedsupercall.Parent)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (global.set $$class-initialized@qualifiedsupercall.Parent (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@qualifiedsupercall.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@qualifiedsupercall.Parent)))
+   (then
+    (return (global.get $$class@qualifiedsupercall.Parent))
+   )
+  )
+  (global.set $$class@qualifiedsupercall.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|qualifiedsup...|__java_lang_String_<once>_@qualifiedsupercall.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@qualifiedsupercall.Parent))
+ )
+)
+
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@qualifiedsupercall.Parent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $qualifiedsupercall.Parent))
+ (local.set $this (ref.cast (ref $qualifiedsupercall.Parent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@qualifiedsupercall.Parent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.Parent)
+;;; End of code for qualifiedsupercall.Parent [methods]
+;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [methods]
+
+;;; InnerClass InnerClass.$create(QualifiedSuperCall $outer_this)
+(func $$create__qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (param $$outer_this (ref null $qualifiedsupercall.QualifiedSuperCall))
+ (result (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+ (local $$instance (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (call $$clinit__void_<once>_@qualifiedsupercall.QualifiedSuperCall.InnerClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (local.set $$instance (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $qualifiedsupercall.QualifiedSuperCall)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (call $$ctor__qualifiedsupercall_QualifiedSuperCall__void_$p_qualifiedsupercall_QualifiedSuperCall_InnerClass@qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InnerClass.$ctor(QualifiedSuperCall $outer_this)
+(func $$ctor__qualifiedsupercall_QualifiedSuperCall__void_$p_qualifiedsupercall_QualifiedSuperCall_InnerClass@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (param $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (param $$outer_this (ref null $qualifiedsupercall.QualifiedSuperCall))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (struct.set $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this@qualifiedsupercall.QualifiedSuperCall.InnerClass (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void InnerClass.test()
+(func $m_test__void@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (type $function.m_test__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:24:16
+ (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (local.set $this (ref.cast (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:25:6
+  (call $m_fun__void@qualifiedsupercall.Parent (ref.as_non_null (struct.get $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this@qualifiedsupercall.QualifiedSuperCall.InnerClass (local.get $this))))
+ )
+)
+(elem declare func $m_test__void@qualifiedsupercall.QualifiedSuperCall.InnerClass)
+
+;;; void InnerClass.$clinit()
+(func $$clinit__void_<once>_@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (if (global.get $$class-initialized@qualifiedsupercall.QualifiedSuperCall.InnerClass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (global.set $$class-initialized@qualifiedsupercall.QualifiedSuperCall.InnerClass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> InnerClass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@qualifiedsupercall.QualifiedSuperCall.InnerClass)))
+   (then
+    (return (global.get $$class@qualifiedsupercall.QualifiedSuperCall.InnerClass))
+   )
+  )
+  (global.set $$class@qualifiedsupercall.QualifiedSuperCall.InnerClass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|qualifiedsup...|__java_lang_String_<once>_@qualifiedsupercall.QualifiedSuperCall.InnerClass )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ )
+)
+
+;;; Class<?> InnerClass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (local.set $this (ref.cast (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@qualifiedsupercall.QualifiedSuperCall.InnerClass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass)
+;;; End of code for qualifiedsupercall.QualifiedSuperCall.InnerClass [methods]
+;;; Code for qualifiedsupercall.QualifiedSuperCall [methods]
+
+;;; QualifiedSuperCall QualifiedSuperCall.$create()
+(func $$create__@qualifiedsupercall.QualifiedSuperCall
+ (result (ref null $qualifiedsupercall.QualifiedSuperCall))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+ (local $$instance (ref null $qualifiedsupercall.QualifiedSuperCall))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (call $$clinit__void_<once>_@qualifiedsupercall.QualifiedSuperCall )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (local.set $$instance (struct.new $qualifiedsupercall.QualifiedSuperCall (global.get $qualifiedsupercall.QualifiedSuperCall.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (call $$ctor__void_$p_qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void QualifiedSuperCall.$ctor()
+(func $$ctor__void_$p_qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall
+ (param $this (ref null $qualifiedsupercall.QualifiedSuperCall))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (call $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void QualifiedSuperCall.$clinit()
+(func $$clinit__void_<once>_@qualifiedsupercall.QualifiedSuperCall
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (if (global.get $$class-initialized@qualifiedsupercall.QualifiedSuperCall)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (global.set $$class-initialized@qualifiedsupercall.QualifiedSuperCall (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/qualifiedsupercall/readable-j2wasm.js/qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (call $$clinit__void_<once>_@qualifiedsupercall.Parent )
+ )
+)
+
+;;; Class<T> QualifiedSuperCall.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@qualifiedsupercall.QualifiedSuperCall
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@qualifiedsupercall.QualifiedSuperCall)))
+   (then
+    (return (global.get $$class@qualifiedsupercall.QualifiedSuperCall))
+   )
+  )
+  (global.set $$class@qualifiedsupercall.QualifiedSuperCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|qualifiedsup...|__java_lang_String_<once>_@qualifiedsupercall.QualifiedSuperCall )(call $$getClassMetadata__java_lang_Class_<once>_@qualifiedsupercall.Parent )))
+  (return (global.get $$class@qualifiedsupercall.QualifiedSuperCall))
+ )
+)
+
+;;; Class<?> QualifiedSuperCall.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $qualifiedsupercall.QualifiedSuperCall))
+ (local.set $this (ref.cast (ref $qualifiedsupercall.QualifiedSuperCall) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@qualifiedsupercall.QualifiedSuperCall ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@qualifiedsupercall.QualifiedSuperCall)
+;;; End of code for qualifiedsupercall.QualifiedSuperCall [methods]

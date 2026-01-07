@@ -1,0 +1,107 @@
+
+;;; Code for simplegenericinterface.SimpleGenericInterface [static fields]
+(global $$class-initialized@simplegenericinterface.SimpleGenericInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@simplegenericinterface.SimpleGenericInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for simplegenericinterface.SimpleGenericInterface [static fields]
+;;; Code for simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor [static fields]
+
+;;; Code for simplegenericinterface.SimpleGenericInterface [methods]
+
+;;; void SimpleGenericInterface.$clinit()
+(func $$clinit__void_<once>_@simplegenericinterface.SimpleGenericInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+  (if (global.get $$class-initialized@simplegenericinterface.SimpleGenericInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+  (global.set $$class-initialized@simplegenericinterface.SimpleGenericInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> SimpleGenericInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@simplegenericinterface.SimpleGenericInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@simplegenericinterface.SimpleGenericInterface)))
+   (then
+    (return (global.get $$class@simplegenericinterface.SimpleGenericInterface))
+   )
+  )
+  (global.set $$class@simplegenericinterface.SimpleGenericInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenericinterface.SimpleGenericInterface )))
+  (return (global.get $$class@simplegenericinterface.SimpleGenericInterface))
+ )
+)
+;;; End of code for simplegenericinterface.SimpleGenericInterface [methods]
+;;; Code for simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_simplegenericinterface_SimpleGenericInterface_$LambdaAdaptor@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor
+ (param $this (ref null $simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+  (if (global.get $$class-initialized@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+  (global.set $$class-initialized@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenericinterface/readable-j2wasm.js/simplegenericinterface/SimpleGenericInterface.java:18:17
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|simplegeneri...|__java_lang_String_<once>_@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor)
+;;; End of code for simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor [methods]

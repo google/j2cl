@@ -1,0 +1,114 @@
+
+;;; Code for javascriptkeywords.JSKeyWords [static fields]
+(global $$class-initialized@javascriptkeywords.JSKeyWords (mut i32)
+ (i32.const 0)
+)
+(global $$class@javascriptkeywords.JSKeyWords (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for javascriptkeywords.JSKeyWords [static fields]
+;;; Code for javascriptkeywords.JSKeyWords [vtable.init]
+(global $javascriptkeywords.JSKeyWords.vtable (ref $javascriptkeywords.JSKeyWords.vtable)
+ (struct.new $javascriptkeywords.JSKeyWords.vtable
+  (ref.func $$getClassImpl__java_lang_Class@javascriptkeywords.JSKeyWords)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_test__int__int@javascriptkeywords.JSKeyWords)
+ )
+)
+;;; End of code for javascriptkeywords.JSKeyWords [vtable.init]
+
+;;; Code for javascriptkeywords.JSKeyWords [methods]
+
+;;; JSKeyWords JSKeyWords.$create()
+(func $$create__@javascriptkeywords.JSKeyWords
+ (result (ref null $javascriptkeywords.JSKeyWords))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+ (local $$instance (ref null $javascriptkeywords.JSKeyWords))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+  (call $$clinit__void_<once>_@javascriptkeywords.JSKeyWords )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+  (local.set $$instance (struct.new $javascriptkeywords.JSKeyWords (global.get $javascriptkeywords.JSKeyWords.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+  (call $$ctor__void_$p_javascriptkeywords_JSKeyWords@javascriptkeywords.JSKeyWords (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JSKeyWords.$ctor()
+(func $$ctor__void_$p_javascriptkeywords_JSKeyWords@javascriptkeywords.JSKeyWords
+ (param $this (ref null $javascriptkeywords.JSKeyWords))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int JSKeyWords.test(int in)
+(func $m_test__int__int@javascriptkeywords.JSKeyWords
+ (type $function.m_test__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $in i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:19:13
+ (local $let i32)
+ (local $this (ref null $javascriptkeywords.JSKeyWords))
+ (local.set $this (ref.cast (ref $javascriptkeywords.JSKeyWords) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:20:4
+  (local.set $let (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:21:4
+  (return (i32.add (local.get $let) (local.get $in)))
+ )
+)
+(elem declare func $m_test__int__int@javascriptkeywords.JSKeyWords)
+
+;;; void JSKeyWords.$clinit()
+(func $$clinit__void_<once>_@javascriptkeywords.JSKeyWords
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+  (if (global.get $$class-initialized@javascriptkeywords.JSKeyWords)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+  (global.set $$class-initialized@javascriptkeywords.JSKeyWords (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/javascriptkeywords/readable-j2wasm.js/javascriptkeywords/JSKeyWords.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> JSKeyWords.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@javascriptkeywords.JSKeyWords
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@javascriptkeywords.JSKeyWords)))
+   (then
+    (return (global.get $$class@javascriptkeywords.JSKeyWords))
+   )
+  )
+  (global.set $$class@javascriptkeywords.JSKeyWords (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|javascriptke...|__java_lang_String_<once>_@javascriptkeywords.JSKeyWords )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@javascriptkeywords.JSKeyWords))
+ )
+)
+
+;;; Class<?> JSKeyWords.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@javascriptkeywords.JSKeyWords
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $javascriptkeywords.JSKeyWords))
+ (local.set $this (ref.cast (ref $javascriptkeywords.JSKeyWords) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@javascriptkeywords.JSKeyWords ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@javascriptkeywords.JSKeyWords)
+;;; End of code for javascriptkeywords.JSKeyWords [methods]

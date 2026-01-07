@@ -1,0 +1,173 @@
+
+;;; Code for nestednativetype.NativeArray.1 [static fields]
+(global $$class-initialized@nestednativetype.NativeArray.1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@nestednativetype.NativeArray.1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nestednativetype.NativeArray.1 [static fields]
+;;; Code for nestednativetype.NativeArray.$Overlay [static fields]
+(global $$class-initialized@nestednativetype.NativeArray.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nestednativetype.NativeArray.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for nestednativetype.NativeArray.$Overlay [static fields]
+;;; Code for nestednativetype.NativeArray.1 [vtable.init]
+(global $nestednativetype.NativeArray.1.vtable (ref $nestednativetype.NativeArray.1.vtable)
+ (struct.new $nestednativetype.NativeArray.1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for nestednativetype.NativeArray.1 [vtable.init]
+;;; Code for nestednativetype.NativeArray.$Overlay [vtable.init]
+(global $nestednativetype.NativeArray.$Overlay.vtable (ref $nestednativetype.NativeArray.$Overlay.vtable)
+ (struct.new $nestednativetype.NativeArray.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay)
+ )
+)
+;;; End of code for nestednativetype.NativeArray.$Overlay [vtable.init]
+
+;;; Code for nestednativetype.NativeArray.$Overlay [methods]
+
+;;; Object $Overlay.a__$devirt(NativeArray $thisArg)
+(func $m_a__$devirt__nestednativetype_NativeArray__java_lang_Object@nestednativetype.NativeArray.$Overlay
+ (param $$thisArg (ref null extern))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:25:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:25:22
+  (call $$clinit__void_<once>_@nestednativetype.NativeArray.$Overlay )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:4
+  (return (call $$create__nestednativetype_NativeArray@nestednativetype.NativeArray.1 (local.get $$thisArg)))
+ )
+)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nestednativetype.NativeArray.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:23:19
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:23:19
+  (if (global.get $$class-initialized@nestednativetype.NativeArray.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:23:19
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:23:19
+  (global.set $$class-initialized@nestednativetype.NativeArray.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nestednativetype.NativeArray.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nestednativetype.NativeArray.$Overlay)))
+   (then
+    (return (global.get $$class@nestednativetype.NativeArray.$Overlay))
+   )
+  )
+  (global.set $$class@nestednativetype.NativeArray.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nestednative...|__java_lang_String_<once>_@nestednativetype.NativeArray.$Overlay )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nestednativetype.NativeArray.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nestednativetype.NativeArray.$Overlay))
+ (local.set $this (ref.cast (ref $nestednativetype.NativeArray.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nestednativetype.NativeArray.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.$Overlay)
+;;; End of code for nestednativetype.NativeArray.$Overlay [methods]
+;;; Code for nestednativetype.NativeArray [methods]
+;;; End of code for nestednativetype.NativeArray [methods]
+;;; Code for nestednativetype.NativeArray.1 [methods]
+
+;;; <anonymous> extends Object <anonymous> extends Object.$create(NativeArray $outer_this)
+(func $$create__nestednativetype_NativeArray@nestednativetype.NativeArray.1
+ (param $$outer_this (ref null extern))
+ (result (ref null $nestednativetype.NativeArray.1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:24
+ (local $$instance (ref null $nestednativetype.NativeArray.1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:24
+  (call $$clinit__void_<once>_@nestednativetype.NativeArray.1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:24
+  (local.set $$instance (struct.new $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:24
+  (call $$ctor__nestednativetype_NativeArray__void_$p_nestednativetype_NativeArray_1@nestednativetype.NativeArray.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:24
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor(NativeArray $outer_this)
+(func $$ctor__nestednativetype_NativeArray__void_$p_nestednativetype_NativeArray_1@nestednativetype.NativeArray.1
+ (param $this (ref null $nestednativetype.NativeArray.1))
+ (param $$outer_this (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:24
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:11
+  (struct.set $nestednativetype.NativeArray.1 $$outer_this@nestednativetype.NativeArray.1 (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:24
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void_<once>_@nestednativetype.NativeArray.1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:11
+  (if (global.get $$class-initialized@nestednativetype.NativeArray.1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:11
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:11
+  (global.set $$class-initialized@nestednativetype.NativeArray.1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nestednativetype/readable-j2wasm.js/nestednativetype/NativeArray.java:26:11
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> <anonymous> extends Object.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nestednativetype.NativeArray.1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nestednativetype.NativeArray.1)))
+   (then
+    (return (global.get $$class@nestednativetype.NativeArray.1))
+   )
+  )
+  (global.set $$class@nestednativetype.NativeArray.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nestednative...|__java_lang_String_<once>_@nestednativetype.NativeArray.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nestednativetype.NativeArray.1))
+ )
+)
+
+;;; Class<?> <anonymous> extends Object.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nestednativetype.NativeArray.1))
+ (local.set $this (ref.cast (ref $nestednativetype.NativeArray.1) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nestednativetype.NativeArray.1 ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nestednativetype.NativeArray.1)
+;;; End of code for nestednativetype.NativeArray.1 [methods]

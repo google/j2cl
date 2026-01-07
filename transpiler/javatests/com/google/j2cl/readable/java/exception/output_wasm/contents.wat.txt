@@ -1,0 +1,284 @@
+
+;;; Code for exception.MyException [static fields]
+(global $$class-initialized@exception.MyException (mut i32)
+ (i32.const 0)
+)
+(global $$class@exception.MyException (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for exception.MyException [static fields]
+;;; Code for exception.MyJsException [static fields]
+(global $$class-initialized@exception.MyJsException (mut i32)
+ (i32.const 0)
+)
+(global $$class@exception.MyJsException (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for exception.MyJsException [static fields]
+;;; Code for exception.MyException [vtable.init]
+(global $exception.MyException.vtable (ref $exception.MyException.vtable)
+ (struct.new $exception.MyException.vtable
+  (ref.func $$getClassImpl__java_lang_Class@exception.MyException)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Throwable)
+  (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getBackingJsObject__javaemul_internal_ThrowableUtils_JsObject@java.lang.Throwable)
+  (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
+  (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
+  (ref.func $m_printStackTrace__java_io_PrintWriter__void@java.lang.Throwable)
+  (ref.func $m_printStackTrace__void@java.lang.Throwable)
+  (ref.func $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang@java.lang.Throwable)
+  (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
+ )
+)
+(global $java.io.Serializable.vtable@$exception.MyException (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+;;; End of code for exception.MyException [vtable.init]
+;;; Code for exception.MyJsException [vtable.init]
+(global $exception.MyJsException.vtable (ref $exception.MyJsException.vtable)
+ (struct.new $exception.MyJsException.vtable
+  (ref.func $$getClassImpl__java_lang_Class@exception.MyJsException)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Throwable)
+  (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getBackingJsObject__javaemul_internal_ThrowableUtils_JsObject@java.lang.Throwable)
+  (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
+  (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
+  (ref.func $m_printStackTrace__java_io_PrintWriter__void@java.lang.Throwable)
+  (ref.func $m_printStackTrace__void@java.lang.Throwable)
+  (ref.func $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang@java.lang.Throwable)
+  (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
+ )
+)
+(global $java.io.Serializable.vtable@$exception.MyJsException (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+;;; End of code for exception.MyJsException [vtable.init]
+
+;;; Code for exception.MyException [methods]
+
+;;; MyException MyException.$create()
+(func $$create__@exception.MyException
+ (result (ref null $exception.MyException))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:19:2
+ (local $$instance (ref null $exception.MyException))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:19:2
+  (call $$clinit__void_<once>_@exception.MyException )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:19:2
+  (local.set $$instance (struct.new $exception.MyException (global.get $exception.MyException.vtable) (global.get $exception.MyException.itable) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:19:2
+  (call $$ctor__void_$p_exception_MyException@exception.MyException (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:19:2
+  (call_ref $function.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_String_NativeString__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$instance))(struct.get $exception.MyException.vtable $m_toString__java_lang_String (struct.get $exception.MyException $vtable(local.get $$instance))))))(struct.get $exception.MyException.vtable $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (struct.get $exception.MyException $vtable(local.get $$instance))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:19:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void MyException.$ctor()
+(func $$ctor__void_$p_exception_MyException@exception.MyException
+ (param $this (ref null $exception.MyException))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:19:2
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:19:16
+  (call $$ctor__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; MyException MyException.$create(Throwable cause)
+(func $$create__java_lang_Throwable@exception.MyException
+ (param $cause (ref null $java.lang.Throwable))
+ (result (ref null $exception.MyException))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:21:2
+ (local $$instance (ref null $exception.MyException))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:21:2
+  (call $$clinit__void_<once>_@exception.MyException )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:21:2
+  (local.set $$instance (struct.new $exception.MyException (global.get $exception.MyException.vtable) (global.get $exception.MyException.itable) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:21:2
+  (call $$ctor__java_lang_Throwable__void_$p_exception_MyException@exception.MyException (ref.as_non_null (local.get $$instance))(local.get $cause))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:21:2
+  (call_ref $function.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_String_NativeString__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$instance))(struct.get $exception.MyException.vtable $m_toString__java_lang_String (struct.get $exception.MyException $vtable(local.get $$instance))))))(struct.get $exception.MyException.vtable $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (struct.get $exception.MyException $vtable(local.get $$instance))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:21:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void MyException.$ctor(Throwable cause)
+(func $$ctor__java_lang_Throwable__void_$p_exception_MyException@exception.MyException
+ (param $this (ref null $exception.MyException))
+ (param $cause (ref null $java.lang.Throwable))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:21:2
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:22:4
+  (call $$ctor__java_lang_Throwable__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this))(local.get $cause))
+ )
+)
+
+;;; void MyException.$clinit()
+(func $$clinit__void_<once>_@exception.MyException
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:18:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:18:12
+  (if (global.get $$class-initialized@exception.MyException)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:18:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:18:12
+  (global.set $$class-initialized@exception.MyException (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyException.java:18:12
+  (call $$clinit__void_<once>_@java.lang.Exception )
+ )
+)
+
+;;; Class<T> MyException.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@exception.MyException
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@exception.MyException)))
+   (then
+    (return (global.get $$class@exception.MyException))
+   )
+  )
+  (global.set $$class@exception.MyException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|exception.My...|__java_lang_String_<once>_@exception.MyException )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Exception )))
+  (return (global.get $$class@exception.MyException))
+ )
+)
+
+;;; Class<?> MyException.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@exception.MyException
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $exception.MyException))
+ (local.set $this (ref.cast (ref $exception.MyException) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@exception.MyException ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@exception.MyException)
+;;; End of code for exception.MyException [methods]
+;;; Code for exception.MyJsException [methods]
+
+;;; MyJsException MyJsException.$create()
+(func $$create__@exception.MyJsException
+ (result (ref null $exception.MyJsException))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:23:9
+ (local $$instance (ref null $exception.MyJsException))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:23:9
+  (call $$clinit__void_<once>_@exception.MyJsException )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:23:9
+  (local.set $$instance (struct.new $exception.MyJsException (global.get $exception.MyJsException.vtable) (global.get $exception.MyJsException.itable) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:23:9
+  (call $$ctor__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:23:9
+  (call_ref $function.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_String_NativeString__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$instance))(struct.get $exception.MyJsException.vtable $m_toString__java_lang_String (struct.get $exception.MyJsException $vtable(local.get $$instance))))))(struct.get $exception.MyJsException.vtable $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (struct.get $exception.MyJsException $vtable(local.get $$instance))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:23:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void MyJsException.$ctor()
+(func $$ctor__void_$p_exception_MyJsException@exception.MyJsException
+ (param $this (ref null $exception.MyJsException))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:23:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:23:25
+  (call $$ctor__void_$p_java_lang_Exception@java.lang.Exception (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; MyJsException MyJsException.$create(Throwable cause)
+(func $$create__java_lang_Throwable@exception.MyJsException
+ (param $cause (ref null $java.lang.Throwable))
+ (result (ref null $exception.MyJsException))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:26:9
+ (local $$instance (ref null $exception.MyJsException))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:26:9
+  (call $$clinit__void_<once>_@exception.MyJsException )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:26:9
+  (local.set $$instance (struct.new $exception.MyJsException (global.get $exception.MyJsException.vtable) (global.get $exception.MyJsException.itable) (i32.const 0) (ref.null extern) (ref.null $java.lang.Throwable) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.util.ArrayList)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:26:9
+  (call $$ctor__java_lang_Throwable__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $$instance))(local.get $cause))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:26:9
+  (call_ref $function.m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_String_NativeString__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$instance))(struct.get $exception.MyJsException.vtable $m_toString__java_lang_String (struct.get $exception.MyJsException $vtable(local.get $$instance))))))(struct.get $exception.MyJsException.vtable $m_privateInitError__javaemul_internal_ThrowableUtils_JsObject__void_$pp_java_lang (struct.get $exception.MyJsException $vtable(local.get $$instance))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:26:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void MyJsException.$ctor(Throwable cause)
+(func $$ctor__java_lang_Throwable__void_$p_exception_MyJsException@exception.MyJsException
+ (param $this (ref null $exception.MyJsException))
+ (param $cause (ref null $java.lang.Throwable))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:26:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:27:4
+  (call $$ctor__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void MyJsException.$clinit()
+(func $$clinit__void_<once>_@exception.MyJsException
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:22:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:22:12
+  (if (global.get $$class-initialized@exception.MyJsException)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:22:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:22:12
+  (global.set $$class-initialized@exception.MyJsException (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/exception/readable-j2wasm.js/exception/MyJsException.java:22:12
+  (call $$clinit__void_<once>_@java.lang.Exception )
+ )
+)
+
+;;; Class<T> MyJsException.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@exception.MyJsException
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@exception.MyJsException)))
+   (then
+    (return (global.get $$class@exception.MyJsException))
+   )
+  )
+  (global.set $$class@exception.MyJsException (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|exception.My...|__java_lang_String_<once>_@exception.MyJsException )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Exception )))
+  (return (global.get $$class@exception.MyJsException))
+ )
+)
+
+;;; Class<?> MyJsException.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@exception.MyJsException
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $exception.MyJsException))
+ (local.set $this (ref.cast (ref $exception.MyJsException) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@exception.MyJsException ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@exception.MyJsException)
+;;; End of code for exception.MyJsException [methods]

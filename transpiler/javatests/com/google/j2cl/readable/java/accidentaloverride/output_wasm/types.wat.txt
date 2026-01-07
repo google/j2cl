@@ -1,0 +1,62 @@
+
+;;; Code for accidentaloverride.SuperInterface [type definition]
+(type $accidentaloverride.SuperInterface.vtable (sub (struct
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
+ (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+ ))
+)
+;;; End of code for accidentaloverride.SuperInterface [type definition]
+;;; Code for accidentaloverride.Parent [type definition]
+(type $accidentaloverride.Parent (sub $java.lang.Object (struct
+ (field $vtable (ref $accidentaloverride.Parent.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $accidentaloverride.Parent.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
+ ))
+)
+;;; End of code for accidentaloverride.Parent [type definition]
+;;; Code for accidentaloverride.AnotherAccidentalOverride [type definition]
+(type $accidentaloverride.AnotherAccidentalOverride (sub $accidentaloverride.Parent (struct
+ (field $vtable (ref $accidentaloverride.AnotherAccidentalOverride.vtable))
+ (field $itable (ref $accidentaloverride.AnotherAccidentalOverride.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $accidentaloverride.AnotherAccidentalOverride.vtable (sub $accidentaloverride.Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
+ (field $m_bar__java_lang_AssertionError__void (ref $function.m_bar__java_lang_AssertionError__void))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
+ (field $m_foo__java_lang_AssertionError__void (ref $function.m_foo__java_lang_AssertionError__void))
+ (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+ ))
+)
+;;; End of code for accidentaloverride.AnotherAccidentalOverride [type definition]
+;;; Code for accidentaloverride.AccidentalOverride [type definition]
+(type $accidentaloverride.AccidentalOverride (sub $accidentaloverride.Parent (struct
+ (field $vtable (ref $accidentaloverride.AccidentalOverride.vtable))
+ (field $itable (ref $accidentaloverride.AccidentalOverride.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $accidentaloverride.AccidentalOverride.vtable (sub $accidentaloverride.Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
+ (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+ ))
+)
+;;; End of code for accidentaloverride.AccidentalOverride [type definition]

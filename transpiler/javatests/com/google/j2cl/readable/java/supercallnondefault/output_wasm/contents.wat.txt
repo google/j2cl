@@ -1,0 +1,192 @@
+
+;;; Code for supercallnondefault.Parent [static fields]
+(global $$class-initialized@supercallnondefault.Parent (mut i32)
+ (i32.const 0)
+)
+(global $$class@supercallnondefault.Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for supercallnondefault.Parent [static fields]
+;;; Code for supercallnondefault.Child [static fields]
+(global $$class-initialized@supercallnondefault.Child (mut i32)
+ (i32.const 0)
+)
+(global $$class@supercallnondefault.Child (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for supercallnondefault.Child [static fields]
+;;; Code for supercallnondefault.Parent [vtable.init]
+(global $supercallnondefault.Parent.vtable (ref $supercallnondefault.Parent.vtable)
+ (struct.new $supercallnondefault.Parent.vtable
+  (ref.func $$getClassImpl__java_lang_Class@supercallnondefault.Parent)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for supercallnondefault.Parent [vtable.init]
+;;; Code for supercallnondefault.Child [vtable.init]
+(global $supercallnondefault.Child.vtable (ref $supercallnondefault.Child.vtable)
+ (struct.new $supercallnondefault.Child.vtable
+  (ref.func $$getClassImpl__java_lang_Class@supercallnondefault.Child)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for supercallnondefault.Child [vtable.init]
+
+;;; Code for supercallnondefault.Parent [methods]
+
+;;; Parent Parent.$create(int f)
+(func $$create__int@supercallnondefault.Parent
+ (param $f i32)
+ (result (ref null $supercallnondefault.Parent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:21:9
+ (local $$instance (ref null $supercallnondefault.Parent))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:21:9
+  (call $$clinit__void_<once>_@supercallnondefault.Parent )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:21:9
+  (local.set $$instance (struct.new $supercallnondefault.Parent (global.get $supercallnondefault.Parent.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:21:9
+  (call $$ctor__int__void_$p_supercallnondefault_Parent@supercallnondefault.Parent (ref.as_non_null (local.get $$instance))(local.get $f))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:21:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor(int f)
+(func $$ctor__int__void_$p_supercallnondefault_Parent@supercallnondefault.Parent
+ (param $this (ref null $supercallnondefault.Parent))
+ (param $f i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:21:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:21:23
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:22:4
+  (struct.set $supercallnondefault.Parent $field@supercallnondefault.Parent (local.get $this) (local.get $f))
+ )
+)
+
+;;; void Parent.$clinit()
+(func $$clinit__void_<once>_@supercallnondefault.Parent
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:18:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:18:6
+  (if (global.get $$class-initialized@supercallnondefault.Parent)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:18:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:18:6
+  (global.set $$class-initialized@supercallnondefault.Parent (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:18:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@supercallnondefault.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@supercallnondefault.Parent)))
+   (then
+    (return (global.get $$class@supercallnondefault.Parent))
+   )
+  )
+  (global.set $$class@supercallnondefault.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supercallnon...|__java_lang_String_<once>_@supercallnondefault.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@supercallnondefault.Parent))
+ )
+)
+
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@supercallnondefault.Parent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $supercallnondefault.Parent))
+ (local.set $this (ref.cast (ref $supercallnondefault.Parent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supercallnondefault.Parent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@supercallnondefault.Parent)
+;;; End of code for supercallnondefault.Parent [methods]
+;;; Code for supercallnondefault.Child [methods]
+
+;;; Child Child.$create(int a)
+(func $$create__int@supercallnondefault.Child
+ (param $a i32)
+ (result (ref null $supercallnondefault.Child))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:27:9
+ (local $$instance (ref null $supercallnondefault.Child))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:27:9
+  (call $$clinit__void_<once>_@supercallnondefault.Child )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:27:9
+  (local.set $$instance (struct.new $supercallnondefault.Child (global.get $supercallnondefault.Child.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:27:9
+  (call $$ctor__int__void_$p_supercallnondefault_Child@supercallnondefault.Child (ref.as_non_null (local.get $$instance))(local.get $a))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:27:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor(int a)
+(func $$ctor__int__void_$p_supercallnondefault_Child@supercallnondefault.Child
+ (param $this (ref null $supercallnondefault.Child))
+ (param $a i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:27:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:28:4
+  (call $$ctor__int__void_$p_supercallnondefault_Parent@supercallnondefault.Parent (ref.as_non_null (local.get $this))(local.get $a))
+ )
+)
+
+;;; void Child.$clinit()
+(func $$clinit__void_<once>_@supercallnondefault.Child
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:26:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:26:13
+  (if (global.get $$class-initialized@supercallnondefault.Child)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:26:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:26:13
+  (global.set $$class-initialized@supercallnondefault.Child (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault/readable-j2wasm.js/supercallnondefault/Child.java:26:13
+  (call $$clinit__void_<once>_@supercallnondefault.Parent )
+ )
+)
+
+;;; Class<T> Child.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@supercallnondefault.Child
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@supercallnondefault.Child)))
+   (then
+    (return (global.get $$class@supercallnondefault.Child))
+   )
+  )
+  (global.set $$class@supercallnondefault.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|supercallnon...|__java_lang_String_<once>_@supercallnondefault.Child )(call $$getClassMetadata__java_lang_Class_<once>_@supercallnondefault.Parent )))
+  (return (global.get $$class@supercallnondefault.Child))
+ )
+)
+
+;;; Class<?> Child.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@supercallnondefault.Child
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $supercallnondefault.Child))
+ (local.set $this (ref.cast (ref $supercallnondefault.Child) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@supercallnondefault.Child ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@supercallnondefault.Child)
+;;; End of code for supercallnondefault.Child [methods]

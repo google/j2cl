@@ -1,0 +1,830 @@
+
+(data $arrayliteral@devirtualizedcalls.ArrayCalls-1 "\01\00\00\00\01\00\00\00")
+;;; Code for devirtualizedcalls.ArrayCalls [static fields]
+(global $$class-initialized@devirtualizedcalls.ArrayCalls (mut i32)
+ (i32.const 0)
+)
+(global $$class@devirtualizedcalls.ArrayCalls (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for devirtualizedcalls.ArrayCalls [static fields]
+;;; Code for devirtualizedcalls.CharSequenceCalls [static fields]
+(global $$class-initialized@devirtualizedcalls.CharSequenceCalls (mut i32)
+ (i32.const 0)
+)
+(global $$class@devirtualizedcalls.CharSequenceCalls (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for devirtualizedcalls.CharSequenceCalls [static fields]
+;;; Code for devirtualizedcalls.NumberCalls [static fields]
+(global $$class-initialized@devirtualizedcalls.NumberCalls (mut i32)
+ (i32.const 0)
+)
+(global $$class@devirtualizedcalls.NumberCalls (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for devirtualizedcalls.NumberCalls [static fields]
+;;; Code for devirtualizedcalls.ObjectCalls [static fields]
+(global $$class-initialized@devirtualizedcalls.ObjectCalls (mut i32)
+ (i32.const 0)
+)
+(global $$class@devirtualizedcalls.ObjectCalls (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for devirtualizedcalls.ObjectCalls [static fields]
+;;; Code for devirtualizedcalls.StringCalls [static fields]
+(global $$class-initialized@devirtualizedcalls.StringCalls (mut i32)
+ (i32.const 0)
+)
+(global $$class@devirtualizedcalls.StringCalls (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for devirtualizedcalls.StringCalls [static fields]
+;;; Code for devirtualizedcalls.ArrayCalls [vtable.init]
+(global $devirtualizedcalls.ArrayCalls.vtable (ref $devirtualizedcalls.ArrayCalls.vtable)
+ (struct.new $devirtualizedcalls.ArrayCalls.vtable
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.ArrayCalls)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@devirtualizedcalls.ArrayCalls)
+ )
+)
+;;; End of code for devirtualizedcalls.ArrayCalls [vtable.init]
+;;; Code for devirtualizedcalls.CharSequenceCalls [vtable.init]
+(global $devirtualizedcalls.CharSequenceCalls.vtable (ref $devirtualizedcalls.CharSequenceCalls.vtable)
+ (struct.new $devirtualizedcalls.CharSequenceCalls.vtable
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@devirtualizedcalls.CharSequenceCalls)
+  (ref.func $m_test__java_lang_CharSequence__void@devirtualizedcalls.CharSequenceCalls)
+ )
+)
+;;; End of code for devirtualizedcalls.CharSequenceCalls [vtable.init]
+;;; Code for devirtualizedcalls.NumberCalls [vtable.init]
+(global $devirtualizedcalls.NumberCalls.vtable (ref $devirtualizedcalls.NumberCalls.vtable)
+ (struct.new $devirtualizedcalls.NumberCalls.vtable
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.NumberCalls)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@devirtualizedcalls.NumberCalls)
+ )
+)
+;;; End of code for devirtualizedcalls.NumberCalls [vtable.init]
+;;; Code for devirtualizedcalls.ObjectCalls [vtable.init]
+(global $devirtualizedcalls.ObjectCalls.vtable (ref $devirtualizedcalls.ObjectCalls.vtable)
+ (struct.new $devirtualizedcalls.ObjectCalls.vtable
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.ObjectCalls)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@devirtualizedcalls.ObjectCalls)
+  (ref.func $m_testNotEquals__boolean@devirtualizedcalls.ObjectCalls)
+  (ref.func $m_test__void@devirtualizedcalls.ObjectCalls)
+ )
+)
+;;; End of code for devirtualizedcalls.ObjectCalls [vtable.init]
+;;; Code for devirtualizedcalls.StringCalls [vtable.init]
+(global $devirtualizedcalls.StringCalls.vtable (ref $devirtualizedcalls.StringCalls.vtable)
+ (struct.new $devirtualizedcalls.StringCalls.vtable
+  (ref.func $$getClassImpl__java_lang_Class@devirtualizedcalls.StringCalls)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@devirtualizedcalls.StringCalls)
+ )
+)
+;;; End of code for devirtualizedcalls.StringCalls [vtable.init]
+
+;;; Code for devirtualizedcalls.ArrayCalls [methods]
+
+;;; ArrayCalls ArrayCalls.$create()
+(func $$create__@devirtualizedcalls.ArrayCalls
+ (result (ref null $devirtualizedcalls.ArrayCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+ (local $$instance (ref null $devirtualizedcalls.ArrayCalls))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+  (call $$clinit__void_<once>_@devirtualizedcalls.ArrayCalls )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+  (local.set $$instance (struct.new $devirtualizedcalls.ArrayCalls (global.get $devirtualizedcalls.ArrayCalls.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+  (call $$ctor__void_$p_devirtualizedcalls_ArrayCalls@devirtualizedcalls.ArrayCalls (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ArrayCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_ArrayCalls@devirtualizedcalls.ArrayCalls
+ (param $this (ref null $devirtualizedcalls.ArrayCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ArrayCalls.main()
+(func $m_main__void@devirtualizedcalls.ArrayCalls
+ (type $function.m_main__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:19:14
+ (local $array2d (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $length1 i32)
+ (local $length2 i32)
+ (local $this (ref null $devirtualizedcalls.ArrayCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.ArrayCalls) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:20:4
+  (local.set $array2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $m_newWithLiteral__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.new_data $int.array $arrayliteral@devirtualizedcalls.ArrayCalls-1 (i32.const 0) (i32.const 2)))(i32.const -1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:22:4
+  (local.set $length1 (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $array2d)) (i32.const 0))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:23:4
+  (local.set $length2 (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $array2d))))
+ )
+)
+(elem declare func $m_main__void@devirtualizedcalls.ArrayCalls)
+
+;;; void ArrayCalls.$clinit()
+(func $$clinit__void_<once>_@devirtualizedcalls.ArrayCalls
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+  (if (global.get $$class-initialized@devirtualizedcalls.ArrayCalls)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+  (global.set $$class-initialized@devirtualizedcalls.ArrayCalls (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ArrayCalls.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ArrayCalls.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.ArrayCalls
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@devirtualizedcalls.ArrayCalls)))
+   (then
+    (return (global.get $$class@devirtualizedcalls.ArrayCalls))
+   )
+  )
+  (global.set $$class@devirtualizedcalls.ArrayCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|devirtualize...|__java_lang_String_<once>_@devirtualizedcalls.ArrayCalls )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@devirtualizedcalls.ArrayCalls))
+ )
+)
+
+;;; Class<?> ArrayCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.ArrayCalls
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $devirtualizedcalls.ArrayCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.ArrayCalls) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.ArrayCalls ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.ArrayCalls)
+;;; End of code for devirtualizedcalls.ArrayCalls [methods]
+;;; Code for devirtualizedcalls.CharSequenceCalls [methods]
+
+;;; CharSequenceCalls CharSequenceCalls.$create()
+(func $$create__@devirtualizedcalls.CharSequenceCalls
+ (result (ref null $devirtualizedcalls.CharSequenceCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+ (local $$instance (ref null $devirtualizedcalls.CharSequenceCalls))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+  (call $$clinit__void_<once>_@devirtualizedcalls.CharSequenceCalls )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+  (local.set $$instance (struct.new $devirtualizedcalls.CharSequenceCalls (global.get $devirtualizedcalls.CharSequenceCalls.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+  (call $$ctor__void_$p_devirtualizedcalls_CharSequenceCalls@devirtualizedcalls.CharSequenceCalls (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void CharSequenceCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_CharSequenceCalls@devirtualizedcalls.CharSequenceCalls
+ (param $this (ref null $devirtualizedcalls.CharSequenceCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void CharSequenceCalls.test(CharSequence cs)
+(func $m_test__java_lang_CharSequence__void@devirtualizedcalls.CharSequenceCalls
+ (type $function.m_test__java_lang_CharSequence__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $cs (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:19:14
+ (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.CharSequenceCalls) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:20:4
+  (drop (call_ref $function.m_charAt__int__char (ref.as_non_null (local.get $cs))(i32.const 0)(struct.get $java.lang.CharSequence.vtable $m_charAt__int__char (ref.cast (ref $java.lang.CharSequence.vtable) (call $get.itable.$java.lang.CharSequence (local.get $cs))))))
+ )
+)
+(elem declare func $m_test__java_lang_CharSequence__void@devirtualizedcalls.CharSequenceCalls)
+
+;;; void CharSequenceCalls.main()
+(func $m_main__void@devirtualizedcalls.CharSequenceCalls
+ (type $function.m_main__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:23:14
+ (local $s (ref null $java.lang.String))
+ (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.CharSequenceCalls) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:24:4
+  (local.set $s (call $$getString_|s|__java_lang_String_<once>_@devirtualizedcalls.CharSequenceCalls ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:25:4
+  (call_ref $function.m_test__java_lang_CharSequence__void (ref.as_non_null (local.get $this))(local.get $s)(struct.get $devirtualizedcalls.CharSequenceCalls.vtable $m_test__java_lang_CharSequence__void (struct.get $devirtualizedcalls.CharSequenceCalls $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_main__void@devirtualizedcalls.CharSequenceCalls)
+
+;;; void CharSequenceCalls.$clinit()
+(func $$clinit__void_<once>_@devirtualizedcalls.CharSequenceCalls
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+  (if (global.get $$class-initialized@devirtualizedcalls.CharSequenceCalls)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+  (global.set $$class-initialized@devirtualizedcalls.CharSequenceCalls (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/CharSequenceCalls.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> CharSequenceCalls.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.CharSequenceCalls
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@devirtualizedcalls.CharSequenceCalls)))
+   (then
+    (return (global.get $$class@devirtualizedcalls.CharSequenceCalls))
+   )
+  )
+  (global.set $$class@devirtualizedcalls.CharSequenceCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|devirtualize...|__java_lang_String_<once>_@devirtualizedcalls.CharSequenceCalls )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@devirtualizedcalls.CharSequenceCalls))
+ )
+)
+
+;;; Class<?> CharSequenceCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.CharSequenceCalls
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.CharSequenceCalls) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.CharSequenceCalls ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
+;;; End of code for devirtualizedcalls.CharSequenceCalls [methods]
+;;; Code for devirtualizedcalls.NumberCalls [methods]
+
+;;; NumberCalls NumberCalls.$create()
+(func $$create__@devirtualizedcalls.NumberCalls
+ (result (ref null $devirtualizedcalls.NumberCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+ (local $$instance (ref null $devirtualizedcalls.NumberCalls))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+  (call $$clinit__void_<once>_@devirtualizedcalls.NumberCalls )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+  (local.set $$instance (struct.new $devirtualizedcalls.NumberCalls (global.get $devirtualizedcalls.NumberCalls.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+  (call $$ctor__void_$p_devirtualizedcalls_NumberCalls@devirtualizedcalls.NumberCalls (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NumberCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_NumberCalls@devirtualizedcalls.NumberCalls
+ (param $this (ref null $devirtualizedcalls.NumberCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void NumberCalls.main()
+(func $m_main__void@devirtualizedcalls.NumberCalls
+ (type $function.m_main__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:19:14
+ (local $i (ref null $java.lang.Number))
+ (local $ii (ref null $java.lang.Integer))
+ (local $d (ref null $java.lang.Number))
+ (local $dd (ref null $java.lang.Double))
+ (local $s (ref null $java.lang.Number))
+ (local $ss (ref null $java.lang.Short))
+ (local $b (ref null $java.lang.Number))
+ (local $bb (ref null $java.lang.Byte))
+ (local $f (ref null $java.lang.Number))
+ (local $ff (ref null $java.lang.Float))
+ (local $l (ref null $java.lang.Number))
+ (local $ll (ref null $java.lang.Long))
+ (local $c (ref null $java.lang.Character))
+ (local $bool (ref null $java.lang.Boolean))
+ (local $this (ref null $devirtualizedcalls.NumberCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.NumberCalls) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:20:4
+  (local.set $i (call $$create__int@java.lang.Integer (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:21:4
+  (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $i))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $i)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:22:4
+  (drop (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $i))(struct.get $java.lang.Number.vtable $m_doubleValue__double (struct.get $java.lang.Number $vtable(local.get $i)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:23:4
+  (drop (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $i))(struct.get $java.lang.Number.vtable $m_floatValue__float (struct.get $java.lang.Number $vtable(local.get $i)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:24:4
+  (drop (call_ref $function.m_intValue__int (ref.as_non_null (local.get $i))(struct.get $java.lang.Number.vtable $m_intValue__int (struct.get $java.lang.Number $vtable(local.get $i)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:25:4
+  (drop (call_ref $function.m_longValue__long (ref.as_non_null (local.get $i))(struct.get $java.lang.Number.vtable $m_longValue__long (struct.get $java.lang.Number $vtable(local.get $i)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:26:4
+  (drop (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $i))(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $i)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:28:4
+  (local.set $ii (call $$create__int@java.lang.Integer (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:29:4
+  (drop (call $m_byteValue__byte@java.lang.Integer (ref.as_non_null (local.get $ii))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:30:4
+  (drop (call $m_doubleValue__double@java.lang.Integer (ref.as_non_null (local.get $ii))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:31:4
+  (drop (call $m_floatValue__float@java.lang.Integer (ref.as_non_null (local.get $ii))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:32:4
+  (drop (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $ii))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:33:4
+  (drop (call $m_longValue__long@java.lang.Integer (ref.as_non_null (local.get $ii))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:34:4
+  (drop (call $m_shortValue__short@java.lang.Integer (ref.as_non_null (local.get $ii))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:36:4
+  (local.set $d (call $$create__double@java.lang.Double (f64.const 1.1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:37:4
+  (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $d))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $d)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:38:4
+  (drop (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $d))(struct.get $java.lang.Number.vtable $m_doubleValue__double (struct.get $java.lang.Number $vtable(local.get $d)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:39:4
+  (drop (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $d))(struct.get $java.lang.Number.vtable $m_floatValue__float (struct.get $java.lang.Number $vtable(local.get $d)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:40:4
+  (drop (call_ref $function.m_intValue__int (ref.as_non_null (local.get $d))(struct.get $java.lang.Number.vtable $m_intValue__int (struct.get $java.lang.Number $vtable(local.get $d)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:41:4
+  (drop (call_ref $function.m_longValue__long (ref.as_non_null (local.get $d))(struct.get $java.lang.Number.vtable $m_longValue__long (struct.get $java.lang.Number $vtable(local.get $d)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:42:4
+  (drop (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $d))(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $d)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:44:4
+  (local.set $dd (call $$create__double@java.lang.Double (f64.const 1.1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:45:4
+  (drop (call $m_byteValue__byte@java.lang.Double (ref.as_non_null (local.get $dd))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:46:4
+  (drop (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (local.get $dd))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:47:4
+  (drop (call $m_floatValue__float@java.lang.Double (ref.as_non_null (local.get $dd))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:48:4
+  (drop (call $m_intValue__int@java.lang.Double (ref.as_non_null (local.get $dd))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:49:4
+  (drop (call $m_longValue__long@java.lang.Double (ref.as_non_null (local.get $dd))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:50:4
+  (drop (call $m_shortValue__short@java.lang.Double (ref.as_non_null (local.get $dd))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:52:4
+  (local.set $s (call $$create__short@java.lang.Short (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:53:4
+  (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $s))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $s)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:54:4
+  (drop (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $s))(struct.get $java.lang.Number.vtable $m_doubleValue__double (struct.get $java.lang.Number $vtable(local.get $s)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:55:4
+  (drop (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $s))(struct.get $java.lang.Number.vtable $m_floatValue__float (struct.get $java.lang.Number $vtable(local.get $s)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:56:4
+  (drop (call_ref $function.m_intValue__int (ref.as_non_null (local.get $s))(struct.get $java.lang.Number.vtable $m_intValue__int (struct.get $java.lang.Number $vtable(local.get $s)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:57:4
+  (drop (call_ref $function.m_longValue__long (ref.as_non_null (local.get $s))(struct.get $java.lang.Number.vtable $m_longValue__long (struct.get $java.lang.Number $vtable(local.get $s)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:58:4
+  (drop (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $s))(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $s)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:60:4
+  (local.set $ss (call $$create__short@java.lang.Short (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:61:4
+  (drop (call $m_byteValue__byte@java.lang.Short (ref.as_non_null (local.get $ss))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:62:4
+  (drop (call $m_doubleValue__double@java.lang.Short (ref.as_non_null (local.get $ss))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:63:4
+  (drop (call $m_floatValue__float@java.lang.Short (ref.as_non_null (local.get $ss))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:64:4
+  (drop (call $m_intValue__int@java.lang.Short (ref.as_non_null (local.get $ss))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:65:4
+  (drop (call $m_longValue__long@java.lang.Short (ref.as_non_null (local.get $ss))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:66:4
+  (drop (call $m_shortValue__short@java.lang.Short (ref.as_non_null (local.get $ss))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:68:4
+  (local.set $b (call $$create__byte@java.lang.Byte (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:69:4
+  (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $b))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $b)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:70:4
+  (drop (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $b))(struct.get $java.lang.Number.vtable $m_doubleValue__double (struct.get $java.lang.Number $vtable(local.get $b)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:71:4
+  (drop (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $b))(struct.get $java.lang.Number.vtable $m_floatValue__float (struct.get $java.lang.Number $vtable(local.get $b)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:72:4
+  (drop (call_ref $function.m_intValue__int (ref.as_non_null (local.get $b))(struct.get $java.lang.Number.vtable $m_intValue__int (struct.get $java.lang.Number $vtable(local.get $b)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:73:4
+  (drop (call_ref $function.m_longValue__long (ref.as_non_null (local.get $b))(struct.get $java.lang.Number.vtable $m_longValue__long (struct.get $java.lang.Number $vtable(local.get $b)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:74:4
+  (drop (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $b))(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $b)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:76:4
+  (local.set $bb (call $$create__byte@java.lang.Byte (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:77:4
+  (drop (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $bb))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:78:4
+  (drop (call $m_doubleValue__double@java.lang.Byte (ref.as_non_null (local.get $bb))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:79:4
+  (drop (call $m_floatValue__float@java.lang.Byte (ref.as_non_null (local.get $bb))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:80:4
+  (drop (call $m_intValue__int@java.lang.Byte (ref.as_non_null (local.get $bb))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:81:4
+  (drop (call $m_longValue__long@java.lang.Byte (ref.as_non_null (local.get $bb))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:82:4
+  (drop (call $m_shortValue__short@java.lang.Byte (ref.as_non_null (local.get $bb))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:84:4
+  (local.set $f (call $$create__float@java.lang.Float (f32.const 1.100000023841858)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:85:4
+  (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $f))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $f)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:86:4
+  (drop (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $f))(struct.get $java.lang.Number.vtable $m_doubleValue__double (struct.get $java.lang.Number $vtable(local.get $f)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:87:4
+  (drop (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $f))(struct.get $java.lang.Number.vtable $m_floatValue__float (struct.get $java.lang.Number $vtable(local.get $f)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:88:4
+  (drop (call_ref $function.m_intValue__int (ref.as_non_null (local.get $f))(struct.get $java.lang.Number.vtable $m_intValue__int (struct.get $java.lang.Number $vtable(local.get $f)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:89:4
+  (drop (call_ref $function.m_longValue__long (ref.as_non_null (local.get $f))(struct.get $java.lang.Number.vtable $m_longValue__long (struct.get $java.lang.Number $vtable(local.get $f)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:90:4
+  (drop (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $f))(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $f)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:92:4
+  (local.set $ff (call $$create__float@java.lang.Float (f32.const 1.100000023841858)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:93:4
+  (drop (call $m_byteValue__byte@java.lang.Float (ref.as_non_null (local.get $ff))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:94:4
+  (drop (call $m_doubleValue__double@java.lang.Float (ref.as_non_null (local.get $ff))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:95:4
+  (drop (call $m_floatValue__float@java.lang.Float (ref.as_non_null (local.get $ff))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:96:4
+  (drop (call $m_intValue__int@java.lang.Float (ref.as_non_null (local.get $ff))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:97:4
+  (drop (call $m_longValue__long@java.lang.Float (ref.as_non_null (local.get $ff))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:98:4
+  (drop (call $m_shortValue__short@java.lang.Float (ref.as_non_null (local.get $ff))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:100:4
+  (local.set $l (call $$create__long@java.lang.Long (i64.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:101:4
+  (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $l))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $l)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:102:4
+  (drop (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $l))(struct.get $java.lang.Number.vtable $m_doubleValue__double (struct.get $java.lang.Number $vtable(local.get $l)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:103:4
+  (drop (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $l))(struct.get $java.lang.Number.vtable $m_floatValue__float (struct.get $java.lang.Number $vtable(local.get $l)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:104:4
+  (drop (call_ref $function.m_intValue__int (ref.as_non_null (local.get $l))(struct.get $java.lang.Number.vtable $m_intValue__int (struct.get $java.lang.Number $vtable(local.get $l)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:105:4
+  (drop (call_ref $function.m_longValue__long (ref.as_non_null (local.get $l))(struct.get $java.lang.Number.vtable $m_longValue__long (struct.get $java.lang.Number $vtable(local.get $l)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:106:4
+  (drop (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $l))(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $l)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:108:4
+  (local.set $ll (call $$create__long@java.lang.Long (i64.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:109:4
+  (drop (call $m_byteValue__byte@java.lang.Long (ref.as_non_null (local.get $ll))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:110:4
+  (drop (call $m_doubleValue__double@java.lang.Long (ref.as_non_null (local.get $ll))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:111:4
+  (drop (call $m_floatValue__float@java.lang.Long (ref.as_non_null (local.get $ll))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:112:4
+  (drop (call $m_intValue__int@java.lang.Long (ref.as_non_null (local.get $ll))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:113:4
+  (drop (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $ll))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:114:4
+  (drop (call $m_shortValue__short@java.lang.Long (ref.as_non_null (local.get $ll))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:116:4
+  (local.set $c (call $$create__char@java.lang.Character (i32.const 97)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:117:4
+  (drop (call $m_charValue__char@java.lang.Character (ref.as_non_null (local.get $c))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:119:4
+  (local.set $bool (call $$create__boolean@java.lang.Boolean (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:120:4
+  (drop (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (local.get $bool))))
+ )
+)
+(elem declare func $m_main__void@devirtualizedcalls.NumberCalls)
+
+;;; void NumberCalls.$clinit()
+(func $$clinit__void_<once>_@devirtualizedcalls.NumberCalls
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+  (if (global.get $$class-initialized@devirtualizedcalls.NumberCalls)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+  (global.set $$class-initialized@devirtualizedcalls.NumberCalls (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/NumberCalls.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> NumberCalls.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.NumberCalls
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@devirtualizedcalls.NumberCalls)))
+   (then
+    (return (global.get $$class@devirtualizedcalls.NumberCalls))
+   )
+  )
+  (global.set $$class@devirtualizedcalls.NumberCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|devirtualize...|__java_lang_String_<once>_@devirtualizedcalls.NumberCalls )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@devirtualizedcalls.NumberCalls))
+ )
+)
+
+;;; Class<?> NumberCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.NumberCalls
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $devirtualizedcalls.NumberCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.NumberCalls) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.NumberCalls ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.NumberCalls)
+;;; End of code for devirtualizedcalls.NumberCalls [methods]
+;;; Code for devirtualizedcalls.ObjectCalls [methods]
+
+;;; ObjectCalls ObjectCalls.$create()
+(func $$create__@devirtualizedcalls.ObjectCalls
+ (result (ref null $devirtualizedcalls.ObjectCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+ (local $$instance (ref null $devirtualizedcalls.ObjectCalls))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+  (call $$clinit__void_<once>_@devirtualizedcalls.ObjectCalls )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+  (local.set $$instance (struct.new $devirtualizedcalls.ObjectCalls (global.get $devirtualizedcalls.ObjectCalls.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+  (call $$ctor__void_$p_devirtualizedcalls_ObjectCalls@devirtualizedcalls.ObjectCalls (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ObjectCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_ObjectCalls@devirtualizedcalls.ObjectCalls
+ (param $this (ref null $devirtualizedcalls.ObjectCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ObjectCalls.main()
+(func $m_main__void@devirtualizedcalls.ObjectCalls
+ (type $function.m_main__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:20:14
+ (local $object (ref null $java.lang.Object))
+ (local $objectCalls (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $this (ref null $devirtualizedcalls.ObjectCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.ObjectCalls) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:21:4
+  (local.set $object (call $$create__@java.lang.Object ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:23:4
+  (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $object))(local.get $object)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $object)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:24:4
+  (drop (call_ref $function.m_hashCode__int (ref.as_non_null (local.get $object))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $object)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:25:4
+  (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $object))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $object)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:26:4
+  (drop (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $object))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:28:4
+  (local.set $objectCalls (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:29:4
+  (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $objectCalls))(local.get $objectCalls)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $objectCalls)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:30:4
+  (drop (call_ref $function.m_hashCode__int (ref.as_non_null (local.get $objectCalls))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $objectCalls)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:31:4
+  (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $objectCalls))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $objectCalls)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:32:4
+  (drop (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $objectCalls))))
+ )
+)
+(elem declare func $m_main__void@devirtualizedcalls.ObjectCalls)
+
+;;; void ObjectCalls.test()
+(func $m_test__void@devirtualizedcalls.ObjectCalls
+ (type $function.m_test__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:36:14
+ (local $this (ref null $devirtualizedcalls.ObjectCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.ObjectCalls) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:37:4
+  (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $this))(call $$create__@java.lang.Object )(struct.get $devirtualizedcalls.ObjectCalls.vtable $m_equals__java_lang_Object__boolean (struct.get $devirtualizedcalls.ObjectCalls $vtable(local.get $this)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:38:4
+  (drop (call_ref $function.m_hashCode__int (ref.as_non_null (local.get $this))(struct.get $devirtualizedcalls.ObjectCalls.vtable $m_hashCode__int (struct.get $devirtualizedcalls.ObjectCalls $vtable(local.get $this)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:39:4
+  (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $this))(struct.get $devirtualizedcalls.ObjectCalls.vtable $m_toString__java_lang_String (struct.get $devirtualizedcalls.ObjectCalls $vtable(local.get $this)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:40:4
+  (drop (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:42:4
+  (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $this))(call $$create__@java.lang.Object )(struct.get $devirtualizedcalls.ObjectCalls.vtable $m_equals__java_lang_Object__boolean (struct.get $devirtualizedcalls.ObjectCalls $vtable(local.get $this)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:43:4
+  (drop (call_ref $function.m_hashCode__int (ref.as_non_null (local.get $this))(struct.get $devirtualizedcalls.ObjectCalls.vtable $m_hashCode__int (struct.get $devirtualizedcalls.ObjectCalls $vtable(local.get $this)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:44:4
+  (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $this))(struct.get $devirtualizedcalls.ObjectCalls.vtable $m_toString__java_lang_String (struct.get $devirtualizedcalls.ObjectCalls $vtable(local.get $this)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:45:4
+  (drop (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))
+ )
+)
+(elem declare func $m_test__void@devirtualizedcalls.ObjectCalls)
+
+;;; boolean ObjectCalls.testNotEquals()
+(func $m_testNotEquals__boolean@devirtualizedcalls.ObjectCalls
+ (type $function.m_testNotEquals__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:48:17
+ (local $this (ref null $devirtualizedcalls.ObjectCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.ObjectCalls) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:49:4
+  (return (i32.eqz (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $this))(call $$create__@java.lang.Object )(struct.get $devirtualizedcalls.ObjectCalls.vtable $m_equals__java_lang_Object__boolean (struct.get $devirtualizedcalls.ObjectCalls $vtable(local.get $this))))))
+ )
+)
+(elem declare func $m_testNotEquals__boolean@devirtualizedcalls.ObjectCalls)
+
+;;; void ObjectCalls.$clinit()
+(func $$clinit__void_<once>_@devirtualizedcalls.ObjectCalls
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+  (if (global.get $$class-initialized@devirtualizedcalls.ObjectCalls)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+  (global.set $$class-initialized@devirtualizedcalls.ObjectCalls (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/ObjectCalls.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ObjectCalls.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.ObjectCalls
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@devirtualizedcalls.ObjectCalls)))
+   (then
+    (return (global.get $$class@devirtualizedcalls.ObjectCalls))
+   )
+  )
+  (global.set $$class@devirtualizedcalls.ObjectCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|devirtualize...|__java_lang_String_<once>_@devirtualizedcalls.ObjectCalls )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@devirtualizedcalls.ObjectCalls))
+ )
+)
+
+;;; Class<?> ObjectCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.ObjectCalls
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $devirtualizedcalls.ObjectCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.ObjectCalls) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.ObjectCalls ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.ObjectCalls)
+;;; End of code for devirtualizedcalls.ObjectCalls [methods]
+;;; Code for devirtualizedcalls.StringCalls [methods]
+
+;;; StringCalls StringCalls.$create()
+(func $$create__@devirtualizedcalls.StringCalls
+ (result (ref null $devirtualizedcalls.StringCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+ (local $$instance (ref null $devirtualizedcalls.StringCalls))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+  (call $$clinit__void_<once>_@devirtualizedcalls.StringCalls )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+  (local.set $$instance (struct.new $devirtualizedcalls.StringCalls (global.get $devirtualizedcalls.StringCalls.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+  (call $$ctor__void_$p_devirtualizedcalls_StringCalls@devirtualizedcalls.StringCalls (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StringCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_StringCalls@devirtualizedcalls.StringCalls
+ (param $this (ref null $devirtualizedcalls.StringCalls))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void StringCalls.main()
+(func $m_main__void@devirtualizedcalls.StringCalls
+ (type $function.m_main__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:22:14
+ (local $literal (ref null $java.lang.String))
+ (local $sub (ref null $java.lang.String))
+ (local $sub2 (ref null $java.lang.String))
+ (local $trimmed (ref null $java.lang.String))
+ (local $newString (ref null $java.lang.String))
+ (local $this (ref null $devirtualizedcalls.StringCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.StringCalls) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:23:4
+  (local.set $literal (call $$getString_|String|__java_lang_String_<once>_@devirtualizedcalls.StringCalls ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:24:4
+  (local.set $sub (call $m_substring__int__java_lang_String@java.lang.String (ref.as_non_null (local.get $literal))(i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:25:4
+  (local.set $sub2 (call $m_substring__int__int__java_lang_String@java.lang.String (ref.as_non_null (local.get $literal))(i32.const 2)(i32.const 3)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:26:4
+  (local.set $trimmed (call $m_trim__java_lang_String@java.lang.String (ref.as_non_null (local.get $literal))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:29:4
+  (local.set $newString (call $m_toString__java_lang_String@java.lang.String (ref.as_non_null (local.get $literal))))
+ )
+)
+(elem declare func $m_main__void@devirtualizedcalls.StringCalls)
+
+;;; void StringCalls.$clinit()
+(func $$clinit__void_<once>_@devirtualizedcalls.StringCalls
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+  (if (global.get $$class-initialized@devirtualizedcalls.StringCalls)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+  (global.set $$class-initialized@devirtualizedcalls.StringCalls (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/devirtualizedcalls/readable-j2wasm.js/devirtualizedcalls/StringCalls.java:21:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> StringCalls.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.StringCalls
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@devirtualizedcalls.StringCalls)))
+   (then
+    (return (global.get $$class@devirtualizedcalls.StringCalls))
+   )
+  )
+  (global.set $$class@devirtualizedcalls.StringCalls (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|devirtualize...|__java_lang_String_<once>_@devirtualizedcalls.StringCalls )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@devirtualizedcalls.StringCalls))
+ )
+)
+
+;;; Class<?> StringCalls.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@devirtualizedcalls.StringCalls
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $devirtualizedcalls.StringCalls))
+ (local.set $this (ref.cast (ref $devirtualizedcalls.StringCalls) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@devirtualizedcalls.StringCalls ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@devirtualizedcalls.StringCalls)
+;;; End of code for devirtualizedcalls.StringCalls [methods]

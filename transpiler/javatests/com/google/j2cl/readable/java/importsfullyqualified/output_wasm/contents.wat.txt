@@ -1,0 +1,98 @@
+
+;;; Code for importsfullyqualified.ImportsFullyQualified [static fields]
+(global $$class-initialized@importsfullyqualified.ImportsFullyQualified (mut i32)
+ (i32.const 0)
+)
+(global $$class@importsfullyqualified.ImportsFullyQualified (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for importsfullyqualified.ImportsFullyQualified [static fields]
+;;; Code for importsfullyqualified.ImportsFullyQualified [vtable.init]
+(global $importsfullyqualified.ImportsFullyQualified.vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable)
+ (struct.new $importsfullyqualified.ImportsFullyQualified.vtable
+  (ref.func $$getClassImpl__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $java.io.Serializable.vtable@$importsfullyqualified.ImportsFullyQualified (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+;;; End of code for importsfullyqualified.ImportsFullyQualified [vtable.init]
+
+;;; Code for importsfullyqualified.ImportsFullyQualified [methods]
+
+;;; ImportsFullyQualified ImportsFullyQualified.$create()
+(func $$create__@importsfullyqualified.ImportsFullyQualified
+ (result (ref null $importsfullyqualified.ImportsFullyQualified))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+ (local $$instance (ref null $importsfullyqualified.ImportsFullyQualified))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+  (call $$clinit__void_<once>_@importsfullyqualified.ImportsFullyQualified )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+  (local.set $$instance (struct.new $importsfullyqualified.ImportsFullyQualified (global.get $importsfullyqualified.ImportsFullyQualified.vtable) (global.get $importsfullyqualified.ImportsFullyQualified.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+  (call $$ctor__void_$p_importsfullyqualified_ImportsFullyQualified@importsfullyqualified.ImportsFullyQualified (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ImportsFullyQualified.$ctor()
+(func $$ctor__void_$p_importsfullyqualified_ImportsFullyQualified@importsfullyqualified.ImportsFullyQualified
+ (param $this (ref null $importsfullyqualified.ImportsFullyQualified))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ImportsFullyQualified.$clinit()
+(func $$clinit__void_<once>_@importsfullyqualified.ImportsFullyQualified
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+  (if (global.get $$class-initialized@importsfullyqualified.ImportsFullyQualified)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+  (global.set $$class-initialized@importsfullyqualified.ImportsFullyQualified (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/importsfullyqualified/readable-j2wasm.js/importsfullyqualified/ImportsFullyQualified.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> ImportsFullyQualified.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@importsfullyqualified.ImportsFullyQualified
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@importsfullyqualified.ImportsFullyQualified)))
+   (then
+    (return (global.get $$class@importsfullyqualified.ImportsFullyQualified))
+   )
+  )
+  (global.set $$class@importsfullyqualified.ImportsFullyQualified (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|importsfully...|__java_lang_String_<once>_@importsfullyqualified.ImportsFullyQualified )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@importsfullyqualified.ImportsFullyQualified))
+ )
+)
+
+;;; Class<?> ImportsFullyQualified.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@importsfullyqualified.ImportsFullyQualified
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $importsfullyqualified.ImportsFullyQualified))
+ (local.set $this (ref.cast (ref $importsfullyqualified.ImportsFullyQualified) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@importsfullyqualified.ImportsFullyQualified ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
+;;; End of code for importsfullyqualified.ImportsFullyQualified [methods]

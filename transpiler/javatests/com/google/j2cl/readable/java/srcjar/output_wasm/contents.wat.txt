@@ -1,0 +1,198 @@
+
+;;; Code for srcjar.Foo [static fields]
+(global $$class-initialized@srcjar.Foo (mut i32)
+ (i32.const 0)
+)
+(global $$class@srcjar.Foo (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for srcjar.Foo [static fields]
+;;; Code for srcjar.Srcjar [static fields]
+(global $$class-initialized@srcjar.Srcjar (mut i32)
+ (i32.const 0)
+)
+(global $$class@srcjar.Srcjar (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for srcjar.Srcjar [static fields]
+;;; Code for srcjar.Foo [vtable.init]
+(global $srcjar.Foo.vtable (ref $srcjar.Foo.vtable)
+ (struct.new $srcjar.Foo.vtable
+  (ref.func $$getClassImpl__java_lang_Class@srcjar.Foo)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for srcjar.Foo [vtable.init]
+;;; Code for srcjar.Srcjar [vtable.init]
+(global $srcjar.Srcjar.vtable (ref $srcjar.Srcjar.vtable)
+ (struct.new $srcjar.Srcjar.vtable
+  (ref.func $$getClassImpl__java_lang_Class@srcjar.Srcjar)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+;;; End of code for srcjar.Srcjar [vtable.init]
+
+;;; Code for srcjar.Foo [methods]
+
+;;; Foo Foo.$create()
+(func $$create__@srcjar.Foo
+ (result (ref null $srcjar.Foo))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+ (local $$instance (ref null $srcjar.Foo))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+  (call $$clinit__void_<once>_@srcjar.Foo )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+  (local.set $$instance (struct.new $srcjar.Foo (global.get $srcjar.Foo.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+  (call $$ctor__void_$p_srcjar_Foo@srcjar.Foo (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Foo.$ctor()
+(func $$ctor__void_$p_srcjar_Foo@srcjar.Foo
+ (param $this (ref null $srcjar.Foo))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Foo.$clinit()
+(func $$clinit__void_<once>_@srcjar.Foo
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+  (if (global.get $$class-initialized@srcjar.Foo)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+  (global.set $$class-initialized@srcjar.Foo (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Foo.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@srcjar.Foo
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@srcjar.Foo)))
+   (then
+    (return (global.get $$class@srcjar.Foo))
+   )
+  )
+  (global.set $$class@srcjar.Foo (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|srcjar.Foo|__java_lang_String_<once>_@srcjar.Foo )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@srcjar.Foo))
+ )
+)
+
+;;; Class<?> Foo.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@srcjar.Foo
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $srcjar.Foo))
+ (local.set $this (ref.cast (ref $srcjar.Foo) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@srcjar.Foo ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@srcjar.Foo)
+;;; End of code for srcjar.Foo [methods]
+;;; Code for srcjar.Srcjar [methods]
+
+;;; Srcjar Srcjar.$create()
+(func $$create__@srcjar.Srcjar
+ (result (ref null $srcjar.Srcjar))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+ (local $$instance (ref null $srcjar.Srcjar))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+  (call $$clinit__void_<once>_@srcjar.Srcjar )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+  (local.set $$instance (struct.new $srcjar.Srcjar (global.get $srcjar.Srcjar.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+  (call $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Srcjar.$ctor()
+(func $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar
+ (param $this (ref null $srcjar.Srcjar))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Srcjar.test()
+(func $m_test__void@srcjar.Srcjar
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:20:21
+ (local $foo (ref null $srcjar.Foo))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:20:28
+  (call $$clinit__void_<once>_@srcjar.Srcjar )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:21:4
+  (local.set $foo (call $$create__@srcjar.Foo ))
+ )
+)
+
+;;; void Srcjar.$clinit()
+(func $$clinit__void_<once>_@srcjar.Srcjar
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+  (if (global.get $$class-initialized@srcjar.Srcjar)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+  (global.set $$class-initialized@srcjar.Srcjar (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Srcjar.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@srcjar.Srcjar
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@srcjar.Srcjar)))
+   (then
+    (return (global.get $$class@srcjar.Srcjar))
+   )
+  )
+  (global.set $$class@srcjar.Srcjar (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|srcjar.Srcjar|__java_lang_String_<once>_@srcjar.Srcjar )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@srcjar.Srcjar))
+ )
+)
+
+;;; Class<?> Srcjar.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@srcjar.Srcjar
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $srcjar.Srcjar))
+ (local.set $this (ref.cast (ref $srcjar.Srcjar) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@srcjar.Srcjar ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@srcjar.Srcjar)
+;;; End of code for srcjar.Srcjar [methods]

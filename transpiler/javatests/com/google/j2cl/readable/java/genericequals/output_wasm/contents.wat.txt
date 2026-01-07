@@ -1,0 +1,154 @@
+
+;;; Code for genericequals.GenericEquals [static fields]
+(global $$class-initialized@genericequals.GenericEquals (mut i32)
+ (i32.const 0)
+)
+(global $$class@genericequals.GenericEquals (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for genericequals.GenericEquals [static fields]
+;;; Code for genericequals.GenericEquals [vtable.init]
+(global $genericequals.GenericEquals.vtable (ref $genericequals.GenericEquals.vtable)
+ (struct.new $genericequals.GenericEquals.vtable
+  (ref.func $$getClassImpl__java_lang_Class@genericequals.GenericEquals)
+  (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals)
+ )
+)
+;;; End of code for genericequals.GenericEquals [vtable.init]
+
+;;; Code for genericequals.GenericEquals [methods]
+
+;;; GenericEquals<T> GenericEquals.$create(T value)
+(func $$create__java_lang_Object@genericequals.GenericEquals
+ (param $value (ref null $java.lang.Object))
+ (result (ref null $genericequals.GenericEquals))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
+ (local $$instance (ref null $genericequals.GenericEquals))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
+  (call $$clinit__void_<once>_@genericequals.GenericEquals )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
+  (local.set $$instance (struct.new $genericequals.GenericEquals (global.get $genericequals.GenericEquals.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $genericequals.GenericEquals) (ref.null $java.lang.Object)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
+  (call $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals (ref.as_non_null (local.get $$instance))(local.get $value))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericEquals.$ctor(T value)
+(func $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals
+ (param $this (ref null $genericequals.GenericEquals))
+ (param $value (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:23:32
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:24:4
+  (struct.set $genericequals.GenericEquals $value@genericequals.GenericEquals (local.get $this) (local.get $value))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:25:4
+  (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals (local.get $this) (ref.null $genericequals.GenericEquals))
+ )
+)
+
+;;; Object GenericEquals.foo(GenericEquals<?> other)
+(func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals
+ (type $function.m_foo__genericequals_GenericEquals__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $other (ref null $genericequals.GenericEquals))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:28:16
+ (local $this (ref null $genericequals.GenericEquals))
+ (local.set $this (ref.cast (ref $genericequals.GenericEquals) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:29:4
+  (return (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals (struct.get $genericequals.GenericEquals $value2@genericequals.GenericEquals (local.get $other))))
+ )
+)
+(elem declare func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals)
+
+;;; boolean GenericEquals.equals(Object obj)
+(func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $obj (ref null $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:33:17
+ (local $other (ref null $genericequals.GenericEquals))
+ (local $this (ref null $genericequals.GenericEquals))
+ (local.set $this (ref.cast (ref $genericequals.GenericEquals) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:34:4
+  (if (ref.eq (local.get $obj) (local.get $this))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:35:6
+     (return (i32.const 1))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:37:4
+  (if (i32.eqz (ref.test (ref $genericequals.GenericEquals) (local.get $obj)))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:38:6
+     (return (i32.const 0))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:40:4
+  (local.set $other (ref.cast (ref null $genericequals.GenericEquals) (local.get $obj)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:41:4
+  (return (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals (local.get $this)))(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals (local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals (local.get $this))))))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)
+
+;;; void GenericEquals.$clinit()
+(func $$clinit__void_<once>_@genericequals.GenericEquals
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
+  (if (global.get $$class-initialized@genericequals.GenericEquals)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
+  (global.set $$class-initialized@genericequals.GenericEquals (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericequals/readable-j2wasm.js/genericequals/GenericEquals.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> GenericEquals.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@genericequals.GenericEquals
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@genericequals.GenericEquals)))
+   (then
+    (return (global.get $$class@genericequals.GenericEquals))
+   )
+  )
+  (global.set $$class@genericequals.GenericEquals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|genericequal...|__java_lang_String_<once>_@genericequals.GenericEquals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@genericequals.GenericEquals))
+ )
+)
+
+;;; Class<?> GenericEquals.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@genericequals.GenericEquals
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $genericequals.GenericEquals))
+ (local.set $this (ref.cast (ref $genericequals.GenericEquals) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericequals.GenericEquals ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@genericequals.GenericEquals)
+;;; End of code for genericequals.GenericEquals [methods]

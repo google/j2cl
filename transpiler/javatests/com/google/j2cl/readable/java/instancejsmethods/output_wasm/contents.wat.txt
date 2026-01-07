@@ -1,0 +1,723 @@
+
+;;; Code for instancejsmethods.MyInterface [static fields]
+(global $$class-initialized@instancejsmethods.MyInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@instancejsmethods.MyInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for instancejsmethods.MyInterface [static fields]
+;;; Code for instancejsmethods.SuperParent [static fields]
+(global $$class-initialized@instancejsmethods.SuperParent (mut i32)
+ (i32.const 0)
+)
+(global $$class@instancejsmethods.SuperParent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for instancejsmethods.SuperParent [static fields]
+;;; Code for instancejsmethods.Parent [static fields]
+(global $$class-initialized@instancejsmethods.Parent (mut i32)
+ (i32.const 0)
+)
+(global $$class@instancejsmethods.Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for instancejsmethods.Parent [static fields]
+;;; Code for instancejsmethods.Child [static fields]
+(global $$class-initialized@instancejsmethods.Child (mut i32)
+ (i32.const 0)
+)
+(global $$class@instancejsmethods.Child (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for instancejsmethods.Child [static fields]
+;;; Code for instancejsmethods.Main [static fields]
+(global $$class-initialized@instancejsmethods.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@instancejsmethods.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for instancejsmethods.Main [static fields]
+;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [static fields]
+(global $$class-initialized@instancejsmethods.MyInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@instancejsmethods.MyInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for instancejsmethods.MyInterface.$LambdaAdaptor [static fields]
+;;; Code for instancejsmethods.SuperParent [vtable.init]
+(global $instancejsmethods.SuperParent.vtable (ref $instancejsmethods.SuperParent.vtable)
+ (struct.new $instancejsmethods.SuperParent.vtable
+  (ref.func $$getClassImpl__java_lang_Class@instancejsmethods.SuperParent)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_bar__int__int__int@instancejsmethods.SuperParent)
+  (ref.func $m_fun__int__int__int@instancejsmethods.SuperParent)
+ )
+)
+;;; End of code for instancejsmethods.SuperParent [vtable.init]
+;;; Code for instancejsmethods.Parent [vtable.init]
+(global $instancejsmethods.Parent.vtable (ref $instancejsmethods.Parent.vtable)
+ (struct.new $instancejsmethods.Parent.vtable
+  (ref.func $$getClassImpl__java_lang_Class@instancejsmethods.Parent)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_bar__int__int__int@instancejsmethods.Parent)
+  (ref.func $m_fun__int__int__int@instancejsmethods.Parent)
+  (ref.func $m_foo__int__int@instancejsmethods.Parent)
+ )
+)
+;;; End of code for instancejsmethods.Parent [vtable.init]
+;;; Code for instancejsmethods.Child [vtable.init]
+(global $instancejsmethods.Child.vtable (ref $instancejsmethods.Child.vtable)
+ (struct.new $instancejsmethods.Child.vtable
+  (ref.func $$getClassImpl__java_lang_Class@instancejsmethods.Child)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_bar__int__int__int@instancejsmethods.Child)
+  (ref.func $m_fun__int__int__int@instancejsmethods.Child)
+  (ref.func $m_foo__int__int@instancejsmethods.Child)
+  (ref.func $m_intfFoo__int@instancejsmethods.Child)
+ )
+)
+(global $instancejsmethods.MyInterface.vtable@$instancejsmethods.Child (ref $instancejsmethods.MyInterface.vtable)
+ (struct.new $instancejsmethods.MyInterface.vtable
+  (ref.func $m_intfFoo__int@instancejsmethods.Child)
+ )
+)
+;;; End of code for instancejsmethods.Child [vtable.init]
+;;; Code for instancejsmethods.Main [vtable.init]
+(global $instancejsmethods.Main.vtable (ref $instancejsmethods.Main.vtable)
+ (struct.new $instancejsmethods.Main.vtable
+  (ref.func $$getClassImpl__java_lang_Class@instancejsmethods.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_testCallBySuperParent__void@instancejsmethods.Main)
+ )
+)
+;;; End of code for instancejsmethods.Main [vtable.init]
+
+;;; Code for instancejsmethods.MyInterface [methods]
+
+;;; void MyInterface.$clinit()
+(func $$clinit__void_<once>_@instancejsmethods.MyInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (if (global.get $$class-initialized@instancejsmethods.MyInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (global.set $$class-initialized@instancejsmethods.MyInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> MyInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.MyInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.MyInterface)))
+   (then
+    (return (global.get $$class@instancejsmethods.MyInterface))
+   )
+  )
+  (global.set $$class@instancejsmethods.MyInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.MyInterface )))
+  (return (global.get $$class@instancejsmethods.MyInterface))
+ )
+)
+;;; End of code for instancejsmethods.MyInterface [methods]
+;;; Code for instancejsmethods.SuperParent [methods]
+
+;;; SuperParent SuperParent.$create()
+(func $$create__@instancejsmethods.SuperParent
+ (result (ref null $instancejsmethods.SuperParent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+ (local $$instance (ref null $instancejsmethods.SuperParent))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+  (call $$clinit__void_<once>_@instancejsmethods.SuperParent )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+  (local.set $$instance (struct.new $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+  (call $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SuperParent.$ctor()
+(func $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent
+ (param $this (ref null $instancejsmethods.SuperParent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int SuperParent.fun(int a, int b)
+(func $m_fun__int__int__int@instancejsmethods.SuperParent
+ (type $function.m_fun__int__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:25:13
+ (local $this (ref null $instancejsmethods.SuperParent))
+ (local.set $this (ref.cast (ref $instancejsmethods.SuperParent) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:26:4
+  (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 111)))
+ )
+)
+(elem declare func $m_fun__int__int__int@instancejsmethods.SuperParent)
+
+;;; int SuperParent.bar(int a, int b)
+(func $m_bar__int__int__int@instancejsmethods.SuperParent
+ (type $function.m_bar__int__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:29:13
+ (local $this (ref null $instancejsmethods.SuperParent))
+ (local.set $this (ref.cast (ref $instancejsmethods.SuperParent) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:30:4
+  (return (i32.add (i32.mul (local.get $a) (local.get $b)) (i32.const 222)))
+ )
+)
+(elem declare func $m_bar__int__int__int@instancejsmethods.SuperParent)
+
+;;; void SuperParent.$clinit()
+(func $$clinit__void_<once>_@instancejsmethods.SuperParent
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+  (if (global.get $$class-initialized@instancejsmethods.SuperParent)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+  (global.set $$class-initialized@instancejsmethods.SuperParent (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:24:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> SuperParent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.SuperParent
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.SuperParent)))
+   (then
+    (return (global.get $$class@instancejsmethods.SuperParent))
+   )
+  )
+  (global.set $$class@instancejsmethods.SuperParent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.SuperParent )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@instancejsmethods.SuperParent))
+ )
+)
+
+;;; Class<?> SuperParent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instancejsmethods.SuperParent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $instancejsmethods.SuperParent))
+ (local.set $this (ref.cast (ref $instancejsmethods.SuperParent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.SuperParent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.SuperParent)
+;;; End of code for instancejsmethods.SuperParent [methods]
+;;; Code for instancejsmethods.Main [methods]
+
+;;; Main Main.$create()
+(func $$create__@instancejsmethods.Main
+ (result (ref null $instancejsmethods.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+ (local $$instance (ref null $instancejsmethods.Main))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+  (call $$clinit__void_<once>_@instancejsmethods.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+  (local.set $$instance (struct.new $instancejsmethods.Main (global.get $instancejsmethods.Main.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+  (call $$ctor__void_$p_instancejsmethods_Main@instancejsmethods.Main (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_instancejsmethods_Main@instancejsmethods.Main
+ (param $this (ref null $instancejsmethods.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.testCallBySuperParent()
+(func $m_testCallBySuperParent__void@instancejsmethods.Main
+ (type $function.m_testCallBySuperParent__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:115:14
+ (local $sp (ref null $instancejsmethods.SuperParent))
+ (local $p (ref null $instancejsmethods.SuperParent))
+ (local $c (ref null $instancejsmethods.SuperParent))
+ (local $pp (ref null $instancejsmethods.Parent))
+ (local $cc (ref null $instancejsmethods.Parent))
+ (local $intf (ref null $java.lang.Object))
+ (local $this (ref null $instancejsmethods.Main))
+ (local.set $this (ref.cast (ref $instancejsmethods.Main) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:116:4
+  (local.set $sp (call $$create__@instancejsmethods.SuperParent ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:117:4
+  (local.set $p (call $$create__@instancejsmethods.Parent ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:118:4
+  (local.set $c (call $$create__@instancejsmethods.Child ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:119:4
+  (local.set $pp (call $$create__@instancejsmethods.Parent ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:120:4
+  (local.set $cc (call $$create__@instancejsmethods.Child ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:121:4
+  (local.set $intf (call $$create__@instancejsmethods.Child ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:123:4
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:124:4
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $sp))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:125:4
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $p))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $p)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:126:4
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $p))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $p)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:127:4
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $c))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $c)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:128:4
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $c))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $c)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:129:4
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $pp))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $pp)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:130:4
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $cc))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $cc)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:131:4
+  (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $intf))(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast (ref $instancejsmethods.MyInterface.vtable) (call $get.itable.$instancejsmethods.MyInterface (local.get $intf))))))
+ )
+)
+(elem declare func $m_testCallBySuperParent__void@instancejsmethods.Main)
+
+;;; void Main.testCallByConcreteType()
+(func $m_testCallByConcreteType__void@instancejsmethods.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:134:21
+ (local $sp (ref null $instancejsmethods.SuperParent))
+ (local $p (ref null $instancejsmethods.Parent))
+ (local $c (ref null $instancejsmethods.Child))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:134:46
+  (call $$clinit__void_<once>_@instancejsmethods.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:135:4
+  (local.set $sp (call $$create__@instancejsmethods.SuperParent ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:136:4
+  (local.set $p (call $$create__@instancejsmethods.Parent ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:137:4
+  (local.set $c (call $$create__@instancejsmethods.Child ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:139:4
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:140:4
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $sp))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:141:4
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $p))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.Parent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:142:4
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $p))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.Parent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:143:4
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $p))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:144:4
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $c))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.Child.vtable $m_fun__int__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:145:4
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $c))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.Child.vtable $m_bar__int__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:146:4
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $instancejsmethods.Child.vtable $m_foo__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:147:4
+  (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $c))(struct.get $instancejsmethods.Child.vtable $m_intfFoo__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void_<once>_@instancejsmethods.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+  (if (global.get $$class-initialized@instancejsmethods.Main)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+  (global.set $$class-initialized@instancejsmethods.Main (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:114:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.Main)))
+   (then
+    (return (global.get $$class@instancejsmethods.Main))
+   )
+  )
+  (global.set $$class@instancejsmethods.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@instancejsmethods.Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instancejsmethods.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $instancejsmethods.Main))
+ (local.set $this (ref.cast (ref $instancejsmethods.Main) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Main ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Main)
+;;; End of code for instancejsmethods.Main [methods]
+;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [methods]
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_instancejsmethods_MyInterface_$LambdaAdaptor@instancejsmethods.MyInterface.$LambdaAdaptor
+ (param $this (ref null $instancejsmethods.MyInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@instancejsmethods.MyInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (if (global.get $$class-initialized@instancejsmethods.MyInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (global.set $$class-initialized@instancejsmethods.MyInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:20:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.MyInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.MyInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@instancejsmethods.MyInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@instancejsmethods.MyInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.MyInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@instancejsmethods.MyInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instancejsmethods.MyInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $instancejsmethods.MyInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $instancejsmethods.MyInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.MyInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.MyInterface.$LambdaAdaptor)
+;;; End of code for instancejsmethods.MyInterface.$LambdaAdaptor [methods]
+;;; Code for instancejsmethods.Parent [methods]
+
+;;; Parent Parent.$create()
+(func $$create__@instancejsmethods.Parent
+ (result (ref null $instancejsmethods.Parent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+ (local $$instance (ref null $instancejsmethods.Parent))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+  (call $$clinit__void_<once>_@instancejsmethods.Parent )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+  (local.set $$instance (struct.new $instancejsmethods.Parent (global.get $instancejsmethods.Parent.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+  (call $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent
+ (param $this (ref null $instancejsmethods.Parent))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+  (call $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int Parent.fun(int a, int b)
+(func $m_fun__int__int__int@instancejsmethods.Parent
+ (type $function.m_fun__int__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:42:13
+ (local $this (ref null $instancejsmethods.Parent))
+ (local.set $this (ref.cast (ref $instancejsmethods.Parent) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:43:4
+  (return (i32.add (local.get $a) (local.get $b)))
+ )
+)
+(elem declare func $m_fun__int__int__int@instancejsmethods.Parent)
+
+;;; int Parent.bar(int a, int b)
+(func $m_bar__int__int__int@instancejsmethods.Parent
+ (type $function.m_bar__int__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:53:13
+ (local $this (ref null $instancejsmethods.Parent))
+ (local.set $this (ref.cast (ref $instancejsmethods.Parent) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:54:4
+  (return (i32.mul (local.get $a) (local.get $b)))
+ )
+)
+(elem declare func $m_bar__int__int__int@instancejsmethods.Parent)
+
+;;; int Parent.foo(int a)
+(func $m_foo__int__int@instancejsmethods.Parent
+ (type $function.m_foo__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:63:13
+ (local $this (ref null $instancejsmethods.Parent))
+ (local.set $this (ref.cast (ref $instancejsmethods.Parent) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:64:4
+  (return (local.get $a))
+ )
+)
+(elem declare func $m_foo__int__int@instancejsmethods.Parent)
+
+;;; void Parent.$clinit()
+(func $$clinit__void_<once>_@instancejsmethods.Parent
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+  (if (global.get $$class-initialized@instancejsmethods.Parent)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+  (global.set $$class-initialized@instancejsmethods.Parent (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:34:6
+  (call $$clinit__void_<once>_@instancejsmethods.SuperParent )
+ )
+)
+
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.Parent)))
+   (then
+    (return (global.get $$class@instancejsmethods.Parent))
+   )
+  )
+  (global.set $$class@instancejsmethods.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Parent )(call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.SuperParent )))
+  (return (global.get $$class@instancejsmethods.Parent))
+ )
+)
+
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instancejsmethods.Parent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $instancejsmethods.Parent))
+ (local.set $this (ref.cast (ref $instancejsmethods.Parent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Parent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Parent)
+;;; End of code for instancejsmethods.Parent [methods]
+;;; Code for instancejsmethods.Child [methods]
+
+;;; Child Child.$create()
+(func $$create__@instancejsmethods.Child
+ (result (ref null $instancejsmethods.Child))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+ (local $$instance (ref null $instancejsmethods.Child))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+  (call $$clinit__void_<once>_@instancejsmethods.Child )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+  (local.set $$instance (struct.new $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (global.get $instancejsmethods.Child.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+  (call $$ctor__void_$p_instancejsmethods_Child@instancejsmethods.Child (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor()
+(func $$ctor__void_$p_instancejsmethods_Child@instancejsmethods.Child
+ (param $this (ref null $instancejsmethods.Child))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+  (call $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int Child.fun(int a, int b)
+(func $m_fun__int__int__int@instancejsmethods.Child
+ (type $function.m_fun__int__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:76:13
+ (local $this (ref null $instancejsmethods.Child))
+ (local.set $this (ref.cast (ref $instancejsmethods.Child) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:77:4
+  (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
+ )
+)
+(elem declare func $m_fun__int__int__int@instancejsmethods.Child)
+
+;;; int Child.bar(int a, int b)
+(func $m_bar__int__int__int@instancejsmethods.Child
+ (type $function.m_bar__int__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:87:13
+ (local $this (ref null $instancejsmethods.Child))
+ (local.set $this (ref.cast (ref $instancejsmethods.Child) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:88:4
+  (return (i32.add (i32.mul (local.get $a) (local.get $b)) (i32.const 1)))
+ )
+)
+(elem declare func $m_bar__int__int__int@instancejsmethods.Child)
+
+;;; int Child.foo(int a)
+(func $m_foo__int__int@instancejsmethods.Child
+ (type $function.m_foo__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:98:13
+ (local $this (ref null $instancejsmethods.Child))
+ (local.set $this (ref.cast (ref $instancejsmethods.Child) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:99:4
+  (return (local.get $a))
+ )
+)
+(elem declare func $m_foo__int__int@instancejsmethods.Child)
+
+;;; int Child.intfFoo()
+(func $m_intfFoo__int@instancejsmethods.Child
+ (type $function.m_intfFoo__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:109:13
+ (local $this (ref null $instancejsmethods.Child))
+ (local.set $this (ref.cast (ref $instancejsmethods.Child) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:110:4
+  (return (i32.const 1))
+ )
+)
+(elem declare func $m_intfFoo__int@instancejsmethods.Child)
+
+;;; void Child.$clinit()
+(func $$clinit__void_<once>_@instancejsmethods.Child
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+  (if (global.get $$class-initialized@instancejsmethods.Child)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+  (global.set $$class-initialized@instancejsmethods.Child (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instancejsmethods/readable-j2wasm.js/instancejsmethods/Main.java:68:6
+  (call $$clinit__void_<once>_@instancejsmethods.Parent )
+ )
+)
+
+;;; Class<T> Child.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Child
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instancejsmethods.Child)))
+   (then
+    (return (global.get $$class@instancejsmethods.Child))
+   )
+  )
+  (global.set $$class@instancejsmethods.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instancejsme...|__java_lang_String_<once>_@instancejsmethods.Child )(call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Parent )))
+  (return (global.get $$class@instancejsmethods.Child))
+ )
+)
+
+;;; Class<?> Child.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instancejsmethods.Child
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $instancejsmethods.Child))
+ (local.set $this (ref.cast (ref $instancejsmethods.Child) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instancejsmethods.Child ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Child)
+;;; End of code for instancejsmethods.Child [methods]

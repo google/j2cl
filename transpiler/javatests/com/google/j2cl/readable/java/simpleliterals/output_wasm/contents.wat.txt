@@ -1,0 +1,185 @@
+
+;;; Code for simpleliterals.SimpleLiterals [static fields]
+(global $$class-initialized@simpleliterals.SimpleLiterals (mut i32)
+ (i32.const 0)
+)
+(global $$class@simpleliterals.SimpleLiterals (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for simpleliterals.SimpleLiterals [static fields]
+;;; Code for simpleliterals.SimpleLiterals [vtable.init]
+(global $simpleliterals.SimpleLiterals.vtable (ref $simpleliterals.SimpleLiterals.vtable)
+ (struct.new $simpleliterals.SimpleLiterals.vtable
+  (ref.func $$getClassImpl__java_lang_Class@simpleliterals.SimpleLiterals)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void@simpleliterals.SimpleLiterals)
+ )
+)
+;;; End of code for simpleliterals.SimpleLiterals [vtable.init]
+
+;;; Code for simpleliterals.SimpleLiterals [methods]
+
+;;; SimpleLiterals SimpleLiterals.$create()
+(func $$create__@simpleliterals.SimpleLiterals
+ (result (ref null $simpleliterals.SimpleLiterals))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+ (local $$instance (ref null $simpleliterals.SimpleLiterals))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+  (call $$clinit__void_<once>_@simpleliterals.SimpleLiterals )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+  (local.set $$instance (struct.new $simpleliterals.SimpleLiterals (global.get $simpleliterals.SimpleLiterals.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+  (call $$ctor__void_$p_simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SimpleLiterals.$ctor()
+(func $$ctor__void_$p_simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals
+ (param $this (ref null $simpleliterals.SimpleLiterals))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void SimpleLiterals.main()
+(func $m_main__void@simpleliterals.SimpleLiterals
+ (type $function.m_main__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:20:14
+ (local $bool i32)
+ (local $ch i32)
+ (local $b i32)
+ (local $nb i32)
+ (local $s i32)
+ (local $ns i32)
+ (local $i i32)
+ (local $ni i32)
+ (local $l i64)
+ (local $nl i64)
+ (local $f f32)
+ (local $nf f32)
+ (local $zf f32)
+ (local $nzf f32)
+ (local $d f64)
+ (local $nd f64)
+ (local $zd f64)
+ (local $nzd f64)
+ (local $o (ref null $java.lang.Object))
+ (local $str (ref null $java.lang.String))
+ (local $c (ref null $java.lang.Class))
+ (local $zeroF f32)
+ (local $minusZeroF f32)
+ (local $zeroD f64)
+ (local $minusZeroD f64)
+ (local $minusMinusZeroD f64)
+ (local $this (ref null $simpleliterals.SimpleLiterals))
+ (local.set $this (ref.cast (ref $simpleliterals.SimpleLiterals) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:21:4
+  (local.set $bool (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:22:4
+  (local.set $ch (i32.const 97))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:23:4
+  (local.set $b (i32.const 127))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:24:4
+  (local.set $nb (i32.const -128))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:25:4
+  (local.set $s (i32.const 32767))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:26:4
+  (local.set $ns (i32.const -32768))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:27:4
+  (local.set $i (i32.const 101))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:28:4
+  (local.set $ni (i32.const -101))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:29:4
+  (local.set $l (i64.const 101))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:30:4
+  (local.set $nl (i64.const -101))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:31:4
+  (local.set $f (f32.const 101.0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:32:4
+  (local.set $nf (f32.neg (f32.const 101.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:33:4
+  (local.set $zf (f32.const 0.0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:34:4
+  (local.set $nzf (f32.neg (f32.const 0.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:35:4
+  (local.set $d (f64.const 101.0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:36:4
+  (local.set $nd (f64.neg (f64.const 101.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:37:4
+  (local.set $zd (f64.const 0.0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:38:4
+  (local.set $nzd (f64.neg (f64.const 0.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:39:4
+  (local.set $o (ref.null $java.lang.Object))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:40:4
+  (local.set $str (call $$getString_|foo|__java_lang_String_<once>_@simpleliterals.SimpleLiterals ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:41:4
+  (local.set $c (call $$getClassMetadata__java_lang_Class_<once>_@simpleliterals.SimpleLiterals ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:42:4
+  (local.set $zeroF (f32.neg (f32.const 0.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:43:4
+  (local.set $minusZeroF (f32.neg (f32.const 0.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:44:4
+  (local.set $zeroD (f64.const 0.0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:45:4
+  (local.set $minusZeroD (f64.neg (f64.const 0.0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:46:4
+  (local.set $minusMinusZeroD (f64.neg (f64.neg (f64.const 0.0))))
+ )
+)
+(elem declare func $m_main__void@simpleliterals.SimpleLiterals)
+
+;;; void SimpleLiterals.$clinit()
+(func $$clinit__void_<once>_@simpleliterals.SimpleLiterals
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+  (if (global.get $$class-initialized@simpleliterals.SimpleLiterals)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+  (global.set $$class-initialized@simpleliterals.SimpleLiterals (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simpleliterals/readable-j2wasm.js/simpleliterals/SimpleLiterals.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> SimpleLiterals.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@simpleliterals.SimpleLiterals
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@simpleliterals.SimpleLiterals)))
+   (then
+    (return (global.get $$class@simpleliterals.SimpleLiterals))
+   )
+  )
+  (global.set $$class@simpleliterals.SimpleLiterals (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|simplelitera...|__java_lang_String_<once>_@simpleliterals.SimpleLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@simpleliterals.SimpleLiterals))
+ )
+)
+
+;;; Class<?> SimpleLiterals.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@simpleliterals.SimpleLiterals
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $simpleliterals.SimpleLiterals))
+ (local.set $this (ref.cast (ref $simpleliterals.SimpleLiterals) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@simpleliterals.SimpleLiterals ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@simpleliterals.SimpleLiterals)
+;;; End of code for simpleliterals.SimpleLiterals [methods]

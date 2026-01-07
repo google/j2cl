@@ -1,0 +1,163 @@
+
+;;; Code for supermethodcall.GrandParentInterface [type definition]
+(type $supermethodcall.GrandParentInterface.vtable (sub (struct
+ (field $m_defaultGrandParent__void (ref $function.m_defaultGrandParent__void))
+ ))
+)
+;;; End of code for supermethodcall.GrandParentInterface [type definition]
+;;; Code for supermethodcall.ParentInterface [type definition]
+(type $supermethodcall.ParentInterface.vtable (sub (struct
+ (field $m_defaultParent__void (ref $function.m_defaultParent__void))
+ ))
+)
+;;; End of code for supermethodcall.ParentInterface [type definition]
+;;; Code for supermethodcall.I1 [type definition]
+(type $supermethodcall.I1.vtable (sub (struct
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
+;;; End of code for supermethodcall.I1 [type definition]
+;;; Code for supermethodcall.I2 [type definition]
+(type $supermethodcall.I2.vtable (sub (struct
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
+;;; End of code for supermethodcall.I2 [type definition]
+;;; Code for supermethodcall.GrandParent [type definition]
+(type $supermethodcall.GrandParent (sub $java.lang.Object (struct
+ (field $vtable (ref $supermethodcall.GrandParent.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $supermethodcall.GrandParent.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultGrandParent__void (ref $function.m_defaultGrandParent__void))
+ (field $m_defaultParent__void (ref $function.m_defaultParent__void))
+ (field $m_grandParentSimplest__void (ref $function.m_grandParentSimplest__void))
+ (field $m_grandParentWithChangingReturn__java_lang_Object (ref $function.m_grandParentWithChangingReturn__java_lang_Object))
+ (field $m_grandParentWithParams__int__void (ref $function.m_grandParentWithParams__int__void))
+ ))
+)
+;;; End of code for supermethodcall.GrandParent [type definition]
+;;; Code for supermethodcall.I3 [type definition]
+(type $supermethodcall.I3.vtable (sub $supermethodcall.I1.vtable (struct
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
+;;; End of code for supermethodcall.I3 [type definition]
+;;; Code for supermethodcall.Super [type definition]
+(type $supermethodcall.Super (sub $java.lang.Object (struct
+ (field $vtable (ref $supermethodcall.Super.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $supermethodcall.Super.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
+;;; End of code for supermethodcall.Super [type definition]
+;;; Code for supermethodcall.SuperToStringTest [type definition]
+(type $supermethodcall.SuperToStringTest (sub $java.lang.Object (struct
+ (field $vtable (ref $supermethodcall.SuperToStringTest.vtable))
+ (field $itable (ref $supermethodcall.SuperToStringTest.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $supermethodcall.SuperToStringTest.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
+;;; End of code for supermethodcall.SuperToStringTest [type definition]
+;;; Code for supermethodcall.I2.$LambdaAdaptor [type definition]
+(type $supermethodcall.I2.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $supermethodcall.I2.$LambdaAdaptor.vtable))
+ (field $itable (ref $supermethodcall.I2.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $supermethodcall.I2.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
+;;; End of code for supermethodcall.I2.$LambdaAdaptor [type definition]
+;;; Code for supermethodcall.Parent [type definition]
+(type $supermethodcall.Parent (sub $supermethodcall.GrandParent (struct
+ (field $vtable (ref $supermethodcall.Parent.vtable))
+ (field $itable (ref $supermethodcall.Parent.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $supermethodcall.Parent.vtable (sub $supermethodcall.GrandParent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultGrandParent__void (ref $function.m_defaultGrandParent__void))
+ (field $m_defaultParent__void (ref $function.m_defaultParent__void))
+ (field $m_grandParentSimplest__void (ref $function.m_grandParentSimplest__void))
+ (field $m_grandParentWithChangingReturn__java_lang_Object (ref $function.m_grandParentWithChangingReturn__java_lang_Object))
+ (field $m_grandParentWithParams__int__void (ref $function.m_grandParentWithParams__int__void))
+ (field $m_parentSimplest__void (ref $function.m_parentSimplest__void))
+ (field $m_parentWithChangingReturn__java_lang_Object (ref $function.m_parentWithChangingReturn__java_lang_Object))
+ (field $m_parentWithParams__int__void (ref $function.m_parentWithParams__int__void))
+ ))
+)
+;;; End of code for supermethodcall.Parent [type definition]
+;;; Code for supermethodcall.Sub [type definition]
+(type $supermethodcall.Sub (sub $supermethodcall.Super (struct
+ (field $vtable (ref $supermethodcall.Sub.vtable))
+ (field $itable (ref $supermethodcall.Sub.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $supermethodcall.Sub.vtable (sub $supermethodcall.Super.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
+;;; End of code for supermethodcall.Sub [type definition]
+;;; Code for supermethodcall.Child [type definition]
+(type $supermethodcall.Child (sub $supermethodcall.Parent (struct
+ (field $vtable (ref $supermethodcall.Child.vtable))
+ (field $itable (ref $supermethodcall.Child.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $supermethodcall.Child.vtable (sub $supermethodcall.Parent.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_defaultGrandParent__void (ref $function.m_defaultGrandParent__void))
+ (field $m_defaultParent__void (ref $function.m_defaultParent__void))
+ (field $m_grandParentSimplest__void (ref $function.m_grandParentSimplest__void))
+ (field $m_grandParentWithChangingReturn__java_lang_Object (ref $function.m_grandParentWithChangingReturn__java_lang_Object))
+ (field $m_grandParentWithParams__int__void (ref $function.m_grandParentWithParams__int__void))
+ (field $m_parentSimplest__void (ref $function.m_parentSimplest__void))
+ (field $m_parentWithChangingReturn__java_lang_Object (ref $function.m_parentWithChangingReturn__java_lang_Object))
+ (field $m_parentWithParams__int__void (ref $function.m_parentWithParams__int__void))
+ (field $m_grandParentWithChangingReturn__supermethodcall_Child (ref $function.m_grandParentWithChangingReturn__supermethodcall_Child))
+ (field $m_parentWithChangingReturn__supermethodcall_Child (ref $function.m_parentWithChangingReturn__supermethodcall_Child))
+ ))
+)
+;;; End of code for supermethodcall.Child [type definition]

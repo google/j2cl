@@ -1,0 +1,70 @@
+
+;;; Code for longinitialvalue.LongInitialValue [static fields]
+(global $LONG_VALUE@longinitialvalue.LongInitialValue (mut i64)
+ (i64.const 0)
+)
+(global $$class-initialized@longinitialvalue.LongInitialValue (mut i32)
+ (i32.const 0)
+)
+(global $$class@longinitialvalue.LongInitialValue (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+;;; End of code for longinitialvalue.LongInitialValue [static fields]
+
+;;; Code for longinitialvalue.LongInitialValue [methods]
+
+;;; void LongInitialValue.$ctor()
+(func $$ctor__void_$p_longinitialvalue_LongInitialValue@longinitialvalue.LongInitialValue
+ (param $this (ref null $longinitialvalue.LongInitialValue))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/longinitialvalue/readable-j2wasm.js/longinitialvalue/LongInitialValue.java:18:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/longinitialvalue/readable-j2wasm.js/longinitialvalue/LongInitialValue.java:18:22
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void LongInitialValue.$clinit()
+(func $$clinit__void_<once>_@longinitialvalue.LongInitialValue
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/longinitialvalue/readable-j2wasm.js/longinitialvalue/LongInitialValue.java:18:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/longinitialvalue/readable-j2wasm.js/longinitialvalue/LongInitialValue.java:18:22
+  (if (global.get $$class-initialized@longinitialvalue.LongInitialValue)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/longinitialvalue/readable-j2wasm.js/longinitialvalue/LongInitialValue.java:18:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/longinitialvalue/readable-j2wasm.js/longinitialvalue/LongInitialValue.java:18:22
+  (global.set $$class-initialized@longinitialvalue.LongInitialValue (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/longinitialvalue/readable-j2wasm.js/longinitialvalue/LongInitialValue.java:18:22
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> LongInitialValue.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@longinitialvalue.LongInitialValue
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@longinitialvalue.LongInitialValue)))
+   (then
+    (return (global.get $$class@longinitialvalue.LongInitialValue))
+   )
+  )
+  (global.set $$class@longinitialvalue.LongInitialValue (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|longinitialv...|__java_lang_String_<once>_@longinitialvalue.LongInitialValue )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@longinitialvalue.LongInitialValue))
+ )
+)
+
+;;; Class<?> LongInitialValue.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@longinitialvalue.LongInitialValue
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $longinitialvalue.LongInitialValue))
+ (local.set $this (ref.cast (ref $longinitialvalue.LongInitialValue) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@longinitialvalue.LongInitialValue ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@longinitialvalue.LongInitialValue)
+;;; End of code for longinitialvalue.LongInitialValue [methods]
