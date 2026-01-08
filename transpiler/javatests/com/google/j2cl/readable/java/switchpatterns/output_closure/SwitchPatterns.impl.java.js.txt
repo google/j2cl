@@ -44,9 +44,9 @@ class SwitchPatterns extends j_l_Object {
    let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
    let /** number */ $caseIndex;
    let /** ?string */ s, /** ?string */ s_1;
-   if (j_l_String.$isInstance($selector) && (s = (/**@type {?string}*/ ($Casts.$to($selector, j_l_String))), true) && j_l_String.m_length__java_lang_String__int(s) == 1) {
+   if (j_l_String.$isInstance($selector) && (s = (/**@type {string}*/ ($Casts.$to($selector, j_l_String))), j_l_String.m_length__java_lang_String__int(s) == 1)) {
     $caseIndex = 0;
-   } else if (j_l_String.$isInstance($selector) && (s_1 = (/**@type {?string}*/ ($Casts.$to($selector, j_l_String))), true)) {
+   } else if (j_l_String.$isInstance($selector) && (s_1 = (/**@type {string}*/ ($Casts.$to($selector, j_l_String))), true)) {
     $caseIndex = 1;
    } else {
     $caseIndex = 2;
@@ -67,9 +67,9 @@ class SwitchPatterns extends j_l_Object {
    let /** Integer */ j, /** (Number|number|!$Long) */ n;
    if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean($selector_1, Integer.valueOf(23)) || Objects.m_equals__java_lang_Object__java_lang_Object__boolean($selector_1, Integer.valueOf(32))) {
     $caseIndex_1 = 0;
-   } else if (Integer.$isInstance($selector_1) && (j = (/**@type {Integer}*/ ($Casts.$to($selector_1, Integer))), true) && j.intValue() > 2) {
+   } else if (Integer.$isInstance($selector_1) && (j = (/**@type {!Integer}*/ ($Casts.$to($selector_1, Integer))), j.intValue() > 2)) {
     $caseIndex_1 = 1;
-   } else if (Number.$isInstance($selector_1) && (n = (/**@type {(Number|number|!$Long)}*/ ($Casts.$to($selector_1, Number))), true)) {
+   } else if (Number.$isInstance($selector_1) && (n = (/**@type {!(Number|number|!$Long)}*/ ($Casts.$to($selector_1, Number))), true)) {
     $caseIndex_1 = 2;
    } else {
     $caseIndex_1 = 3;
@@ -88,7 +88,7 @@ class SwitchPatterns extends j_l_Object {
    let /** Integer */ j_1;
    if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(i, Integer.valueOf(23)) || Objects.m_equals__java_lang_Object__java_lang_Object__boolean(i, Integer.valueOf(32))) {
     $caseIndex_2 = 0;
-   } else if (!$Equality.$same(i, null) && (j_1 = (/**@type {Integer}*/ (i)), true) && j_1.intValue() > 2) {
+   } else if (!$Equality.$same(i, null) && (j_1 = (/**@type {!Integer}*/ (i)), j_1.intValue() > 2)) {
     $caseIndex_2 = 1;
    } else if ($Equality.$same(i, null)) {
     $caseIndex_2 = 2;
@@ -114,9 +114,9 @@ class SwitchPatterns extends j_l_Object {
    let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(r);
    let /** number */ $caseIndex;
    let /** $1R */ pattern$1R, /** * */ exp, /** $1R */ pattern$1R_1, /** * */ exp_1, /** ?string */ s1, /** ?string */ s2, /** ?string */ s3, /** $1R */ pattern$1R_2, /** * */ c1, /** ?string */ c2;
-   if ($1R.$isInstance($selector) && (pattern$1R = (/**@type {$1R}*/ ($Casts.$to($selector, $1R))), true) && ((exp = pattern$1R.m_o__java_lang_Object(), $1R.$isInstance(exp) && (pattern$1R_1 = (/**@type {$1R}*/ ($Casts.$to(exp, $1R))), true)) && (exp_1 = pattern$1R_1.m_o__java_lang_Object(), j_l_String.$isInstance(exp_1) && (s1 = (/**@type {?string}*/ ($Casts.$to(exp_1, j_l_String))), true)) && (s2 = pattern$1R_1.m_s__java_lang_String(), true)) && (s3 = pattern$1R.m_s__java_lang_String(), true) && j_l_String.m_equals__java_lang_String__java_lang_Object__boolean(s1, 'Hello')) {
+   if ($1R.$isInstance($selector) && (pattern$1R = (/**@type {!$1R}*/ ($Casts.$to($selector, $1R))), exp = pattern$1R.m_o__java_lang_Object(), $1R.$isInstance(exp) && (pattern$1R_1 = (/**@type {!$1R}*/ ($Casts.$to(exp, $1R))), exp_1 = pattern$1R_1.m_o__java_lang_Object(), j_l_String.$isInstance(exp_1) && (s1 = (/**@type {string}*/ ($Casts.$to(exp_1, j_l_String))), s2 = pattern$1R_1.m_s__java_lang_String(), s3 = pattern$1R.m_s__java_lang_String(), j_l_String.m_equals__java_lang_String__java_lang_Object__boolean(s1, 'Hello'))))) {
     $caseIndex = 0;
-   } else if ($1R.$isInstance($selector) && (pattern$1R_2 = (/**@type {$1R}*/ ($Casts.$to($selector, $1R))), true) && (c1 = pattern$1R_2.m_o__java_lang_Object(), true) && (c2 = pattern$1R_2.m_s__java_lang_String(), true)) {
+   } else if ($1R.$isInstance($selector) && (pattern$1R_2 = (/**@type {!$1R}*/ ($Casts.$to($selector, $1R))), c1 = pattern$1R_2.m_o__java_lang_Object(), c2 = pattern$1R_2.m_s__java_lang_String(), true)) {
     $caseIndex = 1;
    } else {
     $caseIndex = 2;
@@ -139,9 +139,9 @@ class SwitchPatterns extends j_l_Object {
    let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
    let /** number */ $caseIndex;
    let /** A */ a, /** B */ b;
-   if (A.$isInstance($selector) && (a = (/**@type {A}*/ ($Casts.$to($selector, A))), true)) {
+   if (A.$isInstance($selector) && (a = (/**@type {!A}*/ ($Casts.$to($selector, A))), true)) {
     $caseIndex = 0;
-   } else if (B.$isInstance($selector) && (b = (/**@type {B}*/ ($Casts.$to($selector, B))), true)) {
+   } else if (B.$isInstance($selector) && (b = (/**@type {!B}*/ ($Casts.$to($selector, B))), true)) {
     $caseIndex = 1;
    } else {
     $caseIndex = 2;

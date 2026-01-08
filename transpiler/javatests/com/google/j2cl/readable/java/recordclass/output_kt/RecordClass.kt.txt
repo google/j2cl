@@ -63,7 +63,7 @@ open class RecordClass {
     override fun equals(arg0: Any?): Boolean {
      var ___other: LocalRecord? = null
      if (!(arg0 is LocalRecord && run {
-      ___other = arg0 as LocalRecord?
+      ___other = arg0 as LocalRecord
       true
      })) return false
      return Arrays.equals(
@@ -110,7 +110,7 @@ open class RecordClass {
     override fun equals(arg0: Any?): Boolean {
      var ___other: R2? = null
      if (!(arg0 is R2 && run {
-      ___other = arg0 as R2?
+      ___other = arg0 as R2
       true
      })) return false
      return Arrays.equals(
@@ -159,7 +159,7 @@ open class RecordClass {
     override fun equals(arg0: Any?): Boolean {
      var ___other: R1? = null
      if (!(arg0 is R1 && run {
-      ___other = arg0 as R1?
+      ___other = arg0 as R1
       true
      })) return false
      return Arrays.equals(
@@ -185,34 +185,20 @@ open class RecordClass {
     "b",
     R2(3, "c"),
    )
-   var pattern___1R1: R1? = null
-   var pattern___1R2: R2? = null
-   var pattern___1R1_1: R1? = null
-   var pattern___1R2_1: R2? = null
    val b: Boolean = r is R1 && run {
-    pattern___1R1 = r as R1?
-    true
-   } && (run {
-    val exp: Any? = pattern___1R1!!.o()
+    val pattern___1R1: R1 = r as R1
+    val exp: Any? = pattern___1R1.o()
     exp is R2 && run {
-     pattern___1R2 = exp as R2?
-     true
+     val pattern___1R2: R2 = exp as R2
+     val i1: Int = pattern___1R2.i()
+     val exp_1: Any? = pattern___1R2.o()
+     exp_1 is String && run {
+      val s1: String = exp_1 as String
+      val s2: Any? = pattern___1R1.s()
+      val n: R2? = pattern___1R1.n()
+      true
+     }
     }
-   } && run {
-    val i1: Int = pattern___1R2!!.i()
-    true
-   } && run {
-    val exp_1: Any? = pattern___1R2!!.o()
-    exp_1 is String && run {
-     val s1: String? = exp_1 as String?
-     true
-    }
-   }) && run {
-    val s2: Any? = pattern___1R1!!.s()
-    true
-   } && run {
-    val n: R2? = pattern___1R1!!.n()
-    true
    }
    val o: Any = R1(
     R2(1, "a"),
@@ -220,29 +206,19 @@ open class RecordClass {
     R2(3, "c"),
    )
    val b1: Boolean = o is R1 && run {
-    pattern___1R1_1 = o as R1?
-    true
-   } && (run {
-    val exp_2: Any? = pattern___1R1_1!!.o()
+    val pattern___1R1_1: R1 = o as R1
+    val exp_2: Any? = pattern___1R1_1.o()
     exp_2 is R2 && run {
-     pattern___1R2_1 = exp_2 as R2?
-     true
+     val pattern___1R2_1: R2 = exp_2 as R2
+     val i1_1: Int = pattern___1R2_1.i()
+     val exp_3: Any? = pattern___1R2_1.o()
+     exp_3 is String && run {
+      val s1_1: String = exp_3 as String
+      val s2_1: Any? = pattern___1R1_1.s()
+      val n_1: R2? = pattern___1R1_1.n()
+      true
+     }
     }
-   } && run {
-    val i1_1: Int = pattern___1R2_1!!.i()
-    true
-   } && run {
-    val exp_3: Any? = pattern___1R2_1!!.o()
-    exp_3 is String && run {
-     val s1_1: String? = exp_3 as String?
-     true
-    }
-   }) && run {
-    val s2_1: Any? = pattern___1R1_1!!.s()
-    true
-   } && run {
-    val n_1: R2? = pattern___1R1_1!!.n()
-    true
    }
   }
  }
@@ -261,7 +237,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: SimpleRecord? = null
    if (!(arg0 is SimpleRecord && run {
-    ___other = arg0 as SimpleRecord?
+    ___other = arg0 as SimpleRecord
     true
    })) return false
    return Arrays.equals(
@@ -297,7 +273,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: StringRecord? = null
    if (!(arg0 is StringRecord && run {
-    ___other = arg0 as StringRecord?
+    ___other = arg0 as StringRecord
     true
    })) return false
    return Arrays.equals(
@@ -333,7 +309,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: ArrayRecord? = null
    if (!(arg0 is ArrayRecord && run {
-    ___other = arg0 as ArrayRecord?
+    ___other = arg0 as ArrayRecord
     true
    })) return false
    return Arrays.equals(
@@ -369,7 +345,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: ObjectRecord? = null
    if (!(arg0 is ObjectRecord && run {
-    ___other = arg0 as ObjectRecord?
+    ___other = arg0 as ObjectRecord
     true
    })) return false
    return Arrays.equals(
@@ -412,7 +388,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordWithConstructor? = null
    if (!(arg0 is RecordWithConstructor && run {
-    ___other = arg0 as RecordWithConstructor?
+    ___other = arg0 as RecordWithConstructor
     true
    })) return false
    return Arrays.equals(
@@ -459,7 +435,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordWithCompactConstructor? = null
    if (!(arg0 is RecordWithCompactConstructor && run {
-    ___other = arg0 as RecordWithCompactConstructor?
+    ___other = arg0 as RecordWithCompactConstructor
     true
    })) return false
    return Arrays.equals(
@@ -497,7 +473,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordWithDeferringConstructor? = null
    if (!(arg0 is RecordWithDeferringConstructor && run {
-    ___other = arg0 as RecordWithDeferringConstructor?
+    ___other = arg0 as RecordWithDeferringConstructor
     true
    })) return false
    return Arrays.equals(
@@ -557,7 +533,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordWithOverriddenAccessor? = null
    if (!(arg0 is RecordWithOverriddenAccessor && run {
-    ___other = arg0 as RecordWithOverriddenAccessor?
+    ___other = arg0 as RecordWithOverriddenAccessor
     true
    })) return false
    return Arrays.equals(
@@ -597,7 +573,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordImplementingInterface? = null
    if (!(arg0 is RecordImplementingInterface && run {
-    ___other = arg0 as RecordImplementingInterface?
+    ___other = arg0 as RecordImplementingInterface
     true
    })) return false
    return Arrays.equals(
@@ -637,7 +613,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: StaticFieldRecord? = null
    if (!(arg0 is StaticFieldRecord && run {
-    ___other = arg0 as StaticFieldRecord?
+    ___other = arg0 as StaticFieldRecord
     true
    })) return false
    return Arrays.equals(
@@ -691,7 +667,7 @@ open class RecordClass {
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordSpecializingInterface? = null
    if (!(arg0 is RecordSpecializingInterface && run {
-    ___other = arg0 as RecordSpecializingInterface?
+    ___other = arg0 as RecordSpecializingInterface
     true
    })) return false
    return Arrays.equals(

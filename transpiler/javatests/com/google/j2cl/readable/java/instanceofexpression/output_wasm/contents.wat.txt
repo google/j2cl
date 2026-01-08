@@ -293,13 +293,13 @@
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:101:4
-  (if (if (result i32) (block (result i32)
+  (if (block (result i32)
     (local.set $exp_1 (call $$create__@java.lang.Object ))
     (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $exp_1)) (then (block (result i32)
      (local.set $i (ref.cast (ref null $java.lang.Integer) (local.get $exp_1)))
-     (i32.const 1)
+     (i32.eq (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $i))) (i32.const 2))
     )) (else (i32.const 0)))
-   ) (then (i32.eq (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $i))) (i32.const 2))) (else (i32.const 0)))
+   )
    (then
     (block
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:105:6

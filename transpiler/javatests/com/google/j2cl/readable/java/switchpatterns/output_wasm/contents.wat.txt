@@ -234,10 +234,10 @@
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:26:4
    
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:27:6
-   (if (if (result i32) (if (result i32) (ref.test (ref $java.lang.String) (local.get $$selector)) (then (block (result i32)
+   (if (if (result i32) (ref.test (ref $java.lang.String) (local.get $$selector)) (then (block (result i32)
      (local.set $s (ref.cast (ref null $java.lang.String) (local.get $$selector)))
-     (i32.const 1)
-    )) (else (i32.const 0))) (then (i32.eq (call $m_length__int@java.lang.String (ref.as_non_null (local.get $s))) (i32.const 1))) (else (i32.const 0)))
+     (i32.eq (call $m_length__int@java.lang.String (ref.as_non_null (local.get $s))) (i32.const 1))
+    )) (else (i32.const 0)))
     (then
      (block
       (local.set $$caseIndex (i32.const 0))
@@ -295,10 +295,10 @@
      )
     )(else
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:36:6
-     (if (if (result i32) (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $$selector_1)) (then (block (result i32)
+     (if (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $$selector_1)) (then (block (result i32)
        (local.set $j (ref.cast (ref null $java.lang.Integer) (local.get $$selector_1)))
-       (i32.const 1)
-      )) (else (i32.const 0))) (then (i32.gt_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $j))) (i32.const 2))) (else (i32.const 0)))
+       (i32.gt_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $j))) (i32.const 2))
+      )) (else (i32.const 0)))
       (then
        (block
         (local.set $$caseIndex_1 (i32.const 1))
@@ -354,10 +354,10 @@
      )
     )(else
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:43:6
-     (if (if (result i32) (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $i)) (then (block (result i32)
+     (if (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $i)) (then (block (result i32)
        (local.set $j_1 (ref.cast (ref null $java.lang.Integer) (local.get $i)))
-       (i32.const 1)
-      )) (else (i32.const 0))) (then (i32.gt_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $j_1))) (i32.const 2))) (else (i32.const 0)))
+       (i32.gt_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $j_1))) (i32.const 2))
+      )) (else (i32.const 0)))
       (then
        (block
         (local.set $$caseIndex_2 (i32.const 1))
@@ -436,41 +436,29 @@
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:53:4
    
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:54:6
-   (if (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.1R) (local.get $$selector)) (then (block (result i32)
+   (if (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.1R) (local.get $$selector)) (then (block (result i32)
      (local.set $pattern$1R (ref.cast (ref null $switchpatterns.SwitchPatterns.1R) (local.get $$selector)))
-     (i32.const 1)
-    )) (else (i32.const 0))) (then (if (result i32) (if (result i32) (block (result i32)
      (local.set $exp (call $m_o__java_lang_Object@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R))))
      (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.1R) (local.get $exp)) (then (block (result i32)
       (local.set $pattern$1R_1 (ref.cast (ref null $switchpatterns.SwitchPatterns.1R) (local.get $exp)))
-      (i32.const 1)
+      (local.set $exp_1 (call $m_o__java_lang_Object@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R_1))))
+      (if (result i32) (ref.test (ref $java.lang.String) (local.get $exp_1)) (then (block (result i32)
+       (local.set $s1 (ref.cast (ref null $java.lang.String) (local.get $exp_1)))
+       (local.set $s2 (call $m_s__java_lang_String@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R_1))))
+       (local.set $s3 (call $m_s__java_lang_String@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R))))
+       (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (local.get $s1))(call $$getString_|Hello|__java_lang_String_<once>_@switchpatterns.SwitchPatterns ))
+      )) (else (i32.const 0)))
      )) (else (i32.const 0)))
-    ) (then (block (result i32)
-     (local.set $exp_1 (call $m_o__java_lang_Object@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R_1))))
-     (if (result i32) (ref.test (ref $java.lang.String) (local.get $exp_1)) (then (block (result i32)
-      (local.set $s1 (ref.cast (ref null $java.lang.String) (local.get $exp_1)))
-      (i32.const 1)
-     )) (else (i32.const 0)))
-    )) (else (i32.const 0))) (then (block (result i32)
-     (local.set $s2 (call $m_s__java_lang_String@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R_1))))
-     (i32.const 1)
-    )) (else (i32.const 0)))) (else (i32.const 0))) (then (block (result i32)
-     (local.set $s3 (call $m_s__java_lang_String@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R))))
-     (i32.const 1)
-    )) (else (i32.const 0))) (then (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (local.get $s1))(call $$getString_|Hello|__java_lang_String_<once>_@switchpatterns.SwitchPatterns ))) (else (i32.const 0)))
+    )) (else (i32.const 0)))
     (then
      (block
       (local.set $$caseIndex (i32.const 0))
      )
     )(else
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:55:6
-     (if (if (result i32) (if (result i32) (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.1R) (local.get $$selector)) (then (block (result i32)
+     (if (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.1R) (local.get $$selector)) (then (block (result i32)
        (local.set $pattern$1R_2 (ref.cast (ref null $switchpatterns.SwitchPatterns.1R) (local.get $$selector)))
-       (i32.const 1)
-      )) (else (i32.const 0))) (then (block (result i32)
        (local.set $c1 (call $m_o__java_lang_Object@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R_2))))
-       (i32.const 1)
-      )) (else (i32.const 0))) (then (block (result i32)
        (local.set $c2 (call $m_s__java_lang_String@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $pattern$1R_2))))
        (i32.const 1)
       )) (else (i32.const 0)))

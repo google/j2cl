@@ -38,16 +38,13 @@ import switchpatterns.SwitchPatterns.Sealed.B
 open class SwitchPatterns {
  internal open fun testPatternsWithGuards_pp_switchpatterns() {
   val o: Any = "Hello"
-  var s: String? = null
-  var j: Int? = null
-  var j_1: Int? = null
   when (o) {
    is String if run {
-    s = o as String?
-    true
-   } && s!!.length == 1 -> {}
+    val s: String = o as String
+    s.length == 1
+   } -> {}
    is String if run {
-    val s_1: String? = o as String?
+    val s_1: String = o as String
     true
    } -> {}
    else -> {}
@@ -56,11 +53,11 @@ open class SwitchPatterns {
   when (i!!) {
    23, 32 -> {}
    is Int if run {
-    j = i as Int?
-    true
-   } && j!!.toInt() > 2 -> {}
+    val j: Int? = i as Int
+    j!!.toInt() > 2
+   } -> {}
    is Number if run {
-    val n: Number? = i as Number?
+    val n: Number = i as Number
     true
    } -> {}
    else -> {}
@@ -68,9 +65,9 @@ open class SwitchPatterns {
   when (i) {
    23, 32 -> {}
    is Int if run {
-    j_1 = i as Int?
-    true
-   } && j_1!!.toInt() > 2 -> {}
+    val j_1: Int? = i as Int
+    j_1!!.toInt() > 2
+   } -> {}
    null -> {}
    else -> {}
   }
@@ -98,7 +95,7 @@ open class SwitchPatterns {
    override fun equals(arg0: Any?): Boolean {
     var ___other: R? = null
     if (!(arg0 is R && run {
-     ___other = arg0 as R?
+     ___other = arg0 as R
      true
     })) return false
     return Arrays.equals(
@@ -120,44 +117,28 @@ open class SwitchPatterns {
    }
   }
   val r: Any? = null
-  var pattern___1R: R? = null
-  var pattern___1R_1: R? = null
-  var s1: String? = null
   var s2: String? = null
-  var pattern___1R_2: R? = null
   when (r!!) {
    is R if run {
-    pattern___1R = r as R?
-    true
-   } && (run {
-    val exp: Any? = pattern___1R!!.o()
+    val pattern___1R: R = r as R
+    val exp: Any? = pattern___1R.o()
     exp is R && run {
-     pattern___1R_1 = exp as R?
-     true
+     val pattern___1R_1: R = exp as R
+     val exp_1: Any? = pattern___1R_1.o()
+     exp_1 is String && run {
+      val s1: String = exp_1 as String
+      s2 = pattern___1R_1.s()
+      val s3: String? = pattern___1R.s()
+      s1.equals("Hello")
+     }
     }
-   } && run {
-    val exp_1: Any? = pattern___1R_1!!.o()
-    exp_1 is String && run {
-     s1 = exp_1 as String?
-     true
-    }
-   } && run {
-    s2 = pattern___1R_1!!.s()
-    true
-   }) && run {
-    val s3: String? = pattern___1R!!.s()
-    true
-   } && s1!!.equals("Hello") -> {
+   } -> {
     s2!!.length
    }
    is R if run {
-    pattern___1R_2 = r as R?
-    true
-   } && run {
-    val c1: Any? = pattern___1R_2!!.o()
-    true
-   } && run {
-    val c2: String? = pattern___1R_2!!.s()
+    val pattern___1R_2: R = r as R
+    val c1: Any? = pattern___1R_2.o()
+    val c2: String? = pattern___1R_2.s()
     true
    } -> {}
    else -> {}
@@ -169,13 +150,13 @@ open class SwitchPatterns {
   val i: Int = run {
    when (o!!) {
     is A if run {
-     val a: A? = o as A?
+     val a: A = o as A
      true
     } -> {
      return@run 1
     }
     is B if run {
-     val b: B? = o as B?
+     val b: B = o as B
      true
     } -> {
      return@run 2

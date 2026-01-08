@@ -36,7 +36,7 @@ class SimpleRecord extends Record {
  /** @override @return {boolean} */
  equals(/** * */ arg0) {
   let /** SimpleRecord */ $other;
-  if (!(SimpleRecord.$isInstance(arg0) && ($other = (/**@type {SimpleRecord}*/ ($Casts.$to(arg0, SimpleRecord))), true))) {
+  if (!(SimpleRecord.$isInstance(arg0) && ($other = (/**@type {!SimpleRecord}*/ ($Casts.$to(arg0, SimpleRecord))), true))) {
    return false;
   }
   return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([Integer.valueOf(this.f_value__recordclass_RecordClass_SimpleRecord_)], [Integer.valueOf($other.f_value__recordclass_RecordClass_SimpleRecord_)]);
