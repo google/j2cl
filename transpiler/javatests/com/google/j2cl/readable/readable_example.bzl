@@ -24,7 +24,8 @@ load(
 )
 load("//build_defs/internal_do_not_use:j2cl_common.bzl", "j2cl_common")
 load("//build_defs/internal_do_not_use:j2kt_web_transition.bzl", "j2kt_web_transition")
-load("//build_defs/internal_do_not_use:provider.bzl", "J2clInfo")
+load("//build_defs/internal_do_not_use:j2wasm_common.bzl", "J2WASM_FEATURE_SET")
+load("//build_defs/internal_do_not_use:provider.bzl", "J2clInfo", "J2wasmInfo")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@rules_closure//closure:defs.bzl", "closure_js_binary")
 
@@ -44,6 +45,7 @@ def readable_example(
         generate_readable_source_maps = False,
         generate_wasm_readables = True,
         generate_wasm_imports = False,
+        generate_wasm_externs = False,
         wasm_entry_points = [],
         generate_kt_readables = True,
         generate_kt_web_readables = False,
@@ -102,32 +104,10 @@ def readable_example(
         _js_readable_targets("readable", "output_closure", defs)
 
     if generate_wasm_readables:
-        j2wasm_application(
-            name = "readable_wasm",
-            deps = [":readable-j2wasm"],
+        _wasm_readable_targets(
+            feature_set = J2WASM_FEATURE_SET.DEFAULT if not generate_wasm_externs else J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP,
             entry_points = wasm_entry_points,
-        )
-
-        _readable_diff_test(
-            name = "readable_wasm_golden",
-            target = ":readable-j2wasm",
-            target_file = "readable-j2wasm.js",
-            dir_out = "output_wasm",
-            tags = ["j2wasm"],
-        )
-
-        if generate_wasm_imports:
-            _readable_diff_test(
-                name = "readable_wasm_imports_golden",
-                target = ":readable_wasm.imports.js.txt",
-                dir_out = "output_wasm_imports",
-                tags = ["j2wasm"],
-            )
-
-        build_test(
-            name = "readable_wasm_build_test",
-            targets = ["readable_wasm"],
-            tags = ["j2wasm"],
+            generate_imports = generate_wasm_imports,
         )
 
     if generate_kt_readables:
@@ -217,6 +197,42 @@ def _js_readable_targets(readable_target, dir_out, defs):
         name = "%s_build_test" % readable_target,
         targets = ["%s_binary" % readable_target],
         tags = ["j2cl"],
+    )
+
+def _wasm_readable_targets(feature_set, entry_points, generate_imports):
+    _feature_set_enabled_j2wasm_library(
+        name = "readable-j2wasm-feature_set",
+        j2wasm_library = ":readable-j2wasm",
+        feature_set = feature_set,
+    )
+
+    j2wasm_application(
+        name = "readable_wasm",
+        deps = [":readable-j2wasm-feature_set"],
+        entry_points = entry_points,
+        feature_set = feature_set,
+    )
+
+    _readable_diff_test(
+        name = "readable_wasm_golden",
+        target = ":readable-j2wasm-feature_set",
+        target_file = "readable-j2wasm.js",
+        dir_out = "output_wasm",
+        tags = ["j2wasm"],
+    )
+
+    if generate_imports:
+        _readable_diff_test(
+            name = "readable_wasm_imports_golden",
+            target = ":readable_wasm.imports.js.txt",
+            dir_out = "output_wasm_imports",
+            tags = ["j2wasm"],
+        )
+
+    build_test(
+        name = "readable_wasm_build_test",
+        targets = ["readable_wasm"],
+        tags = ["j2wasm"],
     )
 
 def _readable_diff_test(name, target, dir_out, tags, target_file = ""):
@@ -312,5 +328,25 @@ _j2kt_web_enabled_j2cl_library = rule(
     implementation = _j2kt_web_enabled_j2cl_library_impl,
     attrs = {
         "j2cl_library": attr.label(providers = [J2clInfo], cfg = j2kt_web_transition),
+    },
+)
+
+def _feature_set_enabled_j2wasm_library_impl(ctx):
+    j2wasm_library = ctx.attr.j2wasm_library[0]
+    j2wasm_provider = j2wasm_library[J2wasmInfo]
+    default_provider = j2wasm_library[DefaultInfo]
+    return [default_provider, j2wasm_provider]
+
+_j2wasm_feature_set_transition = transition(
+    implementation = lambda settings, attr: {"//build_defs/internal_do_not_use:j2wasm_feature_set": attr.feature_set},
+    inputs = [],
+    outputs = ["//build_defs/internal_do_not_use:j2wasm_feature_set"],
+)
+
+_feature_set_enabled_j2wasm_library = rule(
+    implementation = _feature_set_enabled_j2wasm_library_impl,
+    attrs = {
+        "j2wasm_library": attr.label(providers = [J2wasmInfo, DefaultInfo], cfg = _j2wasm_feature_set_transition),
+        "feature_set": attr.string(default = J2WASM_FEATURE_SET.DEFAULT),
     },
 )

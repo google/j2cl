@@ -5,8 +5,7 @@
 (type $jstype.SomeJsType.Wildcard.$Overlay.vtable (sub (struct
  ))
 )
-(type $jstype.SomeJsType (sub $java.lang.Object (struct
- (field $vtable (ref $jstype.SomeJsType.vtable))
+(type $jstype.SomeJsType (sub $java.lang.Object (descriptor $jstype.SomeJsType.vtable ) (struct
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $packageField@jstype.SomeJsType (mut i32))
@@ -15,7 +14,7 @@
  (field $publicField@jstype.SomeJsType (mut i32))
  ))
 )
-(type $jstype.SomeJsType.vtable (sub $java.lang.Object.vtable (struct
+(type $jstype.SomeJsType.vtable (sub $java.lang.Object.vtable (describes $jstype.SomeJsType ) (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))

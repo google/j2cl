@@ -197,6 +197,7 @@ public class WasmGeneratorStage {
         });
 
     emitNameMappingFile(library, output);
+    generateJsExterns(library);
   }
 
   public String emitToString(Consumer<WasmConstructsGenerator> emitter) {
@@ -371,6 +372,10 @@ public class WasmGeneratorStage {
 
   private void generateJsImportsFile() {
     JsImportsGenerator.generateOutputs(output, environment.getJsImports());
+  }
+
+  private void generateJsExterns(Library library) {
+    JsExternsGenerator.generateOutputs(output, environment, library);
   }
 
   /** Emits a symbol to name mapping file for all methods in the library. */
