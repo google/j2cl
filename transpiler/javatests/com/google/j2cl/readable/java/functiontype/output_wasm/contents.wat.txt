@@ -1,21 +1,16 @@
 
-;;; Code for functiontype.Function [static fields]
 (global $$class-initialized@functiontype.Function (mut i32)
  (i32.const 0)
 )
 (global $$class@functiontype.Function (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for functiontype.Function [static fields]
-;;; Code for functiontype.FunctionImpl [static fields]
 (global $$class-initialized@functiontype.FunctionImpl (mut i32)
  (i32.const 0)
 )
 (global $$class@functiontype.FunctionImpl (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for functiontype.FunctionImpl [static fields]
-;;; Code for functiontype.FunctionImpl [vtable.init]
 (global $functiontype.FunctionImpl.vtable (ref $functiontype.FunctionImpl.vtable)
  (struct.new $functiontype.FunctionImpl.vtable
   (ref.func $$getClassImpl__java_lang_Class@functiontype.FunctionImpl)
@@ -29,9 +24,7 @@
  (struct.new $functiontype.Function.vtable
  )
 )
-;;; End of code for functiontype.FunctionImpl [vtable.init]
 
-;;; Code for functiontype.Function [methods]
 
 ;;; void Function.$clinit()
 (func $$clinit__void_<once>_@functiontype.Function
@@ -62,8 +55,6 @@
   (return (global.get $$class@functiontype.Function))
  )
 )
-;;; End of code for functiontype.Function [methods]
-;;; Code for functiontype.FunctionImpl [methods]
 
 ;;; FunctionImpl FunctionImpl.$create()
 (func $$create__@functiontype.FunctionImpl
@@ -149,4 +140,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@functiontype.FunctionImpl)
-;;; End of code for functiontype.FunctionImpl [methods]

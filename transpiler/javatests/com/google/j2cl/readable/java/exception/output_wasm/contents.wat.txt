@@ -1,21 +1,16 @@
 
-;;; Code for exception.MyException [static fields]
 (global $$class-initialized@exception.MyException (mut i32)
  (i32.const 0)
 )
 (global $$class@exception.MyException (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for exception.MyException [static fields]
-;;; Code for exception.MyJsException [static fields]
 (global $$class-initialized@exception.MyJsException (mut i32)
  (i32.const 0)
 )
 (global $$class@exception.MyJsException (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for exception.MyJsException [static fields]
-;;; Code for exception.MyException [vtable.init]
 (global $exception.MyException.vtable (ref $exception.MyException.vtable)
  (struct.new $exception.MyException.vtable
   (ref.func $$getClassImpl__java_lang_Class@exception.MyException)
@@ -40,8 +35,6 @@
  (struct.new $java.io.Serializable.vtable
  )
 )
-;;; End of code for exception.MyException [vtable.init]
-;;; Code for exception.MyJsException [vtable.init]
 (global $exception.MyJsException.vtable (ref $exception.MyJsException.vtable)
  (struct.new $exception.MyJsException.vtable
   (ref.func $$getClassImpl__java_lang_Class@exception.MyJsException)
@@ -66,9 +59,7 @@
  (struct.new $java.io.Serializable.vtable
  )
 )
-;;; End of code for exception.MyJsException [vtable.init]
 
-;;; Code for exception.MyException [methods]
 
 ;;; MyException MyException.$create()
 (func $$create__@exception.MyException
@@ -174,8 +165,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@exception.MyException)
-;;; End of code for exception.MyException [methods]
-;;; Code for exception.MyJsException [methods]
 
 ;;; MyJsException MyJsException.$create()
 (func $$create__@exception.MyJsException
@@ -281,4 +270,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@exception.MyJsException)
-;;; End of code for exception.MyJsException [methods]

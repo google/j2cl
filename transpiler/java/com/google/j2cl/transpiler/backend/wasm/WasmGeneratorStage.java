@@ -181,14 +181,11 @@ public class WasmGeneratorStage {
 
     emitToFile(
         "types.wat",
-        generator ->
-            generator.emitForEachType(
-                library, generator::renderModularTypeStructs, "type definition"));
+        generator -> generator.emitForEachType(library, generator::renderModularTypeStructs));
 
     emitToFile(
         "imports.wat",
-        generator ->
-            generator.emitForEachType(library, generator::renderImportedMethods, "imports"));
+        generator -> generator.emitForEachType(library, generator::renderImportedMethods));
 
     emitToFile(
         "contents.wat",
@@ -196,7 +193,7 @@ public class WasmGeneratorStage {
           generator.emitDataSegments(library);
           generator.emitGlobals(library);
           generator.emitClassDispatchTables(library, /* emitItableInitialization= */ false);
-          generator.emitForEachType(library, generator::renderTypeMethods, "methods");
+          generator.emitForEachType(library, generator::renderTypeMethods);
         });
 
     emitNameMappingFile(library, output);
@@ -271,7 +268,7 @@ public class WasmGeneratorStage {
 
     // Emit imports.
     generator.emitImportsForBinaryenIntrinsics();
-    generator.emitForEachType(library, generator::renderImportedMethods, "imports");
+    generator.emitForEachType(library, generator::renderImportedMethods);
     generator.emitExceptionTag();
 
     // Emit all the globals, e.g. vtable instances, etc.
@@ -280,10 +277,9 @@ public class WasmGeneratorStage {
     generator.emitEmptyArraySingletons(usedNativeArrayTypes);
     generator.emitGlobals(library);
 
-
     // Last, emit all methods at the very end so that the synthetic code generated above does
     // not inherit an incorrect source position.
-    generator.emitForEachType(library, generator::renderTypeMethods, "methods");
+    generator.emitForEachType(library, generator::renderTypeMethods);
     generator.emitItableInterfaceGetters(library);
 
     builder.newLine();

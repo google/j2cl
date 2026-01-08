@@ -1,45 +1,34 @@
 
-;;; Code for overridingmethods.SomeInterface [static fields]
 (global $$class-initialized@overridingmethods.SomeInterface (mut i32)
  (i32.const 0)
 )
 (global $$class@overridingmethods.SomeInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for overridingmethods.SomeInterface [static fields]
-;;; Code for overridingmethods.Parent [static fields]
 (global $$class-initialized@overridingmethods.Parent (mut i32)
  (i32.const 0)
 )
 (global $$class@overridingmethods.Parent (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for overridingmethods.Parent [static fields]
-;;; Code for overridingmethods.Child [static fields]
 (global $$class-initialized@overridingmethods.Child (mut i32)
  (i32.const 0)
 )
 (global $$class@overridingmethods.Child (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for overridingmethods.Child [static fields]
-;;; Code for overridingmethods.FinalChild [static fields]
 (global $$class-initialized@overridingmethods.FinalChild (mut i32)
  (i32.const 0)
 )
 (global $$class@overridingmethods.FinalChild (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for overridingmethods.FinalChild [static fields]
-;;; Code for overridingmethods.SomeInterface.$LambdaAdaptor [static fields]
 (global $$class-initialized@overridingmethods.SomeInterface.$LambdaAdaptor (mut i32)
  (i32.const 0)
 )
 (global $$class@overridingmethods.SomeInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for overridingmethods.SomeInterface.$LambdaAdaptor [static fields]
-;;; Code for overridingmethods.Parent [vtable.init]
 (global $overridingmethods.Parent.vtable (ref $overridingmethods.Parent.vtable)
  (struct.new $overridingmethods.Parent.vtable
   (ref.func $$getClassImpl__java_lang_Class@overridingmethods.Parent)
@@ -50,8 +39,6 @@
   (ref.func $m_nonFinal__void@overridingmethods.Parent)
  )
 )
-;;; End of code for overridingmethods.Parent [vtable.init]
-;;; Code for overridingmethods.Child [vtable.init]
 (global $overridingmethods.Child.vtable (ref $overridingmethods.Child.vtable)
  (struct.new $overridingmethods.Child.vtable
   (ref.func $$getClassImpl__java_lang_Class@overridingmethods.Child)
@@ -68,8 +55,6 @@
   (ref.func $m_interfaceMethod__void@overridingmethods.Child)
  )
 )
-;;; End of code for overridingmethods.Child [vtable.init]
-;;; Code for overridingmethods.FinalChild [vtable.init]
 (global $overridingmethods.FinalChild.vtable (ref $overridingmethods.FinalChild.vtable)
  (struct.new $overridingmethods.FinalChild.vtable
   (ref.func $$getClassImpl__java_lang_Class@overridingmethods.FinalChild)
@@ -86,9 +71,7 @@
   (ref.func $m_interfaceMethod__void@overridingmethods.FinalChild)
  )
 )
-;;; End of code for overridingmethods.FinalChild [vtable.init]
 
-;;; Code for overridingmethods.SomeInterface [methods]
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void_<once>_@overridingmethods.SomeInterface
@@ -119,8 +102,6 @@
   (return (global.get $$class@overridingmethods.SomeInterface))
  )
 )
-;;; End of code for overridingmethods.SomeInterface [methods]
-;;; Code for overridingmethods.Parent [methods]
 
 ;;; Parent Parent.$create()
 (func $$create__@overridingmethods.Parent
@@ -229,8 +210,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@overridingmethods.Parent)
-;;; End of code for overridingmethods.Parent [methods]
-;;; Code for overridingmethods.SomeInterface.$LambdaAdaptor [methods]
 
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_overridingmethods_SomeInterface_$LambdaAdaptor@overridingmethods.SomeInterface.$LambdaAdaptor
@@ -286,8 +265,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@overridingmethods.SomeInterface.$LambdaAdaptor)
-;;; End of code for overridingmethods.SomeInterface.$LambdaAdaptor [methods]
-;;; Code for overridingmethods.Child [methods]
 
 ;;; Child Child.$create()
 (func $$create__@overridingmethods.Child
@@ -396,8 +373,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@overridingmethods.Child)
-;;; End of code for overridingmethods.Child [methods]
-;;; Code for overridingmethods.FinalChild [methods]
 
 ;;; FinalChild FinalChild.$create()
 (func $$create__@overridingmethods.FinalChild
@@ -506,4 +481,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@overridingmethods.FinalChild)
-;;; End of code for overridingmethods.FinalChild [methods]

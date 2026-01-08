@@ -1,29 +1,22 @@
 
-;;; Code for subclassgenericclass.GenericClass [static fields]
 (global $$class-initialized@subclassgenericclass.GenericClass (mut i32)
  (i32.const 0)
 )
 (global $$class@subclassgenericclass.GenericClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for subclassgenericclass.GenericClass [static fields]
-;;; Code for subclassgenericclass.GenericSubclassGenericClass [static fields]
 (global $$class-initialized@subclassgenericclass.GenericSubclassGenericClass (mut i32)
  (i32.const 0)
 )
 (global $$class@subclassgenericclass.GenericSubclassGenericClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for subclassgenericclass.GenericSubclassGenericClass [static fields]
-;;; Code for subclassgenericclass.SubclassGenericClass [static fields]
 (global $$class-initialized@subclassgenericclass.SubclassGenericClass (mut i32)
  (i32.const 0)
 )
 (global $$class@subclassgenericclass.SubclassGenericClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for subclassgenericclass.SubclassGenericClass [static fields]
-;;; Code for subclassgenericclass.GenericClass [vtable.init]
 (global $subclassgenericclass.GenericClass.vtable (ref $subclassgenericclass.GenericClass.vtable)
  (struct.new $subclassgenericclass.GenericClass.vtable
   (ref.func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericClass)
@@ -32,8 +25,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for subclassgenericclass.GenericClass [vtable.init]
-;;; Code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
 (global $subclassgenericclass.GenericSubclassGenericClass.vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable)
  (struct.new $subclassgenericclass.GenericSubclassGenericClass.vtable
   (ref.func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
@@ -42,8 +33,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
-;;; Code for subclassgenericclass.SubclassGenericClass [vtable.init]
 (global $subclassgenericclass.SubclassGenericClass.vtable (ref $subclassgenericclass.SubclassGenericClass.vtable)
  (struct.new $subclassgenericclass.SubclassGenericClass.vtable
   (ref.func $$getClassImpl__java_lang_Class@subclassgenericclass.SubclassGenericClass)
@@ -52,9 +41,7 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for subclassgenericclass.SubclassGenericClass [vtable.init]
 
-;;; Code for subclassgenericclass.GenericClass [methods]
 
 ;;; GenericClass<T> GenericClass.$create()
 (func $$create__@subclassgenericclass.GenericClass
@@ -127,8 +114,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericClass)
-;;; End of code for subclassgenericclass.GenericClass [methods]
-;;; Code for subclassgenericclass.GenericSubclassGenericClass [methods]
 
 ;;; GenericSubclassGenericClass<T> GenericSubclassGenericClass.$create()
 (func $$create__@subclassgenericclass.GenericSubclassGenericClass
@@ -201,8 +186,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
-;;; End of code for subclassgenericclass.GenericSubclassGenericClass [methods]
-;;; Code for subclassgenericclass.SubclassGenericClass [methods]
 
 ;;; SubclassGenericClass SubclassGenericClass.$create()
 (func $$create__@subclassgenericclass.SubclassGenericClass
@@ -275,4 +258,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subclassgenericclass.SubclassGenericClass)
-;;; End of code for subclassgenericclass.SubclassGenericClass [methods]

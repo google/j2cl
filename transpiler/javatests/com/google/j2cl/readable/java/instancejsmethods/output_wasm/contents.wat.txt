@@ -1,53 +1,40 @@
 
-;;; Code for instancejsmethods.MyInterface [static fields]
 (global $$class-initialized@instancejsmethods.MyInterface (mut i32)
  (i32.const 0)
 )
 (global $$class@instancejsmethods.MyInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for instancejsmethods.MyInterface [static fields]
-;;; Code for instancejsmethods.SuperParent [static fields]
 (global $$class-initialized@instancejsmethods.SuperParent (mut i32)
  (i32.const 0)
 )
 (global $$class@instancejsmethods.SuperParent (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for instancejsmethods.SuperParent [static fields]
-;;; Code for instancejsmethods.Parent [static fields]
 (global $$class-initialized@instancejsmethods.Parent (mut i32)
  (i32.const 0)
 )
 (global $$class@instancejsmethods.Parent (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for instancejsmethods.Parent [static fields]
-;;; Code for instancejsmethods.Child [static fields]
 (global $$class-initialized@instancejsmethods.Child (mut i32)
  (i32.const 0)
 )
 (global $$class@instancejsmethods.Child (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for instancejsmethods.Child [static fields]
-;;; Code for instancejsmethods.Main [static fields]
 (global $$class-initialized@instancejsmethods.Main (mut i32)
  (i32.const 0)
 )
 (global $$class@instancejsmethods.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for instancejsmethods.Main [static fields]
-;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [static fields]
 (global $$class-initialized@instancejsmethods.MyInterface.$LambdaAdaptor (mut i32)
  (i32.const 0)
 )
 (global $$class@instancejsmethods.MyInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for instancejsmethods.MyInterface.$LambdaAdaptor [static fields]
-;;; Code for instancejsmethods.SuperParent [vtable.init]
 (global $instancejsmethods.SuperParent.vtable (ref $instancejsmethods.SuperParent.vtable)
  (struct.new $instancejsmethods.SuperParent.vtable
   (ref.func $$getClassImpl__java_lang_Class@instancejsmethods.SuperParent)
@@ -58,8 +45,6 @@
   (ref.func $m_fun__int__int__int@instancejsmethods.SuperParent)
  )
 )
-;;; End of code for instancejsmethods.SuperParent [vtable.init]
-;;; Code for instancejsmethods.Parent [vtable.init]
 (global $instancejsmethods.Parent.vtable (ref $instancejsmethods.Parent.vtable)
  (struct.new $instancejsmethods.Parent.vtable
   (ref.func $$getClassImpl__java_lang_Class@instancejsmethods.Parent)
@@ -71,8 +56,6 @@
   (ref.func $m_foo__int__int@instancejsmethods.Parent)
  )
 )
-;;; End of code for instancejsmethods.Parent [vtable.init]
-;;; Code for instancejsmethods.Child [vtable.init]
 (global $instancejsmethods.Child.vtable (ref $instancejsmethods.Child.vtable)
  (struct.new $instancejsmethods.Child.vtable
   (ref.func $$getClassImpl__java_lang_Class@instancejsmethods.Child)
@@ -90,8 +73,6 @@
   (ref.func $m_intfFoo__int@instancejsmethods.Child)
  )
 )
-;;; End of code for instancejsmethods.Child [vtable.init]
-;;; Code for instancejsmethods.Main [vtable.init]
 (global $instancejsmethods.Main.vtable (ref $instancejsmethods.Main.vtable)
  (struct.new $instancejsmethods.Main.vtable
   (ref.func $$getClassImpl__java_lang_Class@instancejsmethods.Main)
@@ -101,9 +82,7 @@
   (ref.func $m_testCallBySuperParent__void@instancejsmethods.Main)
  )
 )
-;;; End of code for instancejsmethods.Main [vtable.init]
 
-;;; Code for instancejsmethods.MyInterface [methods]
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void_<once>_@instancejsmethods.MyInterface
@@ -134,8 +113,6 @@
   (return (global.get $$class@instancejsmethods.MyInterface))
  )
 )
-;;; End of code for instancejsmethods.MyInterface [methods]
-;;; Code for instancejsmethods.SuperParent [methods]
 
 ;;; SuperParent SuperParent.$create()
 (func $$create__@instancejsmethods.SuperParent
@@ -242,8 +219,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.SuperParent)
-;;; End of code for instancejsmethods.SuperParent [methods]
-;;; Code for instancejsmethods.Main [methods]
 
 ;;; Main Main.$create()
 (func $$create__@instancejsmethods.Main
@@ -400,8 +375,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Main)
-;;; End of code for instancejsmethods.Main [methods]
-;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [methods]
 
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_instancejsmethods_MyInterface_$LambdaAdaptor@instancejsmethods.MyInterface.$LambdaAdaptor
@@ -457,8 +430,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.MyInterface.$LambdaAdaptor)
-;;; End of code for instancejsmethods.MyInterface.$LambdaAdaptor [methods]
-;;; Code for instancejsmethods.Parent [methods]
 
 ;;; Parent Parent.$create()
 (func $$create__@instancejsmethods.Parent
@@ -581,8 +552,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Parent)
-;;; End of code for instancejsmethods.Parent [methods]
-;;; Code for instancejsmethods.Child [methods]
 
 ;;; Child Child.$create()
 (func $$create__@instancejsmethods.Child
@@ -720,4 +689,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instancejsmethods.Child)
-;;; End of code for instancejsmethods.Child [methods]

@@ -1,21 +1,16 @@
 
-;;; Code for srcjar.Foo [static fields]
 (global $$class-initialized@srcjar.Foo (mut i32)
  (i32.const 0)
 )
 (global $$class@srcjar.Foo (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for srcjar.Foo [static fields]
-;;; Code for srcjar.Srcjar [static fields]
 (global $$class-initialized@srcjar.Srcjar (mut i32)
  (i32.const 0)
 )
 (global $$class@srcjar.Srcjar (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for srcjar.Srcjar [static fields]
-;;; Code for srcjar.Foo [vtable.init]
 (global $srcjar.Foo.vtable (ref $srcjar.Foo.vtable)
  (struct.new $srcjar.Foo.vtable
   (ref.func $$getClassImpl__java_lang_Class@srcjar.Foo)
@@ -24,8 +19,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for srcjar.Foo [vtable.init]
-;;; Code for srcjar.Srcjar [vtable.init]
 (global $srcjar.Srcjar.vtable (ref $srcjar.Srcjar.vtable)
  (struct.new $srcjar.Srcjar.vtable
   (ref.func $$getClassImpl__java_lang_Class@srcjar.Srcjar)
@@ -34,9 +27,7 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for srcjar.Srcjar [vtable.init]
 
-;;; Code for srcjar.Foo [methods]
 
 ;;; Foo Foo.$create()
 (func $$create__@srcjar.Foo
@@ -109,8 +100,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@srcjar.Foo)
-;;; End of code for srcjar.Foo [methods]
-;;; Code for srcjar.Srcjar [methods]
 
 ;;; Srcjar Srcjar.$create()
 (func $$create__@srcjar.Srcjar
@@ -195,4 +184,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@srcjar.Srcjar)
-;;; End of code for srcjar.Srcjar [methods]

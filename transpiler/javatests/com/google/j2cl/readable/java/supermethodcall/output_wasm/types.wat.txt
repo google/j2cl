@@ -1,29 +1,20 @@
 
-;;; Code for supermethodcall.GrandParentInterface [type definition]
 (type $supermethodcall.GrandParentInterface.vtable (sub (struct
  (field $m_defaultGrandParent__void (ref $function.m_defaultGrandParent__void))
  ))
 )
-;;; End of code for supermethodcall.GrandParentInterface [type definition]
-;;; Code for supermethodcall.ParentInterface [type definition]
 (type $supermethodcall.ParentInterface.vtable (sub (struct
  (field $m_defaultParent__void (ref $function.m_defaultParent__void))
  ))
 )
-;;; End of code for supermethodcall.ParentInterface [type definition]
-;;; Code for supermethodcall.I1 [type definition]
 (type $supermethodcall.I1.vtable (sub (struct
  (field $m_m__void (ref $function.m_m__void))
  ))
 )
-;;; End of code for supermethodcall.I1 [type definition]
-;;; Code for supermethodcall.I2 [type definition]
 (type $supermethodcall.I2.vtable (sub (struct
  (field $m_m__void (ref $function.m_m__void))
  ))
 )
-;;; End of code for supermethodcall.I2 [type definition]
-;;; Code for supermethodcall.GrandParent [type definition]
 (type $supermethodcall.GrandParent (sub $java.lang.Object (struct
  (field $vtable (ref $supermethodcall.GrandParent.vtable))
  (field $itable (ref $itable))
@@ -42,14 +33,10 @@
  (field $m_grandParentWithParams__int__void (ref $function.m_grandParentWithParams__int__void))
  ))
 )
-;;; End of code for supermethodcall.GrandParent [type definition]
-;;; Code for supermethodcall.I3 [type definition]
 (type $supermethodcall.I3.vtable (sub $supermethodcall.I1.vtable (struct
  (field $m_m__void (ref $function.m_m__void))
  ))
 )
-;;; End of code for supermethodcall.I3 [type definition]
-;;; Code for supermethodcall.Super [type definition]
 (type $supermethodcall.Super (sub $java.lang.Object (struct
  (field $vtable (ref $supermethodcall.Super.vtable))
  (field $itable (ref $itable))
@@ -64,8 +51,6 @@
  (field $m_m__void (ref $function.m_m__void))
  ))
 )
-;;; End of code for supermethodcall.Super [type definition]
-;;; Code for supermethodcall.SuperToStringTest [type definition]
 (type $supermethodcall.SuperToStringTest (sub $java.lang.Object (struct
  (field $vtable (ref $supermethodcall.SuperToStringTest.vtable))
  (field $itable (ref $supermethodcall.SuperToStringTest.itable))
@@ -80,8 +65,6 @@
  (field $m_m__void (ref $function.m_m__void))
  ))
 )
-;;; End of code for supermethodcall.SuperToStringTest [type definition]
-;;; Code for supermethodcall.I2.$LambdaAdaptor [type definition]
 (type $supermethodcall.I2.$LambdaAdaptor (sub $java.lang.Object (struct
  (field $vtable (ref $supermethodcall.I2.$LambdaAdaptor.vtable))
  (field $itable (ref $supermethodcall.I2.$LambdaAdaptor.itable))
@@ -96,8 +79,6 @@
  (field $m_m__void (ref $function.m_m__void))
  ))
 )
-;;; End of code for supermethodcall.I2.$LambdaAdaptor [type definition]
-;;; Code for supermethodcall.Parent [type definition]
 (type $supermethodcall.Parent (sub $supermethodcall.GrandParent (struct
  (field $vtable (ref $supermethodcall.Parent.vtable))
  (field $itable (ref $supermethodcall.Parent.itable))
@@ -119,8 +100,6 @@
  (field $m_parentWithParams__int__void (ref $function.m_parentWithParams__int__void))
  ))
 )
-;;; End of code for supermethodcall.Parent [type definition]
-;;; Code for supermethodcall.Sub [type definition]
 (type $supermethodcall.Sub (sub $supermethodcall.Super (struct
  (field $vtable (ref $supermethodcall.Sub.vtable))
  (field $itable (ref $supermethodcall.Sub.itable))
@@ -135,8 +114,6 @@
  (field $m_m__void (ref $function.m_m__void))
  ))
 )
-;;; End of code for supermethodcall.Sub [type definition]
-;;; Code for supermethodcall.Child [type definition]
 (type $supermethodcall.Child (sub $supermethodcall.Parent (struct
  (field $vtable (ref $supermethodcall.Child.vtable))
  (field $itable (ref $supermethodcall.Child.itable))
@@ -160,4 +137,3 @@
  (field $m_parentWithChangingReturn__supermethodcall_Child (ref $function.m_parentWithChangingReturn__supermethodcall_Child))
  ))
 )
-;;; End of code for supermethodcall.Child [type definition]

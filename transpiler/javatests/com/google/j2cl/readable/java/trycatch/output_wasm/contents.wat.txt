@@ -1,5 +1,4 @@
 
-;;; Code for trycatch.TryCatch [static fields]
 (global $closableThing@trycatch.TryCatch (mut (ref null $trycatch.TryCatch.ClosableThing))
  (ref.null $trycatch.TryCatch.ClosableThing)
 )
@@ -9,40 +8,30 @@
 (global $$class@trycatch.TryCatch (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for trycatch.TryCatch [static fields]
-;;; Code for trycatch.TryCatch.ClosableThing [static fields]
 (global $$class-initialized@trycatch.TryCatch.ClosableThing (mut i32)
  (i32.const 0)
 )
 (global $$class@trycatch.TryCatch.ClosableThing (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for trycatch.TryCatch.ClosableThing [static fields]
-;;; Code for trycatch.TryCatch.GenericInterface [static fields]
 (global $$class-initialized@trycatch.TryCatch.GenericInterface (mut i32)
  (i32.const 0)
 )
 (global $$class@trycatch.TryCatch.GenericInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for trycatch.TryCatch.GenericInterface [static fields]
-;;; Code for trycatch.TryCatch.Exception1 [static fields]
 (global $$class-initialized@trycatch.TryCatch.Exception1 (mut i32)
  (i32.const 0)
 )
 (global $$class@trycatch.TryCatch.Exception1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for trycatch.TryCatch.Exception1 [static fields]
-;;; Code for trycatch.TryCatch.Exception2 [static fields]
 (global $$class-initialized@trycatch.TryCatch.Exception2 (mut i32)
  (i32.const 0)
 )
 (global $$class@trycatch.TryCatch.Exception2 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for trycatch.TryCatch.Exception2 [static fields]
-;;; Code for trycatch.TryCatch [vtable.init]
 (global $trycatch.TryCatch.vtable (ref $trycatch.TryCatch.vtable)
  (struct.new $trycatch.TryCatch.vtable
   (ref.func $$getClassImpl__java_lang_Class@trycatch.TryCatch)
@@ -63,8 +52,6 @@
   (ref.func $m_testTryWithResource__void@trycatch.TryCatch)
  )
 )
-;;; End of code for trycatch.TryCatch [vtable.init]
-;;; Code for trycatch.TryCatch.ClosableThing [vtable.init]
 (global $trycatch.TryCatch.ClosableThing.vtable (ref $trycatch.TryCatch.ClosableThing.vtable)
  (struct.new $trycatch.TryCatch.ClosableThing.vtable
   (ref.func $$getClassImpl__java_lang_Class@trycatch.TryCatch.ClosableThing)
@@ -79,8 +66,6 @@
   (ref.func $m_close__void@trycatch.TryCatch.ClosableThing)
  )
 )
-;;; End of code for trycatch.TryCatch.ClosableThing [vtable.init]
-;;; Code for trycatch.TryCatch.Exception1 [vtable.init]
 (global $trycatch.TryCatch.Exception1.vtable (ref $trycatch.TryCatch.Exception1.vtable)
  (struct.new $trycatch.TryCatch.Exception1.vtable
   (ref.func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception1)
@@ -112,8 +97,6 @@
  (struct.new $java.io.Serializable.vtable
  )
 )
-;;; End of code for trycatch.TryCatch.Exception1 [vtable.init]
-;;; Code for trycatch.TryCatch.Exception2 [vtable.init]
 (global $trycatch.TryCatch.Exception2.vtable (ref $trycatch.TryCatch.Exception2.vtable)
  (struct.new $trycatch.TryCatch.Exception2.vtable
   (ref.func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception2)
@@ -145,9 +128,7 @@
  (struct.new $java.io.Serializable.vtable
  )
 )
-;;; End of code for trycatch.TryCatch.Exception2 [vtable.init]
 
-;;; Code for trycatch.TryCatch.GenericInterface [methods]
 
 ;;; void GenericInterface.f(T t)
 (func $m_f__java_lang_Object__void@trycatch.TryCatch.GenericInterface
@@ -188,8 +169,6 @@
   (return (global.get $$class@trycatch.TryCatch.GenericInterface))
  )
 )
-;;; End of code for trycatch.TryCatch.GenericInterface [methods]
-;;; Code for trycatch.TryCatch [methods]
 
 ;;; TryCatch TryCatch.$create()
 (func $$create__@trycatch.TryCatch
@@ -1007,8 +986,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch)
-;;; End of code for trycatch.TryCatch [methods]
-;;; Code for trycatch.TryCatch.ClosableThing [methods]
 
 ;;; ClosableThing ClosableThing.$create()
 (func $$create__@trycatch.TryCatch.ClosableThing
@@ -1093,8 +1070,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch.ClosableThing)
-;;; End of code for trycatch.TryCatch.ClosableThing [methods]
-;;; Code for trycatch.TryCatch.Exception1 [methods]
 
 ;;; Exception1 Exception1.$create(TryCatch $outer_this)
 (func $$create__trycatch_TryCatch@trycatch.TryCatch.Exception1
@@ -1205,8 +1180,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception1)
-;;; End of code for trycatch.TryCatch.Exception1 [methods]
-;;; Code for trycatch.TryCatch.Exception2 [methods]
 
 ;;; Exception2 Exception2.$create(TryCatch $outer_this)
 (func $$create__trycatch_TryCatch@trycatch.TryCatch.Exception2
@@ -1317,4 +1290,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@trycatch.TryCatch.Exception2)
-;;; End of code for trycatch.TryCatch.Exception2 [methods]

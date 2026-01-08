@@ -139,7 +139,7 @@ public class WasmConstructsGenerator {
 
     emitDynamicDispatchMethodTypes();
     emitItableSupportTypes();
-    emitForEachType(library, this::renderMonolithicTypeStructs, "type definition");
+    emitForEachType(library, this::renderMonolithicTypeStructs);
     usedWasmArrayTypes.stream()
         .filter(Predicates.not(ArrayTypeDescriptor::isPrimitiveArray))
         .forEach(this::emitWasmArrayType);
@@ -315,7 +315,6 @@ public class WasmConstructsGenerator {
     if (fields.isEmpty()) {
       return;
     }
-    emitBeginCodeComment(type, "static fields");
     for (Field field : fields) {
       builder.newLine();
       builder.append("(global " + environment.getFieldName(field));
@@ -343,7 +342,6 @@ public class WasmConstructsGenerator {
       builder.newLine();
       builder.append(")");
     }
-    emitEndCodeComment(type, "static fields");
   }
 
   void renderImportedMethods(Type type) {
@@ -600,7 +598,6 @@ public class WasmConstructsGenerator {
   private void emitVtablesInitialization(TypeDeclaration typeDeclaration) {
     WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
 
-    emitBeginCodeComment(typeDeclaration, "vtable.init");
     builder.newLine();
     // Create the class vtable for this type (which is either a class or an enum) and store it
     // in a global variable to be able to use it to initialize instance of this class.
@@ -649,7 +646,6 @@ public class WasmConstructsGenerator {
                   wasmTypeLayout, interfaceTypeLayout, emittedInterfaces);
             });
 
-    emitEndCodeComment(typeDeclaration, "vtable.init");
   }
 
   private void initializeInterfaceVtable(
@@ -714,7 +710,6 @@ public class WasmConstructsGenerator {
     if (!typeDeclaration.implementsInterfaces()) {
       return;
     }
-    emitBeginCodeComment(typeDeclaration, "itable.init");
 
     // Create the struct of interface vtables of the required size and store it in a global variable
     // to be able to use it when objects of this class are instantiated.
@@ -750,7 +745,6 @@ public class WasmConstructsGenerator {
     builder.unindent();
     builder.newLine();
     builder.append(")");
-    emitEndCodeComment(typeDeclaration, "itable.init");
   }
 
   private TypeDeclaration[] getInterfacesByItableIndex(TypeDeclaration typeDeclaration) {
@@ -891,9 +885,7 @@ public class WasmConstructsGenerator {
   }
 
   void emitEmptyArraySingletons(List<ArrayTypeDescriptor> arrayTypes) {
-    emitBeginCodeComment("Empty array singletons");
     arrayTypes.forEach(this::emitEmptyArraySingleton);
-    emitEndCodeComment("Empty array singletons");
   }
 
   void emitEmptyArraySingleton(ArrayTypeDescriptor arrayTypeDescriptor) {
@@ -917,42 +909,11 @@ public class WasmConstructsGenerator {
    * Iterate through all the types in the library, supertypes first, calling the emitter for each of
    * them.
    */
-  void emitForEachType(Library library, Consumer<Type> emitter, String comment) {
+  void emitForEachType(Library library, Consumer<Type> emitter) {
     library
         .streamTypes()
         // Emit the types supertypes first.
         .sorted(Comparator.comparing(t -> t.getDeclaration().getTypeHierarchyDepth()))
-        .forEach(
-            type -> {
-              emitBeginCodeComment(type, comment);
-              emitter.accept(type);
-              emitEndCodeComment(type, comment);
-            });
-  }
-
-  private void emitBeginCodeComment(Type type, String section) {
-    emitBeginCodeComment(type.getDeclaration(), section);
-  }
-
-  private void emitBeginCodeComment(TypeDeclaration typeDeclaration, String section) {
-    emitBeginCodeComment(format("%s [%s]", typeDeclaration.getQualifiedSourceName(), section));
-  }
-
-  private void emitBeginCodeComment(String commentId) {
-    builder.newLine();
-    builder.append(";;; Code for " + commentId);
-  }
-
-  private void emitEndCodeComment(Type type, String section) {
-    emitEndCodeComment(type.getDeclaration(), section);
-  }
-
-  private void emitEndCodeComment(TypeDeclaration typeDeclaration, String section) {
-    emitEndCodeComment(format("%s [%s]", typeDeclaration.getQualifiedSourceName(), section));
-  }
-
-  private void emitEndCodeComment(String commentId) {
-    builder.newLine();
-    builder.append(";;; End of code for " + commentId);
+        .forEach(emitter);
   }
 }

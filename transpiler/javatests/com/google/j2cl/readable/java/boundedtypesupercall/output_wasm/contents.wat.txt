@@ -1,37 +1,28 @@
 
-;;; Code for boundedtypesupercall.Main [static fields]
 (global $$class-initialized@boundedtypesupercall.Main (mut i32)
  (i32.const 0)
 )
 (global $$class@boundedtypesupercall.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for boundedtypesupercall.Main [static fields]
-;;; Code for boundedtypesupercall.Main.Foo [static fields]
 (global $$class-initialized@boundedtypesupercall.Main.Foo (mut i32)
  (i32.const 0)
 )
 (global $$class@boundedtypesupercall.Main.Foo (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for boundedtypesupercall.Main.Foo [static fields]
-;;; Code for boundedtypesupercall.Main.Bar.1 [static fields]
 (global $$class-initialized@boundedtypesupercall.Main.Bar.1 (mut i32)
  (i32.const 0)
 )
 (global $$class@boundedtypesupercall.Main.Bar.1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for boundedtypesupercall.Main.Bar.1 [static fields]
-;;; Code for boundedtypesupercall.Main.Bar [static fields]
 (global $$class-initialized@boundedtypesupercall.Main.Bar (mut i32)
  (i32.const 0)
 )
 (global $$class@boundedtypesupercall.Main.Bar (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for boundedtypesupercall.Main.Bar [static fields]
-;;; Code for boundedtypesupercall.Main [vtable.init]
 (global $boundedtypesupercall.Main.vtable (ref $boundedtypesupercall.Main.vtable)
  (struct.new $boundedtypesupercall.Main.vtable
   (ref.func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main)
@@ -40,8 +31,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for boundedtypesupercall.Main [vtable.init]
-;;; Code for boundedtypesupercall.Main.Bar.1 [vtable.init]
 (global $boundedtypesupercall.Main.Bar.1.vtable (ref $boundedtypesupercall.Main.Bar.1.vtable)
  (struct.new $boundedtypesupercall.Main.Bar.1.vtable
   (ref.func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar.1)
@@ -51,8 +40,6 @@
   (ref.func $m_foo__void@boundedtypesupercall.Main.Bar.1)
  )
 )
-;;; End of code for boundedtypesupercall.Main.Bar.1 [vtable.init]
-;;; Code for boundedtypesupercall.Main.Bar [vtable.init]
 (global $boundedtypesupercall.Main.Bar.vtable (ref $boundedtypesupercall.Main.Bar.vtable)
  (struct.new $boundedtypesupercall.Main.Bar.vtable
   (ref.func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar)
@@ -63,9 +50,7 @@
   (ref.func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar)
  )
 )
-;;; End of code for boundedtypesupercall.Main.Bar [vtable.init]
 
-;;; Code for boundedtypesupercall.Main [methods]
 
 ;;; Main Main.$create()
 (func $$create__@boundedtypesupercall.Main
@@ -138,8 +123,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main)
-;;; End of code for boundedtypesupercall.Main [methods]
-;;; Code for boundedtypesupercall.Main.Foo [methods]
 
 ;;; void Foo.$ctor(T foo)
 (func $$ctor__java_lang_Object__void_$p_boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Foo
@@ -196,8 +179,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Foo)
-;;; End of code for boundedtypesupercall.Main.Foo [methods]
-;;; Code for boundedtypesupercall.Main.Bar [methods]
 
 ;;; Bar<T> Bar.$create()
 (func $$create__@boundedtypesupercall.Main.Bar
@@ -300,8 +281,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar)
-;;; End of code for boundedtypesupercall.Main.Bar [methods]
-;;; Code for boundedtypesupercall.Main.Bar.1 [methods]
 
 ;;; <anonymous> extends Foo<T><T> <anonymous> extends Foo<T>.$create(Bar<T> $outer_this, T foo)
 (func $$create__boundedtypesupercall_Main_Bar__java_lang_Comparable@boundedtypesupercall.Main.Bar.1
@@ -392,4 +371,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@boundedtypesupercall.Main.Bar.1)
-;;; End of code for boundedtypesupercall.Main.Bar.1 [methods]

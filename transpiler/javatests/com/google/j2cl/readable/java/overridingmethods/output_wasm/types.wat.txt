@@ -1,11 +1,8 @@
 
-;;; Code for overridingmethods.SomeInterface [type definition]
 (type $overridingmethods.SomeInterface.vtable (sub (struct
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-;;; End of code for overridingmethods.SomeInterface [type definition]
-;;; Code for overridingmethods.Parent [type definition]
 (type $overridingmethods.Parent (sub $java.lang.Object (struct
  (field $vtable (ref $overridingmethods.Parent.vtable))
  (field $itable (ref $itable))
@@ -21,8 +18,6 @@
  (field $m_nonFinal__void (ref $function.m_nonFinal__void))
  ))
 )
-;;; End of code for overridingmethods.Parent [type definition]
-;;; Code for overridingmethods.SomeInterface.$LambdaAdaptor [type definition]
 (type $overridingmethods.SomeInterface.$LambdaAdaptor (sub $java.lang.Object (struct
  (field $vtable (ref $overridingmethods.SomeInterface.$LambdaAdaptor.vtable))
  (field $itable (ref $overridingmethods.SomeInterface.$LambdaAdaptor.itable))
@@ -37,8 +32,6 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-;;; End of code for overridingmethods.SomeInterface.$LambdaAdaptor [type definition]
-;;; Code for overridingmethods.Child [type definition]
 (type $overridingmethods.Child (sub $overridingmethods.Parent (struct
  (field $vtable (ref $overridingmethods.Child.vtable))
  (field $itable (ref $overridingmethods.Child.itable))
@@ -55,8 +48,6 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-;;; End of code for overridingmethods.Child [type definition]
-;;; Code for overridingmethods.FinalChild [type definition]
 (type $overridingmethods.FinalChild (sub $overridingmethods.Parent (struct
  (field $vtable (ref $overridingmethods.FinalChild.vtable))
  (field $itable (ref $overridingmethods.FinalChild.itable))
@@ -73,4 +64,3 @@
  (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
  ))
 )
-;;; End of code for overridingmethods.FinalChild [type definition]

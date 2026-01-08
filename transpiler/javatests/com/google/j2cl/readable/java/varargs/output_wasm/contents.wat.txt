@@ -3,47 +3,36 @@
 (data $arrayliteral@varargs.Varargs-2 "\02\00\00\00\00\00\00\00\03\00\00\00\00\00\00\00")
 (data $arrayliteral@varargs.Varargs-3 "\02\00\00\00\00\00\00\00\03\00\00\00\00\00\00\00")
 (data $arrayliteral@varargs.Child-1 "\01\00\00\00")
-;;; Code for varargs.Varargs [static fields]
 (global $$class-initialized@varargs.Varargs (mut i32)
  (i32.const 0)
 )
 (global $$class@varargs.Varargs (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for varargs.Varargs [static fields]
-;;; Code for varargs.Child [static fields]
 (global $$class-initialized@varargs.Child (mut i32)
  (i32.const 0)
 )
 (global $$class@varargs.Child (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for varargs.Child [static fields]
-;;; Code for varargs.Varargs.FunctionalInterface.$LambdaAdaptor [static fields]
 (global $$class-initialized@varargs.Varargs.FunctionalInterface.$LambdaAdaptor (mut i32)
  (i32.const 0)
 )
 (global $$class@varargs.Varargs.FunctionalInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for varargs.Varargs.FunctionalInterface.$LambdaAdaptor [static fields]
-;;; Code for varargs.Varargs.$LambdaImplementor$1 [static fields]
 (global $$class-initialized@varargs.Varargs.$LambdaImplementor$1 (mut i32)
  (i32.const 0)
 )
 (global $$class@varargs.Varargs.$LambdaImplementor$1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for varargs.Varargs.$LambdaImplementor$1 [static fields]
-;;; Code for varargs.Varargs.FunctionalInterface [static fields]
 (global $$class-initialized@varargs.Varargs.FunctionalInterface (mut i32)
  (i32.const 0)
 )
 (global $$class@varargs.Varargs.FunctionalInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for varargs.Varargs.FunctionalInterface [static fields]
-;;; Code for varargs.Varargs [vtable.init]
 (global $varargs.Varargs.vtable (ref $varargs.Varargs.vtable)
  (struct.new $varargs.Varargs.vtable
   (ref.func $$getClassImpl__java_lang_Class@varargs.Varargs)
@@ -62,8 +51,6 @@
   (ref.func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs)
  )
 )
-;;; End of code for varargs.Varargs [vtable.init]
-;;; Code for varargs.Child [vtable.init]
 (global $varargs.Child.vtable (ref $varargs.Child.vtable)
  (struct.new $varargs.Child.vtable
   (ref.func $$getClassImpl__java_lang_Class@varargs.Child)
@@ -82,8 +69,6 @@
   (ref.func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs)
  )
 )
-;;; End of code for varargs.Child [vtable.init]
-;;; Code for varargs.Varargs.$LambdaImplementor$1 [vtable.init]
 (global $varargs.Varargs.$LambdaImplementor$1.vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable)
  (struct.new $varargs.Varargs.$LambdaImplementor$1.vtable
   (ref.func $$getClassImpl__java_lang_Class@varargs.Varargs.FunctionalInterface.$LambdaAdaptor)
@@ -98,9 +83,7 @@
   (ref.func $m_apply__arrayOf_java_lang_String__void@varargs.Varargs.$LambdaImplementor$1)
  )
 )
-;;; End of code for varargs.Varargs.$LambdaImplementor$1 [vtable.init]
 
-;;; Code for varargs.Varargs.FunctionalInterface [methods]
 
 ;;; void FunctionalInterface.$clinit()
 (func $$clinit__void_<once>_@varargs.Varargs.FunctionalInterface
@@ -131,8 +114,6 @@
   (return (global.get $$class@varargs.Varargs.FunctionalInterface))
  )
 )
-;;; End of code for varargs.Varargs.FunctionalInterface [methods]
-;;; Code for varargs.Varargs [methods]
 
 ;;; Varargs Varargs.$create(int... args)
 (func $$create__arrayOf_int@varargs.Varargs
@@ -474,8 +455,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Varargs)
-;;; End of code for varargs.Varargs [methods]
-;;; Code for varargs.Varargs.FunctionalInterface.$LambdaAdaptor [methods]
 
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_varargs_Varargs_FunctionalInterface_$LambdaAdaptor@varargs.Varargs.FunctionalInterface.$LambdaAdaptor
@@ -531,8 +510,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Varargs.FunctionalInterface.$LambdaAdaptor)
-;;; End of code for varargs.Varargs.FunctionalInterface.$LambdaAdaptor [methods]
-;;; Code for varargs.Child [methods]
 
 ;;; Child Child.$create()
 (func $$create__@varargs.Child
@@ -605,8 +582,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@varargs.Child)
-;;; End of code for varargs.Child [methods]
-;;; Code for varargs.Varargs.$LambdaImplementor$1 [methods]
 
 ;;; <anonymous> implements FunctionalInterface <anonymous> implements FunctionalInterface.$create(Varargs $outer_this)
 (func $$create__varargs_Varargs@varargs.Varargs.$LambdaImplementor$1
@@ -685,4 +660,3 @@
   (return (global.get $$class@varargs.Varargs.$LambdaImplementor$1))
  )
 )
-;;; End of code for varargs.Varargs.$LambdaImplementor$1 [methods]

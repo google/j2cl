@@ -1,21 +1,16 @@
 
-;;; Code for strings.Strings [static fields]
 (global $$class-initialized@strings.Strings (mut i32)
  (i32.const 0)
 )
 (global $$class@strings.Strings (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for strings.Strings [static fields]
-;;; Code for strings.Strings.StringHolder [static fields]
 (global $$class-initialized@strings.Strings.StringHolder (mut i32)
  (i32.const 0)
 )
 (global $$class@strings.Strings.StringHolder (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for strings.Strings.StringHolder [static fields]
-;;; Code for strings.Strings [vtable.init]
 (global $strings.Strings.vtable (ref $strings.Strings.vtable)
  (struct.new $strings.Strings.vtable
   (ref.func $$getClassImpl__java_lang_Class@strings.Strings)
@@ -25,8 +20,6 @@
   (ref.func $m_test__void@strings.Strings)
  )
 )
-;;; End of code for strings.Strings [vtable.init]
-;;; Code for strings.Strings.StringHolder [vtable.init]
 (global $strings.Strings.StringHolder.vtable (ref $strings.Strings.StringHolder.vtable)
  (struct.new $strings.Strings.StringHolder.vtable
   (ref.func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder)
@@ -35,9 +28,7 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for strings.Strings.StringHolder [vtable.init]
 
-;;; Code for strings.Strings [methods]
 
 ;;; Strings Strings.$create()
 (func $$create__@strings.Strings
@@ -205,8 +196,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@strings.Strings)
-;;; End of code for strings.Strings [methods]
-;;; Code for strings.Strings.StringHolder [methods]
 
 ;;; StringHolder StringHolder.$create()
 (func $$create__@strings.Strings.StringHolder
@@ -291,4 +280,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@strings.Strings.StringHolder)
-;;; End of code for strings.Strings.StringHolder [methods]

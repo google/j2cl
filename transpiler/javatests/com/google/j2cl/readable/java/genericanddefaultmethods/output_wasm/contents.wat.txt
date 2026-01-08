@@ -1,29 +1,22 @@
 
-;;; Code for genericanddefaultmethods.InterfaceWithDefault [static fields]
 (global $$class-initialized@genericanddefaultmethods.InterfaceWithDefault (mut i32)
  (i32.const 0)
 )
 (global $$class@genericanddefaultmethods.InterfaceWithDefault (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for genericanddefaultmethods.InterfaceWithDefault [static fields]
-;;; Code for genericanddefaultmethods.GenericClass [static fields]
 (global $$class-initialized@genericanddefaultmethods.GenericClass (mut i32)
  (i32.const 0)
 )
 (global $$class@genericanddefaultmethods.GenericClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for genericanddefaultmethods.GenericClass [static fields]
-;;; Code for genericanddefaultmethods.ConcreteClass [static fields]
 (global $$class-initialized@genericanddefaultmethods.ConcreteClass (mut i32)
  (i32.const 0)
 )
 (global $$class@genericanddefaultmethods.ConcreteClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for genericanddefaultmethods.ConcreteClass [static fields]
-;;; Code for genericanddefaultmethods.GenericClass [vtable.init]
 (global $genericanddefaultmethods.GenericClass.vtable (ref $genericanddefaultmethods.GenericClass.vtable)
  (struct.new $genericanddefaultmethods.GenericClass.vtable
   (ref.func $$getClassImpl__java_lang_Class@genericanddefaultmethods.GenericClass)
@@ -33,8 +26,6 @@
   (ref.func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass)
  )
 )
-;;; End of code for genericanddefaultmethods.GenericClass [vtable.init]
-;;; Code for genericanddefaultmethods.ConcreteClass [vtable.init]
 (global $genericanddefaultmethods.ConcreteClass.vtable (ref $genericanddefaultmethods.ConcreteClass.vtable)
  (struct.new $genericanddefaultmethods.ConcreteClass.vtable
   (ref.func $$getClassImpl__java_lang_Class@genericanddefaultmethods.ConcreteClass)
@@ -50,9 +41,7 @@
   (ref.func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass)
  )
 )
-;;; End of code for genericanddefaultmethods.ConcreteClass [vtable.init]
 
-;;; Code for genericanddefaultmethods.InterfaceWithDefault [methods]
 
 ;;; void InterfaceWithDefault.foo(String value)
 (func $m_foo__java_lang_String__void@genericanddefaultmethods.InterfaceWithDefault
@@ -103,8 +92,6 @@
   (return (global.get $$class@genericanddefaultmethods.InterfaceWithDefault))
  )
 )
-;;; End of code for genericanddefaultmethods.InterfaceWithDefault [methods]
-;;; Code for genericanddefaultmethods.GenericClass [methods]
 
 ;;; GenericClass<T> GenericClass.$create()
 (func $$create__@genericanddefaultmethods.GenericClass
@@ -200,8 +187,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericanddefaultmethods.GenericClass)
-;;; End of code for genericanddefaultmethods.GenericClass [methods]
-;;; Code for genericanddefaultmethods.ConcreteClass [methods]
 
 ;;; ConcreteClass ConcreteClass.$create()
 (func $$create__@genericanddefaultmethods.ConcreteClass
@@ -291,4 +276,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@genericanddefaultmethods.ConcreteClass)
-;;; End of code for genericanddefaultmethods.ConcreteClass [methods]

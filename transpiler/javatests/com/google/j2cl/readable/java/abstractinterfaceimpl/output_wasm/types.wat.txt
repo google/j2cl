@@ -1,11 +1,8 @@
 
-;;; Code for abstractinterfaceimpl.MyInterface [type definition]
 (type $abstractinterfaceimpl.MyInterface.vtable (sub (struct
  (field $m_foo__int (ref $function.m_foo__int))
  ))
 )
-;;; End of code for abstractinterfaceimpl.MyInterface [type definition]
-;;; Code for abstractinterfaceimpl.AbstractInterfaceImpl [type definition]
 (type $abstractinterfaceimpl.AbstractInterfaceImpl (sub $java.lang.Object (struct
  (field $vtable (ref $abstractinterfaceimpl.AbstractInterfaceImpl.vtable))
  (field $itable (ref $abstractinterfaceimpl.AbstractInterfaceImpl.itable))
@@ -20,8 +17,6 @@
  (field $m_foo__int (ref $function.m_foo__int))
  ))
 )
-;;; End of code for abstractinterfaceimpl.AbstractInterfaceImpl [type definition]
-;;; Code for abstractinterfaceimpl.MyInterface.$LambdaAdaptor [type definition]
 (type $abstractinterfaceimpl.MyInterface.$LambdaAdaptor (sub $java.lang.Object (struct
  (field $vtable (ref $abstractinterfaceimpl.MyInterface.$LambdaAdaptor.vtable))
  (field $itable (ref $abstractinterfaceimpl.MyInterface.$LambdaAdaptor.itable))
@@ -36,4 +31,3 @@
  (field $m_foo__int (ref $function.m_foo__int))
  ))
 )
-;;; End of code for abstractinterfaceimpl.MyInterface.$LambdaAdaptor [type definition]

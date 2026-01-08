@@ -1,29 +1,22 @@
 
-;;; Code for packageinfo.Outer [static fields]
 (global $$class-initialized@packageinfo.Outer (mut i32)
  (i32.const 0)
 )
 (global $$class@packageinfo.Outer (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for packageinfo.Outer [static fields]
-;;; Code for packageinfo.Outer.Inner [static fields]
 (global $$class-initialized@packageinfo.Outer.Inner (mut i32)
  (i32.const 0)
 )
 (global $$class@packageinfo.Outer.Inner (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for packageinfo.Outer.Inner [static fields]
-;;; Code for packageinfo.subpackage.Foo [static fields]
 (global $$class-initialized@packageinfo.subpackage.Foo (mut i32)
  (i32.const 0)
 )
 (global $$class@packageinfo.subpackage.Foo (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-;;; End of code for packageinfo.subpackage.Foo [static fields]
-;;; Code for packageinfo.Outer [vtable.init]
 (global $packageinfo.Outer.vtable (ref $packageinfo.Outer.vtable)
  (struct.new $packageinfo.Outer.vtable
   (ref.func $$getClassImpl__java_lang_Class@packageinfo.Outer)
@@ -32,8 +25,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for packageinfo.Outer [vtable.init]
-;;; Code for packageinfo.Outer.Inner [vtable.init]
 (global $packageinfo.Outer.Inner.vtable (ref $packageinfo.Outer.Inner.vtable)
  (struct.new $packageinfo.Outer.Inner.vtable
   (ref.func $$getClassImpl__java_lang_Class@packageinfo.Outer.Inner)
@@ -42,8 +33,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for packageinfo.Outer.Inner [vtable.init]
-;;; Code for packageinfo.subpackage.Foo [vtable.init]
 (global $packageinfo.subpackage.Foo.vtable (ref $packageinfo.subpackage.Foo.vtable)
  (struct.new $packageinfo.subpackage.Foo.vtable
   (ref.func $$getClassImpl__java_lang_Class@packageinfo.subpackage.Foo)
@@ -52,9 +41,7 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-;;; End of code for packageinfo.subpackage.Foo [vtable.init]
 
-;;; Code for packageinfo.Outer [methods]
 
 ;;; Outer Outer.$create()
 (func $$create__@packageinfo.Outer
@@ -139,8 +126,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfo.Outer)
-;;; End of code for packageinfo.Outer [methods]
-;;; Code for packageinfo.Outer.Inner [methods]
 
 ;;; Inner Inner.$create(Outer $outer_this)
 (func $$create__packageinfo_Outer@packageinfo.Outer.Inner
@@ -217,8 +202,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfo.Outer.Inner)
-;;; End of code for packageinfo.Outer.Inner [methods]
-;;; Code for packageinfo.subpackage.Foo [methods]
 
 ;;; Foo Foo.$create()
 (func $$create__@packageinfo.subpackage.Foo
@@ -303,4 +286,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@packageinfo.subpackage.Foo)
-;;; End of code for packageinfo.subpackage.Foo [methods]

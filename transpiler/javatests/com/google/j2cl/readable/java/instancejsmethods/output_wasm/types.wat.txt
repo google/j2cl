@@ -1,11 +1,8 @@
 
-;;; Code for instancejsmethods.MyInterface [type definition]
 (type $instancejsmethods.MyInterface.vtable (sub (struct
  (field $m_intfFoo__int (ref $function.m_intfFoo__int))
  ))
 )
-;;; End of code for instancejsmethods.MyInterface [type definition]
-;;; Code for instancejsmethods.SuperParent [type definition]
 (type $instancejsmethods.SuperParent (sub $java.lang.Object (struct
  (field $vtable (ref $instancejsmethods.SuperParent.vtable))
  (field $itable (ref $itable))
@@ -21,8 +18,6 @@
  (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
  ))
 )
-;;; End of code for instancejsmethods.SuperParent [type definition]
-;;; Code for instancejsmethods.Main [type definition]
 (type $instancejsmethods.Main (sub $java.lang.Object (struct
  (field $vtable (ref $instancejsmethods.Main.vtable))
  (field $itable (ref $itable))
@@ -37,8 +32,6 @@
  (field $m_testCallBySuperParent__void (ref $function.m_testCallBySuperParent__void))
  ))
 )
-;;; End of code for instancejsmethods.Main [type definition]
-;;; Code for instancejsmethods.MyInterface.$LambdaAdaptor [type definition]
 (type $instancejsmethods.MyInterface.$LambdaAdaptor (sub $java.lang.Object (struct
  (field $vtable (ref $instancejsmethods.MyInterface.$LambdaAdaptor.vtable))
  (field $itable (ref $instancejsmethods.MyInterface.$LambdaAdaptor.itable))
@@ -53,8 +46,6 @@
  (field $m_intfFoo__int (ref $function.m_intfFoo__int))
  ))
 )
-;;; End of code for instancejsmethods.MyInterface.$LambdaAdaptor [type definition]
-;;; Code for instancejsmethods.Parent [type definition]
 (type $instancejsmethods.Parent (sub $instancejsmethods.SuperParent (struct
  (field $vtable (ref $instancejsmethods.Parent.vtable))
  (field $itable (ref $itable))
@@ -71,8 +62,6 @@
  (field $m_foo__int__int (ref $function.m_foo__int__int))
  ))
 )
-;;; End of code for instancejsmethods.Parent [type definition]
-;;; Code for instancejsmethods.Child [type definition]
 (type $instancejsmethods.Child (sub $instancejsmethods.Parent (struct
  (field $vtable (ref $instancejsmethods.Child.vtable))
  (field $itable (ref $instancejsmethods.Child.itable))
@@ -90,4 +79,3 @@
  (field $m_intfFoo__int (ref $function.m_intfFoo__int))
  ))
 )
-;;; End of code for instancejsmethods.Child [type definition]

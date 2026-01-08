@@ -1,15 +1,10 @@
 
-;;; Code for implementsgenericinterface.GenericInterface [type definition]
 (type $implementsgenericinterface.GenericInterface.vtable (sub (struct
  ))
 )
-;;; End of code for implementsgenericinterface.GenericInterface [type definition]
-;;; Code for implementsgenericinterface.GenericSubInterface [type definition]
 (type $implementsgenericinterface.GenericSubInterface.vtable (sub $implementsgenericinterface.GenericInterface.vtable (struct
  ))
 )
-;;; End of code for implementsgenericinterface.GenericSubInterface [type definition]
-;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [type definition]
 (type $implementsgenericinterface.GenericInterfaceGenericImpl (sub $java.lang.Object (struct
  (field $vtable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.vtable))
  (field $itable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.itable))
@@ -23,8 +18,6 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-;;; End of code for implementsgenericinterface.GenericInterfaceGenericImpl [type definition]
-;;; Code for implementsgenericinterface.GenericInterfaceImpl [type definition]
 (type $implementsgenericinterface.GenericInterfaceImpl (sub $java.lang.Object (struct
  (field $vtable (ref $implementsgenericinterface.GenericInterfaceImpl.vtable))
  (field $itable (ref $implementsgenericinterface.GenericInterfaceImpl.itable))
@@ -38,4 +31,3 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-;;; End of code for implementsgenericinterface.GenericInterfaceImpl [type definition]
