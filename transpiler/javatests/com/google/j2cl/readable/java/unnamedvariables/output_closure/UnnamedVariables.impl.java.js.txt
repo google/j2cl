@@ -1,0 +1,160 @@
+goog.module('unnamedvariables.UnnamedVariables$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AutoCloseable = goog.forwardDeclare('java.lang.AutoCloseable$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Exception = goog.forwardDeclare('java.lang.Exception$impl');
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $1R = goog.forwardDeclare('unnamedvariables.UnnamedVariables.$1R$impl');
+let $2R = goog.forwardDeclare('unnamedvariables.UnnamedVariables.$2R$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+class UnnamedVariables extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!UnnamedVariables} */
+ static $create__() {
+  UnnamedVariables.$clinit();
+  let $instance = new UnnamedVariables();
+  $instance.$ctor__unnamedvariables_UnnamedVariables__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__unnamedvariables_UnnamedVariables__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_testSwitchPatterns__void_$pp_unnamedvariables() {
+  let /** * */ r = null;
+  {
+   let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(r);
+   let /** number */ $caseIndex;
+   let /** ?string */ _, /** $1R */ pattern$1R, /** * */ exp, /** ?string */ __1, /** ?string */ __2;
+   if (j_l_String.$isInstance($selector) && (_ = (/**@type {string}*/ ($Casts.$to($selector, j_l_String))), true)) {
+    $caseIndex = 0;
+   } else if ($1R.$isInstance($selector) && (pattern$1R = (/**@type {!$1R}*/ ($Casts.$to($selector, $1R))), exp = pattern$1R.m_o__java_lang_Object(), j_l_String.$isInstance(exp) && (__1 = (/**@type {string}*/ ($Casts.$to(exp, j_l_String))), __2 = pattern$1R.m_s__java_lang_String(), true))) {
+    $caseIndex = 1;
+   } else {
+    $caseIndex = 2;
+   }
+   switch ($caseIndex) {
+    case 0:
+     break;
+    case 1:
+     break;
+    default:
+     break;
+   }
+  }
+ }
+ /** @nodts */
+ m_testInstanceOfPatterns__void_$pp_unnamedvariables() {
+  let /** * */ r = null;
+  let /** ?string */ _, /** $2R */ pattern$2R, /** * */ exp, /** ?string */ __1, /** ?string */ __2;
+  let __3 = j_l_String.$isInstance(r) && (_ = (/**@type {string}*/ ($Casts.$to(r, j_l_String))), true);
+  let __4 = $2R.$isInstance(r) && (pattern$2R = (/**@type {!$2R}*/ ($Casts.$to(r, $2R))), exp = pattern$2R.m_o__java_lang_Object(), j_l_String.$isInstance(exp) && (__1 = (/**@type {string}*/ ($Casts.$to(exp, j_l_String))), __2 = pattern$2R.m_s__java_lang_String(), true));
+ }
+ /** @nodts */
+ m_testDeclaration__void_$pp_unnamedvariables() {
+  let _ = 'Hello';
+  let __1 = j_l_String.m_length__java_lang_String__int('Hello');
+  let __2 = j_l_String.m_length__java_lang_String__int('Bye');
+ }
+ /** @nodts */
+ m_testLambda__void_$pp_unnamedvariables() {
+  let f1 = j_u_function_Function.$adapt(/**  @return {?string}*/ ((/** ?string */ _) =>{
+   let __1 = /**@type {?string}*/ ($Casts.$to(_, j_l_String));
+   return 'Hello';
+  }));
+  let f2 = j_u_function_Function.$adapt(/**  @return {?string}*/ ((/** ?string */ __2) =>{
+   let __3 = /**@type {?string}*/ ($Casts.$to(__2, j_l_String));
+   return 'Hello';
+  }));
+ }
+ /** @nodts */
+ m_testTryCatch__void_$pp_unnamedvariables() {
+  let /** AutoCloseable */ closable = null;
+  try {
+   let /** Throwable */ $primaryExc = null;
+   let /** AutoCloseable */ _ = null;
+   try {
+    _ = closable;
+   } catch (__$jsexc) {
+    let __$exc = $Exceptions.toJava(__$jsexc);
+    {
+     let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
+     $primaryExc = $exceptionFromTry;
+     throw $Exceptions.toJs($exceptionFromTry);
+    }
+   } finally {
+    $primaryExc = $Exceptions.safeClose(_, $primaryExc);
+    if (!$Equality.$same($primaryExc, null)) {
+     throw $Exceptions.toJs($primaryExc);
+    }
+   }
+  } catch (__$jsexc_1) {
+   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   if (RuntimeException.$isInstance(__$exc_1)) {} else if (Exception.$isInstance(__$exc_1) || Error.$isInstance(__$exc_1)) {} else {
+    throw $Exceptions.toJs(__$exc_1);
+   }
+  }
+ }
+ /** @nodts */
+ m_testForEach__void_$pp_unnamedvariables() {
+  let /** Array<?string> */ a = null;
+  for (let $array = a, $index = 0; $index < $array.length; $index++) {
+   let _ = $array[$index];
+  }
+  for (let $array_1 = a, $index_1 = 0; $index_1 < $array_1.length; $index_1++) {
+   let __1 = $array_1[$index_1];
+  }
+  let /** List<?string> */ l = null;
+  for (let $iterator = l.m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+   let __2 = /**@type {?string}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), j_l_String));
+  }
+  for (let $iterator_1 = l.m_iterator__java_util_Iterator(); $iterator_1.m_hasNext__boolean(); ) {
+   let __3 = /**@type {?string}*/ ($Casts.$to($iterator_1.m_next__java_lang_Object(), j_l_String));
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  UnnamedVariables.$clinit = () =>{};
+  UnnamedVariables.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof UnnamedVariables;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Error = goog.module.get('java.lang.Error$impl');
+  Exception = goog.module.get('java.lang.Exception$impl');
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  j_u_function_Function = goog.module.get('java.util.function.Function$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $1R = goog.module.get('unnamedvariables.UnnamedVariables.$1R$impl');
+  $2R = goog.module.get('unnamedvariables.UnnamedVariables.$2R$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(UnnamedVariables, 'unnamedvariables.UnnamedVariables');
+
+exports = UnnamedVariables;
+
+//# sourceMappingURL=UnnamedVariables.js.map

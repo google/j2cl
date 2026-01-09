@@ -219,11 +219,11 @@ class JavaEnvironment {
 
   Variable createVariable(
       SourcePosition sourcePosition,
+      String name,
       VarSymbol variableSymbol,
       boolean isParameter,
       boolean inNullMarkedScope) {
     TypeMirror type = variableSymbol.asType();
-    String name = variableSymbol.getSimpleName().toString();
     TypeDescriptor typeDescriptor =
         createTypeDescriptorWithNullability(
             type, variableSymbol.getAnnotationMirrors(), inNullMarkedScope);

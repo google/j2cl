@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.common.visitor.Processor;
@@ -27,6 +28,7 @@ public abstract class NameDeclaration extends Node implements HasName {
 
   NameDeclaration(String name) {
     this.name = checkNotNull(name);
+    checkArgument(!name.isEmpty());
   }
 
   @Override

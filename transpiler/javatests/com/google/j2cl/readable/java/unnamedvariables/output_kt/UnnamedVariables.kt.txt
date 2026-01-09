@@ -1,0 +1,203 @@
+// Generated from "unnamedvariables/UnnamedVariables.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package unnamedvariables
+
+import javaemul.lang.*
+import java.lang.AutoCloseable
+import java.util.Arrays
+import java.util.function.Function
+import javaemul.internal.Exceptions
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.Error
+import kotlin.Exception
+import kotlin.Int
+import kotlin.RuntimeException
+import kotlin.String
+import kotlin.Suppress
+import kotlin.Throwable
+import kotlin.arrayOf
+import kotlin.collections.MutableList
+import kotlin.run
+
+open class UnnamedVariables {
+ internal open fun testSwitchPatterns_pp_unnamedvariables() {
+  class R {
+   private val o: Any?
+
+   private val s: String?
+
+   constructor(arg0: Any?, arg1: String?) {
+    this.o = arg0
+    this.s = arg1
+   }
+
+   fun o(): Any? {
+    return this.o
+   }
+
+   fun s(): String? {
+    return this.s
+   }
+
+   override fun equals(arg0: Any?): Boolean {
+    var ___other: R? = null
+    if (!(arg0 is R && run {
+     ___other = arg0 as R
+     true
+    })) return false
+    return Arrays.equals(
+     arrayOf<Any?>(this.o, this.s),
+     arrayOf<Any?>(___other!!.o, ___other!!.s),
+    )
+   }
+
+   override fun hashCode(): Int {
+    return Arrays.hashCode(
+     arrayOf<Any?>(this.o, this.s),
+    )
+   }
+
+   override fun toString(): String {
+    return Arrays.toString(
+     arrayOf<Any?>(this.o, this.s),
+    )
+   }
+  }
+  val r: Any? = null
+  when (r!!) {
+   is String if run {
+    val __1: String = r as String
+    true
+   } -> {}
+   is R if run {
+    val pattern___1R: R = r as R
+    val exp: Any? = pattern___1R.o()
+    exp is String && run {
+     val __3: String = exp as String
+     val __4: String? = pattern___1R.s()
+     true
+    }
+   } -> {}
+   else -> {}
+  }
+ }
+
+ internal open fun testInstanceOfPatterns_pp_unnamedvariables() {
+  class R {
+   private val o: Any?
+
+   private val s: String?
+
+   constructor(arg0: Any?, arg1: String?) {
+    this.o = arg0
+    this.s = arg1
+   }
+
+   fun o(): Any? {
+    return this.o
+   }
+
+   fun s(): String? {
+    return this.s
+   }
+
+   override fun equals(arg0: Any?): Boolean {
+    var ___other: R? = null
+    if (!(arg0 is R && run {
+     ___other = arg0 as R
+     true
+    })) return false
+    return Arrays.equals(
+     arrayOf<Any?>(this.o, this.s),
+     arrayOf<Any?>(___other!!.o, ___other!!.s),
+    )
+   }
+
+   override fun hashCode(): Int {
+    return Arrays.hashCode(
+     arrayOf<Any?>(this.o, this.s),
+    )
+   }
+
+   override fun toString(): String {
+    return Arrays.toString(
+     arrayOf<Any?>(this.o, this.s),
+    )
+   }
+  }
+  val r: Any? = null
+  val `_`: Boolean = r is String && run {
+   val __1: String = r as String
+   true
+  }
+  val __2: Boolean = r is R && run {
+   val pattern___2R: R = r as R
+   val exp: Any? = pattern___2R.o()
+   exp is String && run {
+    val __3: String = exp as String
+    val __4: String? = pattern___2R.s()
+    true
+   }
+  }
+ }
+
+ internal open fun testDeclaration_pp_unnamedvariables() {
+  val `_`: String = "Hello"
+  val __1: Int = "Hello".length
+  val __2: Int = "Bye".length
+ }
+
+ internal open fun testLambda_pp_unnamedvariables() {
+  val f1: Function<String?, String?> = Function { `_`: String? ->
+   return@Function "Hello"
+  }
+  val f2: Function<String?, String?> = Function { __1: String? ->
+   return@Function "Hello"
+  }
+ }
+
+ internal open fun testTryCatch_pp_unnamedvariables() {
+  val closable: AutoCloseable? = null
+  try {
+   var ___primaryExc: Throwable? = null
+   var `_`: AutoCloseable? = null
+   try {
+    `_` = closable
+   } catch (___exceptionFromTry: Throwable) {
+    ___primaryExc = ___exceptionFromTry
+    throw ___exceptionFromTry
+   } finally {
+    ___primaryExc = Exceptions.safeClose(`_`, ___primaryExc)
+    if (___primaryExc != null) throw ___primaryExc!!
+   }
+  } catch (__1: RuntimeException) {} catch (__2: Exception) {} catch (__2: Error) {}
+ }
+
+ internal open fun testForEach_pp_unnamedvariables() {
+  val a: Array<String?>? = null
+  for (`_` in a!!) {}
+  for (__1 in a!!) {}
+  val l: MutableList<String?>? = null
+  for (__2 in l!!) {}
+  for (__3 in l!!) {}
+ }
+}
