@@ -91,4 +91,5 @@ bool_flag(
 string_flag(
     name = "profiling_filter",
     build_setting_default = "<disabled>",
+    scope = "universal",
 )
