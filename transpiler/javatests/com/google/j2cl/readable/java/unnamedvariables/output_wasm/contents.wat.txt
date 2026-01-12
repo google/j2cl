@@ -139,6 +139,13 @@
  (local $exp (ref null $java.lang.Object))
  (local $__1 (ref null $java.lang.String))
  (local $__2 (ref null $java.lang.String))
+ (local $pattern$1R_1 (ref null $unnamedvariables.UnnamedVariables.1R))
+ (local $exp_1 (ref null $java.lang.Object))
+ (local $__3 (ref null $java.lang.Number))
+ (local $__4 (ref null $java.lang.String))
+ (local $pattern$1R_2 (ref null $unnamedvariables.UnnamedVariables.1R))
+ (local $__5 (ref null $java.lang.Object))
+ (local $__6 (ref null $java.lang.String))
  (local $this (ref null $unnamedvariables.UnnamedVariables))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables) (local.get $this.untyped)))
  (block
@@ -174,8 +181,39 @@
         (local.set $$caseIndex (i32.const 1))
        )
       )(else
-       (block
-        (local.set $$caseIndex (i32.const 2))
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:37:6
+       (if (if (result i32) (ref.test (ref $unnamedvariables.UnnamedVariables.1R) (local.get $$selector)) (then (block (result i32)
+         (local.set $pattern$1R_1 (ref.cast (ref null $unnamedvariables.UnnamedVariables.1R) (local.get $$selector)))
+         (local.set $exp_1 (call $m_o__java_lang_Object@unnamedvariables.UnnamedVariables.1R (ref.as_non_null (local.get $pattern$1R_1))))
+         (if (result i32) (ref.test (ref $java.lang.Number) (local.get $exp_1)) (then (block (result i32)
+          (local.set $__3 (ref.cast (ref null $java.lang.Number) (local.get $exp_1)))
+          (local.set $__4 (call $m_s__java_lang_String@unnamedvariables.UnnamedVariables.1R (ref.as_non_null (local.get $pattern$1R_1))))
+          (i32.const 1)
+         )) (else (i32.const 0)))
+        )) (else (i32.const 0)))
+        (then
+         (block
+          (local.set $$caseIndex (i32.const 2))
+         )
+        )(else
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:40:6
+         (if (if (result i32) (ref.test (ref $unnamedvariables.UnnamedVariables.1R) (local.get $$selector)) (then (block (result i32)
+           (local.set $pattern$1R_2 (ref.cast (ref null $unnamedvariables.UnnamedVariables.1R) (local.get $$selector)))
+           (local.set $__5 (call $m_o__java_lang_Object@unnamedvariables.UnnamedVariables.1R (ref.as_non_null (local.get $pattern$1R_2))))
+           (local.set $__6 (call $m_s__java_lang_String@unnamedvariables.UnnamedVariables.1R (ref.as_non_null (local.get $pattern$1R_2))))
+           (i32.const 1)
+          )) (else (i32.const 0)))
+          (then
+           (block
+            (local.set $$caseIndex (i32.const 3))
+           )
+          )(else
+           (block
+            (local.set $$caseIndex (i32.const 4))
+           )
+          )
+         )
+        )
        )
       )
      )
@@ -187,13 +225,21 @@
     (block
      (block
       (block
-       (block ;; evaluate expression and jump
-        (br_table 0 1 2 (local.get $$caseIndex))
+       (block
+        (block
+         (block ;; evaluate expression and jump
+          (br_table 0 1 2 3 4 (local.get $$caseIndex))
+         )
+         ;; case 0:
+         (br $SWITCH.BREAK)
+        )
+        ;; case 1:
+        (br $SWITCH.BREAK)
        )
-       ;; case 0:
+       ;; case 2:
        (br $SWITCH.BREAK)
       )
-      ;; case 1:
+      ;; case 3:
       (br $SWITCH.BREAK)
      )
      ;; default:
@@ -209,7 +255,7 @@
 (func $m_testInstanceOfPatterns__void_$pp_unnamedvariables@unnamedvariables.UnnamedVariables
  (type $function.m_testInstanceOfPatterns__void_$pp_unnamedvariables)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:38:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:45:7
  (local $r (ref null $java.lang.Object))
  (local $_ i32)
  (local $__1 (ref null $java.lang.String))
@@ -218,17 +264,26 @@
  (local $exp (ref null $java.lang.Object))
  (local $__3 (ref null $java.lang.String))
  (local $__4 (ref null $java.lang.String))
+ (local $__5 i32)
+ (local $pattern$2R_1 (ref null $unnamedvariables.UnnamedVariables.2R))
+ (local $exp_1 (ref null $java.lang.Object))
+ (local $__6 (ref null $java.lang.Number))
+ (local $__7 (ref null $java.lang.String))
+ (local $__8 i32)
+ (local $pattern$2R_2 (ref null $unnamedvariables.UnnamedVariables.2R))
+ (local $__9 (ref null $java.lang.Object))
+ (local $__10 (ref null $java.lang.String))
  (local $this (ref null $unnamedvariables.UnnamedVariables))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:40:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:47:4
   (local.set $r (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:41:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:48:4
   (local.set $_ (if (result i32) (ref.test (ref $java.lang.String) (local.get $r)) (then (block (result i32)
    (local.set $__1 (ref.cast (ref null $java.lang.String) (local.get $r)))
    (i32.const 1)
   )) (else (i32.const 0))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:42:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:49:4
   (local.set $__2 (if (result i32) (ref.test (ref $unnamedvariables.UnnamedVariables.2R) (local.get $r)) (then (block (result i32)
    (local.set $pattern$2R (ref.cast (ref null $unnamedvariables.UnnamedVariables.2R) (local.get $r)))
    (local.set $exp (call $m_o__java_lang_Object@unnamedvariables.UnnamedVariables.2R (ref.as_non_null (local.get $pattern$2R))))
@@ -238,6 +293,23 @@
     (i32.const 1)
    )) (else (i32.const 0)))
   )) (else (i32.const 0))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:50:4
+  (local.set $__5 (if (result i32) (ref.test (ref $unnamedvariables.UnnamedVariables.2R) (local.get $r)) (then (block (result i32)
+   (local.set $pattern$2R_1 (ref.cast (ref null $unnamedvariables.UnnamedVariables.2R) (local.get $r)))
+   (local.set $exp_1 (call $m_o__java_lang_Object@unnamedvariables.UnnamedVariables.2R (ref.as_non_null (local.get $pattern$2R_1))))
+   (if (result i32) (ref.test (ref $java.lang.Number) (local.get $exp_1)) (then (block (result i32)
+    (local.set $__6 (ref.cast (ref null $java.lang.Number) (local.get $exp_1)))
+    (local.set $__7 (call $m_s__java_lang_String@unnamedvariables.UnnamedVariables.2R (ref.as_non_null (local.get $pattern$2R_1))))
+    (i32.const 1)
+   )) (else (i32.const 0)))
+  )) (else (i32.const 0))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:51:4
+  (local.set $__8 (if (result i32) (ref.test (ref $unnamedvariables.UnnamedVariables.2R) (local.get $r)) (then (block (result i32)
+   (local.set $pattern$2R_2 (ref.cast (ref null $unnamedvariables.UnnamedVariables.2R) (local.get $r)))
+   (local.set $__9 (call $m_o__java_lang_Object@unnamedvariables.UnnamedVariables.2R (ref.as_non_null (local.get $pattern$2R_2))))
+   (local.set $__10 (call $m_s__java_lang_String@unnamedvariables.UnnamedVariables.2R (ref.as_non_null (local.get $pattern$2R_2))))
+   (i32.const 1)
+  )) (else (i32.const 0))))
  )
 )
 (elem declare func $m_testInstanceOfPatterns__void_$pp_unnamedvariables@unnamedvariables.UnnamedVariables)
@@ -246,18 +318,18 @@
 (func $m_testDeclaration__void_$pp_unnamedvariables@unnamedvariables.UnnamedVariables
  (type $function.m_testDeclaration__void_$pp_unnamedvariables)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:45:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:54:7
  (local $_ (ref null $java.lang.String))
  (local $__1 i32)
  (local $__2 i32)
  (local $this (ref null $unnamedvariables.UnnamedVariables))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:48:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:4
   (local.set $_ (call $$getString_|Hello|__java_lang_String_<once>_@unnamedvariables.UnnamedVariables ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:50:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:59:4
   (local.set $__1 (call $m_length__int@java.lang.String (ref.as_non_null (call $$getString_|Hello|__java_lang_String_<once>_@unnamedvariables.UnnamedVariables ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:52:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:61:4
   (local.set $__2 (call $m_length__int@java.lang.String (ref.as_non_null (call $$getString_|Bye|__java_lang_String_<once>_@unnamedvariables.UnnamedVariables ))))
  )
 )
@@ -267,15 +339,15 @@
 (func $m_testLambda__void_$pp_unnamedvariables@unnamedvariables.UnnamedVariables
  (type $function.m_testLambda__void_$pp_unnamedvariables)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:55:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:64:7
  (local $f1 (ref null $java.lang.Object))
  (local $f2 (ref null $java.lang.Object))
  (local $this (ref null $unnamedvariables.UnnamedVariables))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:4
   (local.set $f1 (call $$create__@unnamedvariables.UnnamedVariables.$LambdaImplementor$1 ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:4
   (local.set $f2 (call $$create__@unnamedvariables.UnnamedVariables.$LambdaImplementor$2 ))
  )
 )
@@ -285,7 +357,7 @@
 (func $m_testTryCatch__void_$pp_unnamedvariables@unnamedvariables.UnnamedVariables
  (type $function.m_testTryCatch__void_$pp_unnamedvariables)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:60:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:69:7
  (local $closable (ref null $java.lang.Object))
  (local $$primaryExc (ref null $java.lang.Throwable))
  (local $_ (ref null $java.lang.Object))
@@ -301,40 +373,40 @@
  (local $this (ref null $unnamedvariables.UnnamedVariables))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:61:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:70:4
   (local.set $closable (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
   (try (do
    (block
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
     (local.set $$primaryExc (ref.null $java.lang.Throwable))
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
     (local.set $_ (ref.null $java.lang.Object))
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
      
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
      (block $FINALLY.0.BREAK
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
       (try (do
        (block
-        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
         (try (do
          (block
-          ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+          ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
           (local.set $_ (local.get $closable))
          )
         ) (catch $exception.event
          (local.set $__$jsexc (pop externref))
          (block
-          ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+          ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
           (local.set $__$exc (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
           (block
-           ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+           ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
            (local.set $$exceptionFromTry (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
-           ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+           ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
            (local.set $$primaryExc (local.get $$exceptionFromTry))
-           ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+           ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
            (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $$exceptionFromTry)))
           )
          )
@@ -344,30 +416,30 @@
        (local.set $__$jsexc_1 (pop externref))
        (block
         (local.set $t (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_1)))
-        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
         (local.set $savedThrown.0 (local.get $t))
-        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
         (local.set $exitSelector.0 (i32.const 1))
-        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
         (br $FINALLY.0.BREAK)
        )
       ))
      )
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
       (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $_)(local.get $$primaryExc)))
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
       (if (i32.eqz (ref.is_null (local.get $$primaryExc)))
        (then
-        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
         (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $$primaryExc)))
        )
       )
      )
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
      (if (i32.eqz (ref.is_null (local.get $savedThrown.0)))
       (then
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:62:4
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
        (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $savedThrown.0)))
       )
      )
@@ -376,22 +448,22 @@
   ) (catch $exception.event
    (local.set $__$jsexc_2 (pop externref))
    (block
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:63:33
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:72:33
     (local.set $__$exc_1 (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc_2)))
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:63:33
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:72:33
     (if (ref.test (ref $java.lang.RuntimeException) (local.get $__$exc_1))
      (then
       (block
       )
      )(else
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:74:34
       (if (if (result i32) (ref.test (ref $java.lang.Exception) (local.get $__$exc_1)) (then (i32.const 1)) (else (ref.test (ref $java.lang.Error) (local.get $__$exc_1))))
        (then
         (block
         )
        )(else
         (block
-         ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:63:33
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:72:33
          (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $__$exc_1)))
         )
        )
@@ -408,7 +480,7 @@
 (func $m_testForEach__void_$pp_unnamedvariables@unnamedvariables.UnnamedVariables
  (type $function.m_testForEach__void_$pp_unnamedvariables)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:70:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:79:7
  (local $a (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$index i32)
@@ -424,9 +496,9 @@
  (local $this (ref null $unnamedvariables.UnnamedVariables))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:71:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:80:4
   (local.set $a (ref.null $javaemul.internal.WasmArray.OfObject))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:72:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:81:4
   (local.set $$array (local.get $a))
   (local.set $$index (i32.const 0))
   (block $LOOP.BREAK
@@ -434,7 +506,7 @@
     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array))))))
     (block $LOOP.CONTINUE
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:72:4
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:81:4
       (local.set $_ (ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index))))
      )
     )
@@ -442,7 +514,7 @@
     (br 0)
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:73:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:82:4
   (local.set $$array_1 (local.get $a))
   (local.set $$index_1 (i32.const 0))
   (block $LOOP_1.BREAK
@@ -450,7 +522,7 @@
     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index_1) (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array_1))))))
     (block $LOOP_1.CONTINUE
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:73:4
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:82:4
       (local.set $__1 (ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array_1)) (local.get $$index_1))))
      )
     )
@@ -458,30 +530,30 @@
     (br 0)
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:75:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:84:4
   (local.set $l (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:76:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:85:4
   (local.set $$iterator (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $l))(struct.get $java.util.List.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $l))))))
   (block $LOOP_2.BREAK
    (loop
     (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
     (block $LOOP_2.CONTINUE
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:76:4
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:85:4
       (local.set $__2 (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
      )
     )
     (br 0)
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:77:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:86:4
   (local.set $$iterator_1 (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $l))(struct.get $java.util.List.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $l))))))
   (block $LOOP_3.BREAK
    (loop
     (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
     (block $LOOP_3.CONTINUE
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:77:4
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:86:4
       (local.set $__3 (ref.cast (ref null $java.lang.String) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator_1)))))))
      )
     )
@@ -540,16 +612,16 @@
 ;;; <anonymous> implements Function<String, String> <anonymous> implements Function<String, String>.$create()
 (func $$create__@unnamedvariables.UnnamedVariables.$LambdaImplementor$1
  (result (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
  (local $$instance (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$1))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (call $$clinit__void_<once>_@unnamedvariables.UnnamedVariables.$LambdaImplementor$1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (local.set $$instance (struct.new $unnamedvariables.UnnamedVariables.$LambdaImplementor$1 (global.get $unnamedvariables.UnnamedVariables.$LambdaImplementor$1.vtable) (global.get $unnamedvariables.UnnamedVariables.$LambdaImplementor$1.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (call $$ctor__void_$p_unnamedvariables_UnnamedVariables_$LambdaImplementor$1@unnamedvariables.UnnamedVariables.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (return (local.get $$instance))
  )
 )
@@ -557,9 +629,9 @@
 ;;; void <anonymous> implements Function<String, String>.$ctor()
 (func $$ctor__void_$p_unnamedvariables_UnnamedVariables_$LambdaImplementor$1@unnamedvariables.UnnamedVariables.$LambdaImplementor$1
  (param $this (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (call $$ctor__void_$p_java_util_function_Function_$LambdaAdaptor@java.util.function.Function.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -570,11 +642,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $_ (ref null $java.lang.String))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
  (local $this (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:39
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:39
   (return (call $$getString_|Hello|__java_lang_String_<once>_@unnamedvariables.UnnamedVariables ))
  )
 )
@@ -586,11 +658,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
  (local $this (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (return (call_ref $function.m_apply__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $unnamedvariables.UnnamedVariables.$LambdaImplementor$1.vtable $m_apply__java_lang_String__java_lang_String (struct.get $unnamedvariables.UnnamedVariables.$LambdaImplementor$1 $vtable(local.get $this)))))
  )
 )
@@ -598,20 +670,20 @@
 
 ;;; void <anonymous> implements Function<String, String>.$clinit()
 (func $$clinit__void_<once>_@unnamedvariables.UnnamedVariables.$LambdaImplementor$1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (if (global.get $$class-initialized@unnamedvariables.UnnamedVariables.$LambdaImplementor$1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (global.set $$class-initialized@unnamedvariables.UnnamedVariables.$LambdaImplementor$1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (call $$clinit__void_<once>_@java.util.function.Function.$LambdaAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:56:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:65:34
   (call $$clinit__void_<once>_@java.util.function.Function )
  )
 )
@@ -633,16 +705,16 @@
 ;;; <anonymous> implements Function<String, String> <anonymous> implements Function<String, String>.$create()
 (func $$create__@unnamedvariables.UnnamedVariables.$LambdaImplementor$2
  (result (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$2))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
  (local $$instance (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$2))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (call $$clinit__void_<once>_@unnamedvariables.UnnamedVariables.$LambdaImplementor$2 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (local.set $$instance (struct.new $unnamedvariables.UnnamedVariables.$LambdaImplementor$2 (global.get $unnamedvariables.UnnamedVariables.$LambdaImplementor$2.vtable) (global.get $unnamedvariables.UnnamedVariables.$LambdaImplementor$2.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (call $$ctor__void_$p_unnamedvariables_UnnamedVariables_$LambdaImplementor$2@unnamedvariables.UnnamedVariables.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (return (local.get $$instance))
  )
 )
@@ -650,9 +722,9 @@
 ;;; void <anonymous> implements Function<String, String>.$ctor()
 (func $$ctor__void_$p_unnamedvariables_UnnamedVariables_$LambdaImplementor$2@unnamedvariables.UnnamedVariables.$LambdaImplementor$2
  (param $this (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$2))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (call $$ctor__void_$p_java_util_function_Function_$LambdaAdaptor@java.util.function.Function.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -663,11 +735,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $_ (ref null $java.lang.String))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
  (local $this (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:48
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:48
   (return (call $$getString_|Hello|__java_lang_String_<once>_@unnamedvariables.UnnamedVariables ))
  )
 )
@@ -679,11 +751,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
  (local $this (ref null $unnamedvariables.UnnamedVariables.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (return (call_ref $function.m_apply__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $unnamedvariables.UnnamedVariables.$LambdaImplementor$2.vtable $m_apply__java_lang_String__java_lang_String (struct.get $unnamedvariables.UnnamedVariables.$LambdaImplementor$2 $vtable(local.get $this)))))
  )
 )
@@ -691,20 +763,20 @@
 
 ;;; void <anonymous> implements Function<String, String>.$clinit()
 (func $$clinit__void_<once>_@unnamedvariables.UnnamedVariables.$LambdaImplementor$2
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (if (global.get $$class-initialized@unnamedvariables.UnnamedVariables.$LambdaImplementor$2)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (global.set $$class-initialized@unnamedvariables.UnnamedVariables.$LambdaImplementor$2 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (call $$clinit__void_<once>_@java.util.function.Function.$LambdaAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:57:34
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:66:34
   (call $$clinit__void_<once>_@java.util.function.Function )
  )
 )
@@ -888,16 +960,16 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.String))
  (result (ref null $unnamedvariables.UnnamedVariables.2R))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (local $$instance (ref null $unnamedvariables.UnnamedVariables.2R))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (call $$clinit__void_<once>_@unnamedvariables.UnnamedVariables.2R )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (local.set $$instance (struct.new $unnamedvariables.UnnamedVariables.2R (global.get $unnamedvariables.UnnamedVariables.2R.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.String)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (call $$ctor__java_lang_Object__java_lang_String__void_$p_unnamedvariables_UnnamedVariables_2R@unnamedvariables.UnnamedVariables.2R (ref.as_non_null (local.get $$instance))(local.get $arg0)(local.get $arg1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (return (local.get $$instance))
  )
 )
@@ -907,13 +979,13 @@
  (param $this (ref null $unnamedvariables.UnnamedVariables.2R))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (struct.set $unnamedvariables.UnnamedVariables.2R $o@unnamedvariables.UnnamedVariables.2R (local.get $this) (local.get $arg0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (struct.set $unnamedvariables.UnnamedVariables.2R $s@unnamedvariables.UnnamedVariables.2R (local.get $this) (local.get $arg1))
  )
 )
@@ -923,7 +995,7 @@
  (type $function.m_o__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (local $this (ref null $unnamedvariables.UnnamedVariables.2R))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.2R) (local.get $this.untyped)))
  (block
@@ -937,7 +1009,7 @@
  (type $function.m_s__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (local $this (ref null $unnamedvariables.UnnamedVariables.2R))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.2R) (local.get $this.untyped)))
  (block
@@ -952,7 +1024,7 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (local $$other (ref null $unnamedvariables.UnnamedVariables.2R))
  (local $this (ref null $unnamedvariables.UnnamedVariables.2R))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.2R) (local.get $this.untyped)))
@@ -975,7 +1047,7 @@
  (type $function.m_hashCode__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (local $this (ref null $unnamedvariables.UnnamedVariables.2R))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.2R) (local.get $this.untyped)))
  (block
@@ -989,7 +1061,7 @@
  (type $function.m_toString__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (local $this (ref null $unnamedvariables.UnnamedVariables.2R))
  (local.set $this (ref.cast (ref $unnamedvariables.UnnamedVariables.2R) (local.get $this.untyped)))
  (block
@@ -1000,18 +1072,18 @@
 
 ;;; void R.$clinit()
 (func $$clinit__void_<once>_@unnamedvariables.UnnamedVariables.2R
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (if (global.get $$class-initialized@unnamedvariables.UnnamedVariables.2R)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (global.set $$class-initialized@unnamedvariables.UnnamedVariables.2R (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:39:11
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (call $$clinit__void_<once>_@java.lang.Record )
  )
 )

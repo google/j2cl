@@ -28,6 +28,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.AnyPattern;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayCreationReference;
 import com.google.j2cl.transpiler.ast.ArrayLength;
@@ -118,6 +119,7 @@ import com.sun.tools.javac.code.Symbol.TypeVariableSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
 import com.sun.tools.javac.code.Type.MethodType;
 import com.sun.tools.javac.tree.JCTree;
+import com.sun.tools.javac.tree.JCTree.JCAnyPattern;
 import com.sun.tools.javac.tree.JCTree.JCArrayAccess;
 import com.sun.tools.javac.tree.JCTree.JCAssert;
 import com.sun.tools.javac.tree.JCTree.JCAssign;
@@ -937,6 +939,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               recordPattern.getNestedPatterns().stream()
                   .map(this::convertPattern)
                   .collect(toCollection(ArrayList::new)));
+      case JCAnyPattern anyPattern -> new AnyPattern();
       case null -> null;
       default -> throw new IllegalArgumentException("Unexpected pattern: " + pattern);
     };

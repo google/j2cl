@@ -30,6 +30,7 @@ import kotlin.Boolean
 import kotlin.Error
 import kotlin.Exception
 import kotlin.Int
+import kotlin.Number
 import kotlin.RuntimeException
 import kotlin.String
 import kotlin.Suppress
@@ -97,6 +98,21 @@ open class UnnamedVariables {
      true
     }
    } -> {}
+   is R if run {
+    val pattern___1R_1: R = r as R
+    val exp_1: Any? = pattern___1R_1.o()
+    exp_1 is Number && run {
+     val __6: Number = exp_1 as Number
+     val __7: String? = pattern___1R_1.s()
+     true
+    }
+   } -> {}
+   is R if run {
+    val pattern___1R_2: R = r as R
+    val __9: Any? = pattern___1R_2.o()
+    val __10: String? = pattern___1R_2.s()
+    true
+   } -> {}
    else -> {}
   }
  }
@@ -157,6 +173,21 @@ open class UnnamedVariables {
     val __4: String? = pattern___2R.s()
     true
    }
+  }
+  val __5: Boolean = r is R && run {
+   val pattern___2R_1: R = r as R
+   val exp_1: Any? = pattern___2R_1.o()
+   exp_1 is Number && run {
+    val __6: Number = exp_1 as Number
+    val __7: String? = pattern___2R_1.s()
+    true
+   }
+  }
+  val __8: Boolean = r is R && run {
+   val pattern___2R_2: R = r as R
+   val __9: Any? = pattern___2R_2.o()
+   val __10: String? = pattern___2R_2.s()
+   true
   }
  }
 

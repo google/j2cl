@@ -31,6 +31,13 @@ public class UnnamedVariables {
       // A record pattern with two unnamed variables. The second one is unconditional, so no
       // code should be generated for it.
       case R(String _, String _) -> {}
+      // A record pattern with an unnamed variable and an AnyPattern. No code should be generated
+      // for the AnyPattern, but an instanceof check is needed for the first unnamed variable since
+      // the pattern there is not unconditional.
+      case R(Number _, _) -> {}
+      // A record pattern with all its components being AnyPatterns. Only the instanceof check
+      // for the record type is needed but not the assignment to a temporary variable.
+      case R(_, _) -> {}
       default -> {}
     }
   }
@@ -40,6 +47,8 @@ public class UnnamedVariables {
     Object r = null;
     var _ = r instanceof String _;
     var _ = r instanceof R(String _, String _);
+    var _ = r instanceof R(Number _, _);
+    var _ = r instanceof R(_, _);
   }
 
   void testDeclaration() {

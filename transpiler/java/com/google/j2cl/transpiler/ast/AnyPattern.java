@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Google Inc.
+ * Copyright 2026 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,18 +18,21 @@ package com.google.j2cl.transpiler.ast;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
-/** Class that represents a pattern. */
+/** Class that represents an any pattern. */
 @Visitable
-public abstract sealed class Pattern extends Node implements Cloneable<Pattern>
-    permits AnyPattern, BindingPattern, RecordPattern {
-
-  public abstract TypeDescriptor getTypeDescriptor();
+public final class AnyPattern extends Pattern {
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return TypeDescriptors.get().javaLangObject;
+  }
 
   @Override
-  public abstract Pattern clone();
+  public AnyPattern clone() {
+    return new AnyPattern();
+  }
 
   @Override
   Node acceptInternal(Processor processor) {
-    return Visitor_Pattern.visit(processor, this);
+    return Visitor_AnyPattern.visit(processor, this);
   }
 }

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AnyPattern;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BindingPattern;
@@ -96,6 +97,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
           desugarBindingPattern(sourcePosition, expression, bindingPattern, nextTerm);
       case RecordPattern recordPattern ->
           desugarRecordPattern(sourcePosition, expression, recordPattern, nextTerm);
+      case AnyPattern anyPattern -> throw new IllegalArgumentException();
     };
   }
 
@@ -221,6 +223,17 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
             componentPattern.subList(1, componentPattern.size()),
             accessors.subList(1, accessors.size()),
             nextTerm);
+
+    if (nestedPattern instanceof AnyPattern) {
+      // Treat the nested pattern as if it was written as `var _` by transforming into a binding
+      // pattern with an unnamed variable of the same type as the component.
+      nestedPattern =
+          new BindingPattern(
+              Variable.newBuilder()
+                  .setName("_")
+                  .setTypeDescriptor(accessorCall.getTypeDescriptor())
+                  .build());
+    }
 
     // Match the record property using its accessor to the corresponding pattern form.
     return isUnconditionalPattern(accessorCall, nestedPattern)
