@@ -200,12 +200,12 @@ open class RecordClass {
      }
     }
    }
-   val o: Any = R1(
+   var o: Any = R1(
     R2(1, "a"),
     "b",
     R2(3, "c"),
    )
-   val b1: Boolean = o is R1 && run {
+   var b1: Boolean = o is R1 && run {
     val pattern___1R1_1: R1 = o as R1
     val exp_2: Any? = pattern___1R1_1.o()
     exp_2 is R2 && run {
@@ -218,6 +218,51 @@ open class RecordClass {
       val n_1: R2? = pattern___1R1_1.n()
       true
      }
+    }
+   }
+   class RecursiveRecord {
+    private val r: RecursiveRecord?
+
+    constructor(arg0: RecursiveRecord?) {
+     this.r = arg0
+    }
+
+    fun r(): RecursiveRecord? {
+     return this.r
+    }
+
+    override fun equals(arg0: Any?): Boolean {
+     var ___other: RecursiveRecord? = null
+     if (!(arg0 is RecursiveRecord && run {
+      ___other = arg0 as RecursiveRecord
+      true
+     })) return false
+     return Arrays.equals(
+      arrayOf<Any?>(this.r),
+      arrayOf<Any?>(___other!!.r),
+     )
+    }
+
+    override fun hashCode(): Int {
+     return Arrays.hashCode(
+      arrayOf<Any?>(this.r),
+     )
+    }
+
+    override fun toString(): String {
+     return Arrays.toString(
+      arrayOf<Any?>(this.r),
+     )
+    }
+   }
+   o = RecursiveRecord(null)
+   b1 = o is RecursiveRecord && run {
+    val pattern___1RecursiveRecord: RecursiveRecord = o as RecursiveRecord
+    val exp_4: RecursiveRecord? = pattern___1RecursiveRecord.r()
+    exp_4 is RecursiveRecord && run {
+     val pattern___1RecursiveRecord_1: RecursiveRecord = exp_4 as RecursiveRecord
+     val r1: RecursiveRecord? = pattern___1RecursiveRecord_1.r()
+     true
     }
    }
   }

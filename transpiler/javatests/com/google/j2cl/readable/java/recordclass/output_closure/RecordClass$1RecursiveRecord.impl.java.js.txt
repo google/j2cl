@@ -1,0 +1,72 @@
+goog.module('recordclass.RecordClass.$1RecursiveRecord$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class $1RecursiveRecord extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {$1RecursiveRecord} @nodts*/
+  this.f_r__recordclass_RecordClass_1RecursiveRecord_;
+ }
+ /** @nodts @return {!$1RecursiveRecord} */
+ static $create__recordclass_RecordClass_1RecursiveRecord(/** $1RecursiveRecord */ arg0) {
+  $1RecursiveRecord.$clinit();
+  let $instance = new $1RecursiveRecord();
+  $instance.$ctor__recordclass_RecordClass_1RecursiveRecord__recordclass_RecordClass_1RecursiveRecord__void(arg0);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_1RecursiveRecord__recordclass_RecordClass_1RecursiveRecord__void(/** $1RecursiveRecord */ arg0) {
+  this.$ctor__java_lang_Record__void();
+  this.f_r__recordclass_RecordClass_1RecursiveRecord_ = arg0;
+ }
+ /** @nodts @return {$1RecursiveRecord} */
+ m_r__recordclass_RecordClass_1RecursiveRecord() {
+  return this.f_r__recordclass_RecordClass_1RecursiveRecord_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ arg0) {
+  let /** $1RecursiveRecord */ $other;
+  if (!($1RecursiveRecord.$isInstance(arg0) && ($other = (/**@type {!$1RecursiveRecord}*/ ($Casts.$to(arg0, $1RecursiveRecord))), true))) {
+   return false;
+  }
+  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_r__recordclass_RecordClass_1RecursiveRecord_], [$other.f_r__recordclass_RecordClass_1RecursiveRecord_]);
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_r__recordclass_RecordClass_1RecursiveRecord_]);
+ }
+ /** @override @return {?string} */
+ toString() {
+  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_r__recordclass_RecordClass_1RecursiveRecord_]);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1RecursiveRecord.$clinit = () =>{};
+  $1RecursiveRecord.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1RecursiveRecord;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Arrays = goog.module.get('java.util.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata($1RecursiveRecord, 'recordclass.RecordClass$1RecursiveRecord');
+
+exports = $1RecursiveRecord;
+
+//# sourceMappingURL=RecordClass$1RecursiveRecord.js.map

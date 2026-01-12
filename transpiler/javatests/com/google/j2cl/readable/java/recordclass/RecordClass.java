@@ -119,5 +119,9 @@ public class RecordClass {
 
     Object o = new R1(new R2(1, "a"), "b", new R2(3, "c"));
     boolean b1 = o instanceof R1(R2(var i1, String s1), Object s2, R2 n);
+
+    record RecursiveRecord(RecursiveRecord r) {}
+    o = new RecursiveRecord(null);
+    b1 = o instanceof RecursiveRecord(RecursiveRecord(RecursiveRecord r1));
   }
 }
