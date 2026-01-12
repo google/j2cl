@@ -707,9 +707,7 @@ internal class J2ObjCCompatRenderer(
     val KT_NATIVE_JRE_EXCLUDE =
       setOf(
         "java.io.EOFException",
-        "java.io.File",
         "java.io.FileNotFoundException",
-        "java.io.FileOutputStream",
         "java.io.IOException",
         "java.lang.ArithmeticException",
         "java.lang.AutoCloseable",
