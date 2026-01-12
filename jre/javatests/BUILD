@@ -25,6 +25,7 @@ SRCS = glob(
 
 ERROR_PRONE_SUPPRESSIONS = [
     # keep sorted
+    "-Xep:AssertSameIncompatible:OFF",
     "-Xep:CheckReturnValue:OFF",
     "-Xep:ComparableType:OFF",
     "-Xep:DoNotCall:OFF",
