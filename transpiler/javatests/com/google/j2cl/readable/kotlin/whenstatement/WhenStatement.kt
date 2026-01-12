@@ -233,4 +233,17 @@ class WhenStatement {
       else -> 3
     }
   }
+
+  fun whenWithValVariable() {
+    var o: Any? = Any()
+    var value: Int
+    // Repro for b/463372260
+    return when (val v = o) {
+      "minus_one",
+      "zero",
+      "one" -> value = 1
+      "two" -> value = 2
+      else -> value = 3
+    }
+  }
 }

@@ -330,6 +330,20 @@ class WhenStatement extends j_l_Object {
   let tmp0_subject = o;
   return Objects.m_equals__java_lang_Object__java_lang_Object__boolean(tmp0_subject, a) ? 1 : Objects.m_equals__java_lang_Object__java_lang_Object__boolean(tmp0_subject, Integer.valueOf(v)) ? 2 : 3;
  }
+ /** @final @nodts */
+ m_whenWithValVariable__void() {
+  let o = j_l_Object.$create__();
+  let /** number */ value;
+  let v = o;
+  if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(v, 'minus_one') || (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(v, 'zero') || Objects.m_equals__java_lang_Object__java_lang_Object__boolean(v, 'one'))) {
+   value = 1;
+  } else if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(v, 'two')) {
+   value = 2;
+  } else {
+   value = 3;
+  }
+  return;
+ }
  /** @nodts */
  static $clinit() {
   WhenStatement.$clinit = () =>{};
