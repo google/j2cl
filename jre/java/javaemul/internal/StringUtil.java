@@ -34,6 +34,48 @@ public final class StringUtil {
     return whitespaceRegex.test(str);
   }
 
+  private static NativeRegExp leadingWhitespaceRegex;
+
+  private static NativeRegExp getLeadingWhitespaceRegex() {
+    if (leadingWhitespaceRegex == null) {
+      leadingWhitespaceRegex = new NativeRegExp("^(" + whitespaceRegexStr + ")+");
+    }
+    return leadingWhitespaceRegex;
+  }
+
+  public static int countLeadingWhitespace(String str) {
+    NativeRegExp.Match match = getLeadingWhitespaceRegex().exec(str);
+    if (match == null) {
+      return 0;
+    }
+    return match.getAt(0).length();
+  }
+
+  private static NativeRegExp trailingWhitespaceRegex;
+
+  private static NativeRegExp getTrailingWhitespaceRegex() {
+    if (trailingWhitespaceRegex == null) {
+      trailingWhitespaceRegex = new NativeRegExp("(" + whitespaceRegexStr + ")+$");
+    }
+    return trailingWhitespaceRegex;
+  }
+
+  public static int countTrailingWhitespace(String str) {
+    NativeRegExp.Match match = getTrailingWhitespaceRegex().exec(str);
+    if (match == null) {
+      return 0;
+    }
+    return match.getAt(0).length();
+  }
+
+  public static String stripLeading(String str) {
+    return str.nativeReplace(getLeadingWhitespaceRegex(), "");
+  }
+
+  public static String stripTrailing(String str) {
+    return str.nativeReplace(getTrailingWhitespaceRegex(), "");
+  }
+
   private static final String spaceRegexStr =
       "[\\u0020\\u00A0\\u1680\\u2000-\\u200A\\u202F\\u2028\\u2029\\u205F\\u3000]";
 

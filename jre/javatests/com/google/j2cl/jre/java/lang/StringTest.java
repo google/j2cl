@@ -884,6 +884,31 @@ public class StringTest extends TestCase {
     assertEquals(4, cat.length());
   }
 
+  public void testIsEmpty() {
+    assertTrue("".isEmpty());
+    assertFalse(" ".isEmpty());
+    assertFalse("\n".isEmpty());
+    assertFalse("\u001F".isEmpty());
+    assertFalse("a".isEmpty());
+  }
+
+  public void testIsBlank() {
+    assertTrue("".isBlank());
+    assertTrue(" ".isBlank());
+    assertTrue("\n".isBlank());
+    assertTrue("\t".isBlank());
+    assertTrue("\r".isBlank());
+    assertTrue("\u001F".isBlank());
+    assertTrue("\n\t ".isBlank());
+    assertTrue("\u2028".isBlank());
+    assertTrue("\u2029".isBlank());
+    assertFalse("a".isBlank());
+    assertFalse(" a ".isBlank());
+    assertFalse("a ".isBlank());
+    assertFalse(" a".isBlank());
+    assertFalse("\u00a0".isBlank());
+  }
+
   public void testLowerCase() {
     assertEquals("abc", hideFromCompiler("AbC").toLowerCase());
     assertEquals("abc", hideFromCompiler("abc").toLowerCase());
@@ -1126,6 +1151,28 @@ public class StringTest extends TestCase {
     compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
   }
 
+  public void testLines() {
+    assertLines("empty string", "");
+    assertLines("one line", "a", "a");
+    assertLines("only newlines", "\n", "");
+    assertLines("only newlines 2", "\n\n", "", "");
+    assertLines("only cr", "\r", "");
+    assertLines("only crlf", "\r\n", "");
+    assertLines("leading newline", "\na", "", "a");
+    assertLines("trailing whitespace", "\n ", "", " ");
+    assertLines("non-trailing newlines", "a\nb\nc", "a", "b", "c");
+    assertLines("trailing newline", "a\nb\nc\n", "a", "b", "c");
+    assertLines("trailing crlf", "a\nb\nc\r\n", "a", "b", "c");
+    assertLines("emptylines", "a\n\nb\n\nc\n\n", "a", "", "b", "", "c", "");
+    assertLines("carriage return", "a\rb\rc", "a", "b", "c");
+    assertLines("mixed line feed/carriage return", "a\nb\rc", "a", "b", "c");
+    assertLines("combined line feed/carriage return", "a\r\nb\r\nc", "a", "b", "c");
+  }
+
+  private static void assertLines(String caseName, String input, String... expectedLines) {
+    compareList("Input: " + caseName, expectedLines, input.lines().toArray(String[]::new));
+  }
+
   public void testStartsWith() {
     String haystack = "abcdefghi";
     assertTrue(haystack.startsWith("abc"));
@@ -1240,6 +1287,104 @@ public class StringTest extends TestCase {
 
     // JavaScript would trim \u2029 and other unicode whitespace type characters; but Java wont
     trimRightAssertEquals("\u2029abc\u00a0", "\u2029abc\u00a0");
+  }
+
+  public void testStrip() {
+    assertEquals("", "".strip());
+    assertEquals("", "   ".strip());
+    assertEquals("", " \t ".strip());
+    assertEquals("abc", "abc".strip());
+    assertEquals("a b c", " a b c ".strip());
+    assertEquals("a\tb\nc", "\n\t\r\n\r a\tb\nc\n\t\r\n\r ".strip());
+    // line separators should be stripped.
+    assertEquals("abc", "\r\n\u2028\u2029abc\r\n\u2028\u2029".strip());
+    // nbsp should not be stripped, this differs from JS's String#trim
+    assertEquals("\u00a0abc\u00a0", "\u00a0abc\u00a0".strip());
+    // nulls should not be stripped.
+    assertEquals("\0abc\0", "\0abc\0".strip());
+  }
+
+  public void testStripTrailing() {
+    assertEquals("", "".stripTrailing());
+    assertEquals("", "   ".stripTrailing());
+    assertEquals("", " \t ".stripTrailing());
+    assertEquals("abc", "abc".stripTrailing());
+    assertEquals(" a b c", " a b c ".stripTrailing());
+    // line separators should be stripped.
+    assertEquals("\r\n\u2028\u2029abc", "\r\n\u2028\u2029abc\r\n\u2028\u2029".stripTrailing());
+    // nbsp should not be stripped, this differs from JS's String#trim
+    assertEquals("\u00a0abc\u00a0", "\u00a0abc\u00a0".stripTrailing());
+    // nulls should not be stripped.
+    assertEquals("\0abc\0", "\0abc\0".stripTrailing());
+  }
+
+  public void testStripLeading() {
+    assertEquals("", "".stripLeading());
+    assertEquals("", "   ".stripLeading());
+    assertEquals("", " \t ".stripLeading());
+    assertEquals("abc", "abc".stripLeading());
+    assertEquals("a b c ", " a b c ".stripLeading());
+    assertEquals("a\tb\nc\n\t\r\n\r ", "\n\t\r\n\r a\tb\nc\n\t\r\n\r ".stripLeading());
+    // line separators should be stripped.
+    assertEquals("abc\r\n\u2028\u2029", "\r\n\u2028\u2029abc\r\n\u2028\u2029".stripLeading());
+    // nbsp should not be stripped, this differs from JS's String#trim
+    assertEquals("\u00a0abc\u00a0", "\u00a0abc\u00a0".stripLeading());
+    // nulls should not be stripped.
+    assertEquals("\0abc\0", "\0abc\0".stripLeading());
+  }
+
+  public void testStripIndent() {
+    // empty string
+    assertEquals("", "".stripIndent());
+    // blank string
+    assertEquals("", "   ".stripIndent());
+    assertEquals("", " \t ".stripIndent());
+    // blank string with newlines
+    assertEquals("\n", "\n".stripIndent());
+    assertEquals("\n\n", "\n\n".stripIndent());
+    assertEquals("\n", " \n ".stripIndent());
+    assertEquals("\n\n", "  \n    \n\t".stripIndent());
+
+    // single line
+    assertEquals("abc", "  abc".stripIndent());
+    assertEquals("abc", "  abc \t".stripIndent());
+
+    // trailing newline. Note there's there's technically two lines here with the second having no
+    // indent. Therefore no whitespace is stripped from the first line.
+    assertEquals("  abc\n", "  abc\n".stripIndent());
+    assertEquals("  abc\n", "  abc \n".stripIndent());
+
+    // multiple lines
+    assertEquals("abc\ndef", "  abc\n  def".stripIndent());
+    assertEquals("abc\n def", "  abc\n   def".stripIndent());
+
+    // blank lines
+    assertEquals("abc\n\ndef", "  abc\n\n  def".stripIndent());
+    assertEquals("abc\n\ndef", "  abc\n    \n  def".stripIndent());
+    assertEquals("\nabc", "\n  abc".stripIndent());
+
+    // leading tabs
+    assertEquals("abc\ndef", "\t\tabc\n\t\tdef".stripIndent());
+
+    // jagged indentation
+    assertEquals("abc\n def\nghi", "  abc\n   def\n  ghi".stripIndent());
+
+    // last line blank and affecting indentation
+    assertEquals("abc\n", " abc\n ".stripIndent());
+
+    // check only indentation is stripped, not other spaces
+    assertEquals("a b c\nd e f", "  a b c\n  d e f".stripIndent());
+
+    // check trailing space on last line
+    assertEquals("abc\n def", "  abc\n   def ".stripIndent());
+
+    // mixed whitespace
+    assertEquals(" abc\ndef", "  abc\n\tdef".stripIndent());
+    assertEquals("abc\n def", "\t abc\n\t  def".stripIndent());
+
+    // Mixed whitespace and line separators with jagged indentation.
+    assertEquals(
+        "abc\ndef\n\t\tghi\n  jkl\n", "  abc\n\t\tdef\r\n \t\t\tghi\r    jkl\n  ".stripIndent());
   }
 
   public void testUpperCase() {

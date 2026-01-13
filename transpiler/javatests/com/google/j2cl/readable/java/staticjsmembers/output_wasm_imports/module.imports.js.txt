@@ -12,6 +12,7 @@ function getImports() {
   'WebAssembly': WebAssembly,
   'imports': {
    '?.toString': (/** ? */ $instance, ) => $instance.toString(),
+   'Array.at$1': (/** !Array */ $instance, /** number */ index, ) => $instance.at(index, ),
    'Date.UTC': Date.UTC,
    'Date.constructor': () => new Date(),
    'Date.constructor$1': (/** number */ milliseconds, ) => new Date(milliseconds, ),
@@ -83,6 +84,7 @@ function getImports() {
    'btoa': btoa,
    'foo.Bar.baz': foo_Bar.baz,
    'foo.Baz.baz': foo_Baz.baz,
+   'get Array.length': (/** !Array */ $instance, ) => $instance.length,
    'get Error.captureStackTrace': () => Error.captureStackTrace,
    'get Error.stack': (/** !Error */ $instance, ) => $instance.stack,
    'get Math.PI': () => Math.PI,
@@ -119,6 +121,7 @@ function getImports() {
    'string.lastIndexOf$2': (/** string */ $instance, /** string */ str, /** number */ start, ) => $instance.lastIndexOf(str, start, ),
    'string.repeat$1': (/** string */ $instance, /** number */ count, ) => $instance.repeat(count, ),
    'string.replace$2': (/** string */ $instance, /** !RegExp */ regex, /** string */ replace, ) => $instance.replace(regex, replace, ),
+   'string.split$1': (/** string */ $instance, /** !RegExp */ regex, ) => $instance.split(regex, ),
    'string.toLocaleLowerCase': (/** string */ $instance, ) => $instance.toLocaleLowerCase(),
    'string.toLocaleUpperCase': (/** string */ $instance, ) => $instance.toLocaleUpperCase(),
    'string.toLowerCase': (/** string */ $instance, ) => $instance.toLowerCase(),

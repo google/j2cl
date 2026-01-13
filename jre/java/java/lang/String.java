@@ -27,10 +27,12 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.StringJoiner;
+import java.util.stream.Stream;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.JsUtils;
@@ -417,6 +419,10 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return length() == 0;
   }
 
+  public boolean isBlank() {
+    return isEmpty() || StringUtil.isWhitespace(this);
+  }
+
   public int lastIndexOf(int codePoint) {
     return lastIndexOf(fromCodePoint(codePoint));
   }
@@ -588,6 +594,20 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return out;
   }
 
+  public Stream<String> lines() {
+    String[] lines = splitLines();
+    int limit = lines.length;
+    // Drop the last line if it's empty.
+    if (lines.length > 0 && lines[lines.length - 1].isEmpty()) {
+      limit = lines.length - 1;
+    }
+    return Arrays.stream(lines, 0, limit);
+  }
+
+  private String[] splitLines() {
+    return asNativeString().split(new NativeRegExp("\r?\n|\r"));
+  }
+
   public boolean startsWith(String prefix) {
     return startsWith(prefix, 0);
   }
@@ -672,6 +692,54 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return start > 0 || end < length ? substring(start, end) : this;
   }
 
+  public String strip() {
+    return stripLeading().stripTrailing();
+  }
+
+  public String stripLeading() {
+    return StringUtil.stripLeading(this);
+  }
+
+  public String stripTrailing() {
+    return StringUtil.stripTrailing(this);
+  }
+
+  public String stripIndent() {
+    if (isEmpty()) {
+      return this;
+    }
+    String[] lines = splitLines();
+    int outdent = computeOutdent(lines);
+
+    for (int i = 0; i < lines.length; i++) {
+      // trim the end.
+      String line = lines[i].stripTrailing();
+      if (!line.isEmpty() && outdent > 0) {
+        line = outdent < line.length() ? line.substring(outdent) : "";
+      }
+      lines[i] = line;
+    }
+    return join("\n", lines);
+  }
+
+  private static int computeOutdent(String[] lines) {
+    int minLeadingWhitespace = Integer.MAX_VALUE;
+    for (int i = 0; i < lines.length; i++) {
+      String line = lines[i];
+      // Don't consider entirely blank lines, except for the last line.
+      if (i != lines.length - 1 && line.isBlank()) {
+        continue;
+      }
+      minLeadingWhitespace =
+          Math.min(minLeadingWhitespace, StringUtil.countLeadingWhitespace(line));
+      if (minLeadingWhitespace == 0) {
+        // Once we find a line that doesn't start with whitespace, we can stop.
+        return 0;
+      }
+    }
+    return minLeadingWhitespace;
+  }
+
   @JsType(isNative = true, name = "String", namespace = JsPackage.GLOBAL)
   private static class NativeString {
     public static native String fromCodePoint(int x);
@@ -693,6 +761,8 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     public native String repeat(int count);
 
     public native String replace(NativeRegExp regex, String replace);
+
+    public native String[] split(NativeRegExp regex);
 
     public native String substr(int beginIndex);
 
