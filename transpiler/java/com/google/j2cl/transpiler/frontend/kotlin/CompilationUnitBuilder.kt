@@ -341,13 +341,6 @@ internal class CompilationUnitBuilder(
   private fun convertFunction(irFunction: IrFunction): Method {
     val parameters = convertParameters(irFunction)
     val methodDescriptor = environment.getDeclaredMethodDescriptor(irFunction)
-    val body =
-      when {
-        // Confusingly external property accessor functions have a defined body. We'll ignore the
-        // body of any function that is external and rely on kotlinc to properly enforce this.
-        irFunction.body != null && !irFunction.isExternal -> convertBody(irFunction.body!!)
-        else -> Block.newBuilder().setSourcePosition(getSourcePosition(irFunction)).build()
-      }
     return Method.newBuilder()
       .setMethodDescriptor(methodDescriptor)
       .setSourcePosition(getNameSourcePosition(irFunction))
