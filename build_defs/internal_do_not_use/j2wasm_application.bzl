@@ -17,7 +17,8 @@ goog.module("%MODULE_NAME%.j2wasm");
 
 %IMPORTS%
 
-const options = { "builtins": ["js-string"] , "importedStringConstants": "'"'"'" }
+const jsConstructors = {};
+const options = { "builtins": ["js-string", "js-prototypes"] , "importedStringConstants": "'"'"'" }
 
 /**
  * Instantiates the web assembly module. This is the recommended way to load & instantate
@@ -33,6 +34,7 @@ async function instantiateStreaming(urlOrResponse) {
     // Shortcut for magic import case.
     const response = typeof urlOrResponse == "string" ? fetch(urlOrResponse) : urlOrResponse;
     const {instance} = await WebAssembly.instantiateStreaming(response, getImports(), options);
+    globalThis.j2wasmJsConstructors = jsConstructors;
     return instance;
   }
   const module = await compileStreaming(urlOrResponse);
@@ -65,7 +67,9 @@ async function compile(moduleBuffer) {
  * @suppress {checkTypes} Externs are missing overloads for WebAssembly.instantiate.
  */
 async function instantiate(module) {
-  return WebAssembly.instantiate(module, prepareImports(module));
+  const instance = await WebAssembly.instantiate(module, prepareImports(module));
+  globalThis.j2wasmJsConstructors = jsConstructors;
+  return instance;
 }
 
 /**
@@ -83,7 +87,9 @@ async function instantiate(module) {
  */
 function instantiateBlocking(moduleBuffer) {
   const module = new WebAssembly.Module(moduleBuffer, options);
-  return new WebAssembly.Instance(module, prepareImports(module));
+  const instance = new WebAssembly.Instance(module, prepareImports(module));
+  globalThis.j2wasmJsConstructors = jsConstructors;
+  return instance;
 }
 
 /**
@@ -142,6 +148,8 @@ def _impl_j2wasm_application(ctx):
     bundler_args.add_all(ctx.attr.defines, before_each = "-define")
     bundler_args.add("-output", ctx.outputs.wat)
     bundler_args.add("-jsimports", ctx.outputs.jsimports)
+    if feature_set == J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP:
+        bundler_args.add("-experimentalEnableWasmCustomDescriptorsJsInterop")
     ctx.actions.run(
         progress_message = "Bundling modules for Wasm %s" % ctx.label,
         # Note that all_modules also contains some files that are not

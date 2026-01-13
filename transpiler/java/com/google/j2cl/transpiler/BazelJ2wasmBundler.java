@@ -117,6 +117,12 @@ final class BazelJ2wasmBundler extends BazelWorker {
   @Option(name = "-define", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> defines = new HashMap<>();
 
+  @Option(
+      name = "-experimentalEnableWasmCustomDescriptorsJsInterop",
+      usage = "Enables JsInterop with custom descriptors for Wasm.",
+      hidden = true)
+  boolean enableCustomDescriptorsJsInterop = false;
+
   @Override
   protected void run() {
     emitModuleFile();
@@ -557,7 +563,11 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     writeToFile(
         jsimportPath.toString(),
-        ImmutableList.of(JsImportsGenerator.generateOutputs(requiredModules, jsImportsContents)),
+        ImmutableList.of(
+            JsImportsGenerator.generateOutputs(
+                requiredModules,
+                jsImportsContents,
+                /* enableJsInterop= */ enableCustomDescriptorsJsInterop)),
         problems);
   }
 

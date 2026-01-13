@@ -371,7 +371,10 @@ public class WasmGeneratorStage {
   }
 
   private void generateJsImportsFile() {
-    JsImportsGenerator.generateOutputs(output, environment.getJsImports());
+    JsImportsGenerator.generateOutputs(
+        output,
+        environment.getJsImports(),
+        /* enableJsInterop= */ enableCustomDescriptorsJsInterop);
   }
 
   private void generateJsExterns(Library library) {

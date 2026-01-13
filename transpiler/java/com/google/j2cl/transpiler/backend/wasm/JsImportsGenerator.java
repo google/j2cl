@@ -65,7 +65,7 @@ public final class JsImportsGenerator {
   }
 
   /** Generates the JavaScript code to support the imports. */
-  public static void generateOutputs(Output output, Imports imports) {
+  public static void generateOutputs(Output output, Imports imports, boolean enableJsInterop) {
     JsImportsGenerator importsGenerator = new JsImportsGenerator(imports);
     output.write(
         "imports.txt",
@@ -76,15 +76,18 @@ public final class JsImportsGenerator {
                     toImmutableMap(
                         JsMethodImport::getImportKey,
                         importsGenerator::createImportBody,
-                        (i1, i2) -> i1))));
+                        (i1, i2) -> i1)),
+            enableJsInterop));
   }
 
   /** Generates the JavaScript code to support the imports. */
   public static String generateOutputs(
-      Collection<String> requiredModules, Map<String, String> methodImports) {
+      Collection<String> requiredModules,
+      Map<String, String> methodImports,
+      boolean enableJsInterop) {
     SourceBuilder builder = new SourceBuilder();
     emitRequires(builder, requiredModules);
-    emitJsImports(builder, methodImports);
+    emitImportsFunction(builder, methodImports, enableJsInterop);
     builder.newLine(); // Ends in a new line for human readability.
     return builder.build();
   }
@@ -128,7 +131,8 @@ public final class JsImportsGenerator {
    * }
    * }</pre>
    */
-  private static void emitJsImports(SourceBuilder builder, Map<String, String> methodImports) {
+  private static void emitImportsFunction(
+      SourceBuilder builder, Map<String, String> methodImports, boolean enableJsInterop) {
     builder.newLine();
     builder.append("/** @return {!Object<string, *>} Wasm import object */");
     builder.newLine();
@@ -137,6 +141,19 @@ public final class JsImportsGenerator {
     builder.newLine();
     builder.append("return ");
     builder.openBrace();
+    if (enableJsInterop) {
+      builder.newLine();
+      builder.append("'env': ");
+      builder.openBrace();
+      builder.newLine();
+      // Emit the JS constructors list. This is populated by Wasm to include all the JS
+      // constructors. The variable `jsConstructors` must be defined by the outer
+      // j2wasm_application.
+      builder.append("'constructors': jsConstructors,");
+      builder.closeBrace();
+      builder.append(",");
+      emitJsPrototypeFactory(builder);
+    }
     builder.newLine();
     // Add WebAssembly module. This is needed because the import is hardcoded in
     // `generateWasmModule` and there is no corresponding code in the stb lib.
@@ -157,6 +174,22 @@ public final class JsImportsGenerator {
     builder.closeBrace();
     builder.append(";");
     builder.closeBrace();
+  }
+
+  /**
+   * Emits the JS prototype factory for JsInterop.
+   *
+   * <p>The prototype factory returns an empty object whenever any property is accessed. Wasm uses
+   * this object as the JavaScript prototype and populates it with the exported methods.
+   */
+  private static void emitJsPrototypeFactory(SourceBuilder builder) {
+    builder.newLine();
+    builder.appendLines(
+        "'prototypes': new Proxy({}, {",
+        "    get(target, prop, receiver) {",
+        "        return {};",
+        "    }",
+        "}),");
   }
 
   private String createImportBody(JsMethodImport methodImport) {

@@ -7,6 +7,14 @@ const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 /** @return {!Object<string, *>} Wasm import object */
 function getImports() {
  return {
+  'env': {
+   'constructors': jsConstructors,
+  },
+  'prototypes': new Proxy({}, {
+      get(target, prop, receiver) {
+          return {};
+      }
+  }),
   'WebAssembly': WebAssembly,
   'imports': {
    '?.toString': (/** ? */ $instance, ) => $instance.toString(),
