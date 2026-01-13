@@ -98,13 +98,13 @@ def _normalize_package(package):
 
 def _check_package_definition(package):
     if not package.startswith("//"):
-        fail("Package should start with //, but '%s' does not." % package)
+        fail("Packages should start with //, but '%s' does not." % package)
 
     if package.endswith("/"):
-        fail("Package end with /, but '%s' does." % package)
+        fail("Packages should not end with /, but '%s' does." % package)
 
     if ":" in package:
-        fail("Package should not include a label, but '%s' does." % package)
+        fail("Packages should not include a label, but '%s' does." % package)
 
     return package
 
