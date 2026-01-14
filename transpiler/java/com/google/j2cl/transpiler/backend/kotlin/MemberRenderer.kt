@@ -100,12 +100,11 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
   private fun source(companionObject: CompanionObject): Source =
     newLineSeparated(
-      objCNameRenderer.objCAnnotationSource(companionObject),
       spaceSeparated(
         COMPANION_KEYWORD,
         OBJECT_KEYWORD,
         block(emptyLineSeparated(companionObject.members.map { source(it) })),
-      ),
+      )
     )
 
   internal fun memberSource(member: JavaMember): Source =

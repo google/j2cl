@@ -71,7 +71,6 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
           nativeTypeSource(typeDeclaration)
         } else {
           newLineSeparated(
-            objCNameRenderer.objCAnnotationSource(typeDeclaration),
             objCNameRenderer.objectiveCAnnotationSource(typeDeclaration),
             jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
             autoValueAnnotationsSource(typeDeclaration),

@@ -24,7 +24,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
-import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
@@ -80,28 +79,6 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )
-
-  fun objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    when {
-      !isJ2ObjCInteropEnabled -> Source.EMPTY
-      hiddenFromObjCMapping.contains(typeDeclaration) -> hiddenFromObjCAnnotationSource()
-      needsObjCNameAnnotation(typeDeclaration) ->
-        objCNameAnnotationSource(
-          typeDeclaration.objCName(nameRenderer.objCNamePrefix),
-          swiftName = typeDeclaration.objCNameWithoutPrefix,
-          exact = true,
-        )
-      else -> Source.EMPTY
-    }
-
-  fun objCAnnotationSource(companionObject: CompanionObject): Source =
-    Source.emptyUnless(isJ2ObjCInteropEnabled && needsObjCNameAnnotation(companionObject)) {
-      objCNameAnnotationSource(
-        companionObject.declaration.objCName(nameRenderer.objCNamePrefix),
-        swiftName = companionObject.declaration.objCNameWithoutPrefix,
-        exact = true,
-      )
-    }
 
   fun objCAnnotationSource(methodDescriptor: MethodDescriptor): Source =
     Source.emptyIf(

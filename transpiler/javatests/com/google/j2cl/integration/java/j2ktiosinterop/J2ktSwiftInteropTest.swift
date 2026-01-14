@@ -134,16 +134,16 @@ final class J2ktSwiftInteropTest: XCTestCase {
     obj.customObjectiveCSwiftStringMethod(with: "")
     obj.customSwiftStringMethod(with: "")
 
-    CustomCompanion.shared.customStaticMethod()
-    CustomCompanion.shared.customStaticIntMethod(WithIndex: 1)
-    CustomCompanion.shared.customStaticIntStringMethod(WithIndex: 1, name: "")
+    Custom.Companion.shared.customStaticMethod()
+    Custom.Companion.shared.customStaticIntMethod(WithIndex: 1)
+    Custom.Companion.shared.customStaticIntStringMethod(WithIndex: 1, name: "")
 
-    CustomCompanion.shared.customStaticLongMethod(withLong: 1)
-    CustomCompanion.shared.customStaticLongStringMethod(withLong: 1, with: "")
+    Custom.Companion.shared.customStaticLongMethod(withLong: 1)
+    Custom.Companion.shared.customStaticLongStringMethod(withLong: 1, with: "")
 
     // TODO(b/441689301): Unsupported because of https://youtrack.jetbrains.com/issue/KT-80557
     // obj.lowercase("")
-    // CustomCompanion.shared.staticlowercase("")
+    // Custom.Companion.shared.staticlowercase("")
   }
 
   func testEnumNames() {
