@@ -196,6 +196,10 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor kotlinCoroutinesContinuation;
 
   @Nullable
+  @QualifiedBinaryName("kotlin.Unit")
+  public DeclaredTypeDescriptor kotlinUnit;
+
+  @Nullable
   @QualifiedBinaryName("kotlin.jvm.internal.NothingStub")
   public DeclaredTypeDescriptor kotlinNothing;
 
@@ -409,6 +413,10 @@ public class TypeDescriptors {
 
   public static boolean isJavaLangThrowable(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isSameBaseType(get().javaLangThrowable);
+  }
+
+  public static boolean isKotlinUnit(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isSameBaseType(get().kotlinUnit);
   }
 
   public static boolean isKotlinNothing(TypeDescriptor typeDescriptor) {

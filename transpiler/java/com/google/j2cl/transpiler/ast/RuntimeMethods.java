@@ -80,6 +80,18 @@ public final class RuntimeMethods {
         : methodDescriptor.toBuilder().setStatic(true).build();
   }
 
+  public static Expression getKotlinUnitInstance() {
+    return FieldAccess.newBuilder()
+        .setTarget(
+            FieldDescriptor.newBuilder()
+                .setEnclosingTypeDescriptor(TypeDescriptors.get().kotlinUnit)
+                .setTypeDescriptor(TypeDescriptors.get().kotlinUnit)
+                .setName("INSTANCE")
+                .setStatic(true)
+                .build())
+        .build();
+  }
+
   /** Create a call to the Arrays.$stampType method. */
   public static MethodCall createArraysStampTypeMethodCall(
       Expression array, ArrayTypeDescriptor arrayTypeDescriptor) {

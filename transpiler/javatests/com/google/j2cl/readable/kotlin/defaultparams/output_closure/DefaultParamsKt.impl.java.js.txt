@@ -17,6 +17,7 @@ let InnerClass = goog.forwardDeclare('defaultparams.OuterClass.InnerClass$impl')
 let Subclass = goog.forwardDeclare('defaultparams.Subclass$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
@@ -63,20 +64,29 @@ class DefaultParamsKt extends j_l_Object {
  static m_extFun__defaultparams_DefaultParams__void(/** !DefaultParams */ this_1) {
   DefaultParamsKt.$clinit();
   DefaultParams.m_foo$default__defaultparams_DefaultParams__int__void(this_1, /**@type {number}*/ (undefined));
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static m_extFunWithDefault__defaultparams_DefaultParams__int__void(/** !DefaultParams */ this_1, /** number */ c) {
   DefaultParamsKt.$clinit();
   this_1.m_foo__int__void(c);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static m_extFunWithDefault$default__defaultparams_DefaultParams__int__void(/** !DefaultParams */ this_1, /** number= */ c) {
   DefaultParamsKt.$clinit();
   let c$defaulted = $Util.$isUndefined(c) ? -1 : c;
   DefaultParamsKt.m_extFunWithDefault__defaultparams_DefaultParams__int__void(this_1, c$defaulted);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static m_testExtFun__void() {
@@ -174,7 +184,10 @@ class DefaultParamsKt extends j_l_Object {
    return DefaultParamsKt.m_identityOrCreate$default__java_lang_Object__java_lang_Object__java_lang_Object(/**@type {string}*/ ($Util.$coerceToNull(nonNullStr)), undefined);
   })) : c;
   DefaultParamsKt.m_nestedDefaultCall__java_lang_String__java_lang_String__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function0__void(str, nonNullStr, a$defaulted, b$defaulted, c$defaulted);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static m_testDefaultInitializerCallsWithDefaults__void() {
@@ -190,7 +203,10 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.$clinit();
   let a$defaulted = $Util.$isUndefined(a) ? Integer.valueOf(1) : a;
   DefaultParamsKt.m_boxing__java_lang_Integer__void(a$defaulted);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts @return {number} */
  static m_capturedBoxing__java_lang_Integer__int(/** Integer */ a) {
@@ -223,7 +239,10 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.$clinit();
   let args$defaulted = $Util.$isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)) : args;
   DefaultParamsKt.m_optionalVarargs__arrayOf_int__void(args$defaulted);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static m_varargsWithTrailingOptional__arrayOf_int__int__void(/** !Array<number> */ args, /** number */ optional) {
@@ -234,7 +253,10 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.$clinit();
   let optional$defaulted = $Util.$isUndefined(optional) ? 10 : optional;
   DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(args, optional$defaulted);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static m_varargsWithLeadingOptional__int__arrayOf_int__void(/** number */ optional, /** !Array<number> */ args) {
@@ -245,7 +267,10 @@ class DefaultParamsKt extends j_l_Object {
   DefaultParamsKt.$clinit();
   let optional$defaulted = $Util.$isUndefined(optional) ? 10 : optional;
   DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(optional$defaulted, args);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(/** number */ optional, /** !Array<number> */ args) {
@@ -257,7 +282,10 @@ class DefaultParamsKt extends j_l_Object {
   let optional$defaulted = $Util.$isUndefined(optional) ? 10 : optional;
   let args$defaulted = $Util.$isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)) : args;
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(optional$defaulted, args$defaulted);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static m_testVarargs__void() {
@@ -330,6 +358,7 @@ class DefaultParamsKt extends j_l_Object {
   Subclass = goog.module.get('defaultparams.Subclass$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

@@ -1,0 +1,42 @@
+goog.module('voidtypes.UnitProvider$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class UnitProvider extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!UnitProvider} */
+ static $create__() {
+  UnitProvider.$clinit();
+  let $instance = new UnitProvider();
+  $instance.$ctor__voidtypes_UnitProvider__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__voidtypes_UnitProvider__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_provide__void() {}
+ /** @nodts */
+ static $clinit() {
+  UnitProvider.$clinit = () =>{};
+  UnitProvider.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof UnitProvider;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(UnitProvider, 'voidtypes.UnitProvider');
+
+exports = UnitProvider;
+
+//# sourceMappingURL=UnitProvider.js.map

@@ -165,8 +165,8 @@ private val loweringPhase = loweringPhase {
   // Cleanup IMPLICIT_CAST operations introduced by smart casts that are not needed.
   perFileLowering(::SmartCastCleaner)
   perFileLowering(::BridgeLowering)
-  // Lowers calls to functions that return unit into a block of the call and a unit object ref.
-  perFileLowering(::KotlinUnitValueLowering)
+  // Adds explicit return to all Unit functions and ensures all calls to them have a Unit result.
+  moduleLowering(::UnitLowering)
   // Replaces IrExpressionBody with IrBlockBody returning the expression.
   perFileLowering(::ExpressionBodyTransformer)
   // Place calls that return `Nothing` calls into a synthetic block of `{ foo(); Unit }`.

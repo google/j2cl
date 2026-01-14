@@ -3,6 +3,7 @@ goog.module('nativejstypes.Bar.Companion$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let Bar = goog.forwardDeclare('nativejstypes.Bar');
 let $Overlay = goog.forwardDeclare('nativejstypes.Bar.$Overlay$impl');
 
@@ -27,7 +28,10 @@ class Companion extends j_l_Object {
  /** @final @nodts */
  m_getStatic__void() {
   Bar.getStatic();
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @final @nodts @return {number} */
  m_product__int() {
@@ -51,6 +55,7 @@ class Companion extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Unit = goog.module.get('kotlin.Unit$impl');
   Bar = goog.module.get('nativejstypes.Bar');
   $Overlay = goog.module.get('nativejstypes.Bar.$Overlay$impl');
  }

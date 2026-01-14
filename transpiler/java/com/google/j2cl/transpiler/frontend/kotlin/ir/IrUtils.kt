@@ -610,6 +610,9 @@ private val IrFunction.isPropertyGetter: Boolean
 val IrFunction.hasVoidReturn: Boolean
   get() = returnType.isUnit() && !isPropertyGetter
 
+val IrFunction.isLambda: Boolean
+  get() = origin == IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
+
 fun IrFunction.resolveName(jvmBackendContext: JvmBackendContext): String? =
   when (this) {
     is IrConstructor -> null

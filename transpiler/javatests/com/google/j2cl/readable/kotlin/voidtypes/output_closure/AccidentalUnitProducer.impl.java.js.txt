@@ -1,0 +1,55 @@
+goog.module('voidtypes.AccidentalUnitProducer$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Producer = goog.require('voidtypes.Producer$impl');
+const UnitProvider = goog.require('voidtypes.UnitProvider$impl');
+
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+
+/**
+ * @final
+ * @implements {Producer<!Unit>}
+ */
+class AccidentalUnitProducer extends UnitProvider {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AccidentalUnitProducer} */
+ static $create__() {
+  AccidentalUnitProducer.$clinit();
+  let $instance = new AccidentalUnitProducer();
+  $instance.$ctor__voidtypes_AccidentalUnitProducer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__voidtypes_AccidentalUnitProducer__void() {
+  this.$ctor__voidtypes_UnitProvider__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Unit} */
+ m_provide__java_lang_Object() {
+  return (this.m_provide__void(), Unit.f_INSTANCE__kotlin_Unit);
+ }
+ /** @nodts */
+ static $clinit() {
+  AccidentalUnitProducer.$clinit = () =>{};
+  AccidentalUnitProducer.$loadModules();
+  UnitProvider.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AccidentalUnitProducer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Unit = goog.module.get('kotlin.Unit$impl');
+ }
+}
+Producer.$markImplementor(AccidentalUnitProducer);
+$Util.$setClassMetadata(AccidentalUnitProducer, 'voidtypes.AccidentalUnitProducer');
+
+exports = AccidentalUnitProducer;
+
+//# sourceMappingURL=AccidentalUnitProducer.js.map

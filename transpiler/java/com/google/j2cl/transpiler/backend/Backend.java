@@ -187,6 +187,7 @@ import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNonreferencedNativeMethods;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
+import com.google.j2cl.transpiler.passes.RemoveReturnValuesFromVoidMethods;
 import com.google.j2cl.transpiler.passes.RemoveUnnecessaryLabels;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCastsJ2kt;
@@ -231,6 +232,7 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           EvaluateCompileTimeConstants::new,
+          RemoveReturnValuesFromVoidMethods::new,
           RemoveUnneededNotNullChecks::new,
 
           // Early run of determining whether variables are effectively final so that passes that
@@ -433,6 +435,7 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           EvaluateCompileTimeConstants::new,
+          RemoveReturnValuesFromVoidMethods::new,
           // Early run of determining whether variables are effectively final so that passes that
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
@@ -593,6 +596,7 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           EvaluateCompileTimeConstants::new,
+          RemoveReturnValuesFromVoidMethods::new,
           // Early run of determining whether variables are effectively final so that passes that
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
@@ -744,6 +748,7 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           EvaluateCompileTimeConstants::new,
+          RemoveReturnValuesFromVoidMethods::new,
           // ImplementRecordClasses needs to run before DesugarInstanceOfPatterns.
           ImplementRecordClasses::new,
           // Desugar instanceof patterns needs to run before any pass that uses

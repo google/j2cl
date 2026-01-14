@@ -51,7 +51,9 @@ class SuspendFunctionKt extends j_l_Object {
    (yield* SuspendFunctionKt.m_consumeSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__kotlin_internal_j2cl_SuspendFunction1__void_$s_($continuation_1, 'Inner', SuspendFunction1.$adapt(/**  @return {!Generator<*, ?>}*/ (function* (/** Continuation<?> */ $continuation_2, /** ? */ it_2) {
     let it_3 = /**@type {string}*/ ($Casts.$to(it_2, j_l_String));
     (yield* suspendable.m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation_2, ''));
+    return Unit.f_INSTANCE__kotlin_Unit;
    }))));
+   return Unit.f_INSTANCE__kotlin_Unit;
   }))));
  }
  /** @nodts @return {!Generator<*, void>} */
@@ -83,11 +85,11 @@ class SuspendFunctionKt extends j_l_Object {
   let testIsActive = function* (/** Continuation<?> */ $continuation, /** string */ foo) {};
   SuspendFunctionKt.m_extFunOnSuspendLambda__kotlin_internal_j2cl_SuspendFunction1__void(SuspendFunction1.$adapt(/**  @return {!Generator<*, !Unit>}*/ (function* (/** Continuation<?> */ arg0, /** string */ arg1) {
    let arg1_1 = /**@type {string}*/ ($Casts.$to(arg1, j_l_String));
-   return (yield* testIsActive(arg0, arg1_1));
+   return ((yield* testIsActive(arg0, arg1_1)), Unit.f_INSTANCE__kotlin_Unit);
   })));
   let suspendFunReference = SuspendFunction1.$adapt(/**  @return {!Generator<*, !Unit>}*/ (function* (/** Continuation<?> */ arg0_1, /** string */ arg1_2) {
    let arg1_3 = /**@type {string}*/ ($Casts.$to(arg1_2, j_l_String));
-   return (yield* testIsActive(arg0_1, arg1_3));
+   return ((yield* testIsActive(arg0_1, arg1_3)), Unit.f_INSTANCE__kotlin_Unit);
   }));
   SuspendFunctionKt.m_extFunOnSuspendLambda__kotlin_internal_j2cl_SuspendFunction1__void(suspendFunReference);
  }

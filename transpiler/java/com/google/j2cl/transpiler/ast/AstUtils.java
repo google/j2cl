@@ -627,9 +627,18 @@ public final class AstUtils {
       SourcePosition sourcePosition,
       Expression expression,
       TypeDescriptor methodReturnTypeDescriptor) {
-
     if (TypeDescriptors.isPrimitiveVoid(methodReturnTypeDescriptor)) {
       return expression.makeStatement(sourcePosition);
+    }
+
+    // We may hit a Kotlin rough edge where Kotlin needs Unit to be returned, but expression has a
+    // void type. In which case we can just use a multi-expression: (expression, Unit.INSTANCE)
+    if (TypeDescriptors.isPrimitiveVoid(expression.getTypeDescriptor())
+        && TypeDescriptors.isKotlinUnit(methodReturnTypeDescriptor)) {
+      expression =
+          MultiExpression.newBuilder()
+              .addExpressions(expression, RuntimeMethods.getKotlinUnitInstance())
+              .build();
     }
 
     return ReturnStatement.newBuilder()

@@ -81,6 +81,9 @@ fun unitLambdas() {
     }
     return@consumeGenericJsFunction
   }
+  consumeGenericJsFunction {
+    return@consumeGenericJsFunction a()
+  }
 
   consumeUnitJsFunction { f() }
   consumeUnitJsFunction(::f)
@@ -90,6 +93,9 @@ fun unitLambdas() {
       a == b -> return@consumeUnitJsFunction
     }
     return@consumeUnitJsFunction
+  }
+  consumeUnitJsFunction {
+    return@consumeUnitJsFunction a()
   }
 }
 
@@ -117,6 +123,12 @@ fun consumeUnitJsFunction(f: UnitJsFunction) = f()
 class UnitProducer : Producer<Unit> {
   override fun provide() {}
 }
+
+open class UnitProvider {
+  fun provide() {}
+}
+
+class AccidentalUnitProducer : UnitProvider(), Producer<Unit>
 
 class UnitConsumer : Consumer<Unit> {
   override fun consume(value: Unit) {}

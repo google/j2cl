@@ -17,6 +17,7 @@ let Predicate = goog.forwardDeclare('java.util.function.Predicate$impl');
 let UnaryOperator = goog.forwardDeclare('java.util.function.UnaryOperator$impl');
 let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
@@ -48,7 +49,10 @@ class IntListFromScratch extends j_l_Object {
  /** @override */
  clear() {
   this.f_contents__primitivespecialization_IntListFromScratch_.clear();
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @override @return {boolean} */
  addAll(/** !Collection<?> */ elements) {
@@ -61,7 +65,10 @@ class IntListFromScratch extends j_l_Object {
  /** @nodts */
  m_add__int__int__void(/** number */ index, /** number */ element) {
   this.f_contents__primitivespecialization_IntListFromScratch_.addAtIndex(index, Integer.valueOf(element));
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts @return {boolean} */
  m_add__int__boolean(/** number */ element) {
@@ -257,6 +264,7 @@ class IntListFromScratch extends j_l_Object {
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   Collection = goog.module.get('java.util.Collection$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }

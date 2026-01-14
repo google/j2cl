@@ -95,14 +95,12 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getNameSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
-import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAdaptedFunctionReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClinit
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionOrSuspendFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSuperCall
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isUnitInstanceReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveLabel
 import com.google.j2cl.transpiler.frontend.kotlin.ir.sanitizedName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
@@ -115,7 +113,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitchCase
 import org.jetbrains.kotlin.backend.common.descriptors.synthesizedName
 import org.jetbrains.kotlin.backend.common.ir.isBytecodeGenerationSuppressed
 import org.jetbrains.kotlin.backend.jvm.MultifileFacadeFileEntry
-import org.jetbrains.kotlin.backend.jvm.isMultifileBridge
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrAnonymousInitializer
@@ -546,21 +543,8 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertReturnStatement(irReturn: IrReturn): Statement {
-    val returnTarget = (irReturn.returnTargetSymbol as IrFunctionSymbol).owner
-    val value =
-      // If the method return type should be represented as a void, omit the return value of Unit.
-      // (Except muti-file bridge methods which are not lowered and it is not safe to drop their
-      // return value.)
-      if (returnTarget.hasVoidReturn && !returnTarget.isMultifileBridge()) {
-        check(irReturn.value.isUnitInstanceReference) {
-          "Methods with a void return type should have been lowered to only return Unit.INSTANCE"
-        }
-        null
-      } else {
-        irReturn.value
-      }
     return ReturnStatement.newBuilder()
-      .setExpression(value?.let { convertExpression(it) })
+      .setExpression(convertExpression(irReturn.value))
       .setSourcePosition(getSourcePosition(irReturn))
       .build()
   }
@@ -1454,6 +1438,7 @@ internal class CompilationUnitBuilder(
     check(typeDescriptor.isFunctionalInterface)
     val irFunction = irFunctionExpression.function
     val parameters = convertParameters(irFunction)
+
     val body =
       irFunction.body?.let { convertBody(it) }
         ?: Block.newBuilder().setSourcePosition(getSourcePosition(irFunction)).build()

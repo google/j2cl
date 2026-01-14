@@ -19,6 +19,7 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
+import com.google.j2cl.integration.testing.AssertsBase.assertTrue
 import jsinterop.annotations.JsFunction
 
 fun main(vararg unused: String) {
@@ -67,19 +68,17 @@ fun testUnitGetterWithSideEffects() {
 }
 
 fun testGenericUnitLambdas() {
-  // TODO(b/466125631): enable these tests once the bug is fixed.
-  // genericFunExpectingUnitBlock {}
-  // genericFunExpectingUnitBlock {
-  //   return@genericFunExpectingUnitBlock
-  // }
-  // genericFunExpectingUnitBlock(::unitFun)
+  genericFunExpectingUnitBlock {}
+  genericFunExpectingUnitBlock {
+    return@genericFunExpectingUnitBlock
+  }
+  genericFunExpectingUnitBlock(::unitFun)
   genericFunExpectingUnitBlock(::unitField)
-  // TODO(b/466125631): enable these tests once the bug is fixed.
-  // genericFunExpectingJsFunctionReturningUnit {}
-  // genericFunExpectingJsFunctionReturningUnit {
-  //   return@genericFunExpectingJsFunctionReturningUnit
-  // }
-  // genericFunExpectingJsFunctionReturningUnit(::unitFun)*/
+  genericFunExpectingJsFunctionReturningUnit {}
+  genericFunExpectingJsFunctionReturningUnit {
+    return@genericFunExpectingJsFunctionReturningUnit
+  }
+  genericFunExpectingJsFunctionReturningUnit(::unitFun)
   genericFunExpectingJsFunctionReturningUnit(::unitField)
 }
 
@@ -113,52 +112,50 @@ fun testUnitBlock() {
 }
 
 fun testUnitSpecialization() {
-  // TODO(b/466125631): enable these tests once the bug is fixed.
-  // val unitHolder = UnitHolder(Unit)
-  // assertSame(Unit, unitHolder.getValue())
-  // val holder: Holder<out Unit> = UnitHolder(Unit)
-  // assertSame(Unit, holder.getValue())
-  //
-  // val unitList = UnitList()
-  // unitList.add(Unit)
-  // unitList.add(Unit)
-  // unitList.add(Unit)
-  //
-  // assertEquals(3, unitList.size)
-  // assertTrue(unitList.contains(Unit))
-  // assertEquals(0, unitList.indexOf(Unit))
-  // assertEquals(2, unitList.lastIndexOf(Unit))
-  // assertSame(Unit, unitList[1])
-  //
-  // val anyList = unitList as List<Any>
-  // assertFalse(anyList.contains(Any()))
-  // assertTrue(anyList.contains(Unit))
-  // assertEquals(-1, unitList.indexOf(Any()))
-  // assertEquals(0, unitList.indexOf(Unit))
+  val unitHolder = UnitHolder(Unit)
+  assertSame(Unit, unitHolder.getValue())
+  val holder: Holder<out Unit> = UnitHolder(Unit)
+  assertSame(Unit, holder.getValue())
+
+  val unitList = UnitList()
+  unitList.add(Unit)
+  unitList.add(Unit)
+  unitList.add(Unit)
+
+  assertEquals(3, unitList.size)
+  assertTrue(unitList.contains(Unit))
+  assertEquals(0, unitList.indexOf(Unit))
+  assertEquals(2, unitList.lastIndexOf(Unit))
+  assertSame(Unit, unitList[1])
+
+  val anyList = unitList as List<Any>
+  assertFalse(anyList.contains(Any()))
+  assertTrue(anyList.contains(Unit))
+  assertEquals(-1, unitList.indexOf(Any()))
+  assertEquals(0, unitList.indexOf(Unit))
 }
 
-// TODO(b/466125631): enable these tests once the bug is fixed.
-// private interface Holder<T> {
-//   fun getValue(): T
-// }
-//
-// private class UnitHolder(private val v: Unit) : Holder<Unit> {
-//   override fun getValue() = v
-// }
-//
-// class UnitList : ArrayList<Unit>() {
-//   override fun lastIndexOf(element: Unit): Int = super.lastIndexOf(element)
-//
-//   override fun indexOf(element: Unit): Int = super.indexOf(element)
-//
-//   override fun containsAll(elements: Collection<Unit>): Boolean = super.containsAll(elements)
-//
-//   override fun contains(element: Unit): Boolean = super.contains(element)
-//
-//   override fun removeAt(element: Int): Unit = super.removeAt(element)
-//
-//   override fun get(index: Int): Unit = super.get(index)
-// }
+private interface Holder<T> {
+  fun getValue(): T
+}
+
+private class UnitHolder(private val v: Unit) : Holder<Unit> {
+  override fun getValue() = v
+}
+
+class UnitList : ArrayList<Unit>() {
+  override fun lastIndexOf(element: Unit): Int = super.lastIndexOf(element)
+
+  override fun indexOf(element: Unit): Int = super.indexOf(element)
+
+  override fun containsAll(elements: Collection<Unit>): Boolean = super.containsAll(elements)
+
+  override fun contains(element: Unit): Boolean = super.contains(element)
+
+  override fun removeAt(element: Int): Unit = super.removeAt(element)
+
+  override fun get(index: Int): Unit = super.get(index)
+}
 
 fun testNothingCast() {
   assertThrowsClassCastException {

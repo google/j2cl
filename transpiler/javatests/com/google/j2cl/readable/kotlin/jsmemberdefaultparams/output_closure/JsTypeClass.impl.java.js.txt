@@ -3,6 +3,7 @@ goog.module('jsmemberdefaultparams.JsTypeClass$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 /**
@@ -39,7 +40,10 @@ class JsTypeClass extends j_l_Object {
  static m_publicMethod$default__jsmemberdefaultparams_JsTypeClass__int__void(/** !JsTypeClass */ $this, /** number= */ param) {
   let param$defaulted = $Util.$isUndefined(param) ? 2 : param;
   $this.publicMethod(param$defaulted);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @final @nodts */
  m_privateMethod__int__void_$p_jsmemberdefaultparams_JsTypeClass(/** number */ param) {}
@@ -47,7 +51,10 @@ class JsTypeClass extends j_l_Object {
  static m_privateMethod$default__jsmemberdefaultparams_JsTypeClass__int__void(/** !JsTypeClass */ $this, /** number= */ param) {
   let param$defaulted = $Util.$isUndefined(param) ? 3 : param;
   $this.m_privateMethod__int__void_$p_jsmemberdefaultparams_JsTypeClass(param$defaulted);
-  return;
+  {
+   Unit.f_INSTANCE__kotlin_Unit;
+   return;
+  }
  }
  /** @nodts */
  static $clinit() {
@@ -61,7 +68,9 @@ class JsTypeClass extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  Unit = goog.module.get('kotlin.Unit$impl');
+ }
 }
 $Util.$setClassMetadata(JsTypeClass, 'jsmemberdefaultparams.JsTypeClass');
 
