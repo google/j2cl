@@ -185,7 +185,12 @@ public class WasmGeneratorStage {
 
     emitToFile(
         "imports.wat",
-        generator -> generator.emitForEachType(library, generator::renderImportedMethods));
+        generator -> {
+          if (enableCustomDescriptorsJsInterop) {
+            generator.emitForEachType(library, generator::renderJsPrototypeImport);
+          }
+          generator.emitForEachType(library, generator::renderImportedMethods);
+        });
 
     emitToFile(
         "contents.wat",
@@ -269,6 +274,9 @@ public class WasmGeneratorStage {
 
     // Emit imports.
     generator.emitImportsForBinaryenIntrinsics();
+    if (enableCustomDescriptorsJsInterop) {
+      generator.emitForEachType(library, generator::renderJsPrototypeImport);
+    }
     generator.emitForEachType(library, generator::renderImportedMethods);
     generator.emitExceptionTag();
 

@@ -538,7 +538,13 @@ public class WasmGenerationEnvironment {
    * and configureAll.
    */
   public static boolean isJsExport(TypeDeclaration typeDeclaration) {
-    // TODO(b/472552019): Determine what types should be exported.
-    return typeDeclaration.getQualifiedSourceName().equals("java.lang.Object");
+    // TODO(b/472552019): Determine what types should be exported and remove any test types here.
+    return typeDeclaration.getQualifiedSourceName().equals("java.lang.Object")
+        || typeDeclaration.getQualifiedSourceName().equals("jstype.SomeJsType");
+  }
+
+  /** Returns the name of the global that stores the JS prototype for JsTypes. */
+  public String getJsPrototypeGlobalName(TypeDeclaration typeDeclaration) {
+    return format("$%s.proto", typeDeclaration.getQualifiedSourceName());
   }
 }

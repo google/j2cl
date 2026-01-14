@@ -292,11 +292,18 @@ public class WasmConstructsGenerator {
         // Interface vtables are not custom descriptors.
         /* descriptorClause= */ type.isInterface()
             ? null
-            : format("describes %s ", environment.getWasmTypeName(type.getTypeDescriptor())),
+            : format("describes %s", environment.getWasmTypeName(type.getTypeDescriptor())),
         () -> renderVtableEntries(methods));
   }
 
   private void renderVtableEntries(Collection<MethodDescriptor> methodDescriptors) {
+    if (environment.isCustomDescriptorsJsInteropEnabled()) {
+      // The first entry of the vtable is the JS prototype. This is used to export JsTypes to JS.
+      // Because all types extend j.l.Object, they must have this first field to allow vtables to
+      // extend each other.
+      builder.newLine();
+      builder.append("(field $js_prototype (ref null extern))");
+    }
     methodDescriptors.forEach(
         m -> {
           builder.newLine();
@@ -342,6 +349,15 @@ public class WasmConstructsGenerator {
       builder.newLine();
       builder.append(")");
     }
+  }
+
+  void renderJsPrototypeImport(Type type) {
+    if (!WasmGenerationEnvironment.isJsExport(type.getDeclaration())) {
+      return;
+    }
+    String name = environment.getJsPrototypeGlobalName(type.getDeclaration());
+    builder.newLine();
+    builder.append(format("(import \"prototypes\" \"%s\" (global %s (ref extern)))", name, name));
   }
 
   void renderImportedMethods(Type type) {
@@ -515,7 +531,7 @@ public class WasmConstructsGenerator {
         type,
         /* structNamer= */ environment::getWasmTypeName,
         /* descriptorClause= */ format(
-            "descriptor %s ", environment.getWasmVtableTypeName(type.getTypeDescriptor())),
+            "descriptor %s", environment.getWasmVtableTypeName(type.getTypeDescriptor())),
         () -> renderTypeFields(type));
   }
 
@@ -695,6 +711,16 @@ public class WasmConstructsGenerator {
     builder.append(format("(struct.new %s", environment.getWasmVtableTypeName(implementedType)));
 
     builder.indent();
+    if (environment.isCustomDescriptorsJsInteropEnabled()) {
+      // The first field of the vtable for JsTypes is the JS prototype.
+      builder.newLine();
+      if (WasmGenerationEnvironment.isJsExport(implementedType)) {
+        builder.append(
+            format("(global.get %s)", environment.getJsPrototypeGlobalName(implementedType)));
+      } else {
+        builder.append("(ref.null extern)");
+      }
+    }
     methodDescriptors.forEach(
         m -> {
           builder.newLine();
