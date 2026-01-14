@@ -28,8 +28,11 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class JsMethodExample {
- @JsMethod
- external open fun <T: ArrayList<String?>?> testMethod(): T
+ companion object {
+  @JvmStatic
+  @JsMethod
+  external fun <T: ArrayList<String?>?> testMethod(): T
+ }
 
  abstract class Base<T> internal constructor() {
   @JsMethod(name = "m")

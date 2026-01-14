@@ -10,5 +10,8 @@ package(
 
 readable_example(
     srcs = glob(["*.kt"]),
-    deps = ["//third_party:jsinterop-annotations-j2cl"],
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
+    ],
 )
