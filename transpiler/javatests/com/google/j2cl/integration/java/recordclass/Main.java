@@ -43,6 +43,7 @@ public class Main {
     testUnconditionalPatterns();
     testRecordPatternEvaluationOrder();
     testExceptionInPattern();
+    testCompactConstructorWithComponentReferences();
   }
 
   public static void testAccessors() {
@@ -429,5 +430,35 @@ public class Main {
 
   private static void testExceptionInPattern() {
     // TODO(b/466212492): Remove the stripping once the bug is fixed.
+  }
+
+  private static void testCompactConstructorWithComponentReferences() {
+
+    record R(String s) {
+      R {
+        // Make sure that references to component fields that are not assignments do not prevent
+        // the synthesis of the the implicit component initialization. If that were to happen the
+        // test case above would fail.
+        Runnable r =
+            () -> {
+              var unused = R.this.s;
+            };
+        class Class {
+          void m() {
+            var unused = R.this.s;
+          }
+        }
+        var unused =
+            new Object() {
+              void m() {
+                var unused2 = R.this.s;
+              }
+            };
+      }
+    }
+
+    R r = new R("Hello");
+    // Ensure that the component field was initialized.
+    assertEquals("Hello", r.s);
   }
 }
