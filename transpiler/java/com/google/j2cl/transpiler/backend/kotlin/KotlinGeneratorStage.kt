@@ -46,7 +46,6 @@ class KotlinGeneratorStage(
   private val problems: Problems,
   private val objCNamePrefix: String,
 ) {
-  private val hiddenFromObjCMapping: HiddenFromObjCMapping = HiddenFromObjCMapping()
 
   /** Generate outputs for a library. */
   fun generateOutputs(library: Library) {
@@ -71,7 +70,7 @@ class KotlinGeneratorStage(
 
   /** Generate ObjC outputs for a compilation unit. */
   private fun generateObjCOutputs(compilationUnit: CompilationUnit) {
-    val source = J2ObjCCompatRenderer(objCNamePrefix, hiddenFromObjCMapping).source(compilationUnit)
+    val source = J2ObjCCompatRenderer(objCNamePrefix).source(compilationUnit)
     if (source.isNotEmpty()) {
       val path = compilationUnit.packageRelativePath.replace(".java", "+J2ObjCCompat.h")
       output.write(path, source.buildString())
@@ -84,7 +83,6 @@ class KotlinGeneratorStage(
 
     val environment =
       Environment(
-        hiddenFromObjCMapping = hiddenFromObjCMapping,
         nameToIdentifierMap = nameToIdentifierMap,
         identifierSet = nameToIdentifierMap.values.toSet(),
         privateAsKtInternalDeclarationMemberDescriptorSet =

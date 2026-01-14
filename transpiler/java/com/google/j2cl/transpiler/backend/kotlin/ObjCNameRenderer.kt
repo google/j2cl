@@ -38,9 +38,6 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   private val environment: Environment
     get() = nameRenderer.environment
 
-  private val hiddenFromObjCMapping: HiddenFromObjCMapping
-    get() = environment.hiddenFromObjCMapping
-
   private val isJ2ObjCInteropEnabled: Boolean
     get() = nameRenderer.environment.isJ2ObjCInteropEnabled
 
@@ -51,12 +48,12 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     )
 
   fun objectiveCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    when {
-      !isJ2ObjCInteropEnabled -> Source.EMPTY
-      hiddenFromObjCMapping.contains(typeDeclaration) -> hiddenFromObjCAnnotationSource()
-      needsObjCNameAnnotation(typeDeclaration) ->
-        objectiveCNameAnnotationSource(typeDeclaration.objCNameWithoutPrefix)
-      else -> Source.EMPTY
+    if (!isJ2ObjCInteropEnabled) {
+      Source.EMPTY
+    } else if (needsObjCNameAnnotation(typeDeclaration)) {
+      objectiveCNameAnnotationSource(typeDeclaration.objCNameWithoutPrefix)
+    } else {
+      Source.EMPTY
     }
 
   fun hiddenFromObjCAnnotationSource(): Source =
@@ -81,11 +78,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     )
 
   fun objCAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    Source.emptyIf(
-      !isJ2ObjCInteropEnabled ||
-        methodDescriptor.isConstructor ||
-        hiddenFromObjCMapping.contains(methodDescriptor.enclosingTypeDescriptor)
-    ) {
+    Source.emptyIf(!isJ2ObjCInteropEnabled || methodDescriptor.isConstructor) {
       when {
         isHiddenFromObjC(methodDescriptor) -> hiddenFromObjCAnnotationSource()
         else -> Source.EMPTY
@@ -93,10 +86,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     }
 
   fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-    Source.emptyIf(
-      !isJ2ObjCInteropEnabled ||
-        hiddenFromObjCMapping.contains(fieldDescriptor.enclosingTypeDescriptor)
-    ) {
+    Source.emptyIf(!isJ2ObjCInteropEnabled) {
       when {
         isHiddenFromObjC(fieldDescriptor) -> hiddenFromObjCAnnotationSource()
         needsObjCNameAnnotation(fieldDescriptor) ->
@@ -120,28 +110,25 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     needsObjCNameAnnotation(companionObject.enclosingTypeDeclaration)
 
   private fun needsObjCNameAnnotation(method: Method): Boolean =
-    !hiddenFromObjCMapping.contains(method.descriptor) &&
-      method.descriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-        !enclosingTypeDeclaration.isLocal &&
-          !enclosingTypeDeclaration.isAnonymous &&
-          environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
-          !method.isJavaOverride &&
-          method.descriptor.objectiveCName != null
-      }
+    method.descriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+      !enclosingTypeDeclaration.isLocal &&
+        !enclosingTypeDeclaration.isAnonymous &&
+        environment.ktVisibility(method.descriptor).needsObjCNameAnnotation &&
+        !method.isJavaOverride &&
+        method.descriptor.objectiveCName != null
+    }
 
   private fun needsObjCNameAnnotation(fieldDescriptor: FieldDescriptor): Boolean =
-    !hiddenFromObjCMapping.contains(fieldDescriptor) &&
-      fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
-        needsObjCNameAnnotation(enclosingTypeDeclaration, forceObjCNameAnnotation = true) &&
-          environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
-      }
+    fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+      needsObjCNameAnnotation(enclosingTypeDeclaration, forceObjCNameAnnotation = true) &&
+        environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
+    }
 
   private fun isHiddenFromObjC(methodDescriptor: MethodDescriptor): Boolean =
-    hiddenFromObjCMapping.contains(methodDescriptor) ||
-      hasHiddenFromObjCAnnotation(methodDescriptor)
+    hasHiddenFromObjCAnnotation(methodDescriptor)
 
   private fun isHiddenFromObjC(fieldDescriptor: FieldDescriptor): Boolean =
-    hiddenFromObjCMapping.contains(fieldDescriptor) || hasHiddenFromObjCAnnotation(fieldDescriptor)
+    hasHiddenFromObjCAnnotation(fieldDescriptor)
 
   companion object {
     private fun parameterSource(name: String, valueSource: Source): Source =

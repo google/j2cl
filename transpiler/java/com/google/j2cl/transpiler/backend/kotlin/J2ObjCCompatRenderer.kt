@@ -95,10 +95,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
 // TODO(b/442834826): Refactor to use type model instead of AST nodes.
-internal class J2ObjCCompatRenderer(
-  private val objCNamePrefix: String,
-  private val hiddenFromObjCMapping: HiddenFromObjCMapping,
-) {
+internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   internal fun source(compilationUnit: CompilationUnit): Source =
     dependenciesAndDeclarationsSource(compilationUnit).ifNotEmpty {
       emptyLineSeparated(fileCommentSource(compilationUnit), it) + Source.NEW_LINE
@@ -313,17 +310,16 @@ internal class J2ObjCCompatRenderer(
       shouldRender(fieldDescriptor.typeDescriptor)
 
   private fun shouldRender(typeDescriptor: TypeDescriptor): Boolean =
-    !hiddenFromObjCMapping.contains(typeDescriptor) &&
-      when (typeDescriptor) {
-        is PrimitiveTypeDescriptor -> true
-        is DeclaredTypeDescriptor ->
-          shouldRenderDescriptor(typeDescriptor.typeDeclaration) &&
-            (!isBoxedType(typeDescriptor) || typeDescriptor.isNullable)
-        is ArrayTypeDescriptor -> false
-        is TypeVariable -> shouldRender(typeDescriptor.upperBoundTypeDescriptor)
-        is IntersectionTypeDescriptor -> shouldRender(typeDescriptor.firstType)
-        is UnionTypeDescriptor -> false
-      }
+    when (typeDescriptor) {
+      is PrimitiveTypeDescriptor -> true
+      is DeclaredTypeDescriptor ->
+        shouldRenderDescriptor(typeDescriptor.typeDeclaration) &&
+          (!isBoxedType(typeDescriptor) || typeDescriptor.isNullable)
+      is ArrayTypeDescriptor -> false
+      is TypeVariable -> shouldRender(typeDescriptor.upperBoundTypeDescriptor)
+      is IntersectionTypeDescriptor -> shouldRender(typeDescriptor.firstType)
+      is UnionTypeDescriptor -> false
+    }
 
   private fun shouldRender(typeDeclaration: TypeDeclaration): Boolean =
     shouldRenderDescriptor(typeDeclaration) &&
@@ -333,8 +329,7 @@ internal class J2ObjCCompatRenderer(
   private fun shouldRenderDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&
       existsInObjC(typeDeclaration) &&
-      !typeDeclaration.toDescriptor().isCollection &&
-      !hiddenFromObjCMapping.contains(typeDeclaration)
+      !typeDeclaration.toDescriptor().isCollection
 
   private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
     !typeDeclaration.isKtNative ||

@@ -44,7 +44,6 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.withWidestScopeOrNull
  * @property isJ2ObjCInteropEnabled whether to enable J2ObjC interop
  */
 internal data class Environment(
-  val hiddenFromObjCMapping: HiddenFromObjCMapping,
   private val nameToIdentifierMap: Map<HasName, String> = emptyMap(),
   private val identifierSet: Set<String> = emptySet(),
   private val importedSimpleNameToQualifiedNameMutableMap: MutableMap<String, String> =
