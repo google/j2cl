@@ -3,7 +3,6 @@ goog.module('lambdas.SubWithLambda$impl');
 const Super = goog.require('lambdas.Super$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let Runnable = goog.forwardDeclare('lambdas.Runnable$impl');
 
 /**
@@ -29,10 +28,7 @@ class SubWithLambda extends Super {
  m_n__void() {
   let r = Runnable.$adapt(() =>{
    super.m_m__void();
-   {
-    Unit.f_INSTANCE__kotlin_Unit;
-    return;
-   }
+   return;
   });
  }
  /** @nodts */
@@ -48,7 +44,6 @@ class SubWithLambda extends Super {
  
  /** @nodts */
  static $loadModules() {
-  Unit = goog.module.get('kotlin.Unit$impl');
   Runnable = goog.module.get('lambdas.Runnable$impl');
  }
 }

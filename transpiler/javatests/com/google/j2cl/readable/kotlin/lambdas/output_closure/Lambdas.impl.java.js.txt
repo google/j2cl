@@ -177,37 +177,25 @@ class Lambdas extends j_l_Object {
  m_testLambdaReturningVoidAsExpression__void() {
   let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() =>{
    A.$create__();
-   {
-    Unit.f_INSTANCE__kotlin_Unit;
-    return;
-   }
+   return;
   });
  }
  /** @final @nodts */
  m_testAnonymousInsideLambda__void() {
   let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() =>{
    A.$create__();
-   {
-    Unit.f_INSTANCE__kotlin_Unit;
-    return;
-   }
+   return;
   });
  }
  /** @final @nodts */
  m_testJsInteropLambdas__void() {
   let thenable = /**@type {!$LambdaAdaptor$1<string>}*/ (new $LambdaAdaptor$1((/** function(?string):Unit */ f1, /** function(Throwable):Unit */ f2) =>{
    f1(null);
-   {
-    Unit.f_INSTANCE__kotlin_Unit;
-    return;
-   }
+   return;
   }));
   let otherThenable = /**@type {!$LambdaAdaptor$2<string>}*/ (new $LambdaAdaptor$2((/** function(?string):Unit */ f1_1, /** function(Throwable):Unit */ f2_1) =>{
    f1_1(null);
-   {
-    Unit.f_INSTANCE__kotlin_Unit;
-    return;
-   }
+   return;
   }));
   let equals = Equals.$adapt(/**  @return {boolean}*/ ((/** * */ o) =>{
    return false;
@@ -231,7 +219,6 @@ class Lambdas extends j_l_Object {
   Enum = goog.module.get('java.lang.Enum$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
-  Unit = goog.module.get('kotlin.Unit$impl');
   $LambdaAdaptor$1 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$1$impl');
   $LambdaAdaptor$2 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$2$impl');
   A = goog.module.get('lambdas.Lambdas.A$impl');

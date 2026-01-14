@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.j2cl.transpiler.ast.AstUtils.isKotlinUnitInstanceAccess;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -47,6 +48,16 @@ public final class RemoveReturnValuesFromVoidMethods extends NormalizationPass {
             var enclosingMethod =
                 (MethodLike) checkNotNull(getParent(MethodLike.class::isInstance));
             if (isPrimitiveVoid(enclosingMethod.getDescriptor().getReturnTypeDescriptor())) {
+
+              // We can elide references to Unit.INSTANCE being returned if it's a void return.
+              // This is extremely common in Kotlin code so it's best to not leave it to have to be
+              // cleaned up later.
+              if (isKotlinUnitInstanceAccess(returnStatement.getExpression())) {
+                return ReturnStatement.newBuilder()
+                    .setSourcePosition(returnStatement.getSourcePosition())
+                    .build();
+              }
+
               return Block.newBuilder()
                   .addStatement(
                       returnStatement

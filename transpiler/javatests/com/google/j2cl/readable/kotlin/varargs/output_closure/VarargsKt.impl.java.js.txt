@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
@@ -45,10 +44,7 @@ class VarargsKt extends j_l_Object {
  /** @nodts @template T */
  static m_indirectSpread__arrayOf_java_lang_Comparable__void(/** !Array<T> */ a) {
   VarargsKt.m_generics__arrayOf_java_lang_Object__void(/**@type {!Array<T>}*/ ($Arrays.$stampType([...a], /**@type {Function}*/ (Comparable))));
-  {
-   Unit.f_INSTANCE__kotlin_Unit;
-   return;
-  }
+  return;
  }
  /** @nodts @template T */
  static m_generics__arrayOf_java_lang_Object__void(/** !Array<T> */ element) {}
@@ -67,7 +63,6 @@ class VarargsKt extends j_l_Object {
  static $loadModules() {
   Comparable = goog.module.get('java.lang.Comparable$impl');
   Number = goog.module.get('java.lang.Number$impl');
-  Unit = goog.module.get('kotlin.Unit$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
  }
 }

@@ -3,7 +3,6 @@ goog.module('defaultparams.DefaultParams$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 class DefaultParams extends j_l_Object {
@@ -72,10 +71,7 @@ class DefaultParams extends j_l_Object {
   DefaultParams.$clinit();
   let c$defaulted = $Util.$isUndefined(c) ? 20 : c;
   $this.m_foo__int__void(c$defaulted);
-  {
-   Unit.f_INSTANCE__kotlin_Unit;
-   return;
-  }
+  return;
  }
  /** @nodts */
  static $clinit() {
@@ -89,9 +85,7 @@ class DefaultParams extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  Unit = goog.module.get('kotlin.Unit$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(DefaultParams, 'defaultparams.DefaultParams');
 

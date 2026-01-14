@@ -3,7 +3,6 @@ goog.module('labelstatement.LabeledStatement$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let $1 = goog.forwardDeclare('labelstatement.LabeledStatement.$1$impl');
 
 /**
@@ -50,10 +49,7 @@ class LabeledStatement extends j_l_Object {
  /** @final @nodts */
  m_simpleStatement__void() {
   this.m_foo__void_$p_labelstatement_LabeledStatement();
-  {
-   Unit.f_INSTANCE__kotlin_Unit;
-   return;
-  }
+  return;
  }
  /** @final @nodts */
  m_nestedScopes__void() {
@@ -76,7 +72,6 @@ class LabeledStatement extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  Unit = goog.module.get('kotlin.Unit$impl');
   $1 = goog.module.get('labelstatement.LabeledStatement.$1$impl');
  }
 }

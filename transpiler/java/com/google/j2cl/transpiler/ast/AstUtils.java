@@ -1315,5 +1315,14 @@ public final class AstUtils {
     return node.getAnnotation("javaemul.internal.annotations.Wasm") != null;
   }
 
+  public static boolean isKotlinUnitInstanceAccess(Expression expression) {
+    if (expression instanceof FieldAccess fieldAccess) {
+      var field = fieldAccess.getTarget();
+      return field.getName().equals("INSTANCE")
+          && field.getEnclosingTypeDescriptor().isSameBaseType(TypeDescriptors.get().kotlinUnit);
+    }
+    return false;
+  }
+
   private AstUtils() {}
 }
