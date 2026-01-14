@@ -49,4 +49,8 @@ public final class SerializedLambda implements Serializable {
   public String getImplMethodSignature() {
     return null;
   }
+
+  public String getInstantiatedMethodType() {
+    return null;
+  }
 }
