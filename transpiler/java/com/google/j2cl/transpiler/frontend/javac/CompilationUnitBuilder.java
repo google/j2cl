@@ -948,10 +948,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   // TODO(b/465778762): Consider whether the accessors, which are members of the type descriptor,
   // can be be provided in order by an api on DeclaredTypeDescriptor.
   private List<MethodDescriptor> getAccessorsMethodDescriptor(JCRecordPattern recordPattern) {
-    return ((ClassSymbol) getRecordType(recordPattern).tsym)
+    var recordType = getRecordType(recordPattern);
+    var parameterizedTypeDescriptor = environment.createDeclaredTypeDescriptor(recordType);
+    var parameterization = parameterizedTypeDescriptor.getParameterization();
+    return ((ClassSymbol) recordType.tsym)
         .getRecordComponents().stream()
             .map(RecordComponent::getAccessor)
             .map(environment::createMethodDescriptor)
+            .map(m -> m.specializeTypeVariables(parameterization))
             .collect(toCollection(ArrayList::new));
   }
 

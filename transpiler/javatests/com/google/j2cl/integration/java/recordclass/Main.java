@@ -21,10 +21,13 @@ import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertThrows;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
+
+import com.google.j2cl.integration.testing.TestUtils;
 
 public class Main {
 
@@ -44,6 +47,7 @@ public class Main {
     testRecordPatternEvaluationOrder();
     testExceptionInPattern();
     testCompactConstructorWithComponentReferences();
+    testParametricRecord();
   }
 
   public static void testAccessors() {
@@ -461,4 +465,40 @@ public class Main {
     // Ensure that the component field was initialized.
     assertEquals("Hello", r.s);
   }
+
+  @SuppressWarnings("unchecked") // This test case tests pattern matching with unsafe casts.
+  private static void testParametricRecord() {
+    record ParametericRecord<T>(T value) {}
+    var stringRecord = new ParametericRecord<String>(null);
+    // Because the type of genericRecord is ParametricRecord<String>, the unparameterized
+    // ParametericRecord below is considered ParametricRecord<String> and the instanceof succeeds.
+    assertTrue(stringRecord instanceof ParametericRecord(String s));
+    // However if we explicitly specify the parameterization, the instanceof fails because it
+    // the binding pattern `String s` is no longer considered unconditional
+    assertFalse(stringRecord instanceof ParametericRecord<?>(String s));
+
+    Object o = stringRecord;
+    // Because the type of o is not ParametricRecord<String>, the unparameterized
+    // ParametericRecord below is considered ParametricRecord<?> and the instanceof fails.
+    assertFalse(o instanceof ParametericRecord(String s));
+
+    // This is an unsafe cast, but the pattern below is considered unconditional and hence it
+    // succeeds because `null` can be assigned to `Integer`.
+    var integerRecord = (ParametericRecord<Integer>) o;
+    assertTrue(integerRecord instanceof ParametericRecord(Integer i));
+
+    o = new ParametericRecord<>("abc");
+    ParametericRecord<Integer> unsafeCastRecord = (ParametericRecord<Integer>) o;
+    // TODO(b/420648962) : The erasure cast here is missing in J2KT and the code crashes instead.
+    if (!TestUtils.isJ2KtNative()) {
+      assertThrowsClassCastException(
+          () -> {
+            // Since `unsafeCastRecord` is typed as `ParametricRecord<Integer>`, the pattern below
+            // is unconditional, hence there is no instanceof check, but a underlying cast to
+            // `Integer` that throws.
+            var unused = unsafeCastRecord instanceof ParametericRecord(Integer i);
+          });
+    }
+  }
 }
+

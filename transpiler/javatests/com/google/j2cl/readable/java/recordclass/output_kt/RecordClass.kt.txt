@@ -265,6 +265,47 @@ open class RecordClass {
      true
     }
    }
+   class GenericRecord<T> {
+    private val value: T
+
+    constructor(arg0: T) {
+     this.value = arg0
+    }
+
+    fun value(): T {
+     return this.value
+    }
+
+    override fun equals(arg0: Any?): Boolean {
+     var ___other: GenericRecord<T>? = null
+     if (!(arg0 is GenericRecord<T> && run {
+      ___other = arg0 as GenericRecord<T>
+      true
+     })) return false
+     return Arrays.equals(
+      arrayOf<Any?>(this.value),
+      arrayOf<Any?>(___other!!.value),
+     )
+    }
+
+    override fun hashCode(): Int {
+     return Arrays.hashCode(
+      arrayOf<Any?>(this.value),
+     )
+    }
+
+    override fun toString(): String {
+     return Arrays.toString(
+      arrayOf<Any?>(this.value),
+     )
+    }
+   }
+   val genericRecord: GenericRecord<String?> = GenericRecord<String?>("abc")
+   val b2: Boolean = genericRecord is GenericRecord<String?> && run {
+    val pattern___1GenericRecord: GenericRecord<String?> = genericRecord as GenericRecord<String?>
+    val s: String? = pattern___1GenericRecord.value()
+    true
+   }
   }
  }
 

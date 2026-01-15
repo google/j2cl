@@ -123,5 +123,9 @@ public class RecordClass {
     record RecursiveRecord(RecursiveRecord r) {}
     o = new RecursiveRecord(null);
     b1 = o instanceof RecursiveRecord(RecursiveRecord(RecursiveRecord r1));
+
+    record GenericRecord<T>(T value) {}
+    var genericRecord = new GenericRecord<>("abc");
+    boolean b2 = genericRecord instanceof GenericRecord<String>(String s);
   }
 }

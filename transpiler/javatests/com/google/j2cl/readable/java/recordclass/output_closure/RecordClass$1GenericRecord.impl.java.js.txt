@@ -1,0 +1,73 @@
+goog.module('recordclass.RecordClass.$1GenericRecord$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class $1GenericRecord extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_value__recordclass_RecordClass_1GenericRecord_;
+ }
+ /** @nodts @template T @return {!$1GenericRecord<T>} */
+ static $create__java_lang_Object(/** T */ arg0) {
+  $1GenericRecord.$clinit();
+  let $instance = new $1GenericRecord();
+  $instance.$ctor__recordclass_RecordClass_1GenericRecord__java_lang_Object__void(arg0);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_1GenericRecord__java_lang_Object__void(/** T */ arg0) {
+  this.$ctor__java_lang_Record__void();
+  this.f_value__recordclass_RecordClass_1GenericRecord_ = arg0;
+ }
+ /** @nodts @return {T} */
+ m_value__java_lang_Object() {
+  return this.f_value__recordclass_RecordClass_1GenericRecord_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ arg0) {
+  let /** $1GenericRecord<T> */ $other;
+  if (!($1GenericRecord.$isInstance(arg0) && ($other = (/**@type {!$1GenericRecord<T>}*/ ($Casts.$to(arg0, $1GenericRecord))), true))) {
+   return false;
+  }
+  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_value__recordclass_RecordClass_1GenericRecord_], [$other.f_value__recordclass_RecordClass_1GenericRecord_]);
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_value__recordclass_RecordClass_1GenericRecord_]);
+ }
+ /** @override @return {?string} */
+ toString() {
+  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_value__recordclass_RecordClass_1GenericRecord_]);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1GenericRecord.$clinit = () =>{};
+  $1GenericRecord.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1GenericRecord;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Arrays = goog.module.get('java.util.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata($1GenericRecord, 'recordclass.RecordClass$1GenericRecord');
+
+exports = $1GenericRecord;
+
+//# sourceMappingURL=RecordClass$1GenericRecord.js.map

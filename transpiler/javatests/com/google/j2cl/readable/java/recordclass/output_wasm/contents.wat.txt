@@ -123,6 +123,12 @@
 (global $$class@recordclass.RecordClass.1RecursiveRecord (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@recordclass.RecordClass.1GenericRecord (mut i32)
+ (i32.const 0)
+)
+(global $$class@recordclass.RecordClass.1GenericRecord (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $recordclass.RecordClass.vtable (ref $recordclass.RecordClass.vtable)
  (struct.new $recordclass.RecordClass.vtable
   (ref.func $$getClassImpl__java_lang_Class@recordclass.RecordClass)
@@ -272,6 +278,14 @@
   (ref.func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.1RecursiveRecord)
   (ref.func $m_hashCode__int@recordclass.RecordClass.1RecursiveRecord)
   (ref.func $m_toString__java_lang_String@recordclass.RecordClass.1RecursiveRecord)
+ )
+)
+(global $recordclass.RecordClass.1GenericRecord.vtable (ref $recordclass.RecordClass.1GenericRecord.vtable)
+ (struct.new $recordclass.RecordClass.1GenericRecord.vtable
+  (ref.func $$getClassImpl__java_lang_Class@recordclass.RecordClass.1GenericRecord)
+  (ref.func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.1GenericRecord)
+  (ref.func $m_hashCode__int@recordclass.RecordClass.1GenericRecord)
+  (ref.func $m_toString__java_lang_String@recordclass.RecordClass.1GenericRecord)
  )
 )
 
@@ -430,6 +444,10 @@
  (local $exp_4 (ref null $recordclass.RecordClass.1RecursiveRecord))
  (local $pattern$1RecursiveRecord_1 (ref null $recordclass.RecordClass.1RecursiveRecord))
  (local $r1 (ref null $recordclass.RecordClass.1RecursiveRecord))
+ (local $genericRecord (ref null $recordclass.RecordClass.1GenericRecord))
+ (local $b2 i32)
+ (local $pattern$1GenericRecord (ref null $recordclass.RecordClass.1GenericRecord))
+ (local $s (ref null $java.lang.String))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:4
   (local.set $r (call $$create__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2@recordclass.RecordClass.1R1 (call $$create__int__java_lang_Object@recordclass.RecordClass.1R2 (i32.const 1)(call $$getString_|a|__java_lang_String_<once>_@recordclass.RecordClass ))(call $$getString_|b|__java_lang_String_<once>_@recordclass.RecordClass )(call $$create__int__java_lang_Object@recordclass.RecordClass.1R2 (i32.const 3)(call $$getString_|c|__java_lang_String_<once>_@recordclass.RecordClass ))))
@@ -478,6 +496,14 @@
     (local.set $r1 (call $m_r__recordclass_RecordClass_1RecursiveRecord@recordclass.RecordClass.1RecursiveRecord (ref.as_non_null (local.get $pattern$1RecursiveRecord_1))))
     (i32.const 1)
    )) (else (i32.const 0)))
+  )) (else (i32.const 0))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:128:4
+  (local.set $genericRecord (call $$create__java_lang_Object@recordclass.RecordClass.1GenericRecord (call $$getString_|abc|__java_lang_String_<once>_@recordclass.RecordClass )))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:129:4
+  (local.set $b2 (if (result i32) (ref.test (ref $recordclass.RecordClass.1GenericRecord) (local.get $genericRecord)) (then (block (result i32)
+   (local.set $pattern$1GenericRecord (ref.cast (ref null $recordclass.RecordClass.1GenericRecord) (local.get $genericRecord)))
+   (local.set $s (ref.cast (ref null $java.lang.String) (call $m_value__java_lang_Object@recordclass.RecordClass.1GenericRecord (ref.as_non_null (local.get $pattern$1GenericRecord)))))
+   (i32.const 1)
   )) (else (i32.const 0))))
  )
 )
@@ -3038,3 +3064,145 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.1RecursiveRecord)
+
+;;; GenericRecord<T> GenericRecord.$create(T arg0)
+(func $$create__java_lang_Object@recordclass.RecordClass.1GenericRecord
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $recordclass.RecordClass.1GenericRecord))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+ (local $$instance (ref null $recordclass.RecordClass.1GenericRecord))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (call $$clinit__void_<once>_@recordclass.RecordClass.1GenericRecord )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (local.set $$instance (struct.new $recordclass.RecordClass.1GenericRecord (global.get $recordclass.RecordClass.1GenericRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (call $$ctor__java_lang_Object__void_$p_recordclass_RecordClass_1GenericRecord@recordclass.RecordClass.1GenericRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericRecord.$ctor(T arg0)
+(func $$ctor__java_lang_Object__void_$p_recordclass_RecordClass_1GenericRecord@recordclass.RecordClass.1GenericRecord
+ (param $this (ref null $recordclass.RecordClass.1GenericRecord))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (struct.set $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this) (local.get $arg0))
+ )
+)
+
+;;; T GenericRecord.value()
+(func $m_value__java_lang_Object@recordclass.RecordClass.1GenericRecord
+ (type $function.m_value__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+ (local $this (ref null $recordclass.RecordClass.1GenericRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (return (struct.get $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this)))
+ )
+)
+(elem declare func $m_value__java_lang_Object@recordclass.RecordClass.1GenericRecord)
+
+;;; boolean GenericRecord.equals(Object arg0)
+(func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.1GenericRecord
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+ (local $$other (ref null $recordclass.RecordClass.1GenericRecord))
+ (local $this (ref null $recordclass.RecordClass.1GenericRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.1GenericRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.1GenericRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
+   (then
+    (return (i32.const 0))
+   )
+  )
+  (return (call $m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this))))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $$other))))))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.1GenericRecord)
+
+;;; int GenericRecord.hashCode()
+(func $m_hashCode__int@recordclass.RecordClass.1GenericRecord
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+ (local $this (ref null $recordclass.RecordClass.1GenericRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (return (call $m_hashCode__arrayOf_java_lang_Object__int@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this))))))
+ )
+)
+(elem declare func $m_hashCode__int@recordclass.RecordClass.1GenericRecord)
+
+;;; String GenericRecord.toString()
+(func $m_toString__java_lang_String@recordclass.RecordClass.1GenericRecord
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+ (local $this (ref null $recordclass.RecordClass.1GenericRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this))))))
+ )
+)
+(elem declare func $m_toString__java_lang_String@recordclass.RecordClass.1GenericRecord)
+
+;;; void GenericRecord.$clinit()
+(func $$clinit__void_<once>_@recordclass.RecordClass.1GenericRecord
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (if (global.get $$class-initialized@recordclass.RecordClass.1GenericRecord)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (global.set $$class-initialized@recordclass.RecordClass.1GenericRecord (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:127:11
+  (call $$clinit__void_<once>_@java.lang.Record )
+ )
+)
+
+;;; Class<T> GenericRecord.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.1GenericRecord
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@recordclass.RecordClass.1GenericRecord)))
+   (then
+    (return (global.get $$class@recordclass.RecordClass.1GenericRecord))
+   )
+  )
+  (global.set $$class@recordclass.RecordClass.1GenericRecord (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|recordclass....|__java_lang_String_<once>_@recordclass.RecordClass.1GenericRecord )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Record )))
+  (return (global.get $$class@recordclass.RecordClass.1GenericRecord))
+ )
+)
+
+;;; Class<?> GenericRecord.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@recordclass.RecordClass.1GenericRecord
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $recordclass.RecordClass.1GenericRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.1GenericRecord ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.1GenericRecord)
