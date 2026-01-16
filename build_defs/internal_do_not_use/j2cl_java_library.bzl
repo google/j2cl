@@ -94,6 +94,8 @@ def _impl_j2cl_library(ctx):
         j2kt_java_info = JavaInfo(
             output_jar = java_outputs.class_jar,
             compile_jar = java_outputs.compile_jar,
+            generated_class_jar = java_outputs.generated_class_jar,
+            generated_source_jar = java_outputs.generated_source_jar,
             header_compilation_jar = java_outputs.header_compilation_jar,
             deps = [p._private_.java_info for p in _j2kt_providers_of(ctx.attr.deps)],
             exports = [p._private_.java_info for p in _j2kt_providers_of(ctx.attr.exports)],
