@@ -45,6 +45,7 @@ fun main(vararg unused: String) {
   testInlinedLocalClassSemantics()
   testInlineFactoryFunctionWithCrossinlineLambda()
   testDefaultParams()
+  testBreakContinue()
 }
 
 class MyClass(var f: Int) {
@@ -442,4 +443,30 @@ private fun testDefaultParams() {
   assertEquals(15, inlineFunWithDefaultsAndDefaultVarargs(1))
   assertEquals(33, inlineFunWithDefaultsAndDefaultVarargs(1, 20))
   assertEquals(141, inlineFunWithDefaultsAndDefaultVarargs(1, 20, 30, 40, 50))
+}
+
+inline fun executeBlock(block: () -> Unit) = block()
+
+fun testBreakContinue() {
+  var i = 0
+  while (true) {
+    executeBlock {
+      i++
+      if (i < 10) {
+        continue
+      }
+      break
+    }
+  }
+  assertEquals(10, i)
+
+  outer@ while (true) {
+    executeBlock {
+      while (true) {
+        i++
+        break@outer
+      }
+    }
+  }
+  assertEquals(11, i)
 }

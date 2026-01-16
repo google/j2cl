@@ -526,6 +526,32 @@ class InlineFunctionKt extends j_l_Object {
   return value;
  }
  /** @nodts */
+ static m_executeBlock__kotlin_jvm_functions_Function0__void(/** !Function0<?> */ block) {
+  InlineFunctionKt.$clinit();
+  block.m_invoke__java_lang_Object();
+  return;
+ }
+ /** @nodts */
+ static m_testInlineBreakContinue__void() {
+  InlineFunctionKt.$clinit();
+  let i = 0;
+  while (true) {
+   let unary = i;
+   i = unary + 1 | 0;
+   if (i < 10) {
+    continue;
+   }
+   break;
+  }
+  outer: while (true) {
+   while (true) {
+    let unary_1 = i;
+    i = unary_1 + 1 | 0;
+    break outer;
+   }
+  }
+ }
+ /** @nodts */
  static $clinit() {
   InlineFunctionKt.$clinit = () =>{};
   InlineFunctionKt.$loadModules();

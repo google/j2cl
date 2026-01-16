@@ -288,3 +288,26 @@ internal fun <S : StringParametrizedReproChild> S.find6(): String? {
 internal fun <T : ParametrizedReproChild<String>, S : T> S.find7(t: T): String? {
   return get()
 }
+
+inline fun executeBlock(block: () -> Unit) = block()
+
+fun testInlineBreakContinue() {
+  var i = 0
+  while (true) {
+    executeBlock {
+      i++
+      if (i < 10) {
+        continue
+      }
+      break
+    }
+  }
+  outer@ while (true) {
+    executeBlock {
+      while (true) {
+        i++
+        break@outer
+      }
+    }
+  }
+}
