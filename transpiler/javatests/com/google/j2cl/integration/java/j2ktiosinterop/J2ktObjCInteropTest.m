@@ -16,6 +16,7 @@
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/PackageNames.h"
+#import "j2ktiosinterop/Platform.h"
 #import "j2ktiosinterop/PropertyAutoValueClass.h"
 #import "j2ktiosinterop/PropertyAutoValueMethod.h"
 #import "j2ktiosinterop/PropertyClass.h"
@@ -577,6 +578,10 @@
       [[J2ktiosinteropPropertyAutoValueMethod_builder() setNameWithNSString:@"foo"] build];
   // TODO(b/467703991): Should be property.
   XCTAssertEqual([propertyAutoValueMethod getName], @"foo");
+}
+
+- (void)testPlatform {
+  XCTAssertEqualObjects(J2ktiosinteropPlatform_get_NAME(), @"J2KT");
 }
 
 @end

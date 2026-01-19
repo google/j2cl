@@ -197,4 +197,8 @@ final class J2ktSwiftInteropTest: XCTestCase {
     // CustomNativeClass.Companion.shared.nativeParameter(with: obj)
     // let _ = CustomNativeClass.Companion.shared.nativeReturnType()
   }
+
+  func testPlatform() {
+    XCTAssertEqual(J2ktiosinteropPlatform_get_NAME(), "J2KT")
+  }
 }

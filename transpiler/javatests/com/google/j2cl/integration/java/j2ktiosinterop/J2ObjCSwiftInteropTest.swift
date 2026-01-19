@@ -14,7 +14,7 @@
  * the License.
  */
 import XCTest
-import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integration_java_j2ktiosinterop_j2objc
+import third_party_java_src_j2cl_transpiler_javatests_com_google_j2cl_integration_java_j2ktiosinterop_j2ktiosinterop_j2objc
 
 /// J2ObjC interop test for Swift.
 final class J2ObjCSwiftInteropTest: XCTestCase {
@@ -183,5 +183,9 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     let _ = CustomNativeClass.nativeStaticMethod()
     CustomNativeClass.nativeParameter(with: obj)
     let _ = CustomNativeClass.nativeReturnType()
+  }
+
+  func testPlatform() {
+    XCTAssertEqual(J2ktiosinteropPlatform_get_NAME(), "J2ObjC")
   }
 }
