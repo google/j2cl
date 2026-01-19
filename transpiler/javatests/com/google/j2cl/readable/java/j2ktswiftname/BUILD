@@ -1,0 +1,22 @@
+load(
+    "//transpiler/javatests/com/google/j2cl/readable:readable_example.bzl",
+    "readable_example",
+)
+
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
+
+readable_example(
+    srcs = glob([
+        "*.java",
+        "subpackage/*.java",
+    ]),
+    generate_js_readables = False,
+    generate_wasm_readables = False,
+    j2kt_j2objc_interop_enabled = True,
+    deps = [
+        "//third_party:j2objc_annotations-j2cl",
+    ],
+)
