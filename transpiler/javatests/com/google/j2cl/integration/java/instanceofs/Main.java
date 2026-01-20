@@ -23,6 +23,7 @@ import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import java.io.Serializable;
+import java.util.function.Supplier;
 
 /** Test instanceof array. */
 @SuppressWarnings("BadInstanceof")
@@ -54,15 +55,26 @@ public class Main {
     assertEquals(1, counter);
     assertFalse(incrementCounter() instanceof Number);
     assertEquals(2, counter);
-    assertFalse(incrementCounter() instanceof Serializable);
+    assertTrue(incrementCounter() instanceof Comparable);
     assertEquals(3, counter);
+
+    class LocalClass {
+      int i = incrementCounter() instanceof String s ? s.length() : 0;
+      boolean unused = incrementCounter() instanceof String unusedString;
+    }
+    assertEquals("Hello".length(), new LocalClass().i);
+    assertEquals(5, counter);
+
+    Supplier<Boolean> supplier = () -> incrementCounter() instanceof String unused;
+    assertTrue(supplier.get());
+    assertEquals(6, counter);
   }
 
   private static int counter = 0;
 
   private static Object incrementCounter() {
     counter++;
-    return new Object();
+    return "Hello";
   }
 
   private static void testInstanceOf_interface() {
