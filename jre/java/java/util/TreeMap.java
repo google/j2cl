@@ -30,7 +30,7 @@ import jsinterop.annotations.JsNonNull;
  * {@link #remove} are supported.
  */
 public class TreeMap<K, V> extends AbstractMap<K, V>
-    implements SortedMap<K, V>, NavigableMap<K, V>, Serializable {
+    implements SortedMap<K, V>, NavigableMap<K, V>, Cloneable, Serializable {
 
   private Comparator<? super K> comparator;
   private Node<K, V> root;

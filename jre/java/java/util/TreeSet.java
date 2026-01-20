@@ -25,7 +25,7 @@ import java.io.Serializable;
  *
  * @param <E> element type.
  */
-public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E>, Serializable {
+public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E>, Cloneable, Serializable {
 
   /** TreeSet is stored as a TreeMap of the requested type to a constant Boolean. */
   private NavigableMap<E, Boolean> map;
