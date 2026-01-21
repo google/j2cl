@@ -107,6 +107,24 @@ public final class System {
   @JsMethod(name = "$getDefine", namespace = "nativebootstrap.Util")
   public static native String getProperty(String key, String def);
 
+  // TODO(b/477643941): Remove this if/when Checker Framework tolerates it being absent.
+  static void setProperty(String key, String value) {
+    // Stub for Checker Framework which expects this method to exist or will crash.
+    throw new AssertionError();
+  }
+
+  // TODO(b/477643941): Remove this if/when Checker Framework tolerates it being absent.
+  static void setProperties(Object properties) {
+    // Stub for Checker Framework which expects this method to exist or will crash.
+    throw new AssertionError();
+  }
+
+  // TODO(b/477643941): Remove this if/when Checker Framework tolerates it being absent.
+  static void clearProperty(String key) {
+    // Stub for Checker Framework which expects this method to exist or will crash.
+    throw new AssertionError();
+  }
+
   public static int identityHashCode(Object o) {
     return HashCodes.getIdentityHashCode(o);
   }

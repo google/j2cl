@@ -508,6 +508,12 @@ public class Arrays {
     return copyOfImpl(original, newLength);
   }
 
+  // TODO(b/477643941): Remove this if/when Checker Framework tolerates it being absent.
+  static <T, U> T[] copyOf(U[] original, int newLength, Class<? extends T[]> newType) {
+    // Stub for Checker Framework which expects this method to exist or will crash.
+    throw new AssertionError();
+  }
+
   public static boolean[] copyOfRange(boolean[] original, int from, int to) {
     return copyOfRangeImpl(original, from, to);
   }
