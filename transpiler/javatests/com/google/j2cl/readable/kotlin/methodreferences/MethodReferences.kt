@@ -256,7 +256,10 @@ val kFunctionVar: kotlin.reflect.KFunction0<Any> = ::m
 
 fun returnKFunction(): kotlin.reflect.KFunction0<Any> = ::m
 
+fun implicitlyReturnKFunction() = ::m
+
 fun testKFunctionReference() {
   acceptFunctionExpression(kFunctionVar)
   acceptFunctionExpression(returnKFunction())
+  acceptFunctionExpression(implicitlyReturnKFunction())
 }
