@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
@@ -32,6 +33,7 @@ import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.common.StringUtils;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.common.bazel.FileCache;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -61,6 +63,7 @@ import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -186,6 +189,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 Stream.of(typeGraph.getItableInterfaceGetters(generatorStage.getEnvironment())),
                 Stream.of(getJsPrototypes(typeGraph, generatorStage.getEnvironment())),
                 Stream.of(getJsFunctions(typeGraph)),
+                Stream.of(getJsConfigurationDataAndStartFunction(typeGraph)),
                 Stream.of(")"))
             .collect(toImmutableList());
 
@@ -268,6 +272,153 @@ final class BazelJ2wasmBundler extends BazelWorker {
     }
     sb.append(")\n");
     return sb.toString();
+  }
+
+  /**
+   * Gets the configuration data string and start function for JsInterop with custom descriptors.
+   *
+   * <p>Basic format is follows:
+   *
+   * <ol>
+   *   <li>Number of exported types
+   *   <li>For each exported type:
+   *       <ol>
+   *         <li>Number of constructors
+   *         <li>For each constructor: Name of the constructor (name of the type)
+   *         <li>Number of static members
+   *         <li>For each static member: The type (int) and name
+   *         <li>Number of instance members
+   *         <li>For each instance member: The type (int) and name
+   *         <li>Index of the super type
+   *       </ol>
+   *   <li>
+   * </ol>
+   *
+   * <p>Note that the actual references to the prototype and functions are not present. This relies
+   * on the references previously defined in {@code js_prototypes} and {@code js_functions} data
+   * segments generated in {@link #getJsPrototypes} and {@link #getJsFunctions} respectively. They
+   * must be in the same order.
+   */
+  private String getJsConfigurationDataAndStartFunction(TypeGraph typeGraph) {
+    if (!enableCustomDescriptorsJsInterop) {
+      return "";
+    }
+
+    var exportedTypes = typeGraph.getJsTypes();
+    StringBuilder sb = new StringBuilder();
+
+    int configurationDataLength = 0;
+    try (ByteArrayOutputStream configurationData = new ByteArrayOutputStream()) {
+      appendDataUnsignedLeb128(exportedTypes.size(), configurationData);
+      for (var type : exportedTypes) {
+        // Constructors.
+        // Number of constructors:
+        appendDataUnsignedLeb128(1, configurationData);
+        // For the constructor, simply output the name of the type.
+        appendDataStringWithLength(type.qualifiedJsName(), configurationData);
+
+        // Static members.
+        appendDataUnsignedLeb128(type.staticJsMembers().size(), configurationData);
+        for (var staticMember : type.staticJsMembers()) {
+          appendDataUnsignedLeb128(TypeGraph.getJsMethodKind(staticMember), configurationData);
+          appendDataStringWithLength(staticMember.getJsName(), configurationData);
+        }
+
+        // Instance members.
+        appendDataUnsignedLeb128(type.instanceJsMembers().size(), configurationData);
+        for (var instanceMember : type.instanceJsMembers()) {
+          appendDataUnsignedLeb128(TypeGraph.getJsMethodKind(instanceMember), configurationData);
+          appendDataStringWithLength(instanceMember.getJsName(), configurationData);
+        }
+
+        // Index of the super type.
+        appendDataSignedLeb128(
+            type.superType() != null ? type.superType().index() : -1, configurationData);
+      }
+
+      sb.append("(data $js_data \"");
+      for (byte b : configurationData.toByteArray()) {
+        sb.append(StringUtils.escapeAsUtf8(b));
+      }
+      sb.append("\")\n");
+      sb.append("\n");
+
+      configurationDataLength = configurationData.size();
+    } catch (IOException e) {
+      // Should not happen.
+      throw new AssertionError("", e);
+    }
+
+    checkState(configurationDataLength > 0);
+
+    // Output the start function. We use the start function to call configureAll with all the
+    // information about the exported JS types.
+    sb.append("(func $start\n");
+    sb.append("  (call $js_configureAll\n");
+    sb.append("    (array.new_elem $js_prototypes_t $js_prototypes\n");
+    sb.append("      (i32.const 0) (i32.const ");
+    sb.append(exportedTypes.size());
+    sb.append("))\n");
+    sb.append("    (array.new_elem $js_functions_t $js_functions\n");
+    sb.append("      (i32.const 0) (i32.const ");
+    sb.append(exportedTypes.stream().mapToInt(TypeGraph.JsTypeInfo::getJsMemberCount).sum());
+    sb.append("))\n");
+    sb.append("    (array.new_data $js_data_t $js_data\n");
+    sb.append("      (i32.const 0) (i32.const ");
+    sb.append(configurationDataLength);
+    sb.append("))\n");
+    sb.append("    (global.get $js_constructors)\n");
+    sb.append("  )\n");
+    sb.append(")\n");
+    sb.append("(start $start)\n");
+    return sb.toString();
+  }
+
+  private static void appendDataStringWithLength(String string, ByteArrayOutputStream output) {
+    byte[] bytes = string.getBytes(UTF_8);
+    appendDataUnsignedLeb128(bytes.length, output);
+    output.writeBytes(bytes);
+  }
+
+  /** Encodes an integer into an unsigned LEB128 byte sequence. */
+  private static void appendDataUnsignedLeb128(int value, ByteArrayOutputStream output) {
+    checkArgument(value >= 0);
+    do {
+      byte lower7bits = (byte) (value & 0x7F);
+      value >>>= 7;
+      // Any remaining bits? Set continuation bit.
+      if (value != 0) {
+        lower7bits |= 0x80;
+      }
+      output.write(lower7bits);
+    } while (value != 0);
+  }
+
+  /** Encodes an integer into an signed LEB128 byte sequence. */
+  private static void appendDataSignedLeb128(int value, ByteArrayOutputStream output) {
+    boolean more;
+
+    do {
+      byte chunk = (byte) (value & 0x7F);
+      // Arithmetic shift preserves the sign (sign extend).
+      value >>= 7;
+
+      // Check the sign bit of the 7-bit chunk.
+      boolean chunkSignBit = (chunk & 0x40) != 0;
+
+      // The last byte is reached if the remaining bits in 'value' are
+      // all an extension of the sign bit of the current chunk.
+      // - If chunk is positive (sign bit is 0) and value is 0 (b0000...).
+      // - If chunk is negative (sign bit is 1) and value is -1 (b1111...).
+      if (((value == 0) && !chunkSignBit) || ((value == -1) && chunkSignBit)) {
+        more = false;
+      } else {
+        more = true;
+        chunk |= 0x80;
+      }
+
+      output.write(chunk);
+    } while (more);
   }
 
   private Stream<String> streamDedupedValues(
@@ -520,6 +671,18 @@ final class BazelJ2wasmBundler extends BazelWorker {
       return jsTypes;
     }
 
+    static int getJsMethodKind(JsMemberInfo member) {
+      return switch (member.getKind()) {
+        case METHOD -> 0;
+        case GETTER -> 1;
+        case SETTER -> 2;
+        default ->
+            // Constructors should not go through this call.
+            // TODO(b/458472428): Support JsProperty fields.
+            throw new IllegalArgumentException();
+      };
+    }
+
     /** Emits the top-level itable struct. */
     String getTopLevelItableStructDeclaration() {
       StringBuilder sb = new StringBuilder();
@@ -701,6 +864,15 @@ final class BazelJ2wasmBundler extends BazelWorker {
        */
       Stream<JsMemberInfo> streamJsMembersExceptConstructor() {
         return Streams.concat(staticJsMembers.stream(), instanceJsMembers.stream());
+      }
+
+      /**
+       * Gets the number of functions in this type. Includes constructors, static methods, and
+       * instance methods.
+       */
+      int getJsMemberCount() {
+        // Note: Adding 1 for the constructor.
+        return 1 + staticJsMembers.size() + instanceJsMembers.size();
       }
     }
   }
