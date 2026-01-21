@@ -49,6 +49,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import com.google.j2cl.transpiler.backend.wasm.ItableAllocator;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator;
+import com.google.j2cl.transpiler.backend.wasm.JsMemberInfo;
 import com.google.j2cl.transpiler.backend.wasm.SharedSnippet;
 import com.google.j2cl.transpiler.backend.wasm.Summary;
 import com.google.j2cl.transpiler.backend.wasm.SystemPropertyInfo;
@@ -172,6 +173,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 Stream.of(typeGraph.getTopLevelItableStructDeclaration()),
                 typeGraph.getClasses().stream().map(TypeGraph.Type::getItableStructDeclaration),
                 Stream.of(")"),
+                Stream.of(getJsExportsTypes()),
                 streamDedupedValues(Summary::getWasmImportSnippetsList),
                 getModuleParts("imports"),
                 Stream.of(generatorStage.emitToString(WasmConstructsGenerator::emitExceptionTag)),
@@ -182,10 +184,90 @@ final class BazelJ2wasmBundler extends BazelWorker {
                 Stream.of(literalGlobals),
                 literalGetterMethods,
                 Stream.of(typeGraph.getItableInterfaceGetters(generatorStage.getEnvironment())),
+                Stream.of(getJsPrototypes(typeGraph, generatorStage.getEnvironment())),
+                Stream.of(getJsFunctions(typeGraph)),
                 Stream.of(")"))
             .collect(toImmutableList());
 
     writeToFile(output.toString(), moduleContents, problems);
+  }
+
+  /** Gets basic types and imports needed for configuring JS exports. */
+  private String getJsExportsTypes() {
+    if (!enableCustomDescriptorsJsInterop) {
+      return "";
+    }
+
+    return """
+    (type $js_prototypes_t (array (mut externref)))
+    (type $js_functions_t (array (mut funcref)))
+    (type $js_data_t (array (mut i8)))
+    (type $js_configureAll_t
+      (func (param (ref null $js_prototypes_t))
+            (param (ref null $js_functions_t))
+            (param (ref null $js_data_t))
+            (param externref))
+    )
+
+    (import "wasm:js-prototypes" "configureAll" (func $js_configureAll (type $js_configureAll_t)))
+    (import "env" "constructors" (global $js_constructors externref))
+    """;
+  }
+
+  private String getJsPrototypes(TypeGraph typeGraph, WasmGenerationEnvironment environment) {
+    if (!enableCustomDescriptorsJsInterop) {
+      return "";
+    }
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("(elem $js_prototypes externref\n");
+    for (var type : typeGraph.getJsTypes()) {
+      sb.append("  (global.get ");
+      sb.append(type.getPrototypeGlobalName(environment));
+      sb.append(")\n");
+    }
+    sb.append(")\n");
+    return sb.toString();
+  }
+
+  private String getJsFunctions(TypeGraph typeGraph) {
+    if (!enableCustomDescriptorsJsInterop) {
+      return "";
+    }
+
+    StringBuilder sb = new StringBuilder();
+    // Generate a dummy constructor for types that don't export one.
+    // If the type has no js constructors, we will use this dummy constructor. We still need to
+    // reference a constructor in the configuration data in order to configure a name for the type
+    // in the constructors list.
+    sb.append("(func $js_constructor_placeholder (result anyref)\n");
+    sb.append("  (unreachable)\n");
+    sb.append(")\n");
+    sb.append("\n");
+
+    // List exported methods for all types.
+    sb.append("(elem $js_functions funcref\n");
+    for (var type : typeGraph.getJsTypes()) {
+      // Constructor
+      if (type.jsConstructor() != null) {
+        sb.append("  (ref.func ");
+        sb.append(type.jsConstructor().getWasmName());
+        sb.append(")\n");
+      } else {
+        sb.append("  (ref.func $js_constructor_placeholder)\n");
+      }
+
+      // All other members.
+      type.streamJsMembersExceptConstructor()
+          .forEach(
+              m -> {
+                sb.append("  (ref.func ");
+                sb.append(m.getWasmName());
+                sb.append(")\n");
+              });
+    }
+    sb.append(")\n");
+    return sb.toString();
   }
 
   private Stream<String> streamDedupedValues(
@@ -344,6 +426,9 @@ final class BazelJ2wasmBundler extends BazelWorker {
     private final List<TypeGraph.Type> interfaces = new ArrayList<>();
     private final Map<String, TypeGraph.Type> typesByName = new LinkedHashMap<>();
 
+    // List of exported JS types.
+    private final List<TypeGraph.JsTypeInfo> jsTypes = new ArrayList<>();
+
     private final ItableAllocator<String> itableAllocator;
 
     private TypeGraph(Stream<Summary> summaries) {
@@ -394,11 +479,45 @@ final class BazelJ2wasmBundler extends BazelWorker {
           var interfaceType = typesByName.get(interfaceName);
           type.implementedInterfaces.add(interfaceType);
         }
+
+        if (typeInfo.hasJsInfo()) {
+          // Separate out constructors and static and instance members which are handled separately.
+          JsMemberInfo jsConstructor = null;
+          ImmutableList.Builder<JsMemberInfo> staticJsMembers = ImmutableList.builder();
+          ImmutableList.Builder<JsMemberInfo> instanceJsMembers = ImmutableList.builder();
+          for (JsMemberInfo member : typeInfo.getJsInfo().getJsMembersList()) {
+            if (member.getKind() == JsMemberInfo.Kind.CONSTRUCTOR) {
+              jsConstructor = member;
+            } else if (member.getKind() == JsMemberInfo.Kind.METHOD) {
+              if (member.getIsStatic()) {
+                staticJsMembers.add(member);
+              } else {
+                instanceJsMembers.add(member);
+              }
+            }
+          }
+
+          var exportedType =
+              new TypeGraph.JsTypeInfo(
+                  typeInfo.getJsInfo().getQualifiedJsName(),
+                  /* index= */ jsTypes.size(),
+                  type.getExportedSupertype(),
+                  jsConstructor,
+                  /* staticJsMembers= */ staticJsMembers.build(),
+                  /* instanceJsMembers= */ instanceJsMembers.build());
+
+          jsTypes.add(exportedType);
+          type.exportedType = exportedType;
+        }
       }
     }
 
     List<TypeGraph.Type> getClasses() {
       return classes;
+    }
+
+    List<TypeGraph.JsTypeInfo> getJsTypes() {
+      return jsTypes;
     }
 
     /** Emits the top-level itable struct. */
@@ -446,6 +565,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
       private Type superType;
       private final Set<Type> implementedInterfaces = new HashSet<>();
       private final boolean isAbstract;
+      private TypeGraph.JsTypeInfo exportedType;
 
       public Type(String name, boolean isAbstract) {
         this.name = name;
@@ -548,6 +668,39 @@ final class BazelJ2wasmBundler extends BazelWorker {
           }
         }
         return itableFieldTypes;
+      }
+
+      private TypeGraph.JsTypeInfo getExportedSupertype() {
+        TypeGraph.Type currentType = superType;
+        while (currentType != null) {
+          if (currentType.exportedType != null) {
+            return currentType.exportedType;
+          }
+          currentType = currentType.superType;
+        }
+        return null;
+      }
+    }
+
+    private record JsTypeInfo(
+        String qualifiedJsName,
+        int index,
+        JsTypeInfo superType,
+        JsMemberInfo jsConstructor,
+        ImmutableList<JsMemberInfo> staticJsMembers,
+        ImmutableList<JsMemberInfo> instanceJsMembers) {
+
+      String getPrototypeGlobalName(WasmGenerationEnvironment environment) {
+        return environment.getJsPrototypeGlobalName(qualifiedJsName);
+      }
+
+      /**
+       * Streams all members of this type, excluding the constructor. Static members appear first,
+       * followed by instance members. Members should be referenced in the configuration data in the
+       * order they appear in this stream.
+       */
+      Stream<JsMemberInfo> streamJsMembersExceptConstructor() {
+        return Streams.concat(staticJsMembers.stream(), instanceJsMembers.stream());
       }
     }
   }
