@@ -15,12 +15,27 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static java.util.stream.Collectors.joining;
+
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import java.nio.file.Path;
 
-/** Generates JavaScript externs for allowing JavaScript callers to use exported JsTypes. */
+/**
+ * Generates JavaScript externs for allowing JavaScript callers to use exported JsTypes.
+ *
+ * <p>This is to provide typing information, for types and functions, for the exported JsTypes to
+ * JavaScript callers. The actual concrete types are created at runtime by Wasm.
+ */
 final class JsExternsGenerator {
 
+  private static final String OUTPUT_PATH = "externs";
+
+  private final JsTypeNameResolver closureEnvironment = new JsTypeNameResolver();
   private final WasmGenerationEnvironment environment;
   private final Output output;
 
@@ -40,9 +55,87 @@ final class JsExternsGenerator {
     if (!environment.isCustomDescriptorsJsInteropEnabled()) {
       return;
     }
+    library
+        .streamTypes()
+        .forEach(
+            type -> {
+              generateExtern(type);
+            });
+  }
 
-    // TODO(b/466162335): Generate externs for each type. Once complete, dependencies are resolved,
-    // and JS code is complete, change to .js. This "externs.js" is a placeholder.
-    output.write("externs/externs.js.txt", "");
+  private void generateExtern(Type type) {
+    if (!WasmGenerationEnvironment.isJsExport(type.getDeclaration())) {
+      return;
+    }
+
+    // TODO(b/459918329): Support interfaces.
+    if (type.isInterface()) {
+      return;
+    }
+
+    SourceBuilder sb = new SourceBuilder();
+    sb.appendln("/** @externs */");
+
+    appendConstructor(sb, type);
+
+    // Output to externs/my.package.MyClass.js
+    output.write(
+        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".js.txt").toString(),
+        sb.build());
+  }
+
+  /** Appends the constructor extern for the given type. */
+  private void appendConstructor(SourceBuilder sb, Type type) {
+    String jsDoc = closureEnvironment.getJsDocForType(type);
+    Method constructor =
+        type.getMethods().stream()
+            .filter(m -> m.getDescriptor().isJsConstructor())
+            .findFirst()
+            .orElse(null);
+
+    sb.appendln("");
+    if (constructor == null) {
+      // If no constructor, we still have to emit a constructor function so that type JSDoc
+      // annotations and members can be added.
+      sb.appendln("/**");
+      appendJsDoc(sb, jsDoc);
+      sb.appendln(" * @constructor");
+      sb.appendln(" */");
+      sb.appendln(
+          String.format(
+              "var %s = function() {};", closureEnvironment.aliasForType(type.getDeclaration())));
+      return;
+    }
+
+    sb.appendln("/**");
+    appendJsDoc(sb, jsDoc);
+    for (Variable parameter : constructor.getParameters()) {
+      sb.appendln(
+          String.format(
+              " * @param {%s} %s",
+              closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor()),
+              parameter.getName()));
+    }
+    sb.appendln(" * @constructor");
+    sb.appendln(" */");
+    sb.appendln(
+        String.format(
+            "%s = function(%s) {};",
+            type.getDeclaration().getQualifiedJsName(),
+            constructor.getParameters().stream().map(Variable::getName).collect(joining(", "))));
+  }
+
+  /** Renders a JsDoc clause. The provided jsdoc can be single line or multi-line. */
+  private void appendJsDoc(SourceBuilder sb, String jsDoc) {
+    if (jsDoc.isEmpty()) {
+      return;
+    }
+    if (jsDoc.endsWith("\n")) {
+      sb.append(jsDoc);
+    } else {
+      // Single line jsdoc - turn it into a multi-line jsdoc by prepending a "*" and appending a
+      // newline.
+      sb.appendln(" *" + jsDoc);
+    }
   }
 }

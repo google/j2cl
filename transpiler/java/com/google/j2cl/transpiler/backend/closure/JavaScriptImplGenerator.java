@@ -195,10 +195,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (classJsDoc.isEmpty()) {
       return;
     }
-    if (!classJsDoc.contains("\n")) {
+    if (!classJsDoc.endsWith("\n")) {
       sourceBuilder.appendln("/**" + classJsDoc + " */");
       return;
     }
+    // Multiline JsDocs are assumed to end with newline.
     sourceBuilder.appendln("/**");
     sourceBuilder.append(classJsDoc);
     sourceBuilder.appendln(" */");
