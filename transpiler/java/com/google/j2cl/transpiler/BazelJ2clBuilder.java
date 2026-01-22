@@ -237,7 +237,7 @@ final class BazelJ2clBuilder extends BazelWorker {
 
     // Directly put all supplied js sources into the zip file.
     allSources.stream()
-        .filter(p -> p.sourcePath().endsWith(".js") && !p.sourcePath().endsWith("native.js"))
+        .filter(p -> p.sourcePath().endsWith(".js") && !p.sourcePath().endsWith(".native.js"))
         .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
     problems.abortIfCancelled();
 
