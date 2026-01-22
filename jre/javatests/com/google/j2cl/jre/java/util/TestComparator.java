@@ -49,16 +49,6 @@ abstract class TestComparator extends TestObject {
     Collections.sort(list, comparator);
   }
 
-  @Override
-  public boolean supportsEmptyCollections() {
-    return false;
-  }
-
-  @Override
-  public boolean supportsFullCollections() {
-    return false;
-  }
-
   public void testEmptyListSort() {
     List list = new ArrayList();
     sortObjects(list, makeComparator());

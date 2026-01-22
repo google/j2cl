@@ -59,45 +59,4 @@ abstract class TestObject extends EmulTestBase {
           obj2.equals(obj1));
     }
   }
-
-  public String getCanonicalEmptyCollectionName(Object object) {
-    StringBuilder retval = new StringBuilder();
-    retval.append("data/test/");
-    String colName = object.getClass().getName();
-
-    colName = colName.substring(colName.lastIndexOf(".") + 1);
-    retval.append(colName);
-    retval.append(".emptyCollection.obj");
-    return retval.toString();
-  }
-
-  public String getCanonicalFullCollectionName(Object object) {
-    StringBuilder retval = new StringBuilder();
-    retval.append("data/test/");
-    String colName = object.getClass().getName();
-    colName = colName.substring(colName.lastIndexOf(".") + 1);
-    retval.append(colName);
-    retval.append(".fullCollection.version.obj");
-    return retval.toString();
-  }
-
-  /**
-   * Override this method if a subclass is testing a Collections that cannot serialize an "empty"
-   * Collection (e.g. Comparators have no contents)
-   *
-   * @return true
-   */
-  public boolean supportsEmptyCollections() {
-    return true;
-  }
-
-  /**
-   * Override this method if a subclass is testing a Collections that cannot serialize a "full"
-   * Collection (e.g. Comparators have no contents)
-   *
-   * @return true
-   */
-  public boolean supportsFullCollections() {
-    return true;
-  }
 }

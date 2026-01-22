@@ -925,32 +925,6 @@ abstract class TestCollection extends TestObject {
   }
 
   /**
-   * Returns a list of string elements suitable for return by {@link #getFullElements()}. Override
-   * getFullElements to return the results of this method if your collection does not support
-   * heterogeneous elements or the null element.
-   */
-  public static Object[] getFullNonNullStringElements() {
-    return new Object[] {
-      "If",
-      "the",
-      "dull",
-      "substance",
-      "of",
-      "my",
-      "flesh",
-      "were",
-      "thought",
-      "Injurious",
-      "distance",
-      "could",
-      "not",
-      "stop",
-      "my",
-      "way",
-    };
-  }
-
-  /**
    * Returns a list of string elements suitable for return by {@link #getOtherElements()}. Override
    * getOtherElements to return the results of this method if your collection does not support
    * heterogeneous elements or the null element.
