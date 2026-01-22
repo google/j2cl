@@ -25,7 +25,6 @@ j2cl_library(
 
 """
 
-load("//build_defs/internal_do_not_use/allowlists:allowlists.bzl", "allowlists")
 load("//build_defs/internal_do_not_use/allowlists:j2kt_jvm.bzl", "J2KT_JVM_ALLOWLIST")
 load("//build_defs/internal_do_not_use/allowlists:j2kt_native.bzl", "J2KT_NATIVE_ALLOWLIST")
 load("//build_defs/internal_do_not_use/allowlists:j2kt_web.bzl", "J2KT_WEB_DISABLED", "J2KT_WEB_ENABLED", "J2KT_WEB_EXPERIMENT_ENABLED")
@@ -82,7 +81,7 @@ def j2cl_library(
         args.get("srcs") and any([s for s in args.get("srcs") if s.endswith(".kt")])
     )
 
-    if has_kotlin_srcs and not allowlists.is_package_allowed(native.package_name(), KOTLIN_ALLOWLIST):
+    if has_kotlin_srcs and not KOTLIN_ALLOWLIST.accepts(target_name):
         fail(
             "Package '%s' is not permitted to have Kotlin inputs." % native.package_name(),
             "See: //build_defs/internal_do_not_use/allowlists/kotlin.bzl",
@@ -97,12 +96,12 @@ def j2cl_library(
     #  2. experiment enabled: the target is transpiled through J2KT if the blaze flag is set.
     #  3. disabled: the target is either not in the previous two sets, or is explicitly disabled
     #               despite being in one of the previous two sets.
-    is_j2kt_web_always_enabled = allowlists.is_package_allowed(native.package_name(), J2KT_WEB_ENABLED)
-    is_j2kt_web_experiment_enabled = allowlists.is_package_allowed(native.package_name(), J2KT_WEB_EXPERIMENT_ENABLED)
+    is_j2kt_web_always_enabled = J2KT_WEB_ENABLED.accepts(target_name)
+    is_j2kt_web_experiment_enabled = J2KT_WEB_EXPERIMENT_ENABLED.accepts(target_name)
     maybe_enable_j2kt_web = (
         not has_kotlin_srcs and
         (is_j2kt_web_always_enabled or is_j2kt_web_experiment_enabled) and
-        not allowlists.is_target_allowed(target_name, J2KT_WEB_DISABLED)
+        not J2KT_WEB_DISABLED.accepts(target_name)
     )
 
     # These arguments should not be set by the user.
@@ -150,7 +149,7 @@ def j2cl_library(
         # By default refer back to allow list for implicit j2wasm target generation.
         generate_j2wasm_library = (
             not native.existing_rule(j2wasm_library_name) and
-            allowlists.is_package_allowed(native.package_name(), J2WASM_ALLOWLIST)
+            J2WASM_ALLOWLIST.accepts(target_name)
         )
 
     if generate_j2wasm_library:
@@ -171,7 +170,7 @@ def j2cl_library(
         # By default refer back to allow list for implicit j2kt target generation.
         generate_j2kt_native_library = (
             not native.existing_rule(j2kt_native_library_name) and
-            allowlists.is_package_allowed(native.package_name(), J2KT_NATIVE_ALLOWLIST)
+            J2KT_NATIVE_ALLOWLIST.accepts(target_name)
         )
 
     if generate_j2kt_native_library:
@@ -192,7 +191,7 @@ def j2cl_library(
         # By default refer back to allow list for implicit j2kt target generation.
         generate_j2kt_jvm_library = (
             not native.existing_rule(j2kt_jvm_library_name) and
-            allowlists.is_package_allowed(native.package_name(), J2KT_JVM_ALLOWLIST)
+            J2KT_JVM_ALLOWLIST.accepts(target_name)
         )
 
     if generate_j2kt_jvm_library:
