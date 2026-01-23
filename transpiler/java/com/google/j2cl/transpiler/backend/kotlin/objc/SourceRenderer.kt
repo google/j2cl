@@ -139,19 +139,8 @@ fun className(name: String): Renderer<Source> = ForwardDeclaration.ofClass(name)
 
 fun protocolName(name: String): Renderer<Source> = ForwardDeclaration.ofProtocol(name).nameRenderer
 
-fun nsEnumTypedef(name: String, type: Renderer<Source>, values: List<String>): Renderer<Source> =
-  spaceSeparated(
-      sourceRenderer("typedef"),
-      join(nsEnum, inParentheses(commaSeparated(type, sourceRenderer(name)))),
-      block(
-        values
-          .mapIndexed { index, name ->
-            sourceRenderer(name).plusAssignment(sourceRenderer("$index")).plus(sourceRenderer(","))
-          }
-          .newLineSeparated()
-      ),
-    )
-    .plusSemicolon()
+fun typedef(name: String, type: Renderer<Source>): Renderer<Source> =
+  spaceSeparated(sourceRenderer("typedef"), sourceRenderer(name), type).plusSemicolon()
 
 fun functionDeclaration(
   modifiers: List<Renderer<Source>> = listOf(),

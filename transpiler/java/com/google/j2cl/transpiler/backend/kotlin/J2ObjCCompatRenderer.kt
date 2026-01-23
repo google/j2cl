@@ -67,7 +67,6 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.mathSourceRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.methodCall
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsAssumeNonnull
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsCopying
-import com.google.j2cl.transpiler.backend.kotlin.objc.nsEnumTypedef
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsInline
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableArray
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableDictionary
@@ -84,6 +83,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.sourceRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceWithDependencies
 import com.google.j2cl.transpiler.backend.kotlin.objc.toNullable
 import com.google.j2cl.transpiler.backend.kotlin.objc.toPointer
+import com.google.j2cl.transpiler.backend.kotlin.objc.typedef
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
@@ -167,12 +167,12 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun objCAlias(companionDeclaration: CompanionDeclaration): String =
     companionDeclaration.objCNameWithoutPrefix
 
+  // We append "_" to the enum type name because the @ObjcEnum does not insert an underscore
+  // between the type name and the literal name. Hence we use a typedef to remove it again.
   private fun nsEnumTypedefRenderer(type: Type): Renderer<Source> =
-    nsEnumTypedef(
-      name = objCEnumName(type.declaration),
-      type = intTypeRenderer,
-      values = type.enumFields.map { objCEnumName(it.descriptor) },
-    )
+    objCEnumName(type.declaration).let { enumName ->
+      typedef(enumName + "_", sourceRenderer(enumName))
+    }
 
   private fun propertyQualifierRenderer(fieldDescriptor: FieldDescriptor): Renderer<Source> =
     fieldDescriptor.enclosingTypeDescriptor.typeDeclaration.let { typeDeclaration ->
@@ -593,9 +593,6 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
 
   private fun objCEnumName(typeDeclaration: TypeDeclaration): String =
     "${typeDeclaration.objCNameWithoutPrefix}_Enum"
-
-  private fun objCEnumName(fieldDescriptor: FieldDescriptor): String =
-    "${objCEnumName(fieldDescriptor.enclosingTypeDescriptor.typeDeclaration)}_${fieldDescriptor.name}"
 
   private fun constantValueRenderer(literal: Literal): Renderer<Source>? =
     when (literal) {

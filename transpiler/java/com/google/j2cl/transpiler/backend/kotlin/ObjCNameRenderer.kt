@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -63,6 +64,13 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       }
     )
 
+  fun objCEnumAnnotationSource(name: String, swiftName: String? = null): Source =
+    annotation(
+      nameRenderer.topLevelQualifiedNameSource("javaemul.lang.ObjCEnum"),
+      literal(name),
+      swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
+    )
+
   fun objCNameAnnotationSource(
     name: String,
     swiftName: String? = null,
@@ -75,6 +83,18 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       literal(name),
       swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
+    )
+
+  // We append "_" to the enum type name because the @ObjcEnum annotation does not insert an
+  // underscore between the type name and the literal name. We use a typedef to remove it again.
+  fun objCEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+    newLineSeparated(
+      when {
+        !isJ2ObjCInteropEnabled -> Source.EMPTY
+        typeDeclaration.isEnum ->
+          objCEnumAnnotationSource("${typeDeclaration.objCNameWithoutPrefix}_Enum_")
+        else -> Source.EMPTY
+      }
     )
 
   fun objCAnnotationSource(methodDescriptor: MethodDescriptor): Source =
