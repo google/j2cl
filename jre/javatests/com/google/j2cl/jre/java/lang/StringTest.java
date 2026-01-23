@@ -1429,6 +1429,24 @@ public class StringTest extends TestCase {
     assertEquals(C.getLargeCharArrayString(), String.valueOf(C.getLargeCharArrayValue()));
   }
 
+  public void testJoin() {
+    assertEquals("", String.join("", ""));
+    assertEquals("", String.join(",", ""));
+    assertEquals("", String.join(",", Arrays.<String>asList()));
+
+    assertEquals("a", String.join("", "a"));
+    assertEquals("a", String.join(",", "a"));
+    assertEquals("a", String.join(",", Arrays.asList("a")));
+
+    assertEquals("ab", String.join("", "a", "b"));
+    assertEquals("a,b", String.join(",", "a", "b"));
+    assertEquals("a,b", String.join(",", Arrays.asList("a", "b")));
+
+    assertEquals("abc", String.join("", "a", "b", "c"));
+    assertEquals("a,b,c", String.join(",", "a", "b", "c"));
+    assertEquals("a,b,c", String.join(",", Arrays.asList("a", "b", "c")));
+  }
+
   /**
    * Helper method for testTrim to avoid compiler optimizations.
    *

@@ -15,10 +15,6 @@
  */
 package com.google.j2cl.jre;
 
-import com.google.j2cl.jre.java8.lang.DoubleTest;
-import com.google.j2cl.jre.java8.lang.FloatTest;
-import com.google.j2cl.jre.java8.lang.MathTest;
-import com.google.j2cl.jre.java8.lang.StringTest;
 import com.google.j2cl.jre.java8.math.BigIntegerConvertTest;
 import com.google.j2cl.jre.java8.util.ArrayListTest;
 import com.google.j2cl.jre.java8.util.ArraysTest;
@@ -57,12 +53,6 @@ import org.junit.runners.Suite.SuiteClasses;
 /** Test JRE emulations. */
 @RunWith(Suite.class)
 @SuiteClasses({
-  // -- java.lang
-  DoubleTest.class,
-  FloatTest.class,
-  MathTest.class,
-  StringTest.class,
-
   // -- java.math
   BigIntegerConvertTest.class,
 

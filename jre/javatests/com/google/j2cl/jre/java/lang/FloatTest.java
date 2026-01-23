@@ -90,6 +90,56 @@ public class FloatTest extends TestCase {
     assertFalse(Float.isInfinite(Float.NaN));
   }
 
+  public void testIsFinite() {
+    final float[] nonfiniteNumbers = {
+      Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, Float.NaN,
+    };
+    for (float value : nonfiniteNumbers) {
+      assertFalse(Float.isFinite(value));
+    }
+
+    final float[] finiteNumbers = {
+      -Float.MAX_VALUE,
+      Float.MAX_VALUE,
+      Float.MIN_VALUE,
+      -1.0f,
+      -0.5f,
+      -0.1f,
+      -0.0f,
+      0.0f,
+      0.1f,
+      0.5f,
+      1.0f,
+    };
+    for (float value : finiteNumbers) {
+      assertTrue(Float.isFinite(value));
+    }
+  }
+
+  public void testIsInfinite() {
+    assertTrue(Float.isInfinite(Float.NEGATIVE_INFINITY));
+    assertTrue(Float.isInfinite(Float.POSITIVE_INFINITY));
+
+    assertFalse(Float.isInfinite(Float.NaN));
+
+    final float[] finiteNumbers = {
+      -Float.MAX_VALUE,
+      Float.MAX_VALUE,
+      Float.MIN_VALUE,
+      -1.0f,
+      -0.5f,
+      -0.1f,
+      -0.0f,
+      0.0f,
+      0.1f,
+      0.5f,
+      1.0f,
+    };
+    for (float value : finiteNumbers) {
+      assertFalse(Float.isInfinite(value));
+    }
+  }
+
   public void testParse() {
     /*
      * Note: we must use appropriate deltas for a somewhat subtle reason.

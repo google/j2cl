@@ -16,6 +16,8 @@
 
 package com.google.j2cl.jre.java.lang;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 
@@ -119,6 +121,28 @@ public class MathTest extends TestCase {
     assertEquals(Long.MIN_VALUE, Math.abs(Long.MIN_VALUE));
   }
 
+  private static final Integer[] allIntegerCandidates = getAllIntegerCandidates();
+
+  private static Integer[] getAllIntegerCandidates() {
+    ArrayList<Integer> candidates = new ArrayList<Integer>();
+    candidates.add(0);
+    candidates.add(-1);
+    candidates.add(1);
+    candidates.add(Integer.MAX_VALUE / 2);
+    candidates.add(Integer.MAX_VALUE / 2 - 1);
+    candidates.add(Integer.MIN_VALUE / 2);
+    candidates.add(Integer.MIN_VALUE / 2 - 1);
+    candidates.add(Integer.MAX_VALUE - 1);
+    candidates.add(Integer.MAX_VALUE);
+    candidates.add(Integer.MIN_VALUE + 1);
+    candidates.add(Integer.MIN_VALUE);
+    return candidates.toArray(new Integer[candidates.size()]);
+  }
+
+  private static boolean fitsInInt(BigInteger big) {
+    return big.bitLength() < Integer.SIZE;
+  }
+
   public void testAddExact_int() {
     assertEquals(2, Math.addExact(1, 1));
     assertEquals(-2, Math.addExact(-1, -1));
@@ -146,6 +170,46 @@ public class MathTest extends TestCase {
     } catch (ArithmeticException e) {
       // Expected behavior
     }
+
+    for (int a : allIntegerCandidates) {
+      for (int b : allIntegerCandidates) {
+        BigInteger expectedResult = BigInteger.valueOf(a).add(BigInteger.valueOf(b));
+        boolean expectedSuccess = fitsInInt(expectedResult);
+        try {
+          assertEquals(a + b, Math.addExact(a, b));
+          assertTrue(expectedSuccess);
+        } catch (ArithmeticException e) {
+          assertFalse(expectedSuccess);
+        }
+      }
+    }
+  }
+
+  private static final Long[] allLongCandidates = getAllLongCandidates();
+
+  private static Long[] getAllLongCandidates() {
+    ArrayList<Long> candidates = new ArrayList<Long>();
+
+    for (Integer x : getAllIntegerCandidates()) {
+      candidates.add(x.longValue());
+    }
+
+    candidates.add(Long.MAX_VALUE / 2);
+    candidates.add(Long.MAX_VALUE / 2 - 1);
+    candidates.add(Long.MIN_VALUE / 2);
+    candidates.add(Long.MIN_VALUE / 2 - 1);
+    candidates.add(Integer.MAX_VALUE + 1L);
+    candidates.add(Long.MAX_VALUE - 1L);
+    candidates.add(Long.MAX_VALUE);
+    candidates.add(Integer.MIN_VALUE - 1L);
+    candidates.add(Long.MIN_VALUE + 1L);
+    candidates.add(Long.MIN_VALUE);
+
+    return candidates.toArray(new Long[candidates.size()]);
+  }
+
+  private static boolean fitsInLong(BigInteger big) {
+    return big.bitLength() < Long.SIZE;
   }
 
   public void testAddExact_long() {
@@ -174,6 +238,19 @@ public class MathTest extends TestCase {
       fail("addExact(Long.MIN_VALUE, -1L)");
     } catch (ArithmeticException e) {
       // Expected behavior
+    }
+
+    for (long a : allLongCandidates) {
+      for (long b : allLongCandidates) {
+        BigInteger expectedResult = BigInteger.valueOf(a).add(BigInteger.valueOf(b));
+        boolean expectedSuccess = fitsInLong(expectedResult);
+        try {
+          assertEquals(a + b, Math.addExact(a, b));
+          assertTrue(expectedSuccess);
+        } catch (ArithmeticException e) {
+          assertFalse(expectedSuccess);
+        }
+      }
     }
   }
 
@@ -336,6 +413,17 @@ public class MathTest extends TestCase {
     } catch (ArithmeticException e) {
       // Expected behavior
     }
+
+    for (int a : allIntegerCandidates) {
+      BigInteger expectedResult = BigInteger.valueOf(a).subtract(BigInteger.ONE);
+      boolean expectedSuccess = fitsInInt(expectedResult);
+      try {
+        assertEquals(a - 1, Math.decrementExact(a));
+        assertTrue(expectedSuccess);
+      } catch (ArithmeticException e) {
+        assertFalse(expectedSuccess);
+      }
+    }
   }
 
   public void testDecrementExact_long() {
@@ -347,6 +435,17 @@ public class MathTest extends TestCase {
       fail("decrementExact(Long.MIN_VALUE)");
     } catch (ArithmeticException e) {
       // Expected behavior
+    }
+
+    for (long a : allLongCandidates) {
+      BigInteger expectedResult = BigInteger.valueOf(a).subtract(BigInteger.ONE);
+      boolean expectedSuccess = fitsInLong(expectedResult);
+      try {
+        assertEquals(a - 1, Math.decrementExact(a));
+        assertTrue(expectedSuccess);
+      } catch (ArithmeticException e) {
+        assertFalse(expectedSuccess);
+      }
     }
   }
 
@@ -386,6 +485,94 @@ public class MathTest extends TestCase {
     assertEquals(-Double.MAX_VALUE, v, 0);
   }
 
+  public void testFloorDiv_int() {
+    assertEquals(-1, Math.floorDiv(1, -1));
+    assertEquals(0, Math.floorDiv(0, 1));
+    assertEquals(1, Math.floorDiv(4, 3));
+    assertEquals(-2, Math.floorDiv(4, -3));
+    assertEquals(-2, Math.floorDiv(-4, 3));
+    assertEquals(1, Math.floorDiv(-4, -3));
+    assertEquals(1, Math.floorDiv(Integer.MIN_VALUE, Integer.MIN_VALUE));
+    assertEquals(1, Math.floorDiv(Integer.MAX_VALUE, Integer.MAX_VALUE));
+    assertEquals(-1, Math.floorDiv(Integer.MAX_VALUE, Integer.MIN_VALUE));
+    assertEquals(-2, Math.floorDiv(Integer.MIN_VALUE, Integer.MAX_VALUE));
+    assertEquals(Integer.MIN_VALUE, Math.floorDiv(Integer.MIN_VALUE, 1));
+    assertEquals(Integer.MAX_VALUE, Math.floorDiv(Integer.MAX_VALUE, 1));
+
+    // special case
+    assertEquals(Integer.MIN_VALUE, Math.floorDiv(Integer.MIN_VALUE, -1));
+
+    try {
+      Math.floorDiv(1, 0);
+      fail();
+    } catch (ArithmeticException expected) {
+    }
+  }
+
+  public void testFloorDiv_long() {
+    assertEquals(-1L, Math.floorDiv(1L, -1L));
+    assertEquals(0L, Math.floorDiv(0L, 1L));
+    assertEquals(1L, Math.floorDiv(4L, 3L));
+    assertEquals(-2L, Math.floorDiv(4L, -3L));
+    assertEquals(-2L, Math.floorDiv(-4L, 3L));
+    assertEquals(1L, Math.floorDiv(-4L, -3L));
+    assertEquals(1L, Math.floorDiv(Long.MIN_VALUE, Long.MIN_VALUE));
+    assertEquals(1L, Math.floorDiv(Long.MAX_VALUE, Long.MAX_VALUE));
+    assertEquals(-1L, Math.floorDiv(Long.MAX_VALUE, Long.MIN_VALUE));
+    assertEquals(-2L, Math.floorDiv(Long.MIN_VALUE, Long.MAX_VALUE));
+    assertEquals(Long.MIN_VALUE, Math.floorDiv(Long.MIN_VALUE, 1L));
+    assertEquals(Long.MAX_VALUE, Math.floorDiv(Long.MAX_VALUE, 1L));
+
+    // special case
+    assertEquals(Long.MIN_VALUE, Math.floorDiv(Long.MIN_VALUE, -1));
+
+    try {
+      Math.floorDiv(1L, 0L);
+      fail();
+    } catch (ArithmeticException expected) {
+    }
+  }
+
+  public void testFloorMod_int() {
+    assertEquals(0, Math.floorMod(0, 1));
+    assertEquals(1, Math.floorMod(4, 3));
+    assertEquals(-2, Math.floorMod(4, -3));
+    assertEquals(2, Math.floorMod(-4, 3));
+    assertEquals(-1, Math.floorMod(-4, -3));
+    assertEquals(0, Math.floorMod(Integer.MIN_VALUE, Integer.MIN_VALUE));
+    assertEquals(0, Math.floorMod(Integer.MAX_VALUE, Integer.MAX_VALUE));
+    assertEquals(0, Math.floorMod(Integer.MIN_VALUE, 1));
+    assertEquals(0, Math.floorMod(Integer.MAX_VALUE, 1));
+    assertEquals(Integer.MAX_VALUE - 1, Math.floorMod(Integer.MAX_VALUE - 1, Integer.MAX_VALUE));
+    assertEquals(1, Math.floorMod(Integer.MAX_VALUE, Integer.MAX_VALUE - 1));
+
+    try {
+      Math.floorMod(1, 0);
+      fail();
+    } catch (ArithmeticException expected) {
+    }
+  }
+
+  public void testFloorMod_long() {
+    assertEquals(0L, Math.floorMod(0L, 1L));
+    assertEquals(1L, Math.floorMod(4L, 3L));
+    assertEquals(-2L, Math.floorMod(4L, -3L));
+    assertEquals(2L, Math.floorMod(-4L, 3L));
+    assertEquals(-1L, Math.floorMod(-4L, -3L));
+    assertEquals(0L, Math.floorMod(Long.MIN_VALUE, Long.MIN_VALUE));
+    assertEquals(0L, Math.floorMod(Long.MAX_VALUE, Long.MAX_VALUE));
+    assertEquals(0L, Math.floorMod(Long.MIN_VALUE, 1L));
+    assertEquals(0L, Math.floorMod(Long.MAX_VALUE, 1L));
+    assertEquals(Long.MAX_VALUE - 1L, Math.floorMod(Long.MAX_VALUE - 1L, Long.MAX_VALUE));
+    assertEquals(1L, Math.floorMod(Long.MAX_VALUE, Long.MAX_VALUE - 1L));
+
+    try {
+      Math.floorMod(1L, 0L);
+      fail();
+    } catch (ArithmeticException expected) {
+    }
+  }
+
   public void testHypot() {
     assertEquals(
         Double.POSITIVE_INFINITY, Math.hypot(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
@@ -420,6 +607,17 @@ public class MathTest extends TestCase {
     } catch (ArithmeticException e) {
       // Expected behavior
     }
+
+    for (int a : allIntegerCandidates) {
+      BigInteger expectedResult = BigInteger.valueOf(a).add(BigInteger.ONE);
+      boolean expectedSuccess = fitsInInt(expectedResult);
+      try {
+        assertEquals(a + 1, Math.incrementExact(a));
+        assertTrue(expectedSuccess);
+      } catch (ArithmeticException e) {
+        assertFalse(expectedSuccess);
+      }
+    }
   }
 
   public void testIncrementExact_long() {
@@ -431,6 +629,17 @@ public class MathTest extends TestCase {
       fail("incrementExact(Long.MAX_VALUE)");
     } catch (ArithmeticException e) {
       // Expected behavior
+    }
+
+    for (long a : allLongCandidates) {
+      BigInteger expectedResult = BigInteger.valueOf(a).add(BigInteger.ONE);
+      boolean expectedSuccess = fitsInLong(expectedResult);
+      try {
+        assertEquals(a + 1, Math.incrementExact(a));
+        assertTrue(expectedSuccess);
+      } catch (ArithmeticException e) {
+        assertFalse(expectedSuccess);
+      }
     }
   }
 
@@ -573,6 +782,19 @@ public class MathTest extends TestCase {
     } catch (ArithmeticException e) {
       // Expected behavior
     }
+
+    for (int a : allIntegerCandidates) {
+      for (int b : allIntegerCandidates) {
+        BigInteger expectedResult = BigInteger.valueOf(a).multiply(BigInteger.valueOf(b));
+        boolean expectedSuccess = fitsInInt(expectedResult);
+        try {
+          assertEquals(a * b, Math.multiplyExact(a, b));
+          assertTrue(expectedSuccess);
+        } catch (ArithmeticException e) {
+          assertFalse(expectedSuccess);
+        }
+      }
+    }
   }
 
   public void testMultiplyExact_long() {
@@ -598,6 +820,19 @@ public class MathTest extends TestCase {
     } catch (ArithmeticException e) {
       // Expected behavior
     }
+
+    for (long a : allLongCandidates) {
+      for (long b : allLongCandidates) {
+        BigInteger expectedResult = BigInteger.valueOf(a).multiply(BigInteger.valueOf(b));
+        boolean expectedSuccess = fitsInLong(expectedResult);
+        try {
+          assertEquals(a * b, Math.multiplyExact(a, b));
+          assertTrue(expectedSuccess);
+        } catch (ArithmeticException e) {
+          assertFalse(expectedSuccess);
+        }
+      }
+    }
   }
 
   public void testNegateExact_int() {
@@ -612,6 +847,17 @@ public class MathTest extends TestCase {
     } catch (ArithmeticException e) {
       // Expected behavior
     }
+
+    for (int a : allIntegerCandidates) {
+      BigInteger expectedResult = BigInteger.valueOf(a).negate();
+      boolean expectedSuccess = fitsInInt(expectedResult);
+      try {
+        assertEquals(-a, Math.negateExact(a));
+        assertTrue(expectedSuccess);
+      } catch (ArithmeticException e) {
+        assertFalse(expectedSuccess);
+      }
+    }
   }
 
   public void testNegateExact_long() {
@@ -625,6 +871,17 @@ public class MathTest extends TestCase {
       fail("negateExact(Long.MIN_VALUE)");
     } catch (ArithmeticException e) {
       // Expected behavior
+    }
+
+    for (long a : allLongCandidates) {
+      BigInteger expectedResult = BigInteger.valueOf(a).negate();
+      boolean expectedSuccess = fitsInLong(expectedResult);
+      try {
+        assertEquals(-a, Math.negateExact(a));
+        assertTrue(expectedSuccess);
+      } catch (ArithmeticException e) {
+        assertFalse(expectedSuccess);
+      }
     }
   }
 
@@ -855,6 +1112,19 @@ public class MathTest extends TestCase {
     } catch (ArithmeticException e) {
       // Expected behavior
     }
+
+    for (int a : allIntegerCandidates) {
+      for (int b : allIntegerCandidates) {
+        BigInteger expectedResult = BigInteger.valueOf(a).subtract(BigInteger.valueOf(b));
+        boolean expectedSuccess = fitsInInt(expectedResult);
+        try {
+          assertEquals(a - b, Math.subtractExact(a, b));
+          assertTrue(expectedSuccess);
+        } catch (ArithmeticException e) {
+          assertFalse(expectedSuccess);
+        }
+      }
+    }
   }
 
   public void testSubtractExact_long() {
@@ -876,6 +1146,19 @@ public class MathTest extends TestCase {
       fail("subtractExact(Long.MAX_VALUE, -1L)");
     } catch (ArithmeticException e) {
       // Expected behavior
+    }
+
+    for (long a : allLongCandidates) {
+      for (long b : allLongCandidates) {
+        BigInteger expectedResult = BigInteger.valueOf(a).subtract(BigInteger.valueOf(b));
+        boolean expectedSuccess = fitsInLong(expectedResult);
+        try {
+          assertEquals(a - b, Math.subtractExact(a, b));
+          assertTrue(expectedSuccess);
+        } catch (ArithmeticException e) {
+          assertFalse(expectedSuccess);
+        }
+      }
     }
   }
 
@@ -932,6 +1215,27 @@ public class MathTest extends TestCase {
       fail("incrementExact(Integer.MAX_VALUE + 1L)");
     } catch (ArithmeticException e) {
       // Expected behavior
+    }
+
+    final long[] samples = {
+      0,
+      -1,
+      1,
+      Integer.MIN_VALUE,
+      Integer.MAX_VALUE,
+      Integer.MIN_VALUE - 1L,
+      Integer.MAX_VALUE + 1L,
+      Long.MIN_VALUE,
+      Long.MAX_VALUE
+    };
+    for (long a : samples) {
+      boolean expectedSuccess = (int) a == a;
+      try {
+        assertEquals((int) a, Math.toIntExact(a));
+        assertTrue(expectedSuccess);
+      } catch (ArithmeticException e) {
+        assertFalse(expectedSuccess);
+      }
     }
   }
 
