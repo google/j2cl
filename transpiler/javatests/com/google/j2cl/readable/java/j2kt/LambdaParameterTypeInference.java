@@ -15,6 +15,8 @@
  */
 package j2kt;
 
+import java.util.Map;
+import java.util.function.Function;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -43,5 +45,15 @@ public class LambdaParameterTypeInference {
   // unnecessary cast was inserted for "wrap()" call.
   public static <T extends @Nullable Object> void test(Supplier<? extends T> supplier) {
     add(supplier, wrap(x -> {}));
+  }
+
+  // Repro for b/454662844)
+  public static void testInference(Map<String, Integer> map) {
+    map.compute("", (key, value) -> (value == null) ? 1 : value + 1);
+    LambdaParameterTypeInference.<Integer>applyToNull(value -> (value == null) ? 1 : value + 1);
+  }
+
+  private static <T> int applyToNull(Function<? super @Nullable T, Integer> function) {
+    return function.apply(null);
   }
 }

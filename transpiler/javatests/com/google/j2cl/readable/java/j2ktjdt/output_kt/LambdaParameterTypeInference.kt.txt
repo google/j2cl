@@ -21,7 +21,13 @@ package j2ktjdt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import java.util.function.BiFunction
+import java.util.function.Function
+import kotlin.Any
+import kotlin.Int
+import kotlin.String
 import kotlin.Suppress
+import kotlin.collections.MutableMap
 import kotlin.jvm.JvmStatic
 
 open class LambdaParameterTypeInference {
@@ -45,6 +51,26 @@ open class LambdaParameterTypeInference {
      },
     ),
    )
+  }
+
+  @JvmStatic
+  fun testInference(map: MutableMap<String, Int>) {
+   map.compute(
+    "",
+    BiFunction { key: String, value: Int? ->
+     return@BiFunction if (value == null) 1 else value!!.toInt() + 1
+    },
+   )
+   LambdaParameterTypeInference.applyToNull<Int>(
+    Function { value_1: Int? ->
+     return@Function if (value_1 == null) 1 else value_1!!.toInt() + 1
+    },
+   )
+  }
+
+  @JvmStatic
+  private fun <T: Any> applyToNull(function: Function<in T?, Int>): Int {
+   return function.apply(null)!!.toInt()
   }
  }
 

@@ -1,4 +1,4 @@
-// Generated from "j2kt/LambdaParameterTypeInference.java"
+// Generated from "j2ktjavac/LambdaParameterTypeInference.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -17,7 +17,7 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2kt
+package j2ktjavac
 
 import javaemul.lang.*
 import java.lang.RuntimeException
@@ -57,14 +57,14 @@ open class LambdaParameterTypeInference {
   fun testInference(map: MutableMap<String, Int>) {
    map.compute(
     "",
-    BiFunction { key: String, value: Int? ->
-     return@BiFunction if (value == null) 1 else value!!.toInt() + 1
-    },
+    BiFunction { key: String, value: Int ->
+     return@BiFunction if (value == null) 1 else value.toInt() + 1
+    } as BiFunction<in String, in Int?, out Int?>,
    )
    LambdaParameterTypeInference.applyToNull<Int>(
-    Function { value_1: Int? ->
-     return@Function if (value_1 == null) 1 else value_1!!.toInt() + 1
-    },
+    Function { value_1: Int ->
+     return@Function if (value_1 == null) 1 else value_1.toInt() + 1
+    } as Function<in Int?, Int>,
    )
   }
 
