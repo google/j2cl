@@ -27,7 +27,7 @@ j2cl_library(
 
 load("//build_defs/internal_do_not_use/allowlists:j2kt_jvm.bzl", "J2KT_JVM_ALLOWLIST")
 load("//build_defs/internal_do_not_use/allowlists:j2kt_native.bzl", "J2KT_NATIVE_ALLOWLIST")
-load("//build_defs/internal_do_not_use/allowlists:j2kt_web.bzl", "J2KT_WEB_DISABLED", "J2KT_WEB_ENABLED", "J2KT_WEB_EXPERIMENT_ENABLED")
+load("//build_defs/internal_do_not_use/allowlists:j2kt_web.bzl", "J2KT_WEB_ENABLED", "J2KT_WEB_EXPERIMENT_ENABLED")
 load("//build_defs/internal_do_not_use/allowlists:j2wasm.bzl", "J2WASM_ALLOWLIST")
 load("//build_defs/internal_do_not_use/allowlists:kotlin.bzl", "KOTLIN_ALLOWLIST")
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
@@ -91,17 +91,13 @@ def j2cl_library(
         if target_name != "//ktstdlib:j2cl_kt_stdlib":
             args["deps"] = args.get("deps", []) + [_KOTLIN_STDLIB_TARGET]
 
-    # J2KT Web can be in one of three states for a given target:
+    # J2KT Web can be in one of two states for a given target:
     #  1. enabled: the target is always transpiled through J2KT
     #  2. experiment enabled: the target is transpiled through J2KT if the blaze flag is set.
-    #  3. disabled: the target is either not in the previous two sets, or is explicitly disabled
-    #               despite being in one of the previous two sets.
     is_j2kt_web_always_enabled = J2KT_WEB_ENABLED.accepts(target_name)
     is_j2kt_web_experiment_enabled = J2KT_WEB_EXPERIMENT_ENABLED.accepts(target_name)
     maybe_enable_j2kt_web = (
-        not has_kotlin_srcs and
-        (is_j2kt_web_always_enabled or is_j2kt_web_experiment_enabled) and
-        not J2KT_WEB_DISABLED.accepts(target_name)
+        not has_kotlin_srcs and (is_j2kt_web_always_enabled or is_j2kt_web_experiment_enabled)
     )
 
     # These arguments should not be set by the user.
