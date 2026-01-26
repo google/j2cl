@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
-import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer.Companion.rendererOf
+import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent.Companion.dependent
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.testing.assertBuilds
 import org.junit.Test
@@ -103,16 +103,16 @@ class SourceTest {
   }
 
   @Test
-  fun rendererSourceWithDependencies() {
-    rendererOf(source("void main() {}"))
+  fun sourceWithDependencies() {
+    dependent(source("void main() {}"))
       .with(Dependency.of(Import.system("std.h")))
       .sourceWithDependencies
       .assertBuilds(
         """
-      #import <std.h>
+        #import <std.h>
 
-      void main() {}
-      """
+        void main() {}
+        """
           .trimIndent()
       )
   }

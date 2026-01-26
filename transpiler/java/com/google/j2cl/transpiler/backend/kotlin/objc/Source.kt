@@ -84,8 +84,8 @@ val Import.source: Source
       },
     )
 
-val Renderer<Source>.sourceWithDependencies: Source
+val Dependent<Source>.sourceWithDependencies: Source
   get() =
-    renderWithDependencies().let { (source, dependencies) ->
+    getWithDependencies().let { (source, dependencies) ->
       emptyLineSeparated(dependenciesSource(dependencies), source)
     }

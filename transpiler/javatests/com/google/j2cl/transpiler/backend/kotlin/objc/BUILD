@@ -9,11 +9,7 @@ package(
 kt_jvm_library(
     name = "tests",
     testonly = 1,
-    srcs = [
-        "DependencyTest.kt",
-        "RendererTest.kt",
-        "SourceTest.kt",
-    ],
+    srcs = glob(["*.kt"]),
     deps = [
         "//third_party:junit",
         "//third_party:truth",
