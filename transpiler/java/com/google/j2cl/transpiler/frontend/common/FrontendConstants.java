@@ -39,6 +39,7 @@ public final class FrontendConstants {
   public static final String J2KT_NATIVE_ANNOTATION_NAME = "javaemul.internal.annotations.KtNative";
   public static final String J2KT_OBJECTIVE_C_ANNOTATION_NAME =
       "com.google.j2objc.annotations.ObjectiveCName";
+  public static final String SWIFT_NAME_ANNOTATION_NAME = "com.google.j2objc.annotations.SwiftName";
   public static final String J2KT_OUT_ANNOTATION_NAME = "javaemul.internal.annotations.KtOut";
   public static final String J2KT_PROPERTY_ANNOTATION_NAME =
       "javaemul.internal.annotations.KtProperty";

@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
+import javax.annotation.Nullable;
 
 /**
  * A cache for information on package-info files that are needed for transpilation, like JsInterop
@@ -46,6 +47,7 @@ public class PackageInfoCache {
    * Returns the JsNamespace for the given type, which must be a top level type and referenced by
    * fully qualified source name.
    */
+  @Nullable
   public String getJsNamespace(String topLevelTypeSourceName) {
     return getPackageReport(topLevelTypeSourceName).getJsNamespace();
   }
@@ -54,8 +56,13 @@ public class PackageInfoCache {
    * Returns the ObjectiveCName for the given type which must be a top level type and referenced by
    * its fully qualified source name.
    */
+  @Nullable
   public String getObjectiveCName(String topLevelTypeSourceName) {
     return getPackageReport(topLevelTypeSourceName).getObjectiveCName();
+  }
+
+  public boolean getHasSwiftName(String topLevelTypeSourceName) {
+    return getPackageReport(topLevelTypeSourceName).getHasSwiftName();
   }
 
   public boolean isNullMarked(String topLevelTypeSourceName) {
@@ -63,13 +70,18 @@ public class PackageInfoCache {
   }
 
   public void setPackageProperties(
-      String packageName, String packageJsNamespace, String objectiveCName, boolean isNullMarked) {
+      String packageName,
+      @Nullable String packageJsNamespace,
+      @Nullable String objectiveCName,
+      boolean hasSwiftName,
+      boolean isNullMarked) {
     packageReportByTypeName.put(
         packageName,
         PackageInfo.newBuilder()
             .setPackageName(packageName)
             .setJsNamespace(packageJsNamespace)
             .setObjectiveCName(objectiveCName)
+            .setHasSwiftName(hasSwiftName)
             .setNullMarked(isNullMarked)
             .build());
   }

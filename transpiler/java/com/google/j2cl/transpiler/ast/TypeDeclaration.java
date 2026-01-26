@@ -503,6 +503,18 @@ public abstract class TypeDeclaration
   @Nullable
   public abstract String getObjectiveCNamePrefix();
 
+  @Nullable
+  public String getSwiftName() {
+    String swiftName = J2ktAstUtils.getSwiftName(this);
+    if (swiftName != null) {
+      return swiftName;
+    } else if (getPackage().getHasSwiftName()) {
+      return "";
+    } else {
+      return null;
+    }
+  }
+
   public abstract boolean isNullMarked();
 
   @Memoized

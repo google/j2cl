@@ -20,8 +20,11 @@
 package j2ktswiftname
 
 import javaemul.lang.*
+import com.google.j2objc.annotations.SwiftName
 import kotlin.Suppress
 
+@SwiftName("MyCustomSwiftClass")
 open class SwiftNameClass {
+ @SwiftName("MyCustomSwiftNestedClass")
  open class Nested
 }

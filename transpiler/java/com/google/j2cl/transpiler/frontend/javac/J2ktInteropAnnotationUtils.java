@@ -25,11 +25,13 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PUBLIC_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_THROWS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SWIFT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
 
+import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
 
@@ -54,11 +56,13 @@ public class J2ktInteropAnnotationUtils {
   }
 
   // TODO(b/444296932): Remove when no longer needed.
+  @Nullable
   public static String getJ2ktObjectiveCName(AnnotationMirror annotation) {
     return getAnnotationParameterString(annotation, "value");
   }
 
   // TODO(b/444296932): Remove when no longer needed.
+  @Nullable
   public static String getJ2ktObjectiveCName(AnnotatedConstruct annotatedConstruct) {
     return getJ2ktObjectiveCName(
         getAnnotation(annotatedConstruct, J2ktInteropAnnotationUtils::isJ2ktObjectiveCName));
@@ -67,6 +71,26 @@ public class J2ktInteropAnnotationUtils {
   // TODO(b/444296932): Remove when no longer needed.
   public static boolean isJ2ktObjectiveCName(AnnotationMirror annotation) {
     return getAnnotationName(annotation).equals(J2KT_OBJECTIVE_C_ANNOTATION_NAME);
+  }
+
+  public static boolean isJ2ktSwiftName(AnnotationMirror annotation) {
+    return getAnnotationName(annotation).equals(SWIFT_NAME_ANNOTATION_NAME);
+  }
+
+  @Nullable
+  public static String getJ2ktSwiftName(AnnotatedConstruct annotatedConstruct) {
+    AnnotationMirror annotation =
+        getAnnotation(annotatedConstruct, J2ktInteropAnnotationUtils::isJ2ktSwiftName);
+    if (annotation == null) {
+      return null;
+    }
+    String swiftName = getJ2ktSwiftName(annotation);
+    return swiftName == null ? "" : swiftName;
+  }
+
+  @Nullable
+  public static String getJ2ktSwiftName(AnnotationMirror annotation) {
+    return getAnnotationParameterString(annotation, "value");
   }
 
   public static AnnotationMirror getJ2ktObjectiveCNameAnnotation(

@@ -40,6 +40,7 @@ public abstract class PackageInfo {
     // Prefill with known annotations so we can use it to avoid traversing unrelated annotations.
     annotations.put(FrontendConstants.JS_PACKAGE_ANNOTATION_NAME, null);
     annotations.put(FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME, null);
+    annotations.put(FrontendConstants.SWIFT_NAME_ANNOTATION_NAME, null);
     annotations.put(FrontendConstants.NULL_MARKED_ANNOTATION_NAME, null);
 
     final int opcode = org.objectweb.asm.Opcodes.ASM9;
@@ -71,6 +72,7 @@ public abstract class PackageInfo {
         .setPackageName(packageName)
         .setJsNamespace(annotations.get(FrontendConstants.JS_PACKAGE_ANNOTATION_NAME))
         .setObjectiveCName(annotations.get(FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME))
+        .setHasSwiftName(annotations.get(FrontendConstants.SWIFT_NAME_ANNOTATION_NAME) != null)
         .setNullMarked(annotations.get(FrontendConstants.NULL_MARKED_ANNOTATION_NAME) != null)
         .build();
   }
@@ -83,10 +85,12 @@ public abstract class PackageInfo {
   @Nullable
   public abstract String getObjectiveCName();
 
+  public abstract boolean getHasSwiftName();
+
   public abstract boolean isNullMarked();
 
   public static Builder newBuilder() {
-    return new AutoValue_PackageInfo.Builder().setNullMarked(false);
+    return new AutoValue_PackageInfo.Builder().setNullMarked(false).setHasSwiftName(false);
   }
 
   /** A Builder for PackageReport. */
@@ -95,9 +99,11 @@ public abstract class PackageInfo {
 
     public abstract Builder setPackageName(String packageName);
 
-    public abstract Builder setJsNamespace(String jsNamespace);
+    public abstract Builder setJsNamespace(@Nullable String jsNamespace);
 
-    public abstract Builder setObjectiveCName(String objectiveCName);
+    public abstract Builder setObjectiveCName(@Nullable String objectiveCName);
+
+    public abstract Builder setHasSwiftName(boolean hasSwiftName);
 
     public abstract Builder setNullMarked(boolean isNullMarked);
 

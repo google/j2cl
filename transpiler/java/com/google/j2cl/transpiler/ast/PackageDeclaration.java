@@ -32,8 +32,10 @@ public abstract class PackageDeclaration {
     return getCustomizedJsNamespace() != null ? getCustomizedJsNamespace() : getName();
   }
 
+  public abstract boolean getHasSwiftName();
+
   public static Builder newBuilder() {
-    return new AutoValue_PackageDeclaration.Builder();
+    return new AutoValue_PackageDeclaration.Builder().setHasSwiftName(false);
   }
 
   /** Builder for a PackageDeclaration. */
@@ -43,6 +45,8 @@ public abstract class PackageDeclaration {
     public abstract Builder setName(String name);
 
     public abstract Builder setCustomizedJsNamespace(@Nullable String jsNamespace);
+
+    public abstract Builder setHasSwiftName(boolean value);
 
     private static final ThreadLocalInterner<PackageDeclaration> interner =
         new ThreadLocalInterner<>();

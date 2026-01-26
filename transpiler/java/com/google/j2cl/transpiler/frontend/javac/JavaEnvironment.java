@@ -23,6 +23,7 @@ import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.is
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
+import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktSwiftName;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropUtils.getJ2ktVariance;
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
 
@@ -1523,6 +1524,7 @@ class JavaEnvironment {
     return PackageDeclaration.newBuilder()
         .setName(packageName)
         .setCustomizedJsNamespace(getJsNamespace(packageElement))
+        .setHasSwiftName(getJ2ktSwiftName(packageElement) != null)
         .build();
   }
 

@@ -61,6 +61,11 @@ public class J2ktAstUtils {
   }
 
   @Nullable
+  public static String getSwiftName(HasAnnotations hasAnnotations) {
+    return getAnnotationValueString(hasAnnotations, "com.google.j2objc.annotations.SwiftName");
+  }
+
+  @Nullable
   private static String getAnnotationValueString(
       HasAnnotations hasAnnotations, String qualifiedName) {
     Annotation annotation = hasAnnotations.getAnnotation(qualifiedName);

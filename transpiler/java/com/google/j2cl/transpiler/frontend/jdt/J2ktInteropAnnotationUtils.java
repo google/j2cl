@@ -24,6 +24,7 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PUBLIC_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_THROWS_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SWIFT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getAnnotationBinding;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
@@ -84,6 +85,29 @@ public class J2ktInteropAnnotationUtils {
         .getAnnotationType()
         .getQualifiedName()
         .equals(J2KT_OBJECTIVE_C_ANNOTATION_NAME);
+  }
+
+  public static boolean isJ2ktSwiftName(IAnnotationBinding annotationBinding) {
+    return annotationBinding
+        .getAnnotationType()
+        .getQualifiedName()
+        .equals(SWIFT_NAME_ANNOTATION_NAME);
+  }
+
+  @Nullable
+  public static String getJ2ktSwiftName(PackageDeclaration packageDeclaration) {
+    IAnnotationBinding annotation =
+        getAnnotationBinding(packageDeclaration, J2ktInteropAnnotationUtils::isJ2ktSwiftName);
+    if (annotation == null) {
+      return null;
+    }
+    String swiftName = getJ2ktSwiftName(annotation);
+    return swiftName == null ? "" : swiftName;
+  }
+
+  @Nullable
+  public static String getJ2ktSwiftName(IAnnotationBinding annotationBinding) {
+    return getStringAttribute(annotationBinding, "value");
   }
 
   @Nullable

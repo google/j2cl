@@ -20,8 +20,11 @@
 package j2ktswiftname.subpackage
 
 import javaemul.lang.*
+import com.google.j2objc.annotations.SwiftName
 import kotlin.Suppress
 
+@SwiftName("")
 open class SubpackageClass {
+ @SwiftName("SpecificSwiftName")
  open class OverriddenClass
 }

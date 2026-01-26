@@ -1153,6 +1153,7 @@ public class JdtEnvironment {
     return PackageDeclaration.newBuilder()
         .setName(packageName)
         .setCustomizedJsNamespace(packageAnnotationsResolver.getJsNameSpace(packageName))
+        .setHasSwiftName(packageAnnotationsResolver.getHasSwiftName(packageName))
         .build();
   }
 

@@ -57,6 +57,17 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
       Source.EMPTY
     }
 
+  fun swiftNameAnnotationSource(name: String): Source =
+    annotation(
+      nameRenderer.topLevelQualifiedNameSource("com.google.j2objc.annotations.SwiftName"),
+      literal(name),
+    )
+
+  fun swiftNameAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+    Source.emptyUnless(isJ2ObjCInteropEnabled) {
+      typeDeclaration.swiftName?.let { swiftNameAnnotationSource(it) }.orEmpty()
+    }
+
   fun hiddenFromObjCAnnotationSource(): Source =
     annotation(
       nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {

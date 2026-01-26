@@ -20,6 +20,7 @@ import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils
 import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
 
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 /** A utility class to resolve and cache package annotations. */
@@ -35,16 +36,22 @@ public final class PackageAnnotationsResolver {
 
   private final PackageInfoCache packageInfoCache;
 
+  @Nullable
   public String getJsNameSpace(String packageName) {
     return packageInfoCache.getJsNamespace(packageName);
   }
 
+  @Nullable
   public String getObjectiveCNamePrefix(String packageName) {
     return packageInfoCache.getObjectiveCName(packageName);
   }
 
   public boolean isNullMarked(String packageName) {
     return packageInfoCache.isNullMarked(packageName);
+  }
+
+  public boolean getHasSwiftName(String packageName) {
+    return packageInfoCache.getHasSwiftName(packageName);
   }
 
   /** Populates the cache for the annotations in package-info compilation units. */
@@ -62,6 +69,7 @@ public final class PackageAnnotationsResolver {
                 packageDeclaration.getName().getFullyQualifiedName(),
                 getJsNamespace(packageDeclaration),
                 getJ2ktObjectiveCName(packageDeclaration),
+                J2ktInteropAnnotationUtils.getJ2ktSwiftName(packageDeclaration) != null,
                 JdtAnnotationUtils.hasNullMarkedAnnotation(packageDeclaration));
           }
         });

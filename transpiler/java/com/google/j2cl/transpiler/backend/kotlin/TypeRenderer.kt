@@ -73,6 +73,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
           newLineSeparated(
             objCNameRenderer.objCEnumAnnotationSource(typeDeclaration),
             objCNameRenderer.objectiveCAnnotationSource(typeDeclaration),
+            objCNameRenderer.swiftNameAnnotationSource(typeDeclaration),
             jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
             autoValueAnnotationsSource(typeDeclaration),
             spaceSeparated(
