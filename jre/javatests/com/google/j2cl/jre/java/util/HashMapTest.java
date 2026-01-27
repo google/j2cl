@@ -662,6 +662,15 @@ public class HashMapTest extends TestMap {
     dstMap.putAll(dstMap);
   }
 
+  public void testComputeIfAbsent_nullKey() {
+    HashMap<@Nullable String, @Nullable String> map = new HashMap<String, String>();
+
+    Object value = map.computeIfAbsent(null, k -> "A");
+    assertEquals("A", value);
+    assertTrue(map.containsKey(null));
+    assertEquals("A", map.get(null));
+  }
+
   /** Test method for 'java.util.HashMap.remove(Object)'. */
   public void testRemove() {
     HashMap<@Nullable String, @Nullable String> hashMap = new HashMap<String, String>();

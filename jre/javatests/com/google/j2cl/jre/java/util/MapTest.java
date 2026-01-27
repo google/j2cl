@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,18 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.jre.java9.util;
+package com.google.j2cl.jre.java.util;
 
 import static org.junit.Assert.assertThrows;
 
-import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
-/** Tests for java.util.Map Java 9 API emulation. */
-@SuppressWarnings("JdkImmutableCollections")
-public class MapTest extends EmulTestBase {
+/** Tests for java.util.Map. */
+@NullMarked
+public class MapTest extends TestMap {
 
+  @J2ktIncompatible // not emulated
   public void testOf() {
     assertIsImmutableMapOf(Map.of());
     assertIsImmutableMapOf(Map.of("a", 1), "a");
@@ -137,6 +142,7 @@ public class MapTest extends EmulTestBase {
                 "a", 1, "b", 2, "c", 3, "d", 4, "e", 5, "f", 6, "g", 7, "h", 8, "i", 9, "a", 10));
   }
 
+  @J2ktIncompatible // not emulated
   public void testCopyOf() {
     assertIsImmutableMapOf(Map.copyOf(Map.of("a", 1)), "a");
 
@@ -191,6 +197,7 @@ public class MapTest extends EmulTestBase {
     }
   }
 
+  @J2ktIncompatible // not emulated
   public void testEntry() {
     Map.Entry<String, String> entry = Map.entry("a", "b");
 
@@ -204,6 +211,7 @@ public class MapTest extends EmulTestBase {
   }
 
   @SuppressWarnings("DuplicateMapKeys")
+  @J2ktIncompatible // not emulated
   public void testOfEntries() {
     Map<String, Integer> map = Map.ofEntries(Map.entry("a", 1), Map.entry("b", 2));
 
@@ -223,5 +231,85 @@ public class MapTest extends EmulTestBase {
     assertThrows(
         IllegalArgumentException.class,
         () -> Map.ofEntries(Map.entry("a", "b"), Map.entry("a", "c")));
+  }
+
+  @Override
+  protected Map<@Nullable Object, @Nullable Object> makeEmptyMap() {
+    return new MapImpl<>();
+  }
+
+  private static class MapImpl<K extends @Nullable Object, V extends @Nullable Object>
+      implements Map<K, V> {
+    private final Map<K, V> container = new HashMap<>();
+
+    @Override
+    public int size() {
+      return container.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+      return container.isEmpty();
+    }
+
+    @Override
+    public boolean containsKey(@Nullable Object key) {
+      return container.containsKey(key);
+    }
+
+    @Override
+    public boolean containsValue(@Nullable Object value) {
+      return container.containsValue(value);
+    }
+
+    @Override
+    public V get(@Nullable Object key) {
+      return container.get(key);
+    }
+
+    @Override
+    public V put(K key, V value) {
+      return container.put(key, value);
+    }
+
+    @Override
+    public V remove(@Nullable Object key) {
+      return container.remove(key);
+    }
+
+    @Override
+    public void putAll(Map<? extends K, ? extends V> m) {
+      container.putAll(m);
+    }
+
+    @Override
+    public void clear() {
+      container.clear();
+    }
+
+    @Override
+    public Set<K> keySet() {
+      return container.keySet();
+    }
+
+    @Override
+    public Collection<V> values() {
+      return container.values();
+    }
+
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+      return container.entrySet();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object o) {
+      return container.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+      return container.hashCode();
+    }
   }
 }

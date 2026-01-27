@@ -15,11 +15,18 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static java.util.Arrays.asList;
+
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -355,6 +362,100 @@ public abstract class ListTestBase extends TestArrayList {
         assertEquals(i, elem.intValue());
       }
     }
+  }
+
+  public void testForeach() {
+    List<String> list = makeEmptyStringList();
+
+    try {
+      list.forEach(null);
+      fail();
+    } catch (NullPointerException expected) {
+    }
+
+    list.forEach(e -> fail());
+
+    list = makeEmptyStringList();
+    list.addAll(asList("a", "b", "c"));
+    ArrayList<String> visited = new ArrayList<>();
+    list.forEach(visited::add);
+    assertEquals(asList("a", "b", "c"), visited);
+  }
+
+  public void testRemoveIf() {
+    List<String> list = makeEmptyStringList();
+
+    try {
+      list.removeIf(null);
+      fail();
+    } catch (NullPointerException expected) {
+    }
+
+    list = makeEmptyStringList();
+    list.addAll(asList("a", "b", "c"));
+    assertFalse(list.removeIf(e -> false));
+    assertEquals(asList("a", "b", "c"), list);
+
+    assertFalse(list.removeIf(Predicate.isEqual("")));
+    assertEquals(asList("a", "b", "c"), list);
+
+    assertTrue(list.removeIf(Predicate.isEqual("b")));
+    assertEquals(asList("a", "c"), list);
+
+    list.add("d");
+    assertTrue(list.removeIf(e -> e.equals("a") || e.equals("c")));
+    assertEquals(asList("d"), list);
+
+    assertTrue(list.removeIf(Predicate.isEqual("d")));
+    assertFalse(list.removeIf(Predicate.isEqual("d")));
+    assertTrue(list.isEmpty());
+
+    Collections.addAll(list, "a", "b");
+    assertFalse(list.removeIf(Objects::isNull));
+    assertEquals(asList("a", "b"), list);
+  }
+
+  @J2ktIncompatible // Not nullable according to Jspecify
+  public void testReplaceAll_null() {
+    List<String> list = makeEmptyStringList();
+
+    try {
+      list.replaceAll(null);
+      fail();
+    } catch (NullPointerException expected) {
+    }
+  }
+
+  public void testReplaceAll() {
+    List<String> list = makeEmptyStringList();
+
+    list.replaceAll(UnaryOperator.identity());
+    assertTrue(list.isEmpty());
+
+    Collections.addAll(list, "a", "b");
+    list.replaceAll(UnaryOperator.identity());
+    assertEquals(asList("a", "b"), list);
+
+    list.replaceAll(e -> e + "0");
+    assertEquals(asList("a0", "b0"), list);
+
+    list.add("c");
+    list.replaceAll(e -> e + "1");
+    assertEquals(asList("a01", "b01", "c1"), list);
+  }
+
+  public void testSort() {
+    List<String> list = makeEmptyStringList();
+    list.sort(null);
+
+    Collections.addAll(list, "b", "a", "c");
+    list.sort(null);
+    assertEquals(asList("a", "b", "c"), list);
+
+    list = makeEmptyStringList();
+    Collections.addAll(list, "b", "a", "c");
+    list.sort(Collections.reverseOrder());
+    assertEquals(asList("c", "b", "a"), list);
   }
 
   private <T extends @Nullable Object> void checkListSizeAndContent(List<T> in, int... expected) {

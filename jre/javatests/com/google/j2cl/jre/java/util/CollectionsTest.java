@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,10 +26,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -289,6 +293,7 @@ public class CollectionsTest extends EmulTestBase {
     // Test optimized RandomAccess code path
     testRotateImpl(
         new ListImplProvider() {
+          @Override
           public List<Integer> copyOf(Collection<Integer> data) {
             return new ArrayList<>(data);
           }
@@ -296,6 +301,7 @@ public class CollectionsTest extends EmulTestBase {
     // Test sequential List code path
     testRotateImpl(
         new ListImplProvider() {
+          @Override
           public List<Integer> copyOf(Collection<Integer> data) {
             return new LinkedList<>(data);
           }
@@ -362,5 +368,67 @@ public class CollectionsTest extends EmulTestBase {
 
     Collections.rotate(list, -3);
     assertEquals(original, list);
+  }
+
+  public void testUnmodifiableList() {
+    List<String> list = Collections.unmodifiableList(Arrays.asList("1", "2", "3"));
+    doTestModificationsToList(list);
+    doTestModificationsToListViaIterator(list);
+  }
+
+  public void testUnmodifiableList_emptyList() {
+    List<String> list = Collections.unmodifiableList(new ArrayList<>());
+    doTestModificationsToList(list);
+  }
+
+  private void doTestModificationsToList(List<String> list) {
+    assertUnmodifiableContract(list, l -> l.add("4"));
+    assertUnmodifiableContract(list, l -> l.add(0, "5"));
+    assertUnmodifiableContract(list, l -> l.addAll(Arrays.asList("6")));
+    assertUnmodifiableContract(list, l -> l.addAll(0, Arrays.asList("7")));
+    assertUnmodifiableContract(list, l -> l.addAll(Arrays.asList()));
+    assertUnmodifiableContract(list, l -> l.clear());
+    assertUnmodifiableContract(list, l -> l.replaceAll((s) -> s + "asdf"));
+    assertUnmodifiableContract(list, l -> l.remove("1"));
+    assertUnmodifiableContract(list, l -> l.remove(0));
+    assertUnmodifiableContract(list, l -> l.removeAll(Arrays.asList("1")));
+    assertUnmodifiableContract(list, l -> l.removeIf((s) -> true));
+    assertUnmodifiableContract(list, l -> l.retainAll(Arrays.asList("4")));
+    assertUnmodifiableContract(list, l -> l.set(0, "24"));
+    assertUnmodifiableContract(
+        list, l -> l.sort((s1, s2) -> Integer.valueOf(s2) - Integer.valueOf(s1)));
+    assertUnmodifiableContract(list, l -> l.subList(0, 0).remove(0));
+  }
+
+  private void doTestModificationsToListViaIterator(List<String> list) {
+    assertUnmodifiableContractThroughIterator(list, i -> i.add("4"));
+    assertUnmodifiableContractThroughIterator(list, i -> i.remove());
+    assertUnmodifiableContractThroughIterator(list, i -> i.set("4"));
+  }
+
+  private static void assertUnmodifiableContractThroughIterator(
+      List<String> list, Consumer<ListIterator<String>> consumer) {
+    assertUnmodifiableContract(
+        list,
+        l -> {
+          ListIterator<String> listIterator = l.listIterator();
+          listIterator.next();
+          consumer.accept(listIterator);
+        });
+
+    assertUnmodifiableContract(
+        list,
+        l -> {
+          ListIterator<String> listIterator = l.listIterator(1);
+          listIterator.next();
+          consumer.accept(listIterator);
+        });
+  }
+
+  private static void assertUnmodifiableContract(
+      List<String> list, Consumer<List<String>> consumer) {
+    List<?> originalContent = new ArrayList<>(list);
+    assertThrows(UnsupportedOperationException.class, () -> consumer.accept(list));
+    assertEquals(originalContent, list);
   }
 }

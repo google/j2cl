@@ -48,6 +48,10 @@ abstract class TestList extends TestCollection {
    */
   protected abstract List<@Nullable Object> makeEmptyList();
 
+  protected List<String> makeEmptyStringList() {
+    return (List) makeEmptyList();
+  }
+
   /**
    * Return a new, full {@link List} to be used for testing.
    *

@@ -181,6 +181,10 @@ abstract class TestMap extends TestObject {
     return true;
   }
 
+  protected boolean isStringContentSupported() {
+    return true;
+  }
+
   /**
    * Returns the set of keys in the mappings used to test the map. This method must return an array
    * with the same length as {@link #getSampleValues()} and all array elements must be different.
@@ -329,6 +333,13 @@ abstract class TestMap extends TestObject {
 
   /** Return a new, empty {@link Map} to be used for testing. */
   protected abstract Map<@Nullable Object, @Nullable Object> makeEmptyMap();
+
+  protected final Map<String, String> makeEmptyStringMap() {
+    if (!isStringContentSupported()) {
+      fail("Test method that requires String keys and values");
+    }
+    return (Map) makeEmptyMap();
+  }
 
   protected Map<@Nullable Object, @Nullable Object> makeConfirmedMap() {
     return new HashMap();
@@ -822,6 +833,267 @@ abstract class TestMap extends TestObject {
       it.next();
       fail();
     } catch (ConcurrentModificationException expected) {
+    }
+  }
+
+  public void testCompute() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    String value = map.compute("a", (k, v) -> k + " - " + v);
+    assertEquals("a - A", value);
+    assertTrue(map.containsKey("a"));
+    assertEquals("a - A", map.get("a"));
+
+    value = map.compute("a", (k, v) -> null);
+    assertNull(value);
+    assertFalse(map.containsKey("a"));
+
+    value =
+        map.compute(
+            "a",
+            (k, v) -> {
+              assertNull(v);
+              return k.toUpperCase();
+            });
+    assertEquals("A", value);
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+  }
+
+  public void testComputeIfAbsent() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, @Nullable String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    String value =
+        map.computeIfAbsent(
+            "a",
+            k -> {
+              fail();
+              return null;
+            });
+    assertEquals("A", value);
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+
+    map.remove("a");
+    value = map.computeIfAbsent("a", String::toUpperCase);
+    assertEquals("A", value);
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+
+    map.remove("a");
+    value = map.computeIfAbsent("a", k -> null);
+    assertNull(value);
+    assertFalse(map.containsKey("a"));
+  }
+
+  public void testComputeIfPresent() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    String value = map.computeIfPresent("a", (k, v) -> k + " - " + v);
+    assertEquals("a - A", value);
+    assertTrue(map.containsKey("a"));
+    assertEquals("a - A", map.get("a"));
+
+    value = map.computeIfPresent("a", (k, v) -> null);
+    assertNull(value);
+    assertFalse(map.containsKey("a"));
+
+    value =
+        map.computeIfPresent(
+            "a",
+            (k, v) -> {
+              fail();
+              return null;
+            });
+    assertNull(value);
+    assertFalse(map.containsKey("a"));
+  }
+
+  public void testForeach() {
+    resetFull();
+
+    map.forEach(
+        (k, v) -> {
+          assertTrue(confirmed.containsKey(k));
+          assertEquals(confirmed.get(k), v);
+          confirmed.remove(k);
+        });
+    assertTrue(confirmed.isEmpty());
+  }
+
+  public void testGetOrDefault() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, @Nullable String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    String value = map.getOrDefault("a", null);
+    assertEquals("A", value);
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+
+    map.remove("a");
+    value = map.getOrDefault("a", "A");
+    assertEquals("A", value);
+    assertFalse(map.containsKey("a"));
+    assertNull(map.get("a"));
+
+    map.put("a", null);
+    value = map.getOrDefault("a", "A");
+    assertNull(value);
+    assertTrue(map.containsKey("a"));
+    assertNull(map.get("a"));
+  }
+
+  public void testMerge() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    String newValue =
+        map.merge(
+            "a",
+            "a",
+            (currentValue, value) -> {
+              assertEquals("A", currentValue);
+              assertEquals("a", value);
+              return value;
+            });
+    assertEquals(newValue, "a");
+    assertTrue(map.containsKey("a"));
+    assertEquals("a", map.get("a"));
+
+    try {
+      map.merge("a", null, (currentValue, value) -> "");
+      fail();
+    } catch (NullPointerException expected) {
+    }
+
+    newValue = map.merge("a", "", (currentValue, value) -> null);
+    assertNull(newValue);
+    assertFalse(map.containsKey("a"));
+    assertNull(map.get("a"));
+
+    newValue = map.merge("a", "A", (currentValue, value) -> value);
+    assertEquals("A", newValue);
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+  }
+
+  public void testPutIfAbsent() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, @Nullable String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    String oldValue = map.putIfAbsent("a", "a");
+    assertEquals("A", oldValue);
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+
+    map.remove("a");
+    oldValue = map.putIfAbsent("a", "a");
+    assertNull(oldValue);
+    assertTrue(map.containsKey("a"));
+    assertEquals("a", map.get("a"));
+
+    map.put("a", null);
+    oldValue = map.putIfAbsent("a", "A");
+    assertNull(oldValue);
+    assertEquals("A", map.get("a"));
+  }
+
+  public void testRemoveKeyValue() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, @Nullable String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    assertFalse(map.remove("a", "a"));
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+
+    assertTrue(map.remove("a", "A"));
+    assertFalse(map.containsKey("a"));
+
+    assertFalse(map.remove("a", null));
+
+    map.put("a", null);
+    assertTrue(map.remove("a", null));
+    assertFalse(map.containsKey("a"));
+  }
+
+  public void testReplace() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, @Nullable String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    String oldValue = map.replace("a", "a");
+    assertEquals("A", oldValue);
+    assertTrue(map.containsKey("a"));
+    assertEquals("a", map.get("a"));
+
+    map.remove("a");
+    oldValue = map.replace("a", "A");
+    assertNull(oldValue);
+    assertFalse(map.containsKey("a"));
+    assertNull(map.get("a"));
+  }
+
+  public void testReplaceOldValueNewValue() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    Map<String, @Nullable String> map = makeEmptyStringMap();
+    map.put("a", "A");
+
+    assertTrue(map.replace("a", "A", "a"));
+    assertTrue(map.containsKey("a"));
+    assertEquals("a", map.get("a"));
+
+    assertFalse(map.replace("a", "A", "a"));
+
+    assertTrue(map.replace("a", "a", null));
+    assertTrue(map.containsKey("a"));
+    assertNull(map.get("a"));
+
+    map.remove("a");
+    assertFalse(map.replace("a", "a", "A"));
+    assertFalse(map.containsKey("a"));
+    assertNull(map.get("a"));
+  }
+
+  public void testReplaceAll() {
+    if (!isStringContentSupported()) {
+      return;
+    }
+    resetFull();
+    map.replaceAll((k, v) -> v == null ? null : ((String) v).toLowerCase());
+
+    assertEquals(confirmed.size(), map.size());
+    for (Map.Entry<Object, Object> entry : confirmed.entrySet()) {
+      assertTrue(map.containsKey(entry.getKey()));
+      var value = entry.getValue();
+      assertEquals(map.get(entry.getKey()), value == null ? null : ((String) value).toLowerCase());
     }
   }
 

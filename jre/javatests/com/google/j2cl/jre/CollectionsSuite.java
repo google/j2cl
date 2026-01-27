@@ -31,7 +31,11 @@ import com.google.j2cl.jre.java.util.IdentityHashMapTest;
 import com.google.j2cl.jre.java.util.LinkedHashMapTest;
 import com.google.j2cl.jre.java.util.LinkedHashSetTest;
 import com.google.j2cl.jre.java.util.LinkedListTest;
+import com.google.j2cl.jre.java.util.ListTest;
+import com.google.j2cl.jre.java.util.MapEntryTest;
+import com.google.j2cl.jre.java.util.MapTest;
 import com.google.j2cl.jre.java.util.PriorityQueueTest;
+import com.google.j2cl.jre.java.util.SetTest;
 import com.google.j2cl.jre.java.util.StackTest;
 import com.google.j2cl.jre.java.util.TreeMapIntegerDoubleTest;
 import com.google.j2cl.jre.java.util.TreeMapIntegerDoubleWithComparatorTest;
@@ -62,7 +66,11 @@ import org.junit.runners.Suite.SuiteClasses;
   LinkedHashMapTest.class,
   LinkedHashSetTest.class,
   LinkedListTest.class,
+  ListTest.class,
+  MapTest.class,
+  MapEntryTest.class,
   PriorityQueueTest.class,
+  SetTest.class,
   StackTest.class,
   VectorTest.class,
   TreeMapStringStringTest.class,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,20 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.jre.java9.util;
+package com.google.j2cl.jre.java.util;
 
 import static org.junit.Assert.assertThrows;
 
-import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
-/** Tests for java.util.List Java 9 API emulation. */
+/** Tests for java.util.List. */
 @SuppressWarnings("JdkImmutableCollections")
-public class ListTest extends EmulTestBase {
+@NullMarked
+public class ListTest extends TestList {
 
+  @J2ktIncompatible // not emulated
   public void testOf() {
     assertIsImmutableListOf(List.of());
     assertIsImmutableListOf(List.of("a"), "a");
@@ -99,6 +105,7 @@ public class ListTest extends EmulTestBase {
         () -> List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", null));
   }
 
+  @J2ktIncompatible // not emulated
   public void testCopyOf() {
     assertIsImmutableListOf(List.copyOf(List.of("a", "b")), "a", "b");
     assertIsImmutableListOf(List.copyOf(Arrays.asList("a", "b")), "a", "b");
@@ -149,6 +156,140 @@ public class ListTest extends EmulTestBase {
     // Without any items, remove(T) defaults to iterating items present.
     if (contents.length > 0) {
       assertThrows(UnsupportedOperationException.class, () -> list.remove(contents[0]));
+    }
+  }
+
+  @Override
+  protected List<@Nullable Object> makeEmptyList() {
+    return new ListImpl<>();
+  }
+
+  private static class ListImpl<T extends @Nullable Object> implements List<T> {
+    private final List<T> container = new ArrayList<>();
+
+    @Override
+    public int size() {
+      return container.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+      return container.isEmpty();
+    }
+
+    @Override
+    public boolean contains(@Nullable Object o) {
+      return container.contains(o);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+      return container.iterator();
+    }
+
+    @Override
+    public @Nullable Object[] toArray() {
+      return container.toArray();
+    }
+
+    @Override
+    public <E extends @Nullable Object> E[] toArray(E[] a) {
+      return container.toArray(a);
+    }
+
+    @Override
+    public boolean add(T t) {
+      return container.add(t);
+    }
+
+    @Override
+    public boolean remove(@Nullable Object o) {
+      return container.remove(o);
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+      return container.containsAll(c);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+      return container.addAll(c);
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+      return container.addAll(index, c);
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+      return container.removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+      return container.retainAll(c);
+    }
+
+    @Override
+    public void clear() {
+      container.clear();
+    }
+
+    @Override
+    public T get(int index) {
+      return container.get(index);
+    }
+
+    @Override
+    public T set(int index, T element) {
+      return container.set(index, element);
+    }
+
+    @Override
+    public void add(int index, T element) {
+      container.add(index, element);
+    }
+
+    @Override
+    public T remove(int index) {
+      return container.remove(index);
+    }
+
+    @Override
+    public int indexOf(@Nullable Object o) {
+      return container.indexOf(o);
+    }
+
+    @Override
+    public int lastIndexOf(@Nullable Object o) {
+      return container.lastIndexOf(o);
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+      return container.listIterator();
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+      return container.listIterator(index);
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+      return container.subList(fromIndex, toIndex);
+    }
+
+    @Override
+    public boolean equals(@Nullable Object o) {
+      return container.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+      return container.hashCode();
     }
   }
 }

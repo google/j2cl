@@ -13,11 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.jre.java9.util;
+package com.google.j2cl.jre.java.util;
 
 import static org.junit.Assert.assertThrows;
 
-import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,6 +27,7 @@ import java.util.Set;
 @SuppressWarnings("JdkImmutableCollections")
 public class SetTest extends EmulTestBase {
 
+  @J2ktIncompatible // not emulated
   public void testOf() {
     assertIsImmutableSetOf(Set.of());
     assertIsImmutableSetOf(Set.of("a"), "a");
@@ -110,6 +111,7 @@ public class SetTest extends EmulTestBase {
         () -> Set.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "a"));
   }
 
+  @J2ktIncompatible // not emulated
   public void testCopyOf() {
     assertIsImmutableSetOf(Set.copyOf(Set.of("a", "b")), "a", "b");
     assertIsImmutableSetOf(Set.copyOf(Arrays.asList("a", "b")), "a", "b");

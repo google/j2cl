@@ -23,6 +23,11 @@ import org.jspecify.annotations.Nullable;
 public class TreeMapIntegerDoubleTest extends TreeMapTest<Integer, Double> {
 
   @Override
+  public boolean isStringContentSupported() {
+    return false;
+  }
+
+  @Override
   Integer getGreaterThanMaximumKey() {
     return Integer.MAX_VALUE;
   }

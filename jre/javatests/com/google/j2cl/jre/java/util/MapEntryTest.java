@@ -13,9 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.jre.java8.util;
+package com.google.j2cl.jre.java.util;
 
-import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.Collections;
 import java.util.Comparator;
