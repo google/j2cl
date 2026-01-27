@@ -268,7 +268,7 @@ public interface Map<K, V> {
   @JsNullable
   V get(Object key);
 
-  default V getOrDefault(Object key, V defaultValue) {
+  default @JsNullable V getOrDefault(Object key, @JsNullable V defaultValue) {
     V currentValue = get(key);
     return (currentValue == null && !containsKey(key)) ? defaultValue : currentValue;
   }
