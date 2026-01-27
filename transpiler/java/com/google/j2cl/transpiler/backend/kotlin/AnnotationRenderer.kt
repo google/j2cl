@@ -61,8 +61,6 @@ internal data class AnnotationRenderer(val nameRenderer: NameRenderer) {
   companion object {
     private val RENDERED_ANNOTATIONS =
       setOf(
-        "com.google.errorprone.annotations.CanIgnoreReturnValue",
-        "com.google.errorprone.annotations.ResultIgnorabilityUnspecified",
         "com.google.j2objc.annotations.ObjectiveCName",
         "com.google.j2objc.annotations.SwiftName",
       )
