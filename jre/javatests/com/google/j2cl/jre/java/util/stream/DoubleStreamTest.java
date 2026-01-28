@@ -17,6 +17,7 @@
 package com.google.j2cl.jre.java.util.stream;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;
@@ -465,5 +466,41 @@ public class DoubleStreamTest extends EmulTestBase {
   // See https://github.com/gwtproject/gwt/issues/8615
   private static String toIntegralString(double value) {
     return "" + (int) value;
+  }
+
+  @J2ktIncompatible // Not emulated.
+  public void testTakeWhile() {
+    assertEquals(
+        new double[] {1.1, 2.2},
+        DoubleStream.of(1.1, 2.2, 3.3, 4.4, 5.5, 1.1).takeWhile(i -> i < 3).toArray());
+    assertEquals(0, DoubleStream.of(1.1, 2.2, 3.3, 4.4, 5.5).takeWhile(i -> i > 2).count());
+
+    assertEquals(
+        new double[] {0, 1.0, 2.0, 3.0, 4.0},
+        DoubleStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray());
+    assertEquals(0, DoubleStream.empty().takeWhile(n -> n < 4).count());
+    assertEquals(0, DoubleStream.of(5.0, 6.0, 7.0).takeWhile(n -> n < 5).count());
+    assertEquals(
+        new double[] {1.0, 2.0, 3.0},
+        DoubleStream.of(1.0, 2.0, 3.0).takeWhile(n -> n < 4).toArray());
+
+    // pass an infinite stream to takeWhile, ensure it handles it
+    assertEquals(
+        new double[] {0, 1.0, 2.0, 3.0, 4.0},
+        DoubleStream.iterate(0, i -> i + 1).takeWhile(i -> true).limit(5).toArray());
+  }
+
+  @J2ktIncompatible // Not emulated.
+  public void testDropWhile() {
+    assertEquals(
+        new double[] {3, 4, 5}, DoubleStream.of(1, 2, 3, 4, 5).dropWhile(i -> i < 3).toArray());
+    assertEquals(
+        new double[] {1, 2, 3, 4, 5},
+        DoubleStream.of(1, 2, 3, 4, 5).dropWhile(i -> i > 2).toArray());
+
+    // pass an infinite stream to dropWhile, ensure it handles it
+    assertEquals(
+        new double[] {5, 6, 7, 8, 9},
+        DoubleStream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray());
   }
 }

@@ -19,6 +19,7 @@ package com.google.j2cl.jre.java.util.stream;
 import static java.util.Arrays.asList;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -659,5 +660,40 @@ public class StreamTest extends EmulTestBase {
       assertSame(t, expected);
       assertEquals(0, expected.getSuppressed().length);
     }
+  }
+
+  public void testOfNullable() {
+    assertEquals(0, Stream.ofNullable(null).count());
+    assertEquals(new String[] {"abc"}, Stream.ofNullable("abc").toArray());
+  }
+
+  @J2ktIncompatible // Not emulated.
+  public void testTakeWhile() {
+    assertEquals(new Integer[] {1, 2}, Stream.of(1, 2, 3, 4, 5).takeWhile(i -> i < 3).toArray());
+    assertEquals(0, Stream.of(1, 2, 3, 4, 5, 1).takeWhile(i -> i > 2).count());
+
+    assertEquals(
+        new Integer[] {0, 1, 2, 3, 4},
+        Stream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray());
+    assertEquals(0, Stream.<Integer>empty().takeWhile(n -> n < 4).count());
+    assertEquals(0, Stream.of(5, 6, 7).takeWhile(n -> n < 5).count());
+    assertEquals(new Integer[] {1, 2, 3}, Stream.of(1, 2, 3).takeWhile(n -> n < 4).toArray());
+
+    // pass an infinite stream to takeWhile, ensure it handles it
+    assertEquals(
+        new Integer[] {0, 1, 2, 3, 4},
+        Stream.iterate(0, i -> i + 1).takeWhile(i -> true).limit(5).toArray());
+  }
+
+  @J2ktIncompatible // Not emulated.
+  public void testDropWhile() {
+    assertEquals(new Integer[] {3, 4, 5}, Stream.of(1, 2, 3, 4, 5).dropWhile(i -> i < 3).toArray());
+    assertEquals(
+        new Integer[] {1, 2, 3, 4, 5}, Stream.of(1, 2, 3, 4, 5).dropWhile(i -> i > 2).toArray());
+
+    // pass an infinite stream to dropWhile, ensure it handles it
+    assertEquals(
+        new Integer[] {5, 6, 7, 8, 9},
+        Stream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray());
   }
 }
