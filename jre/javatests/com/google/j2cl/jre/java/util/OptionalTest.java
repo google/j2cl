@@ -20,10 +20,10 @@ import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import junit.framework.TestCase;
+import java.util.stream.Stream;
 
 /** Tests for Optional JRE emulation. */
-public class OptionalTest extends TestCase {
+public class OptionalTest extends EmulTestBase {
 
   private static final Object REFERENCE = new Object();
   private static final Object OTHER_REFERENCE = new Object();
@@ -411,5 +411,16 @@ public class OptionalTest extends TestCase {
 
     // non empty case
     assertEquals(REFERENCE.hashCode(), present.hashCode());
+  }
+
+  public void testStream() {
+    assertEquals(0, Optional.empty().stream().count());
+    assertEquals(1, Optional.of("foo").stream().count());
+
+    assertEquals(
+        new String[] {"a", "b", "c"},
+        Stream.of(Optional.of("a"), empty, Optional.of("b"), Optional.of("c"))
+            .flatMap(Optional::stream)
+            .toArray(String[]::new));
   }
 }

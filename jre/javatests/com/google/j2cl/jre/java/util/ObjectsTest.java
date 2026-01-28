@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Comparator;
 import java.util.Objects;
 import junit.framework.TestCase;
@@ -103,5 +106,27 @@ public class ObjectsTest extends TestCase {
     assertEquals(0, Objects.hashCode(null));
     Object obj = new Object();
     assertEquals(obj.hashCode(), Objects.hashCode(obj));
+  }
+
+  @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
+  @J2ktIncompatible // Not emulated
+  public void testRequireNonNull() {
+    Integer one = 1;
+    Integer anotherOne = 1;
+    assertEquals(one, Objects.requireNonNull(anotherOne, "message"));
+    assertEquals(one, Objects.requireNonNullElse(1, 2));
+    assertEquals(one, Objects.requireNonNullElseGet(1, () -> 2));
+    assertEquals(one, Objects.requireNonNullElse(null, 1));
+    assertEquals(one, Objects.requireNonNullElseGet(null, () -> 1));
+
+    Exception e =
+        assertThrows(
+            NullPointerException.class, () -> Objects.requireNonNull(null, "expected message"));
+    assertTrue(e.getMessage().contains("expected message"));
+
+    assertThrows(NullPointerException.class, () -> Objects.requireNonNullElse(null, null));
+    // NOTE: j2cl throws an uncatchable exception on a null dereference in a function call.
+    // assertThrows(NullPointerException.class, () -> Objects.requireNonNullElseGet(null, null));
+    assertThrows(NullPointerException.class, () -> Objects.requireNonNullElseGet(null, () -> null));
   }
 }

@@ -20,10 +20,10 @@ import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.NoSuchElementException;
 import java.util.OptionalDouble;
-import junit.framework.TestCase;
+import java.util.stream.Stream;
 
 /** Tests for OptionalDouble JRE emulation. */
-public class OptionalDoubleTest extends TestCase {
+public class OptionalDoubleTest extends EmulTestBase {
 
   private static final double REFERENCE = 10d;
   private static final double OTHER_REFERENCE = 20d;
@@ -229,5 +229,21 @@ public class OptionalDoubleTest extends TestCase {
 
     // non empty case
     assertEquals(Double.hashCode(REFERENCE), present.hashCode());
+  }
+
+  @J2ktIncompatible // Not emulated
+  public void testStream() {
+    assertEquals(0, OptionalDouble.empty().stream().count());
+    assertEquals(1, OptionalDouble.of(10.0).stream().count());
+
+    assertEquals(
+        new double[] {10.0, 100.0, 1000.0},
+        Stream.of(
+                OptionalDouble.of(10.0),
+                OptionalDouble.empty(),
+                OptionalDouble.of(100.0),
+                OptionalDouble.of(1000.0))
+            .flatMapToDouble(OptionalDouble::stream)
+            .toArray());
   }
 }

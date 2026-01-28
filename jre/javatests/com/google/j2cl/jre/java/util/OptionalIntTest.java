@@ -20,10 +20,10 @@ import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.NoSuchElementException;
 import java.util.OptionalInt;
-import junit.framework.TestCase;
+import java.util.stream.Stream;
 
 /** Tests for OptionalInt JRE emulation. */
-public class OptionalIntTest extends TestCase {
+public class OptionalIntTest extends EmulTestBase {
 
   private static final int REFERENCE = 10;
   private static final int OTHER_REFERENCE = 20;
@@ -229,5 +229,18 @@ public class OptionalIntTest extends TestCase {
 
     // non empty case
     assertEquals(Integer.hashCode(REFERENCE), present.hashCode());
+  }
+
+  @J2ktIncompatible // Not emulated
+  public void testStream() {
+    assertEquals(0, OptionalInt.empty().stream().count());
+    assertEquals(1, OptionalInt.of(10).stream().count());
+
+    assertEquals(
+        new int[] {10, 100, 1000},
+        Stream.of(
+                OptionalInt.of(10), OptionalInt.empty(), OptionalInt.of(100), OptionalInt.of(1000))
+            .flatMapToInt(OptionalInt::stream)
+            .toArray());
   }
 }
