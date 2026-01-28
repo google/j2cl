@@ -15,7 +15,28 @@
  */
 package wasmcustomdescriptorsjsinterop;
 
+import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
+
 /** Tests J2WASM custom descriptor jsinterop features. */
 public final class Main {
-  public static void main(String... args) throws Exception {}
+  public static void main(String... args) throws Exception {
+    SomeJsType someJsType = internalize(newSomeJsType(123));
+
+    assertTrue(someJsType.value == 123);
+  }
+
+  @JsMethod(namespace = "nativehelper")
+  static native WasmExtern newSomeJsType(int value);
+
+  @Wasm("extern.internalize")
+  public static native <T> T internalize(WasmExtern t);
+
+  // TODO(b/479214877): Remove this externref when we can pass exported types from JS to Wasm or we
+  // implement the necessary wrappers.
+  @JsType(isNative = true)
+  interface WasmExtern {}
 }

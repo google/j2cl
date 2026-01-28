@@ -57,30 +57,32 @@ final class JsExternsGenerator {
     }
     library
         .streamTypes()
+        .filter(this::shouldGenerateExtern)
         .forEach(
             type -> {
               generateExtern(type);
+              generateExternsWiring(type);
             });
   }
 
-  private void generateExtern(Type type) {
-    if (!WasmGenerationEnvironment.isJsExport(type.getDeclaration())) {
-      return;
-    }
-
+  private boolean shouldGenerateExtern(Type type) {
     // TODO(b/459918329): Support interfaces.
     if (type.isInterface()) {
-      return;
+      return false;
     }
 
+    return WasmGenerationEnvironment.isJsExport(type.getDeclaration());
+  }
+
+  private void generateExtern(Type type) {
     SourceBuilder sb = new SourceBuilder();
     sb.appendln("/** @externs */");
 
     appendConstructor(sb, type);
 
-    // Output to externs/my.package.MyClass.js
+    // Output to externs/my.package.MyClass.externs.js
     output.write(
-        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".js.txt").toString(),
+        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".externs.js").toString(),
         sb.build());
   }
 
@@ -137,5 +139,23 @@ final class JsExternsGenerator {
       // newline.
       sb.appendln(" *" + jsDoc);
     }
+  }
+
+  private void generateExternsWiring(Type type) {
+    SourceBuilder sb = new SourceBuilder();
+    sb.appendln(String.format("goog.module('%s');", type.getDeclaration().getModuleName()));
+    sb.appendln("");
+    sb.appendln("const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');");
+    sb.appendln("");
+    sb.appendln(
+        String.format(
+            "exports = /** @type {typeof %s} */ constructorProxy('%s');",
+            closureEnvironment.aliasForType(type.getDeclaration()),
+            type.getDeclaration().getQualifiedJsName()));
+
+    // Output to externs/my.package.MyClass.js
+    output.write(
+        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".js").toString(),
+        sb.build());
   }
 }

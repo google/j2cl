@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.JsInfo;
+import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -228,6 +229,14 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
   /** Method descriptor for $create methods. */
   private static MethodDescriptor getFactoryDescriptorForConstructor(MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
+    // Note: For JS constructors, we mark mark the corresponding factory method as a JS method so
+    // that the summary builder picks it up.
+    JsInfo newJsInfo =
+        constructor.isJsConstructor()
+            ? JsInfo.Builder.from(constructor.getOriginalJsInfo())
+                .setJsMemberType(JsMemberType.METHOD)
+                .build()
+            : JsInfo.NONE;
     return constructor.transform(
         builder ->
             builder
@@ -241,7 +250,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
                         .getTypeDeclaration()
                         .getTypeParameterDescriptors())
                 .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
-                .setOriginalJsInfo(JsInfo.NONE)
+                .setOriginalJsInfo(newJsInfo)
                 .setVisibility(constructor.getVisibility()));
   }
 

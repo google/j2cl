@@ -13,8 +13,11 @@ j2wasm_library(
     name = "wasmcustomdescriptorsjsinterop-j2wasm",
     srcs = glob([
         "super-wasm/*.java",
+        "super-wasm/*.js",
     ]),
     deps = [
+        "//jre/java:javaemul_internal_annotations-j2wasm",
+        "//third_party:jsinterop-annotations-j2wasm",
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm",
     ],
 )

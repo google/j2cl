@@ -149,7 +149,7 @@ public final class SummaryBuilder {
 
       // TODO(b/458472428): Support JsProperty/Getter/Setter.
       if (!(memberDescriptor instanceof MethodDescriptor methodDescriptor
-          && (methodDescriptor.isJsConstructor() || methodDescriptor.isJsMethod()))) {
+          && methodDescriptor.isJsMethod())) {
         continue;
       }
 
@@ -157,8 +157,11 @@ public final class SummaryBuilder {
           JsMemberInfo.newBuilder()
               .setKind(
                   switch (memberDescriptor.getJsInfo().getJsMemberType()) {
-                    case CONSTRUCTOR -> JsMemberInfo.Kind.CONSTRUCTOR;
-                    case METHOD -> JsMemberInfo.Kind.METHOD;
+                    case METHOD ->
+                        memberDescriptor.getOrigin()
+                                == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
+                            ? JsMemberInfo.Kind.CONSTRUCTOR
+                            : JsMemberInfo.Kind.METHOD;
                     // Should not happen, we should be handling all types.
                     // TODO(b/458472428) Consider removing default when all types are handled.
                     default -> throw new AssertionError();
