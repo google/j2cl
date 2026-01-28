@@ -22,12 +22,10 @@ package autovalue
 import javaemul.lang.*
 import autovalue.SimpleAutoValue
 import java.lang.NullPointerException
-import java.util.Arrays
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
-import kotlin.IntArray
 import kotlin.String
 import kotlin.Suppress
 
@@ -42,9 +40,7 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
 
  private val nullableField: Double?
 
- private val arrayField: IntArray?
-
- internal constructor(intField: Int, booleanField: Boolean, stringField: String?, doubleField: Double?, nullableField: Double?, arrayField: IntArray?) {
+ internal constructor(intField: Int, booleanField: Boolean, stringField: String?, doubleField: Double?, nullableField: Double?) {
   this.intField = intField
   this.booleanField = booleanField
   if (stringField == null) {
@@ -56,10 +52,6 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
   }
   this.doubleField = doubleField
   this.nullableField = nullableField
-  if (arrayField == null) {
-   throw NullPointerException("Null arrayField")
-  }
-  this.arrayField = arrayField
  }
 
  override fun getIntField(): Int {
@@ -82,14 +74,8 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
   return this.nullableField
  }
 
- override fun getArrayField(): IntArray? {
-  return this.arrayField
- }
-
  override fun toString(): String {
-  return "SimpleAutoValue{" + "intField=" + this.intField + ", " + "booleanField=" + this.booleanField + ", " + "stringField=" + this.stringField + ", " + "doubleField=" + this.doubleField + ", " + "nullableField=" + this.nullableField + ", " + "arrayField=" + Arrays.toString(
-   this.arrayField,
-  ) + "}"
+  return "SimpleAutoValue{" + "intField=" + this.intField + ", " + "booleanField=" + this.booleanField + ", " + "stringField=" + this.stringField + ", " + "doubleField=" + this.doubleField + ", " + "nullableField=" + this.nullableField + "}"
  }
 
  override fun equals(o: Any?): Boolean {
@@ -104,10 +90,7 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
     that!!.getDoubleField() as Any?,
    ) && (if (this.nullableField == null) that!!.getNullableField() == null else this.nullableField!!.equals(
     that!!.getNullableField() as Any?,
-   )) && Arrays.equals(
-    this.arrayField,
-    if (that is AutoValue_SimpleAutoValue) (that as AutoValue_SimpleAutoValue?)!!.arrayField else that!!.getArrayField(),
-   )
+   ))
   }
   return false
  }
@@ -133,12 +116,6 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
   h___ = h___ * 1000003
   h___ = h___.xor(
    if (this.nullableField == null) 0 else this.nullableField!!.hashCode(),
-  )
-  h___ = h___ * 1000003
-  h___ = h___.xor(
-   Arrays.hashCode(
-    this.arrayField,
-   ),
   )
   return h___
  }

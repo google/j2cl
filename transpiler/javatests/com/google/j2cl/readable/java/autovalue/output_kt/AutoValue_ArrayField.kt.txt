@@ -1,0 +1,77 @@
+// Generated from "autovalue/AutoValue_ArrayField.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package autovalue
+
+import javaemul.lang.*
+import autovalue.ArrayField
+import java.lang.NullPointerException
+import java.util.Arrays
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.IntArray
+import kotlin.String
+import kotlin.Suppress
+
+class AutoValue_ArrayField: ArrayField {
+ private val arrayField: IntArray?
+
+ internal constructor(arrayField: IntArray?) {
+  if (arrayField == null) {
+   throw NullPointerException("Null arrayField")
+  }
+  this.arrayField = arrayField
+ }
+
+ override fun getArrayField(): IntArray? {
+  return this.arrayField
+ }
+
+ override fun toString(): String {
+  return "ArrayField{" + "arrayField=" + Arrays.toString(
+   this.arrayField,
+  ) + "}"
+ }
+
+ override fun equals(o: Any?): Boolean {
+  if (o === this) {
+   return true
+  }
+  if (o is ArrayField) {
+   val that: ArrayField? = o as ArrayField?
+   return Arrays.equals(
+    this.arrayField,
+    if (that is AutoValue_ArrayField) (that as AutoValue_ArrayField?)!!.arrayField else that!!.getArrayField(),
+   )
+  }
+  return false
+ }
+
+ override fun hashCode(): Int {
+  var h___: Int = 1
+  h___ = h___ * 1000003
+  h___ = h___.xor(
+   Arrays.hashCode(
+    this.arrayField,
+   ),
+  )
+  return h___
+ }
+}

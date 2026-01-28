@@ -8,7 +8,6 @@ let Builder = goog.forwardDeclare('autovalue.AutoValue_EmptyAutoValue.Builder$im
 let EmptyAutoValue = goog.forwardDeclare('autovalue.EmptyAutoValue$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class SimpleAutoValue extends ValueType {
  /** @protected @nodts */
@@ -30,13 +29,11 @@ class SimpleAutoValue extends ValueType {
   this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_;
   /**@type {?number} @nodts*/
   this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_;
-  /**@type {Array<number>} @nodts*/
-  this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_;
  }
  /** @nodts @return {SimpleAutoValue} */
  static m_create__autovalue_SimpleAutoValue() {
   SimpleAutoValue.$clinit();
-  return SimpleAutoValue.$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(42, true, 'text', 43, 44, /**@type {!Array<number>}*/ ($Arrays.$stampType([45], $$int)));
+  return SimpleAutoValue.$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double(42, true, 'text', 43, 44);
  }
  /** @nodts @return {Array<SimpleAutoValue>} */
  static m_castAndInstanceOf__java_lang_Object__arrayOf_autovalue_SimpleAutoValue(/** * */ o) {
@@ -44,14 +41,14 @@ class SimpleAutoValue extends ValueType {
   return $Arrays.$instanceIsOfType(o, SimpleAutoValue, 1) ? /**@type {Array<SimpleAutoValue>}*/ (o) : null;
  }
  /** @nodts @return {!SimpleAutoValue} */
- static $create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(/** number */ intField, /** boolean */ booleanField, /** ?string */ stringField, /** ?number */ doubleField, /** ?number */ nullableField, /** Array<number> */ arrayField) {
+ static $create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double(/** number */ intField, /** boolean */ booleanField, /** ?string */ stringField, /** ?number */ doubleField, /** ?number */ nullableField) {
   SimpleAutoValue.$clinit();
   let $instance = new SimpleAutoValue();
-  $instance.$ctor__autovalue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__void(intField, booleanField, stringField, doubleField, nullableField, arrayField);
+  $instance.$ctor__autovalue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__void(intField, booleanField, stringField, doubleField, nullableField);
   return $instance;
  }
  /** @nodts */
- $ctor__autovalue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__void(/** number */ intField, /** boolean */ booleanField, /** ?string */ stringField, /** ?number */ doubleField, /** ?number */ nullableField, /** Array<number> */ arrayField) {
+ $ctor__autovalue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__void(/** number */ intField, /** boolean */ booleanField, /** ?string */ stringField, /** ?number */ doubleField, /** ?number */ nullableField) {
   this.$ctor__javaemul_internal_ValueType__void();
   this.$init__void_$p_autovalue_SimpleAutoValue();
   this.f_intField__autovalue_AutoValue_SimpleAutoValue_ = intField;
@@ -61,9 +58,7 @@ class SimpleAutoValue extends ValueType {
   Objects.m_requireNonNull__java_lang_Object__java_lang_Object(doubleField);
   this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_ = doubleField;
   this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_ = nullableField;
-  Objects.m_requireNonNull__java_lang_Object__java_lang_Object(arrayField);
-  this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_ = arrayField;
-  $J2CL_PRESERVE$(this.f_intField__autovalue_AutoValue_SimpleAutoValue_, this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_, this.f_stringField__autovalue_AutoValue_SimpleAutoValue_, this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_, this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_, this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_);
+  $J2CL_PRESERVE$(this.f_intField__autovalue_AutoValue_SimpleAutoValue_, this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_, this.f_stringField__autovalue_AutoValue_SimpleAutoValue_, this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_, this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_);
  }
  /** @nodts @return {number} */
  m_getIntField__int() {
@@ -85,10 +80,6 @@ class SimpleAutoValue extends ValueType {
  m_getNullableField__java_lang_Double() {
   return this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_;
  }
- /** @nodts @return {Array<number>} */
- m_getArrayField__arrayOf_int() {
-  return this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_;
- }
  /** @private @nodts */
  $init__void_$p_autovalue_SimpleAutoValue() {
   this.f_field2__autovalue_SimpleAutoValue_ = Builder.$create__().m_build__autovalue_EmptyAutoValue();
@@ -109,7 +100,6 @@ class SimpleAutoValue extends ValueType {
   Builder = goog.module.get('autovalue.AutoValue_EmptyAutoValue.Builder$impl');
   Objects = goog.module.get('java.util.Objects$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 SimpleAutoValue.prototype.$excluded_fields = /**@pureOrBreakMyCode*/ [reflect.objectProperty('f_intField__autovalue_SimpleAutoValue_', SimpleAutoValue), reflect.objectProperty('f_field1__autovalue_SimpleAutoValue_', SimpleAutoValue), reflect.objectProperty('f_field2__autovalue_SimpleAutoValue_', SimpleAutoValue)];

@@ -34,13 +34,11 @@ public abstract class SimpleAutoValue {
   @Nullable
   public abstract Double getNullableField();
 
-  public abstract int[] getArrayField();
-
   // Potential collision with private field from AutoValue generated code.
   private int intField;
 
   static SimpleAutoValue create() {
-    return new AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0, new int[] {45});
+    return new AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0);
   }
 
   private EmptyAutoValue field1;
@@ -55,7 +53,7 @@ public abstract class SimpleAutoValue {
 
     <T extends AutoValue_SimpleAutoValue> T foo(
         List<? extends AutoValue_SimpleAutoValue> o1, List<AutoValue_SimpleAutoValue> o2) {
-      foo(null, null).getArrayField();
+      foo(null, null).getIntField();
       AutoValue_SimpleAutoValue o = o1.get(0);
       return null;
     }

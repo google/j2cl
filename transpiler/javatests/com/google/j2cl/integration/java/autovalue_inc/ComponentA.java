@@ -29,6 +29,4 @@ abstract class ComponentA {
   public abstract String getStringField();
 
   public abstract Double getDoubleField();
-
-  public abstract int[] getArrayField();
 }

@@ -48,12 +48,11 @@ public class Main {
     // Note that we created two copies of each class to increase variety and avoid potential
     // optimizations that wouldn't applicable in the real life.
 
-    ComponentA componentA = new AutoValue_ComponentA(1, false, "hello", 42d, new int[] {1, 2, 3});
+    ComponentA componentA = new AutoValue_ComponentA(1, false, "hello", 42d);
     assertEquals(1, componentA.getIntField());
     assertEquals(false, componentA.getBooleanField());
     assertEquals(42d, componentA.getDoubleField());
     assertEquals("hello", componentA.getStringField());
-    assertEquals(2, componentA.getArrayField()[1]);
     CompositeA compositeA = new AutoValue_CompositeA(10, true, "world", 100d, componentA);
     assertEquals(10, compositeA.getIntField());
     assertEquals(true, compositeA.getBooleanField());
@@ -63,12 +62,11 @@ public class Main {
     assertEquals(componentA.hashCode(), compositeA.getComponentField().hashCode());
     assertNotNull(compositeA.toString());
 
-    ComponentB componentB = new AutoValue_ComponentB(2, false, "hello", 43d, new int[] {5, 6, 7});
+    ComponentB componentB = new AutoValue_ComponentB(2, false, "hello", 43d);
     assertEquals(2, componentB.getIntField());
     assertEquals(false, componentB.getBooleanField());
     assertEquals(43d, componentB.getDoubleField());
     assertEquals("hello", componentB.getStringField());
-    assertEquals(6, componentB.getArrayField()[1]);
     CompositeB compositeB = new AutoValue_CompositeB(11, true, "world", 101d, componentB);
     assertEquals(11, compositeB.getIntField());
     assertEquals(true, compositeB.getBooleanField());

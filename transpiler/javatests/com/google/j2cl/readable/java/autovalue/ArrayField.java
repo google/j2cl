@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google Inc.
+ * Copyright 2026 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,12 +18,7 @@ package autovalue;
 import com.google.auto.value.AutoValue;
 
 @AutoValue
-abstract class ComponentA {
-  public abstract int getIntField();
-
-  public abstract boolean getBooleanField();
-
-  public abstract String getStringField();
-
-  public abstract Double getDoubleField();
+public abstract class ArrayField {
+  @SuppressWarnings("mutable")
+  public abstract int[] getArrayField();
 }

@@ -30,11 +30,9 @@ import kotlin.Array
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
-import kotlin.IntArray
 import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.MutableList
-import kotlin.intArrayOf
 import kotlin.jvm.JvmStatic
 
 @WasAutoValue
@@ -49,8 +47,6 @@ abstract class SimpleAutoValue {
 
  abstract fun getNullableField(): Double?
 
- abstract fun getArrayField(): IntArray?
-
  private var intField: Int = 0
 
  private var field1: EmptyAutoValue? = null
@@ -60,14 +56,7 @@ abstract class SimpleAutoValue {
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): SimpleAutoValue? {
-   return AutoValue_SimpleAutoValue(
-    42,
-    true,
-    "text",
-    43.0,
-    44.0,
-    intArrayOf(45),
-   )
+   return AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0)
   }
 
   @JvmStatic
@@ -78,7 +67,7 @@ abstract class SimpleAutoValue {
 
  abstract class GenericType internal constructor(): AbstractCollection<AutoValue_SimpleAutoValue?>() {
   internal open fun <T: AutoValue_SimpleAutoValue?> foo_pp_autovalue(o1: MutableList<out AutoValue_SimpleAutoValue?>?, o2: MutableList<AutoValue_SimpleAutoValue?>?): T {
-   this.foo_pp_autovalue<AutoValue_SimpleAutoValue?>(null, null)!!.getArrayField()
+   this.foo_pp_autovalue<AutoValue_SimpleAutoValue?>(null, null)!!.getIntField()
    val o: AutoValue_SimpleAutoValue? = o1!!.get(0)
    return null as T
   }

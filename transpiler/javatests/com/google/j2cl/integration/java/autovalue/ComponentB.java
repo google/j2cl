@@ -26,7 +26,4 @@ abstract class ComponentB {
   public abstract String getStringField();
 
   public abstract Double getDoubleField();
-
-  @SuppressWarnings("mutable")
-  public abstract int[] getArrayField();
 }
