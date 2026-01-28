@@ -19,6 +19,7 @@ import com.google.j2cl.jre.java.math.BigIntegerAddTest;
 import com.google.j2cl.jre.java.math.BigIntegerAndTest;
 import com.google.j2cl.jre.java.math.BigIntegerCompareTest;
 import com.google.j2cl.jre.java.math.BigIntegerConstructorsTest;
+import com.google.j2cl.jre.java.math.BigIntegerConvertTest;
 import com.google.j2cl.jre.java.math.BigIntegerDivideTest;
 import com.google.j2cl.jre.java.math.BigIntegerHashCodeTest;
 import com.google.j2cl.jre.java.math.BigIntegerModPowTest;
@@ -40,6 +41,7 @@ import org.junit.runners.Suite.SuiteClasses;
   BigIntegerAndTest.class,
   BigIntegerCompareTest.class,
   BigIntegerConstructorsTest.class,
+  BigIntegerConvertTest.class,
   BigIntegerDivideTest.class,
   BigIntegerHashCodeTest.class,
   BigIntegerModPowTest.class,

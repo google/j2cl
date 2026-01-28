@@ -15,9 +15,14 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import org.jspecify.annotations.Nullable;
 
 /** TODO: document me. */
 public class ComparatorTest extends TestComparator {
@@ -33,6 +38,123 @@ public class ComparatorTest extends TestComparator {
     l.add("y");
     l.add("z");
     return l;
+  }
+
+  public void testComparing() {
+    Supplier<String[]> strings = () -> new String[] {"1b3", "2a1", "3c2"};
+    // pre-sorted lists to test against, named for which char (1-indexed) they are sorted on
+    String[] first = {"1b3", "2a1", "3c2"};
+    String[] second = {"2a1", "1b3", "3c2"};
+    String[] third = {"2a1", "3c2", "1b3"};
+
+    // keyextractor
+    assertSortedEquals(first, strings, Comparator.comparing(Function.identity()));
+    Comparator<String> comparing = Comparator.comparing(Function.identity());
+    assertSortedEquals(reverse(first), strings, comparing.reversed());
+    assertSortedEquals(second, strings, Comparator.comparing(a -> a.substring(1)));
+    assertSortedEquals(third, strings, Comparator.comparing(a -> a.substring(2)));
+
+    // keyextractor, keycomparator
+    assertSortedEquals(
+        reverse(second),
+        strings,
+        Comparator.comparing(a -> a.substring(1), Comparator.reverseOrder()));
+    comparing = Comparator.comparing(a -> a.substring(1));
+    assertSortedEquals(reverse(second), strings, comparing.reversed());
+
+    // double key extractor
+    comparing = Comparator.comparingDouble(a -> Double.parseDouble(a.substring(2)));
+    assertSortedEquals(third, strings, comparing);
+    assertSortedEquals(reverse(third), strings, comparing.reversed());
+    // int key extractor
+    comparing = Comparator.comparingInt(a -> Integer.parseInt(a.substring(2)));
+    assertSortedEquals(third, strings, comparing);
+    assertSortedEquals(reverse(third), strings, comparing.reversed());
+    // long key extractor
+    comparing = Comparator.comparingLong(a -> Long.parseLong(a.substring(2)));
+    assertSortedEquals(third, strings, comparing);
+    assertSortedEquals(reverse(third), strings, comparing.reversed());
+  }
+
+  @J2ktIncompatible // TODO(b/315311435): thenComparing not found for given type
+  public void testThenComparing() {
+    Supplier<String[]> strings = () -> new String[] {"1,b", "1,a", "2,a"};
+    // expected sort results for 1st and 2nd char, each (f)orward or (r)everse
+    String[] f1f2 = {"1,a", "1,b", "2,a"};
+    String[] f1r2 = {"1,b", "1,a", "2,a"};
+    String[] f2f1 = {"1,a", "2,a", "1,b"};
+
+    // keyextractor
+    assertSortedEquals(
+        f1f2,
+        strings,
+        Comparator.<String, String>comparing(s -> s.split(",")[0])
+            .thenComparing(s -> s.split(",")[1]));
+    // keyextractor, keycomparator
+    assertSortedEquals(
+        f1r2,
+        strings,
+        Comparator.<String, String>comparing(s -> s.split(",")[0])
+            .thenComparing(s -> s.split(",")[1], Comparator.<String>reverseOrder()));
+
+    // int key extractor
+    assertSortedEquals(
+        f2f1,
+        strings,
+        Comparator.<String, String>comparing(s -> s.split(",")[1])
+            .thenComparingInt(s -> Integer.parseInt(s.split(",")[0])));
+    // long key extractor
+    assertSortedEquals(
+        f2f1,
+        strings,
+        Comparator.<String, String>comparing(s -> s.split(",")[1])
+            .thenComparingLong(s -> Long.parseLong(s.split(",")[0])));
+    // double key extractor
+    assertSortedEquals(
+        f2f1,
+        strings,
+        Comparator.<String, String>comparing(s -> s.split(",")[1])
+            .thenComparingDouble(s -> Double.parseDouble(s.split(",")[0])));
+  }
+
+  public void testNullsFirst() {
+    Supplier<@Nullable String[]> strings = () -> new @Nullable String[] {"a", null, "c", null, "b"};
+    assertSortedEquals(
+        new @Nullable String[] {null, null, "a", "b", "c"},
+        strings,
+        Comparator.nullsFirst(Comparator.naturalOrder()));
+    assertSortedEquals(
+        new @Nullable String[] {null, null, "c", "b", "a"},
+        strings,
+        Comparator.nullsFirst(Comparator.reverseOrder()));
+  }
+
+  public void testNullsLast() {
+    Supplier<@Nullable String[]> strings = () -> new @Nullable String[] {"a", null, "c", null, "b"};
+    assertSortedEquals(
+        new @Nullable String[] {"a", "b", "c", null, null},
+        strings,
+        Comparator.nullsLast(Comparator.naturalOrder()));
+    assertSortedEquals(
+        new @Nullable String[] {"c", "b", "a", null, null},
+        strings,
+        Comparator.nullsLast(Comparator.reverseOrder()));
+  }
+
+  private static <T extends @Nullable Object> void assertSortedEquals(
+      T[] expected, Supplier<T[]> presort, Comparator<T> comparator) {
+    T[] presortedArray = presort.get();
+    Arrays.sort(presortedArray, comparator);
+    assertEquals(expected, presortedArray);
+  }
+
+  private static String[] reverse(String[] array) {
+    int length = array.length;
+    String[] reversed = new String[length];
+    for (int i = 0, j = length - 1; i < length; ++i, --j) {
+      reversed[i] = array[j];
+    }
+    return reversed;
   }
 }
 

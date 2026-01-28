@@ -13,31 +13,30 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.jre.java8.util;
+package com.google.j2cl.jre.java.util;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.NoSuchElementException;
-import java.util.OptionalDouble;
+import java.util.OptionalLong;
 import junit.framework.TestCase;
 
-/** Tests for OptionalDouble JRE emulation. */
-public class OptionalDoubleTest extends TestCase {
+/** Tests for OptionalLong JRE emulation. */
+public class OptionalLongTest extends TestCase {
 
-  private static final double REFERENCE = 10d;
-  private static final double OTHER_REFERENCE = 20d;
-
+  private static final long REFERENCE = 10L;
+  private static final long OTHER_REFERENCE = 20L;
   private boolean[] mutableFlag;
-  private OptionalDouble empty;
-  private OptionalDouble present;
+  private OptionalLong empty;
+  private OptionalLong present;
 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
     mutableFlag = new boolean[1];
-    empty = OptionalDouble.empty();
-    present = OptionalDouble.of(REFERENCE);
+    empty = OptionalLong.empty();
+    present = OptionalLong.of(REFERENCE);
   }
 
   public void testIsPresent() {
@@ -53,17 +52,17 @@ public class OptionalDoubleTest extends TestCase {
     assertFalse(present.isEmpty());
   }
 
-  public void testGetAsDouble() {
+  public void testGetAsLong() {
     // empty case
     try {
-      empty.getAsDouble();
+      empty.getAsLong();
       fail("Empty Optional should throw NoSuchElementException");
     } catch (NoSuchElementException e) {
       // expected
     }
 
     // non-empty case
-    assertEquals(REFERENCE, present.getAsDouble());
+    assertEquals(REFERENCE, present.getAsLong());
   }
 
   @J2ktIncompatible // Parameters are non-nullable according to Jspecify
@@ -171,6 +170,7 @@ public class OptionalDoubleTest extends TestCase {
       return;
     }
 
+    // empty case
     try {
       empty.orElseThrow(() -> null);
       fail("Empty Optional must throw NullPointerException if supplier returns null");
@@ -212,15 +212,15 @@ public class OptionalDoubleTest extends TestCase {
     assertFalse(empty.equals("should not be equal"));
     assertFalse(empty.equals(present));
     assertTrue(empty.equals(empty));
-    assertTrue(empty.equals(OptionalDouble.empty()));
+    assertTrue(empty.equals(OptionalLong.empty()));
 
     // non empty case
     assertFalse(present.equals(null));
     assertFalse(present.equals("should not be equal"));
     assertFalse(present.equals(empty));
-    assertFalse(present.equals(OptionalDouble.of(OTHER_REFERENCE)));
+    assertFalse(present.equals(OptionalLong.of(OTHER_REFERENCE)));
     assertTrue(present.equals(present));
-    assertTrue(present.equals(OptionalDouble.of(REFERENCE)));
+    assertTrue(present.equals(OptionalLong.of(REFERENCE)));
   }
 
   public void testHashcode() {
@@ -228,6 +228,6 @@ public class OptionalDoubleTest extends TestCase {
     assertEquals(0, empty.hashCode());
 
     // non empty case
-    assertEquals(Double.hashCode(REFERENCE), present.hashCode());
+    assertEquals(Long.hashCode(REFERENCE), present.hashCode());
   }
 }

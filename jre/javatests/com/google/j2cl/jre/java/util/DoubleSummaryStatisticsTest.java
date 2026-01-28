@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.google.j2cl.jre.java8.util;
+package com.google.j2cl.jre.java.util;
 
 import static java.lang.Double.MAX_VALUE;
 import static java.lang.Double.MIN_VALUE;
@@ -22,7 +22,6 @@ import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.NaN;
 import static java.lang.Double.POSITIVE_INFINITY;
 
-import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;

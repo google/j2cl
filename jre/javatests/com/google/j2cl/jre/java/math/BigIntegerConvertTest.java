@@ -33,7 +33,7 @@
  * INCLUDES MODIFICATIONS BY GOOGLE.
  */
 /** author Elena Semukhina */
-package com.google.j2cl.jre.java8.math;
+package com.google.j2cl.jre.java.math;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;

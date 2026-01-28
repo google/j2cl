@@ -14,12 +14,11 @@
  * the License.
  */
 
-package com.google.j2cl.jre.java8.util;
+package com.google.j2cl.jre.java.util;
 
 import static java.lang.Long.MAX_VALUE;
 import static java.lang.Long.MIN_VALUE;
 
-import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.util.LongSummaryStatistics;
 
 /** Tests {@link LongSummaryStatistics}. */
