@@ -48,7 +48,6 @@ java_library(
     javacopts = ERROR_PRONE_SUPPRESSIONS,
     deps = [
         "//jre/java:javaemul_internal_annotations",
-        "//third_party:jsinterop-annotations",
         "//third_party:jspecify_annotations",
         "//third_party:junit",
     ],
