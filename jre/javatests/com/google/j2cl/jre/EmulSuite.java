@@ -35,6 +35,12 @@ import com.google.j2cl.jre.java.security.MessageDigestTest;
 import com.google.j2cl.jre.java.util.ComparatorTest;
 import com.google.j2cl.jre.java.util.ObjectsTest;
 import com.google.j2cl.jre.java.util.RandomTest;
+import com.google.j2cl.jre.java.util.stream.CollectorsTest;
+import com.google.j2cl.jre.java.util.stream.DoubleStreamTest;
+import com.google.j2cl.jre.java.util.stream.IntStreamTest;
+import com.google.j2cl.jre.java.util.stream.LongStreamTest;
+import com.google.j2cl.jre.java.util.stream.StreamSupportTest;
+import com.google.j2cl.jre.java.util.stream.StreamTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -73,5 +79,13 @@ import org.junit.runners.Suite.SuiteClasses;
   ComparatorTest.class,
   ObjectsTest.class,
   RandomTest.class,
+
+  // -- java.util.stream
+  DoubleStreamTest.class,
+  IntStreamTest.class,
+  LongStreamTest.class,
+  StreamTest.class,
+  StreamSupportTest.class,
+  CollectorsTest.class,
 })
 public class EmulSuite {}

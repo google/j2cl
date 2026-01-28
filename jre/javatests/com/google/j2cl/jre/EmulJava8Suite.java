@@ -29,12 +29,6 @@ import com.google.j2cl.jre.java8.util.OptionalTest;
 import com.google.j2cl.jre.java8.util.PrimitiveIteratorTest;
 import com.google.j2cl.jre.java8.util.SpliteratorsTest;
 import com.google.j2cl.jre.java8.util.StringJoinerTest;
-import com.google.j2cl.jre.java8.util.stream.CollectorsTest;
-import com.google.j2cl.jre.java8.util.stream.DoubleStreamTest;
-import com.google.j2cl.jre.java8.util.stream.IntStreamTest;
-import com.google.j2cl.jre.java8.util.stream.LongStreamTest;
-import com.google.j2cl.jre.java8.util.stream.StreamSupportTest;
-import com.google.j2cl.jre.java8.util.stream.StreamTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -60,12 +54,5 @@ import org.junit.runners.Suite.SuiteClasses;
   IntSummaryStatisticsTest.class,
   LongSummaryStatisticsTest.class,
 
-  // -- java.util.stream
-  CollectorsTest.class,
-  DoubleStreamTest.class,
-  IntStreamTest.class,
-  LongStreamTest.class,
-  StreamTest.class,
-  StreamSupportTest.class,
 })
 public class EmulJava8Suite {}

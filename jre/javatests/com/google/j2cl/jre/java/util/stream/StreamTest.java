@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.google.j2cl.jre.java8.util.stream;
+package com.google.j2cl.jre.java.util.stream;
 
 import static java.util.Arrays.asList;
 
