@@ -60,7 +60,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   fun swiftNameAnnotationSource(name: String): Source =
     annotation(
       nameRenderer.topLevelQualifiedNameSource("com.google.j2objc.annotations.SwiftName"),
-      literal(name),
+      Source.emptyIf(name.isEmpty()) { literal(name) },
     )
 
   fun swiftNameAnnotationSource(typeDeclaration: TypeDeclaration): Source =
