@@ -16,9 +16,8 @@
 package inlinefunction
 
 class MyClass(var f: Int) {
-  fun addAndReturn(i: Int): Int {
-    f += i
-    return f
+  fun double() {
+    f *= 2
   }
 }
 
@@ -26,7 +25,7 @@ inline fun topLevelInlineFunction(myClass: MyClass, action: (Int) -> Int): Int {
   return action(myClass.f)
 }
 
-inline fun <T> doSomethingOn(target: T, block: (T) -> Unit) = block(target)
+inline fun <T, R> doSomethingOn(target: T, block: (T) -> R) = block(target)
 
 class ClassWithInlineFun(var e: Int) {
   inline fun inlineFun(action: (Int) -> Int): Int {
@@ -101,14 +100,21 @@ fun testInliningWithLocalClass() {
     }
 }
 
+inline fun runNTimes(n: Int, action: () -> Unit) {
+  for (i in 0..<n) {
+    action()
+  }
+}
+
 fun testFunctionRef() {
   val foo = MyClass(2)
-  topLevelInlineFunction(foo, foo::addAndReturn)
+  doSomethingOn(foo, MyClass::double)
 
-  // TODO(b/405183980): Uncomment when this doesn't crash the frontend.
-  // doSomethingOn(MyClass(2)) {
-  //   topLevelInlineFunction(it, it::addAndReturn)
-  // }
+  val result =
+    doSomethingOn(MyClass(2)) {
+      runNTimes(5, it::double)
+      it.f
+    }
 }
 
 inline fun <reified T> castTo(obj: Any?): T = obj as T

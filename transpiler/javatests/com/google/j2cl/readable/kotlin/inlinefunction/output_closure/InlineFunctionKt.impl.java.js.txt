@@ -67,11 +67,10 @@ class InlineFunctionKt extends j_l_Object {
   InlineFunctionKt.$clinit();
   return (/**@type {!Integer}*/ ($Casts.$to(action.m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(myClass.m_getF__int())), Integer))).intValue();
  }
- /** @nodts @template T */
- static m_doSomethingOn__java_lang_Object__kotlin_jvm_functions_Function1__void(/** T */ target, /** !Function1<?, ?> */ block) {
+ /** @nodts @template T, R @return {R} */
+ static m_doSomethingOn__java_lang_Object__kotlin_jvm_functions_Function1__java_lang_Object(/** T */ target, /** !Function1<?, ?> */ block) {
   InlineFunctionKt.$clinit();
-  block.m_invoke__java_lang_Object__java_lang_Object(target);
-  return;
+  return block.m_invoke__java_lang_Object__java_lang_Object(target);
  }
  /** @nodts @return {number} */
  static m_extensionInlineFunction__inlinefunction_MyClass__kotlin_jvm_functions_Function1__int(/** !MyClass */ this_1, /** !Function1<?, ?> */ action) {
@@ -203,12 +202,25 @@ class InlineFunctionKt extends j_l_Object {
   let d = $1Foo.$create__int(it).m_mulByTwo__int();
  }
  /** @nodts */
+ static m_runNTimes__int__kotlin_jvm_functions_Function0__void(/** number */ n, /** !Function0<?> */ action) {
+  InlineFunctionKt.$clinit();
+  for (let inductionVariable = 0; inductionVariable < n; inductionVariable = inductionVariable + 1 | 0) {
+   let i = inductionVariable;
+   action.m_invoke__java_lang_Object();
+  }
+ }
+ /** @nodts */
  static m_testFunctionRef__void() {
   InlineFunctionKt.$clinit();
   let foo = MyClass.$create__int(2);
-  let tmp0_p0 = foo.m_getF__int();
-  let p0 = tmp0_p0;
-  foo.m_addAndReturn__int__int(p0);
+  foo.m_double__void();
+  let tmp0_target = MyClass.$create__int(2);
+  let target = tmp0_target;
+  for (let inductionVariable = 0; inductionVariable < 5; inductionVariable = inductionVariable + 1 | 0) {
+   let i = inductionVariable;
+   target.m_double__void();
+  }
+  let result = target.m_getF__int();
  }
  /** @nodts */
  static m_testReifiedParameter__void() {
