@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.testing.J2ktIncompatible;
@@ -125,8 +126,15 @@ public class ObjectsTest extends TestCase {
     assertTrue(e.getMessage().contains("expected message"));
 
     assertThrows(NullPointerException.class, () -> Objects.requireNonNullElse(null, null));
-    // NOTE: j2cl throws an uncatchable exception on a null dereference in a function call.
-    // assertThrows(NullPointerException.class, () -> Objects.requireNonNullElseGet(null, null));
     assertThrows(NullPointerException.class, () -> Objects.requireNonNullElseGet(null, () -> null));
+  }
+
+  @J2ktIncompatible // Not emulated
+  public void testRequireNonNull_nullSupplier() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+    assertThrows(NullPointerException.class, () -> Objects.requireNonNullElseGet(null, null));
   }
 }
