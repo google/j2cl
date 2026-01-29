@@ -22,9 +22,12 @@ public class SupportedAnnotations {
 
   private static final ImmutableSet<String> RECOGNIZED_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
+          // go/keep-sorted start
           "com.google.apps.xplat.testing.parameterized.RunParameterized",
           "com.google.auto.value.AutoValue",
           "com.google.auto.value.AutoValue.Builder",
+          "com.google.errorprone.annotations.CanIgnoreReturnValue",
+          "com.google.errorprone.annotations.ResultIgnorabilityUnspecified",
           "com.google.j2kt.annotations.HiddenFromObjC",
           "com.google.j2objc.annotations.ObjectiveCName",
           "com.google.j2objc.annotations.SwiftName",
@@ -38,7 +41,9 @@ public class SupportedAnnotations {
           "javaemul.lang.annotations.WasAutoValue",
           "javaemul.lang.annotations.WasAutoValue.Builder",
           "kotlin.Deprecated",
-          "org.junit.runner.RunWith");
+          "org.junit.runner.RunWith"
+          // go/keep-sorted end
+          );
 
   public static boolean isSupportedAnnotation(String qualifiedName) {
     return RECOGNIZED_ANNOTATIONS_QUALIFIED_NAMES.contains(qualifiedName);
