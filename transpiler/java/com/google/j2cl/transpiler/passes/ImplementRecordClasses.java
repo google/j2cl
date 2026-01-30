@@ -80,10 +80,20 @@ public class ImplementRecordClasses extends NormalizationPass {
     addFieldDeclarations(type);
     normalizeConstructors(type);
     addFieldAccessors(type);
-    // TODO(b/445543178): Optimize record classes by extending ValueType.
+    if (isValueTypeBasedImplementation(type)) {
+      AstUtils.preserveFields(type, ImmutableList.of());
+      return;
+    }
     implementEquals(type);
     implementHashCode(type);
     implementToString(type);
+  }
+
+  private static boolean isValueTypeBasedImplementation(Type type) {
+    DeclaredTypeDescriptor javaemulInternalValueType =
+        TypeDescriptors.get().javaemulInternalValueType;
+    return javaemulInternalValueType != null
+        && type.getDeclaration().isSubtypeOf(javaemulInternalValueType.getTypeDeclaration());
   }
 
   /**

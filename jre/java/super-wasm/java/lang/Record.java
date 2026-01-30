@@ -15,7 +15,5 @@
  */
 package java.lang;
 
-import javaemul.internal.ValueType;
-
 /** Superclass for records. */
-public abstract class Record extends ValueType {}
+public abstract class Record {}

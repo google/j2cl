@@ -3,10 +3,6 @@ goog.module('recordclass.RecordClass.RecordWithCompactConstructor$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @final
  */
@@ -34,6 +30,7 @@ class RecordWithCompactConstructor extends Record {
   }
   this.f_a__recordclass_RecordClass_RecordWithCompactConstructor_ = a;
   this.f_b__recordclass_RecordClass_RecordWithCompactConstructor_ = b;
+  $J2CL_PRESERVE$(this.f_a__recordclass_RecordClass_RecordWithCompactConstructor_, this.f_b__recordclass_RecordClass_RecordWithCompactConstructor_);
  }
  /** @nodts @return {number} */
  m_a__int() {
@@ -42,22 +39,6 @@ class RecordWithCompactConstructor extends Record {
  /** @nodts @return {number} */
  m_b__int() {
   return this.f_b__recordclass_RecordClass_RecordWithCompactConstructor_;
- }
- /** @override @return {boolean} */
- equals(/** * */ arg0) {
-  let /** RecordWithCompactConstructor */ $other;
-  if (!(RecordWithCompactConstructor.$isInstance(arg0) && ($other = (/**@type {!RecordWithCompactConstructor}*/ ($Casts.$to(arg0, RecordWithCompactConstructor))), true))) {
-   return false;
-  }
-  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([Integer.valueOf(this.f_a__recordclass_RecordClass_RecordWithCompactConstructor_), Integer.valueOf(this.f_b__recordclass_RecordClass_RecordWithCompactConstructor_)], [Integer.valueOf($other.f_a__recordclass_RecordClass_RecordWithCompactConstructor_), Integer.valueOf($other.f_b__recordclass_RecordClass_RecordWithCompactConstructor_)]);
- }
- /** @override @return {number} */
- hashCode() {
-  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([Integer.valueOf(this.f_a__recordclass_RecordClass_RecordWithCompactConstructor_), Integer.valueOf(this.f_b__recordclass_RecordClass_RecordWithCompactConstructor_)]);
- }
- /** @override @return {?string} */
- toString() {
-  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([Integer.valueOf(this.f_a__recordclass_RecordClass_RecordWithCompactConstructor_), Integer.valueOf(this.f_b__recordclass_RecordClass_RecordWithCompactConstructor_)]);
  }
  /** @nodts */
  static $clinit() {
@@ -71,11 +52,7 @@ class RecordWithCompactConstructor extends Record {
  }
  
  /** @nodts */
- static $loadModules() {
-  Integer = goog.module.get('java.lang.Integer$impl');
-  Arrays = goog.module.get('java.util.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(RecordWithCompactConstructor, 'recordclass.RecordClass$RecordWithCompactConstructor');
 

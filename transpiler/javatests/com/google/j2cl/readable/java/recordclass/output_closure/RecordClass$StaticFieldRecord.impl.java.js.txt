@@ -3,10 +3,6 @@ goog.module('recordclass.RecordClass.StaticFieldRecord$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @final
  */
@@ -43,26 +39,11 @@ class StaticFieldRecord extends Record {
  $ctor__recordclass_RecordClass_StaticFieldRecord__int__void(/** number */ arg0) {
   this.$ctor__java_lang_Record__void();
   this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_ = arg0;
+  $J2CL_PRESERVE$(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_);
  }
  /** @nodts @return {number} */
  m_nonstaticField__int() {
   return this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_;
- }
- /** @override @return {boolean} */
- equals(/** * */ arg0) {
-  let /** StaticFieldRecord */ $other;
-  if (!(StaticFieldRecord.$isInstance(arg0) && ($other = (/**@type {!StaticFieldRecord}*/ ($Casts.$to(arg0, StaticFieldRecord))), true))) {
-   return false;
-  }
-  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([Integer.valueOf(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)], [Integer.valueOf($other.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)]);
- }
- /** @override @return {number} */
- hashCode() {
-  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([Integer.valueOf(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)]);
- }
- /** @override @return {?string} */
- toString() {
-  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([Integer.valueOf(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_)]);
  }
  /** @nodts @return {number} */
  static get f_staticField__recordclass_RecordClass_StaticFieldRecord() {
@@ -85,11 +66,7 @@ class StaticFieldRecord extends Record {
  }
  
  /** @nodts */
- static $loadModules() {
-  Integer = goog.module.get('java.lang.Integer$impl');
-  Arrays = goog.module.get('java.util.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 /**@private {number} @nodts*/
 StaticFieldRecord.$static_staticField__recordclass_RecordClass_StaticFieldRecord = 0;

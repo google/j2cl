@@ -4,9 +4,6 @@ const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const I = goog.require('recordclass.RecordClass.I$impl');
 
-let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @final
  * @implements {I}
@@ -29,26 +26,11 @@ class RecordImplementingInterface extends Record {
  $ctor__recordclass_RecordClass_RecordImplementingInterface__java_lang_String__void(/** ?string */ arg0) {
   this.$ctor__java_lang_Record__void();
   this.f_a__recordclass_RecordClass_RecordImplementingInterface_ = arg0;
+  $J2CL_PRESERVE$(this.f_a__recordclass_RecordClass_RecordImplementingInterface_);
  }
  /** @override @nodts @return {?string} */
  m_a__java_lang_String() {
   return this.f_a__recordclass_RecordClass_RecordImplementingInterface_;
- }
- /** @override @return {boolean} */
- equals(/** * */ arg0) {
-  let /** RecordImplementingInterface */ $other;
-  if (!(RecordImplementingInterface.$isInstance(arg0) && ($other = (/**@type {!RecordImplementingInterface}*/ ($Casts.$to(arg0, RecordImplementingInterface))), true))) {
-   return false;
-  }
-  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_a__recordclass_RecordClass_RecordImplementingInterface_], [$other.f_a__recordclass_RecordClass_RecordImplementingInterface_]);
- }
- /** @override @return {number} */
- hashCode() {
-  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_a__recordclass_RecordClass_RecordImplementingInterface_]);
- }
- /** @override @return {?string} */
- toString() {
-  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_a__recordclass_RecordClass_RecordImplementingInterface_]);
  }
  /** @nodts */
  static $clinit() {
@@ -62,10 +44,7 @@ class RecordImplementingInterface extends Record {
  }
  
  /** @nodts */
- static $loadModules() {
-  Arrays = goog.module.get('java.util.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 I.$markImplementor(RecordImplementingInterface);
 $Util.$setClassMetadata(RecordImplementingInterface, 'recordclass.RecordClass$RecordImplementingInterface');

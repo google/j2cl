@@ -18,9 +18,10 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Predicates.not;
+import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.Predicates;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -31,6 +32,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -673,10 +675,7 @@ public final class AstUtils {
 
   /** Returns a qualified name, ignoring empty and {@code null} {@code parts}. */
   public static String buildQualifiedName(Stream<String> parts) {
-    return parts
-        .filter(Predicates.notNull())
-        .filter(Predicates.not(String::isEmpty))
-        .collect(Collectors.joining("."));
+    return parts.filter(notNull()).filter(not(String::isEmpty)).collect(Collectors.joining("."));
   }
 
   /**
@@ -1322,6 +1321,35 @@ public final class AstUtils {
           && field.getEnclosingTypeDescriptor().isSameBaseType(TypeDescriptors.get().kotlinUnit);
     }
     return false;
+  }
+
+  public static void preserveFields(Type type, Collection<FieldDescriptor> excludedFields) {
+    var preserveFn =
+        TypeDescriptors.get().javaemulInternalValueType.getMethodDescriptorByName("preserve");
+
+    ImmutableList<Expression> fieldReferences =
+        type.getFields().stream()
+            .map(Field::getDescriptor)
+            .filter(f -> f.isInstanceMember() && !excludedFields.contains(f))
+            .map(
+                f ->
+                    FieldAccess.Builder.from(f)
+                        .setQualifier(new ThisReference(type.getTypeDescriptor()))
+                        .build())
+            .collect(toImmutableList());
+
+    // This special call will make JsCompiler think that all these fields are used. There is a
+    // special pass in JsCompiler that later removes this call itself so they won't exist in the
+    // final output.
+    var preserveCall =
+        MethodCall.Builder.from(preserveFn)
+            .setArguments(maybePackageVarargs(preserveFn, fieldReferences))
+            .build()
+            .makeStatement(SourcePosition.NONE);
+
+    // Add the call to preserve fields in the primary constructor since all other constructors
+    // will delegate to it.
+    type.getPrimaryConstructor().getBody().getStatements().add(preserveCall);
   }
 
   private AstUtils() {}

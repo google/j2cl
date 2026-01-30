@@ -3,9 +3,6 @@ goog.module('unnamedvariables.UnnamedVariables.$1R$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @final
  */
@@ -30,6 +27,7 @@ class $1R extends Record {
   this.$ctor__java_lang_Record__void();
   this.f_o__unnamedvariables_UnnamedVariables_1R_ = arg0;
   this.f_s__unnamedvariables_UnnamedVariables_1R_ = arg1;
+  $J2CL_PRESERVE$(this.f_o__unnamedvariables_UnnamedVariables_1R_, this.f_s__unnamedvariables_UnnamedVariables_1R_);
  }
  /** @nodts @return {*} */
  m_o__java_lang_Object() {
@@ -38,22 +36,6 @@ class $1R extends Record {
  /** @nodts @return {?string} */
  m_s__java_lang_String() {
   return this.f_s__unnamedvariables_UnnamedVariables_1R_;
- }
- /** @override @return {boolean} */
- equals(/** * */ arg0) {
-  let /** $1R */ $other;
-  if (!($1R.$isInstance(arg0) && ($other = (/**@type {!$1R}*/ ($Casts.$to(arg0, $1R))), true))) {
-   return false;
-  }
-  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_o__unnamedvariables_UnnamedVariables_1R_, this.f_s__unnamedvariables_UnnamedVariables_1R_], [$other.f_o__unnamedvariables_UnnamedVariables_1R_, $other.f_s__unnamedvariables_UnnamedVariables_1R_]);
- }
- /** @override @return {number} */
- hashCode() {
-  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_o__unnamedvariables_UnnamedVariables_1R_, this.f_s__unnamedvariables_UnnamedVariables_1R_]);
- }
- /** @override @return {?string} */
- toString() {
-  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_o__unnamedvariables_UnnamedVariables_1R_, this.f_s__unnamedvariables_UnnamedVariables_1R_]);
  }
  /** @nodts */
  static $clinit() {
@@ -67,10 +49,7 @@ class $1R extends Record {
  }
  
  /** @nodts */
- static $loadModules() {
-  Arrays = goog.module.get('java.util.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata($1R, 'unnamedvariables.UnnamedVariables$1R');
 

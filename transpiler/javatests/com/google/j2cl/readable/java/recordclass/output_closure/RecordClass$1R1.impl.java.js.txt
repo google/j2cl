@@ -3,9 +3,7 @@ goog.module('recordclass.RecordClass.$1R1$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let $1R2 = goog.forwardDeclare('recordclass.RecordClass.$1R2$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
@@ -34,6 +32,7 @@ class $1R1 extends Record {
   this.f_o__recordclass_RecordClass_1R1_ = arg0;
   this.f_s__recordclass_RecordClass_1R1_ = arg1;
   this.f_n__recordclass_RecordClass_1R1_ = arg2;
+  $J2CL_PRESERVE$(this.f_o__recordclass_RecordClass_1R1_, this.f_s__recordclass_RecordClass_1R1_, this.f_n__recordclass_RecordClass_1R1_);
  }
  /** @nodts @return {*} */
  m_o__java_lang_Object() {
@@ -47,22 +46,6 @@ class $1R1 extends Record {
  m_n__recordclass_RecordClass_1R2() {
   return this.f_n__recordclass_RecordClass_1R1_;
  }
- /** @override @return {boolean} */
- equals(/** * */ arg0) {
-  let /** $1R1 */ $other;
-  if (!($1R1.$isInstance(arg0) && ($other = (/**@type {!$1R1}*/ ($Casts.$to(arg0, $1R1))), true))) {
-   return false;
-  }
-  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_o__recordclass_RecordClass_1R1_, this.f_s__recordclass_RecordClass_1R1_, this.f_n__recordclass_RecordClass_1R1_], [$other.f_o__recordclass_RecordClass_1R1_, $other.f_s__recordclass_RecordClass_1R1_, $other.f_n__recordclass_RecordClass_1R1_]);
- }
- /** @override @return {number} */
- hashCode() {
-  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_o__recordclass_RecordClass_1R1_, this.f_s__recordclass_RecordClass_1R1_, this.f_n__recordclass_RecordClass_1R1_]);
- }
- /** @override @return {?string} */
- toString() {
-  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_o__recordclass_RecordClass_1R1_, this.f_s__recordclass_RecordClass_1R1_, this.f_n__recordclass_RecordClass_1R1_]);
- }
  /** @nodts */
  static $clinit() {
   $1R1.$clinit = () =>{};
@@ -75,10 +58,7 @@ class $1R1 extends Record {
  }
  
  /** @nodts */
- static $loadModules() {
-  Arrays = goog.module.get('java.util.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata($1R1, 'recordclass.RecordClass$1R1');
 

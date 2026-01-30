@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.j2cl.transpiler.ast.TypeDescriptor.replaceTypeDescriptors;
@@ -35,7 +34,6 @@ import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
-import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.JsConstructorReference;
@@ -47,9 +45,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -419,7 +415,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
               // If we don't take any special precautions, if a field is never read explicitly (even
               // it is set), JsCompiler can optimize them away. As a result they won't be seen
               // reflectively and they won't contribute to equals/hashcode/toString.
-              preserveFields(autoValue, excludedFields);
+              AstUtils.preserveFields(autoValue, excludedFields);
             });
   }
 
@@ -509,35 +505,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                 getPropertyNameExpressions(autoValue.getDeclaration(), excludedFields))
             .build();
     autoValue.addLoadTimeStatement(mixinCall.makeStatement(SourcePosition.NONE));
-  }
-
-  private static void preserveFields(Type type, Collection<FieldDescriptor> excludedFields) {
-    MethodDescriptor preserveFn =
-        TypeDescriptors.get().javaemulInternalValueType.getMethodDescriptorByName("preserve");
-
-    List<Expression> fieldReferences =
-        type.getFields().stream()
-            .map(Field::getDescriptor)
-            .filter(f -> f.isInstanceMember() && !excludedFields.contains(f))
-            .map(
-                f ->
-                    FieldAccess.Builder.from(f)
-                        .setQualifier(new ThisReference(type.getTypeDescriptor()))
-                        .build())
-            .collect(toImmutableList());
-
-    // This special call will make JsCompiler think that all these fields are used. There is a
-    // special pass in JsCompiler that later removes this call itself so they won't exist in the
-    // final output.
-    Statement preserveCall =
-        MethodCall.Builder.from(preserveFn)
-            .setArguments(AstUtils.maybePackageVarargs(preserveFn, fieldReferences))
-            .build()
-            .makeStatement(SourcePosition.NONE);
-
-    // Add the call to preserve fields in the primary constructor since all other constructors
-    // will delegate to it.
-    type.getPrimaryConstructor().getBody().getStatements().add(preserveCall);
   }
 
   private static void addExcludedFieldsDeclaration(

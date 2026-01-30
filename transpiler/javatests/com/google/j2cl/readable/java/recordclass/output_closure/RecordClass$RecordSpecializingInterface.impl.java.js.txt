@@ -4,9 +4,6 @@ const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const PropertyAccessors = goog.require('recordclass.RecordClass.PropertyAccessors$impl');
 
-let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @final
  * @implements {PropertyAccessors<?string>}
@@ -32,6 +29,7 @@ class RecordSpecializingInterface extends Record {
   this.$ctor__java_lang_Record__void();
   this.f_parametric__recordclass_RecordClass_RecordSpecializingInterface_ = arg0;
   this.f_nonParametric__recordclass_RecordClass_RecordSpecializingInterface_ = arg1;
+  $J2CL_PRESERVE$(this.f_parametric__recordclass_RecordClass_RecordSpecializingInterface_, this.f_nonParametric__recordclass_RecordClass_RecordSpecializingInterface_);
  }
  /** @nodts @return {?string} */
  m_parametric__java_lang_String() {
@@ -40,22 +38,6 @@ class RecordSpecializingInterface extends Record {
  /** @override @nodts @return {?string} */
  m_nonParametric__java_lang_String() {
   return this.f_nonParametric__recordclass_RecordClass_RecordSpecializingInterface_;
- }
- /** @override @return {boolean} */
- equals(/** * */ arg0) {
-  let /** RecordSpecializingInterface */ $other;
-  if (!(RecordSpecializingInterface.$isInstance(arg0) && ($other = (/**@type {!RecordSpecializingInterface}*/ ($Casts.$to(arg0, RecordSpecializingInterface))), true))) {
-   return false;
-  }
-  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_parametric__recordclass_RecordClass_RecordSpecializingInterface_, this.f_nonParametric__recordclass_RecordClass_RecordSpecializingInterface_], [$other.f_parametric__recordclass_RecordClass_RecordSpecializingInterface_, $other.f_nonParametric__recordclass_RecordClass_RecordSpecializingInterface_]);
- }
- /** @override @return {number} */
- hashCode() {
-  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_parametric__recordclass_RecordClass_RecordSpecializingInterface_, this.f_nonParametric__recordclass_RecordClass_RecordSpecializingInterface_]);
- }
- /** @override @return {?string} */
- toString() {
-  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_parametric__recordclass_RecordClass_RecordSpecializingInterface_, this.f_nonParametric__recordclass_RecordClass_RecordSpecializingInterface_]);
  }
  //Bridge method.
  /** @final @override @nodts @return {?string} */
@@ -74,10 +56,7 @@ class RecordSpecializingInterface extends Record {
  }
  
  /** @nodts */
- static $loadModules() {
-  Arrays = goog.module.get('java.util.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 PropertyAccessors.$markImplementor(RecordSpecializingInterface);
 $Util.$setClassMetadata(RecordSpecializingInterface, 'recordclass.RecordClass$RecordSpecializingInterface');

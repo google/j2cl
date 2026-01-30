@@ -3,9 +3,6 @@ goog.module('recordclass.RecordClass.RecordWithOverriddenAccessor$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @final
  */
@@ -31,22 +28,7 @@ class RecordWithOverriddenAccessor extends Record {
  $ctor__recordclass_RecordClass_RecordWithOverriddenAccessor__java_lang_String__void(/** ?string */ arg0) {
   this.$ctor__java_lang_Record__void();
   this.f_value__recordclass_RecordClass_RecordWithOverriddenAccessor_ = arg0;
- }
- /** @override @return {boolean} */
- equals(/** * */ arg0) {
-  let /** RecordWithOverriddenAccessor */ $other;
-  if (!(RecordWithOverriddenAccessor.$isInstance(arg0) && ($other = (/**@type {!RecordWithOverriddenAccessor}*/ ($Casts.$to(arg0, RecordWithOverriddenAccessor))), true))) {
-   return false;
-  }
-  return Arrays.m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean([this.f_value__recordclass_RecordClass_RecordWithOverriddenAccessor_], [$other.f_value__recordclass_RecordClass_RecordWithOverriddenAccessor_]);
- }
- /** @override @return {number} */
- hashCode() {
-  return Arrays.m_hashCode__arrayOf_java_lang_Object__int([this.f_value__recordclass_RecordClass_RecordWithOverriddenAccessor_]);
- }
- /** @override @return {?string} */
- toString() {
-  return Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String([this.f_value__recordclass_RecordClass_RecordWithOverriddenAccessor_]);
+  $J2CL_PRESERVE$(this.f_value__recordclass_RecordClass_RecordWithOverriddenAccessor_);
  }
  /** @nodts */
  static $clinit() {
@@ -60,10 +42,7 @@ class RecordWithOverriddenAccessor extends Record {
  }
  
  /** @nodts */
- static $loadModules() {
-  Arrays = goog.module.get('java.util.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(RecordWithOverriddenAccessor, 'recordclass.RecordClass$RecordWithOverriddenAccessor');
 
