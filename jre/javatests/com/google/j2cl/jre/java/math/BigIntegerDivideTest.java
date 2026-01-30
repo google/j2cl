@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
@@ -48,12 +50,8 @@ public class BigIntegerDivideTest extends EmulTestBase {
     int bSign = 0;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
-    try {
-      aNumber = aNumber.divide(bNumber);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "BigInteger divide by zero", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.divide(bNumber));
+    assertEquals("Improper exception message", "BigInteger divide by zero", e.getMessage());
   }
 
   /** Divide two negative numbers. */
@@ -146,12 +144,9 @@ public class BigIntegerDivideTest extends EmulTestBase {
     int bSign = 0;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
-    try {
-      aNumber = aNumber.remainder(bNumber);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "BigInteger divide by zero", e.getMessage());
-    }
+    ArithmeticException e =
+        assertThrows(ArithmeticException.class, () -> aNumber.remainder(bNumber));
+    assertEquals("Improper exception message", "BigInteger divide by zero", e.getMessage());
   }
 
   /** Remainder of division of equal numbers. */
@@ -232,12 +227,8 @@ public class BigIntegerDivideTest extends EmulTestBase {
     int aSign = 1;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = BigInteger.ZERO;
-    try {
-      aNumber = aNumber.divide(bNumber);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "BigInteger divide by zero", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.divide(bNumber));
+    assertEquals("Improper exception message", "BigInteger divide by zero", e.getMessage());
   }
 
   /** Remainder of division of two numbers of different signs. The first is negative. */
@@ -293,13 +284,8 @@ public class BigIntegerDivideTest extends EmulTestBase {
     int bSign = -1;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger bNumber = new BigInteger(bSign, bBytes);
-    try {
-      aNumber = aNumber.mod(bNumber);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals(
-          "Improper exception message", "BigInteger: modulus not positive", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.mod(bNumber));
+    assertEquals("Improper exception message", "BigInteger: modulus not positive", e.getMessage());
   }
 
   /** mod when a divisor is positive. */

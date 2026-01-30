@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.lang.reflect;
 
+import static org.junit.Assert.assertThrows;
+
 import java.lang.reflect.Array;
 import junit.framework.TestCase;
 
@@ -22,17 +24,9 @@ import junit.framework.TestCase;
 public final class ArrayTest extends TestCase {
 
   public void testGet() {
-    try {
-      Array.get(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.get(null, 0));
 
-    try {
-      Array.get(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.get(new Object(), 0));
 
     assertEquals("1", Array.get(new Object[] {"1"}, 0));
     assertEquals(Boolean.TRUE, Array.get(new boolean[] {true}, 0));
@@ -46,23 +40,11 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testGetBoolean() {
-    try {
-      Array.getBoolean(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getBoolean(null, 0));
 
-    try {
-      Array.getBoolean(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getBoolean(new Object(), 0));
 
-    try {
-      Array.getBoolean(new Boolean[] {true}, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getBoolean(new Boolean[] {true}, 0));
 
     assertTrue(Array.getBoolean(new boolean[] {true}, 0));
     assertFalse(Array.getBoolean(new boolean[] {false}, 0));
@@ -71,23 +53,11 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testGetByte() {
-    try {
-      Array.getByte(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getByte(null, 0));
 
-    try {
-      Array.getByte(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getByte(new Object(), 0));
 
-    try {
-      Array.getByte(new Byte[] {(byte) 0}, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getByte(new Byte[] {(byte) 0}, 0));
 
     assertEquals((byte) 1, Array.getByte(new byte[] {(byte) 1}, 0));
     assertEquals((byte) 1, Array.getByte(new byte[] {(byte) 1}, 0));
@@ -96,45 +66,21 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testGetChar() {
-    try {
-      Array.getChar(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getChar(null, 0));
 
-    try {
-      Array.getChar(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getChar(new Object(), 0));
 
-    try {
-      Array.getChar(new Character[] {'0'}, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getChar(new Character[] {'0'}, 0));
 
     assertEquals('1', Array.getChar(new char[] {'1'}, 0));
   }
 
   public void testGetDouble() {
-    try {
-      Array.getDouble(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getDouble(null, 0));
 
-    try {
-      Array.getDouble(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getDouble(new Object(), 0));
 
-    try {
-      Array.getDouble(new Double[] {0d}, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getDouble(new Double[] {0d}, 0));
 
     assertEquals(1.0d, Array.getDouble(new double[] {1.0d}, 0));
     assertEquals(1.0d, Array.getDouble(new float[] {1.0f}, 0));
@@ -146,23 +92,11 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testGetFloat() {
-    try {
-      Array.getFloat(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getFloat(null, 0));
 
-    try {
-      Array.getFloat(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getFloat(new Object(), 0));
 
-    try {
-      Array.getFloat(new Float[] {0f}, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getFloat(new Float[] {0f}, 0));
 
     assertEquals(1.0f, Array.getFloat(new float[] {1.0f}, 0));
     assertEquals(1.0f, Array.getFloat(new byte[] {1}, 0));
@@ -173,23 +107,11 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testGetInt() {
-    try {
-      Array.getInt(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getInt(null, 0));
 
-    try {
-      Array.getInt(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getInt(new Object(), 0));
 
-    try {
-      Array.getInt(new Integer[] {0}, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getInt(new Integer[] {0}, 0));
 
     assertEquals(1, Array.getInt(new int[] {1}, 0));
     assertEquals(1, Array.getInt(new byte[] {1}, 0));
@@ -198,11 +120,7 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testGetLength() {
-    try {
-      Array.getLength(null);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getLength(null));
     assertEquals(0, Array.getLength(new Object[0]));
     assertEquals(1, Array.getLength(new Object[1]));
 
@@ -211,23 +129,11 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testGetLong() {
-    try {
-      Array.getLong(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getLong(null, 0));
 
-    try {
-      Array.getLong(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getLong(new Object(), 0));
 
-    try {
-      Array.getLong(new Long[] {0L}, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getLong(new Long[] {0L}, 0));
 
     assertEquals(1L, Array.getLong(new long[] {1L}, 0));
     assertEquals(1L, Array.getLong(new byte[] {1}, 0));
@@ -237,40 +143,20 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testGetShort() {
-    try {
-      Array.getShort(null, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getShort(null, 0));
 
-    try {
-      Array.getShort(new Object(), 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getShort(new Object(), 0));
 
-    try {
-      Array.getShort(new Short[] {(short) 1}, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.getShort(new Short[] {(short) 1}, 0));
 
     assertEquals((short) 1, Array.getShort(new short[] {(short) 1}, 0));
     assertEquals((short) 1, Array.getShort(new short[] {1}, 0));
   }
 
   public void testSet() {
-    try {
-      Array.set(null, 0, true);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.set(null, 0, true));
 
-    try {
-      Array.set(new Object(), 0, true);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.set(new Object(), 0, true));
 
     Object[] objectArray = new Object[1];
     Array.set(objectArray, 0, "1");
@@ -343,17 +229,9 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testSetBoolean() {
-    try {
-      Array.setBoolean(null, 0, true);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setBoolean(null, 0, true));
 
-    try {
-      Array.setBoolean(new Object(), 0, true);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setBoolean(new Object(), 0, true));
 
     boolean[] array = new boolean[1];
 
@@ -362,17 +240,9 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testSetByte() {
-    try {
-      Array.setByte(null, 0, (byte) 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setByte(null, 0, (byte) 0));
 
-    try {
-      Array.setByte(new Object(), 0, (byte) 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setByte(new Object(), 0, (byte) 0));
 
     byte[] bArray = new byte[1];
     Array.setByte(bArray, 0, (byte) 1);
@@ -400,17 +270,9 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testSetChar() {
-    try {
-      Array.setChar(null, 0, 'a');
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setChar(null, 0, 'a'));
 
-    try {
-      Array.setChar(new Object(), 0, 'a');
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setChar(new Object(), 0, 'a'));
 
     char[] array = new char[1];
 
@@ -435,17 +297,9 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testSetDouble() {
-    try {
-      Array.setDouble(null, 0, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setDouble(null, 0, 0));
 
-    try {
-      Array.setDouble(new Object(), 0, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setDouble(new Object(), 0, 0));
 
     double[] array = new double[1];
 
@@ -454,17 +308,9 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testSetFloat() {
-    try {
-      Array.setFloat(null, 0, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setFloat(null, 0, 0));
 
-    try {
-      Array.setFloat(new Object(), 0, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setFloat(new Object(), 0, 0));
 
     float[] array = new float[1];
 
@@ -477,17 +323,9 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testSetInt() {
-    try {
-      Array.setInt(null, 0, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setInt(null, 0, 0));
 
-    try {
-      Array.setInt(new Object(), 0, 0);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setInt(new Object(), 0, 0));
 
     int[] array = new int[1];
 
@@ -508,17 +346,9 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testSetLong() {
-    try {
-      Array.setLong(null, 0, 0L);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setLong(null, 0, 0L));
 
-    try {
-      Array.setLong(new Object(), 0, 0L);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setLong(new Object(), 0, 0L));
 
     long[] array = new long[1];
 
@@ -535,17 +365,9 @@ public final class ArrayTest extends TestCase {
   }
 
   public void testSetShort() {
-    try {
-      Array.setShort(null, 0, (short) 1);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setShort(null, 0, (short) 1));
 
-    try {
-      Array.setShort(new Object(), 0, (short) 1);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(RuntimeException.class, () -> Array.setShort(new Object(), 0, (short) 1));
 
     short[] array = new short[1];
 

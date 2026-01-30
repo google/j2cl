@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -52,12 +54,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     assertEquals("incorrect value", bA, aNumber.unscaledValue());
     assertEquals("incorrect scale", 0, aNumber.scale());
 
-    try {
-      new BigDecimal((BigInteger) null);
-      fail("No NullPointerException");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> new BigDecimal((BigInteger) null));
   }
 
   /** new BigDecimal(BigInteger value, MathContext). */
@@ -108,12 +105,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     assertEquals("incorrect value", res, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
 
-    try {
-      // Regression for HARMONY-783
-      new BigDecimal(new char[] {});
-      fail("NumberFormatException has not been thrown");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(new char[] {}));
   }
 
   /** new BigDecimal(char[] value, int offset, int len). */
@@ -127,12 +119,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     assertEquals("incorrect value", res, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
 
-    try {
-      // Regression for HARMONY-783
-      new BigDecimal(new char[] {}, 0, 0);
-      fail("NumberFormatException has not been thrown");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(new char[] {}, 0, 0));
   }
 
   /** new BigDecimal(char[] value, int offset, int len, MathContext mc). */
@@ -149,12 +136,9 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     assertEquals("incorrect value", res, result.toString());
     assertEquals("incorrect scale", resScale, result.scale());
 
-    try {
-      // Regression for HARMONY-783
-      new BigDecimal(new char[] {}, 0, 0, MathContext.DECIMAL32);
-      fail("NumberFormatException has not been thrown");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(
+        NumberFormatException.class,
+        () -> new BigDecimal(new char[] {}, 0, 0, MathContext.DECIMAL32));
   }
 
   /** new BigDecimal(char[] value, int offset, int len, MathContext mc). */
@@ -165,11 +149,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     int precision = 4;
     RoundingMode rm = RoundingMode.CEILING;
     MathContext mc = new MathContext(precision, rm);
-    try {
-      new BigDecimal(value, offset, len, mc);
-      fail("NumberFormatException has not been thrown");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(value, offset, len, mc));
   }
 
   /** new BigDecimal(char[] value, int offset, int len, MathContext mc). */
@@ -180,11 +160,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     int precision = 4;
     RoundingMode rm = RoundingMode.CEILING;
     MathContext mc = new MathContext(precision, rm);
-    try {
-      new BigDecimal(value, offset, len, mc);
-      fail("NumberFormatException has not been thrown");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(value, offset, len, mc));
   }
 
   /** new BigDecimal(char[] value, MathContext mc). */
@@ -200,11 +176,8 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
 
     // Regression for HARMONY-783
-    try {
-      new BigDecimal(new char[] {}, MathContext.DECIMAL32);
-      fail("NumberFormatException has not been thrown");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(
+        NumberFormatException.class, () -> new BigDecimal(new char[] {}, MathContext.DECIMAL32));
   }
 
   /** new BigDecimal(double value). */
@@ -251,21 +224,9 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     BigDecimal result = new BigDecimal(a, mc);
     BigDecimal expected = new BigDecimal("732546982374982e21");
     assertEquals(expected, result, 1e21);
-    try {
-      new BigDecimal(Double.NaN);
-      fail("Expected NumberFormatException on NaN");
-    } catch (NumberFormatException expectedException) {
-    }
-    try {
-      new BigDecimal(Double.POSITIVE_INFINITY);
-      fail("Expected NumberFormatException on +Infinity");
-    } catch (NumberFormatException expectedException) {
-    }
-    try {
-      new BigDecimal(Double.NEGATIVE_INFINITY);
-      fail("Expected NumberFormatException on -Infinity");
-    } catch (NumberFormatException expectedException) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(Double.NaN));
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(Double.POSITIVE_INFINITY));
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(Double.NEGATIVE_INFINITY));
   }
 
   /** new BigDecimal(-0.1). */
@@ -280,34 +241,22 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /** new BigDecimal(double value) when value is NaN. */
   public void testConstrDoubleNaN() {
     double a = Double.NaN;
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-      assertEquals("Improper exception message", "Infinite or NaN", e.getMessage());
-    }
+    NumberFormatException e = assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
+    assertEquals("Improper exception message", "Infinite or NaN", e.getMessage());
   }
 
   /** new BigDecimal(double value) when value is positive infinity. */
   public void testConstrDoubleNegInfinity() {
     double a = Double.NEGATIVE_INFINITY;
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-      assertEquals("Improper exception message", "Infinite or NaN", e.getMessage());
-    }
+    NumberFormatException e = assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
+    assertEquals("Improper exception message", "Infinite or NaN", e.getMessage());
   }
 
   /** new BigDecimal(double value) when value is positive infinity. */
   public void testConstrDoublePosInfinity() {
     double a = Double.POSITIVE_INFINITY;
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-      assertEquals("Improper exception message", "Infinite or NaN", e.getMessage());
-    }
+    NumberFormatException e = assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
+    assertEquals("Improper exception message", "Infinite or NaN", e.getMessage());
   }
 
   /** new BigDecimal(int value). */
@@ -359,51 +308,31 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /** new BigDecimal(String value) when value is not a valid representation of BigDecimal. */
   public void testConstrStringException() {
     String a = "-238768.787678287a+10";
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
   }
 
   /** new BigDecimal(String value) when exponent is empty. */
   public void testConstrStringExceptionEmptyExponent1() {
     String a = "-238768.787678287e";
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
   }
 
   /** new BigDecimal(String value) when exponent is empty. */
   public void testConstrStringExceptionEmptyExponent2() {
     String a = "-238768.787678287e-";
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
   }
 
   /** new BigDecimal(String value) when exponent is greater than Integer.MAX_VALUE. */
   public void testConstrStringExceptionExponentGreaterIntegerMax() {
     String a = "-238768.787678287e214748364767876";
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
   }
 
   /** new BigDecimal(String value) when exponent is less than Integer.MIN_VALUE. */
   public void testConstrStringExceptionExponentLessIntegerMin() {
     String a = "-238768.787678287e-214748364767876";
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
   }
 
   /** new BigDecimal(String value) when exponent is Integer.MAX_VALUE. */
@@ -419,31 +348,19 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /** new BigDecimal(String value) when exponent is Integer.MIN_VALUE. */
   public void testConstrStringExponentIntegerMin() {
     String a = ".238768e-2147483648";
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException expected");
-    } catch (NumberFormatException expected) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
   }
 
   /** new BigDecimal(String value) when value has multiple signs. */
   public void testConstrStringMultipleSignsStartWithPlus() {
     String a = "+-3";
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException expected");
-    } catch (NumberFormatException expected) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
   }
 
   /** new BigDecimal(String value) when value has multiple signs. */
   public void testConstrStringMultipleSignsStartWithMinus() {
     String a = "-+3";
-    try {
-      new BigDecimal(a);
-      fail("NumberFormatException expected");
-    } catch (NumberFormatException expected) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigDecimal(a));
   }
 
   /** new BigDecimal(String value, MathContext). */

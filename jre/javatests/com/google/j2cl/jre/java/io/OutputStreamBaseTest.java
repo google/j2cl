@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.io;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -43,38 +45,24 @@ public abstract class OutputStreamBaseTest extends TestCase {
   @J2ktIncompatible // Not nullable according to jspecify.
   public void testWriteArrayUsingNullArrayObject() throws IOException {
     final OutputStream outputStream = createDefaultOutputStream();
-    try {
-      outputStream.write(null, 0, 1);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> outputStream.write(null, 0, 1));
   }
 
   public void testWriteArrayUsingNegativeOffsetValue() throws IOException {
     final OutputStream outputStream = createDefaultOutputStream();
-    try {
-      outputStream.write(TEST_ARRAY, -1, 1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> outputStream.write(TEST_ARRAY, -1, 1));
   }
 
   public void testWriteArrayUsingNegativeLengthValue() throws IOException {
     final OutputStream outputStream = createDefaultOutputStream();
-    try {
-      outputStream.write(TEST_ARRAY, 0, -1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> outputStream.write(TEST_ARRAY, 0, -1));
   }
 
   public void testWriteArrayUsingAnInvalidRange() throws IOException {
     final OutputStream outputStream = createDefaultOutputStream();
-    try {
-      outputStream.write(TEST_ARRAY, 1, TEST_ARRAY.length);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(
+        IndexOutOfBoundsException.class,
+        () -> outputStream.write(TEST_ARRAY, 1, TEST_ARRAY.length));
   }
 
   public void testWriteArrayZeroLength() throws IOException {
@@ -116,11 +104,7 @@ public abstract class OutputStreamBaseTest extends TestCase {
   @J2ktIncompatible // Not nullable according to Jspecify
   public void testWriteArrayUsingNullArrayObjectAndNoOffset() throws IOException {
     final OutputStream outputStream = createDefaultOutputStream();
-    try {
-      outputStream.write(null);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> outputStream.write(null));
   }
 
   public void testWriteArrayZeroBytesNoOffset() throws IOException {

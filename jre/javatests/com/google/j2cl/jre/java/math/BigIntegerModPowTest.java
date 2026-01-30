@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
@@ -149,13 +151,9 @@ public class BigIntegerModPowTest extends EmulTestBase {
     int mSign = -1;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger modulus = new BigInteger(mSign, mBytes);
-    try {
-      aNumber = aNumber.modInverse(modulus);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals(
-          "Improper exception message", "BigInteger: modulus not positive", e.getMessage());
-    }
+    ArithmeticException e =
+        assertThrows(ArithmeticException.class, () -> aNumber.modInverse(modulus));
+    assertEquals("Improper exception message", "BigInteger: modulus not positive", e.getMessage());
   }
 
   /** modInverse: negative number. */
@@ -200,12 +198,9 @@ public class BigIntegerModPowTest extends EmulTestBase {
     int mSign = 1;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger modulus = new BigInteger(mSign, mBytes);
-    try {
-      aNumber = aNumber.modInverse(modulus);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "BigInteger not invertible.", e.getMessage());
-    }
+    ArithmeticException e =
+        assertThrows(ArithmeticException.class, () -> aNumber.modInverse(modulus));
+    assertEquals("Improper exception message", "BigInteger not invertible.", e.getMessage());
   }
 
   /** modInverse: positive number. */
@@ -255,13 +250,9 @@ public class BigIntegerModPowTest extends EmulTestBase {
     BigInteger aNumber = new BigInteger(aSign, aBytes);
     BigInteger exp = new BigInteger(eSign, eBytes);
     BigInteger modulus = new BigInteger(mSign, mBytes);
-    try {
-      aNumber = aNumber.modPow(exp, modulus);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals(
-          "Improper exception message", "BigInteger: modulus not positive", e.getMessage());
-    }
+    ArithmeticException e =
+        assertThrows(ArithmeticException.class, () -> aNumber.modPow(exp, modulus));
+    assertEquals("Improper exception message", "BigInteger: modulus not positive", e.getMessage());
   }
 
   /** modPow: negative exponent. */

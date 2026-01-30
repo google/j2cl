@@ -16,32 +16,19 @@
 
 package com.google.j2cl.jre.java.lang;
 
+import static org.junit.Assert.assertThrows;
+
 import junit.framework.TestCase;
 
 /** Unit tests for the Javascript emulation of the Float/float autoboxed fundamental type. */
 public class FloatTest extends TestCase {
 
   public void testBadStrings() {
-    try {
-      new Float("0.0e");
-      fail("constructor");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> new Float("0.0e"));
 
-    try {
-      Float.parseFloat("0.0e");
-      fail("parse");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Float.parseFloat("0.0e"));
 
-    try {
-      Float.valueOf("0x0e");
-      fail("valueOf");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Float.valueOf("0x0e"));
   }
 
   public void testCompare() {
@@ -177,31 +164,11 @@ public class FloatTest extends TestCase {
     assertEquals(Float.NEGATIVE_INFINITY, Float.parseFloat("-Infinity"));
 
     // check for parsing some invalid values
-    try {
-      Float.parseFloat("nan");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
-    try {
-      Float.parseFloat("infinity");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
-    try {
-      Float.parseFloat("1.2.3");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
-    try {
-      Float.parseFloat("+-1.2");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
-    try {
-      Float.parseFloat("1e");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
+    assertThrows(NumberFormatException.class, () -> Float.parseFloat("nan"));
+    assertThrows(NumberFormatException.class, () -> Float.parseFloat("infinity"));
+    assertThrows(NumberFormatException.class, () -> Float.parseFloat("1.2.3"));
+    assertThrows(NumberFormatException.class, () -> Float.parseFloat("+-1.2"));
+    assertThrows(NumberFormatException.class, () -> Float.parseFloat("1e"));
   }
 
   public void testFloatBits() {

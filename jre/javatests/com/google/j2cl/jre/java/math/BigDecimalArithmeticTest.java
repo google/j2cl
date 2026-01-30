@@ -34,6 +34,8 @@
  */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -564,12 +566,8 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int aScale = 15;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = BigDecimal.valueOf(0L);
-    try {
-      aNumber = aNumber.divide(bNumber);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Division by zero", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.divide(bNumber));
+    assertEquals("Improper exception message", "Division by zero", e.getMessage());
   }
 
   /** Divide with invalid rounding mode. */
@@ -580,12 +578,9 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int bScale = 10;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    try {
-      aNumber = aNumber.divide(bNumber, 100);
-      fail("IllegalArgumentException has not been caught");
-    } catch (IllegalArgumentException e) {
-      assertEquals("Improper exception message", "Invalid rounding mode", e.getMessage());
-    }
+    IllegalArgumentException e =
+        assertThrows(IllegalArgumentException.class, () -> aNumber.divide(bNumber, 100));
+    assertEquals("Improper exception message", "Invalid rounding mode", e.getMessage());
   }
 
   /** Divide with ROUND_UNNECESSARY. */
@@ -596,12 +591,10 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int bScale = 10;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    try {
-      aNumber = aNumber.divide(bNumber, BigDecimal.ROUND_UNNECESSARY);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Rounding necessary", e.getMessage());
-    }
+    ArithmeticException e =
+        assertThrows(
+            ArithmeticException.class, () -> aNumber.divide(bNumber, BigDecimal.ROUND_UNNECESSARY));
+    assertEquals("Improper exception message", "Rounding necessary", e.getMessage());
   }
 
   /** Divide: local variable exponent is equal to zero. */
@@ -657,12 +650,9 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
   public void testDivideLargeScale() {
     BigDecimal arg1 = new BigDecimal("320.0E+2147483647");
     BigDecimal arg2 = new BigDecimal("6E-2147483647");
-    try {
-      arg1 = arg1.divide(arg2, Integer.MAX_VALUE, RoundingMode.CEILING);
-      fail("Expected ArithmeticException when dividing with a scale that's too large");
-    } catch (ArithmeticException e) {
-      // expected behaviour
-    }
+    assertThrows(
+        ArithmeticException.class,
+        () -> arg1.divide(arg2, Integer.MAX_VALUE, RoundingMode.CEILING));
   }
 
   /** Divide: remainder is zero. */
@@ -1095,22 +1085,11 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     assertEquals(BigDecimal.ZERO, quotient);
     quotient = BigDecimal.ZERO.negate().divide(BigDecimal.ONE);
     assertEquals(BigDecimal.ZERO, quotient);
-    try {
-      quotient = BigDecimal.ZERO.divide(BigDecimal.ZERO);
-      fail("Expected ArithmeticException, divide by zero");
-    } catch (ArithmeticException expected) {
-    }
+    assertThrows(ArithmeticException.class, () -> BigDecimal.ZERO.divide(BigDecimal.ZERO));
     assertEquals(BigDecimal.ZERO, quotient);
-    try {
-      quotient = BigDecimal.ONE.divide(BigDecimal.ZERO);
-      fail("Expected ArithmeticException, divide by zero");
-    } catch (ArithmeticException expected) {
-    }
-    try {
-      quotient = BigDecimal.ONE.divideToIntegralValue(BigDecimal.ZERO);
-      fail("Expected ArithmeticException, divide by zero");
-    } catch (ArithmeticException expected) {
-    }
+    assertThrows(ArithmeticException.class, () -> BigDecimal.ONE.divide(BigDecimal.ZERO));
+    assertThrows(
+        ArithmeticException.class, () -> BigDecimal.ONE.divideToIntegralValue(BigDecimal.ZERO));
   }
 
   /** Multiply two numbers of different scales. */

@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
@@ -123,12 +125,8 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
     int aSign = 1;
     int number = -7;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    try {
-      aNumber = aNumber.clearBit(number);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Negative bit address", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.clearBit(number));
+    assertEquals("Improper exception message", "Negative bit address", e.getMessage());
   }
 
   /** clearBit(int n) inside a negative number. */
@@ -400,12 +398,8 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
     int aSign = 1;
     int number = -7;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    try {
-      aNumber = aNumber.flipBit(number);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Negative bit address", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.flipBit(number));
+    assertEquals("Improper exception message", "Negative bit address", e.getMessage());
   }
 
   /** flipBit(int n) the leftmost bit in a negative number. */
@@ -678,12 +672,8 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
     int aSign = 1;
     int number = -7;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    try {
-      aNumber = aNumber.setBit(number);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Negative bit address", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.setBit(number));
+    assertEquals("Improper exception message", "Negative bit address", e.getMessage());
   }
 
   /** setBit(int n) the leftmost bit in a negative number. */
@@ -1184,12 +1174,8 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
     int aSign = 1;
     int number = -7;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    try {
-      aNumber.testBit(number);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Negative bit address", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.testBit(number));
+    assertEquals("Improper exception message", "Negative bit address", e.getMessage());
   }
 
   /** testBit(int n) of a negative number. */

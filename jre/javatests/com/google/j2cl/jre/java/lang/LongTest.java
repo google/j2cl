@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.lang;
 
+import static org.junit.Assert.assertThrows;
+
 import junit.framework.TestCase;
 
 /** Unit tests for the Javascript emulation of the Long/long autoboxed fundamental type. */
@@ -89,103 +91,33 @@ public class LongTest extends TestCase {
     assertEquals(Long.MAX_VALUE, Long.parseLong("" + Long.MAX_VALUE));
     // Issue 7308
     assertEquals(Long.MIN_VALUE, Long.parseLong("" + Long.MIN_VALUE));
-    try {
-      Long.parseLong("10L");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      Long.parseLong("");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      // Issue 2636
-      new Long("");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      // issue 3647
-      Long.parseLong("-");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      // issue 3647
-      new Long("-");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      Long.parseLong(" -");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      new Long(" -");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      Long.parseLong("- ");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      new Long("- ");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      Long.parseLong("deadbeefbeef");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      Long.parseLong("123456789ab123456789ab123456789ab123456789ab", 12);
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
+    assertThrows(NumberFormatException.class, () -> Long.parseLong("10L"));
+    assertThrows(NumberFormatException.class, () -> Long.parseLong(""));
+    assertThrows(NumberFormatException.class, () -> new Long(""));
+    assertThrows(NumberFormatException.class, () -> Long.parseLong("-"));
+    assertThrows(NumberFormatException.class, () -> new Long("-"));
+    assertThrows(NumberFormatException.class, () -> Long.parseLong(" -"));
+    assertThrows(NumberFormatException.class, () -> new Long(" -"));
+    assertThrows(NumberFormatException.class, () -> Long.parseLong("- "));
+    assertThrows(NumberFormatException.class, () -> new Long("- "));
+    assertThrows(NumberFormatException.class, () -> Long.parseLong("deadbeefbeef"));
+    assertThrows(
+        NumberFormatException.class,
+        () -> Long.parseLong("123456789ab123456789ab123456789ab123456789ab", 12));
 
     assertEquals(0L, Long.parseLong("0", 12));
     assertEquals(73686780563L, Long.parseLong("123456789ab", 12));
     assertEquals(-73686780563L, Long.parseLong("-123456789ab", 12));
-    try {
-      Long.parseLong("c", 12);
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
+    assertThrows(NumberFormatException.class, () -> Long.parseLong("c", 12));
 
     assertEquals(0L, Long.parseLong("0", 16));
     assertEquals(-1L, Long.parseLong("-1", 16));
     assertEquals(1L, Long.parseLong("1", 16));
     assertEquals(0xdeadbeefdeadL, Long.parseLong("deadbeefdead", 16));
     assertEquals(-0xdeadbeefdeadL, Long.parseLong("-deadbeefdead", 16));
-    try {
-      Long.parseLong("deadbeefdeadbeefdeadbeefdeadbeef", 16);
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
-    try {
-      Long.parseLong("g", 16);
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException ex) {
-      // expected
-    }
+    assertThrows(
+        NumberFormatException.class, () -> Long.parseLong("deadbeefdeadbeefdeadbeefdeadbeef", 16));
+    assertThrows(NumberFormatException.class, () -> Long.parseLong("g", 16));
   }
 
   public void testReverse() {

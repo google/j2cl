@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.sql;
 
+import static org.junit.Assert.assertThrows;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import junit.framework.TestCase;
@@ -85,21 +87,11 @@ public class SqlTimestampTest extends TestCase {
     assertEquals(now, t.getTime());
     assertEquals((now % 1000) * 1000000, t.getNanos());
 
-    try {
-      t.setNanos(-1);
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Correct
-    }
+    assertThrows(IllegalArgumentException.class, () -> t.setNanos(-1));
 
     t.setNanos(0);
 
-    try {
-      t.setNanos(1000000000);
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Correct
-    }
+    assertThrows(IllegalArgumentException.class, () -> t.setNanos(1000000000));
 
     t.setNanos(999999999);
   }
@@ -121,19 +113,9 @@ public class SqlTimestampTest extends TestCase {
   }
 
   public void testValueOf() {
-    try {
-      Timestamp.valueOf("");
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Correct
-    }
+    assertThrows(IllegalArgumentException.class, () -> Timestamp.valueOf(""));
 
-    try {
-      Timestamp.valueOf("asdfg");
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Correct
-    }
+    assertThrows(IllegalArgumentException.class, () -> Timestamp.valueOf("asdfg"));
 
     Timestamp expected = new Timestamp(2000 - 1900, 1 - 1, 1, 12, 34, 56, 123456789);
     Timestamp actual = Timestamp.valueOf("2000-01-01 12:34:56.123456789");

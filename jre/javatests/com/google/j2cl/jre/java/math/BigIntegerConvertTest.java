@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
@@ -51,16 +53,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(Byte.MAX_VALUE, BigInteger.valueOf(Byte.MAX_VALUE).byteValueExact());
     assertEquals(Byte.MIN_VALUE, BigInteger.valueOf(Byte.MIN_VALUE).byteValueExact());
 
-    try {
-      BigInteger.valueOf(Byte.MAX_VALUE + 1).byteValueExact();
-      fail("overflow expected");
-    } catch (Exception expected) {
-    }
-    try {
-      BigInteger.valueOf(Byte.MIN_VALUE - 1).byteValueExact();
-      fail("overflow expected");
-    } catch (Exception expected) {
-    }
+    assertThrows(Exception.class, () -> BigInteger.valueOf(Byte.MAX_VALUE + 1).byteValueExact());
+    assertThrows(Exception.class, () -> BigInteger.valueOf(Byte.MIN_VALUE - 1).byteValueExact());
   }
 
   /** Convert a negative number to a double value. The number's bit length is less than 64 bits. */
@@ -575,16 +569,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(Integer.MAX_VALUE, BigInteger.valueOf(Integer.MAX_VALUE).intValueExact());
     assertEquals(Integer.MIN_VALUE, BigInteger.valueOf(Integer.MIN_VALUE).intValueExact());
 
-    try {
-      BigInteger.valueOf(Integer.MAX_VALUE + 1L).intValueExact();
-      fail("overflow expected");
-    } catch (Exception expected) {
-    }
-    try {
-      BigInteger.valueOf(Integer.MIN_VALUE - 1L).intValueExact();
-      fail("overflow expected");
-    } catch (Exception expected) {
-    }
+    assertThrows(Exception.class, () -> BigInteger.valueOf(Integer.MAX_VALUE + 1L).intValueExact());
+    assertThrows(Exception.class, () -> BigInteger.valueOf(Integer.MIN_VALUE - 1L).intValueExact());
   }
 
   /** Convert a number to a negative long value The BigInteger is longer than int. */
@@ -626,16 +612,12 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(Long.MAX_VALUE, BigInteger.valueOf(Long.MAX_VALUE).longValueExact());
     assertEquals(Long.MIN_VALUE, BigInteger.valueOf(Long.MIN_VALUE).longValueExact());
 
-    try {
-      BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE).longValueExact();
-      fail("overflow expected");
-    } catch (Exception expected) {
-    }
-    try {
-      BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE).longValueExact();
-      fail("overflow expected");
-    } catch (Exception expected) {
-    }
+    assertThrows(
+        Exception.class,
+        () -> BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE).longValueExact());
+    assertThrows(
+        Exception.class,
+        () -> BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE).longValueExact());
   }
 
   public void testShortValueExact() {
@@ -645,16 +627,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
     assertEquals(Short.MAX_VALUE, BigInteger.valueOf(Short.MAX_VALUE).shortValueExact());
     assertEquals(Short.MIN_VALUE, BigInteger.valueOf(Short.MIN_VALUE).shortValueExact());
 
-    try {
-      BigInteger.valueOf(Short.MAX_VALUE + 1).shortValueExact();
-      fail("overflow expected");
-    } catch (Exception expected) {
-    }
-    try {
-      BigInteger.valueOf(Short.MIN_VALUE - 1).shortValueExact();
-      fail("overflow expected");
-    } catch (Exception expected) {
-    }
+    assertThrows(Exception.class, () -> BigInteger.valueOf(Short.MAX_VALUE + 1).shortValueExact());
+    assertThrows(Exception.class, () -> BigInteger.valueOf(Short.MIN_VALUE - 1).shortValueExact());
   }
 
   /** valueOf (long val): convert Integer.MAX_VALUE to a BigInteger. */

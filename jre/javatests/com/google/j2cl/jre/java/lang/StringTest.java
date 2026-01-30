@@ -33,19 +33,9 @@ public class StringTest extends TestCase {
   public void testCharAt() {
     assertEquals('b', hideFromCompiler("abc").charAt(1));
 
-    try {
-      hideFromCompiler("abc").charAt(-1);
-      fail();
-    } catch (StringIndexOutOfBoundsException ignore) {
-      // expected
-    }
+    assertThrows(StringIndexOutOfBoundsException.class, () -> hideFromCompiler("abc").charAt(-1));
 
-    try {
-      hideFromCompiler("abc").charAt(3);
-      fail();
-    } catch (StringIndexOutOfBoundsException ignore) {
-      // expected
-    }
+    assertThrows(StringIndexOutOfBoundsException.class, () -> hideFromCompiler("abc").charAt(3));
   }
 
   public void testCodePoint() {
@@ -116,26 +106,9 @@ public class StringTest extends TestCase {
       return;
     }
 
-    try {
-      returnNull().compareTo("");
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
-
-    try {
-      returnNull().compareTo(returnNull());
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
-
-    try {
-      "".compareTo(returnNull());
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> returnNull().compareTo(""));
+    assertThrows(NullPointerException.class, () -> returnNull().compareTo(returnNull()));
+    assertThrows(NullPointerException.class, () -> "".compareTo(returnNull()));
   }
 
   public void testCompareToIgnoreCase() {
@@ -187,19 +160,8 @@ public class StringTest extends TestCase {
       return;
     }
 
-    try {
-      returnNull().concat("");
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
-
-    try {
-      hideFromCompiler("").concat(returnNull());
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> returnNull().concat(""));
+    assertThrows(NullPointerException.class, () -> hideFromCompiler("").concat(returnNull()));
   }
 
   @J2ktIncompatible
@@ -569,19 +531,8 @@ public class StringTest extends TestCase {
       return;
     }
 
-    try {
-      returnNull().equals("other");
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
-
-    try {
-      returnNull().equals(returnNull());
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> returnNull().equals("other"));
+    assertThrows(NullPointerException.class, () -> returnNull().equals(returnNull()));
   }
 
   public void testEqualsIgnoreCase() {
@@ -617,19 +568,8 @@ public class StringTest extends TestCase {
       return;
     }
 
-    try {
-      returnNull().equalsIgnoreCase("other");
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
-
-    try {
-      returnNull().equalsIgnoreCase(returnNull());
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> returnNull().equalsIgnoreCase("other"));
+    assertThrows(NullPointerException.class, () -> returnNull().equalsIgnoreCase(returnNull()));
   }
 
   public void testEqualsIgnoreCaseNonAscii() {
@@ -831,12 +771,7 @@ public class StringTest extends TestCase {
       return;
     }
 
-    try {
-      returnNull().hashCode();
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> returnNull().hashCode());
   }
 
   public void testIndexOf() {
@@ -856,13 +791,7 @@ public class StringTest extends TestCase {
       return;
     }
 
-    try {
-      int index = returnNull().indexOf("");
-      // Use return value to avoid side-effect to be ignored by JSC.
-      fail(String.valueOf(index));
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> returnNull().indexOf(""));
   }
 
   public void testLastIndexOf() {
@@ -1044,12 +973,7 @@ public class StringTest extends TestCase {
     assertEquals("abcabc", "abc".repeat(2));
 
     // Invalid calls
-    try {
-      String unused = "abc".repeat(-1);
-      fail("Repeating a negative count should throw an exception.");
-    } catch (IllegalArgumentException ex) {
-      // expected.
-    }
+    assertThrows(IllegalArgumentException.class, () -> "abc".repeat(-1));
   }
 
   public void testReplace() {
@@ -1188,29 +1112,11 @@ public class StringTest extends TestCase {
     assertEquals("", hideFromCompiler("abcdef").substring(6));
     assertEquals("", hideFromCompiler("abcdef").substring(6, 6));
 
-    try {
-      hideFromCompiler("abc").substring(-1);
-      fail("Should have thrown");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> hideFromCompiler("abc").substring(-1));
 
-    try {
-      hideFromCompiler("abc").substring(4);
-      fail("Should have thrown");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      hideFromCompiler("abc").substring(2, 4);
-      fail("Should have thrown");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      hideFromCompiler("abc").substring(2, 1);
-      fail("Should have thrown");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> hideFromCompiler("abc").substring(4));
+    assertThrows(IndexOutOfBoundsException.class, () -> hideFromCompiler("abc").substring(2, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> hideFromCompiler("abc").substring(2, 1));
   }
 
   public void testToCharArray() {
@@ -1241,12 +1147,7 @@ public class StringTest extends TestCase {
       return;
     }
 
-    try {
-      returnNull().toString();
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> returnNull().toString());
   }
 
   /*

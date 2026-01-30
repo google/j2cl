@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 import java.util.Random;
@@ -50,12 +52,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    */
   public void testConstructorBytesException() {
     byte aBytes[] = {};
-    try {
-      new BigInteger(aBytes);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-      assertEquals("Improper exception message", "Zero length BigInteger", e.getMessage());
-    }
+    NumberFormatException e =
+        assertThrows(NumberFormatException.class, () -> new BigInteger(aBytes));
+    assertEquals("Improper exception message", "Zero length BigInteger", e.getMessage());
   }
 
   /** Create a negative number from an array of bytes. The number fits in an array of integers. */
@@ -208,12 +207,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorSignBytesException1() {
     byte aBytes[] = {123, 45, -3, -76};
     int aSign = 3;
-    try {
-      new BigInteger(aSign, aBytes);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-      assertEquals("Improper exception message", "Invalid signum value", e.getMessage());
-    }
+    NumberFormatException e =
+        assertThrows(NumberFormatException.class, () -> new BigInteger(aSign, aBytes));
+    assertEquals("Improper exception message", "Invalid signum value", e.getMessage());
   }
 
   /**
@@ -223,12 +219,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorSignBytesException2() {
     byte aBytes[] = {123, 45, -3, -76};
     int aSign = 0;
-    try {
-      new BigInteger(aSign, aBytes);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-      assertEquals("Improper exception message", "signum-magnitude mismatch", e.getMessage());
-    }
+    NumberFormatException e =
+        assertThrows(NumberFormatException.class, () -> new BigInteger(aSign, aBytes));
+    assertEquals("Improper exception message", "signum-magnitude mismatch", e.getMessage());
   }
 
   /**
@@ -554,12 +547,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringException1() {
     String value = "9234853876401";
     int radix = 45;
-    try {
-      new BigInteger(value, radix);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-      assertEquals("Improper exception message", "Radix out of range", e.getMessage());
-    }
+    NumberFormatException e =
+        assertThrows(NumberFormatException.class, () -> new BigInteger(value, radix));
+    assertEquals("Improper exception message", "Radix out of range", e.getMessage());
   }
 
   /**
@@ -569,11 +559,7 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringException2() {
     String value = "   9234853876401";
     int radix = 10;
-    try {
-      new BigInteger(value, radix);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigInteger(value, radix));
   }
 
   /**
@@ -583,11 +569,7 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringException3() {
     String value = "92348$*#78987";
     int radix = 34;
-    try {
-      new BigInteger(value, radix);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigInteger(value, radix));
   }
 
   /**
@@ -597,11 +579,7 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringException4() {
     String value = "98zv765hdsaiy";
     int radix = 20;
-    try {
-      new BigInteger(value, radix);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
-    }
+    assertThrows(NumberFormatException.class, () -> new BigInteger(value, radix));
   }
 
   /** Create a positive number from a string value and radix 10. */

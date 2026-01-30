@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.io;
 
+import static org.junit.Assert.assertThrows;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -105,29 +107,17 @@ public class WriterTest extends TestCase {
 
   public void testAppendSubCharSequenceUsingNegativeStartValue() throws IOException {
     final CharSequence csq = "hola";
-    try {
-      writer.append(csq, -1, 2);
-      fail("should have thrown StringIndexOutOfBoundsException");
-    } catch (StringIndexOutOfBoundsException expected) {
-    }
+    assertThrows(StringIndexOutOfBoundsException.class, () -> writer.append(csq, -1, 2));
   }
 
   public void testAppendSubCharSequenceUsingNegativeEndValue() throws IOException {
     final CharSequence csq = "hola";
-    try {
-      writer.append(csq, 0, -1);
-      fail("should have thrown StringIndexOutOfBoundsException");
-    } catch (StringIndexOutOfBoundsException expected) {
-    }
+    assertThrows(StringIndexOutOfBoundsException.class, () -> writer.append(csq, 0, -1));
   }
 
   public void testAppendSubCharSequenceStartIsGreaterThanEnd() throws IOException {
     final CharSequence csq = "hola";
-    try {
-      writer.append(csq, 2, 1);
-      fail("should have thrown StringIndexOutOfBoundsException");
-    } catch (StringIndexOutOfBoundsException expected) {
-    }
+    assertThrows(StringIndexOutOfBoundsException.class, () -> writer.append(csq, 2, 1));
   }
 
   public void testAppendNullSubCharSequence() throws IOException {
@@ -180,12 +170,7 @@ public class WriterTest extends TestCase {
   }
 
   public void testWriteNullString() throws IOException {
-    try {
-      final String str = null;
-      writer.write(str);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> writer.write((String) null));
   }
 
   public void testWriteNonEmptyString() throws IOException {
@@ -196,29 +181,17 @@ public class WriterTest extends TestCase {
 
   public void testWriteSubStringUsingNegativeStartValue() throws IOException {
     final String str = "hola";
-    try {
-      writer.append(str, -1, 2);
-      fail("should have thrown StringIndexOutOfBoundsException");
-    } catch (StringIndexOutOfBoundsException expected) {
-    }
+    assertThrows(StringIndexOutOfBoundsException.class, () -> writer.append(str, -1, 2));
   }
 
   public void testWriteSubStringUsingNegativeEndValue() throws IOException {
     final String str = "hola";
-    try {
-      writer.append(str, 0, -1);
-      fail("should have thrown StringIndexOutOfBoundsException");
-    } catch (StringIndexOutOfBoundsException expected) {
-    }
+    assertThrows(StringIndexOutOfBoundsException.class, () -> writer.append(str, 0, -1));
   }
 
   public void testWriteSubStringStartIsGreaterThanEnd() throws IOException {
     final String str = "hola";
-    try {
-      writer.append(str, 2, 1);
-      fail("should have thrown StringIndexOutOfBoundsException");
-    } catch (StringIndexOutOfBoundsException expected) {
-    }
+    assertThrows(StringIndexOutOfBoundsException.class, () -> writer.append(str, 2, 1));
   }
 
   public void testWriteEmptySubstring() throws IOException {

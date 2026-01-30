@@ -17,6 +17,7 @@
 package com.google.j2cl.jre.java.lang;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import junit.framework.TestCase;
 
@@ -24,54 +25,19 @@ import junit.framework.TestCase;
 public class DoubleTest extends TestCase {
 
   public void testBadStrings() {
-    try {
-      new Double("0.0e");
-      fail("constructor");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> new Double("0.0e"));
 
-    try {
-      Double.parseDouble("0.0e");
-      fail("parse");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble("0.0e"));
 
-    try {
-      Double.parseDouble(".");
-      fail("parse");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble("."));
 
-    try {
-      Double.parseDouble(".e");
-      fail("parse");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble(".e"));
 
-    try {
-      Double.parseDouble("e5");
-      fail("parse");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble("e5"));
 
-    try {
-      Double.parseDouble(".e5");
-      fail("parse");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble(".e5"));
 
-    try {
-      Double.valueOf("0x0e");
-      fail("valueOf");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Double.valueOf("0x0e"));
   }
 
   public void testCompare() {
@@ -96,17 +62,13 @@ public class DoubleTest extends TestCase {
     }
 
     Double d = Math.random() < 0 ? 42.0 : null;
-    try {
-      assertEquals(null, d.doubleValue());
-      fail("Should have thrown exception");
-    } catch (Exception e) {
-    }
+    assertThrows(Exception.class, () -> assertEquals(null, d.doubleValue()));
 
-    try {
-      double dd = d;
-      fail("Should have thrown exception" + dd);
-    } catch (Exception e) {
-    }
+    assertThrows(
+        Exception.class,
+        () -> {
+          double unused = d;
+        });
   }
 
   public void testEqualityNormalizer() {
@@ -255,31 +217,11 @@ public class DoubleTest extends TestCase {
     assertEquals(Double.NEGATIVE_INFINITY, Double.parseDouble("-Infinity"));
 
     // check for parsing some invalid values
-    try {
-      Double.parseDouble("nan");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
-    try {
-      Double.parseDouble("infinity");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
-    try {
-      Double.parseDouble("1.2.3");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
-    try {
-      Double.parseDouble("+-1.2");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
-    try {
-      Double.parseDouble("1e");
-      fail("Expected NumberFormatException");
-    } catch (NumberFormatException expected) {
-    }
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble("nan"));
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble("infinity"));
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble("1.2.3"));
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble("+-1.2"));
+    assertThrows(NumberFormatException.class, () -> Double.parseDouble("1e"));
   }
 
   public void testDoubleBits() {

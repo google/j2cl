@@ -15,94 +15,42 @@
  */
 package com.google.j2cl.jre.java.lang;
 
+import static org.junit.Assert.assertThrows;
+
 import junit.framework.TestCase;
 
 /** Unit tests for the Javascript emulation of the Integer/int autoboxed fundamental type. */
 public class IntegerTest extends TestCase {
 
   public void testBadStrings() {
-    try {
-      new Integer("");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
-    try {
-      Integer.parseInt("");
-      fail("expected NumberFormatException");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> new Integer(""));
+    assertThrows(NumberFormatException.class, () -> Integer.parseInt(""));
 
-    try {
-      new Integer("05abcd");
-      fail("Constructor should have thrown NumberFormatException");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> new Integer("05abcd"));
 
-    try {
-      Integer.decode("05abcd");
-      fail("Decode should have thrown NumberFormatException");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Integer.decode("05abcd"));
 
-    try {
-      Integer.parseInt("05abcd");
-      fail("parseInt should have thrown NumberFormatException");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Integer.parseInt("05abcd"));
 
-    try {
-      Integer.parseInt(String.valueOf(Long.MAX_VALUE));
-      fail("parseInt should reject numbers greater than the range of int");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(
+        NumberFormatException.class, () -> Integer.parseInt(String.valueOf(Long.MAX_VALUE)));
 
-    try {
-      Integer.parseInt(String.valueOf(Long.MIN_VALUE));
-      fail("parseInt should reject numbers less than the range of int");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(
+        NumberFormatException.class, () -> Integer.parseInt(String.valueOf(Long.MIN_VALUE)));
 
-    try {
-      Integer.parseInt(String.valueOf((long) Integer.MAX_VALUE + 1));
-      fail("parseInt should reject numbers greater than the range of int");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(
+        NumberFormatException.class,
+        () -> Integer.parseInt(String.valueOf((long) Integer.MAX_VALUE + 1)));
 
-    try {
-      Integer.parseInt(String.valueOf((long) Integer.MIN_VALUE - 1));
-      fail("parseInt should reject numbers less than the range of int");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(
+        NumberFormatException.class,
+        () -> Integer.parseInt(String.valueOf((long) Integer.MIN_VALUE - 1)));
 
-    try {
-      Integer.parseInt("-");
-      fail("parseInt should reject \"-\"");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Integer.parseInt("-"));
 
-    try {
-      Integer.parseInt(" -12345");
-      fail("parseInt should reject leading whitespace");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Integer.parseInt(" -12345"));
 
-    try {
-      Integer.parseInt("-12345 ");
-      fail("parseInt should reject trailing whitespace");
-    } catch (NumberFormatException e) {
-      // Expected behavior
-    }
+    assertThrows(NumberFormatException.class, () -> Integer.parseInt("-12345 "));
   }
 
   public void testBinaryString() {
@@ -153,12 +101,7 @@ public class IntegerTest extends TestCase {
     assertEquals(-31, Integer.decode("-0X1F").intValue());
     assertEquals(31, Integer.decode("#1f").intValue());
     assertEquals(10, Integer.decode("012").intValue());
-    try {
-      Integer.decode("abx");
-      fail();
-    } catch (NumberFormatException e) {
-      // pass
-    }
+    assertThrows(NumberFormatException.class, () -> Integer.decode("abx"));
   }
 
   public void testEquals() {

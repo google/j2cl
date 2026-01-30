@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.io;
 
+import static org.junit.Assert.assertThrows;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -118,38 +120,22 @@ public class BufferedWriterTest extends TestCase {
 
   public void testWriteArrayUsingNullArray() throws IOException {
     final char[] b = null;
-    try {
-      writer.write(b, 0, 2);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> writer.write(b, 0, 2));
   }
 
   public void testWriteArrayUsingNegativeOffsetValue() throws IOException {
     final char[] b = {'a', 'b'};
-    try {
-      writer.write(b, -1, 1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> writer.write(b, -1, 1));
   }
 
   public void testWriteArrayUsingNegativeLengthValue() throws IOException {
     final char[] b = {'a', 'b'};
-    try {
-      writer.write(b, 0, -1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> writer.write(b, 0, -1));
   }
 
   public void testWriteArrayUsingInvalidRangeValue() throws IOException {
     final char[] b = {'a', 'b'};
-    try {
-      writer.write(b, 1, 2);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> writer.write(b, 1, 2));
   }
 
   public void testWriteArraySmallerThanBufferSize() throws IOException {
@@ -190,20 +176,12 @@ public class BufferedWriterTest extends TestCase {
 
   public void testWriteStringUsingNullString() throws IOException {
     final String s = null;
-    try {
-      writer.write(s, 0, 2);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> writer.write(s, 0, 2));
   }
 
   public void testWriteStringUsingNegativeOffsetValue() throws IOException {
     final String s = "ab";
-    try {
-      writer.write(s, -1, 1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> writer.write(s, -1, 1));
   }
 
   public void testWriteStringUsingNegativeLengthValue() throws IOException {
@@ -214,11 +192,7 @@ public class BufferedWriterTest extends TestCase {
 
   public void testWriteStringUsingInvalidRangeValue() throws IOException {
     final String s = "ab";
-    try {
-      writer.write(s, 1, 2);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> writer.write(s, 1, 2));
   }
 
   public void testWriteStringSmallerThanBufferSize() throws IOException {

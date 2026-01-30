@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -122,12 +124,9 @@ public class BigDecimalScaleOperationsTest extends EmulTestBase {
     int aScale = 28;
     int newScale = 18;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
-    try {
-      aNumber = aNumber.setScale(newScale);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Rounding necessary", e.getMessage());
-    }
+    ArithmeticException e =
+        assertThrows(ArithmeticException.class, () -> aNumber.setScale(newScale));
+    assertEquals("Improper exception message", "Rounding necessary", e.getMessage());
   }
 
   /** Set the same new scale. */
@@ -305,12 +304,9 @@ public class BigDecimalScaleOperationsTest extends EmulTestBase {
     int aScale = Integer.MAX_VALUE; // 2147483647
     int shift = -18;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
-    try {
-      aNumber = aNumber.movePointRight(shift);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Underflow", e.getMessage());
-    }
+    ArithmeticException e =
+        assertThrows(ArithmeticException.class, () -> aNumber.movePointRight(shift));
+    assertEquals("Improper exception message", "Underflow", e.getMessage());
   }
 
   /** precision(). */

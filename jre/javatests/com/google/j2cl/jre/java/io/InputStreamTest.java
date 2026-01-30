@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.io;
 
+import static org.junit.Assert.assertThrows;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -67,10 +69,6 @@ public class InputStreamTest extends InputStreamBaseTest {
 
   public void testDefaultBehaviorOfReset() {
     final InputStream inputStream = createInputStream(new byte[] {});
-    try {
-      inputStream.reset();
-      fail("should have thrown IOException");
-    } catch (IOException expected) {
-    }
+    assertThrows(IOException.class, () -> inputStream.reset());
   }
 }

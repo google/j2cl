@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.math.MathContext;
@@ -57,56 +59,32 @@ public class MathContextTest extends EmulTestBase {
     assertTrue(mc8.getRoundingMode().equals(RoundingMode.UP));
 
     // try some badly formatted args
-    try {
-      new MathContext("prcision=27 roundingMode=CEILING");
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class, () -> new MathContext("prcision=27 roundingMode=CEILING"));
 
-    try {
-      new MathContext("precision=26 roundingMoe=CEILING");
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class, () -> new MathContext("precision=26 roundingMoe=CEILING"));
 
-    try {
-      new MathContext("precision=25 roundingMode=CEILINGFAN");
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new MathContext("precision=25 roundingMode=CEILINGFAN"));
 
-    try {
-      new MathContext("precision=24 roundingMode=HALF");
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class, () -> new MathContext("precision=24 roundingMode=HALF"));
 
-    try {
-      new MathContext("precision=23 roundingMode=UPSIDEDOWN");
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new MathContext("precision=23 roundingMode=UPSIDEDOWN"));
 
-    try {
-      new MathContext("precision=22roundingMode=UP");
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class, () -> new MathContext("precision=22roundingMode=UP"));
 
-    try {
-      new MathContext("");
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> new MathContext(""));
   }
 
   @J2ktIncompatible // Not nullable according to Jspecify
   public void testMathContextSingleArgConstructorNull() {
-    try {
-      new MathContext(null);
-      fail("Expected NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> new MathContext(null));
   }
 
   public void testMathContextConstructorEquality() {

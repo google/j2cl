@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.sql;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.sql.Time;
 import junit.framework.TestCase;
@@ -30,64 +32,24 @@ public class SqlTimeTest extends TestCase {
   public void testUnimplementedFunctions() {
     Time d = new Time(0);
 
-    try {
-      d.getYear();
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Expected behavior
-    }
+    assertThrows(IllegalArgumentException.class, () -> d.getYear());
 
-    try {
-      d.getMonth();
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Expected behavior
-    }
+    assertThrows(IllegalArgumentException.class, () -> d.getMonth());
 
-    try {
-      d.getDate();
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Expected behavior
-    }
+    assertThrows(IllegalArgumentException.class, () -> d.getDate());
 
-    try {
-      d.getDay();
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Expected behavior
-    }
+    assertThrows(IllegalArgumentException.class, () -> d.getDay());
 
-    try {
-      d.setYear(0);
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Expected behavior
-    }
+    assertThrows(IllegalArgumentException.class, () -> d.setYear(0));
 
-    try {
-      d.setMonth(0);
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Expected behavior
-    }
+    assertThrows(IllegalArgumentException.class, () -> d.setMonth(0));
 
-    try {
-      d.setDate(0);
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Expected behavior
-    }
+    assertThrows(IllegalArgumentException.class, () -> d.setDate(0));
   }
 
   @J2ktIncompatible // Not nullable according to Jspecify
   public void testParseNull() {
-    try {
-      Time.parse(null);
-      fail("Should have thrown exception");
-    } catch (IllegalArgumentException e) {
-      // Expected
-    }
+    assertThrows(IllegalArgumentException.class, () -> Time.parse(null));
   }
 
   public void testParse() {

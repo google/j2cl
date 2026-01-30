@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.lang;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import junit.framework.TestCase;
 
@@ -88,17 +89,13 @@ public class BooleanTest extends TestCase {
       return;
     }
     Boolean b = Math.random() < 0 ? Boolean.TRUE : null;
-    try {
-      assertEquals(null, b.booleanValue());
-      fail("Should have thrown exception");
-    } catch (Exception e) {
-    }
+    assertThrows(Exception.class, () -> assertEquals(null, b.booleanValue()));
 
-    try {
-      boolean bb = b;
-      fail("Should have thrown exception" + bb);
-    } catch (Exception e) {
-    }
+    assertThrows(
+        Exception.class,
+        () -> {
+          boolean unused = b;
+        });
   }
 
   public void testEqualityNormalizer() {

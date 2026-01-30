@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -49,11 +51,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
     assertEquals((byte) 1, BigDecimal.ONE.byteValue());
     assertEquals((byte) -1, BigDecimal.valueOf(255).byteValue());
     assertEquals((byte) 1, BigDecimal.ONE.byteValueExact());
-    try {
-      BigDecimal.valueOf(255).byteValueExact();
-      fail("Expected ArithmeticException on byteValueExact(255)");
-    } catch (ArithmeticException expected) {
-    }
+    assertThrows(ArithmeticException.class, () -> BigDecimal.valueOf(255).byteValueExact());
   }
 
   /** Double value of a small negative BigDecimal. */
@@ -164,11 +162,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
     BigDecimal aNumber = new BigDecimal(a);
     int result = 218520473;
     assertEquals("incorrect value", result, aNumber.intValue());
-    try {
-      aNumber.intValueExact();
-      fail("Expected ArithmeticException on intValueExact");
-    } catch (ArithmeticException expected) {
-    }
+    assertThrows(ArithmeticException.class, () -> aNumber.intValueExact());
   }
 
   /** Integer value of a positive BigDecimal. */
@@ -177,11 +171,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
     BigDecimal aNumber = new BigDecimal(a);
     int result = -218520473;
     assertEquals("incorrect value", result, aNumber.intValue());
-    try {
-      aNumber.intValueExact();
-      fail("Expected ArithmeticException on intValueExact");
-    } catch (ArithmeticException expected) {
-    }
+    assertThrows(ArithmeticException.class, () -> aNumber.intValueExact());
   }
 
   /** Long value of a negative BigDecimal. */
@@ -190,11 +180,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
     BigDecimal aNumber = new BigDecimal(a);
     long result = -1246043477766677607L;
     assertTrue("incorrect value", aNumber.longValue() == result);
-    try {
-      aNumber.longValueExact();
-      fail("Expected ArithmeticException on longValueExact");
-    } catch (ArithmeticException expected) {
-    }
+    assertThrows(ArithmeticException.class, () -> aNumber.longValueExact());
   }
 
   /** Long value of a positive BigDecimal. */
@@ -203,11 +189,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
     BigDecimal aNumber = new BigDecimal(a);
     long result = 1246043477766677607L;
     assertTrue("incorrect value", aNumber.longValue() == result);
-    try {
-      aNumber.longValueExact();
-      fail("Expected ArithmeticException on longValueExact");
-    } catch (ArithmeticException expected) {
-    }
+    assertThrows(ArithmeticException.class, () -> aNumber.longValueExact());
   }
 
   /** scaleByPowerOfTen(int n). */
@@ -237,11 +219,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   public void testShortValue() {
     BigDecimal value = BigDecimal.valueOf(0x13fff);
     assertEquals(0x3fff, value.shortValue());
-    try {
-      value.shortValueExact();
-      fail("Expected ArithmeticException");
-    } catch (ArithmeticException expected) {
-    }
+    assertThrows(ArithmeticException.class, () -> value.shortValueExact());
   }
 
   /** toBigIntegerExact(). */
@@ -257,12 +235,9 @@ public class BigDecimalConvertTest extends EmulTestBase {
   public void testToBigIntegerExactException() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E-10";
     BigDecimal aNumber = new BigDecimal(a);
-    try {
-      aNumber.toBigIntegerExact();
-      fail("java.lang.ArithmeticException has not been thrown");
-    } catch (java.lang.ArithmeticException e) {
-      return;
-    }
+    java.lang.ArithmeticException e =
+        assertThrows(java.lang.ArithmeticException.class, () -> aNumber.toBigIntegerExact());
+    return;
   }
 
   /** Convert a negative BigDecimal to BigInteger. */
@@ -441,12 +416,9 @@ public class BigDecimalConvertTest extends EmulTestBase {
   @SuppressWarnings("ReturnValueIgnored")
   public void testValueOfDoubleNaN() {
     double a = Double.NaN;
-    try {
-      BigDecimal.valueOf(a);
-      fail("NumberFormatException has not been thrown for Double.NaN");
-    } catch (NumberFormatException e) {
-      return;
-    }
+    NumberFormatException e =
+        assertThrows(NumberFormatException.class, () -> BigDecimal.valueOf(a));
+    return;
   }
 
   /** Create a BigDecimal from a negative double value. */

@@ -35,6 +35,8 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import java.math.BigInteger;
 
@@ -278,12 +280,8 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
     int aSign = 1;
     int exp = -5;
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    try {
-      aNumber = aNumber.pow(exp);
-      fail("ArithmeticException has not been caught");
-    } catch (ArithmeticException e) {
-      assertEquals("Improper exception message", "Negative exponent", e.getMessage());
-    }
+    ArithmeticException e = assertThrows(ArithmeticException.class, () -> aNumber.pow(exp));
+    assertEquals("Improper exception message", "Negative exponent", e.getMessage());
   }
 
   /** Exponentiation of a negative number to an even exponent. */

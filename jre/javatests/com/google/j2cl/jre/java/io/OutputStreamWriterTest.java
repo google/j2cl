@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.io;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.Assert.assertThrows;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,19 +52,13 @@ public class OutputStreamWriterTest extends TestCase {
 
   public void testNullCharset() throws UnsupportedEncodingException {
     Charset nullCharset = null;
-    try {
-      new OutputStreamWriter(baos, nullCharset);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> new OutputStreamWriter(baos, nullCharset));
   }
 
   public void testNullOutputStream() throws UnsupportedEncodingException {
-    try {
-      new OutputStreamWriter(/* out= */ null, encodingUTF8Charset);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> new OutputStreamWriter(/* out= */ null, encodingUTF8Charset));
   }
 
   public void testWriteUnicodeChar() throws IOException {
@@ -82,38 +77,22 @@ public class OutputStreamWriterTest extends TestCase {
 
   public void testWriteArrayUsingNullArray() throws IOException {
     final char[] b = null;
-    try {
-      writer.write(b, 0, 2);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> writer.write(b, 0, 2));
   }
 
   public void testWriteArrayUsingNegativeOffsetValue() throws IOException {
     final char[] b = {'a', 'b'};
-    try {
-      writer.write(b, -1, 1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> writer.write(b, -1, 1));
   }
 
   public void testWriteArrayUsingNegativeLengthValue() throws IOException {
     final char[] b = {'a', 'b'};
-    try {
-      writer.write(b, 0, -1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> writer.write(b, 0, -1));
   }
 
   public void testWriteArrayUsingInvalidRangeValue() throws IOException {
     final char[] b = {'a', 'b'};
-    try {
-      writer.write(b, 1, 2);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> writer.write(b, 1, 2));
   }
 
   public void testWriteArrayInvalidCodepoint() throws IOException {

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.io;
 
+import static org.junit.Assert.assertThrows;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -35,41 +37,25 @@ public abstract class InputStreamBaseTest extends TestCase {
 
   public void testReadArrayUsingNullArrayObject() throws IOException {
     final InputStream inputStream = createInputStream(TEST_BYTES);
-    try {
-      inputStream.read(null, 0, 1);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> inputStream.read(null, 0, 1));
   }
 
   public void testReadArrayUsingNegativeOffsetValue() throws IOException {
     final InputStream inputStream = createInputStream(TEST_BYTES);
     final byte[] b = new byte[1];
-    try {
-      inputStream.read(b, -1, 1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> inputStream.read(b, -1, 1));
   }
 
   public void testReadArrayUsingNegativeLengthValue() throws IOException {
     final InputStream inputStream = createInputStream(TEST_BYTES);
     final byte[] b = new byte[1];
-    try {
-      inputStream.read(b, 0, -1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> inputStream.read(b, 0, -1));
   }
 
   public void testReadArrayUsingAnInvalidRange() throws IOException {
     final InputStream inputStream = createInputStream(TEST_BYTES);
     final byte[] b = new byte[1];
-    try {
-      inputStream.read(b, 1, 1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> inputStream.read(b, 1, 1));
   }
 
   public void testReadArrayUsingZeroLength() throws IOException {
@@ -121,11 +107,7 @@ public abstract class InputStreamBaseTest extends TestCase {
 
   public void testReadArrayUsingNullArrayObjectNoOffset() throws IOException {
     final InputStream inputStream = createInputStream(TEST_BYTES);
-    try {
-      inputStream.read(null);
-      fail("should have thrown NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> inputStream.read(null));
   }
 
   public void testReadUsingAnEmptyArrayNoOffset() throws IOException {
