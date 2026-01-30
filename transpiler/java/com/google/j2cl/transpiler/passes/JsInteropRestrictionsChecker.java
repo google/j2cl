@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangRecord;
@@ -2102,13 +2101,8 @@ public class JsInteropRestrictionsChecker {
           .collect(onlyElement());
     }
 
-    ImmutableList<Method> superDelegatingConstructors =
-        type.getConstructors().stream()
-            .filter(Predicates.not(AstUtils::hasThisCall))
-            .collect(toImmutableList());
-    return superDelegatingConstructors.size() != 1
-        ? null
-        : superDelegatingConstructors.getFirst().getDescriptor();
+    var primaryConstructor = type.getPrimaryConstructor();
+    return primaryConstructor != null ? primaryConstructor.getDescriptor() : null;
   }
 
   private void checkJsConstructorSubtype(Type type) {

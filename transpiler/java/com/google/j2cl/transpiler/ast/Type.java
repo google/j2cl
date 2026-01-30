@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicates;
@@ -312,6 +313,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .filter(m -> m.isConstructor() && m.getParameters().isEmpty())
         .findFirst()
         .orElse(null);
+  }
+
+  /** Returns the primary constructor if the the type has one. */
+  @Nullable
+  public Method getPrimaryConstructor() {
+    var superDelegatingConstructors =
+        getConstructors().stream().filter(not(AstUtils::hasThisCall)).collect(toImmutableList());
+    return superDelegatingConstructors.size() != 1 ? null : superDelegatingConstructors.getFirst();
   }
 
   @Override

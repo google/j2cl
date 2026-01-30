@@ -535,8 +535,9 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             .build()
             .makeStatement(SourcePosition.NONE);
 
-    // Hack: Using the last constructor here since AutoValue constructor is appended to end.
-    Iterables.getLast(type.getConstructors()).getBody().getStatements().add(preserveCall);
+    // Add the call to preserve fields in the primary constructor since all other constructors
+    // will delegate to it.
+    type.getPrimaryConstructor().getBody().getStatements().add(preserveCall);
   }
 
   private static void addExcludedFieldsDeclaration(
