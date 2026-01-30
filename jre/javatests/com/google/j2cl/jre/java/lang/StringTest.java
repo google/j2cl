@@ -226,20 +226,10 @@ public class StringTest extends TestCase {
     assertEquals("abcdef", str);
     str = new String(bytes, 1, 3);
     assertEquals("bcd", str);
-    try {
-      new String(bytes, 1, 6);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
-    }
-    try {
-      new String(bytes, -1, 2);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
-    }
-    try {
-      new String(bytes, 6, 2);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
+    if (isJvm()) {
+      assertThrows(IndexOutOfBoundsException.class, () -> new String(bytes, 1, 6));
+      assertThrows(IndexOutOfBoundsException.class, () -> new String(bytes, -1, 2));
+      assertThrows(IndexOutOfBoundsException.class, () -> new String(bytes, 6, 2));
     }
   }
 
@@ -261,35 +251,19 @@ public class StringTest extends TestCase {
     assertEquals("àßçÐéf", str);
     str = new String(bytes, 1, 3, encoding);
     assertEquals("ßçÐ", str);
-    try {
-      new String(bytes, 1, 6, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
-    }
-    try {
-      new String(bytes, -1, 2, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
-    }
-    try {
-      new String(bytes, 6, 2, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
-    }
-    try {
-      new String(bytes, 1, 6, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
-    }
-    try {
-      new String(bytes, -1, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
-    }
-    try {
-      new String(bytes, 6, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !isJvm());
-    } catch (IndexOutOfBoundsException expected) {
+    if (isJvm()) {
+      assertThrows(IndexOutOfBoundsException.class, () -> new String(bytes, 1, 6, encoding));
+      assertThrows(IndexOutOfBoundsException.class, () -> new String(bytes, -1, 2, encoding));
+      assertThrows(IndexOutOfBoundsException.class, () -> new String(bytes, 6, 2, encoding));
+      assertThrows(
+          IndexOutOfBoundsException.class,
+          () -> new String(bytes, 1, 6, Charset.forName(encoding)));
+      assertThrows(
+          IndexOutOfBoundsException.class,
+          () -> new String(bytes, -1, 2, Charset.forName(encoding)));
+      assertThrows(
+          IndexOutOfBoundsException.class,
+          () -> new String(bytes, 6, 2, Charset.forName(encoding)));
     }
   }
 
