@@ -560,7 +560,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
         declaredObjCDependentSource(typeDescriptor)
       // TODO: Handle TypeVariable and Array
       else -> id
-    }.runIf(typeDescriptor.isNullable) { toNullable() }
+    }.runIf(typeDescriptor.canBeNull()) { toNullable() }
 
   private fun primitiveObjCDependentSource(
     primitiveTypeDescriptor: PrimitiveTypeDescriptor
