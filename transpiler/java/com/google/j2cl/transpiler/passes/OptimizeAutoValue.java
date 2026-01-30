@@ -189,6 +189,10 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
   private static boolean canBeInlinedTo(Type type) {
     if (AstUtils.isAnnotatedWithAutoValueBuilder(type.getDeclaration())) {
+      if (!isOptimizableAutoValue(type.getDeclaration().getEnclosingTypeDeclaration())) {
+        // If the enclosing @AutoValue is not optimizable, the builder is also not optimizable.
+        return false;
+      }
       // Note that AutoValue.Builder will generate default ctor so would be only safe to inline
       // the implementation if user didn't declare non-empty one.
       // Most complete logic for safety here would be cross-checking all generated ctors against
@@ -197,7 +201,17 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       Method method = type.getDefaultConstructor();
       return method == null || method.isEmpty();
     }
-    return AstUtils.isAnnotatedWithAutoValue(type.getDeclaration());
+    return isOptimizableAutoValue(type.getDeclaration());
+  }
+
+  private static boolean isOptimizableAutoValue(TypeDeclaration typeDeclaration) {
+    return AstUtils.isAnnotatedWithAutoValue(typeDeclaration)
+        // Do not optimize @AutoValue types that have array properties since ValueType does not
+        // support array valued @AutoValue property semantics.
+        && typeDeclaration.toDescriptor().getPolymorphicMethods().stream()
+            .filter(MethodDescriptor::isAbstract)
+            .map(MethodDescriptor::getReturnTypeDescriptor)
+            .noneMatch(TypeDescriptor::isArray);
   }
 
   private static void inlineMembers(Type from, Type to) {
@@ -381,6 +395,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
               int mask = removeJavaLangObjectMethods(autoValue);
               if (mask == 0) {
                 // No method removed/needs optimization. Leave the type alone.
+                // Note that this also applies when the type can not be inlined to as it wouldn't
+                // have any of the generated `j.l.Object` methods.
                 return;
               }
 

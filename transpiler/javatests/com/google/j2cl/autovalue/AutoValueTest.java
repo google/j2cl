@@ -193,23 +193,20 @@ public class AutoValueTest {
   abstract static class GettersAndConcreteNonGetters {
     abstract int getFoo();
 
-    @SuppressWarnings("mutable")
-    abstract byte[] getBytes();
-
-    boolean hasNoBytes() {
-      return getBytes().length == 0;
+    boolean fooIsZero() {
+      return getFoo() == 0;
     }
 
-    static GettersAndConcreteNonGetters create(int foo, byte[] bytes) {
-      return new AutoValue_AutoValueTest_GettersAndConcreteNonGetters(foo, bytes);
+    static GettersAndConcreteNonGetters create(int foo) {
+      return new AutoValue_AutoValueTest_GettersAndConcreteNonGetters(foo);
     }
   }
 
   @Test
   public void testGettersAndConcreteNonGetters() {
-    GettersAndConcreteNonGetters instance = GettersAndConcreteNonGetters.create(23, new byte[] {1});
-    assertFalse(instance.hasNoBytes());
-    String expectedString = "GettersAndConcreteNonGetters{foo=23, bytes=[1]}";
+    GettersAndConcreteNonGetters instance = GettersAndConcreteNonGetters.create(23);
+    assertFalse(instance.fooIsZero());
+    String expectedString = "GettersAndConcreteNonGetters{foo=23}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -1036,8 +1033,7 @@ public class AutoValueTest {
     // EqualsTester also exercises hashCode(). We clone the arrays above to ensure that using the
     // default Object.hashCode() will fail.
 
-    String expectedString =
-        "PrimitiveArrays{booleans=[" + booleans + "], " + "ints=[" + ints + "]}";
+    String expectedString = "{" + Arrays.toString(booleans) + ", " + Arrays.toString(ints) + "}";
     assertThat(object1.toString()).isEqualTo(expectedString);
     assertThat(object1.ints()).isSameInstanceAs(object1.ints());
   }
@@ -1052,7 +1048,7 @@ public class AutoValueTest {
         PrimitiveArrays.create(Arrays.copyOf(booleans, booleans.length), null);
     new EqualsTester().addEqualityGroup(object1, object2).addEqualityGroup(object0).testEquals();
 
-    String expectedString = "PrimitiveArrays{booleans=[" + booleans + "], " + "ints=null}";
+    String expectedString = "{" + Arrays.toString(booleans) + ", " + "null}";
     assertThat(object1.toString()).isEqualTo(expectedString);
 
     assertThat(object1.booleans()).isSameInstanceAs(object1.booleans());
@@ -1862,9 +1858,6 @@ public class AutoValueTest {
     @Nullable
     public abstract T t();
 
-    @SuppressWarnings("mutable")
-    public abstract int[] ints();
-
     public abstract int noGetter();
 
     public abstract String oAuth();
@@ -1881,8 +1874,6 @@ public class AutoValueTest {
 
       Builder<T> setT(T t);
 
-      Builder<T> setInts(int[] ints);
-
       Builder<T> setNoGetter(int x);
 
       Builder<T> setoAuth(String x); // this ugly spelling is for compatibility
@@ -1892,8 +1883,6 @@ public class AutoValueTest {
       ImmutableList<T> list();
 
       T t();
-
-      int[] ints();
 
       String oAuth();
 
@@ -1906,7 +1895,6 @@ public class AutoValueTest {
   @Test
   public void testBuilderWithUnprefixedGetter() {
     ImmutableList<String> names = ImmutableList.of("fred", "jim");
-    int[] ints = {6, 28, 496, 8128, 33550336};
     int noGetter = -1;
 
     BuilderWithUnprefixedGetters.Builder<String> builder = BuilderWithUnprefixedGetters.builder();
@@ -1917,30 +1905,17 @@ public class AutoValueTest {
     } catch (IllegalStateException e) {
       assertThat(e).hasMessageThat().isNull();
     }
-    try {
-      builder.ints();
-      fail("Attempt to retrieve unset ints property should have failed");
-    } catch (IllegalStateException e) {
-      assertThat(e).hasMessageThat().isNull();
-    }
 
     builder.setList(names);
     assertThat(builder.list()).isSameInstanceAs(names);
-    builder.setInts(ints);
-    assertThat(builder.ints()).isEqualTo(ints);
     builder.setoAuth("OAuth");
     assertThat(builder.oAuth()).isEqualTo("OAuth");
     builder.setOBrien("Flann");
     assertThat(builder.oBrien()).isEqualTo("Flann");
-    // The array is not cloned by the getter, so the client can modify it (but shouldn't).
-    ints[0] = 0;
-    assertThat(builder.ints()[0]).isEqualTo(0);
-    ints[0] = 6;
 
     BuilderWithUnprefixedGetters<String> instance = builder.setNoGetter(noGetter).build();
     assertThat(instance.list()).isSameInstanceAs(names);
     assertThat(instance.t()).isNull();
-    assertThat(instance.ints()).isEqualTo(ints);
     assertThat(instance.noGetter()).isEqualTo(noGetter);
     assertThat(instance.oAuth()).isEqualTo("OAuth");
     assertThat(instance.oBrien()).isEqualTo("Flann");

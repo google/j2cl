@@ -1,0 +1,71 @@
+goog.module('autovalue.AutoValue_ArrayField.Builder$impl');
+
+const ArrayField_Builder = goog.require('autovalue.ArrayField.Builder$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArrayField = goog.forwardDeclare('autovalue.ArrayField$impl');
+let AutoValue__ArrayField = goog.forwardDeclare('autovalue.AutoValue_ArrayField$impl');
+let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @final
+ */
+class Builder extends ArrayField_Builder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Array<number>} @nodts*/
+  this.f_arrayField__autovalue_AutoValue_ArrayField_Builder_;
+ }
+ /** @nodts @return {!Builder} */
+ static $create__() {
+  Builder.$clinit();
+  let $instance = new Builder();
+  $instance.$ctor__autovalue_AutoValue_ArrayField_Builder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_ArrayField_Builder__void() {
+  this.$ctor__autovalue_ArrayField_Builder__void();
+ }
+ /** @override @nodts @return {ArrayField_Builder} */
+ m_setArrayField__arrayOf_int__autovalue_ArrayField_Builder(/** Array<number> */ arrayField) {
+  Objects.m_requireNonNull__java_lang_Object__java_lang_Object(arrayField);
+  this.f_arrayField__autovalue_AutoValue_ArrayField_Builder_ = arrayField;
+  return this;
+ }
+ /** @override @nodts @return {ArrayField} */
+ m_build_pp_autovalue__autovalue_ArrayField() {
+  if ($Equality.$same(this.f_arrayField__autovalue_AutoValue_ArrayField_Builder_, null)) {
+   throw $Exceptions.toJs(IllegalStateException.$create__());
+  }
+  return AutoValue__ArrayField.$create__arrayOf_int(this.f_arrayField__autovalue_AutoValue_ArrayField_Builder_);
+ }
+ /** @nodts */
+ static $clinit() {
+  Builder.$clinit = () =>{};
+  Builder.$loadModules();
+  ArrayField_Builder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Builder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  AutoValue__ArrayField = goog.module.get('autovalue.AutoValue_ArrayField$impl');
+  IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(Builder, 'autovalue.AutoValue_ArrayField$Builder');
+
+exports = Builder;
+
+//# sourceMappingURL=AutoValue_ArrayField$Builder.js.map

@@ -15,7 +15,7 @@
  */
 package javaemul.internal;
 
-import java.util.Arrays;
+import java.util.Objects;
 import java.util.StringJoiner;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsMethod;
@@ -69,31 +69,12 @@ public abstract class ValueType {
     for (String p : thisKeys) {
       Object p1 = JsUtils.getProperty(thisObject, p);
       Object p2 = JsUtils.getProperty(thatObject, p);
-      if (!isAutoValueEqual(p1, p2)) {
+      if (!Objects.equals(p1, p2)) {
         return false;
       }
     }
 
     return true;
-  }
-
-  private static boolean isAutoValueEqual(Object a, Object b) {
-    if (a == b) {
-      return true;
-    }
-    if (a == null || b == null) {
-      return false;
-    }
-
-    if (ArrayStamper.isStamped(a) && ArrayStamper.isStamped(b)) {
-      // AutoValue only supports primitive arrays so if the array is stamped we can safely assume
-      // this is a primitive array. So here we just check that they have same types and compare the
-      // contents.
-      return a.getClass() == b.getClass()
-          && Arrays.equals(JsUtils.<Object[]>uncheckedCast(a), JsUtils.<Object[]>uncheckedCast(b));
-    }
-
-    return a.equals(b);
   }
 
   // Package private to ensure clinit is run when called from types that use this class as a mixin.
@@ -104,12 +85,7 @@ public abstract class ValueType {
       if (value == null) {
         continue;
       }
-      // AutoValue supports primitives arrays, that needs special handling for hashCode.
-      int h =
-          ArrayStamper.isStamped(value)
-              ? Arrays.hashCode(JsUtils.<Object[]>uncheckedCast(value))
-              : value.hashCode();
-      hashCode = (1000003 * hashCode) ^ h;
+      hashCode = (1000003 * hashCode) ^ value.hashCode();
     }
     return hashCode;
   }

@@ -1,48 +1,27 @@
 goog.module('autovalue.ArrayField$impl');
 
-const ValueType = goog.require('javaemul.internal.ValueType$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-class ArrayField extends ValueType {
+/**
+ * @abstract
+ */
+class ArrayField extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Array<number>} @nodts*/
-  this.f_arrayField__autovalue_AutoValue_ArrayField_;
- }
- /** @nodts @return {!ArrayField} */
- static $create__() {
-  ArrayField.$clinit();
-  let $instance = new ArrayField();
-  $instance.$ctor__autovalue_ArrayField__void();
-  return $instance;
  }
  /** @nodts */
  $ctor__autovalue_ArrayField__void() {
-  this.$ctor__javaemul_internal_ValueType__void();
+  this.$ctor__java_lang_Object__void();
  }
- /** @nodts @return {!ArrayField} */
- static $create__arrayOf_int(/** Array<number> */ arrayField) {
-  ArrayField.$clinit();
-  let $instance = new ArrayField();
-  $instance.$ctor__autovalue_ArrayField__arrayOf_int__void(arrayField);
-  return $instance;
- }
- /** @nodts */
- $ctor__autovalue_ArrayField__arrayOf_int__void(/** Array<number> */ arrayField) {
-  this.$ctor__autovalue_ArrayField__void();
-  this.f_arrayField__autovalue_AutoValue_ArrayField_ = arrayField;
-  $J2CL_PRESERVE$(this.f_arrayField__autovalue_AutoValue_ArrayField_);
- }
- /** @nodts @return {Array<number>} */
- m_getArrayField__arrayOf_int() {
-  return this.f_arrayField__autovalue_AutoValue_ArrayField_;
- }
+ /** @abstract @nodts @return {Array<number>} */
+ m_getArrayField__arrayOf_int() {}
  /** @nodts */
  static $clinit() {
   ArrayField.$clinit = () =>{};
   ArrayField.$loadModules();
-  ValueType.$clinit();
+  j_l_Object.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {

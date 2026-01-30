@@ -1,0 +1,82 @@
+goog.module('autovalue.AutoValue_ArrayField$impl');
+
+const ArrayField = goog.require('autovalue.ArrayField$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class AutoValue__ArrayField extends ArrayField {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Array<number>} @nodts*/
+  this.f_arrayField__autovalue_AutoValue_ArrayField_;
+ }
+ /** @nodts @return {!AutoValue__ArrayField} */
+ static $create__arrayOf_int(/** Array<number> */ arrayField) {
+  AutoValue__ArrayField.$clinit();
+  let $instance = new AutoValue__ArrayField();
+  $instance.$ctor__autovalue_AutoValue_ArrayField__arrayOf_int__void(arrayField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_ArrayField__arrayOf_int__void(/** Array<number> */ arrayField) {
+  this.$ctor__autovalue_ArrayField__void();
+  this.f_arrayField__autovalue_AutoValue_ArrayField_ = arrayField;
+ }
+ /** @override @nodts @return {Array<number>} */
+ m_getArrayField__arrayOf_int() {
+  return this.f_arrayField__autovalue_AutoValue_ArrayField_;
+ }
+ /** @override @return {?string} */
+ toString() {
+  return '{' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(Arrays.m_toString__arrayOf_int__java_lang_String(this.f_arrayField__autovalue_AutoValue_ArrayField_)) + '}';
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ o) {
+  if ($Equality.$same(o, this)) {
+   return true;
+  }
+  if (ArrayField.$isInstance(o)) {
+   let that = /**@type {ArrayField}*/ (o);
+   return Arrays.m_equals__arrayOf_int__arrayOf_int__boolean(this.f_arrayField__autovalue_AutoValue_ArrayField_, AutoValue__ArrayField.$isInstance(that) ? (/**@type {AutoValue__ArrayField}*/ ($Casts.$to(that, AutoValue__ArrayField))).f_arrayField__autovalue_AutoValue_ArrayField_ : that.m_getArrayField__arrayOf_int());
+  }
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let h$ = 1;
+  h$ = Math.imul(h$, 1000003);
+  h$ ^= Arrays.m_hashCode__arrayOf_int__int(this.f_arrayField__autovalue_AutoValue_ArrayField_);
+  return h$;
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValue__ArrayField.$clinit = () =>{};
+  AutoValue__ArrayField.$loadModules();
+  ArrayField.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__ArrayField;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Arrays = goog.module.get('java.util.Arrays$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(AutoValue__ArrayField, 'autovalue.AutoValue_ArrayField');
+
+exports = AutoValue__ArrayField;
+
+//# sourceMappingURL=AutoValue_ArrayField.js.map
