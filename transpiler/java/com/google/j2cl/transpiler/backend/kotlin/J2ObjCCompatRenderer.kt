@@ -456,7 +456,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     }
 
   private fun nameDependentSource(variable: Variable): Dependent<Source> =
-    dependentSource(variable.name.objCName.escapeObjCKeyword)
+    dependentSource(variable.name.objCName.escapeObjCKeyword.escapeJ2ObjCKeyword)
 
   private fun objCNameDependentSource(
     companionDeclaration: CompanionDeclaration
