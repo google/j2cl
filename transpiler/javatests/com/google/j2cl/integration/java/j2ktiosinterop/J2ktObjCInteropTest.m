@@ -13,6 +13,7 @@
 #import "j2ktiosinterop/InterfaceDefaultMethodOverrideImpl.h"
 #import "j2ktiosinterop/NativeCustomName.h"
 #import "j2ktiosinterop/NativeDefaultName.h"
+#import "j2ktiosinterop/Nullability.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/PackageNames.h"
@@ -582,6 +583,14 @@
 
 - (void)testPlatform {
   XCTAssertEqualObjects(J2ktiosinteropPlatform_get_NAME(), @"J2KT");
+}
+
+- (void)testNullability {
+  J2ktiosinteropNullability_acceptNullableWithId_(nil);
+  J2ktiosinteropNullability_acceptNullableWithNonNullBoundWithId_(nil);
+  // TODO(b/460155951): Uncomment when fixed.
+  // J2ktiosinteropNullability_acceptWithNullableBoundWithId_(nil);
+  J2ktiosinteropNullability_acceptNullableWithNullableBoundWithId_(nil);
 }
 
 @end

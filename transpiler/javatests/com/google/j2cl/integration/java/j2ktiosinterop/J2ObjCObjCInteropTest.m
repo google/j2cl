@@ -1,5 +1,6 @@
 #import <XCTest/XCTest.h>
 #import <math.h>
+#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/j2ktiosinterop-j2objc_public.h/j2ktiosinterop/Nullability.h"
 
 #import "j2ktiosinterop/CollectionTypes.h"
 #import "j2ktiosinterop/CompileTimeConstantInitialization.h"
@@ -13,6 +14,7 @@
 #import "j2ktiosinterop/InterfaceDefaultMethodOverrideImpl.h"
 #import "j2ktiosinterop/NativeCustomName.h"
 #import "j2ktiosinterop/NativeDefaultName.h"
+#import "j2ktiosinterop/Nullability.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/PackageNames.h"
@@ -524,6 +526,13 @@
 
 - (void)testPlatform {
   XCTAssertEqualObjects(J2ktiosinteropPlatform_get_NAME(), @"J2ObjC");
+}
+
+- (void)testNullability {
+  J2ktiosinteropNullability_acceptNullableWithId_(nil);
+  J2ktiosinteropNullability_acceptNullableWithNonNullBoundWithId_(nil);
+  J2ktiosinteropNullability_acceptWithNullableBoundWithId_(nil);
+  J2ktiosinteropNullability_acceptNullableWithNullableBoundWithId_(nil);
 }
 
 @end

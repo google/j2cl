@@ -201,4 +201,12 @@ final class J2ktSwiftInteropTest: XCTestCase {
   func testPlatform() {
     XCTAssertEqual(J2ktiosinteropPlatform_get_NAME(), "J2KT")
   }
+
+  func testNullability() {
+    J2ktiosinteropNullability_acceptNullableWithId_(nil)
+    J2ktiosinteropNullability_acceptNullableWithNonNullBoundWithId_(nil)
+    // TODO(b/460155951): Uncomment when fixed.
+    // J2ktiosinteropNullability_acceptWithNullableBoundWithId_(nil);
+    J2ktiosinteropNullability_acceptNullableWithNullableBoundWithId_(nil)
+  }
 }
