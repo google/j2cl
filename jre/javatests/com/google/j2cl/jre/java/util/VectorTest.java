@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -67,25 +69,10 @@ public class VectorTest extends ListTestBase {
     Vector<String> v = new Vector<String>();
     v.add("a");
 
-    try {
-      v.indexOf("a", -1);
-      fail("should have failed");
-    } catch (IndexOutOfBoundsException expected) {
-      // Success.
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> v.indexOf("a", -1));
 
-    try {
-      v.lastIndexOf("a", 2);
-      fail("should have failed");
-    } catch (IndexOutOfBoundsException expected) {
-      // Success.
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> v.lastIndexOf("a", 2));
 
-    try {
-      v.setSize(-1);
-      fail("should have failed");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // Success.
-    }
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> v.setSize(-1));
   }
 }

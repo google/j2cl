@@ -162,21 +162,11 @@ public class MapTest extends TestMap {
     // ensure that null values result in a NPE
     HashMap<String, Integer> mapWithNullKey = new HashMap<>();
     mapWithNullKey.put(null, 1);
-    try {
-      Map.copyOf(mapWithNullKey);
-      fail("expected NullPointerException from copyOf with a null key");
-    } catch (NullPointerException ignored) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> Map.copyOf(mapWithNullKey));
 
     HashMap<String, Integer> mapWithNullValue = new HashMap<>();
     mapWithNullValue.put("key", null);
-    try {
-      Map.copyOf(mapWithNullValue);
-      fail("expected NullPointerException from copyOf with a null value");
-    } catch (NullPointerException ignored) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> Map.copyOf(mapWithNullValue));
   }
 
   private static void assertIsImmutableMapOf(Map<String, Integer> map, String... contents) {

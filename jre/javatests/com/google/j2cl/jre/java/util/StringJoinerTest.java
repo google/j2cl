@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.util;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import java.util.StringJoiner;
 import junit.framework.TestCase;
@@ -31,19 +32,19 @@ public class StringJoinerTest extends TestCase {
     joiner = new StringJoiner("|", "[", "]");
   }
 
+  @SuppressWarnings("AssertThrowsMultipleStatements")
   public void testConstructor_null() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;
     }
 
-    try {
-      var joiner = new StringJoiner(null, null, null);
-      fail("NullPointerException must be thrown if any constructor parameter is null");
-      fail(joiner.toString()); // keep the instance to avoid removal of the constructor call.
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          var joiner = new StringJoiner(null, null, null);
+          fail(joiner.toString()); // keep the instance to avoid removal of the constructor call.
+        });
   }
 
   public void testAdd() throws Exception {
@@ -77,12 +78,7 @@ public class StringJoinerTest extends TestCase {
       return;
     }
 
-    try {
-      joiner.merge(null);
-      fail("NullPointerException must be thrown if other joiner is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> joiner.merge(null));
   }
 
   public void testSetEmptyValue() throws Exception {
@@ -96,11 +92,6 @@ public class StringJoinerTest extends TestCase {
       return;
     }
 
-    try {
-      joiner.setEmptyValue(null);
-      fail("NullPointerException must be thrown if emptyValue is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> joiner.setEmptyValue(null));
   }
 }

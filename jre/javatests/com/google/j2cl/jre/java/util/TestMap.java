@@ -17,6 +17,8 @@
 // CHECKSTYLE_ON
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
@@ -760,24 +762,16 @@ abstract class TestMap extends TestObject {
       return;
     }
     resetFull();
-    Iterator<Map.Entry<@Nullable Object, @Nullable Object>> it = map.entrySet().iterator();
+    var it = map.entrySet().iterator();
     final Map.Entry val = it.next();
     map.remove(val.getKey());
-    try {
-      it.next();
-      fail();
-    } catch (ConcurrentModificationException expected) {
-    }
+    assertThrows(ConcurrentModificationException.class, () -> it.next());
 
     resetFull();
-    it = map.entrySet().iterator();
-    it.next();
+    var it2 = map.entrySet().iterator();
+    it2.next();
     map.clear();
-    try {
-      it.next();
-      fail();
-    } catch (ConcurrentModificationException expected) {
-    }
+    assertThrows(ConcurrentModificationException.class, () -> it2.next());
   }
 
   public void testFailFastKeySet() {
@@ -788,24 +782,16 @@ abstract class TestMap extends TestObject {
       return;
     }
     resetFull();
-    Iterator it = map.keySet().iterator();
+    var it = map.keySet().iterator();
     final Object val = it.next();
     map.remove(val);
-    try {
-      it.next();
-      fail();
-    } catch (ConcurrentModificationException expected) {
-    }
+    assertThrows(ConcurrentModificationException.class, () -> it.next());
 
     resetFull();
-    it = map.keySet().iterator();
-    it.next();
+    var it2 = map.keySet().iterator();
+    it2.next();
     map.clear();
-    try {
-      it.next();
-      fail();
-    } catch (ConcurrentModificationException expected) {
-    }
+    assertThrows(ConcurrentModificationException.class, () -> it2.next());
   }
 
   public void testFailFastValues() {
@@ -816,24 +802,16 @@ abstract class TestMap extends TestObject {
       return;
     }
     resetFull();
-    Iterator it = map.values().iterator();
-    it.next();
+    var it1 = map.values().iterator();
+    it1.next();
     map.remove(map.keySet().iterator().next());
-    try {
-      it.next();
-      fail();
-    } catch (ConcurrentModificationException expected) {
-    }
+    assertThrows(ConcurrentModificationException.class, () -> it1.next());
 
     resetFull();
-    it = map.values().iterator();
-    it.next();
+    var it2 = map.values().iterator();
+    it2.next();
     map.clear();
-    try {
-      it.next();
-      fail();
-    } catch (ConcurrentModificationException expected) {
-    }
+    assertThrows(ConcurrentModificationException.class, () -> it2.next());
   }
 
   public void testCompute() {
@@ -978,11 +956,8 @@ abstract class TestMap extends TestObject {
     assertTrue(map.containsKey("a"));
     assertEquals("a", map.get("a"));
 
-    try {
-      map.merge("a", null, (currentValue, value) -> "");
-      fail();
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(
+        NullPointerException.class, () -> map.merge("a", null, (currentValue, value) -> ""));
 
     newValue = map.merge("a", "", (currentValue, value) -> null);
     assertNull(newValue);

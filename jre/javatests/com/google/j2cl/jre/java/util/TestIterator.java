@@ -17,6 +17,8 @@
 // CHECKSTYLE_ON
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -63,11 +65,7 @@ abstract class TestIterator extends TestObject {
 
     Iterator iter = makeEmptyIterator();
     assertTrue("hasNext() should return false for empty iterators", !iter.hasNext());
-    try {
-      iter.next();
-      fail("NoSuchElementException must be thrown when Iterator is exhausted");
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> iter.next());
   }
 
   /**
@@ -93,10 +91,6 @@ abstract class TestIterator extends TestObject {
       iter.next();
     }
 
-    try {
-      iter.next();
-      fail("NoSuchElementException must be thrown when Iterator is exhausted");
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> iter.next());
   }
 }

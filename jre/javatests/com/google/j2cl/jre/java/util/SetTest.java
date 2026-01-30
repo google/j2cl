@@ -132,12 +132,7 @@ public class SetTest extends EmulTestBase {
     assertTrue(copy.contains("a"));
 
     // ensure that null value result in a NPE
-    try {
-      Set.copyOf(Arrays.asList("a", null));
-      fail("Expected NullPointerException from null item in collection passed to copyOf");
-    } catch (NullPointerException ignored) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> Set.copyOf(Arrays.asList("a", null)));
 
     // ensure that duplicate values are ignored.
     assertIsImmutableSetOf(Set.copyOf(Arrays.asList("a", "a")), "a");

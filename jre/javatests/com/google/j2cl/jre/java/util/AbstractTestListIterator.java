@@ -20,6 +20,8 @@
 // CHECKSTYLE_ON
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -110,18 +112,10 @@ abstract class AbstractTestListIterator extends TestIterator {
     assertEquals(-1, it.previousIndex());
 
     // next() should throw a NoSuchElementException
-    try {
-      it.next();
-      fail("NoSuchElementException must be thrown from empty ListIterator");
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.next());
 
     // previous() should throw a NoSuchElementException
-    try {
-      it.previous();
-      fail("NoSuchElementException must be thrown from empty ListIterator");
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.previous());
   }
 
   /** Test navigation through the iterator. */
@@ -135,11 +129,7 @@ abstract class AbstractTestListIterator extends TestIterator {
     // check state at end
     assertEquals(false, it.hasNext());
     assertEquals(true, it.hasPrevious());
-    try {
-      it.next();
-      fail("NoSuchElementException must be thrown from next at end of ListIterator");
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.next());
 
     // loop back through comparing
     for (int i = list.size() - 1; i >= 0; i--) {
@@ -153,11 +143,7 @@ abstract class AbstractTestListIterator extends TestIterator {
     // check state at start
     assertEquals(true, it.hasNext());
     assertEquals(false, it.hasPrevious());
-    try {
-      it.previous();
-      fail("NoSuchElementException must be thrown from previous at start of ListIterator");
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.previous());
   }
 
   /** Test add behaviour. */
@@ -209,11 +195,7 @@ abstract class AbstractTestListIterator extends TestIterator {
     }
 
     // should throw IllegalStateException before next() called
-    try {
-      it.set(addSetValue());
-      fail();
-    } catch (IllegalStateException ex) {
-    }
+    assertThrows(IllegalStateException.class, () -> it.set(addSetValue()));
 
     // set after next should be fine
     it.next();
@@ -228,11 +210,7 @@ abstract class AbstractTestListIterator extends TestIterator {
     if (supportsRemove() && supportsSet()) {
       it.next();
       it.remove();
-      try {
-        it.set(addSetValue());
-        fail("IllegalStateException must be thrown from set after remove");
-      } catch (IllegalStateException e) {
-      }
+      assertThrows(IllegalStateException.class, () -> it.set(addSetValue()));
     }
   }
 
@@ -242,11 +220,7 @@ abstract class AbstractTestListIterator extends TestIterator {
     if (supportsAdd() && supportsSet()) {
       it.next();
       it.add(addSetValue());
-      try {
-        it.set(addSetValue());
-        fail("IllegalStateException must be thrown from set after add");
-      } catch (IllegalStateException e) {
-      }
+      assertThrows(IllegalStateException.class, () -> it.set(addSetValue()));
     }
   }
 
@@ -258,11 +232,7 @@ abstract class AbstractTestListIterator extends TestIterator {
     if (supportsAdd() && supportsRemove()) {
       it.next();
       it.add(addSetValue());
-      try {
-        it.remove();
-        fail("IllegalStateException must be thrown from remove after add");
-      } catch (IllegalStateException e) {
-      }
+      assertThrows(IllegalStateException.class, () -> it.remove());
     }
   }
 }

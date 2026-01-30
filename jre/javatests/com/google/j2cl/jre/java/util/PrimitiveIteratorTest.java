@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.util;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -51,19 +52,15 @@ public class PrimitiveIteratorTest extends TestCase {
       return;
     }
 
-    try {
-      createTestPrimitiveDoubleIterator().forEachRemaining((Consumer<@Nullable Double>) null);
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            createTestPrimitiveDoubleIterator()
+                .forEachRemaining((Consumer<@Nullable Double>) null));
 
-    try {
-      createTestPrimitiveDoubleIterator().forEachRemaining((DoubleConsumer) null);
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> createTestPrimitiveDoubleIterator().forEachRemaining((DoubleConsumer) null));
   }
 
   public void testForEachRemainingIntConsumer() {
@@ -87,19 +84,14 @@ public class PrimitiveIteratorTest extends TestCase {
       return;
     }
 
-    try {
-      createTestPrimitiveIntIterator().forEachRemaining((Consumer<@Nullable Integer>) null);
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            createTestPrimitiveIntIterator().forEachRemaining((Consumer<@Nullable Integer>) null));
 
-    try {
-      createTestPrimitiveIntIterator().forEachRemaining((IntConsumer) null);
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> createTestPrimitiveIntIterator().forEachRemaining((IntConsumer) null));
   }
 
   public void testForEachRemainingLongConsumer() {
@@ -123,19 +115,13 @@ public class PrimitiveIteratorTest extends TestCase {
       return;
     }
 
-    try {
-      createTestPrimitiveLongIterator().forEachRemaining((Consumer<@Nullable Long>) null);
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> createTestPrimitiveLongIterator().forEachRemaining((Consumer<@Nullable Long>) null));
 
-    try {
-      createTestPrimitiveLongIterator().forEachRemaining((LongConsumer) null);
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> createTestPrimitiveLongIterator().forEachRemaining((LongConsumer) null));
   }
 
   private static PrimitiveIterator.OfDouble createTestPrimitiveDoubleIterator() {

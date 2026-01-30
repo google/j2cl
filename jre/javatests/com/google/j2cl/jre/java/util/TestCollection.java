@@ -17,6 +17,8 @@
 // CHECKSTYLE_ON
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -412,43 +414,27 @@ abstract class TestCollection extends TestObject {
     }
 
     resetEmpty();
-    try {
-      collection.add(new Object());
-      fail("Emtpy collection should not support add.");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    assertThrows(UnsupportedOperationException.class, () -> collection.add(new Object()));
     // make sure things didn't change even if the expected exception was
     // thrown.
     verify();
 
-    try {
-      collection.addAll(Arrays.asList(getFullElements()));
-      fail("Emtpy collection should not support addAll.");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> collection.addAll(Arrays.asList(getFullElements())));
     // make sure things didn't change even if the expected exception was
     // thrown.
     verify();
 
     resetFull();
-    try {
-      collection.add(new Object());
-      fail("Full collection should not support add.");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    assertThrows(UnsupportedOperationException.class, () -> collection.add(new Object()));
     // make sure things didn't change even if the expected exception was
     // thrown.
     verify();
 
-    try {
-      collection.addAll(Arrays.asList(getOtherElements()));
-      fail("Full collection should not support addAll.");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> collection.addAll(Arrays.asList(getOtherElements())));
     // make sure things didn't change even if the expected exception was
     // thrown.
     verify();
@@ -560,42 +546,30 @@ abstract class TestCollection extends TestObject {
   /** Tests the read-only functionality of {@link Collection#iterator()}. */
   public void testCollectionIterator() {
     resetEmpty();
-    Iterator it1 = collection.iterator();
+    var it1 = collection.iterator();
     assertEquals("Iterator for empty Collection shouldn't have next.", false, it1.hasNext());
-    try {
-      it1.next();
-      fail(
-          "Iterator at end of Collection should throw "
-              + "NoSuchElementException when next is called.");
-    } catch (NoSuchElementException e) {
-      // expected
-    }
+    assertThrows(NoSuchElementException.class, () -> it1.next());
     // make sure nothing has changed after non-modification
     verify();
 
     resetFull();
-    it1 = collection.iterator();
+    var it2 = collection.iterator();
     for (int i = 0; i < collection.size(); i++) {
-      assertTrue("Iterator for full collection should haveNext", it1.hasNext());
-      it1.next();
+      assertTrue("Iterator for full collection should haveNext", it2.hasNext());
+      it2.next();
     }
-    assertTrue("Iterator should be finished", !it1.hasNext());
+    assertTrue("Iterator should be finished", !it2.hasNext());
 
     ArrayList list = new ArrayList();
-    it1 = collection.iterator();
+    var it3 = collection.iterator();
     for (int i = 0; i < collection.size(); i++) {
-      Object next = it1.next();
+      Object next = it3.next();
       assertTrue(
           "Collection should contain element returned by " + "its iterator",
           collection.contains(next));
       list.add(next);
     }
-    try {
-      it1.next();
-      fail("iterator.next() should raise NoSuchElementException " + "after it finishes");
-    } catch (NoSuchElementException e) {
-      // expected
-    }
+    assertThrows(NoSuchElementException.class, () -> it3.next());
     // make sure nothing has changed after non-modification
     verify();
   }
@@ -607,22 +581,12 @@ abstract class TestCollection extends TestObject {
     }
 
     resetEmpty();
-    try {
-      collection.iterator().remove();
-      fail("New iterator.remove should raise IllegalState");
-    } catch (IllegalStateException e) {
-      // expected
-    }
+    assertThrows(IllegalStateException.class, () -> collection.iterator().remove());
     verify();
 
-    try {
-      Iterator iter = collection.iterator();
-      iter.hasNext();
-      iter.remove();
-      fail("New iterator.remove should raise IllegalState " + "even after hasNext");
-    } catch (IllegalStateException e) {
-      // expected
-    }
+    Iterator i = collection.iterator();
+    i.hasNext();
+    assertThrows(IllegalStateException.class, () -> i.remove());
     verify();
 
     resetFull();
@@ -652,15 +616,10 @@ abstract class TestCollection extends TestObject {
     assertTrue("Collection should be empty after iterator purge", collection.isEmpty());
 
     resetFull();
-    iter = collection.iterator();
-    iter.next();
-    iter.remove();
-    try {
-      iter.remove();
-      fail("Second iter.remove should raise IllegalState");
-    } catch (IllegalStateException e) {
-      // expected
-    }
+    var it = collection.iterator();
+    it.next();
+    it.remove();
+    assertThrows(IllegalStateException.class, () -> it.remove());
   }
 
   /** Tests {@link Collection#remove(Object)}. */
@@ -833,47 +792,22 @@ abstract class TestCollection extends TestObject {
     }
 
     resetEmpty();
-    try {
-      collection.clear();
-      fail("clear should raise UnsupportedOperationException");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    assertThrows(UnsupportedOperationException.class, () -> collection.clear());
     verify();
 
-    try {
-      collection.remove(null);
-      fail("remove should raise UnsupportedOperationException");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    assertThrows(UnsupportedOperationException.class, () -> collection.remove(null));
     verify();
 
-    try {
-      collection.removeAll(null);
-      fail("removeAll should raise UnsupportedOperationException");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    assertThrows(UnsupportedOperationException.class, () -> collection.removeAll(null));
     verify();
 
-    try {
-      collection.retainAll(null);
-      fail("removeAll should raise UnsupportedOperationException");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    assertThrows(UnsupportedOperationException.class, () -> collection.retainAll(null));
     verify();
 
     resetFull();
-    try {
-      Iterator iterator = collection.iterator();
-      iterator.next();
-      iterator.remove();
-      fail("iterator.remove should raise UnsupportedOperationException");
-    } catch (UnsupportedOperationException e) {
-      // expected
-    }
+    Iterator iterator = collection.iterator();
+    iterator.next();
+    assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
     verify();
   }
 

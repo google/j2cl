@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -108,11 +110,7 @@ public class SpliteratorsTest extends TestCase {
     Spliterator<String> spliterator = Spliterators.spliterator(Arrays.asList(original), 0);
     Iterator<String> it = Spliterators.iterator(spliterator);
 
-    try {
-      it.remove();
-      fail();
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> it.remove());
 
     Deque<String> values = new LinkedList<>(Arrays.asList(original));
     it.forEachRemaining(value -> assertEquals(values.pop(), value));
@@ -124,11 +122,7 @@ public class SpliteratorsTest extends TestCase {
     Spliterator.OfDouble spliterator = Spliterators.spliterator(original, 0);
     PrimitiveIterator.OfDouble it = Spliterators.iterator(spliterator);
 
-    try {
-      it.remove();
-      fail();
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> it.remove());
 
     Deque<Double> values = new LinkedList<>(toDoubleCollection(original));
     it.forEachRemaining((double value) -> assertEquals((double) values.pop(), value));
@@ -140,11 +134,7 @@ public class SpliteratorsTest extends TestCase {
     Spliterator.OfInt spliterator = Spliterators.spliterator(original, 0);
     PrimitiveIterator.OfInt it = Spliterators.iterator(spliterator);
 
-    try {
-      it.remove();
-      fail();
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> it.remove());
 
     Deque<Integer> values = new LinkedList<>(toIntCollection(original));
     it.forEachRemaining((int value) -> assertEquals((int) values.pop(), value));
@@ -156,11 +146,7 @@ public class SpliteratorsTest extends TestCase {
     Spliterator.OfLong spliterator = Spliterators.spliterator(original, 0);
     PrimitiveIterator.OfLong it = Spliterators.iterator(spliterator);
 
-    try {
-      it.remove();
-      fail();
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> it.remove());
 
     Deque<Long> values = new LinkedList<>(toLongCollection(original));
     it.forEachRemaining((long value) -> assertEquals((long) values.pop(), value));

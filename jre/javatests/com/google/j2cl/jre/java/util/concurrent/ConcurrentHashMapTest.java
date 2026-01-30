@@ -9,6 +9,8 @@
 // CHECKSTYLE_ON
 package com.google.j2cl.jre.java.util.concurrent;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
@@ -299,190 +301,122 @@ public class ConcurrentHashMapTest extends EmulTestBase {
 
   /** Cannot create with only negative capacity */
   public void testConstructor() {
-    try {
-      new ConcurrentHashMap<Integer, String>(-1);
-      fail("Exception expected");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> new ConcurrentHashMap<Integer, String>(-1));
   }
 
   /** get(null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testGet_NullPointerException() {
-    try {
-      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
-      c.get(null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.get(null));
   }
 
   /** containsKey(null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testContainsKey_NullPointerException() {
-    try {
-      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
-      c.containsKey(null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.containsKey(null));
   }
 
   /** containsValue(null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testContainsValue_NullPointerException() {
-    try {
-      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
-      c.containsValue(null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.containsValue(null));
   }
 
   /** contains(null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testContains_NullPointerException() {
-    try {
-      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
-      c.containsValue(null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.containsValue(null));
   }
 
   /** put(null,x) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testPut1_NullPointerException() {
-    try {
-      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
-      c.put(null, "whatever");
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.put(null, "whatever"));
   }
 
   /** put(x, null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testPut2_NullPointerException() {
-    try {
-      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
-      c.put("whatever", null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.put("whatever", null));
   }
 
   /** putIfAbsent(null, x) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testPutIfAbsent1_NullPointerException() {
-    try {
-      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
-      c.putIfAbsent(null, "whatever");
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.putIfAbsent(null, "whatever"));
   }
 
   /** replace(null, x) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplace_NullPointerException() {
-    try {
-      ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
-      c.replace(null, "whatever");
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<Integer, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.replace(null, "whatever"));
   }
 
   /** replace(null, x, y) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplaceValue_NullPointerException() {
-    try {
-      ConcurrentHashMap<Integer, Integer> c = new ConcurrentHashMap<>(5);
-      c.replace(null, ONE, 42);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<Integer, Integer> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.replace(null, ONE, 42));
   }
 
   /** putIfAbsent(x, null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testPutIfAbsent2_NullPointerException() {
-    try {
-      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
-      c.putIfAbsent("whatever", null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.putIfAbsent("whatever", null));
   }
 
   /** replace(x, null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplace2_NullPointerException() {
-    try {
-      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
-      c.replace("whatever", null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.replace("whatever", null));
   }
 
   /** replace(x, null, y) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplaceValue2_NullPointerException() {
-    try {
-      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
-      c.replace("whatever", null, "A");
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.replace("whatever", null, "A"));
   }
 
   /** replace(x, y, null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testReplaceValue3_NullPointerException() {
-    try {
-      ConcurrentHashMap<String, Integer> c = new ConcurrentHashMap<>(5);
-      c.replace("whatever", ONE, null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<String, Integer> c = new ConcurrentHashMap<>(5);
+    assertThrows(NullPointerException.class, () -> c.replace("whatever", ONE, null));
   }
 
   /** remove(null) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testRemove1_NullPointerException() {
-    try {
-      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
-      c.put("sadsdf", "asdads");
-      c.remove(null);
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
+    c.put("sadsdf", "asdads");
+    assertThrows(NullPointerException.class, () -> c.remove(null));
   }
 
   /** remove(null, x) throws NPE */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testRemove2_NullPointerException() {
-    try {
-      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
-      c.put("sadsdf", "asdads");
-      c.remove(null, "whatever");
-      fail("Exception expected");
-    } catch (NullPointerException expected) {
-    }
+    ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
+    c.put("sadsdf", "asdads");
+    assertThrows(NullPointerException.class, () -> c.remove(null, "whatever"));
   }
 
   /** remove(x, null) returns false */
   @J2ktIncompatible // Non-nullable according to Jspecify
   public void testRemove3() {
-    try {
-      ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
-      c.put("sadsdf", "asdads");
-      assertFalse(c.remove("sadsdf", null));
-    } catch (NullPointerException e) {
-      fail();
-    }
+    ConcurrentHashMap<String, String> c = new ConcurrentHashMap<>(5);
+    c.put("sadsdf", "asdads");
+    assertFalse(c.remove("sadsdf", null));
   }
 
   /** SetValue of an EntrySet entry sets value in the map. */

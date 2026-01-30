@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.util;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.NoSuchElementException;
@@ -72,12 +73,7 @@ public class OptionalTest extends EmulTestBase {
 
   public void testGet() {
     // empty case
-    try {
-      empty.get();
-      fail("Empty Optional should throw NoSuchElementException");
-    } catch (NoSuchElementException e) {
-      // expected
-    }
+    assertThrows(NoSuchElementException.class, () -> empty.get());
 
     // non-empty case
     assertSame(REFERENCE, present.get());
@@ -95,27 +91,12 @@ public class OptionalTest extends EmulTestBase {
     empty.ifPresent(null); // should not fail as per JavaDoc
     empty.ifPresentOrElse(null, () -> {}); // should not fail as per JavaDoc
 
-    try {
-      empty.orElseThrow(null);
-      fail("Empty Optional must throw NullPointerException if supplier is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.orElseThrow(null));
 
     // non-empty case
-    try {
-      present.ifPresent(null);
-      fail("Non-Empty Optional must throw NullPointerException if consumer is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> present.ifPresent(null));
 
-    try {
-      present.ifPresentOrElse(null, () -> {});
-      fail("Non-Empty Optional must throw NullPointerException if consumer is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> present.ifPresentOrElse(null, () -> {}));
 
     try {
       Object reference = present.orElseThrow(null);
@@ -163,12 +144,7 @@ public class OptionalTest extends EmulTestBase {
     }
 
     // empty case
-    try {
-      empty.filter(null);
-      fail("Optional must throw NullPointerException if predicate is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.filter(null));
 
     Optional<Object> filtered = empty.filter(wrapped -> true);
     assertFalse(filtered.isPresent());
@@ -177,12 +153,7 @@ public class OptionalTest extends EmulTestBase {
     assertFalse(filtered.isPresent());
 
     // non-empty case
-    try {
-      present.filter(null);
-      fail("Optional must throw NullPointerException if predicate is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> present.filter(null));
 
     filtered = present.filter(wrapped -> true);
     assertSame(REFERENCE, filtered.get());
@@ -198,12 +169,7 @@ public class OptionalTest extends EmulTestBase {
     }
 
     // empty case
-    try {
-      empty.map(null);
-      fail("Optional must throw NullPointerException if mapper is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.map(null));
 
     empty.map(
         wrapped -> {
@@ -212,12 +178,7 @@ public class OptionalTest extends EmulTestBase {
         });
 
     // non-empty case
-    try {
-      present.map(null);
-      fail("Optional must throw NullPointerException if mapper is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> present.map(null));
     Optional<String> mapped = present.map(wrapped -> null);
     assertFalse(mapped.isPresent());
 
@@ -232,12 +193,7 @@ public class OptionalTest extends EmulTestBase {
     }
 
     // empty case
-    try {
-      empty.flatMap(null);
-      fail("Optional must throw NullPointerException if mapper is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.flatMap(null));
 
     empty.flatMap(
         wrapped -> {
@@ -246,19 +202,9 @@ public class OptionalTest extends EmulTestBase {
         });
 
     // non-empty case
-    try {
-      present.flatMap(null);
-      fail("Optional must throw NullPointerException if mapper is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> present.flatMap(null));
 
-    try {
-      present.flatMap(wrapped -> null);
-      fail("Optional must throw NullPointerException if mapper returns null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> present.flatMap(wrapped -> null));
 
     Optional<String> mapped = present.flatMap(wrapped -> Optional.empty());
     assertFalse(mapped.isPresent());
@@ -273,26 +219,11 @@ public class OptionalTest extends EmulTestBase {
       return;
     }
 
-    try {
-      empty.or(null);
-      fail("Empty Optional must throw NullPointerException if supplier is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.or(null));
 
-    try {
-      present.or(null);
-      fail("Present Optional must throw NullPointerException if supplier is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> present.or(null));
 
-    try {
-      empty.or(() -> null);
-      fail("Empty Optional must throw NullPointerException if supplier returns null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.or(() -> null));
 
     assertEquals(
         present,
@@ -326,12 +257,7 @@ public class OptionalTest extends EmulTestBase {
     }
 
     // empty case
-    try {
-      empty.orElseGet(null);
-      fail("Empty Optional must throw NullPointerException if supplier is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.orElseGet(null));
 
     assertSame(OTHER_REFERENCE, empty.orElseGet(() -> OTHER_REFERENCE));
 
@@ -353,19 +279,9 @@ public class OptionalTest extends EmulTestBase {
     }
 
     // empty case
-    try {
-      empty.<RuntimeException>orElseThrow(() -> null);
-      fail("Empty Optional must throw NullPointerException if supplier returns null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.<RuntimeException>orElseThrow(() -> null));
 
-    try {
-      empty.orElseThrow(IllegalStateException::new);
-      fail("Empty Optional must throw supplied exception");
-    } catch (IllegalStateException e) {
-      // expected
-    }
+    assertThrows(IllegalStateException.class, () -> empty.orElseThrow(IllegalStateException::new));
 
     // non-empty case
     assertSame(
@@ -378,12 +294,7 @@ public class OptionalTest extends EmulTestBase {
   }
 
   public void testOrElseThrowNoArgs() {
-    try {
-      empty.orElseThrow();
-      fail("Expected NoSuchElementException from empty Optional: orElseThrow");
-    } catch (NoSuchElementException ignore) {
-      // expected
-    }
+    assertThrows(NoSuchElementException.class, () -> empty.orElseThrow());
 
     assertEquals(REFERENCE, present.orElseThrow());
   }

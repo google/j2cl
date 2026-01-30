@@ -126,12 +126,7 @@ public class ListTest extends TestList {
     assertTrue(copy.contains("a"));
 
     // ensure that null values in the collection result in a NPE
-    try {
-      List.copyOf(Arrays.asList("a", null));
-      fail("Expected NullPointerException passing copy a collection with a null value");
-    } catch (NullPointerException ignore) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> List.copyOf(Arrays.asList("a", null)));
   }
 
   private static void assertIsImmutableListOf(List<String> list, String... contents) {

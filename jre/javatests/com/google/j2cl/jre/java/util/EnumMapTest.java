@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -196,11 +198,7 @@ public class EnumMapTest extends TestCase {
     numbers.put(Numbers.TWO, null);
     assertTrue("Should contain a null value", numbers.containsValue(null));
 
-    try {
-      numbers.put(null, 3);
-      fail("Should not be able to insert a null key.");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> numbers.put(null, 3));
   }
 
   public void testOrdering() {
@@ -224,11 +222,8 @@ public class EnumMapTest extends TestCase {
   }
 
   public void testConstructorThrowsGivenEmptyOtherMap() {
-    try {
-      new EnumMap<>(new HashMap<Numbers, Integer>());
-      fail();
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class, () -> new EnumMap<>(new HashMap<Numbers, Integer>()));
   }
 
   @SuppressWarnings("CollectionIncompatibleType") // test of incorrect call

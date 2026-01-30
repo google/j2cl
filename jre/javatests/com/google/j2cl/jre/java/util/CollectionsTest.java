@@ -217,12 +217,8 @@ public class CollectionsTest extends EmulTestBase {
   public void testListCopy() {
     List<Integer> src = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
     List<Integer> dest = new ArrayList<Integer>(Arrays.asList(1, 2));
-
-    try {
-      Collections.copy(dest, src);
-      fail();
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    var d = dest;
+    assertThrows(IndexOutOfBoundsException.class, () -> Collections.copy(d, src));
 
     dest = new ArrayList<Integer>(Arrays.asList(5, 6, 7, 8));
     Collections.copy(dest, src);
@@ -238,13 +234,9 @@ public class CollectionsTest extends EmulTestBase {
     Object o2 = new Object();
     Object o3 = new Object();
 
-    try {
-      HashMap<Object, Boolean> nonEmptyMap = new HashMap<Object, Boolean>();
-      nonEmptyMap.put(o1, true);
-      Collections.newSetFromMap(nonEmptyMap);
-      fail();
-    } catch (IllegalArgumentException e) {
-    }
+    HashMap<Object, Boolean> nonEmptyMap = new HashMap<Object, Boolean>();
+    nonEmptyMap.put(o1, true);
+    assertThrows(IllegalArgumentException.class, () -> Collections.newSetFromMap(nonEmptyMap));
 
     Set<Object> set = Collections.newSetFromMap(new HashMap<Object, Boolean>());
 
@@ -284,12 +276,7 @@ public class CollectionsTest extends EmulTestBase {
    * @tests java.util.Collections#rotate(java.util.List, int)
    */
   public void testRotate() {
-    try {
-      Collections.rotate(null, 0);
-      fail("Collections.rotate(null, distance) should throw NullPointerException");
-    } catch (NullPointerException expected) {
-      // Expected
-    }
+    assertThrows(NullPointerException.class, () -> Collections.rotate(null, 0));
     // Test optimized RandomAccess code path
     testRotateImpl(
         new ListImplProvider() {

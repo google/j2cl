@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.util;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
@@ -195,12 +196,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     if (isAddSupported) {
       Set<E> set = createSet();
       set.add(getKeys()[0]);
-      try {
-        Set untypedSet = set;
-        untypedSet.add(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> ((Set) set).add(getConflictingKey()));
     }
   }
 
@@ -239,12 +235,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   public void testAdd_throwsUnsupportedOperationException() {
     if (!isAddSupported) {
       Set<E> set = createSet();
-      try {
-        set.add(getKeys()[0]);
-        fail("expected exception");
-      } catch (UnsupportedOperationException e) {
-        // expected outcome
-      }
+      assertThrows(UnsupportedOperationException.class, () -> set.add(getKeys()[0]));
     }
   }
 
@@ -371,14 +362,9 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
 
       Set<E> destSet = createSet();
       destSet.add(getKeys()[0]);
-      try {
-        // This throws because we're putting a second entry in the set and TreeSet calls the compare
-        // method to order them.
-        destSet.addAll(sourceSet);
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-        // expected outcome
-      }
+      // This throws because we're putting a second entry in the set and TreeSet calls the compare
+      // method to order them.
+      assertThrows(ClassCastException.class, () -> destSet.addAll(sourceSet));
     }
   }
 
@@ -392,12 +378,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     // verify that the method is not supported.
     if (isPutAllSupported) {
       Set<E> set = createSet();
-      try {
-        set.addAll(null);
-        fail("expected exception");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
+      assertThrows(NullPointerException.class, () -> set.addAll(null));
     }
   }
 
@@ -409,12 +390,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   public void testAddAll_throwsUnsupportedOperationException() {
     Set<E> set = createSet();
     if (!isPutAllSupported) {
-      try {
-        set.addAll(createSet());
-        fail("expected exception");
-      } catch (UnsupportedOperationException e) {
-        // expected outcome
-      }
+      assertThrows(UnsupportedOperationException.class, () -> set.addAll(createSet()));
     }
   }
 
@@ -459,12 +435,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   public void testClear_throwsUnsupportedOperationException() {
     Set<E> set = createSet();
     if (!isClearSupported) {
-      try {
-        set.clear();
-        fail("expected exception");
-      } catch (UnsupportedOperationException e) {
-        // expected outcome
-      }
+      assertThrows(UnsupportedOperationException.class, () -> set.clear());
     }
   }
 
@@ -546,12 +517,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.TreeSet#TreeSet(Set)
    */
   public void testConstructor_Set_throwsNullPointerException() {
-    try {
-      new TreeSet<E>((Set<E>) null);
-      fail("expected exception");
-    } catch (NullPointerException e) {
-      // expected outcome
-    }
+    assertThrows(NullPointerException.class, () -> new TreeSet<E>((Set<E>) null));
   }
 
   /**
@@ -560,12 +526,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.TreeSet#TreeSet(SortedSet)
    */
   public void testConstructor_SortedMap_throwsNullPointerException() {
-    try {
-      new TreeSet<E>((SortedSet<E>) null);
-      fail("expected exception");
-    } catch (NullPointerException e) {
-      // expected outcome
-    }
+    assertThrows(NullPointerException.class, () -> new TreeSet<E>((SortedSet<E>) null));
   }
 
   /**
@@ -614,11 +575,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     }
     Set<E> set = createSet();
     set.add(getKeys()[0]);
-    try {
-      set.contains(getConflictingKey());
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
+    assertThrows(ClassCastException.class, () -> set.contains(getConflictingKey()));
   }
 
   /**
@@ -629,12 +586,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   public void testContains_throwsNullPointerException() {
     Set<E> set = createSet();
     if (isNaturalOrder() && !isNullKeySupported) {
-      try {
-        set.contains(null);
-        fail("expected exception");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
+      assertThrows(NullPointerException.class, () -> set.contains(null));
     }
   }
 
@@ -735,12 +687,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   public void testFirstKey_throwsNoSuchElementException() {
     SortedSet<E> sortedSet = createNavigableSet();
     // test with no entries
-    try {
-      sortedSet.first();
-      fail("expected exception");
-    } catch (NoSuchElementException e) {
-      // expected outcome
-    }
+    assertThrows(NoSuchElementException.class, () -> sortedSet.first());
   }
 
   public void testFloor() {
@@ -806,11 +753,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
       // TODO Why does this succeed with natural ordering when subSet doesn't?
       sortedSet.headSet(getConflictingKey());
     } else {
-      try {
-        sortedSet.headSet(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> sortedSet.headSet(getConflictingKey()));
     }
   }
 
@@ -959,12 +902,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   public void testLastKey_throwsNoSuchElementException() {
     SortedSet<E> sortedSet = createNavigableSet();
     // test with no entries
-    try {
-      sortedSet.last();
-      fail("expected exception");
-    } catch (NoSuchElementException e) {
-      // expected outcome
-    }
+    assertThrows(NoSuchElementException.class, () -> sortedSet.last());
   }
 
   public void testLower() {
@@ -1057,11 +995,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     if (isRemoveSupported) {
       Set<E> set = createSet();
       set.add(getKeys()[0]);
-      try {
-        set.remove(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> set.remove(getConflictingKey()));
     }
   }
 
@@ -1073,12 +1007,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   public void testRemove_throwsUnsupportedOperationException() {
     Set<E> set = createSet();
     if (!isRemoveSupported) {
-      try {
-        set.remove(getKeys()[0]);
-        fail("expected exception");
-      } catch (UnsupportedOperationException e) {
-        // expected outcome
-      }
+      assertThrows(UnsupportedOperationException.class, () -> set.remove(getKeys()[0]));
     }
   }
 
@@ -1132,16 +1061,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     }
     SortedSet sortedSet = createNavigableSet();
     sortedSet.add(getKeys()[0]);
-    try {
-      sortedSet.subSet(getConflictingKey(), getKeys()[0]);
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
-    try {
-      sortedSet.subSet(getKeys()[0], getConflictingKey());
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
+    assertThrows(
+        ClassCastException.class, () -> sortedSet.subSet(getConflictingKey(), getKeys()[0]));
+    assertThrows(
+        ClassCastException.class, () -> sortedSet.subSet(getKeys()[0], getConflictingKey()));
   }
 
   /**
@@ -1151,13 +1074,10 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   public void testSubMap_throwsIllegalArgumentException() {
     SortedSet<E> sortedSet = createNavigableSet();
-    try {
-      sortedSet.subSet(getGreaterThanMaximumKey(), getLessThanMinimumKey());
-      fail("expected exception");
-    } catch (IllegalArgumentException e) {
-      // from key is greater than the to key
-      // expected outcome
-    }
+    // from key is greater than the to key
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> sortedSet.subSet(getGreaterThanMaximumKey(), getLessThanMinimumKey()));
   }
 
   /**
@@ -1362,11 +1282,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
       // TODO Why does this succeed with natural ordering when subSet doesn't?
       sortedSet.tailSet(getConflictingKey());
     } else {
-      try {
-        sortedSet.tailSet(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> sortedSet.tailSet(getConflictingKey()));
     }
   }
 

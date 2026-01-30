@@ -17,6 +17,7 @@
 package com.google.j2cl.jre.java.util.stream;
 
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
@@ -44,12 +45,7 @@ public class StreamTest extends EmulTestBase {
   public void testEmptyStream() {
     Stream<Object> empty = Stream.empty();
     assertEquals(0, empty.count());
-    try {
-      empty.count();
-      fail("second terminal operation should have thrown IllegalStateEx");
-    } catch (IllegalStateException expected) {
-      // expected
-    }
+    assertThrows(IllegalStateException.class, () -> empty.count());
 
     assertEquals(0, Stream.empty().limit(2).collect(Collectors.toList()).size());
     assertEquals(0, Stream.empty().count());
@@ -91,18 +87,8 @@ public class StreamTest extends EmulTestBase {
     Stream.Builder<Object> builder = Stream.builder();
     Stream<Object> built = builder.build();
     assertEquals(0, built.count());
-    try {
-      builder.build();
-      fail("build() after build() should fail");
-    } catch (IllegalStateException expected) {
-      // expected
-    }
-    try {
-      builder.add("asdf");
-      fail("add() after build() should fail");
-    } catch (IllegalStateException expected) {
-      // expected
-    }
+    assertThrows(IllegalStateException.class, () -> builder.build());
+    assertThrows(IllegalStateException.class, () -> builder.add("asdf"));
   }
 
   public void testConcat() {
@@ -520,11 +506,8 @@ public class StreamTest extends EmulTestBase {
     assertEquals(1, calledCount[0]);
 
     if (TestUtils.getJdkVersion() >= 11) {
-      try {
-        s = s.onClose(() -> calledCount[0]++);
-        fail();
-      } catch (IllegalStateException expected) {
-      }
+      var s2 = s;
+      assertThrows(IllegalStateException.class, () -> s2.onClose(() -> calledCount[0]++));
       return;
     }
 
@@ -580,12 +563,8 @@ public class StreamTest extends EmulTestBase {
     s.close();
     assertEquals(1, calledCount[0]);
 
-    try {
-      s.count();
-      fail("Expected IllegalStateException");
-    } catch (IllegalStateException expected) {
-      // expected
-    }
+    var s2 = s;
+    assertThrows(IllegalStateException.class, () -> s2.count());
     assertEquals(1, calledCount[0]);
   }
 
@@ -598,22 +577,18 @@ public class StreamTest extends EmulTestBase {
         () -> {
           throw a;
         });
-    try {
-      s.close();
-      fail("RuntimeException expected");
-    } catch (RuntimeException expected) {
-      assertSame(a, expected);
-      assertEquals(0, expected.getSuppressed().length);
-    }
+    RuntimeException e = assertThrows(RuntimeException.class, () -> s.close());
+    assertSame(a, e);
+    assertEquals(0, e.getSuppressed().length);
 
     // Throw an exception in two of the three handlers, confirm both arrive and the third was called
     // correctly
-    s = Stream.of(1, 2, 3);
+    Stream<Object> s2 = Stream.of(1, 2, 3);
 
     RuntimeException a2 = new RuntimeException("a");
     IllegalStateException b = new IllegalStateException("b");
     int[] calledCount = {0};
-    s.onClose(
+    s2.onClose(
             () -> {
               throw a2;
             })
@@ -631,20 +606,16 @@ public class StreamTest extends EmulTestBase {
             })
         .onClose(() -> calledCount[0]++);
 
-    try {
-      s.close();
-      fail("RuntimeException expected");
-    } catch (RuntimeException expected) {
-      assertSame(a2, expected);
-      assertEquals(new Throwable[] {b, b}, expected.getSuppressed());
-    }
+    RuntimeException e2 = assertThrows(RuntimeException.class, () -> s2.close());
+    assertSame(a2, e2);
+    assertEquals(new Throwable[] {b, b}, e2.getSuppressed());
     assertEquals(1, calledCount[0]);
 
     // Throw the same exception instance twice, ensure it only arrives once
-    s = Stream.of(1, 2, 3);
+    Stream<Object> s3 = Stream.of(1, 2, 3);
 
     RuntimeException t = new RuntimeException("a");
-    s.onClose(
+    s3.onClose(
             () -> {
               throw t;
             })
@@ -653,13 +624,9 @@ public class StreamTest extends EmulTestBase {
               throw t;
             });
 
-    try {
-      s.close();
-      fail("RuntimeException expected");
-    } catch (RuntimeException expected) {
-      assertSame(t, expected);
-      assertEquals(0, expected.getSuppressed().length);
-    }
+    RuntimeException e3 = assertThrows(RuntimeException.class, () -> s3.close());
+    assertSame(t, e3);
+    assertEquals(0, e3.getSuppressed().length);
   }
 
   public void testOfNullable() {

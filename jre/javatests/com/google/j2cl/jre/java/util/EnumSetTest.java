@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.util.Arrays;
@@ -164,12 +166,9 @@ public class EnumSetTest extends TestSet {
   }
 
   public void testCopyOf_emptyCollection() {
-    try {
-      EnumSet<Numbers> enumSet = EnumSet.copyOf((List<Numbers>) Collections.EMPTY_LIST);
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-      // Expected
-    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> EnumSet.copyOf((List<Numbers>) Collections.EMPTY_LIST));
   }
 
   public void testCopyOf_emptyEnumSet() {

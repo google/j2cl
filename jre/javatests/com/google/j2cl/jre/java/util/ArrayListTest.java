@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -45,13 +47,7 @@ public class ArrayListTest extends ListTestBase {
             throw new IndexOutOfBoundsException();
           }
         }.listIterator();
-    try {
-      i.add("bar");
-      fail();
-    } catch (UnsupportedOperationException expected) {
-      // add() is expected to fail but shouldn't put us in a inconsistent state.
-      // See: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6533203
-    }
+    assertThrows(UnsupportedOperationException.class, () -> i.add("bar"));
     assertFalse(i.hasPrevious());
   }
 
@@ -61,11 +57,7 @@ public class ArrayListTest extends ListTestBase {
     for (int i = 0; i < 10; i++) {
       l.add(new Integer(i));
     }
-    try {
-      l.removeRange(-1, 1);
-      fail();
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> l.removeRange(-1, 1));
 
     try {
       l.removeRange(2, 1);
@@ -76,11 +68,7 @@ public class ArrayListTest extends ListTestBase {
       // GWT emulation
     }
 
-    try {
-      l.removeRange(2, 11);
-      fail();
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> l.removeRange(2, 11));
 
     l.removeRange(3, 5);
     assertEquals(8, l.size());
@@ -99,29 +87,16 @@ public class ArrayListTest extends ListTestBase {
     // removeRange(0, 0) is a special case in Java; it is always a no-op
     l.removeRange(0, 0);
 
-    try {
-      // (1, 1) is not a special case and undergoes bounds checking
-      l.removeRange(1, 1);
-      fail();
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> l.removeRange(1, 1));
 
-    try {
-      l.removeRange(0, 1);
-      fail();
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> l.removeRange(0, 1));
 
     // Tests on 1-element ArrayList
     l.add(new Integer(1));
     assertEquals(1, l.size());
     l.removeRange(0, 0); // in-bounds no-op
     l.removeRange(1, 1); // in-bounds no-op
-    try {
-      l.removeRange(2, 2); // out-of-bounds no-op
-      fail();
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> l.removeRange(2, 2));
 
     l.removeRange(0, 1);
     assertEquals(0, l.size());

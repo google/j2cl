@@ -42,6 +42,7 @@ import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Collectors.toUnmodifiableList;
 import static java.util.stream.Collectors.toUnmodifiableMap;
 import static java.util.stream.Collectors.toUnmodifiableSet;
+import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
@@ -434,22 +435,14 @@ public class CollectorsTest extends EmulTestBase {
     applyItems(map, c, "a", "b");
 
     // inline applyItems and test each to confirm failure for duplicates
-    try {
-      applyItemsWithoutSplitting(c, "a", "a");
-      fail("expected IllegalStateException");
-    } catch (IllegalStateException expected) {
-    }
-    try {
-      applyItemsWithSplitting(c, "a", "a");
-      fail("expected IllegalStateException");
-    } catch (IllegalStateException expected) {
-    }
+    assertThrows(IllegalStateException.class, () -> applyItemsWithoutSplitting(c, "a", "a"));
+    assertThrows(IllegalStateException.class, () -> applyItemsWithSplitting(c, "a", "a"));
 
     assertZeroItemsCollectedAs(Collections.emptyMap(), c);
     assertSingleItemCollectedAs(Collections.singletonMap("a", "a"), c, "a");
 
     List<String> seen = new ArrayList<>();
-    c =
+    Collector<String, ?, Map<String, String>> c2 =
         toMap(
             Function.identity(),
             Function.identity(),
@@ -460,7 +453,7 @@ public class CollectorsTest extends EmulTestBase {
             });
     map = new HashMap<>();
     map.put("a", "a,a");
-    applyItems(map, c, "a", "a");
+    applyItems(map, c2, "a", "a");
     assertEquals(Arrays.asList("first: a", "second: a", "first: a", "second: a"), seen);
   }
 
@@ -511,11 +504,7 @@ public class CollectorsTest extends EmulTestBase {
 
   @SuppressWarnings("JdkCollectors") // test of a JDK Collector implementation
   public void testNullFromValueFunction() {
-    try {
-      Stream.of(1).collect(toMap(e -> e, e -> null));
-      fail();
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> Stream.of(1).collect(toMap(e -> e, e -> null)));
   }
 
   @SuppressWarnings({
@@ -531,19 +520,18 @@ public class CollectorsTest extends EmulTestBase {
      * testNullFromValueFunction() above....)
      */
     Function<Map.Entry<?, @Nullable String>, @Nullable String> valueFunction = Map.Entry::getValue;
-    try {
-      Stream.<Map.Entry<String, @Nullable String>>of(
-              new SimpleImmutableEntry<>("a", "x"),
-              new SimpleImmutableEntry<>("a", "y"),
-              new SimpleImmutableEntry<>("a", null))
-          .collect(
-              toMap(
-                  Map.Entry::getKey,
-                  (Function<Map.Entry<?, @Nullable String>, String>) valueFunction,
-                  (a, b) -> a + b));
-      fail();
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            Stream.<Map.Entry<String, @Nullable String>>of(
+                    new SimpleImmutableEntry<>("a", "x"),
+                    new SimpleImmutableEntry<>("a", "y"),
+                    new SimpleImmutableEntry<>("a", null))
+                .collect(
+                    toMap(
+                        Map.Entry::getKey,
+                        (Function<Map.Entry<?, @Nullable String>, String>) valueFunction,
+                        (a, b) -> a + b)));
   }
 
   public void testSet() {
@@ -563,12 +551,9 @@ public class CollectorsTest extends EmulTestBase {
   public void testToUnmodifiableList() {
     applyItems(List.of("a", "b"), toUnmodifiableList(), "a", "b");
     assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
-    try {
-      Stream.of("a").map(ignore -> null).collect(toUnmodifiableList());
-      fail("Expected NPE");
-    } catch (NullPointerException expected) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> Stream.of("a").map(ignore -> null).collect(toUnmodifiableList()));
   }
 
   @J2ktIncompatible // Not emulated in J2KT
@@ -593,18 +578,12 @@ public class CollectorsTest extends EmulTestBase {
         "a");
 
     // verify nulls blow up for both keys and values
-    try {
-      Stream.of("a").collect(toUnmodifiableMap(obj -> null, Function.identity()));
-      fail("Expected NPE");
-    } catch (NullPointerException expected) {
-      // expected
-    }
-    try {
-      Stream.of("a").collect(toUnmodifiableMap(Function.identity(), obj -> null));
-      fail("Expected NPE");
-    } catch (NullPointerException expected) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> Stream.of("a").collect(toUnmodifiableMap(obj -> null, Function.identity())));
+    assertThrows(
+        NullPointerException.class,
+        () -> Stream.of("a").collect(toUnmodifiableMap(Function.identity(), obj -> null)));
   }
 
   @J2ktIncompatible // Not emulated in J2KT
@@ -612,12 +591,9 @@ public class CollectorsTest extends EmulTestBase {
     applyItems(Set.of("a", "b"), toUnmodifiableSet(), "a", "b");
     assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
     // verify nulls fail
-    try {
-      Stream.of("a").map(ignore -> null).collect(toUnmodifiableSet());
-      fail("Expected NPE");
-    } catch (NullPointerException expected) {
-      // expected
-    }
+    assertThrows(
+        NullPointerException.class,
+        () -> Stream.of("a").map(ignore -> null).collect(toUnmodifiableSet()));
   }
 
   /**

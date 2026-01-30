@@ -18,6 +18,7 @@ package com.google.j2cl.jre.java.util;
 import static com.google.j2cl.jre.testing.TestUtils.getJdkVersion;
 import static com.google.j2cl.jre.testing.TestUtils.isJvm;
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.AbstractMap.SimpleEntry;
@@ -294,12 +295,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
   public void testClear_throwsUnsupportedOperationException() {
     Map<K, V> map = createMap();
     if (!isClearSupported) {
-      try {
-        map.clear();
-        fail("expected exception");
-      } catch (UnsupportedOperationException e) {
-        // expected outcome
-      }
+      assertThrows(UnsupportedOperationException.class, () -> map.clear());
     }
   }
 
@@ -430,12 +426,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
    * @see java.util.TreeMap#TreeMap(Map)
    */
   public void testConstructor_Map_throwsNullPointerException() {
-    try {
-      new TreeMap<K, V>((Map<K, V>) null);
-      fail("expected exception");
-    } catch (NullPointerException e) {
-      // expected outcome
-    }
+    assertThrows(NullPointerException.class, () -> new TreeMap<K, V>((Map<K, V>) null));
   }
 
   /**
@@ -478,12 +469,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       return;
     }
 
-    try {
-      new TreeMap<K, V>((SortedMap<K, V>) null);
-      fail("expected exception");
-    } catch (NullPointerException e) {
-      // expected outcome
-    }
+    assertThrows(NullPointerException.class, () -> new TreeMap<K, V>((SortedMap<K, V>) null));
   }
 
   /**
@@ -532,11 +518,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     map.containsKey(getConflictingKey());
 
     map.put(keys[0], values[0]);
-    try {
-      map.containsKey(getConflictingKey());
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
+    assertThrows(ClassCastException.class, () -> map.containsKey(getConflictingKey()));
   }
 
   /**
@@ -547,12 +529,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
   public void testContainsKey_throwsNullPointerException() {
     Map<K, V> map = createMap();
     if (isNaturalOrder() && !isNullKeySupported) {
-      try {
-        map.containsKey(null);
-        fail("expected exception");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
+      assertThrows(NullPointerException.class, () -> map.containsKey(null));
     }
   }
 
@@ -618,12 +595,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
   public void testContainsValue_throwsNullPointerException() {
     Map<K, V> map = createMap();
     if (!isNullValueSupported) {
-      try {
-        map.containsValue(null);
-        fail("expected exception");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
+      assertThrows(NullPointerException.class, () -> map.containsValue(null));
     }
   }
 
@@ -655,18 +627,8 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     map.put(keys[1], values[1]);
     assertEquals(2, keySet.size());
 
-    try {
-      keySet.add(keys[2]);
-      fail();
-    } catch (Exception e) {
-      // java.util.NavigableMap.navigableKeySet() does not support add
-    }
-    try {
-      keySet.addAll(keySet);
-      fail();
-    } catch (Exception e) {
-      // java.util.NavigableMap.navigableKeySet() does not support addAll
-    }
+    assertThrows(Exception.class, () -> keySet.add(keys[2]));
+    assertThrows(Exception.class, () -> keySet.addAll(keySet));
   }
 
   public void testDescendingKeySet_viewRemove() {
@@ -718,11 +680,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       it.remove();
       assertEquals(key, rem);
     }
-    try {
-      it.next();
-      fail("should throw NoSuchElementException");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.next());
     _assertEmpty(map);
   }
 
@@ -776,29 +734,27 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
    */
   public void testEntrySet_add_throwsUnsupportedOperationException() {
     Map<K, V> map = createMap();
-    try {
-      map.entrySet()
-          .add(
-              new Entry<K, V>() {
-                @Override
-                public K getKey() {
-                  return null;
-                }
+    assertThrows(
+        UnsupportedOperationException.class,
+        () ->
+            map.entrySet()
+                .add(
+                    new Entry<K, V>() {
+                      @Override
+                      public K getKey() {
+                        return null;
+                      }
 
-                @Override
-                public V getValue() {
-                  return null;
-                }
+                      @Override
+                      public V getValue() {
+                        return null;
+                      }
 
-                @Override
-                public V setValue(V value) {
-                  return null;
-                }
-              });
-      fail("expected exception");
-    } catch (UnsupportedOperationException e) {
-      // expected outcome
-    }
+                      @Override
+                      public V setValue(V value) {
+                        return null;
+                      }
+                    }));
   }
 
   public void testEntrySet() {
@@ -839,11 +795,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       map.containsValue(entry.getValue());
       it.remove();
     }
-    try {
-      it.next();
-      fail("should throw NoSuchElementException");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.next());
     _assertEmpty(map);
   }
 
@@ -1072,12 +1024,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
   public void testFirstKey_throwsNoSuchElementException() {
     SortedMap<K, V> sortedMap = createNavigableMap();
     // test with no entries
-    try {
-      sortedMap.firstKey();
-      fail("expected exception");
-    } catch (NoSuchElementException e) {
-      // expected outcome
-    }
+    assertThrows(NoSuchElementException.class, () -> sortedMap.firstKey());
   }
 
   public void testFloorEntry() {
@@ -1198,11 +1145,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     map.get(getConflictingKey());
 
     map.put(keys[0], values[0]);
-    try {
-      map.get(getConflictingKey());
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
+    assertThrows(ClassCastException.class, () -> map.get(getConflictingKey()));
   }
 
   /**
@@ -1325,17 +1268,9 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     SortedMap<K, V> submap = map.headMap(getLessThanMinimumKey());
     assertEquals(submap.size(), 0);
     assertTrue(submap.isEmpty());
-    try {
-      submap.firstKey();
-      fail("NoSuchElementException should be thrown");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> submap.firstKey());
 
-    try {
-      submap.lastKey();
-      fail("NoSuchElementException should be thrown");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> submap.lastKey());
 
     try {
       submap.headMap(null);
@@ -1382,13 +1317,9 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       assertFalse("unexpected NPE", useNullKey());
     }
 
-    subMap = map.headMap(keys[2]);
-    assertEquals(2, subMap.size());
-    try {
-      subMap.put(keys[2], values[2]);
-      fail("should throw IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    var s = map.headMap(keys[2]);
+    assertEquals(2, s.size());
+    assertThrows(IllegalArgumentException.class, () -> s.put(keys[2], values[2]));
     assertEquals(keys.length, map.size());
     subMap = map.headMap(keys[2], true);
     assertEquals(3, subMap.size());
@@ -1402,16 +1333,9 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
 
     subMap.put(keys[1], values[1]);
 
-    try {
-      subMap.subMap(keys[1], keys[3]);
-      fail("should throw IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
-    try {
-      subMap.subMap(keys[3], keys[1]);
-      fail("should throw IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    var s2 = subMap;
+    assertThrows(IllegalArgumentException.class, () -> s2.subMap(keys[1], keys[3]));
+    assertThrows(IllegalArgumentException.class, () -> s2.subMap(keys[3], keys[1]));
 
     if (useNullKey() && useNullValue()) {
       map.put(null, null);
@@ -1465,35 +1389,15 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     assertEquals(0, exclusiveHeadMap.size());
     assertNull(exclusiveHeadMap.firstEntry());
     assertNull(exclusiveHeadMap.lastEntry());
-    try {
-      assertNull(exclusiveHeadMap.firstKey());
-      fail();
-    } catch (NoSuchElementException e) {
-      // expected outcome
-    }
-    try {
-      assertNull(exclusiveHeadMap.lastKey());
-      fail();
-    } catch (NoSuchElementException e) {
-      // expected outcome
-    }
+    assertThrows(NoSuchElementException.class, () -> assertNull(exclusiveHeadMap.firstKey()));
+    assertThrows(NoSuchElementException.class, () -> assertNull(exclusiveHeadMap.lastKey()));
 
     NavigableMap<K, V> inclusiveHeadMap = createNavigableMap().headMap(keys[0], true);
     assertEquals(0, inclusiveHeadMap.size());
     assertNull(inclusiveHeadMap.firstEntry());
     assertNull(inclusiveHeadMap.lastEntry());
-    try {
-      assertNull(inclusiveHeadMap.firstKey());
-      fail();
-    } catch (NoSuchElementException e) {
-      // expected outcome
-    }
-    try {
-      assertNull(inclusiveHeadMap.lastKey());
-      fail();
-    } catch (NoSuchElementException e) {
-      // expected outcome
-    }
+    assertThrows(NoSuchElementException.class, () -> assertNull(inclusiveHeadMap.firstKey()));
+    assertThrows(NoSuchElementException.class, () -> assertNull(inclusiveHeadMap.lastKey()));
   }
 
   /**
@@ -1554,11 +1458,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       // TODO Why does this succeed with natural ordering when subMap doesn't?
       sortedMap.headMap(getConflictingKey());
     } else {
-      try {
-        sortedMap.headMap(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> sortedMap.headMap(getConflictingKey()));
     }
 
     sortedMap.put(keys[0], values[0]);
@@ -1566,11 +1466,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       // TODO Why does this succeed with natural ordering when subMap doesn't?
       sortedMap.headMap(getConflictingKey());
     } else {
-      try {
-        sortedMap.headMap(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> sortedMap.headMap(getConflictingKey()));
     }
   }
 
@@ -1598,12 +1494,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     map.put(keys[3], values[3]);
 
     NavigableMap<K, V> headMap = map.headMap(keys[2], true);
-    try {
-      headMap.put(keys[3], values[3]);
-      fail();
-    } catch (IllegalArgumentException e) {
-      // must not insert value outside the range
-    }
+    assertThrows(IllegalArgumentException.class, () -> headMap.put(keys[3], values[3]));
     headMap.remove(keys[3]);
     assertEquals(2, headMap.size());
     assertEquals(3, map.size());
@@ -1785,11 +1676,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       it.remove();
       assertEquals(key, rem);
     }
-    try {
-      it.next();
-      fail("should throw NoSuchElementException");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.next());
     _assertEmpty(map);
   }
 
@@ -1880,12 +1767,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
   public void testLastKey_throwsNoSuchElementException() {
     SortedMap<K, V> sortedMap = createNavigableMap();
     // test with no entries
-    try {
-      sortedMap.lastKey();
-      fail("expected exception");
-    } catch (NoSuchElementException e) {
-      // expected outcome
-    }
+    assertThrows(NoSuchElementException.class, () -> sortedMap.lastKey());
   }
 
   public void testLowerEntry() {
@@ -1969,11 +1851,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     _assertEquals(map.navigableKeySet(), keySet);
     _assertEquals(keySet, keySet);
 
-    try {
-      keySet.add(keys[3]);
-      fail("should throw UnsupportedOperationException");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> keySet.add(keys[3]));
     try {
       keySet.add(null);
       fail("should throw UnsupportedOperationException");
@@ -1981,31 +1859,19 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     } catch (NullPointerException expected) {
       // J2kt
     }
-    try {
-      keySet.addAll(keySet);
-      fail("should throw UnsupportedOperationException");
-    } catch (UnsupportedOperationException expected) {
-    }
-    try {
-      keySet.addAll(null);
-      fail("should throw NullPointerException");
-    } catch (NullPointerException expected) {
-    }
-    Collection<K> collection = new ArrayList<K>();
-    keySet.addAll(collection);
-    try {
-      collection.add(keys[3]);
-      keySet.addAll(collection);
-      fail("should throw UnsupportedOperationException");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> keySet.addAll(keySet));
+    assertThrows(NullPointerException.class, () -> keySet.addAll(null));
+    Collection<K> c = new ArrayList<K>();
+    keySet.addAll(c);
+    c.add(keys[3]);
+    assertThrows(UnsupportedOperationException.class, () -> keySet.addAll(c));
 
     Iterator<K> iter = keySet.iterator();
     iter.next();
     iter.remove();
     assertFalse(map.containsKey(keys[0]));
 
-    collection = new ArrayList<K>();
+    var collection = new ArrayList<K>();
     collection.add(keys[2]);
     keySet.retainAll(collection);
     assertEquals(1, map.size());
@@ -2034,18 +1900,8 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     map.put(keys[1], values[1]);
     assertEquals(2, keySet.size());
 
-    try {
-      keySet.add(keys[2]);
-      fail();
-    } catch (Exception e) {
-      // java.util.NavigableMap.navigableKeySet() does not support add
-    }
-    try {
-      keySet.addAll(keySet);
-      fail();
-    } catch (Exception e) {
-      // java.util.NavigableMap.navigableKeySet() does not support addAll
-    }
+    assertThrows(Exception.class, () -> keySet.add(keys[2]));
+    assertThrows(Exception.class, () -> keySet.addAll(keySet));
   }
 
   public void testNavigableKeySet_viewRemove() {
@@ -2088,11 +1944,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       it.remove();
       assertEquals(key, rem);
     }
-    try {
-      it.next();
-      fail("should throw NoSuchElementException");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.next());
     _assertEmpty(map);
   }
 
@@ -2243,31 +2095,11 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       unused = sortedMap.tailMap(getLessThanMinimumKey());
     } else if (getJdkVersion() > 6) {
       // nulls are rejected immediately and don't poison the map anymore
-      try {
-        assertNull(sortedMap.put(null, values[0]));
-        fail("should have thrown");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
-      try {
-        assertNull(sortedMap.put(null, values[1]));
-        fail("expected exception adding second null");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
-      try {
-        sortedMap.containsKey(null);
-        fail("expected exception on containsKey(null)");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
+      assertThrows(NullPointerException.class, () -> assertNull(sortedMap.put(null, values[0])));
+      assertThrows(NullPointerException.class, () -> assertNull(sortedMap.put(null, values[1])));
+      assertThrows(NullPointerException.class, () -> sortedMap.containsKey(null));
       sortedMap.containsKey(keys[0]);
-      try {
-        sortedMap.get(null);
-        fail("expected exception on get(null)");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
+      assertThrows(NullPointerException.class, () -> sortedMap.get(null));
       sortedMap.get(keys[0]);
       try {
         sortedMap.remove(null);
@@ -2284,48 +2116,13 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       } catch (NullPointerException e) {
         // expected outcome
       }
-      try {
-        assertNull(sortedMap.put(null, values[1]));
-        fail("expected exception adding second null");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
-      try {
-        sortedMap.containsKey(null);
-        fail("expected exception on containsKey(null)");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
-      try {
-        sortedMap.containsKey(keys[0]);
-        fail("expected exception on contains(key)");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
-      try {
-        sortedMap.get(null);
-        fail("expected exception on get(null)");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
-      try {
-        sortedMap.get(keys[0]);
-        fail("expected exception on get(key)");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
-      try {
-        sortedMap.remove(null);
-        fail("expected exception on remove(null)");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
-      try {
-        sortedMap.remove(keys[0]);
-        fail("expected exception on remove(key)");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
+      assertThrows(NullPointerException.class, () -> assertNull(sortedMap.put(null, values[1])));
+      assertThrows(NullPointerException.class, () -> sortedMap.containsKey(null));
+      assertThrows(NullPointerException.class, () -> sortedMap.containsKey(keys[0]));
+      assertThrows(NullPointerException.class, () -> sortedMap.get(null));
+      assertThrows(NullPointerException.class, () -> sortedMap.get(keys[0]));
+      assertThrows(NullPointerException.class, () -> sortedMap.remove(null));
+      assertThrows(NullPointerException.class, () -> sortedMap.remove(keys[0]));
     }
   }
 
@@ -2395,12 +2192,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       V[] values = getValues();
       Map<K, V> map = createMap();
       map.put(keys[0], values[0]);
-      try {
-        Map untypedMap = map;
-        untypedMap.put(getConflictingKey(), values[1]);
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> ((Map) map).put(getConflictingKey(), values[1]));
     }
   }
 
@@ -2480,12 +2272,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       K[] keys = getKeys();
       V[] values = getValues();
       Map<K, V> map = createMap();
-      try {
-        map.put(keys[0], values[0]);
-        fail("expected exception");
-      } catch (UnsupportedOperationException e) {
-        // expected outcome
-      }
+      assertThrows(UnsupportedOperationException.class, () -> map.put(keys[0], values[0]));
     }
   }
 
@@ -2641,13 +2428,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       V[] values = getValues();
       Map<K, V> destMap = createMap();
       destMap.put(keys[0], values[0]);
-      try {
-        // This throws because we're putting a second entry in the map and the TreeMap calls the
-        // compare method.
-        destMap.putAll(sourceMap);
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> destMap.putAll(sourceMap));
     }
   }
 
@@ -2674,12 +2455,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     // verify that the method is not supported.
     if (isPutAllSupported) {
       Map<K, V> map = createMap();
-      try {
-        map.putAll(null);
-        fail("expected exception");
-      } catch (NullPointerException e) {
-        // expected outcome
-      }
+      assertThrows(NullPointerException.class, () -> map.putAll(null));
     }
   }
 
@@ -2691,12 +2467,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
   public void testPutAll_throwsUnsupportedOperationException() {
     Map<K, V> map = createMap();
     if (!isPutAllSupported) {
-      try {
-        map.putAll(createMap());
-        fail("expected exception");
-      } catch (UnsupportedOperationException e) {
-        // expected outcome
-      }
+      assertThrows(UnsupportedOperationException.class, () -> map.putAll(createMap()));
     }
   }
 
@@ -2767,11 +2538,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       map.remove(getConflictingKey());
 
       map.put(keys[0], values[0]);
-      try {
-        map.remove(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> map.remove(getConflictingKey()));
     }
   }
 
@@ -2819,12 +2586,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     K[] keys = getKeys();
     Map<K, V> map = createMap();
     if (!isRemoveSupported) {
-      try {
-        map.remove(keys[0]);
-        fail("expected exception");
-      } catch (UnsupportedOperationException e) {
-        // expected outcome
-      }
+      assertThrows(UnsupportedOperationException.class, () -> map.remove(keys[0]));
     }
   }
 
@@ -2879,11 +2641,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     assertEquals(keys.length, map.tailMap(getLessThanMinimumKey()).size());
     assertEquals(1, map.subMap(keys[1], keys[2]).size());
     assertEquals(2, map.subMap(keys[0], keys[2]).size());
-    try {
-      map.subMap(keys[2], keys[1]);
-      fail("Should throw an IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> map.subMap(keys[2], keys[1]));
     assertEquals(
         keys.length, map.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey()).size());
   }
@@ -3001,11 +2759,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       subMap.containsValue(entry.getValue());
       it.remove();
     }
-    try {
-      it.next();
-      fail("should throw NoSuchElementException");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.next());
     assertEquals(2, map.size());
     assertEquals(0, subMap.size());
     assertEquals(subMap.size(), entries.size());
@@ -3049,11 +2803,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       assertTrue(map.containsKey(entry.getKey()));
       assertTrue(map.containsValue(entry.getValue()));
     }
-    try {
-      it.next();
-      fail("should throw NoSuchElementException");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> it.next());
 
     Set<K> keySet = subMap.keySet();
     assertEquals(3, keySet.size());
@@ -3105,28 +2855,12 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     K[] keys = getKeys();
     V[] values = getValues();
     SortedMap sortedMap = createNavigableMap();
-    try {
-      sortedMap.subMap(getConflictingKey(), keys[0]);
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
-    try {
-      sortedMap.subMap(keys[0], getConflictingKey());
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
+    assertThrows(ClassCastException.class, () -> sortedMap.subMap(getConflictingKey(), keys[0]));
+    assertThrows(ClassCastException.class, () -> sortedMap.subMap(keys[0], getConflictingKey()));
 
     sortedMap.put(keys[0], values[0]);
-    try {
-      sortedMap.subMap(getConflictingKey(), keys[0]);
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
-    try {
-      sortedMap.subMap(keys[0], getConflictingKey());
-      fail("ClassCastException expected");
-    } catch (ClassCastException expected) {
-    }
+    assertThrows(ClassCastException.class, () -> sortedMap.subMap(getConflictingKey(), keys[0]));
+    assertThrows(ClassCastException.class, () -> sortedMap.subMap(keys[0], getConflictingKey()));
   }
 
   /**
@@ -3136,13 +2870,10 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
    */
   public void testSubMap_throwsIllegalArgumentException() {
     SortedMap<K, V> sortedMap = createNavigableMap();
-    try {
-      sortedMap.subMap(getGreaterThanMaximumKey(), getLessThanMinimumKey());
-      fail("expected exception");
-    } catch (IllegalArgumentException e) {
-      // from key is greater than the to key
-      // expected outcome
-    }
+    // from key is greater than the to key
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> sortedMap.subMap(getGreaterThanMaximumKey(), getLessThanMinimumKey()));
   }
 
   /**
@@ -3176,12 +2907,8 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     map.put(keys[3], values[3]);
 
     NavigableMap<K, V> subMap = map.subMap(keys[1], true, keys[3], true);
-    try {
-      subMap.put(keys[0], values[0]);
-      fail();
-    } catch (IllegalArgumentException e) {
-      // must not insert value outside the range
-    }
+    // outside the range
+    assertThrows(IllegalArgumentException.class, () -> subMap.put(keys[0], values[0]));
     assertFalse(subMap.containsKey(keys[0]));
     assertNull(subMap.remove(keys[0]));
     assertTrue(map.containsKey(keys[0]));
@@ -3320,11 +3047,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       // TODO Why does this succeed with natural ordering when subMap doesn't?
       map.tailMap(getConflictingKey());
     } else {
-      try {
-        map.tailMap(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> map.tailMap(getConflictingKey()));
     }
 
     map.put(keys[0], values[0]);
@@ -3332,11 +3055,7 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
       // TODO Why does this succeed with natural ordering when subMap doesn't?
       map.tailMap(getConflictingKey());
     } else {
-      try {
-        map.tailMap(getConflictingKey());
-        fail("ClassCastException expected");
-      } catch (ClassCastException expected) {
-      }
+      assertThrows(ClassCastException.class, () -> map.tailMap(getConflictingKey()));
     }
   }
 
@@ -3365,12 +3084,8 @@ abstract class TreeMapTest<K extends @Nullable Object, V extends @Nullable Objec
     map.put(keys[3], values[3]);
 
     NavigableMap<K, V> tailMap = map.tailMap(keys[1], true);
-    try {
-      tailMap.put(keys[0], values[0]);
-      fail();
-    } catch (IllegalArgumentException e) {
-      // must not insert value outside the range
-    }
+    // outside the range
+    assertThrows(IllegalArgumentException.class, () -> tailMap.put(keys[0], values[0]));
     tailMap.remove(keys[0]);
     assertEquals(2, tailMap.size());
     assertEquals(3, map.size());

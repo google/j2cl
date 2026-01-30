@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashSet;
@@ -114,12 +116,7 @@ public class BitSetTest extends EmulTestBase {
     assertEquals(0, set.cardinality());
 
     // test exceptions
-    try {
-      set = new BitSet(-1);
-      fail("exception expected");
-    } catch (NegativeArraySizeException expected) {
-    }
-
+    assertThrows(NegativeArraySizeException.class, () -> new BitSet(-1));
     set = new BitSet(0);
     set = new BitSet(BIG_NUMBER);
   }
@@ -371,18 +368,9 @@ public class BitSetTest extends EmulTestBase {
     assertTrue(set.isEmpty());
 
     // test exceptions
-    try {
-      set.clear(-1, 2);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      set.clear(3, 1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    var s = set;
+    assertThrows(IndexOutOfBoundsException.class, () -> s.clear(-1, 2));
+    assertThrows(IndexOutOfBoundsException.class, () -> s.clear(3, 1));
     set.clear(2, 2);
   }
 
@@ -488,33 +476,14 @@ public class BitSetTest extends EmulTestBase {
     checkRange(set, 1, 5);
 
     // test clear(int, int) exceptions
-    try {
-      set.clear(-1, 2);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      set.clear(3, 1);
-      fail("expected exception");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    var s = set;
+    assertThrows(IndexOutOfBoundsException.class, () -> s.clear(-1, 2));
+    assertThrows(IndexOutOfBoundsException.class, () -> s.clear(3, 1));
     set.clear(2, 2);
 
     // test set(int, int) exceptions
-    try {
-      set.set(-1, 2);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      set.set(3, 1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    assertThrows(IndexOutOfBoundsException.class, () -> s.set(-1, 2));
+    assertThrows(IndexOutOfBoundsException.class, () -> s.set(3, 1));
     set.set(2, 2);
   }
 
@@ -620,12 +589,8 @@ public class BitSetTest extends EmulTestBase {
     assertTrue(set.isEmpty());
 
     // test exceptions
-    try {
-      set.flip(-1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    var s = set;
+    assertThrows(IndexOutOfBoundsException.class, () -> s.flip(-1));
     set.flip(BIG_NUMBER);
     set.flip(BIG_NUMBER);
   }
@@ -692,18 +657,9 @@ public class BitSetTest extends EmulTestBase {
     checkRange(set, 1, 5, 10, 15);
 
     // test exceptions
-    try {
-      set.flip(-1, 2);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      set.flip(3, 1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    var s = set;
+    assertThrows(IndexOutOfBoundsException.class, () -> s.flip(-1, 2));
+    assertThrows(IndexOutOfBoundsException.class, () -> s.flip(3, 1));
     set.flip(2, 2);
   }
 
@@ -732,21 +688,12 @@ public class BitSetTest extends EmulTestBase {
     checkValues(set, 0, 4, 7, 10, 31, 32, 33, 69);
 
     // test get() exceptions
-    try {
-      set.get(-1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    var s = set;
+    assertThrows(IndexOutOfBoundsException.class, () -> s.get(-1));
     set.get(BIG_NUMBER);
 
     // test set() exceptions
-    try {
-      set.set(-1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    assertThrows(IndexOutOfBoundsException.class, () -> s.set(-1));
     set.set(BIG_NUMBER);
   }
 
@@ -787,17 +734,9 @@ public class BitSetTest extends EmulTestBase {
     }
 
     // test exceptions
-    try {
-      set.get(-1, 2);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      set.get(3, 1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    var s = set;
+    assertThrows(IndexOutOfBoundsException.class, () -> s.get(-1, 2));
+    assertThrows(IndexOutOfBoundsException.class, () -> s.get(3, 1));
 
     set.get(2, 2);
   }
@@ -980,12 +919,9 @@ public class BitSetTest extends EmulTestBase {
       assertEquals(i + 1, set.nextClearBit(0));
     }
     assertEquals(BIG_NUMBER, set.nextClearBit(BIG_NUMBER));
+    var s = set;
 
-    try {
-      set.nextClearBit(-1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> s.nextClearBit(-1));
   }
 
   public void testNextSetBit() {
@@ -1022,11 +958,8 @@ public class BitSetTest extends EmulTestBase {
     set.set(TEST_SIZE / 2);
     assertEquals(TEST_SIZE / 2, set.nextSetBit(0));
 
-    try {
-      set.nextSetBit(-1);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    var s = set;
+    assertThrows(IndexOutOfBoundsException.class, () -> s.nextSetBit(-1));
   }
 
   public void testPreviousClearBit() {
@@ -1048,11 +981,7 @@ public class BitSetTest extends EmulTestBase {
       assertEquals(-1, set.previousClearBit(i));
     }
 
-    try {
-      set.previousClearBit(-100);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> set.previousClearBit(-100));
   }
 
   public void testPreviousSetBit() {
@@ -1075,11 +1004,7 @@ public class BitSetTest extends EmulTestBase {
       assertEquals(i, set.previousSetBit(i));
     }
 
-    try {
-      set.previousSetBit(-100);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> set.previousSetBit(-100));
   }
 
   public void testOr() {
@@ -1221,32 +1146,12 @@ public class BitSetTest extends EmulTestBase {
     checkRange(set, 1, 5, 10, 15);
 
     // test exceptions
-    try {
-      set.set(-1, 2, true);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      set.set(3, 1, true);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    var s = set;
+    assertThrows(IndexOutOfBoundsException.class, () -> s.set(-1, 2, true));
+    assertThrows(IndexOutOfBoundsException.class, () -> s.set(3, 1, true));
     set.set(2, 2, true);
-
-    try {
-      set.set(-1, 2, false);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
-    try {
-      set.set(3, 1, false);
-      fail("exception expected");
-    } catch (IndexOutOfBoundsException expected) {
-    }
-
+    assertThrows(IndexOutOfBoundsException.class, () -> s.set(-1, 2, false));
+    assertThrows(IndexOutOfBoundsException.class, () -> s.set(3, 1, false));
     set.set(2, 2, false);
   }
 

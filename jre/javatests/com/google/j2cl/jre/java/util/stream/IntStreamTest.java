@@ -16,6 +16,8 @@
 
 package com.google.j2cl.jre.java.util.stream;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
@@ -38,12 +40,7 @@ public class IntStreamTest extends EmulTestBase {
   public void testEmptyStream() {
     IntStream empty = IntStream.empty();
     assertEquals(0, empty.count());
-    try {
-      empty.count();
-      fail("second terminal operation should have thrown IllegalStateEx");
-    } catch (IllegalStateException expected) {
-      // expected
-    }
+    assertThrows(IllegalStateException.class, () -> empty.count());
 
     assertEquals(0, IntStream.empty().limit(2).toArray().length);
     assertEquals(0L, IntStream.empty().count());
@@ -75,18 +72,8 @@ public class IntStreamTest extends EmulTestBase {
     IntStream.Builder builder = IntStream.builder();
     IntStream built = builder.build();
     assertEquals(0, built.count());
-    try {
-      builder.build();
-      fail("build() after build() should fail");
-    } catch (IllegalStateException expected) {
-      // expected
-    }
-    try {
-      builder.add(10);
-      fail("add() after build() should fail");
-    } catch (IllegalStateException expected) {
-      // expected
-    }
+    assertThrows(IllegalStateException.class, () -> builder.build());
+    assertThrows(IllegalStateException.class, () -> builder.add(10));
   }
 
   public void testConcat() {

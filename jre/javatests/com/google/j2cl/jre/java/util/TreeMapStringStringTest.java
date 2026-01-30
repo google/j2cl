@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -132,16 +134,8 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     Set<String> kset = subMap.keySet();
     Iterator<String> it = kset.iterator();
     assertFalse("iterator[0]", it.hasNext());
-    try {
-      subMap.firstKey();
-      fail("firstKey should have thrown NoSuchElementException");
-    } catch (NoSuchElementException expected) {
-    }
-    try {
-      subMap.lastKey();
-      fail("lastKey should have thrown NoSuchElementException");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> subMap.firstKey());
+    assertThrows(NoSuchElementException.class, () -> subMap.lastKey());
   }
 
   public void testTailMapSimple() {

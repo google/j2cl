@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -71,11 +73,8 @@ public class LinkedListTest extends ListTestBase {
     LinkedList<Object> l = new LinkedList<Object>();
     Iterator<Object> it = l.descendingIterator();
     assertFalse(it.hasNext());
-    try {
-      it.next();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    var i = it;
+    assertThrows(NoSuchElementException.class, () -> i.next());
 
     l.add(o1);
     l.add(o2);
@@ -88,11 +87,8 @@ public class LinkedListTest extends ListTestBase {
     assertTrue(it.hasNext());
     assertEquals(o1, it.next());
     assertFalse(it.hasNext());
-    try {
-      it.next();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    var i2 = it;
+    assertThrows(NoSuchElementException.class, () -> i2.next());
     checkListSizeAndContent(l, o1, o2, o3);
 
     l = new LinkedList<Object>();
@@ -117,11 +113,7 @@ public class LinkedListTest extends ListTestBase {
     Object o2 = new Object();
 
     LinkedList<Object> l = new LinkedList<Object>();
-    try {
-      l.element();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> l.element());
 
     l.add(o1);
     assertEquals(o1, l.element());
@@ -137,11 +129,7 @@ public class LinkedListTest extends ListTestBase {
     Object o2 = new Object();
 
     LinkedList<Object> l = new LinkedList<Object>();
-    try {
-      l.getFirst();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> l.getFirst());
 
     l.add(o1);
     assertEquals(o1, l.getFirst());
@@ -157,11 +145,7 @@ public class LinkedListTest extends ListTestBase {
     Object o2 = new Object();
 
     LinkedList<Object> l = new LinkedList<Object>();
-    try {
-      l.getLast();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> l.getLast());
 
     l.add(o1);
     assertEquals(o1, l.getLast());
@@ -318,11 +302,7 @@ public class LinkedListTest extends ListTestBase {
     Object o2 = new Object();
 
     LinkedList<Object> l = new LinkedList<Object>();
-    try {
-      l.pop();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> l.pop());
 
     l.add(o1);
     assertEquals(o1, l.pop());
@@ -353,11 +333,7 @@ public class LinkedListTest extends ListTestBase {
     Object o2 = new Object();
 
     LinkedList<Object> l = new LinkedList<Object>();
-    try {
-      l.remove();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> l.remove());
 
     l.add(o1);
     assertEquals(o1, l.remove());
@@ -374,11 +350,7 @@ public class LinkedListTest extends ListTestBase {
     Object o2 = new Object();
 
     LinkedList<Object> l = new LinkedList<Object>();
-    try {
-      l.removeFirst();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> l.removeFirst());
 
     l.add(o1);
     assertEquals(o1, l.removeFirst());
@@ -425,11 +397,7 @@ public class LinkedListTest extends ListTestBase {
     Object o2 = new Object();
 
     LinkedList<Object> l = new LinkedList<Object>();
-    try {
-      l.removeLast();
-      fail();
-    } catch (NoSuchElementException e) {
-    }
+    assertThrows(NoSuchElementException.class, () -> l.removeLast());
 
     l.add(o1);
     assertEquals(o1, l.removeLast());
@@ -477,17 +445,9 @@ public class LinkedListTest extends ListTestBase {
     for (int i = 0; i < 10; i++) {
       l.add(new Integer(i));
     }
-    try {
-      l.removeRange(-1, 1);
-      fail();
-    } catch (IndexOutOfBoundsException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> l.removeRange(-1, 1));
 
-    try {
-      l.removeRange(2, 11);
-      fail();
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> l.removeRange(2, 11));
 
     assertEquals(2, l.size());
     for (int i = 0; i < 2; i++) {

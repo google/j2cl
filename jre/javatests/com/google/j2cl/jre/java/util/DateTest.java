@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.util.ArrayList;
@@ -356,12 +358,7 @@ public class DateTest extends TestCase {
 
   @J2ktIncompatible // Not nullable according to Jspecify
   public void testParseNull() {
-    try {
-      Date.parse(null);
-      fail("Should have thrown exception");
-    } catch (IllegalArgumentException e) {
-      // Expected
-    }
+    assertThrows(IllegalArgumentException.class, () -> Date.parse(null));
   }
 
   /** Testing for public static long java.util.Date.parse(java.lang.String). */

@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.util;
 
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.NoSuchElementException;
@@ -55,12 +56,7 @@ public class OptionalDoubleTest extends EmulTestBase {
 
   public void testGetAsDouble() {
     // empty case
-    try {
-      empty.getAsDouble();
-      fail("Empty Optional should throw NoSuchElementException");
-    } catch (NoSuchElementException e) {
-      // expected
-    }
+    assertThrows(NoSuchElementException.class, () -> empty.getAsDouble());
 
     // non-empty case
     assertEquals(REFERENCE, present.getAsDouble());
@@ -77,20 +73,10 @@ public class OptionalDoubleTest extends EmulTestBase {
     // empty case
     empty.ifPresent(null); // should not fail as per JavaDoc
 
-    try {
-      empty.orElseThrow(null);
-      fail("Empty Optional must throw NullPointerException if supplier is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.orElseThrow(null));
 
     // non-empty case
-    try {
-      present.ifPresent(null);
-      fail("Non-Empty Optional must throw NullPointerException if consumer is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> present.ifPresent(null));
 
     try {
       Object reference = present.orElseThrow(null);
@@ -146,12 +132,7 @@ public class OptionalDoubleTest extends EmulTestBase {
     }
 
     // empty case
-    try {
-      empty.orElseGet(null);
-      fail("Empty Optional must throw NullPointerException if supplier is null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.orElseGet(null));
 
     assertEquals(OTHER_REFERENCE, empty.orElseGet(() -> OTHER_REFERENCE));
 
@@ -171,19 +152,9 @@ public class OptionalDoubleTest extends EmulTestBase {
       return;
     }
 
-    try {
-      empty.orElseThrow(() -> null);
-      fail("Empty Optional must throw NullPointerException if supplier returns null");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrows(NullPointerException.class, () -> empty.orElseThrow(() -> null));
 
-    try {
-      empty.orElseThrow(IllegalStateException::new);
-      fail("Empty Optional must throw supplied exception");
-    } catch (IllegalStateException e) {
-      // expected
-    }
+    assertThrows(IllegalStateException.class, () -> empty.orElseThrow(IllegalStateException::new));
 
     // non-empty case
     assertEquals(
@@ -196,12 +167,7 @@ public class OptionalDoubleTest extends EmulTestBase {
   }
 
   public void testOrElseThrowNoArgs() {
-    try {
-      empty.orElseThrow();
-      fail("Expected NoSuchElementException from empty Optional: orElseThrow");
-    } catch (NoSuchElementException ignore) {
-      // expected
-    }
+    assertThrows(NoSuchElementException.class, () -> empty.orElseThrow());
 
     assertEquals(REFERENCE, present.orElseThrow());
   }

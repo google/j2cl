@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Arrays;
 import java.util.Collections;
@@ -102,11 +104,7 @@ public class ArraysTest extends EmulTestBase {
     "NullNeedsCastForVarargs",
   })
   public void testAsList() {
-    try {
-      Arrays.asList((Object[]) null);
-      fail();
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> Arrays.asList((Object[]) null));
 
     // 0
     Object[] test = {};
@@ -144,39 +142,19 @@ public class ArraysTest extends EmulTestBase {
   public void testAsListIsFixed() {
     List<String> list = Arrays.asList("foo", "bar", "baz");
 
-    try {
-      list.add("bal");
-      fail("Expected UnsupportedOperationException");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> list.add("bal"));
 
-    try {
-      list.remove(0);
-      fail("Expected UnsupportedOperationException");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> list.remove(0));
 
-    try {
-      list.clear();
-      fail("Expected UnsupportedOperationException");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> list.clear());
 
     Iterator<String> it = list.iterator();
     it.next();
-    try {
-      it.remove();
-      fail("Expected UnsupportedOperationException");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> it.remove());
 
     ListIterator<String> lit = list.listIterator();
     lit.next();
-    try {
-      lit.add("bal");
-      fail("Expected UnsupportedOperationException");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> lit.add("bal"));
 
     assertEquals(3, list.size());
   }
@@ -1638,27 +1616,9 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(new String[] {"1", "2", "3"}, Arrays.stream(six, 0, 3).toArray());
     assertEquals(new String[] {"4", "5", "6"}, Arrays.stream(six, 3, 6).toArray());
 
-    try {
-      // start < 0
-      Arrays.stream(six, -1, 1);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
-    try {
-      // end < start
-      Arrays.stream(six, 2, 1);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
-    try {
-      // end > size
-      Arrays.stream(six, 0, 7);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, -1, 1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, 2, 1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, 0, 7));
   }
 
   public void testArrayStream_int() {
@@ -1676,27 +1636,9 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(new int[] {1, 2, 3}, Arrays.stream(six, 0, 3).toArray());
     assertEquals(new int[] {4, 5, 6}, Arrays.stream(six, 3, 6).toArray());
 
-    try {
-      // start < 0
-      Arrays.stream(six, -1, 1);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
-    try {
-      // end < start
-      Arrays.stream(six, 2, 1);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
-    try {
-      // end > size
-      Arrays.stream(six, 0, 7);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, -1, 1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, 2, 1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, 0, 7));
   }
 
   public void testArrayStream_long() {
@@ -1714,27 +1656,9 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(new long[] {1, 2, 3}, Arrays.stream(six, 0, 3).toArray());
     assertEquals(new long[] {4, 5, 6}, Arrays.stream(six, 3, 6).toArray());
 
-    try {
-      // start < 0
-      Arrays.stream(six, -1, 1);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
-    try {
-      // end < start
-      Arrays.stream(six, 2, 1);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
-    try {
-      // end > size
-      Arrays.stream(six, 0, 7);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, -1, 1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, 2, 1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, 0, 7));
   }
 
   public void testArrayStream_double() {
@@ -1752,27 +1676,9 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(new double[] {1, 2, 3}, Arrays.stream(six, 0, 3).toArray());
     assertEquals(new double[] {4, 5, 6}, Arrays.stream(six, 3, 6).toArray());
 
-    try {
-      // start < 0
-      Arrays.stream(six, -1, 1);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
-    try {
-      // end < start
-      Arrays.stream(six, 2, 1);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
-    try {
-      // end > size
-      Arrays.stream(six, 0, 7);
-      fail("expected aioobe");
-    } catch (ArrayIndexOutOfBoundsException expected) {
-      // expected
-    }
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, -1, 1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, 2, 1));
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Arrays.stream(six, 0, 7));
   }
 
   /**

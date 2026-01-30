@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.Random;
 import junit.framework.TestCase;
 
@@ -34,11 +36,7 @@ public class RandomTest extends TestCase {
     assertEquals((byte) -69, b[3]);
     assertEquals((byte) -40, b[4]);
 
-    try {
-      r.nextBytes(null);
-      fail("Expected NullPointerException");
-    } catch (NullPointerException e) {
-    }
+    assertThrows(NullPointerException.class, () -> r.nextBytes(null));
   }
 
   public void testNextDouble() {
@@ -76,17 +74,9 @@ public class RandomTest extends TestCase {
     assertEquals(1749940626, r.nextInt());
     assertEquals(892128508, r.nextInt());
 
-    try {
-      r.nextInt(0);
-      fail("Expected IlledgalArgumentException");
-    } catch (IllegalArgumentException e) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> r.nextInt(0));
 
-    try {
-      r.nextInt(-1);
-      fail("Expected IlledgalArgumentException");
-    } catch (IllegalArgumentException e) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> r.nextInt(-1));
   }
 
   public void testNextInt100() {

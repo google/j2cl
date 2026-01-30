@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.java.util;
 
+import static org.junit.Assert.assertThrows;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,11 +34,7 @@ public class PriorityQueueTest extends TestCollection {
   public void testAdd() {
     PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
 
-    try {
-      queue.add(null);
-      fail("Expected NullPointerException");
-    } catch (NullPointerException expected) {
-    }
+    assertThrows(NullPointerException.class, () -> queue.add(null));
 
     queue.add(1);
     assertTrue(Arrays.asList(1).containsAll(queue));
@@ -46,24 +44,16 @@ public class PriorityQueueTest extends TestCollection {
 
   @SuppressWarnings("ModifyingCollectionWithItself")
   public void testAddAll() {
-    PriorityQueue<Integer> queue = new PriorityQueue<>();
-    try {
-      queue.addAll(queue);
-      fail();
-    } catch (IllegalArgumentException expected) {
-    }
+    PriorityQueue<Integer> q = new PriorityQueue<>();
+    assertThrows(IllegalArgumentException.class, () -> q.addAll(q));
 
-    queue = new PriorityQueue<>();
-    try {
-      queue.addAll(Arrays.asList(1, null));
-      fail();
-    } catch (NullPointerException expected) {
-    }
-    assertTrue(Arrays.asList(1).containsAll(queue));
+    PriorityQueue<Integer> q2 = new PriorityQueue<>();
+    assertThrows(NullPointerException.class, () -> q2.addAll(Arrays.asList(1, null)));
+    assertTrue(Arrays.asList(1).containsAll(q2));
 
-    queue = new PriorityQueue<>();
-    queue.addAll(Arrays.asList(2, 1, 3));
-    assertTrue(Arrays.asList(1, 2, 3).containsAll(queue));
+    PriorityQueue<Integer> q3 = new PriorityQueue<>();
+    q3.addAll(Arrays.asList(2, 1, 3));
+    assertTrue(Arrays.asList(1, 2, 3).containsAll(q3));
   }
 
   public void testBasic() {
@@ -71,12 +61,7 @@ public class PriorityQueueTest extends TestCollection {
     assertEquals(0, pq.size());
     assertTrue(pq.isEmpty());
     assertNull(pq.peek());
-    try {
-      pq.remove();
-      fail("Expected exception");
-    } catch (NoSuchElementException e) {
-      // expected
-    }
+    assertThrows(NoSuchElementException.class, () -> pq.remove());
     pq.add(14);
     assertEquals(1, pq.size());
     assertFalse(pq.isEmpty());
@@ -186,11 +171,7 @@ public class PriorityQueueTest extends TestCollection {
 
   public void testPeekElement() {
     PriorityQueue<Integer> queue = new PriorityQueue<>();
-    try {
-      queue.element();
-      fail();
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> queue.element());
     assertNull(queue.peek());
 
     queue.add(3);
@@ -203,11 +184,8 @@ public class PriorityQueueTest extends TestCollection {
 
   public void testPollRemove() {
     PriorityQueue<Integer> queue = new PriorityQueue<>();
-    try {
-      queue.remove();
-      fail();
-    } catch (NoSuchElementException expected) {
-    }
+    var q = queue;
+    assertThrows(NoSuchElementException.class, () -> q.remove());
     assertNull(queue.poll());
 
     queue.add(3);
