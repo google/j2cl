@@ -21,6 +21,7 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.ArrayField
+import java.lang.IllegalStateException
 import java.lang.NullPointerException
 import java.util.Arrays
 import kotlin.Any
@@ -33,10 +34,7 @@ import kotlin.Suppress
 class AutoValue_ArrayField: ArrayField {
  private val arrayField: IntArray?
 
- internal constructor(arrayField: IntArray?) {
-  if (arrayField == null) {
-   throw NullPointerException("Null arrayField")
-  }
+ private constructor(arrayField: IntArray?) {
   this.arrayField = arrayField
  }
 
@@ -73,5 +71,29 @@ class AutoValue_ArrayField: ArrayField {
    ),
   )
   return h___
+ }
+
+ class Builder internal constructor(): autovalue.ArrayField.Builder() {
+  private var arrayField: IntArray? = null
+
+  override fun setArrayField(arrayField: IntArray?): autovalue.ArrayField.Builder? {
+   if (arrayField == null) {
+    throw NullPointerException("Null arrayField")
+   }
+   this.arrayField = arrayField
+   return this
+  }
+
+  override fun build_pp_autovalue(): ArrayField? {
+   if (this.arrayField == null) {
+    val missing: String = " arrayField"
+    throw IllegalStateException(
+     "Missing required properties:" + missing,
+    )
+   }
+   return AutoValue_ArrayField(
+    this@Builder.arrayField,
+   )
+  }
  }
 }

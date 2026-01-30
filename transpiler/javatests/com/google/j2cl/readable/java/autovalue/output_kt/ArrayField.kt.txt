@@ -27,4 +27,11 @@ import kotlin.Suppress
 @WasAutoValue
 abstract class ArrayField {
  abstract fun getArrayField(): IntArray?
+
+ @javaemul.lang.annotations.WasAutoValue.Builder
+ abstract class Builder {
+  abstract fun setArrayField(arrayField: IntArray?): Builder?
+
+  internal abstract fun build_pp_autovalue(): ArrayField?
+ }
 }

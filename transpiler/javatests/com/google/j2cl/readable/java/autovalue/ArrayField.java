@@ -21,4 +21,11 @@ import com.google.auto.value.AutoValue;
 public abstract class ArrayField {
   @SuppressWarnings("mutable")
   public abstract int[] getArrayField();
+
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setArrayField(int[] arrayField);
+
+    abstract ArrayField build();
+  }
 }

@@ -23,6 +23,12 @@
 (global $$class@autovalue.AutoValue_ArrayField (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@autovalue.AutoValue_ArrayField.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.AutoValue_ArrayField.Builder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@autovalue.AutoValue_AutoValueJsType (mut i32)
  (i32.const 0)
 )
@@ -123,6 +129,12 @@
  (i32.const 0)
 )
 (global $$class@autovalue.ArrayField (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@autovalue.ArrayField.Builder (mut i32)
+ (i32.const 0)
+)
+(global $$class@autovalue.ArrayField.Builder (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@autovalue.AutoValueJsType (mut i32)
@@ -258,6 +270,16 @@
   (ref.func $m_hashCode__int@autovalue.AutoValue_ArrayField)
   (ref.func $m_toString__java_lang_String@autovalue.AutoValue_ArrayField)
   (ref.func $m_getArrayField__arrayOf_int@autovalue.AutoValue_ArrayField)
+ )
+)
+(global $autovalue.AutoValue_ArrayField.Builder.vtable (ref $autovalue.AutoValue_ArrayField.Builder.vtable)
+ (struct.new $autovalue.AutoValue_ArrayField.Builder.vtable
+  (ref.func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ArrayField.Builder)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_build__autovalue_ArrayField_$pp_autovalue@autovalue.AutoValue_ArrayField.Builder)
+  (ref.func $m_setArrayField__arrayOf_int__autovalue_ArrayField_Builder@autovalue.AutoValue_ArrayField.Builder)
  )
 )
 (global $autovalue.AutoValue_AutoValueJsType.vtable (ref $autovalue.AutoValue_AutoValueJsType.vtable)
@@ -524,6 +546,61 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.ArrayField)
+
+;;; void Builder.$ctor()
+(func $$ctor__void_$p_autovalue_ArrayField_Builder@autovalue.ArrayField.Builder
+ (param $this (ref null $autovalue.ArrayField.Builder))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ArrayField.java:26:31
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ArrayField.java:26:31
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Builder.$clinit()
+(func $$clinit__void_<once>_@autovalue.ArrayField.Builder
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ArrayField.java:26:31
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ArrayField.java:26:31
+  (if (global.get $$class-initialized@autovalue.ArrayField.Builder)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ArrayField.java:26:31
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ArrayField.java:26:31
+  (global.set $$class-initialized@autovalue.ArrayField.Builder (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/ArrayField.java:26:31
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Builder.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.ArrayField.Builder
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.ArrayField.Builder)))
+   (then
+    (return (global.get $$class@autovalue.ArrayField.Builder))
+   )
+  )
+  (global.set $$class@autovalue.ArrayField.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Ar...|__java_lang_String_<once>_@autovalue.ArrayField.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@autovalue.ArrayField.Builder))
+ )
+)
+
+;;; Class<?> Builder.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autovalue.ArrayField.Builder
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $autovalue.ArrayField.Builder))
+ (local.set $this (ref.cast (ref $autovalue.ArrayField.Builder) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.ArrayField.Builder ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@autovalue.ArrayField.Builder)
 
 ;;; void AutoValueJsType.$ctor()
 (func $$ctor__void_$p_autovalue_AutoValueJsType@autovalue.AutoValueJsType
@@ -1725,16 +1802,16 @@
 (func $$create__arrayOf_int@autovalue.AutoValue_ArrayField
  (param $arrayField (ref null $javaemul.internal.WasmArray.OfInt))
  (result (ref null $autovalue.AutoValue_ArrayField))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:10
  (local $$instance (ref null $autovalue.AutoValue_ArrayField))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:10
   (call $$clinit__void_<once>_@autovalue.AutoValue_ArrayField )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:10
   (local.set $$instance (struct.new $autovalue.AutoValue_ArrayField (global.get $autovalue.AutoValue_ArrayField.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfInt)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:10
   (call $$ctor__arrayOf_int__void_$p_autovalue_AutoValue_ArrayField@autovalue.AutoValue_ArrayField (ref.as_non_null (local.get $$instance))(local.get $arrayField))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:10
   (return (local.get $$instance))
  )
 )
@@ -1743,13 +1820,11 @@
 (func $$ctor__arrayOf_int__void_$p_autovalue_AutoValue_ArrayField@autovalue.AutoValue_ArrayField
  (param $this (ref null $autovalue.AutoValue_ArrayField))
  (param $arrayField (ref null $javaemul.internal.WasmArray.OfInt))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:13:10
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:14:24
   (call $$ctor__void_$p_autovalue_ArrayField@autovalue.ArrayField (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:15:4
-  (drop (call $m_requireNonNull__java_lang_Object__java_lang_Object@java.util.Objects (local.get $arrayField)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:16:4
   (struct.set $autovalue.AutoValue_ArrayField $arrayField@autovalue.AutoValue_ArrayField (local.get $this) (local.get $arrayField))
  )
 )
@@ -1759,11 +1834,11 @@
  (type $function.m_getArrayField__arrayOf_int)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $javaemul.internal.WasmArray.OfInt))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:21:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:20:15
  (local $this (ref null $autovalue.AutoValue_ArrayField))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_ArrayField) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:22:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:21:4
   (return (struct.get $autovalue.AutoValue_ArrayField $arrayField@autovalue.AutoValue_ArrayField (local.get $this)))
  )
 )
@@ -1774,11 +1849,11 @@
  (type $function.m_toString__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:26:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:25:16
  (local $this (ref null $autovalue.AutoValue_ArrayField))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_ArrayField) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:27:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:26:4
   (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_int__java_lang_String@java.util.Arrays (struct.get $autovalue.AutoValue_ArrayField $arrayField@autovalue.AutoValue_ArrayField (local.get $this)))))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )))
  )
 )
@@ -1790,32 +1865,32 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:33:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:32:17
  (local $that (ref null $autovalue.ArrayField))
  (local $this (ref null $autovalue.AutoValue_ArrayField))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_ArrayField) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:34:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:33:4
   (if (ref.eq (local.get $o) (local.get $this))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:35:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:34:6
      (return (i32.const 1))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:36:4
   (if (ref.test (ref $autovalue.ArrayField) (local.get $o))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:38:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:37:6
      (local.set $that (ref.cast (ref null $autovalue.ArrayField) (local.get $o)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:39:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:38:6
      (return (call $m_equals__arrayOf_int__arrayOf_int__boolean@java.util.Arrays (struct.get $autovalue.AutoValue_ArrayField $arrayField@autovalue.AutoValue_ArrayField (local.get $this))(if (result (ref null $javaemul.internal.WasmArray.OfInt)) (ref.test (ref $autovalue.AutoValue_ArrayField) (local.get $that)) (then (struct.get $autovalue.AutoValue_ArrayField $arrayField@autovalue.AutoValue_ArrayField (ref.cast (ref null $autovalue.AutoValue_ArrayField) (local.get $that)))) (else (call_ref $function.m_getArrayField__arrayOf_int (ref.as_non_null (local.get $that))(struct.get $autovalue.ArrayField.vtable $m_getArrayField__arrayOf_int (struct.get $autovalue.ArrayField $vtable(local.get $that))))))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:41:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:40:4
   (return (i32.const 0))
  )
 )
@@ -1826,18 +1901,18 @@
  (type $function.m_hashCode__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:45:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:44:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_ArrayField))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_ArrayField) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:46:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:45:4
   (local.set $h$ (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:47:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:46:4
   (local.set $h$ (i32.mul (local.get $h$) (i32.const 1000003)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:48:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:47:4
   (local.set $h$ (i32.xor (local.get $h$) (call $m_hashCode__arrayOf_int__int@java.util.Arrays (struct.get $autovalue.AutoValue_ArrayField $arrayField@autovalue.AutoValue_ArrayField (local.get $this)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:49:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:48:4
   (return (local.get $h$))
  )
 )
@@ -1887,6 +1962,122 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ArrayField)
+
+;;; Builder Builder.$create()
+(func $$create__@autovalue.AutoValue_ArrayField.Builder
+ (result (ref null $autovalue.AutoValue_ArrayField.Builder))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:53:4
+ (local $$instance (ref null $autovalue.AutoValue_ArrayField.Builder))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:53:4
+  (call $$clinit__void_<once>_@autovalue.AutoValue_ArrayField.Builder )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:53:4
+  (local.set $$instance (struct.new $autovalue.AutoValue_ArrayField.Builder (global.get $autovalue.AutoValue_ArrayField.Builder.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfInt)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:53:4
+  (call $$ctor__void_$p_autovalue_AutoValue_ArrayField_Builder@autovalue.AutoValue_ArrayField.Builder (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:53:4
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Builder.$ctor()
+(func $$ctor__void_$p_autovalue_AutoValue_ArrayField_Builder@autovalue.AutoValue_ArrayField.Builder
+ (param $this (ref null $autovalue.AutoValue_ArrayField.Builder))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:53:4
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:53:14
+  (call $$ctor__void_$p_autovalue_ArrayField_Builder@autovalue.ArrayField.Builder (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Builder Builder.setArrayField(int[] arrayField)
+(func $m_setArrayField__arrayOf_int__autovalue_ArrayField_Builder@autovalue.AutoValue_ArrayField.Builder
+ (type $function.m_setArrayField__arrayOf_int__autovalue_ArrayField_Builder)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arrayField (ref null $javaemul.internal.WasmArray.OfInt))
+ (result (ref null $autovalue.ArrayField.Builder))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:56:30
+ (local $this (ref null $autovalue.AutoValue_ArrayField.Builder))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ArrayField.Builder) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:57:6
+  (drop (call $m_requireNonNull__java_lang_Object__java_lang_Object@java.util.Objects (local.get $arrayField)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:58:6
+  (struct.set $autovalue.AutoValue_ArrayField.Builder $arrayField@autovalue.AutoValue_ArrayField.Builder (local.get $this) (local.get $arrayField))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:59:6
+  (return (local.get $this))
+ )
+)
+(elem declare func $m_setArrayField__arrayOf_int__autovalue_ArrayField_Builder@autovalue.AutoValue_ArrayField.Builder)
+
+;;; ArrayField Builder.build()
+(func $m_build__autovalue_ArrayField_$pp_autovalue@autovalue.AutoValue_ArrayField.Builder
+ (type $function.m_build__autovalue_ArrayField_$pp_autovalue)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $autovalue.ArrayField))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:62:15
+ (local $this (ref null $autovalue.AutoValue_ArrayField.Builder))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ArrayField.Builder) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:63:6
+  (if (ref.is_null (struct.get $autovalue.AutoValue_ArrayField.Builder $arrayField@autovalue.AutoValue_ArrayField.Builder (local.get $this)))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:64:8
+     (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.IllegalStateException )))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:66:6
+  (return (call $$create__arrayOf_int@autovalue.AutoValue_ArrayField (struct.get $autovalue.AutoValue_ArrayField.Builder $arrayField@autovalue.AutoValue_ArrayField.Builder (local.get $this))))
+ )
+)
+(elem declare func $m_build__autovalue_ArrayField_$pp_autovalue@autovalue.AutoValue_ArrayField.Builder)
+
+;;; void Builder.$clinit()
+(func $$clinit__void_<once>_@autovalue.AutoValue_ArrayField.Builder
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:51:21
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:51:21
+  (if (global.get $$class-initialized@autovalue.AutoValue_ArrayField.Builder)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:51:21
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:51:21
+  (global.set $$class-initialized@autovalue.AutoValue_ArrayField.Builder (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_ArrayField.java:51:21
+  (call $$clinit__void_<once>_@autovalue.ArrayField.Builder )
+ )
+)
+
+;;; Class<T> Builder.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_ArrayField.Builder
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@autovalue.AutoValue_ArrayField.Builder)))
+   (then
+    (return (global.get $$class@autovalue.AutoValue_ArrayField.Builder))
+   )
+  )
+  (global.set $$class@autovalue.AutoValue_ArrayField.Builder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|autovalue.Au...|__java_lang_String_<once>_@autovalue.AutoValue_ArrayField.Builder )(call $$getClassMetadata__java_lang_Class_<once>_@autovalue.ArrayField.Builder )))
+  (return (global.get $$class@autovalue.AutoValue_ArrayField.Builder))
+ )
+)
+
+;;; Class<?> Builder.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ArrayField.Builder
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $autovalue.AutoValue_ArrayField.Builder))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_ArrayField.Builder) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@autovalue.AutoValue_ArrayField.Builder ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ArrayField.Builder)
 
 ;;; AutoValue_AutoValueJsType AutoValue_AutoValueJsType.$create(int field, int withJsMethod)
 (func $$create__int__int@autovalue.AutoValue_AutoValueJsType
