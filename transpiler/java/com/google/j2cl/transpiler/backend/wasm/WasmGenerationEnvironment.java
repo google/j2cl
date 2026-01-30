@@ -548,7 +548,7 @@ public class WasmGenerationEnvironment {
 
   /** Returns the name of the global that stores the JS prototype for JsTypes. */
   public String getJsPrototypeGlobalName(TypeDeclaration typeDeclaration) {
-    return getJsPrototypeGlobalName(typeDeclaration.getQualifiedSourceName());
+    return getJsPrototypeGlobalName(typeDeclaration.getQualifiedJsName());
   }
 
   /** Returns the name of the global that stores the JS prototype for JsTypes. */

@@ -112,6 +112,10 @@ public final class StringUtils {
     return escaped.toString();
   }
 
+  public static String escapeAsUtf8(byte b) {
+    return escape(b & 0xFF, /* forUtf8= */ true);
+  }
+
   public static String escapeAsUtf8(int c) {
     return escape(c, /* forUtf8= */ true);
   }
