@@ -405,9 +405,7 @@ public class ExplicitNotNullable {
   }
 
   DependentTypeParameters<?, ?> testDependentWildcards(DependentTypeParameters<?, ?> x) {
-    return x;
-    // TODO(b/255955130): This is not yet working. Uncomment when fixed.
-    // return x.getThis();
+    return x.getThis();
   }
 
   static void testLocalNullability() {
@@ -454,7 +452,7 @@ class DefaultNullable {
   static void nullableAccept(String s) {}
 }
 
-// Repros fixed incosistency adding the outer parameter in ResolveCaptures.
+// Repros fixed inconsistency adding the outer parameter in ResolveCaptures.
 @NullMarked
 class OuterClass<E> {
   class InnerClass<E> {}

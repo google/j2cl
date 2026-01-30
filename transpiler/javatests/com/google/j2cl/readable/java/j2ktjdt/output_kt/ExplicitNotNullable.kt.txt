@@ -24,6 +24,10 @@ import kotlin.Any
 import kotlin.Suppress
 
 open class ExplicitNotNullable {
+ internal open fun testDependentWildcards_pp_j2ktjdt(x: DependentTypeParameters<*, *>): DependentTypeParameters<*, *> {
+  return x.getThis_pp_j2ktjdt() as DependentTypeParameters<*, *>
+ }
+
  open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
   internal open fun getThis_pp_j2ktjdt(): DependentTypeParameters<E, T> {
    return this

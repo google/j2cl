@@ -27,8 +27,7 @@ public class ExplicitNotNullable {
     }
   }
 
-  // TODO(b/255955130): Uncomment when fixed.
-  // DependentTypeParameters<?, ?> testDependentWildcards(DependentTypeParameters<?, ?> x) {
-  //   return x.getThis();
-  // }
+  DependentTypeParameters<?, ?> testDependentWildcards(DependentTypeParameters<?, ?> x) {
+    return x.getThis();
+  }
 }

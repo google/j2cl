@@ -151,7 +151,7 @@ open class ExplicitNotNullable {
  }
 
  internal open fun testDependentWildcards_pp_nullability_explicitnotnullable(x: DependentTypeParameters<*, *>): DependentTypeParameters<*, *> {
-  return x
+  return x.getThis_pp_nullability_explicitnotnullable() as DependentTypeParameters<*, *>
  }
 
  companion object {

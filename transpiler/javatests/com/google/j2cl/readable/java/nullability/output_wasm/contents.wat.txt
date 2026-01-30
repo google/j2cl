@@ -7804,28 +7804,28 @@
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:408:4
-  (return (local.get $x))
+  (return (call_ref $function.m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (ref.as_non_null (local.get $x))(struct.get $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable $m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (struct.get $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters $vtable(local.get $x)))))
  )
 )
 (elem declare func $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
 
 ;;; void ExplicitNotNullable.testLocalNullability()
 (func $m_testLocalNullability__void@nullability.explicitnotnullable.ExplicitNotNullable
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:413:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:411:14
  (local $stringConsumer (ref null $java.lang.Object))
  (local $nullableStringConsumer (ref null $java.lang.Object))
  (local $nonNullStringConsumer (ref null $java.lang.Object))
  (local $b i32)
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:413:37
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:411:37
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:414:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:412:4
   (local.set $stringConsumer (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:415:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:413:4
   (local.set $nullableStringConsumer (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:417:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:415:4
   (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:419:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:417:4
   (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
    (then (i32.const 0))
    (else 
@@ -7840,14 +7840,14 @@
  (param $f (ref null $java.lang.Object))
  (param $string (ref null $java.lang.String))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:422:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:420:16
  (local $localString (ref null $java.lang.String))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:423:67
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:421:67
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:425:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:423:4
   (local.set $localString (local.get $string))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:430:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:428:4
   (return (ref.cast (ref null $java.lang.String) (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $f))(local.get $localString)(struct.get $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.Function.vtable) (call $get.itable.$nullability.explicitnotnullable.ExplicitNotNullable.Function (local.get $f)))))))
  )
 )
@@ -7856,11 +7856,11 @@
 (func $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:433:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:431:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:433:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:431:15
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:433:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:431:15
   (return (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $arg0)))
  )
 )
@@ -7869,18 +7869,18 @@
 (func $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable
  (param $nullable (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:433:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:431:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:434:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:432:4
   (if (ref.is_null (local.get $nullable))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:433:6
      (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (call $$create__@java.lang.NullPointerException )))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:437:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:435:4
   (return (local.get $nullable))
  )
 )
@@ -7888,12 +7888,12 @@
 ;;; void ExplicitNotNullable.testAssertNotNull_parametrized(String nullable)
 (func $m_testAssertNotNull_parametrized__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $nullable (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:440:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:438:14
  (local $nonNull (ref null $java.lang.String))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:440:72
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:438:72
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:441:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:439:4
   (local.set $nonNull (ref.cast (ref null $java.lang.String) (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable))))
  )
 )
@@ -7901,12 +7901,12 @@
 ;;; void ExplicitNotNullable.testAssertNotNull_notNullBounds(T nullable)
 (func $m_testAssertNotNull_notNullBounds__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $nullable (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:444:18
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:442:18
  (local $notNull (ref null $java.lang.Object))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:444:72
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:442:72
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:445:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:443:4
   (local.set $notNull (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
  )
 )
@@ -7914,12 +7914,12 @@
 ;;; void ExplicitNotNullable.testAssertNotNull_nullableBounds(T nullable)
 (func $m_testAssertNotNull_nullableBounds__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable
  (param $nullable (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:448:43
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:446:43
  (local $notNull (ref null $java.lang.Object))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:448:98
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:446:98
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:449:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:447:4
   (local.set $notNull (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
  )
 )
@@ -8038,16 +8038,16 @@
 ;;; DefaultNullable DefaultNullable.$create()
 (func $$create__@nullability.explicitnotnullable.DefaultNullable
  (result (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
  (local $$instance (ref null $nullability.explicitnotnullable.DefaultNullable))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.DefaultNullable )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
   (local.set $$instance (struct.new $nullability.explicitnotnullable.DefaultNullable (global.get $nullability.explicitnotnullable.DefaultNullable.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
   (return (local.get $$instance))
  )
 )
@@ -8055,9 +8055,9 @@
 ;;; void DefaultNullable.$ctor()
 (func $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable
  (param $this (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -8065,27 +8065,27 @@
 ;;; void DefaultNullable.nullableAccept(String s)
 (func $m_nullableAccept__java_lang_String__void@nullability.explicitnotnullable.DefaultNullable
  (param $s (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:454:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:452:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:454:39
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:452:39
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.DefaultNullable )
  )
 )
 
 ;;; void DefaultNullable.$clinit()
 (func $$clinit__void_<once>_@nullability.explicitnotnullable.DefaultNullable
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
   (if (global.get $$class-initialized@nullability.explicitnotnullable.DefaultNullable)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
   (global.set $$class-initialized@nullability.explicitnotnullable.DefaultNullable (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:453:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:451:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -8120,16 +8120,16 @@
 ;;; OuterClass<E> OuterClass.$create()
 (func $$create__@nullability.explicitnotnullable.OuterClass
  (result (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass (global.get $nullability.explicitnotnullable.OuterClass.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (return (local.get $$instance))
  )
 )
@@ -8137,11 +8137,11 @@
 ;;; void OuterClass.$ctor()
 (func $$ctor__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass
  (param $this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (call $$init__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass (ref.as_non_null (local.get $this)))
  )
 )
@@ -8149,29 +8149,29 @@
 ;;; void OuterClass.$init()
 (func $$init__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass
  (param $this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:4
   (drop (call $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.1 (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:4
   (drop (call $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.2 (local.get $this)))
  )
 )
 
 ;;; void OuterClass.$clinit()
 (func $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (if (global.get $$class-initialized@nullability.explicitnotnullable.OuterClass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (global.set $$class-initialized@nullability.explicitnotnullable.OuterClass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:459:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:457:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -9120,16 +9120,16 @@
 (func $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.InnerClass
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
  (result (ref null $nullability.explicitnotnullable.OuterClass.InnerClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.InnerClass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.InnerClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.InnerClass (global.get $nullability.explicitnotnullable.OuterClass.InnerClass.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $nullability.explicitnotnullable.OuterClass)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (return (local.get $$instance))
  )
 )
@@ -9138,29 +9138,29 @@
 (func $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass
  (param $this (ref null $nullability.explicitnotnullable.OuterClass.InnerClass))
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (struct.set $nullability.explicitnotnullable.OuterClass.InnerClass $$outer_this@nullability.explicitnotnullable.OuterClass.InnerClass (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.InnerClass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (if (global.get $$class-initialized@nullability.explicitnotnullable.OuterClass.InnerClass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (global.set $$class-initialized@nullability.explicitnotnullable.OuterClass.InnerClass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:460:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:458:8
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -10202,16 +10202,16 @@
 (func $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.1
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
  (result (ref null $nullability.explicitnotnullable.OuterClass.1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:24
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.1))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:24
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:24
   (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.1 (global.get $nullability.explicitnotnullable.OuterClass.1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $nullability.explicitnotnullable.OuterClass) (ref.null $nullability.explicitnotnullable.OuterClass)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:24
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_1@nullability.explicitnotnullable.OuterClass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:24
   (return (local.get $$instance))
  )
 )
@@ -10220,29 +10220,29 @@
 (func $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_1@nullability.explicitnotnullable.OuterClass.1
  (param $this (ref null $nullability.explicitnotnullable.OuterClass.1))
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:4
   (struct.set $nullability.explicitnotnullable.OuterClass.1 $$outer_this@nullability.explicitnotnullable.OuterClass.1 (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:24
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
 )
 
 ;;; void <anonymous> extends InnerClass<E, E>.$clinit()
 (func $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:4
   (if (global.get $$class-initialized@nullability.explicitnotnullable.OuterClass.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:4
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:4
   (global.set $$class-initialized@nullability.explicitnotnullable.OuterClass.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:463:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:461:4
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.InnerClass )
  )
 )
@@ -10278,16 +10278,16 @@
 (func $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.2
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
  (result (ref null $nullability.explicitnotnullable.OuterClass.2))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:29
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.2))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:29
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.2 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:29
   (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.2 (global.get $nullability.explicitnotnullable.OuterClass.2.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $nullability.explicitnotnullable.OuterClass) (ref.null $nullability.explicitnotnullable.OuterClass)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:29
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_2@nullability.explicitnotnullable.OuterClass.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:29
   (return (local.get $$instance))
  )
 )
@@ -10296,29 +10296,29 @@
 (func $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_2@nullability.explicitnotnullable.OuterClass.2
  (param $this (ref null $nullability.explicitnotnullable.OuterClass.2))
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:29
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:4
   (struct.set $nullability.explicitnotnullable.OuterClass.2 $$outer_this@nullability.explicitnotnullable.OuterClass.2 (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:29
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:29
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
 )
 
 ;;; void <anonymous> extends InnerClass<String, E>.$clinit()
 (func $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.2
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:4
   (if (global.get $$class-initialized@nullability.explicitnotnullable.OuterClass.2)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:4
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:4
   (global.set $$class-initialized@nullability.explicitnotnullable.OuterClass.2 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:464:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:462:4
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.OuterClass.InnerClass )
  )
 )
