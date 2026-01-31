@@ -43,8 +43,7 @@ public class NullabilityInferenceProblem10 {
     }
 
     static void test(Lazy<Observable<Foo>> lazyObservable) {
-      // TODO(b/...): Uncomment when fixed
-      // lazyObservable.get().addObserver(InNullMarked::observeNullable);
+      lazyObservable.get().addObserver(InNullMarked::observeNullable);
     }
   }
 }

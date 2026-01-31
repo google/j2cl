@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Streams;
+import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
@@ -31,7 +32,6 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
@@ -128,7 +128,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
+    Processor processor =
         new AbstractRewriter() {
           @Override
           public Node rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
@@ -193,7 +193,17 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                       methodCall.getArguments());
             }
 
-            return Invocation.Builder.from(methodCall).setTarget(rewrittenMethodDescriptor).build();
+            // Propagate nullability from parameters to function expression arguments.
+            ImmutableList<Expression> rewrittenArguments =
+                zip(
+                    methodCall.getArguments(),
+                    rewrittenMethodDescriptor.getParameterTypeDescriptors(),
+                    PropagateNullability.this::propagateNullabilityToFunctionExpression);
+
+            return MethodCall.Builder.from(methodCall)
+                .setTarget(rewrittenMethodDescriptor)
+                .setArguments(rewrittenArguments)
+                .build();
           }
 
           // TODO(b/406815802): See if rewriteInvocation can be refactored to seamlessly
@@ -260,7 +270,14 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                 .setTypeDescriptor(inferredFunctionalInterface)
                 .build();
           }
-        });
+        };
+
+    // Propagate nullability twice to ensure that we apply the effect of outward nullability
+    // propagation from the first pass is used in the inward nullability propagation in the
+    // second pass.
+    // TODO(b/406815802): See whether this can be refactored to avoid running twice if not needed.
+    compilationUnit.accept(processor);
+    compilationUnit.accept(processor);
   }
 
   /**
@@ -445,6 +462,19 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
     return reparameterize(
         methodDescriptor, typeParameterDescriptors, inferredTypeArgumentDescriptors);
+  }
+
+  private Expression propagateNullabilityToFunctionExpression(
+      Expression toExpression, TypeDescriptor fromTypeDescriptor) {
+    return switch (toExpression) {
+      case FunctionExpression functionExpression ->
+          FunctionExpression.Builder.from(functionExpression)
+              .setTypeDescriptor(
+                  propagateNullabilityTo(
+                      toExpression.getTypeDescriptor(), fromTypeDescriptor, ImmutableSet.of()))
+              .build();
+      default -> toExpression;
+    };
   }
 
   // TODO(b/406815802): Add JavaDoc

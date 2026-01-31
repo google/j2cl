@@ -57,14 +57,14 @@ open class LambdaParameterTypeInference {
   fun testInference(map: MutableMap<String, Int>) {
    map.compute(
     "",
-    BiFunction { key: String, value: Int ->
-     return@BiFunction if (value == null) 1 else value.toInt() + 1
-    } as BiFunction<in String, in Int?, out Int?>,
+    BiFunction { key: String, value: Int? ->
+     return@BiFunction if (value == null) 1 else value!!.toInt() + 1
+    },
    )
    LambdaParameterTypeInference.applyToNull<Int>(
-    Function { value_1: Int ->
-     return@Function if (value_1 == null) 1 else value_1.toInt() + 1
-    } as Function<in Int?, Int>,
+    Function { value_1: Int? ->
+     return@Function if (value_1 == null) 1 else value_1!!.toInt() + 1
+    },
    )
   }
 

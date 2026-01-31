@@ -38,7 +38,13 @@ open class NullabilityInferenceProblem10 {
    }
 
    @JvmStatic
-   internal fun test_pp_j2kt(lazyObservable: Lazy<Observable<Foo>>) {}
+   internal fun test_pp_j2kt(lazyObservable: Lazy<Observable<Foo>>) {
+    lazyObservable.get()!!.addObserver(
+     Observer { arg0: Foo? ->
+      return@Observer InNullMarked.observeNullable_pp_j2kt(arg0)
+     },
+    )
+   }
   }
 
   interface Foo

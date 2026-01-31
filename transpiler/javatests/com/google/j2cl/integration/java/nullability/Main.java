@@ -17,7 +17,6 @@ package nullability;
 
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 
 import java.util.function.Function;
 import org.jspecify.annotations.NullMarked;
@@ -311,12 +310,7 @@ public class Main {
   }
 
   private static void testLambdaParameterTypeInference() {
-    if (!isJ2Kt()) {
-      // TODO(b/454662844): The function here gets inferred to Function<Integer, Integer> then
-      // cast to Function<in Integer?, Integer>, which at runtime has a bridge/adaptor
-      // that does an implicit unboxing and ends in NPE.
-      assertTrue(1 == Main.<Integer>applyToNull(value -> (value == null) ? 1 : value + 1));
-    }
+    assertTrue(1 == Main.<Integer>applyToNull(value -> (value == null) ? 1 : value + 1));
   }
 
   private static <T> int applyToNull(Function<? super @Nullable T, Integer> function) {
