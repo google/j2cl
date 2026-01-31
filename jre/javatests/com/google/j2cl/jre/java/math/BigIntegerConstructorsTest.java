@@ -51,7 +51,7 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * long.
    */
   public void testConstructorBytesException() {
-    byte aBytes[] = {};
+    byte[] aBytes = {};
     NumberFormatException e =
         assertThrows(NumberFormatException.class, () -> new BigInteger(aBytes));
     assertEquals("Improper exception message", "Zero length BigInteger", e.getMessage());
@@ -59,10 +59,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a negative number from an array of bytes. The number fits in an array of integers. */
   public void testConstructorBytesNegative1() {
-    byte aBytes[] = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
-    byte rBytes[] = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
+    byte[] aBytes = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
+    byte[] rBytes = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -72,10 +72,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a negative number from an array of bytes. The number fits in an integer. */
   public void testConstructorBytesNegative2() {
-    byte aBytes[] = {-12, 56, 100};
-    byte rBytes[] = {-12, 56, 100};
+    byte[] aBytes = {-12, 56, 100};
+    byte[] rBytes = {-12, 56, 100};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -85,10 +85,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a negative number from an array of bytes. The number of bytes is 4. */
   public void testConstructorBytesNegative3() {
-    byte aBytes[] = {-128, -12, 56, 100};
-    byte rBytes[] = {-128, -12, 56, 100};
+    byte[] aBytes = {-128, -12, 56, 100};
+    byte[] rBytes = {-128, -12, 56, 100};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -98,10 +98,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a negative number from an array of bytes. The number of bytes is multiple of 4. */
   public void testConstructorBytesNegative4() {
-    byte aBytes[] = {-128, -12, 56, 100, -13, 56, 93, -78};
-    byte rBytes[] = {-128, -12, 56, 100, -13, 56, 93, -78};
+    byte[] aBytes = {-128, -12, 56, 100, -13, 56, 93, -78};
+    byte[] rBytes = {-128, -12, 56, 100, -13, 56, 93, -78};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -111,10 +111,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a positive number from an array of bytes. The number of bytes is multiple of 4. */
   public void testConstructorBytesPositive() {
-    byte aBytes[] = {127, 56, 100, -1, 14, 75, -24, -100};
-    byte rBytes[] = {127, 56, 100, -1, 14, 75, -24, -100};
+    byte[] aBytes = {127, 56, 100, -1, 14, 75, -24, -100};
+    byte[] rBytes = {127, 56, 100, -1, 14, 75, -24, -100};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -124,10 +124,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a positive number from an array of bytes. The number fits in an array of integers. */
   public void testConstructorBytesPositive1() {
-    byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
-    byte rBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
+    byte[] aBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
+    byte[] rBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -137,10 +137,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a positive number from an array of bytes. The number fits in an integer. */
   public void testConstructorBytesPositive2() {
-    byte aBytes[] = {12, 56, 100};
-    byte rBytes[] = {12, 56, 100};
+    byte[] aBytes = {12, 56, 100};
+    byte[] rBytes = {12, 56, 100};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -150,10 +150,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a positive number from an array of bytes. The number of bytes is 4. */
   public void testConstructorBytesPositive3() {
-    byte aBytes[] = {127, 56, 100, -1};
-    byte rBytes[] = {127, 56, 100, -1};
+    byte[] aBytes = {127, 56, 100, -1};
+    byte[] rBytes = {127, 56, 100, -1};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -163,10 +163,10 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a zero number from an array of zero bytes. */
   public void testConstructorBytesZero() {
-    byte aBytes[] = {0, 0, 0, -0, +0, 0, -0};
-    byte rBytes[] = {0};
+    byte[] aBytes = {0, 0, 0, -0, +0, 0, -0};
+    byte[] rBytes = {0};
     BigInteger aNumber = new BigInteger(aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -205,7 +205,7 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * improper value.
    */
   public void testConstructorSignBytesException1() {
-    byte aBytes[] = {123, 45, -3, -76};
+    byte[] aBytes = {123, 45, -3, -76};
     int aSign = 3;
     NumberFormatException e =
         assertThrows(NumberFormatException.class, () -> new BigInteger(aSign, aBytes));
@@ -217,7 +217,7 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * contains non-zero bytes while the sign is 0.
    */
   public void testConstructorSignBytesException2() {
-    byte aBytes[] = {123, 45, -3, -76};
+    byte[] aBytes = {123, 45, -3, -76};
     int aSign = 0;
     NumberFormatException e =
         assertThrows(NumberFormatException.class, () -> new BigInteger(aSign, aBytes));
@@ -229,11 +229,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * integers. The most significant byte is positive.
    */
   public void testConstructorSignBytesNegative1() {
-    byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
+    byte[] aBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
     int aSign = -1;
-    byte rBytes[] = {-13, -57, -101, 1, 75, -90, -46, -92, -4, 15};
+    byte[] rBytes = {-13, -57, -101, 1, 75, -90, -46, -92, -4, 15};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -246,11 +246,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * integers. The most significant byte is negative.
    */
   public void testConstructorSignBytesNegative2() {
-    byte aBytes[] = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
+    byte[] aBytes = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
     int aSign = -1;
-    byte rBytes[] = {-1, 11, -57, -101, 1, 75, -90, -46, -92, -4, 15};
+    byte[] rBytes = {-1, 11, -57, -101, 1, 75, -90, -46, -92, -4, 15};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -260,11 +260,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a negative number from a sign and an array of bytes. The number fits in an integer. */
   public void testConstructorSignBytesNegative3() {
-    byte aBytes[] = {-12, 56, 100};
+    byte[] aBytes = {-12, 56, 100};
     int aSign = -1;
-    byte rBytes[] = {-1, 11, -57, -100};
+    byte[] rBytes = {-1, 11, -57, -100};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -277,11 +277,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * significant byte is positive.
    */
   public void testConstructorSignBytesNegative4() {
-    byte aBytes[] = {127, 56, 100, -2};
+    byte[] aBytes = {127, 56, 100, -2};
     int aSign = -1;
-    byte rBytes[] = {-128, -57, -101, 2};
+    byte[] rBytes = {-128, -57, -101, 2};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -294,11 +294,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * significant byte is negative.
    */
   public void testConstructorSignBytesNegative5() {
-    byte aBytes[] = {-127, 56, 100, -2};
+    byte[] aBytes = {-127, 56, 100, -2};
     int aSign = -1;
-    byte rBytes[] = {-1, 126, -57, -101, 2};
+    byte[] rBytes = {-1, 126, -57, -101, 2};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -311,11 +311,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * 4. The most significant byte is positive.
    */
   public void testConstructorSignBytesNegative6() {
-    byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
+    byte[] aBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
     int aSign = -1;
-    byte rBytes[] = {-13, -57, -101, 1, 75, -90, -46, -92, -4, 14, -24, 101};
+    byte[] rBytes = {-13, -57, -101, 1, 75, -90, -46, -92, -4, 14, -24, 101};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -328,11 +328,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * 4. The most significant byte is negative.
    */
   public void testConstructorSignBytesNegative7() {
-    byte aBytes[] = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
+    byte[] aBytes = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
     int aSign = -1;
-    byte rBytes[] = {-1, 11, -57, -101, 1, 75, -90, -46, -92, -4, 14, -24, 101};
+    byte[] rBytes = {-1, 11, -57, -101, 1, 75, -90, -46, -92, -4, 14, -24, 101};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -345,11 +345,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * integers. The most significant byte is positive.
    */
   public void testConstructorSignBytesPositive1() {
-    byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
+    byte[] aBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
     int aSign = 1;
-    byte rBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
+    byte[] rBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -362,11 +362,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * integers. The most significant byte is negative.
    */
   public void testConstructorSignBytesPositive2() {
-    byte aBytes[] = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
+    byte[] aBytes = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
     int aSign = 1;
-    byte rBytes[] = {0, -12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
+    byte[] rBytes = {0, -12, 56, 100, -2, -76, 89, 45, 91, 3, -15};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -376,11 +376,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a positive number from a sign and an array of bytes. The number fits in an integer. */
   public void testConstructorSignBytesPositive3() {
-    byte aBytes[] = {-12, 56, 100};
+    byte[] aBytes = {-12, 56, 100};
     int aSign = 1;
-    byte rBytes[] = {0, -12, 56, 100};
+    byte[] rBytes = {0, -12, 56, 100};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -393,11 +393,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * significant byte is positive.
    */
   public void testConstructorSignBytesPositive4() {
-    byte aBytes[] = {127, 56, 100, -2};
+    byte[] aBytes = {127, 56, 100, -2};
     int aSign = 1;
-    byte rBytes[] = {127, 56, 100, -2};
+    byte[] rBytes = {127, 56, 100, -2};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -410,11 +410,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * significant byte is negative.
    */
   public void testConstructorSignBytesPositive5() {
-    byte aBytes[] = {-127, 56, 100, -2};
+    byte[] aBytes = {-127, 56, 100, -2};
     int aSign = 1;
-    byte rBytes[] = {0, -127, 56, 100, -2};
+    byte[] rBytes = {0, -127, 56, 100, -2};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -427,11 +427,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * 4. The most significant byte is positive.
    */
   public void testConstructorSignBytesPositive6() {
-    byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
+    byte[] aBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
     int aSign = 1;
-    byte rBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
+    byte[] rBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -444,11 +444,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
    * 4. The most significant byte is negative.
    */
   public void testConstructorSignBytesPositive7() {
-    byte aBytes[] = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
+    byte[] aBytes = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
     int aSign = 1;
-    byte rBytes[] = {0, -12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
+    byte[] rBytes = {0, -12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 23, -101};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -458,11 +458,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a zero number from a sign and an array of zero bytes. The sign is -1. */
   public void testConstructorSignBytesZero1() {
-    byte aBytes[] = {-0, 0, +0, 0, 0, 00, 000};
+    byte[] aBytes = {-0, 0, +0, 0, 0, 00, 000};
     int aSign = -1;
-    byte rBytes[] = {0};
+    byte[] rBytes = {0};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -472,11 +472,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a zero number from a sign and an array of zero bytes. The sign is 0. */
   public void testConstructorSignBytesZero2() {
-    byte aBytes[] = {-0, 0, +0, 0, 0, 00, 000};
+    byte[] aBytes = {-0, 0, +0, 0, 0, 00, 000};
     int aSign = 0;
-    byte rBytes[] = {0};
+    byte[] rBytes = {0};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -486,11 +486,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a zero number from a sign and an array of zero bytes. The sign is 1. */
   public void testConstructorSignBytesZero3() {
-    byte aBytes[] = {-0, 0, +0, 0, 0, 00, 000};
+    byte[] aBytes = {-0, 0, +0, 0, 0, 00, 000};
     int aSign = 1;
-    byte rBytes[] = {0};
+    byte[] rBytes = {0};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -500,11 +500,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a zero number from a sign and an array of zero length. The sign is -1. */
   public void testConstructorSignBytesZeroNull1() {
-    byte aBytes[] = {};
+    byte[] aBytes = {};
     int aSign = -1;
-    byte rBytes[] = {0};
+    byte[] rBytes = {0};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -514,11 +514,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a zero number from a sign and an array of zero length. The sign is 0. */
   public void testConstructorSignBytesZeroNull2() {
-    byte aBytes[] = {};
+    byte[] aBytes = {};
     int aSign = 0;
-    byte rBytes[] = {0};
+    byte[] rBytes = {0};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -528,11 +528,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
 
   /** Create a zero number from a sign and an array of zero length. The sign is 1. */
   public void testConstructorSignBytesZeroNull3() {
-    byte aBytes[] = {};
+    byte[] aBytes = {};
     int aSign = 1;
-    byte rBytes[] = {0};
+    byte[] rBytes = {0};
     BigInteger aNumber = new BigInteger(aSign, aBytes);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -586,9 +586,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringRadix10() {
     String value = "987328901348934898";
     int radix = 10;
-    byte rBytes[] = {13, -77, -78, 103, -103, 97, 68, -14};
+    byte[] rBytes = {13, -77, -78, 103, -103, 97, 68, -14};
     BigInteger aNumber = new BigInteger(value, radix);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -600,9 +600,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringRadix10Negative() {
     String value = "-234871376037";
     int radix = 36;
-    byte rBytes[] = {-4, 48, 71, 62, -76, 93, -105, 13};
+    byte[] rBytes = {-4, 48, 71, 62, -76, 93, -105, 13};
     BigInteger aNumber = new BigInteger(value, radix);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -614,9 +614,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringRadix10Zero() {
     String value = "-00000000000000";
     int radix = 10;
-    byte rBytes[] = {0};
+    byte[] rBytes = {0};
     BigInteger aNumber = new BigInteger(value, radix);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -628,9 +628,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringRadix16() {
     String value = "fe2340a8b5ce790";
     int radix = 16;
-    byte rBytes[] = {15, -30, 52, 10, -117, 92, -25, -112};
+    byte[] rBytes = {15, -30, 52, 10, -117, 92, -25, -112};
     BigInteger aNumber = new BigInteger(value, radix);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -642,9 +642,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringRadix2() {
     String value = "10101010101010101";
     int radix = 2;
-    byte rBytes[] = {1, 85, 85};
+    byte[] rBytes = {1, 85, 85};
     BigInteger aNumber = new BigInteger(value, radix);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -656,12 +656,12 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringRadix36() {
     String value = "skdjgocvhdjfkl20jndjkf347ejg457";
     int radix = 36;
-    byte rBytes[] = {
+    byte[] rBytes = {
       0, -12, -116, 112, -105, 12, -36, 66, 108, 66, -20, -37, -15, 108, -7, 52, -99, -109, -8, -45,
       -5
     };
     BigInteger aNumber = new BigInteger(value, radix);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);
@@ -673,9 +673,9 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   public void testConstructorStringRadix8() {
     String value = "76356237071623450";
     int radix = 8;
-    byte rBytes[] = {7, -50, -28, -8, -25, 39, 40};
+    byte[] rBytes = {7, -50, -28, -8, -25, 39, 40};
     BigInteger aNumber = new BigInteger(value, radix);
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertTrue(resBytes[i] == rBytes[i]);

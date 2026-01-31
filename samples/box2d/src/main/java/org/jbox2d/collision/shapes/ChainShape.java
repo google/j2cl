@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2013, Daniel Murphy
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 	* Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  * 	* Redistributions in binary form must reproduce the above copyright notice,
  * 	  this list of conditions and the following disclaimer in the documentation
  * 	  and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -22,7 +22,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 package org.jbox2d.collision.shapes;
-
 
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.RayCastInput;
@@ -38,7 +37,7 @@ import org.jbox2d.common.Vec2;
  * can use inside and outside collision. Therefore, you may use any winding order. Since there may
  * be many vertices, they are allocated using Alloc. Connectivity information is used to create
  * smooth collisions. WARNING The chain will not collide properly if there are self-intersections.
- * 
+ *
  * @author Daniel
  */
 public class ChainShape extends Shape {
@@ -62,13 +61,11 @@ public class ChainShape extends Shape {
     return m_count - 1;
   }
 
-  /**
-   * Get a child edge.
-   */
+  /** Get a child edge. */
   public void getChildEdge(EdgeShape edge, int index) {
     assert (0 <= index && index < m_count - 1);
     edge.m_radius = m_radius;
-    
+
     final Vec2 v0 = m_vertices[index + 0];
     final Vec2 v1 = m_vertices[index + 1];
     edge.m_vertex1.x = v0.x;
@@ -130,7 +127,7 @@ public class ChainShape extends Shape {
     assert (childIndex < m_count);
     final Vec2 lower = aabb.lowerBound;
     final Vec2 upper = aabb.upperBound;
-    
+
     int i1 = childIndex;
     int i2 = childIndex + 1;
     if (i2 == m_count) {
@@ -172,7 +169,7 @@ public class ChainShape extends Shape {
 
   /**
    * Create a loop. This automatically adjusts connectivity.
-   * 
+   *
    * @param vertices an array of vertices, these are copied
    * @param count the vertex count
    */
@@ -201,11 +198,11 @@ public class ChainShape extends Shape {
 
   /**
    * Create a chain with isolated end vertices.
-   * 
+   *
    * @param vertices an array of vertices, these are copied
    * @param count the vertex count
    */
-  public void createChain(final Vec2 vertices[], int count) {
+  public void createChain(final Vec2[] vertices, int count) {
     assert (m_vertices == null && m_count == 0);
     assert (count >= 2);
     m_count = count;
@@ -227,7 +224,7 @@ public class ChainShape extends Shape {
 
   /**
    * Establish connectivity to a vertex that precedes the first vertex. Don't call this for loops.
-   * 
+   *
    * @param prevVertex
    */
   public void setPrevVertex(final Vec2 prevVertex) {
@@ -237,7 +234,7 @@ public class ChainShape extends Shape {
 
   /**
    * Establish connectivity to a vertex that follows the last vertex. Don't call this for loops.
-   * 
+   *
    * @param nextVertex
    */
   public void setNextVertex(final Vec2 nextVertex) {

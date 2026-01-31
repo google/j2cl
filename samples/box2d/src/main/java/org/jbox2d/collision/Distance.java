@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2013, Daniel Murphy
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 	* Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  * 	* Redistributions in binary form must reproduce the above copyright notice,
  * 	  this list of conditions and the following disclaimer in the documentation
  * 	  and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -31,14 +31,14 @@ import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.MathUtils;
 import org.jbox2d.common.Rot;
 import org.jbox2d.common.Settings;
-import org.jbox2d.common.Vec2;
 import org.jbox2d.common.Transform;
+import org.jbox2d.common.Vec2;
 
 // updated to rev 100
 /**
  * This is non-static for faster pooling. To get an instance, use the {@link SingletonPool}, don't
  * construct a distance object.
- * 
+ *
  * @author Daniel Murphy
  */
 public class Distance {
@@ -47,9 +47,7 @@ public class Distance {
   public static int GJK_ITERS = 0;
   public static int GJK_MAX_ITERS = 20;
 
-  /**
-   * GJK using Voronoi regions (Christer Ericson) and Barycentric coordinates.
-   */
+  /** GJK using Voronoi regions (Christer Ericson) and Barycentric coordinates. */
   private class SimplexVertex {
     public final Vec2 wA = new Vec2(); // support point in shapeA
     public final Vec2 wB = new Vec2(); // support point in shapeB
@@ -70,17 +68,20 @@ public class Distance {
 
   /**
    * Used to warm start Distance. Set count to zero on first call.
-   * 
+   *
    * @author daniel
    */
   public static class SimplexCache {
     /** length or area */
     public float metric;
+
     public int count;
+
     /** vertices on shape A */
-    public final int indexA[] = new int[3];
+    public final int[] indexA = new int[3];
+
     /** vertices on shape B */
-    public final int indexB[] = new int[3];
+    public final int[] indexB = new int[3];
 
     public SimplexCache() {
       metric = 0;
@@ -105,11 +106,15 @@ public class Distance {
     public final SimplexVertex m_v1 = new SimplexVertex();
     public final SimplexVertex m_v2 = new SimplexVertex();
     public final SimplexVertex m_v3 = new SimplexVertex();
-    public final SimplexVertex vertices[] = {m_v1, m_v2, m_v3};
+    public final SimplexVertex[] vertices = {m_v1, m_v2, m_v3};
     public int m_count;
 
-    public void readCache(SimplexCache cache, DistanceProxy proxyA, Transform transformA,
-        DistanceProxy proxyB, Transform transformB) {
+    public void readCache(
+        SimplexCache cache,
+        DistanceProxy proxyA,
+        Transform transformA,
+        DistanceProxy proxyB,
+        Transform transformB) {
       assert (cache.count <= 3);
 
       // Copy data from cache.
@@ -197,7 +202,7 @@ public class Distance {
 
     /**
      * this returns pooled objects. don't keep or modify them
-     * 
+     *
      * @return
      */
     public void getClosestPoint(final Vec2 out) {
@@ -291,9 +296,7 @@ public class Distance {
     }
 
     // djm pooled from above
-    /**
-     * Solve a line segment using barycentric coordinates.
-     */
+    /** Solve a line segment using barycentric coordinates. */
     public void solve2() {
       // Solve a line segment using barycentric coordinates.
       //
@@ -356,11 +359,11 @@ public class Distance {
     private final Vec2 w3 = new Vec2();
 
     /**
-     * Solve a line segment using barycentric coordinates.<br/>
-     * Possible regions:<br/>
-     * - points[2]<br/>
-     * - edge points[0]-points[2]<br/>
-     * - edge points[1]-points[2]<br/>
+     * Solve a line segment using barycentric coordinates.<br>
+     * Possible regions:<br>
+     * - points[2]<br>
+     * - edge points[0]-points[2]<br>
+     * - edge points[1]-points[2]<br>
      * - inside the triangle
      */
     public void solve3() {
@@ -469,7 +472,7 @@ public class Distance {
   /**
    * A distance proxy is used by the GJK algorithm. It encapsulates any shape. TODO: see if we can
    * just do assignments with m_vertices, instead of copying stuff over
-   * 
+   *
    * @author daniel
    */
   public static class DistanceProxy {
@@ -539,7 +542,7 @@ public class Distance {
 
     /**
      * Get the supporting vertex index in the given direction.
-     * 
+     *
      * @param d
      * @return
      */
@@ -559,7 +562,7 @@ public class Distance {
 
     /**
      * Get the supporting vertex in the given direction.
-     * 
+     *
      * @param d
      * @return
      */
@@ -579,7 +582,7 @@ public class Distance {
 
     /**
      * Get the vertex count.
-     * 
+     *
      * @return
      */
     public final int getVertexCount() {
@@ -588,7 +591,7 @@ public class Distance {
 
     /**
      * Get a vertex by index. Used by Distance.
-     * 
+     *
      * @param index
      * @return
      */
@@ -610,13 +613,13 @@ public class Distance {
    * Compute the closest points between two shapes. Supports any combination of: CircleShape and
    * PolygonShape. The simplex cache is input/output. On the first call set SimplexCache.count to
    * zero.
-   * 
+   *
    * @param output
    * @param cache
    * @param input
    */
-  public final void distance(final DistanceOutput output, final SimplexCache cache,
-      final DistanceInput input) {
+  public final void distance(
+      final DistanceOutput output, final SimplexCache cache, final DistanceInput input) {
     GJK_CALLS++;
 
     final DistanceProxy proxyA = input.proxyA;

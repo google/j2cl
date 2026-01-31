@@ -98,7 +98,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
 
   /** new BigDecimal(char[] value). */
   public void testConstrChar() {
-    char value[] = {'-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
+    char[] value = {'-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
     BigDecimal result = new BigDecimal(value);
     String res = "-1.23804738E-419";
     int resScale = 427;
@@ -110,7 +110,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
 
   /** new BigDecimal(char[] value, int offset, int len). */
   public void testConstrCharIntInt() {
-    char value[] = {'-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
+    char[] value = {'-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
     int offset = 3;
     int len = 12;
     BigDecimal result = new BigDecimal(value, offset, len);
@@ -124,7 +124,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
 
   /** new BigDecimal(char[] value, int offset, int len, MathContext mc). */
   public void testConstrCharIntIntMathContext() {
-    char value[] = {'-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
+    char[] value = {'-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
     int offset = 3;
     int len = 12;
     int precision = 4;
@@ -143,7 +143,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
 
   /** new BigDecimal(char[] value, int offset, int len, MathContext mc). */
   public void testConstrCharIntIntMathContextException1() {
-    char value[] = {'-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
+    char[] value = {'-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
     int offset = 3;
     int len = 120;
     int precision = 4;
@@ -154,7 +154,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
 
   /** new BigDecimal(char[] value, int offset, int len, MathContext mc). */
   public void testConstrCharIntIntMathContextException2() {
-    char value[] = {'-', '1', '2', '3', '8', '0', ',', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
+    char[] value = {'-', '1', '2', '3', '8', '0', ',', '4', '7', '3', '8', 'E', '-', '4', '2', '3'};
     int offset = 3;
     int len = 120;
     int precision = 4;
@@ -165,7 +165,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
 
   /** new BigDecimal(char[] value, MathContext mc). */
   public void testConstrCharMathContext() {
-    char value[] = {'3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2'};
+    char[] value = {'3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2'};
     int precision = 4;
     RoundingMode rm = RoundingMode.CEILING;
     MathContext mc = new MathContext(precision, rm);

@@ -216,7 +216,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int remScale = 70;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result[] = aNumber.divideAndRemainder(bNumber);
+    BigDecimal[] result = aNumber.divideAndRemainder(bNumber);
     assertEquals("incorrect quotient value", res, result[0].toString());
     assertEquals("incorrect quotient scale", resScale, result[0].scale());
     assertEquals("incorrect remainder value", rem, result[1].toString());
@@ -238,7 +238,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int remScale = 70;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result[] = aNumber.divideAndRemainder(bNumber);
+    BigDecimal[] result = aNumber.divideAndRemainder(bNumber);
     assertEquals("incorrect quotient value", res, result[0].toString());
     assertEquals("incorrect quotient scale", resScale, result[0].scale());
     assertEquals("incorrect remainder value", rem, result[1].toString());
@@ -260,7 +260,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int remScale = 45;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result[] = aNumber.divideAndRemainder(bNumber, mc);
+    BigDecimal[] result = aNumber.divideAndRemainder(bNumber, mc);
     assertEquals("incorrect quotient value", res, result[0].toString());
     assertEquals("incorrect quotient scale", resScale, result[0].scale());
     assertEquals("incorrect remainder value", rem, result[1].toString());
@@ -282,7 +282,7 @@ public class BigDecimalArithmeticTest extends EmulTestBase {
     int remScale = 70;
     BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
     BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
-    BigDecimal result[] = aNumber.divideAndRemainder(bNumber, mc);
+    BigDecimal[] result = aNumber.divideAndRemainder(bNumber, mc);
     assertEquals("incorrect quotient value", res, result[0].toString());
     assertEquals("incorrect quotient scale", resScale, result[0].scale());
     assertEquals("incorrect remainder value", rem, result[1].toString());

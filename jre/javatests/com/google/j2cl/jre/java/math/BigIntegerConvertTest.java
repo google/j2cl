@@ -509,7 +509,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a negative BigInteger to an integer value. The low digit is negative. */
   public void testIntValueNegative1() {
-    byte aBytes[] = {12, 56, 100, -2, -76, -128, 45, 91, 3};
+    byte[] aBytes = {12, 56, 100, -2, -76, -128, 45, 91, 3};
     int sign = -1;
     int resInt = 2144511229;
     int aNumber = new BigInteger(sign, aBytes).intValue();
@@ -518,7 +518,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a negative BigInteger to an integer value. The low digit is negative. */
   public void testIntValueNegative2() {
-    byte aBytes[] = {-12, 56, 100};
+    byte[] aBytes = {-12, 56, 100};
     int result = -771996;
     int aNumber = new BigInteger(aBytes).intValue();
     assertEquals(result, aNumber);
@@ -526,7 +526,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a negative BigInteger to an integer value. The low digit is positive. */
   public void testIntValueNegative3() {
-    byte aBytes[] = {12, 56, 100, -2, -76, 127, 45, 91, 3};
+    byte[] aBytes = {12, 56, 100, -2, -76, 127, 45, 91, 3};
     int sign = -1;
     int resInt = -2133678851;
     int aNumber = new BigInteger(sign, aBytes).intValue();
@@ -539,7 +539,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a positive BigInteger to an integer value. The low digit is positive */
   public void testIntValuePositive1() {
-    byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3};
+    byte[] aBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3};
     int resInt = 1496144643;
     int aNumber = new BigInteger(aBytes).intValue();
     assertEquals(resInt, aNumber);
@@ -547,7 +547,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a positive BigInteger to an integer value. The low digit is positive */
   public void testIntValuePositive2() {
-    byte aBytes[] = {12, 56, 100};
+    byte[] aBytes = {12, 56, 100};
     int resInt = 800868;
     int aNumber = new BigInteger(aBytes).intValue();
     assertEquals(resInt, aNumber);
@@ -555,7 +555,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a positive BigInteger to an integer value. The low digit is negative. */
   public void testIntValuePositive3() {
-    byte aBytes[] = {56, 13, 78, -12, -5, 56, 100};
+    byte[] aBytes = {56, 13, 78, -12, -5, 56, 100};
     int sign = 1;
     int resInt = -184862620;
     int aNumber = new BigInteger(sign, aBytes).intValue();
@@ -575,7 +575,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a number to a negative long value The BigInteger is longer than int. */
   public void testLongValueNegative1() {
-    byte aBytes[] = {12, -1, 100, -2, -76, -128, 45, 91, 3};
+    byte[] aBytes = {12, -1, 100, -2, -76, -128, 45, 91, 3};
     long result = -43630045168837885L;
     long aNumber = new BigInteger(aBytes).longValue();
     assertEquals(result, aNumber);
@@ -583,7 +583,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a number to a negative long value The number fits in a long. */
   public void testLongValueNegative2() {
-    byte aBytes[] = {-12, 56, 100, 45, -101, 45, 98};
+    byte[] aBytes = {-12, 56, 100, 45, -101, 45, 98};
     long result = -3315696807498398L;
     long aNumber = new BigInteger(aBytes).longValue();
     assertEquals(result, aNumber);
@@ -591,7 +591,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a BigInteger to a positive long value The BigInteger is longer than int. */
   public void testLongValuePositive1() {
-    byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, 120, -34, -12, 45, 98};
+    byte[] aBytes = {12, 56, 100, -2, -76, 89, 45, 91, 3, 120, -34, -12, 45, 98};
     long result = 3268209772258930018L;
     long aNumber = new BigInteger(aBytes).longValue();
     assertEquals(result, aNumber);
@@ -599,7 +599,7 @@ public class BigIntegerConvertTest extends EmulTestBase {
 
   /** Convert a number to a positive long value The number fits in a long. */
   public void testLongValuePositive2() {
-    byte aBytes[] = {12, 56, 100, 18, -105, 34, -18, 45};
+    byte[] aBytes = {12, 56, 100, 18, -105, 34, -18, 45};
     long result = 880563758158769709L;
     long aNumber = new BigInteger(aBytes).longValue();
     assertEquals(result, aNumber);
@@ -635,8 +635,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfIntegerMax() {
     long longVal = Integer.MAX_VALUE;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {127, -1, -1, -1};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {127, -1, -1, -1};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);
@@ -648,8 +648,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfIntegerMin() {
     long longVal = Integer.MIN_VALUE;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {-128, 0, 0, 0};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {-128, 0, 0, 0};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);
@@ -661,8 +661,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfLongMax() {
     long longVal = Long.MAX_VALUE;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {127, -1, -1, -1, -1, -1, -1, -1};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {127, -1, -1, -1, -1, -1, -1, -1};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);
@@ -674,8 +674,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfLongMin() {
     long longVal = Long.MIN_VALUE;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {-128, 0, 0, 0, 0, 0, 0, 0};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {-128, 0, 0, 0, 0, 0, 0, 0};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);
@@ -687,8 +687,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfLongNegative1() {
     long longVal = -268209772258930018L;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {-4, 71, 32, -94, 23, 55, -46, -98};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {-4, 71, 32, -94, 23, 55, -46, -98};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);
@@ -703,8 +703,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfLongNegative2() {
     long longVal = -58930018L;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {-4, 124, -52, -98};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {-4, 124, -52, -98};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);
@@ -716,8 +716,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfLongPositive1() {
     long longVal = 268209772258930018L;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {3, -72, -33, 93, -24, -56, 45, 98};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {3, -72, -33, 93, -24, -56, 45, 98};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);
@@ -732,8 +732,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfLongPositive2() {
     long longVal = 58930018L;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {3, -125, 51, 98};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {3, -125, 51, 98};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);
@@ -745,8 +745,8 @@ public class BigIntegerConvertTest extends EmulTestBase {
   public void testValueOfLongZero() {
     long longVal = 0L;
     BigInteger aNumber = BigInteger.valueOf(longVal);
-    byte rBytes[] = {0};
-    byte resBytes[] = new byte[rBytes.length];
+    byte[] rBytes = {0};
+    byte[] resBytes = new byte[rBytes.length];
     resBytes = aNumber.toByteArray();
     for (int i = 0; i < resBytes.length; i++) {
       assertEquals("Byte " + i, rBytes[i], resBytes[i]);

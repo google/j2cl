@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2013, Daniel Murphy
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 	* Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  * 	* Redistributions in binary form must reproduce the above copyright notice,
  * 	  this list of conditions and the following disclaimer in the documentation
  * 	  and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -83,11 +83,11 @@ public class ConstantVolumeJoint extends Joint {
       distanceJoints = new DistanceJoint[bodies.length];
       for (int i = 0; i < targetLengths.length; ++i) {
         final int next = (i == targetLengths.length - 1) ? 0 : i + 1;
-        djd.frequencyHz = def.frequencyHz;// 20.0f;
-        djd.dampingRatio = def.dampingRatio;// 50.0f;
+        djd.frequencyHz = def.frequencyHz; // 20.0f;
+        djd.dampingRatio = def.dampingRatio; // 50.0f;
         djd.collideConnected = def.collideConnected;
-        djd.initialize(bodies[i], bodies[next], bodies[i].getWorldCenter(),
-            bodies[next].getWorldCenter());
+        djd.initialize(
+            bodies[i], bodies[next], bodies[i].getWorldCenter(), bodies[next].getWorldCenter());
         distanceJoints[i] = (DistanceJoint) world.createJoint(djd);
       }
     } else {
@@ -154,8 +154,9 @@ public class ConstantVolumeJoint extends Joint {
     boolean done = true;
     for (int i = 0; i < bodies.length; ++i) {
       final int next = (i == bodies.length - 1) ? 0 : i + 1;
-      delta.set(toExtrude * (normals[i].x + normals[next].x), toExtrude
-          * (normals[i].y + normals[next].y));
+      delta.set(
+          toExtrude * (normals[i].x + normals[next].x),
+          toExtrude * (normals[i].y + normals[next].y));
       // sumdeltax += dx;
       float normSqrd = delta.lengthSquared();
       if (normSqrd > Settings.maxLinearCorrection * Settings.maxLinearCorrection) {
@@ -216,7 +217,7 @@ public class ConstantVolumeJoint extends Joint {
 
     Velocity[] velocities = step.velocities;
     Position[] positions = step.positions;
-    final Vec2 d[] = pool.getVec2Array(bodies.length);
+    final Vec2[] d = pool.getVec2Array(bodies.length);
 
     for (int i = 0; i < bodies.length; ++i) {
       final int prev = (i == 0) ? bodies.length - 1 : i - 1;

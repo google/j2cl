@@ -31,7 +31,6 @@ ERROR_PRONE_SUPPRESSIONS = [
     "-Xep:DoNotCall:OFF",
     "-Xep:EqualsIncompatibleType:OFF",
     "-Xep:IdentityBinaryExpression:OFF",
-    "-Xep:MixedArrayDimensions:OFF",  # See go/lsc-mixedarraydimensions
     "-Xep:ReturnValueIgnored:OFF",
     "-Xep:SelfAssertion:OFF",
     "-Xep:SelfComparison:OFF",

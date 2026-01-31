@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2013, Daniel Murphy
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 	* Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  * 	* Redistributions in binary form must reproduce the above copyright notice,
  * 	  this list of conditions and the following disclaimer in the documentation
  * 	  and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -40,28 +40,24 @@ import org.jbox2d.pooling.arrays.Vec2Array;
  */
 public class PolygonShape extends Shape {
   /** Dump lots of debug information. */
-  private final static boolean m_debug = false;
+  private static final boolean m_debug = false;
 
-  /**
-   * Local position of the shape centroid in parent body frame.
-   */
+  /** Local position of the shape centroid in parent body frame. */
   public final Vec2 m_centroid = new Vec2();
 
   /**
    * The vertices of the shape. Note: use getVertexCount(), not m_vertices.length, to get number of
    * active vertices.
    */
-  public final Vec2 m_vertices[];
+  public final Vec2[] m_vertices;
 
   /**
    * The normals of the shape. Note: use getVertexCount(), not m_normals.length, to get number of
    * active normals.
    */
-  public final Vec2 m_normals[];
+  public final Vec2[] m_normals;
 
-  /**
-   * Number of active vertices in the shape.
-   */
+  /** Number of active vertices in the shape. */
   public int m_count;
 
   // pooling
@@ -102,10 +98,10 @@ public class PolygonShape extends Shape {
   /**
    * Create a convex hull from the given array of points. The count must be in the range [3,
    * Settings.maxPolygonVertices].
-   * 
+   *
    * @warning the points may be re-ordered, even if they form a convex polygon
    * @warning collinear points are handled but not removed. Collinear points may lead to poor
-   *          stacking behavior.
+   *     stacking behavior.
    */
   public final void set(final Vec2[] vertices, final int count) {
     set(vertices, count, null, null);
@@ -114,13 +110,13 @@ public class PolygonShape extends Shape {
   /**
    * Create a convex hull from the given array of points. The count must be in the range [3,
    * Settings.maxPolygonVertices]. This method takes an arraypool for pooling
-   * 
+   *
    * @warning the points may be re-ordered, even if they form a convex polygon
    * @warning collinear points are handled but not removed. Collinear points may lead to poor
-   *          stacking behavior.
+   *     stacking behavior.
    */
-  public final void set(final Vec2[] verts, final int num, final Vec2Array vecPool,
-      final IntArray intPool) {
+  public final void set(
+      final Vec2[] verts, final int num, final Vec2Array vecPool, final IntArray intPool) {
     assert (3 <= num && num <= Settings.maxPolygonVertices);
     if (num < 3) {
       setAsBox(1.0f, 1.0f);
@@ -216,7 +212,7 @@ public class PolygonShape extends Shape {
 
   /**
    * Build vertices to represent an axis-aligned box.
-   * 
+   *
    * @param hx the half-width.
    * @param hy the half-height.
    */
@@ -235,7 +231,7 @@ public class PolygonShape extends Shape {
 
   /**
    * Build vertices to represent an oriented box.
-   * 
+   *
    * @param hx the half-width.
    * @param hy the half-height.
    * @param center the center of the box in local coordinates.
@@ -333,7 +329,7 @@ public class PolygonShape extends Shape {
 
   /**
    * Get the vertex count.
-   * 
+   *
    * @return
    */
   public final int getVertexCount() {
@@ -342,7 +338,7 @@ public class PolygonShape extends Shape {
 
   /**
    * Get a vertex by index.
-   * 
+   *
    * @param index
    * @return
    */
@@ -352,8 +348,8 @@ public class PolygonShape extends Shape {
   }
 
   @Override
-  public final boolean raycast(RayCastOutput output, RayCastInput input, Transform xf,
-      int childIndex) {
+  public final boolean raycast(
+      RayCastOutput output, RayCastInput input, Transform xf, int childIndex) {
     final Rot xfq = xf.q;
     final Vec2 xfp = xf.p;
     float tempx, tempy;
@@ -555,7 +551,7 @@ public class PolygonShape extends Shape {
 
   /**
    * Validate convexity. This is a very time consuming operation.
-   * 
+   *
    * @return
    */
   public boolean validate() {

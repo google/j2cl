@@ -99,7 +99,7 @@ public class AbstractSequentialListTest extends EmulTestBase {
 
   public void testIteratorFunction() {
     List l = new AbstractSequentialListImpl<Integer>();
-    int firstFivePrimes[] = {2, 3, 5, 7, 11};
+    int[] firstFivePrimes = {2, 3, 5, 7, 11};
     for (int prime : firstFivePrimes) {
       l.add(new Integer(prime));
     }
