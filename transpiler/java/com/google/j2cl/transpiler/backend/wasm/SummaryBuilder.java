@@ -132,7 +132,7 @@ public final class SummaryBuilder {
   private int getTypeId(DeclaredTypeDescriptor typeDescriptor) {
     String typeName = environment.getTypeSignature(typeDescriptor);
     // Note that the IDs start from '1' to reserve '0' for NULL_TYPE.
-    return typeIdByTypeName.computeIfAbsent(typeName, x -> typeIdByTypeName.size() + 1);
+    return typeIdByTypeName.computeIfAbsent(typeName, unused -> typeIdByTypeName.size() + 1);
   }
 
   private JsInfo getJsInfo(Type type) {

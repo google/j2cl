@@ -329,7 +329,7 @@ public class WasmGenerationEnvironment {
         .filter(MethodDescriptor::isSideEffectFree)
         .collect(
             toImmutableMap(
-                this::getNoSideEffectWrapperFunctionName, Function.identity(), (a, b) -> a));
+                this::getNoSideEffectWrapperFunctionName, Function.identity(), (a, unused) -> a));
   }
 
   /** Returns methods that need a wasm function type declaration indexed by the name of the type. */
@@ -339,7 +339,7 @@ public class WasmGenerationEnvironment {
         .flatMap(t -> t.getMethods().stream())
         .map(Method::getDescriptor)
         .filter(MethodDescriptor::isPolymorphic)
-        .collect(toImmutableMap(this::getFunctionTypeName, Function.identity(), (a, b) -> a));
+        .collect(toImmutableMap(this::getFunctionTypeName, Function.identity(), (a, unused) -> a));
   }
 
   /** The data index for the array literals that can be emitted as data. */
