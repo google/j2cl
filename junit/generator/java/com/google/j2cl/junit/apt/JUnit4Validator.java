@@ -163,8 +163,17 @@ class JUnit4Validator extends BaseValidator {
     }
 
     if (TestingPredicates.IS_RETURNTYPE_A_THENABLE.test(executableElement)) {
-      // if we are an async test, we need the timeout attribute
-      if (timeout <= 0L) {
+      // if we are an async test, we need the timeout attribute.
+      // Tests in `kotlinx.coroutines.*` use the common declaration of `kotlin.Test`, which does not
+      // support timeouts. Therefore, these tests are exempt from timeout validation.
+      // The default timeout for async tests is set to 5s (see `JsUnitHelpers.java`). If in the
+      // future, other packages need exemptions, we should consider allowing per-package timeout
+      // specifications.
+      boolean isKotlinCoroutineTest =
+          executableElement.getEnclosingElement() instanceof TypeElement enclosingType
+              && enclosingType.getQualifiedName().toString().startsWith("kotlinx.coroutines.");
+
+      if (timeout <= 0L && !isKotlinCoroutineTest) {
         errorReporter.report(ErrorMessage.ASYNC_HAS_NO_TIMEOUT, executableElement);
         isValid = false;
       }

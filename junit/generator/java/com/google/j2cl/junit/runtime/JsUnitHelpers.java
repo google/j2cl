@@ -40,6 +40,10 @@ public final class JsUnitHelpers {
     if (thenable == null) {
       throw new IllegalStateException("Test returned null as its promise");
     }
+    if (timeout == 0) {
+      // Default timeout for async tests that are allowed to not specify timeout.
+      timeout = 5000;
+    }
     GoogTestCase.getActiveTestCase().promiseTimeout = timeout;
     return ((IThenable<?>) thenable);
   }
