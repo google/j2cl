@@ -23,6 +23,7 @@ import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.base.Predicates;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
@@ -170,6 +171,9 @@ import com.sun.tools.javac.tree.JCTree.JCWhileLoop;
 import com.sun.tools.javac.tree.JCTree.JCYield;
 import com.sun.tools.javac.tree.JCTree.Tag;
 import java.io.IOException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -774,7 +778,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   /** Javac does not always report the end position of a construct. */
   private int guessEndPosition(JCTree node) {
     int startCharacterPosition = node.getStartPosition();
-    int endCharacterPosition = node.getEndPosition(javacUnit.endPositions);
+    int endCharacterPosition = getEndPosition(node, javacUnit);
     if (endCharacterPosition == -1 || endCharacterPosition == startCharacterPosition) {
       try {
         // Scan the source file for the end of an identifier.
@@ -787,6 +791,47 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       }
     }
     return endCharacterPosition;
+  }
+
+  private static int getEndPosition(JCTree tree, JCCompilationUnit unit) {
+    // TODO: remove method handles once the minimum supported JDK is JDK 27+
+    try {
+      return (int) GET_END_POS_HANDLE.invokeExact(tree, unit);
+    } catch (Throwable e) {
+      Throwables.throwIfUnchecked(e);
+      throw new AssertionError(e);
+    }
+  }
+
+  private static final MethodHandle GET_END_POS_HANDLE = getEndPosMethodHandle();
+
+  private static MethodHandle getEndPosMethodHandle() {
+    MethodHandles.Lookup lookup = MethodHandles.lookup();
+    try {
+      // JDK versions after https://bugs.openjdk.org/browse/JDK-8372948
+      return MethodHandles.dropArguments(
+          lookup.findVirtual(
+              JCTree.class, "getEndPosition", java.lang.invoke.MethodType.methodType(int.class)),
+          1,
+          JCCompilationUnit.class);
+    } catch (ReflectiveOperationException e1) {
+      // JDK versions before https://bugs.openjdk.org/browse/JDK-8372948
+      try {
+        Class<?> endPosTableClass = Class.forName("com.sun.tools.javac.tree.EndPosTable");
+        return MethodHandles.filterArguments(
+            lookup.findVirtual(
+                JCTree.class,
+                "getEndPosition",
+                java.lang.invoke.MethodType.methodType(int.class, endPosTableClass)),
+            1,
+            lookup
+                .findVarHandle(JCCompilationUnit.class, "endPositions", endPosTableClass)
+                .toMethodHandle(VarHandle.AccessMode.GET));
+      } catch (ReflectiveOperationException e2) {
+        e2.addSuppressed(e1);
+        throw new LinkageError(e2.getMessage(), e2);
+      }
+    }
   }
 
   private SourcePosition getNamePosition(JCTree node) {
