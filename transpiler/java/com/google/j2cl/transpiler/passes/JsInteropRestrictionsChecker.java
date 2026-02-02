@@ -2184,7 +2184,8 @@ public class JsInteropRestrictionsChecker {
               method.getReadableDescription());
       case GETTER -> {
         TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
-        if (startsWithCamelCase(methodDescriptor.getName(), "is")
+        if (methodDescriptor.getJsInfo().getJsName() == null
+            && startsWithCamelCase(methodDescriptor.getName(), "is")
             && !TypeDescriptors.isPrimitiveBoolean(returnTypeDescriptor)) {
           problems.error(
               method.getSourcePosition(),

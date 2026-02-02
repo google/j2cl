@@ -280,6 +280,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty abstract void setX(int x);
               @JsProperty abstract boolean isY();
               @JsProperty abstract void setY(boolean y);
+              // Getter style with customized name becomes non getter style
+              @JsProperty(name = "isEnabled") abstract int isEnabled();
             }
             """)
         .assertNoWarnings();
