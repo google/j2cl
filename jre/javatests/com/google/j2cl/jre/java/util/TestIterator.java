@@ -81,11 +81,8 @@ abstract class TestIterator extends TestObject {
 
     assertTrue("hasNext() should return true for at least one element", iter.hasNext());
 
-    try {
-      iter.next();
-    } catch (NoSuchElementException e) {
-      fail("Full iterators must have at least one element");
-    }
+    // Full iterators must have at least one element.
+    iter.next();
 
     while (iter.hasNext()) {
       iter.next();

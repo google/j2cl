@@ -77,12 +77,8 @@ public class OptionalIntTest extends EmulTestBase {
     // non-empty case
     assertThrows(NullPointerException.class, () -> present.ifPresent(null));
 
-    try {
-      Object reference = present.orElseThrow(null);
-      assertEquals(REFERENCE, reference);
-    } catch (NullPointerException e) {
-      fail("Optional must not throw NullPointerException if supplier is null");
-    }
+    Object reference = present.orElseThrow(null);
+    assertEquals(REFERENCE, reference);
   }
 
   public void testIfPresent() {

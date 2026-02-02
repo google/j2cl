@@ -204,11 +204,7 @@ public class ArrayDequeTest extends TestCollection {
     Iterator<Object> it = deque.iterator();
     it.next();
     deque.removeFirst();
-    try {
-      it.next();
-    } catch (ConcurrentModificationException e) {
-      fail();
-    }
+    it.next();
     deque.removeLast();
     try {
       it.next();
@@ -229,11 +225,7 @@ public class ArrayDequeTest extends TestCollection {
     it = deque.iterator();
     it.next();
     deque.addFirst(new Object());
-    try {
-      it.next();
-    } catch (ConcurrentModificationException e) {
-      fail();
-    }
+    it.next();
     deque.addLast(new Object());
     try {
       it.next();
@@ -248,11 +240,7 @@ public class ArrayDequeTest extends TestCollection {
     it.next();
     it.next();
     deque.removeFirst();
-    try {
-      it.remove();
-    } catch (ConcurrentModificationException e) {
-      fail();
-    }
+    it.remove();
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
     it = deque.iterator();
