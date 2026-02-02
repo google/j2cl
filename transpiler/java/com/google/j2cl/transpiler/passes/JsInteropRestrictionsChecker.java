@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.MoreCollectors.onlyElement;
+import static com.google.j2cl.common.StringUtils.startsWithCamelCase;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangRecord;
 
 import com.google.common.base.Predicate;
@@ -2183,7 +2184,7 @@ public class JsInteropRestrictionsChecker {
               method.getReadableDescription());
       case GETTER -> {
         TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
-        if (methodDescriptor.getName().startsWith("is")
+        if (startsWithCamelCase(methodDescriptor.getName(), "is")
             && !TypeDescriptors.isPrimitiveBoolean(returnTypeDescriptor)) {
           problems.error(
               method.getSourcePosition(),

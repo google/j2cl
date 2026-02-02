@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.j2cl.common.StringUtils.startsWithCamelCase;
+
 import java.beans.Introspector;
 import javax.annotation.Nullable;
 
@@ -72,11 +74,5 @@ public enum JsMemberType {
 
   public String computeJsName(MemberDescriptor memberDescriptor) {
     return memberDescriptor.getName();
-  }
-
-  private static boolean startsWithCamelCase(String string, String prefix) {
-    return string.length() > prefix.length()
-        && string.startsWith(prefix)
-        && Character.isUpperCase(string.charAt(prefix.length()));
   }
 }
