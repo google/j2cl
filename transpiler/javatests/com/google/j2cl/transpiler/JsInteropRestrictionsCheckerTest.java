@@ -260,8 +260,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public interface Buggy {
               @JsProperty(name = "x") int x();
               @JsProperty(name = "x") void x(int x);
-              @JsProperty(name = "issuer") int z();
-              @JsProperty(name = "issuer") void z(int z);
+              @JsProperty(name = "issuer") int issuer();
+              @JsProperty(name = "issuer") void issuer(int issuer);
             }
             """)
         .assertNoWarnings();
