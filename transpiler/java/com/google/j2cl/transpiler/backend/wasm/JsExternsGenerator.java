@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.findSuperTypeWithJsPrototype;
 import static java.util.stream.Collectors.joining;
 
 import com.google.j2cl.common.OutputUtils.Output;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.Type;
@@ -57,7 +59,7 @@ final class JsExternsGenerator {
     }
     library
         .streamTypes()
-        .filter(this::shouldGenerateExtern)
+        .filter(t -> shouldGenerateExtern(t.getTypeDescriptor()))
         .forEach(
             type -> {
               generateExtern(type);
@@ -65,13 +67,16 @@ final class JsExternsGenerator {
             });
   }
 
-  private boolean shouldGenerateExtern(Type type) {
+  private boolean shouldGenerateExtern(DeclaredTypeDescriptor typeDescriptor) {
     // TODO(b/459918329): Support interfaces.
-    if (type.isInterface()) {
+    if (typeDescriptor.isInterface()) {
       return false;
     }
 
-    return WasmGenerationEnvironment.isJsExport(type.getDeclaration());
+    // Generate externs if the type has a JS prototype or if the type has a supertype with a JS
+    // prototype. In practice, because j.l.Object has a JS prototype, this nearly all types (some
+    // exclusions such as interfaces and native types)
+    return findSuperTypeWithJsPrototype(typeDescriptor.getTypeDeclaration()) != null;
   }
 
   private void generateExtern(Type type) {
@@ -88,7 +93,7 @@ final class JsExternsGenerator {
 
   /** Appends the constructor extern for the given type. */
   private void appendConstructor(SourceBuilder sb, Type type) {
-    String jsDoc = closureEnvironment.getJsDocForType(type);
+    String jsDoc = closureEnvironment.getJsDocForType(type, /* isWasmExtern= */ true);
     Method constructor =
         type.getMethods().stream()
             .filter(m -> m.getDescriptor().isJsConstructor())

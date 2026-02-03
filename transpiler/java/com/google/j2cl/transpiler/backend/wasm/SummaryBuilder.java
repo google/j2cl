@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.j2cl.common.StringUtils.escapeAsWtf16;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.hasJsPrototype;
 import static java.util.function.Predicate.not;
 
 import com.google.common.collect.ImmutableList;
@@ -117,7 +118,7 @@ public final class SummaryBuilder {
       summary.addInterfaces(typeHierarchyInfoBuilder.build());
     } else {
       if (environment.isCustomDescriptorsJsInteropEnabled()
-          && WasmGenerationEnvironment.isJsExport(type.getDeclaration())) {
+          && hasJsPrototype(type.getDeclaration())) {
         typeHierarchyInfoBuilder.setJsInfo(getJsInfo(type));
       }
 

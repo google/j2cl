@@ -534,16 +534,34 @@ public class WasmGenerationEnvironment {
   }
 
   /**
-   * Returns true if the given type should be exposed to JS with a JS prototype in the descriptor
-   * and configureAll.
+   * Returns true if the given type should have a JS prototype generated and configured in
+   * configureAll.
    */
-  public static boolean isJsExport(TypeDeclaration typeDeclaration) {
-    // TODO(b/472552019): Determine what types should be exported and remove any test types here.
-    return typeDeclaration.getQualifiedSourceName().equals("java.lang.Object")
-        || typeDeclaration.getQualifiedSourceName().equals("jstype.SomeJsType")
-        || typeDeclaration
-            .getQualifiedSourceName()
-            .equals("wasmcustomdescriptorsjsinterop.SomeJsType");
+  public static boolean hasJsPrototype(TypeDeclaration typeDeclaration) {
+    return !typeDeclaration.isNative()
+        && !typeDeclaration.isInterface()
+        && (typeDeclaration.getDeclaredMethodDescriptors().stream()
+                .anyMatch(methodDescriptor -> methodDescriptor.isJsMember())
+            || typeDeclaration.getDeclaredFieldDescriptors().stream()
+                .anyMatch(fieldDescriptor -> fieldDescriptor.isJsMember()));
+  }
+
+  /**
+   * Returns the first supertype of the given type that has a JS prototype, including the type
+   * itself.
+   *
+   * <p>If no supertype has a JS prototype, returns null.
+   */
+  @Nullable
+  public static TypeDeclaration findSuperTypeWithJsPrototype(TypeDeclaration typeDeclaration) {
+    TypeDeclaration superTypeWithJsPrototype = typeDeclaration;
+    while (superTypeWithJsPrototype != null) {
+      if (hasJsPrototype(superTypeWithJsPrototype)) {
+        return superTypeWithJsPrototype;
+      }
+      superTypeWithJsPrototype = superTypeWithJsPrototype.getSuperTypeDeclaration();
+    }
+    return null;
   }
 
   /** Returns the name of the global that stores the JS prototype for JsTypes. */
