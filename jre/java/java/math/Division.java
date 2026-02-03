@@ -68,11 +68,11 @@ class Division {
    * @param bLength the divisor's length
    * @return the remainder
    */
-  static int[] divide(int quot[], int quotLength, int a[], int aLength, int b[], int bLength) {
+  static int[] divide(int[] quot, int quotLength, int[] a, int aLength, int[] b, int bLength) {
 
-    int normA[] = new int[aLength + 1]; // the normalized dividend
+    int[] normA = new int[aLength + 1]; // the normalized dividend
     // an extra byte is needed for correct shift
-    int normB[] = new int[bLength + 1]; // the normalized divisor;
+    int[] normB = new int[bLength + 1]; // the normalized divisor;
     int normBLength = bLength;
     /*
      * Step D1: normalize a and b and put the results to a1 and b1 the
@@ -196,8 +196,8 @@ class Division {
     }
     int quotientLength = valLen;
     int quotientSign = ((valSign == divisorSign) ? 1 : -1);
-    int quotientDigits[] = new int[quotientLength];
-    int remainderDigits[];
+    int[] quotientDigits = new int[quotientLength];
+    int[] remainderDigits;
     remainderDigits =
         new int[] {Division.divideArrayByInt(quotientDigits, valDigits, valLen, divisor)};
     BigInteger result0 = new BigInteger(quotientSign, quotientLength, quotientDigits);
@@ -217,7 +217,7 @@ class Division {
    * @param divisor the divisor
    * @return remainder
    */
-  static int divideArrayByInt(int dest[], int src[], final int srcLength, final int divisor) {
+  static int divideArrayByInt(int[] dest, int[] src, final int srcLength, final int divisor) {
 
     long rem = 0;
     long bLong = divisor & 0xffffffffL;
@@ -342,13 +342,13 @@ class Division {
    * @see #monPro(BigInteger, BigInteger, BigInteger, long)
    * @see #monSquare(BigInteger, BigInteger, long)
    */
-  static BigInteger finalSubtraction(int res[], BigInteger modulus) {
+  static BigInteger finalSubtraction(int[] res, BigInteger modulus) {
 
     // skipping leading zeros
     int modulusLen = modulus.numberLength;
     boolean doSub = res[modulusLen] != 0;
     if (!doSub) {
-      int modulusDigits[] = modulus.digits;
+      int[] modulusDigits = modulus.digits;
       doSub = true;
       for (int i = modulusLen - 1; i >= 0; i--) {
         if (res[i] != modulusDigits[i]) {
@@ -492,9 +492,9 @@ class Division {
     // PRE: a is coprime with modulo, a < modulo
 
     int max = Math.max(a.numberLength, modulo.numberLength);
-    int uDigits[] = new int[max + 1]; // enough place to make all the inplace
+    int[] uDigits = new int[max + 1]; // enough place to make all the inplace
     // operation
-    int vDigits[] = new int[max + 1];
+    int[] vDigits = new int[max + 1];
     System.arraycopy(modulo.digits, 0, uDigits, 0, modulo.numberLength);
     System.arraycopy(a.digits, 0, vDigits, 0, a.numberLength);
     BigInteger u = new BigInteger(modulo.sign, modulo.numberLength, uDigits);
@@ -712,7 +712,7 @@ class Division {
    */
   static BigInteger monPro(BigInteger a, BigInteger b, BigInteger modulus, int n2) {
     int modulusLen = modulus.numberLength;
-    int res[] = new int[(modulusLen << 1) + 1];
+    int[] res = new int[(modulusLen << 1) + 1];
     Multiplication.multArraysPAP(
         a.digits,
         Math.min(modulusLen, a.numberLength),
@@ -733,7 +733,7 @@ class Division {
    * @param c the multiplier of b
    * @return the carry element of subtraction
    */
-  static int multiplyAndSubtract(int a[], int start, int b[], int bLen, int c) {
+  static int multiplyAndSubtract(int[] a, int start, int[] b, int bLen, int c) {
     long carry0 = 0;
     long carry1 = 0;
 
@@ -833,7 +833,7 @@ class Division {
    * @param divisor the divisor
    * @return remainder
    */
-  static int remainderArrayByInt(int src[], final int srcLength, final int divisor) {
+  static int remainderArrayByInt(int[] src, final int srcLength, final int divisor) {
 
     long result = 0;
 
@@ -858,7 +858,7 @@ class Division {
   static BigInteger slidingWindow(
       BigInteger x2, BigInteger a2, BigInteger exponent, BigInteger modulus, int n2) {
     // fill odd low pows of a2
-    BigInteger pows[] = new BigInteger[8];
+    BigInteger[] pows = new BigInteger[8];
     BigInteger res = x2;
     int lowexp;
     BigInteger x3;

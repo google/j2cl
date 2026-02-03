@@ -135,7 +135,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
    * An array with the first <code>BigInteger</code> scaled by zero. ( <code>[0,0],[1,0],...,[10,0]
    * </code>).
    */
-  private static final BigDecimal BI_SCALED_BY_ZERO[] = new BigDecimal[BI_SCALED_BY_ZERO_LENGTH];
+  private static final BigDecimal[] BI_SCALED_BY_ZERO = new BigDecimal[BI_SCALED_BY_ZERO_LENGTH];
 
   /** An array filled with characters <code>'0'</code>. */
   private static final char[] CH_ZEROS = new char[100];
@@ -200,7 +200,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
    * An array with powers of five that fit in the type <code>double</code> ( <code>5^0,5^1,...,5^27
    * </code>).
    */
-  private static final BigInteger FIVE_POW[];
+  private static final BigInteger[] FIVE_POW;
 
   /** The double closest to <code>Math.log(2.0d)</code>. */
   private static final double LOG2 = 0.6931471805599453d;
@@ -218,13 +218,13 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
    * An array with powers of ten that fit in the type <code>double</code> ( <code>
    * 10^0,10^1,...,10^18</code>).
    */
-  private static final BigInteger TEN_POW[];
+  private static final BigInteger[] TEN_POW;
 
   /**
    * An array with the zero number scaled by the first positive scales. ( <code>
    * 0*10^0, 0*10^1, ..., 0*10^10</code>).
    */
-  private static final BigDecimal ZERO_SCALED_BY[] = new BigDecimal[11];
+  private static final BigDecimal[] ZERO_SCALED_BY = new BigDecimal[11];
 
   static {
     // To fill all static arrays.
@@ -1003,7 +1003,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
     BigInteger p = this.getUnscaledValue();
     BigInteger q = divisor.getUnscaledValue();
     BigInteger gcd; // greatest common divisor between 'p' and 'q'
-    BigInteger quotAndRem[];
+    BigInteger[] quotAndRem;
     double diffScale = scale - divisor.scale;
     int newScale; // the new scale for final quotient
     int k; // number of factors "2" in 'q'
@@ -1185,7 +1185,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
     int i = 1; // index
     int lastPow = TEN_POW.length - 1; // last power of ten
     BigInteger integerQuot; // for temporal results
-    BigInteger quotAndRem[] = {getUnscaledValue()};
+    BigInteger[] quotAndRem = {getUnscaledValue()};
     // In special cases it reduces the problem to call the dual method
     if ((mc.getPrecision() == 0) || (this.isZero()) || (divisor.isZero())) {
       return this.divide(divisor);
@@ -1259,7 +1259,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
    * @see #remainder
    */
   public BigDecimal[] divideAndRemainder(BigDecimal divisor) {
-    BigDecimal quotAndRem[] = new BigDecimal[2];
+    BigDecimal[] quotAndRem = new BigDecimal[2];
 
     quotAndRem[0] = this.divideToIntegralValue(divisor);
     quotAndRem[1] = this.subtract(quotAndRem[0].multiply(divisor));
@@ -1282,7 +1282,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
    * @see #remainder
    */
   public BigDecimal[] divideAndRemainder(BigDecimal divisor, MathContext mc) {
-    BigDecimal quotAndRem[] = new BigDecimal[2];
+    BigDecimal[] quotAndRem = new BigDecimal[2];
 
     quotAndRem[0] = this.divideToIntegralValue(divisor, mc);
     quotAndRem[1] = this.subtract(quotAndRem[0].multiply(divisor));
@@ -1302,7 +1302,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
   public BigDecimal divideToIntegralValue(BigDecimal divisor) {
     BigInteger integralValue; // the integer of result
     BigInteger powerOfTen; // some power of ten
-    BigInteger quotAndRem[] = {getUnscaledValue()};
+    BigInteger[] quotAndRem = {getUnscaledValue()};
     double newScale = this.scale - divisor.scale;
     double tempScale = 0;
     int i = 1;
@@ -1372,7 +1372,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>, Serial
     double diffScale = this.scale - divisor.scale;
     double newScale = diffScale;
     double quotPrecision = diffPrecision - diffScale + 1;
-    BigInteger quotAndRem[] = new BigInteger[2];
+    BigInteger[] quotAndRem = new BigInteger[2];
     // In special cases it call the dual method
     if ((mcPrecision == 0) || (this.isZero()) || (divisor.isZero())) {
       return this.divideToIntegralValue(divisor);

@@ -56,7 +56,7 @@ class Elementary {
    * @return
    */
   static BigInteger add(BigInteger op1, BigInteger op2) {
-    int resDigits[];
+    int[] resDigits;
     int resSign;
     int op1Sign = op1.sign;
     int op2Sign = op2.sign;
@@ -234,7 +234,7 @@ class Elementary {
    *
    * @return a possible generated carry (0 or 1)
    */
-  static int inplaceAdd(int a[], final int aSize, final int addend) {
+  static int inplaceAdd(int[] a, final int aSize, final int addend) {
     long carry = addend & 0xFFFFFFFFL;
 
     for (int i = 0; (carry != 0) && (i < aSize); i++) {
@@ -268,7 +268,7 @@ class Elementary {
    */
   static BigInteger subtract(BigInteger op1, BigInteger op2) {
     int resSign;
-    int resDigits[];
+    int[] resDigits;
     int op1Sign = op1.sign;
     int op2Sign = op2.sign;
 
@@ -324,15 +324,15 @@ class Elementary {
    *
    * @return {@code a + b}
    */
-  private static int[] add(int a[], int aSize, int b[], int bSize) {
+  private static int[] add(int[] a, int aSize, int[] b, int bSize) {
     // PRE: a[] >= b[]
-    int res[] = new int[aSize + 1];
+    int[] res = new int[aSize + 1];
     add(res, a, aSize, b, bSize);
     return res;
   }
 
   /** Performs {@code res = a + b}. */
-  private static void add(int res[], int a[], int aSize, int b[], int bSize) {
+  private static void add(int[] res, int[] a, int aSize, int[] b, int bSize) {
     // PRE: a.length < max(aSize, bSize)
 
     int i;
@@ -370,7 +370,7 @@ class Elementary {
   }
 
   /** Performs {@code res = b - a}. */
-  private static void inverseSubtract(int res[], int a[], int aSize, int b[], int bSize) {
+  private static void inverseSubtract(int[] res, int[] a, int aSize, int[] b, int bSize) {
     int i;
     long borrow = 0;
     if (aSize < bSize) {
@@ -404,9 +404,9 @@ class Elementary {
    *
    * @return {@code a - b}
    */
-  private static int[] subtract(int a[], int aSize, int b[], int bSize) {
+  private static int[] subtract(int[] a, int aSize, int[] b, int bSize) {
     // PRE: a[] >= b[]
-    int res[] = new int[aSize];
+    int[] res = new int[aSize];
     subtract(res, a, aSize, b, bSize);
     return res;
   }
@@ -415,7 +415,7 @@ class Elementary {
    * Performs {@code res = a - b}. It is assumed the magnitude of a is not less than the magnitude
    * of b.
    */
-  private static void subtract(int res[], int a[], int aSize, int b[], int bSize) {
+  private static void subtract(int[] res, int[] a, int aSize, int[] b, int bSize) {
     // PRE: a[] >= b[]
     int i;
     long borrow = 0;

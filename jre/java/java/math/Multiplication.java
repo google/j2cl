@@ -41,7 +41,7 @@ class Multiplication {
    * An array with the first powers of five in {@code BigInteger} version. ( {@code
    * 5^0,5^1,...,5^31})
    */
-  static final BigInteger bigFivePows[] = new BigInteger[32];
+  static final BigInteger[] bigFivePows = new BigInteger[32];
 
   /**
    * An array with the first powers of ten in {@code BigInteger} version. ( {@code
@@ -50,7 +50,7 @@ class Multiplication {
   static final BigInteger[] bigTenPows = new BigInteger[32];
 
   /** An array with powers of five that fit in the type {@code int}. ({@code 5^0,5^1,...,5^13}) */
-  static final int fivePows[] = {
+  static final int[] fivePows = {
     1,
     5,
     25,
@@ -68,7 +68,7 @@ class Multiplication {
   };
 
   /** An array with powers of ten that fit in the type {@code int}. ({@code 10^0,10^1,...,10^9}) */
-  static final int tenPows[] = {
+  static final int[] tenPows = {
     1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
   };
 
@@ -188,7 +188,7 @@ class Multiplication {
    * @param factor the multiplier
    * @return the top digit of production
    */
-  static int multiplyByInt(int a[], final int aSize, final int factor) {
+  static int multiplyByInt(int[] a, final int aSize, final int factor) {
     return multiplyByInt(a, a, aSize, factor);
   }
 
@@ -217,7 +217,7 @@ class Multiplication {
     }
     // Common case
     int resLength = aNumberLength + 1;
-    int resDigits[] = new int[resLength];
+    int[] resDigits = new int[resLength];
 
     resDigits[aNumberLength] = multiplyByInt(resDigits, aDigits, aNumberLength, factor);
     BigInteger result = new BigInteger(resSign, resLength, resDigits);
@@ -342,7 +342,7 @@ class Multiplication {
     }
     int[] aDigits = a.digits;
     int[] bDigits = b.digits;
-    int resDigits[] = new int[resLength];
+    int[] resDigits = new int[resLength];
     // Common case
     multArraysPAP(aDigits, aLen, bDigits, bLen, resDigits);
     BigInteger result = new BigInteger(resSign, resLength, resDigits);
@@ -350,7 +350,7 @@ class Multiplication {
     return result;
   }
 
-  static void multPAP(int a[], int b[], int t[], int aLen, int bLen) {
+  static void multPAP(int[] a, int[] b, int[] t, int aLen, int bLen) {
     if (a == b && aLen == bLen) {
       square(a, aLen, t);
       return;
@@ -511,7 +511,7 @@ class Multiplication {
    * @param factor the multiplier
    * @return the top digit of production
    */
-  private static int multiplyByInt(int res[], int a[], final int aSize, final int factor) {
+  private static int multiplyByInt(int[] res, int[] a, final int aSize, final int factor) {
     long carry = 0;
     for (int i = 0; i < aSize; i++) {
       carry = unsignedMultAddAdd(a[i], factor, (int) carry, 0);

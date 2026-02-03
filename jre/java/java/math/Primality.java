@@ -61,7 +61,7 @@ class Primality {
   };
 
   /** All prime numbers with bit length lesser than 10 bits. */
-  private static final int primes[] = {
+  private static final int[] primes = {
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
     101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193,
     197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307,
@@ -74,7 +74,7 @@ class Primality {
   };
 
   /** All {@code BigInteger} prime numbers with bit length lesser than 8 bits. */
-  private static final BigInteger BIprimes[] = new BigInteger[primes.length];
+  private static final BigInteger[] BIprimes = new BigInteger[primes.length];
 
   static {
     // To initialize the dual table of BigInteger primes
@@ -94,7 +94,7 @@ class Primality {
     // PRE: bitLength >= 2;
     // For small numbers get a random prime from the prime table
     if (bitLength <= 10) {
-      int rp[] = offsetPrimes[bitLength];
+      int[] rp = offsetPrimes[bitLength];
       return BIprimes[rp[0] + rnd.nextInt(rp[1])];
     }
     int shiftCount = (-bitLength) & 31;
@@ -165,8 +165,8 @@ class Primality {
     int i, j;
     int certainty;
     int gapSize = 1024; // for searching of the next probable prime number
-    int modules[] = new int[primes.length];
-    boolean isDivisible[] = new boolean[gapSize];
+    int[] modules = new int[primes.length];
+    boolean[] isDivisible = new boolean[gapSize];
     BigInteger startPoint;
     BigInteger probPrime;
     // If n < "last prime of table" searches next prime in the table

@@ -142,7 +142,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>, Serial
     }
     int intCount = exp >> 5;
     int bitN = exp & 31;
-    int resDigits[] = new int[intCount + 1];
+    int[] resDigits = new int[intCount + 1];
     resDigits[intCount] = 1 << bitN;
     return new BigInteger(1, intCount + 1, resDigits);
   }
@@ -213,7 +213,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>, Serial
    *
    * <p>TODO(jat): consider changing to 24-bit integers for better performance in browsers.
    */
-  int digits[];
+  int[] digits;
 
   /** The length of this in measured in ints. Can be less than digits.length(). */
   int numberLength;
@@ -397,7 +397,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>, Serial
    * @param signum The sign of the number represented by {@code digits}
    * @param digits The magnitude of the number
    */
-  BigInteger(int signum, int digits[]) {
+  BigInteger(int signum, int[] digits) {
     if (digits.length == 0) {
       sign = 0;
       numberLength = 1;
@@ -605,7 +605,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>, Serial
       return ZERO;
     }
     int resLength = thisLen - divisorLen + 1;
-    int resDigits[] = new int[resLength];
+    int[] resDigits = new int[resLength];
     int resSign = ((thisSign == divisorSign) ? 1 : -1);
     if (divisorLen == 1) {
       Division.divideArrayByInt(resDigits, digits, thisLen, divisor.digits[0]);
@@ -653,8 +653,8 @@ public class BigInteger extends Number implements Comparable<BigInteger>, Serial
     int quotientLength = thisLen - divisorLen + 1;
     int remainderLength = divisorLen;
     int quotientSign = ((thisSign == divisorSign) ? 1 : -1);
-    int quotientDigits[] = new int[quotientLength];
-    int remainderDigits[] =
+    int[] quotientDigits = new int[quotientLength];
+    int[] remainderDigits =
         Division.divide(
             quotientDigits, quotientLength, thisDigits, thisLen, divisorDigits, divisorLen);
     BigInteger result0 = new BigInteger(quotientSign, quotientLength, quotientDigits);
@@ -1112,7 +1112,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>, Serial
       return this;
     }
     int resLength = divisorLen;
-    int resDigits[] = new int[resLength];
+    int[] resDigits = new int[resLength];
     if (resLength == 1) {
       resDigits[0] = Division.remainderArrayByInt(digits, thisLen, divisor.digits[0]);
     } else {

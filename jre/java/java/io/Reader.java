@@ -41,7 +41,7 @@ public abstract class Reader {
 
   /** Reads a single character, or -1 if we are at the end of the stream. */
   public int read() throws IOException {
-    char chr[] = new char[1];
+    char[] chr = new char[1];
     return (read(chr) == -1) ? -1 : chr[0];
   }
 

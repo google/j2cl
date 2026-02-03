@@ -1274,7 +1274,7 @@ public class Collections {
         swapImpl(list, i, rnd.nextInt(i + 1));
       }
     } else {
-      Object arr[] = list.toArray();
+      Object[] arr = list.toArray();
       for (int i = arr.length - 1; i >= 1; i--) {
         swapImpl(arr, i, rnd.nextInt(i + 1));
       }

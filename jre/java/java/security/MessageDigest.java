@@ -24,7 +24,7 @@ public abstract class MessageDigest extends MessageDigestSpi {
   private static class Md5Digest extends MessageDigest {
 
     // 16 * 4 bytes
-    static byte padding[] = {
+    static byte[] padding = {
       (byte) 0x80,
       0,
       0,
@@ -270,7 +270,7 @@ public abstract class MessageDigest extends MessageDigestSpi {
       }
     }
 
-    private byte buffer[];
+    private byte[] buffer;
 
     // TODO(jat): consider doing away with long math
     private long counter;
@@ -279,9 +279,9 @@ public abstract class MessageDigest extends MessageDigestSpi {
 
     private int remainder;
 
-    private int state[];
+    private int[] state;
 
-    private int x[];
+    private int[] x;
 
     public Md5Digest() {
       super("MD5");

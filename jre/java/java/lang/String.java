@@ -142,7 +142,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return NativeString.fromCharCode(x);
   }
 
-  public static String valueOf(char x[], int offset, int count) {
+  public static String valueOf(char[] x, int offset, int count) {
     int end = offset + count;
     // Shortcut for the common case.
     if (offset == 0 && end == x.length && end < ArrayHelper.ARRAY_PROCESS_BATCH_SIZE) {
@@ -244,11 +244,11 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     this.value = createImpl(bytes, charset);
   }
 
-  public String(char value[]) {
+  public String(char[] value) {
     this.value = String.valueOf(value);
   }
 
-  public String(char value[], int offset, int count) {
+  public String(char[] value, int offset, int count) {
     this.value = String.valueOf(value, offset, count);
   }
 
