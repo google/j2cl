@@ -76,49 +76,6 @@ def j2cl_library(
     if has_srcs and target_name != "//jre/java:jre":
         args["deps"] = args.get("deps", []) + [Label("//:jre")]
 
-    # TODO(b/259727254): This doesn't cover all scenarios.
-    has_kotlin_srcs = args.get("kt_common_srcs") or (
-        args.get("srcs") and any([s for s in args.get("srcs") if s.endswith(".kt")])
-    )
-
-    if has_kotlin_srcs and not KOTLIN_ALLOWLIST.accepts(target_name):
-        fail(
-            "Package '%s' is not permitted to have Kotlin inputs." % native.package_name(),
-            "See: //build_defs/internal_do_not_use/allowlists/kotlin.bzl",
-        )
-
-    if has_kotlin_srcs:
-        if target_name != "//ktstdlib:j2cl_kt_stdlib":
-            args["deps"] = args.get("deps", []) + [_KOTLIN_STDLIB_TARGET]
-
-    # J2KT Web can be in one of two states for a given target:
-    #  1. enabled: the target is always transpiled through J2KT
-    #  2. experiment enabled: the target is transpiled through J2KT if the blaze flag is set.
-    is_j2kt_web_always_enabled = J2KT_WEB_ENABLED.accepts(target_name)
-    is_j2kt_web_experiment_enabled = J2KT_WEB_EXPERIMENT_ENABLED.accepts(target_name)
-    maybe_enable_j2kt_web = (
-        not has_kotlin_srcs and (is_j2kt_web_always_enabled or is_j2kt_web_experiment_enabled)
-    )
-
-    # These arguments should not be set by the user.
-    args["enable_j2kt_web"] = False
-
-    if maybe_enable_j2kt_web:
-        # Enable j2kt-web if the blaze flag is set to True
-        args["enable_j2kt_web"] = True if is_j2kt_web_always_enabled else select({
-            "//build_defs/internal_do_not_use:j2kt_web_enabled": True,
-            "//conditions:default": False,
-        })
-
-        if has_srcs:
-            # If j2kt-web is enabled, we need to add the J2KT JRE and Kotlin stdlib as deps.
-            j2kt_deps = [_JRE_J2KT_TARGET, _KOTLIN_STDLIB_TARGET]
-            extra_deps = select({
-                "//build_defs/internal_do_not_use:j2kt_web_enabled": j2kt_deps,
-                "//conditions:default": j2kt_deps if is_j2kt_web_always_enabled else [],
-            })
-            args["deps"] = args.get("deps", []) + extra_deps
-
     j2cl_library_rule(
         name = name,
         **args

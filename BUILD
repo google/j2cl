@@ -73,9 +73,24 @@ string_flag(
 )
 
 # Flag to enable j2kt-web experiment. Please talk to j2cl-team@ before using it.
+# TODO(kevinoconnor): Remove this flag once the migration to j2kt_web_environment is complete.
 bool_flag(
     name = "experimental_enable_j2kt_web",
     build_setting_default = False,
+)
+
+# Flag to enable j2kt-web experiment. Please talk to j2cl-team@ before using it.
+string_flag(
+    name = "j2kt_web_environment",
+    build_setting_default = "production",
+    values = [
+        # Enables J2KT/Web for the set packages in the J2KT_WEB_ENABLED allowlist.
+        "production",
+        # Enables J2KT/Web for the set packages in the J2KT_WEB_EXPERIMENT_ENABLED allowlist.
+        "experimental",
+        # Disables J2KT/Web for all targets, regardless of allowlist membership.
+        "disabled",
+    ],
 )
 
 # Flag to enable klibs experiment. Please talk to j2cl-team@ before using it.

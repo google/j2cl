@@ -1,6 +1,7 @@
 # Description:
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
+load("@bazel_skylib//lib:selects.bzl", "selects")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load(":j2cl_library.bzl", "j2cl_library")
 load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
@@ -35,9 +36,44 @@ package(
 # ***************************************************
 
 config_setting(
-    name = "j2kt_web_enabled",
+    name = "j2kt_web_enabled_bool_flag",
     flag_values = {
         "//:experimental_enable_j2kt_web": "True",
+    },
+    visibility = ["//visibility:private"],
+)
+
+# TODO(kevinoconnor): Remove this temporary group once experimental_enable_j2kt_web is removed.
+# Temporary group that handles both and the old and new blaze flags.
+selects.config_setting_group(
+    name = "j2kt_web_enabled",
+    match_any = [
+        ":j2kt_web_enabled_bool_flag",
+        ":j2kt_web_experimental_environment",
+    ],
+)
+
+config_setting(
+    name = "j2kt_web_production_environment",
+    flag_values = {
+        "//:j2kt_web_environment": "production",
+        # TODO(kevinoconnor): Remove this once experimental_enable_j2kt_web is removed. This is only
+        # needed to ensure that the interpretation of the two flags are mutually exclusive.
+        "//:experimental_enable_j2kt_web": "False",
+    },
+)
+
+config_setting(
+    name = "j2kt_web_experimental_environment",
+    flag_values = {
+        "//:j2kt_web_environment": "experimental",
+    },
+)
+
+config_setting(
+    name = "j2kt_web_disabled",
+    flag_values = {
+        "//:j2kt_web_environment": "disabled",
     },
 )
 
