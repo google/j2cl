@@ -6,7 +6,7 @@ visibility([
 ])
 
 j2kt_web_transition = transition(
-    implementation = lambda *_: {"//:experimental_enable_j2kt_web": True},
+    implementation = lambda *_: {"//:j2kt_web_environment": "experimental"},
     inputs = [],
-    outputs = ["//:experimental_enable_j2kt_web"],
+    outputs = ["//:j2kt_web_environment"],
 )
