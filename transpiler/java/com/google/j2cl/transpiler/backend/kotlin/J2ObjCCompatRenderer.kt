@@ -280,8 +280,9 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
   private fun methodFunctionDependentSources(method: Method): List<Dependent<Source>> =
     method
       .takeIf { shouldRender(it.descriptor) }
-      ?.toObjCNames()
-      ?.let { functionDependentSources(method, it) } ?: listOf()
+      ?.let { it.descriptor.toObjCNames() }
+      ?.let { functionDependentSources(method, it) }
+      .orIfNull { listOf() }
 
   private fun shouldRender(methodDescriptor: MethodDescriptor): Boolean =
     !methodDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&

@@ -20,7 +20,7 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
-import com.google.j2cl.transpiler.ast.Method
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -28,7 +28,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
-import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
@@ -47,14 +46,14 @@ internal val String.escapeObjCKeyword
 internal val KtVisibility.needsObjCNameAnnotation
   get() = isPublic || isProtected
 
-internal fun Method.toObjCNames(): MethodObjCNames? =
+internal fun MethodDescriptor.toObjCNames(): MethodObjCNames? =
   when {
-    descriptor.isConstructor -> toConstructorObjCNames()
+    isConstructor -> toConstructorObjCNames()
     else -> toNonConstructorObjCNames()
   }
 
-internal fun Method.toConstructorObjCNames(): MethodObjCNames =
-  descriptor.objectiveCName.let { objectiveCName ->
+internal fun MethodDescriptor.toConstructorObjCNames(): MethodObjCNames =
+  objectiveCName.let { objectiveCName ->
     MethodObjCNames(
       ObjCName(string = "init"),
       if (
@@ -66,28 +65,25 @@ internal fun Method.toConstructorObjCNames(): MethodObjCNames =
             if (it.startsWith(prefix)) {
               it.substring(prefix.length)
             } else {
-              parameters.first().objCName
+              parameterTypeDescriptors.first().parameterObjCName
             }
           }
         } else {
-          parameters.mapIndexed { index, parameter ->
-            parameter.objCName.letIf(index != 0) { "with$it" }
+          parameterTypeDescriptors.mapIndexed { index, typeDescriptor ->
+            typeDescriptor.parameterObjCName.letIf(index != 0) { "with$it" }
           }
         }
         .map { ObjCName(string = it) },
     )
   }
 
-internal fun Method.toNonConstructorObjCNames(): MethodObjCNames =
-  descriptor.objectiveCName.let { objectiveCName ->
+internal fun MethodDescriptor.toNonConstructorObjCNames(): MethodObjCNames =
+  objectiveCName.let { objectiveCName ->
     if (objectiveCName == null || !objectiveCName.contains(":")) {
       MethodObjCNames(
-        ObjCName(
-          string = objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword,
-          swiftString = swiftName,
-        ),
-        parameters.map {
-          ObjCName(string = it.objCParameterName, swiftString = swiftParameterName(it))
+        ObjCName(string = objectiveCName ?: ktName.escapeJ2ObjCKeyword, swiftString = swiftName),
+        parameterTypeDescriptors.map {
+          ObjCName(string = "with${it.parameterObjCName}", swiftString = swiftParameterName(it))
         },
       )
     } else {
@@ -219,11 +215,8 @@ private fun TypeVariable.variableObjCName(useId: Boolean): String =
 private fun IntersectionTypeDescriptor.intersectionObjCName(useId: Boolean): String =
   firstType.objCName(useId = useId)
 
-internal val Variable.objCName: String
-  get() = typeDescriptor.objCName(useId = true).titleCased
-
-internal val Variable.objCParameterName: String
-  get() = "with$objCName"
+internal val TypeDescriptor.parameterObjCName: String
+  get() = objCName(useId = true).titleCased
 
 internal val FieldDescriptor.objCName: String
   get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(objCNameNeedsUnderscoreSuffix) { it + "_" }
