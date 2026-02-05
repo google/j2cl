@@ -187,7 +187,6 @@ public class MapTest extends TestMap {
     }
   }
 
-  @J2ktIncompatible // not emulated
   public void testEntry() {
     Map.Entry<String, String> entry = Map.entry("a", "b");
 
