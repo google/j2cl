@@ -88,4 +88,5 @@ internal val Type.needsCompanionSupplierInterface: Boolean
   get() =
     typeDescriptor.isCollection &&
       declaration.visibility.isPublic &&
+      !declaration.isKtNative &&
       toCompanionObjectOrNull() != null
