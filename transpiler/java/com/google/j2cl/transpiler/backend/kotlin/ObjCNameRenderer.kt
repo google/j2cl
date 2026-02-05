@@ -100,11 +100,14 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
   // underscore between the type name and the literal name. We use a typedef to remove it again.
   fun objCEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     newLineSeparated(
-      when {
-        !isJ2ObjCInteropEnabled -> Source.EMPTY
-        typeDeclaration.isEnum ->
-          objCEnumAnnotationSource("${typeDeclaration.objCNameWithoutPrefix}_Enum_")
-        else -> Source.EMPTY
+      if (
+        isJ2ObjCInteropEnabled &&
+          typeDeclaration.isEnum &&
+          typeDeclaration.declaredFieldDescriptors.any { it.isEnumConstant }
+      ) {
+        objCEnumAnnotationSource("${typeDeclaration.objCNameWithoutPrefix}_Enum_")
+      } else {
+        Source.EMPTY
       }
     )
 

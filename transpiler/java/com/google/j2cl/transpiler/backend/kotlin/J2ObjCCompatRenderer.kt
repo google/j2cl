@@ -132,7 +132,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       type.toCompanionObjectOrNull()?.let { add(aliasDeclarationDependentSource(it.declaration)) }
     }
 
-    if (type.isEnum) {
+    if (type.isEnum && type.enumFields.isNotEmpty()) {
       add(nsEnumTypedefDependentSource(type))
     }
 
