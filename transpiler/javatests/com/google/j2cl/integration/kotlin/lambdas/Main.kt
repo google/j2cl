@@ -117,6 +117,11 @@ private class Captures {
   internal fun testCapturedVariableScoping() {
     val suppliers = mutableListOf<IntSupplier>()
 
+    fun captureAndReturn(intSupplier: IntSupplier): Int {
+      suppliers.add(intSupplier)
+      return intSupplier.get()
+    }
+
     var x = 0
     do {
       var i = x++
@@ -131,16 +136,19 @@ private class Captures {
       // This modification will be seen only in the second supplier.
       i++
       // Condition on a variable that is declared in the body.
-    } while (i < 2)
+    } while (captureAndReturn { i + 1 } < 3)
 
-    // At the end suppliers[0] = () -> 1 and suppliers[1] = () -> 3
-    assertTrue(suppliers.size == 2)
+    // At the end suppliers[0] = () -> 1, suppliers[1] = () -> 2, suppliers[2] = () -> 3 and
+    // suppliers[3] = () -> 4
+    assertEquals(4, suppliers.size)
     // TODO(b/468336770): Remove the condition `isJvm()` once the bug is fixed and the lambda
     // capture behavior matches Kotlin/JVM.
     if (isJvm()) {
       assertEquals(1, suppliers[0].get())
+      assertEquals(2, suppliers[1].get())
+      assertEquals(3, suppliers[2].get())
     }
-    assertEquals(3, suppliers[1].get())
+    assertEquals(4, suppliers[3].get())
   }
 
   internal fun testLambdaCaptureFieldAndLocal() {
