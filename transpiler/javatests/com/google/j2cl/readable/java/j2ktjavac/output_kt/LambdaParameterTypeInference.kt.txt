@@ -33,10 +33,10 @@ import kotlin.jvm.JvmStatic
 
 abstract class LambdaParameterTypeInference {
  open fun testInferenceFromReturnType(supplier: Supplier<Void?>) {
-  this.transform_pp_j2ktjavac<Void?, Void>(
+  this.transform_pp_j2ktjavac<Void?, Void?>(
    supplier,
    Function { p: Void? ->
-    return@Function p!!
+    return@Function p
    },
   )
  }

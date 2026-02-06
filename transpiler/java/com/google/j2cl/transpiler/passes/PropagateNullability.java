@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -521,12 +522,18 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               return;
             }
 
+            var returnedExpressionTypeDescriptor = expression.getTypeDescriptor();
+            if (isJavaLangVoid(returnedExpressionTypeDescriptor)) {
+              // If a method returns an expression of type `Void`, it must be the null value.
+              returnedExpressionTypeDescriptor = returnedExpressionTypeDescriptor.toNullable();
+            }
+
             propagatedTypeArgumentDescriptorRef[0] =
                 propagateTypeArgumentNullabilityFromInferredType(
                     typeParameterDescriptor,
                     propagatedTypeArgumentDescriptorRef[0],
                     methodLike.getDescriptor().getDeclarationDescriptor().getReturnTypeDescriptor(),
-                    expression.getTypeDescriptor());
+                    returnedExpressionTypeDescriptor);
           }
         });
     return propagatedTypeArgumentDescriptorRef[0];
