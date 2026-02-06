@@ -37,8 +37,6 @@ import com.google.errorprone.annotations.FormatString;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
-import com.google.j2cl.transpiler.ast.Annotation;
-import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -2459,34 +2457,8 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private static boolean isUnusableByJsSuppressed(MemberDescriptor memberDescriptor) {
-    // TODO(b/36227943): Abide by standard rules regarding suppression annotations in
-    // enclosing elements.
-    return isUnusableByJsSuppressed((HasAnnotations) memberDescriptor)
-        || isUnusableByJsSuppressed(
-            memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
-  }
-
-  private static boolean isUnusableByJsSuppressed(TypeDeclaration typeDeclaration) {
-    // TODO(b/36227943): Abide by standard rules regarding suppression annotations in
-    // enclosing elements.
-    if (isUnusableByJsSuppressed((HasAnnotations) typeDeclaration)) {
-      return true;
-    }
-
-    // TODO(b/406060774): Handle the annotation on enclosing member descriptor for anonymous and
-    // local classes and add a test.
-
-    TypeDeclaration enclosingTypeDeclaration = typeDeclaration.getEnclosingTypeDeclaration();
-    return enclosingTypeDeclaration != null && isUnusableByJsSuppressed(enclosingTypeDeclaration);
-  }
-
   private static boolean isUnusableByJsSuppressed(HasAnnotations node) {
-    Annotation suppressWarningsAnnotation = node.getAnnotation("java.lang.SuppressWarnings");
-    return suppressWarningsAnnotation != null
-        && ((ArrayConstant) suppressWarningsAnnotation.getValues().get("value"))
-            .getValueExpressions().stream()
-                .anyMatch(v -> ((StringLiteral) v).getValue().equals("unusable-by-js"));
+    return node.isWarningSuppressed("unusable-by-js");
   }
 
   private void warnIfUnusableByJs(TypeDescriptor typeDescriptor, String prefix, Member member) {

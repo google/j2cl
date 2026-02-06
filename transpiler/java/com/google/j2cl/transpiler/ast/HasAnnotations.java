@@ -50,4 +50,35 @@ public interface HasAnnotations {
         .collect(toOptional())
         .orElse(null);
   }
+
+  default boolean isWarningSuppressed(String suppression) {
+
+    if (hasSuppressionAnnotation(suppression)) {
+      return true;
+    }
+
+    // Look for suppression in the enclosing declaration.
+    return switch (this) {
+      case TypeDeclaration typeDeclaration
+          when typeDeclaration.getEnclosingMethodDescriptor() != null ->
+          typeDeclaration.getEnclosingMethodDescriptor().isWarningSuppressed(suppression);
+      case TypeDeclaration typeDeclaration
+          when typeDeclaration.getEnclosingTypeDeclaration() != null ->
+          typeDeclaration.getEnclosingTypeDeclaration().isWarningSuppressed(suppression);
+      case MemberDescriptor memberDescriptor ->
+          memberDescriptor
+              .getEnclosingTypeDescriptor()
+              .getTypeDeclaration()
+              .isWarningSuppressed(suppression);
+      default -> false;
+    };
+  }
+
+  private boolean hasSuppressionAnnotation(String suppression) {
+    Annotation annotation = getAnnotation("java.lang.SuppressWarnings");
+    return annotation != null
+        && annotation.getValues().get("value") instanceof ArrayConstant arrayConstant
+        && arrayConstant.getValueExpressions().stream()
+            .anyMatch(v -> v instanceof StringLiteral s && s.getValue().matches(suppression));
+  }
 }

@@ -57,6 +57,7 @@ import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
 import com.google.j2cl.transpiler.ast.LocalFunctionDeclarationStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
+import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
@@ -115,6 +116,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     public final Stream<Object> getParents() {
       return visitor.getParents();
+    }
+
+    public final Member getCurrentMember() {
+      return visitor.getCurrentMember();
     }
 
     /**

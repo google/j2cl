@@ -21,6 +21,7 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import java.lang.Void
 import java.util.function.BiFunction
 import java.util.function.Function
 import kotlin.Any
@@ -30,7 +31,18 @@ import kotlin.Suppress
 import kotlin.collections.MutableMap
 import kotlin.jvm.JvmStatic
 
-open class LambdaParameterTypeInference {
+abstract class LambdaParameterTypeInference {
+ open fun testInferenceFromReturnType(supplier: Supplier<Void?>) {
+  this.transform_pp_j2kt<Void?, Void?>(
+   supplier,
+   Function { p: Void? ->
+    return@Function p
+   },
+  )
+ }
+
+ internal abstract fun <I, O> transform_pp_j2kt(supplier: Supplier<I>, function: Function<in I, out O>): Supplier<O>
+
  companion object {
   @JvmStatic
   fun <T> wrap(consumer: Consumer<T>): Consumer<T> {
