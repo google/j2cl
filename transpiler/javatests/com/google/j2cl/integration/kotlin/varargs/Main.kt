@@ -34,6 +34,8 @@ fun main(vararg unused: String) {
   testVarargs_spread()
   testVarargs_indirectSpread()
   testVarargs_overloaded()
+  testVarargs_primitiveArray()
+  testVarargs_boxedArray()
 }
 
 private fun testVarargs_constructor() {
@@ -353,4 +355,16 @@ private fun testVarargs_overloaded() {
   assertEquals("overloaded(Long)", overloaded(1L))
   assertEquals("overloaded(Long, Long...)", overloaded(1L, 2, 3L))
   assertEquals("overloaded(Long, Long...)", overloaded(1, 2, 3L))
+}
+
+private fun returnVarargs_primitiveArray(vararg integers: Int): IntArray = integers
+
+private fun returnVarargs_boxedArray(vararg integers: Int?): Array<out Int?> = integers
+
+private fun testVarargs_primitiveArray() {
+  val unused = returnVarargs_primitiveArray(1, 2, 3)
+}
+
+private fun testVarargs_boxedArray() {
+  val unused2 = returnVarargs_boxedArray(1, 2, 3)
 }

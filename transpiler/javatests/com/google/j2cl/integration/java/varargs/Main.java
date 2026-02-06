@@ -17,11 +17,13 @@ package varargs;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import java.util.ArrayList;
 import java.util.List;
 import javaemul.internal.annotations.KtDisabled;
+import org.jspecify.annotations.NonNull;
 import varargs.innerpackage.SubclassWithImplicitConstructor;
 import varargs.innerpackage.SuperWithNoPublicConstructors;
 
@@ -39,6 +41,8 @@ public class Main {
     testVarargs_implicitSuperConstructorCall_visibility();
     testVarargs_genericVarargsParameter();
     testVarargs_overloaded();
+    testVarargs_boxedTypes();
+    testVarargs_nonNullBoxedTypes();
   }
 
   private static void testVarargs_constructor() {
@@ -348,5 +352,26 @@ public class Main {
     assertEquals("overloaded(long)", overloaded(1L));
     assertEquals("overloaded(long, long...)", overloaded(1L, 2, 3L));
     assertEquals("overloaded(long, long...)", overloaded(1, 2, 3L));
+  }
+
+  private static void testVarargs_boxedTypes() {
+    Integer[] unused = applyBoxedVarargs(1, 2, 3);
+  }
+
+  private static void testVarargs_nonNullBoxedTypes() {
+    // TODO(b/322326845): Enable for J2KT when fixed.
+    if (!isJ2Kt()) {
+      Integer[] unused = applyNonNullBoxedVarargs(1, 2, 3);
+    }
+  }
+
+  private static Integer[] applyBoxedVarargs(Integer... integers) {
+    return integers;
+  }
+
+  private static Integer[] applyNonNullBoxedVarargs(@NonNull Integer... integers) {
+    // TODO(b/322326845): `integers` is translated as `IntArray` instead of `Array<Integer>` which
+    // causes this method to crash at runtime with a ClassCastException.
+    return integers;
   }
 }
