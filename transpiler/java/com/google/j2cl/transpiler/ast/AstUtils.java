@@ -1352,36 +1352,5 @@ public final class AstUtils {
     type.getPrimaryConstructor().getBody().getStatements().add(preserveCall);
   }
 
-  public static boolean isSuppressed(HasAnnotations hasAnnotations, String suppression) {
-    if (hasAnnotations == null) {
-      return false;
-    }
-
-    if (hasSuppressionAnnotation(hasAnnotations, suppression)) {
-      return true;
-    }
-
-    // Look in the enclosing declaration.
-    return switch (hasAnnotations) {
-      case TypeDeclaration typeDeclaration
-          when typeDeclaration.getEnclosingMethodDescriptor() != null ->
-          isSuppressed(typeDeclaration.getEnclosingMethodDescriptor(), suppression);
-      case TypeDeclaration typeDeclaration ->
-          isSuppressed(typeDeclaration.getSuperTypeDeclaration(), suppression);
-      case MemberDescriptor memberDescriptor ->
-          isSuppressed(
-              memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration(), suppression);
-      default -> false;
-    };
-  }
-
-  private static boolean hasSuppressionAnnotation(HasAnnotations node, String suppression) {
-    Annotation annotation = node.getAnnotation("java.lang.SuppressWarnings");
-    return annotation != null
-        && annotation.getValues().get("value") instanceof ArrayConstant arrayConstant
-        && arrayConstant.getValueExpressions().stream()
-            .anyMatch(v -> v instanceof StringLiteral s && s.getValue().matches(suppression));
-  }
-
   private AstUtils() {}
 }
