@@ -1314,6 +1314,13 @@ public final class AstUtils {
     return node.getAnnotation("javaemul.internal.annotations.Wasm") != null;
   }
 
+  /** Returns true if the specified member in Wasm can be referenced by JS. */
+  public static boolean canBeReferencedExternallyWasm(MemberDescriptor memberDescriptor) {
+    return memberDescriptor.canBeReferencedExternally()
+        // TODO(b/481799839): Consider "@Wasm native ..." methods.
+        && !memberDescriptor.isNative();
+  }
+
   public static boolean isKotlinUnitInstanceAccess(Expression expression) {
     if (expression instanceof FieldAccess fieldAccess) {
       var field = fieldAccess.getTarget();

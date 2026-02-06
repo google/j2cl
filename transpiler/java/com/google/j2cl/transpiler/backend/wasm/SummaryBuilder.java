@@ -26,6 +26,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
@@ -144,7 +145,9 @@ public final class SummaryBuilder {
 
     for (Member member : type.getMembers()) {
       MemberDescriptor memberDescriptor = member.getDescriptor();
-      if (!memberDescriptor.canBeReferencedExternally() || memberDescriptor.isNative()) {
+      if (!AstUtils.canBeReferencedExternallyWasm(memberDescriptor)
+          // We don't expose constructors directly. Instead, the factory method is exported.
+          || memberDescriptor.isConstructor()) {
         continue;
       }
 

@@ -32,6 +32,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -541,9 +542,11 @@ public class WasmGenerationEnvironment {
     return !typeDeclaration.isNative()
         && !typeDeclaration.isInterface()
         && (typeDeclaration.getDeclaredMethodDescriptors().stream()
-                .anyMatch(methodDescriptor -> methodDescriptor.isJsMember())
+                .anyMatch(
+                    methodDescriptor -> AstUtils.canBeReferencedExternallyWasm(methodDescriptor))
             || typeDeclaration.getDeclaredFieldDescriptors().stream()
-                .anyMatch(fieldDescriptor -> fieldDescriptor.isJsMember()));
+                .anyMatch(
+                    fieldDescriptor -> AstUtils.canBeReferencedExternallyWasm(fieldDescriptor)));
   }
 
   /**
