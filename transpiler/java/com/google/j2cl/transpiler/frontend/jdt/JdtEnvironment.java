@@ -851,7 +851,7 @@ public class JdtEnvironment {
     ImmutableList<ParameterDescriptor> parameterDescriptors =
         convertParameterDescriptors(methodBinding, inNullMarkedScope);
 
-    ImmutableList<TypeDescriptor> exceptionTypeDescriptors =
+    ImmutableList<TypeDescriptor> thrownTypeDescriptors =
         FluentIterable.from(methodBinding.getExceptionTypes()).stream()
             .map(this::createTypeDescriptor)
             .map(TypeDescriptor::toNonNullable)
@@ -864,7 +864,7 @@ public class JdtEnvironment {
             .setParameterDescriptors(parameterDescriptors)
             .setDeclarationDescriptor(declarationMethodDescriptor)
             .setReturnTypeDescriptor(returnTypeDescriptor)
-            .setExceptionTypeDescriptors(exceptionTypeDescriptors)
+            .setThrownTypeDescriptors(thrownTypeDescriptors)
             .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
             .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
             .setOriginalJsInfo(jsInfo)

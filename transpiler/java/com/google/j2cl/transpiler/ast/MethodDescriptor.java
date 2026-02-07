@@ -378,7 +378,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
 
-  public abstract ImmutableList<TypeDescriptor> getExceptionTypeDescriptors();
+  public abstract ImmutableList<TypeDescriptor> getThrownTypeDescriptors();
 
   /** Type parameters declared in the method. */
   public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
@@ -1030,7 +1030,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(ImmutableList.of())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
-        .setExceptionTypeDescriptors(ImmutableList.of())
+        .setThrownTypeDescriptors(ImmutableList.of())
         .setTypeParameterTypeDescriptors(ImmutableList.of())
         .setTypeArgumentTypeDescriptors(ImmutableList.of());
   }
@@ -1538,8 +1538,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     @CanIgnoreReturnValue
-    public abstract Builder setExceptionTypeDescriptors(
-        ImmutableList<TypeDescriptor> exceptionTypeDescriptors);
+    public abstract Builder setThrownTypeDescriptors(
+        ImmutableList<TypeDescriptor> thrownTypeDescriptors);
 
     public abstract ImmutableList<TypeDescriptor> getTypeArgumentTypeDescriptors();
 

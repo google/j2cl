@@ -58,12 +58,12 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
       .orEmpty()
 
   fun jvmThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    methodDescriptor.exceptionTypeDescriptors
+    methodDescriptor.thrownTypeDescriptors
       .takeIf { it.isNotEmpty() }
-      ?.let { exceptionTypeDescriptors ->
+      ?.let { thrownTypeDescriptors ->
         KotlinSource.annotation(
           nameRenderer.topLevelQualifiedNameSource("kotlin.jvm.Throws"),
-          exceptionTypeDescriptors.map {
+          thrownTypeDescriptors.map {
             KotlinSource.classLiteral(
               nameRenderer.typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable())
             )

@@ -1077,7 +1077,7 @@ class JavaEnvironment {
         .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setTypeArgumentTypeDescriptors(typeArguments)
-        .setExceptionTypeDescriptors(thrownExceptions)
+        .setThrownTypeDescriptors(thrownExceptions)
         .setOriginalJsInfo(jsInfo)
         .setOriginalKtInfo(ktInfo)
         .setVisibility(visibility)
