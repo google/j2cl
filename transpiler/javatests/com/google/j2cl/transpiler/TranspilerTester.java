@@ -94,27 +94,22 @@ public class TranspilerTester {
   /** Creates a new transpiler tester initialized with WASM defaults. */
   public static TranspilerTester newTesterWithWasmDefaults() {
     return newTester()
-        // TODO(b/395921769): Remove this after the test are ported to modular WASM.
         .noAssertDelayedCancelChecks()
         .addArgs("-backend", "WASM")
         .setClassPathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy.jar")
         .setSystemPathArg(
-            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_system")
-        .addArgs("-defineForWasm", "J2WASM_DEBUG=TRUE")
-        .addArgs("-defineForWasm", "jre.strictFpToString=DISABLED")
-        .addArgs("-defineForWasm", "jre.checkedMode=ENABLED")
-        .addArgs("-defineForWasm", "jre.checks.checkLevel=NORMAL")
-        .addArgs("-defineForWasm", "jre.checks.bounds=AUTO")
-        .addArgs("-defineForWasm", "jre.checks.api=AUTO")
-        .addArgs("-defineForWasm", "jre.checks.numeric=AUTO")
-        .addArgs("-defineForWasm", "jre.checks.type=AUTO")
-        .addArgs("-defineForWasm", "jre.logging.logLevel=ALL")
-        .addArgs("-defineForWasm", "jre.logging.simpleConsoleHandler=ENABLED")
-        .addArgs("-defineForWasm", "jre.classMetadata=SIMPLE")
-        .addArgs("-defineForWasm", "jre.assertions=ENABLED")
-        .addSourcePathArg(
-            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy-src.jar");
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_system");
+  }
+
+  public static TranspilerTester newTesterWithEntryPointValidatorDefaults() {
+    return newTester()
+        .noAssertDelayedCancelChecks()
+        .addArgs("-backend", "WASM_ENTRY_POINT_VALIDATOR")
+        .setClassPathArg(
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_deploy.jar")
+        .setSystemPathArg(
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_system");
   }
 
   private abstract static class File {

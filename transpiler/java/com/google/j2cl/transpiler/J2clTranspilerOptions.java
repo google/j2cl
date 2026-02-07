@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.frontend.Frontend;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Nullable;
 
 /** Configuration for the transpiler. */
@@ -94,8 +93,6 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
     }
 
     abstract Builder setWasmEntryPointPatterns(List<EntryPointPattern> entryPointSpecs);
-
-    public abstract Builder setDefinesForWasm(Map<String, String> definesForWasm);
 
     public abstract Builder setEnableWasmCustomDescriptors(boolean enableWasmCustomDescriptors);
 

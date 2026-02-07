@@ -416,7 +416,7 @@ def _j2cl_transpile(
         outputs.append(profile_output)
         args.add("-profileOutput", profile_output)
 
-    if backend == "WASM_MODULAR":
+    if backend == "WASM":
         # Add a prefix to where the Java source files will be located relative to the source map.
         args.add(output_dir.short_path, format = "-sourceMappingPathPrefix=%s/")
 

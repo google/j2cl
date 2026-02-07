@@ -15,26 +15,22 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.WasmEntryPointBridgesCreator;
 
-/**
- * Generates forwarding methods for Wasm entry points. The forwarding methods are then exported
- * (instead of the original entry points). The forwarding methods perform necessary conversions
- * between {@code java.lang.String} and Wasm strings.
- */
-public class AddEntryPointBridgesWasm extends LibraryNormalizationPass {
+/** Validates that entry point patterns are consistent with the application being transpiled. */
+public class ValidateWasmEntryPoints extends LibraryNormalizationPass {
   private final ImmutableList<EntryPointPattern> entryPointPatterns;
 
-  public AddEntryPointBridgesWasm(ImmutableList<EntryPointPattern> entryPointPatterns) {
+  public ValidateWasmEntryPoints(ImmutableList<EntryPointPattern> entryPointPatterns) {
     this.entryPointPatterns = entryPointPatterns;
   }
 
   @Override
   public void applyTo(Library library) {
-    new WasmEntryPointBridgesCreator(entryPointPatterns, getProblems()).generateBridges(library);
+    new WasmEntryPointBridgesCreator(entryPointPatterns, getProblems())
+        .validateEntryPoints(library);
   }
 }

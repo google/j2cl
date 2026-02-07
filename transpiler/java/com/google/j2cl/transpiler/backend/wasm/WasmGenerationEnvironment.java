@@ -18,12 +18,10 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.lang.String.format;
 import static java.util.Comparator.comparingInt;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -44,7 +42,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -208,11 +205,6 @@ public class WasmGenerationEnvironment {
     return getTypeSignature(typeDescriptor) + ".itable";
   }
 
-  /** Returns the name of the global that stores the itable for a Java type. */
-  public String getWasmItableGlobalName(TypeDeclaration typeDeclaration) {
-    return getWasmItableGlobalName(typeDeclaration.toDescriptor());
-  }
-
   /** Returns the name of the wasm type of the vtable for a Java type. */
   public String getWasmVtableTypeName(DeclaredTypeDescriptor typeDescriptor) {
     return getTypeSignature(typeDescriptor) + ".vtable";
@@ -373,21 +365,6 @@ public class WasmGenerationEnvironment {
     return dataNameByLiteral.get(arrayLiteral);
   }
 
-  int getItableIndexForInterface(TypeDeclaration typeDeclaration) {
-    return itableAllocator.getItableFieldIndex(typeDeclaration);
-  }
-
-  int getItableSize() {
-    if (isModular) {
-      throw new UnsupportedOperationException();
-    }
-    return itableAllocator.getItableSize();
-  }
-
-  public JsImportsGenerator.Imports getJsImports() {
-    return jsImports;
-  }
-
   public JsMethodImport getJsMethodImport(MethodDescriptor methodDescriptor) {
     return jsImports.getMethodImports().get(methodDescriptor);
   }
@@ -409,10 +386,8 @@ public class WasmGenerationEnvironment {
     return enableCustomDescriptorsJsInterop;
   }
 
-  private final boolean isModular;
   private final Library library;
   private final JsImportsGenerator.Imports jsImports;
-  private final ItableAllocator<TypeDeclaration> itableAllocator;
   private final String sourceMappingPathPrefix;
   private final boolean enableCustomDescriptors;
   private final boolean enableCustomDescriptorsJsInterop;
@@ -423,8 +398,7 @@ public class WasmGenerationEnvironment {
         jsImports,
         /* sourceMappingPathPrefix= */ null,
         /* enableCustomDescriptors= */ false,
-        /* enableCustomDescriptorsJsInterop= */ false,
-        /* isModular= */ false);
+        /* enableCustomDescriptorsJsInterop= */ false);
   }
 
   WasmGenerationEnvironment(
@@ -432,9 +406,7 @@ public class WasmGenerationEnvironment {
       Imports jsImports,
       String sourceMappingPathPrefix,
       boolean enableCustomDescriptors,
-      boolean enableCustomDescriptorsJsInterop,
-      boolean isModular) {
-    this.isModular = isModular;
+      boolean enableCustomDescriptorsJsInterop) {
     this.library = library;
     this.sourceMappingPathPrefix = sourceMappingPathPrefix;
     this.enableCustomDescriptors = enableCustomDescriptors;
@@ -471,25 +443,7 @@ public class WasmGenerationEnvironment {
               checkState(previous == null);
             });
 
-    this.itableAllocator = createItableAllocator(library);
-
     this.jsImports = jsImports;
-  }
-
-  @Nullable
-  private ItableAllocator<TypeDeclaration> createItableAllocator(Library library) {
-    if (isModular) {
-      // Itable allocation happens in the bundler for modular compilation.
-      return null;
-    }
-    return new ItableAllocator<>(
-        library
-            .streamTypes()
-            .filter(Predicates.not(Type::isInterface))
-            .map(Type::getDeclaration)
-            .collect(toImmutableList()),
-        TypeDeclaration::getAllSuperInterfaces,
-        WasmGenerationEnvironment::getTypeLayoutSuperTypeDeclaration);
   }
 
   /** Returns a wasm layout creating it from a type declaration if it wasn't created before. */

@@ -33,12 +33,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.spi.MapOptionHandler;
 
 /** A javac-like command line driver for J2clTranspiler. */
 public final class J2clCommandLineRunner extends CommandLineTool {
@@ -139,9 +136,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-forbiddenAnnotation", hidden = true)
   List<String> forbiddenAnnotations = new ArrayList<>();
 
-  @Option(name = "-defineForWasm", handler = MapOptionHandler.class, hidden = true)
-  Map<String, String> definesForWasm = new HashMap<>();
-
   @Option(name = "-objCNamePrefix", hidden = true)
   String objCNamePrefix = "J2kt";
 
@@ -221,7 +215,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setFrontend(this.frontend)
         .setBackend(this.backend)
         .setWasmEntryPointStrings(wasmEntryPoints)
-        .setDefinesForWasm(definesForWasm)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)

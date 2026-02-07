@@ -13,7 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
-import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithWasmDefaults;
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithEntryPointValidatorDefaults;
 
 import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -132,7 +132,7 @@ public final class J2wasmTranspilerTest extends TestCase {
 
   @CanIgnoreReturnValue
   private TranspileResult assertTranspileSucceeds(String compilationUnitName, String code) {
-    return newTesterWithWasmDefaults()
+    return newTesterWithEntryPointValidatorDefaults()
         .addCompilationUnit(compilationUnitName, code)
         .assertTranspileSucceeds();
   }
@@ -141,7 +141,7 @@ public final class J2wasmTranspilerTest extends TestCase {
   private TranspileResult assertTranspileSucceedsWithEntryPoints(
       String compilationUnitName, List<String> entryPoints, String code) {
     TranspilerTester tester =
-        newTesterWithWasmDefaults().addCompilationUnit(compilationUnitName, code);
+        newTesterWithEntryPointValidatorDefaults().addCompilationUnit(compilationUnitName, code);
     for (String entryPoint : entryPoints) {
       tester.addArgs("-generateWasmExport", entryPoint);
     }
@@ -151,7 +151,7 @@ public final class J2wasmTranspilerTest extends TestCase {
   private TranspileResult assertTranspileFailsWithEntryPoints(
       String compilationUnitName, List<String> entryPoints, String code) {
     TranspilerTester tester =
-        newTesterWithWasmDefaults().addCompilationUnit(compilationUnitName, code);
+        newTesterWithEntryPointValidatorDefaults().addCompilationUnit(compilationUnitName, code);
     for (String entryPoint : entryPoints) {
       tester.addArgs("-generateWasmExport", entryPoint);
     }

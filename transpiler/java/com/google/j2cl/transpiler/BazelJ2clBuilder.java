@@ -27,12 +27,9 @@ import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.spi.MapOptionHandler;
 
 /**
  * The J2cl builder for Bazel that runs as a worker.
@@ -122,8 +119,8 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(
       name = "-experimentalBackend",
       usage =
-          "Select the backend to use: CLOSURE (default), WASM (experimental), "
-              + "WASM_MODULAR (experimental), KOTLIN (experimental).",
+          "Select the backend to use: CLOSURE (default), WASM (experimental), KOTLIN"
+              + " (experimental).",
       hidden = true)
   Backend backend = Backend.CLOSURE;
 
@@ -173,9 +170,6 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   @Option(name = "-experimentalEnableKlibs", usage = "Enable using klibs for the kotlin frontend.")
   boolean enableKlibs = false;
-
-  @Option(name = "-experimentalDefineForWasm", handler = MapOptionHandler.class, hidden = true)
-  Map<String, String> definesForWasm = new HashMap<>();
 
   @Option(name = "-objCNamePrefix", hidden = true)
   String objCNamePrefix = "J2kt";
@@ -263,7 +257,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setWasmEntryPointStrings(this.wasmEntryPoints)
         .setEnableWasmCustomDescriptors(this.enableWasmCustomDescriptors)
         .setEnableWasmCustomDescriptorsJsInterop(this.enableWasmCustomDescriptorsJsInterop)
-        .setDefinesForWasm(definesForWasm)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)

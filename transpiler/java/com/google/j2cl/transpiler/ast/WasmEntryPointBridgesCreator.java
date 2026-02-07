@@ -47,18 +47,15 @@ public class WasmEntryPointBridgesCreator {
     this.problems = problems;
   }
 
-  public void generateBridges(Library library) {
+  public void validateEntryPoints(Library library) {
     library
         .streamTypes()
         .forEach(
             type -> {
               for (Method method : type.getMethods()) {
-                Method exportBridgeMethod =
-                    generateBridge(method.getDescriptor(), method.getSourcePosition());
-                if (exportBridgeMethod == null) {
-                  continue;
-                }
-                type.addMember(exportBridgeMethod);
+                // isEntryPoint also checks that the regular expressions used to select entrypoints
+                // are consistent.
+                var unused = isEntryPoint(method.getDescriptor());
               }
             });
 
@@ -88,15 +85,8 @@ public class WasmEntryPointBridgesCreator {
     return generateBridge(methodDescriptor, SourcePosition.NONE);
   }
 
-  @Nullable
   private Method generateBridge(MethodDescriptor methodDescriptor, SourcePosition sourcePosition) {
     if (!isEntryPoint(methodDescriptor)) {
-      return null;
-    }
-
-    if (!exportedMethodNames.add(methodDescriptor.getName())) {
-      problems.error(
-          "More than one method are exported with the same name '%s'.", methodDescriptor.getName());
       return null;
     }
 
@@ -146,9 +136,17 @@ public class WasmEntryPointBridgesCreator {
           methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName(),
           methodDescriptor.getName())) {
         unmatchedEntryPointPatterns.remove(entryPointPattern);
+
+        if (!exportedMethodNames.add(methodDescriptor.getName())) {
+          problems.error(
+              "More than one method are exported with the same name '%s'.",
+              methodDescriptor.getName());
+        }
+
         return true;
       }
     }
+
     return false;
   }
 
