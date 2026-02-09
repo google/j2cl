@@ -200,6 +200,10 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::SingletonReferencesLowering)
   // Reconstruct `for-loop` node for iterations over array and non-overflowing ranges.
   perFileLowering(::CreateForLoopLowering)
+  printIr("before")
+  // Fix variable scoping in do..while loops.
+  perFileLowering(::DoWhileLoopLowering)
+  printIr("after")
   // Convert some `when` statements to a `switch` java-like statement.
   perFileLowering(::CreateSwitchLowering)
   // Lower Kotlin annotation in a Java-like format expected by the J2CL ast.

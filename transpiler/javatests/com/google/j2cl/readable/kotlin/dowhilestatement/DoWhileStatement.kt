@@ -32,12 +32,14 @@ class DoWhileStatement {
       } while (foo)
     }
 
-    do {
+    label@ do {
       var foo: Boolean
       if (cdt) {
         foo = false
+        break@label
       } else {
         foo = true
+        continue@label
       }
     } while (foo)
   }

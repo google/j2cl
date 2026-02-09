@@ -21,6 +21,7 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 fun main(vararg unused: String) {
   testUnlabeledBreaks()
   testLabeledLoop()
+  testBreakInDoWhileLoop()
 }
 
 private fun testUnlabeledBreaks() {
@@ -75,4 +76,84 @@ private fun testLabeledLoop() {
     }
     break
   }
+}
+
+/**
+ * The do-while loops in this test will be rewritten to a while loop with an inner do-while loop. We
+ * test that any break statements are still working as expected.
+ */
+private fun testBreakInDoWhileLoop() {
+  // track the expected sequence of loop executions.
+  val sequence = mutableListOf<String>()
+
+  fun registerWhileCondition(iteration: Int, loopName: String): Int {
+    // Ensure that when break statements are reached, the loop condition is not evaluated.
+    sequence.add("while_${loopName}_${iteration}")
+    return iteration
+  }
+
+  var outer = 0
+
+  outer@ do {
+    var x = outer++
+    sequence.add("outer_$x")
+
+    // labelled block
+    block@ do {
+      inner@ do {
+        val y = x++
+        when (y) {
+          0 -> {
+            sequence.add("break")
+            break
+          }
+          1 -> {
+            sequence.add("break@inner")
+            break@inner
+          }
+          2 -> {
+            sequence.add("break@block")
+
+            break@block
+          }
+          else -> {
+            sequence.add("inner_else_$y")
+          }
+        }
+      } while (registerWhileCondition(y, "inner") < 3)
+      sequence.add("block")
+    } while (false)
+
+    if (x == 4) {
+      sequence.add("break_outer")
+      break@outer
+    }
+    sequence.add("end_outer")
+  } while (registerWhileCondition(x, "outer") < 100)
+
+  assertEquals(4, outer)
+
+  val expectedSequence =
+    listOf(
+      "outer_0",
+      "break",
+      "block",
+      "end_outer",
+      "while_outer_1",
+      "outer_1",
+      "break@inner",
+      "block",
+      "end_outer",
+      "while_outer_2",
+      "outer_2",
+      "break@block",
+      "end_outer",
+      "while_outer_3",
+      "outer_3",
+      "inner_else_3",
+      "while_inner_3",
+      "block",
+      "break_outer",
+    )
+  assertEquals(expectedSequence, sequence)
 }

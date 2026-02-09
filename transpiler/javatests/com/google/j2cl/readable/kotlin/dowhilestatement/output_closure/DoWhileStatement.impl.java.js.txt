@@ -30,19 +30,31 @@ class DoWhileStatement extends j_l_Object {
   } while (cdt);
   do {} while (cdt);
   if (cdt) {
-   let /** boolean */ foo;
-   do {
-    foo = false;
-   } while (foo);
-  }
-  let /** boolean */ foo_1;
-  do {
-   if (cdt) {
-    foo_1 = false;
-   } else {
-    foo_1 = true;
+   while (true) {
+    let /** boolean */ foo;
+    {
+     foo = false;
+    }
+    if (!foo) {
+     break;
+    }
    }
-  } while (foo_1);
+  }
+  while (true) {
+   let /** boolean */ foo_1;
+   {
+    loop_body$1: if (cdt) {
+     foo_1 = false;
+     break;
+    } else {
+     foo_1 = true;
+     break loop_body$1;
+    }
+   }
+   if (!foo_1) {
+    break;
+   }
+  }
  }
  /** @nodts */
  static $clinit() {

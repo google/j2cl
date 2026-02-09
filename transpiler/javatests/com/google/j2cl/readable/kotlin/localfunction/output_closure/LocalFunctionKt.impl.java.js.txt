@@ -51,15 +51,20 @@ class LocalFunctionKt extends j_l_Object {
   let message = '';
   let inductionVariable = start;
   if (inductionVariable <= end) {
-   let /** number */ k;
-   do {
-    k = inductionVariable;
-    inductionVariable = inductionVariable + 1 | 0;
-    let localFunctionInLoop = /**  @return {string}*/ (() =>{
-     return 'Hello';
-    });
-    message = j_l_String.m_valueOf__java_lang_Object__java_lang_String(message) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(localFunctionInLoop());
-   } while (k != end);
+   while (true) {
+    let /** number */ k;
+    {
+     k = inductionVariable;
+     inductionVariable = inductionVariable + 1 | 0;
+     let localFunctionInLoop = /**  @return {string}*/ (() =>{
+      return 'Hello';
+     });
+     message = j_l_String.m_valueOf__java_lang_Object__java_lang_String(message) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(localFunctionInLoop());
+    }
+    if (!(k != end)) {
+     break;
+    }
+   }
   }
   return message;
  }

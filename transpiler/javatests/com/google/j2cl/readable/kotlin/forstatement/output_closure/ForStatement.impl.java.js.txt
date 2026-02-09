@@ -46,12 +46,17 @@ class ForStatement extends j_l_Object {
   let inductionVariable_3 = 6;
   let last = ProgressionUtilKt.m_getProgressionLastElement__int__int__int__int(6, 0, tmp);
   if (last <= inductionVariable_3) {
-   let /** number */ i_2;
-   do {
-    i_2 = inductionVariable_3;
-    inductionVariable_3 = inductionVariable_3 + tmp | 0;
-    count = i_2;
-   } while (i_2 != last);
+   while (true) {
+    let /** number */ i_2;
+    {
+     i_2 = inductionVariable_3;
+     inductionVariable_3 = inductionVariable_3 + tmp | 0;
+     count = i_2;
+    }
+    if (!(i_2 != last)) {
+     break;
+    }
+   }
   }
   let list = /**@type {!ArrayList<!Integer>}*/ (ArrayList.$create__());
   for (let $iterator = list.m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {

@@ -19,7 +19,6 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertNotEquals
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
-import com.google.j2cl.integration.testing.TestUtils.isJvm
 
 fun main(vararg unused: String) {
   val captures = Captures()
@@ -141,13 +140,10 @@ private class Captures {
     // At the end suppliers[0] = () -> 1, suppliers[1] = () -> 2, suppliers[2] = () -> 3 and
     // suppliers[3] = () -> 4
     assertEquals(4, suppliers.size)
-    // TODO(b/468336770): Remove the condition `isJvm()` once the bug is fixed and the lambda
-    // capture behavior matches Kotlin/JVM.
-    if (isJvm()) {
-      assertEquals(1, suppliers[0].get())
-      assertEquals(2, suppliers[1].get())
-      assertEquals(3, suppliers[2].get())
-    }
+    assertEquals(1, suppliers[0].get())
+    assertEquals(2, suppliers[1].get())
+    assertEquals(3, suppliers[2].get())
+
     assertEquals(4, suppliers[3].get())
   }
 

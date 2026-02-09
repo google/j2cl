@@ -71,11 +71,16 @@ class RangeOperatorsKt extends j_l_Object {
   let inductionVariable_10 = 1;
   let last = s;
   if (inductionVariable_10 <= last) {
-   let /** number */ i_10;
-   do {
-    i_10 = inductionVariable_10;
-    inductionVariable_10 = inductionVariable_10 + 1 | 0;
-   } while (i_10 != last);
+   while (true) {
+    let /** number */ i_10;
+    {
+     i_10 = inductionVariable_10;
+     inductionVariable_10 = inductionVariable_10 + 1 | 0;
+    }
+    if (!(i_10 != last)) {
+     break;
+    }
+   }
   }
   for (let inductionVariable_11 = s; inductionVariable_11 <= 1; inductionVariable_11 = inductionVariable_11 + 1 | 0) {
    let i_11 = inductionVariable_11;
@@ -83,11 +88,16 @@ class RangeOperatorsKt extends j_l_Object {
   let inductionVariable_12 = $Long.fromInt(1);
   let last_1 = $Primitives.widenShortToLong(s);
   if ($LongUtils.lessEquals(inductionVariable_12, last_1)) {
-   let /** !$Long */ i_12;
-   do {
-    i_12 = inductionVariable_12;
-    inductionVariable_12 = $LongUtils.plus(inductionVariable_12, $Long.fromInt(1));
-   } while ($LongUtils.notEquals(i_12, last_1));
+   while (true) {
+    let /** !$Long */ i_12;
+    {
+     i_12 = inductionVariable_12;
+     inductionVariable_12 = $LongUtils.plus(inductionVariable_12, $Long.fromInt(1));
+    }
+    if (!$LongUtils.notEquals(i_12, last_1)) {
+     break;
+    }
+   }
   }
   for (let inductionVariable_13 = $Primitives.widenShortToLong(s); $LongUtils.lessEquals(inductionVariable_13, $Long.fromInt(1)); inductionVariable_13 = $LongUtils.plus(inductionVariable_13, $Long.fromInt(1))) {
    let i_13 = inductionVariable_13;
@@ -108,11 +118,16 @@ class RangeOperatorsKt extends j_l_Object {
   let inductionVariable_18 = 1;
   let last_4 = b;
   if (inductionVariable_18 <= last_4) {
-   let /** number */ i_18;
-   do {
-    i_18 = inductionVariable_18;
-    inductionVariable_18 = inductionVariable_18 + 1 | 0;
-   } while (i_18 != last_4);
+   while (true) {
+    let /** number */ i_18;
+    {
+     i_18 = inductionVariable_18;
+     inductionVariable_18 = inductionVariable_18 + 1 | 0;
+    }
+    if (!(i_18 != last_4)) {
+     break;
+    }
+   }
   }
   for (let inductionVariable_19 = b; inductionVariable_19 <= 1; inductionVariable_19 = inductionVariable_19 + 1 | 0) {
    let i_19 = inductionVariable_19;
@@ -120,11 +135,16 @@ class RangeOperatorsKt extends j_l_Object {
   let inductionVariable_20 = $Long.fromInt(1);
   let last_5 = $Primitives.widenByteToLong(b);
   if ($LongUtils.lessEquals(inductionVariable_20, last_5)) {
-   let /** !$Long */ i_20;
-   do {
-    i_20 = inductionVariable_20;
-    inductionVariable_20 = $LongUtils.plus(inductionVariable_20, $Long.fromInt(1));
-   } while ($LongUtils.notEquals(i_20, last_5));
+   while (true) {
+    let /** !$Long */ i_20;
+    {
+     i_20 = inductionVariable_20;
+     inductionVariable_20 = $LongUtils.plus(inductionVariable_20, $Long.fromInt(1));
+    }
+    if (!$LongUtils.notEquals(i_20, last_5)) {
+     break;
+    }
+   }
   }
   for (let inductionVariable_21 = $Primitives.widenByteToLong(b); $LongUtils.lessEquals(inductionVariable_21, $Long.fromInt(1)); inductionVariable_21 = $LongUtils.plus(inductionVariable_21, $Long.fromInt(1))) {
    let i_21 = inductionVariable_21;
@@ -144,22 +164,32 @@ class RangeOperatorsKt extends j_l_Object {
   let inductionVariable_26 = 1;
   let last_8 = ProgressionUtilKt.m_getProgressionLastElement__int__int__int__int(1, 5, 3);
   if (inductionVariable_26 <= last_8) {
-   let /** number */ i_26;
-   do {
-    i_26 = inductionVariable_26;
-    inductionVariable_26 = inductionVariable_26 + 3 | 0;
-   } while (i_26 != last_8);
+   while (true) {
+    let /** number */ i_26;
+    {
+     i_26 = inductionVariable_26;
+     inductionVariable_26 = inductionVariable_26 + 3 | 0;
+    }
+    if (!(i_26 != last_8)) {
+     break;
+    }
+   }
   }
   let progression = RangesKt.m_step__kotlin_ranges_IntProgression__int__kotlin_ranges_IntProgression(RangesKt.m_until__int__int__kotlin_ranges_IntRange(1, 5), 3);
   let inductionVariable_27 = progression.m_getFirst__int();
   let last_9 = progression.m_getLast__int();
   let step = progression.m_getStep__int();
   if (step > 0 && inductionVariable_27 <= last_9 || step < 0 && last_9 <= inductionVariable_27) {
-   let /** number */ i_27;
-   do {
-    i_27 = inductionVariable_27;
-    inductionVariable_27 = inductionVariable_27 + step | 0;
-   } while (i_27 != last_9);
+   while (true) {
+    let /** number */ i_27;
+    {
+     i_27 = inductionVariable_27;
+     inductionVariable_27 = inductionVariable_27 + step | 0;
+    }
+    if (!(i_27 != last_9)) {
+     break;
+    }
+   }
   }
   for (let inductionVariable_28 = 1; inductionVariable_28 < 5; inductionVariable_28 = inductionVariable_28 + 1 | 0) {
    let i_28 = inductionVariable_28;
@@ -168,11 +198,16 @@ class RangeOperatorsKt extends j_l_Object {
   let inductionVariable_29 = 5;
   let last_10 = ProgressionUtilKt.m_getProgressionLastElement__int__int__int__int(5, 1, tmp);
   if (last_10 <= inductionVariable_29) {
-   let /** number */ i_29;
-   do {
-    i_29 = inductionVariable_29;
-    inductionVariable_29 = inductionVariable_29 + tmp | 0;
-   } while (i_29 != last_10);
+   while (true) {
+    let /** number */ i_29;
+    {
+     i_29 = inductionVariable_29;
+     inductionVariable_29 = inductionVariable_29 + tmp | 0;
+    }
+    if (!(i_29 != last_10)) {
+     break;
+    }
+   }
   }
   for (let inductionVariable_30 = 5; 1 <= inductionVariable_30; inductionVariable_30 = inductionVariable_30 + -1 | 0) {
    let i_30 = inductionVariable_30;
@@ -182,11 +217,16 @@ class RangeOperatorsKt extends j_l_Object {
   let last_11 = progression_1.m_getLast__int();
   let step_1 = progression_1.m_getStep__int();
   if (step_1 > 0 && inductionVariable_31 <= last_11 || step_1 < 0 && last_11 <= inductionVariable_31) {
-   let /** number */ i_31;
-   do {
-    i_31 = inductionVariable_31;
-    inductionVariable_31 = inductionVariable_31 + step_1 | 0;
-   } while (i_31 != last_11);
+   while (true) {
+    let /** number */ i_31;
+    {
+     i_31 = inductionVariable_31;
+     inductionVariable_31 = inductionVariable_31 + step_1 | 0;
+    }
+    if (!(i_31 != last_11)) {
+     break;
+    }
+   }
   }
   let from = Short.m_valueOf__short__java_lang_Short(1);
   let to = $Long.fromInt(1);
@@ -194,11 +234,16 @@ class RangeOperatorsKt extends j_l_Object {
    let inductionVariable_32 = $Primitives.widenShortToLong(from.m_shortValue__short());
    let last_12 = Long.m_longValue__java_lang_Long__long(to);
    if ($LongUtils.lessEquals(inductionVariable_32, last_12)) {
-    let /** !$Long */ i_32;
-    do {
-     i_32 = inductionVariable_32;
-     inductionVariable_32 = $LongUtils.plus(inductionVariable_32, $Long.fromInt(1));
-    } while ($LongUtils.notEquals(i_32, last_12));
+    while (true) {
+     let /** !$Long */ i_32;
+     {
+      i_32 = inductionVariable_32;
+      inductionVariable_32 = $LongUtils.plus(inductionVariable_32, $Long.fromInt(1));
+     }
+     if (!$LongUtils.notEquals(i_32, last_12)) {
+      break;
+     }
+    }
    }
    for (let inductionVariable_33 = $Primitives.widenShortToLong(from.m_shortValue__short()), last_13 = Long.m_longValue__java_lang_Long__long(to); $LongUtils.less(inductionVariable_33, last_13); inductionVariable_33 = $LongUtils.plus(inductionVariable_33, $Long.fromInt(1))) {
     let i_33 = inductionVariable_33;

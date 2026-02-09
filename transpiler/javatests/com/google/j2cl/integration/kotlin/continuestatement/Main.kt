@@ -25,6 +25,7 @@ fun main(vararg unused: String) {
   testWhileLoop()
   testNestedForLoop()
   testNestedSwitch()
+  testContinueInDoWhileLoop()
 }
 
 private fun testForLoop() {
@@ -103,4 +104,65 @@ private fun testNestedSwitch() {
     }
     fail()
   }
+}
+
+/**
+ * The do-while loops in this test will be rewritten to a while loop with an inner do-while loop. We
+ * test that any continue statements are still working as expected.
+ */
+private fun testContinueInDoWhileLoop() {
+  // track the expected sequence of loop executions.
+  val sequence = mutableListOf<String>()
+
+  fun registerWhileCondition(iteration: Int, loopName: String): Int {
+    // Ensure that when continue statements are reached, the loop condition is still evaluated.
+    sequence.add("while_${loopName}_${iteration}")
+    return iteration
+  }
+
+  var outer = 0
+
+  outer@ do {
+    var x = outer++
+    sequence.add("outer_$x")
+
+    inner@ do {
+      val y = x++ // 2 3
+      when (y) {
+        0 -> {
+          sequence.add("continue")
+          continue
+        }
+        1 -> {
+          sequence.add("continue@inner")
+          continue@inner
+        }
+        else -> {
+          sequence.add("inner_else_$y")
+        }
+      }
+    } while (registerWhileCondition(y, "inner") < 2)
+
+    if (x < 4) {
+      sequence.add("continue_outer")
+      continue@outer
+    }
+    sequence.add("Should not be called")
+  } while (registerWhileCondition(x, "outer") < 3)
+
+  assertEquals(1, outer)
+
+  val expectedSequence =
+    listOf(
+      "outer_0",
+      "continue",
+      "while_inner_0",
+      "continue@inner",
+      "while_inner_1",
+      "inner_else_2",
+      "while_inner_2",
+      "continue_outer",
+      "while_outer_3",
+    )
+  assertEquals(expectedSequence, sequence)
 }
