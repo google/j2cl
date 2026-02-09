@@ -63,7 +63,7 @@ j2kt_native_library(
 closure_js_library(
     name = "compilation_environment",
     srcs = select({
-        "//build_defs/internal_do_not_use:j2kt_web_enabled": ["super-j2cl/compilation_environment_j2kt.js"],
+        "//build_defs/internal_do_not_use:j2kt_web_experimental_environment": ["super-j2cl/compilation_environment_j2kt.js"],
         "//conditions:default": ["super-j2cl/compilation_environment.js"],
     }),
 )

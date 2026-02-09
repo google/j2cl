@@ -72,14 +72,7 @@ string_flag(
     ],
 )
 
-# Flag to enable j2kt-web experiment. Please talk to j2cl-team@ before using it.
-# TODO(kevinoconnor): Remove this flag once the migration to j2kt_web_environment is complete.
-bool_flag(
-    name = "experimental_enable_j2kt_web",
-    build_setting_default = False,
-)
-
-# Flag to enable j2kt-web experiment. Please talk to j2cl-team@ before using it.
+# Flag to configure j2kt-web experiment. Please talk to j2cl-team@ before using it.
 string_flag(
     name = "j2kt_web_environment",
     build_setting_default = "production",
