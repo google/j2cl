@@ -67,6 +67,10 @@ public class OptimizeImplicitConstructors extends NormalizationPass {
               return type;
             }
 
+            if (!descriptor.getAnnotations().isEmpty()) {
+              return type;
+            }
+
             type.getMembers().remove(constructors.getFirst());
 
             return type;
