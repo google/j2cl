@@ -539,46 +539,36 @@
 
 - (void)testProperties {
   J2ktiosinteropPropertyClass *propertyClass = create_J2ktiosinteropPropertyClass_init();
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyClass intMethod], 0);
+  XCTAssertEqual(propertyClass.intMethod, 0);
   XCTAssertEqual([propertyClass intSuppressMethod], 0);
   XCTAssertEqual([propertyClass intMethodWithParamWithInt:1], 1);
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyClass getLongMethod], 0);
+  XCTAssertEqual(propertyClass.longMethod, 0);
 
   J2ktiosinteropPropertyMethod *propertyMethod = create_J2ktiosinteropPropertyMethod_init();
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyMethod intMethod], 0);
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyMethod getLongMethod], 0);
+  XCTAssertEqual(propertyMethod.intMethod, 0);
+  XCTAssertEqual(propertyMethod.longMethod, 0);
 
   J2ktiosinteropPropertyClassOverride *propertyClassOverride =
       create_J2ktiosinteropPropertyClassOverride_init();
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyClassOverride intMethod], 0);
+  XCTAssertEqual(propertyClassOverride.intMethod, 0);
   XCTAssertEqual([propertyClassOverride intSuppressMethod], 0);
   XCTAssertEqual([propertyClassOverride intMethodWithParamWithInt:1], 1);
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyClassOverride getLongMethod], 0);
+  XCTAssertEqual(propertyClassOverride.longMethod, 0);
   XCTAssertEqual([propertyClassOverride nonOverrideIntMethod], 0);
 
   J2ktiosinteropPropertyMethodOverride *propertyMethodOverride =
       create_J2ktiosinteropPropertyMethodOverride_init();
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyMethodOverride intMethod], 0);
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyMethodOverride getLongMethod], 0);
+  XCTAssertEqual(propertyMethodOverride.intMethod, 0);
+  XCTAssertEqual(propertyMethodOverride.longMethod, 0);
   XCTAssertEqual([propertyMethodOverride nonOverrideIntMethod], 0);
 
   J2ktiosinteropPropertyAutoValueClass *propertyAutoValueClass =
       [[J2ktiosinteropPropertyAutoValueClass_builder() setNameWithNSString:@"foo"] build];
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyAutoValueClass getName], @"foo");
+  XCTAssertEqual(propertyAutoValueClass.name, @"foo");
 
   J2ktiosinteropPropertyAutoValueMethod *propertyAutoValueMethod =
       [[J2ktiosinteropPropertyAutoValueMethod_builder() setNameWithNSString:@"foo"] build];
-  // TODO(b/467703991): Should be property.
-  XCTAssertEqual([propertyAutoValueMethod getName], @"foo");
+  XCTAssertEqual(propertyAutoValueMethod.name, @"foo");
 }
 
 - (void)testPlatform {

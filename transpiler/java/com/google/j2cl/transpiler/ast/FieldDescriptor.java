@@ -167,6 +167,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
+  public boolean isKtProperty() {
+    return true;
+  }
+
+  @Override
   @Memoized
   public String getBinaryName() {
     return getName();

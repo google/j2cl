@@ -50,9 +50,7 @@ public abstract class MemberDescriptor
 
   abstract KtInfo getKtInfo();
 
-  public boolean isKtProperty() {
-    return isField() || getKtInfo().isProperty() || getEnclosingTypeDescriptor().isAnnotation();
-  }
+  public abstract boolean isKtProperty();
 
   @Nullable
   public String getExplicitKtName() {

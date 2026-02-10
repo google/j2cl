@@ -1171,6 +1171,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   @Override
+  public boolean isKtProperty() {
+    return getKtInfo().isProperty()
+        || getEnclosingTypeDescriptor().isAnnotation()
+        || isJ2ObjCPropertyGetter();
+  }
+
+  @Override
   public MethodDescriptor specializeTypeVariables(
       Map<TypeVariable, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
     return specializeTypeVariables(
