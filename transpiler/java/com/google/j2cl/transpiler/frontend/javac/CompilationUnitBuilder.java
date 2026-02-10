@@ -1055,7 +1055,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     throw new AssertionError("Unexpected node type in lambda body: " + body.getKind());
   }
 
-
   /**
    * Converts method reference expressions of the form:
    *
@@ -1526,15 +1525,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return new JsConstructorReference(environment.createTypeDeclaration(classSymbol));
     }
     if (symbol instanceof VarSymbol varSymbol) {
+      if (symbol.getKind() == ElementKind.FIELD || symbol.getKind() == ElementKind.ENUM_CONSTANT) {
+        FieldDescriptor fieldDescriptor =
+            environment.createFieldDescriptor(varSymbol, identifier.type);
+        return FieldAccess.newBuilder().setTarget(fieldDescriptor).build();
+      }
 
-    if (symbol.getKind() == ElementKind.FIELD || symbol.getKind() == ElementKind.ENUM_CONSTANT) {
-      FieldDescriptor fieldDescriptor =
-          environment.createFieldDescriptor(varSymbol, identifier.type);
-      return FieldAccess.newBuilder().setTarget(fieldDescriptor).build();
-    }
-
-    Variable variable = variableByVariableElement.get(symbol);
-    return variable.createReference();
+      Variable variable = variableByVariableElement.get(symbol);
+      return variable.createReference();
     }
     throw new AssertionError("Unexpected symbol class: " + symbol.getClass());
   }
@@ -1686,7 +1684,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           return RuntimeMethods.createCheckNotNullCall(
               convertExpression(((JCUnary) jcExpression).arg));
         }
-        // fall through
+      // fall through
       default:
         throw new AssertionError(
             "Unknown expression " + jcExpression + " (node type: " + jcExpression.getKind() + ")");
