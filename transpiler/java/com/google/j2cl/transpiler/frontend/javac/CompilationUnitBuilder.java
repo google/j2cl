@@ -299,8 +299,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     } else {
       initializer = convertConstantToLiteral(variableElement);
     }
-    return Field.Builder.from(
-            environment.createFieldDescriptor(variableElement, fieldDeclaration.type))
+    return Field.Builder.from(environment.createFieldDescriptor(variableElement))
         .setInitializer(initializer)
         .setSourcePosition(getSourcePosition(fieldDeclaration))
         .setNameSourcePosition(getNamePosition(fieldDeclaration))
