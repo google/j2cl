@@ -1213,7 +1213,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       DeclaredTypeDescriptor parameterizedEnclosingType =
           getParameterizedEnclosingType(
               environment.createDeclaredTypeDescriptor(
-                  JavaEnvironment.getEnclosingType(variableElement).asType()),
+                  JavaEnvironment.getEnclosingTypeElement(variableElement).asType()),
               qualifier);
 
       FieldDescriptor fieldDescriptor =

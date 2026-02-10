@@ -557,7 +557,7 @@ class JavaEnvironment {
         // class.
         String binaryName = getBinaryNameFromTypeBinding(currentType);
         String declaringClassPrefix =
-            getBinaryNameFromTypeBinding(getEnclosingType(currentType)) + "$";
+            getBinaryNameFromTypeBinding(getEnclosingTypeElement(currentType)) + "$";
         simpleName = binaryName.substring(declaringClassPrefix.length());
       } else {
         simpleName = asElement(erasure(currentType.asType())).getSimpleName().toString();
@@ -580,7 +580,7 @@ class JavaEnvironment {
   private boolean isEnumSyntheticMethod(ExecutableElement methodElement) {
     // Enum synthetic methods are not marked as such because per JLS 13.1 these methods are
     // implicitly declared but are not marked as synthetic.
-    return getEnclosingType(methodElement).getKind() == ElementKind.ENUM
+    return getEnclosingTypeElement(methodElement).getKind() == ElementKind.ENUM
         && (isValuesMethod(methodElement) || isValueOfMethod(methodElement));
   }
 
@@ -618,7 +618,7 @@ class JavaEnvironment {
 
   FieldDescriptor createFieldDescriptor(VariableElement variableElement, TypeMirror type) {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(getEnclosingType(variableElement).asType());
+        createDeclaredTypeDescriptor(getEnclosingTypeElement(variableElement).asType());
     return createFieldDescriptor(enclosingTypeDescriptor, variableElement, type);
   }
 
@@ -1392,7 +1392,7 @@ class JavaEnvironment {
     boolean isNullMarked = isNullMarked(typeElement);
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeElement))
-        .setEnclosingTypeDeclaration(createTypeDeclaration(getEnclosingType(typeElement)))
+        .setEnclosingTypeDeclaration(createTypeDeclaration(getEnclosingTypeElement(typeElement)))
         .setEnclosingMethodDescriptorFactory(() -> getEnclosingMethodDescriptor(typeElement))
         .setSuperTypeDescriptorFactory(
             () ->
@@ -1521,15 +1521,7 @@ class JavaEnvironment {
     return typeParameterElements;
   }
 
-  public static TypeElement getEnclosingType(Element typeElement) {
-    Element enclosing = typeElement.getEnclosingElement();
-    while (enclosing != null && !(enclosing instanceof TypeElement)) {
-      enclosing = enclosing.getEnclosingElement();
-    }
-    return (TypeElement) enclosing;
-  }
-
-  private static TypeElement getEnclosingType(TypeElement typeElement) {
+  public static TypeElement getEnclosingTypeElement(Element typeElement) {
     Element enclosing = typeElement.getEnclosingElement();
     while (enclosing != null && !(enclosing instanceof TypeElement)) {
       enclosing = enclosing.getEnclosingElement();
