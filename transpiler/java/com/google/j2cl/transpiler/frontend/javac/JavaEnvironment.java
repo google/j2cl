@@ -1052,23 +1052,6 @@ class JavaEnvironment {
             .map(this::createTypeDescriptor)
             .collect(toImmutableList());
 
-    // if (methodName.equals("isNull")) {
-    //   // debug = true;
-    //   var anno = createAnnotations(declarationMethodElement, inNullMarkedScope);
-    //   // debug = false;
-
-    //   AnnotationMirror wasmAnnotation =
-    //       com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName(
-    //           declarationMethodElement, "javaemul.internal.annotations.Wasm");
-    //   String wasmInfo =
-    //       wasmAnnotation == null
-    //           ? null
-    //           : com.google.j2cl.transpiler.frontend.javac.AnnotationUtils
-    //               .getAnnotationParameterString(wasmAnnotation, "value");
-
-    //   System.out.println("isNull found " + anno + " wasmInfo=" + wasmInfo);
-    // }
-
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
