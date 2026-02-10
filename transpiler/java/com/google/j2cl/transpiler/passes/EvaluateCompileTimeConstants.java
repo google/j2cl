@@ -60,7 +60,6 @@ public class EvaluateCompileTimeConstants extends NormalizationPass {
                     Literal.fromValue(
                         ((NumberLiteral) initializer.getConstantValue()).getValue(),
                         typeDescriptor);
-                ;
               }
               return Field.Builder.from(field).setInitializer(initializer).build();
             }
