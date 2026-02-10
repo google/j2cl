@@ -99,7 +99,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
@@ -1090,7 +1089,6 @@ class JavaEnvironment {
     ClassType javaLangObjectTypeBinding =
         (ClassType) elements.getTypeElement("java.lang.Object").asType();
     return getDeclaredMethods(javaLangObjectTypeBinding).stream()
-        .map(MethodDeclarationPair::getMethodSymbol)
         .filter(JavaEnvironment::isPolymorphic)
         .collect(ImmutableSet.toImmutableSet());
   }
@@ -1283,7 +1281,7 @@ class JavaEnvironment {
     return typeArguments;
   }
 
-  private ImmutableList<MethodDeclarationPair> getDeclaredMethods(ClassType classType) {
+  private ImmutableList<MethodSymbol> getDeclaredMethods(ClassType classType) {
     return classType.asElement().getEnclosedElements().stream()
         .filter(
             element ->
@@ -1291,32 +1289,10 @@ class JavaEnvironment {
                     && (element.getKind() == ElementKind.METHOD
                         || element.getKind() == ElementKind.CONSTRUCTOR))
         .map(MethodSymbol.class::cast)
-        .map(
-            methodSymbol ->
-                new MethodDeclarationPair(
-                    (MethodSymbol) methodSymbol.asMemberOf(classType, internalTypes), methodSymbol))
         .collect(toImmutableList());
   }
 
-  static final class MethodDeclarationPair {
-    private final MethodSymbol methodSymbol;
-    private final MethodSymbol declarationMethodSymbol;
-
-    private MethodDeclarationPair(MethodSymbol methodSymbol, MethodSymbol declarationMethodSymbol) {
-      this.methodSymbol = methodSymbol;
-      this.declarationMethodSymbol = declarationMethodSymbol;
-    }
-
-    public MethodSymbol getMethodSymbol() {
-      return methodSymbol;
-    }
-
-    public MethodSymbol getDeclarationMethodSymbol() {
-      return declarationMethodSymbol;
-    }
-  }
-
-  private ImmutableList<MethodDeclarationPair> getMethods(ClassType classType) {
+  private ImmutableList<MethodSymbol> getMethods(ClassType classType) {
     return elements.getAllMembers((TypeElement) classType.asElement()).stream()
         .filter(
             element ->
@@ -1324,10 +1300,6 @@ class JavaEnvironment {
                     && (element.getKind() == ElementKind.METHOD
                         || element.getKind() == ElementKind.CONSTRUCTOR))
         .map(MethodSymbol.class::cast)
-        .map(
-            methodSymbol ->
-                new MethodDeclarationPair(
-                    (MethodSymbol) methodSymbol.asMemberOf(classType, internalTypes), methodSymbol))
         .collect(toImmutableList());
   }
 
@@ -1382,8 +1354,7 @@ class JavaEnvironment {
 
           // Get the actual abstract method from the frontend; which will return the unparameterized
           // declaration possibly from a supertype.
-          var functionalInterfaceMethodDecl =
-              getFunctionalInterfaceMethodDecl(typeElement.asType());
+          var functionalInterfaceMethodDecl = getFunctionalInterfaceMethod(typeElement.asType());
 
           if (functionalInterfaceMethodDecl == null) {
             return null;
@@ -1567,14 +1538,7 @@ class JavaEnvironment {
   }
 
   @Nullable
-  private MethodSymbol getFunctionalInterfaceMethodDecl(TypeMirror typeMirror) {
-    return Optional.ofNullable(getFunctionalInterfaceMethodPair(typeMirror))
-        .map(MethodDeclarationPair::getDeclarationMethodSymbol)
-        .orElse(null);
-  }
-
-  @Nullable
-  private MethodDeclarationPair getFunctionalInterfaceMethodPair(TypeMirror typeMirror) {
+  private MethodSymbol getFunctionalInterfaceMethod(TypeMirror typeMirror) {
     Type type = (Type) typeMirror;
     if (!internalTypes.isFunctionalInterface(type)) {
       return null;
@@ -1582,14 +1546,11 @@ class JavaEnvironment {
     if (type instanceof IntersectionType intersectionType) {
       return intersectionType.getBounds().stream()
           .filter(this::isFunctionalInterface)
-          .map(this::getFunctionalInterfaceMethodPair)
+          .map(this::getFunctionalInterfaceMethod)
           .collect(onlyElement());
     }
     return getMethods((ClassType) type).stream()
-        .filter(
-            m ->
-                isAbstract(m.getDeclarationMethodSymbol())
-                    && !isJavaLangObjectOverride(m.getDeclarationMethodSymbol()))
+        .filter(m -> isAbstract(m) && !isJavaLangObjectOverride(m))
         // There are cases in which the functional interface extends two distinct functional
         // interfaces. In those cases all the methods that remain abstract in this interface must
         // be compatible (i.e. have the same signature in the current parameterization). In this
