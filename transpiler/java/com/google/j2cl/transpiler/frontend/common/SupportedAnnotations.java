@@ -30,6 +30,8 @@ public class SupportedAnnotations {
           "com.google.errorprone.annotations.ResultIgnorabilityUnspecified",
           "com.google.j2kt.annotations.HiddenFromObjC",
           "com.google.j2objc.annotations.ObjectiveCName",
+          "com.google.j2objc.annotations.Property",
+          "com.google.j2objc.annotations.Property.Suppress",
           "com.google.j2objc.annotations.SwiftName",
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",

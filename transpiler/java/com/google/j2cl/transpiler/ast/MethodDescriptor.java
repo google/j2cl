@@ -681,6 +681,41 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return isJsPropertySetter() || getOrigin() == MethodOrigin.SYNTHETIC_PROPERTY_SETTER;
   }
 
+  public boolean isJ2ObjCPropertyGetter() {
+    if (!isDeclaration()) {
+      return getDeclarationDescriptor().isJ2ObjCPropertyGetter();
+    }
+
+    if (isConstructor()) {
+      return false;
+    }
+
+    if (!getParameterDescriptors().isEmpty()) {
+      return false;
+    }
+
+    if (TypeDescriptors.isPrimitiveVoid(getReturnTypeDescriptor())) {
+      return false;
+    }
+
+    if (hasAnnotation("com.google.j2objc.annotations.Property.Suppress")) {
+      return false;
+    }
+
+    if (hasAnnotation("com.google.j2objc.annotations.Property")) {
+      return true;
+    }
+
+    if (getEnclosingTypeDescriptor()
+        .getTypeDeclaration()
+        .hasAnnotation("com.google.j2objc.annotations.Property")) {
+      return true;
+    }
+
+    return getJavaOverriddenMethodDescriptors().stream()
+        .anyMatch(it -> it.isJ2ObjCPropertyGetter());
+  }
+
   public abstract boolean isEnumSyntheticMethod();
 
   @Override

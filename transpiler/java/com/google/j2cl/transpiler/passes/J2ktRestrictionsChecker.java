@@ -66,6 +66,7 @@ public final class J2ktRestrictionsChecker {
             checkReferencedTypeVisibilities(method);
             checkKtProperty(method);
             checkObjectiveCName(method);
+            checkJ2ObjCProperty(method);
           }
 
           @Override
@@ -208,6 +209,19 @@ public final class J2ktRestrictionsChecker {
                 objectiveCNameFirstComponent
                     + "With"
                     + objectiveCName.substring(objectiveCNameFirstComponent.length()));
+          }
+
+          private void checkJ2ObjCProperty(Method method) {
+            MethodDescriptor methodDescriptor = method.getDescriptor();
+            if (methodDescriptor.isJ2ObjCPropertyGetter()) {
+              if (methodDescriptor.isJsMember() && !methodDescriptor.isJsPropertyGetter()) {
+                problems.error(
+                    method.getSourcePosition(),
+                    "Method '%s' is marked @Property for J2ObjC but exposed to JS without a"
+                        + " @JsProperty.",
+                    method.getReadableDescription());
+              }
+            }
           }
 
           private void checkNullMarked(Type type) {

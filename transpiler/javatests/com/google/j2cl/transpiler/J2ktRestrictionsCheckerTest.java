@@ -413,6 +413,72 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         .assertTranspileSucceeds();
   }
 
+  public void testJ2ObjCPropertyAndJsTypeFails() {
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
+            "com.google.j2objc.annotations.Property", "public @interface Property {}")
+        .addCompilationUnit("jsinterop.annotations.JsType", "public @interface JsType {}")
+        .addCompilationUnit(
+            "test.Main",
+            """
+            @jsinterop.annotations.JsType
+            @com.google.j2objc.annotations.Property
+            class Main {
+              public int getFoo() {
+                return 1;
+              };
+            }
+            """)
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:5: Method 'int Main.getFoo()' is marked @Property for J2ObjC but"
+                + " exposed to JS without a @JsProperty.");
+  }
+
+  public void testJ2ObjCPropertyAndJsMethodFails() {
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
+            "com.google.j2objc.annotations.Property", "public @interface Property {}")
+        .addCompilationUnit("jsinterop.annotations.JsMethod", "public @interface JsMethod {}")
+        .addCompilationUnit(
+            "test.Main",
+            """
+            @com.google.j2objc.annotations.Property
+            class Main {
+              @jsinterop.annotations.JsMethod
+              public int getFoo() {
+                return 1;
+              };
+            }
+            """)
+        .assertTranspileFails()
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:5: Method 'int Main.getFoo()' is marked @Property for J2ObjC but"
+                + " exposed to JS without a @JsProperty.");
+  }
+
+  public void testJ2ObjCPropertyAndJsPropertySucceeds() {
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
+            "com.google.j2objc.annotations.Property", "public @interface Property {}")
+        .addCompilationUnit("jsinterop.annotations.JsProperty", "public @interface JsProperty {}")
+        .addCompilationUnit(
+            "test.Main",
+            """
+            @com.google.j2objc.annotations.Property
+            class Main {
+              @jsinterop.annotations.JsProperty
+              public int getFoo() {
+                return 1;
+              };
+            }
+            """)
+        .assertTranspileSucceeds();
+  }
+
   private TranspilerTester newTranspilerTester() {
     return TranspilerTester.newTesterWithJ2ktDefaults();
   }
