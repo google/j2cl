@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.MemberDescriptor
-import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
@@ -58,14 +56,6 @@ internal val TypeDeclaration.isKtInner: Boolean
 internal val TypeDeclaration.isOpen: Boolean
   get() = !isFinal && !isAnonymous
 
-internal val MethodDescriptor.isOpen: Boolean
-  get() =
-    enclosingTypeDescriptor.typeDeclaration.isOpen &&
-      !isFinal &&
-      !isConstructor &&
-      !isStatic &&
-      !visibility.isPrivate
-
 /**
  * Returns whether the described type is a test class, i.e. has the JUnit `@RunWith` annotation or
  * `@RunParameterized` annotation.
@@ -87,12 +77,6 @@ internal val Visibility.defaultMemberKtVisibility: KtVisibility
       // types.
       Visibility.PRIVATE -> KtVisibility.INTERNAL
     }
-
-internal val MemberDescriptor.isEnumConstructor: Boolean
-  get() = enclosingTypeDescriptor.isEnum && isConstructor
-
-internal val MemberDescriptor.isInterfaceMethod: Boolean
-  get() = enclosingTypeDescriptor.isInterface
 
 internal fun TypeDeclaration.equalsOrEnclosedIn(other: TypeDeclaration): Boolean =
   this == other || enclosingTypeDeclaration?.equalsOrEnclosedIn(other) ?: false
