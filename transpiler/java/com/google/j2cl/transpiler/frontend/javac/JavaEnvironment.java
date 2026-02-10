@@ -788,7 +788,7 @@ class JavaEnvironment {
     ImmutableList<ParameterDescriptor> parameterDescriptors =
         convertParameterDescriptors(enclosingTypeDescriptor, declarationMethodElement, parameters);
 
-    return createDeclaredMethodDescriptor(
+    return createMethodDescriptor(
         enclosingTypeDescriptor,
         declarationMethodElement,
         declarationMethodDescriptor,
@@ -1017,7 +1017,7 @@ class JavaEnvironment {
     return internalTypes.isSameType((Type) thisType, (Type) thatType);
   }
 
-  private MethodDescriptor createDeclaredMethodDescriptor(
+  private MethodDescriptor createMethodDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       ExecutableElement declarationMethodElement,
       MethodDescriptor declarationMethodDescriptor,
