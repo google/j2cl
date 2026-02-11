@@ -12,7 +12,8 @@ J2KT_WEB_DISABLED = allowlists.of_targets([
 ])
 
 # Packages for which J2KT Web is always enabled for, except those specified in J2KT_WEB_DISABLED.
-J2KT_WEB_ENABLED = allowlists.of_packages([], exclude = [J2KT_WEB_DISABLED])
+J2KT_WEB_ENABLED = allowlists.of_packages([
+], exclude = [J2KT_WEB_DISABLED])
 
 # Packages for which J2KT Web is enabled if the blaze flag is enabled, except those specified in
 # J2KT_WEB_DISABLED.
