@@ -279,6 +279,7 @@ def _golden_output_impl(ctx):
         ctx.actions.run_shell(
             inputs = [input],
             outputs = [output],
+            mnemonic = "J2clGoldenOutputCopy",
             command = "\n".join([
                 "set -e",
                 "INPUT=%s" % input.path,
@@ -297,6 +298,7 @@ def _golden_output_impl(ctx):
         ctx.actions.run_shell(
             inputs = [input],
             outputs = [output],
+            mnemonic = "J2clGoldenOutputCopySingle",
             command = "cp -L -f %s %s/module.imports.js.txt" % (input.path, output.path),
         )
     else:
