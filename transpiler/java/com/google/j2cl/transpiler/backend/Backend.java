@@ -608,7 +608,6 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
-          EvaluateCompileTimeConstants::new,
           RemoveReturnValuesFromVoidMethods::new,
           // ImplementRecordClasses needs to run before DesugarInstanceOfPatterns.
           ImplementRecordClasses::new,

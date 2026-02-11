@@ -51,7 +51,7 @@ open class SwitchStatement {
    }
   }
   when (1) {
-   -2, 1, 2 -> {}
+   - 2, 1, 2 -> {}
    else -> {
     return
    }
@@ -65,13 +65,13 @@ open class SwitchStatement {
   }
   var s: Short = 1.toShort()
   when (s) {
-   1.toShort() -> {
+   1L.toShort() -> {
     s = (s.toInt() + 1).toShort()
    }
-   3.toShort() -> {
+   SwitchStatement.CONST_pp_switchstatement -> {
     s = (s.toInt() + 1).toShort()
    }
-   12.toShort() -> {
+   (SwitchStatement.CONST_pp_switchstatement.toInt() * 4).toShort() -> {
     s = (s.toInt() + 1).toShort()
    }
    else -> {}
@@ -82,28 +82,28 @@ open class SwitchStatement {
   when (ch) {
    'a' -> {}
    '\u0001' -> {}
-   '\u0002' -> {}
-   '\u0003' -> {}
+   2.toByte().toInt().toChar() -> {}
+   3.toShort().toInt().toChar() -> {}
    else -> {}
   }
   when (i) {
    97 -> {}
    1 -> {}
-   2 -> {}
-   3 -> {}
+   2.toByte().toInt() -> {}
+   3.toShort().toInt() -> {}
    else -> {}
   }
   when (b) {
    97.toByte() -> {}
    1.toByte() -> {}
    2.toByte() -> {}
-   3.toByte() -> {}
+   3.toShort().toByte() -> {}
    else -> {}
   }
   when (s) {
    97.toShort() -> {}
    1.toShort() -> {}
-   2.toShort() -> {}
+   2.toByte().toShort() -> {}
    3.toShort() -> {}
    else -> {}
   }
