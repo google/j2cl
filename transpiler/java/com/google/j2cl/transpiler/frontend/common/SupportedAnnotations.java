@@ -33,6 +33,7 @@ public class SupportedAnnotations {
           "com.google.j2objc.annotations.Property",
           "com.google.j2objc.annotations.Property.Suppress",
           "com.google.j2objc.annotations.SwiftName",
+          "dagger.Inject",
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
           "java.lang.SuppressWarnings",
@@ -42,6 +43,7 @@ public class SupportedAnnotations {
           "javaemul.internal.annotations.Wasm",
           "javaemul.lang.annotations.WasAutoValue",
           "javaemul.lang.annotations.WasAutoValue.Builder",
+          "javax.inject.Inject",
           "kotlin.Deprecated",
           "org.junit.runner.RunWith"
           // go/keep-sorted end

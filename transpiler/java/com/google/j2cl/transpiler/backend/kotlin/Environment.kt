@@ -125,6 +125,8 @@ internal data class Environment(
       // All interface methods are public in Kotlin, and Java allows non-public static members, so
       // we map them to public.
       memberDescriptor.isInterfaceMethod -> KtVisibility.PUBLIC
+      // TODO(b/483489173): Remove when visibility problem in Dagger is solved differently.
+      memberDescriptor.isConstructor && memberDescriptor.hasInjectAnnotation -> KtVisibility.PUBLIC
       // Explicit private members.
       isKtPrivate(memberDescriptor) -> KtVisibility.PRIVATE
       // Use default visibility for everything else.
