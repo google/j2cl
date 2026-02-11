@@ -62,7 +62,6 @@ import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
-import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -293,12 +292,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private Field convertFieldDeclaration(JCVariableDecl fieldDeclaration) {
     Expression initializer;
     VariableElement variableElement = fieldDeclaration.sym;
-    Object constantValue = variableElement.getConstantValue();
-    if (constantValue == null) {
-      initializer = convertExpressionOrNull(fieldDeclaration.getInitializer());
-    } else {
-      initializer = convertConstantToLiteral(variableElement);
-    }
+    initializer = convertExpressionOrNull(fieldDeclaration.getInitializer());
     return Field.Builder.from(environment.createFieldDescriptor(variableElement))
         .setInitializer(initializer)
         .setSourcePosition(getSourcePosition(fieldDeclaration))
@@ -356,12 +350,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private Method.Builder newMethodBuilder(ExecutableElement methodElement) {
     MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodElement);
     return Method.newBuilder().setMethodDescriptor(methodDescriptor);
-  }
-
-  private Literal convertConstantToLiteral(VariableElement variableElement) {
-    return Literal.fromValue(
-        variableElement.getConstantValue(),
-        environment.createTypeDescriptor(variableElement.asType()));
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////

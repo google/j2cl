@@ -41,7 +41,7 @@ open class CompileTimeConstant<T> {
  val B2: Int = 20
 
  @JvmField
- val C2: Int = 200
+ val C2: Int = CompileTimeConstant.A * CompileTimeConstant.B
 
  @JvmField
  val D2: String = "Tur\"tle"
@@ -50,7 +50,7 @@ open class CompileTimeConstant<T> {
  val E2: String = "Do\"ve"
 
  @JvmField
- val F2: String = "Tur\"tleDo\"ve"
+ val F2: String = this.D2 + this.E2
 
  @JvmField
  val G2: Long = 10000L
@@ -59,7 +59,7 @@ open class CompileTimeConstant<T> {
  val H2: Char = 'A'
 
  @JvmField
- val I2: Boolean = true
+ val I2: Boolean = this.G2 > 100L
 
  init {
   val b: Boolean = this.I2
@@ -88,15 +88,15 @@ open class CompileTimeConstant<T> {
 
   const val B: Int = 20
 
-  const val C: Int = 200
+  const val C: Int = CompileTimeConstant.A * CompileTimeConstant.B
 
   const val D: String = "Tur\"tle"
 
   const val E: String = "Do\'ve"
 
-  const val F: String = "Tur\"tleDo\'ve"
+  const val F: String = CompileTimeConstant.D + CompileTimeConstant.E
 
-  const val J: String = "Tur\"tleDo\'veTur\"tleDo\'ve"
+  const val J: String = CompileTimeConstant.F + CompileTimeConstant.F
 
   @JvmField
   val K: String? = null
@@ -107,28 +107,28 @@ open class CompileTimeConstant<T> {
 
   const val N: String = "ThisIsALongStringAlsoButLonger"
 
-  const val O: String = "1 is 1"
+  const val O: String = "" + 1 + " is 1"
 
   const val G: Long = 10000L
 
   const val H: Char = 'A'
 
-  const val I: Boolean = true
+  const val I: Boolean = CompileTimeConstant.G > 100L
 
   const val P: Double = 3.141592653589793
 
-  const val Q: Float = 3.1415927f
+  const val Q: Float = CompileTimeConstant.P.toFloat()
 
-  const val MIN_BYTE: Byte = (-128).toByte()
+  const val MIN_BYTE: Byte = (- 128).toByte()
 
-  const val MIN_SHORT: Short = (-32768).toShort()
+  const val MIN_SHORT: Short = (- 32768).toShort()
 
   const val MIN_INT: Int = -2147483647 - 1
 
   const val MIN_LONG: Long = -9223372036854775807L - 1L
 
-  const val MIN_BYTE_WITH_CAST: Byte = (-128).toByte()
+  const val MIN_BYTE_WITH_CAST: Byte = (- 128).toByte()
 
-  const val MIN_SHORT_WITH_CAST: Short = (-32768).toShort()
+  const val MIN_SHORT_WITH_CAST: Short = (- 32768).toShort()
  }
 }

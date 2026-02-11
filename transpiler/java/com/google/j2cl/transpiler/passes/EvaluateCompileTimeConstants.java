@@ -15,18 +15,14 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.j2cl.transpiler.ast.TypeDescriptors.isNumericPrimitive;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.SwitchCase;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 
 /**
  * Evaluates compile-time constants in constructs where the transpiler assumes they are.
@@ -52,16 +48,9 @@ public class EvaluateCompileTimeConstants extends NormalizationPass {
           public Node rewriteField(Field field) {
             Expression initializer = field.getInitializer();
             if (initializer != null && field.isCompileTimeConstant()) {
-              TypeDescriptor typeDescriptor = field.getDescriptor().getTypeDescriptor();
-              if (isNumericPrimitive(typeDescriptor)) {
-                // Coerce the type of the constant to the field, since Java allows initializing
-                // integral typed fields that are smaller than integer with an integer literal.
-                initializer =
-                    Literal.fromValue(
-                        ((NumberLiteral) initializer.getConstantValue()).getValue(),
-                        typeDescriptor);
-              }
-              return Field.Builder.from(field).setInitializer(initializer).build();
+              return Field.Builder.from(field)
+                  .setInitializer(field.getDescriptor().getConstantValue())
+                  .build();
             }
             return field;
           }

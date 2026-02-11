@@ -61,7 +61,6 @@ import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
-import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -300,14 +299,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
         Expression initializer;
         IVariableBinding variableBinding = fragment.resolveBinding();
-        if (variableBinding.getConstantValue() == null) {
-          initializer = convertOrNull(fragment.getInitializer());
-        } else {
-          initializer =
-              Literal.fromValue(
-                  variableBinding.getConstantValue(),
-                  environment.createTypeDescriptor(variableBinding.getType()));
-        }
+        initializer = convertOrNull(fragment.getInitializer());
         Field field =
             Field.Builder.from(environment.createFieldDescriptor(variableBinding))
                 .setInitializer(initializer)

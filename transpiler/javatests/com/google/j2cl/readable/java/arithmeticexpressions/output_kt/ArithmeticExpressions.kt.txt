@@ -296,9 +296,9 @@ open class ArithmeticExpressions {
  companion object {
   private const val FLOAT_CONSTANT: Float = 1.1f
 
-  private const val DOUBLE_CONSTANT: Double = 1.100000023841858
+  private const val DOUBLE_CONSTANT: Double = ArithmeticExpressions.FLOAT_CONSTANT.toDouble()
 
-  private const val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
+  private const val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = (ArithmeticExpressions.FLOAT_CONSTANT + ArithmeticExpressions.FLOAT_CONSTANT).toDouble()
 
   @JvmField
   var one: kotlin.Long = 1L
