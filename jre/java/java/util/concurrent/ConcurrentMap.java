@@ -28,6 +28,12 @@ import java.util.Map;
  */
 public interface ConcurrentMap<K, V> extends Map<K, V> {
 
+  @Override
+  default V getOrDefault(Object key, V defaultValue) {
+    V value = get(key);
+    return value == null ? defaultValue : value;
+  }
+
   V putIfAbsent(K key, V value);
 
   boolean remove(Object key, Object value);
