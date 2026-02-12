@@ -15,27 +15,26 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.ObjectiveCName;
 
-/** Tests for J2ObjC properties on methods with overrides. */
-public class PropertyMethodOverride extends PropertyMethod {
-  @Override
-  public int intMethod() {
-    return super.intMethod();
+public class ObjectiveCNameOverrides {
+  public static class Parent {
+    @ObjectiveCName("parent")
+    public String parentWithOverride() {
+      return "parent";
+    }
   }
 
-  @Override
-  public int getLongMethod() {
-    return super.getLongMethod();
-  }
+  public static final class Child extends Parent {
+    @Override
+    @ObjectiveCName("parentOverride") // Ignored in override.
+    public String parentWithOverride() {
+      return super.parentWithOverride() + "/child";
+    }
 
-  public int nonOverrideIntMethod() {
-    return 0;
+    @ObjectiveCName("child")
+    public String childWithoutOverride() {
+      return "child";
+    }
   }
-
-  // TODO(b/483964587): Uncomment when fixed.
-  // @Override
-  // @Property // Ignored in override.
-  // public int getPropertyInOverrideMethod() {
-  //   return 1;
-  // }
 }

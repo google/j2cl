@@ -15,6 +15,7 @@
 #import "j2ktiosinterop/NativeCustomName.h"
 #import "j2ktiosinterop/NativeDefaultName.h"
 #import "j2ktiosinterop/Nullability.h"
+#import "j2ktiosinterop/ObjectiveCNameOverrides.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
 #import "j2ktiosinterop/OnlyImplicitDefaultConstructor.h"
 #import "j2ktiosinterop/PackageNames.h"
@@ -500,6 +501,7 @@
   J2ktiosinteropPropertyMethod *propertyMethod = create_J2ktiosinteropPropertyMethod_init();
   XCTAssertEqual(propertyMethod.intMethod, 0);
   XCTAssertEqual(propertyMethod.longMethod, 0);
+  XCTAssertEqual([propertyMethod getPropertyInOverrideMethod], 0);
 
   J2ktiosinteropPropertyClassOverride *propertyClassOverride =
       create_J2ktiosinteropPropertyClassOverride_init();
@@ -514,6 +516,8 @@
   XCTAssertEqual(propertyMethodOverride.intMethod, 0);
   XCTAssertEqual(propertyMethodOverride.longMethod, 0);
   XCTAssertEqual([propertyMethodOverride nonOverrideIntMethod], 0);
+  // TODO(b/483964587): Uncomment when fixed.
+  // XCTAssertEqual([propertyMethodOverride getPropertyInOverrideMethod], 1);
 
   J2ktiosinteropPropertyAutoValueClass *propertyAutoValueClass =
       [[J2ktiosinteropPropertyAutoValueClass_builder() setNameWithNSString:@"foo"] build];
@@ -533,6 +537,16 @@
   J2ktiosinteropNullability_acceptNullableWithNonNullBoundWithId_(nil);
   J2ktiosinteropNullability_acceptWithNullableBoundWithId_(nil);
   J2ktiosinteropNullability_acceptNullableWithNullableBoundWithId_(nil);
+}
+
+- (void)testObjectiveCNameOverrides {
+  J2ktiosinteropObjectiveCNameOverrides_Parent *parent =
+      create_J2ktiosinteropObjectiveCNameOverrides_Parent_init();
+  XCTAssertEqualObjects([parent parent], @"parent");
+  J2ktiosinteropObjectiveCNameOverrides_Child *child =
+      create_J2ktiosinteropObjectiveCNameOverrides_Child_init();
+  XCTAssertEqualObjects([child parent], @"parent/child");
+  XCTAssertEqualObjects([child child], @"child");
 }
 
 @end

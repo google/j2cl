@@ -28,4 +28,8 @@ public class PropertyMethod {
   public int getLongMethod() {
     return 0;
   }
+
+  public int getPropertyInOverrideMethod() {
+    return 0;
+  }
 }

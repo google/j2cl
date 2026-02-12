@@ -205,7 +205,15 @@ final class J2ktSwiftInteropTest: XCTestCase {
   func testNullability() {
     J2ktiosinteropNullability_acceptNullableWithId_(nil)
     J2ktiosinteropNullability_acceptNullableWithNonNullBoundWithId_(nil)
-    J2ktiosinteropNullability_acceptWithNullableBoundWithId_(nil);
+    J2ktiosinteropNullability_acceptWithNullableBoundWithId_(nil)
     J2ktiosinteropNullability_acceptNullableWithNullableBoundWithId_(nil)
+  }
+
+  func testOverrides() {
+    let parent = J2ktiosinteropObjectiveCNameOverrides_Parent()
+    XCTAssertEqual(parent.parent(), "parent")
+    let child = J2ktiosinteropObjectiveCNameOverrides_Child()
+    XCTAssertEqual(child.parent(), "parent/child")
+    XCTAssertEqual(child.child(), "child")
   }
 }
