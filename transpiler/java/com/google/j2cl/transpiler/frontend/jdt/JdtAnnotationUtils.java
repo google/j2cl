@@ -89,7 +89,7 @@ public final class JdtAnnotationUtils {
     // Use the compiler internal representation to obtain attribute values because the dom
     // model (IAnnotationBinding) would only return the attribute values if the annotation class
     // was present in the compile.
-    AnnotationBinding internalAnnotationBinding = getAnnotationBinding(annotationBinding);
+    AnnotationBinding internalAnnotationBinding = toInternalAnnotationBinding(annotationBinding);
     for (ElementValuePair elementValuePair : internalAnnotationBinding.getElementValuePairs()) {
       if (!attributeName.equals(String.valueOf(elementValuePair.getName()))) {
         continue;
@@ -126,7 +126,8 @@ public final class JdtAnnotationUtils {
    * representation, i.e. org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding to extract the
    * attribute values.
    */
-  private static AnnotationBinding getAnnotationBinding(IAnnotationBinding annotationBinding) {
+  private static AnnotationBinding toInternalAnnotationBinding(
+      IAnnotationBinding annotationBinding) {
     try {
       // Access to the internal compiler class AnnotationBinding through the private field
       // binding in the dom class implementing IAnnotationBinding.
