@@ -16,6 +16,7 @@ def _impl(ctx):
         inputs = all_srcs,
         outputs = [src_jar],
         tools = [zip_tool],
+        mnemonic = "J2clPackageSources",
         arguments = [f.path for f in all_srcs],
         command = "\n".join([
             "set -eu",
