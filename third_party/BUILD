@@ -1,6 +1,7 @@
 # Description:
 #   Thirdparty dependencies indirection for bazel.
 
+load("@rules_java//java:defs.bzl", "java_import", "java_library")
 load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library")
 
 package(
