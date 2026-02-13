@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.frontend.javac;
+package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -35,7 +35,8 @@ import java.util.List;
 import java.util.Map;
 
 /** Fixes the nullability mismatches in anonymous class constructors. */
-public class FixAnonymousClassInstantiations {
+public class FixAnonymousClassInstantiations extends NormalizationPass {
+  @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
@@ -138,15 +139,21 @@ public class FixAnonymousClassInstantiations {
                   var declarationTypeDescriptor =
                       superConstructorParameterTypes.get(superParameterIndex);
                   var parameterDescriptor = parameterDescriptors.get(constructorParameterIndex);
+                  var parameterTypeDescriptor = parameterDescriptor.getTypeDescriptor();
+
+                  if (declarationTypeDescriptor == parameterTypeDescriptor) {
+                    // Same type, no need to propagate.
+                    return;
+                  }
 
                   var updatedParameterType =
-                      JavaEnvironment.propagateNullability(
-                              declarationTypeDescriptor, parameterDescriptor.getTypeDescriptor())
+                      AstUtils.propagateNullability(
+                              declarationTypeDescriptor, parameterTypeDescriptor)
                           .toNullable(
                               declarationTypeDescriptor.isNullable()
-                                  || parameterDescriptor.getTypeDescriptor().isNullable());
+                                  || parameterTypeDescriptor.isNullable());
 
-                  if (!updatedParameterType.equals(parameterDescriptor.getTypeDescriptor())) {
+                  if (updatedParameterType != parameterTypeDescriptor) {
                     parameterDescriptors.set(
                         constructorParameterIndex,
                         parameterDescriptor.toBuilder()

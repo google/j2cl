@@ -25,6 +25,8 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
@@ -1357,6 +1359,63 @@ public final class AstUtils {
     // Add the call to preserve fields in the primary constructor since all other constructors
     // will delegate to it.
     type.getPrimaryConstructor().getBody().getStatements().add(preserveCall);
+  }
+
+  /**
+   * Applies the nullability annotation present in type variables from the declaration to the
+   * corresponding substituted type in the reference.
+   */
+  public static TypeDescriptor propagateNullability(
+      TypeDescriptor declarationTypeDescriptor, TypeDescriptor referenceTypeDescriptor) {
+
+    return switch (declarationTypeDescriptor) {
+
+      // If the declaration is type variable, apply its nullability annotation if there is one.
+      case TypeVariable typeVariable -> {
+        if (typeVariable.isAnnotatedNonNullable()) {
+          yield referenceTypeDescriptor.toNonNullable();
+        } else if (typeVariable.isAnnotatedNullable()) {
+          yield referenceTypeDescriptor.toNullable();
+        } else {
+          yield referenceTypeDescriptor;
+        }
+      }
+
+      // If the declaration is an array, propagate the nullability on its component.
+      case ArrayTypeDescriptor declaration -> {
+        var fromRereference = (ArrayTypeDescriptor) referenceTypeDescriptor;
+        var declarationComponentTypeDescriptor = declaration.getComponentTypeDescriptor();
+        var resultingComponentTypeDescriptor =
+            propagateNullability(
+                declarationComponentTypeDescriptor, fromRereference.getComponentTypeDescriptor());
+        yield ArrayTypeDescriptor.Builder.from(fromRereference)
+            .setComponentTypeDescriptor(resultingComponentTypeDescriptor)
+            .build();
+      }
+
+      // If the declaration is a declared type, propagate the nullability on its type arguments.
+      case DeclaredTypeDescriptor declaration -> {
+        // TODO(b/483755859): The assumption made here is that referenceTypeDescriptor is the same
+        // type as declaration type descriptor which might not be true.
+        var fromReference = (DeclaredTypeDescriptor) referenceTypeDescriptor;
+        var rewrittenArguments =
+            Streams.zip(
+                    declaration.getTypeArgumentDescriptors().stream(),
+                    fromReference.getTypeArgumentDescriptors().stream(),
+                    AstUtils::propagateNullability)
+                .collect(toImmutableList());
+        yield ((DeclaredTypeDescriptor) referenceTypeDescriptor)
+            .getTypeDeclaration()
+            .toDescriptor(rewrittenArguments)
+            .toNullable(fromReference.isNullable());
+      }
+
+      // Nothing to propagate for primitives.
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> referenceTypeDescriptor;
+      default ->
+          throw new InternalCompilerError(
+              "Unexpected type in declaration: " + declarationTypeDescriptor.getClass());
+    };
   }
 
   private AstUtils() {}

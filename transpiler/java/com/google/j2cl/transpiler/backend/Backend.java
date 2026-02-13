@@ -44,6 +44,7 @@ import com.google.j2cl.transpiler.passes.EvaluateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
+import com.google.j2cl.transpiler.passes.FixAnonymousClassInstantiations;
 import com.google.j2cl.transpiler.passes.FixJavaKotlinCollectionMethodsMismatch;
 import com.google.j2cl.transpiler.passes.FixJavaKotlinMethodOverrideMismatch;
 import com.google.j2cl.transpiler.passes.ImplementArraysAsClasses;
@@ -608,6 +609,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          FixAnonymousClassInstantiations::new,
           RemoveReturnValuesFromVoidMethods::new,
           // ImplementRecordClasses needs to run before DesugarInstanceOfPatterns.
           ImplementRecordClasses::new,

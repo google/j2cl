@@ -1698,12 +1698,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         getCurrentCompilationUnit().addType(convertClassDeclaration(classDeclaration));
       }
     }
-    runFixUpPasses(getCurrentCompilationUnit());
     return getCurrentCompilationUnit();
-  }
-
-  private void runFixUpPasses(CompilationUnit compilationUnit) {
-    new FixAnonymousClassInstantiations().applyTo(compilationUnit);
   }
 
   // TODO(b/394094907): Support for annotating methods as @NullMarked.

@@ -37,7 +37,7 @@ open class Main {
 
   open fun doSomething(): Foo<T>? {
    return object : Foo<T>(
-    this@Bar.getSomething(),
+    this@Bar.getSomething()!!,
    ) {
     override fun foo() {}
    }
