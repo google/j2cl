@@ -681,6 +681,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return isJsPropertySetter() || getOrigin() == MethodOrigin.SYNTHETIC_PROPERTY_SETTER;
   }
 
+  /**
+   * Returns true if the method is a getter for a J2ObjC property.
+   *
+   * <p>This is a getter if it is a declaration, has no parameters, has a non-void return type, and
+   * either it has a {@code com.google.j2objc.annotations.Property} annotation or it overrides a
+   * method that has a {@code com.google.j2objc.annotations.Property} annotation.
+   *
+   * <p>Note that the annotation is ignored in overrides.
+   */
   public boolean isJ2ObjCPropertyGetter() {
     if (!isDeclaration()) {
       return getDeclarationDescriptor().isJ2ObjCPropertyGetter();
@@ -698,6 +707,19 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return false;
     }
 
+    return getJavaOverriddenMethodDescriptors().isEmpty()
+        ? hasJ2ObjCPropertyAnnotation()
+        : getJavaOverriddenMethodDescriptors().stream()
+            .filter(m -> m.getJavaOverriddenMethodDescriptors().isEmpty())
+            .anyMatch(m -> m.hasJ2ObjCPropertyAnnotation());
+  }
+
+  /**
+   * Returns true if the method has a {@code com.google.j2objc.annotations.Property} annotation
+   * either on the method itself or on the enclosing type, unless the method is annotated with
+   * {@code com.google.j2objc.annotations.Property.Suppress}.
+   */
+  private boolean hasJ2ObjCPropertyAnnotation() {
     if (hasAnnotation("com.google.j2objc.annotations.Property.Suppress")) {
       return false;
     }
@@ -712,8 +734,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return true;
     }
 
-    return getJavaOverriddenMethodDescriptors().stream()
-        .anyMatch(it -> it.isJ2ObjCPropertyGetter());
+    return false;
   }
 
   public abstract boolean isEnumSyntheticMethod();
