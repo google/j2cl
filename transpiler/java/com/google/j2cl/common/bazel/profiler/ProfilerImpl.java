@@ -31,7 +31,7 @@ class ProfilerImpl implements Profiler {
   public ProfilerImpl(Path profileOutput) {
     this.profileOutput = profileOutput;
     this.profiler = JvmProfiler.getProfiler();
-    OutputOptions outputOptions = new OutputOptions().addCompleteDetail(true).addVmDetail(true);
+    OutputOptions outputOptions = new OutputOptions().addCompleteDetail(true);
     profiler.startProfiling(outputOptions, Duration.ofSeconds(60));
   }
 
