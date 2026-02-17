@@ -116,6 +116,7 @@ def _extract_kotlin_srcjar(ctx):
         inputs = [ctx.file.input_jar],
         outputs = [output_dir],
         command = "unzip -q %s *.kt -d %s" % (ctx.file.input_jar.path, output_dir.path),
+        mnemonic = "J2ktExtractKotlinSrcjar",
     )
 
     return [DefaultInfo(files = depset([output_dir]))]
