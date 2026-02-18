@@ -51,15 +51,6 @@ open class Main {
   foo!!.callM()
  }
 
- companion object {
-  @JvmStatic
-  fun testOverlayInterfaceImpl() {
-   val foo: NativeJsTypeInterfaceWithOverlay = NativeJsTypeInterfaceWithOverlayImpl()
-   foo.m()
-   foo.callM()
-  }
- }
-
  @JsType(namespace = "test.foo", isNative = true)
  fun interface NativeJsTypeInterfaceWithOverlay {
   fun m(): Int
@@ -73,12 +64,6 @@ open class Main {
    @JvmField
    @JsOverlay
    val staticField: Any? = Any()
-  }
- }
-
- open class NativeJsTypeInterfaceWithOverlayImpl internal constructor(): NativeJsTypeInterfaceWithOverlay {
-  override fun m(): Int {
-   return 0
   }
  }
 

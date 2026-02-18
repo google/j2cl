@@ -42,12 +42,6 @@ class NativeJsTypeWithOverlayConstant {
   }
 }
 
-internal class NativeJsTypeInterfaceWithOverlayImpl : NativeJsTypeInterfaceWithOverlay {
-  override fun m(): Int {
-    return 0
-  }
-}
-
 @JsType(isNative = true, namespace = "test.foo")
 class NativeJsTypeWithOverlay {
   external fun m(): Int
@@ -131,12 +125,6 @@ fun test() {
 }
 
 fun testOverlayInterface(foo: NativeJsTypeInterfaceWithOverlay) {
-  foo.m()
-  foo.callM()
-}
-
-fun testOverlayInterfaceImpl() {
-  val foo: NativeJsTypeInterfaceWithOverlay = NativeJsTypeInterfaceWithOverlayImpl()
   foo.m()
   foo.callM()
 }

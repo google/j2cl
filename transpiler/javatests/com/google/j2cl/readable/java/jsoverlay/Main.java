@@ -34,12 +34,6 @@ public class Main {
     }
   }
 
-  static class NativeJsTypeInterfaceWithOverlayImpl implements NativeJsTypeInterfaceWithOverlay {
-    public int m() {
-      return 0;
-    }
-  }
-
   @JsType(isNative = true, namespace = "test.foo")
   public static class NativeJsTypeWithOverlay {
     public static int nonJsOverlayField;
@@ -127,12 +121,6 @@ public class Main {
   }
 
   public void testOverlayInterface(NativeJsTypeInterfaceWithOverlay foo) {
-    foo.m();
-    foo.callM();
-  }
-
-  public static void testOverlayInterfaceImpl() {
-    NativeJsTypeInterfaceWithOverlay foo = new NativeJsTypeInterfaceWithOverlayImpl();
     foo.m();
     foo.callM();
   }

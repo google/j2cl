@@ -30,6 +30,12 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
  m() {
   return 0;
  }
+ /** @final @nodts */
+ m_testOverlayInterfaceImpl__void() {
+  let foo = NativeJsTypeInterfaceWithOverlayImpl.$create__();
+  foo.m();
+  $Overlay.m_callM__$devirt__jsoverlay_NativeJsTypeInterfaceWithOverlay__int(foo);
+ }
  //Default method forwarding stub.
  /** @nodts @suppress{visibility} @return {number} */
  m_callM__int() {

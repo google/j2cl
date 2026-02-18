@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let NativeJsTypeInterfaceWithOverlay_$Overlay = goog.forwardDeclare('jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
-let NativeJsTypeInterfaceWithOverlayImpl = goog.forwardDeclare('jsoverlay.Main.NativeJsTypeInterfaceWithOverlayImpl$impl');
 let $Overlay = goog.forwardDeclare('jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay$impl');
 let NativeJsTypeWithOverlayConstant_$Overlay = goog.forwardDeclare('jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay$impl');
 let NativeJsTypeInterfaceWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeInterfaceWithOverlay');
@@ -49,13 +48,6 @@ class Main extends j_l_Object {
   NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__int(foo);
  }
  /** @nodts */
- static m_testOverlayInterfaceImpl__void() {
-  Main.$clinit();
-  let foo = NativeJsTypeInterfaceWithOverlayImpl.$create__();
-  foo.m();
-  NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__int(foo);
- }
- /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
@@ -70,7 +62,6 @@ class Main extends j_l_Object {
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   NativeJsTypeInterfaceWithOverlay_$Overlay = goog.module.get('jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
-  NativeJsTypeInterfaceWithOverlayImpl = goog.module.get('jsoverlay.Main.NativeJsTypeInterfaceWithOverlayImpl$impl');
   $Overlay = goog.module.get('jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay$impl');
   NativeJsTypeWithOverlayConstant_$Overlay = goog.module.get('jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay$impl');
   NativeJsTypeWithOverlay = goog.module.get('test.foo.NativeJsTypeWithOverlay');

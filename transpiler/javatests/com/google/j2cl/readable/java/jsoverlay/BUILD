@@ -19,10 +19,14 @@ j2kt_jvm_library(
 
 j2wasm_library(
     name = "readable-j2wasm",
-    srcs = glob([
-        "super-wasm/*.java",
-        "native_sources/*.js",
-    ]),
+    srcs = glob(
+        [
+            "*.java",
+            "super-wasm/*.java",
+            "native_sources/*.js",
+        ],
+        exclude = ["NativeJsTypeInterfaceWithOverlayImpl.java"],
+    ),
     deps = [
         "//third_party:jsinterop-annotations-j2wasm",
     ],
