@@ -685,18 +685,27 @@ public final class AstUtils {
    * {@code method}.
    */
   public static Method createStaticOverlayMethod(
-      Method method, DeclaredTypeDescriptor targetTypeDescriptor) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
-    checkArgument(methodDescriptor.isStatic());
-
+      Method method, TypeDeclaration overlayTypeDeclaration) {
     return Method.Builder.from(method)
         .setMethodDescriptor(
-            MethodDescriptor.Builder.from(methodDescriptor)
-                .setOriginalJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
-                .setEnclosingTypeDescriptor(targetTypeDescriptor)
-                .removeParameterOptionality()
-                .build())
+            createStaticOverlayMethodDescriptor(method.getDescriptor(), overlayTypeDeclaration))
         .build();
+  }
+
+  /**
+   * Creates a static MethodDescriptor in {@code targetTypeDescriptor} with the same signature as
+   * {@code methodDescriptor}.
+   */
+  public static MethodDescriptor createStaticOverlayMethodDescriptor(
+      MethodDescriptor methodDescriptor, TypeDeclaration overlayTypeDeclaration) {
+    checkArgument(methodDescriptor.isStatic());
+
+    return methodDescriptor.transform(
+        builder ->
+            builder
+                .setOriginalJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
+                .setEnclosingTypeDescriptor(overlayTypeDeclaration.toDescriptor())
+                .removeParameterOptionality());
   }
 
   /**
