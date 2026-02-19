@@ -835,7 +835,8 @@ public final class AstUtils {
                 .setEnclosingTypeDescriptor(targetTypeDescriptor)
                 // The instance ($thisArg) parameter is assumed non nullable for
                 // the typing perspective.
-                .addParameterTypeDescriptors(0, enclosingTypeDescriptor.toNonNullable())
+                .addParameterTypeDescriptors(
+                    0, enclosingTypeDescriptor.getDeclarationDescriptor().toNonNullable())
                 .addTypeParameterTypeDescriptors(
                     0, enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
                 .setStatic(true)

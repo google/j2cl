@@ -134,4 +134,11 @@ internal interface ParameterizedNativeInterface<T> {
   @JsOverlay fun <T, S> shadowsTypeVariable(param1: T, param2: S) {}
 
   @JsOverlay fun <T, S> shadowsTypeVariable(param1: T, param2: Int) {}
+
+  @JsOverlay fun publicCalleeByPrivate() {}
+
+  @JsOverlay
+  private fun privateCaller(t1: ParameterizedNativeInterface<String>) {
+    t1.publicCalleeByPrivate() // Call with different parameterization.
+  }
 }

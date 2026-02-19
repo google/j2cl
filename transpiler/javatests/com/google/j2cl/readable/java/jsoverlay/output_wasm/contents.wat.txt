@@ -158,6 +158,37 @@
  )
 )
 
+;;; void $Overlay.publicCalleeByPrivate__$devirt(ParameterizedNativeInterface<T> arg0)
+(func $m_publicCalleeByPrivate__$devirt__jsoverlay_ParameterizedNativeInterface__void@jsoverlay.ParameterizedNativeInterface.$Overlay
+ (param $arg0 (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:139:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:139:15
+  (call $$clinit__void_<once>_@jsoverlay.ParameterizedNativeInterface.$Overlay )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:139:15
+  (call $m_publicCalleeByPrivate__$devirt_$private__jsoverlay_ParameterizedNativeInterface__void@jsoverlay.ParameterizedNativeInterface.$Overlay (local.get $arg0))
+ )
+)
+
+;;; void $Overlay.publicCalleeByPrivate__$devirt_$private(ParameterizedNativeInterface<T> $thisArg)
+(func $m_publicCalleeByPrivate__$devirt_$private__jsoverlay_ParameterizedNativeInterface__void@jsoverlay.ParameterizedNativeInterface.$Overlay
+ (param $$thisArg (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:139:15
+ (block
+ )
+)
+
+;;; void $Overlay.privateCaller__$devirt(ParameterizedNativeInterface<T> $thisArg, ParameterizedNativeInterface<String> t1)
+(func $m_privateCaller__$devirt__jsoverlay_ParameterizedNativeInterface__jsoverlay_ParameterizedNativeInterface__void@jsoverlay.ParameterizedNativeInterface.$Overlay
+ (param $$thisArg (ref null extern))
+ (param $t1 (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:142:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:143:4
+  (call $m_publicCalleeByPrivate__$devirt_$private__jsoverlay_ParameterizedNativeInterface__void@jsoverlay.ParameterizedNativeInterface.$Overlay (local.get $t1))
+ )
+)
+
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@jsoverlay.ParameterizedNativeInterface.$Overlay
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:130:10

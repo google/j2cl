@@ -126,7 +126,7 @@ public class Main {
   }
 }
 
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
 interface ParameterizedNativeInterface<T> {
 
   @JsOverlay
@@ -134,4 +134,12 @@ interface ParameterizedNativeInterface<T> {
 
   @JsOverlay
   default <T, S> void shadowsTypeVariable(T param1, int param2) {}
+
+  @JsOverlay
+  default void publicCalleeByPrivate() {}
+
+  @JsOverlay
+  private void privateCaller(ParameterizedNativeInterface<String> t1) {
+    t1.publicCalleeByPrivate(); // Call with different parameterization.
+  }
 }

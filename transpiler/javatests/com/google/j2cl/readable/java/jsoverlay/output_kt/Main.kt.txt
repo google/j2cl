@@ -148,11 +148,19 @@ open class Main {
  }
 }
 
-@JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
+@JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 interface ParameterizedNativeInterface<T> {
  @JsOverlay
  fun <T_1, S> shadowsTypeVariable(param1: T_1, param2: S) {}
 
  @JsOverlay
  fun <T_1, S> shadowsTypeVariable(param1: T_1, param2: Int) {}
+
+ @JsOverlay
+ fun publicCalleeByPrivate() {}
+
+ @JsOverlay
+ fun privateCaller_private_jsoverlay_ParameterizedNativeInterface(t1: ParameterizedNativeInterface<String?>?) {
+  t1!!.publicCalleeByPrivate()
+ }
 }
