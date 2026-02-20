@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.common.bazel.profiler;
 
-import com.google.monitoring.runtime.OutputOptions;
 import com.google.monitoring.runtime.cpu.JvmProfiler;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -31,8 +30,7 @@ class ProfilerImpl implements Profiler {
   public ProfilerImpl(Path profileOutput) {
     this.profileOutput = profileOutput;
     this.profiler = JvmProfiler.getProfiler();
-    OutputOptions outputOptions = new OutputOptions().addCompleteDetail(true);
-    profiler.startProfiling(outputOptions, Duration.ofSeconds(60));
+    profiler.startProfiling(Duration.ofSeconds(60));
   }
 
   @Override
