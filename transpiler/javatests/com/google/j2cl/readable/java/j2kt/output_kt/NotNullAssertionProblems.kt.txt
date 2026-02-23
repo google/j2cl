@@ -150,7 +150,7 @@ open class NotNullAssertionProblems {
  companion object {
   @JvmStatic
   fun testImplicitInvocationTypeArguments_wildcards(string: String, wildcardSupplier: Supplier<*>) {
-   NotNullAssertionProblems.accept1(
+   NotNullAssertionProblems.accept1<Any?>(
     wildcardSupplier.getValue(),
    )
    NotNullAssertionProblems.accept2<Any?>(
@@ -173,7 +173,7 @@ open class NotNullAssertionProblems {
 
   @JvmStatic
   fun testImplicitConstructorTypeArguments_wildcards(string: String, wildcardSupplier: Supplier<*>) {
-   Consumer(
+   Consumer<Any?>(
     wildcardSupplier.getValue(),
    )
    Consumer<Any?>(
@@ -266,7 +266,7 @@ open class NotNullAssertionProblems {
   fun <T: Any> testDefaultValue(value: Any?) {
    if (value != null) {
     val x: Any? = NotNullAssertionProblems.getDefaultValue(
-     value!!.getClass() as Class<*>,
+     value!!.getClass(),
     )
     if (x != null) {
      NotNullAssertionProblems.accept1<Int>(

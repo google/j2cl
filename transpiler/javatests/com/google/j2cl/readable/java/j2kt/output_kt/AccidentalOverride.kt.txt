@@ -51,11 +51,11 @@ open class AccidentalOverride {
  }
 
  abstract inner class TestImplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), Interface {
-  abstract override fun abstractAccidentalOverride()
-
   override fun accidentalOverride() {
    super<SubClass>.accidentalOverride()
   }
+
+  abstract override fun abstractAccidentalOverride()
  }
 
  abstract inner class TestExplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), Interface {

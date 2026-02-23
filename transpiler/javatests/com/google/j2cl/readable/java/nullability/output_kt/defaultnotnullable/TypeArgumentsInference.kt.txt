@@ -38,8 +38,8 @@ open class TypeArgumentsInference {
 
   @JvmStatic
   fun <K> wildcardPairAndIdentity(): Pair<K, *> {
-   return TypeArgumentsInference.pairIdentity<K, Any?>(
-    TypeArgumentsInference.wildcardPair<K>() as Pair<K, Any?>,
+   return TypeArgumentsInference.pairIdentity(
+    TypeArgumentsInference.wildcardPair<K>(),
    )
   }
  }

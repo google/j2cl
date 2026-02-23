@@ -75,7 +75,7 @@ open class NullabilityInferenceProblem internal constructor() {
       return@Function NullabilityInferenceProblem.checkNotNull<String>(
        user.getName().orElse("")!!,
       )
-     } as Function<in User, out String>,
+     },
     ),
     users,
    )

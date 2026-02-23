@@ -25,7 +25,7 @@ import kotlin.Suppress
 
 open class ExplicitNotNullable {
  internal open fun testDependentWildcards_pp_j2kt(x: DependentTypeParameters<*, *>): DependentTypeParameters<*, *> {
-  return x.getThis_pp_j2kt() as DependentTypeParameters<*, *>
+  return x.getThis_pp_j2kt()
  }
 
  open class DependentTypeParameters<E: Any, T: E?> internal constructor() {

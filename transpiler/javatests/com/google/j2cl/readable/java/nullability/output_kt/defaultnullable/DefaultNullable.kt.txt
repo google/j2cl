@@ -48,7 +48,7 @@ open class DefaultNullable {
 
  private var f5: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
- private var f6: MutableList<String?>? = ArrayList<String?>()
+ private var f6: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
  private var f7: MutableList<String?>? = null
 
@@ -269,10 +269,10 @@ open class DefaultNullable {
    }
    val constructorReference: NullMarkedSupplier<String?> = NullMarkedSupplier {
     return@NullMarkedSupplier String()
-   } as NullMarkedSupplier<String?>
+   }
    val newArrayReference: NullMarkedIntFunction<Array<String?>?> = NullMarkedIntFunction { arg0: Int ->
     return@NullMarkedIntFunction arrayOfNulls<String>(arg0)
-   } as NullMarkedIntFunction<Array<String?>?>
+   }
   }
 
   @JvmStatic

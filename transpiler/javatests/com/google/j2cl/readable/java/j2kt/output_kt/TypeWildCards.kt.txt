@@ -41,7 +41,7 @@ open class TypeWildCards internal constructor() {
 
   @JvmStatic
   fun testObservable(observable: Observable<*>) {
-   (observable as Observable<Any?>).addObserver(
+   observable.addObserver(
     Observer { e: Any? ->
     },
    )
@@ -49,7 +49,7 @@ open class TypeWildCards internal constructor() {
 
   @JvmStatic
   fun <T: Observable<*>> testObservableParameterized(observable: T) {
-   (observable as Observable<Any?>).addObserver(
+   observable.addObserver(
     Observer { e: Any? ->
     },
    )
@@ -57,7 +57,7 @@ open class TypeWildCards internal constructor() {
 
   @JvmStatic
   fun testSuperWildcardObservable(observable: SuperWildcardObservable<*>) {
-   (observable as SuperWildcardObservable<Any?>).addObserver(
+   observable.addObserver(
     Observer { e: Any? ->
     },
    )
@@ -65,7 +65,7 @@ open class TypeWildCards internal constructor() {
 
   @JvmStatic
   fun testKtInObservable(observable: KtInObservable<*>) {
-   (observable as KtInObservable<Any?>).addObserver(
+   observable.addObserver(
     KtInObserver { e: Any? ->
     },
    )
@@ -73,7 +73,7 @@ open class TypeWildCards internal constructor() {
 
   @JvmStatic
   fun testRecursiveObservable(observable: RecursiveObservable<*>) {
-   (observable as RecursiveObservable<RecursiveObservable<*>>).addObserver(
+   observable.addObserver(
     Observer { e ->
     },
    )
@@ -122,7 +122,7 @@ open class TypeWildCards internal constructor() {
 
    @JvmStatic
    fun testSetMethod(holder: Holder<*>) {
-    (holder as Holder<Any?>).set_pp_j2kt(
+    holder.set_pp_j2kt(
      Observer { e: Any? ->
      },
     )
@@ -165,7 +165,7 @@ open class TypeWildCards internal constructor() {
 
    @JvmStatic
    fun testSetMethod(holder: Holder<*>) {
-    (holder as Holder<Event>).set_pp_j2kt(
+    holder.set_pp_j2kt(
      Observer { e: Event ->
      },
     )
@@ -207,7 +207,7 @@ open class TypeWildCards internal constructor() {
 
    @JvmStatic
    fun testSetMethod(holder: Holder<*, *>) {
-    (holder as Holder<Event, Collection<Event>>).set_pp_j2kt(
+    holder.set_pp_j2kt(
      Observer { e: Collection<out Event> ->
      },
     )

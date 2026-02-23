@@ -38,15 +38,17 @@ open class NullabilityInferenceProblem9 {
 
   @JvmStatic
   internal fun test_pp_j2kt(nullableFooFuture: Future<Foo?>, fooFuture: Future<Foo>): Future<Foo> {
-   return NullabilityInferenceProblem9.transformFuture_pp_j2kt<Foo?, Foo?>(
+   return NullabilityInferenceProblem9.transformFuture_pp_j2kt<Foo?, Foo>(
     nullableFooFuture,
     FutureFunction { nullableFoo: Foo? ->
      if (nullableFoo != null) {
-      return@FutureFunction NullabilityInferenceProblem9.future_pp_j2kt<Foo?>(nullableFoo)
+      return@FutureFunction NullabilityInferenceProblem9.future_pp_j2kt<Foo>(
+       nullableFoo!!,
+      )
      }
-     return@FutureFunction fooFuture as Future<Foo?>
+     return@FutureFunction fooFuture
     },
-   ) as Future<Foo>
+   )
   }
  }
 

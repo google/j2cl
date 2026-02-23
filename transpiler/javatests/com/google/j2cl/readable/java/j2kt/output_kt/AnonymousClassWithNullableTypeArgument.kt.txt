@@ -40,14 +40,14 @@ open class AnonymousClassWithNullableTypeArgument {
 
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromArgument() {
-   object : Holder<String?>(
-    AnonymousClassWithNullableTypeArgument.nullableString(),
+   object : Holder<String>(
+    AnonymousClassWithNullableTypeArgument.nullableString()!!,
    ) {}
   }
 
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromArgumentAndReturnType(): Holder<String?> {
-   return object : Holder<String?>("Supplier") {}
+   return object : Holder<String>("Supplier") {} as Holder<String?>
   }
 
   @JvmStatic

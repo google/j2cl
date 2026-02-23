@@ -39,11 +39,11 @@ open class AnonymousClassWithNullableTypeArgument {
 
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> {
-   return object : Supplier<Any?> {
+   return object : Supplier<Any> {
     override fun get(): Any? {
      return null
     }
-   }
+   } as Supplier<Any?>
   }
 
   @JvmStatic
@@ -66,14 +66,14 @@ open class AnonymousClassWithNullableTypeArgument {
 
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromArgument() {
-   object : Holder<String?>(
-    AnonymousClassWithNullableTypeArgument.nullableString(),
+   object : Holder<String>(
+    AnonymousClassWithNullableTypeArgument.nullableString()!!,
    ) {}
   }
 
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromArgumentAndReturnType(): Holder<String?> {
-   return object : Holder<String?>("Supplier") {}
+   return object : Holder<String>("Supplier") {} as Holder<String?>
   }
 
   @JvmStatic

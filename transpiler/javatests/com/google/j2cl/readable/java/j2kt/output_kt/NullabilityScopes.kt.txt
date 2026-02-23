@@ -106,7 +106,7 @@ open class NullabilityScopes {
   }
 
   open fun testRecursiveWildcardConversion(table: Table<out Cell<*>>?): Array<out Cell<*>?>? {
-   return table!!.getNullableCells() as Array<out Cell<*>?>?
+   return table!!.getNullableCells()
   }
 
   open class Foo<K> {

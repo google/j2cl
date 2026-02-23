@@ -51,7 +51,7 @@ open class ExplicitNotNullable {
 
  private var f5: MutableList<String>? = ArrayList<String>()
 
- private var f6: MutableList<String?> = ArrayList<String?>()
+ private var f6: MutableList<String?> = ArrayList<String>() as MutableList<String?>
 
  private var f7: MutableList<String?>? = null
 
@@ -151,7 +151,7 @@ open class ExplicitNotNullable {
  }
 
  internal open fun testDependentWildcards_pp_nullability_explicitnotnullable(x: DependentTypeParameters<*, *>): DependentTypeParameters<*, *> {
-  return x.getThis_pp_nullability_explicitnotnullable() as DependentTypeParameters<*, *>
+  return x.getThis_pp_nullability_explicitnotnullable()
  }
 
  companion object {

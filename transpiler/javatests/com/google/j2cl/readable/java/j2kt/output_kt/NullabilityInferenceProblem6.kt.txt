@@ -28,7 +28,7 @@ open class NullabilityInferenceProblem6 {
  companion object {
   @JvmStatic
   internal fun testLambda_pp_j2kt(from: Container<*>, to: Container<in Any?>) {
-   (from as Container<Any?>).forEach(
+   from.forEach(
     Consumer { it: Any? ->
      to.add(it)
     },
@@ -37,7 +37,7 @@ open class NullabilityInferenceProblem6 {
 
   @JvmStatic
   internal fun testMethodReference_pp_j2kt(from: Container<*>, to: Container<in Any?>) {
-   (from as Container<Any?>).forEach(
+   from.forEach(
     Consumer { arg0: Any? ->
      to.add(arg0)
     },
@@ -46,7 +46,7 @@ open class NullabilityInferenceProblem6 {
 
   @JvmStatic
   internal fun testLambda_pp_j2kt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
-   (from as FooContainer<Foo?>).forEach(
+   from.forEach(
     Consumer { it: Foo? ->
      to.add(it)
     },
@@ -55,7 +55,7 @@ open class NullabilityInferenceProblem6 {
 
   @JvmStatic
   internal fun testMethodReference_pp_j2kt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
-   (from as FooContainer<Foo?>).forEach(
+   from.forEach(
     Consumer { arg0: Foo? ->
      to.add(arg0)
     },

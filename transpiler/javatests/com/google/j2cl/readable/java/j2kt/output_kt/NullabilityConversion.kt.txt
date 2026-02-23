@@ -293,7 +293,7 @@ open class NullabilityConversion {
 
       @JvmStatic
       fun <T: Child?> defaultToNonNull(supplier: Supplier<out T>): T & Any {
-       return supplier.get() as (T & Any)
+       return supplier.get()!!
       }
 
       @JvmStatic
@@ -430,7 +430,7 @@ open class NullabilityConversion {
      companion object {
       @JvmStatic
       fun nullableToNullable(it: Generic<in Child?>): Generic<*> {
-       return it
+       return it as Generic<*>
       }
 
       @JvmStatic
@@ -440,7 +440,7 @@ open class NullabilityConversion {
 
       @JvmStatic
       fun nonNullToNullable(it: Generic<in Child>): Generic<*> {
-       return it
+       return it as Generic<*>
       }
 
       @JvmStatic

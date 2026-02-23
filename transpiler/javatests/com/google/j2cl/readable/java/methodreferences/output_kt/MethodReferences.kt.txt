@@ -138,7 +138,7 @@ open class MethodReferences<T> {
   }
   val superToStringProducer: Producer<String> = Producer {
    return@Producer super.toString()
-  } as Producer<String>
+  }
   var jsobjectFactory: JsProducer<Any> = JsProducer {
    return@JsProducer Any()
   }
@@ -159,7 +159,7 @@ open class MethodReferences<T> {
   } as JsFunctionInterface<Int, Array<Any>>
   val jsSuperToStringProducer: JsProducer<String> = JsProducer {
    return@JsProducer super.toString()
-  } as JsProducer<String>
+  }
   val jsbiFunction: JsBiFunction<MethodReferences<T>, Number, Boolean> = JsBiFunction { arg0_19: MethodReferences<T>, arg1_1: Number ->
    return@JsBiFunction arg0_19.sameAs_pp_methodreferences(arg1_1)
   }
@@ -208,7 +208,7 @@ open class MethodReferences<T> {
 
  open inner class ObjectCapturingOuter internal constructor() {
   internal open fun getMain_pp_methodreferences(): MethodReferences<T> {
-   return this@MethodReferences as MethodReferences<T>
+   return this@MethodReferences
   }
  }
 

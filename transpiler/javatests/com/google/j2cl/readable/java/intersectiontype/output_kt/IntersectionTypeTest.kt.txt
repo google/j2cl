@@ -73,7 +73,7 @@ open class IntersectionTypeTest<U> {
  }
 
  open fun testDefaultMethodCall(o: Any?) {
-  o.let { it as Cmp?; it as EmptyA?; it }!!.defaultM()
+  o.let { it as EmptyA?; it as Cmp?; it }!!.defaultM()
   o.let { it as CmpImpl?; it as EmptyA?; it }!!.defaultM()
  }
 
@@ -87,7 +87,7 @@ open class IntersectionTypeTest<U> {
   @JvmStatic
   fun <T> cast(o: Any?): Getable<T>? {
    if (o == null) {
-    return o.let { it as Getable<T>?; it as Setable?; it }
+    return o.let { it as Setable?; it as Getable<T>?; it }
    }
    return o.let { it as Getable<T>?; it as Setable?; it }
   }

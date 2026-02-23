@@ -27,12 +27,12 @@ open class NullnessCheckerErrorWorkarounds internal constructor() {
  companion object {
   @JvmStatic
   internal fun testNullableAnnotation_pp_j2kt(table: Table<out Cell<*>>) {
-   val cell: Cell<*>? = table.get() as Cell<*>?
+   val cell: Cell<*>? = table.get()
   }
 
   @JvmStatic
   internal fun testSuppressWarnings_pp_j2kt(table: Table<out Cell<*>>) {
-   val cell: Cell<*>? = table.get() as Cell<*>?
+   val cell: Cell<*>? = table.get()
   }
  }
 
