@@ -26,12 +26,9 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
-import com.google.j2cl.transpiler.ast.Member;
-import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.StringLiteral;
@@ -143,27 +140,20 @@ public final class SummaryBuilder {
     JsInfo.Builder jsInfoBuilder =
         JsInfo.newBuilder().setQualifiedJsName(typeDeclaration.getQualifiedJsName());
 
-    for (Member member : type.getMembers()) {
-      MemberDescriptor memberDescriptor = member.getDescriptor();
-      if (!AstUtils.canBeReferencedExternallyWasm(memberDescriptor)
-          // We don't expose constructors directly. Instead, the factory method is exported.
-          || memberDescriptor.isConstructor()) {
-        continue;
-      }
-
-      // TODO(b/458472428): Support JsProperty/Getter/Setter.
-      if (!(memberDescriptor instanceof MethodDescriptor methodDescriptor
-          && methodDescriptor.isJsMethod())) {
+    // TODO(b/458472428): Support JsProperty/Getter/Setter.
+    for (var method : type.getMethods()) {
+      MethodDescriptor methodDescriptor = method.getDescriptor();
+      if (!(methodDescriptor.getOrigin().isWasmJsExport()
+          || methodDescriptor.getOrigin().isWasmJsConstructorExport())) {
         continue;
       }
 
       jsInfoBuilder.addJsMembers(
           JsMemberInfo.newBuilder()
               .setKind(
-                  switch (memberDescriptor.getJsInfo().getJsMemberType()) {
+                  switch (methodDescriptor.getJsInfo().getJsMemberType()) {
                     case METHOD ->
-                        memberDescriptor.getOrigin()
-                                == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
+                        methodDescriptor.getOrigin().isWasmJsConstructorExport()
                             ? JsMemberInfo.Kind.CONSTRUCTOR
                             : JsMemberInfo.Kind.METHOD;
                     // Should not happen, we should be handling all types.
@@ -171,8 +161,8 @@ public final class SummaryBuilder {
                     default -> throw new AssertionError();
                   })
               .setWasmName(environment.getMethodImplementationName(methodDescriptor))
-              .setJsName(memberDescriptor.getSimpleJsName())
-              .setIsStatic(memberDescriptor.isStatic()));
+              .setJsName(methodDescriptor.getSimpleJsName())
+              .setIsStatic(methodDescriptor.isStatic()));
     }
 
     return jsInfoBuilder.build();

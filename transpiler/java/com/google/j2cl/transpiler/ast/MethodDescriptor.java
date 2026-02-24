@@ -137,6 +137,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL,
     SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED,
     SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD,
+    SYNTHETIC_WASM_JS_EXPORT,
+    SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT,
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
     DEFAULT_METHOD_BRIDGE, // Bridges to a default method interface.
@@ -214,6 +216,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public boolean isRequiredSystemGetPropertyGetter() {
       return this == SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED;
+    }
+
+    public boolean isWasmJsExport() {
+      return this == SYNTHETIC_WASM_JS_EXPORT;
+    }
+
+    public boolean isWasmJsConstructorExport() {
+      return this == SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT;
     }
   }
 

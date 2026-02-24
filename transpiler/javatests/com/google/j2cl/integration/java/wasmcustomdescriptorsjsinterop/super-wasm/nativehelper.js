@@ -15,7 +15,16 @@
  */
 goog.module('nativehelper');
 
+const BaseJsType = goog.require('wasmcustomdescriptorsjsinterop.BaseJsType');
 const SomeJsType = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType');
+
+/**
+ * @return {!BaseJsType}
+ * @public
+ */
+function newBaseJsType() {
+  return new BaseJsType();
+}
 
 /**
  * @param {number} value
@@ -26,6 +35,28 @@ function newSomeJsType(value) {
   return new SomeJsType(value);
 }
 
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {number}
+ * @public
+ */
+function callGetNumber(someJsType) {
+  return someJsType.getNumber();
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {string}
+ * @public
+ */
+function callGetString(someJsType) {
+  return someJsType.getString();
+}
+
+
 exports = {
+  newBaseJsType,
   newSomeJsType,
+  callGetNumber,
+  callGetString,
 };

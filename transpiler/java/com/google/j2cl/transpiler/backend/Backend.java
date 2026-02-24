@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingS
 import com.google.j2cl.transpiler.passes.AddEnumImplicitMethods;
 import com.google.j2cl.transpiler.passes.AddInterfaceConstructorCasts;
 import com.google.j2cl.transpiler.passes.AddJavaLangObjectForwardingMethods;
+import com.google.j2cl.transpiler.passes.AddJsExportBridgesWasm;
 import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
 import com.google.j2cl.transpiler.passes.AddSwitchExpressionsExhaustivenessCheck;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
@@ -542,6 +543,7 @@ public enum Backend {
           // extracted. After extracting qualifiers, we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
+          AddJsExportBridgesWasm::new,
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.

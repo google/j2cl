@@ -81,16 +81,30 @@ public class WasmEntryPointBridgesCreator {
   }
 
   @Nullable
-  public Method generateBridge(MethodDescriptor methodDescriptor) {
+  private Method generateBridge(MethodDescriptor methodDescriptor) {
     return generateBridge(methodDescriptor, SourcePosition.NONE);
   }
 
+  @Nullable
   private Method generateBridge(MethodDescriptor methodDescriptor, SourcePosition sourcePosition) {
     if (!isEntryPoint(methodDescriptor)) {
       return null;
     }
 
-    MethodDescriptor bridgeMethodDescriptor = createExportBridgeDescriptor(methodDescriptor);
+    return generateBridge(methodDescriptor, sourcePosition, /* isEntryPoint= */ true);
+  }
+
+  /**
+   * Generates a bridge method, intended to be exported, that defers to the specified method.
+   *
+   * @param isEntryPoint true if the bridge is an entry point, which is exported by a clause at the
+   *     method declaration. If false, the bridge should be exported by other means, such as by
+   *     custom descriptors {@code configureAll}.
+   */
+  public static Method generateBridge(
+      MethodDescriptor methodDescriptor, SourcePosition sourcePosition, boolean isEntryPoint) {
+    MethodDescriptor bridgeMethodDescriptor =
+        createExportBridgeDescriptor(methodDescriptor, isEntryPoint);
     List<Variable> parameters =
         AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterTypeDescriptors());
 
@@ -105,19 +119,21 @@ public class WasmEntryPointBridgesCreator {
 
     return Method.newBuilder()
         .setMethodDescriptor(bridgeMethodDescriptor)
-        .setWasmExportName(methodDescriptor.getName())
+        .setWasmExportName(isEntryPoint ? methodDescriptor.getName() : null)
         .setParameters(parameters)
         .addStatements(
             convertReturnIfNeeded(
                 AstUtils.createForwardingStatement(
                     sourcePosition,
-                    /* qualifier= */ null,
+                    /* qualifier= */ methodDescriptor.isStatic()
+                        ? null
+                        : new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()),
                     methodDescriptor,
-                    /* isStaticDispatch= */ true,
+                    /* isStaticDispatch= */ methodDescriptor.isStatic(),
                     arguments,
                     returnType),
                 returnType))
-        .setJsDocDescription("Wasm entry point forwarding method.")
+        .setJsDocDescription(isEntryPoint ? "Wasm entry point forwarding method." : null)
         .setSourcePosition(sourcePosition)
         .build();
   }
@@ -172,16 +188,37 @@ public class WasmEntryPointBridgesCreator {
     return statement;
   }
 
-  private static MethodDescriptor createExportBridgeDescriptor(MethodDescriptor descriptor) {
-    return MethodDescriptor.Builder.from(descriptor)
-        .setName(descriptor.getName() + "__$export")
-        .setReturnTypeDescriptor(
-            replaceStringWithNativeString(descriptor.getReturnTypeDescriptor()))
-        .updateParameterTypeDescriptors(
-            descriptor.getParameterTypeDescriptors().stream()
-                .map(WasmEntryPointBridgesCreator::replaceStringWithNativeString)
-                .collect(toImmutableList()))
-        .build();
+  private static MethodDescriptor createExportBridgeDescriptor(
+      MethodDescriptor descriptor, boolean isEntryPoint) {
+    MethodDescriptor.Builder builder =
+        MethodDescriptor.Builder.from(descriptor)
+            // TODO(b/487374903): Should no longer need to change the name once the origin is more
+            // specific. The "$" prefix added here may also not be needed.
+            .setName(
+                (isEntryPoint ? "" : "$")
+                    + descriptor.getName()
+                    + (isEntryPoint ? "__$export" : "__$js_export"))
+            .setReturnTypeDescriptor(
+                replaceStringWithNativeString(descriptor.getReturnTypeDescriptor()))
+            .updateParameterTypeDescriptors(
+                descriptor.getParameterTypeDescriptors().stream()
+                    .map(WasmEntryPointBridgesCreator::replaceStringWithNativeString)
+                    .collect(toImmutableList()));
+    if (!isEntryPoint) {
+      // For JsInterop exports, copy the JsInfo and set an origin that can be referenced later to
+      // build configuration data.
+      builder
+          .setOriginalJsInfo(
+              descriptor.getJsInfo().toBuilder().setJsName(descriptor.getSimpleJsName()).build())
+          .setOrigin(getExportBridgeOrigin(descriptor));
+    }
+    return builder.build();
+  }
+
+  private static MethodDescriptor.MethodOrigin getExportBridgeOrigin(MethodDescriptor descriptor) {
+    return descriptor.getOrigin() == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
+        ? MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT
+        : MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_EXPORT;
   }
 
   private static TypeDescriptor replaceStringWithNativeString(TypeDescriptor typeDescriptor) {

@@ -230,3 +230,41 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstype.SomeJsType)
+
+;;; SomeJsType<T> SomeJsType.$$create__$js_export()
+(func $$$create__$js_export__jstype_SomeJsType@jstype.SomeJsType
+ (result (ref null $jstype.SomeJsType))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
+  (return (call $$create__@jstype.SomeJsType ))
+ )
+)
+
+;;; void SomeJsType.$publicMethod__$js_export()
+(func $$publicMethod__$js_export__void@jstype.SomeJsType
+ (type $function.$publicMethod__$js_export__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:29:14
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:29:14
+  (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
+ )
+)
+(elem declare func $$publicMethod__$js_export__void@jstype.SomeJsType)
+
+;;; void SomeJsType.$useFieldsAndMethods__$js_export()
+(func $$useFieldsAndMethods__$js_export__void@jstype.SomeJsType
+ (type $function.$useFieldsAndMethods__$js_export__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:37:14
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:37:14
+  (call_ref $function.m_useFieldsAndMethods__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_useFieldsAndMethods__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
+ )
+)
+(elem declare func $$useFieldsAndMethods__$js_export__void@jstype.SomeJsType)

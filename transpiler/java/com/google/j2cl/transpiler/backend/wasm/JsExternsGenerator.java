@@ -19,9 +19,12 @@ import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.
 import static java.util.stream.Collectors.joining;
 
 import com.google.j2cl.common.OutputUtils.Output;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
@@ -84,6 +87,7 @@ final class JsExternsGenerator {
     sb.appendln("/** @externs */");
 
     appendConstructor(sb, type);
+    appendMethods(sb, type);
 
     // Output to externs/my.package.MyClass.externs.js
     output.write(
@@ -130,6 +134,40 @@ final class JsExternsGenerator {
             "%s = function(%s) {};",
             type.getDeclaration().getQualifiedJsName(),
             constructor.getParameters().stream().map(Variable::getName).collect(joining(", "))));
+  }
+
+  private void appendMethods(SourceBuilder sb, Type type) {
+    for (Method method : type.getMethods()) {
+      MethodDescriptor methodDescriptor = method.getDescriptor();
+      if (!AstUtils.canBeReferencedExternallyWasm(methodDescriptor)
+          // Constructors handled elsewhere.
+          || methodDescriptor.isConstructor()) {
+        continue;
+      }
+
+      sb.appendln("");
+      sb.appendln("/**");
+      appendJsDoc(sb, closureEnvironment.getJsDocForMethod(method));
+      for (Variable parameter : method.getParameters()) {
+        sb.appendln(
+            String.format(
+                " * @param {%s} %s",
+                closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor()),
+                parameter.getName()));
+      }
+      sb.appendln(" */");
+      sb.appendln(
+          String.format(
+              "%s.%s = function(%s) {};",
+              getMemberOwner(methodDescriptor),
+              methodDescriptor.getSimpleJsName(),
+              method.getParameters().stream().map(Variable::getName).collect(joining(", "))));
+    }
+  }
+
+  private String getMemberOwner(MemberDescriptor memberDescriptor) {
+    return closureEnvironment.aliasForType(memberDescriptor.getEnclosingTypeDescriptor())
+        + (memberDescriptor.isStatic() ? "" : ".prototype");
   }
 
   /** Renders a JsDoc clause. The provided jsdoc can be single line or multi-line. */
