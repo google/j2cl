@@ -91,20 +91,20 @@ public class WasmEntryPointBridgesCreator {
       return null;
     }
 
-    return generateBridge(methodDescriptor, sourcePosition, /* isEntryPoint= */ true);
+    return generateBridge(
+        methodDescriptor, sourcePosition, MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_ENTRY_POINT);
   }
 
   /**
-   * Generates a bridge method, intended to be exported, that defers to the specified method.
-   *
-   * @param isEntryPoint true if the bridge is an entry point, which is exported by a clause at the
-   *     method declaration. If false, the bridge should be exported by other means, such as by
-   *     custom descriptors {@code configureAll}.
+   * Generates a bridge method, intended to be exported, that defers to the specified method and
+   * does any necessary JS <-> Wasm argument and return value conversions.
    */
   public static Method generateBridge(
-      MethodDescriptor methodDescriptor, SourcePosition sourcePosition, boolean isEntryPoint) {
+      MethodDescriptor methodDescriptor,
+      SourcePosition sourcePosition,
+      MethodDescriptor.MethodOrigin origin) {
     MethodDescriptor bridgeMethodDescriptor =
-        createExportBridgeDescriptor(methodDescriptor, isEntryPoint);
+        createExportBridgeDescriptor(methodDescriptor, origin);
     List<Variable> parameters =
         AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterTypeDescriptors());
 
@@ -119,7 +119,6 @@ public class WasmEntryPointBridgesCreator {
 
     return Method.newBuilder()
         .setMethodDescriptor(bridgeMethodDescriptor)
-        .setWasmExportName(isEntryPoint ? methodDescriptor.getName() : null)
         .setParameters(parameters)
         .addStatements(
             convertReturnIfNeeded(
@@ -133,7 +132,8 @@ public class WasmEntryPointBridgesCreator {
                     arguments,
                     returnType),
                 returnType))
-        .setJsDocDescription(isEntryPoint ? "Wasm entry point forwarding method." : null)
+        .setJsDocDescription(
+            origin.isWasmEntryPoint() ? "Wasm entry point forwarding method." : null)
         .setSourcePosition(sourcePosition)
         .build();
   }
@@ -189,36 +189,21 @@ public class WasmEntryPointBridgesCreator {
   }
 
   private static MethodDescriptor createExportBridgeDescriptor(
-      MethodDescriptor descriptor, boolean isEntryPoint) {
+      MethodDescriptor descriptor, MethodDescriptor.MethodOrigin origin) {
     MethodDescriptor.Builder builder =
         MethodDescriptor.Builder.from(descriptor)
-            // TODO(b/487374903): Should no longer need to change the name once the origin is more
-            // specific. The "$" prefix added here may also not be needed.
-            .setName(
-                (isEntryPoint ? "" : "$")
-                    + descriptor.getName()
-                    + (isEntryPoint ? "__$export" : "__$js_export"))
+            .setOrigin(origin)
             .setReturnTypeDescriptor(
                 replaceStringWithNativeString(descriptor.getReturnTypeDescriptor()))
             .updateParameterTypeDescriptors(
                 descriptor.getParameterTypeDescriptors().stream()
                     .map(WasmEntryPointBridgesCreator::replaceStringWithNativeString)
                     .collect(toImmutableList()));
-    if (!isEntryPoint) {
-      // For JsInterop exports, copy the JsInfo and set an origin that can be referenced later to
-      // build configuration data.
-      builder
-          .setOriginalJsInfo(
-              descriptor.getJsInfo().toBuilder().setJsName(descriptor.getSimpleJsName()).build())
-          .setOrigin(getExportBridgeOrigin(descriptor));
+    if (!origin.isWasmEntryPoint()) {
+      builder.setOriginalJsInfo(
+          descriptor.getJsInfo().toBuilder().setJsName(descriptor.getSimpleJsName()).build());
     }
     return builder.build();
-  }
-
-  private static MethodDescriptor.MethodOrigin getExportBridgeOrigin(MethodDescriptor descriptor) {
-    return descriptor.getOrigin() == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
-        ? MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT
-        : MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_EXPORT;
   }
 
   private static TypeDescriptor replaceStringWithNativeString(TypeDescriptor typeDescriptor) {

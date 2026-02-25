@@ -39,7 +39,6 @@ public class Method extends Member implements MethodLike {
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
   private final String jsDocDescription;
-  private final String wasmExportName;
   @Nullable private Boolean isForcedJavaOverride;
 
   private boolean hasSuppressNothingToOverrideAnnotation;
@@ -50,14 +49,12 @@ public class Method extends Member implements MethodLike {
       List<Variable> parameters,
       Block body,
       String jsDocDescription,
-      String wasmExportName,
       @Nullable Boolean isForcedJavaOverride,
       boolean hasSuppressNothingToOverrideAnnotation) {
     super(sourcePosition);
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
     this.jsDocDescription = jsDocDescription;
-    this.wasmExportName = wasmExportName;
     this.body = checkNotNull(body);
     this.isForcedJavaOverride = isForcedJavaOverride;
     this.hasSuppressNothingToOverrideAnnotation = hasSuppressNothingToOverrideAnnotation;
@@ -103,16 +100,6 @@ public class Method extends Member implements MethodLike {
 
   public String getJsDocDescription() {
     return jsDocDescription;
-  }
-
-  public boolean isWasmEntryPoint() {
-    return wasmExportName != null;
-  }
-
-  /** The name of the export for the Wasm entry point. */
-  @Nullable
-  public String getWasmExportName() {
-    return wasmExportName;
   }
 
   @Nullable
@@ -201,7 +188,6 @@ public class Method extends Member implements MethodLike {
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
     private String jsDocDescription;
-    private String wasmExportName;
     private SourcePosition bodySourcePosition;
     private SourcePosition sourcePosition;
     @Nullable private Boolean isForcedJavaOverride;
@@ -213,7 +199,6 @@ public class Method extends Member implements MethodLike {
       builder.parameters = Lists.newArrayList(method.getParameters());
       builder.statements = Lists.newArrayList(method.getBody().getStatements());
       builder.jsDocDescription = method.getJsDocDescription();
-      builder.wasmExportName = method.getWasmExportName();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.sourcePosition = method.getSourcePosition();
       builder.isForcedJavaOverride = method.isForcedJavaOverride();
@@ -301,12 +286,6 @@ public class Method extends Member implements MethodLike {
     }
 
     @CanIgnoreReturnValue
-    public Builder setWasmExportName(String wasmExportName) {
-      this.wasmExportName = wasmExportName;
-      return this;
-    }
-
-    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
@@ -346,7 +325,6 @@ public class Method extends Member implements MethodLike {
           parameters,
           body,
           jsDocDescription,
-          wasmExportName,
           isForcedJavaOverride,
           hasSuppressNothingToOverrideAnnotation);
     }

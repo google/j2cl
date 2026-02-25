@@ -317,8 +317,8 @@ public class WasmConstructsGenerator {
               JsImportsGenerator.MODULE, jsMethodImport.getImportKey()));
     }
 
-    if (method.isWasmEntryPoint()) {
-      builder.append(" (export \"" + method.getWasmExportName() + "\")");
+    if (methodDescriptor.getOrigin().isWasmEntryPoint()) {
+      builder.append(" (export \"" + methodDescriptor.getName() + "\")");
     }
 
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();

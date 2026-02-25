@@ -44,7 +44,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
                     WasmEntryPointBridgesCreator.generateBridge(
                         method.getDescriptor(),
                         method.getSourcePosition(),
-                        /* isEntryPoint= */ false);
+                        getBridgeOrigin(method.getDescriptor()));
 
                 // Do not generate duplicate methods.
                 // TODO(b/482129587): Reconsider which method to export.
@@ -63,5 +63,11 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
         && !methodDescriptor.isConstructor()
         // TODO(b/458472428): Support JsProperty/Getter/Setter.
         && methodDescriptor.isJsMethod();
+  }
+
+  private static MethodDescriptor.MethodOrigin getBridgeOrigin(MethodDescriptor descriptor) {
+    return descriptor.getOrigin() == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
+        ? MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT
+        : MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_EXPORT;
   }
 }

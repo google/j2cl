@@ -137,6 +137,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL,
     SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED,
     SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD,
+    SYNTHETIC_WASM_ENTRY_POINT,
     SYNTHETIC_WASM_JS_EXPORT,
     SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT,
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
@@ -184,6 +185,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         case SYNTHETIC_PROPERTY_SETTER, SYNTHETIC_PROPERTY_GETTER -> FieldOrigin.SOURCE.getPrefix();
 
+        case SYNTHETIC_WASM_ENTRY_POINT -> "export_";
+
+        case SYNTHETIC_WASM_JS_EXPORT, SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT -> "js_export_";
+
         // Don't prefix the rest, they all start with "$"
         default -> "";
       };
@@ -216,6 +221,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public boolean isRequiredSystemGetPropertyGetter() {
       return this == SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED;
+    }
+
+    public boolean isWasmEntryPoint() {
+      return this == SYNTHETIC_WASM_ENTRY_POINT;
     }
 
     public boolean isWasmJsExport() {
