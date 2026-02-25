@@ -122,6 +122,8 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.properties
 import org.jetbrains.kotlin.ir.util.superTypes
+import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.FqNameUnsafe
@@ -616,8 +618,43 @@ val IrFunction.isLambda: Boolean
 fun IrFunction.resolveName(jvmBackendContext: JvmBackendContext): String? =
   when (this) {
     is IrConstructor -> null
-    is IrSimpleFunction -> this.resolveName(jvmBackendContext)
+    is IrSimpleFunction -> this.resolveName(jvmBackendContext) + getLocalSuffix()
   }
+
+private fun IrFunction.getLocalSuffix(): String {
+  // Whether the IrFunction is a local function itself.
+  val isLocal = visibility.delegate == Visibilities.Local
+  if (!isLocal) {
+    return ""
+  }
+  var index = 0
+  val function = this
+  var found = false
+  parent.acceptChildrenVoid(
+    object : IrVisitorVoid() {
+      override fun visitElement(element: IrElement) {
+        if (!found && element !is IrDeclarationParent) {
+          element.acceptChildrenVoid(this)
+        }
+      }
+
+      override fun visitFunction(declaration: IrFunction) {
+        if (declaration.symbol == function.symbol) {
+          found = true
+        }
+        if (!found && declaration.name == function.name) {
+          // There is a another local function with the same name that appears before the
+          // local function we are looking for. Keep track of the count to add as a suffix.
+          index++
+        }
+      }
+    }
+  )
+  if (index == 0) {
+    return ""
+  }
+  return "_$$index"
+}
 
 fun IrSimpleFunction.resolveName(jvmBackendContext: JvmBackendContext): String {
   // Pretend the function is public when mapping the signature. We want to avoid internal name

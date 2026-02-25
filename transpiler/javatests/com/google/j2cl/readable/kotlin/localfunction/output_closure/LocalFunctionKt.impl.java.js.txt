@@ -10,6 +10,7 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let StringBuilder = goog.forwardDeclare('java.lang.StringBuilder$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -128,10 +129,10 @@ class LocalFunctionKt extends j_l_Object {
   let localFunction = /**  @return {number}*/ ((/** number */ i) =>{
    return i;
   });
-  let localFunction_1 = /**  @return {number}*/ ((/** number */ i_1, /** number */ j) =>{
+  let localFunction_$1 = /**  @return {number}*/ ((/** number */ i_1, /** number */ j) =>{
    return i_1 + j | 0;
   });
-  return localFunction(1) + localFunction_1(1, 2) | 0;
+  return localFunction(1) + localFunction_$1(1, 2) | 0;
  }
  /** @nodts */
  static m_testBoxingUnboxing__void() {
@@ -141,6 +142,33 @@ class LocalFunctionKt extends j_l_Object {
    });
    return true;
   });
+ }
+ /** @nodts */
+ static m_testSameNameLocalFunctions__void() {
+  {
+   let local = /**  @return {string}*/ (() =>{
+    return 'foo';
+   });
+   local();
+  }
+  {
+   let local_$1 = /**  @return {string}*/ (() =>{
+    return 'bar';
+   });
+   local_$1();
+  }
+  let f = Function0.$adapt(/**  @return {?}*/ (() =>{
+   let local_1 = /**  @return {string}*/ (() =>{
+    return 'baz';
+   });
+   return local_1();
+  }));
+  f = Function0.$adapt(/**  @return {?}*/ (() =>{
+   let local_2 = /**  @return {string}*/ (() =>{
+    return 'zoo';
+   });
+   return local_2();
+  }));
  }
  /** @nodts */
  static $clinit() {
@@ -159,6 +187,7 @@ class LocalFunctionKt extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   StringBuilder = goog.module.get('java.lang.StringBuilder$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }

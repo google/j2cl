@@ -145,6 +145,31 @@ private fun testBoxingUnboxing() {
   }
 }
 
+private fun testSameNameLocalFunctions() {
+  class LocalCall {
+    // Not a local function
+    fun local() {}
+  }
+  if (true) {
+    fun local(): String = "foo"
+    local()
+  }
+  if (true) {
+    fun local(): String = "bar"
+    local()
+  }
+
+  var f = {
+    fun local(): String = "baz"
+    local()
+  }
+
+  f = {
+    fun local(): String = "zoo"
+    local()
+  }
+}
+
 // TODO(b/428046269): Re-enable when default arguments are supported for local functions.
 // private fun testLocalFunctionWithDefaultArgument(): Int {
 //   fun localFunction(i: Int, j: Int = 0): Int {
