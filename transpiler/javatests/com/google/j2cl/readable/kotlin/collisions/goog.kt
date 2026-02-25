@@ -22,12 +22,9 @@ import jsinterop.annotations.JsType
 
 class goog
 
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
-class Blah
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String") class Blah
 
-@JsMethod(namespace = JsPackage.GLOBAL, name = "Math.random")
-external fun m()
-
+@JsMethod(namespace = JsPackage.GLOBAL, name = "Math.random") external fun m()
 
 @JsProperty(name = "String.prototype.length", namespace = JsPackage.GLOBAL)
 external fun getN(): Double
@@ -75,5 +72,17 @@ class T<T : Number?> {
     val t: T? = collisions.T<T>().m()
     t!!.toByte()
     return t
+  }
+
+  fun o() {
+    var r: () -> Unit = {
+      class Local {}
+      Local()
+    }
+
+    r = {
+      class Local {}
+      Local()
+    }
   }
 }

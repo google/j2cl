@@ -35,6 +35,30 @@
 (global $$class@collisions.T (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@collisions.T.1Local (mut i32)
+ (i32.const 0)
+)
+(global $$class@collisions.T.1Local (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@collisions.T.$LambdaImplementor$1 (mut i32)
+ (i32.const 0)
+)
+(global $$class@collisions.T.$LambdaImplementor$1 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@collisions.T.2Local (mut i32)
+ (i32.const 0)
+)
+(global $$class@collisions.T.2Local (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@collisions.T.$LambdaImplementor$2 (mut i32)
+ (i32.const 0)
+)
+(global $$class@collisions.T.$LambdaImplementor$2 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@collisions.Blah.$Overlay (mut i32)
  (i32.const 0)
 )
@@ -90,6 +114,51 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_m__java_lang_Number_$pp_collisions@collisions.T)
   (ref.func $m_n__java_lang_Number_$pp_collisions@collisions.T)
+  (ref.func $m_o__void_$pp_collisions@collisions.T)
+ )
+)
+(global $collisions.T.1Local.vtable (ref $collisions.T.1Local.vtable)
+ (struct.new $collisions.T.1Local.vtable
+  (ref.func $$getClassImpl__java_lang_Class@collisions.T.1Local)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $collisions.T.$LambdaImplementor$1.vtable (ref $collisions.T.$LambdaImplementor$1.vtable)
+ (struct.new $collisions.T.$LambdaImplementor$1.vtable
+  (ref.func $$getClassImpl__java_lang_Class@java.lang.Runnable.$LambdaAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_run__void@collisions.T.$LambdaImplementor$1)
+ )
+)
+(global $java.lang.Runnable.vtable@$collisions.T.$LambdaImplementor$1 (ref $java.lang.Runnable.vtable)
+ (struct.new $java.lang.Runnable.vtable
+  (ref.func $m_run__void@collisions.T.$LambdaImplementor$1)
+ )
+)
+(global $collisions.T.2Local.vtable (ref $collisions.T.2Local.vtable)
+ (struct.new $collisions.T.2Local.vtable
+  (ref.func $$getClassImpl__java_lang_Class@collisions.T.2Local)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $collisions.T.$LambdaImplementor$2.vtable (ref $collisions.T.$LambdaImplementor$2.vtable)
+ (struct.new $collisions.T.$LambdaImplementor$2.vtable
+  (ref.func $$getClassImpl__java_lang_Class@java.lang.Runnable.$LambdaAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_run__void@collisions.T.$LambdaImplementor$2)
+ )
+)
+(global $java.lang.Runnable.vtable@$collisions.T.$LambdaImplementor$2 (ref $java.lang.Runnable.vtable)
+ (struct.new $java.lang.Runnable.vtable
+  (ref.func $m_run__void@collisions.T.$LambdaImplementor$2)
  )
 )
 (global $collisions.Blah.$Overlay.vtable (ref $collisions.Blah.$Overlay.vtable)
@@ -677,6 +746,23 @@
 )
 (elem declare func $m_n__java_lang_Number_$pp_collisions@collisions.T)
 
+;;; void T.o()
+(func $m_o__void_$pp_collisions@collisions.T
+ (type $function.m_o__void_$pp_collisions)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:88:7
+ (local $r (ref null $java.lang.Object))
+ (local $this (ref null $collisions.T))
+ (local.set $this (ref.cast (ref $collisions.T) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:89:4
+  (local.set $r (call $$create__collisions_T@collisions.T.$LambdaImplementor$1 (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:95:4
+  (local.set $r (call $$create__collisions_T@collisions.T.$LambdaImplementor$2 (local.get $this)))
+ )
+)
+(elem declare func $m_o__void_$pp_collisions@collisions.T)
+
 ;;; void T.$clinit()
 (func $$clinit__void_<once>_@collisions.T
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
@@ -721,3 +807,309 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.T)
+
+;;; Local<T> Local.$create(T<T> $outer_this)
+(func $$create__collisions_T@collisions.T.1Local
+ (param $$outer_this (ref null $collisions.T))
+ (result (ref null $collisions.T.1Local))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+ (local $$instance (ref null $collisions.T.1Local))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (call $$clinit__void_<once>_@collisions.T.1Local )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (local.set $$instance (struct.new $collisions.T.1Local (global.get $collisions.T.1Local.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $collisions.T)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (call $$ctor__collisions_T__void_$p_collisions_T_1Local@collisions.T.1Local (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Local.$ctor(T<T> $outer_this)
+(func $$ctor__collisions_T__void_$p_collisions_T_1Local@collisions.T.1Local
+ (param $this (ref null $collisions.T.1Local))
+ (param $$outer_this (ref null $collisions.T))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (struct.set $collisions.T.1Local $$outer_this@collisions.T.1Local (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Local.$clinit()
+(func $$clinit__void_<once>_@collisions.T.1Local
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (if (global.get $$class-initialized@collisions.T.1Local)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (global.set $$class-initialized@collisions.T.1Local (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Local.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@collisions.T.1Local
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@collisions.T.1Local)))
+   (then
+    (return (global.get $$class@collisions.T.1Local))
+   )
+  )
+  (global.set $$class@collisions.T.1Local (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|collisions.T...|__java_lang_String_<once>_@collisions.T.1Local )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@collisions.T.1Local))
+ )
+)
+
+;;; Class<?> Local.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.T.1Local
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $collisions.T.1Local))
+ (local.set $this (ref.cast (ref $collisions.T.1Local) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@collisions.T.1Local ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.T.1Local)
+
+;;; Local<T> Local.$create(T<T> $outer_this)
+(func $$create__collisions_T@collisions.T.2Local
+ (param $$outer_this (ref null $collisions.T))
+ (result (ref null $collisions.T.2Local))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+ (local $$instance (ref null $collisions.T.2Local))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (call $$clinit__void_<once>_@collisions.T.2Local )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (local.set $$instance (struct.new $collisions.T.2Local (global.get $collisions.T.2Local.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $collisions.T)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (call $$ctor__collisions_T__void_$p_collisions_T_2Local@collisions.T.2Local (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Local.$ctor(T<T> $outer_this)
+(func $$ctor__collisions_T__void_$p_collisions_T_2Local@collisions.T.2Local
+ (param $this (ref null $collisions.T.2Local))
+ (param $$outer_this (ref null $collisions.T))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (struct.set $collisions.T.2Local $$outer_this@collisions.T.2Local (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Local.$clinit()
+(func $$clinit__void_<once>_@collisions.T.2Local
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (if (global.get $$class-initialized@collisions.T.2Local)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (global.set $$class-initialized@collisions.T.2Local (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Local.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@collisions.T.2Local
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@collisions.T.2Local)))
+   (then
+    (return (global.get $$class@collisions.T.2Local))
+   )
+  )
+  (global.set $$class@collisions.T.2Local (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|collisions.T...|__java_lang_String_<once>_@collisions.T.2Local )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@collisions.T.2Local))
+ )
+)
+
+;;; Class<?> Local.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@collisions.T.2Local
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $collisions.T.2Local))
+ (local.set $this (ref.cast (ref $collisions.T.2Local) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@collisions.T.2Local ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@collisions.T.2Local)
+
+;;; <anonymous> implements Runnable<T> <anonymous> implements Runnable.$create(T<T> $outer_this)
+(func $$create__collisions_T@collisions.T.$LambdaImplementor$1
+ (param $$outer_this (ref null $collisions.T))
+ (result (ref null $collisions.T.$LambdaImplementor$1))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+ (local $$instance (ref null $collisions.T.$LambdaImplementor$1))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (call $$clinit__void_<once>_@collisions.T.$LambdaImplementor$1 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (local.set $$instance (struct.new $collisions.T.$LambdaImplementor$1 (global.get $collisions.T.$LambdaImplementor$1.vtable) (global.get $collisions.T.$LambdaImplementor$1.itable) (i32.const 0) (ref.null $collisions.T)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (call $$ctor__collisions_T__void_$p_collisions_T_$LambdaImplementor$1@collisions.T.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Runnable.$ctor(T<T> $outer_this)
+(func $$ctor__collisions_T__void_$p_collisions_T_$LambdaImplementor$1@collisions.T.$LambdaImplementor$1
+ (param $this (ref null $collisions.T.$LambdaImplementor$1))
+ (param $$outer_this (ref null $collisions.T))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (struct.set $collisions.T.$LambdaImplementor$1 $$outer_this@collisions.T.$LambdaImplementor$1 (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (call $$ctor__void_$p_java_lang_Runnable_$LambdaAdaptor@java.lang.Runnable.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> implements Runnable.run()
+(func $m_run__void@collisions.T.$LambdaImplementor$1
+ (type $function.m_run__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+ (local $this (ref null $collisions.T.$LambdaImplementor$1))
+ (local.set $this (ref.cast (ref $collisions.T.$LambdaImplementor$1) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:92:10
+  (drop (call $$create__collisions_T@collisions.T.1Local (struct.get $collisions.T.$LambdaImplementor$1 $$outer_this@collisions.T.$LambdaImplementor$1 (local.get $this))))
+ )
+)
+(elem declare func $m_run__void@collisions.T.$LambdaImplementor$1)
+
+;;; void <anonymous> implements Runnable.$clinit()
+(func $$clinit__void_<once>_@collisions.T.$LambdaImplementor$1
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (if (global.get $$class-initialized@collisions.T.$LambdaImplementor$1)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (global.set $$class-initialized@collisions.T.$LambdaImplementor$1 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  (call $$clinit__void_<once>_@java.lang.Runnable.$LambdaAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements Runnable.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@collisions.T.$LambdaImplementor$1
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@collisions.T.$LambdaImplementor$1)))
+   (then
+    (return (global.get $$class@collisions.T.$LambdaImplementor$1))
+   )
+  )
+  (global.set $$class@collisions.T.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|collisions.T...|__java_lang_String_<once>_@collisions.T.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Runnable.$LambdaAdaptor )))
+  (return (global.get $$class@collisions.T.$LambdaImplementor$1))
+ )
+)
+
+;;; <anonymous> implements Runnable<T> <anonymous> implements Runnable.$create(T<T> $outer_this)
+(func $$create__collisions_T@collisions.T.$LambdaImplementor$2
+ (param $$outer_this (ref null $collisions.T))
+ (result (ref null $collisions.T.$LambdaImplementor$2))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+ (local $$instance (ref null $collisions.T.$LambdaImplementor$2))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (call $$clinit__void_<once>_@collisions.T.$LambdaImplementor$2 )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (local.set $$instance (struct.new $collisions.T.$LambdaImplementor$2 (global.get $collisions.T.$LambdaImplementor$2.vtable) (global.get $collisions.T.$LambdaImplementor$2.itable) (i32.const 0) (ref.null $collisions.T)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (call $$ctor__collisions_T__void_$p_collisions_T_$LambdaImplementor$2@collisions.T.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Runnable.$ctor(T<T> $outer_this)
+(func $$ctor__collisions_T__void_$p_collisions_T_$LambdaImplementor$2@collisions.T.$LambdaImplementor$2
+ (param $this (ref null $collisions.T.$LambdaImplementor$2))
+ (param $$outer_this (ref null $collisions.T))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (struct.set $collisions.T.$LambdaImplementor$2 $$outer_this@collisions.T.$LambdaImplementor$2 (local.get $this) (local.get $$outer_this))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (call $$ctor__void_$p_java_lang_Runnable_$LambdaAdaptor@java.lang.Runnable.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> implements Runnable.run()
+(func $m_run__void@collisions.T.$LambdaImplementor$2
+ (type $function.m_run__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+ (local $this (ref null $collisions.T.$LambdaImplementor$2))
+ (local.set $this (ref.cast (ref $collisions.T.$LambdaImplementor$2) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:98:10
+  (drop (call $$create__collisions_T@collisions.T.2Local (struct.get $collisions.T.$LambdaImplementor$2 $$outer_this@collisions.T.$LambdaImplementor$2 (local.get $this))))
+ )
+)
+(elem declare func $m_run__void@collisions.T.$LambdaImplementor$2)
+
+;;; void <anonymous> implements Runnable.$clinit()
+(func $$clinit__void_<once>_@collisions.T.$LambdaImplementor$2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (if (global.get $$class-initialized@collisions.T.$LambdaImplementor$2)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (global.set $$class-initialized@collisions.T.$LambdaImplementor$2 (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  (call $$clinit__void_<once>_@java.lang.Runnable.$LambdaAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements Runnable.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@collisions.T.$LambdaImplementor$2
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@collisions.T.$LambdaImplementor$2)))
+   (then
+    (return (global.get $$class@collisions.T.$LambdaImplementor$2))
+   )
+  )
+  (global.set $$class@collisions.T.$LambdaImplementor$2 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|collisions.T...|__java_lang_String_<once>_@collisions.T.$LambdaImplementor$2 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Runnable.$LambdaAdaptor )))
+  (return (global.get $$class@collisions.T.$LambdaImplementor$2))
+ )
+)

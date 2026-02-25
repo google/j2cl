@@ -3,7 +3,10 @@ goog.module('collisions.T$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1Local = goog.forwardDeclare('collisions.T.$1Local$impl');
+let $2Local = goog.forwardDeclare('collisions.T.$2Local$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let Runnable = goog.forwardDeclare('java.lang.Runnable$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
@@ -37,6 +40,15 @@ class T extends j_l_Object {
   return t;
  }
  /** @nodts */
+ m_o__void_$pp_collisions() {
+  let r = Runnable.$adapt(() =>{
+   $1Local.$create__collisions_T(this);
+  });
+  r = Runnable.$adapt(() =>{
+   $2Local.$create__collisions_T(this);
+  });
+ }
+ /** @nodts */
  static $clinit() {
   T.$clinit = () =>{};
   T.$loadModules();
@@ -49,6 +61,9 @@ class T extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  $1Local = goog.module.get('collisions.T.$1Local$impl');
+  $2Local = goog.module.get('collisions.T.$2Local$impl');
+  Runnable = goog.module.get('java.lang.Runnable$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
  }
 }

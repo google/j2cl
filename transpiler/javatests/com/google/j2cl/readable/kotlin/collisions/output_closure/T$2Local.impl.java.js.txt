@@ -1,0 +1,51 @@
+goog.module('collisions.T.$2Local$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let T = goog.forwardDeclare('collisions.T$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+
+/**
+ * @final
+ * @template T_1
+ */
+class $2Local extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!T<T_1>} @nodts*/
+  this.$outer_this__collisions_T_2Local;
+ }
+ /** @nodts @template T_1 @return {!$2Local<T_1>} */
+ static $create__collisions_T(/** !T<T_1> */ $outer_this) {
+  $2Local.$clinit();
+  let $instance = new $2Local();
+  $instance.$ctor__collisions_T_2Local__collisions_T__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__collisions_T_2Local__collisions_T__void(/** !T<T_1> */ $outer_this) {
+  this.$outer_this__collisions_T_2Local = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  $2Local.$clinit = () =>{};
+  $2Local.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2Local;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2Local, 'collisions.T$2Local');
+
+exports = $2Local;
+
+//# sourceMappingURL=T$2Local.js.map

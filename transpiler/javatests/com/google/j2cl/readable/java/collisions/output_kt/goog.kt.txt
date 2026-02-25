@@ -20,6 +20,7 @@
 package collisions
 
 import javaemul.lang.*
+import java.lang.Runnable
 import kotlin.Double
 import kotlin.Int
 import kotlin.Number
@@ -83,5 +84,16 @@ open class T<T: Number?> internal constructor() {
   val t: T? = collisions.T<T>().m_pp_collisions()
   t!!.toByte()
   return t as T
+ }
+
+ internal open fun o_pp_collisions() {
+  var r: Runnable = Runnable {
+   open class Local internal constructor()
+   Local()
+  }
+  r = Runnable {
+   open class Local internal constructor()
+   Local()
+  }
  }
 }

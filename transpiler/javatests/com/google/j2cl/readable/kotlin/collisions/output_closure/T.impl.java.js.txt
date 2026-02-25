@@ -3,7 +3,11 @@ goog.module('collisions.T$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1Local = goog.forwardDeclare('collisions.T.$1Local$impl');
+let $2Local = goog.forwardDeclare('collisions.T.$2Local$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
@@ -37,6 +41,17 @@ class T extends j_l_Object {
   $Numbers.m_byteValue__java_lang_Number__byte(/**@type {!(Number|number|!$Long)}*/ (t));
   return t;
  }
+ /** @final @nodts */
+ m_o__void() {
+  let r = Function0.$adapt(/**  @return {?}*/ (() =>{
+   $1Local.$create__collisions_T(this);
+   return Unit.f_INSTANCE__kotlin_Unit;
+  }));
+  r = Function0.$adapt(/**  @return {?}*/ (() =>{
+   $2Local.$create__collisions_T(this);
+   return Unit.f_INSTANCE__kotlin_Unit;
+  }));
+ }
  /** @nodts */
  static $clinit() {
   T.$clinit = () =>{};
@@ -50,6 +65,10 @@ class T extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  $1Local = goog.module.get('collisions.T.$1Local$impl');
+  $2Local = goog.module.get('collisions.T.$2Local$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
  }
 }

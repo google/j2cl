@@ -84,4 +84,18 @@ class T<T extends Number> {
     t.byteValue();
     return t;
   }
+
+  void o() {
+    Runnable r =
+        () -> {
+          class Local {}
+          new Local();
+        };
+
+    r =
+        () -> {
+          class Local {}
+          new Local();
+        };
+  }
 }
