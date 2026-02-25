@@ -13,7 +13,6 @@ java_library(
     deps = [
         "//third_party:gson",
         "//third_party:guava",
-        "//third_party:jscomp",
         "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler/ast",

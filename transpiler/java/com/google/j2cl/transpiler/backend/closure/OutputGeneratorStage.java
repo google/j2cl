@@ -27,6 +27,8 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.backend.common.ReadableSourceMapGenerator;
+import com.google.j2cl.transpiler.backend.common.SourceMapGenerator;
 import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfoBuilder;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -212,8 +214,9 @@ public class OutputGeneratorStage {
   private String renderSourceMap(
       Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     try {
-      return SourceMapGeneratorStage.generateSourceMaps(
-          type, javaSourcePositionByOutputSourcePosition);
+      return SourceMapGenerator.generateSourceMaps(
+          type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX,
+          javaSourcePositionByOutputSourcePosition);
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_WRITE_FILE, e.getMessage());
       return null;
@@ -232,7 +235,8 @@ public class OutputGeneratorStage {
         ReadableSourceMapGenerator.generate(
             javaSourcePositionByOutputSourcePosition,
             javaScriptImplementationFileContents,
-            nativeJavaScriptFile,
+            nativeJavaScriptFile == null ? null : nativeJavaScriptFile.getRelativeFilePath(),
+            nativeJavaScriptFile == null ? null : nativeJavaScriptFile.getContent(),
             j2clUnit.getFilePath(),
             problems);
     if (!readableOutput.isEmpty()) {

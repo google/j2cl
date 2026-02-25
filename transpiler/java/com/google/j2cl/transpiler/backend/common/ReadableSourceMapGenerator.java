@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.backend.closure;
+package com.google.j2cl.transpiler.backend.common;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -36,39 +36,40 @@ import java.util.Map.Entry;
 public final class ReadableSourceMapGenerator {
   /** The source location of the ast node to print, input or output. */
   public static String generate(
-      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
-      String javaScriptImplementationFileContents,
-      NativeJavaScriptFile nativeJavaScriptFile,
+      Map<SourcePosition, SourcePosition> sourcePositionByOutputSourcePosition,
+      String outputFileContents,
+      String nativeFilePath,
+      String nativeFileContent,
       String j2clUnitFilePath,
       Problems problems) {
 
     Map<String, List<String>> sourceLinesByFileName =
-        buildSourceLinesByFileName(nativeJavaScriptFile, j2clUnitFilePath, problems);
+        buildSourceLinesByFileName(nativeFilePath, nativeFileContent, j2clUnitFilePath, problems);
 
     StringBuilder sb = new StringBuilder();
 
     List<Entry<SourcePosition, SourcePosition>> entries =
-        new ArrayList<>(javaSourcePositionByOutputSourcePosition.entrySet());
+        new ArrayList<>(sourcePositionByOutputSourcePosition.entrySet());
 
-    List<String> javaScriptSourceLines =
-        Arrays.asList(javaScriptImplementationFileContents.split("\n"));
+    List<String> outputSourceLines = Arrays.asList(outputFileContents.split("\n"));
     for (Entry<SourcePosition, SourcePosition> entry : entries) {
-      SourcePosition javaSourcePosition = checkNotNull(entry.getValue());
-      SourcePosition javaScriptSourcePosition = checkNotNull(entry.getKey());
-      List<String> javaSourceLines = sourceLinesByFileName.get(javaSourcePosition.getFileName());
-      if (javaSourceLines == null) {
-        // ReadableSourceMapGenerator doesn't work over multiple files so inlining is not handled.
+      SourcePosition sourcePosition = checkNotNull(entry.getValue());
+      SourcePosition outputSourcePosition = checkNotNull(entry.getKey());
+      List<String> sourceLines = sourceLinesByFileName.get(sourcePosition.getFileName());
+      if (sourceLines == null) {
+        // ReadableSourceMapGenerator doesn't work over multiple files so inlining is not
+        // handled.
         continue;
       }
 
-      boolean hasName = javaSourcePosition.getName() != null;
+      boolean hasName = sourcePosition.getName() != null;
 
-      sb.append(extract(javaSourcePosition, javaSourceLines, hasName))
+      sb.append(extract(sourcePosition, sourceLines, hasName))
           .append(" => ")
-          .append(extract(javaScriptSourcePosition, javaScriptSourceLines, hasName).trim());
+          .append(extract(outputSourcePosition, outputSourceLines, hasName).trim());
 
       if (hasName) {
-        sb.append(" \"").append(javaSourcePosition.getName()).append("\"");
+        sb.append(" \"").append(sourcePosition.getName()).append("\"");
       }
 
       sb.append("\n");
@@ -77,14 +78,12 @@ public final class ReadableSourceMapGenerator {
   }
 
   private static ImmutableMap<String, List<String>> buildSourceLinesByFileName(
-      NativeJavaScriptFile nativeJavaScriptFile, String j2clUnitFilePath, Problems problems) {
+      String nativeFilePath, String nativeFileContent, String j2clUnitFilePath, Problems problems) {
     ImmutableMap.Builder<String, List<String>> contentsByFileNameBuilder = ImmutableMap.builder();
 
-    if (nativeJavaScriptFile != null) {
-      String nativeJavaScriptFileFileName = nativeJavaScriptFile.getRelativeFilePath();
+    if (nativeFilePath != null) {
       contentsByFileNameBuilder.put(
-          new File(nativeJavaScriptFileFileName).getName(),
-          Splitter.on('\n').splitToList(nativeJavaScriptFile.getContent()));
+          new File(nativeFilePath).getName(), Splitter.on('\n').splitToList(nativeFileContent));
     }
     try {
       contentsByFileNameBuilder.put(

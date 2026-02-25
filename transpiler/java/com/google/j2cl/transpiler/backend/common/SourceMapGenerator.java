@@ -13,47 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.backend.closure;
+package com.google.j2cl.transpiler.backend.common;
 
 import com.google.debugging.sourcemap.FilePosition;
 import com.google.debugging.sourcemap.SourceMapFormat;
-import com.google.debugging.sourcemap.SourceMapGenerator;
 import com.google.debugging.sourcemap.SourceMapGeneratorFactory;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.transpiler.ast.Type;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
 /** Generates the source maps. */
-public final class SourceMapGeneratorStage {
+public final class SourceMapGenerator {
 
   public static String generateSourceMaps(
-      Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition)
+      String sourceMapFileName, Map<SourcePosition, SourcePosition> sourcePositionByOutputPosition)
       throws IOException {
-    return renderSourceMapToString(type, javaSourcePositionByOutputSourcePosition);
-  }
-
-  private static String renderSourceMapToString(
-      Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition)
-      throws IOException {
-    SourceMapGenerator sourceMapGenerator =
+    com.google.debugging.sourcemap.SourceMapGenerator sourceMapGenerator =
         SourceMapGeneratorFactory.getInstance(SourceMapFormat.V3);
-    for (Entry<SourcePosition, SourcePosition> entry :
-        javaSourcePositionByOutputSourcePosition.entrySet()) {
-      SourcePosition javaSourcePosition = entry.getValue();
-      SourcePosition javaScriptSourcePosition = entry.getKey();
+    for (Entry<SourcePosition, SourcePosition> entry : sourcePositionByOutputPosition.entrySet()) {
+      SourcePosition sourcePosition = entry.getValue();
+      SourcePosition outputSourcePosition = entry.getKey();
 
       sourceMapGenerator.addMapping(
-          javaSourcePosition.getFileName(),
-          javaSourcePosition.getName(),
-          toFilePosition(javaSourcePosition.getStartFilePosition()),
-          toFilePosition(javaScriptSourcePosition.getStartFilePosition()),
-          toFilePosition(javaScriptSourcePosition.getEndFilePosition()));
+          sourcePosition.getFileName(),
+          sourcePosition.getName(),
+          toFilePosition(sourcePosition.getStartFilePosition()),
+          toFilePosition(outputSourcePosition.getStartFilePosition()),
+          toFilePosition(outputSourcePosition.getEndFilePosition()));
     }
     StringBuilder sb = new StringBuilder();
-    String typeName = type.getDeclaration().getSimpleBinaryName();
-    sourceMapGenerator.appendTo(sb, typeName + JavaScriptImplGenerator.FILE_SUFFIX);
+    sourceMapGenerator.appendTo(sb, sourceMapFileName);
     return sb.toString();
   }
 
@@ -66,5 +56,5 @@ public final class SourceMapGeneratorStage {
     return new FilePosition(j2clFilePosition.getLine(), j2clFilePosition.getColumn());
   }
 
-  private SourceMapGeneratorStage() {}
+  private SourceMapGenerator() {}
 }
