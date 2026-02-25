@@ -37,6 +37,7 @@ public class Main {
     testNestedSwitch();
     testFallthroughSwitchExpression();
     testAutoboxing();
+    testConstantExpressions();
   }
 
   private static void testSwitchValues() {
@@ -301,5 +302,25 @@ public class Main {
 
   private static void assertIsPrimitiveInt(@DoNotAutobox Object object) {
     assertTrue(object instanceof Double);
+  }
+
+  private static void testConstantExpressions() {
+    assertEquals(4, getTopBits(0xFF000000));
+    assertEquals(3, getTopBits(0x80111111));
+    assertEquals(2, getTopBits(0x73000000));
+    assertEquals(1, getTopBits(0x13000000));
+  }
+
+  private static final int TOP_KEY_BITS_MASK = 0x3 << 30;
+
+  private static int getTopBits(int smearedHash) {
+    int topBits = smearedHash & TOP_KEY_BITS_MASK;
+    return switch (topBits) {
+      case 0x0 -> 1;
+      case 0x1 << 30 -> 2;
+      case 0x2 << 30 -> 3;
+      case 0x3 << 30 -> 4;
+      default -> throw new AssertionError();
+    };
   }
 }
