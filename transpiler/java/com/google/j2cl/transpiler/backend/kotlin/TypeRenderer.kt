@@ -66,38 +66,33 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
 
   /** Returns source for the given type. */
   fun typeSource(type: Type): Source =
-    type.declaration
-      .let { typeDeclaration ->
-        if (typeDeclaration.isKtNative) {
-          nativeTypeSource(typeDeclaration)
-        } else {
-          newLineSeparated(
-            objCNameRenderer.objCEnumAnnotationSource(typeDeclaration),
-            objCNameRenderer.objectiveCAnnotationSource(typeDeclaration),
-            objCNameRenderer.swiftNameAnnotationSource(typeDeclaration),
-            jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
-            autoValueAnnotationsSource(typeDeclaration),
-            suppressIncompatibleObjCNameOverrideSource(type),
-            spaceSeparated(
-              inheritanceModifierSource(typeDeclaration),
-              classModifiersSource(typeDeclaration),
-              kindModifiersSource(typeDeclaration),
-              colonSeparated(
-                spaceSeparated(
-                  typeDeclarationSource(typeDeclaration),
-                  ktPrimaryConstructorSource(type),
-                ),
-                superTypesSource(type),
-              ),
-              nameRenderer.whereClauseSource(
-                typeDeclaration.directlyDeclaredTypeParameterDescriptors
-              ),
-              typeBodySource(type, skipEmptyBlock = true),
+    type.declaration.let { typeDeclaration ->
+      if (typeDeclaration.isKtNative) {
+        nativeTypeSource(type)
+      } else {
+        newLineSeparated(
+          objCNameRenderer.objCEnumAnnotationSource(typeDeclaration),
+          objCNameRenderer.objectiveCAnnotationSource(typeDeclaration),
+          objCNameRenderer.swiftNameAnnotationSource(typeDeclaration),
+          jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
+          autoValueAnnotationsSource(typeDeclaration),
+          suppressIncompatibleObjCNameOverrideSource(type),
+          spaceSeparated(
+            inheritanceModifierSource(typeDeclaration),
+            classModifiersSource(typeDeclaration),
+            kindModifiersSource(typeDeclaration),
+            colonSeparated(
+              spaceSeparated(typeDeclarationSource(type), ktPrimaryConstructorSource(type)),
+              superTypesSource(type),
             ),
-          )
-        }
+            nameRenderer.whereClauseSource(
+              typeDeclaration.directlyDeclaredTypeParameterDescriptors
+            ),
+            typeBodySource(type, skipEmptyBlock = true),
+          ),
+        )
       }
-      .withMapping(type.sourcePosition)
+    }
 
   /** Returns source with body of the given type. */
   fun typeBodySource(type: Type, skipEmptyBlock: Boolean = false): Source =
@@ -143,10 +138,10 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
     }
   }
 
-  private fun typeDeclarationSource(declaration: TypeDeclaration): Source =
+  private fun typeDeclarationSource(type: Type): Source =
     join(
-      identifierSource(declaration.ktSimpleName),
-      nameRenderer.typeParametersSource(declaration.directlyDeclaredTypeParameterDescriptors),
+      typeIdentifierSource(type),
+      nameRenderer.typeParametersSource(type.declaration.directlyDeclaredTypeParameterDescriptors),
     )
 
   private fun superTypesSource(type: Type): Source =
@@ -221,14 +216,17 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
     fun classModifiersSource(typeDeclaration: TypeDeclaration): Source =
       Source.emptyUnless(typeDeclaration.isKtInner) { KotlinSource.INNER_KEYWORD }
 
-    fun nativeTypeSource(type: TypeDeclaration): Source =
+    fun nativeTypeSource(type: Type): Source =
       comment(
         spaceSeparated(
           KotlinSource.NATIVE_KEYWORD,
           KotlinSource.CLASS_KEYWORD,
-          identifierSource(type.ktSimpleName),
+          typeIdentifierSource(type),
         )
       )
+
+    fun typeIdentifierSource(type: Type): Source =
+      identifierSource(type.declaration.ktSimpleName).withMapping(type.sourcePosition)
 
     fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
       Source.emptyUnless(typeDeclaration.isClass && !typeDeclaration.isFinal) {
