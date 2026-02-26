@@ -15,13 +15,17 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
+import com.google.common.base.Splitter;
+import com.google.j2cl.transpiler.backend.common.SourceFile;
+import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 
 /**
  * NativeJavaScriptFile contains information about native javascript files that is used to output
  * native code during the javascript generation stage.
  */
-public class NativeJavaScriptFile {
+public class NativeJavaScriptFile implements SourceFile {
   private final String relativePath;
   private final String content;
 
@@ -33,6 +37,7 @@ public class NativeJavaScriptFile {
   }
 
   /** Returns the path for the native file relative to the root. */
+  @Override
   public String getRelativeFilePath() {
     // Replace .native.js by .native_js so that the file is not seen as a JavaScript source
     // by jscompiler.
@@ -50,6 +55,11 @@ public class NativeJavaScriptFile {
 
   public String getContent() {
     return content;
+  }
+
+  @Override
+  public List<String> getLines() throws IOException {
+    return Splitter.on('\n').splitToList(getContent());
   }
 
   @Override

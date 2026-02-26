@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -28,6 +29,7 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.common.ReadableSourceMapGenerator;
+import com.google.j2cl.transpiler.backend.common.SourceFile;
 import com.google.j2cl.transpiler.backend.common.SourceMapGenerator;
 import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfoBuilder;
 import java.io.IOException;
@@ -231,13 +233,16 @@ public class OutputGeneratorStage {
       NativeJavaScriptFile nativeJavaScriptFile) {
     checkArgument(
         !j2clUnit.isSynthetic(), "Cannot generate sourcemap for synthetic CompilationUnit");
+    var sourceFilesBuilder =
+        ImmutableSet.<SourceFile>builder().add(SourceFile.fromPath(j2clUnit.getFilePath()));
+    if (nativeJavaScriptFile != null) {
+      sourceFilesBuilder.add(nativeJavaScriptFile);
+    }
     String readableOutput =
         ReadableSourceMapGenerator.generate(
             javaSourcePositionByOutputSourcePosition,
             javaScriptImplementationFileContents,
-            nativeJavaScriptFile == null ? null : nativeJavaScriptFile.getRelativeFilePath(),
-            nativeJavaScriptFile == null ? null : nativeJavaScriptFile.getContent(),
-            j2clUnit.getFilePath(),
+            sourceFilesBuilder.build(),
             problems);
     if (!readableOutput.isEmpty()) {
       String readableSourceMapRelativePath =

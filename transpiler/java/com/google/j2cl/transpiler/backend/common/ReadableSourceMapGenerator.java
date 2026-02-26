@@ -18,16 +18,15 @@ package com.google.j2cl.transpiler.backend.common;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.CharMatcher;
-import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,13 +37,11 @@ public final class ReadableSourceMapGenerator {
   public static String generate(
       Map<SourcePosition, SourcePosition> sourcePositionByOutputSourcePosition,
       String outputFileContents,
-      String nativeFilePath,
-      String nativeFileContent,
-      String j2clUnitFilePath,
+      Collection<SourceFile> sourceFiles,
       Problems problems) {
 
     Map<String, List<String>> sourceLinesByFileName =
-        buildSourceLinesByFileName(nativeFilePath, nativeFileContent, j2clUnitFilePath, problems);
+        buildSourceLinesByFileName(sourceFiles, problems);
 
     StringBuilder sb = new StringBuilder();
 
@@ -78,17 +75,14 @@ public final class ReadableSourceMapGenerator {
   }
 
   private static ImmutableMap<String, List<String>> buildSourceLinesByFileName(
-      String nativeFilePath, String nativeFileContent, String j2clUnitFilePath, Problems problems) {
+      Collection<SourceFile> sourceFiles, Problems problems) {
     ImmutableMap.Builder<String, List<String>> contentsByFileNameBuilder = ImmutableMap.builder();
 
-    if (nativeFilePath != null) {
-      contentsByFileNameBuilder.put(
-          new File(nativeFilePath).getName(), Splitter.on('\n').splitToList(nativeFileContent));
-    }
     try {
-      contentsByFileNameBuilder.put(
-          new File(j2clUnitFilePath).getName(),
-          java.nio.file.Files.readAllLines(Paths.get(j2clUnitFilePath)));
+      for (var file : sourceFiles) {
+        contentsByFileNameBuilder.put(
+            new File(file.getRelativeFilePath()).getName(), file.getLines());
+      }
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
     }
