@@ -231,9 +231,8 @@
   Custom_customStaticLongMethod(1);
   Custom_customStaticLongStringMethod(2, @"");
 
-  // TODO(b/441689301): Unsupported because of https://youtrack.jetbrains.com/issue/KT-80557
-  // [obj lowercase:@""];
-  // Custom_staticlowercase_(@"");
+  [obj lowercase:@""];
+  Custom_staticlowercase_(@"");
 }
 
 - (void)testEnumNames {

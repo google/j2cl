@@ -93,13 +93,11 @@ internal fun MethodDescriptor.toNonConstructorObjCNames(): MethodObjCNames =
       // - first occurrence of "With",
       // - index of last uppercase character,
       // - in half arbitrarily.
-      // Does not handle single character objc name.
-      check(firstObjCParameterName.length > 1)
       val splitIndex =
         null
           ?: firstObjCParameterName.indexOf("With").takeIf { it > 0 }
           ?: firstObjCParameterName.indexOfLast { it.isUpperCase() }.takeIf { it > 0 }
-          ?: firstObjCParameterName.length.div(2)
+          ?: firstObjCParameterName.length
       MethodObjCNames(
         ObjCName(string = firstObjCParameterName.substring(0, splitIndex)),
         objCParameterNames.mapFirst { it.substring(splitIndex) }.map { ObjCName(string = it) },

@@ -98,13 +98,9 @@ public final class CustomNames {
   @ObjectiveCName("customStaticLongStringMethod")
   public static void staticLongStringMethod(long i, String s) {}
 
-  // TODO(b/441689301): Unsupported because of https://youtrack.jetbrains.com/issue/KT-80557
-  @J2ktIncompatible
   @ObjectiveCName("lowercase:")
   public void lowercase(String t) {}
 
-  // TODO(b/441689301): Unsupported because of https://youtrack.jetbrains.com/issue/KT-80557
-  @J2ktIncompatible
   @ObjectiveCName("staticlowercase:")
   public static void staticlowercase(String s) {}
 }

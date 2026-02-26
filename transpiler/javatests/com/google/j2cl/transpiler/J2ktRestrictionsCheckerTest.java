@@ -241,35 +241,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
                 + " 'J2ktMonitor'.");
   }
 
-  public void testUnsupportedObjectiveCNameAnnotation() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            interface Main {
-              @com.google.j2objc.annotations.ObjectiveCName("submit:")
-              void submit(String s);
-            }
-            """)
-        .addCompilationUnit(
-            "com.google.j2objc.annotations.ObjectiveCName",
-            """
-            public @interface ObjectiveCName {
-              String value();
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:4: Method 'void Main.submit(String s)' is annotated with"
-                + " '@ObjectiveCName(\"submit:\")' which can not be translated to Kotlin. The first"
-                + " component of Objective C selector must contains at least one uppercase"
-                + " character, so it can be split in two parts and translated into two '@ObjCName'"
-                + " annotations, on function and its first parameter. Consider renaming to"
-                + " '@ObjectiveCName(\"submitWith:\")' or removing the annotation. Reference bug:"
-                + " https://youtrack.jetbrains.com/issue/KT-80557");
-  }
-
   public void testExplicitQualifierInAnonymousNewInstanceFails() {
     newTranspilerTester()
         .addNullMarkPackageInfo("test")

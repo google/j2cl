@@ -19,7 +19,6 @@ import static com.google.common.base.Predicates.not;
 import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isSubtypeOfJ2ktMonitor;
 import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isValidSynchronizedStatementExpressionTypeDescriptor;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
-import static java.lang.Character.isUpperCase;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -65,7 +64,6 @@ public final class J2ktRestrictionsChecker {
             checkNotGenericConstructor(method);
             checkReferencedTypeVisibilities(method);
             checkKtProperty(method);
-            checkObjectiveCName(method);
             checkJ2ObjCProperty(method);
           }
 
@@ -162,53 +160,6 @@ public final class J2ktRestrictionsChecker {
                   "Method '%s' can not be '@KtProperty', as it has void return type.",
                   method.getReadableDescription());
             }
-          }
-
-          /**
-           * Checks that first component in @ObjectiveCName contains at least one upper-case
-           * character. Otherwise, it can not be translated to Kotlin. See:
-           * https://youtrack.jetbrains.com/issue/KT-80557
-           */
-          private void checkObjectiveCName(Method method) {
-            MethodDescriptor methodDescriptor = method.getDescriptor();
-
-            // Constructors and zero-arg methods are not affected.
-            if (methodDescriptor.isConstructor()
-                || methodDescriptor.getParameterDescriptors().isEmpty()) {
-              return;
-            }
-
-            String objectiveCName = methodDescriptor.getObjectiveCName();
-            if (objectiveCName == null) {
-              return;
-            }
-
-            int colonIndex = objectiveCName.indexOf(':');
-            if (colonIndex == -1) {
-              return;
-            }
-
-            String objectiveCNameFirstComponent = objectiveCName.substring(0, colonIndex);
-            for (char ch : objectiveCNameFirstComponent.toCharArray()) {
-              if (isUpperCase(ch)) {
-                return;
-              }
-            }
-
-            problems.error(
-                method.getSourcePosition(),
-                "Method '%s' is annotated with '@ObjectiveCName(\"%s\")' which can not be"
-                    + " translated to Kotlin. "
-                    + "The first component of Objective C selector must contains at least one"
-                    + " uppercase character, so it can be split in two parts and translated into"
-                    + " two '@ObjCName' annotations, on function and its first parameter. "
-                    + "Consider renaming to '@ObjectiveCName(\"%s\")' or removing the "
-                    + "annotation. Reference bug: https://youtrack.jetbrains.com/issue/KT-80557",
-                method.getReadableDescription(),
-                objectiveCName,
-                objectiveCNameFirstComponent
-                    + "With"
-                    + objectiveCName.substring(objectiveCNameFirstComponent.length()));
           }
 
           private void checkJ2ObjCProperty(Method method) {

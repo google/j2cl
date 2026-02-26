@@ -141,9 +141,8 @@ final class J2ktSwiftInteropTest: XCTestCase {
     Custom.Companion.shared.customStaticLongMethod(withLong: 1)
     Custom.Companion.shared.customStaticLongStringMethod(withLong: 1, with: "")
 
-    // TODO(b/441689301): Unsupported because of https://youtrack.jetbrains.com/issue/KT-80557
-    // obj.lowercase("")
-    // Custom.Companion.shared.staticlowercase("")
+    obj.lowercase("")
+    Custom.Companion.shared.staticlowercase("")
   }
 
   func testEnumNames() {
