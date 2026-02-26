@@ -145,6 +145,17 @@
       when (v) {
 ...        else -> 20
       }] => [r] "r"
+[testInstanceOf] => [m_testInstanceOf__java_lang_Object__boolean_$p_sourcemap_SourceMap]
+[o: Any] => [o] "o"
+[return o is String] => [return j_l_String.$isInstance(o);] "sourcemap.SourceMap.testInstanceOf"
+[testFunctionExpression] => [m_testFunctionExpression__java_util_function_Function_$p_sourcemap_SourceMap]
+[return Function { o: Any? -> o }] => [return j_u_function_Function.$adapt(/**  @return {*}*/ ((/** * */ o) =>{
+   return o;
+  }));] "sourcemap.SourceMap.testFunctionExpression"
+[o: Any?] => [o] "o"
+[o] => [return o;] "sourcemap.SourceMap.<lambda in testFunctionExpression>"
+[testTypeLiteral] => [m_testTypeLiteral__java_lang_Class_$p_sourcemap_SourceMap]
+[return String::class.java] => [return Class.$get(j_l_String);] "sourcemap.SourceMap.testTypeLiteral"
 [SourceMap] => [m_reversed__java_util_Comparator]
 [SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_reversed__$default__java_util_Comparator__java_util_Comparator(this));] "sourcemap.SourceMap.reversed"
 [SourceMap] => [m_thenComparing__java_util_Comparator__java_util_Comparator]

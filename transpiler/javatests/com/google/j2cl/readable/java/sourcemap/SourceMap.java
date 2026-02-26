@@ -138,4 +138,16 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
           default -> 20;
         };
   }
+
+  private boolean testInstanceOf(Object o) {
+    return o instanceof String;
+  }
+
+  private Function<Object, Object> testFunctionExpression() {
+    return (Object o) -> o;
+  }
+
+  private Class<?> testTypeLiteral() {
+    return String.class;
+  }
 }

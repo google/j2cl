@@ -135,6 +135,17 @@
    }] "sourcemap.SourceMap.testSwitchExpression"
 [10] => [return 10;] "sourcemap.SourceMap.testSwitchExpression"
 [20] => [return 20;] "sourcemap.SourceMap.testSwitchExpression"
+[testInstanceOf] => [m_testInstanceOf__java_lang_Object__boolean_$p_sourcemap_SourceMap]
+[o] => [o] "o"
+[return o instanceof String;] => [return j_l_String.$isInstance(o);] "sourcemap.SourceMap.testInstanceOf"
+[testFunctionExpression] => [m_testFunctionExpression__java_util_function_Function_$p_sourcemap_SourceMap]
+[return (Object o) -> o;] => [return j_u_function_Function.$adapt(/**  @return {*}*/ ((/** * */ o) =>{
+   return o;
+  }));] "sourcemap.SourceMap.testFunctionExpression"
+[o] => [o] "o"
+[o] => [return o;] "sourcemap.SourceMap.<lambda in testFunctionExpression>"
+[testTypeLiteral] => [m_testTypeLiteral__java_lang_Class_$p_sourcemap_SourceMap]
+[return String.class;] => [return Class.$get(j_l_String);] "sourcemap.SourceMap.testTypeLiteral"
 [SourceMap] => [m_reversed__java_util_Comparator]
 [SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_reversed__$default__java_util_Comparator__java_util_Comparator(this));] "sourcemap.SourceMap.reversed"
 [SourceMap] => [m_thenComparing__java_util_Comparator__java_util_Comparator]

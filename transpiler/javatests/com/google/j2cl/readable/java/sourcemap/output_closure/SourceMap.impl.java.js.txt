@@ -4,9 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const Comparator = goog.require('java.util.Comparator$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
 let Supplier = goog.forwardDeclare('java.util.function.Supplier$impl');
@@ -113,6 +115,20 @@ class SourceMap extends j_l_Object {
    }
   })();
  }
+ /** @nodts @return {boolean} */
+ m_testInstanceOf__java_lang_Object__boolean_$p_sourcemap_SourceMap(/** * */ o) {
+  return j_l_String.$isInstance(o);
+ }
+ /** @nodts @return {j_u_function_Function<*, *>} */
+ m_testFunctionExpression__java_util_function_Function_$p_sourcemap_SourceMap() {
+  return j_u_function_Function.$adapt(/**  @return {*}*/ ((/** * */ o) =>{
+   return o;
+  }));
+ }
+ /** @nodts @return {Class<?>} */
+ m_testTypeLiteral__java_lang_Class_$p_sourcemap_SourceMap() {
+  return Class.$get(j_l_String);
+ }
  //Default method forwarding stub.
  /** @override @nodts @return {Comparator<T>} */
  m_reversed__java_util_Comparator() {
@@ -197,7 +213,9 @@ class SourceMap extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Class = goog.module.get('java.lang.Class$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   j_u_function_Function = goog.module.get('java.util.function.Function$impl');
   Supplier = goog.module.get('java.util.function.Supplier$impl');

@@ -15,6 +15,7 @@
  */
 package sourcemap
 
+import java.util.function.Function
 import jsinterop.annotations.JsConstructor
 
 // TODO(b/325660274): Improve the test coverage for sourcemap.
@@ -130,5 +131,17 @@ abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Compar
         2 -> 10
         else -> 20
       }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
   }
 }
