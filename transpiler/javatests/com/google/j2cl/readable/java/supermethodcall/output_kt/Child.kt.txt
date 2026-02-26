@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -47,6 +46,7 @@ open class GrandParent internal constructor() {
  open fun defaultGrandParent() {}
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class Parent internal constructor(): GrandParent(), ParentInterface {
  open fun parentSimplest() {}
 
@@ -62,6 +62,7 @@ open class Parent internal constructor(): GrandParent(), ParentInterface {
  }
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class Child: Parent(), GrandParentInterface {
  override fun parentSimplest() {
   super<Parent>.parentSimplest()
@@ -109,12 +110,14 @@ open class Super internal constructor() {
  open fun m() {}
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class Sub internal constructor(): Super(), I2, I3 {
  override fun m() {
   super<I3>.m()
  }
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 abstract class SuperToStringTest internal constructor(): I1 {
  override fun toString(): String {
   return super.toString()

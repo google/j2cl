@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -187,7 +186,9 @@ open class TryCatch {
   fun f(t: T) {}
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class Exception1 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class Exception2 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
 }

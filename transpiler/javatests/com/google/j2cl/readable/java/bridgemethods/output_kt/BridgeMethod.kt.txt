@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -48,6 +47,7 @@ open class Parent<T: Error?> internal constructor(): SuperParent<T, Number?>() {
  open fun <T_1> `fun`(t: T_1) {}
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class BridgeMethod: Parent<AssertionError?>(), SomeInterface<AssertionError?, Number?> {
  override fun foo(a: AssertionError?, n: Number?) {}
 
@@ -58,6 +58,7 @@ fun interface SomeOtherFooInterface<T> {
  fun foo(t: T, s: Double?)
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class DualUnrelatedBridges internal constructor(): SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {
  override fun foo(s: String?, n: Double?) {}
 
@@ -70,6 +71,7 @@ open class SuperDualUnrelatedAccidentalBridges internal constructor() {
  open fun foo(s: String?, n: Number?) {}
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class DualUnrelatedAccidentalBridges internal constructor(): SuperDualUnrelatedAccidentalBridges(), SomeInterface<String?, Double?>, SomeOtherFooInterface<String?>
 
 fun interface Getter {
@@ -82,6 +84,7 @@ open class ClassWithParameterizedGet<T> internal constructor() {
  }
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class AccidentalOverrideBridge internal constructor(): ClassWithParameterizedGet<String?>(), Getter {
  open fun test() {
   val g: Getter = AccidentalOverrideBridge()
@@ -105,6 +108,7 @@ open class TestCase10036 internal constructor() {
   override fun get(value: String?): String?
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class B<B1: Comparable<*>?> internal constructor(): BI1, BI2 {
   abstract fun get(value: B1): String?
  }
@@ -120,6 +124,7 @@ open class TestCase102 internal constructor() {
   fun set(value: String?)
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class B<B1> internal constructor(): BI1, BI2 {
   abstract fun set(value: B1)
  }
@@ -153,6 +158,7 @@ open class Consumer<T> internal constructor() {
  fun accept(t: T) {}
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class StringConsumerImpl internal constructor(): Consumer<String?>(), StringConsumer
 
 abstract class SpecializingReturnAbstractClass internal constructor() {
@@ -163,6 +169,7 @@ fun interface SpecializingReturnInterface {
  fun foo(): String?
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 abstract class SpecializingReturnAbstractSubclass internal constructor(): SpecializingReturnAbstractClass(), SpecializingReturnInterface
 
 interface InterfaceWithDefaultMethod {
@@ -175,8 +182,10 @@ fun interface InterfaceOverridingDefaultMethod: InterfaceWithDefaultMethod {
  override fun foo(): String?
 }
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 abstract class DoesNotInheritDefaultMethod1 internal constructor(): InterfaceWithDefaultMethod, InterfaceOverridingDefaultMethod
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 abstract class DoesNotInheritDefaultMethod2 internal constructor(): InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod
 
 open class PackagePrivateBridgeSuper<T, U> internal constructor() {

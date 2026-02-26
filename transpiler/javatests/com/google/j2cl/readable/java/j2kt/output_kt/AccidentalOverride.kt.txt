@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -34,12 +33,14 @@ open class AccidentalOverride {
   fun abstractAccidentalOverride() {}
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class TestImplicitOverride internal constructor(): AccidentalOverride.SuperClass(), Interface {
   override fun accidentalOverride() {
    super<SuperClass>.accidentalOverride()
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class TestExplicitOverride internal constructor(): AccidentalOverride.SuperClass(), Interface {
   override fun accidentalOverride() {
    super<SuperClass>.accidentalOverride()
@@ -50,6 +51,7 @@ open class AccidentalOverride {
   abstract fun abstractAccidentalOverride()
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract inner class TestImplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), Interface {
   override fun accidentalOverride() {
    super<SubClass>.accidentalOverride()
@@ -58,6 +60,7 @@ open class AccidentalOverride {
   abstract override fun abstractAccidentalOverride()
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract inner class TestExplicitOverrideInAbstractClass internal constructor(): AccidentalOverride.SubClass(), Interface {
   override fun accidentalOverride() {
    super<SubClass>.accidentalOverride()

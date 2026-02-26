@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -88,14 +87,17 @@ open class Main {
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class D: A<Int?>(), I<Int?> {
   override fun `fun`(i: Int?): Int? {
    return i
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class E: B(), J<String?>
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class F: A<Int?>(), I<Int?>
 
  fun interface G<V> {

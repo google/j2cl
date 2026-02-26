@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -489,6 +488,7 @@ open class Collections {
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class CustomCollectionDisambiguatingOverrides<T>: CustomCollection<T>(), MutableCollectionJvm<T> {
   override fun spliterator(): Spliterator<T> {
    return super<CustomCollection>.spliterator()
@@ -618,6 +618,7 @@ open class Collections {
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class CustomMapDisambiguatingOverrides<K, V>: CustomMap<K, V>(), MutableMapJvm<K, V> {
   override fun getOrDefault(arg0: K, arg1: V): V {
    val arg1_1: V? = arg1

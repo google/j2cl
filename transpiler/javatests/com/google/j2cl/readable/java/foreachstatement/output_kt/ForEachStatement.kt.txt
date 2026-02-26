@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -118,24 +117,28 @@ open class ForEachStatement {
   for (s in i!!) {}
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception1 internal constructor(): java.lang.Exception(), MutableIterableJvm<Number?> {
   override fun iterator(): MutableIterator<Number?> {
    return null!!
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception2 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int?> {
   override fun iterator(): MutableIterator<Int?> {
    return null!!
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception3 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int> {
   override fun iterator(): MutableIterator<Int> {
    return null!!
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception4 internal constructor(): java.lang.Exception(), MutableIterableJvm<Any?> {
   override fun iterator(): MutableIterator<Any?> {
    return null!!

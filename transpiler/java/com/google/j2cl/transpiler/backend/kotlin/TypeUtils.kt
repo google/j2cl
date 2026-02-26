@@ -18,11 +18,14 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member as KtMember
 import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
 import com.google.j2cl.transpiler.backend.kotlin.common.runIfNotNull
+import kotlin.streams.asSequence
 
 /** Returns a list of type descriptors declared on this type. */
 internal val Type.declaredSuperTypeDescriptors: List<TypeDescriptor>
@@ -90,3 +93,26 @@ internal val Type.needsCompanionSupplierInterface: Boolean
       declaration.visibility.isPublic &&
       !declaration.isKtNative &&
       toCompanionObjectOrNull() != null
+
+/** Returns whether this type needs `@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")`. */
+internal val Type.needsIncompatibleObjCNameOverrideSuppression: Boolean
+  get() =
+    typeDescriptor.polymorphicMethods.any { methodDescriptor ->
+      !methodDescriptor.isStatic &&
+        !isJavaLangObject(methodDescriptor.enclosingTypeDescriptor) &&
+        overridesFromMultipleIndependentPaths(methodDescriptor)
+    }
+
+/** Returns whether the given method overrides from more than one independent supertype paths. */
+private fun Type.overridesFromMultipleIndependentPaths(
+  methodDescriptor: MethodDescriptor
+): Boolean =
+  getSuperTypesStream()
+    .asSequence()
+    .filter { superType ->
+      superType.polymorphicMethods.any { superMethod ->
+        methodDescriptor.isOverride(superMethod) || methodDescriptor == superMethod
+      }
+    }
+    .drop(1)
+    .any()

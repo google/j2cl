@@ -26,6 +26,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangRecord
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERFACE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
@@ -76,6 +77,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
             objCNameRenderer.swiftNameAnnotationSource(typeDeclaration),
             jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
             autoValueAnnotationsSource(typeDeclaration),
+            suppressIncompatibleObjCNameOverrideSource(type),
             spaceSeparated(
               inheritanceModifierSource(typeDeclaration),
               classModifiersSource(typeDeclaration),
@@ -188,6 +190,14 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
           nameRenderer.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue.Builder")
         )
       else -> Source.EMPTY
+    }
+
+  private fun suppressIncompatibleObjCNameOverrideSource(type: Type): Source =
+    Source.emptyUnless(type.needsIncompatibleObjCNameOverrideSuppression) {
+      annotation(
+        nameRenderer.topLevelQualifiedNameSource("kotlin.Suppress"),
+        literal("INCOMPATIBLE_OBJC_NAME_OVERRIDE"),
+      )
     }
 
   /**

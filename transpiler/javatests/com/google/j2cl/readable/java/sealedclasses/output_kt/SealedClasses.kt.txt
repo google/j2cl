@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -61,6 +60,7 @@ open class SealedClasses {
   private constructor()
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  enum class EnumImplementsSealedInterface: Animal {
   V1,
   V2;

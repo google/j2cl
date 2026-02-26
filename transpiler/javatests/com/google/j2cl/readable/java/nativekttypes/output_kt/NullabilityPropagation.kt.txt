@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -62,6 +61,7 @@ class NullabilityPropagation {
   fun nonNullStringDoubleOverride(s: String): String
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class Subtype internal constructor(): NullabilityToPropagate<String?, String>, Interface {
   override fun nullableString1(s: String?): String? {
    return s

@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -45,6 +44,7 @@ open class MultipleAbstractParents {
   fun getFoo(t: T): String?
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class AbstractListCollection<T>: List<T>, Collection<T>
 
  abstract class AbstractCollection<T> {
@@ -53,6 +53,7 @@ open class MultipleAbstractParents {
   }
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class AbstractList<T>: AbstractCollection<T>(), List<T>
 
  abstract class AbstractList2<T>: List<T>
@@ -63,8 +64,10 @@ open class MultipleAbstractParents {
   override fun getFoo(string: String?): String?
  }
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class AbstractStringList: AbstractList<String?>(), IStringList
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class AbstractStringList2: AbstractList2<String?>(), IStringList
 
  open class SubAbstractStringList2: AbstractStringList2() {

@@ -13,7 +13,6 @@
  "USELESS_CAST",
  "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
  "VARIABLE_WITH_REDUNDANT_INITIALIZER",
- "INCOMPATIBLE_OBJC_NAME_OVERRIDE",
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
@@ -180,6 +179,7 @@ open class TypeWildCards {
 
  abstract inner class OtherElement: IntegerSupplier, HasKey
 
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract inner class SubOtherElement: TypeWildCards.OtherElement(), HasKey
 
  open inner class Foo internal constructor(): GenericType<TypeWildCards.Foo?>()
