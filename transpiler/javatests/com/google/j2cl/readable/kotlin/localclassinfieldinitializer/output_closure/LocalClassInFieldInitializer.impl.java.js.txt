@@ -1,0 +1,86 @@
+goog.module('localclassinfieldinitializer.LocalClassInFieldInitializer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let $1Local = goog.forwardDeclare('localclassinfieldinitializer.LocalClassInFieldInitializer.$1Local$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class LocalClassInFieldInitializer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Function1<?, ?>} @nodts*/
+  this.f_r__localclassinfieldinitializer_LocalClassInFieldInitializer_;
+  /**@type {number} @nodts*/
+  this.f_s__localclassinfieldinitializer_LocalClassInFieldInitializer_ = 0;
+ }
+ /** @nodts @return {!LocalClassInFieldInitializer} */
+ static $create__() {
+  LocalClassInFieldInitializer.$clinit();
+  let $instance = new LocalClassInFieldInitializer();
+  $instance.$ctor__localclassinfieldinitializer_LocalClassInFieldInitializer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclassinfieldinitializer_LocalClassInFieldInitializer__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_r__localclassinfieldinitializer_LocalClassInFieldInitializer_ = Function1.$adapt(/**  @return {?}*/ ((/** ? */ it) =>{
+   let it_1 = /**@type {string}*/ ($Casts.$to(it, j_l_String));
+   return Unit.f_INSTANCE__kotlin_Unit;
+  }));
+  let tmp = this;
+  let /** number */ tmp_1;
+  {
+   $1Local.$create__localclassinfieldinitializer_LocalClassInFieldInitializer(this);
+   tmp_1 = 1;
+  }
+  tmp.f_s__localclassinfieldinitializer_LocalClassInFieldInitializer_ = tmp_1;
+ }
+ /** @final @nodts @return {!Function1<?, ?>} */
+ m_getR__kotlin_jvm_functions_Function1() {
+  return this.f_r__localclassinfieldinitializer_LocalClassInFieldInitializer_;
+ }
+ /** @final @nodts */
+ m_setR__kotlin_jvm_functions_Function1__void(/** !Function1<?, ?> */ set__) {
+  this.f_r__localclassinfieldinitializer_LocalClassInFieldInitializer_ = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getS__int() {
+  return this.f_s__localclassinfieldinitializer_LocalClassInFieldInitializer_;
+ }
+ /** @final @nodts */
+ m_setS__int__void(/** number */ set__) {
+  this.f_s__localclassinfieldinitializer_LocalClassInFieldInitializer_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalClassInFieldInitializer.$clinit = () =>{};
+  LocalClassInFieldInitializer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalClassInFieldInitializer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  $1Local = goog.module.get('localclassinfieldinitializer.LocalClassInFieldInitializer.$1Local$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(LocalClassInFieldInitializer, 'localclassinfieldinitializer.LocalClassInFieldInitializer');
+
+exports = LocalClassInFieldInitializer;
+
+//# sourceMappingURL=LocalClassInFieldInitializer.js.map

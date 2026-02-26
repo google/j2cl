@@ -1,0 +1,77 @@
+goog.module('localclassinfieldinitializer.LocalClassInFieldInitializer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let $1Local = goog.forwardDeclare('localclassinfieldinitializer.LocalClassInFieldInitializer.$1Local$impl');
+let Local = goog.forwardDeclare('localclassinfieldinitializer.LocalClassInFieldInitializer.Local$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+class LocalClassInFieldInitializer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Consumer<?string>} @nodts*/
+  this.f_r__localclassinfieldinitializer_LocalClassInFieldInitializer;
+  /**@type {number} @nodts*/
+  this.f_i__localclassinfieldinitializer_LocalClassInFieldInitializer = 0;
+ }
+ /** @nodts @return {!LocalClassInFieldInitializer} */
+ static $create__() {
+  LocalClassInFieldInitializer.$clinit();
+  let $instance = new LocalClassInFieldInitializer();
+  $instance.$ctor__localclassinfieldinitializer_LocalClassInFieldInitializer__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclassinfieldinitializer_LocalClassInFieldInitializer__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_localclassinfieldinitializer_LocalClassInFieldInitializer();
+ }
+ /** @private @nodts */
+ $init__void_$p_localclassinfieldinitializer_LocalClassInFieldInitializer() {
+  this.f_r__localclassinfieldinitializer_LocalClassInFieldInitializer = Consumer.$adapt((/** ?string */ s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+   $1Local.$create__localclassinfieldinitializer_LocalClassInFieldInitializer__java_lang_String(this, s_1);
+  });
+  this.f_i__localclassinfieldinitializer_LocalClassInFieldInitializer = (() =>{
+   switch (1) {
+    case 1:
+     {
+      Local.$create__localclassinfieldinitializer_LocalClassInFieldInitializer(this);
+      return 1;
+     }
+    default:
+     {
+      return 2;
+     }
+   }
+  })();
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalClassInFieldInitializer.$clinit = () =>{};
+  LocalClassInFieldInitializer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalClassInFieldInitializer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Consumer = goog.module.get('java.util.function.Consumer$impl');
+  $1Local = goog.module.get('localclassinfieldinitializer.LocalClassInFieldInitializer.$1Local$impl');
+  Local = goog.module.get('localclassinfieldinitializer.LocalClassInFieldInitializer.Local$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(LocalClassInFieldInitializer, 'localclassinfieldinitializer.LocalClassInFieldInitializer');
+
+exports = LocalClassInFieldInitializer;
+
+//# sourceMappingURL=LocalClassInFieldInitializer.js.map
