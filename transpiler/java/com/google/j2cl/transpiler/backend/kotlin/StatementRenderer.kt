@@ -124,7 +124,7 @@ internal data class StatementRenderer(
       is TryStatement -> tryStatementSource(statement)
       is YieldStatement -> yieldStatementSource(statement)
       else -> throw InternalCompilerError("Unexpected ${statement::class.java.simpleName}")
-    }.withMapping(statement.sourcePosition)
+    }.with(statement.sourcePosition)
 
   private fun assertStatementSource(assertStatement: AssertStatement): Source =
     spaceSeparated(

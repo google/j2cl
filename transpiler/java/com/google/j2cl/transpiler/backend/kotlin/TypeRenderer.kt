@@ -226,7 +226,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
       )
 
     fun typeIdentifierSource(type: Type): Source =
-      identifierSource(type.declaration.ktSimpleName).withMapping(type.sourcePosition)
+      identifierSource(type.declaration.ktSimpleName).with(type.sourcePosition)
 
     fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
       Source.emptyUnless(typeDeclaration.isClass && !typeDeclaration.isFinal) {
