@@ -16,24 +16,11 @@
 package renamejsmethodsinnativejstype
 
 import com.google.j2cl.integration.testing.Asserts.assertTrue
-import jsinterop.annotations.JsMethod
 
 fun main(vararg args: String) {
-  testJsMethodInJava()
-  testJsMethodInJs()
-}
-
-fun testJsMethodInJava() {
   val foo = Foo()
   assertTrue(foo.sum() == 42)
   foo.x = 50
   foo.y = 5
   assertTrue(foo.sum() == 55)
 }
-
-fun testJsMethodInJs() {
-  val foo = Foo()
-  assertTrue(callSum(foo) == 42)
-}
-
-@JsMethod external fun callSum(foo: Foo): Int

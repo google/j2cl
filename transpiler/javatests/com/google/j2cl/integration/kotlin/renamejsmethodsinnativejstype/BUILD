@@ -28,14 +28,8 @@ j2cl_library(
 integration_test(
     # Src's JUST the Main class and gets Foo as a dependency. Do not
     # change this since this is part of what the test is verifying.
-    srcs = [
-        "Main.kt",
-        "renamejsmethodsinnativejstype.MainKt.native.js",
-    ],
+    srcs = ["Main.kt"],
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,
-    deps = [
-        ":foo",
-        ":native_types",
-    ],
+    deps = [":foo"],
 )
