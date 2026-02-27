@@ -64,16 +64,16 @@ class SuspendFunction extends j_l_Object {
  }
  /** @final @nodts @return {!Generator<*, void>} */
  *m_testSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__void_$s_(/** Continuation<?> */ $continuation, /** string */ param) {
-  let lambda = SuspendFunction1.$adapt(/**  @return {!Generator<*, ?>}*/ (function* (/** Continuation<?> */ $continuation_1, /** ? */ it) {
+  let lambda = SuspendFunction1.$adapt(/**  @return {!Generator<*, string>}*/ (function* (/** Continuation<?> */ $continuation_1, /** string */ it) {
    let it_1 = /**@type {string}*/ ($Casts.$to(it, j_l_String));
    let s = (yield* this.m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation_1, it_1));
    this.m_nonSuspendingFunction__java_lang_String__java_lang_String(s);
    return s;
   }).bind(this));
   let s_1 = /**@type {string}*/ ($Casts.$to((yield* lambda.m_invoke__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_($continuation, param)), j_l_String));
-  (yield* SuspendFunctionKt.m_consumeSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__kotlin_internal_j2cl_SuspendFunction1__void_$s_($continuation, 'Outer', SuspendFunction1.$adapt(/**  @return {!Generator<*, ?>}*/ (function* (/** Continuation<?> */ $continuation_2, /** ? */ it_2) {
+  (yield* SuspendFunctionKt.m_consumeSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__kotlin_internal_j2cl_SuspendFunction1__void_$s_($continuation, 'Outer', SuspendFunction1.$adapt(/**  @return {!Generator<*, !Unit>}*/ (function* (/** Continuation<?> */ $continuation_2, /** string */ it_2) {
    let it_3 = /**@type {string}*/ ($Casts.$to(it_2, j_l_String));
-   (yield* SuspendFunctionKt.m_consumeSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__kotlin_internal_j2cl_SuspendFunction1__void_$s_($continuation_2, 'Inner', SuspendFunction1.$adapt(/**  @return {!Generator<*, ?>}*/ (function* (/** Continuation<?> */ $continuation_3, /** ? */ it_4) {
+   (yield* SuspendFunctionKt.m_consumeSuspendLambda__kotlin_coroutines_Continuation__java_lang_String__kotlin_internal_j2cl_SuspendFunction1__void_$s_($continuation_2, 'Inner', SuspendFunction1.$adapt(/**  @return {!Generator<*, !Unit>}*/ (function* (/** Continuation<?> */ $continuation_3, /** string */ it_4) {
     let it_5 = /**@type {string}*/ ($Casts.$to(it_4, j_l_String));
     let s_2 = (yield* this.m_anotherSuspendFunction__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation_3, 'Lambda'));
     this.m_nonSuspendingFunction__java_lang_String__java_lang_String(s_2);

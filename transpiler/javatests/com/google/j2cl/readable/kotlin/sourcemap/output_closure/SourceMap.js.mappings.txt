@@ -118,7 +118,7 @@
 [return value] => [return value;] "sourcemap.SourceMap.testStatements"
 [testLambdaAndMethodReference] => [m_testLambdaAndMethodReference__int__void_$p_sourcemap_SourceMap]
 [n: Int] => [n] "n"
-[val f = { i: Int -> i + 1 }] => [let f = Function1.$adapt(/**  @return {?}*/ ((/** ? */ i) =>{
+[val f = { i: Int -> i + 1 }] => [let f = Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ i) =>{
    let i_1 = (/**@type {!Integer}*/ ($Casts.$to(i, Integer))).intValue();
    return Integer.valueOf(i_1 + 1 | 0);
   }));] "sourcemap.SourceMap.testLambdaAndMethodReference"

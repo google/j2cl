@@ -1369,7 +1369,11 @@ internal class CompilationUnitBuilder(
 
   private fun convertSamConversion(irTypeOperatorCall: IrTypeOperatorCall): Expression {
     val expression = irTypeOperatorCall.unfoldExpression()
-    val functionalTypeDescriptor = environment.getDeclaredTypeDescriptor(irTypeOperatorCall.type)
+
+    val functionalTypeDescriptor =
+      environment.getReferenceTypeDescriptorForFunctionReference(
+        irTypeOperatorCall.type as IrSimpleType
+      )
     return when (expression) {
       is IrFunctionReference -> createFunctionExpression(functionalTypeDescriptor, expression)
       is IrPropertyReference ->
@@ -1549,7 +1553,10 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertFunctionExpression(irExpression: IrFunctionExpression) =
-    createFunctionExpression(environment.getDeclaredTypeDescriptor(irExpression.type), irExpression)
+    createFunctionExpression(
+      environment.getReferenceTypeDescriptorForFunctionReference(irExpression.type as IrSimpleType),
+      irExpression,
+    )
 
   private fun convertPropertyReference(irExpression: IrPropertyReference): Expression {
     val propertyReferenceType = irExpression.type as IrSimpleType
