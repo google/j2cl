@@ -274,7 +274,7 @@ def _golden_output_impl(ctx):
         if not input.path.endswith(".kt-all"):
             excluded_extensions.append("kt")
 
-        exclusion_filter = " -o ".join(["-name *.%s" % ext for ext in excluded_extensions])
+        exclusion_filter = " -o ".join(["-name '*.%s'" % ext for ext in excluded_extensions])
 
         ctx.actions.run_shell(
             inputs = [input],

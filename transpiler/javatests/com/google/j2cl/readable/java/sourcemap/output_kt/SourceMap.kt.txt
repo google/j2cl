@@ -1,0 +1,184 @@
+// Generated from "sourcemap/SourceMap.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package sourcemap
+
+import javaemul.lang.*
+import java.lang.Class
+import java.util.ArrayList
+import java.util.Comparator
+import java.util.function.Function
+import java.util.function.Supplier
+import jsinterop.annotations.JsConstructor
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.Int
+import kotlin.Number
+import kotlin.String
+import kotlin.Suppress
+import kotlin.jvm.JvmField
+import kotlin.jvm.javaObjectType
+import kotlin.run
+
+abstract class SourceMap<T: Number?>: Comparator<T> {
+ private var uninitializedInstanceField: Int = 0
+
+ init {
+  this.uninitializedInstanceField = 1000
+ }
+
+ private var uninitializedInstanceField2: String? = null
+
+ init {
+  if (this.uninitializedInstanceField == 1000) {
+   this.uninitializedInstanceField2 = "Hello!"
+  } else if (this.uninitializedInstanceField == 2000) {
+   this.uninitializedInstanceField2 = "World!"
+  } else {
+   this.uninitializedInstanceField2 = "Universe!"
+  }
+ }
+
+ @JsConstructor
+ internal constructor(i: Int)
+
+ private constructor(uninitializedInstanceField: Int, uninitializedInstanceField2: String?): this(2)
+
+ private var initializedInstanceField: Int = 2
+
+ private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+  var value: Int = 0
+  var i: Int = 0
+  while (i < times) {
+   value = value + 1
+   i = i + 1
+  }
+  if (number % 2 == 0) {
+   value = value + 1
+  } else {
+   value = value + 2
+  }
+  var b2: Int = b
+  while (b2 > 0 && b2 < 100) {
+   b2 = b2 - 10
+  }
+  value = value + (a + b2)
+  var i_1: Int = 0
+  while (i_1 <= 2) {
+   when (number) {
+    1 -> {
+     value = value + 5
+    }
+    2 -> {
+     value = value + 2
+     break
+    }
+    3 -> {
+     break
+    }
+    else -> {}
+   }
+   if (i_1 == 1) {
+    break
+   }
+   i_1 = i_1 + 1
+  }
+  return value
+ }
+
+ private fun testLambdaAndMethodReference(n: Int) {
+  val f: Function<Int?, Int?> = Function { i: Int? ->
+   return@Function i!!.toInt() + 1
+  }
+  val f2: Supplier<Int?> = run {
+   val ______q: ArrayList<Any?> = ArrayList<Any?>()
+   Supplier {
+    return@Supplier (______q as ArrayList<Any?>).size
+   }
+  }
+  val f3: Supplier<Int?> = Supplier {
+   return@Supplier this.simpleMethod()
+  }
+ }
+
+ private fun simpleMethod(): Int {
+  return 1
+ }
+
+ private fun testLocalClass() {
+  open class LocalClass internal constructor()
+  LocalClass()
+ }
+
+ private fun testSwitchExpression() {
+  val v: Int = 1
+  val r: Int = run {
+   when (v) {
+    1, 2 -> {
+     return@run 10
+    }
+    else -> {
+     return@run 20
+    }
+   }
+  }
+ }
+
+ private fun testInstanceOf(o: Any?): Boolean {
+  return o is String
+ }
+
+ private fun testFunctionExpression(): Function<Any?, Any?>? {
+  return Function { o: Any? ->
+   return@Function o
+  }
+ }
+
+ private fun testTypeLiteral(): Class<*>? {
+  return String::class.javaObjectType
+ }
+
+ companion object {
+  @JvmField
+  internal var uninitializedStaticField_pp_sourcemap: Double = 0.0
+
+  init {
+   SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
+  }
+
+  @JvmField
+  internal var initializedStaticField_pp_sourcemap: String? = "Hello"
+
+  init {
+   if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
+    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   }
+  }
+ }
+
+ enum class Enum1 {
+  VALUE1,
+  VALUE2,
+  VALUE3(1);
+
+  constructor()
+
+  constructor(i: Int)
+ }
+}

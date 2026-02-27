@@ -10,7 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = False,
     generate_readable_source_maps = True,
     generate_wasm_readables = False,
     javacopts = [

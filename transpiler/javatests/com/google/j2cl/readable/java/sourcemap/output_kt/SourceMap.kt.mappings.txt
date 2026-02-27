@@ -1,0 +1,321 @@
+[SourceMap] => [SourceMap]
+[{
+    uninitializedInstanceField = 1000;
+  }] => [{
+  this.uninitializedInstanceField = 1000
+ }]
+[uninitializedInstanceField = 1000;] => [this.uninitializedInstanceField = 1000]
+[{
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!";
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!";
+    } else {
+      uninitializedInstanceField2 = "Universe!";
+    }
+  }] => [{
+  if (this.uninitializedInstanceField == 1000) {
+   this.uninitializedInstanceField2 = "Hello!"
+  } else if (this.uninitializedInstanceField == 2000) {
+   this.uninitializedInstanceField2 = "World!"
+  } else {
+   this.uninitializedInstanceField2 = "Universe!"
+  }
+ }]
+[if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!";
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!";
+    } else {
+      uninitializedInstanceField2 = "Universe!";
+    }] => [if (this.uninitializedInstanceField == 1000) {
+   this.uninitializedInstanceField2 = "Hello!"
+  } else if (this.uninitializedInstanceField == 2000) {
+   this.uninitializedInstanceField2 = "World!"
+  } else {
+   this.uninitializedInstanceField2 = "Universe!"
+  }]
+[{
+      uninitializedInstanceField2 = "Hello!";
+    }] => [{
+   this.uninitializedInstanceField2 = "Hello!"
+  }]
+[uninitializedInstanceField2 = "Hello!";] => [this.uninitializedInstanceField2 = "Hello!"]
+[if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!";
+    } else {
+      uninitializedInstanceField2 = "Universe!";
+    }] => [if (this.uninitializedInstanceField == 2000) {
+   this.uninitializedInstanceField2 = "World!"
+  } else {
+   this.uninitializedInstanceField2 = "Universe!"
+  }]
+[{
+      uninitializedInstanceField2 = "World!";
+    }] => [{
+   this.uninitializedInstanceField2 = "World!"
+  }]
+[uninitializedInstanceField2 = "World!";] => [this.uninitializedInstanceField2 = "World!"]
+[{
+      uninitializedInstanceField2 = "Universe!";
+    }] => [{
+   this.uninitializedInstanceField2 = "Universe!"
+  }]
+[uninitializedInstanceField2 = "Universe!";] => [this.uninitializedInstanceField2 = "Universe!"]
+[int value = 0;] => [var value: Int = 0]
+[for (int i = 0; i < times; i++) {
+      value++;
+    }] => [var i: Int = 0]
+[for (int i = 0; i < times; i++) {
+      value++;
+    }] => [while (i < times) {
+   value = value + 1
+   i = i + 1
+  }]
+[for (int i = 0; i < times; i++) {
+      value++;
+    }] => [{
+   value = value + 1
+   i = i + 1
+  }]
+[value++;] => [value = value + 1]
+[for (int i = 0; i < times; i++) {
+      value++;
+    }] => [i = i + 1]
+[if (number % 2 == 0) {
+      value += 1;
+    } else {
+      value += 2;
+    }] => [if (number % 2 == 0) {
+   value = value + 1
+  } else {
+   value = value + 2
+  }]
+[{
+      value += 1;
+    }] => [{
+   value = value + 1
+  }]
+[value += 1;] => [value = value + 1]
+[{
+      value += 2;
+    }] => [{
+   value = value + 2
+  }]
+[value += 2;] => [value = value + 2]
+[int b2 = b;] => [var b2: Int = b]
+[while (b2 > 0 && b2 < 100) {
+      b2 -= 10;
+    }] => [while (b2 > 0 && b2 < 100) {
+   b2 = b2 - 10
+  }]
+[{
+      b2 -= 10;
+    }] => [{
+   b2 = b2 - 10
+  }]
+[b2 -= 10;] => [b2 = b2 - 10]
+[value += a + b2;] => [value = value + (a + b2)]
+[for (int i = 0; i <= 2; i++) {
+      switch (number) {
+        case 1:
+          value += 5;
+          break;
+        case 2:
+          value += 2;
+          break outerLoop;
+        case 3:
+          break outerLoop;
+      }
+      if (i == 1) {
+        break;
+      }
+    }] => [var i_1: Int = 0]
+[for (int i = 0; i <= 2; i++) {
+      switch (number) {
+        case 1:
+          value += 5;
+          break;
+        case 2:
+          value += 2;
+          break outerLoop;
+        case 3:
+          break outerLoop;
+      }
+      if (i == 1) {
+        break;
+      }
+    }] => [while (i_1 <= 2) {
+   when (number) {
+    1 -> {
+     value = value + 5
+    }
+    2 -> {
+     value = value + 2
+     break
+    }
+    3 -> {
+     break
+    }
+    else -> {}
+   }
+   if (i_1 == 1) {
+    break
+   }
+   i_1 = i_1 + 1
+  }]
+[for (int i = 0; i <= 2; i++) {
+      switch (number) {
+        case 1:
+          value += 5;
+          break;
+        case 2:
+          value += 2;
+          break outerLoop;
+        case 3:
+          break outerLoop;
+      }
+      if (i == 1) {
+        break;
+      }
+    }] => [{
+   when (number) {
+    1 -> {
+     value = value + 5
+    }
+    2 -> {
+     value = value + 2
+     break
+    }
+    3 -> {
+     break
+    }
+    else -> {}
+   }
+   if (i_1 == 1) {
+    break
+   }
+   i_1 = i_1 + 1
+  }]
+[switch (number) {
+        case 1:
+          value += 5;
+          break;
+        case 2:
+          value += 2;
+          break outerLoop;
+        case 3:
+          break outerLoop;
+      }] => [when (number) {
+    1 -> {
+     value = value + 5
+    }
+    2 -> {
+     value = value + 2
+     break
+    }
+    3 -> {
+     break
+    }
+    else -> {}
+   }]
+[value += 5;] => [value = value + 5]
+[value += 2;] => [value = value + 2]
+[break outerLoop;] => [break]
+[break outerLoop;] => [break]
+[if (i == 1) {
+        break;
+      }] => [if (i_1 == 1) {
+    break
+   }]
+[{
+        break;
+      }] => [{
+    break
+   }]
+[break;] => [break]
+[for (int i = 0; i <= 2; i++) {
+      switch (number) {
+        case 1:
+          value += 5;
+          break;
+        case 2:
+          value += 2;
+          break outerLoop;
+        case 3:
+          break outerLoop;
+      }
+      if (i == 1) {
+        break;
+      }
+    }] => [i_1 = i_1 + 1]
+[return value;] => [return value]
+[Function<Integer, Integer> f = i -> i + 1;] => [val f: Function<Int?, Int?> = Function { i: Int? ->
+   return@Function i!!.toInt() + 1
+  }]
+[i + 1] => [return@Function i!!.toInt() + 1]
+[Supplier<Integer> f2 = new ArrayList()::size;] => [val f2: Supplier<Int?> = run {
+   val ______q: ArrayList<Any?> = ArrayList<Any?>()
+   Supplier {
+    return@Supplier (______q as ArrayList<Any?>).size
+   }
+  }]
+[new ArrayList()::size] => [return@Supplier (______q as ArrayList<Any?>).size]
+[Supplier<Integer> f3 = this::simpleMethod;] => [val f3: Supplier<Int?> = Supplier {
+   return@Supplier this.simpleMethod()
+  }]
+[this::simpleMethod] => [return@Supplier this.simpleMethod()]
+[return 1;] => [return 1]
+[class LocalClass {}] => [open class LocalClass internal constructor()]
+[LocalClass] => [LocalClass]
+[new LocalClass();] => [LocalClass()]
+[int v = 1;] => [val v: Int = 1]
+[int r =
+        switch (v) {
+          case 1, 2 -> 10;
+          default -> 20;
+        };] => [val r: Int = run {
+   when (v) {
+    1, 2 -> {
+     return@run 10
+    }
+    else -> {
+     return@run 20
+    }
+   }
+  }]
+[10] => [return@run 10]
+[20] => [return@run 20]
+[return o instanceof String;] => [return o is String]
+[return (Object o) -> o;] => [return Function { o: Any? ->
+   return@Function o
+  }]
+[o] => [return@Function o]
+[return String.class;] => [return String::class.javaObjectType]
+[static {
+    uninitializedStaticField = 10.0;
+  }] => [{
+   SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
+  }]
+[uninitializedStaticField = 10.0;] => [SourceMap.uninitializedStaticField_pp_sourcemap = 10.0]
+[static {
+    if (uninitializedStaticField == 10.0) {
+      initializedStaticField = "World";
+    }
+  }] => [{
+   if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
+    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   }
+  }]
+[if (uninitializedStaticField == 10.0) {
+      initializedStaticField = "World";
+    }] => [if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
+    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   }]
+[{
+      initializedStaticField = "World";
+    }] => [{
+    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   }]
+[initializedStaticField = "World";] => [SourceMap.initializedStaticField_pp_sourcemap = "World"]
+[Enum1] => [Enum1]

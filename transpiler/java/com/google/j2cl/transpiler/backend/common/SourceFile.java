@@ -29,7 +29,6 @@ public interface SourceFile {
   static SourceFile fromPath(String relativePath) {
     return new SourceFile() {
       private List<String> lines;
-      ;
 
       @Override
       public String getRelativeFilePath() {

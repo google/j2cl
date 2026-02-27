@@ -31,6 +31,10 @@ private constructor(
   /** Returns string with a content of this source. */
   fun buildString(): String = SourceBuilder().also { it.append(this) }.build()
 
+  /** Returns string with a content of this source and source map. */
+  fun buildStringWithMappings(): Pair<String, Map<SourcePosition, SourcePosition>> =
+    SourceBuilder().also { it.append(this) }.let { it.build() to it.mappings }
+
   /** Returns whether this source is empty. */
   fun isEmpty(): Boolean = nonEmptyAppendFn == null
 

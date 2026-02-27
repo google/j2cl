@@ -604,7 +604,11 @@ public enum Backend {
   KOTLIN {
     @Override
     public void generateOutputs(BackendOptions options, Library library, Problems problems) {
-      new KotlinGeneratorStage(options.getOutput(), problems, options.getObjCNamePrefix())
+      new KotlinGeneratorStage(
+              options.getOutput(),
+              problems,
+              /* objCNamePrefix= */ options.getObjCNamePrefix(),
+              /* shouldGenerateReadableSourceMaps= */ options.getEmitReadableSourceMap())
           .generateOutputs(library);
     }
 
