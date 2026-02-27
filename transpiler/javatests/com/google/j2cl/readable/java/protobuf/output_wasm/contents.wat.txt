@@ -1,4 +1,28 @@
 
+(global $$class-initialized@com.google.wireless.android.play.playlog.proto.LogSourceEnum (mut i32)
+ (i32.const 0)
+)
+(global $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $UNKNOWN@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (mut (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ (ref.null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource)
+)
+(global $namesToValuesMap@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (mut i32)
+ (i32.const 0)
+)
+(global $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@protobuf.LogSourceProtoEnum (mut i32)
+ (i32.const 0)
+)
+(global $$class@protobuf.LogSourceProtoEnum (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@protobuf.Protobuf (mut i32)
  (i32.const 0)
 )
@@ -10,6 +34,41 @@
 )
 (global $$class@protobuf.Protobuf.Test (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
+)
+(global $com.google.wireless.android.play.playlog.proto.LogSourceEnum.vtable (ref $com.google.wireless.android.play.playlog.proto.LogSourceEnum.vtable)
+ (struct.new $com.google.wireless.android.play.playlog.proto.LogSourceEnum.vtable
+  (ref.func $$getClassImpl__java_lang_Class@com.google.wireless.android.play.playlog.proto.LogSourceEnum)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource.vtable (ref $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource.vtable)
+ (struct.new $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource.vtable
+  (ref.func $$getClassImpl__java_lang_Class@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
+  (ref.func $m_hashCode__int@java.lang.Enum)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+ )
+)
+(global $java.lang.Comparable.vtable@$com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (ref $java.lang.Comparable.vtable)
+ (struct.new $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+)
+(global $java.io.Serializable.vtable@$com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
+(global $protobuf.LogSourceProtoEnum.vtable (ref $protobuf.LogSourceProtoEnum.vtable)
+ (struct.new $protobuf.LogSourceProtoEnum.vtable
+  (ref.func $$getClassImpl__java_lang_Class@protobuf.LogSourceProtoEnum)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
 )
 (global $protobuf.Protobuf.vtable (ref $protobuf.Protobuf.vtable)
  (struct.new $protobuf.Protobuf.vtable
@@ -32,6 +91,175 @@
  )
 )
 
+
+;;; LogSourceEnum LogSourceEnum.$create()
+(func $$create__@com.google.wireless.android.play.playlog.proto.LogSourceEnum
+ (result (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+ (local $$instance (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+  (call $$clinit__void_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+  (local.set $$instance (struct.new $com.google.wireless.android.play.playlog.proto.LogSourceEnum (global.get $com.google.wireless.android.play.playlog.proto.LogSourceEnum.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+  (call $$ctor__void_$p_com_google_wireless_android_play_playlog_proto_LogSourceEnum@com.google.wireless.android.play.playlog.proto.LogSourceEnum (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void LogSourceEnum.$ctor()
+(func $$ctor__void_$p_com_google_wireless_android_play_playlog_proto_LogSourceEnum@com.google.wireless.android.play.playlog.proto.LogSourceEnum
+ (param $this (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void LogSourceEnum.$clinit()
+(func $$clinit__void_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+  (if (global.get $$class-initialized@com.google.wireless.android.play.playlog.proto.LogSourceEnum)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+  (global.set $$class-initialized@com.google.wireless.android.play.playlog.proto.LogSourceEnum (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:18:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> LogSourceEnum.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum)))
+   (then
+    (return (global.get $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum))
+   )
+  )
+  (global.set $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|com.google.w...|__java_lang_String_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum))
+ )
+)
+
+;;; Class<?> LogSourceEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@com.google.wireless.android.play.playlog.proto.LogSourceEnum
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum))
+ (local.set $this (ref.cast (ref $com.google.wireless.android.play.playlog.proto.LogSourceEnum) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@com.google.wireless.android.play.playlog.proto.LogSourceEnum)
+
+;;; LogSourceProtoEnum LogSourceProtoEnum.$create()
+(func $$create__@protobuf.LogSourceProtoEnum
+ (result (ref null $protobuf.LogSourceProtoEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+ (local $$instance (ref null $protobuf.LogSourceProtoEnum))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+  (call $$clinit__void_<once>_@protobuf.LogSourceProtoEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+  (local.set $$instance (struct.new $protobuf.LogSourceProtoEnum (global.get $protobuf.LogSourceProtoEnum.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+  (call $$ctor__void_$p_protobuf_LogSourceProtoEnum@protobuf.LogSourceProtoEnum (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void LogSourceProtoEnum.$ctor()
+(func $$ctor__void_$p_protobuf_LogSourceProtoEnum@protobuf.LogSourceProtoEnum
+ (param $this (ref null $protobuf.LogSourceProtoEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void LogSourceProtoEnum.setLogSourceStatus(LogSource source)
+(func $m_setLogSourceStatus__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource__void@protobuf.LogSourceProtoEnum
+ (param $source (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:22:21
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:22:58
+  (call $$clinit__void_<once>_@protobuf.LogSourceProtoEnum )
+ )
+)
+
+;;; LogSource LogSourceProtoEnum.getDefaultLogSource()
+(func $m_getDefaultLogSource__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource@protobuf.LogSourceProtoEnum
+ (result (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:25:26
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:25:48
+  (call $$clinit__void_<once>_@protobuf.LogSourceProtoEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:26:4
+  (return (block (result (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+   (call $$clinit__void_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource )
+   (global.get $UNKNOWN@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource)
+  ))
+ )
+)
+
+;;; void LogSourceProtoEnum.$clinit()
+(func $$clinit__void_<once>_@protobuf.LogSourceProtoEnum
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+  (if (global.get $$class-initialized@protobuf.LogSourceProtoEnum)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+  (global.set $$class-initialized@protobuf.LogSourceProtoEnum (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/protobuf/LogSourceProtoEnum.java:20:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> LogSourceProtoEnum.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@protobuf.LogSourceProtoEnum
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@protobuf.LogSourceProtoEnum)))
+   (then
+    (return (global.get $$class@protobuf.LogSourceProtoEnum))
+   )
+  )
+  (global.set $$class@protobuf.LogSourceProtoEnum (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|protobuf.Log...|__java_lang_String_<once>_@protobuf.LogSourceProtoEnum )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@protobuf.LogSourceProtoEnum))
+ )
+)
+
+;;; Class<?> LogSourceProtoEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@protobuf.LogSourceProtoEnum
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $protobuf.LogSourceProtoEnum))
+ (local.set $this (ref.cast (ref $protobuf.LogSourceProtoEnum) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@protobuf.LogSourceProtoEnum ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@protobuf.LogSourceProtoEnum)
 
 ;;; Protobuf Protobuf.$create()
 (func $$create__@protobuf.Protobuf
@@ -380,3 +608,127 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@protobuf.Protobuf.Test)
+
+;;; LogSource LogSource.$create(String $name, int $ordinal)
+(func $$create__java_lang_String__int@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (result (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+ (local $$instance (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (local.set $$instance (struct.new $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (global.get $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource.vtable) (global.get $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (call $$ctor__java_lang_String__int__void_$p_com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (return (local.get $$instance))
+ )
+)
+
+;;; void LogSource.$ctor(String $name, int $ordinal)
+(func $$ctor__java_lang_String__int__void_$p_com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource
+ (param $this (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+ )
+)
+
+;;; LogSource LogSource.valueOf(String name)
+(func $m_valueOf__java_lang_String__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource
+ (param $name (ref null $java.lang.String))
+ (result (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (call $$clinit__void_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (if (ref.is_null (global.get $namesToValuesMap@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+     (global.set $namesToValuesMap@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource )))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (return (ref.cast (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))))
+ )
+)
+
+;;; LogSource[] LogSource.values()
+(func $m_values__arrayOf_com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (call $$clinit__void_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (return (call $m_values_$private__arrayOf_com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource ))
+ )
+)
+
+;;; LogSource[] LogSource.values_$private()
+(func $m_values_$private__arrayOf_com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $UNKNOWN@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))))
+ )
+)
+
+;;; void LogSource.$clinit()
+(func $$clinit__void_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (if (global.get $$class-initialized@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (global.set $$class-initialized@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:19:14
+  (call $$clinit__void_<once>_@java.lang.Enum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/protobuf/readable-j2wasm.js/com/google/wireless/android/play/playlog/proto/LogSourceEnum.java:20:4
+  (global.set $UNKNOWN@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (call $$create__java_lang_String__int@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (call $$getString_|UNKNOWN|__java_lang_String_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource )(i32.const 0)))
+ )
+)
+
+;;; Class<T> LogSource.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource)))
+   (then
+    (return (global.get $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+   )
+  )
+  (global.set $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|com.google.w...|__java_lang_String_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource )))
+  (return (global.get $$class@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ )
+)
+
+;;; Class<?> LogSource.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource))
+ (local.set $this (ref.cast (ref $com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource)

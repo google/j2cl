@@ -14,6 +14,8 @@ package(
 # The source files that we want to test. Other files are part of the test fixture.
 READABLE_SRCS = [
     "Protobuf.java",
+    "LogSourceEnum.java",
+    "LogSourceProtoEnum.java",
 ]
 
 java_library(

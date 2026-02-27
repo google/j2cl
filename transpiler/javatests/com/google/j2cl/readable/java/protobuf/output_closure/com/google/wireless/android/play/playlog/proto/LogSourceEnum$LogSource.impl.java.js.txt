@@ -1,0 +1,72 @@
+goog.module('com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @final
+ * @extends {Enum<LogSource>}
+ */
+class LogSource extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LogSource} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new LogSource();
+  $instance.$ctor__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!LogSource} */
+ static m_valueOf__java_lang_String__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource(/** string */ name) {
+  LogSource.$clinit();
+  if ($Equality.$same(LogSource.f_namesToValuesMap__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource_, null)) {
+   LogSource.f_namesToValuesMap__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource_ = (/**@type {Map<?string, !LogSource>}*/ ($Enums.createMapFromValues(LogSource.m_values__arrayOf_com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource())));
+  }
+  return /**@type {LogSource}*/ ($Enums.getValueFromNameAndMap(name, LogSource.f_namesToValuesMap__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource_));
+ }
+ /** @nodts @return {!Array<!LogSource>} */
+ static m_values__arrayOf_com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource() {
+  LogSource.$clinit();
+  return /**@type {!Array<!LogSource>}*/ ($Arrays.$stampType([LogSource.f_UNKNOWN__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource], LogSource));
+ }
+ /** @nodts */
+ static $clinit() {
+  LogSource.$clinit = () =>{};
+  LogSource.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LogSource;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number} @nodts*/
+LogSource.$ordinal_UNKNOWN__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource = 0;
+/**@const {!LogSource} @nodts*/
+LogSource.f_UNKNOWN__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource = /**@pureOrBreakMyCode*/ LogSource.$create__java_lang_String__int($Util.$makeEnumName('UNKNOWN'), LogSource.$ordinal_UNKNOWN__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource);
+/**@type {Map<?string, !LogSource>} @nodts*/
+LogSource.f_namesToValuesMap__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource_;
+$Util.$setClassMetadataForEnum(LogSource, 'com.google.wireless.android.play.playlog.proto.LogSourceEnum$LogSource');
+
+exports = LogSource;
+
+//# sourceMappingURL=LogSourceEnum$LogSource.js.map

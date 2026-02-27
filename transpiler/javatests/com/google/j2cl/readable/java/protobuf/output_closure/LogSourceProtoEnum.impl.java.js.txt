@@ -1,0 +1,53 @@
+goog.module('protobuf.LogSourceProtoEnum$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let LogSource = goog.forwardDeclare('com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource$impl');
+
+class LogSourceProtoEnum extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LogSourceProtoEnum} */
+ static $create__() {
+  LogSourceProtoEnum.$clinit();
+  let $instance = new LogSourceProtoEnum();
+  $instance.$ctor__protobuf_LogSourceProtoEnum__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__protobuf_LogSourceProtoEnum__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_setLogSourceStatus__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource__void(/** LogSource */ source) {
+  LogSourceProtoEnum.$clinit();
+ }
+ /** @nodts @return {LogSource} */
+ static m_getDefaultLogSource__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource() {
+  LogSourceProtoEnum.$clinit();
+  return LogSource.f_UNKNOWN__com_google_wireless_android_play_playlog_proto_LogSourceEnum_LogSource;
+ }
+ /** @nodts */
+ static $clinit() {
+  LogSourceProtoEnum.$clinit = () =>{};
+  LogSourceProtoEnum.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LogSourceProtoEnum;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  LogSource = goog.module.get('com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource$impl');
+ }
+}
+$Util.$setClassMetadata(LogSourceProtoEnum, 'protobuf.LogSourceProtoEnum');
+
+exports = LogSourceProtoEnum;
+
+//# sourceMappingURL=LogSourceProtoEnum.js.map

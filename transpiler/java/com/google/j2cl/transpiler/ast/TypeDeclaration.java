@@ -355,9 +355,13 @@ public abstract class TypeDeclaration
   abstract KtTypeInfo getKtTypeInfo();
 
   public boolean isProtobuf() {
-    return getAllSuperTypesIncludingSelf().stream()
-        .map(TypeDeclaration::getPackageName)
-        .anyMatch("com.google.protobuf"::equals);
+    return getQualifiedSourceName()
+            // This is a protobuf type in J2CL and Kotlin/Native protos but not in Java proto lite
+            // which confuses the generic protobuf detection logic below.
+            .equals("com.google.wireless.android.play.playlog.proto.LogSourceEnum.LogSource")
+        || getAllSuperTypesIncludingSelf().stream()
+            .map(TypeDeclaration::getPackageName)
+            .anyMatch("com.google.protobuf"::equals);
   }
 
   public boolean isJsEnum() {
