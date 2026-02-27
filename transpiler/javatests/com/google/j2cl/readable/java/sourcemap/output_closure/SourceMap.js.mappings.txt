@@ -36,10 +36,12 @@
 [value++;] => [value = value + 1 | 0;] "sourcemap.SourceMap.testStatements"
 [if (number % 2 == 0) {
       value += 1;
-...      value += 2;
+...
+      value += 2;
     }] => [if ($Primitives.coerceDivision(number_1 % 2) == 0) {
    value = value + 1 | 0;
-...   value = value + 2 | 0;
+...
+   value = value + 2 | 0;
   }] "sourcemap.SourceMap.testStatements"
 [value += 1;] => [value = value + 1 | 0;] "sourcemap.SourceMap.testStatements"
 [value += 2;] => [value = value + 2 | 0;] "sourcemap.SourceMap.testStatements"
@@ -54,25 +56,31 @@
 [value += a + b2;] => [value = value + (a + b2) | 0;] "sourcemap.SourceMap.testStatements"
 [outerLoop: // Label for the outer loop
     for (int i = 0; i <= 2; i++) {
-...      }
+...
+      }
     }] => [outerLoop: for (let i_1 = 0; i_1 <= 2; i_1 = i_1 + 1 | 0) {
    switch (number_1) {
-...   }
+...
+   }
   }] "sourcemap.SourceMap.testStatements"
 [for (int i = 0; i <= 2; i++) {
       switch (number) {
-...      }
+...
+      }
     }] => [for (let i_1 = 0; i_1 <= 2; i_1 = i_1 + 1 | 0) {
    switch (number_1) {
-...   }
+...
+   }
   }] "sourcemap.SourceMap.testStatements"
 [i] => [i_1] "i"
 [switch (number) {
         case 1:
-...          break outerLoop;
+...
+          break outerLoop;
       }] => [switch (number_1) {
     case 1:
-...     break outerLoop;
+...
+     break outerLoop;
    }] "sourcemap.SourceMap.testStatements"
 [value += 5;] => [value = value + 5 | 0;] "sourcemap.SourceMap.testStatements"
 [break;] => [break;] "sourcemap.SourceMap.testStatements"
@@ -99,7 +107,8 @@
 [i + 1] => [return Integer.valueOf(i_1.intValue() + 1 | 0);] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [{
     Function<Integer, Integer> f = i -> i + 1;
-...    Supplier<Integer> f3 = this::simpleMethod;
+...
+    Supplier<Integer> f3 = this::simpleMethod;
   }] => [let /** ArrayList */ $$q;] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [Supplier<Integer> f2 = new ArrayList()::size;] => [let f2 = ($$q = (/**@type {!ArrayList}*/ (ArrayList.$create__())), Supplier.$adapt(/**  @return {Integer}*/ (() =>{
    return Integer.valueOf($$q.size());
@@ -120,10 +129,12 @@
 [v] => [v] "v"
 [int r =
         switch (v) {
-...          default -> 20;
+...
+          default -> 20;
         };] => [let r = (() =>{
    switch (v) {
-...   }
+...
+   }
   })();] "sourcemap.SourceMap.testSwitchExpression"
 [r] => [r] "r"
 [switch (v) {
@@ -131,7 +142,8 @@
           default -> 20;
         }] => [switch (v) {
     case 1:case 2:
-...     return 20;
+...
+     return 20;
    }] "sourcemap.SourceMap.testSwitchExpression"
 [10] => [return 10;] "sourcemap.SourceMap.testSwitchExpression"
 [20] => [return 20;] "sourcemap.SourceMap.testSwitchExpression"
@@ -164,18 +176,22 @@
 [uninitializedInstanceField = 1000;] => [this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 1000;] "sourcemap.SourceMap.<init>"
 [if (uninitializedInstanceField == 1000) {
       uninitializedInstanceField2 = "Hello!";
-...      uninitializedInstanceField2 = "Universe!";
+...
+      uninitializedInstanceField2 = "Universe!";
     }] => [if (this.f_uninitializedInstanceField__sourcemap_SourceMap_ == 1000) {
    this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Hello!';
-...   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Universe!';
+...
+   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Universe!';
   }] "sourcemap.SourceMap.<init>"
 [uninitializedInstanceField2 = "Hello!";] => [this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Hello!';] "sourcemap.SourceMap.<init>"
 [if (uninitializedInstanceField == 2000) {
       uninitializedInstanceField2 = "World!";
-...      uninitializedInstanceField2 = "Universe!";
+...
+      uninitializedInstanceField2 = "Universe!";
     }] => [if (this.f_uninitializedInstanceField__sourcemap_SourceMap_ == 2000) {
    this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'World!';
-...   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Universe!';
+...
+   this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Universe!';
   }] "sourcemap.SourceMap.<init>"
 [uninitializedInstanceField2 = "World!";] => [this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'World!';] "sourcemap.SourceMap.<init>"
 [uninitializedInstanceField2 = "Universe!";] => [this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Universe!';] "sourcemap.SourceMap.<init>"

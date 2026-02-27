@@ -103,7 +103,7 @@ public final class ReadableSourceMapGenerator {
         content
             .append("\n")
             .append(trimTrailingWhitespace(lines.get(startLine + 1)))
-            .append("\n...")
+            .append("\n...\n")
             .append(trimTrailingWhitespace(lines.get(endLine - 1)));
       } else {
         for (int line = startLine + 1; line < endLine; line++) {
