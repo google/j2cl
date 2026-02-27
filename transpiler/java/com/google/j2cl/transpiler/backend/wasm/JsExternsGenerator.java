@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.findSuperTypeWithJsPrototype;
-import static java.util.stream.Collectors.joining;
 
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -26,7 +25,6 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
 
@@ -100,7 +98,7 @@ final class JsExternsGenerator {
     String jsDoc = closureEnvironment.getJsDocForType(type, /* isWasmExtern= */ true);
     Method constructor =
         type.getMethods().stream()
-            .filter(m -> m.getDescriptor().isJsConstructor())
+            .filter(m -> isConstructor(m.getDescriptor()))
             .findFirst()
             .orElse(null);
 
@@ -120,48 +118,37 @@ final class JsExternsGenerator {
 
     sb.appendln("/**");
     appendJsDoc(sb, jsDoc);
-    for (Variable parameter : constructor.getParameters()) {
-      sb.appendln(
-          String.format(
-              " * @param {%s} %s",
-              closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor()),
-              parameter.getName()));
-    }
     sb.appendln(" * @constructor");
     sb.appendln(" */");
-    sb.appendln(
-        String.format(
-            "%s = function(%s) {};",
-            type.getDeclaration().getQualifiedJsName(),
-            constructor.getParameters().stream().map(Variable::getName).collect(joining(", "))));
+    sb.append(
+        String.format("%s = function", closureEnvironment.aliasForType(type.getDeclaration())));
+    closureEnvironment.emitParameters(sb, constructor);
+    sb.appendln(" {};");
   }
 
   private void appendMethods(SourceBuilder sb, Type type) {
     for (Method method : type.getMethods()) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
       if (!AstUtils.canBeReferencedExternallyWasm(methodDescriptor)
+          // Exclude generated export bridges. They do not have enough information, such as what
+          // they @Override, to generate the extern.
+          || methodDescriptor.getOrigin().isWasmJsExport()
+          || methodDescriptor.getOrigin().isWasmJsConstructorExport()
           // Constructors handled elsewhere.
-          || methodDescriptor.isConstructor()) {
+          || isConstructor(methodDescriptor)) {
         continue;
       }
 
       sb.appendln("");
       sb.appendln("/**");
       appendJsDoc(sb, closureEnvironment.getJsDocForMethod(method));
-      for (Variable parameter : method.getParameters()) {
-        sb.appendln(
-            String.format(
-                " * @param {%s} %s",
-                closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor()),
-                parameter.getName()));
-      }
       sb.appendln(" */");
-      sb.appendln(
+      sb.append(
           String.format(
-              "%s.%s = function(%s) {};",
-              getMemberOwner(methodDescriptor),
-              methodDescriptor.getSimpleJsName(),
-              method.getParameters().stream().map(Variable::getName).collect(joining(", "))));
+              "%s.%s = function",
+              getMemberOwner(methodDescriptor), methodDescriptor.getSimpleJsName()));
+      closureEnvironment.emitParameters(sb, method);
+      sb.appendln(" {};");
     }
   }
 
@@ -182,6 +169,11 @@ final class JsExternsGenerator {
       // newline.
       sb.appendln(" *" + jsDoc);
     }
+  }
+
+  private static boolean isConstructor(MethodDescriptor methodDescriptor) {
+    return methodDescriptor.getOrigin()
+        == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR;
   }
 
   private void generateExternsWiring(Type type) {
