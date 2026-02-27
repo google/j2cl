@@ -100,6 +100,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
             tags = tags + ["ide-test-intermediate"],
             gen_by_xplat = True,
             exec_properties = exec_properties,
+            generate_framework = False,
         )
 
 def _extract_kotlin_srcjar(ctx):
