@@ -30,8 +30,9 @@ class LocalClassInFieldInitializer {
       Local()
       1
     } else {
-      class Local {}
-      Local()
+      // TODO(b/488364395): Uncomment when bug is fixed.
+      // class Local {}
+      // Local()
       2
     }
 }
