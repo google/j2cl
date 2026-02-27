@@ -43,7 +43,6 @@ import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -189,32 +188,16 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterFieldDeclarationStatement(FieldDeclarationStatement declaration) {
-        String typeJsDoc =
-            environment.getClosureTypeString(declaration.getFieldDescriptor().getTypeDescriptor());
-        ArrayList<String> jsDocs = new ArrayList<>();
-        if (!declaration.isPublic()) {
-          jsDocs.add("@private");
-        }
-        if (declaration.isConst()) {
-          jsDocs.add("@const");
-        }
-        if (jsDocs.isEmpty()) {
-          jsDocs.add("@type");
-        }
-        jsDocs.add("{" + typeJsDoc + "}");
-        if (declaration.getFieldDescriptor().hasAnnotation("java.lang.Deprecated")
-            || declaration.getFieldDescriptor().hasAnnotation("kotlin.Deprecated")) {
-          jsDocs.add("@deprecated");
-        }
-        if (!declaration.getFieldDescriptor().canBeReferencedExternally()) {
-          jsDocs.add("@nodts");
-        }
+        String jsDoc =
+            environment.getJsDocForField(
+                declaration.getFieldDescriptor(), /* isPublic= */ declaration.isPublic());
+
         Runnable renderer =
             () ->
                 builder.emitWithMapping(
                     declaration.getSourcePosition(),
                     () -> {
-                      builder.appendln("/**" + String.join(" ", jsDocs) + "*/");
+                      builder.appendln("/**" + jsDoc + "*/");
                       renderExpression(declaration.getExpression());
                       builder.append(";");
                     });

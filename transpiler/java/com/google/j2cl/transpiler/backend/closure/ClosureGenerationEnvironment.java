@@ -21,6 +21,7 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.HasAnnotations;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
@@ -36,6 +37,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -306,5 +308,29 @@ public class ClosureGenerationEnvironment {
         // Only map parameters if they are named.
         AstUtils.removeUnnamedSourcePosition(parameter.getSourcePosition()),
         () -> sourceBuilder.append(getUniqueNameForVariable(parameter)));
+  }
+
+  /** Returns the JsDoc annotation for the given field. */
+  public String getJsDocForField(FieldDescriptor fieldDescriptor, boolean isPublic) {
+    String typeJsDoc = getClosureTypeString(fieldDescriptor.getTypeDescriptor());
+    ArrayList<String> jsDocs = new ArrayList<>();
+    if (!isPublic) {
+      jsDocs.add("@private");
+    }
+    if (fieldDescriptor.isCompileTimeConstant()) {
+      jsDocs.add("@const");
+    }
+    if (jsDocs.isEmpty()) {
+      jsDocs.add("@type");
+    }
+    jsDocs.add("{" + typeJsDoc + "}");
+    if (fieldDescriptor.hasAnnotation("java.lang.Deprecated")
+        || fieldDescriptor.hasAnnotation("kotlin.Deprecated")) {
+      jsDocs.add("@deprecated");
+    }
+    if (!fieldDescriptor.canBeReferencedExternally()) {
+      jsDocs.add("@nodts");
+    }
+    return String.join(" ", jsDocs);
   }
 }
