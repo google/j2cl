@@ -227,6 +227,14 @@ public final class RuntimeMethods {
         .build();
   }
 
+  public static MethodCall createStringFromSafeJsStringMethodCall(Expression expression) {
+    // Use the imprecise getMethodDescriptorByName to avoid having NativeString as a
+    // known type descriptor.
+    MethodDescriptor stringCreator =
+        TypeDescriptors.get().javaLangString.getMethodDescriptorByName("fromSafeJsString");
+    return MethodCall.Builder.from(stringCreator).setArguments(expression).build();
+  }
+
   public static MethodCall createStringFromJsStringMethodCall(Expression expression) {
     // Use the imprecise getMethodDescriptorByName to avoid having NativeString as a
     // known type descriptor.

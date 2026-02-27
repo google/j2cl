@@ -78,7 +78,7 @@ public class StringLiteralGettersCreator {
           .reduce(RuntimeMethods::createStringConcatMethodCall)
           .get();
     }
-    return RuntimeMethods.createStringFromJsStringMethodCall(new StringLiteral(value));
+    return RuntimeMethods.createStringFromSafeJsStringMethodCall(new StringLiteral(value));
   }
 
   private static boolean isValidUtf8String(String value) {

@@ -819,6 +819,10 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return new String(nativeFromCharCodeArray(x, 0, length));
   }
 
+  static String fromSafeJsString(NativeString o) {
+    return new String(o);
+  }
+
   static String fromJsString(NativeString o) {
     return o == null ? null : new String(o);
   }
