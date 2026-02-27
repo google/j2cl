@@ -108,6 +108,27 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "Return type of 'C Main.test4()' cannot be of type 'C'.");
   }
 
+  public void testNativeJsTypeEqualityFails() {
+    assertTranspileFails(
+            "test.Main",
+            """
+            import jsinterop.annotations.*;
+            @JsType(isNative = true)
+            class Native {}
+            class Main {
+              void test() {
+                Native n = new Native();
+                Object o = new Object();
+                boolean b = n == o;
+                b = o != n;
+              }
+            }
+            """)
+        .assertErrorsWithoutSourcePosition(
+            "Native JsType 'Native' cannot be compared with non-native type.",
+            "Native JsType 'Native' cannot be compared with non-native type.");
+  }
+
   public void testNativeJsTypeInvalidAssignmentsFails() {
     assertTranspileFails(
             "test.Buggy",

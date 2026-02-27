@@ -286,6 +286,7 @@ public class JsInteropRestrictionsChecker {
 
     checkNativeTypeArguments(type);
     checkNativeTypeArrays(type);
+    checkNativeTypeEqualityCheck(type);
   }
 
   private void checkNativeTypeArguments(Type type) {
@@ -307,6 +308,40 @@ public class JsInteropRestrictionsChecker {
         /* checkArrayComponent= */ true,
         /* disallowedTypeDescription= */ "Native type array",
         /* messageSuffix= */ " (b/261079024)");
+  }
+
+  private void checkNativeTypeEqualityCheck(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitBinaryExpression(BinaryExpression binaryExpression) {
+            if (!binaryExpression.getOperator().isRelationalOperator()) {
+              return;
+            }
+
+            if (isAllowedForNativeTypeEquality(
+                binaryExpression.getLeftOperand(), binaryExpression.getRightOperand())) {
+              return;
+            }
+
+            var operand =
+                binaryExpression.getLeftOperand().getTypeDescriptor().isNative()
+                    ? binaryExpression.getLeftOperand()
+                    : binaryExpression.getRightOperand();
+            problems.error(
+                ((HasSourcePosition) getParent(HasSourcePosition.class::isInstance))
+                    .getSourcePosition(),
+                "%s cannot be compared with non-native type.",
+                getReadableDescriptionWithPrefix(operand.getTypeDescriptor()));
+          }
+
+          private boolean isAllowedForNativeTypeEquality(Expression left, Expression right) {
+            if (left instanceof NullLiteral || right instanceof NullLiteral) {
+              return true;
+            }
+            return left.getTypeDescriptor().isNative() == right.getTypeDescriptor().isNative();
+          }
+        });
   }
 
   private void checkNativeTypesAssignabilityInWasm(Type type) {
