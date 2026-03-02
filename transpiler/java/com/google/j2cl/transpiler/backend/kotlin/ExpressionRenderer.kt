@@ -661,7 +661,7 @@ internal data class ExpressionRenderer(
     )
 
   private fun variableReferenceSource(variableReference: VariableReference): Source =
-    nameRenderer.nameSource(variableReference.target)
+    nameRenderer.hasNameSource(variableReference.target)
 
   private fun variableDeclarationFragmentSource(fragment: VariableDeclarationFragment): Source =
     spaceSeparated(
@@ -670,7 +670,10 @@ internal data class ExpressionRenderer(
     )
 
   private fun variableSource(variable: Variable): Source =
-    join(nameRenderer.nameSource(variable), variableDeclaratorSource(variable.typeDescriptor))
+    join(
+      nameRenderer.variableNameSource(variable),
+      variableDeclaratorSource(variable.typeDescriptor),
+    )
 
   private fun variableDeclaratorSource(typeDescriptor: TypeDescriptor): Source =
     if (typeDescriptor.isDenotableNonWildcard) {

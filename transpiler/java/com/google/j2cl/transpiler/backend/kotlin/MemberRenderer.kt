@@ -151,28 +151,26 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     val initializer = field.initializer
 
     return newLineSeparated(
-      Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
-      memberDescriptorRenderer.volatileAnnotationSource(fieldDescriptor),
-      objCNameRenderer.objCAnnotationSource(fieldDescriptor),
-      jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field),
-      spaceSeparated(
-        memberDescriptorRenderer.visibilityModifierSource(field.descriptor),
-        Source.emptyUnless(isConst) { CONST_KEYWORD },
-        Source.emptyUnless(field.isKtLateInit) { LATEINIT_KEYWORD },
-        if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
-        colonSeparated(
-          identifierSource(environment.ktMangledName(fieldDescriptor)),
-          nameRenderer.typeDescriptorSource(typeDescriptor),
+        Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
+        memberDescriptorRenderer.volatileAnnotationSource(fieldDescriptor),
+        objCNameRenderer.objCAnnotationSource(fieldDescriptor),
+        jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field),
+        spaceSeparated(
+          memberDescriptorRenderer.visibilityModifierSource(field.descriptor),
+          Source.emptyUnless(isConst) { CONST_KEYWORD },
+          Source.emptyUnless(field.isKtLateInit) { LATEINIT_KEYWORD },
+          if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
+          colonSeparated(fieldNameSource(field), nameRenderer.typeDescriptorSource(typeDescriptor)),
+          initializer(
+            if (initializer == null && field.isNative) {
+              nameRenderer.topLevelQualifiedNameSource("kotlin.js.definedExternally")
+            } else {
+              initializer?.let { expressionRenderer.expressionSource(it) }.orEmpty()
+            }
+          ),
         ),
-        initializer(
-          if (initializer == null && field.isNative) {
-            nameRenderer.topLevelQualifiedNameSource("kotlin.js.definedExternally")
-          } else {
-            initializer?.let { expressionRenderer.expressionSource(it) }.orEmpty()
-          }
-        ),
-      ),
-    )
+      )
+      .with(field.sourcePosition)
   }
 
   private val jvmFieldsAreIllegal: Boolean
@@ -198,10 +196,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
         spaceSeparated(
           methodModifiersSource(method),
           colonSeparated(
-            join(
-              memberDescriptorRenderer.methodKindAndNameSource(methodDescriptor),
-              methodParametersSource(method),
-            ),
+            join(methodKindAndNameSource(method), methodParametersSource(method)),
             if (methodDescriptor.isConstructor) {
               constructorInvocationSource(method)
             } else {
@@ -224,6 +219,23 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       },
       Source.emptyUnless(method.isJavaOverride) { KotlinSource.OVERRIDE_KEYWORD },
     )
+
+  private fun methodKindAndNameSource(method: Method): Source =
+    if (method.descriptor.isConstructor) {
+      KotlinSource.CONSTRUCTOR_KEYWORD
+    } else {
+      spaceSeparated(
+        if (method.descriptor.isKtProperty) KotlinSource.VAL_KEYWORD else KotlinSource.FUN_KEYWORD,
+        nameRenderer.typeParametersSource(method.descriptor.typeParameterTypeDescriptors),
+        methodNameSource(method),
+      )
+    }
+
+  private fun methodNameSource(method: Method): Source =
+    memberDescriptorRenderer.nameSource(method.descriptor).with(method.sourcePosition)
+
+  private fun fieldNameSource(field: Field): Source =
+    memberDescriptorRenderer.nameSource(field.descriptor).with(field.nameSourcePosition)
 
   fun annotationsSource(method: Method): Source =
     newLineSeparated(
@@ -278,7 +290,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
       },
       Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
       colonSeparated(
-        nameRenderer.nameSource(parameter),
+        nameRenderer.variableNameSource(parameter),
         nameRenderer.typeDescriptorSource(renderedTypeDescriptor),
       ),
     )

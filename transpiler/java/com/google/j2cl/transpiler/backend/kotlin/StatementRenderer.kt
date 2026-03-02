@@ -144,7 +144,7 @@ internal data class StatementRenderer(
     join(CONTINUE_KEYWORD, continueStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
   private fun labelReferenceSource(labelReference: LabelReference): Source =
-    at(nameRenderer.nameSource(labelReference.target))
+    at(nameRenderer.hasNameSource(labelReference.target))
 
   private fun doWhileStatementSource(doWhileStatement: DoWhileStatement): Source =
     spaceSeparated(
@@ -162,7 +162,7 @@ internal data class StatementRenderer(
       FOR_KEYWORD,
       inParentheses(
         infix(
-          nameRenderer.nameSource(forEachStatement.loopVariable),
+          nameRenderer.variableNameSource(forEachStatement.loopVariable),
           IN_KEYWORD,
           expressionSource(forEachStatement.iterableExpression),
         )
@@ -194,7 +194,7 @@ internal data class StatementRenderer(
 
   private fun labeledStatementSource(labelStatement: LabeledStatement): Source =
     spaceSeparated(
-      join(nameRenderer.nameSource(labelStatement.label), AT_OPERATOR),
+      join(nameRenderer.hasNameSource(labelStatement.label), AT_OPERATOR),
       labelStatement.statement.let {
         statementSource(it).letIf(it is LabeledStatement) { block(it) }
       },
@@ -253,7 +253,7 @@ internal data class StatementRenderer(
       CATCH_KEYWORD,
       inParentheses(
         colonSeparated(
-          nameRenderer.nameSource(variable),
+          nameRenderer.variableNameSource(variable),
           nameRenderer.typeDescriptorSource(type.toNonNullable()),
         )
       ),

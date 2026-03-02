@@ -1,10 +1,14 @@
 [SourceMap] => [SourceMap]
+[private int uninitializedInstanceField;] => [private var uninitializedInstanceField: Int = 0]
+[uninitializedInstanceField] => [uninitializedInstanceField]
 [{
     uninitializedInstanceField = 1000;
   }] => [{
   this.uninitializedInstanceField = 1000
  }]
 [uninitializedInstanceField = 1000;] => [this.uninitializedInstanceField = 1000]
+[private String uninitializedInstanceField2;] => [private var uninitializedInstanceField2: String? = null]
+[uninitializedInstanceField2] => [uninitializedInstanceField2]
 [{
     if (uninitializedInstanceField == 1000) {
       uninitializedInstanceField2 = "Hello!";
@@ -62,10 +66,22 @@
    this.uninitializedInstanceField2 = "Universe!"
   }]
 [uninitializedInstanceField2 = "Universe!";] => [this.uninitializedInstanceField2 = "Universe!"]
+[i] => [i] "i"
+[uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
+[uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
+[private int initializedInstanceField = 2;] => [private var initializedInstanceField: Int = 2]
+[initializedInstanceField] => [initializedInstanceField]
+[testStatements] => [testStatements]
+[a] => [a] "a"
+[b] => [b] "b"
+[times] => [times] "times"
+[number] => [number] "number"
 [int value = 0;] => [var value: Int = 0]
+[value] => [value] "value"
 [for (int i = 0; i < times; i++) {
       value++;
     }] => [var i: Int = 0]
+[i] => [i] "i"
 [for (int i = 0; i < times; i++) {
       value++;
     }] => [while (i < times) {
@@ -104,6 +120,7 @@
   }]
 [value += 2;] => [value = value + 2]
 [int b2 = b;] => [var b2: Int = b]
+[b2] => [b2] "b2"
 [while (b2 > 0 && b2 < 100) {
       b2 -= 10;
     }] => [while (b2 > 0 && b2 < 100) {
@@ -131,6 +148,7 @@
         break;
       }
     }] => [var i_1: Int = 0]
+[i] => [i_1] "i"
 [for (int i = 0; i <= 2; i++) {
       switch (number) {
         case 1:
@@ -250,9 +268,13 @@
       }
     }] => [i_1 = i_1 + 1]
 [return value;] => [return value]
+[testLambdaAndMethodReference] => [testLambdaAndMethodReference]
+[n] => [n] "n"
 [Function<Integer, Integer> f = i -> i + 1;] => [val f: Function<Int?, Int?> = Function { i: Int? ->
    return@Function i!!.toInt() + 1
   }]
+[f] => [f] "f"
+[i] => [i] "i"
 [i + 1] => [return@Function i!!.toInt() + 1]
 [Supplier<Integer> f2 = new ArrayList()::size;] => [val f2: Supplier<Int?> = run {
    val ______q: ArrayList<Any?> = ArrayList<Any?>()
@@ -260,16 +282,22 @@
     return@Supplier (______q as ArrayList<Any?>).size
    }
   }]
+[f2] => [f2] "f2"
 [new ArrayList()::size] => [return@Supplier (______q as ArrayList<Any?>).size]
 [Supplier<Integer> f3 = this::simpleMethod;] => [val f3: Supplier<Int?> = Supplier {
    return@Supplier this.simpleMethod()
   }]
+[f3] => [f3] "f3"
 [this::simpleMethod] => [return@Supplier this.simpleMethod()]
+[simpleMethod] => [simpleMethod]
 [return 1;] => [return 1]
+[testLocalClass] => [testLocalClass]
 [class LocalClass {}] => [open class LocalClass internal constructor()]
 [LocalClass] => [LocalClass]
 [new LocalClass();] => [LocalClass()]
+[testSwitchExpression] => [testSwitchExpression]
 [int v = 1;] => [val v: Int = 1]
+[v] => [v] "v"
 [int r =
         switch (v) {
           case 1, 2 -> 10;
@@ -284,20 +312,32 @@
     }
    }
   }]
+[r] => [r] "r"
 [10] => [return@run 10]
 [20] => [return@run 20]
+[testInstanceOf] => [testInstanceOf]
+[o] => [o] "o"
 [return o instanceof String;] => [return o is String]
+[testFunctionExpression] => [testFunctionExpression]
 [return (Object o) -> o;] => [return Function { o: Any? ->
    return@Function o
   }]
+[o] => [o] "o"
 [o] => [return@Function o]
+[testTypeLiteral] => [testTypeLiteral]
 [return String.class;] => [return String::class.javaObjectType]
+[static double uninitializedStaticField;] => [@JvmField
+  internal var uninitializedStaticField_pp_sourcemap: Double = 0.0]
+[uninitializedStaticField] => [uninitializedStaticField_pp_sourcemap]
 [static {
     uninitializedStaticField = 10.0;
   }] => [{
    SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
   }]
 [uninitializedStaticField = 10.0;] => [SourceMap.uninitializedStaticField_pp_sourcemap = 10.0]
+[static String initializedStaticField = "Hello";] => [@JvmField
+  internal var initializedStaticField_pp_sourcemap: String? = "Hello"]
+[initializedStaticField] => [initializedStaticField_pp_sourcemap]
 [static {
     if (uninitializedStaticField == 10.0) {
       initializedStaticField = "World";
@@ -319,3 +359,4 @@
    }]
 [initializedStaticField = "World";] => [SourceMap.initializedStaticField_pp_sourcemap = "World"]
 [Enum1] => [Enum1]
+[i] => [i] "i"

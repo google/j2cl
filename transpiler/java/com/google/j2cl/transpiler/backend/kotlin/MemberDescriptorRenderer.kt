@@ -20,11 +20,9 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDescriptors
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONSTRUCTOR_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
 import com.google.j2cl.transpiler.backend.kotlin.common.inBackTicks
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 import java.lang.Boolean.getBoolean
 
@@ -40,16 +38,8 @@ internal data class MemberDescriptorRenderer(val nameRenderer: NameRenderer) {
   private val annotationRenderer: AnnotationRenderer
     get() = AnnotationRenderer(nameRenderer)
 
-  fun methodKindAndNameSource(methodDescriptor: MethodDescriptor): Source =
-    if (methodDescriptor.isConstructor) {
-      CONSTRUCTOR_KEYWORD
-    } else {
-      spaceSeparated(
-        if (methodDescriptor.isKtProperty) KotlinSource.VAL_KEYWORD else KotlinSource.FUN_KEYWORD,
-        nameRenderer.typeParametersSource(methodDescriptor.typeParameterTypeDescriptors),
-        identifierSource(environment.ktMangledName(methodDescriptor)),
-      )
-    }
+  fun nameSource(memberDescriptor: MemberDescriptor): Source =
+    identifierSource(environment.ktMangledName(memberDescriptor))
 
   fun methodReturnTypeSource(methodDescriptor: MethodDescriptor): Source =
     methodDescriptor.returnTypeDescriptor

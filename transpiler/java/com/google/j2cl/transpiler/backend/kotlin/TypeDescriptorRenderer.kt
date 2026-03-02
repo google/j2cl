@@ -177,7 +177,7 @@ internal data class TypeDescriptorRenderer(
           )
         } else {
           join(
-              nameRenderer.nameSource(typeVariable.toDeclaration()),
+              nameRenderer.hasNameSource(typeVariable.toDeclaration()),
               nullableSuffixSource(typeVariable),
             )
             .letIf(typeVariable.hasAmpersandAny) {

@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 
@@ -56,7 +57,9 @@ private constructor(
     copy(localFieldNames = this.localFieldNames + localNames)
 
   /** Returns source containing name of the given node. */
-  fun nameSource(hasName: HasName) = identifierSource(environment.identifier(hasName))
+  fun hasNameSource(hasName: HasName) = identifierSource(environment.identifier(hasName))
+
+  fun variableNameSource(variable: Variable) = hasNameSource(variable).with(variable.sourcePosition)
 
   /**
    * Returns source for top-level qualified name.
