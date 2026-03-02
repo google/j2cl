@@ -15,9 +15,16 @@
  */
 package javaemul.internal;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-/** A special interface that to deal with JavaScript values as externs in Wasm. */
+/** A special class that to deal with JavaScript values as externs in Wasm. */
 @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
-public interface WasmExtern {}
+public class WasmExtern {
+
+  @JsMethod(namespace = "j2wasm.EqualityUtils")
+  public static native boolean isSame(WasmExtern left, WasmExtern right);
+
+  private WasmExtern() {}
+}

@@ -3,6 +3,7 @@ const foo_Baz = goog.require('foo.Baz');
 const j2wasm_CharUtils = goog.require('j2wasm.CharUtils');
 const j2wasm_ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
 const j2wasm_DoubleUtils = goog.require('j2wasm.DoubleUtils');
+const j2wasm_EqualityUtils = goog.require('j2wasm.EqualityUtils');
 const j2wasm_ExceptionUtils = goog.require('j2wasm.ExceptionUtils');
 const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 
@@ -101,6 +102,7 @@ function getImports() {
    'j2wasm.ConsoleUtils.log': j2wasm_ConsoleUtils.log,
    'j2wasm.DoubleUtils.dmod': j2wasm_DoubleUtils.dmod,
    'j2wasm.DoubleUtils.isValidDouble': j2wasm_DoubleUtils.isValidDouble,
+   'j2wasm.EqualityUtils.isSame': j2wasm_EqualityUtils.isSame,
    'j2wasm.ExceptionUtils.getJavaThrowable': j2wasm_ExceptionUtils.getJavaThrowable,
    'j2wasm.ExceptionUtils.isError': j2wasm_ExceptionUtils.isError,
    'j2wasm.ExceptionUtils.setJavaThrowable': j2wasm_ExceptionUtils.setJavaThrowable,

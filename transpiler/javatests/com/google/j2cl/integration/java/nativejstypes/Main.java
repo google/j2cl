@@ -17,6 +17,9 @@ package nativejstypes;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+
 public class Main {
   public static void testNativeJsTypeWithNamespace() {
     Foo foo = new Foo();
@@ -42,9 +45,25 @@ public class Main {
     assertTrue(number22.toFixed().equals(number10base2.toString()));
   }
 
+  public static void testNativeEquality() {
+    Number n1 = new Number(1.0);
+    Number n2 = new Number(1.0);
+    assertTrue(n1 == n1);
+    assertTrue(n1 != n2);
+    assertTrue(n1 != null);
+
+    Number n3 = getUndefined();
+    assertTrue(n3 == null);
+    assertTrue(n3 != n1);
+  }
+
+  @JsProperty(namespace = JsPackage.GLOBAL)
+  private static native Number getUndefined();
+
   public static void main(String... args) {
     testNativeJsTypeWithNamespace();
     testNativeJsTypeWithoutNamespace();
     testGlobalNativeJsType();
+    testNativeEquality();
   }
 }

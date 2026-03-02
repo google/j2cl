@@ -16,6 +16,8 @@
 package nativejstypes
 
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsProperty
 
 fun testNativeJsTypeWithNamespace() {
   val foo = Foo()
@@ -41,8 +43,23 @@ fun testGlobalNativeJsType() {
   assertTrue(number22.toFixed().equals(number10base2.toString()))
 }
 
+fun testNativeEquality() {
+  val n1 = Number(1.0)
+  val n2 = Number(1.0)
+  assertTrue(n1 === n1)
+  assertTrue(n1 !== n2)
+  assertTrue(n1 !== null)
+
+  val n3 = getUndefined()
+  assertTrue(n3 === null)
+  assertTrue(n3 !== n1)
+}
+
+@JsProperty(namespace = JsPackage.GLOBAL) private external fun getUndefined(): Number
+
 fun main(vararg unused: String) {
   testNativeJsTypeWithNamespace()
   testNativeJsTypeWithoutNamespace()
   testGlobalNativeJsType()
+  testNativeEquality()
 }

@@ -556,10 +556,10 @@ public enum Backend {
           RemoveNoopStatements::new,
 
           // Passes that transform the AST to match the requirements of the Wasm instruction set.
-          // Make null literals to have the type required by their use.
-          NormalizeNullLiterals::new,
           // Rewrite 'a != b' to '!(a == b)'
           RewriteReferenceEqualityOperations::new,
+          // Make null literals to have the type required by their use.
+          NormalizeNullLiterals::new,
 
           // Post-verifications
           VerifySingleAstReference::new,

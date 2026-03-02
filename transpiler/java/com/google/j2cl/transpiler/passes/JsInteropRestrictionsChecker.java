@@ -1339,7 +1339,12 @@ public class JsInteropRestrictionsChecker {
 
   private void checkQualifiedJsName(Type type) {
     if (type.getDeclaration().isStarOrUnknown()) {
-      if (!type.isNative() || !type.isInterface() || !JsUtils.isGlobal(type.getJsNamespace())) {
+      // WasmExtern has static native methods so declared as a class but sill safe since we control
+      // the definition and things like instanceof is already forbidden in Wasm.
+      if (TypeDescriptors.get().javaemulInternalWasmExtern != type.getTypeDescriptor()
+          && (!type.isNative()
+              || !type.isInterface()
+              || !JsUtils.isGlobal(type.getJsNamespace()))) {
         problems.error(
             type.getSourcePosition(),
             "Only native interfaces in the global namespace can be named '%s'.",

@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
@@ -42,6 +43,17 @@ public class RewriteReferenceEqualityOperations extends NormalizationPass {
           public Node rewriteBinaryExpression(BinaryExpression expression) {
             if (!expression.isReferenceComparison()) {
               return expression;
+            }
+
+            if (expression.getLeftOperand().getTypeDescriptor().isNative()
+                || expression.getRightOperand().getTypeDescriptor().isNative()) {
+              MethodCall equalityCall =
+                  RuntimeMethods.createWasmExternEqualityMethodCall(
+                      expression.getLeftOperand(), expression.getRightOperand());
+              if (expression.getOperator() == BinaryOperator.NOT_EQUALS) {
+                return equalityCall.prefixNot();
+              }
+              return equalityCall;
             }
 
             if (expression.getOperator() == BinaryOperator.EQUALS) {

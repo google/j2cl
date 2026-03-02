@@ -5892,7 +5892,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:373:16
-  (return (if (result i32) (ref.is_null (struct.get $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 $$outer_this@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 (local.get $this))) (then (i32.const 0)) (else (i32.const 1))))
+  (return (if (result i32) (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.WasmExtern (struct.get $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 $$outer_this@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13 (local.get $this))(ref.null extern)) (then (i32.const 0)) (else (i32.const 1))))
  )
 )
 (elem declare func $m_foo__int__int@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13)

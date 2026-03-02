@@ -447,6 +447,19 @@ public final class RuntimeMethods {
         BootstrapType.NATIVE_EQUALITY.getDescriptor(), methodName, arguments);
   }
 
+  public static MethodCall createWasmExternEqualityMethodCall(
+      Expression leftOperand, Expression rightOperand) {
+    return MethodCall.Builder.from(
+            TypeDescriptors.get()
+                .javaemulInternalWasmExtern
+                .getMethodDescriptor(
+                    "isSame",
+                    TypeDescriptors.get().javaemulInternalWasmExtern,
+                    TypeDescriptors.get().javaemulInternalWasmExtern))
+        .setArguments(leftOperand, rightOperand)
+        .build();
+  }
+
   /** Create a call to an Exceptions method. */
   public static MethodCall createExceptionsMethodCall(String methodName, Expression... arguments) {
     return MethodCall.Builder.from(
