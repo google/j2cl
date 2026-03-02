@@ -66,9 +66,12 @@
    this.uninitializedInstanceField2 = "Universe!"
   }]
 [uninitializedInstanceField2 = "Universe!";] => [this.uninitializedInstanceField2 = "Universe!"]
+[SourceMap] => [constructor]
 [i] => [i] "i"
+[SourceMap] => [constructor]
 [uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
 [uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
+[this(2);] => [this(2)]
 [private int initializedInstanceField = 2;] => [private var initializedInstanceField: Int = 2]
 [initializedInstanceField] => [initializedInstanceField]
 [testStatements] => [testStatements]
@@ -359,12 +362,22 @@
    }]
 [initializedStaticField = "World";] => [SourceMap.initializedStaticField_pp_sourcemap = "World"]
 [Enum1] => [Enum1]
+[VALUE1] => [VALUE1]
+[VALUE2] => [VALUE2]
+[VALUE3] => [VALUE3]
+[Enum1] => [constructor]
+[Enum1] => [constructor]
 [i] => [i] "i"
 [SuperCalls] => [SuperCalls]
+[SuperCalls] => [constructor]
 [i] => [i] "i"
+[super(i);] => [super(
+   i!!.toInt(),
+  )]
 [InnerClass] => [InnerClass]
 [i] => [i] "i"
 [public final int field;] => [@JvmField
   val field: Int]
 [field] => [field]
+[InnerClass] => [init]
 [this.field = i;] => [this.field = i]

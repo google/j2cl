@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
+import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocationStatement
 import com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithDoNotAutobox
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.InitializerBlock
@@ -187,7 +188,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
   private fun methodHeaderSource(method: Method): Source =
     if (isKtPrimaryConstructor(method)) {
-      INIT_KEYWORD
+      INIT_KEYWORD.withMapping(method.sourcePosition)
     } else {
       val methodDescriptor = method.descriptor
       newLineSeparated(
@@ -222,7 +223,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
   private fun methodKindAndNameSource(method: Method): Source =
     if (method.descriptor.isConstructor) {
-      KotlinSource.CONSTRUCTOR_KEYWORD
+      KotlinSource.CONSTRUCTOR_KEYWORD.withMapping(method.sourcePosition)
     } else {
       spaceSeparated(
         if (method.descriptor.isKtProperty) KotlinSource.VAL_KEYWORD else KotlinSource.FUN_KEYWORD,
@@ -297,16 +298,18 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
   }
 
   private fun constructorInvocationSource(method: Method): Source =
-    getConstructorInvocation(method)
-      ?.let { constructorInvocation ->
+    getConstructorInvocationStatement(method)
+      ?.let { statement ->
+        val invocation = getConstructorInvocation(statement)
         join(
-          if (constructorInvocation.target.inSameTypeAs(method.descriptor)) {
-            THIS_KEYWORD
-          } else {
-            SUPER_KEYWORD
-          },
-          expressionRenderer.invocationSource(constructorInvocation),
-        )
+            if (invocation.target.inSameTypeAs(method.descriptor)) {
+              THIS_KEYWORD
+            } else {
+              SUPER_KEYWORD
+            },
+            expressionRenderer.invocationSource(invocation),
+          )
+          .withMapping(statement.sourcePosition)
       }
       .orEmpty()
 
@@ -322,7 +325,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           jsInteropAnnotationRenderer.jsInteropAnnotationsSource(field),
           spaceSeparated(
             join(
-              field.descriptor.enumValueDeclarationNameSource,
+              field.descriptor.enumValueDeclarationNameSource.withMapping(field.nameSourcePosition),
               newInstance.arguments
                 .takeIf { it.isNotEmpty() }
                 ?.let { expressionRenderer.invocationSource(newInstance) }
@@ -334,6 +337,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           ),
         )
       }
+      .withMapping(field.descriptor)
 
   /** Returns source with `val companion: Type.Companion`. */
   internal fun companionSupplierInterfaceMethodSource(type: Type): Source =

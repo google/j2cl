@@ -117,7 +117,15 @@ public final class AstUtils {
     if (statement == null) {
       return null;
     }
-    checkArgument(statement.getExpression() instanceof MethodCall);
+    return getConstructorInvocation(statement);
+  }
+
+  /**
+   * Returns the constructor invocation (super call or this call) in a specified constructor
+   * invocation statement.
+   */
+  public static MethodCall getConstructorInvocation(ExpressionStatement statement) {
+    checkArgument(isConstructorInvocationStatement(statement));
     MethodCall methodCall = (MethodCall) statement.getExpression();
     checkArgument(methodCall.getTarget().isConstructor());
     return methodCall;

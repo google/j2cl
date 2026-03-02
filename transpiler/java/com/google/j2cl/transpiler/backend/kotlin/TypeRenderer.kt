@@ -207,7 +207,8 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
     Source.emptyUnless(type.needsCompanionSupplierInterface) {
       spaceSeparated(
         INTERFACE_KEYWORD,
-        source(type.declaration.ktSimpleName + "CompanionSupplier"),
+        source(type.declaration.ktSimpleName + "CompanionSupplier")
+          .withMapping(type.sourcePosition),
         block(memberRenderer(type).companionSupplierInterfaceMethodSource(type)),
       )
     }
