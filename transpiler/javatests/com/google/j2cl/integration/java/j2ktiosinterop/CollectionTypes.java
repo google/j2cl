@@ -15,6 +15,7 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.ObjectiveCName;
 import java.util.AbstractCollection;
 import java.util.AbstractList;
 import java.util.AbstractMap;
@@ -134,11 +135,15 @@ public final class CollectionTypes {
     return new CustomMap<>();
   }
 
+  // TODO b/488987142: Remove annotation after Kotlin plugin bug fix.
+  @ObjectiveCName("acceptIteratorWithJavaUtilIterator:")
   public static <T extends @Nullable Object> void acceptIterator(Iterator<T> iterator) {}
 
   public static <T extends @Nullable Object> void acceptCustomIterator(
       CustomIterator<T> iterator) {}
 
+  // TODO b/488987142: Remove annotation after Kotlin plugin bug fix.
+  @ObjectiveCName("acceptListIteratorWithJavaUtilListIterator:")
   public static <T extends @Nullable Object> void acceptListIterator(ListIterator<T> iterator) {}
 
   public static <T extends @Nullable Object> void acceptCustomListIterator(
@@ -149,6 +154,8 @@ public final class CollectionTypes {
   public static <T extends @Nullable Object> void acceptCustomIterable(
       CustomIterable<T> iterable) {}
 
+  // TODO b/488987142: Remove annotation after Kotlin plugin bug fix.
+  @ObjectiveCName("acceptCollectionWithJavaUtilCollection:")
   public static <T extends @Nullable Object> void acceptCollection(Collection<T> collection) {}
 
   public static <T extends @Nullable Object> void acceptAbstractCollection(
@@ -167,6 +174,8 @@ public final class CollectionTypes {
 
   public static <T extends @Nullable Object> void acceptCustomList(CustomList<T> list) {}
 
+  // TODO b/488987142: Remove annotation after Kotlin plugin bug fix.
+  @ObjectiveCName("acceptSetWithJavaUtilSet:")
   public static <T extends @Nullable Object> void acceptSet(Set<T> set) {}
 
   public static <T extends @Nullable Object> void acceptHashSet(HashSet<T> set) {}

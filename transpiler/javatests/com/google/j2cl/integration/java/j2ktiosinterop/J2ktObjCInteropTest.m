@@ -383,12 +383,12 @@
       [J2ktiosinteropCollectionTypesCompanion.shared getCustomMap];
 
   [J2ktiosinteropCollectionTypesCompanion.shared
-      acceptIteratorWithKotlinCollectionsMutableIterator:iterator];
+      acceptIteratorWithJavaUtilIterator:iterator];
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptCustomIteratorWithJ2ktiosinteropCollectionTypes_CustomIterator:customIterator];
 
   [J2ktiosinteropCollectionTypesCompanion.shared
-      acceptListIteratorWithKotlinCollectionsMutableListIterator:listIterator];
+      acceptListIteratorWithJavaUtilListIterator:listIterator];
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptCustomListIteratorWithJ2ktiosinteropCollectionTypes_CustomListIterator:
           customListIterator];
@@ -398,7 +398,7 @@
       acceptCustomIterableWithJ2ktiosinteropCollectionTypes_CustomIterable:customIterable];
 
   [J2ktiosinteropCollectionTypesCompanion.shared
-      acceptCollectionWithKotlinCollectionsMutableCollection:collection];
+      acceptCollectionWithJavaUtilCollection:collection];
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptAbstractCollectionWithJavaUtilAbstractCollection:abstractCollection];
   [J2ktiosinteropCollectionTypesCompanion.shared
@@ -412,7 +412,7 @@
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptCustomListWithJ2ktiosinteropCollectionTypes_CustomList:customList];
 
-  [J2ktiosinteropCollectionTypesCompanion.shared acceptSetWithKotlinCollectionsMutableSet:set];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptSetWithJavaUtilSet:set];
   [J2ktiosinteropCollectionTypesCompanion.shared acceptHashSetWithKotlinCollectionsHashSet:hashSet];
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptAbstractSetWithJavaUtilAbstractSet:abstractSet];
