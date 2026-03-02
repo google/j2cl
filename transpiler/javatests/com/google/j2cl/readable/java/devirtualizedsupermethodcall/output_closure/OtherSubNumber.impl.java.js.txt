@@ -1,0 +1,68 @@
+goog.module('devirtualizedsupermethodcall.OtherSubNumber$impl');
+
+const Number = goog.require('java.lang.Number$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+
+class OtherSubNumber extends Number {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!OtherSubNumber} */
+ static $create__() {
+  OtherSubNumber.$clinit();
+  let $instance = new OtherSubNumber();
+  $instance.$ctor__devirtualizedsupermethodcall_OtherSubNumber__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__devirtualizedsupermethodcall_OtherSubNumber__void() {
+  this.$ctor__java_lang_Number__void();
+ }
+ /** @override @nodts @return {number} */
+ m_intValue__int() {
+  return 0;
+ }
+ /** @override @nodts @return {!$Long} */
+ m_longValue__long() {
+  return $Long.fromInt(0);
+ }
+ /** @override @nodts @return {number} */
+ m_floatValue__float() {
+  return 0;
+ }
+ /** @override @nodts @return {number} */
+ m_doubleValue__double() {
+  return 0;
+ }
+ /** @override @nodts @return {number} */
+ m_byteValue__byte() {
+  return 0;
+ }
+ /** @override @nodts @return {number} */
+ m_shortValue__short() {
+  return 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  OtherSubNumber.$clinit = () =>{};
+  OtherSubNumber.$loadModules();
+  Number.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OtherSubNumber;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+ }
+}
+$Util.$setClassMetadata(OtherSubNumber, 'devirtualizedsupermethodcall.OtherSubNumber');
+
+exports = OtherSubNumber;
+
+//# sourceMappingURL=OtherSubNumber.js.map

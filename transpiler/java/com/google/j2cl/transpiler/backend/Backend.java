@@ -203,6 +203,7 @@ import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringComparison;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringConcatenation;
+import com.google.j2cl.transpiler.passes.SynthesizeKotlinNumberOverrides;
 import com.google.j2cl.transpiler.passes.ValidateWasmEntryPoints;
 import com.google.j2cl.transpiler.passes.VariableDeclarationHoister;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
@@ -657,6 +658,7 @@ public enum Backend {
           InsertExplicitSuperCalls::new,
           NormalizeLambdaExpressionsJ2kt::new,
           AddJavaLangObjectForwardingMethods::new,
+          SynthesizeKotlinNumberOverrides::new,
           AddDisambiguatingOverloadResolutionCastsJ2kt::new,
           AddVisibilityMethodBridgesJ2kt::new,
           NormalizeSynchronizedConstructs::new,

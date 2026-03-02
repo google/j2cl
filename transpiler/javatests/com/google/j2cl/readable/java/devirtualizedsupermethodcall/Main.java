@@ -37,6 +37,40 @@ class SubNumber extends Number {
   }
 }
 
+class OtherSubNumber extends Number {
+  @Override
+  public int intValue() {
+    return 0;
+  }
+
+  @Override
+  public long longValue() {
+    return (long) 0;
+  }
+
+  @Override
+  public float floatValue() {
+    return 0;
+  }
+
+  @Override
+  public double doubleValue() {
+    return 0;
+  }
+
+  // Relevant to the Kotlin backend: this Number subclass doesn't rely on default
+  // implementations of byteValue and shortValue that are missing in Kotlin.
+  @Override
+  public byte byteValue() {
+    return 0;
+  }
+
+  @Override
+  public short shortValue() {
+    return 0;
+  }
+}
+
 class FooCallsSuperObjectMethod {
   @Override
   public int hashCode() {
@@ -55,5 +89,12 @@ public class Main {
     sn.floatValue();
     sn.intValue();
     sn.shortValue();
+
+    OtherSubNumber osn = new OtherSubNumber();
+    osn.byteValue();
+    osn.doubleValue();
+    osn.floatValue();
+    osn.intValue();
+    osn.shortValue();
   }
 }
