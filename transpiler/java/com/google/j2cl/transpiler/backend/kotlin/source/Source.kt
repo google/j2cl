@@ -62,17 +62,20 @@ private constructor(
    */
   inline fun ifNotEmpty(fn: (Source) -> Source) = if (isEmpty()) this else fn(this)
 
-  /** Returns source with additional source position information. */
-  fun with(sourcePosition: SourcePosition): Source = withEmitter { emitter ->
+  /**
+   * Returns source containing mapping from the given source position to the position of this
+   * source.
+   */
+  fun withMapping(sourcePosition: SourcePosition): Source = withMapping { emitter ->
     emitWithMapping(sourcePosition, emitter)
   }
 
-  /** Returns source with additional source position information for the given member. */
-  fun withSourcePositionOf(memberDescriptor: MemberDescriptor): Source = withEmitter { emitter ->
+  /** Returns source containing mapping from the given member to the position of this source. */
+  fun withMapping(memberDescriptor: MemberDescriptor): Source = withMapping { emitter ->
     emitWithMemberMapping(memberDescriptor, emitter)
   }
 
-  private fun withEmitter(emitter: SourceBuilder.(() -> Unit) -> Unit): Source =
+  private fun withMapping(emitter: SourceBuilder.(() -> Unit) -> Unit): Source =
     nonEmptyAppendFn
       ?.let { appendFn ->
         Source { sourceBuilder -> sourceBuilder.emitter { appendFn(sourceBuilder) } }

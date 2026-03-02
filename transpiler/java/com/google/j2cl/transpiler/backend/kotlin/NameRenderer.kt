@@ -59,7 +59,8 @@ private constructor(
   /** Returns source containing name of the given node. */
   fun hasNameSource(hasName: HasName) = identifierSource(environment.identifier(hasName))
 
-  fun variableNameSource(variable: Variable) = hasNameSource(variable).with(variable.sourcePosition)
+  fun variableNameSource(variable: Variable) =
+    hasNameSource(variable).withMapping(variable.sourcePosition)
 
   /**
    * Returns source for top-level qualified name.

@@ -109,8 +109,8 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
 
   internal fun memberSource(member: JavaMember): Source =
     when (member) {
-      is Method -> methodSource(member).withSourcePositionOf(member.descriptor)
-      is Field -> fieldSource(member).withSourcePositionOf(member.descriptor)
+      is Method -> methodSource(member).withMapping(member.descriptor)
+      is Field -> fieldSource(member).withMapping(member.descriptor)
       is InitializerBlock -> initializerBlockSource(member)
       else -> throw InternalCompilerError("Unhandled ${member::class}")
     }
@@ -170,7 +170,7 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
           ),
         ),
       )
-      .with(field.sourcePosition)
+      .withMapping(field.sourcePosition)
   }
 
   private val jvmFieldsAreIllegal: Boolean
@@ -232,10 +232,10 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     }
 
   private fun methodNameSource(method: Method): Source =
-    memberDescriptorRenderer.nameSource(method.descriptor).with(method.sourcePosition)
+    memberDescriptorRenderer.nameSource(method.descriptor).withMapping(method.sourcePosition)
 
   private fun fieldNameSource(field: Field): Source =
-    memberDescriptorRenderer.nameSource(field.descriptor).with(field.nameSourcePosition)
+    memberDescriptorRenderer.nameSource(field.descriptor).withMapping(field.nameSourcePosition)
 
   fun annotationsSource(method: Method): Source =
     newLineSeparated(
