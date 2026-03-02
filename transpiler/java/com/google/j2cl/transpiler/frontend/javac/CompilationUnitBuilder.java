@@ -399,7 +399,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private DoWhileStatement convertDoWhileLoop(JCDoWhileLoop statement) {
     return DoWhileStatement.newBuilder()
         .setSourcePosition(getSourcePosition(statement))
-        .setConditionExpression(convertConditionRemovingOuterParentheses(statement.getCondition()))
+        .setConditionExpression(convertExpression(statement.getCondition()))
         .setBody(convertStatement(statement.getStatement()))
         .build();
   }
@@ -467,7 +467,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private IfStatement convertIf(JCIf statement) {
     return IfStatement.newBuilder()
         .setSourcePosition(getSourcePosition(statement))
-        .setConditionExpression(convertConditionRemovingOuterParentheses(statement.getCondition()))
+        .setConditionExpression(convertExpression(statement.getCondition()))
         .setThenStatement(convertStatement(statement.getThenStatement()))
         .setElseStatement(convertStatementOrNull(statement.getElseStatement()))
         .build();
@@ -476,7 +476,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private WhileStatement convertWhileLoop(JCWhileLoop statement) {
     return WhileStatement.newBuilder()
         .setSourcePosition(getSourcePosition(statement))
-        .setConditionExpression(convertConditionRemovingOuterParentheses(statement.getCondition()))
+        .setConditionExpression(convertExpression(statement.getCondition()))
         .setBody(convertStatement(statement.getStatement()))
         .build();
   }
@@ -1562,10 +1562,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       case MEMBER_SELECT -> ((JCTree.JCFieldAccess) node).getExpression();
       default -> throw new AssertionError("Unexpected tree kind: " + node.getKind());
     };
-  }
-
-  private Expression convertConditionRemovingOuterParentheses(JCExpression expression) {
-    return convertExpression(((JCParens) expression).getExpression());
   }
 
   private Expression convertParens(JCParens expression) {
