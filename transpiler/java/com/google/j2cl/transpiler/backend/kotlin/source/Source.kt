@@ -73,9 +73,11 @@ private constructor(
   }
 
   private fun withEmitter(emitter: SourceBuilder.(() -> Unit) -> Unit): Source =
-    nonEmptyAppendFn?.let { appendFn ->
-      Source { sourceBuilder -> emitter(sourceBuilder) { appendFn(sourceBuilder) } }
-    } ?: Source(null)
+    nonEmptyAppendFn
+      ?.let { appendFn ->
+        Source { sourceBuilder -> sourceBuilder.emitter { appendFn(sourceBuilder) } }
+      }
+      .orEmpty()
 
   companion object {
     val EMPTY = Source(null)
