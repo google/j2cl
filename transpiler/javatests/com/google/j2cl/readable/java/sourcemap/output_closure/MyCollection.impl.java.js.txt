@@ -1,0 +1,121 @@
+goog.module('sourcemap.MyCollection$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Collection = goog.require('java.util.Collection$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let UnsupportedOperationException = goog.forwardDeclare('java.lang.UnsupportedOperationException$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let Predicate = goog.forwardDeclare('java.util.function.Predicate$impl');
+let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @abstract
+ * @template T
+ * @implements {Collection<T>}
+ */
+class MyCollection extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__sourcemap_MyCollection__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T_1 @return {MyCollection<T_1>} */
+ static m_empty__sourcemap_MyCollection() {
+  MyCollection.$clinit();
+  throw $Exceptions.toJs(UnsupportedOperationException.$create__());
+ }
+ //Default method forwarding stub.
+ /** @override @nodts */
+ m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ arg0) {
+  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {Spliterator<T>} */
+ m_spliterator__java_util_Spliterator() {
+  return /**@type {Spliterator<T>}*/ (Collection.m_spliterator__$default__java_util_Collection__java_util_Spliterator(this));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {Stream<T>} */
+ m_parallelStream__java_util_stream_Stream() {
+  return /**@type {Stream<T>}*/ (Collection.m_parallelStream__$default__java_util_Collection__java_util_stream_Stream(this));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {boolean} */
+ m_removeIf__java_util_function_Predicate__boolean(/** Predicate<?> */ arg0) {
+  return Collection.m_removeIf__$default__java_util_Collection__java_util_function_Predicate__boolean(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {Stream<T>} */
+ m_stream__java_util_stream_Stream() {
+  return /**@type {Stream<T>}*/ (Collection.m_stream__$default__java_util_Collection__java_util_stream_Stream(this));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {Array<*>} */
+ m_toArray__arrayOf_java_lang_Object() {
+  return Collection.m_toArray__$default__java_util_Collection__arrayOf_java_lang_Object(this);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @template T_1 @return {Array<T_1>} */
+ m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object(/** Array<T_1> */ arg0) {
+  return Collection.m_toArray__$default__java_util_Collection__arrayOf_java_lang_Object__arrayOf_java_lang_Object(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @return {!Array<T>} */
+ toArray() {
+  return Collection.m__private_jsToArray____$default__java_util_Collection__arrayOf_java_lang_Object(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  MyCollection.$clinit = () =>{};
+  MyCollection.$loadModules();
+  j_l_Object.$clinit();
+  Collection.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyCollection;
+ }
+ /** @abstract @override @nodts @return {Iterator<T>} */
+ m_iterator__java_util_Iterator() {}
+ /** @abstract @override @return {boolean} */
+ add(/** T */ arg0) {}
+ /** @abstract @override @return {boolean} */
+ addAll(/** Collection<?> */ arg0) {}
+ /** @abstract @override */
+ clear() {}
+ /** @abstract @override @return {boolean} */
+ contains(/** * */ arg0) {}
+ /** @abstract @override @return {boolean} */
+ containsAll(/** Collection<?> */ arg0) {}
+ /** @abstract @override @return {boolean} */
+ isEmpty() {}
+ /** @abstract @override @return {boolean} */
+ remove(/** * */ arg0) {}
+ /** @abstract @override @return {boolean} */
+ removeAll(/** Collection<?> */ arg0) {}
+ /** @abstract @override @return {boolean} */
+ retainAll(/** Collection<?> */ arg0) {}
+ /** @abstract @override @return {number} */
+ size() {}
+ 
+ /** @nodts */
+ static $loadModules() {
+  Iterable = goog.module.get('java.lang.Iterable$impl');
+  UnsupportedOperationException = goog.module.get('java.lang.UnsupportedOperationException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+Collection.$markImplementor(MyCollection);
+$Util.$setClassMetadata(MyCollection, 'sourcemap.MyCollection');
+
+exports = MyCollection;
+
+//# sourceMappingURL=MyCollection.js.map

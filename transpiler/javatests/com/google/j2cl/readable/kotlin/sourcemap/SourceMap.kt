@@ -144,4 +144,16 @@ abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Compar
   private fun testTypeLiteral(): Class<*> {
     return String::class.java
   }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass constructor(i: Int) {
+    val field: Int
+
+    init {
+      field = i
+    }
+  }
 }

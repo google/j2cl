@@ -181,4 +181,20 @@ abstract class SourceMap<T: Number?>: Comparator<T> {
 
   constructor(i: Int)
  }
+
+ abstract class SuperCalls: SourceMap<Int?> {
+  @JsConstructor
+  constructor(i: Int?): super(
+   i!!.toInt(),
+  )
+ }
+
+ inner class InnerClass constructor(i: Int) {
+  @JvmField
+  val field: Int
+
+  init {
+   this.field = i
+  }
+ }
 }

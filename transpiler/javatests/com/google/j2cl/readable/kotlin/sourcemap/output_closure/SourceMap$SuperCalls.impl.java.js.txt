@@ -1,0 +1,41 @@
+goog.module('sourcemap.SourceMap.SuperCalls$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SourceMap = goog.require('sourcemap.SourceMap$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+/**
+ * @abstract
+ * @extends {SourceMap<!Integer>}
+ */
+class SuperCalls extends SourceMap {
+ 
+ constructor(/** number */ i) {
+  SuperCalls.$clinit();
+  super(i);
+  this.$ctor__sourcemap_SourceMap_SuperCalls__int__void(i);
+ }
+ /** @nodts */
+ $ctor__sourcemap_SourceMap_SuperCalls__int__void(/** number */ i) {}
+ /** @nodts */
+ static $clinit() {
+  SuperCalls.$clinit = () =>{};
+  SuperCalls.$loadModules();
+  SourceMap.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SuperCalls;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {number} */
+ m_compare__java_lang_Object__java_lang_Object__int(/** !Integer */ arg0, /** !Integer */ arg1) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SuperCalls, 'sourcemap.SourceMap$SuperCalls');
+
+exports = SuperCalls;
+
+//# sourceMappingURL=SourceMap$SuperCalls.js.map

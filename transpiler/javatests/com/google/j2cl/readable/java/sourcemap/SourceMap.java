@@ -150,4 +150,19 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
   private Class<?> testTypeLiteral() {
     return String.class;
   }
+
+  public abstract static class SuperCalls extends SourceMap<Integer> {
+    @JsConstructor
+    public SuperCalls(Integer i) {
+      super(i);
+    }
+  }
+
+  public final class InnerClass {
+    public final int field;
+
+    public InnerClass(int i) {
+      this.field = i;
+    }
+  }
 }
