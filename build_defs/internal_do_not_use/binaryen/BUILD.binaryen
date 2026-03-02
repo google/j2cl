@@ -69,19 +69,34 @@ cc_library(
         "src/**/*.inc",
         "src/**/*.def",
     ]),
+    deps = ["@fp16//:fp16"],
 )
+
+cc_library(
+    name = "binaryen_fuzzing",
+    srcs = [
+        "src/tools/fuzzing/fuzzing.cpp",
+        "src/tools/fuzzing/heap-types.cpp",
+        "src/tools/fuzzing/parameters.cpp",
+        "src/tools/fuzzing/random.cpp",
+        "src/tools/optimization-options.h",
+        "src/tools/tool-options.h",
+    ],
+    hdrs = [
+        "src/tools/fuzzing.h",
+        "src/tools/fuzzing/heap-types.h",
+        "src/tools/fuzzing/random.h",
+    ],
+    copts = BINARYEN_COPTS,
+    includes = ["src/tools"],
+    deps = [":binaryen_lib"],
+)
+
 
 cc_binary(
     name = "wasm-opt",
     srcs = [
         "src/tools/execution-results.h",
-        "src/tools/fuzzing.h",
-        "src/tools/fuzzing/fuzzing.cpp",
-        "src/tools/fuzzing/heap-types.cpp",
-        "src/tools/fuzzing/heap-types.h",
-        "src/tools/fuzzing/parameters.h",
-        "src/tools/fuzzing/random.cpp",
-        "src/tools/fuzzing/random.h",
         "src/tools/optimization-options.h",
         "src/tools/spec-wrapper.h",
         "src/tools/tool-options.h",
@@ -91,7 +106,10 @@ cc_binary(
     copts = BINARYEN_COPTS,
     linkopts = BINARYEN_LINKOPTS,
     includes = ["src/tools"],
-    deps = [":binaryen_lib"],
+    deps = [
+        ":binaryen_fuzzing",
+        ":binaryen_lib",
+    ],
 )
 
 py_binary(

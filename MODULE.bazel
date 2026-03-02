@@ -45,12 +45,14 @@ http_archive(
 http_archive(
     name = "com_google_binaryen",
     build_file = "@j2cl//build_defs/internal_do_not_use/binaryen:BUILD.binaryen",
+    integrity = "sha256-yn3VuqGnSbWwnrlj3umd7nThy7iLOnKEupkX6dVV7O8=",
     patch_args = ["-p1"],
     patches = ["@j2cl//build_defs/internal_do_not_use/binaryen:generate_intrinsics.patch"],
-    sha256 = "a3b0c6b4884cd147913088817f6e238e700394834a7cbd8610acd6b23bdd4860",
-    strip_prefix = "binaryen-6645f0c05b8e9268f35742bb6b0a67e0a9c40795",
-    url = "https://github.com/WebAssembly/binaryen/archive/6645f0c05b8e9268f35742bb6b0a67e0a9c40795.zip",
+    strip_prefix = "binaryen-7317be60193cde60940e3eb704fdafdfb182ce87",
+    url = "https://github.com/WebAssembly/binaryen/archive/7317be60193cde60940e3eb704fdafdfb182ce87.zip",
 )
+
+bazel_dep(name = "fp16", version = "0.0.0-20210320-0a92994")
 
 # Dependencies needed for development.
 
