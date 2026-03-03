@@ -322,7 +322,7 @@ public class Main {
   }
 
   static record RecordWithOverriddenAccessor(String a) {
-    @SuppressWarnings("MissingOverride") // TODO(b/449764809) Allow @Override
+    @Override
     public String a() {
       return "foo_instead";
     }
