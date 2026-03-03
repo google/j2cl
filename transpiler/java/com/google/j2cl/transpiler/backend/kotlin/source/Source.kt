@@ -146,6 +146,9 @@ private constructor(
 
     fun inParentheses(source: Source) = join(LEFT_PARENTHESIS, source, RIGHT_PARENTHESIS)
 
+    fun inParenthesesIndented(source: Source) =
+      inParentheses(indented(source).ifNotEmpty { it.plus(NEW_LINE) })
+
     fun inAngleBrackets(source: Source) = join(LEFT_ANGLE_BRACKET, source, RIGHT_ANGLE_BRACKET)
 
     fun inSquareBrackets(source: Source) = join(LEFT_SQUARE_BRACKET, source, RIGHT_SQUARE_BRACKET)
@@ -207,6 +210,9 @@ private constructor(
 
     fun emptyLineSeparated(source: Source, vararg sources: Source) =
       emptyLineSeparated(listOf(source, *sources))
+
+    fun inNewLinesPlusCommas(sources: Iterable<Source>) =
+      join(sources.map { inNewLine(it).plus(COMMA) })
 
     fun infix(lhs: Source, operator: String, rhs: Source) = infix(lhs, source(operator), rhs)
 

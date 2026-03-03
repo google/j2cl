@@ -117,21 +117,19 @@ internal data class MemberRenderer(val nameRenderer: NameRenderer, val enclosing
     }
 
   private fun methodSource(method: Method): Source =
-    spaceSeparated(
+    join(
       methodHeaderSource(method),
       when {
         method.isAbstract -> Source.EMPTY
         method.isNative -> Source.EMPTY
         method.isConstructor && method.renderedStatements.isEmpty() -> Source.EMPTY
-        method.descriptor.isKtProperty -> ktPropertyGetterSource(method)
-        else -> bodySource(method)
+        method.descriptor.isKtProperty -> indented(inNewLine(ktPropertyGetterSource(method)))
+        else -> Source.SPACE.plus(bodySource(method))
       },
     )
 
   private fun ktPropertyGetterSource(method: Method): Source =
-    indented(
-      inNewLine(spaceSeparated(join(GET_KEYWORD, inParentheses(Source.EMPTY)), bodySource(method)))
-    )
+    spaceSeparated(join(GET_KEYWORD, inParentheses(Source.EMPTY)), bodySource(method))
 
   private fun bodySource(method: Method): Source =
     block(statementRenderer.statementsSource(method.renderedStatements))

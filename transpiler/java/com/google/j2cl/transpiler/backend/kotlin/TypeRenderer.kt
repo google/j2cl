@@ -33,10 +33,9 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLinesPlusCommas
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParenthesesIfNotEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParenthesesIndented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -112,13 +111,8 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
       type.declaration.isAnnotation ->
         // Render non-static annotation methods as constructor parameters.
         memberRenderer(type).run {
-          inParenthesesIfNotEmpty(
-            indented(
-              commaSeparated(
-                type.methods.filter { !it.isStatic }.map { inNewLine(memberSource(it)) }
-              )
-            )
-          )
+          inNewLinesPlusCommas(type.methods.filter { !it.isStatic }.map { memberSource(it) })
+            .ifNotEmpty { inParenthesesIndented(it) }
         }
       ktPrimaryConstructor != null ->
         memberRenderer(type).run {
