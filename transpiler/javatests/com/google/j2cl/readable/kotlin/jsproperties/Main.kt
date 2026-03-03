@@ -96,14 +96,6 @@ class Buzz(@JsProperty val f: Int) {
     @JsProperty(name = "mismatchedName") set
 }
 
-/** Tests for native JsProperty. */
-class NativeFoo {
-  @JsProperty(name = "hasOwnProperty") external fun getA(): Any
-
-  val b: Any
-    @JsProperty(name = "hasOwnProperty") external get
-}
-
 @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL) external fun getNativeB(): Double
 
 val nativeProperty: Double
@@ -138,8 +130,8 @@ class HasFieldAndGetterSetterFuns : ValueHolder() {
 
 class Main {
   fun testNativeJsProperty() {
-    NativeFoo().getA()
-    NativeFoo().b
+    FooWithNativeProperty().getA()
+    FooWithNativeProperty().b
     getNativeB()
     nativeProperty
   }

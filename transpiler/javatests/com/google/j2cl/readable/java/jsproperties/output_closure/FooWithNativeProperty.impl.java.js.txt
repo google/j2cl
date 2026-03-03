@@ -1,0 +1,42 @@
+goog.module('jsproperties.FooWithNativeProperty$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class FooWithNativeProperty extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!FooWithNativeProperty} */
+ static $create__() {
+  FooWithNativeProperty.$clinit();
+  let $instance = new FooWithNativeProperty();
+  $instance.$ctor__jsproperties_FooWithNativeProperty__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_FooWithNativeProperty__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ // /** @return {*} */
+ // native get hasOwnProperty() 
+ /** @nodts */
+ static $clinit() {
+  FooWithNativeProperty.$clinit = () =>{};
+  FooWithNativeProperty.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FooWithNativeProperty;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(FooWithNativeProperty, 'jsproperties.FooWithNativeProperty');
+
+exports = FooWithNativeProperty;
+
+//# sourceMappingURL=FooWithNativeProperty.js.map

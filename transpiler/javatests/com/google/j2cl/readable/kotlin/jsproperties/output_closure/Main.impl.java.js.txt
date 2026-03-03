@@ -5,10 +5,10 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare('jsproperties.Bar$impl');
 let ClassWithJvmField = goog.forwardDeclare('jsproperties.ClassWithJvmField$impl');
+let FooWithNativeProperty = goog.forwardDeclare('jsproperties.FooWithNativeProperty$impl');
 let HasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.HasFieldAndGetterSetterFuns$impl');
 let JavaFoo = goog.forwardDeclare('jsproperties.JavaFoo$impl');
 let MainKt = goog.forwardDeclare('jsproperties.MainKt$impl');
-let NativeFoo = goog.forwardDeclare('jsproperties.NativeFoo$impl');
 let OtherHasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');
 
 /**
@@ -32,8 +32,8 @@ class Main extends j_l_Object {
  }
  /** @final @nodts */
  m_testNativeJsProperty__void() {
-  NativeFoo.$create__().hasOwnProperty;
-  NativeFoo.$create__().hasOwnProperty;
+  FooWithNativeProperty.$create__().hasOwnProperty;
+  FooWithNativeProperty.$create__().hasOwnProperty;
   Math.PI;
   Math.E;
  }
@@ -87,10 +87,10 @@ class Main extends j_l_Object {
  static $loadModules() {
   Bar = goog.module.get('jsproperties.Bar$impl');
   ClassWithJvmField = goog.module.get('jsproperties.ClassWithJvmField$impl');
+  FooWithNativeProperty = goog.module.get('jsproperties.FooWithNativeProperty$impl');
   HasFieldAndGetterSetterFuns = goog.module.get('jsproperties.HasFieldAndGetterSetterFuns$impl');
   JavaFoo = goog.module.get('jsproperties.JavaFoo$impl');
   MainKt = goog.module.get('jsproperties.MainKt$impl');
-  NativeFoo = goog.module.get('jsproperties.NativeFoo$impl');
   OtherHasFieldAndGetterSetterFuns = goog.module.get('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');
  }
 }

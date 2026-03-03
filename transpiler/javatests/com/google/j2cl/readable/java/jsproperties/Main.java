@@ -15,7 +15,6 @@
  */
 package jsproperties;
 
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
 /** Tests for non native static JsProperty. */
@@ -70,15 +69,6 @@ class Bar {
   }
 }
 
-/** Tests for native JsProperty. */
-class NativeFoo {
-  @JsProperty(name = "hasOwnProperty")
-  public native Object getA();
-
-  @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
-  public static native double getB();
-}
-
 interface InterfaceWithDefaultJsProperties {
   @JsProperty
   default int getM() {
@@ -93,8 +83,8 @@ class ImplementsInterfaceWithDefaultJsProperties implements InterfaceWithDefault
 
 public class Main {
   public void testNativeJsProperty() {
-    new NativeFoo().getA();
-    NativeFoo.getB();
+    new FooWithNativeProperty().getA();
+    FooWithNativeProperty.getB();
   }
 
   public void testStaticJsProperty() {
