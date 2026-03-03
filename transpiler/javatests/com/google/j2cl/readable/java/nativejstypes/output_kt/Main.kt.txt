@@ -20,6 +20,8 @@ package nativejstypes
 
 import javaemul.lang.*
 import java.lang.Class
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -100,6 +102,18 @@ open class Main {
   }
   
   @JvmStatic
+  fun testNativeTypeEquality() {
+   val foo1: Foo? = null
+   val foo2: Foo? = null
+   val a1: Boolean = foo1 === foo2
+   val a2: Boolean = foo1 == null
+   val gbigint1: GBigInt? = null
+   val gbigint2: GBigInt? = null
+   val b1: Boolean = gbigint1 === gbigint2
+   val b2: Boolean = gbigint1 == null
+  }
+  
+  @JvmStatic
   fun testTopLevel() {
    TopLevel.x = 2
    val nested: Nested = Nested()
@@ -109,3 +123,6 @@ open class Main {
   }
  }
 }
+
+@JsType(name = "gbigint", namespace = JsPackage.GLOBAL, isNative = true)
+class GBigInt internal constructor()

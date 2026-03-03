@@ -93,7 +93,6 @@ public final class NullEqualityOptimizationTest {
 
   @Test
   public void gbigintComparisonOptimizes() {
-    // TODO(b/485937103): gbigint is a hidden primitive and not correctly handled at the moment.
-    assertFunctionMatches(getCompareGBigInt(), "return !value;");
+    assertFunctionMatches(getCompareGBigInt(), "return value==null;");
   }
 }

@@ -16,6 +16,8 @@
 package nativejstypes;
 
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static int testNativeJsTypeWithNamespace() {
@@ -70,6 +72,18 @@ public class Main {
     boolean unusedEq = bar.equals(new Object());
   }
 
+  public static void testNativeTypeEquality() {
+    Foo foo1 = null;
+    Foo foo2 = null;
+    var a1 = foo1 == foo2;
+    var a2 = foo1 == null;
+
+    GBigInt gbigint1 = null;
+    GBigInt gbigint2 = null;
+    var b1 = gbigint1 == gbigint2;
+    var b2 = gbigint1 == null;
+  }
+
   public static void testTopLevel() {
     TopLevel.x = 2;
 
@@ -80,3 +94,6 @@ public class Main {
     topLevelNestedReference.x = 4;
   }
 }
+
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "gbigint")
+final class GBigInt {}

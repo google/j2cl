@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.acme.MyFoo');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let Bar = goog.forwardDeclare('nativejstypes.Bar');
 let $synthetic_nativejstypes_Bar = goog.forwardDeclare('nativejstypes.Bar');
 let TopLevel = goog.forwardDeclare('toplevel');
@@ -87,6 +88,18 @@ class Main extends j_l_Object {
   let unusedEq = $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(bar, j_l_Object.$create__());
  }
  /** @nodts */
+ static m_testNativeTypeEquality__void() {
+  Main.$clinit();
+  let /** Foo */ foo1 = null;
+  let /** Foo */ foo2 = null;
+  let a1 = $Equality.$same(foo1, foo2);
+  let a2 = $Equality.$same(foo1, null);
+  let /** gbigint */ gbigint1 = null;
+  let /** gbigint */ gbigint2 = null;
+  let b1 = $Equality.$same(/**@type {?}*/ (gbigint1), /**@type {?}*/ (gbigint2));
+  let b2 = $Equality.$same(/**@type {?}*/ (gbigint1), null);
+ }
+ /** @nodts */
  static m_testTopLevel__void() {
   Main.$clinit();
   TopLevel.x = 2;
@@ -110,6 +123,7 @@ class Main extends j_l_Object {
  static $loadModules() {
   Foo = goog.module.get('com.acme.MyFoo');
   Class = goog.module.get('java.lang.Class$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
   Bar = goog.module.get('nativejstypes.Bar');
   $synthetic_nativejstypes_Bar = goog.module.get('nativejstypes.Bar');
   TopLevel = goog.module.get('toplevel');

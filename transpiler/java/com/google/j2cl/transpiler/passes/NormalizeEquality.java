@@ -19,7 +19,9 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
@@ -54,7 +56,9 @@ public class NormalizeEquality extends NormalizationPass {
             // null and undefined as equivalent.
             MethodCall sameCall =
                 RuntimeMethods.createEqualityMethodCall(
-                    "$same", binaryExpression.getLeftOperand(), binaryExpression.getRightOperand());
+                    "$same",
+                    hideNonComformingTypes(binaryExpression.getLeftOperand()),
+                    hideNonComformingTypes(binaryExpression.getRightOperand()));
             if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
               return sameCall.prefixNot();
             }
@@ -84,5 +88,17 @@ public class NormalizeEquality extends NormalizationPass {
             return switchStatement;
           }
         });
+  }
+
+  // TODO(485937103): Remove when such types are handled properly in J2clEqualitySameRewriter.
+  private static Expression hideNonComformingTypes(Expression expression) {
+    if (expression.getTypeDescriptor() instanceof DeclaredTypeDescriptor declaredTypeDescriptor
+        && declaredTypeDescriptor.getQualifiedJsName().equals("gbigint")) {
+      return JsDocCastExpression.newBuilder()
+          .setExpression(expression)
+          .setCastTypeDescriptor(TypeDescriptors.getUnknownType())
+          .build();
+    }
+    return expression;
   }
 }
