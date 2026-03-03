@@ -19,7 +19,6 @@ import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Streams;
 import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
@@ -33,6 +32,9 @@ import javax.annotation.Nullable;
  * (instead of the original entry points). The forwarding methods perform necessary conversions
  * between {@code java.lang.String} and Wasm strings.
  */
+// TODO(b/482402363) This helper class can be removed after updating test infra and moving the
+// traversal logic into BazelJ2wasmExportsGenerator. Currently, this common logic is shared between
+// the external pipeline and the test-specific one so that the test is valid.
 public class WasmEntryPointBridgesCreator {
   private final ImmutableList<EntryPointPattern> entryPointPatterns;
   private final Set<EntryPointPattern> unmatchedEntryPointPatterns;
@@ -91,51 +93,8 @@ public class WasmEntryPointBridgesCreator {
       return null;
     }
 
-    return generateBridge(
+    return WasmExportBridgesUtils.generateBridge(
         methodDescriptor, sourcePosition, MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_ENTRY_POINT);
-  }
-
-  /**
-   * Generates a bridge method, intended to be exported, that defers to the specified method and
-   * does any necessary JS <-> Wasm argument and return value conversions.
-   */
-  public static Method generateBridge(
-      MethodDescriptor methodDescriptor,
-      SourcePosition sourcePosition,
-      MethodDescriptor.MethodOrigin origin) {
-    MethodDescriptor bridgeMethodDescriptor =
-        createExportBridgeDescriptor(methodDescriptor, origin);
-    List<Variable> parameters =
-        AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterTypeDescriptors());
-
-    ImmutableList<Expression> arguments =
-        Streams.zip(
-                parameters.stream(),
-                methodDescriptor.getParameterTypeDescriptors().stream(),
-                WasmEntryPointBridgesCreator::convertArgumentIfNeeded)
-            .collect(toImmutableList());
-
-    TypeDescriptor returnType = methodDescriptor.getReturnTypeDescriptor();
-
-    return Method.newBuilder()
-        .setMethodDescriptor(bridgeMethodDescriptor)
-        .setParameters(parameters)
-        .addStatements(
-            convertReturnIfNeeded(
-                AstUtils.createForwardingStatement(
-                    sourcePosition,
-                    /* qualifier= */ methodDescriptor.isStatic()
-                        ? null
-                        : new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()),
-                    methodDescriptor,
-                    /* isStaticDispatch= */ methodDescriptor.isStatic(),
-                    arguments,
-                    returnType),
-                returnType))
-        .setJsDocDescription(
-            origin.isWasmEntryPoint() ? "Wasm entry point forwarding method." : null)
-        .setSourcePosition(sourcePosition)
-        .build();
   }
 
   private boolean isEntryPoint(MethodDescriptor methodDescriptor) {
@@ -164,52 +123,5 @@ public class WasmEntryPointBridgesCreator {
     }
 
     return false;
-  }
-
-  /** Creates the argument expression, containing any necessary conversions. */
-  private static Expression convertArgumentIfNeeded(
-      Variable parameter, TypeDescriptor targetArgumentDescriptor) {
-    Expression reference = parameter.createReference();
-    if (TypeDescriptors.isJavaLangString(targetArgumentDescriptor)) {
-      return RuntimeMethods.createStringFromJsStringMethodCall(reference);
-    }
-    return reference;
-  }
-
-  private static Statement convertReturnIfNeeded(
-      Statement statement, TypeDescriptor targetReturnTypeDescriptor) {
-    if (TypeDescriptors.isJavaLangString(targetReturnTypeDescriptor)) {
-      ReturnStatement returnStatement = (ReturnStatement) statement;
-      return ReturnStatement.Builder.from(returnStatement)
-          .setExpression(
-              RuntimeMethods.createJsStringFromStringMethodCall(returnStatement.getExpression()))
-          .build();
-    }
-    return statement;
-  }
-
-  private static MethodDescriptor createExportBridgeDescriptor(
-      MethodDescriptor descriptor, MethodDescriptor.MethodOrigin origin) {
-    MethodDescriptor.Builder builder =
-        MethodDescriptor.Builder.from(descriptor)
-            .setOrigin(origin)
-            .setReturnTypeDescriptor(
-                replaceStringWithNativeString(descriptor.getReturnTypeDescriptor()))
-            .updateParameterTypeDescriptors(
-                descriptor.getParameterTypeDescriptors().stream()
-                    .map(WasmEntryPointBridgesCreator::replaceStringWithNativeString)
-                    .collect(toImmutableList()));
-    if (!origin.isWasmEntryPoint()) {
-      builder.setOriginalJsInfo(
-          descriptor.getJsInfo().toBuilder().setJsName(descriptor.getSimpleJsName()).build());
-    }
-    return builder.build();
-  }
-
-  private static TypeDescriptor replaceStringWithNativeString(TypeDescriptor typeDescriptor) {
-    if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
-      return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
-    }
-    return typeDescriptor;
   }
 }
