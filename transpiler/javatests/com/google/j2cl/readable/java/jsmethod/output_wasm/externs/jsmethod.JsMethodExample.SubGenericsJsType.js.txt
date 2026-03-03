@@ -2,4 +2,7 @@ goog.module('jsmethod.JsMethodExample.SubGenericsJsType');
 
 const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
 
-exports = /** @type {typeof jsmethod_JsMethodExample_SubGenericsJsType} */ constructorProxy('jsmethod.JsMethodExample.SubGenericsJsType');
+/** @const {typeof jsmethod_JsMethodExample_SubGenericsJsType} */
+const SubGenericsJsType = constructorProxy('jsmethod.JsMethodExample.SubGenericsJsType');
+
+exports = SubGenericsJsType;

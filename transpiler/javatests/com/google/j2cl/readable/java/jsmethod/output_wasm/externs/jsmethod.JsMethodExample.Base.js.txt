@@ -2,4 +2,7 @@ goog.module('jsmethod.JsMethodExample.Base');
 
 const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
 
-exports = /** @type {typeof jsmethod_JsMethodExample_Base} */ constructorProxy('jsmethod.JsMethodExample.Base');
+/** @const {typeof jsmethod_JsMethodExample_Base} */
+const Base = constructorProxy('jsmethod.JsMethodExample.Base');
+
+exports = Base;

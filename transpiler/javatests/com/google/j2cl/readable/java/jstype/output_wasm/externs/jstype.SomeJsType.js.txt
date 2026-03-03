@@ -2,4 +2,7 @@ goog.module('jstype.SomeJsType');
 
 const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
 
-exports = /** @type {typeof jstype_SomeJsType} */ constructorProxy('jstype.SomeJsType');
+/** @const {typeof jstype_SomeJsType} */
+const SomeJsType = constructorProxy('jstype.SomeJsType');
+
+exports = SomeJsType;

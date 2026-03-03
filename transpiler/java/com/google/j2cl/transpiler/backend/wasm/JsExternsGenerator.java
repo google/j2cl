@@ -121,9 +121,9 @@ final class JsExternsGenerator {
     sb.appendln(" * @constructor");
     sb.appendln(" */");
     sb.append(
-        String.format("%s = function", closureEnvironment.aliasForType(type.getDeclaration())));
+        String.format("var %s = function", closureEnvironment.aliasForType(type.getDeclaration())));
     closureEnvironment.emitParameters(sb, constructor);
-    sb.appendln(" {};");
+    sb.appendln("{};");
   }
 
   private void appendMethods(SourceBuilder sb, Type type) {
@@ -148,7 +148,7 @@ final class JsExternsGenerator {
               "%s.%s = function",
               getMemberOwner(methodDescriptor), methodDescriptor.getSimpleJsName()));
       closureEnvironment.emitParameters(sb, method);
-      sb.appendln(" {};");
+      sb.appendln("{};");
     }
   }
 
@@ -183,10 +183,13 @@ final class JsExternsGenerator {
     sb.appendln("const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');");
     sb.appendln("");
     sb.appendln(
+        "/** @const {typeof " + closureEnvironment.aliasForType(type.getDeclaration()) + "} */");
+    sb.appendln(
         String.format(
-            "exports = /** @type {typeof %s} */ constructorProxy('%s');",
-            closureEnvironment.aliasForType(type.getDeclaration()),
-            type.getDeclaration().getQualifiedJsName()));
+            "const %s = constructorProxy('%s');",
+            type.getDeclaration().getSimpleJsName(), type.getDeclaration().getQualifiedJsName()));
+    sb.appendln("");
+    sb.appendln(String.format("exports = %s;", type.getDeclaration().getSimpleJsName()));
 
     // Output to externs/my.package.MyClass.js
     output.write(
