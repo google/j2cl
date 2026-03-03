@@ -762,6 +762,9 @@ public enum Backend {
   }
 
   public Frontend getDefaultFrontend() {
-    return Frontend.JAVAC;
+    return switch (this) {
+      case KOTLIN -> Frontend.JDT;
+      default -> Frontend.JAVAC;
+    };
   }
 }

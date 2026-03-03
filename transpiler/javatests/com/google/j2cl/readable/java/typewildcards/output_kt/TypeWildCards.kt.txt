@@ -135,7 +135,7 @@ open class TypeWildCards {
   
   @JvmStatic
   fun testWildcardInRecursiveVariableDeclaration() {
-   val o: RecursiveType<*> = RecursiveType(null)
+   val o: RecursiveType<*> = RecursiveType(null) as RecursiveType<*>
   }
   
   @JvmStatic

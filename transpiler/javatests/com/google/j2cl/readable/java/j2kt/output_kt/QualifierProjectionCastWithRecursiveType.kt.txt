@@ -27,9 +27,7 @@ open class QualifierProjectionCastWithRecursiveType {
  companion object {
   @JvmStatic
   fun test(foo: Foo<*>) {
-   (foo as Foo<Foo<*>>).name(
-    null as Foo<*>?,
-   )
+   (foo as Foo<Foo<*>>).name(null)
   }
  }
  
