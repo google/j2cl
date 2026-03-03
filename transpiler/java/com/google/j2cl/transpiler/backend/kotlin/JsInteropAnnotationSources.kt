@@ -36,14 +36,14 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 /**
- * Js interop annotation renderer.
+ * Js interop annotation sources.
  *
- * @property nameRenderer underlying name renderer
+ * @property nameSources underlying name sources
  */
-internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) {
+internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
 
   private val environment: Environment
-    get() = nameRenderer.environment
+    get() = nameSources.environment
 
   fun jsInteropAnnotationsSource(typeDeclaration: TypeDeclaration): Source =
     jsFunctionAnnotationSource(typeDeclaration)
@@ -60,7 +60,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
 
   fun jsInteropAnnotationsSource(parameterDescriptor: ParameterDescriptor): Source =
     emptyUnless(parameterDescriptor.isJsOptional) {
-      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOptional"))
+      annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsOptional"))
     }
 
   private fun jsMemberAnnotationSource(method: Method): Source =
@@ -77,17 +77,17 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
 
   private fun jsIgnoreAnnotationSource(memberDescriptor: MemberDescriptor): Source =
     emptyUnless(memberDescriptor.hasJsIgnoreAnnotation) {
-      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsIgnore"))
+      annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsIgnore"))
     }
 
   private fun jsOverlayAnnotationSource(memberDescriptor: MemberDescriptor): Source =
     emptyUnless(memberDescriptor.isJsOverlay) {
-      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsOverlay"))
+      annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsOverlay"))
     }
 
   private fun jsConstructorAnnotationSource(methodDescriptor: MethodDescriptor): Source =
     emptyUnless(methodDescriptor.hasJsConstructorAnnotation) {
-      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsConstructor"))
+      annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsConstructor"))
     }
 
   private fun jsMethodAnnotationSource(method: Method): Source =
@@ -97,17 +97,17 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
 
   private fun jsAsyncAnnotationSource(method: Method): Source =
     emptyUnless(method.descriptor.isJsAsync) {
-      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsAsync"))
+      annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsAsync"))
     }
 
   /**
-   * Render the `annotationQualifiedName` annotation if the member had an annotation in the source
+   * Include the `annotationQualifiedName` annotation if the member had an annotation in the source
    * or if it requires one to restore its jsname.
    */
   private fun jsInteropAnnotationSource(member: Member, annotationQualifiedName: String): Source =
     emptyUnless(hasJsInteropAnnotation(member)) {
       annotation(
-        nameRenderer.topLevelQualifiedNameSource(annotationQualifiedName),
+        nameSources.topLevelQualifiedNameSource(annotationQualifiedName),
         nameParameterSource(jsAnnotationNameParameterValue(member)),
         namespaceParameterSource(member.descriptor.originalJsInfo.jsNamespace),
       )
@@ -128,13 +128,13 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
 
   private fun jsFunctionAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     emptyUnless(typeDeclaration.isJsFunctionInterface) {
-      annotation(nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsFunction"))
+      annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsFunction"))
     }
 
   private fun jsEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     emptyUnless(typeDeclaration.isJsEnum) {
       annotation(
-        nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsEnum"),
+        nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsEnum"),
         nameParameterSource(typeDeclaration),
         namespaceParameterSource(typeDeclaration),
         isNativeParameterSource(typeDeclaration.isNative),
@@ -149,7 +149,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
   private fun jsTypeAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     emptyUnless(typeDeclaration.isJsType) {
       annotation(
-        nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsType"),
+        nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsType"),
         nameParameterSource(typeDeclaration),
         namespaceParameterSource(typeDeclaration),
         isNativeParameterSource(typeDeclaration.isNative),
@@ -173,7 +173,7 @@ internal data class JsInteropAnnotationRenderer(val nameRenderer: NameRenderer) 
 
   private fun globalNamespaceSource(): Source =
     dotSeparated(
-      nameRenderer.topLevelQualifiedNameSource("jsinterop.annotations.JsPackage"),
+      nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsPackage"),
       identifierSource("GLOBAL"),
     )
 

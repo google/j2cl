@@ -30,21 +30,21 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 /**
- * ObjC annotation renderer.
+ * ObjC name sources.
  *
- * @property nameRenderer underlying name renderer
+ * @property nameSources underlying name sources
  */
-internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
+internal class ObjCNameSources(val nameSources: NameSources) {
 
   private val environment: Environment
-    get() = nameRenderer.environment
+    get() = nameSources.environment
 
   private val isJ2ObjCInteropEnabled: Boolean
-    get() = nameRenderer.environment.isJ2ObjCInteropEnabled
+    get() = nameSources.environment.isJ2ObjCInteropEnabled
 
   fun objectiveCNameAnnotationSource(name: String): Source =
     annotation(
-      nameRenderer.topLevelQualifiedNameSource("com.google.j2objc.annotations.ObjectiveCName"),
+      nameSources.topLevelQualifiedNameSource("com.google.j2objc.annotations.ObjectiveCName"),
       literal(name),
     )
 
@@ -59,7 +59,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   fun swiftNameAnnotationSource(name: String): Source =
     annotation(
-      nameRenderer.topLevelQualifiedNameSource("com.google.j2objc.annotations.SwiftName"),
+      nameSources.topLevelQualifiedNameSource("com.google.j2objc.annotations.SwiftName"),
       Source.emptyIf(name.isEmpty()) { literal(name) },
     )
 
@@ -70,14 +70,14 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
 
   fun hiddenFromObjCAnnotationSource(): Source =
     annotation(
-      nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
+      nameSources.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
         topLevelQualifiedNameSource("kotlin.native.HiddenFromObjC")
       }
     )
 
   fun objCEnumAnnotationSource(name: String, swiftName: String? = null): Source =
     annotation(
-      nameRenderer.topLevelQualifiedNameSource("javaemul.lang.ObjCEnum"),
+      nameSources.topLevelQualifiedNameSource("javaemul.lang.ObjCEnum"),
       literal(name),
       swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
     )
@@ -88,7 +88,7 @@ internal class ObjCNameRenderer(val nameRenderer: NameRenderer) {
     exact: Boolean? = null,
   ): Source =
     annotation(
-      nameRenderer.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCName") {
+      nameSources.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCName") {
         topLevelQualifiedNameSource("kotlin.native.ObjCName")
       },
       literal(name),

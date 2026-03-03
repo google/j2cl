@@ -51,55 +51,55 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  * @param typeDescriptor the type descriptor to get the source for
  * @param asSuperType whether to use bridge name for the super-type
  * @param projectRawToWildcards whether to project raw types to use wildcards
- * @param rendersCaptures whether to render captures
+ * @param includesCaptures whether to include captures
  */
-internal fun NameRenderer.typeDescriptorSource(
+internal fun NameSources.typeDescriptorSource(
   typeDescriptor: TypeDescriptor,
   asSuperType: Boolean = false,
   projectRawToWildcards: Boolean = false,
-  rendersCaptures: Boolean = false,
+  includesCaptures: Boolean = false,
 ): Source =
-  TypeDescriptorRenderer(
+  TypeDescriptorSources(
       this,
       asSuperType = asSuperType,
       projectRawToWildcards = projectRawToWildcards,
-      rendersCaptures = rendersCaptures,
+      includesCaptures = includesCaptures,
     )
     .source(typeDescriptor)
 
 /** Returns source for the given list of type bindings. */
-internal fun NameRenderer.typeBindingsSource(
+internal fun NameSources.typeBindingsSource(
   typeBindings: List<TypeBinding>,
-  rendersCaptures: Boolean = false,
+  includesCaptures: Boolean = false,
 ): Source =
-  TypeDescriptorRenderer(this, rendersCaptures = rendersCaptures).typeBindingsSource(typeBindings)
+  TypeDescriptorSources(this, includesCaptures = includesCaptures).typeBindingsSource(typeBindings)
 
 /**
- * Type descriptor renderer, contains options for rendering type descriptor sources.
+ * Type descriptor sources, contains options for generating source for type descriptor.
  *
- * @property nameRenderer the underlying renderer
+ * @property nameSources the underlying name sources
  * @property seenTypeVariables a set of seen type variables used to detect recursion
- * @property asSuperType whether to render a super-type, using bridge name if present
+ * @property asSuperType whether to generate source for a super-type, using bridge name if present
  * @property projectRawToWildcards whether to project raw types to wildcards, or bounds
- * @property rendersCaptures whether to render captures
+ * @property includesCaptures whether to include captures
  */
-internal data class TypeDescriptorRenderer(
-  private val nameRenderer: NameRenderer,
+internal data class TypeDescriptorSources(
+  private val nameSources: NameSources,
   private val seenTypeVariables: Set<TypeVariable> = setOf(),
   // TODO(b/246842682): Remove when bridge types are materialized as TypeDescriptors
   private val asSuperType: Boolean = false,
   private val projectRawToWildcards: Boolean = false,
-  private val rendersCaptures: Boolean = false,
+  private val includesCaptures: Boolean = false,
 ) {
   private val environment: Environment
-    get() = nameRenderer.environment
+    get() = nameSources.environment
 
   /** Returns source for the given type descriptor. */
   fun source(typeDescriptor: TypeDescriptor): Source =
     when (typeDescriptor) {
       is ArrayTypeDescriptor -> arraySource(typeDescriptor)
       is DeclaredTypeDescriptor -> declaredSource(typeDescriptor)
-      is PrimitiveTypeDescriptor -> nameRenderer.qualifiedNameSource(typeDescriptor)
+      is PrimitiveTypeDescriptor -> nameSources.qualifiedNameSource(typeDescriptor)
       is TypeVariable -> variableSource(typeDescriptor)
       is IntersectionTypeDescriptor -> intersectionSource(typeDescriptor)
       is UnionTypeDescriptor ->
@@ -113,13 +113,13 @@ internal data class TypeDescriptorRenderer(
   /** Returns source for the given type bindings. */
   fun source(typeBinding: TypeBinding): Source = child.source(typeBinding.typeArgumentDescriptor)
 
-  /** Renderer for child type descriptors, including: arguments, bounds, intersections, etc... */
+  /** Child type descriptors sources, including: arguments, bounds, intersections, etc... */
   private val child
     get() = copy(asSuperType = false)
 
   private fun arraySource(arrayTypeDescriptor: ArrayTypeDescriptor): Source =
     join(
-      nameRenderer.qualifiedNameSource(arrayTypeDescriptor),
+      nameSources.qualifiedNameSource(arrayTypeDescriptor),
       arrayTypeDescriptor.componentTypeDescriptor.let {
         Source.emptyIf(it.isPrimitive) { inAngleBrackets(child.source(it)) }
       },
@@ -132,7 +132,7 @@ internal data class TypeDescriptorRenderer(
     val isStatic = !typeDeclaration.isCapturingEnclosingInstance
     return join(
       if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic) {
-        nameRenderer.qualifiedNameSource(declaredTypeDescriptor, asSuperType = asSuperType)
+        nameSources.qualifiedNameSource(declaredTypeDescriptor, asSuperType = asSuperType)
       } else {
         dotSeparated(
           child.declaredSource(enclosingTypeDescriptor.toNonNullable()),
@@ -159,7 +159,7 @@ internal data class TypeDescriptorRenderer(
         if (typeVariable.isWildcardOrCapture) {
           spaceSeparated(
             Source.emptyUnless(typeVariable.isCapture) {
-              captureSource(typeVariable).let { if (rendersCaptures) it else blockComment(it) }
+              captureSource(typeVariable).let { if (includesCaptures) it else blockComment(it) }
             },
             typeVariable.lowerBoundTypeDescriptor.let { lowerBound ->
               if (lowerBound != null) {
@@ -177,14 +177,14 @@ internal data class TypeDescriptorRenderer(
           )
         } else {
           join(
-              nameRenderer.hasNameSource(typeVariable.toDeclaration()),
+              nameSources.hasNameSource(typeVariable.toDeclaration()),
               nullableSuffixSource(typeVariable),
             )
             .letIf(typeVariable.hasAmpersandAny) {
               infix(
                 it,
                 INTERSECTION_OPERATOR,
-                nameRenderer.topLevelQualifiedNameSource("kotlin.Any"),
+                nameSources.topLevelQualifiedNameSource("kotlin.Any"),
               )
             }
         }
@@ -197,7 +197,7 @@ internal data class TypeDescriptorRenderer(
   private fun nullableSuffixSource(typeDescriptor: TypeDescriptor): Source =
     Source.emptyUnless(typeDescriptor.isNullable) { NULLABLE_OPERATOR }
 
-  private fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
+  private fun withSeen(typeVariable: TypeVariable): TypeDescriptorSources =
     copy(seenTypeVariables = seenTypeVariables + typeVariable.toDeclaration())
 
   private fun didSee(typeVariable: TypeVariable): Boolean =

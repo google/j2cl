@@ -35,11 +35,11 @@ internal val Type.declaredSuperTypeDescriptors: List<TypeDescriptor>
 internal val Type.hasConstructors: Boolean
   get() = constructors.isNotEmpty()
 
-/** Returns the constructor to render as primary in Kotlin. */
+/** Returns the constructor to translate as primary in Kotlin. */
 internal val Type.ktPrimaryConstructor: Method?
   get() =
     constructors.singleOrNull()?.takeIf {
-      // Render primary constructors for inner classes only, where it's necessary.
+      // Include primary constructors for inner classes only, where it's necessary for visibility.
       // Don't do it all classes, because Kotlin does not allow using `return` inside `init {}`.
       // It's also necessary because of: https://youtrack.jetbrains.com/issue/KT-65299
       // TODO(b/322331738): Remove special handling of primary constructors when the bug is fixed.
@@ -54,7 +54,7 @@ internal val Type.ktMembers: List<KtMember>
       .filter { !it.isStatic }
       .filter { !it.descriptor.enclosingTypeDescriptor.isAnnotation }
       .filter { !declaration.isAnonymous || !it.isConstructor }
-      .filter { it !is Method || it != ktPrimaryConstructor || it.renderedStatements.isNotEmpty() }
+      .filter { it !is Method || it != ktPrimaryConstructor || it.includedStatements.isNotEmpty() }
       .runIfNotNull(ktPrimaryConstructor) { moveAfterFields(it) }
       .map { KtMember.WithJavaMember(it) }
       .plus(toCompanionObjectOrNull()?.let { KtMember.WithCompanionObject(it) })
@@ -76,7 +76,7 @@ private fun Sequence<Member>.moveAfterFields(member: Member): Sequence<Member> =
 
 // TODO(b/310160330): Remove this restriction once Kotlin allows for that:
 // https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-field-annotation-in-interface-companion.md#open-questions
-/** Returns whether it's illegal to render [@JvmField] annotations in this type. */
+/** Returns whether it's illegal to include [@JvmField] annotations in this type. */
 internal val Type.jvmFieldsAreIllegal
   get() =
     isInterface &&

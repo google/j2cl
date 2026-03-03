@@ -41,7 +41,7 @@ private val Method.needsFinalModifier: Boolean
       isJavaOverride &&
       descriptor.enclosingTypeDescriptor.typeDeclaration.isOpen
 
-internal val Method.renderedStatements: List<Statement>
+internal val Method.includedStatements: List<Statement>
   get() {
     if (!descriptor.isKtDisabled) {
       return body.statements.filter { !AstUtils.isConstructorInvocationStatement(it) }

@@ -116,7 +116,7 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
             withoutNullabilityAnnotations()
           }
         } else if (upperBoundTypeDescriptor.isImplicitUpperBound) {
-          // Ignore type variables which will be rendered as star (unbounded wildcard).
+          // Ignore type variables which will be transpiled as star (unbounded wildcard).
           this
         } else {
           TypeVariable.Builder.from(this)

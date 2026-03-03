@@ -95,7 +95,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
 // TODO(b/442834826): Refactor to use type model instead of AST nodes.
-internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
+internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
   internal fun source(compilationUnit: CompilationUnit): Source =
     dependenciesAndDeclarationsSource(compilationUnit).ifNotEmpty {
       emptyLineSeparated(fileCommentSource(compilationUnit), it) + Source.NEW_LINE
@@ -118,13 +118,13 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     includedTypes(compilationUnit).flatMap(::declarationsDependentSources)
 
   private fun includedTypes(compilationUnit: CompilationUnit): List<Type> =
-    compilationUnit.types.filter(::shouldRender).flatMap { listOf(it) + includedTypes(it) }
+    compilationUnit.types.filter(::shouldInclude).flatMap { listOf(it) + includedTypes(it) }
 
   private fun includedTypes(type: Type): List<Type> =
-    type.types.filter(::shouldRender).flatMap { listOf(it) + includedTypes(it) }
+    type.types.filter(::shouldInclude).flatMap { listOf(it) + includedTypes(it) }
 
-  private fun shouldRender(type: Type): Boolean =
-    !nameIsMappedInObjC(type.declaration) && shouldRender(type.declaration)
+  private fun shouldInclude(type: Type): Boolean =
+    !nameIsMappedInObjC(type.declaration) && shouldInclude(type.declaration)
 
   private fun declarationsDependentSources(type: Type): List<Dependent<Source>> = buildList {
     if (objCNamePrefix.isNotEmpty()) {
@@ -140,7 +140,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
 
     addAll(type.members.flatMap(::functionDependentSources))
 
-    // Render implicit constructor
+    // Include implicit constructor
     if (!type.isInterface && type.constructors.isEmpty()) {
       addAll(
         functionDependentSources(
@@ -193,7 +193,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     fieldDescriptor.objCName
 
   private fun fieldGetFunctionDependentSource(field: Field): Dependent<Source> =
-    field.descriptor.takeIf(::shouldRender)?.let(::getFunctionDependentSource)
+    field.descriptor.takeIf(::shouldInclude)?.let(::getFunctionDependentSource)
       ?: dependent(Source.EMPTY)
 
   private fun getFunctionDependentSource(fieldDescriptor: FieldDescriptor): Dependent<Source> =
@@ -222,7 +222,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     fieldDescriptor.objCName.escapeObjCKeyword
 
   private fun fieldSetFunctionDependentSource(field: Field): Dependent<Source> =
-    field.descriptor.takeIf { !it.isFinal && shouldRender(it) }?.let(::setFunctionDependentSource)
+    field.descriptor.takeIf { !it.isFinal && shouldInclude(it) }?.let(::setFunctionDependentSource)
       ?: dependent(Source.EMPTY)
 
   private fun setFunctionDependentSource(fieldDescriptor: FieldDescriptor): Dependent<Source> =
@@ -256,7 +256,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
     get() = "value"
 
   private fun fieldConstantDefineDependentSource(field: Field): Dependent<Source> =
-    field.descriptor.takeIf(::shouldRender)?.let(::constantDefineDependentSource)
+    field.descriptor.takeIf(::shouldInclude)?.let(::constantDefineDependentSource)
       ?: dependent(Source.EMPTY)
 
   private fun constantDefineDependentSource(fieldDescriptor: FieldDescriptor): Dependent<Source>? =
@@ -279,31 +279,31 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
 
   private fun methodFunctionDependentSources(method: Method): List<Dependent<Source>> =
     method
-      .takeIf { shouldRender(it.descriptor) }
+      .takeIf { shouldInclude(it.descriptor) }
       ?.let { it.descriptor.toObjCNames() }
       ?.let { functionDependentSources(method, it) }
       .orIfNull { listOf() }
 
-  private fun shouldRender(methodDescriptor: MethodDescriptor): Boolean =
+  private fun shouldInclude(methodDescriptor: MethodDescriptor): Boolean =
     !methodDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
       methodDescriptor.visibility.isPublic &&
       when {
-        // Static methods are always rendered.
+        // Static methods are always included.
         methodDescriptor.isStatic -> true
-        // Constructors are rendered except for specific cases.
+        // Constructors are included except for specific cases.
         methodDescriptor.isConstructor ->
           when {
             // Inner class constructors have implicit `outer` parameter.
             methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isKtInner -> false
-            // Primitive constructors are not rendered, as they are currently implemented in Kotlin
+            // Primitive constructors are not included, as they are currently implemented in Kotlin
             // as `invoke` calls and are deprecated in Java.
             isBoxedType(methodDescriptor.enclosingTypeDescriptor) -> false
             else -> true
           }
         else -> false
       } &&
-      shouldRender(methodDescriptor.returnTypeDescriptor) &&
-      methodDescriptor.parameterTypeDescriptors.all(::shouldRender) &&
+      shouldInclude(methodDescriptor.returnTypeDescriptor) &&
+      methodDescriptor.parameterTypeDescriptors.all(::shouldInclude) &&
       canInferObjCName(methodDescriptor) &&
       !methodDescriptor.ktInfo.isThrows
 
@@ -312,30 +312,30 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       methodDescriptor.objectiveCName.let { it != null && it.endsWith(":") } ||
       methodDescriptor.parameterTypeDescriptors.all { !it.isProtobuf }
 
-  private fun shouldRender(fieldDescriptor: FieldDescriptor): Boolean =
+  private fun shouldInclude(fieldDescriptor: FieldDescriptor): Boolean =
     !fieldDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
       fieldDescriptor.visibility.isPublic &&
       (fieldDescriptor.isStatic || fieldDescriptor.enclosingTypeDescriptor.isInterface) &&
-      shouldRender(fieldDescriptor.typeDescriptor)
+      shouldInclude(fieldDescriptor.typeDescriptor)
 
-  private fun shouldRender(typeDescriptor: TypeDescriptor): Boolean =
+  private fun shouldInclude(typeDescriptor: TypeDescriptor): Boolean =
     when (typeDescriptor) {
       is PrimitiveTypeDescriptor -> true
       is DeclaredTypeDescriptor ->
-        shouldRenderDescriptor(typeDescriptor.typeDeclaration) &&
+        shouldIncludeDescriptor(typeDescriptor.typeDeclaration) &&
           (!isBoxedType(typeDescriptor) || typeDescriptor.isNullable)
       is ArrayTypeDescriptor -> false
-      is TypeVariable -> shouldRender(typeDescriptor.upperBoundTypeDescriptor)
-      is IntersectionTypeDescriptor -> shouldRender(typeDescriptor.firstType)
+      is TypeVariable -> shouldInclude(typeDescriptor.upperBoundTypeDescriptor)
+      is IntersectionTypeDescriptor -> shouldInclude(typeDescriptor.firstType)
       is UnionTypeDescriptor -> false
     }
 
-  private fun shouldRender(typeDeclaration: TypeDeclaration): Boolean =
-    shouldRenderDescriptor(typeDeclaration) &&
+  private fun shouldInclude(typeDeclaration: TypeDeclaration): Boolean =
+    shouldIncludeDescriptor(typeDeclaration) &&
       !typeDeclaration.isProtobuf &&
       !typeDeclaration.isAnnotation
 
-  private fun shouldRenderDescriptor(typeDeclaration: TypeDeclaration): Boolean =
+  private fun shouldIncludeDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&
       existsInObjC(typeDeclaration) &&
       !typeDeclaration.toDescriptor().isCollection
@@ -631,7 +631,7 @@ internal class J2ObjCCompatRenderer(private val objCNamePrefix: String) {
       else -> null
     }
 
-  // Literal rendering code is based on:
+  // Literal source generation is based on:
   // /google3/third_party/java_src/j2objc/translator/src/main/java/com/google/devtools/j2objc/gen/LiteralGenerator.java
 
   private fun booleanLiteralDependentSource(booleanLiteral: BooleanLiteral): Dependent<Source>? =

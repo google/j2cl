@@ -30,17 +30,17 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.withWidestScopeOrNull
 /**
  * Code generation environment.
  *
- * @property nameToIdentifierMap a map from named node to rendered identifier string
+ * @property nameToIdentifierMap a map from named node to translated identifier string
  * @property identifierSet a set of used identifier strings, which potentially shadow imports
  * @property importedSimpleNameToQualifiedNameMutableMap a mutable map from simple name string to
  *   qualified name string of types to be imported, filled-in during code generation
  * @property importedOptInQualifiedNamesMutableSet a mutable set with imported qualified names for
  *   [@OptIn] annotation, filled-in during code generation
- * @property topLevelQualifiedNamesSet top-level qualified names, which will be rendered as simple
+ * @property topLevelQualifiedNamesSet top-level qualified names, which will be translated as simple
  *   name without import
  * @property privateAsKtInternalDeclarationMemberDescriptorSet a set of private declaration member
- *   descriptors which should be rendered as internal in Kotlin.
- * @property captureIndices mutable map of capture indices, used for rendering capture types
+ *   descriptors which should be translated as internal in Kotlin.
+ * @property captureIndices mutable map of capture indices, used for translating capture types
  * @property isJ2ObjCInteropEnabled whether to enable J2ObjC interop
  */
 internal data class Environment(
@@ -111,7 +111,7 @@ internal data class Environment(
     }
   }
 
-  /** Returns whether the given member descriptor should be rendered as private in Kotlin. */
+  /** Returns whether the given member descriptor should be translated as private in Kotlin. */
   private fun isKtPrivate(memberDescriptor: MemberDescriptor): Boolean =
     memberDescriptor.declarationDescriptor.let {
       it.visibility.isPrivate && !privateAsKtInternalDeclarationMemberDescriptorSet.contains(it)
@@ -135,9 +135,9 @@ internal data class Environment(
 
   /** Returns Kotlin type visibility. */
   fun ktVisibility(typeDeclaration: TypeDeclaration): KtVisibility =
-    // Render all types as public, to allow extending with wider visibility which is legal in Java,
-    // but illegal in Kotlin.
-    // TODO(b/358052247): Render private types as private if possible
+    // Translate all types as public, to allow extending with wider visibility which is legal in
+    // Java, but illegal in Kotlin.
+    // TODO(b/358052247): Translate private types as private if possible
     KtVisibility.PUBLIC
 
   /**

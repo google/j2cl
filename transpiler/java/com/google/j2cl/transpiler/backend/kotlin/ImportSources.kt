@@ -29,12 +29,12 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSe
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 /**
- * Kotlin import renderer.
+ * Kotlin import sources.
  *
- * @property nameRenderer underlying name renderer
+ * @property nameSources underlying name sources
  */
-internal data class ImportRenderer(val nameRenderer: NameRenderer) {
-  /** Source with rendered imports. */
+internal data class ImportSources(val nameSources: NameSources) {
+  /** Source with resolved imports. */
   val importsSource: Source
     get() = newLineSeparated(imports.map { it.source })
 
@@ -42,10 +42,10 @@ internal data class ImportRenderer(val nameRenderer: NameRenderer) {
   private val defaultImports: Set<Import>
     get() = setOf(starImport("javaemul", "lang"))
 
-  /** A list of imports to render. */
+  /** A list of resolved imports. */
   private val imports: List<Import>
     get() =
-      defaultImports.plus(nameRenderer.environment.importsSet).sortedWith(lexicographicalOrder())
+      defaultImports.plus(nameSources.environment.importsSet).sortedWith(lexicographicalOrder())
 
   companion object {
     /** Source for this import. */

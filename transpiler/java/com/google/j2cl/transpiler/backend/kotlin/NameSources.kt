@@ -24,13 +24,13 @@ import com.google.j2cl.transpiler.backend.kotlin.common.orIfNull
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 
 /**
- * Renderer of Kotlin names, with import resolution and alias generation.
+ * Kotlin name sources, with import resolution and alias generation.
  *
- * @property environment rendering environment
+ * @property environment the environment
  * @property localTypeNameMap a map from local names to qualified names
  * @property localFieldNames a set of local field names
  */
-internal data class NameRenderer
+internal data class NameSources
 private constructor(
   val environment: Environment,
   val objCNamePrefix: String,
@@ -47,13 +47,13 @@ private constructor(
     localFieldNames = setOf(),
   )
 
-  fun plusLocalNames(type: Type): NameRenderer =
+  fun plusLocalNames(type: Type): NameSources =
     plusLocalTypeNameMap(type.localTypeNameMap).plusLocalFieldNames(type.localFieldNames)
 
-  fun plusLocalTypeNameMap(localNameMap: Map<String, String>): NameRenderer =
+  fun plusLocalTypeNameMap(localNameMap: Map<String, String>): NameSources =
     copy(localTypeNameMap = this.localTypeNameMap + localNameMap)
 
-  fun plusLocalFieldNames(localNames: Set<String>): NameRenderer =
+  fun plusLocalFieldNames(localNames: Set<String>): NameSources =
     copy(localFieldNames = this.localFieldNames + localNames)
 
   /** Returns source containing name of the given node. */
@@ -109,7 +109,7 @@ private constructor(
    */
   fun sourceWithOptInQualifiedName(
     optInQualifiedName: String,
-    fn: NameRenderer.() -> Source,
+    fn: NameSources.() -> Source,
   ): Source = fn().also { environment.addOptInQualifiedName(optInQualifiedName) }
 
   /** Returns source for the given qualified name of extension member. */

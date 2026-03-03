@@ -95,7 +95,7 @@ class KotlinGeneratorStage(
 
   /** Generate ObjC outputs for a compilation unit. */
   private fun generateObjCOutputs(compilationUnit: CompilationUnit) {
-    val source = J2ObjCCompatRenderer(objCNamePrefix).source(compilationUnit)
+    val source = J2ObjCCompatSources(objCNamePrefix).source(compilationUnit)
     if (source.isNotEmpty()) {
       val path = compilationUnit.packageRelativePath.replace(".java", "+J2ObjCCompat.h")
       output.write(path, source.buildString())
@@ -115,16 +115,16 @@ class KotlinGeneratorStage(
         isJ2ObjCInteropEnabled = isJ2ObjCInteropEnabled,
       )
 
-    val nameRenderer =
-      NameRenderer(environment, objCNamePrefix).plusLocalTypeNameMap(compilationUnit.localTypeNames)
+    val nameSources =
+      NameSources(environment, objCNamePrefix).plusLocalTypeNameMap(compilationUnit.localTypeNames)
 
-    val compilationUnitRenderer = CompilationUnitRenderer(nameRenderer)
+    val compilationUnitSources = CompilationUnitSources(nameSources)
 
-    return compilationUnitRenderer.source(compilationUnit)
+    return compilationUnitSources.source(compilationUnit)
   }
 }
 
-/** Returns a map from all named nodes in this compilation unit to rendered identifier strings. */
+/** Returns a map from all named nodes in this compilation unit to translated identifier strings. */
 private fun CompilationUnit.buildNameToIdentifierMap(): Map<HasName, String> = buildMap {
   buildForbiddenIdentifierSet().let { forbiddenIdentifiers ->
     streamTypes().forEach { type -> putAll(computeUniqueNames(forbiddenIdentifiers, type)) }
@@ -136,7 +136,7 @@ private fun CompilationUnit.buildForbiddenIdentifierSet(): Set<String> = buildSe
   accept(
     object : AbstractVisitor() {
       override fun enterFunctionExpression(functionExpression: FunctionExpression): Boolean {
-        // Functional interface names are forbidden because they are rendered in return statement
+        // Functional interface names are forbidden because they are included in return statement
         // labels.
         add(functionExpression.typeDescriptor.functionalInterface!!.typeDeclaration.ktSimpleName)
         return true
@@ -146,7 +146,7 @@ private fun CompilationUnit.buildForbiddenIdentifierSet(): Set<String> = buildSe
 }
 
 /**
- * Build a set of private member descriptors in this compilation unit which should be rendered as
+ * Build a set of private member descriptors in this compilation unit which should be translated as
  * internal in Kotlin.
  */
 private fun CompilationUnit.buildPrivateKtInternalMemberDescriptorSet(): Set<MemberDescriptor> =

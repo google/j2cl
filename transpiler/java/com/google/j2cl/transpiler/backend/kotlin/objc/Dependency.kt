@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
-/** Renderer dependency: an import or a forward declaration. */
+/** Dependency: an import or a forward declaration. */
 sealed class Dependency {
   /** Dependency with import. */
   data class WithImport(val import: Import) : Dependency()
@@ -43,7 +43,7 @@ data class ForwardDeclaration(val kind: Kind, val name: String) {
   /** The kind of forward declaration: a class or a protocol. */
   enum class Kind {
     CLASS,
-    PROTOCOL
+    PROTOCOL,
   }
 
   companion object {

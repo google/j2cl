@@ -25,41 +25,41 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 
-internal data class AnnotationRenderer(val nameRenderer: NameRenderer) {
-  private val literalRenderer: LiteralRenderer
-    get() = LiteralRenderer(nameRenderer)
+internal data class AnnotationSources(val nameSources: NameSources) {
+  private val literalSources: LiteralSources
+    get() = LiteralSources(nameSources)
 
   fun annotationsSource(hasAnnotations: HasAnnotations): Source =
     newLineSeparated(
       hasAnnotations.annotations
-        .filter { RENDERED_ANNOTATIONS.contains(it.typeDescriptor.qualifiedSourceName) }
+        .filter { SUPPORTED_ANNOTATIONS.contains(it.typeDescriptor.qualifiedSourceName) }
         .map { annotationSource(it) }
     )
 
   private fun annotationSource(annotation: Annotation): Source =
     annotation(
-      nameRenderer.qualifiedNameSource(annotation.typeDescriptor),
+      nameSources.qualifiedNameSource(annotation.typeDescriptor),
       annotation.singleValueOrNull().let { singleValue ->
         if (singleValue is Literal) {
-          listOf(literalRenderer.literalSource(singleValue))
+          listOf(literalSources.literalSource(singleValue))
         } else {
           // TODO(b/444430700): Filter default values when they are supported.
           annotation.values.entries.map { entry ->
-            assignment(source(entry.key), literalRenderer.literalSource(entry.value as Literal))
+            assignment(source(entry.key), literalSources.literalSource(entry.value as Literal))
           }
         }
       },
     )
 
   fun volatileAnnotationSource(): Source =
-    annotation(nameRenderer.topLevelQualifiedNameSource("kotlin.concurrent.Volatile"))
+    annotation(nameSources.topLevelQualifiedNameSource("kotlin.concurrent.Volatile"))
 
   // TODO(b/444430700): Filter default values when they are supported.
   private fun Annotation.singleValueOrNull(): AnnotationValue? =
     values.entries.singleOrNull()?.takeIf { it.key == "value" }?.value
 
   companion object {
-    private val RENDERED_ANNOTATIONS =
+    private val SUPPORTED_ANNOTATIONS =
       setOf(
         "com.google.errorprone.annotations.CanIgnoreReturnValue",
         "com.google.errorprone.annotations.ResultIgnorabilityUnspecified",

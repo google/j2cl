@@ -30,7 +30,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.nonNull
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 
-internal data class LiteralRenderer(val nameRenderer: NameRenderer) {
+internal data class LiteralSources(val nameSources: NameSources) {
   fun literalSource(literal: Literal): Source =
     when (literal) {
       is NullLiteral -> NULL_KEYWORD
@@ -48,11 +48,11 @@ internal data class LiteralRenderer(val nameRenderer: NameRenderer) {
 
   private fun typeLiteralSource(typeLiteral: TypeLiteral): Source =
     dotSeparated(
-      classLiteral(nameRenderer.qualifiedNameSource(typeLiteral.referencedTypeDescriptor)),
+      classLiteral(nameSources.qualifiedNameSource(typeLiteral.referencedTypeDescriptor)),
       if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-        nonNull(nameRenderer.extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
+        nonNull(nameSources.extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
       } else {
-        nameRenderer.extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
+        nameSources.extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
       },
     )
 
@@ -63,6 +63,6 @@ internal data class LiteralRenderer(val nameRenderer: NameRenderer) {
       PrimitiveTypes.LONG -> literal(numberLiteral.value.toLong())
       PrimitiveTypes.FLOAT -> literal(numberLiteral.value.toFloat())
       PrimitiveTypes.DOUBLE -> literal(numberLiteral.value.toDouble())
-      else -> throw InternalCompilerError("renderNumberLiteral($numberLiteral)")
+      else -> throw InternalCompilerError("numberLiteralSource($numberLiteral)")
     }
 }

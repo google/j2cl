@@ -72,34 +72,34 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSe
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 /**
- * Renderer of statements.
+ * Provides statement sources.
  *
- * @property nameRenderer underlying name renderer
+ * @property nameSources underlying name sources
  * @property enclosingType enclosing type
- * @property currentReturnLabelIdentifier optional label to render in return statements
- * @property renderThisReferenceWithLabel whether to render this reference with explicit qualifier
+ * @property currentReturnLabelIdentifier optional label to include in return statements
+ * @property thisReferenceIncludesLabel whether to include explicit label in this reference
  */
-internal data class StatementRenderer(
-  val nameRenderer: NameRenderer,
+internal data class StatementSources(
+  val nameSources: NameSources,
   val enclosingType: Type,
   val currentReturnLabelIdentifier: String? = null,
   // TODO(b/252138814): Remove when KT-54349 is fixed
-  val renderThisReferenceWithLabel: Boolean = false,
+  val thisReferenceIncludesLabel: Boolean = false,
 ) {
-  private val expressionRenderer: ExpressionRenderer
+  private val expressionSources: ExpressionSources
     get() =
-      ExpressionRenderer(
-        nameRenderer,
+      ExpressionSources(
+        nameSources,
         enclosingType,
         currentReturnLabelIdentifier = currentReturnLabelIdentifier,
-        renderThisReferenceWithLabel = renderThisReferenceWithLabel,
+        thisReferenceIncludesLabel = thisReferenceIncludesLabel,
       )
 
-  private val typeRenderer: TypeRenderer
-    get() = TypeRenderer(nameRenderer)
+  private val typeSources: TypeSources
+    get() = TypeSources(nameSources)
 
   private fun expressionSource(expression: Expression): Source =
-    expressionRenderer.expressionSource(expression)
+    expressionSources.expressionSource(expression)
 
   fun statementsSource(statements: List<Statement>): Source =
     newLineSeparated(statements.map(::statementSource))
@@ -129,7 +129,7 @@ internal data class StatementRenderer(
   private fun assertStatementSource(assertStatement: AssertStatement): Source =
     spaceSeparated(
       join(
-        nameRenderer.extensionMemberQualifiedNameSource("kotlin.assert"),
+        nameSources.extensionMemberQualifiedNameSource("kotlin.assert"),
         inParentheses(expressionSource(assertStatement.expression)),
       ),
       assertStatement.message?.let { block(expressionSource(it)) }.orEmpty(),
@@ -144,7 +144,7 @@ internal data class StatementRenderer(
     join(CONTINUE_KEYWORD, continueStatement.labelReference?.let(::labelReferenceSource).orEmpty())
 
   private fun labelReferenceSource(labelReference: LabelReference): Source =
-    at(nameRenderer.hasNameSource(labelReference.target))
+    at(nameSources.hasNameSource(labelReference.target))
 
   private fun doWhileStatementSource(doWhileStatement: DoWhileStatement): Source =
     spaceSeparated(
@@ -162,7 +162,7 @@ internal data class StatementRenderer(
       FOR_KEYWORD,
       inParentheses(
         infix(
-          nameRenderer.variableNameSource(forEachStatement.loopVariable),
+          nameSources.variableNameSource(forEachStatement.loopVariable),
           IN_KEYWORD,
           expressionSource(forEachStatement.iterableExpression),
         )
@@ -185,7 +185,7 @@ internal data class StatementRenderer(
         assignment(
           colonSeparated(
             identifierSource(fieldDescriptor.name!!),
-            nameRenderer.typeDescriptorSource(fieldDescriptor.typeDescriptor),
+            nameSources.typeDescriptorSource(fieldDescriptor.typeDescriptor),
           ),
           expressionSource(declaration.expression),
         ),
@@ -194,7 +194,7 @@ internal data class StatementRenderer(
 
   private fun labeledStatementSource(labelStatement: LabeledStatement): Source =
     spaceSeparated(
-      join(nameRenderer.hasNameSource(labelStatement.label), AT_OPERATOR),
+      join(nameSources.hasNameSource(labelStatement.label), AT_OPERATOR),
       labelStatement.statement.let {
         statementSource(it).letIf(it is LabeledStatement) { block(it) }
       },
@@ -202,7 +202,7 @@ internal data class StatementRenderer(
 
   private fun localClassDeclarationStatementSource(
     localClassDeclarationStatement: LocalClassDeclarationStatement
-  ): Source = typeRenderer.typeSource(localClassDeclarationStatement.localClass)
+  ): Source = typeSources.typeSource(localClassDeclarationStatement.localClass)
 
   private fun returnStatementSource(returnStatement: ReturnStatement): Source =
     spaceSeparated(
@@ -213,8 +213,8 @@ internal data class StatementRenderer(
   private fun synchronizedStatementSource(synchronizedStatement: SynchronizedStatement): Source =
     spaceSeparated(
       join(
-        nameRenderer.extensionMemberQualifiedNameSource("kotlin.synchronized"),
-        inAngleBrackets(nameRenderer.topLevelQualifiedNameSource("kotlin.Unit")),
+        nameSources.extensionMemberQualifiedNameSource("kotlin.synchronized"),
+        inAngleBrackets(nameSources.topLevelQualifiedNameSource("kotlin.Unit")),
         inParentheses(expressionSource(synchronizedStatement.expression)),
       ),
       statementSource(synchronizedStatement.body),
@@ -253,8 +253,8 @@ internal data class StatementRenderer(
       CATCH_KEYWORD,
       inParentheses(
         colonSeparated(
-          nameRenderer.variableNameSource(variable),
-          nameRenderer.typeDescriptorSource(type.toNonNullable()),
+          nameSources.variableNameSource(variable),
+          nameSources.typeDescriptorSource(type.toNonNullable()),
         )
       ),
       blockSource(body),

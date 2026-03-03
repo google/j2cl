@@ -43,25 +43,25 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSe
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 /**
- * Provides context for rendering Kotlin types.
+ * Provides context for translating Java types to Kotlin types.
  *
- * @property nameRenderer underlying name renderer
+ * @property nameSources underlying name sources
  */
-internal data class TypeRenderer(val nameRenderer: NameRenderer) {
+internal data class TypeSources(val nameSources: NameSources) {
   private val environment: Environment
-    get() = nameRenderer.environment
+    get() = nameSources.environment
 
-  private fun memberRenderer(type: Type): MemberRenderer =
-    MemberRenderer(nameRenderer.plusLocalNames(type), type)
+  private fun memberSources(type: Type): MemberSources =
+    MemberSources(nameSources.plusLocalNames(type), type)
 
-  private fun expressionRenderer(type: Type): ExpressionRenderer =
-    ExpressionRenderer(nameRenderer.plusLocalNames(type), type)
+  private fun expressionSources(type: Type): ExpressionSources =
+    ExpressionSources(nameSources.plusLocalNames(type), type)
 
-  private val jsInteropAnnotationRenderer: JsInteropAnnotationRenderer
-    get() = JsInteropAnnotationRenderer(nameRenderer)
+  private val jsInteropAnnotationSources: JsInteropAnnotationSources
+    get() = JsInteropAnnotationSources(nameSources)
 
-  private val objCNameRenderer: ObjCNameRenderer
-    get() = ObjCNameRenderer(nameRenderer)
+  private val objCNameSources: ObjCNameSources
+    get() = ObjCNameSources(nameSources)
 
   /** Returns source for the given type. */
   fun typeSource(type: Type): Source =
@@ -70,10 +70,10 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
         nativeTypeSource(type)
       } else {
         newLineSeparated(
-          objCNameRenderer.objCEnumAnnotationSource(typeDeclaration),
-          objCNameRenderer.objectiveCAnnotationSource(typeDeclaration),
-          objCNameRenderer.swiftNameAnnotationSource(typeDeclaration),
-          jsInteropAnnotationRenderer.jsInteropAnnotationsSource(typeDeclaration),
+          objCNameSources.objCEnumAnnotationSource(typeDeclaration),
+          objCNameSources.objectiveCAnnotationSource(typeDeclaration),
+          objCNameSources.swiftNameAnnotationSource(typeDeclaration),
+          jsInteropAnnotationSources.jsInteropAnnotationsSource(typeDeclaration),
           autoValueAnnotationsSource(typeDeclaration),
           suppressIncompatibleObjCNameOverrideSource(type),
           spaceSeparated(
@@ -84,9 +84,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
               spaceSeparated(typeDeclarationSource(type), ktPrimaryConstructorSource(type)),
               superTypesSource(type),
             ),
-            nameRenderer.whereClauseSource(
-              typeDeclaration.directlyDeclaredTypeParameterDescriptors
-            ),
+            nameSources.whereClauseSource(typeDeclaration.directlyDeclaredTypeParameterDescriptors),
             typeBodySource(type, skipEmptyBlock = true),
           ),
         )
@@ -95,11 +93,11 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
 
   /** Returns source with body of the given type. */
   fun typeBodySource(type: Type, skipEmptyBlock: Boolean = false): Source =
-    memberRenderer(type).run {
+    memberSources(type).run {
       block(
         emptyLineSeparated(
-          Source.emptyUnless(type.isEnum) { memberRenderer(type).enumValuesSource(type) },
-          emptyLineSeparated(type.ktMembers.map { memberRenderer(type).source(it) }),
+          Source.emptyUnless(type.isEnum) { memberSources(type).enumValuesSource(type) },
+          emptyLineSeparated(type.ktMembers.map { memberSources(type).source(it) }),
         ),
         skipEmptyBlock = skipEmptyBlock,
       )
@@ -109,13 +107,13 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
     val ktPrimaryConstructor = type.ktPrimaryConstructor
     return when {
       type.declaration.isAnnotation ->
-        // Render non-static annotation methods as constructor parameters.
-        memberRenderer(type).run {
+        // Translate non-static annotation methods as constructor parameters.
+        memberSources(type).run {
           inNewLinesPlusCommas(type.methods.filter { !it.isStatic }.map { memberSource(it) })
             .ifNotEmpty { inParenthesesIndented(it) }
         }
       ktPrimaryConstructor != null ->
-        memberRenderer(type).run {
+        memberSources(type).run {
           spaceSeparated(
             annotationsSource(ktPrimaryConstructor),
             join(KotlinSource.CONSTRUCTOR_KEYWORD, methodParametersSource(ktPrimaryConstructor)),
@@ -135,7 +133,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
   private fun typeDeclarationSource(type: Type): Source =
     join(
       typeIdentifierSource(type),
-      nameRenderer.typeParametersSource(type.declaration.directlyDeclaredTypeParameterDescriptors),
+      nameSources.typeParametersSource(type.declaration.directlyDeclaredTypeParameterDescriptors),
     )
 
   private fun superTypesSource(type: Type): Source =
@@ -151,7 +149,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
 
   private fun superTypeSource(type: Type, superTypeDescriptor: TypeDescriptor): Source =
     join(
-      nameRenderer.typeDescriptorSource(superTypeDescriptor.toNonNullable(), asSuperType = true),
+      nameSources.typeDescriptorSource(superTypeDescriptor.toNonNullable(), asSuperType = true),
       superTypeInvocationSource(type, superTypeDescriptor),
     )
 
@@ -165,18 +163,18 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
     }
 
   private fun constructorInvocationSource(type: Type, method: Method): Source =
-    getConstructorInvocation(method)?.let { expressionRenderer(type).invocationSource(it) }
+    getConstructorInvocation(method)?.let { expressionSources(type).invocationSource(it) }
       ?: inParentheses(Source.EMPTY)
 
   private fun autoValueAnnotationsSource(typeDeclaration: TypeDeclaration): Source =
     when {
       typeDeclaration.hasAnnotation("com.google.auto.value.AutoValue") ->
         annotation(
-          nameRenderer.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue")
+          nameSources.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue")
         )
       typeDeclaration.hasAnnotation("com.google.auto.value.AutoValue.Builder") ->
         annotation(
-          nameRenderer.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue.Builder")
+          nameSources.topLevelQualifiedNameSource("javaemul.lang.annotations.WasAutoValue.Builder")
         )
       else -> Source.EMPTY
     }
@@ -184,7 +182,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
   private fun suppressIncompatibleObjCNameOverrideSource(type: Type): Source =
     Source.emptyUnless(type.needsIncompatibleObjCNameOverrideSuppression) {
       annotation(
-        nameRenderer.topLevelQualifiedNameSource("kotlin.Suppress"),
+        nameSources.topLevelQualifiedNameSource("kotlin.Suppress"),
         literal("INCOMPATIBLE_OBJC_NAME_OVERRIDE"),
       )
     }
@@ -203,7 +201,7 @@ internal data class TypeRenderer(val nameRenderer: NameRenderer) {
         INTERFACE_KEYWORD,
         source(type.declaration.ktSimpleName + "CompanionSupplier")
           .withMapping(type.sourcePosition),
-        block(memberRenderer(type).companionSupplierInterfaceMethodSource(type)),
+        block(memberSources(type).companionSupplierInterfaceMethodSource(type)),
       )
     }
 

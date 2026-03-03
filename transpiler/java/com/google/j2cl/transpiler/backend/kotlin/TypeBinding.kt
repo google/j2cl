@@ -28,8 +28,6 @@ import com.google.j2cl.transpiler.backend.kotlin.common.runIf
  *
  * <p>Use {@code DeclaredTypeDescriptor.typeArgumentTypeBindings(...)} and {@code
  * MethodDescriptor.typeArgumentTypeBindings} to get type arguments for type and method descriptors.
- *
- * <p>Use {@code Renderer.renderTypeBindings(...)} to render them.
  */
 internal data class TypeBinding(
   val typeParameterDescriptor: TypeVariable,

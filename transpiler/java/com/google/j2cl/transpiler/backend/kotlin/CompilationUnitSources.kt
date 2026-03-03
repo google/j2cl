@@ -28,36 +28,29 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSe
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
 /**
- * Compilation unit renderer.
+ * Compilation unit sources.
  *
- * @param nameRenderer the underlying name renderer
+ * @param nameSources the underlying name sources
  */
-internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
+internal data class CompilationUnitSources(val nameSources: NameSources) {
 
   /** Returns source for the given compilation unit. */
   fun source(compilationUnit: CompilationUnit): Source {
-    // Render types, collecting qualified names to import
     val typesSource = typesSource(compilationUnit)
-
-    // Render file header, collecting qualified names to import
     val fileHeaderSource = fileHeaderSource(compilationUnit)
-
-    // Render package and collected imports
     val packageAndImportsSource = packageAndImportsSource(compilationUnit)
-
     val completeSource = emptyLineSeparated(fileHeaderSource, packageAndImportsSource, typesSource)
-
     return completeSource.plus(Source.NEW_LINE)
   }
 
-  private val importRenderer: ImportRenderer
-    get() = ImportRenderer(nameRenderer)
+  private val importSources: ImportSources
+    get() = ImportSources(nameSources)
 
   private fun fileHeaderSource(compilationUnit: CompilationUnit): Source =
     newLineSeparated(fileCommentSource(compilationUnit), fileAnnotationsSource())
 
   private fun packageAndImportsSource(compilationUnit: CompilationUnit): Source =
-    emptyLineSeparated(packageSource(compilationUnit), importRenderer.importsSource)
+    emptyLineSeparated(packageSource(compilationUnit), importSources.importsSource)
 
   private fun typesSource(compilationUnit: CompilationUnit): Source =
     emptyLineSeparated(compilationUnit.types.flatMap(::typeSources))
@@ -69,20 +62,20 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
     newLineSeparated(fileOptInAnnotationSource, suppressFileAnnotationsSource)
 
   private fun fileOptInAnnotationSource(features: List<Source>): Source =
-    fileAnnotation(nameRenderer.topLevelQualifiedNameSource("kotlin.OptIn"), features)
+    fileAnnotation(nameSources.topLevelQualifiedNameSource("kotlin.OptIn"), features)
 
   private val fileOptInAnnotationSource: Source
     get() =
-      nameRenderer.environment.importedOptInQualifiedNamesSet
+      nameSources.environment.importedOptInQualifiedNamesSet
         .takeIf { it.isNotEmpty() }
-        ?.map { KotlinSource.classLiteral(nameRenderer.topLevelQualifiedNameSource(it)) }
+        ?.map { KotlinSource.classLiteral(nameSources.topLevelQualifiedNameSource(it)) }
         ?.let { fileOptInAnnotationSource(it) }
         .orEmpty()
 
   private val suppressFileAnnotationsSource: Source
     get() =
       fileAnnotation(
-        nameRenderer.topLevelQualifiedNameSource("kotlin.Suppress"),
+        nameSources.topLevelQualifiedNameSource("kotlin.Suppress"),
         listOf(
             "ALWAYS_NULL",
             "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -110,7 +103,7 @@ internal data class CompilationUnitRenderer(val nameRenderer: NameRenderer) {
       .orEmpty()
 
   private fun typeSources(type: Type): Sequence<Source> =
-    TypeRenderer(nameRenderer).run {
+    TypeSources(nameSources).run {
       sequenceOf(typeSource(type), companionSupplierInterfaceSource(type))
     }
 }

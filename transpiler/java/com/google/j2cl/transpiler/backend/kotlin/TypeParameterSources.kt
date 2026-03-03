@@ -31,10 +31,10 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngle
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
-internal fun NameRenderer.typeParametersSource(typeVariables: List<TypeVariable>): Source =
+internal fun NameSources.typeParametersSource(typeVariables: List<TypeVariable>): Source =
   commaSeparated(typeVariables.map(::typeParameterSource)).ifNotEmpty { inAngleBrackets(it) }
 
-internal fun NameRenderer.whereClauseSource(typeVariables: List<TypeVariable>): Source =
+internal fun NameSources.whereClauseSource(typeVariables: List<TypeVariable>): Source =
   whereClauseSource(
     commaSeparated(typeVariables.map { it.whereClauseItems }.flatten().map { source(it) })
   )
@@ -49,7 +49,7 @@ internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
       .filter { !it.isImplicitUpperBound }
       .map { it.runIf(!it.canBeNullableAsBound) { toNonNullable() } }
 
-private fun NameRenderer.typeParameterSource(typeVariable: TypeVariable): Source =
+private fun NameSources.typeParameterSource(typeVariable: TypeVariable): Source =
   spaceSeparated(
     typeParameterVarianceSource(typeVariable),
     colonSeparated(
@@ -58,7 +58,7 @@ private fun NameRenderer.typeParameterSource(typeVariable: TypeVariable): Source
     ),
   )
 
-private fun NameRenderer.typeParameterBoundSource(typeVariable: TypeVariable): Source =
+private fun NameSources.typeParameterBoundSource(typeVariable: TypeVariable): Source =
   typeVariable.upperBoundTypeDescriptors
     .singleOrNull()
     ?.let { typeDescriptorSource(it, projectRawToWildcards = true) }
@@ -82,7 +82,7 @@ private val TypeVariable.whereClauseItems: List<WhereClauseItem>
       .takeIf { it.size > 1 }
       ?.map { WhereClauseItem(this.toDeclaration(), it) } ?: listOf()
 
-private fun NameRenderer.source(whereClauseItem: WhereClauseItem): Source =
+private fun NameSources.source(whereClauseItem: WhereClauseItem): Source =
   colonSeparated(
     hasNameSource(whereClauseItem.hasName),
     typeDescriptorSource(whereClauseItem.boundTypeDescriptor),
