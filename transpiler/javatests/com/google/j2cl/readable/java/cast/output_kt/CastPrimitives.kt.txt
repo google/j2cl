@@ -91,7 +91,7 @@ open class CastPrimitives {
   f = d.toFloat()
   d = d
  }
-
+ 
  open fun testReferenceToPrimitive() {
   val o: Any = Any()
   val bool: Boolean = o as Boolean
@@ -103,7 +103,7 @@ open class CastPrimitives {
   val f: Float = o as Float
   val d: Double = o as Double
  }
-
+ 
  open fun testLiteralToPrimitive() {
   var b: Byte = 0.toByte()
   var c: Char = '\u0000'
@@ -148,7 +148,7 @@ open class CastPrimitives {
   f = 'a'.code.toFloat()
   d = 'a'.code.toDouble()
  }
-
+ 
  open fun testUnboxAndWiden() {
   val boxedByte: Byte? = java.lang.Byte.valueOf(
    0.toByte(),
@@ -159,7 +159,7 @@ open class CastPrimitives {
   val f: Float = boxedByte!!.toByte().toFloat()
   val d: Double = boxedByte!!.toByte().toDouble()
  }
-
+ 
  open fun testImplicitArgumentCasts() {
   val b: Byte = 127.toByte()
   val c: Char = 65535.toChar()
@@ -211,7 +211,7 @@ open class CastPrimitives {
    i.toLong(),
   )
  }
-
+ 
  open fun testImplicitArrayIndexCasts(array: ByteArray?) {
   val b: Byte = 127.toByte()
   val c: Char = 65535.toChar()
@@ -225,7 +225,7 @@ open class CastPrimitives {
   result = array!![1]
   result = array!![97]
  }
-
+ 
  open fun testImplicitLongAssignmentCasts() {
   val fbyte: Byte = 11.toByte()
   val fchar: Char = 12.toChar()
@@ -255,38 +255,38 @@ open class CastPrimitives {
   )
   tlong = (0 + 1).toLong() + 2L
  }
-
+ 
  companion object {
   @JvmStatic
   private fun getShort(value: Short): Short {
    return value
   }
-
+  
   @JvmStatic
   private fun getInt(value: Int): Int {
    return value
   }
-
+  
   @JvmStatic
   private fun getLong(value: Long): Long {
    return value
   }
-
+  
   @JvmStatic
   private fun getFloat(value: Float): Float {
    return value
   }
-
+  
   @JvmStatic
   private fun getDouble(value: Double): Double {
    return value
   }
  }
-
+ 
  open class IntValueHolder {
   internal constructor(value: Int)
  }
-
+ 
  open class LongValueHolder {
   internal constructor(value: Long)
  }

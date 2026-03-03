@@ -32,21 +32,21 @@ import kotlin.Suppress
 
 class AutoValue_ArrayField: ArrayField {
  private val arrayField: IntArray?
-
+ 
  private constructor(arrayField: IntArray?) {
   this.arrayField = arrayField
  }
-
+ 
  override fun getArrayField(): IntArray? {
   return this.arrayField
  }
-
+ 
  override fun toString(): String {
   return "ArrayField{arrayField=" + Arrays.toString(
    this.arrayField,
   ) + "}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -60,7 +60,7 @@ class AutoValue_ArrayField: ArrayField {
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
@@ -71,10 +71,10 @@ class AutoValue_ArrayField: ArrayField {
   )
   return h___
  }
-
+ 
  class Builder internal constructor(): autovalue.ArrayField.Builder() {
   private var arrayField: IntArray? = null
-
+  
   override fun setArrayField(arrayField: IntArray?): autovalue.ArrayField.Builder? {
    if (arrayField == null) {
     throw NullPointerException("Null arrayField")
@@ -82,7 +82,7 @@ class AutoValue_ArrayField: ArrayField {
    this.arrayField = arrayField
    return this
   }
-
+  
   override fun build_pp_autovalue(): ArrayField? {
    if (this.arrayField == null) {
     val missing: String = " arrayField"

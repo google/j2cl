@@ -28,18 +28,18 @@ fun interface MyInterface {
 
 open class MixedNestings {
  open fun mm() {}
-
+ 
  open fun test() {
   A().a()
  }
-
+ 
  open inner class A internal constructor() {
   open fun aa() {}
-
+  
   open fun a() {
    open class B internal constructor() {
     open fun bb() {}
-
+    
     open fun b(): Int {
      val i: MyInterface = object : MyInterface {
       override fun `fun`(a: Int): Int {

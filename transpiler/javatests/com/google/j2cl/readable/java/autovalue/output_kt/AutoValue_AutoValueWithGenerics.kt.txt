@@ -28,19 +28,19 @@ import kotlin.Suppress
 
 class AutoValue_AutoValueWithGenerics<T>: AutoValueWithGenerics<T> {
  private val booleanField: Boolean
-
+ 
  internal constructor(booleanField: Boolean) {
   this.booleanField = booleanField
  }
-
+ 
  override fun getBooleanField(): Boolean {
   return this.booleanField
  }
-
+ 
  override fun toString(): String {
   return "AutoValueWithGenerics{booleanField=" + this.booleanField + "}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -51,7 +51,7 @@ class AutoValue_AutoValueWithGenerics<T>: AutoValueWithGenerics<T> {
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003

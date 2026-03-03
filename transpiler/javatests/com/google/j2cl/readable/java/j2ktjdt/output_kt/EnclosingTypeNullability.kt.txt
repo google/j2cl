@@ -27,12 +27,12 @@ open class EnclosingTypeNullability internal constructor() {
  internal open fun test_pp_j2ktjdt(foo: Outer<String>) {
   val value: Outer<String>.Inner = foo.getInner_pp_j2ktjdt()
  }
-
+ 
  class Outer<V> internal constructor() {
   internal fun getInner_pp_j2ktjdt(): Outer<V>.Inner {
    throw RuntimeException()
   }
-
+  
   inner class Inner internal constructor()
  }
 }

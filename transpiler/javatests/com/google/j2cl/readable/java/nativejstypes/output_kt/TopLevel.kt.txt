@@ -27,12 +27,12 @@ import kotlin.jvm.JvmField
 @JsType(name = "toplevel", namespace = "", isNative = true)
 open class TopLevel {
  private constructor()
-
+ 
  companion object {
   @JvmField
   var x: Int = 0
  }
-
+ 
  @JsType(isNative = true)
  open class Nested internal constructor() {
   @JvmField

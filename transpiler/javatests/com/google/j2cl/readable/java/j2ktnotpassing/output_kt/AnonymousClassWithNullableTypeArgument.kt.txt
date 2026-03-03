@@ -35,7 +35,7 @@ open class AnonymousClassWithNullableTypeArgument {
     }
    }
   }
-
+  
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> {
    return object : Supplier<Any> {
@@ -44,7 +44,7 @@ open class AnonymousClassWithNullableTypeArgument {
     }
    } as Supplier<Any?>
   }
-
+  
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromMembers() {
    object : Supplier<Any> {
@@ -53,7 +53,7 @@ open class AnonymousClassWithNullableTypeArgument {
     }
    }
   }
-
+  
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromMembersAndArgument() {
    object : AbstractHolder<String>("Supplier") {
@@ -62,38 +62,38 @@ open class AnonymousClassWithNullableTypeArgument {
     }
    }
   }
-
+  
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromArgument() {
    object : Holder<String>(
     AnonymousClassWithNullableTypeArgument.nullableString()!!,
    ) {}
   }
-
+  
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromArgumentAndReturnType(): Holder<String?> {
    return object : Holder<String>("Supplier") {} as Holder<String?>
   }
-
+  
   @JvmStatic
   fun nullableString(): String? {
    return null
   }
  }
-
+ 
  fun interface Supplier<V> {
   fun get(): V
  }
-
+ 
  abstract class AbstractHolder<V> {
   constructor(value: V)
-
+  
   abstract fun get(): V
  }
-
+ 
  open class Holder<V> {
   constructor(value: V)
-
+  
   open fun get(): V {
    throw RuntimeException()
   }

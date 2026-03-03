@@ -27,33 +27,33 @@ import kotlin.jvm.JvmStatic
 abstract class KtPropertyNameConflict {
  @JvmField
  var fieldWithConflictingGetter_ktPropertyConflict: Int = 0
-
+ 
  @JvmField
  var fieldWithConflictingNonGetter_ktPropertyConflict: Int = 0
-
+ 
  @JvmField
  var fieldWithConflictingRenamedMethod_ktPropertyConflict: Int = 0
-
+ 
  open val fieldWithConflictingGetter: Int
   get() {
    return this.fieldWithConflictingGetter_ktPropertyConflict
   }
-
+ 
  open val fieldWithConflictingNonGetter: Int
   get() {
    return this.fieldWithConflictingNonGetter_ktPropertyConflict
   }
-
+ 
  open val fieldWithConflictingRenamedMethod: Int
   get() {
    return this.fieldWithConflictingRenamedMethod_ktPropertyConflict
   }
-
+ 
  open val fieldWithConflictingSuperMethod: Int
   get() {
    return 0
   }
-
+ 
  companion object {
   @JvmStatic
   fun test(o: KtPropertyNameConflict?, i: Interface?) {
@@ -66,7 +66,7 @@ abstract class KtPropertyNameConflict {
    val conflictingSuperMethod: Int = o!!.fieldWithConflictingSuperMethod
    val conflictingInterfaceMethod: Int = i!!.fieldWithConflictingInterfaceMethod
   }
-
+  
   @JvmStatic
   fun test(o: KtPropertyNameConflict.Subclass?) {
    val fieldWithConflictingGetter: Int = o!!.fieldWithConflictingGetter_ktPropertyConflict
@@ -81,18 +81,18 @@ abstract class KtPropertyNameConflict {
    val conflictingInterfaceMethod: Int = o!!.fieldWithConflictingInterfaceMethod
   }
  }
-
+ 
  interface Interface {
   val fieldWithConflictingInterfaceMethod: Int
  }
-
+ 
  abstract inner class Subclass: KtPropertyNameConflict(), Interface {
   @JvmField
   internal var fieldWithConflictingSuperMethod_pp_nativekttypes: Int = 0
-
+  
   @JvmField
   internal var fieldWithConflictingInterfaceMethod_pp_nativekttypes: Int = 0
-
+  
   override val fieldWithConflictingInterfaceMethod: Int
    get() {
     return this.fieldWithConflictingInterfaceMethod_pp_nativekttypes

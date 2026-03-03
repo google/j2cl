@@ -31,32 +31,32 @@ open class SmartCasts {
   open class Local<T: Local<T>> {
    @JvmField
    internal val fieldInitializedInConstructor_pp_j2ktjdt: Any
-
+   
    @JvmField
    internal var t_pp_j2ktjdt: T
-
+   
    internal constructor() {
     this.t_pp_j2ktjdt = this as T
     this.fieldInitializedInConstructor_pp_j2ktjdt = 1
    }
   }
  }
-
+ 
  internal open fun testThisReferenceInInitializer_pp_j2ktjdt() {
   open class Local<T: Local<T>> internal constructor() {
    @JvmField
    internal var fieldInitializedInInitializer_pp_j2ktjdt: Any
-
+   
    @JvmField
    internal var t_pp_j2ktjdt: T
-
+   
    init {
     this.t_pp_j2ktjdt = this as T
     this.fieldInitializedInInitializer_pp_j2ktjdt = 1
    }
   }
  }
-
+ 
  companion object {
   @JvmStatic
   fun <T: Any> testParameterReference(foo: Foo<T>) {
@@ -67,7 +67,7 @@ open class SmartCasts {
     foo as Foo<T>,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testFinalVariableReference(foo: Foo<T>) {
    val localFoo: Foo<T> = foo
@@ -78,7 +78,7 @@ open class SmartCasts {
     localFoo as Foo<T>,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testNonFinalVariableReference(foo: Foo<T>, foo2: Foo<T>) {
    var localFoo: Foo<T> = foo
@@ -90,7 +90,7 @@ open class SmartCasts {
     localFoo as Foo<T>,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testArguments(foo: Foo<T>) {
    SmartCasts.acceptFooOfObjectAndT<T>(
@@ -98,7 +98,7 @@ open class SmartCasts {
     foo as Foo<T>,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testIfStatement(foo: Foo<T>, condition: Boolean) {
    if (condition) {
@@ -110,7 +110,7 @@ open class SmartCasts {
     foo as Foo<T>,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testFinalFieldAccess(container: Container<T>) {
    SmartCasts.acceptFooOfObject(
@@ -120,7 +120,7 @@ open class SmartCasts {
     container.foo as Foo<T>,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testFinalFieldAccessThroughCastVariable(container: Container<T>) {
    SmartCasts.acceptFooOfObject(
@@ -130,7 +130,7 @@ open class SmartCasts {
     (container as Container<T>).foo,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testNonFinalFieldAccess(container: Container<T>) {
    SmartCasts.acceptFooOfObject(
@@ -140,7 +140,7 @@ open class SmartCasts {
     container.nonFinalFoo as Foo<T>,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testInvocation(container: Container<T>) {
    SmartCasts.acceptFooOfObject(
@@ -150,7 +150,7 @@ open class SmartCasts {
     container.getFoo(),
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testTypeArgumentInference(foo: Foo<T>) {
    SmartCasts.acceptFooOfObject(
@@ -160,7 +160,7 @@ open class SmartCasts {
     (foo as Foo<T>).get(),
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testArray(a: Array<T>) {
    SmartCasts.acceptArrayOfObject(
@@ -170,7 +170,7 @@ open class SmartCasts {
     a as Array<T>,
    )
   }
-
+  
   @JvmStatic
   fun <T: Any> testVararg(vararg a: T) {
    val a_1: Array<T> = a as Array<T>
@@ -181,29 +181,29 @@ open class SmartCasts {
     a_1 as Array<T>,
    )
   }
-
+  
   @JvmStatic
   fun acceptFooOfObject(foo: Foo<Any>) {}
-
+  
   @JvmStatic
   fun <T: Any> acceptFooOfT(foo: Foo<T>) {}
-
+  
   @JvmStatic
   fun <T: Any> acceptFooOfObjectAndT(foo: Foo<Any>, foo2: Foo<T>) {}
-
+  
   @JvmStatic
   fun <T: Any> acceptT(foo: T) {}
-
+  
   @JvmStatic
   fun acceptArrayOfObject(a: Array<Any>) {}
-
+  
   @JvmStatic
   fun <T: Any> acceptArrayOfT(a: Array<T>) {}
  }
-
+ 
  fun interface Foo<T: Any> {
   fun get(): T
-
+  
   fun testThisReference() {
    SmartCasts.acceptFooOfObject(
     this as Foo<Any>,
@@ -213,23 +213,23 @@ open class SmartCasts {
    )
   }
  }
-
+ 
  open class Container<T: Any> {
   @JvmField
   val foo: Foo<T>
-
+  
   @JvmField
   var nonFinalFoo: Foo<T>
-
+  
   constructor(foo: Foo<T>) {
    this.foo = foo
    this.nonFinalFoo = foo
   }
-
+  
   open fun getFoo(): Foo<T> {
    return this.foo
   }
-
+  
   open fun testImplicitThisReference() {
    SmartCasts.acceptFooOfObject(
     this.foo as Foo<Any>,
@@ -238,7 +238,7 @@ open class SmartCasts {
     this.foo as Foo<T>,
    )
   }
-
+  
   open fun testExplicitThisReference() {
    SmartCasts.acceptFooOfObject(
     this.foo as Foo<Any>,
@@ -247,7 +247,7 @@ open class SmartCasts {
     this.foo as Foo<T>,
    )
   }
-
+  
   open fun testMixedThisReference() {
    SmartCasts.acceptFooOfObject(
     this.foo as Foo<Any>,
@@ -256,10 +256,10 @@ open class SmartCasts {
     this.foo as Foo<T>,
    )
   }
-
+  
   open class SubContainer<T: Any>: Container<T> {
    internal constructor(foo: Foo<T>): super(foo)
-
+   
    open fun testSuperReference() {
     SmartCasts.acceptFooOfObject(
      super.foo as Foo<Any>,
@@ -268,7 +268,7 @@ open class SmartCasts {
      super.foo as Foo<T>,
     )
    }
-
+   
    open fun testSuperAndThisReference() {
     SmartCasts.acceptFooOfObject(
      super.foo as Foo<Any>,

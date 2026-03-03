@@ -39,7 +39,7 @@ interface Serial
 
 fun interface Cmp {
  fun cmp(): Int
-
+ 
  fun defaultM(): Int {
   return 1
  }
@@ -59,7 +59,7 @@ open class IntersectionTypeTest<U> {
  open fun cast3(s: Any?): Any? {
   return s
  }
-
+ 
  open fun testMethodCall() {
   val o: Any? = IntersectionTypeTest.m()
   IntersectionTypeTest.set(
@@ -70,19 +70,19 @@ open class IntersectionTypeTest<U> {
   )
   val g: Getable<*>? = IntersectionTypeTest.n()
  }
-
+ 
  open fun testDefaultMethodCall(o: Any?) {
   o.let { it as EmptyA?; it as Cmp?; it }!!.defaultM()
   o.let { it as CmpImpl?; it as EmptyA?; it }!!.defaultM()
  }
-
+ 
  companion object {
   @JvmStatic
   fun <T> getAndSet(`object`: T) where T: Getable<*>?, T: Setable? {
    `object`!!.set(1)
    `object`!!.get()
   }
-
+  
   @JvmStatic
   fun <T> cast(o: Any?): Getable<T>? {
    if (o == null) {
@@ -90,70 +90,70 @@ open class IntersectionTypeTest<U> {
    }
    return o.let { it as Getable<T>?; it as Setable?; it }
   }
-
+  
   @JvmStatic
   fun <T> cast1(s: Any?): Getable<Comparable<String>?>? {
    return s.let { it as Getable<Comparable<String>?>?; it as Setable?; it }
   }
-
+  
   @JvmStatic
   fun <T> cast2(s: Any?): Getable<Comparable<T & Any>?>? {
    return s.let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
   }
-
+  
   @JvmStatic
   fun method(): Cmp? {
    return (Cmp {
     return@Cmp 1
    }).let { it as Cmp; it as Serial; it }
   }
-
+  
   @JvmStatic
   fun method2(): Cmp2<Any?>? {
    return Cmp2 { a: Int ->
     return@Cmp2 1
    } as Cmp2<Any?>?
   }
-
+  
   @JvmStatic
   fun testClosureAssignment(o: Any?) {
    val e: A? = o.let { it as A?; it as EmptyA?; it as EmptyB?; it }
    val g: EmptyA? = o.let { it as A?; it as EmptyA?; it as EmptyB?; it }
    val s: EmptyB? = o.let { it as A?; it as EmptyA?; it as EmptyB?; it }
   }
-
+  
   @JvmStatic
   private fun <T> get(t: T): T {
    return t
   }
-
+  
   @JvmStatic
   private fun <T> m(): T where T: A?, T: EmptyA? {
    return IntersectionTypeTest.get<Any?>(
     Any(),
    ) as T
   }
-
+  
   @JvmStatic
   private fun <T> n(): Getable<T>? where T: A?, T: EmptyA? {
    return null
   }
-
+  
   @JvmStatic
   private fun <T> set(t: T) where T: A?, T: EmptyA? {}
-
+  
   @JvmStatic
   private fun <T> callOnIntersetionTypes(t: T) where T: SomeConcreteType?, T: Cmp? {
    t!!.cmp()
    null.let { it as SomeConcreteType?; it as Cmp?; it }!!.cmp()
   }
-
+  
   @JvmStatic
   private fun <T> callOnIntersectionTypeWithParameterizedType(t: T) where T: GenericType<String?>?, T: Getable<Int?>? {
    t!!.doSomething_pp_intersectiontype("")
    t!!.get()
   }
-
+  
   @JvmStatic
   private fun callOnIntersectionTypeWithRawType() {
    val t = GenericType<String?>().let { it as GenericType<Any?>; it as Getable<Any?>; it }
@@ -161,21 +161,21 @@ open class IntersectionTypeTest<U> {
    (t as Getable<Any?>).get()
   }
  }
-
+ 
  open inner class MapEntry internal constructor() {
   open fun <T> method(o: Any?): Getable<T>? {
    return o.let { it as Getable<T>?; it as Setable?; it }
   }
  }
-
+ 
  open class A internal constructor()
-
+ 
  interface EmptyA
-
+ 
  interface EmptyB
-
+ 
  open class SomeConcreteType internal constructor()
-
+ 
  open class GenericType<T> internal constructor() {
   internal open fun doSomething_pp_intersectiontype(t: T) {}
  }

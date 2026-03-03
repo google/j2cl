@@ -27,17 +27,17 @@ import kotlin.jvm.JvmStatic
 open class NativeClass {
  @JsMethod
  external open fun nativeInstanceMethod(): String?
-
+ 
  companion object {
   @JvmStatic
   @JsMethod
   external fun nativeStaticMethod(): NativeClass?
-
+  
   @JvmStatic
   @JsMethod(name = "notPublicNativeStaticMethod")
   internal external fun notPublicNativeStaticMethod_pp_nativeinjection(): NativeClass?
  }
-
+ 
  open class InnerClass {
   @JsMethod
   external open fun nativeInstanceMethod(): String?

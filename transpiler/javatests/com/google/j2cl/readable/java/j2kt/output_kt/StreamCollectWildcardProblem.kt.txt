@@ -42,7 +42,7 @@ open class StreamCollectWildcardProblem {
     ),
    )
   }
-
+  
   @JvmStatic
   fun testMethodReferenceMapCollect(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
@@ -55,7 +55,7 @@ open class StreamCollectWildcardProblem {
     ),
    )
   }
-
+  
   @JvmStatic
   fun testLambdaMapCollect(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
@@ -68,7 +68,7 @@ open class StreamCollectWildcardProblem {
     ),
    )
   }
-
+  
   @JvmStatic
   fun testCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
@@ -77,7 +77,7 @@ open class StreamCollectWildcardProblem {
     ) as MutableList<Foo<*>>,
    )
   }
-
+  
   @JvmStatic
   fun testMethodReferenceMapCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
@@ -90,7 +90,7 @@ open class StreamCollectWildcardProblem {
     ) as MutableList<Foo<*>>,
    )
   }
-
+  
   @JvmStatic
   fun testLambdaMapCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
@@ -103,12 +103,12 @@ open class StreamCollectWildcardProblem {
     ) as MutableList<Foo<*>>,
    )
   }
-
+  
   @JvmStatic
   fun accept(list: MutableList<Foo<*>>) {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   fun testNullabilityInference(stream1: Stream<Foo<Any>>, stream2: Stream<Foo<Any>>, b: Boolean): Stream<String> {
    return Stream.of<Stream<String>?>(
@@ -133,10 +133,10 @@ open class StreamCollectWildcardProblem {
    )
   }
  }
-
+ 
  interface Foo<T: Any> {
   fun getThis(): Foo<T>
-
+  
   fun getString(): String
  }
 }

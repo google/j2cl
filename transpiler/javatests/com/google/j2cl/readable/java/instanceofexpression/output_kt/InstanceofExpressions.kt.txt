@@ -52,14 +52,14 @@ open class InstanceofExpressions {
   b = `object` is InstanceofExpressions
   b = `object` is String
  }
-
+ 
  open fun testInstanceofInterface() {
   val o: Any = Any()
   var b: Boolean = false
   b = o is Serializable
   b = object : Serializable {} is Serializable
  }
-
+ 
  open fun testInstanceofBoxedType() {
   val b: Any = Int(1)
   var a: Boolean = b is Byte
@@ -76,7 +76,7 @@ open class InstanceofExpressions {
   a = d is Number
   a = d is Double
  }
-
+ 
  open fun testInstanceOfArray() {
   val `object`: Any = Any()
   val objectArray: Array<Any?> = arrayOfNulls<Any>(0)
@@ -105,11 +105,11 @@ open class InstanceofExpressions {
   a = `object` is CharArray
   a = `object` is BooleanArray
  }
-
+ 
  open fun testPrecedence() {
   val b: Boolean = (if (false) "foo" else "bar") is String
  }
-
+ 
  private fun testPatternMatch() {
   var s: String? = null
   var i: Int? = null
@@ -144,7 +144,7 @@ open class InstanceofExpressions {
    val k: Int = n!!.toByte().toInt()
   }
  }
-
+ 
  private fun testReproCloneInstanceof() {
   val o: Any? = null
   Int(

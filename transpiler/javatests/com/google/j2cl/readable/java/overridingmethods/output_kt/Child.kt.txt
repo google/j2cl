@@ -27,24 +27,24 @@ fun interface SomeInterface {
 
 open class Parent internal constructor() {
  open fun nonFinal() {}
-
+ 
  open fun finalInChild() {}
-
+ 
  fun finalInParent() {}
 }
 
 open class Child internal constructor(): Parent(), SomeInterface {
  override fun nonFinal() {}
-
+ 
  final override fun finalInChild() {}
-
+ 
  override fun interfaceMethod() {}
 }
 
 class FinalChild internal constructor(): Parent(), SomeInterface {
  override fun nonFinal() {}
-
+ 
  override fun finalInChild() {}
-
+ 
  override fun interfaceMethod() {}
 }

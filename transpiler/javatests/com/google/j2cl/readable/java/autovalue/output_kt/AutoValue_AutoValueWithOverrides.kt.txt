@@ -26,18 +26,18 @@ import kotlin.Suppress
 
 class AutoValue_AutoValueWithOverrides: AutoValueWithOverrides {
  private val baseField: Int
-
+ 
  private val booleanField: Boolean
-
+ 
  internal constructor(baseField: Int, booleanField: Boolean) {
   this.baseField = baseField
   this.booleanField = booleanField
  }
-
+ 
  override fun getBaseField(): Int {
   return this.baseField
  }
-
+ 
  override fun getBooleanField(): Boolean {
   return this.booleanField
  }

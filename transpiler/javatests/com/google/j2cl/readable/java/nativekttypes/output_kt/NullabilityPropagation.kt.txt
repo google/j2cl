@@ -27,103 +27,103 @@ import kotlin.Suppress
 class NullabilityPropagation {
  interface NullabilityToPropagate<ExtendsNullable, ExtendsNonNull: Any> {
   fun nullableString1(s: String?): String?
-
+  
   fun nullableString2(s: String?): String?
-
+  
   fun nonNullString1(s: String): String
-
+  
   fun nonNullString2(s: String): String
-
+  
   fun nullableExtendsNullable1(s: ExtendsNullable?): ExtendsNullable?
-
+  
   fun nullableExtendsNullable2(s: ExtendsNullable?): ExtendsNullable?
-
+  
   fun nonNullExtendsNullable1(s: ExtendsNullable): ExtendsNullable
-
+  
   fun nonNullExtendsNullable2(s: ExtendsNullable): ExtendsNullable
-
+  
   fun nullableExtendsNonNull1(s: ExtendsNonNull?): ExtendsNonNull?
-
+  
   fun nullableExtendsNonNull2(s: ExtendsNonNull?): ExtendsNonNull?
-
+  
   fun nonNullExtendsNonNull1(s: ExtendsNonNull): ExtendsNonNull
-
+  
   fun nonNullExtendsNonNull2(s: ExtendsNonNull): ExtendsNonNull
-
+  
   fun nonNullStringTransitive(s: String): String
-
+  
   fun nonNullStringDoubleOverride(s: String): String
-
+  
   fun jsOptionalParameter(@JsOptional s: String?): String
  }
-
+ 
  fun interface Interface {
   fun nonNullStringDoubleOverride(s: String): String
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class Subtype internal constructor(): NullabilityToPropagate<String?, String>, Interface {
   override fun nullableString1(s: String?): String? {
    return s
   }
-
+  
   override fun nullableString2(s: String?): String {
    return s!!
   }
-
+  
   override fun nonNullString1(s: String): String {
    return s
   }
-
+  
   override fun nonNullString2(s: String): String {
    return s
   }
-
+  
   override fun nullableExtendsNullable1(s: String?): String? {
    return s
   }
-
+  
   override fun nullableExtendsNullable2(s: String?): String {
    return s!!
   }
-
+  
   override fun nonNullExtendsNullable1(s: String?): String? {
    return s
   }
-
+  
   override fun nonNullExtendsNullable2(s: String?): String {
    return s!!
   }
-
+  
   override fun nullableExtendsNonNull1(s: String?): String? {
    return s
   }
-
+  
   override fun nullableExtendsNonNull2(s: String?): String {
    return s!!
   }
-
+  
   override fun nonNullExtendsNonNull1(s: String): String {
    return s
   }
-
+  
   override fun nonNullExtendsNonNull2(s: String): String {
    return s
   }
-
+  
   override fun nonNullStringTransitive(s: String): String {
    return s
   }
-
+  
   override fun nonNullStringDoubleOverride(s: String): String {
    return s
   }
-
+  
   override fun jsOptionalParameter(@JsOptional s: String?): String {
    return s!!
   }
  }
-
+ 
  open inner class SubSubType internal constructor(): NullabilityPropagation.Subtype() {
   override fun nonNullStringTransitive(s: String): String {
    return s

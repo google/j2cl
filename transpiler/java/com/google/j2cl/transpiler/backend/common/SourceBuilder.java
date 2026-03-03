@@ -147,6 +147,8 @@ public class SourceBuilder {
     if (source.isEmpty()) {
       return;
     }
+
+    // TODO(b/489088462): Don't add indent to empty lines.
     String indentedSource =
         source.replace(LINE_SEPARATOR, LINE_SEPARATOR + INDENT.repeat(currentIndentation));
 

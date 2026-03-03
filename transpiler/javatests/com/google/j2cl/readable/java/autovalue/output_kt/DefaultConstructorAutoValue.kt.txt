@@ -27,22 +27,22 @@ import kotlin.jvm.JvmStatic
 @WasAutoValue
 abstract class DefaultConstructorAutoValue {
  internal constructor()
-
+ 
  abstract fun getBooleanField(): Boolean
-
+ 
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): DefaultConstructorAutoValue? {
    return autovalue.AutoValue_DefaultConstructorAutoValue.Builder().setBooleanField_pp_autovalue(true)!!.build()
   }
  }
-
+ 
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   constructor()
-
+  
   internal abstract fun setBooleanField_pp_autovalue(x: Boolean): Builder?
-
+  
   abstract fun build(): DefaultConstructorAutoValue?
  }
 }

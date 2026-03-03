@@ -27,19 +27,19 @@ open class NullabilityInferenceProblem3 {
   open fun concat(generic: Generic<*>): T {
    throw RuntimeException()
   }
-
+  
   open fun toConcrete(): Concrete {
    throw RuntimeException()
   }
  }
-
+ 
  class Concrete: Generic<Concrete> {
   private val delegate: Generic<*>
-
+  
   constructor(delegate: Generic<*>) {
    this.delegate = delegate
   }
-
+  
   override fun concat(generic: Generic<*>): Concrete {
    return this.delegate.concat(generic).toConcrete()
   }

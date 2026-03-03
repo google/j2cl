@@ -33,7 +33,7 @@ open class InferReturn<T> {
   fun <T_1> inferGeneric(foo: T_1): InferReturn<T_1>? {
    return InferReturn<T_1>()
   }
-
+  
   @JvmStatic
   fun tightenType(foo: InferReturn<String?>?): InferReturn<InferReturn<String?>?>? {
    if (foo != null) {
@@ -41,7 +41,7 @@ open class InferReturn<T> {
    }
    return null
   }
-
+  
   @JvmStatic
   fun main() {
    val list: ArrayList<Any?>? = InferReturn.newArrayList<Any?>("foo")
@@ -49,20 +49,20 @@ open class InferReturn<T> {
    val array: Array<Any?>? = InferReturn.newArray<String?>("foo") as Array<Any?>?
    InferReturn.acceptsArrayOfObject(array)
   }
-
+  
   @JvmStatic
   fun <V> newArrayList(foo: V): ArrayList<V>? {
    return ArrayList<V>()
   }
-
+  
   @JvmStatic
   fun <V> newArray(foo: V): Array<V>? {
    return arrayOfNulls<Any>(0) as Array<V>
   }
-
+  
   @JvmStatic
   fun acceptsArrayListOfObject(foo: ArrayList<Any?>?) {}
-
+  
   @JvmStatic
   fun acceptsArrayOfObject(foo: Array<Any?>?) {}
  }

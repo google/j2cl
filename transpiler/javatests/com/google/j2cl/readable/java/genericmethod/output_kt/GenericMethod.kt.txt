@@ -34,41 +34,41 @@ import kotlin.jvm.JvmStatic
 
 open class GenericMethod<T> {
  open fun <T_1, S> foo(f: T_1, s: S) {}
-
+ 
  open fun `fun`(o: Any?) {}
-
+ 
  open fun <T_1: Exception?> `fun`(t: T_1) {}
-
+ 
  open fun <T_1: Error?> `fun`(t: T_1) {
   object : GenericMethod<T_1>() {
    fun fun2(t: T_1) {}
-
+   
    fun <T_1> fun2(t: T_1) {}
   }
   open class LocalClass<T> internal constructor(): GenericMethod<T>() {
    open fun fun2(t: T) {}
-
+   
    open fun <T_1: Number?> fun2(t: T_1) {}
   }
   LocalClass<T_1>()
  }
-
+ 
  open fun <T_1> bar(): GenericMethod<T_1>? {
   return null
  }
-
+ 
  open fun <T_1> `fun`(array: Array<T_1>?): Array<T_1>? {
   return array
  }
-
+ 
  open fun <T_1> checked(): T_1 {
   return null as T_1
  }
-
+ 
  open fun <T_1> unchecked(): T_1 {
   return null as T_1
  }
-
+ 
  open fun test() {
   val g: GenericMethod<Number?> = GenericMethod<Number?>()
   g.foo<GenericMethod<Number?>?, GenericMethod<Number?>?>(g, g)
@@ -93,14 +93,14 @@ open class GenericMethod<T> {
   this.checked<Content?>()!!.getProp_pp_genericmethod()
   this.unchecked<Content?>()!!.getProp_pp_genericmethod()
  }
-
+ 
  companion object {
   @JvmStatic
   fun acceptsContent(content: Content?) {}
-
+  
   @JvmStatic
   fun acceptsString(string: String?) {}
-
+  
   @JvmStatic
   fun testErasureCast_wildcard() {
    val list: MutableList<Container<*>?> = ArrayList<Container<*>>() as MutableList<Container<*>?>
@@ -122,7 +122,7 @@ open class GenericMethod<T> {
    )
    GenericMethod.acceptsContent(deepContent)
   }
-
+  
   @JvmStatic
   fun <CT: Container<C>?, C: Content?> testErasureCast_typeVariable() {
    val list: MutableList<Container<C>?> = ArrayList<Container<C>>() as MutableList<Container<C>?>
@@ -144,48 +144,48 @@ open class GenericMethod<T> {
    )
    GenericMethod.acceptsContent(deepContent)
   }
-
+  
   @JvmStatic
   internal fun <V> testLowerWildcardBound_pp_genericmethod(consumer: Consumer<in V>?, v: V) {
    consumer!!.accept(v)
   }
-
+  
   @JvmStatic
   internal fun <V> testUpperWildcardBound_pp_genericmethod(supplier: Supplier<out V>?): V {
    return supplier!!.get()
   }
-
+  
   @JvmStatic
   internal fun <T_1: Number?> methodWithBoundTypeVariable_pp_genericmethod(unusedForInference: T_1) {}
-
+  
   @JvmStatic
   internal fun testMethodCallsWithCaptureTypeArguments_pp_genericmethod() {
    GenericMethod.methodWithBoundTypeVariable_pp_genericmethod<Long?>(0L)
   }
  }
-
+ 
  open class SuperContainer<C: Container<*>?> internal constructor() {
   internal open fun get_pp_genericmethod(): C {
    return null as C
   }
  }
-
+ 
  open class Container<CT: Content?> internal constructor() {
   internal open fun get_pp_genericmethod(): CT {
    return null as CT
   }
  }
-
+ 
  open class Content internal constructor() {
   internal open fun getProp_pp_genericmethod(): String? {
    return null
   }
  }
-
+ 
  fun interface Consumer<V> {
   fun accept(v: V)
  }
-
+ 
  fun interface Supplier<V> {
   fun get(): V
  }

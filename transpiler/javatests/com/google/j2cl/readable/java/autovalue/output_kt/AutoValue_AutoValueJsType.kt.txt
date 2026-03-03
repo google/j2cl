@@ -29,27 +29,27 @@ import kotlin.Suppress
 
 class AutoValue_AutoValueJsType: AutoValueJsType {
  private val field: Int
-
+ 
  private val withJsMethod: Int
-
+ 
  internal constructor(field: Int, withJsMethod: Int) {
   this.field = field
   this.withJsMethod = withJsMethod
  }
-
+ 
  override fun getField(): Int {
   return this.field
  }
-
+ 
  @JsMethod(name = "getField2")
  override fun getWithJsMethod_pp_autovalue(): Int {
   return this.withJsMethod
  }
-
+ 
  override fun toString(): String {
   return "AutoValueJsType{field=" + this.field + ", withJsMethod=" + this.withJsMethod + "}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -60,7 +60,7 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003

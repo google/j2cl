@@ -40,12 +40,12 @@ open class Casts {
   val o: Any = Any()
   val c: Casts? = o as Casts?
  }
-
+ 
  open fun testCasToInterface() {
   val o: Any = Any()
   val s: Serializable? = o as Serializable?
  }
-
+ 
  open fun testCastToBoxedType() {
   val o: Any = Int(1)
   val b: Byte? = o as Byte?
@@ -58,14 +58,14 @@ open class Casts {
   val c: Char? = o as Char?
   val bool: Boolean? = o as Boolean?
  }
-
+ 
  open fun testCastToArray() {
   val foo: Any? = null as Array<Any?>?
   val bar: Any? = null as Array<Array<Any?>?>?
  }
-
+ 
  private fun functionForInstanceofTest() {}
-
+ 
  open fun testCastVariableAfterInstanceOf() {
   var o: Any = Any()
   if (o is Casts) {
@@ -93,7 +93,7 @@ open class Casts {
   }
   val c_1: Casts? = if (o is Casts) o as Casts? else null
  }
-
+ 
  open fun testCastFieldAfterInstanceOf() {
   var foo: Casts.Foo = Foo()
   if (foo.field is Casts) {
@@ -116,7 +116,7 @@ open class Casts {
   }
   val c_1: Casts? = if (foo.field is Casts) foo.field as Casts? else null
  }
-
+ 
  open fun testCaseMethodAfterInstanceOf() {
   val foo: Casts.Foo = Foo()
   if (foo.method() is Casts) {
@@ -124,7 +124,7 @@ open class Casts {
   }
   val c: Casts? = if (foo.method() is Casts) foo.method() as Casts? else null
  }
-
+ 
  open fun testPrecedence() {
   val foo: Any = "foo"
   val bar: Any = "bar"
@@ -132,11 +132,11 @@ open class Casts {
   val s1: String? = (if (false) foo else bar) as String?
   val s2: String = ("foo" + notString) as String
  }
-
+ 
  open inner class Foo internal constructor() {
   @JvmField
   var field: Any? = Any()
-
+  
   open fun method(): Any? {
    return Any()
   }

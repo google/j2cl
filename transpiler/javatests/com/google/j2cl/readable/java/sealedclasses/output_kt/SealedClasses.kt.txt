@@ -25,58 +25,58 @@ import sealedclasses.sealedclassinanotherpackage.SealedClassInAnotherPackage
 
 open class SealedClasses {
  class SubClass: SealedClassInAnotherPackage()
-
+ 
  interface Animal
-
+ 
  abstract class Mammal: Animal {
   constructor()
-
+  
   internal constructor(name: String?): this()
-
+  
   open fun retrieveName(): String? {
    return "Animal"
   }
-
+  
   abstract fun changeName(updatedName: String?)
-
+  
   class Dolphin: Mammal() {
    override fun changeName(updatedName: String?) {}
   }
  }
-
+ 
  class Dog: Mammal() {
   override fun changeName(updatedName: String?) {}
  }
-
+ 
  class Cat internal constructor(): Mammal() {
   override fun changeName(updatedName: String?) {}
  }
-
+ 
  class Whale internal constructor(): Mammal() {
   override fun changeName(updatedName: String?) {}
  }
-
+ 
  class Deer: Animal {
   private constructor()
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  enum class EnumImplementsSealedInterface: Animal {
   V1,
   V2;
  }
-
+ 
  abstract class Shape {
   class Circle: Shape()
-
+  
   class Rectangle: Shape {
    private constructor()
   }
  }
-
+ 
  open class SealedClassWithInnerClass {
   inner class A: SealedClassWithInnerClass()
-
+  
   inner class B: SealedClassWithInnerClass()
  }
 }

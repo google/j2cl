@@ -56,7 +56,7 @@ open class Arrays {
   objects[0] = null
   objects2d[0]!![1] = null
  }
-
+ 
  open fun testJavaTypeArray() {
   var objects: Array<Arrays.SomeObject?> = arrayOfNulls<Arrays.SomeObject>(100)
   objects = arrayOfNulls<Arrays.SomeObject>(0)
@@ -71,7 +71,7 @@ open class Arrays {
   objects[0] = null
   objects2d[0]!![1] = null
  }
-
+ 
  internal open fun testIntArrays_pp_array() {
   var ints: IntArray = IntArray(100)
   ints = IntArray(0)
@@ -93,7 +93,7 @@ open class Arrays {
   ints[c.code] = c.code
   ints = intArrayOf(b.toInt(), c.code)
  }
-
+ 
  internal open fun testLongArrays_pp_array() {
   var longs: LongArray = LongArray(100)
   longs = LongArray(0)
@@ -115,7 +115,7 @@ open class Arrays {
   longs[c.code] = c.code.toLong()
   longs = longArrayOf(b.toLong(), c.code.toLong())
  }
-
+ 
  internal open fun testDevirtualizedTypeArrays_pp_array() {
   var booleans: Array<Boolean?> = arrayOfNulls<Boolean>(100)
   booleans = arrayOfNulls<Boolean>(0)
@@ -130,7 +130,7 @@ open class Arrays {
   booleans[0] = true
   booleans2d[0]!![1] = false
  }
-
+ 
  internal open fun testStringArrays_pp_array() {
   var strings: Array<String?> = arrayOfNulls<String>(100)
   strings = arrayOfNulls<String>(0)
@@ -145,7 +145,7 @@ open class Arrays {
   strings[0] = null
   strings2d[0]!![1] = null
  }
-
+ 
  private fun testNativeArray() {
   var nativeObjects: Array<NativeType?> = arrayOfNulls<NativeType>(100)
   nativeObjects = arrayOfNulls<NativeType>(0)
@@ -160,37 +160,37 @@ open class Arrays {
   nativeObjects[0] = null
   nativeObjects2d[0]!![1] = null
  }
-
+ 
  open fun testErasureCastsOnArrayAccess() {
   val container: ArrayContainer<String?>? = null
   val s: String? = container!!.data_pp_array!![0]
  }
-
+ 
  open fun testCovariance() {
   var objectArray: Array<Any?>? = null
   val stringArray: Array<String?>? = null
   objectArray = stringArray as Array<Any?>?
  }
-
+ 
  open fun testArraysSupertypeClosureTypes() {}
-
+ 
  open fun consumesCloneable(cloneable: Cloneable?) {}
-
+ 
  open fun consumesSerializable(serializable: Serializable?) {}
-
+ 
  internal open fun <T> testArrayClone_pp_array(array: Array<T>?): Array<T>? {
   return array!!.clone()
  }
-
+ 
  open inner class SomeObject internal constructor()
-
+ 
  @JsType(name = "String", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeType internal constructor()
-
+ 
  open class ArrayContainer<T> internal constructor() {
   @JvmField
   internal var data_pp_array: Array<T>? = null
  }
-
+ 
  annotation class GwtIncompatible
 }

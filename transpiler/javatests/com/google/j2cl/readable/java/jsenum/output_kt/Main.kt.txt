@@ -96,7 +96,7 @@ open class Main {
     },
    )
   }
-
+  
   @JvmStatic
   private fun testExhaustiveJsEnumSwitchExpression() {
    val comparableJsEnum: ComparableJsEnum? = if (ComparableJsEnum.ONE.getValue() == 1) ComparableJsEnum.TWO else null
@@ -114,7 +114,7 @@ open class Main {
     }
    }
   }
-
+  
   @JvmStatic
   private fun testJsEnumAutoboxingSpecialMethods() {
    val stringJsEnum: StringJsEnum = StringJsEnum.ONE
@@ -164,16 +164,16 @@ open class Main {
     ),
    )
   }
-
+  
   @JvmStatic
   private fun acceptsJsFunctionSupplier(supplier: JsFunctionSuppiler<ComparableJsEnum?>?) {}
-
+  
   @JvmStatic
   private fun acceptsSupplierOfSupplier(supplier: Supplier<Supplier<ComparableJsEnum?>?>?) {}
-
+  
   @JvmStatic
   private fun acceptsJsFunctionParameterizedByJsEnum(supplier: SpecializedJsFunction<ComparableJsEnum?>?) {}
-
+  
   @JvmStatic
   private fun testReturnsAndParameters() {
    val returnedValue: ComparableJsEnum? = Main.returnsJsEnum()
@@ -182,20 +182,20 @@ open class Main {
     ComparableJsEnum.ONE,
    )
   }
-
+  
   @JvmStatic
   private fun returnsJsEnum(): ComparableJsEnum? {
    return ComparableJsEnum.ONE
   }
-
+  
   @JvmStatic
   private fun returnsNullJsEnum(): ComparableJsEnum? {
    return null
   }
-
+  
   @JvmStatic
   private fun takesJsEnum(value: ComparableJsEnum?) {}
-
+  
   @JvmStatic
   private fun testBoxUnboxWithTypeInference() {
    val templatedField: TemplatedField<ComparableJsEnum?> = TemplatedField<ComparableJsEnum?>(
@@ -212,12 +212,12 @@ open class Main {
     ComparableJsEnum.ONE,
    )
   }
-
+  
   @JvmStatic
   private fun <T> boxingPassthrough(t: T): T {
    return t
   }
-
+  
   @JvmStatic
   internal fun boxingWithGenerics_pp_jsenum() {
    Foo<Any?>(
@@ -226,13 +226,13 @@ open class Main {
     ),
    )
   }
-
+  
   @JvmStatic
   private fun <T> varargsConsumer(vararg args: T): T {
    val args_1: Array<T>? = args as Array<T>?
    return args_1!![0]
   }
-
+  
   @JvmStatic
   private fun testVarargs() {
    Main.varargsConsumer<SomeJsEnum?>(
@@ -243,7 +243,7 @@ open class Main {
     Main.varargsConsumer<SomeJsEnum?>(arg0)
    }
   }
-
+  
   @JvmStatic
   private fun testNonNativeJsEnumArrays() {
    val arr: Array<IntJsEnum?> = arrayOf<IntJsEnum?>(IntJsEnum.MINUSONE, IntJsEnum.TWENTY)
@@ -273,25 +273,25 @@ open class Main {
     IntJsEnum.TWENTY,
    )
   }
-
+  
   @JvmStatic
   private fun nonNativeJsEnumVarargs(vararg values: IntJsEnum?) {
    val values_1: Array<IntJsEnum?>? = values as Array<IntJsEnum?>?
    val v: IntJsEnum? = values_1!![0]
   }
-
+  
   @JvmStatic
   private fun nonNativeJsEnumArrayVarargs(vararg values: Array<IntJsEnum?>?) {
    val values_1: Array<Array<IntJsEnum?>?>? = values as Array<Array<IntJsEnum?>?>?
    val v: Array<IntJsEnum?>? = values_1!![0]
   }
-
+  
   @JvmStatic
   private fun <T> tVarargs(vararg values: T) {
    val values_1: Array<T>? = values as Array<T>?
    val v: T? = values_1!![0]
   }
-
+  
   @JvmStatic
   private fun testNonNativeStringJsEnumArrays() {
    val arr: Array<StringJsEnum?> = arrayOf<StringJsEnum?>(StringJsEnum.ONE, StringJsEnum.THREE)
@@ -304,7 +304,7 @@ open class Main {
    val arrayWithNull: Array<StringJsEnum?> = arrayOf<StringJsEnum?>(null)
    arrayWithNull[0] = null
   }
-
+  
   @JvmStatic
   private fun testNativeJsEnumArrays() {
    val arr: Array<NativeStringEnum?> = arrayOf<NativeStringEnum?>(NativeStringEnum.ONE, NativeStringEnum.THREE)
@@ -317,26 +317,26 @@ open class Main {
    arrayWithNull[0] = null
   }
  }
-
+ 
  fun interface Supplier<T> {
   fun get(): T
  }
-
+ 
  fun interface Consumer<T> {
   fun accept(t: T)
  }
-
+ 
  @JsEnum
  enum class ComparableJsEnum {
   ZERO,
   ONE,
   TWO;
-
+  
   fun getValue(): Int {
    return this.ordinal
   }
  }
-
+ 
  @JsEnum(hasCustomValue = true)
  enum class IntJsEnum {
   MINUSONE(-1),
@@ -344,139 +344,139 @@ open class Main {
    2 * 10,
   ),
   ELEVEN(11);
-
+  
   private var value: Int = 0
-
+  
   fun getValue(): Int {
    return this.value
   }
-
+  
   constructor(value: Int) {
    this.value = value
   }
  }
-
+ 
  @JsEnum(hasCustomValue = true)
  enum class StringJsEnum {
   ONE("ONE"),
   THREE("THREE");
-
+  
   private var value: String? = null
-
+  
   fun getValue(): String? {
    return this.value
   }
-
+  
   constructor(value: String?) {
    this.value = value
   }
  }
-
+ 
  @JsEnum(hasCustomValue = true)
  enum class NonNullableStringJsEnum {
   ONE("ONE"),
   THREE("THREE");
-
+  
   private var value: String
-
+  
   fun getValue(): String? {
    return this.value
   }
-
+  
   constructor(value: String?) {
    this.value = value!!
   }
  }
-
+ 
  @JsEnum(name = "NonNullableStringJsEnum", namespace = "jsenum.Main", isNative = true)
  enum class NativeStringEnum {
   ONE,
   THREE;
  }
-
+ 
  @JsFunction
  fun interface JsFunctionSuppiler<T> {
   fun get(): T
  }
-
+ 
  @JsFunction
  fun interface SpecializedJsFunction<T> {
   fun get(value: T): T
  }
-
+ 
  open class TemplatedField<T> {
   @JvmField
   internal var value_pp_jsenum: T
-
+  
   internal constructor(value: T) {
    this.value_pp_jsenum = value
   }
-
+  
   internal open fun getValue_pp_jsenum(): T {
    return this.value_pp_jsenum
   }
  }
-
+ 
  open class Foo<T> {
   internal constructor(c: Optional<IntJsEnum>?)
  }
-
+ 
  @JsEnum
  enum class JsEnumWithRenamedProperties {
   @JsProperty(name = "NAUGHT")
   ZERO,
   ONE,
   TWO;
-
+  
   fun getValue(): Int {
    return this.ordinal
   }
  }
-
+ 
  open class SupplierConsumerImpl<T> internal constructor(): Supplier<T>, Consumer<T> {
   override fun accept(t: T) {}
-
+  
   override fun get(): T {
    return null as T
   }
  }
-
+ 
  interface ComparableJsEnumSupplierConsumer: Supplier<ComparableJsEnum?>, Consumer<ComparableJsEnum?> {
   @JsMethod
   override fun get(): ComparableJsEnum?
-
+  
   override fun accept(e: ComparableJsEnum?)
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class ComparableJsEnumSupplierConsumerImpl internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class ComparableJsEnumSupplierConsumerImplWithOverrides internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer {
   override fun accept(t: ComparableJsEnum?) {}
-
+  
   override fun get(): ComparableJsEnum? {
    return null
   }
  }
-
+ 
  @JsEnum
  enum class SomeJsEnum {
   A;
  }
-
+ 
  open class BaseVarargs<T> {
   internal constructor(vararg args: T) {
    val args_1: Array<T>? = args as Array<T>?
   }
  }
-
+ 
  open class SubtypeVarargs: BaseVarargs<SomeJsEnum?> {
   internal constructor(): super(
    SomeJsEnum.A,
    SomeJsEnum.A,
   )
  }
-
+ 
  open class SubtypeImplicitVarargs internal constructor(): BaseVarargs<SomeJsEnum?>()
 }

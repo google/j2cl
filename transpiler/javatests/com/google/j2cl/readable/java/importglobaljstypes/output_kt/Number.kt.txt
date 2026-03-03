@@ -34,40 +34,40 @@ open class Number {
  open fun testJsDocForLiteralType(a: MyLiteralType?): MyLiteralType? {
   return a
  }
-
+ 
  companion object {
   @JvmStatic
   @JsMethod(name = "Number.isInteger", namespace = JsPackage.GLOBAL)
   external fun f(x: Double): Boolean
-
+  
   @JvmStatic
   fun test(x: Double): Boolean {
    return Number.f(x)
   }
-
+  
   @JvmStatic
   @JsMethod(name = "Array", namespace = JsPackage.GLOBAL)
   private external fun <T> createArray(): NativeArray<T>?
-
+  
   @JvmStatic
   private fun getStringAt(index: Int): String? {
    return Number.createArray<String?>()!!.at(index)
   }
-
+  
   @JvmStatic
   private fun getArrayLength(array: NativeArray<*>?): Int {
    return array!!.getLength()
   }
  }
-
+ 
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
  interface NativeArray<T> {
   @JsProperty
   fun getLength(): Int
-
+  
   fun at(index: Int): T
  }
-
+ 
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  interface MyLiteralType
 }

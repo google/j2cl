@@ -29,12 +29,12 @@ open class NullabilityInferenceProblem9 {
   internal fun <V> future_pp_j2ktjdt(v: V): Future<V> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   internal fun <I, O> transformFuture_pp_j2ktjdt(future: Future<I>, fn: FutureFunction<in I, out O>): Future<O> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   internal fun test_pp_j2ktjdt(nullableFooFuture: Future<Foo?>, fooFuture: Future<Foo>): Future<Foo> {
    return NullabilityInferenceProblem9.transformFuture_pp_j2ktjdt<Foo?, Foo?>(
@@ -48,11 +48,11 @@ open class NullabilityInferenceProblem9 {
    ) as Future<Foo>
   }
  }
-
+ 
  interface Foo
-
+ 
  interface Future<V>
-
+ 
  fun interface FutureFunction<I, O> {
   fun apply(i: I): Future<O>
  }

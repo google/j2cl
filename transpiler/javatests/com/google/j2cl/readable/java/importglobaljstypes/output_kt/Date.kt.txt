@@ -30,18 +30,18 @@ open class Date {
  open fun copy(d: NativeDate?): NativeDate? {
   return d
  }
-
+ 
  companion object {
   @JvmStatic
   fun now(x: Double): Double {
    return NativeDate.now()
   }
  }
-
+ 
  @JsType(name = "Date", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeDate {
   external open fun getSeconds(): Int
-
+  
   companion object {
    @JvmStatic
    external fun now(): Double

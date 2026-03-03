@@ -28,11 +28,11 @@ import kotlin.Suppress
 
 class AutoValue_EmptyAutoValue: EmptyAutoValue {
  private constructor()
-
+ 
  override fun toString(): String {
   return "EmptyAutoValue{}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -42,12 +42,12 @@ class AutoValue_EmptyAutoValue: EmptyAutoValue {
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   val h___: Int = 1
   return h___
  }
-
+ 
  class Builder internal constructor(): autovalue.EmptyAutoValue.Builder() {
   override fun build(): EmptyAutoValue? {
    return AutoValue_EmptyAutoValue()

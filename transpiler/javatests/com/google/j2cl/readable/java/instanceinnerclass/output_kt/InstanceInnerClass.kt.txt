@@ -26,20 +26,20 @@ import kotlin.jvm.JvmField
 open class InstanceInnerClass {
  @JvmField
  var instanceField: Int = 0
-
+ 
  open fun funOuter() {}
-
+ 
  open fun test() {
   InstanceInnerClass().InnerClass()
  }
-
+ 
  open inner class InnerClass {
   @JvmField
   var field: Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
-
+  
   @JvmField
   var enclosingInstance: InstanceInnerClass? = this@InstanceInnerClass
-
+  
   open fun funInner() {
    this@InstanceInnerClass.funOuter()
    this@InstanceInnerClass.funOuter()

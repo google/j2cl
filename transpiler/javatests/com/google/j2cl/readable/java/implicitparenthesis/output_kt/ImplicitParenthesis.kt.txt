@@ -31,7 +31,7 @@ open class ImplicitParenthesis {
   ImplicitParenthesis.examples()
   ImplicitParenthesis.nonExamples()
  }
-
+ 
  companion object {
   @JvmStatic
   private fun examples() {
@@ -71,7 +71,7 @@ open class ImplicitParenthesis {
    }!!.toInt()
    assert(primitiveInt == 11)
   }
-
+  
   @JvmStatic
   private fun nonExamples() {
    var primitiveInt: Int = 0
@@ -87,7 +87,7 @@ open class ImplicitParenthesis {
    boxedBoolean = boxedInt!!.toInt() == primitiveInt
    assert(boxedBoolean!!.booleanValue() == false)
   }
-
+  
   @JvmStatic
   private fun parenthesisRemoval() {
    Int(

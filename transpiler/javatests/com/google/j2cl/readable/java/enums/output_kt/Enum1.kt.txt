@@ -40,24 +40,24 @@ enum class Enum2 {
  ),
  VALUE3,
  VALUE4(5);
-
+ 
  @JvmField
  internal var foo_pp_enums: Int = Enum1.V1.ordinal
-
+ 
  constructor(foo: Int) {
   this.foo_pp_enums = foo
  }
-
+ 
  constructor(foo: Enum<*>?): this(
   foo!!.ordinal,
  )
-
+ 
  constructor(vararg somePars: Any?): this(
   somePars!!.size,
  ) {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }
-
+ 
  internal open fun specialMethods_pp_enums() {
   val o1: Int = Enum2.valueOf(
    null!!,
@@ -65,13 +65,13 @@ enum class Enum2 {
   val o2: Int = Enum2.valueOf("VALUE1").ordinal
   val l: Int = Enum2.values().size
  }
-
+ 
  companion object {
   @JvmStatic
   internal fun f_pp_enums(o: Any?): Enum2? {
    return null
   }
-
+  
   @JvmField
   internal var C_pp_enums: Enum2? = Enum2.f_pp_enums(
    Any(),
@@ -85,6 +85,6 @@ enum class Enum3 {
    return@Function 1 + v!!.toInt()
   },
  );
-
+ 
  constructor(function: Function<Int?, Int?>?)
 }

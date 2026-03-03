@@ -37,33 +37,33 @@ import kotlin.jvm.JvmStatic
 @WasAutoValue
 abstract class SimpleAutoValue {
  abstract fun getIntField(): Int
-
+ 
  abstract fun getBooleanField(): Boolean
-
+ 
  abstract fun getStringField(): String?
-
+ 
  abstract fun getDoubleField(): Double?
-
+ 
  abstract fun getNullableField(): Double?
-
+ 
  private var intField: Int = 0
-
+ 
  private var field1: EmptyAutoValue? = null
-
+ 
  private var field2: EmptyAutoValue = Builder().build()!!
-
+ 
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): SimpleAutoValue? {
    return AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0)
   }
-
+  
   @JvmStatic
   internal fun castAndInstanceOf_pp_autovalue(o: Any?): Array<AutoValue_SimpleAutoValue?>? {
    return if (o is Array<*>) o as Array<AutoValue_SimpleAutoValue?>? else null
   }
  }
-
+ 
  abstract class GenericType internal constructor(): AbstractCollection<AutoValue_SimpleAutoValue?>() {
   internal open fun <T: AutoValue_SimpleAutoValue?> foo_pp_autovalue(o1: MutableList<out AutoValue_SimpleAutoValue?>?, o2: MutableList<AutoValue_SimpleAutoValue?>?): T {
    this.foo_pp_autovalue<AutoValue_SimpleAutoValue?>(null, null)!!.getIntField()

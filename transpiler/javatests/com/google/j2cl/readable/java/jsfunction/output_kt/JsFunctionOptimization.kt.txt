@@ -89,15 +89,15 @@ open class JsFunctionOptimization {
    },
   )
  }
-
+ 
  @JsFunction
  fun interface F {
   fun m(s: String?): String?
  }
-
+ 
  open inner class Holder<T> {
   internal constructor(value: T)
-
+  
   internal constructor(i: Int, vararg value: T) {
    val value_1: Array<T>? = value as Array<T>?
   }

@@ -36,7 +36,7 @@ open class LabeledStatement {
    }
   }
  }
-
+ 
  open fun simpleStatement() {
   this.foo()
   do {
@@ -53,13 +53,13 @@ open class LabeledStatement {
   } while (false)
   return
  }
-
+ 
  open fun block() {}
-
+ 
  open fun ifStatement() {
   if (true) {}
  }
-
+ 
  open fun switchStatement() {
   LABEL@ do {
    CASE@ do {
@@ -80,12 +80,12 @@ open class LabeledStatement {
    } while (false)
   } while (false)
  }
-
+ 
  open fun nestedScopes() {
   object : Any() {
    internal fun m_pp_labelstatement() {}
   }
  }
-
+ 
  private fun foo() {}
 }

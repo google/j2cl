@@ -29,11 +29,11 @@ import kotlin.Suppress
 
 class AutoValue_ExtendingAutoValue: ExtendingAutoValue {
  private val baseField: Int
-
+ 
  private val booleanField: Boolean
-
+ 
  private val stringField: String?
-
+ 
  internal constructor(baseField: Int, booleanField: Boolean, stringField: String?) {
   this.baseField = baseField
   this.booleanField = booleanField
@@ -42,23 +42,23 @@ class AutoValue_ExtendingAutoValue: ExtendingAutoValue {
   }
   this.stringField = stringField
  }
-
+ 
  override fun getBaseField(): Int {
   return this.baseField
  }
-
+ 
  override fun getBooleanField(): Boolean {
   return this.booleanField
  }
-
+ 
  override fun getStringField(): String? {
   return this.stringField
  }
-
+ 
  override fun toString(): String {
   return "ExtendingAutoValue{baseField=" + this.baseField + ", booleanField=" + this.booleanField + ", stringField=" + this.stringField + "}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -71,7 +71,7 @@ class AutoValue_ExtendingAutoValue: ExtendingAutoValue {
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003

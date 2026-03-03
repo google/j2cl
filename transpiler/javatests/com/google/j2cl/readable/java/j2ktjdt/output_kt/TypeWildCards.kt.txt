@@ -30,14 +30,14 @@ open class TypeWildCards internal constructor() {
   internal fun testSupplierWithUpperAndLowerBounds_pp_j2ktjdt(supplier: SupplierWithUpperBound<in Child>) {
    val parent: Parent? = supplier.get() as Parent?
   }
-
+  
   @JvmStatic
   internal fun testNullWithLowerBound_pp_j2ktjdt(observer: Observer<in Child>) {
    observer.on(
     null as Child,
    )
   }
-
+  
   @JvmStatic
   fun testObservable(observable: Observable<*>) {
    (observable as Observable<Any?>).addObserver(
@@ -45,7 +45,7 @@ open class TypeWildCards internal constructor() {
     },
    )
   }
-
+  
   @JvmStatic
   fun <T: Observable<*>> testObservableParameterized(observable: T) {
    (observable as Observable<Any?>).addObserver(
@@ -53,7 +53,7 @@ open class TypeWildCards internal constructor() {
     },
    )
   }
-
+  
   @JvmStatic
   fun testSuperWildcardObservable(observable: SuperWildcardObservable<*>) {
    (observable as SuperWildcardObservable<Any?>).addObserver(
@@ -61,7 +61,7 @@ open class TypeWildCards internal constructor() {
     },
    )
   }
-
+  
   @JvmStatic
   fun testKtInObservable(observable: KtInObservable<*>) {
    (observable as KtInObservable<Any?>).addObserver(
@@ -69,7 +69,7 @@ open class TypeWildCards internal constructor() {
     },
    )
   }
-
+  
   @JvmStatic
   fun testRecursiveObservable(observable: RecursiveObservable<*>) {
    (observable as RecursiveObservable<RecursiveObservable<*>>).addObserver(
@@ -78,39 +78,39 @@ open class TypeWildCards internal constructor() {
    )
   }
  }
-
+ 
  open class Parent internal constructor()
-
+ 
  open class Child internal constructor(): Parent()
-
+ 
  fun interface SupplierWithUpperBound<T: Parent> {
   fun get(): T
  }
-
+ 
  fun interface Observer<E> {
   fun on(event: E)
  }
-
+ 
  fun interface KtInObserver<in E> {
   fun on(event: E)
  }
-
+ 
  fun interface Observable<E> {
   fun addObserver(observer: Observer<E>)
  }
-
+ 
  fun interface SuperWildcardObservable<E> {
   fun addObserver(observer: Observer<in E?>)
  }
-
+ 
  fun interface KtInObservable<E> {
   fun addObserver(observer: KtInObserver<E>)
  }
-
+ 
  fun interface RecursiveObservable<E: RecursiveObservable<E>> {
   fun addObserver(observer: Observer<E>)
  }
-
+ 
  open class WithoutBounds internal constructor() {
   companion object {
    @JvmStatic
@@ -118,7 +118,7 @@ open class TypeWildCards internal constructor() {
     (holder as Holder<Any?>).observer_pp_j2ktjdt = Observer { e: Any? ->
     }
    }
-
+   
    @JvmStatic
    fun testSetMethod(holder: Holder<*>) {
     (holder as Holder<Any?>).set_pp_j2ktjdt(
@@ -126,7 +126,7 @@ open class TypeWildCards internal constructor() {
      },
     )
    }
-
+   
    @JvmStatic
    fun testSetStaticMethod(holder: Holder<*>) {
     Holder.setStatic_pp_j2ktjdt(
@@ -136,24 +136,24 @@ open class TypeWildCards internal constructor() {
     )
    }
   }
-
+  
   fun interface Observer<E> {
    fun on(event: E)
   }
-
+  
   open class Holder<E> internal constructor() {
    @JvmField
    internal var observer_pp_j2ktjdt: Observer<E>? = null
-
+   
    internal open fun set_pp_j2ktjdt(observer: Observer<E>) {}
-
+   
    companion object {
     @JvmStatic
     internal fun <E> setStatic_pp_j2ktjdt(holder: Holder<E>, observer: Observer<E>) {}
    }
   }
  }
-
+ 
  open class WithBounds internal constructor() {
   companion object {
    @JvmStatic
@@ -161,7 +161,7 @@ open class TypeWildCards internal constructor() {
     (holder as Holder<Event>).observer_pp_j2ktjdt = Observer { e: Event ->
     }
    }
-
+   
    @JvmStatic
    fun testSetMethod(holder: Holder<*>) {
     (holder as Holder<Event>).set_pp_j2ktjdt(
@@ -169,7 +169,7 @@ open class TypeWildCards internal constructor() {
      },
     )
    }
-
+   
    @JvmStatic
    fun testSetStaticMethod(holder: Holder<*>) {
     Holder.setStatic_pp_j2ktjdt(
@@ -179,26 +179,26 @@ open class TypeWildCards internal constructor() {
     )
    }
   }
-
+  
   interface Event
-
+  
   fun interface Observer<E: Event> {
    fun on(event: E)
   }
-
+  
   open class Holder<E: Event> internal constructor() {
    @JvmField
    internal var observer_pp_j2ktjdt: Observer<E>? = null
-
+   
    internal open fun set_pp_j2ktjdt(observer: Observer<E>) {}
-
+   
    companion object {
     @JvmStatic
     internal fun <E: Event> setStatic_pp_j2ktjdt(holder: Holder<E>, observer: Observer<E>) {}
    }
   }
  }
-
+ 
  open class WithDependentBounds internal constructor() {
   companion object {
    @JvmStatic
@@ -206,7 +206,7 @@ open class TypeWildCards internal constructor() {
     (holder as Holder<Event, Collection<Event>>).observer_pp_j2ktjdt = Observer { e: Collection<out Event> ->
     }
    }
-
+   
    @JvmStatic
    fun testSetMethod(holder: Holder<*, *>) {
     (holder as Holder<Event, Collection<Event>>).set_pp_j2ktjdt(
@@ -214,7 +214,7 @@ open class TypeWildCards internal constructor() {
      },
     )
    }
-
+   
    @JvmStatic
    fun testSetStaticMethod(holder: Holder<*, *>) {
     Holder.setStatic_pp_j2ktjdt(
@@ -224,31 +224,31 @@ open class TypeWildCards internal constructor() {
     )
    }
   }
-
+  
   interface Event
-
+  
   interface Collection<V>
-
+  
   fun interface Observer<E: Event, C: Collection<E>> {
    fun on(events: C)
   }
-
+  
   open class Holder<E: Event, C: Collection<E>> internal constructor() {
    @JvmField
    internal var observer_pp_j2ktjdt: Observer<E, C>? = null
-
+   
    internal open fun set_pp_j2ktjdt(observer: Observer<E, C>) {}
-
+   
    companion object {
     @JvmStatic
     internal fun <E: Event, C: Collection<E>> setStatic_pp_j2ktjdt(holder: Holder<E, C>, observer: Observer<E, C>) {}
    }
   }
  }
-
+ 
  open class Outer<T: Any, V: Any> internal constructor() {
   interface ParameterizedInterface<T, V>
-
+  
   open inner class Inner internal constructor() {
    internal open fun testNullabilityOnWildcardBounds_pp_j2ktjdt(p: ParameterizedInterface<in T?, out V?>) {
     this.testNullabilityOnWildcardBounds_pp_j2ktjdt(p)

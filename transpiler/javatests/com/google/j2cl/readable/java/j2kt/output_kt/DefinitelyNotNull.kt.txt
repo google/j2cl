@@ -34,26 +34,26 @@ open class DefinitelyNotNull {
   internal fun testNotNullSupplier_pp_j2kt(supplier: NotNullSupplier<out String?>): String {
    return supplier.getNotNull()!!
   }
-
+  
   @JvmStatic
   fun <T> testEquivalence(equivalence: Equivalence<in T & Any>, a: T?, b: T?): Boolean {
    return equivalence.equivalent(a, b)
   }
  }
-
+ 
  fun interface NotNullSupplier<T> {
   fun getNotNull(): T & Any
  }
-
+ 
  open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
    throw RuntimeException()
   }
-
+  
   internal open fun <S: T> nullsLast_pp_j2kt(): Ordering<S?> {
    throw RuntimeException()
   }
-
+  
   companion object {
    @JvmStatic
    internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> {
@@ -61,37 +61,37 @@ open class DefinitelyNotNull {
    }
   }
  }
-
+ 
  inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
   @JvmField
   internal val ordering_pp_j2kt: Ordering<in T>
-
+  
   init {
    this.ordering_pp_j2kt = ordering
   }
  }
-
+ 
  open class ImmutableList<E: Any> {
   companion object {
    @JvmStatic
    fun <E: Any> copyOf(iterable: MutableIterable<E>): ImmutableList<E> {
     throw RuntimeException()
    }
-
+   
    @JvmStatic
    fun <E> copyOfNullableWithInvalidBounds(iterable: MutableIterable<E>): ImmutableList<E & Any> {
     return ImmutableList.copyOf<E & Any>(
      iterable as MutableIterable<E & Any>,
     )
    }
-
+   
    @JvmStatic
    fun <E> copyOfNullableWithCorrectBounds(iterable: MutableIterable<E & Any>): ImmutableList<E & Any> {
     return ImmutableList.copyOf<E & Any>(iterable)
    }
   }
  }
-
+ 
  fun interface Equivalence<T: Any> {
   fun equivalent(a: T?, b: T?): Boolean
  }

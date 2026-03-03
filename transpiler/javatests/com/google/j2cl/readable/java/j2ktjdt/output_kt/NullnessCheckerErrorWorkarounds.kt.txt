@@ -28,18 +28,18 @@ open class NullnessCheckerErrorWorkarounds internal constructor() {
   internal fun testNullableAnnotation_pp_j2ktjdt(table: Table<out Cell<*>>) {
    val cell: Cell<*>? = table.get() as Cell<*>?
   }
-
+  
   @JvmStatic
   internal fun testSuppressWarnings_pp_j2ktjdt(table: Table<out Cell<*>>) {
    val cell: Cell<*>? = table.get() as Cell<*>?
   }
  }
-
+ 
  fun interface Array<T> {
   fun get(): T?
  }
-
+ 
  interface Cell<C: Cell<C>>
-
+ 
  fun interface Table<C: Cell<C>>: Array<C>
 }

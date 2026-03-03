@@ -26,12 +26,12 @@ open class OuterClass {
  open fun test() {
   OuterClass().InnerClass().InnerInnerClass()
  }
-
+ 
  open inner class InnerClass {
   open inner class InnerInnerClass {
    @JvmField
    var x: OuterClass.InnerClass? = this@InnerClass
-
+   
    @JvmField
    var y: OuterClass? = this@OuterClass
   }

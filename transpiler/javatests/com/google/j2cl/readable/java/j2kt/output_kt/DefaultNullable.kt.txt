@@ -32,7 +32,7 @@ open class DefaultNullable {
     DefaultNullable.accept_pp_j2kt(arg0)
    }
   }
-
+  
   @JvmStatic
   internal fun accept_pp_j2kt(s: String?) {}
  }
@@ -48,7 +48,7 @@ abstract class Ordering<T> internal constructor() {
  internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
   return null!!
  }
-
+ 
  companion object {
   @JvmStatic
   internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> {

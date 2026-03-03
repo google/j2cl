@@ -44,7 +44,7 @@ open class TryCatch {
    r_1 = null
   }
  }
-
+ 
  @Throws(Throwable::class)
  open fun testEmptyThrowableCatch() {
   try {
@@ -54,7 +54,7 @@ open class TryCatch {
    throw ClassCastException()
   } catch (e_1: Exception) {} catch (e_2: Throwable) {}
  }
-
+ 
  @Throws(Throwable::class)
  open fun testEmptyThrowableRethrow() {
   try {
@@ -63,13 +63,13 @@ open class TryCatch {
    throw e
   }
  }
-
+ 
  open fun testFinally() {
   try {
    assert(true)
   } finally {}
  }
-
+ 
  open fun testTryWithResource() {
   try {
    var ___primaryExc: Throwable? = null
@@ -89,7 +89,7 @@ open class TryCatch {
    }
   } catch (e: Exception) {}
  }
-
+ 
  open fun testTryWithResourceJava9() {
   val thing: ClosableThing = ClosableThing()
   val thing2: ClosableThing = ClosableThing()
@@ -111,7 +111,7 @@ open class TryCatch {
    }
   } catch (e: Exception) {}
  }
-
+ 
  open fun testTryWithResouceOnStaticField() {
   try {
    var ___primaryExc: Throwable? = null
@@ -128,7 +128,7 @@ open class TryCatch {
    }
   } catch (e: Exception) {}
  }
-
+ 
  open fun testNestedTryCatch() {
   try {
    throw java.lang.Exception()
@@ -138,32 +138,32 @@ open class TryCatch {
    } catch (ie: Exception) {}
   }
  }
-
+ 
  @Throws(Throwable::class)
  open fun testThrowGenerics() {
   throw this.getT<Exception?>(
    java.lang.Exception(),
   )!!
  }
-
+ 
  private fun <T> getT(t: T): T {
   return t
  }
-
+ 
  @Throws(Throwable::class)
  open fun testThrowBoundGenerics() {
   throw this.getThrowable<Throwable?>()!!
  }
-
+ 
  private fun <T: Throwable?> getThrowable(): T {
   return null as T
  }
-
+ 
  @Throws(Throwable::class)
  open fun <T: Throwable?> testThrowsParameterized(throwable: T) {
   throw throwable!!
  }
-
+ 
  open fun testMultiCatchParameterizedException() {
   try {
    throw Exception1()
@@ -173,22 +173,22 @@ open class TryCatch {
    e.f("")
   }
  }
-
+ 
  companion object {
   private val closableThing: ClosableThing? = ClosableThing()
  }
-
+ 
  open class ClosableThing internal constructor(): AutoCloseable {
   override fun close() {}
  }
-
+ 
  interface GenericInterface<T> {
   fun f(t: T) {}
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class Exception1 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class Exception2 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
 }

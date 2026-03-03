@@ -33,7 +33,7 @@ open class NullabilityInferenceProblem6 {
     },
    )
   }
-
+  
   @JvmStatic
   internal fun testMethodReference_pp_j2ktjdt(from: Container<*>, to: Container<in Any?>) {
    (from as Container<Any?>).forEach(
@@ -42,7 +42,7 @@ open class NullabilityInferenceProblem6 {
     },
    )
   }
-
+  
   @JvmStatic
   internal fun testLambda_pp_j2ktjdt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
    (from as FooContainer<Foo?>).forEach(
@@ -51,7 +51,7 @@ open class NullabilityInferenceProblem6 {
     },
    )
   }
-
+  
   @JvmStatic
   internal fun testMethodReference_pp_j2ktjdt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
    (from as FooContainer<Foo?>).forEach(
@@ -61,26 +61,26 @@ open class NullabilityInferenceProblem6 {
    )
   }
  }
-
+ 
  fun interface Consumer<V> {
   fun accept(v: V)
  }
-
+ 
  interface Container<V> {
   fun forEach(consumer: Consumer<V>)
-
+  
   fun add(v: V)
  }
-
+ 
  interface Foo
-
+ 
  fun interface FooConsumer<V: Foo?> {
   fun accept(v: V)
  }
-
+ 
  interface FooContainer<V: Foo?> {
   fun forEach(consumer: Consumer<V>)
-
+  
   fun add(v: V)
  }
 }

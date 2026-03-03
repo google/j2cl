@@ -83,7 +83,7 @@ open class Collections {
     Collections.mismatchingCollection(),
    )
   }
-
+  
   @JvmStatic
   fun testCollection_parameterized(collection: MutableCollection<String>) {
    collection.java_contains(
@@ -120,7 +120,7 @@ open class Collections {
     Collections.mismatchingCollection(),
    )
   }
-
+  
   @JvmStatic
   fun testCollection_specialized(collection: CollectionOfString) {
    collection.java_contains(
@@ -157,7 +157,7 @@ open class Collections {
     Collections.mismatchingCollection(),
    )
   }
-
+  
   @JvmStatic
   fun <T> testList_generic(list: MutableList<T>) {
    list.java_addAll(
@@ -177,7 +177,7 @@ open class Collections {
     Collections.mismatching() as Any?,
    )
   }
-
+  
   @JvmStatic
   fun testList_parameterized(list: MutableList<String>) {
    list.java_addAll(
@@ -197,7 +197,7 @@ open class Collections {
     Collections.mismatching() as Any?,
    )
   }
-
+  
   @JvmStatic
   fun testList_specialized(list: ListOfString) {
    list.java_addAll(
@@ -217,7 +217,7 @@ open class Collections {
     Collections.mismatching() as Any?,
    )
   }
-
+  
   @JvmStatic
   fun <K, V> testMap_generic(map: MutableMap<K, V>) {
    map.java_get(
@@ -264,7 +264,7 @@ open class Collections {
     Collections.mismatching() as Any?,
    )
   }
-
+  
   @JvmStatic
   fun testMap_parameterized(map: MutableMap<String, String>) {
    map.java_get(
@@ -311,7 +311,7 @@ open class Collections {
     Collections.mismatching() as Any?,
    )
   }
-
+  
   @JvmStatic
   fun testMap_specialized(map: MapOfString) {
    map.java_get(
@@ -358,73 +358,73 @@ open class Collections {
     Collections.mismatching() as Any?,
    )
   }
-
+  
   @JvmStatic
   private fun <T> convert(`object`: T): T {
    return `object`
   }
-
+  
   @JvmStatic
   private fun <T> convertCollection(c: MutableCollection<T>): MutableCollection<T> {
    return c
   }
-
+  
   @JvmStatic
   private fun <K, V> convertMap(m: MutableMap<K, V>): MutableMap<K, V> {
    return m
   }
-
+  
   @JvmStatic
   private fun <T> generic(): T {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   private fun string(): String {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   private fun mismatching(): Int {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   private fun <T> genericCollection(): MutableCollection<T> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   private fun collectionOfString(): MutableCollection<String> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   private fun mismatchingCollection(): MutableCollection<Int> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   private fun <K, V> genericMap(): MutableMap<K, V> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   private fun mapOfString(): MutableMap<String, String> {
    throw RuntimeException()
   }
  }
-
+ 
  open class CustomCollection<T>: AbstractCollection<T>() {
   override fun iterator(): MutableIterator<T> {
    throw RuntimeException()
   }
-
+  
   override val size: Int
    get() {
     return 0
    }
-
+  
   override fun contains(o: T): Boolean {
    val o_1: Any? = o
    var o_2: Any? = o_1
@@ -433,7 +433,7 @@ open class Collections {
     o_2 as T,
    )
   }
-
+  
   override fun remove(o: T): Boolean {
    val o_1: Any? = o
    var o_2: Any? = o_1
@@ -442,7 +442,7 @@ open class Collections {
     o_2 as T,
    )
   }
-
+  
   override fun addAll(c: Collection<T>): Boolean {
    val c_1: MutableCollection<out T> = c as MutableCollection<out T>
    var c_2: MutableCollection<out T> = c_1
@@ -451,7 +451,7 @@ open class Collections {
     c_2 as Collection<T>,
    )
   }
-
+  
   override fun containsAll(c: Collection<T>): Boolean {
    val c_1: MutableCollection<*> = c as MutableCollection<*>
    var c_2: MutableCollection<*> = c_1
@@ -460,7 +460,7 @@ open class Collections {
     c_2 as Collection<T>,
    )
   }
-
+  
   override fun removeAll(c: Collection<T>): Boolean {
    val c_1: MutableCollection<*> = c as MutableCollection<*>
    var c_2: MutableCollection<*> = c_1
@@ -469,7 +469,7 @@ open class Collections {
     c_2 as Collection<T>,
    )
   }
-
+  
   override fun retainAll(c: Collection<T>): Boolean {
    val c_1: MutableCollection<*> = c as MutableCollection<*>
    var c_2: MutableCollection<*> = c_1
@@ -478,33 +478,33 @@ open class Collections {
     c_2 as Collection<T>,
    )
   }
-
+  
   override fun toArray(): Array<Any?> {
    return super<AbstractCollection>.toArray()
   }
-
+  
   override fun <T1> toArray(a: Array<T1>): Array<T1> {
    return super<AbstractCollection>.toArray<T1>(a)
   }
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class CustomCollectionDisambiguatingOverrides<T>: CustomCollection<T>(), MutableCollectionJvm<T> {
   override fun spliterator(): Spliterator<T> {
    return super<CustomCollection>.spliterator()
   }
  }
-
+ 
  open class CustomList<T>: AbstractList<T>() {
   override fun get(index: Int): T {
    throw IndexOutOfBoundsException()
   }
-
+  
   override val size: Int
    get() {
     return 0
    }
-
+  
   override fun addAll(index: Int, c: Collection<T>): Boolean {
    val c_1: MutableCollection<out T> = c as MutableCollection<out T>
    var c_2: MutableCollection<out T> = c_1
@@ -514,7 +514,7 @@ open class Collections {
     c_2 as Collection<T>,
    )
   }
-
+  
   override fun indexOf(o: T): Int {
    val o_1: Any? = o
    var o_2: Any? = o_1
@@ -523,7 +523,7 @@ open class Collections {
     o_2 as T,
    )
   }
-
+  
   override fun lastIndexOf(o: T): Int {
    val o_1: Any? = o
    var o_2: Any? = o_1
@@ -532,22 +532,22 @@ open class Collections {
     o_2 as T,
    )
   }
-
+  
   override fun toArray(): Array<Any?> {
    return super<AbstractList>.toArray()
   }
-
+  
   override fun <T1> toArray(a: Array<T1>): Array<T1> {
    return super<AbstractList>.toArray<T1>(a)
   }
  }
-
+ 
  open class CustomMap<K, V>: AbstractMap<K, V>() {
   override val entries: MutableSet<MutableEntry<K, V>>
    get() {
     throw RuntimeException()
    }
-
+  
   override fun containsKey(key: K): Boolean {
    val key_1: Any? = key
    var key_2: Any? = key_1
@@ -556,7 +556,7 @@ open class Collections {
     key_2 as K,
    )
   }
-
+  
   override fun containsValue(value: V): Boolean {
    val value_1: Any? = value
    var value_2: Any? = value_1
@@ -565,7 +565,7 @@ open class Collections {
     value_2 as V,
    )
   }
-
+  
   override fun remove(key: K): V? {
    val key_1: Any? = key
    var key_2: Any? = key_1
@@ -574,7 +574,7 @@ open class Collections {
     key_2 as K,
    )
   }
-
+  
   override fun remove(key: K, value: V): Boolean {
    val value_1: Any? = value
    val key_1: Any? = key
@@ -587,7 +587,7 @@ open class Collections {
     value_2 as V,
    )
   }
-
+  
   override fun get(key: K): V? {
    val key_1: Any? = key
    var key_2: Any? = key_1
@@ -596,7 +596,7 @@ open class Collections {
     key_2 as K,
    )
   }
-
+  
   override fun getOrDefault(key: K, defaultValue: V): V {
    val defaultValue_1: V? = defaultValue
    val key_1: Any? = key
@@ -607,7 +607,7 @@ open class Collections {
     defaultValue_1 as V,
    ) as V
   }
-
+  
   override fun putAll(m: Map<out K, V>) {
    val m_1: MutableMap<out K, out V> = m as MutableMap<out K, out V>
    var m_2: MutableMap<out K, out V> = m_1
@@ -617,7 +617,7 @@ open class Collections {
    )
   }
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class CustomMapDisambiguatingOverrides<K, V>: CustomMap<K, V>(), MutableMapJvm<K, V> {
   override fun getOrDefault(arg0: K, arg1: V): V {
@@ -628,7 +628,7 @@ open class Collections {
     arg1_1 as V,
    ) as V
   }
-
+  
   override fun remove(arg0: K, arg1: V): Boolean {
    val arg1_1: Any? = arg1
    val arg0_1: Any? = arg0
@@ -638,7 +638,7 @@ open class Collections {
    )
   }
  }
-
+ 
  open class CustomMapReturnTypes<K, V>: CustomMap<K, V>() {
   override fun getOrDefault(key: K, defaultValue: V): V {
    val defaultValue_1: V? = defaultValue
@@ -646,21 +646,21 @@ open class Collections {
    return defaultValue_1 as V
   }
  }
-
+ 
  open class CollectionOfString: CustomCollection<String>() {
   open fun containsInteger(integer: Int): Boolean {
    return super<CustomCollection>.remove(
     integer as Any? as String,
    )
   }
-
+  
   open fun removeInteger(integer: Int): Boolean {
    return super<CustomCollection>.remove(
     integer as Any? as String,
    )
   }
  }
-
+ 
  open class ListOfString: CustomList<String>() {
   override fun indexOf(o: String): Int {
    val o_1: Any? = o
@@ -670,7 +670,7 @@ open class Collections {
     o_2 as String,
    )
   }
-
+  
   override fun lastIndexOf(o: String): Int {
    val o_1: Any? = o
    var o_2: Any? = o_1
@@ -680,7 +680,7 @@ open class Collections {
    )
   }
  }
-
+ 
  open class MapOfString: CustomMap<String, String>() {
   override fun containsKey(key: String): Boolean {
    val key_1: Any? = key
@@ -690,7 +690,7 @@ open class Collections {
     key_2 as String,
    )
   }
-
+  
   override fun containsValue(value: String): Boolean {
    val value_1: Any? = value
    var value_2: Any? = value_1
@@ -699,7 +699,7 @@ open class Collections {
     value_2 as String,
    )
   }
-
+  
   override fun remove(key: String): String? {
    val key_1: Any? = key
    var key_2: Any? = key_1
@@ -708,7 +708,7 @@ open class Collections {
     key_2 as String,
    )
   }
-
+  
   override fun remove(key: String, value: String): Boolean {
    val value_1: Any? = value
    val key_1: Any? = key
@@ -721,7 +721,7 @@ open class Collections {
     value_2 as String,
    )
   }
-
+  
   override fun get(key: String): String? {
    val key_1: Any? = key
    var key_2: Any? = key_1
@@ -730,7 +730,7 @@ open class Collections {
     key_2 as String,
    )
   }
-
+  
   override fun getOrDefault(key: String, defaultValue: String): String {
    val defaultValue_1: String? = defaultValue
    val key_1: Any? = key
@@ -742,23 +742,23 @@ open class Collections {
    ) as String
   }
  }
-
+ 
  abstract class AbstractCollectionWithToArrayOverride<E>: MutableCollectionJvm<E> {
   @Suppress("NOTHING_TO_OVERRIDE")
   override fun toArray(): Array<Any?> {
    return uninitializedArrayOf<Any>(0) as Array<Any?>
   }
-
+  
   @Suppress("NOTHING_TO_OVERRIDE")
   override fun <T> toArray(a: Array<T>): Array<T> {
    return a
   }
  }
-
+ 
  interface CollectionInterfaceWithToArrayOverride<E>: MutableListJvm<E> {
   @Suppress("NOTHING_TO_OVERRIDE")
   override fun toArray(): Array<Any?>
-
+  
   @Suppress("NOTHING_TO_OVERRIDE")
   override fun <T> toArray(a: Array<T>): Array<T>
  }

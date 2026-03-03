@@ -34,28 +34,28 @@ interface ParentInterface {
 
 open class GrandParent internal constructor() {
  open fun grandParentSimplest() {}
-
+ 
  open fun grandParentWithParams(foo: Int) {}
-
+ 
  open fun grandParentWithChangingReturn(): Any? {
   return null
  }
-
+ 
  open fun defaultParent() {}
-
+ 
  open fun defaultGrandParent() {}
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class Parent internal constructor(): GrandParent(), ParentInterface {
  open fun parentSimplest() {}
-
+ 
  open fun parentWithParams(foo: Int) {}
-
+ 
  open fun parentWithChangingReturn(): Any? {
   return null
  }
-
+ 
  override fun defaultParent() {
   super<GrandParent>.defaultParent()
   super<ParentInterface>.defaultParent()
@@ -67,29 +67,29 @@ open class Child: Parent(), GrandParentInterface {
  override fun parentSimplest() {
   super<Parent>.parentSimplest()
  }
-
+ 
  override fun parentWithParams(foo: Int) {
   super<Parent>.parentWithParams(foo)
  }
-
+ 
  override fun parentWithChangingReturn(): Child? {
   super<Parent>.parentWithChangingReturn()
   return this
  }
-
+ 
  override fun grandParentSimplest() {
   super<Parent>.grandParentSimplest()
  }
-
+ 
  override fun grandParentWithParams(foo: Int) {
   super<Parent>.grandParentWithParams(foo)
  }
-
+ 
  override fun grandParentWithChangingReturn(): Child? {
   super<Parent>.grandParentWithChangingReturn()
   return this
  }
-
+ 
  override fun defaultGrandParent() {
   super<Parent>.defaultGrandParent()
   super<GrandParentInterface>.defaultGrandParent()

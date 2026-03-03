@@ -54,23 +54,23 @@ open class TypeWildCards {
  open fun unbounded(g: GenericType<*>?): Any? {
   return g!!.get_pp_typewildcards()
  }
-
+ 
  open fun upperBound(g: GenericType<out Bar?>?): Bar? {
   return g!!.get_pp_typewildcards()
  }
-
+ 
  open fun lowerBound(g: GenericType<in Bar?>?): Any? {
   return g!!.get_pp_typewildcards()
  }
-
+ 
  open fun unboundedRecursive(g: RecursiveType<*>?) {}
-
+ 
  open fun upperBoundRecursive(g: GenericType<out RecursiveType<*>?>?) {}
-
+ 
  open fun lowerBoundRecursive(g: GenericType<in RecursiveType<*>?>?) {}
-
+ 
  open fun deepRecursiveType(t: DeepRecursiveType<*>?) {}
-
+ 
  open fun test() {
   this.unbounded(
    GenericType<Bar?>(),
@@ -82,7 +82,7 @@ open class TypeWildCards {
    GenericType<Bar?>(),
   )
  }
-
+ 
  open fun testInferredGenericIntersection() {
   val elements: List<TypeWildCards.Element?>? = null
   val otherElements: List<TypeWildCards.SubOtherElement?>? = null
@@ -94,99 +94,99 @@ open class TypeWildCards {
    },
   )
  }
-
+ 
  open fun testRecursiveGeneric() {
   TypeWildCards.takesRecursiveGeneric(
    Foo(),
   )
  }
-
+ 
  companion object {
   @JvmStatic
   fun <T: typewildcards.TypeWildCards.A?> testBoundedTypeMemberAccess(t: T) {
    val i: Int = t!!.f_pp_typewildcards
    t!!.m()
   }
-
+  
   @JvmStatic
   fun <T> testIntersectionBoundedTypeMemberAccess(t: T) where T: typewildcards.TypeWildCards.A?, T: Y? {
    val i: Int = t!!.f_pp_typewildcards
    t!!.m()
    t!!.n()
   }
-
+  
   @JvmStatic
   private fun <F, V> transform(from: List<F>?, function: Function<in F, out V>?): List<V>? {
    return null
   }
-
+  
   @JvmStatic
   private fun <E> concat(a: List<out E>?, b: List<out E>?): List<E>? {
    return null
   }
-
+  
   @JvmStatic
   private fun takesRecursiveGeneric(foo: GenericType<TypeWildCards.Foo?>?) {}
-
+  
   @JvmStatic
   fun <C> testInferredIntersectionWithTypeVariable(ri: RecursiveInterface<out C, C>?): C {
    return ri!!.m()
   }
-
+  
   @JvmStatic
   fun testWildcardInRecursiveVariableDeclaration() {
    val o: RecursiveType<*> = RecursiveType(null)
   }
-
+  
   @JvmStatic
   internal fun <D> createMultipleGenerics_pp_typewildcards(foo: List<D>?): MultipleGenerics<D, String?, List<D>?>? {
    return MultipleGenerics<D, String?, List<D>?>()
   }
-
+  
   @JvmField
   internal var listWithWildcard_pp_typewildcards: List<*>? = null
-
+  
   @JvmField
   internal var valMultipleGenerics_pp_typewildcards: MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(
    TypeWildCards.listWithWildcard_pp_typewildcards,
   )
  }
-
+ 
  fun interface X {
   fun m()
  }
-
+ 
  fun interface Y {
   fun n()
  }
-
+ 
  open class A internal constructor(): X {
   @JvmField
   internal var f_pp_typewildcards: Int = 0
-
+  
   override fun m() {}
  }
-
+ 
  fun interface IntegerSupplier {
   fun get(): Int?
  }
-
+ 
  fun interface HasKey {
   fun getKey(): String?
  }
-
+ 
  abstract inner class Element: HasKey, IntegerSupplier
-
+ 
  abstract inner class OtherElement: IntegerSupplier, HasKey
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract inner class SubOtherElement: TypeWildCards.OtherElement(), HasKey
-
+ 
  open inner class Foo internal constructor(): GenericType<TypeWildCards.Foo?>()
-
+ 
  fun interface RecursiveInterface<T: RecursiveInterface<T, C>?, C> {
   fun m(): T
  }
-
+ 
  open class MultipleGenerics<A, B, C> internal constructor()
 }

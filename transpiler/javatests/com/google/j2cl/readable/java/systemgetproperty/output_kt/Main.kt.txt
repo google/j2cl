@@ -29,9 +29,9 @@ import kotlin.jvm.JvmStatic
 open class Main {
  companion object {
   private val property: String? = System.getProperty("jre.classMetadata")
-
+  
   private val propertyWithDefault: String? = System.getProperty("jre.classMetadata", "default")
-
+  
   @JvmStatic
   fun main(args: Array<String?>?) {
    var x: Boolean = false
@@ -50,7 +50,7 @@ open class Main {
     Main.mightHaveSideEffects(),
    )!!.equals("foo")
   }
-
+  
   @JvmStatic
   private fun mightHaveSideEffects(): String? {
    return "Foo"

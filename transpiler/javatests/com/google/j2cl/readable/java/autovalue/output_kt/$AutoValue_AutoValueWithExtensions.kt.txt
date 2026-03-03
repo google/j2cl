@@ -29,9 +29,9 @@ import kotlin.Suppress
 
 abstract class ___AutoValue_AutoValueWithExtensions: AutoValueWithExtensions {
  private val intField: Int
-
+ 
  private val stringField: String?
-
+ 
  internal constructor(intField: Int, stringField: String?) {
   this.intField = intField
   if (stringField == null) {
@@ -39,19 +39,19 @@ abstract class ___AutoValue_AutoValueWithExtensions: AutoValueWithExtensions {
   }
   this.stringField = stringField
  }
-
+ 
  override fun getIntField(): Int {
   return this.intField
  }
-
+ 
  override fun getStringField(): String? {
   return this.stringField
  }
-
+ 
  override fun toString(): String {
   return "AutoValueWithExtensions{intField=" + this.intField + ", stringField=" + this.stringField + "}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -64,7 +64,7 @@ abstract class ___AutoValue_AutoValueWithExtensions: AutoValueWithExtensions {
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003

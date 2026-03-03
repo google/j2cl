@@ -26,13 +26,13 @@ import kotlin.Suppress
 @JsType(isNative = true)
 open class Nullability {
  external open fun acceptsNull(arg: String?)
-
+ 
  external open fun doesNotAcceptNull(arg: String)
 }
 
 @JsType(name = "Nullability", isNative = true)
 open class NullabilityNullMarked internal constructor() {
  external open fun acceptsNull(arg: String?)
-
+ 
  external open fun doesNotAcceptNull(arg: String)
 }

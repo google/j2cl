@@ -32,7 +32,7 @@ open class A<T, S> internal constructor() {
  open fun `fun`(s: S): T {
   return null as T
  }
-
+ 
  open fun get(): T {
   return null as T
  }
@@ -47,7 +47,7 @@ open class B internal constructor(): A<Number?, String?>(), I<Int?, String?> {
 
 interface SpecializedInterface {
  fun `fun`(s: String?): String?
-
+ 
  fun get(): String?
 }
 

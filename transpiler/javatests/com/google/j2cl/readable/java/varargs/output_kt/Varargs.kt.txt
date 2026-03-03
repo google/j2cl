@@ -33,40 +33,40 @@ import kotlin.jvm.JvmStatic
 
 open class Varargs {
  private var args: Array<Any?>? = null
-
+ 
  constructor(vararg args: Int)
-
+ 
  constructor(): this(1)
-
+ 
  open fun test(a: Int, vararg args: Any?) {
   val args_1: Array<Any?>? = args as Array<Any?>?
  }
-
+ 
  open fun testCloneable(vararg args: Cloneable?) {
   val args_1: Array<Cloneable?>? = args as Array<Cloneable?>?
  }
-
+ 
  open fun testSerializable(vararg args: Serializable?) {
   val args_1: Array<Serializable?>? = args as Array<Serializable?>?
  }
-
+ 
  open fun testAssignment(vararg args: Any?) {
   val args_1: Array<Any?>? = args as Array<Any?>?
   this.args = args_1
  }
-
+ 
  open fun testLambda(functionalInterface: FunctionalInterface?) {}
-
+ 
  open fun testOverloaded(o: Any?) {}
-
+ 
  open fun testOverloaded(o: String?, vararg rest: Any?) {
   val rest_1: Array<Any?>? = rest as Array<Any?>?
  }
-
+ 
  open fun testOverloaded(l: Long) {}
-
+ 
  open fun testOverloaded(l: Long, vararg rest: Long) {}
-
+ 
  open fun main() {
   val v: Varargs = Varargs()
   v.test(1)
@@ -123,24 +123,24 @@ open class Varargs {
   v.testOverloaded(1L, 2L, 3L)
   v.testOverloaded(1L, 2L, 3L)
  }
-
+ 
  companion object {
   @JvmStatic
   fun <T: Number?> `fun`(vararg elements: T) {
    val elements_1: Array<T>? = elements as Array<T>?
   }
-
+  
   @JvmStatic
   fun <E: Number?> bar(a: E, b: E) {
    Varargs.`fun`<E>(a, b)
   }
-
+  
   @JvmStatic
   fun <T> passthrough(o: T): T {
    return o
   }
  }
-
+ 
  fun interface FunctionalInterface {
   fun apply(vararg strings: String?)
  }

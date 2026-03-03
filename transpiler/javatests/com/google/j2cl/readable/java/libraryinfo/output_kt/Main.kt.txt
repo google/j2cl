@@ -38,20 +38,20 @@ open class Main {
  private fun execute() {
   Main.log(42)
  }
-
+ 
  override fun toString(): String {
   return super.toString()
  }
-
+ 
  companion object {
   @JvmField
   var STATIC_FIELD: String? = "STATIC_FIELD"
-
+  
   const val CONSTANT: String = "STATIC_FIELD"
-
+  
   @JsProperty
   const val JS_CONSTANT: String = "STATIC_FIELD"
-
+  
   @JvmStatic
   @JsMethod
   fun entryPoint() {
@@ -67,11 +67,11 @@ open class Main {
     internal fun foo_pp_libraryinfo() {}
    }
   }
-
+  
   @JvmStatic
   @JsMethod(name = "console.log", namespace = JsPackage.GLOBAL)
   external fun log(o: Int)
-
+  
   @JvmStatic
   @JsMethod
   fun main() {
@@ -80,54 +80,54 @@ open class Main {
    val clazz: Class<*> = Foo::class.javaObjectType
   }
  }
-
+ 
  @JsType
  interface JsTypeInterface {
   fun foo()
-
+  
   fun bar()
  }
-
+ 
  fun interface FunctionnalInterface {
   fun foo()
  }
-
+ 
  fun interface JsAccessibleFunctionnalInterface {
   @JsMethod
   fun accessibleFunctionalInterfaceMethod()
  }
-
+ 
  @JsFunction
  fun interface Function {
   fun apply(s: String?)
  }
-
+ 
  class FunctionImpl internal constructor(): Function {
   override fun apply(s: String?) {}
  }
-
+ 
  @JsEnum
  enum class MyJsEnum {
   A,
   B,
   C;
  }
-
+ 
  enum class MyEnum {
   FOO,
   BAR;
  }
-
+ 
  @JsType
  open class MyJsType {
   @JvmField
   internal var someField_pp_libraryinfo: Any? = null
-
+  
   constructor() {
    this.someField_pp_libraryinfo = Main()
   }
  }
-
+ 
  open inner class Foo {
   internal open fun instanceMethod_pp_libraryinfo() {}
  }

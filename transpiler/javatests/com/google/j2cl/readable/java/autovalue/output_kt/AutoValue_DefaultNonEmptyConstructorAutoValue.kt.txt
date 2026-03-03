@@ -30,19 +30,19 @@ import kotlin.Suppress
 
 class AutoValue_DefaultNonEmptyConstructorAutoValue: DefaultNonEmptyConstructorAutoValue {
  private val booleanField: Boolean
-
+ 
  private constructor(booleanField: Boolean) {
   this.booleanField = booleanField
  }
-
+ 
  override fun getBooleanField(): Boolean {
   return this.booleanField
  }
-
+ 
  override fun toString(): String {
   return "DefaultNonEmptyConstructorAutoValue{booleanField=" + this.booleanField + "}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -53,7 +53,7 @@ class AutoValue_DefaultNonEmptyConstructorAutoValue: DefaultNonEmptyConstructorA
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
@@ -62,12 +62,12 @@ class AutoValue_DefaultNonEmptyConstructorAutoValue: DefaultNonEmptyConstructorA
   )
   return h___
  }
-
+ 
  class Builder internal constructor(): autovalue.DefaultNonEmptyConstructorAutoValue.Builder() {
   private var booleanField: Boolean = false
-
+  
   private var set___0: Byte = 0.toByte()
-
+  
   override fun setBooleanField(booleanField: Boolean): autovalue.DefaultNonEmptyConstructorAutoValue.Builder? {
    this.booleanField = booleanField
    this.set___0 = this.set___0.toInt().or(
@@ -75,7 +75,7 @@ class AutoValue_DefaultNonEmptyConstructorAutoValue: DefaultNonEmptyConstructorA
    ).toByte()
    return this
   }
-
+  
   override fun build(): DefaultNonEmptyConstructorAutoValue? {
    if (this.set___0.toInt() != 1) {
     val missing: String = " booleanField"

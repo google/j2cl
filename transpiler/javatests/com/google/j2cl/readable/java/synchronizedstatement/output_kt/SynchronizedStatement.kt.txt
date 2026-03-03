@@ -30,41 +30,41 @@ import kotlin.synchronized
 
 open class SynchronizedStatement: J2ktMonitor() {
  private var a: Int = 0
-
+ 
  private var b: Int = 0
-
+ 
  private val j2ktMonitor: J2ktMonitor? = J2ktMonitor()
-
+ 
  private val customMonitor: J2ktMonitor? = CustomMonitor()
-
+ 
  open fun testSynchronizedOnThis() {
   synchronized<Unit>(this) {
    this.a = this.a + 1
    this.b = this.b - 1
   }
  }
-
+ 
  open fun testSynchronizedOnJ2ktMonitor() {
   synchronized<Unit>(this.j2ktMonitor!!) {
    this.a = this.a + 1
    this.b = this.b - 1
   }
  }
-
+ 
  open fun testSynchronizedOnCustomMonitor() {
   synchronized<Unit>(this.customMonitor!!) {
    this.a = this.a + 1
    this.b = this.b - 1
   }
  }
-
+ 
  open fun testSynchronizedMethod() {
   synchronized<Unit>(this) {
    this.a = this.a + 1
    this.b = this.b - 1
   }
  }
-
+ 
  open fun testReturn(): Int {
   synchronized<Unit>(this) {
    if (this.a < 10) {
@@ -81,9 +81,9 @@ open class SynchronizedStatement: J2ktMonitor() {
    ___value_1
   }
  }
-
+ 
  open fun testBreakAndContinue() {}
-
+ 
  open fun testInitialization(): Int {
   var a: Int = 0
   synchronized<Unit>(this) {
@@ -91,7 +91,7 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
   return a
  }
-
+ 
  open fun testIfStatementWithNonVoidBodyWithoutElse() {
   synchronized<Unit>(this) {
    if (this.a < 10) {
@@ -101,16 +101,16 @@ open class SynchronizedStatement: J2ktMonitor() {
    }
   }
  }
-
+ 
  private fun intMethod(): Int {
   return 0
  }
-
+ 
  companion object {
   private var staticA: Int = 0
-
+  
   private var staticB: Int = 0
-
+  
   @JvmStatic
   fun testSynchronizedOnClass() {
    synchronized<Unit>(SynchronizedStatement::class.javaObjectType) {
@@ -118,7 +118,7 @@ open class SynchronizedStatement: J2ktMonitor() {
     SynchronizedStatement.staticB = SynchronizedStatement.staticB - 1
    }
   }
-
+  
   @JvmStatic
   fun testSynchronizedStaticMethod() {
    synchronized<Unit>(SynchronizedStatement::class.javaObjectType) {
@@ -127,12 +127,12 @@ open class SynchronizedStatement: J2ktMonitor() {
    }
   }
  }
-
+ 
  open class ExtendsSynchronized: SynchronizedStatement() {
   internal open fun foo_pp_synchronizedstatement() {
    synchronized<Unit>(this) {}
   }
  }
-
+ 
  open class CustomMonitor: J2ktMonitor()
 }

@@ -35,76 +35,76 @@ import kotlin.collections.MutableList
 
 open class Main {
  private var f1: String = "Hello"
-
+ 
  private var f2: String? = null
-
+ 
  private var f4: MutableList<String> = ArrayList<String>()
-
+ 
  private var f5: MutableList<String>? = ArrayList<String>()
-
+ 
  private var f6: MutableList<String?> = ArrayList<String>() as MutableList<String?>
-
+ 
  private var f7: MutableList<String?>? = null
-
+ 
  private var f8: Array<String> = arrayOf<String>()
-
+ 
  private var f9: Array<String?> = arrayOf<String?>()
-
+ 
  private var f10: Array<String>? = arrayOf<String>()
-
+ 
  private var f12: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
-
+ 
  @JsConstructor
  constructor(a: String)
-
+ 
  open fun m1(a: String, b: MutableList<Double>, c: String?): String {
   return ""
  }
-
+ 
  open fun m2(a: String?, b: MutableList<Double>): String? {
   return ""
  }
-
+ 
  @JsMethod
  open fun m3(a: String, vararg args: String): String? {
   val args_1: Array<String>? = args as Array<String>?
   return null
  }
-
+ 
  open fun m4(f: MyFunction) {}
-
+ 
  @JsFunction
  fun interface MyFunction {
   fun x(a: String): String
  }
-
+ 
  open class StringComparator: Comparator<String> {
   override fun compare(a: String, b: String): Int {
    return 0
   }
  }
-
+ 
  open class NullableStringComparator: Comparator<String?> {
   override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
-
+ 
  open class NonNullableStringSubNullableComparator: NullableStringComparator() {
   override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
-
+ 
  interface NonNullableTemplatedReturn<T> {
   fun get(): T & Any
-
+  
   fun getArray(): Array<T & Any>?
  }
-
+ 
  interface NonNullableTemplate<T: Any> {
   fun get(): T
-
+  
   fun getArray(): Array<T>?
  }
 }

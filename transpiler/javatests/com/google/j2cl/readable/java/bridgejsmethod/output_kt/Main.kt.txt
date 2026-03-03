@@ -53,129 +53,129 @@ open class Main {
    l.fun_pp_bridgejsmethod("foo", 1)
   }
  }
-
+ 
  open class A<T> {
   @JsMethod
   open fun `fun`(t: T): T {
    return t
   }
-
+  
   open fun bar(t: T) {}
  }
-
+ 
  fun interface I<T: Number?> {
   @JsMethod(name = "mNumber")
   fun `fun`(t: T): T
  }
-
+ 
  fun interface J<T> {
   fun bar(t: T)
  }
-
+ 
  open class B: A<String?>() {
   override fun `fun`(s: String?): String? {
    return s
   }
-
+  
   @JsMethod
   override fun bar(s: String?) {}
  }
-
+ 
  open class C: A<Int?>() {
   override fun `fun`(i: Int?): Int? {
    return i
   }
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class D: A<Int?>(), I<Int?> {
   override fun `fun`(i: Int?): Int? {
    return i
   }
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class E: B(), J<String?>
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class F: A<Int?>(), I<Int?>
-
+ 
  fun interface G<V> {
   fun enclose(value: V): V
  }
-
+ 
  open class H<V>: G<V> {
   @JsMethod
   override fun enclose(value: V): V {
    return null as V
   }
  }
-
+ 
  open class K<K1, K2> {
   internal open fun fun_pp_bridgejsmethod(k1: K1, k2: K2) {}
  }
-
+ 
  open class L<L1>: K<String?, L1>() {
   @JsMethod(name = "fun")
   override fun fun_pp_bridgejsmethod(string: String?, l1: L1) {}
  }
-
+ 
  fun interface M {
   fun getB(): B?
  }
-
+ 
  @JsType
  abstract inner class N internal constructor(): M {
   abstract override fun getB(): B?
  }
-
+ 
  open inner class O internal constructor(): Main.N() {
   private var b: B? = null
-
+  
   override fun getB(): B? {
    return this.b
   }
  }
-
+ 
  fun interface P {
   fun getKey(): String?
  }
-
+ 
  @JsType
  abstract inner class Q internal constructor(): P {
   abstract override fun getKey(): String?
  }
-
+ 
  @JsType
  abstract inner class R internal constructor(): Main.Q() {
   override fun getKey(): String? {
    return null
   }
  }
-
+ 
  open inner class S internal constructor(): Main.R()
-
+ 
  open inner class GrandParent<T> internal constructor() {
   @JsMethod
   open fun jsMethod(t: T) {}
-
+  
   open fun method(t: T) {}
  }
-
+ 
  open inner class Parent<T: Main.Parent<*>?> internal constructor(): Main.GrandParent<T>() {
   override fun jsMethod(t: T) {}
-
+  
   override fun method(t: T) {}
  }
-
+ 
  open inner class ChildWithoutOverrides internal constructor(): Main.Parent<Main.ChildWithoutOverrides?>()
-
+ 
  open inner class ChildWithOverrides<T: Main.ChildWithOverrides<T>?> internal constructor(): Main.Parent<T>() {
   override fun jsMethod(t: T) {}
-
+  
   override fun method(t: T) {}
  }
-
+ 
  open inner class ChildWithRenamedOverride internal constructor(): Main.GrandParent<Main.ChildWithRenamedOverride?>() {
   @JsMethod(name = "renamedJsMethod")
   override fun jsMethod(t: Main.ChildWithRenamedOverride?) {}

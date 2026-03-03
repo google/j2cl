@@ -26,25 +26,25 @@ import kotlin.jvm.JvmStatic
 
 class J2ObjCWeakOuterExample<T> {
  private val value: T
-
+ 
  constructor(value: T) {
   this.value = value
  }
-
+ 
  @JvmField
  val anonymousClassSupplierField: Supplier<T> = object : Supplier<T> {
   override fun get(): T {
    return this@J2ObjCWeakOuterExample.value
   }
  }
-
+ 
  fun getLambdaSupplierVariable(): Supplier<T> {
   val supplier: Supplier<T> = Supplier {
    return@Supplier this.value
   }
   return supplier
  }
-
+ 
  fun getAnonymousClassSupplierVariable(): Supplier<T> {
   val supplier: Supplier<T> = object : Supplier<T> {
    override fun get(): T {
@@ -53,25 +53,25 @@ class J2ObjCWeakOuterExample<T> {
   }
   return supplier
  }
-
+ 
  fun getInnerSupplier(): J2ObjCWeakOuterExample<T>.InnerSupplier {
   return InnerSupplier()
  }
-
+ 
  fun getStaticSupplier(): StaticSupplier {
   return StaticSupplier()
  }
-
+ 
  companion object {
   private const val staticValue: String = "foo"
-
+  
   @JvmField
   val staticAnonymousClassSupplierField: Supplier<String> = object : Supplier<String> {
    override fun get(): String {
     return J2ObjCWeakOuterExample.staticValue
    }
   }
-
+  
   @JvmStatic
   fun getStaticLambdaSupplierVariable(): Supplier<String> {
    val supplier: Supplier<String> = Supplier {
@@ -79,7 +79,7 @@ class J2ObjCWeakOuterExample<T> {
    }
    return supplier
   }
-
+  
   @JvmStatic
   fun getStaticAnonymousClassSupplierVariable(): Supplier<String> {
    val supplier: Supplier<String> = object : Supplier<String> {
@@ -90,43 +90,43 @@ class J2ObjCWeakOuterExample<T> {
    return supplier
   }
  }
-
+ 
  fun interface Supplier<T> {
   fun get(): T
  }
-
+ 
  open inner class InnerSupplier: Supplier<T> {
   override fun get(): T {
    return this@J2ObjCWeakOuterExample.value
   }
-
+  
   open fun getInnerInnerSupplier(): J2ObjCWeakOuterExample<T>.InnerSupplier.InnerInnerSupplier {
    return InnerInnerSupplier()
   }
-
+  
   open fun getInnerSiblingInnerSupplier(): J2ObjCWeakOuterExample<T>.InnerSupplier.InnerSiblingInnerSupplier {
    return InnerSiblingInnerSupplier()
   }
-
+  
   open inner class InnerInnerSupplier: Supplier<T> {
    override fun get(): T {
     return this@J2ObjCWeakOuterExample.value
    }
   }
-
+  
   open inner class InnerSiblingInnerSupplier: J2ObjCWeakOuterExample<T>.SiblingInnerSupplier() {
    override fun get(): T {
     return this@J2ObjCWeakOuterExample.value
    }
   }
  }
-
+ 
  open inner class SiblingInnerSupplier: Supplier<T> {
   override fun get(): T {
    return this@J2ObjCWeakOuterExample.value
   }
  }
-
+ 
  open class StaticSupplier: Supplier<String> {
   override fun get(): String {
    return J2ObjCWeakOuterExample.staticValue

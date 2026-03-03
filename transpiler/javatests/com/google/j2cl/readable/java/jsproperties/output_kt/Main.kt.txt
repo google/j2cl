@@ -30,25 +30,25 @@ import kotlin.jvm.JvmStatic
 open class Foo internal constructor() {
  companion object {
   private var f: Int = 0
-
+  
   @JvmStatic
   @JsProperty
   fun getA(): Int {
    return Foo.f + 1
   }
-
+  
   @JvmStatic
   @JsProperty
   fun setA(x: Int) {
    Foo.f = x + 2
   }
-
+  
   @JvmStatic
   @JsProperty(name = "abc")
   fun getB(): Int {
    return Foo.f + 3
   }
-
+  
   @JvmStatic
   @JsProperty(name = "abc")
   fun setB(x: Int) {
@@ -59,25 +59,25 @@ open class Foo internal constructor() {
 
 open class Bar internal constructor() {
  private var f: Int = 0
-
+ 
  @JsProperty
  private var privateField: Int = -1
-
+ 
  @JsProperty
  open fun getA(): Int {
   return this.f + 1
  }
-
+ 
  @JsProperty
  open fun setA(x: Int) {
   this.f = x + 2
  }
-
+ 
  @JsProperty(name = "abc")
  open fun getB(): Int {
   return this.f + 3
  }
-
+ 
  @JsProperty(name = "abc")
  open fun setB(x: Int) {
   this.f = x + 4
@@ -87,7 +87,7 @@ open class Bar internal constructor() {
 open class NativeFoo internal constructor() {
  @JsProperty(name = "hasOwnProperty")
  external open fun getA(): Any?
-
+ 
  companion object {
   @JvmStatic
   @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
@@ -100,7 +100,7 @@ interface InterfaceWithDefaultJsProperties {
  fun getM(): Int {
   return 3
  }
-
+ 
  @JsProperty
  fun setM(value: Int) {}
 }
@@ -112,14 +112,14 @@ open class Main {
   NativeFoo().getA()
   NativeFoo.getB()
  }
-
+ 
  open fun testStaticJsProperty() {
   Foo.getA()
   Foo.setA(10)
   Foo.getB()
   Foo.setB(10)
  }
-
+ 
  open fun testInstanceJsProperty() {
   val bar: Bar = Bar()
   bar.getA()

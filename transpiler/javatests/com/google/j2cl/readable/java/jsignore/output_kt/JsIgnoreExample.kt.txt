@@ -32,18 +32,18 @@ open class JsIgnoreExample {
  companion object {
   @JvmStatic
   fun exportedFunction() {}
-
+  
   @JvmStatic
   @JsIgnore
   fun notExportedFunction() {}
-
+  
   @JvmField
   var exportedField: Int = 10
-
+  
   @JvmField
   @JsIgnore
   var notExportedField: Int = 20
-
+  
   @JvmField
   val CONSTNAME: Any? = Any()
  }

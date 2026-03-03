@@ -27,31 +27,31 @@ open class FunctionalInterfaces {
  fun interface NonParametrized {
   fun apply(string: String?): String?
  }
-
+ 
  fun interface Parametrized<T> {
   fun apply(t: T): T
  }
-
+ 
  fun interface Specialized: Parametrized<String?> {
   override fun apply(string: String?): String?
  }
-
+ 
  fun interface WithDefaultMethod {
   fun apply(string: String?): String?
-
+  
   fun defaultApply(string: String?): String? {
    return this@WithDefaultMethod.apply(string)
   }
  }
-
+ 
  fun interface WithObjectMethods {
   fun apply(string: String?): String?
  }
-
+ 
  interface WithParametrizedMethod {
   fun <T> apply(t: T): T
  }
-
+ 
  interface WithKtProperty {
   val size: Int
  }

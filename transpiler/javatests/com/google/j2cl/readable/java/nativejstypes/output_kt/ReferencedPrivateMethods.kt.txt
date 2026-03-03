@@ -34,21 +34,21 @@ open class ReferencedPrivateMethods internal constructor() {
    return t.x_private_2 + NativeReferencedPrivateMethods.s_private_2 + t.getInstance_private_2() + NativeReferencedPrivateMethods.getStatic_private_2()
   }
  }
-
+ 
  @JsType(namespace = "nativejstypes", isNative = true)
  open class NativeReferencedPrivateMethods internal constructor() {
   @JvmField
   @JsProperty(name = "x")
   internal var x_private_2: Int = 0
-
+  
   @JsMethod(name = "getInstance")
   internal external fun getInstance_private_2(): Int
-
+  
   companion object {
    @JvmField
    @JsProperty(name = "s")
    internal var s_private_2: Int = 0
-
+   
    @JvmStatic
    @JsMethod(name = "getStatic")
    internal external fun getStatic_private_2(): Int

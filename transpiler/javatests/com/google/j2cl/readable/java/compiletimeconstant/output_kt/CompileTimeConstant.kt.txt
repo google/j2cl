@@ -35,31 +35,31 @@ import kotlin.jvm.JvmField
 open class CompileTimeConstant<T> {
  @JvmField
  val A2: Int = 10
-
+ 
  @JvmField
  val B2: Int = 20
-
+ 
  @JvmField
  val C2: Int = CompileTimeConstant.A * CompileTimeConstant.B
-
+ 
  @JvmField
  val D2: String = "Tur\"tle"
-
+ 
  @JvmField
  val E2: String = "Do\"ve"
-
+ 
  @JvmField
  val F2: String = this.D2 + this.E2
-
+ 
  @JvmField
  val G2: Long = 10000L
-
+ 
  @JvmField
  val H2: Char = 'A'
-
+ 
  @JvmField
  val I2: Boolean = this.G2 > 100L
-
+ 
  init {
   val b: Boolean = this.I2
   val s: String = "" + CompileTimeConstant.G + CompileTimeConstant.F
@@ -76,58 +76,58 @@ open class CompileTimeConstant<T> {
   val intTimesOverflow: Int = 2147483647 * 2
   val intShlOverflow: Int = 2147483647.shl(2)
  }
-
+ 
  companion object {
   @JvmField
   val OBJ: Any? = null
-
+  
   const val DEFAULT: Int = 0
-
+  
   const val A: Int = 10
-
+  
   const val B: Int = 20
-
+  
   const val C: Int = CompileTimeConstant.A * CompileTimeConstant.B
-
+  
   const val D: String = "Tur\"tle"
-
+  
   const val E: String = "Do\'ve"
-
+  
   const val F: String = CompileTimeConstant.D + CompileTimeConstant.E
-
+  
   const val J: String = CompileTimeConstant.F + CompileTimeConstant.F
-
+  
   @JvmField
   val K: String? = null
-
+  
   const val L: String = "ThisIsALongString"
-
+  
   const val M: String = "ThisIsALongStringAlso"
-
+  
   const val N: String = "ThisIsALongStringAlsoButLonger"
-
+  
   const val O: String = "" + 1 + " is 1"
-
+  
   const val G: Long = 10000L
-
+  
   const val H: Char = 'A'
-
+  
   const val I: Boolean = CompileTimeConstant.G > 100L
-
+  
   const val P: Double = 3.141592653589793
-
+  
   const val Q: Float = CompileTimeConstant.P.toFloat()
-
+  
   const val MIN_BYTE: Byte = (-128).toByte()
-
+  
   const val MIN_SHORT: Short = (-32768).toShort()
-
+  
   const val MIN_INT: Int = -2147483647 - 1
-
+  
   const val MIN_LONG: Long = -9223372036854775807L - 1L
-
+  
   const val MIN_BYTE_WITH_CAST: Byte = (-128).toByte()
-
+  
   const val MIN_SHORT_WITH_CAST: Short = (-32768).toShort()
  }
 }

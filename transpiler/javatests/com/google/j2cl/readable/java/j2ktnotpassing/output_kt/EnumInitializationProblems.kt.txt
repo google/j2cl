@@ -28,21 +28,21 @@ class EnumInitializationProblems {
   ZERO(
    Enum1.VALUE,
   );
-
+  
   constructor(value: Int)
-
+  
   companion object {
    private const val VALUE: Int = 0
   }
  }
-
+ 
  enum class Enum2 {
   ZERO(
    Enum2.zero(),
   );
-
+  
   constructor(value: Int)
-
+  
   companion object {
    @JvmStatic
    private fun zero(): Int {
@@ -50,15 +50,15 @@ class EnumInitializationProblems {
    }
   }
  }
-
+ 
  enum class Enum3 {
   ZERO(null),
   ONE(
    Enum3.ZERO,
   );
-
+  
   constructor(previous: Enum3?)
-
+  
   companion object {
    @JvmStatic
    private fun zero(): Enum3 {

@@ -36,23 +36,23 @@ open class Main {
    assert(Outer().method() == 5)
   }
  }
-
+ 
  open class Outer internal constructor() {
   @JvmField
   internal var a_pp_jsinnerclass: Int = 2
-
+  
   open fun method(): Int {
    return Inner().getB() + this.a_pp_jsinnerclass
   }
-
+  
   @JsType(namespace = "com.google.test")
   open inner class Inner constructor() {
    private var b: Int = 0
-
+   
    init {
     this.b = this@Outer.a_pp_jsinnerclass + 1
    }
-
+   
    open fun getB(): Int {
     return this.b
    }

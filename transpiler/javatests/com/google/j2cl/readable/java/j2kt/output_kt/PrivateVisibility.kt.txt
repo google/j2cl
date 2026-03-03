@@ -31,10 +31,10 @@ class PrivateVisibility {
    return OuterConstructorReference()
   }
  }
-
+ 
  class InnerConstructorReference {
   private constructor()
-
+  
   companion object {
    @JvmStatic
    fun testInnerConstructorReference(): InnerConstructorReference {
@@ -42,11 +42,11 @@ class PrivateVisibility {
    }
   }
  }
-
+ 
  class OuterConstructorReference {
   internal constructor()
  }
-
+ 
  class Outer {
   fun testMemberReference() {
    Outer.outerField = 0
@@ -54,14 +54,14 @@ class PrivateVisibility {
    Inner.innerField_outerReference_private_2 = 0
    Inner.innerMethod_outerReference_private_2()
   }
-
+  
   companion object {
    private var outerField: Int = 0
-
+   
    @JvmStatic
    private fun outerMethod() {}
   }
-
+  
   class Inner {
    fun testMemberReference() {
     Outer.outerField = 0
@@ -69,16 +69,16 @@ class PrivateVisibility {
     Inner.innerField_innerReference = 0
     Inner.innerMethod_innerReference()
    }
-
+   
    companion object {
     private var innerField_innerReference: Int = 0
-
+    
     @JvmField
     internal var innerField_outerReference_private_2: Int = 0
-
+    
     @JvmStatic
     private fun innerMethod_innerReference() {}
-
+    
     @JvmStatic
     internal fun innerMethod_outerReference_private_2() {}
    }

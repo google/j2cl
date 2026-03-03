@@ -29,7 +29,7 @@ import kotlin.jvm.JvmStatic
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 open class BoundedJsArray<V> {
  private constructor(size: Int)
-
+ 
  companion object {
   @JvmStatic
   @JsOverlay
@@ -37,7 +37,7 @@ open class BoundedJsArray<V> {
    val array: BoundedJsArray<V_1>? = null
    return array
   }
-
+  
   @JvmStatic
   @JsOverlay
   fun <V_1> create(size: Int): BoundedJsArray<V_1>? {

@@ -34,64 +34,64 @@ open class Main {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
-
+ 
  internal constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int, flag: Boolean) {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
-
+ 
  internal open fun test_pp_parameterassignments(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   return nonFinal_1
  }
-
+ 
  internal open fun testObjectVarargs_pp_parameterassignments(o: Any?, vararg oa: Any?) {
   var oa_1: Array<Any?>? = oa as Array<Any?>?
   oa_1 = arrayOf<Any?>(o, oa_1!![0])
  }
-
+ 
  internal open fun testPrimitiveVarargs_pp_parameterassignments(i: Int, vararg ia: Int) {
   var ia_1: IntArray? = ia
   ia_1 = intArrayOf(i, ia_1!![0])
  }
-
+ 
  @JvmField
  internal val fn_pp_parameterassignments: Fn? = Fn { nonFinal: Int, implicitFinal: Int ->
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
   return@Fn nonFinal_1
  }
-
+ 
  @JvmField
  internal val fnPrimitiveVarargs_pp_parameterassignments: FnPrimitiveVarargs? = FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
   `is`!![0] = `is`!![1]
  }
-
+ 
  @JvmField
  internal val fnObjectVarargs_pp_parameterassignments: FnObjectVarargs? = FnObjectVarargs { o: Any?, os: Array<*>? ->
   val os_1: Array<Any?>? = os as Array<Any?>?
   os_1!![0] = os_1!![1]
  }
-
+ 
  fun interface Fn {
   fun test(nonFinal: Int, implicitFinal: Int): Int
  }
-
+ 
  fun interface FnPrimitiveVarargs {
   fun test(i: Int, vararg `is`: Int)
  }
-
+ 
  fun interface FnObjectVarargs {
   fun test(o: Any?, vararg os: Any?)
  }
-
+ 
  open class SubMain: Main {
   constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): super(nonFinal, explicitFinal, implicitFinal) {
    var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   }
-
+  
   override fun test_pp_parameterassignments(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
    var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal

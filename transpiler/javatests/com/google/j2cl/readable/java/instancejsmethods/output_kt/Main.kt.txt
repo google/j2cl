@@ -32,7 +32,7 @@ open class SuperParent internal constructor() {
  open fun `fun`(a: Int, b: Int): Int {
   return a + b + 111
  }
-
+ 
  open fun bar(a: Int, b: Int): Int {
   return a * b + 222
  }
@@ -43,12 +43,12 @@ open class Parent internal constructor(): SuperParent() {
  override fun `fun`(a: Int, b: Int): Int {
   return a + b
  }
-
+ 
  @JsMethod
  override fun bar(a: Int, b: Int): Int {
   return a * b
  }
-
+ 
  @JsMethod(name = "myFoo")
  open fun foo(a: Int): Int {
   return a
@@ -59,16 +59,16 @@ open class Child internal constructor(): Parent(), MyInterface {
  override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }
-
+ 
  override fun bar(a: Int, b: Int): Int {
   return a * b + 1
  }
-
+ 
  @JsMethod(name = "myFoo")
  override fun foo(a: Int): Int {
   return a
  }
-
+ 
  @JsMethod
  override fun intfFoo(): Int {
   return 1
@@ -93,7 +93,7 @@ open class Main {
   cc.foo(1)
   intf.intfFoo()
  }
-
+ 
  companion object {
   @JvmStatic
   fun testCallByConcreteType() {

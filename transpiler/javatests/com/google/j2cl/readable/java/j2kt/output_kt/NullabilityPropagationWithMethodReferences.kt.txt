@@ -34,7 +34,7 @@ class NullabilityPropagationWithMethodReferences {
   fun <T> apply(t: T): T {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   fun testConstructor(): Factory {
    return NullabilityPropagationWithMethodReferences.apply<Factory>(
@@ -43,7 +43,7 @@ class NullabilityPropagationWithMethodReferences {
     },
    )
   }
-
+  
   @JvmStatic
   fun testStaticMethod(): Factory {
    return NullabilityPropagationWithMethodReferences.apply<Factory>(
@@ -52,7 +52,7 @@ class NullabilityPropagationWithMethodReferences {
     },
    )
   }
-
+  
   @JvmStatic
   fun testInstanceMethod(foo: Foo): Factory {
    return NullabilityPropagationWithMethodReferences.apply<Factory>(
@@ -61,7 +61,7 @@ class NullabilityPropagationWithMethodReferences {
     },
    )
   }
-
+  
   @JvmStatic
   fun testNewArray(): ArrayFactory {
    return NullabilityPropagationWithMethodReferences.apply<ArrayFactory>(
@@ -71,23 +71,23 @@ class NullabilityPropagationWithMethodReferences {
    )
   }
  }
-
+ 
  class Foo {
   fun copy(): Foo {
    return Foo()
   }
-
+  
   companion object {
    @JvmStatic
    fun create(): Foo {
     return Foo()
    }
   }
-
+  
   fun interface Factory {
    fun create(): Foo
   }
-
+  
   fun interface ArrayFactory {
    fun create(size: Int): Array<Foo>
   }

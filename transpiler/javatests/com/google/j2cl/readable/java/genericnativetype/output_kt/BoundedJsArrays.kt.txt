@@ -26,13 +26,13 @@ import kotlin.jvm.JvmStatic
 
 open class BoundedJsArrays {
  private constructor()
-
+ 
  companion object {
   @JvmStatic
   fun <V> create(): BoundedJsArray<V>? {
    return BoundedJsArray.create<V>()
   }
-
+  
   @JvmStatic
   fun <V> createWithSize(size: Int): BoundedJsArray<V>? {
    return BoundedJsArray.create<V>(size)

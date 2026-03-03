@@ -34,19 +34,19 @@ open class NullabilityInferenceWithLocalVariables {
    val local: String = ""
    return arrayOf<String>(local, "")
   }
-
+  
   @JvmStatic
   fun testConstructor(): Foo<String> {
    val local: String = ""
    return Foo<Any?>(local, "") as Foo<String>
   }
-
+  
   @JvmStatic
   fun testMethod(): Foo<String> {
    val local: String = ""
    return Foo.foo<String>(local, "")
   }
-
+  
   @JvmStatic
   fun testMethodChain(): Foo<String> {
    val l1: String = ""
@@ -55,20 +55,20 @@ open class NullabilityInferenceWithLocalVariables {
    )
   }
  }
-
+ 
  open class Foo<T> {
   internal constructor(t1: T, t2: T)
-
+  
   internal open fun chain_pp_j2ktjdt(foo: Foo<T>): Foo<T> {
    throw RuntimeException()
   }
-
+  
   companion object {
    @JvmStatic
    fun <T> foo(t: T): Foo<T> {
     throw RuntimeException()
    }
-
+   
    @JvmStatic
    fun <T> foo(t1: T, t2: T): Foo<T> {
     throw RuntimeException()

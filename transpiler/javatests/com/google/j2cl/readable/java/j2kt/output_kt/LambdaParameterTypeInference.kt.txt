@@ -39,20 +39,20 @@ abstract class LambdaParameterTypeInference {
    },
   )
  }
-
+ 
  internal abstract fun <I, O> transform_pp_j2kt(supplier: Supplier<I>, function: Function<in I, out O>): Supplier<O>
-
+ 
  companion object {
   @JvmStatic
   fun <T> wrap(consumer: Consumer<T>): Consumer<T> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   fun <T> add(supplier: Supplier<T>, consumer: Consumer<in T>) {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   fun <T> test(supplier: Supplier<out T>) {
    LambdaParameterTypeInference.add(
@@ -63,7 +63,7 @@ abstract class LambdaParameterTypeInference {
     ),
    )
   }
-
+  
   @JvmStatic
   fun testInference(map: MutableMap<String, Int>) {
    map.compute(
@@ -78,17 +78,17 @@ abstract class LambdaParameterTypeInference {
     },
    )
   }
-
+  
   @JvmStatic
   private fun <T: Any> applyToNull(function: Function<in T?, Int>): Int {
    return function.apply(null)!!.toInt()
   }
  }
-
+ 
  fun interface Supplier<T> {
   fun get(): T
  }
-
+ 
  fun interface Consumer<T> {
   fun accept(t: T)
  }

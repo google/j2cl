@@ -29,7 +29,7 @@ open class UnsatisfiedTypeBounds internal constructor() {
   internal fun <T: Any> methodWithTypeConstraints_pp_j2ktnotpassing(helper: Helper<T>, foo: Foo<out T>): T {
    return foo.get()
   }
-
+  
   @JvmStatic
   internal fun test_pp_j2ktnotpassing() {
    val command: Command? = UnsatisfiedTypeBounds.methodWithTypeConstraints_pp_j2ktnotpassing<Command>(
@@ -38,18 +38,18 @@ open class UnsatisfiedTypeBounds internal constructor() {
    )
   }
  }
-
+ 
  fun interface Foo<T: Foo<T>> {
   fun get(): T
  }
-
+ 
  interface Command
-
+ 
  open class FooCommand internal constructor(): Foo<FooCommand>, Command {
   override fun get(): FooCommand {
    return this
   }
  }
-
+ 
  class Helper<T: Any> internal constructor()
 }

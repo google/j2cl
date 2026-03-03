@@ -34,14 +34,14 @@ open class NullabilityInferenceProblem7 {
     local2!!,
    )
   }
-
+  
   @JvmStatic
   internal fun test2_pp_j2kt(ordering: Ordering<Foo>, foo1: Foo, foo2: Foo): Foo {
    val localFoo1: Foo = foo1
    val localFoo2: Foo = foo2
    return ordering.max<Foo>(localFoo1, localFoo2)
   }
-
+  
   @JvmStatic
   internal fun test3_pp_j2kt(ordering: FooOrdering, foo1: Foo, foo2: Foo): Foo {
    val localFoo1: Foo = foo1
@@ -49,12 +49,12 @@ open class NullabilityInferenceProblem7 {
    return ordering.max<Foo>(localFoo1, localFoo2)
   }
  }
-
+ 
  interface Foo
-
+ 
  interface Ordering<V> {
   fun <T: V> max(v1: T, v2: T): T
  }
-
+ 
  interface FooOrdering: Ordering<Foo>
 }

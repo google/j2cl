@@ -35,15 +35,15 @@ class MethodReference internal constructor() {
     },
    )
   }
-
+  
   @JvmStatic
   internal fun <F, T> transform_pp_j2kt(foo: Foo<F>, function: Function<in F, out T>) {}
  }
-
+ 
  interface Function<T, R> {
   fun <H> apply(t: T): R
  }
-
+ 
  fun interface Foo<T> {
   fun bar(): Foo<T>
  }

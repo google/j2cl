@@ -27,30 +27,30 @@ import kotlin.jvm.JvmField
 open class ParentOuter internal constructor() {
  @JvmField
  var fieldInParentOuter: Int = 0
-
+ 
  open fun funInParentOuter() {}
 }
 
 open class ParentInner internal constructor() {
  @JvmField
  var fieldInParentInner: Int = 0
-
+ 
  open fun funInParentInner() {}
 }
 
 open class ChildClass: ParentOuter() {
  @JvmField
  var fieldInOuter: Int = 0
-
+ 
  open fun funInOuter() {}
-
+ 
  open fun testLocalClass() {
   open class LocalClass internal constructor(): ChildClass() {
    @JvmField
    internal var object_pp_innerclassinheritance: Any? = this
-
+   
    override fun funInParentOuter() {}
-
+   
    open fun test() {
     this.funInOuter()
     this@ChildClass.funInOuter()
@@ -61,13 +61,13 @@ open class ChildClass: ParentOuter() {
   }
   LocalClass().test()
  }
-
+ 
  open inner class InnerClass internal constructor(): ParentInner() {
   @JvmField
   var fieldInInner: Int = 0
-
+  
   open fun funInInner() {}
-
+  
   open fun testInnerClass(): Int {
    this@ChildClass.funInParentOuter()
    this@ChildClass.funInParentOuter()

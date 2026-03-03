@@ -38,14 +38,14 @@ open class Immediate internal constructor(): Transitive() {
 open class NonNativeUpper: Immediate {
  @JsConstructor
  constructor()
-
+ 
  internal open fun doNonNativeUpperInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
 open class NonNativeLower: NonNativeUpper {
  @JsConstructor
  constructor()
-
+ 
  internal open fun doNonNativeLowerInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
@@ -53,7 +53,7 @@ open class NonNativeLower: NonNativeUpper {
 open class Transitive internal constructor() {
  @JsProperty(name = "constructor")
  internal external fun getJsProperty_pp_transitivejsoverlayimport(): Any?
-
+ 
  @JsOverlay
  internal fun doTransitiveInstanceMethod_pp_transitivejsoverlayimport(arg1: String?) {}
 }

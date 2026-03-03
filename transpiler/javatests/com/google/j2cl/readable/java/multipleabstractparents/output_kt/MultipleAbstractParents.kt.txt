@@ -35,50 +35,50 @@ open class MultipleAbstractParents {
    assert((StringList() as IStringList).getFoo(null)!!.equals("AbstractCollection"))
   }
  }
-
+ 
  fun interface List<T> {
   fun getFoo(t: T): String?
  }
-
+ 
  fun interface Collection<T> {
   fun getFoo(t: T): String?
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class AbstractListCollection<T>: List<T>, Collection<T>
-
+ 
  abstract class AbstractCollection<T> {
   open fun getFoo(t: T): String? {
    return "AbstractCollection"
   }
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class AbstractList<T>: AbstractCollection<T>(), List<T>
-
+ 
  abstract class AbstractList2<T>: List<T>
-
+ 
  open class ArrayList<T>: AbstractList<T>()
-
+ 
  fun interface IStringList: List<String?> {
   override fun getFoo(string: String?): String?
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class AbstractStringList: AbstractList<String?>(), IStringList
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class AbstractStringList2: AbstractList2<String?>(), IStringList
-
+ 
  open class SubAbstractStringList2: AbstractStringList2() {
   override fun getFoo(t: String?): String? {
    return null
   }
  }
-
+ 
  abstract class AbstractStringList3: AbstractList2<String?>()
-
+ 
  open class StringList: AbstractStringList()
-
+ 
  open class StringListChild: StringList()
 }

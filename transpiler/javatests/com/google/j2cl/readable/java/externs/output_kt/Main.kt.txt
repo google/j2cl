@@ -36,23 +36,23 @@ import kotlin.jvm.JvmStatic
 open class Main {
  @JvmField
  var aFoo: FooOverlay? = null
-
+ 
  @JvmField
  internal var innerExtern_pp_externs: InnerExtern? = null
-
+ 
  @JvmField
  internal var inner_pp_externs: Inner? = null
-
+ 
  companion object {
   @JvmStatic
   private fun testFooOverlay(fooOverlay: FooOverlay?): Boolean {
    return fooOverlay!!.getFoo()!!.equals("Hello")
   }
-
+  
   @JvmStatic
   @JsMethod
   private external fun useDirectlyAsFoo(fooOverlay: Any?)
-
+  
   @JvmStatic
   fun main(vararg args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
@@ -64,24 +64,24 @@ open class Main {
    )
   }
  }
-
+ 
  open class FooImpl internal constructor() {
   @JvmField
   @JsProperty(name = "foo")
   internal var foo_pp_externs: String? = null
  }
-
+ 
  @JsType(name = "Foo", namespace = JsPackage.GLOBAL, isNative = true)
  fun interface FooOverlay {
   @JsProperty
   fun getFoo(): String?
  }
-
+ 
  @JsType(namespace = JsPackage.GLOBAL, isNative = true)
  open class TopLevelExtern {
   @JsType(isNative = true)
   open class InnerExtern
-
+  
   @JsType(name = "FooImpl", namespace = "externs.Main", isNative = true)
   open class Inner
  }

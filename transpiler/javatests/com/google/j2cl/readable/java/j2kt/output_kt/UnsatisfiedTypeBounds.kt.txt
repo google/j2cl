@@ -26,14 +26,14 @@ open class UnsatisfiedTypeBounds internal constructor() {
  fun interface Foo<T: Foo<T>> {
   fun get(): T
  }
-
+ 
  interface Command
-
+ 
  open class FooCommand internal constructor(): Foo<FooCommand>, Command {
   override fun get(): FooCommand {
    return this
   }
  }
-
+ 
  class Helper<T: Any> internal constructor()
 }

@@ -44,43 +44,43 @@ open class Main {
   si.interfaceMethod()
   si.defaultMethod(null)
  }
-
+ 
  fun interface Interface<T> {
   fun interfaceMethod()
-
+  
   fun defaultMethod(t: T) {
    this.privateMethod_private_interfaces_Main_Interface(t)
   }
-
+  
   fun privateMethod_private_interfaces_Main_Interface(t: T) {}
-
+  
   companion object {
    const val a: Int = 1
-
+   
    const val b: Int = 2
-
+   
    @JvmStatic
    fun staticInterfaceMethod() {}
   }
  }
-
+ 
  fun interface SubInterface: Interface<String?> {
   override fun defaultMethod(s: String?) {
    super<Interface>.defaultMethod(s)
   }
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open inner class Implementor internal constructor(): SubInterface, Interface<String?> {
   override fun interfaceMethod() {}
  }
-
+ 
  abstract inner class AbstractImplementor internal constructor(): SubInterface
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  enum class EnumImplementor: SubInterface {
   ONE;
-
+  
   override fun interfaceMethod() {}
  }
 }

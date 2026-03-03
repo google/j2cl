@@ -29,7 +29,7 @@ open class CastOnArrayInit {
   fun <E> `fun`(vararg args: Foo<E>?) {
    val args_1: Array<Foo<E>?>? = args as Array<Foo<E>?>?
   }
-
+  
   @JvmStatic
   fun <E> test() {
    val f1: Foo<E> = Foo<E>()
@@ -37,6 +37,6 @@ open class CastOnArrayInit {
    CastOnArrayInit.`fun`<E>(f1, f2)
   }
  }
-
+ 
  open class Foo<T>
 }

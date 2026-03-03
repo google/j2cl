@@ -27,15 +27,15 @@ import kotlin.jvm.JvmField
 open class SimpleGenericType<T, S> {
  @JvmField
  var first: T
-
+ 
  @JvmField
  var second: S
-
+ 
  constructor(t: T, s: S) {
   this.first = t
   this.second = s
  }
-
+ 
  open fun test() {
   val g: SimpleGenericType<Any?, Error?> = SimpleGenericType<Any?, Error?>(
    Any(),

@@ -108,7 +108,7 @@ open class BooleanOperations {
   open class Outer internal constructor() {
    @JvmField
    internal var b_pp_booleanoperations: Boolean = false
-
+   
    open inner class Inner internal constructor() {
     init {
      this@Outer.b_pp_booleanoperations = this@Outer.b_pp_booleanoperations.or(true)
@@ -125,7 +125,7 @@ open class BooleanOperations {
    } == null,
   )
  }
-
+ 
  companion object {
   @JvmStatic
   private fun acceptBoolean(b: Boolean) {}

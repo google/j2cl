@@ -24,13 +24,13 @@ import kotlin.Suppress
 
 open class AnonymousClassUninitializedFieldReference {
  private val obj: Any
-
+ 
  private val anonymous: Any = object : Any() {
   fun getObj(): Any {
    return this@AnonymousClassUninitializedFieldReference.obj
   }
  }
-
+ 
  constructor(obj: Any) {
   this.obj = obj
  }

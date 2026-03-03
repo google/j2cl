@@ -29,29 +29,29 @@ open class NonreferencedMethods {
  @JsType(name = "NativeNonreferencedMethods", namespace = "nativejstypes", isNative = true)
  open class NativePrivateMembersOnPublicClass {
   private var x: Int = 0
-
+  
   private constructor(x: Int)
-
+  
   private external fun getInstance1(): Int
-
+  
   companion object {
    private var s: Int = 0
-
+   
    @JvmStatic
    private external fun getStatic(): Int
   }
  }
-
+ 
  @JsType(name = "NativeNonreferencedMethods", namespace = "nativejstypes", isNative = true)
  open class NativeMembersOnPrivateClass {
   constructor(x: Int)
-
+  
   external open fun getInstance2(): Int
-
+  
   companion object {
    @JvmField
    var s: Int = 0
-
+   
    @JvmStatic
    external fun getStatic(): Int
   }

@@ -38,13 +38,13 @@ import kotlin.run
 
 abstract class SourceMap<T: Number?>: Comparator<T> {
  private var uninitializedInstanceField: Int = 0
-
+ 
  init {
   this.uninitializedInstanceField = 1000
  }
-
+ 
  private var uninitializedInstanceField2: String? = null
-
+ 
  init {
   if (this.uninitializedInstanceField == 1000) {
    this.uninitializedInstanceField2 = "Hello!"
@@ -54,14 +54,14 @@ abstract class SourceMap<T: Number?>: Comparator<T> {
    this.uninitializedInstanceField2 = "Universe!"
   }
  }
-
+ 
  @JsConstructor
  internal constructor(i: Int)
-
+ 
  private constructor(uninitializedInstanceField: Int, uninitializedInstanceField2: String?): this(2)
-
+ 
  private var initializedInstanceField: Int = 2
-
+ 
  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
   var value: Int = 0
   var i: Int = 0
@@ -101,7 +101,7 @@ abstract class SourceMap<T: Number?>: Comparator<T> {
   }
   return value
  }
-
+ 
  private fun testLambdaAndMethodReference(n: Int) {
   val f: Function<Int?, Int?> = Function { i: Int? ->
    return@Function i!!.toInt() + 1
@@ -116,16 +116,16 @@ abstract class SourceMap<T: Number?>: Comparator<T> {
    return@Supplier this.simpleMethod()
   }
  }
-
+ 
  private fun simpleMethod(): Int {
   return 1
  }
-
+ 
  private fun testLocalClass() {
   open class LocalClass internal constructor()
   LocalClass()
  }
-
+ 
  private fun testSwitchExpression() {
   val v: Int = 1
   val r: Int = run {
@@ -139,60 +139,60 @@ abstract class SourceMap<T: Number?>: Comparator<T> {
    }
   }
  }
-
+ 
  private fun testInstanceOf(o: Any?): Boolean {
   return o is String
  }
-
+ 
  private fun testFunctionExpression(): Function<Any?, Any?>? {
   return Function { o: Any? ->
    return@Function o
   }
  }
-
+ 
  private fun testTypeLiteral(): Class<*>? {
   return String::class.javaObjectType
  }
-
+ 
  companion object {
   @JvmField
   internal var uninitializedStaticField_pp_sourcemap: Double = 0.0
-
+  
   init {
    SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
   }
-
+  
   @JvmField
   internal var initializedStaticField_pp_sourcemap: String? = "Hello"
-
+  
   init {
    if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
     SourceMap.initializedStaticField_pp_sourcemap = "World"
    }
   }
  }
-
+ 
  enum class Enum1 {
   VALUE1,
   VALUE2,
   VALUE3(1);
-
+  
   constructor()
-
+  
   constructor(i: Int)
  }
-
+ 
  abstract class SuperCalls: SourceMap<Int?> {
   @JsConstructor
   constructor(i: Int?): super(
    i!!.toInt(),
   )
  }
-
+ 
  inner class InnerClass constructor(i: Int) {
   @JvmField
   val field: Int
-
+  
   init {
    this.field = i
   }

@@ -26,43 +26,43 @@ import kotlin.jvm.JvmField
 open class RawType internal constructor() {
  @JvmField
  internal var rawUnbound_pp_rawtype: Unbound<Any?>? = Unbound<Any?>()
-
+ 
  @JvmField
  internal var rawBound_pp_rawtype: Bound<RawType?>? = Bound<RawType?>()
-
+ 
  @JvmField
  internal var rawBoundRecursively_pp_rawtype: BoundRecursively<*>? = BoundRecursively()
-
+ 
  @JvmField
  internal var rawBoundDependentDirect_pp_rawtype: BoundDependentDirect<Any?, Any?>? = BoundDependentDirect<Any?, Any?>()
-
+ 
  @JvmField
  internal var rawBoundDependentIndirect_pp_rawtype: BoundDependentIndirect<Any?, Unbound<Any?>?>? = BoundDependentIndirect<Any?, Unbound<Any?>?>()
-
+ 
  open class Unbound<T> internal constructor() {
   internal open fun method_pp_rawtype(t: T): T {
    return t
   }
  }
-
+ 
  open class Bound<T: RawType?> internal constructor()
-
+ 
  open class BoundRecursively<T: BoundRecursively<T>?> internal constructor()
-
+ 
  open class BoundDependentDirect<A, B: A> internal constructor()
-
+ 
  open class BoundDependentIndirect<A, B: Unbound<A>?> internal constructor()
-
+ 
  open class RawUnboundChild internal constructor(): Unbound<Any?>() {
   override fun method_pp_rawtype(o: Any?): Any? {
    return super<Unbound>.method_pp_rawtype(o)
   }
  }
-
+ 
  interface GenericSuperclass<T: RawType?> {
   fun f(t: T) {}
  }
-
+ 
  open class RawSubclass internal constructor(): GenericSuperclass<RawType?> {
   override fun f(t: RawType?) {}
  }

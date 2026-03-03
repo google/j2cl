@@ -27,9 +27,9 @@ open class GenericMethodReferences {
  internal open fun <T> instanceGenericMethod_pp_j2kt(t: T): T {
   return t
  }
-
+ 
  internal open fun accept_pp_j2kt(fn: InterfaceWithGenericMethod) {}
-
+ 
  internal open fun test_pp_j2kt(instance: GenericMethodReferences) {
   this.accept_pp_j2kt(
    object : InterfaceWithGenericMethod {
@@ -53,7 +53,7 @@ open class GenericMethodReferences {
    },
   )
  }
-
+ 
  companion object {
   @JvmStatic
   internal fun <T> staticGenericMethod_pp_j2kt(t: T): T {

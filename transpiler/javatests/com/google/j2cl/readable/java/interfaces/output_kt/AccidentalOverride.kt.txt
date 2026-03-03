@@ -25,21 +25,21 @@ open class AccidentalOverride {
  interface Left<T: Left<T>> {
   fun foo(t: T) {}
  }
-
+ 
  interface Right<T: Right<T>> {
   fun foo(t: T) {}
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  interface Bottom<T: Bottom<T>>: Left<T>, Right<T> {
   override fun foo(t: T) {}
  }
-
+ 
  open class A<T: Left<T>, V: Right<V>>: Left<T>, Right<V>
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class B: A<B, B>(), Bottom<B>
-
+ 
  open class C: Bottom<C> {
   override fun foo(c: C) {}
  }

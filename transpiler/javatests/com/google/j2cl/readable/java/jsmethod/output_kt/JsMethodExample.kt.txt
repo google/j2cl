@@ -32,77 +32,77 @@ open class JsMethodExample {
   @JsMethod
   external fun <T: ArrayList<String?>?> testMethod(): T
  }
-
+ 
  abstract class Base<T> internal constructor() {
   @JsMethod(name = "m")
   internal open fun m_pp_jsmethod(t: T) {}
  }
-
+ 
  fun interface I {
   @JsMethod(name = "mString")
   fun m(s: String?)
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Sub internal constructor(): Base<String?>(), I {
   override fun m(s: String?) {}
-
+  
   internal override fun m_pp_jsmethod(arg0: String?) {
    this.m(arg0)
   }
  }
-
+ 
  @JsType
  open class SubJsType internal constructor(): Base<String?>() {
   public open fun m(s: String?) {}
-
+  
   override fun m_pp_jsmethod(arg0: String?) {
    this.m(arg0)
   }
-
+  
   companion object {
    @JvmStatic
    internal fun n_pp_jsmethod() {}
   }
  }
-
+ 
  @JsType
  open class SubGenericsJsType<T> internal constructor(): Base<T>() {
   public open fun m(s: T) {}
-
+  
   override fun m_pp_jsmethod(arg0: T) {
    this.m(arg0)
   }
  }
-
+ 
  @JsType
  open class SubJsTypeWithRenamedJsMethod internal constructor(): Base<String?>() {
   @JsMethod(name = "renamedM")
   public open fun m(s: String?) {}
-
+  
   override fun m_pp_jsmethod(arg0: String?) {
    this.m(arg0)
   }
  }
-
+ 
  interface InterfaceWithMethod {
   fun m()
-
+  
   fun n()
  }
-
+ 
  fun interface InterfaceExposingJsMethods: InterfaceWithMethod {
   @JsMethod
   override fun m() {}
-
+  
   @JsMethod
   override fun n()
  }
-
+ 
  open class SuperClassWithFinalMethod internal constructor() {
   fun n() {}
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class ExposesOverrideableJsMethod internal constructor(): SuperClassWithFinalMethod(), InterfaceExposingJsMethods
 }

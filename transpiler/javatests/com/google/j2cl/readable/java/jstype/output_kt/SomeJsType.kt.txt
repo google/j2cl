@@ -31,25 +31,25 @@ import kotlin.jvm.JvmField
 open class SomeJsType<T> {
  @JvmField
  var publicField: Int = 0
-
+ 
  private var privateField: Int = 0
-
+ 
  @JvmField
  internal var packageField_pp_jstype: Int = 0
-
+ 
  @JvmField
  @JsIgnore
  var protectedField: Int = 0
-
+ 
  open fun publicMethod() {}
-
+ 
  private fun privateMethod() {}
-
+ 
  internal open fun packageMethod_pp_jstype() {}
-
+ 
  @JsIgnore
  open fun protectedMethod() {}
-
+ 
  open fun useFieldsAndMethods() {
   val value: Int = this.publicField + this.privateField + this.packageField_pp_jstype + this.protectedField
   this.publicMethod()
@@ -57,16 +57,16 @@ open class SomeJsType<T> {
   this.packageMethod_pp_jstype()
   this.protectedMethod()
  }
-
+ 
  private fun testStarAndWildCard(s: Star?, w: Wildcard?): Wildcard? {
   val `object`: Any = Any()
   val star: Star = 3.0 as Any as Star
   return star as Wildcard?
  }
-
+ 
  @JsType(name = "*", namespace = JsPackage.GLOBAL, isNative = true)
  interface Star
-
+ 
  @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  interface Wildcard
 }

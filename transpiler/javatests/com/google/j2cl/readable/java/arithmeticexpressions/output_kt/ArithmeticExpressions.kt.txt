@@ -56,7 +56,7 @@ open class ArithmeticExpressions {
   val o: Any = c
   s = (o as Char).code.toShort()
  }
-
+ 
  open fun testPrimitives() {
   var a: Int = 10
   val b: Int = run {
@@ -114,7 +114,7 @@ open class ArithmeticExpressions {
   val z: kotlin.Long? = 121L
   k = y.code.toLong() == z!!.toLong()
  }
-
+ 
  open fun testDoubleAssignments() {
   var a: Double = 1.0
   a = a + 2.0
@@ -123,14 +123,14 @@ open class ArithmeticExpressions {
   a = a / 5.0
   a = a % 6.0
  }
-
+ 
  @JvmField
  var bar: kotlin.Long = run {
   val ___value: kotlin.Long = ArithmeticExpressions.foo
   ArithmeticExpressions.foo = ArithmeticExpressions.foo + 1L
   ___value
  }
-
+ 
  open fun testCompoundArray() {
   val ints: IntArray? = null
   ints!![0] = ints!![0] + 1
@@ -199,7 +199,7 @@ open class ArithmeticExpressions {
    ___value_6
   }.toInt() == 10
  }
-
+ 
  open fun testCompoundBoxedTypes() {
   var c: Int? = 1000
   var d: Int? = 10000
@@ -249,10 +249,10 @@ open class ArithmeticExpressions {
   ref!!.field_pp_arithmeticexpressions = (ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1).toByte()
   val n: Int = 1 + ref!!.field_pp_arithmeticexpressions!!.toByte().toInt()
  }
-
+ 
  @JvmField
  internal var intField_pp_arithmeticexpressions: kotlin.Long = 0L
-
+ 
  open fun testExtendedOperands() {
   var boxedInteger: Int? = 3
   var i: Int = 0
@@ -281,7 +281,7 @@ open class ArithmeticExpressions {
   l = (i + boxedInteger!!.toInt()).toLong() + l + 20L
   d = (20L + l).toDouble() + d
  }
-
+ 
  open fun testEffectivelyFinalVariableInAssignmentExpression(condition: Boolean) {
   var effectivelyFinal: kotlin.Long = 0L
   if (condition && run {
@@ -291,34 +291,34 @@ open class ArithmeticExpressions {
    val unused: kotlin.Long = effectivelyFinal
   }
  }
-
+ 
  companion object {
   private const val FLOAT_CONSTANT: Float = 1.1f
-
+  
   private const val DOUBLE_CONSTANT: Double = ArithmeticExpressions.FLOAT_CONSTANT.toDouble()
-
+  
   private const val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = (ArithmeticExpressions.FLOAT_CONSTANT + ArithmeticExpressions.FLOAT_CONSTANT).toDouble()
-
+  
   @JvmField
   var one: kotlin.Long = 1L
-
+  
   @JvmField
   var foo: kotlin.Long = run {
    val ___value: kotlin.Long = ArithmeticExpressions.one
    ArithmeticExpressions.one = ArithmeticExpressions.one + 1L
    ___value
   }
-
+  
   @JvmStatic
   private fun getLongArray(): LongArray? {
    return null
   }
-
+  
   @JvmStatic
   private fun getInteger(): Int? {
    return null
   }
-
+  
   @JvmStatic
   private fun testSideEffect() {
    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect()
@@ -326,14 +326,14 @@ open class ArithmeticExpressions {
    val ___value: kotlin.Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5L
    ___qualifier_1!!.intField_pp_arithmeticexpressions = ___value
   }
-
+  
   @JvmStatic
   private fun getWithSideEffect(): ArithmeticExpressions? {
    return null
   }
-
+  
   private var counter: kotlin.Long = 0L
-
+  
   @JvmStatic
   private fun incrementCounter(): kotlin.Long {
    return run {

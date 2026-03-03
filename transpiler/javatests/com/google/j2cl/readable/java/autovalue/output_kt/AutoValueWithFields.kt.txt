@@ -30,12 +30,12 @@ import kotlin.jvm.JvmField
 abstract class AutoValueWithFields internal constructor(): Parent(), Serializable {
  @JvmField
  internal var userField2_pp_autovalue: Int = 0
-
+ 
  abstract fun getIntField(): Int
-
+ 
  companion object {
   private const val serialVersionUID: Long = 42L
-
+  
   private const val staticField: Long = 42L
  }
 }
@@ -43,7 +43,7 @@ abstract class AutoValueWithFields internal constructor(): Parent(), Serializabl
 open class Parent internal constructor() {
  @JvmField
  internal var userField1_pp_autovalue: Int = 0
-
+ 
  companion object {
   private const val staticField: Long = 42L
  }

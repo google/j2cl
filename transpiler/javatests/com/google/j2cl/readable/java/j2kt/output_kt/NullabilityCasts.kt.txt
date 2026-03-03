@@ -40,17 +40,17 @@ open class NullabilityCasts {
    },
   )
  }
-
+ 
  companion object {
   @JvmStatic
   internal fun <I, O> tranformAsync_pp_j2kt(async: Async<I>, function: AsyncFunction<in I, out O>): Async<O> {
    throw RuntimeException()
   }
  }
-
+ 
  fun interface AsyncFunction<I, O> {
   fun apply(i: I): Async<O>
  }
-
+ 
  interface Async<V>
 }

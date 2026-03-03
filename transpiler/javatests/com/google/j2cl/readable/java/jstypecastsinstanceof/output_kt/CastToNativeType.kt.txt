@@ -41,10 +41,10 @@ open class CastToNativeType {
   val h: Array<NativeObject<String?, Any?>?>? = a as Array<NativeObject<String?, Any?>?>?
   c = a is Array<*>
  }
-
+ 
  @JsType(namespace = "test.foo", isNative = true)
  open class NativeJsType
-
+ 
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeObject<K, V>
 }

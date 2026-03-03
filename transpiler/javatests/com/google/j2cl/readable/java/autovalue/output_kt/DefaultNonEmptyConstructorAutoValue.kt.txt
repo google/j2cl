@@ -28,30 +28,30 @@ import kotlin.jvm.JvmStatic
 @WasAutoValue
 abstract class DefaultNonEmptyConstructorAutoValue {
  private val field: Int
-
+ 
  internal constructor() {
   this.field = 1
  }
-
+ 
  abstract fun getBooleanField(): Boolean
-
+ 
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): DefaultNonEmptyConstructorAutoValue? {
    return autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder().setBooleanField(true)!!.build()
   }
  }
-
+ 
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   private val field: Int
-
+  
   internal constructor() {
    this.field = 1
   }
-
+  
   abstract fun setBooleanField(x: Boolean): Builder?
-
+  
   abstract fun build(): DefaultNonEmptyConstructorAutoValue?
  }
 }

@@ -32,7 +32,7 @@ open class NullabilityInferenceInLambdaReturnTypes {
    },
   )
  }
-
+ 
  private fun testTransformAndAccept() {
   NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any?>(
    NullabilityInferenceInLambdaReturnTypes.transform_pp_j2kt<Any?>(
@@ -42,51 +42,51 @@ open class NullabilityInferenceInLambdaReturnTypes {
    ),
   )
  }
-
+ 
  private fun <V> testReturnArgument_expliciParameterType(): Operator<Foo<V>> {
   return Operator { foo: Foo<V> ->
    return@Operator foo
   }
  }
-
+ 
  private fun <V> testReturnArgument_inferredParameterType(): Operator<Foo<V>> {
   return Operator { foo: Foo<V> ->
    return@Operator foo
   }
  }
-
+ 
  private fun <V> testReturnLocal_explicitParameterType(): Operator<Foo<V>> {
   return Operator { foo: Foo<V> ->
    val localFoo: Foo<V> = foo
    return@Operator localFoo
   }
  }
-
+ 
  private fun <V> testReturnLocal_inferredParameterType(): Operator<Foo<V>> {
   return Operator { foo: Foo<V> ->
    val localFoo: Foo<V> = foo
    return@Operator localFoo
   }
  }
-
+ 
  companion object {
   @JvmStatic
   internal fun <V> accept_pp_j2kt(supplier: Supplier<V>) {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   internal fun <V> transform_pp_j2kt(supplier: Supplier<V>): Supplier<V> {
    throw RuntimeException()
   }
  }
-
+ 
  interface Foo<V>
-
+ 
  fun interface Supplier<V> {
   fun get(): V
  }
-
+ 
  fun interface Operator<V> {
   fun apply(v: V): V
  }

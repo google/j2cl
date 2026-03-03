@@ -44,21 +44,21 @@ open class RecordClass {
   rwc.a()
   rwc.b()
  }
-
+ 
  companion object {
   @JvmStatic
   private fun testLocalRecordClas() {
    class LocalRecord {
     private val value: Int
-
+    
     constructor(arg0: Int) {
      this.value = arg0
     }
-
+    
     fun value(): Int {
      return this.value
     }
-
+    
     override fun equals(arg0: Any?): Boolean {
      var ___other: LocalRecord? = null
      if (!(arg0 is LocalRecord && run {
@@ -70,13 +70,13 @@ open class RecordClass {
       arrayOf<Any?>(___other!!.value),
      )
     }
-
+    
     override fun hashCode(): Int {
      return Arrays.hashCode(
       arrayOf<Any?>(this.value),
      )
     }
-
+    
     override fun toString(): String {
      return Arrays.toString(
       arrayOf<Any?>(this.value),
@@ -85,27 +85,27 @@ open class RecordClass {
    }
    val lr: LocalRecord = LocalRecord(1)
   }
-
+  
   @JvmStatic
   private fun testRecordPatterns() {
    class R2 {
     private val i: Int
-
+    
     private val o: Any?
-
+    
     constructor(arg0: Int, arg1: Any?) {
      this.i = arg0
      this.o = arg1
     }
-
+    
     fun i(): Int {
      return this.i
     }
-
+    
     fun o(): Any? {
      return this.o
     }
-
+    
     override fun equals(arg0: Any?): Boolean {
      var ___other: R2? = null
      if (!(arg0 is R2 && run {
@@ -117,13 +117,13 @@ open class RecordClass {
       arrayOf<Any?>(___other!!.i, ___other!!.o),
      )
     }
-
+    
     override fun hashCode(): Int {
      return Arrays.hashCode(
       arrayOf<Any?>(this.i, this.o),
      )
     }
-
+    
     override fun toString(): String {
      return Arrays.toString(
       arrayOf<Any?>(this.i, this.o),
@@ -132,29 +132,29 @@ open class RecordClass {
    }
    class R1 {
     private val o: Any?
-
+    
     private val s: String?
-
+    
     private val n: R2?
-
+    
     constructor(arg0: Any?, arg1: String?, arg2: R2?) {
      this.o = arg0
      this.s = arg1
      this.n = arg2
     }
-
+    
     fun o(): Any? {
      return this.o
     }
-
+    
     fun s(): String? {
      return this.s
     }
-
+    
     fun n(): R2? {
      return this.n
     }
-
+    
     override fun equals(arg0: Any?): Boolean {
      var ___other: R1? = null
      if (!(arg0 is R1 && run {
@@ -166,13 +166,13 @@ open class RecordClass {
       arrayOf<Any?>(___other!!.o, ___other!!.s, ___other!!.n),
      )
     }
-
+    
     override fun hashCode(): Int {
      return Arrays.hashCode(
       arrayOf<Any?>(this.o, this.s, this.n),
      )
     }
-
+    
     override fun toString(): String {
      return Arrays.toString(
       arrayOf<Any?>(this.o, this.s, this.n),
@@ -221,15 +221,15 @@ open class RecordClass {
    }
    class RecursiveRecord {
     private val r: RecursiveRecord?
-
+    
     constructor(arg0: RecursiveRecord?) {
      this.r = arg0
     }
-
+    
     fun r(): RecursiveRecord? {
      return this.r
     }
-
+    
     override fun equals(arg0: Any?): Boolean {
      var ___other: RecursiveRecord? = null
      if (!(arg0 is RecursiveRecord && run {
@@ -241,13 +241,13 @@ open class RecordClass {
       arrayOf<Any?>(___other!!.r),
      )
     }
-
+    
     override fun hashCode(): Int {
      return Arrays.hashCode(
       arrayOf<Any?>(this.r),
      )
     }
-
+    
     override fun toString(): String {
      return Arrays.toString(
       arrayOf<Any?>(this.r),
@@ -266,15 +266,15 @@ open class RecordClass {
    }
    class GenericRecord<T> {
     private val value: T
-
+    
     constructor(arg0: T) {
      this.value = arg0
     }
-
+    
     fun value(): T {
      return this.value
     }
-
+    
     override fun equals(arg0: Any?): Boolean {
      var ___other: GenericRecord<T>? = null
      if (!(arg0 is GenericRecord<T> && run {
@@ -286,13 +286,13 @@ open class RecordClass {
       arrayOf<Any?>(___other!!.value),
      )
     }
-
+    
     override fun hashCode(): Int {
      return Arrays.hashCode(
       arrayOf<Any?>(this.value),
      )
     }
-
+    
     override fun toString(): String {
      return Arrays.toString(
       arrayOf<Any?>(this.value),
@@ -307,18 +307,18 @@ open class RecordClass {
    }
   }
  }
-
+ 
  class SimpleRecord {
   private val value: Int
-
+  
   constructor(arg0: Int) {
    this.value = arg0
   }
-
+  
   fun value(): Int {
    return this.value
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: SimpleRecord? = null
    if (!(arg0 is SimpleRecord && run {
@@ -330,31 +330,31 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.value),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.value),
    )
   }
  }
-
+ 
  class StringRecord {
   private val value: String?
-
+  
   constructor(arg0: String?) {
    this.value = arg0
   }
-
+  
   fun value(): String? {
    return this.value
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: StringRecord? = null
    if (!(arg0 is StringRecord && run {
@@ -366,31 +366,31 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.value),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.value),
    )
   }
  }
-
+ 
  class ArrayRecord {
   private val value: IntArray?
-
+  
   constructor(arg0: IntArray?) {
    this.value = arg0
   }
-
+  
   fun value(): IntArray? {
    return this.value
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: ArrayRecord? = null
    if (!(arg0 is ArrayRecord && run {
@@ -402,31 +402,31 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.value),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.value),
    )
   }
  }
-
+ 
  class ObjectRecord {
   private val value: Any?
-
+  
   constructor(arg0: Any?) {
    this.value = arg0
   }
-
+  
   fun value(): Any? {
    return this.value
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: ObjectRecord? = null
    if (!(arg0 is ObjectRecord && run {
@@ -438,38 +438,38 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.value),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.value),
    )
   }
  }
-
+ 
  class RecordWithConstructor {
   private val a: Int
-
+  
   private val b: Int
-
+  
   constructor(a: Int, b: Int) {
    this.a = a + 1
    this.b = b - 1
   }
-
+  
   fun a(): Int {
    return this.a
   }
-
+  
   fun b(): Int {
    return this.b
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordWithConstructor? = null
    if (!(arg0 is RecordWithConstructor && run {
@@ -481,25 +481,25 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.a, ___other!!.b),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.a, this.b),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.a, this.b),
    )
   }
  }
-
+ 
  class RecordWithCompactConstructor {
   private val a: Int
-
+  
   private val b: Int
-
+  
   constructor(a: Int, b: Int) {
    var a_1: Int = a
    if (a_1 < 0) {
@@ -508,15 +508,15 @@ open class RecordClass {
    this.a = a_1
    this.b = b
   }
-
+  
   fun a(): Int {
    return this.a
   }
-
+  
   fun b(): Int {
    return this.b
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordWithCompactConstructor? = null
    if (!(arg0 is RecordWithCompactConstructor && run {
@@ -528,33 +528,33 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.a, ___other!!.b),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.a, this.b),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.a, this.b),
    )
   }
  }
-
+ 
  class RecordWithDeferringConstructor {
   private val value: Int
-
+  
   constructor(): this(123)
-
+  
   constructor(arg0: Int) {
    this.value = arg0
   }
-
+  
   fun value(): Int {
    return this.value
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordWithDeferringConstructor? = null
    if (!(arg0 is RecordWithDeferringConstructor && run {
@@ -566,55 +566,55 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.value),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.value),
    )
   }
  }
-
+ 
  class RecordWithOverriddenObjectMethods {
   private val value: String?
-
+  
   override fun equals(other: Any?): Boolean {
    return false
   }
-
+  
   override fun hashCode(): Int {
    return 0
   }
-
+  
   override fun toString(): String {
    return "foo"
   }
-
+  
   constructor(arg0: String?) {
    this.value = arg0
   }
-
+  
   fun value(): String? {
    return this.value
   }
  }
-
+ 
  class RecordWithOverriddenAccessor {
   private val value: String?
-
+  
   fun value(): String? {
    return "foo"
   }
-
+  
   constructor(arg0: String?) {
    this.value = arg0
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordWithOverriddenAccessor? = null
    if (!(arg0 is RecordWithOverriddenAccessor && run {
@@ -626,36 +626,36 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.value),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.value),
    )
   }
  }
-
+ 
  fun interface I {
   fun a(): String?
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  class RecordImplementingInterface: I {
   private val a: String?
-
+  
   constructor(arg0: String?) {
    this.a = arg0
   }
-
+  
   override fun a(): String? {
    return this.a
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordImplementingInterface? = null
    if (!(arg0 is RecordImplementingInterface && run {
@@ -667,35 +667,35 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.a),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.a),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.a),
    )
   }
  }
-
+ 
  class StaticFieldRecord {
   private val nonstaticField: Int
-
+  
   constructor(initializeWithStaticField: Boolean): this(
    if (initializeWithStaticField) StaticFieldRecord.staticField else 0,
   )
-
+  
   constructor(arg0: Int) {
    this.nonstaticField = arg0
   }
-
+  
   fun nonstaticField(): Int {
    return this.nonstaticField
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: StaticFieldRecord? = null
    if (!(arg0 is StaticFieldRecord && run {
@@ -707,50 +707,50 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.nonstaticField),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.nonstaticField),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.nonstaticField),
    )
   }
-
+  
   companion object {
    @JvmField
    var staticField: Int = 1
   }
  }
-
+ 
  interface PropertyAccessors<T> {
   fun parametric(): T
-
+  
   fun nonParametric(): String?
  }
-
+ 
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  class RecordSpecializingInterface: PropertyAccessors<String?> {
   private val parametric: String?
-
+  
   private val nonParametric: String?
-
+  
   constructor(arg0: String?, arg1: String?) {
    this.parametric = arg0
    this.nonParametric = arg1
   }
-
+  
   override fun parametric(): String? {
    return this.parametric
   }
-
+  
   override fun nonParametric(): String? {
    return this.nonParametric
   }
-
+  
   override fun equals(arg0: Any?): Boolean {
    var ___other: RecordSpecializingInterface? = null
    if (!(arg0 is RecordSpecializingInterface && run {
@@ -762,13 +762,13 @@ open class RecordClass {
     arrayOf<Any?>(___other!!.parametric, ___other!!.nonParametric),
    )
   }
-
+  
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.parametric, this.nonParametric),
    )
   }
-
+  
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.parametric, this.nonParametric),

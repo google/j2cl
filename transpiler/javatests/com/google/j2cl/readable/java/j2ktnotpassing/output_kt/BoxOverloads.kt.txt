@@ -27,10 +27,10 @@ open class BoxOverloads {
  companion object {
   @JvmStatic
   fun boxedOverload(d: Double) {}
-
+  
   @JvmStatic
   fun boxedOverload(d: Double) {}
-
+  
   @JvmStatic
   fun testBoxedOverload() {
    BoxOverloads.boxedOverload(1.25)
@@ -42,7 +42,7 @@ open class BoxOverloads {
    )
    BoxOverloads.boxedOverload(1.0)
   }
-
+  
   @JvmStatic
   fun testGenericBoxedOverload(generic: Generic<Double>) {
    generic.overload(1.25)
@@ -52,10 +52,10 @@ open class BoxOverloads {
    generic.overload(1.0)
   }
  }
-
+ 
  interface Generic<T> {
   fun overload(d: Double)
-
+  
   fun overload(t: T)
  }
 }

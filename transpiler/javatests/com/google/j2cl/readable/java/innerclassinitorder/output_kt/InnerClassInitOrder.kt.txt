@@ -30,17 +30,17 @@ import kotlin.jvm.JvmField
 open class InnerClassInitOrder {
  @JvmField
  var number: Int = 0
-
+ 
  open fun testOuterThisFromSuperCall() {
   OuterRefFromSuperCtorCall()
   assert(this.number == 100)
  }
-
+ 
  open fun testOuterThisFromThisCall() {
   OuterRefFromThisCtorCall()
   assert(this.number == 1100)
  }
-
+ 
  open fun testInnerClassCtors() {
   val p1: P1<*> = P1<Any?>()
   assert(1 == p1.value_pp_innerclassinitorder)
@@ -51,21 +51,21 @@ open class InnerClassInitOrder {
   assert(1 == p2.P3<Any?>().value_pp_innerclassinitorder)
   assert(2 == p2.P3<Any?>(2).value_pp_innerclassinitorder)
  }
-
+ 
  open fun testInnerClassInitialization() {
   InnerClass()
   assert(this.number == 1111)
  }
-
+ 
  open fun testInnerClassLoop() {
   abstract class AddNumber {
    @JvmField
    internal var num_pp_innerclassinitorder: Int = 0
-
+   
    constructor(i: Int) {
     this.num_pp_innerclassinitorder = i
    }
-
+   
    abstract fun act()
   }
   val results: Array<AddNumber?> = arrayOfNulls<AddNumber>(10)
@@ -84,37 +84,37 @@ open class InnerClassInitOrder {
   }
   assert(this.number == 1156)
  }
-
+ 
  private val outer: Outer? = Outer(1)
-
+ 
  private val outerIsSuper: Outer.OuterIsSuper? = this.outer!!.OuterIsSuper(2)
-
+ 
  open fun testOuterIsNotSuper() {
   val x: Outer.OuterIsNotSuper = this.outerIsSuper!!.OuterIsNotSuper()
   assert(2 == x.getValue())
  }
-
+ 
  open fun testSuperDispatch() {
   assert(1 == this.outerIsSuper!!.checkDispatchFromSub1())
   assert(1 == this.outerIsSuper!!.checkDispatchFromSub2())
  }
-
+ 
  open fun testUnqualifiedAlloc() {
   val x: Outer.OuterIsNotSuper? = this.outerIsSuper!!.unqualifiedAlloc()
   assert(2 == x!!.getValue())
  }
-
+ 
  open fun testUnqualifiedSuperCall() {
   val x: Outer.TestUnqualifiedSuperCall = this.outerIsSuper!!.TestUnqualifiedSuperCall()
   assert(2 == x.getValue())
  }
-
+ 
  open class OuterRefFromSuperCtorBase {
   internal constructor(o: Any?) {
    o!!.hashCode()
   }
  }
-
+ 
  open inner class OuterRefFromSuperCtorCall constructor(): OuterRefFromSuperCtorBase(
   object : Any() {
    override fun hashCode(): Int {
@@ -123,10 +123,10 @@ open class InnerClassInitOrder {
    }
   },
  )
-
+ 
  open inner class OuterRefFromThisCtorCall: OuterRefFromSuperCtorBase {
   constructor(`object`: Any?): super(`object`)
-
+  
   constructor(): this(
    object : Any() {
     override fun hashCode(): Int {
@@ -136,19 +136,19 @@ open class InnerClassInitOrder {
    },
   )
  }
-
+ 
  open inner class InnerClass internal constructor() {
   init {
    this.callInner_pp_innerclassinitorder()
   }
-
+  
   internal open fun callInner_pp_innerclassinitorder() {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1
    open class ReallyInnerClass internal constructor() {
     init {
      this.callReallyInner_pp_innerclassinitorder()
     }
-
+    
     internal open fun callReallyInner_pp_innerclassinitorder() {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 10
     }
@@ -156,95 +156,95 @@ open class InnerClassInitOrder {
    ReallyInnerClass()
   }
  }
-
+ 
  open class P1<T1> {
   @JvmField
   internal val value_pp_innerclassinitorder: Int
-
+  
   internal constructor(): this(1)
-
+  
   internal constructor(i: Int) {
    this.value_pp_innerclassinitorder = i
   }
-
+  
   open inner class P2<T2>: P1<T1> {
    internal constructor(): this(1)
-
+   
    internal constructor(i: Int): super(i)
-
+   
    open inner class P3<T3>: P1<T1>.P2<T2> {
     internal constructor(): this(1)
-
+    
     internal constructor(i: Int): super(i)
    }
   }
  }
-
+ 
  open class ESOuter internal constructor() {
   open fun newESInner(): ESOuter.ESInner? {
    return ESInner()
   }
-
+  
   open inner class ESInner {
    @JvmField
    var value: Int = 0
-
+   
    constructor() {
     this.value = 1
    }
-
+   
    constructor(value: Int) {
     this.value = value
    }
   }
  }
-
+ 
  open class ESWGOuter<T> internal constructor() {
   open fun newESWGInner(): ESWGOuter<T>.ESWGInner? {
    return ESWGInner()
   }
-
+  
   open inner class ESWGInner {
    @JvmField
    var value: Int = 0
-
+   
    constructor() {
     this.value = 1
    }
-
+   
    constructor(value: Int) {
     this.value = value
    }
   }
  }
-
+ 
  open class Outer {
   @JvmField
   val value: Int
-
+  
   constructor(i: Int) {
    this.value = i
   }
-
+  
   open fun checkDispatch(): Int {
    return 1
   }
-
+  
   open inner class OuterIsNotSuper {
    open fun getValue(): Int {
     return this@Outer.value
    }
   }
-
+  
   open inner class OuterIsSuper constructor(i: Int): Outer(i) {
    override fun checkDispatch(): Int {
     return 2
    }
-
+   
    open fun checkDispatchFromSub1(): Int {
     return super<Outer>.checkDispatch()
    }
-
+   
    open fun checkDispatchFromSub2(): Int {
     return object : Outer(1) {
      fun go(): Int {
@@ -252,12 +252,12 @@ open class InnerClassInitOrder {
      }
     }.go()
    }
-
+   
    open fun unqualifiedAlloc(): Outer.OuterIsNotSuper? {
     return OuterIsNotSuper()
    }
   }
-
+  
   open inner class TestUnqualifiedSuperCall: Outer.OuterIsNotSuper()
  }
 }

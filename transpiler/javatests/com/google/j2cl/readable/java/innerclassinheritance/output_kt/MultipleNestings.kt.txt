@@ -23,17 +23,17 @@ import kotlin.Suppress
 
 open class MultipleNestings {
  open fun funInM() {}
-
+ 
  open inner class Parent {
   open fun `fun`() {}
  }
-
+ 
  open inner class InnerClass1: MultipleNestings.Parent() {
   open fun funInI1() {}
-
+  
   open inner class InnerClass2: MultipleNestings.Parent() {
    open fun funInI2() {}
-
+   
    open fun test() {
     this.`fun`()
     this.`fun`()

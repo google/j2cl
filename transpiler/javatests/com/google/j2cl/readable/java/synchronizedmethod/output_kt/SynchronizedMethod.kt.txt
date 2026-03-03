@@ -32,16 +32,16 @@ import kotlin.synchronized
 
 open class SynchronizedMethod: J2ktMonitor() {
  private var a: Int = 0
-
+ 
  private var b: Int = 0
-
+ 
  open fun testNonStatic() {
   synchronized<Unit>(this) {
    this.a = this.a + 1
    this.b = this.b - 1
   }
  }
-
+ 
  open fun testReturn(bool: Boolean): Int {
   synchronized<Unit>(this) {
    if (bool) {
@@ -58,7 +58,7 @@ open class SynchronizedMethod: J2ktMonitor() {
    }
   }
  }
-
+ 
  open fun testIfStatementWithNonVoidBodyWithoutElse(b1: Boolean, b2: Boolean) {
   synchronized<Unit>(this) {
    if (b1) {
@@ -68,16 +68,16 @@ open class SynchronizedMethod: J2ktMonitor() {
    }
   }
  }
-
+ 
  private fun apply(string: String?): String? {
   return string
  }
-
+ 
  companion object {
   private var sa: Int = 0
-
+  
   private var sb: Int = 0
-
+  
   @JvmStatic
   fun testStatic() {
    synchronized<Unit>(SynchronizedMethod::class.javaObjectType) {

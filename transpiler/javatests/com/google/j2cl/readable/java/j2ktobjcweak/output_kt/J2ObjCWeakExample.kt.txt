@@ -24,45 +24,45 @@ import kotlin.jvm.JvmStatic
 
 class J2ObjCWeakExample {
  private val finalNullableFoo: Foo?
-
+ 
  private val finalNonNullFoo: Foo
-
+ 
  private var nullableFooWithoutInitializer: Foo? = null
-
+ 
  private var nullableFooWithInitializer: Foo? = Foo()
-
+ 
  private var nonNullFooWithoutInitializer: Foo
-
+ 
  private var nonNullFooWithInitializer: Foo = Foo()
-
+ 
  constructor() {
   this.finalNullableFoo = null
   this.finalNonNullFoo = Foo()
   this.nonNullFooWithoutInitializer = Foo()
  }
-
+ 
  constructor(nullableFoo: Foo?, nonNullFoo: Foo) {
   this.finalNullableFoo = nullableFoo
   this.finalNonNullFoo = nullableFoo!!
   this.nullableFooWithoutInitializer = nonNullFoo
   this.nonNullFooWithoutInitializer = nonNullFoo
  }
-
+ 
  fun setFoo(nullableFoo: Foo?, nonNullFoo: Foo) {
   this.nullableFooWithoutInitializer = nullableFoo
   this.nullableFooWithInitializer = nullableFoo
   this.nonNullFooWithoutInitializer = nonNullFoo
   this.nonNullFooWithInitializer = this.nonNullFooWithoutInitializer
  }
-
+ 
  fun getNullableFoo(): Foo? {
   return this.nullableFooWithoutInitializer
  }
-
+ 
  fun getNonNullFoo(): Foo {
   return this.nonNullFooWithoutInitializer
  }
-
+ 
  companion object {
   @JvmStatic
   fun nonNullVariable(foo1: Foo, foo2: Foo): Foo {
@@ -70,26 +70,26 @@ class J2ObjCWeakExample {
    localFoo = foo2
    return localFoo
   }
-
+  
   @JvmStatic
   fun nullableVariable(foo1: Foo?, foo2: Foo?): Foo {
    var localFoo: Foo? = foo1
    localFoo = foo2
    return localFoo!!
   }
-
+  
   @JvmStatic
   fun finalNonNullVariable(foo: Foo): Foo {
    val localFoo: Foo = foo
    return localFoo
   }
-
+  
   @JvmStatic
   fun finalNullableVariable(foo: Foo?): Foo {
    val localFoo: Foo? = foo
    return localFoo!!
   }
  }
-
+ 
  class Foo
 }

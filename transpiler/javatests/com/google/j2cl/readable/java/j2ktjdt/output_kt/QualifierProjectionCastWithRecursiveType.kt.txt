@@ -30,7 +30,7 @@ open class QualifierProjectionCastWithRecursiveType {
    (foo as Foo<Foo<*>>).name(null)
   }
  }
-
+ 
  fun interface Foo<T: Foo<T>> {
   fun name(s: T?): String
  }

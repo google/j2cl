@@ -29,19 +29,19 @@ import kotlin.Suppress
 
 class AutoValue_AutoValueWithFields: AutoValueWithFields {
  private val intField: Int
-
+ 
  internal constructor(intField: Int) {
   this.intField = intField
  }
-
+ 
  override fun getIntField(): Int {
   return this.intField
  }
-
+ 
  override fun toString(): String {
   return "AutoValueWithFields{intField=" + this.intField + "}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -52,7 +52,7 @@ class AutoValue_AutoValueWithFields: AutoValueWithFields {
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003
@@ -61,7 +61,7 @@ class AutoValue_AutoValueWithFields: AutoValueWithFields {
   )
   return h___
  }
-
+ 
  companion object {
   private const val serialVersionUID: Long = 42L
  }

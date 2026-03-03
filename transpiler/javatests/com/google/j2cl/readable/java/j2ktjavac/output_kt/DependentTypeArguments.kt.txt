@@ -34,7 +34,7 @@ open class DependentTypeArguments {
     },
    )
   }
-
+  
   @JvmStatic
   fun <TestK, TestV, TestF: Function<TestK, TestV>> test1_explicitTypeArguments(function: TestF, mergeFunction: BiFunction<TestV, TestV, TestV>): Collector<*, TestF> {
    return Collector.of<TestF>(
@@ -44,7 +44,7 @@ open class DependentTypeArguments {
     },
    )
   }
-
+  
   @JvmStatic
   private fun <TestE, TestK, TestV, TestF: Function<TestK, TestV>> test2_implicitTypeArguments(acum: Function<TestK, Supplier<TestE>>, map: TestF): Collector<*, TestF> {
    return Collector.of<Function<TestK, Supplier<TestE>>, TestF>(
@@ -63,7 +63,7 @@ open class DependentTypeArguments {
     },
    )
   }
-
+  
   @JvmStatic
   private fun <TestE, TestK, TestV, TestF: Function<TestK, TestV>> test2_explicitTypeArguments(acum: Function<TestK, Supplier<TestE>>, map: TestF): Collector<*, TestF> {
    return Collector.of<Function<TestK, Supplier<TestE>>, TestF>(
@@ -82,41 +82,41 @@ open class DependentTypeArguments {
     },
    )
   }
-
+  
   @JvmStatic
   private fun <MergeK, MergeV, MergeF: Function<MergeK, MergeV>> mergeAll(m1: MergeF, m2: MergeF, mergeFunction: BiFunction<MergeV, MergeV, MergeV>): MergeF {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   private fun <AddElem, AddSup: Supplier<AddElem>> addAll(supplier: AddSup, sup2: Supplier<AddElem>): AddSup {
    throw RuntimeException()
   }
  }
-
+ 
  fun interface Supplier<SupOut> {
   fun get(): SupOut
  }
-
+ 
  fun interface Function<FunIn, FunOut> {
   fun apply(`in`: FunIn): FunOut
  }
-
+ 
  fun interface BiFunction<BiIn1, BiIn2, BiOut> {
   fun apply(in1: BiIn1, in2: BiIn2): BiOut
  }
-
+ 
  fun interface BiConsumer<BiIn1, BiIn2> {
   fun accept(in1: BiIn1, in2: BiIn2)
  }
-
+ 
  interface Collector<CollAcum, CollRes> {
   companion object {
    @JvmStatic
    fun <OfRes> of(start: OfRes, combiner: BiFunction<OfRes, OfRes, OfRes>): Collector<OfRes, OfRes> {
     throw RuntimeException()
    }
-
+   
    @JvmStatic
    fun <OfAcum, OfRes> of(start: OfAcum, combiner: BiFunction<OfAcum, OfAcum, OfAcum>, finisher: Function<OfAcum, OfRes>): Collector<OfAcum, OfRes> {
     throw RuntimeException()

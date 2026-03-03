@@ -48,21 +48,21 @@ open class Main {
    val enumArray: Array<SomeEnum?> = foo!!.enumArray as Array<SomeEnum?>
    val annotationArray: Array<Zoo?> = foo!!.annotationArray as Array<Zoo?>
   }
-
+  
   @JvmStatic
   internal fun testClassValues_pp_annotation(foo: Foo?) {}
-
+  
   @JvmStatic
   internal fun test_pp_annotation(classImplementingAnnotation: Main.ClassImplementingAnnotation?): Annotation? {
    return classImplementingAnnotation
   }
-
+  
   @JvmStatic
   internal fun test_pp_annotation(interfaceExtendingAnnotation: InterfaceExtendingAnnotation?): Annotation? {
    return interfaceExtendingAnnotation
   }
  }
-
+ 
  annotation class Foo (
   val booleanValue: Boolean,
   val intValue: Int,
@@ -81,21 +81,21 @@ open class Main {
  ) {
   companion object {
    const val BOOLEAN_CONSTANT: Boolean = false
-
+   
    const val INT_CONSTANT: Int = 123
-
+   
    const val STRING_CONSTANT: String = "foo"
   }
  }
-
+ 
  enum class SomeEnum {
   ZERO,
   ONE;
  }
-
+ 
  annotation class Zoo
-
+ 
  abstract inner class ClassImplementingAnnotation internal constructor(): Annotation
-
+ 
  interface InterfaceExtendingAnnotation: Annotation
 }

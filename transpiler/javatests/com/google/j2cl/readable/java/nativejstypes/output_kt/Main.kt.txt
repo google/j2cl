@@ -44,21 +44,21 @@ open class Main {
    val foo: Foo = Foo()
    return foo.sum()
   }
-
+  
   @JvmStatic
   fun testNativeJsTypeWithNamespaceJsProperties() {
    val foo: Foo = Foo()
    foo.x = 50
    foo.y = 5
   }
-
+  
   @JvmStatic
   fun testNativeJsTypeWithoutNamespace(): Int {
    val bar: Bar = Bar(6, 7)
    val unused: Int = Bar.getStatic()
    return bar.product()
   }
-
+  
   @JvmStatic
   fun testNativeJsTypeWithoutNamespaceJsProperties() {
    val bar: Bar = Bar(6, 7)
@@ -66,7 +66,7 @@ open class Main {
    bar.y = 5
    Bar.f = 10
   }
-
+  
   @JvmStatic
   fun testInnerNativeJsType() {
    val barInner: Inner = Inner(1)
@@ -76,19 +76,19 @@ open class Main {
    Inner.getInnerStatic()
    BarInnerWithDotInName.getInnerStatic()
   }
-
+  
   @JvmStatic
   fun testGlobalNativeJsType() {
    val header: Headers = Headers()
    header.append("Content-Type", "text/xml")
   }
-
+  
   @JvmStatic
   fun testNativeTypeClassLiteral() {
    var o1: Any = Bar::class.javaObjectType
    o1 = Array::class.javaObjectType as Class<Array<Array<Bar?>?>>
   }
-
+  
   @JvmStatic
   fun testNativeTypeObjectMethods() {
    val bar: Bar = Bar(6, 7)
@@ -98,7 +98,7 @@ open class Main {
     Any(),
    )
   }
-
+  
   @JvmStatic
   fun testTopLevel() {
    TopLevel.x = 2

@@ -30,15 +30,15 @@ import kotlin.jvm.JvmStatic
 
 abstract class SomeClass {
  abstract fun foo(): String?
-
+ 
  internal constructor(i: Int)
 }
 
 abstract class SomeClassWithStaticMembers {
  abstract fun foo(): String?
-
+ 
  internal constructor(i: Int)
-
+ 
  companion object {
   @JvmStatic
   internal fun staticMethod_pp_anonymousclass() {}
@@ -48,34 +48,34 @@ abstract class SomeClassWithStaticMembers {
 open class AnonymousClass {
  @JvmField
  internal var i_pp_anonymousclass: Int = 0
-
+ 
  @JvmField
  internal var o_pp_anonymousclass: Any? = null
-
+ 
  constructor(a: Any?) {
   this.o_pp_anonymousclass = object : SomeClass(0) {
    @JvmField
    internal var outer_pp_anonymousclass: Any? = this@AnonymousClass
-
+   
    @JvmField
    internal var other_pp_anonymousclass: Any? = a
-
+   
    override fun foo(): String? {
     return "" + this@AnonymousClass.i_pp_anonymousclass
    }
   }
  }
-
+ 
  open fun main() {
   val instance: SomeClass = object : SomeClass(
    this@AnonymousClass.i_pp_anonymousclass,
   ) {
    @JvmField
    internal var object_pp_anonymousclass: Any? = this
-
+   
    @JvmField
    internal var outer_pp_anonymousclass: Any? = this@AnonymousClass
-
+   
    override fun foo(): String? {
     return "a"
    }
@@ -85,10 +85,10 @@ open class AnonymousClass {
   ) {
    @JvmField
    internal var object_pp_anonymousclass: Any? = this
-
+   
    @JvmField
    internal var outer_pp_anonymousclass: Any? = this@AnonymousClass
-
+   
    override fun foo(): String? {
     return "a"
    }
@@ -104,7 +104,7 @@ interface SomeInterface {
     return "a"
    }
   }
-
+  
   @JvmStatic
   fun captures() {
    var i: Int = 0
@@ -116,7 +116,7 @@ interface SomeInterface {
    object : SomeClass(1) {
     @JvmField
     internal var capturedI_pp_anonymousclass: Int = i
-
+    
     override fun foo(): String? {
      return "a"
     }
@@ -128,11 +128,11 @@ interface SomeInterface {
 open class JsConstructorClass {
  @JsConstructor
  internal constructor(o: Any?)
-
+ 
  internal constructor(): this(
   if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null,
  )
-
+ 
  companion object {
   @JvmField
   internal var trueVar_pp_anonymousclass: Boolean = true

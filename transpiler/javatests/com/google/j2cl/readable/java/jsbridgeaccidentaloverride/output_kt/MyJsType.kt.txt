@@ -30,15 +30,15 @@ fun interface OtherInterface {
 @JsType
 open class MyJsType: OtherInterface {
  internal constructor()
-
+ 
  open fun foo(a: Int): Int {
   return a
  }
-
+ 
  open fun bar(a: Int): Int {
   return a + 1
  }
-
+ 
  override fun f(a: Int): Int {
   return a - 1
  }
@@ -46,7 +46,7 @@ open class MyJsType: OtherInterface {
 
 interface MyInterface {
  fun foo(a: Int): Int
-
+ 
  fun bar(a: Int): Int
 }
 

@@ -76,7 +76,7 @@ class KotlinGeneratorStage(
 
     val (source, mappings) = ktSource(compilationUnit).buildStringWithMappings()
 
-    output.write(sourcePath, source.trimTrailingWhitespaces())
+    output.write(sourcePath, source)
 
     output.write(sourceMapPath, SourceMapGenerator.generateSourceMaps(sourceMapPath, mappings))
 
@@ -123,9 +123,6 @@ class KotlinGeneratorStage(
     return compilationUnitRenderer.source(compilationUnit)
   }
 }
-
-/** Returns string with trimmed trailing whitespaces. */
-private fun String.trimTrailingWhitespaces() = lines().joinToString("\n") { it.trimEnd() }
 
 /** Returns a map from all named nodes in this compilation unit to rendered identifier strings. */
 private fun CompilationUnit.buildNameToIdentifierMap(): Map<HasName, String> = buildMap {

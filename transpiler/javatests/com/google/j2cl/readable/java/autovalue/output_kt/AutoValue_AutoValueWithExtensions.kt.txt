@@ -29,14 +29,14 @@ import kotlin.text.StringBuilder
 
 class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
  internal constructor(intField: Int, stringField: String?): super(intField, stringField)
-
+ 
  override fun toPrettyString_pp_autovalue(): String? {
   return "AutoValueWithExtensions {\n  intField = " + this.getIntField() + ",\n  stringField = " + AutoValue_AutoValueWithExtensions.format(
    this.getStringField(),
    1,
   ) + ",\n}"
  }
-
+ 
  companion object {
   @JvmStatic
   private fun format(value: Any?, indentLevel: Int): String? {
@@ -48,7 +48,7 @@ class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
     "\n" + AutoValue_AutoValueWithExtensions.___indent(indentLevel),
    )
   }
-
+  
   @JvmStatic
   private fun ___indent(level: Int): String? {
    val builder: StringBuilder = StringBuilder()

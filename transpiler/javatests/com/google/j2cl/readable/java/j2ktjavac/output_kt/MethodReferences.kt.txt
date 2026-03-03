@@ -35,7 +35,7 @@ open class MethodReferences {
     },
    )
   }
-
+  
   @JvmStatic
   fun <T> testExplicitTypeArguments(): BiConsumer<Consumer<T>, T> {
    return MethodReferences.apply<Consumer<T>, T>(
@@ -44,12 +44,12 @@ open class MethodReferences {
     },
    )
   }
-
+  
   @JvmStatic
   fun <A, B> apply(biConsumer: BiConsumer<A, B>): BiConsumer<A, B> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   internal fun testMemberReferenceParameterNullabilty_pp_j2ktjavac() {
    val consumerFn: Consumer<Container<Any>>? = null
@@ -60,12 +60,12 @@ open class MethodReferences {
     },
    )
   }
-
+  
   @JvmStatic
   fun <T: Collection<String>> toCollection(collectionConstructor: Supplier<T>): T {
    return null!!
   }
-
+  
   @JvmStatic
   fun testArrayCreationReference() {
    var collection: Collection<String>? = MethodReferences.toCollection<ArrayList<String>>(
@@ -80,23 +80,23 @@ open class MethodReferences {
    )
   }
  }
-
+ 
  fun interface Consumer<A> {
   fun accept(a: A)
  }
-
+ 
  fun interface BiConsumer<A, B> {
   fun accept(a: A, b: B)
  }
-
+ 
  open class Container<V> internal constructor() {
   open fun apply(callback: Consumer<V>) {}
  }
-
+ 
  interface Collection<T: Any>
-
+ 
  open class ArrayList<T: Any> internal constructor(): Collection<T>
-
+ 
  fun interface Supplier<T: Any> {
   fun get(): T
  }

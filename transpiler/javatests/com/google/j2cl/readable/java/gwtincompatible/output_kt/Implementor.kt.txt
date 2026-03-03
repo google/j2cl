@@ -27,15 +27,15 @@ import kotlin.Suppress
 
 open class Implementor: ClassWithAbstractMethod(), Interface, NestedInterface {
  override fun incompatible() {}
-
+ 
  override fun nestedIncompatible() {}
-
+ 
  override fun incompatibleFromClass() {}
-
+ 
  open fun compatibleMethod() {
   val a: Int = 4
  }
-
+ 
  enum class SomeEnum {
   COMPATIBLE {
    override fun method_pp_gwtincompatible() {}
@@ -43,7 +43,7 @@ open class Implementor: ClassWithAbstractMethod(), Interface, NestedInterface {
   INCOMPATIBLE {
    override fun method_pp_gwtincompatible() {}
   };
-
+  
   internal abstract fun method_pp_gwtincompatible()
  }
 }

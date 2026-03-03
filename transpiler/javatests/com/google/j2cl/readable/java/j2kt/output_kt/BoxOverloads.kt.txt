@@ -32,16 +32,16 @@ open class BoxOverloads {
  constructor(d: Double): this(
   java.lang.Double.valueOf(d) as Double?,
  )
-
+ 
  constructor(d: Double?)
-
+ 
  companion object {
   @JvmStatic
   fun nullableBoxedOverload(d: Double) {}
-
+  
   @JvmStatic
   fun nullableBoxedOverload(d: Double?) {}
-
+  
   @JvmStatic
   fun testNullableBoxedOverload() {
    BoxOverloads.nullableBoxedOverload(1.25)
@@ -53,13 +53,13 @@ open class BoxOverloads {
    )
    BoxOverloads.nullableBoxedOverload(1.0)
   }
-
+  
   @JvmStatic
   fun nullableNumberOverload(d: Double) {}
-
+  
   @JvmStatic
   fun nullableNumberOverload(n: Number?) {}
-
+  
   @JvmStatic
   fun testNullableNumberOverload() {
    BoxOverloads.nullableNumberOverload(1.25)
@@ -77,13 +77,13 @@ open class BoxOverloads {
     Int(1) as Number?,
    )
   }
-
+  
   @JvmStatic
   fun numberOverload(d: Double) {}
-
+  
   @JvmStatic
   fun numberOverload(n: Number) {}
-
+  
   @JvmStatic
   fun testNumberOverload() {
    BoxOverloads.numberOverload(1.25)
@@ -101,13 +101,13 @@ open class BoxOverloads {
     Int(1) as Number,
    )
   }
-
+  
   @JvmStatic
   fun nullableObjectOverload(d: Double) {}
-
+  
   @JvmStatic
   fun nullableObjectOverload(o: Any?) {}
-
+  
   @JvmStatic
   fun testNullableObjectOverload() {
    BoxOverloads.nullableObjectOverload(1.25)
@@ -126,13 +126,13 @@ open class BoxOverloads {
    )
    BoxOverloads.nullableObjectOverload("foo")
   }
-
+  
   @JvmStatic
   fun objectOverload(d: Double) {}
-
+  
   @JvmStatic
   fun objectOverload(o: Any) {}
-
+  
   @JvmStatic
   fun testObjectOverload() {
    BoxOverloads.objectOverload(1.25)
@@ -151,17 +151,17 @@ open class BoxOverloads {
    )
    BoxOverloads.objectOverload("foo")
   }
-
+  
   @JvmStatic
   fun <T: Any> firstNonNull(t1: T?, t2: T): T {
    return (if (t1 != null) t1 else t2)!!
   }
-
+  
   @JvmStatic
   fun testFirstNonNull(i: Int?) {
    BoxOverloads.firstNonNull<Int>(i, 0)
   }
-
+  
   @JvmStatic
   fun testComparableOverload(generic: Generic<Double>) {
    generic.comparableOverload(1.25)
@@ -170,14 +170,14 @@ open class BoxOverloads {
    )
   }
  }
-
+ 
  interface Generic<T> {
   fun overload(d: Double)
-
+  
   fun overload(t: T)
-
+  
   fun comparableOverload(d: Double)
-
+  
   fun comparableOverload(comparable: Comparable<T & Any>)
  }
 }

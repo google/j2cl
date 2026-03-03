@@ -31,20 +31,20 @@ open class InstanceQualifiers {
  companion object {
   @JvmField
   var staticField: Int = 100
-
+  
   @JvmField
   var sideEffectCount: Int = 0
-
+  
   @JvmStatic
   fun getStaticValue(): Int {
    return InstanceQualifiers.staticField
   }
-
+  
   @JvmStatic
   fun getStaticInstanceQualifiers(): InstanceQualifiers? {
    return null
   }
-
+  
   @JvmStatic
   fun main(vararg args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?

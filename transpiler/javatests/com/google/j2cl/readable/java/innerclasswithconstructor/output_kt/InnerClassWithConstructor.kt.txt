@@ -26,32 +26,32 @@ import kotlin.jvm.JvmField
 open class InnerClassWithConstructor {
  @JvmField
  var a: Int = 0
-
+ 
  open inner class InnerClass {
   @JvmField
   var b: Int = 0
-
+  
   constructor(b: Int) {
    this.b = this@InnerClassWithConstructor.a + b
   }
-
+  
   constructor(): this(
    this@InnerClassWithConstructor.a,
   )
  }
-
+ 
  open inner class InnerClassWithSingleConstructor constructor(b: Int) {
   @JvmField
   var b: Int = 0
-
+  
   init {
    this.b = this@InnerClassWithConstructor.a + b
   }
  }
-
+ 
  open inner class InnerClassWithFieldAfterConstructor constructor(i: Int) {
   private val i: Int
-
+  
   init {
    this.i = i
   }

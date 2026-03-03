@@ -26,7 +26,7 @@ open class NullabilityInferenceProblem2 {
  fun interface Supplier<T> {
   fun get(): T
  }
-
+ 
  abstract inner class Test<T> {
   open fun <E: T> foo(supplier: Supplier<E>): E {
    val local: E? = supplier.get()
@@ -35,7 +35,7 @@ open class NullabilityInferenceProblem2 {
     supplier.get(),
    )
   }
-
+  
   open fun <E: T> foo(a: E, b: E): E {
    throw RuntimeException()
   }

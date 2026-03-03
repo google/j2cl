@@ -31,12 +31,12 @@ open class NullabilityInferenceProblem8 {
   fun <I: Any, O: Any> nonNullWithLowerBound(fn: Function<in I, O>): Function<I, O> {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   fun acceptParameterized(fn: Function<String, Any>) {
    throw RuntimeException()
   }
-
+  
   @JvmStatic
   fun testMethodReference(supplier: NullableSupplier<Any>) {
    NullabilityInferenceProblem8.acceptParameterized(
@@ -47,7 +47,7 @@ open class NullabilityInferenceProblem8 {
     ),
    )
   }
-
+  
   @JvmStatic
   fun testLambda(supplier: NullableSupplier<Any>) {
    NullabilityInferenceProblem8.acceptParameterized(
@@ -59,11 +59,11 @@ open class NullabilityInferenceProblem8 {
    )
   }
  }
-
+ 
  fun interface NullableSupplier<V> {
   fun get(key: String): V?
  }
-
+ 
  fun interface Function<I, O> {
   fun apply(i: I): O
  }

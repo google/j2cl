@@ -35,24 +35,24 @@ open class BridgeMethodDefault internal constructor() {
    Any(),
   )
  }
-
+ 
  fun interface I<T> {
   fun m(t: T)
  }
-
+ 
  interface II: I<String?> {
   override fun m(s: String?) {}
  }
-
+ 
  open class A internal constructor(): II
-
+ 
  interface JJ: I<Any?> {
   @JsMethod
   override fun m(o: Any?) {}
  }
-
+ 
  open class B internal constructor(): JJ
-
+ 
  open class C internal constructor(): B() {
   override fun m(o: Any?) {}
  }

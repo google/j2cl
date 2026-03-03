@@ -26,27 +26,27 @@ import kotlin.jvm.JvmField
 open class ThisReferenceQualifier {
  @JvmField
  internal var outer_pp_j2kt: Int = 0
-
+ 
  init {
   object : ThisReferenceQualifier() {
    @JvmField
    internal var anonymousOuter_pp_j2kt: Int = 0
-
+   
    init {
     object : ThisReferenceQualifier() {
      @JvmField
      internal var anonymousInner_pp_j2kt: Int = 0
-
+     
      init {
       open class LocalOuter internal constructor() {
        @JvmField
        internal var localOuter_pp_j2kt: Int = 0
-
+       
        init {
         open class LocalInner internal constructor() {
          @JvmField
          internal var localInner_pp_j2kt: Int = 0
-
+         
          init {
           outer_pp_j2kt = outer_pp_j2kt
           anonymousOuter_pp_j2kt = anonymousOuter_pp_j2kt

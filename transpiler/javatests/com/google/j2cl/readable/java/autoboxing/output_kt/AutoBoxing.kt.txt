@@ -46,83 +46,83 @@ open class AutoBoxing {
  open fun box(b: Boolean): Boolean? {
   return b
  }
-
+ 
  open fun box(d: Double): Double? {
   return d
  }
-
+ 
  open fun box(b: Byte): Byte? {
   return b
  }
-
+ 
  open fun box(f: Float): Float? {
   return f
  }
-
+ 
  open fun box(i: Int): Int? {
   return i
  }
-
+ 
  open fun box(l: Long): Long? {
   return l
  }
-
+ 
  open fun box(s: Short): Short? {
   return s
  }
-
+ 
  open fun box(c: Char): Char? {
   return c
  }
-
+ 
  open fun unbox(b: Boolean?): Boolean {
   return b!!.booleanValue()
  }
-
+ 
  open fun unbox(d: Double?): Double {
   return d!!.toDouble()
  }
-
+ 
  open fun unbox(b: Byte?): Byte {
   return b!!.toByte()
  }
-
+ 
  open fun unbox(f: Float?): Float {
   return f!!.toFloat()
  }
-
+ 
  open fun unbox(i: Int?): Int {
   return i!!.toInt()
  }
-
+ 
  open fun unbox(l: Long?): Long {
   return l!!.toLong()
  }
-
+ 
  open fun unbox(s: Short?): Short {
   return s!!.toShort()
  }
-
+ 
  open fun unbox(c: Char?): Char {
   return c!!.toChar()
  }
-
+ 
  open fun takesAndReturnsPrimitiveDouble(d: Double): Double {
   return d
  }
-
+ 
  open fun takesAndReturnsVoid(v: Void?): Void? {
   return null
  }
-
+ 
  open fun takesFloatVarArgs(vararg elements: Float?) {
   val elements_1: Array<Float?>? = elements as Array<Float?>?
  }
-
+ 
  open fun takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox o: Any?): Double {
   return o as Double
  }
-
+ 
  open fun sumWithoutBoxing(@DoNotAutobox vararg numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -131,7 +131,7 @@ open class AutoBoxing {
   }
   return sum
  }
-
+ 
  @JsMethod
  open fun sumWithoutBoxingJsVarargs(@DoNotAutobox vararg numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
@@ -141,7 +141,7 @@ open class AutoBoxing {
   }
   return sum
  }
-
+ 
  open fun sumWithUnboxing(boxedDoubles: MutableIterable<Double?>?): Double {
   var sum: Double = 0.0
   for (d in boxedDoubles!!) {
@@ -150,7 +150,7 @@ open class AutoBoxing {
   }
   return sum
  }
-
+ 
  open fun testBoxing() {
   var bool: Boolean = true
   var d: Double = 2.2
@@ -231,7 +231,7 @@ open class AutoBoxing {
   )
   o = 15.let { it as Int; it as Comparable<Int>; it }
  }
-
+ 
  open fun testUnboxing() {
   var boxBool: Boolean? = Boolean(true)
   var boxD: Double? = Double(2.2)
@@ -338,7 +338,7 @@ open class AutoBoxing {
    boxL!!.toLong().toInt(),
   )
  }
-
+ 
  open fun testUnboxingBoolean() {
   var boxB1: Boolean? = Boolean(true)
   val boxB2: Boolean? = Boolean(false)
@@ -456,7 +456,7 @@ open class AutoBoxing {
    }!!.booleanValue(),
   )
  }
-
+ 
  open fun testUnboxingEquality() {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = false
@@ -471,14 +471,14 @@ open class AutoBoxing {
   assert(i != i)
   assert(i != boxI!!.toInt())
  }
-
+ 
  open fun testAssertStatement() {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = true
   assert(boxB!!.booleanValue())
   assert(b)
  }
-
+ 
  open fun testUnbox_withCast() {
   open class Supplier<T> internal constructor() {
    internal open fun get_pp_autoboxing(): T {
@@ -488,19 +488,19 @@ open class AutoBoxing {
   val supplier: Supplier<Int?> = Supplier<Int?>()
   val i: Int = supplier.get_pp_autoboxing()!!.toInt()
  }
-
+ 
  companion object {
   const val COMPILE_TIME_CONSTANT: Float = 1.1f
-
+  
   @JvmStatic
   private fun acceptsObject(x: Any?) {}
-
+  
   @JvmStatic
   private fun acceptsInt(x: Int) {}
-
+  
   @JvmStatic
   private fun acceptsString(x: String?) {}
-
+  
   @JvmStatic
   private fun testUnboxingGeneric(integerRef: Ref<Int?>?, booleanRef: Ref<Boolean?>?, stringRef: Ref<String?>?) {
    integerRef!!.field_pp_autoboxing = integerRef!!.field_pp_autoboxing
@@ -529,7 +529,7 @@ open class AutoBoxing {
     "" + integerRef!!.field_pp_autoboxing,
    )
   }
-
+  
   @JvmStatic
   fun <T: Long?> testUnboxingFromTypeVariable() {
    var n: T? = 10L as (T & Any)
@@ -555,7 +555,7 @@ open class AutoBoxing {
    l = Local<Long?>().toLong_pp_autoboxing(11L)
    assert(l == 11L)
   }
-
+  
   @JvmStatic
   fun <T> testUnboxingFromIntersectionType() where T: Long?, T: Comparable<Long>? {
    var n: T? = 10L as (T & Any)
@@ -583,11 +583,11 @@ open class AutoBoxing {
    val i: Int = 10.let { it as Int; it as Comparable<Int>; it }.toInt()
   }
  }
-
+ 
  open class Ref<T> {
   @JvmField
   internal var field_pp_autoboxing: T
-
+  
   internal constructor(value: T) {
    this.field_pp_autoboxing = value
   }

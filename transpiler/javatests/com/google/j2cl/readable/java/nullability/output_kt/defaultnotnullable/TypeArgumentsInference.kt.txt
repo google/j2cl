@@ -29,12 +29,12 @@ open class TypeArgumentsInference {
   fun <K> wildcardPair(): Pair<K, *> {
    return Pair<K, Any>()
   }
-
+  
   @JvmStatic
   fun <K, V> pairIdentity(pair: Pair<K, V>): Pair<K, V> {
    return pair
   }
-
+  
   @JvmStatic
   fun <K> wildcardPairAndIdentity(): Pair<K, *> {
    return TypeArgumentsInference.pairIdentity(
@@ -42,6 +42,6 @@ open class TypeArgumentsInference {
    )
   }
  }
-
+ 
  class Pair<K, V>
 }

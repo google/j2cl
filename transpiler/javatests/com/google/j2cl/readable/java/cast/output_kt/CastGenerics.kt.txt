@@ -33,11 +33,11 @@ import kotlin.jvm.JvmStatic
 open class CastGenerics<T, E: Number?> {
  @JvmField
  internal var field_pp_cast: T? = null
-
+ 
  internal open fun method_pp_cast(): T {
   return null as T
  }
-
+ 
  open fun testCastToTypeVariable() {
   val o: Any = Int(1)
   val e: E? = o as E?
@@ -45,7 +45,7 @@ open class CastGenerics<T, E: Number?> {
   val es: Array<E>? = o as Array<E>?
   val ts: Array<T>? = o as Array<T>?
  }
-
+ 
  open fun <S, V: Enum<V>> testCastToMethodTypeVariable() {
   val o: Any = Int(1)
   val s: S? = o as S?
@@ -53,11 +53,11 @@ open class CastGenerics<T, E: Number?> {
   c = o as Array<S>?
   c = o as V?
  }
-
+ 
  open fun testCastToRawToGeneric(foo: Foo<Any?>?): Foo<String?>? {
   return foo as Foo<String?>?
  }
-
+ 
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class Nested<SS> internal constructor() {
    private fun nestedGenericMethod(o: Any?) {
@@ -65,14 +65,14 @@ open class CastGenerics<T, E: Number?> {
    }
   }
  }
-
+ 
  open fun <EE> method(o: Any?): EE where EE: Empty1?, EE: Empty2<EE>? {
   if (o is Empty1) {
    return o as EE
   }
   return null as EE
  }
-
+ 
  companion object {
   @JvmStatic
   fun <T_1, U: T_1> testErasureCast() where T_1: A?, T_1: B? {
@@ -117,63 +117,63 @@ open class CastGenerics<T, E: Number?> {
    val superString: Container<in String?>? = null
    oA = superString!!.get_pp_cast()
   }
-
+  
   @JvmStatic
   fun testErasureCastInNullMarkedCode() {
    val container: NullMarkedContainer<out String> = NullMarkedContainer<String>("abc")
    val s: String? = container.get_pp_cast()
   }
-
+  
   @JvmStatic
   fun testCastToParamterizedType() {
    val o: Any = Int(1)
    var cc: CastGenerics<Error?, Number?>? = o as CastGenerics<Error?, Number?>?
    cc = o as CastGenerics<Error?, Number?>?
   }
-
+  
   @JvmStatic
   fun <T_1> doSomething(): Foo<T_1>? {
    return object : Foo<T_1>() {}
   }
  }
-
+ 
  fun interface A {
   fun mA()
  }
-
+ 
  fun interface B {
   fun mB()
  }
-
+ 
  abstract class BaseImplementor internal constructor(): A, B
-
+ 
  open class Implementor internal constructor(): BaseImplementor() {
   override fun mA() {}
-
+  
   override fun mB() {}
  }
-
+ 
  open class Container<T> internal constructor() {
   internal open fun get_pp_cast(): T {
    return null as T
   }
  }
-
+ 
  open class NullMarkedContainer<T: Any> {
   private var value: T
-
+  
   internal constructor(value: T) {
    this.value = value
   }
-
+  
   internal open fun get_pp_cast(): T {
    return this.value
   }
  }
-
+ 
  interface Empty1
-
+ 
  interface Empty2<TT>
-
+ 
  open class Foo<V>
 }

@@ -35,13 +35,13 @@ class RegExp internal constructor() {
    val str: String? = regExp.toString()
   }
  }
-
+ 
  @JsType(name = "RegExp", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeRegExp {
   constructor(pattern: String?)
-
+  
   external open fun test(value: String?): Boolean
-
+  
   external override fun toString(): String
  }
 }

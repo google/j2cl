@@ -38,21 +38,21 @@ import kotlin.jvm.JvmStatic
 open class Main {
  @JvmField
  internal var field_pp_jsvarargs: Int = 0
-
+ 
  constructor(f: Int) {
   this.field_pp_jsvarargs = f
  }
-
+ 
  @JsMethod
  open fun f3(m: Int, vararg numbers: Int): Int {
   return this.field_pp_jsvarargs + m + numbers!![1]
  }
-
+ 
  @JsMethod
  open fun f4(vararg numbers: Int): Int {
   return this.field_pp_jsvarargs + numbers!![1]
  }
-
+ 
  open fun testStaticMethodNotFirst() {
   Main.f1(1, 1, 2)
   Main.f1(1, 1, 2)
@@ -88,7 +88,7 @@ open class Main {
    *null!!,
   )
  }
-
+ 
  open fun testStaticMethodFirst() {
   Main.f2(1, 2)
   Main.generics<Int?>(1, 2)
@@ -132,7 +132,7 @@ open class Main {
    *integers,
   )
  }
-
+ 
  open fun testInstanceMethodNotFirst() {
   val m: Main = Main(1)
   m.f3(1, 1, 2)
@@ -151,7 +151,7 @@ open class Main {
    *ints,
   )
  }
-
+ 
  open fun testInstanceMethodFirst() {
   val m: Main = Main(1)
   m.f4(1, 2)
@@ -167,7 +167,7 @@ open class Main {
    *ints,
   )
  }
-
+ 
  open fun testJsFunction() {
   val a: AFunction = AFunction()
   val o1: Any = Any()
@@ -188,7 +188,7 @@ open class Main {
    *os,
   )
  }
-
+ 
  open fun testSideEffect() {
   val ints: IntArray = intArrayOf(1, 2)
   Main(1).f3(
@@ -196,48 +196,48 @@ open class Main {
    *ints,
   )
  }
-
+ 
  open fun testNullJsVarargs() {
   val ints: IntArray? = null
   Main.f2(
    *ints!!,
   )
  }
-
+ 
  open fun <U> testGenericJsFunctionWithVarags() {
   val function: GenericFunction<U> = GenericFunction { n: U, param: Array<out U>? ->
    val param_1: Array<U>? = param as Array<U>?
    return@GenericFunction param_1
   }
  }
-
+ 
  companion object {
   @JvmStatic
   @JsMethod
   fun f1(multiplier: Int, vararg numbers: Int): Int {
    return numbers!!.size + numbers!![0] + multiplier
   }
-
+  
   @JvmStatic
   @JsMethod
   fun f2(vararg numbers: Int): Int {
    return numbers!!.size + numbers!![0]
   }
-
+  
   @JvmStatic
   @JsMethod
   fun <T> generics(vararg elements: T): T {
    val elements_1: Array<T>? = elements as Array<T>?
    return elements_1!![0]
   }
-
+  
   @JvmStatic
   @JsMethod
   fun parameterizedType(vararg elements: MutableList<Main?>?): Main? {
    val elements_1: Array<MutableList<Main?>?>? = elements as Array<MutableList<Main?>?>?
    return elements_1!![0]!!.get(0)
   }
-
+  
   @JvmStatic
   @JsMethod
   fun <T> parameterizedByT(vararg elements: MutableList<T>?): T {
@@ -245,12 +245,12 @@ open class Main {
    return elements_1!![0]!!.get(0)
   }
  }
-
+ 
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeObject {
   constructor(vararg pars: Any?)
  }
-
+ 
  open class SubVarargsConstructorClass: NativeObject {
   @JsConstructor
   constructor(i: Int, vararg args: Any?): super(
@@ -259,17 +259,17 @@ open class Main {
    val args_1: Array<Any?>? = args as Array<Any?>?
   }
  }
-
+ 
  @JsFunction
  fun interface Function {
   fun f1(i: Int, vararg args: Any?): Any?
  }
-
+ 
  @JsType
  abstract class AbstractMethodWithVarargs {
   abstract fun abstractMethod(vararg args: Int)
  }
-
+ 
  @JsType
  interface StaticInterfaceMethodWithVarargs {
   companion object {
@@ -277,17 +277,17 @@ open class Main {
    fun staticMethod(vararg args: Int) {}
   }
  }
-
+ 
  class AFunction internal constructor(): Function {
   override fun f1(i: Int, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![i]
   }
  }
-
+ 
  open class SubMain: Main {
   constructor(): super(10)
-
+  
   override fun f3(m: Int, vararg numbers: Int): Int {
    var a: Int = super<Main>.f3(1, 1, 2)
    a = a + super<Main>.f3(1)
@@ -307,7 +307,7 @@ open class Main {
    return a
   }
  }
-
+ 
  @JsFunction
  fun interface GenericFunction<T> {
   fun m(i: T, vararg args: T): Any?

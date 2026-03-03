@@ -26,14 +26,14 @@ import kotlin.jvm.JvmStatic
 
 class BoxedVarargs {
  private constructor()
-
+ 
  companion object {
   @JvmStatic
   fun testNonNull(vararg integers: Int): Array<Int> {
    val integers_1: Array<Int> = integers as Array<Int>
    return integers_1
   }
-
+  
   @JvmStatic
   fun testNullable(vararg integers: Int?): Array<Int?> {
    val integers_1: Array<Int?> = integers as Array<Int?>

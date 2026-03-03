@@ -36,7 +36,7 @@ open class NestedGenericClass<T> {
   E<Number?>()
   F()
  }
-
+ 
  open fun <T_1> bar() {
   open class G<T> internal constructor() {
    open fun <T_1> bar() {
@@ -46,7 +46,7 @@ open class NestedGenericClass<T> {
   }
   G<Error?>().bar<Any?>()
  }
-
+ 
  open fun test() {
   val n: NestedGenericClass<Number?> = NestedGenericClass<Number?>()
   val a: NestedGenericClass<Number?>.A<Error?> = n.A<Error?>()
@@ -54,26 +54,26 @@ open class NestedGenericClass<T> {
   n.C()
   n.C().D()
  }
-
+ 
  open inner class A<T> {
   open inner class B<T> constructor()
  }
-
+ 
  open inner class C {
   @JvmField
   var c: T? = null
-
+  
   open inner class D {
    @JvmField
    var d: T? = null
   }
  }
-
+ 
  open inner class RecursiveTypeVariable<T: NestedGenericClass<T>.RecursiveTypeVariable<T>?> internal constructor() {
   internal open fun test_pp_nestedgenericclass(t: T) {
    t!!.Inner()
   }
-
+  
   open inner class Inner internal constructor()
  }
 }

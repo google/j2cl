@@ -44,103 +44,103 @@ open class Main {
   n.baz_private_2()
   val b: String = NativeJsTypeWithOverlayConstant.STRING_COMPILE_TIME_CONSTANT + NativeJsTypeInterfaceWithOverlay.staticField
  }
-
+ 
  open fun testOverlayInterface(foo: NativeJsTypeInterfaceWithOverlay?) {
   foo!!.m()
   foo!!.callM()
  }
-
+ 
  @JsType(namespace = "test.foo", isNative = true)
  fun interface NativeJsTypeInterfaceWithOverlay {
   fun m(): Int
-
+  
   @JsOverlay
   fun callM(): Int {
    return this@NativeJsTypeInterfaceWithOverlay.m()
   }
-
+  
   companion object {
    @JvmField
    @JsOverlay
    val staticField: Any? = Any()
   }
  }
-
+ 
  @JsType(namespace = "test.foo", isNative = true)
  open class NativeJsTypeWithOverlay {
   external open fun m(): Int
-
+  
   @JsOverlay
   fun callM(): Int {
    return this.m()
   }
-
+  
   @JsOverlay
   internal fun foo_private_2(): Int {
    return 1
   }
-
+  
   @JsOverlay
   internal fun baz_private_2(): Int {
    return 1
   }
-
+  
   @JsOverlay
   fun overlayWithJsFunction() {
    object : Intf {
     override fun run() {}
    }.run()
   }
-
+  
   @JsOverlay
   fun overlay() {}
-
+  
   companion object {
    @JvmField
    var nonJsOverlayField: Int = 0
-
+   
    @JvmField
    @JsOverlay
    var staticField: Any? = Any()
-
+   
    @JvmStatic
    external fun n()
-
+   
    @JvmStatic
    @JsOverlay
    fun `fun`(): Int {
     return 1
    }
-
+   
    @JvmStatic
    @JsOverlay
    internal fun bar_private_2(): Int {
     return 1
    }
-
+   
    @JvmStatic
    @JsOverlay
    fun varargs(vararg a: Int): Int {
     return a!![0]
    }
-
+   
    @JvmStatic
    @JsOverlay
    fun overlay(o: NativeJsTypeWithOverlay?) {}
   }
  }
-
+ 
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class NativeJsTypeWithOverlayConstant internal constructor() {
   companion object {
    @JsOverlay
    const val COMPILE_TIME_CONSTANT: Int = 10
-
+   
    @JsOverlay
    const val STRING_COMPILE_TIME_CONSTANT: String = "10"
   }
  }
-
+ 
  @JsFunction
  fun interface Intf {
   fun run()
@@ -151,13 +151,13 @@ open class Main {
 interface ParameterizedNativeInterface<T> {
  @JsOverlay
  fun <T_1, S> shadowsTypeVariable(param1: T_1, param2: S) {}
-
+ 
  @JsOverlay
  fun <T_1, S> shadowsTypeVariable(param1: T_1, param2: Int) {}
-
+ 
  @JsOverlay
  fun publicCalleeByPrivate() {}
-
+ 
  @JsOverlay
  fun privateCaller_private_jsoverlay_ParameterizedNativeInterface(t1: ParameterizedNativeInterface<String?>?) {
   t1!!.publicCalleeByPrivate()

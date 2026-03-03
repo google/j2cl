@@ -29,27 +29,27 @@ open class Child: Parent(), Interface {
  public open fun overrideInParentExposedInChild(a: Int): Int {
   return a + 1
  }
-
+ 
  public open fun exposedInChild(a: Int, b: Int): Int {
   return a + b + 1
  }
-
+ 
  override fun exposedInChildWithInterface(a: Int, b: Int): Int {
   return a + b + 1
  }
-
+ 
  override fun exposedAbstractInParent(a: Int, b: Int, c: Int): Int {
   return a + b + c + 2
  }
-
+ 
  override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(arg0: Int): Int {
   return this.overrideInParentExposedInChild(arg0)
  }
-
+ 
  override fun exposedInChild_pp_packageprivatemethods_package1(arg0: Int, arg1: Int): Int {
   return this.exposedInChild(arg0, arg1)
  }
-
+ 
  internal override fun exposedInChildWithInterface_pp_packageprivatemethods_package1(arg0: Int, arg1: Int): Int {
   return this.exposedInChildWithInterface(arg0, arg1)
  }

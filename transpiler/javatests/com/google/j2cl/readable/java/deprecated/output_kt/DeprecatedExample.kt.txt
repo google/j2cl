@@ -33,33 +33,33 @@ import kotlin.jvm.JvmStatic
 open class DeprecatedExample {
  @JvmField
  var deprecatedInstanceField: String? = "deprecated field"
-
+ 
  open fun deprecatedInstanceMethod(someArg: String?) {}
-
+ 
  constructor()
-
+ 
  companion object {
   const val DEPRECATED_STATIC_FIELD: String = "deprecated field"
-
+  
   @JvmStatic
   fun deprecatedStaticMethod(someObject: Any?) {}
  }
-
+ 
  @JsType
  fun interface DeprecatedInterface {
   fun doAThing(anInt: Int)
  }
-
+ 
  @JsFunction
  fun interface DeprecatedJsFunction {
   fun doAThing(aThing: Any?)
  }
-
+ 
  @JsType
  enum class DeprecatedEnum {
   A_VALUE;
  }
-
+ 
  @JsEnum
  enum class DeprecatedJsEnum {
   A_VALUE;

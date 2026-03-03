@@ -33,84 +33,84 @@ open class NullabilityScopes {
     nullMarkedFoo as Foo<Any?>,
    )
   }
-
+  
   open fun testNullMarkedWildcardConstructorImplicitTypeArguments(nullMarkedFoo: Foo<String>) {
    Foo<String>(nullMarkedFoo)
   }
-
+  
   open fun testNullMarkedWildcardConstructorExplicitTypeArguments(nullMarkedFoo: Foo<String>) {
    Foo<String>(nullMarkedFoo)
   }
-
+  
   open fun testNonNullMarkedWildcardConstructorRaw(nonNullMarkedFoo: j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String>) {
    j2kt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>(
     nonNullMarkedFoo as j2kt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>?,
    )
   }
-
+  
   open fun testNonNullMarkedWildcardConstructorImplicitTypeArguemnts(nonNullMarkedFoo: j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String>) {
    j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
   }
-
+  
   open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(nonNullMarkedFoo: j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String>) {
    j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String?>(nonNullMarkedFoo)
   }
-
+  
   open class Foo<K> {
    constructor()
-
+   
    constructor(foo: Foo<out K>)
   }
-
+  
   interface Array<T>
-
+  
   interface Cell<T: Cell<T>>
-
+  
   fun interface Table<T: Cell<T>> {
    fun getNullableCells(): Array<T?>
   }
  }
-
+ 
  open class NonNullMarkedScope {
   open fun testNullMarkedWildcardConstructorRaw(nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?) {
    j2kt.NullabilityScopes.NullMarkedScope.Foo<Any?>(
     nullMarkedFoo!! as j2kt.NullabilityScopes.NullMarkedScope.Foo<Any?>,
    )
   }
-
+  
   open fun testNullMarkedWildcardConstructorImplicitTypeArguments(nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?) {
    j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>(
     nullMarkedFoo!!,
    )
   }
-
+  
   open fun testNullMarkedWildcardConstructorExplicitTypeArguments(nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?) {
    j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>(
     nullMarkedFoo!!,
    )
   }
-
+  
   open fun testNonNullMarkedWildcardConstructorRaw(nonNullMarkedFoo: Foo<String?>?) {
    Foo<Any?>(
     nonNullMarkedFoo as Foo<Any?>?,
    )
   }
-
+  
   open fun testNonNullMarkedWildcardConstructorImplicitTypeArguments(nonNullMarkedFoo: Foo<String?>?) {
    Foo<String?>(nonNullMarkedFoo)
   }
-
+  
   open fun testNonNullMarkedWildcardConstructorExplicitTypeArguments(nonNullMarkedFoo: Foo<String?>?) {
    Foo<String?>(nonNullMarkedFoo)
   }
-
+  
   open fun testRecursiveWildcardConversion(table: Table<out Cell<*>>?): Array<out Cell<*>?>? {
    return table!!.getNullableCells()
   }
-
+  
   open class Foo<K> {
    constructor()
-
+   
    constructor(foo: Foo<out K>?)
   }
  }

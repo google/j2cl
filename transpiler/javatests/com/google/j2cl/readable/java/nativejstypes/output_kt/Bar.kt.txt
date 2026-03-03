@@ -29,28 +29,28 @@ import kotlin.jvm.JvmStatic
 open class Bar {
  @JvmField
  var x: Int = 0
-
+ 
  @JvmField
  var y: Int = 0
-
+ 
  constructor(x: Int, y: Int)
-
+ 
  external open fun product(): Int
-
+ 
  companion object {
   @JvmField
   var f: Int = 0
-
+  
   @JvmStatic
   external fun getStatic(): Int
  }
-
+ 
  @JsType(isNative = true)
  open class Inner {
   constructor(n: Int)
-
+  
   external open fun square(): Int
-
+  
   companion object {
    @JvmStatic
    external fun getInnerStatic(): Int
@@ -61,9 +61,9 @@ open class Bar {
 @JsType(name = "Bar.Inner", isNative = true)
 open class BarInnerWithDotInName {
  constructor(n: Int)
-
+ 
  external open fun square(): Int
-
+ 
  companion object {
   @JvmStatic
   external fun getInnerStatic(): Int
@@ -73,9 +73,9 @@ open class BarInnerWithDotInName {
 @JsType(name = "Bar.Inner", namespace = "nativejstypes", isNative = true)
 open class BarInnerWithDotInNameAndHasNamespace {
  constructor(n: Int)
-
+ 
  external open fun square(): Int
-
+ 
  companion object {
   @JvmStatic
   external fun getInnerStatic(): Int

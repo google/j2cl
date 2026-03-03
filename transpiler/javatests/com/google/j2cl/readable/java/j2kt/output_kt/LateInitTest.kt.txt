@@ -25,11 +25,11 @@ import org.junit.Assert
 
 class LateInitTest {
  private lateinit var uninitialized: String
-
+ 
  fun setup() {
   this.uninitialized = "I have been initialized"
  }
-
+ 
  fun behaviorBeingTested_expectedResult() {
   Assert.assertEquals(
    this.uninitialized,

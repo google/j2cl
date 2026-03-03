@@ -37,12 +37,12 @@ open class NullabilityScopes2 internal constructor() {
     throw RuntimeException()
    }
   }
-
+  
   fun interface Recursive<M: Recursive<M>> {
    fun toList(): MutableList<Recursive<M>>
   }
  }
-
+ 
  open class NonNullMarkedScope<T: Recursive<T>> internal constructor() {
   open fun flatten(recursive: Recursive<T>?): MutableList<Any?>? {
    return recursive!!.toList().stream().map<MutableList<Any?>?>(

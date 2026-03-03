@@ -28,24 +28,24 @@ import kotlin.jvm.JvmStatic
 @WasAutoValue
 abstract class AutoValueWithBuilder {
  abstract fun getBooleanField(): Boolean
-
+ 
  abstract fun getNullableField(): Double?
-
+ 
  abstract fun toBuilder(): Builder?
-
+ 
  companion object {
   @JvmStatic
   internal fun create_pp_autovalue(): AutoValueWithBuilder? {
    return autovalue.AutoValue_AutoValueWithBuilder.Builder().setBooleanField(true)!!.build()
   }
  }
-
+ 
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder internal constructor() {
   abstract fun setBooleanField(x: Boolean): Builder?
-
+  
   abstract fun setNullableField(x: Double?): Builder?
-
+  
   abstract fun build(): AutoValueWithBuilder?
  }
 }

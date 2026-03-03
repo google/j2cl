@@ -45,19 +45,19 @@ open class MethodReferences<T> {
  open fun isA(): Boolean {
   return true
  }
-
+ 
  internal open fun self_pp_methodreferences(): Any {
   return this
  }
-
+ 
  internal open fun t_pp_methodreferences(): T {
   return null as T
  }
-
+ 
  internal open fun sameAs_pp_methodreferences(n: Number): Boolean {
   return false
  }
-
+ 
  internal open fun main_pp_methodreferences() {
   var objectFactory: Producer<Any> = Producer {
    return@Producer Any()
@@ -174,13 +174,13 @@ open class MethodReferences<T> {
    },
   )
  }
-
+ 
  companion object {
   @JvmStatic
   internal fun m_pp_methodreferences(): Any {
    return Any()
   }
-
+  
   @JvmField
   internal var staticStringProducer_pp_methodreferences: Producer<String> = run {
    val ______q: Any = MethodReferences.m_pp_methodreferences()
@@ -188,47 +188,47 @@ open class MethodReferences<T> {
     return@Producer ______q.toString()
    }
   }
-
+  
   @JvmStatic
   private fun <U, V> acceptFunctionSuperVariance(f: Function<in U, V>) {}
  }
-
+ 
  fun interface Producer<T> {
   fun produce(): T
  }
-
+ 
  fun interface Predicate<T> {
   fun apply(parameter: T): Boolean
  }
-
+ 
  fun interface ArrayProducer<T> {
   fun produce(size: Int): Array<T>
  }
-
+ 
  open inner class ObjectCapturingOuter internal constructor() {
   internal open fun getMain_pp_methodreferences(): MethodReferences<T> {
    return this@MethodReferences
   }
  }
-
+ 
  fun interface Function<T, U> {
   fun apply(t: T): U
  }
-
+ 
  fun interface BiFunction<T, U, V> {
   fun apply(t: T, u: U): V
  }
-
+ 
  @JsFunction
  fun interface JsProducer<T> {
   fun produce(): T
  }
-
+ 
  @JsFunction
  fun interface JsFunctionInterface<T, U> {
   fun apply(t: T): U
  }
-
+ 
  @JsFunction
  fun interface JsBiFunction<T, U, V> {
   fun apply(t: T, u: U): V

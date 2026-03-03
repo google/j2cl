@@ -32,32 +32,32 @@ open class InnerClassInsideAnonymousClassInitProblem {
    open inner class InnerClassWithSingleConstructor constructor(i: Int) {
     @JvmField
     internal val i_pp_j2kt: Int
-
+    
     init {
      this.i_pp_j2kt = i
     }
-
+    
     internal open val property_pp_j2kt: Int
      get() {
       return this.i_pp_j2kt
      }
    }
   }
-
+  
   @JvmField
   internal val obj2_pp_j2kt: Any = object : Any() {
    open inner class InnerClassWithTwoConstructors {
     @JvmField
     internal val i_pp_j2kt: Int
-
+    
     internal constructor(i: Int) {
      this.i_pp_j2kt = i
     }
-
+    
     internal constructor(i: Float) {
      this.i_pp_j2kt = i.toInt()
     }
-
+    
     internal open val property_pp_j2kt: Int
      get() {
       return this.i_pp_j2kt

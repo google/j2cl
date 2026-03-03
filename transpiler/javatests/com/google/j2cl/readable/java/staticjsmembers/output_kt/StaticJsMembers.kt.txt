@@ -57,74 +57,74 @@ open class StaticJsMembers {
   Native()
   Extern()
  }
-
+ 
  companion object {
   @JvmField
   @JsProperty(name = "field")
   var field1: Int = 0
-
+  
   @JvmField
   @JsProperty
   var field2: Int = 0
-
+  
   @JvmStatic
   @JsMethod(name = "fun")
   fun f1(a: Int) {}
-
+  
   @JvmStatic
   @JsMethod
   fun f2(a: Int) {}
-
+  
   @JvmStatic
   @JsMethod(name = "Math.floor", namespace = JsPackage.GLOBAL)
   external fun f3(a: Double)
-
+  
   @JvmStatic
   @JsMethod(name = "isFinite", namespace = JsPackage.GLOBAL)
   external fun f4(a: Double): Boolean
-
+  
   @JvmStatic
   @JsMethod(name = "baz", namespace = "foo.Bar")
   external fun f5(): Boolean
-
+  
   @JvmStatic
   @JsMethod(name = "baz", namespace = "foo.Baz")
   external fun f6(): Boolean
-
+  
   @JvmStatic
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(a: Int, b: Int): Int
-
+  
   @JvmStatic
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(a: Int, b: Int, c: Int): Int
-
+  
   @JvmStatic
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(a: Double, b: Double): Double
  }
-
+ 
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class Native {
   companion object {
    @JvmField
    @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
    var field3: Int = 0
-
+   
    @JvmField
    @JsProperty(name = "top", namespace = JsPackage.GLOBAL)
    var field4: Int = 0
-
+   
    @JvmField
    @JsProperty(name = "field", namespace = "foo.Bar")
    var field5: Int = 0
-
+   
    @JvmField
    @JsProperty(name = "window.top", namespace = JsPackage.GLOBAL)
    var field6: Int = 0
   }
  }
-
+ 
  @JsType(name = "window.Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class Extern
 }

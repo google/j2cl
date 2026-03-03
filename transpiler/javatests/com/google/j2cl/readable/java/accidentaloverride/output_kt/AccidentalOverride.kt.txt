@@ -25,13 +25,13 @@ import kotlin.Suppress
 
 open class Parent<T: Error?> internal constructor() {
  open fun foo(e: T) {}
-
+ 
  fun bar(e: T) {}
 }
 
 interface SuperInterface<T> {
  fun foo(t: T)
-
+ 
  fun bar(e: T)
 }
 

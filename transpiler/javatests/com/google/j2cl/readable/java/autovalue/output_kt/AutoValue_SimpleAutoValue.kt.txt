@@ -30,15 +30,15 @@ import kotlin.Suppress
 
 class AutoValue_SimpleAutoValue: SimpleAutoValue {
  private val intField: Int
-
+ 
  private val booleanField: Boolean
-
+ 
  private val stringField: String?
-
+ 
  private val doubleField: Double?
-
+ 
  private val nullableField: Double?
-
+ 
  internal constructor(intField: Int, booleanField: Boolean, stringField: String?, doubleField: Double?, nullableField: Double?) {
   this.intField = intField
   this.booleanField = booleanField
@@ -52,31 +52,31 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
   this.doubleField = doubleField
   this.nullableField = nullableField
  }
-
+ 
  override fun getIntField(): Int {
   return this.intField
  }
-
+ 
  override fun getBooleanField(): Boolean {
   return this.booleanField
  }
-
+ 
  override fun getStringField(): String? {
   return this.stringField
  }
-
+ 
  override fun getDoubleField(): Double? {
   return this.doubleField
  }
-
+ 
  override fun getNullableField(): Double? {
   return this.nullableField
  }
-
+ 
  override fun toString(): String {
   return "SimpleAutoValue{intField=" + this.intField + ", booleanField=" + this.booleanField + ", stringField=" + this.stringField + ", doubleField=" + this.doubleField + ", nullableField=" + this.nullableField + "}"
  }
-
+ 
  override fun equals(o: Any?): Boolean {
   if (o === this) {
    return true
@@ -93,7 +93,7 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
   }
   return false
  }
-
+ 
  override fun hashCode(): Int {
   var h___: Int = 1
   h___ = h___ * 1000003

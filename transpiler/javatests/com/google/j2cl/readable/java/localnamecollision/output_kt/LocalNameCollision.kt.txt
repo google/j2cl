@@ -42,11 +42,11 @@ open class LocalNameCollision {
   LocalNameCollision = RuntimeException is localnamecollision.LocalNameCollision || RuntimeException is kotlin.RuntimeException || RuntimeException is localnamecollision.package1.A || RuntimeException is localnamecollision.package2.A || RuntimeException is Class
   assert(localnamecollision.Asserts().n_pp_localnamecollision() == 5)
  }
-
+ 
  open fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int): Boolean {
   return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
-
+ 
  constructor(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int) {
   val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
@@ -56,10 +56,10 @@ open class A internal constructor() {
  companion object {
   @JvmField
   internal var A_pp_localnamecollision: localnamecollision.A? = null
-
+  
   @JvmField
   internal var B_pp_localnamecollision: localnamecollision.A.B? = null
-
+  
   @JvmStatic
   internal fun test_pp_localnamecollision() {
    localnamecollision.A.A_pp_localnamecollision = localnamecollision.A.A_pp_localnamecollision
@@ -68,6 +68,6 @@ open class A internal constructor() {
    localnamecollision.A.B_pp_localnamecollision = localnamecollision.A.B_pp_localnamecollision
   }
  }
-
+ 
  open class B internal constructor()
 }

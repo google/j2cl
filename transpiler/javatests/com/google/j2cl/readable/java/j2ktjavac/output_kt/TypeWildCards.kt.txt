@@ -31,7 +31,7 @@ open class TypeWildCards internal constructor() {
  internal open fun <T: Any> consume_pp_j2ktjavac(vararg t: T) {
   val t_1: Array<T> = t as Array<T>
  }
-
+ 
  internal open fun testIncosistentBounds_pp_j2ktjavac() {
   this.consume_pp_j2ktjavac<WithInTypeParameter<*>>(
    A(),
@@ -42,18 +42,18 @@ open class TypeWildCards internal constructor() {
    B(),
   )
  }
-
+ 
  internal open fun <T: Number> methodWithUnusedTypeParameter_pp_j2ktjavac() {}
-
+ 
  internal open fun testUnusedTypeParameter_pp_j2ktjavac() {
   this.methodWithUnusedTypeParameter_pp_j2ktjavac<Number>()
   this.methodWithUnusedTypeParameter_pp_j2ktjavac<Number>()
  }
-
+ 
  internal open fun testContainer_pp_j2ktjavac() {
   val c: TypeWildCards.SomeContainer<out TypeWildCards.Content<*>>? = null
  }
-
+ 
  open class WithDependentBounds internal constructor() {
   companion object {
    @JvmStatic
@@ -61,7 +61,7 @@ open class TypeWildCards internal constructor() {
     (holder as Holder<Event, Collection<*>>).observer_pp_j2ktjavac = Observer { e: Collection<out Event> ->
     }
    }
-
+   
    @JvmStatic
    fun testSetMethod(holder: Holder<*, *>) {
     holder.set_pp_j2ktjavac(
@@ -69,7 +69,7 @@ open class TypeWildCards internal constructor() {
      },
     )
    }
-
+   
    @JvmStatic
    fun testSetStaticMethod(holder: Holder<*, *>) {
     Holder.setStatic_pp_j2ktjavac(
@@ -79,60 +79,60 @@ open class TypeWildCards internal constructor() {
     )
    }
   }
-
+  
   interface Event
-
+  
   interface Collection<V>
-
+  
   fun interface Observer<E: Event, C: Collection<E>> {
    fun on(events: C)
   }
-
+  
   open class Holder<E: Event, C: Collection<E>> internal constructor() {
    @JvmField
    internal var observer_pp_j2ktjavac: Observer<E, C>? = null
-
+   
    internal open fun set_pp_j2ktjavac(observer: Observer<E, C>) {}
-
+   
    companion object {
     @JvmStatic
     internal fun <E: Event, C: Collection<E>> setStatic_pp_j2ktjavac(holder: Holder<E, C>, observer: Observer<E, C>) {}
    }
   }
  }
-
+ 
  interface WithInTypeParameter<in T: Any>
-
+ 
  open inner class A internal constructor(): WithInTypeParameter<TypeWildCards.A>
-
+ 
  open inner class B internal constructor(): WithInTypeParameter<TypeWildCards.B>
-
+ 
  open class Outer<T: Any, V: Any> internal constructor() {
   interface ParameterizedInterface<T, V>
-
+  
   open inner class Inner internal constructor() {
    internal open fun testNullabilityOnWildcardBounds_pp_j2ktjavac(p: ParameterizedInterface<in T?, out V?>) {
     this.testNullabilityOnWildcardBounds_pp_j2ktjavac(p)
    }
   }
  }
-
+ 
  open inner class View<P: TypeWildCards.Presenter<*>> internal constructor()
-
+ 
  open inner class Presenter<V: TypeWildCards.View<*>> internal constructor()
-
+ 
  open inner class Content<T: Any> internal constructor()
-
+ 
  open inner class SomeContainer<T: TypeWildCards.Content<T>> internal constructor()
-
+ 
  fun interface OtTester<O: OtTester<O, T>, T> {
   fun applyCommands(vararg command: T): O
  }
-
+ 
  abstract inner class IndexBasedTestCase<M: Any> {
   abstract fun newOtTester(): OtTester<*, M>
  }
-
+ 
  abstract inner class AbstractAnimationCommandTransformerTestCases: TypeWildCards.IndexBasedTestCase<String>() {
   open fun testAddAnimation_noTransformAgainstMissingPage() {
    this.newOtTester().applyCommands().applyCommands()

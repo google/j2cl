@@ -34,7 +34,7 @@ open class LambdaReturnFromBlock {
    return@Function null
   } as Function<Void>
  }
-
+ 
  open fun testSynchronized() {
   val fn: Function<Void> = Function {
    synchronized<Unit>(LambdaReturnFromBlock.lock) {
@@ -43,10 +43,10 @@ open class LambdaReturnFromBlock {
    throw AssertionError("Unreachable")
   } as Function<Void>
  }
-
+ 
  @JvmField
  internal var x_pp_j2ktjdt: Int = 1
-
+ 
  open fun testSwitchInLambda() {
   val fn: Function<Void> = Function {
    when (this.x_pp_j2ktjdt) {
@@ -60,11 +60,11 @@ open class LambdaReturnFromBlock {
    throw AssertionError("Unreachable")
   } as Function<Void>
  }
-
+ 
  companion object {
   private val lock: J2ktMonitor = J2ktMonitor()
  }
-
+ 
  fun interface Function<O> {
   fun apply(): O
  }

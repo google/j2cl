@@ -26,11 +26,11 @@ open class RawTypes {
  internal open fun <T: RawTypes.Child<T>> copy_pp_j2ktjdt(child: RawTypes.Child<T>): RawTypes.Child<T> {
   return child
  }
-
+ 
  internal open fun <T: RawTypes.Child<T>> toParent_pp_j2ktjdt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
   return a
  }
-
+ 
  internal open fun returnsRaw_pp_j2ktjdt(parent: RawTypes.Child<*>): RawTypes.Parent<Any> {
   return this.toParent_pp_j2ktjdt(
    this.copy_pp_j2ktjdt(
@@ -38,8 +38,8 @@ open class RawTypes {
    ),
   ) as RawTypes.Parent<Any>
  }
-
+ 
  open inner class Parent<T: Any> internal constructor()
-
+ 
  open inner class Child<T: RawTypes.Child<T>> internal constructor(): RawTypes.Parent<T>()
 }
