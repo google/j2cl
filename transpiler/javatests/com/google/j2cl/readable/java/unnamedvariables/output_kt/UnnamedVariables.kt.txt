@@ -61,7 +61,7 @@ open class UnnamedVariables {
    override fun equals(arg0: Any?): Boolean {
     var ___other: R? = null
     if (!(arg0 is R && run {
-     ___other = arg0 as R
+     ___other = arg0 as R?
      true
     })) return false
     return Arrays.equals(
@@ -138,7 +138,7 @@ open class UnnamedVariables {
    override fun equals(arg0: Any?): Boolean {
     var ___other: R? = null
     if (!(arg0 is R && run {
-     ___other = arg0 as R
+     ___other = arg0 as R?
      true
     })) return false
     return Arrays.equals(
@@ -161,31 +161,31 @@ open class UnnamedVariables {
   }
   val r: Any? = null
   val `_`: Boolean = r is String && run {
-   val __1: String = r as String
+   val __1: String? = r as String?
    true
   }
   val __2: Boolean = r is R && run {
-   val pattern___2R: R = r as R
-   val exp: Any? = pattern___2R.o()
+   val pattern___2R: R? = r as R?
+   val exp: Any? = pattern___2R!!.o()
    exp is String && run {
-    val __3: String = exp as String
-    val __4: String? = pattern___2R.s()
+    val __3: String? = exp as String?
+    val __4: String? = pattern___2R!!.s()
     true
    }
   }
   val __5: Boolean = r is R && run {
-   val pattern___2R_1: R = r as R
-   val exp_1: Any? = pattern___2R_1.o()
+   val pattern___2R_1: R? = r as R?
+   val exp_1: Any? = pattern___2R_1!!.o()
    exp_1 is Number && run {
-    val __6: Number = exp_1 as Number
-    val __7: String? = pattern___2R_1.s()
+    val __6: Number? = exp_1 as Number?
+    val __7: String? = pattern___2R_1!!.s()
     true
    }
   }
   val __8: Boolean = r is R && run {
-   val pattern___2R_2: R = r as R
-   val __9: Any? = pattern___2R_2.o()
-   val __10: String? = pattern___2R_2.s()
+   val pattern___2R_2: R? = r as R?
+   val __9: Any? = pattern___2R_2!!.o()
+   val __10: String? = pattern___2R_2!!.s()
    true
   }
  }

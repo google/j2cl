@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -270,6 +271,16 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             return FunctionExpression.Builder.from(functionExpression)
                 .setTypeDescriptor(inferredFunctionalInterface)
                 .build();
+          }
+
+          @Override
+          public CastExpression rewriteCastExpression(CastExpression castExpression) {
+            if (castExpression.getExpression().getTypeDescriptor().isNullable()) {
+              return CastExpression.Builder.from(castExpression)
+                  .setCastTypeDescriptor(castExpression.getCastTypeDescriptor().toNullable())
+                  .build();
+            }
+            return castExpression;
           }
         };
 
