@@ -27,7 +27,7 @@ j2cl_library(
 
 load("//build_defs/internal_do_not_use/allowlists:j2kt_jvm.bzl", "J2KT_JVM_ALLOWLIST")
 load("//build_defs/internal_do_not_use/allowlists:j2kt_native.bzl", "J2KT_NATIVE_ALLOWLIST")
-load("//build_defs/internal_do_not_use/allowlists:j2kt_web.bzl", "J2KT_WEB_ENABLED", "J2KT_WEB_EXPERIMENT_ENABLED")
+load("//build_defs/internal_do_not_use/allowlists:j2kt_web.bzl", "J2KT_WEB_ENABLED", "J2KT_WEB_EXPERIMENT_ENABLED", "J2KT_WEB_STAGING_ENABLED")
 load("//build_defs/internal_do_not_use/allowlists:j2wasm.bzl", "J2WASM_ALLOWLIST")
 load("//build_defs/internal_do_not_use/allowlists:kotlin.bzl", "KOTLIN_ALLOWLIST")
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")

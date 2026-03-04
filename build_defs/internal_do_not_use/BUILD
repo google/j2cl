@@ -49,6 +49,13 @@ config_setting(
 )
 
 config_setting(
+    name = "j2kt_web_staging_environment",
+    flag_values = {
+        "//:j2kt_web_environment": "staging",
+    },
+)
+
+config_setting(
     name = "j2kt_web_disabled",
     flag_values = {
         "//:j2kt_web_environment": "disabled",

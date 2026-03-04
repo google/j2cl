@@ -22,3 +22,11 @@ J2KT_WEB_EXPERIMENT_ENABLED = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/integration/java/...",
     "//transpiler/javatests/com/google/j2cl/readable/java/...",
 ], exclude = [J2KT_WEB_DISABLED])
+
+# Packages that are building with J2KT Web, but cannot yet be promoted to experimental. Since all
+# projects share the experimental set, we might need to delay adding packages to it if there's a
+# rollout in progress. Until then, the packages can be staged.
+# NOTE: the staged set should _never_ be rolled out to production. It should only be used for local
+#   development/testing, benchmarking, and CI.
+J2KT_WEB_STAGING_ENABLED = allowlists.of_packages([
+], exclude = [J2KT_WEB_DISABLED])

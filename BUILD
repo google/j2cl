@@ -81,6 +81,8 @@ string_flag(
         "production",
         # Enables J2KT/Web for the set packages in the J2KT_WEB_EXPERIMENT_ENABLED allowlist.
         "experimental",
+        # Enables J2KT/Web for the set packages in the J2KT_WEB_STAGING_ENABLED allowlist.
+        "staging",
         # Disables J2KT/Web for all targets, regardless of allowlist membership.
         "disabled",
     ],
