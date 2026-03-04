@@ -282,11 +282,11 @@
 [Supplier<Integer> f2 = new ArrayList()::size;] => [val f2: Supplier<Int?> = run {
    val ______q: ArrayList<Any?> = ArrayList<Any?>()
    Supplier {
-    return@Supplier ______q.size
+    return@Supplier (______q as ArrayList<Any?>).size
    }
   }]
 [f2] => [f2] "f2"
-[new ArrayList()::size] => [return@Supplier ______q.size]
+[new ArrayList()::size] => [return@Supplier (______q as ArrayList<Any?>).size]
 [Supplier<Integer> f3 = this::simpleMethod;] => [val f3: Supplier<Int?> = Supplier {
    return@Supplier this.simpleMethod()
   }]
@@ -316,8 +316,8 @@
    }
   }]
 [r] => [r] "r"
-[10;] => [return@run 10]
-[20;] => [return@run 20]
+[10] => [return@run 10]
+[20] => [return@run 20]
 [testInstanceOf] => [testInstanceOf]
 [o] => [o] "o"
 [return o instanceof String;] => [return o is String]
@@ -332,7 +332,7 @@
 [static double uninitializedStaticField;] => [@JvmField
   internal var uninitializedStaticField_pp_sourcemap: Double = 0.0]
 [uninitializedStaticField] => [uninitializedStaticField_pp_sourcemap]
-[{
+[static {
     uninitializedStaticField = 10.0;
   }] => [{
    SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
@@ -341,7 +341,7 @@
 [static String initializedStaticField = "Hello";] => [@JvmField
   internal var initializedStaticField_pp_sourcemap: String? = "Hello"]
 [initializedStaticField] => [initializedStaticField_pp_sourcemap]
-[{
+[static {
     if (uninitializedStaticField == 10.0) {
       initializedStaticField = "World";
     }
