@@ -21,8 +21,8 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.COLON
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaAndNewLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inOptionalParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParenthesesIfNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indented
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
@@ -166,7 +166,7 @@ internal object KotlinSource {
   fun annotation(name: Source): Source = join(at(name))
 
   fun annotation(name: Source, parameter: Source, vararg parameters: Source): Source =
-    join(at(name), inParenthesesIfNotEmpty(commaSeparated(parameter, *parameters)))
+    join(at(name), inOptionalParentheses(commaSeparated(parameter, *parameters)))
 
   fun annotation(name: Source, parameters: List<Source>) =
     join(

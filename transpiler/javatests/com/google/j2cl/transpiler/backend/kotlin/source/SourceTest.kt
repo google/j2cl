@@ -26,8 +26,8 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngle
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inCurlyBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inDoubleQuotes
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inInlineCurlyBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inOptionalParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParenthesesIfNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inSquareBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
@@ -142,8 +142,8 @@ class SourceTest {
     inDoubleQuotes(sourceA).assertBuilds("\"a\"")
     inInlineCurlyBrackets(sourceA).assertBuilds("{ a }")
 
-    inParenthesesIfNotEmpty(Source.EMPTY).assertBuilds("")
-    inParenthesesIfNotEmpty(sourceA).assertBuilds("(a)")
+    inOptionalParentheses(Source.EMPTY).assertBuilds("")
+    inOptionalParentheses(sourceA).assertBuilds("(a)")
   }
 
   @Test

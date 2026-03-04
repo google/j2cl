@@ -142,12 +142,9 @@ private constructor(
 
     fun inNewLine(source: Source) = NEW_LINE + source
 
-    fun inParenthesesIfNotEmpty(source: Source) = source.ifNotEmpty { inParentheses(it) }
+    fun inOptionalParentheses(source: Source) = source.ifNotEmpty { inParentheses(it) }
 
     fun inParentheses(source: Source) = join(LEFT_PARENTHESIS, source, RIGHT_PARENTHESIS)
-
-    fun inParenthesesIndented(source: Source) =
-      inParentheses(indented(source).ifNotEmpty { it.plus(NEW_LINE) })
 
     fun inAngleBrackets(source: Source) = join(LEFT_ANGLE_BRACKET, source, RIGHT_ANGLE_BRACKET)
 
@@ -173,6 +170,8 @@ private constructor(
         }
       }
 
+    fun indentedMultiLine(source: Source) = source.ifNotEmpty { indented(source).plus(NEW_LINE) }
+
     fun indentedIf(condition: Boolean, source: Source) = if (condition) indented(source) else source
 
     fun spaceSeparated(sources: Iterable<Source>) = join(sources, separator = " ")
@@ -180,6 +179,9 @@ private constructor(
     fun commaSeparated(sources: Iterable<Source>) = join(sources, separator = ", ")
 
     fun commaAndNewLineSeparated(sources: Iterable<Source>) = join(sources, separator = ",\n")
+
+    fun inNewLinesWithCommas(sources: Iterable<Source>) =
+      join(sources.map { inNewLine(it).plus(COMMA) })
 
     fun dotSeparated(sources: Iterable<Source>) = join(sources, separator = ".")
 

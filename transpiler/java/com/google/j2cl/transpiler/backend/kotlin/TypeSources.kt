@@ -33,9 +33,10 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLinesPlusCommas
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLinesWithCommas
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inOptionalParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParenthesesIndented
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.indentedMultiLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -109,8 +110,11 @@ internal data class TypeSources(val nameSources: NameSources) {
       type.declaration.isAnnotation ->
         // Translate non-static annotation methods as constructor parameters.
         memberSources(type).run {
-          inNewLinesPlusCommas(type.methods.filter { !it.isStatic }.map { memberSource(it) })
-            .ifNotEmpty { inParenthesesIndented(it) }
+          inOptionalParentheses(
+            indentedMultiLine(
+              inNewLinesWithCommas(type.methods.filter { !it.isStatic }.map { memberSource(it) })
+            )
+          )
         }
       ktPrimaryConstructor != null ->
         memberSources(type).run {
