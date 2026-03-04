@@ -135,7 +135,9 @@ final class JsExternsGenerator {
           || methodDescriptor.getOrigin().isWasmJsExport()
           || methodDescriptor.getOrigin().isWasmJsConstructorExport()
           // Constructors handled elsewhere.
-          || isConstructor(methodDescriptor)) {
+          || isConstructor(methodDescriptor)
+          // TODO(b/458472428): Support JsProperty.
+          || !methodDescriptor.isJsMethod()) {
         continue;
       }
 
