@@ -22,7 +22,6 @@ import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
@@ -45,21 +44,10 @@ public class RewriteReferenceEqualityOperations extends NormalizationPass {
               return expression;
             }
 
-            if (expression.getLeftOperand().getTypeDescriptor().isNative()
-                || expression.getRightOperand().getTypeDescriptor().isNative()) {
-              MethodCall equalityCall =
-                  RuntimeMethods.createWasmExternEqualityMethodCall(
-                      expression.getLeftOperand(), expression.getRightOperand());
-              if (expression.getOperator() == BinaryOperator.NOT_EQUALS) {
-                return equalityCall.prefixNot();
-              }
-              return equalityCall;
-            }
-
             if (expression.getOperator() == BinaryOperator.EQUALS) {
-              return rewriteNullEquality(expression);
+              return rewriteEquality(expression);
             } else {
-              return rewriteNullEquality(
+              return rewriteEquality(
                       expression.getLeftOperand().infixEquals(expression.getRightOperand()))
                   .prefixNot();
             }
@@ -67,10 +55,14 @@ public class RewriteReferenceEqualityOperations extends NormalizationPass {
         });
   }
 
-  private static Expression rewriteNullEquality(BinaryExpression expression) {
+  private static Expression rewriteEquality(BinaryExpression expression) {
     checkArgument(expression.getOperator() == BinaryOperator.EQUALS);
 
-    if (expression.getRightOperand() instanceof NullLiteral) {
+    if (expression.getLeftOperand().getTypeDescriptor().isNative()
+        || expression.getRightOperand().getTypeDescriptor().isNative()) {
+      return RuntimeMethods.createWasmExternEqualityMethodCall(
+          expression.getLeftOperand(), expression.getRightOperand());
+    } else if (expression.getRightOperand() instanceof NullLiteral) {
       return RuntimeMethods.createPlatformIsNullCall(expression.getLeftOperand());
     } else if (expression.getLeftOperand() instanceof NullLiteral) {
       return RuntimeMethods.createPlatformIsNullCall(expression.getRightOperand());
