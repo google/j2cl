@@ -182,7 +182,7 @@ jobs:
   release:
     needs: run_tests
     if: ${{ inputs.create_github_release }}
-    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.3.0
+    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.4.0
     with:
       prerelease: ${{ contains(inputs.version, '-RC') }}
       release_files: ${{ github.event.repository.name }}-*.tar.gz
