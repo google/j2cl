@@ -127,21 +127,16 @@
 [{ i: Int -> i + 1 }] => [let i_1 = /**@type {!Integer}*/ ($Casts.$to(i, Integer));] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [i: Int] => [i_1] "i"
 [i + 1] => [return Integer.valueOf(i_1.intValue() + 1 | 0);] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
-[{
-    val f = { i: Int -> i + 1 }
-...
-    val f3 = this::simpleMethod
-  }] => [let /** ArrayList<!*> */ $propertyReferenceQualifier;] "sourcemap.SourceMap.testLambdaAndMethodReference"
-[val f2 = ArrayList<Any>()::size] => [let f2 = /**@type {!MutableKProperty0Impl<!Integer>}*/ (($propertyReferenceQualifier = (/**@type {!ArrayList<!*>}*/ (ArrayList.$create__())), MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {?}*/ (() =>{
-   return Integer.valueOf($propertyReferenceQualifier.size());
-  })), null)));] "sourcemap.SourceMap.testLambdaAndMethodReference"
+[val f2 = ArrayList<Any>()::size] => [let f2 = /**@type {!MutableKProperty0Impl<!Integer>}*/ (MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {!Integer}*/ (() =>{
+   return Integer.valueOf(tmp0_bound0.size());
+  })), null));] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [val f2 = ArrayList<Any>()::size] => [f2] "f2"
-[ArrayList<Any>()::size] => [return Integer.valueOf($propertyReferenceQualifier.size());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
+[ArrayList<Any>()::size] => [return Integer.valueOf(tmp0_bound0.size());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [val f3 = this::simpleMethod] => [let f3 = Function0.$adapt(/**  @return {!Integer}*/ (() =>{
-   return Integer.valueOf(tmp0_bound0.m_simpleMethod__int_$p_sourcemap_SourceMap());
+   return Integer.valueOf(tmp0_bound0_1.m_simpleMethod__int_$p_sourcemap_SourceMap());
   }));] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [val f3 = this::simpleMethod] => [f3] "f3"
-[this::simpleMethod] => [return Integer.valueOf(tmp0_bound0.m_simpleMethod__int_$p_sourcemap_SourceMap());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
+[this::simpleMethod] => [return Integer.valueOf(tmp0_bound0_1.m_simpleMethod__int_$p_sourcemap_SourceMap());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [simpleMethod] => [m_simpleMethod__int_$p_sourcemap_SourceMap]
 [1] => [return 1;] "sourcemap.SourceMap.simpleMethod"
 [testLocalClass] => [m_testLocalClass__void_$p_sourcemap_SourceMap]

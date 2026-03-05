@@ -35,7 +35,6 @@ import com.google.j2cl.transpiler.ast.CatchClause
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.ConditionalExpression
 import com.google.j2cl.transpiler.ast.ContinueStatement
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.DoWhileStatement
 import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.Field
@@ -56,7 +55,6 @@ import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodCall
 import com.google.j2cl.transpiler.ast.MethodDescriptor
-import com.google.j2cl.transpiler.ast.MethodReference
 import com.google.j2cl.transpiler.ast.MultiExpression
 import com.google.j2cl.transpiler.ast.NewArray
 import com.google.j2cl.transpiler.ast.NewInstance
@@ -93,14 +91,12 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrNull
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getNameSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getSourcePosition
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClinit
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSuperCall
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveLabel
 import com.google.j2cl.transpiler.frontend.kotlin.ir.sanitizedName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
-import com.google.j2cl.transpiler.frontend.kotlin.ir.unfoldExpression
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForInLoop
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForLoop
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitch
@@ -129,7 +125,6 @@ import org.jetbrains.kotlin.ir.expressions.IrBody
 import org.jetbrains.kotlin.ir.expressions.IrBranch
 import org.jetbrains.kotlin.ir.expressions.IrBreak
 import org.jetbrains.kotlin.ir.expressions.IrCall
-import org.jetbrains.kotlin.ir.expressions.IrCallableReference
 import org.jetbrains.kotlin.ir.expressions.IrCatch
 import org.jetbrains.kotlin.ir.expressions.IrClassReference
 import org.jetbrains.kotlin.ir.expressions.IrConst
@@ -143,17 +138,13 @@ import org.jetbrains.kotlin.ir.expressions.IrEnumConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrFieldAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
-import org.jetbrains.kotlin.ir.expressions.IrFunctionExpression
-import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrGetClass
 import org.jetbrains.kotlin.ir.expressions.IrGetEnumValue
 import org.jetbrains.kotlin.ir.expressions.IrGetField
 import org.jetbrains.kotlin.ir.expressions.IrGetValue
 import org.jetbrains.kotlin.ir.expressions.IrInstanceInitializerCall
-import org.jetbrains.kotlin.ir.expressions.IrLocalDelegatedPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
-import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrReturn
 import org.jetbrains.kotlin.ir.expressions.IrRichFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrSetField
@@ -171,7 +162,6 @@ import org.jetbrains.kotlin.ir.expressions.IrVarargElement
 import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.expressions.IrWhileLoop
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
-import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
@@ -639,8 +629,6 @@ internal class CompilationUnitBuilder(
       is IrFunctionAccessExpression -> convertFunctionAccessExpression(irExpression)
       is IrVararg -> convertVararg(irExpression)
       is IrRichFunctionReference -> convertRichFunctionReference(irExpression)
-      is IrPropertyReference -> convertPropertyReference(irExpression)
-      is IrLocalDelegatedPropertyReference -> convertLocalDelegatedPropertyReference(irExpression)
       is IrClassReference -> convertClassReference(irExpression)
       is IrGetClass -> convertGetClass(irExpression)
       else -> throw IllegalStateException("Unhandled IrExpression:\n${irExpression.dump()}")
@@ -1290,9 +1278,6 @@ internal class CompilationUnitBuilder(
 
   private fun convertTypeOperatorCall(irTypeOperatorCall: IrTypeOperatorCall): Expression {
     return when (irTypeOperatorCall.operator) {
-      // SAM_CONVERSIONS are the operation that give the actual functional interface type
-      // to function expressions (and objects that can be typed as functions).
-      IrTypeOperator.SAM_CONVERSION -> convertSamConversion(irTypeOperatorCall)
       IrTypeOperator.INSTANCEOF ->
         createInstanceOfExpression(
           irTypeOperatorCall.argument,
@@ -1322,8 +1307,11 @@ internal class CompilationUnitBuilder(
             .build()
         }
       }
+      IrTypeOperator.SAM_CONVERSION,
       IrTypeOperator.SAFE_CAST ->
-        throw IllegalStateException("rTypeOperator.SAFE_CAST expressions should have been lowered")
+        throw IllegalStateException(
+          "IrTypeOperator.${irTypeOperatorCall.operator.name} expressions should have been lowered"
+        )
       // TODO(b/274450717): Implement missing types and make this when statement exhaustive.
       else ->
         throw IllegalStateException(
@@ -1360,58 +1348,6 @@ internal class CompilationUnitBuilder(
       .setExpression(convertExpression(expression))
       .setTestTypeDescriptor(testTypeDescriptor)
       .setSourcePosition(sourcePosition)
-      .build()
-  }
-
-  private fun convertSamConversion(irTypeOperatorCall: IrTypeOperatorCall): Expression {
-    val expression = irTypeOperatorCall.unfoldExpression()
-
-    val functionalTypeDescriptor =
-      environment.getReferenceTypeDescriptorForFunctionReference(
-        irTypeOperatorCall.type as IrSimpleType
-      )
-    return when (expression) {
-      is IrPropertyReference ->
-        createAccessorReference(
-          functionalTypeDescriptor,
-          expression,
-          convertQualifier(expression),
-          expression.getter,
-        )
-      is IrFunctionExpression,
-      is IrFunctionReference ->
-        throw IllegalStateException(
-          "SAM conversion with function expression or function reference should have been lowered to IrRichFunctionReference: ${irTypeOperatorCall.dump()}"
-        )
-      else ->
-        // TODO(b/225955286): Implement conversion functionality from things that are not lambdas.
-        throw IllegalStateException("Unsupported SAM conversion ${irTypeOperatorCall.dump()}")
-    }
-  }
-
-  private fun createAccessorReference(
-    functionalTypeDescriptor: DeclaredTypeDescriptor,
-    irPropertyReference: IrCallableReference<*>,
-    propertyReferenceQualifier: Expression?,
-    accessorFunctionSymbol: IrFunctionSymbol?,
-  ): Expression {
-    // Immutable properties do not have setter.
-    if (accessorFunctionSymbol == null) {
-      return functionalTypeDescriptor.nullValue
-    }
-    val accessorFunction = accessorFunctionSymbol.owner
-
-    return MethodReference.newBuilder()
-      .setTypeDescriptor(functionalTypeDescriptor)
-      .setReferencedMethodDescriptor(
-        environment.getMethodDescriptor(
-          accessorFunction,
-          irPropertyReference.getTypeSubstitutionMap(accessorFunction),
-        )
-      )
-      .setInterfaceMethodDescriptor(functionalTypeDescriptor.singleAbstractMethodDescriptor)
-      .setQualifier(propertyReferenceQualifier)
-      .setSourcePosition(getSourcePosition(irPropertyReference))
       .build()
   }
 
@@ -1479,110 +1415,6 @@ internal class CompilationUnitBuilder(
       .setStatements(body.statements)
       .setSourcePosition(getSourcePosition(irExpression))
       .build()
-  }
-
-  private fun convertPropertyReference(irExpression: IrPropertyReference): Expression {
-    val propertyReferenceType = irExpression.type as IrSimpleType
-    // We support two different kinds of property references:
-    // - reference to a property without receiver (top level property) or has the receiver bound to
-    //   it (a value property reference: `aReference::aProperty`).
-    // - reference to a property which take the receiver as a parameter (class property reference
-    //   `MyClass::aProperty`)
-    val propertyReferenceTypeDescriptor =
-      when (propertyReferenceType.arguments.size) {
-        1 -> TypeDescriptors.get().kotlinJvmInternalMutableKProperty0Impl!!
-        2 -> TypeDescriptors.get().kotlinJvmInternalMutableKProperty1Impl!!
-        // Note: There is a KProperty2<D, E, V> interface used to represent a reference to a
-        // property which takes two receivers as parameters (e.g: an extension property defined in
-        // another class). This kind of property cannot be directly referenced in a user code
-        // through the `::` operator. The user needs to use some reflection api on the class itself
-        // to get a reference to these properties. These reflection apis not being supported by
-        // J2CL, we don't need to support that case.
-        else -> throw IllegalStateException("Unsupported property reference.")
-      }
-
-    // As we mapped a Kotlin type to our own implementation, we need to ensure to specialize the
-    // right type variable.
-    check(
-      propertyReferenceTypeDescriptor.typeDeclaration.typeParameterDescriptors.size ==
-        propertyReferenceType.arguments.size
-    )
-    val j2clSubstitutionMap =
-      propertyReferenceType.arguments
-        .mapIndexed { index, typeArgument ->
-          propertyReferenceTypeDescriptor.typeDeclaration.typeParameterDescriptors[index] to
-            environment.getReferenceTypeDescriptorForTypeArgument(typeArgument)
-        }
-        .toMap()
-    val kMutablePropertyCtor =
-      propertyReferenceTypeDescriptor.singleConstructor.specializeTypeVariables(j2clSubstitutionMap)
-
-    check(kMutablePropertyCtor.parameterTypeDescriptors.size == 2)
-
-    val expressions = mutableListOf<Expression>()
-
-    val propertyQualifierExpression = convertQualifier(irExpression)
-    // If there is a qualifier, we need to evaluate it once, store it into a variable to reuse it
-    // in the setter and getter.
-    val propertyQualifierVariable =
-      propertyQualifierExpression?.let { qualifierExpression ->
-        Variable.newBuilder()
-          .setName("\$propertyReferenceQualifier")
-          .setTypeDescriptor(qualifierExpression.typeDescriptor)
-          .setFinal(true)
-          .build()
-      }
-
-    if (propertyQualifierExpression != null) {
-      expressions.add(
-        VariableDeclarationExpression.newBuilder()
-          .addVariableDeclaration(propertyQualifierVariable, propertyQualifierExpression)
-          .build()
-      )
-    }
-
-    expressions.add(
-      // new MutableKPropertyXImpl(nameOfTheProperty, getterAsLamdba, setterAsLambdaOrNull)
-      NewInstance.newBuilder()
-        .setTarget(kMutablePropertyCtor)
-        .setArguments(
-          createAccessorReference(
-            kMutablePropertyCtor.parameterTypeDescriptors[0] as DeclaredTypeDescriptor,
-            irExpression,
-            propertyQualifierVariable?.createReference(),
-            irExpression.getter,
-          ),
-          createAccessorReference(
-            kMutablePropertyCtor.parameterTypeDescriptors[1] as DeclaredTypeDescriptor,
-            irExpression,
-            propertyQualifierVariable?.createReference(),
-            irExpression.setter,
-          ),
-        )
-        .build()
-    )
-
-    return MultiExpression.newBuilder().addExpressions(expressions).build()
-  }
-
-  private fun convertLocalDelegatedPropertyReference(
-    irExpression: IrLocalDelegatedPropertyReference
-  ): Expression {
-    val variableReferenceType = irExpression.type as IrSimpleType
-    val localVariableKPropertyDescriptor =
-      TypeDescriptors.get().kotlinJvmInternalLocalVariableKPropertyImpl!!
-    val j2clSubstitutionMap =
-      variableReferenceType.arguments
-        .mapIndexed { index, typeArgument ->
-          localVariableKPropertyDescriptor.typeDeclaration.typeParameterDescriptors[index] to
-            environment.getReferenceTypeDescriptorForTypeArgument(typeArgument)
-        }
-        .toMap()
-    val kMutablePropertyCtor =
-      localVariableKPropertyDescriptor.singleConstructor.specializeTypeVariables(
-        j2clSubstitutionMap
-      )
-    return NewInstance.newBuilder().setTarget(kMutablePropertyCtor).build()
   }
 
   private fun convertQualifier(fieldAccess: IrFieldAccessExpression): Expression? =

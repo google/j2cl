@@ -190,6 +190,9 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::EnumClassConstructorLowering)
   // Rewrites calls to KFunction.invoke() as FunctionN.invoke().
   perFileLowering(::RewriteKFunctionInvokeLowering)
+  // Lowers `IrRichPropertyReference` into instantiations of the corresponding internal `KProperty`
+  // implementation
+  moduleLowering(::J2clPropertyReferenceLowering)
   // Lowers IrRichFunctionReference with bound values IrRichFunctionReference without bound values
   // and converting KFunctionN types to FunctionN types.
   moduleLowering(::J2clFunctionReferenceLowering)
