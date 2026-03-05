@@ -100,6 +100,10 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::WrapInlineDeclarationsWithReifiedTypeParametersLowering)
   // Perform function inlining.
   moduleLowering(::J2clFunctionInlining)
+  // TODO(dramaix) : This should be run as the first pass. But our inlining pass is adding function
+  // references and function expression.
+  moduleLowering(::J2clUpgradeCallableReferences)
+
   // Remove inline functions with reified type parameters as these functions cannot be called from
   // Java
   perFileLowering(::RemoveInlineDeclarationsWithReifiedTypeParametersLowering)
@@ -186,6 +190,9 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::EnumClassConstructorLowering)
   // Rewrites calls to KFunction.invoke() as FunctionN.invoke().
   perFileLowering(::RewriteKFunctionInvokeLowering)
+  // Lowers IrRichFunctionReference with bound values IrRichFunctionReference without bound values
+  // and converting KFunctionN types to FunctionN types.
+  moduleLowering(::J2clFunctionReferenceLowering)
 
   // BLOCK DECOMPOSITION
   // Transforms statement-like-expression nodes into pure-statement. This should be the last

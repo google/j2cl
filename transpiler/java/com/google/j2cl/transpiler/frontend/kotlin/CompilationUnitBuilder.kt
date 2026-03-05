@@ -90,15 +90,11 @@ import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrNull
-import com.google.j2cl.transpiler.frontend.kotlin.ir.findFunctionByName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getNameSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isAdaptedFunctionReference
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClinit
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionOrSuspendFunction
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSuperCall
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveLabel
@@ -159,6 +155,7 @@ import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrReturn
+import org.jetbrains.kotlin.ir.expressions.IrRichFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrSetField
 import org.jetbrains.kotlin.ir.expressions.IrSetValue
 import org.jetbrains.kotlin.ir.expressions.IrSpreadElement
@@ -175,18 +172,18 @@ import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.expressions.IrWhileLoop
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
+import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeProjection
 import org.jetbrains.kotlin.ir.types.classOrFail
-import org.jetbrains.kotlin.ir.types.classOrNull
+import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.types.isNullable
 import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.types.makeNullable
-import org.jetbrains.kotlin.ir.types.typeWithArguments
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
@@ -641,8 +638,7 @@ internal class CompilationUnitBuilder(
       is IrGetEnumValue -> convertGetEnumValue(irExpression)
       is IrFunctionAccessExpression -> convertFunctionAccessExpression(irExpression)
       is IrVararg -> convertVararg(irExpression)
-      is IrFunctionReference -> convertFunctionReference(irExpression)
-      is IrFunctionExpression -> convertFunctionExpression(irExpression)
+      is IrRichFunctionReference -> convertRichFunctionReference(irExpression)
       is IrPropertyReference -> convertPropertyReference(irExpression)
       is IrLocalDelegatedPropertyReference -> convertLocalDelegatedPropertyReference(irExpression)
       is IrClassReference -> convertClassReference(irExpression)
@@ -1375,7 +1371,6 @@ internal class CompilationUnitBuilder(
         irTypeOperatorCall.type as IrSimpleType
       )
     return when (expression) {
-      is IrFunctionReference -> createFunctionExpression(functionalTypeDescriptor, expression)
       is IrPropertyReference ->
         createAccessorReference(
           functionalTypeDescriptor,
@@ -1383,30 +1378,15 @@ internal class CompilationUnitBuilder(
           convertQualifier(expression),
           expression.getter,
         )
-      is IrFunctionExpression -> createFunctionExpression(functionalTypeDescriptor, expression)
+      is IrFunctionExpression,
+      is IrFunctionReference ->
+        throw IllegalStateException(
+          "SAM conversion with function expression or function reference should have been lowered to IrRichFunctionReference: ${irTypeOperatorCall.dump()}"
+        )
       else ->
         // TODO(b/225955286): Implement conversion functionality from things that are not lambdas.
         throw IllegalStateException("Unsupported SAM conversion ${irTypeOperatorCall.dump()}")
     }
-  }
-
-  private fun createFunctionExpression(
-    functionalTypeDescriptor: DeclaredTypeDescriptor,
-    irFunctionReference: IrFunctionReference,
-  ): Expression {
-    val referencedMethodDescriptor =
-      environment.getMethodDescriptor(
-        irFunctionReference.symbol.owner,
-        irFunctionReference.typeSubstitutionMap,
-      )
-
-    return MethodReference.newBuilder()
-      .setTypeDescriptor(functionalTypeDescriptor)
-      .setReferencedMethodDescriptor(referencedMethodDescriptor)
-      .setInterfaceMethodDescriptor(functionalTypeDescriptor.getSingleAbstractMethodDescriptor())
-      .setQualifier(convertQualifier(irFunctionReference))
-      .setSourcePosition(getSourcePosition(irFunctionReference))
-      .build()
   }
 
   private fun createAccessorReference(
@@ -1432,27 +1412,6 @@ internal class CompilationUnitBuilder(
       .setInterfaceMethodDescriptor(functionalTypeDescriptor.singleAbstractMethodDescriptor)
       .setQualifier(propertyReferenceQualifier)
       .setSourcePosition(getSourcePosition(irPropertyReference))
-      .build()
-  }
-
-  private fun createFunctionExpression(
-    typeDescriptor: TypeDescriptor,
-    irFunctionExpression: IrFunctionExpression,
-  ): FunctionExpression {
-    check(typeDescriptor.isFunctionalInterface)
-    val irFunction = irFunctionExpression.function
-    val parameters = convertParameters(irFunction)
-
-    val body =
-      irFunction.body?.let { convertBody(it) }
-        ?: Block.newBuilder().setSourcePosition(getSourcePosition(irFunction)).build()
-
-    return FunctionExpression.newBuilder()
-      .setTypeDescriptor(typeDescriptor)
-      .setJsAsync(typeDescriptor.functionalInterface!!.singleAbstractMethodDescriptor!!.isJsAsync)
-      .setParameters(parameters)
-      .setStatements(body.statements)
-      .setSourcePosition(getSourcePosition(irFunction))
       .build()
   }
 
@@ -1482,81 +1441,45 @@ internal class CompilationUnitBuilder(
         )
     }
 
-  private fun convertFunctionReference(irExpression: IrFunctionReference): Expression {
-    // Function references are resolved in the IR as fictitious `KFunction{N}` or
-    // `KSuspendFunction{N}` interfaces that do not exist at runtime (`N` being the arity of the
-    // referenced function). Kotlin/JVM maps any `KFunction{N}` or `KSuspendFunction{N}` type to the
-    // existing interfaces `KFunction` or `KSuspendFunction`. Then it introduces a cast to
-    // `kotlin.Function{N}` or `kotlin.coroutines.SuspendFunction{N}` at `invoke()` function call
-    // sites as this function is specific to those interfaces.  For more information, please refer
-    // to:
-    // https://github.com/JetBrains/kotlin/blob/master/spec-docs/function-types.md#how-this-will-help-reflection
-    //
-    // In J2CL, we are only supporting the api of `Function{N}` and `SuspendFunction{N}`for now. To
-    // avoid casts at `invoke()` function call sites, we will type our MethodReference as
-    // `Function{N}` or `SuspendFunction{N}`. Any call to the `KFunction` or `KSuspendFunction` API
-    // will be rejected by the compiler.
-    //
-    // Note about varargs and function reference: A function with varargs can be used in a context
-    // of a function type without varargs. In this case, Kotlin compiler creates an extra function
-    // adapter and the reference we see here is the reference to the adapter function. The type
-    // of the `IrFunctionReference` is directly `Function{N}` or `SuspendFunction{N}`
-    // ex:
-    // ```
-    //  fun foo(varargs String s): String = s.joinToString()
-    //  fun acceptFoo(foo: (String, String) -> String): String {...}
-    //  var fooRef = ::foo // The type of the reference is KFunction1<Array<String>, String>>
-    //  acceptFoo(::foo) // the type of reference in this ctx is Function2<String, String, String>
-    //  ```
-    val functionNType: IrSimpleType
-    if (irExpression.isAdaptedFunctionReference) {
-      check(irExpression.type.isFunctionOrSuspendFunction())
-      functionNType = irExpression.type as IrSimpleType
-    } else {
-      check(irExpression.type.isKFunctionOrKSuspendFunction())
-      val kFunctionNType = irExpression.type as IrSimpleType
+  private fun convertRichFunctionReference(irExpression: IrRichFunctionReference): Expression {
+    if (irExpression.boundValues.isNotEmpty()) {
+      throw IllegalStateException(
+        "IrRichFunctionReference with boundValues should have been lowered: ${irExpression.dump()}"
+      )
+    }
+    val typeDescriptor =
+      environment.getReferenceTypeDescriptorForFunctionReference(irExpression.type as IrSimpleType)
 
-      // In the Kotlin type system, `KFunction{N}`  does not directly extend `Function{N}` but the
-      // `KFunction{N}.invoke()` is declared as overriding `Function{N}.invoke()`. This is possible
-      // because `KFunction{N}` is a synthetic interfaces.
-      // The simplest way to find the Function{N} type is to look at the enclosing class of the
-      // single overridden function of `KFunction{N}.invoke` that must be `Function{N}.invoke`.
-      // Same comment applies for `KSuspendFunction{N}` and `SuspendFunction{N}`
-      functionNType =
-        checkNotNull(kFunctionNType.classOrNull)
-          .owner
-          .findFunctionByName("invoke")
-          .overriddenSymbols
-          .single()
-          .owner
-          .parentAsClass
-          .symbol
-          .typeWithArguments(kFunctionNType.arguments)
-      check(functionNType.isFunctionOrSuspendFunction())
+    if (typeDescriptor.functionalInterface == null) {
+      throw IllegalStateException("The type is not a functional interface: ${irExpression.dump()}")
     }
 
-    val functionNTypeDescriptor =
-      environment.getReferenceTypeDescriptorForFunctionReference(functionNType)
+    val parameters = convertParameters(irExpression.invokeFunction)
+    // Force boxing of parameters that correspond to type parameters in the SAM method.
+    // This is necessary because invokeFunction might be specialized to primitives (e.g. Int)
+    // while the SAM method uses a type parameter. J2CL functional interface adaptation
+    // expects the boxed version in such cases to avoid unnecessary unboxing/boxing glitches.
+    parameters.zip(irExpression.overriddenFunctionSymbol!!.owner.nonDispatchParameters).forEach {
+      (parameter, samParameter) ->
+      if (
+        samParameter.type.classifierOrNull is IrTypeParameterSymbol &&
+          parameter.typeDescriptor.isPrimitive
+      ) {
+        parameter.setTypeDescriptor(parameter.typeDescriptor.toBoxedType())
+      }
+    }
 
-    return MethodReference.newBuilder()
-      .setTypeDescriptor(functionNTypeDescriptor)
-      .setReferencedMethodDescriptor(
-        environment.getMethodDescriptor(irExpression.symbol.owner, irExpression.typeSubstitutionMap)
-      )
-      .setInterfaceMethodDescriptor(
-        // `Function{N}` are considered as fun interfaces by J2CL and Lambda adaptor are generated.
-        functionNTypeDescriptor.singleAbstractMethodDescriptor
-      )
-      .setQualifier(convertQualifier(irExpression))
+    val body =
+      irExpression.invokeFunction.body?.let { convertBody(it) } ?: Block.newBuilder().build()
+
+    return FunctionExpression.newBuilder()
+      .setTypeDescriptor(typeDescriptor)
+      .setJsAsync(typeDescriptor.functionalInterface!!.singleAbstractMethodDescriptor!!.isJsAsync)
+      .setParameters(parameters)
+      .setStatements(body.statements)
       .setSourcePosition(getSourcePosition(irExpression))
       .build()
   }
-
-  private fun convertFunctionExpression(irExpression: IrFunctionExpression) =
-    createFunctionExpression(
-      environment.getReferenceTypeDescriptorForFunctionReference(irExpression.type as IrSimpleType),
-      irExpression,
-    )
 
   private fun convertPropertyReference(irExpression: IrPropertyReference): Expression {
     val propertyReferenceType = irExpression.type as IrSimpleType
