@@ -1,0 +1,165 @@
+// Generated from "jsasync/Main.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package jsasync
+
+import javaemul.lang.*
+import java.lang.Void
+import jsasync.Helper
+import jsasync.Helper.IThenable
+import jsinterop.annotations.JsAsync
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
+import kotlin.Int
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class Main {
+ private val x: IThenable<Int?>? = Promise.resolve<Int?>(10)
+ 
+ @JsAsync
+ internal open fun emptyAsyncMethod_pp_jsasync(): IThenable<Void?>? {
+  return null
+ }
+ 
+ @JsAsync
+ internal open fun asyncMethod_pp_jsasync(): IThenable<Int?>? {
+  val result: Int = Helper.await<Int?>(
+   Promise.resolve<Int?>(7),
+  )!!.toInt()
+  return this.parametricAsyncMethod_pp_jsasync<Int?>(result)
+ }
+ 
+ @JsAsync
+ internal open fun <T> parametricAsyncMethod_pp_jsasync(value: T): IThenable<T>? {
+  return Promise.resolve<T>(
+   Helper.await<T>(
+    Promise.resolve<T>(value),
+   ),
+  )
+ }
+ 
+ @JsAsync
+ @JsMethod(name = "jsAsyncAndJsMethod")
+ internal open fun jsAsyncAndJsMethod_pp_jsasync(): IThenable<Void?>? {
+  return null
+ }
+ 
+ internal open fun testAsyncLambdas_pp_jsasync() {
+  val i: AsyncInterface = AsyncInterface {
+   return@AsyncInterface Promise.resolve<Int?>(
+    Helper.await<Int?>(
+     Promise.resolve<Int?>(5),
+    ),
+   )
+  }
+  val o: BaseInterface = object : BaseInterface {
+   @JsAsync
+   override fun asyncCall(): IThenable<Int?>? {
+    return Promise.resolve<Int?>(
+     Helper.await<Int?>(
+      this@Main.x,
+     ),
+    )
+   }
+  }
+  val j: AsyncJsFunctionInterface = AsyncJsFunctionInterface {
+   return@AsyncJsFunctionInterface Promise.resolve<Int?>(
+    Helper.await<Int?>(
+     Promise.resolve<Int?>(5),
+    ),
+   )
+  }
+  val optimizableJsFunction: JsFunctionInterface = object : JsFunctionInterface {
+   @JsAsync
+   override fun doSomething(): IThenable<Int?>? {
+    return Promise.resolve<Int?>(
+     Helper.await<Int?>(
+      this@Main.x,
+     ),
+    )
+   }
+  }
+  val unoptimizableJsFunction: JsFunctionInterface = object : JsFunctionInterface {
+   @JsAsync
+   override fun doSomething(): IThenable<Int?>? {
+    val tmp: JsFunctionInterface = this
+    return Promise.resolve<Int?>(
+     Helper.await<Int?>(
+      this@Main.x,
+     ),
+    )
+   }
+  }
+ }
+ 
+ companion object {
+  @JvmStatic
+  @JsAsync
+  internal fun staticAsyncMethod_pp_jsasync(): IThenable<Void?>? {
+   return Promise.resolve<Void?>(
+    Helper.await<Void?>(
+     Promise.resolve<Void?>(
+      null as Void?,
+     ),
+    ),
+   )
+  }
+ }
+ 
+ fun interface BaseInterface {
+  fun asyncCall(): IThenable<Int?>?
+ }
+ 
+ fun interface AsyncInterface: BaseInterface {
+  @JsAsync
+  override fun asyncCall(): IThenable<Int?>?
+ }
+ 
+ interface InterfaceWithAsyncDefaultMethod {
+  @JsAsync
+  fun asyncCall(): IThenable<Int?>? {
+   return Promise.resolve<Int?>(
+    Helper.await<Int?>(
+     Promise.resolve<Int?>(5),
+    ),
+   )
+  }
+ }
+ 
+ @JsFunction
+ fun interface JsFunctionInterface {
+  fun doSomething(): IThenable<Int?>?
+ }
+ 
+ @JsFunction
+ fun interface AsyncJsFunctionInterface {
+  @JsAsync
+  fun doSomething(): IThenable<Int?>?
+ }
+ 
+ @JsType(namespace = JsPackage.GLOBAL, isNative = true)
+ open class Promise<T> internal constructor(): IThenable<T> {
+  companion object {
+   @JvmStatic
+   external fun <T> resolve(value: T): Promise<T>?
+  }
+ }
+}

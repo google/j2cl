@@ -9,6 +9,7 @@ J2KT_WEB_DISABLED = allowlists.of_targets([
     # Defines the special "await" method that is well-known to J2CL. This doesn't
     # come through J2KT cleanly and will generate invalid code.
     "//transpiler/javatests/com/google/j2cl/integration/java/jsasync:promise-j2cl",
+    "//transpiler/javatests/com/google/j2cl/readable/java/jsasync:helper",
 ])
 
 # Packages for which J2KT Web is always enabled for, except those specified in J2KT_WEB_DISABLED.

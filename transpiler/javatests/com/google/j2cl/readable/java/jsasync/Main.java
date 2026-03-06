@@ -15,6 +15,9 @@
  */
 package jsasync;
 
+import static jsasync.Helper.await;
+
+import jsasync.Helper.IThenable;
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -117,13 +120,7 @@ public class Main {
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-  public interface IThenable<T> {}
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   private static class Promise<T> implements IThenable<T> {
     public static native <T> Promise<T> resolve(T value);
   }
-
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native <T> T await(IThenable<T> thenable);
 }

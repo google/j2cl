@@ -95,13 +95,9 @@ fun interface AsyncJsFunctionInterface {
   @JsAsync fun doSomething(): IThenable<Int>
 }
 
-@JsType(isNative = true, namespace = JsPackage.GLOBAL) interface IThenable<T> {}
-
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
 private class Promise<T> : IThenable<T> {
   companion object {
     @JvmStatic external fun <T> resolve(value: T): Promise<T>
   }
 }
-
-@JsMethod(namespace = JsPackage.GLOBAL) private external fun <T> await(thenable: IThenable<T>): T

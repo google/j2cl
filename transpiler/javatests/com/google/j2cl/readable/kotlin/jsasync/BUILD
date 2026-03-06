@@ -1,3 +1,4 @@
+load("//build_defs:rules.bzl", "j2cl_library")
 load(
     "//transpiler/javatests/com/google/j2cl/readable:readable_example.bzl",
     "readable_example",
@@ -8,9 +9,18 @@ package(
     licenses = ["notice"],
 )
 
+j2cl_library(
+    name = "helper",
+    srcs = ["Helper.kt"],
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
+)
+
 readable_example(
-    srcs = glob(["*.kt"]),
+    srcs = ["Main.kt"],
     generate_kt_readables = False,  # @JsAsync not supported in Kotlin.
     generate_wasm_readables = False,  # @JsAsync not supported in wasm.
-    deps = ["//third_party:jsinterop-annotations-j2cl"],
+    deps = [
+        ":helper",
+        "//third_party:jsinterop-annotations-j2cl",
+    ],
 )
