@@ -106,7 +106,12 @@ class KlibsKotlinParser(private val problems: Problems) {
     val compilationResult =
       K2JKlibCompiler()
         .compileKlibAndDeserializeIr(arguments, compilerConfiguration, disposable, null)
+    problems.abortIfHasErrors()
     problems.abortIfCancelled()
+
+    checkNotNull(compilationResult) {
+      "Compilation result should not be null if no errors were reported."
+    }
 
     val moduleFragment = compilationResult.mainModuleFragment
     val pluginContext = compilationResult.pluginContext
