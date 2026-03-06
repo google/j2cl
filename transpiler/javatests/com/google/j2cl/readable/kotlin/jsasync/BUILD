@@ -17,8 +17,6 @@ j2cl_library(
 
 readable_example(
     srcs = ["Main.kt"],
-    generate_kt_readables = False,  # @JsAsync not supported in Kotlin.
-    generate_wasm_readables = False,  # @JsAsync not supported in wasm.
     deps = [
         ":helper",
         "//third_party:jsinterop-annotations-j2cl",

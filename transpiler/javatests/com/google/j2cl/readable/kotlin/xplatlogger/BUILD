@@ -10,6 +10,5 @@ package(
 
 readable_example(
     srcs = glob(["*.kt"]),
-    generate_kt_readables = False,
     deps = ["//transpiler/javatests/com/google/j2cl/readable/java/xplatlogger:fakes"],
 )
