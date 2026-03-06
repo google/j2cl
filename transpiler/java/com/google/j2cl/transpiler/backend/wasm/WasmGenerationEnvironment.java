@@ -510,15 +510,33 @@ public class WasmGenerationEnvironment {
    * <p>If no supertype has a JS prototype, returns null.
    */
   @Nullable
-  public static TypeDeclaration findSuperTypeWithJsPrototype(TypeDeclaration typeDeclaration) {
-    TypeDeclaration superTypeWithJsPrototype = typeDeclaration;
+  public static DeclaredTypeDescriptor findSuperTypeWithJsPrototypeIncludingSelf(
+      TypeDeclaration typeDeclaration) {
+    return findSuperTypeWithJsPrototypeIncludingSelf(typeDeclaration.toDescriptor());
+  }
+
+  /**
+   * Returns the first supertype of the given type that has a JS prototype, including the type
+   * itself.
+   *
+   * <p>If no supertype has a JS prototype, returns null.
+   */
+  @Nullable
+  public static DeclaredTypeDescriptor findSuperTypeWithJsPrototypeIncludingSelf(
+      @Nullable DeclaredTypeDescriptor typeDescriptor) {
+    DeclaredTypeDescriptor superTypeWithJsPrototype = typeDescriptor;
     while (superTypeWithJsPrototype != null) {
-      if (hasJsPrototype(superTypeWithJsPrototype)) {
+      if (hasJsPrototype(superTypeWithJsPrototype.getTypeDeclaration())) {
         return superTypeWithJsPrototype;
       }
-      superTypeWithJsPrototype = superTypeWithJsPrototype.getSuperTypeDeclaration();
+      superTypeWithJsPrototype = superTypeWithJsPrototype.getSuperTypeDescriptor();
     }
     return null;
+  }
+
+  /** Returns the name of the global that stores the JS prototype for JsTypes. */
+  public String getJsPrototypeGlobalName(DeclaredTypeDescriptor typeDescriptor) {
+    return getJsPrototypeGlobalName(typeDescriptor.getTypeDeclaration());
   }
 
   /** Returns the name of the global that stores the JS prototype for JsTypes. */
