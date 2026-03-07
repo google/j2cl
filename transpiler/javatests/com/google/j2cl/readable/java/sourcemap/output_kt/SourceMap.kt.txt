@@ -25,6 +25,7 @@ import java.util.Comparator
 import java.util.function.Function
 import java.util.function.Supplier
 import jsinterop.annotations.JsConstructor
+import jsinterop.annotations.JsEnum
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -195,6 +196,27 @@ abstract class SourceMap<T: Number?>: Comparator<T> {
   
   init {
    this.field = i
+  }
+ }
+ 
+ @JsEnum
+ enum class FooJsEnum {
+  A,
+  B,
+  C;
+ }
+ 
+ @JsEnum(hasCustomValue = true)
+ enum class StringJsEnum {
+  A("FOO"),
+  B("BAR"),
+  C("BUZZ");
+  
+  @JvmField
+  val value: String?
+  
+  constructor(value: String?) {
+   this.value = value
   }
  }
 }

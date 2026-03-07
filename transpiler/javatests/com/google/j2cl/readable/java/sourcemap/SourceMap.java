@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsEnum;
 
 abstract class SourceMap<T extends Number> implements Comparator<T> {
 
@@ -163,6 +164,26 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
 
     public InnerClass(int i) {
       this.field = i;
+    }
+  }
+
+  @JsEnum
+  public enum FooJsEnum {
+    A,
+    B,
+    C;
+  }
+
+  @JsEnum(hasCustomValue = true)
+  public enum StringJsEnum {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ");
+
+    public final String value;
+
+    StringJsEnum(String value) {
+      this.value = value;
     }
   }
 }
