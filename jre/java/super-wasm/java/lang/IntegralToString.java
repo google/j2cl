@@ -18,22 +18,7 @@ package java.lang;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
-/**
- * Converts integral types to strings. This class is public but hidden so that it can also be used
- * by java.util.Formatter to speed up %d. This class is in java.lang so that it can take advantage
- * of the package-private String constructor.
- *
- * <p>The most important methods are appendInt/appendLong and intToString(int)/longToString(int).
- * The former are used in the implementation of StringBuilder, StringBuffer, and Formatter, while
- * the latter are used by Integer.toString and Long.toString.
- *
- * <p>The append methods take AbstractStringBuilder rather than Appendable because the latter
- * requires CharSequences, while we only have raw char[]s. Since much of the savings come from not
- * creating any garbage, we can't afford temporary CharSequence instances.
- *
- * <p>One day the performance advantage of the binary/hex/octal specializations will be small enough
- * that we can lose the duplication, but until then this class offers the full set.
- */
+/** Converts integral types to strings. */
 final class IntegralToString {
 
   private static final int BUFFER_LENGTH = 65;
@@ -97,48 +82,6 @@ final class IntegralToString {
 
   private static final int SMI_MAX = Integer.MAX_VALUE >> 1;
   private static final int SMI_MIN = Integer.MIN_VALUE >> 1;
-
-  public static void appendInt(AbstractStringBuilder sb, int i) {
-    // Only use fast path for SMI numbers, otherwise JS is very slow.
-    if (SMI_MIN <= i && i <= SMI_MAX) {
-      sb.append0(intToString(i));
-      return;
-    }
-
-    boolean negative = i < 0;
-    if (negative) {
-      i = -i;
-      if (i < 0) {
-        // If it is still negative, it is the MIN_VALUE
-        sb.append0("-2147483648");
-        return;
-      }
-    }
-    int bufLen = BUFFER_LENGTH;
-    char[] buf = BUFFER;
-    int cursor = bufLen;
-    // Calculate digits two-at-a-time till remaining digits fit in 16 bits
-    while (i >= (1 << 16)) {
-      // Compute q = n/100 and r = n % 100 as per "Hacker's Delight" 10-8
-      int q = (int) ((0x51EB851FL * i) >>> 37);
-      int r = i - 100 * q;
-      buf[--cursor] = ONES[r];
-      buf[--cursor] = TENS[r];
-      i = q;
-    }
-    // Calculate remaining digits one-at-a-time for performance
-    while (i != 0) {
-      // Compute q = n/10 and r = n % 10 as per "Hacker's Delight" 10-8
-      int q = (0xCCCD * i) >>> 19;
-      int r = i - 10 * q;
-      buf[--cursor] = DIGITS[r];
-      i = q;
-    }
-    if (negative) {
-      buf[--cursor] = '-';
-    }
-    sb.append0(buf, cursor, bufLen - cursor);
-  }
 
   public static String longToString(long v, int radix) {
     int i = (int) v;
