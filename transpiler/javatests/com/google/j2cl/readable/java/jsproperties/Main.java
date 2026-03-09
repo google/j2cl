@@ -69,6 +69,23 @@ class Bar {
   }
 }
 
+/** Tests for read only JsProperty. */
+class ReadOnlyJsProperty {
+  public final int a = 1;
+
+  public static final int b = 2;
+
+  @JsProperty
+  public int getC() {
+    return 3;
+  }
+
+  @JsProperty
+  public static int getD() {
+    return 4;
+  }
+}
+
 interface InterfaceWithDefaultJsProperties {
   @JsProperty
   default int getM() {
@@ -100,5 +117,14 @@ public class Main {
     bar.setA(10);
     bar.getB();
     bar.setB(10);
+  }
+
+  public void testReadOnlyJsProperty() {
+    ReadOnlyJsProperty readOnlyJsProperty = new ReadOnlyJsProperty();
+    int r;
+    r = readOnlyJsProperty.a;
+    r = ReadOnlyJsProperty.b;
+    readOnlyJsProperty.getC();
+    ReadOnlyJsProperty.getD();
   }
 }

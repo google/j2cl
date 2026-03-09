@@ -1,0 +1,54 @@
+goog.module('jsproperties.ReadOnlyJsProperty$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class ReadOnlyJsProperty extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__jsproperties_ReadOnlyJsProperty_ = 0;
+ }
+ /** @nodts @return {!ReadOnlyJsProperty} */
+ static $create__() {
+  ReadOnlyJsProperty.$clinit();
+  let $instance = new ReadOnlyJsProperty();
+  $instance.$ctor__jsproperties_ReadOnlyJsProperty__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_ReadOnlyJsProperty__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_a__jsproperties_ReadOnlyJsProperty_ = 1;
+ }
+ /** @return {number} */
+ get a() {
+  return this.f_a__jsproperties_ReadOnlyJsProperty_;
+ }
+ /** @return {number} */
+ get b() {
+  return 2;
+ }
+ /** @nodts */
+ static $clinit() {
+  ReadOnlyJsProperty.$clinit = () =>{};
+  ReadOnlyJsProperty.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ReadOnlyJsProperty;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ReadOnlyJsProperty, 'jsproperties.ReadOnlyJsProperty');
+
+exports = ReadOnlyJsProperty;
+
+//# sourceMappingURL=ReadOnlyJsProperty.js.map

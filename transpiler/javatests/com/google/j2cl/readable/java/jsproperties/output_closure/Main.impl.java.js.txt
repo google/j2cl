@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Bar = goog.forwardDeclare('jsproperties.Bar$impl');
 let Foo = goog.forwardDeclare('jsproperties.Foo$impl');
 let FooWithNativeProperty = goog.forwardDeclare('jsproperties.FooWithNativeProperty$impl');
+let ReadOnlyJsProperty = goog.forwardDeclare('jsproperties.ReadOnlyJsProperty$impl');
 
 class Main extends j_l_Object {
  /** @protected @nodts */
@@ -44,6 +45,15 @@ class Main extends j_l_Object {
   bar.abc = 10;
  }
  /** @nodts */
+ m_testReadOnlyJsProperty__void() {
+  let readOnlyJsProperty = ReadOnlyJsProperty.$create__();
+  let /** number */ r;
+  r = readOnlyJsProperty.f_a__jsproperties_ReadOnlyJsProperty;
+  r = ReadOnlyJsProperty.f_b__jsproperties_ReadOnlyJsProperty;
+  readOnlyJsProperty.c;
+  ReadOnlyJsProperty.d;
+ }
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
@@ -59,6 +69,7 @@ class Main extends j_l_Object {
   Bar = goog.module.get('jsproperties.Bar$impl');
   Foo = goog.module.get('jsproperties.Foo$impl');
   FooWithNativeProperty = goog.module.get('jsproperties.FooWithNativeProperty$impl');
+  ReadOnlyJsProperty = goog.module.get('jsproperties.ReadOnlyJsProperty$impl');
  }
 }
 $Util.$setClassMetadata(Main, 'jsproperties.Main');

@@ -67,6 +67,7 @@ class Bar(private var f: Int) {
   }
 }
 
+/** Tests for Kotlin properties with JsProperty. */
 class Buzz(@JsProperty val f: Int) {
   val fieldGetter: Int
     @JsProperty get() = 10
@@ -94,6 +95,23 @@ class Buzz(@JsProperty val f: Int) {
   var getterSetterWithCustomName: Int = 80
     @JsProperty(name = "anotherName") get
     @JsProperty(name = "mismatchedName") set
+}
+
+/** Tests for read only JsProperty. */
+class ReadOnlyJsProperty {
+  @JsProperty val a: Int = 1
+
+  @JsProperty
+  fun getB(): Int {
+    return 2
+  }
+}
+
+@JsProperty val c: Int = 3
+
+@JsProperty
+fun getD(): Int {
+  return 4
 }
 
 @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL) external fun getNativeB(): Double

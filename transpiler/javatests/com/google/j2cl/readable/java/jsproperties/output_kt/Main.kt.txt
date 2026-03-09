@@ -23,6 +23,7 @@ import jsinterop.annotations.JsProperty
 import jsproperties.FooWithNativeProperty
 import kotlin.Int
 import kotlin.Suppress
+import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
 open class Foo internal constructor() {
@@ -82,6 +83,26 @@ open class Bar internal constructor() {
  }
 }
 
+open class ReadOnlyJsProperty internal constructor() {
+ @JvmField
+ val a: Int = 1
+ 
+ @JsProperty
+ open fun getC(): Int {
+  return 3
+ }
+ 
+ companion object {
+  const val b: Int = 2
+  
+  @JvmStatic
+  @JsProperty
+  fun getD(): Int {
+   return 4
+  }
+ }
+}
+
 interface InterfaceWithDefaultJsProperties {
  @JsProperty
  fun getM(): Int {
@@ -113,5 +134,14 @@ open class Main {
   bar.setA(10)
   bar.getB()
   bar.setB(10)
+ }
+ 
+ open fun testReadOnlyJsProperty() {
+  val readOnlyJsProperty: ReadOnlyJsProperty = ReadOnlyJsProperty()
+  var r: Int = 0
+  r = readOnlyJsProperty.a
+  r = ReadOnlyJsProperty.b
+  readOnlyJsProperty.getC()
+  ReadOnlyJsProperty.getD()
  }
 }
