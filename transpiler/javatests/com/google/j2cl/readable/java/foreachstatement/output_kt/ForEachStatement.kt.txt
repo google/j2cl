@@ -19,8 +19,9 @@
 package foreachstatement
 
 import javaemul.lang.*
-import javaemul.lang.JavaIterator
+import java.lang.UnsupportedOperationException
 import javaemul.lang.MutableIterableJvm
+import javaemul.lang.MutableIteratorJvm
 import kotlin.Any
 import kotlin.Char
 import kotlin.Exception
@@ -155,5 +156,9 @@ open class ForEachStatement {
   override fun iterator(): StringIterator
  }
  
- interface StringIterator: JavaIterator<String?>
+ interface StringIterator: MutableIteratorJvm<String?> {
+  override fun remove() {
+   throw UnsupportedOperationException()
+  }
+ }
 }

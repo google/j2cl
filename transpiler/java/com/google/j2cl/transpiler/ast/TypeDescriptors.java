@@ -78,6 +78,9 @@ public class TypeDescriptors {
   @QualifiedBinaryName("java.lang.NullPointerException")
   public DeclaredTypeDescriptor javaLangNullPointerException;
 
+  @QualifiedBinaryName("java.lang.UnsupportedOperationException")
+  public DeclaredTypeDescriptor javaLangUnsupportedOperationException;
+
   @QualifiedBinaryName("java.lang.AssertionError")
   public DeclaredTypeDescriptor javaLangAssertionError;
 
@@ -92,6 +95,11 @@ public class TypeDescriptors {
 
   public DeclaredTypeDescriptor javaUtilArrays;
   public DeclaredTypeDescriptor javaUtilCollection;
+  public DeclaredTypeDescriptor javaUtilIterator;
+
+  @QualifiedBinaryName("java.util.ListIterator")
+  public DeclaredTypeDescriptor javaUtilListIterator;
+
   public DeclaredTypeDescriptor javaUtilMap;
   public DeclaredTypeDescriptor javaUtilList;
   public DeclaredTypeDescriptor javaUtilObjects;
