@@ -10,6 +10,8 @@ J2KT_WEB_DISABLED = allowlists.of_targets([
     # come through J2KT cleanly and will generate invalid code.
     "//transpiler/javatests/com/google/j2cl/integration/java/jsasync:promise-j2cl",
     "//transpiler/javatests/com/google/j2cl/readable/java/jsasync:helper",
+    # Test library for calling non-J2KT transpiled Java from J2KT-transpiled Java.
+    "//transpiler/javatests/com/google/j2cl/integration/java/j2ktjvminterop:java-j2cl",
 ])
 
 # Packages for which J2KT Web is always enabled for, except those specified in J2KT_WEB_DISABLED.
