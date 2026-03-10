@@ -1500,6 +1500,19 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         qualifierTypeDescriptor.findSupertype(enclosingTypeDescriptor.getTypeDeclaration()));
   }
 
+  /**
+   * Converts a syntactic element which is just a plain identifier in the source code.
+   *
+   * <p>A `JCIdent` can represent a variety of different source code elements:
+   *
+   * <ul>
+   *   <li>`this`.
+   *   <li>`super`.
+   *   <li>a variable name.
+   *   <li>an unqualified field name.
+   *   <li>an unqualified type name.
+   * </ul>
+   */
   private Expression convertIdent(JCIdent identifier) {
     if (isThisExpression(identifier)) {
       return new ThisReference(getCurrentType().getTypeDescriptor());
@@ -1507,12 +1520,28 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     if (isSuperExpression(identifier)) {
       return new SuperReference(getCurrentType().getTypeDescriptor());
     }
+    // In some cases `identifier.sym` will point to a synthetic symbol for the field and not the
+    // actual declaration `Symbol`. For those cases we need to get declaration `Symbol` by calling
+    // `baseSymbol()`.
     Symbol symbol = identifier.sym.baseSymbol();
     if (symbol instanceof ClassSymbol classSymbol) {
       return new JsConstructorReference(environment.createTypeDeclaration(classSymbol));
     }
     if (symbol instanceof VarSymbol varSymbol) {
       if (symbol.getKind() == ElementKind.FIELD || symbol.getKind() == ElementKind.ENUM_CONSTANT) {
+        // An unqualified field access in a subclass might have a different type than its
+        // declaration:
+        //
+        // class A<T> {
+        //   T field;
+        // }
+        // class B extends A<String> {
+        //   // Unqualifed access to `field` here is of type `String`.
+        //   private String zoo() { return field; }
+        // }
+        //
+        // For unqualified field access, the actual type of the field access is provided by
+        // `identifier.type` (vs. `identifier.sym` which might not be reflect the parameterization).
         FieldDescriptor fieldDescriptor =
             environment.createFieldDescriptor(varSymbol, identifier.type);
         return FieldAccess.newBuilder().setTarget(fieldDescriptor).build();
