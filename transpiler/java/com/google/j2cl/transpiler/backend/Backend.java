@@ -544,7 +544,10 @@ public enum Backend {
           // extracted. After extracting qualifiers, we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
-          AddJsExportBridgesWasm::new,
+          () ->
+              new AddJsExportBridgesWasm(
+                  /* enableCustomDescriptorsJsInterop= */ options
+                      .getEnableWasmCustomDescriptorsJsInterop()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.

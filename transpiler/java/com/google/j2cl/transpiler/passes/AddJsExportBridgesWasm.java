@@ -28,8 +28,18 @@ import java.util.HashSet;
  * and any necessary conversions between {@code java.lang.String} and Wasm strings.
  */
 public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
+  private final boolean enableCustomDescriptorsJsInterop;
+
+  public AddJsExportBridgesWasm(boolean enableCustomDescriptorsJsInterop) {
+    this.enableCustomDescriptorsJsInterop = enableCustomDescriptorsJsInterop;
+  }
+
   @Override
   public void applyTo(Library library) {
+    if (!enableCustomDescriptorsJsInterop) {
+      return;
+    }
+
     library
         .streamTypes()
         .forEach(
