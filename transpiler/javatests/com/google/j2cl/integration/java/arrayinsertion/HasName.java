@@ -13,6 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package arrayleafinsertion;
+package arrayinsertion;
 
-public interface HasFullName extends HasName {}
+public interface HasName {
+
+  String getName();
+
+  void setName(String name);
+}

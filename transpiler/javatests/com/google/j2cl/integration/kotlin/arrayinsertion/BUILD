@@ -8,4 +8,8 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(srcs = glob(["*.kt"]))
+integration_test(
+    srcs = glob(["*.kt"]),
+    # TODO(b/227554485): missing runtime array insertion checks (missing ArrayStoreException)
+    enable_kt_native = False,
+)

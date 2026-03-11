@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package arraybranchinsertion;
+package arrayinsertion;
 
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class Main {
@@ -25,10 +26,26 @@ public class Main {
   }
 
   private static void testFullArray() {
+    Object[] array = new HasName[2];
+
+    // You can insert a leaf value of a different but conforming type.
+    array[0] = new Person();
+
+    // When inserting a leaf value the type must conform.
+    assertThrowsArrayStoreException(() -> array[0] = new Object());
+
+    // You can always insert null.
+    array[0] = null;
+
+    // Multidimensional array.
     Object[][] array2d = new HasName[2][2];
     assertTrue(array2d[0].length == 2);
     assertTrue(array2d.length == 2);
 
+    // Leaf insertion
+    array2d[0][0] = new Person();
+
+    // Branch insertion
     // You can swap out an entire array in an array slot.
     array2d[0] = new HasName[2];
     assertTrue(array2d[0].length == 2);
@@ -55,10 +72,12 @@ public class Main {
   }
 
   private static void testPartialArray() {
-    // You can create a partially initialized array.
     Object[][] partialArray = new Object[1][];
     assertTrue(partialArray.length == 1);
+    // Leaf insertion
+    assertThrowsNullPointerException(() -> partialArray[0][0] = new Person());
 
+    // Branch insertion
     // You can fill the uninitialized dimensions with the same type.
     partialArray[0] = new Object[100];
     assertTrue(partialArray[0].length == 100);

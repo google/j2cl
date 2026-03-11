@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package arraybranchinsertion
+package arrayinsertion
 
 import com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException
+import com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 
 fun main(vararg unused: String) {
@@ -24,11 +25,28 @@ fun main(vararg unused: String) {
 }
 
 private fun testFullArray() {
+  val array: Array<Any?> = arrayOfNulls<HasName>(2) as Array<Any?>
+
+  // You can insert a leaf value of a different but conforming type.
+  array[0] = Person()
+
+  // When inserting a leaf value the type must conform.
+  assertThrowsArrayStoreException { array[0] = Any() }
+
+  // You can always insert null.
+  array[0] = null
+
+  // Multidimensional array.
   val array2d: Array<Array<out Any?>> =
     (arrayOf<Array<HasName?>>(arrayOfNulls(2), arrayOfNulls(2))) as Array<Array<out Any?>>
+
   assertTrue(array2d[0].size == 2)
   assertTrue(array2d.size == 2)
 
+  // Leaf insertion
+  castToArrayOfAny(array2d[0])[0] = Person()
+
+  // Branch insertion
   // You can swap out an entire array in an array slot.
   array2d[0] = arrayOfNulls<HasName>(2)
   assertTrue(array2d[0].size == 2)
@@ -59,13 +77,14 @@ private fun testFullArray() {
   }
 }
 
-private fun castToArrayOfAny(arr: Any): Array<Any> = arr as Array<Any>
-
 private fun testPartialArray() {
-  // You can create a partially initialized array.
   val partialArray: Array<Array<out Any?>?> = arrayOfNulls(1)
   assertTrue(partialArray.size == 1)
 
+  // Leaf insertion
+  assertThrowsNullPointerException { castToArrayOfAny(partialArray[0]!!)[0] = Person() }
+
+  // Branch insertion
   // You can fill the uninitialized dimensions with the same type.
   partialArray[0] = arrayOfNulls(100)
   assertTrue(partialArray[0]!!.size == 100)
@@ -74,3 +93,5 @@ private fun testPartialArray() {
   partialArray[0] = arrayOfNulls<Person>(100)
   assertTrue(partialArray[0]!!.size == 100)
 }
+
+private fun castToArrayOfAny(arr: Any): Array<Any> = arr as Array<Any>

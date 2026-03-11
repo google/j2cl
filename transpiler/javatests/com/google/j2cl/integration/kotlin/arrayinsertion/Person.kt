@@ -13,6 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package arraybranchinsertion
+package arrayinsertion
 
-interface HasFullName : HasName
+class Person(override var name: String? = null) : HasFullName
