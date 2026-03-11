@@ -74,6 +74,8 @@ public class Main {
   private static void testPartialArray() {
     Object[][] partialArray = new Object[1][];
     assertTrue(partialArray.length == 1);
+    assertTrue(partialArray[0] == null);
+
     // Leaf insertion
     assertThrowsNullPointerException(() -> partialArray[0][0] = new Person());
 

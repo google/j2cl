@@ -80,6 +80,7 @@ private fun testFullArray() {
 private fun testPartialArray() {
   val partialArray: Array<Array<out Any?>?> = arrayOfNulls(1)
   assertTrue(partialArray.size == 1)
+  assertTrue(partialArray[0] == null)
 
   // Leaf insertion
   assertThrowsNullPointerException { castToArrayOfAny(partialArray[0]!!)[0] = Person() }
