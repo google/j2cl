@@ -58,7 +58,6 @@ import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
@@ -1089,11 +1088,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             : environment.createTypeDescriptor(
                 memberReference.getQualifierExpression().type, inNullMarkedScope());
 
-    if (qualifier instanceof JsConstructorReference) {
-      // The qualifier was just the class name, remove it.
-      qualifier = null;
-    }
-
     var enclosingTypeDescriptor =
         getEnclosingTypeDescriptor(methodSymbol, methodType, qualifierTypeDescriptor);
 
@@ -1188,12 +1182,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     Expression qualifier;
     if (fieldAccess.sym instanceof VariableElement variableElement) {
       qualifier = convertExpression(expression);
-      if (qualifier instanceof JsConstructorReference) {
-        // Remove qualifier if it a type. A type can only be a qualifier for a static field and
-        // in such cases the actual target type is part of the field descriptor.
-        checkState(fieldAccess.sym.isStatic());
-        qualifier = null;
-      }
       if (fieldAccess.name.contentEquals("length") && qualifier.getTypeDescriptor().isArray()) {
         return ArrayLength.newBuilder().setArrayExpression(qualifier).build();
       }
@@ -1209,6 +1197,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               parameterizedEnclosingType, variableElement, fieldAccess.type);
       return FieldAccess.newBuilder().setQualifier(qualifier).setTarget(fieldDescriptor).build();
     }
+
+    // Ignore qualified class names. These only appear as qualifiers for static members, class
+    // literals, etc. and are handled when processing the parent node.
+    checkState(fieldAccess.sym instanceof ClassSymbol);
     return null;
   }
 
@@ -1273,12 +1265,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     JCExpression jcQualifier = getExplicitQualifier(methodInvocation);
     Expression qualifier = convertExpressionOrNull(jcQualifier);
     MethodSymbol methodSymbol = getMemberSymbol(methodInvocation.getMethodSelect());
-
-    if (qualifier instanceof JsConstructorReference) {
-      // Remove qualifier if it is a type name. Only allowed for static methods.
-      checkState(methodSymbol.isStatic());
-      qualifier = null;
-    }
 
     MethodType methodType = methodInvocation.meth.type.asMethodType();
     DeclaredTypeDescriptor enclosingTypeDescriptor =
@@ -1524,9 +1510,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // actual declaration `Symbol`. For those cases we need to get declaration `Symbol` by calling
     // `baseSymbol()`.
     Symbol symbol = identifier.sym.baseSymbol();
-    if (symbol instanceof ClassSymbol classSymbol) {
-      return new JsConstructorReference(environment.createTypeDeclaration(classSymbol));
-    }
     if (symbol instanceof VarSymbol varSymbol) {
       if (symbol.getKind() == ElementKind.FIELD || symbol.getKind() == ElementKind.ENUM_CONSTANT) {
         // An unqualified field access in a subclass might have a different type than its
@@ -1550,7 +1533,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Variable variable = variableByVariableElement.get(symbol);
       return variable.createReference();
     }
-    throw new AssertionError("Unexpected symbol class: " + symbol.getClass());
+
+    // Ignore unqualified class names. These only appear as qualifiers for static members, class
+    // literals, etc. and are handled when processing the parent node.
+    checkState(identifier.sym instanceof ClassSymbol);
+    return null;
   }
 
   private static boolean isSuperConstructorCall(JCMethodInvocation methodInvocation) {
