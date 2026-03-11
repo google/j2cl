@@ -1160,24 +1160,35 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private Expression convertFieldAccess(JCFieldAccess fieldAccess) {
     JCExpression expression = fieldAccess.getExpression();
     if (fieldAccess.name.contentEquals("class")) {
+      // Type literals (Type.class) are seen as a qualified field accesses to a field named "class"
+      // with its qualifier being the type accessible through `expression.type`.
       return new TypeLiteral(
           getSourcePosition(fieldAccess), environment.createTypeDescriptor(expression.type));
     }
 
     if (fieldAccess.name.contentEquals("this")) {
+      // Qualified `this` expressions are seen as a qualified field accesses to a field named "this"
+      // with its qualifier being the type accessible through `expression.type`.
       return new ThisReference(
-          environment.createTypeDeclaration((ClassSymbol) expression.type.tsym).toDescriptor(),
-          /* isQualified= */ true);
+          environment.createDeclaredTypeDescriptor(expression.type), /* isQualified= */ true);
     }
     if (fieldAccess.name.contentEquals("super")) {
+      // Qualified `super` expressions are seen as a qualified field accesses to a field named
+      // "super" with its qualifier being the type accessible through `expression.type`.
       DeclaredTypeDescriptor typeDescriptor =
-          environment.createTypeDeclaration((ClassSymbol) expression.type.tsym).toDescriptor();
+          environment.createDeclaredTypeDescriptor(expression.type);
 
-      boolean isQualified = !typeDescriptor.isInterface();
-      if (isQualified) {
-        return new SuperReference(typeDescriptor, isQualified);
+      if (typeDescriptor.isInterface()) {
+        // Don't consider calls that select a default method in the super hierarchy as qualified.
+        // This qualified super expression can only be a qualifier of a method call. The actual
+        // class where the method resides will be present in the target of the method call that has
+        // this expression as its qualifier (this is the same modeling we do for the Kotlin
+        // frontend).
+        return new SuperReference(getCurrentType().getTypeDescriptor());
       }
-      return new SuperReference(getCurrentType().getTypeDescriptor());
+
+      // This is a qualified super expression referring to an enclosing class.
+      return new SuperReference(typeDescriptor, /* isQualified= */ true);
     }
     Expression qualifier;
     if (fieldAccess.sym instanceof VariableElement variableElement) {
