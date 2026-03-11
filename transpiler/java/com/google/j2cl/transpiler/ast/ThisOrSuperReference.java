@@ -30,7 +30,7 @@ public abstract class ThisOrSuperReference extends Expression {
   private final boolean isQualified;
 
   public ThisOrSuperReference(DeclaredTypeDescriptor typeDescriptor, boolean isQualified) {
-    this.typeDescriptor = typeDescriptor.toNonNullable();
+    this.typeDescriptor = typeDescriptor.getDeclarationDescriptor().toNonNullable();
     this.isQualified = isQualified;
   }
 
