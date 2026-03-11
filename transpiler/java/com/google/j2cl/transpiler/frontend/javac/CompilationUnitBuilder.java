@@ -1273,11 +1273,30 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertMethodInvocation(JCMethodInvocation methodInvocation) {
-    JCExpression jcQualifier = getExplicitQualifier(methodInvocation);
-    Expression qualifier = convertExpressionOrNull(jcQualifier);
-    MethodSymbol methodSymbol = getMemberSymbol(methodInvocation.getMethodSelect());
+    MethodSymbol methodSymbol;
+    Expression qualifier = null;
+    JCExpression methodSelectorExpression = methodInvocation.getMethodSelect();
 
-    MethodType methodType = methodInvocation.meth.type.asMethodType();
+    // The target and qualifier of method calls are in the method selector which is either
+    // an identifier (JCIdent) for unqualified calls or member select expression (JCFieldAccess)
+    // for qualified calls.
+    switch (methodSelectorExpression) {
+      case JCIdent ident -> {
+        // This is an unqualified method call, where `ident.sym` is the method symbol.
+        methodSymbol = (MethodSymbol) ident.sym.baseSymbol();
+      }
+      case JCFieldAccess fieldAccess -> {
+        // This is a qualified method call, where `fieldAccess.sym` is the method symbol and
+        // `fieldAccess.getExpression()` is the qualifier.
+        methodSymbol = (MethodSymbol) fieldAccess.sym.baseSymbol();
+        qualifier = convertExpression(fieldAccess.getExpression());
+      }
+      default ->
+          throw new IllegalArgumentException(
+              "Unexpected method selector " + methodSelectorExpression);
+    }
+
+    MethodType methodType = methodInvocation.getMethodSelect().type.asMethodType();
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         getEnclosingTypeDescriptor(
             methodSymbol,
@@ -1353,13 +1372,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    boolean hasSuperQualifier = isSuperExpression(jcQualifier);
-    boolean isStaticDispatch = isQualifiedSuperExpression(jcQualifier);
-    if (hasSuperQualifier
-        && (qualifier.getTypeDescriptor().isInterface() || methodDescriptor.isDefaultMethod())) {
-      // This is a default method call through super.
-      isStaticDispatch = true;
-    }
+    boolean isStaticDispatch =
+        qualifier instanceof SuperReference superReference
+            && (superReference.isQualified()
+                || qualifier.getTypeDescriptor().isInterface()
+                || methodDescriptor.isDefaultMethod());
 
     return MethodCall.Builder.from(methodDescriptor)
         .setQualifier(qualifier)
@@ -1409,27 +1426,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             .collect(toCollection(ArrayList::new));
 
     return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
-  }
-
-  /**
-   * Returns a qualifier for a method invocation that doesn't have one, specifically,
-   * instanceMethod() will return a resolved qualifier that may refer to "this" or to the enclosing
-   * instances. A staticMethod() will return null.
-   */
-  @Nullable
-  private static JCExpression getExplicitQualifier(JCMethodInvocation methodInvocation) {
-
-    if (methodInvocation.getMethodSelect().getKind() != Kind.IDENTIFIER) {
-      return getQualifier(methodInvocation.getMethodSelect());
-    }
-
-    // No qualifier specified.
-    MethodSymbol memberSymbol = getMemberSymbol(methodInvocation.getMethodSelect());
-    if (memberSymbol.isStatic()) {
-      return null;
-    }
-
-    return getQualifier(methodInvocation.getMethodSelect());
   }
 
   private DeclaredTypeDescriptor getEnclosingTypeDescriptor(
@@ -1572,23 +1568,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return identifier.getName().contentEquals("this");
     }
     return false;
-  }
-
-  private static MethodSymbol getMemberSymbol(JCTree.JCExpression node) {
-    return switch (node.getKind()) {
-      case IDENTIFIER -> (MethodSymbol) ((JCTree.JCIdent) node).sym.baseSymbol();
-      case MEMBER_SELECT -> (MethodSymbol) ((JCTree.JCFieldAccess) node).sym;
-      default -> throw new AssertionError("Unexpected tree kind: " + node.getKind());
-    };
-  }
-
-  @Nullable
-  private static JCExpression getQualifier(JCTree.JCExpression node) {
-    return switch (node.getKind()) {
-      case IDENTIFIER -> null;
-      case MEMBER_SELECT -> ((JCTree.JCFieldAccess) node).getExpression();
-      default -> throw new AssertionError("Unexpected tree kind: " + node.getKind());
-    };
   }
 
   private Expression convertParens(JCParens expression) {
