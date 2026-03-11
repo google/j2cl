@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -30,7 +31,6 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import java.util.List;
 
 /**
  * Normalizes array creations for wasm.
@@ -47,10 +47,17 @@ import java.util.List;
 public class NormalizeArrayCreationsWasm extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    // Implementing ArrayLiterals will introduced new NewArray nodes in the ast. We need first to
-    // process all arrayLiterals and then we can normalize multi-dimensional array creation.
-    removeExplicitInstantiationInArrayLiterals(compilationUnit);
-    normalizeMultidimensionalArrays(compilationUnit);
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteNewArray(NewArray newArray) {
+            if (newArray.getInitializer() != null) {
+              return implementArrayCreationFromArrayLiteral(newArray);
+            } else {
+              return implementArrayCreationWithDimensions(newArray);
+            }
+          }
+        });
   }
 
   /**
@@ -59,19 +66,10 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
    * <p>After this rewriting arrays are either an explicit creation with dimension expressions, e.g.
    * {@code new Array[4][]} or array literals e.g. {@code \{\{1,3\},null\}}.
    */
-  private static void removeExplicitInstantiationInArrayLiterals(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Expression rewriteNewArray(NewArray newArray) {
-            Expression initializer = newArray.getInitializer();
-            if (initializer == null) {
-              return newArray;
-            }
-            checkState(initializer instanceof ArrayLiteral);
-            return initializer;
-          }
-        });
+  private static Expression implementArrayCreationFromArrayLiteral(NewArray newArray) {
+    Expression initializer = newArray.getInitializer();
+    checkState(initializer instanceof ArrayLiteral);
+    return initializer;
   }
 
   /**
@@ -93,32 +91,26 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
    * <p>where 5 is the id for the primitive type int and -1 is used to denote an uninitialized array
    * dimension.
    */
-  private static void normalizeMultidimensionalArrays(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Expression rewriteNewArray(NewArray newArray) {
-            if (newArray.getDimensionExpressions().size() < 2) {
-              return newArray;
-            }
-            checkArgument(newArray.getInitializer() == null);
+  private static Expression implementArrayCreationWithDimensions(NewArray newArray) {
+    if (newArray.getDimensionExpressions().size() < 2) {
+      return newArray;
+    }
+    checkArgument(newArray.getInitializer() == null);
 
-            List<Expression> nonNullDimensions =
-                newArray.getDimensionExpressions().stream()
-                    .map(NormalizeArrayCreationsWasm::nullToMinusOne)
-                    .collect(toImmutableList());
+    ImmutableList<Expression> nonNullDimensions =
+        newArray.getDimensionExpressions().stream()
+            .map(NormalizeArrayCreationsWasm::nullToMinusOne)
+            .collect(toImmutableList());
 
-            return RuntimeMethods.createCreateMultiDimensionalArrayCall(
-                ArrayLiteral.newBuilder()
-                    .setTypeDescriptor(
-                        ArrayTypeDescriptor.newBuilder()
-                            .setComponentTypeDescriptor(PrimitiveTypes.INT)
-                            .build())
-                    .setValueExpressions(nonNullDimensions)
-                    .build(),
-                NumberLiteral.fromInt(getTypeIndex(newArray.getLeafTypeDescriptor())));
-          }
-        });
+    return RuntimeMethods.createCreateMultiDimensionalArrayCall(
+        ArrayLiteral.newBuilder()
+            .setTypeDescriptor(
+                ArrayTypeDescriptor.newBuilder()
+                    .setComponentTypeDescriptor(PrimitiveTypes.INT)
+                    .build())
+            .setValueExpressions(nonNullDimensions)
+            .build(),
+        NumberLiteral.fromInt(getTypeIndex(newArray.getLeafTypeDescriptor())));
   }
 
   private static int getTypeIndex(TypeDescriptor typeDescriptor) {
