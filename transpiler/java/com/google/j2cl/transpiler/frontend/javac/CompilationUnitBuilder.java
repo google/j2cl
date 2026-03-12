@@ -1304,8 +1304,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               "Unexpected method selector " + methodSelectorExpression);
     }
 
-    MethodType methodType = methodInvocation.getMethodSelect().type.asMethodType();
-    DeclaredTypeDescriptor enclosingTypeDescriptor =
+    var methodType = methodInvocation.getMethodSelect().type.asMethodType();
+    var enclosingTypeDescriptor =
         getEnclosingTypeDescriptor(
             methodSymbol,
             methodType,
@@ -1313,13 +1313,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 ? null
                 : qualifier.getTypeDescriptor());
 
-    // The type arguments for the method itself. For example `String` in `C.<String>m()`.
-    var typeArguments =
-        convertTypeArguments(
-            methodInvocation.getTypeArguments(),
-            methodSymbol,
-            methodType,
-            enclosingTypeDescriptor.getTypeDeclaration().isNullMarked());
     if (methodSymbol.isConstructor()) {
       // For constructor calls, make the enclosing type of the method either the current enclosing
       // type or the super type as declared. Javac does not always provide enough information here
@@ -1332,42 +1325,21 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               : getCurrentType().getSuperTypeDescriptor();
     }
 
-    MethodDescriptor methodDescriptor =
-        environment.createMethodDescriptor(
-            /* enclosingTypeDescriptor= */ enclosingTypeDescriptor,
-            /* methodType= */ methodType,
-            /* declarationMethodElement= */ methodSymbol,
-            typeArguments);
-
-    // Calls to clone() always return the type of the object it is called on but the method type
-    // does not reflect that. So it is fixed here.
-    if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")
-        && methodDescriptor.getSignature().equals("clone()")) {
-      // The return type of the method should be the same as the type of the invocation expression;
-      // but in the case of clone() on an array types, which is a synthetic method, these are not
-      // the same. clone() on array types returns always the same array type it was called on,
-      // but javac presents it just as returning java.lang.Object.
-      methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
-              .setReturnTypeDescriptor(
-                  environment.createTypeDescriptor(methodInvocation.type).toNonNullable())
-              .build();
-    }
-
-    if (methodDescriptor.isConstructor()
-        && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum)) {
-      // Fix inconsistencies in calls to JRE's Enum constructor calls. Enum constructor has 2
-      // implicit parameters (name and ordinal) that are added by a normalization pass. This removes
-      // the parameter definition from the descriptor so that they are consistent.
-      checkArgument(
-          methodDescriptor.getParameterDescriptors().size()
-              == methodInvocation.getArguments().size() + 2);
-      methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
-              .setParameterDescriptors(ImmutableList.of())
-              .makeDeclaration()
-              .build();
-    }
+    // The type arguments for the method itself. For example `String` in `C.<String>m()`.
+    var typeArguments =
+        convertTypeArguments(
+            methodInvocation.getTypeArguments(),
+            methodSymbol,
+            methodType,
+            enclosingTypeDescriptor.getTypeDeclaration().isNullMarked());
+    var methodDescriptor =
+        fixSpecialMethodDescriptors(
+            qualifier,
+            environment.createMethodDescriptor(
+                /* enclosingTypeDescriptor= */ enclosingTypeDescriptor,
+                /* methodType= */ methodType,
+                /* declarationMethodElement= */ methodSymbol,
+                typeArguments));
 
     List<Expression> arguments =
         convertArguments(methodDescriptor, methodInvocation.getArguments());
@@ -1383,6 +1355,41 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .setStaticDispatch(isStaticDispatch)
         .setSourcePosition(getSourcePosition(methodInvocation))
         .build();
+  }
+
+  /**
+   * Fixes up method descriptors that are modeled inconsistently with respect to the {@code
+   * JCMethodInvocation} node.
+   */
+  private MethodDescriptor fixSpecialMethodDescriptors(
+      Expression qualifier, MethodDescriptor methodDescriptor) {
+    if (qualifier != null
+        && qualifier.getTypeDescriptor().isArray()
+        && methodDescriptor.getSignature().equals("clone()")) {
+      // A call to `q.clone()` on an array `q` returns the same array type as the array `q`. That
+      // is reflected in the type of the JCMethodInvocation node but not in the return type
+      // of the method descriptor.
+      // This is a bit hacky since there is not a declared type that represents an array to be the
+      // enclosing type of the `clone()` method.
+      return MethodDescriptor.Builder.from(methodDescriptor)
+          .setReturnTypeDescriptor(qualifier.getTypeDescriptor().toNonNullable())
+          .build();
+    }
+
+    // TODO(b/491913371): Cleanup after JDT is gone.
+    if (methodDescriptor.isConstructor()
+        && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum)) {
+      // The constructor for `java.lang.Enum` has two parameters (ordinal and name) but those are
+      // implicit in the method calls. Here the JCMethodInvocation lacks those parameters but the
+      // method descriptor contains them.
+      // In our AST we require that the parameters declared  method descriptor in an `Invocation`
+      // are consistent with the arguments passed.
+      return MethodDescriptor.Builder.from(methodDescriptor)
+          .setParameterDescriptors(ImmutableList.of())
+          .makeDeclaration()
+          .build();
+    }
+    return methodDescriptor;
   }
 
   private ImmutableList<TypeDescriptor> convertTypeArguments(
