@@ -129,6 +129,25 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "Native JsType 'Native' cannot be compared with non-native type.");
   }
 
+  public void testNativeTypeStringConcatenationFails() {
+    assertTranspileFails(
+            "test.Main",
+            """
+            import jsinterop.annotations.*;
+            @JsType(isNative = true)
+            class Native {}
+            class Main {
+              void test(Native n) {
+                String s1 = "" + n;
+                s1 += n;
+              }
+            }
+            """)
+        .assertErrorsWithoutSourcePosition(
+            "Native JsType 'Native' cannot be assigned to 'Object'. (b/262009761)",
+            "Native JsType 'Native' cannot be assigned to 'Object'. (b/262009761)");
+  }
+
   public void testNativeJsTypeInvalidAssignmentsFails() {
     assertTranspileFails(
             "test.Buggy",

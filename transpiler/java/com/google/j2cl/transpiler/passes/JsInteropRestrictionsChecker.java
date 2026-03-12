@@ -2544,6 +2544,14 @@ public class JsInteropRestrictionsChecker {
               }
 
               @Override
+              public Expression rewriteStringContext(Expression expression) {
+                return rewriteTypeConversionContext(
+                    expression.getTypeDescriptor(),
+                    TypeDescriptors.get().javaLangObject,
+                    expression);
+              }
+
+              @Override
               public Expression rewriteMemberQualifierContext(
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
