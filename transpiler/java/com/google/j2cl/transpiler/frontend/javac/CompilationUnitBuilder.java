@@ -1372,19 +1372,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     List<Expression> arguments =
         convertArguments(methodDescriptor, methodInvocation.getArguments());
 
-    if (isSuperConstructorCall(methodInvocation)) {
-      return MethodCall.Builder.from(methodDescriptor)
-          .setQualifier(qualifier)
-          .setArguments(arguments)
-          .setSourcePosition(getSourcePosition(methodInvocation))
-          .build();
-    }
-
     boolean isStaticDispatch =
         qualifier instanceof SuperReference superReference
             && (superReference.isQualified()
-                || qualifier.getTypeDescriptor().isInterface()
-                || methodDescriptor.isDefaultMethod());
+                || methodDescriptor.getEnclosingTypeDescriptor().isInterface());
 
     return MethodCall.Builder.from(methodDescriptor)
         .setQualifier(qualifier)
@@ -1558,13 +1549,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // literals, etc. and are handled when processing the parent node.
     checkState(identifier.sym instanceof ClassSymbol);
     return null;
-  }
-
-  private static boolean isSuperConstructorCall(JCMethodInvocation methodInvocation) {
-    if (methodInvocation.getMethodSelect() instanceof JCIdent identifier) {
-      return identifier.getName().contentEquals("super");
-    }
-    return false;
   }
 
   private Expression convertParens(JCParens expression) {
