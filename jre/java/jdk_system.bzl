@@ -3,9 +3,7 @@
 load("@rules_java//java:defs.bzl", "JavaInfo", "java_common")
 
 def _jdk_system(ctx):
-    # TODO(goktug): Use header jar for open-source when Bazel with new Turbine is available.
-    bootclasspath = ctx.file.bootclasspath
-
+    bootclasspath = ctx.attr.bootclasspath[JavaInfo].compile_jars.to_list()[0]
     system = ctx.actions.declare_directory("%s" % ctx.label.name)
     java_runtime = ctx.attr._runtime[java_common.JavaRuntimeInfo]
     zip_tool = ctx.executable._zip
