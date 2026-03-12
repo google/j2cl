@@ -1159,44 +1159,52 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   @Nullable
   private Expression convertFieldAccess(JCFieldAccess fieldAccess) {
     JCExpression expression = fieldAccess.getExpression();
-    if (fieldAccess.name.contentEquals("class")) {
-      // Type literals (Type.class) are seen as a qualified field accesses to a field named "class"
-      // with its qualifier being the type accessible through `expression.type`.
-      return new TypeLiteral(
-          getSourcePosition(fieldAccess), environment.createTypeDescriptor(expression.type));
-    }
 
-    if (fieldAccess.name.contentEquals("this")) {
+    // Handle special cases that are modeled as field accesses with a special field names.
+    switch (fieldAccess.name.toString()) {
       // Qualified `this` expressions are seen as a qualified field accesses to a field named "this"
       // with its qualifier being the type accessible through `expression.type`.
-      return new ThisReference(
-          environment.createDeclaredTypeDescriptor(expression.type), /* isQualified= */ true);
-    }
-    if (fieldAccess.name.contentEquals("super")) {
+      case "this" -> {
+        return new ThisReference(
+            environment.createDeclaredTypeDescriptor(expression.type), /* isQualified= */ true);
+      }
+
       // Qualified `super` expressions are seen as a qualified field accesses to a field named
       // "super" with its qualifier being the type accessible through `expression.type`.
-      DeclaredTypeDescriptor typeDescriptor =
-          environment.createDeclaredTypeDescriptor(expression.type);
+      case "super" -> {
+        DeclaredTypeDescriptor typeDescriptor =
+            environment.createDeclaredTypeDescriptor(expression.type);
 
-      if (typeDescriptor.isInterface()) {
-        // Don't consider calls that select a default method in the super hierarchy as qualified.
-        // This qualified super expression can only be a qualifier of a method call. The actual
-        // class where the method resides will be present in the target of the method call that has
-        // this expression as its qualifier (this is the same modeling we do for the Kotlin
-        // frontend).
-        return new SuperReference(getCurrentType().getTypeDescriptor());
+        if (typeDescriptor.isInterface()) {
+          // Don't consider calls that select a default method in the super hierarchy as qualified.
+          // This qualified super expression can only be a qualifier of a method call. The actual
+          // class where the method resides will be present in the target of the method call that
+          // has this expression as its qualifier (this is the same modeling we do for the Kotlin
+          // frontend).
+          return new SuperReference(getCurrentType().getTypeDescriptor());
+        }
+
+        // This is a qualified super expression referring to an enclosing class.
+        return new SuperReference(typeDescriptor, /* isQualified= */ true);
       }
 
-      // This is a qualified super expression referring to an enclosing class.
-      return new SuperReference(typeDescriptor, /* isQualified= */ true);
+      // Type literals (Type.class) are seen as a qualified field accesses to a field named "class"
+      // with its qualifier being the type accessible through `expression.type`.
+      case "class" -> {
+        return new TypeLiteral(
+            getSourcePosition(fieldAccess), environment.createTypeDescriptor(expression.type));
+      }
+
+      // The `length` field is special, but only in array types.
+      case "length" -> {
+        if (expression.type.getKind() == TypeKind.ARRAY) {
+          return ArrayLength.newBuilder().setArrayExpression(convertExpression(expression)).build();
+        }
+      }
     }
-    Expression qualifier;
-    if (fieldAccess.sym instanceof VariableElement variableElement) {
-      qualifier = convertExpression(expression);
-      if (fieldAccess.name.contentEquals("length") && qualifier.getTypeDescriptor().isArray()) {
-        return ArrayLength.newBuilder().setArrayExpression(qualifier).build();
-      }
 
+    if (fieldAccess.sym.baseSymbol() instanceof VariableElement variableElement) {
+      Expression qualifier = convertExpression(expression);
       DeclaredTypeDescriptor parameterizedEnclosingType =
           getParameterizedEnclosingType(
               environment.createDeclaredTypeDescriptor(
@@ -1450,7 +1458,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 methodType.getReturnType(), methodType.getReturnType().tsym)
             : JavaEnvironment.getTypeSubstitution(methodType, methodSymbol);
 
-    // Use the raw upperbound for unparamterized type variables.
+    // Use the raw upperbound for unparameterized type variables.
     for (var tv :
         unparameterizedEnclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors()) {
       enclosingTypeArguments.put(tv, tv.toRawTypeDescriptor());
@@ -1507,12 +1515,17 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
    * </ul>
    */
   private Expression convertIdent(JCIdent identifier) {
-    if (isThisExpression(identifier)) {
-      return new ThisReference(getCurrentType().getTypeDescriptor());
+    switch (identifier.name.toString()) {
+      case "this" -> {
+        // Unqualified `this`.
+        return new ThisReference(getCurrentType().getTypeDescriptor());
+      }
+      case "super" -> {
+        // Unqualified `super`.
+        return new SuperReference(getCurrentType().getTypeDescriptor());
+      }
     }
-    if (isSuperExpression(identifier)) {
-      return new SuperReference(getCurrentType().getTypeDescriptor());
-    }
+
     // In some cases `identifier.sym` will point to a synthetic symbol for the field and not the
     // actual declaration `Symbol`. For those cases we need to get declaration `Symbol` by calling
     // `baseSymbol()`.
@@ -1548,24 +1561,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private static boolean isSuperConstructorCall(JCMethodInvocation methodInvocation) {
-    return isSuperExpression(methodInvocation.getMethodSelect());
-  }
-
-  private static boolean isSuperExpression(JCExpression expression) {
-    if (expression instanceof JCIdent identifier) {
+    if (methodInvocation.getMethodSelect() instanceof JCIdent identifier) {
       return identifier.getName().contentEquals("super");
-    }
-    return false;
-  }
-
-  private static boolean isQualifiedSuperExpression(JCExpression expression) {
-    return expression instanceof JCFieldAccess fieldAccess
-        && fieldAccess.getIdentifier().contentEquals("super");
-  }
-
-  private static boolean isThisExpression(JCExpression expression) {
-    if (expression instanceof JCIdent identifier) {
-      return identifier.getName().contentEquals("this");
     }
     return false;
   }
