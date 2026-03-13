@@ -78,6 +78,7 @@ import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
 import com.sun.tools.javac.code.Symbol.TypeVariableSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
+import com.sun.tools.javac.code.Symtab;
 import com.sun.tools.javac.code.TargetType;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.code.Type.CapturedType;
@@ -124,10 +125,11 @@ import javax.lang.model.type.WildcardType;
 
 /** Utility functions to interact with JavaC internal representations. */
 class JavaEnvironment {
-  JavacTypes javacTypes;
-  Types internalTypes;
-  JavacElements elements;
-  Problems problems;
+  private final JavacTypes javacTypes;
+  private final Types internalTypes;
+  private final JavacElements elements;
+  private final Symtab symtab;
+  private final Problems problems;
 
   JavaEnvironment(
       Context context, Collection<String> wellKnownQualifiedBinaryNames, Problems problems) {
@@ -135,6 +137,7 @@ class JavaEnvironment {
     this.javacTypes = JavacTypes.instance(context);
     this.internalTypes = Types.instance(context);
     this.elements = JavacElements.instance(context);
+    this.symtab = Symtab.instance(context);
 
     initWellKnownTypes(wellKnownQualifiedBinaryNames);
   }
@@ -315,8 +318,14 @@ class JavaEnvironment {
           .build();
     }
 
-    return withNullability(
-        createDeclaredType((ClassType) typeMirror, inNullMarkedScope), isNullable);
+    ClassType classType = (ClassType) typeMirror;
+    if (isSyntheticArrayClass(classType.asElement())) {
+      // For callers that don't need to handle the special cases we return `java.lang.Object` as the
+      // supertype of all array types.
+      return withNullability(TypeDescriptors.get().javaLangObject, isNullable);
+    }
+
+    return withNullability(createDeclaredType(classType, inNullMarkedScope), isNullable);
   }
 
   /**
@@ -692,13 +701,10 @@ class JavaEnvironment {
     // The enclosing type descriptor might be a subclass of the actual type descriptor, hence
     // traverse the supertypes to find the actual enclosing type descriptor without loosing the
     // parameterization.
+    var enclosingElement =
+        ((MethodSymbol) declarationMethodElement).baseSymbol().getEnclosingElement();
     DeclaredTypeDescriptor unparameterizedEnclosingTypeDescriptor =
-        fixEnclosingTypeDescriptor(
-            createDeclaredTypeDescriptor(
-                ((MethodSymbol) declarationMethodElement)
-                    .baseSymbol()
-                    .getEnclosingElement()
-                    .asType()));
+        createDeclaredTypeDescriptor(enclosingElement.asType());
 
     enclosingTypeDescriptor =
         enclosingTypeDescriptor.getAllSuperTypesIncludingSelf().stream()
@@ -740,18 +746,6 @@ class JavaEnvironment {
         parameterDescriptors,
         returnTypeDescriptor,
         typeArguments);
-  }
-
-  /** Replace non-existent synthetic enclosing classes with the appropriate class. */
-  // TODO(b/443070736): Reconsider whether to just do this in createDeclaredTypeDescriptor.
-  static DeclaredTypeDescriptor fixEnclosingTypeDescriptor(
-      DeclaredTypeDescriptor enclosingTypeDescriptor) {
-    // Methods on array types show an enclosing class of "Array" in the default package.
-    if (enclosingTypeDescriptor.getQualifiedSourceName().equals("Array")) {
-      // Return java.lang.Object since all methods on arrays are defined in it,
-      return TypeDescriptors.get().javaLangObject;
-    }
-    return enclosingTypeDescriptor;
   }
 
   private ImmutableList<ParameterDescriptor> convertParameterDescriptors(
@@ -816,6 +810,10 @@ class JavaEnvironment {
         (ExecutableType) methodElement.asType(),
         methodElement,
         ImmutableList.of());
+  }
+
+  ExecutableType convertToMemberOf(MethodSymbol constructorElement, Type targetType) {
+    return (ExecutableType) constructorElement.asMemberOf(targetType, internalTypes).asType();
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1608,6 +1606,17 @@ class JavaEnvironment {
 
   private static boolean isSynthetic(Element element) {
     return element instanceof Symbol s && (s.flags() & Flags.SYNTHETIC) != 0;
+  }
+
+  /**
+   * Returns {@code true} for the internal compiler class that represents arrays as a declared type.
+   *
+   * <p>Javac has a synthetic class as a supertype of all array types to have a place where to have
+   * the array specialised members like `length` and `clone()` (`clone` to specialize the return
+   * type).
+   */
+  public boolean isSyntheticArrayClass(Element element) {
+    return symtab.arrayClass == element;
   }
 
   private static boolean isAnnotatedWithKotlinMetadata(Element element) {

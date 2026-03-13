@@ -184,7 +184,6 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.ExecutableType;
 import javax.lang.model.type.TypeKind;
 
 /** Creates a J2CL Java AST from the AST provided by JavaC. */
@@ -1056,7 +1055,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     var functionalMethodDescriptor =
         expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
 
-    if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")
+    if (environment.isSyntheticArrayClass(methodSymbol.getEnclosingElement())
         && methodSymbol.isConstructor()) {
       // Arrays member references are seen as references to members on a class Array.
       // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing
@@ -1248,8 +1247,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodDescriptor constructorMethodDescriptor =
         environment.createMethodDescriptor(
             /* enclosingTypeDescriptor= */ enclosingTypeDescriptor,
-            /* methodType= */ (ExecutableType)
-                constructorElement.asMemberOf(expression.type, environment.internalTypes).asType(),
+            /* methodType= */ environment.convertToMemberOf(constructorElement, expression.type),
             /* declarationMethodElement= */ constructorElement,
             typeArguments);
     Expression qualifier = convertExpressionOrNull(expression.getEnclosingExpression());
@@ -1483,7 +1481,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private DeclaredTypeDescriptor getParameterizedEnclosingType(
       DeclaredTypeDescriptor enclosingTypeDescriptor, TypeDescriptor qualifierTypeDescriptor) {
 
-    enclosingTypeDescriptor = JavaEnvironment.fixEnclosingTypeDescriptor(enclosingTypeDescriptor);
     if (qualifierTypeDescriptor == null) {
       return enclosingTypeDescriptor;
     }
