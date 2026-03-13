@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// TODO(b/492223202): Remove when we upgrade to LV=2.3 (or -api-version=2.3)
+@file:Suppress("DEPRECATION_ERROR")
+
 package casttoprimitives
 
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
