@@ -150,7 +150,6 @@ public interface Map<K, V> {
         k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7, k8, v8, k9, v9, k10, v10);
   }
 
-  @JsIgnore
   static <K, V> Entry<K, V> entry(K key, V value) {
     // This isn't quite consistent with the javadoc, since this is serializable, while entry()
     // need not be serializable.
@@ -159,6 +158,12 @@ public interface Map<K, V> {
 
   @JsIgnore
   static <K, V> Map<K, V> ofEntries(Entry<? extends K, ? extends V>... entries) {
+    return Collections.internalMapFromEntries(Arrays.asList(entries));
+  }
+
+  /** Map.ofEntries API that is friendly to use from JavaScript. */
+  @JsMethod(name = "ofEntries")
+  static <K, V> Map<K, V> jsOfEntries(Entry<? extends K, ? extends V>... entries) {
     return Collections.internalMapFromEntries(Arrays.asList(entries));
   }
 
