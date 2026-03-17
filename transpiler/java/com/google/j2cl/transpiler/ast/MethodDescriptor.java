@@ -1388,6 +1388,22 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
+   * Returns the mapping between all the type variables in the type arguments.
+   *
+   * <p>Note: It does not include the mapping for wildcards; hence this parameterization is not
+   * enough to recreate a method descriptor from its declaration.
+   */
+  @Memoized
+  public Map<TypeVariable, TypeDescriptor> getLocalParameterization() {
+    Map<TypeVariable, TypeDescriptor> parameterization = new LinkedHashMap<>();
+    Streams.forEachPair(
+        getDeclarationDescriptor().getTypeParameterTypeDescriptors().stream(),
+        getTypeArgumentTypeDescriptors().stream(),
+        parameterization::put);
+    return parameterization;
+  }
+
+  /**
    * Returns the mapping between all the type variables in the enclosing context and the type
    * arguments.
    *
@@ -1396,11 +1412,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   @Memoized
   public Map<TypeVariable, TypeDescriptor> getParameterization() {
-    Map<TypeVariable, TypeDescriptor> parameterization = new LinkedHashMap<>();
-    Streams.forEachPair(
-        getDeclarationDescriptor().getTypeParameterTypeDescriptors().stream(),
-        getTypeArgumentTypeDescriptors().stream(),
-        parameterization::put);
+    Map<TypeVariable, TypeDescriptor> parameterization =
+        new LinkedHashMap<>(getLocalParameterization());
     if (!isStatic()) {
       parameterization.putAll(getEnclosingTypeDescriptor().getParameterization());
     }

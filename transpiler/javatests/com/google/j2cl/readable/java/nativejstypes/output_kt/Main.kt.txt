@@ -34,6 +34,7 @@ import nativejstypes.Bar
 import nativejstypes.Bar.Inner
 import nativejstypes.BarInnerWithDotInName
 import nativejstypes.Foo
+import nativejstypes.GenericRegularClass
 import nativejstypes.Headers
 import nativejstypes.TopLevel
 import nativejstypes.TopLevel.Nested
@@ -120,6 +121,12 @@ open class Main {
    nested.x = 3
    val topLevelNestedReference: TopLevelNestedReference = TopLevelNestedReference()
    topLevelNestedReference.x = 4
+  }
+  
+  @JvmStatic
+  fun testGenericRegularClass() {
+   val genericRegularClass: GenericRegularClass<Foo?> = GenericRegularClass<Foo?>()
+   genericRegularClass.field = Foo()
   }
  }
 }

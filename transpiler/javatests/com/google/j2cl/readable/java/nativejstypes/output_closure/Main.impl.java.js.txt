@@ -8,6 +8,7 @@ let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let Bar = goog.forwardDeclare('nativejstypes.Bar');
 let $synthetic_nativejstypes_Bar = goog.forwardDeclare('nativejstypes.Bar');
+let GenericRegularClass = goog.forwardDeclare('nativejstypes.GenericRegularClass$impl');
 let TopLevel = goog.forwardDeclare('toplevel');
 let toplevel = goog.forwardDeclare('toplevel');
 let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
@@ -109,6 +110,12 @@ class Main extends j_l_Object {
   topLevelNestedReference.x = 4;
  }
  /** @nodts */
+ static m_testGenericRegularClass__void() {
+  Main.$clinit();
+  let genericRegularClass = /**@type {!GenericRegularClass<Foo>}*/ (GenericRegularClass.$create__());
+  genericRegularClass.f_field__nativejstypes_GenericRegularClass = new Foo();
+ }
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
@@ -126,6 +133,7 @@ class Main extends j_l_Object {
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   Bar = goog.module.get('nativejstypes.Bar');
   $synthetic_nativejstypes_Bar = goog.module.get('nativejstypes.Bar');
+  GenericRegularClass = goog.module.get('nativejstypes.GenericRegularClass$impl');
   TopLevel = goog.module.get('toplevel');
   toplevel = goog.module.get('toplevel');
   $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');

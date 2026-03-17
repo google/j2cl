@@ -93,6 +93,11 @@ public class Main {
     TopLevelNestedReference topLevelNestedReference = new TopLevelNestedReference();
     topLevelNestedReference.x = 4;
   }
+
+  public static void testGenericRegularClass() {
+    GenericRegularClass<Foo> genericRegularClass = new GenericRegularClass<>();
+    genericRegularClass.field = new Foo();
+  }
 }
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "gbigint")

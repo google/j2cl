@@ -30,24 +30,27 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         class MyNative {
           int primitiveField;
           String stringField;
-          C nativeField;
-          MyNative(int a, String b, C c) {}
-          native C test(int a, String b, C c);
-          // TODO(b/290267878): Uncomment when this case is correct.
-          // native <T extends MyNative> void test2(T t);
+          MyNative nativeField;
+          MyNative(int a, String b, MyNative c) {}
+          native MyNative test(int a, String b, MyNative c);
         }
         class MyNonNative {
           @JsMethod
-          static native C test(C c);
+          static native MyNative test(MyNative c);
         }
-        @JsType(isNative = true)
-        class C {}
+        class MyNonNative2<T extends MyNative> {
+          T field;
+          void method(T t) {}
+          @JsMethod
+          static native <E extends MyNative> void method2(E e);
+        }
         class Main {
           void test() {
             // Assignment and casting to null is allowed, even when the null literal is of unknown
             // type.
             MyNative n;
             n = (MyNative) null;
+            MyNonNative2<MyNative> r = new MyNonNative2<>();
           }
         }
         """);
@@ -295,6 +298,8 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
                 + " 'MyNativeType[]'. (b/261079024)",
             "Array creation 'new MyNativeType[1]' cannot be of type 'MyNativeType[]'."
                 + " (b/261079024)",
+            "Method MyNativeType[] Main.returnsTArray() cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
             "Variable 'arr' cannot be of type 'MyNativeType[]'. (b/261079024)",
             "Variable 'list' cannot be of type 'List<MyNativeType[]>'. (b/261079024)",
             "Cannot cast to Native type array 'MyNativeType[]'. (b/261079024)",
@@ -343,34 +348,39 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
               static class Buggy extends Main<MyNativeType> {}
             }
             """)
-        .assertErrorsWithoutSourcePosition(
-            "Field 'Main<T>.myNativeType' cannot be of type 'List<MyNativeType>'. (b/290992813)",
-            "Parameter 'p' in 'void Main.acceptsNativeTypeList(List<MyNativeType> p)' cannot be of"
-                + " type 'List<MyNativeType>'. (b/290992813)",
-            "Parameter 'p' in 'void Main.acceptsNativeTypeVarargsList(List<MyNativeType>... p)'"
-                + " cannot be of type 'List<MyNativeType>[]'. (b/290992813)",
-            "Return type of 'List<MyNativeType> Main.returnsNativeTypeList()' cannot be of type"
-                + " 'List<MyNativeType>'. (b/290992813)",
-            "Object creation 'new ArrayList.<init>()' cannot be of type 'ArrayList<MyNativeType>'."
-                + " (b/290992813)",
-            "Variable 'arr' cannot be of type 'List<MyNativeType>'. (b/290992813)",
-            "Cannot cast to type with Native type argument 'List<MyNativeType>'. (b/290992813)",
-            "Returned type in call to method 'List<MyNativeType> Main.returnsTList()'"
-                + " cannot be of type 'List<MyNativeType>'. (b/290992813)",
-            "Returned type in call to method 'MyNativeType Main.returnsT()' cannot be of type"
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:9: Type List<MyNativeType> cannot be parameterized with native JsType"
                 + " 'MyNativeType'. (b/290992813)",
-            "Native JsType 'MyNativeType' cannot be assigned to 'T'. (b/262009761)",
-            "Object creation 'new Main.<init>()' cannot be of type 'Main<MyNativeType>'."
-                + " (b/290992813)",
-            "Object creation 'new Main.<init>()' cannot be of type 'Main<List<MyNativeType>>'."
-                + " (b/290992813)",
-            "Returned type in call to method 'MyNativeType List.get(int)' cannot be of type"
+            "Error:Main.java:12: Type List<MyNativeType> cannot be parameterized with native JsType"
                 + " 'MyNativeType'. (b/290992813)",
-            "Reference to field 'Main<MyNativeType>.tList' cannot be of type 'List<MyNativeType>'."
-                + " (b/290992813)",
-            "Reference to field 'Main<List<MyNativeType>>.t' cannot be of type"
-                + " 'List<MyNativeType>'. (b/290992813)",
-            "Supertype of 'Buggy' cannot be of type 'Main<MyNativeType>'. (b/290992813)");
+            "Error:Main.java:13: Type List<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:14: Type List<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:19: Type ArrayList<MyNativeType> cannot be parameterized with native"
+                + " JsType 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:20: Type List<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:22: Method List<MyNativeType> Main.returnsTList() cannot be"
+                + " parameterized with native JsType 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:22: Type List<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:23: Method MyNativeType Main.returnsT() cannot be parameterized with"
+                + " native JsType 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:24: Method void Main.acceptsT(MyNativeType) cannot be parameterized"
+                + " with native JsType 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:24: Native JsType 'MyNativeType' cannot be assigned to 'T'."
+                + " (b/262009761)",
+            "Error:Main.java:25: Type Main<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:25: Type List<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:26: Type List<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:8: Type Main<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)",
+            "Error:Main.java:28: Type Main<MyNativeType> cannot be parameterized with native JsType"
+                + " 'MyNativeType'. (b/290992813)");
   }
 
   @CanIgnoreReturnValue

@@ -90,4 +90,9 @@ fun testTopLevel() {
   topLevelNestedReference.x = 4
 }
 
+fun testGenericRegularClass() {
+  val genericRegularClass = GenericRegularClass<Foo>()
+  genericRegularClass.field = Foo()
+}
+
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "gbigint") internal class GBigInt

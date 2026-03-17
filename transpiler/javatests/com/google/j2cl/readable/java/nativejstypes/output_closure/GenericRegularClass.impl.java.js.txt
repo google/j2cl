@@ -1,0 +1,47 @@
+goog.module('nativejstypes.GenericRegularClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('com.acme.MyFoo');
+
+/**
+ * @template T
+ */
+class GenericRegularClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?T} @nodts*/
+  this.f_field__nativejstypes_GenericRegularClass;
+ }
+ /** @nodts @template T @return {!GenericRegularClass<T>} */
+ static $create__() {
+  GenericRegularClass.$clinit();
+  let $instance = new GenericRegularClass();
+  $instance.$ctor__nativejstypes_GenericRegularClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_GenericRegularClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericRegularClass.$clinit = () =>{};
+  GenericRegularClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericRegularClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericRegularClass, 'nativejstypes.GenericRegularClass');
+
+exports = GenericRegularClass;
+
+//# sourceMappingURL=GenericRegularClass.js.map

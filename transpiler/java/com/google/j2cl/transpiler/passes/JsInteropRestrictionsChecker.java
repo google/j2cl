@@ -290,14 +290,65 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkNativeTypeArguments(Type type) {
-    checkAllowedTypes(
-        type,
-        TypeDescriptor::isNative,
-        /* onlyCheckTypeSpecialization= */ true,
-        // Native type arrays are checked elsewhere.
-        /* checkArrayComponent= */ false,
-        /* disallowedTypeDescription= */ "type with Native type argument",
-        /* messageSuffix= */ " (b/290992813)");
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
+            checkTypeDescriptor(methodDescriptor.getReturnTypeDescriptor());
+            checkParameterization(
+                "Method", methodDescriptor, methodDescriptor.getLocalParameterization());
+          }
+
+          @Override
+          public void exitFieldDescriptor(FieldDescriptor fieldDescriptor) {
+            checkTypeDescriptor(fieldDescriptor.getTypeDescriptor());
+          }
+
+          @Override
+          public void exitVariable(Variable variable) {
+            checkTypeDescriptor(variable.getTypeDescriptor());
+          }
+
+          @Override
+          public void exitType(Type type) {
+            type.getSuperTypesStream().forEach(this::checkTypeDescriptor);
+          }
+
+          void checkTypeDescriptor(TypeDescriptor typeDescriptor) {
+            if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
+              checkParameterization(
+                  "Type", typeDescriptor, declaredTypeDescriptor.getParameterization());
+            } else if (typeDescriptor instanceof ArrayTypeDescriptor arrayTypeDescriptor) {
+              checkTypeDescriptor(arrayTypeDescriptor.getComponentTypeDescriptor());
+            }
+          }
+
+          private void checkParameterization(
+              String prefix,
+              HasReadableDescription context,
+              Map<TypeVariable, TypeDescriptor> parameterization) {
+            parameterization.forEach(
+                (tv, value) -> {
+                  if (tv.toRawTypeDescriptor().isNative() != value.isNative()) {
+                    problems.error(
+                        getBestSourcePosition(),
+                        "%s %s cannot be parameterized with native JsType '%s'. (b/290992813)",
+                        prefix,
+                        context.getReadableDescription(),
+                        value.getReadableDescription());
+                  }
+                });
+          }
+
+          private SourcePosition getBestSourcePosition() {
+            HasSourcePosition hasSourcePosition =
+                ((HasSourcePosition) getParent(HasSourcePosition.class::isInstance));
+            if (hasSourcePosition == null) {
+              hasSourcePosition = getCurrentType();
+            }
+            return hasSourcePosition.getSourcePosition();
+          }
+        });
   }
 
   private void checkNativeTypeArrays(Type type) {
