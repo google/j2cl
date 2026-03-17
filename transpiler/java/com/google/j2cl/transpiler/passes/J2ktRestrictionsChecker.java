@@ -244,6 +244,11 @@ public final class J2ktRestrictionsChecker {
               return;
             }
 
+            // TODO(b/493518121): Remove when anonymous classes have default visibility.
+            if (typeDeclaration.isAnonymous()) {
+              return;
+            }
+
             Visibility visibility = typeDeclaration.getVisibility();
             Visibility superVisibility = superTypeDeclaration.getVisibility();
             if (isWiderThan(visibility, superVisibility)) {

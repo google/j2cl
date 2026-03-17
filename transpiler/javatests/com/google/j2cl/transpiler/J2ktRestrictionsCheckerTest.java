@@ -85,6 +85,22 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
                 + " super type 'Pkg' (default).");
   }
 
+  public void testAnonymousClassVisibilitySucceeds() {
+    newTranspilerTester()
+        .addNullMarkPackageInfo("test")
+        .addCompilationUnit(
+            "test.Main",
+            """
+            class Pkg {}
+            public class Main {
+              Pkg m() {
+                return new Pkg() {};
+              }
+            }
+            """)
+        .assertTranspileSucceeds();
+  }
+
   public void testInterfaceVisibilityWarnings() {
     newTranspilerTester()
         .addNullMarkPackageInfo("test")
