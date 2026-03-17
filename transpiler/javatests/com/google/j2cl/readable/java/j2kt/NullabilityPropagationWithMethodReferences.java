@@ -33,8 +33,8 @@ public final class NullabilityPropagationWithMethodReferences {
       Foo create();
     }
 
-    public interface ArrayFactory {
-      Foo[] create(int size);
+    public interface ArrayFactory<T extends @Nullable Object> {
+      T[] create(int size);
     }
   }
 
@@ -54,7 +54,11 @@ public final class NullabilityPropagationWithMethodReferences {
     return apply(foo::copy);
   }
 
-  public static Foo.ArrayFactory testNewArray() {
+  public static Foo.ArrayFactory<Foo> testNewArray() {
     return apply(Foo[]::new);
+  }
+
+  public static Foo.ArrayFactory<@Nullable Foo> testNullableNewArray() {
+    return apply(@Nullable Foo[]::new);
   }
 }
