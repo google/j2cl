@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -129,7 +130,10 @@ public class ImplementStaticInitializationViaConditionChecks
 
   private static MethodDescriptor createPrivateDescriptor(MethodDescriptor descriptor) {
     return descriptor.transform(
-        m -> m.setVisibility(Visibility.PRIVATE).setName(descriptor.getName() + "_$private"));
+        m ->
+            m.setOriginalJsInfo(JsInfo.NONE)
+                .setVisibility(Visibility.PRIVATE)
+                .setName(descriptor.getName() + "_$private"));
   }
 
   /** Implements the static initialization method ($clinit). */
