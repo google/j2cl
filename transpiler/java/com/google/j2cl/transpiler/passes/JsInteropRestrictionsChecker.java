@@ -356,7 +356,6 @@ public class JsInteropRestrictionsChecker {
         type,
         TypeDescriptor::isNativeJsArray,
         /* onlyCheckTypeSpecialization= */ false,
-        /* checkArrayComponent= */ true,
         /* disallowedTypeDescription= */ "Native type array",
         /* messageSuffix= */ " (b/261079024)");
   }
@@ -891,7 +890,6 @@ public class JsInteropRestrictionsChecker {
         type,
         AstUtils::isNonNativeJsEnumArray,
         /* onlyCheckTypeSpecialization= */ true,
-        /* checkArrayComponent= */ true,
         /* disallowedTypeDescription= */ "JsEnum array type",
         /* messageSuffix= */ "");
 
@@ -909,14 +907,12 @@ public class JsInteropRestrictionsChecker {
                 expressionTypeDescriptor,
                 expressionTypeDescriptor,
                 AstUtils::isNonNativeJsEnumArray,
-                /* onlyCheckTypeSpecialization= */ false,
-                /* checkArrayComponent= */ true)
+                /* onlyCheckTypeSpecialization= */ false)
             || hasDisallowedType(
                 toTypeDescriptor,
                 toTypeDescriptor,
                 AstUtils::isNonNativeJsEnumArray,
-                /* onlyCheckTypeSpecialization= */ false,
-                /* checkArrayComponent= */ true));
+                /* onlyCheckTypeSpecialization= */ false));
   }
 
   private static boolean isDisallowedJsEnumArrayOverride(
@@ -930,8 +926,7 @@ public class JsInteropRestrictionsChecker {
             expressionTypeDescriptor,
             expressionTypeDescriptor,
             AstUtils::isNonNativeJsEnumArray,
-            /* onlyCheckTypeSpecialization= */ false,
-            /* checkArrayComponent= */ true);
+            /* onlyCheckTypeSpecialization= */ false);
   }
 
   private void checkJsEnumSwitchUsage(Type type) {
@@ -2701,7 +2696,6 @@ public class JsInteropRestrictionsChecker {
       Type type,
       Predicate<TypeDescriptor> isTypeDisallowed,
       boolean onlyCheckTypeSpecialization,
-      boolean checkArrayComponent,
       String disallowedTypeDescription,
       String messageSuffix) {
     type.accept(
@@ -2717,7 +2711,6 @@ public class JsInteropRestrictionsChecker {
                 superTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                checkArrayComponent,
                 nestedType.getSourcePosition(),
                 messageSuffix,
                 "Supertype of '%s'",
@@ -2737,7 +2730,6 @@ public class JsInteropRestrictionsChecker {
                 variableTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                checkArrayComponent,
                 sourcePosition == SourcePosition.NONE
                     ? getCurrentMember().getSourcePosition()
                     : sourcePosition,
@@ -2751,13 +2743,7 @@ public class JsInteropRestrictionsChecker {
             checkMethodSignature(
                 method,
                 Predicates.not(
-                    t ->
-                        hasDisallowedType(
-                            t,
-                            t,
-                            isTypeDisallowed,
-                            onlyCheckTypeSpecialization,
-                            checkArrayComponent)),
+                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)),
                 messageSuffix);
           }
 
@@ -2766,13 +2752,7 @@ public class JsInteropRestrictionsChecker {
             checkMethodSignature(
                 functionExpression,
                 Predicates.not(
-                    t ->
-                        hasDisallowedType(
-                            t,
-                            t,
-                            isTypeDisallowed,
-                            onlyCheckTypeSpecialization,
-                            checkArrayComponent)),
+                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)),
                 messageSuffix);
           }
 
@@ -2785,7 +2765,6 @@ public class JsInteropRestrictionsChecker {
                 fieldTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                checkArrayComponent,
                 field.getSourcePosition(),
                 messageSuffix,
                 "Field '%s'",
@@ -2806,7 +2785,6 @@ public class JsInteropRestrictionsChecker {
                 declaredTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
                 messageSuffix,
                 "Reference to field '%s'",
@@ -2828,7 +2806,6 @@ public class JsInteropRestrictionsChecker {
                 declaredTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
                 messageSuffix,
                 "Returned type in call to method '%s'",
@@ -2843,7 +2820,6 @@ public class JsInteropRestrictionsChecker {
                 newArrayTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
                 messageSuffix,
                 "Array creation '%s'",
@@ -2860,7 +2836,6 @@ public class JsInteropRestrictionsChecker {
                 instanceTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                checkArrayComponent,
                 getCurrentMember().getSourcePosition(),
                 messageSuffix,
                 "Object creation '%s'",
@@ -2876,8 +2851,7 @@ public class JsInteropRestrictionsChecker {
                 testTypeDescriptor,
                 testTypeDescriptor,
                 isTypeDisallowed,
-                onlyCheckTypeSpecialization,
-                checkArrayComponent)) {
+                onlyCheckTypeSpecialization)) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against %s '%s'.%s",
@@ -2894,8 +2868,7 @@ public class JsInteropRestrictionsChecker {
                 castTypeDescriptor,
                 castTypeDescriptor,
                 isTypeDisallowed,
-                onlyCheckTypeSpecialization,
-                checkArrayComponent)) {
+                onlyCheckTypeSpecialization)) {
               // TODO(b/65465035): Emit the expression source position when it is tracked.
               problems.error(
                   getCurrentMember().getSourcePosition(),
@@ -2914,7 +2887,6 @@ public class JsInteropRestrictionsChecker {
       TypeDescriptor declaredTypeDescriptor,
       Predicate<TypeDescriptor> isTypeDisallowed,
       boolean onlyCheckTypeSpecialization,
-      boolean checkArrayComponent,
       SourcePosition sourcePosition,
       String messageSuffix,
       @FormatString String messagePrefixFormat,
@@ -2923,8 +2895,7 @@ public class JsInteropRestrictionsChecker {
         inferredTypeDescriptor,
         declaredTypeDescriptor,
         isTypeDisallowed,
-        onlyCheckTypeSpecialization,
-        checkArrayComponent)) {
+        onlyCheckTypeSpecialization)) {
       problems.error(
           sourcePosition,
           "%s cannot be of type '%s'.%s",
@@ -2942,8 +2913,7 @@ public class JsInteropRestrictionsChecker {
       TypeDescriptor inferredTypeDescriptor,
       TypeDescriptor declaredTypeDescriptor,
       Predicate<TypeDescriptor> isTypeDisallowed,
-      boolean onlyCheckTypeSpecialization,
-      boolean checkArrayComponent) {
+      boolean onlyCheckTypeSpecialization) {
     if (!onlyCheckTypeSpecialization && isTypeDisallowed.test(inferredTypeDescriptor)) {
       return true;
     }
@@ -2963,24 +2933,13 @@ public class JsInteropRestrictionsChecker {
     if (inferredTypeDescriptor.isArray()) {
       ArrayTypeDescriptor inferredArrayTypeDescriptor =
           (ArrayTypeDescriptor) inferredTypeDescriptor;
-      if (checkArrayComponent) {
-        return hasDisallowedType(
-            inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
-            declaredTypeDescriptor.isArray()
-                ? ((ArrayTypeDescriptor) declaredTypeDescriptor).getComponentTypeDescriptor()
-                : inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
-            isTypeDisallowed,
-            onlyCheckTypeSpecialization,
-            checkArrayComponent);
-      }
-
-      // If we don't check array components (`A` in `A[]`), we should still check the type arguments
-      // of the leaf type (for example, `A` in `List<A>[][]`).
-      inferredTypeDescriptor = inferredArrayTypeDescriptor.getLeafTypeDescriptor();
-      declaredTypeDescriptor =
+      return hasDisallowedType(
+          inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
           declaredTypeDescriptor.isArray()
-              ? ((ArrayTypeDescriptor) declaredTypeDescriptor).getLeafTypeDescriptor()
-              : inferredArrayTypeDescriptor.getLeafTypeDescriptor();
+              ? ((ArrayTypeDescriptor) declaredTypeDescriptor).getComponentTypeDescriptor()
+              : inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
+          isTypeDisallowed,
+          onlyCheckTypeSpecialization);
     }
 
     if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
@@ -2996,8 +2955,7 @@ public class JsInteropRestrictionsChecker {
                 ? declaredTypeArguments.get(typeArgIndex)
                 : inferredTypeArguments.get(typeArgIndex),
             isTypeDisallowed,
-            /* onlyCheckTypeSpecialization= */ false,
-            checkArrayComponent)) {
+            /* onlyCheckTypeSpecialization= */ false)) {
           return true;
         }
       }
