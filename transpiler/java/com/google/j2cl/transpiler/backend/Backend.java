@@ -261,6 +261,7 @@ public enum Backend {
           library,
           problems,
           /* checkWasmRestrictions= */ false,
+          /* checkWasmCustomDescriptorsJsInterop= */ false,
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
     }
@@ -460,6 +461,8 @@ public enum Backend {
           library,
           problems,
           /* checkWasmRestrictions= */ true,
+          /* checkWasmCustomDescriptorsJsInterop= */ options
+              .getEnableWasmCustomDescriptorsJsInterop(),
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
     }

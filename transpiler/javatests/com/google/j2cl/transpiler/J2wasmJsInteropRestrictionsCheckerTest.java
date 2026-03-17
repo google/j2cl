@@ -13,6 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithWasmCustomDescriptorsJsInteropEnabled;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithWasmDefaults;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -383,9 +384,41 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
                 + " 'MyNativeType'. (b/290992813)");
   }
 
+  public void testExportedTypePassedToNativeMethodSucceeds() {
+    assertTranspileSucceedsWithCustomDescriptorsJsInteropEnabled(
+        "test.MyNative",
+        """
+        import jsinterop.annotations.*;
+        @JsType
+        class MyJsType {
+          public void m() {}
+        }
+        class Main {
+          @JsMethod
+          static native void acceptJsType(MyJsType jsType);
+
+          @JsMethod
+          static native MyJsType returnJsType();
+
+          private static void test() {
+            acceptJsType(new MyJsType());
+            MyJsType jsType = returnJsType();
+          }
+        }
+        """);
+  }
+
   @CanIgnoreReturnValue
   private TranspileResult assertTranspileSucceeds(String compilationUnitName, String code) {
     return newTesterWithWasmDefaults()
+        .addCompilationUnit(compilationUnitName, code)
+        .assertTranspileSucceeds();
+  }
+
+  @CanIgnoreReturnValue
+  private TranspileResult assertTranspileSucceedsWithCustomDescriptorsJsInteropEnabled(
+      String compilationUnitName, String code) {
+    return newTesterWithWasmCustomDescriptorsJsInteropEnabled()
         .addCompilationUnit(compilationUnitName, code)
         .assertTranspileSucceeds();
   }

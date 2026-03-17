@@ -102,6 +102,13 @@ public class TranspilerTester {
             "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle-j2wasm_system");
   }
 
+  /**
+   * Creates a new transpiler tester initialized with WASM custom descriptors JS interop enabled.
+   */
+  public static TranspilerTester newTesterWithWasmCustomDescriptorsJsInteropEnabled() {
+    return newTesterWithWasmDefaults().addArgs("-experimentalEnableWasmCustomDescriptorsJsInterop");
+  }
+
   public static TranspilerTester newTesterWithEntryPointValidatorDefaults() {
     return newTester()
         .noAssertDelayedCancelChecks()

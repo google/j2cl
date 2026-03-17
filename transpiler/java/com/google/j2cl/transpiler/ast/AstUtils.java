@@ -1334,6 +1334,53 @@ public final class AstUtils {
     return node.getAnnotation("javaemul.internal.annotations.Wasm") != null;
   }
 
+  /**
+   * Returns true if the given type should have a JS prototype populated in Wasm.
+   *
+   * <p>A new prototype is populated if the type adds exported members.
+   */
+  public static boolean hasWasmJsPrototype(TypeDeclaration typeDeclaration) {
+    return !typeDeclaration.isNative()
+        && !typeDeclaration.isInterface()
+        && (typeDeclaration.getDeclaredMethodDescriptors().stream()
+                .anyMatch(
+                    methodDescriptor -> AstUtils.canBeReferencedExternallyWasm(methodDescriptor))
+            || typeDeclaration.getDeclaredFieldDescriptors().stream()
+                .anyMatch(
+                    fieldDescriptor -> AstUtils.canBeReferencedExternallyWasm(fieldDescriptor)));
+  }
+
+  /**
+   * Returns the first supertype of the given type that has a JS prototype in Wasm, including the
+   * type itself.
+   *
+   * <p>If no supertype has a JS prototype, returns null.
+   */
+  @Nullable
+  public static DeclaredTypeDescriptor findSuperTypeWithWasmJsPrototypeIncludingSelf(
+      TypeDeclaration typeDeclaration) {
+    return findSuperTypeWithWasmJsPrototypeIncludingSelf(typeDeclaration.toDescriptor());
+  }
+
+  /**
+   * Returns the first supertype of the given type that has a JS prototype in Wasm, including the
+   * type itself.
+   *
+   * <p>If no supertype has a JS prototype, returns null.
+   */
+  @Nullable
+  public static DeclaredTypeDescriptor findSuperTypeWithWasmJsPrototypeIncludingSelf(
+      @Nullable DeclaredTypeDescriptor typeDescriptor) {
+    DeclaredTypeDescriptor superTypeWithJsPrototype = typeDescriptor;
+    while (superTypeWithJsPrototype != null) {
+      if (hasWasmJsPrototype(superTypeWithJsPrototype.getTypeDeclaration())) {
+        return superTypeWithJsPrototype;
+      }
+      superTypeWithJsPrototype = superTypeWithJsPrototype.getSuperTypeDescriptor();
+    }
+    return null;
+  }
+
   /** Returns true if the specified member in Wasm can be referenced by JS. */
   public static boolean canBeReferencedExternallyWasm(MemberDescriptor memberDescriptor) {
     return memberDescriptor.canBeReferencedExternally()

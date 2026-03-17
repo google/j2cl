@@ -17,9 +17,9 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.findSuperTypeWithJsPrototypeIncludingSelf;
+import static com.google.j2cl.transpiler.ast.AstUtils.findSuperTypeWithWasmJsPrototypeIncludingSelf;
+import static com.google.j2cl.transpiler.ast.AstUtils.hasWasmJsPrototype;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
-import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.hasJsPrototype;
 import static java.lang.String.format;
 
 import com.google.common.collect.ImmutableList;
@@ -268,7 +268,7 @@ public class WasmConstructsGenerator {
   }
 
   void renderJsPrototypeImport(Type type) {
-    if (!hasJsPrototype(type.getDeclaration())) {
+    if (!hasWasmJsPrototype(type.getDeclaration())) {
       return;
     }
     String name = environment.getJsPrototypeGlobalName(type.getDeclaration());
@@ -598,7 +598,7 @@ public class WasmConstructsGenerator {
     builder.indent();
     if (environment.isCustomDescriptorsJsInteropEnabled()) {
       // The first field of the vtable for JsTypes is the JS prototype.
-      var jsPrototypeType = findSuperTypeWithJsPrototypeIncludingSelf(implementedType);
+      var jsPrototypeType = findSuperTypeWithWasmJsPrototypeIncludingSelf(implementedType);
       builder.newLine();
       if (jsPrototypeType != null) {
         builder.append(

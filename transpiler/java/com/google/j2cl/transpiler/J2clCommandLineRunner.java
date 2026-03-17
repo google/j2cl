@@ -133,6 +133,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-generateWasmExport", hidden = true)
   List<String> wasmEntryPoints = new ArrayList<>();
 
+  @Option(name = "-experimentalEnableWasmCustomDescriptorsJsInterop", hidden = true)
+  boolean enableWasmCustomDescriptorsJsInterop = false;
+
   @Option(name = "-forbiddenAnnotation", hidden = true)
   List<String> forbiddenAnnotations = new ArrayList<>();
 
@@ -215,6 +218,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setFrontend(this.frontend)
         .setBackend(this.backend)
         .setWasmEntryPointStrings(wasmEntryPoints)
+        .setEnableWasmCustomDescriptorsJsInterop(this.enableWasmCustomDescriptorsJsInterop)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)

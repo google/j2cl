@@ -105,15 +105,21 @@ public class JsInteropRestrictionsChecker {
       Library library,
       Problems problems,
       boolean checkWasmRestrictions,
+      boolean checkWasmCustomDescriptorsJsInterop,
       boolean isNullMarkedSupported,
       boolean optimizeAutoValue) {
     new JsInteropRestrictionsChecker(
-            problems, checkWasmRestrictions, isNullMarkedSupported, optimizeAutoValue)
+            problems,
+            checkWasmRestrictions,
+            checkWasmCustomDescriptorsJsInterop,
+            isNullMarkedSupported,
+            optimizeAutoValue)
         .checkLibrary(library);
   }
 
   private final Problems problems;
   private final boolean checkWasmRestrictions;
+  private final boolean checkWasmCustomDescriptorsJsInterop;
   private final boolean isNullMarkedSupported;
   private final boolean optimizeAutoValue;
   private boolean wasUnusableByJsWarningReported = false;
@@ -121,10 +127,12 @@ public class JsInteropRestrictionsChecker {
   private JsInteropRestrictionsChecker(
       Problems problems,
       boolean checkWasmRestrictions,
+      boolean checkWasmCustomDescriptorsJsInterop,
       boolean isNullMarkedSupported,
       boolean optimizeAutoValue) {
     this.problems = problems;
     this.checkWasmRestrictions = checkWasmRestrictions;
+    this.checkWasmCustomDescriptorsJsInterop = checkWasmCustomDescriptorsJsInterop;
     this.isNullMarkedSupported = isNullMarkedSupported;
     this.optimizeAutoValue = optimizeAutoValue;
   }
@@ -1716,17 +1724,21 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    checkMethodSignature(method, JsInteropRestrictionsChecker::canCrossWasmJavaScriptBoundary, "");
+    checkMethodSignature(method, this::canCrossWasmJavaScriptBoundary, "");
   }
 
   /**
    * Checks whether the specified type can be imported from JavaScript or exported to JavaScript
    * from Wasm.
    */
-  private static boolean canCrossWasmJavaScriptBoundary(TypeDescriptor typeDescriptor) {
+  private boolean canCrossWasmJavaScriptBoundary(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
         || TypeDescriptors.isJavaLangString(typeDescriptor)
-        || typeDescriptor.isNative();
+        || typeDescriptor.isNative()
+        || (checkWasmCustomDescriptorsJsInterop
+            && typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
+            && AstUtils.findSuperTypeWithWasmJsPrototypeIncludingSelf(declaredTypeDescriptor)
+                != null);
   }
 
   private void checkMethodSignature(

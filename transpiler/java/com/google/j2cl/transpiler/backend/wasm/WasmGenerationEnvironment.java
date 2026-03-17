@@ -30,7 +30,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -486,52 +485,6 @@ public class WasmGenerationEnvironment {
     }
 
     return typeDeclaration.getSuperTypeDeclaration();
-  }
-
-  /**
-   * Returns true if the given type should have a JS prototype generated and configured in
-   * configureAll.
-   */
-  public static boolean hasJsPrototype(TypeDeclaration typeDeclaration) {
-    return !typeDeclaration.isNative()
-        && !typeDeclaration.isInterface()
-        && (typeDeclaration.getDeclaredMethodDescriptors().stream()
-                .anyMatch(
-                    methodDescriptor -> AstUtils.canBeReferencedExternallyWasm(methodDescriptor))
-            || typeDeclaration.getDeclaredFieldDescriptors().stream()
-                .anyMatch(
-                    fieldDescriptor -> AstUtils.canBeReferencedExternallyWasm(fieldDescriptor)));
-  }
-
-  /**
-   * Returns the first supertype of the given type that has a JS prototype, including the type
-   * itself.
-   *
-   * <p>If no supertype has a JS prototype, returns null.
-   */
-  @Nullable
-  public static DeclaredTypeDescriptor findSuperTypeWithJsPrototypeIncludingSelf(
-      TypeDeclaration typeDeclaration) {
-    return findSuperTypeWithJsPrototypeIncludingSelf(typeDeclaration.toDescriptor());
-  }
-
-  /**
-   * Returns the first supertype of the given type that has a JS prototype, including the type
-   * itself.
-   *
-   * <p>If no supertype has a JS prototype, returns null.
-   */
-  @Nullable
-  public static DeclaredTypeDescriptor findSuperTypeWithJsPrototypeIncludingSelf(
-      @Nullable DeclaredTypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor superTypeWithJsPrototype = typeDescriptor;
-    while (superTypeWithJsPrototype != null) {
-      if (hasJsPrototype(superTypeWithJsPrototype.getTypeDeclaration())) {
-        return superTypeWithJsPrototype;
-      }
-      superTypeWithJsPrototype = superTypeWithJsPrototype.getSuperTypeDescriptor();
-    }
-    return null;
   }
 
   /** Returns the name of the global that stores the JS prototype for JsTypes. */
