@@ -158,6 +158,8 @@ public interface Map<K, V> {
 
   @JsIgnore
   static <K, V> Map<K, V> ofEntries(Entry<? extends K, ? extends V>... entries) {
+    // This is not marked as JS method for symmetry with List.of and avoid extra cloning at
+    // call sites when an array is passed. A different method provided as Map.ofEntries to JS below.
     return Collections.internalMapFromEntries(Arrays.asList(entries));
   }
 
