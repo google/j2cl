@@ -22,10 +22,10 @@ import javaemul.lang.*
 import j2kt.NullabilityPropagationWithMethodReferences.Foo.ArrayFactory
 import j2kt.NullabilityPropagationWithMethodReferences.Foo.Factory
 import java.lang.RuntimeException
+import javaemul.lang.uninitializedArrayOf
 import kotlin.Array
 import kotlin.Int
 import kotlin.Suppress
-import kotlin.arrayOfNulls
 import kotlin.jvm.JvmStatic
 
 class NullabilityPropagationWithMethodReferences {
@@ -64,18 +64,18 @@ class NullabilityPropagationWithMethodReferences {
   
   @JvmStatic
   fun testNewArray(): ArrayFactory<Foo> {
-   return NullabilityPropagationWithMethodReferences.apply<ArrayFactory<Foo?>>(
+   return NullabilityPropagationWithMethodReferences.apply<ArrayFactory<Foo>>(
     ArrayFactory { arg0: Int ->
-     return@ArrayFactory arrayOfNulls<Foo>(arg0)
+     return@ArrayFactory uninitializedArrayOf<Foo>(arg0)
     },
-   ) as ArrayFactory<Foo>
+   )
   }
   
   @JvmStatic
   fun testNullableNewArray(): ArrayFactory<Foo?> {
    return NullabilityPropagationWithMethodReferences.apply<ArrayFactory<Foo?>>(
     ArrayFactory { arg0: Int ->
-     return@ArrayFactory arrayOfNulls<Foo>(arg0)
+     return@ArrayFactory uninitializedArrayOf<Foo>(arg0) as Array<Foo?>
     },
    )
   }

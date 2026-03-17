@@ -19,6 +19,7 @@
 package methodreferences
 
 import javaemul.lang.*
+import javaemul.lang.uninitializedArrayOf
 import jsinterop.annotations.JsFunction
 import kotlin.Any
 import kotlin.Array
@@ -36,7 +37,6 @@ import kotlin.Number
 import kotlin.ShortArray
 import kotlin.String
 import kotlin.Suppress
-import kotlin.arrayOfNulls
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.run
@@ -88,8 +88,8 @@ open class MethodReferences<T> {
    return@Producer ObjectCapturingOuter()
   }
   val arrayProducer: ArrayProducer<Any> = ArrayProducer { arg0_3: Int ->
-   return@ArrayProducer arrayOfNulls<Double>(arg0_3) as Array<Any?>
-  } as ArrayProducer<Any>
+   return@ArrayProducer uninitializedArrayOf<Double>(arg0_3) as Array<Any>
+  }
   objectFactory = run {
    val ______q_1: MethodReferences<Any> = MethodReferences<Any>()
    Producer {
@@ -124,16 +124,16 @@ open class MethodReferences<T> {
    return@Function DoubleArray(arg0_12.toInt())
   }
   val objectArrayFactory: Function<Int, Array<Any>> = Function { arg0_13: Int ->
-   return@Function arrayOfNulls<Any>(arg0_13.toInt())
-  } as Function<Int, Array<Any>>
+   return@Function uninitializedArrayOf<Any>(arg0_13.toInt())
+  }
   val nullableObjectArrayFactory: Function<Int, Array<Any?>> = Function { arg0_14: Int ->
-   return@Function arrayOfNulls<Any>(arg0_14.toInt())
+   return@Function uninitializedArrayOf<Any>(arg0_14.toInt()) as Array<Any?>
   }
   val stringArrayFactory: Function<Int, Array<String>> = Function { arg0_15: Int ->
-   return@Function arrayOfNulls<String>(arg0_15.toInt())
-  } as Function<Int, Array<String>>
+   return@Function uninitializedArrayOf<String>(arg0_15.toInt())
+  }
   val nullableStringArrayFactory: Function<Int, Array<String?>> = Function { arg0_16: Int ->
-   return@Function arrayOfNulls<String>(arg0_16.toInt())
+   return@Function uninitializedArrayOf<String>(arg0_16.toInt()) as Array<String?>
   }
   val superToStringProducer: Producer<String> = Producer {
    return@Producer super.toString()
@@ -154,8 +154,8 @@ open class MethodReferences<T> {
    return@JsFunctionInterface arg0_17.self_pp_methodreferences()
   }
   val jsarrayFactory: JsFunctionInterface<Int, Array<Any>> = JsFunctionInterface { arg0_18: Int ->
-   return@JsFunctionInterface arrayOfNulls<Any>(arg0_18.toInt())
-  } as JsFunctionInterface<Int, Array<Any>>
+   return@JsFunctionInterface uninitializedArrayOf<Any>(arg0_18.toInt())
+  }
   val jsSuperToStringProducer: JsProducer<String> = JsProducer {
    return@JsProducer super.toString()
   }

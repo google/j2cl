@@ -147,6 +147,7 @@ import com.sun.tools.javac.tree.JCTree.JCLabeledStatement;
 import com.sun.tools.javac.tree.JCTree.JCLambda;
 import com.sun.tools.javac.tree.JCTree.JCLiteral;
 import com.sun.tools.javac.tree.JCTree.JCMemberReference;
+import com.sun.tools.javac.tree.JCTree.JCMemberReference.ReferenceKind;
 import com.sun.tools.javac.tree.JCTree.JCMethodDecl;
 import com.sun.tools.javac.tree.JCTree.JCMethodInvocation;
 import com.sun.tools.javac.tree.JCTree.JCNewArray;
@@ -1055,19 +1056,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     var functionalMethodDescriptor =
         expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
 
-    if (environment.isSyntheticArrayClass(methodSymbol.getEnclosingElement())
-        && methodSymbol.isConstructor()) {
-      // Arrays member references are seen as references to members on a class Array.
-      // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing
-      // type descriptor and the MethodDescriptor are created in the right context.
-      var typeElement = (TypeElement) memberReference.getQualifierExpression().type.asElement();
-      boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
+    if (memberReference.kind == ReferenceKind.ARRAY_CTOR) {
       return ArrayCreationReference.newBuilder()
           .setTargetTypeDescriptor(
-              environment.createTypeDescriptor(
-                  memberReference.getQualifierExpression().type,
-                  inNullMarkedScope,
-                  ArrayTypeDescriptor.class))
+              environment
+                  .createTypeDescriptor(
+                      memberReference.getQualifierExpression().type,
+                      inNullMarkedScope(),
+                      ArrayTypeDescriptor.class)
+                  .toNonNullable())
           .setInterfaceMethodDescriptor(functionalMethodDescriptor)
           .setSourcePosition(getSourcePosition(memberReference))
           .build();

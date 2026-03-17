@@ -329,6 +329,17 @@ class JavaEnvironment {
   }
 
   /**
+   * Returns {@code true} for the internal compiler class that represents arrays as a declared type.
+   *
+   * <p>Javac has a synthetic class as a supertype of all array types to have a place where to have
+   * the array specialised members like `length` and `clone()` (`clone` to specialize the return
+   * type).
+   */
+  private boolean isSyntheticArrayClass(Element element) {
+    return symtab.arrayClass == element;
+  }
+
+  /**
    * Returns whether the given type binding should be nullable, according to the annotations on it
    * and if nullability is enabled for the package containing the binding.
    */
@@ -1606,17 +1617,6 @@ class JavaEnvironment {
 
   private static boolean isSynthetic(Element element) {
     return element instanceof Symbol s && (s.flags() & Flags.SYNTHETIC) != 0;
-  }
-
-  /**
-   * Returns {@code true} for the internal compiler class that represents arrays as a declared type.
-   *
-   * <p>Javac has a synthetic class as a supertype of all array types to have a place where to have
-   * the array specialised members like `length` and `clone()` (`clone` to specialize the return
-   * type).
-   */
-  public boolean isSyntheticArrayClass(Element element) {
-    return symtab.arrayClass == element;
   }
 
   private static boolean isAnnotatedWithKotlinMetadata(Element element) {
