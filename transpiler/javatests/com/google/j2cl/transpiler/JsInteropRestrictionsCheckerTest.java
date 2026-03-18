@@ -3884,14 +3884,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeDefaultConstructorSucceeds() {
     assertTranspileSucceeds(
             "test.Buggy",
-"""
+            """
             import jsinterop.annotations.*;
             @JsType(isNative = true)
             public class Buggy {}
-
-
-
-""")
+            """)
         .assertNoWarnings();
   }
 
