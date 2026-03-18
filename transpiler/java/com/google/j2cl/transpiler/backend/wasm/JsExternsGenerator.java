@@ -129,11 +129,7 @@ final class JsExternsGenerator {
   private void appendMethods(SourceBuilder sb, Type type) {
     for (Method method : type.getMethods()) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (!AstUtils.canBeReferencedExternallyWasm(methodDescriptor)
-          // Exclude generated export bridges. They do not have enough information, such as what
-          // they @Override, to generate the extern.
-          || methodDescriptor.getOrigin().isWasmJsExport()
-          || methodDescriptor.getOrigin().isWasmJsConstructorExport()
+      if (!AstUtils.needsWasmJsExport(methodDescriptor)
           // Constructors handled elsewhere.
           || isConstructor(methodDescriptor)
           // TODO(b/458472428): Support JsProperty.

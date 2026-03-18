@@ -1343,11 +1343,9 @@ public final class AstUtils {
     return !typeDeclaration.isNative()
         && !typeDeclaration.isInterface()
         && (typeDeclaration.getDeclaredMethodDescriptors().stream()
-                .anyMatch(
-                    methodDescriptor -> AstUtils.canBeReferencedExternallyWasm(methodDescriptor))
+                .anyMatch(methodDescriptor -> AstUtils.needsWasmJsExport(methodDescriptor))
             || typeDeclaration.getDeclaredFieldDescriptors().stream()
-                .anyMatch(
-                    fieldDescriptor -> AstUtils.canBeReferencedExternallyWasm(fieldDescriptor)));
+                .anyMatch(fieldDescriptor -> AstUtils.needsWasmJsExport(fieldDescriptor)));
   }
 
   /**
@@ -1381,11 +1379,19 @@ public final class AstUtils {
     return null;
   }
 
-  /** Returns true if the specified member in Wasm can be referenced by JS. */
-  public static boolean canBeReferencedExternallyWasm(MemberDescriptor memberDescriptor) {
+  /**
+   * Returns true if the specified member in Wasm needs an export to be generated (ie, a bridge and
+   * a JS extern).
+   */
+  public static boolean needsWasmJsExport(MemberDescriptor memberDescriptor) {
     return memberDescriptor.canBeReferencedExternally()
         // TODO(b/481799839): Consider "@Wasm native ..." methods.
-        && !memberDescriptor.isNative();
+        && !memberDescriptor.isNative()
+        // JS members that override an already exported JS member don't need a bridge in the
+        // overriding type. The bridge in the overridden method does a polymorphic dispatch.
+        // Also exclude the generated export bridges themselves.
+        && !(memberDescriptor instanceof MethodDescriptor methodDescriptor
+            && (methodDescriptor.isJsOverride() || methodDescriptor.getOrigin().isWasmJsExport()));
   }
 
   public static boolean isKotlinUnitInstanceAccess(Expression expression) {

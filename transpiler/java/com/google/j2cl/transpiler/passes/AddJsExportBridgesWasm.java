@@ -68,7 +68,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
   }
 
   private static boolean shouldGenerateBridge(MethodDescriptor methodDescriptor) {
-    return AstUtils.canBeReferencedExternallyWasm(methodDescriptor)
+    return AstUtils.needsWasmJsExport(methodDescriptor)
         // We don't expose constructors directly. Instead, the factory method is exported.
         && !methodDescriptor.isConstructor()
         // TODO(b/458472428): Support JsProperty/Getter/Setter.
@@ -78,6 +78,6 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
   private static MethodDescriptor.MethodOrigin getBridgeOrigin(MethodDescriptor descriptor) {
     return descriptor.getOrigin() == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
         ? MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT
-        : MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_EXPORT;
+        : MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_METHOD_EXPORT;
   }
 }

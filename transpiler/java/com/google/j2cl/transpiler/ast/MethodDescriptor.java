@@ -138,7 +138,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED,
     SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD,
     SYNTHETIC_WASM_ENTRY_POINT,
-    SYNTHETIC_WASM_JS_EXPORT,
+    SYNTHETIC_WASM_JS_METHOD_EXPORT,
     SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT,
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
@@ -187,7 +187,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         case SYNTHETIC_WASM_ENTRY_POINT -> "export_";
 
-        case SYNTHETIC_WASM_JS_EXPORT, SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT -> "js_export_";
+        case SYNTHETIC_WASM_JS_METHOD_EXPORT, SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT -> "js_export_";
 
         // Don't prefix the rest, they all start with "$"
         default -> "";
@@ -223,12 +223,17 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return this == SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED;
     }
 
+    /** True if the method is a bridge generated for access from JavaScript. */
+    public boolean isWasmJsExport() {
+      return isWasmEntryPoint() || isWasmJsMethodExport() || isWasmJsConstructorExport();
+    }
+
     public boolean isWasmEntryPoint() {
       return this == SYNTHETIC_WASM_ENTRY_POINT;
     }
 
-    public boolean isWasmJsExport() {
-      return this == SYNTHETIC_WASM_JS_EXPORT;
+    public boolean isWasmJsMethodExport() {
+      return this == SYNTHETIC_WASM_JS_METHOD_EXPORT;
     }
 
     public boolean isWasmJsConstructorExport() {
