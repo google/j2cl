@@ -2747,7 +2747,35 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
-  public void testJsEnumArraysFails() {
+  public void testJsEnumArrayAssignmentFails() {
+    assertTranspileFails(
+            "Main",
+            """
+            import jsinterop.annotations.*;
+            public class Main {
+              @JsEnum enum MyJsEnum {A, B}
+              private static void acceptsObjectArray(Object[] p) {}
+              private static void tests() {
+                Object[] array = new MyJsEnum[0];
+                Object[] array2 = new MyJsEnum[0][];
+                Object[] array3 = (Object[]) new MyJsEnum[0];
+                acceptsObjectArray(new MyJsEnum[0]);
+                Object o = new MyJsEnum[1];
+                o = (MyJsEnum[]) o;
+              }
+            }
+            """)
+        .assertErrorsWithoutSourcePosition(
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
+            "JsEnum array 'MyJsEnum[][]' cannot be assigned to 'Object[]'.",
+            "JsEnum array 'MyJsEnum[]' cannot be cast to 'Object[]'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.",
+            "'Object' cannot be cast to JsEnum array 'MyJsEnum[]'.",
+            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.");
+  }
+
+  public void testJsEnumArrayBoundsAndSpecializationFails() {
     assertTranspileFails(
             "Main",
             """
@@ -2761,7 +2789,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               T[][] tArrayArray;
               List<T> tList;
               List<T[]> tArrayList;
-              private static void acceptsObjectArray(Object[] p) {}
               private static <T> T returnsT() { return null; }
               private static <T> T[] returnsTArray(T t) { return null; }
               private static <T> T[][] returnsTArrayArray(T t) { return null; }
@@ -2773,17 +2800,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               private static <T> void acceptsTArrayArray(T[][] t) {}
               private static <T> void acceptsTVarargs(T... p) {}
               private static void acceptsJsEnumArrayListVarargs(List<MyJsEnum[]>... p) {}
-              private static void arrays() {
-                Object[] array = new MyJsEnum[0];
-                Object[] array2 = new MyJsEnum[0][];
-                Object[] array3 = (Object[]) new MyJsEnum[0];
-                acceptsObjectArray(new MyJsEnum[0]);
-                Object o = new MyJsEnum[1];
+              private static void tests() {
+                Object o = null;
                 o = (Function<? extends Object, ? extends Object>) (MyJsEnum[] p1) -> p1;
                 o = (Function<? extends Object, ? extends Object>) (MyJsEnum... p2) -> p2;
-                o = (MyJsEnum[]) o;
-                if (o instanceof MyJsEnum[]) { }
-                MyJsEnum[] arr = new MyJsEnum[0];
                 acceptsT(new MyJsEnum[0]);
                 acceptsTArray(new MyJsEnum[0]);
                 acceptsTArrayArray(new MyJsEnum[0][]);
@@ -2800,7 +2820,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 e = new Main<MyJsEnum>().tArrayArray[0][0];
                 e = new Main<MyJsEnum[]>().tList.get(0)[0];
                 e = new Main<MyJsEnum>().tArrayList.get(0)[0];
-                arr.getClass();
                 List<MyJsEnum[]> list = null;
                 DerivedWithJsEnumArrayField buggy = new DerivedWithJsEnumArrayField();
                 e = buggy.arr[0];
@@ -2837,19 +2856,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class BaseWithTArrayField<T>{
               T[] arr;
             }
-            class DerivedWithJsEnumArrayField extends BaseWithTArrayField<Main.MyJsEnum> {
-            }
+            class DerivedWithJsEnumArrayField extends BaseWithTArrayField<Main.MyJsEnum> {}
             """)
         .assertErrorsWithoutSourcePosition(
-            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
-            "JsEnum array 'MyJsEnum[][]' cannot be assigned to 'Object[]'.",
-            "JsEnum array 'MyJsEnum[]' cannot be cast to 'Object[]'.",
-            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.",
-            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.",
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'R'.",
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'R'.",
-            "'Object' cannot be cast to JsEnum array 'MyJsEnum[]'.",
-            "JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.",
             // Method invocation `acceptsT(new MyJsEnum[0])`.
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T'.",
             // Array access qualifier in `Main.<MyJsEnum[]>returnsT()[0]`.
@@ -2894,8 +2905,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             // Type parameter of field `List<T> tList`.
             "Reference to field 'Main<MyJsEnum[]>.tList' cannot be of type 'List<MyJsEnum[]>'.",
             "Reference to field 'Main<MyJsEnum>.tArrayList' cannot be of type 'List<MyJsEnum[]>'.",
-            "Cannot do instanceof against JsEnum array 'MyJsEnum[]'.",
-            "Cannot access member of 'Object' with JsEnum array 'MyJsEnum[]'.",
             "Reference to field 'BaseWithTArrayField<MyJsEnum>.arr' cannot be of type"
                 + " 'MyJsEnum[]'.",
             "Variable 'list' cannot be of type 'List<MyJsEnum[]>'.",
@@ -2940,6 +2949,25 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + " type.",
             // Method call `super.acceptsTVarargs(p)`
             "JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.");
+  }
+
+  public void testJsEnumArrayInstanceofAndMemberAccessFails() {
+    assertTranspileFails(
+            "Main",
+            """
+            import jsinterop.annotations.*;
+            public class Main {
+              @JsEnum enum MyJsEnum {A, B}
+              private static void tests(Object o) {
+                if (o instanceof MyJsEnum[]) { }
+                MyJsEnum[] arr = new MyJsEnum[0];
+                arr.getClass();
+              }
+            }
+            """)
+        .assertErrorsWithoutSourcePosition(
+            "Cannot do instanceof against JsEnum array 'MyJsEnum[]'.",
+            "Cannot access member of 'Object' with JsEnum array 'MyJsEnum[]'.");
   }
 
   public void testNativeJsEnumArraysSucceeds() {
