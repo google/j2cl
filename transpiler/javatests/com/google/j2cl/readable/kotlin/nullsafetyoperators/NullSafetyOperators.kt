@@ -30,4 +30,5 @@ fun main() {
   val i = 1!!
   val j = 1 ?: 2
   val k = 1?.hashCode()
+  val l = if (true) a!! else a!!
 }

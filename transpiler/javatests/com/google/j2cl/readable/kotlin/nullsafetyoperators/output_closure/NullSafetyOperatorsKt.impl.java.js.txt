@@ -6,6 +6,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let MyClass = goog.forwardDeclare('nullsafetyoperators.MyClass$impl');
@@ -53,6 +55,12 @@ class NullSafetyOperatorsKt extends j_l_Object {
   let j = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(Integer.valueOf(tmp5_elvis_lhs), null) ? 2 : tmp5_elvis_lhs;
   let tmp6_safe_receiver = 1;
   let k = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(Integer.valueOf(tmp6_safe_receiver), null) ? null : Integer.valueOf($Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(tmp6_safe_receiver)));
+  let /** ? */ tmp;
+  {
+   InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(a);
+   return tmp = Unit.f_INSTANCE__kotlin_Unit;
+  }
+  let l = tmp;
  }
  /** @nodts */
  static $clinit() {
@@ -69,6 +77,8 @@ class NullSafetyOperatorsKt extends j_l_Object {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   Objects = goog.module.get('java.util.Objects$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Unit = goog.module.get('kotlin.Unit$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   MyClass = goog.module.get('nullsafetyoperators.MyClass$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
