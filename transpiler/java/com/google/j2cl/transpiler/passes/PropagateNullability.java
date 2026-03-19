@@ -23,11 +23,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Streams;
-import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -40,12 +40,15 @@ import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -130,7 +133,64 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    Processor processor =
+    fixVariableNullability(compilationUnit);
+
+    // Propagate nullability twice to ensure that we apply the effect of outward nullability
+    // propagation from the first pass is used in the inward nullability propagation in the
+    // second pass.
+    // TODO(b/406815802): See whether this can be refactored to avoid running twice if not needed.
+    propagateNullability(compilationUnit);
+    propagateNullability(compilationUnit);
+  }
+
+  /** Makes variables and lambda parameters nullable if they are compared to {@code null}. */
+  private static void fixVariableNullability(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitBinaryExpression(BinaryExpression binaryExpression) {
+            if (!binaryExpression.isReferenceComparison()) {
+              return;
+            }
+
+            if (!(getParent(MethodLike.class::isInstance)
+                instanceof FunctionExpression functionExpression)) {
+              return;
+            }
+
+            Variable variable = getVariableIfComparedToNull(binaryExpression);
+            if (variable == null
+                || variable.isParameter()
+                    && !functionExpression.getParameters().contains(variable)) {
+              // If the variable compared to null is a parameter but not of the enclosing lambda
+              // leave unchanged.
+              return;
+            }
+
+            var variableTypeDescriptor = variable.getTypeDescriptor();
+            if (!variableTypeDescriptor.canBeNull()) {
+              variable.setTypeDescriptor(variableTypeDescriptor.toNullable());
+            }
+          }
+
+          private static Variable getVariableIfComparedToNull(BinaryExpression binaryExpression) {
+            if (binaryExpression.getLeftOperand() instanceof NullLiteral
+                && binaryExpression.getRightOperand()
+                    instanceof VariableReference variableReference) {
+              return variableReference.getTarget();
+            }
+            if (binaryExpression.getRightOperand() instanceof NullLiteral
+                && binaryExpression.getLeftOperand()
+                    instanceof VariableReference variableReference) {
+              return variableReference.getTarget();
+            }
+            return null;
+          }
+        });
+  }
+
+  private static void propagateNullability(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
@@ -200,7 +260,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                 zip(
                     methodCall.getArguments(),
                     rewrittenMethodDescriptor.getParameterTypeDescriptors(),
-                    PropagateNullability.this::propagateNullabilityToFunctionExpression);
+                    PropagateNullability::propagateNullabilityToFunctionExpression);
 
             return MethodCall.Builder.from(methodCall)
                 .setTarget(rewrittenMethodDescriptor)
@@ -282,14 +342,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             }
             return castExpression;
           }
-        };
-
-    // Propagate nullability twice to ensure that we apply the effect of outward nullability
-    // propagation from the first pass is used in the inward nullability propagation in the
-    // second pass.
-    // TODO(b/406815802): See whether this can be refactored to avoid running twice if not needed.
-    compilationUnit.accept(processor);
-    compilationUnit.accept(processor);
+        });
   }
 
   /**
@@ -310,7 +363,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
    * @param typeDescriptor type descriptor to look for parameterizations in
    * @return a stream with parameterizations
    */
-  private Stream<TypeDescriptor> getParameterizationsIn(
+  private static Stream<TypeDescriptor> getParameterizationsIn(
       TypeDescriptor declarationTypeDescriptor,
       TypeVariable typeParameter,
       TypeDescriptor typeDescriptor) {
@@ -320,7 +373,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
   private record DescriptorPair(TypeDescriptor declaration, TypeDescriptor parameterized) {}
 
-  private Stream<TypeDescriptor> getParameterizationsIn(
+  private static Stream<TypeDescriptor> getParameterizationsIn(
       TypeDescriptor declarationTypeDescriptor,
       TypeVariable typeParameter,
       TypeDescriptor typeDescriptor,
@@ -429,7 +482,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     };
   }
 
-  private ArrayLiteral propagateNullabilityFromValueExpressions(ArrayLiteral arrayLiteral) {
+  private static ArrayLiteral propagateNullabilityFromValueExpressions(ArrayLiteral arrayLiteral) {
     ArrayTypeDescriptor arrayTypeDescriptor = arrayLiteral.getTypeDescriptor();
     TypeDescriptor componentTypeDescriptor =
         propagateNullabilityFrom(
@@ -452,7 +505,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   /** Propagate nullability from all type arguments to another, respecting parameter nullability. */
-  private MethodDescriptor propagateNullabilityFromArguments(
+  private static MethodDescriptor propagateNullabilityFromArguments(
       MethodDescriptor methodDescriptor,
       ImmutableList<TypeVariable> typeParameterDescriptors,
       ImmutableList<TypeDescriptor> typeArgumentDescriptors,
@@ -476,7 +529,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         methodDescriptor, typeParameterDescriptors, inferredTypeArgumentDescriptors);
   }
 
-  private Expression propagateNullabilityToFunctionExpression(
+  private static Expression propagateNullabilityToFunctionExpression(
       Expression toExpression, TypeDescriptor fromTypeDescriptor) {
     return switch (toExpression) {
       case FunctionExpression functionExpression ->
@@ -490,7 +543,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   // TODO(b/406815802): Add JavaDoc
-  private MethodDescriptor propagateNullabilityFromQualifier(
+  private static MethodDescriptor propagateNullabilityFromQualifier(
       MethodDescriptor methodDescriptor,
       ImmutableList<TypeVariable> typeParameterDescriptors,
       ImmutableList<TypeDescriptor> typeArgumentDescriptors,
@@ -514,7 +567,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   // TODO(b/406815802): Add JavaDoc
-  private TypeDescriptor propagateTypeArgumentNullabilityFromReturnExpressions(
+  private static TypeDescriptor propagateTypeArgumentNullabilityFromReturnExpressions(
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
       MethodLike methodLike) {
@@ -551,7 +604,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   // TODO(b/406815802): Add JavaDoc
-  private TypeDescriptor propagateTypeArgumentNullabilityFromInferredTypes(
+  private static TypeDescriptor propagateTypeArgumentNullabilityFromInferredTypes(
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
       List<TypeDescriptor> declarationTypeDescriptors,
@@ -568,7 +621,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   // TODO(b/406815802): Add JavaDoc comment.
-  private TypeDescriptor propagateTypeArgumentNullabilityFromInferredType(
+  private static TypeDescriptor propagateTypeArgumentNullabilityFromInferredType(
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
       TypeDescriptor declarationTypeDescriptor,
@@ -584,7 +637,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   // TODO(b/406815802): Add JavaDoc comment.
-  private TypeDescriptor propagateTypeArgument(
+  private static TypeDescriptor propagateTypeArgument(
       TypeVariable typeParameter, TypeDescriptor typeArgument) {
     return typeParameter.canBeNull() ? typeArgument : typeArgument.toNonNullable();
   }
