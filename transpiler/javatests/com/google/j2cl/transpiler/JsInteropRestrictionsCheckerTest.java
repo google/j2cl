@@ -1696,30 +1696,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
-  public void testJsFunctionFails() {
+  public void testJsFunctionInvalidInterfaceFails() {
     assertTranspileFails(
             "test.Buggy",
-            """
+"""
             import jsinterop.annotations.*;
-            import java.util.List;
             @JsFunction
             interface Function {
               int getFoo();
-            }
-            public final class Buggy implements Function {
-              @JsConstructor
-              Buggy() { }
-              @JsProperty
-              public int getFoo() { return 0; }
-              @JsMethod
-              private void bleh() {}
-              @JsMethod
-              private native void nativeMethod();
-              @JsProperty
-              public int prop = 0;
-              public String toString() { return ""; }
-              public boolean equals(Object o) { return false; }
-              public int hashCode() { return 0; }
             }
             @JsFunction
             interface InvalidFunction {
@@ -1729,19 +1713,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               int f = 0;
               static void n() {}
             }
-            class NonFinalJsFunction implements Function {
-              public int getFoo() { return 0; }
-            }
-            @JsType
-            final class JsFunctionMarkedAsJsType implements Function {
-              public int getFoo() { return 0; }
-            }
             @JsFunction
             interface JsFunctionExtendsInterface extends Cloneable {
               void foo();
             }
             interface InterfaceExtendsJsFunction extends Function {}
-            class BaseClass { { if (new Object() instanceof Buggy) {} }}
+            class BaseClass {}
             final class JsFunctionExtendingBaseClass extends BaseClass implements Function {
               public int getFoo() { return 0; }
             }
@@ -1765,8 +1742,110 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             interface FunctionWithDefaultMethod {
               default int getFoo() { return 0; }
             }
+            @JsFunction
+            interface JsFunctionWithMethodDefinedTypeVariable {
+              <T> void m();
+            }
+""")
+        .assertErrorsWithoutSourcePosition(
+            "JsFunction 'InvalidJsFunctionClass' has to be a functional interface.",
+            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
+                + " member 'void InvalidFunction.m()'.",
+            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
+                + " member 'InvalidFunction.f'.",
+            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
+                + " member 'void InvalidFunction.n()'.",
+            "JsFunction interface member 'int InvalidFunction.getFoo()' cannot be JsMethod "
+                + "nor JsProperty nor JsConstructor.",
+            "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface.",
+            "'InvalidJsTypeJsFunction' cannot be both a JsFunction and a JsType at the same time.",
+            "JsFunction interface member 'void InvalidJsTypeJsFunction.n()' cannot be JsMethod "
+                + "nor JsProperty nor JsConstructor.",
+            "JsFunction 'JsFunctionExtendsInterface' cannot extend other interfaces.",
+            "'InterfaceExtendsJsFunction' cannot extend JsFunction 'Function'.",
+            "JsFunction implementation 'JsFunctionExtendingBaseClass' cannot extend a class.",
+            "JsFunction implementation 'JsFunctionMultipleInterfaces' cannot implement more than"
+                + " one interface.",
+            "JsFunction implementation 'JsFunctionImplementingDefaultMethod' cannot implement more "
+                + "than one interface.",
+            "JsFunction 'void JsFunctionWithMethodDefinedTypeVariable.m()' cannot declare type"
+                + " parameters. Type parameters must be declared on the enclosing interface"
+                + " instead.");
+  }
+
+  public void testJsFunctionInvalidImplementationFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            @JsFunction
+            interface Function {
+              int getFoo();
+            }
+            public final class Buggy implements Function {
+              @JsConstructor
+              Buggy() { }
+              @JsProperty
+              public int getFoo() { return 0; }
+              @JsMethod
+              private void bleh() {}
+              @JsMethod
+              private native void nativeMethod();
+              @JsProperty
+              public int prop = 0;
+              public String toString() { return ""; }
+              public boolean equals(Object o) { return false; }
+              public int hashCode() { return 0; }
+            }
+            class NonFinalJsFunction implements Function {
+              public int getFoo() { return 0; }
+            }
+            @JsType
+            final class JsFunctionMarkedAsJsType implements Function {
+              public int getFoo() { return 0; }
+            }
             abstract class AbstractFunctionImplementation implements Function {
             }
+            interface Foo {
+              int getFoo();
+            }
+            class Main {
+              public static void main() {
+                Object o = (Foo & Function) () -> 0;
+              }
+            }
+            """)
+        .assertErrorsWithoutSourcePosition(
+            "JsFunction implementation member 'int Buggy.getFoo()' cannot be "
+                + "JsMethod nor JsProperty nor JsConstructor.",
+            "JsFunction implementation member 'void Buggy.bleh()' cannot be"
+                + " JsMethod nor JsProperty nor JsConstructor.",
+            "JsFunction implementation method 'void Buggy.nativeMethod()' cannot be native.",
+            "JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty "
+                + "nor JsConstructor.",
+            "JsFunction implementation member 'int JsFunctionMarkedAsJsType.getFoo()' cannot be "
+                + "JsMethod nor JsProperty nor JsConstructor.",
+            "JsFunction implementation method 'String Buggy.toString()' cannot override a "
+                + "supertype method.",
+            "JsFunction implementation method 'boolean Buggy.equals(Object)' cannot override a "
+                + "supertype method.",
+            "JsFunction implementation method 'int Buggy.hashCode()' cannot override a supertype "
+                + "method.",
+            "JsFunction implementation member 'Buggy()' cannot be JsMethod nor JsProperty "
+                + "nor JsConstructor.",
+            "JsFunction implementation 'NonFinalJsFunction' must be final.",
+            "'JsFunctionMarkedAsJsType' cannot be both a JsFunction implementation and "
+                + "a JsType at the same time.",
+            "JsFunction implementation 'AbstractFunctionImplementation' must be final.",
+            "JsFunction lambda can only implement the JsFunction interface.");
+  }
+
+  public void testJsFunctionRecursiveFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            import java.util.List;
             @JsFunction
             interface MutuallyRecursiveFunctionA {
               void m(MutuallyRecursiveFunctionB f);
@@ -1804,60 +1883,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 T extends Comparable<T> & TypeVariableWithIntersectionBound<T>> {
               void m(T f);
             }
-            @JsFunction interface JsFunctionWithMethodDefinedTypeVariable {
-              <T> void m();
-            }
-            class Main {
-              public static void main() {
-                Object o;
-                o = (Foo & Function) () -> 0;
-              }
-            }
             """)
         .assertErrorsWithoutSourcePosition(
-            "'InvalidJsTypeJsFunction' cannot be both a JsFunction and a JsType at the same time.",
-            "JsFunction 'InvalidJsFunctionClass' has to be a functional interface.",
-            "JsFunction implementation 'NonFinalJsFunction' must be final.",
-            "'JsFunctionMarkedAsJsType' cannot be both a JsFunction implementation and "
-                + "a JsType at the same time.",
-            "JsFunction 'JsFunctionExtendsInterface' cannot extend other interfaces.",
-            "'InterfaceExtendsJsFunction' cannot extend JsFunction 'Function'.",
-            "JsFunction implementation 'JsFunctionExtendingBaseClass' cannot extend a class.",
-            "JsFunction implementation 'JsFunctionMultipleInterfaces' cannot implement more than"
-                + " one interface.",
-            "Cannot do instanceof against JsFunction implementation 'Buggy'.",
-            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
-                + " member 'void InvalidFunction.m()'.",
-            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
-                + " member 'InvalidFunction.f'.",
-            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
-                + " member 'void InvalidFunction.n()'.",
-            "JsFunction implementation member 'int Buggy.getFoo()' cannot be "
-                + "JsMethod nor JsProperty nor JsConstructor.",
-            "JsFunction implementation member 'void Buggy.bleh()' cannot be"
-                + " JsMethod nor JsProperty nor JsConstructor.",
-            "JsFunction implementation method 'void Buggy.nativeMethod()' cannot be native.",
-            "JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty "
-                + "nor JsConstructor.",
-            "JsFunction implementation member 'int JsFunctionMarkedAsJsType.getFoo()' cannot be "
-                + "JsMethod nor JsProperty nor JsConstructor.",
-            "JsFunction implementation method 'String Buggy.toString()' cannot override a "
-                + "supertype method.",
-            "JsFunction implementation method 'boolean Buggy.equals(Object)' cannot override a "
-                + "supertype method.",
-            "JsFunction implementation method 'int Buggy.hashCode()' cannot override a supertype "
-                + "method.",
-            "JsFunction interface member 'int InvalidFunction.getFoo()' cannot be JsMethod "
-                + "nor JsProperty nor JsConstructor.",
-            "JsFunction interface member 'void InvalidJsTypeJsFunction.n()' cannot be JsMethod "
-                + "nor JsProperty nor JsConstructor.",
-            "JsFunction implementation 'JsFunctionImplementingDefaultMethod' cannot implement more "
-                + "than one interface.",
-            "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface.",
-            "JsFunction implementation member 'Buggy()' cannot be JsMethod nor JsProperty "
-                + "nor JsConstructor.",
-            "JsFunction implementation 'AbstractFunctionImplementation' must be final.",
-            "JsFunction lambda can only implement the JsFunction interface.",
             "JsFunction 'void MutuallyRecursiveFunctionA.m(MutuallyRecursiveFunctionB f)' cannot "
                 + "refer recursively to itself "
                 + "(via MutuallyRecursiveFunctionA MutuallyRecursiveFunctionB.m()). (b/153591461)",
@@ -1873,10 +1900,29 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + " to itself. (b/153591461)",
             "JsFunction 'void IndirectReferenceThroughJsFunction.m("
                 + "JsFunctionNotInvolvedInCycle<IndirectReferenceThroughJsFunction> f)' cannot "
-                + "refer recursively to itself. (b/153591461)",
-            "JsFunction 'void JsFunctionWithMethodDefinedTypeVariable.m()' cannot declare type"
-                + " parameters. Type parameters must be declared on the enclosing interface"
-                + " instead.");
+                + "refer recursively to itself. (b/153591461)");
+  }
+
+  public void testJsFunctionImplementationInstanceofFails() {
+    assertTranspileFails(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            @JsFunction
+            interface Function {
+              int getFoo();
+            }
+            final class Buggy implements Function {
+              public int getFoo() { return 0; }
+            }
+            class Main {
+              public static void main() {
+                if (new Object() instanceof Buggy) {}
+              }
+            }
+            """)
+        .assertErrorsWithoutSourcePosition(
+            "Cannot do instanceof against JsFunction implementation 'Buggy'.");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() {
