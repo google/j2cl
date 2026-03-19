@@ -278,6 +278,89 @@ public class GwtIncompatibleStripperTest {
   }
 
   @Test
+  public void testProcessUnrelatedAnnotations() {
+    String before =
+        lines(
+            "public class Foo {",
+            "  @GwtIncompatible",
+            "  @Override",
+            "  public void m() {}",
+            "  @Override",
+            "  @GwtIncompatible",
+            "  public void n() {}",
+            "}");
+    String after =
+        lines(
+            "public class Foo {",
+            stripped("  @GwtIncompatible"),
+            stripped("  @Override"),
+            stripped("  public void m() {}"),
+            stripped("  @Override"),
+            stripped("  @GwtIncompatible"),
+            stripped("  public void n() {}"),
+            "}");
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
+  }
+
+  @Test
+  public void testProcessJavadoc() {
+    String before =
+        lines(
+            "public class Foo {",
+            "  /**",
+            "   * doc",
+            "   */",
+            "  @GwtIncompatible",
+            "  public void m() {}",
+            "}");
+    String after =
+        lines(
+            "public class Foo {",
+            stripped("  /**"),
+            stripped("   * doc"),
+            stripped("   */"),
+            stripped("  @GwtIncompatible"),
+            stripped("  public void m() {}"),
+            "}");
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
+  }
+
+  @Test
+  public void testProcessMultiVariable() {
+    String before = lines("public class Foo {", "  @GwtIncompatible", "  public String a, b;", "}");
+    String after =
+        lines(
+            "public class Foo {",
+            stripped("  @GwtIncompatible"),
+            stripped("  public String a, b;"),
+            "}");
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
+  }
+
+  @Test
+  public void testProcessMultiVariableJavadoc() {
+    String before =
+        lines(
+            "public class Foo {",
+            "  /**",
+            "   * doc",
+            "   */",
+            "  @GwtIncompatible",
+            "  public String a, b;",
+            "}");
+    String after =
+        lines(
+            "public class Foo {",
+            stripped("  /**"),
+            stripped("   * doc"),
+            stripped("   */"),
+            stripped("  @GwtIncompatible"),
+            stripped("  public String a, b;"),
+            "}");
+    assertEquals(after, GwtIncompatibleStripper.strip(before, ImmutableList.of("GwtIncompatible")));
+  }
+
+  @Test
   public void testNestedComment() {
     String before =
         lines(
