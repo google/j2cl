@@ -48,7 +48,9 @@ public final class AddNothingReturnStatements extends NormalizationPass {
           @Override
           public Node rewriteExpressionStatement(ExpressionStatement expressionStatement) {
             if (!TypeDescriptors.isKotlinNothing(
-                expressionStatement.getExpression().getTypeDescriptor())) {
+                // We use the raw type descriptor to correctly identify types where Nothing is an
+                // upper bound of a type parameter: e.g. Function0<? extends Nothing>.
+                expressionStatement.getExpression().getTypeDescriptor().toRawTypeDescriptor())) {
               return expressionStatement;
             }
 

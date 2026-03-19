@@ -131,3 +131,7 @@ fun nestedLambdaWithNothingReturn() {
         .provide()
     }
 }
+
+fun <T : Nothing> typeParameterExtendingNothing(x: T): T {
+  alwaysThrows()
+}
