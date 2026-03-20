@@ -50,9 +50,6 @@ internal class J2clInlineFunctionResolver(private val context: J2clBackendContex
       expression.symbol.isCoroutineContextGetter()
   }
 
-  private val IrFunctionSymbol.isExtensionStringPlus: Boolean
-    get() = this == context.irBuiltIns.extensionStringPlus
-
   private fun IrFunctionSymbol.isCoroutineContextGetter(): Boolean =
     context.intrinsics.isCoroutineContextGetterCall(this)
 }
