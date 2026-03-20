@@ -16,6 +16,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import org.jetbrains.kotlin.backend.common.LoweringContext
 import org.jetbrains.kotlin.backend.common.lower.UpgradeCallableReferences
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -28,7 +29,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 /** Upgrades property and function reference-like nodes to the new IrRichCallableReference node. */
-class J2clUpgradeCallableReferences(context: J2clBackendContext) :
+class J2clUpgradeCallableReferences(context: LoweringContext) :
   UpgradeCallableReferences(
     context,
     upgradeFunctionReferencesAndLambdas = true,

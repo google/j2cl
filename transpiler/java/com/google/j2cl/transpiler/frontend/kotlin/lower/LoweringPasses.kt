@@ -73,11 +73,11 @@ private val loweringPhase = loweringPhase {
   // Invent names for local classes and anonymous objects. Later passes may require all classes
   // to have a name for computing function signature.
   perFileLowering(jvmInventNamesForLocalClassesFactory)
-  // Transform all callable reference (including defaults) to inline lambdas, mark inline lambdas
-  // for later passes.
-  perFileLowering(::J2clInlineCallableReferenceToLambdaPhase)
   // Rewrites `Array(size) { index -> value }` using type-specific initializer lambdas.
   perFileLowering(::ArrayConstructorLowering)
+  // TODO(dramaix) : This should be run as the first pass. But our inlining pass is adding function
+  // references and function expression.
+  moduleLowering(::J2clUpgradeCallableReferences)
   // Create nullable backing fields and insert nullability checks for lateinit properties and
   // variables. Must run before JvmPropertiesLowering.
   perFileLowering(::LateinitLowering)
@@ -89,21 +89,8 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::LocalClassesExtractionFromInlineFunctionsLowering.asPostfix())
   // Create public bridge for private top level function called from inline functions.
   perFileLowering(::SyntheticAccessorLowering)
-  // TODO(b/449125803) : remove that pass and use `UpgradeCallableReferences` instead.
-  // Replace reference to inline function with reified parameter with reference to a synthetic
-  // non-inline function where types parameters have been substituted so there is no reference to
-  // inline functions anymore.
-  // ex:
-  // inline fun <reified T> castTo(param: Any): T  = param as T
-  // reference like `::castTo<String>` is replaced with `::castTo$wrap` where
-  // fun castTo$wrap(param: Any) String = castTo<String>(param)
-  perFileLowering(::WrapInlineDeclarationsWithReifiedTypeParametersLowering)
   // Perform function inlining.
   moduleLowering(::J2clFunctionInlining)
-  // TODO(dramaix) : This should be run as the first pass. But our inlining pass is adding function
-  // references and function expression.
-  moduleLowering(::J2clUpgradeCallableReferences)
-
   // Remove inline functions with reified type parameters as these functions cannot be called from
   // Java
   perFileLowering(::RemoveInlineDeclarationsWithReifiedTypeParametersLowering)

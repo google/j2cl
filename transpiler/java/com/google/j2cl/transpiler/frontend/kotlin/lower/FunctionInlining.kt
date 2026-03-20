@@ -97,6 +97,14 @@ constructor(
     if (actualCallee.body == null) {
       return expression
     }
+
+    // MODIFIED BY GOOGLE.
+    // The serialized IR from Kotlin/JVM compilation does not fully support
+    // `IrRichCallableReference` nodes. Run `J2clUpgradeCallableReferences` to ensure the inline
+    // function body uses the correct node types expected by the inliner.
+    J2clUpgradeCallableReferences(context).lower(actualCallee)
+    // END OF MODIFICATIONS.
+
     actualCallee.body?.transformChildren(this, actualCallee)
     actualCallee.parameters.forEachIndexed { index, param ->
       if (expression.arguments[index] == null) {
@@ -597,10 +605,9 @@ private class CallInlining(
             argumentExpression.isLambdaBlock())
 
     val isImmutableVariableLoad: Boolean
-      get() =
-        argumentExpression.let { argument ->
-          argument is IrGetValue && !argument.symbol.owner.let { it is IrVariable && it.isVar }
-        }
+      get() = argumentExpression.let { argument ->
+        argument is IrGetValue && !argument.symbol.owner.let { it is IrVariable && it.isVar }
+      }
   }
 
   private fun ParameterToArgument.allOuterClasses(): List<ParameterToArgument> {
