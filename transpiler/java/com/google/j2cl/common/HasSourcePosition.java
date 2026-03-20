@@ -13,9 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.ast;
-
-import com.google.j2cl.common.SourcePosition;
+package com.google.j2cl.common;
 
 /** An interface for source nodes that know their position in the original source. */
 public interface HasSourcePosition {

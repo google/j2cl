@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import com.google.common.collect.Iterables;
+import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import java.util.List;
 import javax.annotation.Nullable;

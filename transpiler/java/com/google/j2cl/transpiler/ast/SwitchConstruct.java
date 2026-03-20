@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
 import java.util.List;
 

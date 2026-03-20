@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;

@@ -25,6 +25,7 @@ import static java.lang.Boolean.getBoolean;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Severity;
 import com.google.j2cl.common.SourcePosition;
@@ -32,7 +33,6 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.HasSourcePosition;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
