@@ -63,6 +63,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNative
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
 import com.google.j2cl.transpiler.frontend.kotlin.ir.jsName
@@ -274,6 +275,7 @@ internal class KotlinEnvironment(
         .setFunctionalInterface(irClass.isFunctionalInterface)
         .setHasAbstractModifier(irClass.isAbstract)
         .setFinal(irClass.isFinal)
+        .setSealed(irClass.isSealed)
         .setLocal(irClass.isLocal && !irClass.isAnonymousObject)
         .setAnonymous(irClass.isAnonymousObject)
         .setJsType(irClass.isJsType)
@@ -971,16 +973,15 @@ private fun remapDeclarationTypeVarianceOntoArguments(
   arguments: List<IrTypeArgument>,
   originalTypeParams: List<IrTypeParameter>,
   replacementTypeParams: List<IrTypeParameter>,
-) =
-  arguments.mapIndexed { index, argument ->
-    if (
-      argument is IrTypeProjection &&
-        originalTypeParams[index].variance != Variance.INVARIANT &&
-        replacementTypeParams[index].variance == Variance.INVARIANT &&
-        argument.variance == Variance.INVARIANT
-    ) {
-      makeTypeProjection(argument.type, originalTypeParams[index].variance)
-    } else {
-      argument
-    }
+) = arguments.mapIndexed { index, argument ->
+  if (
+    argument is IrTypeProjection &&
+      originalTypeParams[index].variance != Variance.INVARIANT &&
+      replacementTypeParams[index].variance == Variance.INVARIANT &&
+      argument.variance == Variance.INVARIANT
+  ) {
+    makeTypeProjection(argument.type, originalTypeParams[index].variance)
+  } else {
+    argument
   }
+}

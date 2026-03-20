@@ -1370,6 +1370,7 @@ class JavaEnvironment {
         .setAnnotation(isAnnotation(typeElement))
         .setCapturingEnclosingInstance(capturesEnclosingInstance((ClassSymbol) typeElement))
         .setFinal(isFinal)
+        .setSealed(isSealed(typeElement))
         .setFunctionalInterface(isFunctionalInterface(typeElement.asType()))
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeElement))
         .setAnnotationsFactory(() -> createAnnotations(typeElement, isNullMarked))
@@ -1597,6 +1598,10 @@ class JavaEnvironment {
 
   private static boolean isFinal(Element element) {
     return element.getModifiers().contains(Modifier.FINAL);
+  }
+
+  private static boolean isSealed(Element element) {
+    return element.getModifiers().contains(Modifier.SEALED);
   }
 
   private static boolean isVolatile(Element element) {

@@ -363,12 +363,11 @@ private fun IrType.resolveWithTypeParameterMapping(
     if (arguments.isEmpty()) {
       return this
     }
-    val resolvedArguments =
-      arguments.map {
-        it.typeOrNull?.resolveWithTypeParameterMapping(parameterTypeMapping)?.let { type ->
-          makeTypeProjection(type, type.variance)
-        } ?: it
-      }
+    val resolvedArguments = arguments.map {
+      it.typeOrNull?.resolveWithTypeParameterMapping(parameterTypeMapping)?.let { type ->
+        makeTypeProjection(type, type.variance)
+      } ?: it
+    }
     return toBuilder().apply { arguments = resolvedArguments }.buildSimpleType()
   }
   return this
@@ -539,6 +538,9 @@ val IrClass.isAbstract: Boolean
 
 val IrClass.isFinal: Boolean
   get() = modality == Modality.FINAL
+
+val IrClass.isSealed: Boolean
+  get() = modality == Modality.SEALED
 
 val IrClass.isFromSource: Boolean
   get() = source.containingFile != SourceFile.NO_SOURCE_FILE

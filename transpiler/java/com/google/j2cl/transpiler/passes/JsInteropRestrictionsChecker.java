@@ -1555,6 +1555,26 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
+    if (typeDeclaration.isSealed()) {
+      problems.error(
+          type.getSourcePosition(),
+          "Sealed %s '%s' cannot be a native JsType.",
+          typeDeclaration.isInterface() ? "interface" : "class",
+          readableDescription);
+    }
+
+    type.getSuperTypesStream()
+        .filter(typeDescriptor -> typeDescriptor.getTypeDeclaration().isSealed())
+        .forEach(
+            superType ->
+                problems.error(
+                    type.getSourcePosition(),
+                    "Native JsType '%s' cannot %s sealed %s '%s'.",
+                    readableDescription,
+                    type.isInterface() || superType.isClass() ? "extend" : "implement",
+                    superType.isInterface() ? "interface" : "class",
+                    superType.getReadableDescription()));
+
     type.getSuperTypesStream()
         .filter(Predicates.not(TypeDescriptors::isJavaLangObject))
         .filter(Predicates.not(TypeDescriptor::isNative))

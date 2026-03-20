@@ -3438,6 +3438,46 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "'void Interface.someOtherMethod()'.");
   }
 
+  public void testSealedClassExtendingNativeJsTypeSucceeds() {
+    assertTranspileSucceeds(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            @JsType(isNative=true)
+            class NativeBase {}
+            sealed class SealedClass extends NativeBase { @JsConstructor SealedClass() {} }
+            final class Subtype extends SealedClass { @JsConstructor Subtype() {} }
+            """)
+        .assertNoWarnings();
+  }
+
+  public void testNativeJsTypeSealedTypeFails() {
+    assertTranspileFails(
+            "test.Foo",
+            """
+            import jsinterop.annotations.*;
+            @JsType(isNative = true)
+            sealed class SealedNativeClass {}
+            @JsType(isNative = true)
+            sealed interface SealedNativeInterface {}
+            @JsType(isNative = true)
+            final class NativeSubtype extends SealedNativeClass implements SealedNativeInterface { @JsConstructor NativeSubtype() {} }
+            @JsType(isNative = true)
+            sealed class SealedNativeSubtype extends SealedNativeClass implements SealedNativeInterface {}
+            final class FinalSubtype extends SealedNativeSubtype { @JsConstructor FinalSubtype() {} }
+            """)
+        .assertErrorsWithoutSourcePosition(
+            "Sealed class 'SealedNativeClass' cannot be a native JsType.",
+            "Sealed interface 'SealedNativeInterface' cannot be a native JsType.",
+            "Native JsType 'NativeSubtype' cannot implement sealed interface"
+                + " 'SealedNativeInterface'.",
+            "Native JsType 'NativeSubtype' cannot extend sealed class 'SealedNativeClass'.",
+            "Sealed class 'SealedNativeSubtype' cannot be a native JsType.",
+            "Native JsType 'SealedNativeSubtype' cannot implement sealed interface"
+                + " 'SealedNativeInterface'.",
+            "Native JsType 'SealedNativeSubtype' cannot extend sealed class 'SealedNativeClass'.");
+  }
+
   public void testJsOptionalSucceeds() {
     newTesterWithDefaults()
         .addCompilationUnit(

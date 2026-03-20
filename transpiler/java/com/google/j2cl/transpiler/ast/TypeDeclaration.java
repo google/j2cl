@@ -277,6 +277,8 @@ public abstract class TypeDeclaration
 
   public abstract boolean isFinal();
 
+  public abstract boolean isSealed();
+
   // TODO(b/322906767): Remove when the bug is fixed.
   private static final boolean PRESERVE_EQUALS_FOR_JSTYPE_INTERFACE =
       "true"
@@ -820,6 +822,7 @@ public abstract class TypeDeclaration
         .setAnnotation(false)
         .setCapturingEnclosingInstance(false)
         .setFinal(false)
+        .setSealed(false)
         .setFunctionalInterface(false)
         .setAnnotationsFactory(ImmutableList::of)
         .setJsFunctionInterface(false)
@@ -888,6 +891,8 @@ public abstract class TypeDeclaration
     public abstract Builder setCapturingEnclosingInstance(boolean capturingEnclosingInstance);
 
     public abstract Builder setFinal(boolean isFinal);
+
+    public abstract Builder setSealed(boolean isSealed);
 
     public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
 
