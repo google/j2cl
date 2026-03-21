@@ -1,6 +1,8 @@
 package ${packageName};
 
 import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.common.HasSourcePosition;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Predicate;
@@ -45,6 +47,27 @@ abstract class ProcessorPrivate implements Processor {
   public Object getParent(Predicate<Object> predicate) {
     return getParents().filter(predicate).findFirst().orElse(null);
   }
+
+  /** Returns the closest meaningful source position from an enclosing node. */
+  public final SourcePosition getSourcePosition() {
+    // TODO(b/494674927): This might skip Type and return source position of
+    // parent Type. E.g.
+    //   'class A { class B {} }', returns source info for A instead of B.
+    HasSourcePosition hasSourcePosition =
+        (HasSourcePosition)
+            getParent(
+                p ->
+                    p instanceof HasSourcePosition hs
+                        && hs.getSourcePosition() != SourcePosition.NONE);
+    if (hasSourcePosition == null) {
+      if (getCurrentContext() instanceof HasSourcePosition contextPosition) {
+        hasSourcePosition = contextPosition;
+      }
+    }
+    return hasSourcePosition != null
+        ? hasSourcePosition.getSourcePosition()
+        : SourcePosition.NONE;
+  };
 
   final void pushParent(Object p) {
     stackOfParent.push(p);

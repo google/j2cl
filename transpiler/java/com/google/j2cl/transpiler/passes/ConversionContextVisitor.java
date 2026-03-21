@@ -20,7 +20,6 @@ import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
@@ -103,15 +102,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     /** Returns the closest meaningful source position from an enclosing node. */
     public final SourcePosition getSourcePosition() {
-      HasSourcePosition hasSourcePosition =
-          (HasSourcePosition)
-              visitor.getParent(
-                  p ->
-                      p instanceof HasSourcePosition hs
-                          && hs.getSourcePosition() != SourcePosition.NONE);
-      return hasSourcePosition != null
-          ? hasSourcePosition.getSourcePosition()
-          : SourcePosition.NONE;
+      return visitor.getSourcePosition();
     }
 
     public final Stream<Object> getParents() {

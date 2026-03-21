@@ -2940,9 +2940,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Returned type in call to method 'List<MyJsEnum[][]> Main.instanceReturnsTArrayList()'"
                 + " cannot be of type 'List<MyJsEnum[][]>'.",
             "Object creation 'new Main.<init>()' cannot be of type 'Main<MyJsEnum[]>'.",
+            "Object creation 'new Main.<init>()' cannot be of type 'Main<MyJsEnum[]>'.",
+            "Object creation 'new Main.<init>()' cannot be of type 'Main<MyJsEnum[]>'.",
             "Reference to field 'Main<MyJsEnum[]>.t' cannot be of type 'MyJsEnum[]'.",
             "Reference to field 'Main<MyJsEnum>.tArray' cannot be of type 'MyJsEnum[]'.",
             "Reference to field 'Main<MyJsEnum>.tArrayArray' cannot be of type 'MyJsEnum[][]'.",
+            "Returned type in call to method 'MyJsEnum[] List.get(int)' cannot be of type"
+                + " 'MyJsEnum[]'.",
             "Returned type in call to method 'MyJsEnum[] List.get(int)' cannot be of type"
                 + " 'MyJsEnum[]'.",
             // Array access qualifier in `List<E>.get(a)[b]` where the array expression is `E`.

@@ -12,7 +12,10 @@ java_library(
         # Do not use. Temporary visible to workaround https://github.com/bazelbuild/bazel/issues/25214.
         "//visibility:public",
     ],
-    exports = [":visitor-internal"],
+    exports = [
+        ":visitor-internal",
+        "//transpiler/java/com/google/j2cl/common",
+    ],
 )
 
 java_library(

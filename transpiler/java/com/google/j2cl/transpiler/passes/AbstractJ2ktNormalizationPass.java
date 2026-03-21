@@ -21,9 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.errorprone.annotations.FormatMethod;
-import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
@@ -58,13 +56,6 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
   @FormatMethod
   final void debug(String detailMessage, Object... args) {
     debug(SourcePosition.NONE, detailMessage, args);
-  }
-
-  /** Returns the closest meaningful source position from an enclosing node. */
-  final SourcePosition getSourcePosition(AbstractRewriter rewriter) {
-    HasSourcePosition hasSourcePosition =
-        (HasSourcePosition) rewriter.getParent(HasSourcePosition.class::isInstance);
-    return hasSourcePosition != null ? hasSourcePosition.getSourcePosition() : SourcePosition.NONE;
   }
 
   /**

@@ -339,22 +339,13 @@ public class JsInteropRestrictionsChecker {
                 (tv, value) -> {
                   if (tv.toRawTypeDescriptor().isNative() != value.isNative()) {
                     problems.error(
-                        getBestSourcePosition(),
+                        getSourcePosition(),
                         "%s %s cannot be parameterized with native JsType '%s'. (b/290992813)",
                         prefix,
                         context.getReadableDescription(),
                         value.getReadableDescription());
                   }
                 });
-          }
-
-          private SourcePosition getBestSourcePosition() {
-            HasSourcePosition hasSourcePosition =
-                ((HasSourcePosition) getParent(HasSourcePosition.class::isInstance));
-            if (hasSourcePosition == null) {
-              hasSourcePosition = getCurrentType();
-            }
-            return hasSourcePosition.getSourcePosition();
           }
         });
   }
@@ -387,8 +378,7 @@ public class JsInteropRestrictionsChecker {
                     ? binaryExpression.getLeftOperand()
                     : binaryExpression.getRightOperand();
             problems.error(
-                ((HasSourcePosition) getParent(HasSourcePosition.class::isInstance))
-                    .getSourcePosition(),
+                getSourcePosition(),
                 "%s cannot be compared with non-native type.",
                 getReadableDescriptionWithPrefix(operand.getTypeDescriptor()));
           }
@@ -2762,9 +2752,7 @@ public class JsInteropRestrictionsChecker {
                 variableTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                sourcePosition == SourcePosition.NONE
-                    ? getCurrentMember().getSourcePosition()
-                    : sourcePosition,
+                sourcePosition == SourcePosition.NONE ? getSourcePosition() : sourcePosition,
                 messageSuffix,
                 "Variable '%s'",
                 variable.getName());
@@ -2817,7 +2805,7 @@ public class JsInteropRestrictionsChecker {
                 declaredTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                getCurrentMember().getSourcePosition(),
+                getSourcePosition(),
                 messageSuffix,
                 "Reference to field '%s'",
                 fieldAccess.getTarget().getReadableDescription());
@@ -2838,7 +2826,7 @@ public class JsInteropRestrictionsChecker {
                 declaredTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                getCurrentMember().getSourcePosition(),
+                getSourcePosition(),
                 messageSuffix,
                 "Returned type in call to method '%s'",
                 methodCall.getTarget().getReadableDescription());
@@ -2852,7 +2840,7 @@ public class JsInteropRestrictionsChecker {
                 newArrayTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                getCurrentMember().getSourcePosition(),
+                getSourcePosition(),
                 messageSuffix,
                 "Array creation '%s'",
                 // TODO(b/65465035): Emit the expression source position when it is tracked, and
@@ -2868,7 +2856,7 @@ public class JsInteropRestrictionsChecker {
                 instanceTypeDescriptor,
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
-                getCurrentMember().getSourcePosition(),
+                getSourcePosition(),
                 messageSuffix,
                 "Object creation '%s'",
                 // TODO(b/65465035): Emit the expression source position when it is tracked, and
@@ -2903,7 +2891,7 @@ public class JsInteropRestrictionsChecker {
                 onlyCheckTypeSpecialization)) {
               // TODO(b/65465035): Emit the expression source position when it is tracked.
               problems.error(
-                  getCurrentMember().getSourcePosition(),
+                  getSourcePosition(),
                   "Cannot cast to %s '%s'.%s",
                   disallowedTypeDescription,
                   castTypeDescriptor.getReadableDescription(),

@@ -107,7 +107,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
 
             DebugDescriber describer = newDebugDescriber();
             debug(
-                getSourcePosition(this),
+                getSourcePosition(),
                 "Inserting qualifier projection cast from %s to %s",
                 describer.getDescription(typeDescriptor),
                 describer.getDescription(projectedTypeDescriptor));
