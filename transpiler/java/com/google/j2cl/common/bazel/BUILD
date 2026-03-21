@@ -21,3 +21,8 @@ java_library(
         "//transpiler/java/com/google/j2cl/common/bazel/profiler",
     ],
 )
+
+config_setting(
+    name = "profiling_disabled",
+    flag_values = {"//:profiling_filter": "<disabled>"},
+)

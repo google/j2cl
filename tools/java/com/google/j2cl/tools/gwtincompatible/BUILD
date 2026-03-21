@@ -4,7 +4,7 @@
 #   J2CL.
 
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
-load("//transpiler/java/com/google/j2cl/common/bazel:jvm_flags.bzl", "JVM_FLAGS")
+load("//transpiler/java/com/google/j2cl/common/bazel:compiler_java_binary.bzl", "compiler_java_binary")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -45,11 +45,8 @@ java_library(
     ],
 )
 
-java_binary(
+compiler_java_binary(
     name = "GwtIncompatibleStripper_worker",
-    jvm_flags = JVM_FLAGS,
     main_class = "com.google.j2cl.tools.gwtincompatible.BazelGwtIncompatibleStripper",
-    use_launcher = False,
-    visibility = ["//build_defs:toolchain_users"],
     runtime_deps = [":gwtincompatible_worker_lib"],
 )

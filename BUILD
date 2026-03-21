@@ -97,7 +97,8 @@ bool_flag(
 # Flag to enable profiling for particular targets.
 # Example usage:
 #   blaze build <my_binary> --//:profiling_filter=<target_pattern>
-#   pprof --flame blaze-bin/<target>.profile
+#   pprof --flame blaze-bin/<target>_<mnemonic>.profile
+# You should also see the matched targets & corresponding pprof command in the blaze output.
 string_flag(
     name = "profiling_filter",
     build_setting_default = "<disabled>",

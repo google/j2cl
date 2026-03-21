@@ -1,5 +1,5 @@
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
-load(":compiler_java_binary.bzl", "compiler_java_binary")
+load("//transpiler/java/com/google/j2cl/common/bazel:compiler_java_binary.bzl", "compiler_java_binary")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -124,9 +124,4 @@ compiler_java_binary(
     ],
     main_class = "com.google.j2cl.transpiler.BazelJ2wasmBundler",
     runtime_deps = [":bazelj2wasmbundler_lib"],
-)
-
-config_setting(
-    name = "profiling_disabled",
-    flag_values = {"//:profiling_filter": "<disabled>"},
 )
