@@ -68,6 +68,12 @@ class Strings extends j_l_Object {
   s1 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(Integer.valueOf(1 + 2 | 0).toString()) + 's';
   s1 = 's' + 1 + 2;
  }
+ /** @final @nodts */
+ m_testMultiDollarInterpolation__void() {
+  let name = 'world';
+  let s1 = '' + 'Hello ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(name) + ', $$name, $name';
+  let s2 = '' + 'Hello ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(name) + '\n      $name literal\n      ';
+ }
  /** @nodts */
  static $clinit() {
   Strings.$clinit = () =>{};
