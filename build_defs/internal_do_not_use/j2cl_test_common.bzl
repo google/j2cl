@@ -180,6 +180,7 @@ def j2cl_test_common(
         jvm_flags = [],
         tags = [],
         enable_rta = True,
+        native_deps = [],
         **kwargs):
     """Macro for running a JUnit test cross compiled as a web test
 
