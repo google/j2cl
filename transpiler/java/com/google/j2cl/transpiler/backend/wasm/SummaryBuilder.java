@@ -143,8 +143,7 @@ public final class SummaryBuilder {
     // TODO(b/458472428): Support JsProperty/Getter/Setter.
     for (var method : type.getMethods()) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (!(methodDescriptor.getOrigin().isWasmJsExport()
-          || methodDescriptor.getOrigin().isWasmJsConstructorExport())) {
+      if (!methodDescriptor.getOrigin().isWasmJsExport()) {
         continue;
       }
 

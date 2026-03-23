@@ -98,7 +98,7 @@ final class JsExternsGenerator {
     String jsDoc = closureEnvironment.getJsDocForType(type, /* isWasmExtern= */ true);
     Method constructor =
         type.getMethods().stream()
-            .filter(m -> isConstructor(m.getDescriptor()))
+            .filter(m -> m.getDescriptor().isJsConstructor())
             .findFirst()
             .orElse(null);
 
@@ -131,9 +131,9 @@ final class JsExternsGenerator {
       MethodDescriptor methodDescriptor = method.getDescriptor();
       if (!AstUtils.needsWasmJsExport(methodDescriptor)
           // Constructors handled elsewhere.
-          || isConstructor(methodDescriptor)
+          || methodDescriptor.isJsConstructor()
           // TODO(b/458472428): Support JsProperty.
-          || !methodDescriptor.isJsMethod()) {
+          || methodDescriptor.isJsProperty()) {
         continue;
       }
 
@@ -167,11 +167,6 @@ final class JsExternsGenerator {
       // newline.
       sb.appendln(" *" + jsDoc);
     }
-  }
-
-  private static boolean isConstructor(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.getOrigin()
-        == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR;
   }
 
   private void generateExternsWiring(Type type) {
