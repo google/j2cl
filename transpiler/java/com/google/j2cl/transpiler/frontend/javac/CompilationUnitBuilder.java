@@ -1220,38 +1220,34 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertNewClass(JCNewClass expression) {
-    Type anonymousInnerClass =
+    var anonymousInnerClass =
         expression.getClassBody() != null
             ? convertClassDeclaration(expression.getClassBody(), expression)
             : null;
 
-    MethodSymbol constructorElement = (MethodSymbol) expression.constructor;
+    var constructorSymbol = (MethodSymbol) expression.constructor.baseSymbol();
     // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
     // descriptor and the MethodDescriptor are created in the right context.
-    TypeElement typeElement = (TypeElement) expression.type.asElement();
-    boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
-    DeclaredTypeDescriptor enclosingTypeDescriptor =
+    var typeElement = (TypeElement) expression.type.asElement();
+    var inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
+    var enclosingTypeDescriptor =
         environment.createDeclaredTypeDescriptor(expression.type, inNullMarkedScope);
 
-    MethodType methodType = expression.constructor.type.asMethodType();
+    var methodType = expression.constructorType.baseType().asMethodType();
     var typeArguments =
         convertTypeArguments(
             expression.getTypeArguments(),
-            constructorElement,
+            constructorSymbol,
             methodType,
             enclosingTypeDescriptor.getTypeDeclaration().isNullMarked());
 
-    MethodDescriptor constructorMethodDescriptor =
+    var constructorMethodDescriptor =
         environment.createMethodDescriptor(
-            /* enclosingTypeDescriptor= */ enclosingTypeDescriptor,
-            /* methodType= */ environment.convertToMemberOf(constructorElement, expression.type),
-            /* declarationMethodElement= */ constructorElement,
-            typeArguments);
-    Expression qualifier = convertExpressionOrNull(expression.getEnclosingExpression());
-    List<Expression> arguments =
-        convertArguments(constructorMethodDescriptor, expression.getArguments());
-    DeclaredTypeDescriptor targetClassDescriptor =
-        constructorMethodDescriptor.getEnclosingTypeDescriptor();
+            enclosingTypeDescriptor, methodType, constructorSymbol, typeArguments);
+
+    var qualifier = convertExpressionOrNull(expression.getEnclosingExpression());
+    var arguments = convertArguments(constructorMethodDescriptor, expression.getArguments());
+    var targetClassDescriptor = constructorMethodDescriptor.getEnclosingTypeDescriptor();
 
     if (targetClassDescriptor.getTypeDeclaration().isAnonymous() && qualifier != null) {
       // This is the qualifier to for the super invocation, pass as first parameter, since the
@@ -1259,7 +1255,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       arguments.add(0, qualifier);
       qualifier = null;
     }
-    boolean needsQualifier =
+    var needsQualifier =
         constructorMethodDescriptor
             .getEnclosingTypeDescriptor()
             .getTypeDeclaration()

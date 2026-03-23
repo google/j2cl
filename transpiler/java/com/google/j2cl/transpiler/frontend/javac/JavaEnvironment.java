@@ -823,10 +823,6 @@ class JavaEnvironment {
         ImmutableList.of());
   }
 
-  ExecutableType convertToMemberOf(MethodSymbol constructorElement, Type targetType) {
-    return (ExecutableType) constructorElement.asMemberOf(targetType, internalTypes).asType();
-  }
-
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Utility methods to process nullability annotations on classes that are compiled separately.
   // Javac does not present TYPE_USE annotation in the returned type instances.
