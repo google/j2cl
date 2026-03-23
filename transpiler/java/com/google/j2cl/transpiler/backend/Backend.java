@@ -509,8 +509,14 @@ public enum Backend {
           RewriteUnaryExpressions::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
           NormalizeSwitchConstructs::new,
+          () ->
+              new AddJsExportBridgesWasm(
+                  /* enableCustomDescriptorsJsInterop= */ options
+                      .getEnableWasmCustomDescriptorsJsInterop()),
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
+          // It must also run after AddJsExportBridgesWasm so we don't remove fields for which it
+          // needs to generate bridges.
           PropagateCompileTimeConstants::new,
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
@@ -547,10 +553,6 @@ public enum Backend {
           // extracted. After extracting qualifiers, we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
-          () ->
-              new AddJsExportBridgesWasm(
-                  /* enableCustomDescriptorsJsInterop= */ options
-                      .getEnableWasmCustomDescriptorsJsInterop()),
           ImplementFinallyViaControlFlow::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.

@@ -96,10 +96,20 @@
 (func $$create__@jstype.SomeJsType
  (result (ref null $jstype.SomeJsType))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
- (local $$instance (ref null $jstype.SomeJsType))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
   (call $$clinit__void_<once>_@jstype.SomeJsType )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
+  (return (call $$create_$private__@jstype.SomeJsType ))
+ )
+)
+
+;;; SomeJsType<T> SomeJsType.$create_$private()
+(func $$create_$private__@jstype.SomeJsType
+ (result (ref null $jstype.SomeJsType))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
+ (local $$instance (ref null $jstype.SomeJsType))
+ (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
   (local.set $$instance (struct.new_desc $jstype.SomeJsType (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $jstype.SomeJsType.vtable)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
@@ -186,6 +196,46 @@
 )
 (elem declare func $m_useFieldsAndMethods__void@jstype.SomeJsType)
 
+;;; SomeJsType<T> SomeJsType.<init>()
+(func $js_export_<init>__jstype_SomeJsType@jstype.SomeJsType
+ (result (ref null $jstype.SomeJsType))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
+  (call $$clinit__void_<once>_@jstype.SomeJsType )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
+  (return (call $$create_$private__@jstype.SomeJsType ))
+ )
+)
+
+;;; void SomeJsType.publicMethod()
+(func $js_export_publicMethod__void@jstype.SomeJsType
+ (type $function.js_export_publicMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:29:14
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:29:14
+  (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
+ )
+)
+(elem declare func $js_export_publicMethod__void@jstype.SomeJsType)
+
+;;; void SomeJsType.useFieldsAndMethods()
+(func $js_export_useFieldsAndMethods__void@jstype.SomeJsType
+ (type $function.js_export_useFieldsAndMethods__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:37:14
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:37:14
+  (call_ref $function.m_useFieldsAndMethods__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_useFieldsAndMethods__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
+ )
+)
+(elem declare func $js_export_useFieldsAndMethods__void@jstype.SomeJsType)
+
 ;;; void SomeJsType.$clinit()
 (func $$clinit__void_<once>_@jstype.SomeJsType
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
@@ -230,41 +280,3 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstype.SomeJsType)
-
-;;; SomeJsType<T> SomeJsType.$create()
-(func $js_export_$create__jstype_SomeJsType@jstype.SomeJsType
- (result (ref null $jstype.SomeJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
-  (return (call $$create__@jstype.SomeJsType ))
- )
-)
-
-;;; void SomeJsType.publicMethod()
-(func $js_export_publicMethod__void@jstype.SomeJsType
- (type $function.js_export_publicMethod__void)
- (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:29:14
- (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:29:14
-  (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
- )
-)
-(elem declare func $js_export_publicMethod__void@jstype.SomeJsType)
-
-;;; void SomeJsType.useFieldsAndMethods()
-(func $js_export_useFieldsAndMethods__void@jstype.SomeJsType
- (type $function.js_export_useFieldsAndMethods__void)
- (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:37:14
- (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:37:14
-  (call_ref $function.m_useFieldsAndMethods__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_useFieldsAndMethods__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
- )
-)
-(elem declare func $js_export_useFieldsAndMethods__void@jstype.SomeJsType)

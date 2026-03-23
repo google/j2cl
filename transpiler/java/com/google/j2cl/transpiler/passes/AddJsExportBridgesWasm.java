@@ -69,15 +69,17 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
 
   private static boolean shouldGenerateBridge(MethodDescriptor methodDescriptor) {
     return AstUtils.needsWasmJsExport(methodDescriptor)
-        // We don't expose constructors directly. Instead, the factory method is exported.
-        && !methodDescriptor.isConstructor()
         // TODO(b/458472428): Support JsProperty/Getter/Setter.
-        && methodDescriptor.isJsMethod();
+        && (methodDescriptor.isJsConstructor() || methodDescriptor.isJsMethod());
   }
 
   private static MethodDescriptor.MethodOrigin getBridgeOrigin(MethodDescriptor descriptor) {
-    return descriptor.getOrigin() == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
-        ? MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT
-        : MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_METHOD_EXPORT;
+    return switch (descriptor.getJsInfo().getJsMemberType()) {
+      case CONSTRUCTOR -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT;
+      case METHOD -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_METHOD_EXPORT;
+      default ->
+          throw new AssertionError(
+              "Unexpected JsMemberType: " + descriptor.getJsInfo().getJsMemberType().name());
+    };
   }
 }

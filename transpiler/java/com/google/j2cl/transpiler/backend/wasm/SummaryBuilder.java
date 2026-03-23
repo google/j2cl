@@ -152,13 +152,14 @@ public final class SummaryBuilder {
           JsMemberInfo.newBuilder()
               .setKind(
                   switch (methodDescriptor.getJsInfo().getJsMemberType()) {
-                    case METHOD ->
-                        methodDescriptor.getOrigin().isWasmJsConstructorExport()
-                            ? JsMemberInfo.Kind.CONSTRUCTOR
-                            : JsMemberInfo.Kind.METHOD;
+                    case CONSTRUCTOR -> JsMemberInfo.Kind.CONSTRUCTOR;
+                    case METHOD -> JsMemberInfo.Kind.METHOD;
                     // Should not happen, we should be handling all types.
                     // TODO(b/458472428) Consider removing default when all types are handled.
-                    default -> throw new AssertionError();
+                    default ->
+                        throw new AssertionError(
+                            "Unexpected JsMemberType: "
+                                + methodDescriptor.getJsInfo().getJsMemberType().name());
                   })
               .setWasmName(environment.getMethodImplementationName(methodDescriptor))
               .setJsName(methodDescriptor.getSimpleJsName())

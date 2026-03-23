@@ -1387,6 +1387,11 @@ public final class AstUtils {
     return memberDescriptor.canBeReferencedExternally()
         // TODO(b/481799839): Consider "@Wasm native ..." methods.
         && !memberDescriptor.isNative()
+        // Exclude native js constructors.
+        // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true
+        // for native constructors, or exposing isNativeConstructor from MethodDescriptor.
+        && !(memberDescriptor.isConstructor()
+            && memberDescriptor.getEnclosingTypeDescriptor().isNative())
         // JS members that override an already exported JS member don't need a bridge in the
         // overriding type. The bridge in the overridden method does a polymorphic dispatch.
         // Also exclude the generated export bridges themselves.

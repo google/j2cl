@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
@@ -50,17 +51,7 @@ public class WasmExportBridgesUtils {
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
         .addStatements(
-            convertReturnIfNeeded(
-                AstUtils.createForwardingStatement(
-                    sourcePosition,
-                    /* qualifier= */ methodDescriptor.isStatic()
-                        ? null
-                        : new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()),
-                    methodDescriptor,
-                    /* isStaticDispatch= */ methodDescriptor.isStatic(),
-                    arguments,
-                    returnType),
-                returnType))
+            createBridgeTargetInvocation(methodDescriptor, sourcePosition, arguments, returnType))
         .setJsDocDescription(
             origin.isWasmEntryPoint() ? "Wasm entry point forwarding method." : null)
         .setSourcePosition(sourcePosition)
@@ -89,6 +80,36 @@ public class WasmExportBridgesUtils {
     return statement;
   }
 
+  private static Statement createBridgeTargetInvocation(
+      MethodDescriptor methodDescriptor,
+      SourcePosition sourcePosition,
+      List<Expression> arguments,
+      TypeDescriptor returnTypeDescriptor) {
+    if (methodDescriptor.isConstructor()) {
+      checkState(
+          returnTypeDescriptor.isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
+      return ReturnStatement.newBuilder()
+          .setExpression(
+              NewInstance.Builder.from(methodDescriptor)
+                  .setArguments(AstUtils.maybePackageVarargs(methodDescriptor, arguments))
+                  .build())
+          .setSourcePosition(sourcePosition)
+          .build();
+    }
+
+    return convertReturnIfNeeded(
+        AstUtils.createForwardingStatement(
+            sourcePosition,
+            /* qualifier= */ methodDescriptor.isStatic()
+                ? null
+                : new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()),
+            methodDescriptor,
+            /* isStaticDispatch= */ methodDescriptor.isStatic(),
+            arguments,
+            returnTypeDescriptor),
+        returnTypeDescriptor);
+  }
+
   private static MethodDescriptor createBridgeDescriptor(
       MethodDescriptor descriptor, MethodDescriptor.MethodOrigin origin) {
     MethodDescriptor.Builder builder =
@@ -99,10 +120,17 @@ public class WasmExportBridgesUtils {
             .updateParameterTypeDescriptors(
                 descriptor.getParameterTypeDescriptors().stream()
                     .map(WasmExportBridgesUtils::replaceStringWithNativeString)
-                    .collect(toImmutableList()));
-    if (!origin.isWasmEntryPoint()) {
-      builder.setOriginalJsInfo(
-          descriptor.getJsInfo().toBuilder().setJsName(descriptor.getSimpleJsName()).build());
+                    .collect(toImmutableList()))
+            // Copy over the JsInfo from the descriptor. This allows the bridge to retain the JsInfo
+            // if, for example, it is inherited; we otherwise lose the inherited JsInfo because we
+            // lose override information. It also preserves the CONSTRUCTOR member type if the
+            // original member is a constructor.
+            // TODO(b/493656775): Consider calling `makeBridge` here instead and getting JsInfo from
+            // the mangling descriptor/bridge origin.
+            .setOriginalJsInfo(descriptor.getJsInfo());
+    if (descriptor.isConstructor()) {
+      // Change constructors to static factory methods.
+      builder.setStatic(true).setConstructor(false);
     }
     return builder.build();
   }
