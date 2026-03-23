@@ -275,6 +275,38 @@ public class GwtIncompatibleStripperTest {
   }
 
   @Test
+  public void testProcessAnnotationBeforeJavadoc() {
+    // Note that this is NOT considered a javadoc by javac.
+    assertAnnotatedCodeStripped(
+        """
+        public class Foo {
+        -  @GwtIncompatible
+        -  /**"
+        -   * doc"
+        -   */"
+        -  public String a, b;
+        """,
+        "GwtIncompatible");
+  }
+
+  @Test
+  public void testProcessCommentAfterJavadoc() {
+    // Note that this is STILL considered a javadoc by javac.
+    assertAnnotatedCodeStripped(
+        """
+        public class Foo {
+        -  /**
+        -   * doc
+        -   */
+        -  // /**
+        -  @GwtIncompatible
+        -  public String a, b;
+        }
+        """,
+        "GwtIncompatible");
+  }
+
+  @Test
   public void testNestedComment() {
     assertAnnotatedCodeStripped(
         """
@@ -312,6 +344,31 @@ public class GwtIncompatibleStripperTest {
         }
         """,
         "GwtIncompatible");
+  }
+
+  @Test
+  public void testProcessRecord() {
+    assertAnnotatedCodeStripped(
+        """
+            "public class Foo {",
+            "-  @GwtIncompatible",
+            "-  public record Bar(int a, String b) {}",
+            }
+        """,
+        "GwtIncompatible");
+  }
+
+  @Test
+  public void testProcessSealedClass() {
+    assertAnnotatedCodeStripped(
+        """
+            "public class Foo {",
+            "-  @GwtIncompatible",
+            "-  public sealed class Bar permits Baz {}",
+            "  public final class Baz extends Bar {}",
+        }
+        """,
+        "GwtIncompatible  ");
   }
 
   private static void assertAnnotatedCodeStripped(String code, String... annotations) {

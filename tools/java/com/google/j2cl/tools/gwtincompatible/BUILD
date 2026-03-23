@@ -17,13 +17,19 @@ java_library(
         ["*.java"],
         exclude = ["BazelGwtIncompatibleStripper.java"],
     ),
+    add_exports = [
+        "jdk.compiler/com.sun.tools.javac.api",
+        "jdk.compiler/com.sun.tools.javac.file",
+        "jdk.compiler/com.sun.tools.javac.parser",
+        "jdk.compiler/com.sun.tools.javac.tree",
+        "jdk.compiler/com.sun.tools.javac.util",
+    ],
     visibility = ["//tools/javatests/com/google/j2cl/tools/gwtincompatible:__pkg__"],
     deps = [
         "//third_party:args4j",
         "//third_party:guava",
-        "//third_party:jdt-core",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/jdt",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/javac",
     ],
 )
 

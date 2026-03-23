@@ -17,6 +17,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
@@ -26,22 +27,29 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.transpiler.frontend.jdt.AnnotatedNodeCollector;
+import com.google.j2cl.transpiler.frontend.javac.AnnotatedNodeCollector;
+import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.ImportTree;
+import com.sun.source.tree.Tree;
+import com.sun.source.tree.VariableTree;
+import com.sun.source.util.DocSourcePositions;
+import com.sun.tools.javac.api.JavacTrees;
+import com.sun.tools.javac.file.JavacFileManager;
+import com.sun.tools.javac.parser.ParserFactory;
+import com.sun.tools.javac.tree.JCTree.JCCompilationUnit;
+import com.sun.tools.javac.util.Context;
+import com.sun.tools.javac.util.Log;
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
-import org.eclipse.jdt.core.dom.ImportDeclaration;
+import javax.tools.JavaFileObject;
+import javax.tools.SimpleJavaFileObject;
+import javax.tools.StandardLocation;
 
 /**
  * A helper to comment out source code elements annotated with "incompatible" annotations
@@ -89,61 +97,78 @@ public final class GwtIncompatibleStripper {
       return fileContent;
     }
 
-    Map<String, String> compilerOptions = new HashMap<>();
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_14);
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_14);
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_14);
+    Context context = new Context();
+    JavacFileManager fileManager = new JavacFileManager(context, true, UTF_8);
+    try {
+      // Set an empty bootclasspath to save time on javac initialization.
+      // By default it will read classes from the host JDK's bootclasspath.
+      fileManager.setLocationFromPaths(StandardLocation.PLATFORM_CLASS_PATH, ImmutableList.of());
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
 
-    // Parse the file.
-    ASTParser parser = ASTParser.newParser(AST.JLS14);
-    parser.setCompilerOptions(compilerOptions);
-    parser.setResolveBindings(false);
-    parser.setSource(fileContent.toCharArray());
-    CompilationUnit compilationUnit = (CompilationUnit) parser.createAST(null);
+    SimpleJavaFileObject fileObject =
+        new SimpleJavaFileObject(URI.create("string:///temp.java"), JavaFileObject.Kind.SOURCE) {
+          @Override
+          public String getCharContent(boolean ignoreEncodingErrors) {
+            return fileContent;
+          }
+        };
+
+    Log.instance(context).useSource(fileObject);
+
+    JCCompilationUnit compilationUnit =
+        ParserFactory.instance(context)
+            .newParser(
+                fileContent,
+                /* keepDocComments= */ true,
+                /* keepEndPos= */ true,
+                /* keepLineMap= */ true)
+            .parseCompilationUnit();
 
     // Find all the declarations with the annotation name
     AnnotatedNodeCollector gwtIncompatibleVisitor =
         new AnnotatedNodeCollector(
-            ImmutableSet.copyOf(annotationNames),
+            ImmutableList.copyOf(annotationNames),
             // Stop traversing on the first matching scope. Since we're deleting that entire scope
             // there's no need to traverse within it.
             /* stopTraversalOnMatch= */ true);
-    compilationUnit.accept(gwtIncompatibleVisitor);
-    ImmutableSet<ASTNode> nodesToRemove = gwtIncompatibleVisitor.getNodes();
-
-    // Delete the gwtIncompatible nodes.
-    for (ASTNode gwtIncompatibleNode : nodesToRemove) {
-      gwtIncompatibleNode.delete();
-    }
+    gwtIncompatibleVisitor.scan(compilationUnit, null);
+    ImmutableSet<Tree> incompatibleNodes = gwtIncompatibleVisitor.getNodes();
 
     // Gets all the imports that are no longer needed.
-    UnusedImportsNodeCollector unusedImportsNodeCollector = new UnusedImportsNodeCollector();
-    compilationUnit.accept(unusedImportsNodeCollector);
-    List<ImportDeclaration> unusedImportsNodes = unusedImportsNodeCollector.getUnusedImports();
+    UnusedImportsNodeCollector unusedImportsNodeCollector =
+        new UnusedImportsNodeCollector(incompatibleNodes);
+    unusedImportsNodeCollector.scan(compilationUnit, null);
+    List<ImportTree> unusedImportsNodes = unusedImportsNodeCollector.getUnusedImports();
 
-    // Wrap all the not needed nodes inside comments in the original source
+    // Replace all the not needed nodes with whitespace in the original source
     // (so we can preserve line numbers and have accurate source maps).
-    List<ASTNode> nodesToWrap = Lists.newArrayList(unusedImportsNodes);
-    // Add the nodes to remove in start position order.
-    nodesToRemove.stream()
-        .sorted(Comparator.comparingInt(ASTNode::getStartPosition))
-        .forEach(nodesToWrap::add);
-    if (nodesToWrap.isEmpty()) {
+    List<Tree> nodesToRemove = Lists.newArrayList(unusedImportsNodes);
+    nodesToRemove.addAll(incompatibleNodes);
+    if (nodesToRemove.isEmpty()) {
       // Nothing was changed.
       return fileContent;
     }
 
-    // Precondition: Node ranges must not overlap and they must be sorted by position.
+    JavacTrees docTrees = JavacTrees.instance(context);
+    DocSourcePositions sourcePositions = docTrees.getSourcePositions();
+
+    // The nodes to remove are sorted by position. Overlapping node ranges (multivariable) are
+    // handled by virtue of skipping ranges that have already been processed.
     StringBuilder newFileContent = new StringBuilder();
     int currentPosition = 0;
-    for (ASTNode nodeToWrap : nodesToWrap) {
-      int startPosition = nodeToWrap.getStartPosition();
-      int endPosition = startPosition + nodeToWrap.getLength();
-      checkState(
-          currentPosition <= startPosition,
-          "Unexpected node position: %s, must be >= %s",
-          startPosition,
-          currentPosition);
+    for (Tree node : nodesToRemove) {
+      int startPosition =
+          getStartPosition(node, docTrees, sourcePositions, compilationUnit, fileContent);
+      int endPosition = getEndPosition(node, sourcePositions, compilationUnit);
+
+      // If a node is overlapping with a previously stripped node, its startPosition will be
+      // adjusted to the currentPosition.
+      // Multivariable declarations are only current example of this where both share start
+      // position and first one end before the second one.
+      startPosition = Math.max(startPosition, currentPosition);
+      checkState(startPosition < endPosition);
 
       newFileContent.append(fileContent, currentPosition, startPosition);
 
@@ -151,7 +176,7 @@ public final class GwtIncompatibleStripper {
       for (char c : fileContent.substring(startPosition, endPosition).toCharArray()) {
         strippedCodeBuilder.append(Character.isWhitespace(c) ? c : ' ');
       }
-      if (nodeToWrap instanceof EnumConstantDeclaration) {
+      if (node instanceof VariableTree) {
         // HACK: We assume that if there is a comma, it directly follows the enum constant and we
         // remove it. In practice this should work for most cases since if there is a comma
         // following the constant, the formatter will have it adjacent to the constant. If this is
@@ -168,6 +193,30 @@ public final class GwtIncompatibleStripper {
     newFileContent.append(fileContent, currentPosition, fileContent.length());
 
     return newFileContent.toString();
+  }
+
+  private static int getStartPosition(
+      Tree node,
+      JavacTrees trees,
+      DocSourcePositions sourcePositions,
+      CompilationUnitTree compilationUnit,
+      String fileContent) {
+    int start = (int) sourcePositions.getStartPosition(compilationUnit, node);
+    DocCommentTree javaDoc = trees.getDocCommentTree(trees.getPath(compilationUnit, node));
+    if (javaDoc != null) {
+      int javadocStart = (int) sourcePositions.getStartPosition(compilationUnit, javaDoc, javaDoc);
+      checkState(javadocStart < start);
+      // DocTrees.getSourcePositions() returns the position slightly after the initial "/**".
+      // To ensure we strip the entire Javadoc block, we reverse search for the exact "/**"
+      // prefix starting from the returned docStart position.
+      start = fileContent.lastIndexOf("/**", javadocStart);
+    }
+    return start;
+  }
+
+  private static int getEndPosition(
+      Tree node, DocSourcePositions sourcePositions, CompilationUnitTree compilationUnit) {
+    return (int) sourcePositions.getEndPosition(compilationUnit, node);
   }
 
   private GwtIncompatibleStripper() {}

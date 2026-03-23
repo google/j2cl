@@ -7,6 +7,7 @@ load("@rules_java//java:defs.bzl", "java_library")
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [
+        "//tools:__subpackages__",
         "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
     ],
 )

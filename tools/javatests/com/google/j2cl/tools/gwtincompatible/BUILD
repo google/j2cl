@@ -20,7 +20,6 @@ java_test(
     srcs = ["UnusedImportsNodeCollectorTest.java"],
     deps = [
         "//third_party:guava",
-        "//third_party:jdt-core",
         "//third_party:junit",
         "//tools/java/com/google/j2cl/tools/gwtincompatible:gwtincompatible_lib",
     ],

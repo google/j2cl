@@ -15,67 +15,70 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
+import com.sun.source.tree.CompilationUnitTree;
+import com.sun.source.tree.IdentifierTree;
+import com.sun.source.tree.ImportTree;
+import com.sun.source.tree.Tree;
+import com.sun.source.util.TreeScanner;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.ImportDeclaration;
-import org.eclipse.jdt.core.dom.Name;
-import org.eclipse.jdt.core.dom.QualifiedName;
-import org.eclipse.jdt.core.dom.SimpleName;
 
-/** Collects unused imports, so they can be commented out, {@see GwtIncompatibleStripper}. */
-class UnusedImportsNodeCollector extends ASTVisitor {
-  private List<ImportDeclaration> unusedImports = new ArrayList<>();
-  private Set<String> referencedNames = new HashSet<>();
+/** Collects unused imports, so they can be commented out. */
+class UnusedImportsNodeCollector extends TreeScanner<Void, Void> {
+  private final List<ImportTree> unusedImports = new ArrayList<>();
+  private final Set<String> referencedNames = new HashSet<>();
+  private final Set<Tree> nodesToRemove;
 
-  @Override
-  public boolean visit(ImportDeclaration importDeclaration) {
-    // Prevent visiting the names inside the import themselves.
-    return false;
+  public UnusedImportsNodeCollector(Set<Tree> nodesToRemove) {
+    this.nodesToRemove = nodesToRemove;
   }
 
   @Override
-  public boolean visit(QualifiedName qualifiedName) {
-    // We need the first component of the qualified name for example for Foo.Bar.baz
-    // we are looking for the import of Foo.
-    Name qualifier = qualifiedName.getQualifier();
-    while (!qualifier.isSimpleName()) {
-      qualifier = ((QualifiedName) qualifier).getQualifier();
+  public Void scan(Tree tree, Void unused) {
+    if (tree != null && nodesToRemove.contains(tree)) {
+      return null; // Do not scan children of stripped nodes.
     }
-    referencedNames.add(qualifier.getFullyQualifiedName());
-    return false;
+    return super.scan(tree, null);
   }
 
   @Override
-  public boolean visit(SimpleName simpleName) {
-    referencedNames.add(simpleName.getIdentifier());
-    return false;
+  public Void visitImport(ImportTree importTree, Void unused) {
+    // Prevent visiting the names inside the import themselves.
+    return null;
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  public void endVisit(CompilationUnit compilationUnit) {
-    List<ImportDeclaration> imports = compilationUnit.imports();
-    for (ImportDeclaration importDeclaration : imports) {
-      if (importDeclaration.isOnDemand()) {
+  public Void visitIdentifier(IdentifierTree node, Void unused) {
+    referencedNames.add(node.getName().toString());
+    return null;
+  }
+
+  @Override
+  public Void visitCompilationUnit(CompilationUnitTree compilationUnitTree, Void unused) {
+    if (compilationUnitTree.getPackage() != null) {
+      scan(compilationUnitTree.getPackage().getAnnotations(), null);
+    }
+    super.visitCompilationUnit(compilationUnitTree, null);
+
+    for (ImportTree importTree : compilationUnitTree.getImports()) {
+      String importString = importTree.getQualifiedIdentifier().toString();
+      if (importString.endsWith(".*")) {
         // Assume .* imports are always needed.
         continue;
       }
-      SimpleName importedClass =
-          importDeclaration.getName().isSimpleName()
-              ? (SimpleName) importDeclaration.getName()
-              : ((QualifiedName) importDeclaration.getName()).getName();
 
-      if (!referencedNames.contains(importedClass.getIdentifier())) {
-        unusedImports.add(importDeclaration);
+      String importedClass = importString.substring(importString.lastIndexOf('.') + 1);
+
+      if (!referencedNames.contains(importedClass)) {
+        unusedImports.add(importTree);
       }
     }
+    return null;
   }
 
-  public List<ImportDeclaration> getUnusedImports() {
+  public List<ImportTree> getUnusedImports() {
     return unusedImports;
   }
 }
