@@ -19,6 +19,7 @@ import com.google.j2cl.jre.java.lang.JsExceptionTest;
 import com.google.j2cl.jre.java.lang.JsStringTest;
 import com.google.j2cl.jre.java.lang.JsThrowableTest;
 import com.google.j2cl.jre.java.util.JsCollectionTest;
+import com.google.j2cl.jre.java.util.JsIteratorTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -30,5 +31,6 @@ import org.junit.runners.Suite.SuiteClasses;
   JsThrowableTest.class,
   JsStringTest.class,
   JsCollectionTest.class,
+  JsIteratorTest.class,
 })
 public class JsSuite {}

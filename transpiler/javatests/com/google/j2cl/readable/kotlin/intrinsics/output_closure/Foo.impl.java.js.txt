@@ -4,7 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const Collection = goog.require('java.util.Collection$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let j_l_Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
@@ -34,12 +34,17 @@ class Foo extends j_l_Object {
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
  m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ arg0) {
-  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
+  j_l_Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} @return {!Spliterator<T>} */
  m_spliterator__java_util_Spliterator() {
   return /**@type {!Spliterator<T>}*/ (Collection.m_spliterator__$default__java_util_Collection__java_util_Spliterator(this));
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Iterable<T>} */
+ asJsIterable() {
+  return /**@type {Iterable<T>}*/ (j_l_Iterable.m___private_asJsIterable__$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterable(this));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} @return {!Stream<T>} */
@@ -105,7 +110,7 @@ class Foo extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  Iterable = goog.module.get('java.lang.Iterable$impl');
+  j_l_Iterable = goog.module.get('java.lang.Iterable$impl');
  }
 }
 Collection.$markImplementor(Foo);

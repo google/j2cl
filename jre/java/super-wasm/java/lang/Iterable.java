@@ -21,10 +21,6 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
-import javaemul.internal.JsIterableHelper;
-import javaemul.internal.JsIterableHelper.JsIterable;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsNonNull;
 
 /**
  * Allows an instance of a class implementing this interface to be used in the foreach statement.

@@ -72,6 +72,7 @@ package_sources(
         "javaemul/internal/Casts.java",  # J2WASM doesn't need it.
         "javaemul/internal/ArrayStamper.java",  # Unused in Wasm
         "javaemul/internal/Comparables.java",  # Unused in Wasm
+        "javaemul/internal/JsIterableHelper.java",  # Unused in Wasm
         "javaemul/internal/Objects.java",  # Unused in Wasm
         "javaemul/internal/Ref.java",  # Unused in Wasm
     ],

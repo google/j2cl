@@ -18,8 +18,6 @@ package java.util;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.util.function.Consumer;
-import javaemul.internal.JsIterableHelper;
-import javaemul.internal.JsIterableHelper.JsIterator;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html">the official Java
@@ -27,7 +25,7 @@ import javaemul.internal.JsIterableHelper.JsIterator;
  *
  * @param <T> element type
  */
-public interface Iterator<T> extends JsIterator<T> {
+public interface Iterator<T> {
 
   boolean hasNext();
 
@@ -42,12 +40,5 @@ public interface Iterator<T> extends JsIterator<T> {
 
   default void remove() {
     throw new UnsupportedOperationException();
-  }
-
-  @Override
-  default JsIterableHelper.IIterableResult<T> _private_jsNext__() {
-    return hasNext()
-        ? JsIterableHelper.makeResult(next(), false)
-        : JsIterableHelper.makeResult((T) null, true);
   }
 }

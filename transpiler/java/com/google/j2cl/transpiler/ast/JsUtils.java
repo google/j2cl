@@ -33,7 +33,7 @@ public final class JsUtils {
    * characters but we disallow those for the time being.
    */
   public static boolean isValidJsIdentifier(String name) {
-    return name.matches(VALID_JS_NAME_REGEX);
+    return name.equals("[Symbol.iterator]") || name.matches(VALID_JS_NAME_REGEX);
   }
 
   /**

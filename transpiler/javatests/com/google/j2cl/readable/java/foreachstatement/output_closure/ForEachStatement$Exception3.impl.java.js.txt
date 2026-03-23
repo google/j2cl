@@ -1,7 +1,7 @@
 goog.module('foreachstatement.ForEachStatement.Exception3$impl');
 
 const Exception = goog.require('java.lang.Exception$impl');
-const Iterable = goog.require('java.lang.Iterable$impl');
+const j_l_Iterable = goog.require('java.lang.Iterable$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -10,7 +10,7 @@ let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
 /**
- * @implements {Iterable<!Integer>}
+ * @implements {j_l_Iterable<!Integer>}
  */
 class Exception3 extends Exception {
  /** @protected @nodts */
@@ -36,19 +36,24 @@ class Exception3 extends Exception {
  //Default method forwarding stub.
  /** @override @nodts */
  m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ arg0) {
-  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
+  j_l_Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
  }
  //Default method forwarding stub.
  /** @override @nodts @return {Spliterator<!Integer>} */
  m_spliterator__java_util_Spliterator() {
-  return /**@type {Spliterator<!Integer>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
+  return /**@type {Spliterator<!Integer>}*/ (j_l_Iterable.m_spliterator__$default__java_lang_Iterable__java_util_Spliterator(this));
+ }
+ //Default method forwarding stub.
+ /** @override @return {!Iterable<!Integer>} */
+ asJsIterable() {
+  return /**@type {!Iterable<!Integer>}*/ (j_l_Iterable.m___private_asJsIterable__$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterable(this));
  }
  /** @nodts */
  static $clinit() {
   Exception3.$clinit = () =>{};
   Exception3.$loadModules();
   Exception.$clinit();
-  Iterable.$clinit();
+  j_l_Iterable.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -58,7 +63,7 @@ class Exception3 extends Exception {
  /** @nodts */
  static $loadModules() {}
 }
-Iterable.$markImplementor(Exception3);
+j_l_Iterable.$markImplementor(Exception3);
 $Util.$setClassMetadata(Exception3, 'foreachstatement.ForEachStatement$Exception3');
 
 exports = Exception3;
