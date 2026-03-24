@@ -33,17 +33,7 @@ class WhenStatement extends j_l_Object {
   this.$ctor__java_lang_Object__void();
   let tmp = this;
   let tmp0_subject = this.m_getEnumNumber__whenstatement_Numbers_$p_whenstatement_WhenStatement();
-  let /** number */ tmp_1;
-  if ($Equality.$same(tmp0_subject, Numbers.f_ONE__whenstatement_Numbers)) {
-   tmp_1 = 1;
-  } else if ($Equality.$same(tmp0_subject, Numbers.f_TWO__whenstatement_Numbers)) {
-   tmp_1 = 2;
-  } else if ($Equality.$same(tmp0_subject, Numbers.f_THREE__whenstatement_Numbers)) {
-   tmp_1 = 3;
-  } else {
-   return Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
-  }
-  tmp.f_num__whenstatement_WhenStatement_ = tmp_1;
+  tmp.f_num__whenstatement_WhenStatement_ = $Equality.$same(tmp0_subject, Numbers.f_ONE__whenstatement_Numbers) ? 1 : $Equality.$same(tmp0_subject, Numbers.f_TWO__whenstatement_Numbers) ? 2 : $Equality.$same(tmp0_subject, Numbers.f_THREE__whenstatement_Numbers) ? 3 : Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
  }
  /** @final @nodts @return {number} */
  m_whenExpressionWithString__java_lang_String__int_$p_whenstatement_WhenStatement(/** string */ stringValue) {
@@ -187,17 +177,7 @@ class WhenStatement extends j_l_Object {
  /** @final @nodts @return {number} */
  m_whenExpressionWithEnumValue__whenstatement_Numbers__int(/** !Numbers */ number_1) {
   let tmp0_subject = number_1;
-  let /** number */ tmp;
-  if ($Equality.$same(tmp0_subject, Numbers.f_ONE__whenstatement_Numbers)) {
-   tmp = 1;
-  } else if ($Equality.$same(tmp0_subject, Numbers.f_TWO__whenstatement_Numbers)) {
-   tmp = 2;
-  } else if ($Equality.$same(tmp0_subject, Numbers.f_THREE__whenstatement_Numbers)) {
-   tmp = 3;
-  } else {
-   return Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
-  }
-  return tmp;
+  return $Equality.$same(tmp0_subject, Numbers.f_ONE__whenstatement_Numbers) ? 1 : $Equality.$same(tmp0_subject, Numbers.f_TWO__whenstatement_Numbers) ? 2 : $Equality.$same(tmp0_subject, Numbers.f_THREE__whenstatement_Numbers) ? 3 : Intrinsics.m_throwNoWhenBranchMatchedException__kotlin_jvm_internal_NothingStub();
  }
  /** @final @nodts @return {number} */
  m_whenStatementWithEnumValue__whenstatement_Numbers__int(/** Numbers */ number_1) {

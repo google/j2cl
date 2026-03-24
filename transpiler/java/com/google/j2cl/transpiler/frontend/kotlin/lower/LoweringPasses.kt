@@ -160,8 +160,6 @@ private val loweringPhase = loweringPhase {
   moduleLowering(::UnitLowering)
   // Replaces IrExpressionBody with IrBlockBody returning the expression.
   perFileLowering(::ExpressionBodyTransformer)
-  // Place calls that return `Nothing` calls into a synthetic block of `{ foo(); Unit }`.
-  perFileLowering(::KotlinNothingValueCallsLowering)
   // Mange the names of functions that are shadowing those in super types.
   perFileLowering(::MangleWellKnownShadowingFunctionsLowering)
   // Implement intrinsic. Must run after function inlining.
