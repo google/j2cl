@@ -25,11 +25,11 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class NullabilityInferenceProblem10 {
- fun interface Lazy<V> {
+ internal fun interface Lazy<V> {
   fun get(): V
  }
  
- open class InNullMarked internal constructor() {
+ internal open class InNullMarked internal constructor() {
   companion object {
    @JvmStatic
    internal fun observeNullable_pp_j2kt(foo: Foo?): Future<Void?> {
@@ -46,15 +46,15 @@ open class NullabilityInferenceProblem10 {
    }
   }
   
-  interface Foo
+  internal interface Foo
   
-  interface Future<V>
+  internal interface Future<V>
   
-  fun interface Observable<V> {
+  internal fun interface Observable<V> {
    fun addObserver(observer: Observer<V>)
   }
   
-  fun interface Observer<V> {
+  internal fun interface Observer<V> {
    fun observe(v: V): Future<Void?>
   }
  }

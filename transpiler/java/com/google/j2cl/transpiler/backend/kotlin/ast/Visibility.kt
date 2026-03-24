@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.ast
 
+import com.google.j2cl.transpiler.ast.Visibility as JavaVisibility
+
 /** Kotlin visibility. */
 enum class Visibility {
   PUBLIC,
@@ -33,6 +35,16 @@ enum class Visibility {
 
   val isPrivate
     get() = this === PRIVATE
+
+  companion object {
+    fun from(javaVisibility: JavaVisibility): Visibility =
+      when (javaVisibility) {
+        JavaVisibility.PUBLIC -> PUBLIC
+        JavaVisibility.PROTECTED -> PROTECTED
+        JavaVisibility.PACKAGE_PRIVATE -> INTERNAL
+        JavaVisibility.PRIVATE -> PRIVATE
+      }
+  }
 }
 
 /** Returns visibility with the widest scope of [visibilities] or null if none were given. */

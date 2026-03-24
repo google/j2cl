@@ -32,7 +32,7 @@ open class NullabilityScopes3 {
   )
  }
  
- class Optional<T: Any> internal constructor() {
+ internal class Optional<T: Any> internal constructor() {
   companion object {
    @JvmStatic
    internal fun <T: Any> of_pp_j2kt(value: T): Optional<T> {
@@ -41,9 +41,9 @@ open class NullabilityScopes3 {
   }
  }
  
- interface List<T>
+ internal interface List<T>
  
- open class ImmutableList<T: Any> internal constructor(): List<T> {
+ internal open class ImmutableList<T: Any> internal constructor(): List<T> {
   companion object {
    @JvmStatic
    internal fun <T: Any> of_pp_j2kt(): ImmutableList<T> {

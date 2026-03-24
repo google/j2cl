@@ -78,6 +78,7 @@ internal data class TypeSources(val nameSources: NameSources) {
           autoValueAnnotationsSource(typeDeclaration),
           suppressIncompatibleObjCNameOverrideSource(type),
           spaceSeparated(
+            visibilityModifierSource(typeDeclaration),
             inheritanceModifierSource(typeDeclaration),
             classModifiersSource(typeDeclaration),
             kindModifiersSource(typeDeclaration),
@@ -224,6 +225,9 @@ internal data class TypeSources(val nameSources: NameSources) {
 
     fun typeIdentifierSource(type: Type): Source =
       identifierSource(type.declaration.ktSimpleName).withMapping(type.sourcePosition)
+
+    fun visibilityModifierSource(typeDeclaration: TypeDeclaration): Source =
+      typeDeclaration.declaredKtVisibility?.source.orEmpty()
 
     fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
       Source.emptyUnless(typeDeclaration.isClass && !typeDeclaration.isFinal) {

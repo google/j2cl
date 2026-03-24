@@ -24,7 +24,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
-open class TypeWildCards internal constructor() {
+internal open class TypeWildCards internal constructor() {
  companion object {
   @JvmStatic
   internal fun testSupplierWithUpperAndLowerBounds_pp_j2kt(supplier: SupplierWithUpperBound<in Child>) {
@@ -79,39 +79,39 @@ open class TypeWildCards internal constructor() {
   }
  }
  
- open class Parent internal constructor()
+ internal open class Parent internal constructor()
  
- open class Child internal constructor(): Parent()
+ internal open class Child internal constructor(): Parent()
  
- fun interface SupplierWithUpperBound<T: Parent> {
+ internal fun interface SupplierWithUpperBound<T: Parent> {
   fun get(): T
  }
  
- fun interface Observer<E> {
+ internal fun interface Observer<E> {
   fun on(event: E)
  }
  
- fun interface KtInObserver<in E> {
+ internal fun interface KtInObserver<in E> {
   fun on(event: E)
  }
  
- fun interface Observable<E> {
+ internal fun interface Observable<E> {
   fun addObserver(observer: Observer<E>)
  }
  
- fun interface SuperWildcardObservable<E> {
+ internal fun interface SuperWildcardObservable<E> {
   fun addObserver(observer: Observer<in E?>)
  }
  
- fun interface KtInObservable<E> {
+ internal fun interface KtInObservable<E> {
   fun addObserver(observer: KtInObserver<E>)
  }
  
- fun interface RecursiveObservable<E: RecursiveObservable<E>> {
+ internal fun interface RecursiveObservable<E: RecursiveObservable<E>> {
   fun addObserver(observer: Observer<E>)
  }
  
- open class WithoutBounds internal constructor() {
+ internal open class WithoutBounds internal constructor() {
   companion object {
    @JvmStatic
    fun testSetField(holder: Holder<*>) {
@@ -137,11 +137,11 @@ open class TypeWildCards internal constructor() {
    }
   }
   
-  fun interface Observer<E> {
+  internal fun interface Observer<E> {
    fun on(event: E)
   }
   
-  open class Holder<E> internal constructor() {
+  internal open class Holder<E> internal constructor() {
    @JvmField
    internal var observer_pp_j2kt: Observer<E>? = null
    
@@ -154,7 +154,7 @@ open class TypeWildCards internal constructor() {
   }
  }
  
- open class WithBounds internal constructor() {
+ internal open class WithBounds internal constructor() {
   companion object {
    @JvmStatic
    fun testSetField(holder: Holder<*>) {
@@ -180,13 +180,13 @@ open class TypeWildCards internal constructor() {
    }
   }
   
-  interface Event
+  internal interface Event
   
-  fun interface Observer<E: Event> {
+  internal fun interface Observer<E: Event> {
    fun on(event: E)
   }
   
-  open class Holder<E: Event> internal constructor() {
+  internal open class Holder<E: Event> internal constructor() {
    @JvmField
    internal var observer_pp_j2kt: Observer<E>? = null
    
@@ -199,7 +199,7 @@ open class TypeWildCards internal constructor() {
   }
  }
  
- open class WithDependentBounds internal constructor() {
+ internal open class WithDependentBounds internal constructor() {
   companion object {
    @JvmStatic
    fun testSetField(holder: Holder<*, *>) {}
@@ -222,15 +222,15 @@ open class TypeWildCards internal constructor() {
    }
   }
   
-  interface Event
+  internal interface Event
   
-  interface Collection<V>
+  internal interface Collection<V>
   
-  fun interface Observer<E: Event, C: Collection<E>> {
+  internal fun interface Observer<E: Event, C: Collection<E>> {
    fun on(events: C)
   }
   
-  open class Holder<E: Event, C: Collection<E>> internal constructor() {
+  internal open class Holder<E: Event, C: Collection<E>> internal constructor() {
    @JvmField
    internal var observer_pp_j2kt: Observer<E, C>? = null
    
@@ -243,10 +243,10 @@ open class TypeWildCards internal constructor() {
   }
  }
  
- open class Outer<T: Any, V: Any> internal constructor() {
-  interface ParameterizedInterface<T, V>
+ internal open class Outer<T: Any, V: Any> internal constructor() {
+  internal interface ParameterizedInterface<T, V>
   
-  open inner class Inner internal constructor() {
+  internal open inner class Inner internal constructor() {
    internal open fun testNullabilityOnWildcardBounds_pp_j2kt(p: ParameterizedInterface<in T?, out V?>) {
     this.testNullabilityOnWildcardBounds_pp_j2kt(p)
    }

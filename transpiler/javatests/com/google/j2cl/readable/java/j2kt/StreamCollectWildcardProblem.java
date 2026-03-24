@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class StreamCollectWildcardProblem {
-  interface Foo<T> {
+  public interface Foo<T> {
     Foo<T> getThis();
 
     String getString();

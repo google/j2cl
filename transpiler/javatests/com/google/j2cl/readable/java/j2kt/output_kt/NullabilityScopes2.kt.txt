@@ -29,8 +29,8 @@ import kotlin.Suppress
 import kotlin.collections.MutableList
 import kotlin.jvm.JvmStatic
 
-open class NullabilityScopes2 internal constructor() {
- open class NullMarkedScope internal constructor() {
+internal open class NullabilityScopes2 internal constructor() {
+ internal open class NullMarkedScope internal constructor() {
   companion object {
    @JvmStatic
    fun <E> toList(): Collector<E, *, MutableList<E>> {
@@ -38,12 +38,12 @@ open class NullabilityScopes2 internal constructor() {
    }
   }
   
-  fun interface Recursive<M: Recursive<M>> {
+  internal fun interface Recursive<M: Recursive<M>> {
    fun toList(): MutableList<Recursive<M>>
   }
  }
  
- open class NonNullMarkedScope<T: Recursive<T>> internal constructor() {
+ internal open class NonNullMarkedScope<T: Recursive<T>> internal constructor() {
   open fun flatten(recursive: Recursive<T>?): MutableList<Any?>? {
    return recursive!!.toList().stream().map<MutableList<Any?>?>(
     Function { arg0: Recursive<T>? ->

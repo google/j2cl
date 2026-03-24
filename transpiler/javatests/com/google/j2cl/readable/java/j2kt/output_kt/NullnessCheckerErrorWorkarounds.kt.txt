@@ -22,7 +22,7 @@ import javaemul.lang.*
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
-open class NullnessCheckerErrorWorkarounds internal constructor() {
+internal open class NullnessCheckerErrorWorkarounds internal constructor() {
  companion object {
   @JvmStatic
   internal fun testNullableAnnotation_pp_j2kt(table: Table<out Cell<*>>) {
@@ -35,11 +35,11 @@ open class NullnessCheckerErrorWorkarounds internal constructor() {
   }
  }
  
- fun interface Array<T> {
+ internal fun interface Array<T> {
   fun get(): T?
  }
  
- interface Cell<C: Cell<C>>
+ internal interface Cell<C: Cell<C>>
  
- fun interface Table<C: Cell<C>>: Array<C>
+ internal fun interface Table<C: Cell<C>>: Array<C>
 }

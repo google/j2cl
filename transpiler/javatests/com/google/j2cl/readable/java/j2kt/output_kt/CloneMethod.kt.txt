@@ -46,7 +46,7 @@ open class CloneMethod {
   val selected: Int = arraySupplier.get()[slot]
  }
  
- fun interface Supplier<T: Any> {
+ internal fun interface Supplier<T: Any> {
   fun get(): T
  }
 }

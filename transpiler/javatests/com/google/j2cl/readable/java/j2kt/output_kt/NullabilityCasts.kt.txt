@@ -48,9 +48,9 @@ open class NullabilityCasts {
   }
  }
  
- fun interface AsyncFunction<I, O> {
+ internal fun interface AsyncFunction<I, O> {
   fun apply(i: I): Async<O>
  }
  
- interface Async<V>
+ internal interface Async<V>
 }

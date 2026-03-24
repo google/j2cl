@@ -31,7 +31,7 @@ import kotlin.jvm.JvmStatic
 open class DefinitelyNotNull {
  companion object {
   @JvmStatic
-  internal fun testNotNullSupplier_pp_j2kt(supplier: NotNullSupplier<out String?>): String {
+  fun testNotNullSupplier(supplier: NotNullSupplier<out String?>): String {
    return supplier.getNotNull()!!
   }
   
@@ -45,7 +45,7 @@ open class DefinitelyNotNull {
   fun getNotNull(): T & Any
  }
  
- open class Ordering<T> internal constructor() {
+ open class Ordering<T> {
   internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
    throw RuntimeException()
   }
@@ -62,7 +62,7 @@ open class DefinitelyNotNull {
   }
  }
  
- inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
+ internal inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
   @JvmField
   internal val ordering_pp_j2kt: Ordering<in T>
   

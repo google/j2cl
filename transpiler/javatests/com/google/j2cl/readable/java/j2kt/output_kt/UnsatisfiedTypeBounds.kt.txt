@@ -22,18 +22,18 @@ import javaemul.lang.*
 import kotlin.Any
 import kotlin.Suppress
 
-open class UnsatisfiedTypeBounds internal constructor() {
- fun interface Foo<T: Foo<T>> {
+internal open class UnsatisfiedTypeBounds internal constructor() {
+ internal fun interface Foo<T: Foo<T>> {
   fun get(): T
  }
  
- interface Command
+ internal interface Command
  
- open class FooCommand internal constructor(): Foo<FooCommand>, Command {
+ internal open class FooCommand internal constructor(): Foo<FooCommand>, Command {
   override fun get(): FooCommand {
    return this
   }
  }
  
- class Helper<T: Any> internal constructor()
+ internal class Helper<T: Any> internal constructor()
 }

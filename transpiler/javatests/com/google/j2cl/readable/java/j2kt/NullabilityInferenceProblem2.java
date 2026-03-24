@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class NullabilityInferenceProblem2 {
-  interface Supplier<T extends @Nullable Object> {
+  public interface Supplier<T extends @Nullable Object> {
     T get();
   }
 

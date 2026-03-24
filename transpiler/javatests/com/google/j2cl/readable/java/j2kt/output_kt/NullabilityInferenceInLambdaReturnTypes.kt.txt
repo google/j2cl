@@ -81,13 +81,13 @@ open class NullabilityInferenceInLambdaReturnTypes {
   }
  }
  
- interface Foo<V>
+ internal interface Foo<V>
  
- fun interface Supplier<V> {
+ internal fun interface Supplier<V> {
   fun get(): V
  }
  
- fun interface Operator<V> {
+ internal fun interface Operator<V> {
   fun apply(v: V): V
  }
 }

@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class QualifierProjectionCastWithRecursiveType {
-  interface Foo<T extends Foo<T>> {
+  public interface Foo<T extends Foo<T>> {
     String name(@Nullable T s);
   }
 

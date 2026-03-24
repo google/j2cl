@@ -27,8 +27,8 @@ import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.jvm.JvmStatic
 
-open class VarargOverloads internal constructor() {
- open class NewInstanceOverload {
+internal open class VarargOverloads internal constructor() {
+ internal open class NewInstanceOverload {
   internal constructor(foo: Int, vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
@@ -48,7 +48,7 @@ open class VarargOverloads internal constructor() {
   }
  }
  
- open class ThisConstructorCallOverload {
+ internal open class ThisConstructorCallOverload {
   internal constructor(vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
@@ -62,7 +62,7 @@ open class VarargOverloads internal constructor() {
   )
  }
  
- open class SuperConstructorCallOverload {
+ internal open class SuperConstructorCallOverload {
   internal constructor(vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
@@ -71,26 +71,26 @@ open class VarargOverloads internal constructor() {
    val strings_1: Array<String> = strings as Array<String>
   }
   
-  open class Explicit: SuperConstructorCallOverload {
+  internal open class Explicit: SuperConstructorCallOverload {
    internal constructor(): super(
     *arrayOf<String>(),
    )
   }
   
-  open class Implicit: SuperConstructorCallOverload {
+  internal open class Implicit: SuperConstructorCallOverload {
    internal constructor(): super(
     *arrayOf<String>(),
    )
   }
   
-  open class FromImplicitConstructor: SuperConstructorCallOverload {
+  internal open class FromImplicitConstructor: SuperConstructorCallOverload {
    internal constructor(): super(
     *arrayOf<String>(),
    )
   }
  }
  
- open class MethodCallOverload internal constructor() {
+ internal open class MethodCallOverload internal constructor() {
   internal open fun method_pp_j2kt(vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
@@ -106,12 +106,12 @@ open class VarargOverloads internal constructor() {
   }
  }
  
- open class MethodCallOverloadInSubtype internal constructor() {
+ internal open class MethodCallOverloadInSubtype internal constructor() {
   internal open fun method_pp_j2kt(vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
   
-  open class Subtype internal constructor(): MethodCallOverloadInSubtype() {
+  internal open class Subtype internal constructor(): MethodCallOverloadInSubtype() {
    internal open fun method_pp_j2kt(vararg strings: String) {
     val strings_1: Array<String> = strings as Array<String>
    }
@@ -124,7 +124,7 @@ open class VarargOverloads internal constructor() {
   }
  }
  
- open class MethodCallVarargAndArrayArgs internal constructor() {
+ internal open class MethodCallVarargAndArrayArgs internal constructor() {
   internal open fun method_pp_j2kt(vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
@@ -136,7 +136,7 @@ open class VarargOverloads internal constructor() {
   }
  }
  
- open class StaticMethodOverloadSubtypeCallTarget internal constructor() {
+ internal open class StaticMethodOverloadSubtypeCallTarget internal constructor() {
   internal open fun test_pp_j2kt() {
    StaticMethodOverloadSubtypeCallTarget.method_pp_j2kt()
    StaticMethodOverloadSubtypeCallTarget.generalizedInSubtype_pp_j2kt()
@@ -157,7 +157,7 @@ open class VarargOverloads internal constructor() {
    }
   }
   
-  open class Subtype internal constructor(): StaticMethodOverloadSubtypeCallTarget() {
+  internal open class Subtype internal constructor(): StaticMethodOverloadSubtypeCallTarget() {
    companion object {
     @JvmStatic
     internal fun generalizedInSubtype_pp_j2kt(vararg objects: Any) {
@@ -167,7 +167,7 @@ open class VarargOverloads internal constructor() {
   }
  }
  
- enum class EnumWithOverloadedConstructors {
+ internal enum class EnumWithOverloadedConstructors {
   CONSTRUCTOR_OVERLOAD(
    *arrayOf<String>(),
   ),

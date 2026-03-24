@@ -23,16 +23,16 @@ import java.lang.RuntimeException
 import kotlin.String
 import kotlin.Suppress
 
-open class EnclosingTypeNullability internal constructor() {
+internal open class EnclosingTypeNullability internal constructor() {
  internal open fun test_pp_j2kt(foo: Outer<String>) {
   val value: Outer<String>.Inner = foo.getInner_pp_j2kt()
  }
  
- class Outer<V> internal constructor() {
+ internal class Outer<V> internal constructor() {
   internal fun getInner_pp_j2kt(): Outer<V>.Inner {
    throw RuntimeException()
   }
   
-  inner class Inner internal constructor()
+  internal inner class Inner internal constructor()
  }
 }

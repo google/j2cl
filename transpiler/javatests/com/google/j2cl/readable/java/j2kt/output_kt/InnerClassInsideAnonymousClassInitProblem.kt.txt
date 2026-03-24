@@ -29,7 +29,7 @@ open class InnerClassInsideAnonymousClassInitProblem {
  companion object {
   @JvmField
   internal val obj_pp_j2kt: Any = object : Any() {
-   open inner class InnerClassWithSingleConstructor constructor(i: Int) {
+   internal open inner class InnerClassWithSingleConstructor constructor(i: Int) {
     @JvmField
     internal val i_pp_j2kt: Int
     
@@ -46,7 +46,7 @@ open class InnerClassInsideAnonymousClassInitProblem {
   
   @JvmField
   internal val obj2_pp_j2kt: Any = object : Any() {
-   open inner class InnerClassWithTwoConstructors {
+   internal open inner class InnerClassWithTwoConstructors {
     @JvmField
     internal val i_pp_j2kt: Int
     

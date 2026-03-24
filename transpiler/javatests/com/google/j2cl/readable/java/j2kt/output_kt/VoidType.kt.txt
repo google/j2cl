@@ -50,11 +50,11 @@ open class VoidType {
   }
  }
  
- interface NullableBounds<T>
+ internal interface NullableBounds<T>
  
- interface NonNullBounds<T: Any>
+ internal interface NonNullBounds<T: Any>
  
- fun interface Consumer<V: Void?> {
+ internal fun interface Consumer<V: Void?> {
   fun accept(v: V)
  }
 }

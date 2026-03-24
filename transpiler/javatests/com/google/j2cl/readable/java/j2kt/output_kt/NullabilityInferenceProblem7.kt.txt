@@ -50,11 +50,11 @@ open class NullabilityInferenceProblem7 {
   }
  }
  
- interface Foo
+ internal interface Foo
  
- interface Ordering<V> {
+ internal interface Ordering<V> {
   fun <T: V> max(v1: T, v2: T): T
  }
  
- interface FooOrdering: Ordering<Foo>
+ internal interface FooOrdering: Ordering<Foo>
 }

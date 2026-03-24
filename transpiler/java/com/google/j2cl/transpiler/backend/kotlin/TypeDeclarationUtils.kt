@@ -78,6 +78,20 @@ internal val Visibility.defaultMemberKtVisibility: KtVisibility
       Visibility.PRIVATE -> KtVisibility.INTERNAL
     }
 
+internal val TypeDeclaration.defaultKtVisibility: KtVisibility
+  get() = KtVisibility.PUBLIC
+
+internal val TypeDeclaration.ktVisibility: KtVisibility
+  get() =
+    if (useActualKtVisibility) {
+      KtVisibility.from(visibility)
+    } else {
+      KtVisibility.PUBLIC
+    }
+
+internal val TypeDeclaration.declaredKtVisibility: KtVisibility?
+  get() = ktVisibility.takeIf { !isAnonymous && !isLocal && it != defaultKtVisibility }
+
 internal fun TypeDeclaration.equalsOrEnclosedIn(other: TypeDeclaration): Boolean =
   this == other || enclosingTypeDeclaration?.equalsOrEnclosedIn(other) ?: false
 

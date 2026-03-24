@@ -38,13 +38,13 @@ open class DefaultNullable {
  }
 }
 
-open class NotNullable internal constructor() {
- fun interface Consumer<T> {
+internal open class NotNullable internal constructor() {
+ internal fun interface Consumer<T> {
   fun accept(t: T)
  }
 }
 
-abstract class Ordering<T> internal constructor() {
+internal abstract class Ordering<T> internal constructor() {
  internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
   return null!!
  }

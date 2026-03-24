@@ -23,7 +23,7 @@ import kotlin.Any
 import kotlin.Suppress
 
 open class ImportResolution {
- open class Parent internal constructor() {
+ internal open class Parent internal constructor() {
   internal open fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
   }
@@ -44,7 +44,7 @@ open class ImportResolution {
    string.genericMethod_pp_j2kt()
   }
   
-  open inner class String internal constructor() {
+  internal open inner class String internal constructor() {
    internal open fun parentStringMethod_pp_j2kt() {}
    
    internal open fun testJavaLangString_pp_j2kt(string: kotlin.String) {
@@ -69,7 +69,7 @@ open class ImportResolution {
   }
  }
  
- open class Child internal constructor(): j2kt.ImportResolution.Parent() {
+ internal open class Child internal constructor(): j2kt.ImportResolution.Parent() {
   override fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
   }
@@ -90,7 +90,7 @@ open class ImportResolution {
    string.genericMethod_pp_j2kt()
   }
   
-  open inner class String internal constructor() {
+  internal open inner class String internal constructor() {
    internal open fun childStringMethod_pp_j2kt() {}
    
    internal open fun testJavaLang_pp_j2kt(string: kotlin.String) {
@@ -115,7 +115,7 @@ open class ImportResolution {
   }
  }
  
- open class GrandChild internal constructor(): Child() {
+ internal open class GrandChild internal constructor(): Child() {
   override fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
   }
@@ -137,7 +137,7 @@ open class ImportResolution {
   }
  }
  
- open class SiblingParent internal constructor() {
+ internal open class SiblingParent internal constructor() {
   internal open fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
   }
@@ -158,12 +158,12 @@ open class ImportResolution {
    string.genericMethod_pp_j2kt()
   }
   
-  open inner class String internal constructor() {
+  internal open inner class String internal constructor() {
    internal open fun siblingParentStringMethod_pp_j2kt() {}
   }
  }
  
- open class Generic<Parent: Any> internal constructor() {
+ internal open class Generic<Parent: Any> internal constructor() {
   internal open fun testJavaLangString_pp_j2kt(string: kotlin.String) {
    string.java_trim()
   }
@@ -184,7 +184,7 @@ open class ImportResolution {
    string.genericMethod_pp_j2kt()
   }
   
-  open inner class String internal constructor() {
+  internal open inner class String internal constructor() {
    internal open fun genericMethod_pp_j2kt() {}
   }
  }

@@ -20,11 +20,11 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class NullabilityInferenceProblem8 {
-  interface NullableSupplier<V extends @Nullable Object> {
+  public interface NullableSupplier<V extends @Nullable Object> {
     @Nullable V get(String key);
   }
 
-  interface Function<I extends @Nullable Object, O extends @Nullable Object> {
+  public interface Function<I extends @Nullable Object, O extends @Nullable Object> {
     O apply(I i);
   }
 

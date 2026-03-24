@@ -30,7 +30,7 @@ import kotlin.Suppress
 import kotlin.collections.MutableIterable
 import kotlin.jvm.JvmStatic
 
-open class NullabilityInferenceProblem internal constructor() {
+internal open class NullabilityInferenceProblem internal constructor() {
  companion object {
   @JvmStatic
   private fun <E: Any> sortedCopyOf(comparator: Comparator<in E>, elements: MutableIterable<E>): ImmutableList<E> {
@@ -81,9 +81,9 @@ open class NullabilityInferenceProblem internal constructor() {
   }
  }
  
- interface ImmutableList<T: Any>: MutableListJvm<T>
+ internal interface ImmutableList<T: Any>: MutableListJvm<T>
  
- fun interface User {
+ internal fun interface User {
   fun getName(): Optional<String>
  }
 }
