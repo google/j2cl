@@ -757,6 +757,7 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
         "java.lang.UnsupportedOperationException",
         "java.lang.invoke.",
         "java.lang.ref.WeakReference",
+        "java.lang.ref.SoftReference",
         "java.nio.",
         "java.util.Base64",
         "java.util.ConcurrentModificationException",
