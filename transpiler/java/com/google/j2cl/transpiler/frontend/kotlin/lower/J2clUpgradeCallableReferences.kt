@@ -25,6 +25,8 @@ import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.expressions.impl.IrRichFunctionReferenceImpl
 import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
+import org.jetbrains.kotlin.ir.types.classOrFail
+import org.jetbrains.kotlin.ir.util.selectSAMOverriddenFunction
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
@@ -68,7 +70,8 @@ class J2clUpgradeCallableReferences(context: LoweringContext) :
                   ?.getter
                   ?.symbol,
               type = expression.type,
-              overriddenFunctionSymbol = selectSAMOverriddenFunction(expression.type),
+              overriddenFunctionSymbol =
+                expression.type.classOrFail.owner.selectSAMOverriddenFunction().symbol,
               origin = propertyReference.origin,
             )
             .apply { boundValues += propertyReference.boundValues }

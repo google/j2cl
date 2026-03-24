@@ -86,7 +86,7 @@ public class HeaderKlibCompiler() {
         put(CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY, messageCollector)
         put(CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY, messageCollector)
         put(
-          CLIConfigurationKeys.PERF_MANAGER,
+          CommonConfigurationKeys.PERF_MANAGER,
           object : PerformanceManager(JvmPlatforms.defaultJvmPlatform, "HeaderKlibGenerator") {},
         )
         setupCommonArguments(arguments) { versionArray -> MetadataVersion(*versionArray) }

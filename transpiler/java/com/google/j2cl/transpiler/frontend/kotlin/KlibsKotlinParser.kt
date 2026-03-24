@@ -178,7 +178,7 @@ class KlibsKotlinParser(private val problems: Problems) {
     configuration.put(CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY, messageCollector)
     configuration.put(CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY, messageCollector)
     configuration.put(
-      CLIConfigurationKeys.PERF_MANAGER,
+      CommonConfigurationKeys.PERF_MANAGER,
       object : PerformanceManager(JvmPlatforms.defaultJvmPlatform, "J2clKotlinParser") {},
     )
 

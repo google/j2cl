@@ -4,7 +4,7 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import org.jetbrains.kotlin.backend.common.ir.Symbols
+import org.jetbrains.kotlin.backend.common.ir.PreSerializationSymbols
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.expressions.IrCall
@@ -172,7 +172,7 @@ internal class InlineFunctionBodyPreprocessor(
           // So we postpone the postprocessor call for a separate run. This shouldn't be a
           // significant performance hit,
           // as typeOf calls are rare.
-          if (Symbols.isTypeOfIntrinsic(expression.symbol)) {
+          if (PreSerializationSymbols.isTypeOfIntrinsic(expression.symbol)) {
             // We need to call super.remap here because we need to remap local classes.
             typeOfNodes[it] =
               super.remapTypeImpl(

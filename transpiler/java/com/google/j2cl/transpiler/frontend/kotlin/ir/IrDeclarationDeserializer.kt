@@ -6,6 +6,7 @@
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import kotlin.reflect.full.declaredMemberProperties
+import org.jetbrains.kotlin.backend.common.linkage.issues.IrDisallowedErrorNode
 import org.jetbrains.kotlin.backend.common.linkage.issues.IrSymbolTypeMismatchException
 import org.jetbrains.kotlin.backend.common.serialization.IrDeserializationSettings
 import org.jetbrains.kotlin.backend.common.serialization.IrDeserializationSettings.DeserializeFunctionBodies
@@ -25,6 +26,7 @@ import org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType as ProtoDefinitelyNotNullType
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType as ProtoDynamicType
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry as ProtoEnumEntry
+import org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType as ProtoErrorType
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression as ProtoExpression
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrField as ProtoField
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction as ProtoFunction
@@ -39,7 +41,6 @@ import org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeNulla
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement as ProtoStatement
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrType as ProtoType
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrType.KindCase.*
-import org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation as ProtoTypeAbbreviation
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias as ProtoTypeAlias
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter as ProtoTypeParameter
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter as ProtoValueParameter
@@ -64,7 +65,8 @@ import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.*
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
-// copied and modified from org/jetbrains/kotlin/ir/declarations/IrFunction.kt
+// copied and modified from
+// compiler/ir/serialization.common/src/org/jetbrains/kotlin/backend/common/serialization/IrDeclarationDeserializer.kt
 class IrDeclarationDeserializer(
   builtIns: IrBuiltIns,
   private val symbolTable: SymbolTable,
@@ -83,7 +85,7 @@ class IrDeclarationDeserializer(
     settings.deserializeFunctionBodies == DeserializeFunctionBodies.ALL
 
   private val bodyDeserializer =
-    IrBodyDeserializer(builtIns, irFactory, libraryFile, this, settings)
+    IrBodyDeserializer(builtIns, irFactory, libraryFile, this, settings, irInterner)
 
   private fun deserializeName(index: Int): Name =
     irInterner.name(Name.guessByFirstCharacter(libraryFile.string(index)))
@@ -132,15 +134,12 @@ class IrDeclarationDeserializer(
 
     val arguments = proto.argumentList.memoryOptimizedMap { deserializeIrTypeArgument(it) }
     val annotations = deserializeAnnotations(proto.annotationList)
-    val abbreviation =
-      if (proto.hasAbbreviation()) deserializeTypeAbbreviation(proto.abbreviation) else null
 
     return IrSimpleTypeImpl(
       symbol,
       deserializeSimpleTypeNullability(proto.nullability),
       arguments,
       annotations,
-      abbreviation,
     )
   }
 
@@ -153,25 +152,14 @@ class IrDeclarationDeserializer(
 
     val arguments = proto.argumentList.memoryOptimizedMap { deserializeIrTypeArgument(it) }
     val annotations = deserializeAnnotations(proto.annotationList)
-    val abbreviation =
-      if (proto.hasAbbreviation()) deserializeTypeAbbreviation(proto.abbreviation) else null
 
     return IrSimpleTypeImpl(
       symbol,
       SimpleTypeNullability.fromHasQuestionMark(proto.hasQuestionMark),
       arguments,
       annotations,
-      abbreviation,
     )
   }
-
-  private fun deserializeTypeAbbreviation(proto: ProtoTypeAbbreviation): IrTypeAbbreviation =
-    IrTypeAbbreviationImpl(
-      deserializeIrSymbol(proto.typeAlias).checkSymbolType(TYPEALIAS_SYMBOL),
-      proto.hasQuestionMark,
-      proto.argumentList.memoryOptimizedMap { deserializeIrTypeArgument(it) },
-      deserializeAnnotations(proto.annotationList),
-    )
 
   private val SIMPLE_DYNAMIC_TYPE = IrDynamicTypeImpl(emptyList(), Variance.INVARIANT)
 
@@ -182,6 +170,12 @@ class IrDeclarationDeserializer(
       val annotations = deserializeAnnotations(proto.annotationList)
       IrDynamicTypeImpl(annotations, Variance.INVARIANT)
     }
+  }
+
+  private fun deserializeErrorType(proto: ProtoErrorType): IrErrorType {
+    if (!settings.allowErrorNodes) throw IrDisallowedErrorNode(IrErrorType::class.java)
+    val annotations = deserializeAnnotations(proto.annotationList)
+    return IrErrorTypeImpl(null, annotations, Variance.INVARIANT)
   }
 
   private fun deserializeDefinitelyNotNullType(proto: ProtoDefinitelyNotNullType): IrSimpleType {
@@ -196,6 +190,7 @@ class IrDeclarationDeserializer(
       SIMPLE -> deserializeSimpleType(proto.simple)
       LEGACYSIMPLE -> deserializeLegacySimpleType(proto.legacySimple)
       DYNAMIC -> deserializeDynamicType(proto.dynamic)
+      ERROR -> deserializeErrorType(proto.error)
       else -> error("Unexpected IrType kind: ${proto.kindCase}")
     }
   }
@@ -849,14 +844,13 @@ class IrDeclarationDeserializer(
           }
         }
 
-      val unused =
-        field.usingParent {
-          if (proto.hasInitializer()) {
-            withInitializerGuard(isConst) {
-              initializer = deserializeExpressionBody(proto.initializer)
-            }
+      val unused = field.usingParent {
+        if (proto.hasInitializer()) {
+          withInitializerGuard(isConst) {
+            initializer = deserializeExpressionBody(proto.initializer)
           }
         }
+      }
 
       field
     }
@@ -887,7 +881,9 @@ class IrDeclarationDeserializer(
         )
 
       prop.apply {
-        delegate = deserializeIrVariable(proto.delegate)
+        if (proto.hasDelegate()) {
+          delegate = deserializeIrVariable(proto.delegate)
+        }
         getter = deserializeIrFunction(proto.getter)
         if (proto.hasSetter()) setter = deserializeIrFunction(proto.setter)
       }

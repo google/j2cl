@@ -18,22 +18,30 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
-import org.jetbrains.kotlin.backend.common.ir.Symbols
+import org.jetbrains.kotlin.backend.common.ir.PreSerializationSymbols
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.jvm.functionByName
+import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstImpl
+import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
+import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
+import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.isMarkedNullable
 import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.util.dump
+import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
+import org.jetbrains.kotlin.ir.util.getPackageFragment
+import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isGetter
+import org.jetbrains.kotlin.ir.util.isTopLevel
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.util.resolveFakeOverride
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
@@ -47,9 +55,26 @@ import org.jetbrains.kotlin.utils.atMostOne
 //  - we lower to a checkInitialized(value) helper function that can be have its checking disabled.
 //  - private properties are inlined directly to all callsites. This would normally be done by
 //    by JvmPropertiesLowering, but we use our checkInitialized(value) instead.
-internal class LateinitLowering(private val context: J2clBackendContext) :
-  FileLoweringPass, IrElementTransformerVoid() {
+internal class LateinitLowering(
+  // MODIFIED BY GOOGLE
+  // Pass the j2clBackendContext.
+  // original code:
+  // private val loweringContext: LoweringContext,
+  private val loweringContext: J2clBackendContext,
+  // END OF MODIFICATIONS
+  private val uninitializedPropertyAccessExceptionThrower:
+    UninitializedPropertyAccessExceptionThrower,
+) : FileLoweringPass, IrElementTransformerVoid() {
   private val visitedLateinitVariables = mutableSetOf<IrVariable>()
+
+  constructor(
+    // MODIFIED BY GOOGLE
+    // Pass the j2clBackendContext.
+    // original code:
+    // loweringContext: LoweringContext,
+    loweringContext: J2clBackendContext
+    // END OF MODIFICATIONS
+  ) : this(loweringContext, UninitializedPropertyAccessExceptionThrower(loweringContext.symbols))
 
   override fun lower(irFile: IrFile) {
     irFile.transformChildrenVoid(this)
@@ -83,7 +108,7 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
         IrConstImpl.constNull(
           declaration.startOffset,
           declaration.endOffset,
-          context.irBuiltIns.nothingNType,
+          loweringContext.irBuiltIns.nothingNType,
         )
     }
 
@@ -98,13 +123,22 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
       return expression
     }
 
-    return context
+    return loweringContext
       .createIrBuilder(
         (irValue.parent as IrSymbolOwner).symbol,
         expression.startOffset,
         expression.endOffset,
       )
       .run {
+        // MODIFIED BY GOOGLE
+        // Use our checkInitialized(value) helper function that can be have its checking disabled.
+        // original code:
+        // irIfThenElse(
+        //     expression.type,
+        //     irEqualsNull(irGet(irValue)),
+        //     uninitializedPropertyAccessExceptionThrower.build(this, irValue.name.asString()),
+        //     irGet(irValue)
+        // )
         irCall(checkInitializedSymbol).apply {
           // `checkInitialized` is an object class function. Due to the `@JvmStatic` annotation,
           // a dispatch receiver is not required for J2CL, so we set it to `null` for simplicity.
@@ -112,6 +146,7 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
           arguments[1] = irGet(irValue)
           typeArguments[0] = irValue.type.makeNotNull()
         }
+        // END OF MODIFICATIONS
       }
   }
 
@@ -135,16 +170,18 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
   override fun visitCall(expression: IrCall): IrExpression {
     expression.transformChildrenVoid()
 
-    return when {
-      Symbols.isLateinitIsInitializedPropertyGetter(expression.symbol) ->
-        rewriteIsInitialized(expression)
-      expression.isPrivateLateinitAccessor() -> rewriteLateinitGetterAccessor(expression)
-      else -> expression
+    // MODIFIED BY GOOGLE
+    // We rewrite calls to private lateinit property accessors. This would normally be done by
+    // `JvmPropertiesLowering`, which would typically inline these to direct backing field accesses,
+    // but we need to wrap the backing field access with a call to `checkInitialized(value)`.
+    if (expression.isPrivateLateinitAccessor()) {
+      return rewriteLateinitGetterAccessor(expression)
     }
-  }
+    // END OF MODIFICATIONS
 
-  private fun rewriteIsInitialized(expression: IrCall): IrExpression =
-    expression.arguments[0]!!.replaceTailExpression {
+    if (!isLateinitIsInitializedPropertyGetter(expression.symbol)) return expression
+
+    return expression.arguments[0]!!.replaceTailExpression {
       val (property, dispatchReceiver) =
         when (it) {
           is IrPropertyReference ->
@@ -162,15 +199,20 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
         property.backingField
           ?: throw AssertionError("Lateinit property is supposed to have a backing field")
       transformLateinitBackingField(backingField, property)
-      context.createIrBuilder(property.symbol, expression.startOffset, expression.endOffset).run {
-        irNotEquals(irGetField(dispatchReceiver, backingField), irNull())
-      }
+      loweringContext
+        .createIrBuilder(property.symbol, expression.startOffset, expression.endOffset)
+        .run { irNotEquals(irGetField(dispatchReceiver, backingField), irNull()) }
     }
+  }
 
+  // MODIFIED BY GOOGLE
+  // We rewrite calls to private lateinit property accessors. This would normally be done by
+  // `JvmPropertiesLowering`, which would typically inline these to direct backing field accesses,
+  // but we need to wrap the backing field access with a call to `checkInitialized(value)`.
   private fun rewriteLateinitGetterAccessor(expression: IrCall): IrExpression {
     val backingField = expression.symbol.owner.correspondingPropertySymbol!!.owner.backingField!!
     val type = backingField.type
-    return context
+    return loweringContext
       .createIrBuilder(expression.symbol, expression.startOffset, expression.endOffset)
       .run {
         irCall(checkInitializedSymbol, expression.type).apply {
@@ -182,6 +224,8 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
         }
       }
   }
+
+  // END OF MODIFICATIONS
 
   private fun transformLateinitBackingField(backingField: IrField, property: IrProperty) {
     assert(backingField.initializer == null) {
@@ -198,9 +242,29 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
     }
     val startOffset = getter.startOffset
     val endOffset = getter.endOffset
-
+    // MODIFIED BY GOOGLE
+    // Use our checkInitialized(value) helper function that can be have its checking disabled.
+    // original code:
+    // getter.body = loweringContext.irFactory.createBlockBody(startOffset, endOffset) {
+    //   val irBuilder = loweringContext.createIrBuilder(getter.symbol, startOffset, endOffset)
+    //   irBuilder.run {
+    //     val resultVar = scope.createTemporaryVariable(
+    //       irGetField(getter.dispatchReceiverParameter?.let { irGet(it) }, backingField, type),
+    //       inventUniqueName = false,
+    //     )
+    //     resultVar.parent = getter
+    //     statements.add(resultVar)
+    //     val throwIfNull = irIfThenElse(
+    //       context.irBuiltIns.nothingType,
+    //       irNotEquals(irGet(resultVar), irNull()),
+    //       irReturn(irGet(resultVar)),
+    //       throwUninitializedPropertyAccessException(backingField.name.asString())
+    //     )
+    //     statements.add(throwIfNull)
+    //   }
+    // }
     getter.body =
-      context.createIrBuilder(getter.symbol, startOffset, endOffset).run {
+      loweringContext.createIrBuilder(getter.symbol, startOffset, endOffset).run {
         irBlockBody {
           +irReturn(
             irCall(checkInitializedSymbol, type.makeNotNull()).apply {
@@ -216,10 +280,11 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
           )
         }
       }
+    // END OF MODIFICATIONS
   }
 
   private val jvmIntrinsicsClass by lazy {
-    context.jvmBackendContext.irPluginContext!!.referenceClass(
+    loweringContext.jvmBackendContext.irPluginContext!!.referenceClass(
       ClassId.topLevel(FqName("kotlin.jvm.internal.Intrinsics"))
     )!!
   }
@@ -227,6 +292,17 @@ internal class LateinitLowering(private val context: J2clBackendContext) :
   private val checkInitializedSymbol by lazy {
     jvmIntrinsicsClass.functionByName("checkInitialized")
   }
+
+  private fun isLateinitIsInitializedPropertyGetter(symbol: IrFunctionSymbol): Boolean =
+    symbol is IrSimpleFunctionSymbol &&
+      symbol.owner.let { function ->
+        function.name.asString() == "<get-isInitialized>" &&
+          function.isTopLevel &&
+          function.getPackageFragment().packageFqName.asString() == "kotlin" &&
+          function.hasShape(extensionReceiver = true) &&
+          function.parameters[0].type.classOrNull?.owner?.fqNameWhenAvailable?.toUnsafe() ==
+            StandardNames.FqNames.kProperty0
+      }
 }
 
 private inline fun IrExpression.replaceTailExpression(
@@ -246,8 +322,22 @@ private inline fun IrExpression.replaceTailExpression(
   return this
 }
 
+open class UninitializedPropertyAccessExceptionThrower(
+  private val symbols: PreSerializationSymbols
+) {
+  open fun build(builder: IrBuilderWithScope, name: String): IrExpression {
+    val throwExceptionFunction = symbols.throwUninitializedPropertyAccessException.owner
+    return builder.irCall(throwExceptionFunction).apply { arguments[0] = builder.irString(name) }
+  }
+}
+
+// MODIFIED BY GOOGLE
+// We rewrite calls to private lateinit property accessors. This would normally be done by
+// `JvmPropertiesLowering`, which would typically inline these to direct backing field accesses,
+// but we need to wrap the backing field access with a call to `checkInitialized(value)`.
 private fun IrCall.isPrivateLateinitAccessor(): Boolean {
   val accessor = symbol.owner.takeIf { it.isGetter } ?: return false
   val property = accessor.correspondingPropertySymbol?.owner ?: return false
   return property.isLateinit && DescriptorVisibilities.isPrivate(property.visibility)
 }
+// END OF MODIFICATIONS

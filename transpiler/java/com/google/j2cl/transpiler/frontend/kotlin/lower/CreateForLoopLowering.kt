@@ -182,8 +182,15 @@ private class LoopTransformer(
       extractAndSplitInnerLoopBody(expression) ?: return super.visitBlock(expression)
     val oldLoop = getInnerLoop(expression)
 
+    val extraTempVariables = mutableListOf<IrVariable>()
+
     val newLoop =
       if (isForEachLoop(initializers)) {
+        // Only the FOR_LOOP_ITERATOR variable is relevant for the for-in loop structure.
+        // Other initializers are temporary variables that can be kept outside the new loop.
+        extraTempVariables.addAll(
+          initializers.filter { it.origin != IrDeclarationOrigin.FOR_LOOP_ITERATOR }
+        )
         createForInLoop(expression, initializers, condition, innerLoopBody, oldLoop)
           ?: return super.visitBlock(expression)
       } else {
@@ -205,12 +212,13 @@ private class LoopTransformer(
       startOffset = expression.startOffset,
       endOffset = expression.endOffset,
       type = expression.type,
-      statements = listOf(newLoop),
+      statements = extraTempVariables + listOf(newLoop),
     )
   }
 
-  private fun isForEachLoop(initializers: List<IrVariable>) =
-    initializers.singleOrNull()?.origin == IrDeclarationOrigin.FOR_LOOP_ITERATOR
+  private fun isForEachLoop(initializers: List<IrVariable>) = initializers.any {
+    it.origin == IrDeclarationOrigin.FOR_LOOP_ITERATOR
+  }
 
   private fun createForInLoop(
     originalExpression: IrBlock,
@@ -229,7 +237,10 @@ private class LoopTransformer(
       return null
     }
 
-    val iterableExpression = extractIterableExpression(initializers[0].initializer) ?: return null
+    val iterableExpression =
+      extractIterableExpression(
+        initializers.single { it.origin == IrDeclarationOrigin.FOR_LOOP_ITERATOR }.initializer
+      ) ?: return null
 
     // Pop off the first variable definition. This should be the loop variable. Any other
     // variable definitions would be from destructuring the loop variable, which can be moved
@@ -262,6 +273,7 @@ private class LoopTransformer(
       val variable =
         (blockStatements[i] as? IrVariable)?.takeIf {
           it.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE ||
+            it.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE_FOR_INLINED_PARAMETER ||
             it.origin == IrDeclarationOrigin.FOR_LOOP_ITERATOR
         }
       if (variable == null) {

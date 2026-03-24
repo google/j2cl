@@ -7,7 +7,9 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import kotlin.reflect.full.declaredMemberProperties
 import org.jetbrains.kotlin.backend.common.serialization.IrDeserializationSettings
+import org.jetbrains.kotlin.backend.common.serialization.IrInterningService
 import org.jetbrains.kotlin.backend.common.serialization.IrLibraryFile
+import org.jetbrains.kotlin.backend.common.serialization.deserializeFileEntryName
 import org.jetbrains.kotlin.backend.common.serialization.encodings.*
 import org.jetbrains.kotlin.backend.common.serialization.encodings.BinarySymbolData.SymbolKind
 import org.jetbrains.kotlin.backend.common.serialization.encodings.BinarySymbolData.SymbolKind.*
@@ -93,6 +95,7 @@ class IrBodyDeserializer(
   private val libraryFile: IrLibraryFile,
   private val declarationDeserializer: IrDeclarationDeserializer,
   private val settings: IrDeserializationSettings,
+  private val irInterner: IrInterningService,
 ) {
 
   private val fileLoops = hashMapOf<Int, IrLoop>()
@@ -199,7 +202,8 @@ class IrBodyDeserializer(
       runIf(proto.hasInlinedFunctionSymbol()) {
         deserializeTypedSymbol<IrFunctionSymbol>(proto.inlinedFunctionSymbol, FUNCTION_SYMBOL)
       }
-    val inlinedFunctionFileEntry = deserializeFileEntry(libraryFile.fileEntry(proto))
+    val inlinedFunctionFileEntry =
+      libraryFile.deserializeFileEntry(libraryFile.fileEntry(proto), irInterner)
     return withDeserializedBlock(proto.base) { origin, statements ->
       IrInlinedFunctionBlockImpl(
         start,
@@ -302,11 +306,10 @@ class IrBodyDeserializer(
 
       val rawType =
         with(IrSimpleTypeBuilder()) {
-          arguments =
-            typeParameters.memoryOptimizedMap {
-              classifier = it.symbol
-              buildSimpleType()
-            }
+          arguments = typeParameters.memoryOptimizedMap {
+            classifier = it.symbol
+            buildSimpleType()
+          }
           classifier = klass.symbol
           buildSimpleType()
         }
@@ -1097,12 +1100,29 @@ class IrBodyDeserializer(
 }
 
 // MODIFIED BY GOOGLE.
-// Copied from org.jetbrains.kotlin.backend.jvm.serialization.IrFileDeserializer to make internal
-// api available.
-internal fun deserializeFileEntry(fileEntryProto: FileEntry): IrFileEntry =
-  NaiveSourceBasedFileEntryImpl(
-    name = fileEntryProto.name,
-    lineStartOffsets = fileEntryProto.lineStartOffsetList.toIntArray(),
+// Copied from
+// compiler/ir/serialization.common/src/org/jetbrains/kotlin/backend/common/serialization/IrFileDeserializer.kt
+// to make internal api available.
+internal fun IrLibraryFile.deserializeFileEntry(
+  fileEntryProto: FileEntry,
+  irInterner: IrInterningService,
+): IrFileEntry {
+  val lineStartOffsets: IntArray
+  if (fileEntryProto.lineStartOffsetDeltaCount > 0) {
+    lineStartOffsets = IntArray(fileEntryProto.lineStartOffsetDeltaCount)
+    var offset = 0
+    for ((index, delta) in fileEntryProto.lineStartOffsetDeltaList.withIndex()) {
+      offset += delta
+      lineStartOffsets[index] = offset
+    }
+  } else {
+    lineStartOffsets = fileEntryProto.lineStartOffsetList.toIntArray()
+  }
+
+  return NaiveSourceBasedFileEntryImpl(
+    name = irInterner.string(deserializeFileEntryName(fileEntryProto)),
+    lineStartOffsets = lineStartOffsets,
     firstRelevantLineIndex = fileEntryProto.firstRelevantLineIndex,
   )
+}
 // END OF MODIFICATIONS.

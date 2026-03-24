@@ -21,7 +21,6 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendContext;
 import org.jetbrains.kotlin.backend.jvm.lower.FileClassLowering;
 import org.jetbrains.kotlin.backend.jvm.lower.JvmInventNamesForLocalClasses;
 import org.jetbrains.kotlin.backend.jvm.lower.JvmLateinitLowering;
-import org.jetbrains.kotlin.backend.jvm.lower.JvmLocalClassPopupLowering;
 import org.jetbrains.kotlin.backend.jvm.lower.JvmPropertiesLowering;
 import org.jetbrains.kotlin.backend.jvm.lower.JvmReturnableBlockLowering;
 import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering;
@@ -33,8 +32,6 @@ import org.jetbrains.kotlin.backend.jvm.lower.StaticInitializersLowering;
  */
 @SuppressWarnings("KotlinInternal")
 final class SmuggledJvmLoweringPasses {
-  static final Function1<JvmBackendContext, FileLoweringPass> jvmLocalClassPopupLoweringFactory =
-      JvmLocalClassPopupLowering::new;
   static final Function1<JvmBackendContext, FileLoweringPass> jvmInventNamesForLocalClassesFactory =
       JvmInventNamesForLocalClasses::new;
   static final Function1<JvmBackendContext, FileLoweringPass> staticInitializersLoweringFactory =

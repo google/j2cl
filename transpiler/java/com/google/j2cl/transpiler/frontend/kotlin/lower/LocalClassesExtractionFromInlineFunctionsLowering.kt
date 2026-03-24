@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
 import org.jetbrains.kotlin.backend.common.LoweringContext
 import org.jetbrains.kotlin.backend.common.ScopeWithIr
-import org.jetbrains.kotlin.backend.common.lower.LocalClassPopupLowering
+import org.jetbrains.kotlin.backend.common.lower.LocalDeclarationPopupLowering
 import org.jetbrains.kotlin.backend.common.lower.LocalDeclarationsLowering
 import org.jetbrains.kotlin.backend.common.runOnFilePostfix
 import org.jetbrains.kotlin.ir.IrElement
@@ -48,12 +48,12 @@ internal class LocalClassesInInlineFunctionsLowering(val context: LoweringContex
     function.collectExtractableLocalClassesInto(classesToExtract)
     if (classesToExtract.isEmpty()) return
 
-    LocalDeclarationsLowering(context).lower(function, function, classesToExtract)
+    LocalDeclarationsLowering(context).lower(irBody, function)
   }
 }
 
 internal class LocalClassesExtractionFromInlineFunctionsLowering(context: LoweringContext) :
-  LocalClassPopupLowering(context) {
+  LocalDeclarationPopupLowering(context) {
 
   private val classesToExtract = mutableSetOf<IrClass>()
 
@@ -67,8 +67,8 @@ internal class LocalClassesExtractionFromInlineFunctionsLowering(context: Loweri
     classesToExtract.clear()
   }
 
-  override fun shouldPopUp(klass: IrClass, currentScope: ScopeWithIr?): Boolean {
-    return classesToExtract.contains(klass)
+  override fun shouldPopUp(declaration: IrDeclaration, currentScope: ScopeWithIr?): Boolean {
+    return declaration is IrClass && classesToExtract.contains(declaration)
   }
 }
 

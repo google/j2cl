@@ -286,10 +286,6 @@ private class IrLibraryFileFromAnnotation(
     error("This method is never supposed to be called")
   }
 
-  override fun inlineDeclaration(index: Int): ProtoDeclaration {
-    error("This method is never supposed to be called")
-  }
-
   override fun type(index: Int): ProtoType = types[index]
 
   override fun signature(index: Int): ProtoIdSignature = signatures[index]
@@ -352,7 +348,9 @@ fun makeSimpleFakeOverrideBuilder(
     typeSystemContext,
     fakeOverrideDeclarationTable =
       PrePopulatedDeclarationTable(symbolDeserializer.deserializedSymbolsWithOwnersInCurrentFile),
-    friendModules = emptyMap(), // TODO: provide friend modules
+    friendModules =
+      emptyMap(), // TODO(KT-62534) can be removed when ModuleDescriptorImpl.shouldSeeInternalsOf is
+    // fixed
     partialLinkageSupport = PartialLinkageSupportForLinker.DISABLED,
   )
 }

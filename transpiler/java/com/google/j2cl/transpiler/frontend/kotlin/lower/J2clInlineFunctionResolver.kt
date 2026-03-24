@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.UnsignedType
 import org.jetbrains.kotlin.ir.declarations.IrFunction
-import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
+import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.inline.InlineFunctionResolver
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.util.resolveFakeOverrideOrSelf
@@ -31,7 +31,9 @@ internal class J2clInlineFunctionResolver(private val context: J2clBackendContex
     return symbol.owner.resolveFakeOverrideOrSelf().takeIf { it.isInline }
   }
 
-  override fun shouldSkipBecauseOfCallSite(expression: IrFunctionAccessExpression): Boolean {
+  override fun shouldSkipBecauseOfCallSite(
+    expression: IrMemberAccessExpression<IrFunctionSymbol>
+  ): Boolean {
     return super.shouldSkipBecauseOfCallSite(expression) ||
       // arrayOf functions are inline intrinsic functions in the jvm stdlib and should not be
       // inlined. The calls to these functions are directly handled by our CompilationUnitBuilder.

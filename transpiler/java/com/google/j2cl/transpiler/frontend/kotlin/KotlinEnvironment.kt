@@ -934,13 +934,7 @@ internal class KotlinEnvironment(
       }
 
     // Return a new copy of the type with the builtin class symbol in place of the original symbol.
-    return IrSimpleTypeImpl(
-      builtinClass,
-      nullability,
-      replacementArguments,
-      annotations,
-      abbreviation,
-    )
+    return IrSimpleTypeImpl(builtinClass, nullability, replacementArguments, annotations)
   }
 
   fun IrClass.getDeclaredFields(): Set<IrField> {

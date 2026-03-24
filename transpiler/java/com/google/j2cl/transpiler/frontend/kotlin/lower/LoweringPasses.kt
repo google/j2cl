@@ -121,7 +121,7 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::LocalDelegatedPropertiesLowering)
   // Make IrGetField/IrSetField to objects' fields point to the static versions
   perFileLowering(::RemapObjectFieldAccesses)
-  perFileLowering(jvmLocalClassPopupLoweringFactory)
+  perFileLowering(::JvmLocalDeclarationPopupLowering)
   // Adds stub methods to the implementations of the read-only collection types to properly
   // implement the Java collection APIs.
   perFileLowering(::CollectionStubMethodLowering)
