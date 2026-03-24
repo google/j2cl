@@ -19,6 +19,7 @@
 package j2kt
 
 import javaemul.lang.*
+import javaemul.lang.annotations.WasAutoValue
 import kotlin.Suppress
 
 class VisibilityModifiers {
@@ -30,25 +31,21 @@ class VisibilityModifiers {
  
  private open class Private internal constructor()
  
- abstract class AutoValue_Value internal constructor()
- 
- abstract class AutoOneOf_OneOf internal constructor()
+ @WasAutoValue
+ internal abstract class Value internal constructor() {
+  @javaemul.lang.annotations.WasAutoValue.Builder
+  internal abstract class Builder internal constructor() {
+   internal abstract fun build_pp_j2kt(): Value?
+  }
+ }
  
  abstract class AutoConverter_Converter internal constructor()
  
  abstract class AutoEnumConverter_EnumConverter internal constructor()
  
- class Value: AutoValue_Value()
- 
- class OneOf: AutoOneOf_OneOf()
- 
  class Converter: AutoConverter_Converter()
  
  class EnumConverter: AutoEnumConverter_EnumConverter()
- 
- internal abstract class NotAutoValue_Value internal constructor()
- 
- internal abstract class NotAutoOneOf_OneOf internal constructor()
  
  internal abstract class NotAutoConverter_Converter internal constructor()
  

@@ -100,3 +100,19 @@ internal fun TypeDeclaration.isFromJRE(): Boolean =
     packageName.startsWith("java.") ||
     packageName.startsWith("javax.") ||
     packageName.startsWith("kotlin.")
+
+private val AUTO_CONVERTER_PREFIXES: List<String> = listOf("AutoConverter_", "AutoEnumConverter_")
+
+internal val TypeDeclaration.isAutoConverter: Boolean
+  get() = classComponents.any { classComponent ->
+    AUTO_CONVERTER_PREFIXES.any { classComponent.startsWith(it) }
+  }
+
+internal val TypeDeclaration.isAutoValueOrBuilder: Boolean
+  get() =
+    hasAnnotation("com.google.auto.value.AutoValue") ||
+      hasAnnotation("com.google.auto.value.AutoValue.Builder")
+
+internal val TypeDeclaration.hasAutoValueOrBuilderSuperType: Boolean
+  get() =
+    toDescriptor().superTypesStream.map { it.typeDeclaration }.anyMatch { it.isAutoValueOrBuilder }

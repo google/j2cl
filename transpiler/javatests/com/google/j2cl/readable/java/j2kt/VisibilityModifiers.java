@@ -15,6 +15,8 @@
  */
 package j2kt;
 
+import com.google.auto.value.AutoValue;
+
 public final class VisibilityModifiers {
   public static class Public {}
 
@@ -24,25 +26,23 @@ public final class VisibilityModifiers {
 
   private static class Private {}
 
-  abstract static class AutoValue_Value {}
+  @AutoValue
+  abstract static class Value {
+    @AutoValue.Builder
+    abstract static class Builder {
+      abstract Value build();
+    }
+  }
 
-  abstract static class AutoOneOf_OneOf {}
-
+  // Emulates generated AutoConverter class.
   abstract static class AutoConverter_Converter {}
 
+  // Emulates generated AutoEnumConverter class.
   abstract static class AutoEnumConverter_EnumConverter {}
-
-  public static final class Value extends AutoValue_Value {}
-
-  public static final class OneOf extends AutoOneOf_OneOf {}
 
   public static final class Converter extends AutoConverter_Converter {}
 
   public static final class EnumConverter extends AutoEnumConverter_EnumConverter {}
-
-  abstract static class NotAutoValue_Value {}
-
-  abstract static class NotAutoOneOf_OneOf {}
 
   abstract static class NotAutoConverter_Converter {}
 
