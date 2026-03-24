@@ -737,26 +737,61 @@ class JavaEnvironment {
       typeArguments = ImmutableList.of();
     }
 
+    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     TypeDescriptor returnTypeDescriptor =
         adjustForSyntheticEnumOrAnnotationMethod(
             declarationMethodElement,
             applyReturnTypeNullabilityAnnotations(
                 createTypeDescriptorWithNullability(
-                    returnType,
-                    declarationMethodElement.getAnnotationMirrors(),
-                    enclosingTypeDescriptor.getTypeDeclaration().isNullMarked()),
+                    returnType, declarationMethodElement.getAnnotationMirrors(), inNullMarkedScope),
                 declarationMethodElement));
 
     ImmutableList<ParameterDescriptor> parameterDescriptors =
         convertParameterDescriptors(enclosingTypeDescriptor, declarationMethodElement, parameters);
 
-    return createMethodDescriptor(
-        enclosingTypeDescriptor,
-        declarationMethodElement,
-        declarationMethodDescriptor,
-        parameterDescriptors,
-        returnTypeDescriptor,
-        typeArguments);
+    ImmutableList<TypeVariable> typeParameterTypeDescriptors =
+        declarationMethodElement.getTypeParameters().stream()
+            .map(TypeParameterElement::asType)
+            .map(javax.lang.model.type.TypeVariable.class::cast)
+            .map(tv -> createTypeVariable(tv, ImmutableList.of(), inNullMarkedScope))
+            .collect(toImmutableList());
+
+    var thrownExceptions =
+        declarationMethodElement.getThrownTypes().stream()
+            .map(this::createTypeDescriptor)
+            .collect(toImmutableList());
+
+    boolean isNative =
+        isNative(declarationMethodElement)
+            || (!JsInteropUtils.getJsInfo(declarationMethodElement).isJsOverlay()
+                && enclosingTypeDescriptor.isNative()
+                && isAbstract(declarationMethodElement));
+    boolean isConstructor = declarationMethodElement.getKind() == ElementKind.CONSTRUCTOR;
+
+    String methodName = declarationMethodElement.getSimpleName().toString();
+    return MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setName(isConstructor ? null : methodName)
+        .setParameterDescriptors((List<ParameterDescriptor>) parameterDescriptors)
+        .setDeclarationDescriptor(declarationMethodDescriptor)
+        .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
+        .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+        .setTypeArgumentTypeDescriptors(typeArguments)
+        .setThrownTypeDescriptors(thrownExceptions)
+        .setOriginalJsInfo(JsInteropUtils.getJsInfo(declarationMethodElement))
+        .setOriginalKtInfo(J2ktInteropUtils.getJ2ktInfo(declarationMethodElement))
+        .setVisibility(getVisibility(declarationMethodElement))
+        .setStatic(isStatic(declarationMethodElement))
+        .setConstructor(isConstructor)
+        .setNative(isNative)
+        .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
+        .setFinal(isFinal(declarationMethodElement))
+        .setDefaultMethod(isDefaultMethod(declarationMethodElement))
+        .setAbstract(isAbstract(declarationMethodElement))
+        .setSynchronized(isSynchronized(declarationMethodElement))
+        .setSynthetic(isSynthetic(declarationMethodElement))
+        .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
+        .build();
   }
 
   private ImmutableList<ParameterDescriptor> convertParameterDescriptors(
@@ -965,66 +1000,6 @@ class JavaEnvironment {
 
   private boolean isSameType(TypeMirror thisType, TypeMirror thatType) {
     return internalTypes.isSameType((Type) thisType, (Type) thatType);
-  }
-
-  private MethodDescriptor createMethodDescriptor(
-      DeclaredTypeDescriptor enclosingTypeDescriptor,
-      ExecutableElement declarationMethodElement,
-      MethodDescriptor declarationMethodDescriptor,
-      List<ParameterDescriptor> parameterDescriptors,
-      TypeDescriptor returnTypeDescriptor,
-      List<TypeDescriptor> typeArguments) {
-    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
-    ImmutableList<TypeVariable> typeParameterTypeDescriptors =
-        declarationMethodElement.getTypeParameters().stream()
-            .map(TypeParameterElement::asType)
-            .map(javax.lang.model.type.TypeVariable.class::cast)
-            .map(tv -> createTypeVariable(tv, ImmutableList.of(), inNullMarkedScope))
-            .collect(toImmutableList());
-
-    boolean isStatic = isStatic(declarationMethodElement);
-    Visibility visibility = getVisibility(declarationMethodElement);
-    boolean isDefault = isDefaultMethod(declarationMethodElement);
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(declarationMethodElement);
-    KtInfo ktInfo = J2ktInteropUtils.getJ2ktInfo(declarationMethodElement);
-
-    boolean isNative =
-        isNative(declarationMethodElement)
-            || (!jsInfo.isJsOverlay()
-                && enclosingTypeDescriptor.isNative()
-                && isAbstract(declarationMethodElement));
-
-    boolean isConstructor = declarationMethodElement.getKind() == ElementKind.CONSTRUCTOR;
-    String methodName = declarationMethodElement.getSimpleName().toString();
-
-    var thrownExceptions =
-        declarationMethodElement.getThrownTypes().stream()
-            .map(this::createTypeDescriptor)
-            .collect(toImmutableList());
-
-    return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(isConstructor ? null : methodName)
-        .setParameterDescriptors(parameterDescriptors)
-        .setDeclarationDescriptor(declarationMethodDescriptor)
-        .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
-        .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
-        .setTypeArgumentTypeDescriptors(typeArguments)
-        .setThrownTypeDescriptors(thrownExceptions)
-        .setOriginalJsInfo(jsInfo)
-        .setOriginalKtInfo(ktInfo)
-        .setVisibility(visibility)
-        .setStatic(isStatic)
-        .setConstructor(isConstructor)
-        .setNative(isNative)
-        .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
-        .setFinal(isFinal(declarationMethodElement))
-        .setDefaultMethod(isDefault)
-        .setAbstract(isAbstract(declarationMethodElement))
-        .setSynchronized(isSynchronized(declarationMethodElement))
-        .setSynthetic(isSynthetic(declarationMethodElement))
-        .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
-        .build();
   }
 
   private boolean isJavaLangObjectOverride(MethodSymbol method) {

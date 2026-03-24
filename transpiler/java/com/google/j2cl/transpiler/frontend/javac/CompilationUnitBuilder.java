@@ -1096,10 +1096,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     var targetMethodDescriptor =
         environment.createMethodDescriptor(
-            enclosingTypeDescriptor,
-            /* methodType= */ methodType.asMethodType(),
-            /* declarationMethodElement= */ methodSymbol,
-            typeArguments);
+            enclosingTypeDescriptor, methodType.asMethodType(), methodSymbol, typeArguments);
 
     return MethodReference.newBuilder()
         .setTypeDescriptor(expressionTypeDescriptor)
@@ -1327,10 +1324,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         fixSpecialMethodDescriptors(
             qualifier,
             environment.createMethodDescriptor(
-                /* enclosingTypeDescriptor= */ enclosingTypeDescriptor,
-                /* methodType= */ methodType,
-                /* declarationMethodElement= */ methodSymbol,
-                typeArguments));
+                enclosingTypeDescriptor, methodType, methodSymbol, typeArguments));
 
     List<Expression> arguments =
         convertArguments(methodDescriptor, methodInvocation.getArguments());
