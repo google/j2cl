@@ -23,4 +23,28 @@ public final class VisibilityModifiers {
   protected static class Protected {}
 
   private static class Private {}
+
+  abstract static class AutoValue_Value {}
+
+  abstract static class AutoOneOf_OneOf {}
+
+  abstract static class AutoConverter_Converter {}
+
+  abstract static class AutoEnumConverter_EnumConverter {}
+
+  public static final class Value extends AutoValue_Value {}
+
+  public static final class OneOf extends AutoOneOf_OneOf {}
+
+  public static final class Converter extends AutoConverter_Converter {}
+
+  public static final class EnumConverter extends AutoEnumConverter_EnumConverter {}
+
+  abstract static class NotAutoValue_Value {}
+
+  abstract static class NotAutoOneOf_OneOf {}
+
+  abstract static class NotAutoConverter_Converter {}
+
+  abstract static class NotAutoEnumConverter_EnumConverter {}
 }

@@ -29,4 +29,28 @@ class VisibilityModifiers {
  protected open class Protected
  
  private open class Private internal constructor()
+ 
+ abstract class AutoValue_Value internal constructor()
+ 
+ abstract class AutoOneOf_OneOf internal constructor()
+ 
+ abstract class AutoConverter_Converter internal constructor()
+ 
+ abstract class AutoEnumConverter_EnumConverter internal constructor()
+ 
+ class Value: AutoValue_Value()
+ 
+ class OneOf: AutoOneOf_OneOf()
+ 
+ class Converter: AutoConverter_Converter()
+ 
+ class EnumConverter: AutoEnumConverter_EnumConverter()
+ 
+ internal abstract class NotAutoValue_Value internal constructor()
+ 
+ internal abstract class NotAutoOneOf_OneOf internal constructor()
+ 
+ internal abstract class NotAutoConverter_Converter internal constructor()
+ 
+ internal abstract class NotAutoEnumConverter_EnumConverter internal constructor()
 }
