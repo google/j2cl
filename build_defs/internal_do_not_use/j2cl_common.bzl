@@ -498,8 +498,8 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     "-Xsam-conversions=class",
     # TODO(b/347052390): Remove once the const evaluation optimization crash is fixed (KT-70391).
     "-Xignore-const-optimization-errors",
-    # TODO(b/492223202): Remove once J2CL supports language version 2.3.
-    "-language-version=2.2",
+    # Set the Kotlin language version to isolate J2CL from Google3 language version updates.
+    "-language-version=2.3",
 ]
 
 KOTLIN_SERIALIZE_IR_FLAGS = [

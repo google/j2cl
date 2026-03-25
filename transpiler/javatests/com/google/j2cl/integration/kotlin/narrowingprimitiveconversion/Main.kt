@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// TODO(b/492223202): Remove when we upgrade to LV=2.3 (or -api-version=2.3)
-@file:Suppress("DEPRECATION_ERROR")
 
 package narrowingprimitiveconversion
 
@@ -43,9 +41,9 @@ private fun testCoercions() {
   val dd = 2415919103.7 // dd > max_int
   val md = 1.7976931348623157E308 // Double.MAX_VALUE;
 
-  assertTrue(b.toChar() == '\u0001')
+  assertTrue(b.toInt().toChar() == '\u0001')
 
-  assertTrue(mb.toChar().toInt() == 127)
+  assertTrue(mb.toInt().toChar().toInt() == 127)
 
   assertTrue(c.toByte() == 97.toByte())
   assertTrue(c.toShort() == 97.toShort())
@@ -54,10 +52,10 @@ private fun testCoercions() {
   assertTrue(mc.toShort() == (-1).toShort())
 
   assertTrue(s.toByte() == 2.toByte())
-  assertTrue(s.toChar().toInt() == 2)
+  assertTrue(s.toInt().toChar().toInt() == 2)
 
   assertTrue(ms.toByte() == (-1).toByte())
-  assertTrue(ms.toChar().toInt() == 32767)
+  assertTrue(ms.toInt().toChar().toInt() == 32767)
 
   assertTrue(i.toByte() == 3.toByte())
   assertTrue(i.toChar().toInt() == 3)
@@ -68,46 +66,46 @@ private fun testCoercions() {
   assertTrue(mi.toShort() == (-1).toShort())
 
   assertTrue(l.toByte() == 4.toByte())
-  assertTrue(l.toChar().toInt() == 4)
+  assertTrue(l.toInt().toChar().toInt() == 4)
   assertTrue(l.toShort() == 4.toShort())
   assertTrue(l.toInt() == 4)
 
   assertTrue(ll.toByte() == (-1).toByte())
-  assertTrue(ll.toChar().toInt() == 65535)
+  assertTrue(ll.toInt().toChar().toInt() == 65535)
   assertTrue(ll.toShort() == (-1).toShort())
   assertTrue(ll.toInt() == -1879048193)
 
   assertTrue(ml.toByte() == (-1).toByte())
-  assertTrue(ml.toChar().toInt() == 65535)
+  assertTrue(ml.toInt().toChar().toInt() == 65535)
   assertTrue(ml.toShort() == (-1).toShort())
   assertTrue(ml.toInt() == -1)
 
   assertTrue(f.toInt().toByte() == 2.toByte())
-  assertTrue(f.toChar().toInt() == 2)
+  assertTrue(f.toInt().toChar().toInt() == 2)
   assertTrue(f.toInt().toShort() == 2.toShort())
   assertTrue(f.toInt() == 2)
   assertTrue(f.toLong() == 2L)
 
   assertTrue(mf.toInt().toByte() == (-1).toByte())
-  assertTrue(mf.toChar().toInt() == 65535)
+  assertTrue(mf.toInt().toChar().toInt() == 65535)
   assertTrue(mf.toInt().toShort() == (-1).toShort())
   assertTrue(mf.toInt() == 2147483647)
   assertTrue(mf.toLong() == 9223372036854775807L)
 
   assertTrue(d.toInt().toByte() == 2.toByte())
-  assertTrue(d.toChar().toInt() == 2)
+  assertTrue(d.toInt().toChar().toInt() == 2)
   assertTrue(d.toInt().toShort() == 2.toShort())
   assertTrue(d.toInt() == 2)
   assertTrue(d.toLong() == 2L)
 
   assertTrue(dd.toInt().toByte() == (-1).toByte())
-  assertTrue(dd.toChar().toInt() == 65535)
+  assertTrue(dd.toInt().toChar().toInt() == 65535)
   assertTrue(dd.toInt().toShort() == (-1).toShort())
   assertTrue(dd.toInt() == 2147483647)
   assertTrue(dd.toLong() == 2415919103L)
 
   assertTrue(md.toInt().toByte() == (-1).toByte())
-  assertTrue(md.toChar().toInt() == 65535)
+  assertTrue(md.toInt().toChar().toInt() == 65535)
   assertTrue(md.toInt().toShort() == (-1).toShort())
   assertTrue(md.toInt() == 2147483647)
   assertTrue(md.toLong() == 9223372036854775807L)
@@ -136,9 +134,9 @@ private fun testCoercions() {
   assertTrue(fmax.toInt().toByte() == Integer.MAX_VALUE.toByte())
   assertTrue(fnan.toInt().toByte() == 0.toByte())
 
-  assertTrue(fmin.toChar() == Integer.MIN_VALUE.toChar())
-  assertTrue(fmax.toChar() == Integer.MAX_VALUE.toChar())
-  assertTrue(fnan.toChar() == 0.toChar())
+  assertTrue(fmin.toInt().toChar() == Integer.MIN_VALUE.toChar())
+  assertTrue(fmax.toInt().toChar() == Integer.MAX_VALUE.toChar())
+  assertTrue(fnan.toInt().toChar() == 0.toChar())
 
   val three: Byte = 3
   assertTrue(-128 == (three.toInt() shl 7).toByte().toInt())
@@ -150,8 +148,8 @@ private fun testStaticCoercions() {
   val b = 9223372036854775807L.toByte() // -1
   assertTrue(b == max.toByte())
 
-  val c = 9223372036854775807L.toChar() // 65535
-  assertTrue(c == max.toChar())
+  val c = 9223372036854775807L.toInt().toChar() // 65535
+  assertTrue(c == max.toInt().toChar())
 
   val s = 9223372036854775807L.toShort() // -1
   assertTrue(s == max.toShort())

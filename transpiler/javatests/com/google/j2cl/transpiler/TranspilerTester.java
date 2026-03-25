@@ -77,7 +77,7 @@ public class TranspilerTester {
         // JVM target.
         // Note: For Bazel compilation, this is provided through toolchain defaults.
         .addArgs("-kotlincOptions", "-jvm-target=11")
-        .addArgs("-kotlincOptions", "-language-version=2.2")
+        .addArgs("-kotlincOptions", "-language-version=2.3")
         .setClassPathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/ktstdlib_bundle_deploy.jar");
   }

@@ -103,7 +103,7 @@ fun testSerializedJsArray() {
   for (element in array.getIterable()) {
     actual[i++] = element
   }
-  assertEquals(arrayOf("a", 2.0, 3.3), actual)
+  assertEquals(arrayOf<Any>("a", 2.0, 3.3), actual)
 }
 
 fun testSerializedJsMap() {

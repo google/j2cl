@@ -21,13 +21,13 @@ private const val DOUBLE_CONSTANT_WITH_ARITHMETIC = FLOAT_CONSTANT + FLOAT_CONST
 
 fun testCoercions() {
   var b: Byte = 1L.toByte()
-  var c: Char = 1L.toChar()
+  var c: Char = 1L.toInt().toChar()
   var s: Short = 1L.toShort()
   var i: Int = 1L.toInt()
   var f: Float = 1L.toFloat()
   var d: Double = 1L.toDouble()
   b = 9223372036854775807L.toByte() // -1
-  c = 9223372036854775807L.toChar() // 65535
+  c = 9223372036854775807L.toInt().toChar() // 65535
   s = 9223372036854775807L.toShort() // -1
   i = 9223372036854775807L.toInt() // -1
   f = 9223372036854775807L.toFloat() //  9.223372036854776E18

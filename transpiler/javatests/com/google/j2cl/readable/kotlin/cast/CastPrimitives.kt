@@ -26,7 +26,7 @@ class CastPrimitives {
     var d = 1.1
 
     b = b.toByte()
-    c = b.toChar()
+    c = b.toInt().toChar()
     s = b.toShort()
     i = b.toInt()
     l = b.toLong()
@@ -42,7 +42,7 @@ class CastPrimitives {
     d = c.toDouble()
 
     b = s.toByte()
-    c = s.toChar()
+    c = s.toInt().toChar()
     i = s.toInt()
     s = s.toShort()
     l = s.toLong()
@@ -58,7 +58,7 @@ class CastPrimitives {
     d = i.toDouble()
 
     b = l.toByte()
-    c = l.toChar()
+    c = l.toInt().toChar()
     i = l.toInt()
     s = l.toShort()
     l = l.toLong()
@@ -66,7 +66,7 @@ class CastPrimitives {
     d = l.toDouble()
 
     b = f.toInt().toByte()
-    c = f.toChar()
+    c = f.toInt().toChar()
     i = f.toInt()
     s = f.toInt().toShort()
     l = f.toLong()
@@ -74,7 +74,7 @@ class CastPrimitives {
     d = f.toDouble()
 
     b = d.toInt().toByte()
-    c = d.toChar()
+    c = d.toInt().toChar()
     i = d.toInt()
     s = d.toInt().toShort()
     l = d.toLong()

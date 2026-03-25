@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// TODO(b/492223202): Remove when we upgrade to LV=2.3 (or -api-version=2.3)
-@file:Suppress("DEPRECATION_ERROR")
 
 package casttoprimitives
 
@@ -71,14 +69,14 @@ fun testPrimitiveToPrimitive() {
   val negInfiniteDouble: Double = Double.NEGATIVE_INFINITY
   val nanDouble: Double = Double.NaN
 
-  assertTrue(b.toChar() == '\u0001')
+  assertTrue(b.toInt().toChar() == '\u0001')
   assertTrue(b.toShort() == SHORT_ONE)
   assertTrue(b.toInt() == 1)
   assertTrue(b.toLong() == 1L)
   assertTrue(b.toFloat() == 1.0f)
   assertTrue(b.toDouble() == 1.0)
 
-  assertTrue(maxByte.toChar() == '\u007F')
+  assertTrue(maxByte.toInt().toChar() == '\u007F')
   assertTrue(maxByte.toShort() == SHORT_127)
   assertTrue(maxByte.toInt() == 127)
   assertTrue(maxByte.toLong() == 127L)
@@ -101,14 +99,14 @@ fun testPrimitiveToPrimitive() {
   assertTrue(maxChar.toDouble() == 65535.0)
 
   assertTrue(s.toByte() == BYTE_TWO)
-  assertTrue(s.toChar() == '\u0002')
+  assertTrue(s.toInt().toChar() == '\u0002')
   assertTrue(s.toInt() == 2)
   assertTrue(s.toLong() == 2L)
   assertTrue(s.toFloat() == 2.0f)
   assertTrue(s.toDouble() == 2.0)
 
   assertTrue(maxShort.toByte() == BYTE_MINUS_ONE)
-  assertTrue(maxShort.toChar() == '\u7FFF')
+  assertTrue(maxShort.toInt().toChar() == '\u7FFF')
   assertTrue(maxShort.toInt() == 32767)
   assertTrue(maxShort.toLong() == 32767L)
   assertTrue(maxShort.toFloat() == 32767.0f)
@@ -130,21 +128,21 @@ fun testPrimitiveToPrimitive() {
   assertTrue(maxInt.toDouble() == 2.147483647E9)
 
   assertTrue(l.toByte() == BYTE_FOUR)
-  assertTrue(l.toChar() == '\u0004')
+  assertTrue(l.toInt().toChar() == '\u0004')
   assertTrue(l.toShort() == SHORT_FOUR)
   assertTrue(l.toInt() == 4)
   assertTrue(l.toFloat() == 4f)
   assertTrue(l.toDouble() == 4.0)
 
   assertTrue(ll.toByte() == BYTE_MINUS_ONE)
-  assertTrue(ll.toChar() == '\uFFFF')
+  assertTrue(ll.toInt().toChar() == '\uFFFF')
   assertTrue(ll.toShort() == SHORT_MINUS_ONE)
   assertTrue(ll.toInt() == -1879048193)
   // assertTrue(ll.toFloat() == 2.4159191E9)); // toFloat() returns double-precision 2.415919103E9.
   assertTrue(ll.toDouble() == 2.415919103E9)
 
   assertTrue(maxLong.toByte() == BYTE_MINUS_ONE)
-  assertTrue(maxLong.toChar() == '\uFFFF')
+  assertTrue(maxLong.toInt().toChar() == '\uFFFF')
   assertTrue(maxLong.toShort() == SHORT_MINUS_ONE)
   assertTrue(maxLong.toInt() == -1)
   assertTrue(maxLong.toFloat() == 9.223372036854776E18f)
@@ -158,7 +156,7 @@ fun testPrimitiveToPrimitive() {
   assertTrue(f.toDouble() - 2.7 < 1e-7)
 
   assertTrue(maxFloat.toInt().toByte() == BYTE_MINUS_ONE)
-  assertTrue(maxFloat.toChar() == '\uFFFF')
+  assertTrue(maxFloat.toInt().toChar() == '\uFFFF')
   assertTrue(maxFloat.toInt().toShort() == SHORT_MINUS_ONE)
   assertTrue(maxFloat.toInt() == 2147483647)
   assertTrue(maxFloat.toLong() == 9223372036854775807L)
