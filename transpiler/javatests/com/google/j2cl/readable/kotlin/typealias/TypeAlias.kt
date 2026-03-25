@@ -45,6 +45,7 @@ class KeyValueContainer<K, V> {
   }
 
   fun getKey(): K = k ?: throw IllegalStateException()
+
   fun getValue(): V = v ?: throw IllegalStateException()
 }
 
@@ -100,3 +101,18 @@ private fun <K> consumeFooValueContainer(c: FooValueContainer<K>) {}
 private fun consumeFooProvider(f: FooProvider) {}
 
 private fun consumeFooToInt(f: ToInt<Foo>) {}
+
+class Outer {
+  class Inner
+
+  typealias NestedInner = Inner
+
+  typealias NestedInt = Int
+}
+
+private fun testNestedTypeAlias() {
+  val a: Outer.NestedInner = Outer.Inner()
+
+  fun foo(i: Outer.NestedInt) {}
+  foo(2)
+}

@@ -9,6 +9,7 @@ let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let Container = goog.forwardDeclare('typealias.Container$impl');
 let Foo = goog.forwardDeclare('typealias.Foo$impl');
 let KeyValueContainer = goog.forwardDeclare('typealias.KeyValueContainer$impl');
+let Inner = goog.forwardDeclare('typealias.Outer.Inner$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
@@ -75,6 +76,12 @@ class TypeAliasKt extends j_l_Object {
  /** @nodts */
  static m_consumeFooToInt__kotlin_jvm_functions_Function1__void(/** !Function1<?, ?> */ f) {}
  /** @nodts */
+ static m_testNestedTypeAlias__void() {
+  let a = Inner.$create__();
+  let foo = (/** number */ i) =>{};
+  foo(2);
+ }
+ /** @nodts */
  static $clinit() {
   TypeAliasKt.$clinit = () =>{};
   TypeAliasKt.$loadModules();
@@ -93,6 +100,7 @@ class TypeAliasKt extends j_l_Object {
   Container = goog.module.get('typealias.Container$impl');
   Foo = goog.module.get('typealias.Foo$impl');
   KeyValueContainer = goog.module.get('typealias.KeyValueContainer$impl');
+  Inner = goog.module.get('typealias.Outer.Inner$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
