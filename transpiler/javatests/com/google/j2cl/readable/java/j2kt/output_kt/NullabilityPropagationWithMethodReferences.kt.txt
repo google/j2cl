@@ -70,15 +70,6 @@ class NullabilityPropagationWithMethodReferences {
     },
    )
   }
-  
-  @JvmStatic
-  fun testNullableNewArray(): ArrayFactory<Foo?> {
-   return NullabilityPropagationWithMethodReferences.apply<ArrayFactory<Foo?>>(
-    ArrayFactory { arg0: Int ->
-     return@ArrayFactory uninitializedArrayOf<Foo>(arg0) as Array<Foo?>
-    },
-   )
-  }
  }
  
  class Foo {
