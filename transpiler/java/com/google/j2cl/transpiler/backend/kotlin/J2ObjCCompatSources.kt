@@ -729,7 +729,6 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
       )
 
     // Java JRE classes where we generate J2ObjC compat headers.
-    // TODO(b/448061854): At least enable the primitive types.
     val KT_NATIVE_JRE_EXCLUDE =
       setOf(
         "java.io.EOFException",
@@ -761,8 +760,6 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
         "java.nio.",
         "java.util.Base64",
         "java.util.ConcurrentModificationException",
-        "java.util.Iterator",
-        "java.util.ListIterator",
         "java.util.Locale",
         "java.util.Map",
         "java.util.Map.Entry",
