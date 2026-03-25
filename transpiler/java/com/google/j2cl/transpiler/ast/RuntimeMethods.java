@@ -460,6 +460,29 @@ public final class RuntimeMethods {
         .build();
   }
 
+  /** Creates a method call to WasmExtern.externalize(). */
+  public static MethodCall createWasmExternalizeMethodCall(Expression argument) {
+    checkArgument(!argument.getTypeDescriptor().isPrimitive());
+    MethodDescriptor methodDescriptor =
+        TypeDescriptors.get().javaemulInternalWasmExtern.getMethodDescriptorByName("externalize");
+    return MethodCall.Builder.from(methodDescriptor).setArguments(argument).build();
+  }
+
+  /** Creates a method call to WasmExtern.internalize(). */
+  public static MethodCall createWasmInternalizeMethodCall(
+      Expression argument, TypeDescriptor typeDescriptor) {
+    checkArgument(
+        argument
+            .getTypeDescriptor()
+            .isSameBaseType(TypeDescriptors.get().javaemulInternalWasmExtern));
+    MethodDescriptor methodDescriptor =
+        TypeDescriptors.get()
+            .javaemulInternalWasmExtern
+            .getMethodDescriptorByName("internalize")
+            .specializeTypeVariables(unused -> typeDescriptor);
+    return MethodCall.Builder.from(methodDescriptor).setArguments(argument).build();
+  }
+
   /** Create a call to an Exceptions method. */
   public static MethodCall createExceptionsMethodCall(String methodName, Expression... arguments) {
     return MethodCall.Builder.from(

@@ -15,7 +15,6 @@
  */
 package javaemul.internal;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -32,19 +31,13 @@ public final class ThrowableUtils {
 
   /** Gets the Java {@link Throwable} of the specified js {@code Error}. */
   public static Throwable getJavaThrowable(JsObject e) {
-    return internalize(getJavaThrowableImpl(e));
+    return WasmExtern.internalize(getJavaThrowableImpl(e));
   }
-
-  @Wasm("extern.internalize")
-  public static native <T> T internalize(WasmExtern t);
 
   /** Sets the Java {@link Throwable} of the specified js {@code Error}. */
   public static void setJavaThrowable(JsObject e, Throwable javaThrowable) {
-    setJavaThrowableImpl(e, externalize(javaThrowable));
+    setJavaThrowableImpl(e, WasmExtern.externalize(javaThrowable));
   }
-
-  @Wasm("extern.externalize")
-  public static native WasmExtern externalize(Throwable t);
 
   @JsMethod(name = "setJavaThrowable", namespace = "j2wasm.ExceptionUtils")
   private static native void setJavaThrowableImpl(JsObject error, WasmExtern javaThrowable);

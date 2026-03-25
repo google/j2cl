@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -25,6 +26,12 @@ public class WasmExtern {
 
   @JsMethod(namespace = "j2wasm.EqualityUtils")
   public static native boolean isSame(WasmExtern left, WasmExtern right);
+
+  @Wasm("extern.internalize")
+  public static native <T> T internalize(WasmExtern t);
+
+  @Wasm("extern.externalize")
+  public static native WasmExtern externalize(Object t);
 
   private WasmExtern() {}
 }
