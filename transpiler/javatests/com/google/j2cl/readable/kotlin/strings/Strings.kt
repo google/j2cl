@@ -222,7 +222,8 @@ private class Foo {
   override fun toString() = "bar"
 }
 
-private fun intToStringHelper(i: Int) = i.toString()
+// Also 496167636 return statement in function expression body. Does not remove the return
+private fun intToStringHelper(i: Int): String = return i.toString()
 
 private fun nullableIntToStringHelper(i: Int?) = i.toString()
 
