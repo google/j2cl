@@ -1,0 +1,44 @@
+goog.module('recordclass.RecordClass.EmptyRecord$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class EmptyRecord extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!EmptyRecord} */
+ static $create__() {
+  EmptyRecord.$clinit();
+  let $instance = new EmptyRecord();
+  $instance.$ctor__recordclass_RecordClass_EmptyRecord__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_EmptyRecord__void() {
+  this.$ctor__java_lang_Record__void();
+  $J2CL_PRESERVE$();
+ }
+ /** @nodts */
+ static $clinit() {
+  EmptyRecord.$clinit = () =>{};
+  EmptyRecord.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EmptyRecord;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(EmptyRecord, 'recordclass.RecordClass$EmptyRecord');
+
+exports = EmptyRecord;
+
+//# sourceMappingURL=RecordClass$EmptyRecord.js.map

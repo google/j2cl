@@ -36,6 +36,19 @@
  (field $m_a__java_lang_String (ref $function.m_a__java_lang_String))
  ))
 )
+(type $recordclass.RecordClass.EmptyRecord (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.EmptyRecord.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.EmptyRecord.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 (type $recordclass.RecordClass.SimpleRecord (sub $java.lang.Record (struct
  (field $vtable (ref $recordclass.RecordClass.SimpleRecord.vtable))
  (field $itable (ref $itable))

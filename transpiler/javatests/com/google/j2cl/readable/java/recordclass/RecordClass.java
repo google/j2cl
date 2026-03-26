@@ -29,6 +29,8 @@ public class RecordClass {
     rwc.b();
   }
 
+  static record EmptyRecord() {}
+
   static record SimpleRecord(int value) {}
 
   static record StringRecord(String value) {}

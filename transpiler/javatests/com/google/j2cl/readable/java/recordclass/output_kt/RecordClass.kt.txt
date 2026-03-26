@@ -308,6 +308,33 @@ open class RecordClass {
   }
  }
  
+ class EmptyRecord {
+  constructor()
+  
+  override fun equals(arg0: Any?): Boolean {
+   if (!(arg0 is EmptyRecord && run {
+    val ___other: EmptyRecord? = arg0 as EmptyRecord?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(),
+    arrayOf<Any?>(),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(),
+   )
+  }
+  
+  override fun toString(): String {
+   return Arrays.toString(
+    arrayOf<Any?>(),
+   )
+  }
+ }
+ 
  class SimpleRecord {
   private val value: Int
   
