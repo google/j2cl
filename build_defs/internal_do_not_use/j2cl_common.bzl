@@ -498,6 +498,10 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     "-Xsam-conversions=class",
     # TODO(b/347052390): Remove once the const evaluation optimization crash is fixed (KT-70391).
     "-Xignore-const-optimization-errors",
+    # Ensure annotations are persisted in the metadata to workaround KT-84773. The flag will become
+    # enabled by default in Kotlin 2.3.20.
+    # TODO(b/496407053): Remove after the 2.3.20 upgrade.
+    "-Xannotations-in-metadata",
     # Set the Kotlin language version to isolate J2CL from Google3 language version updates.
     "-language-version=2.3",
 ]
