@@ -30,6 +30,7 @@ fun main(vararg unused: String) {
   testOnlyElse()
   testWhenWithOneBranch()
   testWhenExpressionWithStatements()
+  testDataFlowBasedExhaustivenessCheckOnWhenStatement()
 }
 
 private fun testSwitchValues() {
@@ -298,4 +299,20 @@ private fun testWhenWithOneBranch() {
       OneEntry.THE_ONE -> 4
     }
   assertEquals(4, a)
+}
+
+private fun testDataFlowBasedExhaustivenessCheckOnWhenStatement() {
+  assertEquals(1, dataFlowBasedExhaustivenessCheckOnWhenStatement(Numbers.ONE))
+  assertEquals(2, dataFlowBasedExhaustivenessCheckOnWhenStatement(Numbers.TWO))
+  assertEquals(3, dataFlowBasedExhaustivenessCheckOnWhenStatement(Numbers.THREE))
+}
+
+private fun dataFlowBasedExhaustivenessCheckOnWhenStatement(number: Numbers): Int {
+  if (number == Numbers.ONE) {
+    return 1
+  }
+  return when (number) {
+    Numbers.TWO -> return 2
+    Numbers.THREE -> return 3
+  }
 }
