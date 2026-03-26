@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
-import static com.google.j2cl.transpiler.ast.AstUtils.findSuperTypeWithWasmJsPrototypeIncludingSelf;
+import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -74,10 +74,8 @@ final class JsExternsGenerator {
       return false;
     }
 
-    // Generate externs if the type has a JS prototype or if the type has a supertype with a JS
-    // prototype. In practice, because j.l.Object has a JS prototype, this nearly all types (some
-    // exclusions such as interfaces and native types)
-    return findSuperTypeWithWasmJsPrototypeIncludingSelf(typeDescriptor) != null;
+    // Generate externs if this type or a supertype is visible to JS.
+    return isWasmJsExportedType(typeDescriptor);
   }
 
   private void generateExtern(Type type) {

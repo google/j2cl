@@ -1745,10 +1745,7 @@ public class JsInteropRestrictionsChecker {
     return typeDescriptor.isPrimitive()
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || typeDescriptor.isNative()
-        || (checkWasmCustomDescriptorsJsInterop
-            && typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
-            && AstUtils.findSuperTypeWithWasmJsPrototypeIncludingSelf(declaredTypeDescriptor)
-                != null);
+        || (checkWasmCustomDescriptorsJsInterop && AstUtils.isWasmJsExportedType(typeDescriptor));
   }
 
   private void checkMethodSignature(

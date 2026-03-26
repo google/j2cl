@@ -1340,24 +1340,27 @@ public final class AstUtils {
    * <p>A new prototype is populated if the type adds exported members.
    */
   public static boolean hasWasmJsPrototype(TypeDeclaration typeDeclaration) {
+    return !typeDeclaration.isInterface() && declaresWasmJsExports(typeDeclaration);
+  }
+
+  /** Returns true if the given type has any exported members in Wasm. */
+  public static boolean declaresWasmJsExports(TypeDeclaration typeDeclaration) {
     return !typeDeclaration.isNative()
-        && !typeDeclaration.isInterface()
         && (typeDeclaration.getDeclaredMethodDescriptors().stream()
                 .anyMatch(methodDescriptor -> AstUtils.needsWasmJsExport(methodDescriptor))
             || typeDeclaration.getDeclaredFieldDescriptors().stream()
                 .anyMatch(fieldDescriptor -> AstUtils.needsWasmJsExport(fieldDescriptor)));
   }
 
-  /**
-   * Returns the first supertype of the given type that has a JS prototype in Wasm, including the
-   * type itself.
-   *
-   * <p>If no supertype has a JS prototype, returns null.
-   */
-  @Nullable
-  public static DeclaredTypeDescriptor findSuperTypeWithWasmJsPrototypeIncludingSelf(
-      TypeDeclaration typeDeclaration) {
-    return findSuperTypeWithWasmJsPrototypeIncludingSelf(typeDeclaration.toDescriptor());
+  /** Returns true if this type defined in Wasm is exported to/visible in JS. */
+  public static boolean isWasmJsExportedType(TypeDeclaration typeDeclaration) {
+    return findSuperTypeWithWasmJsExportsIncludingSelf(typeDeclaration) != null;
+  }
+
+  /** Returns true if this type defined in Wasm is exported to/visible in JS. */
+  public static boolean isWasmJsExportedType(TypeDescriptor typeDescriptor) {
+    return typeDescriptor instanceof DeclaredTypeDescriptor dtd
+        && findSuperTypeWithWasmJsExportsIncludingSelf(dtd) != null;
   }
 
   /**
@@ -1367,14 +1370,25 @@ public final class AstUtils {
    * <p>If no supertype has a JS prototype, returns null.
    */
   @Nullable
-  public static DeclaredTypeDescriptor findSuperTypeWithWasmJsPrototypeIncludingSelf(
+  public static DeclaredTypeDescriptor findSuperTypeWithWasmJsExportsIncludingSelf(
+      TypeDeclaration typeDeclaration) {
+    return findSuperTypeWithWasmJsExportsIncludingSelf(typeDeclaration.toDescriptor());
+  }
+
+  /**
+   * Returns the first supertype of the given type that has a JS prototype in Wasm, including the
+   * type itself.
+   *
+   * <p>If no supertype has a JS prototype, returns null.
+   */
+  @Nullable
+  public static DeclaredTypeDescriptor findSuperTypeWithWasmJsExportsIncludingSelf(
       @Nullable DeclaredTypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor superTypeWithJsPrototype = typeDescriptor;
-    while (superTypeWithJsPrototype != null) {
-      if (hasWasmJsPrototype(superTypeWithJsPrototype.getTypeDeclaration())) {
-        return superTypeWithJsPrototype;
+    while (typeDescriptor != null) {
+      if (declaresWasmJsExports(typeDescriptor.getTypeDeclaration())) {
+        return typeDescriptor;
       }
-      superTypeWithJsPrototype = superTypeWithJsPrototype.getSuperTypeDescriptor();
+      typeDescriptor = typeDescriptor.getSuperTypeDescriptor();
     }
     return null;
   }

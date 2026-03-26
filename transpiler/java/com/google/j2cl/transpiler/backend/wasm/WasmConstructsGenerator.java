@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.j2cl.transpiler.ast.AstUtils.findSuperTypeWithWasmJsPrototypeIncludingSelf;
+import static com.google.j2cl.transpiler.ast.AstUtils.findSuperTypeWithWasmJsExportsIncludingSelf;
 import static com.google.j2cl.transpiler.ast.AstUtils.hasWasmJsPrototype;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.lang.String.format;
@@ -209,11 +209,11 @@ public class WasmConstructsGenerator {
         /* descriptorClause= */ type.isInterface()
             ? null
             : format("describes %s", environment.getWasmTypeName(type.getTypeDescriptor())),
-        () -> renderVtableEntries(methods));
+        () -> renderVtableEntries(type, methods));
   }
 
-  private void renderVtableEntries(Collection<MethodDescriptor> methodDescriptors) {
-    if (environment.isCustomDescriptorsJsInteropEnabled()) {
+  private void renderVtableEntries(Type type, Collection<MethodDescriptor> methodDescriptors) {
+    if (environment.isCustomDescriptorsJsInteropEnabled() && !type.isInterface()) {
       // The first entry of the vtable is the JS prototype. This is used to export JsTypes to JS.
       // Because all types extend j.l.Object, they must have this first field to allow vtables to
       // extend each other.
@@ -596,9 +596,9 @@ public class WasmConstructsGenerator {
     builder.append(format("(struct.new %s", environment.getWasmVtableTypeName(implementedType)));
 
     builder.indent();
-    if (environment.isCustomDescriptorsJsInteropEnabled()) {
+    if (environment.isCustomDescriptorsJsInteropEnabled() && !implementedType.isInterface()) {
       // The first field of the vtable for JsTypes is the JS prototype.
-      var jsPrototypeType = findSuperTypeWithWasmJsPrototypeIncludingSelf(implementedType);
+      var jsPrototypeType = findSuperTypeWithWasmJsExportsIncludingSelf(implementedType);
       builder.newLine();
       if (jsPrototypeType != null) {
         builder.append(
