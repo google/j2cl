@@ -28,17 +28,17 @@ class RecordWithDeferringConstructor extends Record {
  }
  //Factory method corresponding to constructor 'RecordWithDeferringConstructor(int)'.
  /** @nodts @return {!RecordWithDeferringConstructor} */
- static $create__int(/** number */ arg0) {
+ static $create__int(/** number */ value) {
   RecordWithDeferringConstructor.$clinit();
   let $instance = new RecordWithDeferringConstructor();
-  $instance.$ctor__recordclass_RecordClass_RecordWithDeferringConstructor__int__void(arg0);
+  $instance.$ctor__recordclass_RecordClass_RecordWithDeferringConstructor__int__void(value);
   return $instance;
  }
  //Initialization from constructor 'RecordWithDeferringConstructor(int)'.
  /** @nodts */
- $ctor__recordclass_RecordClass_RecordWithDeferringConstructor__int__void(/** number */ arg0) {
+ $ctor__recordclass_RecordClass_RecordWithDeferringConstructor__int__void(/** number */ value) {
   this.$ctor__java_lang_Record__void();
-  this.f_value__recordclass_RecordClass_RecordWithDeferringConstructor_ = arg0;
+  this.f_value__recordclass_RecordClass_RecordWithDeferringConstructor_ = value;
   $J2CL_PRESERVE$(this.f_value__recordclass_RecordClass_RecordWithDeferringConstructor_);
  }
  /** @nodts @return {number} */

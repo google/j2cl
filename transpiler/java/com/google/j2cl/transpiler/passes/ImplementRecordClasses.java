@@ -140,12 +140,14 @@ public class ImplementRecordClasses extends NormalizationPass {
   }
 
   private static void normalizeConstructors(Type type) {
+    ImmutableList<FieldDescriptor> recordFields = getRecordFields(type.getTypeDescriptor());
+
     MethodDescriptor canonicalConstructorDescriptor =
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setConstructor(true)
             .setParameterDescriptors(
-                getRecordFields(type.getTypeDescriptor()).stream()
+                recordFields.stream()
                     .map(
                         f ->
                             MethodDescriptor.ParameterDescriptor.newBuilder()
@@ -162,9 +164,7 @@ public class ImplementRecordClasses extends NormalizationPass {
       type.addMember(
           Method.newBuilder()
               .setMethodDescriptor(canonicalConstructorDescriptor)
-              .setParameters(
-                  AstUtils.createParameterVariables(
-                      canonicalConstructorDescriptor.getParameterTypeDescriptors()))
+              .setParameters(createParameters(recordFields))
               .setSourcePosition(type.getSourcePosition())
               .build());
     }
@@ -196,7 +196,7 @@ public class ImplementRecordClasses extends NormalizationPass {
           Block.Builder.from(constructor.getBody())
               .addStatements(
                   Streams.zip(
-                          getRecordFields(type.getTypeDescriptor()).stream(),
+                          recordFields.stream(),
                           constructor.getParameters().stream(),
                           (field, parameter) ->
                               BinaryExpression.Builder.asAssignmentTo(field)
@@ -206,6 +206,21 @@ public class ImplementRecordClasses extends NormalizationPass {
                       .collect(toImmutableList()))
               .build());
     }
+  }
+
+  private static ImmutableList<Variable> createParameters(
+      ImmutableList<FieldDescriptor> recordFields) {
+    return recordFields.stream()
+        .map(ImplementRecordClasses::createParameter)
+        .collect(toImmutableList());
+  }
+
+  private static Variable createParameter(FieldDescriptor fieldDescriptor) {
+    return Variable.newBuilder()
+        .setName(fieldDescriptor.getName())
+        .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
+        .setParameter(true)
+        .build();
   }
 
   private static void implementHashCode(Type type) {

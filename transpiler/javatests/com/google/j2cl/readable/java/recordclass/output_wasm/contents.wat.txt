@@ -746,9 +746,9 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.EmptyRecord)
 
-;;; SimpleRecord SimpleRecord.$create(int arg0)
+;;; SimpleRecord SimpleRecord.$create(int value)
 (func $$create__int@recordclass.RecordClass.SimpleRecord
- (param $arg0 i32)
+ (param $value i32)
  (result (ref null $recordclass.RecordClass.SimpleRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:34:16
  (local $$instance (ref null $recordclass.RecordClass.SimpleRecord))
@@ -758,22 +758,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:34:16
   (local.set $$instance (struct.new $recordclass.RecordClass.SimpleRecord (global.get $recordclass.RecordClass.SimpleRecord.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:34:16
-  (call $$ctor__int__void_$p_recordclass_RecordClass_SimpleRecord@recordclass.RecordClass.SimpleRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__int__void_$p_recordclass_RecordClass_SimpleRecord@recordclass.RecordClass.SimpleRecord (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:34:16
   (return (local.get $$instance))
  )
 )
 
-;;; void SimpleRecord.$ctor(int arg0)
+;;; void SimpleRecord.$ctor(int value)
 (func $$ctor__int__void_$p_recordclass_RecordClass_SimpleRecord@recordclass.RecordClass.SimpleRecord
  (param $this (ref null $recordclass.RecordClass.SimpleRecord))
- (param $arg0 i32)
+ (param $value i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:34:16
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:34:16
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:34:16
-  (struct.set $recordclass.RecordClass.SimpleRecord $value@recordclass.RecordClass.SimpleRecord (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.SimpleRecord $value@recordclass.RecordClass.SimpleRecord (local.get $this) (local.get $value))
  )
 )
 
@@ -888,9 +888,9 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.SimpleRecord)
 
-;;; StringRecord StringRecord.$create(String arg0)
+;;; StringRecord StringRecord.$create(String value)
 (func $$create__java_lang_String@recordclass.RecordClass.StringRecord
- (param $arg0 (ref null $java.lang.String))
+ (param $value (ref null $java.lang.String))
  (result (ref null $recordclass.RecordClass.StringRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:36:16
  (local $$instance (ref null $recordclass.RecordClass.StringRecord))
@@ -900,22 +900,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:36:16
   (local.set $$instance (struct.new $recordclass.RecordClass.StringRecord (global.get $recordclass.RecordClass.StringRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:36:16
-  (call $$ctor__java_lang_String__void_$p_recordclass_RecordClass_StringRecord@recordclass.RecordClass.StringRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__java_lang_String__void_$p_recordclass_RecordClass_StringRecord@recordclass.RecordClass.StringRecord (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:36:16
   (return (local.get $$instance))
  )
 )
 
-;;; void StringRecord.$ctor(String arg0)
+;;; void StringRecord.$ctor(String value)
 (func $$ctor__java_lang_String__void_$p_recordclass_RecordClass_StringRecord@recordclass.RecordClass.StringRecord
  (param $this (ref null $recordclass.RecordClass.StringRecord))
- (param $arg0 (ref null $java.lang.String))
+ (param $value (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:36:16
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:36:16
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:36:16
-  (struct.set $recordclass.RecordClass.StringRecord $value@recordclass.RecordClass.StringRecord (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.StringRecord $value@recordclass.RecordClass.StringRecord (local.get $this) (local.get $value))
  )
 )
 
@@ -1030,9 +1030,9 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.StringRecord)
 
-;;; ArrayRecord ArrayRecord.$create(int[] arg0)
+;;; ArrayRecord ArrayRecord.$create(int[] value)
 (func $$create__arrayOf_int@recordclass.RecordClass.ArrayRecord
- (param $arg0 (ref null $javaemul.internal.WasmArray.OfInt))
+ (param $value (ref null $javaemul.internal.WasmArray.OfInt))
  (result (ref null $recordclass.RecordClass.ArrayRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:38:16
  (local $$instance (ref null $recordclass.RecordClass.ArrayRecord))
@@ -1042,22 +1042,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:38:16
   (local.set $$instance (struct.new $recordclass.RecordClass.ArrayRecord (global.get $recordclass.RecordClass.ArrayRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfInt)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:38:16
-  (call $$ctor__arrayOf_int__void_$p_recordclass_RecordClass_ArrayRecord@recordclass.RecordClass.ArrayRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__arrayOf_int__void_$p_recordclass_RecordClass_ArrayRecord@recordclass.RecordClass.ArrayRecord (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:38:16
   (return (local.get $$instance))
  )
 )
 
-;;; void ArrayRecord.$ctor(int[] arg0)
+;;; void ArrayRecord.$ctor(int[] value)
 (func $$ctor__arrayOf_int__void_$p_recordclass_RecordClass_ArrayRecord@recordclass.RecordClass.ArrayRecord
  (param $this (ref null $recordclass.RecordClass.ArrayRecord))
- (param $arg0 (ref null $javaemul.internal.WasmArray.OfInt))
+ (param $value (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:38:16
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:38:16
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:38:16
-  (struct.set $recordclass.RecordClass.ArrayRecord $value@recordclass.RecordClass.ArrayRecord (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.ArrayRecord $value@recordclass.RecordClass.ArrayRecord (local.get $this) (local.get $value))
  )
 )
 
@@ -1172,9 +1172,9 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.ArrayRecord)
 
-;;; ObjectRecord ObjectRecord.$create(Object arg0)
+;;; ObjectRecord ObjectRecord.$create(Object value)
 (func $$create__java_lang_Object@recordclass.RecordClass.ObjectRecord
- (param $arg0 (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
  (result (ref null $recordclass.RecordClass.ObjectRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:40:16
  (local $$instance (ref null $recordclass.RecordClass.ObjectRecord))
@@ -1184,22 +1184,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:40:16
   (local.set $$instance (struct.new $recordclass.RecordClass.ObjectRecord (global.get $recordclass.RecordClass.ObjectRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:40:16
-  (call $$ctor__java_lang_Object__void_$p_recordclass_RecordClass_ObjectRecord@recordclass.RecordClass.ObjectRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__java_lang_Object__void_$p_recordclass_RecordClass_ObjectRecord@recordclass.RecordClass.ObjectRecord (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:40:16
   (return (local.get $$instance))
  )
 )
 
-;;; void ObjectRecord.$ctor(Object arg0)
+;;; void ObjectRecord.$ctor(Object value)
 (func $$ctor__java_lang_Object__void_$p_recordclass_RecordClass_ObjectRecord@recordclass.RecordClass.ObjectRecord
  (param $this (ref null $recordclass.RecordClass.ObjectRecord))
- (param $arg0 (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:40:16
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:40:16
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:40:16
-  (struct.set $recordclass.RecordClass.ObjectRecord $value@recordclass.RecordClass.ObjectRecord (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.ObjectRecord $value@recordclass.RecordClass.ObjectRecord (local.get $this) (local.get $value))
  )
 )
 
@@ -1670,9 +1670,9 @@
  )
 )
 
-;;; RecordWithDeferringConstructor RecordWithDeferringConstructor.$create(int arg0)
+;;; RecordWithDeferringConstructor RecordWithDeferringConstructor.$create(int value)
 (func $$create__int@recordclass.RecordClass.RecordWithDeferringConstructor
- (param $arg0 i32)
+ (param $value i32)
  (result (ref null $recordclass.RecordClass.RecordWithDeferringConstructor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:57:16
  (local $$instance (ref null $recordclass.RecordClass.RecordWithDeferringConstructor))
@@ -1682,22 +1682,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:57:16
   (local.set $$instance (struct.new $recordclass.RecordClass.RecordWithDeferringConstructor (global.get $recordclass.RecordClass.RecordWithDeferringConstructor.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:57:16
-  (call $$ctor__int__void_$p_recordclass_RecordClass_RecordWithDeferringConstructor@recordclass.RecordClass.RecordWithDeferringConstructor (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__int__void_$p_recordclass_RecordClass_RecordWithDeferringConstructor@recordclass.RecordClass.RecordWithDeferringConstructor (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:57:16
   (return (local.get $$instance))
  )
 )
 
-;;; void RecordWithDeferringConstructor.$ctor(int arg0)
+;;; void RecordWithDeferringConstructor.$ctor(int value)
 (func $$ctor__int__void_$p_recordclass_RecordClass_RecordWithDeferringConstructor@recordclass.RecordClass.RecordWithDeferringConstructor
  (param $this (ref null $recordclass.RecordClass.RecordWithDeferringConstructor))
- (param $arg0 i32)
+ (param $value i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:57:16
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:57:16
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:57:16
-  (struct.set $recordclass.RecordClass.RecordWithDeferringConstructor $value@recordclass.RecordClass.RecordWithDeferringConstructor (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.RecordWithDeferringConstructor $value@recordclass.RecordClass.RecordWithDeferringConstructor (local.get $this) (local.get $value))
  )
 )
 
@@ -1858,9 +1858,9 @@
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.RecordWithOverriddenObjectMethods)
 
-;;; RecordWithOverriddenObjectMethods RecordWithOverriddenObjectMethods.$create(String arg0)
+;;; RecordWithOverriddenObjectMethods RecordWithOverriddenObjectMethods.$create(String value)
 (func $$create__java_lang_String@recordclass.RecordClass.RecordWithOverriddenObjectMethods
- (param $arg0 (ref null $java.lang.String))
+ (param $value (ref null $java.lang.String))
  (result (ref null $recordclass.RecordClass.RecordWithOverriddenObjectMethods))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:63:23
  (local $$instance (ref null $recordclass.RecordClass.RecordWithOverriddenObjectMethods))
@@ -1870,22 +1870,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:63:23
   (local.set $$instance (struct.new $recordclass.RecordClass.RecordWithOverriddenObjectMethods (global.get $recordclass.RecordClass.RecordWithOverriddenObjectMethods.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:63:23
-  (call $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordWithOverriddenObjectMethods@recordclass.RecordClass.RecordWithOverriddenObjectMethods (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordWithOverriddenObjectMethods@recordclass.RecordClass.RecordWithOverriddenObjectMethods (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:63:23
   (return (local.get $$instance))
  )
 )
 
-;;; void RecordWithOverriddenObjectMethods.$ctor(String arg0)
+;;; void RecordWithOverriddenObjectMethods.$ctor(String value)
 (func $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordWithOverriddenObjectMethods@recordclass.RecordClass.RecordWithOverriddenObjectMethods
  (param $this (ref null $recordclass.RecordClass.RecordWithOverriddenObjectMethods))
- (param $arg0 (ref null $java.lang.String))
+ (param $value (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:63:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:63:23
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:63:23
-  (struct.set $recordclass.RecordClass.RecordWithOverriddenObjectMethods $value@recordclass.RecordClass.RecordWithOverriddenObjectMethods (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.RecordWithOverriddenObjectMethods $value@recordclass.RecordClass.RecordWithOverriddenObjectMethods (local.get $this) (local.get $value))
  )
 )
 
@@ -1963,9 +1963,9 @@
 )
 (elem declare func $m_value__java_lang_String@recordclass.RecordClass.RecordWithOverriddenAccessor)
 
-;;; RecordWithOverriddenAccessor RecordWithOverriddenAccessor.$create(String arg0)
+;;; RecordWithOverriddenAccessor RecordWithOverriddenAccessor.$create(String value)
 (func $$create__java_lang_String@recordclass.RecordClass.RecordWithOverriddenAccessor
- (param $arg0 (ref null $java.lang.String))
+ (param $value (ref null $java.lang.String))
  (result (ref null $recordclass.RecordClass.RecordWithOverriddenAccessor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:80:23
  (local $$instance (ref null $recordclass.RecordClass.RecordWithOverriddenAccessor))
@@ -1975,22 +1975,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:80:23
   (local.set $$instance (struct.new $recordclass.RecordClass.RecordWithOverriddenAccessor (global.get $recordclass.RecordClass.RecordWithOverriddenAccessor.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:80:23
-  (call $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordWithOverriddenAccessor@recordclass.RecordClass.RecordWithOverriddenAccessor (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordWithOverriddenAccessor@recordclass.RecordClass.RecordWithOverriddenAccessor (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:80:23
   (return (local.get $$instance))
  )
 )
 
-;;; void RecordWithOverriddenAccessor.$ctor(String arg0)
+;;; void RecordWithOverriddenAccessor.$ctor(String value)
 (func $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordWithOverriddenAccessor@recordclass.RecordClass.RecordWithOverriddenAccessor
  (param $this (ref null $recordclass.RecordClass.RecordWithOverriddenAccessor))
- (param $arg0 (ref null $java.lang.String))
+ (param $value (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:80:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:80:23
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:80:23
-  (struct.set $recordclass.RecordClass.RecordWithOverriddenAccessor $value@recordclass.RecordClass.RecordWithOverriddenAccessor (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.RecordWithOverriddenAccessor $value@recordclass.RecordClass.RecordWithOverriddenAccessor (local.get $this) (local.get $value))
  )
 )
 
@@ -2091,9 +2091,9 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.RecordWithOverriddenAccessor)
 
-;;; RecordImplementingInterface RecordImplementingInterface.$create(String arg0)
+;;; RecordImplementingInterface RecordImplementingInterface.$create(String a)
 (func $$create__java_lang_String@recordclass.RecordClass.RecordImplementingInterface
- (param $arg0 (ref null $java.lang.String))
+ (param $a (ref null $java.lang.String))
  (result (ref null $recordclass.RecordClass.RecordImplementingInterface))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:91:16
  (local $$instance (ref null $recordclass.RecordClass.RecordImplementingInterface))
@@ -2103,22 +2103,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:91:16
   (local.set $$instance (struct.new $recordclass.RecordClass.RecordImplementingInterface (global.get $recordclass.RecordClass.RecordImplementingInterface.vtable) (global.get $recordclass.RecordClass.RecordImplementingInterface.itable) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:91:16
-  (call $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordImplementingInterface@recordclass.RecordClass.RecordImplementingInterface (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordImplementingInterface@recordclass.RecordClass.RecordImplementingInterface (ref.as_non_null (local.get $$instance))(local.get $a))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:91:16
   (return (local.get $$instance))
  )
 )
 
-;;; void RecordImplementingInterface.$ctor(String arg0)
+;;; void RecordImplementingInterface.$ctor(String a)
 (func $$ctor__java_lang_String__void_$p_recordclass_RecordClass_RecordImplementingInterface@recordclass.RecordClass.RecordImplementingInterface
  (param $this (ref null $recordclass.RecordClass.RecordImplementingInterface))
- (param $arg0 (ref null $java.lang.String))
+ (param $a (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:91:16
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:91:16
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:91:16
-  (struct.set $recordclass.RecordClass.RecordImplementingInterface $a@recordclass.RecordClass.RecordImplementingInterface (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.RecordImplementingInterface $a@recordclass.RecordClass.RecordImplementingInterface (local.get $this) (local.get $a))
  )
 )
 
@@ -2262,9 +2262,9 @@
  )
 )
 
-;;; StaticFieldRecord StaticFieldRecord.$create(int arg0)
+;;; StaticFieldRecord StaticFieldRecord.$create(int nonstaticField)
 (func $$create__int@recordclass.RecordClass.StaticFieldRecord
- (param $arg0 i32)
+ (param $nonstaticField i32)
  (result (ref null $recordclass.RecordClass.StaticFieldRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:93:16
  (local $$instance (ref null $recordclass.RecordClass.StaticFieldRecord))
@@ -2274,22 +2274,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:93:16
   (local.set $$instance (struct.new $recordclass.RecordClass.StaticFieldRecord (global.get $recordclass.RecordClass.StaticFieldRecord.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:93:16
-  (call $$ctor__int__void_$p_recordclass_RecordClass_StaticFieldRecord@recordclass.RecordClass.StaticFieldRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__int__void_$p_recordclass_RecordClass_StaticFieldRecord@recordclass.RecordClass.StaticFieldRecord (ref.as_non_null (local.get $$instance))(local.get $nonstaticField))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:93:16
   (return (local.get $$instance))
  )
 )
 
-;;; void StaticFieldRecord.$ctor(int arg0)
+;;; void StaticFieldRecord.$ctor(int nonstaticField)
 (func $$ctor__int__void_$p_recordclass_RecordClass_StaticFieldRecord@recordclass.RecordClass.StaticFieldRecord
  (param $this (ref null $recordclass.RecordClass.StaticFieldRecord))
- (param $arg0 i32)
+ (param $nonstaticField i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:93:16
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:93:16
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:93:16
-  (struct.set $recordclass.RecordClass.StaticFieldRecord $nonstaticField@recordclass.RecordClass.StaticFieldRecord (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.StaticFieldRecord $nonstaticField@recordclass.RecordClass.StaticFieldRecord (local.get $this) (local.get $nonstaticField))
  )
 )
 
@@ -2406,10 +2406,10 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.StaticFieldRecord)
 
-;;; RecordSpecializingInterface RecordSpecializingInterface.$create(String arg0, String arg1)
+;;; RecordSpecializingInterface RecordSpecializingInterface.$create(String parametric, String nonParametric)
 (func $$create__java_lang_String__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface
- (param $arg0 (ref null $java.lang.String))
- (param $arg1 (ref null $java.lang.String))
+ (param $parametric (ref null $java.lang.String))
+ (param $nonParametric (ref null $java.lang.String))
  (result (ref null $recordclass.RecordClass.RecordSpecializingInterface))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:107:9
  (local $$instance (ref null $recordclass.RecordClass.RecordSpecializingInterface))
@@ -2419,25 +2419,25 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:107:9
   (local.set $$instance (struct.new $recordclass.RecordClass.RecordSpecializingInterface (global.get $recordclass.RecordClass.RecordSpecializingInterface.vtable) (global.get $recordclass.RecordClass.RecordSpecializingInterface.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:107:9
-  (call $$ctor__java_lang_String__java_lang_String__void_$p_recordclass_RecordClass_RecordSpecializingInterface@recordclass.RecordClass.RecordSpecializingInterface (ref.as_non_null (local.get $$instance))(local.get $arg0)(local.get $arg1))
+  (call $$ctor__java_lang_String__java_lang_String__void_$p_recordclass_RecordClass_RecordSpecializingInterface@recordclass.RecordClass.RecordSpecializingInterface (ref.as_non_null (local.get $$instance))(local.get $parametric)(local.get $nonParametric))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:107:9
   (return (local.get $$instance))
  )
 )
 
-;;; void RecordSpecializingInterface.$ctor(String arg0, String arg1)
+;;; void RecordSpecializingInterface.$ctor(String parametric, String nonParametric)
 (func $$ctor__java_lang_String__java_lang_String__void_$p_recordclass_RecordClass_RecordSpecializingInterface@recordclass.RecordClass.RecordSpecializingInterface
  (param $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
- (param $arg0 (ref null $java.lang.String))
- (param $arg1 (ref null $java.lang.String))
+ (param $parametric (ref null $java.lang.String))
+ (param $nonParametric (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:107:9
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:107:9
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:107:9
-  (struct.set $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this) (local.get $parametric))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:107:9
-  (struct.set $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this) (local.get $arg1))
+  (struct.set $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this) (local.get $nonParametric))
  )
 )
 
@@ -2581,9 +2581,9 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.RecordSpecializingInterface)
 
-;;; LocalRecord LocalRecord.$create(int arg0)
+;;; LocalRecord LocalRecord.$create(int value)
 (func $$create__int@recordclass.RecordClass.1LocalRecord
- (param $arg0 i32)
+ (param $value i32)
  (result (ref null $recordclass.RecordClass.1LocalRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:111:11
  (local $$instance (ref null $recordclass.RecordClass.1LocalRecord))
@@ -2593,22 +2593,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:111:11
   (local.set $$instance (struct.new $recordclass.RecordClass.1LocalRecord (global.get $recordclass.RecordClass.1LocalRecord.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:111:11
-  (call $$ctor__int__void_$p_recordclass_RecordClass_1LocalRecord@recordclass.RecordClass.1LocalRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__int__void_$p_recordclass_RecordClass_1LocalRecord@recordclass.RecordClass.1LocalRecord (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:111:11
   (return (local.get $$instance))
  )
 )
 
-;;; void LocalRecord.$ctor(int arg0)
+;;; void LocalRecord.$ctor(int value)
 (func $$ctor__int__void_$p_recordclass_RecordClass_1LocalRecord@recordclass.RecordClass.1LocalRecord
  (param $this (ref null $recordclass.RecordClass.1LocalRecord))
- (param $arg0 i32)
+ (param $value i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:111:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:111:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:111:11
-  (struct.set $recordclass.RecordClass.1LocalRecord $value@recordclass.RecordClass.1LocalRecord (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.1LocalRecord $value@recordclass.RecordClass.1LocalRecord (local.get $this) (local.get $value))
  )
 )
 
@@ -2723,10 +2723,10 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.1LocalRecord)
 
-;;; R2 R2.$create(int arg0, Object arg1)
+;;; R2 R2.$create(int i, Object o)
 (func $$create__int__java_lang_Object@recordclass.RecordClass.1R2
- (param $arg0 i32)
- (param $arg1 (ref null $java.lang.Object))
+ (param $i i32)
+ (param $o (ref null $java.lang.Object))
  (result (ref null $recordclass.RecordClass.1R2))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:116:11
  (local $$instance (ref null $recordclass.RecordClass.1R2))
@@ -2736,25 +2736,25 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:116:11
   (local.set $$instance (struct.new $recordclass.RecordClass.1R2 (global.get $recordclass.RecordClass.1R2.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:116:11
-  (call $$ctor__int__java_lang_Object__void_$p_recordclass_RecordClass_1R2@recordclass.RecordClass.1R2 (ref.as_non_null (local.get $$instance))(local.get $arg0)(local.get $arg1))
+  (call $$ctor__int__java_lang_Object__void_$p_recordclass_RecordClass_1R2@recordclass.RecordClass.1R2 (ref.as_non_null (local.get $$instance))(local.get $i)(local.get $o))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:116:11
   (return (local.get $$instance))
  )
 )
 
-;;; void R2.$ctor(int arg0, Object arg1)
+;;; void R2.$ctor(int i, Object o)
 (func $$ctor__int__java_lang_Object__void_$p_recordclass_RecordClass_1R2@recordclass.RecordClass.1R2
  (param $this (ref null $recordclass.RecordClass.1R2))
- (param $arg0 i32)
- (param $arg1 (ref null $java.lang.Object))
+ (param $i i32)
+ (param $o (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:116:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:116:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:116:11
-  (struct.set $recordclass.RecordClass.1R2 $i@recordclass.RecordClass.1R2 (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.1R2 $i@recordclass.RecordClass.1R2 (local.get $this) (local.get $i))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:116:11
-  (struct.set $recordclass.RecordClass.1R2 $o@recordclass.RecordClass.1R2 (local.get $this) (local.get $arg1))
+  (struct.set $recordclass.RecordClass.1R2 $o@recordclass.RecordClass.1R2 (local.get $this) (local.get $o))
  )
 )
 
@@ -2883,11 +2883,11 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.1R2)
 
-;;; R1 R1.$create(Object arg0, String arg1, R2 arg2)
+;;; R1 R1.$create(Object o, String s, R2 n)
 (func $$create__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2@recordclass.RecordClass.1R1
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
- (param $arg2 (ref null $recordclass.RecordClass.1R2))
+ (param $o (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (param $n (ref null $recordclass.RecordClass.1R2))
  (result (ref null $recordclass.RecordClass.1R1))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
  (local $$instance (ref null $recordclass.RecordClass.1R1))
@@ -2897,28 +2897,28 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
   (local.set $$instance (struct.new $recordclass.RecordClass.1R1 (global.get $recordclass.RecordClass.1R1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $recordclass.RecordClass.1R2) (ref.null $java.lang.Object) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
-  (call $$ctor__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2__void_$p_recordclass_RecordClass_1R1@recordclass.RecordClass.1R1 (ref.as_non_null (local.get $$instance))(local.get $arg0)(local.get $arg1)(local.get $arg2))
+  (call $$ctor__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2__void_$p_recordclass_RecordClass_1R1@recordclass.RecordClass.1R1 (ref.as_non_null (local.get $$instance))(local.get $o)(local.get $s)(local.get $n))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
   (return (local.get $$instance))
  )
 )
 
-;;; void R1.$ctor(Object arg0, String arg1, R2 arg2)
+;;; void R1.$ctor(Object o, String s, R2 n)
 (func $$ctor__java_lang_Object__java_lang_String__recordclass_RecordClass_1R2__void_$p_recordclass_RecordClass_1R1@recordclass.RecordClass.1R1
  (param $this (ref null $recordclass.RecordClass.1R1))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
- (param $arg2 (ref null $recordclass.RecordClass.1R2))
+ (param $o (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (param $n (ref null $recordclass.RecordClass.1R2))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
-  (struct.set $recordclass.RecordClass.1R1 $o@recordclass.RecordClass.1R1 (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.1R1 $o@recordclass.RecordClass.1R1 (local.get $this) (local.get $o))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
-  (struct.set $recordclass.RecordClass.1R1 $s@recordclass.RecordClass.1R1 (local.get $this) (local.get $arg1))
+  (struct.set $recordclass.RecordClass.1R1 $s@recordclass.RecordClass.1R1 (local.get $this) (local.get $s))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:117:11
-  (struct.set $recordclass.RecordClass.1R1 $n@recordclass.RecordClass.1R1 (local.get $this) (local.get $arg2))
+  (struct.set $recordclass.RecordClass.1R1 $n@recordclass.RecordClass.1R1 (local.get $this) (local.get $n))
  )
 )
 
@@ -3061,9 +3061,9 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.1R1)
 
-;;; RecursiveRecord RecursiveRecord.$create(RecursiveRecord arg0)
+;;; RecursiveRecord RecursiveRecord.$create(RecursiveRecord r)
 (func $$create__recordclass_RecordClass_1RecursiveRecord@recordclass.RecordClass.1RecursiveRecord
- (param $arg0 (ref null $recordclass.RecordClass.1RecursiveRecord))
+ (param $r (ref null $recordclass.RecordClass.1RecursiveRecord))
  (result (ref null $recordclass.RecordClass.1RecursiveRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:125:11
  (local $$instance (ref null $recordclass.RecordClass.1RecursiveRecord))
@@ -3073,22 +3073,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:125:11
   (local.set $$instance (struct.new $recordclass.RecordClass.1RecursiveRecord (global.get $recordclass.RecordClass.1RecursiveRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $recordclass.RecordClass.1RecursiveRecord)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:125:11
-  (call $$ctor__recordclass_RecordClass_1RecursiveRecord__void_$p_recordclass_RecordClass_1RecursiveRecord@recordclass.RecordClass.1RecursiveRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__recordclass_RecordClass_1RecursiveRecord__void_$p_recordclass_RecordClass_1RecursiveRecord@recordclass.RecordClass.1RecursiveRecord (ref.as_non_null (local.get $$instance))(local.get $r))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:125:11
   (return (local.get $$instance))
  )
 )
 
-;;; void RecursiveRecord.$ctor(RecursiveRecord arg0)
+;;; void RecursiveRecord.$ctor(RecursiveRecord r)
 (func $$ctor__recordclass_RecordClass_1RecursiveRecord__void_$p_recordclass_RecordClass_1RecursiveRecord@recordclass.RecordClass.1RecursiveRecord
  (param $this (ref null $recordclass.RecordClass.1RecursiveRecord))
- (param $arg0 (ref null $recordclass.RecordClass.1RecursiveRecord))
+ (param $r (ref null $recordclass.RecordClass.1RecursiveRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:125:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:125:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:125:11
-  (struct.set $recordclass.RecordClass.1RecursiveRecord $r@recordclass.RecordClass.1RecursiveRecord (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.1RecursiveRecord $r@recordclass.RecordClass.1RecursiveRecord (local.get $this) (local.get $r))
  )
 )
 
@@ -3203,9 +3203,9 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.1RecursiveRecord)
 
-;;; GenericRecord<T> GenericRecord.$create(T arg0)
+;;; GenericRecord<T> GenericRecord.$create(T value)
 (func $$create__java_lang_Object@recordclass.RecordClass.1GenericRecord
- (param $arg0 (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
  (result (ref null $recordclass.RecordClass.1GenericRecord))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:129:11
  (local $$instance (ref null $recordclass.RecordClass.1GenericRecord))
@@ -3215,22 +3215,22 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:129:11
   (local.set $$instance (struct.new $recordclass.RecordClass.1GenericRecord (global.get $recordclass.RecordClass.1GenericRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:129:11
-  (call $$ctor__java_lang_Object__void_$p_recordclass_RecordClass_1GenericRecord@recordclass.RecordClass.1GenericRecord (ref.as_non_null (local.get $$instance))(local.get $arg0))
+  (call $$ctor__java_lang_Object__void_$p_recordclass_RecordClass_1GenericRecord@recordclass.RecordClass.1GenericRecord (ref.as_non_null (local.get $$instance))(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:129:11
   (return (local.get $$instance))
  )
 )
 
-;;; void GenericRecord.$ctor(T arg0)
+;;; void GenericRecord.$ctor(T value)
 (func $$ctor__java_lang_Object__void_$p_recordclass_RecordClass_1GenericRecord@recordclass.RecordClass.1GenericRecord
  (param $this (ref null $recordclass.RecordClass.1GenericRecord))
- (param $arg0 (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:129:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:129:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:129:11
-  (struct.set $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this) (local.get $arg0))
+  (struct.set $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this) (local.get $value))
  )
 )
 

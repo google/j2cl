@@ -1185,10 +1185,10 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.Digit)
 
-;;; R R.$create(Object arg0, String arg1)
+;;; R R.$create(Object o, String s)
 (func $$create__java_lang_Object__java_lang_String@switchpatterns.SwitchPatterns.1R
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
  (result (ref null $switchpatterns.SwitchPatterns.1R))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:51:11
  (local $$instance (ref null $switchpatterns.SwitchPatterns.1R))
@@ -1198,25 +1198,25 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:51:11
   (local.set $$instance (struct.new $switchpatterns.SwitchPatterns.1R (global.get $switchpatterns.SwitchPatterns.1R.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:51:11
-  (call $$ctor__java_lang_Object__java_lang_String__void_$p_switchpatterns_SwitchPatterns_1R@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $$instance))(local.get $arg0)(local.get $arg1))
+  (call $$ctor__java_lang_Object__java_lang_String__void_$p_switchpatterns_SwitchPatterns_1R@switchpatterns.SwitchPatterns.1R (ref.as_non_null (local.get $$instance))(local.get $o)(local.get $s))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:51:11
   (return (local.get $$instance))
  )
 )
 
-;;; void R.$ctor(Object arg0, String arg1)
+;;; void R.$ctor(Object o, String s)
 (func $$ctor__java_lang_Object__java_lang_String__void_$p_switchpatterns_SwitchPatterns_1R@switchpatterns.SwitchPatterns.1R
  (param $this (ref null $switchpatterns.SwitchPatterns.1R))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:51:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:51:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:51:11
-  (struct.set $switchpatterns.SwitchPatterns.1R $o@switchpatterns.SwitchPatterns.1R (local.get $this) (local.get $arg0))
+  (struct.set $switchpatterns.SwitchPatterns.1R $o@switchpatterns.SwitchPatterns.1R (local.get $this) (local.get $o))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:51:11
-  (struct.set $switchpatterns.SwitchPatterns.1R $s@switchpatterns.SwitchPatterns.1R (local.get $this) (local.get $arg1))
+  (struct.set $switchpatterns.SwitchPatterns.1R $s@switchpatterns.SwitchPatterns.1R (local.get $this) (local.get $s))
  )
 )
 

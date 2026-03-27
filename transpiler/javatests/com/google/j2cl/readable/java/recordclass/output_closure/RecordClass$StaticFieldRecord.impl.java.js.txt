@@ -28,17 +28,17 @@ class StaticFieldRecord extends Record {
  }
  //Factory method corresponding to constructor 'StaticFieldRecord(int)'.
  /** @nodts @return {!StaticFieldRecord} */
- static $create__int(/** number */ arg0) {
+ static $create__int(/** number */ nonstaticField) {
   StaticFieldRecord.$clinit();
   let $instance = new StaticFieldRecord();
-  $instance.$ctor__recordclass_RecordClass_StaticFieldRecord__int__void(arg0);
+  $instance.$ctor__recordclass_RecordClass_StaticFieldRecord__int__void(nonstaticField);
   return $instance;
  }
  //Initialization from constructor 'StaticFieldRecord(int)'.
  /** @nodts */
- $ctor__recordclass_RecordClass_StaticFieldRecord__int__void(/** number */ arg0) {
+ $ctor__recordclass_RecordClass_StaticFieldRecord__int__void(/** number */ nonstaticField) {
   this.$ctor__java_lang_Record__void();
-  this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_ = arg0;
+  this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_ = nonstaticField;
   $J2CL_PRESERVE$(this.f_nonstaticField__recordclass_RecordClass_StaticFieldRecord_);
  }
  /** @nodts @return {number} */

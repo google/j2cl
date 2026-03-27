@@ -26,16 +26,16 @@ class RecordWithOverriddenObjectMethods extends Record {
   return 'foo';
  }
  /** @nodts @return {!RecordWithOverriddenObjectMethods} */
- static $create__java_lang_String(/** ?string */ arg0) {
+ static $create__java_lang_String(/** ?string */ value) {
   RecordWithOverriddenObjectMethods.$clinit();
   let $instance = new RecordWithOverriddenObjectMethods();
-  $instance.$ctor__recordclass_RecordClass_RecordWithOverriddenObjectMethods__java_lang_String__void(arg0);
+  $instance.$ctor__recordclass_RecordClass_RecordWithOverriddenObjectMethods__java_lang_String__void(value);
   return $instance;
  }
  /** @nodts */
- $ctor__recordclass_RecordClass_RecordWithOverriddenObjectMethods__java_lang_String__void(/** ?string */ arg0) {
+ $ctor__recordclass_RecordClass_RecordWithOverriddenObjectMethods__java_lang_String__void(/** ?string */ value) {
   this.$ctor__java_lang_Record__void();
-  this.f_value__recordclass_RecordClass_RecordWithOverriddenObjectMethods_ = arg0;
+  this.f_value__recordclass_RecordClass_RecordWithOverriddenObjectMethods_ = value;
   $J2CL_PRESERVE$(this.f_value__recordclass_RecordClass_RecordWithOverriddenObjectMethods_);
  }
  /** @nodts @return {?string} */

@@ -795,10 +795,10 @@
  )
 )
 
-;;; R R.$create(Object arg0, String arg1)
+;;; R R.$create(Object o, String s)
 (func $$create__java_lang_Object__java_lang_String@unnamedvariables.UnnamedVariables.1R
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
  (result (ref null $unnamedvariables.UnnamedVariables.1R))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:25:11
  (local $$instance (ref null $unnamedvariables.UnnamedVariables.1R))
@@ -808,25 +808,25 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:25:11
   (local.set $$instance (struct.new $unnamedvariables.UnnamedVariables.1R (global.get $unnamedvariables.UnnamedVariables.1R.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:25:11
-  (call $$ctor__java_lang_Object__java_lang_String__void_$p_unnamedvariables_UnnamedVariables_1R@unnamedvariables.UnnamedVariables.1R (ref.as_non_null (local.get $$instance))(local.get $arg0)(local.get $arg1))
+  (call $$ctor__java_lang_Object__java_lang_String__void_$p_unnamedvariables_UnnamedVariables_1R@unnamedvariables.UnnamedVariables.1R (ref.as_non_null (local.get $$instance))(local.get $o)(local.get $s))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:25:11
   (return (local.get $$instance))
  )
 )
 
-;;; void R.$ctor(Object arg0, String arg1)
+;;; void R.$ctor(Object o, String s)
 (func $$ctor__java_lang_Object__java_lang_String__void_$p_unnamedvariables_UnnamedVariables_1R@unnamedvariables.UnnamedVariables.1R
  (param $this (ref null $unnamedvariables.UnnamedVariables.1R))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:25:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:25:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:25:11
-  (struct.set $unnamedvariables.UnnamedVariables.1R $o@unnamedvariables.UnnamedVariables.1R (local.get $this) (local.get $arg0))
+  (struct.set $unnamedvariables.UnnamedVariables.1R $o@unnamedvariables.UnnamedVariables.1R (local.get $this) (local.get $o))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:25:11
-  (struct.set $unnamedvariables.UnnamedVariables.1R $s@unnamedvariables.UnnamedVariables.1R (local.get $this) (local.get $arg1))
+  (struct.set $unnamedvariables.UnnamedVariables.1R $s@unnamedvariables.UnnamedVariables.1R (local.get $this) (local.get $s))
  )
 )
 
@@ -955,10 +955,10 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@unnamedvariables.UnnamedVariables.1R)
 
-;;; R R.$create(Object arg0, String arg1)
+;;; R R.$create(Object o, String s)
 (func $$create__java_lang_Object__java_lang_String@unnamedvariables.UnnamedVariables.2R
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
  (result (ref null $unnamedvariables.UnnamedVariables.2R))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (local $$instance (ref null $unnamedvariables.UnnamedVariables.2R))
@@ -968,25 +968,25 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (local.set $$instance (struct.new $unnamedvariables.UnnamedVariables.2R (global.get $unnamedvariables.UnnamedVariables.2R.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
-  (call $$ctor__java_lang_Object__java_lang_String__void_$p_unnamedvariables_UnnamedVariables_2R@unnamedvariables.UnnamedVariables.2R (ref.as_non_null (local.get $$instance))(local.get $arg0)(local.get $arg1))
+  (call $$ctor__java_lang_Object__java_lang_String__void_$p_unnamedvariables_UnnamedVariables_2R@unnamedvariables.UnnamedVariables.2R (ref.as_non_null (local.get $$instance))(local.get $o)(local.get $s))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (return (local.get $$instance))
  )
 )
 
-;;; void R.$ctor(Object arg0, String arg1)
+;;; void R.$ctor(Object o, String s)
 (func $$ctor__java_lang_Object__java_lang_String__void_$p_unnamedvariables_UnnamedVariables_2R@unnamedvariables.UnnamedVariables.2R
  (param $this (ref null $unnamedvariables.UnnamedVariables.2R))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
   (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
-  (struct.set $unnamedvariables.UnnamedVariables.2R $o@unnamedvariables.UnnamedVariables.2R (local.get $this) (local.get $arg0))
+  (struct.set $unnamedvariables.UnnamedVariables.2R $o@unnamedvariables.UnnamedVariables.2R (local.get $this) (local.get $o))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/unnamedvariables/readable-j2wasm.js/unnamedvariables/UnnamedVariables.java:46:11
-  (struct.set $unnamedvariables.UnnamedVariables.2R $s@unnamedvariables.UnnamedVariables.2R (local.get $this) (local.get $arg1))
+  (struct.set $unnamedvariables.UnnamedVariables.2R $s@unnamedvariables.UnnamedVariables.2R (local.get $this) (local.get $s))
  )
 )
 

@@ -51,8 +51,8 @@ open class RecordClass {
    class LocalRecord {
     private val value: Int
     
-    constructor(arg0: Int) {
-     this.value = arg0
+    constructor(value: Int) {
+     this.value = value
     }
     
     fun value(): Int {
@@ -93,9 +93,9 @@ open class RecordClass {
     
     private val o: Any?
     
-    constructor(arg0: Int, arg1: Any?) {
-     this.i = arg0
-     this.o = arg1
+    constructor(i: Int, o: Any?) {
+     this.i = i
+     this.o = o
     }
     
     fun i(): Int {
@@ -137,10 +137,10 @@ open class RecordClass {
     
     private val n: R2?
     
-    constructor(arg0: Any?, arg1: String?, arg2: R2?) {
-     this.o = arg0
-     this.s = arg1
-     this.n = arg2
+    constructor(o: Any?, s: String?, n: R2?) {
+     this.o = o
+     this.s = s
+     this.n = n
     }
     
     fun o(): Any? {
@@ -222,8 +222,8 @@ open class RecordClass {
    class RecursiveRecord {
     private val r: RecursiveRecord?
     
-    constructor(arg0: RecursiveRecord?) {
-     this.r = arg0
+    constructor(r: RecursiveRecord?) {
+     this.r = r
     }
     
     fun r(): RecursiveRecord? {
@@ -267,8 +267,8 @@ open class RecordClass {
    class GenericRecord<T> {
     private val value: T
     
-    constructor(arg0: T) {
-     this.value = arg0
+    constructor(value: T) {
+     this.value = value
     }
     
     fun value(): T {
@@ -338,8 +338,8 @@ open class RecordClass {
  class SimpleRecord {
   private val value: Int
   
-  constructor(arg0: Int) {
-   this.value = arg0
+  constructor(value: Int) {
+   this.value = value
   }
   
   fun value(): Int {
@@ -374,8 +374,8 @@ open class RecordClass {
  class StringRecord {
   private val value: String?
   
-  constructor(arg0: String?) {
-   this.value = arg0
+  constructor(value: String?) {
+   this.value = value
   }
   
   fun value(): String? {
@@ -410,8 +410,8 @@ open class RecordClass {
  class ArrayRecord {
   private val value: IntArray?
   
-  constructor(arg0: IntArray?) {
-   this.value = arg0
+  constructor(value: IntArray?) {
+   this.value = value
   }
   
   fun value(): IntArray? {
@@ -446,8 +446,8 @@ open class RecordClass {
  class ObjectRecord {
   private val value: Any?
   
-  constructor(arg0: Any?) {
-   this.value = arg0
+  constructor(value: Any?) {
+   this.value = value
   }
   
   fun value(): Any? {
@@ -574,8 +574,8 @@ open class RecordClass {
   
   constructor(): this(123)
   
-  constructor(arg0: Int) {
-   this.value = arg0
+  constructor(value: Int) {
+   this.value = value
   }
   
   fun value(): Int {
@@ -622,8 +622,8 @@ open class RecordClass {
    return "foo"
   }
   
-  constructor(arg0: String?) {
-   this.value = arg0
+  constructor(value: String?) {
+   this.value = value
   }
   
   fun value(): String? {
@@ -638,8 +638,8 @@ open class RecordClass {
    return "foo"
   }
   
-  constructor(arg0: String?) {
-   this.value = arg0
+  constructor(value: String?) {
+   this.value = value
   }
   
   override fun equals(arg0: Any?): Boolean {
@@ -675,8 +675,8 @@ open class RecordClass {
  class RecordImplementingInterface: I {
   private val a: String?
   
-  constructor(arg0: String?) {
-   this.a = arg0
+  constructor(a: String?) {
+   this.a = a
   }
   
   override fun a(): String? {
@@ -715,8 +715,8 @@ open class RecordClass {
    if (initializeWithStaticField) StaticFieldRecord.staticField else 0,
   )
   
-  constructor(arg0: Int) {
-   this.nonstaticField = arg0
+  constructor(nonstaticField: Int) {
+   this.nonstaticField = nonstaticField
   }
   
   fun nonstaticField(): Int {
@@ -765,9 +765,9 @@ open class RecordClass {
   
   private val nonParametric: String?
   
-  constructor(arg0: String?, arg1: String?) {
-   this.parametric = arg0
-   this.nonParametric = arg1
+  constructor(parametric: String?, nonParametric: String?) {
+   this.parametric = parametric
+   this.nonParametric = nonParametric
   }
   
   override fun parametric(): String? {
