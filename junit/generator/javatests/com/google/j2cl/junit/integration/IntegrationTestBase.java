@@ -172,6 +172,9 @@ public abstract class IntegrationTestBase {
     // Cleanup log message for jsunit until "Start" log.
     if (testMode.isWeb()) {
       int startIndex = Iterables.indexOf(logs, x -> x.endsWith("  Start"));
+      if (startIndex == -1) {
+        throw new IllegalStateException("Missing 'Start' in log\n" + String.join("\n", logs));
+      }
       logs = logs.subList(startIndex, logs.size());
     }
     return logs;
