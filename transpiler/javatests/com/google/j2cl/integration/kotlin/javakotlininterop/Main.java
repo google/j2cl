@@ -38,6 +38,8 @@ public class Main {
     testJavaKotlinMixedHierarchyFromKotlinWithoutExplicitOverride();
     testDefaultArguments();
     testDefaultArgumentsWithVarargs();
+    testDataClass();
+    testJvmRecordDataClass();
   }
 
   private static void testTopLevelDeclarations() {
@@ -210,5 +212,19 @@ public class Main {
     assertEquals(
         new int[] {20, 4, 5, 6},
         KotlinOptionalVarargs.optionalVarargsWithLeadingOptional(20, new int[] {4, 5, 6}));
+  }
+
+  private static void testDataClass() {
+    DataClass data = new DataClass(2, "bar");
+    assertEquals(2, data.getX());
+    assertEquals("bar", data.getY());
+    assertEquals(new DataClass(2, "bar"), data);
+  }
+
+  private static void testJvmRecordDataClass() {
+    MyRecord record = new MyRecord(1, "foo");
+    assertEquals(1, record.x());
+    assertEquals("foo", record.y());
+    assertEquals(new MyRecord(1, "foo"), record);
   }
 }
