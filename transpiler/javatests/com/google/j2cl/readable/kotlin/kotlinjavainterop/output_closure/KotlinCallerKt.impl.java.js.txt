@@ -1,0 +1,62 @@
+goog.module('kotlinjavainterop.KotlinCallerKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let JavaRecord = goog.forwardDeclare('kotlinjavainterop.JavaRecord$impl');
+
+/**
+ * @final
+ */
+class KotlinCallerKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!KotlinCallerKt} */
+ static $create__() {
+  KotlinCallerKt.$clinit();
+  let $instance = new KotlinCallerKt();
+  $instance.$ctor__kotlinjavainterop_KotlinCallerKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__kotlinjavainterop_KotlinCallerKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testRecordUsage__void() {
+  KotlinCallerKt.$clinit();
+  let record = JavaRecord.$create__int__java_lang_String(123, 'test');
+  let value = record.m_value__int();
+  let name = record.m_name__java_lang_String();
+  let upperName = record.m_getUppercasedName__java_lang_String();
+ }
+ /** @nodts */
+ static m_testMethodAccess__void() {
+  KotlinCallerKt.$clinit();
+  let record = JavaRecord.$create__int__java_lang_String(456, 'test2');
+  let value = record.m_value__int();
+  let name = record.m_name__java_lang_String();
+ }
+ /** @nodts */
+ static $clinit() {
+  KotlinCallerKt.$clinit = () =>{};
+  KotlinCallerKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KotlinCallerKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  JavaRecord = goog.module.get('kotlinjavainterop.JavaRecord$impl');
+ }
+}
+$Util.$setClassMetadata(KotlinCallerKt, 'kotlinjavainterop.KotlinCallerKt');
+
+exports = KotlinCallerKt;
+
+//# sourceMappingURL=KotlinCallerKt.js.map
