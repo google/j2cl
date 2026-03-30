@@ -1,5 +1,6 @@
 const foo_Bar = goog.require('foo.Bar');
 const foo_Baz = goog.require('foo.Baz');
+const j2wasm_ArrayUtils = goog.require('j2wasm.ArrayUtils');
 const j2wasm_CharUtils = goog.require('j2wasm.CharUtils');
 const j2wasm_ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
 const j2wasm_DoubleUtils = goog.require('j2wasm.DoubleUtils');
@@ -13,6 +14,7 @@ function getImports() {
   'WebAssembly': WebAssembly,
   'imports': {
    '?.toString': (/** ? */ $instance, ) => $instance.toString(),
+   'Array': Array,
    'Array.at$1': (/** !Array */ $instance, /** number */ index, ) => $instance.at(index, ),
    'Date.UTC': Date.UTC,
    'Date.constructor': () => new Date(),
@@ -95,6 +97,9 @@ function getImports() {
    'get top': () => top,
    'get window.top': () => window.top,
    'isFinite': isFinite,
+   'j2wasm.ArrayUtils.getArrayAt': j2wasm_ArrayUtils.getArrayAt,
+   'j2wasm.ArrayUtils.getArrayLength': j2wasm_ArrayUtils.getArrayLength,
+   'j2wasm.ArrayUtils.setArrayAt': j2wasm_ArrayUtils.setArrayAt,
    'j2wasm.CharUtils.charToLowerCase': j2wasm_CharUtils.charToLowerCase,
    'j2wasm.CharUtils.charToUpperCase': j2wasm_CharUtils.charToUpperCase,
    'j2wasm.CharUtils.codePointToLowerCase': j2wasm_CharUtils.codePointToLowerCase,

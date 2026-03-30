@@ -21,16 +21,25 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Normalizes array creations for wasm.
@@ -47,6 +56,20 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 public class NormalizeArrayCreationsWasm extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    // Expand native JsType array literals first since their handling introduces NewArray
+    // expressions that must be also rewritten.
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
+            if (!arrayLiteral.getTypeDescriptor().isNativeJsArray()) {
+              return arrayLiteral;
+            }
+            return expandNativeJsTypeArrayLiterals(arrayLiteral);
+          }
+        });
+
+    // Rewrite NewArray expressions.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -68,7 +91,7 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
    */
   private static Expression implementArrayCreationFromArrayLiteral(NewArray newArray) {
     Expression initializer = newArray.getInitializer();
-    checkState(initializer instanceof ArrayLiteral);
+    checkState(initializer instanceof ArrayLiteral || initializer instanceof MultiExpression);
     return initializer;
   }
 
@@ -92,25 +115,45 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
    * dimension.
    */
   private static Expression implementArrayCreationWithDimensions(NewArray newArray) {
-    if (newArray.getDimensionExpressions().size() < 2) {
+    if (newArray.getDimensionExpressions().size() == 1) {
+      if (newArray.getTypeDescriptor().isNativeJsArray()) {
+        // WasmExtern.createArray(size)
+        return MethodCall.Builder.from(
+                TypeDescriptors.get()
+                    .javaemulInternalWasmExtern
+                    .getMethodDescriptorByName("createArray"))
+            .setArguments(newArray.getDimensionExpressions().getFirst())
+            .build();
+      }
       return newArray;
     }
+
     checkArgument(newArray.getInitializer() == null);
 
-    ImmutableList<Expression> nonNullDimensions =
-        newArray.getDimensionExpressions().stream()
-            .map(NormalizeArrayCreationsWasm::nullToMinusOne)
-            .collect(toImmutableList());
-
-    return RuntimeMethods.createCreateMultiDimensionalArrayCall(
+    Expression dimensionsParameter =
         ArrayLiteral.newBuilder()
             .setTypeDescriptor(
                 ArrayTypeDescriptor.newBuilder()
                     .setComponentTypeDescriptor(PrimitiveTypes.INT)
                     .build())
-            .setValueExpressions(nonNullDimensions)
-            .build(),
-        NumberLiteral.fromInt(getTypeIndex(newArray.getLeafTypeDescriptor())));
+            .setValueExpressions(
+                newArray.getDimensionExpressions().stream()
+                    .map(NormalizeArrayCreationsWasm::nullToMinusOne)
+                    .collect(toImmutableList()))
+            .build();
+
+    if (newArray.getTypeDescriptor().isNativeJsArray()) {
+      // WasmExtern.createMultiDimensionalArray(new int[] { d1, d2 })
+      return MethodCall.Builder.from(
+              TypeDescriptors.get()
+                  .javaemulInternalWasmExtern
+                  .getMethodDescriptorByName("createMultiDimensionalArray"))
+          .setArguments(dimensionsParameter)
+          .build();
+    }
+
+    return RuntimeMethods.createCreateMultiDimensionalArrayCall(
+        dimensionsParameter, NumberLiteral.fromInt(getTypeIndex(newArray.getLeafTypeDescriptor())));
   }
 
   private static int getTypeIndex(TypeDescriptor typeDescriptor) {
@@ -119,5 +162,67 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
 
   private static Expression nullToMinusOne(Expression original) {
     return original instanceof NullLiteral ? NumberLiteral.fromInt(-1) : original;
+  }
+
+  private static Expression expandNativeJsTypeArrayLiterals(ArrayLiteral arrayLiteral) {
+    // Create a simple native array. We can ignore dimensions since:
+    // 1. There is no metadata to represent multidimensional arrays, they are just arrays of
+    // arrays.
+    // 2. Since it has array literal, nested array creations are taken care of by their
+    // corresponding expansion.
+    int size = arrayLiteral.getValueExpressions().size();
+    NewArray newArray = newNativeJsTypeArrayCall(size);
+    if (size == 0) {
+      return newArray;
+    }
+
+    // Wasm lacks a literal initialization construct for external JS objects.
+    // We simulate array literals by sequentially setting its elements.
+    List<Expression> expressions = new ArrayList<>();
+
+    // var nativeArray = new Array(size)
+    Variable variable =
+        Variable.newBuilder()
+            .setName("nativeArray")
+            .setTypeDescriptor(getWasmExernArrayType())
+            .setFinal(true)
+            .build();
+    expressions.add(
+        VariableDeclarationExpression.newBuilder()
+            .addVariableDeclaration(variable, newArray)
+            .build());
+
+    // tmp[0] = literal_0
+    // tmp[1] = literal_1
+    // ...
+    for (int i = 0; i < size; i++) {
+      expressions.add(
+          BinaryExpression.Builder.asAssignmentTo(
+                  ArrayAccess.newBuilder()
+                      .setArrayExpression(variable.createReference())
+                      .setIndexExpression(NumberLiteral.fromInt(i))
+                      .build())
+              .setRightOperand(arrayLiteral.getValueExpressions().get(i))
+              .build());
+    }
+
+    // return tmp
+    expressions.add(variable.createReference());
+    return MultiExpression.newBuilder().setExpressions(expressions).build();
+  }
+
+  private static NewArray newNativeJsTypeArrayCall(int size) {
+    // new Array(size)
+    return NewArray.newBuilder()
+        .setTypeDescriptor(getWasmExernArrayType())
+        .setDimensionExpressions(ImmutableList.of(NumberLiteral.fromInt(size)))
+        .setInitializer(null)
+        .build();
+  }
+
+  private static ArrayTypeDescriptor getWasmExernArrayType() {
+    return ArrayTypeDescriptor.newBuilder()
+        .setComponentTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmExtern)
+        .build();
   }
 }

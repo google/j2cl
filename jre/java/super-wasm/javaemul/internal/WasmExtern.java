@@ -17,6 +17,7 @@ package javaemul.internal;
 
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -32,6 +33,38 @@ public class WasmExtern {
 
   @Wasm("extern.externalize")
   public static native WasmExtern externalize(Object t);
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Array")
+  public static native WasmExtern createArray(int length);
+
+  @JsOverlay
+  public static WasmExtern createMultiDimensionalArray(int... dimensions) {
+    return createMultiDimensionalArrayRecursive(dimensions, 0);
+  }
+
+  @JsOverlay
+  private static WasmExtern createMultiDimensionalArrayRecursive(int[] dimensions, int index) {
+    int length = dimensions[index];
+    if (length == -1) {
+      return null;
+    }
+    WasmExtern array = createArray(length);
+    if (index + 1 < dimensions.length) {
+      for (int i = 0; i < length; i++) {
+        setArrayAt(array, i, createMultiDimensionalArrayRecursive(dimensions, index + 1));
+      }
+    }
+    return array;
+  }
+
+  @JsMethod(namespace = "j2wasm.ArrayUtils")
+  public static native int getArrayLength(WasmExtern target);
+
+  @JsMethod(namespace = "j2wasm.ArrayUtils")
+  public static native WasmExtern getArrayAt(WasmExtern target, int index);
+
+  @JsMethod(namespace = "j2wasm.ArrayUtils")
+  public static native void setArrayAt(WasmExtern target, int index, WasmExtern value);
 
   private WasmExtern() {}
 }

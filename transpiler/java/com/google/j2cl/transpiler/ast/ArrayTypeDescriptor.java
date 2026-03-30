@@ -79,6 +79,11 @@ public abstract non-sealed class ArrayTypeDescriptor extends TypeDescriptor {
     return getLeafTypeDescriptor().toRawTypeDescriptor().isNative();
   }
 
+  @Override
+  public boolean isNative() {
+    return isNativeJsArray();
+  }
+
   /**
    * Returns true for arrays where raw wasm array representation is enough. These arrays are located
    * in {@see javaemul.internal.WasmArrays}.

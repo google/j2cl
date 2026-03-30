@@ -17,7 +17,6 @@ package array
 
 import java.io.Serializable
 import java.lang.Cloneable
-import javaemul.internal.annotations.Wasm
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 
@@ -180,8 +179,7 @@ class Arrays {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String") private class NativeType
 
-  @Wasm("nop") // TODO(b/261079024) Remove when arrays of native types are supported.
-  private fun testNativeArray() {
+  fun testNativeArray() {
     // Creation
     var nativeObjects = arrayOfNulls<NativeType>(100)
     nativeObjects = arrayOfNulls(0)

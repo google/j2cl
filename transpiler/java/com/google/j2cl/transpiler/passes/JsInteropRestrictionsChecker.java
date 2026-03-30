@@ -293,7 +293,6 @@ public class JsInteropRestrictionsChecker {
     }
 
     checkNativeTypeArguments(type);
-    checkNativeTypeArrays(type);
     checkNativeTypeEqualityCheck(type);
   }
 
@@ -348,15 +347,6 @@ public class JsInteropRestrictionsChecker {
                 });
           }
         });
-  }
-
-  private void checkNativeTypeArrays(Type type) {
-    checkAllowedTypes(
-        type,
-        TypeDescriptor::isNativeJsArray,
-        /* onlyCheckTypeSpecialization= */ false,
-        /* disallowedTypeDescription= */ "Native type array",
-        /* messageSuffix= */ " (b/261079024)");
   }
 
   private void checkNativeTypeEqualityCheck(Type type) {

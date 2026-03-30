@@ -61,6 +61,7 @@ import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaImplementorClasses;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaJsFunctionAdaptor;
+import com.google.j2cl.transpiler.passes.ImplementNativeJsTypeArrayOperationsWasm;
 import com.google.j2cl.transpiler.passes.ImplementNotNullOperator;
 import com.google.j2cl.transpiler.passes.ImplementRecordClasses;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitFunctionRedirection;
@@ -497,6 +498,8 @@ public enum Backend {
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           // Must run after NormalizeEnumClasses
           RemoveNameFromJsEnums::new,
+          NormalizeArrayCreationsWasm::new,
+          ImplementNativeJsTypeArrayOperationsWasm::new,
           NormalizeOverlayMembers::new,
           NormalizeInstanceCompileTimeConstants::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),
@@ -537,7 +540,6 @@ public enum Backend {
           NormalizeInstantiationThroughFactoryMethods::new,
           ImplementStaticInitializationViaConditionChecks::new,
           ImplementClassMetadataViaGetters::new,
-          NormalizeArrayCreationsWasm::new,
           InsertCastOnArrayAccess::new,
           () -> new ImplementAssertStatements(/* useWasmDebugFlag= */ true),
 
