@@ -20,8 +20,8 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class PatternMatchingProblem {
 
-  // TODO(b/496900091): Uncomment when fixed.
-  // public static boolean isEmptyString(Object object) {
-  //   return object instanceof String string && !string.isEmpty();
-  // }
+  // Repro for b/496900091
+  public static boolean isEmptyString(Object object) {
+    return object instanceof String string && !string.isEmpty();
+  }
 }

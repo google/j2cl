@@ -19,6 +19,21 @@
 package j2kt
 
 import javaemul.lang.*
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+import kotlin.run
 
-class PatternMatchingProblem
+class PatternMatchingProblem {
+ companion object {
+  @JvmStatic
+  fun isEmptyString(`object`: Any): Boolean {
+   return `object` is String && run {
+    val string: String = `object` as String
+    (!string.isEmpty())
+   }
+  }
+ }
+}

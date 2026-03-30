@@ -192,6 +192,13 @@ internal data class ExpressionSources(
       else -> throw InternalCompilerError("Unexpected ${expression::class.java.simpleName}")
     }
 
+  fun expressionSourceInNewlineSeparatedSequence(expression: Expression): Source =
+    expressionSource(expression).letIf(expression is PrefixExpression) {
+      // Adds parenthesis to expressions that might need them when they are rendered in a sequence
+      // separated with new lines. See b/496900091.
+      inParentheses(it)
+    }
+
   private fun arrayAccessSource(arrayAccess: ArrayAccess): Source =
     join(
       leftSubExpressionSource(arrayAccess.ktPrecedence, arrayAccess.arrayExpression),
@@ -418,7 +425,11 @@ internal data class ExpressionSources(
   private fun multiExpressionSource(multiExpression: MultiExpression): Source =
     spaceSeparated(
       nameSources.extensionMemberQualifiedNameSource("kotlin.run"),
-      block(newLineSeparated(multiExpression.expressions.map(this::expressionSource))),
+      block(
+        newLineSeparated(
+          multiExpression.expressions.map(this::expressionSourceInNewlineSeparatedSequence)
+        )
+      ),
     )
 
   private fun newArraySource(newArray: NewArray): Source =

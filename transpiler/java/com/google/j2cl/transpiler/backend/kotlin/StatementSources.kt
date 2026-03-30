@@ -155,7 +155,7 @@ internal data class StatementSources(
     )
 
   private fun expressionStatementSource(expressionStatement: ExpressionStatement): Source =
-    expressionSource(expressionStatement.expression)
+    expressionSources.expressionSourceInNewlineSeparatedSequence(expressionStatement.expression)
 
   private fun forEachStatementSource(forEachStatement: ForEachStatement): Source =
     spaceSeparated(
