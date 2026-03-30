@@ -17,7 +17,6 @@ j2cl_test_integration_test(
         "CLOSURE",
         "WASM",
     ],
-    tags = ["not_run:arm"],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:MethodOrderingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:ParentMethodTest",

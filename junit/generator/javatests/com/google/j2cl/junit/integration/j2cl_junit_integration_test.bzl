@@ -24,16 +24,22 @@ def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps =
     if "CLOSURE" in platforms:
         test_data_all += [d + "-j2cl" for d in test_data]
         test_data_all += [d + "-j2cl_compiled" for d in test_data]
-        tags = tags + ["j2cl"]
+        tags = tags + [
+            "j2cl",
+        ]
 
     if "J2KT" in platforms:
         test_data_all += [d + "-j2kt-jvm" for d in test_data]
-        tags = tags + ["j2kt"]
+        tags = tags + [
+            "j2kt",
+        ]
 
     if "WASM" in platforms:
         test_data_all += [d + "-j2wasm" for d in test_data]
         test_data_all += [d + "-j2wasm_optimized" for d in test_data]
-        tags = tags + ["j2wasm"]
+        tags = tags + [
+            "j2wasm",
+        ]
 
     shard_count = len(test_data_all)
     if shard_count > 50:
