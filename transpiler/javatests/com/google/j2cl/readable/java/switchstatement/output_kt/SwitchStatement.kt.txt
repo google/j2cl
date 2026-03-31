@@ -575,6 +575,32 @@ open class SwitchStatement {
   }
   
   @JvmStatic
+  private fun testReturnFromAllCases_withRules(i: Int): Int {
+   SWITCH@ do {
+    CASE@ do {
+     do {
+      when (i) {
+       1 -> {
+        break@CASE
+       }
+       else -> {
+        break
+       }
+      }
+      break@SWITCH
+     } while (false)
+     if (true) {
+      return 1
+     } else {
+      return 2
+     }
+     break@SWITCH
+    } while (false)
+    return 3
+   } while (false)
+  }
+  
+  @JvmStatic
   private fun testDefaultNotLast_withRules(i: Int, doBreak: Boolean): Int {
    var result: Int = 0
    SWITCH@ do {

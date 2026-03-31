@@ -467,6 +467,21 @@ public class SwitchStatement {
     }
   }
 
+  private static int testReturnFromAllCases_withRules(int i) {
+    switch (i) {
+      default -> {
+        if (true) {
+          return 1;
+        } else {
+          return 2;
+        }
+      }
+      case 1 -> {
+        return 3;
+      }
+    }
+  }
+
   private static int testDefaultNotLast_withRules(int i, boolean doBreak) {
     int result = 0;
     switch (i) {

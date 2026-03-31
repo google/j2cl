@@ -436,6 +436,25 @@ class SwitchStatement extends j_l_Object {
   }
  }
  /** @nodts @return {number} */
+ static m_testReturnFromAllCases_withRules__int__int(/** number */ i) {
+  switch (i) {
+   default:
+    {
+     if (true) {
+      return 1;
+     } else {
+      return 2;
+     }
+    }
+    break;
+   case 1:
+    {
+     return 3;
+    }
+    break;
+  }
+ }
+ /** @nodts @return {number} */
  static m_testDefaultNotLast_withRules__int__boolean__int(/** number */ i, /** boolean */ doBreak) {
   let result = 0;
   switch (i) {

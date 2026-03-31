@@ -1286,19 +1286,64 @@
  )
 )
 
+;;; int SwitchStatement.testReturnFromAllCases_withRules(int i)
+(func $m_testReturnFromAllCases_withRules__int__int@switchstatement.SwitchStatement
+ (param $i i32)
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:470:21
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:471:4
+  (block $SWITCH.BREAK
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:471:4
+   (block
+    (block
+     (block ;; evaluate expression and jump
+      (br_table 1 0 (i32.sub (local.get $i) (i32.const 1)))
+     )
+     ;; default:
+     (block
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:473:8
+      (if (i32.const 1)
+       (then
+        (block
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:474:10
+         (return (i32.const 1))
+        )
+       )(else
+        (block
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:476:10
+         (return (i32.const 2))
+        )
+       )
+      )
+     )
+     (br $SWITCH.BREAK)
+    )
+    ;; case 1:
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:480:8
+     (return (i32.const 3))
+    )
+    (br $SWITCH.BREAK)
+   )
+  )
+ )
+ (unreachable)
+)
+
 ;;; int SwitchStatement.testDefaultNotLast_withRules(int i, boolean doBreak)
 (func $m_testDefaultNotLast_withRules__int__boolean__int@switchstatement.SwitchStatement
  (param $i i32)
  (param $doBreak i32)
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:470:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:485:21
  (local $result i32)
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:471:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:486:4
   (local.set $result (i32.const 0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:472:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:487:4
   (block $SWITCH.BREAK
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:472:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:487:4
    (block
     (block
      (block
@@ -1309,18 +1354,18 @@
         )
         ;; case 1:
         (block
-         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:474:8
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:489:8
          (local.set $result (i32.const 1))
-         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:475:8
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:490:8
          (if (local.get $doBreak)
           (then
            (block
-            ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:476:10
+            ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:491:10
             (br $SWITCH.BREAK)
            )
           )
          )
-         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:478:8
+         ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:493:8
          (local.set $result (i32.const 2))
         )
         (br $SWITCH.BREAK)
@@ -1333,18 +1378,18 @@
      )
      ;; case 3:
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:483:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:498:8
       (local.set $result (i32.const 3))
      )
      (br $SWITCH.BREAK)
     )
     ;; case 4:
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:485:16
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:500:16
     (drop (call $m_foo__int@switchstatement.SwitchStatement ))
     (br $SWITCH.BREAK)
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:487:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:502:4
   (return (local.get $result))
  )
 )
@@ -1352,9 +1397,9 @@
 ;;; int SwitchStatement.foo()
 (func $m_foo__int@switchstatement.SwitchStatement
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:490:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:505:21
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:491:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:506:4
   (return (i32.const 1))
  )
 )
@@ -1363,7 +1408,7 @@
 (func $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:494:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:509:15
  (block
  )
 )

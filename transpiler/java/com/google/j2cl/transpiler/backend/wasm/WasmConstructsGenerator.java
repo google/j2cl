@@ -28,15 +28,20 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -397,6 +402,17 @@ public class WasmConstructsGenerator {
     }
 
     StatementTranspiler.render(method.getBody(), builder, environment);
+
+    if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)
+        && !endsWithReturnOrThrow(method.getBody())) {
+      // A method that returns a value will never flow out of the end and will always have an
+      // explicit return or throw statements along all paths. If the return statement (or a throw
+      // statement) is not seen, add an explicit unreachable instruction to avoid cases that trip
+      // the validation of the wasm code.
+      builder.newLine();
+      builder.append("(unreachable)");
+    }
+
     builder.unindent();
     builder.newLine();
     builder.append(")");
@@ -409,6 +425,19 @@ public class WasmConstructsGenerator {
               "(elem declare func %s)",
               environment.getMethodImplementationName(method.getDescriptor())));
     }
+  }
+
+  private static boolean endsWithReturnOrThrow(Statement statement) {
+    return switch (statement) {
+      case ThrowStatement s -> true;
+      case ReturnStatement s -> true;
+      case Block b when !b.getStatements().isEmpty() ->
+          endsWithReturnOrThrow(b.getStatements().getLast());
+      case IfStatement s when s.getElseStatement() != null ->
+          endsWithReturnOrThrow(s.getThenStatement())
+              && endsWithReturnOrThrow(s.getElseStatement());
+      default -> false;
+    };
   }
 
   /**
