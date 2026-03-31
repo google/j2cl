@@ -15,20 +15,13 @@ package com.google.j2cl.transpiler.frontend.kotlin.klib
 
 import com.google.j2cl.transpiler.frontend.kotlin.jklib.K2JKlibCompiler
 import com.google.j2cl.transpiler.frontend.kotlin.jklib.K2JKlibCompilerArguments
-import com.intellij.openapi.util.Disposer
 import java.io.File
 import kotlin.system.exitProcess
-import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSourceLocation
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
-import org.jetbrains.kotlin.cli.common.setupCommonArguments
-import org.jetbrains.kotlin.config.CommonConfigurationKeys
-import org.jetbrains.kotlin.config.CompilerConfiguration
-import org.jetbrains.kotlin.metadata.deserialization.MetadataVersion
-import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
-import org.jetbrains.kotlin.util.PerformanceManager
+import org.jetbrains.kotlin.config.Services
 import org.kohsuke.args4j.Argument
 import org.kohsuke.args4j.CmdLineParser
 import org.kohsuke.args4j.Option
@@ -58,48 +51,30 @@ public class HeaderKlibCompiler() {
         freeArgs = sources
       }
 
-    val configuration =
-      CompilerConfiguration().apply {
-        val messageCollector =
-          object : MessageCollector {
-            var hasErrors = false
+    val messageCollector =
+      object : MessageCollector {
+        var hasErrors = false
 
-            override fun clear() {}
+        override fun clear() {}
 
-            override fun report(
-              severity: CompilerMessageSeverity,
-              message: String,
-              location: CompilerMessageSourceLocation?,
-            ) {
-              if (!severity.isError) {
-                return
-              }
-              hasErrors = true
-              System.err.println(
-                "${severity.name}\t${location?.path ?: ""}:${location?.line ?: ""} \t$message"
-              )
-            }
-
-            override fun hasErrors() = hasErrors
+        override fun report(
+          severity: CompilerMessageSeverity,
+          message: String,
+          location: CompilerMessageSourceLocation?,
+        ) {
+          if (!severity.isError) {
+            return
           }
+          hasErrors = true
+          System.err.println(
+            "${severity.name}\t${location?.path ?: ""}:${location?.line ?: ""} \t$message"
+          )
+        }
 
-        put(CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY, messageCollector)
-        put(CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY, messageCollector)
-        put(
-          CommonConfigurationKeys.PERF_MANAGER,
-          object : PerformanceManager(JvmPlatforms.defaultJvmPlatform, "HeaderKlibGenerator") {},
-        )
-        setupCommonArguments(arguments) { versionArray -> MetadataVersion(*versionArray) }
+        override fun hasErrors() = hasErrors
       }
 
-    val disposable = Disposer.newDisposable("HeaderKlibCompiler Disposable")
-
-    val exitCode =
-      try {
-        K2JKlibCompiler().doExecute(arguments, configuration, disposable, null)
-      } finally {
-        Disposer.dispose(disposable)
-      }
+    val exitCode = K2JKlibCompiler().doExecutePhased(arguments, Services.EMPTY, messageCollector)
 
     exitProcess(exitCode.code)
   }

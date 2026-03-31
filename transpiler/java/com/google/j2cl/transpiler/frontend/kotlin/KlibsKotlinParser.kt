@@ -31,25 +31,14 @@ import com.intellij.openapi.Disposable
 import com.intellij.openapi.util.Disposer
 import java.io.File
 import org.jetbrains.kotlin.analyzer.CompilationErrorException
-import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
-import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
-import org.jetbrains.kotlin.cli.common.setupCommonArguments
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.createProjectEnvironment
 import org.jetbrains.kotlin.cli.jvm.config.jvmClasspathRoots
 import org.jetbrains.kotlin.codegen.state.GenerationState
-import org.jetbrains.kotlin.config.CommonConfigurationKeys
-import org.jetbrains.kotlin.config.CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY
-import org.jetbrains.kotlin.config.CommonConfigurationKeys.MODULE_NAME
-import org.jetbrains.kotlin.config.CommonConfigurationKeys.USE_FIR
-import org.jetbrains.kotlin.config.CompilerConfiguration
-import org.jetbrains.kotlin.diagnostics.DiagnosticReporterFactory
-import org.jetbrains.kotlin.metadata.deserialization.MetadataVersion
+import org.jetbrains.kotlin.config.moduleName
 import org.jetbrains.kotlin.modules.TargetId
-import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
-import org.jetbrains.kotlin.util.PerformanceManager
 
 /** A parser for Kotlin sources that builds {@code CompilationtUnit}s. */
 class KlibsKotlinParser(private val problems: Problems) {
@@ -59,16 +48,12 @@ class KlibsKotlinParser(private val problems: Problems) {
     check(options.enableKlibs) { "This parser only supports Klibs" }
 
     val arguments = createCompilerArguments(options)
-    val compilerConfiguration = createCompilerConfiguration(arguments, options)
     problems.abortIfCancelled()
-
-    check(compilerConfiguration.getBoolean(USE_FIR)) { "Kotlin/Closure only supports > K2" }
 
     val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     try {
       problems.registerForCancellation()
-      val compilationUnits =
-        parseFiles(arguments, compilerConfiguration, kotlincDisposable, options.targetLabel)
+      val compilationUnits = parseFiles(arguments, kotlincDisposable, options.targetLabel)
 
       return Library.newBuilder()
         .setCompilationUnits(compilationUnits)
@@ -88,56 +73,55 @@ class KlibsKotlinParser(private val problems: Problems) {
 
   private fun parseFiles(
     arguments: K2JKlibCompilerArguments,
-    compilerConfiguration: CompilerConfiguration,
     disposable: Disposable,
     currentTarget: String?,
   ): List<CompilationUnit> {
 
-    val messageCollector = compilerConfiguration.get(MESSAGE_COLLECTOR_KEY)!!
-    val projectEnvironment =
-      createProjectEnvironment(
-        compilerConfiguration,
-        disposable,
-        EnvironmentConfigFiles.JVM_CONFIG_FILES,
-        messageCollector,
-      )
-    problems.abortIfCancelled()
+    val messageCollector = problems.createMessageCollector()
 
     val compilationResult =
-      K2JKlibCompiler()
-        .compileKlibAndDeserializeIr(arguments, compilerConfiguration, disposable, null)
+      K2JKlibCompiler().compileKlibAndDeserializeIr(arguments, messageCollector, disposable)
     problems.abortIfHasErrors()
 
     checkNotNull(compilationResult) {
       "Compilation result should not be null if no errors were reported."
     }
 
-    val moduleFragment = compilationResult.mainModuleFragment
+    val moduleFragment = compilationResult.moduleFragment
     val pluginContext = compilationResult.pluginContext
+    val configuration = compilationResult.configuration
+
+    val projectEnvironment =
+      createProjectEnvironment(
+        configuration,
+        disposable,
+        EnvironmentConfigFiles.JVM_CONFIG_FILES,
+        messageCollector,
+      )
+    problems.abortIfCancelled()
 
     val state =
       GenerationState(
         projectEnvironment.project,
         moduleFragment.descriptor,
-        compilerConfiguration,
-        targetId = TargetId(compilerConfiguration.get(MODULE_NAME)!!, "java-production"),
-        diagnosticReporter = DiagnosticReporterFactory.createPendingReporter(messageCollector),
+        configuration,
+        targetId = TargetId(configuration.moduleName!!, "java-production"),
+        diagnosticReporter = compilationResult.diagnosticsCollector,
       )
 
-    val lowerings = LoweringPasses(state, compilerConfiguration)
+    val lowerings = LoweringPasses(state, configuration)
     lowerings.generate(moduleFragment, pluginContext)
     problems.abortIfCancelled()
 
     val jarFileSystem =
       KotlinCoreEnvironment.createForProduction(
           disposable,
-          compilerConfiguration,
+          configuration,
           EnvironmentConfigFiles.JVM_CONFIG_FILES,
         )
         .projectEnvironment
         .jarFileSystem
-    val classpath =
-      compilerConfiguration.jvmClasspathRoots.map { jarFileSystem.findFileByPath("$it!/")!! }
+    val classpath = configuration.jvmClasspathRoots.map { jarFileSystem.findFileByPath("$it!/")!! }
 
     val packageInfoCache = PackageInfoCache(classpath)
     problems.abortIfCancelled()
@@ -166,24 +150,5 @@ class KlibsKotlinParser(private val problems: Problems) {
           .toTypedArray()
       arguments.freeArgs = options.sources.map(SourceUtils.FileInfo::sourcePath)
     }
-  }
-
-  fun createCompilerConfiguration(
-    arguments: K2JKlibCompilerArguments,
-    options: FrontendOptions,
-  ): CompilerConfiguration {
-    val configuration = CompilerConfiguration()
-
-    val messageCollector = problems.createMessageCollector()
-    configuration.put(CommonConfigurationKeys.MESSAGE_COLLECTOR_KEY, messageCollector)
-    configuration.put(CLIConfigurationKeys.ORIGINAL_MESSAGE_COLLECTOR_KEY, messageCollector)
-    configuration.put(
-      CommonConfigurationKeys.PERF_MANAGER,
-      object : PerformanceManager(JvmPlatforms.defaultJvmPlatform, "J2clKotlinParser") {},
-    )
-
-    configuration.setupCommonArguments(arguments) { versionArray -> MetadataVersion(*versionArray) }
-
-    return configuration
   }
 }
