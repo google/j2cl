@@ -173,8 +173,6 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::NumericConversionLowering)
   // Removes enum super constructor calls and cleans up effectively empty constructors.
   perFileLowering(::EnumClassConstructorLowering)
-  // Rewrites calls to KFunction.invoke() as FunctionN.invoke().
-  perFileLowering(::RewriteKFunctionInvokeLowering)
   // Lowers `IrRichPropertyReference` into instantiations of the corresponding internal `KProperty`
   // implementation
   moduleLowering(::J2clPropertyReferenceLowering)

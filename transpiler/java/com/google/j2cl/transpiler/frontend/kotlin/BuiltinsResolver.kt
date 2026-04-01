@@ -18,6 +18,7 @@
 package com.google.j2cl.transpiler.frontend.kotlin
 
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.builtins.functions.BuiltInFunctionArity
@@ -27,6 +28,7 @@ import org.jetbrains.kotlin.ir.symbols.IrFieldSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.util.fields
 import org.jetbrains.kotlin.ir.util.functions
+import org.jetbrains.kotlin.ir.util.isKSuspendFunction
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.render
@@ -74,16 +76,37 @@ internal class BuiltinsResolver(
   }
 
   fun resolveClass(irClassSymbol: IrClassSymbol): IrClassSymbol? {
-    val fqName = irClassSymbol.owner.kotlinFqName.toUnsafe()
+    val classSymbol =
+      if (irClassSymbol.isKFunctionOrKSuspendFunction()) {
+        convertKFunctionNToFunctionN(irClassSymbol)
+      } else {
+        irClassSymbol
+      }
+
+    val fqName = classSymbol.owner.kotlinFqName.toUnsafe()
     val mappedClassId =
       mapToIntrinsicImplementation(fqName)
         ?: JavaToKotlinClassMap.mapKotlinToJava(fqName)
         ?: return null
     val resolvedClass = pluginContext.referenceClass(mappedClassId) ?: return null
     check(resolvedClass.isBound) {
-      "Resolved class to unbound symbol, originally: ${irClassSymbol.owner.render()}"
+      "Resolved class to unbound symbol, originally: ${classSymbol.owner.render()}"
     }
     return resolvedClass
+  }
+
+  private fun convertKFunctionNToFunctionN(kFunctionNClassSymbol: IrClassSymbol): IrClassSymbol {
+    // KFunctionN interfaces provide reflection support on top of FunctionN interfaces. Since these
+    // interfaces are synthetic and reflection is not supported in J2CL, we convert them to their
+    // corresponding FunctionN or SuspendFunctionN interfaces, which are treated as functional
+    // interfaces by J2CL.
+    val arity = kFunctionNClassSymbol.owner.typeParameters.size - 1
+
+    return if (kFunctionNClassSymbol.isKSuspendFunction()) {
+      jvmBackendContext.symbols.suspendFunctionN(arity)
+    } else {
+      jvmBackendContext.symbols.functionN(arity)
+    }
   }
 }
 

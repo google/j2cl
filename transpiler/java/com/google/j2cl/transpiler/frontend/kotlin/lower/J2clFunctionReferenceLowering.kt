@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.lower.VariableRemapper
 import org.jetbrains.kotlin.ir.builders.declarations.addValueParameter
@@ -31,9 +30,6 @@ import org.jetbrains.kotlin.ir.expressions.IrReturn
 import org.jetbrains.kotlin.ir.expressions.IrRichFunctionReference
 import org.jetbrains.kotlin.ir.expressions.impl.IrReturnImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrRichFunctionReferenceImpl
-import org.jetbrains.kotlin.ir.types.IrSimpleType
-import org.jetbrains.kotlin.ir.types.typeWithArguments
-import org.jetbrains.kotlin.ir.util.isKSuspendFunction
 import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.patchDeclarationParents
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
@@ -55,34 +51,29 @@ import org.jetbrains.kotlin.name.SpecialNames
  *   reference like `receiver::foo`, `receiver` is a bound value. When such a reference is invoked,
  *   bound values are passed as the initial arguments to `invokeFunction`.
  *
- * This lowering performs two main transformations:
- * 1. Bound Value Transformation: When an [IrRichFunctionReference] contains `boundValues`, this
- *    lowering creates a block expression that evaluates the bound values into temporary variables.
- *    Inside this block, a new `invokeFunction` is defined where the body is copied from the
- *    original `invokeFunction`. This new `invokeFunction` only accepts parameters for the unbound
- *    arguments. References to the bound parameters in the original body are replaced by references
- *    to the temporary variables, and references to the unbound parameters are replaced by
- *    references to the new function's parameters.
+ * This lowering performs a main transformation: Bound Value Transformation: When an
+ * [IrRichFunctionReference] contains `boundValues`, this lowering creates a block expression that
+ * evaluates the bound values into temporary variables. Inside this block, a new `invokeFunction` is
+ * defined where the body is copied from the original `invokeFunction`. This new `invokeFunction`
+ * only accepts parameters for the unbound arguments. References to the bound parameters in the
+ * original body are replaced by references to the temporary variables, and references to the
+ * unbound parameters are replaced by references to the new function's parameters.
  *
- *    For example, for `receiver::foo` where `foo` is `fun Foo.foo(i: Int)`:
+ * For example, for `receiver::foo` where `foo` is `fun Foo.foo(i: Int)`:
  *
- *    Before transformation:
+ * Before transformation:
  *
- *    IrRichFunctionReference:
- *         - boundValues: [receiver]
- *         - invokeFunction: `fun foo(receiver: Foo, i: Int) { receiver.foo(i) }`
+ * IrRichFunctionReference:
+ * - boundValues: [receiver]
+ * - invokeFunction: `fun foo(receiver: Foo, i: Int) { receiver.foo(i) }`
  *
  *   After transformation:
  *
  *   IrBlock:
  *     - val tmp_bound_0 = receiver
  *     - IrRichFunctionReference:
- *         - boundValues: []
- *         - invokeFunction: `fun (p0: Int) { tmp_bound_0.foo(p0) }`
- * 2. `KFunctionN` to `FunctionN` Conversion: If the type of the [IrRichFunctionReference] is
- *    `KFunctionN` or `KSuspendFunctionN` (which are reflection-enabled types and represented by
- *    sybthetic interfaces), it is converted to the corresponding `FunctionN` or `SuspendFunctionN`
- *    type that are real functional interfaces.
+ * - boundValues: []
+ * - invokeFunction: `fun (p0: Int) { tmp_bound_0.foo(p0) }`
  */
 internal class J2clFunctionReferenceLowering(private val context: J2clBackendContext) :
   FileLoweringPass, IrElementTransformerVoid() {
@@ -95,7 +86,7 @@ internal class J2clFunctionReferenceLowering(private val context: J2clBackendCon
     expression.transformChildrenVoid(this)
 
     if (expression.boundValues.isEmpty()) {
-      return convertKFunctionNToFunctionN(expression)
+      return expression
     }
 
     val originalInvokeFunction = expression.invokeFunction
@@ -105,12 +96,11 @@ internal class J2clFunctionReferenceLowering(private val context: J2clBackendCon
 
     return builder.irBlock {
       // 1. Create temporary variables for specified bound values.
-      val boundVariables =
-        boundValues.mapIndexed { index, value ->
-          // Note: irTemporary creates the variable, adds it to the builder and returns the
-          // variable.
-          irTemporary(value, nameHint = "bound$index")
-        }
+      val boundVariables = boundValues.mapIndexed { index, value ->
+        // Note: irTemporary creates the variable, adds it to the builder and returns the
+        // variable.
+        irTemporary(value, nameHint = "bound$index")
+      }
 
       // 2. Create the new invoke function that takes only the unbound parameters.
       val newInvokeFunction =
@@ -172,58 +162,19 @@ internal class J2clFunctionReferenceLowering(private val context: J2clBackendCon
 
       // 4. Create the new RichFunctionReference that have no boundValues and use the new
       // invoke function.
-      +convertKFunctionNToFunctionN(
-        IrRichFunctionReferenceImpl(
-          expression.startOffset,
-          expression.endOffset,
-          expression.type,
-          expression.reflectionTargetSymbol,
-          expression.overriddenFunctionSymbol,
-          newInvokeFunction,
-          expression.origin,
-          expression.hasUnitConversion,
-          expression.hasSuspendConversion,
-          expression.hasVarargConversion,
-          expression.isRestrictedSuspension,
-        )
+      +IrRichFunctionReferenceImpl(
+        expression.startOffset,
+        expression.endOffset,
+        expression.type,
+        expression.reflectionTargetSymbol,
+        expression.overriddenFunctionSymbol,
+        newInvokeFunction,
+        expression.origin,
+        expression.hasUnitConversion,
+        expression.hasSuspendConversion,
+        expression.hasVarargConversion,
+        expression.isRestrictedSuspension,
       )
     }
-  }
-
-  private fun convertKFunctionNToFunctionN(
-    originalRichFunctionReference: IrRichFunctionReference
-  ): IrRichFunctionReference {
-
-    val expressionType = originalRichFunctionReference.type
-
-    if (!expressionType.isKFunctionOrKSuspendFunction()) {
-      return originalRichFunctionReference
-    }
-
-    // If it is a KFunction/KSuspendFunction interface, we need to convert it to a
-    // FunctionN/SuspendFunctionN interface that are considered as fun interface by J2CL.`
-    val kFunctionNType = expressionType as IrSimpleType
-    val arity = kFunctionNType.arguments.size - 1
-    val functionNClass =
-      if (kFunctionNType.isKSuspendFunction()) {
-        context.symbols.suspendFunctionN(arity)
-      } else {
-        context.symbols.functionN(arity)
-      }
-    val newExpressionType = functionNClass.typeWithArguments(kFunctionNType.arguments)
-
-    return IrRichFunctionReferenceImpl(
-      originalRichFunctionReference.startOffset,
-      originalRichFunctionReference.endOffset,
-      newExpressionType,
-      originalRichFunctionReference.reflectionTargetSymbol,
-      originalRichFunctionReference.overriddenFunctionSymbol,
-      originalRichFunctionReference.invokeFunction,
-      originalRichFunctionReference.origin,
-      originalRichFunctionReference.hasUnitConversion,
-      originalRichFunctionReference.hasSuspendConversion,
-      originalRichFunctionReference.hasVarargConversion,
-      originalRichFunctionReference.isRestrictedSuspension,
-    )
   }
 }

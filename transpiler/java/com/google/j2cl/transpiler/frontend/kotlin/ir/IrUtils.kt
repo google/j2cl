@@ -484,7 +484,7 @@ fun IrType.isArrayType(): Boolean = isArray() || isNullableArray() || isPrimitiv
 fun IrType.isClassType(fqName: FqNameUnsafe): Boolean =
   isClassType(fqName, false) || isClassType(fqName, true)
 
-fun IrType.isKFunctionOrKSuspendFunction() = isKFunction() || isKSuspendFunction()
+fun IrClassifierSymbol.isKFunctionOrKSuspendFunction() = isKFunction() || isKSuspendFunction()
 
 fun IrType.isFunctionOrSuspendFunction() = isFunction() || isSuspendFunction()
 

@@ -60,7 +60,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionalInterface
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isKFunctionOrKSuspendFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNative
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
@@ -901,7 +900,7 @@ internal class KotlinEnvironment(
 
     check(
       (originalTypeParams.size == replacementTypeParams.size &&
-        arguments.size == replacementTypeParams.size) || this.isKFunctionOrKSuspendFunction()
+        arguments.size == replacementTypeParams.size)
     ) {
       """
       |Mismatch in number of parameters for original type ${classSymbol.owner.kotlinFqName} mapped
@@ -918,13 +917,6 @@ internal class KotlinEnvironment(
     val replacementArguments =
       when {
         !useDeclarationVariance -> arguments
-        // KFunction and KSuspendFunction are special cases where there's a mismatch in the number
-        // of original type params, replacement type params, and number of arguments. We're not
-        // going to attempt to rewrite these.
-        // TODO(b/443226297): Instead of following the JVM mapping and maps K(Suspend)Function{N} to
-        // K(Suspend)Function, we should map them directly to the physical (Suspend)Function{N}
-        // interfaces present in our stdlib.
-        isKFunctionOrKSuspendFunction() -> arguments
         else ->
           remapDeclarationTypeVarianceOntoArguments(
             arguments,
