@@ -172,8 +172,6 @@ public class J2clMinifier {
   }
 
   private static final String MINIFICATION_SEPARATOR = "_$";
-  // TODO(b/149248404): Remove zip handling.
-  private static final String ZIP_FILE_SEPARATOR = "!/";
   private static final String JS_DIR_SEPARATOR = ".js/";
 
   private static final int[][] nextState;
@@ -412,14 +410,9 @@ public class J2clMinifier {
     // Because the mapping is done during transpilation and j2cl doesn't know the final path of
     // the zip file, the key used is the path of the file inside the zip file.
     String key = fullPath;
-    int keyStartIndex = fullPath.indexOf(ZIP_FILE_SEPARATOR);
+    int keyStartIndex = fullPath.indexOf(JS_DIR_SEPARATOR);
     if (keyStartIndex > 0) {
-      key = key.substring(keyStartIndex + ZIP_FILE_SEPARATOR.length());
-    } else {
-      keyStartIndex = fullPath.indexOf(JS_DIR_SEPARATOR);
-      if (keyStartIndex > 0) {
-        key = key.substring(keyStartIndex + JS_DIR_SEPARATOR.length());
-      }
+      key = key.substring(keyStartIndex + JS_DIR_SEPARATOR.length());
     }
 
     return key;

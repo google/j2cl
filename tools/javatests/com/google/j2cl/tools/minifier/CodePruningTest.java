@@ -43,8 +43,8 @@ public class CodePruningTest {
 
     assertThat(j2clMinifier.minify("Foo.java.js", "Foo.java.js file content")).isEmpty();
 
-    // work with file in zip file
-    assertThat(j2clMinifier.minify("my_zip_file.js.zip!/Foo.java.js", "Foo.java.js file content"))
+    // work with file in directory ending with .js
+    assertThat(j2clMinifier.minify("my_zip_file.js/Foo.java.js", "Foo.java.js file content"))
         .isEmpty();
 
     // any other file should not be modify
