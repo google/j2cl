@@ -16,11 +16,11 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.WasmExportBridgesUtils;
-import java.util.HashSet;
 
 /**
  * Generates forwarding methods for Wasm JsInterop exported methods. The forwarding methods are then
@@ -44,9 +44,8 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
         .streamTypes()
         .forEach(
             type -> {
-              var seenMethodsByMangledName = new HashSet<String>();
               for (Method method : type.getMethods()) {
-                if (!shouldGenerateBridge(method.getDescriptor())) {
+                if (!AstUtils.needsWasmJsExport(method.getDescriptor())) {
                   continue;
                 }
 
@@ -55,28 +54,35 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
                         method.getDescriptor(),
                         method.getSourcePosition(),
                         getBridgeOrigin(method.getDescriptor()));
+                type.addMember(bridge);
+              }
 
-                // Do not generate duplicate methods.
-                // TODO(b/482129587): Reconsider which method to export.
-                if (!seenMethodsByMangledName.add(bridge.getDescriptor().getMangledName())) {
+              for (Field field : type.getFields()) {
+                if (!AstUtils.needsWasmJsExport(field.getDescriptor())) {
                   continue;
                 }
 
-                type.addMember(bridge);
+                Method getter =
+                    WasmExportBridgesUtils.generateGetterBridge(
+                        field.getDescriptor(), field.getSourcePosition());
+                type.addMember(getter);
+
+                if (!field.isCompileTimeConstant()) {
+                  Method setter =
+                      WasmExportBridgesUtils.generateSetterBridge(
+                          field.getDescriptor(), field.getSourcePosition());
+                  type.addMember(setter);
+                }
               }
             });
-  }
-
-  private static boolean shouldGenerateBridge(MethodDescriptor methodDescriptor) {
-    return AstUtils.needsWasmJsExport(methodDescriptor)
-        // TODO(b/458472428): Support JsProperty/Getter/Setter.
-        && (methodDescriptor.isJsConstructor() || methodDescriptor.isJsMethod());
   }
 
   private static MethodDescriptor.MethodOrigin getBridgeOrigin(MethodDescriptor descriptor) {
     return switch (descriptor.getJsInfo().getJsMemberType()) {
       case CONSTRUCTOR -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT;
       case METHOD -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_METHOD_EXPORT;
+      case GETTER -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT;
+      case SETTER -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT;
       default ->
           throw new AssertionError(
               "Unexpected JsMemberType: " + descriptor.getJsInfo().getJsMemberType().name());

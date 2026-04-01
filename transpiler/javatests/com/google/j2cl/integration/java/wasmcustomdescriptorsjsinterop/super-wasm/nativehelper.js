@@ -53,10 +53,108 @@ function callGetString(someJsType) {
   return someJsType.getString();
 }
 
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {number}
+ * @public
+ */
+function getField(someJsType) {
+  return someJsType.field;
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @param {number} value
+ * @return {void}
+ * @public
+ */
+function setField(someJsType, value) {
+  someJsType.field = value;
+}
+
+/**
+ * @return {number}
+ * @public
+ */
+function getStaticField() {
+  return SomeJsType.staticField;
+}
+
+/**
+ * @param {number} value
+ * @return {void}
+ * @public
+ */
+function setStaticField(value) {
+  SomeJsType.staticField = value;
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {number}
+ * @public
+ */
+function getReadOnlyField(someJsType) {
+  return someJsType.readOnlyField;
+}
+
+/**
+ * @return {number}
+ * @public
+ */
+function getStaticReadOnlyField() {
+  return SomeJsType.staticReadOnlyField;
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {number}
+ * @public
+ */
+function getReadOnlyProperty(someJsType) {
+  return someJsType.readOnlyProperty;
+}
+
+/**
+ * @return {number}
+ * @public
+ */
+function getStaticReadOnlyProperty() {
+  return SomeJsType.staticReadOnlyProperty;
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {number}
+ * @public
+ */
+function getReadWriteProperty(someJsType) {
+  return someJsType.readWriteProperty;
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @param {number} value
+ * @return {void}
+ * @public
+ */
+function setReadWriteProperty(someJsType, value) {
+  someJsType.readWriteProperty = value;
+}
 
 exports = {
   newBaseJsType,
   newSomeJsType,
   callGetNumber,
   callGetString,
+  getField,
+  setField,
+  getStaticField,
+  setStaticField,
+  getReadOnlyField,
+  getStaticReadOnlyField,
+  getReadOnlyProperty,
+  getStaticReadOnlyProperty,
+  getReadWriteProperty,
+  setReadWriteProperty,
 };

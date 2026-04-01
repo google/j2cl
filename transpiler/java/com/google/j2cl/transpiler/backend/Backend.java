@@ -501,6 +501,11 @@ public enum Backend {
           NormalizeArrayCreationsWasm::new,
           ImplementNativeJsTypeArrayOperationsWasm::new,
           NormalizeOverlayMembers::new,
+          () ->
+              new AddJsExportBridgesWasm(
+                  /* enableCustomDescriptorsJsInterop= */ options
+                      .getEnableWasmCustomDescriptorsJsInterop()),
+          // Must run after AddJsExportBridgesWasm so that pass can recognize instance fields.
           NormalizeInstanceCompileTimeConstants::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),
           NormalizeStaticMemberQualifiers::new,
@@ -512,10 +517,6 @@ public enum Backend {
           RewriteUnaryExpressions::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
           NormalizeSwitchConstructs::new,
-          () ->
-              new AddJsExportBridgesWasm(
-                  /* enableCustomDescriptorsJsInterop= */ options
-                      .getEnableWasmCustomDescriptorsJsInterop()),
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           // It must also run after AddJsExportBridgesWasm so we don't remove fields for which it

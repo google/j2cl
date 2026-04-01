@@ -639,12 +639,10 @@ final class BazelJ2wasmBundler extends BazelWorker {
           for (JsMemberInfo member : typeInfo.getJsInfo().getJsMembersList()) {
             if (member.getKind() == JsMemberInfo.Kind.CONSTRUCTOR) {
               jsConstructor = member;
-            } else if (member.getKind() == JsMemberInfo.Kind.METHOD) {
-              if (member.getIsStatic()) {
-                staticJsMembers.add(member);
-              } else {
-                instanceJsMembers.add(member);
-              }
+            } else if (member.getIsStatic()) {
+              staticJsMembers.add(member);
+            } else {
+              instanceJsMembers.add(member);
             }
           }
 
@@ -677,9 +675,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
         case GETTER -> 1;
         case SETTER -> 2;
         default ->
-            // Constructors should not go through this call.
-            // TODO(b/458472428): Support JsProperty fields.
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Unexpected member kind " + member.getKind().name());
       };
     }
 

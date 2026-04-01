@@ -58,6 +58,53 @@ public class WasmExportBridgesUtils {
         .build();
   }
 
+  /**
+   * Generates a property getter bridge corresponding to a @JsProperty field, intended to be
+   * exported, that returns the value of the specified field, performing any necessary JS <-> Wasm
+   * conversions.
+   */
+  public static Method generateGetterBridge(
+      FieldDescriptor fieldDescriptor, SourcePosition sourcePosition) {
+    MethodDescriptor bridgeMethodDescriptor = createGetterBridgeDescriptor(fieldDescriptor);
+
+    return Method.newBuilder()
+        .setMethodDescriptor(bridgeMethodDescriptor)
+        .addStatements(
+            convertReturnIfNeeded(
+                AstUtils.createReturnOrExpressionStatement(
+                    sourcePosition,
+                    FieldAccess.Builder.from(fieldDescriptor).setDefaultInstanceQualifier().build(),
+                    fieldDescriptor.getTypeDescriptor()),
+                fieldDescriptor.getTypeDescriptor()))
+        .setSourcePosition(sourcePosition)
+        .build();
+  }
+
+  /**
+   * Generates a property setter bridge corresponding to a @JsProperty field, intended to be
+   * exported, that sets the value of the specified field, performing any necessary JS <-> Wasm
+   * conversions.
+   */
+  public static Method generateSetterBridge(
+      FieldDescriptor fieldDescriptor, SourcePosition sourcePosition) {
+    MethodDescriptor bridgeMethodDescriptor = createSetterBridgeDescriptor(fieldDescriptor);
+    Variable valueParameter =
+        AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterTypeDescriptors())
+            .get(0);
+
+    return Method.newBuilder()
+        .setMethodDescriptor(bridgeMethodDescriptor)
+        .setParameters(valueParameter)
+        .addStatements(
+            BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
+                .setRightOperand(
+                    convertArgumentIfNeeded(valueParameter, fieldDescriptor.getTypeDescriptor()))
+                .build()
+                .makeStatement(sourcePosition))
+        .setSourcePosition(sourcePosition)
+        .build();
+  }
+
   /** Creates the argument expression, containing any necessary conversions. */
   private static Expression convertArgumentIfNeeded(
       Variable parameter, TypeDescriptor targetArgumentDescriptor) {
@@ -133,6 +180,39 @@ public class WasmExportBridgesUtils {
       builder.setStatic(true).setConstructor(false);
     }
     return builder.build();
+  }
+
+  private static MethodDescriptor createGetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
+    return buildPropertyBridgeDescriptor(fieldDescriptor, JsMemberType.GETTER)
+        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT)
+        .setReturnTypeDescriptor(replaceStringWithNativeString(fieldDescriptor.getTypeDescriptor()))
+        .build();
+  }
+
+  private static MethodDescriptor createSetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
+    return buildPropertyBridgeDescriptor(fieldDescriptor, JsMemberType.SETTER)
+        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT)
+        .setParameterTypeDescriptors(
+            replaceStringWithNativeString(fieldDescriptor.getTypeDescriptor()))
+        .build();
+  }
+
+  private static MethodDescriptor.Builder buildPropertyBridgeDescriptor(
+      FieldDescriptor fieldDescriptor, JsMemberType jsMemberType) {
+    return MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
+        .setName(fieldDescriptor.getName())
+        .setVisibility(fieldDescriptor.getVisibility())
+        .setStatic(fieldDescriptor.isStatic())
+        .setOriginalJsInfo(
+            fieldDescriptor.getJsInfo().toBuilder()
+                .setJsMemberType(jsMemberType)
+                // Name has to be set here to avoid JsMemberType.GETTER/SETTER.computeJsName()
+                // returning null.
+                // TODO(b/493656775): Revisit this when creating these bridges using `makeBridge`.
+                // Perhaps the bridge origin should be a MemberDescriptor.
+                .setJsName(fieldDescriptor.getSimpleJsName())
+                .build());
   }
 
   private static TypeDescriptor replaceStringWithNativeString(TypeDescriptor typeDescriptor) {

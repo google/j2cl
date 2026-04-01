@@ -140,7 +140,6 @@ public final class SummaryBuilder {
     JsInfo.Builder jsInfoBuilder =
         JsInfo.newBuilder().setQualifiedJsName(typeDeclaration.getQualifiedJsName());
 
-    // TODO(b/458472428): Support JsProperty/Getter/Setter.
     for (var method : type.getMethods()) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
       if (!methodDescriptor.getOrigin().isWasmJsExport()) {
@@ -153,8 +152,8 @@ public final class SummaryBuilder {
                   switch (methodDescriptor.getJsInfo().getJsMemberType()) {
                     case CONSTRUCTOR -> JsMemberInfo.Kind.CONSTRUCTOR;
                     case METHOD -> JsMemberInfo.Kind.METHOD;
-                    // Should not happen, we should be handling all types.
-                    // TODO(b/458472428) Consider removing default when all types are handled.
+                    case GETTER -> JsMemberInfo.Kind.GETTER;
+                    case SETTER -> JsMemberInfo.Kind.SETTER;
                     default ->
                         throw new AssertionError(
                             "Unexpected JsMemberType: "

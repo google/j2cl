@@ -17,16 +17,23 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
+import com.google.common.collect.Streams;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.JsInfo;
+import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 /**
  * Generates JavaScript externs for allowing JavaScript callers to use exported JsTypes.
@@ -83,6 +90,7 @@ final class JsExternsGenerator {
     sb.appendln("/** @externs */");
 
     appendConstructor(sb, type);
+    appendFields(sb, type);
     appendMethods(sb, type);
 
     // Output to externs/my.package.MyClass.externs.js
@@ -124,14 +132,74 @@ final class JsExternsGenerator {
     sb.appendln("{};");
   }
 
+  private void appendFields(SourceBuilder sb, Type type) {
+    // Collect fields from getter/setter methods.
+    var getterSetters = new HashMap<String, GetterSetterPair>();
+    for (Method method : type.getMethods()) {
+      MethodDescriptor methodDescriptor = method.getDescriptor();
+      if (!AstUtils.needsWasmJsExport(methodDescriptor) || !methodDescriptor.isJsProperty()) {
+        continue;
+      }
+
+      GetterSetterPair getterSetterPair =
+          getterSetters.computeIfAbsent(
+              methodDescriptor.getSimpleJsName(), k -> new GetterSetterPair());
+      if (methodDescriptor.isJsPropertyGetter()) {
+        getterSetterPair.getter = method;
+      } else if (methodDescriptor.isJsPropertySetter()) {
+        getterSetterPair.setter = method;
+      }
+    }
+
+    Streams.concat(
+            type.getFields().stream().map(Field::getDescriptor).filter(AstUtils::needsWasmJsExport),
+            getterSetters.values().stream().map(GetterSetterPair::asFieldDescriptor))
+        .forEach(
+            fieldDescriptor -> {
+              sb.appendln("");
+              sb.append("/** ");
+              sb.append(closureEnvironment.getJsDocForField(fieldDescriptor, /* isPublic= */ true));
+              sb.appendln(" */");
+              sb.appendln(
+                  String.format(
+                      "%s.%s;",
+                      getMemberOwner(fieldDescriptor), fieldDescriptor.getSimpleJsName()));
+            });
+  }
+
+  private static class GetterSetterPair {
+    private Method getter = null;
+    private Method setter = null;
+
+    /**
+     * Returns a field descriptor representing the getter/setter pair which can be used to generate
+     * the extern as if it were a field.
+     */
+    FieldDescriptor asFieldDescriptor() {
+      MethodDescriptor primary = getter != null ? getter.getDescriptor() : setter.getDescriptor();
+      TypeDescriptor typeDescriptor =
+          getter != null
+              ? getter.getDescriptor().getReturnTypeDescriptor()
+              : setter.getDescriptor().getParameterTypeDescriptors().get(0);
+      return FieldDescriptor.newBuilder()
+          .setEnclosingTypeDescriptor(primary.getEnclosingTypeDescriptor())
+          .setName(primary.getSimpleJsName())
+          .setTypeDescriptor(typeDescriptor)
+          .setStatic(primary.isStatic())
+          .setFinal(setter == null)
+          .setOriginalJsInfo(
+              JsInfo.Builder.from(primary.getJsInfo())
+                  .setJsName(primary.getSimpleJsName())
+                  .setJsMemberType(JsMemberType.PROPERTY)
+                  .build())
+          .build();
+    }
+  }
+
   private void appendMethods(SourceBuilder sb, Type type) {
     for (Method method : type.getMethods()) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (!AstUtils.needsWasmJsExport(methodDescriptor)
-          // Constructors handled elsewhere.
-          || methodDescriptor.isJsConstructor()
-          // TODO(b/458472428): Support JsProperty.
-          || methodDescriptor.isJsProperty()) {
+      if (!AstUtils.needsWasmJsExport(methodDescriptor) || !methodDescriptor.isJsMethod()) {
         continue;
       }
 

@@ -21,6 +21,7 @@ import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /** Tests J2WASM custom descriptor jsinterop features. */
@@ -28,6 +29,7 @@ public final class Main {
   public static void main(String... args) throws Exception {
     testConstructor();
     testMethod();
+    testProperty();
     testInheritedMethod();
   }
 
@@ -35,7 +37,7 @@ public final class Main {
     BaseJsType baseJsType = internalize(newBaseJsType());
 
     SomeJsType someJsType = internalize(newSomeJsType(123));
-    assertTrue(someJsType.value == 123);
+    assertTrue(someJsType.field == 123);
   }
 
   private static void testMethod() {
@@ -44,9 +46,30 @@ public final class Main {
     assertTrue(callGetString(externalize(someJsType)).equals("str"));
   }
 
+  private static void testProperty() {
+    SomeJsType someJsType = new SomeJsType(123);
+
+    assertTrue(getField(externalize(someJsType)) == 123);
+    setField(externalize(someJsType), 456);
+    assertTrue(getField(externalize(someJsType)) == 456);
+
+    setStaticField(789);
+    assertTrue(getStaticField() == 789);
+
+    assertTrue(getReadOnlyField(externalize(someJsType)) == 111);
+    assertTrue(getStaticReadOnlyField() == 222);
+
+    assertTrue(getReadOnlyProperty(externalize(someJsType)) == 333);
+    assertTrue(getStaticReadOnlyProperty() == 444);
+
+    assertTrue(getReadWriteProperty(externalize(someJsType)) == 0);
+    setReadWriteProperty(externalize(someJsType), 567);
+    assertTrue(getReadWriteProperty(externalize(someJsType)) == 567);
+  }
+
   private static void testInheritedMethod() {
     SubJsType subJsType = new SubJsType();
-    assertTrue(subJsType.value == 12);
+    assertTrue(subJsType.field == 12);
     assertTrue(callGetNumber(externalize(subJsType)) == 22);
     assertTrue(callGetString(externalize(subJsType)).equals("str"));
   }
@@ -59,10 +82,14 @@ public final class Main {
 
   @JsType(namespace = "wasmcustomdescriptorsjsinterop")
   static class SomeJsType extends BaseJsType {
-    public int value;
+    public int field;
+    public static int staticField = 0;
 
-    public SomeJsType(int value) {
-      this.value = value;
+    public final int readOnlyField = 111;
+    public static final int staticReadOnlyField = 222;
+
+    public SomeJsType(int field) {
+      this.field = field;
     }
 
     public int getNumber() {
@@ -71,6 +98,28 @@ public final class Main {
 
     public String getString() {
       return "str";
+    }
+
+    @JsProperty
+    public int getReadOnlyProperty() {
+      return 333;
+    }
+
+    @JsProperty
+    public static int getStaticReadOnlyProperty() {
+      return 444;
+    }
+
+    private int ignoredField;
+
+    @JsProperty
+    public int getReadWriteProperty() {
+      return ignoredField;
+    }
+
+    @JsProperty
+    public void setReadWriteProperty(int value) {
+      ignoredField = value;
     }
   }
 
@@ -97,6 +146,36 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native String callGetString(WasmExtern someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int getField(WasmExtern someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native void setField(WasmExtern someJsType, int value);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int getStaticField();
+
+  @JsMethod(namespace = "nativehelper")
+  static native void setStaticField(int value);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int getReadOnlyField(WasmExtern someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int getStaticReadOnlyField();
+
+  @JsMethod(namespace = "nativehelper")
+  static native int getReadOnlyProperty(WasmExtern someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int getStaticReadOnlyProperty();
+
+  @JsMethod(namespace = "nativehelper")
+  static native int getReadWriteProperty(WasmExtern someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native void setReadWriteProperty(WasmExtern someJsType, int value);
 
   @Wasm("extern.internalize")
   public static native <T> T internalize(WasmExtern t);
