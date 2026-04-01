@@ -15,12 +15,15 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.Annotation
 import com.google.j2cl.transpiler.ast.AnnotationValue
 import com.google.j2cl.transpiler.ast.HasAnnotations
 import com.google.j2cl.transpiler.ast.Literal
+import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -41,15 +44,23 @@ internal data class AnnotationSources(val nameSources: NameSources) {
       nameSources.qualifiedNameSource(annotation.typeDescriptor),
       annotation.singleValueOrNull().let { singleValue ->
         if (singleValue is Literal) {
-          listOf(literalSources.literalSource(singleValue))
+          listOf(annotationValueSource(singleValue))
         } else {
           // TODO(b/444430700): Filter default values when they are supported.
           annotation.values.entries.map { entry ->
-            assignment(source(entry.key), literalSources.literalSource(entry.value as Literal))
+            assignment(source(entry.key), annotationValueSource(entry.value))
           }
         }
       },
     )
+
+  private fun annotationValueSource(annotationValue: AnnotationValue): Source =
+    when (annotationValue) {
+      is TypeLiteral ->
+        classLiteral(nameSources.qualifiedNameSource(annotationValue.referencedTypeDescriptor))
+      is Literal -> literalSources.literalSource(annotationValue)
+      else -> throw InternalCompilerError("Unexpected ${annotationValue::class.simpleName}")
+    }
 
   fun volatileAnnotationSource(): Source =
     annotation(nameSources.topLevelQualifiedNameSource("kotlin.concurrent.Volatile"))
@@ -63,6 +74,7 @@ internal data class AnnotationSources(val nameSources: NameSources) {
       setOf(
         "com.google.errorprone.annotations.CanIgnoreReturnValue",
         "com.google.errorprone.annotations.ResultIgnorabilityUnspecified",
+        "com.google.j2objc.annotations.ObjectiveCKmpMethod",
         "com.google.j2objc.annotations.ObjectiveCName",
         "com.google.j2objc.annotations.SwiftName",
       )
