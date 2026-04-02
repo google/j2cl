@@ -19,8 +19,6 @@ import static java.util.Arrays.stream;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
-import com.google.common.io.MoreFiles;
-import com.google.common.io.RecursiveDeleteOption;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.File;
 import java.io.IOException;
@@ -71,9 +69,8 @@ public class SourceUtils {
 
   private static final String J2CL_TEMP_ROOT = "_j2cl";
 
-  public static Path deriveDirectory(Path output, String suffix) {
-    String name = MoreFiles.getNameWithoutExtension(output);
-    return output.resolveSibling(J2CL_TEMP_ROOT).resolve(name + suffix);
+  static Path deriveTempRootForBazel(Path output) {
+    return output.resolveSibling(J2CL_TEMP_ROOT);
   }
 
   private static final String ARCHIVE_ROOT = "j2cl_sources";
@@ -89,10 +86,6 @@ public class SourceUtils {
   @Nullable
   private static Stream<FileInfo> getAllSourcesImpl(
       Stream<String> sources, Path sourceJarDir, Problems problems) {
-    // Make sure the directory is empty. For Bazel workers, we reuse the directory between runs for
-    // same targets (predictable directory helps with debugging). However, requires cleaning up
-    // before each run.
-    cleanupDirectory(sourceJarDir, problems);
     // Make sure to extract all of the Jars into a single temp dir so that when later sorting
     // sourceFilePaths there is no instability introduced by differences in randomly generated
     // temp dir prefixes.
@@ -117,17 +110,6 @@ public class SourceUtils {
                     : Stream.of(FileInfo.create(f, f, getJavaPath(f))))
         .sorted()
         .distinct();
-  }
-
-  private static void cleanupDirectory(Path directory, Problems problems) {
-    try {
-      if (Files.exists(directory)) {
-        MoreFiles.deleteRecursively(directory, RecursiveDeleteOption.ALLOW_INSECURE);
-      }
-      Files.createDirectories(directory);
-    } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_CREATE_TEMP_DIR, e.getMessage());
-    }
   }
 
   @Nullable

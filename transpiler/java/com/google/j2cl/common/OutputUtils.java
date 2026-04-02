@@ -20,6 +20,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -44,10 +46,28 @@ public class OutputUtils {
     private final ExecutorService fileService = Executors.newSingleThreadExecutor();
     private final Problems problems;
     private final Path root;
+    private final Path tempRoot;
 
-    private Output(Problems problems, Path root) {
+    private Output(Problems problems, Path root, Path tempRoot) {
       this.problems = problems;
       this.root = root;
+      this.tempRoot = tempRoot;
+    }
+
+    public Path createTempDirectory(String suffix) {
+      Path tempDir = tempRoot.resolve(MoreFiles.getNameWithoutExtension(root) + suffix);
+      // Make sure the directory is empty. For Bazel workers, we reuse the directory between runs
+      // for same targets (predictable directory helps with debugging). However, requires cleaning
+      // up  before each run.
+      try {
+        if (Files.exists(tempDir)) {
+          MoreFiles.deleteRecursively(tempDir, RecursiveDeleteOption.ALLOW_INSECURE);
+        }
+        Files.createDirectories(tempDir);
+      } catch (IOException e) {
+        problems.fatal(FatalError.CANNOT_CREATE_TEMP_DIR, e.getMessage());
+      }
+      return tempDir;
     }
 
     public void write(String path, byte[] content) {
@@ -127,24 +147,30 @@ public class OutputUtils {
     }
   }
 
-  public static Output initOutput(Path output, Problems problems) {
-    return output.toString().endsWith(".zip") || output.toString().endsWith(".jar")
-        ? getZipOutput(output, problems)
-        : getDirOutput(output, problems);
+  public static Output initOutputForBazel(Path output, Problems problems) {
+    // For Bazel workers, we use a predictable temp root directory driven by the output file name.
+    // See Output.createTempDirectory() for more details.
+    return initOutput(output, SourceUtils.deriveTempRootForBazel(output), problems);
   }
 
-  private static Output getDirOutput(Path output, Problems problems) {
+  public static Output initOutput(Path output, Path tempRoot, Problems problems) {
+    return output.toString().endsWith(".zip") || output.toString().endsWith(".jar")
+        ? getZipOutput(output, tempRoot, problems)
+        : getDirOutput(output, tempRoot, problems);
+  }
+
+  private static Output getDirOutput(Path output, Path tempRoot, Problems problems) {
     if (Files.isRegularFile(output)) {
       problems.fatal(FatalError.OUTPUT_LOCATION, output);
     }
 
-    return new Output(problems, output);
+    return new Output(problems, output, tempRoot);
   }
 
-  private static Output getZipOutput(Path output, Problems problems) {
+  private static Output getZipOutput(Path output, Path tempRoot, Problems problems) {
     FileSystem newFileSystem = initZipOutput(output, problems);
 
-    return new Output(problems, newFileSystem.getPath("/")) {
+    return new Output(problems, newFileSystem.getPath("/"), tempRoot) {
 
       @Override
       protected final void createDirectories(Path outputPath) throws IOException {

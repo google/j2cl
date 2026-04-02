@@ -16,6 +16,7 @@ package com.google.j2cl.tools.gwtincompatible;
 import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
 import com.google.j2cl.common.CommandLineTool;
+import com.google.j2cl.common.OutputUtils;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -56,7 +57,8 @@ public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineT
       annotations.add("GwtIncompatible");
     }
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
-    GwtIncompatibleStripper.strip(files.stream(), outputPath, tempDir, problems, annotations);
+    var output = OutputUtils.initOutput(outputPath, tempDir, problems);
+    GwtIncompatibleStripper.strip(files.stream(), output, problems, annotations);
   }
 
   public static int run(Collection<String> args, PrintStream stdErr) {

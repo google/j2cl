@@ -21,7 +21,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
-import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
@@ -59,17 +58,13 @@ import javax.tools.StandardLocation;
 public final class GwtIncompatibleStripper {
 
   static void strip(
-      Stream<Path> files,
-      Path outputPath,
-      Path tempDir,
-      Problems problems,
-      List<String> annotationNames) {
-    try (Output out = OutputUtils.initOutput(outputPath, problems)) {
+      Stream<Path> files, Output output, Problems problems, List<String> annotationNames) {
+    try (output) {
       List<FileInfo> allPaths =
-          SourceUtils.getAllSources(files, tempDir, problems)
+          SourceUtils.getAllSources(files, output.createTempDirectory("_source_jars"), problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(toImmutableList());
-      preprocessFiles(allPaths, out, problems, annotationNames);
+      preprocessFiles(allPaths, output, problems, annotationNames);
     }
   }
 

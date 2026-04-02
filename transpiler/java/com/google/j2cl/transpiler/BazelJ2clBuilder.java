@@ -177,7 +177,7 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Override
   protected void run() {
     problems.abortIfCancelled();
-    try (Output out = OutputUtils.initOutput(output, problems)) {
+    try (Output out = OutputUtils.initOutputForBazel(output, problems)) {
       problems.abortIfCancelled();
       try {
         J2clTranspiler.transpile(createOptions(out), problems);
@@ -205,7 +205,7 @@ final class BazelJ2clBuilder extends BazelWorker {
       problems.fatal(FatalError.INVALID_JAVA_FRONTEND, javaFrontend);
     }
 
-    Path sourceJarDir = SourceUtils.deriveDirectory(this.output, "_source_jars");
+    Path sourceJarDir = output.createTempDirectory("_source_jars");
     ImmutableList<FileInfo> allSources =
         SourceUtils.getAllSources(sources.stream(), sourceJarDir, problems)
             .collect(toImmutableList());

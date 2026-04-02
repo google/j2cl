@@ -69,7 +69,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
 
   @Override
   protected void run() {
-    try (Output out = OutputUtils.initOutput(this.output, problems)) {
+    try (Output out = OutputUtils.initOutputForBazel(this.output, problems)) {
       ImmutableList<EntryPointPattern> entryPointPatterns =
           this.wasmEntryPoints.stream().map(EntryPointPattern::from).collect(toImmutableList());
       List<String> binaryNames = getBinaryNamesOfClassesWithExports(classpaths, entryPointPatterns);

@@ -159,7 +159,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Override
   protected void run() {
     problems.abortIfCancelled();
-    try (Output out = OutputUtils.initOutput(this.output, problems)) {
+    try (Output out = OutputUtils.initOutput(this.output, this.tempDir, problems)) {
       problems.abortIfCancelled();
       J2clTranspiler.transpile(createOptions(out), problems);
     }
@@ -179,7 +179,8 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     }
 
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSources(this.files.stream(), tempDir.resolve("_source_jars"), problems)
+        SourceUtils.getAllSources(
+                this.files.stream(), output.createTempDirectory("_source_jars"), problems)
             .collect(toImmutableList());
     problems.abortIfCancelled();
 
@@ -199,7 +200,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
 
     ImmutableList<FileInfo> allNativeSources =
         SourceUtils.getAllSources(
-                this.nativeSourcePath.stream(), tempDir.resolve("_naitve_sources"), problems)
+                this.nativeSourcePath.stream(),
+                output.createTempDirectory("_native_sources"),
+                problems)
             .filter(p -> p.sourcePath().endsWith(".native.js"))
             .collect(toImmutableList());
     problems.abortIfCancelled();
