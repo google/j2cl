@@ -1472,6 +1472,7 @@ public class JsInteropRestrictionsChecker {
           member.getSourcePosition(),
           "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
           readableDescription);
+      return;
     }
 
     if (memberDescriptor.isJsMember()) {

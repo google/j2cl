@@ -2033,7 +2033,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           @JsOverlay
           public final void anOverlayMethod() {
         > Error: JsOverlay 'void MyJsEnum.anOverlayMethod()' can only be declared in a native type or @JsFunction interface.
-        > Error: Cannot use 'super' in JsOverlay method 'void MyJsEnum.anOverlayMethod()'.
             super.ordinal();
           }
           public final void aMethod() {
