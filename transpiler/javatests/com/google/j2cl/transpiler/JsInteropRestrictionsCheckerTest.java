@@ -2036,8 +2036,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             super.ordinal();
           }
           public final void aMethod() {
-        > Error: Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.
             super.name();
+        > Error: Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.
         > Error: JsEnum 'MyJsEnum' does not support 'String Enum.name()'.
           }
         }

@@ -1954,7 +1954,7 @@ public class JsInteropRestrictionsChecker {
             @Override
             public void exitSuperReference(SuperReference superReference) {
               problems.error(
-                  method.getSourcePosition(),
+                  getSourcePosition(),
                   "Cannot use 'super' in %s method '%s'.",
                   messagePrefix,
                   method.getReadableDescription());
