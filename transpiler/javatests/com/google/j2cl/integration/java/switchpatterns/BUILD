@@ -10,9 +10,4 @@ package(
 
 integration_test(
     srcs = glob(["*.java"]),
-    experimental_java_frontend = "javac",
-    javacopts = [
-        "-source 21",
-        "-target 21",
-    ],
 )

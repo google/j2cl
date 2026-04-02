@@ -10,8 +10,4 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    javacopts = [
-        "-source 17",
-        "-target 17",
-    ],
 )

@@ -10,11 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["**/*.java"]),
-    experimental_java_frontend = "javac",
-    javacopts = [
-        "-source 21",
-        "-target 21",
-    ],
     deps = [
         "//third_party:jsinterop-annotations-j2cl",
     ],

@@ -10,10 +10,7 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    experimental_java_frontend = "javac",
     javacopts = [
-        "-source 21",
-        "-target 21",
         # Allow trailing whitespace in text blocks
         "-Xlint:-text-blocks",
     ],

@@ -10,7 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["**/*.java"]),
-    experimental_java_frontend = "javac",
     javacopts = [
         "-source 22",
         "-target 22",

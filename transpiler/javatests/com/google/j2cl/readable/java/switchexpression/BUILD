@@ -10,10 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    javacopts = [
-        "-source 14",
-        "-target 14",
-    ],
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
     ],
