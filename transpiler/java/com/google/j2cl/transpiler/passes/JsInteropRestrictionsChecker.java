@@ -2273,7 +2273,7 @@ public class JsInteropRestrictionsChecker {
       case UNDEFINED_ACCESSOR ->
           problems.error(
               method.getSourcePosition(),
-              "JsProperty '%s' should have a correct setter or getter signature.",
+              "JsProperty '%s' should have a correct property accessor signature.",
               method.getReadableDescription());
       case GETTER -> {
         TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();

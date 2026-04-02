@@ -280,17 +280,17 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           @JsProperty int isX();
         > Error: JsProperty 'int Buggy.isX()' cannot have a non-boolean return.
           @JsProperty int getY(int x);
-        > Error: JsProperty 'int Buggy.getY(int x)' should have a correct setter or getter signature.
+        > Error: JsProperty 'int Buggy.getY(int x)' should have a correct property accessor signature.
           @JsProperty void getZ();
-        > Error: JsProperty 'void Buggy.getZ()' should have a correct setter or getter signature.
+        > Error: JsProperty 'void Buggy.getZ()' should have a correct property accessor signature.
           @JsProperty void setX(int x, int y);
-        > Error: JsProperty 'void Buggy.setX(int x, int y)' should have a correct setter or getter signature.
+        > Error: JsProperty 'void Buggy.setX(int x, int y)' should have a correct property accessor signature.
           @JsProperty void setY();
-        > Error: JsProperty 'void Buggy.setY()' should have a correct setter or getter signature.
+        > Error: JsProperty 'void Buggy.setY()' should have a correct property accessor signature.
           @JsProperty int setZ(int z);
-        > Error: JsProperty 'int Buggy.setZ(int z)' should have a correct setter or getter signature.
+        > Error: JsProperty 'int Buggy.setZ(int z)' should have a correct property accessor signature.
           @JsProperty static void setStatic() {}
-        > Error: JsProperty 'void Buggy.setStatic()' should have a correct setter or getter signature.
+        > Error: JsProperty 'void Buggy.setStatic()' should have a correct property accessor signature.
           @JsProperty void setW(int... z);
         > Error: JsProperty 'void Buggy.setW(int... z)' cannot have a vararg parameter.
         }
