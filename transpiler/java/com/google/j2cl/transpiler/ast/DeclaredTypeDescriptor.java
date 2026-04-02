@@ -125,10 +125,6 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return getTypeDeclaration().isStarOrUnknown();
   }
 
-  public boolean isJavaScriptClass() {
-    return !isStarOrUnknown() && !isJsFunctionInterface();
-  }
-
   @Override
   public boolean isNoopCast() {
     return getTypeDeclaration().isNoopCast();

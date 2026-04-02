@@ -129,22 +129,19 @@ public class ClosureGenerationEnvironment {
               + getJsDocDeclarationForTypeVariable(
                   type.getDeclaration().getTypeParameterDescriptors()));
     }
-    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
+    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptorToDeclare(type);
     if (superTypeDescriptor != null && (isWasmExtern || superTypeDescriptor.hasTypeArguments())) {
       // No need to render if it does not have type arguments as it will also appear in the
       // extends clause of the class definition (unless it's an externs declaration).
       renderClauseIfTypeExistsInJavaScript("extends", superTypeDescriptor, isWasmExtern, sb);
     }
 
-    // TODO(b/459918329): Support interfaces in Wasm externs.
-    if (!isWasmExtern) {
-      String extendsOrImplementsString = type.isInterface() ? "extends" : "implements";
-      type.getSuperInterfaceTypeDescriptors()
-          .forEach(
-              t ->
-                  renderClauseIfTypeExistsInJavaScript(
-                      extendsOrImplementsString, t, isWasmExtern, sb));
-    }
+    String extendsOrImplementsString = type.isInterface() ? "extends" : "implements";
+    type.getSuperInterfaceTypeDescriptors()
+        .forEach(
+            t ->
+                renderClauseIfTypeExistsInJavaScript(
+                    extendsOrImplementsString, t, isWasmExtern, sb));
 
     if (isDeprecated(type.getDeclaration())) {
       appendWithNewLine(sb, " * @deprecated");
@@ -162,13 +159,21 @@ public class ClosureGenerationEnvironment {
             .collect(joining(", ")));
   }
 
+  /**
+   * Returns the super type to declare in the Closure JsDoc. The super type declared in Closure is
+   * not necessarily the same as the one in the model.
+   */
+  protected DeclaredTypeDescriptor getSuperTypeDescriptorToDeclare(Type type) {
+    return type.getSuperTypeDescriptor();
+  }
+
   /*** Renders a JsDoc clause only if the type is an actual class in JavaScript. */
   private void renderClauseIfTypeExistsInJavaScript(
       String extendsOrImplementsString,
       DeclaredTypeDescriptor typeDescriptor,
       boolean isWasmExtern,
       StringBuilder sb) {
-    if (!typeDescriptor.isJavaScriptClass()) {
+    if (!isJavaScriptClass(typeDescriptor)) {
       return;
     }
 
@@ -193,6 +198,11 @@ public class ClosureGenerationEnvironment {
               .collect(joining(", ", "<", ">"));
     }
     appendWithNewLine(sb, String.format(" * @%s {%s}", extendsOrImplementsString, superTypeString));
+  }
+
+  /** Returns true if the given type exists as a class in JavaScript. */
+  protected boolean isJavaScriptClass(DeclaredTypeDescriptor typeDescriptor) {
+    return !typeDescriptor.isStarOrUnknown() && !typeDescriptor.isJsFunctionInterface();
   }
 
   /** Returns the JsDoc annotation for the given method. */

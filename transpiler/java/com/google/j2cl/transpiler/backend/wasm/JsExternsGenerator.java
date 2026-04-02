@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.j2cl.transpiler.ast.AstUtils.findSuperTypeWithWasmJsExportsIncludingSelf;
 import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
 import com.google.common.collect.Streams;
@@ -75,7 +76,11 @@ final class JsExternsGenerator {
             });
   }
 
-  private boolean shouldGenerateExtern(DeclaredTypeDescriptor typeDescriptor) {
+  static DeclaredTypeDescriptor findExportedSuperType(Type type) {
+    return findSuperTypeWithWasmJsExportsIncludingSelf(type.getSuperTypeDescriptor());
+  }
+
+  static boolean shouldGenerateExtern(DeclaredTypeDescriptor typeDescriptor) {
     // TODO(b/459918329): Support interfaces.
     if (typeDescriptor.isInterface()) {
       return false;

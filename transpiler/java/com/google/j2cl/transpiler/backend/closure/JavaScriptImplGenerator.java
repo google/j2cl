@@ -212,7 +212,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         () -> sourceBuilder.append(environment.aliasForType(type.getDeclaration())));
 
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null && superTypeDescriptor.isJavaScriptClass()) {
+    if (superTypeDescriptor != null && environment.isJavaScriptClass(superTypeDescriptor)) {
       sourceBuilder.append(format(" extends %s", environment.aliasForType(superTypeDescriptor)));
     }
 

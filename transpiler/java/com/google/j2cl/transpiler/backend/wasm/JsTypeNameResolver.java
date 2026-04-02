@@ -40,6 +40,16 @@ final class JsTypeNameResolver extends ClosureGenerationEnvironment {
     return getJsTypeAlias(typeDeclaration);
   }
 
+  @Override
+  protected DeclaredTypeDescriptor getSuperTypeDescriptorToDeclare(Type type) {
+    return JsExternsGenerator.findExportedSuperType(type);
+  }
+
+  @Override
+  protected boolean isJavaScriptClass(DeclaredTypeDescriptor typeDescriptor) {
+    return JsExternsGenerator.shouldGenerateExtern(typeDescriptor);
+  }
+
   /**
    * Returns the type alias for the given type declaration.
    *
