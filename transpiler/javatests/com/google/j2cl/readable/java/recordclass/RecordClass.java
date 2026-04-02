@@ -107,7 +107,14 @@ public class RecordClass {
   record RecordSpecializingInterface(String parametric, String nonParametric)
       implements PropertyAccessors<String> {}
 
-  private static void testLocalRecordClas() {
+  // Repro for b/498931729
+  public record PublicRecordWithPublicFactory() {
+    public PublicRecordWithPublicFactory factory() {
+      return new PublicRecordWithPublicFactory();
+    }
+  }
+
+  private static void testLocalRecordClass() {
     record LocalRecord(int value) {}
     LocalRecord lr = new LocalRecord(1);
   }

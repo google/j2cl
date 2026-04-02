@@ -66,6 +66,9 @@ public final class AstUtils {
         isImplicitJsConstructor(enclosingTypeDescriptor.getTypeDeclaration())
             ? JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build()
             : JsInfo.NONE;
+    // Do not mark the implicit constructor as synthetic. Implicit members are never marked as
+    // synthetic because the usage sites have to agree, and they don't have the information of
+    // whether they are synthesized or not.
     return MethodDescriptor.newBuilder()
         .setVisibility(
             getImplicitConstructorVisibility(enclosingTypeDescriptor.getTypeDeclaration()))

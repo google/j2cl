@@ -618,6 +618,7 @@ public class NormalizeConstructors extends NormalizationPass {
                         .getEnclosingTypeDescriptor()
                         .getTypeDeclaration()
                         .getTypeParameterDescriptors())
+                .setSynthetic(true)
                 .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR));
   }
 

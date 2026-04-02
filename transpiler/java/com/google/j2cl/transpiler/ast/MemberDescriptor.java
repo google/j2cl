@@ -106,6 +106,12 @@ public abstract class MemberDescriptor
 
   public abstract boolean isInstanceMember();
 
+  /**
+   * Returns true if this member is synthetic (JLS 4.7.8).
+   *
+   * <p>Returns true only for members that are considered implementation artifacts, like bridges,
+   * but not for implicit members like default constructor or record accessors.
+   */
   public abstract boolean isSynthetic();
 
   public abstract Origin getOrigin();

@@ -113,12 +113,14 @@ public class ImplementRecordClasses extends NormalizationPass {
 
   private static void addFieldAccessors(Type type) {
     for (FieldDescriptor field : getRecordFields(type.getTypeDescriptor())) {
+      // Do not mark the implicit accessors as synthetic. Implicit members are never marked as
+      // synthetic because the usage sites have to agree, and they don't have the information of
+      // whether they are synthesized or not.
       MethodDescriptor fieldAccessorDescriptor =
           MethodDescriptor.newBuilder()
               .setEnclosingTypeDescriptor(type.getTypeDescriptor())
               .setName(field.getName())
               .setReturnTypeDescriptor(field.getTypeDescriptor())
-              .setSynthetic(true)
               .build();
       if (type.containsMethod(fieldAccessorDescriptor::isSameSignature)) {
         continue;
@@ -142,6 +144,9 @@ public class ImplementRecordClasses extends NormalizationPass {
   private static void normalizeConstructors(Type type) {
     ImmutableList<FieldDescriptor> recordFields = getRecordFields(type.getTypeDescriptor());
 
+    // Do not mark the canonical constructor as synthetic. Implicit members are never marked as
+    // synthetic because the usage sites have to agree, and they don't have the information of
+    // whether they are synthesized or not.
     MethodDescriptor canonicalConstructorDescriptor =
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
@@ -154,7 +159,6 @@ public class ImplementRecordClasses extends NormalizationPass {
                                 .setTypeDescriptor(f.getTypeDescriptor())
                                 .build())
                     .collect(toImmutableList()))
-            .setSynthetic(true)
             .build();
 
     // Generate the canonical constructor if it does not exist.
@@ -299,12 +303,15 @@ public class ImplementRecordClasses extends NormalizationPass {
     if (type.containsMethod(m -> m.isOverride(methodDescriptor))) {
       return;
     }
+
+    // Do not mark the implicit object overrides as synthetic. Implicit members are never marked as
+    // synthetic because the usage sites have to agree, and they don't have the information of
+    // whether they are synthesized or not.
     MethodDescriptor generatedMethodDescriptor =
         MethodDescriptor.Builder.from(methodDescriptor)
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setDeclarationDescriptor(null)
             .setNative(false)
-            .setSynthetic(true)
             .build();
     List<Variable> parameters =
         AstUtils.createParameterVariables(methodDescriptor.getParameterTypeDescriptors());

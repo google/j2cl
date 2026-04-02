@@ -1,0 +1,48 @@
+goog.module('recordclass.RecordClass.PublicRecordWithPublicFactory$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class PublicRecordWithPublicFactory extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {PublicRecordWithPublicFactory} */
+ m_factory__recordclass_RecordClass_PublicRecordWithPublicFactory() {
+  return PublicRecordWithPublicFactory.$create__();
+ }
+ /** @nodts @return {!PublicRecordWithPublicFactory} */
+ static $create__() {
+  PublicRecordWithPublicFactory.$clinit();
+  let $instance = new PublicRecordWithPublicFactory();
+  $instance.$ctor__recordclass_RecordClass_PublicRecordWithPublicFactory__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_PublicRecordWithPublicFactory__void() {
+  this.$ctor__java_lang_Record__void();
+  $J2CL_PRESERVE$();
+ }
+ /** @nodts */
+ static $clinit() {
+  PublicRecordWithPublicFactory.$clinit = () =>{};
+  PublicRecordWithPublicFactory.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PublicRecordWithPublicFactory;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(PublicRecordWithPublicFactory, 'recordclass.RecordClass$PublicRecordWithPublicFactory');
+
+exports = PublicRecordWithPublicFactory;
+
+//# sourceMappingURL=RecordClass$PublicRecordWithPublicFactory.js.map

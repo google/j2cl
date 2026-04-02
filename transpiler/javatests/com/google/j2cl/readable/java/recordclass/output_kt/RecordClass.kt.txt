@@ -47,7 +47,7 @@ open class RecordClass {
  
  companion object {
   @JvmStatic
-  private fun testLocalRecordClas() {
+  private fun testLocalRecordClass() {
    class LocalRecord {
     private val value: Int
     
@@ -799,6 +799,35 @@ open class RecordClass {
   override fun toString(): String {
    return Arrays.toString(
     arrayOf<Any?>(this.parametric, this.nonParametric),
+   )
+  }
+ }
+ 
+ class PublicRecordWithPublicFactory {
+  fun factory(): PublicRecordWithPublicFactory? {
+   return PublicRecordWithPublicFactory()
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   if (!(arg0 is PublicRecordWithPublicFactory && run {
+    val ___other: PublicRecordWithPublicFactory? = arg0 as PublicRecordWithPublicFactory?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(),
+    arrayOf<Any?>(),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(),
+   )
+  }
+  
+  override fun toString(): String {
+   return Arrays.toString(
+    arrayOf<Any?>(),
    )
   }
  }
