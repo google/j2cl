@@ -461,7 +461,7 @@ public final class RuntimeMethods {
   }
 
   /** Creates a method call to WasmExtern.externalize(). */
-  public static MethodCall createWasmExternalizeMethodCall(Expression argument) {
+  public static Expression createWasmExternalizeMethodCall(Expression argument) {
     checkArgument(!argument.getTypeDescriptor().isPrimitive());
     MethodDescriptor methodDescriptor =
         TypeDescriptors.get().javaemulInternalWasmExtern.getMethodDescriptorByName("externalize");
@@ -469,7 +469,7 @@ public final class RuntimeMethods {
   }
 
   /** Creates a method call to WasmExtern.internalize(). */
-  public static MethodCall createWasmInternalizeMethodCall(
+  public static Expression createWasmInternalizeMethodCall(
       Expression argument, TypeDescriptor typeDescriptor) {
     checkArgument(
         argument
@@ -480,7 +480,12 @@ public final class RuntimeMethods {
             .javaemulInternalWasmExtern
             .getMethodDescriptorByName("internalize")
             .specializeTypeVariables(unused -> typeDescriptor);
-    return MethodCall.Builder.from(methodDescriptor).setArguments(argument).build();
+    // Cast the result of internalize to the expected type to make it independent of the pass that
+    // adds the erasure cast.
+    return CastExpression.newBuilder()
+        .setExpression(MethodCall.Builder.from(methodDescriptor).setArguments(argument).build())
+        .setCastTypeDescriptor(typeDescriptor)
+        .build();
   }
 
   /** Create a call to an Exceptions method. */

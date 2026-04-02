@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithWasm;
+import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -46,9 +47,7 @@ public class InsertExternConversionsWasm extends NormalizationPass {
               method
                   .getParameters()
                   .forEach(
-                      p ->
-                          p.setTypeDescriptor(
-                              replaceStringWithNativeString(p.getTypeDescriptor())));
+                      p -> p.setTypeDescriptor(replaceTypeWithExternalType(p.getTypeDescriptor())));
               method = Method.Builder.from(method).setMethodDescriptor(newDescriptor).build();
             }
             return method;
@@ -72,16 +71,11 @@ public class InsertExternConversionsWasm extends NormalizationPass {
                 Streams.zip(
                         methodDescriptor.getParameterTypeDescriptors().stream(),
                         invocation.getArguments().stream(),
-                        (paramType, arg) ->
-                            TypeDescriptors.isJavaLangString(paramType)
-                                ? RuntimeMethods.createJsStringFromStringMethodCall(arg)
-                                : arg)
+                        InsertExternConversionsWasm::convertArgumentIfNeeded)
                     .collect(toImmutableList()))
             .setTarget(createExportedMethodDescriptor(methodDescriptor))
             .build();
-    return TypeDescriptors.isJavaLangString(methodDescriptor.getReturnTypeDescriptor())
-        ? RuntimeMethods.createStringFromJsStringMethodCall(newInvocation)
-        : newInvocation;
+    return convertReturnIfNeeded(newInvocation, methodDescriptor.getReturnTypeDescriptor());
   }
 
   private static MethodDescriptor createExportedMethodDescriptor(MethodDescriptor descriptor) {
@@ -92,18 +86,46 @@ public class InsertExternConversionsWasm extends NormalizationPass {
         builder ->
             builder
                 .setReturnTypeDescriptor(
-                    replaceStringWithNativeString(builder.getReturnTypeDescriptor()))
+                    replaceTypeWithExternalType(builder.getReturnTypeDescriptor()))
                 .updateParameterTypeDescriptors(
                     builder.getParameterTypeDescriptors().stream()
-                        .map(InsertExternConversionsWasm::replaceStringWithNativeString)
+                        .map(InsertExternConversionsWasm::replaceTypeWithExternalType)
                         .collect(toImmutableList())));
   }
 
-  private static TypeDescriptor replaceStringWithNativeString(TypeDescriptor typeDescriptor) {
+  private static TypeDescriptor replaceTypeWithExternalType(TypeDescriptor typeDescriptor) {
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
     }
+    if (isWasmJsExportedType(typeDescriptor)) {
+      return TypeDescriptors.get()
+          .javaemulInternalWasmExtern
+          .toNullable(typeDescriptor.isNullable());
+    }
     return typeDescriptor;
+  }
+
+  private static Expression convertArgumentIfNeeded(
+      TypeDescriptor targetArgumentTypeDescriptor, Expression argument) {
+    if (TypeDescriptors.isJavaLangString(targetArgumentTypeDescriptor)) {
+      return RuntimeMethods.createJsStringFromStringMethodCall(argument);
+    }
+    if (isWasmJsExportedType(targetArgumentTypeDescriptor)) {
+      return RuntimeMethods.createWasmExternalizeMethodCall(argument);
+    }
+    return argument;
+  }
+
+  private static Expression convertReturnIfNeeded(
+      Expression invocationExpression, TypeDescriptor targetReturnTypeDescriptor) {
+    if (TypeDescriptors.isJavaLangString(targetReturnTypeDescriptor)) {
+      return RuntimeMethods.createStringFromJsStringMethodCall(invocationExpression);
+    }
+    if (isWasmJsExportedType(targetReturnTypeDescriptor)) {
+      return RuntimeMethods.createWasmInternalizeMethodCall(
+          invocationExpression, targetReturnTypeDescriptor);
+    }
+    return invocationExpression;
   }
 
   private static boolean isJavaScriptMethod(MethodDescriptor descriptor) {
