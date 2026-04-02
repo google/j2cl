@@ -38,6 +38,11 @@ public class ReturnStatement extends Statement {
   }
 
   @Override
+  public boolean terminatesAbruptly() {
+    return true;
+  }
+
+  @Override
   public ReturnStatement clone() {
     return ReturnStatement.newBuilder()
         .setExpression(AstUtils.clone(expression))

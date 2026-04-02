@@ -44,6 +44,11 @@ public class Block extends Statement {
   }
 
   @Override
+  public boolean terminatesAbruptly() {
+    return statements.stream().anyMatch(Statement::terminatesAbruptly);
+  }
+
+  @Override
   public Block clone() {
     return Block.newBuilder()
         .setSourcePosition(getSourcePosition())

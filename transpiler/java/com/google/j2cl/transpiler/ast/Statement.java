@@ -45,6 +45,17 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
     return false;
   }
 
+  /**
+   * Returns {@code true} if the statement completes abruptly (JLS 14.1).
+   *
+   * <p>Returns {@code true} if the statement is guaranteed not to follow the normal control flow.
+   * Note that neither labeled statements nor constructs with implicit breaks (like switch
+   * statements) are not considered to terminate abruptly in this approximation.
+   */
+  public boolean terminatesAbruptly() {
+    return false;
+  }
+
   public LabeledStatement encloseWithLabel(Label label) {
     return LabeledStatement.newBuilder()
         .setStatement(this)

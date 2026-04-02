@@ -54,6 +54,13 @@ public class IfStatement extends Statement {
   }
 
   @Override
+  public boolean terminatesAbruptly() {
+    return elseStatement != null
+        && thenStatement.terminatesAbruptly()
+        && elseStatement.terminatesAbruptly();
+  }
+
+  @Override
   public IfStatement clone() {
     return new IfStatement(
         getSourcePosition(),

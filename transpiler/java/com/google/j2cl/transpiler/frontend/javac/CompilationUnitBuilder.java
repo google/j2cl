@@ -568,21 +568,22 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .build());
     }
 
-    var statementsBuilder = ImmutableList.<Statement>builder();
 
     checkState(body == null || body instanceof JCStatement);
-    if (body instanceof JCStatement s) {
-      statementsBuilder.add(convertStatement(s));
+    var caseBody = body == null ? null : convertStatement((JCStatement) body);
+
+    // If the result of the switch construct is void, it means that it is a switch statement;
+    // otherwise the result should have been the type of the resulting expression and no case
+    // falls through.
+    var isSwitchStatement = isPrimitiveVoid(resultTypeDescriptor);
+    if (isSwitchStatement && !(caseBody != null && caseBody.terminatesAbruptly())) {
+      // Add a break statement to prevent fallthrough since this is a case rule and the body
+      // can complete normally.
+      return ImmutableList.of(
+          caseBody, BreakStatement.newBuilder().setSourcePosition(SourcePosition.NONE).build());
     }
 
-    if (isPrimitiveVoid(resultTypeDescriptor)) {
-      // Switch case rules don't fallthrough and this one is in a switch statement,
-      // add an explicit break.
-      statementsBuilder.add(
-          BreakStatement.newBuilder().setSourcePosition(SourcePosition.NONE).build());
-    }
-
-    return statementsBuilder.build();
+    return ImmutableList.of(caseBody);
   }
 
   private List<Expression> convertCaseExpressions(JCCase caseClause) {

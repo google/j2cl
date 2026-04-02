@@ -39,6 +39,11 @@ public abstract class BreakOrContinueStatement extends Statement {
     return labelReference != null && labelReference.getTarget() == label;
   }
 
+  @Override
+  public boolean terminatesAbruptly() {
+    return true;
+  }
+
   public abstract <S extends BreakOrContinueStatement, B extends Builder<S, B>>
       Builder<S, B> toBuilder();
 

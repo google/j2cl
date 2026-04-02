@@ -45,6 +45,11 @@ public class YieldStatement extends Statement {
   }
 
   @Override
+  public boolean terminatesAbruptly() {
+    return true;
+  }
+
+  @Override
   public YieldStatement clone() {
     return YieldStatement.newBuilder()
         .setExpression(expression.clone())

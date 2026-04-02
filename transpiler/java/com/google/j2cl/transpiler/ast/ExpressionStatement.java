@@ -43,6 +43,13 @@ public class ExpressionStatement extends Statement {
   }
 
   @Override
+  public boolean terminatesAbruptly() {
+    var typeDescriptor = expression.getTypeDescriptor();
+    return !typeDescriptor.isNullable()
+        && TypeDescriptors.isKotlinNothing(typeDescriptor.toRawTypeDescriptor());
+  }
+
+  @Override
   public ExpressionStatement clone() {
     return new ExpressionStatement(getSourcePosition(), expression.clone());
   }

@@ -38,6 +38,11 @@ public class ThrowStatement extends Statement {
   }
 
   @Override
+  public boolean terminatesAbruptly() {
+    return true;
+  }
+
+  @Override
   public ThrowStatement clone() {
     return new ThrowStatement(getSourcePosition(), expression.clone());
   }
