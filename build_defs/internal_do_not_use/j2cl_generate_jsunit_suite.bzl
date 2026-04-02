@@ -88,15 +88,20 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         name = name,
         srcs = [":%s_test_artifacts" % name],
         outs = [name + ".js.zip"],
-        cmd = "\n".join([
-            "TMP=$$(mktemp -d)",
-            "WD=$$(pwd)",
-            "unzip -q $< *.testsuite *.json -d $$TMP",
-            "cd $$TMP",
-            "for f in $$(find . -name *.testsuite); do mv $$f $${f/.testsuite/.js}; done",
-            "zip -q -r $$WD/$@ .",
-            "rm -rf $$TMP",
-        ]),
+        cmd = """
+            set -u
+            TMP=$$(mktemp -d)
+            OUTPUT_ZIP="$$(pwd)/$@"
+            unzip -q $< "*.testsuite" "*.json" -d $$TMP
+            (
+              cd $$TMP
+              for f in $$(find . -name "*.testsuite"); do
+                mv $$f $${f/.testsuite/.js}
+              done
+              zip -q -r "$$OUTPUT_ZIP" .
+            )
+            rm -rf $$TMP
+        """,
         testonly = 1,
         tags = ["manual", "notap"],
     )

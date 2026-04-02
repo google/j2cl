@@ -121,18 +121,25 @@ def j2wasm_generate_jsunit_suite(
         name = name,
         srcs = [out_jar],
         outs = [name + ".js.zip"],
-        cmd = "\n".join([
-            "TMP=$$(mktemp -d)",
-            "WD=$$(pwd)",
-            "unzip -q $(location %s) *.testsuite *.json -d $$TMP" % out_jar,
-            "cd $$TMP",
-            "for f in $$(find . -name *.testsuite); do" +
-            " sed -i -e 's/REPLACEMENT_MODULE_NAME_PLACEHOLDER/%s/' $$f ;" % wasm_module_name +
-            " sed -i -e 's/REPLACEMENT_BUILD_PATH_PLACEHOLDER/%s/' $$f ;" % processed_wasm_path +
-            " mv $$f $${f/.testsuite/.js}; done",
-            "zip -q -r $$WD/$@ .",
-            "rm -rf $$TMP",
-        ]),
+        cmd = """
+            set -u
+            TMP=$$(mktemp -d)
+            OUTPUT_ZIP="$$(pwd)/$@"
+            unzip -q $< "*.testsuite" "*.json" -d $$TMP
+            (
+                cd $$TMP
+                for f in $$(find . -name "*.testsuite"); do
+                    sed -i -e 's/REPLACEMENT_MODULE_NAME_PLACEHOLDER/{wasm_module_name}/' $$f
+                    sed -i -e 's/REPLACEMENT_BUILD_PATH_PLACEHOLDER/{processed_wasm_path}/' $$f
+                    mv $$f $${{f/.testsuite/.js}}
+                done
+                zip -q -r "$$OUTPUT_ZIP" .
+            )
+            rm -rf $$TMP
+        """.format(
+            wasm_module_name = wasm_module_name,
+            processed_wasm_path = processed_wasm_path,
+        ),
         testonly = 1,
         tags = tags + ["manual", "notap"],
     )
