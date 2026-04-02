@@ -238,7 +238,10 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
 
   fun annotationsSource(method: Method): Source =
     newLineSeparated(
-      annotationSources.annotationsSource(method.descriptor),
+      annotationSources.annotationsSource(
+        method.descriptor,
+        isProperty = method.descriptor.isKtProperty,
+      ),
       objCNameSources.objCAnnotationSource(method.descriptor),
       jsInteropAnnotationSources.jsInteropAnnotationsSource(method),
       memberDescriptorSources.jvmThrowsAnnotationSource(method.descriptor),

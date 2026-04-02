@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 
@@ -32,16 +33,24 @@ internal data class AnnotationSources(val nameSources: NameSources) {
   private val literalSources: LiteralSources
     get() = LiteralSources(nameSources)
 
-  fun annotationsSource(hasAnnotations: HasAnnotations): Source =
+  fun annotationsSource(hasAnnotations: HasAnnotations, isProperty: Boolean = false): Source =
     newLineSeparated(
       hasAnnotations.annotations
         .filter { SUPPORTED_ANNOTATIONS.contains(it.typeDescriptor.qualifiedSourceName) }
-        .map { annotationSource(it) }
+        .map { annotationSource(it, isProperty) }
     )
 
-  private fun annotationSource(annotation: Annotation): Source =
+  private fun annotationSource(annotation: Annotation, isProperty: Boolean): Source =
     annotation(
-      nameSources.qualifiedNameSource(annotation.typeDescriptor),
+      join(
+        Source.emptyIf(
+          !isProperty ||
+            !SUPPORTED_PROPERTY_ANNOTATIONS.contains(annotation.typeDescriptor.qualifiedSourceName)
+        ) {
+          join(source("get"), Source.COLON)
+        },
+        nameSources.qualifiedNameSource(annotation.typeDescriptor),
+      ),
       annotation.singleValueOrNull().let { singleValue ->
         if (singleValue is Literal) {
           listOf(annotationValueSource(singleValue))
@@ -75,6 +84,12 @@ internal data class AnnotationSources(val nameSources: NameSources) {
         "com.google.errorprone.annotations.CanIgnoreReturnValue",
         "com.google.errorprone.annotations.ResultIgnorabilityUnspecified",
         "com.google.j2objc.annotations.ObjectiveCKmpMethod",
+        "com.google.j2objc.annotations.ObjectiveCName",
+        "com.google.j2objc.annotations.SwiftName",
+      )
+
+    private val SUPPORTED_PROPERTY_ANNOTATIONS =
+      setOf(
         "com.google.j2objc.annotations.ObjectiveCName",
         "com.google.j2objc.annotations.SwiftName",
       )
