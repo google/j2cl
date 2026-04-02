@@ -139,16 +139,45 @@ public class JavacParser {
     }
   }
 
+  private static final ImmutableSet<String> ALLOWED_JAVAC_OPTIONS =
+      ImmutableSet.of("--source", "--patch-module");
+
   private static ImmutableList<String> getJavacOptions(FrontendOptions options) {
-    return ImmutableList.<String>builder()
-        // Allow JRE classes to depend on internal annotations (in the unnamed module). This is
-        // needed for both JRE and non-JRE compilation; some JRE methods are annotated with
-        // internal annotations which are then read by some backends.
-        .add("--add-reads")
-        .add("java.base=ALL-UNNAMED")
-        .addAll(options.getJavacOptions())
-        .build();
+    ImmutableList.Builder<String> builder =
+        ImmutableList.<String>builder()
+            // Allow JRE classes to depend on internal annotations (in the unnamed module). This is
+            // needed for both JRE and non-JRE compilation; some JRE methods are annotated with
+            // internal annotations which are then read by some backends.
+            .add("--add-reads")
+            .add("java.base=ALL-UNNAMED");
+
+    ImmutableList<String> javacOptions = options.getJavacOptions();
+    for (int i = 0; i < javacOptions.size(); i++) {
+      JavacOption parsedOption = parseJavacOption(javacOptions.get(i));
+      if (ALLOWED_JAVAC_OPTIONS.contains(parsedOption.key())) {
+        builder.add(parsedOption.key());
+        if (parsedOption.value() != null) {
+          // Option was in key=value format
+          builder.add(parsedOption.value());
+        } else if (i + 1 < javacOptions.size() && !javacOptions.get(i + 1).startsWith("-")) {
+          // Option value is the next element
+          builder.add(javacOptions.get(i + 1));
+          i++; // Skip next element as it's the value
+        }
+      }
+    }
+    return builder.build();
   }
+
+  private static JavacOption parseJavacOption(String opt) {
+    int equalsIndex = opt.indexOf('=');
+    if (equalsIndex > 0) {
+      return new JavacOption(opt.substring(0, equalsIndex), opt.substring(equalsIndex + 1));
+    }
+    return new JavacOption(opt, null);
+  }
+
+  private static record JavacOption(String key, @Nullable String value) {}
 
   private void reportErrors(
       DiagnosticCollector<JavaFileObject> diagnosticCollector,

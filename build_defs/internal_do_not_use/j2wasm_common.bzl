@@ -84,7 +84,7 @@ def _compile_feature_set(
         plugins = plugins,
         exported_plugins = exported_plugins,
         backend = "WASM",
-        javac_opts = javac_opts + DEFAULT_J2WASM_JAVAC_OPTS,
+        javac_opts = DEFAULT_J2WASM_JAVAC_OPTS + javac_opts,
         artifact_suffix = artifact_suffix,
         internal_transpiler_flags = internal_transpiler_flags,
     )

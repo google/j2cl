@@ -49,6 +49,7 @@ def _compile(
 
     output_jar = ctx.actions.declare_file("lib%s.jar" % name)
 
+    javac_opts = DEFAULT_J2CL_JAVAC_OPTS + javac_opts
     kotlincopts = DEFAULT_J2CL_KOTLINCOPTS + kotlincopts
 
     if not has_kotlin_srcs:
@@ -215,7 +216,6 @@ def _java_compile(
         strip_annotations = ["GwtIncompatible"]):
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     stripped_java_srcs = [_strip_incompatible_annotation(ctx, name, srcs, mnemonic, strip_annotations)] if srcs else []
-    javac_opts = DEFAULT_J2CL_JAVAC_OPTS + javac_opts
 
     return java_common.compile(
         ctx,
@@ -394,6 +394,7 @@ def _j2cl_transpile(
         compilation_classpath = [d.transitive_compile_time_jars for d in jvm_deps]
 
     classpath = depset(transitive = [get_bootclasspath(ctx)] + compilation_classpath)
+    tokenized_javac_opts = [token for opt in javac_opts for token in ctx.tokenize(opt)]
     outputs = [output_dir, library_info_output]
 
     args = ctx.actions.args()
@@ -402,15 +403,7 @@ def _j2cl_transpile(
     _add_profiling_support(ctx, mnemonic, outputs, args)
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add_all("-system", jdk_system, expand_directories = False)
-
-    # TODO(b/416084067): Support Javac options with an allowlist.
-    # Forward necessary options to invoke javac in the transpiler.
-    for i in range(len(javac_opts)):
-        # We currently only support separated ["-opt", "val"]. We do not support ["-opt=val"] or
-        # ["-opt val"].
-        if javac_opts[i] == "--patch-module":
-            args.add("-javacOptions", javac_opts[i])
-            args.add("-javacOptions", javac_opts[i + 1])
+    args.add_all(tokenized_javac_opts, format_each = "-javacOptions=%s")
 
     # Explicitly format this as Bazel target labels can start with a @, which
     # can be misinterpreted as a flag file to load.
