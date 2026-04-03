@@ -234,7 +234,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
     memberDescriptorSources.nameSource(method.descriptor).withMapping(method.sourcePosition)
 
   private fun fieldNameSource(field: Field): Source =
-    memberDescriptorSources.nameSource(field.descriptor).withMapping(field.nameSourcePosition)
+    memberDescriptorSources.nameSource(field.descriptor).withMapping(field.sourcePosition)
 
   fun annotationsSource(method: Method): Source =
     newLineSeparated(
@@ -326,7 +326,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
           jsInteropAnnotationSources.jsInteropAnnotationsSource(field),
           spaceSeparated(
             join(
-              field.descriptor.enumValueDeclarationNameSource.withMapping(field.nameSourcePosition),
+              field.descriptor.enumValueDeclarationNameSource.withMapping(field.sourcePosition),
               newInstance.arguments
                 .takeIf { it.isNotEmpty() }
                 ?.let { expressionSources.invocationSource(newInstance) }

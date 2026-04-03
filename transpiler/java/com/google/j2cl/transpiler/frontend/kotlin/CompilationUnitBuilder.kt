@@ -277,8 +277,7 @@ internal class CompilationUnitBuilder(
       }
 
     return Field.Builder.from(environment.getDeclaredFieldDescriptor(irEnumEntry))
-      .setSourcePosition(getSourcePosition(irEnumEntry))
-      .setNameSourcePosition(getNameSourcePosition(irEnumEntry))
+      .setSourcePosition(getNameSourcePosition(irEnumEntry))
       .setInitializer(initializer)
       .build()
   }
@@ -309,15 +308,12 @@ internal class CompilationUnitBuilder(
       // position. In this case, we will use the name position of the object class.
       val objectNameSourcePosition = getNameSourcePosition(irField.type.classOrFail.owner)
       sourcePosition = objectNameSourcePosition
-      nameSourcePosition = objectNameSourcePosition
     } else {
-      sourcePosition = getSourcePosition(irField)
-      nameSourcePosition = getNameSourcePosition(irField)
+      sourcePosition = getNameSourcePosition(irField)
     }
 
     return Field.Builder.from(declaredFieldDescriptor)
       .setSourcePosition(sourcePosition)
-      .setNameSourcePosition(nameSourcePosition)
       .setInitializer(initializer)
       .build()
   }
@@ -609,7 +605,9 @@ internal class CompilationUnitBuilder(
     convertExpression(irExpression).makeStatement(getSourcePosition(irExpression))
 
   private fun convertExpressions(expressions: List<IrExpression>): List<Expression> =
-    expressions.map { convertExpression(it) }
+    expressions.map {
+      convertExpression(it)
+    }
 
   private fun convertExpression(irExpression: IrExpression): Expression =
     when (irExpression) {

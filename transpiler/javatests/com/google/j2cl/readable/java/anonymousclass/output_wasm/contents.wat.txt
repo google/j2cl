@@ -212,7 +212,7 @@
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:75:10
   (global.set $$class-initialized@anonymousclass.SomeInterface (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:76:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:76:12
   (global.set $implicitlyStatic@anonymousclass.SomeInterface (call $$create__int@anonymousclass.SomeInterface.1 (i32.const 1)))
  )
 )
@@ -517,7 +517,7 @@
   (global.set $$class-initialized@anonymousclass.JsConstructorClass (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:104:6
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:112:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:112:17
   (global.set $trueVar@anonymousclass.JsConstructorClass (i32.const 1))
  )
 )
@@ -835,9 +835,9 @@
  (param $this (ref null $anonymousclass.AnonymousClass.1))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:40:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:41:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:41:17
   (struct.set $anonymousclass.AnonymousClass.1 $outer@anonymousclass.AnonymousClass.1 (local.get $this) (struct.get $anonymousclass.AnonymousClass.1 $$outer_this@anonymousclass.AnonymousClass.1 (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:42:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:42:17
   (struct.set $anonymousclass.AnonymousClass.1 $other@anonymousclass.AnonymousClass.1 (local.get $this) (struct.get $anonymousclass.AnonymousClass.1 $$captured_a@anonymousclass.AnonymousClass.1 (local.get $this)))
  )
 )
@@ -942,9 +942,9 @@
  (param $this (ref null $anonymousclass.AnonymousClass.2))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:53:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:54:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:54:17
   (struct.set $anonymousclass.AnonymousClass.2 $object@anonymousclass.AnonymousClass.2 (local.get $this) (local.get $this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:55:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:55:17
   (struct.set $anonymousclass.AnonymousClass.2 $outer@anonymousclass.AnonymousClass.2 (local.get $this) (struct.get $anonymousclass.AnonymousClass.2 $$outer_this@anonymousclass.AnonymousClass.2 (local.get $this)))
  )
 )
@@ -1049,9 +1049,9 @@
  (param $this (ref null $anonymousclass.AnonymousClass.3))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:64:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:65:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:65:17
   (struct.set $anonymousclass.AnonymousClass.3 $object@anonymousclass.AnonymousClass.3 (local.get $this) (local.get $this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:66:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:66:17
   (struct.set $anonymousclass.AnonymousClass.3 $outer@anonymousclass.AnonymousClass.3 (local.get $this) (struct.get $anonymousclass.AnonymousClass.3 $$outer_this@anonymousclass.AnonymousClass.3 (local.get $this)))
  )
 )
@@ -1245,7 +1245,7 @@
  (param $this (ref null $anonymousclass.SomeInterface.2))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:92:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:94:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/anonymousclass/readable-j2wasm.js/anonymousclass/AnonymousClass.java:94:10
   (struct.set $anonymousclass.SomeInterface.2 $capturedI@anonymousclass.SomeInterface.2 (local.get $this) (struct.get $anonymousclass.SomeInterface.2 $$captured_i@anonymousclass.SomeInterface.2 (local.get $this)))
  )
 )

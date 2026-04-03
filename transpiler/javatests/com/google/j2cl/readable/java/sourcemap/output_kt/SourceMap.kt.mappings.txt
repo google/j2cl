@@ -1,5 +1,5 @@
 [SourceMap] => [SourceMap]
-[private int uninitializedInstanceField;] => [private var uninitializedInstanceField: Int = 0]
+[uninitializedInstanceField] => [private var uninitializedInstanceField: Int = 0]
 [uninitializedInstanceField] => [uninitializedInstanceField]
 [{
     uninitializedInstanceField = 1000;
@@ -7,7 +7,7 @@
   this.uninitializedInstanceField = 1000
  }]
 [uninitializedInstanceField = 1000;] => [this.uninitializedInstanceField = 1000]
-[private String uninitializedInstanceField2;] => [private var uninitializedInstanceField2: String? = null]
+[uninitializedInstanceField2] => [private var uninitializedInstanceField2: String? = null]
 [uninitializedInstanceField2] => [uninitializedInstanceField2]
 [{
     if (uninitializedInstanceField == 1000) {
@@ -72,7 +72,7 @@
 [uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
 [uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
 [this(2);] => [this(2)]
-[private int initializedInstanceField = 2;] => [private var initializedInstanceField: Int = 2]
+[initializedInstanceField] => [private var initializedInstanceField: Int = 2]
 [initializedInstanceField] => [initializedInstanceField]
 [testStatements] => [testStatements]
 [a] => [a] "a"
@@ -329,7 +329,7 @@
 [o] => [return@Function o]
 [testTypeLiteral] => [testTypeLiteral]
 [return String.class;] => [return String::class.javaObjectType]
-[static double uninitializedStaticField;] => [@JvmField
+[uninitializedStaticField] => [@JvmField
   internal var uninitializedStaticField_pp_sourcemap: Double = 0.0]
 [uninitializedStaticField] => [uninitializedStaticField_pp_sourcemap]
 [static {
@@ -338,7 +338,7 @@
    SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
   }]
 [uninitializedStaticField = 10.0;] => [SourceMap.uninitializedStaticField_pp_sourcemap = 10.0]
-[static String initializedStaticField = "Hello";] => [@JvmField
+[initializedStaticField] => [@JvmField
   internal var initializedStaticField_pp_sourcemap: String? = "Hello"]
 [initializedStaticField] => [initializedStaticField_pp_sourcemap]
 [static {
@@ -376,7 +376,7 @@
   )]
 [InnerClass] => [InnerClass]
 [i] => [i] "i"
-[public final int field;] => [@JvmField
+[field] => [@JvmField
   val field: Int]
 [field] => [field]
 [InnerClass] => [init]
@@ -389,7 +389,7 @@
 [A] => [A]
 [B] => [B]
 [C] => [C]
-[public final String value;] => [@JvmField
+[value] => [@JvmField
   val value: String?]
 [value] => [value]
 [StringJsEnum] => [constructor]

@@ -287,8 +287,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       checkArgument(fieldDescriptor.isEnumConstant());
       return Field.Builder.from(fieldDescriptor)
           .setInitializer(initializer)
-          .setSourcePosition(getSourcePosition(enumConstantDeclaration))
-          .setNameSourcePosition(getSourcePosition(enumConstantDeclaration.getName()))
+          .setSourcePosition(getSourcePosition(enumConstantDeclaration.getName()))
           .build();
     }
 
@@ -303,8 +302,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         Field field =
             Field.Builder.from(environment.createFieldDescriptor(variableBinding))
                 .setInitializer(initializer)
-                .setSourcePosition(getSourcePosition(fieldDeclaration))
-                .setNameSourcePosition(getSourcePosition(fragment.getName()))
+                .setSourcePosition(getSourcePosition(fragment.getName()))
                 .build();
         fields.add(field);
       }

@@ -294,8 +294,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     initializer = convertExpressionOrNull(fieldDeclaration.getInitializer());
     return Field.Builder.from(environment.createFieldDescriptor(variableElement))
         .setInitializer(initializer)
-        .setSourcePosition(getSourcePosition(fieldDeclaration))
-        .setNameSourcePosition(getNamePosition(fieldDeclaration))
+        .setSourcePosition(getNamePosition(fieldDeclaration))
         .build();
   }
 

@@ -224,8 +224,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           @JsProperty
           public static final int show = 0;
           @JsProperty(name = "show")
-        > Error: 'Buggy.display' and 'Buggy.show' cannot both use the same JavaScript name 'show'.
           public static final int display = 0;
+        > Error: 'Buggy.display' and 'Buggy.show' cannot both use the same JavaScript name 'show'.
         }
         """);
   }
@@ -485,8 +485,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           @JsMethod
           public static void show() {}
           @JsProperty
-        > Error: 'Buggy.show' and 'void Buggy.show()' cannot both use the same JavaScript name 'show'.
           public static final int show = 0;
+        > Error: 'Buggy.show' and 'void Buggy.show()' cannot both use the same JavaScript name 'show'.
         }
         """);
   }
@@ -1658,8 +1658,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           private native void nativeMethod();
         > Error: JsFunction implementation method 'void Buggy.nativeMethod()' cannot be native.
           @JsProperty
-        > Error: JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty nor JsConstructor.
           public int prop = 0;
+        > Error: JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty nor JsConstructor.
           public String toString() { return ""; }
         > Error: JsFunction implementation method 'String Buggy.toString()' cannot override a supertype method.
           public boolean equals(Object o) { return false; }

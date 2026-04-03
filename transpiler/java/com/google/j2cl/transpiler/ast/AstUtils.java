@@ -481,7 +481,7 @@ public final class AstUtils {
         FieldAccess.newBuilder()
             .setTarget(fieldDescriptor)
             .setDefaultInstanceQualifier()
-            .setSourcePosition(field.getNameSourcePosition())
+            .setSourcePosition(field.getSourcePosition())
             .build();
 
     if (field.getInitializer() != null) {

@@ -133,7 +133,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               sourceBuilder.appendln(" /** @deprecated */");
             }
             sourceBuilder.emitWithMapping(
-                field.getNameSourcePosition(), () -> sourceBuilder.append(field.getMangledName()));
+                field.getSourcePosition(), () -> sourceBuilder.append(field.getMangledName()));
             sourceBuilder.append(" : ");
             ExpressionTranspiler.render(field.getInitializer(), environment, sourceBuilder);
             sourceBuilder.append(",");

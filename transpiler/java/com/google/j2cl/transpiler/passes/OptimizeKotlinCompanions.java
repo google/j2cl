@@ -348,7 +348,6 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
                 getCompanionInstanceFieldOnCompanion(
                     companionInstanceOnEnclosingType.getDescriptor()))
             .setSourcePosition(companionInstanceOnEnclosingType.getSourcePosition())
-            .setNameSourcePosition(companionInstanceOnEnclosingType.getNameSourcePosition())
             .build();
     companion.addMember(companionInstanceOnCompanion);
 

@@ -633,7 +633,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:20:13
  (local $$value i64)
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:95:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:95:14
   (struct.set $arithmeticexpressions.ArithmeticExpressions $bar@arithmeticexpressions.ArithmeticExpressions (local.get $this) (block (result i64)
    (local.set $$value (global.get $foo@arithmeticexpressions.ArithmeticExpressions))
    (global.set $foo@arithmeticexpressions.ArithmeticExpressions (i64.add (global.get $foo@arithmeticexpressions.ArithmeticExpressions) (i64.const 1)))
@@ -658,15 +658,15 @@
   (global.set $$class-initialized@arithmeticexpressions.ArithmeticExpressions (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:93:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:93:21
   (global.set $one@arithmeticexpressions.ArithmeticExpressions (i64.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:94:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:94:21
   (global.set $foo@arithmeticexpressions.ArithmeticExpressions (block (result i64)
    (local.set $$value (global.get $one@arithmeticexpressions.ArithmeticExpressions))
    (global.set $one@arithmeticexpressions.ArithmeticExpressions (i64.add (global.get $one@arithmeticexpressions.ArithmeticExpressions) (i64.const 1)))
    (local.get $$value)
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:216:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/arithmeticexpressions/readable-j2wasm.js/arithmeticexpressions/ArithmeticExpressions.java:216:22
   (global.set $counter@arithmeticexpressions.ArithmeticExpressions (i64.const 0))
  )
 )
