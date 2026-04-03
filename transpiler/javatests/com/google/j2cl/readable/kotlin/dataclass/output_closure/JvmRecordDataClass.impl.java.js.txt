@@ -1,0 +1,112 @@
+goog.module('dataclass.JvmRecordDataClass$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class JvmRecordDataClass extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_f__dataclass_JvmRecordDataClass_ = 0;
+  /**@type {string} @nodts*/
+  this.f_z__dataclass_JvmRecordDataClass_;
+ }
+ /** @nodts @return {!JvmRecordDataClass} */
+ static $create__int__java_lang_String(/** number */ f, /** string */ z) {
+  JvmRecordDataClass.$clinit();
+  let $instance = new JvmRecordDataClass();
+  $instance.$ctor__dataclass_JvmRecordDataClass__int__java_lang_String__void(f, z);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_JvmRecordDataClass__int__java_lang_String__void(/** number */ f, /** string */ z) {
+  this.$ctor__java_lang_Record__void();
+  this.f_f__dataclass_JvmRecordDataClass_ = f;
+  this.f_z__dataclass_JvmRecordDataClass_ = z;
+ }
+ /** @final @nodts @return {number} */
+ m_f__int() {
+  return this.f_f__dataclass_JvmRecordDataClass_;
+ }
+ /** @final @nodts @return {string} */
+ m_z__java_lang_String() {
+  return this.f_z__dataclass_JvmRecordDataClass_;
+ }
+ /** @final @nodts @return {number} */
+ m_component1__int() {
+  return this.f_f__dataclass_JvmRecordDataClass_;
+ }
+ /** @final @nodts @return {string} */
+ m_component2__java_lang_String() {
+  return this.f_z__dataclass_JvmRecordDataClass_;
+ }
+ /** @final @nodts @return {!JvmRecordDataClass} */
+ m_copy__int__java_lang_String__dataclass_JvmRecordDataClass(/** number */ f, /** string */ z) {
+  return JvmRecordDataClass.$create__int__java_lang_String(f, z);
+ }
+ /** @nodts @return {!JvmRecordDataClass} */
+ static m_copy$default__dataclass_JvmRecordDataClass__int__java_lang_String__dataclass_JvmRecordDataClass(/** !JvmRecordDataClass */ $this, /** number= */ f, /** string= */ z) {
+  let f$defaulted = $Util.$isUndefined(f) ? $this.f_f__dataclass_JvmRecordDataClass_ : f;
+  let z$defaulted = $Util.$isUndefined(z) ? $this.f_z__dataclass_JvmRecordDataClass_ : z;
+  return $this.m_copy__int__java_lang_String__dataclass_JvmRecordDataClass(f$defaulted, z$defaulted);
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'JvmRecordDataClass(' + 'f=' + this.f_f__dataclass_JvmRecordDataClass_ + ', ' + 'z=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_z__dataclass_JvmRecordDataClass_) + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let result = $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_f__dataclass_JvmRecordDataClass_));
+  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(this.f_z__dataclass_JvmRecordDataClass_) | 0;
+  return result;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!JvmRecordDataClass.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!JvmRecordDataClass}*/ (other);
+  if (this.f_f__dataclass_JvmRecordDataClass_ != tmp0_other_with_cast.f_f__dataclass_JvmRecordDataClass_) {
+   return false;
+  }
+  if (!$Equality.$same(this.f_z__dataclass_JvmRecordDataClass_, tmp0_other_with_cast.f_z__dataclass_JvmRecordDataClass_)) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  JvmRecordDataClass.$clinit = () =>{};
+  JvmRecordDataClass.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JvmRecordDataClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(JvmRecordDataClass, 'dataclass.JvmRecordDataClass');
+
+exports = JvmRecordDataClass;
+
+//# sourceMappingURL=JvmRecordDataClass.js.map

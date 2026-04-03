@@ -51,8 +51,11 @@ data class IntValueHolder(override val backingValue: Int) : ValueHolder<Int>
 
 data class ArrayMembers(private val a: IntArray, private val b: Array<String>)
 
+@kotlin.jvm.JvmRecord data class JvmRecordDataClass(val f: Int, val z: String)
+
 fun main() {
   val (foo) = BasicDataClass(1)
   val (a, b, c) = PolymorphicDataType(1, 2, 3)
   IntValueHolder(10).backingValue
+  val (f, z) = JvmRecordDataClass(1, "a")
 }
