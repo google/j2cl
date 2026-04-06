@@ -38,6 +38,7 @@ public class Main {
     testJavaKotlinMixedHierarchyFromKotlinWithoutExplicitOverride();
     testDefaultArguments();
     testDefaultArgumentsWithVarargs();
+    testJsTypeClass();
     testDataClass();
     testJsTypeDataClass();
     testJvmRecordDataClass();
@@ -213,6 +214,13 @@ public class Main {
     assertEquals(
         new int[] {20, 4, 5, 6},
         KotlinOptionalVarargs.optionalVarargsWithLeadingOptional(20, new int[] {4, 5, 6}));
+  }
+
+  private static void testJsTypeClass() {
+    JsTypeClass jsTypeClass = new JsTypeClass(1, "foo");
+    // TODO(b/499370830): Uncomment when the bug is fixed.
+    // assertEquals(1, jsTypeClass.getX());
+    // assertEquals("foo", jsTypeClass.getY());
   }
 
   private static void testDataClass() {

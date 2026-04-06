@@ -146,6 +146,8 @@ object KotlinOptionalVarargs {
   ) = intArrayOf(optional, *args)
 }
 
+@JsType class JsTypeClass(val x: Int, val y: String)
+
 data class DataClass(val x: Int, val y: String)
 
 @JsType data class JsTypeDataClass(val x: Int, val y: String)
