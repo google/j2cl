@@ -58,15 +58,15 @@ class JsTypeDataClass extends j_l_Object {
  component2() {
   return this.f_bar__dataclass_JsTypeDataClass_;
  }
- /** @final @return {!JsTypeDataClass} */
- copy(/** number */ foo, /** number */ bar) {
+ /** @final @nodts @return {!JsTypeDataClass} */
+ m_copy__int__int__dataclass_JsTypeDataClass(/** number */ foo, /** number */ bar) {
   return new JsTypeDataClass(foo, bar);
  }
  /** @nodts @return {!JsTypeDataClass} */
  static m_copy$default__dataclass_JsTypeDataClass__int__int__dataclass_JsTypeDataClass(/** !JsTypeDataClass */ $this, /** number= */ foo, /** number= */ bar) {
   let foo$defaulted = $Util.$isUndefined(foo) ? $this.f_foo__dataclass_JsTypeDataClass_ : foo;
   let bar$defaulted = $Util.$isUndefined(bar) ? $this.f_bar__dataclass_JsTypeDataClass_ : bar;
-  return $this.copy(foo$defaulted, bar$defaulted);
+  return $this.m_copy__int__int__dataclass_JsTypeDataClass(foo$defaulted, bar$defaulted);
  }
  /** @override @return {string} */
  toString() {

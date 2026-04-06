@@ -170,7 +170,10 @@ val IrDeclaration.isJsIgnore: Boolean
       // otherwise conflict the "real" JS member.
       origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
       // Instance field of the Companion class should be marked as JsIgnore
-      isCompanionInstanceField
+      isCompanionInstanceField ||
+      // Hide copy method of data classes from JS callers since they are not functional for JS use.
+      (this as? IrFunction)?.takeIf { it.name.asString() == "copy" }?.origin ==
+        IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER
 
 private val IrDeclaration.isCompanionInstanceField: Boolean
   get() =

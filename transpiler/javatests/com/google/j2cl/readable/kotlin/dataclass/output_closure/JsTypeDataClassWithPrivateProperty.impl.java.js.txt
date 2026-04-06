@@ -28,14 +28,14 @@ class JsTypeDataClassWithPrivateProperty extends j_l_Object {
  m_component1__int_$p_dataclass_JsTypeDataClassWithPrivateProperty() {
   return this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_;
  }
- /** @final @return {!JsTypeDataClassWithPrivateProperty} */
- copy(/** number */ foo) {
+ /** @final @nodts @return {!JsTypeDataClassWithPrivateProperty} */
+ m_copy__int__dataclass_JsTypeDataClassWithPrivateProperty(/** number */ foo) {
   return new JsTypeDataClassWithPrivateProperty(foo);
  }
  /** @nodts @return {!JsTypeDataClassWithPrivateProperty} */
  static m_copy$default__dataclass_JsTypeDataClassWithPrivateProperty__int__dataclass_JsTypeDataClassWithPrivateProperty(/** !JsTypeDataClassWithPrivateProperty */ $this, /** number= */ foo) {
   let foo$defaulted = $Util.$isUndefined(foo) ? $this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_ : foo;
-  return $this.copy(foo$defaulted);
+  return $this.m_copy__int__dataclass_JsTypeDataClassWithPrivateProperty(foo$defaulted);
  }
  /** @override @return {string} */
  toString() {

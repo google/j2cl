@@ -32,14 +32,14 @@ class JsTypeDataClassWithJsIgnore extends j_l_Object {
  component1() {
   return this.f_foo__dataclass_JsTypeDataClassWithJsIgnore_;
  }
- /** @final @return {!JsTypeDataClassWithJsIgnore} */
- copy(/** number */ foo) {
+ /** @final @nodts @return {!JsTypeDataClassWithJsIgnore} */
+ m_copy__int__dataclass_JsTypeDataClassWithJsIgnore(/** number */ foo) {
   return new JsTypeDataClassWithJsIgnore(foo);
  }
  /** @nodts @return {!JsTypeDataClassWithJsIgnore} */
  static m_copy$default__dataclass_JsTypeDataClassWithJsIgnore__int__dataclass_JsTypeDataClassWithJsIgnore(/** !JsTypeDataClassWithJsIgnore */ $this, /** number= */ foo) {
   let foo$defaulted = $Util.$isUndefined(foo) ? $this.f_foo__dataclass_JsTypeDataClassWithJsIgnore_ : foo;
-  return $this.copy(foo$defaulted);
+  return $this.m_copy__int__dataclass_JsTypeDataClassWithJsIgnore(foo$defaulted);
  }
  /** @override @return {string} */
  toString() {
