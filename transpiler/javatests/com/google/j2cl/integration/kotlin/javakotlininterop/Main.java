@@ -224,7 +224,7 @@ public class Main {
 
   private static void testJsTypeDataClass() {
     JsTypeDataClass data = new JsTypeDataClass(2, "bar");
-    // TODO(498763782): Uncomment when the bug is fixed.
+    // TODO(b/499370830): Uncomment when the bug is fixed.
     // assertEquals(2, data.getX());
     // assertEquals("bar", data.getY());
     assertEquals(new JsTypeDataClass(2, "bar"), data);
