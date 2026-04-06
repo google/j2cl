@@ -64,29 +64,22 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         abstract class Buggy {
           C anotherField;
         > Error: Native JsType field 'Buggy.anotherField' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Type 'C' of field 'Buggy.anotherField' is not usable by but exposed to JavaScript.
           Buggy(C arg) {}
         > Error: Parameter 'arg' in 'Buggy(C arg)' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Type of parameter 'arg' in 'Buggy(C arg)' is not usable by but exposed to JavaScript.
           native void test(Object c);
         > Error: Parameter 'c' in 'void Buggy.test(Object c)' cannot be of type 'Object'.
           native <T> void test2(T c);
         > Error: Parameter 'c' in 'void Buggy.test2(T c)' cannot be of type 'T'.
           native void test3(C c);
         > Error: Parameter 'c' in 'void Buggy.test3(C c)' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Type of parameter 'c' in 'void Buggy.test3(C c)' is not usable by but exposed to JavaScript.
           abstract void test4(C c);
         > Error: Parameter 'c' in 'void Buggy.test4(C c)' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Type of parameter 'c' in 'void Buggy.test4(C c)' is not usable by but exposed to JavaScript.
           native C testReturn();
         > Error: Return type of 'C Buggy.testReturn()' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Return type of 'C Buggy.testReturn()' is not usable by but exposed to JavaScript.
           @JsProperty native C getField();
         > Error: Return type of 'C Buggy.getField()' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Return type of 'C Buggy.getField()' is not usable by but exposed to JavaScript.
           @JsProperty native void setField(C c);
         > Error: Parameter 'c' in 'void Buggy.setField(C c)' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Type of parameter 'c' in 'void Buggy.setField(C c)' is not usable by but exposed to JavaScript.
         }
         class C {}
         """);
@@ -107,11 +100,9 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           @JsMethod
           static native void test3(C c);
         > Error: Parameter 'c' in 'void Main.test3(C c)' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Type of parameter 'c' in 'void Main.test3(C c)' is not usable by but exposed to JavaScript.
           @JsMethod
           static native C test4();
         > Error: Return type of 'C Main.test4()' cannot be of type 'C'.
-        > Warning: [unusable-by-js] Return type of 'C Main.test4()' is not usable by but exposed to JavaScript.
         }
         class C {}
         """);

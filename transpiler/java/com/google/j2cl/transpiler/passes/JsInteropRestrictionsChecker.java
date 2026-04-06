@@ -2558,7 +2558,8 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void warnIfUnusableByJs(TypeDescriptor typeDescriptor, String prefix, Member member) {
-    if (typeDescriptor.canBeReferencedExternally()) {
+    // TODO(b/499380520): Consolidate with type boundary checks on the WASM side.
+    if (typeDescriptor.canBeReferencedExternally() || checkWasmRestrictions) {
       return;
     }
 
