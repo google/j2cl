@@ -36,6 +36,7 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class J2clTranspilerOptions implements FrontendOptions, BackendOptions {
 
+  @Nullable
   public abstract Frontend getFrontend();
 
   public abstract Backend getBackend();
@@ -83,7 +84,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setOptimizeAutoValue(boolean b);
 
-    public abstract Builder setFrontend(Frontend frontend);
+    public abstract Builder setFrontend(@Nullable Frontend frontend);
 
     public abstract Builder setBackend(Backend backend);
 
@@ -115,9 +116,53 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setObjCNamePrefix(String objCNamePrefix);
 
+    abstract ImmutableList<FileInfo> getSources();
+
+    @Nullable
+    abstract Frontend getFrontend();
+
+    abstract Backend getBackend();
+
+    abstract boolean getEmitReadableSourceMap();
+
+    abstract boolean getGenerateKytheIndexingMetadata();
+
     abstract J2clTranspilerOptions autoBuild();
 
     public J2clTranspilerOptions build(Problems problems) {
+      boolean readableSourceMaps = getEmitReadableSourceMap();
+      boolean generateKytheIndexingMetadata = getGenerateKytheIndexingMetadata();
+      if (readableSourceMaps && generateKytheIndexingMetadata) {
+        problems.warning(
+            "Readable source maps are not available when generating Kythe indexing metadata.");
+        setEmitReadableSourceMap(false);
+      }
+
+      ImmutableList<FileInfo> allSources = getSources();
+      ImmutableList<FileInfo> allJavaSources =
+          allSources.stream()
+              .filter(p -> p.sourcePath().endsWith(".java"))
+              .collect(toImmutableList());
+
+      ImmutableList<FileInfo> allKotlinSources =
+          allSources.stream()
+              .filter(p -> p.sourcePath().endsWith(".kt"))
+              .collect(toImmutableList());
+
+      if (!allJavaSources.isEmpty() && !allKotlinSources.isEmpty()) {
+        throw new AssertionError(
+            "Transpilation of Java and Kotlin files together is not supported yet.");
+      }
+
+      // Set the sources explicitly since original sources can include non-java/kotlin files.
+      setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources);
+
+      Frontend frontend = getFrontend();
+      if (frontend == null) {
+        setFrontend(
+            !allKotlinSources.isEmpty() ? Frontend.KOTLIN : getBackend().getDefaultFrontend());
+      }
+
       J2clTranspilerOptions options = autoBuild();
 
       // Validate the entry point syntax.

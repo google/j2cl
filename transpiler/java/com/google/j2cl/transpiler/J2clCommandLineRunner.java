@@ -168,35 +168,11 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   private J2clTranspilerOptions createOptions(Output output) {
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar", ".kt");
 
-    if (this.frontend == null) {
-      this.frontend = this.backend.getDefaultFrontend();
-    }
-
-    if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
-      problems.warning(
-          "Readable source maps are not available when generating Kythe indexing metadata.");
-      this.readableSourceMaps = false;
-    }
-
     ImmutableList<FileInfo> allSources =
         SourceUtils.getAllSources(
                 this.files.stream(), output.createTempDirectory("_source_jars"), problems)
             .collect(toImmutableList());
     problems.abortIfCancelled();
-
-    ImmutableList<FileInfo> allJavaSources =
-        allSources.stream()
-            .filter(p -> p.sourcePath().endsWith(".java"))
-            .collect(toImmutableList());
-
-    ImmutableList<FileInfo> allKotlinSources =
-        allSources.stream().filter(p -> p.sourcePath().endsWith(".kt")).collect(toImmutableList());
-
-    // TODO(b/226952880): add support for transpiling java and kotlin simultaneously.
-    if (!allJavaSources.isEmpty() && !allKotlinSources.isEmpty()) {
-      throw new AssertionError(
-          "Transpilation of Java and Kotlin files together is not supported yet.");
-    }
 
     ImmutableList<FileInfo> allNativeSources =
         SourceUtils.getAllSources(
@@ -208,7 +184,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     problems.abortIfCancelled();
 
     return J2clTranspilerOptions.newBuilder()
-        .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
+        .setSources(allSources)
         .setNativeSources(allNativeSources)
         .setClasspaths(this.classPath)
         .setSystem(this.system)

@@ -19,7 +19,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.CommandLineParser;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
-import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.common.bazel.BazelWorker;
@@ -190,39 +189,11 @@ final class BazelJ2clBuilder extends BazelWorker {
   }
 
   private J2clTranspilerOptions createOptions(Output output) {
-
-    if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
-      problems.warning(
-          "Readable source maps are not available when generating Kythe indexing metadata.");
-      this.readableSourceMaps = false;
-    }
-
-    if (javaFrontend == null) {
-      javaFrontend = backend.getDefaultFrontend();
-    }
-
-    if (!javaFrontend.isJavaFrontend()) {
-      problems.fatal(FatalError.INVALID_JAVA_FRONTEND, javaFrontend);
-    }
-
-    Path sourceJarDir = output.createTempDirectory("_source_jars");
     ImmutableList<FileInfo> allSources =
-        SourceUtils.getAllSources(sources.stream(), sourceJarDir, problems)
+        SourceUtils.getAllSources(
+                sources.stream(), output.createTempDirectory("_source_jars"), problems)
             .collect(toImmutableList());
     problems.abortIfCancelled();
-
-    ImmutableList<FileInfo> allJavaSources =
-        allSources.stream()
-            .filter(p -> p.sourcePath().endsWith(".java"))
-            .collect(toImmutableList());
-
-    ImmutableList<FileInfo> allKotlinSources =
-        allSources.stream().filter(p -> p.sourcePath().endsWith(".kt")).collect(toImmutableList());
-
-    if (!allJavaSources.isEmpty() && !allKotlinSources.isEmpty()) {
-      throw new AssertionError(
-          "Transpilation of Java and Kotlin files together is not supported yet.");
-    }
 
     ImmutableList<FileInfo> allNativeSources =
         allSources.stream()
@@ -236,11 +207,7 @@ final class BazelJ2clBuilder extends BazelWorker {
     problems.abortIfCancelled();
 
     return J2clTranspilerOptions.newBuilder()
-        .setSources(
-            ImmutableList.<FileInfo>builder()
-                .addAll(allJavaSources)
-                .addAll(allKotlinSources)
-                .build())
+        .setSources(allSources)
         .setNativeSources(allNativeSources)
         .setClasspaths(this.classpaths)
         .setSystem(this.system)
@@ -252,7 +219,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setSourceMappingPathPrefix(this.sourceMappingPathPrefix)
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
-        .setFrontend(allKotlinSources.isEmpty() ? javaFrontend : Frontend.KOTLIN)
+        .setFrontend(this.javaFrontend)
         .setBackend(this.backend)
         .setWasmEntryPointStrings(this.wasmEntryPoints)
         .setEnableWasmCustomDescriptors(this.enableWasmCustomDescriptors)
