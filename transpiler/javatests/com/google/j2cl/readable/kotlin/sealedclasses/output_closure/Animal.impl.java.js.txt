@@ -2,8 +2,11 @@ goog.module('sealedclasses.Animal$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let J2clSealedTypeMarker = goog.forwardDeclare('javaemul.internal.J2clSealedTypeMarker');
+
 /**
  * @interface
+ * @extends {J2clSealedTypeMarker}
  */
 class Animal {
  /** @nodts */

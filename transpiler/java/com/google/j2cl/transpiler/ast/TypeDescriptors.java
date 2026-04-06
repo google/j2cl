@@ -158,6 +158,10 @@ public class TypeDescriptors {
   @Nullable public DeclaredTypeDescriptor javaemulInternalAsserts;
 
   @Nullable
+  @QualifiedBinaryName("javaemul.internal.J2clSealedTypeMarker")
+  public DeclaredTypeDescriptor javaemulInternalSealedTypeMarker;
+
+  @Nullable
   @QualifiedBinaryName("javaemul.internal.ValueType")
   public DeclaredTypeDescriptor javaemulInternalValueType;
 

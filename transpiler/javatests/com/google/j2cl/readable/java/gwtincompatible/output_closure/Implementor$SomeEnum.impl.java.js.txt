@@ -4,6 +4,7 @@ const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('gwtincompatible.Implementor.SomeEnum.$1$impl');
+let J2clSealedTypeMarker = goog.forwardDeclare('javaemul.internal.J2clSealedTypeMarker');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
@@ -11,6 +12,7 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 /**
  * @abstract
  * @extends {Enum<SomeEnum>}
+ * @implements {J2clSealedTypeMarker}
  */
 class SomeEnum extends Enum {
  /** @protected @nodts */

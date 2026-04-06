@@ -46,6 +46,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private final SourcePosition sourcePosition;
   private boolean isAbstract;
   private DeclaredTypeDescriptor superTypeDescriptor;
+  private ImmutableList<DeclaredTypeDescriptor> superInterfaceTypeDescriptors;
   private final boolean isJavaRecord;
   private boolean isOptimizedEnum;
 
@@ -59,6 +60,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     this.typeDeclaration = typeDeclaration;
     this.isAbstract = typeDeclaration.isAbstract();
     this.superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
+    this.superInterfaceTypeDescriptors = typeDeclaration.getInterfaceTypeDescriptors();
     this.isJavaRecord = isJavaRecord;
   }
 
@@ -247,8 +249,13 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return superTypeDescriptor;
   }
 
+  public void setSuperInterfaceTypeDescriptors(
+      ImmutableList<DeclaredTypeDescriptor> superInterfaceTypeDescriptors) {
+    this.superInterfaceTypeDescriptors = superInterfaceTypeDescriptors;
+  }
+
   public List<DeclaredTypeDescriptor> getSuperInterfaceTypeDescriptors() {
-    return typeDeclaration.getInterfaceTypeDescriptors();
+    return superInterfaceTypeDescriptors;
   }
 
   public Stream<DeclaredTypeDescriptor> getSuperTypesStream() {

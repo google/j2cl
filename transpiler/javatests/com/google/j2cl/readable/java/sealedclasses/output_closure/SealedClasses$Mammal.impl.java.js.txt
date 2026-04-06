@@ -4,9 +4,12 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const Animal = goog.require('sealedclasses.SealedClasses.Animal$impl');
 
+let J2clSealedTypeMarker = goog.forwardDeclare('javaemul.internal.J2clSealedTypeMarker');
+
 /**
  * @abstract
  * @implements {Animal}
+ * @implements {J2clSealedTypeMarker}
  */
 class Mammal extends j_l_Object {
  /** @protected @nodts */

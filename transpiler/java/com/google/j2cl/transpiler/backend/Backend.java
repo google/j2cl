@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.passes.AddInterfaceConstructorCasts;
 import com.google.j2cl.transpiler.passes.AddJavaLangObjectForwardingMethods;
 import com.google.j2cl.transpiler.passes.AddJsExportBridgesWasm;
 import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
+import com.google.j2cl.transpiler.passes.AddSealedClassMarker;
 import com.google.j2cl.transpiler.passes.AddSwitchExpressionsExhaustivenessCheck;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesJ2kt;
 import com.google.j2cl.transpiler.passes.AnnotateProtobufMethodsAsKtProperties;
@@ -282,6 +283,7 @@ public enum Backend {
           ImplementLambdaExpressionsViaJsFunctionAdaptor::new,
           NormalizeFunctionExpressions::new,
           ConvertLocalFunctionDeclarationToFunctionExpressions::new,
+          AddSealedClassMarker::new,
           // Compute bridge methods before optimizing autovalue, since inlining the autovalue
           // classes requires inlining the bridges as well.
           AddBridgeMethods::new,
