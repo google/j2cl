@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OVERLAY_A
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
+import org.jetbrains.kotlin.builtins.StandardNames.DATA_CLASS_COMPONENT_PREFIX
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
@@ -171,15 +172,20 @@ val IrDeclaration.isJsIgnore: Boolean
       origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
       // Instance field of the Companion class should be marked as JsIgnore
       isCompanionInstanceField ||
-      // Hide copy method of data classes from JS callers since they are not functional for JS use.
-      (this as? IrFunction)?.takeIf { it.name.asString() == "copy" }?.origin ==
-        IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER
+      // Hide synthetic members of data classes from JS callers.
+      isDataClassSyntheticHelper
 
 private val IrDeclaration.isCompanionInstanceField: Boolean
   get() =
     this is IrField &&
       type.getClass()?.isCompanion == true &&
       origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE
+
+private val IrDeclaration.isDataClassSyntheticHelper: Boolean
+  get() =
+    this is IrFunction &&
+      origin == IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER &&
+      (name.asString() == "copy" || name.asString().startsWith(DATA_CLASS_COMPONENT_PREFIX))
 
 val IrProperty.isJsProperty: Boolean
   get() = getJsPropertyAnnotation() != null
