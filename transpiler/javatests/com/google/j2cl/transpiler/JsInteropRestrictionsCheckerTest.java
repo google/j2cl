@@ -18,8 +18,6 @@ package com.google.j2cl.transpiler;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
-import java.util.ArrayList;
-import java.util.List;
 import junit.framework.TestCase;
 
 /** Tests for JsInteropRestrictionsChecker. */
@@ -4438,65 +4436,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   }
 
   private void assertWithInlineMessages(String... compilationUnitsAndSources) {
-    List<String> expectedErrors = new ArrayList<>();
-    List<String> expectedWarnings = new ArrayList<>();
-    var tester = newTesterWithDefaults();
-
-    for (int i = 0; i < compilationUnitsAndSources.length; i += 2) {
-      String compilationUnit = compilationUnitsAndSources[i];
-      String source = compilationUnitsAndSources[i + 1];
-      String code = parseCompilationUnit(compilationUnit, source, expectedErrors, expectedWarnings);
-      tester = tester.addCompilationUnit(compilationUnit, code);
-    }
-
-    var result =
-        expectedErrors.isEmpty() ? tester.assertTranspileSucceeds() : tester.assertTranspileFails();
-    result
-        .assertErrorsWithSourcePosition(expectedErrors.toArray(new String[0]))
-        .assertWarningsWithSourcePosition(expectedWarnings.toArray(new String[0]));
-  }
-
-  private String parseCompilationUnit(
-      String compilationUnit,
-      String source,
-      List<String> expectedErrors,
-      List<String> expectedWarnings) {
-    String fileName = compilationUnit.substring(compilationUnit.lastIndexOf(".") + 1) + ".java";
-
-    int currentLine = 1;
-    if (compilationUnit.contains(".")) {
-      currentLine++; // Has package declaration.
-    }
-
-    StringBuilder codeBuilder = new StringBuilder();
-    List<String> lastMessageList = null;
-    for (String line : source.split("\n", -1)) {
-      String trimmedLine = line.trim();
-      if (trimmedLine.startsWith("> Error:")) {
-        expectedErrors.add(formatMessage("Error", fileName, currentLine - 1, trimmedLine));
-        lastMessageList = expectedErrors;
-      } else if (trimmedLine.startsWith("> Warning:")) {
-        expectedWarnings.add(formatMessage("Warning", fileName, currentLine - 1, trimmedLine));
-        lastMessageList = expectedWarnings;
-      } else if (trimmedLine.startsWith("> ")) {
-        if (lastMessageList == null || lastMessageList.isEmpty()) {
-          throw new IllegalArgumentException("Unexpected continuation line: " + trimmedLine);
-        }
-        int lastIndex = lastMessageList.size() - 1;
-        String lastMessage = lastMessageList.get(lastIndex);
-        lastMessageList.set(lastIndex, lastMessage + "\n" + trimmedLine.substring("> ".length()));
-      } else {
-        codeBuilder.append(line).append("\n");
-        currentLine++;
-        lastMessageList = null;
-      }
-    }
-    return codeBuilder.toString();
-  }
-
-  private static String formatMessage(String type, String fileName, int lineNumber, String line) {
-    String trimmedLine = line.substring(("> " + type + ": ").length());
-    return type + ":" + fileName + ":" + lineNumber + ": " + trimmedLine;
+    newTesterWithDefaults().assertWithInlineMessages(compilationUnitsAndSources);
   }
 
   private TranspileResult assertTranspileSucceeds(String compilationUnitName, String code) {

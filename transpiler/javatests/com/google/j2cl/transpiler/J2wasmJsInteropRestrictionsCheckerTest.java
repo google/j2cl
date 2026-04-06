@@ -16,14 +16,12 @@ package com.google.j2cl.transpiler;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithWasmCustomDescriptorsJsInteropEnabled;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithWasmDefaults;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 import junit.framework.TestCase;
 
 /** Tests for J2wasm transpilation. */
 public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeSucceeds() {
-    assertTranspileSucceeds(
+    assertWithInlineMessages(
         "test.MyNative",
         """
         import jsinterop.annotations.*;
@@ -58,217 +56,214 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
   }
 
   public void testNativeJsTypeInvalidMembersFails() {
-    assertTranspileFails(
-            "test.Buggy",
-            """
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            abstract class Buggy {
-              C anotherField;
-              Buggy(C arg) {}
-              native void test(Object c);
-              native <T> void test2(T c);
-              native void test3(C c);
-              abstract void test4(C c);
-              native C testReturn();
-              @JsProperty native C getField();
-              @JsProperty native void setField(C c);
-            }
-            class C {}
-            """)
-        .assertErrorsWithoutSourcePosition(
-            "Native JsType field 'Buggy.anotherField' cannot be of type 'C'.",
-            "Parameter 'arg' in 'Buggy(C arg)' cannot be of type 'C'.",
-            "Parameter 'c' in 'void Buggy.test(Object c)' cannot be of type 'Object'.",
-            "Parameter 'c' in 'void Buggy.test2(T c)' cannot be of type 'T'.",
-            "Parameter 'c' in 'void Buggy.test3(C c)' cannot be of type 'C'.",
-            "Parameter 'c' in 'void Buggy.test4(C c)' cannot be of type 'C'.",
-            "Return type of 'C Buggy.testReturn()' cannot be of type 'C'.",
-            "Return type of 'C Buggy.getField()' cannot be of type 'C'.",
-            "Parameter 'c' in 'void Buggy.setField(C c)' cannot be of type 'C'.");
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        abstract class Buggy {
+          C anotherField;
+        > Error: Native JsType field 'Buggy.anotherField' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Type 'C' of field 'Buggy.anotherField' is not usable by but exposed to JavaScript.
+          Buggy(C arg) {}
+        > Error: Parameter 'arg' in 'Buggy(C arg)' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Type of parameter 'arg' in 'Buggy(C arg)' is not usable by but exposed to JavaScript.
+          native void test(Object c);
+        > Error: Parameter 'c' in 'void Buggy.test(Object c)' cannot be of type 'Object'.
+          native <T> void test2(T c);
+        > Error: Parameter 'c' in 'void Buggy.test2(T c)' cannot be of type 'T'.
+          native void test3(C c);
+        > Error: Parameter 'c' in 'void Buggy.test3(C c)' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Type of parameter 'c' in 'void Buggy.test3(C c)' is not usable by but exposed to JavaScript.
+          abstract void test4(C c);
+        > Error: Parameter 'c' in 'void Buggy.test4(C c)' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Type of parameter 'c' in 'void Buggy.test4(C c)' is not usable by but exposed to JavaScript.
+          native C testReturn();
+        > Error: Return type of 'C Buggy.testReturn()' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Return type of 'C Buggy.testReturn()' is not usable by but exposed to JavaScript.
+          @JsProperty native C getField();
+        > Error: Return type of 'C Buggy.getField()' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Return type of 'C Buggy.getField()' is not usable by but exposed to JavaScript.
+          @JsProperty native void setField(C c);
+        > Error: Parameter 'c' in 'void Buggy.setField(C c)' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Type of parameter 'c' in 'void Buggy.setField(C c)' is not usable by but exposed to JavaScript.
+        }
+        class C {}
+        """);
   }
 
   public void testNativeMemberFails() {
-    assertTranspileFails(
-            "test.Buggy",
-            """
-            import jsinterop.annotations.*;
-            class Main {
-              @JsMethod
-              static native void test(Object c);
-              @JsMethod
-              static native <T> void test2(T c);
-              @JsMethod
-              static native void test3(C c);
-              @JsMethod
-              static native C test4();
-            }
-            class C {}
-            """)
-        .assertErrorsWithoutSourcePosition(
-            "Parameter 'c' in 'void Main.test(Object c)' cannot be of type 'Object'.",
-            "Parameter 'c' in 'void Main.test2(T c)' cannot be of type 'T'.",
-            "Parameter 'c' in 'void Main.test3(C c)' cannot be of type 'C'.",
-            "Return type of 'C Main.test4()' cannot be of type 'C'.");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        class Main {
+          @JsMethod
+          static native void test(Object c);
+        > Error: Parameter 'c' in 'void Main.test(Object c)' cannot be of type 'Object'.
+          @JsMethod
+          static native <T> void test2(T c);
+        > Error: Parameter 'c' in 'void Main.test2(T c)' cannot be of type 'T'.
+          @JsMethod
+          static native void test3(C c);
+        > Error: Parameter 'c' in 'void Main.test3(C c)' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Type of parameter 'c' in 'void Main.test3(C c)' is not usable by but exposed to JavaScript.
+          @JsMethod
+          static native C test4();
+        > Error: Return type of 'C Main.test4()' cannot be of type 'C'.
+        > Warning: [unusable-by-js] Return type of 'C Main.test4()' is not usable by but exposed to JavaScript.
+        }
+        class C {}
+        """);
   }
 
   public void testNativeJsTypeEqualityFails() {
-    assertTranspileFails(
-            "test.Main",
-            """
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            class Native {}
-            class Main {
-              void test() {
-                Native n = new Native();
-                Object o = new Object();
-                boolean b = n == o;
-                b = o != n;
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        class Native {}
+        class Main {
+          void test() {
+            Native n = new Native();
+            Object o = new Object();
+            boolean b = n == o;
+        > Error: Native JsType 'Native' cannot be compared with non-native type.
+            b = o != n;
+        > Error: Native JsType 'Native' cannot be compared with non-native type.
 
-                Native[] arr = new Native[1];
-                b = arr == o;
-                b = o != arr;
-              }
-            }
-            """)
-        .assertErrorsWithoutSourcePosition(
-            "Native JsType 'Native' cannot be compared with non-native type.",
-            "Native JsType 'Native' cannot be compared with non-native type.",
-            "Native JsType 'Native[]' cannot be compared with non-native type.",
-            "Native JsType 'Native[]' cannot be compared with non-native type.");
+            Native[] arr = new Native[1];
+            b = arr == o;
+        > Error: Native JsType 'Native[]' cannot be compared with non-native type.
+            b = o != arr;
+        > Error: Native JsType 'Native[]' cannot be compared with non-native type.
+          }
+        }
+        """);
   }
 
   public void testNativeTypeStringConcatenationFails() {
-    assertTranspileFails(
-            "test.Main",
-            """
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            class Native {}
-            class Main {
-              void test(Native n) {
-                String s1 = "" + n;
-                s1 += n;
-              }
-            }
-            """)
-        .assertErrorsWithoutSourcePosition(
-            "Native JsType 'Native' cannot be assigned to 'Object'. (b/262009761)",
-            "Native JsType 'Native' cannot be assigned to 'Object'. (b/262009761)");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        class Native {}
+        class Main {
+          void test(Native n) {
+            String s1 = "" + n;
+        > Error: Native JsType 'Native' cannot be assigned to 'Object'. (b/262009761)
+            s1 += n;
+        > Error: Native JsType 'Native' cannot be assigned to 'Object'. (b/262009761)
+          }
+        }
+        """);
   }
 
   public void testNativeJsTypeInvalidAssignmentsFails() {
-    assertTranspileFails(
-            "test.Buggy",
-            """
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            class Buggy {}
-            @JsType(isNative = true)
-            class AlsoBuggy {}
-            class Main {
-              void test() {
-                Object obj = new Buggy();
-                obj = new Buggy[1];
-                passArgument(new AlsoBuggy());
-                passArgument(new AlsoBuggy[1]);
-                Object obj2 = (Object) new Buggy();
-                Buggy b = (Buggy) new Object();
-                Buggy[] bArr = (Buggy[]) new Object();
-                new Buggy().equals(null);
-                new Buggy[1].equals(null);
-              }
-              void passArgument(Object arg) {}
-            }
-            """)
-        .assertErrorsWithoutSourcePosition(
-            "Native JsType 'Buggy' cannot be assigned to 'Object'. (b/262009761)",
-            "Native JsType 'Buggy[]' cannot be assigned to 'Object'. (b/262009761)",
-            "Native JsType 'AlsoBuggy' cannot be assigned to 'Object'. (b/262009761)",
-            "Native JsType 'AlsoBuggy[]' cannot be assigned to 'Object'. (b/262009761)",
-            "Native JsType 'Buggy' cannot be cast to 'Object'. (b/262009761)",
-            "'Object' cannot be cast to Native JsType 'Buggy'. (b/262009761)",
-            "'Object' cannot be cast to Native JsType 'Buggy[]'. (b/262009761)",
-            "Cannot access member of 'Object' with Native JsType 'Buggy'. (b/262009761)",
-            "Cannot access member of 'Object' with Native JsType 'Buggy[]'. (b/262009761)");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        class Buggy {}
+        @JsType(isNative = true)
+        class AlsoBuggy {}
+        class Main {
+          void test() {
+            Object obj = new Buggy();
+        > Error: Native JsType 'Buggy' cannot be assigned to 'Object'. (b/262009761)
+            obj = new Buggy[1];
+        > Error: Native JsType 'Buggy[]' cannot be assigned to 'Object'. (b/262009761)
+            passArgument(new AlsoBuggy());
+        > Error: Native JsType 'AlsoBuggy' cannot be assigned to 'Object'. (b/262009761)
+            passArgument(new AlsoBuggy[1]);
+        > Error: Native JsType 'AlsoBuggy[]' cannot be assigned to 'Object'. (b/262009761)
+            Object obj2 = (Object) new Buggy();
+        > Error: Native JsType 'Buggy' cannot be cast to 'Object'. (b/262009761)
+            Buggy b = (Buggy) new Object();
+        > Error: 'Object' cannot be cast to Native JsType 'Buggy'. (b/262009761)
+            Buggy[] bArr = (Buggy[]) new Object();
+        > Error: 'Object' cannot be cast to Native JsType 'Buggy[]'. (b/262009761)
+            new Buggy().equals(null);
+        > Error: Cannot access member of 'Object' with Native JsType 'Buggy'. (b/262009761)
+            new Buggy[1].equals(null);
+        > Error: Cannot access member of 'Object' with Native JsType 'Buggy[]'. (b/262009761)
+          }
+          void passArgument(Object arg) {}
+        }
+        """);
   }
 
   public void testNonnativeTypeExtendNativeJsTypeFails() {
-    assertTranspileFails(
-            "test.Buggy",
-            """
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            class Buggy {}
-            class Subclass extends Buggy {}
-            """)
-        .assertErrorsWithoutSourcePosition(
-            "Non-native type 'Subclass' cannot extend native JsType 'Buggy'.");
+    assertWithInlineMessages(
+        "test.Subclass",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        class Buggy {}
+        class Subclass extends Buggy {}
+        > Error: Non-native type 'Subclass' cannot extend native JsType 'Buggy'.
+        """);
   }
 
   public void testInstanceOfNativeJsTypeFails() {
-    assertTranspileFails(
-            "test.Buggy",
-            """
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            class Buggy {}
-            @JsType(isNative = true)
-            interface BuggyInterface {}
-            class Main {
-              void test(Object b) {
-                if (b instanceof Buggy) {}
-                if (b instanceof BuggyInterface) {}
-                if (b instanceof Buggy[]) {}
-              }
-            }
-            """)
-        .assertErrorsWithoutSourcePosition(
-            "Cannot do instanceof against native JsType 'Buggy'.",
-            "Cannot do instanceof against native JsType interface 'BuggyInterface'.",
-            "Cannot do instanceof against native JsType 'Buggy[]'.");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        class Buggy {}
+        @JsType(isNative = true)
+        interface BuggyInterface {}
+        class Main {
+          void test(Object b) {
+            if (b instanceof Buggy) {}
+        > Error: Cannot do instanceof against native JsType 'Buggy'.
+            if (b instanceof BuggyInterface) {}
+        > Error: Cannot do instanceof against native JsType interface 'BuggyInterface'.
+            if (b instanceof Buggy[]) {}
+        > Error: Cannot do instanceof against native JsType 'Buggy[]'.
+          }
+        }
+        """);
   }
 
   public void testNativeJsTypePatternMatchFails() {
-    assertTranspileFails(
-            "test.Buggy",
-            """
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            class Buggy {}
-            @JsType(isNative = true)
-            interface BuggyInterface {}
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        class Buggy {}
+        @JsType(isNative = true)
+        interface BuggyInterface {}
 
-            record R(BuggyInterface b) {}
-            class Main {
-              public Main() {
-                switch (new Object()) {
-                 case BuggyInterface b -> {}
-                 case R(BuggyInterface b) -> {}
-                 case R(Object o) -> {}
-                 case Buggy b -> {}
-                 case Buggy[] b -> {}
-                 default -> {}
-                }
-              }
+        // TODO(b/466508694): Decide if we can allow these or give a better error message if not.
+        record R(BuggyInterface b) {}
+        > Error: Native JsType 'BuggyInterface' cannot be assigned to 'Object'. (b/262009761)
+        class Main {
+          public Main() {
+            switch (new Object()) {
+             case BuggyInterface b -> {}
+        > Error: Cannot pattern match against native JsType interface 'BuggyInterface'.
+             case R(BuggyInterface b) -> {}
+        > Error: Cannot pattern match against native JsType interface 'BuggyInterface'.
+             case R(Object o) -> {}
+             case Buggy b -> {}
+        > Error: Cannot pattern match against native JsType 'Buggy'.
+             case Buggy[] b -> {}
+        > Error: Cannot pattern match against native JsType 'Buggy[]'.
+             default -> {}
             }
-            """)
-        .assertErrorsWithSourcePosition(
-            // TODO(b/466508694): Decide if we can allow these or give a better error message if
-            // not.
-            "Error:Buggy.java:8: Native JsType 'BuggyInterface' cannot be assigned to 'Object'."
-                + " (b/262009761)",
-            "Error:Buggy.java:12: Cannot pattern match against native JsType interface"
-                + " 'BuggyInterface'.",
-            "Error:Buggy.java:13: Cannot pattern match against native JsType interface"
-                + " 'BuggyInterface'.",
-            "Error:Buggy.java:15: Cannot pattern match against native JsType 'Buggy'.",
-            "Error:Buggy.java:16: Cannot pattern match against native JsType 'Buggy[]'.");
+          }
+        }
+        """);
   }
 
   public void testNativeJsTypeArraySucceeds() {
-    assertTranspileSucceeds(
+    assertWithInlineMessages(
         "test.Main",
         """
         import java.util.List;
@@ -295,149 +290,112 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
   }
 
   public void testNativeJsTypeArgumentFails() {
-    assertTranspileFails(
-            "test.Main",
-            """
-            import java.util.ArrayList;
-            import java.util.List;
-            import java.util.function.Function;
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            class MyNativeType {}
-            public class Main<T> {
-              List<MyNativeType> myNativeType;
-              List<T> tList;
-              T t;
-              private static void acceptsNativeTypeList(List<MyNativeType> p) {}
-              private static void acceptsNativeTypeVarargsList(List<MyNativeType>... p) {}
-              private static List<MyNativeType> returnsNativeTypeList() { return null; }
-              private static <T> List<T> returnsTList() { return null; }
-              private static <T> T returnsT() { return null; }
-              private static <T> void acceptsT(T t) {}
-              private static void arrays() {
-                Object o = new ArrayList<MyNativeType>();
-                List<MyNativeType> arr = null;
-                o = (List<MyNativeType>) o;
-                MyNativeType e = Main.<MyNativeType>returnsTList().get(0);
-                e = Main.<MyNativeType>returnsT();
-                acceptsT(new MyNativeType());
-                e = new Main<MyNativeType>().tList.get(0);
-                e = new Main<List<MyNativeType>>().t.get(0);
-              }
-              static class Buggy extends Main<MyNativeType> {}
-            }
-            """)
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:9: Type List<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:12: Type List<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:13: Type List<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:14: Type List<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:19: Type ArrayList<MyNativeType> cannot be parameterized with native"
-                + " JsType 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:20: Type List<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:22: Method List<MyNativeType> Main.returnsTList() cannot be"
-                + " parameterized with native JsType 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:22: Type List<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:23: Method MyNativeType Main.returnsT() cannot be parameterized with"
-                + " native JsType 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:24: Method void Main.acceptsT(MyNativeType) cannot be parameterized"
-                + " with native JsType 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:24: Native JsType 'MyNativeType' cannot be assigned to 'T'."
-                + " (b/262009761)",
-            "Error:Main.java:25: Type Main<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:25: Type List<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:26: Type List<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:8: Type Main<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Error:Main.java:28: Type Main<MyNativeType> cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import java.util.ArrayList;
+        import java.util.List;
+        import java.util.function.Function;
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        class MyNativeType {}
+        public class Main<T> {
+        > Error: Type Main<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+          List<MyNativeType> myNativeType;
+        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+          List<T> tList;
+          T t;
+          private static void acceptsNativeTypeList(List<MyNativeType> p) {}
+        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+          private static void acceptsNativeTypeVarargsList(List<MyNativeType>... p) {}
+        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+          private static List<MyNativeType> returnsNativeTypeList() { return null; }
+        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+          private static <T> List<T> returnsTList() { return null; }
+          private static <T> T returnsT() { return null; }
+          private static <T> void acceptsT(T t) {}
+          private static void arrays() {
+            Object o = new ArrayList<MyNativeType>();
+        > Error: Type ArrayList<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+            List<MyNativeType> arr = null;
+        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+            o = (List<MyNativeType>) o;
+            MyNativeType e = Main.<MyNativeType>returnsTList().get(0);
+        > Error: Method List<MyNativeType> Main.returnsTList() cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+            e = Main.<MyNativeType>returnsT();
+        > Error: Method MyNativeType Main.returnsT() cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+            acceptsT(new MyNativeType());
+        > Error: Method void Main.acceptsT(MyNativeType) cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+        > Error: Native JsType 'MyNativeType' cannot be assigned to 'T'. (b/262009761)
+            e = new Main<MyNativeType>().tList.get(0);
+        > Error: Type Main<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+            e = new Main<List<MyNativeType>>().t.get(0);
+        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+          }
+          static class Buggy extends Main<MyNativeType> {}
+        > Error: Type Main<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+        }
+        """);
   }
 
   public void testNativeJsTypeArrayArgumentFails() {
-    assertTranspileFails(
-            "test.Main",
-            """
-            import java.util.List;
-            import jsinterop.annotations.*;
-            @JsType(isNative = true)
-            class MyNativeType {}
-            public class Main<T> {
-              private static <T> T[] returnsTArray() { return null; }
-              private static <T> T returnsT() { return null; }
-              T t;
-              public void test() {
-                List<MyNativeType[]> list = null;
-                MyNativeType e = Main.<MyNativeType>returnsTArray()[0];
-                e = Main.<MyNativeType[]>returnsT()[0];
-                e = new Main<MyNativeType[]>().t[0];
-              }
-            }
-            """)
-        .assertErrorsWithoutSourcePosition(
-            "Type List<MyNativeType[]> cannot be parameterized with native JsType 'MyNativeType[]'."
-                + " (b/290992813)",
-            "Method MyNativeType[] Main.returnsTArray() cannot be parameterized with native JsType"
-                + " 'MyNativeType'. (b/290992813)",
-            "Method MyNativeType[] Main.returnsT() cannot be parameterized with native JsType"
-                + " 'MyNativeType[]'. (b/290992813)",
-            "Type Main<MyNativeType[]> cannot be parameterized with native JsType 'MyNativeType[]'."
-                + " (b/290992813)",
-            "Native JsType 'MyNativeType[]' cannot be assigned to 'T[]'. (b/262009761)",
-            "Native JsType 'MyNativeType[]' cannot be assigned to 'T'. (b/262009761)",
-            "Native JsType 'MyNativeType[]' cannot be assigned to 'T'. (b/262009761)");
-  }
-
-  public void testExportedTypePassedToNativeMethodSucceeds() {
-    assertTranspileSucceedsWithCustomDescriptorsJsInteropEnabled(
-        "test.MyNative",
+    assertWithInlineMessages(
+        "test.Main",
         """
+        import java.util.List;
         import jsinterop.annotations.*;
-        @JsType
-        class MyJsType {
-          public void m() {}
-        }
-        class Main {
-          @JsMethod
-          static native void acceptJsType(MyJsType jsType);
-
-          @JsMethod
-          static native MyJsType returnJsType();
-
-          private static void test() {
-            acceptJsType(new MyJsType());
-            MyJsType jsType = returnJsType();
+        @JsType(isNative = true)
+        class MyNativeType {}
+        public class Main<T> {
+          private static <T> T[] returnsTArray() { return null; }
+          private static <T> T returnsT() { return null; }
+          T t;
+          public void test() {
+            List<MyNativeType[]> list = null;
+        > Error: Type List<MyNativeType[]> cannot be parameterized with native JsType 'MyNativeType[]'. (b/290992813)
+            MyNativeType e = Main.<MyNativeType>returnsTArray()[0];
+        > Error: Method MyNativeType[] Main.returnsTArray() cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
+        > Error: Native JsType 'MyNativeType[]' cannot be assigned to 'T[]'. (b/262009761)
+            e = Main.<MyNativeType[]>returnsT()[0];
+        > Error: Method MyNativeType[] Main.returnsT() cannot be parameterized with native JsType 'MyNativeType[]'. (b/290992813)
+        > Error: Native JsType 'MyNativeType[]' cannot be assigned to 'T'. (b/262009761)
+            e = new Main<MyNativeType[]>().t[0];
+        > Error: Type Main<MyNativeType[]> cannot be parameterized with native JsType 'MyNativeType[]'. (b/290992813)
+        > Error: Native JsType 'MyNativeType[]' cannot be assigned to 'T'. (b/262009761)
           }
         }
         """);
   }
 
-  @CanIgnoreReturnValue
-  private TranspileResult assertTranspileSucceeds(String compilationUnitName, String code) {
-    return newTesterWithWasmDefaults()
-        .addCompilationUnit(compilationUnitName, code)
+  public void testExportedTypePassedToNativeMethodSucceeds() {
+    newTesterWithWasmCustomDescriptorsJsInteropEnabled()
+        .addCompilationUnit(
+            "test.MyNative",
+            """
+            import jsinterop.annotations.*;
+            @JsType
+            class MyJsType {
+              public void m() {}
+            }
+            class Main {
+              @JsMethod
+              static native void acceptJsType(MyJsType jsType);
+
+              @JsMethod
+              static native MyJsType returnJsType();
+
+              private static void test() {
+                acceptJsType(new MyJsType());
+                MyJsType jsType = returnJsType();
+              }
+            }
+            """)
         .assertTranspileSucceeds();
   }
 
-  @CanIgnoreReturnValue
-  private TranspileResult assertTranspileSucceedsWithCustomDescriptorsJsInteropEnabled(
-      String compilationUnitName, String code) {
-    return newTesterWithWasmCustomDescriptorsJsInteropEnabled()
-        .addCompilationUnit(compilationUnitName, code)
-        .assertTranspileSucceeds();
-  }
-
-  private TranspileResult assertTranspileFails(String compilationUnitName, String code) {
-    return newTesterWithWasmDefaults()
-        .addCompilationUnit(compilationUnitName, code)
-        .assertTranspileFails();
+  private void assertWithInlineMessages(String... compilationUnitsAndSources) {
+    newTesterWithWasmDefaults().assertWithInlineMessages(compilationUnitsAndSources);
   }
 }
