@@ -1401,19 +1401,40 @@ public final class AstUtils {
    * a JS extern).
    */
   public static boolean needsWasmJsExport(MemberDescriptor memberDescriptor) {
-    return memberDescriptor.canBeReferencedExternally()
-        // TODO(b/481799839): Consider "@Wasm native ..." methods.
-        && !memberDescriptor.isNative()
-        // Exclude native js constructors.
-        // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true
-        // for native constructors, or exposing isNativeConstructor from MethodDescriptor.
-        && !(memberDescriptor.isConstructor()
-            && memberDescriptor.getEnclosingTypeDescriptor().isNative())
-        // JS members that override an already exported JS member don't need a bridge in the
-        // overriding type. The bridge in the overridden method does a polymorphic dispatch.
-        // Also exclude the generated export bridges themselves.
-        && !(memberDescriptor instanceof MethodDescriptor methodDescriptor
-            && (methodDescriptor.isJsOverride() || methodDescriptor.getOrigin().isWasmJsExport()));
+    if (!memberDescriptor.canBeReferencedExternally()) {
+      return false;
+    }
+
+    // TODO(masonwu): Consider "@Wasm native ..." methods.
+    if (memberDescriptor.isNative()) {
+      return false;
+    }
+
+    // Exclude native js constructors.
+    // TODO(masonwu): Consider refactoring to have MethodDescriptor.isNative return true
+    // for native constructors, or exposing isNativeConstructor from MethodDescriptor.
+    if (memberDescriptor.isConstructor()
+        && memberDescriptor.getEnclosingTypeDescriptor().isNative()) {
+      return false;
+    }
+
+    if (memberDescriptor instanceof MethodDescriptor methodDescriptor) {
+      // Exclude generated export bridges themselves.
+      if (methodDescriptor.getOrigin().isWasmJsExport()) {
+        return false;
+      }
+
+      // JS members that override an already exported JS member don't need a bridge in the
+      // overriding type. The bridge in the overridden method does a polymorphic dispatch.
+      // Exclude interface methods from this check because there's no export bridges
+      // generated for interface methods themselves.
+      if (methodDescriptor.getJsOverriddenMethodDescriptors().stream()
+          .anyMatch(m -> !m.getEnclosingTypeDescriptor().isInterface() && m.isJsOverrideable())) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public static boolean isKotlinUnitInstanceAccess(Expression expression) {

@@ -140,30 +140,6 @@
 )
 (elem declare func $m_setM__int__void@jsproperties.InterfaceWithDefaultJsProperties)
 
-;;; int InterfaceWithDefaultJsProperties.getM()
-(func $js_export_get_getM__int@jsproperties.InterfaceWithDefaultJsProperties
- (param $this (ref null $java.lang.Object))
- (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:91:14
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:91:14
-  (return (call_ref $function.m_getM__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.InterfaceWithDefaultJsProperties.vtable $m_getM__int (ref.cast (ref $jsproperties.InterfaceWithDefaultJsProperties.vtable) (call $get.itable.$jsproperties.InterfaceWithDefaultJsProperties (local.get $this))))))
- )
-)
-(elem declare func $js_export_get_getM__int@jsproperties.InterfaceWithDefaultJsProperties)
-
-;;; void InterfaceWithDefaultJsProperties.setM(int arg0)
-(func $js_export_set_setM__int__void@jsproperties.InterfaceWithDefaultJsProperties
- (param $this (ref null $java.lang.Object))
- (param $arg0 i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:96:15
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:96:15
-  (call_ref $function.m_setM__int__void (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $jsproperties.InterfaceWithDefaultJsProperties.vtable $m_setM__int__void (ref.cast (ref $jsproperties.InterfaceWithDefaultJsProperties.vtable) (call $get.itable.$jsproperties.InterfaceWithDefaultJsProperties (local.get $this)))))
- )
-)
-(elem declare func $js_export_set_setM__int__void@jsproperties.InterfaceWithDefaultJsProperties)
-
 ;;; void InterfaceWithDefaultJsProperties.$clinit()
 (func $$clinit__void_<once>_@jsproperties.InterfaceWithDefaultJsProperties
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:89:10
@@ -820,6 +796,36 @@
  )
 )
 (elem declare func $m_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
+
+;;; int ImplementsInterfaceWithDefaultJsProperties.getM()
+(func $js_export_get_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties
+ (type $function.js_export_get_getM__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ (local $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
+ (local.set $this (ref.cast (ref $jsproperties.ImplementsInterfaceWithDefaultJsProperties) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  (return (call_ref $function.m_getM__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.ImplementsInterfaceWithDefaultJsProperties.vtable $m_getM__int (ref.get_desc $jsproperties.ImplementsInterfaceWithDefaultJsProperties(local.get $this)))))
+ )
+)
+(elem declare func $js_export_get_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
+
+;;; void ImplementsInterfaceWithDefaultJsProperties.setM(int arg0)
+(func $js_export_set_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties
+ (type $function.js_export_set_setM__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ (local $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
+ (local.set $this (ref.cast (ref $jsproperties.ImplementsInterfaceWithDefaultJsProperties) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  (call_ref $function.m_setM__int__void (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $jsproperties.ImplementsInterfaceWithDefaultJsProperties.vtable $m_setM__int__void (ref.get_desc $jsproperties.ImplementsInterfaceWithDefaultJsProperties(local.get $this))))
+ )
+)
+(elem declare func $js_export_set_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
 
 ;;; void ImplementsInterfaceWithDefaultJsProperties.$clinit()
 (func $$clinit__void_<once>_@jsproperties.ImplementsInterfaceWithDefaultJsProperties

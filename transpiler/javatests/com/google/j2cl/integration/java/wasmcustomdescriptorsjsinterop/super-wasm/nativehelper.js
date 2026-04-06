@@ -16,6 +16,9 @@
 goog.module('nativehelper');
 
 const BaseJsType = goog.require('wasmcustomdescriptorsjsinterop.BaseJsType');
+const JsInterface = goog.require('wasmcustomdescriptorsjsinterop.JsInterface');
+const JsInterfaceGetNumber = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceGetNumber');
+const JsInterfaceRenamedMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceRenamedMethod');
 const SomeJsType = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType');
 
 /**
@@ -142,6 +145,42 @@ function setReadWriteProperty(someJsType, value) {
   someJsType.readWriteProperty = value;
 }
 
+/**
+ * @param {!JsInterface} i
+ * @return {number}
+ * @public
+ */
+function callInterfaceMethod(i) {
+  return i.interfaceMethod();
+}
+
+/**
+ * @param {!JsInterfaceGetNumber} i
+ * @return {number}
+ * @public
+ */
+function callInterfaceGetNumber(i) {
+  return i.getNumber();
+}
+
+/**
+ * @param {!JsInterfaceRenamedMethod} i
+ * @return {number}
+ * @public
+ */
+function callInterfaceRenamedMethod(i) {
+  return i.renamed();
+}
+
+/**
+ * @param {!JsInterfaceDefaultMethod} i
+ * @return {number}
+ * @public
+ */
+function callInterfaceDefaultMethod(i) {
+  return i.m();
+}
+
 exports = {
   newBaseJsType,
   newSomeJsType,
@@ -157,4 +196,8 @@ exports = {
   getStaticReadOnlyProperty,
   getReadWriteProperty,
   setReadWriteProperty,
+  callInterfaceMethod,
+  callInterfaceGetNumber,
+  callInterfaceRenamedMethod,
+  callInterfaceDefaultMethod,
 };

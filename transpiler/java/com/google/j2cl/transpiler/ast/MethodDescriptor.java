@@ -1227,7 +1227,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * Whether it is valid to emit a JsDoc @override annotations for methods that override methods in
    * this type.
    */
-  private boolean isJsOverrideable() {
+  boolean isJsOverrideable() {
     return !isJsOverlay()
         && !getEnclosingTypeDescriptor().isStarOrUnknown()
         && !getEnclosingTypeDescriptor().isJsFunctionInterface();

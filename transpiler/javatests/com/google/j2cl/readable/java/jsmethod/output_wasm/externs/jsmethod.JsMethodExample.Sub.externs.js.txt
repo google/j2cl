@@ -2,6 +2,12 @@
 
 /**
  * @extends {jsmethod_JsMethodExample_Base<?string>}
+ * @implements {jsmethod_JsMethodExample_I}
  * @constructor
  */
 var jsmethod_JsMethodExample_Sub = function() {};
+
+/**
+ * @override
+ */
+jsmethod_JsMethodExample_Sub.prototype.mString = function(/** ?string */ s) {};

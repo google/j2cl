@@ -81,11 +81,6 @@ final class JsExternsGenerator {
   }
 
   static boolean shouldGenerateExtern(DeclaredTypeDescriptor typeDescriptor) {
-    // TODO(b/459918329): Support interfaces.
-    if (typeDescriptor.isInterface()) {
-      return false;
-    }
-
     // Generate externs if this type or a supertype is visible to JS.
     return isWasmJsExportedType(typeDescriptor);
   }
@@ -119,7 +114,9 @@ final class JsExternsGenerator {
       // annotations and members can be added.
       sb.appendln("/**");
       appendJsDoc(sb, jsDoc);
-      sb.appendln(" * @constructor");
+      if (!type.isInterface()) {
+        sb.appendln(" * @constructor");
+      }
       sb.appendln(" */");
       sb.appendln(
           String.format(
@@ -129,7 +126,9 @@ final class JsExternsGenerator {
 
     sb.appendln("/**");
     appendJsDoc(sb, jsDoc);
-    sb.appendln(" * @constructor");
+    if (!type.isInterface()) {
+      sb.appendln(" * @constructor");
+    }
     sb.appendln(" */");
     sb.append(
         String.format("var %s = function", closureEnvironment.aliasForType(type.getDeclaration())));
@@ -244,20 +243,36 @@ final class JsExternsGenerator {
     SourceBuilder sb = new SourceBuilder();
     sb.appendln(String.format("goog.module('%s');", type.getDeclaration().getModuleName()));
     sb.appendln("");
-    sb.appendln("const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');");
-    sb.appendln("");
-    sb.appendln(
-        "/** @const {typeof " + closureEnvironment.aliasForType(type.getDeclaration()) + "} */");
-    sb.appendln(
-        String.format(
-            "const %s = constructorProxy('%s');",
-            type.getDeclaration().getSimpleJsName(), type.getDeclaration().getQualifiedJsName()));
-    sb.appendln("");
-    sb.appendln(String.format("exports = %s;", type.getDeclaration().getSimpleJsName()));
+
+    String externName = closureEnvironment.aliasForType(type.getDeclaration());
+    String simpleJsName = type.getDeclaration().getSimpleJsName();
+    if (type.isInterface()) {
+      generateTypeAlias(sb, simpleJsName, externName);
+    } else {
+      generateConstructorProxy(
+          sb, externName, simpleJsName, type.getDeclaration().getQualifiedJsName());
+    }
+
+    sb.appendln(String.format("exports = %s;", simpleJsName));
 
     // Output to externs/my.package.MyClass.js
     output.write(
         Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".js").toString(),
         sb.build());
+  }
+
+  private static void generateConstructorProxy(
+      SourceBuilder sb, String externName, String simpleJsName, String qualifiedJsName) {
+    sb.appendln("const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');");
+    sb.appendln("");
+    sb.appendln(String.format("/** @const {typeof %s} */", externName));
+    sb.appendln(String.format("const %s = constructorProxy('%s');", simpleJsName, qualifiedJsName));
+    sb.appendln("");
+  }
+
+  private static void generateTypeAlias(SourceBuilder sb, String simpleJsName, String externName) {
+    sb.appendln(String.format("/** @typedef {%s} */", externName));
+    sb.appendln(String.format("let %s;", simpleJsName));
+    sb.appendln("");
   }
 }

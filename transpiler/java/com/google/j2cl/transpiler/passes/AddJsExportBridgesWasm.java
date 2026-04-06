@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Predicates.not;
+
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.WasmExportBridgesUtils;
 
 /**
@@ -42,6 +45,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
 
     library
         .streamTypes()
+        .filter(not(Type::isInterface))
         .forEach(
             type -> {
               for (Method method : type.getMethods()) {

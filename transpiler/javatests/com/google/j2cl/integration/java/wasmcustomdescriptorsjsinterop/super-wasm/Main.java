@@ -29,6 +29,7 @@ public final class Main {
     testMethod();
     testProperty();
     testInheritedMethod();
+    testInterfaceMethod();
   }
 
   private static void testConstructor() {
@@ -133,6 +134,68 @@ public final class Main {
     }
   }
 
+  private static void testInterfaceMethod() {
+    JsInterface jsInterface = new JsInterfaceImpl();
+    assertTrue(callInterfaceMethod(jsInterface) == 1);
+
+    JsInterfaceGetNumber jsInterfaceGetNumber = new JsInterfaceGetNumberImpl();
+    assertTrue(callGetNumber((SomeJsType) jsInterfaceGetNumber) == 22);
+    assertTrue(callInterfaceGetNumber(jsInterfaceGetNumber) == 22);
+
+    JsInterfaceRenamedMethod jsInterfaceRenamedMethod = new JsInterfaceRenamedMethodImpl();
+    assertTrue(callGetNumber((SomeJsType) jsInterfaceRenamedMethod) == 22);
+    // TODO(b/499366074): Test when this case is supported with a bridge method.
+    // assertTrue(callInterfaceRenamedMethod(jsInterfaceRenamedMethod) == 22);
+
+    JsInterfaceDefaultMethod jsInterfaceDefaultMethod = new JsInterfaceDefaultMethodImpl();
+    assertTrue(callInterfaceDefaultMethod(jsInterfaceDefaultMethod) == 9876);
+  }
+
+  @JsType(namespace = "wasmcustomdescriptorsjsinterop")
+  interface JsInterface {
+    int interfaceMethod();
+  }
+
+  static class JsInterfaceImpl implements JsInterface {
+    @Override
+    public int interfaceMethod() {
+      return 1;
+    }
+  }
+
+  @JsType(namespace = "wasmcustomdescriptorsjsinterop")
+  interface JsInterfaceGetNumber {
+    int getNumber();
+  }
+
+  static class JsInterfaceGetNumberImpl extends SubJsType implements JsInterfaceGetNumber {
+    @JsConstructor
+    public JsInterfaceGetNumberImpl() {}
+  }
+
+  @JsType(namespace = "wasmcustomdescriptorsjsinterop")
+  interface JsInterfaceRenamedMethod {
+    @JsMethod(name = "renamed")
+    int getNumber();
+  }
+
+  static class JsInterfaceRenamedMethodImpl extends SubJsType implements JsInterfaceRenamedMethod {
+    @JsConstructor
+    public JsInterfaceRenamedMethodImpl() {}
+  }
+
+  @JsType(namespace = "wasmcustomdescriptorsjsinterop")
+  interface JsInterfaceDefaultMethod {
+    default int m() {
+      return 9876;
+    }
+  }
+
+  static class JsInterfaceDefaultMethodImpl implements JsInterfaceDefaultMethod {
+    @JsConstructor
+    public JsInterfaceDefaultMethodImpl() {}
+  }
+
   @JsMethod(namespace = "nativehelper")
   static native BaseJsType newBaseJsType();
 
@@ -174,4 +237,16 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native void setReadWriteProperty(SomeJsType someJsType, int value);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callInterfaceMethod(JsInterface jsInterface);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callInterfaceGetNumber(JsInterfaceGetNumber jsInterface);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callInterfaceRenamedMethod(JsInterfaceRenamedMethod jsInterface);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callInterfaceDefaultMethod(JsInterfaceDefaultMethod jsInterface);
 }
