@@ -28,6 +28,7 @@ fun main(vararg unused: String) {
   testToString()
   testInheritance()
   testArrayMembers()
+  testJvmRecordDataClass()
 }
 
 data class Foo(val bar: Int, val buzz: String?, val optional: Int = 10) {
@@ -149,4 +150,26 @@ fun testInheritance() {
   val otherChild = Child(1, 2)
   otherChild.c = 3
   assertEquals(child, otherChild)
+}
+
+interface JvmRecordInterface {
+  val x: Int
+
+  fun component2(): String
+}
+
+@kotlin.jvm.JvmRecord
+data class JvmRecordDataClass(override val x: Int, val y: String) : JvmRecordInterface {
+  override fun toString() = "Custom"
+}
+
+fun testJvmRecordDataClass() {
+  val o = JvmRecordDataClass(1, "2")
+  val i: JvmRecordInterface = o
+  assertEquals(1, o.x)
+  assertEquals(1, i.x)
+  assertEquals("2", o.y)
+  assertEquals("2", o.component2())
+  assertEquals("2", i.component2())
+  assertEquals("Custom", o.toString())
 }

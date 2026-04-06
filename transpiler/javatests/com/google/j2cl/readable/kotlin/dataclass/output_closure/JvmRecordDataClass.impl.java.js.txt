@@ -1,5 +1,6 @@
 goog.module('dataclass.JvmRecordDataClass$impl');
 
+const DataClassInterface = goog.require('dataclass.DataClassInterface$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -10,6 +11,7 @@ let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
  * @final
+ * @implements {DataClassInterface}
  */
 class JvmRecordDataClass extends Record {
  /** @protected @nodts */
@@ -33,7 +35,7 @@ class JvmRecordDataClass extends Record {
   this.f_f__dataclass_JvmRecordDataClass_ = f;
   this.f_z__dataclass_JvmRecordDataClass_ = z;
  }
- /** @final @nodts @return {number} */
+ /** @nodts @return {number} */
  m_f__int() {
   return this.f_f__dataclass_JvmRecordDataClass_;
  }
@@ -45,7 +47,7 @@ class JvmRecordDataClass extends Record {
  m_component1__int() {
   return this.f_f__dataclass_JvmRecordDataClass_;
  }
- /** @final @nodts @return {string} */
+ /** @final @override @nodts @return {string} */
  m_component2__java_lang_String() {
   return this.f_z__dataclass_JvmRecordDataClass_;
  }
@@ -86,6 +88,10 @@ class JvmRecordDataClass extends Record {
   }
   return true;
  }
+ /** @override @nodts @return {number} */
+ m_getF__int() {
+  return this.m_f__int();
+ }
  /** @nodts */
  static $clinit() {
   JvmRecordDataClass.$clinit = () =>{};
@@ -105,6 +111,7 @@ class JvmRecordDataClass extends Record {
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
 }
+DataClassInterface.$markImplementor(JvmRecordDataClass);
 $Util.$setClassMetadata(JvmRecordDataClass, 'dataclass.JvmRecordDataClass');
 
 exports = JvmRecordDataClass;
