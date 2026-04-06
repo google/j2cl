@@ -1,0 +1,84 @@
+goog.module('dataclass.JsTypeDataClassWithPrivateProperty$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class JsTypeDataClassWithPrivateProperty extends j_l_Object {
+ 
+ constructor(/** number */ foo) {
+  JsTypeDataClassWithPrivateProperty.$clinit();
+  super();
+  /**@type {number} @nodts*/
+  this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_ = 0;
+  this.$ctor__dataclass_JsTypeDataClassWithPrivateProperty__int__void(foo);
+ }
+ /** @nodts */
+ $ctor__dataclass_JsTypeDataClassWithPrivateProperty__int__void(/** number */ foo) {
+  this.$ctor__java_lang_Object__void();
+  this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_ = foo;
+ }
+ /** @final @nodts @return {number} */
+ m_component1__int_$p_dataclass_JsTypeDataClassWithPrivateProperty() {
+  return this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_;
+ }
+ /** @final @return {!JsTypeDataClassWithPrivateProperty} */
+ copy(/** number */ foo) {
+  return new JsTypeDataClassWithPrivateProperty(foo);
+ }
+ /** @nodts @return {!JsTypeDataClassWithPrivateProperty} */
+ static m_copy$default__dataclass_JsTypeDataClassWithPrivateProperty__int__dataclass_JsTypeDataClassWithPrivateProperty(/** !JsTypeDataClassWithPrivateProperty */ $this, /** number= */ foo) {
+  let foo$defaulted = $Util.$isUndefined(foo) ? $this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_ : foo;
+  return $this.copy(foo$defaulted);
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'JsTypeDataClassWithPrivateProperty(' + 'foo=' + this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_));
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!JsTypeDataClassWithPrivateProperty.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!JsTypeDataClassWithPrivateProperty}*/ (other);
+  if (this.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_ != tmp0_other_with_cast.f_foo__dataclass_JsTypeDataClassWithPrivateProperty_) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  JsTypeDataClassWithPrivateProperty.$clinit = () =>{};
+  JsTypeDataClassWithPrivateProperty.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsTypeDataClassWithPrivateProperty;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(JsTypeDataClassWithPrivateProperty, 'dataclass.JsTypeDataClassWithPrivateProperty');
+
+exports = JsTypeDataClassWithPrivateProperty;
+
+//# sourceMappingURL=JsTypeDataClassWithPrivateProperty.js.map
