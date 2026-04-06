@@ -132,7 +132,10 @@ def _diff(original, modified, is_size, group_by, filter_noise):
   if original.is_wasm():
     print("  Disassembling.")
     repo_util.build(["//third_party/binaryen:wasm-dis"])
-    wasm_dis_cmd = ["blaze-bin/third_party/binaryen/wasm-dis", "--enable-gc"]
+    wasm_dis_cmd = [
+        "blaze-bin/third_party/binaryen/src/wasm-dis",
+        "--enable-gc",
+    ]
     repo_util.run_cmd(
         wasm_dis_cmd
         + [
