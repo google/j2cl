@@ -1,5 +1,6 @@
 goog.module('autovalue.AutoValueWithExtensions$impl');
 
+const reflect = goog.require('goog.reflect');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -14,14 +15,18 @@ class AutoValueWithExtensions extends ValueType {
  constructor() {
   super();
   /**@type {number} @nodts*/
-  this.f_intField__autovalue____AutoValue_AutoValueWithExtensions_ = 0;
+  this.f_intField__autovalue_______AutoValue_AutoValueWithExtensions_ = 0;
   /**@type {?string} @nodts*/
-  this.f_stringField__autovalue____AutoValue_AutoValueWithExtensions_;
+  this.f_stringField__autovalue_______AutoValue_AutoValueWithExtensions_;
  }
  /** @nodts */
  $ctor__autovalue_AutoValueWithExtensions__void() {
   this.$ctor__javaemul_internal_ValueType__void();
-  $J2CL_PRESERVE$(this.f_intField__autovalue____AutoValue_AutoValueWithExtensions_, this.f_stringField__autovalue____AutoValue_AutoValueWithExtensions_);
+  $J2CL_PRESERVE$(this.f_intField__autovalue_______AutoValue_AutoValueWithExtensions_, this.f_stringField__autovalue_______AutoValue_AutoValueWithExtensions_);
+ }
+ /** @nodts @return {number} */
+ m_getMemoizedNative_pp_autovalue__int() {
+  return Math.imul(this.m_getIntField__int(), 2);
  }
  /** @abstract @nodts @return {?string} */
  m_toPrettyString_pp_autovalue__java_lang_String() {}
@@ -33,17 +38,17 @@ class AutoValueWithExtensions extends ValueType {
  /** @nodts */
  $ctor__autovalue_AutoValueWithExtensions__int__java_lang_String__void(/** number */ intField, /** ?string */ stringField) {
   this.$ctor__autovalue_AutoValueWithExtensions__void();
-  this.f_intField__autovalue____AutoValue_AutoValueWithExtensions_ = intField;
+  this.f_intField__autovalue_______AutoValue_AutoValueWithExtensions_ = intField;
   Objects.m_requireNonNull__java_lang_Object__java_lang_Object(stringField);
-  this.f_stringField__autovalue____AutoValue_AutoValueWithExtensions_ = stringField;
+  this.f_stringField__autovalue_______AutoValue_AutoValueWithExtensions_ = stringField;
  }
  /** @nodts @return {number} */
  m_getIntField__int() {
-  return this.f_intField__autovalue____AutoValue_AutoValueWithExtensions_;
+  return this.f_intField__autovalue_______AutoValue_AutoValueWithExtensions_;
  }
  /** @nodts @return {?string} */
  m_getStringField__java_lang_String() {
-  return this.f_stringField__autovalue____AutoValue_AutoValueWithExtensions_;
+  return this.f_stringField__autovalue_______AutoValue_AutoValueWithExtensions_;
  }
  /** @nodts */
  static $clinit() {
@@ -62,6 +67,7 @@ class AutoValueWithExtensions extends ValueType {
   Objects = goog.module.get('java.util.Objects$impl');
  }
 }
+AutoValueWithExtensions.prototype.$excluded_fields = /**@pureOrBreakMyCode*/ [reflect.objectProperty('f_monitor__autovalue_AutoValue_AutoValueWithExtensions_', AutoValueWithExtensions), reflect.objectProperty('f_memoizedNative__autovalue_AutoValue_AutoValueWithExtensions_', AutoValueWithExtensions), reflect.objectProperty('f_memoizedNative___Memoized__autovalue_AutoValue_AutoValueWithExtensions_', AutoValueWithExtensions)];
 $Util.$setClassMetadata(AutoValueWithExtensions, 'autovalue.AutoValueWithExtensions');
 
 exports = AutoValueWithExtensions;

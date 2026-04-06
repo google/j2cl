@@ -1,0 +1,68 @@
+goog.module('autovalue.AutoValue_AutoValueWithFields$impl');
+
+const AutoValueWithFields = goog.require('autovalue.AutoValueWithFields$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+
+/**
+ * @final
+ */
+class AutoValue__AutoValueWithFields extends AutoValueWithFields {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {*} @nodts*/
+  this.f_monitor__autovalue_AutoValue_AutoValueWithFields_;
+  /**@type {number} @nodts*/
+  this.f_memoizedNative__autovalue_AutoValue_AutoValueWithFields_ = 0;
+  /**@type {boolean} @nodts*/
+  this.f_memoizedNative___Memoized__autovalue_AutoValue_AutoValueWithFields_ = false;
+ }
+ /** @nodts @return {!AutoValue__AutoValueWithFields} */
+ static $create__int(/** number */ intField) {
+  AutoValue__AutoValueWithFields.$clinit();
+  let $instance = new AutoValue__AutoValueWithFields();
+  $instance.$ctor__autovalue_AutoValue_AutoValueWithFields__int__void(intField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValue_AutoValueWithFields__int__void(/** number */ intField) {
+  this.$ctor__autovalue_AutoValueWithFields__int__void(intField);
+  this.f_monitor__autovalue_AutoValue_AutoValueWithFields_ = j_l_Object.$create__();
+ }
+ /** @override @nodts @return {number} */
+ m_getMemoizedNative_pp_autovalue__int() {
+  if (!this.f_memoizedNative___Memoized__autovalue_AutoValue_AutoValueWithFields_) {
+   let tmp0_lock = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(this.f_monitor__autovalue_AutoValue_AutoValueWithFields_);
+   let lock = tmp0_lock;
+   if (!this.f_memoizedNative___Memoized__autovalue_AutoValue_AutoValueWithFields_) {
+    this.f_memoizedNative__autovalue_AutoValue_AutoValueWithFields_ = super.m_getMemoizedNative_pp_autovalue__int();
+    this.f_memoizedNative___Memoized__autovalue_AutoValue_AutoValueWithFields_ = true;
+   }
+  }
+  return this.f_memoizedNative__autovalue_AutoValue_AutoValueWithFields_;
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValue__AutoValueWithFields.$clinit = () =>{};
+  AutoValue__AutoValueWithFields.$loadModules();
+  AutoValueWithFields.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__AutoValueWithFields;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+ }
+}
+$Util.$setClassMetadata(AutoValue__AutoValueWithFields, 'autovalue.AutoValue_AutoValueWithFields');
+
+exports = AutoValue__AutoValueWithFields;
+
+//# sourceMappingURL=AutoValue_AutoValueWithFields.js.map

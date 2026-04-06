@@ -19,50 +19,35 @@
 package autovalue
 
 import javaemul.lang.*
-import autovalue.AutoValueWithFields
-import kotlin.Any
+import autovalue.___AutoValue_AutoValueWithFields
+import javaemul.lang.J2ktMonitor
 import kotlin.Boolean
 import kotlin.Int
-import kotlin.Long
-import kotlin.String
 import kotlin.Suppress
+import kotlin.Unit
+import kotlin.concurrent.Volatile
+import kotlin.synchronized
 
-class AutoValue_AutoValueWithFields: AutoValueWithFields {
- private val intField: Int
+class AutoValue_AutoValueWithFields: ___AutoValue_AutoValueWithFields {
+ private val monitor: J2ktMonitor? = J2ktMonitor()
  
- internal constructor(intField: Int) {
-  this.intField = intField
- }
+ @Volatile
+ private var memoizedNative: Int = 0
  
- override fun getIntField(): Int {
-  return this.intField
- }
+ @Volatile
+ private var memoizedNative___Memoized: Boolean = false
  
- override fun toString(): String {
-  return "AutoValueWithFields{intField=" + this.intField + "}"
- }
+ internal constructor(intField: Int): super(intField)
  
- override fun equals(o: Any?): Boolean {
-  if (o === this) {
-   return true
+ override fun getMemoizedNative_pp_autovalue(): Int {
+  if (!this.memoizedNative___Memoized) {
+   synchronized<Unit>(this.monitor!!) {
+    if (!this.memoizedNative___Memoized) {
+     this.memoizedNative = super<___AutoValue_AutoValueWithFields>.getMemoizedNative_pp_autovalue()
+     this.memoizedNative___Memoized = true
+    }
+   }
   }
-  if (o is AutoValueWithFields) {
-   val that: AutoValueWithFields? = o as AutoValueWithFields?
-   return this.intField == that!!.getIntField()
-  }
-  return false
- }
- 
- override fun hashCode(): Int {
-  var h___: Int = 1
-  h___ = h___ * 1000003
-  h___ = h___.xor(
-   this.intField,
-  )
-  return h___
- }
- 
- companion object {
-  private const val serialVersionUID: Long = 42L
+  return this.memoizedNative
  }
 }

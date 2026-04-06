@@ -19,62 +19,45 @@
 package autovalue
 
 import javaemul.lang.*
-import autovalue.AutoValueWithExtensions
-import java.lang.NullPointerException
+import autovalue.______AutoValue_AutoValueWithExtensions
 import kotlin.Any
-import kotlin.Boolean
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+import kotlin.text.StringBuilder
 
-abstract class ___AutoValue_AutoValueWithExtensions: AutoValueWithExtensions {
- private val intField: Int
+abstract class ___AutoValue_AutoValueWithExtensions: ______AutoValue_AutoValueWithExtensions {
+ internal constructor(intField: Int, stringField: String?): super(intField, stringField)
  
- private val stringField: String?
- 
- internal constructor(intField: Int, stringField: String?) {
-  this.intField = intField
-  if (stringField == null) {
-   throw NullPointerException("Null stringField")
-  }
-  this.stringField = stringField
+ final override fun toPrettyString_pp_autovalue(): String? {
+  return "AutoValueWithExtensions {\n  intField = " + this.getIntField() + ",\n  stringField = " + ___AutoValue_AutoValueWithExtensions.format(
+   this.getStringField(),
+   1,
+  ) + ",\n}"
  }
  
- override fun getIntField(): Int {
-  return this.intField
- }
- 
- override fun getStringField(): String? {
-  return this.stringField
- }
- 
- override fun toString(): String {
-  return "AutoValueWithExtensions{intField=" + this.intField + ", stringField=" + this.stringField + "}"
- }
- 
- override fun equals(o: Any?): Boolean {
-  if (o === this) {
-   return true
-  }
-  if (o is AutoValueWithExtensions) {
-   val that: AutoValueWithExtensions? = o as AutoValueWithExtensions?
-   return this.intField == that!!.getIntField() && this.stringField!!.equals(
-    that!!.getStringField(),
+ companion object {
+  @JvmStatic
+  private fun format(value: Any?, indentLevel: Int): String? {
+   if (value == null) {
+    return "null"
+   }
+   return value!!.toString().java_replace(
+    "\n",
+    "\n" + ___AutoValue_AutoValueWithExtensions.___indent(indentLevel),
    )
   }
-  return false
- }
- 
- override fun hashCode(): Int {
-  var h___: Int = 1
-  h___ = h___ * 1000003
-  h___ = h___.xor(
-   this.intField,
-  )
-  h___ = h___ * 1000003
-  h___ = h___.xor(
-   this.stringField!!.hashCode(),
-  )
-  return h___
+  
+  @JvmStatic
+  private fun ___indent(level: Int): String? {
+   val builder: StringBuilder = StringBuilder()
+   var i: Int = 0
+   while (i < level) {
+    builder.append("  ")
+    i = i + 1
+   }
+   return builder.toString()
+  }
  }
 }

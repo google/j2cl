@@ -20,44 +20,35 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.___AutoValue_AutoValueWithExtensions
-import kotlin.Any
+import javaemul.lang.J2ktMonitor
+import kotlin.Boolean
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
-import kotlin.jvm.JvmStatic
-import kotlin.text.StringBuilder
+import kotlin.Unit
+import kotlin.concurrent.Volatile
+import kotlin.synchronized
 
 class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
+ private val monitor: J2ktMonitor? = J2ktMonitor()
+ 
+ @Volatile
+ private var memoizedNative: Int = 0
+ 
+ @Volatile
+ private var memoizedNative___Memoized: Boolean = false
+ 
  internal constructor(intField: Int, stringField: String?): super(intField, stringField)
  
- override fun toPrettyString_pp_autovalue(): String? {
-  return "AutoValueWithExtensions {\n  intField = " + this.getIntField() + ",\n  stringField = " + AutoValue_AutoValueWithExtensions.format(
-   this.getStringField(),
-   1,
-  ) + ",\n}"
- }
- 
- companion object {
-  @JvmStatic
-  private fun format(value: Any?, indentLevel: Int): String? {
-   if (value == null) {
-    return "null"
+ override fun getMemoizedNative_pp_autovalue(): Int {
+  if (!this.memoizedNative___Memoized) {
+   synchronized<Unit>(this.monitor!!) {
+    if (!this.memoizedNative___Memoized) {
+     this.memoizedNative = super<___AutoValue_AutoValueWithExtensions>.getMemoizedNative_pp_autovalue()
+     this.memoizedNative___Memoized = true
+    }
    }
-   return value!!.toString().java_replace(
-    "\n",
-    "\n" + AutoValue_AutoValueWithExtensions.___indent(indentLevel),
-   )
   }
-  
-  @JvmStatic
-  private fun ___indent(level: Int): String? {
-   val builder: StringBuilder = StringBuilder()
-   var i: Int = 0
-   while (i < level) {
-    builder.append("  ")
-    i = i + 1
-   }
-   return builder.toString()
-  }
+  return this.memoizedNative
  }
 }

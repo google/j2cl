@@ -33,6 +33,10 @@ abstract class AutoValueWithFields internal constructor(): Parent(), Serializabl
  
  abstract fun getIntField(): Int
  
+ internal open fun getMemoizedNative_pp_autovalue(): Int {
+  return this.getIntField() * 2
+ }
+ 
  companion object {
   private const val serialVersionUID: Long = 42L
   

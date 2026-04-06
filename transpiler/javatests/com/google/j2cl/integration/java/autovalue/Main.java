@@ -146,7 +146,6 @@ public class Main {
   }
 
   @AutoValue
-  @J2ktIncompatible // TODO(b/385167941): Remove when Memoized is supported in J2KT.
   protected abstract static class TypeWithMemoization {
     public abstract int foo();
 
@@ -156,8 +155,6 @@ public class Main {
     }
   }
 
-  // TODO(b/385167941): Remove when Memoized is supported in J2KT.
-  @J2ktIncompatible
   private static void testMemoized() {
     TypeWithMemoization o1 = new AutoValue_Main_TypeWithMemoization(11);
     TypeWithMemoization o2 = new AutoValue_Main_TypeWithMemoization(11);
@@ -169,9 +166,6 @@ public class Main {
     assertEquals(o1.hashCode(), o2.hashCode());
   }
 
-  // TODO(b/385167941): This overload only exists to allow the code to compile when the the other
-  //   method is stripped from J2KT builds.
-  public static void testMemoized(Object... o) {}
 
   @AutoValue
   abstract static class AbstractEquals {

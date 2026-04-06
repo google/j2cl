@@ -26,7 +26,6 @@ abstract class AutoValueWithExtensions {
   public abstract String getStringField();
 
   @Memoized
-  @J2ktIncompatible // TODO(b/385167941): Remove when @Memoized can be used with J2KT.
   int getMemoizedNative() {
     return getIntField() * 2;
   }
