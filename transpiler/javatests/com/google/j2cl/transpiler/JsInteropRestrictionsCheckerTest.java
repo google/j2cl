@@ -381,10 +381,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           void setX(boolean x);
           @JsProperty
           boolean getY();
-        > Error: 'boolean Buggy.getY()' and 'void Buggy.setY(boolean)' cannot both use the same JavaScript name 'y'.
-          // TODO(b/277967621): This error message is incorrect, in this case there are multiple
-          // members colliding on the same name but the error reporter selects the wrong ones to
-          // emit the message.
+        > Error: 'boolean Buggy.getY()', 'void Buggy.setX(boolean)' and 'void Buggy.setY(boolean)' cannot all use the same JavaScript name 'y'.
         }
         """);
   }

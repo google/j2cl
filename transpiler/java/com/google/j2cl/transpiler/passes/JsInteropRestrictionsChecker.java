@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.common.StringUtils.startsWithCamelCase;
@@ -29,7 +30,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Ordering;
 import com.google.common.collect.Streams;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.FormatMethod;
@@ -2398,19 +2398,21 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    // Emit the colliding method descriptor in way that is independent on the order in which the
+    // Emit the colliding method descriptors in way that is independent on the order in which the
     // frontend provides the methods.
-    var memberDescription = memberDescriptor.getReadableDescription();
-    var potentiallyCollidingMemberDescription = potentiallyCollidingMember.getReadableDescription();
-
-    var first = Ordering.natural().min(memberDescription, potentiallyCollidingMemberDescription);
-    var second = Ordering.natural().max(memberDescription, potentiallyCollidingMemberDescription);
-
+    var collidingMemberDescriptions =
+        potentiallyCollidingMembers.stream()
+            .map(MemberDescriptor::getReadableDescription)
+            .sorted()
+            .map(s -> "'" + s + "'")
+            .collect(toImmutableList());
     problems.error(
         sourcePosition,
-        "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
-        first,
-        second,
+        "%s and %s cannot %s use the same JavaScript name '%s'.",
+        String.join(
+            ", ", collidingMemberDescriptions.subList(0, collidingMemberDescriptions.size() - 1)),
+        collidingMemberDescriptions.getLast(),
+        potentiallyCollidingMembers.size() == 2 ? "both" : "all",
         memberDescriptor.getSimpleJsName());
   }
 
