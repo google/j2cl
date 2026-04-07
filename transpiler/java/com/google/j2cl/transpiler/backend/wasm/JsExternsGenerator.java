@@ -190,7 +190,10 @@ final class JsExternsGenerator {
           .setName(primary.getSimpleJsName())
           .setTypeDescriptor(typeDescriptor)
           .setStatic(primary.isStatic())
-          .setFinal(setter == null)
+          // If there is no setter, mark as compile time constant. It's not technically a compile
+          // time constant, but this is needed to emit @const which is used for constants and
+          // read-only properties.
+          .setCompileTimeConstant(setter == null)
           .setOriginalJsInfo(
               JsInfo.Builder.from(primary.getJsInfo())
                   .setJsName(primary.getSimpleJsName())
