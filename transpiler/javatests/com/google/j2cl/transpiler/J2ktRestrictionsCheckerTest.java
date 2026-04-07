@@ -21,337 +21,276 @@ import junit.framework.TestCase;
 @SuppressWarnings("CheckReturnValue")
 public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testEmptyClass() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit("test.Empty", "class Empty {}")
-        .assertTranspileSucceeds();
+    assertWithInlineMessages(
+        "test.Empty",
+        """
+        class Empty {}
+        """);
   }
 
   public void testGenericConstructorFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            class Main {
-              <T> Main(T t) {}
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:3: Constructor 'Main(T t)' cannot declare type variables.");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        class Main {
+          <T> Main(T t) {}
+        > Error: Constructor 'Main(T t)' cannot declare type variables.
+        }
+        """);
   }
 
   public void testMemberVisibilityWarnings() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Public",
-            """
-            class Pkg {}
-            public class Public {
-              public void pkgParam(Pkg pkg) {}
-              public Pkg pkgReturnType() { return new Pkg(); }
-              public Pkg pkgField;
-              static class InnerPkg {
-                public InnerPkg() {}
-                public Pkg pkgReturnType() { return new Pkg(); }
-                public Pkg pkgField;
-              }
-            }
-            """)
-        .assertTranspileSucceeds()
-        .assertWarningsWithSourcePosition(
-            "Warning:Public.java:4: Member 'void Public.pkgParam(Pkg pkg)' (public) should not have"
-                + " wider visibility than 'Pkg' (default).",
-            "Warning:Public.java:5: Member 'Pkg Public.pkgReturnType()' (public) should not have"
-                + " wider visibility than 'Pkg' (default).",
-            "Warning:Public.java:6: Member 'Public.pkgField' (public) should not have wider"
-                + " visibility than 'Pkg' (default).");
+    assertWithInlineMessages(
+        "test.Public",
+        """
+        class Pkg {}
+        public class Public {
+          public void pkgParam(Pkg pkg) {}
+        > Warning: Member 'void Public.pkgParam(Pkg pkg)' (public) should not have wider visibility than 'Pkg' (default).
+          public Pkg pkgReturnType() { return new Pkg(); }
+        > Warning: Member 'Pkg Public.pkgReturnType()' (public) should not have wider visibility than 'Pkg' (default).
+          public Pkg pkgField;
+        > Warning: Member 'Public.pkgField' (public) should not have wider visibility than 'Pkg' (default).
+          static class InnerPkg {
+            public InnerPkg() {}
+            public Pkg pkgReturnType() { return new Pkg(); }
+            public Pkg pkgField;
+          }
+        }
+        """);
   }
 
   public void testClassVisibilityWarnings() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            class Pkg {}
-            public class Main extends Pkg {}
-            """)
-        .assertTranspileSucceeds()
-        .assertWarningsWithSourcePosition(
-            "Warning:Main.java:3: Type 'Main' (public) should not have wider visibility than its"
-                + " super type 'Pkg' (default).");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        class Pkg {}
+        public class Main extends Pkg {}
+        > Warning: Type 'Main' (public) should not have wider visibility than its super type 'Pkg' (default).
+        """);
   }
 
   public void testAnonymousClassVisibilitySucceeds() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            class Pkg {}
-            public class Main {
-              Pkg m() {
-                return new Pkg() {};
-              }
-            }
-            """)
-        .assertTranspileSucceeds();
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        class Pkg {}
+        public class Main {
+          Pkg m() {
+            return new Pkg() {};
+          }
+        }
+        """);
   }
 
   public void testInterfaceVisibilityWarnings() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            interface Pkg {}
-            public interface Main extends Pkg {}
-            """)
-        .assertTranspileSucceeds()
-        .assertWarningsWithSourcePosition(
-            "Warning:Main.java:3: Type 'Main' (public) should not have wider visibility than its"
-                + " super type 'Pkg' (default).");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        interface Pkg {}
+        public interface Main extends Pkg {}
+        > Warning: Type 'Main' (public) should not have wider visibility than its super type 'Pkg' (default).
+        """);
   }
 
   public void testNonNullMarkedErrors() {
     newTranspilerTester()
-        .addCompilationUnit("test.Main", "class Main { void m() {} }")
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:2: Type 'test.Main' must be directly or indirectly @NullMarked.");
+        .assertWithInlineMessages(
+            "test.Main",
+            """
+            class Main { void m() {} }
+            > Error: Type 'test.Main' must be directly or indirectly @NullMarked.
+            """);
 
     newTranspilerTester()
         .addNullMarkPackageInfo("foo")
-        .addCompilationUnit("foo.A", "class A { void m() {} }")
-        .addCompilationUnit("bar.B", "class B { void m() {} }")
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:B.java:2: Type 'bar.B' must be directly or indirectly @NullMarked.");
+        .assertWithInlineMessages(
+            "foo.A",
+            "class A { void m() {} }",
+            "bar.B",
+            """
+            class B { void m() {} }
+            > Error: Type 'bar.B' must be directly or indirectly @NullMarked.
+            """);
 
     // Enums are tolerated as not being NullMarked.
-    newTranspilerTester().addCompilationUnit("foo.A", "enum A {}").assertTranspileSucceeds();
+    newTranspilerTester().assertWithInlineMessages("foo.A", "enum A {}");
 
     // Annotations are tolerated as not being NullMarked.
-    newTranspilerTester().addCompilationUnit("foo.A", "@interface A {}").assertTranspileSucceeds();
+    newTranspilerTester().assertWithInlineMessages("foo.A", "@interface A {}");
 
     // Empty classes are tolerated as not being NullMarked.
-    newTranspilerTester().addCompilationUnit("foo.A", "class A {}").assertTranspileSucceeds();
+    newTranspilerTester().assertWithInlineMessages("foo.A", "class A {}");
 
     // But the empty class cannot have a supertype.
     newTranspilerTester()
-        .addCompilationUnit("foo.A", "class A {}")
-        .addCompilationUnit("foo.B", "class B extends A {}")
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:B.java:2: Type 'foo.B' must be directly or indirectly @NullMarked.");
+        .assertWithInlineMessages(
+            "foo.A",
+            "class A {}",
+            "foo.B",
+            """
+            class B extends A {}
+            > Error: Type 'foo.B' must be directly or indirectly @NullMarked.
+            """);
 
     newTranspilerTester()
-        .addCompilationUnit(
+        .assertWithInlineMessages(
             "test.Main",
             """
             class Outer {
+            > Error: Type 'test.Outer' must be directly or indirectly @NullMarked.
               @org.jspecify.annotations.NullMarked
               class Inner { void m() {} }
               @org.jspecify.annotations.NullMarked
               static class StaticInner { void m() {} }
             }
-            """)
-        .addCompilationUnit(
-            "org.jspecify.annotations.NullMarked", "public @interface NullMarked {}")
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:2: Type 'test.Outer' must be directly or indirectly @NullMarked.");
+            """,
+            "org.jspecify.annotations.NullMarked",
+            "public @interface NullMarked {}");
   }
 
   public void testKtPropertyNonEmptyParametersFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            abstract class Main {
-              @javaemul.internal.annotations.KtProperty
-              abstract int method(int foo);
-            }
-            """)
-        .addCompilationUnit(
-            "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:4: Method 'int Main.method(int foo)' can not be '@KtProperty', as it"
-                + " has non-empty parameters.");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        abstract class Main {
+          @javaemul.internal.annotations.KtProperty
+          abstract int method(int foo);
+        > Error: Method 'int Main.method(int foo)' can not be '@KtProperty', as it has non-empty parameters.
+        }
+        """,
+        "javaemul.internal.annotations.KtProperty",
+        "public @interface KtProperty {}");
   }
 
   public void testKtPropertyVoidReturnTypeFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            abstract class Main {
-              @javaemul.internal.annotations.KtProperty
-              abstract void method();
-            }
-            """)
-        .addCompilationUnit(
-            "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:4: Method 'void Main.method()' can not be '@KtProperty', as it has"
-                + " void return type.");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        abstract class Main {
+          @javaemul.internal.annotations.KtProperty
+          abstract void method();
+        > Error: Method 'void Main.method()' can not be '@KtProperty', as it has void return type.
+        }
+        """,
+        "javaemul.internal.annotations.KtProperty",
+        "public @interface KtProperty {}");
   }
 
   public void testKtPropertyConstructorFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            class Main {
-              @javaemul.internal.annotations.KtProperty
-              Main() {}
-            }
-            """)
-        .addCompilationUnit(
-            "javaemul.internal.annotations.KtProperty", "public @interface KtProperty {}")
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:4: Constructor 'Main()' can not be '@KtProperty'.");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        class Main {
+          @javaemul.internal.annotations.KtProperty
+          Main() {}
+        > Error: Constructor 'Main()' can not be '@KtProperty'.
+        }
+        """,
+        "javaemul.internal.annotations.KtProperty",
+        "public @interface KtProperty {}");
   }
 
   public void testSynchronizedMethodInUnsupportedTypeFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Child",
-            """
-            class Parent {}
-            class Child extends Parent {
-              synchronized void method() {}
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Child.java:3: Type 'Child' does not support synchronized methods as it does not "
-                + "extend 'J2ktMonitor' or is not a direct subclass of 'Object'.");
+    assertWithInlineMessages(
+        "test.Child",
+        """
+        class Parent {}
+        class Child extends Parent {
+        > Error: Type 'Child' does not support synchronized methods as it does not extend 'J2ktMonitor' or is not a direct subclass of 'Object'.
+          synchronized void method() {}
+        }
+        """);
   }
 
   public void testUnsupportedSynchronizedStatementFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            class Main {
-              void method() {
-                synchronized (this) {}
-              }
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:4: Synchronized statement is valid only on instances of 'Class' or"
-                + " 'J2ktMonitor'.");
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        class Main {
+          void method() {
+            synchronized (this) {}
+        > Error: Synchronized statement is valid only on instances of 'Class' or 'J2ktMonitor'.
+          }
+        }
+        """);
   }
 
   public void testExplicitQualifierInAnonymousNewInstanceFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Outer",
-            """
-            class Outer {
-              class Inner {
-                void test(Outer outer) {
-                  outer.new Inner() {};
-                }
-              }
+    assertWithInlineMessages(
+        "test.Outer",
+        """
+        class Outer {
+          class Inner {
+            void test(Outer outer) {
+              outer.new Inner() {};
+        > Error: Explicit qualifier in constructor call is not supported.
             }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Outer.java:5: Explicit qualifier in constructor call is not supported.");
+          }
+        }
+        """);
   }
 
   public void testExplicitQualifierInSuperCallFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Outer",
-            """
-            class Outer {
-              class Inner {}
-            }
-            class InnerSubclass extends Outer.Inner {
-              InnerSubclass(Outer outer) {
-                outer.super();
-              }
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Outer.java:7: Explicit qualifier in constructor call is not supported.");
+    assertWithInlineMessages(
+        "test.Outer",
+        """
+        class Outer {
+          class Inner {}
+        }
+        class InnerSubclass extends Outer.Inner {
+          InnerSubclass(Outer outer) {
+            outer.super();
+        > Error: Explicit qualifier in constructor call is not supported.
+          }
+        }
+        """);
   }
 
   public void testFieldShadowingFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "test.Parent",
-            """
-            public class Parent {
-              public int publicShadowedByPublic;
-              public int publicShadowedByPrivateShadowedByPublic;
-              protected int protectedShadowedByProtected;
-              protected int protectedShadowedByPublic;
-              int packagePrivateShadowedByPackagePrivate;
-              int packagePrivateShadowedByPublic;
-            }
-            """)
-        .addCompilationUnit(
-            "test.Child",
-            """
-            public class Child extends Parent {
-              public int publicShadowedByPublic;
-              public int publicShadowedByPrivateShadowedByPublic;
-              protected int protectedShadowedByProtected;
-              public int protectedShadowedByPublic;
-              int packagePrivateShadowedByPackagePrivate;
-              public int packagePrivateShadowedByPublic;
-            }
-            """)
-        .addCompilationUnit(
-            "test.GrandChild",
-            """
-            public class GrandChild extends Child {
-              public int publicShadowedByPrivateShadowedByPublic;
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Child.java:3: Field 'Child.publicShadowedByPublic' cannot shadow a super type"
-                + " field.",
-            "Error:Child.java:4: Field 'Child.publicShadowedByPrivateShadowedByPublic' cannot"
-                + " shadow a super type field.",
-            "Error:Child.java:5: Field 'Child.protectedShadowedByProtected' cannot shadow a super"
-                + " type field.",
-            "Error:Child.java:6: Field 'Child.protectedShadowedByPublic' cannot shadow a super type"
-                + " field.",
-            "Error:Child.java:7: Field 'Child.packagePrivateShadowedByPackagePrivate' cannot shadow"
-                + " a super type field.",
-            "Error:Child.java:8: Field 'Child.packagePrivateShadowedByPublic' cannot shadow a super"
-                + " type field.",
-            "Error:GrandChild.java:3: Field 'GrandChild.publicShadowedByPrivateShadowedByPublic'"
-                + " cannot shadow a super type field.");
+    assertWithInlineMessages(
+        "test.Parent",
+        """
+        public class Parent {
+          public int publicShadowedByPublic;
+          public int publicShadowedByPrivateShadowedByPublic;
+          protected int protectedShadowedByProtected;
+          protected int protectedShadowedByPublic;
+          int packagePrivateShadowedByPackagePrivate;
+          int packagePrivateShadowedByPublic;
+        }
+        """,
+        "test.Child",
+        """
+        public class Child extends Parent {
+          public int publicShadowedByPublic;
+        > Error: Field 'Child.publicShadowedByPublic' cannot shadow a super type field.
+          public int publicShadowedByPrivateShadowedByPublic;
+        > Error: Field 'Child.publicShadowedByPrivateShadowedByPublic' cannot shadow a super type field.
+          protected int protectedShadowedByProtected;
+        > Error: Field 'Child.protectedShadowedByProtected' cannot shadow a super type field.
+          public int protectedShadowedByPublic;
+        > Error: Field 'Child.protectedShadowedByPublic' cannot shadow a super type field.
+          int packagePrivateShadowedByPackagePrivate;
+        > Error: Field 'Child.packagePrivateShadowedByPackagePrivate' cannot shadow a super type field.
+          public int packagePrivateShadowedByPublic;
+        > Error: Field 'Child.packagePrivateShadowedByPublic' cannot shadow a super type field.
+        }
+        """,
+        "test.GrandChild",
+        """
+        public class GrandChild extends Child {
+          public int publicShadowedByPrivateShadowedByPublic;
+        > Error: Field 'GrandChild.publicShadowedByPrivateShadowedByPublic' cannot shadow a super type field.
+        }
+        """);
   }
 
   public void testFieldShadowingSucceeds() {
     newTranspilerTester()
         .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
+        .addNullMarkPackageInfo("other")
+        .assertWithInlineMessages(
             "test.Parent",
             """
             public class Parent {
@@ -359,111 +298,112 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
               int packagePrivateInDifferentPackage;
               public static int staticField;
             }
-            """)
-        .addCompilationUnit(
+            """,
             "test.Child",
             """
             public interface Child extends Parent {
               int interfaceField = 1;
             }
-            """)
-        .addCompilationUnit(
+            """,
             "test.Child",
             """
             public class Child extends Parent {
               public int privateField;
             }
-            """)
-        .addNullMarkPackageInfo("other")
-        .addCompilationUnit(
+            """,
             "other.Child",
             """
             public class Child extends test.Parent {
               int packagePrivateInOtherPackage;
               public static int staticField;
             }
-            """)
-        .addCompilationUnit(
+            """,
             "test.ParentInterface",
             """
             public interface ParentInterface {
               int interfaceField = 0;
             }
-            """)
-        .addCompilationUnit(
+            """,
             "test.ChildInterface",
             """
             public interface ChildInterface extends ParentInterface {
               int interfaceField = 1;
             }
-            """)
-        .assertTranspileSucceeds();
+            """);
   }
 
   public void testJ2ObjCPropertyAndJsTypeFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "com.google.j2objc.annotations.Property", "public @interface Property {}")
-        .addCompilationUnit("jsinterop.annotations.JsType", "public @interface JsType {}")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            @jsinterop.annotations.JsType
-            @com.google.j2objc.annotations.Property
-            class Main {
-              public int getFoo() {
-                return 1;
-              };
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:5: Method 'int Main.getFoo()' is marked @Property for J2ObjC but"
-                + " exposed to JS without a @JsProperty.");
+    assertWithInlineMessages(
+        "com.google.j2objc.annotations.Property",
+        """
+        public @interface Property {}
+        """,
+        "jsinterop.annotations.JsType",
+        """
+        public @interface JsType {}
+        """,
+        "test.Main",
+        """
+        @jsinterop.annotations.JsType
+        @com.google.j2objc.annotations.Property
+        class Main {
+          public int getFoo() {
+        > Error: Method 'int Main.getFoo()' is marked @Property for J2ObjC but exposed to JS without a @JsProperty.
+            return 1;
+          };
+        }
+        """);
   }
 
   public void testJ2ObjCPropertyAndJsMethodFails() {
-    newTranspilerTester()
-        .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "com.google.j2objc.annotations.Property", "public @interface Property {}")
-        .addCompilationUnit("jsinterop.annotations.JsMethod", "public @interface JsMethod {}")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            @com.google.j2objc.annotations.Property
-            class Main {
-              @jsinterop.annotations.JsMethod
-              public int getFoo() {
-                return 1;
-              };
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithSourcePosition(
-            "Error:Main.java:5: Method 'int Main.getFoo()' is marked @Property for J2ObjC but"
-                + " exposed to JS without a @JsProperty.");
+    assertWithInlineMessages(
+        "com.google.j2objc.annotations.Property",
+        """
+        public @interface Property {}
+        """,
+        "jsinterop.annotations.JsMethod",
+        """
+        public @interface JsMethod {}
+        """,
+        "test.Main",
+        """
+        @com.google.j2objc.annotations.Property
+        class Main {
+          @jsinterop.annotations.JsMethod
+          public int getFoo() {
+        > Error: Method 'int Main.getFoo()' is marked @Property for J2ObjC but exposed to JS without a @JsProperty.
+            return 1;
+          };
+        }
+        """);
   }
 
   public void testJ2ObjCPropertyAndJsPropertySucceeds() {
+    assertWithInlineMessages(
+        "com.google.j2objc.annotations.Property",
+        """
+        public @interface Property {}
+        """,
+        "jsinterop.annotations.JsProperty",
+        """
+        public @interface JsProperty {}
+        """,
+        "test.Main",
+        """
+        @com.google.j2objc.annotations.Property
+        class Main {
+          @jsinterop.annotations.JsProperty
+          public int getFoo() {
+            return 1;
+          };
+        }
+        """);
+  }
+
+  private void assertWithInlineMessages(String... compilationUnitsAndSources) {
     newTranspilerTester()
         .addNullMarkPackageInfo("test")
-        .addCompilationUnit(
-            "com.google.j2objc.annotations.Property", "public @interface Property {}")
-        .addCompilationUnit("jsinterop.annotations.JsProperty", "public @interface JsProperty {}")
-        .addCompilationUnit(
-            "test.Main",
-            """
-            @com.google.j2objc.annotations.Property
-            class Main {
-              @jsinterop.annotations.JsProperty
-              public int getFoo() {
-                return 1;
-              };
-            }
-            """)
-        .assertTranspileSucceeds();
+        .assertWithInlineMessages(compilationUnitsAndSources);
   }
 
   private TranspilerTester newTranspilerTester() {
