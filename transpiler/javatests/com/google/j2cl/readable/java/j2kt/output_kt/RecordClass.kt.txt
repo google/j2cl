@@ -1,0 +1,279 @@
+// Generated from "j2kt/RecordClass.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2kt
+
+import javaemul.lang.*
+import java.util.Arrays
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.arrayOf
+import kotlin.run
+
+class RecordClass {
+ class RecordWithEmptyCopyMethod {
+  private val a: Int
+  
+  private val b: Int
+  
+  fun copy(): RecordWithEmptyCopyMethod? {
+   return RecordWithEmptyCopyMethod(
+    this@RecordWithEmptyCopyMethod.a,
+    this@RecordWithEmptyCopyMethod.b,
+   )
+  }
+  
+  constructor(a: Int, b: Int) {
+   this.a = a
+   this.b = b
+  }
+  
+  fun a(): Int {
+   return this.a
+  }
+  
+  fun b(): Int {
+   return this.b
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: RecordWithEmptyCopyMethod? = null
+   if (!(arg0 is RecordWithEmptyCopyMethod && run {
+    ___other = arg0 as RecordWithEmptyCopyMethod?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.a, this.b),
+    arrayOf<Any?>(___other!!.a, ___other!!.b),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+  
+  override fun toString(): String {
+   return Arrays.toString(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+ }
+ 
+ class RecordWithPartialCopyMethod {
+  private val a: Int
+  
+  private val b: Int
+  
+  fun copy(a: Int): RecordWithPartialCopyMethod? {
+   return RecordWithPartialCopyMethod(
+    a,
+    this@RecordWithPartialCopyMethod.b,
+   )
+  }
+  
+  constructor(a: Int, b: Int) {
+   this.a = a
+   this.b = b
+  }
+  
+  fun a(): Int {
+   return this.a
+  }
+  
+  fun b(): Int {
+   return this.b
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: RecordWithPartialCopyMethod? = null
+   if (!(arg0 is RecordWithPartialCopyMethod && run {
+    ___other = arg0 as RecordWithPartialCopyMethod?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.a, this.b),
+    arrayOf<Any?>(___other!!.a, ___other!!.b),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+  
+  override fun toString(): String {
+   return Arrays.toString(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+ }
+ 
+ class RecordWithFullCopyMethod {
+  private val a: Int
+  
+  private val b: Int
+  
+  fun copy(a: Int, b: Int): RecordWithFullCopyMethod? {
+   return RecordWithFullCopyMethod(a, b)
+  }
+  
+  constructor(a: Int, b: Int) {
+   this.a = a
+   this.b = b
+  }
+  
+  fun a(): Int {
+   return this.a
+  }
+  
+  fun b(): Int {
+   return this.b
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: RecordWithFullCopyMethod? = null
+   if (!(arg0 is RecordWithFullCopyMethod && run {
+    ___other = arg0 as RecordWithFullCopyMethod?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.a, this.b),
+    arrayOf<Any?>(___other!!.a, ___other!!.b),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+  
+  override fun toString(): String {
+   return Arrays.toString(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+ }
+ 
+ class RecordWithUnrelatedCopyMethod {
+  private val a: Int
+  
+  private val b: Int
+  
+  fun copy(s: String?): RecordWithUnrelatedCopyMethod? {
+   return RecordWithUnrelatedCopyMethod(
+    s!!.length,
+    s!!.length,
+   )
+  }
+  
+  constructor(a: Int, b: Int) {
+   this.a = a
+   this.b = b
+  }
+  
+  fun a(): Int {
+   return this.a
+  }
+  
+  fun b(): Int {
+   return this.b
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: RecordWithUnrelatedCopyMethod? = null
+   if (!(arg0 is RecordWithUnrelatedCopyMethod && run {
+    ___other = arg0 as RecordWithUnrelatedCopyMethod?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.a, this.b),
+    arrayOf<Any?>(___other!!.a, ___other!!.b),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+  
+  override fun toString(): String {
+   return Arrays.toString(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+ }
+ 
+ class RecordWithComponentMethods {
+  private val a: Int
+  
+  private val b: Int
+  
+  fun component1(): Int {
+   return this.a
+  }
+  
+  fun component2(): Int {
+   return this.b
+  }
+  
+  constructor(a: Int, b: Int) {
+   this.a = a
+   this.b = b
+  }
+  
+  fun a(): Int {
+   return this.a
+  }
+  
+  fun b(): Int {
+   return this.b
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: RecordWithComponentMethods? = null
+   if (!(arg0 is RecordWithComponentMethods && run {
+    ___other = arg0 as RecordWithComponentMethods?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.a, this.b),
+    arrayOf<Any?>(___other!!.a, ___other!!.b),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+  
+  override fun toString(): String {
+   return Arrays.toString(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+ }
+}
