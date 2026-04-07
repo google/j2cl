@@ -14,13 +14,13 @@ let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
+let $short = goog.forwardDeclare('javaemul.internal.primitives.$short$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
-let $$short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
 
 /**
  * @final
@@ -142,7 +142,7 @@ class ArithmeticExpressionsKt extends j_l_Object {
  /** @nodts */
  static m_testCompoundArray__void() {
   ArithmeticExpressionsKt.$clinit();
-  let ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int));
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $int));
   let array = ints;
   let index_0 = 0;
   $Arrays.$set(array, index_0, array[index_0] + 1 | 0);
@@ -183,7 +183,7 @@ class ArithmeticExpressionsKt extends j_l_Object {
   i = unary_3 + 1 | 0;
   let index_0_9 = unary_3;
   $Arrays.$set(array_9, index_0_9, Primitives.m_coerceDivision__int__int(array_9[index_0_9] / 1));
-  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
+  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $long));
   let array_10 = longs;
   let index_0_10 = 0;
   $Arrays.$set(array_10, index_0_10, $LongUtils.plus(array_10[index_0_10], $Long.fromInt(1)));
@@ -200,7 +200,7 @@ class ArithmeticExpressionsKt extends j_l_Object {
   let unary_5 = array_13[index_0_13];
   $Arrays.$set(array_13, index_0_13, $LongUtils.plus(unary_5, $Long.fromInt(1)));
   let strings = /**@type {Array<?string>}*/ (null);
-  let shorts = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$short));
+  let shorts = /**@type {!Array<number>}*/ ($Arrays.$create([0], $short));
   let array_14 = shorts;
   let index_0_14 = 0;
   $Arrays.$set(array_14, index_0_14, Primitives.m_narrowIntToShort__int__int(array_14[index_0_14] + 1 | 0));
@@ -224,7 +224,7 @@ class ArithmeticExpressionsKt extends j_l_Object {
  /** @nodts @return {!Array<!$Long>} */
  static m_getLongArray__arrayOf_long() {
   ArithmeticExpressionsKt.$clinit();
-  return /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
+  return /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $long));
  }
  /** @nodts @return {Integer} */
  static m_getInteger__java_lang_Integer() {
@@ -340,13 +340,13 @@ class ArithmeticExpressionsKt extends j_l_Object {
   Objects = goog.module.get('java.util.Objects$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Primitives = goog.module.get('javaemul.internal.Primitives$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  $long = goog.module.get('javaemul.internal.primitives.$long$impl');
+  $short = goog.module.get('javaemul.internal.primitives.$short$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
-  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
-  $$short = goog.module.get('vmbootstrap.primitives.$short$impl');
  }
 }
 /**@const {number} @nodts*/

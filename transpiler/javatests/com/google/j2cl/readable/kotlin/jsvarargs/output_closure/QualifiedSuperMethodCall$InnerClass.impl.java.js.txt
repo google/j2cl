@@ -3,10 +3,10 @@ goog.module('jsvarargs.QualifiedSuperMethodCall.InnerClass$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let Main = goog.forwardDeclare('jsvarargs.Main$impl');
 let QualifiedSuperMethodCall = goog.forwardDeclare('jsvarargs.QualifiedSuperMethodCall$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @final
@@ -36,7 +36,7 @@ class InnerClass extends j_l_Object {
   Main.prototype.f3.call(this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1);
   Main.prototype.f3.call(this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, 1, 2);
   Main.prototype.f3.call(this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1);
-  let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int));
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $int));
   Main.prototype.f3.call(this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, ...ints);
  }
  /** @nodts */
@@ -52,9 +52,9 @@ class InnerClass extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   Main = goog.module.get('jsvarargs.Main$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(InnerClass, 'jsvarargs.QualifiedSuperMethodCall$InnerClass');

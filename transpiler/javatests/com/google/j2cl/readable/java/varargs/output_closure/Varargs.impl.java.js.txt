@@ -8,11 +8,11 @@ let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let FunctionalInterface = goog.forwardDeclare('varargs.Varargs.FunctionalInterface$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 class Varargs extends j_l_Object {
  /** @protected @nodts */
@@ -45,7 +45,7 @@ class Varargs extends j_l_Object {
  //Initialization from constructor 'Varargs()'.
  /** @nodts */
  $ctor__varargs_Varargs__void() {
-  this.$ctor__varargs_Varargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([1], $$int)));
+  this.$ctor__varargs_Varargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([1], $int)));
  }
  /** @nodts */
  m_test__int__arrayOf_java_lang_Object__void(/** number */ a, /** Array<*> */ args) {}
@@ -102,8 +102,8 @@ class Varargs extends j_l_Object {
   v.m_testOverloaded__long__void($Long.fromInt(1));
   v.m_testOverloaded__java_lang_Object__void(Long.m_valueOf__long__java_lang_Long($Long.fromInt(1)));
   v.m_testOverloaded__long__void($Long.fromInt(1));
-  v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $$long)));
-  v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $$long)));
+  v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $long)));
+  v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $long)));
  }
  /** @nodts */
  static $clinit() {
@@ -121,11 +121,11 @@ class Varargs extends j_l_Object {
   Long = goog.module.get('java.lang.Long$impl');
   Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  $long = goog.module.get('javaemul.internal.primitives.$long$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   FunctionalInterface = goog.module.get('varargs.Varargs.FunctionalInterface$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
-  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
  }
 }
 $Util.$setClassMetadata(Varargs, 'varargs.Varargs');

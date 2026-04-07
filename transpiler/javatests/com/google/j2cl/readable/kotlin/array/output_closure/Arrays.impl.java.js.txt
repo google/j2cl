@@ -12,14 +12,14 @@ let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
+let $byte = goog.forwardDeclare('javaemul.internal.primitives.$byte$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let ArrayHelpersKt = goog.forwardDeclare('kotlin.jvm.internal.ArrayHelpersKt$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $$byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 /**
  * @final
@@ -84,63 +84,63 @@ class Arrays extends j_l_Object {
  }
  /** @final @nodts */
  m_testIntArrays__void() {
-  let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $$int));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$stampType([0, 1], $$int)));
-  let ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$createWithInitializer(5, $$int, /**  @return {Array<number>}*/ ((/** number */ it) =>{
-   return /**@type {!Array<number>}*/ ($Arrays.$create([10], $$int));
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $int));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([0], $int)));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$stampType([0, 1], $int)));
+  let ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$createWithInitializer(5, $int, /**  @return {Array<number>}*/ ((/** number */ it) =>{
+   return /**@type {!Array<number>}*/ ($Arrays.$create([10], $int));
   }), 2));
-  ints2d = (/**@type {!Array<Array<number>>}*/ ($Arrays.$stampType([/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int)), null], $$int, 2)));
-  ints2d = (/**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $$int)));
+  ints2d = (/**@type {!Array<Array<number>>}*/ ($Arrays.$stampType([/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $int)), null], $int, 2)));
+  ints2d = (/**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $int)));
   let n = ints[0];
   n = ints2d[0][1];
   $Arrays.$set(ints, 0, 1);
   $Arrays.$set(ints2d[0], 1, 1);
-  let nonNull2dArray = /**@type {!Array<!Array<number>>}*/ ($Arrays.$createWithInitializer(1, $$int, /**  @return {!Array<number>}*/ ((/** number */ it_1) =>{
-   return /**@type {!Array<number>}*/ ($Arrays.$create([2], $$int));
+  let nonNull2dArray = /**@type {!Array<!Array<number>>}*/ ($Arrays.$createWithInitializer(1, $int, /**  @return {!Array<number>}*/ ((/** number */ it_1) =>{
+   return /**@type {!Array<number>}*/ ($Arrays.$create([2], $int));
   }), 2));
   n = nonNull2dArray[0][1];
   $Arrays.$set(nonNull2dArray[1], 2, 1);
   let b = 1;
   let c = 97 /* 'a' */;
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([b], $$int)));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([b], $int)));
   $Arrays.$set(ints, b, b);
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([c], $$int)));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([c], $int)));
   let tmp = ints;
   let tmp_1 = c;
   $Arrays.$set(tmp, tmp_1, c);
   let tmp_2 = b;
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$stampType([tmp_2, c], $$int)));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$stampType([tmp_2, c], $int)));
  }
  /** @final @nodts */
  m_testLongArrays__void() {
-  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $$long));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long)));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(0), $Long.fromInt(1)], $$long)));
-  let longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$createWithInitializer(5, $$long, /**  @return {Array<!$Long>}*/ ((/** number */ it) =>{
-   return /**@type {!Array<!$Long>}*/ ($Arrays.$create([10], $$long));
+  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $long));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $long)));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(0), $Long.fromInt(1)], $long)));
+  let longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$createWithInitializer(5, $long, /**  @return {Array<!$Long>}*/ ((/** number */ it) =>{
+   return /**@type {!Array<!$Long>}*/ ($Arrays.$create([10], $long));
   }), 2));
-  longs2d = (/**@type {!Array<Array<!$Long>>}*/ ($Arrays.$stampType([/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(1), $Long.fromInt(2)], $$long)), null], $$long, 2)));
-  longs2d = (/**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([20, null], $$long)));
+  longs2d = (/**@type {!Array<Array<!$Long>>}*/ ($Arrays.$stampType([/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(1), $Long.fromInt(2)], $long)), null], $long, 2)));
+  longs2d = (/**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([20, null], $long)));
   let n = longs[0];
   n = longs2d[0][1];
   $Arrays.$set(longs, 0, $Long.fromInt(1));
   $Arrays.$set(longs2d[0], 1, $Long.fromInt(1));
-  let nonNull2dArray = /**@type {!Array<!Array<!$Long>>}*/ ($Arrays.$createWithInitializer(1, $$long, /**  @return {!Array<!$Long>}*/ ((/** number */ it_1) =>{
-   return /**@type {!Array<!$Long>}*/ ($Arrays.$create([2], $$long));
+  let nonNull2dArray = /**@type {!Array<!Array<!$Long>>}*/ ($Arrays.$createWithInitializer(1, $long, /**  @return {!Array<!$Long>}*/ ((/** number */ it_1) =>{
+   return /**@type {!Array<!$Long>}*/ ($Arrays.$create([2], $long));
   }), 2));
   n = nonNull2dArray[0][1];
   $Arrays.$set(nonNull2dArray[1], 2, $Long.fromInt(1));
   let b = 1;
   let c = 97 /* 'a' */;
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([b], $$long)));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([b], $long)));
   $Arrays.$set(longs, b, Primitives.m_widenByteToLong__int__long(b));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([c], $$long)));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([c], $long)));
   let tmp = longs;
   let tmp_1 = c;
   $Arrays.$set(tmp, tmp_1, Primitives.m_widenCharToLong__int__long(c));
   let tmp_2 = Primitives.m_widenByteToLong__int__long(b);
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([tmp_2, Primitives.m_widenCharToLong__int__long(c)], $$long)));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([tmp_2, Primitives.m_widenCharToLong__int__long(c)], $long)));
  }
  /** @final @nodts */
  m_testDevirtualizedTypeArrays__void() {
@@ -232,55 +232,55 @@ class Arrays extends j_l_Object {
   for (let indexedObject = stringArray, inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
    let e = /**@type {?string}*/ (indexedObject[inductionVariable]);
   }
-  let byteArray = /**@type {!Array<number>}*/ ($Arrays.$create([1], $$byte));
+  let byteArray = /**@type {!Array<number>}*/ ($Arrays.$create([1], $byte));
   for (let indexedObject_1 = byteArray, inductionVariable_1 = 0, last_1 = indexedObject_1.length; inductionVariable_1 < last_1; inductionVariable_1 = inductionVariable_1 + 1 | 0) {
    let e_1 = indexedObject_1[inductionVariable_1];
   }
  }
  /** @final @nodts */
  m_testArrayInitializer__void() {
-  let ints = /**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $$int, /**  @return {number}*/ ((/** number */ it) =>{
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, /**  @return {number}*/ ((/** number */ it) =>{
    return Math.imul(it, 2);
   })));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $$int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0) =>{
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0) =>{
    let p0_1 = /**@type {!Integer}*/ ($Casts.$to(p0, Integer));
    return Integer.valueOf(ArrayKt.m_doubleIt__int__int(p0_1.intValue()));
   }))))));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $$int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ x) =>{
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ x) =>{
    let x_1 = /**@type {Integer}*/ ($Casts.$to(x, Integer));
    return Integer.valueOf(ArrayKt.m_toNonNullable__java_lang_Integer__int(x_1));
   }))))));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $$int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ p0_2) =>{
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ p0_2) =>{
    let p0_3 = /**@type {Integer}*/ ($Casts.$to(p0_2, Integer));
    return Integer.valueOf(ArrayKt.m_toNonNullable__java_lang_Integer__int(p0_3));
   }))))));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $$int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0_4) =>{
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0_4) =>{
    let p0_5 = /**@type {!Integer}*/ ($Casts.$to(p0_4, Integer));
-   return Integer.valueOf(ArrayKt.m_acceptsVararg__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([p0_5.intValue()], $$int))));
+   return Integer.valueOf(ArrayKt.m_acceptsVararg__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([p0_5.intValue()], $int))));
   }))))));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $$int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0_6) =>{
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0_6) =>{
    let p0_7 = /**@type {!Integer}*/ ($Casts.$to(p0_6, Integer));
-   return Integer.valueOf(ArrayKt.m_tailingVararg__int__arrayOf_int__int(p0_7.intValue(), /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int))));
+   return Integer.valueOf(ArrayKt.m_tailingVararg__int__arrayOf_int__int(p0_7.intValue(), /**@type {!Array<number>}*/ ($Arrays.$create([0], $int))));
   }))))));
   let initializer = Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ x_2) =>{
    let x_3 = /**@type {!Integer}*/ ($Casts.$to(x_2, Integer));
    return x_3;
   }));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $$int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(initializer))));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(initializer))));
   let otherInitializer = Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ p0_8) =>{
    let p0_9 = /**@type {Integer}*/ ($Casts.$to(p0_8, Integer));
    return Integer.valueOf(ArrayKt.m_toNonNullable__java_lang_Integer__int(p0_9));
   }));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $$int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(otherInitializer))));
-  let multidimensional = /**@type {!Array<!Array<number>>}*/ ($Arrays.$createWithInitializer(10, $$int, /**  @return {!Array<number>}*/ ((/** number */ it_1) =>{
-   return /**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(1, $$int, /**  @return {number}*/ ((/** number */ it_2) =>{
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(otherInitializer))));
+  let multidimensional = /**@type {!Array<!Array<number>>}*/ ($Arrays.$createWithInitializer(10, $int, /**  @return {!Array<number>}*/ ((/** number */ it_1) =>{
+   return /**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(1, $int, /**  @return {number}*/ ((/** number */ it_2) =>{
     return Math.imul(it_2, 2);
    })));
   }), 2));
-  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $$long, /**  @return {!$Long}*/ ((/** number */ it_3) =>{
+  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $long, /**  @return {!$Long}*/ ((/** number */ it_3) =>{
    return Primitives.m_widenIntToLong__int__long(it_3);
   })));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $$long, ArrayHelpersKt.m_toLongArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_LongArrayInitializer(Function1.$adapt(/**  @return {!$Long}*/ ((/** !Integer */ p0_10) =>{
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $long, ArrayHelpersKt.m_toLongArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_LongArrayInitializer(Function1.$adapt(/**  @return {!$Long}*/ ((/** !Integer */ p0_10) =>{
    let p0_11 = /**@type {!Integer}*/ ($Casts.$to(p0_10, Integer));
    return Primitives.m_widenIntToLong__int__long(p0_11.intValue());
   }))))));
@@ -289,7 +289,7 @@ class Arrays extends j_l_Object {
  m_testArrayInitializerEscapesScope__int() {
   let tmp = 0;
   let tmp_1 = 5;
-  let tmp_2 = /**@type {!Array<number>}*/ ($Arrays.$create([tmp_1], $$int));
+  let tmp_2 = /**@type {!Array<number>}*/ ($Arrays.$create([tmp_1], $int));
   while (tmp < tmp_1) {
    let tmp_3 = tmp;
    return tmp_3 + 1 | 0;
@@ -325,14 +325,14 @@ class Arrays extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   Primitives = goog.module.get('javaemul.internal.Primitives$impl');
+  $byte = goog.module.get('javaemul.internal.primitives.$byte$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  $long = goog.module.get('javaemul.internal.primitives.$long$impl');
   Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
   ArrayHelpersKt = goog.module.get('kotlin.jvm.internal.ArrayHelpersKt$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $$byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
-  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
  }
 }
 $Util.$setClassMetadata(Arrays, 'array.Arrays');

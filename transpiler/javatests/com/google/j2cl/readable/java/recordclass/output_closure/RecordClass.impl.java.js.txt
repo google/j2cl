@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $1GenericRecord = goog.forwardDeclare('recordclass.RecordClass.$1GenericRecord$impl');
 let $1LocalRecord = goog.forwardDeclare('recordclass.RecordClass.$1LocalRecord$impl');
@@ -15,7 +16,6 @@ let RecordWithConstructor = goog.forwardDeclare('recordclass.RecordClass.RecordW
 let SimpleRecord = goog.forwardDeclare('recordclass.RecordClass.SimpleRecord$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class RecordClass extends j_l_Object {
  /** @protected @nodts */
@@ -37,7 +37,7 @@ class RecordClass extends j_l_Object {
  m_main__void() {
   let r = SimpleRecord.$create__int(1);
   r.m_value__int();
-  let ar = ArrayRecord.$create__arrayOf_int(/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int)));
+  let ar = ArrayRecord.$create__arrayOf_int(/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $int)));
   let arValueResult = ar.m_value__arrayOf_int()[0];
   let rwc = RecordWithConstructor.$create__int__int(1, 2);
   rwc.m_a__int();
@@ -73,6 +73,7 @@ class RecordClass extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $1GenericRecord = goog.module.get('recordclass.RecordClass.$1GenericRecord$impl');
   $1LocalRecord = goog.module.get('recordclass.RecordClass.$1LocalRecord$impl');
@@ -84,7 +85,6 @@ class RecordClass extends j_l_Object {
   SimpleRecord = goog.module.get('recordclass.RecordClass.SimpleRecord$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(RecordClass, 'recordclass.RecordClass');

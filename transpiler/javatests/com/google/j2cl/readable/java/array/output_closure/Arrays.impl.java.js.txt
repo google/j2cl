@@ -10,10 +10,10 @@ let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 class Arrays extends j_l_Object {
  /** @protected @nodts */
@@ -60,43 +60,43 @@ class Arrays extends j_l_Object {
  }
  /** @nodts */
  m_testIntArrays__void_$pp_array() {
-  let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $$int));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$stampType([0, 1], $$int)));
-  let ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$create([5, 10], $$int));
-  ints2d = (/**@type {!Array<Array<number>>}*/ ($Arrays.$stampType([/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $$int)), null], $$int, 2)));
-  ints2d = (/**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $$int)));
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $int));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([0], $int)));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$stampType([0, 1], $int)));
+  let ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$create([5, 10], $int));
+  ints2d = (/**@type {!Array<Array<number>>}*/ ($Arrays.$stampType([/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $int)), null], $int, 2)));
+  ints2d = (/**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $int)));
   let n = ints[0];
   n = ints2d[0][1];
   $Arrays.$set(ints, 0, 1);
   $Arrays.$set(ints2d[0], 1, 1);
   let b = 1;
   let c = 97 /* 'a' */;
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([b], $$int)));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([b], $int)));
   $Arrays.$set(ints, b, b);
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([c], $$int)));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$create([c], $int)));
   $Arrays.$set(ints, c, c);
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$stampType([b, c], $$int)));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$stampType([b, c], $int)));
  }
  /** @nodts */
  m_testLongArrays__void_$pp_array() {
-  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $$long));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long)));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(0), $Long.fromInt(1)], $$long)));
-  let longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([5, 10], $$long));
-  longs2d = (/**@type {!Array<Array<!$Long>>}*/ ($Arrays.$stampType([/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(1), $Long.fromInt(2)], $$long)), null], $$long, 2)));
-  longs2d = (/**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([20, null], $$long)));
+  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $long));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $long)));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(0), $Long.fromInt(1)], $long)));
+  let longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([5, 10], $long));
+  longs2d = (/**@type {!Array<Array<!$Long>>}*/ ($Arrays.$stampType([/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(1), $Long.fromInt(2)], $long)), null], $long, 2)));
+  longs2d = (/**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([20, null], $long)));
   let n = longs[0];
   n = longs2d[0][1];
   $Arrays.$set(longs, 0, $Long.fromInt(1));
   $Arrays.$set(longs2d[0], 1, $Long.fromInt(1));
   let b = 1;
   let c = 97 /* 'a' */;
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([b], $$long)));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([b], $long)));
   $Arrays.$set(longs, b, Primitives.m_widenByteToLong__int__long(b));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([c], $$long)));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([c], $long)));
   $Arrays.$set(longs, c, Primitives.m_widenCharToLong__int__long(c));
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([Primitives.m_widenByteToLong__int__long(b), Primitives.m_widenCharToLong__int__long(c)], $$long)));
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([Primitives.m_widenByteToLong__int__long(b), Primitives.m_widenCharToLong__int__long(c)], $long)));
  }
  /** @nodts */
  m_testDevirtualizedTypeArrays__void_$pp_array() {
@@ -174,10 +174,10 @@ class Arrays extends j_l_Object {
   Boolean = goog.module.get('java.lang.Boolean$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   Primitives = goog.module.get('javaemul.internal.Primitives$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  $long = goog.module.get('javaemul.internal.primitives.$long$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
-  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
  }
 }
 $Util.$setClassMetadata(Arrays, 'array.Arrays');

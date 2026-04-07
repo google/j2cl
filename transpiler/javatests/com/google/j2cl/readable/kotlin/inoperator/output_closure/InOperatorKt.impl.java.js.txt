@@ -4,8 +4,8 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Holder = goog.forwardDeclare('inoperator.Holder$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @final
@@ -33,7 +33,7 @@ class InOperatorKt extends j_l_Object {
   let b = !Holder.$create__int(2).m_contains__int__boolean(1);
   let tmp0_subject = 1;
   let c = Holder.$create__int(1).m_contains__int__boolean(tmp0_subject) ? 'In Holder' : !Holder.$create__int(1).m_contains__int__boolean(tmp0_subject) ? 'Out of Holder' : 'In Holder';
-  for (let indexedObject = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)), inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
+  for (let indexedObject = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $int)), inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
    let item = indexedObject[inductionVariable];
   }
  }
@@ -51,8 +51,8 @@ class InOperatorKt extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Holder = goog.module.get('inoperator.Holder$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(InOperatorKt, 'inoperator.InOperatorKt');

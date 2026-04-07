@@ -1,5 +1,5 @@
 # Description:
-#   j2cl/vmbootstrap/primitives: Primitive helper classes.
+#   j2cl/javaemul/internal/primitives: Primitive helper classes.
 #
 # Depends on the JRE JS.
 
@@ -12,8 +12,8 @@ package(
 )
 
 # You can see the generated file with following commands:
-# blaze build //jre/java/javaemul/internal/vmbootstrap/primitives:all
-# gnome-open blaze-genfiles/jre/java/javaemul/internal/vmbootstrap/primitives/
+# blaze build //jre/java/javaemul/internal/primitives:all
+# gnome-open blaze-genfiles/jre/java/javaemul/internal/primitives/
 
 generate_primitive_type(
     name = "double",

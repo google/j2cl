@@ -17,12 +17,12 @@ let InnerClass = goog.forwardDeclare('defaultparams.OuterClass.InnerClass$impl')
 let Subclass = goog.forwardDeclare('defaultparams.Subclass$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @final
@@ -221,7 +221,7 @@ class DefaultParamsKt extends j_l_Object {
  /** @nodts */
  static m_optionalVarargs$default__arrayOf_int__void(/** !Array<number>= */ args) {
   DefaultParamsKt.$clinit();
-  let args$defaulted = $Util.$isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)) : args;
+  let args$defaulted = $Util.$isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $int)) : args;
   DefaultParamsKt.m_optionalVarargs__arrayOf_int__void(args$defaulted);
   return;
  }
@@ -255,7 +255,7 @@ class DefaultParamsKt extends j_l_Object {
  static m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/** number= */ optional, /** !Array<number>= */ args) {
   DefaultParamsKt.$clinit();
   let optional$defaulted = $Util.$isUndefined(optional) ? 10 : optional;
-  let args$defaulted = $Util.$isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)) : args;
+  let args$defaulted = $Util.$isUndefined(args) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $int)) : args;
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(optional$defaulted, args$defaulted);
   return;
  }
@@ -263,18 +263,18 @@ class DefaultParamsKt extends j_l_Object {
  static m_testVarargs__void() {
   DefaultParamsKt.$clinit();
   DefaultParamsKt.m_optionalVarargs$default__arrayOf_int__void(/**@type {!Array<number>}*/ (undefined));
-  DefaultParamsKt.m_optionalVarargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
-  DefaultParamsKt.m_varargsWithTrailingOptional$default__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), /**@type {number}*/ (undefined));
-  DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)), 20);
-  DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)), 20);
-  DefaultParamsKt.m_varargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
-  DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
-  DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
+  DefaultParamsKt.m_optionalVarargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $int)));
+  DefaultParamsKt.m_varargsWithTrailingOptional$default__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $int)), /**@type {number}*/ (undefined));
+  DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $int)), 20);
+  DefaultParamsKt.m_varargsWithTrailingOptional__arrayOf_int__int__void(/**@type {!Array<number>}*/ ($Arrays.$create([0], $int)), 20);
+  DefaultParamsKt.m_varargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $int)));
+  DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $int)));
+  DefaultParamsKt.m_varargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$create([0], $int)));
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ (undefined));
-  DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ ($Util.$coerceToNull(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)))));
-  let tmp0_args = /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int));
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(/**@type {number}*/ (undefined), /**@type {!Array<number>}*/ ($Util.$coerceToNull(/**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $int)))));
+  let tmp0_args = /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $int));
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(20, tmp0_args);
-  DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $$int)));
+  DefaultParamsKt.m_optionalVarargsWithLeadingOptional__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ ($Arrays.$stampType([4, 5, 6], $int)));
   DefaultParamsKt.m_optionalVarargsWithLeadingOptional$default__int__arrayOf_int__void(20, /**@type {!Array<number>}*/ (undefined));
  }
  /** @nodts */
@@ -330,11 +330,11 @@ class DefaultParamsKt extends j_l_Object {
   Subclass = goog.module.get('defaultparams.Subclass$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(DefaultParamsKt, 'defaultparams.DefaultParamsKt');

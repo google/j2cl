@@ -11,6 +11,7 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let ClassWithJsFunctionProperty = goog.forwardDeclare('jsfunction.Main.ClassWithJsFunctionProperty$impl');
 let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.Main.DoubleDoubleJsBiFunction$impl');
 let JsFunctionImplementation = goog.forwardDeclare('jsfunction.Main.JsFunctionImplementation$impl');
@@ -20,7 +21,6 @@ let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Main extends j_l_Object {
  /** @protected @nodts */
@@ -96,7 +96,7 @@ class Main extends j_l_Object {
  /** @nodts @return {?function(number, ...number):number} */
  m_testJsFunctionVarargs__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction() {
   let f = /**  @return {number}*/ ((/** number */ i, .../** ...number */ numbers) =>{
-   $Arrays.$stampType(numbers, $$int);
+   $Arrays.$stampType(numbers, $int);
    let sum = i;
    for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
     let number_1 = $array[$index];
@@ -111,7 +111,7 @@ class Main extends j_l_Object {
  /** @nodts @return {?function(number, ...number):number} */
  m_testJsFunctionVarargsInnerClass__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction() {
   return /**  @return {number}*/ ((/** number */ i, .../** ...number */ numbers) =>{
-   $Arrays.$stampType(numbers, $$int);
+   $Arrays.$stampType(numbers, $int);
    let sum = i;
    for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
     let number_1 = $array[$index];
@@ -284,6 +284,7 @@ class Main extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   Primitives = goog.module.get('javaemul.internal.Primitives$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   ClassWithJsFunctionProperty = goog.module.get('jsfunction.Main.ClassWithJsFunctionProperty$impl');
   DoubleDoubleJsBiFunction = goog.module.get('jsfunction.Main.DoubleDoubleJsBiFunction$impl');
   JsFunctionImplementation = goog.module.get('jsfunction.Main.JsFunctionImplementation$impl');
@@ -292,7 +293,6 @@ class Main extends j_l_Object {
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $JavaScriptFunction = goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(Main, 'jsfunction.Main');

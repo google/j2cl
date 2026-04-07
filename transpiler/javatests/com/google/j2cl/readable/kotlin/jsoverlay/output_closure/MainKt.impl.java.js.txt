@@ -4,12 +4,12 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let NativeJsTypeInterfaceWithOverlay_$Overlay = goog.forwardDeclare('jsoverlay.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
 let $Overlay = goog.forwardDeclare('jsoverlay.NativeJsTypeWithOverlay.$Overlay$impl');
 let NativeJsTypeInterfaceWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeInterfaceWithOverlay');
 let NativeJsTypeWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeWithOverlay');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @final
@@ -41,7 +41,7 @@ class MainKt extends j_l_Object {
   $Overlay.m_foo__$devirt__jsoverlay_NativeJsTypeWithOverlay__int(n);
   let a = 10 + NativeJsTypeWithOverlay.nonJsOverlayField | 0;
   $Overlay.f_staticField__jsoverlay_NativeJsTypeWithOverlay_$Overlay = null;
-  $Overlay.m_varargs__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $$int)));
+  $Overlay.m_varargs__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2, 3], $int)));
   $Overlay.m_baz__$devirt__jsoverlay_NativeJsTypeWithOverlay__int(n);
   let b = '10' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(NativeJsTypeInterfaceWithOverlay_$Overlay.f_staticField__jsoverlay_NativeJsTypeInterfaceWithOverlay_$Overlay);
  }
@@ -65,11 +65,11 @@ class MainKt extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   NativeJsTypeInterfaceWithOverlay_$Overlay = goog.module.get('jsoverlay.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
   $Overlay = goog.module.get('jsoverlay.NativeJsTypeWithOverlay.$Overlay$impl');
   NativeJsTypeWithOverlay = goog.module.get('test.foo.NativeJsTypeWithOverlay');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(MainKt, 'jsoverlay.MainKt');

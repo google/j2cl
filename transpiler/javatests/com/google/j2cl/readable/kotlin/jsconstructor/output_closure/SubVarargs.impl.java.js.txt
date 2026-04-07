@@ -4,8 +4,8 @@ const Varargs = goog.require('jsconstructor.Varargs$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @final
@@ -15,7 +15,7 @@ class SubVarargs extends Varargs {
  
  constructor(/** !* */ i, .../** ...number */ args) {
   SubVarargs.$clinit();
-  $Arrays.$stampType(args, $$int);
+  $Arrays.$stampType(args, $int);
   super(...args);
   this.$ctor__jsconstructor_SubVarargs__java_lang_Object__arrayOf_int__void(i, args);
  }
@@ -53,8 +53,8 @@ class SubVarargs extends Varargs {
  /** @nodts */
  static $loadModules() {
   j_l_Object = goog.module.get('java.lang.Object$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(SubVarargs, 'jsconstructor.SubVarargs');

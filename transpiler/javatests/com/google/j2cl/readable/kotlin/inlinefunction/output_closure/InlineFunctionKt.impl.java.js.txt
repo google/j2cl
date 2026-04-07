@@ -33,6 +33,7 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let ArraysKt = goog.forwardDeclare('kotlin.collections.ArraysKt$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
@@ -41,7 +42,6 @@ let Sequence = goog.forwardDeclare('kotlin.sequences.Sequence$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @final
@@ -465,7 +465,7 @@ class InlineFunctionKt extends j_l_Object {
  static m_inlineFunWithDefaultsAndDefaultVarargs$default__int__int__arrayOf_int__int(/** number */ a, /** number= */ b, /** !Array<number>= */ c) {
   InlineFunctionKt.$clinit();
   let b$defaulted = $Util.$isUndefined(b) ? 2 : b;
-  let c$defaulted = $Util.$isUndefined(c) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int)) : c;
+  let c$defaulted = $Util.$isUndefined(c) ? /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $int)) : c;
   return InlineFunctionKt.m_inlineFunWithDefaultsAndDefaultVarargs__int__int__arrayOf_int__int(a, b$defaulted, c$defaulted);
  }
  /** @nodts */
@@ -473,14 +473,14 @@ class InlineFunctionKt extends j_l_Object {
   InlineFunctionKt.$clinit();
   1 + 2 | 0;
   1 + 20 | 0;
-  1 + 2 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int))) | 0;
-  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$create([0], $$int))) | 0;
-  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int))) | 0;
-  let c = /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int));
+  1 + 2 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$create([0], $int))) | 0;
+  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$create([0], $int))) | 0;
+  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $int))) | 0;
+  let c = /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $int));
   1 + 2 + ArraysKt.m_sum__arrayOf_int__int(c) | 0;
-  let c_1 = /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $$int));
+  let c_1 = /**@type {!Array<number>}*/ ($Arrays.$stampType([3, 4, 5], $int));
   1 + 20 + ArraysKt.m_sum__arrayOf_int__int(c_1) | 0;
-  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([30, 40, 50], $$int))) | 0;
+  1 + 20 + ArraysKt.m_sum__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([30, 40, 50], $int))) | 0;
  }
  /** @nodts @template S @return {?string} */
  static m_find0__inlinefunction_Repro__java_lang_String(/** S */ this_1) {
@@ -598,13 +598,13 @@ class InlineFunctionKt extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Ref = goog.module.get('javaemul.internal.Ref$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   Unit = goog.module.get('kotlin.Unit$impl');
   ArraysKt = goog.module.get('kotlin.collections.ArraysKt$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(InlineFunctionKt, 'inlinefunction.InlineFunctionKt');

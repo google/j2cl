@@ -90,7 +90,7 @@ filegroup(
             "**/externs.js",
         ],
     ) + [
-        "//jre/java/javaemul/internal/vmbootstrap/primitives",
+        "//jre/java/javaemul/internal/primitives",
     ],
     visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
 )

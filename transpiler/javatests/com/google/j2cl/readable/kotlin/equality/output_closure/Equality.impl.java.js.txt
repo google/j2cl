@@ -5,10 +5,10 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Float = goog.forwardDeclare('java.lang.Float$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @final
@@ -38,7 +38,7 @@ class Equality extends j_l_Object {
   let e = $Equality.$same(Float.m_valueOf__float__java_lang_Float(0), Float.m_valueOf__float__java_lang_Float(0));
   let f = !$Equality.$same(null, j_l_Object.$create__());
   let g = !$Equality.$same(j_l_Object.$create__(), null);
-  let h = !$Equality.$same(null, /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int)));
+  let h = !$Equality.$same(null, /**@type {!Array<number>}*/ ($Arrays.$create([0], $int)));
  }
  /** @nodts */
  static $clinit() {
@@ -55,10 +55,10 @@ class Equality extends j_l_Object {
  static $loadModules() {
   Double = goog.module.get('java.lang.Double$impl');
   Float = goog.module.get('java.lang.Float$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(Equality, 'equality.Equality');

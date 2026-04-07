@@ -8,6 +8,14 @@ let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $boolean = goog.forwardDeclare('javaemul.internal.primitives.$boolean$impl');
+let $byte = goog.forwardDeclare('javaemul.internal.primitives.$byte$impl');
+let $char = goog.forwardDeclare('javaemul.internal.primitives.$char$impl');
+let $double = goog.forwardDeclare('javaemul.internal.primitives.$double$impl');
+let $float = goog.forwardDeclare('javaemul.internal.primitives.$float$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
+let $short = goog.forwardDeclare('javaemul.internal.primitives.$short$impl');
 let ArrayProducer = goog.forwardDeclare('methodreferences.MethodReferences.ArrayProducer$impl');
 let BiFunction = goog.forwardDeclare('methodreferences.MethodReferences.BiFunction$impl');
 let MethodReferences_Function = goog.forwardDeclare('methodreferences.MethodReferences.Function$impl');
@@ -18,14 +26,6 @@ let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
-let $$boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
-let $$byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
-let $$char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
-let $$double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
-let $$float = goog.forwardDeclare('vmbootstrap.primitives.$float$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
-let $$short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
 
 /**
  * @template T
@@ -113,35 +113,35 @@ class MethodReferences extends j_l_Object {
   }));
   let booleanArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<boolean>}*/ ((/** !Integer */ arg0_9) =>{
    let arg0_10 = /**@type {!Integer}*/ ($Casts.$to(arg0_9, Integer));
-   return /**@type {!Array<boolean>}*/ ($Arrays.$create([arg0_10.intValue()], $$boolean));
+   return /**@type {!Array<boolean>}*/ ($Arrays.$create([arg0_10.intValue()], $boolean));
   }));
   let charArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ arg0_11) =>{
    let arg0_12 = /**@type {!Integer}*/ ($Casts.$to(arg0_11, Integer));
-   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_12.intValue()], $$char));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_12.intValue()], $char));
   }));
   let byteArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ arg0_13) =>{
    let arg0_14 = /**@type {!Integer}*/ ($Casts.$to(arg0_13, Integer));
-   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_14.intValue()], $$byte));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_14.intValue()], $byte));
   }));
   let shortArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ arg0_15) =>{
    let arg0_16 = /**@type {!Integer}*/ ($Casts.$to(arg0_15, Integer));
-   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_16.intValue()], $$short));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_16.intValue()], $short));
   }));
   let intArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ arg0_17) =>{
    let arg0_18 = /**@type {!Integer}*/ ($Casts.$to(arg0_17, Integer));
-   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_18.intValue()], $$int));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_18.intValue()], $int));
   }));
   let longArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<!$Long>}*/ ((/** !Integer */ arg0_19) =>{
    let arg0_20 = /**@type {!Integer}*/ ($Casts.$to(arg0_19, Integer));
-   return /**@type {!Array<!$Long>}*/ ($Arrays.$create([arg0_20.intValue()], $$long));
+   return /**@type {!Array<!$Long>}*/ ($Arrays.$create([arg0_20.intValue()], $long));
   }));
   let floatArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ arg0_21) =>{
    let arg0_22 = /**@type {!Integer}*/ ($Casts.$to(arg0_21, Integer));
-   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_22.intValue()], $$float));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_22.intValue()], $float));
   }));
   let doubleArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ arg0_23) =>{
    let arg0_24 = /**@type {!Integer}*/ ($Casts.$to(arg0_23, Integer));
-   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_24.intValue()], $$double));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_24.intValue()], $double));
   }));
   let objectArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<!*>}*/ ((/** !Integer */ arg0_25) =>{
    let arg0_26 = /**@type {!Integer}*/ ($Casts.$to(arg0_25, Integer));
@@ -229,6 +229,14 @@ class MethodReferences extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  $boolean = goog.module.get('javaemul.internal.primitives.$boolean$impl');
+  $byte = goog.module.get('javaemul.internal.primitives.$byte$impl');
+  $char = goog.module.get('javaemul.internal.primitives.$char$impl');
+  $double = goog.module.get('javaemul.internal.primitives.$double$impl');
+  $float = goog.module.get('javaemul.internal.primitives.$float$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  $long = goog.module.get('javaemul.internal.primitives.$long$impl');
+  $short = goog.module.get('javaemul.internal.primitives.$short$impl');
   ArrayProducer = goog.module.get('methodreferences.MethodReferences.ArrayProducer$impl');
   BiFunction = goog.module.get('methodreferences.MethodReferences.BiFunction$impl');
   MethodReferences_Function = goog.module.get('methodreferences.MethodReferences.Function$impl');
@@ -238,14 +246,6 @@ class MethodReferences extends j_l_Object {
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
-  $$boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
-  $$byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
-  $$char = goog.module.get('vmbootstrap.primitives.$char$impl');
-  $$double = goog.module.get('vmbootstrap.primitives.$double$impl');
-  $$float = goog.module.get('vmbootstrap.primitives.$float$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
-  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
-  $$short = goog.module.get('vmbootstrap.primitives.$short$impl');
  }
 }
 /**@private {!Producer<string>} @nodts*/

@@ -559,7 +559,9 @@ public class TypeDescriptors {
       PrimitiveTypeDescriptor primitiveTypeDescriptor) {
     // Prepend "$" so that internal aliases start with "$".
     return createSyntheticTypeDescriptor(
-        Kind.CLASS, "vmbootstrap.primitives", "$" + primitiveTypeDescriptor.getSimpleSourceName());
+        Kind.CLASS,
+        "javaemul.internal.primitives",
+        "$" + primitiveTypeDescriptor.getSimpleSourceName());
   }
 
   public static DeclaredTypeDescriptor createGlobalNativeTypeDescriptor(

@@ -3,11 +3,11 @@ goog.module('parameterassignments.Main$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let Fn = goog.forwardDeclare('parameterassignments.Main.Fn$impl');
 let FnObjectVarargs = goog.forwardDeclare('parameterassignments.Main.FnObjectVarargs$impl');
 let FnPrimitiveVarargs = goog.forwardDeclare('parameterassignments.Main.FnPrimitiveVarargs$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Main extends j_l_Object {
  /** @protected @nodts */
@@ -60,7 +60,7 @@ class Main extends j_l_Object {
  }
  /** @nodts */
  m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments(/** number */ i, /** Array<number> */ ia) {
-  ia = (/**@type {!Array<number>}*/ ($Arrays.$stampType([i, ia[0]], $$int)));
+  ia = (/**@type {!Array<number>}*/ ($Arrays.$stampType([i, ia[0]], $int)));
  }
  /** @private @nodts */
  $init__void_$p_parameterassignments_Main() {
@@ -88,11 +88,11 @@ class Main extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   Fn = goog.module.get('parameterassignments.Main.Fn$impl');
   FnObjectVarargs = goog.module.get('parameterassignments.Main.FnObjectVarargs$impl');
   FnPrimitiveVarargs = goog.module.get('parameterassignments.Main.FnPrimitiveVarargs$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(Main, 'parameterassignments.Main');
