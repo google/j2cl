@@ -3,9 +3,6 @@ goog.module('dataclass.JvmRecordDataClassOverridingEquals$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
-
 /**
  * @final
  */
@@ -27,6 +24,7 @@ class JvmRecordDataClassOverridingEquals extends Record {
  $ctor__dataclass_JvmRecordDataClassOverridingEquals__java_lang_String__void(/** string */ s) {
   this.$ctor__java_lang_Record__void();
   this.f_s__dataclass_JvmRecordDataClassOverridingEquals_ = s;
+  $J2CL_PRESERVE$(this.f_s__dataclass_JvmRecordDataClassOverridingEquals_);
  }
  /** @final @nodts @return {string} */
  m_s__java_lang_String() {
@@ -49,14 +47,6 @@ class JvmRecordDataClassOverridingEquals extends Record {
   let s$defaulted = $Util.$isUndefined(s) ? $this.f_s__dataclass_JvmRecordDataClassOverridingEquals_ : s;
   return $this.m_copy__java_lang_String__dataclass_JvmRecordDataClassOverridingEquals(s$defaulted);
  }
- /** @override @return {string} */
- toString() {
-  return '' + 'JvmRecordDataClassOverridingEquals(' + 's=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_s__dataclass_JvmRecordDataClassOverridingEquals_) + ')';
- }
- /** @override @return {number} */
- hashCode() {
-  return $Objects.m_hashCode__java_lang_Object__int(this.f_s__dataclass_JvmRecordDataClassOverridingEquals_);
- }
  /** @nodts */
  static $clinit() {
   JvmRecordDataClassOverridingEquals.$clinit = () =>{};
@@ -69,10 +59,7 @@ class JvmRecordDataClassOverridingEquals extends Record {
  }
  
  /** @nodts */
- static $loadModules() {
-  j_l_String = goog.module.get('java.lang.String$impl');
-  $Objects = goog.module.get('vmbootstrap.Objects$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(JvmRecordDataClassOverridingEquals, 'dataclass.JvmRecordDataClassOverridingEquals');
 

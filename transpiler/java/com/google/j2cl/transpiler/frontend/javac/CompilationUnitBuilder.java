@@ -234,8 +234,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         typeDeclaration.isAnonymous()
             ? getSourcePosition(sourcePositionNode)
             : getNamePosition(sourcePositionNode),
-        typeDeclaration,
-        typeElement.isRecord());
+        typeDeclaration);
   }
 
   private Type convertClassDeclaration(JCClassDecl classDecl) {
