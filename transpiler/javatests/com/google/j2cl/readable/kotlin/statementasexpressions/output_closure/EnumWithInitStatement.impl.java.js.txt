@@ -5,13 +5,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let BAZ = goog.forwardDeclare('statementasexpressions.EnumWithInitStatement.BAZ$impl');
 let StatementAsExpressionsKt = goog.forwardDeclare('statementasexpressions.StatementAsExpressionsKt$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @extends {Enum<!EnumWithInitStatement>}
@@ -68,9 +68,9 @@ class EnumWithInitStatement extends Enum {
  static m_valueOf__java_lang_String__statementasexpressions_EnumWithInitStatement(/** string */ name) {
   EnumWithInitStatement.$clinit();
   if ($Equality.$same(EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_, null)) {
-   EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_ = (/**@type {Map<?string, !EnumWithInitStatement>}*/ ($Enums.createMapFromValues(EnumWithInitStatement.m_values__arrayOf_statementasexpressions_EnumWithInitStatement())));
+   EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_ = (/**@type {Map<?string, !EnumWithInitStatement>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(EnumWithInitStatement.m_values__arrayOf_statementasexpressions_EnumWithInitStatement())));
   }
-  return /**@type {EnumWithInitStatement}*/ ($Enums.getValueFromNameAndMap(name, EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_));
+  return /**@type {EnumWithInitStatement}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, EnumWithInitStatement.f_namesToValuesMap__statementasexpressions_EnumWithInitStatement_));
  }
  /** @nodts @return {!Array<!EnumWithInitStatement>} */
  static m_values__arrayOf_statementasexpressions_EnumWithInitStatement() {
@@ -107,13 +107,13 @@ class EnumWithInitStatement extends Enum {
  static $loadModules() {
   AssertionError = goog.module.get('java.lang.AssertionError$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   BAZ = goog.module.get('statementasexpressions.EnumWithInitStatement.BAZ$impl');
   StatementAsExpressionsKt = goog.module.get('statementasexpressions.StatementAsExpressionsKt$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 /**@const {number} @nodts*/

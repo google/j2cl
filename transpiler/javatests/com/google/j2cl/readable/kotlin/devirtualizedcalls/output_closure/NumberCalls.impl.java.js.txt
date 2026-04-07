@@ -10,10 +10,10 @@ let Float = goog.forwardDeclare('java.lang.Float$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 /**
  * @final
@@ -64,7 +64,7 @@ class NumberCalls extends j_l_Object {
   let ii = Integer.valueOf(1);
   let tmp6_safe_receiver = ii;
   if ($Equality.$same(tmp6_safe_receiver, null)) {} else {
-   $Primitives.narrowIntToByte(tmp6_safe_receiver.intValue());
+   Primitives.m_narrowIntToByte__int__int(tmp6_safe_receiver.intValue());
   }
   let tmp7_safe_receiver = ii;
   if ($Equality.$same(tmp7_safe_receiver, null)) {} else {
@@ -80,11 +80,11 @@ class NumberCalls extends j_l_Object {
   }
   let tmp10_safe_receiver = ii;
   if ($Equality.$same(tmp10_safe_receiver, null)) {} else {
-   $Primitives.widenIntToLong(tmp10_safe_receiver.intValue());
+   Primitives.m_widenIntToLong__int__long(tmp10_safe_receiver.intValue());
   }
   let tmp11_safe_receiver = ii;
   if ($Equality.$same(tmp11_safe_receiver, null)) {} else {
-   $Primitives.narrowIntToShort(tmp11_safe_receiver.intValue());
+   Primitives.m_narrowIntToShort__int__int(tmp11_safe_receiver.intValue());
   }
   let d = 1.1;
   let tmp12_safe_receiver = d;
@@ -114,7 +114,7 @@ class NumberCalls extends j_l_Object {
   let dd = 1.1;
   let tmp18_safe_receiver = dd;
   if ($Equality.$same(tmp18_safe_receiver, null)) {} else {
-   $Primitives.narrowDoubleToInt(Double.m_doubleValue__java_lang_Double__double(tmp18_safe_receiver));
+   Primitives.m_narrowDoubleToInt__int__int(Double.m_doubleValue__java_lang_Double__double(tmp18_safe_receiver));
   }
   let tmp19_safe_receiver = dd;
   if ($Equality.$same(tmp19_safe_receiver, null)) {} else {
@@ -126,15 +126,15 @@ class NumberCalls extends j_l_Object {
   }
   let tmp21_safe_receiver = dd;
   if ($Equality.$same(tmp21_safe_receiver, null)) {} else {
-   $Primitives.narrowDoubleToInt(Double.m_doubleValue__java_lang_Double__double(tmp21_safe_receiver));
+   Primitives.m_narrowDoubleToInt__int__int(Double.m_doubleValue__java_lang_Double__double(tmp21_safe_receiver));
   }
   let tmp22_safe_receiver = dd;
   if ($Equality.$same(tmp22_safe_receiver, null)) {} else {
-   $Primitives.narrowDoubleToLong(Double.m_doubleValue__java_lang_Double__double(tmp22_safe_receiver));
+   Primitives.m_narrowDoubleToLong__int__long(Double.m_doubleValue__java_lang_Double__double(tmp22_safe_receiver));
   }
   let tmp23_safe_receiver = dd;
   if ($Equality.$same(tmp23_safe_receiver, null)) {} else {
-   $Primitives.narrowDoubleToInt(Double.m_doubleValue__java_lang_Double__double(tmp23_safe_receiver));
+   Primitives.m_narrowDoubleToInt__int__int(Double.m_doubleValue__java_lang_Double__double(tmp23_safe_receiver));
   }
   let s = Short.m_valueOf__short__java_lang_Short(1);
   let tmp24_safe_receiver = s;
@@ -164,7 +164,7 @@ class NumberCalls extends j_l_Object {
   let ss = Short.m_valueOf__short__java_lang_Short(1);
   let tmp30_safe_receiver = ss;
   if ($Equality.$same(tmp30_safe_receiver, null)) {} else {
-   $Primitives.narrowShortToByte(tmp30_safe_receiver.m_shortValue__short());
+   Primitives.m_narrowShortToByte__int__int(tmp30_safe_receiver.m_shortValue__short());
   }
   let tmp31_safe_receiver = ss;
   if ($Equality.$same(tmp31_safe_receiver, null)) {} else {
@@ -180,7 +180,7 @@ class NumberCalls extends j_l_Object {
   }
   let tmp34_safe_receiver = ss;
   if ($Equality.$same(tmp34_safe_receiver, null)) {} else {
-   $Primitives.widenShortToLong(tmp34_safe_receiver.m_shortValue__short());
+   Primitives.m_widenShortToLong__int__long(tmp34_safe_receiver.m_shortValue__short());
   }
   let tmp35_safe_receiver = ss;
   if ($Equality.$same(tmp35_safe_receiver, null)) {} else {
@@ -230,7 +230,7 @@ class NumberCalls extends j_l_Object {
   }
   let tmp46_safe_receiver = bb;
   if ($Equality.$same(tmp46_safe_receiver, null)) {} else {
-   $Primitives.widenByteToLong(tmp46_safe_receiver.m_byteValue__byte());
+   Primitives.m_widenByteToLong__int__long(tmp46_safe_receiver.m_byteValue__byte());
   }
   let tmp47_safe_receiver = bb;
   if ($Equality.$same(tmp47_safe_receiver, null)) {} else {
@@ -264,7 +264,7 @@ class NumberCalls extends j_l_Object {
   let ff = Float.m_valueOf__float__java_lang_Float(1.100000023841858);
   let tmp54_safe_receiver = ff;
   if ($Equality.$same(tmp54_safe_receiver, null)) {} else {
-   $Primitives.narrowFloatToInt(tmp54_safe_receiver.m_floatValue__float());
+   Primitives.m_narrowFloatToInt__int__int(tmp54_safe_receiver.m_floatValue__float());
   }
   let tmp55_safe_receiver = ff;
   if ($Equality.$same(tmp55_safe_receiver, null)) {} else {
@@ -276,15 +276,15 @@ class NumberCalls extends j_l_Object {
   }
   let tmp57_safe_receiver = ff;
   if ($Equality.$same(tmp57_safe_receiver, null)) {} else {
-   $Primitives.narrowFloatToInt(tmp57_safe_receiver.m_floatValue__float());
+   Primitives.m_narrowFloatToInt__int__int(tmp57_safe_receiver.m_floatValue__float());
   }
   let tmp58_safe_receiver = ff;
   if ($Equality.$same(tmp58_safe_receiver, null)) {} else {
-   $Primitives.narrowFloatToLong(tmp58_safe_receiver.m_floatValue__float());
+   Primitives.m_narrowFloatToLong__int__long(tmp58_safe_receiver.m_floatValue__float());
   }
   let tmp59_safe_receiver = ff;
   if ($Equality.$same(tmp59_safe_receiver, null)) {} else {
-   $Primitives.narrowFloatToInt(tmp59_safe_receiver.m_floatValue__float());
+   Primitives.m_narrowFloatToInt__int__int(tmp59_safe_receiver.m_floatValue__float());
   }
   let l = $Long.fromInt(1);
   let tmp60_safe_receiver = l;
@@ -314,19 +314,19 @@ class NumberCalls extends j_l_Object {
   let ll = $Long.fromInt(1);
   let tmp66_safe_receiver = ll;
   if ($Equality.$same(tmp66_safe_receiver, null)) {} else {
-   $Primitives.narrowLongToByte(Long.m_longValue__java_lang_Long__long(tmp66_safe_receiver));
+   Primitives.m_narrowLongToByte__long__int(Long.m_longValue__java_lang_Long__long(tmp66_safe_receiver));
   }
   let tmp67_safe_receiver = ll;
   if ($Equality.$same(tmp67_safe_receiver, null)) {} else {
-   $Primitives.widenLongToDouble(Long.m_longValue__java_lang_Long__long(tmp67_safe_receiver));
+   Primitives.m_widenLongToDouble__long__double(Long.m_longValue__java_lang_Long__long(tmp67_safe_receiver));
   }
   let tmp68_safe_receiver = ll;
   if ($Equality.$same(tmp68_safe_receiver, null)) {} else {
-   $Primitives.widenLongToFloat(Long.m_longValue__java_lang_Long__long(tmp68_safe_receiver));
+   Primitives.m_widenLongToFloat__long__double(Long.m_longValue__java_lang_Long__long(tmp68_safe_receiver));
   }
   let tmp69_safe_receiver = ll;
   if ($Equality.$same(tmp69_safe_receiver, null)) {} else {
-   $Primitives.narrowLongToInt(Long.m_longValue__java_lang_Long__long(tmp69_safe_receiver));
+   Primitives.m_narrowLongToInt__long__int(Long.m_longValue__java_lang_Long__long(tmp69_safe_receiver));
   }
   let tmp70_safe_receiver = ll;
   if ($Equality.$same(tmp70_safe_receiver, null)) {} else {
@@ -334,7 +334,7 @@ class NumberCalls extends j_l_Object {
   }
   let tmp71_safe_receiver = ll;
   if ($Equality.$same(tmp71_safe_receiver, null)) {} else {
-   $Primitives.narrowLongToShort(Long.m_longValue__java_lang_Long__long(tmp71_safe_receiver));
+   Primitives.m_narrowLongToShort__long__int(Long.m_longValue__java_lang_Long__long(tmp71_safe_receiver));
   }
   let c = Character.m_valueOf__char__java_lang_Character(97 /* 'a' */);
   let tmp72_safe_receiver = c;
@@ -343,7 +343,7 @@ class NumberCalls extends j_l_Object {
   }
   let tmp73_safe_receiver = c;
   if ($Equality.$same(tmp73_safe_receiver, null)) {} else {
-   $Primitives.narrowCharToByte(tmp73_safe_receiver.m_charValue__char());
+   Primitives.m_narrowCharToByte__int__int(tmp73_safe_receiver.m_charValue__char());
   }
   let tmp74_safe_receiver = c;
   if ($Equality.$same(tmp74_safe_receiver, null)) {} else {
@@ -359,11 +359,11 @@ class NumberCalls extends j_l_Object {
   }
   let tmp77_safe_receiver = c;
   if ($Equality.$same(tmp77_safe_receiver, null)) {} else {
-   $Primitives.widenCharToLong(tmp77_safe_receiver.m_charValue__char());
+   Primitives.m_widenCharToLong__int__long(tmp77_safe_receiver.m_charValue__char());
   }
   let tmp78_safe_receiver = c;
   if ($Equality.$same(tmp78_safe_receiver, null)) {} else {
-   $Primitives.narrowCharToShort(tmp78_safe_receiver.m_charValue__char());
+   Primitives.m_narrowCharToShort__int__int(tmp78_safe_receiver.m_charValue__char());
   }
   let bool = true;
  }
@@ -387,10 +387,10 @@ class NumberCalls extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   Long = goog.module.get('java.lang.Long$impl');
   Short = goog.module.get('java.lang.Short$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(NumberCalls, 'devirtualizedcalls.NumberCalls');

@@ -6,9 +6,9 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 /**
  * @final
@@ -155,10 +155,10 @@ class CompileTimeConstant extends j_l_Object {
  m_testExpressionsWithIntrinsicConstEvaluation__int__void(/** number */ code) {
   let CHAR_MAX_INT_VALUE = 65535 /* '\uFFFF' */;
   let CHAR_MIN_INT_VALUE = 0 /* '\u0000' */;
-  let CHAR_MAX_BYTE_VALUE = $Primitives.narrowIntToByte(65535 /* '\uFFFF' */);
-  let CHAR_MIN_BYTE_VALUE = $Primitives.narrowIntToByte(0 /* '\u0000' */);
-  let CHAR_MAX_SHORT_VALUE = $Primitives.narrowIntToShort(65535 /* '\uFFFF' */);
-  let CHAR_MIN_SHORT_VALUE = $Primitives.narrowIntToShort(0 /* '\u0000' */);
+  let CHAR_MAX_BYTE_VALUE = Primitives.m_narrowIntToByte__int__int(65535 /* '\uFFFF' */);
+  let CHAR_MIN_BYTE_VALUE = Primitives.m_narrowIntToByte__int__int(0 /* '\u0000' */);
+  let CHAR_MAX_SHORT_VALUE = Primitives.m_narrowIntToShort__int__int(65535 /* '\uFFFF' */);
+  let CHAR_MIN_SHORT_VALUE = Primitives.m_narrowIntToShort__int__int(0 /* '\u0000' */);
   let CHAR_MAX_LONG_VALUE = $Long.fromInt(65535);
   let CHAR_MIN_LONG_VALUE = $Long.fromInt(0);
   let CHAR_MAX_FLOAT_VALUE = 0 /* '\u0000' */;
@@ -191,9 +191,9 @@ class CompileTimeConstant extends j_l_Object {
  static $loadModules() {
   Long = goog.module.get('java.lang.Long$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 /**@type {*} @nodts*/

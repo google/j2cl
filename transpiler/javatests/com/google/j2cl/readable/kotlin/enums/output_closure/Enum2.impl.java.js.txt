@@ -6,9 +6,9 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Enum1 = goog.forwardDeclare('enums.Enum1$impl');
 let VALUE4 = goog.forwardDeclare('enums.Enum2.VALUE4$impl');
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @extends {Enum<!Enum2>}
@@ -95,9 +95,9 @@ class Enum2 extends Enum {
  static m_valueOf__java_lang_String__enums_Enum2(/** string */ name) {
   Enum2.$clinit();
   if ($Equality.$same(Enum2.f_namesToValuesMap__enums_Enum2_, null)) {
-   Enum2.f_namesToValuesMap__enums_Enum2_ = (/**@type {Map<?string, !Enum2>}*/ ($Enums.createMapFromValues(Enum2.m_values__arrayOf_enums_Enum2())));
+   Enum2.f_namesToValuesMap__enums_Enum2_ = (/**@type {Map<?string, !Enum2>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(Enum2.m_values__arrayOf_enums_Enum2())));
   }
-  return /**@type {Enum2}*/ ($Enums.getValueFromNameAndMap(name, Enum2.f_namesToValuesMap__enums_Enum2_));
+  return /**@type {Enum2}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, Enum2.f_namesToValuesMap__enums_Enum2_));
  }
  /** @nodts @return {!Array<!Enum2>} */
  static m_values__arrayOf_enums_Enum2() {
@@ -141,9 +141,9 @@ class Enum2 extends Enum {
   Enum1 = goog.module.get('enums.Enum1$impl');
   VALUE4 = goog.module.get('enums.Enum2.VALUE4$impl');
   j_l_Object = goog.module.get('java.lang.Object$impl');
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 /**@const {number} @nodts*/

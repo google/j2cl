@@ -3,9 +3,9 @@ goog.module('deprecated.DeprecatedExample.DeprecatedEnum$impl');
 const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @final
@@ -33,9 +33,9 @@ class DeprecatedEnum extends Enum {
  static valueOf(/** string */ name) {
   DeprecatedEnum.$clinit();
   if ($Equality.$same(DeprecatedEnum.f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_, null)) {
-   DeprecatedEnum.f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_ = (/**@type {Map<?string, !DeprecatedEnum>}*/ ($Enums.createMapFromValues(DeprecatedEnum.values())));
+   DeprecatedEnum.f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_ = (/**@type {Map<?string, !DeprecatedEnum>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(DeprecatedEnum.values())));
   }
-  return /**@type {DeprecatedEnum}*/ ($Enums.getValueFromNameAndMap(name, DeprecatedEnum.f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_));
+  return /**@type {DeprecatedEnum}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, DeprecatedEnum.f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_));
  }
  /** @return {!Array<!DeprecatedEnum>} */
  static values() {
@@ -55,9 +55,9 @@ class DeprecatedEnum extends Enum {
  
  /** @nodts */
  static $loadModules() {
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 /**@const {number} @deprecated @nodts*/

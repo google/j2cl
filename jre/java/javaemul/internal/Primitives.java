@@ -15,13 +15,10 @@
  */
 package javaemul.internal;
 
-import jsinterop.annotations.JsType;
-
 /**
  * Static Primitive helper. This class should only use int, long and double and avoid casts and
  * coercions.
  */
-@JsType(namespace = "vmbootstrap")
 public class Primitives {
 
   /** Narrows a number to a 8-bit signed number. */

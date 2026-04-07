@@ -4,10 +4,10 @@ const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('gwtincompatible.Implementor.SomeEnum.$1$impl');
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let J2clSealedTypeMarker = goog.forwardDeclare('javaemul.internal.J2clSealedTypeMarker');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @abstract
@@ -31,9 +31,9 @@ class SomeEnum extends Enum {
  static m_valueOf__java_lang_String__gwtincompatible_Implementor_SomeEnum(/** string */ name) {
   SomeEnum.$clinit();
   if ($Equality.$same(SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_, null)) {
-   SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ = (/**@type {Map<?string, !SomeEnum>}*/ ($Enums.createMapFromValues(SomeEnum.m_values__arrayOf_gwtincompatible_Implementor_SomeEnum())));
+   SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ = (/**@type {Map<?string, !SomeEnum>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(SomeEnum.m_values__arrayOf_gwtincompatible_Implementor_SomeEnum())));
   }
-  return /**@type {SomeEnum}*/ ($Enums.getValueFromNameAndMap(name, SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_));
+  return /**@type {SomeEnum}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_));
  }
  /** @nodts @return {!Array<!SomeEnum>} */
  static m_values__arrayOf_gwtincompatible_Implementor_SomeEnum() {
@@ -59,9 +59,9 @@ class SomeEnum extends Enum {
  /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('gwtincompatible.Implementor.SomeEnum.$1$impl');
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 /**@const {number} @nodts*/

@@ -6,8 +6,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
-let $Enums_BoxedLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedLightEnum$impl');
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
+let BoxedLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedLightEnum$impl');
 let NativeJsEnum = goog.forwardDeclare('xplatforeach.NativeJsEnum');
 let SomeJsEnum = goog.forwardDeclare('xplatforeach.SomeJsEnum$impl');
 let SomeJsEnum_$Overlay = goog.forwardDeclare('xplatforeach.SomeJsEnum.$Overlay$impl');
@@ -39,10 +39,10 @@ class ForEachStatements extends j_l_Object {
   }
  }
  /** @nodts */
- static m_jsArrayOfJsEnum__com_google_gwt_corp_collections_JsArray__void(/** Array<$Enums_BoxedLightEnum<?SomeJsEnum>> */ array) {
+ static m_jsArrayOfJsEnum__com_google_gwt_corp_collections_JsArray__void(/** Array<BoxedLightEnum<?SomeJsEnum>> */ array) {
   ForEachStatements.$clinit();
-  for (let $array = /**@type {Array<$Enums_BoxedLightEnum<?SomeJsEnum>>}*/ (array), $index = 0; $index < $array.length; $index++) {
-   let element = /**@type {?SomeJsEnum}*/ ($Enums.unbox($array[$index], SomeJsEnum_$Overlay));
+  for (let $array = /**@type {Array<BoxedLightEnum<?SomeJsEnum>>}*/ (array), $index = 0; $index < $array.length; $index++) {
+   let element = /**@type {?SomeJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object($array[$index], SomeJsEnum_$Overlay));
    {
     j_l_String.m_valueOf__int__java_lang_String(/**@type {number}*/ (element));
    }
@@ -179,7 +179,7 @@ class ForEachStatements extends j_l_Object {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   SomeJsEnum_$Overlay = goog.module.get('xplatforeach.SomeJsEnum.$Overlay$impl');
  }
 }

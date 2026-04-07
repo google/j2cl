@@ -4,13 +4,13 @@ const Consumer = goog.require('jsenum.Consumer$impl');
 const Supplier = goog.require('jsenum.Supplier$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
 let ComparableJsEnum = goog.forwardDeclare('jsenum.ComparableJsEnum$impl');
-let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
 
 /**
  * @interface
- * @extends {Supplier<!$Enums_BoxedComparableLightEnum<!ComparableJsEnum>>}
- * @extends {Consumer<!$Enums_BoxedComparableLightEnum<!ComparableJsEnum>>}
+ * @extends {Supplier<!BoxedComparableLightEnum<!ComparableJsEnum>>}
+ * @extends {Consumer<!BoxedComparableLightEnum<!ComparableJsEnum>>}
  */
 class ComparableJsEnumSupplierConsumer {
  /** @abstract @return {!ComparableJsEnum} */

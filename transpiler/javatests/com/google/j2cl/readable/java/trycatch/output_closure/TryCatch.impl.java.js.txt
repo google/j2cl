@@ -8,13 +8,13 @@ let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let ClosableThing = goog.forwardDeclare('trycatch.TryCatch.ClosableThing$impl');
 let Exception1 = goog.forwardDeclare('trycatch.TryCatch.Exception1$impl');
 let Exception2 = goog.forwardDeclare('trycatch.TryCatch.Exception2$impl');
 let GenericInterface = goog.forwardDeclare('trycatch.TryCatch.GenericInterface$impl');
-let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class TryCatch extends j_l_Object {
@@ -77,7 +77,7 @@ class TryCatch extends j_l_Object {
  /** @nodts */
  m_testFinally__void() {
   try {
-   $Asserts.$assert(true);
+   Asserts.$assert__boolean__void(true);
   } finally {}
  }
  /** @nodts */
@@ -245,13 +245,13 @@ class TryCatch extends j_l_Object {
   Exception = goog.module.get('java.lang.Exception$impl');
   NullPointerException = goog.module.get('java.lang.NullPointerException$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Asserts = goog.module.get('javaemul.internal.Asserts$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   ClosableThing = goog.module.get('trycatch.TryCatch.ClosableThing$impl');
   Exception1 = goog.module.get('trycatch.TryCatch.Exception1$impl');
   Exception2 = goog.module.get('trycatch.TryCatch.Exception2$impl');
   GenericInterface = goog.module.get('trycatch.TryCatch.GenericInterface$impl');
-  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }

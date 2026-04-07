@@ -3,9 +3,9 @@ goog.module('enums.Enum1$impl');
 const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @final
@@ -32,9 +32,9 @@ class Enum1 extends Enum {
  static m_valueOf__java_lang_String__enums_Enum1(/** string */ name) {
   Enum1.$clinit();
   if ($Equality.$same(Enum1.f_namesToValuesMap__enums_Enum1_, null)) {
-   Enum1.f_namesToValuesMap__enums_Enum1_ = (/**@type {Map<?string, !Enum1>}*/ ($Enums.createMapFromValues(Enum1.m_values__arrayOf_enums_Enum1())));
+   Enum1.f_namesToValuesMap__enums_Enum1_ = (/**@type {Map<?string, !Enum1>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(Enum1.m_values__arrayOf_enums_Enum1())));
   }
-  return /**@type {Enum1}*/ ($Enums.getValueFromNameAndMap(name, Enum1.f_namesToValuesMap__enums_Enum1_));
+  return /**@type {Enum1}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, Enum1.f_namesToValuesMap__enums_Enum1_));
  }
  /** @nodts @return {!Array<!Enum1>} */
  static m_values__arrayOf_enums_Enum1() {
@@ -54,9 +54,9 @@ class Enum1 extends Enum {
  
  /** @nodts */
  static $loadModules() {
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 /**@const {number} @nodts*/

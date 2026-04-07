@@ -3,8 +3,8 @@ goog.module('jsinnerclass.MainKt$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
 let Outer = goog.forwardDeclare('jsinnerclass.Main.Outer$impl');
-let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 /**
  * @final
@@ -30,7 +30,7 @@ class MainKt extends j_l_Object {
   MainKt.$clinit();
   let tmp0_value = Outer.$create__().m_method__int() == 5;
   let value = tmp0_value;
-  $Asserts.$assertWithMessage(value, 'Assertion failed');
+  Asserts.$assertWithMessage__boolean__java_lang_Object__void(value, 'Assertion failed');
  }
  /** @nodts */
  static $clinit() {
@@ -45,8 +45,8 @@ class MainKt extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Asserts = goog.module.get('javaemul.internal.Asserts$impl');
   Outer = goog.module.get('jsinnerclass.Main.Outer$impl');
-  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
  }
 }
 $Util.$setClassMetadata(MainKt, 'jsinnerclass.MainKt');

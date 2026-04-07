@@ -3,13 +3,13 @@ goog.module('jsenum.Main.SubtypeVarargs$impl');
 const BaseVarargs = goog.require('jsenum.Main.BaseVarargs$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
+let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
 let SomeJsEnum = goog.forwardDeclare('jsenum.Main.SomeJsEnum$impl');
 let $Overlay = goog.forwardDeclare('jsenum.Main.SomeJsEnum.$Overlay$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
-let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
 
 /**
- * @extends {BaseVarargs<$Enums_BoxedComparableLightEnum<?SomeJsEnum>>}
+ * @extends {BaseVarargs<BoxedComparableLightEnum<?SomeJsEnum>>}
  */
 class SubtypeVarargs extends BaseVarargs {
  /** @protected @nodts */
@@ -24,7 +24,7 @@ class SubtypeVarargs extends BaseVarargs {
  }
  /** @nodts */
  $ctor__jsenum_Main_SubtypeVarargs__void() {
-  this.$ctor__jsenum_Main_BaseVarargs__arrayOf_java_lang_Object__void([/**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, $Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!SomeJsEnum>}*/ ($Enums.boxComparable(SomeJsEnum.A, $Overlay))]);
+  this.$ctor__jsenum_Main_BaseVarargs__arrayOf_java_lang_Object__void([/**@type {BoxedComparableLightEnum<!SomeJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(SomeJsEnum.A, $Overlay)), /**@type {BoxedComparableLightEnum<!SomeJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(SomeJsEnum.A, $Overlay))]);
  }
  /** @nodts */
  static $clinit() {
@@ -39,9 +39,9 @@ class SubtypeVarargs extends BaseVarargs {
  
  /** @nodts */
  static $loadModules() {
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   SomeJsEnum = goog.module.get('jsenum.Main.SomeJsEnum$impl');
   $Overlay = goog.module.get('jsenum.Main.SomeJsEnum.$Overlay$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 $Util.$setClassMetadata(SubtypeVarargs, 'jsenum.Main$SubtypeVarargs');

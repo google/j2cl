@@ -13,11 +13,11 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 let $$short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
@@ -57,7 +57,7 @@ class ArithmeticExpressionsKt extends j_l_Object {
   f = 9.223372036854776E18;
   d = 9.223372036854776E18;
   let o = Character.m_valueOf__char__java_lang_Character(c);
-  s = $Primitives.narrowCharToShort((/**@type {!Character}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), Character))).m_charValue__char());
+  s = Primitives.m_narrowCharToShort__int__int((/**@type {!Character}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), Character))).m_charValue__char());
  }
  /** @nodts */
  static m_testPrimitives__void() {
@@ -78,7 +78,7 @@ class ArithmeticExpressionsKt extends j_l_Object {
   let h = ~a;
   let i = 1 + 1 + 2 - 5 | 0;
   let j = Math.imul(1 + 2, 3 + 4);
-  let p = $Primitives.coerceDivision(Math.imul($Primitives.coerceDivision(1 / 2), 3) % 4);
+  let p = Primitives.m_coerceDivision__int__int(Math.imul(Primitives.m_coerceDivision__int__int(1 / 2), 3) % 4);
   let r = -2147483648;
   let t = -1;
   let u = 1;
@@ -87,22 +87,22 @@ class ArithmeticExpressionsKt extends j_l_Object {
   let k = !((1 + 2 + 3 | 0) == 4);
   let l = (1 + 2 | 0) != 4;
   let m = $LongUtils.notEquals($Long.fromBits(-1, 2147483647) /* 9223372036854775807 */, $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */);
-  let o = $Primitives.coerceDivision((5 + 1 | 0) / 2) - 0;
+  let o = Primitives.m_coerceDivision__int__int((5 + 1 | 0) / 2) - 0;
   a = a >> 31;
   a = a >> 1;
   a = a + 1 | 0;
-  a = $Primitives.coerceDivision(a / 1);
+  a = Primitives.m_coerceDivision__int__int(a / 1);
   a = a + 2147483647 | 0;
   k = !!(+ k | + true);
   let s = 10;
-  s = $Primitives.narrowIntToShort(s + 1 | 0);
+  s = Primitives.m_narrowIntToShort__int__int(s + 1 | 0);
   k = s == 10;
   let q = 3 >> 2;
   q = 3 >>> 2 | 0;
-  let x = $Primitives.narrowIntToByte(Math.imul($Primitives.narrowIntToShort(a) + $Primitives.narrowIntToByte($Primitives.narrowIntToShort(b)), $Primitives.narrowIntToShort($Primitives.narrowIntToByte(c))));
+  let x = Primitives.m_narrowIntToByte__int__int(Math.imul(Primitives.m_narrowIntToShort__int__int(a) + Primitives.m_narrowIntToByte__int__int(Primitives.m_narrowIntToShort__int__int(b)), Primitives.m_narrowIntToShort__int__int(Primitives.m_narrowIntToByte__int__int(c))));
   let y = 121 /* 'y' */;
   let z = $Long.fromInt(121);
-  k = $LongUtils.equals($Primitives.widenCharToLong(y), z);
+  k = $LongUtils.equals(Primitives.m_widenCharToLong__int__long(y), z);
  }
  /** @nodts */
  static m_testDoubleAssignments__void() {
@@ -154,10 +154,10 @@ class ArithmeticExpressionsKt extends j_l_Object {
   $Arrays.$set(array_2, index_0_2, Math.imul(array_2[index_0_2], 1));
   let array_3 = ints;
   let index_0_3 = 0;
-  $Arrays.$set(array_3, index_0_3, $Primitives.coerceDivision(array_3[index_0_3] / 1));
+  $Arrays.$set(array_3, index_0_3, Primitives.m_coerceDivision__int__int(array_3[index_0_3] / 1));
   let array_4 = ints;
   let index_0_4 = 0;
-  $Arrays.$set(array_4, index_0_4, $Primitives.coerceDivision(array_4[index_0_4] % 1));
+  $Arrays.$set(array_4, index_0_4, Primitives.m_coerceDivision__int__int(array_4[index_0_4] % 1));
   let array_5 = ints;
   let index_0_5 = 0;
   let unary = array_5[index_0_5];
@@ -182,7 +182,7 @@ class ArithmeticExpressionsKt extends j_l_Object {
   let unary_3 = i;
   i = unary_3 + 1 | 0;
   let index_0_9 = unary_3;
-  $Arrays.$set(array_9, index_0_9, $Primitives.coerceDivision(array_9[index_0_9] / 1));
+  $Arrays.$set(array_9, index_0_9, Primitives.m_coerceDivision__int__int(array_9[index_0_9] / 1));
   let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
   let array_10 = longs;
   let index_0_10 = 0;
@@ -203,7 +203,7 @@ class ArithmeticExpressionsKt extends j_l_Object {
   let shorts = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$short));
   let array_14 = shorts;
   let index_0_14 = 0;
-  $Arrays.$set(array_14, index_0_14, $Primitives.narrowIntToShort(array_14[index_0_14] + 1 | 0));
+  $Arrays.$set(array_14, index_0_14, Primitives.m_narrowIntToShort__int__int(array_14[index_0_14] + 1 | 0));
   let b = array_14[index_0_14] == 10;
  }
  /** @nodts */
@@ -212,9 +212,9 @@ class ArithmeticExpressionsKt extends j_l_Object {
   let ref = /**@type {!$1Ref<!Byte>}*/ ($1Ref.$create__java_lang_Object(Byte.m_valueOf__byte__java_lang_Byte(1)));
   let receiver = ref;
   let unary = (/**@type {!Byte}*/ ($Casts.$to(receiver.m_getField__java_lang_Object(), Byte))).m_byteValue__byte();
-  receiver.m_setField__java_lang_Object__void(Byte.m_valueOf__byte__java_lang_Byte($Primitives.narrowIntToByte(unary + 1 | 0)));
+  receiver.m_setField__java_lang_Object__void(Byte.m_valueOf__byte__java_lang_Byte(Primitives.m_narrowIntToByte__int__int(unary + 1 | 0)));
   let receiver_1 = ref;
-  receiver_1.m_setField__java_lang_Object__void(Byte.m_valueOf__byte__java_lang_Byte($Primitives.narrowIntToByte((/**@type {!Byte}*/ ($Casts.$to(receiver_1.m_getField__java_lang_Object(), Byte))).m_byteValue__byte() + 1 | 0)));
+  receiver_1.m_setField__java_lang_Object__void(Byte.m_valueOf__byte__java_lang_Byte(Primitives.m_narrowIntToByte__int__int((/**@type {!Byte}*/ ($Casts.$to(receiver_1.m_getField__java_lang_Object(), Byte))).m_byteValue__byte() + 1 | 0)));
   receiver_1.m_getField__java_lang_Object();
   let n = 1 + (/**@type {!Byte}*/ ($Casts.$to(ref.m_getField__java_lang_Object(), Byte))).m_byteValue__byte() | 0;
   let longRef = /**@type {!$1Ref<!$Long>}*/ ($1Ref.$create__java_lang_Object($Long.fromInt(1)));
@@ -339,11 +339,11 @@ class ArithmeticExpressionsKt extends j_l_Object {
   Long = goog.module.get('java.lang.Long$impl');
   Objects = goog.module.get('java.util.Objects$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
   $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
   $$short = goog.module.get('vmbootstrap.primitives.$short$impl');

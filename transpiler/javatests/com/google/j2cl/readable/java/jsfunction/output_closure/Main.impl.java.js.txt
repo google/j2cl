@@ -10,6 +10,7 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let ClassWithJsFunctionProperty = goog.forwardDeclare('jsfunction.Main.ClassWithJsFunctionProperty$impl');
 let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.Main.DoubleDoubleJsBiFunction$impl');
 let JsFunctionImplementation = goog.forwardDeclare('jsfunction.Main.JsFunctionImplementation$impl');
@@ -19,7 +20,6 @@ let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Main extends j_l_Object {
@@ -155,7 +155,7 @@ class Main extends j_l_Object {
  /** @nodts */
  m_testJsFunctionOptional__void_$pp_jsfunction() {
   let f = /**  @return {number}*/ ((/** number */ i, /** ?number= */ n) =>{
-   return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double__double(n));
+   return Primitives.m_narrowDoubleToInt__int__int(i + Double.m_doubleValue__java_lang_Double__double(n));
   });
  }
  
@@ -283,6 +283,7 @@ class Main extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   ClassWithJsFunctionProperty = goog.module.get('jsfunction.Main.ClassWithJsFunctionProperty$impl');
   DoubleDoubleJsBiFunction = goog.module.get('jsfunction.Main.DoubleDoubleJsBiFunction$impl');
   JsFunctionImplementation = goog.module.get('jsfunction.Main.JsFunctionImplementation$impl');
@@ -291,7 +292,6 @@ class Main extends j_l_Object {
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $JavaScriptFunction = goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }

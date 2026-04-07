@@ -11,12 +11,12 @@ let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let ArrayHelpersKt = goog.forwardDeclare('kotlin.jvm.internal.ArrayHelpersKt$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $$byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
@@ -134,13 +134,13 @@ class Arrays extends j_l_Object {
   let b = 1;
   let c = 97 /* 'a' */;
   longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([b], $$long)));
-  $Arrays.$set(longs, b, $Primitives.widenByteToLong(b));
+  $Arrays.$set(longs, b, Primitives.m_widenByteToLong__int__long(b));
   longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$create([c], $$long)));
   let tmp = longs;
   let tmp_1 = c;
-  $Arrays.$set(tmp, tmp_1, $Primitives.widenCharToLong(c));
-  let tmp_2 = $Primitives.widenByteToLong(b);
-  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([tmp_2, $Primitives.widenCharToLong(c)], $$long)));
+  $Arrays.$set(tmp, tmp_1, Primitives.m_widenCharToLong__int__long(c));
+  let tmp_2 = Primitives.m_widenByteToLong__int__long(b);
+  longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$stampType([tmp_2, Primitives.m_widenCharToLong__int__long(c)], $$long)));
  }
  /** @final @nodts */
  m_testDevirtualizedTypeArrays__void() {
@@ -278,11 +278,11 @@ class Arrays extends j_l_Object {
    })));
   }), 2));
   let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $$long, /**  @return {!$Long}*/ ((/** number */ it_3) =>{
-   return $Primitives.widenIntToLong(it_3);
+   return Primitives.m_widenIntToLong__int__long(it_3);
   })));
   longs = (/**@type {!Array<!$Long>}*/ ($Arrays.$createWithInitializer(10, $$long, ArrayHelpersKt.m_toLongArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_LongArrayInitializer(Function1.$adapt(/**  @return {!$Long}*/ ((/** !Integer */ p0_10) =>{
    let p0_11 = /**@type {!Integer}*/ ($Casts.$to(p0_10, Integer));
-   return $Primitives.widenIntToLong(p0_11.intValue());
+   return Primitives.m_widenIntToLong__int__long(p0_11.intValue());
   }))))));
  }
  /** @final @nodts @return {number} */
@@ -324,12 +324,12 @@ class Arrays extends j_l_Object {
   Boolean = goog.module.get('java.lang.Boolean$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
   ArrayHelpersKt = goog.module.get('kotlin.jvm.internal.ArrayHelpersKt$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
   $$byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
   $$long = goog.module.get('vmbootstrap.primitives.$long$impl');

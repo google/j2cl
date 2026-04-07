@@ -4,9 +4,9 @@ const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let BANG = goog.forwardDeclare('companion.EnumWithCompanion.BANG$impl');
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @extends {Enum<!EnumWithCompanion>}
@@ -46,9 +46,9 @@ class EnumWithCompanion extends Enum {
  static m_valueOf__java_lang_String__companion_EnumWithCompanion(/** string */ name) {
   EnumWithCompanion.$clinit();
   if ($Equality.$same(EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_, null)) {
-   EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_ = (/**@type {Map<?string, !EnumWithCompanion>}*/ ($Enums.createMapFromValues(EnumWithCompanion.m_values__arrayOf_companion_EnumWithCompanion())));
+   EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_ = (/**@type {Map<?string, !EnumWithCompanion>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(EnumWithCompanion.m_values__arrayOf_companion_EnumWithCompanion())));
   }
-  return /**@type {EnumWithCompanion}*/ ($Enums.getValueFromNameAndMap(name, EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_));
+  return /**@type {EnumWithCompanion}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, EnumWithCompanion.f_namesToValuesMap__companion_EnumWithCompanion_));
  }
  /** @nodts @return {!Array<!EnumWithCompanion>} */
  static m_values__arrayOf_companion_EnumWithCompanion() {
@@ -90,9 +90,9 @@ class EnumWithCompanion extends Enum {
  /** @nodts */
  static $loadModules() {
   BANG = goog.module.get('companion.EnumWithCompanion.BANG$impl');
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 /**@const {number} @nodts*/

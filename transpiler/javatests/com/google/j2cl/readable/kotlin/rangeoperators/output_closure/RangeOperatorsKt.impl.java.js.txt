@@ -5,13 +5,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let ProgressionUtilKt = goog.forwardDeclare('kotlin.internal.ProgressionUtilKt$impl');
 let CharRange = goog.forwardDeclare('kotlin.ranges.CharRange$impl');
 let RangesKt = goog.forwardDeclare('kotlin.ranges.RangesKt$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 /**
  * @final
@@ -37,10 +37,10 @@ class RangeOperatorsKt extends j_l_Object {
   RangeOperatorsKt.$clinit();
   if (CharRange.$create__char__char(97 /* 'a' */, 122 /* 'z' */).m_contains__char__boolean(97 /* 'a' */)) {}
   if (RangesKt.m_until__char__char__kotlin_ranges_CharRange(97 /* 'a' */, 122 /* 'z' */).m_contains__char__boolean(97 /* 'a' */)) {}
-  for (let inductionVariable = 97 /* 'a' */; inductionVariable <= 122 /* 'z' */; inductionVariable = $Primitives.narrowIntToChar(inductionVariable + 1 | 0)) {
+  for (let inductionVariable = 97 /* 'a' */; inductionVariable <= 122 /* 'z' */; inductionVariable = Primitives.m_narrowIntToChar__int__int(inductionVariable + 1 | 0)) {
    let i = inductionVariable;
   }
-  for (let inductionVariable_1 = 97 /* 'a' */; inductionVariable_1 < 122 /* 'z' */; inductionVariable_1 = $Primitives.narrowIntToChar(inductionVariable_1 + 1 | 0)) {
+  for (let inductionVariable_1 = 97 /* 'a' */; inductionVariable_1 < 122 /* 'z' */; inductionVariable_1 = Primitives.m_narrowIntToChar__int__int(inductionVariable_1 + 1 | 0)) {
    let i_1 = inductionVariable_1;
   }
   for (let inductionVariable_2 = 0; inductionVariable_2 <= 4; inductionVariable_2 = inductionVariable_2 + 1 | 0) {
@@ -86,7 +86,7 @@ class RangeOperatorsKt extends j_l_Object {
    let i_11 = inductionVariable_11;
   }
   let inductionVariable_12 = $Long.fromInt(1);
-  let last_1 = $Primitives.widenShortToLong(s);
+  let last_1 = Primitives.m_widenShortToLong__int__long(s);
   if ($LongUtils.lessEquals(inductionVariable_12, last_1)) {
    while (true) {
     let /** !$Long */ i_12;
@@ -99,7 +99,7 @@ class RangeOperatorsKt extends j_l_Object {
     }
    }
   }
-  for (let inductionVariable_13 = $Primitives.widenShortToLong(s); $LongUtils.lessEquals(inductionVariable_13, $Long.fromInt(1)); inductionVariable_13 = $LongUtils.plus(inductionVariable_13, $Long.fromInt(1))) {
+  for (let inductionVariable_13 = Primitives.m_widenShortToLong__int__long(s); $LongUtils.lessEquals(inductionVariable_13, $Long.fromInt(1)); inductionVariable_13 = $LongUtils.plus(inductionVariable_13, $Long.fromInt(1))) {
    let i_13 = inductionVariable_13;
   }
   for (let inductionVariable_14 = 1, last_2 = s; inductionVariable_14 < last_2; inductionVariable_14 = inductionVariable_14 + 1 | 0) {
@@ -108,10 +108,10 @@ class RangeOperatorsKt extends j_l_Object {
   for (let inductionVariable_15 = s; inductionVariable_15 < 1; inductionVariable_15 = inductionVariable_15 + 1 | 0) {
    let i_15 = inductionVariable_15;
   }
-  for (let inductionVariable_16 = $Long.fromInt(1), last_3 = $Primitives.widenShortToLong(s); $LongUtils.less(inductionVariable_16, last_3); inductionVariable_16 = $LongUtils.plus(inductionVariable_16, $Long.fromInt(1))) {
+  for (let inductionVariable_16 = $Long.fromInt(1), last_3 = Primitives.m_widenShortToLong__int__long(s); $LongUtils.less(inductionVariable_16, last_3); inductionVariable_16 = $LongUtils.plus(inductionVariable_16, $Long.fromInt(1))) {
    let i_16 = inductionVariable_16;
   }
-  for (let inductionVariable_17 = $Primitives.widenShortToLong(s); $LongUtils.less(inductionVariable_17, $Long.fromInt(1)); inductionVariable_17 = $LongUtils.plus(inductionVariable_17, $Long.fromInt(1))) {
+  for (let inductionVariable_17 = Primitives.m_widenShortToLong__int__long(s); $LongUtils.less(inductionVariable_17, $Long.fromInt(1)); inductionVariable_17 = $LongUtils.plus(inductionVariable_17, $Long.fromInt(1))) {
    let i_17 = inductionVariable_17;
   }
   let b = 1;
@@ -133,7 +133,7 @@ class RangeOperatorsKt extends j_l_Object {
    let i_19 = inductionVariable_19;
   }
   let inductionVariable_20 = $Long.fromInt(1);
-  let last_5 = $Primitives.widenByteToLong(b);
+  let last_5 = Primitives.m_widenByteToLong__int__long(b);
   if ($LongUtils.lessEquals(inductionVariable_20, last_5)) {
    while (true) {
     let /** !$Long */ i_20;
@@ -146,7 +146,7 @@ class RangeOperatorsKt extends j_l_Object {
     }
    }
   }
-  for (let inductionVariable_21 = $Primitives.widenByteToLong(b); $LongUtils.lessEquals(inductionVariable_21, $Long.fromInt(1)); inductionVariable_21 = $LongUtils.plus(inductionVariable_21, $Long.fromInt(1))) {
+  for (let inductionVariable_21 = Primitives.m_widenByteToLong__int__long(b); $LongUtils.lessEquals(inductionVariable_21, $Long.fromInt(1)); inductionVariable_21 = $LongUtils.plus(inductionVariable_21, $Long.fromInt(1))) {
    let i_21 = inductionVariable_21;
   }
   for (let inductionVariable_22 = 1, last_6 = b; inductionVariable_22 < last_6; inductionVariable_22 = inductionVariable_22 + 1 | 0) {
@@ -155,10 +155,10 @@ class RangeOperatorsKt extends j_l_Object {
   for (let inductionVariable_23 = b; inductionVariable_23 < 1; inductionVariable_23 = inductionVariable_23 + 1 | 0) {
    let i_23 = inductionVariable_23;
   }
-  for (let inductionVariable_24 = $Long.fromInt(1), last_7 = $Primitives.widenByteToLong(b); $LongUtils.less(inductionVariable_24, last_7); inductionVariable_24 = $LongUtils.plus(inductionVariable_24, $Long.fromInt(1))) {
+  for (let inductionVariable_24 = $Long.fromInt(1), last_7 = Primitives.m_widenByteToLong__int__long(b); $LongUtils.less(inductionVariable_24, last_7); inductionVariable_24 = $LongUtils.plus(inductionVariable_24, $Long.fromInt(1))) {
    let i_24 = inductionVariable_24;
   }
-  for (let inductionVariable_25 = $Primitives.widenByteToLong(b); $LongUtils.less(inductionVariable_25, $Long.fromInt(1)); inductionVariable_25 = $LongUtils.plus(inductionVariable_25, $Long.fromInt(1))) {
+  for (let inductionVariable_25 = Primitives.m_widenByteToLong__int__long(b); $LongUtils.less(inductionVariable_25, $Long.fromInt(1)); inductionVariable_25 = $LongUtils.plus(inductionVariable_25, $Long.fromInt(1))) {
    let i_25 = inductionVariable_25;
   }
   let inductionVariable_26 = 1;
@@ -231,7 +231,7 @@ class RangeOperatorsKt extends j_l_Object {
   let from = Short.m_valueOf__short__java_lang_Short(1);
   let to = $Long.fromInt(1);
   if (!$Equality.$same(from, null) && !$Equality.$same(to, null)) {
-   let inductionVariable_32 = $Primitives.widenShortToLong(from.m_shortValue__short());
+   let inductionVariable_32 = Primitives.m_widenShortToLong__int__long(from.m_shortValue__short());
    let last_12 = Long.m_longValue__java_lang_Long__long(to);
    if ($LongUtils.lessEquals(inductionVariable_32, last_12)) {
     while (true) {
@@ -245,7 +245,7 @@ class RangeOperatorsKt extends j_l_Object {
      }
     }
    }
-   for (let inductionVariable_33 = $Primitives.widenShortToLong(from.m_shortValue__short()), last_13 = Long.m_longValue__java_lang_Long__long(to); $LongUtils.less(inductionVariable_33, last_13); inductionVariable_33 = $LongUtils.plus(inductionVariable_33, $Long.fromInt(1))) {
+   for (let inductionVariable_33 = Primitives.m_widenShortToLong__int__long(from.m_shortValue__short()), last_13 = Long.m_longValue__java_lang_Long__long(to); $LongUtils.less(inductionVariable_33, last_13); inductionVariable_33 = $LongUtils.plus(inductionVariable_33, $Long.fromInt(1))) {
     let i_33 = inductionVariable_33;
    }
   }
@@ -265,13 +265,13 @@ class RangeOperatorsKt extends j_l_Object {
  static $loadModules() {
   Long = goog.module.get('java.lang.Long$impl');
   Short = goog.module.get('java.lang.Short$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   ProgressionUtilKt = goog.module.get('kotlin.internal.ProgressionUtilKt$impl');
   CharRange = goog.module.get('kotlin.ranges.CharRange$impl');
   RangesKt = goog.module.get('kotlin.ranges.RangesKt$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(RangeOperatorsKt, 'rangeoperators.RangeOperatorsKt');

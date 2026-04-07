@@ -27,7 +27,6 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-@JsType(namespace = "vmbootstrap")
 class Enums {
 
   @JsType(isNative = true, name = "Map", namespace = JsPackage.GLOBAL)

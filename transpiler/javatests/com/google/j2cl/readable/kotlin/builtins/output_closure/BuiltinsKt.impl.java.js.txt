@@ -11,11 +11,11 @@ let HashMap = goog.forwardDeclare('java.util.HashMap$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let Map = goog.forwardDeclare('java.util.Map$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let CollectionsKt = goog.forwardDeclare('kotlin.collections.CollectionsKt$impl');
 let MapsKt = goog.forwardDeclare('kotlin.collections.MapsKt$impl');
 let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 /**
  * @final
@@ -75,10 +75,10 @@ class BuiltinsKt extends j_l_Object {
   let e = $Numbers.m_floatValue__java_lang_Number__float(number_1);
   let f = $Numbers.m_doubleValue__java_lang_Number__double(number_1);
   let int_1 = 1;
-  let g = $Primitives.narrowIntToByte(int_1);
-  let h = $Primitives.narrowIntToShort(int_1);
+  let g = Primitives.m_narrowIntToByte__int__int(int_1);
+  let h = Primitives.m_narrowIntToShort__int__int(int_1);
   let i = int_1;
-  let j = $Primitives.widenIntToLong(int_1);
+  let j = Primitives.m_widenIntToLong__int__long(int_1);
   let k = int_1;
   let l = int_1;
   let charSequence = 'abcd';
@@ -107,11 +107,11 @@ class BuiltinsKt extends j_l_Object {
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   HashMap = goog.module.get('java.util.HashMap$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   CollectionsKt = goog.module.get('kotlin.collections.CollectionsKt$impl');
   MapsKt = goog.module.get('kotlin.collections.MapsKt$impl');
   $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(BuiltinsKt, 'builtins.BuiltinsKt');

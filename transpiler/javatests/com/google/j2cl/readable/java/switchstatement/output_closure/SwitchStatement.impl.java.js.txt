@@ -4,11 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let Numbers = goog.forwardDeclare('switchstatement.Numbers$impl');
-let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class SwitchStatement extends j_l_Object {
  /** @protected @nodts */
@@ -62,13 +62,13 @@ class SwitchStatement extends j_l_Object {
   let s = 1;
   switch (s) {
    case 1:
-    s = $Primitives.narrowIntToShort(s + 1 | 0);
+    s = Primitives.m_narrowIntToShort__int__int(s + 1 | 0);
     break;
    case 3:
-    s = $Primitives.narrowIntToShort(s + 1 | 0);
+    s = Primitives.m_narrowIntToShort__int__int(s + 1 | 0);
     break;
    case 12:
-    s = $Primitives.narrowIntToShort(s + 1 | 0);
+    s = Primitives.m_narrowIntToShort__int__int(s + 1 | 0);
     break;
   }
  }
@@ -85,7 +85,7 @@ class SwitchStatement extends j_l_Object {
     break;
    case 3:
     i = 3;
-    $Asserts.$assert(i == 3);
+    Asserts.$assert__boolean__void(i == 3);
     return;
   }
   switch (5) {
@@ -93,7 +93,7 @@ class SwitchStatement extends j_l_Object {
     let i_1 = 1;
     break;
   }
-  $Asserts.$assert(false);
+  Asserts.$assert__boolean__void(false);
  }
  /** @nodts */
  m_testCaseExpressionTypes__char__int__byte__short__void_$p_switchstatement_SwitchStatement(/** number */ ch, /** number */ i, /** number */ b, /** number */ s) {
@@ -500,11 +500,11 @@ class SwitchStatement extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Asserts = goog.module.get('javaemul.internal.Asserts$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   Numbers = goog.module.get('switchstatement.Numbers$impl');
-  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 /**@const {number} @nodts*/

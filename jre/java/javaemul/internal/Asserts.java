@@ -15,10 +15,7 @@
  */
 package javaemul.internal;
 
-import jsinterop.annotations.JsType;
-
 /** Defines helper functions used for generating assert statements. */
-@JsType(namespace = "vmbootstrap")
 public class Asserts {
 
   // TODO(b/203692803): Unify the mechanism to enable/disable assertions in the different platforms.

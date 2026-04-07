@@ -25,8 +25,8 @@ let OuterRefFromThisCtorCall = goog.forwardDeclare('innerclassinitorder.InnerCla
 let P1 = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.P1$impl');
 let P2 = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
 let P3 = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
+let Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class InnerClassInitOrder extends j_l_Object {
  /** @protected @nodts */
@@ -54,44 +54,44 @@ class InnerClassInitOrder extends j_l_Object {
  /** @nodts */
  m_testOuterThisFromSuperCall__void() {
   OuterRefFromSuperCtorCall.$create__innerclassinitorder_InnerClassInitOrder(this);
-  $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 100);
+  Asserts.$assert__boolean__void(this.f_number__innerclassinitorder_InnerClassInitOrder == 100);
  }
  /** @nodts */
  m_testOuterThisFromThisCall__void() {
   OuterRefFromThisCtorCall.$create__innerclassinitorder_InnerClassInitOrder(this);
-  $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1100);
+  Asserts.$assert__boolean__void(this.f_number__innerclassinitorder_InnerClassInitOrder == 1100);
  }
  /** @nodts */
  m_testExtendsNested__void() {
   let o = ESOuter.$create__();
-  $Asserts.$assert(1 == ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
-  $Asserts.$assert(2 == ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter__int(o, 2).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
-  $Asserts.$assert(1 == ESInnerSubclass.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
-  $Asserts.$assert(2 == ESInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
+  Asserts.$assert__boolean__void(1 == ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
+  Asserts.$assert__boolean__void(2 == ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter__int(o, 2).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
+  Asserts.$assert__boolean__void(1 == ESInnerSubclass.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
+  Asserts.$assert__boolean__void(2 == ESInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
  }
  /** @nodts */
  m_testExtendsNestedWithGenerics__void() {
   let o = /**@type {!ESWGOuter<?string>}*/ (ESWGOuter.$create__());
-  $Asserts.$assert(1 == (/**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o))).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
-  $Asserts.$assert(2 == (/**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(o, 2))).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
-  $Asserts.$assert(1 == ESWGInnerSubclass.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
-  $Asserts.$assert(2 == ESWGInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
+  Asserts.$assert__boolean__void(1 == (/**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o))).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
+  Asserts.$assert__boolean__void(2 == (/**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(o, 2))).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
+  Asserts.$assert__boolean__void(1 == ESWGInnerSubclass.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
+  Asserts.$assert__boolean__void(2 == ESWGInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
  }
  /** @nodts */
  m_testInnerClassCtors__void() {
   let p1 = /**@type {!P1<*>}*/ (P1.$create__());
-  $Asserts.$assert(1 == p1.f_value__innerclassinitorder_InnerClassInitOrder_P1);
-  $Asserts.$assert(2 == (/**@type {!P1<*>}*/ (P1.$create__int(2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  Asserts.$assert__boolean__void(1 == p1.f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  Asserts.$assert__boolean__void(2 == (/**@type {!P1<*>}*/ (P1.$create__int(2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
   let p2 = /**@type {!P2<*, *>}*/ (P2.$create__innerclassinitorder_InnerClassInitOrder_P1(p1));
-  $Asserts.$assert(1 == p2.f_value__innerclassinitorder_InnerClassInitOrder_P1);
-  $Asserts.$assert(2 == (/**@type {!P2<*, *>}*/ (P2.$create__innerclassinitorder_InnerClassInitOrder_P1__int(p1, 2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
-  $Asserts.$assert(1 == (/**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2(p2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
-  $Asserts.$assert(2 == (/**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int(p2, 2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  Asserts.$assert__boolean__void(1 == p2.f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  Asserts.$assert__boolean__void(2 == (/**@type {!P2<*, *>}*/ (P2.$create__innerclassinitorder_InnerClassInitOrder_P1__int(p1, 2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  Asserts.$assert__boolean__void(1 == (/**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2(p2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
+  Asserts.$assert__boolean__void(2 == (/**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int(p2, 2))).f_value__innerclassinitorder_InnerClassInitOrder_P1);
  }
  /** @nodts */
  m_testInnerClassInitialization__void() {
   InnerClass.$create__innerclassinitorder_InnerClassInitOrder(this);
-  $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1111);
+  Asserts.$assert__boolean__void(this.f_number__innerclassinitorder_InnerClassInitOrder == 1111);
  }
  /** @nodts */
  m_testInnerClassLoop__void() {
@@ -106,47 +106,47 @@ class InnerClassInitOrder extends j_l_Object {
     theAp.m_act__void();
    }
   }
-  $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1156);
+  Asserts.$assert__boolean__void(this.f_number__innerclassinitorder_InnerClassInitOrder == 1156);
  }
  /** @nodts */
  m_testOuterIsNotSuper__void() {
   let x = OuterIsNotSuper.$create__innerclassinitorder_InnerClassInitOrder_Outer(this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
-  $Asserts.$assert(2 == x.m_getValue__int());
+  Asserts.$assert__boolean__void(2 == x.m_getValue__int());
  }
  /** @nodts */
  m_testOuterIsNotSuperAnon__void() {
   let x = $2.$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(this, this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
-  $Asserts.$assert(2 == x.m_getValue__int());
+  Asserts.$assert__boolean__void(2 == x.m_getValue__int());
  }
  /** @nodts */
  m_testQualifiedSuperCall__void() {
   let x = TestQualifiedSuperCall.$create__();
-  $Asserts.$assert(2 == x.m_getValue__int());
+  Asserts.$assert__boolean__void(2 == x.m_getValue__int());
  }
  /** @nodts */
  m_testQualifiedSuperCallAnon__void() {
   let x = $3.$create__innerclassinitorder_InnerClassInitOrder(this);
-  $Asserts.$assert(2 == x.m_getValue__int());
+  Asserts.$assert__boolean__void(2 == x.m_getValue__int());
  }
  /** @nodts */
  m_testSuperDispatch__void() {
-  $Asserts.$assert(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub1__int());
-  $Asserts.$assert(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub2__int());
+  Asserts.$assert__boolean__void(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub1__int());
+  Asserts.$assert__boolean__void(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub2__int());
  }
  /** @nodts */
  m_testUnqualifiedAlloc__void() {
   let x = this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper();
-  $Asserts.$assert(2 == x.m_getValue__int());
+  Asserts.$assert__boolean__void(2 == x.m_getValue__int());
  }
  /** @nodts */
  m_testUnqualifiedSuperCall__void() {
   let x = TestUnqualifiedSuperCall.$create__innerclassinitorder_InnerClassInitOrder_Outer(this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
-  $Asserts.$assert(2 == x.m_getValue__int());
+  Asserts.$assert__boolean__void(2 == x.m_getValue__int());
  }
  /** @nodts */
  m_testUnqualifiedSuperCallAnon__void() {
   let x = $4.$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(this, this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
-  $Asserts.$assert(2 == x.m_getValue__int());
+  Asserts.$assert__boolean__void(2 == x.m_getValue__int());
  }
  /** @private @nodts */
  $init__void_$p_innerclassinitorder_InnerClassInitOrder() {
@@ -189,8 +189,8 @@ class InnerClassInitOrder extends j_l_Object {
   P1 = goog.module.get('innerclassinitorder.InnerClassInitOrder.P1$impl');
   P2 = goog.module.get('innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
   P3 = goog.module.get('innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
+  Asserts = goog.module.get('javaemul.internal.Asserts$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
  }
 }
 $Util.$setClassMetadata(InnerClassInitOrder, 'innerclassinitorder.InnerClassInitOrder');

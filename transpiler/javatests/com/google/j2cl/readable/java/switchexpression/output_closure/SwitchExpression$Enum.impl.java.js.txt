@@ -3,9 +3,9 @@ goog.module('switchexpression.SwitchExpression.Enum$impl');
 const j_l_Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @final
@@ -32,9 +32,9 @@ class Enum extends j_l_Enum {
  static m_valueOf__java_lang_String__switchexpression_SwitchExpression_Enum(/** string */ name) {
   Enum.$clinit();
   if ($Equality.$same(Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_, null)) {
-   Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_ = (/**@type {Map<?string, !Enum>}*/ ($Enums.createMapFromValues(Enum.m_values__arrayOf_switchexpression_SwitchExpression_Enum())));
+   Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_ = (/**@type {Map<?string, !Enum>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(Enum.m_values__arrayOf_switchexpression_SwitchExpression_Enum())));
   }
-  return /**@type {Enum}*/ ($Enums.getValueFromNameAndMap(name, Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_));
+  return /**@type {Enum}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, Enum.f_namesToValuesMap__switchexpression_SwitchExpression_Enum_));
  }
  /** @nodts @return {!Array<!Enum>} */
  static m_values__arrayOf_switchexpression_SwitchExpression_Enum() {
@@ -54,9 +54,9 @@ class Enum extends j_l_Enum {
  
  /** @nodts */
  static $loadModules() {
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 /**@const {number} @nodts*/

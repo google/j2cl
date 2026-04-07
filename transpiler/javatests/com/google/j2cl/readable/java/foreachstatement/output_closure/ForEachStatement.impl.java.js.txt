@@ -18,10 +18,10 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class ForEachStatement extends j_l_Object {
  /** @protected @nodts */
@@ -81,7 +81,7 @@ class ForEachStatement extends j_l_Object {
    if (Exception2.$isInstance(__$exc_1) || Exception3.$isInstance(__$exc_1)) {
     let e_2 = /**@type {(Exception2|Exception3)}*/ (__$exc_1);
     for (let $iterator_2 = (/**@type {Iterable<Integer>}*/ ($Casts.$to(e_2, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
-     let o_2 = $Primitives.widenIntToLong((/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).intValue());
+     let o_2 = Primitives.m_widenIntToLong__int__long((/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).intValue());
     }
    } else {
     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc_1);
@@ -103,7 +103,7 @@ class ForEachStatement extends j_l_Object {
    let i = (/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).intValue();
   }
   for (let $iterator_3 = (/**@type {!Iterable<Integer>}*/ ($Casts.$to(integerIterable, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_3.m_hasNext__boolean(); ) {
-   let i_1 = $Primitives.widenIntToLong((/**@type {Integer}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Integer))).intValue());
+   let i_1 = Primitives.m_widenIntToLong__int__long((/**@type {Integer}*/ ($Casts.$to($iterator_3.m_next__java_lang_Object(), Integer))).intValue());
   }
   let /** Iterable<Character> */ charIterable = null;
   for (let $iterator_4 = charIterable.m_iterator__java_util_Iterator(); $iterator_4.m_hasNext__boolean(); ) {
@@ -170,9 +170,9 @@ class ForEachStatement extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   Throwable = goog.module.get('java.lang.Throwable$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(ForEachStatement, 'foreachstatement.ForEachStatement');

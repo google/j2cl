@@ -7,6 +7,8 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
+let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
@@ -18,8 +20,6 @@ let Sealed = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed$impl');
 let A = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.A$impl');
 let B = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.B$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
-let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
 
 class SwitchPatterns extends j_l_Object {
  /** @protected @nodts */
@@ -186,7 +186,7 @@ class SwitchPatterns extends j_l_Object {
    default:
     break;
   }
-  let digit = /**@type {?Digit}*/ ($Enums.unbox(null, $Overlay));
+  let digit = /**@type {?Digit}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, $Overlay));
   switch ($Util.$coerceToNull(digit)) {
    case Digit.ZERO:
     SwitchPatterns.m_fail__void();
@@ -235,6 +235,7 @@ class SwitchPatterns extends j_l_Object {
   Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   Objects = goog.module.get('java.util.Objects$impl');
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $1R = goog.module.get('switchpatterns.SwitchPatterns.$1R$impl');
@@ -244,7 +245,6 @@ class SwitchPatterns extends j_l_Object {
   A = goog.module.get('switchpatterns.SwitchPatterns.Sealed.A$impl');
   B = goog.module.get('switchpatterns.SwitchPatterns.Sealed.B$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 $Util.$setClassMetadata(SwitchPatterns, 'switchpatterns.SwitchPatterns');

@@ -3,7 +3,7 @@ goog.module('localnamecollision.Asserts$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let javaemul_internal_Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
 
 class Asserts extends j_l_Object {
  /** @protected @nodts */
@@ -23,7 +23,7 @@ class Asserts extends j_l_Object {
  }
  /** @nodts @return {number} */
  m_n__int_$pp_localnamecollision() {
-  $Asserts.$assert(5 != 4);
+  javaemul_internal_Asserts.$assert__boolean__void(5 != 4);
   return 5;
  }
  /** @nodts */
@@ -39,7 +39,7 @@ class Asserts extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+  javaemul_internal_Asserts = goog.module.get('javaemul.internal.Asserts$impl');
  }
 }
 $Util.$setClassMetadata(Asserts, 'localnamecollision.Asserts');

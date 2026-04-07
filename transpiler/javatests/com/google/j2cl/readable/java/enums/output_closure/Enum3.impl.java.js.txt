@@ -5,10 +5,10 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @final
@@ -35,9 +35,9 @@ class Enum3 extends Enum {
  static m_valueOf__java_lang_String__enums_Enum3(/** string */ name) {
   Enum3.$clinit();
   if ($Equality.$same(Enum3.f_namesToValuesMap__enums_Enum3_, null)) {
-   Enum3.f_namesToValuesMap__enums_Enum3_ = (/**@type {Map<?string, !Enum3>}*/ ($Enums.createMapFromValues(Enum3.m_values__arrayOf_enums_Enum3())));
+   Enum3.f_namesToValuesMap__enums_Enum3_ = (/**@type {Map<?string, !Enum3>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(Enum3.m_values__arrayOf_enums_Enum3())));
   }
-  return /**@type {Enum3}*/ ($Enums.getValueFromNameAndMap(name, Enum3.f_namesToValuesMap__enums_Enum3_));
+  return /**@type {Enum3}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, Enum3.f_namesToValuesMap__enums_Enum3_));
  }
  /** @nodts @return {!Array<!Enum3>} */
  static m_values__arrayOf_enums_Enum3() {
@@ -67,10 +67,10 @@ class Enum3 extends Enum {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   j_u_function_Function = goog.module.get('java.util.function.Function$impl');
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 /**@const {number} @nodts*/

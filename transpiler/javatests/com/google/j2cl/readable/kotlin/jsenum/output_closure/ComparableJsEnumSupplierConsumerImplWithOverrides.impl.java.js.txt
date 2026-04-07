@@ -5,14 +5,14 @@ const SupplierConsumerImpl = goog.require('jsenum.SupplierConsumerImpl$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
+let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
 let ComparableJsEnum = goog.forwardDeclare('jsenum.ComparableJsEnum$impl');
 let $Overlay = goog.forwardDeclare('jsenum.ComparableJsEnum.$Overlay$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
-let $Enums_BoxedComparableLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedComparableLightEnum$impl');
 
 /**
  * @final
- * @extends {SupplierConsumerImpl<!$Enums_BoxedComparableLightEnum<!ComparableJsEnum>>}
+ * @extends {SupplierConsumerImpl<!BoxedComparableLightEnum<!ComparableJsEnum>>}
  * @implements {ComparableJsEnumSupplierConsumer}
  */
 class ComparableJsEnumSupplierConsumerImplWithOverrides extends SupplierConsumerImpl {
@@ -35,17 +35,17 @@ class ComparableJsEnumSupplierConsumerImplWithOverrides extends SupplierConsumer
  m_accept__jsenum_ComparableJsEnum__void(/** !ComparableJsEnum */ t) {}
  /** @override @return {!ComparableJsEnum} */
  get() {
-  return /**@type {!ComparableJsEnum}*/ ($Enums.unbox(j_l_Object.$create__(), $Overlay));
+  return /**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(j_l_Object.$create__(), $Overlay));
  }
  //Bridge method.
- /** @final @override @nodts @suppress{visibility} @return {!$Enums_BoxedComparableLightEnum<!ComparableJsEnum>} */
+ /** @final @override @nodts @suppress{visibility} @return {!BoxedComparableLightEnum<!ComparableJsEnum>} */
  m_get__java_lang_Object() {
-  return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(this.get(), $Overlay));
+  return /**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(this.get(), $Overlay));
  }
  //Bridge method.
  /** @final @override @nodts @suppress{visibility} */
- m_accept__java_lang_Object__void(/** !$Enums_BoxedComparableLightEnum<!ComparableJsEnum> */ arg0) {
-  this.m_accept__jsenum_ComparableJsEnum__void(/**@type {!ComparableJsEnum}*/ ($Enums.unbox(arg0, $Overlay)));
+ m_accept__java_lang_Object__void(/** !BoxedComparableLightEnum<!ComparableJsEnum> */ arg0) {
+  this.m_accept__jsenum_ComparableJsEnum__void(/**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(arg0, $Overlay)));
  }
  /** @nodts */
  static $clinit() {
@@ -61,8 +61,8 @@ class ComparableJsEnumSupplierConsumerImplWithOverrides extends SupplierConsumer
  /** @nodts */
  static $loadModules() {
   j_l_Object = goog.module.get('java.lang.Object$impl');
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
   $Overlay = goog.module.get('jsenum.ComparableJsEnum.$Overlay$impl');
-  $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
 ComparableJsEnumSupplierConsumer.$markImplementor(ComparableJsEnumSupplierConsumerImplWithOverrides);

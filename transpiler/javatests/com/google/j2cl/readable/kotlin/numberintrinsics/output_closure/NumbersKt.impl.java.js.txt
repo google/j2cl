@@ -11,9 +11,9 @@ let Float = goog.forwardDeclare('java.lang.Float$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 /**
  * @final
@@ -48,10 +48,10 @@ class NumbersKt extends j_l_Object {
  static m_shorts__void() {
   NumbersKt.$clinit();
   let a = 0;
-  let b = $Primitives.narrowShortToByte(a);
+  let b = Primitives.m_narrowShortToByte__int__int(a);
   let c = a;
   let d = a;
-  let e = $Primitives.widenShortToLong(a);
+  let e = Primitives.m_widenShortToLong__int__long(a);
   let f = a;
   let g = a;
  }
@@ -108,8 +108,8 @@ class NumbersKt extends j_l_Object {
   let i = 0;
   let d = 0;
   let f = 0;
-  let b = $Primitives.narrowIntToByte(i);
-  let s = $Primitives.narrowIntToShort(i);
+  let b = Primitives.m_narrowIntToByte__int__int(i);
+  let s = Primitives.m_narrowIntToShort__int__int(i);
   let l = $Long.fromInt(0);
   let x = 0;
   x = Integer.m_compare__int__int__int(i, i);
@@ -117,38 +117,38 @@ class NumbersKt extends j_l_Object {
   x = Float.m_compare__float__float__int(i, f);
   x = Integer.m_compare__int__int__int(i, b);
   x = Integer.m_compare__int__int__int(i, s);
-  x = Long.m_compare__long__long__int($Primitives.widenIntToLong(i), l);
+  x = Long.m_compare__long__long__int(Primitives.m_widenIntToLong__int__long(i), l);
   x = Double.m_compare__double__double__int(d, d);
   x = Double.m_compare__double__double__int(d, i);
   x = Double.m_compare__double__double__int(d, f);
   x = Double.m_compare__double__double__int(d, b);
   x = Double.m_compare__double__double__int(d, s);
-  x = Double.m_compare__double__double__int(d, $Primitives.widenLongToDouble(l));
+  x = Double.m_compare__double__double__int(d, Primitives.m_widenLongToDouble__long__double(l));
   x = Float.m_compare__float__float__int(f, f);
   x = Float.m_compare__float__float__int(f, i);
   x = Double.m_compare__double__double__int(f, d);
   x = Float.m_compare__float__float__int(f, b);
   x = Float.m_compare__float__float__int(f, s);
-  x = Float.m_compare__float__float__int(f, $Primitives.widenLongToFloat(l));
+  x = Float.m_compare__float__float__int(f, Primitives.m_widenLongToFloat__long__double(l));
   x = Byte.m_compare__byte__byte__int(b, b);
   x = Integer.m_compare__int__int__int(b, i);
   x = Double.m_compare__double__double__int(b, d);
   x = Float.m_compare__float__float__int(b, f);
   x = Integer.m_compare__int__int__int(b, s);
-  x = Long.m_compare__long__long__int($Primitives.widenByteToLong(b), l);
+  x = Long.m_compare__long__long__int(Primitives.m_widenByteToLong__int__long(b), l);
   x = Short.m_compare__short__short__int(s, s);
   x = Integer.m_compare__int__int__int(s, i);
   x = Double.m_compare__double__double__int(s, d);
   x = Float.m_compare__float__float__int(s, f);
   x = Integer.m_compare__int__int__int(s, b);
-  x = Long.m_compare__long__long__int($Primitives.widenShortToLong(s), l);
+  x = Long.m_compare__long__long__int(Primitives.m_widenShortToLong__int__long(s), l);
   x = Long.m_compare__long__long__int(l, l);
-  x = Long.m_compare__long__long__int(l, $Primitives.widenIntToLong(i));
-  x = Double.m_compare__double__double__int($Primitives.widenLongToDouble(l), d);
-  x = Float.m_compare__float__float__int($Primitives.widenLongToFloat(l), f);
-  x = Long.m_compare__long__long__int(l, $Primitives.widenByteToLong(b));
-  x = Long.m_compare__long__long__int(l, $Primitives.widenShortToLong(s));
-  x = Character.m_compare__char__char__int($Primitives.narrowIntToChar(i), $Primitives.narrowIntToChar(i));
+  x = Long.m_compare__long__long__int(l, Primitives.m_widenIntToLong__int__long(i));
+  x = Double.m_compare__double__double__int(Primitives.m_widenLongToDouble__long__double(l), d);
+  x = Float.m_compare__float__float__int(Primitives.m_widenLongToFloat__long__double(l), f);
+  x = Long.m_compare__long__long__int(l, Primitives.m_widenByteToLong__int__long(b));
+  x = Long.m_compare__long__long__int(l, Primitives.m_widenShortToLong__int__long(s));
+  x = Character.m_compare__char__char__int(Primitives.m_narrowIntToChar__int__int(i), Primitives.m_narrowIntToChar__int__int(i));
   x = Boolean.m_compare__boolean__boolean__int(false, true);
  }
  /** @nodts */
@@ -172,9 +172,9 @@ class NumbersKt extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   Long = goog.module.get('java.lang.Long$impl');
   Short = goog.module.get('java.lang.Short$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(NumbersKt, 'numberintrinsics.NumbersKt');

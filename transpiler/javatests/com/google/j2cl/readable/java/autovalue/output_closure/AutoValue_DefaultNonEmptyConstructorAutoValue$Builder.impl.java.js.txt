@@ -6,7 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 
 /**
  * @final
@@ -34,7 +34,7 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
  /** @override @nodts @return {DefaultNonEmptyConstructorAutoValue_Builder} */
  m_setBooleanField__boolean__autovalue_DefaultNonEmptyConstructorAutoValue_Builder(/** boolean */ booleanField) {
   this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = booleanField;
-  this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = $Primitives.narrowIntToByte(this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ | 1);
+  this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = Primitives.m_narrowIntToByte__int__int(this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ | 1);
   return this;
  }
  /** @override @nodts @return {DefaultNonEmptyConstructorAutoValue} */
@@ -60,7 +60,7 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
   DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
-  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(Builder, 'autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder');
