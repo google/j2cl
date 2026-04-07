@@ -48,6 +48,7 @@ public class Main {
     testExceptionInPattern();
     testCompactConstructorWithComponentReferences();
     testParametricRecord();
+    testRecordInOtherLibrary();
   }
 
   public static void testAccessors() {
@@ -498,6 +499,31 @@ public class Main {
             // `Integer` that throws.
             var unused = unsafeCastRecord instanceof ParametericRecord(Integer i);
           });
+    }
+  }
+
+  private static void testRecordInOtherLibrary() {
+    RecordInOtherLibrary record = new RecordInOtherLibrary(1, "hello");
+    assertEquals(1, record.i());
+    assertEquals("hello", record.s());
+
+    // Test that the structure of a record is understood across compilation boundaries.
+    if (record instanceof RecordInOtherLibrary(int i, String s)) {
+      assertEquals(1, i);
+      assertEquals("hello", s);
+    }
+
+    RecordInOtherLibraryMultpileConstructors recordWithMultipleConstructors =
+        new RecordInOtherLibraryMultpileConstructors(1, "hello");
+    assertEquals(1, recordWithMultipleConstructors.i());
+    assertEquals("hello", recordWithMultipleConstructors.s());
+    assertEquals("default", new RecordInOtherLibraryMultpileConstructors("default", 0).s());
+
+    // Test that the structure of a record is understood across compilation boundaries.
+    if (recordWithMultipleConstructors
+        instanceof RecordInOtherLibraryMultpileConstructors(int i, String s)) {
+      assertEquals(1, i);
+      assertEquals("hello", s);
     }
   }
 }
