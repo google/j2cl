@@ -4,8 +4,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const EnumWithInitStatement = goog.require('statementasexpressions.EnumWithInitStatement$impl');
 
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let StatementAsExpressionsKt = goog.forwardDeclare('statementasexpressions.StatementAsExpressionsKt$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -28,7 +28,7 @@ class BAZ extends EnumWithInitStatement {
   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
    tmp = 'BAZ';
   } else {
-   throw $Exceptions.toJs(AssertionError.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(AssertionError.$create__());
   }
   this.$ctor__statementasexpressions_EnumWithInitStatement__java_lang_String__int__java_lang_String__void($name, $ordinal, tmp);
  }
@@ -50,8 +50,8 @@ class BAZ extends EnumWithInitStatement {
  /** @nodts */
  static $loadModules() {
   AssertionError = goog.module.get('java.lang.AssertionError$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   StatementAsExpressionsKt = goog.module.get('statementasexpressions.StatementAsExpressionsKt$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(BAZ, 'statementasexpressions.EnumWithInitStatement$BAZ');

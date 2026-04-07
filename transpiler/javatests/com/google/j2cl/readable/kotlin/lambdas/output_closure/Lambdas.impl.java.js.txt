@@ -7,6 +7,7 @@ let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$1$impl');
 let $LambdaAdaptor$2 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$2$impl');
@@ -21,7 +22,6 @@ let GenericFunctionalInterface = goog.forwardDeclare('lambdas.Lambdas.GenericFun
 let Wrapper = goog.forwardDeclare('lambdas.Lambdas.Wrapper$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -158,7 +158,7 @@ class Lambdas extends j_l_Object {
   this.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface(BiFunction.$adapt(/**  @return {number}*/ ((/** T */ x, /** string */ y) =>{
    let x_1 = /**@type {T}*/ ($Casts.$to(x, Enum));
    let y_1 = /**@type {string}*/ ($Casts.$to(y, j_l_String));
-   throw $Exceptions.toJs(RuntimeException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
   })));
   this.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface(BiFunction.$adapt(/**  @return {number}*/ ((/** !* */ x_2, /** string */ y_2) =>{
    let y_3 = /**@type {string}*/ ($Casts.$to(y_2, j_l_String));
@@ -219,6 +219,7 @@ class Lambdas extends j_l_Object {
   Enum = goog.module.get('java.lang.Enum$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $LambdaAdaptor$1 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$1$impl');
   $LambdaAdaptor$2 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$2$impl');
   A = goog.module.get('lambdas.Lambdas.A$impl');
@@ -232,7 +233,6 @@ class Lambdas extends j_l_Object {
   Wrapper = goog.module.get('lambdas.Lambdas.Wrapper$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(Lambdas, 'lambdas.Lambdas');

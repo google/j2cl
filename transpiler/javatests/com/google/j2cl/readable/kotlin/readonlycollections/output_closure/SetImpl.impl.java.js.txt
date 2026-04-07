@@ -12,8 +12,8 @@ let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Predicate = goog.forwardDeclare('java.util.function.Predicate$impl');
 let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -38,23 +38,23 @@ class SetImpl extends j_l_Object {
  }
  /** @nodts @return {number} */
  m_getSize__int() {
-  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
  /** @override @return {boolean} */
  contains(/** T */ element) {
-  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
  /** @override @return {boolean} */
  containsAll(/** !Collection<?> */ elements) {
-  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
  /** @override @return {boolean} */
  isEmpty() {
-  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
  /** @override @nodts @return {!Iterator<?>} */
  m_iterator__java_util_Iterator() {
-  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
  /** @override @return {boolean} */
  add(/** T */ element) {
@@ -145,8 +145,8 @@ class SetImpl extends j_l_Object {
   j_l_Iterable = goog.module.get('java.lang.Iterable$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   Collection = goog.module.get('java.util.Collection$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 Set.$markImplementor(SetImpl);

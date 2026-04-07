@@ -15,10 +15,10 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Predicate = goog.forwardDeclare('java.util.function.Predicate$impl');
 let UnaryOperator = goog.forwardDeclare('java.util.function.UnaryOperator$impl');
 let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let NothingIterator = goog.forwardDeclare('voidtypes.NothingIterator$impl');
 
 /**
@@ -54,7 +54,7 @@ class EmptyList extends j_l_Object {
  }
  /** @override @return {?} */
  getAtIndex(/** number */ index) {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {number} */
  m_indexOf__kotlin_jvm_internal_NothingStub__int(/** ? */ element) {
@@ -82,7 +82,7 @@ class EmptyList extends j_l_Object {
   if (index == 0) {
    tmp = NothingIterator.f_INSTANCE__voidtypes_NothingIterator;
   } else {
-   throw $Exceptions.toJs(RuntimeException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
   }
   return tmp;
  }
@@ -92,7 +92,7 @@ class EmptyList extends j_l_Object {
   if (fromIndex == 0 && toIndex == 0) {
    tmp = this;
   } else {
-   throw $Exceptions.toJs(RuntimeException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
   }
   return tmp;
  }
@@ -250,10 +250,10 @@ class EmptyList extends j_l_Object {
   j_l_Iterable = goog.module.get('java.lang.Iterable$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   Collection = goog.module.get('java.util.Collection$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   NothingStub = goog.module.get('kotlin.Nothing$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   NothingIterator = goog.module.get('voidtypes.NothingIterator$impl');
  }
 }

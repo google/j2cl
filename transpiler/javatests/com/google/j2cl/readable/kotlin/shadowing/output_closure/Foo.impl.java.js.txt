@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 
 /**
  * @final
@@ -36,7 +36,7 @@ class Foo extends AbstractCollection {
  }
  /** @override @nodts @return {!Iterator<?>} */
  m_iterator__java_util_Iterator() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @final @nodts */
  m_add$shadowing_Foo_add__java_lang_Object__void(/** T */ value) {}
@@ -54,7 +54,7 @@ class Foo extends AbstractCollection {
  /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(Foo, 'shadowing.Foo');

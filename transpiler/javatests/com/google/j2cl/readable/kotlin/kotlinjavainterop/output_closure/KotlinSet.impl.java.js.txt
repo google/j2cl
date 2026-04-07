@@ -10,9 +10,9 @@ let Set = goog.forwardDeclare('java.util.Set$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -37,7 +37,7 @@ class KotlinSet extends AbstractSet {
  }
  /** @override @nodts @return {number} */
  m_getSize__int() {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
  }
  /** @override @return {boolean} */
  isEmpty() {
@@ -57,7 +57,7 @@ class KotlinSet extends AbstractSet {
  }
  /** @override @nodts @return {!Iterator<?>} */
  m_iterator__java_util_Iterator() {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
  }
  /** @override @nodts @return {!Stream<V>} */
  m_parallelStream__java_util_stream_Stream() {
@@ -87,9 +87,9 @@ class KotlinSet extends AbstractSet {
   Iterable = goog.module.get('java.lang.Iterable$impl');
   Collection = goog.module.get('java.util.Collection$impl');
   Set = goog.module.get('java.util.Set$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   NotImplementedError = goog.module.get('kotlin.NotImplementedError$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(KotlinSet, 'kotlinjavainterop.KotlinSet');

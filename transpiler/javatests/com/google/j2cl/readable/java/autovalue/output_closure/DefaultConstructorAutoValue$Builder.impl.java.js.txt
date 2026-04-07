@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let DefaultConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultConstructorAutoValue$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class Builder extends j_l_Object {
@@ -37,7 +37,7 @@ class Builder extends j_l_Object {
  /** @nodts @return {DefaultConstructorAutoValue} */
  m_build__autovalue_DefaultConstructorAutoValue() {
   if (this.f_set$0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ != 1) {
-   throw $Exceptions.toJs(IllegalStateException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(IllegalStateException.$create__());
   }
   return DefaultConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_);
  }
@@ -56,7 +56,7 @@ class Builder extends j_l_Object {
  static $loadModules() {
   DefaultConstructorAutoValue = goog.module.get('autovalue.DefaultConstructorAutoValue$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }

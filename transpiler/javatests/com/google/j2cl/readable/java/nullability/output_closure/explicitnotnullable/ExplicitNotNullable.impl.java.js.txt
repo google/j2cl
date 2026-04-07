@@ -7,6 +7,7 @@ let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$i
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let DefaultNullable = goog.forwardDeclare('nullability.explicitnotnullable.DefaultNullable$impl');
 let Consumer = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
@@ -19,7 +20,6 @@ let ParameterizedNullable = goog.forwardDeclare('nullability.explicitnotnullable
 let Supplier = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Supplier$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let $$char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
 
@@ -358,7 +358,7 @@ class ExplicitNotNullable extends j_l_Object {
  static m_assertNotNull__java_lang_Object__java_lang_Object(/** ?T */ nullable) {
   ExplicitNotNullable.$clinit();
   if ($Equality.$same(nullable, null)) {
-   throw $Exceptions.toJs(NullPointerException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NullPointerException.$create__());
   }
   return nullable;
  }
@@ -428,6 +428,7 @@ class ExplicitNotNullable extends j_l_Object {
   NullPointerException = goog.module.get('java.lang.NullPointerException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   DefaultNullable = goog.module.get('nullability.explicitnotnullable.DefaultNullable$impl');
   Consumer = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
@@ -436,7 +437,6 @@ class ExplicitNotNullable extends j_l_Object {
   Supplier = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Supplier$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
   $$char = goog.module.get('vmbootstrap.primitives.$char$impl');
  }

@@ -8,9 +8,9 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -35,7 +35,7 @@ class IterableReturningTypeVariable extends j_l_Object {
  }
  /** @override @nodts @return {T} */
  m_iterator__java_util_Iterator() {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {string}*/ (undefined), /**@type {DefaultConstructorMarker}*/ (undefined)));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {string}*/ (undefined), /**@type {DefaultConstructorMarker}*/ (undefined)));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
@@ -66,8 +66,8 @@ class IterableReturningTypeVariable extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   NotImplementedError = goog.module.get('kotlin.NotImplementedError$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 j_l_Iterable.$markImplementor(IterableReturningTypeVariable);

@@ -5,10 +5,10 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let Enum = goog.forwardDeclare('switchexpression.SwitchExpression.Enum$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class SwitchExpression extends j_l_Object {
@@ -35,7 +35,7 @@ class SwitchExpression extends j_l_Object {
     case 1:
      return $Long.fromInt(5);
     case 3:case 4:
-     throw $Exceptions.toJs(RuntimeException.$create__());
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
     default:
      {
       let /** number */ $value;
@@ -53,7 +53,7 @@ class SwitchExpression extends j_l_Object {
     case 1:
      return $Long.fromInt(5);
     case 3:case 4:
-     throw $Exceptions.toJs(RuntimeException.$create__());
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
     default:
      {
       let /** number */ $value;
@@ -82,7 +82,7 @@ class SwitchExpression extends j_l_Object {
         return (() =>{
          switch (6) {
           case 1:
-           throw $Exceptions.toJs(RuntimeException.$create__());
+           throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
           default:
            return $Long.fromInt(5);
          }
@@ -136,10 +136,10 @@ class SwitchExpression extends j_l_Object {
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   Short = goog.module.get('java.lang.Short$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   Enum = goog.module.get('switchexpression.SwitchExpression.Enum$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }

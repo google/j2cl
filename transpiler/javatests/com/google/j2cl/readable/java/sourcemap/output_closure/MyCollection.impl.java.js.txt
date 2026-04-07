@@ -11,7 +11,7 @@ let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Predicate = goog.forwardDeclare('java.util.function.Predicate$impl');
 let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 
 /**
  * @abstract
@@ -30,7 +30,7 @@ class MyCollection extends j_l_Object {
  /** @nodts @template T_1 @return {MyCollection<T_1>} */
  static m_empty__sourcemap_MyCollection() {
   MyCollection.$clinit();
-  throw $Exceptions.toJs(UnsupportedOperationException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(UnsupportedOperationException.$create__());
  }
  //Default method forwarding stub.
  /** @override @nodts */
@@ -115,7 +115,7 @@ class MyCollection extends j_l_Object {
  static $loadModules() {
   j_l_Iterable = goog.module.get('java.lang.Iterable$impl');
   UnsupportedOperationException = goog.module.get('java.lang.UnsupportedOperationException$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
  }
 }
 Collection.$markImplementor(MyCollection);

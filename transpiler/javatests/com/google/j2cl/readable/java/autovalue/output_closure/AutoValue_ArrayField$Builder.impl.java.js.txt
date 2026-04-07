@@ -7,8 +7,8 @@ let ArrayField = goog.forwardDeclare('autovalue.ArrayField$impl');
 let AutoValue__ArrayField = goog.forwardDeclare('autovalue.AutoValue_ArrayField$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -40,7 +40,7 @@ class Builder extends ArrayField_Builder {
  /** @override @nodts @return {ArrayField} */
  m_build__autovalue_ArrayField_$pp_autovalue() {
   if ($Equality.$same(this.f_arrayField__autovalue_AutoValue_ArrayField_Builder_, null)) {
-   throw $Exceptions.toJs(IllegalStateException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(IllegalStateException.$create__());
   }
   return AutoValue__ArrayField.$create__arrayOf_int(this.f_arrayField__autovalue_AutoValue_ArrayField_Builder_);
  }
@@ -60,8 +60,8 @@ class Builder extends ArrayField_Builder {
   AutoValue__ArrayField = goog.module.get('autovalue.AutoValue_ArrayField$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
   Objects = goog.module.get('java.util.Objects$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(Builder, 'autovalue.AutoValue_ArrayField$Builder');

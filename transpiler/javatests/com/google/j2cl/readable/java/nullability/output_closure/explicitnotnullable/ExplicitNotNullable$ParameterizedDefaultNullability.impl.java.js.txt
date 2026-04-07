@@ -4,7 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 
 /**
  * @template N
@@ -39,7 +39,7 @@ class ParameterizedDefaultNullability extends j_l_Object {
  }
  /** @nodts @return {N} */
  m_getNonNullable__java_lang_Object_$pp_nullability_explicitnotnullable() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {N} */
  m_getDefaultNullability__java_lang_Object_$pp_nullability_explicitnotnullable() {
@@ -65,7 +65,7 @@ class ParameterizedDefaultNullability extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(ParameterizedDefaultNullability, 'nullability.explicitnotnullable.ExplicitNotNullable$ParameterizedDefaultNullability');

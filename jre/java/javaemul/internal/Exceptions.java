@@ -18,10 +18,8 @@ package javaemul.internal;
 import javaemul.internal.ThrowableUtils.JsObject;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
 
 /** Provides helper methods to deal with Exceptions. */
-@JsType(namespace = "vmbootstrap")
 public class Exceptions {
 
   /**
@@ -29,8 +27,7 @@ public class Exceptions {
    * exception occurred during the resource initialization or in the try block, it is passed in here
    * so that we can add suppressed exceptions to it if the resource fails to close.
    */
-  public static Throwable safeClose(
-      @SuppressWarnings("unusable-by-js") AutoCloseable resource, Throwable currentException) {
+  public static Throwable safeClose(AutoCloseable resource, Throwable currentException) {
     if (resource == null) {
       return currentException;
     }

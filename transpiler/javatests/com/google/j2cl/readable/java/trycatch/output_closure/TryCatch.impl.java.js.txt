@@ -8,6 +8,7 @@ let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let ClosableThing = goog.forwardDeclare('trycatch.TryCatch.ClosableThing$impl');
 let Exception1 = goog.forwardDeclare('trycatch.TryCatch.Exception1$impl');
@@ -15,7 +16,6 @@ let Exception2 = goog.forwardDeclare('trycatch.TryCatch.Exception2$impl');
 let GenericInterface = goog.forwardDeclare('trycatch.TryCatch.GenericInterface$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class TryCatch extends j_l_Object {
  /** @protected @nodts */
@@ -36,41 +36,41 @@ class TryCatch extends j_l_Object {
  /** @nodts */
  m_testMultiCatch__void() {
   try {
-   throw $Exceptions.toJs(ClassCastException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(ClassCastException.$create__());
   } catch (__$jsexc) {
-   let __$exc = $Exceptions.toJava(__$jsexc);
+   let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
    if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
     let e = /**@type {(NullPointerException|ClassCastException)}*/ (__$exc);
-    throw $Exceptions.toJs(e);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(e);
    } else if (RuntimeException.$isInstance(__$exc)) {
     let r = /**@type {RuntimeException}*/ (__$exc);
     r = null;
    } else {
-    throw $Exceptions.toJs(__$exc);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc);
    }
   }
  }
  /** @nodts */
  m_testEmptyThrowableCatch__void() {
   try {
-   throw $Exceptions.toJs(ClassCastException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(ClassCastException.$create__());
   } catch (__$jsexc) {}
   try {
-   throw $Exceptions.toJs(ClassCastException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(ClassCastException.$create__());
   } catch (__$jsexc_1) {
-   let __$exc = $Exceptions.toJava(__$jsexc_1);
+   let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc_1);
    if (Exception.$isInstance(__$exc)) {} else {}
   }
  }
  /** @nodts */
  m_testEmptyThrowableRethrow__void() {
   try {
-   throw $Exceptions.toJs(ClassCastException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(ClassCastException.$create__());
   } catch (__$jsexc) {
-   let __$exc = $Exceptions.toJava(__$jsexc);
+   let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
    {
     let e = /**@type {Throwable}*/ (__$exc);
-    throw $Exceptions.toJs(e);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(e);
    }
   }
  }
@@ -89,25 +89,25 @@ class TryCatch extends j_l_Object {
    try {
     thing = ClosableThing.$create__();
     thing2 = ClosableThing.$create__();
-    throw $Exceptions.toJs(Exception.$create__());
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
    } catch (__$jsexc) {
-    let __$exc = $Exceptions.toJava(__$jsexc);
+    let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
     {
      let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
      $primaryExc = $exceptionFromTry;
-     throw $Exceptions.toJs($exceptionFromTry);
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($exceptionFromTry);
     }
    } finally {
-    $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
-    $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable(thing2, $primaryExc);
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable(thing, $primaryExc);
     if (!$Equality.$same($primaryExc, null)) {
-     throw $Exceptions.toJs($primaryExc);
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($primaryExc);
     }
    }
   } catch (__$jsexc_1) {
-   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   let __$exc_1 = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc_1);
    if (Exception.$isInstance(__$exc_1)) {} else {
-    throw $Exceptions.toJs(__$exc_1);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc_1);
    }
   }
  }
@@ -122,25 +122,25 @@ class TryCatch extends j_l_Object {
    try {
     $resource = thing;
     $resource_1 = thing2;
-    throw $Exceptions.toJs(Exception.$create__());
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
    } catch (__$jsexc) {
-    let __$exc = $Exceptions.toJava(__$jsexc);
+    let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
     {
      let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
      $primaryExc = $exceptionFromTry;
-     throw $Exceptions.toJs($exceptionFromTry);
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($exceptionFromTry);
     }
    } finally {
-    $primaryExc = $Exceptions.safeClose($resource_1, $primaryExc);
-    $primaryExc = $Exceptions.safeClose($resource, $primaryExc);
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable($resource_1, $primaryExc);
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable($resource, $primaryExc);
     if (!$Equality.$same($primaryExc, null)) {
-     throw $Exceptions.toJs($primaryExc);
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($primaryExc);
     }
    }
   } catch (__$jsexc_1) {
-   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   let __$exc_1 = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc_1);
    if (Exception.$isInstance(__$exc_1)) {} else {
-    throw $Exceptions.toJs(__$exc_1);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc_1);
    }
   }
  }
@@ -151,51 +151,51 @@ class TryCatch extends j_l_Object {
    let /** ClosableThing */ $resource = null;
    try {
     $resource = TryCatch.f_closableThing__trycatch_TryCatch_;
-    throw $Exceptions.toJs(Exception.$create__());
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
    } catch (__$jsexc) {
-    let __$exc = $Exceptions.toJava(__$jsexc);
+    let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
     {
      let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
      $primaryExc = $exceptionFromTry;
-     throw $Exceptions.toJs($exceptionFromTry);
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($exceptionFromTry);
     }
    } finally {
-    $primaryExc = $Exceptions.safeClose($resource, $primaryExc);
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable($resource, $primaryExc);
     if (!$Equality.$same($primaryExc, null)) {
-     throw $Exceptions.toJs($primaryExc);
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($primaryExc);
     }
    }
   } catch (__$jsexc_1) {
-   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   let __$exc_1 = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc_1);
    if (Exception.$isInstance(__$exc_1)) {} else {
-    throw $Exceptions.toJs(__$exc_1);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc_1);
    }
   }
  }
  /** @nodts */
  m_testNestedTryCatch__void() {
   try {
-   throw $Exceptions.toJs(Exception.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
   } catch (__$jsexc) {
-   let __$exc = $Exceptions.toJava(__$jsexc);
+   let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
    if (Exception.$isInstance(__$exc)) {
     let ae = /**@type {Exception}*/ (__$exc);
     try {
-     throw $Exceptions.toJs(Exception.$create__());
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
     } catch (__$jsexc_1) {
-     let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+     let __$exc_1 = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc_1);
      if (Exception.$isInstance(__$exc_1)) {} else {
-      throw $Exceptions.toJs(__$exc_1);
+      throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc_1);
      }
     }
    } else {
-    throw $Exceptions.toJs(__$exc);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc);
    }
   }
  }
  /** @nodts */
  m_testThrowGenerics__void() {
-  throw $Exceptions.toJs(/**@type {Exception}*/ ($Casts.$to(this.m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch(Exception.$create__()), Exception)));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(/**@type {Exception}*/ ($Casts.$to(this.m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch(Exception.$create__()), Exception)));
  }
  /** @nodts @template T @return {T} */
  m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch(/** T */ t) {
@@ -203,7 +203,7 @@ class TryCatch extends j_l_Object {
  }
  /** @nodts */
  m_testThrowBoundGenerics__void() {
-  throw $Exceptions.toJs(this.m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(this.m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch());
  }
  /** @nodts @template T @return {T} */
  m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch() {
@@ -211,19 +211,19 @@ class TryCatch extends j_l_Object {
  }
  /** @nodts @template T */
  m_testThrowsParameterized__java_lang_Throwable__void(/** T */ throwable) {
-  throw $Exceptions.toJs(/**@type {!Throwable}*/ (throwable));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(/**@type {!Throwable}*/ (throwable));
  }
  /** @nodts */
  m_testMultiCatchParameterizedException__void() {
   try {
-   throw $Exceptions.toJs(Exception1.$create__trycatch_TryCatch(this));
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception1.$create__trycatch_TryCatch(this));
   } catch (__$jsexc) {
-   let __$exc = $Exceptions.toJava(__$jsexc);
+   let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
    if (Exception2.$isInstance(__$exc) || Exception1.$isInstance(__$exc)) {
     let e = /**@type {(Exception2|Exception1)}*/ (__$exc);
     (/**@type {!GenericInterface<?string>}*/ ($Casts.$to(e, /**@type {Function}*/ (GenericInterface)))).m_f__java_lang_Object__void('');
    } else {
-    throw $Exceptions.toJs(__$exc);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc);
    }
   }
  }
@@ -245,6 +245,7 @@ class TryCatch extends j_l_Object {
   Exception = goog.module.get('java.lang.Exception$impl');
   NullPointerException = goog.module.get('java.lang.NullPointerException$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   ClosableThing = goog.module.get('trycatch.TryCatch.ClosableThing$impl');
   Exception1 = goog.module.get('trycatch.TryCatch.Exception1$impl');
@@ -252,7 +253,6 @@ class TryCatch extends j_l_Object {
   GenericInterface = goog.module.get('trycatch.TryCatch.GenericInterface$impl');
   $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 /**@type {ClosableThing} @nodts*/

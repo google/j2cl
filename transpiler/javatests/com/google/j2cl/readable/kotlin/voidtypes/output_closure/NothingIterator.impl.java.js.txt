@@ -7,10 +7,10 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -33,11 +33,11 @@ class NothingIterator extends j_l_Object {
  }
  /** @override @nodts @return {boolean} */
  m_hasNext__boolean() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {?} */
  m_next__kotlin_jvm_internal_NothingStub() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @override @nodts @return {boolean} */
  m_hasPrevious__boolean() {
@@ -49,7 +49,7 @@ class NothingIterator extends j_l_Object {
  }
  /** @nodts @return {?} */
  m_previous__kotlin_jvm_internal_NothingStub() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @override @nodts @return {number} */
  m_previousIndex__int() {
@@ -118,10 +118,10 @@ class NothingIterator extends j_l_Object {
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   Iterator = goog.module.get('java.util.Iterator$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   NothingStub = goog.module.get('kotlin.Nothing$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 /**@private {!NothingIterator} @nodts*/

@@ -12,10 +12,10 @@ let Set = goog.forwardDeclare('java.util.Set$impl');
 let BiConsumer = goog.forwardDeclare('java.util.function.BiConsumer$impl');
 let BiFunction = goog.forwardDeclare('java.util.function.BiFunction$impl');
 let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -38,35 +38,35 @@ class NothingByStringMap extends j_l_Object {
  }
  /** @nodts @return {!Set<?>} */
  m_getEntries__java_util_Set() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {!Set<?>} */
  m_getKeys__java_util_Set() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {number} */
  m_getSize__int() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {!Collection<?>} */
  m_getValues__java_util_Collection() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {boolean} */
  m_containsKey__java_lang_String__boolean(/** string */ key) {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {boolean} */
  m_containsValue__kotlin_jvm_internal_NothingStub__boolean(/** ? */ value) {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {?} */
  m_get__java_lang_String__kotlin_jvm_internal_NothingStub(/** string */ key) {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @override @return {boolean} */
  isEmpty() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  /** @nodts @return {?} */
  m_put__java_lang_String__kotlin_jvm_internal_NothingStub__kotlin_jvm_internal_NothingStub(/** string */ key, /** ? */ value) {
@@ -233,10 +233,10 @@ class NothingByStringMap extends j_l_Object {
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   NothingStub = goog.module.get('kotlin.Nothing$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 /**@private {!NothingByStringMap} @nodts*/

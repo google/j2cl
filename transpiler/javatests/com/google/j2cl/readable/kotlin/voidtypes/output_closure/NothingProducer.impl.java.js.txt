@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const Producer = goog.require('voidtypes.Producer$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 
 /**
  * @final
@@ -29,7 +29,7 @@ class NothingProducer extends j_l_Object {
  }
  /** @nodts @return {?} */
  m_provide__kotlin_jvm_internal_NothingStub() {
-  throw $Exceptions.toJs(RuntimeException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
  }
  //Bridge method.
  /** @final @override @nodts @suppress{visibility} @return {?} */
@@ -50,7 +50,7 @@ class NothingProducer extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
  }
 }
 Producer.$markImplementor(NothingProducer);

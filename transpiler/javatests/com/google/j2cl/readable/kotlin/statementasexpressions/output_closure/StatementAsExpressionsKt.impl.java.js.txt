@@ -7,11 +7,11 @@ let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let $1X = goog.forwardDeclare('statementasexpressions.StatementAsExpressionsKt.$1X$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -50,7 +50,7 @@ class StatementAsExpressionsKt extends j_l_Object {
  /** @nodts */
  static m_testThrowsFromCondition__void() {
   StatementAsExpressionsKt.$clinit();
-  throw $Exceptions.toJs(IllegalStateException.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(IllegalStateException.$create__());
  }
  /** @nodts */
  static m_testConditions__void() {
@@ -59,7 +59,7 @@ class StatementAsExpressionsKt extends j_l_Object {
   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
    tmp = true;
   } else {
-   throw $Exceptions.toJs(RuntimeException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
   }
   if (tmp) {
    return;
@@ -69,7 +69,7 @@ class StatementAsExpressionsKt extends j_l_Object {
    if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
     tmp_1 = true;
    } else {
-    throw $Exceptions.toJs(RuntimeException.$create__());
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
    }
    if (!tmp_1) {
     break;
@@ -81,7 +81,7 @@ class StatementAsExpressionsKt extends j_l_Object {
     if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
      tmp_2 = true;
     } else {
-     throw $Exceptions.toJs(RuntimeException.$create__());
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
     }
    }
    if (!tmp_2) {
@@ -133,7 +133,7 @@ class StatementAsExpressionsKt extends j_l_Object {
   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
    tmp = 32;
   } else {
-   throw $Exceptions.toJs(RuntimeException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
   }
   let b = tmp;
  }
@@ -149,7 +149,7 @@ class StatementAsExpressionsKt extends j_l_Object {
   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
    tmp = 1;
   } else {
-   throw $Exceptions.toJs(RuntimeException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
   }
   - tmp | 0;
  }
@@ -160,7 +160,7 @@ class StatementAsExpressionsKt extends j_l_Object {
   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
    tmp = 1;
   } else {
-   throw $Exceptions.toJs(RuntimeException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
   }
   1 - tmp | 0;
  }
@@ -197,7 +197,7 @@ class StatementAsExpressionsKt extends j_l_Object {
   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
    tmp = 1;
   } else {
-   throw $Exceptions.toJs(AssertionError.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(AssertionError.$create__());
   }
   let boolean_1 = true;
  }
@@ -222,7 +222,7 @@ class StatementAsExpressionsKt extends j_l_Object {
   if (Double.$isInstance(data)) {
    StatementAsExpressionsKt.m_methodThatReturnsVoid__void();
   } else {
-   throw $Exceptions.toJs(AssertionError.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(AssertionError.$create__());
   }
   let foo = Unit.f_INSTANCE__kotlin_Unit;
  }
@@ -239,12 +239,12 @@ class StatementAsExpressionsKt extends j_l_Object {
   try {
    StatementAsExpressionsKt.m_methodThatReturnsVoid__void();
   } catch (__$jsexc) {
-   let __$exc = $Exceptions.toJava(__$jsexc);
+   let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
    if (RuntimeException.$isInstance(__$exc)) {
     let e = /**@type {!RuntimeException}*/ (__$exc);
     StatementAsExpressionsKt.m_methodThatReturnsVoid__void();
    } else {
-    throw $Exceptions.toJs(__$exc);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc);
    }
   } finally {}
   let foo = Unit.f_INSTANCE__kotlin_Unit;
@@ -253,12 +253,12 @@ class StatementAsExpressionsKt extends j_l_Object {
   try {
    tmp_1 = StatementAsExpressionsKt.m_consumeAndReturnDouble__double__double(1);
   } catch (__$jsexc_1) {
-   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   let __$exc_1 = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc_1);
    if (RuntimeException.$isInstance(__$exc_1)) {
     let e_1 = /**@type {!RuntimeException}*/ (__$exc_1);
     tmp_1 = StatementAsExpressionsKt.m_consumeAndReturnDouble__double__double(2);
    } else {
-    throw $Exceptions.toJs(__$exc_1);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc_1);
    }
   } finally {
    let unary = x;
@@ -276,7 +276,7 @@ class StatementAsExpressionsKt extends j_l_Object {
   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
    tmp = 1;
   } else {
-   throw $Exceptions.toJs(RuntimeException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
   }
   StatementAsExpressionsKt.f_fieldAssignedAStatement__statementasexpressions_StatementAsExpressionsKt_ = tmp;
  }
@@ -291,11 +291,11 @@ class StatementAsExpressionsKt extends j_l_Object {
   Double = goog.module.get('java.lang.Double$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   Unit = goog.module.get('kotlin.Unit$impl');
   Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
   $1X = goog.module.get('statementasexpressions.StatementAsExpressionsKt.$1X$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 /**@type {boolean} @nodts*/

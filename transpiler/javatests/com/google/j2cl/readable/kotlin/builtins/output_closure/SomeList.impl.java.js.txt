@@ -3,8 +3,8 @@ goog.module('builtins.SomeList$impl');
 const AbstractMutableList = goog.require('kotlin.collections.AbstractMutableList$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let NotImplementedError = goog.forwardDeclare('kotlin.NotImplementedError$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -36,23 +36,23 @@ class SomeList extends AbstractMutableList {
  }
  /** @override */
  addAtIndex(/** number */ index, /** T */ element) {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
  }
  /** @override @return {T} */
  getAtIndex(/** number */ index) {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
  }
  /** @override @nodts @return {T} */
  m_removeAt__int__java_lang_Object(/** number */ index) {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
  }
  /** @override @return {T} */
  setAtIndex(/** number */ index, /** T */ element) {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
  }
  /** @override @nodts @return {!Array<*>} */
  m_toArray__arrayOf_java_lang_Object() {
-  throw $Exceptions.toJs(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String('' + 'An operation is not implemented: ' + 'Not yet implemented'));
  }
  /** @override @return {T} */
  removeAtIndex(/** number */ index) {
@@ -71,8 +71,8 @@ class SomeList extends AbstractMutableList {
  
  /** @nodts */
  static $loadModules() {
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   NotImplementedError = goog.module.get('kotlin.NotImplementedError$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(SomeList, 'builtins.SomeList');

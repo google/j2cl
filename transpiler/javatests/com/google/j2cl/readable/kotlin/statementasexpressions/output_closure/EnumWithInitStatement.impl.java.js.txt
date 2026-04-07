@@ -5,13 +5,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let BAZ = goog.forwardDeclare('statementasexpressions.EnumWithInitStatement.BAZ$impl');
 let StatementAsExpressionsKt = goog.forwardDeclare('statementasexpressions.StatementAsExpressionsKt$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @extends {Enum<!EnumWithInitStatement>}
@@ -50,7 +50,7 @@ class EnumWithInitStatement extends Enum {
   if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
    tmp = 'FOO';
   } else {
-   throw $Exceptions.toJs(AssertionError.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(AssertionError.$create__());
   }
   return EnumWithInitStatement.$create__java_lang_String__int__java_lang_String($Util.$makeEnumName('FOO'), EnumWithInitStatement.$ordinal_FOO__statementasexpressions_EnumWithInitStatement, tmp);
  }
@@ -107,13 +107,13 @@ class EnumWithInitStatement extends Enum {
  static $loadModules() {
   AssertionError = goog.module.get('java.lang.AssertionError$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   BAZ = goog.module.get('statementasexpressions.EnumWithInitStatement.BAZ$impl');
   StatementAsExpressionsKt = goog.module.get('statementasexpressions.StatementAsExpressionsKt$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 /**@const {number} @nodts*/

@@ -17,10 +17,10 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class ForEachStatement extends j_l_Object {
@@ -57,9 +57,9 @@ class ForEachStatement extends j_l_Object {
  /** @nodts */
  m_testMulticatch__void_$p_foreachstatement_ForEachStatement() {
   try {
-   throw $Exceptions.toJs(Exception.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
   } catch (__$jsexc) {
-   let __$exc = $Exceptions.toJava(__$jsexc);
+   let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
    if (Exception1.$isInstance(__$exc) || Exception2.$isInstance(__$exc)) {
     let e = /**@type {(Exception1|Exception2)}*/ (__$exc);
     for (let $iterator = (/**@type {Iterable<(Number|number|!$Long)>}*/ ($Casts.$to(e, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
@@ -71,20 +71,20 @@ class ForEachStatement extends j_l_Object {
      let o_1 = $iterator_1.m_next__java_lang_Object();
     }
    } else {
-    throw $Exceptions.toJs(__$exc);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc);
    }
   }
   try {
-   throw $Exceptions.toJs(Exception.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
   } catch (__$jsexc_1) {
-   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   let __$exc_1 = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc_1);
    if (Exception2.$isInstance(__$exc_1) || Exception3.$isInstance(__$exc_1)) {
     let e_2 = /**@type {(Exception2|Exception3)}*/ (__$exc_1);
     for (let $iterator_2 = (/**@type {Iterable<Integer>}*/ ($Casts.$to(e_2, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator_2.m_hasNext__boolean(); ) {
      let o_2 = $Primitives.widenIntToLong((/**@type {Integer}*/ ($Casts.$to($iterator_2.m_next__java_lang_Object(), Integer))).intValue());
     }
    } else {
-    throw $Exceptions.toJs(__$exc_1);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc_1);
    }
   }
  }
@@ -169,9 +169,9 @@ class ForEachStatement extends j_l_Object {
   Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   Throwable = goog.module.get('java.lang.Throwable$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }

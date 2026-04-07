@@ -12,13 +12,13 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $1R = goog.forwardDeclare('unnamedvariables.UnnamedVariables.$1R$impl');
 let $2R = goog.forwardDeclare('unnamedvariables.UnnamedVariables.$2R$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class UnnamedVariables extends j_l_Object {
  /** @protected @nodts */
@@ -103,22 +103,22 @@ class UnnamedVariables extends j_l_Object {
    try {
     _ = closable;
    } catch (__$jsexc) {
-    let __$exc = $Exceptions.toJava(__$jsexc);
+    let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
     {
      let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
      $primaryExc = $exceptionFromTry;
-     throw $Exceptions.toJs($exceptionFromTry);
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($exceptionFromTry);
     }
    } finally {
-    $primaryExc = $Exceptions.safeClose(_, $primaryExc);
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable(_, $primaryExc);
     if (!$Equality.$same($primaryExc, null)) {
-     throw $Exceptions.toJs($primaryExc);
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($primaryExc);
     }
    }
   } catch (__$jsexc_1) {
-   let __$exc_1 = $Exceptions.toJava(__$jsexc_1);
+   let __$exc_1 = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc_1);
    if (RuntimeException.$isInstance(__$exc_1)) {} else if (Exception.$isInstance(__$exc_1) || Error.$isInstance(__$exc_1)) {} else {
-    throw $Exceptions.toJs(__$exc_1);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc_1);
    }
   }
  }
@@ -158,12 +158,12 @@ class UnnamedVariables extends j_l_Object {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   j_u_function_Function = goog.module.get('java.util.function.Function$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $1R = goog.module.get('unnamedvariables.UnnamedVariables.$1R$impl');
   $2R = goog.module.get('unnamedvariables.UnnamedVariables.$2R$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(UnnamedVariables, 'unnamedvariables.UnnamedVariables');

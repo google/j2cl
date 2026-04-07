@@ -6,8 +6,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -32,11 +32,11 @@ class IteratorImpl extends j_l_Object {
  }
  /** @override @nodts @return {boolean} */
  m_hasNext__boolean() {
-  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
  /** @override @nodts @return {T} */
  m_next__java_lang_Object() {
-  throw $Exceptions.toJs(RuntimeException.$create__java_lang_String('not implemented'));
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
  /** @override @nodts */
  m_remove__void() {
@@ -67,8 +67,8 @@ class IteratorImpl extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 Iterator.$markImplementor(IteratorImpl);

@@ -6,11 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let SomeProvider = goog.forwardDeclare('unreachablecode.SomeProvider$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @final
@@ -44,7 +44,7 @@ class MainKt extends j_l_Object {
  /** @nodts @return {?} */
  static m_alwaysThrows__kotlin_jvm_internal_NothingStub() {
   MainKt.$clinit();
-  throw $Exceptions.toJs(Error.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Error.$create__());
  }
  /** @nodts */
  static m_noReturnRequired__void() {
@@ -82,7 +82,7 @@ class MainKt extends j_l_Object {
  /** @nodts @return {!*} */
  static m_trailingThrow__java_lang_Object() {
   MainKt.$clinit();
-  throw $Exceptions.toJs(Error.$create__());
+  throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Error.$create__());
  }
  /** @nodts @return {number} */
  static m_lacksReturnStatement__int() {
@@ -170,10 +170,10 @@ class MainKt extends j_l_Object {
   Error = goog.module.get('java.lang.Error$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   SomeProvider = goog.module.get('unreachablecode.SomeProvider$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 /**@type {number} @nodts*/

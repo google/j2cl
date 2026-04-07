@@ -4,7 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 
 /**
  * @final
@@ -32,7 +32,7 @@ class ClassWithInitializer extends j_l_Object {
   if (tmp0_subject == 48 /* '0' */ || tmp0_subject == 49 /* '1' */) {
    tmp = 1;
   } else if (tmp0_subject == 50 /* '2' */) {
-   throw $Exceptions.toJs(AssertionError.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(AssertionError.$create__());
   } else {
    tmp = 3;
   }
@@ -60,7 +60,7 @@ class ClassWithInitializer extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   AssertionError = goog.module.get('java.lang.AssertionError$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(ClassWithInitializer, 'statementasexpressions.ClassWithInitializer');

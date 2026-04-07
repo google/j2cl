@@ -4,9 +4,9 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $1 = goog.forwardDeclare('unreachableclass.Main.$1$impl');
 let $1A = goog.forwardDeclare('unreachableclass.Main.$1A$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class Main extends j_l_Object {
  /** @protected @nodts */
@@ -28,13 +28,13 @@ class Main extends j_l_Object {
  /** @private @nodts */
  $init__void_$p_unreachableclass_Main() {
   try {} catch (__$jsexc) {
-   let __$exc = $Exceptions.toJava(__$jsexc);
+   let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
    if (RuntimeException.$isInstance(__$exc)) {
     let e = /**@type {RuntimeException}*/ (__$exc);
     $1A.$create__unreachableclass_Main(this).m_m__void_$pp_unreachableclass();
     $1.$create__unreachableclass_Main(this);
    } else {
-    throw $Exceptions.toJs(__$exc);
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(__$exc);
    }
   }
  }
@@ -52,9 +52,9 @@ class Main extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $1 = goog.module.get('unreachableclass.Main.$1$impl');
   $1A = goog.module.get('unreachableclass.Main.$1A$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(Main, 'unreachableclass.Main');

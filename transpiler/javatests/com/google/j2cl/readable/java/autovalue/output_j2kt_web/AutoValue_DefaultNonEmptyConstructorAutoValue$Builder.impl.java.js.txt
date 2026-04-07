@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 /**
@@ -41,7 +41,7 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
  /** @override @nodts @return {DefaultNonEmptyConstructorAutoValue} */
  m_build__autovalue_DefaultNonEmptyConstructorAutoValue() {
   if (this.f_set___0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ != 1) {
-   throw $Exceptions.toJs(IllegalStateException.$create__());
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(IllegalStateException.$create__());
   }
   return DefaultNonEmptyConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_);
  }
@@ -60,7 +60,7 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
  static $loadModules() {
   DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
