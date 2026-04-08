@@ -16,6 +16,7 @@
 package javakotlininterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 import static javakotlininterop.KotlinClassKt.testJavaKotlinMixedHierarchyFromKotlinWithExplicitOverride;
@@ -243,5 +244,6 @@ public class Main {
     assertEquals(1, record.x());
     assertEquals("foo", record.y());
     assertEquals(new MyRecord(1, "foo"), record);
+    assertTrue(record instanceof MyRecord(int i, String s) && s.equals("foo"));
   }
 }
