@@ -717,7 +717,6 @@ public abstract class TypeDeclaration
 
   /** Returns the JsConstructor for this class if any. */
   @Memoized
-  @Nullable
   public List<MethodDescriptor> getJsConstructorMethodDescriptors() {
     return getDeclaredMethodDescriptors().stream()
         .filter(MethodDescriptor::isJsConstructor)
@@ -787,23 +786,17 @@ public abstract class TypeDeclaration
 
   abstract boolean getHasAbstractModifier();
 
-  @Nullable
   abstract DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>>
       getInterfaceTypeDescriptorsFactory();
 
-  @Nullable
   abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
 
-  @Nullable
   abstract DescriptorFactory<ImmutableList<MethodDescriptor>> getDeclaredMethodDescriptorsFactory();
 
-  @Nullable
   abstract DescriptorFactory<MethodDescriptor> getSingleAbstractMethodDescriptorFactory();
 
-  @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
-  @Nullable
   abstract Supplier<ImmutableList<TypeDeclaration>> getMemberTypeDeclarationsFactory();
 
   abstract Supplier<ImmutableList<Annotation>> getAnnotationsFactory();
