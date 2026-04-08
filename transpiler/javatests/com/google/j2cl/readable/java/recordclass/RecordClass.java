@@ -120,11 +120,27 @@ public class RecordClass {
   }
 
   private static void testRecordPatterns() {
-    record R2(int i, Object o) {}
+    record R2(int i, Object o) {
+      // The accessors are declared in a different order to test that the pattern matching is not
+      // affected by the order of the accessor methods.
+      public Object o() {
+        return o;
+      }
+
+      public int i() {
+        return i;
+      }
+    }
     record R1(Object o, String s, R2 n) {}
 
     R1 r = new R1(new R2(1, "a"), "b", new R2(3, "c"));
-    boolean b = r instanceof R1(R2(var i1, String s1), Object s2, R2 n);
+    boolean b =
+        r instanceof R1(R2(var i1, String s1), Object s2, R2 n)
+            && i1 == 1
+            && s1.equals("a")
+            && s2.equals("b")
+            && n.i() == 3
+            && n.o().equals("c");
 
     Object o = new R1(new R2(1, "a"), "b", new R2(3, "c"));
     boolean b1 = o instanceof R1(R2(var i1, String s1), Object s2, R2 n);

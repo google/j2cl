@@ -93,17 +93,17 @@ open class RecordClass {
     
     private val o: Any?
     
-    constructor(i: Int, o: Any?) {
-     this.i = i
-     this.o = o
+    fun o(): Any? {
+     return this.o
     }
     
     fun i(): Int {
      return this.i
     }
     
-    fun o(): Any? {
-     return this.o
+    constructor(i: Int, o: Any?) {
+     this.i = i
+     this.o = o
     }
     
     override fun equals(arg0: Any?): Boolean {
@@ -184,6 +184,9 @@ open class RecordClass {
     "b",
     R2(3, "c"),
    )
+   var s1: String? = null
+   var s2: Any? = null
+   var n: R2? = null
    val b: Boolean = r is R1 && run {
     val pattern___1R1: R1 = r as R1
     val exp: Any? = pattern___1R1.o()
@@ -192,13 +195,13 @@ open class RecordClass {
      val i1: Int = pattern___1R2!!.i()
      val exp_1: Any? = pattern___1R2!!.o()
      exp_1 is String && run {
-      val s1: String? = exp_1 as String?
-      val s2: Any? = pattern___1R1.s()
-      val n: R2? = pattern___1R1.n()
-      true
+      s1 = exp_1 as String?
+      s2 = pattern___1R1.s()
+      n = pattern___1R1.n()
+      i1 == 1
      }
     }
-   }
+   } && s1!!.equals("a") && s2!!.equals("b") && n!!.i() == 3 && n!!.o()!!.equals("c")
    var o: Any = R1(
     R2(1, "a"),
     "b",
