@@ -1,0 +1,72 @@
+// Generated from "j2ktnotpassing/nullmarked/AutoValue_AutoValueWithExtensions.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktnotpassing.nullmarked
+
+import javaemul.lang.*
+import j2ktnotpassing.nullmarked.___AutoValue_AutoValueWithExtensions
+import java.lang.NullPointerException
+import javaemul.lang.J2ktMonitor
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.Unit
+import kotlin.concurrent.Volatile
+import kotlin.synchronized
+
+class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
+ private val monitor: J2ktMonitor = J2ktMonitor()
+ 
+ @Volatile
+ private var memoizedString: String
+ 
+ @Volatile
+ private var memoizedInt: Int = 0
+ 
+ @Volatile
+ private var memoizedInt___Memoized: Boolean = false
+ 
+ internal constructor(stringField: String, intField: Int): super(stringField, intField)
+ 
+ override fun getMemoizedString_pp_j2ktnotpassing_nullmarked(): String {
+  if (this.memoizedString == null) {
+   synchronized<Unit>(this.monitor) {
+    if (this.memoizedString == null) {
+     this.memoizedString = super<___AutoValue_AutoValueWithExtensions>.getMemoizedString_pp_j2ktnotpassing_nullmarked()
+     if (this.memoizedString == null) {
+      throw NullPointerException("getMemoizedString() cannot return null")
+     }
+    }
+   }
+  }
+  return this.memoizedString
+ }
+ 
+ override fun getMemoizedInt_pp_j2ktnotpassing_nullmarked(): Int {
+  if (!this.memoizedInt___Memoized) {
+   synchronized<Unit>(this.monitor) {
+    if (!this.memoizedInt___Memoized) {
+     this.memoizedInt = super<___AutoValue_AutoValueWithExtensions>.getMemoizedInt_pp_j2ktnotpassing_nullmarked()
+     this.memoizedInt___Memoized = true
+    }
+   }
+  }
+  return this.memoizedInt
+ }
+}
