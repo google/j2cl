@@ -745,6 +745,8 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return methodsByMangledName.values();
   }
 
+  // Safe cast because a specialized a member will be the same type of member.
+  @SuppressWarnings("unchecked")
   private <T extends MemberDescriptor> ImmutableList<T> specializeMembers(Collection<T> members) {
     if (isRaw()) {
       return members.stream().map(m -> (T) m.toRawMemberDescriptor()).collect(toImmutableList());
@@ -752,6 +754,8 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return specializeMembers(members, getTypeArgumentsByTypeTypeParameter());
   }
 
+  // Safe cast because a specialized a member will be the same type of member.
+  @SuppressWarnings("unchecked")
   private static <T extends MemberDescriptor> ImmutableList<T> specializeMembers(
       Collection<T> members, Map<TypeVariable, TypeDescriptor> parameterization) {
     return members.stream()
