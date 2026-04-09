@@ -1,4 +1,3 @@
-# Copyright 2017 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,7 +53,6 @@ def blaze_clean():
 def blaze_build(
     js_readable_dirs,
     wasm_readable_dirs,
-    wasm_imports_readable_dirs,
     j2kt_readable_dirs,
     j2kt_web_readable_dirs,
 ):
@@ -62,8 +60,6 @@ def blaze_build(
 
   build_targets = [d + ":readable_golden" for d in js_readable_dirs]
   build_targets += [d + ":readable_wasm_golden" for d in wasm_readable_dirs]
-  build_targets += [d + ":readable_wasm_imports_golden"
-                    for d in wasm_imports_readable_dirs]
   build_targets += [d + ":readable_j2kt_golden" for d in j2kt_readable_dirs]
   build_targets += [
       d + ":readable-j2kt-web_golden" for d in j2kt_web_readable_dirs
@@ -79,13 +75,6 @@ def replace_transpiled_wasm(readable_dirs):
   """Copy and replace with Blaze built Wasm."""
   _replace_readable_outputs(
       readable_dirs, "readable_wasm_golden", "output_wasm"
-  )
-
-
-def replace_transpiled_wasm_imports(readable_dirs):
-  """Copy and replace with Blaze built Wasm imports."""
-  _replace_readable_outputs(
-      readable_dirs, "readable_wasm_imports_golden", "output_wasm_imports"
   )
 
 
@@ -186,9 +175,6 @@ def main(argv):
       readable_pattern, "_js") if "CLOSURE" in args.platforms else []
   wasm_readable_dirs = get_readable_dirs(
       readable_pattern, "_wasm") if "WASM" in args.platforms else []
-  wasm_imports_readable_dirs = (
-      get_readable_dirs(readable_pattern, "_wasm_imports_golden")
-      if "WASM" in args.platforms else [])
   j2kt_readable_dirs = (
       get_readable_dirs(readable_pattern, "-j2kt-jvm")
       if "J2KT" in args.platforms
@@ -234,7 +220,6 @@ def main(argv):
   build_log = blaze_build(
       js_readable_dirs,
       wasm_readable_dirs,
-      wasm_imports_readable_dirs,
       j2kt_readable_dirs,
       j2kt_web_readable_dirs,
   )
@@ -257,10 +242,6 @@ def main(argv):
   if wasm_readable_dirs:
     print("  Copying and reformatting transpiled Wasm")
     replace_transpiled_wasm(wasm_readable_dirs)
-
-  if wasm_imports_readable_dirs:
-    print("  Copying and reformatting transpiled Wasm imports")
-    replace_transpiled_wasm_imports(wasm_imports_readable_dirs)
 
   if j2kt_readable_dirs:
     print("  Copying and reformatting transpiled KT")
