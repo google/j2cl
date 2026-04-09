@@ -36,6 +36,8 @@ public class JsMethodExample {
   abstract static class Base<T> {
     @JsMethod
     void m(T t) {}
+
+    void o(String s) {}
   }
 
   interface I {
@@ -46,6 +48,10 @@ public class JsMethodExample {
   // Regression test for b/124227197
   static class Sub extends Base<String> implements I {
     public void m(String s) {}
+
+    // Package-private JsMethod overriding a non-JsMethod.
+    @JsMethod
+    void o(String s) {}
   }
 
   @JsType

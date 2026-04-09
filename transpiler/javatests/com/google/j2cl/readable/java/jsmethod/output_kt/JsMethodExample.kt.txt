@@ -36,6 +36,8 @@ open class JsMethodExample {
  abstract class Base<T> internal constructor() {
   @JsMethod(name = "m")
   internal open fun m_pp_jsmethod(t: T) {}
+  
+  internal open fun o_pp_jsmethod(s: String?) {}
  }
  
  fun interface I {
@@ -46,6 +48,9 @@ open class JsMethodExample {
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Sub internal constructor(): Base<String?>(), I {
   override fun m(s: String?) {}
+  
+  @JsMethod(name = "o")
+  override fun o_pp_jsmethod(s: String?) {}
   
   internal override fun m_pp_jsmethod(arg0: String?) {
    this.m(arg0)

@@ -36,6 +36,8 @@ class JsMethodExample {
 
   abstract class Base<T> {
     @JsMethod open internal fun m(t: T) {}
+
+    open internal fun o(s: String) {}
   }
 
   interface I {
@@ -46,6 +48,9 @@ class JsMethodExample {
   class Sub internal constructor() : Base<String>(), I {
     // This should not be a JsMethod.
     override fun m(s: String) {}
+
+    // Internal JsMethod overriding a non-JsMethod.
+    @JsMethod override fun o(s: String) {}
   }
 
   @JsType

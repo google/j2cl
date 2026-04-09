@@ -29,10 +29,17 @@ class Sub extends Base {
  }
  /** @override */
  mString(/** ?string */ s) {}
+ 
+ o(/** ?string */ s) {}
  //Bridge method.
  /** @final @override */
  m(/** ?string */ arg0) {
   this.mString(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ //Bridge method.
+ /** @final @override @nodts */
+ m_o__java_lang_String__void_$pp_jsmethod(/** ?string */ arg0) {
+  this.o(arg0);
  }
  /** @nodts */
  static $clinit() {
