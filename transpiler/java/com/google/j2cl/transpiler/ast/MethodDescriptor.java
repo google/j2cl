@@ -487,6 +487,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   // the details.
   abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
 
+  @Override
   @Memoized
   public MethodDescriptor toRawMemberDescriptor() {
     return toBuilder()

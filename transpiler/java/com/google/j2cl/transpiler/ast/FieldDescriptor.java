@@ -117,6 +117,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   // the details.
   abstract FieldDescriptor getDeclarationDescriptorOrNullIfSelf();
 
+  @Override
   @Memoized
   public FieldDescriptor toRawMemberDescriptor() {
     return toBuilder()

@@ -509,13 +509,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
    */
   @Memoized
   public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
-    if (isRaw()) {
-      return getTypeDeclaration().getDeclaredMethodDescriptors().stream()
-          .map(MethodDescriptor::toRawMemberDescriptor)
-          .collect(toImmutableList());
-    }
-    return specializeMethods(
-        getTypeDeclaration().getDeclaredMethodDescriptors(), getTypeArgumentsByTypeTypeParameter());
+    return specializeMembers(getTypeDeclaration().getDeclaredMethodDescriptors());
   }
 
   /**
@@ -524,14 +518,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
    */
   @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
-    if (isRaw()) {
-      return getTypeDeclaration().getDeclaredFieldDescriptors().stream()
-          .map(FieldDescriptor::toRawMemberDescriptor)
-          .collect(toImmutableList());
-    }
-    return getTypeDeclaration().getDeclaredFieldDescriptors().stream()
-        .map(f -> f.specializeTypeVariables(getTypeArgumentsByTypeTypeParameter()))
-        .collect(toImmutableList());
+    return specializeMembers(getTypeDeclaration().getDeclaredFieldDescriptors());
   }
 
   @Memoized
@@ -548,14 +535,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
    */
   @Memoized
   public List<MethodDescriptor> getRecordComponentAccessors() {
-    if (isRaw()) {
-      return getTypeDeclaration().getRecordComponentAccessorDescriptors().stream()
-          .map(MethodDescriptor::toRawMemberDescriptor)
-          .collect(toImmutableList());
-    }
-    return specializeMethods(
-        getTypeDeclaration().getRecordComponentAccessorDescriptors(),
-        getTypeArgumentsByTypeTypeParameter());
+    return specializeMembers(getTypeDeclaration().getRecordComponentAccessorDescriptors());
   }
 
   /** Retrieves the field descriptor named {@code name} if it exists, {@code null} otherwise. */
@@ -652,7 +632,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   public Collection<MethodDescriptor> getPolymorphicMethods() {
     DeclaredTypeDescriptor declaration = getDeclarationDescriptor();
     if (!declaration.equals(this)) {
-      return specializeMethods(declaration.getPolymorphicMethods(), getParameterization());
+      return specializeMembers(declaration.getPolymorphicMethods(), getParameterization());
     }
 
     // The bridges need to be computed at the type declaration in order to create them as
@@ -765,10 +745,17 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return methodsByMangledName.values();
   }
 
-  private static ImmutableList<MethodDescriptor> specializeMethods(
-      Collection<MethodDescriptor> methods, Map<TypeVariable, TypeDescriptor> parameterization) {
-    return methods.stream()
-        .map(m -> m.getDeclarationDescriptor().specializeTypeVariables(parameterization))
+  private <T extends MemberDescriptor> ImmutableList<T> specializeMembers(Collection<T> members) {
+    if (isRaw()) {
+      return members.stream().map(m -> (T) m.toRawMemberDescriptor()).collect(toImmutableList());
+    }
+    return specializeMembers(members, getTypeArgumentsByTypeTypeParameter());
+  }
+
+  private static <T extends MemberDescriptor> ImmutableList<T> specializeMembers(
+      Collection<T> members, Map<TypeVariable, TypeDescriptor> parameterization) {
+    return members.stream()
+        .map(m -> (T) m.getDeclarationDescriptor().specializeTypeVariables(parameterization))
         .collect(toImmutableList());
   }
 
