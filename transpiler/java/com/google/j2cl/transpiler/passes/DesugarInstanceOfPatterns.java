@@ -198,7 +198,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
             sourcePosition,
             patternVariable,
             recordPattern.getNestedPatterns(),
-            recordPattern.getComponentAccessorsDescriptors(),
+            recordPattern.getTypeDescriptor().getRecordComponentAccessors(),
             nextTerm));
   }
 

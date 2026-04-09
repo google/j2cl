@@ -20,28 +20,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import java.util.ArrayList;
 import java.util.List;
 
 /** Class that represents a record pattern. */
 @Visitable
 public final class RecordPattern extends Pattern {
   @Visitable DeclaredTypeDescriptor recordTypeDescriptor;
-  @Visitable List<MethodDescriptor> componentAccessorsDescriptors;
   @Visitable List<Pattern> nestedPatterns;
 
   public RecordPattern(
       DeclaredTypeDescriptor recordTypeDescriptor,
-      List<MethodDescriptor> componentAccessorsDescriptors,
       List<Pattern> nestedPatterns) {
-    checkArgument(componentAccessorsDescriptors.size() == nestedPatterns.size());
+    checkArgument(
+        recordTypeDescriptor.getRecordComponentAccessors().size() == nestedPatterns.size());
     this.recordTypeDescriptor = checkNotNull(recordTypeDescriptor);
-    this.componentAccessorsDescriptors = checkNotNull(componentAccessorsDescriptors);
     this.nestedPatterns = checkNotNull(nestedPatterns);
-  }
-
-  public List<MethodDescriptor> getComponentAccessorsDescriptors() {
-    return componentAccessorsDescriptors;
   }
 
   public List<Pattern> getNestedPatterns() {
@@ -57,7 +50,6 @@ public final class RecordPattern extends Pattern {
   public RecordPattern clone() {
     return new RecordPattern(
         recordTypeDescriptor,
-        new ArrayList<>(componentAccessorsDescriptors),
         AstUtils.clone(nestedPatterns));
   }
 

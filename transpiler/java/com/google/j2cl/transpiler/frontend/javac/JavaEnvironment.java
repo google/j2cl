@@ -112,6 +112,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.NestingKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.Parameterizable;
+import javax.lang.model.element.RecordComponentElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
@@ -767,6 +768,11 @@ class JavaEnvironment {
                 && enclosingTypeDescriptor.isNative()
                 && isAbstract(declarationMethodElement));
     boolean isConstructor = declarationMethodElement.getKind() == ElementKind.CONSTRUCTOR;
+    var enclosingClass = (ClassSymbol) declarationMethodElement.getEnclosingElement();
+    boolean isRecordComponentAccessor =
+        isRecord(enclosingClass)
+            && enclosingClass.getRecordComponents().stream()
+                .anyMatch(c -> c.getAccessor() == declarationMethodElement);
 
     String methodName = declarationMethodElement.getSimpleName().toString();
     return MethodDescriptor.newBuilder()
@@ -783,6 +789,7 @@ class JavaEnvironment {
         .setVisibility(getVisibility(declarationMethodElement))
         .setStatic(isStatic(declarationMethodElement))
         .setConstructor(isConstructor)
+        .setRecordComponentAccessor(isRecordComponentAccessor)
         .setNative(isNative)
         .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
         .setFinal(isFinal(declarationMethodElement))
@@ -1380,6 +1387,14 @@ class JavaEnvironment {
                     .map(TypeElement.class::cast)
                     .map(this::createTypeDeclaration)
                     .collect(toImmutableList()))
+        .setRecordComponentAccessorsDescriptorFactory(
+            () ->
+                !isRecord(typeElement)
+                    ? ImmutableList.of()
+                    : typeElement.getRecordComponents().stream()
+                        .map(RecordComponentElement::getAccessor)
+                        .map(this::createMethodDescriptor)
+                        .collect(toImmutableList()))
         .build();
   }
 

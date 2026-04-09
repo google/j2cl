@@ -113,7 +113,6 @@ import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
-import com.sun.tools.javac.code.Symbol.RecordComponent;
 import com.sun.tools.javac.code.Symbol.TypeVariableSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
 import com.sun.tools.javac.code.Type.MethodType;
@@ -965,7 +964,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       case JCRecordPattern recordPattern ->
           new RecordPattern(
               environment.createDeclaredTypeDescriptor(getRecordType(recordPattern)),
-              getAccessorsMethodDescriptor(recordPattern),
               recordPattern.getNestedPatterns().stream()
                   .map(this::convertPattern)
                   .collect(toCollection(ArrayList::new)));
@@ -973,20 +971,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       case null -> null;
       default -> throw new IllegalArgumentException("Unexpected pattern: " + pattern);
     };
-  }
-
-  // TODO(b/465778762): Consider whether the accessors, which are members of the type descriptor,
-  // can be be provided in order by an api on DeclaredTypeDescriptor.
-  private List<MethodDescriptor> getAccessorsMethodDescriptor(JCRecordPattern recordPattern) {
-    var recordType = getRecordType(recordPattern);
-    var parameterizedTypeDescriptor = environment.createDeclaredTypeDescriptor(recordType);
-    var parameterization = parameterizedTypeDescriptor.getParameterization();
-    return ((ClassSymbol) recordType.tsym)
-        .getRecordComponents().stream()
-            .map(RecordComponent::getAccessor)
-            .map(environment::createMethodDescriptor)
-            .map(m -> m.specializeTypeVariables(parameterization))
-            .collect(toCollection(ArrayList::new));
   }
 
   private static com.sun.tools.javac.code.Type getRecordType(JCRecordPattern recordPattern) {

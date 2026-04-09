@@ -334,6 +334,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Return true if the underlying method represent a Kotlin suspend function. */
   public abstract boolean isSuspendFunction();
 
+  public abstract boolean isRecordComponentAccessor();
+
   public boolean isBridge() {
     return getBridgeOrigin() != null;
   }
@@ -1119,6 +1121,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setSynchronized(false)
         .setConstructor(false)
         .setDefaultMethod(false)
+        .setRecordComponentAccessor(false)
         .setNative(false)
         .setStatic(false)
         .setFinal(false)
@@ -1501,6 +1504,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setStatic(boolean isStatic);
 
     public abstract Builder setConstructor(boolean isConstructor);
+
+    public abstract Builder setRecordComponentAccessor(boolean isRecordComponentAccessor);
 
     public abstract Builder setAbstract(boolean isAbstract);
 

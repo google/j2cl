@@ -542,6 +542,22 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         .build();
   }
 
+  /**
+   * The list of component accessors declared in the record type returned in the order the
+   * components are declared.
+   */
+  @Memoized
+  public List<MethodDescriptor> getRecordComponentAccessors() {
+    if (isRaw()) {
+      return getTypeDeclaration().getRecordComponentAccessorDescriptors().stream()
+          .map(MethodDescriptor::toRawMemberDescriptor)
+          .collect(toImmutableList());
+    }
+    return specializeMethods(
+        getTypeDeclaration().getRecordComponentAccessorDescriptors(),
+        getTypeArgumentsByTypeTypeParameter());
+  }
+
   /** Retrieves the field descriptor named {@code name} if it exists, {@code null} otherwise. */
   @Nullable
   public FieldDescriptor getFieldDescriptor(String name) {

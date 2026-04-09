@@ -715,6 +715,15 @@ public abstract class TypeDeclaration
     return getDeclaredMethodDescriptorsFactory().get(this);
   }
 
+  /**
+   * The list of component accessors declared in the record type returned in the order the
+   * components are declared.
+   */
+  @Memoized
+  public ImmutableList<MethodDescriptor> getRecordComponentAccessorDescriptors() {
+    return getRecordComponentAccessorsDescriptorFactory().get(this);
+  }
+
   /** Returns the JsConstructor for this class if any. */
   @Memoized
   public List<MethodDescriptor> getJsConstructorMethodDescriptors() {
@@ -793,6 +802,9 @@ public abstract class TypeDeclaration
 
   abstract DescriptorFactory<ImmutableList<MethodDescriptor>> getDeclaredMethodDescriptorsFactory();
 
+  abstract DescriptorFactory<ImmutableList<MethodDescriptor>>
+      getRecordComponentAccessorsDescriptorFactory();
+
   abstract DescriptorFactory<MethodDescriptor> getSingleAbstractMethodDescriptorFactory();
 
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
@@ -829,7 +841,8 @@ public abstract class TypeDeclaration
         .setMemberTypeDeclarationsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setEnclosingMethodDescriptorFactory(() -> null)
-        .setSuperTypeDescriptorFactory(() -> null);
+        .setSuperTypeDescriptorFactory(() -> null)
+        .setRecordComponentAccessorsDescriptorFactory(() -> ImmutableList.of());
   }
 
   // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
@@ -973,6 +986,15 @@ public abstract class TypeDeclaration
         Supplier<ImmutableList<FieldDescriptor>> declaredFieldDescriptorsFactory) {
       return setDeclaredFieldDescriptorsFactory(
           typeDescriptor -> declaredFieldDescriptorsFactory.get());
+    }
+
+    public abstract Builder setRecordComponentAccessorsDescriptorFactory(
+        DescriptorFactory<ImmutableList<MethodDescriptor>> componentAccessorsDescriptorFactory);
+
+    public Builder setRecordComponentAccessorsDescriptorFactory(
+        Supplier<ImmutableList<MethodDescriptor>> componentAccessorsDescriptorFactory) {
+      return setRecordComponentAccessorsDescriptorFactory(
+          typeDescriptor -> componentAccessorsDescriptorFactory.get());
     }
 
     public abstract Builder setMemberTypeDeclarationsFactory(
