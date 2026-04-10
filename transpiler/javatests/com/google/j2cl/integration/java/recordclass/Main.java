@@ -51,7 +51,7 @@ public class Main {
     testRecordInOtherLibrary();
   }
 
-  public static void testAccessors() {
+  private static void testAccessors() {
     SimpleRecord r = new SimpleRecord(1);
     assertEquals(1, r.value());
 
@@ -62,7 +62,7 @@ public class Main {
     assertEquals("foo", sr.value());
   }
 
-  public static void testEquals() {
+  private static void testEquals() {
     SimpleRecord r0 = new SimpleRecord(1);
     SimpleRecord r1 = new SimpleRecord(1);
     assertTrue(r0.equals(r0));
@@ -117,7 +117,7 @@ public class Main {
     assertTrue(er1.equals(er0));
   }
 
-  public static void testHashCode() {
+  private static void testHashCode() {
     SimpleRecord r0 = new SimpleRecord(1);
     SimpleRecord r1 = new SimpleRecord(1);
     assertEquals(r0.hashCode(), r1.hashCode());
@@ -133,7 +133,7 @@ public class Main {
   }
 
   @SuppressWarnings("ArrayToString")
-  public static void testToString() {
+  private static void testToString() {
     SimpleRecord r0 = new SimpleRecord(1);
     assertTrue(r0.toString().contains(Integer.toString(1)));
 
@@ -160,7 +160,7 @@ public class Main {
 
   static record EmptyRecord() {}
 
-  public static void testConstructor() {
+  private static void testConstructor() {
     RecordWithConstructor r0 = new RecordWithConstructor(1, 1);
     assertEquals(2, r0.a());
     assertEquals(0, r0.b());
@@ -285,7 +285,7 @@ public class Main {
     }
   }
 
-  public static void testOverriddenMethods() {
+  private static void testOverriddenMethods() {
     RecordWithOverriddenEquals r0 = new RecordWithOverriddenEquals("a", "b");
     assertEquals(r0, new RecordWithOverriddenEquals("a", "bnot"));
     assertNotEquals(r0, new RecordWithOverriddenEquals("anot", "b"));
@@ -329,7 +329,7 @@ public class Main {
     }
   }
 
-  public static void testGeneric() {
+  private static void testGeneric() {
     GenericRecord<String> r0 = new GenericRecord<>("abc");
     assertEquals("abc", r0.a());
 
@@ -349,7 +349,7 @@ public class Main {
   static record GenericRecord<T>(T a) {}
 
   @SuppressWarnings("BadInstanceof") // Specifically testing instanceof this case.
-  public static void testImplementingInterface() {
+  private static void testImplementingInterface() {
     RecordImplementingInterface r = new RecordImplementingInterface("a");
 
     assertTrue(r instanceof InterfaceWithMethod);
@@ -379,7 +379,7 @@ public class Main {
     }
   }
 
-  public static void testStaticFields() {
+  private static void testStaticFields() {
     StaticFieldRecord r0 = new StaticFieldRecord(true);
     assertEquals(1, r0.nonstaticField());
     assertEquals(1, StaticFieldRecord.staticField);
