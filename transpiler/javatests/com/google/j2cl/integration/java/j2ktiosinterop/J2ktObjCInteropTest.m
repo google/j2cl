@@ -5,6 +5,7 @@
 #import "j2ktiosinterop/CompileTimeConstantInitialization.h"
 #import "j2ktiosinterop/CompileTimeConstants.h"
 #import "j2ktiosinterop/CustomNames.h"
+#import "j2ktiosinterop/DataClassRecord.h"
 #import "j2ktiosinterop/DefaultNames.h"
 #import "j2ktiosinterop/EnumNames.h"
 #import "j2ktiosinterop/ImmutableList.h"
@@ -13,6 +14,7 @@
 #import "j2ktiosinterop/InterfaceDefaultMethodOverrideImpl.h"
 #import "j2ktiosinterop/NativeCustomName.h"
 #import "j2ktiosinterop/NativeDefaultName.h"
+#import "j2ktiosinterop/NonDataClassRecord.h"
 #import "j2ktiosinterop/Nullability.h"
 #import "j2ktiosinterop/ObjectiveCNameOverrides.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
@@ -592,6 +594,43 @@
       create_J2ktiosinteropObjectiveCNameOverrides_Child_init();
   XCTAssertEqualObjects([child parent], @"parent/child");
   XCTAssertEqualObjects([child child], @"child");
+}
+
+- (void)testDataClassRecord {
+  J2ktiosinteropDataClassRecord *record =
+      create_J2ktiosinteropDataClassRecord_initWithInt_withNSString_(123, @"foo");
+  // TODO(b/445545563): Uncomment once Java records are translated to Kotlin data classes with
+  // @JvmRecord annotation.
+  // XCTAssertTrue([record isKindOfClass:[JavaLangRecord class]]);
+  XCTAssertEqual([record a], 123);
+  XCTAssertEqualObjects([record b], @"foo");
+  // TODO(b/501052309): Uncomment once fixed.
+  // XCTAssertTrue([record.description containsString:@"DataClassRecord"]);
+  XCTAssertTrue([record.description containsString:@"123"]);
+  XCTAssertTrue([record.description containsString:@"foo"]);
+
+  J2ktiosinteropDataClassRecord *record2 =
+      create_J2ktiosinteropDataClassRecord_initWithInt_withNSString_(123, @"foo");
+  XCTAssertEqualObjects(record, record2);
+  XCTAssertEqual(record.hash, record2.hash);
+}
+
+- (void)testNonDataClassRecord {
+  J2ktiosinteropNonDataClassRecord *record =
+      create_J2ktiosinteropNonDataClassRecord_initWithInt_withNSString_(123, @"foo");
+  // TODO(b/501069312): Uncomment when fixed.
+  // XCTAssertTrue([record isKindOfClass:[JavaLangRecord class]]);
+  XCTAssertEqual([record a], 123);
+  XCTAssertEqualObjects([record b], @"foo");
+  // TODO(b/501052309): Uncomment once fixed.
+  // XCTAssertTrue([record.description containsString:@"NonDataClassRecord"]);
+  XCTAssertTrue([record.description containsString:@"123"]);
+  XCTAssertTrue([record.description containsString:@"foo"]);
+
+  J2ktiosinteropNonDataClassRecord *record2 =
+      create_J2ktiosinteropNonDataClassRecord_initWithInt_withNSString_(123, @"foo");
+  XCTAssertEqualObjects(record, record2);
+  XCTAssertEqual(record.hash, record2.hash);
 }
 
 @end

@@ -215,4 +215,37 @@ final class J2ktSwiftInteropTest: XCTestCase {
     XCTAssertEqual(child.parent(), "parent/child")
     XCTAssertEqual(child.child(), "child")
   }
+
+  func testDataClassRecord() {
+    let record = J2ktiosinteropDataClassRecord(int: 123, with: "foo")
+    // TODO(b/445545563): Uncomment once Java records are translated to Kotlin data classes with
+    // @JvmRecord annotation.
+    // XCTAssertTrue(record is JavaLangRecord)
+    XCTAssertEqual(record.a(), 123)
+    XCTAssertEqual(record.b(), "foo")
+    // TODO(b/501052309): Uncomment once fixed.
+    // XCTAssertTrue(record.description.contains("DataClassRecord"))
+    XCTAssertTrue(record.description.contains("1"))
+    XCTAssertTrue(record.description.contains("foo"))
+
+    let record2 = J2ktiosinteropDataClassRecord(int: 123, with: "foo")
+    XCTAssertEqual(record, record2)
+    XCTAssertEqual(record.hash, record2.hash)
+  }
+
+  func testNonDataClassRecord() {
+    let record = J2ktiosinteropNonDataClassRecord(int: 123, with: "foo")
+    // TODO(b/501069312): Uncomment when fixed.
+    // XCTAssertTrue(record is JavaLangRecord)
+    XCTAssertEqual(record.a(), 123)
+    XCTAssertEqual(record.b(), "foo")
+    // TODO(b/501052309): Uncomment once fixed.
+    // XCTAssertTrue(record.description.contains("NonDataClassRecord"))
+    XCTAssertTrue(record.description.contains("1"))
+    XCTAssertTrue(record.description.contains("foo"))
+
+    let record2 = J2ktiosinteropNonDataClassRecord(int: 123, with: "foo")
+    XCTAssertEqual(record, record2)
+    XCTAssertEqual(record.hash, record2.hash)
+  }
 }
