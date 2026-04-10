@@ -4,7 +4,7 @@ load(":allowlists.bzl", "allowlists")
 
 visibility(["//build_defs/internal_do_not_use/..."])
 
-JS_LIBRARY_CHECKS_DISABLED = allowlists.of_packages([
+OFF = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/readable/kotlin/inlinefunction",
     # TODO(b/281534723): Remove after bad react example code is cleaned.
     "//samples/react/java/com/google/j2cl/samples/react/state",
@@ -18,6 +18,8 @@ JS_LIBRARY_CHECKS_DISABLED = allowlists.of_packages([
     # TODO(b/277822633): Remove after IObject as parameter is correctly mapped.
     "@jsinterop_generator//javatests/jsinterop/generator/externs/iobjectiarraylike",
 ])
+
+LOOSE = allowlists.of_packages([])
 
 EXTRA_CONFORMANCE_ALLOWLIST = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/readable/...",
