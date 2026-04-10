@@ -55,7 +55,7 @@ public class OutputUtils {
     }
 
     public Path createTempDirectory(String suffix) {
-      Path tempDir = tempRoot.resolve(MoreFiles.getNameWithoutExtension(root) + suffix);
+      Path tempDir = tempRoot.resolve(suffix);
       // Make sure the directory is empty. For Bazel workers, we reuse the directory between runs
       // for same targets (predictable directory helps with debugging). However, requires cleaning
       // up  before each run.

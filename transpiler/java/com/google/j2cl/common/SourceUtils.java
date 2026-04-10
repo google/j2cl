@@ -19,6 +19,7 @@ import static java.util.Arrays.stream;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.File;
 import java.io.IOException;
@@ -70,7 +71,7 @@ public class SourceUtils {
   private static final String J2CL_TEMP_ROOT = "_j2cl";
 
   static Path deriveTempRootForBazel(Path output) {
-    return output.resolveSibling(J2CL_TEMP_ROOT);
+    return output.resolveSibling(J2CL_TEMP_ROOT).resolve(MoreFiles.getNameWithoutExtension(output));
   }
 
   private static final String ARCHIVE_ROOT = "j2cl_sources";
