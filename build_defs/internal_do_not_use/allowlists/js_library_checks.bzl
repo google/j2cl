@@ -21,6 +21,8 @@ JS_LIBRARY_CHECKS_DISABLED = allowlists.of_packages([
 
 EXTRA_CONFORMANCE_ALLOWLIST = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/readable/...",
+    "//jre/...",
+    "//ktstdlib/...",
 ], exclude = [
     allowlists.of_packages([
         "//transpiler/javatests/com/google/j2cl/readable/java/genericequals",

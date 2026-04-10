@@ -141,19 +141,22 @@ public class JsExceptionTest extends JsThrowableTestBase {
 
   private static void throwSvgError() {
     // In old Firefox, this throws an object (not Error):
-    createElementNS("http://www.w3.org/2000/svg", "text").getBBox();
+    ((SVGTextElement) createElementNS("http://www.w3.org/2000/svg", "text")).getBBox();
 
     // For other browsers, make sure an exception is thrown to keep the test simple
     throw new RuntimeException("NS_ERROR_FAILURE");
   }
 
   @JsMethod(name = "document.createElementNS", namespace = JsPackage.GLOBAL)
-  private static native SVGElement createElementNS(String arg1, String arg2);
+  private static native Element createElementNS(String arg1, String arg2);
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-  private interface SVGElement {
+  private interface SVGTextElement extends Element {
     void getBBox();
   }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  private interface Element {}
 
   private static void assertJsException(Object expected, Throwable exception) {
     assertTrue(exception instanceof RuntimeException);
