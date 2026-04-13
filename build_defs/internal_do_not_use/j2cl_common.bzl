@@ -27,7 +27,7 @@ def _compile(
         klib_friends = depset(),
         exported_friend_klibs = depset()):
     name = ctx.label.name + artifact_suffix
-    java_toolchain = _get_java_toolchain(ctx)
+    java_toolchain = get_java_toolchain(ctx)
     jvm_srcs, js_srcs = split_srcs(srcs)
     has_srcs_to_transpile = (jvm_srcs or kt_common_srcs)
 
@@ -248,10 +248,10 @@ def _kt_compile(
 def get_bootclasspath(ctx):
     """Returns a depset containing the Java bootclasspath entries."""
 
-    toolchain = _get_java_toolchain(ctx)
+    toolchain = get_java_toolchain(ctx)
     return depset(transitive = [toolchain.bootclasspath, toolchain._bootclasspath_info._auxiliary])
 
-def _get_java_toolchain(ctx):
+def get_java_toolchain(ctx):
     return ctx.attr._j2cl_java_toolchain[java_common.JavaToolchainInfo]
 
 def get_jdk_system(java_toolchain, javac_opts):

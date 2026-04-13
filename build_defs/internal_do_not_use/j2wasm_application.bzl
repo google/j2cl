@@ -5,7 +5,7 @@ This is an experimental tool and should not be used.
 """
 
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
-load(":j2cl_common.bzl", "get_bootclasspath")
+load(":j2cl_common.bzl", "get_bootclasspath", "get_java_toolchain", "get_jdk_system")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 load(":j2wasm_common.bzl", "J2WASM_FEATURE_SET", "J2WASM_TOOLCHAIN_ATTRS")
 load(":provider.bzl", "J2wasmInfo")
@@ -137,14 +137,16 @@ def _impl_j2wasm_application(ctx):
     )
 
     all_modules = module_outputs.to_list() + [exports_module_output]
-    jre_jars = get_bootclasspath(ctx).to_list()
+    bundler_classpath = get_bootclasspath(ctx).to_list()
+    jdk_system = get_jdk_system(get_java_toolchain(ctx), [])
 
     # Bundle the module outputs.
     bundler_args = ctx.actions.args()
     bundler_args.use_param_file("@%s", use_always = True)
     bundler_args.set_param_file_format("multiline")
     bundler_args.add_all(all_modules, expand_directories = False)
-    bundler_args.add_joined("-classpath", jre_jars, join_with = ctx.configuration.host_path_separator)
+    bundler_args.add_joined("-classpath", bundler_classpath, join_with = ctx.configuration.host_path_separator)
+    bundler_args.add_all("-system", jdk_system, expand_directories = False)
     bundler_args.add_all(ctx.attr.defines, before_each = "-define")
     bundler_args.add("-output", ctx.outputs.wat)
     bundler_args.add("-jsimports", ctx.outputs.jsimports)
@@ -155,7 +157,7 @@ def _impl_j2wasm_application(ctx):
         # Note that all_modules also contains some files that are not
         # actually needed by the bundler, e.g. namemaps; that increases
         # the total size of the inputs to the bundler.
-        inputs = all_modules + jre_jars,
+        inputs = all_modules + bundler_classpath + jdk_system,
         outputs = [ctx.outputs.wat, ctx.outputs.jsimports],
         executable = ctx.executable._bundler,
         arguments = [bundler_args],

@@ -39,6 +39,8 @@ import com.sun.tools.javac.tree.JCTree;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -75,30 +77,16 @@ public class JavacParser {
     try {
       // TODO(b/470163090): Customize the JavaCompiler instance to have more granular control for
       // cancelation.
-      JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
       DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
-      JavacFileManager fileManager =
-          (JavacFileManager)
-              compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8);
-      var searchpath = options.getClasspaths().stream().collect(toImmutableList());
-      fileManager.setLocationFromPaths(StandardLocation.PLATFORM_CLASS_PATH, searchpath);
-      fileManager.setLocationFromPaths(StandardLocation.CLASS_PATH, searchpath);
-      if (options.getSystem() != null) {
-        fileManager.setLocationFromPaths(
-            StandardLocation.SYSTEM_MODULES, ImmutableList.of(options.getSystem()));
-      }
+
       JavacTaskImpl task =
-          (JavacTaskImpl)
-              compiler.getTask(
-                  null,
-                  fileManager,
-                  diagnostics,
-                  getJavacOptions(options),
-                  null,
-                  fileManager.getJavaFileObjectsFromFiles(
-                      targetPathBySourcePath.keySet().stream()
-                          .map(File::new)
-                          .collect(toImmutableList())));
+          createCompilationTask(
+              options.getClasspaths(),
+              options.getSystem(),
+              getJavacOptions(options),
+              targetPathBySourcePath.keySet().stream().map(File::new).collect(toImmutableList()),
+              diagnostics);
+
       task.addTaskListener(
           new TaskListener() {
             @Override
@@ -114,7 +102,9 @@ public class JavacParser {
 
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList(task.parse());
       task.analyze();
-      reportErrors(diagnostics, javacCompilationUnits, options.getForbiddenAnnotations());
+
+      checkForbiddenAnnotations(javacCompilationUnits, options.getForbiddenAnnotations(), problems);
+      reportDiagnosticErrors(diagnostics, problems);
       problems.abortIfHasErrors();
 
       JavaEnvironment javaEnvironment =
@@ -139,17 +129,60 @@ public class JavacParser {
     }
   }
 
+  public static JavaEnvironment createEnvironment(
+      List<Path> classpaths, Path system, Problems problems) {
+    try {
+      var diagnostics = new DiagnosticCollector<JavaFileObject>();
+      var task =
+          createCompilationTask(
+              classpaths.stream()
+                  .flatMap(p -> Arrays.stream(p.toString().split(File.pathSeparator)))
+                  .map(Path::of)
+                  .collect(toImmutableList()),
+              system,
+              getJavacOptionsBuilder().build(),
+              /* sources= */ ImmutableList.of(),
+              diagnostics);
+      reportDiagnosticErrors(diagnostics, problems);
+      return new JavaEnvironment(
+          task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
+      return null;
+    }
+  }
+
+  private static JavacTaskImpl createCompilationTask(
+      List<Path> classPath,
+      Path system,
+      List<String> javacOptions,
+      Iterable<File> sources,
+      DiagnosticCollector<JavaFileObject> diagnostics)
+      throws IOException {
+    JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+    JavacFileManager fileManager =
+        (JavacFileManager)
+            compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8);
+    fileManager.setLocationFromPaths(StandardLocation.PLATFORM_CLASS_PATH, classPath);
+    fileManager.setLocationFromPaths(StandardLocation.CLASS_PATH, classPath);
+    if (system != null) {
+      fileManager.setLocationFromPaths(StandardLocation.SYSTEM_MODULES, ImmutableList.of(system));
+    }
+    return (JavacTaskImpl)
+        compiler.getTask(
+            null,
+            fileManager,
+            diagnostics,
+            javacOptions,
+            null,
+            fileManager.getJavaFileObjectsFromFiles(sources));
+  }
+
   private static final ImmutableSet<String> ALLOWED_JAVAC_OPTIONS =
       ImmutableSet.of("--source", "--patch-module");
 
   private static ImmutableList<String> getJavacOptions(FrontendOptions options) {
-    ImmutableList.Builder<String> builder =
-        ImmutableList.<String>builder()
-            // Allow JRE classes to depend on internal annotations (in the unnamed module). This is
-            // needed for both JRE and non-JRE compilation; some JRE methods are annotated with
-            // internal annotations which are then read by some backends.
-            .add("--add-reads")
-            .add("java.base=ALL-UNNAMED");
+    ImmutableList.Builder<String> builder = getJavacOptionsBuilder();
 
     ImmutableList<String> javacOptions = options.getJavacOptions();
     for (int i = 0; i < javacOptions.size(); i++) {
@@ -169,6 +202,15 @@ public class JavacParser {
     return builder.build();
   }
 
+  private static ImmutableList.Builder<String> getJavacOptionsBuilder() {
+    return ImmutableList.<String>builder()
+        // Allow JRE classes to depend on internal annotations (in the unnamed module). This is
+        // needed for both JRE and non-JRE compilation; some JRE methods are annotated with
+        // internal annotations which are then read by some backends.
+        .add("--add-reads")
+        .add("java.base=ALL-UNNAMED");
+  }
+
   private static JavacOption parseJavacOption(String opt) {
     int equalsIndex = opt.indexOf('=');
     if (equalsIndex > 0) {
@@ -179,10 +221,28 @@ public class JavacParser {
 
   private static record JavacOption(String key, @Nullable String value) {}
 
-  private void reportErrors(
-      DiagnosticCollector<JavaFileObject> diagnosticCollector,
+  private static void reportDiagnosticErrors(
+      DiagnosticCollector<JavaFileObject> diagnosticCollector, Problems problems) {
+    for (Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollector.getDiagnostics()) {
+      if (diagnostic.getKind() == Kind.ERROR) {
+        String errorMessage = diagnostic.getMessage(Locale.US);
+        if (diagnostic.getSource() != null) {
+          problems.error(
+              (int) diagnostic.getLineNumber(),
+              diagnostic.getSource().getName(),
+              "%s",
+              errorMessage);
+        } else {
+          problems.error("%s", errorMessage);
+        }
+      }
+    }
+  }
+
+  private static void checkForbiddenAnnotations(
       List<CompilationUnitTree> javacCompilationUnits,
-      ImmutableList<String> forbiddenAnnotations) {
+      ImmutableList<String> forbiddenAnnotations,
+      Problems problems) {
     // Here we check for instances of forbidden annotations in the ast. If that is the case, we
     // throw an error since these should have been stripped by the build system already.
     for (var compilationUnit : javacCompilationUnits) {
@@ -199,21 +259,6 @@ public class JavacParser {
               compilationUnit.getSourceFile().getName(),
               FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
               forbiddenAnnotation);
-        }
-      }
-    }
-
-    for (Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollector.getDiagnostics()) {
-      if (diagnostic.getKind() == Kind.ERROR) {
-        String errorMessage = diagnostic.getMessage(Locale.US);
-        if (diagnostic.getSource() != null) {
-          problems.error(
-              (int) diagnostic.getLineNumber(),
-              diagnostic.getSource().getName(),
-              "%s",
-              errorMessage);
-        } else {
-          problems.error("%s", errorMessage);
         }
       }
     }

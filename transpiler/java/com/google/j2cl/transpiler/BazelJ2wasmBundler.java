@@ -59,8 +59,7 @@ import com.google.j2cl.transpiler.backend.wasm.TypeInfo;
 import com.google.j2cl.transpiler.backend.wasm.WasmConstructsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
-import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
-import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
+import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -118,6 +117,12 @@ final class BazelJ2wasmBundler extends BazelWorker {
       usage = "Specifies where to find all the class files for the application.")
   List<Path> classpaths;
 
+  @Option(
+      name = "-system",
+      metaVar = "<path>",
+      usage = "Specifies the location of the system modules.")
+  Path system;
+
   @Option(name = "-define", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> defines = new HashMap<>();
 
@@ -138,9 +143,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     // Create an environment to initialize the well known type descriptors to be able to synthesize
     // code.
-    // TODO(b/294284380): consider removing JDT and manually synthesizing required types.
-    new JdtEnvironment(
-        new JdtParser(problems), classpaths, TypeDescriptors.getWellKnownTypeNames());
+    var unused = JavacParser.createEnvironment(classpaths, system, problems);
 
     var referencedSystemProperties =
         getSummaries()

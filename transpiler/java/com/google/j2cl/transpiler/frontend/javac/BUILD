@@ -8,6 +8,7 @@ package(
     default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [
         "//tools:__subpackages__",
+        "//transpiler/java/com/google/j2cl/transpiler:__pkg__",
         "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
     ],
 )
@@ -29,6 +30,7 @@ java_library(
     javacopts = ["-Xep:BetaApi:OFF"],
     deps = [
         "//third_party:auto_value",
+        "//third_party:error_prone_annotations",
         "//third_party:guava",
         "//third_party:jsinterop-annotations",
         "//third_party:jsr305_annotations",
