@@ -22,10 +22,10 @@ import com.google.j2cl.transpiler.ast.HasAnnotations
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 
@@ -42,15 +42,7 @@ internal data class AnnotationSources(val nameSources: NameSources) {
 
   private fun annotationSource(annotation: Annotation, isProperty: Boolean): Source =
     annotation(
-      join(
-        Source.emptyIf(
-          !isProperty ||
-            !SUPPORTED_PROPERTY_ANNOTATIONS.contains(annotation.typeDescriptor.qualifiedSourceName)
-        ) {
-          join(source("get"), Source.COLON)
-        },
-        nameSources.qualifiedNameSource(annotation.typeDescriptor),
-      ),
+      annotationNameSource(annotation, isProperty),
       annotation.singleValueOrNull().let { singleValue ->
         if (singleValue is Literal) {
           listOf(annotationValueSource(singleValue))
@@ -61,6 +53,12 @@ internal data class AnnotationSources(val nameSources: NameSources) {
           }
         }
       },
+    )
+
+  internal fun annotationNameSource(annotation: Annotation, isProperty: Boolean): Source =
+    annotationName(
+      annotationTargetSource(annotation, isProperty),
+      nameSources.qualifiedNameSource(annotation.typeDescriptor),
     )
 
   private fun annotationValueSource(annotationValue: AnnotationValue): Source =
@@ -88,10 +86,16 @@ internal data class AnnotationSources(val nameSources: NameSources) {
         "com.google.j2objc.annotations.SwiftName",
       )
 
-    private val SUPPORTED_PROPERTY_ANNOTATIONS =
+    private val PROPERTY_GET_ANNOTATIONS =
       setOf(
         "com.google.j2objc.annotations.ObjectiveCName",
         "com.google.j2objc.annotations.SwiftName",
       )
+
+    private fun hasGetTarget(annotation: Annotation, isProperty: Boolean): Boolean =
+      isProperty && PROPERTY_GET_ANNOTATIONS.contains(annotation.typeDescriptor.qualifiedSourceName)
+
+    fun annotationTargetSource(annotation: Annotation, isProperty: Boolean): Source =
+      Source.emptyUnless(hasGetTarget(annotation, isProperty)) { KotlinSource.GET_KEYWORD }
   }
 }

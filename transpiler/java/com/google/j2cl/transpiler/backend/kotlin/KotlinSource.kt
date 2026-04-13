@@ -163,6 +163,9 @@ internal object KotlinSource {
 
   fun todo(source: Source): Source = join(TODO_IDENTIFIER, inParentheses(source))
 
+  fun annotationName(target: Source, className: Source): Source =
+    join(target.ifNotEmpty { it.plus(COLON) }, className)
+
   fun annotation(name: Source): Source = join(at(name))
 
   fun annotation(name: Source, parameter: Source, vararg parameters: Source): Source =
@@ -181,7 +184,7 @@ internal object KotlinSource {
     )
 
   fun fileAnnotation(name: Source, parameters: List<Source>): Source =
-    annotation(join(FILE_KEYWORD, COLON, name), parameters)
+    annotation(annotationName(FILE_KEYWORD, name), parameters)
 
   fun blockComment(source: Source): Source = spaceSeparated(source("/*"), source, source("*/"))
 }
