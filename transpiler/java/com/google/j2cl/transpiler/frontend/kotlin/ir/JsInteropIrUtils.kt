@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.builtins.StandardNames.DATA_CLASS_COMPONENT_PREFIX
+import org.jetbrains.kotlin.builtins.StandardNames.DATA_CLASS_COPY
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
@@ -185,7 +186,7 @@ private val IrDeclaration.isDataClassSyntheticHelper: Boolean
   get() =
     this is IrFunction &&
       origin == IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER &&
-      (name.asString() == "copy" || name.asString().startsWith(DATA_CLASS_COMPONENT_PREFIX))
+      (name == DATA_CLASS_COPY || name.asString().startsWith(DATA_CLASS_COMPONENT_PREFIX))
 
 val IrProperty.isJsProperty: Boolean
   get() = getJsPropertyAnnotation() != null
