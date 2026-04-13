@@ -23,6 +23,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
@@ -238,7 +239,20 @@ public class ImplementRecordClasses extends NormalizationPass {
     implementObjectMethodOverride(
         type,
         "toString",
-        () -> RuntimeMethods.createArraysToStringMethodCall(createRecordFieldAccessList(type)));
+        () -> {
+          Expression qualifier =
+              RuntimeMethods.createGetClassMethodCall(new ThisReference(type.getTypeDescriptor()));
+          return BinaryExpression.newBuilder()
+              .setOperator(BinaryOperator.PLUS)
+              .setLeftOperand(
+                  MethodCall.Builder.from(
+                          TypeDescriptors.get().javaLangClass.getMethodDescriptor("getName"))
+                      .setQualifier(qualifier)
+                      .build())
+              .setRightOperand(
+                  RuntimeMethods.createArraysToStringMethodCall(createRecordFieldAccessList(type)))
+              .build();
+        });
   }
 
   private static void implementEquals(Type type) {

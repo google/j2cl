@@ -77,7 +77,7 @@ open class UnnamedVariables {
    }
    
    override fun toString(): String {
-    return Arrays.toString(
+    return this.getClass().getName() + Arrays.toString(
      arrayOf<Any?>(this.o, this.s),
     )
    }
@@ -154,7 +154,7 @@ open class UnnamedVariables {
    }
    
    override fun toString(): String {
-    return Arrays.toString(
+    return this.getClass().getName() + Arrays.toString(
      arrayOf<Any?>(this.o, this.s),
     )
    }

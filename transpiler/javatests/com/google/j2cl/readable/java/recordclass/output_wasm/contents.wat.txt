@@ -714,7 +714,7 @@
  (local $this (ref null $recordclass.RecordClass.EmptyRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.EmptyRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.EmptyRecord)
@@ -856,7 +856,7 @@
  (local $this (ref null $recordclass.RecordClass.SimpleRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.SimpleRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.SimpleRecord $value@recordclass.RecordClass.SimpleRecord (local.get $this)))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.SimpleRecord $value@recordclass.RecordClass.SimpleRecord (local.get $this)))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.SimpleRecord)
@@ -998,7 +998,7 @@
  (local $this (ref null $recordclass.RecordClass.StringRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.StringRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.StringRecord $value@recordclass.RecordClass.StringRecord (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.StringRecord $value@recordclass.RecordClass.StringRecord (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.StringRecord)
@@ -1140,7 +1140,7 @@
  (local $this (ref null $recordclass.RecordClass.ArrayRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.ArrayRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.ArrayRecord $value@recordclass.RecordClass.ArrayRecord (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.ArrayRecord $value@recordclass.RecordClass.ArrayRecord (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.ArrayRecord)
@@ -1282,7 +1282,7 @@
  (local $this (ref null $recordclass.RecordClass.ObjectRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.ObjectRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.ObjectRecord $value@recordclass.RecordClass.ObjectRecord (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.ObjectRecord $value@recordclass.RecordClass.ObjectRecord (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.ObjectRecord)
@@ -1442,7 +1442,7 @@
  (local $this (ref null $recordclass.RecordClass.RecordWithConstructor))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordWithConstructor) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithConstructor $a@recordclass.RecordClass.RecordWithConstructor (local.get $this)))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithConstructor $b@recordclass.RecordClass.RecordWithConstructor (local.get $this)))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithConstructor $a@recordclass.RecordClass.RecordWithConstructor (local.get $this)))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithConstructor $b@recordclass.RecordClass.RecordWithConstructor (local.get $this)))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.RecordWithConstructor)
@@ -1611,7 +1611,7 @@
  (local $this (ref null $recordclass.RecordClass.RecordWithCompactConstructor))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordWithCompactConstructor) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithCompactConstructor $a@recordclass.RecordClass.RecordWithCompactConstructor (local.get $this)))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithCompactConstructor $b@recordclass.RecordClass.RecordWithCompactConstructor (local.get $this)))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithCompactConstructor $a@recordclass.RecordClass.RecordWithCompactConstructor (local.get $this)))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithCompactConstructor $b@recordclass.RecordClass.RecordWithCompactConstructor (local.get $this)))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.RecordWithCompactConstructor)
@@ -1780,7 +1780,7 @@
  (local $this (ref null $recordclass.RecordClass.RecordWithDeferringConstructor))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordWithDeferringConstructor) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithDeferringConstructor $value@recordclass.RecordClass.RecordWithDeferringConstructor (local.get $this)))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.RecordWithDeferringConstructor $value@recordclass.RecordClass.RecordWithDeferringConstructor (local.get $this)))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.RecordWithDeferringConstructor)
@@ -2059,7 +2059,7 @@
  (local $this (ref null $recordclass.RecordClass.RecordWithOverriddenAccessor))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordWithOverriddenAccessor) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.RecordWithOverriddenAccessor $value@recordclass.RecordClass.RecordWithOverriddenAccessor (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.RecordWithOverriddenAccessor $value@recordclass.RecordClass.RecordWithOverriddenAccessor (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.RecordWithOverriddenAccessor)
@@ -2201,7 +2201,7 @@
  (local $this (ref null $recordclass.RecordClass.RecordImplementingInterface))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordImplementingInterface) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.RecordImplementingInterface $a@recordclass.RecordClass.RecordImplementingInterface (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.RecordImplementingInterface $a@recordclass.RecordClass.RecordImplementingInterface (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.RecordImplementingInterface)
@@ -2372,7 +2372,7 @@
  (local $this (ref null $recordclass.RecordClass.StaticFieldRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.StaticFieldRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.StaticFieldRecord $nonstaticField@recordclass.RecordClass.StaticFieldRecord (local.get $this)))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.StaticFieldRecord $nonstaticField@recordclass.RecordClass.StaticFieldRecord (local.get $this)))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.StaticFieldRecord)
@@ -2534,7 +2534,7 @@
  (local $this (ref null $recordclass.RecordClass.RecordSpecializingInterface))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.RecordSpecializingInterface) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))(struct.get $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $recordclass.RecordClass.RecordSpecializingInterface $parametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))(struct.get $recordclass.RecordClass.RecordSpecializingInterface $nonParametric@recordclass.RecordClass.RecordSpecializingInterface (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.RecordSpecializingInterface)
@@ -2698,7 +2698,7 @@
  (local $this (ref null $recordclass.RecordClass.PublicRecordWithPublicFactory))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.PublicRecordWithPublicFactory) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.PublicRecordWithPublicFactory)
@@ -2840,7 +2840,7 @@
  (local $this (ref null $recordclass.RecordClass.1LocalRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.1LocalRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.1LocalRecord $value@recordclass.RecordClass.1LocalRecord (local.get $this)))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.1LocalRecord $value@recordclass.RecordClass.1LocalRecord (local.get $this)))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.1LocalRecord)
@@ -3002,7 +3002,7 @@
  (local $this (ref null $recordclass.RecordClass.1R2))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.1R2) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.1R2 $i@recordclass.RecordClass.1R2 (local.get $this)))(struct.get $recordclass.RecordClass.1R2 $o@recordclass.RecordClass.1R2 (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (struct.get $recordclass.RecordClass.1R2 $i@recordclass.RecordClass.1R2 (local.get $this)))(struct.get $recordclass.RecordClass.1R2 $o@recordclass.RecordClass.1R2 (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.1R2)
@@ -3180,7 +3180,7 @@
  (local $this (ref null $recordclass.RecordClass.1R1))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.1R1) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 3 (struct.get $recordclass.RecordClass.1R1 $o@recordclass.RecordClass.1R1 (local.get $this))(struct.get $recordclass.RecordClass.1R1 $s@recordclass.RecordClass.1R1 (local.get $this))(struct.get $recordclass.RecordClass.1R1 $n@recordclass.RecordClass.1R1 (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 3 (struct.get $recordclass.RecordClass.1R1 $o@recordclass.RecordClass.1R1 (local.get $this))(struct.get $recordclass.RecordClass.1R1 $s@recordclass.RecordClass.1R1 (local.get $this))(struct.get $recordclass.RecordClass.1R1 $n@recordclass.RecordClass.1R1 (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.1R1)
@@ -3322,7 +3322,7 @@
  (local $this (ref null $recordclass.RecordClass.1RecursiveRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.1RecursiveRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.1RecursiveRecord $r@recordclass.RecordClass.1RecursiveRecord (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.1RecursiveRecord $r@recordclass.RecordClass.1RecursiveRecord (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.1RecursiveRecord)
@@ -3464,7 +3464,7 @@
  (local $this (ref null $recordclass.RecordClass.1GenericRecord))
  (local.set $this (ref.cast (ref $recordclass.RecordClass.1GenericRecord) (local.get $this.untyped)))
  (block
-  (return (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this))))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.1GenericRecord $value@recordclass.RecordClass.1GenericRecord (local.get $this))))))))
  )
 )
 (elem declare func $m_toString__java_lang_String@recordclass.RecordClass.1GenericRecord)
