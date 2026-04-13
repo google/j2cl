@@ -125,7 +125,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.WildcardType;
 
 /** Utility functions to interact with JavaC internal representations. */
-class JavaEnvironment {
+public class JavaEnvironment {
   private final JavacTypes javacTypes;
   private final Types internalTypes;
   private final JavacElements elements;
@@ -151,8 +151,7 @@ class JavaEnvironment {
     wellKnownQualifiedBinaryNames.forEach(
         binaryName -> {
           this.problems.abortIfCancelled();
-          String qualifiedSourceName = binaryName.replace('$', '.');
-          TypeElement element = getTypeElement(qualifiedSourceName);
+          TypeElement element = binaryNameToTypeElement(binaryName);
           if (element != null) {
             builder.addReferenceType(createDeclaredTypeDescriptor(element.asType()));
           }
@@ -1032,6 +1031,11 @@ class JavaEnvironment {
         && !method.getModifiers().contains(Modifier.PRIVATE);
   }
 
+  public DeclaredTypeDescriptor createTypeDescriptor(String qualifiedBinaryName) {
+    TypeElement element = binaryNameToTypeElement(qualifiedBinaryName);
+    return element != null ? createDeclaredTypeDescriptor(element.asType()) : null;
+  }
+
   public ImmutableList<TypeDescriptor> createTypeDescriptors(
       List<? extends TypeMirror> typeMirrors, boolean inNullMarkedScope) {
     return typeMirrors.stream()
@@ -1065,8 +1069,9 @@ class JavaEnvironment {
         .collect(toImmutableList());
   }
 
-  private TypeElement getTypeElement(String qualifiedSourceName) {
-    return elements.getTypeElement(qualifiedSourceName);
+  private TypeElement binaryNameToTypeElement(String qualifiedBinaryName) {
+    String qualifiedSourcEName = qualifiedBinaryName.replace('$', '.');
+    return elements.getTypeElement(qualifiedSourcEName);
   }
 
   private Element asElement(TypeMirror typeMirror) {

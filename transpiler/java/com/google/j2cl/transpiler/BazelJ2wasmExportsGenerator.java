@@ -14,8 +14,8 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.function.Predicate.not;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.reflect.ClassPath;
@@ -26,12 +26,13 @@ import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.bazel.BazelWorker;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WasmEntryPointBridgesCreator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
-import com.google.j2cl.transpiler.frontend.jdt.JdtEnvironment;
-import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
+import com.google.j2cl.transpiler.frontend.javac.JavaEnvironment;
+import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.jdt.core.dom.ITypeBinding;
+import java.util.function.Predicate;
 import org.kohsuke.args4j.Option;
 
 /** The J2wasm export generator for Bazel that runs as a worker. */
@@ -54,6 +55,12 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
       usage = "Specifies where to find all the class files for the application.",
       handler = CommandLineParser.MultiPathOptionHandler.class)
   List<Path> classpaths;
+
+  @Option(
+      name = "-system",
+      metaVar = "<path>",
+      usage = "Specifies where to find the system modules.")
+  Path system;
 
   @Option(
       name = "-output",
@@ -74,21 +81,17 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
           this.wasmEntryPoints.stream().map(EntryPointPattern::from).collect(toImmutableList());
       List<String> binaryNames = getBinaryNamesOfClassesWithExports(classpaths, entryPointPatterns);
 
-      // Create a parser just to resolve binary names, with no sources to parse.
       // TODO(b/294284380): Make this independent of the frontend.
-      JdtParser parser = new JdtParser(problems);
+      // Create a parser just to resolve binary names, with no sources to parse.
+      JavaEnvironment environment = JavacParser.createEnvironment(classpaths, system, problems);
       Set<String> wellKnownTypeNames = TypeDescriptors.getWellKnownTypeNames();
       binaryNames.addAll(wellKnownTypeNames);
-      var bindings =
-          parser.resolveBindings(classpaths, binaryNames).stream()
-              // Methods in annotations can not be exported, and additionally the bindings might
-              // not be complete and cannot be fully resolved to descriptors.
-              .filter(not(ITypeBinding::isAnnotation))
+      var typeDescriptors =
+          binaryNames.stream()
+              .map(environment::createTypeDescriptor)
+              .filter(Predicates.notNull())
+              .filter(Predicate.not(DeclaredTypeDescriptor::isAnnotation))
               .collect(toImmutableList());
-      // TODO(b/392756608): Avoid triggering another read of classpath for well-known types.
-      var environment = new JdtEnvironment(parser, classpaths, wellKnownTypeNames);
-
-      var typeDescriptors = environment.createDescriptorsFromBindings(bindings);
 
       var entryPointBridgeCreator = new WasmEntryPointBridgesCreator(entryPointPatterns, problems);
 

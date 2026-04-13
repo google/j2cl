@@ -115,19 +115,21 @@ def _impl_j2wasm_application(ctx):
         feature_set = ctx.attr._feature_set[BuildSettingInfo].value
 
     deps = _get_j2cl_infos_for_feature_set([ctx.attr._jre] + ctx.attr.deps, feature_set)
-    module_outputs = _get_transitive_modules(deps)
+    classpath = _get_all_classjars(deps).to_list()
+    jdk_system = get_jdk_system(get_java_toolchain(ctx), [])
 
     # Create a module for exports.
     exports_module_output = ctx.actions.declare_directory(ctx.label.name + ".exports")
     exporter_args = ctx.actions.args()
     exporter_args.use_param_file("@%s", use_always = True)
     exporter_args.set_param_file_format("multiline")
-    exporter_args.add_joined("-classpath", _get_all_classjars(deps).to_list(), join_with = ctx.configuration.host_path_separator)
+    exporter_args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
+    exporter_args.add_all("-system", jdk_system, expand_directories = False)
     exporter_args.add("-output", exports_module_output.path)
     exporter_args.add_all(ctx.attr.entry_points, before_each = "-entryPointPattern")
     ctx.actions.run(
         progress_message = "Generating Wasm Exports %s" % ctx.label,
-        inputs = _get_all_classjars(deps),
+        inputs = classpath + jdk_system,
         outputs = [exports_module_output],
         executable = ctx.executable._export_generator,
         arguments = [exporter_args],
@@ -136,9 +138,9 @@ def _impl_j2wasm_application(ctx):
         mnemonic = "J2wasmApp",
     )
 
-    all_modules = module_outputs.to_list() + [exports_module_output]
+    module_outputs = _get_transitive_modules(deps).to_list()
+    all_modules = module_outputs + [exports_module_output]
     bundler_classpath = get_bootclasspath(ctx).to_list()
-    jdk_system = get_jdk_system(get_java_toolchain(ctx), [])
 
     # Bundle the module outputs.
     bundler_args = ctx.actions.args()
@@ -269,7 +271,7 @@ def _impl_j2wasm_application(ctx):
 
     # Compute the directory where the source map file will reside (relative to `runtime_root`).
     source_map_short_path_dir = ctx.outputs.srcmap.short_path.removesuffix(ctx.outputs.srcmap.basename)
-    for module_output in module_outputs.to_list():
+    for module_output in module_outputs:
         # Add the module output to the runfiles.
         runfiles.append(module_output)
 

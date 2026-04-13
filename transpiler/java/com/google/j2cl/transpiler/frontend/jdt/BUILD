@@ -6,8 +6,6 @@ load("@rules_java//java:defs.bzl", "java_library")
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [
-        "//tools/java/com/google/j2cl/tools/gwtincompatible:__pkg__",
-        "//transpiler/java/com/google/j2cl/transpiler:__pkg__",
         "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
     ],
     licenses = ["notice"],
