@@ -1,0 +1,47 @@
+goog.module('interfaces.Main.SubImplementor$impl');
+
+const AbstractImplementor = goog.require('interfaces.Main.AbstractImplementor$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('interfaces.Main$impl');
+
+class SubImplementor extends AbstractImplementor {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Main} @nodts*/
+  this.$outer_this__interfaces_Main_SubImplementor;
+ }
+ /** @nodts @return {!SubImplementor} */
+ static $create__interfaces_Main(/** !Main */ $outer_this) {
+  SubImplementor.$clinit();
+  let $instance = new SubImplementor();
+  $instance.$ctor__interfaces_Main_SubImplementor__interfaces_Main__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__interfaces_Main_SubImplementor__interfaces_Main__void(/** !Main */ $outer_this) {
+  this.$outer_this__interfaces_Main_SubImplementor = $outer_this;
+  this.$ctor__interfaces_Main_AbstractImplementor__interfaces_Main__void($outer_this);
+ }
+ /** @final @override @nodts */
+ m_interfaceMethod__void() {}
+ /** @nodts */
+ static $clinit() {
+  SubImplementor.$clinit = () =>{};
+  SubImplementor.$loadModules();
+  AbstractImplementor.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubImplementor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubImplementor, 'interfaces.Main$SubImplementor');
+
+exports = SubImplementor;
+
+//# sourceMappingURL=Main$SubImplementor.js.map

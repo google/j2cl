@@ -53,6 +53,14 @@ class Main {
 
   abstract inner class AbstractImplementor : SubInterface
 
+  inner class SubImplementor : AbstractImplementor() {
+    override final fun interfaceMethod() {}
+
+    // In Kotlin, explicit implementations of `Any` methods are required if defined
+    // on the interface.
+    override fun toString(): String = ""
+  }
+
   enum class EnumImplementor : SubInterface {
     ONE;
 
@@ -79,5 +87,10 @@ class Main {
     val si: SubInterface = Implementor()
     si.interfaceMethod()
     si.defaultMethod(null)
+
+    val si2: SubInterface = SubImplementor()
+    si2.interfaceMethod()
+    (si2 as SubImplementor).interfaceMethod()
+    (si2 as AbstractImplementor).interfaceMethod()
   }
 }

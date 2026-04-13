@@ -3,9 +3,12 @@ goog.module('interfaces.Main$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let AbstractImplementor = goog.forwardDeclare('interfaces.Main.AbstractImplementor$impl');
 let EnumImplementor = goog.forwardDeclare('interfaces.Main.EnumImplementor$impl');
 let Implementor = goog.forwardDeclare('interfaces.Main.Implementor$impl');
 let Interface = goog.forwardDeclare('interfaces.Main.Interface$impl');
+let SubImplementor = goog.forwardDeclare('interfaces.Main.SubImplementor$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Main extends j_l_Object {
  /** @protected @nodts */
@@ -38,6 +41,10 @@ class Main extends j_l_Object {
   let si = Implementor.$create__interfaces_Main(this);
   si.m_interfaceMethod__void();
   si.m_defaultMethod__java_lang_String__void(null);
+  let si2 = SubImplementor.$create__interfaces_Main(this);
+  si2.m_interfaceMethod__void();
+  (/**@type {SubImplementor}*/ ($Casts.$to(si2, SubImplementor))).m_interfaceMethod__void();
+  (/**@type {AbstractImplementor}*/ ($Casts.$to(si2, AbstractImplementor))).m_interfaceMethod__void();
  }
  /** @nodts */
  static $clinit() {
@@ -52,9 +59,12 @@ class Main extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  AbstractImplementor = goog.module.get('interfaces.Main.AbstractImplementor$impl');
   EnumImplementor = goog.module.get('interfaces.Main.EnumImplementor$impl');
   Implementor = goog.module.get('interfaces.Main.Implementor$impl');
   Interface = goog.module.get('interfaces.Main.Interface$impl');
+  SubImplementor = goog.module.get('interfaces.Main.SubImplementor$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 $Util.$setClassMetadata(Main, 'interfaces.Main');

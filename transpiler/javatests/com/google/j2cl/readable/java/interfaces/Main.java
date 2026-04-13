@@ -49,6 +49,11 @@ public class Main {
 
   abstract class AbstractImplementor implements SubInterface {}
 
+  class SubImplementor extends AbstractImplementor {
+    @Override
+    public final void interfaceMethod() {}
+  }
+
   enum EnumImplementor implements SubInterface {
     ONE;
 
@@ -74,5 +79,10 @@ public class Main {
     SubInterface si = new Implementor();
     si.interfaceMethod();
     si.defaultMethod(null);
+
+    SubInterface si2 = new SubImplementor();
+    si2.interfaceMethod();
+    ((SubImplementor) si2).interfaceMethod();
+    ((AbstractImplementor) si2).interfaceMethod();
   }
 }
