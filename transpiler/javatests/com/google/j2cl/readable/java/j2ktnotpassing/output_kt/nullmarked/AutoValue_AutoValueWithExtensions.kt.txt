@@ -34,7 +34,7 @@ class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
  private val monitor: J2ktMonitor = J2ktMonitor()
  
  @Volatile
- private var memoizedString: String
+ private var memoizedString: String? = null
  
  @Volatile
  private var memoizedInt: Int = 0
@@ -55,7 +55,7 @@ class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
     }
    }
   }
-  return this.memoizedString
+  return this.memoizedString!!
  }
  
  override fun getMemoizedInt_pp_j2ktnotpassing_nullmarked(): Int {
