@@ -15,9 +15,18 @@
  */
 package j2ktjvminterop;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
+import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+
+import com.google.j2cl.integration.testing.TestUtils;
+
+@SuppressWarnings("BadInstanceof") // Needed for Asserts.assertTrue import.
 public class Main {
   public static void main(String... args) {
     testProtectedInParentPublicInChild();
+    testRecordConvertedToDataClass();
+    testRecordNotConvertedToDataClass();
   }
 
   private static void testProtectedInParentPublicInChild() {
@@ -25,5 +34,32 @@ public class Main {
     // TODO(b/489150132): Uncomment when J2KT transpires explicit visibility.
     // kotlinChild.protectedInParentPublicInChild();
     kotlinChild.publicInChildDelegatingToProtectedInParent();
+  }
+
+  private static void testRecordConvertedToDataClass() {
+    RecordConvertedToDataClass record = new RecordConvertedToDataClass(123, "a");
+    if (!TestUtils.isJ2Kt()) {
+      assertTrue(record instanceof Record);
+    } else {
+      // TODO(b/445545563): Should be true for non-native once Java records are translated to
+      // Kotlin data classes with @JvmRecord annotation.
+      assertFalse(record instanceof Record);
+    }
+
+    assertEquals(123, record.a());
+    assertEquals("a", record.b());
+  }
+
+  private static void testRecordNotConvertedToDataClass() {
+    RecordNotConvertedToDataClass record = new RecordNotConvertedToDataClass(123, "a");
+    if (!TestUtils.isJ2Kt()) {
+      assertTrue(record instanceof Record);
+    } else {
+      // Records which are not converted to data classes are not instances of Record.
+      assertFalse(record instanceof Record);
+    }
+
+    assertEquals(123, record.a());
+    assertEquals("a", record.b());
   }
 }
