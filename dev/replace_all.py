@@ -143,7 +143,7 @@ def main(argv):
       else []
   )
   j2kt_readables = (
-      get_readables(readable_pattern, "j2kt-jvm", "kt")
+      get_readables(readable_pattern, "j2kt", "kt")
       if "J2KT" in args.platforms
       else []
   )
