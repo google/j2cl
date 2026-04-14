@@ -51,13 +51,28 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private static String getMethodQualifiers(MethodDescriptor methodDescriptor) {
-    String staticQualifier = methodDescriptor.isStatic() ? "static " : "";
+    String qualifiers = "";
+    if (methodDescriptor.isStatic()) {
+      qualifiers += "static ";
+    }
     if (!methodDescriptor.isAbstract() && methodDescriptor.isJsAsync()) {
       // Do not emit the "async" modifier for abstract methods since jscompiler will emit
       // a warning due to the way async are transpiled down.
-      return staticQualifier + "async ";
+      qualifiers += "async ";
     }
-    return staticQualifier;
+
+    // NOTE: no more qualifiers should be added after this next batch. The remaining ones should be
+    // mutually exclusive.
+    if (methodDescriptor.isSuspendFunction()) {
+      // Kotlin suspend functions are transpiled to JavaScript generator functions, which are
+      // indicated by a `*` before their name.
+      qualifiers += "*";
+    } else if (methodDescriptor.isPropertyGetter()) {
+      qualifiers += "get ";
+    } else if (methodDescriptor.isPropertySetter()) {
+      qualifiers += "set ";
+    }
+    return qualifiers;
   }
 
   /**
@@ -66,13 +81,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void emitMethodHeader(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     sourceBuilder.append(getMethodQualifiers(methodDescriptor));
-    if (methodDescriptor.isSuspendFunction()) {
-      // Kotlin suspend functions are transpiled to JavaScript generator functions, which are
-      // indicated by a `*` before their name.
-      sourceBuilder.append("*");
-    }
+    // TODO(b/158014657): remove this once the bug is fixed.
+    String methodName =
+        methodDescriptor.isPropertyGetter() || methodDescriptor.isPropertySetter()
+            ? methodDescriptor.computePropertyMangledName()
+            : methodDescriptor.getMangledName();
     sourceBuilder.emitWithMapping(
-        method.getSourcePosition(), () -> sourceBuilder.append(methodDescriptor.getMangledName()));
+        method.getSourcePosition(), () -> sourceBuilder.append(methodName));
 
     environment.emitParameters(sourceBuilder, method);
   }

@@ -848,11 +848,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       }
 
       if (isPropertyGetter()) {
-        return "get " + computePropertyMangledName();
+        return "get$$" + computePropertyMangledName();
       }
 
       if (isPropertySetter()) {
-        return "set " + computePropertyMangledName();
+        return "set$$" + computePropertyMangledName();
       }
 
       if (isJsMethod()) {
