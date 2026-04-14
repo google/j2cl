@@ -16,7 +16,6 @@ package com.google.j2cl.transpiler;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
@@ -27,11 +26,8 @@ import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Method;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WasmEntryPointBridgesCreator;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
-import com.google.j2cl.transpiler.frontend.javac.JavaEnvironment;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -41,7 +37,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import org.kohsuke.args4j.Option;
 
@@ -77,17 +72,14 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
   @Override
   protected void run() {
     try (Output out = OutputUtils.initOutputForBazel(this.output, problems)) {
-      ImmutableList<EntryPointPattern> entryPointPatterns =
+      var entryPointPatterns =
           this.wasmEntryPoints.stream().map(EntryPointPattern::from).collect(toImmutableList());
-      List<String> binaryNames = getBinaryNamesOfClassesWithExports(classpaths, entryPointPatterns);
 
       // TODO(b/294284380): Make this independent of the frontend.
       // Create a parser just to resolve binary names, with no sources to parse.
-      JavaEnvironment environment = JavacParser.createEnvironment(classpaths, system, problems);
-      Set<String> wellKnownTypeNames = TypeDescriptors.getWellKnownTypeNames();
-      binaryNames.addAll(wellKnownTypeNames);
+      var environment = JavacParser.createEnvironment(classpaths, system, problems);
       var typeDescriptors =
-          binaryNames.stream()
+          getBinaryNamesOfClassesWithExports(classpaths, entryPointPatterns).stream()
               .map(environment::createTypeDescriptor)
               .filter(Predicates.notNull())
               .filter(Predicate.not(DeclaredTypeDescriptor::isAnnotation))
@@ -95,7 +87,7 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
 
       var entryPointBridgeCreator = new WasmEntryPointBridgesCreator(entryPointPatterns, problems);
 
-      List<Method> exportedMethods =
+      var exportedMethods =
           entryPointBridgeCreator.generateBridges(
               typeDescriptors.stream()
                   .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
