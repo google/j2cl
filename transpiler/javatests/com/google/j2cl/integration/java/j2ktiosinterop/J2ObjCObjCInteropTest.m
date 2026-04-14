@@ -28,6 +28,8 @@
 #import "j2ktiosinterop/PropertyClassOverride.h"
 #import "j2ktiosinterop/PropertyMethod.h"
 #import "j2ktiosinterop/PropertyMethodOverride.h"
+#import "j2ktiosinterop/RecordAccessors.h"
+#import "j2ktiosinterop/RecordImplementingAccessors.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Double.h"
@@ -580,6 +582,17 @@
       create_J2ktiosinteropNonDataClassRecord_initWithInt_withNSString_(123, @"foo");
   XCTAssertEqualObjects(record, record2);
   XCTAssertEqual(record.hash, record2.hash);
+}
+
+- (void)testRecordImplementingAccessors {
+  J2ktiosinteropRecordImplementingAccessors *record =
+      create_J2ktiosinteropRecordImplementingAccessors_initWithInt_withNSString_(123, @"foo");
+  XCTAssertEqual([record i], 123);
+  XCTAssertEqualObjects([record s], @"foo");
+
+  id<J2ktiosinteropRecordAccessors> accessors = record;
+  XCTAssertEqual([accessors i], 123);
+  XCTAssertEqualObjects([accessors s], @"foo");
 }
 
 @end

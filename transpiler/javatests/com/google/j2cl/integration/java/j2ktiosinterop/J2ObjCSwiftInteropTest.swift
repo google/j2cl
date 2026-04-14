@@ -231,4 +231,15 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     XCTAssertEqual(record, record2)
     XCTAssertEqual(record.hash, record2.hash)
   }
+
+  func testRecordImplementingAccessors() {
+    let record: J2ktiosinteropRecordImplementingAccessors =
+      J2ktiosinteropRecordImplementingAccessors(int: 123, with: "foo")
+    XCTAssertEqual(record.i(), 123)
+    XCTAssertEqual(record.s(), "foo")
+
+    let accessors: J2ktiosinteropRecordAccessors = record
+    XCTAssertEqual(accessors.i(), 123)
+    XCTAssertEqual(accessors.s(), "foo")
+  }
 }
