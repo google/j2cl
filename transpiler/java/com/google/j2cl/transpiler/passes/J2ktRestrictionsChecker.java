@@ -87,6 +87,7 @@ public final class J2ktRestrictionsChecker {
             checkSuperTypeVisibilities(type);
             checkInterfaceTypeVisibilities(type);
             checkSynchronizedMethods(type);
+            checkJsTypeOnRecord(type);
           }
 
           @Override
@@ -308,6 +309,18 @@ public final class J2ktRestrictionsChecker {
                 type.getReadableDescription(),
                 TypeDescriptors.get().javaemulLangJ2ktMonitor.getReadableDescription(),
                 TypeDescriptors.get().javaLangObject.getReadableDescription());
+          }
+
+          private void checkJsTypeOnRecord(Type type) {
+            TypeDeclaration typeDeclaration = type.getDeclaration();
+            if (typeDeclaration.isJsType()
+                && typeDeclaration.getSuperTypeDescriptor() != null
+                && TypeDescriptors.isJavaLangRecord(typeDeclaration.getSuperTypeDescriptor())) {
+              problems.error(
+                  type.getSourcePosition(),
+                  "Record class '%s' cannot be a JsType. (b/470146353)",
+                  typeDeclaration.getReadableDescription());
+            }
           }
 
           private void checkSynchronizedStatement(SynchronizedStatement synchronizedStatement) {

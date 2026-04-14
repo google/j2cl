@@ -400,6 +400,34 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testJsTypeOnRecordFails() {
+    assertWithInlineMessages(
+        "jsinterop.annotations.JsType",
+        """
+        public @interface JsType {}
+        """,
+        "test.Main",
+        """
+        @jsinterop.annotations.JsType
+        record TopLevel(int x) {}
+        > Error: Record class 'TopLevel' cannot be a JsType. (b/470146353)
+        """);
+
+    assertWithInlineMessages(
+        "jsinterop.annotations.JsType",
+        """
+        public @interface JsType {}
+        """,
+        "test.Main2",
+        """
+        class Outer {
+          @jsinterop.annotations.JsType
+          record Nested(int x) {}
+        > Error: Record class 'Nested' cannot be a JsType. (b/470146353)
+        }
+        """);
+  }
+
   private void assertWithInlineMessages(String... compilationUnitsAndSources) {
     newTranspilerTester()
         .addNullMarkPackageInfo("test")
