@@ -13,15 +13,26 @@
 """Regenerates readables."""
 
 import argparse
+import json
+import os
+import re
+import subprocess
+import sys
+import tempfile
 import repo_util
 
 
 READABLE_TARGET_PATTERN = "transpiler/javatests/com/google/j2cl/readable/..."
 
 
-def get_readable_dirs(name_filter, rule_suffix=""):
+def get_readables(name_filter, readable_kind, output_postfix=None):
   """Finds and returns the dirs of readable examples."""
-  return _get_dirs_from_blaze_query(f"{name_filter}:readable{rule_suffix}$")
+  golden = f"readable_{readable_kind}_golden"
+  output = f"output_{output_postfix or readable_kind}"
+  return [
+      {"dir": dir, "golden": golden, "output": output}
+      for dir in _get_dirs_from_blaze_query(f"{name_filter}:{golden}$")
+  ]
 
 
 def _get_dirs_from_blaze_query(rules_filter):
@@ -33,54 +44,76 @@ def _get_dirs_from_blaze_query(rules_filter):
   return list(filter(bool, dirs))
 
 
-def blaze_build(
-    js_readable_dirs,
-    wasm_readable_dirs,
-    j2kt_readable_dirs,
-    j2kt_web_readable_dirs,
-):
-  """Blaze build everything in 1-go, for speed."""
+def blaze_test(readables):
+  """Runs everything in 1-go, for speed and return the list of failures."""
 
-  build_targets = [d + ":readable_golden" for d in js_readable_dirs]
-  build_targets += [d + ":readable_wasm_golden" for d in wasm_readable_dirs]
-  build_targets += [d + ":readable_j2kt_golden" for d in j2kt_readable_dirs]
-  build_targets += [
-      d + ":readable-j2kt-web_golden" for d in j2kt_web_readable_dirs
-  ]
+  target_to_readables = {
+      f"//{readable['dir']}:{readable['golden']}_test": readable
+      for readable in readables
+  }
 
-  cmd = ["blaze", "build", "-c", "fastbuild"] + build_targets
-  return repo_util.run_cmd(cmd)
+  # Create a temporary file to store the Build Event Protocol output.
+  with tempfile.NamedTemporaryFile() as bep_file:
+    bep_file_path = bep_file.name
+    cmd = [
+        "blaze",
+        "test",
+        "--keep_going",
+        f"--build_event_json_file={bep_file_path}",
+    ] + list(target_to_readables.keys())
+    result = subprocess.run(cmd, check=False, capture_output=True, text=True)
+    if not os.path.exists(bep_file_path):
+      print("Error invoking blaze!")
+      print(result.stderr)
+      raise FileNotFoundError("BEP file not generated! See the error output.")
 
+    match = re.search(
+        r"Streaming build results to: (https?://sponge2/\S+)", result.stderr
+    )
+    if not match: raise RuntimeError("Sponge link not found.")
+    sponge_link = match.group(1)
 
-def replace_transpiled_wasm(readable_dirs):
-  """Copy and replace with Blaze built Wasm."""
-  _replace_readable_outputs(
-      readable_dirs, "readable_wasm_golden", "output_wasm"
-  )
+    failed_targets = _process_blaze_results(bep_file_path, sponge_link)
 
-
-def replace_transpiled_js(readable_dirs):
-  """Copy and replace with Blaze built JS."""
-  _replace_readable_outputs(readable_dirs, "readable_golden", "output_closure")
-
-
-def replace_transpiled_j2kt_web(readable_dirs):
-  """Copy and replace with Blaze built JS."""
-  _replace_readable_outputs(
-      readable_dirs, "readable-j2kt-web_golden", "output_j2kt_web"
-  )
+  return [target_to_readables[t] for t in failed_targets]
 
 
-def replace_transpiled_j2kt(readable_dirs):
-  """Copy and replace with Blaze built kt."""
-  _replace_readable_outputs(readable_dirs, "readable_j2kt_golden", "output_kt")
+def _process_blaze_results(bep_file_path, sponge_link):
+  """Processes the Build Event Protocol file to find failed targets."""
+  failed_targets = []
+  build_finished = False
+  with open(bep_file_path, "r") as f:
+    for line in f:
+      event = json.loads(line)
+      event_id = event["id"]
+
+      if "buildFinished" in event_id:
+        build_finished = True
+
+      if "testSummary" in event_id:
+        label = event_id["testSummary"]["label"]
+        status = event["testSummary"]["overallStatus"]
+        if status != "PASSED":
+          failed_targets.append(label)
+
+      if "targetSummary" in event_id:
+        label = event_id["targetSummary"]["label"]
+        status = event["targetSummary"].get("overallBuildSuccess", False)
+        if not status:
+          print(f"Build failed for at least one target: {label}")
+          print(f"Sponge link: {sponge_link}")
+          sys.exit(1)
+
+  if not build_finished: raise RuntimeError("Build finished event not found.")
+
+  return failed_targets
 
 
-def _replace_readable_outputs(readable_dirs, tree_artifact_dir, output_dir):
+def _replace_readable_outputs(readables):
   """Copy and replace readable directories with output from Blaze."""
-  for readable_dir in readable_dirs:
-    transpiler_output = f"blaze-bin/{readable_dir}/{tree_artifact_dir}"
-    output = f"{readable_dir}/{output_dir}"
+  for readable in readables:
+    transpiler_output = f"blaze-bin/{readable['dir']}/{readable['golden']}"
+    output = f"{readable['dir']}/{readable['output']}"
     repo_util.run_cmd(["rm", "-Rf", output])
     repo_util.run_cmd(["mkdir", output])
     repo_util.run_cmd(
@@ -99,28 +132,33 @@ def main(argv):
   build_all = readable_name == "all"
 
   readable_pattern = ".*" if build_all else readable_name
-  js_readable_dirs = get_readable_dirs(
-      readable_pattern, "_js") if "CLOSURE" in args.platforms else []
-  wasm_readable_dirs = get_readable_dirs(
-      readable_pattern, "_wasm") if "WASM" in args.platforms else []
-  j2kt_readable_dirs = (
-      get_readable_dirs(readable_pattern, "-j2kt-jvm")
+  js_readables = (
+      get_readables(readable_pattern, "closure")
+      if "CLOSURE" in args.platforms
+      else []
+  )
+  wasm_readables = (
+      get_readables(readable_pattern, "wasm")
+      if "WASM" in args.platforms
+      else []
+  )
+  j2kt_readables = (
+      get_readables(readable_pattern, "j2kt-jvm", "kt")
       if "J2KT" in args.platforms
       else []
   )
 
-  j2kt_web_readable_dirs = (
-      get_readable_dirs(readable_pattern, "-j2kt-web")
+  j2kt_web_readables = (
+      get_readables(readable_pattern, "j2kt-web", "j2kt_web")
       if "CLOSURE" in args.platforms
       else []
   )
 
-  if (
-      not js_readable_dirs
-      and not wasm_readable_dirs
-      and not j2kt_readable_dirs
-      and not j2kt_web_readable_dirs
-  ):
+  all_readables = (
+      js_readables + wasm_readables + j2kt_readables + j2kt_web_readables
+  )
+
+  if not all_readables:
     print("No matching readables!")
     return -1
 
@@ -129,42 +167,26 @@ def main(argv):
     print("  Blaze building everything")
   else:
     print("  Blaze building JS:")
-    print("\n".join(["    " + d for d in js_readable_dirs or ["No matches"]]))
+    _print_readables(js_readables)
     print("  Blaze building JS from J2KT:")
-    print(
-        "\n".join(
-            ["    " + d for d in j2kt_web_readable_dirs or ["No matches"]]
-        )
-    )
+    _print_readables(j2kt_web_readables)
     print("  Blaze building Wasm:")
-    print("\n".join(["    " + d for d in wasm_readable_dirs or ["No matches"]]))
+    _print_readables(wasm_readables)
     print("  Blaze building J2KT:")
-    print("\n".join(["    " + d for d in j2kt_readable_dirs or ["No matches"]]))
+    _print_readables(j2kt_readables)
 
-  blaze_build(
-      js_readable_dirs,
-      wasm_readable_dirs,
-      j2kt_readable_dirs,
-      j2kt_web_readable_dirs,
-  )
+  stale_readables = blaze_test(all_readables)
+  print("  Number of stale readables: %d" % len(stale_readables))
+  if stale_readables:
+    print("    Refreshing readables...")
+    _replace_readable_outputs(stale_readables)
 
-  if js_readable_dirs:
-    print("  Copying and reformatting transpiled JS")
-    replace_transpiled_js(js_readable_dirs)
 
-  if j2kt_web_readable_dirs:
-    print("  Copying and reformatting transpiled JS from J2KT")
-    replace_transpiled_j2kt_web(j2kt_web_readable_dirs)
-
-  if wasm_readable_dirs:
-    print("  Copying and reformatting transpiled Wasm")
-    replace_transpiled_wasm(wasm_readable_dirs)
-
-  if j2kt_readable_dirs:
-    print("  Copying and reformatting transpiled KT")
-    replace_transpiled_j2kt(j2kt_readable_dirs)
-
-  print("Check for changes in the readable examples")
+def _print_readables(readables):
+  if not readables:
+    print("    No matches")
+  else:
+    print("\n".join([f"    {d['dir']}" for d in readables]))
 
 
 def add_arguments(parser):

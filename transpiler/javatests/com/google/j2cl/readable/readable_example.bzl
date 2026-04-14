@@ -96,12 +96,10 @@ def readable_example(
 
     if generate_js_readables:
         # this is just an alias so that we can disable the readable golden generation in replace_all.py.
-        native.alias(
-            name = "readable_js",
-            actual = ":readable",
-        )
+        native.alias(name = "readable_closure", actual = ":readable")
+        native.alias(name = "readable_closure.js", actual = ":readable.js")
 
-        _js_readable_targets("readable", "output_closure", defs)
+        _js_readable_targets("readable_closure", "output_closure", defs)
 
     if generate_wasm_readables:
         _wasm_readable_targets(
@@ -166,14 +164,14 @@ def readable_example(
 
 def _js_readable_targets(readable_target, dir_out, defs):
     _extract_json_warnings(
-        name = "%s_closure_warnings" % readable_target,
+        name = "%s_warnings" % readable_target,
         target = ":%s" % readable_target,
     )
 
     _readable_diff_test(
         name = "%s_golden" % readable_target,
         target = ":%s.js" % readable_target,
-        extra_file = "%s_closure_warnings" % readable_target,
+        extra_file = "%s_warnings" % readable_target,
         dir_out = dir_out,
         tags = ["j2cl"],
     )
