@@ -110,7 +110,7 @@ def readable_example(
 
     if generate_kt_readables:
         _readable_diff_test(
-            name = "readable_j2kt_golden",
+            name = "readable_kt_golden",
             target = ":readable-j2kt-jvm.kt-all",
             dir_out = "output_kt",
             tags = ["j2kt"],
@@ -150,17 +150,17 @@ def readable_example(
 
     if generate_kt_web_readables:
         _j2kt_web_enabled_j2cl_library(
-            name = "readable-j2kt-web",
+            name = "readable_j2kt_web",
             j2cl_library = ":readable",
         )
 
         # Expose the generated js files under the expected name.
         native.alias(
-            name = "readable-j2kt-web.js",
-            actual = ":readable-j2kt-web",
+            name = "readable_j2kt_web.js",
+            actual = ":readable_j2kt_web",
         )
 
-        _js_readable_targets("readable-j2kt-web", "output_j2kt_web", defs)
+        _js_readable_targets("readable_j2kt_web", "output_j2kt_web", defs)
 
 def _js_readable_targets(readable_target, dir_out, defs):
     _extract_json_warnings(

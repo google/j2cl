@@ -25,10 +25,10 @@ import repo_util
 READABLE_TARGET_PATTERN = "transpiler/javatests/com/google/j2cl/readable/..."
 
 
-def get_readables(name_filter, readable_kind, output_postfix=None):
+def get_readables(name_filter, output_postfix):
   """Finds and returns the dirs of readable examples."""
-  golden = f"readable_{readable_kind}_golden"
-  output = f"output_{output_postfix or readable_kind}"
+  golden = f"readable_{output_postfix}_golden"
+  output = f"output_{output_postfix}"
   return [
       {"dir": dir, "golden": golden, "output": output}
       for dir in _get_dirs_from_blaze_query(f"{name_filter}:{golden}$")
@@ -143,13 +143,13 @@ def main(argv):
       else []
   )
   j2kt_readables = (
-      get_readables(readable_pattern, "j2kt", "kt")
+      get_readables(readable_pattern, "kt")
       if "J2KT" in args.platforms
       else []
   )
 
   j2kt_web_readables = (
-      get_readables(readable_pattern, "j2kt-web", "j2kt_web")
+      get_readables(readable_pattern, "j2kt_web")
       if "CLOSURE" in args.platforms
       else []
   )
