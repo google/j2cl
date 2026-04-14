@@ -18,7 +18,6 @@ load("@rules_shell//shell:sh_test.bzl", "sh_test")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
     "//build_defs:rules.bzl",
-    "J2CL_OPTIMIZED_DEFS",
     "j2cl_library",
     "j2wasm_application",
 )
@@ -27,7 +26,6 @@ load("//build_defs/internal_do_not_use:j2kt_web_transition.bzl", "j2kt_web_trans
 load("//build_defs/internal_do_not_use:j2wasm_common.bzl", "J2WASM_FEATURE_SET")
 load("//build_defs/internal_do_not_use:provider.bzl", "J2clInfo", "J2wasmInfo")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("@rules_closure//closure:defs.bzl", "closure_js_binary")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -75,6 +73,8 @@ def readable_example(
 
     build_kt_native_readables = generate_kt_readables and build_kt_readables and build_kt_native_readables
     generate_kt_web_readables = generate_kt_readables and generate_kt_web_readables
+
+    native.vardef(name = "JS_LIB_DEBUG", value = "1")
 
     # Transpile the Java files.
     j2cl_library(
@@ -165,37 +165,16 @@ def readable_example(
         _js_readable_targets("readable-j2kt-web", "output_j2kt_web", defs)
 
 def _js_readable_targets(readable_target, dir_out, defs):
+    _extract_json_warnings(
+        name = "%s_closure_warnings" % readable_target,
+        target = ":%s" % readable_target,
+    )
+
     _readable_diff_test(
         name = "%s_golden" % readable_target,
         target = ":%s.js" % readable_target,
+        extra_file = "%s_closure_warnings" % readable_target,
         dir_out = dir_out,
-        tags = ["j2cl"],
-    )
-
-    # Verify compatibility of generated JS.
-    closure_js_binary(
-        name = "%s_binary" % readable_target,
-        defs = J2CL_OPTIMIZED_DEFS + [
-            "--conformance_config=transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt",
-            "--jscomp_warning=conformanceViolations",
-            "--jscomp_warning=strictPrimitiveOperators",
-            "--jscomp_warning=checkRegExp",
-            "--jscomp_warning=checkTypes",
-            "--jscomp_warning=const",
-            "--jscomp_warning=missingProperties",
-            "--jscomp_warning=tooManyTypeParams",
-            "--jscomp_warning=visibility",
-            "--summary_detail_level=3",
-        ] + defs,
-        compiler = "//javascript/tools/jscompiler:head",
-        extra_inputs = ["//transpiler/javatests/com/google/j2cl/readable:conformance_proto"],
-        use_precompiled_libraries = False,
-        deps = [":%s" % readable_target],
-    )
-
-    build_test(
-        name = "%s_build_test" % readable_target,
-        targets = ["%s_binary" % readable_target],
         tags = ["j2cl"],
     )
 
@@ -343,5 +322,44 @@ _feature_set_enabled_j2wasm_library = rule(
     attrs = {
         "j2wasm_library": attr.label(providers = [J2wasmInfo, DefaultInfo], cfg = _j2wasm_feature_set_transition),
         "feature_set": attr.string(default = J2WASM_FEATURE_SET.DEFAULT),
+    },
+)
+
+def _extract_json_warnings_impl(ctx):
+    debug_outputs = ctx.attr.target[J2clInfo]._private_.js_info.debug_outputs.to_list()
+    warnings_file = [f for f in debug_outputs if f.basename.endswith("_local_warnings.json")][0]
+    output = ctx.actions.declare_file(ctx.label.name + ".log")
+    ctx.actions.run_shell(
+        inputs = [warnings_file],
+        outputs = [output],
+        mnemonic = "J2clExtractJsonWarnings",
+        command = r"""set -e
+        awk -v RS='[,{}]' '
+        # Skip info-level JSON objects
+        /"level":"info"/ { skip=1; next }
+        skip && /"description"/ { skip=0; next }
+        # Filter for interesting fields
+        /"(description|context)":/ {
+            # Remove field names.
+            sub(/"(description|context)":/, "", $0);
+            # Remove the double quotes from the message.
+            gsub(/^"|"$/, "", $0);
+            # Unescape newlines and double quotes.
+            gsub(/\\n/, "\n", $0);
+            gsub(/\\"/, "\"", $0);
+            # Print the cleaned record
+            if ($0 != "") print $0;
+        }
+        ' "$1" > "$2"
+        """,
+        arguments = [warnings_file.path, output.path],
+    )
+
+    return [DefaultInfo(files = depset([output]))]
+
+_extract_json_warnings = rule(
+    implementation = _extract_json_warnings_impl,
+    attrs = {
+        "target": attr.label(providers = [J2clInfo]),
     },
 )

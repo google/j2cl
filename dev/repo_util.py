@@ -230,7 +230,7 @@ def get_repo_path(workspace):
   return f"/google/src/cloud/{getpass.getuser()}/{workspace}/google3"
 
 
-def run_cmd(cmd_args, cwd=None, include_stderr=False, shell=False):
+def run_cmd(cmd_args, cwd=None, shell=False):
   """Runs a command and returns output as a string."""
 
   process = subprocess.Popen(
@@ -251,7 +251,4 @@ def run_cmd(cmd_args, cwd=None, include_stderr=False, shell=False):
         + (cmd_args if isinstance(cmd_args, str) else " ".join(cmd_args))
     )
 
-  rv = output[0].decode("utf-8")
-  if include_stderr:
-    rv = (rv + "\n" if rv else "") + output[1].decode("utf-8")
-  return rv
+  return output[0].decode("utf-8")

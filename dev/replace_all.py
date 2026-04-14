@@ -10,25 +10,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Regenerates readable JS and build logs."""
+"""Regenerates readables."""
 
 import argparse
-import os
-import re
 import repo_util
 
 
 READABLE_TARGET_PATTERN = "transpiler/javatests/com/google/j2cl/readable/..."
-
-
-def extract_pattern(pattern_string, from_value):
-  """Returns the regex matched value."""
-  return re.compile(pattern_string).search(from_value).group(1)
-
-
-def replace_pattern(pattern_string, replacement, in_value):
-  """Returns the regex replaced value."""
-  return re.compile(pattern_string).sub(replacement, in_value)
 
 
 def get_readable_dirs(name_filter, rule_suffix=""):
@@ -45,11 +33,6 @@ def _get_dirs_from_blaze_query(rules_filter):
   return list(filter(bool, dirs))
 
 
-def blaze_clean():
-  """Clean output to force full compilation of all targets."""
-  repo_util.run_cmd(["blaze", "clean", "--expunge"])
-
-
 def blaze_build(
     js_readable_dirs,
     wasm_readable_dirs,
@@ -64,11 +47,9 @@ def blaze_build(
   build_targets += [
       d + ":readable-j2kt-web_golden" for d in j2kt_web_readable_dirs
   ]
-  if not args.nologs:
-    build_targets += [d + ":readable_binary" for d in js_readable_dirs]
 
   cmd = ["blaze", "build", "-c", "fastbuild"] + build_targets
-  return repo_util.run_cmd(cmd, include_stderr=True)
+  return repo_util.run_cmd(cmd)
 
 
 def replace_transpiled_wasm(readable_dirs):
@@ -88,59 +69,6 @@ def replace_transpiled_j2kt_web(readable_dirs):
   _replace_readable_outputs(
       readable_dirs, "readable-j2kt-web_golden", "output_j2kt_web"
   )
-
-
-def is_spam(line):
-  """Whether the line is build output spam or not."""
-  return re.match(r"\[[0-9,]+\s?/\s?[0-9,]+\]", line)
-
-
-def gather_closure_warnings(build_log):
-  """Gather Closure compiler warnings."""
-
-  compiling_javascript_prefix = "From Compiling JavaScript for checks "
-  build_logs = build_log.split("INFO: ")
-  build_logs = [
-      build_log[len(compiling_javascript_prefix):]
-      for build_log in build_logs
-      if build_log and build_log.startswith(compiling_javascript_prefix)
-  ]
-
-  if not build_logs:
-    raise Exception("Did not find JSCompiler output.")
-
-  for build_log in build_logs:
-    # Remove unstable build timing lines.
-    build_log = "\n".join(
-        [line for line in build_log.splitlines() if not is_spam(line)])
-
-    # Remove folder path spam.
-    build_log = build_log.replace("blaze-out/k8-fastbuild/bin/", "")
-    # Remove stable (but occasionally changing) line number details.
-    build_log = replace_pattern(r"\:([0-9]*)\:([0-9]*)\:", "", build_log)
-    build_log = replace_pattern(
-        r"([0-9]+\|)",
-        # replace the string "<number>|" with whitespace so that the error
-        # message is still readable.
-        lambda match: " " * len(match.group(0)),
-        build_log)
-
-    # Filter out the unstable ", ##% typed" message
-    percent_typed_msg = (extract_pattern(r"g\(s\)(, .*? typed)", build_log))
-    build_log = build_log.replace(percent_typed_msg, "")
-
-    build_log_path = extract_pattern("//(.*?):",
-                                     build_log) + "/build.closure.log"
-    # Don't write build.log files for integration tests.
-    if "readable/" not in build_log_path:
-      continue
-    if os.path.isfile(build_log_path):
-      os.remove(build_log_path)
-
-    if "\n0 error(s), 0 warning(s)" not in build_log:
-      # There are errors, emit the build.log file.
-      with open(build_log_path, "w") as build_log_file:
-        build_log_file.write(build_log)
 
 
 def replace_transpiled_j2kt(readable_dirs):
@@ -196,11 +124,7 @@ def main(argv):
     print("No matching readables!")
     return -1
 
-  print("Generating readable and build logs:")
-  if not args.nologs and (js_readable_dirs or j2kt_web_readable_dirs):
-    print("  Cleaning stale blaze outputs")
-    blaze_clean()
-
+  print("Generating readables:")
   if build_all:
     print("  Blaze building everything")
   else:
@@ -217,19 +141,12 @@ def main(argv):
     print("  Blaze building J2KT:")
     print("\n".join(["    " + d for d in j2kt_readable_dirs or ["No matches"]]))
 
-  build_log = blaze_build(
+  blaze_build(
       js_readable_dirs,
       wasm_readable_dirs,
       j2kt_readable_dirs,
       j2kt_web_readable_dirs,
   )
-
-  if js_readable_dirs or j2kt_web_readable_dirs:
-    if args.nologs:
-      print("  Skipping logs!!!")
-    else:
-      print("  Processing build logs")
-      gather_closure_warnings(build_log)
 
   if js_readable_dirs:
     print("  Copying and reformatting transpiled JS")
@@ -252,10 +169,6 @@ def main(argv):
 
 def add_arguments(parser):
   parser.add_argument(
-      "--nologs",
-      action="store_true",
-      help="omit the generations of build.logs")
-  parser.add_argument(
       "readable_name",
       nargs=1,
       metavar="<name>",
@@ -263,6 +176,5 @@ def add_arguments(parser):
 
 
 def run_for_presubmit(argv):
-  argv = argparse.Namespace(
-      readable_name=["all"], nologs=False, platforms=argv.platforms)
+  argv = argparse.Namespace(readable_name=["all"], platforms=argv.platforms)
   main(argv)

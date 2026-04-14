@@ -5,7 +5,6 @@ load(":allowlists.bzl", "allowlists")
 visibility(["//build_defs/internal_do_not_use/..."])
 
 OFF = allowlists.of_packages([
-    "//transpiler/javatests/com/google/j2cl/readable/kotlin/inlinefunction",
     # TODO(b/281534723): Remove after bad react example code is cleaned.
     "//samples/react/java/com/google/j2cl/samples/react/state",
     # TODO(b/275736677): toString method patched by ValueType is not recognized by JSC.
@@ -19,16 +18,13 @@ OFF = allowlists.of_packages([
     "@jsinterop_generator//javatests/jsinterop/generator/externs/iobjectiarraylike",
 ])
 
-LOOSE = allowlists.of_packages([])
+LOOSE = allowlists.of_packages([
+    # We don't want to block the readable tests from running even if they have errors.
+    "//transpiler/javatests/com/google/j2cl/readable/...",
+])
 
 EXTRA_CONFORMANCE_ALLOWLIST = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/readable/...",
     "//jre/...",
     "//ktstdlib/...",
-], exclude = [
-    allowlists.of_packages([
-        "//transpiler/javatests/com/google/j2cl/readable/java/genericequals",
-        "//transpiler/javatests/com/google/j2cl/readable/kotlin/genericequals",
-        "//transpiler/javatests/com/google/j2cl/readable/kotlin/inlinefunction",
-    ]),
 ])
