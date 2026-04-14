@@ -164,11 +164,13 @@ class TypeWildCards {
       holder.set(e -> {});
     }
 
+    // Repro for b/443813558
     public static void testSetStaticMethod(Holder<?, ?> holder) {
       Holder.setStatic(holder, e -> {});
     }
   }
 
+  // repro for b/450914940
   static class Outer<T, V> {
     interface ParameterizedInterface<T extends @Nullable Object, V extends @Nullable Object> {}
 
@@ -177,6 +179,65 @@ class TypeWildCards {
           ParameterizedInterface<? super @Nullable T, ? extends @Nullable V> p) {
         testNullabilityOnWildcardBounds(p);
       }
+    }
+  }
+
+  interface WithInTypeParameter<@KtIn T> {}
+
+  class A implements WithInTypeParameter<A> {}
+
+  class B implements WithInTypeParameter<B> {}
+
+  <T> void consume(T... t) {}
+
+  /**
+   * A @KtIn type parameter cannot take wildcards with upper bounds; however the frontend my infer a
+   * type for a @KtIn type parameter that has upper bounds because it is the more precise supertype.
+   */
+  void testInconsistentBounds() {
+
+    // The frontend might infer WithInTypeParameter<? extends WithInTypeParameter<?>>
+    consume(new A(), new B());
+    this.<WithInTypeParameter<? extends WithInTypeParameter<?>>>consume(new A(), new B());
+  }
+
+  <T extends Number> void methodWithUnusedTypeParameter() {}
+
+  // repro for b/454726194
+  void testUnusedTypeParameter() {
+    methodWithUnusedTypeParameter();
+    this.<Number>methodWithUnusedTypeParameter();
+  }
+
+  // TODO(b/202428351): Uncomment once fixed (finite bounds violation).
+  // class View<P extends Presenter<?>> {}
+  // class Presenter<V extends View<?>> {}
+
+  // repro for b/464077965
+  class Content<T> {}
+
+  class SomeContainer<T extends Content<T>> {}
+
+  // TODO(b/202428351): Uncomment once fixed (upper bound violation).
+  // void testContainer() {
+  //   SomeContainer<? extends Content<?>> c = null;
+  // }
+
+  // repro for b/466683008.
+  @NullMarked
+  public interface OtTester<O extends OtTester<O, T>, T extends @Nullable Object> {
+    O applyCommands(T... command);
+  }
+
+  @NullMarked
+  public abstract class IndexBasedTestCase<M> {
+    protected abstract OtTester<?, M> newOtTester();
+  }
+
+  public abstract class AbstractAnimationCommandTransformerTestCases
+      extends IndexBasedTestCase<String> {
+    public void testAddAnimation_noTransformAgainstMissingPage() {
+      newOtTester().applyCommands().applyCommands();
     }
   }
 }

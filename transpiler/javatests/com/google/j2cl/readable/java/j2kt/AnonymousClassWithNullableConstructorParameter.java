@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktjavac;
+package j2kt;
 
-public class EffectivelyFinal {
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
-  // repro for b/471271316.
-  void test() {
-    for (int i = 0; i < 10; i++) {
-      if (i == 0) {}
-      return;
-    }
+@NullMarked
+public class AnonymousClassWithNullableConstructorParameter {
+
+  AnonymousClassWithNullableConstructorParameter(@Nullable String s) {}
+
+  public static void test() {
+    var unused = new AnonymousClassWithNullableConstructorParameter(null) {};
   }
 }

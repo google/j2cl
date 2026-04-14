@@ -20,11 +20,36 @@ package j2kt
 
 import javaemul.lang.*
 import kotlin.Any
+import kotlin.Array
+import kotlin.Number
+import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
 internal open class TypeWildCards internal constructor() {
+ internal open fun <T: Any> consume_pp_j2kt(vararg t: T) {
+  val t_1: Array<T> = t as Array<T>
+ }
+ 
+ internal open fun testInconsistentBounds_pp_j2kt() {
+  this.consume_pp_j2kt<WithInTypeParameter<*>>(
+   A(),
+   B(),
+  )
+  this.consume_pp_j2kt<WithInTypeParameter<*>>(
+   A(),
+   B(),
+  )
+ }
+ 
+ internal open fun <T: Number> methodWithUnusedTypeParameter_pp_j2kt() {}
+ 
+ internal open fun testUnusedTypeParameter_pp_j2kt() {
+  this.methodWithUnusedTypeParameter_pp_j2kt<Number>()
+  this.methodWithUnusedTypeParameter_pp_j2kt<Number>()
+ }
+ 
  companion object {
   @JvmStatic
   internal fun testSupplierWithUpperAndLowerBounds_pp_j2kt(supplier: SupplierWithUpperBound<in Child>) {
@@ -250,6 +275,30 @@ internal open class TypeWildCards internal constructor() {
    internal open fun testNullabilityOnWildcardBounds_pp_j2kt(p: ParameterizedInterface<in T?, out V?>) {
     this.testNullabilityOnWildcardBounds_pp_j2kt(p)
    }
+  }
+ }
+ 
+ internal interface WithInTypeParameter<in T: Any>
+ 
+ internal open inner class A internal constructor(): WithInTypeParameter<TypeWildCards.A>
+ 
+ internal open inner class B internal constructor(): WithInTypeParameter<TypeWildCards.B>
+ 
+ internal open inner class Content<T: Any> internal constructor()
+ 
+ internal open inner class SomeContainer<T: TypeWildCards.Content<T>> internal constructor()
+ 
+ fun interface OtTester<O: OtTester<O, T>, T> {
+  fun applyCommands(vararg command: T): O
+ }
+ 
+ abstract inner class IndexBasedTestCase<M: Any> {
+  abstract fun newOtTester(): OtTester<*, M>
+ }
+ 
+ abstract inner class AbstractAnimationCommandTransformerTestCases: TypeWildCards.IndexBasedTestCase<String>() {
+  open fun testAddAnimation_noTransformAgainstMissingPage() {
+   this.newOtTester().applyCommands().applyCommands()
   }
  }
 }

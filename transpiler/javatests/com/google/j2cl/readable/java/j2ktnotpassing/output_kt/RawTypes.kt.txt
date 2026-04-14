@@ -1,4 +1,4 @@
-// Generated from "j2ktjavac/RawTypes.java"
+// Generated from "j2ktnotpassing/RawTypes.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -16,24 +16,24 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2ktjavac
+package j2ktnotpassing
 
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Suppress
 
 open class RawTypes {
- internal open fun <T: RawTypes.Child<T>> copy_pp_j2ktjavac(child: RawTypes.Child<T>): RawTypes.Child<T> {
+ internal open fun <T: RawTypes.Child<T>> copy_pp_j2ktnotpassing(child: RawTypes.Child<T>): RawTypes.Child<T> {
   return child
  }
  
- internal open fun <T: RawTypes.Child<T>> toParent_pp_j2ktjavac(a: RawTypes.Child<T>): RawTypes.Parent<T> {
+ internal open fun <T: RawTypes.Child<T>> toParent_pp_j2ktnotpassing(a: RawTypes.Child<T>): RawTypes.Parent<T> {
   return a
  }
  
- internal open fun returnsRaw_pp_j2ktjavac(parent: RawTypes.Child<*>): RawTypes.Parent<Any> {
-  return this.toParent_pp_j2ktjavac(
-   this.copy_pp_j2ktjavac(
+ internal open fun returnsRaw_pp_j2ktnotpassing(parent: RawTypes.Child<*>): RawTypes.Parent<Any> {
+  return this.toParent_pp_j2ktnotpassing(
+   this.copy_pp_j2ktnotpassing(
     parent as RawTypes.Child</* capture#1-of */ out RawTypes.Child<*>>,
    ) as RawTypes.Child</* capture#2-of */ out RawTypes.Child<*>>,
   )

@@ -1,4 +1,4 @@
-// Generated from "j2ktjavac/Nullability.java"
+// Generated from "j2kt/Nullability.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -16,7 +16,7 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2ktjavac
+package j2kt
 
 import javaemul.lang.*
 import java.util.function.Consumer
@@ -26,25 +26,25 @@ import kotlin.String
 import kotlin.Suppress
 
 open class Nullability {
- internal open fun testNonNullOnType_pp_j2ktjavac(unannotated: NonNullInterface?, annotatedNonNull: NonNullInterface, annotatedNullable: NonNullInterface?) {}
+ internal open fun testNonNullOnType_pp_j2kt(unannotated: NonNullInterface?, annotatedNonNull: NonNullInterface, annotatedNullable: NonNullInterface?) {}
  
- open class NullMarkedClass internal constructor() {
-  internal open fun test_pp_j2ktjavac(s: String) {
+ internal open class NullMarkedClass internal constructor() {
+  internal open fun test_pp_j2kt(s: String) {
    val c: Consumer<*> = Consumer { ss: String? ->
    }
   }
   
-  internal open fun testBoxedHolder_pp_j2ktjavac(holder: NullMarkedClass.Holder<Int>) {
-   holder.acceptNullableConsumer_pp_j2ktjavac(
+  internal open fun testBoxedHolder_pp_j2kt(holder: NullMarkedClass.Holder<Int>) {
+   holder.acceptNullableConsumer_pp_j2kt(
     Consumer { s: Int? ->
     },
    )
   }
   
-  open inner class Holder<T: Any> internal constructor() {
-   internal open fun acceptNullableConsumer_pp_j2ktjavac(consumer: Consumer<T?>) {}
+  internal open inner class Holder<T: Any> internal constructor() {
+   internal open fun acceptNullableConsumer_pp_j2kt(consumer: Consumer<T?>) {}
   }
  }
  
- interface NonNullInterface
+ internal interface NonNullInterface
 }

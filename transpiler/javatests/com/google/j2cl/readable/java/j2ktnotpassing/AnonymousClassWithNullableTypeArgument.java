@@ -49,6 +49,7 @@ public class AnonymousClassWithNullableTypeArgument {
 
   public static Supplier<@Nullable Object>
       testImplicitTypeArguments_inferredFromMembersAndReturnType() {
+    // In javac frontend it's inferred as Supplier<Object>
     return new Supplier<>() {
       @Override
       public @Nullable Object get() {
@@ -59,6 +60,8 @@ public class AnonymousClassWithNullableTypeArgument {
 
   // TODO(b/440316295): J2KT renders `new Supplier<Object>`.
   public static void testImplicitTypeArguments_inferredFromMembers() {
+    // rerpo for b/408237089
+    // In javac frontend it's inferred as Supplier<Object>
     new Supplier<>() {
       @Override
       public @Nullable Object get() {
@@ -69,6 +72,8 @@ public class AnonymousClassWithNullableTypeArgument {
 
   // TODO(b/440316295): J2KT renders `new AbstractSupplier<String>`.
   public static void testImplicitTypeArguments_inferredFromMembersAndArgument() {
+    // rerpo for b/408237089
+    // In javac frontend it's inferred as AbstractHolder<String>
     new AbstractHolder<>("Supplier") {
       @Override
       public @Nullable String get() {
@@ -78,12 +83,30 @@ public class AnonymousClassWithNullableTypeArgument {
   }
 
   public static void testImplicitTypeArguments_inferredFromArgument() {
+    // In javac frontend it's inferred as Holder<String>
     new Holder<>(nullableString()) {};
   }
 
   public static Holder<@Nullable String>
       testImplicitTypeArguments_inferredFromArgumentAndReturnType() {
+    // In javac frontend it's inferred as Holder<String>
     return new Holder<>("Supplier") {};
+  }
+
+  static class ParameterizedEmptyClass<T extends @Nullable Object> {}
+
+  interface ParameterizedEmptyInterface<T extends @Nullable Object> {}
+
+  public static <T extends @Nullable Object>
+      ParameterizedEmptyClass<@Nullable T> testExplicitSuperclassTypeArguments() {
+    new ParameterizedEmptyClass<@Nullable Void>() {};
+    return new ParameterizedEmptyClass<@Nullable T>() {};
+  }
+
+  public static <T extends @Nullable Object>
+      ParameterizedEmptyInterface<@Nullable T> testExplicitSuperInterfaceTypeArguments() {
+    new ParameterizedEmptyInterface<@Nullable Void>() {};
+    return new ParameterizedEmptyInterface<@Nullable T>() {};
   }
 
   public static @Nullable String nullableString() {

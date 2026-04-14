@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktjavac;
+package j2kt;
 
 import java.util.function.Consumer;
 import jsinterop.annotations.JsNonNull;

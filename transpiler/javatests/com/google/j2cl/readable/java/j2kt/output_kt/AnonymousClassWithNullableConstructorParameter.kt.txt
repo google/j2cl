@@ -1,4 +1,4 @@
-// Generated from "j2ktjavac/EffectivelyFinal.java"
+// Generated from "j2kt/AnonymousClassWithNullableConstructorParameter.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -16,18 +16,20 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2ktjavac
+package j2kt
 
 import javaemul.lang.*
-import kotlin.Int
+import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
 
-open class EffectivelyFinal {
- internal open fun test_pp_j2ktjavac() {
-  val i: Int = 0
-  while (i < 10) {
-   if (i == 0) {}
-   return
+open class AnonymousClassWithNullableConstructorParameter {
+ internal constructor(s: String?)
+ 
+ companion object {
+  @JvmStatic
+  fun test() {
+   val unused = object : AnonymousClassWithNullableConstructorParameter(null) {}
   }
  }
 }
