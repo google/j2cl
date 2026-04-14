@@ -190,13 +190,17 @@ abstract class WasmTypeLayout {
       return false;
     }
     return !(methodDescriptor.getEnclosingTypeDescriptor().isFinal() || methodDescriptor.isFinal())
-        // TODO(b/342007699): Consider a separate method instead of
-        // getJsOverriddenMethodDescriptors.
-        || !methodDescriptor.getJsOverriddenMethodDescriptors().isEmpty()
-        || isAccidentalInterfaceOverride(methodDescriptor);
+        // If a method overrides a parent method, it should overwrite the vtable entry.
+        || (getWasmSupertypeLayout() != null
+            && getWasmSupertypeLayout()
+                .getAllPolymorphicMethodsByMangledName()
+                .containsKey(methodDescriptor.getMangledName()))
+        || overridesInterfaceMethod(methodDescriptor);
   }
 
-  private boolean isAccidentalInterfaceOverride(MethodDescriptor methodDescriptor) {
+  private boolean overridesInterfaceMethod(MethodDescriptor methodDescriptor) {
+    // We only need to check the interfaces that are directly implemented by this type.
+    // Interfaces in the full hierarchy are already included in vtable of the supertype.
     return getTypeDescriptor().getInterfaceTypeDescriptors().stream()
         .flatMap(i -> i.getPolymorphicMethods().stream())
         // Skip the methods interfaces inherit from java.lang.Object.

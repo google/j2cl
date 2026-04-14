@@ -43,6 +43,7 @@ public class Main {
     testStaticMethods();
     testPrivateMethods();
     testAccidentalOverrides();
+    testChildClassFinalMethod();
     testCallWithDifferentNullMarking();
   }
 
@@ -210,17 +211,33 @@ public class Main {
     assertTrue(mReturns1.defaultMethod() == 1);
   }
 
+  private abstract static class AbstractClassWithoutMethod implements SomeInterface {}
+
+  private static class ChildClassWithFinalMethod extends AbstractClassWithoutMethod {
+    public final int run() {
+      return 3;
+    }
+  }
+
+  private static void testChildClassFinalMethod() {
+    ChildClassWithFinalMethod c = new ChildClassWithFinalMethod();
+    AbstractClassWithoutMethod a = c;
+    assertTrue(run(c) == 3);
+    assertTrue(c.run() == 3);
+    assertTrue(a.run() == 3);
+  }
+
   private abstract static class AbstractClassWithFinalMethod {
     public final int run() {
       return 2;
     }
   }
 
-  private static class ChildClassWithFinalMethod extends AbstractClassWithFinalMethod
+  private static class ChildClassInheritingFinalMethod extends AbstractClassWithFinalMethod
       implements SomeInterface {}
 
   private static void testAccidentalOverrides() {
-    ChildClassWithFinalMethod c = new ChildClassWithFinalMethod();
+    ChildClassInheritingFinalMethod c = new ChildClassInheritingFinalMethod();
     AbstractClassWithFinalMethod a = c;
     assertTrue(run(c) == 2);
     assertTrue(c.run() == 2);

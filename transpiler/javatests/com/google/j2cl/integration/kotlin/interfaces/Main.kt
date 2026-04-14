@@ -24,6 +24,7 @@ fun main(vararg unused: String) {
   testDefaultMethods_superCall()
   testDefaultMethods_diamondProperty()
   testPrivateMethods()
+  testChildClassFinalMethod()
   testAccidentalOverrides()
   testCompanionFields()
   testCompanionMethods()
@@ -193,14 +194,30 @@ private fun testPrivateMethods() {
   assertEquals(1, mReturns1.defaultMethod())
 }
 
+abstract class AbstractClassWithoutMethod : SomeInterface
+
+class ChildClassWithFinalMethod : AbstractClassWithoutMethod() {
+  override fun run(): Int {
+    return 3
+  }
+}
+
+private fun testChildClassFinalMethod() {
+  val c = ChildClassWithFinalMethod()
+  val a: AbstractClassWithoutMethod = c
+  assertEquals(3, run(c))
+  assertEquals(3, c.run())
+  assertEquals(3, a.run())
+}
+
 internal abstract class AbstractClassWithFinalMethod {
   open fun run() = 2
 }
 
-internal open class ChildClassWithFinalMethod : AbstractClassWithFinalMethod(), SomeInterface
+internal open class ChildClassInheritingFinalMethod : AbstractClassWithFinalMethod(), SomeInterface
 
 private fun testAccidentalOverrides() {
-  val c = ChildClassWithFinalMethod()
+  val c = ChildClassInheritingFinalMethod()
   val a: AbstractClassWithFinalMethod = c
   assertTrue(run(c) == 2)
   assertTrue(c.run() == 2)
