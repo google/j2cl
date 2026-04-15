@@ -28,7 +28,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
-import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.COMPANION_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONST_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
@@ -261,11 +260,12 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
     val methodDescriptor = method.descriptor
     val parameterDescriptors = methodDescriptor.parameterDescriptors
     val parameters = method.parameters
+    val nameSources = parameters.map { nameSources.variableNameSource(it) }
     return Source.emptyIf(methodDescriptor.isKtProperty) {
       inParentheses(
         commaSeparated(
           0.until(parameters.size).map { index ->
-            parameterSource(parameterDescriptors[index], parameters[index])
+            parameterSource(parameterDescriptors[index], nameSources[index])
           }
         )
       )
@@ -274,7 +274,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
 
   private fun parameterSource(
     parameterDescriptor: ParameterDescriptor,
-    parameter: Variable,
+    nameSource: Source,
   ): Source {
     val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
     val typeDescriptor =
@@ -291,10 +291,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
         )
       },
       Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
-      colonSeparated(
-        nameSources.variableNameSource(parameter),
-        nameSources.typeDescriptorSource(typeDescriptor),
-      ),
+      colonSeparated(nameSource, nameSources.typeDescriptorSource(typeDescriptor)),
     )
   }
 
