@@ -20,6 +20,7 @@ import os
 import re
 import signal
 import subprocess
+import sys
 
 INTEGRATION_ROOT = "transpiler/javatests/com/google/j2cl/integration/"
 OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:opt%s"
@@ -242,13 +243,17 @@ def run_cmd(cmd_args, cwd=None, shell=False):
       cwd=cwd)
   output = process.communicate()
   if process.wait() != 0:
-    print("Error while running the command!")
+    cmd_str = " ".join(cmd_args)
+    max_length = 1000
+    truncated_cmd_str = (
+        (cmd_str[:max_length] + "...[truncated]")
+        if len(cmd_str) > max_length
+        else cmd_str
+    )
+    print("Error while running command:\n" + truncated_cmd_str)
     print("\nOUTPUT:\n============")
     print(output[1].decode("utf-8"))
     print("============\n")
-    raise Exception(
-        "cmd invocation FAILED: "
-        + (cmd_args if isinstance(cmd_args, str) else " ".join(cmd_args))
-    )
+    sys.exit(1)
 
   return output[0].decode("utf-8")
