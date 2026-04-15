@@ -109,9 +109,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean isJavaRecord() {
-    var superTypeDescriptor = getSuperTypeDescriptor();
-    return superTypeDescriptor != null
-        && superTypeDescriptor.isSameBaseType(TypeDescriptors.get().javaLangRecord);
+    return getDeclaration().isJavaRecord();
   }
 
   public TypeDeclaration getOverlaidTypeDeclaration() {

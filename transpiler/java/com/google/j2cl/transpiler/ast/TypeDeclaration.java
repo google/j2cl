@@ -353,6 +353,10 @@ public abstract class TypeDeclaration
     return getKtTypeInfo() != null;
   }
 
+  public boolean isJavaRecord() {
+    return TypeDescriptors.get().javaLangRecord.isSameBaseType(getSuperTypeDescriptor());
+  }
+
   @Nullable
   abstract KtTypeInfo getKtTypeInfo();
 
