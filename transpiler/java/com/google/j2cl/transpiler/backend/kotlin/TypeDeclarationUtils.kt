@@ -116,3 +116,6 @@ internal val TypeDeclaration.isAutoValueOrBuilder: Boolean
 internal val TypeDeclaration.hasAutoValueOrBuilderSuperType: Boolean
   get() =
     toDescriptor().superTypesStream.map { it.typeDeclaration }.anyMatch { it.isAutoValueOrBuilder }
+
+internal val TypeDeclaration.isEnumWithNonEmptyValues: Boolean
+  get() = isEnum && declaredFieldDescriptors.any { it.isEnumConstant }

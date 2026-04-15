@@ -151,7 +151,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
     return newLineSeparated(
         Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
         memberDescriptorSources.volatileAnnotationSource(fieldDescriptor),
-        objCNameSources.objCAnnotationSource(fieldDescriptor),
+        objCNameSources.objCAnnotationSource(field),
         jsInteropAnnotationSources.jsInteropAnnotationsSource(field),
         spaceSeparated(
           memberDescriptorSources.visibilityModifierSource(field.descriptor),
@@ -241,7 +241,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
         method.descriptor,
         isProperty = method.descriptor.isKtProperty,
       ),
-      objCNameSources.objCAnnotationSource(method.descriptor),
+      objCNameSources.objCAnnotationSource(method),
       jsInteropAnnotationSources.jsInteropAnnotationsSource(method),
       memberDescriptorSources.jvmThrowsAnnotationSource(method.descriptor),
       memberDescriptorSources.nativeThrowsAnnotationSource(method.descriptor),
@@ -319,7 +319,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
       .let { it as NewInstance }
       .let { newInstance ->
         newLineSeparated(
-          objCNameSources.objCAnnotationSource(field.descriptor),
+          objCNameSources.objCAnnotationSource(field),
           jsInteropAnnotationSources.jsInteropAnnotationsSource(field),
           spaceSeparated(
             join(

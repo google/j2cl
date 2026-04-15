@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
@@ -25,7 +26,6 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -49,12 +49,11 @@ internal class ObjCNameSources(val nameSources: NameSources) {
     )
 
   fun objectiveCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    if (!isJ2ObjCInteropEnabled) {
-      Source.EMPTY
-    } else if (needsObjCNameAnnotation(typeDeclaration)) {
-      objectiveCNameAnnotationSource(typeDeclaration.objCNameWithoutPrefix)
-    } else {
-      Source.EMPTY
+    when {
+      !isJ2ObjCInteropEnabled -> Source.EMPTY
+      needsObjCNameAnnotation(typeDeclaration) ->
+        objectiveCNameAnnotationSource(typeDeclaration.objCNameWithoutPrefix)
+      else -> Source.EMPTY
     }
 
   fun swiftNameAnnotationSource(name: String): Source =
@@ -64,8 +63,9 @@ internal class ObjCNameSources(val nameSources: NameSources) {
     )
 
   fun swiftNameAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    Source.emptyUnless(isJ2ObjCInteropEnabled) {
-      typeDeclaration.swiftName?.let { swiftNameAnnotationSource(it) }.orEmpty()
+    when {
+      !isJ2ObjCInteropEnabled -> Source.EMPTY
+      else -> typeDeclaration.swiftName?.let { swiftNameAnnotationSource(it) }.orEmpty()
     }
 
   fun hiddenFromObjCAnnotationSource(): Source =
@@ -99,34 +99,28 @@ internal class ObjCNameSources(val nameSources: NameSources) {
   // We append "_" to the enum type name because the @ObjcEnum annotation does not insert an
   // underscore between the type name and the literal name. We use a typedef to remove it again.
   fun objCEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    newLineSeparated(
-      if (
-        isJ2ObjCInteropEnabled &&
-          typeDeclaration.isEnum &&
-          typeDeclaration.declaredFieldDescriptors.any { it.isEnumConstant }
-      ) {
+    when {
+      !isJ2ObjCInteropEnabled -> Source.EMPTY
+      typeDeclaration.isEnumWithNonEmptyValues ->
         objCEnumAnnotationSource("${typeDeclaration.objCNameWithoutPrefix}_Enum_")
-      } else {
-        Source.EMPTY
-      }
-    )
-
-  fun objCAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    Source.emptyIf(!isJ2ObjCInteropEnabled || methodDescriptor.isConstructor) {
-      when {
-        isHiddenFromObjC(methodDescriptor) -> hiddenFromObjCAnnotationSource()
-        else -> Source.EMPTY
-      }
+      else -> Source.EMPTY
     }
 
-  fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-    Source.emptyIf(!isJ2ObjCInteropEnabled) {
-      when {
-        isHiddenFromObjC(fieldDescriptor) -> hiddenFromObjCAnnotationSource()
-        needsObjCNameAnnotation(fieldDescriptor) ->
-          objCNameAnnotationSource(fieldDescriptor.objCName)
-        else -> Source.EMPTY
-      }
+  fun objCAnnotationSource(method: Method): Source =
+    when {
+      !isJ2ObjCInteropEnabled -> Source.EMPTY
+      method.descriptor.isConstructor -> Source.EMPTY
+      isHiddenFromObjC(method.descriptor) -> hiddenFromObjCAnnotationSource()
+      else -> Source.EMPTY
+    }
+
+  fun objCAnnotationSource(field: Field): Source =
+    when {
+      !isJ2ObjCInteropEnabled -> Source.EMPTY
+      isHiddenFromObjC(field.descriptor) -> hiddenFromObjCAnnotationSource()
+      needsObjCNameAnnotation(field.descriptor) ->
+        objCNameAnnotationSource(field.descriptor.objCName)
+      else -> Source.EMPTY
     }
 
   private fun needsObjCNameAnnotation(
