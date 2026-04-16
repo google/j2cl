@@ -24,6 +24,7 @@ def _compile(
         internal_transpiler_flags = {},
         artifact_suffix = "",
         is_j2kt_web_enabled = False,
+        enforce_kt_strict_deps = True,
         klib_friends = depset(),
         exported_friend_klibs = depset()):
     name = ctx.label.name + artifact_suffix
@@ -103,6 +104,7 @@ def _compile(
             output_jar,
             javac_opts,
             kotlincopts = kotlincopts,
+            enforce_strict_deps = enforce_kt_strict_deps,
             is_j2kt_web_enabled = is_j2kt_web_enabled,
         )
 
@@ -242,6 +244,7 @@ def _kt_compile(
         output_jar = None,
         javac_opts = [],
         kotlincopts = [],
+        enforce_strict_deps = True,
         is_j2kt_web_enabled = False):
     fail("Kotlin frontend is disabled")
 
