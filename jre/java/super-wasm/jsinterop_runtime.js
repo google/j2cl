@@ -19,7 +19,8 @@ goog.module('j2wasm.JsInteropRuntime');
  * instantiation and static calls.
  *
  * @param {string} id The ID of the exported constructor.
- * @return {!Object} The proxy.
+ * @return {T} The proxy.
+ * @template T
  */
 function constructorProxy(id) {
   return new Proxy(
