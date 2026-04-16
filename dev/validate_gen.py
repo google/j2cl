@@ -134,7 +134,8 @@ def test_failed_compilation():
     f.write("INVALID JAVA CODE")
 
   _run_gen_expecting_failure()
-  _assert_in("Build failed for at least one target", _out.getvalue())
+  _assert_in("No test status for targets", _out.getvalue())
+  _assert_in("Sponge link:", _out.getvalue())
 
 
 def test_broken_build_file():
@@ -154,8 +155,9 @@ def test_missing_file_in_srcs():
   with open(BUILD_FILE, "w") as f:
     f.write(broken_build)
 
-  # This should fail, but currently doesn't.
-  # run_gen_expecting_failure()
+  _run_gen_expecting_failure()
+  _assert_in("No test status for targets", _out.getvalue())
+  _assert_in("Sponge link:", _out.getvalue())
 
 
 def test_platform_filtering():

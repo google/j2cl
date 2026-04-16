@@ -55,32 +55,39 @@ def blaze_test(readables):
   # Create a temporary file to store the Build Event Protocol output.
   with tempfile.NamedTemporaryFile() as bep_file:
     bep_file_path = bep_file.name
+    all_targets = list(target_to_readables.keys())
     cmd = [
         "blaze",
         "test",
         "--keep_going",
         f"--build_event_json_file={bep_file_path}",
-    ] + list(target_to_readables.keys())
+    ] + all_targets
     result = subprocess.run(cmd, check=False, capture_output=True, text=True)
     if not os.path.exists(bep_file_path):
       print("Error invoking blaze!")
       print(result.stderr)
       raise FileNotFoundError("BEP file not generated! See the error output.")
 
-    match = re.search(
-        r"Streaming build results to: (https?://sponge2/\S+)", result.stderr
-    )
-    if not match: raise RuntimeError("Sponge link not found.")
-    sponge_link = match.group(1)
+    failed_targets, successful_targets = _process_blaze_results(bep_file_path)
 
-    failed_targets = _process_blaze_results(bep_file_path, sponge_link)
+    broken_targets = set(all_targets) - successful_targets - failed_targets
+    if broken_targets:
+      match = re.search(
+          r"Streaming build results to: (https?://sponge2/\S+)", result.stderr
+      )
+      if not match: raise RuntimeError("Sponge link not found.")
+      sponge_link = match.group(1)
+      print(f"No test status for targets:\n {'\n '.join(broken_targets)}")
+      print(f"Sponge link: {sponge_link}")
+      sys.exit(1)
 
   return [target_to_readables[t] for t in failed_targets]
 
 
-def _process_blaze_results(bep_file_path, sponge_link):
+def _process_blaze_results(bep_file_path):
   """Processes the Build Event Protocol file to find failed targets."""
-  failed_targets = []
+  successful_targets = set()
+  failed_targets = set()
   build_finished = False
   with open(bep_file_path, "r") as f:
     for line in f:
@@ -93,20 +100,14 @@ def _process_blaze_results(bep_file_path, sponge_link):
       if "testSummary" in event_id:
         label = event_id["testSummary"]["label"]
         status = event["testSummary"]["overallStatus"]
-        if status != "PASSED":
-          failed_targets.append(label)
-
-      if "targetSummary" in event_id:
-        label = event_id["targetSummary"]["label"]
-        status = event["targetSummary"].get("overallBuildSuccess", False)
-        if not status:
-          print(f"Build failed for at least one target: {label}")
-          print(f"Sponge link: {sponge_link}")
-          sys.exit(1)
+        if status == "PASSED":
+          successful_targets.add(label)
+        elif status == "FAILED":
+          failed_targets.add(label)
 
   if not build_finished: raise RuntimeError("Build finished event not found.")
 
-  return failed_targets
+  return (failed_targets, successful_targets)
 
 
 def _replace_readable_outputs(readables):
