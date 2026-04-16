@@ -43,6 +43,7 @@ public final class Main {
     SomeJsType someJsType = new SomeJsType(123);
     assertTrue(callGetNumber(someJsType) == 11);
     assertTrue(callGetString(someJsType).equals("str"));
+    assertTrue(callPackagePrivateMethod(someJsType).equals("pp"));
   }
 
   private static void testProperty() {
@@ -77,6 +78,11 @@ public final class Main {
   static class BaseJsType {
     @JsConstructor
     public BaseJsType() {}
+
+    // Non-js method.
+    String packagePrivateMethod() {
+      return "";
+    }
   }
 
   @JsType(namespace = "wasmcustomdescriptorsjsinterop")
@@ -119,6 +125,11 @@ public final class Main {
     @JsProperty
     public void setReadWriteProperty(int value) {
       ignoredField = value;
+    }
+
+    @JsMethod
+    String packagePrivateMethod() {
+      return "pp";
     }
   }
 
@@ -237,6 +248,9 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native void setReadWriteProperty(SomeJsType someJsType, int value);
+
+  @JsMethod(namespace = "nativehelper")
+  static native String callPackagePrivateMethod(SomeJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
   static native int callInterfaceMethod(JsInterface jsInterface);

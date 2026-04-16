@@ -146,6 +146,15 @@ function setReadWriteProperty(someJsType, value) {
 }
 
 /**
+ * @param {!SomeJsType} someJsType
+ * @return {string}
+ * @public
+ */
+function callPackagePrivateMethod(someJsType) {
+  return someJsType.packagePrivateMethod();
+}
+
+/**
  * @param {!JsInterface} i
  * @return {number}
  * @public
@@ -196,6 +205,7 @@ exports = {
   getStaticReadOnlyProperty,
   getReadWriteProperty,
   setReadWriteProperty,
+  callPackagePrivateMethod,
   callInterfaceMethod,
   callInterfaceGetNumber,
   callInterfaceRenamedMethod,

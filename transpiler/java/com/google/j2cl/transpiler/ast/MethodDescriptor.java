@@ -834,39 +834,58 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getOrigin().getName() == null ? getName() : getOrigin().getName();
   }
 
-  @Memoized
   @Override
   public String getMangledName() {
-    if (getManglingDescriptor() != this) {
-      return getManglingDescriptor().getMangledName();
+    if (!useClosureManglingPatterns()) {
+      // Do not use JsInfo when producing mangled names for wasm.
+      return getStandardMangledName();
     }
 
-    // Do not use JsInfo when producing mangled names for wasm.
-    if (useClosureManglingPatterns()) {
-      if (isJsConstructor() || getOrigin() == MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR) {
-        return "constructor";
-      }
+    return getClosureMangledName();
+  }
 
-      if (isPropertyGetter()) {
-        return "get$$" + computePropertyMangledName();
-      }
+  /**
+   * Returns the name for this method descriptor using Closure-style mangling patterns which takes
+   * into account JS members.
+   */
+  @Memoized
+  public String getClosureMangledName() {
+    if (getManglingDescriptor() != this) {
+      return getManglingDescriptor().getClosureMangledName();
+    }
 
-      if (isPropertySetter()) {
-        return "set$$" + computePropertyMangledName();
-      }
+    if (isJsConstructor() || getOrigin() == MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR) {
+      return "constructor";
+    }
 
-      if (isJsMethod()) {
-        return getSimpleJsName();
-      }
+    if (isPropertyGetter()) {
+      return "get$$" + computePropertyMangledName();
+    }
 
-      if (getOrigin().isSyntheticInstanceOfSupportMember() || isCustomIsInstanceMethod()) {
-        // Class support methods, like $isInstance and $markImplementor, should not be mangled.
-        return getName();
-      }
+    if (isPropertySetter()) {
+      return "set$$" + computePropertyMangledName();
+    }
+
+    if (isJsMethod()) {
+      return getSimpleJsName();
+    }
+
+    if (getOrigin().isSyntheticInstanceOfSupportMember() || isCustomIsInstanceMethod()) {
+      // Class support methods, like $isInstance and $markImplementor, should not be mangled.
+      return getName();
     }
 
     // All special cases have been handled. Go ahead and construct the mangled name for a plain
     // Java method.
+    return getStandardMangledName();
+  }
+
+  @Memoized
+  String getStandardMangledName() {
+    if (getManglingDescriptor() != this) {
+      return getManglingDescriptor().getStandardMangledName();
+    }
+
     String suffix = "";
     if (isInstanceMember()) {
       // Only use suffixes for instance methods. Static methods are always called through the
@@ -1217,7 +1236,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // interface methods never override class methods.
         .filter(t -> !(getEnclosingTypeDescriptor().isInterface() && isJavaLangObject(t)))
         .flatMap(t -> t.getPolymorphicMethods().stream())
-        .filter(m -> m.getMangledName().equals(getMangledName()))
+        .filter(m -> m.getClosureMangledName().equals(getClosureMangledName()))
         .forEach(m -> overriddenMethodsBuilder.add(m).addAll(m.getJsOverriddenMethodDescriptors()));
 
     return overriddenMethodsBuilder.build();
