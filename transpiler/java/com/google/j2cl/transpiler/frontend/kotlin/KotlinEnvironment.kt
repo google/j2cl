@@ -128,6 +128,7 @@ import org.jetbrains.kotlin.ir.util.classId
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.eraseTypeParameters
+import org.jetbrains.kotlin.ir.util.fields
 import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotation
@@ -249,6 +250,22 @@ internal class KotlinEnvironment(
             irClass.enumEntries.map(::getDeclaredFieldDescriptor) +
               irClass.getDeclaredFields().map(::getDeclaredFieldDescriptor).toList()
           )
+        }
+        .setRecordComponentAccessorsDescriptorFactory { t ->
+          if (t.isJavaRecord) {
+            // TODO(b/503338755): Make sure we have good coverage for potential edge cases.
+            ImmutableList.copyOf(
+              t.declaredFieldDescriptors.map { f ->
+                t.declaredMethodDescriptors.first {
+                  it.name == f.name &&
+                    it.parameterDescriptors.isEmpty() &&
+                    it.returnTypeDescriptor.isSameBaseType(f.typeDescriptor)
+                }
+              }
+            )
+          } else {
+            ImmutableList.of()
+          }
         }
         .setSuperTypeDescriptorFactory { _ ->
           irClass.superClass?.let { getSuperTypeDescriptor(it.makeNullable()) }
@@ -619,11 +636,12 @@ internal class KotlinEnvironment(
         }
 
       val isConstructor = irFunction is IrConstructor
-      val parameterDescriptors = ImmutableList.builder<MethodDescriptor.ParameterDescriptor>()
+      val parameterDescriptorsBuilder =
+        ImmutableList.builder<MethodDescriptor.ParameterDescriptor>()
 
       if (irFunction.isSuspend) {
         // Add the implicit continuation parameter so our type model is correct.
-        parameterDescriptors.add(
+        parameterDescriptorsBuilder.add(
           MethodDescriptor.ParameterDescriptor.newBuilder()
             .setTypeDescriptor(
               TypeDescriptors.get()
@@ -647,7 +665,7 @@ internal class KotlinEnvironment(
             specialBridge.substitutedParameterTypes?.get(param.indexInParameters)
           type = substitutedType?.eraseToScope(visibleTypeParameters) ?: type.eraseTypeParameters()
         }
-        parameterDescriptors.add(
+        parameterDescriptorsBuilder.add(
           MethodDescriptor.ParameterDescriptor.newBuilder()
             .setTypeDescriptor(getTypeDescriptor(type))
             // A parameter is only considered optional if it has a default initializer AND it's
@@ -673,12 +691,23 @@ internal class KotlinEnvironment(
       val isLocal = irFunction.visibility.delegate == Visibilities.Local
       val enclosingMethodDescriptor =
         if (isLocal) getDeclaredMethodDescriptor(irFunction.parent as IrFunction) else null
+      val name = irFunction.resolveName(jvmBackendContext)
+      val parametersDescriptors = parameterDescriptorsBuilder.build()
+
+      // TODO(b/503338755): Make sure we have good coverage for potential edge cases.
+      val isRecordComponentAccessor =
+        enclosingMethodDescriptor == null &&
+          enclosingTypeDescriptor.typeDeclaration.isJavaRecord &&
+          parametersDescriptors.isEmpty() &&
+          irFunction.parentAsClass.fields.any {
+            it.name.asString() == name && irFunction.returnType == it.type
+          }
 
       MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setEnclosingMethodDescriptor(enclosingMethodDescriptor)
-        .setName(irFunction.resolveName(jvmBackendContext))
-        .setParameterDescriptors(parameterDescriptors.build())
+        .setName(name)
+        .setParameterDescriptors(parametersDescriptors)
         .setReturnTypeDescriptor(
           if (irFunction.hasVoidReturn) {
             PrimitiveTypes.VOID
@@ -706,6 +735,7 @@ internal class KotlinEnvironment(
             !visibility.isPrivate &&
             !isStatic
         )
+        .setRecordComponentAccessor(isRecordComponentAccessor)
         .setTypeParameterTypeDescriptors(irFunction.typeParameters.map(::getTypeVariable))
         .setOriginalJsInfo(jsInfo)
         .setAnnotations(createAnnotations(irFunction))

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.MoreCollectors;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -113,16 +114,13 @@ public class ImplementRecordClasses extends NormalizationPass {
   }
 
   private static void addFieldAccessors(Type type) {
-    for (FieldDescriptor field : getRecordFields(type.getTypeDescriptor())) {
-      // Do not mark the implicit accessors as synthetic. Implicit members are never marked as
-      // synthetic because the usage sites have to agree, and they don't have the information of
-      // whether they are synthesized or not.
-      MethodDescriptor fieldAccessorDescriptor =
-          MethodDescriptor.newBuilder()
-              .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-              .setName(field.getName())
-              .setReturnTypeDescriptor(field.getTypeDescriptor())
-              .build();
+    var typeDescriptor = type.getTypeDescriptor();
+    for (FieldDescriptor field : getRecordFields(typeDescriptor)) {
+      var fieldAccessorDescriptor =
+          typeDescriptor.getRecordComponentAccessors().stream()
+              .filter(m -> m.getName().equals(field.getName()))
+              .collect(MoreCollectors.onlyElement());
+
       if (type.containsMethod(fieldAccessorDescriptor::isSameSignature)) {
         continue;
       }
