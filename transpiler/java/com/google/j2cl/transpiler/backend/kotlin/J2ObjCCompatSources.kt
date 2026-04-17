@@ -30,9 +30,11 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
+import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
@@ -54,6 +56,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent.Companion.combin
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent.Companion.dependent
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent.Companion.flatten
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
+import com.google.j2cl.transpiler.backend.kotlin.objc.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.objc.defineAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependentFloatSource
@@ -65,22 +68,28 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.objc.getProperty
 import com.google.j2cl.transpiler.backend.kotlin.objc.id
+import com.google.j2cl.transpiler.backend.kotlin.objc.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.objc.join
 import com.google.j2cl.transpiler.backend.kotlin.objc.macroDefine
 import com.google.j2cl.transpiler.backend.kotlin.objc.methodCall
+import com.google.j2cl.transpiler.backend.kotlin.objc.nsArray
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsAssumeNonnull
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsCopying
+import com.google.j2cl.transpiler.backend.kotlin.objc.nsDictionary
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsInline
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableArray
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableDictionary
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableSet
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsNumber
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsObject
+import com.google.j2cl.transpiler.backend.kotlin.objc.nsSet
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsString
 import com.google.j2cl.transpiler.backend.kotlin.objc.plusAssignment
 import com.google.j2cl.transpiler.backend.kotlin.objc.plusSemicolon
 import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
 import com.google.j2cl.transpiler.backend.kotlin.objc.returnStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceWithDependencies
+import com.google.j2cl.transpiler.backend.kotlin.objc.spaceSeparated
 import com.google.j2cl.transpiler.backend.kotlin.objc.toNullable
 import com.google.j2cl.transpiler.backend.kotlin.objc.toPointer
 import com.google.j2cl.transpiler.backend.kotlin.objc.typedef
@@ -277,12 +286,16 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
       else -> emptyList()
     }
 
-  private fun methodFunctionDependentSources(method: Method): List<Dependent<Source>> =
+  private fun methodFunctionDependentSources(method: Method): List<Dependent<Source>> = buildList {
     method
       .takeIf { shouldInclude(it.descriptor) }
       ?.let { it.descriptor.toObjCNames() }
-      ?.let { functionDependentSources(method, it) }
-      .orIfNull { listOf() }
+      ?.let { selector -> addAll(functionDependentSources(method, selector)) }
+    method
+      .takeIf { it.descriptor.isObjectiveCKmpMethod && it.descriptor.isStatic }
+      ?.let { it.descriptor.objectiveCKmpMethodSelector() }
+      ?.let { selector -> add(objectiveCKmpMethodFunctionDependentSource(method, selector)) }
+  }
 
   private fun shouldInclude(methodDescriptor: MethodDescriptor): Boolean =
     !methodDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
@@ -304,8 +317,127 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
       } &&
       shouldInclude(methodDescriptor.returnTypeDescriptor) &&
       methodDescriptor.parameterTypeDescriptors.all(::shouldInclude) &&
-      canInferObjCName(methodDescriptor) &&
+      ((methodDescriptor.isStatic && methodDescriptor.isObjectiveCKmpMethod) ||
+        canInferObjCName(methodDescriptor)) &&
       !methodDescriptor.ktInfo.isThrows
+
+  private val MethodDescriptor.isObjectiveCKmpMethod: Boolean
+    get() = hasAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")
+
+  private fun MethodDescriptor.objectiveCKmpMethodSelector(): String? =
+    getAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")?.let { annotation ->
+      (annotation.values["selector"] as? StringLiteral)?.value
+    }
+
+  private fun TypeDescriptor.objCKmpDependentSource(): Dependent<Source> {
+    val typeDescriptors = TypeDescriptors.get()
+    val baseTypeDescriptor =
+      (this as? DeclaredTypeDescriptor)?.let { declaredType ->
+        listOf(
+            typeDescriptors.javaUtilList,
+            typeDescriptors.javaUtilSet,
+            typeDescriptors.javaUtilMap,
+            typeDescriptors.javaLangNumber,
+          )
+          .find { declaredType.isAssignableTo(it) }
+          ?.typeDeclaration
+      }
+    val mappedBaseTypeSource = baseTypeDescriptor?.let {
+      mappedObjCNameDependentSource(baseTypeDescriptor, readonly = true)
+    }
+
+    return when {
+      mappedBaseTypeSource == nsDictionary ->
+        mapObjCDependentSource(mappedBaseTypeSource).runIf(isNullable) { toNullable() }
+      mappedBaseTypeSource == nsArray || mappedBaseTypeSource == nsSet ->
+        collectionObjCDependentSource(mappedBaseTypeSource).runIf(isNullable) { toNullable() }
+      mappedBaseTypeSource == nsNumber -> nsNumber.toPointer().runIf(isNullable) { toNullable() }
+      else -> objCDependentSource(this)
+    }
+  }
+
+  private fun TypeDescriptor.collectionObjCDependentSource(
+    baseSource: Dependent<Source>
+  ): Dependent<Source> =
+    (this as? DeclaredTypeDescriptor)
+      ?.typeArgumentDescriptors
+      ?.firstOrNull()
+      ?.let { typeArgument ->
+        join(baseSource, inAngleBrackets(typeArgument.objCKmpDependentSource())).toPointer()
+      }
+      .orIfNull { baseSource.toPointer() }
+
+  private fun TypeDescriptor.mapObjCDependentSource(
+    baseSource: Dependent<Source>
+  ): Dependent<Source> =
+    (this as? DeclaredTypeDescriptor)
+      ?.typeArgumentDescriptors
+      ?.takeIf { it.size == 2 }
+      ?.let { typeArguments ->
+        join(
+            baseSource,
+            inAngleBrackets(
+              commaSeparated(
+                typeArguments[0].objCKmpDependentSource(),
+                typeArguments[1].objCKmpDependentSource(),
+              )
+            ),
+          )
+          .toPointer()
+      }
+      .orIfNull { baseSource.toPointer() }
+
+  private fun objectiveCKmpMethodFunctionDependentSource(
+    method: Method,
+    selector: String,
+  ): Dependent<Source> =
+    functionDeclaration(
+      modifiers = listOf(nsInline),
+      returnType = method.descriptor.returnTypeDescriptor.objCKmpDependentSource(),
+      name = objectiveCKmpMethodFunctionName(method.descriptor, selector),
+      parameters = method.parameters.map(::variableKmpDependentSource),
+      statements = objectiveCKmpMethodStatementDependentSources(method, selector),
+    )
+
+  private fun variableKmpDependentSource(variable: Variable): Dependent<Source> =
+    spaceSeparated(variable.typeDescriptor.objCKmpDependentSource(), nameDependentSource(variable))
+
+  private fun objectiveCKmpMethodFunctionName(
+    methodDescriptor: MethodDescriptor,
+    selector: String,
+  ): String =
+    methodDescriptor.enclosingTypeDescriptor
+      .objCName(useId = true)
+      .plus("_")
+      .plus(selector.removeSuffix(":"))
+
+  private fun objectiveCKmpMethodStatementDependentSources(
+    method: Method,
+    selector: String,
+  ): List<Dependent<Source>> =
+    lastStatementDependentSources(method, objectiveCKmpMethodCallDependentSource(method, selector))
+
+  private fun lastStatementDependentSources(
+    method: Method,
+    expression: Dependent<Source>,
+  ): List<Dependent<Source>> =
+    listOf(
+      if (isPrimitiveVoid(method.descriptor.returnTypeDescriptor)) {
+        expressionStatement(expression)
+      } else {
+        returnStatement(expression)
+      }
+    )
+
+  private fun objectiveCKmpMethodCallDependentSource(
+    method: Method,
+    selector: String,
+  ): Dependent<Source> =
+    methodCall(
+      target = methodCallTargetDependentSource(method),
+      name = selector,
+      arguments = method.parameters.map(::nameDependentSource),
+    )
 
   private fun canInferObjCName(methodDescriptor: MethodDescriptor): Boolean =
     methodDescriptor.parameterTypeDescriptors.isEmpty() ||
@@ -416,12 +548,7 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
     method: Method,
     objCNames: MethodObjCNames,
   ): List<Dependent<Source>> =
-    if (isPrimitiveVoid(method.descriptor.returnTypeDescriptor)) {
-
-      listOf(expressionStatement(methodCallDependentSource(method, objCNames)))
-    } else {
-      listOf(returnStatement(methodCallDependentSource(method, objCNames)))
-    }
+    lastStatementDependentSources(method, methodCallDependentSource(method, objCNames))
 
   private fun methodCallDependentSource(
     method: Method,
@@ -481,15 +608,18 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
   private fun nameIsMappedInObjC(typeDeclaration: TypeDeclaration): Boolean =
     mappedObjCNameDependentSource(typeDeclaration) != null
 
-  private fun mappedObjCNameDependentSource(typeDeclaration: TypeDeclaration): Dependent<Source>? =
+  private fun mappedObjCNameDependentSource(
+    typeDeclaration: TypeDeclaration,
+    readonly: Boolean = false,
+  ): Dependent<Source>? =
     when (typeDeclaration.qualifiedBinaryName) {
       "java.lang.Object" -> nsObject
       "java.lang.String" -> nsString
       "java.lang.Number" -> nsNumber
       "java.lang.Cloneable" -> nsCopying
-      "java.util.List" -> nsMutableArray
-      "java.util.Set" -> nsMutableSet
-      "java.util.Map" -> nsMutableDictionary
+      "java.util.List" -> if (readonly) nsArray else nsMutableArray
+      "java.util.Set" -> if (readonly) nsSet else nsMutableSet
+      "java.util.Map" -> if (readonly) nsDictionary else nsMutableDictionary
       else -> null
     }
 

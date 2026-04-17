@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inSquareBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
@@ -60,11 +61,17 @@ fun parameter(name: Dependent<Source>, value: Dependent<Source>): Dependent<Sour
 
 fun block(dependent: Dependent<Source>): Dependent<Source> = dependent.map { block(it) }
 
-fun inParentheses(dependent: Dependent<Source>): Dependent<Source> =
-  dependent.map { inParentheses(it) }
+fun inParentheses(dependent: Dependent<Source>): Dependent<Source> = dependent.map {
+  inParentheses(it)
+}
 
-fun inSquareBrackets(dependent: Dependent<Source>): Dependent<Source> =
-  dependent.map { inSquareBrackets(it) }
+fun inAngleBrackets(dependent: Dependent<Source>): Dependent<Source> = dependent.map {
+  Source.inAngleBrackets(it)
+}
+
+fun inSquareBrackets(dependent: Dependent<Source>): Dependent<Source> = dependent.map {
+  inSquareBrackets(it)
+}
 
 fun join(first: Dependent<Source>, vararg rest: Dependent<Source>): Dependent<Source> =
   listOf(first, *rest).flatten().map { join(it) }
@@ -128,6 +135,12 @@ val nsObject: Dependent<Source> = ForwardDeclaration.ofClass("NSObject").depende
 val nsNumber: Dependent<Source> = ForwardDeclaration.ofClass("NSNumber").dependentName
 
 val nsString: Dependent<Source> = ForwardDeclaration.ofClass("NSString").dependentName
+
+val nsArray: Dependent<Source> = ForwardDeclaration.ofClass("NSArray").dependentName
+
+val nsSet: Dependent<Source> = ForwardDeclaration.ofClass("NSSet").dependentName
+
+val nsDictionary: Dependent<Source> = ForwardDeclaration.ofClass("NSDictionary").dependentName
 
 val nsMutableArray: Dependent<Source> = ForwardDeclaration.ofClass("NSMutableArray").dependentName
 
@@ -197,7 +210,8 @@ fun returnStatement(expression: Dependent<Source>): Dependent<Source> =
 fun expressionStatement(expression: Dependent<Source>): Dependent<Source> =
   expression.plusSemicolon()
 
-fun nsAssumeNonnull(body: Dependent<Source>): Dependent<Source> =
-  body.ifNotEmpty { emptyLineSeparated(nsAssumeNonnullBegin, it, nsAssumeNonnullEnd) }
+fun nsAssumeNonnull(body: Dependent<Source>): Dependent<Source> = body.ifNotEmpty {
+  emptyLineSeparated(nsAssumeNonnullBegin, it, nsAssumeNonnullEnd)
+}
 
 fun Dependent<Source>.toNullable(): Dependent<Source> = spaceSeparated(this, nullable)
