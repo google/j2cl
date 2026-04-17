@@ -21,6 +21,7 @@ import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import org.jspecify.annotations.NullMarked;
@@ -150,6 +151,67 @@ public class Collections {
     map.containsValue(mismatching());
     map.remove(mismatching());
     map.remove(mismatching(), mismatching());
+  }
+
+  public static <L extends List<String>, M extends L> void testMutability(
+      Iterator<String> iterator,
+      ListIterator<String> listIterator,
+      Collection<String> collection,
+      List<String> list,
+      L genericList,
+      M genericList2,
+      Set<String> set,
+      Map<String, String> map,
+      Map.Entry<String, String> mapEntry) {
+    iterator.remove();
+
+    listIterator.add("foo");
+    listIterator.set("foo");
+    listIterator.remove();
+
+    collection.add("foo");
+    collection.remove("foo");
+    collection.clear();
+
+    list.add(0, "foo");
+    list.set(0, "foo");
+    list.remove(0);
+    list.sort(null);
+
+    genericList.add(0, "foo");
+    genericList.set(0, "foo");
+    genericList.remove(0);
+    genericList.sort(null);
+
+    genericList2.add(0, "foo");
+    genericList2.set(0, "foo");
+    genericList2.remove(0);
+    genericList2.sort(null);
+
+    set.add("foo");
+    set.remove("foo");
+
+    map.put("foo", "bar");
+    map.remove("foo");
+    map.clear();
+
+    mapEntry.setValue("bar");
+  }
+
+  public static void testMutability_subtypes(
+      CustomCollection<String> collection, CustomList<String> list, CustomMap<String, String> map) {
+    collection.add("foo");
+    collection.remove("foo");
+    collection.clear();
+
+    list.add(0, "foo");
+    list.set(0, "foo");
+    list.remove(0);
+    list.sort(null);
+
+    map.put("foo", "bar");
+    map.remove("foo");
+    map.clear();
   }
 
   public static class CustomCollection<T extends @Nullable Object> extends AbstractCollection<T> {

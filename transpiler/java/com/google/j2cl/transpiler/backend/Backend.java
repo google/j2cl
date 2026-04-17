@@ -177,6 +177,7 @@ import com.google.j2cl.transpiler.passes.OptimizeXplatLogger;
 import com.google.j2cl.transpiler.passes.OverrideKotlinAdditionalAbstractMethods;
 import com.google.j2cl.transpiler.passes.PreventSmartCasts;
 import com.google.j2cl.transpiler.passes.ProjectCapturesInLambdaParameters;
+import com.google.j2cl.transpiler.passes.PromoteMutability;
 import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullability;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityInOverrides;
@@ -731,6 +732,7 @@ public enum Backend {
           RemoveUnneededCastsJ2kt::new,
 
           // Passes that breaks the invariants for running ConversionContextVisitor related passes.
+          PromoteMutability::new,
           NormalizeVarargInvocationsJ2kt::new,
           NormalizeArrayCreationsJ2kt::new,
           OptimizeImplicitSuperCalls::new,

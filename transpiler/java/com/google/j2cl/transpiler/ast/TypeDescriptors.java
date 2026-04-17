@@ -101,6 +101,11 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaUtilListIterator;
 
   public DeclaredTypeDescriptor javaUtilMap;
+  public DeclaredTypeDescriptor javaUtilSet;
+
+  @QualifiedBinaryName("java.util.Map$Entry")
+  public DeclaredTypeDescriptor javaUtilMapEntry;
+
   public DeclaredTypeDescriptor javaUtilList;
   public DeclaredTypeDescriptor javaUtilObjects;
   public DeclaredTypeDescriptor javaUtilOptional;

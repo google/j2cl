@@ -52,34 +52,34 @@ open class Collections {
    collection.java_contains(
     Collections.generic<T>(),
    )
-   collection.java_remove(
+   collection.asMutableCollection().java_remove(
     Collections.generic<T>(),
    )
    collection.java_containsAll(
     Collections.genericCollection<T>(),
    )
-   collection.java_addAll(
+   collection.asMutableCollection().java_addAll(
     Collections.genericCollection<T>(),
    )
-   collection.java_removeAll(
+   collection.asMutableCollection().java_removeAll(
     Collections.genericCollection<T>(),
    )
-   collection.java_retainAll(
+   collection.asMutableCollection().java_retainAll(
     Collections.genericCollection<T>(),
    )
    collection.java_contains(
     Collections.mismatching() as Any?,
    )
-   collection.java_remove(
+   collection.asMutableCollection().java_remove(
     Collections.mismatching() as Any?,
    )
    collection.java_containsAll(
     Collections.mismatchingCollection(),
    )
-   collection.java_removeAll(
+   collection.asMutableCollection().java_removeAll(
     Collections.mismatchingCollection(),
    )
-   collection.java_retainAll(
+   collection.asMutableCollection().java_retainAll(
     Collections.mismatchingCollection(),
    )
   }
@@ -89,34 +89,34 @@ open class Collections {
    collection.java_contains(
     Collections.string(),
    )
-   collection.java_remove(
+   collection.asMutableCollection().java_remove(
     Collections.string(),
    )
    collection.java_containsAll(
     Collections.collectionOfString(),
    )
-   collection.java_addAll(
+   collection.asMutableCollection().java_addAll(
     Collections.collectionOfString(),
    )
-   collection.java_removeAll(
+   collection.asMutableCollection().java_removeAll(
     Collections.collectionOfString(),
    )
-   collection.java_retainAll(
+   collection.asMutableCollection().java_retainAll(
     Collections.collectionOfString(),
    )
    collection.java_contains(
     Collections.mismatching() as Any?,
    )
-   collection.java_remove(
+   collection.asMutableCollection().java_remove(
     Collections.mismatching() as Any?,
    )
    collection.java_containsAll(
     Collections.mismatchingCollection(),
    )
-   collection.java_removeAll(
+   collection.asMutableCollection().java_removeAll(
     Collections.mismatchingCollection(),
    )
-   collection.java_retainAll(
+   collection.asMutableCollection().java_retainAll(
     Collections.mismatchingCollection(),
    )
   }
@@ -160,7 +160,7 @@ open class Collections {
   
   @JvmStatic
   fun <T> testList_generic(list: MutableList<T>) {
-   list.java_addAll(
+   list.asMutableList().java_addAll(
     0,
     Collections.genericCollection<T>(),
    )
@@ -180,7 +180,7 @@ open class Collections {
   
   @JvmStatic
   fun testList_parameterized(list: MutableList<String>) {
-   list.java_addAll(
+   list.asMutableList().java_addAll(
     0,
     Collections.collectionOfString(),
    )
@@ -233,13 +233,13 @@ open class Collections {
    map.java_containsValue(
     Collections.generic<V>(),
    )
-   map.java_putAll(
+   map.asMutableMap().java_putAll(
     Collections.genericMap<K, V>(),
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.generic<K>(),
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.generic<K>(),
     Collections.generic<V>(),
    )
@@ -256,10 +256,10 @@ open class Collections {
    map.java_containsValue(
     Collections.mismatching() as Any?,
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.mismatching() as Any?,
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.mismatching() as Any?,
     Collections.mismatching() as Any?,
    )
@@ -280,13 +280,13 @@ open class Collections {
    map.java_containsValue(
     Collections.string(),
    )
-   map.java_putAll(
+   map.asMutableMap().java_putAll(
     Collections.mapOfString(),
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.string(),
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.string(),
     Collections.string(),
    )
@@ -303,10 +303,10 @@ open class Collections {
    map.java_containsValue(
     Collections.mismatching() as Any?,
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.mismatching() as Any?,
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.mismatching() as Any?,
     Collections.mismatching() as Any?,
    )

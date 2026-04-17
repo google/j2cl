@@ -40,6 +40,7 @@ import kotlin.collections.Map
 import kotlin.collections.MutableCollection
 import kotlin.collections.MutableIterator
 import kotlin.collections.MutableList
+import kotlin.collections.MutableListIterator
 import kotlin.collections.MutableMap
 import kotlin.collections.MutableMap.MutableEntry
 import kotlin.collections.MutableSet
@@ -52,34 +53,34 @@ open class Collections {
    collection.java_contains(
     Collections.generic<T>(),
    )
-   collection.java_remove(
+   collection.asMutableCollection().java_remove(
     Collections.generic<T>(),
    )
    collection.java_containsAll(
     Collections.genericCollection<T>(),
    )
-   collection.java_addAll(
+   collection.asMutableCollection().java_addAll(
     Collections.genericCollection<T>(),
    )
-   collection.java_removeAll(
+   collection.asMutableCollection().java_removeAll(
     Collections.genericCollection<T>(),
    )
-   collection.java_retainAll(
+   collection.asMutableCollection().java_retainAll(
     Collections.genericCollection<T>(),
    )
    collection.java_contains(
     Collections.mismatching() as Any?,
    )
-   collection.java_remove(
+   collection.asMutableCollection().java_remove(
     Collections.mismatching() as Any?,
    )
    collection.java_containsAll(
     Collections.mismatchingCollection(),
    )
-   collection.java_removeAll(
+   collection.asMutableCollection().java_removeAll(
     Collections.mismatchingCollection(),
    )
-   collection.java_retainAll(
+   collection.asMutableCollection().java_retainAll(
     Collections.mismatchingCollection(),
    )
   }
@@ -89,34 +90,34 @@ open class Collections {
    collection.java_contains(
     Collections.string(),
    )
-   collection.java_remove(
+   collection.asMutableCollection().java_remove(
     Collections.string(),
    )
    collection.java_containsAll(
     Collections.collectionOfString(),
    )
-   collection.java_addAll(
+   collection.asMutableCollection().java_addAll(
     Collections.collectionOfString(),
    )
-   collection.java_removeAll(
+   collection.asMutableCollection().java_removeAll(
     Collections.collectionOfString(),
    )
-   collection.java_retainAll(
+   collection.asMutableCollection().java_retainAll(
     Collections.collectionOfString(),
    )
    collection.java_contains(
     Collections.mismatching() as Any?,
    )
-   collection.java_remove(
+   collection.asMutableCollection().java_remove(
     Collections.mismatching() as Any?,
    )
    collection.java_containsAll(
     Collections.mismatchingCollection(),
    )
-   collection.java_removeAll(
+   collection.asMutableCollection().java_removeAll(
     Collections.mismatchingCollection(),
    )
-   collection.java_retainAll(
+   collection.asMutableCollection().java_retainAll(
     Collections.mismatchingCollection(),
    )
   }
@@ -160,7 +161,7 @@ open class Collections {
   
   @JvmStatic
   fun <T> testList_generic(list: MutableList<T>) {
-   list.java_addAll(
+   list.asMutableList().java_addAll(
     0,
     Collections.genericCollection<T>(),
    )
@@ -180,7 +181,7 @@ open class Collections {
   
   @JvmStatic
   fun testList_parameterized(list: MutableList<String>) {
-   list.java_addAll(
+   list.asMutableList().java_addAll(
     0,
     Collections.collectionOfString(),
    )
@@ -233,13 +234,13 @@ open class Collections {
    map.java_containsValue(
     Collections.generic<V>(),
    )
-   map.java_putAll(
+   map.asMutableMap().java_putAll(
     Collections.genericMap<K, V>(),
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.generic<K>(),
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.generic<K>(),
     Collections.generic<V>(),
    )
@@ -256,10 +257,10 @@ open class Collections {
    map.java_containsValue(
     Collections.mismatching() as Any?,
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.mismatching() as Any?,
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.mismatching() as Any?,
     Collections.mismatching() as Any?,
    )
@@ -280,13 +281,13 @@ open class Collections {
    map.java_containsValue(
     Collections.string(),
    )
-   map.java_putAll(
+   map.asMutableMap().java_putAll(
     Collections.mapOfString(),
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.string(),
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.string(),
     Collections.string(),
    )
@@ -303,10 +304,10 @@ open class Collections {
    map.java_containsValue(
     Collections.mismatching() as Any?,
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.mismatching() as Any?,
    )
-   map.java_remove(
+   map.asMutableMap().java_remove(
     Collections.mismatching() as Any?,
     Collections.mismatching() as Any?,
    )
@@ -357,6 +358,49 @@ open class Collections {
     Collections.mismatching() as Any?,
     Collections.mismatching() as Any?,
    )
+  }
+  
+  @JvmStatic
+  fun <L: MutableList<String>, M: L> testMutability(iterator: MutableIterator<String>, listIterator: MutableListIterator<String>, collection: MutableCollection<String>, list: MutableList<String>, genericList: L, genericList2: M, set: MutableSet<String>, map: MutableMap<String, String>, mapEntry: MutableEntry<String, String>) {
+   iterator.asMutableIterator().remove()
+   listIterator.asMutableListIterator().add("foo")
+   listIterator.asMutableListIterator().set("foo")
+   listIterator.asMutableListIterator().remove()
+   collection.asMutableCollection().add("foo")
+   collection.asMutableCollection().java_remove("foo")
+   collection.asMutableCollection().clear()
+   list.asMutableList().add(0, "foo")
+   list.asMutableList().set(0, "foo")
+   list.asMutableList().removeAt(0)
+   list.asMutableList().sort(null)
+   genericList.asMutableList().add(0, "foo")
+   genericList.asMutableList().set(0, "foo")
+   genericList.asMutableList().removeAt(0)
+   genericList.asMutableList().sort(null)
+   genericList2.asMutableList().add(0, "foo")
+   genericList2.asMutableList().set(0, "foo")
+   genericList2.asMutableList().removeAt(0)
+   genericList2.asMutableList().sort(null)
+   set.asMutableSet().add("foo")
+   set.asMutableSet().java_remove("foo")
+   map.asMutableMap().put("foo", "bar")
+   map.asMutableMap().java_remove("foo")
+   map.asMutableMap().clear()
+   mapEntry.asMutableEntry().setValue("bar")
+  }
+  
+  @JvmStatic
+  fun testMutability_subtypes(collection: CustomCollection<String>, list: CustomList<String>, map: CustomMap<String, String>) {
+   collection.add("foo")
+   collection.java_remove("foo")
+   collection.clear()
+   list.add(0, "foo")
+   list.set(0, "foo")
+   list.removeAt(0)
+   list.sort(null)
+   map.put("foo", "bar")
+   map.java_remove("foo")
+   map.clear()
   }
   
   @JvmStatic

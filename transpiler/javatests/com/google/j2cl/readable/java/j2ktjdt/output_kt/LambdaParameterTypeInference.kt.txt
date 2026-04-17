@@ -66,7 +66,7 @@ abstract class LambdaParameterTypeInference {
   
   @JvmStatic
   fun testInference(map: MutableMap<String, Int>) {
-   map.compute(
+   map.asMutableMap().compute(
     "",
     BiFunction { key: String, value: Int? ->
      return@BiFunction if (value == null) 1 else value!!.toInt() + 1

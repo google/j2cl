@@ -169,7 +169,7 @@ open class Main {
  internal open fun testFunctionExpressionTypeReplacement_pp_jsfunction() {
   val f: ParametricJsFunction<String?> = ParametricJsFunction { unused: String? ->
    val l: MutableList<MutableList<*>?> = ArrayList<MutableList<*>>() as MutableList<MutableList<*>?>
-   l.add(
+   l.asMutableList().add(
     ArrayList<String>(),
    )
   }
