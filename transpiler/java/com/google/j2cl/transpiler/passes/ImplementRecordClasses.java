@@ -26,7 +26,6 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BindingPattern;
-import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -143,33 +142,27 @@ public class ImplementRecordClasses extends NormalizationPass {
   private static void normalizeConstructors(Type type) {
     ImmutableList<FieldDescriptor> recordFields = getRecordFields(type.getTypeDescriptor());
 
-    // Do not mark the canonical constructor as synthetic. Implicit members are never marked as
-    // synthetic because the usage sites have to agree, and they don't have the information of
-    // whether they are synthesized or not.
     MethodDescriptor canonicalConstructorDescriptor =
-        MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-            .setConstructor(true)
-            .setParameterDescriptors(
+        type.getTypeDescriptor()
+            .getMethodDescriptor(
+                MethodDescriptor.CONSTRUCTOR_METHOD_NAME,
                 recordFields.stream()
-                    .map(
-                        f ->
-                            MethodDescriptor.ParameterDescriptor.newBuilder()
-                                .setTypeDescriptor(f.getTypeDescriptor())
-                                .build())
-                    .collect(toImmutableList()))
-            .build();
+                    .map(FieldDescriptor::getTypeDescriptor)
+                    .toArray(TypeDescriptor[]::new));
 
-    // Generate the canonical constructor if it does not exist.
-    // That is, given a record like `record Foo(String a, int b)`, we expect that a canonical
-    // constructor `Foo(String, int)` exists.
-    if (!type.containsMethod(canonicalConstructorDescriptor::isSameSignature)) {
-      type.addMember(
+    Method canonicalConstructor =
+        type.getConstructors().stream()
+            .filter(m -> m.getDescriptor().isSameSignature(canonicalConstructorDescriptor))
+            .findFirst()
+            .orElse(null);
+    if (canonicalConstructor == null) {
+      canonicalConstructor =
           Method.newBuilder()
               .setMethodDescriptor(canonicalConstructorDescriptor)
               .setParameters(createParameters(recordFields))
               .setSourcePosition(type.getSourcePosition())
-              .build());
+              .build();
+      type.addMember(canonicalConstructor);
     }
 
     // Add field assignments to compact constructors.
@@ -190,25 +183,34 @@ public class ImplementRecordClasses extends NormalizationPass {
     //     this.value = value;
     //   }
     // }
-    for (Method constructor : type.getConstructors()) {
-      if (!isCompactConstructor(constructor)) {
-        continue;
-      }
 
-      constructor.setBody(
-          Block.Builder.from(constructor.getBody())
-              .addStatements(
-                  Streams.zip(
-                          recordFields.stream(),
-                          constructor.getParameters().stream(),
-                          (field, parameter) ->
-                              BinaryExpression.Builder.asAssignmentTo(field)
-                                  .setRightOperand(parameter.createReference())
-                                  .build()
-                                  .makeStatement(constructor.getSourcePosition()))
-                      .collect(toImmutableList()))
-              .build());
+    if (!isCompactConstructor(canonicalConstructor)) {
+      return;
     }
+
+    canonicalConstructor
+        .getBody()
+        .getStatements()
+        .addAll(
+            createFieldAssignments(
+                recordFields,
+                canonicalConstructor.getParameters(),
+                canonicalConstructor.getSourcePosition()));
+  }
+
+  private static ImmutableList<Statement> createFieldAssignments(
+      ImmutableList<FieldDescriptor> recordFields,
+      List<Variable> parameters,
+      SourcePosition sourcePosition) {
+    return Streams.zip(
+            recordFields.stream(),
+            parameters.stream(),
+            (field, parameter) ->
+                BinaryExpression.Builder.asAssignmentTo(field)
+                    .setRightOperand(parameter.createReference())
+                    .build()
+                    .makeStatement(sourcePosition))
+        .collect(toImmutableList());
   }
 
   private static ImmutableList<Variable> createParameters(
@@ -355,22 +357,13 @@ public class ImplementRecordClasses extends NormalizationPass {
         .collect(toImmutableList());
   }
 
-  private static boolean isCompactConstructor(Method constructor) {
+  private static boolean isCompactConstructor(Method canonicalConstructor) {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        constructor.getDescriptor().getEnclosingTypeDescriptor();
+        canonicalConstructor.getDescriptor().getEnclosingTypeDescriptor();
     boolean[] isCompactConstructor = {true};
-    // A compact constructor is the canonical constructor (no `this()` call) and doesn't have any
-    // field assignments.
-    constructor.accept(
+    // A canonical constructor is compact if it doesn't have any field assignments.
+    canonicalConstructor.accept(
         new AbstractVisitor() {
-          @Override
-          public void exitMethodCall(MethodCall methodCall) {
-            if (methodCall.getTarget().isConstructor()
-                && methodCall.getTarget().isMemberOf(enclosingTypeDescriptor)) {
-              isCompactConstructor[0] = false;
-            }
-          }
-
           @Override
           public void exitBinaryExpression(BinaryExpression binaryExpression) {
             if (binaryExpression.isSimpleOrCompoundAssignment()
