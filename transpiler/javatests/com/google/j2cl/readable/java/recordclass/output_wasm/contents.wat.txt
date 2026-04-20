@@ -111,6 +111,18 @@
 (global $$class@recordclass.RecordClass.PublicRecordWithPublicFactory (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@recordclass.RecordClass.VarargsRecord (mut i32)
+ (i32.const 0)
+)
+(global $$class@recordclass.RecordClass.VarargsRecord (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@recordclass.RecordClass.VarargsRecordWithCustomAccessor (mut i32)
+ (i32.const 0)
+)
+(global $$class@recordclass.RecordClass.VarargsRecordWithCustomAccessor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@recordclass.RecordClass.1LocalRecord (mut i32)
  (i32.const 0)
 )
@@ -274,6 +286,22 @@
   (ref.func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.PublicRecordWithPublicFactory)
   (ref.func $m_hashCode__int@recordclass.RecordClass.PublicRecordWithPublicFactory)
   (ref.func $m_toString__java_lang_String@recordclass.RecordClass.PublicRecordWithPublicFactory)
+ )
+)
+(global $recordclass.RecordClass.VarargsRecord.vtable (ref $recordclass.RecordClass.VarargsRecord.vtable)
+ (struct.new $recordclass.RecordClass.VarargsRecord.vtable
+  (ref.func $$getClassImpl__java_lang_Class@recordclass.RecordClass.VarargsRecord)
+  (ref.func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.VarargsRecord)
+  (ref.func $m_hashCode__int@recordclass.RecordClass.VarargsRecord)
+  (ref.func $m_toString__java_lang_String@recordclass.RecordClass.VarargsRecord)
+ )
+)
+(global $recordclass.RecordClass.VarargsRecordWithCustomAccessor.vtable (ref $recordclass.RecordClass.VarargsRecordWithCustomAccessor.vtable)
+ (struct.new $recordclass.RecordClass.VarargsRecordWithCustomAccessor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
+  (ref.func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
+  (ref.func $m_hashCode__int@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
+  (ref.func $m_toString__java_lang_String@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
  )
 )
 (global $recordclass.RecordClass.1LocalRecord.vtable (ref $recordclass.RecordClass.1LocalRecord.vtable)
@@ -2747,6 +2775,291 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.PublicRecordWithPublicFactory)
+
+;;; VarargsRecord VarargsRecord.$create(String... values)
+(func $$create__arrayOf_java_lang_String@recordclass.RecordClass.VarargsRecord
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ (result (ref null $recordclass.RecordClass.VarargsRecord))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+ (local $$instance (ref null $recordclass.RecordClass.VarargsRecord))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (call $$clinit__void_<once>_@recordclass.RecordClass.VarargsRecord )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (local.set $$instance (struct.new $recordclass.RecordClass.VarargsRecord (global.get $recordclass.RecordClass.VarargsRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (call $$ctor__arrayOf_java_lang_String__void_$p_recordclass_RecordClass_VarargsRecord@recordclass.RecordClass.VarargsRecord (ref.as_non_null (local.get $$instance))(local.get $values))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void VarargsRecord.$ctor(String... values)
+(func $$ctor__arrayOf_java_lang_String__void_$p_recordclass_RecordClass_VarargsRecord@recordclass.RecordClass.VarargsRecord
+ (param $this (ref null $recordclass.RecordClass.VarargsRecord))
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (struct.set $recordclass.RecordClass.VarargsRecord $values@recordclass.RecordClass.VarargsRecord (local.get $this) (local.get $values))
+ )
+)
+
+;;; String[] VarargsRecord.values()
+(func $m_values__arrayOf_java_lang_String@recordclass.RecordClass.VarargsRecord
+ (type $function.m_values__arrayOf_java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+ (local $this (ref null $recordclass.RecordClass.VarargsRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecord) (local.get $this.untyped)))
+ (block
+  (return (struct.get $recordclass.RecordClass.VarargsRecord $values@recordclass.RecordClass.VarargsRecord (local.get $this)))
+ )
+)
+(elem declare func $m_values__arrayOf_java_lang_String@recordclass.RecordClass.VarargsRecord)
+
+;;; boolean VarargsRecord.equals(Object arg0)
+(func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.VarargsRecord
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+ (local $$other (ref null $recordclass.RecordClass.VarargsRecord))
+ (local $this (ref null $recordclass.RecordClass.VarargsRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecord) (local.get $this.untyped)))
+ (block
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.VarargsRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.VarargsRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
+   (then
+    (return (i32.const 0))
+   )
+  )
+  (return (call $m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.VarargsRecord $values@recordclass.RecordClass.VarargsRecord (local.get $this))))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.VarargsRecord $values@recordclass.RecordClass.VarargsRecord (local.get $$other))))))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.VarargsRecord)
+
+;;; int VarargsRecord.hashCode()
+(func $m_hashCode__int@recordclass.RecordClass.VarargsRecord
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+ (local $this (ref null $recordclass.RecordClass.VarargsRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecord) (local.get $this.untyped)))
+ (block
+  (return (call $m_hashCode__arrayOf_java_lang_Object__int@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.VarargsRecord $values@recordclass.RecordClass.VarargsRecord (local.get $this))))))
+ )
+)
+(elem declare func $m_hashCode__int@recordclass.RecordClass.VarargsRecord)
+
+;;; String VarargsRecord.toString()
+(func $m_toString__java_lang_String@recordclass.RecordClass.VarargsRecord
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+ (local $this (ref null $recordclass.RecordClass.VarargsRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecord) (local.get $this.untyped)))
+ (block
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.VarargsRecord $values@recordclass.RecordClass.VarargsRecord (local.get $this))))))))
+ )
+)
+(elem declare func $m_toString__java_lang_String@recordclass.RecordClass.VarargsRecord)
+
+;;; void VarargsRecord.$clinit()
+(func $$clinit__void_<once>_@recordclass.RecordClass.VarargsRecord
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (if (global.get $$class-initialized@recordclass.RecordClass.VarargsRecord)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (global.set $$class-initialized@recordclass.RecordClass.VarargsRecord (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:157:9
+  (call $$clinit__void_<once>_@java.lang.Record )
+ )
+)
+
+;;; Class<T> VarargsRecord.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.VarargsRecord
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@recordclass.RecordClass.VarargsRecord)))
+   (then
+    (return (global.get $$class@recordclass.RecordClass.VarargsRecord))
+   )
+  )
+  (global.set $$class@recordclass.RecordClass.VarargsRecord (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|recordclass....|__java_lang_String_<once>_@recordclass.RecordClass.VarargsRecord )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Record )))
+  (return (global.get $$class@recordclass.RecordClass.VarargsRecord))
+ )
+)
+
+;;; Class<?> VarargsRecord.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@recordclass.RecordClass.VarargsRecord
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $recordclass.RecordClass.VarargsRecord))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecord) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.VarargsRecord ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.VarargsRecord)
+
+;;; String[] VarargsRecordWithCustomAccessor.value()
+(func $m_value__arrayOf_java_lang_String@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ (type $function.m_value__arrayOf_java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:160:20
+ (local $this (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecordWithCustomAccessor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:161:6
+  (return (struct.get $recordclass.RecordClass.VarargsRecordWithCustomAccessor $value@recordclass.RecordClass.VarargsRecordWithCustomAccessor (local.get $this)))
+ )
+)
+(elem declare func $m_value__arrayOf_java_lang_String@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
+
+;;; VarargsRecordWithCustomAccessor VarargsRecordWithCustomAccessor.$create(String... value)
+(func $$create__arrayOf_java_lang_String@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ (param $value (ref null $javaemul.internal.WasmArray.OfObject))
+ (result (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+ (local $$instance (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (call $$clinit__void_<once>_@recordclass.RecordClass.VarargsRecordWithCustomAccessor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (local.set $$instance (struct.new $recordclass.RecordClass.VarargsRecordWithCustomAccessor (global.get $recordclass.RecordClass.VarargsRecordWithCustomAccessor.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (call $$ctor__arrayOf_java_lang_String__void_$p_recordclass_RecordClass_VarargsRecordWithCustomAccessor@recordclass.RecordClass.VarargsRecordWithCustomAccessor (ref.as_non_null (local.get $$instance))(local.get $value))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void VarargsRecordWithCustomAccessor.$ctor(String... value)
+(func $$ctor__arrayOf_java_lang_String__void_$p_recordclass_RecordClass_VarargsRecordWithCustomAccessor@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ (param $this (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ (param $value (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (struct.set $recordclass.RecordClass.VarargsRecordWithCustomAccessor $value@recordclass.RecordClass.VarargsRecordWithCustomAccessor (local.get $this) (local.get $value))
+ )
+)
+
+;;; boolean VarargsRecordWithCustomAccessor.equals(Object arg0)
+(func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+ (local $$other (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ (local $this (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecordWithCustomAccessor) (local.get $this.untyped)))
+ (block
+  (if (i32.eqz (if (result i32) (ref.test (ref $recordclass.RecordClass.VarargsRecordWithCustomAccessor) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
+   (then
+    (return (i32.const 0))
+   )
+  )
+  (return (call $m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.VarargsRecordWithCustomAccessor $value@recordclass.RecordClass.VarargsRecordWithCustomAccessor (local.get $this))))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.VarargsRecordWithCustomAccessor $value@recordclass.RecordClass.VarargsRecordWithCustomAccessor (local.get $$other))))))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
+
+;;; int VarargsRecordWithCustomAccessor.hashCode()
+(func $m_hashCode__int@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+ (local $this (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecordWithCustomAccessor) (local.get $this.untyped)))
+ (block
+  (return (call $m_hashCode__arrayOf_java_lang_Object__int@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.VarargsRecordWithCustomAccessor $value@recordclass.RecordClass.VarargsRecordWithCustomAccessor (local.get $this))))))
+ )
+)
+(elem declare func $m_hashCode__int@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
+
+;;; String VarargsRecordWithCustomAccessor.toString()
+(func $m_toString__java_lang_String@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+ (local $this (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecordWithCustomAccessor) (local.get $this.untyped)))
+ (block
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $recordclass.RecordClass.VarargsRecordWithCustomAccessor $value@recordclass.RecordClass.VarargsRecordWithCustomAccessor (local.get $this))))))))
+ )
+)
+(elem declare func $m_toString__java_lang_String@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
+
+;;; void VarargsRecordWithCustomAccessor.$clinit()
+(func $$clinit__void_<once>_@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (if (global.get $$class-initialized@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (global.set $$class-initialized@recordclass.RecordClass.VarargsRecordWithCustomAccessor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:159:9
+  (call $$clinit__void_<once>_@java.lang.Record )
+ )
+)
+
+;;; Class<T> VarargsRecordWithCustomAccessor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@recordclass.RecordClass.VarargsRecordWithCustomAccessor)))
+   (then
+    (return (global.get $$class@recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+   )
+  )
+  (global.set $$class@recordclass.RecordClass.VarargsRecordWithCustomAccessor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|recordclass....|__java_lang_String_<once>_@recordclass.RecordClass.VarargsRecordWithCustomAccessor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Record )))
+  (return (global.get $$class@recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ )
+)
+
+;;; Class<?> VarargsRecordWithCustomAccessor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@recordclass.RecordClass.VarargsRecordWithCustomAccessor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $recordclass.RecordClass.VarargsRecordWithCustomAccessor))
+ (local.set $this (ref.cast (ref $recordclass.RecordClass.VarargsRecordWithCustomAccessor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@recordclass.RecordClass.VarargsRecordWithCustomAccessor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@recordclass.RecordClass.VarargsRecordWithCustomAccessor)
 
 ;;; LocalRecord LocalRecord.$create(int value)
 (func $$create__int@recordclass.RecordClass.1LocalRecord

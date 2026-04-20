@@ -96,6 +96,17 @@ public class Main {
     assertTrue(ar2.equals(ar3));
     assertTrue(ar3.equals(ar2));
 
+    // TODO(b/504162357): Uncomment once the bug is fixed.
+    // Varargs are the same as arrays.
+    // VarargsRecord vr0 = new VarargsRecord(1, 2);
+    // VarargsRecord vr1 = new VarargsRecord(1, 2);
+    // assertFalse(vr0.equals(vr1));
+    // assertFalse(vr1.equals(vr0));
+    // VarargsRecord vr2 = new VarargsRecord(arrayValue);
+    // VarargsRecord vr3 = new VarargsRecord(arrayValue);
+    // assertTrue(vr2.equals(vr3));
+    // assertTrue(vr3.equals(vr2));
+
     // Object values call `equals()` (reference equality unless the type overrides it).
     ObjectRecord objr0 = new ObjectRecord(new Object());
     ObjectRecord objr1 = new ObjectRecord(new Object());
@@ -127,6 +138,11 @@ public class Main {
     ArrayRecord ar1 = new ArrayRecord(arrayValue);
     assertEquals(ar0.hashCode(), ar1.hashCode());
 
+    // TODO(b/504162357): Uncomment once the bug is fixed.
+    // VarargsRecord vr0 = new VarargsRecord(arrayValue);
+    // VarargsRecord vr1 = new VarargsRecord(arrayValue);
+    // assertEquals(vr0.hashCode(), vr1.hashCode());
+
     EmptyRecord er0 = new EmptyRecord();
     EmptyRecord er1 = new EmptyRecord();
     assertEquals(er0.hashCode(), er1.hashCode());
@@ -145,6 +161,10 @@ public class Main {
     int[] arrayValue = new int[] {1, 2};
     ArrayRecord ar0 = new ArrayRecord(arrayValue);
     assertTrue(ar0.toString().contains(arrayValue.toString()));
+
+    // TODO(b/504162357): Uncomment once the bug is fixed.
+    // VarargsRecord vr0 = new VarargsRecord(arrayValue);
+    // assertTrue(vr0.toString().contains(arrayValue.toString()));
   }
 
   static record SimpleRecord(int value) {}
@@ -155,6 +175,9 @@ public class Main {
 
   @SuppressWarnings("ArrayRecordComponent")
   static record ArrayRecord(int[] value) {}
+
+  @SuppressWarnings("ArrayRecordComponent")
+  static record VarargsRecord(int... value) {}
 
   static record ObjectRecord(Object value) {}
 

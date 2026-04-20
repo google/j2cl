@@ -1,0 +1,51 @@
+goog.module('recordclass.RecordClass.VarargsRecordWithCustomAccessor$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class VarargsRecordWithCustomAccessor extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Array<?string>} @nodts*/
+  this.f_value__recordclass_RecordClass_VarargsRecordWithCustomAccessor_;
+ }
+ /** @nodts @return {Array<?string>} */
+ m_value__arrayOf_java_lang_String() {
+  return this.f_value__recordclass_RecordClass_VarargsRecordWithCustomAccessor_;
+ }
+ /** @nodts @return {!VarargsRecordWithCustomAccessor} */
+ static $create__arrayOf_java_lang_String(/** Array<?string> */ value) {
+  VarargsRecordWithCustomAccessor.$clinit();
+  let $instance = new VarargsRecordWithCustomAccessor();
+  $instance.$ctor__recordclass_RecordClass_VarargsRecordWithCustomAccessor__arrayOf_java_lang_String__void(value);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_VarargsRecordWithCustomAccessor__arrayOf_java_lang_String__void(/** Array<?string> */ value) {
+  this.$ctor__java_lang_Record__void();
+  this.f_value__recordclass_RecordClass_VarargsRecordWithCustomAccessor_ = value;
+  $J2CL_PRESERVE$(...this.f_value__recordclass_RecordClass_VarargsRecordWithCustomAccessor_);
+ }
+ /** @nodts */
+ static $clinit() {
+  VarargsRecordWithCustomAccessor.$clinit = () =>{};
+  VarargsRecordWithCustomAccessor.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof VarargsRecordWithCustomAccessor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(VarargsRecordWithCustomAccessor, 'recordclass.RecordClass$VarargsRecordWithCustomAccessor');
+
+exports = VarargsRecordWithCustomAccessor;
+
+//# sourceMappingURL=RecordClass$VarargsRecordWithCustomAccessor.js.map

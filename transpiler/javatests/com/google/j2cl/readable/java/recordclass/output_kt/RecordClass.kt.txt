@@ -21,6 +21,7 @@ package recordclass
 import javaemul.lang.*
 import java.util.Arrays
 import kotlin.Any
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.IntArray
@@ -829,6 +830,80 @@ open class RecordClass {
   override fun toString(): String {
    return this.getClass().getName() + Arrays.toString(
     arrayOf<Any?>(),
+   )
+  }
+ }
+ 
+ class VarargsRecord {
+  private val values: Array<String?>?
+  
+  internal constructor(vararg values: String?) {
+   val values_1: Array<String?>? = values as Array<String?>?
+   this.values = values_1
+  }
+  
+  fun values(): Array<String?>? {
+   return this.values
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: VarargsRecord? = null
+   if (!(arg0 is VarargsRecord && run {
+    ___other = arg0 as VarargsRecord?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.values),
+    arrayOf<Any?>(___other!!.values),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.values),
+   )
+  }
+  
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.values),
+   )
+  }
+ }
+ 
+ class VarargsRecordWithCustomAccessor {
+  private val value: Array<String?>?
+  
+  fun value(): Array<String?>? {
+   return this.value
+  }
+  
+  internal constructor(vararg value: String?) {
+   val value_1: Array<String?>? = value as Array<String?>?
+   this.value = value_1
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: VarargsRecordWithCustomAccessor? = null
+   if (!(arg0 is VarargsRecordWithCustomAccessor && run {
+    ___other = arg0 as VarargsRecordWithCustomAccessor?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.value),
+    arrayOf<Any?>(___other!!.value),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.value),
+   )
+  }
+  
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.value),
    )
   }
  }

@@ -1,0 +1,73 @@
+// Generated from "j2ktnotpassing/RecordClass.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import java.util.Arrays
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.arrayOf
+import kotlin.run
+
+open class RecordClass internal constructor() {
+ internal open fun testVarargsRecord_pp_j2ktnotpassing() {
+  val r: VarargsRecord = VarargsRecord("a", "b")
+ }
+ 
+ class VarargsRecord {
+  private val values: Array<String?>?
+  
+  internal constructor(vararg values: String?) {
+   val values_1: Array<String?>? = values as Array<String?>?
+   this.values = values_1
+  }
+  
+  fun values(): Array<String?>? {
+   return this.values
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: VarargsRecord? = null
+   if (!(arg0 is VarargsRecord && run {
+    ___other = arg0 as VarargsRecord?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.values),
+    arrayOf<Any?>(___other!!.values),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.values),
+   )
+  }
+  
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.values),
+   )
+  }
+ }
+}

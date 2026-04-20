@@ -1,0 +1,51 @@
+goog.module('recordclass.RecordClass.VarargsRecord$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class VarargsRecord extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Array<?string>} @nodts*/
+  this.f_values__recordclass_RecordClass_VarargsRecord_;
+ }
+ /** @nodts @return {!VarargsRecord} */
+ static $create__arrayOf_java_lang_String(/** Array<?string> */ values) {
+  VarargsRecord.$clinit();
+  let $instance = new VarargsRecord();
+  $instance.$ctor__recordclass_RecordClass_VarargsRecord__arrayOf_java_lang_String__void(values);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_VarargsRecord__arrayOf_java_lang_String__void(/** Array<?string> */ values) {
+  this.$ctor__java_lang_Record__void();
+  this.f_values__recordclass_RecordClass_VarargsRecord_ = values;
+  $J2CL_PRESERVE$(...this.f_values__recordclass_RecordClass_VarargsRecord_);
+ }
+ /** @nodts @return {Array<?string>} */
+ m_values__arrayOf_java_lang_String() {
+  return this.f_values__recordclass_RecordClass_VarargsRecord_;
+ }
+ /** @nodts */
+ static $clinit() {
+  VarargsRecord.$clinit = () =>{};
+  VarargsRecord.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof VarargsRecord;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(VarargsRecord, 'recordclass.RecordClass$VarargsRecord');
+
+exports = VarargsRecord;
+
+//# sourceMappingURL=RecordClass$VarargsRecord.js.map

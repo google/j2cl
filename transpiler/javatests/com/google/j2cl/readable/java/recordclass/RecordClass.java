@@ -153,4 +153,12 @@ public class RecordClass {
     var genericRecord = new GenericRecord<>("abc");
     boolean b2 = genericRecord instanceof GenericRecord<String>(String s);
   }
+
+  record VarargsRecord(String... values) {}
+
+  record VarargsRecordWithCustomAccessor(String... value) {
+    public String[] value() {
+      return value;
+    }
+  }
 }
