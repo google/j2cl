@@ -35,6 +35,7 @@ import com.sun.source.tree.VariableTree;
 import com.sun.source.util.DocSourcePositions;
 import com.sun.tools.javac.api.JavacTrees;
 import com.sun.tools.javac.file.JavacFileManager;
+import com.sun.tools.javac.parser.JavacParser;
 import com.sun.tools.javac.parser.ParserFactory;
 import com.sun.tools.javac.tree.JCTree.JCCompilationUnit;
 import com.sun.tools.javac.util.Context;
@@ -113,8 +114,8 @@ public final class GwtIncompatibleStripper {
     Log.instance(context).useSource(fileObject);
 
     JCCompilationUnit compilationUnit =
-        ParserFactory.instance(context)
-            .newParser(
+        newParser(
+                ParserFactory.instance(context),
                 fileContent,
                 /* keepDocComments= */ true,
                 /* keepEndPos= */ true,
@@ -188,6 +189,31 @@ public final class GwtIncompatibleStripper {
     newFileContent.append(fileContent, currentPosition, fileContent.length());
 
     return newFileContent.toString();
+  }
+
+  private static final boolean IS_END_POS_TABLE_PRESENT = getIsEndPosTablePresent();
+
+  private static boolean getIsEndPosTablePresent() {
+    try {
+      // JDK versions before https://bugs.openjdk.org/browse/JDK-8372948
+      Class.forName("com.sun.tools.javac.tree.EndPosTable");
+      return true;
+    } catch (ClassNotFoundException e) {
+      return false;
+    }
+  }
+
+  private static JavacParser newParser(
+      ParserFactory parserFactory,
+      CharSequence source,
+      boolean keepDocComments,
+      boolean keepEndPos,
+      boolean keepLineMap) {
+    if (IS_END_POS_TABLE_PRESENT) {
+      return parserFactory.newParser(source, keepDocComments, keepEndPos, keepLineMap);
+    }
+    return parserFactory.newParser(
+        source, keepDocComments, keepLineMap, /* parseModuleInfo */ false);
   }
 
   private static int getStartPosition(
