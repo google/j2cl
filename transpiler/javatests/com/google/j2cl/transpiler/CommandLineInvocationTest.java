@@ -382,7 +382,9 @@ public class CommandLineInvocationTest extends TestCase {
             "test/Foo.java.js",
             "test/Foo.impl.java.js",
             "test/Bar.java.js",
-            "test/Bar.impl.java.js")
+            "test/Bar.impl.java.js",
+            "test/Foo.java",
+            "test/Bar.java")
         .assertOutputFilesDoNotExist("some/thing/Bogus.js");
 
     // Test transpilation of java file without java package
@@ -390,7 +392,7 @@ public class CommandLineInvocationTest extends TestCase {
         .setOutputPath(Files.createTempDirectory("outputdir"))
         .addCompilationUnit("Foo", "public class Foo {}")
         .assertTranspileSucceeds()
-        .assertOutputFilesExist("Foo.java.js", "Foo.impl.java.js");
+        .assertOutputFilesExist("Foo.java.js", "Foo.impl.java.js", "Foo.java");
   }
 
   public void testOutputsToZipFile() throws IOException {
@@ -418,6 +420,8 @@ public class CommandLineInvocationTest extends TestCase {
       assertNotNull(zipFile.getEntry("test/Foo.impl.java.js"));
       assertNotNull(zipFile.getEntry("test/Bar.java.js"));
       assertNotNull(zipFile.getEntry("test/Bar.impl.java.js"));
+      assertNotNull(zipFile.getEntry("test/Foo.java"));
+      assertNotNull(zipFile.getEntry("test/Bar.java"));
       assertNull(zipFile.getEntry("some/thing/Bogus.js"));
     }
   }
