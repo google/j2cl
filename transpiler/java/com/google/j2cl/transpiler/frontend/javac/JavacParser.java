@@ -193,7 +193,14 @@ public class JavacParser {
 
     ImmutableList<String> javacOptions = options.getJavacOptions();
     for (int i = 0; i < javacOptions.size(); i++) {
-      JavacOption parsedOption = parseJavacOption(javacOptions.get(i));
+      String javacOption = javacOptions.get(i);
+      if (javacOption.startsWith("-A")) {
+        // Direcly forward APT options; these are owned by processors (not javac or J2CL).
+        builder.add(javacOption);
+        continue;
+      }
+
+      JavacOption parsedOption = parseJavacOption(javacOption);
       if (ALLOWED_JAVAC_OPTIONS.contains(parsedOption.key())) {
         builder.add(parsedOption.key());
         if (parsedOption.value() != null) {
