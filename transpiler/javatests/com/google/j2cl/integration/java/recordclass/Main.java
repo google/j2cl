@@ -28,6 +28,7 @@ import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import com.google.j2cl.integration.testing.TestUtils;
+import java.util.Arrays;
 
 public class Main {
 
@@ -96,16 +97,25 @@ public class Main {
     assertTrue(ar2.equals(ar3));
     assertTrue(ar3.equals(ar2));
 
-    // TODO(b/504162357): Uncomment once the bug is fixed.
     // Varargs are the same as arrays.
-    // VarargsRecord vr0 = new VarargsRecord(1, 2);
-    // VarargsRecord vr1 = new VarargsRecord(1, 2);
-    // assertFalse(vr0.equals(vr1));
-    // assertFalse(vr1.equals(vr0));
-    // VarargsRecord vr2 = new VarargsRecord(arrayValue);
-    // VarargsRecord vr3 = new VarargsRecord(arrayValue);
-    // assertTrue(vr2.equals(vr3));
-    // assertTrue(vr3.equals(vr2));
+    VarargsRecord vr0 = new VarargsRecord(1, 2);
+    VarargsRecord vr1 = new VarargsRecord(1, 2);
+    assertFalse(vr0.equals(vr1));
+    assertFalse(vr1.equals(vr0));
+
+    // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
+    // so reference equality when passing the same array to varargs does not hold in J2KT.
+    if (!isJ2Kt()) {
+      VarargsRecord vr2 = new VarargsRecord(arrayValue);
+      VarargsRecord vr3 = new VarargsRecord(arrayValue);
+      assertTrue(vr2.equals(vr3));
+      assertTrue(vr3.equals(vr2));
+    }
+
+    // But value equality is the same as arrays.
+    VarargsRecord vr4 = new VarargsRecord(new int[] {1, 2});
+    VarargsRecord vr5 = new VarargsRecord(new int[] {1, 2});
+    assertTrue(Arrays.equals(vr4.value(), vr5.value()));
 
     // Object values call `equals()` (reference equality unless the type overrides it).
     ObjectRecord objr0 = new ObjectRecord(new Object());
@@ -138,10 +148,13 @@ public class Main {
     ArrayRecord ar1 = new ArrayRecord(arrayValue);
     assertEquals(ar0.hashCode(), ar1.hashCode());
 
-    // TODO(b/504162357): Uncomment once the bug is fixed.
-    // VarargsRecord vr0 = new VarargsRecord(arrayValue);
-    // VarargsRecord vr1 = new VarargsRecord(arrayValue);
-    // assertEquals(vr0.hashCode(), vr1.hashCode());
+    // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
+    // so reference equality when passing the same array to varargs does not hold in J2KT.
+    if (!isJ2Kt()) {
+      VarargsRecord vr0 = new VarargsRecord(arrayValue);
+      VarargsRecord vr1 = new VarargsRecord(arrayValue);
+      assertEquals(vr0.hashCode(), vr1.hashCode());
+    }
 
     EmptyRecord er0 = new EmptyRecord();
     EmptyRecord er1 = new EmptyRecord();
@@ -162,9 +175,12 @@ public class Main {
     ArrayRecord ar0 = new ArrayRecord(arrayValue);
     assertTrue(ar0.toString().contains(arrayValue.toString()));
 
-    // TODO(b/504162357): Uncomment once the bug is fixed.
-    // VarargsRecord vr0 = new VarargsRecord(arrayValue);
-    // assertTrue(vr0.toString().contains(arrayValue.toString()));
+    // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
+    // so reference equality when passing the same array to varargs does not hold in J2KT.
+    if (!isJ2Kt()) {
+      VarargsRecord vr0 = new VarargsRecord(arrayValue);
+      assertTrue(vr0.toString().contains(arrayValue.toString()));
+    }
   }
 
   static record SimpleRecord(int value) {}
