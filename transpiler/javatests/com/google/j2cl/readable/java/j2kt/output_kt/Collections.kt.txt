@@ -404,6 +404,77 @@ open class Collections {
   }
   
   @JvmStatic
+  fun testLowerBoundAssignment(collection: MutableCollection<String>, list: MutableList<String>, set: MutableSet<String>, map: MutableMap<String, String>, mapEntry: MutableEntry<String, String>, customCollection: CustomCollection<String>) {
+   var lowerC: MutableCollection<in String> = collection.asMutableCollection()
+   var lowerL: MutableList<in String> = list.asMutableList()
+   var lowerS: MutableSet<in String> = set.asMutableSet()
+   var lowerM: MutableMap<in String, in String> = map.asMutableMap()
+   var lowerMe: MutableEntry<String, in String> = mapEntry.asMutableEntry()
+   val lowerC2: MutableCollection<in String> = customCollection
+   val lowerC3: MutableCollection<in String> = lowerC
+   lowerC = collection.asMutableCollection()
+   lowerL = list.asMutableList()
+   lowerS = set.asMutableSet()
+   lowerM = map.asMutableMap()
+   lowerMe = mapEntry.asMutableEntry()
+   Collections.passLowerBoundCollection(
+    collection.asMutableCollection(),
+   )
+   Collections.passLowerBoundList(
+    list.asMutableList(),
+   )
+   Collections.passLowerBoundSet(
+    set.asMutableSet(),
+   )
+   Collections.passLowerBoundMap(
+    map.asMutableMap(),
+   )
+   Collections.passLowerBoundMapEntry(
+    mapEntry.asMutableEntry(),
+   )
+  }
+  
+  @JvmStatic
+  private fun passLowerBoundCollection(collection: MutableCollection<in String>) {}
+  
+  @JvmStatic
+  private fun passLowerBoundList(list: MutableList<in String>) {}
+  
+  @JvmStatic
+  private fun passLowerBoundSet(set: MutableSet<in String>) {}
+  
+  @JvmStatic
+  private fun passLowerBoundMap(map: MutableMap<in String, in String>) {}
+  
+  @JvmStatic
+  private fun passLowerBoundMapEntry(mapEntry: MutableEntry<String, in String>) {}
+  
+  @JvmStatic
+  private fun returnLowerBoundCollection(collection: MutableCollection<String>): MutableCollection<in String> {
+   return collection.asMutableCollection()
+  }
+  
+  @JvmStatic
+  private fun returnLowerBoundList(list: MutableList<String>): MutableList<in String> {
+   return list.asMutableList()
+  }
+  
+  @JvmStatic
+  private fun returnLowerBoundSet(set: MutableSet<String>): MutableSet<in String> {
+   return set.asMutableSet()
+  }
+  
+  @JvmStatic
+  private fun returnLowerBoundMap(map: MutableMap<String, String>): MutableMap<in String, in String> {
+   return map.asMutableMap()
+  }
+  
+  @JvmStatic
+  private fun returnLowerBoundMapEntry(mapEntry: MutableEntry<String, String>): MutableEntry<String, in String> {
+   return mapEntry.asMutableEntry()
+  }
+  
+  @JvmStatic
   private fun <T> convert(`object`: T): T {
    return `object`
   }

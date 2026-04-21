@@ -214,6 +214,67 @@ public class Collections {
     map.clear();
   }
 
+  public static void testLowerBoundAssignment(
+      Collection<String> collection,
+      List<String> list,
+      Set<String> set,
+      Map<String, String> map,
+      Map.Entry<String, String> mapEntry,
+      CustomCollection<String> customCollection) {
+    Collection<? super String> lowerC = collection;
+    List<? super String> lowerL = list;
+    Set<? super String> lowerS = set;
+    Map<? super String, ? super String> lowerM = map;
+    Map.Entry<String, ? super String> lowerMe = mapEntry;
+
+    Collection<? super String> lowerC2 = customCollection;
+    Collection<? super String> lowerC3 = lowerC;
+
+    lowerC = collection;
+    lowerL = list;
+    lowerS = set;
+    lowerM = map;
+    lowerMe = mapEntry;
+
+    passLowerBoundCollection(collection);
+    passLowerBoundList(list);
+    passLowerBoundSet(set);
+    passLowerBoundMap(map);
+    passLowerBoundMapEntry(mapEntry);
+  }
+
+  private static void passLowerBoundCollection(Collection<? super String> collection) {}
+
+  private static void passLowerBoundList(List<? super String> list) {}
+
+  private static void passLowerBoundSet(Set<? super String> set) {}
+
+  private static void passLowerBoundMap(Map<? super String, ? super String> map) {}
+
+  private static void passLowerBoundMapEntry(Map.Entry<String, ? super String> mapEntry) {}
+
+  private static Collection<? super String> returnLowerBoundCollection(
+      Collection<String> collection) {
+    return collection;
+  }
+
+  private static List<? super String> returnLowerBoundList(List<String> list) {
+    return list;
+  }
+
+  private static Set<? super String> returnLowerBoundSet(Set<String> set) {
+    return set;
+  }
+
+  private static Map<? super String, ? super String> returnLowerBoundMap(Map<String, String> map) {
+    return map;
+  }
+
+  private static Map.Entry<String, ? super String> returnLowerBoundMapEntry(
+      Map.Entry<String, String> mapEntry) {
+    return mapEntry;
+  }
+
   public static class CustomCollection<T extends @Nullable Object> extends AbstractCollection<T> {
     @Override
     public Iterator<T> iterator() {

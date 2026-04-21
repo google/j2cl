@@ -21,6 +21,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
@@ -28,7 +29,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
-import java.util.Map;
+import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 import javax.annotation.Nullable;
 
 /**
@@ -148,6 +149,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     rewriteMutationCalls(compilationUnit);
+    rewriteLowerBoundedCollectionExpressions(compilationUnit);
   }
 
   private void rewriteMutationCalls(CompilationUnit compilationUnit) {
@@ -166,11 +168,6 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
               // Qualifier type was already mutable, no need to insert asMutable() call.
               return methodCall;
             }
-
-            Map<TypeVariable, TypeDescriptor> parameterization =
-                targetMethod.getEnclosingTypeDescriptor().getParameterization();
-
-            asMutableMethod = asMutableMethod.specializeTypeVariables(parameterization);
 
             MethodCall asMutableCall =
                 MethodCall.Builder.from(asMutableMethod)
@@ -236,6 +233,47 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
         .anyMatch(mutationMethods::contains);
   }
 
+  private void rewriteLowerBoundedCollectionExpressions(CompilationUnit compilationUnit) {
+
+    // java.util.List will generally be translated as kotlin.collection.List. But contravariant
+    // lists must be MutableList in Kotlin, so the Kotlin transpiler backend will render those
+    // as mutable.
+    //
+    // This pass ensure that code like the following results in legal Kotlin code:
+    // List<Number> l1;
+    // List<? super Integer> l2 = l1;
+    //
+    // Namely
+    // val l1: List<Number>
+    // val l2: MutableList<in Int> = l1.asMutableList()
+    compilationUnit.accept(
+        new ConversionContextVisitor(
+            new ContextRewriter() {
+              @Override
+              public Expression rewriteTypeConversionContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
+                  Expression expression) {
+
+                if (!isMutableDueToVariance(declaredTypeDescriptor)) {
+                  return expression;
+                }
+
+                TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
+                if (isMutableDueToVariance(typeDescriptor)) {
+                  return expression;
+                }
+
+                MethodDescriptor asMutableMethod = getAsMutableMethodIfReadonly(typeDescriptor);
+                if (asMutableMethod == null) {
+                  return expression;
+                }
+
+                return MethodCall.Builder.from(asMutableMethod).setQualifier(expression).build();
+              }
+            }));
+  }
+
   /**
    * Returns the asMutable() method for a type if it is a collection base interface that will be
    * translated as a readonly Kotlin type, null otherwise.
@@ -256,7 +294,12 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
       return null;
     }
     if (type instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
-      return asMutableMethodsByTypeDeclaration.get(declaredTypeDescriptor.getTypeDeclaration());
+      MethodDescriptor asMutableMethod =
+          asMutableMethodsByTypeDeclaration.get(declaredTypeDescriptor.getTypeDeclaration());
+      if (asMutableMethod != null) {
+        return asMutableMethod.specializeTypeVariables(
+            declaredTypeDescriptor.getParameterization());
+      }
     }
     return null;
   }
