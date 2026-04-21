@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
+import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.JsConstructorReference;
@@ -53,6 +54,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor.TypeReplacer;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -243,16 +245,42 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     ImmutableMap<String, Member> movedMembersByMangledName =
         Maps.uniqueIndex(movedMembers, Member::getMangledName);
 
+    LinkedHashMap<Member, Member> oldMemberByNewMember = new LinkedHashMap<>();
+
     to.getMembers()
         .removeIf(
             m -> {
               if (movedMembersByMangledName.containsKey(m.getMangledName())) {
                 // We should never end up replacing a non-empty method.
                 checkState(!m.isMethod() || ((Method) m).isEmpty(), m);
+                oldMemberByNewMember.put(movedMembersByMangledName.get(m.getMangledName()), m);
                 return true;
               }
               return false;
             });
+
+    // Update the source positions of the moved members to match the source positions of the
+    // members they replace. This ensures that users are brought to the original declaration of
+    // member rather than the generated member. We do _not_ update other positions, like the body of
+    // a method, as stepping into that code should bring you to the generated code.
+    movedMembers.replaceAll(
+        m -> {
+          Member oldMember = oldMemberByNewMember.get(m);
+          if (oldMember == null) {
+            return m;
+          }
+          return switch (m) {
+            case Method newMethod ->
+                Method.Builder.from(newMethod)
+                    .setSourcePosition(oldMember.getSourcePosition())
+                    .build();
+            case Field newField ->
+                Field.Builder.from(newField)
+                    .setSourcePosition(oldMember.getSourcePosition())
+                    .build();
+            default -> m;
+          };
+        });
 
     // Note that the adding to end here matters since later preserveFields will assume last
     // constructor is the one that is coming from AutoValue implementation class.
@@ -457,7 +485,9 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     return Iterables.filter(t.getDeclaredFieldDescriptors(), FieldDescriptor::isInstanceMember);
   }
 
-  /** @return mask summarizes the removed methods. */
+  /**
+   * @return mask summarizes the removed methods.
+   */
   private static int removeJavaLangObjectMethods(Type type) {
     Set<Method> generatedObjectMethods = new HashSet<>();
     int mask = 0;
