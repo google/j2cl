@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 
 /** Class representing a library, which is the collection of compilation units compiled together. */
 @Visitable
-public class Library extends Node {
+public class Library extends Node implements AutoCloseable {
   @Visitable List<CompilationUnit> compilationUnits;
   private final DisposableListener disposableListener;
 
@@ -38,12 +38,6 @@ public class Library extends Node {
 
   public List<CompilationUnit> getCompilationUnits() {
     return compilationUnits;
-  }
-
-  public void dispose() {
-    if (disposableListener != null) {
-      disposableListener.onDispose();
-    }
   }
 
   public Stream<Type> streamTypes() {
@@ -70,6 +64,13 @@ public class Library extends Node {
 
   public static Builder newBuilder() {
     return new Builder();
+  }
+
+  @Override
+  public void close() {
+    if (disposableListener != null) {
+      disposableListener.onDispose();
+    }
   }
 
   /** Builder for Library. */

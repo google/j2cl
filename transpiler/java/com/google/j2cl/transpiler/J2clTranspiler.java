@@ -59,11 +59,10 @@ class J2clTranspiler {
       MemberDescriptor.setClosureManglingPatterns();
     }
 
-    Library library =
+    try (Library library =
         options.getSources().isEmpty()
             ? Library.newEmpty()
-            : options.getFrontend().parse(options, problems);
-    try {
+            : options.getFrontend().parse(options, problems)) {
       problems.abortIfHasErrors();
       if (!library.isEmpty()) {
         desugarLibrary(library);
@@ -71,9 +70,6 @@ class J2clTranspiler {
         normalizeLibrary(library);
       }
       options.getBackend().generateOutputs(options, library, problems);
-    } finally {
-      // Now we are done, release resources from the frontend if needed.
-      library.dispose();
     }
   }
 
