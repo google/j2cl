@@ -409,7 +409,7 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
     methodDescriptor.enclosingTypeDescriptor
       .objCName(useId = true)
       .plus("_")
-      .plus(selector.removeSuffix(":"))
+      .plus(selector.replace(":", "_"))
 
   private fun objectiveCKmpMethodStatementDependentSources(
     method: Method,
