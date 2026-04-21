@@ -237,7 +237,7 @@ final class J2ktSwiftInteropTest: XCTestCase {
     let record = J2ktiosinteropNonDataClassRecord(int: 123, with: "foo")
     // TODO(b/501069312): Uncomment when fixed.
     // XCTAssertTrue(record is JavaLangRecord)
-    XCTAssertEqual(record.a(), 123)
+    XCTAssertEqual(record.a(), 124)
     XCTAssertEqual(record.b(), "foo")
     // TODO(b/501052309): Uncomment once fixed.
     // XCTAssertTrue(record.description.contains("NonDataClassRecord"))
@@ -252,11 +252,11 @@ final class J2ktSwiftInteropTest: XCTestCase {
   func testRecordImplementingAccessors() {
     let record: J2ktiosinteropRecordImplementingAccessors =
       J2ktiosinteropRecordImplementingAccessors(int: 123, with: "foo")
-    XCTAssertEqual(record.i(), 123)
+    XCTAssertEqual(record.i(), 124)
     XCTAssertEqual(record.s(), "foo")
 
     let accessors: J2ktiosinteropRecordAccessors = record
-    XCTAssertEqual(accessors.i(), 123)
+    XCTAssertEqual(accessors.i(), 124)
     XCTAssertEqual(accessors.s(), "foo")
   }
 }

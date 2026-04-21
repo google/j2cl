@@ -25,4 +25,8 @@ public record NonDataClassRecord(int a, String b) {
       a = 0;
     }
   }
+
+  public int a() {
+    return a + 1;
+  }
 }

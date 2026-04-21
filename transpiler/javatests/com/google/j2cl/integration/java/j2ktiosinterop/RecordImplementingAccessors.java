@@ -18,4 +18,8 @@ package j2ktiosinterop;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public record RecordImplementingAccessors(int i, String s) implements RecordAccessors {}
+public record RecordImplementingAccessors(int i, String s) implements RecordAccessors {
+  public int i() {
+    return i + 1;
+  }
+}

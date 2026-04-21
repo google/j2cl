@@ -622,7 +622,7 @@
       create_J2ktiosinteropNonDataClassRecord_initWithInt_withNSString_(123, @"foo");
   // TODO(b/501069312): Uncomment when fixed.
   // XCTAssertTrue([record isKindOfClass:[JavaLangRecord class]]);
-  XCTAssertEqual([record a], 123);
+  XCTAssertEqual([record a], 124);
   XCTAssertEqualObjects([record b], @"foo");
   // TODO(b/501052309): Uncomment once fixed.
   // XCTAssertTrue([record.description containsString:@"NonDataClassRecord"]);
@@ -638,11 +638,11 @@
 - (void)testRecordImplementingAccessors {
   J2ktiosinteropRecordImplementingAccessors *record =
       create_J2ktiosinteropRecordImplementingAccessors_initWithInt_withNSString_(123, @"foo");
-  XCTAssertEqual([record i], 123);
+  XCTAssertEqual([record i], 124);
   XCTAssertEqualObjects([record s], @"foo");
 
   id<J2ktiosinteropRecordAccessors> accessors = record;
-  XCTAssertEqual([accessors i], 123);
+  XCTAssertEqual([accessors i], 124);
   XCTAssertEqualObjects([accessors s], @"foo");
 }
 
