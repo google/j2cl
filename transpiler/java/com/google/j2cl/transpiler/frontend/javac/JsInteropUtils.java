@@ -52,14 +52,7 @@ public final class JsInteropUtils {
 
   public static JsInfo getJsInfo(VariableElement member) {
     AnnotationMirror annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(member);
-    if (member.getEnclosingElement() instanceof TypeElement typeElement) {
-      return getJsInfo(member, typeElement, annotation, false);
-    }
-    return JsInfo.newBuilder()
-        .setJsMemberType(JsMemberType.NONE)
-        .setJsAsync(false)
-        .setJsOverlay(false)
-        .build();
+    return getJsInfo(member, (TypeElement) member.getEnclosingElement(), annotation, false);
   }
 
   private static JsInfo getJsInfo(
