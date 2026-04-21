@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
@@ -87,6 +88,7 @@ public class JavacParser {
               targetPathBySourcePath.keySet().stream().map(File::new).collect(toImmutableList()),
               diagnostics);
 
+      List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList();
       task.addTaskListener(
           new TaskListener() {
             @Override
@@ -97,10 +99,15 @@ public class JavacParser {
             @Override
             public void finished(TaskEvent taskEvent) {
               problems.abortIfCancelled();
+              if (taskEvent.getKind() == TaskEvent.Kind.PARSE) {
+                // Collect parsed compilation units; these include compilation units for the
+                // provided source files and source file that might be generated during compilation.
+                javacCompilationUnits.add(checkNotNull(taskEvent.getCompilationUnit()));
+              }
             }
           });
 
-      List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList(task.parse());
+      task.parse();
       task.analyze();
 
       checkForbiddenAnnotations(javacCompilationUnits, options.getForbiddenAnnotations(), problems);
