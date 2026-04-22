@@ -31,6 +31,11 @@ public class TestAptProcessor extends AbstractProcessor {
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     for (var element : roundEnv.getElementsAnnotatedWith(TestAnnotation.class)) {
+      // Test that APT options are forwarded by J2CL.
+      if (!processingEnv.getOptions().containsKey("TestAptProcessor.enabled")) {
+        throw new RuntimeException("TestAptProcessor.enabled is not set");
+      }
+
       var name = "Generated" + element.getSimpleName();
       var packageName =
           ((PackageElement) element.getEnclosingElement()).getQualifiedName().toString();
