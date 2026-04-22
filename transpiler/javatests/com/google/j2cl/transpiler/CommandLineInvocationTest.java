@@ -373,10 +373,16 @@ public class CommandLineInvocationTest extends TestCase {
         .addCompilationUnit(
             "test.Bar",
             """
+            import jsinterop.annotations.JsMethod;
+
             public class Bar {
               public class InnerBar {}
+
+              @JsMethod
+              public native void nativeInstanceMethod();
             }
             """)
+        .addFile("java/test/Bar.native.js", "Bar.prototype.nativeInstanceMethod = function () {}")
         .assertTranspileSucceeds()
         .assertOutputFilesExist(
             "test/Foo.java.js",
@@ -384,7 +390,8 @@ public class CommandLineInvocationTest extends TestCase {
             "test/Bar.java.js",
             "test/Bar.impl.java.js",
             "test/Foo.java",
-            "test/Bar.java")
+            "test/Bar.java",
+            "test/Bar.native_js")
         .assertOutputFilesDoNotExist("some/thing/Bogus.js");
 
     // Test transpilation of java file without java package
@@ -409,10 +416,16 @@ public class CommandLineInvocationTest extends TestCase {
         .addCompilationUnit(
             "test.Bar",
             """
+            import jsinterop.annotations.JsMethod;
+
             public class Bar {
               public class InnerBar {}
+
+              @JsMethod
+              public native void nativeInstanceMethod();
             }
             """)
+        .addFile("java/test/Bar.native.js", "Bar.prototype.nativeInstanceMethod = function () {}")
         .assertTranspileSucceeds();
 
     try (ZipFile zipFile = new ZipFile(outputLocation.toFile())) {
@@ -422,6 +435,7 @@ public class CommandLineInvocationTest extends TestCase {
       assertNotNull(zipFile.getEntry("test/Bar.impl.java.js"));
       assertNotNull(zipFile.getEntry("test/Foo.java"));
       assertNotNull(zipFile.getEntry("test/Bar.java"));
+      assertNotNull(zipFile.getEntry("test/Bar.native_js"));
       assertNull(zipFile.getEntry("some/thing/Bogus.js"));
     }
   }
