@@ -95,7 +95,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
                   .addStatement(
                       0,
                       createClinitCallStatement(
-                          method.getBody().getSourcePosition(),
+                          method.getSourcePosition(),
                           method.getDescriptor().getEnclosingTypeDescriptor()))
                   .build();
             }
