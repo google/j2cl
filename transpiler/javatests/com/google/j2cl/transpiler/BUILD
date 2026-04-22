@@ -46,6 +46,29 @@ java_test(
     ],
 )
 
+java_library(
+    name = "test_apt_processor",
+    srcs = [
+        "TestAnnotation.java",
+        "TestAptProcessor.java",
+    ],
+)
+
+java_test(
+    name = "AnnotationProcessingTest",
+    srcs = ["AnnotationProcessingTest.java"],
+    data = [
+        ":jre_bundle_files",
+        ":test_apt_processor",
+    ],
+    deps = [
+        ":test_apt_processor",
+        ":tester_lib",
+        "//third_party:junit",
+        "//third_party:truth",
+    ],
+)
+
 java_test(
     name = "SourceMapsIntegrationTest",
     srcs = ["SourceMapsIntegrationTest.java"],

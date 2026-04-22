@@ -30,6 +30,9 @@ public interface FrontendOptions {
   ImmutableList<Path> getClasspaths();
 
   @Nullable
+  Path getAptGeneratedSourcesPath();
+
+  @Nullable
   Path getSystem();
 
   boolean getGenerateKytheIndexingMetadata();

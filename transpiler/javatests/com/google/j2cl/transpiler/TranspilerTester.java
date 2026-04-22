@@ -340,6 +340,15 @@ public class TranspilerTester {
     return this;
   }
 
+  @CanIgnoreReturnValue
+  public TranspilerTester addJavacOptions(String... javacOptions) {
+    for (String javacOption : javacOptions) {
+      args.add("-javacOptions");
+      args.add(javacOption);
+    }
+    return this;
+  }
+
   public TranspilerTester setOutputPath(Path outputPath) {
     this.outputPath = outputPath;
     return this;
@@ -563,7 +572,11 @@ public class TranspilerTester {
     @CanIgnoreReturnValue
     public TranspileResult assertOutputFilesExist(String... fileNames) {
       Arrays.stream(fileNames)
-          .forEach(fileName -> Assert.assertTrue(Files.exists(outputPath.resolve(fileName))));
+          .forEach(
+              fileName ->
+                  Assert.assertTrue(
+                      "File " + fileName + " not found",
+                      Files.exists(outputPath.resolve(fileName))));
       return this;
     }
 

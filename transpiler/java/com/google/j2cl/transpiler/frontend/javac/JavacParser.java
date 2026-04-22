@@ -17,7 +17,8 @@ package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static com.google.j2cl.common.SourceUtils.getJavaPath;
+import static java.util.stream.Collectors.toMap;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -42,6 +43,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -72,7 +74,14 @@ public class JavacParser {
     // our output would be unstable
     final Map<String, String> targetPathBySourcePath =
         options.getSources().stream()
-            .collect(toImmutableMap(FileInfo::sourcePath, FileInfo::targetPath));
+            .collect(
+                toMap(
+                    FileInfo::sourcePath,
+                    FileInfo::targetPath,
+                    (u, v) -> {
+                      throw new IllegalStateException("Duplicate source path: " + u);
+                    },
+                    LinkedHashMap::new));
 
     problems.abortIfCancelled();
     try {
@@ -80,13 +89,15 @@ public class JavacParser {
       // cancelation.
       DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
 
+      Path aptGeneratedSourcesPath = options.getAptGeneratedSourcesPath();
       JavacTaskImpl task =
           createCompilationTask(
               options.getClasspaths(),
               options.getSystem(),
               getJavacOptions(options),
               targetPathBySourcePath.keySet().stream().map(File::new).collect(toImmutableList()),
-              diagnostics);
+              diagnostics,
+              aptGeneratedSourcesPath);
 
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList();
       task.addTaskListener(
@@ -103,6 +114,10 @@ public class JavacParser {
                 // Collect parsed compilation units; these include compilation units for the
                 // provided source files and source file that might be generated during compilation.
                 javacCompilationUnits.add(checkNotNull(taskEvent.getCompilationUnit()));
+
+                // Compilation unit might have been generated; add it to the map.
+                var sourcePath = taskEvent.getCompilationUnit().getSourceFile().getName();
+                targetPathBySourcePath.computeIfAbsent(sourcePath, s -> getJavaPath(s));
               }
             }
           });
@@ -149,7 +164,8 @@ public class JavacParser {
               system,
               getJavacOptionsBuilder().build(),
               /* sources= */ ImmutableList.of(),
-              diagnostics);
+              diagnostics,
+              /* aptGeneratedSourcesPath= */ null);
       reportDiagnosticErrors(diagnostics, problems);
       return new JavaEnvironment(
           task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
@@ -164,7 +180,8 @@ public class JavacParser {
       Path system,
       List<String> javacOptions,
       Iterable<File> sources,
-      DiagnosticCollector<JavaFileObject> diagnostics)
+      DiagnosticCollector<JavaFileObject> diagnostics,
+      Path aptGeneratedSourcesPath)
       throws IOException {
     JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
     JavacFileManager fileManager =
@@ -172,6 +189,10 @@ public class JavacParser {
             compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8);
     fileManager.setLocationFromPaths(StandardLocation.PLATFORM_CLASS_PATH, classPath);
     fileManager.setLocationFromPaths(StandardLocation.CLASS_PATH, classPath);
+    if (aptGeneratedSourcesPath != null) {
+      fileManager.setLocationFromPaths(
+          StandardLocation.SOURCE_OUTPUT, ImmutableList.of(aptGeneratedSourcesPath));
+    }
     if (system != null) {
       fileManager.setLocationFromPaths(StandardLocation.SYSTEM_MODULES, ImmutableList.of(system));
     }
@@ -186,7 +207,7 @@ public class JavacParser {
   }
 
   private static final ImmutableSet<String> ALLOWED_JAVAC_OPTIONS =
-      ImmutableSet.of("--source", "--patch-module");
+      ImmutableSet.of("--source", "--patch-module", "-processor", "-processorpath");
 
   private static ImmutableList<String> getJavacOptions(FrontendOptions options) {
     ImmutableList.Builder<String> builder = getJavacOptionsBuilder();
@@ -195,7 +216,7 @@ public class JavacParser {
     for (int i = 0; i < javacOptions.size(); i++) {
       String javacOption = javacOptions.get(i);
       if (javacOption.startsWith("-A")) {
-        // Direcly forward APT options; these are owned by processors (not javac or J2CL).
+        // Directly forward APT options; these are owned by processors (not javac or J2CL).
         builder.add(javacOption);
         continue;
       }
