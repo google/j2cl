@@ -86,6 +86,7 @@ java_test(
     deps = [
         ":tester_lib",
         "//third_party:junit",
+        "//third_party:truth",
     ],
 )
 
