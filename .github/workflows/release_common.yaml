@@ -34,16 +34,6 @@ on:
         type: boolean
         required: false
         default: true
-      create_github_release:
-        description: 'Create a GitHub release (which also creates a git tag)'
-        type: boolean
-        required: false
-        default: true
-      continue_if_tag_exists:
-        description: 'Continue the workflow even if the git tag already exists'
-        type: boolean
-        required: false
-        default: false
     secrets:
       SONATYPE_USERNAME_TOKEN:
         description: 'Sonatype username token'
@@ -59,11 +49,8 @@ on:
         required: false
 
 jobs:
-  create_git_tag:
+  validation:
     runs-on: ubuntu-latest
-    permissions:
-      # Required for creating and pushing git tags.
-      contents: write
     steps:
       - name: Checkout current commit
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -83,41 +70,61 @@ jobs:
             exit 1
           fi
 
-      - name: Check and Create Git Tag
+      - name: Check Tag existence
         run: |
           TAG_NAME="${{ inputs.version }}"
           # Get all remote refs matching the TAG_NAME
           ALL_REFS=$(git ls-remote origin "$TAG_NAME")
 
-          # Check if any refs were found and if we should continue
+          # Check if any refs were found
           if [ -n "${ALL_REFS}" ]; then
             # Check if this is a tag reference
             if echo "${ALL_REFS}" | grep -q "refs/tags/${TAG_NAME}"; then
-              echo "Tag '$TAG_NAME' already exists."
-              if [[ "${{ inputs.continue_if_tag_exists }}" == "true" ]]; then
-                echo "Continuing workflow as 'continue_if_tag_exists' is true. Skipping tag creation."
-                exit 0
-              else
-                echo "Error: Tag '$TAG_NAME' already exists and 'continue_if_tag_exists' is false. Aborting."
-                exit 1
-              fi
+              echo "Error: Tag '$TAG_NAME' already exists. Aborting."
+              exit 1
             else
               echo "A ref with name '${TAG_NAME}' exists but is not a tag (e.g., a branch). Aborting."
               exit 1
             fi
           fi
 
-          echo "Creating tag '$TAG_NAME'"
+  run_tests:
+    uses: ./.github/workflows/ci.yaml
+    with:
+      git_ref: ${{ inputs.git_ref }}
 
+  create_git_tag:
+    needs: [validation, run_tests]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout current commit
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ inputs.git_ref }}
+      - name: Create and Push Tag
+        run: |
+          TAG_NAME="${{ inputs.version }}"
           git config --local user.email "j2cl-github-bot@github.com"
           git config --local user.name "J2CL GitHub Bot"
           git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
           git push origin "$TAG_NAME"
 
+  release:
+    needs: create_git_tag
+    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.4.0
+    with:
+      prerelease: ${{ contains(inputs.version, '-RC') }}
+      release_files: ${{ github.event.repository.name }}-*.tar.gz
+      tag_name: ${{ inputs.version }}
+      # TODO(dramaix): contribute upstream to allow skipping test.
+      bazel_test_command: "bazel build"
+
   publish_to_sonatype:
     runs-on: ubuntu-latest
     if: ${{ inputs.publish_to_sonatype }}
-    needs: create_git_tag
+    needs: release
 
     steps:
       - name: Check secrets are provided
@@ -171,24 +178,6 @@ jobs:
           SONATYPE_PASSWORD_TOKEN: ${{ secrets.SONATYPE_PASSWORD_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-  run_tests:
-    needs: create_git_tag
-    uses: ./.github/workflows/ci.yaml
-    with:
-      git_ref: ${{ inputs.version }}
-      is_release: true
-
-  release:
-    needs: run_tests
-    if: ${{ inputs.create_github_release }}
-    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.4.0
-    with:
-      prerelease: ${{ contains(inputs.version, '-RC') }}
-      release_files: ${{ github.event.repository.name }}-*.tar.gz
-      tag_name: ${{ inputs.version }}
-      # TODO(dramaix): contribute upstream to allow skipping test.
-      bazel_test_command: "bazel build"
-
   publish_to_bcr:
     if: ${{ inputs.publish_to_bcr }}
     needs: release
@@ -208,3 +197,4 @@ jobs:
       attestations: write
     secrets:
       publish_token: ${{ secrets.BCR_PUBLISH_TOKEN }}
+

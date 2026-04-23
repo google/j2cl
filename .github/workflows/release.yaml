@@ -29,11 +29,6 @@ on:
         description: 'The base RC version to use to create the final release. Should be formatted as X.Y.Z-RC.N'
         type: string
         required: false
-      continue_if_tag_exists:
-        description: 'Continue the workflow even if the GitHub tag already exists'
-        type: boolean
-        required: true
-        default: false
 
 jobs:
   validate_inputs:
@@ -102,7 +97,6 @@ jobs:
       version: ${{ github.event.inputs.version }}
       git_ref: ${{ github.event.inputs.base_rc_version && format('refs/tags/{0}', github.event.inputs.base_rc_version) || github.ref }}
       publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
-      continue_if_tag_exists: ${{ github.event.inputs.continue_if_tag_exists == 'true' }}
       publish_to_bcr: ${{ github.event.repository.name != 'jsinterop-annotations' }}
 
     # Allow the reusable workflow to access the secrets.
