@@ -148,6 +148,11 @@ class KlibsKotlinParser(private val problems: Problems) {
           .filter { it.originalPath().startsWith("common-srcs/") }
           .map(FileInfo::sourcePath)
           .toTypedArray()
+
+      // TODO(b/505790341): Remove temporary file once once everything is done in memory.
+      // Temporary file used to store the intermediate klib file.
+      var klibDirectory = options.output.createTempDirectory("_klib")
+      arguments.destination = klibDirectory.resolve("tmp.klib").toString()
       arguments.freeArgs = options.sources.map(SourceUtils.FileInfo::sourcePath)
     }
   }
