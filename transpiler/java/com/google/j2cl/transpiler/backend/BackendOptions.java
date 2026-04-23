@@ -27,6 +27,8 @@ public interface BackendOptions {
 
   Output getOutput();
 
+  Path getAptGeneratedSourcesPath();
+
   @Nullable
   Path getLibraryInfoOutput();
 

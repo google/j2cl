@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.common;
 
+import static com.google.common.collect.Streams.stream;
 import static java.util.Arrays.stream;
 
 import com.google.auto.value.AutoValue;
@@ -75,6 +76,12 @@ public class SourceUtils {
   }
 
   private static final String ARCHIVE_ROOT = "j2cl_sources";
+
+  /** Returns all source files under the given directory. */
+  public static Stream<FileInfo> getAllSources(Path directory) {
+    return stream(MoreFiles.fileTraverser().depthFirstPreOrder(directory))
+        .map(p -> FileInfo.create(p.toString(), directory.relativize(p).toString()));
+  }
 
   /** Returns all individual sources where source jars extracted and flattened. */
   @Nullable

@@ -16,13 +16,17 @@
 package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Streams;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
@@ -48,6 +52,7 @@ public class OutputGeneratorStage {
   private final Problems problems;
   private final Output output;
   private final Path libraryInfoOutputPath;
+  private final Path aptGeneratedSourcesPath;
   private final boolean shouldGenerateReadableSourceMaps;
   private final boolean shouldGenerateReadableLibraryInfo;
   private final boolean generateKytheIndexingMetadata;
@@ -56,6 +61,7 @@ public class OutputGeneratorStage {
       List<FileInfo> nativeJavaScriptFiles,
       Output output,
       Path libraryInfoOutputPath,
+      Path aptGeneratedSourcesPath,
       boolean shouldGenerateReadableLibraryInfo,
       boolean shouldGenerateReadableSourceMaps,
       boolean generateKytheIndexingMetadata,
@@ -63,6 +69,7 @@ public class OutputGeneratorStage {
     this.nativeJavaScriptFiles = nativeJavaScriptFiles;
     this.output = output;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
+    this.aptGeneratedSourcesPath = aptGeneratedSourcesPath;
     this.shouldGenerateReadableLibraryInfo = shouldGenerateReadableLibraryInfo;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
     this.generateKytheIndexingMetadata = generateKytheIndexingMetadata;
@@ -71,12 +78,15 @@ public class OutputGeneratorStage {
 
   public void generateOutputs(Library library) {
 
-    // The map must be ordered because it will be iterated over later and if it was not ordered then
-    // our output would be unstable. Actually this one can't actually destabilize output but since
-    // it's being safely iterated over now it's best to guard against it being unsafely iterated
-    // over in the future.
+    ImmutableList<FileInfo> allNativeFiles =
+        Streams.concat(
+                nativeJavaScriptFiles.stream(),
+                SourceUtils.getAllSources(aptGeneratedSourcesPath)
+                    .filter(f -> f.sourcePath().endsWith(".native.js")))
+            .collect(toImmutableList());
+
     NativeJavaScriptFileResolver nativeJavaScriptFileResolver =
-        NativeJavaScriptFileResolver.create(nativeJavaScriptFiles, problems);
+        NativeJavaScriptFileResolver.create(allNativeFiles, problems);
     LibraryInfoBuilder libraryInfoBuilder = new LibraryInfoBuilder();
 
     for (CompilationUnit compilationUnit : library.getCompilationUnits()) {

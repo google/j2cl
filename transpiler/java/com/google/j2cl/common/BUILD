@@ -12,6 +12,9 @@ package(
 java_library(
     name = "common",
     srcs = glob(["*.java"]),
+    javacopts = [
+        "-Xep:BetaApi:OFF",
+    ],
     deps = [
         "//third_party:args4j",
         "//third_party:auto_value",

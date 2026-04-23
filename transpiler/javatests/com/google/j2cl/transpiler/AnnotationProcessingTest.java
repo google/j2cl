@@ -74,4 +74,24 @@ public class AnnotationProcessingTest extends TestCase {
             "-ATestAptProcessor.enabled")
         .assertTranspileSucceeds();
   }
+
+  public void testAnnotationProcessing_withNativeJsFiles() throws Exception {
+    newTesterWithDefaults()
+        .addCompilationUnit(
+            "bar.Foo",
+            """
+            import com.google.j2cl.transpiler.TestAnnotation;
+            @TestAnnotation
+            public class Foo {}
+            """)
+        .addArgs("-cp", PROCESSOR_JAR)
+        .addJavacOptions(
+            "-processorpath",
+            PROCESSOR_JAR,
+            "-processor",
+            TestAptProcessor.class.getName(),
+            "-ATestAptProcessor.enabled")
+        .assertTranspileSucceeds()
+        .assertOutputFilesExist("bar/GeneratedFoo.native_js");
+  }
 }
