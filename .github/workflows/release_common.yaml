@@ -176,6 +176,7 @@ jobs:
     uses: ./.github/workflows/ci.yaml
     with:
       git_ref: ${{ inputs.version }}
+      is_release: true
 
   release:
     needs: run_tests

@@ -35,6 +35,10 @@ on:
         description: 'The git ref used to checkout the repository and run the tests.'
         type: string
         required: false
+      is_release:
+        type: boolean
+        required: false
+        default: false
 
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
 jobs:
@@ -91,6 +95,14 @@ jobs:
       - name: Fake host name
         if: matrix.os == 'macos-latest'
         run: sudo scutil --set HostName unknown
+
+      # Use pinned versions of our project dependencies when running test during the release
+      # process.
+      - name: Disable dev overrides
+        if: inputs.is_release == true
+        run: |
+          echo "Removing overrides from MODULE.bazel"
+          sed -i '/--- BEGIN DEV OVERRIDES ---/,/--- END DEV OVERRIDES ---/d' MODULE.bazel
 
       - name: Run tests
         if: matrix.test-target == 'default'
