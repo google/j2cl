@@ -29,11 +29,6 @@ on:
         description: 'Publish the release to Sonatype'
         type: boolean
         required: true
-      sonatype_auto_publish:
-        description: 'Automatically publish the release to Sonatype'
-        type: boolean
-        required: false
-        default: false
       publish_to_bcr:
         description: 'Publish the repo to BCR'
         type: boolean
@@ -164,7 +159,10 @@ jobs:
       - name: Publish to Sonatype
         run: |
           auto_publish_flag=""
-          if [[ "${{ inputs.sonatype_auto_publish }}" == true ]]; then
+          # We auto-publish the Sonatype release if we do not produce a BCR release because there
+          # are no subsequent validation steps (like those for BCR) to wait for before making the
+          # Sonatype release public.
+          if [[ "${{ inputs.publish_to_bcr }}" == "false" ]]; then
             auto_publish_flag="--sonatype-auto-publish"
           fi
           ./maven/publish_to_sonatype.sh --version ${{ inputs.version }} $auto_publish_flag
