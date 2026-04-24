@@ -22,6 +22,7 @@ import sys
 import replace_all
 
 READABLE_DIR = "transpiler/javatests/com/google/j2cl/readable/java/emptyclass"
+READABLE_DIR_KT = "transpiler/javatests/com/google/j2cl/readable/kotlin/emptyclass"
 GOLDEN_CLOSURE = os.path.join(
     READABLE_DIR, "output_closure", "EmptyClass.java.js.txt"
 )
@@ -163,6 +164,36 @@ def test_missing_file_in_srcs():
 def test_platform_filtering():
   _run_gen(platforms=["CLOSURE"])
   _assert_in("Blaze building Wasm:\n    No matches", _out.getvalue())
+
+
+def test_pattern():
+  _run_gen(name="empty.*", platforms=["CLOSURE"])
+  output = _out.getvalue()
+  _assert_not_in("No matching readables!", output)
+  _assert_in(READABLE_DIR, output)
+  _assert_in(READABLE_DIR_KT, output)
+
+
+def test_pattern2():
+  _run_gen(name="java/empty.*", platforms=["CLOSURE"])
+  output = _out.getvalue()
+  _assert_not_in("No matching readables!", output)
+  _assert_in(READABLE_DIR, output)
+  _assert_not_in(READABLE_DIR_KT, output)
+
+
+def test_pattern3():
+  _run_gen(name="kotlin/empty.*", platforms=["CLOSURE"])
+  output = _out.getvalue()
+  _assert_not_in("No matching readables!", output)
+  _assert_not_in(READABLE_DIR, output)
+  _assert_in(READABLE_DIR_KT, output)
+
+
+def test_pattern_no_matches():
+  _run_gen(name="empty", platforms=["CLOSURE"])
+  output = _out.getvalue()
+  _assert_in("No matching readables!", output)
 
 
 def _run_test(name, func):
