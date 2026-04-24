@@ -8,6 +8,7 @@ package(
     default_visibility = [
         "//transpiler/java/com/google/j2cl/transpiler:__pkg__",
         "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
+        "//transpiler/javatests/com/google/j2cl/transpiler/frontend:__subpackages__",
     ],
     licenses = ["notice"],
 )

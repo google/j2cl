@@ -141,7 +141,9 @@ public class JavacParser {
           // If Kythe metadata is being requested, use the target path.
           sourcePath = targetPathBySourcePath.get(sourcePath);
         }
-        compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(sourcePath, cu));
+        compilationUnits.add(
+            compilationUnitBuilder.buildCompilationUnit(
+                sourcePath, cu, options.getGenerateKytheIndexingMetadata()));
         problems.abortIfCancelled();
       }
       return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();

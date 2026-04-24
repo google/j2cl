@@ -80,10 +80,8 @@ public class KytheIndexingMetadataTest {
     // Ensures there's an anchor on the name of the class declaration.
     assertImputesEdgeExists(
         kytheMetadata,
-        // TODO(b/505491718): This source range is off by one due the earlier ° character occupying
-        // two bytes in the source file.
-        /* sourceBegin= */ 32,
-        /* sourceEnd= */ 53,
+        /* sourceBegin= */ 33,
+        /* sourceEnd= */ 54,
         /* targetBegin= */ 171,
         /* targetEnd= */ 192);
   }
