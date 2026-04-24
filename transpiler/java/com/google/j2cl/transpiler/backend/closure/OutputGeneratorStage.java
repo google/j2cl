@@ -134,9 +134,9 @@ public class OutputGeneratorStage {
           // Inline metadata so that Kythe can create edges between these files and the Java source
           // file.
           javaScriptHeaderSource +=
-              renderKytheIndexingMetadata(jsHeaderGenerator.getSourceMappings());
+              renderKytheIndexingMetadata(compilationUnit, jsHeaderGenerator.getSourceMappings());
           javaScriptImplementationSource +=
-              renderKytheIndexingMetadata(jsImplGenerator.getSourceMappings());
+              renderKytheIndexingMetadata(compilationUnit, jsImplGenerator.getSourceMappings());
         } else {
           String sourceMap = renderSourceMap(type, jsImplGenerator.getSourceMappings());
 
@@ -200,6 +200,7 @@ public class OutputGeneratorStage {
   private static final String READABLE_MAPPINGS_SUFFIX = ".js.mappings";
 
   private String renderKytheIndexingMetadata(
+      CompilationUnit compilationUnit,
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     KytheIndexingMetadata metadata = new KytheIndexingMetadata();
 
@@ -208,15 +209,20 @@ public class OutputGeneratorStage {
       SourcePosition javaSourcePosition = entry.getValue();
       SourcePosition javaScriptSourcePosition = entry.getKey();
 
+      // Skip if the source position is not in the compilation unit.
+      if (javaSourcePosition.getFilePath() == null
+          || !javaSourcePosition.getFilePath().equals(compilationUnit.getFilePath())) {
+        continue;
+      }
+
       metadata.addAnchorAnchor(
           javaSourcePosition.getStartFilePosition().getByteOffset(),
           javaSourcePosition.getEndFilePosition().getByteOffset(),
           javaScriptSourcePosition.getStartFilePosition().getByteOffset(),
           javaScriptSourcePosition.getEndFilePosition().getByteOffset(),
-          null, // sourceCorpus
+          /* sourceCorpus= */ null,
           javaSourcePosition.getFilePath(),
-          null // sourceRoot
-          );
+          /* sourceRoot= */ null);
     }
 
     return String.format("%n// Kythe Indexing Metadata:%n// %s", metadata.toJson());
