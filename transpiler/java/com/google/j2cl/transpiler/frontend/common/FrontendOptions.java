@@ -32,8 +32,7 @@ public interface FrontendOptions {
 
   ImmutableList<Path> getClasspaths();
 
-  @Nullable
-  Path getAptGeneratedSourcesPath();
+  Path getSourceGenPath();
 
   @Nullable
   Path getSystem();

@@ -89,7 +89,7 @@ public class JavacParser {
       // cancelation.
       DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
 
-      Path aptGeneratedSourcesPath = options.getAptGeneratedSourcesPath();
+      Path sourceGenPath = options.getSourceGenPath();
       JavacTaskImpl task =
           createCompilationTask(
               options.getClasspaths(),
@@ -97,7 +97,7 @@ public class JavacParser {
               getJavacOptions(options),
               targetPathBySourcePath.keySet().stream().map(File::new).collect(toImmutableList()),
               diagnostics,
-              aptGeneratedSourcesPath);
+              sourceGenPath);
 
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList();
       task.addTaskListener(
@@ -167,7 +167,7 @@ public class JavacParser {
               getJavacOptionsBuilder().build(),
               /* sources= */ ImmutableList.of(),
               diagnostics,
-              /* aptGeneratedSourcesPath= */ null);
+              /* sourceGenPath= */ null);
       reportDiagnosticErrors(diagnostics, problems);
       return new JavaEnvironment(
           task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
@@ -183,7 +183,7 @@ public class JavacParser {
       List<String> javacOptions,
       Iterable<File> sources,
       DiagnosticCollector<JavaFileObject> diagnostics,
-      Path aptGeneratedSourcesPath)
+      Path sourceGenPath)
       throws IOException {
     JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
     JavacFileManager fileManager =
@@ -191,9 +191,9 @@ public class JavacParser {
             compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8);
     fileManager.setLocationFromPaths(StandardLocation.PLATFORM_CLASS_PATH, classPath);
     fileManager.setLocationFromPaths(StandardLocation.CLASS_PATH, classPath);
-    if (aptGeneratedSourcesPath != null) {
+    if (sourceGenPath != null) {
       fileManager.setLocationFromPaths(
-          StandardLocation.SOURCE_OUTPUT, ImmutableList.of(aptGeneratedSourcesPath));
+          StandardLocation.SOURCE_OUTPUT, ImmutableList.of(sourceGenPath));
     }
     if (system != null) {
       fileManager.setLocationFromPaths(StandardLocation.SYSTEM_MODULES, ImmutableList.of(system));

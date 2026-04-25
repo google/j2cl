@@ -27,10 +27,10 @@ public interface BackendOptions {
 
   Output getOutput();
 
-  Path getAptGeneratedSourcesPath();
-
   @Nullable
   Path getLibraryInfoOutput();
+
+  Path getSourceGenPath();
 
   ImmutableList<FileInfo> getNativeSources();
 

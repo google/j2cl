@@ -72,9 +72,9 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setTargetLabel(String targetLabel);
 
-    public abstract Builder setAptGeneratedSourcesPath(@Nullable Path path);
-
     public abstract Builder setLibraryInfoOutput(@Nullable Path path);
+
+    public abstract Builder setSourceGenPath(Path path);
 
     public abstract Builder setEmitReadableLibraryInfo(boolean b);
 
@@ -167,7 +167,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
             !allKotlinSources.isEmpty() ? Frontend.KOTLIN : getBackend().getDefaultFrontend());
       }
 
-      setAptGeneratedSourcesPath(getOutput().createTempDirectory("_apt_sources"));
+      setSourceGenPath(getOutput().createTempDirectory("_sourcegen"));
 
       J2clTranspilerOptions options = autoBuild();
 

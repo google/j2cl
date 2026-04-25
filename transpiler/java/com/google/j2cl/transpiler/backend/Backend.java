@@ -224,7 +224,7 @@ public enum Backend {
               options.getNativeSources(),
               options.getOutput(),
               options.getLibraryInfoOutput(),
-              options.getAptGeneratedSourcesPath(),
+              options.getSourceGenPath(),
               options.getEmitReadableLibraryInfo(),
               options.getEmitReadableSourceMap(),
               options.getGenerateKytheIndexingMetadata(),

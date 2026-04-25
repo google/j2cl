@@ -67,7 +67,7 @@ class J2clTranspiler {
 
       // TODO(b/506284703): Reconsider refactoring how sourcefiles are handled in general.
       // Copy generated JS files from the APT directory to the output directory.
-      SourceUtils.getAllSources(options.getAptGeneratedSourcesPath())
+      SourceUtils.getAllSources(options.getSourceGenPath())
           .filter(f -> f.sourcePath().endsWith(".js") && !f.sourcePath().endsWith(".native.js"))
           .forEach(f -> options.getOutput().copyFile(f.sourcePath(), f.targetPath()));
 

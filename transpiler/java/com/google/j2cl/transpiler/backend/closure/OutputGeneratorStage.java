@@ -52,7 +52,7 @@ public class OutputGeneratorStage {
   private final Problems problems;
   private final Output output;
   private final Path libraryInfoOutputPath;
-  private final Path aptGeneratedSourcesPath;
+  private final Path sourceGenPath;
   private final boolean shouldGenerateReadableSourceMaps;
   private final boolean shouldGenerateReadableLibraryInfo;
   private final boolean generateKytheIndexingMetadata;
@@ -61,7 +61,7 @@ public class OutputGeneratorStage {
       List<FileInfo> nativeJavaScriptFiles,
       Output output,
       Path libraryInfoOutputPath,
-      Path aptGeneratedSourcesPath,
+      Path sourceGenPath,
       boolean shouldGenerateReadableLibraryInfo,
       boolean shouldGenerateReadableSourceMaps,
       boolean generateKytheIndexingMetadata,
@@ -69,7 +69,7 @@ public class OutputGeneratorStage {
     this.nativeJavaScriptFiles = nativeJavaScriptFiles;
     this.output = output;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
-    this.aptGeneratedSourcesPath = aptGeneratedSourcesPath;
+    this.sourceGenPath = sourceGenPath;
     this.shouldGenerateReadableLibraryInfo = shouldGenerateReadableLibraryInfo;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
     this.generateKytheIndexingMetadata = generateKytheIndexingMetadata;
@@ -81,7 +81,7 @@ public class OutputGeneratorStage {
     ImmutableList<FileInfo> allNativeFiles =
         Streams.concat(
                 nativeJavaScriptFiles.stream(),
-                SourceUtils.getAllSources(aptGeneratedSourcesPath)
+                SourceUtils.getAllSources(sourceGenPath)
                     .filter(f -> f.sourcePath().endsWith(".native.js")))
             .collect(toImmutableList());
 
