@@ -94,4 +94,25 @@ public class AnnotationProcessingTest extends TestCase {
         .assertTranspileSucceeds()
         .assertOutputFilesExist("bar/GeneratedFoo.native_js");
   }
+
+  public void testAnnotationProcessing_withJsSources() throws Exception {
+    newTesterWithDefaults()
+        .addCompilationUnit(
+            "bar.Foo",
+            """
+            import com.google.j2cl.transpiler.TestAnnotation;
+            @TestAnnotation
+            public class Foo {}
+            """)
+        .addArgs("-cp", PROCESSOR_JAR)
+        .addJavacOptions(
+            "-processorpath",
+            PROCESSOR_JAR,
+            "-processor",
+            TestAptProcessor.class.getName(),
+            "-ATestAptProcessor.enabled",
+            "-ATestAptProcessor.generateJsSource")
+        .assertTranspileSucceeds()
+        .assertOutputFilesExist("bar/GeneratedFoo.js");
+  }
 }

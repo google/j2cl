@@ -52,6 +52,9 @@ java_library(
         "TestAnnotation.java",
         "TestAptProcessor.java",
     ],
+    deps = [
+        "//third_party:error_prone_annotations",
+    ],
 )
 
 java_test(

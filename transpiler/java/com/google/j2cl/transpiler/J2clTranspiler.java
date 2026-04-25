@@ -15,6 +15,7 @@ package com.google.j2cl.transpiler;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -63,6 +64,13 @@ class J2clTranspiler {
         options.getSources().isEmpty()
             ? Library.newEmpty()
             : options.getFrontend().parse(options, problems)) {
+
+      // TODO(b/506284703): Reconsider refactoring how sourcefiles are handled in general.
+      // Copy generated JS files from the APT directory to the output directory.
+      SourceUtils.getAllSources(options.getAptGeneratedSourcesPath())
+          .filter(f -> f.sourcePath().endsWith(".js") && !f.sourcePath().endsWith(".native.js"))
+          .forEach(f -> options.getOutput().copyFile(f.sourcePath(), f.targetPath()));
+
       problems.abortIfHasErrors();
       if (!library.isEmpty()) {
         desugarLibrary(library);
