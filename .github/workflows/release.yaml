@@ -23,26 +23,57 @@ on:
     inputs:
       version:
         description: 'The version to release'
-        required: true
+        required: false
         type: string
       base_rc_version:
         description: 'The base RC version to use to create the final release. Should be formatted as X.Y.Z-RC.N'
         type: string
         required: false
+  push:
+    branches:
+      - master
+    paths:
+      - 'oss_version.txt'
 
 jobs:
+  get_version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: get_version
+        run: |
+          if [ -f "oss_version.txt" ]; then
+            if [[ "${{ github.event.inputs.version }}" != "" ]]; then
+              echo "Error: The 'version' input field must not be set for repositories using 'oss_version.txt' (like j2cl)."
+              exit 1
+            fi
+            version=$(xargs < oss_version.txt)
+            echo "Using version from oss_version.txt: ${version}."
+            echo "version=${version}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=${{ github.event.inputs.version }}" >> "$GITHUB_OUTPUT"
+          fi
+
   validate_inputs:
+    needs: get_version
     runs-on: ubuntu-latest
     steps:
-      - name: Validate base_rc_version
+      - name: Validate inputs
         run: |
+          version="${{ needs.get_version.outputs.version }}"
+          if [[ -z "$version" ]]; then
+            echo "Error: Release version is missing. It must be provided via the 'version' input or 'oss_version.txt' file."
+            exit 1
+          fi
+
           base_rc_version="${{ github.event.inputs.base_rc_version }}"
           if [[ -z "$base_rc_version" ]]; then
             echo "The base RC version field is empty, no validation needed."
             exit 0
           fi
 
-          version="${{ github.event.inputs.version }}"
           repo_name="${{ github.event.repository.name }}"
           RC_REGEX='^([0-9]+\.[0-9]+\.[0-9]+)-RC\.?[0-9]+$'
           VERSION_REGEX='^[0-9]+\.[0-9]+\.[0-9]+$'
@@ -82,7 +113,7 @@ jobs:
           fi
 
   release:
-    needs: validate_inputs
+    needs: [validate_inputs, get_version]
     uses: google/j2cl/.github/workflows/release_common.yaml@master
 
     permissions:
@@ -92,9 +123,9 @@ jobs:
       id-token: write
       attestations: write
 
-    # Pass the inputs from the manual trigger to the reusable workflow.
+    # Pass the inputs from the trigger to the reusable workflow.
     with:
-      version: ${{ github.event.inputs.version }}
+      version: ${{ needs.get_version.outputs.version }}
       git_ref: ${{ github.event.inputs.base_rc_version && format('refs/tags/{0}', github.event.inputs.base_rc_version) || github.ref }}
       publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
       publish_to_bcr: ${{ github.event.repository.name != 'jsinterop-annotations' }}
