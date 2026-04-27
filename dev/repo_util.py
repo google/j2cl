@@ -218,7 +218,7 @@ def get_file_from_target(target):
 def sync_j2size_repo():
   g4_sync_cmds = [
       "synced_to_cl=@$(srcfs get_readonly) && "
-      "cd $(p4 g4d -f j2cl-size) && g4 sync $synced_to_cl"
+      "cd $(p4 g4d -f j2cl-size) && p4 sync $synced_to_cl"
   ]
   run_cmd(g4_sync_cmds, shell=True)
 

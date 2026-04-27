@@ -19,6 +19,7 @@ import os
 import shlex
 import subprocess
 import sys
+import tempfile
 
 
 _out = io.StringIO()
@@ -176,16 +177,114 @@ class GenValidationTest(ValidationTest):
     _assert_output("No matching readables!")
 
 
+EMPTYCLASS_ES5 = "transpiler/javatests/com/google/j2cl/integration/java/emptyclass:opt.es5"
+EMPTYCLASS_WASM = "transpiler/javatests/com/google/j2cl/integration/java/emptyclass:opt.wasm"
+
+
 class DiffValidationTest(ValidationTest):
   """Validation tests for j2 diff."""
 
+  def test_diff_closure(self):
+    _j2("diff java/emptyclass.es5")
+    _assert_output(f"'{EMPTYCLASS_ES5}'")
+    _assert_output("Formatting.")
+    _assert_output("Reducing noise.")
+    _assert_output("Starting diff.")
 
-def _j2(args_str, out_stream=None):
+  def test_diff_wasm(self):
+    _j2("diff java/emptyclass.wasm")
+    _assert_output(f"'{EMPTYCLASS_WASM}'")
+    _assert_output("Disassembling.")
+    _assert_output("Reducing noise.")
+    _assert_output("Starting diff.")
+
+  def test_diff_two_targets(self):
+    _j2("diff java/emptyclasswithfields.es5 java/emptyclass.es5")
+    _assert_output(f"'{EMPTYCLASS_ES5}'")
+    _assert_output("Formatting.")
+    _assert_output("Reducing noise.")
+    _assert_output("Starting diff.")
+
+  def test_diff_targets_with_workspace(self):
+    _j2("diff j2cl-size@java/emptyclass.es5 java/emptyclass.es5")
+    _assert_output(f"'{EMPTYCLASS_ES5}'")
+    _assert_output("Formatting.")
+    _assert_output("Reducing noise.")
+    _assert_output("Starting diff.")
+
+  def test_diff_target_with_complete_path(self):
+    _j2(f"diff //{EMPTYCLASS_WASM}")
+    _assert_output(f"'{EMPTYCLASS_WASM}'")
+    _assert_output("Disassembling.")
+    _assert_output("Reducing noise.")
+    _assert_output("Starting diff.")
+
+  def test_diff_binary_target(self):
+    # Other tests use size_report targets. Verify we can use binary as well.
+    wasm_binary = EMPTYCLASS_WASM.replace("opt.wasm", "j2wasm_application")
+    _j2(f"diff //{wasm_binary}")
+    _assert_output(f"'{wasm_binary}.wasm'")
+    _assert_output("Disassembling.")
+    _assert_output("Reducing noise.")
+    _assert_output("Starting diff.")
+
+  def test_diff_size(self):
+    _j2("diff --size java/emptyclass.es5")
+    _assert_output(f"'{EMPTYCLASS_ES5}'")
+    _assert_output("Performing size diff...")
+    _assert_output("Uncompressed")
+    _assert_output("Compressed")
+    _assert_output("Diff: +0 (0.0%)")
+
+  def test_diff_too_many_targets(self):
+    _j2_expecting_failure("diff java1 java2 java3")
+    _assert_output("More than 2 targets to compare.")
+
+  def test_diff_workspace_single_target(self):
+    _j2_expecting_failure("diff j2cl-size@java/emptyclass.es5")
+    _assert_output("Workspace is not allowed on a single target compare.")
+
+  def test_diff_no_such_workspace(self):
+    _j2_expecting_failure("diff invalid-workspace@java/emptyclass.es5")
+    _assert_output("No such workspace invalid-workspace")
+
+  def test_diff_no_such_target(self):
+    _j2_expecting_failure("diff //invalid/target")
+    _assert_output("no such target")
+
+  def test_diff_creates_j2cl_size(self):
+    with tempfile.TemporaryDirectory() as temp_dir:
+
+      # Mock p4 to capture the passed args
+      mock_bin_dir = os.path.join(temp_dir, "mock_bin")
+      mock_p4_path = os.path.join(mock_bin_dir, "p4")
+      captured_p4_args_file = os.path.join(temp_dir, "captured_p4_args.txt")
+      os.makedirs(mock_bin_dir)
+      with open(mock_p4_path, "w") as f:
+        f.write(f"#!/bin/sh\necho $@ >> {captured_p4_args_file}\n")
+      os.chmod(mock_p4_path, 0o755)
+
+      # Update the PATH to intercept without our mock p4.
+      env = os.environ.copy()
+      env["PATH"] = mock_bin_dir + ":" + env.get("PATH", "")
+
+      _j2("diff java/emptyclass.es5", env=env)
+      _assert_output(f"'{EMPTYCLASS_ES5}'")
+      _assert_output("Starting diff.")
+
+      captured_p4_args = open(captured_p4_args_file, "r").read()
+      _assert_in("g4d -f j2cl-size", captured_p4_args)
+      _assert_in("sync @", captured_p4_args)
+
+
+def _j2(args_str, out_stream=None, env=None):
   if out_stream is None:
     out_stream = _out
   args = shlex.split(args_str)
   cmd = ["python3", "dev/j2.py"] + args
-  result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+  result = subprocess.run(
+      cmd, capture_output=True, text=True, check=False, env=env
+  )
   out_stream.write(result.stdout)
   out_stream.write(result.stderr)
   if result.returncode != 0:
