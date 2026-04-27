@@ -333,14 +333,19 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
     val typeDescriptors = TypeDescriptors.get()
     val baseTypeDescriptor =
       (this as? DeclaredTypeDescriptor)?.let { declaredType ->
-        listOf(
-            typeDescriptors.javaUtilList,
-            typeDescriptors.javaUtilSet,
-            typeDescriptors.javaUtilMap,
-            typeDescriptors.javaLangNumber,
-          )
-          .find { declaredType.isAssignableTo(it) }
-          ?.typeDeclaration
+        if (declaredType.typeDeclaration.qualifiedBinaryName == "java.lang.Boolean") {
+          // Map Boolean to Number, which maps to NSNumber in Objective-C.
+          typeDescriptors.javaLangNumber.typeDeclaration
+        } else {
+          listOf(
+              typeDescriptors.javaUtilList,
+              typeDescriptors.javaUtilSet,
+              typeDescriptors.javaUtilMap,
+              typeDescriptors.javaLangNumber,
+            )
+            .find { declaredType.isAssignableTo(it) }
+            ?.typeDeclaration
+        }
       }
     val mappedBaseTypeSource = baseTypeDescriptor?.let {
       mappedObjCNameDependentSource(baseTypeDescriptor, readonly = true)
