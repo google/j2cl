@@ -14,12 +14,44 @@
 
 # pylint: disable=missing-function-docstring
 
-import argparse
-import contextlib
 import io
 import os
+import shlex
+import subprocess
 import sys
-import replace_all
+
+
+_out = io.StringIO()
+
+
+class ValidationTest:
+  """Base class for validation tests."""
+
+  def setup(self):
+    # Clear the buffer
+    _out.seek(0)
+    _out.truncate(0)
+
+  def teardown(self):
+    pass
+
+  def run_test(self, name, func):
+    print(f"{name}: ", end="", flush=True)
+    self.setup()
+    try:
+      func()
+      print("\033[92mSUCCESS\033[0m")
+      return True
+    except BaseException as e:  # pylint: disable=broad-exception-caught
+      print("\033[91mFAILED\033[0m")
+      print("--- Error ---")
+      print(str(e))
+      print("--- Captured Output ---")
+      print(_out.getvalue())
+      return False
+    finally:
+      self.teardown()
+
 
 READABLE_DIR = "transpiler/javatests/com/google/j2cl/readable/java/emptyclass"
 READABLE_DIR_KT = "transpiler/javatests/com/google/j2cl/readable/kotlin/emptyclass"
@@ -36,39 +68,136 @@ SOURCE_FILE = os.path.join(READABLE_DIR, "EmptyClass.java")
 BUILD_FILE = os.path.join(READABLE_DIR, "BUILD")
 
 
-_out = io.StringIO()
-_backup = {}
+class GenValidationTest(ValidationTest):
+  """Validation tests for j2 gen."""
+
+  def setup(self):
+    super().setup()
+
+    self._backup = {
+        GOLDEN_CLOSURE: open(GOLDEN_CLOSURE, "r").read(),
+        GOLDEN_WASM: open(GOLDEN_WASM, "r").read(),
+        GOLDEN_KT: open(GOLDEN_KT, "r").read(),
+        GOLDEN_KT_WEB: open(GOLDEN_KT_WEB, "r").read(),
+        SOURCE_FILE: open(SOURCE_FILE, "r").read(),
+        BUILD_FILE: open(BUILD_FILE, "r").read(),
+    }
+
+    # Make sure we are starting with a clean state.
+    self._ensure_clean_state()
+
+  def teardown(self):
+    super().teardown()
+    for path, content in self._backup.items():
+      with open(path, "w") as f:
+        f.write(content)
+
+  def _ensure_clean_state(self):
+    if _out.getvalue():
+      raise AssertionError("Output buffer not cleared between tests!")
+    localout = io.StringIO()
+    _j2("gen java/emptyclass", out_stream=localout)
+    _assert_in("Number of stale readables: 0", localout.getvalue())
+
+  def test_golden_file_updates(self):
+    with open(GOLDEN_CLOSURE, "a") as f:
+      f.write("\n// STALE COMMENT\n")
+    with open(GOLDEN_WASM, "a") as f:
+      f.write("\n;; STALE COMMENT\n")
+    with open(GOLDEN_KT, "a") as f:
+      f.write("\n// STALE COMMENT\n")
+    with open(GOLDEN_KT_WEB, "a") as f:
+      f.write("\n// STALE COMMENT\n")
+
+    _j2("gen java/emptyclass")
+    _assert_output("Number of stale readables: 4")
+
+    with open(GOLDEN_CLOSURE, "r") as f:
+      _assert_not_in("// STALE COMMENT", f.read())
+    with open(GOLDEN_WASM, "r") as f:
+      _assert_not_in(";; STALE COMMENT", f.read())
+    with open(GOLDEN_KT, "r") as f:
+      _assert_not_in("// STALE COMMENT", f.read())
+    with open(GOLDEN_KT_WEB, "r") as f:
+      _assert_not_in("// STALE COMMENT", f.read())
+
+  def test_failed_compilation(self):
+    with open(SOURCE_FILE, "w") as f:
+      f.write("INVALID JAVA CODE")
+
+    _j2_expecting_failure("gen java/emptyclass")
+    _assert_output("No test status for targets")
+    _assert_output("Sponge link:")
+
+  def test_broken_build_file(self):
+    with open(BUILD_FILE, "w") as f:
+      f.write("INVALID BAZEL SYNTAX")
+
+    _j2_expecting_failure("gen java/emptyclass")
+    _assert_output("Error while running command")
+    _assert_output("blaze query filter")
+
+  def test_missing_file_in_srcs(self):
+    original_build = self._backup[BUILD_FILE]
+    _assert_in('glob(["*.java"])', original_build)
+
+    broken_build = original_build.replace('glob(["*.java"])', "[]")
+    with open(BUILD_FILE, "w") as f:
+      f.write(broken_build)
+
+    _j2_expecting_failure("gen java/emptyclass")
+    _assert_output("No test status for targets")
+    _assert_output("Sponge link:")
+
+  def test_platform_filtering(self):
+    _j2("-p CLOSURE gen java/emptyclass")
+    _assert_output("Blaze building Wasm:\n    No matches")
+
+  def test_pattern(self):
+    _j2("-p CLOSURE gen empty.*")
+    _assert_not_output("No matching readables!")
+    _assert_output(READABLE_DIR)
+    _assert_output(READABLE_DIR_KT)
+
+  def test_pattern2(self):
+    _j2("-p CLOSURE gen java/empty.*")
+    _assert_not_output("No matching readables!")
+    _assert_output(READABLE_DIR)
+    _assert_not_output(READABLE_DIR_KT)
+
+  def test_pattern3(self):
+    _j2("-p CLOSURE gen kotlin/empty.*")
+    _assert_not_output("No matching readables!")
+    _assert_not_output(READABLE_DIR)
+    _assert_output(READABLE_DIR_KT)
+
+  def test_pattern_no_matches(self):
+    _j2("-p CLOSURE gen empty")
+    _assert_output("No matching readables!")
 
 
-def _setup():
-  # Clear the buffer
-  _out.seek(0)
-  _out.truncate(0)
-
-  _backup[GOLDEN_CLOSURE] = open(GOLDEN_CLOSURE, "r").read()
-  _backup[GOLDEN_WASM] = open(GOLDEN_WASM, "r").read()
-  _backup[GOLDEN_KT] = open(GOLDEN_KT, "r").read()
-  _backup[GOLDEN_KT_WEB] = open(GOLDEN_KT_WEB, "r").read()
-  _backup[SOURCE_FILE] = open(SOURCE_FILE, "r").read()
-  _backup[BUILD_FILE] = open(BUILD_FILE, "r").read()
-
-  # Make sure we are starting with a clean state.
-  _ensure_clean_state()
+class DiffValidationTest(ValidationTest):
+  """Validation tests for j2 diff."""
 
 
-def _teardown():
-  for path, content in _backup.items():
-    with open(path, "w") as f:
-      f.write(content)
+def _j2(args_str, out_stream=None):
+  if out_stream is None:
+    out_stream = _out
+  args = shlex.split(args_str)
+  cmd = ["python3", "dev/j2.py"] + args
+  result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+  out_stream.write(result.stdout)
+  out_stream.write(result.stderr)
+  if result.returncode != 0:
+    raise SystemExit(result.returncode)
 
 
-def _ensure_clean_state():
-  if _out.getvalue():
-    raise AssertionError("Output buffer not cleared between tests!")
-  localout = io.StringIO()
-  with contextlib.redirect_stdout(localout):
-    _run_gen()
-  _assert_in("Number of stale readables: 0", localout.getvalue())
+def _j2_expecting_failure(args_str):
+  try:
+    _j2(args_str)
+    raise AssertionError(f"j2 gen {args_str} expected to fail but didn't.")
+  except SystemExit:
+    return
 
 
 def _assert_in(needle, haystack, msg=None):
@@ -81,150 +210,45 @@ def _assert_not_in(needle, haystack, msg=None):
     raise AssertionError(msg or f"Did not expect to find '{needle}'.")
 
 
-def _fail():
-  raise AssertionError("j2 gen expected to fail but didn't.")
+def _assert_output(needle):
+  _assert_in(needle, _out.getvalue())
 
 
-def _run_gen(name="java/emptyclass", platforms=None):
-  argv = argparse.Namespace(
-      readable_name=[name], platforms=platforms or ["CLOSURE", "WASM", "J2KT"]
+def _assert_not_output(needle):
+  _assert_not_in(needle, _out.getvalue())
+
+
+def main(argv):
+  print("Starting j2 validation...\n")
+
+  test_suites_mapping = {
+      "gen": GenValidationTest(),
+      "diff": DiffValidationTest(),
+  }
+  test_suites = (
+      [test_suites_mapping[argv.test_suite]]
+      if argv.test_suite
+      else test_suites_mapping.values()
   )
-  replace_all.main(argv)
-
-
-def _run_gen_expecting_failure(**kwargs):
-  try:
-    _run_gen(**kwargs)
-    _fail()
-  except SystemExit:
-    return
-
-
-def test_golden_file_updates():
-  with open(GOLDEN_CLOSURE, "a") as f:
-    f.write("\n// STALE COMMENT\n")
-  with open(GOLDEN_WASM, "a") as f:
-    f.write("\n;; STALE COMMENT\n")
-  with open(GOLDEN_KT, "a") as f:
-    f.write("\n// STALE COMMENT\n")
-  with open(GOLDEN_KT_WEB, "a") as f:
-    f.write("\n// STALE COMMENT\n")
-
-  _run_gen()
-  output = _out.getvalue()
-
-  _assert_in("Number of stale readables: 4", output)
-
-  with open(GOLDEN_CLOSURE, "r") as f:
-    new_closure = f.read()
-  with open(GOLDEN_WASM, "r") as f:
-    new_wasm = f.read()
-  with open(GOLDEN_KT, "r") as f:
-    new_kt = f.read()
-  with open(GOLDEN_KT_WEB, "r") as f:
-    new_kt_web = f.read()
-
-  _assert_not_in("// STALE COMMENT", new_closure, "Closure golden not updated!")
-  _assert_not_in(";; STALE COMMENT", new_wasm, "WASM golden not updated!")
-  _assert_not_in("// STALE COMMENT", new_kt, "KT golden not updated!")
-  _assert_not_in("// STALE COMMENT", new_kt_web, "J2KT Web golden not updated!")
-
-
-def test_failed_compilation():
-  with open(SOURCE_FILE, "w") as f:
-    f.write("INVALID JAVA CODE")
-
-  _run_gen_expecting_failure()
-  _assert_in("No test status for targets", _out.getvalue())
-  _assert_in("Sponge link:", _out.getvalue())
-
-
-def test_broken_build_file():
-  with open(BUILD_FILE, "w") as f:
-    f.write("INVALID BAZEL SYNTAX")
-
-  _run_gen_expecting_failure()
-  _assert_in("Error while running command", _out.getvalue())
-  _assert_in("blaze query filter", _out.getvalue())
-
-
-def test_missing_file_in_srcs():
-  original_build = _backup[BUILD_FILE]
-  _assert_in('glob(["*.java"])', original_build)
-
-  broken_build = original_build.replace('glob(["*.java"])', "[]")
-  with open(BUILD_FILE, "w") as f:
-    f.write(broken_build)
-
-  _run_gen_expecting_failure()
-  _assert_in("No test status for targets", _out.getvalue())
-  _assert_in("Sponge link:", _out.getvalue())
-
-
-def test_platform_filtering():
-  _run_gen(platforms=["CLOSURE"])
-  _assert_in("Blaze building Wasm:\n    No matches", _out.getvalue())
-
-
-def test_pattern():
-  _run_gen(name="empty.*", platforms=["CLOSURE"])
-  output = _out.getvalue()
-  _assert_not_in("No matching readables!", output)
-  _assert_in(READABLE_DIR, output)
-  _assert_in(READABLE_DIR_KT, output)
-
-
-def test_pattern2():
-  _run_gen(name="java/empty.*", platforms=["CLOSURE"])
-  output = _out.getvalue()
-  _assert_not_in("No matching readables!", output)
-  _assert_in(READABLE_DIR, output)
-  _assert_not_in(READABLE_DIR_KT, output)
-
-
-def test_pattern3():
-  _run_gen(name="kotlin/empty.*", platforms=["CLOSURE"])
-  output = _out.getvalue()
-  _assert_not_in("No matching readables!", output)
-  _assert_not_in(READABLE_DIR, output)
-  _assert_in(READABLE_DIR_KT, output)
-
-
-def test_pattern_no_matches():
-  _run_gen(name="empty", platforms=["CLOSURE"])
-  output = _out.getvalue()
-  _assert_in("No matching readables!", output)
-
-
-def _run_test(name, func):
-  print(f"{name}: ", end="", flush=True)
-  _setup()
-  try:
-    with contextlib.redirect_stdout(_out):
-      func()
-    print("\033[92mSUCCESS\033[0m")
-    return True
-  except BaseException as e:  # pylint: disable=broad-exception-caught
-    print("\033[91mFAILED\033[0m")
-    print("--- Error ---")
-    print(str(e))
-    print("--- Captured Output ---")
-    print(_out.getvalue())
-    return False
-  finally:
-    _teardown()
-
-
-def main(unused_argv):
-  print("Starting j2 gen validation...\n")
 
   success = True
-  for name, func in list(globals().items()):
-    if not name.startswith("test_"):
-      continue
-    display_name = name.replace("_", " ").capitalize()
-    success &= _run_test(display_name, func)
+  for test_suite in test_suites:
+    for name in dir(test_suite):
+      if not name.startswith("test_"):
+        continue
+      func = getattr(test_suite, name)
+      display_name = name.replace("_", " ").capitalize()
+      success &= test_suite.run_test(display_name, func)
 
   print("")
   if not success:
     sys.exit(1)
+
+
+def add_arguments(parser):
+  parser.add_argument(
+      "test_suite",
+      nargs="?",
+      choices=["gen", "diff"],
+      help="Test suite to run (gen or diff). If omitted, all tests are run.",
+  )
