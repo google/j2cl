@@ -58,6 +58,19 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   Path system;
 
   @Option(
+      name = "-processor",
+      metaVar = "<class>",
+      usage = "Names of the annotation processors to run.")
+  List<String> processors = new ArrayList<>();
+
+  @Option(
+      name = "-processorpath",
+      metaVar = "<path>",
+      usage = "Specifies where to find annotation processors.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> processorPath = new ArrayList<>();
+
+  @Option(
       name = "-nativesourcepath",
       metaVar = "<path>",
       usage = "Specifies where to find zip files containing native.js files for native methods.",
@@ -188,6 +201,8 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setNativeSources(allNativeSources)
         .setClasspaths(this.classPath)
         .setSystem(this.system)
+        .setAnnotationProcessors(this.processors)
+        .setAnnotationProcessorPath(this.processorPath)
         .setOutput(output)
         .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(false)

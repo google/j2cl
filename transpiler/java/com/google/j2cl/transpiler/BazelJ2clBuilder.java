@@ -59,6 +59,19 @@ final class BazelJ2clBuilder extends BazelWorker {
   Path system;
 
   @Option(
+      name = "-processor",
+      metaVar = "<class>",
+      usage = "Names of the annotation processors to run.")
+  List<String> processors = new ArrayList<>();
+
+  @Option(
+      name = "-processorpath",
+      metaVar = "<path>",
+      usage = "Specifies where to find annotation processors.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> processorPath = new ArrayList<>();
+
+  @Option(
       name = "-output",
       required = true,
       metaVar = "<path>",
@@ -211,6 +224,8 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setNativeSources(allNativeSources)
         .setClasspaths(this.classpaths)
         .setSystem(this.system)
+        .setAnnotationProcessors(this.processors)
+        .setAnnotationProcessorPath(this.processorPath)
         .setOutput(output)
         .setTargetLabel(targetLabel)
         .setLibraryInfoOutput(libraryInfoOutput)

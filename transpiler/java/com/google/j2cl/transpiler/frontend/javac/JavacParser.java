@@ -94,6 +94,7 @@ public class JavacParser {
           createCompilationTask(
               options.getClasspaths(),
               options.getSystem(),
+              options.getAnnotationProcessorPath(),
               getJavacOptions(options),
               targetPathBySourcePath.keySet().stream().map(File::new).collect(toImmutableList()),
               diagnostics,
@@ -164,6 +165,7 @@ public class JavacParser {
                   .map(Path::of)
                   .collect(toImmutableList()),
               system,
+              /* processorPath= */ ImmutableList.of(),
               getJavacOptionsBuilder().build(),
               /* sources= */ ImmutableList.of(),
               diagnostics,
@@ -180,6 +182,7 @@ public class JavacParser {
   private static JavacTaskImpl createCompilationTask(
       List<Path> classPath,
       Path system,
+      List<Path> processorPath,
       List<String> javacOptions,
       Iterable<File> sources,
       DiagnosticCollector<JavaFileObject> diagnostics,
@@ -198,6 +201,9 @@ public class JavacParser {
     if (system != null) {
       fileManager.setLocationFromPaths(StandardLocation.SYSTEM_MODULES, ImmutableList.of(system));
     }
+    if (!processorPath.isEmpty()) {
+      fileManager.setLocationFromPaths(StandardLocation.ANNOTATION_PROCESSOR_PATH, processorPath);
+    }
     return (JavacTaskImpl)
         compiler.getTask(
             null,
@@ -209,10 +215,15 @@ public class JavacParser {
   }
 
   private static final ImmutableSet<String> ALLOWED_JAVAC_OPTIONS =
-      ImmutableSet.of("--source", "--patch-module", "-processor", "-processorpath");
+      ImmutableSet.of("--source", "--patch-module");
 
   private static ImmutableList<String> getJavacOptions(FrontendOptions options) {
     ImmutableList.Builder<String> builder = getJavacOptionsBuilder();
+
+    if (!options.getAnnotationProcessors().isEmpty()) {
+      builder.add("-processor");
+      builder.add(String.join(",", options.getAnnotationProcessors()));
+    }
 
     ImmutableList<String> javacOptions = options.getJavacOptions();
     for (int i = 0; i < javacOptions.size(); i++) {

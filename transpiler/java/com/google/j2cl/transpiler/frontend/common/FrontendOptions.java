@@ -37,6 +37,10 @@ public interface FrontendOptions {
   @Nullable
   Path getSystem();
 
+  ImmutableList<String> getAnnotationProcessors();
+
+  ImmutableList<Path> getAnnotationProcessorPath();
+
   boolean getGenerateKytheIndexingMetadata();
 
   boolean isNullMarkedSupported();

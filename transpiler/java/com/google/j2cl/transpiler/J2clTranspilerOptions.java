@@ -68,6 +68,10 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setSystem(@Nullable Path jdkSystem);
 
+    public abstract Builder setAnnotationProcessors(List<String> annotationProcessors);
+
+    public abstract Builder setAnnotationProcessorPath(List<Path> annotationProcessorPath);
+
     public abstract Builder setOutput(Output output);
 
     public abstract Builder setTargetLabel(String targetLabel);

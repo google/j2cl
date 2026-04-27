@@ -37,13 +37,9 @@ public class AnnotationProcessingTest extends TestCase {
             public class Foo {}
             """)
         .addArgs("-cp", PROCESSOR_JAR)
-        .addJavacOptions(
-            "-processorpath",
-            PROCESSOR_JAR,
-            "-processor",
-            TestAptProcessor.class.getName(),
-            // Test that APT options are forwarded to the processor.
-            "-ATestAptProcessor.enabled")
+        .addArgs("-processorpath", PROCESSOR_JAR)
+        .addArgs("-processor", TestAptProcessor.class.getName())
+        .addJavacOptions("-ATestAptProcessor.enabled")
         .assertTranspileSucceeds()
         .assertOutputFilesExist(
             "bar/Foo.java",
@@ -66,12 +62,9 @@ public class AnnotationProcessingTest extends TestCase {
             """)
         .addArgs("-generatekytheindexingmetadata")
         .addArgs("-cp", PROCESSOR_JAR)
-        .addJavacOptions(
-            "-processorpath",
-            PROCESSOR_JAR,
-            "-processor",
-            TestAptProcessor.class.getName(),
-            "-ATestAptProcessor.enabled")
+        .addArgs("-processorpath", PROCESSOR_JAR)
+        .addArgs("-processor", TestAptProcessor.class.getName())
+        .addJavacOptions("-ATestAptProcessor.enabled")
         .assertTranspileSucceeds();
   }
 
@@ -85,12 +78,9 @@ public class AnnotationProcessingTest extends TestCase {
             public class Foo {}
             """)
         .addArgs("-cp", PROCESSOR_JAR)
-        .addJavacOptions(
-            "-processorpath",
-            PROCESSOR_JAR,
-            "-processor",
-            TestAptProcessor.class.getName(),
-            "-ATestAptProcessor.enabled")
+        .addArgs("-processorpath", PROCESSOR_JAR)
+        .addArgs("-processor", TestAptProcessor.class.getName())
+        .addJavacOptions("-ATestAptProcessor.enabled")
         .assertTranspileSucceeds()
         .assertOutputFilesExist("bar/GeneratedFoo.native_js");
   }
@@ -105,13 +95,9 @@ public class AnnotationProcessingTest extends TestCase {
             public class Foo {}
             """)
         .addArgs("-cp", PROCESSOR_JAR)
-        .addJavacOptions(
-            "-processorpath",
-            PROCESSOR_JAR,
-            "-processor",
-            TestAptProcessor.class.getName(),
-            "-ATestAptProcessor.enabled",
-            "-ATestAptProcessor.generateJsSource")
+        .addArgs("-processorpath", PROCESSOR_JAR)
+        .addArgs("-processor", TestAptProcessor.class.getName())
+        .addJavacOptions("-ATestAptProcessor.enabled", "-ATestAptProcessor.generateJsSource")
         .assertTranspileSucceeds()
         .assertOutputFilesExist("bar/GeneratedFoo.js");
   }
