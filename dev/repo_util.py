@@ -139,14 +139,9 @@ def get_rule_kind(target, cwd=None):
   """Returns the rule kind of the target if it exists, otherwise return None."""
   command = [BLAZE_CMD, "query", '"%s"' % target, "--output=label_kind"]
 
-  try:
-    result = run_cmd(command, cwd=cwd).split()
-    # the output of the cmd is "{rule_kind} rule {target_label}"
-    return result[0]
-  except Exception:
-    # invalid target, just return None to the caller so we know the target does
-    # not exist.
-    return None
+  result = run_cmd(command, cwd=cwd).split()
+  # the output of the cmd is "{rule_kind} rule {target_label}"
+  return result[0]
 
 
 def get_all_size_tests(cwd=None):

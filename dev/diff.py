@@ -78,10 +78,8 @@ def _create_target_info(target):
   elif rule_kind == "_size_report":
     # Size report targets doesn't need extension.
     pass
-  elif rule_kind:
-    raise argparse.ArgumentTypeError(f"Unknown target kind {rule_kind}")
   else:
-    raise argparse.ArgumentTypeError(f"No such target {blaze_target}")
+    raise argparse.ArgumentTypeError(f"Unknown target kind {rule_kind}")
 
   return TargetInfo(workspace_path, blaze_target)
 
