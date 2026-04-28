@@ -17,6 +17,7 @@
 
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -76,7 +77,14 @@ def _create_target_info(target):
     # remove the '//'
     blaze_target = blaze_target[2:]
   else:
-    # This is an integration test name. Format: (java|kotlin)/(test)(.version)?
+    # Check for size_report format: (test)/(java|kotlin).(variant)
+    match = re.fullmatch(r"(\w+)/(java|kotlin)\.(\w+)", blaze_target)
+    if match:
+      test, lang, variant = match.groups()
+      blaze_target = f"{lang}/{test}.{variant}"
+
+    # otherwise assume it is an integration test name.
+    # Format: (java|kotlin)/(test).(variant)
     blaze_target = repo_util.get_optimized_target(blaze_target)
 
   blaze_target = _get_artifact_target(blaze_target, workspace_path)

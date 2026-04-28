@@ -217,6 +217,17 @@ class DiffValidationTest(ValidationTest):
     _assert_output("Reducing noise.")
     _assert_output("Starting diff.")
 
+  def test_diff_tagets_with_report_style(self):
+    _j2("diff emptyclass/java.es5")
+    _assert_output(f"for '{EMPTYCLASS_ES5}'")
+    _assert_not_output("against")
+    _assert_output("Formatting.")
+    _assert_output("Reducing noise.")
+    _assert_output("Starting diff.")
+
+    _j2("diff emptyclass/java.wasm")
+    _assert_output(f"for '{EMPTYCLASS_WASM}'")
+
   def test_diff_target_with_complete_path(self):
     _j2(f"diff //{EMPTYCLASS_WASM}")
     _assert_output(f"for '{EMPTYCLASS_WASM}'")
