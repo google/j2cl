@@ -215,6 +215,11 @@ public class OutputGeneratorStage {
         continue;
       }
 
+      if (!javaSourcePosition.hasValidPositions()
+          || !javaScriptSourcePosition.hasValidPositions()) {
+        continue;
+      }
+
       metadata.addAnchorAnchor(
           javaSourcePosition.getStartFilePosition().getByteOffset(),
           javaSourcePosition.getEndFilePosition().getByteOffset(),

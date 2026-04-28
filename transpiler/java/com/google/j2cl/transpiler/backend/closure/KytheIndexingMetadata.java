@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
@@ -82,6 +84,7 @@ public class KytheIndexingMetadata {
         String corpus,
         String path,
         String root) {
+      checkArgument(sourceBegin >= 0 && sourceEnd >= 0 && targetBegin >= 0 && targetEnd >= 0);
       this.sourceBegin = sourceBegin;
       this.sourceEnd = sourceEnd;
       this.targetBegin = targetBegin;

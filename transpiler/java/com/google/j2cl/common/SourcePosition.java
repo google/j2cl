@@ -39,6 +39,10 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   public abstract FilePosition getEndFilePosition();
 
+  public final boolean hasValidPositions() {
+    return getStartFilePosition() != FilePosition.NONE && getEndFilePosition() != FilePosition.NONE;
+  }
+
   @Nullable
   public abstract String getFilePath();
 
