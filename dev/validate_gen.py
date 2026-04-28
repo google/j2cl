@@ -179,6 +179,7 @@ class GenValidationTest(ValidationTest):
 
 EMPTYCLASS_ES5 = "transpiler/javatests/com/google/j2cl/integration/java/emptyclass:opt.es5"
 EMPTYCLASS_WASM = "transpiler/javatests/com/google/j2cl/integration/java/emptyclass:opt.wasm"
+EMPTYCLASS_WITHFIELDS_ES5 = "transpiler/javatests/com/google/j2cl/integration/java/emptyclasswithfields:opt.es5"
 
 
 class DiffValidationTest(ValidationTest):
@@ -186,51 +187,55 @@ class DiffValidationTest(ValidationTest):
 
   def test_diff_closure(self):
     _j2("diff java/emptyclass.es5")
-    _assert_output(f"'{EMPTYCLASS_ES5}'")
+    _assert_output(f"for '{EMPTYCLASS_ES5}'")
+    _assert_not_output("against")
     _assert_output("Formatting.")
     _assert_output("Reducing noise.")
     _assert_output("Starting diff.")
 
   def test_diff_wasm(self):
     _j2("diff java/emptyclass.wasm")
-    _assert_output(f"'{EMPTYCLASS_WASM}'")
+    _assert_output(f"for '{EMPTYCLASS_WASM}'")
+    _assert_not_output("against")
     _assert_output("Disassembling.")
     _assert_output("Reducing noise.")
     _assert_output("Starting diff.")
 
   def test_diff_two_targets(self):
     _j2("diff java/emptyclasswithfields.es5 java/emptyclass.es5")
-    _assert_output(f"'{EMPTYCLASS_ES5}'")
+    _assert_output(f"for '{EMPTYCLASS_ES5}'")
+    _assert_output(f"against '{EMPTYCLASS_WITHFIELDS_ES5}'")
     _assert_output("Formatting.")
     _assert_output("Reducing noise.")
     _assert_output("Starting diff.")
 
   def test_diff_targets_with_workspace(self):
-    _j2("diff j2cl-size@java/emptyclass.es5 java/emptyclass.es5")
-    _assert_output(f"'{EMPTYCLASS_ES5}'")
+    _j2("diff java/emptyclass.es5 j2cl-size@java/emptyclass.es5")
+    _assert_output(f"for 'j2cl-size@{EMPTYCLASS_ES5}'")
+    _assert_output(f"against '{EMPTYCLASS_ES5}'")
     _assert_output("Formatting.")
     _assert_output("Reducing noise.")
     _assert_output("Starting diff.")
 
   def test_diff_target_with_complete_path(self):
     _j2(f"diff //{EMPTYCLASS_WASM}")
-    _assert_output(f"'{EMPTYCLASS_WASM}'")
+    _assert_output(f"for '{EMPTYCLASS_WASM}'")
     _assert_output("Disassembling.")
     _assert_output("Reducing noise.")
     _assert_output("Starting diff.")
 
   def test_diff_binary_target(self):
     # Other tests use size_report targets. Verify we can use binary as well.
-    wasm_binary = EMPTYCLASS_WASM.replace("opt.wasm", "j2wasm_application")
+    wasm_binary = EMPTYCLASS_WASM.replace(":opt.wasm", ":j2wasm_application")
     _j2(f"diff //{wasm_binary}")
-    _assert_output(f"'{wasm_binary}.wasm'")
+    _assert_output(f"for '{wasm_binary}.wasm'")
     _assert_output("Disassembling.")
     _assert_output("Reducing noise.")
     _assert_output("Starting diff.")
 
   def test_diff_size(self):
     _j2("diff --size java/emptyclass.es5")
-    _assert_output(f"'{EMPTYCLASS_ES5}'")
+    _assert_output(f"for '{EMPTYCLASS_ES5}'")
     _assert_output("Performing size diff...")
     _assert_output("Uncompressed")
     _assert_output("Compressed")
@@ -269,7 +274,7 @@ class DiffValidationTest(ValidationTest):
       env["PATH"] = mock_bin_dir + ":" + env.get("PATH", "")
 
       _j2("diff java/emptyclass.es5", env=env)
-      _assert_output(f"'{EMPTYCLASS_ES5}'")
+      _assert_output(f"for '{EMPTYCLASS_ES5}'")
       _assert_output("Starting diff.")
 
       captured_p4_args = open(captured_p4_args_file, "r").read()

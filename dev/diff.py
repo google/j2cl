@@ -13,6 +13,8 @@
 # limitations under the License.
 """Diffs optimized integration test JS with current CL changes."""
 
+# pylint: disable=missing-function-docstring
+
 import argparse
 import os
 import shutil
@@ -23,12 +25,18 @@ import repo_util
 
 
 class TargetInfo:
-  workspace_path = None
-  blaze_target = ""
 
-  def __init__(self, workspace_path, blaze_target):
+  def __init__(self, workspace_name, workspace_path, blaze_target):
+    self.workspace_name = workspace_name
     self.workspace_path = workspace_path
     self.blaze_target = blaze_target
+
+  def __str__(self):
+    return (
+        f"{self.workspace_name}@{self.blaze_target}"
+        if self.workspace_name
+        else self.blaze_target
+    )
 
   def get_output_file(self):
     file_path = "blaze-bin/" + repo_util.get_file_from_target(self.blaze_target)
@@ -42,7 +50,7 @@ class TargetInfo:
 
   def to_j2cl_size_target(self):
     target_info = _ = TargetInfo(
-        repo_util.get_repo_path("j2cl-size"), self.blaze_target
+        "j2cl-size", repo_util.get_repo_path("j2cl-size"), self.blaze_target
     )
     # sync the j2cl-size workspace to the same base cl
     repo_util.sync_j2size_repo()
@@ -60,6 +68,7 @@ def _create_target_info(target):
     if not os.path.isdir(workspace_path):
       raise argparse.ArgumentTypeError(f"No such workspace {workspace_name}")
   else:
+    workspace_name = None
     workspace_path = None
     blaze_target = target
 
@@ -70,18 +79,21 @@ def _create_target_info(target):
     # This is an integration test name. Format: (java|kotlin)/(test)(.version)?
     blaze_target = repo_util.get_optimized_target(blaze_target)
 
+  blaze_target = _get_artifact_target(blaze_target, workspace_path)
+  return TargetInfo(workspace_name, workspace_path, blaze_target)
+
+
+def _get_artifact_target(blaze_target, workspace_path):
   rule_kind = repo_util.get_rule_kind(blaze_target, workspace_path)
   if rule_kind == "js_binary":
-    blaze_target += ".js"
-  if rule_kind == "_j2wasm_application":
-    blaze_target += ".wasm"
+    return blaze_target + ".js"
+  elif rule_kind == "_j2wasm_application":
+    return blaze_target + ".wasm"
   elif rule_kind == "_size_report":
     # Size report targets doesn't need extension.
-    pass
+    return blaze_target
   else:
     raise argparse.ArgumentTypeError(f"Unknown target kind {rule_kind}")
-
-  return TargetInfo(workspace_path, blaze_target)
 
 
 def main(argv):
@@ -106,7 +118,12 @@ def main(argv):
 
 
 def _diff(original, modified, is_size, group_by, filter_noise):
-  print(f"Constructing a diff of changes in '{modified.blaze_target}'.")
+  print(f"Constructing diff for '{modified}'.")
+  if (
+      original.workspace_name != "j2cl-size"
+      or original.blaze_target != modified.blaze_target
+  ):
+    print(f"    against '{original}'.")
 
   original_targets = [original.blaze_target]
   modified_targets = [modified.blaze_target]
