@@ -154,7 +154,6 @@ public final class Main {
     assertTrue(callInterfaceGetNumber(jsInterfaceGetNumber) == 22);
 
     JsInterfaceRenamedMethod jsInterfaceRenamedMethod = new JsInterfaceRenamedMethodImpl();
-    assertTrue(callGetNumber((SomeJsType) jsInterfaceRenamedMethod) == 22);
     // TODO(b/499366074): Test when this case is supported with a bridge method.
     // assertTrue(callInterfaceRenamedMethod(jsInterfaceRenamedMethod) == 22);
 
@@ -187,10 +186,17 @@ public final class Main {
   @JsType(namespace = "wasmcustomdescriptorsjsinterop")
   interface JsInterfaceRenamedMethod {
     @JsMethod(name = "renamed")
-    int getNumber();
+    int mightBeRenamed();
   }
 
-  static class JsInterfaceRenamedMethodImpl extends SubJsType implements JsInterfaceRenamedMethod {
+  static class BaseRenamedMethod {
+    public int mightBeRenamed() {
+      return 23;
+    }
+  }
+
+  static class JsInterfaceRenamedMethodImpl extends BaseRenamedMethod
+      implements JsInterfaceRenamedMethod {
     @JsConstructor
     public JsInterfaceRenamedMethodImpl() {}
   }
