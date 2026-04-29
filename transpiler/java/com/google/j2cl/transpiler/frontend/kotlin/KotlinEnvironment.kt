@@ -699,7 +699,7 @@ internal class KotlinEnvironment(
         enclosingMethodDescriptor == null &&
           enclosingTypeDescriptor.typeDeclaration.isJavaRecord &&
           parametersDescriptors.isEmpty() &&
-          irFunction.parentAsClass.fields.any {
+          irFunction.parentAsClass.getDeclaredFields().any {
             it.name.asString() == name && irFunction.returnType == it.type
           }
 
