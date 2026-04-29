@@ -292,9 +292,19 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
       ?.let { it.descriptor.toObjCNames() }
       ?.let { selector -> addAll(functionDependentSources(method, selector)) }
     method
-      .takeIf { it.descriptor.isObjectiveCKmpMethod && it.descriptor.isStatic }
+      .takeIf {
+        it.descriptor.isObjectiveCKmpMethod &&
+          (it.descriptor.isStatic || it.descriptor.isConstructor)
+      }
       ?.let { it.descriptor.objectiveCKmpMethodSelector() }
-      ?.let { selector -> add(objectiveCKmpMethodFunctionDependentSource(method, selector)) }
+      ?.let { selector ->
+        if (method.isConstructor) {
+          add(objectiveCKmpMethodFunctionDependentSource(method, selector, prefix = "create_"))
+          add(objectiveCKmpMethodFunctionDependentSource(method, selector, prefix = "new_"))
+        } else {
+          add(objectiveCKmpMethodFunctionDependentSource(method, selector))
+        }
+      }
   }
 
   private fun shouldInclude(methodDescriptor: MethodDescriptor): Boolean =
@@ -317,8 +327,8 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
       } &&
       shouldInclude(methodDescriptor.returnTypeDescriptor) &&
       methodDescriptor.parameterTypeDescriptors.all(::shouldInclude) &&
-      ((methodDescriptor.isStatic && methodDescriptor.isObjectiveCKmpMethod) ||
-        canInferObjCName(methodDescriptor)) &&
+      (((methodDescriptor.isStatic || methodDescriptor.isConstructor) &&
+        methodDescriptor.isObjectiveCKmpMethod) || canInferObjCName(methodDescriptor)) &&
       !methodDescriptor.ktInfo.isThrows
 
   private val MethodDescriptor.isObjectiveCKmpMethod: Boolean
@@ -395,11 +405,12 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
   private fun objectiveCKmpMethodFunctionDependentSource(
     method: Method,
     selector: String,
+    prefix: String = "",
   ): Dependent<Source> =
     functionDeclaration(
       modifiers = listOf(nsInline),
       returnType = method.descriptor.returnTypeDescriptor.objCKmpDependentSource(),
-      name = objectiveCKmpMethodFunctionName(method.descriptor, selector),
+      name = objectiveCKmpMethodFunctionName(method.descriptor, selector, prefix),
       parameters = method.parameters.map(::variableKmpDependentSource),
       statements = objectiveCKmpMethodStatementDependentSources(method, selector),
     )
@@ -410,9 +421,11 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
   private fun objectiveCKmpMethodFunctionName(
     methodDescriptor: MethodDescriptor,
     selector: String,
+    prefix: String = "",
   ): String =
     methodDescriptor.enclosingTypeDescriptor
       .objCName(useId = true)
+      .let { "$prefix$it" }
       .plus("_")
       .plus(selector.replace(":", "_"))
 
