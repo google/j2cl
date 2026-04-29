@@ -676,7 +676,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             fromDeclared.findSupertype(toDeclared.getTypeDeclaration());
 
         // For RAW type descriptors, propagate outer nullability only without type arguments.
-        if (toDeclared.isRaw() || fromDeclaredSuper == null) {
+        if (toDeclared.isRaw() || fromDeclaredSuper == null || fromDeclaredSuper.isRaw()) {
           return toDeclared.toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
         }
 
