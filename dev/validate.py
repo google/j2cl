@@ -10,7 +10,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Validates j2 gen functionality."""
+"""Validates j2 functionality."""
 
 # pylint: disable=missing-function-docstring
 
@@ -310,7 +310,7 @@ def _j2(args_str, out_stream=None, env=None):
 def _j2_expecting_failure(args_str):
   try:
     _j2(args_str)
-    raise AssertionError(f"j2 gen {args_str} expected to fail but didn't.")
+    raise AssertionError(f"j2 {args_str} expected to fail but didn't.")
   except SystemExit:
     return
 

@@ -25,7 +25,7 @@ import presubmit
 import replace_all
 import test_all
 import test_integration
-import validate_gen
+import validate
 
 
 def _add_cmd(subparsers, name, handler, descr):
@@ -55,7 +55,7 @@ if __name__ == "__main__":
   _add_cmd(parsers, "testall", test_all, "Run all tests.")
   _add_cmd(parsers, "presubmit", presubmit,
            "Run the tasks needed before submit")
-  _add_cmd(parsers, "validate", validate_gen, "Self-validate this script.")
+  _add_cmd(parsers, "validate", validate, "Self-validate this script.")
 
   args = base_parser.parse_args()
   if not hasattr(args, "func"):
