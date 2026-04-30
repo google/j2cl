@@ -17,7 +17,6 @@ package com.google.j2cl.tools.gwtincompatible;
 
 import static org.junit.Assert.assertEquals;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -41,31 +40,44 @@ public class UnusedImportsNodeCollectorTest {
   @Test
   public void testGetUnusedImports() throws Exception {
     String source =
-        Joiner.on("\n")
-            .join(
-                "package a.b.c;",
-                "import x1.y1.z1.*;",
-                "import x1.y2.z1.A;",
-                "import x1.y2.z1.B;",
-                "import x1.y2.z1.C;",
-                "import x1.y2.z1.D;",
-                "import x1.y2.z1.E;",
-                "import x1.y2.z1.F;",
-                "import x1.y2.z1.G;",
-                "import x2.H;",
-                "import x2.I;",
-                "import static x2.L;",
-                "import x2.M;",
-                "/** See {@link M}.**/ ",
-                "public class Foo extends A {",
-                "  @I",
-                "  public void m(B b) {",
-                "    C c = new D();",
-                "    return E.r() + F.e + L;",
-                "  }",
-                "}");
+        """
+        @Q
+        package a.b.c;
+
+        import static x1.y1.z1.A.m;
+        import static x1.y1.z1.A.n;
+        import static x2.L;
+
+        import x1.y1.z1.*;
+        import x1.y2.z1.A;
+        import x1.y2.z1.B;
+        import x1.y2.z1.C;
+        import x1.y2.z1.D;
+        import x1.y2.z1.E;
+        import x1.y2.z1.F;
+        import x1.y2.z1.G;
+        import x2.H;
+        import x2.I;
+        import x2.M;
+        import x2.O;
+        import x2.P;
+        import x2.Q;
+        import x2.R;
+        import x2.S;
+
+        /** See {@link M}.**/
+        public class Foo extends A {
+          @I
+          public void m(B b) {
+            C c = new D(O::x);
+
+            return E.r() + F.e + L + n() + P.R.S.s;
+          }
+        }
+        """;
     List<String> imports = getUnusedImports(source);
-    assertEquals(Lists.newArrayList("x1.y2.z1.G", "x2.H", "x2.M"), imports);
+    assertEquals(
+        Lists.newArrayList("x1.y1.z1.A.m", "x1.y2.z1.G", "x2.H", "x2.M", "x2.R", "x2.S"), imports);
   }
 
   private List<String> getUnusedImports(String source) throws IOException {
