@@ -93,9 +93,10 @@ final class JsExternsGenerator {
     appendFields(sb, type);
     appendMethods(sb, type);
 
-    // Output to externs/my.package.MyClass.externs.js
+    // Output to externs/my.package.MyClass.externs.java.js
     output.write(
-        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".externs.js").toString(),
+        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".externs.java.js")
+            .toString(),
         sb.build());
   }
 
@@ -258,9 +259,9 @@ final class JsExternsGenerator {
 
     sb.appendln(String.format("exports = %s;", simpleJsName));
 
-    // Output to externs/my.package.MyClass.js
+    // Output to externs/my.package.MyClass.java.js
     output.write(
-        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".js").toString(),
+        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".java.js").toString(),
         sb.build());
   }
 
