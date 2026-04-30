@@ -170,13 +170,19 @@ public class Collections {
     listIterator.remove();
 
     collection.add("foo");
+    collection.addAll(list);
     collection.remove("foo");
+    collection.removeAll(list);
+    collection.removeIf(x -> true);
+    collection.retainAll(list);
     collection.clear();
 
     list.add(0, "foo");
+    list.addAll(list);
     list.set(0, "foo");
-    list.remove(0);
     list.sort(null);
+    list.remove(0);
+    list.replaceAll(x -> x);
 
     genericList.add(0, "foo");
     genericList.set(0, "foo");
@@ -189,11 +195,24 @@ public class Collections {
     genericList2.sort(null);
 
     set.add("foo");
+    set.addAll(list);
     set.remove("foo");
+    set.removeAll(list);
+    set.removeIf(x -> true);
+    set.retainAll(list);
+    set.clear();
 
     map.put("foo", "bar");
+    map.putAll(map);
+    map.putIfAbsent("foo", "bar");
     map.remove("foo");
+    map.replace("foo", "bar");
+    map.replaceAll((k, v) -> v);
     map.clear();
+    map.compute("foo", (k, v) -> v);
+    map.computeIfAbsent("foo", k -> "bar");
+    map.computeIfPresent("foo", (k, v) -> v);
+    map.merge("foo", "bar", (v1, v2) -> v1);
 
     mapEntry.setValue("bar");
   }
@@ -201,17 +220,31 @@ public class Collections {
   public static void testMutability_subtypes(
       CustomCollection<String> collection, CustomList<String> list, CustomMap<String, String> map) {
     collection.add("foo");
+    collection.addAll(list);
     collection.remove("foo");
+    collection.removeAll(list);
+    collection.removeIf(x -> true);
+    collection.retainAll(list);
     collection.clear();
 
     list.add(0, "foo");
+    list.addAll(list);
     list.set(0, "foo");
-    list.remove(0);
     list.sort(null);
+    list.remove(0);
+    list.replaceAll(x -> x);
 
     map.put("foo", "bar");
+    map.putAll(map);
+    map.putIfAbsent("foo", "bar");
     map.remove("foo");
+    map.replace("foo", "bar");
+    map.replaceAll((k, v) -> v);
     map.clear();
+    map.compute("foo", (k, v) -> v);
+    map.computeIfAbsent("foo", k -> "bar");
+    map.computeIfPresent("foo", (k, v) -> v);
+    map.merge("foo", "bar", (v1, v2) -> v1);
   }
 
   public static void testLowerBoundAssignment(

@@ -25,6 +25,10 @@ import java.util.AbstractCollection
 import java.util.AbstractList
 import java.util.AbstractMap
 import java.util.Spliterator
+import java.util.function.BiFunction
+import java.util.function.Function
+import java.util.function.Predicate
+import java.util.function.UnaryOperator
 import javaemul.lang.MutableCollectionJvm
 import javaemul.lang.MutableListJvm
 import javaemul.lang.MutableMapJvm
@@ -367,12 +371,26 @@ open class Collections {
    listIterator.asMutableListIterator().set("foo")
    listIterator.asMutableListIterator().remove()
    collection.asMutableCollection().add("foo")
+   collection.asMutableCollection().java_addAll(list)
    collection.asMutableCollection().java_remove("foo")
+   collection.asMutableCollection().java_removeAll(list)
+   collection.asMutableCollection().removeIf(
+    Predicate { x: String ->
+     return@Predicate true
+    },
+   )
+   collection.asMutableCollection().java_retainAll(list)
    collection.asMutableCollection().clear()
    list.asMutableList().add(0, "foo")
+   list.asMutableList().java_addAll(list)
    list.asMutableList().set(0, "foo")
-   list.asMutableList().removeAt(0)
    list.asMutableList().sort(null)
+   list.asMutableList().removeAt(0)
+   list.asMutableList().replaceAll(
+    UnaryOperator { x_1: String ->
+     return@UnaryOperator x_1
+    },
+   )
    genericList.asMutableList().add(0, "foo")
    genericList.asMutableList().set(0, "foo")
    genericList.asMutableList().removeAt(0)
@@ -382,25 +400,114 @@ open class Collections {
    genericList2.asMutableList().removeAt(0)
    genericList2.asMutableList().sort(null)
    set.asMutableSet().add("foo")
+   set.asMutableSet().java_addAll(list)
    set.asMutableSet().java_remove("foo")
+   set.asMutableSet().java_removeAll(list)
+   set.asMutableSet().removeIf(
+    Predicate { x_2: String ->
+     return@Predicate true
+    },
+   )
+   set.asMutableSet().java_retainAll(list)
+   set.asMutableSet().clear()
    map.asMutableMap().put("foo", "bar")
+   map.asMutableMap().java_putAll(map)
+   map.asMutableMap().putIfAbsent("foo", "bar")
    map.asMutableMap().java_remove("foo")
+   map.asMutableMap().replace("foo", "bar")
+   map.asMutableMap().replaceAll(
+    BiFunction { k: String, v: String ->
+     return@BiFunction v
+    },
+   )
    map.asMutableMap().clear()
+   map.asMutableMap().compute(
+    "foo",
+    BiFunction { k_1: String, v_1: String? ->
+     return@BiFunction v_1
+    },
+   )
+   map.asMutableMap().computeIfAbsent(
+    "foo",
+    Function { k_2: String ->
+     return@Function "bar"
+    },
+   )
+   map.asMutableMap().computeIfPresent(
+    "foo",
+    BiFunction { k_3: String, v_2: String ->
+     return@BiFunction v_2
+    },
+   )
+   map.asMutableMap().merge(
+    "foo",
+    "bar",
+    BiFunction { v1: String, v2: String ->
+     return@BiFunction v1
+    },
+   )
    mapEntry.asMutableEntry().setValue("bar")
   }
   
   @JvmStatic
   fun testMutability_subtypes(collection: CustomCollection<String>, list: CustomList<String>, map: CustomMap<String, String>) {
    collection.add("foo")
+   collection.java_addAll(list)
    collection.java_remove("foo")
+   collection.java_removeAll(list)
+   collection.removeIf(
+    Predicate { x: String ->
+     return@Predicate true
+    },
+   )
+   collection.java_retainAll(list)
    collection.clear()
    list.add(0, "foo")
+   list.java_addAll(list)
    list.set(0, "foo")
-   list.removeAt(0)
    list.sort(null)
+   list.removeAt(0)
+   list.replaceAll(
+    UnaryOperator { x_1: String ->
+     return@UnaryOperator x_1
+    },
+   )
    map.put("foo", "bar")
+   map.java_putAll(map)
+   map.putIfAbsent("foo", "bar")
    map.java_remove("foo")
+   map.replace("foo", "bar")
+   map.replaceAll(
+    BiFunction { k: String, v: String ->
+     return@BiFunction v
+    },
+   )
    map.clear()
+   map.compute(
+    "foo",
+    BiFunction { k_1: String, v_1: String? ->
+     return@BiFunction v_1
+    },
+   )
+   map.computeIfAbsent(
+    "foo",
+    Function { k_2: String ->
+     return@Function "bar"
+    },
+   )
+   map.computeIfPresent(
+    "foo",
+    BiFunction { k_3: String, v_2: String ->
+     return@BiFunction v_2
+    },
+   )
+   map.merge(
+    "foo",
+    "bar",
+    BiFunction { v1: String, v2: String ->
+     return@BiFunction v1
+    },
+   )
   }
   
   @JvmStatic

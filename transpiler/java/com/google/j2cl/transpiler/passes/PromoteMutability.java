@@ -75,6 +75,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
         "remove",
         "removeFirst",
         "removeLast",
+        "replaceAll",
         "addFirst",
         "addLast");
 
