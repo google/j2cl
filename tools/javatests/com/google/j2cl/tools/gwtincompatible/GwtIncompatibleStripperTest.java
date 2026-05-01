@@ -18,10 +18,14 @@ package com.google.j2cl.tools.gwtincompatible;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.joining;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import java.util.function.Function;
+import javax.tools.DiagnosticCollector;
+import javax.tools.JavaFileObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -52,7 +56,7 @@ public class GwtIncompatibleStripperTest {
   public void testNoProcessString() {
     assertAnnotatedCodeStripped(
         """
-        public class Foo {String a = "@GwtIncompatible");}
+        public class Foo {String a = "@GwtIncompatible";}
         """,
         "GwtIncompatible");
   }
@@ -281,10 +285,11 @@ public class GwtIncompatibleStripperTest {
         """
         public class Foo {
         -  @GwtIncompatible
-        -  /**"
-        -   * doc"
-        -   */"
+        -  /**
+        -   * doc
+        -   */
         -  public String a, b;
+        }
         """,
         "GwtIncompatible");
   }
@@ -350,10 +355,10 @@ public class GwtIncompatibleStripperTest {
   public void testProcessRecord() {
     assertAnnotatedCodeStripped(
         """
-            "public class Foo {",
-            "-  @GwtIncompatible",
-            "-  public record Bar(int a, String b) {}",
-            }
+        public class Foo {
+        -  @GwtIncompatible
+        -  public record Bar(int a, String b) {}
+        }
         """,
         "GwtIncompatible");
   }
@@ -362,19 +367,70 @@ public class GwtIncompatibleStripperTest {
   public void testProcessSealedClass() {
     assertAnnotatedCodeStripped(
         """
-            "public class Foo {",
-            "-  @GwtIncompatible",
-            "-  public sealed class Bar permits Baz {}",
-            "  public final class Baz extends Bar {}",
+        public class Foo {
+        -  @GwtIncompatible
+        -  public sealed class Bar permits Baz {}
+          public final class Baz extends Bar {}
         }
         """,
-        "GwtIncompatible  ");
+        "GwtIncompatible");
+  }
+
+  @Test
+  public void testStripWithSyntaxErrors() {
+    assertAnnotatedCodeStrippedWithSyntaxErrors(
+        """
+        public class Foo {
+        -  @GwtIncompatible
+        -  public String a;
+        // missing closing brace
+        """,
+        "GwtIncompatible");
+
+    assertAnnotatedCodeStrippedWithSyntaxErrors(
+        """
+        public class Foo {
+        -  @GwtIncompatible
+        -  public String a;
+
+        // Dangling annotation
+        @GwtIncompatible
+        """,
+        "GwtIncompatible");
+  }
+
+  @Test
+  public void testStripToTheEndOfFile() {
+    assertAnnotatedCodeStripped(
+        """
+        - @GwtIncompatible
+        - public class Foo {
+        - }
+        """,
+        "GwtIncompatible");
   }
 
   private static void assertAnnotatedCodeStripped(String code, String... annotations) {
-    assertEquals(
-        after(code),
-        GwtIncompatibleStripper.strip(before(code), ImmutableList.copyOf(annotations)));
+    assertAnnotatedCodeStrippedImpl(code, /* expectErrors= */ false, annotations);
+  }
+
+  private static void assertAnnotatedCodeStrippedWithSyntaxErrors(
+      String code, String... annotations) {
+    assertAnnotatedCodeStrippedImpl(code, /* expectErrors= */ true, annotations);
+  }
+
+  private static void assertAnnotatedCodeStrippedImpl(
+      String code, boolean expectErrors, String... annotations) {
+    DiagnosticCollector<JavaFileObject> collector = new DiagnosticCollector<>();
+    String strippedContent =
+        GwtIncompatibleStripper.strip(before(code), ImmutableList.copyOf(annotations), collector);
+    assertEquals(after(code), strippedContent);
+    assertTrue(
+        expectErrors
+            ? "Expected syntax errors"
+            : ("Code contains unexpected syntax errors: \n"
+                + Joiner.on("\n").join(collector.getDiagnostics())),
+        expectErrors != collector.getDiagnostics().isEmpty());
   }
 
   private static String before(String code) {

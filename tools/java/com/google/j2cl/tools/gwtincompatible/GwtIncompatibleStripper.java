@@ -17,6 +17,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -47,6 +48,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.tools.DiagnosticCollector;
+import javax.tools.DiagnosticListener;
 import javax.tools.JavaFileObject;
 import javax.tools.SimpleJavaFileObject;
 import javax.tools.StandardLocation;
@@ -88,12 +91,23 @@ public final class GwtIncompatibleStripper {
   }
 
   public static String strip(String fileContent, List<String> annotationNames) {
+    return strip(fileContent, annotationNames, /* diagnosticCollector= */ null);
+  }
+
+  @VisibleForTesting
+  static String strip(
+      String fileContent,
+      List<String> annotationNames,
+      DiagnosticCollector<JavaFileObject> diagnosticCollector) {
     // Avoid parsing if there are no textual references to the annotation name(s).
     if (annotationNames.stream().noneMatch(fileContent::contains)) {
       return fileContent;
     }
 
     Context context = new Context();
+    if (diagnosticCollector != null) {
+      context.put(DiagnosticListener.class, diagnosticCollector);
+    }
     JavacFileManager fileManager = new JavacFileManager(context, true, UTF_8);
     try {
       // Set an empty bootclasspath to save time on javac initialization.
@@ -154,10 +168,16 @@ public final class GwtIncompatibleStripper {
     // handled by virtue of skipping ranges that have already been processed.
     StringBuilder newFileContent = new StringBuilder();
     int currentPosition = 0;
+    int fileContentLength = fileContent.length();
     for (Tree node : nodesToRemove) {
       int startPosition =
           getStartPosition(node, docTrees, sourcePositions, compilationUnit, fileContent);
       int endPosition = getEndPosition(node, sourcePositions, compilationUnit);
+      if (!isValidPosition(startPosition, endPosition, fileContentLength)) {
+        // When the code has syntax errors, the javac parser may produce nodes with positions that
+        // are outside the file content. Ignore those nodes.
+        continue;
+      }
 
       // If a node is overlapping with a previously stripped node, its startPosition will be
       // adjusted to the currentPosition.
@@ -189,6 +209,10 @@ public final class GwtIncompatibleStripper {
     newFileContent.append(fileContent, currentPosition, fileContent.length());
 
     return newFileContent.toString();
+  }
+
+  private static boolean isValidPosition(int start, int end, int length) {
+    return start >= 0 && start < end && end < length;
   }
 
   private static final boolean IS_END_POS_TABLE_PRESENT = getIsEndPosTablePresent();
