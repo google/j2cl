@@ -100,7 +100,7 @@ public class StringTest extends TestCase {
     assertTrue(hideFromCompiler("İ").compareTo("z") > 0);
   }
 
-  public static void testCompareToNull() {
+  public void testCompareToNull() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;
@@ -154,7 +154,7 @@ public class StringTest extends TestCase {
     assertEquals("abcd", s);
   }
 
-  public static void testConcatNull() {
+  public void testConcatNull() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;
@@ -196,7 +196,7 @@ public class StringTest extends TestCase {
     assertEquals("\uD801\uDC00", new String(sb));
   }
 
-  public static void testConstructorNull() {
+  public void testConstructorNull() {
 
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
@@ -215,7 +215,7 @@ public class StringTest extends TestCase {
     }
   }
 
-  public static void testConstructorBytes() {
+  public void testConstructorBytes() {
     if (isWasm()) {
       // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
       return;
@@ -233,7 +233,7 @@ public class StringTest extends TestCase {
     }
   }
 
-  public static void testConstructorLatin1() throws UnsupportedEncodingException {
+  public void testConstructorLatin1() throws UnsupportedEncodingException {
     if (isWasm()) {
       // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
       return;
@@ -267,7 +267,7 @@ public class StringTest extends TestCase {
     }
   }
 
-  public static void testConstructorUtf8() throws UnsupportedEncodingException {
+  public void testConstructorUtf8() throws UnsupportedEncodingException {
     if (isWasm()) {
       // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
       return;
@@ -499,7 +499,7 @@ public class StringTest extends TestCase {
     assertFalse(hideFromCompiler("acba").equals("abca"));
   }
 
-  public static void testEqualsNull() {
+  public void testEqualsNull() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;
@@ -536,7 +536,7 @@ public class StringTest extends TestCase {
     assertFalse(hideFromCompiler("acba").equalsIgnoreCase("abca"));
   }
 
-  public static void testEqualsIgnoreCaseNull() {
+  public void testEqualsIgnoreCaseNull() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;
@@ -593,7 +593,7 @@ public class StringTest extends TestCase {
     assertTrue(Arrays.equals(bytes, str.getBytes()));
   }
 
-  public static void testGetBytesLatin1() throws UnsupportedEncodingException {
+  public void testGetBytesLatin1() throws UnsupportedEncodingException {
     if (isWasm()) {
       // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
       return;
@@ -613,7 +613,7 @@ public class StringTest extends TestCase {
     }
   }
 
-  public static void testGetBytesUtf8() throws UnsupportedEncodingException {
+  public void testGetBytesUtf8() throws UnsupportedEncodingException {
     if (isWasm()) {
       // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
       return;
@@ -739,7 +739,7 @@ public class StringTest extends TestCase {
     }
   }
 
-  public static void testHashCodeNull() {
+  public void testHashCodeNull() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;
@@ -759,7 +759,7 @@ public class StringTest extends TestCase {
     assertEquals(0, haystack.indexOf(""));
   }
 
-  public static void testIndexOfNull() {
+  public void testIndexOfNull() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;
@@ -1115,7 +1115,7 @@ public class StringTest extends TestCase {
     assertSame("s same as s.toString()", s, s.toString());
   }
 
-  public static void testToStringNull() {
+  public void testToStringNull() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;

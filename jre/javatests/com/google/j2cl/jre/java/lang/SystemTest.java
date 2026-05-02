@@ -123,7 +123,7 @@ public class SystemTest extends TestCase {
   }
 
   @J2ktIncompatible // We don't have this information at runtime.
-  public static void testArraycopyMultidim() {
+  public void testArraycopyMultidim() {
     Object[][] objArray = new Object[1][1];
     String[][] strArray = new String[1][1];
     strArray[0][0] = "Test";
@@ -153,7 +153,7 @@ public class SystemTest extends TestCase {
   }
 
   @J2ktIncompatible // We don't have this information at runtime.
-  public static void testArraycopyObjects() {
+  public void testArraycopyObjects() {
     Foo[] fooArray = new Foo[4];
     Bar[] barArray = new Bar[4];
     Object[] src = new Object[] {new Bar(), new Bar(), new Foo(), new Bar()};

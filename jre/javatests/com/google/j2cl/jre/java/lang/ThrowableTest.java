@@ -24,7 +24,7 @@ import junit.framework.TestCase;
 public class ThrowableTest extends TestCase {
 
   @J2ktIncompatible // Currently unsupported
-  public static void testStackTrace() {
+  public void testStackTrace() {
     Throwable e = new Throwable("<my msg>");
     assertTrue(e.getStackTrace().length > 0);
 

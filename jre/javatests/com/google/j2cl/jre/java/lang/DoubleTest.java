@@ -55,7 +55,7 @@ public class DoubleTest extends TestCase {
     assertTrue(Double.compare(-0.0, -0.0) == 0);
   }
 
-  public static void testNPE() {
+  public void testNPE() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported
       return;
