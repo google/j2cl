@@ -183,36 +183,18 @@ public class WasmExportBridgesUtils {
   }
 
   private static MethodDescriptor createGetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
-    return buildPropertyBridgeDescriptor(fieldDescriptor, JsMemberType.GETTER)
+    return MethodDescriptor.Builder.from(AstUtils.getGetterMethodDescriptor(fieldDescriptor))
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT)
         .setReturnTypeDescriptor(replaceStringWithNativeString(fieldDescriptor.getTypeDescriptor()))
         .build();
   }
 
   private static MethodDescriptor createSetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
-    return buildPropertyBridgeDescriptor(fieldDescriptor, JsMemberType.SETTER)
+    return MethodDescriptor.Builder.from(AstUtils.getSetterMethodDescriptor(fieldDescriptor))
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT)
         .setParameterTypeDescriptors(
             replaceStringWithNativeString(fieldDescriptor.getTypeDescriptor()))
         .build();
-  }
-
-  private static MethodDescriptor.Builder buildPropertyBridgeDescriptor(
-      FieldDescriptor fieldDescriptor, JsMemberType jsMemberType) {
-    return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
-        .setName(fieldDescriptor.getName())
-        .setVisibility(fieldDescriptor.getVisibility())
-        .setStatic(fieldDescriptor.isStatic())
-        .setOriginalJsInfo(
-            fieldDescriptor.getJsInfo().toBuilder()
-                .setJsMemberType(jsMemberType)
-                // Name has to be set here to avoid JsMemberType.GETTER/SETTER.computeJsName()
-                // returning null.
-                // TODO(b/493656775): Revisit this when creating these bridges using `makeBridge`.
-                // Perhaps the bridge origin should be a MemberDescriptor.
-                .setJsName(fieldDescriptor.getSimpleJsName())
-                .build());
   }
 
   private static TypeDescriptor replaceStringWithNativeString(TypeDescriptor typeDescriptor) {
