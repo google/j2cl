@@ -41,7 +41,7 @@ jobs:
     outputs:
       version: ${{ steps.get_version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: get_version
         run: |
           if [ -f "oss_version.txt" ]; then
