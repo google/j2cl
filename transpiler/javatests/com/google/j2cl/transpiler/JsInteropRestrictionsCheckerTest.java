@@ -881,6 +881,42 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testRenamedObjectMethodFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        interface Interface {
+          @JsMethod(name = "eq") boolean equals(Object other);
+        > Error: 'boolean Interface.equals(Object other)' cannot be assigned JavaScript name 'eq' that is different from the JavaScript name of a method it overrides ('boolean Object.equals(Object)' with JavaScript name 'equals').
+        }
+        public class Buggy  {
+          @JsMethod(name = "hash") public int hashCode() {
+        > Error: 'int Buggy.hashCode()' cannot be assigned JavaScript name 'hash' that is different from the JavaScript name of a method it overrides ('int Object.hashCode()' with JavaScript name 'hashCode').
+            return 0;
+          }
+        }
+        """);
+  }
+
+  public void testObjectMethodBecomesJsPropertyFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        interface Interface {
+          @JsProperty(name = "string") String toString();
+        > Error: JsProperty 'String Interface.toString()' cannot override JsMethod 'String Object.toString()'.
+        }
+        public class Buggy  {
+          @JsProperty(name = "hash") public int hashCode() {
+          > Error: JsProperty 'int Buggy.hashCode()' cannot override JsMethod 'int Object.hashCode()'.
+            return 0;
+          }
+        }
+        """);
+  }
+
   public void testJsPropertyDifferentFlavourInSubclassFails() {
     assertWithInlineMessages(
         "test.Buggy",
