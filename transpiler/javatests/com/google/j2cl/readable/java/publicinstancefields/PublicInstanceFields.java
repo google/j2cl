@@ -18,4 +18,5 @@ package publicinstancefields;
 public class PublicInstanceFields {
   public int a = 1;
   public int b;
+  public int getA;
 }

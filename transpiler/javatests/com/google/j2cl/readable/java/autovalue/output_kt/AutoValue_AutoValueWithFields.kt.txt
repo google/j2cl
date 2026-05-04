@@ -32,22 +32,22 @@ class AutoValue_AutoValueWithFields: ___AutoValue_AutoValueWithFields {
  private val monitor: J2ktMonitor? = J2ktMonitor()
  
  @Volatile
- private var memoizedNative: Int = 0
+ private var getMemoizedNative: Int = 0
  
  @Volatile
- private var memoizedNative___Memoized: Boolean = false
+ private var getMemoizedNative___Memoized: Boolean = false
  
  internal constructor(intField: Int): super(intField)
  
  override fun getMemoizedNative_pp_autovalue(): Int {
-  if (!this.memoizedNative___Memoized) {
+  if (!this.getMemoizedNative___Memoized) {
    synchronized<Unit>(this.monitor!!) {
-    if (!this.memoizedNative___Memoized) {
-     this.memoizedNative = super<___AutoValue_AutoValueWithFields>.getMemoizedNative_pp_autovalue()
-     this.memoizedNative___Memoized = true
+    if (!this.getMemoizedNative___Memoized) {
+     this.getMemoizedNative = super<___AutoValue_AutoValueWithFields>.getMemoizedNative_pp_autovalue()
+     this.getMemoizedNative___Memoized = true
     }
    }
   }
-  return this.memoizedNative
+  return this.getMemoizedNative
  }
 }

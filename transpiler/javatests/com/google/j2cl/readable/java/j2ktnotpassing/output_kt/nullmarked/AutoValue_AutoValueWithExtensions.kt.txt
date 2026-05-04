@@ -34,39 +34,39 @@ class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
  private val monitor: J2ktMonitor = J2ktMonitor()
  
  @Volatile
- private var memoizedString: String? = null
+ private var getMemoizedString: String? = null
  
  @Volatile
- private var memoizedInt: Int = 0
+ private var getMemoizedInt: Int = 0
  
  @Volatile
- private var memoizedInt___Memoized: Boolean = false
+ private var getMemoizedInt___Memoized: Boolean = false
  
  internal constructor(stringField: String, intField: Int): super(stringField, intField)
  
  override fun getMemoizedString_pp_j2ktnotpassing_nullmarked(): String {
-  if (this.memoizedString == null) {
+  if (this.getMemoizedString == null) {
    synchronized<Unit>(this.monitor) {
-    if (this.memoizedString == null) {
-     this.memoizedString = super<___AutoValue_AutoValueWithExtensions>.getMemoizedString_pp_j2ktnotpassing_nullmarked()
-     if (this.memoizedString == null) {
+    if (this.getMemoizedString == null) {
+     this.getMemoizedString = super<___AutoValue_AutoValueWithExtensions>.getMemoizedString_pp_j2ktnotpassing_nullmarked()
+     if (this.getMemoizedString == null) {
       throw NullPointerException("getMemoizedString() cannot return null")
      }
     }
    }
   }
-  return this.memoizedString!!
+  return this.getMemoizedString!!
  }
  
  override fun getMemoizedInt_pp_j2ktnotpassing_nullmarked(): Int {
-  if (!this.memoizedInt___Memoized) {
+  if (!this.getMemoizedInt___Memoized) {
    synchronized<Unit>(this.monitor) {
-    if (!this.memoizedInt___Memoized) {
-     this.memoizedInt = super<___AutoValue_AutoValueWithExtensions>.getMemoizedInt_pp_j2ktnotpassing_nullmarked()
-     this.memoizedInt___Memoized = true
+    if (!this.getMemoizedInt___Memoized) {
+     this.getMemoizedInt = super<___AutoValue_AutoValueWithExtensions>.getMemoizedInt_pp_j2ktnotpassing_nullmarked()
+     this.getMemoizedInt___Memoized = true
     }
    }
   }
-  return this.memoizedInt
+  return this.getMemoizedInt
  }
 }

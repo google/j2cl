@@ -20,4 +20,6 @@ class PublicInstanceFields {
   // Property must be initialized or be abstract
   // 'lateinit' modifier is not allowed on properties of primitive types
   var b = 0
+
+  var getA = 0
 }
