@@ -18,7 +18,10 @@ package j2kt;
 import java.util.AbstractCollection;
 import java.util.AbstractList;
 import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -274,7 +277,22 @@ public class Collections {
     passLowerBoundSet(set);
     passLowerBoundMap(map);
     passLowerBoundMapEntry(mapEntry);
+
+    List<List<? super String>> nestedList = new java.util.ArrayList<>();
+    nestedList.add(new java.util.ArrayList<String>());
+    nestedList.add(new java.util.ArrayList<Object>());
+
+    List<Map<String, ? super String>> nestedMap = new java.util.ArrayList<>();
+    Map<String, String> innerMap = new java.util.HashMap<>();
+    nestedMap.add(innerMap);
+
+    testNestedLowerBounds(l -> {}, nestedList, nestedMap);
   }
+
+  private static void testNestedLowerBounds(
+      java.util.function.Consumer<List<? super String>> consumer,
+      List<List<? super String>> nestedList,
+      List<Map<String, ? super String>> nestedMap) {}
 
   private static void passLowerBoundCollection(Collection<? super String> collection) {}
 
@@ -311,7 +329,7 @@ public class Collections {
   public static class CustomCollection<T extends @Nullable Object> extends AbstractCollection<T> {
     @Override
     public Iterator<T> iterator() {
-      throw new RuntimeException();
+      return java.util.Collections.emptyIterator();
     }
 
     @Override
@@ -378,6 +396,16 @@ public class Collections {
     }
 
     @Override
+    public ListIterator<T> listIterator() {
+      return java.util.Collections.emptyListIterator();
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+      return java.util.Collections.emptyList();
+    }
+
+    @Override
     public int size() {
       return 0;
     }
@@ -411,11 +439,48 @@ public class Collections {
     }
   }
 
+  public static class CustomListWithSuperCalls<T extends @Nullable Object> extends ArrayList<T> {
+    @Override
+    public T get(int index) {
+      throw new IndexOutOfBoundsException();
+    }
+
+    @Override
+    public int size() {
+      return 0;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+      return super.iterator();
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+      return super.listIterator();
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+      return super.subList(fromIndex, toIndex);
+    }
+  }
+
   public static class CustomMap<K extends @Nullable Object, V extends @Nullable Object>
       extends AbstractMap<K, V> {
     @Override
     public Set<Entry<K, V>> entrySet() {
-      throw new RuntimeException();
+      return java.util.Collections.emptySet();
+    }
+
+    @Override
+    public Set<K> keySet() {
+      return java.util.Collections.emptySet();
+    }
+
+    @Override
+    public Collection<V> values() {
+      return java.util.Collections.emptyList();
     }
 
     @Override
@@ -459,6 +524,49 @@ public class Collections {
     public void putAll(Map<? extends K, ? extends V> m) {
       m = convertMap(m);
       super.putAll(m);
+    }
+  }
+
+  public static class CustomMapWithSuperCalls<
+          K extends @Nullable Object, V extends @Nullable Object>
+      extends HashMap<K, V> {
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+      return super.entrySet();
+    }
+
+    @Override
+    public Set<K> keySet() {
+      return super.keySet();
+    }
+
+    @Override
+    public Collection<V> values() {
+      return super.values();
+    }
+  }
+
+  public static class CustomMapSetValues<K extends @Nullable Object, V extends @Nullable Object>
+      extends CustomMap<K, V> {
+    @Override
+    public Set<V> values() {
+      return java.util.Collections.emptySet();
+    }
+  }
+
+  public static class CustomMapWithNestedLambda<
+          K extends @Nullable Object, V extends @Nullable Object>
+      extends CustomMap<K, V> {
+    @Override
+    public Collection<V> values() {
+      Runnable r =
+          () -> {
+            Collection<V> ignored = (Collection<V>) java.util.Collections.emptySet();
+            return;
+          };
+      java.util.function.Supplier<Collection<V>> s =
+          () -> (Collection<V>) java.util.Collections.emptySet();
+      return (Collection<V>) java.util.Collections.emptyList();
     }
   }
 
@@ -539,6 +647,25 @@ public class Collections {
     }
   }
 
+  public static class SpecificEntrySet extends AbstractSet<Map.Entry<String, Integer>> {
+    @Override
+    public Iterator<Map.Entry<String, Integer>> iterator() {
+      return null;
+    }
+
+    @Override
+    public int size() {
+      return 0;
+    }
+  }
+
+  public static class CustomMapWithSpecificEntrySet extends AbstractMap<String, Integer> {
+    @Override
+    public Set<Map.Entry<String, Integer>> entrySet() {
+      return new SpecificEntrySet();
+    }
+  }
+
   public abstract static class AbstractCollectionWithToArrayOverride<E extends @Nullable Object>
       implements Collection<E> {
 
@@ -605,5 +732,52 @@ public class Collections {
 
   private static Map<String, String> mapOfString() {
     throw new RuntimeException();
+  }
+
+  private static void testCustomMapWithCustomSetEntry(
+      CustomMapWithCustomSetEntry<String, String> map) {
+    Set<Map.Entry<String, String>> entrySet = map.entrySet();
+    Map<String, String> regularMap = map;
+    entrySet = regularMap.entrySet();
+  }
+
+  public interface CustomMapWithCustomSetEntry<
+          K extends @Nullable Object, V extends @Nullable Object>
+      extends Map<K, V> {
+    @Override
+    AbstractSet<Entry<K, V>> entrySet();
+  }
+
+  public interface CustomIterable<E extends @Nullable Object> extends Iterable<E> {
+    @Override
+    Iterator<E> iterator();
+  }
+
+  public interface CustomListWithSubList extends List<List<String>> {
+    @Override
+    List<List<String>> subList(int fromIndex, int toIndex);
+  }
+
+  public static <L extends List<String>> void testTypeVariableMutation(L list) {
+    list.add("foo");
+  }
+
+  public static <L extends List<? super String>> void testTypeVariableMutationWithLowerBound(
+      L list) {
+    list.add("foo");
+  }
+
+  public static void testWildcardMutation(List<? extends List<String>> lists) {
+    lists.get(0).add("foo");
+  }
+
+  public static void testIterableLambda() {
+    List<String> list = new ArrayList<>();
+    Iterable<String> it = () -> list.iterator();
+  }
+
+  public static void testCustomIterableLambda() {
+    List<String> list = new ArrayList<>();
+    CustomIterable<String> it = () -> list.iterator();
   }
 }
