@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.common.collect.MoreCollectors.toOptional;
@@ -30,6 +31,7 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
@@ -48,6 +50,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -743,6 +746,79 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     }
 
     return methodsByMangledName.values();
+  }
+
+  /**
+   * Returns accidental overrides of interface methods in the form of synthetic methods whose target
+   * is the superclass implementation. To get the interface methods overridden by each method, use
+   * {@link MethodDescriptor#getJavaOverriddenMethodDescriptors}.
+   *
+   * <p>An accidental override occurs when a class implements an interface and inherits an
+   * implementation from a superclass that matches the interface method's signature, without
+   * providing an explicit override itself.
+   *
+   * <p>Example:
+   *
+   * <pre>{@code
+   * interface I { void m(); }
+   * class A { public void m() {} }
+   * class B extends A implements I {}
+   * }</pre>
+   *
+   * <p>In class {@code B}, {@code A.m} is an "accidental override" of {@code I.m}.
+   */
+  @Memoized
+  public Collection<MethodDescriptor> getAccidentalOverrides() {
+    if (isInterface() || getSuperTypeDescriptor() == null) {
+      return ImmutableList.of();
+    }
+
+    SourceLanguage sourceLanguage = getTypeDeclaration().getSourceLanguage();
+
+    // Methods declared explicitly in this type.
+    ImmutableSet<String> declaredOverrideKeys =
+        getDeclaredMethodDescriptors().stream()
+            .filter(MethodDescriptor::isPolymorphic)
+            .map(m -> m.getOverrideKey(sourceLanguage))
+            .collect(toImmutableSet());
+
+    // Interface methods that are not declared in this type. These are all interface methods that
+    // are accidentally overridden. We just need to find the corresponding implementation in a
+    // superclass.
+    ImmutableMap<String, MethodDescriptor> undeclaredInterfaceMethodsByOverrideKey =
+        getInterfaceTypeDescriptors().stream()
+            .flatMap(i -> i.getPolymorphicMethods().stream())
+            .filter(
+                m ->
+                    !TypeDescriptors.isJavaLangObject(m.getEnclosingTypeDescriptor())
+                        // Exclude interface methods that are implemented by the supertype.
+                        && !getSuperTypeDescriptor().isSubtypeOf(m.getEnclosingTypeDescriptor())
+                        && !declaredOverrideKeys.contains(m.getOverrideKey(sourceLanguage)))
+            .collect(
+                toImmutableMap(
+                    m -> m.getOverrideKey(sourceLanguage),
+                    Function.identity(),
+                    (existing, replacement) -> replacement));
+
+    return getSuperTypeDescriptor().getPolymorphicMethods().stream()
+        .map(
+            m -> {
+              var interfaceMethod =
+                  undeclaredInterfaceMethodsByOverrideKey.get(m.getOverrideKey(sourceLanguage));
+              if (interfaceMethod == null) {
+                // No corresponding interface method found, so no accidental override.
+                return null;
+              }
+
+              // Note: Create the accidental override bridge as a SPECIALIZING_BRIDGE for now which
+              // has the required behavior for `getJsInfo` and does not delegate it to the bridge
+              // origin.
+              // TODO(b/507538365): Consider its own method origin.
+              return createBridgeMethodDescriptor(
+                  MethodOrigin.SPECIALIZING_BRIDGE, interfaceMethod, m);
+            })
+        .filter(Objects::nonNull)
+        .collect(toImmutableList());
   }
 
   // Safe cast because a specialized a member will be the same type of member.

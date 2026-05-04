@@ -608,7 +608,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         }
         class Buggy3 implements IBuggy2, IBuggy3 {
           public void show(boolean b) {}
-        > Error: 'void Buggy3.show(boolean b)' cannot be assigned JavaScript name 'display' that is different from the JavaScript name of a method it overrides ('void IBuggy2.show(boolean)' with JavaScript name 'show').
+        > Error: 'void Buggy3.show(boolean)' cannot be assigned JavaScript name 'display' that is different from the JavaScript name of a method it overrides ('void IBuggy2.show(boolean)' with JavaScript name 'show').
         }
         class Main {
           public static void main() {
@@ -847,21 +847,56 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   }
 
   // TODO(b/37579830): Finalize checker implementation and enable this test.
-  public void disabled_testAccidentallyRenamedSuperInterfaceJsMethodFails() {
+  public void testAccidentallyRenamedSuperInterfaceJsMethodFails() {
     assertWithInlineMessages(
         "test.Buggy",
         """
         import jsinterop.annotations.*;
         @JsType
-        interface IBuggy {
+        interface InterfaceExposingFooAsFoo {
           void foo();
         }
         @JsType
-        class ParentBuggy {
+        class ParentExposingFooAsBar {
           @JsMethod(name = "bar") public void foo() {}
         }
-        public class Buggy extends ParentBuggy implements IBuggy {
-        > Error: 'void EntryPoint.ParentBuggy.foo()' (exposed by 'EntryPoint.Buggy') cannot be assigned a different JavaScript name than the method it overrides.
+        class ChildAccidentallyOverridingFoo extends ParentExposingFooAsBar implements InterfaceExposingFooAsFoo {
+        > Error: 'void ParentExposingFooAsBar.foo()' cannot be assigned JavaScript name 'bar' (exposed by test.ChildAccidentallyOverridingFoo) that is different from the JavaScript name of a method it overrides ('void InterfaceExposingFooAsFoo.foo()' with JavaScript name 'foo').
+        }
+        // The following works because there is no accidental override.
+        class NoAccidentalOverride extends ChildAccidentallyOverridingFoo implements InterfaceExposingFooAsFoo {
+        }
+        interface InterfaceExposingM {
+          @JsMethod
+          void m();
+          void n();
+        }
+        interface InterfaceExposingN {
+          void m();
+          @JsMethod
+          void n();
+        }
+        class ParentExposingRenamedMAndN {
+          @JsMethod(name = "mm")
+          public void m() {}
+          @JsMethod(name = "nn")
+          public void n() {}
+        }
+        class ChildAccidentallyOverridingMAndN extends ParentExposingRenamedMAndN implements InterfaceExposingM, InterfaceExposingN {
+        > Error: 'void ParentExposingRenamedMAndN.m()' cannot be assigned JavaScript name 'mm' (exposed by test.ChildAccidentallyOverridingMAndN) that is different from the JavaScript name of a method it overrides ('void InterfaceExposingM.m()' with JavaScript name 'm').
+        > Error: 'void ParentExposingRenamedMAndN.n()' cannot be assigned JavaScript name 'nn' (exposed by test.ChildAccidentallyOverridingMAndN) that is different from the JavaScript name of a method it overrides ('void InterfaceExposingN.n()' with JavaScript name 'n').
+        }
+        // Test when there is a conflict between 2 interfaces.
+        @JsType
+        interface InterfaceExposingFooAsBar {
+          @JsMethod(name = "bar")
+          void foo();
+        }
+        class ParentNotExposingFoo {
+          public void foo() {}
+        }
+        class ChildAccidentallyOverridingFooMultipleInterfaces extends ParentNotExposingFoo implements InterfaceExposingFooAsFoo, InterfaceExposingFooAsBar {
+        > Error: 'void ChildAccidentallyOverridingFooMultipleInterfaces.foo()' cannot be assigned JavaScript name 'bar' (inherited from test.InterfaceExposingFooAsBar) that is different from the JavaScript name of a method it overrides ('void InterfaceExposingFooAsFoo.foo()' with JavaScript name 'foo').
         }
         """);
   }
@@ -888,7 +923,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         import jsinterop.annotations.*;
         interface Interface {
           @JsMethod(name = "eq") boolean equals(Object other);
-        > Error: 'boolean Interface.equals(Object other)' cannot be assigned JavaScript name 'eq' that is different from the JavaScript name of a method it overrides ('boolean Object.equals(Object)' with JavaScript name 'equals').
+        > Error: 'boolean Interface.equals(Object)' cannot be assigned JavaScript name 'eq' that is different from the JavaScript name of a method it overrides ('boolean Object.equals(Object)' with JavaScript name 'equals').
         }
         public class Buggy  {
           @JsMethod(name = "hash") public int hashCode() {
@@ -1094,9 +1129,43 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           @JsProperty(name = "getY") public int getY() { return 6; }
           > Error: JsProperty 'int Buggy.getY()' cannot override JsMethod 'int Super.getY()'.
           @JsMethod public void setX(int x) {  }
-          > Error: JsMethod 'void Buggy.setX(int x)' cannot override JsProperty 'void Super.setX(int)'.
+          > Error: JsMethod 'void Buggy.setX(int)' cannot override JsProperty 'void Super.setX(int)'.
           @JsMethod public void setZ(int z) {}
-          > Error: JsMethod 'void Buggy.setZ(int z)' cannot override JsProperty 'void Super.setZ(int)'.
+          > Error: JsMethod 'void Buggy.setZ(int)' cannot override JsProperty 'void Super.setZ(int)'.
+        }
+        """);
+  }
+
+  public void testAccidentalOverrideMixingJsMethodJsPropertyFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        interface InterfaceExposingGetStringAsMethod {
+          @JsMethod
+          String getString();
+        }
+        class ParentExposingGetStringAsProperty {
+          @JsProperty
+          public String getString() {
+            return "C1.get";
+          }
+        }
+        class ChildAccidentallyOverriddingGetString extends ParentExposingGetStringAsProperty implements InterfaceExposingGetStringAsMethod {
+        > Error: JsProperty 'String ParentExposingGetStringAsProperty.getString()' (exposed by test.ChildAccidentallyOverriddingGetString) cannot override JsMethod 'String InterfaceExposingGetStringAsMethod.getString()'.
+        }
+        // Test when there is a conflict between 2 interfaces.
+        interface InterfaceExposingGetStringAsProperty {
+          @JsProperty
+          String getString();
+        }
+        class ParentNotExposingGetString {
+          public String getString() {
+            return "C2.get";
+          }
+        }
+        class ChildAccidentallyOverridingGetStringMultipleInterfaces extends ParentNotExposingGetString implements InterfaceExposingGetStringAsMethod, InterfaceExposingGetStringAsProperty {
+        > Error: JsProperty 'String ChildAccidentallyOverridingGetStringMultipleInterfaces.getString()' (inherited from test.InterfaceExposingGetStringAsProperty) cannot override JsMethod 'String InterfaceExposingGetStringAsMethod.getString()'.
         }
         """);
   }
@@ -3704,6 +3773,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           public native int hashCode();
         }
         class SomeClass3 extends NativeTypeWithHashCode implements A {
+        > Error: 'int NativeTypeWithHashCode.hashCode()' cannot be assigned JavaScript name 'hashCode' (exposed by test.SomeClass3) that is different from the JavaScript name of a method it overrides ('int A.hashCode()' with JavaScript name 'something').
           @JsConstructor public SomeClass3() {}
         }
         @JsType(isNative=true) interface NativeInterface {

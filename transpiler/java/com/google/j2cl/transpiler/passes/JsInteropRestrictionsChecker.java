@@ -96,6 +96,7 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
@@ -203,6 +204,8 @@ public class JsInteropRestrictionsChecker {
       checkMember(member);
     }
     problems.abortIfCancelled();
+
+    checkAccidentalOverrides(type);
 
     checkTypeLiteralsAndInstanceOfs(type);
     checkJsEnumUsages(type);
@@ -1162,6 +1165,12 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
+  private void checkAccidentalOverrides(Type type) {
+    type.getTypeDescriptor().getAccidentalOverrides().stream()
+        .filter(m -> m.getJsInfo().getJsMemberType() != JsMemberType.UNDEFINED_ACCESSOR)
+        .forEach(bridge -> checkOverrideConsistency(bridge, type.getSourcePosition()));
+  }
+
   private void checkIllegalOverrides(Method method) {
     Optional<MethodDescriptor> jsOverlayOverride =
         method.getDescriptor().getJavaOverriddenMethodDescriptors().stream()
@@ -1325,50 +1334,105 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkOverrideConsistency(Member member) {
-    if (!member.isMethod() || !member.getDescriptor().isJsMember()) {
+    if (!member.isMethod()) {
       return;
     }
     Method method = (Method) member;
-    String jsName = method.getSimpleJsName();
-    MethodDescriptor methodDescriptor = method.getDescriptor();
+    checkOverrideConsistency(method.getDescriptor(), method.getSourcePosition());
+  }
+
+  private void checkOverrideConsistency(
+      MethodDescriptor methodDescriptor, SourcePosition sourcePosition) {
+    if (!methodDescriptor.isJsMember()) {
+      return;
+    }
+
+    // Accidental overrides are represented as a synthetic bridge method whose origin is the
+    // interface method, and target is the implementing method.
+    // If the target is not itself a js member, then use the bridge for the consistency check (to
+    // catch inconsistencies between interfaces).
+    MethodDescriptor targetMethodDescriptor =
+        methodDescriptor.isBridge() && methodDescriptor.getBridgeTarget().isJsMember()
+            ? methodDescriptor.getBridgeTarget()
+            : methodDescriptor;
+
     for (MethodDescriptor overriddenMethodDescriptor :
         methodDescriptor.getJavaOverriddenMethodDescriptors()) {
       if (!overriddenMethodDescriptor.isJsMember() || overriddenMethodDescriptor.isBridge()) {
         continue;
       }
 
-      if (!methodDescriptor.canInheritsJsInfoFrom(overriddenMethodDescriptor)) {
+      if (!targetMethodDescriptor.canInheritsJsInfoFrom(overriddenMethodDescriptor)) {
         // Only methods that have the same jsinfo compatibility signature have to agree in the
         // name. An override that specializes the parameters needs to have a different name than
         // the method it overrides.
         continue;
       }
 
-      if (overriddenMethodDescriptor.isJsMethod() != methodDescriptor.isJsMethod()) {
+      if (overriddenMethodDescriptor.isJsMethod() != targetMethodDescriptor.isJsMethod()) {
         // Overrides can not change JsMethod to JsProperty nor vice versa.
         problems.error(
-            method.getSourcePosition(),
-            "%s '%s' cannot override %s '%s'.",
-            member.getDescriptor().isJsMethod() ? "JsMethod" : "JsProperty",
-            member.getReadableDescription(),
+            sourcePosition,
+            "%s '%s'%s cannot override %s '%s'.",
+            targetMethodDescriptor.isJsMethod() ? "JsMethod" : "JsProperty",
+            targetMethodDescriptor.getReadableDescription(),
+            getAccidentalOverrideMessage(methodDescriptor, MethodDescriptor::isJsMethod),
             overriddenMethodDescriptor.isJsMethod() ? "JsMethod" : "JsProperty",
             overriddenMethodDescriptor.getReadableDescription());
         break;
       }
 
       String parentName = overriddenMethodDescriptor.getSimpleJsName();
-      if (!parentName.equals(jsName)) {
+      if (!parentName.equals(targetMethodDescriptor.getSimpleJsName())) {
         problems.error(
-            method.getSourcePosition(),
-            "'%s' cannot be assigned JavaScript name '%s' that is different from the"
+            sourcePosition,
+            "'%s' cannot be assigned JavaScript name '%s'%s that is different from the"
                 + " JavaScript name of a method it overrides ('%s' with JavaScript name '%s').",
-            member.getReadableDescription(),
-            jsName,
+            targetMethodDescriptor.getReadableDescription(),
+            targetMethodDescriptor.getSimpleJsName(),
+            getAccidentalOverrideMessage(methodDescriptor, MethodDescriptor::getSimpleJsName),
             overriddenMethodDescriptor.getReadableDescription(),
             parentName);
         break;
       }
     }
+  }
+
+  /**
+   * Gets a description of where the given accidental override is from, or empty string if it's not
+   * an accidental override.
+   */
+  private static <T> String getAccidentalOverrideMessage(
+      MethodDescriptor methodDescriptor, Function<MethodDescriptor, T> matchOverrideBy) {
+    if (!methodDescriptor.isBridge()) {
+      // Not an accidental override.
+      return "";
+    }
+
+    // Two cases here:
+    if (methodDescriptor.getBridgeTarget().isJsMember()) {
+      // 1. The bridge target is a js member: the conflict is between the parent method
+      // (the bridge target) and an interface method that was overridden by it.
+      // Simply report the enclosing type.
+      return String.format(
+          " (exposed by %s)",
+          methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName());
+    }
+
+    // 2. The bridge target is not a js member; the conflict is between two interface methods.
+    // Report a best-effort description of the conflict by finding the interface that the
+    // bridge got its js info from; this is the one that conflicts with the other interface
+    // method.
+    return methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
+        .filter(m -> matchOverrideBy.apply(m).equals(matchOverrideBy.apply(methodDescriptor)))
+        .findFirst()
+        .map(
+            m ->
+                String.format(
+                    " (inherited from %s)",
+                    m.getEnclosingTypeDescriptor().getQualifiedSourceName()))
+        // The condition to enter this method ensures that we should always have a value here.
+        .get();
   }
 
   private void checkQualifiedJsName(Type type) {
