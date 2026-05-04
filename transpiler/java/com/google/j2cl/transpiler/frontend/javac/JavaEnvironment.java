@@ -540,9 +540,7 @@ public class JavaEnvironment {
   private ImmutableList<String> getClassComponents(
       javax.lang.model.type.TypeVariable typeVariable) {
     Element enclosingElement = typeVariable.asElement().getEnclosingElement();
-    if (enclosingElement.getKind() == ElementKind.CLASS
-        || enclosingElement.getKind() == ElementKind.INTERFACE
-        || enclosingElement.getKind() == ElementKind.ENUM) {
+    if (enclosingElement.getKind().isDeclaredType()) {
       return ImmutableList.<String>builder()
           .addAll(getClassComponents(enclosingElement))
           .add(
@@ -600,7 +598,7 @@ public class JavaEnvironment {
   private boolean isEnumSyntheticMethod(ExecutableElement methodElement) {
     // Enum synthetic methods are not marked as such because per JLS 13.1 these methods are
     // implicitly declared but are not marked as synthetic.
-    return getEnclosingTypeElement(methodElement).getKind() == ElementKind.ENUM
+    return isEnum(getEnclosingTypeElement(methodElement))
         && (isValuesMethod(methodElement) || isValueOfMethod(methodElement));
   }
 
@@ -1187,8 +1185,7 @@ public class JavaEnvironment {
     do {
       typeArguments.addAll(currentType.getTypeArguments());
       Element enclosingElement = currentType.asElement().getEnclosingElement();
-      if (enclosingElement.getKind() == ElementKind.METHOD
-          || enclosingElement.getKind() == ElementKind.CONSTRUCTOR) {
+      if (isMethod(enclosingElement)) {
         typeArguments.addAll(
             ((Parameterizable) enclosingElement)
                 .getTypeParameters().stream().map(Element::asType).collect(toImmutableList()));
@@ -1198,21 +1195,16 @@ public class JavaEnvironment {
     return typeArguments;
   }
 
-
-
-  private static Kind getKindFromTypeBinding(TypeElement typeElement) {
-    if (isEnum(typeElement) && !isAnonymous(typeElement)) {
-      // Do not consider the anonymous classes that constitute enum values as Enums, only the
-      // enum "class" itself is considered Kind.ENUM.
-      return Kind.ENUM;
-    } else if (isClass(typeElement)
-        || isRecord(typeElement)
-        || (isEnum(typeElement) && isAnonymous(typeElement))) {
-      return Kind.CLASS;
-    } else if (isInterface(typeElement)) {
-      return Kind.INTERFACE;
-    }
-    throw new InternalCompilerError("Type binding %s not handled.", typeElement);
+  private static Kind getKind(TypeElement typeElement) {
+    return switch (typeElement.getKind()) {
+      case ENUM ->
+          // Do not consider the anonymous classes that constitute enum values as Enums, only the
+          // enum "class" itself is considered Kind.ENUM.
+          isAnonymous(typeElement) ? Kind.CLASS : Kind.ENUM;
+      case CLASS, RECORD -> Kind.CLASS;
+      case INTERFACE, ANNOTATION_TYPE -> Kind.INTERFACE;
+      default -> throw new InternalCompilerError("Type binding %s not handled.", typeElement);
+    };
   }
 
   @Nullable
@@ -1223,7 +1215,7 @@ public class JavaEnvironment {
 
     // Compute these first since they're reused in other calculations.
     boolean isAbstract = isAbstract(typeElement) && !isInterface(typeElement);
-    Kind kind = getKindFromTypeBinding(typeElement);
+    Kind kind = getKind(typeElement);
     boolean isFinal = isFinal(typeElement);
 
     Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
@@ -1231,10 +1223,7 @@ public class JavaEnvironment {
           ImmutableList.Builder<MethodDescriptor> listBuilder = ImmutableList.builder();
           for (MethodSymbol methodElement :
               typeElement.getEnclosedElements().stream()
-                  .filter(
-                      element ->
-                          element.getKind() == ElementKind.METHOD
-                              || element.getKind() == ElementKind.CONSTRUCTOR)
+                  .filter(JavaEnvironment::isMethod)
                   .map(MethodSymbol.class::cast)
                   .collect(toImmutableList())) {
             MethodDescriptor methodDescriptor = createMethodDescriptor(methodElement);
@@ -1274,10 +1263,7 @@ public class JavaEnvironment {
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
             typeElement.getEnclosedElements().stream()
-                .filter(
-                    element ->
-                        element.getKind() == ElementKind.FIELD
-                            || element.getKind() == ElementKind.ENUM_CONSTANT)
+                .filter(JavaEnvironment::isField)
                 .map(VariableElement.class::cast)
                 .map(this::createFieldDescriptor)
                 .collect(toImmutableList());
@@ -1369,9 +1355,7 @@ public class JavaEnvironment {
   @Nullable
   private MethodDescriptor getEnclosingMethodDescriptor(TypeElement typeElement) {
     Element enclosingElement = typeElement.getEnclosingElement();
-    if (enclosingElement == null
-        || (enclosingElement.getKind() != ElementKind.METHOD
-            && enclosingElement.getKind() != ElementKind.CONSTRUCTOR)) {
+    if (enclosingElement == null || !isMethod(enclosingElement)) {
       return null;
     }
 
@@ -1414,10 +1398,9 @@ public class JavaEnvironment {
         break;
       }
 
-      if (enclosingElement.getKind() != ElementKind.STATIC_INIT
-          && enclosingElement.getKind() != ElementKind.INSTANCE_INIT
+      if (!enclosingElement.getKind().isInitializer()
           && enclosingElement instanceof Parameterizable parameterizable) {
-        // Add the enclosing element type variables, skip STATIC_INIT and INSTANCE_INIT since they
+        // Add the enclosing element type variables, skip initializer blocks since they
         // never define type variables, and throw NPE if getTypeParameters is called on them.
         typeParameterElements.addAll(parameterizable.getTypeParameters());
       }
@@ -1491,8 +1474,7 @@ public class JavaEnvironment {
   }
 
   private boolean isFunctionalInterface(TypeMirror type) {
-    return internalTypes.isFunctionalInterface((Type) type)
-        && ((Type) type).asElement().getKind() == ElementKind.INTERFACE;
+    return internalTypes.isFunctionalInterface((Type) type);
   }
 
   private static boolean isEnum(TypeElement typeElement) {
@@ -1507,21 +1489,24 @@ public class JavaEnvironment {
     return typeElement.getNestingKind() == NestingKind.ANONYMOUS;
   }
 
-  private static boolean isClass(TypeElement typeElement) {
-    return typeElement.getKind() == ElementKind.CLASS;
-  }
-
   private static boolean isRecord(TypeElement typeElement) {
     return typeElement.getKind() == ElementKind.RECORD;
   }
 
   private static boolean isInterface(TypeElement typeElement) {
-    return typeElement.getKind() == ElementKind.INTERFACE
-        || typeElement.getKind() == ElementKind.ANNOTATION_TYPE;
+    return typeElement.getKind().isInterface();
   }
 
   private static boolean isLocal(TypeElement typeElement) {
     return typeElement.getNestingKind() == NestingKind.LOCAL;
+  }
+
+  private static boolean isMethod(Element element) {
+    return element.getKind().isExecutable() && !element.getKind().isInitializer();
+  }
+
+  private static boolean isField(Element element) {
+    return element.getKind().isField();
   }
 
   public static Visibility getVisibility(Element element) {
