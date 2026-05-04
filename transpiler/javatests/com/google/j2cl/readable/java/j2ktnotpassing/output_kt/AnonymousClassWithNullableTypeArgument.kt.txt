@@ -38,6 +38,20 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
+  fun testImplicitTypeArguments_inferredFromParameters() {
+   AnonymousClassWithNullableTypeArgument.accept<Supplier<Any?>>(
+    object : Supplier<Any> {
+     override fun get(): Any? {
+      return null
+     }
+    } as Supplier<Any?>,
+   )
+  }
+  
+  @JvmStatic
+  private fun <T> accept(t: T) {}
+  
+  @JvmStatic
   fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> {
    return object : Supplier<Any> {
     override fun get(): Any? {

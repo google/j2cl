@@ -47,6 +47,18 @@ public class AnonymousClassWithNullableTypeArgument {
     };
   }
 
+  public static void testImplicitTypeArguments_inferredFromParameters() {
+    AnonymousClassWithNullableTypeArgument.<Supplier<@Nullable Object>>accept(
+        new Supplier<>() {
+          @Override
+          public @Nullable Object get() {
+            return null;
+          }
+        });
+  }
+
+  private static <T extends @Nullable Object> void accept(T t) {}
+
   public static Supplier<@Nullable Object>
       testImplicitTypeArguments_inferredFromMembersAndReturnType() {
     // In javac frontend it's inferred as Supplier<Object>

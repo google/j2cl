@@ -48,6 +48,19 @@ public class AnonymousClassWithNullableTypeArgument {
   }
 
   // TODO(b/440316295): Uncomment when fixed
+  // public static void testImplicitTypeArguments_inferredFromParameters() {
+  //   AnonymousClassWithNullableTypeArgument.<Supplier<@Nullable Object>>accept(
+  //       new Supplier<>() {
+  //         @Override
+  //         public @Nullable Object get() {
+  //           return null;
+  //         }
+  //       });
+  // }
+
+  // private static <T extends @Nullable Object> void accept(T t) {}
+
+  // TODO(b/440316295): Uncomment when fixed
   // public static Supplier<@Nullable Object>
   //     testImplicitTypeArguments_inferredFromMembersAndReturnType() {
   //   return new Supplier<>() {
