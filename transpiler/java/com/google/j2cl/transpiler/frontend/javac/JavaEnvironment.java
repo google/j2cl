@@ -31,7 +31,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
@@ -91,6 +90,7 @@ import com.sun.tools.javac.code.TypeAnnotationPosition;
 import com.sun.tools.javac.code.TypeAnnotationPosition.TypePathEntry;
 import com.sun.tools.javac.code.TypeAnnotationPosition.TypePathEntryKind;
 import com.sun.tools.javac.code.Types;
+import com.sun.tools.javac.code.Types.FunctionDescriptorLookupError;
 import com.sun.tools.javac.model.JavacElements;
 import com.sun.tools.javac.model.JavacTypes;
 import com.sun.tools.javac.util.Context;
@@ -1008,28 +1008,7 @@ public class JavaEnvironment {
     return internalTypes.isSameType((Type) thisType, (Type) thatType);
   }
 
-  private boolean isJavaLangObjectOverride(MethodSymbol method) {
-    return getJavaLangObjectMethods().stream()
-        .anyMatch(
-            om ->
-                method.getSimpleName().equals(om.name)
-                    && javacTypes.isSubsignature(
-                        (ExecutableType) method.asType(), (ExecutableType) om.asType()));
-  }
 
-  private ImmutableSet<MethodSymbol> getJavaLangObjectMethods() {
-    ClassType javaLangObjectTypeBinding =
-        (ClassType) elements.getTypeElement("java.lang.Object").asType();
-    return getDeclaredMethods(javaLangObjectTypeBinding).stream()
-        .filter(JavaEnvironment::isPolymorphic)
-        .collect(ImmutableSet.toImmutableSet());
-  }
-
-  private static boolean isPolymorphic(MethodSymbol method) {
-    return !method.isConstructor()
-        && !isStatic(method)
-        && !method.getModifiers().contains(Modifier.PRIVATE);
-  }
 
   public DeclaredTypeDescriptor createTypeDescriptor(String qualifiedBinaryName) {
     TypeElement element = binaryNameToTypeElement(qualifiedBinaryName);
@@ -1219,27 +1198,7 @@ public class JavaEnvironment {
     return typeArguments;
   }
 
-  private ImmutableList<MethodSymbol> getDeclaredMethods(ClassType classType) {
-    return classType.asElement().getEnclosedElements().stream()
-        .filter(
-            element ->
-                !isSynthetic(element)
-                    && (element.getKind() == ElementKind.METHOD
-                        || element.getKind() == ElementKind.CONSTRUCTOR))
-        .map(MethodSymbol.class::cast)
-        .collect(toImmutableList());
-  }
 
-  private ImmutableList<MethodSymbol> getMethods(ClassType classType) {
-    return elements.getAllMembers((TypeElement) classType.asElement()).stream()
-        .filter(
-            element ->
-                !isSynthetic(element)
-                    && (element.getKind() == ElementKind.METHOD
-                        || element.getKind() == ElementKind.CONSTRUCTOR))
-        .map(MethodSymbol.class::cast)
-        .collect(toImmutableList());
-  }
 
   private static Kind getKindFromTypeBinding(TypeElement typeElement) {
     if (isEnum(typeElement) && !isAnonymous(typeElement)) {
@@ -1488,15 +1447,13 @@ public class JavaEnvironment {
           .map(this::getFunctionalInterfaceMethod)
           .collect(onlyElement());
     }
-    return getMethods((ClassType) type).stream()
-        .filter(m -> isAbstract(m) && !isJavaLangObjectOverride(m))
-        // There are cases in which the functional interface extends two distinct functional
-        // interfaces. In those cases all the methods that remain abstract in this interface must
-        // be compatible (i.e. have the same signature in the current parameterization). In this
-        // case any of them are suitable abstract methods as the method that implements the
-        // functional interface will always override both.
-        .findFirst()
-        .get();
+    try {
+      // Request the method symbol associated with this functional interface type.
+      return (MethodSymbol) internalTypes.findDescriptorSymbol(type.tsym);
+    } catch (FunctionDescriptorLookupError e) {
+      throw new InternalCompilerError(
+          e, "Failed to find functional interface method for %s", type.toString());
+    }
   }
 
   @Nullable
