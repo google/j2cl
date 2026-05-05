@@ -888,7 +888,6 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
         "java.lang.Class",
         "java.lang.ClassCastException",
         "java.lang.Enum",
-        "java.lang.Error",
         "java.lang.Exception",
         "java.lang.IndexOutOfBoundsException",
         "java.lang.IllegalStateException",
