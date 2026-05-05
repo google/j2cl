@@ -313,9 +313,18 @@ public final class J2ktRestrictionsChecker {
 
           private void checkJsTypeOnRecord(Type type) {
             TypeDeclaration typeDeclaration = type.getDeclaration();
-            if (typeDeclaration.isJsType()
-                && typeDeclaration.getSuperTypeDescriptor() != null
-                && TypeDescriptors.isJavaLangRecord(typeDeclaration.getSuperTypeDescriptor())) {
+            if (typeDeclaration.isJavaRecord() && typeDeclaration.isNative()) {
+              problems.error(
+                  type.getSourcePosition(),
+                  "Record class '%s' cannot be a native JsType.",
+                  type.getDeclaration().getReadableDescription());
+            }
+            // For now allow JsType on records only for tests.
+            // TODO(b/470146353): Allow JsType on records when all Xplat infra is ready to rollout.
+            if (typeDeclaration.isJavaRecord()
+                && typeDeclaration.isJsType()
+                && !type.getSourcePosition().getFilePath().contains("/test/")
+                && !type.getSourcePosition().getFilePath().contains("/javatests/")) {
               problems.error(
                   type.getSourcePosition(),
                   "Record class '%s' cannot be a JsType. (b/470146353)",

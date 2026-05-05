@@ -1,0 +1,51 @@
+goog.module('recordclass.RecordClass.JsInteropRecordWithHiddenCanonical$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JsInteropRecordWithHiddenCanonical extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_value__recordclass_RecordClass_JsInteropRecordWithHiddenCanonical_ = 0;
+ }
+ /** @nodts @return {!JsInteropRecordWithHiddenCanonical} */
+ static $create__int(/** number */ value) {
+  JsInteropRecordWithHiddenCanonical.$clinit();
+  let $instance = new JsInteropRecordWithHiddenCanonical();
+  $instance.$ctor__recordclass_RecordClass_JsInteropRecordWithHiddenCanonical__int__void(value);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_JsInteropRecordWithHiddenCanonical__int__void(/** number */ value) {
+  this.$ctor__java_lang_Record__void();
+  this.f_value__recordclass_RecordClass_JsInteropRecordWithHiddenCanonical_ = value;
+  $J2CL_PRESERVE$(this.f_value__recordclass_RecordClass_JsInteropRecordWithHiddenCanonical_);
+ }
+ /** @return {number} */
+ get value() {
+  return this.f_value__recordclass_RecordClass_JsInteropRecordWithHiddenCanonical_;
+ }
+ /** @nodts */
+ static $clinit() {
+  JsInteropRecordWithHiddenCanonical.$clinit = () =>{};
+  JsInteropRecordWithHiddenCanonical.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsInteropRecordWithHiddenCanonical;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsInteropRecordWithHiddenCanonical, 'recordclass.RecordClass$JsInteropRecordWithHiddenCanonical');
+
+exports = JsInteropRecordWithHiddenCanonical;
+
+//# sourceMappingURL=RecordClass$JsInteropRecordWithHiddenCanonical.js.map

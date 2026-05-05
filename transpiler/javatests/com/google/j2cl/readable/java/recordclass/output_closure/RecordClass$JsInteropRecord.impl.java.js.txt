@@ -1,0 +1,67 @@
+goog.module('recordclass.RecordClass.JsInteropRecord$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JsInteropRecord extends Record {
+ 
+ constructor(/** number */ value, /** ?string */ text, /** ?string */ ignored, /** boolean */ isFoo) {
+  JsInteropRecord.$clinit();
+  super();
+  /**@type {number} @nodts*/
+  this.f_value__recordclass_RecordClass_JsInteropRecord_ = 0;
+  /**@type {?string} @nodts*/
+  this.f_text__recordclass_RecordClass_JsInteropRecord_;
+  /**@type {?string} @nodts*/
+  this.f_ignored__recordclass_RecordClass_JsInteropRecord_;
+  /**@type {boolean} @nodts*/
+  this.f_isFoo__recordclass_RecordClass_JsInteropRecord_ = false;
+  this.$ctor__recordclass_RecordClass_JsInteropRecord__int__java_lang_String__java_lang_String__boolean__void(value, text, ignored, isFoo);
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_JsInteropRecord__int__java_lang_String__java_lang_String__boolean__void(/** number */ value, /** ?string */ text, /** ?string */ ignored, /** boolean */ isFoo) {
+  this.$ctor__java_lang_Record__void();
+  this.f_value__recordclass_RecordClass_JsInteropRecord_ = value;
+  this.f_text__recordclass_RecordClass_JsInteropRecord_ = text;
+  this.f_ignored__recordclass_RecordClass_JsInteropRecord_ = ignored;
+  this.f_isFoo__recordclass_RecordClass_JsInteropRecord_ = isFoo;
+  $J2CL_PRESERVE$(this.f_value__recordclass_RecordClass_JsInteropRecord_, this.f_text__recordclass_RecordClass_JsInteropRecord_, this.f_ignored__recordclass_RecordClass_JsInteropRecord_, this.f_isFoo__recordclass_RecordClass_JsInteropRecord_);
+ }
+ /** @return {number} */
+ get customVal() {
+  return this.f_value__recordclass_RecordClass_JsInteropRecord_;
+ }
+ /** @return {?string} */
+ get text() {
+  return this.f_text__recordclass_RecordClass_JsInteropRecord_;
+ }
+ /** @nodts @return {?string} */
+ m_ignored__java_lang_String() {
+  return this.f_ignored__recordclass_RecordClass_JsInteropRecord_;
+ }
+ /** @return {boolean} */
+ get isFoo() {
+  return this.f_isFoo__recordclass_RecordClass_JsInteropRecord_;
+ }
+ /** @nodts */
+ static $clinit() {
+  JsInteropRecord.$clinit = () =>{};
+  JsInteropRecord.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsInteropRecord;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsInteropRecord, 'recordclass.RecordClass$JsInteropRecord');
+
+exports = JsInteropRecord;
+
+//# sourceMappingURL=RecordClass$JsInteropRecord.js.map

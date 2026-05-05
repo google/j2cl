@@ -21,7 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.common.StringUtils.startsWithCamelCase;
-import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangRecord;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -1147,13 +1146,22 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
-    if (typeDeclaration.getSuperTypeDescriptor() != null
-        && isJavaLangRecord(typeDeclaration.getSuperTypeDescriptor())) {
+    if (typeDeclaration.isJavaRecord() && typeDeclaration.isNative()) {
+      problems.error(
+          type.getSourcePosition(),
+          "Record class '%s' cannot be a native JsType.",
+          type.getDeclaration().getReadableDescription());
+      return false;
+    }
+    // For now allow JsType on records only for J2CL tests.
+    // TODO(b/470146353): Allow JsType on records when all Xplat infra is ready to rollout.
+    if (typeDeclaration.isJavaRecord()
+        && !type.getSourcePosition().getFilePath().contains("/test/")
+        && !type.getSourcePosition().getFilePath().contains("/javatests/")) {
       problems.error(
           type.getSourcePosition(),
           "Record class '%s' cannot be a JsType. (b/470146353)",
-          type.getDeclaration().getReadableDescription());
-      return false;
+          typeDeclaration.getReadableDescription());
     }
 
     if (typeDeclaration.isNative()) {
@@ -1220,6 +1228,9 @@ public class JsInteropRestrictionsChecker {
       }
       if (!checkJsPropertyAccessor(method)) {
         return;
+      }
+      if (method.getDescriptor().isRecordComponentAccessor()) {
+        checkRecordComponentAccessor(method);
       }
       if (method.getDescriptor().isCustomIsInstanceMethod()) {
         checkCustomIsInstanceMethod(method);
@@ -1305,6 +1316,28 @@ public class JsInteropRestrictionsChecker {
           method.getSourcePosition(),
           "Suspend function '%s' cannot have JsInterop annotations.",
           method.getReadableDescription());
+    }
+  }
+
+  private void checkRecordComponentAccessor(Method method) {
+    if (method.getDescriptor().getOriginalJsInfo().getHasJsMemberAnnotation()) {
+      if (method.getDescriptor().getOriginalJsInfo().getJsMemberType() == JsMemberType.METHOD) {
+        // Explicitly reject JsMethod since it is disallowed regardless of the annotation
+        // location. To catch the issue, we are allowing compiler to read the annotation from
+        // generated accessors but as a result we cannot tell if the annotation was on the
+        // accessor or the component. So the message could be slightly off when it is explicitly
+        // set on the accessor as we refer to it as "component".
+        problems.error(
+            method.getSourcePosition(),
+            "Record component '%s' cannot be a JsMethod.",
+            method.getDescriptor().getReadableDescription());
+      } else {
+        problems.error(
+            method.getSourcePosition(),
+            "Record component accessor '%s' should declare its JsInterop annotations on the"
+                + " component.",
+            method.getDescriptor().getReadableDescription());
+      }
     }
   }
 
@@ -2123,6 +2156,14 @@ public class JsInteropRestrictionsChecker {
       ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(i);
       TypeDescriptor parameterTypeDescriptor = parameterDescriptor.getTypeDescriptor();
       if (parameterDescriptor.isJsOptional()) {
+        if (methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isJavaRecord()
+            && methodDescriptor.isJsConstructor()) {
+          problems.error(
+              method.getSourcePosition(),
+              "Record component '%s' cannot be JsOptional.",
+              parameter.getName());
+          continue;
+        }
         if (parameterTypeDescriptor.isPrimitive()) {
           problems.error(
               method.getSourcePosition(),

@@ -625,6 +625,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return JsInfo.Builder.from(originalJsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
 
+    // The original JsInfo for a record component is present only in the corresponding field.
+    JsInfo inheritedRecordAccessorJsInfo = getInheritedRecordAccessorJsInfo();
+    if (inheritedRecordAccessorJsInfo != null) {
+      originalJsInfo = inheritedRecordAccessorJsInfo;
+    }
+
     if (originalJsInfo.isJsOverlay()
         || originalJsInfo.getJsName() != null
         || originalJsInfo.getJsNamespace() != null) {
@@ -685,6 +691,34 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return JsInfo.Builder.from(defaultJsInfo)
         .setJsAsync(originalJsInfo.isJsAsync())
         .setHasJsMemberAnnotation(hasExplicitJsMemberAnnotation)
+        .build();
+  }
+
+  /**
+   * Returns the JsInfo of the method if it is a record component accessor. Otherwise returns null.
+   */
+  @Nullable
+  private JsInfo getInheritedRecordAccessorJsInfo() {
+    if (!isRecordComponentAccessor()) {
+      return null;
+    }
+
+    FieldDescriptor fieldDescriptor = getEnclosingTypeDescriptor().getFieldDescriptor(getName());
+    if (fieldDescriptor == null) {
+      // This should never happen except kotlin header jar that hides private fields (b/508481530).
+      return null;
+    }
+    JsInfo fieldJsInfo = fieldDescriptor.getOriginalJsInfo();
+    if (fieldJsInfo.getJsMemberType() != JsMemberType.PROPERTY) {
+      return null;
+    }
+
+    return JsInfo.Builder.from(fieldJsInfo)
+        .setJsMemberType(JsMemberType.GETTER)
+        // For inheritance purposes, we should consider always always as having a JsMember
+        // annotation even if the component was not originally annotated since we don't want to
+        // inherit from the parent JsMember type.
+        .setHasJsMemberAnnotation(true)
         .build();
   }
 

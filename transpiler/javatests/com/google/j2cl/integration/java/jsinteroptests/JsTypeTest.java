@@ -62,6 +62,7 @@ public class JsTypeTest {
     testWildcard();
     testNativeFunctionalInterface();
     testInheritName();
+    testJsTypeRecord();
   }
 
   @JsType(isNative = true, namespace = "test.foo")
@@ -825,5 +826,22 @@ public class JsTypeTest {
     object = new ClassWithJsMethodInheritingName();
     assertEquals(ClassWithJsMethodInheritingName.class.getName(), object.className());
     assertEquals(ClassWithJsMethodInheritingName.class.getName(), callName(object));
+  }
+
+  @JsType
+  public record MyJsTypeRecord(int a, @JsProperty(name = "customB") String b) {}
+
+  @JsType(isNative = true, namespace = "woo.JsTypeTest", name = "MyJsTypeRecord")
+  public static class NativeMyJsTypeRecord {
+    public NativeMyJsTypeRecord(int a, String customB) {}
+
+    @JsProperty public int a;
+    @JsProperty public String customB;
+  }
+
+  private static void testJsTypeRecord() {
+    NativeMyJsTypeRecord r = new NativeMyJsTypeRecord(1, "2");
+    assertEquals(1, r.a);
+    assertEquals("2", r.customB);
   }
 }

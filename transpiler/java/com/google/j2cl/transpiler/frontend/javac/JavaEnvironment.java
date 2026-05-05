@@ -1489,7 +1489,7 @@ public class JavaEnvironment {
     return typeElement.getNestingKind() == NestingKind.ANONYMOUS;
   }
 
-  private static boolean isRecord(TypeElement typeElement) {
+  public static boolean isRecord(TypeElement typeElement) {
     return typeElement.getKind() == ElementKind.RECORD;
   }
 

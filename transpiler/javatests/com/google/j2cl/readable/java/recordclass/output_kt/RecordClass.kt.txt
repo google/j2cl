@@ -20,6 +20,10 @@ package recordclass
 
 import javaemul.lang.*
 import java.util.Arrays
+import jsinterop.annotations.JsIgnore
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsProperty
+import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -830,6 +834,249 @@ open class RecordClass {
   override fun toString(): String {
    return this.getClass().getName() + Arrays.toString(
     arrayOf<Any?>(),
+   )
+  }
+ }
+ 
+ @JsType
+ class JsInteropRecord {
+  private val value: Int
+  
+  private val text: String?
+  
+  private val ignored: String?
+  
+  private val isFoo: Boolean
+  
+  constructor(value: Int, text: String?, ignored: String?, isFoo: Boolean) {
+   this.value = value
+   this.text = text
+   this.ignored = ignored
+   this.isFoo = isFoo
+  }
+  
+  @JsIgnore
+  fun value(): Int {
+   return this.value
+  }
+  
+  @JsIgnore
+  fun text(): String? {
+   return this.text
+  }
+  
+  @JsIgnore
+  fun ignored(): String? {
+   return this.ignored
+  }
+  
+  @JsIgnore
+  fun isFoo(): Boolean {
+   return this.isFoo
+  }
+  
+  @JsIgnore
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: JsInteropRecord? = null
+   if (!(arg0 is JsInteropRecord && run {
+    ___other = arg0 as JsInteropRecord?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.value, this.text, this.ignored, this.isFoo),
+    arrayOf<Any?>(___other!!.value, ___other!!.text, ___other!!.ignored, ___other!!.isFoo),
+   )
+  }
+  
+  @JsIgnore
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.value, this.text, this.ignored, this.isFoo),
+   )
+  }
+  
+  @JsIgnore
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.value, this.text, this.ignored, this.isFoo),
+   )
+  }
+ }
+ 
+ @JsType
+ class JsInteropRecordWithExplicitMembers {
+  private val value: Int
+  
+  private val text: String?
+  
+  private val ignored: String?
+  
+  constructor(value: Int, text: String?, ignored: String?) {
+   this.value = value
+   this.text = text
+   this.ignored = ignored
+  }
+  
+  @JsIgnore
+  fun value(): Int {
+   return this.value
+  }
+  
+  @JsIgnore
+  fun text(): String? {
+   return this.text
+  }
+  
+  @JsIgnore
+  fun ignored(): String? {
+   return this.ignored
+  }
+  
+  @JsIgnore
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: JsInteropRecordWithExplicitMembers? = null
+   if (!(arg0 is JsInteropRecordWithExplicitMembers && run {
+    ___other = arg0 as JsInteropRecordWithExplicitMembers?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.value, this.text, this.ignored),
+    arrayOf<Any?>(___other!!.value, ___other!!.text, ___other!!.ignored),
+   )
+  }
+  
+  @JsIgnore
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.value, this.text, this.ignored),
+   )
+  }
+  
+  @JsIgnore
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.value, this.text, this.ignored),
+   )
+  }
+ }
+ 
+ interface I2 {
+  @JsProperty(name = "customVal")
+  fun value(): Int
+  
+  @JsProperty(name = "customText")
+  fun text(): String?
+  
+  @JsProperty(name = "ignored")
+  fun ignored(): String?
+  
+  @JsMethod
+  fun ignored2(): String?
+ }
+ 
+ @JsType
+ @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
+ class JsInteropRecordImplementingInterface: I2 {
+  private val value: Int
+  
+  private val text: String?
+  
+  private val ignored: String?
+  
+  private val ignored2: String?
+  
+  constructor(value: Int, text: String?, ignored: String?, ignored2: String?) {
+   this.value = value
+   this.text = text
+   this.ignored = ignored
+   this.ignored2 = ignored2
+  }
+  
+  @JsIgnore
+  override fun value(): Int {
+   return this.value
+  }
+  
+  @JsIgnore
+  override fun text(): String? {
+   return this.text
+  }
+  
+  @JsIgnore
+  override fun ignored(): String? {
+   return this.ignored
+  }
+  
+  @JsIgnore
+  override fun ignored2(): String? {
+   return this.ignored2
+  }
+  
+  @JsIgnore
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: JsInteropRecordImplementingInterface? = null
+   if (!(arg0 is JsInteropRecordImplementingInterface && run {
+    ___other = arg0 as JsInteropRecordImplementingInterface?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.value, this.text, this.ignored, this.ignored2),
+    arrayOf<Any?>(___other!!.value, ___other!!.text, ___other!!.ignored, ___other!!.ignored2),
+   )
+  }
+  
+  @JsIgnore
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.value, this.text, this.ignored, this.ignored2),
+   )
+  }
+  
+  @JsIgnore
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.value, this.text, this.ignored, this.ignored2),
+   )
+  }
+ }
+ 
+ @JsType
+ class JsInteropRecordWithHiddenCanonical {
+  private val value: Int
+  
+  internal constructor(value: Int) {
+   this.value = value
+  }
+  
+  @JsIgnore
+  fun value(): Int {
+   return this.value
+  }
+  
+  @JsIgnore
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: JsInteropRecordWithHiddenCanonical? = null
+   if (!(arg0 is JsInteropRecordWithHiddenCanonical && run {
+    ___other = arg0 as JsInteropRecordWithHiddenCanonical?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.value),
+    arrayOf<Any?>(___other!!.value),
+   )
+  }
+  
+  @JsIgnore
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.value),
+   )
+  }
+  
+  @JsIgnore
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.value),
    )
   }
  }

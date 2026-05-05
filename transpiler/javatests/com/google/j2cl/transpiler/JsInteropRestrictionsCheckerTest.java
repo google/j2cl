@@ -3083,18 +3083,176 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
-  public void testRecordJsTypeFails() {
+  public void testRecordJsTypeSucceeds() {
     assertWithInlineMessages(
         "test.Buggy",
         """
         import jsinterop.annotations.*;
         @JsType
         public record Buggy() {}
-        > Error: Record class 'Buggy' cannot be a JsType. (b/470146353)
+        """);
+  }
+
+  public void testRecordNativeJsTypeFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
         @JsType(isNative = true)
         record NativeBuggy() {}
-        > Error: Record class 'NativeBuggy' cannot be a JsType. (b/470146353)
+        > Error: Record class 'NativeBuggy' cannot be a native JsType.
         """);
+  }
+
+  public void testJsInteropAnnotationsOnRecordAccessorFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        @JsType
+        public record Buggy(int x, int y, int z) {
+          @JsMethod
+          public int x() { return x; }
+        > Error: Record component 'int Buggy.x()' cannot be a JsMethod.
+          @JsProperty
+          public int y() { return y; }
+        > Error: Record component accessor 'int Buggy.y()' should declare its JsInterop annotations on the component.
+          // TODO(b/271602011): We should disallow this when we disallow other no-effect @JsIgnores.
+          @JsIgnore
+          public int z() { return z; }
+        }
+        """);
+  }
+
+  public void testJsOptionalOnRecordComponentFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        @JsType
+        public record Buggy(@JsOptional String x) {
+        > Error: Record component 'x' cannot be JsOptional.
+        }
+        //
+        @JsType
+        record BuggyWithExplicitCanonicalConstructor(@JsOptional String x) {
+          // TODO(b/508710887): Disallow @JsOptional on components even when the canonical
+          // constructor is explicitly defined.
+          public BuggyWithExplicitCanonicalConstructor(String x) {
+            this.x = x;
+          }
+        }
+        """);
+  }
+
+  public void testJsMethodOnRecordComponentFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        public record Buggy(@JsMethod String x, @JsMethod String y) {
+        > Error: Record component 'String Buggy.x()' cannot be a JsMethod.
+          // TODO(b/508710887): Disallow @JsMethod on components with custom accessors.
+          public String y() { return y; }
+        }
+        """);
+  }
+
+  public void testJsInteropAnnotationsRecordMethodSucceeds() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        @JsType
+        public record Buggy() {
+          @JsMethod
+          public void foo(@JsOptional Double x) {}
+        }
+        """);
+  }
+
+  public void testJsConstructorsInRecordSucceeds() {
+    assertTranspileSucceeds(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+
+            record CompactJsConstructor(int x, int y) {
+              @JsConstructor
+              CompactJsConstructor {}
+            }
+            record IgnoredConstructor(int x, int y) {
+              @JsConstructor
+              IgnoredConstructor(int x, int y) {
+                this.x = x;
+                this.y = y;
+              }
+              @JsIgnore
+              public IgnoredConstructor(int x) {
+                this(x, 0);
+              }
+            }
+            """)
+        .assertNoWarnings();
+  }
+
+  public void testMultipleJsConstructorsInRecordFails() {
+    assertWithInlineMessages(
+        "test.BuggyFails",
+        """
+        import jsinterop.annotations.*;
+        @JsType
+        public record BuggyFails(int x, int y) {
+        > Error: More than one JsConstructor exists for 'BuggyFails'.
+          // TODO(goktug): We should not complain about "component" in non-canonical constructor.
+          public BuggyFails(@JsOptional int x) {
+          > Error: Record component 'x' cannot be JsOptional.
+            this(x, 0);
+          }
+        }
+        """);
+  }
+
+  public void testCollidingMembersInRecordFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+
+        @JsType
+        record Buggy(int x, @JsProperty(name = "y") int foo) {
+        > Error: 'int Buggy.foo()' and 'void Buggy.y(int)' cannot both use the same JavaScript name 'y'.
+        > Error: 'int Buggy.x()' and 'void Buggy.x(int)' cannot both use the same JavaScript name 'x'.
+
+          public void x(int i) {}
+          public void y(int i) {}
+        }
+
+        @JsType
+        record BuggyParent(int x) implements Foo {
+        > Error: JsProperty 'int BuggyParent.x()' cannot override JsMethod 'int Foo.x()'.
+        }
+
+        interface Foo {
+          @JsMethod
+          int x();
+        }
+        """);
+  }
+
+  public void testNonCollidingInheritedMembersInRecordSucceeds() {
+    assertTranspileSucceeds(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            @JsType
+            public record Buggy(int x) implements Bar {}
+            interface Bar {
+              @JsProperty(name = "x")
+              int x();
+            }
+            """)
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeImplementsNativeJsTypeSucceeds() {

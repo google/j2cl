@@ -43,6 +43,9 @@ public enum JsMemberType {
     @Override
     public String computeJsName(MemberDescriptor memberDescriptor) {
       String methodName = memberDescriptor.getName();
+      if (((MethodDescriptor) memberDescriptor).isRecordComponentAccessor()) {
+        return methodName;
+      }
       if (startsWithCamelCase(methodName, "get")) {
         return Introspector.decapitalize(methodName.substring(3));
       }

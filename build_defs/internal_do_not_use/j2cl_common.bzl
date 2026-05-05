@@ -476,6 +476,9 @@ def _create_js_lib_struct(j2cl_info, extra_providers = []):
     return [j2cl_info, j2cl_info._private_.js_info] + extra_providers
 
 DEFAULT_J2CL_JAVAC_OPTS = [
+    # Until emitPrivateFieldsInRecords is available in OSS, use emitPrivateFields to make record
+    # fields visible to downstream targets.
+    "-XDturbine.emitPrivateFields",
     # Avoid log site injection which introduces calls to unsupported APIs.
     "-XDinjectLogSites=false",
     # Avoid optimized JVM String concat which introduces calls to unsupported APIs.

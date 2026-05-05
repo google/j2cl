@@ -1,0 +1,70 @@
+goog.module('recordclass.RecordClass.JsInteropRecordImplementingInterface$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const I2 = goog.require('recordclass.RecordClass.I2$impl');
+
+/**
+ * @final
+ * @implements {I2}
+ */
+class JsInteropRecordImplementingInterface extends Record {
+ 
+ constructor(/** number */ value, /** ?string */ text, /** ?string */ ignored, /** ?string */ ignored2) {
+  JsInteropRecordImplementingInterface.$clinit();
+  super();
+  /**@type {number} @nodts*/
+  this.f_value__recordclass_RecordClass_JsInteropRecordImplementingInterface_ = 0;
+  /**@type {?string} @nodts*/
+  this.f_text__recordclass_RecordClass_JsInteropRecordImplementingInterface_;
+  /**@type {?string} @nodts*/
+  this.f_ignored__recordclass_RecordClass_JsInteropRecordImplementingInterface_;
+  /**@type {?string} @nodts*/
+  this.f_ignored2__recordclass_RecordClass_JsInteropRecordImplementingInterface_;
+  this.$ctor__recordclass_RecordClass_JsInteropRecordImplementingInterface__int__java_lang_String__java_lang_String__java_lang_String__void(value, text, ignored, ignored2);
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_JsInteropRecordImplementingInterface__int__java_lang_String__java_lang_String__java_lang_String__void(/** number */ value, /** ?string */ text, /** ?string */ ignored, /** ?string */ ignored2) {
+  this.$ctor__java_lang_Record__void();
+  this.f_value__recordclass_RecordClass_JsInteropRecordImplementingInterface_ = value;
+  this.f_text__recordclass_RecordClass_JsInteropRecordImplementingInterface_ = text;
+  this.f_ignored__recordclass_RecordClass_JsInteropRecordImplementingInterface_ = ignored;
+  this.f_ignored2__recordclass_RecordClass_JsInteropRecordImplementingInterface_ = ignored2;
+  $J2CL_PRESERVE$(this.f_value__recordclass_RecordClass_JsInteropRecordImplementingInterface_, this.f_text__recordclass_RecordClass_JsInteropRecordImplementingInterface_, this.f_ignored__recordclass_RecordClass_JsInteropRecordImplementingInterface_, this.f_ignored2__recordclass_RecordClass_JsInteropRecordImplementingInterface_);
+ }
+ /** @override @return {number} */
+ get customVal() {
+  return this.f_value__recordclass_RecordClass_JsInteropRecordImplementingInterface_;
+ }
+ /** @override @return {?string} */
+ get customText() {
+  return this.f_text__recordclass_RecordClass_JsInteropRecordImplementingInterface_;
+ }
+ /** @override @return {?string} */
+ get ignored() {
+  return this.f_ignored__recordclass_RecordClass_JsInteropRecordImplementingInterface_;
+ }
+ /** @override @return {?string} */
+ ignored2() {
+  return this.f_ignored2__recordclass_RecordClass_JsInteropRecordImplementingInterface_;
+ }
+ /** @nodts */
+ static $clinit() {
+  JsInteropRecordImplementingInterface.$clinit = () =>{};
+  JsInteropRecordImplementingInterface.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsInteropRecordImplementingInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I2.$markImplementor(JsInteropRecordImplementingInterface);
+$Util.$setClassMetadata(JsInteropRecordImplementingInterface, 'recordclass.RecordClass$JsInteropRecordImplementingInterface');
+
+exports = JsInteropRecordImplementingInterface;
+
+//# sourceMappingURL=RecordClass$JsInteropRecordImplementingInterface.js.map

@@ -15,6 +15,11 @@
  */
 package recordclass;
 
+import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 public class RecordClass {
 
   public void main() {
@@ -111,6 +116,69 @@ public class RecordClass {
   public record PublicRecordWithPublicFactory() {
     public PublicRecordWithPublicFactory factory() {
       return new PublicRecordWithPublicFactory();
+    }
+  }
+
+  @JsType
+  public static record JsInteropRecord(
+      @JsProperty(name = "customVal") int value,
+      String text,
+      @JsIgnore String ignored,
+      boolean isFoo) {}
+
+  @JsType
+  public static record JsInteropRecordWithExplicitMembers(
+      @JsProperty(name = "customVal") int value, String text, @JsIgnore String ignored) {
+
+    public JsInteropRecordWithExplicitMembers(int value, String text, String ignored) {
+      this.value = value;
+      this.text = text;
+      this.ignored = ignored;
+    }
+
+    public int value() {
+      return value;
+    }
+
+    public String text() {
+      return text;
+    }
+
+    public String ignored() {
+      return ignored;
+    }
+  }
+
+  interface I2 {
+    // Matches record component name so accepted as override.
+    @JsProperty(name = "customVal")
+    int value();
+
+    // The inherited explicit name should win over record component name.
+    @JsProperty(name = "customText")
+    String text();
+
+    // The inherited JsProperty annotation should win over for otherwise ignored record component.
+    @JsProperty(name = "ignored")
+    String ignored();
+
+    // The inherited JsMethod annotation should win over for otherwise ignored record component.
+    @JsMethod
+    String ignored2();
+  }
+
+  @JsType
+  public static record JsInteropRecordImplementingInterface(
+      @JsProperty(name = "customVal") int value,
+      String text,
+      @JsIgnore String ignored,
+      @JsIgnore String ignored2)
+      implements I2 {}
+
+  @JsType
+  static record JsInteropRecordWithHiddenCanonical(int value) {
+    JsInteropRecordWithHiddenCanonical(int value) {
+      this.value = value;
     }
   }
 

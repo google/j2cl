@@ -15,9 +15,15 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
+import static com.google.j2cl.transpiler.frontend.javac.JavaEnvironment.getEnclosingTypeElement;
+import static com.google.j2cl.transpiler.frontend.javac.JavaEnvironment.isRecord;
+import static com.google.j2cl.transpiler.frontend.javac.JavaEnvironment.isStatic;
+
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
+import com.sun.tools.javac.code.Flags;
+import com.sun.tools.javac.code.Symbol;
 import java.util.Set;
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
@@ -42,9 +48,14 @@ public final class JsInteropUtils {
       annotation = JsInteropAnnotationUtils.getJsConstructorAnnotation(member);
     }
     if (annotation == null) {
-      annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(member);
+      // Do not read annotations for synthetic accessor (which are copied from the record
+      // components). We will continue reading annotations from custom accessors so that they
+      // can be checked and rejected by the restriction checker.
+      boolean generated = (((Symbol) member).flags() & Flags.GENERATED_MEMBER) != 0;
+      if (!generated) {
+        annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(member);
+      }
     }
-
     boolean isPropertyAccessor = JsInteropAnnotationUtils.getJsPropertyAnnotation(member) != null;
     return getJsInfo(
         member, (TypeElement) member.getEnclosingElement(), annotation, isPropertyAccessor);
@@ -65,13 +76,12 @@ public final class JsInteropUtils {
     boolean jsAsync = isJsAsync(member);
 
     if (JsInteropAnnotationUtils.getJsIgnoreAnnotation(member) == null) {
-      boolean publicMemberOfJsType =
-          isJsType(declaringType) && member.getModifiers().contains(Modifier.PUBLIC);
+      boolean implicitJsMember = isJsType(declaringType) && canBeImplicitJsMember(member);
       boolean isJsEnumConstant =
           isJsEnum(declaringType) && member.getKind() == ElementKind.ENUM_CONSTANT;
       boolean memberOfNativeType = isJsNativeType(declaringType) && !isJsEnum(declaringType);
       if (memberAnnotation != null
-          || ((publicMemberOfJsType || isJsEnumConstant || memberOfNativeType) && !jsOverlay)) {
+          || ((implicitJsMember || isJsEnumConstant || memberOfNativeType) && !jsOverlay)) {
         return JsInfo.newBuilder()
             .setJsMemberType(getJsMemberType(member, isAccessor))
             .setJsName(JsInteropAnnotationUtils.getJsName(memberAnnotation))
@@ -88,6 +98,37 @@ public final class JsInteropUtils {
         .setJsOverlay(jsOverlay)
         .setJsAsync(jsAsync)
         .build();
+  }
+
+  private static boolean canBeImplicitJsMember(Element member) {
+    // Public members are implicitly JsMembers.
+    if (member.getModifiers().contains(Modifier.PUBLIC)) {
+      // Component accessors will inherit JsInfo from the components so should not be considered
+      // implicit JsMembers even though they are public.
+      if (isRecordComponentAccessor(member)) {
+        return false;
+      }
+      return true;
+    }
+    // Record components fields, although private, are implicit js members. Later in the process, it
+    // will be used by public accessors to inherit JsInfo from.
+    if (isRecordComponentField(member)) {
+      return true;
+    }
+    return false;
+  }
+
+  private static boolean isRecordComponentAccessor(Element member) {
+    return member.getKind() == ElementKind.METHOD
+        && ((TypeElement) member.getEnclosingElement())
+            .getRecordComponents().stream()
+                .anyMatch(component -> component.getAccessor().equals(member));
+  }
+
+  private static boolean isRecordComponentField(Element member) {
+    return member.getKind() == ElementKind.FIELD
+        && !isStatic(member)
+        && isRecord(getEnclosingTypeElement(member));
   }
 
   @Nullable
