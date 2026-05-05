@@ -384,3 +384,13 @@ private class RecursiveJsFunctionImplementation :
   ParametricJsFunction<RecursiveJsFunctionImplementation?> {
   override fun call(t: RecursiveJsFunctionImplementation?) {}
 }
+
+@JsFunction
+fun interface InvokableFunction {
+  operator fun invoke(a: Int): Int
+}
+
+fun testInvokableFunction() {
+  val f: InvokableFunction = InvokableFunction { a: Int -> a + 1 }
+  f(1)
+}

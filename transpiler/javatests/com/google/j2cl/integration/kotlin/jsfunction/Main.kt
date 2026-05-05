@@ -24,6 +24,7 @@ import jsinterop.annotations.JsOverlay
 fun main(vararg unused: String) {
   testJsFunction()
   testParameterizedJsFunctionMethod()
+  testInvokableJsFunction()
 }
 
 @JsFunction
@@ -128,4 +129,14 @@ private fun testParameterizedJsFunctionMethod() {
   }
   A()
   assertEquals("HelloB", parameterInterfaceFn.f(B())!!.m())
+}
+
+@JsFunction
+fun interface InvokableFunction {
+  operator fun invoke(a: Int): Int
+}
+
+fun testInvokableJsFunction() {
+  val f: InvokableFunction = InvokableFunction { a: Int -> a + 1 }
+  assertEquals(2, f(1))
 }
