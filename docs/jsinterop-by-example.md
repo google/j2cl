@@ -229,6 +229,27 @@ console.log(Interop.staticProp); // 10
 console.log(Interop.instance.instanceProp); // 30
 ```
 
+### `JsProperty` on Record Components
+
+```java
+public record Interop(@JsProperty String name){
+  @JsProperty
+  public static Interop getInstance() {
+    return new Interop("42");
+  }
+}
+```
+
+JavaScript Usage:
+
+```javascript
+goog.module('my.js.usage');
+
+const Interop = goog.require("com.google.example.Interop")
+
+console.log(Interop.instance.name); // "42"
+```
+
 ### `@JsOptional` - Closure optional parameters
 
 See
@@ -285,6 +306,35 @@ const Exported = goog.require("com.google.example.Exported");
 let e = new Exported();
 console.log(e.prop); // 100
 console.log(e.value()); // 100
+```
+
+### `@JsType` - Expose a Java Record to JavaScript
+
+When a Java Record is annotated with `@JsType`, its components are exposed as
+read-only JavaScript properties. Everything else follows regular `@JsType`
+rules.
+
+```java
+@JsType(namespace = "my.js.package")
+public record MyRecord(String name, int value) {
+  // Non-component accessor  method
+  public String display() {
+    return this.name + ": " + this.value;
+  }
+}
+```
+
+JavaScript Usage:
+
+```javascript
+goog.module('my.js.usage');
+const MyRecord = goog.require('my.js.package.MyRecord');
+
+const record = new MyRecord('test', 42);
+console.log(record.name); // Access component as property: 'test'
+console.log(record.value); // Access component as property: 42
+console.log(record.display()); // Call regular method: 'test: 42'
+// record.name = 'new'; // Error: read-only
 ```
 
 ### `@JsEnum` - Expose a Java enum to JavaScript
