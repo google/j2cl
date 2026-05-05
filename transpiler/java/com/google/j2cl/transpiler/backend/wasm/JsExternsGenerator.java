@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 /**
  * Generates JavaScript externs for allowing JavaScript callers to use exported JsTypes.
@@ -140,21 +141,22 @@ final class JsExternsGenerator {
   private void appendFields(SourceBuilder sb, Type type) {
     // Collect fields from getter/setter methods.
     var getterSetters = new HashMap<String, GetterSetterPair>();
-    for (Method method : type.getMethods()) {
-      MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (!AstUtils.needsWasmJsExport(methodDescriptor) || !methodDescriptor.isJsProperty()) {
-        continue;
-      }
+    streamExportedMethods(type)
+        .forEach(
+            method -> {
+              if (!method.getDescriptor().isJsProperty()) {
+                return;
+              }
 
-      GetterSetterPair getterSetterPair =
-          getterSetters.computeIfAbsent(
-              methodDescriptor.getSimpleJsName(), k -> new GetterSetterPair());
-      if (methodDescriptor.isJsPropertyGetter()) {
-        getterSetterPair.getter = method;
-      } else if (methodDescriptor.isJsPropertySetter()) {
-        getterSetterPair.setter = method;
-      }
-    }
+              GetterSetterPair getterSetterPair =
+                  getterSetters.computeIfAbsent(
+                      method.getDescriptor().getSimpleJsName(), k -> new GetterSetterPair());
+              if (method.getDescriptor().isJsPropertyGetter()) {
+                getterSetterPair.getter = method;
+              } else if (method.getDescriptor().isJsPropertySetter()) {
+                getterSetterPair.setter = method;
+              }
+            });
 
     Streams.concat(
             type.getFields().stream().map(Field::getDescriptor).filter(AstUtils::needsWasmJsExport),
@@ -205,23 +207,41 @@ final class JsExternsGenerator {
   }
 
   private void appendMethods(SourceBuilder sb, Type type) {
-    for (Method method : type.getMethods()) {
-      MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (!AstUtils.needsWasmJsExport(methodDescriptor) || !methodDescriptor.isJsMethod()) {
-        continue;
-      }
+    streamExportedMethods(type)
+        .forEach(
+            method -> {
+              if (!method.getDescriptor().isJsMethod()) {
+                return;
+              }
 
-      sb.appendln("");
-      sb.appendln("/**");
-      appendJsDoc(sb, closureEnvironment.getJsDocForMethod(method));
-      sb.appendln(" */");
-      sb.append(
-          String.format(
-              "%s.%s = function",
-              getMemberOwner(methodDescriptor), methodDescriptor.getSimpleJsName()));
-      closureEnvironment.emitParameters(sb, method);
-      sb.appendln("{};");
-    }
+              sb.appendln("");
+              sb.appendln("/**");
+              appendJsDoc(sb, closureEnvironment.getJsDocForMethod(method));
+              sb.appendln(" */");
+              sb.append(
+                  String.format(
+                      "%s.%s = function",
+                      getMemberOwner(method.getDescriptor()),
+                      method.getDescriptor().getSimpleJsName()));
+              closureEnvironment.emitParameters(sb, method);
+              sb.appendln("{};");
+            });
+  }
+
+  private static Stream<Method> streamExportedMethods(Type type) {
+    return Streams.concat(
+        type.getMethods().stream().filter(m -> AstUtils.needsWasmJsExport(m.getDescriptor())),
+        type.getTypeDescriptor().getAccidentalOverrides().stream()
+            .filter(AstUtils::needsWasmJsExport)
+            .map(
+                accidentalOverride ->
+                    Method.newBuilder()
+                        .setMethodDescriptor(accidentalOverride)
+                        .setParameters(
+                            AstUtils.createParameterVariables(
+                                accidentalOverride.getParameterTypeDescriptors()))
+                        .setSourcePosition(type.getSourcePosition())
+                        .build()));
   }
 
   private String getMemberOwner(MemberDescriptor memberDescriptor) {

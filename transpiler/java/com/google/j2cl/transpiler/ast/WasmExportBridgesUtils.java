@@ -168,6 +168,7 @@ public class WasmExportBridgesUtils {
                 descriptor.getParameterTypeDescriptors().stream()
                     .map(WasmExportBridgesUtils::replaceStringWithNativeString)
                     .collect(toImmutableList()))
+            .makeDeclaration()
             // Copy over the JsInfo from the descriptor. This allows the bridge to retain the JsInfo
             // if, for example, it is inherited; we otherwise lose the inherited JsInfo because we
             // lose override information. It also preserves the CONSTRUCTOR member type if the

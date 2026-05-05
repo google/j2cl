@@ -154,11 +154,21 @@ public final class Main {
     assertTrue(callInterfaceGetNumber(jsInterfaceGetNumber) == 22);
 
     JsInterfaceRenamedMethod jsInterfaceRenamedMethod = new JsInterfaceRenamedMethodImpl();
-    // TODO(b/499366074): Test when this case is supported with a bridge method.
-    // assertTrue(callInterfaceRenamedMethod(jsInterfaceRenamedMethod) == 22);
+    assertTrue(callInterfaceRenamedMethod(jsInterfaceRenamedMethod) == 23);
 
     JsInterfaceDefaultMethod jsInterfaceDefaultMethod = new JsInterfaceDefaultMethodImpl();
     assertTrue(callInterfaceDefaultMethod(jsInterfaceDefaultMethod) == 9876);
+
+    JsInterfaceAccidentalImpl jsInterfaceAccidentalImpl = new JsInterfaceAccidentalImpl();
+    assertTrue(callAccidentalMethod(jsInterfaceAccidentalImpl) == 2);
+    assertTrue(callInterfaceMethod(jsInterfaceAccidentalImpl) == 2);
+
+    JsInterfaceAccidentalDefaultMethodImpl jsInterfaceAccidentalDefaultMethodImpl =
+        new JsInterfaceAccidentalDefaultMethodImpl();
+    assertTrue(callAccidentalDefaultMethod(jsInterfaceAccidentalDefaultMethodImpl) == 3);
+    assertTrue(callInterfaceDefaultMethod(jsInterfaceAccidentalDefaultMethodImpl) == 3);
+
+    assertTrue(callInterfaceMethod(() -> 23) == 23);
   }
 
   @JsType(namespace = "wasmcustomdescriptorsjsinterop")
@@ -212,6 +222,21 @@ public final class Main {
     @JsConstructor
     public JsInterfaceDefaultMethodImpl() {}
   }
+
+  static class NonJsBase {
+    public final int interfaceMethod() {
+      return 2;
+    }
+
+    public final int m() {
+      return 3;
+    }
+  }
+
+  static class JsInterfaceAccidentalImpl extends NonJsBase implements JsInterface {}
+
+  static class JsInterfaceAccidentalDefaultMethodImpl extends NonJsBase
+      implements JsInterfaceDefaultMethod {}
 
   @JsMethod(namespace = "nativehelper")
   static native BaseJsType newBaseJsType();
@@ -269,4 +294,10 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native int callInterfaceDefaultMethod(JsInterfaceDefaultMethod jsInterface);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callAccidentalMethod(JsInterfaceAccidentalImpl impl);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callAccidentalDefaultMethod(JsInterfaceAccidentalDefaultMethodImpl impl);
 }

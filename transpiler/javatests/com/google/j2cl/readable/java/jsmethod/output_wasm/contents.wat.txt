@@ -150,7 +150,7 @@
 )
 (global $jsmethod.JsMethodExample.ExposesOverrideableJsMethod.vtable (ref (exact $jsmethod.JsMethodExample.ExposesOverrideableJsMethod.vtable))
  (struct.new $jsmethod.JsMethodExample.ExposesOverrideableJsMethod.vtable
-  (ref.null extern)
+  (global.get $jsmethod.JsMethodExample.ExposesOverrideableJsMethod.proto)
   (ref.func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -1180,6 +1180,18 @@
  )
 )
 (elem declare func $js_export_m__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
+
+;;; void ExposesOverrideableJsMethod.n()
+(func $js_export_n__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
+ (type $function.js_export_n__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ExposesOverrideableJsMethod) (local.get $this.untyped)))
+ (block
+  (call_ref $function.m_n__void (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.ExposesOverrideableJsMethod.vtable $m_n__void (ref.get_desc $jsmethod.JsMethodExample.ExposesOverrideableJsMethod(local.get $this))))
+ )
+)
+(elem declare func $js_export_n__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
 
 ;;; void ExposesOverrideableJsMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.ExposesOverrideableJsMethod

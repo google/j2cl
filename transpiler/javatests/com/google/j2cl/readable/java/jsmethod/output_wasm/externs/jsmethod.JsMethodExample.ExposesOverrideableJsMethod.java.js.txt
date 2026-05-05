@@ -1,0 +1,8 @@
+goog.module('jsmethod.JsMethodExample.ExposesOverrideableJsMethod');
+
+const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+
+/** @const {typeof jsmethod_JsMethodExample_ExposesOverrideableJsMethod} */
+const ExposesOverrideableJsMethod = constructorProxy('jsmethod.JsMethodExample.ExposesOverrideableJsMethod');
+
+exports = ExposesOverrideableJsMethod;

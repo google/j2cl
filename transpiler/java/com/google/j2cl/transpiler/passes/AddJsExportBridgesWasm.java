@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Predicates.not;
 
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Library;
@@ -48,6 +49,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
         .filter(not(Type::isInterface))
         .forEach(
             type -> {
+              // Generate bridges for declared methods.
               for (Method method : type.getMethods()) {
                 if (!AstUtils.needsWasmJsExport(method.getDescriptor())) {
                   continue;
@@ -58,6 +60,21 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
                         method.getDescriptor(),
                         method.getSourcePosition(),
                         getBridgeOrigin(method.getDescriptor()));
+                type.addMember(bridge);
+              }
+
+              // Generate bridges for accidental overrides of interface js methods.
+              for (MethodDescriptor accidentalOverride :
+                  type.getTypeDescriptor().getAccidentalOverrides()) {
+                if (!AstUtils.needsWasmJsExport(accidentalOverride)) {
+                  continue;
+                }
+
+                Method bridge =
+                    WasmExportBridgesUtils.generateBridge(
+                        accidentalOverride,
+                        SourcePosition.NONE,
+                        getBridgeOrigin(accidentalOverride));
                 type.addMember(bridge);
               }
 

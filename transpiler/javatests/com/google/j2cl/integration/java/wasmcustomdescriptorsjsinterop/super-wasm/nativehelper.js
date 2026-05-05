@@ -190,6 +190,24 @@ function callInterfaceDefaultMethod(i) {
   return i.m();
 }
 
+/**
+ * @param {!JsInterfaceAccidentalImpl} impl
+ * @return {number}
+ * @public
+ */
+function callAccidentalMethod(impl) {
+  return impl.interfaceMethod();
+}
+
+/**
+ * @param {!JsInterfaceAccidentalDefaultMethodImpl} impl
+ * @return {number}
+ * @public
+ */
+function callAccidentalDefaultMethod(impl) {
+  return impl.m();
+}
+
 exports = {
   newBaseJsType,
   newSomeJsType,
@@ -210,4 +228,6 @@ exports = {
   callInterfaceGetNumber,
   callInterfaceRenamedMethod,
   callInterfaceDefaultMethod,
+  callAccidentalMethod,
+  callAccidentalDefaultMethod,
 };

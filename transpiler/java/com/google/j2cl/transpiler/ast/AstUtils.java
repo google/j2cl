@@ -1346,13 +1346,15 @@ public final class AstUtils {
     return !typeDeclaration.isInterface() && declaresWasmJsExports(typeDeclaration);
   }
 
-  /** Returns true if the given type has any exported members in Wasm. */
+  /** Returns true if the given type introduces any exported members in Wasm. */
   public static boolean declaresWasmJsExports(TypeDeclaration typeDeclaration) {
     return !typeDeclaration.isNative()
         && (typeDeclaration.getDeclaredMethodDescriptors().stream()
-                .anyMatch(methodDescriptor -> AstUtils.needsWasmJsExport(methodDescriptor))
+                .anyMatch(AstUtils::needsWasmJsExport)
             || typeDeclaration.getDeclaredFieldDescriptors().stream()
-                .anyMatch(fieldDescriptor -> AstUtils.needsWasmJsExport(fieldDescriptor)));
+                .anyMatch(AstUtils::needsWasmJsExport)
+            || typeDeclaration.toDescriptor().getAccidentalOverrides().stream()
+                .anyMatch(AstUtils::needsWasmJsExport));
   }
 
   /** Returns true if this type defined in Wasm is exported to/visible in JS. */
