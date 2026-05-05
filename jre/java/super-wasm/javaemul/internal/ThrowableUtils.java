@@ -57,6 +57,8 @@ public final class ThrowableUtils {
     public static native void captureStackTrace(NativeError error);
 
     public String stack;
+
+    public native String toString();
   }
 
   public static boolean isTypeError(JsObject error) {

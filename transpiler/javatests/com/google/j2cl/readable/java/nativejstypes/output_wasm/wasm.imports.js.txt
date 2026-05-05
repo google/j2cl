@@ -55,6 +55,7 @@ function getImports() {
    'Error': Error,
    'Error.captureStackTrace': Error.captureStackTrace,
    'Error.constructor': () => new Error(),
+   'Error.toString': (/** !Error */ $instance, ) => $instance.toString(),
    'Headers.append$2': (/** !Headers */ $instance, /** string */ name, /** string */ value, ) => $instance.append(name, value, ),
    'Headers.constructor': () => new Headers(),
    'Headers.get$1': (/** !Headers */ $instance, /** string */ name, ) => $instance.get(name, ),

@@ -57,6 +57,7 @@ function getImports() {
    'Error': Error,
    'Error.captureStackTrace': Error.captureStackTrace,
    'Error.constructor': () => new Error(),
+   'Error.toString': (/** !Error */ $instance, ) => $instance.toString(),
    'Math.acos': Math.acos,
    'Math.asin': Math.asin,
    'Math.atan': Math.atan,
