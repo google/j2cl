@@ -71,6 +71,7 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getSealed__switchpatterns_SwitchPatterns_Sealed_$pp_switchpatterns@switchpatterns.SwitchPatterns)
   (ref.func $m_testExhaustivePatternsWithNoDefault__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
   (ref.func $m_testPatternsWithGuards__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
   (ref.func $m_testPatternsWithNull__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
@@ -83,10 +84,12 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed.A)
  )
 )
 (global $switchpatterns.SwitchPatterns.Sealed.vtable@$switchpatterns.SwitchPatterns.Sealed.A (ref $switchpatterns.SwitchPatterns.Sealed.vtable)
  (struct.new $switchpatterns.SwitchPatterns.Sealed.vtable
+  (ref.func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed.A)
  )
 )
 (global $switchpatterns.SwitchPatterns.Sealed.B.vtable (ref $switchpatterns.SwitchPatterns.Sealed.B.vtable)
@@ -95,10 +98,12 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed.B)
  )
 )
 (global $switchpatterns.SwitchPatterns.Sealed.vtable@$switchpatterns.SwitchPatterns.Sealed.B (ref $switchpatterns.SwitchPatterns.Sealed.vtable)
  (struct.new $switchpatterns.SwitchPatterns.Sealed.vtable
+  (ref.func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed.B)
  )
 )
 (global $switchpatterns.SwitchPatterns.Color.vtable (ref $switchpatterns.SwitchPatterns.Color.vtable)
@@ -148,6 +153,82 @@
  )
 )
 
+
+;;; void Sealed.testSwitchOnThis()
+(func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed
+ (param $this (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:65:17
+ (local $i i32)
+ (local $$selector (ref null $java.lang.Object))
+ (local $$caseIndex i32)
+ (local $a (ref null $switchpatterns.SwitchPatterns.Sealed.A))
+ (local $b (ref null $switchpatterns.SwitchPatterns.Sealed.B))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:66:6
+  (local.set $i 
+  (block $SWITCH (result i32)
+   (block
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:67:10
+    (local.set $$selector (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (local.get $this)))
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:67:10
+    
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:68:12
+    (if (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.Sealed.A) (local.get $$selector)) (then (block (result i32)
+      (local.set $a (ref.cast (ref null $switchpatterns.SwitchPatterns.Sealed.A) (local.get $$selector)))
+      (i32.const 1)
+     )) (else (i32.const 0)))
+     (then
+      (block
+       (local.set $$caseIndex (i32.const 0))
+      )
+     )(else
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:69:12
+      (if (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.Sealed.B) (local.get $$selector)) (then (block (result i32)
+        (local.set $b (ref.cast (ref null $switchpatterns.SwitchPatterns.Sealed.B) (local.get $$selector)))
+        (i32.const 1)
+       )) (else (i32.const 0)))
+       (then
+        (block
+         (local.set $$caseIndex (i32.const 1))
+        )
+       )(else
+        (block
+         (local.set $$caseIndex (i32.const 2))
+        )
+       )
+      )
+     )
+    )
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:67:10
+    (block $SWITCH_1.BREAK
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:67:10
+     (block
+      (block
+       (block
+        (block ;; evaluate expression and jump
+         (br_table 0 1 2 (local.get $$caseIndex))
+        )
+        ;; case 0:
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:68:31
+        (i32.const 1)
+        (br $SWITCH)
+       )
+       ;; case 1:
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:69:31
+       (i32.const 2)
+       (br $SWITCH)
+      )
+      ;; default:
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:67:10
+      (call $m_checkExhaustive__void@javaemul.internal.InternalPreconditions )
+     )
+    )
+   )
+   (unreachable)
+  ))
+ )
+)
+(elem declare func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed)
 
 ;;; void Sealed.$clinit()
 (func $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Sealed
@@ -500,12 +581,26 @@
 )
 (elem declare func $m_testRecordPatterns__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
 
+;;; Sealed SwitchPatterns.getSealed()
+(func $m_getSealed__switchpatterns_SwitchPatterns_Sealed_$pp_switchpatterns@switchpatterns.SwitchPatterns
+ (type $function.m_getSealed__switchpatterns_SwitchPatterns_Sealed_$pp_switchpatterns)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:74:9
+ (local $this (ref null $switchpatterns.SwitchPatterns))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:4
+  (return (ref.null $java.lang.Object))
+ )
+)
+(elem declare func $m_getSealed__switchpatterns_SwitchPatterns_Sealed_$pp_switchpatterns@switchpatterns.SwitchPatterns)
+
 ;;; void SwitchPatterns.testExhaustivePatternsWithNoDefault()
 (func $m_testExhaustivePatternsWithNoDefault__void_$pp_switchpatterns@switchpatterns.SwitchPatterns
  (type $function.m_testExhaustivePatternsWithNoDefault__void_$pp_switchpatterns)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:66:7
- (local $o (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:78:7
  (local $i i32)
  (local $$selector (ref null $java.lang.Object))
  (local $$caseIndex i32)
@@ -514,17 +609,15 @@
  (local $this (ref null $switchpatterns.SwitchPatterns))
  (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:67:4
-  (local.set $o (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:68:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:79:4
   (local.set $i 
   (block $SWITCH (result i32)
    (block
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:69:8
-    (local.set $$selector (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (local.get $o)))
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:69:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:80:8
+    (local.set $$selector (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call_ref $function.m_getSealed__switchpatterns_SwitchPatterns_Sealed_$pp_switchpatterns (ref.as_non_null (local.get $this))(struct.get $switchpatterns.SwitchPatterns.vtable $m_getSealed__switchpatterns_SwitchPatterns_Sealed_$pp_switchpatterns (struct.get $switchpatterns.SwitchPatterns $vtable(local.get $this))))))
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:80:8
     
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:70:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:81:10
     (if (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.Sealed.A) (local.get $$selector)) (then (block (result i32)
       (local.set $a (ref.cast (ref null $switchpatterns.SwitchPatterns.Sealed.A) (local.get $$selector)))
       (i32.const 1)
@@ -534,7 +627,7 @@
        (local.set $$caseIndex (i32.const 0))
       )
      )(else
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:71:10
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:10
       (if (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.Sealed.B) (local.get $$selector)) (then (block (result i32)
         (local.set $b (ref.cast (ref null $switchpatterns.SwitchPatterns.Sealed.B) (local.get $$selector)))
         (i32.const 1)
@@ -551,9 +644,9 @@
       )
      )
     )
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:69:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:80:8
     (block $SWITCH_1.BREAK
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:69:8
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:80:8
      (block
       (block
        (block
@@ -561,17 +654,17 @@
          (br_table 0 1 2 (local.get $$caseIndex))
         )
         ;; case 0:
-        ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:70:29
+        ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:81:29
         (i32.const 1)
         (br $SWITCH)
        )
        ;; case 1:
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:71:29
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:29
        (i32.const 2)
        (br $SWITCH)
       )
       ;; default:
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:69:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:80:8
       (call $m_checkExhaustive__void@javaemul.internal.InternalPreconditions )
      )
     )
@@ -586,7 +679,7 @@
 (func $m_testPatternsWithNull__void_$pp_switchpatterns@switchpatterns.SwitchPatterns
  (type $function.m_testPatternsWithNull__void_$pp_switchpatterns)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:89:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:100:7
  (local $color (ref null $switchpatterns.SwitchPatterns.Color))
  (local $$expression i32)
  (local $$expression_1 i32)
@@ -599,14 +692,14 @@
  (local $this (ref null $switchpatterns.SwitchPatterns))
  (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:90:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:101:4
   (local.set $color (ref.null $switchpatterns.SwitchPatterns.Color))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:92:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:103:4
   (block $SWITCH.BREAK
    (block
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:92:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:103:4
     (local.set $$expression (if (result i32) (ref.is_null (local.get $color)) (then (i32.const -1)) (else (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $color))))))
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:92:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:103:4
     (block
      (block
       (block
@@ -614,82 +707,82 @@
         (br_table 1 0 2 (i32.sub (local.get $$expression) (i32.const -1)))
        )
        ;; case 0:
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:94:8
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:105:8
        (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:95:8
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:106:8
        (br $SWITCH.BREAK)
       )
       ;; case -1:
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:97:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:108:8
       (br $SWITCH.BREAK)
      )
      ;; default:
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:99:8
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:110:8
      (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:103:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:114:4
   (block $SWITCH_1.BREAK
    (block
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:103:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:114:4
     (local.set $$expression_1 (if (result i32) (ref.is_null (local.get $color)) (then (i32.const -1)) (else (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $color))))))
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:103:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:114:4
     (block
      (block
       (block ;; evaluate expression and jump
        (br_table 0 1 (local.get $$expression_1))
       )
       ;; case 0:
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:105:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:116:8
       (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:106:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:117:8
       (br $SWITCH_1.BREAK)
      )
      ;; default:
      (block
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:109:10
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:120:10
       (local.set $variable (i32.const 0))
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:110:10
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:121:10
       (br $SWITCH_1.BREAK)
      )
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:115:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:126:4
   (block $SWITCH_2.BREAK
    (block
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:115:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:126:4
     (local.set $$expression_2 (block (result i32)
      (local.set $$switchExpression (call $m_valueOf__java_lang_String__switchpatterns_SwitchPatterns_Color@switchpatterns.SwitchPatterns.Color (call $$getString_|BLUE|__java_lang_String_<once>_@switchpatterns.SwitchPatterns )))
      (if (result i32) (ref.is_null (local.get $$switchExpression)) (then (i32.const -1)) (else (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $$switchExpression)))))
     ))
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:115:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:126:4
     (block
      (block
       (block ;; evaluate expression and jump
        (br_table 0 1 (local.get $$expression_2))
       )
       ;; case 0:
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:117:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:128:8
       (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:118:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:129:8
       (br $SWITCH_2.BREAK)
      )
      ;; default:
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:120:8
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:131:8
      (br $SWITCH_2.BREAK)
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:124:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:135:4
   (local.set $digit (ref.null $switchpatterns.SwitchPatterns.Digit))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:125:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:136:4
   (block $SWITCH_3.BREAK
    (block
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:125:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:136:4
     (local.set $$expression_3 (if (result i32) (ref.is_null (local.get $digit)) (then (i32.const -1)) (else (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $digit))))))
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:125:4
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:136:4
     (block
      (block
       (block
@@ -697,26 +790,26 @@
         (br_table 1 0 2 (i32.sub (local.get $$expression_3) (i32.const -1)))
        )
        ;; case 0:
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:127:8
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:138:8
        (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
-       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:128:8
+       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:139:8
        (br $SWITCH_3.BREAK)
       )
       ;; case -1:
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:130:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:141:8
       (br $SWITCH_3.BREAK)
      )
      ;; default:
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:132:8
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:143:8
      (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:136:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:147:4
   (local.set $s (call $$getString_|Hi|__java_lang_String_<once>_@switchpatterns.SwitchPatterns ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:137:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:148:4
   (block $SWITCH_4.BREAK
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:137:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:148:4
    (block
     (block
      (block
@@ -726,23 +819,23 @@
        (br 2)
       )
       ;; case switchpatterns.SwitchPatterns.$getString_|Hi|():
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:139:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:150:8
       (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
-      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:140:8
+      ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:151:8
       (br $SWITCH_4.BREAK)
      )
      ;; case null:
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:142:8
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:153:8
      (br $SWITCH_4.BREAK)
     )
     ;; default:
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:144:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:155:8
     (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:148:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:159:4
   (block $SWITCH_5.BREAK
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:148:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:159:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -750,13 +843,13 @@
       (br 1)
      )
      ;; case switchpatterns.SwitchPatterns.$getString_|Hi|():
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:150:8
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:161:8
      (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:151:8
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:162:8
      (br $SWITCH_5.BREAK)
     )
     ;; default:
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:153:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:164:8
     (br $SWITCH_5.BREAK)
    )
   )
@@ -766,18 +859,18 @@
 
 ;;; void SwitchPatterns.fail()
 (func $m_fail__void@switchpatterns.SwitchPatterns
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:157:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:168:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:157:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:168:14
   (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:157:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:168:14
   (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
  )
 )
 
 ;;; void SwitchPatterns.fail_$private()
 (func $m_fail_$private__void@switchpatterns.SwitchPatterns
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:157:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:168:14
  (block
  )
 )
@@ -854,6 +947,20 @@
  )
 )
 
+;;; void A.testSwitchOnThis()
+(func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed.A
+ (type $function.m_testSwitchOnThis__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:61:16
+ (local $this (ref null $switchpatterns.SwitchPatterns.Sealed.A))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns.Sealed.A) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:61:16
+  (call $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed (ref.as_non_null (local.get $this)))
+ )
+)
+(elem declare func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed.A)
+
 ;;; void A.$clinit()
 (func $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Sealed.A
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:61:16
@@ -869,6 +976,8 @@
   (global.set $$class-initialized@switchpatterns.SwitchPatterns.Sealed.A (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:61:16
   (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:61:16
+  (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Sealed )
  )
 )
 
@@ -926,6 +1035,20 @@
  )
 )
 
+;;; void B.testSwitchOnThis()
+(func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed.B
+ (type $function.m_testSwitchOnThis__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:63:16
+ (local $this (ref null $switchpatterns.SwitchPatterns.Sealed.B))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns.Sealed.B) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:63:16
+  (call $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed (ref.as_non_null (local.get $this)))
+ )
+)
+(elem declare func $m_testSwitchOnThis__void@switchpatterns.SwitchPatterns.Sealed.B)
+
 ;;; void B.$clinit()
 (func $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Sealed.B
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:63:16
@@ -941,6 +1064,8 @@
   (global.set $$class-initialized@switchpatterns.SwitchPatterns.Sealed.B (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:63:16
   (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:63:16
+  (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Sealed )
  )
 )
 
@@ -976,14 +1101,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $switchpatterns.SwitchPatterns.Color))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
  (local $$instance (ref null $switchpatterns.SwitchPatterns.Color))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (local.set $$instance (struct.new $switchpatterns.SwitchPatterns.Color (global.get $switchpatterns.SwitchPatterns.Color.vtable) (global.get $switchpatterns.SwitchPatterns.Color.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (call $$ctor__java_lang_String__int__void_$p_switchpatterns_SwitchPatterns_Color@switchpatterns.SwitchPatterns.Color (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (return (local.get $$instance))
  )
 )
@@ -993,13 +1118,13 @@
  (param $this (ref null $switchpatterns.SwitchPatterns.Color))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -1008,20 +1133,20 @@
 (func $m_valueOf__java_lang_String__switchpatterns_SwitchPatterns_Color@switchpatterns.SwitchPatterns.Color
  (param $name (ref null $java.lang.String))
  (result (ref null $switchpatterns.SwitchPatterns.Color))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Color )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (if (ref.is_null (global.get $namesToValuesMap@switchpatterns.SwitchPatterns.Color))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
      (global.set $namesToValuesMap@switchpatterns.SwitchPatterns.Color (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_switchpatterns_SwitchPatterns_Color@switchpatterns.SwitchPatterns.Color )))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (return (ref.cast (ref null $switchpatterns.SwitchPatterns.Color) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@switchpatterns.SwitchPatterns.Color))))
  )
 )
@@ -1029,11 +1154,11 @@
 ;;; Color[] Color.values()
 (func $m_values__arrayOf_switchpatterns_SwitchPatterns_Color@switchpatterns.SwitchPatterns.Color
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Color )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (return (call $m_values_$private__arrayOf_switchpatterns_SwitchPatterns_Color@switchpatterns.SwitchPatterns.Color ))
  )
 )
@@ -1041,33 +1166,33 @@
 ;;; Color[] Color.values_$private()
 (func $m_values_$private__arrayOf_switchpatterns_SwitchPatterns_Color@switchpatterns.SwitchPatterns.Color
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 3 (global.get $RED@switchpatterns.SwitchPatterns.Color)(global.get $BLUE@switchpatterns.SwitchPatterns.Color)(global.get $GREEN@switchpatterns.SwitchPatterns.Color))))
  )
 )
 
 ;;; void Color.$clinit()
 (func $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Color
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (if (global.get $$class-initialized@switchpatterns.SwitchPatterns.Color)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (global.set $$class-initialized@switchpatterns.SwitchPatterns.Color (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:75:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:76:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:87:4
   (global.set $RED@switchpatterns.SwitchPatterns.Color (call $$create__java_lang_String__int@switchpatterns.SwitchPatterns.Color (call $$getString_|RED|__java_lang_String_<once>_@switchpatterns.SwitchPatterns.Color )(i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:77:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:88:4
   (global.set $BLUE@switchpatterns.SwitchPatterns.Color (call $$create__java_lang_String__int@switchpatterns.SwitchPatterns.Color (call $$getString_|BLUE|__java_lang_String_<once>_@switchpatterns.SwitchPatterns )(i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:78:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:89:4
   (global.set $GREEN@switchpatterns.SwitchPatterns.Color (call $$create__java_lang_String__int@switchpatterns.SwitchPatterns.Color (call $$getString_|GREEN|__java_lang_String_<once>_@switchpatterns.SwitchPatterns.Color )(i32.const 2)))
  )
 )
@@ -1104,14 +1229,14 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $switchpatterns.SwitchPatterns.Digit))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
  (local $$instance (ref null $switchpatterns.SwitchPatterns.Digit))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (local.set $$instance (struct.new $switchpatterns.SwitchPatterns.Digit (global.get $switchpatterns.SwitchPatterns.Digit.vtable) (global.get $switchpatterns.SwitchPatterns.Digit.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (call $$ctor__java_lang_String__int__void_$p_switchpatterns_SwitchPatterns_Digit@switchpatterns.SwitchPatterns.Digit (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (return (local.get $$instance))
  )
 )
@@ -1121,39 +1246,39 @@
  (param $this (ref null $switchpatterns.SwitchPatterns.Digit))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
 
 ;;; void Digit.$clinit()
 (func $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Digit
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (if (global.get $$class-initialized@switchpatterns.SwitchPatterns.Digit)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (global.set $$class-initialized@switchpatterns.SwitchPatterns.Digit (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:82:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:93:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:83:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:94:4
   (global.set $ZERO@switchpatterns.SwitchPatterns.Digit (call $$create__java_lang_String__int@switchpatterns.SwitchPatterns.Digit (ref.null $java.lang.String)(i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:84:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:95:4
   (global.set $ONE@switchpatterns.SwitchPatterns.Digit (call $$create__java_lang_String__int@switchpatterns.SwitchPatterns.Digit (ref.null $java.lang.String)(i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:85:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:96:4
   (global.set $TWO@switchpatterns.SwitchPatterns.Digit (call $$create__java_lang_String__int@switchpatterns.SwitchPatterns.Digit (ref.null $java.lang.String)(i32.const 2)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:86:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:97:4
   (global.set $THREE@switchpatterns.SwitchPatterns.Digit (call $$create__java_lang_String__int@switchpatterns.SwitchPatterns.Digit (ref.null $java.lang.String)(i32.const 3)))
  )
 )

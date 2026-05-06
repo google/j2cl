@@ -61,12 +61,23 @@ public class SwitchPatterns {
     final class A implements Sealed {}
 
     final class B implements Sealed {}
+
+    default void testSwitchOnThis() {
+      int i =
+          switch (this) {
+            case Sealed.A a -> 1;
+            case Sealed.B b -> 2;
+          };
+    }
+  }
+
+  Sealed getSealed() {
+    return null;
   }
 
   void testExhaustivePatternsWithNoDefault() {
-    Sealed o = null;
     int i =
-        switch (o) {
+        switch (getSealed()) {
           case Sealed.A a -> 1;
           case Sealed.B b -> 2;
         };

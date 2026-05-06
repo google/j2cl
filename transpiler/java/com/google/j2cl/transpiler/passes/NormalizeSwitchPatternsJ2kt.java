@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
@@ -185,10 +186,22 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
           public SwitchCasePattern rewriteSwitchCasePattern(SwitchCasePattern switchCasePattern) {
             SwitchConstruct<?> enclosingSwitchConstruct = (SwitchConstruct<?>) getParent();
 
-            // A switch with patterns is guaranteed to have a variable reference as a selector at
-            // this point.
+            // At this point the selector expression is expected to be normalized to either a
+            // variable reference or a multi expression that ends with a variable reference.
             var selectorVariable =
-                ((VariableReference) enclosingSwitchConstruct.getExpression()).getTarget();
+                switch (enclosingSwitchConstruct.getExpression()) {
+                  case VariableReference variableReference -> variableReference.getTarget();
+                  case MultiExpression mutliExpression
+                      when mutliExpression.getExpressions().getLast()
+                          instanceof VariableReference variableReference ->
+                      variableReference.getTarget();
+                  default -> {
+                    throw new InternalCompilerError(
+                        "Unexpected switch selector expression: "
+                            + enclosingSwitchConstruct.getExpression());
+                  }
+                };
+
             var patternTypeDescriptor = switchCasePattern.getPattern().getTypeDescriptor();
 
             return switchCasePattern.toBuilder()

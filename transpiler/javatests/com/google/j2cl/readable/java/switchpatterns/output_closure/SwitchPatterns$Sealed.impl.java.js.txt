@@ -2,13 +2,43 @@ goog.module('switchpatterns.SwitchPatterns.Sealed$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let J2clSealedTypeMarker = goog.forwardDeclare('javaemul.internal.J2clSealedTypeMarker');
+let A = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.A$impl');
+let B = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.B$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @interface
  * @extends {J2clSealedTypeMarker}
  */
 class Sealed {
+ /** @abstract @nodts */
+ m_testSwitchOnThis__void() {}
+ /** @nodts */
+ static m_testSwitchOnThis__$default__switchpatterns_SwitchPatterns_Sealed__void(/** !Sealed */ $thisArg) {
+  Sealed.$clinit();
+  let i = (() =>{
+   let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object($thisArg);
+   let /** number */ $caseIndex;
+   let /** A */ a, /** B */ b;
+   if (A.$isInstance($selector) && (a = (/**@type {!A}*/ ($Casts.$to($selector, A))), true)) {
+    $caseIndex = 0;
+   } else if (B.$isInstance($selector) && (b = (/**@type {!B}*/ ($Casts.$to($selector, B))), true)) {
+    $caseIndex = 1;
+   } else {
+    $caseIndex = 2;
+   }
+   switch ($caseIndex) {
+    case 0:
+     return 1;
+    case 1:
+     return 2;
+    default:
+     InternalPreconditions.m_checkExhaustive__void();
+   }
+  })();
+ }
  /** @nodts */
  static $clinit() {
   Sealed.$clinit = () =>{};
@@ -24,7 +54,12 @@ class Sealed {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  A = goog.module.get('switchpatterns.SwitchPatterns.Sealed.A$impl');
+  B = goog.module.get('switchpatterns.SwitchPatterns.Sealed.B$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 Sealed.$markImplementor(/**@type {Function}*/ (Sealed));
 $Util.$setClassMetadataForInterface(/**@type {Function}*/ (Sealed), 'switchpatterns.SwitchPatterns$Sealed');

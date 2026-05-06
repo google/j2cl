@@ -1,8 +1,12 @@
 goog.module('switchpatterns.SwitchPatterns.Sealed');
 
+goog.require('javaemul.internal.InternalPreconditions');
 goog.require('javaemul.internal.J2clSealedTypeMarker');
 goog.require('javaemul.internal.J2clSealedTypeMarker.$Overlay');
 goog.require('nativebootstrap.Util');
+goog.require('switchpatterns.SwitchPatterns.Sealed.A');
+goog.require('switchpatterns.SwitchPatterns.Sealed.B');
+goog.require('vmbootstrap.Casts');
 
 const Sealed = goog.require('switchpatterns.SwitchPatterns.Sealed$impl');
 exports = Sealed;
