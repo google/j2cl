@@ -24,6 +24,10 @@ public class AnonymousClassWithNullableTypeArgument {
     V get();
   }
 
+  public interface Consumer<V extends @Nullable Object> {
+    void accept(V value);
+  }
+
   public abstract static class AbstractHolder<V extends @Nullable Object> {
     public AbstractHolder(V value) {}
 
@@ -118,5 +122,17 @@ public class AnonymousClassWithNullableTypeArgument {
 
   public static @Nullable String nullableString() {
     return null;
+  }
+
+  public static void acceptWildcardConsumer(Consumer<?> consumer) {
+    throw new RuntimeException();
+  }
+
+  public static void testAcceptWildcardConsumerOfNonNullString() {
+    acceptWildcardConsumer(
+        new Consumer<String>() {
+          @Override
+          public void accept(String string) {}
+        });
   }
 }

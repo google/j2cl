@@ -106,10 +106,28 @@ open class AnonymousClassWithNullableTypeArgument {
   fun nullableString(): String? {
    return null
   }
+  
+  @JvmStatic
+  fun acceptWildcardConsumer(consumer: Consumer<*>) {
+   throw RuntimeException()
+  }
+  
+  @JvmStatic
+  fun testAcceptWildcardConsumerOfNonNullString() {
+   AnonymousClassWithNullableTypeArgument.acceptWildcardConsumer(
+    object : Consumer<String> {
+     override fun accept(string: String) {}
+    },
+   )
+  }
  }
  
  fun interface Supplier<V> {
   fun get(): V
+ }
+ 
+ fun interface Consumer<V> {
+  fun accept(value: V)
  }
  
  abstract class AbstractHolder<V> {
@@ -126,7 +144,7 @@ open class AnonymousClassWithNullableTypeArgument {
   }
  }
  
- open class ParameterizedEmptyClass<T> internal constructor()
+ open class ParameterizedEmptyClass<T>
  
  interface ParameterizedEmptyInterface<T>
 }

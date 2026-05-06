@@ -24,6 +24,10 @@ public class AnonymousClassWithNullableTypeArgument {
     V get();
   }
 
+  public interface Consumer<V extends @Nullable Object> {
+    void accept(V value);
+  }
+
   public abstract static class AbstractHolder<V extends @Nullable Object> {
     public AbstractHolder(V value) {}
 
@@ -72,7 +76,7 @@ public class AnonymousClassWithNullableTypeArgument {
 
   // TODO(b/440316295): J2KT renders `new Supplier<Object>`.
   public static void testImplicitTypeArguments_inferredFromMembers() {
-    // rerpo for b/408237089
+    // repro for b/408237089
     // In javac frontend it's inferred as Supplier<Object>
     new Supplier<>() {
       @Override
@@ -84,7 +88,7 @@ public class AnonymousClassWithNullableTypeArgument {
 
   // TODO(b/440316295): J2KT renders `new AbstractSupplier<String>`.
   public static void testImplicitTypeArguments_inferredFromMembersAndArgument() {
-    // rerpo for b/408237089
+    // repro for b/408237089
     // In javac frontend it's inferred as AbstractHolder<String>
     new AbstractHolder<>("Supplier") {
       @Override
@@ -105,9 +109,9 @@ public class AnonymousClassWithNullableTypeArgument {
     return new Holder<>("Supplier") {};
   }
 
-  static class ParameterizedEmptyClass<T extends @Nullable Object> {}
+  public static class ParameterizedEmptyClass<T extends @Nullable Object> {}
 
-  interface ParameterizedEmptyInterface<T extends @Nullable Object> {}
+  public interface ParameterizedEmptyInterface<T extends @Nullable Object> {}
 
   public static <T extends @Nullable Object>
       ParameterizedEmptyClass<@Nullable T> testExplicitSuperclassTypeArguments() {
@@ -123,5 +127,17 @@ public class AnonymousClassWithNullableTypeArgument {
 
   public static @Nullable String nullableString() {
     return null;
+  }
+
+  public static void acceptWildcardConsumer(Consumer<?> consumer) {
+    throw new RuntimeException();
+  }
+
+  public static void testAcceptWildcardConsumerOfNonNullString() {
+    acceptWildcardConsumer(
+        new Consumer<String>() {
+          @Override
+          public void accept(String string) {}
+        });
   }
 }
