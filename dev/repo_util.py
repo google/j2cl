@@ -210,12 +210,16 @@ def get_file_from_target(target):
   return target.replace(":", "/")
 
 
+def get_current_cl():
+  return int(run_cmd(["srcfs", "get_readonly"]))
+
+
 def sync_j2size_repo():
-  g4_sync_cmds = [
-      "synced_to_cl=@$(srcfs get_readonly) && "
-      "cd $(p4 g4d -f j2cl-size) && p4 sync $synced_to_cl"
-  ]
-  run_cmd(g4_sync_cmds, shell=True)
+  sync_jsize_repo_to_cl(get_current_cl())
+
+
+def sync_jsize_repo_to_cl(cl):
+  run_cmd([f"cd $(p4 g4d -f j2cl-size) && p4 sync @{cl}"], shell=True)
 
 
 def get_j2size_repo_path():

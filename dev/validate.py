@@ -292,6 +292,20 @@ class DiffValidationTest(ValidationTest):
       _assert_in("g4d -f j2cl-size", captured_p4_args)
       _assert_in("sync @", captured_p4_args)
 
+  def test_diff_bisect_requires_one_target(self):
+    _j2_expecting_failure("diff --bisect-size 123-456 foo bar")
+    _assert_output("--bisect-size requires exactly one target")
+
+  def test_diff_bisect_invalid_range(self):
+    _j2_expecting_failure("diff --bisect-size invalid-range foo")
+    _assert_output("Invalid CL range")
+
+  def test_diff_bisect(self):
+    _j2("diff --bisect-size 899235670-899235680 java/recordclass.wasm")
+    _assert_output("Bisecting size change for 'java/recordclass.wasm'")
+    _assert_output("Culprit CL identified: cl/899235675")
+    _assert_output("record classes more consistent")
+
 
 def _j2(args_str, out_stream=None, env=None):
   if out_stream is None:

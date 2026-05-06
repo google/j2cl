@@ -16,10 +16,12 @@
 # pylint: disable=missing-function-docstring
 
 import argparse
+import math
 import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 
 import repo_util
@@ -105,6 +107,14 @@ def _get_artifact_target(blaze_target, workspace_path):
 
 
 def main(argv):
+  if argv.bisect_size:
+    if len(argv.targets) != 1:
+      raise argparse.ArgumentTypeError(
+          "--bisect-size requires exactly one target"
+      )
+    _bisect(argv.targets[0], argv.bisect_size)
+    return
+
   if len(argv.targets) > 2:
     raise argparse.ArgumentTypeError("More than 2 targets to compare.")
 
@@ -282,6 +292,71 @@ def _print_size_diff(prefix, original_size, modified_size):
   print(f"      Diff: {diff:+} ({diff/original_size:.1%})")
 
 
+def _bisect(target_str, cl_range):
+  start_cl, end_cl = cl_range
+  print(f"Bisecting size change for '{target_str}'")
+  print(f"    in range  {start_cl}..{end_cl}")
+
+  j2cl_size_target = _create_target_info(target_str).to_j2cl_size_target()
+
+  # Verify initial and final states
+  print(f"Checking initial state at {start_cl}...")
+  size_start = _measure_size(j2cl_size_target, start_cl)
+  print(f"Size at {start_cl}: {size_start}")
+
+  print(f"Checking final state at {end_cl}...")
+  size_end = _measure_size(j2cl_size_target, end_cl)
+  print(f"Size at {end_cl}: {size_end}")
+
+  if size_start == size_end:
+    print("Start and end sizes are the same. Cannot bisect.")
+    return
+
+  low = start_cl
+  high = end_cl
+  max_steps = math.ceil(math.log2(high - low + 1))
+  step_count = 0
+
+  while low < high:
+    step_count += 1
+    mid = (low + high) // 2
+    print(f"[Step {step_count}/{max_steps}] Checking CL {mid}...")
+    size = _measure_size(j2cl_size_target, mid)
+    print(f"  Size at {mid}: {size}")
+
+    if size == size_start:
+      low = mid + 1
+    else:
+      high = mid
+
+  culprit_cl = low
+  print(f"Culprit CL identified: cl/{culprit_cl}")
+  print("--------------------------------------------------")
+  sys.stdout.flush()
+  subprocess.call(f"g4 describe -s {culprit_cl}", shell=True)
+  print(f"Link to culprit CL: http://cl/{culprit_cl}")
+
+
+def _measure_size(target_info, cl):
+  repo_util.sync_jsize_repo_to_cl(cl)
+  repo_util.build([target_info.blaze_target], cwd=target_info.workspace_path)
+  return os.path.getsize(target_info.get_output_file())
+
+
+def _parse_cl_range(cl_range_str):
+  """Parses a CL range string of the format 'start-end'."""
+  match = re.fullmatch(r"(\d+)-(\d+)", cl_range_str)
+  if not match:
+    raise argparse.ArgumentTypeError(
+        f"Invalid CL range: {cl_range_str}. Expected format: start-end"
+    )
+  start_cl, end_cl = map(int, match.groups())
+  if start_cl >= end_cl:
+    print(f"Start CL ({start_cl}) must be smaller than end CL ({end_cl}).")
+    sys.exit(1)
+  return start_cl, end_cl
+
+
 def add_arguments(parser):
   parser.add_argument(
       "--size",
@@ -302,6 +377,13 @@ def add_arguments(parser):
       default=True,
       action=argparse.BooleanOptionalAction,
       help="Filter noise in the diff due to difference in variable indexes.",
+  )
+
+  parser.add_argument(
+      "--bisect-size",
+      metavar="RANGE",
+      type=_parse_cl_range,
+      help="Bisect size change in CL range (e.g. 12345-67890)",
   )
 
   parser.add_argument(
