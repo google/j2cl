@@ -365,6 +365,8 @@ def main(argv):
     for name in dir(test_suite):
       if not name.startswith("test_"):
         continue
+      if argv.test_case and name != argv.test_case:
+        continue
       func = getattr(test_suite, name)
       display_name = name.replace("_", " ").capitalize()
       success &= test_suite.run_test(display_name, func)
@@ -380,4 +382,9 @@ def add_arguments(parser):
       nargs="?",
       choices=["gen", "diff"],
       help="Test suite to run (gen or diff). If omitted, all tests are run.",
+  )
+  parser.add_argument(
+      "test_case",
+      nargs="?",
+      help="Test case to run. If omitted, all test cases are run.",
   )
