@@ -43,6 +43,7 @@ public class Main {
     testDataClass();
     testJsTypeDataClass();
     testJvmRecordDataClass();
+    testJsTypeJvmRecordDataClass();
   }
 
   private static void testTopLevelDeclarations() {
@@ -245,5 +246,12 @@ public class Main {
     assertEquals("foo", record.y());
     assertEquals(new MyRecord(1, "foo"), record);
     assertTrue(record instanceof MyRecord(int i, String s) && s.equals("foo"));
+  }
+
+  private static void testJsTypeJvmRecordDataClass() {
+    MyJsTypeRecord record = new MyJsTypeRecord(1, "foo");
+    // TODO(b/499370830): Uncomment when the bug is fixed.
+    // assertEquals(1, record.x());
+    // assertEquals("foo", record.y());
   }
 }

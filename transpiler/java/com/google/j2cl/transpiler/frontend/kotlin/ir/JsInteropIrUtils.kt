@@ -51,13 +51,18 @@ import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.util.getAnnotation
+import org.jetbrains.kotlin.ir.util.hasEqualFqName
 import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isGetter
 import org.jetbrains.kotlin.ir.util.isSetter
 import org.jetbrains.kotlin.ir.util.isStatic
+import org.jetbrains.kotlin.ir.util.nonDispatchParameters
+import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
+import org.jetbrains.kotlin.ir.util.superClass
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.resolve.jvm.JAVA_LANG_RECORD_FQ_NAME
 
 private fun IrClass.getJsTypeAnnotation(): IrConstructorCall? =
   getJsInteropAnnotation(JS_TYPE_ANNOTATION_FQ_NAME)
@@ -231,7 +236,6 @@ fun IrDeclaration.getJsInfo(): JsInfo =
     .setJsMemberType(getJsMemberType())
     .setJsOverlay(isJsOverlay)
     .setJsAsync(this is IrFunction && isJsAsync)
-    .setHasJsMemberAnnotation(false)
     .apply {
       val jsMemberAnnotation = getJsMemberAnnotation()
       setHasJsMemberAnnotation(jsMemberAnnotation != null)
@@ -249,7 +253,7 @@ fun IrDeclaration.isJsMember(): Boolean =
     isCompanionMember -> false
     getJsMemberAnnotation() != null -> true
     isJsEnumEntry() -> true
-    isPublicMemberOfJsType() -> !isJsOverlay
+    isImplicitJsMember() -> !isJsOverlay
     isMemberOfNativeJsType() -> !isMemberOfJsEnum && !isJsOverlay
     else -> false
   }
@@ -311,16 +315,50 @@ private fun IrDeclaration.isJsEnumEntry(): Boolean {
   return this is IrEnumEntry && parentClassOrNull?.isJsEnum == true
 }
 
-private fun IrDeclaration.isPublicMemberOfJsType(): Boolean {
+private fun IrDeclaration.isImplicitJsMember(): Boolean {
   if (!isMemberOfJsType) {
     return false
   }
   return when (this) {
-    is IrDeclarationWithVisibility -> visibility == DescriptorVisibilities.PUBLIC
+    is IrDeclarationWithVisibility -> canBeImplicitJsMember()
     is IrEnumEntry -> true // Enum entries are always public
     else -> false
   }
 }
+
+private fun IrDeclarationWithVisibility.canBeImplicitJsMember(): Boolean {
+  // Public members are implicitly JsMembers.
+  if (visibility == DescriptorVisibilities.PUBLIC) {
+    // Java component accessors will inherit JsInfo from the components so should not be considered
+    // implicit JsMembers even though they are public.
+    if (isJavaRecordComponentAccessor()) {
+      return false
+    }
+    return true
+  }
+  // Java record components fields, although private, are implicit js members. Later in the
+  // process, it will be used by public accessors to inherit JsInfo from.
+  if (isJavaRecordComponentField()) {
+    return true
+  }
+  return false
+}
+
+private fun IrDeclaration.isJavaRecordComponentAccessor(): Boolean =
+  this is IrFunction &&
+    !isStatic &&
+    nonDispatchParameters.isEmpty() &&
+    isMemberOfJavaRecord() &&
+    // Has matching backing field.
+    parentAsClass.declarations.filterIsInstance<IrProperty>().any {
+      it.backingField?.isStatic == false && it.name == this.name
+    }
+
+private fun IrDeclaration.isJavaRecordComponentField(): Boolean =
+  this is IrField && !isStatic && isMemberOfJavaRecord()
+
+private fun IrDeclaration.isMemberOfJavaRecord(): Boolean =
+  isFromJava() && parentAsClass.superClass?.hasEqualFqName(JAVA_LANG_RECORD_FQ_NAME) == true
 
 // Computing whether an instance method is a JsMethod requires looking at overridden methods, and
 // such computation is done in the J2CL type model. Therefore this method only checks whether a

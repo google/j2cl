@@ -152,4 +152,6 @@ data class DataClass(val x: Int, val y: String)
 
 @JsType data class JsTypeDataClass(val x: Int, val y: String)
 
-@kotlin.jvm.JvmRecord data class MyRecord(val x: Int, val y: String)
+@JvmRecord data class MyRecord(val x: Int, val y: String)
+
+@JsType @JvmRecord data class MyJsTypeRecord(val x: Int, val y: String)

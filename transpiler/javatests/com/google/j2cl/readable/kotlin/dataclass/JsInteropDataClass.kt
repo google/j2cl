@@ -27,6 +27,14 @@ import jsinterop.annotations.JsType
 
 data class DataClassWithJsProperty(@JsProperty(name = "renamedFoo") val foo: Int)
 
+@JsType
+@JvmRecord
+data class JsTypeJvmRecordDataClass(
+  @JsProperty(name = "customVal") val x: Int,
+  val y: String,
+  @JsIgnore val ignored: String,
+)
+
 fun main() {
   val foo1 = JsTypeDataClass(1).foo
   val (foo2) = JsTypeDataClassWithJsIgnore(1)

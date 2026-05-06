@@ -43,6 +43,7 @@ fun main(vararg unused: String) {
   testFakeOverrideSpecialization()
   testNullMarkedCode()
   testJsInterop()
+  testJavaRecordJsInterop()
 }
 
 fun testFieldAccess() {
@@ -166,4 +167,18 @@ fun testJsInterop() {
   //   "SpecializedPrimitiveParameters#boxedDoubleJsMethod",
   //   specializesPrimitiveParameters.boxedDoubleJsMethod(1.0),
   // )
+}
+
+fun testJavaRecordJsInterop() {
+  val record = JsInteropRecord(1, "foo", "ignored")
+  // TODO(b/508477062): Enable when the bug is fixed.
+  // assertEquals(1, record.x())
+  // assertEquals("foo", record.y())
+  // assertEquals("ignored", record.ignored())
+
+  val explicitRecord = JsInteropRecordExplicitMembers(1, "foo", "ignored")
+  // TODO(b/508477062): Enable when the bug is fixed.
+  // assertEquals(1, explicitRecord.x())
+  // assertEquals("foo", explicitRecord.y())
+  // assertEquals("ignored", explicitRecord.ignored())
 }

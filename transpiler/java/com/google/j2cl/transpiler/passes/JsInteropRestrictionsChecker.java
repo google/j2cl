@@ -78,6 +78,7 @@ import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
@@ -1320,6 +1321,13 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkRecordComponentAccessor(Method method) {
+    if (method.getDescriptor().getEnclosingTypeDescriptor().getTypeDeclaration().getSourceLanguage()
+        == SourceLanguage.KOTLIN) {
+      // Accessors in Kotlin data classes with @JvmRecord - although looks like component accessors,
+      // still follow Kotlin annotation targeting. Java targeting rules and related validations are
+      // irrelevant.
+      return;
+    }
     if (method.getDescriptor().getOriginalJsInfo().getHasJsMemberAnnotation()) {
       if (method.getDescriptor().getOriginalJsInfo().getJsMemberType() == JsMemberType.METHOD) {
         // Explicitly reject JsMethod since it is disallowed regardless of the annotation
