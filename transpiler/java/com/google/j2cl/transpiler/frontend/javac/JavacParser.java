@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -96,7 +97,7 @@ public class JavacParser {
               options.getSystem(),
               options.getAnnotationProcessorPath(),
               getJavacOptions(options),
-              targetPathBySourcePath.keySet().stream().map(File::new).collect(toImmutableList()),
+              targetPathBySourcePath.keySet().stream().map(Path::of).collect(toImmutableList()),
               diagnostics,
               sourceGenPath);
 
@@ -184,7 +185,7 @@ public class JavacParser {
       Path system,
       List<Path> processorPath,
       List<String> javacOptions,
-      Iterable<File> sources,
+      Collection<Path> sources,
       DiagnosticCollector<JavaFileObject> diagnostics,
       Path sourceGenPath)
       throws IOException {
@@ -211,7 +212,7 @@ public class JavacParser {
             diagnostics,
             javacOptions,
             null,
-            fileManager.getJavaFileObjectsFromFiles(sources));
+            fileManager.getJavaFileObjectsFromPaths(sources));
   }
 
   private static final ImmutableSet<String> ALLOWED_JAVAC_OPTIONS =
