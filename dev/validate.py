@@ -300,6 +300,14 @@ class DiffValidationTest(ValidationTest):
     _j2_expecting_failure("diff --bisect-size invalid-range foo")
     _assert_output("Invalid CL range")
 
+  def test_diff_bisect_auto_range(self):
+    _j2_expecting_failure("diff --bisect-size auto non-existent")
+    _assert_output("Auto-calculating CL range...")
+    _assert_output("    in range ")
+    _assert_output("Bisecting size change for 'non-existent'")
+    # Verify that we tried to build the target and that's the cause of failure.
+    _assert_output("no such package")
+
   def test_diff_bisect(self):
     _j2("diff --bisect-size 899235670-899235680 java/recordclass.wasm")
     _assert_output("Bisecting size change for 'java/recordclass.wasm'")

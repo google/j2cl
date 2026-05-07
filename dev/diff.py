@@ -344,15 +344,25 @@ def _measure_size(target_info, cl):
 
 
 def _parse_cl_range(cl_range_str):
-  """Parses a CL range string of the format 'start-end'."""
-  match = re.fullmatch(r"(\d+)-(\d+)", cl_range_str)
-  if not match:
-    raise argparse.ArgumentTypeError(
-        f"Invalid CL range: {cl_range_str}. Expected format: start-end"
-    )
-  start_cl, end_cl = map(int, match.groups())
+  """Parses a CL range string of the format 'start-end' or 'auto'."""
+  if cl_range_str == "auto":
+    print("Auto-calculating CL range...")
+    start_cl = repo_util.get_last_cl_for_size_report()
+    end_cl = repo_util.get_current_cl()
+  else:
+    match = re.fullmatch(r"(\d+)-(\d+)", cl_range_str)
+    if not match:
+      print(f"Invalid CL range: {cl_range_str}")
+      raise argparse.ArgumentTypeError(
+          f"Invalid CL range: {cl_range_str}. Expected format: start-end or"
+          " 'auto'"
+      )
+    start_cl, end_cl = map(int, match.groups())
+
   if start_cl >= end_cl:
     print(f"Start CL ({start_cl}) must be smaller than end CL ({end_cl}).")
+    if cl_range_str == "auto":
+      print("Your workspace might be out of date. Please sync.")
     sys.exit(1)
   return start_cl, end_cl
 
@@ -383,7 +393,10 @@ def add_arguments(parser):
       "--bisect-size",
       metavar="RANGE",
       type=_parse_cl_range,
-      help="Bisect size change in CL range (e.g. 12345-67890)",
+      help=(
+          "Bisect size change in CL range (e.g. 12345-67890) "
+          "or 'auto' to auto-calculate."
+      ),
   )
 
   parser.add_argument(

@@ -222,6 +222,14 @@ def sync_jsize_repo_to_cl(cl):
   run_cmd([f"cd $(p4 g4d -f j2cl-size) && p4 sync @{cl}"], shell=True)
 
 
+def get_last_cl_for_size_report():
+  path = SIZE_REPORT
+  output = run_cmd(
+      ["p4 changes -m 1 -s submitted %s | awk '{print $2}'" % path], shell=True
+  )
+  return int(output)
+
+
 def get_j2size_repo_path():
   return get_repo_path("j2cl-size")
 
