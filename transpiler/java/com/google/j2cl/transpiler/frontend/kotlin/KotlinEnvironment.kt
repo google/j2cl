@@ -63,6 +63,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNative
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
 import com.google.j2cl.transpiler.frontend.kotlin.ir.jsName
@@ -138,7 +139,6 @@ import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isInterface
 import org.jetbrains.kotlin.ir.util.isLocal
-import org.jetbrains.kotlin.ir.util.isReal
 import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.isTypeParameter
@@ -960,7 +960,7 @@ internal class KotlinEnvironment(
   }
 
   fun IrClass.getDeclaredFields(): Set<IrField> {
-    val fields = declarations.filterIsInstance<IrField>().filter { it.isReal }.toMutableSet()
+    val fields = declarations.filterIsInstance<IrField>().filter { !it.isSynthetic }.toMutableSet()
 
     val companion = declarations.filterIsInstance<IrClass>().firstOrNull(IrClass::isCompanion)
     if (companion != null) {
