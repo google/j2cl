@@ -417,7 +417,7 @@
       acceptCustomListWithJ2ktiosinteropCollectionTypes_CustomList:customList];
 
   [J2ktiosinteropCollectionTypesCompanion.shared acceptSetWithJavaUtilSet:set];
-  [J2ktiosinteropCollectionTypesCompanion.shared acceptHashSetWithKotlinCollectionsHashSet:hashSet];
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptHashSetWithJavaUtilHashSet:hashSet];
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptAbstractSetWithJavaUtilAbstractSet:abstractSet];
   [J2ktiosinteropCollectionTypesCompanion.shared
