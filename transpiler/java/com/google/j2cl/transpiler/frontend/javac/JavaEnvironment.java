@@ -35,7 +35,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.AnnotationValue;
@@ -130,7 +129,6 @@ public class JavaEnvironment {
   private final Types internalTypes;
   private final JavacElements elements;
   private final Symtab symtab;
-  private final Problems problems;
 
   private final Map<TypeElement, TypeDeclaration> cachedTypeDeclarationByTypeElement =
       new HashMap<>();
@@ -151,9 +149,7 @@ public class JavaEnvironment {
 
   private final Map<FieldDescriptorKey, FieldDescriptor> cachedFieldDescriptors = new HashMap<>();
 
-  JavaEnvironment(
-      Context context, Collection<String> wellKnownQualifiedBinaryNames, Problems problems) {
-    this.problems = problems;
+  JavaEnvironment(Context context, Collection<String> wellKnownQualifiedBinaryNames) {
     this.javacTypes = JavacTypes.instance(context);
     this.internalTypes = Types.instance(context);
     this.elements = JavacElements.instance(context);

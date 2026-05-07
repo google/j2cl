@@ -138,7 +138,7 @@ public class JavacParser {
       problems.abortIfHasErrors();
 
       JavaEnvironment javaEnvironment =
-          new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
+          new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames());
       CompilationUnitBuilder compilationUnitBuilder =
           new CompilationUnitBuilder(javaEnvironment, problems);
 
@@ -180,8 +180,7 @@ public class JavacParser {
               problems,
               new Context());
       reportDiagnosticErrors(diagnostics, problems);
-      return new JavaEnvironment(
-          task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
+      return new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames());
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       return null;
