@@ -36,8 +36,10 @@ import com.sun.source.tree.Tree;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import com.sun.tools.javac.api.JavacTaskImpl;
+import com.sun.tools.javac.api.JavacTool;
 import com.sun.tools.javac.file.JavacFileManager;
 import com.sun.tools.javac.tree.JCTree;
+import com.sun.tools.javac.util.Context;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -52,7 +54,6 @@ import javax.annotation.Nullable;
 import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.DiagnosticCollector;
-import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
@@ -86,9 +87,11 @@ public class JavacParser {
 
     problems.abortIfCancelled();
     try {
-      // TODO(b/470163090): Customize the JavaCompiler instance to have more granular control for
-      // cancelation.
       DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
+      Context context = new Context();
+      // Register the cancellation-aware compiler components to ensure that cancellation is checked
+      // during parsing and type checking.
+      CancellationChecker.register(context, problems);
 
       Path sourceGenPath = options.getSourceGenPath();
       JavacTaskImpl task =
@@ -99,7 +102,9 @@ public class JavacParser {
               getJavacOptions(options),
               targetPathBySourcePath.keySet().stream().map(Path::of).collect(toImmutableList()),
               diagnostics,
-              sourceGenPath);
+              sourceGenPath,
+              problems,
+              context);
 
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList();
       task.addTaskListener(
@@ -124,6 +129,7 @@ public class JavacParser {
             }
           });
 
+      problems.abortIfCancelled();
       task.parse();
       task.analyze();
 
@@ -170,7 +176,9 @@ public class JavacParser {
               getJavacOptionsBuilder().build(),
               /* sources= */ ImmutableList.of(),
               diagnostics,
-              /* sourceGenPath= */ null);
+              /* sourceGenPath= */ null,
+              problems,
+              new Context());
       reportDiagnosticErrors(diagnostics, problems);
       return new JavaEnvironment(
           task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
@@ -187,9 +195,13 @@ public class JavacParser {
       List<String> javacOptions,
       Collection<Path> sources,
       DiagnosticCollector<JavaFileObject> diagnostics,
-      Path sourceGenPath)
+      Path sourceGenPath,
+      Problems problems,
+      Context context)
       throws IOException {
-    JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+    JavacTool compiler = (JavacTool) ToolProvider.getSystemJavaCompiler();
+    problems.abortIfCancelled();
+
     JavacFileManager fileManager =
         (JavacFileManager)
             compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8);
@@ -212,7 +224,8 @@ public class JavacParser {
             diagnostics,
             javacOptions,
             null,
-            fileManager.getJavaFileObjectsFromPaths(sources));
+            fileManager.getJavaFileObjectsFromPaths(sources),
+            context);
   }
 
   private static final ImmutableSet<String> ALLOWED_JAVAC_OPTIONS =

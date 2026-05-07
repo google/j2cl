@@ -150,13 +150,11 @@ public class JavaEnvironment {
     // Add well-known, non-primitive types.
     wellKnownQualifiedBinaryNames.forEach(
         binaryName -> {
-          this.problems.abortIfCancelled();
           TypeElement element = binaryNameToTypeElement(binaryName);
           if (element != null) {
             builder.addReferenceType(createDeclaredTypeDescriptor(element.asType()));
           }
         });
-    this.problems.abortIfCancelled();
     builder.buildSingleton();
   }
 

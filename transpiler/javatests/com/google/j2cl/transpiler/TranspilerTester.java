@@ -688,9 +688,14 @@ public class TranspilerTester {
     assertThat(Thread.currentThread().isInterrupted()).isFalse();
 
     final String[] knownDelayedCalls = {
-      "com.google.j2cl.transpiler.frontend.javac.JavacParser.parseFiles",
       // Kotlin frontend is currently missing a lot of checks in between large chunks of works.
       "com.google.j2cl.transpiler.frontend.kotlin.KotlinParser.parseFiles",
+      // TODO(b/510525116): Consider wheter to instrument the type checking more aggressively to
+      // reducethe delay in larger compilations.
+      // Javac analysis exceeds the delay especially for larger files.
+      "com.sun.tools.javac.main.JavaCompiler.enterTrees",
+      // Javac analysis exceeds the delay especially for larger files.
+      "com.sun.tools.javac.main.JavaCompiler.attribute",
     };
     for (String knownDelayedCall : knownDelayedCalls) {
       delayedCalls.removeIf(t -> t.contains(knownDelayedCall));
@@ -702,6 +707,8 @@ public class TranspilerTester {
     final String[] knownSlightlyDelayedCalls = {
       // Jdt is slow to do the check and we can't do much about it.
       "org.eclipse.core.runtime.SubMonitor.isCanceled",
+      // Javac parsing occasionally exceeds the delay.
+      "com.sun.tools.javac.main.JavaCompiler.parseFiles",
     };
     for (String knownSlightlyDelayedCall : knownSlightlyDelayedCalls) {
       slightlyDelayedCalls.removeIf(t -> t.contains(knownSlightlyDelayedCall));
