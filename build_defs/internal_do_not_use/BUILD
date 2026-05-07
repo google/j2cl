@@ -137,3 +137,11 @@ alias(
     name = "closure_testcase",
     actual = "//third_party:closure_testcase",
 )
+
+TEST_BZL_SRCS = glob(
+    [
+        "*_test*.bzl",
+        "*_suite*.bzl",
+    ],
+    exclude = ["j2cl_library_build_test.bzl"],
+)
