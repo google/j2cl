@@ -132,6 +132,25 @@ public class JavaEnvironment {
   private final Symtab symtab;
   private final Problems problems;
 
+  private final Map<TypeElement, TypeDeclaration> cachedTypeDeclarationByTypeElement =
+      new HashMap<>();
+
+  private record MethodDescriptorKey(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      ExecutableType methodType,
+      ExecutableElement declarationMethodElement,
+      List<TypeDescriptor> typeArguments) {}
+
+  private final Map<MethodDescriptorKey, MethodDescriptor> cachedMethodDescriptors =
+      new HashMap<>();
+
+  private record FieldDescriptorKey(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      TypeDescriptor fieldType,
+      VariableElement variableElement) {}
+
+  private final Map<FieldDescriptorKey, FieldDescriptor> cachedFieldDescriptors = new HashMap<>();
+
   JavaEnvironment(
       Context context, Collection<String> wellKnownQualifiedBinaryNames, Problems problems) {
     this.problems = problems;
@@ -642,15 +661,19 @@ public class JavaEnvironment {
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       VariableElement variableElement,
       TypeMirror type) {
+    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
+    TypeDescriptor thisTypeDescriptor =
+        createTypeDescriptorWithNullability(
+            type, variableElement.getAnnotationMirrors(), inNullMarkedScope);
+    var key = new FieldDescriptorKey(enclosingTypeDescriptor, thisTypeDescriptor, variableElement);
+    if (cachedFieldDescriptors.containsKey(key)) {
+      return cachedFieldDescriptors.get(key);
+    }
 
     boolean isStatic = isStatic(variableElement);
     Visibility visibility = getVisibility(variableElement);
     String fieldName = variableElement.getSimpleName().toString();
 
-    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
-    TypeDescriptor thisTypeDescriptor =
-        createTypeDescriptorWithNullability(
-            type, variableElement.getAnnotationMirrors(), inNullMarkedScope);
 
     TypeDescriptor declarationTypeDescriptor =
         createTypeDescriptorWithNullability(
@@ -678,23 +701,26 @@ public class JavaEnvironment {
 
     boolean isFinal = isFinal(variableElement);
     boolean isVolatile = isVolatile(variableElement);
-    return FieldDescriptor.newBuilder()
-        .setDeclarationDescriptor(declarationFieldDescriptor)
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(fieldName)
-        .setTypeDescriptor(thisTypeDescriptor)
-        .setStatic(isStatic)
-        .setVisibility(visibility)
-        .setOriginalJsInfo(jsInfo)
-        .setOriginalKtInfo(ktInfo)
-        .setFinal(isFinal)
-        .setAnnotations(createAnnotations(variableElement, inNullMarkedScope))
-        .setCompileTimeConstant(isCompileTimeConstant)
-        .setConstantValue(
-            constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
-        .setEnumConstant(isEnumConstant)
-        .setVolatile(isVolatile)
-        .build();
+    var fieldDescriptor =
+        FieldDescriptor.newBuilder()
+            .setDeclarationDescriptor(declarationFieldDescriptor)
+            .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+            .setName(fieldName)
+            .setTypeDescriptor(thisTypeDescriptor)
+            .setStatic(isStatic)
+            .setVisibility(visibility)
+            .setOriginalJsInfo(jsInfo)
+            .setOriginalKtInfo(ktInfo)
+            .setFinal(isFinal)
+            .setAnnotations(createAnnotations(variableElement, inNullMarkedScope))
+            .setCompileTimeConstant(isCompileTimeConstant)
+            .setConstantValue(
+                constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
+            .setEnumConstant(isEnumConstant)
+            .setVolatile(isVolatile)
+            .build();
+    cachedFieldDescriptors.put(key, fieldDescriptor);
+    return fieldDescriptor;
   }
 
   /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
@@ -703,6 +729,13 @@ public class JavaEnvironment {
       ExecutableType methodType,
       ExecutableElement declarationMethodElement,
       List<TypeDescriptor> typeArguments) {
+
+    var key =
+        new MethodDescriptorKey(
+            enclosingTypeDescriptor, methodType, declarationMethodElement, typeArguments);
+    if (cachedMethodDescriptors.containsKey(key)) {
+      return cachedMethodDescriptors.get(key);
+    }
 
     // TODO(b/380911302): Remove redundancy in the creation of method descriptors.
     // The enclosing type descriptor might be a subclass of the actual type descriptor, hence
@@ -770,30 +803,33 @@ public class JavaEnvironment {
                 .anyMatch(c -> c.getAccessor() == declarationMethodElement);
 
     String methodName = declarationMethodElement.getSimpleName().toString();
-    return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(isConstructor ? null : methodName)
-        .setParameterDescriptors((List<ParameterDescriptor>) parameterDescriptors)
-        .setDeclarationDescriptor(declarationMethodDescriptor)
-        .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
-        .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
-        .setTypeArgumentTypeDescriptors(typeArguments)
-        .setThrownTypeDescriptors(thrownExceptions)
-        .setOriginalJsInfo(JsInteropUtils.getJsInfo(declarationMethodElement))
-        .setOriginalKtInfo(J2ktInteropUtils.getJ2ktInfo(declarationMethodElement))
-        .setVisibility(getVisibility(declarationMethodElement))
-        .setStatic(isStatic(declarationMethodElement))
-        .setConstructor(isConstructor)
-        .setRecordComponentAccessor(isRecordComponentAccessor)
-        .setNative(isNative)
-        .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
-        .setFinal(isFinal(declarationMethodElement))
-        .setDefaultMethod(isDefaultMethod(declarationMethodElement))
-        .setAbstract(isAbstract(declarationMethodElement))
-        .setSynchronized(isSynchronized(declarationMethodElement))
-        .setSynthetic(isSynthetic(declarationMethodElement))
-        .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
-        .build();
+    var md =
+        MethodDescriptor.newBuilder()
+            .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+            .setName(isConstructor ? null : methodName)
+            .setParameterDescriptors((List<ParameterDescriptor>) parameterDescriptors)
+            .setDeclarationDescriptor(declarationMethodDescriptor)
+            .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
+            .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+            .setTypeArgumentTypeDescriptors(typeArguments)
+            .setThrownTypeDescriptors(thrownExceptions)
+            .setOriginalJsInfo(JsInteropUtils.getJsInfo(declarationMethodElement))
+            .setOriginalKtInfo(J2ktInteropUtils.getJ2ktInfo(declarationMethodElement))
+            .setVisibility(getVisibility(declarationMethodElement))
+            .setStatic(isStatic(declarationMethodElement))
+            .setConstructor(isConstructor)
+            .setRecordComponentAccessor(isRecordComponentAccessor)
+            .setNative(isNative)
+            .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
+            .setFinal(isFinal(declarationMethodElement))
+            .setDefaultMethod(isDefaultMethod(declarationMethodElement))
+            .setAbstract(isAbstract(declarationMethodElement))
+            .setSynchronized(isSynchronized(declarationMethodElement))
+            .setSynthetic(isSynthetic(declarationMethodElement))
+            .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
+            .build();
+    cachedMethodDescriptors.put(key, md);
+    return md;
   }
 
   private ImmutableList<ParameterDescriptor> convertParameterDescriptors(
@@ -1211,6 +1247,10 @@ public class JavaEnvironment {
       return null;
     }
 
+    if (cachedTypeDeclarationByTypeElement.containsKey(typeElement)) {
+      return cachedTypeDeclarationByTypeElement.get(typeElement);
+    }
+
     // Compute these first since they're reused in other calculations.
     boolean isAbstract = isAbstract(typeElement) && !isInterface(typeElement);
     Kind kind = getKind(typeElement);
@@ -1271,79 +1311,83 @@ public class JavaEnvironment {
     List<TypeParameterElement> typeParameterElements = getTypeParameters(typeElement);
 
     boolean isNullMarked = isNullMarked(typeElement);
-    return TypeDeclaration.newBuilder()
-        .setClassComponents(getClassComponents(typeElement))
-        .setEnclosingTypeDeclaration(createTypeDeclaration(getEnclosingTypeElement(typeElement)))
-        .setEnclosingMethodDescriptorFactory(() -> getEnclosingMethodDescriptor(typeElement))
-        .setSuperTypeDescriptorFactory(
-            () ->
-                (DeclaredTypeDescriptor)
-                    applyNullabilityAnnotations(
-                        createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked),
-                        typeElement,
-                        position ->
-                            position.type == TargetType.CLASS_EXTENDS
-                                && position.type_index == SUPERCLASS_TYPE_INDEX))
-        .setInterfaceTypeDescriptorsFactory(
-            () ->
-                createTypeDescriptors(
-                    typeElement.getInterfaces(),
-                    isNullMarked,
-                    DeclaredTypeDescriptor.class,
-                    typeElement))
-        .setHasAbstractModifier(isAbstract)
-        .setKind(kind)
-        .setAnnotation(isAnnotation(typeElement))
-        .setCapturingEnclosingInstance(capturesEnclosingInstance((ClassSymbol) typeElement))
-        .setFinal(isFinal)
-        .setSealed(isSealed(typeElement))
-        .setFunctionalInterface(isFunctionalInterface(typeElement.asType()))
-        .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeElement))
-        .setAnnotationsFactory(() -> createAnnotations(typeElement, isNullMarked))
-        .setSourceLanguage(
-            isAnnotatedWithKotlinMetadata(typeElement)
-                ? SourceLanguage.KOTLIN
-                : SourceLanguage.JAVA)
-        .setJsType(JsInteropUtils.isJsType(typeElement))
-        .setJsEnumInfo(jsEnumInfo)
-        .setNative(JsInteropUtils.isJsNativeType(typeElement))
-        .setAnonymous(isAnonymous(typeElement))
-        // Keep parity with jdt where anonymous classes are also considered local.
-        .setLocal(isLocal(typeElement) || isAnonymous(typeElement))
-        .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
-        .setCustomizedJsNamespace(getJsNamespace(typeElement))
-        .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
-        .setKtTypeInfo(J2ktInteropUtils.getJ2ktTypeInfo(typeElement))
-        .setNullMarked(isNullMarked)
-        .setOriginalSimpleSourceName(
-            typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
-        .setPackage(createPackageDeclaration(getPackageOf(typeElement)))
-        .setTypeParameterDescriptors(
-            typeParameterElements.stream()
-                .map(TypeParameterElement::asType)
-                .map(javax.lang.model.type.TypeVariable.class::cast)
-                .map(tv -> createTypeVariable(tv, ImmutableList.of(), isNullMarked))
-                .collect(toImmutableList()))
-        .setVisibility(getVisibility(typeElement))
-        .setDeclaredMethodDescriptorsFactory(declaredMethods)
-        .setSingleAbstractMethodDescriptorFactory(singleAbstractMethod)
-        .setDeclaredFieldDescriptorsFactory(declaredFields)
-        .setMemberTypeDeclarationsFactory(
-            () ->
-                typeElement.getEnclosedElements().stream()
-                    .filter(TypeElement.class::isInstance)
-                    .map(TypeElement.class::cast)
-                    .map(this::createTypeDeclaration)
+    var td =
+        TypeDeclaration.newBuilder()
+            .setClassComponents(getClassComponents(typeElement))
+            .setEnclosingTypeDeclaration(
+                createTypeDeclaration(getEnclosingTypeElement(typeElement)))
+            .setEnclosingMethodDescriptorFactory(() -> getEnclosingMethodDescriptor(typeElement))
+            .setSuperTypeDescriptorFactory(
+                () ->
+                    (DeclaredTypeDescriptor)
+                        applyNullabilityAnnotations(
+                            createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked),
+                            typeElement,
+                            position ->
+                                position.type == TargetType.CLASS_EXTENDS
+                                    && position.type_index == SUPERCLASS_TYPE_INDEX))
+            .setInterfaceTypeDescriptorsFactory(
+                () ->
+                    createTypeDescriptors(
+                        typeElement.getInterfaces(),
+                        isNullMarked,
+                        DeclaredTypeDescriptor.class,
+                        typeElement))
+            .setHasAbstractModifier(isAbstract)
+            .setKind(kind)
+            .setAnnotation(isAnnotation(typeElement))
+            .setCapturingEnclosingInstance(capturesEnclosingInstance((ClassSymbol) typeElement))
+            .setFinal(isFinal)
+            .setSealed(isSealed(typeElement))
+            .setFunctionalInterface(isFunctionalInterface(typeElement.asType()))
+            .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeElement))
+            .setAnnotationsFactory(() -> createAnnotations(typeElement, isNullMarked))
+            .setSourceLanguage(
+                isAnnotatedWithKotlinMetadata(typeElement)
+                    ? SourceLanguage.KOTLIN
+                    : SourceLanguage.JAVA)
+            .setJsType(JsInteropUtils.isJsType(typeElement))
+            .setJsEnumInfo(jsEnumInfo)
+            .setNative(JsInteropUtils.isJsNativeType(typeElement))
+            .setAnonymous(isAnonymous(typeElement))
+            // Keep parity with jdt where anonymous classes are also considered local.
+            .setLocal(isLocal(typeElement) || isAnonymous(typeElement))
+            .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
+            .setCustomizedJsNamespace(getJsNamespace(typeElement))
+            .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
+            .setKtTypeInfo(J2ktInteropUtils.getJ2ktTypeInfo(typeElement))
+            .setNullMarked(isNullMarked)
+            .setOriginalSimpleSourceName(
+                typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
+            .setPackage(createPackageDeclaration(getPackageOf(typeElement)))
+            .setTypeParameterDescriptors(
+                typeParameterElements.stream()
+                    .map(TypeParameterElement::asType)
+                    .map(javax.lang.model.type.TypeVariable.class::cast)
+                    .map(tv -> createTypeVariable(tv, ImmutableList.of(), isNullMarked))
                     .collect(toImmutableList()))
-        .setRecordComponentAccessorsDescriptorFactory(
-            () ->
-                !isRecord(typeElement)
-                    ? ImmutableList.of()
-                    : typeElement.getRecordComponents().stream()
-                        .map(RecordComponentElement::getAccessor)
-                        .map(this::createMethodDescriptor)
+            .setVisibility(getVisibility(typeElement))
+            .setDeclaredMethodDescriptorsFactory(declaredMethods)
+            .setSingleAbstractMethodDescriptorFactory(singleAbstractMethod)
+            .setDeclaredFieldDescriptorsFactory(declaredFields)
+            .setMemberTypeDeclarationsFactory(
+                () ->
+                    typeElement.getEnclosedElements().stream()
+                        .filter(TypeElement.class::isInstance)
+                        .map(TypeElement.class::cast)
+                        .map(this::createTypeDeclaration)
                         .collect(toImmutableList()))
-        .build();
+            .setRecordComponentAccessorsDescriptorFactory(
+                () ->
+                    !isRecord(typeElement)
+                        ? ImmutableList.of()
+                        : typeElement.getRecordComponents().stream()
+                            .map(RecordComponentElement::getAccessor)
+                            .map(this::createMethodDescriptor)
+                            .collect(toImmutableList()))
+            .build();
+    cachedTypeDeclarationByTypeElement.put(typeElement, td);
+    return td;
   }
 
   // The value of type_index for the superclass position in the raw type data of a declaration.
