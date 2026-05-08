@@ -24,7 +24,6 @@ import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnot
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktSwiftName;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropUtils.getJ2ktVariance;
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
 
 import com.google.common.collect.HashMultimap;
@@ -47,7 +46,6 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.KtVariance;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
@@ -404,7 +402,6 @@ public class JavaEnvironment {
     // are SYNTHETIC that are not instances of CapturedType. (see b/447445848).
     boolean isCapture =
         typeVariable instanceof CapturedType || ((baseSymbol.flags() & Flags.SYNTHETIC) != 0);
-    KtVariance ktVariance = getJ2ktVariance(baseSymbol);
     Type baseSymbolType = baseSymbol.asType();
     int id = getTypeVariableId(baseSymbolType);
     return TypeVariable.newBuilder()
@@ -423,7 +420,6 @@ public class JavaEnvironment {
                 + (baseSymbolType.getLowerBound() != null
                     ? "::v::" + baseSymbolType.getLowerBound()
                     : ""))
-        .setKtVariance(ktVariance)
         .setName(baseSymbol.getSimpleName().toString())
         .setCapture(isCapture)
         .setNullabilityAnnotation(getNullabilityAnnotation(typeVariable, elementAnnotations))

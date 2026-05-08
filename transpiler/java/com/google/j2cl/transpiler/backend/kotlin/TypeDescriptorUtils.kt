@@ -89,6 +89,15 @@ internal val TypeDescriptor.isDenotableNonWildcard: Boolean
       is TypeVariable -> !isWildcard && isDenotable
       else -> isDenotable
     }
+
+internal val TypeVariable.ktVariance: KtVariance?
+  get() =
+    when {
+      hasAnnotation("javaemul.internal.annotations.KtIn") -> KtVariance.IN
+      hasAnnotation("javaemul.internal.annotations.KtOut") -> KtVariance.OUT
+      else -> null
+    }
+
 internal val TypeVariable.hasNullableBounds: Boolean
   get() = upperBoundTypeDescriptor.canBeNull() && hasNullableRecursiveBounds
 

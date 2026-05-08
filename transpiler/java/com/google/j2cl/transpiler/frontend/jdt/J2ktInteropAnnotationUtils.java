@@ -15,10 +15,9 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_IN_ANNOTATION_NAME;
+
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OUT_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PUBLIC_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SWIFT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
@@ -96,21 +95,7 @@ public class J2ktInteropAnnotationUtils {
     return findAnnotationBindingByName(binding, J2KT_OBJECTIVE_C_ANNOTATION_NAME);
   }
 
-  @Nullable
-  public static IAnnotationBinding getJ2ktInAnnotation(ITypeBinding typeVariableBinding) {
-    // TODO(b/399932181): Double check the logic and comment here why we're using
-    // ITypeBinding.getTypeAnnotations() instead of IBinding.getAnnotations().
-    return findAnnotationBindingByName(
-        typeVariableBinding.getTypeAnnotations(), J2KT_IN_ANNOTATION_NAME);
-  }
 
-  @Nullable
-  public static IAnnotationBinding getJ2ktOutAnnotation(ITypeBinding typeVariableBinding) {
-    // TODO(b/399932181): Double check the logic and comment here why we're using
-    // ITypeBinding.getTypeAnnotations() instead of IBinding.getAnnotations().
-    return findAnnotationBindingByName(
-        typeVariableBinding.getTypeAnnotations(), J2KT_OUT_ANNOTATION_NAME);
-  }
 
   @Nullable
   public static IAnnotationBinding getJ2ktPublicNativeAnnotation(IBinding binding) {

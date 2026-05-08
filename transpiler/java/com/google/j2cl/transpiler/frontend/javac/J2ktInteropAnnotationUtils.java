@@ -15,10 +15,9 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_IN_ANNOTATION_NAME;
+
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OUT_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PUBLIC_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SWIFT_NAME_ANNOTATION_NAME;
@@ -82,13 +81,7 @@ public class J2ktInteropAnnotationUtils {
     return findAnnotationByName(annotatedConstruct, J2KT_OBJECTIVE_C_ANNOTATION_NAME);
   }
 
-  public static AnnotationMirror getJ2ktInAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, J2KT_IN_ANNOTATION_NAME);
-  }
 
-  public static AnnotationMirror getJ2ktOutAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, J2KT_OUT_ANNOTATION_NAME);
-  }
 
   public static AnnotationMirror getJ2ktPublicNativeAnnotation(
       AnnotatedConstruct annotatedConstruct) {

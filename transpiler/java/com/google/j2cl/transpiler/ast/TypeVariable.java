@@ -149,9 +149,6 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     return getUpperBoundTypeDescriptor().getMethodDescriptor(methodName, parameters);
   }
 
-  @Nullable
-  public abstract KtVariance getKtVariance();
-
   @Override
   public boolean isAssignableTo(TypeDescriptor that) {
     return this.getUpperBoundTypeDescriptor().isAssignableTo(that);
@@ -522,8 +519,6 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     public abstract Builder setCapture(boolean isCapture);
 
     public abstract Builder setLowerBoundTypeDescriptor(@Nullable TypeDescriptor typeDescriptor);
-
-    public abstract Builder setKtVariance(@Nullable KtVariance ktVariance);
 
     public abstract Builder setNullabilityAnnotation(NullabilityAnnotation nullabilityAnnotation);
 

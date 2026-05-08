@@ -32,12 +32,12 @@ public final class FrontendConstants {
   public static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
   public static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
 
-  public static final String J2KT_IN_ANNOTATION_NAME = "javaemul.internal.annotations.KtIn";
+
   public static final String J2KT_NATIVE_ANNOTATION_NAME = "javaemul.internal.annotations.KtNative";
   public static final String J2KT_OBJECTIVE_C_ANNOTATION_NAME =
       "com.google.j2objc.annotations.ObjectiveCName";
   public static final String SWIFT_NAME_ANNOTATION_NAME = "com.google.j2objc.annotations.SwiftName";
-  public static final String J2KT_OUT_ANNOTATION_NAME = "javaemul.internal.annotations.KtOut";
+
   public static final String J2KT_PUBLIC_NATIVE_ANNOTATION_NAME =
       "com.google.j2kt.annotations.KtNative";
 

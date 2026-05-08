@@ -352,7 +352,6 @@ public class JdtEnvironment {
         .setAnnotations(createAnnotations(typeBinding.getTypeAnnotations(), inNullMarkedScope))
         .setUniqueKey(uniqueKey)
         .setName(typeBinding.getName())
-        .setKtVariance(J2ktInteropUtils.getJ2ktVariance(typeBinding))
         .setNullabilityAnnotation(nullabilityAnnotation)
         .build();
   }

@@ -15,18 +15,15 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktInAnnotation;
+
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktNativeAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktOutAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktPublicNativeAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
 
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
-import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
-import org.eclipse.jdt.core.dom.ITypeBinding;
 
 /** Utility functions for Kotlin Interop properties. */
 public class J2ktInteropUtils {
@@ -54,14 +51,5 @@ public class J2ktInteropUtils {
     return null;
   }
 
-  @Nullable
-  public static KtVariance getJ2ktVariance(ITypeBinding typeVariableBinding) {
-    if (getJ2ktInAnnotation(typeVariableBinding) != null) {
-      return KtVariance.IN;
-    } else if (getJ2ktOutAnnotation(typeVariableBinding) != null) {
-      return KtVariance.OUT;
-    } else {
-      return null;
-    }
-  }
+
 }

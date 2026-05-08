@@ -16,13 +16,10 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktInAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktNativeAnnotation;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktOutAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktPublicNativeAnnotation;
 
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
-import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
@@ -53,14 +50,5 @@ public class J2ktInteropUtils {
     return null;
   }
 
-  @Nullable
-  public static KtVariance getJ2ktVariance(AnnotatedConstruct annotatedConstruct) {
-    if (getJ2ktInAnnotation(annotatedConstruct) != null) {
-      return KtVariance.IN;
-    } else if (getJ2ktOutAnnotation(annotatedConstruct) != null) {
-      return KtVariance.OUT;
-    } else {
-      return null;
-    }
-  }
+
 }
