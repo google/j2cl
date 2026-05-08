@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
-import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
@@ -335,9 +334,7 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
     get() = hasAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")
 
   private fun MethodDescriptor.objectiveCKmpMethodSelector(): String? =
-    getAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")?.let { annotation ->
-      (annotation.values["selector"] as? StringLiteral)?.value
-    }
+    getAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")?.getStringValue("selector")
 
   private fun TypeDescriptor.objCKmpDependentSource(): Dependent<Source> {
     val typeDescriptors = TypeDescriptors.get()

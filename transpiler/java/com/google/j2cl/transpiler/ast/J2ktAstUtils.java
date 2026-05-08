@@ -99,11 +99,7 @@ public class J2ktAstUtils {
   private static String getAnnotationValueString(
       HasAnnotations hasAnnotations, String qualifiedName) {
     Annotation annotation = hasAnnotations.getAnnotation(qualifiedName);
-    if (annotation == null) {
-      return null;
-    }
-    var literal = annotation.getValues().get("value");
-    return literal instanceof StringLiteral stringLiteral ? stringLiteral.getValue() : null;
+    return annotation == null ? null : annotation.getStringValue("value");
   }
 
   private J2ktAstUtils() {}

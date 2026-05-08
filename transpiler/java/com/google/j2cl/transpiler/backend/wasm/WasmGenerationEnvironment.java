@@ -40,7 +40,6 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
-import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -171,10 +170,7 @@ public class WasmGenerationEnvironment {
   @Nullable
   static String getWasmInfo(HasAnnotations node) {
     Annotation wasm = node.getAnnotation("javaemul.internal.annotations.Wasm");
-    if (wasm == null) {
-      return null;
-    }
-    return ((StringLiteral) wasm.getValues().get("value")).getValue();
+    return wasm == null ? null : wasm.getStringValue("value");
   }
 
   public String getTypeSignature(TypeDeclaration typeDeclaration) {
