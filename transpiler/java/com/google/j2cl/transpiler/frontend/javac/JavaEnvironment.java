@@ -410,6 +410,7 @@ public class JavaEnvironment {
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
         .setLowerBoundTypeDescriptor(lowerBound)
+        .setAnnotations(createAnnotations(baseSymbol, inNullMarkedScope))
         .setUniqueKey(
             "#"
                 + id

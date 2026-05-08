@@ -349,6 +349,7 @@ public class JdtEnvironment {
         .setWildcard(typeBinding.isWildcardType())
         .setUnbound(typeBinding.isWildcardType() && isUnbounded(typeBinding))
         .setCapture(typeBinding.isCapture())
+        .setAnnotations(createAnnotations(typeBinding.getTypeAnnotations(), inNullMarkedScope))
         .setUniqueKey(uniqueKey)
         .setName(typeBinding.getName())
         .setKtVariance(J2ktInteropUtils.getJ2ktVariance(typeBinding))

@@ -20,8 +20,10 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.ThreadLocalInterner;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
@@ -38,10 +40,14 @@ import javax.annotation.Nullable;
  * TypeVariable class is a value type. Those properties are set through {@code Supplier}.
  */
 @AutoValue
-public abstract non-sealed class TypeVariable extends TypeDescriptor implements HasName {
+public abstract non-sealed class TypeVariable extends TypeDescriptor
+    implements HasName, HasAnnotations {
 
   @Override
   public abstract String getName();
+
+  @Override
+  public abstract ImmutableList<Annotation> getAnnotations();
 
   @Memoized
   public TypeDescriptor getUpperBoundTypeDescriptor() {
@@ -289,6 +295,7 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor implements 
         .setWildcard(false)
         .setCapture(false)
         .setUnbound(false)
+        .setAnnotations(ImmutableList.of())
         .setNullabilityAnnotation(NullabilityAnnotation.NONE);
   }
 
@@ -519,6 +526,8 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor implements 
     public abstract Builder setKtVariance(@Nullable KtVariance ktVariance);
 
     public abstract Builder setNullabilityAnnotation(NullabilityAnnotation nullabilityAnnotation);
+
+    public abstract Builder setAnnotations(List<Annotation> annotations);
 
     private static final ThreadLocalInterner<TypeVariable> interner = new ThreadLocalInterner<>();
 
