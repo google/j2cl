@@ -114,7 +114,7 @@ def _impl_j2wasm_application(ctx):
     if feature_set == J2WASM_FEATURE_SET.DEFAULT:
         feature_set = ctx.attr._feature_set[BuildSettingInfo].value
 
-    deps = _get_j2cl_infos_for_feature_set([ctx.attr._jre] + ctx.attr.deps, feature_set)
+    deps = _get_j2cl_infos_for_feature_set(ctx.attr.deps, feature_set)
     classpath = _get_all_classjars(deps).to_list()
     jdk_system = get_jdk_system(get_java_toolchain(ctx), [])
 
@@ -372,7 +372,6 @@ _J2WASM_APP_ATTRS = {
     "enable_debug_info": attr.bool(default = False),
     "use_magic_string_imports": attr.bool(default = False),
     "feature_set": attr.string(default = J2WASM_FEATURE_SET.DEFAULT),
-    "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
     "_binaryen": attr.label(
         cfg = "exec",
         executable = True,

@@ -27,6 +27,11 @@ closure_js_library(
 )
 
 alias(
+    name = "jre-j2wasm",
+    actual = "//jre/java:jre-j2wasm",
+)
+
+alias(
     name = "jsinterop-annotations",
     actual = "//third_party:jsinterop-annotations",
 )

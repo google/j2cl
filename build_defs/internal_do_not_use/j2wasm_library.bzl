@@ -52,7 +52,7 @@ def _j2wasm_or_js_providers_of(deps):
 def _j2wasm_or_js_provider_of(dep):
     return dep[J2wasmInfo] if J2wasmInfo in dep else dep[JsInfo]
 
-j2wasm_library = rule(
+_j2wasm_library_rule = rule(
     implementation = _impl_j2wasm_library_rule,
     attrs = J2WASM_LIB_ATTRS,
     toolchains = ["@bazel_tools//tools/jdk:toolchain_type"],
@@ -62,3 +62,14 @@ j2wasm_library = rule(
         "srcjar": "lib%{name}-src.jar",
     },
 )
+
+# buildifier: disable=function-docstring-args
+def j2wasm_library(name, **kwargs):
+    args = dict(kwargs)
+    target_name = "//" + native.package_name() + ":" + name
+
+    # If this is JRE itself, don't synthesize the JRE dep.
+    if args.get("srcs") and target_name != "//jre/java:jre-j2wasm":
+        args["deps"] = args.get("deps", []) + [Label("//:jre-j2wasm")]
+
+    _j2wasm_library_rule(name = name, **args)

@@ -108,7 +108,7 @@ j2wasm_library(
         ":jre_java_files-j2wasm",
     ] + glob(["super-wasm/*.js"]),
     javacopts = JRE_JAVAC_OPTS,
-    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    visibility = ["//:__pkg__"],
     deps = [
         ":javaemul_internal_annotations-j2wasm",
         "//third_party:jsinterop-annotations-j2wasm",
