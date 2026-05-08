@@ -69,7 +69,6 @@ import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
-import com.sun.tools.javac.code.Attribute.TypeCompound;
 import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.ClassSymbol;
@@ -77,7 +76,6 @@ import com.sun.tools.javac.code.Symbol.MethodSymbol;
 import com.sun.tools.javac.code.Symbol.TypeVariableSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
 import com.sun.tools.javac.code.Symtab;
-import com.sun.tools.javac.code.TargetType;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.code.Type.CapturedType;
 import com.sun.tools.javac.code.Type.ClassType;
@@ -85,9 +83,6 @@ import com.sun.tools.javac.code.Type.IntersectionClassType;
 import com.sun.tools.javac.code.Type.JCPrimitiveType;
 import com.sun.tools.javac.code.Type.TypeVar;
 import com.sun.tools.javac.code.Type.UnionClassType;
-import com.sun.tools.javac.code.TypeAnnotationPosition;
-import com.sun.tools.javac.code.TypeAnnotationPosition.TypePathEntry;
-import com.sun.tools.javac.code.TypeAnnotationPosition.TypePathEntryKind;
 import com.sun.tools.javac.code.Types;
 import com.sun.tools.javac.code.Types.FunctionDescriptorLookupError;
 import com.sun.tools.javac.model.JavacElements;
@@ -99,7 +94,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
@@ -766,10 +760,10 @@ public class JavaEnvironment {
     TypeDescriptor returnTypeDescriptor =
         adjustForSyntheticEnumOrAnnotationMethod(
             declarationMethodElement,
-            applyReturnTypeNullabilityAnnotations(
+            applyNullabilityAnnotations(
                 createTypeDescriptorWithNullability(
                     returnType, declarationMethodElement.getAnnotationMirrors(), inNullMarkedScope),
-                declarationMethodElement));
+                declarationMethodElement.getReturnType()));
 
     ImmutableList<ParameterDescriptor> parameterDescriptors =
         convertParameterDescriptors(enclosingTypeDescriptor, declarationMethodElement, parameters);
@@ -842,11 +836,10 @@ public class JavaEnvironment {
       TypeDescriptor parameterType =
           adjustForSyntheticEnumOrAnnotationMethod(
               declarationMethodElement,
-              applyParameterNullabilityAnnotations(
+              applyNullabilityAnnotations(
                   createTypeDescriptorWithNullability(
                       parameters.get(i), parameterAnnotations, inNullMarkedScope),
-                  declarationMethodElement,
-                  i));
+                  declarationMethodElement.getParameters().get(i).asType()));
 
       parametersBuilder.add(
           ParameterDescriptor.newBuilder()
@@ -892,119 +885,57 @@ public class JavaEnvironment {
         ImmutableList.of());
   }
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  // Utility methods to process nullability annotations on classes that are compiled separately.
-  // Javac does not present TYPE_USE annotation in the returned type instances.
-  // TODO(b/443074477): Debug for which cases this is needed. In theory, the original bug in javac
-  // was fixed (https://bugs.openjdk.org/browse/JDK-8225377).
-  private static TypeDescriptor applyParameterNullabilityAnnotations(
-      TypeDescriptor typeDescriptor, ExecutableElement declarationMethodElement, int index) {
-    return applyNullabilityAnnotations(
-        typeDescriptor,
-        declarationMethodElement,
-        position ->
-            position.parameter_index == index
-                && position.type == TargetType.METHOD_FORMAL_PARAMETER);
-  }
-
-  private static TypeDescriptor applyReturnTypeNullabilityAnnotations(
-      TypeDescriptor typeDescriptor, ExecutableElement declarationMethodElement) {
-    return applyNullabilityAnnotations(
-        typeDescriptor,
-        declarationMethodElement,
-        position -> position.type == TargetType.METHOD_RETURN);
-  }
-
   private static TypeDescriptor applyNullabilityAnnotations(
-      TypeDescriptor typeDescriptor,
-      Element declarationMethodElement,
-      Predicate<TypeAnnotationPosition> positionSelector) {
-    List<TypeCompound> methodAnnotations =
-        ((Symbol) declarationMethodElement).getRawTypeAttributes();
-    for (TypeCompound methodAnnotation : methodAnnotations) {
-      TypeAnnotationPosition position = methodAnnotation.getPosition();
-      if (!positionSelector.test(position)
-          // Skip annotations that are on a lambda in the body.
-          || position.onLambda != null) {
-        continue;
+      TypeDescriptor typeDescriptor, TypeMirror declarationTypeMirror) {
+    if (typeDescriptor == null || declarationTypeMirror == null) {
+      return typeDescriptor;
+    }
+
+    typeDescriptor =
+        switch (getNullabilityAnnotation(declarationTypeMirror.getAnnotationMirrors())) {
+          case NULLABLE -> typeDescriptor.toNullable();
+          case NOT_NULLABLE -> typeDescriptor.toNonNullable();
+          case NONE -> typeDescriptor;
+        };
+
+    return switch (typeDescriptor) {
+      case DeclaredTypeDescriptor declaredTypeDescriptor
+          when declarationTypeMirror instanceof DeclaredType declaredType -> {
+        List<TypeDescriptor> typeArguments = declaredTypeDescriptor.getTypeArgumentDescriptors();
+        List<? extends TypeMirror> declarationTypeArguments = declaredType.getTypeArguments();
+        if (typeArguments.size() == declarationTypeArguments.size()) {
+          List<TypeDescriptor> newTypeArguments = new ArrayList<>();
+          for (int i = 0; i < typeArguments.size(); i++) {
+            newTypeArguments.add(
+                applyNullabilityAnnotations(typeArguments.get(i), declarationTypeArguments.get(i)));
+          }
+          yield declaredTypeDescriptor.withTypeArguments(newTypeArguments);
+        }
+        yield declaredTypeDescriptor;
       }
-      if (isNonNullAnnotation(methodAnnotation)) {
-        typeDescriptor =
-            applyNullabilityAnnotation(typeDescriptor, position.location, /* isNullable= */ false);
-      } else if (isNullableAnnotation(methodAnnotation)) {
-        typeDescriptor =
-            applyNullabilityAnnotation(typeDescriptor, position.location, /* isNullable= */ true);
-      }
-    }
 
-    return typeDescriptor;
+      case ArrayTypeDescriptor arrayTypeDescriptor
+          when declarationTypeMirror instanceof ArrayType arrayType ->
+          ArrayTypeDescriptor.newBuilder()
+              .setComponentTypeDescriptor(
+                  applyNullabilityAnnotations(
+                      arrayTypeDescriptor.getComponentTypeDescriptor(),
+                      arrayType.getComponentType()))
+              .setNullable(arrayTypeDescriptor.isNullable())
+              .build();
+
+      case TypeVariable targetWildcard
+          when targetWildcard.isWildcard()
+              && declarationTypeMirror instanceof WildcardType declarationWildcard ->
+          targetWildcard.withRewrittenBounds(
+              upperBound ->
+                  applyNullabilityAnnotations(upperBound, declarationWildcard.getExtendsBound()),
+              lowerBound ->
+                  applyNullabilityAnnotations(lowerBound, declarationWildcard.getSuperBound()));
+
+      default -> typeDescriptor;
+    };
   }
-
-  private static TypeDescriptor applyNullabilityAnnotation(
-      TypeDescriptor typeDescriptor, List<TypePathEntry> location, boolean isNullable) {
-    if (location.isEmpty()) {
-      return withNullability(typeDescriptor, isNullable);
-    }
-    TypePathEntry currentEntry = location.getFirst();
-    List<TypePathEntry> rest = location.subList(1, location.size());
-    switch (currentEntry.tag) {
-      case TYPE_ARGUMENT:
-        DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-        List<TypeDescriptor> replacements =
-            new ArrayList<>(declaredTypeDescriptor.getTypeArgumentDescriptors());
-        if (currentEntry.arg < replacements.size()) {
-          // Only apply the type argument annotation if the type is not raw.
-          replacements.set(
-              currentEntry.arg,
-              applyNullabilityAnnotation(replacements.get(currentEntry.arg), rest, isNullable));
-        }
-        return declaredTypeDescriptor.withTypeArguments(replacements);
-      case ARRAY:
-        ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-        return ArrayTypeDescriptor.newBuilder()
-            .setComponentTypeDescriptor(
-                applyNullabilityAnnotation(
-                    arrayTypeDescriptor.getComponentTypeDescriptor(), rest, isNullable))
-            .setNullable(typeDescriptor.isNullable())
-            .build();
-      case INNER_TYPE:
-        DeclaredTypeDescriptor innerType = (DeclaredTypeDescriptor) typeDescriptor;
-        // Consume all inner type annotation and only continue if does not relate to an outer type
-        // of the type in question.
-        int innerDepth = getInnerDepth(innerType);
-        int innerCount = countInner(rest) + 1;
-        if (innerCount != innerDepth) {
-          // Applies to outer type, not relevant for nullability, ignore.
-          return innerType;
-        }
-        return applyNullabilityAnnotation(
-            typeDescriptor, rest.subList(innerCount - 1, rest.size()), isNullable);
-      case WILDCARD:
-        // TODO(b/450914940): Have a more principled approach for applying nullability annotations
-        // from declarations to inferred types.
-        if (rest.isEmpty()) {
-          // Only apply the annotation that is on the bound to the wildcard to work around the
-          // issue.
-          return withNullability(typeDescriptor, isNullable);
-        }
-    }
-    return typeDescriptor;
-  }
-
-  private static int countInner(List<TypePathEntry> rest) {
-    return !rest.isEmpty() && rest.getFirst().tag == TypePathEntryKind.INNER_TYPE
-        ? countInner(rest.subList(1, rest.size())) + 1
-        : 0;
-  }
-
-  private static int getInnerDepth(DeclaredTypeDescriptor innerType) {
-    if (innerType.getTypeDeclaration().isCapturingEnclosingInstance()) {
-      return getInnerDepth(innerType.getEnclosingTypeDescriptor()) + 1;
-    }
-    return 0;
-  }
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
    * Returns true if any of the type parameters has been specialized.
@@ -1050,24 +981,6 @@ public class JavaEnvironment {
         .collect(toImmutableList());
   }
 
-  public <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
-      List<? extends TypeMirror> typeMirrors,
-      boolean inNullMarkedScope,
-      Class<T> clazz,
-      Element declarationElement) {
-    ImmutableList.Builder<T> typeDescriptorsBuilder = ImmutableList.builder();
-    for (int i = 0; i < typeMirrors.size(); i++) {
-      final int index = i;
-      typeDescriptorsBuilder.add(
-          clazz.cast(
-              applyNullabilityAnnotations(
-                  createTypeDescriptor(typeMirrors.get(i), inNullMarkedScope, clazz),
-                  declarationElement,
-                  position ->
-                      position.type == TargetType.CLASS_EXTENDS && position.type_index == index)));
-    }
-    return typeDescriptorsBuilder.build();
-  }
 
   public <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
       List<? extends TypeMirror> typeMirrors, boolean inNullMarkedScope, Class<T> clazz) {
@@ -1314,21 +1227,11 @@ public class JavaEnvironment {
                 createTypeDeclaration(getEnclosingTypeElement(typeElement)))
             .setEnclosingMethodDescriptorFactory(() -> getEnclosingMethodDescriptor(typeElement))
             .setSuperTypeDescriptorFactory(
-                () ->
-                    (DeclaredTypeDescriptor)
-                        applyNullabilityAnnotations(
-                            createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked),
-                            typeElement,
-                            position ->
-                                position.type == TargetType.CLASS_EXTENDS
-                                    && position.type_index == SUPERCLASS_TYPE_INDEX))
+                () -> createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked))
             .setInterfaceTypeDescriptorsFactory(
                 () ->
                     createTypeDescriptors(
-                        typeElement.getInterfaces(),
-                        isNullMarked,
-                        DeclaredTypeDescriptor.class,
-                        typeElement))
+                        typeElement.getInterfaces(), isNullMarked, DeclaredTypeDescriptor.class))
             .setHasAbstractModifier(isAbstract)
             .setKind(kind)
             .setAnnotation(isAnnotation(typeElement))
@@ -1385,10 +1288,6 @@ public class JavaEnvironment {
     cachedTypeDeclarationByTypeElement.put(typeElement, td);
     return td;
   }
-
-  // The value of type_index for the superclass position in the raw type data of a declaration.
-  // Must be in sync with com.sun.tools.javac.code.TypeAnnotationPosition.
-  private static final int SUPERCLASS_TYPE_INDEX = 65535;
 
   @Nullable
   private MethodDescriptor getEnclosingMethodDescriptor(TypeElement typeElement) {
@@ -1493,10 +1392,15 @@ public class JavaEnvironment {
   /** Return whether a type is annotated for nullability and which type of annotation it has. */
   private static NullabilityAnnotation getNullabilityAnnotation(
       AnnotatedConstruct annotatedConstruct, List<? extends AnnotationMirror> elementAnnotations) {
+    return getNullabilityAnnotation(
+        Iterables.concat(elementAnnotations, annotatedConstruct.getAnnotationMirrors()));
+  }
 
-    Iterable<AnnotationMirror> allAnnotations =
-        Iterables.concat(elementAnnotations, annotatedConstruct.getAnnotationMirrors());
-    for (AnnotationMirror annotation : allAnnotations) {
+  /** Return whether a type is annotated for nullability and which type of annotation it has. */
+  private static NullabilityAnnotation getNullabilityAnnotation(
+      Iterable<? extends AnnotationMirror> annotations) {
+
+    for (AnnotationMirror annotation : annotations) {
       String annotationName = getAnnotationName(annotation);
 
       if (Nullability.isNonNullAnnotation(annotationName)) {
