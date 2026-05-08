@@ -45,8 +45,14 @@ public abstract class MemberDescriptor
 
   public abstract JsInfo getJsInfo();
 
+  @Nullable
+  abstract KtInfo getOriginalKtInfoInternal();
+
   /** Return KtInfo from the member's annotation. */
-  public abstract KtInfo getOriginalKtInfo();
+  public KtInfo getOriginalKtInfo() {
+    KtInfo info = getOriginalKtInfoInternal();
+    return info != null ? info : J2ktAstUtils.getKtInfo(getAnnotations());
+  }
 
   abstract KtInfo getKtInfo();
 

@@ -17,10 +17,40 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject;
 
+import java.util.List;
 import javax.annotation.Nullable;
 
 /** J2KT AST utilities. */
 public class J2ktAstUtils {
+  /** Construct KtInfo from the given annotations. */
+  public static KtInfo getKtInfo(List<Annotation> annotations) {
+    if (annotations.isEmpty()) {
+      return KtInfo.NONE;
+    }
+
+    String name = null;
+    boolean isProperty = false;
+    boolean isDisabled = false;
+    boolean isThrows = false;
+
+    for (Annotation annotation : annotations) {
+      switch (annotation.getTypeDescriptor().getQualifiedSourceName()) {
+        case "javaemul.internal.annotations.KtName" -> name = annotation.getStringValue("value");
+        case "javaemul.internal.annotations.KtProperty" -> isProperty = true;
+        case "javaemul.internal.annotations.KtDisabled" -> isDisabled = true;
+        case "com.google.j2kt.annotations.Throws" -> isThrows = true;
+        default -> {}
+      }
+    }
+
+    return KtInfo.newBuilder()
+        .setProperty(isProperty)
+        .setName(name)
+        .setDisabled(isDisabled)
+        .setThrows(isThrows)
+        .build();
+  }
+
   /** Returns whether given type declaration implicitly extends J2ktMonitor. */
   public static boolean implicitlyExtendsJ2ktMonitor(TypeDeclaration typeDeclaration) {
     if (!typeDeclaration.isClass()) {

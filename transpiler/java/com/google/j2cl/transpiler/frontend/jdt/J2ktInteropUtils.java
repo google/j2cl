@@ -15,17 +15,12 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktDisabledAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktInAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktNativeAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktOutAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktPropertyAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktPublicNativeAnnotation;
-import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktThrowsAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
 
-import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
 import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
@@ -57,33 +52,6 @@ public class J2ktInteropUtils {
     }
 
     return null;
-  }
-
-  public static KtInfo getJ2ktInfo(IBinding binding) {
-    return KtInfo.newBuilder()
-        .setProperty(isKtProperty(binding))
-        .setName(getJ2ktName(binding))
-        .setDisabled(isKtDisabled(binding))
-        .setThrows(isThrows(binding))
-        .build();
-  }
-
-  @Nullable
-  private static String getJ2ktName(IBinding binding) {
-    IAnnotationBinding annotationBinding = getJ2ktNameAnnotation(binding);
-    return annotationBinding != null ? getStringAttribute(annotationBinding, "value") : null;
-  }
-
-  private static boolean isKtProperty(IBinding binding) {
-    return getJ2ktPropertyAnnotation(binding) != null;
-  }
-
-  public static boolean isKtDisabled(IBinding binding) {
-    return getJ2ktDisabledAnnotation(binding) != null;
-  }
-
-  private static boolean isThrows(IBinding binding) {
-    return getJ2ktThrowsAnnotation(binding) != null;
   }
 
   @Nullable

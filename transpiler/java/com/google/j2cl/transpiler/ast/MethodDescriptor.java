@@ -1169,7 +1169,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // Default values.
         .setVisibility(Visibility.PUBLIC)
         .setOriginalJsInfo(JsInfo.NONE)
-        .setOriginalKtInfo(KtInfo.NONE)
         .setAnnotations(ImmutableList.of())
         .setAbstract(false)
         .setSynchronized(false)
@@ -1648,7 +1647,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
-    public abstract Builder setOriginalKtInfo(KtInfo ktInfo);
+    abstract Builder setOriginalKtInfoInternal(KtInfo ktInfo);
+
+    @CanIgnoreReturnValue
+    public Builder setOriginalKtInfo(KtInfo ktInfo) {
+      return setOriginalKtInfoInternal(ktInfo);
+    }
 
     public abstract Builder setAnnotations(List<Annotation> annotations);
 

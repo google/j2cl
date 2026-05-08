@@ -15,15 +15,11 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_DISABLED_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_IN_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OUT_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PUBLIC_NATIVE_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_THROWS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SWIFT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
@@ -39,20 +35,8 @@ import javax.lang.model.element.AnnotationMirror;
 public class J2ktInteropAnnotationUtils {
   private J2ktInteropAnnotationUtils() {}
 
-  public static AnnotationMirror getJ2ktNameAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, J2KT_NAME_ANNOTATION_NAME);
-  }
-
   public static AnnotationMirror getJ2ktNativeAnnotation(AnnotatedConstruct annotatedConstruct) {
     return findAnnotationByName(annotatedConstruct, J2KT_NATIVE_ANNOTATION_NAME);
-  }
-
-  public static AnnotationMirror getJ2ktPropertyAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, J2KT_PROPERTY_ANNOTATION_NAME);
-  }
-
-  public static AnnotationMirror getJ2ktDisabledAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, J2KT_DISABLED_ANNOTATION_NAME);
   }
 
   // TODO(b/444296932): Remove when no longer needed.
@@ -104,10 +88,6 @@ public class J2ktInteropAnnotationUtils {
 
   public static AnnotationMirror getJ2ktOutAnnotation(AnnotatedConstruct annotatedConstruct) {
     return findAnnotationByName(annotatedConstruct, J2KT_OUT_ANNOTATION_NAME);
-  }
-
-  public static AnnotationMirror getJ2ktThrowsAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, J2KT_THROWS_ANNOTATION_NAME);
   }
 
   public static AnnotationMirror getJ2ktPublicNativeAnnotation(

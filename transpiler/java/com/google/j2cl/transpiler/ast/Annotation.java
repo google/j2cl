@@ -19,6 +19,7 @@ import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /** Represents an annotation instance and its element values. */
 @AutoValue
@@ -27,6 +28,15 @@ public abstract class Annotation {
   public abstract DeclaredTypeDescriptor getTypeDescriptor();
 
   public abstract ImmutableMap<String, AnnotationValue> getValues();
+
+  @Nullable
+  public String getStringValue(String elementName) {
+    AnnotationValue value = getValues().get(elementName);
+    if (value instanceof StringLiteral stringLiteral) {
+      return stringLiteral.getValue();
+    }
+    return null;
+  }
 
   public static Builder newBuilder() {
     return new AutoValue_Annotation.Builder();

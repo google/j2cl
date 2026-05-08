@@ -16,22 +16,16 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktDisabledAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktInAnnotation;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktNativeAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktOutAnnotation;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktPropertyAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktPublicNativeAnnotation;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktThrowsAnnotation;
 
-import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
 import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.Element;
 
 /** Utility functions for Kotlin Interop properties. */
 public class J2ktInteropUtils {
@@ -57,33 +51,6 @@ public class J2ktInteropUtils {
     }
 
     return null;
-  }
-
-  public static KtInfo getJ2ktInfo(Element element) {
-    return KtInfo.newBuilder()
-        .setProperty(isKtProperty(element))
-        .setName(getJ2ktName(element))
-        .setDisabled(isKtDisabled(element))
-        .setThrows(isThrows(element))
-        .build();
-  }
-
-  @Nullable
-  private static String getJ2ktName(AnnotatedConstruct annotatedConstruct) {
-    AnnotationMirror annotation = getJ2ktNameAnnotation(annotatedConstruct);
-    return annotation != null ? getAnnotationParameterString(annotation, "value") : null;
-  }
-
-  private static boolean isKtProperty(AnnotatedConstruct annotatedConstruct) {
-    return getJ2ktPropertyAnnotation(annotatedConstruct) != null;
-  }
-
-  public static boolean isKtDisabled(AnnotatedConstruct annotatedConstruct) {
-    return getJ2ktDisabledAnnotation(annotatedConstruct) != null;
-  }
-
-  private static boolean isThrows(AnnotatedConstruct annotatedConstruct) {
-    return getJ2ktThrowsAnnotation(annotatedConstruct) != null;
   }
 
   @Nullable

@@ -246,7 +246,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         // Default values.
         .setVisibility(Visibility.PUBLIC)
         .setOriginalJsInfo(JsInfo.NONE)
-        .setOriginalKtInfo(KtInfo.NONE)
         .setAnnotations(ImmutableList.of())
         .setCompileTimeConstant(false)
         .setStatic(false)
@@ -298,7 +297,12 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
-    public abstract Builder setOriginalKtInfo(KtInfo ktInfo);
+    abstract Builder setOriginalKtInfoInternal(KtInfo ktInfo);
+
+    @CanIgnoreReturnValue
+    public Builder setOriginalKtInfo(KtInfo ktInfo) {
+      return setOriginalKtInfoInternal(ktInfo);
+    }
 
     public abstract Builder setAnnotations(List<Annotation> annotations);
 

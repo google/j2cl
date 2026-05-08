@@ -39,7 +39,6 @@ import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
@@ -766,7 +765,6 @@ public class JdtEnvironment {
             .setStatic(isStatic)
             .setVisibility(visibility)
             .setOriginalJsInfo(JsInteropUtils.getJsInfo(variableBinding))
-            .setOriginalKtInfo(J2ktInteropUtils.getJ2ktInfo(variableBinding))
             .setAnnotations(createAnnotations(variableBinding, inNullMarkedScope))
             .setFinal(isFinal)
             .setCompileTimeConstant(isCompileTimeConstant)
@@ -805,7 +803,6 @@ public class JdtEnvironment {
     Visibility visibility = getVisibility(methodBinding);
     boolean isDefault = isDefaultMethod(methodBinding);
     JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
-    KtInfo ktInfo = J2ktInteropUtils.getJ2ktInfo(methodBinding);
 
     boolean isNative =
         Modifier.isNative(methodBinding.getModifiers())
@@ -868,7 +865,6 @@ public class JdtEnvironment {
             .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
             .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
             .setOriginalJsInfo(jsInfo)
-            .setOriginalKtInfo(ktInfo)
             .setAnnotations(createAnnotations(methodBinding, inNullMarkedScope))
             .setVisibility(visibility)
             .setStatic(isStatic)

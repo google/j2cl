@@ -15,15 +15,11 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_DISABLED_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_IN_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OUT_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PUBLIC_NATIVE_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_THROWS_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SWIFT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getAnnotationBinding;
@@ -40,23 +36,8 @@ public class J2ktInteropAnnotationUtils {
   private J2ktInteropAnnotationUtils() {}
 
   @Nullable
-  public static IAnnotationBinding getJ2ktNameAnnotation(IBinding binding) {
-    return findAnnotationBindingByName(binding, J2KT_NAME_ANNOTATION_NAME);
-  }
-
-  @Nullable
   public static IAnnotationBinding getJ2ktNativeAnnotation(IBinding binding) {
     return findAnnotationBindingByName(binding, J2KT_NATIVE_ANNOTATION_NAME);
-  }
-
-  @Nullable
-  public static IAnnotationBinding getJ2ktPropertyAnnotation(IBinding binding) {
-    return findAnnotationBindingByName(binding, J2KT_PROPERTY_ANNOTATION_NAME);
-  }
-
-  @Nullable
-  public static IAnnotationBinding getJ2ktDisabledAnnotation(IBinding binding) {
-    return findAnnotationBindingByName(binding, J2KT_DISABLED_ANNOTATION_NAME);
   }
 
   /** The namespace specified on a package, type, method or field. */
@@ -129,11 +110,6 @@ public class J2ktInteropAnnotationUtils {
     // ITypeBinding.getTypeAnnotations() instead of IBinding.getAnnotations().
     return findAnnotationBindingByName(
         typeVariableBinding.getTypeAnnotations(), J2KT_OUT_ANNOTATION_NAME);
-  }
-
-  @Nullable
-  public static IAnnotationBinding getJ2ktThrowsAnnotation(IBinding binding) {
-    return findAnnotationBindingByName(binding, J2KT_THROWS_ANNOTATION_NAME);
   }
 
   @Nullable

@@ -47,7 +47,6 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtVariance;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -679,7 +678,6 @@ public class JavaEnvironment {
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
-    KtInfo ktInfo = J2ktInteropUtils.getJ2ktInfo(variableElement);
     Object constantValue = variableElement.getConstantValue();
     boolean isCompileTimeConstant = constantValue != null;
     boolean isEnumConstant = ((VarSymbol) variableElement).isEnum();
@@ -700,7 +698,6 @@ public class JavaEnvironment {
             .setStatic(isStatic)
             .setVisibility(visibility)
             .setOriginalJsInfo(jsInfo)
-            .setOriginalKtInfo(ktInfo)
             .setFinal(isFinal)
             .setAnnotations(createAnnotations(variableElement, inNullMarkedScope))
             .setCompileTimeConstant(isCompileTimeConstant)
@@ -804,7 +801,6 @@ public class JavaEnvironment {
             .setTypeArgumentTypeDescriptors(typeArguments)
             .setThrownTypeDescriptors(thrownExceptions)
             .setOriginalJsInfo(JsInteropUtils.getJsInfo(declarationMethodElement))
-            .setOriginalKtInfo(J2ktInteropUtils.getJ2ktInfo(declarationMethodElement))
             .setVisibility(getVisibility(declarationMethodElement))
             .setStatic(isStatic(declarationMethodElement))
             .setConstructor(isConstructor)
