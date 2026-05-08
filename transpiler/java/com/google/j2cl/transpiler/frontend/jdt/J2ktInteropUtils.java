@@ -24,7 +24,6 @@ import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktPublicNativeAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktThrowsAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
-import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.isWarningSuppressed;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
@@ -32,9 +31,7 @@ import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
-import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
-import org.eclipse.jdt.core.dom.IVariableBinding;
 
 /** Utility functions for Kotlin Interop properties. */
 public class J2ktInteropUtils {
@@ -62,28 +59,11 @@ public class J2ktInteropUtils {
     return null;
   }
 
-  public static KtInfo getJ2ktInfo(IMethodBinding methodBinding) {
-    return getJ2ktInfo(methodBinding, /* isUninitializedWarningSuppressed= */ false);
-  }
-
-  public static KtInfo getJ2ktInfo(IVariableBinding variableBinding) {
-    // Checking for both property annotations and enclosing class annotations for uninitialized
-    // warning suppressions.
-    boolean isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(variableBinding);
-    @Nullable ITypeBinding declaringClass = variableBinding.getDeclaringClass();
-    while (declaringClass != null && !isUninitializedWarningSuppressed) {
-      isUninitializedWarningSuppressed = isUninitializedWarningSuppressed(declaringClass);
-      declaringClass = declaringClass.getDeclaringClass();
-    }
-    return getJ2ktInfo(variableBinding, isUninitializedWarningSuppressed);
-  }
-
-  private static KtInfo getJ2ktInfo(IBinding binding, boolean isUninitializedWarningSuppressed) {
+  public static KtInfo getJ2ktInfo(IBinding binding) {
     return KtInfo.newBuilder()
         .setProperty(isKtProperty(binding))
         .setName(getJ2ktName(binding))
         .setDisabled(isKtDisabled(binding))
-        .setUninitializedWarningSuppressed(isUninitializedWarningSuppressed)
         .setThrows(isThrows(binding))
         .build();
   }
@@ -104,10 +84,6 @@ public class J2ktInteropUtils {
 
   private static boolean isThrows(IBinding binding) {
     return getJ2ktThrowsAnnotation(binding) != null;
-  }
-
-  public static boolean isUninitializedWarningSuppressed(IBinding binding) {
-    return isWarningSuppressed(binding, "nullness:initialization.field.uninitialized");
   }
 
   @Nullable

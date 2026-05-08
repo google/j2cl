@@ -30,8 +30,6 @@ public abstract class KtInfo {
 
   public abstract boolean isDisabled();
 
-  public abstract boolean isUninitializedWarningSuppressed();
-
   public abstract boolean isThrows();
 
   @Nullable
@@ -40,11 +38,7 @@ public abstract class KtInfo {
   public abstract Builder toBuilder();
 
   public static Builder newBuilder() {
-    return new AutoValue_KtInfo.Builder()
-        .setProperty(false)
-        .setDisabled(false)
-        .setThrows(false)
-        .setUninitializedWarningSuppressed(false);
+    return new AutoValue_KtInfo.Builder().setProperty(false).setDisabled(false).setThrows(false);
   }
 
   /** The builder. */
@@ -53,8 +47,6 @@ public abstract class KtInfo {
     public abstract Builder setProperty(boolean isProperty);
 
     public abstract Builder setDisabled(boolean isDisabled);
-
-    public abstract Builder setUninitializedWarningSuppressed(boolean isLateInit);
 
     public abstract Builder setName(String name);
 

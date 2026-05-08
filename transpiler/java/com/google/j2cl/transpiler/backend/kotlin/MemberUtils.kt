@@ -69,7 +69,8 @@ internal val Field.isKtLateInit: Boolean
               it.qualifiedSourceName == "org.junit.TestCase"
           }
       }
-    return (descriptor.ktInfo.isUninitializedWarningSuppressed || isTestProperty) &&
+    return (descriptor.isWarningSuppressed("nullness:initialization.field.uninitialized") ||
+      isTestProperty) &&
       !descriptor.isFinal &&
       !descriptor.typeDescriptor.isNullable &&
       !TypeDescriptors.isBoxedType(descriptor.typeDescriptor) &&

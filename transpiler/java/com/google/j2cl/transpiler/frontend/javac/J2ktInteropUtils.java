@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
-import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.isWarningSuppressed;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktDisabledAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktInAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktNameAnnotation;
@@ -61,17 +60,11 @@ public class J2ktInteropUtils {
   }
 
   public static KtInfo getJ2ktInfo(Element element) {
-    return getJ2ktInfo(element, isUninitializedWarningSuppressed(element));
-  }
-
-  private static KtInfo getJ2ktInfo(
-      AnnotatedConstruct annotatedConstruct, boolean isUninitializedWarningSuppressed) {
     return KtInfo.newBuilder()
-        .setProperty(isKtProperty(annotatedConstruct))
-        .setName(getJ2ktName(annotatedConstruct))
-        .setDisabled(isKtDisabled(annotatedConstruct))
-        .setUninitializedWarningSuppressed(isUninitializedWarningSuppressed)
-        .setThrows(isThrows(annotatedConstruct))
+        .setProperty(isKtProperty(element))
+        .setName(getJ2ktName(element))
+        .setDisabled(isKtDisabled(element))
+        .setThrows(isThrows(element))
         .build();
   }
 
@@ -91,15 +84,6 @@ public class J2ktInteropUtils {
 
   private static boolean isThrows(AnnotatedConstruct annotatedConstruct) {
     return getJ2ktThrowsAnnotation(annotatedConstruct) != null;
-  }
-
-  public static boolean isUninitializedWarningSuppressed(Element element) {
-    for (; element != null; element = element.getEnclosingElement()) {
-      if (isWarningSuppressed(element, "nullness:initialization.field.uninitialized")) {
-        return true;
-      }
-    }
-    return false;
   }
 
   @Nullable
