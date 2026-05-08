@@ -660,7 +660,6 @@ public class JavaEnvironment {
     Visibility visibility = getVisibility(variableElement);
     String fieldName = variableElement.getSimpleName().toString();
 
-
     TypeDescriptor declarationTypeDescriptor =
         createTypeDescriptorWithNullability(
             variableElement.asType(), variableElement.getAnnotationMirrors(), inNullMarkedScope);
@@ -960,8 +959,6 @@ public class JavaEnvironment {
     return internalTypes.isSameType((Type) thisType, (Type) thatType);
   }
 
-
-
   public DeclaredTypeDescriptor createTypeDescriptor(String qualifiedBinaryName) {
     TypeElement element = binaryNameToTypeElement(qualifiedBinaryName);
     return element != null ? createDeclaredTypeDescriptor(element.asType()) : null;
@@ -973,7 +970,6 @@ public class JavaEnvironment {
         .map(typeMirror -> createTypeDescriptor(typeMirror, inNullMarkedScope))
         .collect(toImmutableList());
   }
-
 
   public <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
       List<? extends TypeMirror> typeMirrors, boolean inNullMarkedScope, Class<T> clazz) {
@@ -1247,7 +1243,6 @@ public class JavaEnvironment {
             .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
             .setCustomizedJsNamespace(getJsNamespace(typeElement))
             .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
-            .setKtTypeInfo(J2ktInteropUtils.getJ2ktTypeInfo(typeElement))
             .setNullMarked(isNullMarked)
             .setOriginalSimpleSourceName(
                 typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)

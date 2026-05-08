@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PUBLIC_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
@@ -33,10 +32,6 @@ import javax.lang.model.element.AnnotationMirror;
 /** Utility methods to get information about Kotlin Interop annotations. */
 public class J2ktInteropAnnotationUtils {
   private J2ktInteropAnnotationUtils() {}
-
-  public static AnnotationMirror getJ2ktNativeAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, J2KT_NATIVE_ANNOTATION_NAME);
-  }
 
   // TODO(b/444296932): Remove when no longer needed.
   @Nullable

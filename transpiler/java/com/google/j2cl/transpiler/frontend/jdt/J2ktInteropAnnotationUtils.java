@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.frontend.jdt;
 
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_OBJECTIVE_C_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.J2KT_PUBLIC_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SWIFT_NAME_ANNOTATION_NAME;
@@ -33,11 +32,6 @@ import org.eclipse.jdt.core.dom.PackageDeclaration;
 /** Utility methods to get information about Kotlin Interop annotations. */
 public class J2ktInteropAnnotationUtils {
   private J2ktInteropAnnotationUtils() {}
-
-  @Nullable
-  public static IAnnotationBinding getJ2ktNativeAnnotation(IBinding binding) {
-    return findAnnotationBindingByName(binding, J2KT_NATIVE_ANNOTATION_NAME);
-  }
 
   /** The namespace specified on a package, type, method or field. */
   // TODO(b/444296932): Remove when no longer needed.

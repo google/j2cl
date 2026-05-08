@@ -1120,7 +1120,6 @@ public class JdtEnvironment {
             .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeBinding))
             .setCustomizedJsNamespace(JsInteropAnnotationUtils.getJsNamespace(typeBinding))
             .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding))
-            .setKtTypeInfo(J2ktInteropUtils.getJ2ktTypeInfo(typeBinding))
             .setNullMarked(isNullMarked)
             .setOriginalSimpleSourceName(typeBinding.getName())
             .setPackage(createPackageDeclaration(typeBinding.getPackage()))

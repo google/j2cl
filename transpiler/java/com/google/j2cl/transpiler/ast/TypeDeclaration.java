@@ -349,16 +349,9 @@ public abstract class TypeDeclaration
   @Nullable
   public abstract JsEnumInfo getJsEnumInfo();
 
-  public boolean isKtNative() {
-    return getKtTypeInfo() != null;
-  }
-
   public boolean isJavaRecord() {
     return TypeDescriptors.get().javaLangRecord.isSameBaseType(getSuperTypeDescriptor());
   }
-
-  @Nullable
-  abstract KtTypeInfo getKtTypeInfo();
 
   public boolean isProtobuf() {
     return getQualifiedSourceName()
@@ -602,27 +595,6 @@ public abstract class TypeDeclaration
   public String getQualifiedSourceName() {
     return AstUtils.buildQualifiedName(
         Streams.concat(Stream.of(getPackageName()), getClassComponents().stream()));
-  }
-
-  @Nullable
-  @Memoized
-  public String getKtNativeQualifiedName() {
-    KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    return ktTypeInfo != null ? ktTypeInfo.getQualifiedName() : null;
-  }
-
-  @Nullable
-  @Memoized
-  public String getKtBridgeQualifiedName() {
-    KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    return ktTypeInfo != null ? ktTypeInfo.getBridgeQualifiedName() : null;
-  }
-
-  @Nullable
-  @Memoized
-  public String getKtCompanionQualifiedName() {
-    KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    return ktTypeInfo == null ? null : ktTypeInfo.getCompanionQualifiedName();
   }
 
   @Nullable
@@ -920,8 +892,6 @@ public abstract class TypeDeclaration
     public abstract Builder setLocal(boolean local);
 
     public abstract Builder setNative(boolean isNative);
-
-    public abstract Builder setKtTypeInfo(KtTypeInfo ktTypeInfo);
 
     public abstract Builder setTypeParameterDescriptors(
         Iterable<TypeVariable> typeParameterDescriptors);

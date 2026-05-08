@@ -119,3 +119,17 @@ internal val TypeDeclaration.hasAutoValueOrBuilderSuperType: Boolean
 
 internal val TypeDeclaration.isEnumWithNonEmptyValues: Boolean
   get() = isEnum && declaredFieldDescriptors.any { it.isEnumConstant }
+
+internal val TypeDeclaration.isKtNative: Boolean
+  get() =
+    hasAnnotation("javaemul.internal.annotations.KtNative") ||
+      hasAnnotation("com.google.j2kt.annotations.KtNative")
+
+internal val TypeDeclaration.ktNativeQualifiedName: String?
+  get() = getAnnotation("javaemul.internal.annotations.KtNative")?.getStringValue("name")
+
+internal val TypeDeclaration.ktBridgeQualifiedName: String?
+  get() = getAnnotation("javaemul.internal.annotations.KtNative")?.getStringValue("bridgeName")
+
+internal val TypeDeclaration.ktCompanionQualifiedName: String?
+  get() = getAnnotation("javaemul.internal.annotations.KtNative")?.getStringValue("companionName")
