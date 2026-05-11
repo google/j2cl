@@ -162,8 +162,8 @@ val IrDeclarationWithVisibility.j2clVisibility: Visibility
     when (visibility.delegate) {
       // Internal means that the owner is visible inside the kotlin module. When you call
       // kotlin members from java, they are considered as public.
-      Visibilities.Public,
-      Visibilities.Internal -> Visibility.PUBLIC
+      Visibilities.Public -> Visibility.PUBLIC
+      Visibilities.Internal,
       Visibilities.Protected,
       JavaVisibilities.ProtectedAndPackage,
       JavaVisibilities.ProtectedStaticVisibility -> Visibility.PROTECTED
