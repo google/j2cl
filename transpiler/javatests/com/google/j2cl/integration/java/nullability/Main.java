@@ -18,10 +18,12 @@ package nullability;
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import com.google.j2cl.integration.testing.TestUtils;
 import java.util.function.Function;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@SuppressWarnings("CheckReturnValue")
 @NullMarked
 public class Main {
 
@@ -117,17 +119,17 @@ public class Main {
   }
 
   private static void testExplicitConstructorTypeArguments() {
-    new Consumer<@Nullable String>(STRING);
-    new Consumer<@Nullable String>(NULL_STRING);
+    new ConsumerImpl<@Nullable String>(STRING);
+    new ConsumerImpl<@Nullable String>(NULL_STRING);
 
-    new Consumer<@Nullable String>(NULL_STRING, STRING);
-    new Consumer<@Nullable String>(STRING, NULL_STRING);
+    new ConsumerImpl<@Nullable String>(NULL_STRING, STRING);
+    new ConsumerImpl<@Nullable String>(STRING, NULL_STRING);
 
-    new VarargConsumer<@Nullable String>();
-    new VarargConsumer<@Nullable String>(STRING);
-    new VarargConsumer<@Nullable String>(NULL_STRING);
-    new VarargConsumer<@Nullable String>(STRING, NULL_STRING);
-    new VarargConsumer<@Nullable String>(NULL_STRING, STRING);
+    new VarargConsumerImpl<@Nullable String>();
+    new VarargConsumerImpl<@Nullable String>(STRING);
+    new VarargConsumerImpl<@Nullable String>(NULL_STRING);
+    new VarargConsumerImpl<@Nullable String>(STRING, NULL_STRING);
+    new VarargConsumerImpl<@Nullable String>(NULL_STRING, STRING);
   }
 
   private static void testImplicitInvocationTypeArguments() {
@@ -151,41 +153,41 @@ public class Main {
   }
 
   private static void testImplicitConstructorTypeArguments() {
-    new Consumer<>(STRING);
-    new Consumer<>(NULL_STRING);
+    new ConsumerImpl<>(STRING);
+    new ConsumerImpl<>(NULL_STRING);
 
-    new VarargConsumer<>();
-    new VarargConsumer<>(STRING);
-    new VarargConsumer<>(NULL_STRING);
+    new VarargConsumerImpl<>();
+    new VarargConsumerImpl<>(STRING);
+    new VarargConsumerImpl<>(NULL_STRING);
 
     // T inferred as Any, instead of Any?
-    new Consumer<>(null);
+    new ConsumerImpl<>(null);
 
     // T inferred as String, instead of String?
-    new Consumer<>(NULL_STRING, STRING);
-    new Consumer<>(STRING, NULL_STRING);
+    new ConsumerImpl<>(NULL_STRING, STRING);
+    new ConsumerImpl<>(STRING, NULL_STRING);
 
     // T inferred as String, instead of String?
-    new VarargConsumer<>(STRING, NULL_STRING);
-    new VarargConsumer<>(NULL_STRING, STRING);
+    new VarargConsumerImpl<>(STRING, NULL_STRING);
+    new VarargConsumerImpl<>(NULL_STRING, STRING);
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void testRawConstructorTypeArguments() {
-    new Consumer(STRING);
-    new Consumer(NULL_STRING);
+    new ConsumerImpl(STRING);
+    new ConsumerImpl(NULL_STRING);
 
-    new VarargConsumer();
-    new VarargConsumer(STRING);
-    new VarargConsumer(NULL_STRING);
+    new VarargConsumerImpl();
+    new VarargConsumerImpl(STRING);
+    new VarargConsumerImpl(NULL_STRING);
 
-    new Consumer(null);
+    new ConsumerImpl(null);
 
-    new Consumer(NULL_STRING, STRING);
-    new Consumer(STRING, NULL_STRING);
+    new ConsumerImpl(NULL_STRING, STRING);
+    new ConsumerImpl(STRING, NULL_STRING);
 
-    new VarargConsumer(STRING, NULL_STRING);
-    new VarargConsumer(NULL_STRING, STRING);
+    new VarargConsumerImpl(STRING, NULL_STRING);
+    new VarargConsumerImpl(NULL_STRING, STRING);
   }
 
   private static void testImplicitInvocationTypeArgumentsWithWildcards() {
@@ -197,22 +199,22 @@ public class Main {
 
   private static void testImplicitConstructorTypeArgumentsWithWildcards() {
     Supplier<?> supplier = Supplier.<@Nullable String>of(NULL_STRING);
-    new Consumer<>(supplier.getValue());
-    new Consumer<>(STRING, supplier.getValue());
-    new VarargConsumer<>(STRING, supplier.getValue());
+    new ConsumerImpl<>(supplier.getValue());
+    new ConsumerImpl<>(STRING, supplier.getValue());
+    new VarargConsumerImpl<>(STRING, supplier.getValue());
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void testRawConstructorTypeArgumentsWithWildcards() {
     Supplier<?> supplier = Supplier.<@Nullable String>of(NULL_STRING);
-    new Consumer(supplier.getValue());
-    new Consumer(STRING, supplier.getValue());
-    new VarargConsumer(STRING, supplier.getValue());
+    new ConsumerImpl(supplier.getValue());
+    new ConsumerImpl(STRING, supplier.getValue());
+    new VarargConsumerImpl(STRING, supplier.getValue());
   }
 
   private static void testImplicitConstructorTypeArgumentsWithInference() {
-    new Consumer<>(STRING, null).accept(NULL_STRING);
-    new VarargConsumer<>(STRING, null).accept(NULL_STRING);
+    new ConsumerImpl<>(STRING, null).accept(NULL_STRING);
+    new VarargConsumerImpl<>(STRING, null).accept(NULL_STRING);
   }
 
   private static void testLambdaReturnTypeInference() {
@@ -286,16 +288,20 @@ public class Main {
     }
   }
 
-  private static class Consumer<T extends @Nullable Object> {
-    private Consumer(T unused) {}
+  private interface Consumer<T extends @Nullable Object> {
+    void accept(T value);
+  }
 
-    private Consumer(T unused1, T unused2) {}
+  private static class ConsumerImpl<T extends @Nullable Object> {
+    private ConsumerImpl(T unused) {}
+
+    private ConsumerImpl(T unused1, T unused2) {}
 
     private void accept(T unused) {}
   }
 
-  private static class VarargConsumer<T extends @Nullable Object> {
-    private VarargConsumer(T... unused) {}
+  private static class VarargConsumerImpl<T extends @Nullable Object> {
+    private VarargConsumerImpl(T... unused) {}
 
     private void accept(T unused) {}
   }
@@ -311,9 +317,40 @@ public class Main {
 
   private static void testLambdaParameterTypeInference() {
     assertTrue(1 == Main.<Integer>applyToNull(value -> (value == null) ? 1 : value + 1));
+
+    // repro for b/454662844
+    if (!TestUtils.isJ2Kt()) {
+      nullableTripleConsumerAccept(
+          new Consumer<Consumer<Consumer<@Nullable String>>>() {
+            @Override
+            public void accept(Consumer<Consumer<@Nullable String>> doubleConsumer) {
+              doubleConsumer.accept(
+                  new Consumer<@Nullable String>() {
+                    @Override
+                    public void accept(@Nullable String string) {
+                      assertNull(string);
+                    }
+                  });
+            }
+          },
+          null);
+    }
   }
 
   private static <T> int applyToNull(Function<? super @Nullable T, Integer> function) {
     return function.apply(null);
+  }
+
+  private static <T extends @Nullable Object> Consumer<Consumer<Consumer<T>>> processTripleConsumer(
+      Consumer<Consumer<Consumer<T>>> tripleConsumer) {
+    return tripleConsumer;
+  }
+
+  private static void nullableTripleConsumerAccept(
+      Consumer<Consumer<Consumer<@Nullable String>>> nullableTripleConsumer,
+      @Nullable String nullableValue) {
+    // J2KT translates `nullableValue` as `nullableValue!!`, which causes NPE.
+    processTripleConsumer(nullableTripleConsumer)
+        .accept(nullableConsumer -> nullableConsumer.accept(nullableValue));
   }
 }

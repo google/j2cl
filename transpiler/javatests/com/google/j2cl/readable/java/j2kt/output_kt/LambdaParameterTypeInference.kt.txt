@@ -83,6 +83,22 @@ abstract class LambdaParameterTypeInference {
   private fun <T: Any> applyToNull(function: Function<in T?, Int>): Int {
    return function.apply(null)!!.toInt()
   }
+  
+  @JvmStatic
+  fun <T> processTripleConsumer(tripleConsumer: Consumer<Consumer<Consumer<T>>>): Consumer<Consumer<Consumer<T>>> {
+   return tripleConsumer
+  }
+  
+  @JvmStatic
+  fun testNullableTripleConsumer(nullableTripleConsumer: Consumer<Consumer<Consumer<String?>>>, nullableString: String?) {
+   LambdaParameterTypeInference.processTripleConsumer<String?>(nullableTripleConsumer).accept(
+    Consumer { nullableConsumer: Consumer<String?> ->
+     nullableConsumer.accept(
+      nullableString!!,
+     )
+    },
+   )
+  }
  }
  
  fun interface Supplier<T> {

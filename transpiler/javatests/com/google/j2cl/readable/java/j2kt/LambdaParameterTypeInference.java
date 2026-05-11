@@ -63,4 +63,16 @@ public abstract class LambdaParameterTypeInference {
 
   abstract <I extends @Nullable Object, O extends @Nullable Object> Supplier<O> transform(
       Supplier<I> supplier, Function<? super I, ? extends O> function);
+
+  public static <T extends @Nullable Object> Consumer<Consumer<Consumer<T>>> processTripleConsumer(
+      Consumer<Consumer<Consumer<T>>> tripleConsumer) {
+    return tripleConsumer;
+  }
+
+  public static void testNullableTripleConsumer(
+      Consumer<Consumer<Consumer<@Nullable String>>> nullableTripleConsumer,
+      @Nullable String nullableString) {
+    processTripleConsumer(nullableTripleConsumer)
+        .accept(nullableConsumer -> nullableConsumer.accept(nullableString));
+  }
 }
