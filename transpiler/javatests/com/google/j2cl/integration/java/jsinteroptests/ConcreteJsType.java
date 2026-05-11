@@ -70,33 +70,33 @@ class ConcreteJsType {
   @SuppressWarnings("unusable-by-js")
   public A notTypeTightenedField = new AImpl1();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasPublicMethod(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasPublicStaticMethod(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasPrivateMethod(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasProtectedMethod(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasPackageMethod(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasPublicField(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasPublicStaticField(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasPrivateField(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasProtectedField(Object obj);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
   public static native boolean hasPackageField(Object obj);
 }

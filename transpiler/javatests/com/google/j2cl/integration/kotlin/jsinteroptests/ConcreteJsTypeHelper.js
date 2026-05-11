@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2026 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('jsinteroptests.ConcreteJsTypeHelper');
+
+/**
+ * @fileoverview
+ * @suppress {strictMissingProperties}
+ */
+
+
 /**
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasPublicMethod = function(obj) {
+exports.hasPublicMethod = function(obj) {
   return obj.publicMethod != undefined;
 };
 
@@ -24,7 +32,7 @@ ConcreteJsType.hasPublicMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasPublicStaticMethod = function(obj) {
+exports.hasPublicStaticMethod = function(obj) {
   return obj.publicStaticMethod != undefined;
 };
 
@@ -32,7 +40,7 @@ ConcreteJsType.hasPublicStaticMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasPrivateMethod = function(obj) {
+exports.hasPrivateMethod = function(obj) {
   return obj.privateMethod != undefined;
 };
 
@@ -40,7 +48,7 @@ ConcreteJsType.hasPrivateMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasProtectedMethod = function(obj) {
+exports.hasProtectedMethod = function(obj) {
   return obj.protectedMethod != undefined;
 };
 
@@ -48,7 +56,7 @@ ConcreteJsType.hasProtectedMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasPackageMethod = function(obj) {
+exports.hasPackageMethod = function(obj) {
   return obj.packageMethod != undefined;
 };
 
@@ -56,7 +64,7 @@ ConcreteJsType.hasPackageMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasPublicField = function(obj) {
+exports.hasPublicField = function(obj) {
   return obj.publicField != undefined;
 };
 
@@ -64,7 +72,7 @@ ConcreteJsType.hasPublicField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasPublicStaticField = function(obj) {
+exports.hasPublicStaticField = function(obj) {
   return obj.publicStaticField != undefined;
 };
 
@@ -72,7 +80,7 @@ ConcreteJsType.hasPublicStaticField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasPrivateField = function(obj) {
+exports.hasPrivateField = function(obj) {
   return obj.privateField != undefined;
 };
 
@@ -80,7 +88,7 @@ ConcreteJsType.hasPrivateField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasProtectedField = function(obj) {
+exports.hasProtectedField = function(obj) {
   return obj.protectedField != undefined;
 };
 
@@ -88,6 +96,6 @@ ConcreteJsType.hasProtectedField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsType.hasPackageField = function(obj) {
+exports.hasPackageField = function(obj) {
   return obj.packageField != undefined;
 };

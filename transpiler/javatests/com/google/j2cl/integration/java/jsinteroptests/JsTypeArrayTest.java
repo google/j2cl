@@ -76,7 +76,7 @@ public class JsTypeArrayTest {
     assertNotNull(array[0]);
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native SimpleJsTypeReturnFromNative[] returnJsTypeFromNative();
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -90,7 +90,7 @@ public class JsTypeArrayTest {
     assertEquals(2, array[1].getId());
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native SimpleJsTypeReturnFromNativeWithAMethod[] returnJsTypeWithIdsFromNative();
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -109,7 +109,7 @@ public class JsTypeArrayTest {
     assertNotNull(array[0]);
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native void fillArrayField(SimpleJsTypeAsAFieldHolder holder);
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -132,10 +132,10 @@ public class JsTypeArrayTest {
     assertNotNull(array[0]);
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native void fillArrayParam(SimpleJsTypeAsAParamHolder holder);
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeArrayTest")
   private static class SimpleJsTypeReturnForMultiDimArray {
     @JsProperty
     public native int getId();
@@ -150,10 +150,10 @@ public class JsTypeArrayTest {
     assertEquals(2, array[0][0][1].getId());
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native Object returnJsType3DimFromNative();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native SimpleJsTypeReturnForMultiDimArray getSimpleJsType(int i);
 
   private static void testObjectArray_castFromNative() {
@@ -300,12 +300,12 @@ public class JsTypeArrayTest {
     }
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native Object returnObjectArrayFromNative();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native Object returnSomeFunction();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   private static native String[] nonNumericKeys(Object object);
 }

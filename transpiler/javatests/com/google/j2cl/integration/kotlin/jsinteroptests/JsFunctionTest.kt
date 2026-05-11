@@ -383,7 +383,9 @@ object JsFunctionTest {
     fun m(): T
   }
 
-  @JsMethod @JvmStatic private external fun createFunctionThatReturnsThis(): JsFunctionInterface
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun createFunctionThatReturnsThis(): JsFunctionInterface
 
   private fun testJsFunctionProperty() {
     class JsFuncionProperty {
@@ -517,29 +519,51 @@ object JsFunctionTest {
     }
   }
 
-  @JsMethod @JvmStatic private external fun callAsFunctionNoArgument(fn: Any?): Any?
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun callAsFunctionNoArgument(fn: Any?): Any?
 
-  @JsMethod @JvmStatic private external fun callAsFunction(fn: Any?, arg: Int): Int
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun callAsFunction(fn: Any?, arg: Int): Int
 
-  @JsMethod @JvmStatic private external fun callWithFunctionApply(fn: Any?, arg: Int): Int
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun callWithFunctionApply(fn: Any?, arg: Int): Int
 
-  @JsMethod @JvmStatic private external fun callWithFunctionCall(fn: Any?, arg: Int): Int
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun callWithFunctionCall(fn: Any?, arg: Int): Int
 
-  @JsMethod @JvmStatic private external fun setField(o: Any?, fieldName: String, value: Int)
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun setField(o: Any?, fieldName: String, value: Int)
 
-  @JsMethod @JvmStatic private external fun getField(o: Any?, fieldName: String): Int
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun getField(o: Any?, fieldName: String): Int
 
-  @JsMethod @JvmStatic private external fun callIntFunction(o: Any?, functionName: String): Int
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun callIntFunction(o: Any?, functionName: String): Int
 
-  @JsMethod @JvmStatic private external fun createMyJsFunction(): MyJsFunctionInterface
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun createMyJsFunction(): MyJsFunctionInterface
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   @JvmStatic
   private external fun createReferentialFunction(): MyJsFunctionIdentityInterface
 
-  @JsMethod @JvmStatic private external fun createFunction(): Any
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun createFunction(): Any
 
-  @JsMethod @JvmStatic private external fun createObject(): Any
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun createObject(): Any
 
-  @JsMethod @JvmStatic private external fun hasField(o: Any?, fieldName: String): Boolean
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
+  @JvmStatic
+  private external fun hasField(o: Any?, fieldName: String): Boolean
 }

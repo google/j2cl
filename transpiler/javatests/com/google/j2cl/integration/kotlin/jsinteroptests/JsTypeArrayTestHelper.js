@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2026 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,38 +12,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('jsinteroptests.JsTypeArrayTestHelper');
+
+/**
+ * @fileoverview
+ * @suppress {strictMissingProperties}
+ */
+
+
 /**
  * @return {Array<*>}
  */
-JsTypeArrayTest.returnJsTypeFromNative = function() {
+exports.returnJsTypeFromNative = function() {
   return [{}, {}];
 };
 
 /**
  * @return {Array<*>}
  */
-JsTypeArrayTest.returnJsTypeWithIdsFromNative = function() {
+exports.returnJsTypeWithIdsFromNative = function() {
   return [{id: 1}, {id: 2}];
 };
 
 /**
  * @param {*} holder
  */
-JsTypeArrayTest.fillArrayField = function(holder) {
+exports.fillArrayField = function(holder) {
   holder.arrayField = [{}, {}];
 };
 
 /**
  * @param {*} holder
  */
-JsTypeArrayTest.fillArrayParam = function(holder) {
+exports.fillArrayParam = function(holder) {
   holder.setArrayParam([{}, {}]);
 };
 
 /**
  * @return {*}
  */
-JsTypeArrayTest.returnJsType3DimFromNative = function() {
+exports.returnJsType3DimFromNative = function() {
   return [[[{id: 1}, {id: 2}, {}], []]];
 };
 
@@ -51,21 +59,21 @@ JsTypeArrayTest.returnJsType3DimFromNative = function() {
  * @param {number} i
  * @return {*}
  */
-JsTypeArrayTest.getSimpleJsType = function(i) {
+exports.getSimpleJsType = function(i) {
   return {id: i};
 };
 
 /**
  * @return {*}
  */
-JsTypeArrayTest.returnObjectArrayFromNative = function() {
+exports.returnObjectArrayFromNative = function() {
   return ['1', '2', '3'];
 };
 
 /**
  * @return {*}
  */
-JsTypeArrayTest.returnSomeFunction = function() {
+exports.returnSomeFunction = function() {
   return function(a) { return a + 2; };
 };
 
@@ -73,17 +81,8 @@ JsTypeArrayTest.returnSomeFunction = function() {
  * @param {?} object
  * @return {!Array<?string>}
  */
-JsTypeArrayTest.nonNumericKeys = function(object) {
+exports.nonNumericKeys = function(object) {
   let array = Object.getOwnPropertyNames(object).filter(key => !isFinite(key));
   array.sort();
   return array;
-};
-
-// This should be an interface but can not be since there is no way
-// to define an interface contract with fields.
-JsTypeArrayTest.SimpleJsTypeReturnForMultiDimArray = class {
-  constructor() {
-    /** @public {number} */
-    this.id = 0;
-  }
 };

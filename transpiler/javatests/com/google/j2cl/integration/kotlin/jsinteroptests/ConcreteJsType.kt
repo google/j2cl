@@ -58,24 +58,44 @@ open class ConcreteJsType {
 
     @JvmField val publicStaticField: Int = 10
 
-    @JsMethod @JvmStatic external fun hasPublicMethod(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasPublicMethod(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasPublicStaticMethod(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasPublicStaticMethod(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasPrivateMethod(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasPrivateMethod(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasProtectedMethod(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasProtectedMethod(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasPackageMethod(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasPackageMethod(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasPublicField(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasPublicField(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasPublicStaticField(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasPublicStaticField(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasPrivateField(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasPrivateField(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasProtectedField(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasProtectedField(obj: Any?): Boolean
 
-    @JsMethod @JvmStatic external fun hasPackageField(obj: Any?): Boolean
+    @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+    @JvmStatic
+    external fun hasPackageField(obj: Any?): Boolean
   }
 }

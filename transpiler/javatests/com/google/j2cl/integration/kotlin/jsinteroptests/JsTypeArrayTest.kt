@@ -75,7 +75,7 @@ object JsTypeArrayTest {
     assertNotNull(array[0])
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   @JvmStatic
   private external fun returnJsTypeFromNative(): Array<SimpleJsTypeReturnFromNative>
 
@@ -89,7 +89,7 @@ object JsTypeArrayTest {
     assertEquals(2, array[1].getId())
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   @JvmStatic
   private external fun returnJsTypeWithIdsFromNative():
     Array<SimpleJsTypeReturnFromNativeWithAMethod>
@@ -110,7 +110,9 @@ object JsTypeArrayTest {
     assertNotNull(array!![0])
   }
 
-  @JsMethod @JvmStatic private external fun fillArrayField(holder: SimpleJsTypeAsAFieldHolder)
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
+  @JvmStatic
+  private external fun fillArrayField(holder: SimpleJsTypeAsAFieldHolder)
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private interface SimpleJsTypeAsAParam {}
@@ -132,9 +134,11 @@ object JsTypeArrayTest {
     assertNotNull(array!![0])
   }
 
-  @JsMethod @JvmStatic private external fun fillArrayParam(holder: SimpleJsTypeAsAParamHolder)
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
+  @JvmStatic
+  private external fun fillArrayParam(holder: SimpleJsTypeAsAParamHolder)
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeArrayTest")
   private class SimpleJsTypeReturnForMultiDimArray {
     @JsProperty external fun getId(): Int
   }
@@ -149,9 +153,11 @@ object JsTypeArrayTest {
     assertEquals(2, array[0][0][1].getId())
   }
 
-  @JsMethod @JvmStatic private external fun returnJsType3DimFromNative(): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
+  @JvmStatic
+  private external fun returnJsType3DimFromNative(): Any?
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
   @JvmStatic
   private external fun getSimpleJsType(i: Int): SimpleJsTypeReturnForMultiDimArray
 
@@ -298,9 +304,15 @@ object JsTypeArrayTest {
     } catch (expected: ArrayStoreException) {}
   }
 
-  @JsMethod @JvmStatic private external fun returnObjectArrayFromNative(): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
+  @JvmStatic
+  private external fun returnObjectArrayFromNative(): Any?
 
-  @JsMethod @JvmStatic private external fun returnSomeFunction(): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
+  @JvmStatic
+  private external fun returnSomeFunction(): Any?
 
-  @JsMethod @JvmStatic private external fun nonNumericKeys(o: Any?): Array<String>
+  @JsMethod(namespace = "jsinteroptests.JsTypeArrayTestHelper")
+  @JvmStatic
+  private external fun nonNumericKeys(o: Any?): Array<String>
 }

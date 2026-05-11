@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2026 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,10 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('jsinteroptests.JsFunctionTestHelper');
+
+/**
+ * @fileoverview
+ * @suppress {strictMissingProperties}
+ */
+
+
 /**
  * @return {Function}
  */
-JsFunctionTest.createFunctionThatReturnsThis = function() {
+exports.createFunctionThatReturnsThis = function() {
   return function() {
     return this;
   };
@@ -26,7 +34,7 @@ JsFunctionTest.createFunctionThatReturnsThis = function() {
  * @return {*}
  * @public
  */
-JsFunctionTest.callAsFunctionNoArgument = function(fn) {
+exports.callAsFunctionNoArgument = function(fn) {
   return (/** @type {Function} */ (fn))();
 };
 
@@ -36,7 +44,7 @@ JsFunctionTest.callAsFunctionNoArgument = function(fn) {
  * @return {number}
  * @public
  */
-JsFunctionTest.callAsFunction = function(fn, arg) {
+exports.callAsFunction = function(fn, arg) {
   return (/** @type {Function} */ (fn))(arg);
 };
 
@@ -46,7 +54,7 @@ JsFunctionTest.callAsFunction = function(fn, arg) {
  * @return {number}
  * @public
  */
-JsFunctionTest.callWithFunctionApply = function(fn, arg) {
+exports.callWithFunctionApply = function(fn, arg) {
   return fn.apply(null, [arg]);
 };
 
@@ -56,7 +64,7 @@ JsFunctionTest.callWithFunctionApply = function(fn, arg) {
  * @return {number}
  * @public
  */
-JsFunctionTest.callWithFunctionCall = function(fn, arg) {
+exports.callWithFunctionCall = function(fn, arg) {
   return fn.call(null, arg);
 };
 
@@ -66,7 +74,7 @@ JsFunctionTest.callWithFunctionCall = function(fn, arg) {
  * @param {number} value
  * @public
  */
-JsFunctionTest.setField = function(object, fieldName, value) {
+exports.setField = function(object, fieldName, value) {
   object[fieldName] = value;
 };
 
@@ -76,7 +84,7 @@ JsFunctionTest.setField = function(object, fieldName, value) {
  * @return {number}
  * @public
  */
-JsFunctionTest.getField = function(object, fieldName) {
+exports.getField = function(object, fieldName) {
   return object[fieldName];
 };
 
@@ -86,7 +94,7 @@ JsFunctionTest.getField = function(object, fieldName) {
  * @return {number}
  * @public
  */
-JsFunctionTest.callIntFunction = function(object, functionName) {
+exports.callIntFunction = function(object, functionName) {
   return object[functionName]();
 };
 
@@ -94,7 +102,7 @@ JsFunctionTest.callIntFunction = function(object, functionName) {
  * @return {Function}
  * @public
  */
-JsFunctionTest.createMyJsFunction = function() {
+exports.createMyJsFunction = function() {
   var myFunction = function(a) { return a; };
   return myFunction;
 };
@@ -103,7 +111,7 @@ JsFunctionTest.createMyJsFunction = function() {
  * @return {Function}
  * @public
  */
-JsFunctionTest.createReferentialFunction = function() {
+exports.createReferentialFunction = function() {
   function myFunction() {
     return myFunction;
   }
@@ -114,7 +122,7 @@ JsFunctionTest.createReferentialFunction = function() {
  * @return {Function}
  * @public
  */
-JsFunctionTest.createFunction = function() {
+exports.createFunction = function() {
   var fun = function(a) { return a; };
   return fun;
 };
@@ -123,7 +131,7 @@ JsFunctionTest.createFunction = function() {
  * @return {*}
  * @public
  */
-JsFunctionTest.createObject = function() {
+exports.createObject = function() {
   var a = {};
   return a;
 };
@@ -134,6 +142,6 @@ JsFunctionTest.createObject = function() {
  * @return {boolean}
  * @public
  */
-JsFunctionTest.hasField = function(object, fieldName) {
+exports.hasField = function(object, fieldName) {
   return object[fieldName] != undefined;
 };

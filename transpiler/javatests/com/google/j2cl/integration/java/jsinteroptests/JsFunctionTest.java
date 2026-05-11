@@ -436,7 +436,7 @@ public class JsFunctionTest {
     T m();
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   private static native JsFunctionInterface createFunctionThatReturnsThis();
 
   private static void testJsFunctionProperty() {
@@ -586,40 +586,40 @@ public class JsFunctionTest {
     }
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native Object callAsFunctionNoArgument(Object fn);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native int callAsFunction(Object fn, int arg);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native int callWithFunctionApply(Object fn, int arg);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native int callWithFunctionCall(Object fn, int arg);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native void setField(Object object, String fieldName, int value);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native int getField(Object object, String fieldName);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native int callIntFunction(Object object, String functionName);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native MyJsFunctionInterface createMyJsFunction();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native MyJsFunctionIdentityInterface createReferentialFunction();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native Object createFunction();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native Object createObject();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsFunctionTestHelper")
   public static native boolean hasField(Object object, String fieldName);
 }
 

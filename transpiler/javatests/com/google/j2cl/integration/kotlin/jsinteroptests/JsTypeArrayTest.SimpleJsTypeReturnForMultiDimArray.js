@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2026 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,20 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * @param {*} o
- * @return {number}
- * @public
- */
-JsExportTest.callFoo = function(o) {
-  return o.foo();
-};
+goog.module('jsinteroptests.JsTypeArrayTest.SimpleJsTypeReturnForMultiDimArray');
 
-/**
- * @param {*} o
- * @return {number}
- * @public
- */
-JsExportTest.accessField = function(o) {
-  return o.field;
-};
+// This should be an interface but can not be since there is no way
+// to define an interface contract with fields.
+class SimpleJsTypeReturnForMultiDimArray {
+  constructor() {
+    /** @public {number} */
+    this.id = 0;
+  }
+}
+
+exports = SimpleJsTypeReturnForMultiDimArray;
