@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.j2cl.transpiler.frontend.jdt.J2ktInteropAnnotationUtils.getJ2ktObjectiveCName;
 import static com.google.j2cl.transpiler.frontend.jdt.JsInteropAnnotationUtils.getJsNamespace;
 
 import java.util.stream.Stream;
@@ -41,17 +40,8 @@ public final class PackageAnnotationsResolver {
     return packageInfoCache.getJsNamespace(packageName);
   }
 
-  @Nullable
-  public String getObjectiveCNamePrefix(String packageName) {
-    return packageInfoCache.getObjectiveCName(packageName);
-  }
-
   public boolean isNullMarked(String packageName) {
     return packageInfoCache.isNullMarked(packageName);
-  }
-
-  public boolean getHasSwiftName(String packageName) {
-    return packageInfoCache.getHasSwiftName(packageName);
   }
 
   /** Populates the cache for the annotations in package-info compilation units. */
@@ -68,8 +58,6 @@ public final class PackageAnnotationsResolver {
             packageInfoCache.setPackageProperties(
                 packageDeclaration.getName().getFullyQualifiedName(),
                 getJsNamespace(packageDeclaration),
-                getJ2ktObjectiveCName(packageDeclaration),
-                J2ktInteropAnnotationUtils.getJ2ktSwiftName(packageDeclaration) != null,
                 JdtAnnotationUtils.hasNullMarkedAnnotation(packageDeclaration));
           }
         });

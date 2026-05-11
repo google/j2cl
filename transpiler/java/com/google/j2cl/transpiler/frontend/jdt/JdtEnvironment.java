@@ -1134,11 +1134,11 @@ public class JdtEnvironment {
   private PackageDeclaration createPackageDeclaration(IPackageBinding packageBinding) {
     // Caching is left to PackageDeclaration.Builder since construction is trivial.
     String packageName = packageBinding.getName();
+    boolean isNullMarked = packageAnnotationsResolver.isNullMarked(packageName);
     return PackageDeclaration.newBuilder()
         .setName(packageName)
         .setCustomizedJsNamespace(packageAnnotationsResolver.getJsNameSpace(packageName))
-        .setHasSwiftName(packageAnnotationsResolver.getHasSwiftName(packageName))
-        .setObjectiveCNamePrefix(packageAnnotationsResolver.getObjectiveCNamePrefix(packageName))
+        .setAnnotations(createAnnotations(packageBinding, isNullMarked))
         .build();
   }
 

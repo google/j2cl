@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.toOptional;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getSuppressWarningsAnnotation;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -85,15 +84,6 @@ public final class AnnotationUtils {
     return findAnnotationByName(construct, annotationSourceName) != null;
   }
 
-  public static boolean isWarningSuppressed(AnnotatedConstruct annotatedConstruct, String warning) {
-    var annotation = getSuppressWarningsAnnotation(annotatedConstruct);
-    if (annotation == null) {
-      return false;
-    }
-
-    var suppressions = getAnnotationParameterArray(annotation, "value");
-    return suppressions.contains(warning);
-  }
 
   @Nullable
   public static AnnotationMirror getAnnotation(

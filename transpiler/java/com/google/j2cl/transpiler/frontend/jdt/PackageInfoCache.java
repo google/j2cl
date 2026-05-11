@@ -56,15 +56,6 @@ public class PackageInfoCache {
    * Returns the ObjectiveCName for the given type which must be a top level type and referenced by
    * its fully qualified source name.
    */
-  @Nullable
-  public String getObjectiveCName(String topLevelTypeSourceName) {
-    return getPackageReport(topLevelTypeSourceName).getObjectiveCName();
-  }
-
-  public boolean getHasSwiftName(String topLevelTypeSourceName) {
-    return getPackageReport(topLevelTypeSourceName).getHasSwiftName();
-  }
-
   public boolean isNullMarked(String topLevelTypeSourceName) {
     return getPackageReport(topLevelTypeSourceName).isNullMarked();
   }
@@ -72,16 +63,12 @@ public class PackageInfoCache {
   public void setPackageProperties(
       String packageName,
       @Nullable String packageJsNamespace,
-      @Nullable String objectiveCName,
-      boolean hasSwiftName,
       boolean isNullMarked) {
     packageReportByTypeName.put(
         packageName,
         PackageInfo.newBuilder()
             .setPackageName(packageName)
             .setJsNamespace(packageJsNamespace)
-            .setObjectiveCName(objectiveCName)
-            .setHasSwiftName(hasSwiftName)
             .setNullMarked(isNullMarked)
             .build());
   }

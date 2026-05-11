@@ -153,9 +153,7 @@ private val TypeDeclaration.objCNamePrefix: String
   }
 
 internal val TypeDeclaration.objectiveCNamePrefix: String?
-  get() =
-    getAnnotation("com.google.j2objc.annotations.ObjectiveCName")?.getStringValue("value")
-      ?: if (enclosingTypeDeclaration == null) `package`.objectiveCNamePrefix else null
+  get() = objectiveCName ?: if (enclosingTypeDeclaration == null) `package`.objectiveCName else null
 
 private val TypeDeclaration.simpleObjCNamePrefix: String
   get() = objectiveCNamePrefix ?: objCPackagePrefix

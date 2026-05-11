@@ -23,8 +23,6 @@ import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.is
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktObjectiveCName;
-import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktSwiftName;
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
 
 import com.google.common.collect.HashMultimap;
@@ -1287,14 +1285,14 @@ public class JavaEnvironment {
     return createMethodDescriptor((ExecutableElement) enclosingElement);
   }
 
-  private static PackageDeclaration createPackageDeclaration(PackageElement packageElement) {
+  private PackageDeclaration createPackageDeclaration(PackageElement packageElement) {
     // Caching is left to PackageDeclaration.Builder since construction is trivial.
     String packageName = packageElement.getQualifiedName().toString();
+    boolean isNullMarked = isNullMarked(packageElement);
     return PackageDeclaration.newBuilder()
         .setName(packageName)
         .setCustomizedJsNamespace(getJsNamespace(packageElement))
-        .setHasSwiftName(getJ2ktSwiftName(packageElement) != null)
-        .setObjectiveCNamePrefix(getJ2ktObjectiveCName(packageElement))
+        .setAnnotations(createAnnotations(packageElement, isNullMarked))
         .build();
   }
 
