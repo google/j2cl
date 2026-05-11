@@ -19,35 +19,35 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class NullMarkedClass {
-  public static Integer getNonNullInteger() {
-    return 1;
+  public static Integer getNonNullInteger(Integer nonNullValue) {
+    return nonNullValue;
   }
 
-  public static Boolean getNonNullBoolean() {
-    return true;
+  public static Boolean getNonNullBoolean(Boolean nonNullValue) {
+    return nonNullValue;
   }
 
-  public static Character getNonNullCharacter() {
-    return 'a';
+  public static Character getNonNullCharacter(Character nonNullValue) {
+    return nonNullValue;
   }
 
-  public static Short getNonNullShort() {
-    return 1;
+  public static Short getNonNullShort(Short nonNullValue) {
+    return nonNullValue;
   }
 
-  public static Byte getNonNullByte() {
-    return 1;
+  public static Byte getNonNullByte(Byte nonNullValue) {
+    return nonNullValue;
   }
 
-  public static Long getNonNullLong() {
-    return 1L;
+  public static Long getNonNullLong(Long nonNullValue) {
+    return nonNullValue;
   }
 
-  public static Double getNonNullDouble() {
-    return 1.0;
+  public static Double getNonNullDouble(Double nonNullValue) {
+    return nonNullValue;
   }
 
-  public static Float getNonNullFloat() {
-    return 1.0f;
+  public static Float getNonNullFloat(Float nonNullValue) {
+    return nonNullValue;
   }
 }

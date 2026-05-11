@@ -95,14 +95,17 @@ fun testFakeOverrideSpecialization() {
 }
 
 fun testNullMarkedCode() {
-  assertUnderlyingTypeEquals(Int::class.javaObjectType, NullMarkedClass.getNonNullInteger())
-  assertUnderlyingTypeEquals(Boolean::class.javaObjectType, NullMarkedClass.getNonNullBoolean())
-  assertUnderlyingTypeEquals(Char::class.javaObjectType, NullMarkedClass.getNonNullCharacter())
-  assertUnderlyingTypeEquals(Short::class.javaObjectType, NullMarkedClass.getNonNullShort())
-  assertUnderlyingTypeEquals(Byte::class.javaObjectType, NullMarkedClass.getNonNullByte())
-  assertUnderlyingTypeEquals(Long::class.javaObjectType, NullMarkedClass.getNonNullLong())
-  assertUnderlyingTypeEquals(Double::class.javaObjectType, NullMarkedClass.getNonNullDouble())
-  assertUnderlyingTypeEquals(Float::class.javaObjectType, NullMarkedClass.getNonNullFloat())
+  assertUnderlyingTypeEquals(Int::class.javaObjectType, NullMarkedClass.getNonNullInteger(1))
+  assertUnderlyingTypeEquals(Boolean::class.javaObjectType, NullMarkedClass.getNonNullBoolean(true))
+  assertUnderlyingTypeEquals(Char::class.javaObjectType, NullMarkedClass.getNonNullCharacter('a'))
+  assertUnderlyingTypeEquals(
+    Short::class.javaObjectType,
+    NullMarkedClass.getNonNullShort(1.toShort()),
+  )
+  assertUnderlyingTypeEquals(Byte::class.javaObjectType, NullMarkedClass.getNonNullByte(1.toByte()))
+  assertUnderlyingTypeEquals(Long::class.javaObjectType, NullMarkedClass.getNonNullLong(1L))
+  assertUnderlyingTypeEquals(Double::class.javaObjectType, NullMarkedClass.getNonNullDouble(1.0))
+  assertUnderlyingTypeEquals(Float::class.javaObjectType, NullMarkedClass.getNonNullFloat(1.0f))
 }
 
 @JsType class KtJsType : SubJsTypeClass()
