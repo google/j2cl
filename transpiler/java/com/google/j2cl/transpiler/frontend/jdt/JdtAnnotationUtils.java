@@ -15,9 +15,6 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
-import static java.util.Arrays.stream;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.VerifyException;
 import com.google.j2cl.transpiler.frontend.common.Nullability;
@@ -63,10 +60,6 @@ public final class JdtAnnotationUtils {
 
   static String getStringAttribute(IAnnotationBinding annotationBinding, String attributeName) {
     return getAttribute(annotationBinding, attributeName, String.class);
-  }
-
-  static Object[] getArrayAttribute(IAnnotationBinding annotationBinding, String attributeName) {
-    return getAttribute(annotationBinding, attributeName, Object[].class);
   }
 
   static boolean getBooleanAttribute(
@@ -165,20 +158,6 @@ public final class JdtAnnotationUtils {
       return null;
     }
     return Arrays.stream(binding.getAnnotations()).filter(whichAnnotation).findFirst().orElse(null);
-  }
-
-  public static boolean isWarningSuppressed(IBinding binding, String warning) {
-    IAnnotationBinding annotationBinding = getSuppressWarningsAnnotation(binding);
-    if (annotationBinding == null) {
-      return false;
-    }
-
-    Object[] suppressions = JdtAnnotationUtils.getArrayAttribute(annotationBinding, "value");
-    return stream(suppressions).anyMatch(warning::equals);
-  }
-
-  public static IAnnotationBinding getSuppressWarningsAnnotation(IBinding binding) {
-    return findAnnotationBindingByName(binding, SUPPRESS_WARNINGS_ANNOTATION_NAME);
   }
 
   public static boolean hasNullMarkedAnnotation(PackageDeclaration packageDeclaration) {

@@ -30,16 +30,7 @@ public final class FrontendConstants {
   public static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
   public static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
 
-
-  public static final String J2KT_OBJECTIVE_C_ANNOTATION_NAME =
-      "com.google.j2objc.annotations.ObjectiveCName";
-  public static final String SWIFT_NAME_ANNOTATION_NAME = "com.google.j2objc.annotations.SwiftName";
-
-  public static final String J2KT_PUBLIC_NATIVE_ANNOTATION_NAME =
-      "com.google.j2kt.annotations.KtNative";
-
   public static final String NULL_MARKED_ANNOTATION_NAME = "org.jspecify.annotations.NullMarked";
-  public static final String SUPPRESS_WARNINGS_ANNOTATION_NAME = "java.lang.SuppressWarnings";
 
   private FrontendConstants() {}
 }
