@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject;
 
 import java.util.List;
-import javax.annotation.Nullable;
 
 /** J2KT AST utilities. */
 public class J2ktAstUtils {
@@ -85,22 +84,6 @@ public class J2ktAstUtils {
             || isSubtypeOfJ2ktMonitor(descriptor));
   }
 
-  @Nullable
-  public static String getObjectiveCName(HasAnnotations hasAnnotations) {
-    return getAnnotationValueString(hasAnnotations, "com.google.j2objc.annotations.ObjectiveCName");
-  }
-
-  @Nullable
-  public static String getSwiftName(HasAnnotations hasAnnotations) {
-    return getAnnotationValueString(hasAnnotations, "com.google.j2objc.annotations.SwiftName");
-  }
-
-  @Nullable
-  private static String getAnnotationValueString(
-      HasAnnotations hasAnnotations, String qualifiedName) {
-    Annotation annotation = hasAnnotations.getAnnotation(qualifiedName);
-    return annotation == null ? null : annotation.getStringValue("value");
-  }
 
   private J2ktAstUtils() {}
 }

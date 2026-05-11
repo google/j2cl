@@ -19,6 +19,7 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.HasAnnotations
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -39,6 +40,9 @@ internal data class MethodObjCNames(val objCName: ObjCName, val parameterObjCNam
 
 /** ObjC name, together with its Swift counterpart. */
 internal data class ObjCName(val string: String, val swiftString: String? = null)
+
+internal val HasAnnotations.objectiveCName: String?
+  get() = getAnnotation("com.google.j2objc.annotations.ObjectiveCName")?.getStringValue("value")
 
 internal val String.escapeObjCKeyword
   get() = letIf(objCKeywords.contains(this)) { it + "_" }
@@ -140,14 +144,18 @@ private val TypeDeclaration.defaultObjCName: String
   get() = objCNamePrefix + simpleObjCName
 
 private val TypeDeclaration.objCNamePrefix: String
-  get() =
-    enclosingTypeDeclaration.run {
-      if (this != null) {
-        objCNameWithoutPrefix + "_"
-      } else {
-        simpleObjCNamePrefix
-      }
+  get() = enclosingTypeDeclaration.run {
+    if (this != null) {
+      objCNameWithoutPrefix + "_"
+    } else {
+      simpleObjCNamePrefix
     }
+  }
+
+internal val TypeDeclaration.objectiveCNamePrefix: String?
+  get() =
+    getAnnotation("com.google.j2objc.annotations.ObjectiveCName")?.getStringValue("value")
+      ?: if (enclosingTypeDeclaration == null) `package`.objectiveCNamePrefix else null
 
 private val TypeDeclaration.simpleObjCNamePrefix: String
   get() = objectiveCNamePrefix ?: objCPackagePrefix

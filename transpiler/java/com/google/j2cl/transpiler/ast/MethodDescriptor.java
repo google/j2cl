@@ -825,10 +825,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         && getName().equals(IS_INSTANCE_METHOD_NAME);
   }
 
-  @Nullable
-  public String getObjectiveCName() {
-    return J2ktAstUtils.getObjectiveCName(this);
-  }
 
   /** Returns true if this descriptor and {@code other} refer to the same method declaration. */
   // TODO(b/372055363): This should be equivalent to

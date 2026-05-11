@@ -503,21 +503,6 @@ public abstract class TypeDeclaration
   @Nullable
   abstract String getCustomizedJsNamespace();
 
-  @Nullable
-  public abstract String getObjectiveCNamePrefix();
-
-  @Nullable
-  public String getSwiftName() {
-    String swiftName = J2ktAstUtils.getSwiftName(this);
-    if (swiftName != null) {
-      return swiftName;
-    } else if (getPackage().getHasSwiftName()) {
-      return "";
-    } else {
-      return null;
-    }
-  }
-
   public abstract boolean isNullMarked();
 
   @Memoized
@@ -597,11 +582,6 @@ public abstract class TypeDeclaration
         Streams.concat(Stream.of(getPackageName()), getClassComponents().stream()));
   }
 
-  @Nullable
-  @Memoized
-  public String getObjectiveCName() {
-    return J2ktAstUtils.getObjectiveCName(this);
-  }
 
   @Memoized
   @Nullable
@@ -913,8 +893,6 @@ public abstract class TypeDeclaration
     public abstract Builder setSimpleJsName(String simpleJsName);
 
     public abstract Builder setCustomizedJsNamespace(String jsNamespace);
-
-    public abstract Builder setObjectiveCNamePrefix(String objectiveCNamePrefix);
 
     public abstract Builder setNullMarked(boolean isNullMarked);
 

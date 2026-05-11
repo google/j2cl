@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
+import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
@@ -49,8 +50,12 @@ internal val TypeDescriptor.useWithParameterSwiftName: Boolean
     }
 
 internal val MethodDescriptor.swiftName: String?
+  get() = singleGetParameterTypeDescriptor?.let { typeDescriptor ->
+    "getWith"
+      .runIf(!typeDescriptor.useWithParameterSwiftName) { plus(typeDescriptor.parameterObjCName) }
+  }
+
+internal val TypeDeclaration.swiftName: String?
   get() =
-    singleGetParameterTypeDescriptor?.let { typeDescriptor ->
-      "getWith"
-        .runIf(!typeDescriptor.useWithParameterSwiftName) { plus(typeDescriptor.parameterObjCName) }
-    }
+    getAnnotation("com.google.j2objc.annotations.SwiftName")?.getStringValue("value")
+      ?: if (`package`.hasSwiftName) "" else null

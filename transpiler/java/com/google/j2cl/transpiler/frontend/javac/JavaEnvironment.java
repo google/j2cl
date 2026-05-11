@@ -23,6 +23,7 @@ import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.is
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
+import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktObjectiveCName;
 import static com.google.j2cl.transpiler.frontend.javac.J2ktInteropAnnotationUtils.getJ2ktSwiftName;
 import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
 
@@ -1242,7 +1243,6 @@ public class JavaEnvironment {
             .setLocal(isLocal(typeElement) || isAnonymous(typeElement))
             .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
             .setCustomizedJsNamespace(getJsNamespace(typeElement))
-            .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeElement))
             .setNullMarked(isNullMarked)
             .setOriginalSimpleSourceName(
                 typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
@@ -1294,6 +1294,7 @@ public class JavaEnvironment {
         .setName(packageName)
         .setCustomizedJsNamespace(getJsNamespace(packageElement))
         .setHasSwiftName(getJ2ktSwiftName(packageElement) != null)
+        .setObjectiveCNamePrefix(getJ2ktObjectiveCName(packageElement))
         .build();
   }
 
@@ -1364,18 +1365,6 @@ public class JavaEnvironment {
     }
   }
 
-  @Nullable
-  private String getObjectiveCNamePrefix(TypeElement typeElement) {
-    // checkArgument(!typeElement.isPrimitive());
-    String objectiveCNamePrefix = J2ktInteropAnnotationUtils.getJ2ktObjectiveCName(typeElement);
-    boolean isTopLevelType =
-        typeElement.getEnclosingElement() == null
-            || typeElement.getEnclosingElement() instanceof PackageElement;
-
-    return objectiveCNamePrefix != null || !isTopLevelType
-        ? objectiveCNamePrefix
-        : J2ktInteropAnnotationUtils.getJ2ktObjectiveCName(getPackageOf(typeElement));
-  }
 
   /** Return whether a type is annotated for nullability and which type of annotation it has. */
   private static NullabilityAnnotation getNullabilityAnnotation(

@@ -1046,16 +1046,6 @@ public class JdtEnvironment {
     throw new InternalCompilerError("Type binding %s not handled", typeBinding);
   }
 
-  @Nullable
-  private String getObjectiveCNamePrefix(ITypeBinding typeBinding) {
-    checkArgument(!typeBinding.isPrimitive());
-    String objectiveCNamePrefix = J2ktInteropAnnotationUtils.getJ2ktObjectiveCName(typeBinding);
-    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
-
-    return objectiveCNamePrefix != null || !isTopLevelType
-        ? objectiveCNamePrefix
-        : packageAnnotationsResolver.getObjectiveCNamePrefix(typeBinding.getPackage().getName());
-  }
 
   @Nullable
   public TypeDeclaration createDeclarationForType(final ITypeBinding typeBinding) {
@@ -1119,7 +1109,6 @@ public class JdtEnvironment {
             .setLocal(isLocal(typeBinding))
             .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeBinding))
             .setCustomizedJsNamespace(JsInteropAnnotationUtils.getJsNamespace(typeBinding))
-            .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding))
             .setNullMarked(isNullMarked)
             .setOriginalSimpleSourceName(typeBinding.getName())
             .setPackage(createPackageDeclaration(typeBinding.getPackage()))
@@ -1149,6 +1138,7 @@ public class JdtEnvironment {
         .setName(packageName)
         .setCustomizedJsNamespace(packageAnnotationsResolver.getJsNameSpace(packageName))
         .setHasSwiftName(packageAnnotationsResolver.getHasSwiftName(packageName))
+        .setObjectiveCNamePrefix(packageAnnotationsResolver.getObjectiveCNamePrefix(packageName))
         .build();
   }
 

@@ -34,6 +34,9 @@ public abstract class PackageDeclaration {
 
   public abstract boolean getHasSwiftName();
 
+  @Nullable
+  public abstract String getObjectiveCNamePrefix();
+
   public static Builder newBuilder() {
     return new AutoValue_PackageDeclaration.Builder().setHasSwiftName(false);
   }
@@ -47,6 +50,8 @@ public abstract class PackageDeclaration {
     public abstract Builder setCustomizedJsNamespace(@Nullable String jsNamespace);
 
     public abstract Builder setHasSwiftName(boolean value);
+
+    public abstract Builder setObjectiveCNamePrefix(@Nullable String value);
 
     private static final ThreadLocalInterner<PackageDeclaration> interner =
         new ThreadLocalInterner<>();
