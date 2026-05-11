@@ -283,13 +283,11 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
       List<SwitchCase> cases, Expression selector, Variable caseIndexVariable, int currentIndex) {
 
     Statement caseIndexAssignment =
-        Block.newBuilder()
-            .addStatement(
-                BinaryExpression.Builder.asAssignmentTo(caseIndexVariable)
-                    .setRightOperand(NumberLiteral.fromInt(currentIndex))
-                    .build()
-                    .makeStatement(SourcePosition.NONE))
-            .build();
+        BinaryExpression.Builder.asAssignmentTo(caseIndexVariable)
+            .setRightOperand(NumberLiteral.fromInt(currentIndex))
+            .build()
+            .makeStatement(SourcePosition.NONE)
+            .ensureBlock();
 
     if (currentIndex == cases.size() || cases.get(currentIndex).isDefault()) {
       return caseIndexAssignment;

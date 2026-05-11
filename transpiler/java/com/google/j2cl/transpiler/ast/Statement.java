@@ -64,6 +64,10 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
         .build();
   }
 
+  public Block ensureBlock() {
+    return Block.newBuilder().setSourcePosition(getSourcePosition()).setStatements(this).build();
+  }
+
   @Override
   public abstract Statement clone();
 

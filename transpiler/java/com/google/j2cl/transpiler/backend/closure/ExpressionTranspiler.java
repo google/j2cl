@@ -28,7 +28,6 @@ import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -56,7 +55,6 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
-import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -170,16 +168,8 @@ public final class ExpressionTranspiler {
       public boolean enterEmbeddedStatement(EmbeddedStatement expression) {
         // Emit the embedded statements as a parameterless IIFE.
         sourceBuilder.append("(() =>");
-        Statement statement = expression.getStatement();
         StatementTranspiler.render(
-            statement instanceof Block
-                ? statement
-                : Block.newBuilder()
-                    .setStatements(statement)
-                    .setSourcePosition(statement.getSourcePosition())
-                    .build(),
-            environment,
-            sourceBuilder);
+            expression.getStatement().ensureBlock(), environment, sourceBuilder);
         sourceBuilder.append(")()");
         return false;
       }

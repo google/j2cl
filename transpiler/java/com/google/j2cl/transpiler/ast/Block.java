@@ -49,6 +49,11 @@ public class Block extends Statement {
   }
 
   @Override
+  public Block ensureBlock() {
+    return this;
+  }
+
+  @Override
   public Block clone() {
     return Block.newBuilder()
         .setSourcePosition(getSourcePosition())

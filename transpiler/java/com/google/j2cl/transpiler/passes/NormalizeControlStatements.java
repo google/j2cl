@@ -39,22 +39,12 @@ public class NormalizeControlStatements extends NormalizationPass {
               return ifStatement;
             }
 
-            thenStatement =
-                thenStatement instanceof Block
-                    ? thenStatement
-                    : Block.newBuilder()
-                        .setSourcePosition(thenStatement.getSourcePosition())
-                        .setStatements(thenStatement)
-                        .build();
+            thenStatement = thenStatement.ensureBlock();
             elseStatement =
-                elseStatement == null
-                        || elseStatement instanceof Block
-                        || elseStatement instanceof IfStatement
+                elseStatement == null || elseStatement instanceof IfStatement
                     ? elseStatement
-                    : Block.newBuilder()
-                        .setSourcePosition(elseStatement.getSourcePosition())
-                        .setStatements(elseStatement)
-                        .build();
+                    : elseStatement.ensureBlock();
+
             return IfStatement.newBuilder()
                 .setSourcePosition(ifStatement.getSourcePosition())
                 .setConditionExpression(ifStatement.getConditionExpression())
@@ -70,13 +60,7 @@ public class NormalizeControlStatements extends NormalizationPass {
               return loopStatement;
             }
 
-            return LoopStatement.Builder.from(loopStatement)
-                .setBody(
-                    Block.newBuilder()
-                        .setSourcePosition(body.getSourcePosition())
-                        .setStatements(body)
-                        .build())
-                .build();
+            return LoopStatement.Builder.from(loopStatement).setBody(body.ensureBlock()).build();
           }
         });
   }

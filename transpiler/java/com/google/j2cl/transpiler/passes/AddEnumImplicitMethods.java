@@ -24,7 +24,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
@@ -102,19 +101,16 @@ public class AddEnumImplicitMethods extends NormalizationPass {
             .setConditionExpression(
                 FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build().infixEqualsNull())
             .setThenStatement(
-                Block.newBuilder()
-                    .setSourcePosition(sourcePosition)
-                    //   namesToValuesMap = createMapFromValues(this.values());
-                    .setStatements(
-                        BinaryExpression.Builder.asAssignmentTo(namesToValuesMapFieldDescriptor)
-                            .setRightOperand(
-                                RuntimeMethods.createEnumsCreateMapFromValuesMethodCall(
-                                    MethodCall.Builder.from(
-                                            typeDescriptor.getMethodDescriptor(VALUES_METHOD_NAME))
-                                        .build()))
-                            .build()
-                            .makeStatement(sourcePosition))
-                    .build())
+                //   namesToValuesMap = createMapFromValues(this.values());
+                BinaryExpression.Builder.asAssignmentTo(namesToValuesMapFieldDescriptor)
+                    .setRightOperand(
+                        RuntimeMethods.createEnumsCreateMapFromValuesMethodCall(
+                            MethodCall.Builder.from(
+                                    typeDescriptor.getMethodDescriptor(VALUES_METHOD_NAME))
+                                .build()))
+                    .build()
+                    .makeStatement(sourcePosition)
+                    .ensureBlock())
             .build();
 
     // return getValueFromNameAndMap(name, namesToValuesMap);

@@ -63,8 +63,8 @@ public abstract class LoopStatement extends Statement {
 
     @CanIgnoreReturnValue
     public T setBodyStatements(Statement... statements) {
-      if (statements.length == 1 && statements[0] instanceof Block) {
-        setBody(statements[0]);
+      if (statements.length == 1 && statements[0] instanceof Block block) {
+        return setBody(block);
       }
       return setBody(Block.newBuilder().setStatements(statements).build());
     }

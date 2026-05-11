@@ -798,22 +798,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     // Lambda expression bodies can be either an Expression or a Statement
     private Block convertLambdaBody(ASTNode lambdaBody, TypeDescriptor returnTypeDescriptor) {
-      Block body;
       if (lambdaBody.getNodeType() == ASTNode.BLOCK) {
-        body = convert((org.eclipse.jdt.core.dom.Block) lambdaBody);
-      } else {
-        checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
-        Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
-        Statement statement =
-            AstUtils.createReturnOrExpressionStatement(
-                getSourcePosition(lambdaBody), lambdaMethodBody, returnTypeDescriptor);
-        body =
-            Block.newBuilder()
-                .setSourcePosition(getSourcePosition(lambdaBody))
-                .setStatements(statement)
-                .build();
+        return convert((org.eclipse.jdt.core.dom.Block) lambdaBody);
       }
-      return body;
+      checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
+      Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
+      return AstUtils.createReturnOrExpressionStatement(
+              getSourcePosition(lambdaBody), lambdaMethodBody, returnTypeDescriptor)
+          .ensureBlock();
     }
 
     /**

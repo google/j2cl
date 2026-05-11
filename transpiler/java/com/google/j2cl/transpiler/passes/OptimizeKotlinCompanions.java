@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -389,12 +388,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
                     && ((InitializerBlock) m).getBody().getStatements().isEmpty());
 
     Statement initializer = Iterables.getOnlyElement(initializers);
-    companion.addStaticInitializerBlock(
-        0,
-        Block.newBuilder()
-            .setSourcePosition(initializer.getSourcePosition())
-            .addStatement(initializer)
-            .build());
+    companion.addStaticInitializerBlock(0, initializer.ensureBlock());
   }
 
   private static boolean isFieldInitializer(
