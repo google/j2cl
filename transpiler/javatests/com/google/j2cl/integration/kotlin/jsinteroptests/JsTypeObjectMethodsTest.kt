@@ -40,17 +40,18 @@ object JsTypeObjectMethodsTest {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private interface NativeObjectInterface {}
 
-  @JsType(isNative = true) private interface NativeInterface {}
+  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeObjectMethodsTest")
+  private interface NativeInterface {}
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeObjectMethodsTestHelper")
   @JvmStatic
   private external fun createWithEqualsAndHashCode(a: Int, b: Int): NativeObjectInterface
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeObjectMethodsTestHelper")
   @JvmStatic
   private external fun createWithoutEqualsAndHashCode(a: Int, b: Int): NativeObjectInterface
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeObjectMethodsTest")
   open internal class NativeClassWithHashCode {
     internal constructor()
 
@@ -94,7 +95,9 @@ object JsTypeObjectMethodsTest {
     assertFalse((o1 as Any) == o2)
   }
 
-  @JsMethod @JvmStatic private external fun callHashCode(obj: Any?): Int
+  @JsMethod(namespace = "jsinteroptests.JsTypeObjectMethodsTestHelper")
+  @JvmStatic
+  private external fun callHashCode(obj: Any?): Int
 
   private class SubtypeOfNativeClass @JsConstructor constructor(n: Int) :
     NativeClassWithHashCode() {
@@ -135,7 +138,11 @@ object JsTypeObjectMethodsTest {
     // assertTrue(o.equals(o));
   }
 
-  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  @JsType(
+    isNative = true,
+    namespace = "jsinteroptests.JsTypeObjectMethodsTest",
+    name = "NativeJsTypeImplementsObjectMethods",
+  )
   internal class NativeClassWithDeclarations internal constructor(number: Double) {
 
     override external fun equals(other: Any?): Boolean
@@ -145,10 +152,18 @@ object JsTypeObjectMethodsTest {
     override external fun toString(): String
   }
 
-  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  @JsType(
+    isNative = true,
+    namespace = "jsinteroptests.JsTypeObjectMethodsTest",
+    name = "NativeJsTypeImplementsObjectMethods",
+  )
   internal class NativeClassWithoutDeclarations internal constructor(number: Double)
 
-  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  @JsType(
+    isNative = true,
+    namespace = "jsinteroptests.JsTypeObjectMethodsTest",
+    name = "NativeJsTypeImplementsObjectMethods",
+  )
   internal interface NativeInterfaceWithDeclarations {
     override fun equals(other: Any?): Boolean
 
@@ -157,7 +172,11 @@ object JsTypeObjectMethodsTest {
     override fun toString(): String
   }
 
-  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  @JsType(
+    isNative = true,
+    namespace = "jsinteroptests.JsTypeObjectMethodsTest",
+    name = "NativeJsTypeImplementsObjectMethods",
+  )
   internal interface NativeInterfaceWithoutDeclarations {}
 
   private fun testObjectMethodDispatch() {

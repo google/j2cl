@@ -130,7 +130,7 @@ object JsPropertyTest {
     assertEquals(12 + SET_X, obj.x)
   }
 
-  @JsType(isNative = true, name = "MyNativeJsType")
+  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest", name = "MyNativeJsType")
   open internal class MyNativeJsType {
     constructor(n: Int)
 
@@ -198,7 +198,7 @@ object JsPropertyTest {
     assertEquals(42, myNativeJsType.sum(30))
   }
 
-  @JsType(isNative = true, name = "MyNativeJsType")
+  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest", name = "MyNativeJsType")
   open internal class MyNativeJsTypeWithConstructor(x: Int) {
     @JvmField var ctorExecuted: Boolean = definedExternally
     @JvmField var x: Int = definedExternally
@@ -219,7 +219,7 @@ object JsPropertyTest {
     assertEquals(12, obj.x)
   }
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest")
   internal interface MyNativeJsTypeInterface {
     @JsProperty fun getX(): Int
 
@@ -368,7 +368,7 @@ object JsPropertyTest {
     assertFalse(o.isX())
   }
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest")
   internal interface AccidentalOverridePropertyJsTypeInterface {
     @JsProperty fun getX(): Int
   }
@@ -420,23 +420,37 @@ object JsPropertyTest {
     assertEquals(0, o.getX())
   }
 
-  @JsMethod @JvmStatic private external fun createMyNativeJsType(): MyNativeJsType
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
+  @JvmStatic
+  private external fun createMyNativeJsType(): MyNativeJsType
 
-  @JsMethod @JvmStatic private external fun createJsTypeGetProperty(): JsTypeGetProperty
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
+  @JvmStatic
+  private external fun createJsTypeGetProperty(): JsTypeGetProperty
 
-  @JsMethod @JvmStatic private external fun createJsTypeIsProperty(): JsTypeIsProperty
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
+  @JvmStatic
+  private external fun createJsTypeIsProperty(): JsTypeIsProperty
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   @JvmStatic
   private external fun createMyJsInterfaceWithProtectedNames(): MyJsTypeInterfaceWithProtectedNames
 
-  @JsMethod @JvmStatic private external fun isUndefined(value: Int): Boolean
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
+  @JvmStatic
+  private external fun isUndefined(value: Int): Boolean
 
-  @JsMethod @JvmStatic private external fun hasField(o: Any?, fieldName: String): Boolean
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
+  @JvmStatic
+  private external fun hasField(o: Any?, fieldName: String): Boolean
 
-  @JsMethod @JvmStatic private external fun getProperty(o: Any?, name: String): Int
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
+  @JvmStatic
+  private external fun getProperty(o: Any?, name: String): Int
 
-  @JsMethod @JvmStatic private external fun setProperty(o: Any?, name: String, value: Int)
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
+  @JvmStatic
+  private external fun setProperty(o: Any?, name: String, value: Int)
 
   fun assertJsTypeHasFields(obj: Any, vararg fields: String) {
     for (field in fields) {

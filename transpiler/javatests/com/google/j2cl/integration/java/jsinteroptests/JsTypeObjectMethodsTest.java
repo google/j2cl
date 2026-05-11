@@ -41,16 +41,16 @@ public class JsTypeObjectMethodsTest {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   interface NativeObjectInterface {}
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeObjectMethodsTest")
   interface NativeInterface {}
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeObjectMethodsTestHelper")
   private static native NativeObjectInterface createWithEqualsAndHashCode(int a, int b);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeObjectMethodsTestHelper")
   private static native NativeObjectInterface createWithoutEqualsAndHashCode(int a, int b);
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeObjectMethodsTest")
   static class NativeClassWithHashCode {
     NativeClassWithHashCode() {}
 
@@ -117,7 +117,7 @@ public class JsTypeObjectMethodsTest {
     assertFalse(((Object) o1).equals(o2));
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeObjectMethodsTestHelper")
   private static native int callHashCode(Object obj);
 
   private static class SubtypeOfNativeClass extends NativeClassWithHashCode {
@@ -164,7 +164,10 @@ public class JsTypeObjectMethodsTest {
     // assertTrue(o.equals(o));
   }
 
-  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  @JsType(
+      isNative = true,
+      namespace = "jsinteroptests.JsTypeObjectMethodsTest",
+      name = "NativeJsTypeImplementsObjectMethods")
   static class NativeClassWithDeclarations {
 
     NativeClassWithDeclarations(Double number) {}
@@ -177,12 +180,18 @@ public class JsTypeObjectMethodsTest {
     public native String toString();
   }
 
-  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  @JsType(
+      isNative = true,
+      namespace = "jsinteroptests.JsTypeObjectMethodsTest",
+      name = "NativeJsTypeImplementsObjectMethods")
   static class NativeClassWithoutDeclarations {
     NativeClassWithoutDeclarations(Double number) {}
   }
 
-  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  @JsType(
+      isNative = true,
+      namespace = "jsinteroptests.JsTypeObjectMethodsTest",
+      name = "NativeJsTypeImplementsObjectMethods")
   interface NativeInterfaceWithDeclarations {
     boolean equals(Object other);
 
@@ -192,7 +201,10 @@ public class JsTypeObjectMethodsTest {
     String toString();
   }
 
-  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  @JsType(
+      isNative = true,
+      namespace = "jsinteroptests.JsTypeObjectMethodsTest",
+      name = "NativeJsTypeImplementsObjectMethods")
   interface NativeInterfaceWithoutDeclarations {}
 
   private static void testObjectMethodDispatch() {

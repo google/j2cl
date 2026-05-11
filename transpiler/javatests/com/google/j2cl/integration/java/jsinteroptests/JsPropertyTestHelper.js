@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2026 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,19 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('jsinteroptests.JsPropertyTestHelper');
+
+const MyNativeJsType = goog.require('jsinteroptests.JsPropertyTest.MyNativeJsType');
+
 /**
  * @return {*}
  * @public
  */
-JsPropertyTest.createMyNativeJsType = function() {
-  return new JsPropertyTest.MyNativeJsType(0);
+exports.createMyNativeJsType = function() {
+  return new MyNativeJsType(0);
 };
 
 /**
  * @return {*}
  * @public
  */
-JsPropertyTest.createJsTypeGetProperty = function() {
+exports.createJsTypeGetProperty = function() {
   var a = {};
   a['x'] = undefined;
   return a;
@@ -34,7 +38,7 @@ JsPropertyTest.createJsTypeGetProperty = function() {
  * @return {*}
  * @public
  */
-JsPropertyTest.createJsTypeIsProperty = function() {
+exports.createJsTypeIsProperty = function() {
   var a = {};
   a['x'] = false;
   return a;
@@ -45,7 +49,7 @@ let _MyNativeInterfaceWithProtectedNames = goog.require('woo.JsPropertyTest.MyJs
  * @return {_MyNativeInterfaceWithProtectedNames}
  * @public
  */
-JsPropertyTest.createMyJsInterfaceWithProtectedNames = function() {
+exports.createMyJsInterfaceWithProtectedNames = function() {
   return new _MyNativeInterfaceWithProtectedNames();
 };
 
@@ -54,7 +58,7 @@ JsPropertyTest.createMyJsInterfaceWithProtectedNames = function() {
  * @return {boolean}
  * @public
  */
-JsPropertyTest.isUndefined = function(value) {
+exports.isUndefined = function(value) {
   return value === undefined;
 };
 
@@ -64,7 +68,7 @@ JsPropertyTest.isUndefined = function(value) {
  * @return {boolean}
  * @public
  */
-JsPropertyTest.hasField = function(object, fieldName) {
+exports.hasField = function(object, fieldName) {
   return object[fieldName] != undefined;
 };
 
@@ -74,7 +78,7 @@ JsPropertyTest.hasField = function(object, fieldName) {
  * @return {number}
  * @public
  */
-JsPropertyTest.getProperty = function(object, name) {
+exports.getProperty = function(object, name) {
   return object[name];
 };
 
@@ -84,67 +88,6 @@ JsPropertyTest.getProperty = function(object, name) {
  * @param {*} value
  * @public
  */
-JsPropertyTest.setProperty = function(object, name, value) {
+exports.setProperty = function(object, name, value) {
   object[name] = value;
-};
-
-JsPropertyTest.MyNativeJsType = class {
-  /** @param {number=} x */
-  constructor(x) {
-    this.x = x;
-    this.y = 0;
-    this.ctorExecuted = true;
-  }
-
-  /**
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  static answerToLife() {
-    return 42;
-  }
-
-  /**
-   * @param {number} bias
-   * @return {number}
-   * @public
-   */
-  sum(bias) {
-    return this.x + bias;
-  }
-};
-
-/**
- * @public {number}
- */
-JsPropertyTest.MyNativeJsType.staticX = 33;
-
-/** @interface */
-JsPropertyTest.AccidentalOverridePropertyJsTypeInterface = class {
-  /** @return {number} */
-  get x() {
-    return 0;
-  }
-};
-
-/** @interface */
-JsPropertyTest.MyNativeJsTypeInterface = class {
-  /**
-   * @param {number} value
-   * @returns {void}
-   */
-  set x(value) {}
-
-  /**
-   * @returns {number}
-   */
-  get x() {}
-
-  /**
-   * @param {number} bias
-   * @return {number}
-   * @public
-   */
-  sum(bias) {}
 };

@@ -137,7 +137,7 @@ public class JsPropertyTest {
     assertEquals(12 + SET_X, obj.x);
   }
 
-  @JsType(isNative = true, name = "MyNativeJsType")
+  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest", name = "MyNativeJsType")
   static class MyNativeJsType {
     public MyNativeJsType() {}
 
@@ -213,7 +213,7 @@ public class JsPropertyTest {
     assertEquals(42, myNativeJsType.sum(30));
   }
 
-  @JsType(isNative = true, name = "MyNativeJsType")
+  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest", name = "MyNativeJsType")
   static class MyNativeJsTypeWithConstructor {
     public MyNativeJsTypeWithConstructor(int x) {}
 
@@ -240,7 +240,7 @@ public class JsPropertyTest {
     assertEquals(12, obj.x);
   }
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest")
   interface MyNativeJsTypeInterface {
     @JsProperty
     int getX();
@@ -406,8 +406,8 @@ public class JsPropertyTest {
     object.setX(false);
     assertFalse(object.isX());
   }
-  
-  @JsType(isNative = true)
+
+  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest")
   interface AccidentalOverridePropertyJsTypeInterface {
     @JsProperty
     int getX();
@@ -447,7 +447,7 @@ public class JsPropertyTest {
     assertEquals(55, object.getX());
     assertEquals(55, getProperty(object, "x"));
   }
-  
+
   @JsType(isNative = true)
   interface JsTypeGetProperty {
 
@@ -468,28 +468,28 @@ public class JsPropertyTest {
     assertEquals(0, object.getX());
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   private static native MyNativeJsType createMyNativeJsType();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   private static native JsTypeGetProperty createJsTypeGetProperty();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   private static native JsTypeIsProperty createJsTypeIsProperty();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   private static native MyJsTypeInterfaceWithProtectedNames createMyJsInterfaceWithProtectedNames();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   private static native boolean isUndefined(int value);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   private static native boolean hasField(Object object, String fieldName);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   private static native int getProperty(Object object, String name);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsPropertyTestHelper")
   private static native void setProperty(Object object, String name, int value);
 
   public void assertJsTypeHasFields(Object obj, String... fields) {
