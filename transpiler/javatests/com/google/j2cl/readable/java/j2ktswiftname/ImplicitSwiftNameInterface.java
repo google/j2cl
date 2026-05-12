@@ -17,13 +17,5 @@ package j2ktswiftname;
 
 import com.google.j2objc.annotations.SwiftName;
 
-@SwiftName("MyCustomSwiftClass")
-public class SwiftNameClass {
-  @SwiftName("MyCustomSwiftNestedClass")
-  public static class Nested {}
-
-  @SwiftName
-  public static class ImplicitNested {}
-
-  public static class UnannotatedNested {}
-}
+@SwiftName
+public interface ImplicitSwiftNameInterface {}
