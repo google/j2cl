@@ -40,11 +40,13 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.get_version.outputs.version }}
+      base_rc_version: ${{ steps.get_version.outputs.base_rc_version }}
     steps:
       - uses: actions/checkout@v4
       - id: get_version
         run: |
           if [ -f "oss_version.txt" ]; then
+            # Read version from oss_version.txt and prevent manual override.
             if [[ "${{ github.event.inputs.version }}" != "" ]]; then
               echo "Error: The 'version' input field must not be set for repositories using 'oss_version.txt' (like j2cl)."
               exit 1
@@ -52,55 +54,91 @@ jobs:
             version=$(xargs < oss_version.txt)
             echo "Using version from oss_version.txt: ${version}."
             echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+            if [[ "${{ github.event.inputs.base_rc_version }}" != "" ]]; then
+              echo "Error: The 'base_rc_version' input field must not be set for repositories using 'oss_version.txt'."
+              exit 1
+            fi
+
+            # Auto-detect base_rc_version for final semantic releases by finding the last RC tag.
+            repo_name="${{ github.event.repository.name }}"
+            RC_REGEX='^([0-9]+\.[0-9]+\.[0-9]+)-RC\.?[0-9]+$'
+            VERSION_REGEX='^[0-9]+\.[0-9]+\.[0-9]+$'
+
+            base_rc_version=""
+
+            if [[ "$version" =~ $VERSION_REGEX ]] && [[ ! "$version" =~ $RC_REGEX ]]; then
+              echo "This is a final release for a semantic versioned project. Finding last RC tag."
+              tags=$(git ls-remote --tags --refs ${{ github.server_url }}/${{ github.repository }} "${version}-RC*" | awk -F'refs/tags/' '{print $2}')
+              if [[ -z "$tags" ]]; then
+                echo "Error: No tags found starting with ${version}-RC"
+                exit 1
+              fi
+              base_rc_version=$(echo "$tags" | sort -V | tail -n 1)
+              echo "Found last RC tag: $base_rc_version"
+            fi
+            echo "base_rc_version=$base_rc_version" >> "$GITHUB_OUTPUT"
           else
             echo "version=${{ github.event.inputs.version }}" >> "$GITHUB_OUTPUT"
+            echo "base_rc_version=${{ github.event.inputs.base_rc_version }}" >> "$GITHUB_OUTPUT"
           fi
 
   validate_inputs:
     needs: get_version
     runs-on: ubuntu-latest
     steps:
-      - name: Validate inputs
+      - name: Validate version
         run: |
           version="${{ needs.get_version.outputs.version }}"
+          repo_name="${{ github.event.repository.name }}"
+
           if [[ -z "$version" ]]; then
-            echo "Error: Release version is missing. It must be provided via the 'version' input or 'oss_version.txt' file."
+            echo "Error: Release version is missing."
             exit 1
           fi
 
-          base_rc_version="${{ github.event.inputs.base_rc_version }}"
-          if [[ -z "$base_rc_version" ]]; then
-            echo "The base RC version field is empty, no validation needed."
-            exit 0
+          if [[ "$repo_name" == "j2cl" || "$repo_name" == "jsinterop-generator" ]]; then
+            if [[ ! "$version" =~ ^v[0-9]{8}$ ]]; then
+              echo "Error: Invalid date-based version format. Expected vYYYYMMDD, but got '${version}'."
+              exit 1
+            fi
+          else
+            if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-RC[0-9]+)?$ ]]; then
+              echo "Error: Invalid semantic version format. Expected X.Y.Z or X.Y.Z-RCN, but got '${version}'."
+              exit 1
+            fi
           fi
 
+      - name: Validate base RC version
+        # TODO(dramaix): remove this step when base_rc_version cannot be passed manually
+        if: github.event.inputs.base_rc_version != ''
+        run: |
+          version="${{ needs.get_version.outputs.version }}"
+          base_rc_version="${{ needs.get_version.outputs.base_rc_version }}"
           repo_name="${{ github.event.repository.name }}"
-          RC_REGEX='^([0-9]+\.[0-9]+\.[0-9]+)-RC\.?[0-9]+$'
-          VERSION_REGEX='^[0-9]+\.[0-9]+\.[0-9]+$'
+          RC_REGEX='^([0-9]+\.[0-9]+\.[0-9]+)-RC[0-9]+$'
 
-          # Ensure base_rc_version is not set for repositories that do not use RC versions.
+          # Ensure base_rc_version is not set for repositories that do not use semantic versionning
           if [[ "$repo_name" == "jsinterop-generator" || "$repo_name" == "j2cl" ]]; then
             echo "Error: The base RC version field should not be set for repository '${repo_name}'."
             exit 1
           fi
 
           # Ensure base_rc_version is not set for for RC releases.
-          # RC releases should not be based on another RC version.
           if [[ "$version" =~ $RC_REGEX ]]; then
-            echo "Error: If the version '${version}' is an RC version, the base RC version field must be empty."
+            echo "Error: If the version '${version}' is an RC version, the base RC version must be empty."
             exit 1
           fi
 
           # Validate base_rc_version format
           if [[ ! "$base_rc_version" =~ $RC_REGEX ]]; then
-            echo "Error: Invalid base_rc_version format. Expected X.Y.Z-RC.N, but got '${base_rc_version}'."
+            echo "Error: Invalid base_rc_version format. Expected X.Y.Z-RCN, but got '${base_rc_version}'."
             exit 1
           fi
 
           # Extract the base version from base_rc_version using the first captured group from the regex match.
+          # TODO(dramaix): remove when base_rc_version cannot be passed manually
           base_version_from_rc="${BASH_REMATCH[1]}"
-          # Ensure the base version extracted from `base_rc_version` matches the intended release `version`.
-          # This prevents releasing a final version based on an incorrect Release Candidate.
           if [[ "$base_version_from_rc" != "$version" ]]; then
             echo "Error: The base_rc_version '${base_rc_version}' does not match the version '${version}'."
             exit 1
@@ -126,7 +164,7 @@ jobs:
     # Pass the inputs from the trigger to the reusable workflow.
     with:
       version: ${{ needs.get_version.outputs.version }}
-      git_ref: ${{ github.event.inputs.base_rc_version && format('refs/tags/{0}', github.event.inputs.base_rc_version) || github.ref }}
+      git_ref: ${{ needs.get_version.outputs.base_rc_version && format('refs/tags/{0}', needs.get_version.outputs.base_rc_version) || github.ref }}
       publish_to_sonatype: ${{ github.event.repository.name != 'jsinterop-generator' && github.event.repository.name != 'j2cl' }}
       publish_to_bcr: ${{ github.event.repository.name != 'jsinterop-annotations' }}
 
