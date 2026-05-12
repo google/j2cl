@@ -281,54 +281,54 @@ public class JavaEnvironment {
       TypeMirror typeMirror,
       List<? extends AnnotationMirror> elementAnnotations,
       boolean inNullMarkedScope) {
+    if (typeMirror == null || typeMirror.getKind() == TypeKind.NONE) {
+      return null;
+    }
 
-    return switch (typeMirror.getKind()) {
-      // Calls like getSuperclass() return the NONE type instead of null.
-      case NONE -> null;
+    if (typeMirror.getKind().isPrimitive() || typeMirror.getKind() == TypeKind.VOID) {
+      return PrimitiveTypes.get(asElement(typeMirror).getSimpleName().toString());
+    }
 
-      // This is the kind of the null literal.
-      case NULL -> TypeDescriptors.get().javaLangObject;
+    if (typeMirror.getKind() == TypeKind.INTERSECTION) {
+      return createIntersectionType((IntersectionClassType) typeMirror, inNullMarkedScope);
+    }
 
-      case BOOLEAN, BYTE, SHORT, INT, LONG, CHAR, FLOAT, DOUBLE, VOID ->
-          PrimitiveTypes.get(asElement(typeMirror).getSimpleName().toString());
+    if (typeMirror.getKind() == TypeKind.UNION) {
+      return createUnionType((UnionClassType) typeMirror);
+    }
 
-      case DECLARED -> {
-        boolean isNullable = isNullable(typeMirror, elementAnnotations, inNullMarkedScope);
-        ClassType classType = (ClassType) typeMirror;
-        if (isSyntheticArrayClass(classType.asElement())) {
-          // For callers that don't need to handle the special cases we return `java.lang.Object` as
-          // the supertype of all array types.
-          yield withNullability(TypeDescriptors.get().javaLangObject, isNullable);
-        }
-        yield withNullability(createDeclaredType(classType, inNullMarkedScope), isNullable);
-      }
+    if (typeMirror.getKind() == TypeKind.NULL) {
+      return TypeDescriptors.get().javaLangObject;
+    }
 
-      case ARRAY ->
-          ArrayTypeDescriptor.newBuilder()
-              .setComponentTypeDescriptor(
-                  createTypeDescriptor(
-                      ((ArrayType) typeMirror).getComponentType(), inNullMarkedScope))
-              .setNullable(isNullable(typeMirror, elementAnnotations, inNullMarkedScope))
-              .build();
+    if (typeMirror.getKind() == TypeKind.TYPEVAR) {
+      return createTypeVariable(
+          (javax.lang.model.type.TypeVariable) typeMirror, elementAnnotations, inNullMarkedScope);
+    }
 
-      case TYPEVAR ->
-          createTypeVariable(
-              (javax.lang.model.type.TypeVariable) typeMirror,
-              elementAnnotations,
-              inNullMarkedScope);
+    if (typeMirror.getKind() == TypeKind.WILDCARD) {
+      return createWildcard((WildcardType) typeMirror, inNullMarkedScope);
+    }
 
-      case WILDCARD -> createWildcard((WildcardType) typeMirror, inNullMarkedScope);
+    boolean isNullable = isNullable(typeMirror, elementAnnotations, inNullMarkedScope);
+    if (typeMirror.getKind() == TypeKind.ARRAY) {
+      ArrayType arrayType = (ArrayType) typeMirror;
+      TypeDescriptor componentTypeDescriptor =
+          createTypeDescriptor(arrayType.getComponentType(), inNullMarkedScope);
+      return ArrayTypeDescriptor.newBuilder()
+          .setComponentTypeDescriptor(componentTypeDescriptor)
+          .setNullable(isNullable)
+          .build();
+    }
 
-      case INTERSECTION ->
-          createIntersectionType((IntersectionClassType) typeMirror, inNullMarkedScope);
+    ClassType classType = (ClassType) typeMirror;
+    if (isSyntheticArrayClass(classType.asElement())) {
+      // For callers that don't need to handle the special cases we return `java.lang.Object` as the
+      // supertype of all array types.
+      return withNullability(TypeDescriptors.get().javaLangObject, isNullable);
+    }
 
-      case UNION -> createUnionType((UnionClassType) typeMirror);
-
-      default ->
-          // TypeKind has represents type with error as ERROR and other concepts like PACKAGE,
-          // EXECUTABLE, etc that we don't model as TypeDescriptors.
-          throw new InternalCompilerError("Unexpected type kind: %s", typeMirror.getKind());
-    };
+    return withNullability(createDeclaredType(classType, inNullMarkedScope), isNullable);
   }
 
   /**
@@ -444,15 +444,12 @@ public class JavaEnvironment {
     boolean isUnboundWildcard = wildcardType == null || isUnboundWildcard(wildcardType);
 
     TypeMirror superBound = isUnboundWildcard ? null : wildcardType.getSuperBound();
-    TypeDescriptor lowerBound =
-        superBound != null ? createTypeDescriptor(superBound, inNullMarkedScope) : null;
-
-    TypeMirror extendsBound =
-        isUnboundWildcard || superBound != null ? null : wildcardType.getExtendsBound();
-    TypeVariable.DescriptorFactory<TypeDescriptor> upperBoundFactory =
-        self -> extendsBound != null ? createTypeDescriptor(extendsBound, inNullMarkedScope) : null;
-
+    TypeMirror extendsBound = isUnboundWildcard ? null : wildcardType.getExtendsBound();
     String id = getWildcardUniqueKeyPrefix(wildcardType, declarationTypeParameter);
+
+    TypeVariable.DescriptorFactory<TypeDescriptor> upperBoundFactory =
+        self -> superBound == null ? createTypeDescriptor(extendsBound, inNullMarkedScope) : null;
+    TypeDescriptor lowerBound = createTypeDescriptor(superBound, inNullMarkedScope);
     if (isUnboundWildcard
         && declarationTypeParameter != null
         && !isDefaultUpperbound(declarationTypeParameter.getUpperBound())) {
