@@ -248,12 +248,12 @@ public class JsExportTest {
 
   private static void testNoExport() {
     Object staticInitializerStaticMethodCtor =
-        PropertyUtils.toCtor(StaticInitializerStaticMethod.class);
+        ClassCtorExtractor.toCtor(StaticInitializerStaticMethod.class);
     assertFalse(PropertyUtils.hasNotExported_1(staticInitializerStaticMethodCtor));
     assertFalse(PropertyUtils.hasNotExported_2(staticInitializerStaticMethodCtor));
 
     Object staticInitializerStaticFieldCtor =
-        PropertyUtils.toCtor(StaticInitializerStaticField.class);
+        ClassCtorExtractor.toCtor(StaticInitializerStaticField.class);
     assertFalse(PropertyUtils.hasNOT_EXPORTED_1(staticInitializerStaticFieldCtor));
     assertFalse(PropertyUtils.hasNOT_EXPORTED_2(staticInitializerStaticFieldCtor));
     assertFalse(PropertyUtils.hasNOT_EXPORTED_3(staticInitializerStaticFieldCtor));
@@ -380,7 +380,7 @@ public class JsExportTest {
   private static native int getPublicStaticFieldInEnum();
 
   private static void testEnum_notExported() {
-    Object enumClassCtor = PropertyUtils.toCtor(MyExportedEnum.class);
+    Object enumClassCtor = ClassCtorExtractor.toCtor(MyExportedEnum.class);
     assertFalse(PropertyUtils.hasPublicFinalField(enumClassCtor));
     assertFalse(PropertyUtils.hasPrivateStaticFinalField(enumClassCtor));
     assertFalse(PropertyUtils.hasProtectedStaticFinalField(enumClassCtor));

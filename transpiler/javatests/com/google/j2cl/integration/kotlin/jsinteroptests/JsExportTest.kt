@@ -256,12 +256,12 @@ object JsExportTest {
 
   private fun testNoExport() {
     val staticInitializerStaticMethodCtor: Any =
-      PropertyUtils.toCtor(StaticInitializerStaticMethod::class.java)
+      ClassCtorExtractor.toCtor(StaticInitializerStaticMethod::class.java)
     assertFalse(PropertyUtils.hasNotExported_1(staticInitializerStaticMethodCtor))
     assertFalse(PropertyUtils.hasNotExported_2(staticInitializerStaticMethodCtor))
 
     val staticInitializerStaticFieldCtor: Any =
-      PropertyUtils.toCtor(StaticInitializerStaticField::class.java)
+      ClassCtorExtractor.toCtor(StaticInitializerStaticField::class.java)
     assertFalse(PropertyUtils.hasNOT_EXPORTED_1(staticInitializerStaticFieldCtor))
     assertFalse(PropertyUtils.hasNOT_EXPORTED_2(staticInitializerStaticFieldCtor))
     assertFalse(PropertyUtils.hasNOT_EXPORTED_3(staticInitializerStaticFieldCtor))
@@ -401,7 +401,7 @@ object JsExportTest {
   private external fun getPublicStaticFieldInEnum(): Int
 
   private fun testEnum_notExported() {
-    val enumClassCtor: Any = PropertyUtils.toCtor(MyExportedEnum::class.java)
+    val enumClassCtor: Any = ClassCtorExtractor.toCtor(MyExportedEnum::class.java)
     assertFalse(PropertyUtils.hasPublicFinalField(enumClassCtor))
     assertFalse(PropertyUtils.hasPrivateStaticFinalField(enumClassCtor))
     assertFalse(PropertyUtils.hasProtectedStaticFinalField(enumClassCtor))

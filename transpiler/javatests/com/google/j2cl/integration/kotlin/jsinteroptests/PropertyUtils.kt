@@ -15,64 +15,63 @@
  */
 package jsinteroptests
 
-import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsType
 import kotlin.jvm.JvmStatic
 
 /** Utility methods to test for the presence of properties in objects. */
+@JsType(isNative = true, namespace = "jsinteroptests")
 object PropertyUtils {
-  @JsMethod @JvmStatic external fun hasPublicMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasPublicMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPublicSubclassMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasPublicSubclassMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPublicStaticSubclassMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasPublicStaticSubclassMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPrivateSubclassMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasPrivateSubclassMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasProtectedSubclassMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasProtectedSubclassMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPackageSubclassMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasPackageSubclassMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPublicSubclassField(obj: Any?): Boolean
+  @JvmStatic external fun hasPublicSubclassField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPublicStaticSubclassField(obj: Any?): Boolean
+  @JvmStatic external fun hasPublicStaticSubclassField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPrivateSubclassField(obj: Any?): Boolean
+  @JvmStatic external fun hasPrivateSubclassField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasProtectedSubclassField(obj: Any?): Boolean
+  @JvmStatic external fun hasProtectedSubclassField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPackageSubclassField(obj: Any?): Boolean
+  @JvmStatic external fun hasPackageSubclassField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPublicFinalField(obj: Any?): Boolean
+  @JvmStatic external fun hasPublicFinalField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPrivateStaticFinalField(obj: Any?): Boolean
+  @JvmStatic external fun hasPrivateStaticFinalField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasProtectedStaticFinalField(obj: Any?): Boolean
+  @JvmStatic external fun hasProtectedStaticFinalField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasDefaultStaticFinalField(obj: Any?): Boolean
+  @JvmStatic external fun hasDefaultStaticFinalField(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasProtectedStaticMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasProtectedStaticMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasPrivateStaticMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasPrivateStaticMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasDefaultStaticMethod(obj: Any?): Boolean
+  @JvmStatic external fun hasDefaultStaticMethod(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasOwnPropertyMine(obj: Any?): Boolean
+  @JvmStatic external fun hasOwnPropertyMine(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasOwnPropertyToString(obj: Any?): Boolean
+  @JvmStatic external fun hasOwnPropertyToString(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasNotExported_1(obj: Any?): Boolean
+  @JvmStatic external fun hasNotExported_1(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasNotExported_2(obj: Any?): Boolean
+  @JvmStatic external fun hasNotExported_2(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasNOT_EXPORTED_1(obj: Any?): Boolean
+  @JvmStatic external fun hasNOT_EXPORTED_1(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasNOT_EXPORTED_2(obj: Any?): Boolean
+  @JvmStatic external fun hasNOT_EXPORTED_2(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasNOT_EXPORTED_3(obj: Any?): Boolean
+  @JvmStatic external fun hasNOT_EXPORTED_3(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasNOT_EXPORTED_4(obj: Any?): Boolean
+  @JvmStatic external fun hasNOT_EXPORTED_4(obj: Any?): Boolean
 
-  @JsMethod @JvmStatic external fun hasNOT_EXPORTED_5(obj: Any?): Boolean
-
-  @JsMethod @JvmStatic external fun toCtor(obj: Class<*>): Any
+  @JvmStatic external fun hasNOT_EXPORTED_5(obj: Any?): Boolean
 }
