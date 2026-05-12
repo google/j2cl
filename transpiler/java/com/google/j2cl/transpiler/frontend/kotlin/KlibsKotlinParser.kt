@@ -38,6 +38,11 @@ import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.createProjectEnviro
 import org.jetbrains.kotlin.cli.jvm.config.jvmClasspathRoots
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.moduleName
+import org.jetbrains.kotlin.ir.IrStatement
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
+import org.jetbrains.kotlin.ir.declarations.IrProperty
+import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
+import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.modules.TargetId
 
 /** A parser for Kotlin sources that builds {@code CompilationtUnit}s. */
@@ -90,6 +95,30 @@ class KlibsKotlinParser(private val problems: Problems) {
     val moduleFragment = compilationResult.moduleFragment
     val pluginContext = compilationResult.pluginContext
     val configuration = compilationResult.configuration
+
+    // Workaround for b/512342762. The JKlib backend generates fake override properties for Java
+    // properties that have a backing field. The `JvmPropertiesLowering` pass later inlines this
+    // backing field. This causes the `JSInteropRestrictionChecker` to report an error because both
+    // the original property on the parent class and the inlined backing field in the child class
+    // end up with the same JavaScript name.
+    // TODO(b/512342762): Remove this cleaning step once JKlib backend does not add backing field in
+    // fake override properties.
+    moduleFragment.transformChildrenVoid(
+      object : IrElementTransformerVoid() {
+        override fun visitProperty(declaration: IrProperty): IrStatement {
+          if (declaration.isFakeOverride) {
+            val backingField = declaration.backingField
+            if (
+              backingField != null &&
+                backingField.origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB
+            ) {
+              declaration.backingField = null
+            }
+          }
+          return super.visitProperty(declaration)
+        }
+      }
+    )
 
     val projectEnvironment =
       createProjectEnvironment(
