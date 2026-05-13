@@ -40,7 +40,7 @@ public class JsTypeVarargsTest {
     testVarargsCall_interfaceMethods();
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
   private static native int varargsLengthThruArguments(Object... varargs);
 
   @JsMethod
@@ -74,7 +74,7 @@ public class JsTypeVarargsTest {
     return varargs.getClass();
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
   private static native Object callGetVarargsSlotUsingJsName();
 
   @JsType(isNative = true, namespace = GLOBAL, name = "Object")
@@ -221,13 +221,13 @@ public class JsTypeVarargsTest {
     assertSame(f, callAFunction(f));
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
   private static native int callSumAndMultiply();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
   private static native int callSumAndMultiplyInt();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
   private static native Object callAFunction(Object obj);
 
   private static void testVarargsCall_jsFunction() {

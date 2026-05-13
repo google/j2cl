@@ -51,12 +51,13 @@ object NativeJsTypeTest {
     testAccessNamespaceAsProperty()
   }
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest")
   internal class MyNativeJsType {
     @Override external override fun hashCode(): Int
   }
 
-  @JsType(isNative = true) private interface MyNativeJsTypeInterface
+  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest")
+  private interface MyNativeJsTypeInterface
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   internal class NativeObject : MyNativeJsTypeInterface
@@ -139,17 +140,23 @@ object NativeJsTypeTest {
     assertEquals("", nativeArray.toString())
   }
 
-  @JsMethod @JvmStatic private external fun createNativeObject(): FinalNativeObject
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
+  @JvmStatic
+  private external fun createNativeObject(): FinalNativeObject
 
-  @JsMethod @JvmStatic private external fun createNativeObjectWithToString(): MyNativeJsType
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
+  @JvmStatic
+  private external fun createNativeObjectWithToString(): MyNativeJsType
 
-  @JsMethod(name = "createNativeObject")
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper", name = "createNativeObject")
   @JvmStatic
   private external fun createNativeObjectWithoutToString(): MyNativeJsType
 
-  @JsMethod @JvmStatic private external fun createNativeArray(): Any
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
+  @JvmStatic
+  private external fun createNativeArray(): Any
 
-  @JsType(isNative = true, name = "NativeJsTypeWithOverlay")
+  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest")
   internal class NativeJsTypeWithOverlay {
     companion object {
       @JsOverlay @JvmField val x: Int = 2
@@ -183,7 +190,7 @@ object NativeJsTypeTest {
     }
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   @JvmStatic
   private external fun createNativeJsTypeWithOverlayWithM(): NativeJsTypeWithOverlay
 
@@ -240,21 +247,29 @@ object NativeJsTypeTest {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Function")
   internal class NativeFunction
 
-  @JsMethod @JvmStatic private external fun createFunction(): Any?
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
+  @JvmStatic
+  private external fun createFunction(): Any?
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array") internal class NativeArray
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Number")
   internal class NativeNumber
 
-  @JsMethod @JvmStatic private external fun createNumber(): Any?
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
+  @JvmStatic
+  private external fun createNumber(): Any?
 
-  @JsMethod @JvmStatic private external fun createBoxedNumber(): Any?
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
+  @JvmStatic
+  private external fun createBoxedNumber(): Any?
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
   internal class NativeString
 
-  @JsMethod @JvmStatic private external fun createBoxedString(): Any?
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
+  @JvmStatic
+  private external fun createBoxedString(): Any?
 
   @JsFunction
   fun interface SomeFunctionInterface {
@@ -420,7 +435,9 @@ object NativeJsTypeTest {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   internal class NativeSubClassAccidentalOverride : NativeSuperClass(), NativeInterface
 
-  @JsMethod @JvmStatic private external fun createNativeSubclass(): NativeSubClassAccidentalOverride
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
+  @JvmStatic
+  private external fun createNativeSubclass(): NativeSubClassAccidentalOverride
 
   fun testForwaringMethodsOnNativeClasses() {
     val subClass: NativeSubClassAccidentalOverride = createNativeSubclass()
@@ -447,7 +464,7 @@ object NativeJsTypeTest {
     // assertNull(NativeClassWithStaticOverlayFields.uninitializedString);
   }
 
-  @JsType(isNative = true, name = "MyNativeJsType")
+  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest", name = "MyNativeJsType")
   internal class MyNativeJsTypeWithInner {
     @JsType(isNative = true)
     internal class Inner(n: Int) {
@@ -458,7 +475,11 @@ object NativeJsTypeTest {
   // This is implemented in NativeJsTypeTest.native.js on purpose to make sure that the reference to
   // the enclosing module is considered a Java type and all the scheme to avoid dependency
   // cycles is correct.
-  @JsType(isNative = true, name = "MyNativeJsType.Inner")
+  @JsType(
+    isNative = true,
+    namespace = "jsinteroptests.NativeJsTypeTest",
+    name = "MyNativeJsType.Inner",
+  )
   internal class MyNativeJsTypeInner(n: Int) {
     @JsProperty external fun getN(): Int
   }

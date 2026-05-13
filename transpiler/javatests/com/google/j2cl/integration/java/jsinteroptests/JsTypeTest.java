@@ -491,10 +491,10 @@ public class JsTypeTest {
     return new MyNamespacedNativeJsType();
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   public static native Object createNativeButton();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   public static native Object createObject();
 
   private static void testConcreteJsTypeAccess() {
@@ -576,7 +576,7 @@ public class JsTypeTest {
     assertFalse((Boolean) callM(a, new Object()));
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   private static native Object callM(Object obj, Object param);
 
   private static void testRevealedOverrideJsType() {
@@ -596,7 +596,7 @@ public class JsTypeTest {
     assertEquals(100, subclassInterface.publicMethodAlsoExposedAsNonJsMethod());
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   private static native boolean hasFieldRun(Object obj);
 
   private static void testEnumeration() {
@@ -624,20 +624,20 @@ public class JsTypeTest {
     assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C));
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   private static native int callPublicMethod(Object object);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   private static native boolean isUndefined(Object value);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   @SuppressWarnings("unusable-by-js")
   private static native void setTheField(ConcreteJsType obj, ConcreteJsType.A value);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   private static native int callPublicMethodFromEnumeration(MyEnumWithJsType enumeration);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   private static native int callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen e);
 
   @JsType
@@ -657,10 +657,10 @@ public class JsTypeTest {
     assertNotNull(someField);
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   public static native void fillJsTypeField(SimpleJsTypeWithField jstype);
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeTest")
   interface InterfaceWithSingleJavaConcrete {
     int m();
   }
@@ -672,7 +672,7 @@ public class JsTypeTest {
     }
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   private static native Object nativeObjectImplementingM();
 
   private static void testSingleJavaConcreteInterface() {
@@ -695,7 +695,7 @@ public class JsTypeTest {
     }
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   private static native Object nativeJsFunction();
 
   private static void testSingleJavaConcreteJsFunction() {
@@ -755,10 +755,10 @@ public class JsTypeTest {
     assertEquals("bar", callBar(instance, null));
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   public static native Object callFoo(Object obj, Object param);
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   public static native Object callBar(Object obj, Object param);
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")

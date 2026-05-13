@@ -50,13 +50,13 @@ public class NativeJsTypeTest {
     testAccessNamespaceAsProperty();
   }
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest")
   static class MyNativeJsType {
     @Override
     public native int hashCode();
   }
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest")
   private interface MyNativeJsTypeInterface {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -139,19 +139,19 @@ public class NativeJsTypeTest {
     assertEquals("", nativeArray.toString());
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native FinalNativeObject createNativeObject();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native MyNativeJsType createNativeObjectWithToString();
 
-  @JsMethod(name = "createNativeObject")
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper", name = "createNativeObject")
   private static native MyNativeJsType createNativeObjectWithoutToString();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native Object createNativeArray();
 
-  @JsType(isNative = true, name = "NativeJsTypeWithOverlay")
+  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest")
   static class NativeJsTypeWithOverlay {
 
     @JsOverlay public static final int x = 2;
@@ -185,7 +185,7 @@ public class NativeJsTypeTest {
     }
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native NativeJsTypeWithOverlay createNativeJsTypeWithOverlayWithM();
 
   private static void testNativeJsTypeWithOverlay() {
@@ -243,7 +243,7 @@ public class NativeJsTypeTest {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Function")
   static class NativeFunction {}
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native Object createFunction();
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
@@ -252,16 +252,16 @@ public class NativeJsTypeTest {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Number")
   static class NativeNumber {}
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native Object createNumber();
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native Object createBoxedNumber();
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
   static class NativeString {}
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native Object createBoxedString();
 
   @JsFunction
@@ -426,7 +426,7 @@ public class NativeJsTypeTest {
   static class NativeSubClassAccidentalOverride extends NativeSuperClass
       implements NativeInterface {}
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native NativeSubClassAccidentalOverride createNativeSubclass();
 
   private static void testForwaringMethodsOnNativeClasses() {
@@ -449,7 +449,7 @@ public class NativeJsTypeTest {
     assertNull(NativeClassWithStaticOverlayFields.uninitializedString);
   }
 
-  @JsType(isNative = true, name = "MyNativeJsType")
+  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest", name = "MyNativeJsType")
   static class MyNativeJsTypeWithInner {
     @JsType(isNative = true)
     static class Inner {
@@ -462,7 +462,10 @@ public class NativeJsTypeTest {
   // This is implemented in NativeJsTypeTest.native.js on purpose to make sure that the reference to
   // the enclosing module is considered a Java type and all the scheme to avoid dependency
   // cycles is correct.
-  @JsType(isNative = true, name = "MyNativeJsType.Inner")
+  @JsType(
+      isNative = true,
+      namespace = "jsinteroptests.NativeJsTypeTest",
+      name = "MyNativeJsType.Inner")
   static class MyNativeJsTypeInner {
     public MyNativeJsTypeInner(int n) {}
 

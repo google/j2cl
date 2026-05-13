@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2026 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,32 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('jsinteroptests.JsTypeVarargsTestHelper');
+
 /**
  * @param {...*} args
  * @return {number}
  */
-JsTypeVarargsTest.varargsLengthThruArguments = function(...args) {
+exports.varargsLengthThruArguments = function(...args) {
   return arguments.length;
 };
 
 /**
  * @return {*}
  */
-JsTypeVarargsTest.callGetVarargsSlotUsingJsName = function() {
+exports.callGetVarargsSlotUsingJsName = function() {
+  // Work around a cycle caused by using goog.require('woo.JsTypeVarargsTest').
+  const JsTypeVarargsTest = goog.module.get('woo.JsTypeVarargsTest');
   return JsTypeVarargsTest.getVarargsSlot(2, '1', '2', '3', '4');
 };
 
 /**
- * @return {number}
+ * @return {?number}
  */
-JsTypeVarargsTest.callSumAndMultiply = function() {
+exports.callSumAndMultiply = function() {
+  // Work around a cycle caused by using goog.require('woo.JsTypeVarargsTest').
+  const JsTypeVarargsTest = goog.module.get('woo.JsTypeVarargsTest');
   return JsTypeVarargsTest.sumAndMultiply(2, 10, 20);
 };
 
 /**
- * @return {number}
+ * @return {?number}
  */
-JsTypeVarargsTest.callSumAndMultiplyInt = function() {
+exports.callSumAndMultiplyInt = function() {
+  // Work around a cycle caused by using goog.require('woo.JsTypeVarargsTest').
+  const JsTypeVarargsTest = goog.module.get('woo.JsTypeVarargsTest');
   return JsTypeVarargsTest.sumAndMultiplyInt(3, 2, 8);
 };
 
@@ -45,6 +53,6 @@ JsTypeVarargsTest.callSumAndMultiplyInt = function() {
  * @param {Function} f
  * @return {*}
  */
-JsTypeVarargsTest.callAFunction = function(f) {
+exports.callAFunction = function(f) {
   return f(2, null, null, f, null);
 };

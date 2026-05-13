@@ -447,9 +447,13 @@ object JsTypeTest {
 
   @JvmStatic private fun createMyNamespacedJsInterface(): Any? = MyNamespacedNativeJsType()
 
-  @JsMethod @JvmStatic external fun createNativeButton(): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  external fun createNativeButton(): Any?
 
-  @JsMethod @JvmStatic external fun createObject(): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  external fun createObject(): Any?
 
   private fun testConcreteJsTypeAccess() {
     val concreteJsType = ConcreteJsType()
@@ -524,7 +528,9 @@ object JsTypeTest {
     assertFalse(callM(a, Any()) as Boolean)
   }
 
-  @JsMethod @JvmStatic private external fun callM(obj: Any?, param: Any?): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  private external fun callM(obj: Any?, param: Any?): Any?
 
   private fun testRevealedOverrideJsType() {
     val plainParentType = PlainParentType()
@@ -543,7 +549,9 @@ object JsTypeTest {
     assertEquals(100, subclassInterface.publicMethodAlsoExposedAsNonJsMethod())
   }
 
-  @JsMethod @JvmStatic private external fun hasFieldRun(obj: Any?): Boolean
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  private external fun hasFieldRun(obj: Any?): Boolean
 
   private fun testEnumeration() {
     assertEquals(2, callPublicMethodFromEnumeration(MyEnumWithJsType.TEST1))
@@ -570,20 +578,24 @@ object JsTypeTest {
     assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C))
   }
 
-  @JsMethod @JvmStatic private external fun callPublicMethod(o: Any?): Int
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  private external fun callPublicMethod(o: Any?): Int
 
-  @JsMethod @JvmStatic private external fun isUndefined(value: Any?): Boolean
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  private external fun isUndefined(value: Any?): Boolean
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   @SuppressWarnings("unusable-by-js")
   @JvmStatic
   private external fun setTheField(obj: ConcreteJsType?, value: ConcreteJsType.A?)
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   @JvmStatic
   private external fun callPublicMethodFromEnumeration(enumeration: MyEnumWithJsType?): Int
 
-  @JsMethod
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   @JvmStatic
   private external fun callPublicMethodFromEnumerationSubclass(e: MyEnumWithSubclassGen?): Int
 
@@ -603,9 +615,11 @@ object JsTypeTest {
     assertNotNull(someField)
   }
 
-  @JsMethod @JvmStatic internal external fun fillJsTypeField(jstype: SimpleJsTypeWithField)
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  internal external fun fillJsTypeField(jstype: SimpleJsTypeWithField)
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeTest")
   internal interface InterfaceWithSingleJavaConcrete {
     fun m(): Int
   }
@@ -614,7 +628,9 @@ object JsTypeTest {
     override fun m(): Int = 5
   }
 
-  @JsMethod @JvmStatic private external fun nativeObjectImplementingM(): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  private external fun nativeObjectImplementingM(): Any?
 
   private fun testSingleJavaConcreteInterface() {
     // Create a couple of instances and use the objects in some way to avoid complete pruning
@@ -633,7 +649,9 @@ object JsTypeTest {
     override fun m(): Int = 5
   }
 
-  @JsMethod @JvmStatic private external fun nativeJsFunction(): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  private external fun nativeJsFunction(): Any?
 
   private fun testSingleJavaConcreteJsFunction() {
     // Create a couple of instances and use the objects in some way to avoid complete pruning
@@ -684,9 +702,13 @@ object JsTypeTest {
     assertEquals("bar", callBar(instance, null))
   }
 
-  @JsMethod @JvmStatic public external fun callFoo(obj: Any?, param: Any?): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  public external fun callFoo(obj: Any?, param: Any?): Any?
 
-  @JsMethod @JvmStatic public external fun callBar(obj: Any?, param: Any?): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JvmStatic
+  public external fun callBar(obj: Any?, param: Any?): Any?
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*") interface Star
 

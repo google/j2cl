@@ -39,7 +39,9 @@ object JsTypeVarargsTest {
     testVarargsCall_interfaceMethods()
   }
 
-  @JsMethod @JvmStatic private external fun varargsLengthThruArguments(vararg varargs: Any?): Int
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
+  @JvmStatic
+  private external fun varargsLengthThruArguments(vararg varargs: Any?): Int
 
   @JsMethod @JvmStatic private fun varargsLength(vararg varargs: Any?): Int = varargs.size
 
@@ -65,7 +67,9 @@ object JsTypeVarargsTest {
   @JvmStatic
   private fun getVarargsArrayClass(vararg varargs: String?): Class<*> = varargs::class.java
 
-  @JsMethod @JvmStatic private external fun callGetVarargsSlotUsingJsName(): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
+  @JvmStatic
+  private external fun callGetVarargsSlotUsingJsName(): Any?
 
   @JsType(isNative = true, namespace = GLOBAL, name = "Object") internal class NativeJsType
 
@@ -196,11 +200,17 @@ object JsTypeVarargsTest {
     assertSame(f, callAFunction(f))
   }
 
-  @JsMethod @JvmStatic private external fun callSumAndMultiply(): Int
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
+  @JvmStatic
+  private external fun callSumAndMultiply(): Int
 
-  @JsMethod @JvmStatic private external fun callSumAndMultiplyInt(): Int
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
+  @JvmStatic
+  private external fun callSumAndMultiplyInt(): Int
 
-  @JsMethod @JvmStatic private external fun callAFunction(obj: Any?): Any?
+  @JsMethod(namespace = "jsinteroptests.JsTypeVarargsTestHelper")
+  @JvmStatic
+  private external fun callAFunction(obj: Any?): Any?
 
   private fun testVarargsCall_jsFunction() {
     val function: Function = AFunction()

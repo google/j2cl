@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2026 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('jsinteroptests.JsTypeTestHelper');
+
+/**
+ * @fileoverview
+ * @suppress {strictMissingProperties}
+ */
+
+
 /**
  * @return {*}
  * @public
  */
-JsTypeTest.createNativeButton = function() {
+exports.createNativeButton = function() {
   return document.createElement('button');
 };
 
@@ -24,7 +32,7 @@ JsTypeTest.createNativeButton = function() {
  * @return {*}
  * @public
  */
-JsTypeTest.createObject = function() {
+exports.createObject = function() {
   return {};
 };
 
@@ -32,7 +40,7 @@ JsTypeTest.createObject = function() {
  * @param {*} object
  * @return {number}
  */
-JsTypeTest.callPublicMethod = function(object) {
+exports.callPublicMethod = function(object) {
   return object.publicMethod();
 };
 
@@ -40,7 +48,7 @@ JsTypeTest.callPublicMethod = function(object) {
  * @param {*} value
  * @return {boolean}
  */
-JsTypeTest.isUndefined = function(value) {
+exports.isUndefined = function(value) {
   return value == undefined;
 };
 
@@ -48,7 +56,7 @@ JsTypeTest.isUndefined = function(value) {
  * @param {*} obj
  * @param {*} value
  */
-JsTypeTest.setTheField = function(obj, value) {
+exports.setTheField = function(obj, value) {
   obj.notTypeTightenedField = value;
 };
 
@@ -57,7 +65,7 @@ JsTypeTest.setTheField = function(obj, value) {
  * @param {*} param
  * @return {*}
  */
-JsTypeTest.callFoo = function(obj, param) {
+exports.callFoo = function(obj, param) {
   return obj.foo(param);
 };
 
@@ -66,7 +74,7 @@ JsTypeTest.callFoo = function(obj, param) {
  * @param {*} param
  * @return {*}
  */
-JsTypeTest.callBar = function(obj, param) {
+exports.callBar = function(obj, param) {
   return obj.bar(param);
 };
 
@@ -75,28 +83,28 @@ JsTypeTest.callBar = function(obj, param) {
  * @param {*} param
  * @return {*}
  */
-JsTypeTest.callM = function(obj, param) {
+exports.callM = function(obj, param) {
   return obj.m(param);
 };
 
 /**
  * @param {*} jstype
  */
-JsTypeTest.fillJsTypeField = function(jstype) {
+exports.fillJsTypeField = function(jstype) {
   jstype.someField = {};
 };
 
 /**
  * @return {*}
  */
-JsTypeTest.nativeObjectImplementingM = function() {
+exports.nativeObjectImplementingM = function() {
   return {m: function() { return 3; }};
 };
 
 /**
  * @return {*}
  */
-JsTypeTest.nativeJsFunction = function() {
+exports.nativeJsFunction = function() {
   return function() { return 3; };
 };
 
@@ -104,7 +112,7 @@ JsTypeTest.nativeJsFunction = function() {
  * @param {*} obj
  * @return {boolean}
  */
-JsTypeTest.hasFieldRun = function(obj) {
+exports.hasFieldRun = function(obj) {
   return obj.run != undefined;
 };
 
@@ -112,7 +120,7 @@ JsTypeTest.hasFieldRun = function(obj) {
  * @param {*} enumeration
  * @return {number}
  */
-JsTypeTest.callPublicMethodFromEnumeration = function(enumeration) {
+exports.callPublicMethodFromEnumeration = function(enumeration) {
   return enumeration.idxAddOne();
 };
 
@@ -120,13 +128,6 @@ JsTypeTest.callPublicMethodFromEnumeration = function(enumeration) {
  * @param {*} enumeration
  * @return {number}
  */
-JsTypeTest.callPublicMethodFromEnumerationSubclass = function(enumeration) {
+exports.callPublicMethodFromEnumerationSubclass = function(enumeration) {
   return enumeration.foo();
-};
-
-
-/** @interface */
-JsTypeTest.InterfaceWithSingleJavaConcrete = class {
-  /** @return {number} */
-  m() {}
 };

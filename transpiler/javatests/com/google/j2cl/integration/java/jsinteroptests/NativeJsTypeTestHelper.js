@@ -12,11 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('jsinteroptests.NativeJsTypeTestHelper');
+
+const NativeJsTypeWithOverlay = goog.require('jsinteroptests.NativeJsTypeTest.NativeJsTypeWithOverlay');
+
 /**
- * @return {NativeJsTypeTest.NativeJsTypeWithOverlay}
+ * @return {NativeJsTypeWithOverlay}
  */
-NativeJsTypeTest.createNativeJsTypeWithOverlayWithM = function() {
-  let subtypeWithM = class extends NativeJsTypeTest.NativeJsTypeWithOverlay {
+exports.createNativeJsTypeWithOverlayWithM = function() {
+  let subtypeWithM = class extends NativeJsTypeWithOverlay {
     constructor() {
       super();
       /** @type {?} */ (this)['m'] = function() {
@@ -30,59 +34,59 @@ NativeJsTypeTest.createNativeJsTypeWithOverlayWithM = function() {
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeObjectWithToString = function() {
+exports.createNativeObjectWithToString = function() {
   return {toString: function() { return 'Native type'; }};
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeObject = function() {
+exports.createNativeObject = function() {
   return {};
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeArray = function() {
+exports.createNativeArray = function() {
   return [];
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createFunction = function() {
+exports.createFunction = function() {
   return function() {};
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNumber = function() {
+exports.createNumber = function() {
   return 42;
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createBoxedNumber = function() {
+exports.createBoxedNumber = function() {
   return new Number(42);
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createBoxedString = function() {
+exports.createBoxedString = function() {
   return new String('hello');
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeSubclass = function() {
+exports.createNativeSubclass = function() {
   const implementingClass = class {
     constructor() {
-      /** @private {?string} */
+      /** @private {string|null|undefined} */
       this.element_ = undefined;
     }
     /** @param {string} e */
@@ -95,32 +99,9 @@ NativeJsTypeTest.createNativeSubclass = function() {
      */
     remove(e) {
       let ret = this.element_ == e;
-      this.element_ = undefined;
+      this.element_ = null;
       return ret;
     }
   };
   return new implementingClass();
 };
-
-NativeJsTypeTest.MyNativeJsType = class {
-  constructor() {}
-};
-
-NativeJsTypeTest.MyNativeJsType.Inner = class {
-  /** @param {number} n */
-  constructor(n) {
-    /** @public {number} */
-    this.n = n;
-  }
-};
-
-NativeJsTypeTest.NativeJsTypeWithOverlay = class extends Object {
-  constructor() {
-    super();
-    /** @public {number} */
-    this.k = 0;
-  }
-};
-
-/** @interface */
-NativeJsTypeTest.MyNativeJsTypeInterface = class {};
