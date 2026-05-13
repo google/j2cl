@@ -1098,6 +1098,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .setReferencedMethodDescriptor(targetMethodDescriptor)
         .setInterfaceMethodDescriptor(functionalMethodDescriptor)
         .setQualifier(qualifier)
+        .setTypeArguments(convertTypes(memberReference.getTypeArguments(), inNullMarkedScope()))
         .setSourcePosition(getSourcePosition(memberReference))
         .build();
   }
@@ -1260,6 +1261,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .setAnonymousInnerClass(anonymousInnerClass)
         .setQualifier(qualifier)
         .setArguments(arguments)
+        .setTypeArguments(convertTypes(expression.getTypeArguments(), inNullMarkedScope()))
         .build();
   }
 
@@ -1332,6 +1334,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return MethodCall.Builder.from(methodDescriptor)
         .setQualifier(qualifier)
         .setArguments(arguments)
+        .setTypeArguments(convertTypes(methodInvocation.getTypeArguments(), inNullMarkedScope()))
         .setStaticDispatch(isStaticDispatch)
         .setSourcePosition(getSourcePosition(methodInvocation))
         .build();
@@ -1377,12 +1380,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodSymbol methodSymbol,
       com.sun.tools.javac.code.Type methodType,
       boolean inNullMarkedScope) {
-    var typeArgumentsDescriptors =
-        typeArguments == null
-            ? ImmutableList.<TypeDescriptor>of()
-            : environment.createTypeDescriptors(
-                typeArguments.stream().map(e -> e.type).collect(toImmutableList()),
-                inNullMarkedScope);
+    var typeArgumentsDescriptors = convertTypes(typeArguments, inNullMarkedScope);
 
     if (typeArgumentsDescriptors.isEmpty() && !methodSymbol.getTypeParameters().isEmpty()) {
       // Retrieve the inferred type arguments
@@ -1394,6 +1392,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .collect(toImmutableList());
     }
     return typeArgumentsDescriptors;
+  }
+
+  private ImmutableList<TypeDescriptor> convertTypes(
+      List<? extends JCExpression> types, boolean inNullMarkedScope) {
+    if (types == null) {
+      return ImmutableList.of();
+    }
+    return types.stream()
+        .map(t -> environment.createTypeDescriptor(t.type, inNullMarkedScope))
+        .collect(toImmutableList());
   }
 
   private static com.sun.tools.javac.code.Type getDeclaredUpperBound(TypeVariableSymbol t) {
