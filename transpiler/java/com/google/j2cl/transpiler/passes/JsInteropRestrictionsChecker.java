@@ -1147,6 +1147,14 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
+    if (type.getTypeDescriptor().isKotlinCompanionClass()) {
+      problems.error(
+          type.getSourcePosition(),
+          "Companion object '%s' cannot be a JsType.",
+          typeDeclaration.getReadableDescription());
+      return false;
+    }
+
     if (typeDeclaration.isJavaRecord() && typeDeclaration.isNative()) {
       problems.error(
           type.getSourcePosition(),

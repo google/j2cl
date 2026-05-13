@@ -24,13 +24,6 @@ class JsTypeClassWithCompanion {
   }
 }
 
-class JsTypeCompanion {
-  @JsType
-  companion object {
-    fun foo() {}
-  }
-}
-
 class CompanionImplementsJsType {
   companion object : JsTypeInterface {
     override fun foo() {}
