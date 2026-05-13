@@ -30,6 +30,7 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
   @Visitable TypeDescriptor typeDescriptor;
   private boolean isFinal;
   private boolean isParameter;
+  private final boolean isExplicitlyTyped;
   private final SourcePosition sourcePosition;
   private final ImmutableList<Annotation> annotations;
 
@@ -39,11 +40,13 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
       TypeDescriptor typeDescriptor,
       boolean isFinal,
       boolean isParameter,
+      boolean isExplicitlyTyped,
       ImmutableList<Annotation> annotations) {
     super(name);
     setTypeDescriptor(typeDescriptor);
     this.isFinal = isFinal;
     this.isParameter = isParameter;
+    this.isExplicitlyTyped = isExplicitlyTyped;
     this.sourcePosition = checkNotNull(sourcePosition);
     this.annotations = annotations;
   }
@@ -70,6 +73,10 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
 
   public boolean isParameter() {
     return isParameter;
+  }
+
+  public boolean isExplicitlyTyped() {
+    return isExplicitlyTyped;
   }
 
   @Override
@@ -107,6 +114,7 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
     private TypeDescriptor typeDescriptor;
     private boolean isFinal;
     private boolean isParameter;
+    private boolean isExplicitlyTyped = true;
     private SourcePosition sourcePosition = SourcePosition.NONE;
     private ImmutableList<Annotation> annotations = ImmutableList.of();
 
@@ -116,6 +124,7 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
       builder.typeDescriptor = variable.getTypeDescriptor();
       builder.isFinal = variable.isFinal();
       builder.isParameter = variable.isParameter;
+      builder.isExplicitlyTyped = variable.isExplicitlyTyped;
       builder.sourcePosition = variable.sourcePosition;
       builder.annotations = variable.annotations;
       return builder;
@@ -157,10 +166,23 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder setExplicitlyTyped(boolean isExplicitlyTyped) {
+      this.isExplicitlyTyped = isExplicitlyTyped;
+      return this;
+    }
+
     public Variable build() {
       checkState(name != null);
       checkState(typeDescriptor != null);
-      return new Variable(sourcePosition, name, typeDescriptor, isFinal, isParameter, annotations);
+      return new Variable(
+          sourcePosition,
+          name,
+          typeDescriptor,
+          isFinal,
+          isParameter,
+          isExplicitlyTyped,
+          annotations);
     }
   }
 }

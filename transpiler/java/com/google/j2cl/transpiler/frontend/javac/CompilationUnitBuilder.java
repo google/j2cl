@@ -334,12 +334,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         variableElement.getSimpleName().isEmpty()
             ? "_"
             : variableElement.getSimpleName().toString();
+    boolean isExplicitlyTyped =
+        !variableDeclaration.isImplicitlyTyped() && !variableDeclaration.declaredUsingVar();
     Variable variable =
         environment.createVariable(
             getNamePosition(name, variableDeclaration),
             name,
             variableElement,
             isParameter,
+            isExplicitlyTyped,
             inNullMarkedScope());
     variableByVariableElement.put(variableElement, variable);
     return variable;

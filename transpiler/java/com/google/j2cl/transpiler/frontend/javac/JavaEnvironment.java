@@ -228,6 +228,7 @@ public class JavaEnvironment {
       String name,
       VarSymbol variableSymbol,
       boolean isParameter,
+      boolean isExplicitlyTyped,
       boolean inNullMarkedScope) {
     TypeMirror type = variableSymbol.asType();
     TypeDescriptor typeDescriptor =
@@ -245,6 +246,7 @@ public class JavaEnvironment {
         .setTypeDescriptor(typeDescriptor)
         .setFinal(isFinal)
         .setParameter(isParameter)
+        .setExplicitlyTyped(isExplicitlyTyped)
         .setSourcePosition(sourcePosition)
         .setAnnotations(createAnnotations(variableSymbol, inNullMarkedScope))
         .build();
