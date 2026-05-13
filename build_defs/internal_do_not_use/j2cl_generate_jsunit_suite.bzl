@@ -72,6 +72,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         srcs = [":%s_lib" % name],
         output_group = "test_artifacts",
         testonly = True,
+        tags = tags,
         visibility = ["//visibility:private"],
     )
 
