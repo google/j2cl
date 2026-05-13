@@ -24,31 +24,10 @@ public class AnonymousClassWithNullableTypeArgument {
     V get();
   }
 
-  public interface Consumer<V extends @Nullable Object> {
-    void accept(V value);
-  }
-
   public abstract static class AbstractHolder<V extends @Nullable Object> {
     public AbstractHolder(V value) {}
 
     public abstract V get();
-  }
-
-  public static class Holder<V extends @Nullable Object> {
-    public Holder(V value) {}
-
-    public V get() {
-      throw new RuntimeException();
-    }
-  }
-
-  public static Supplier<@Nullable Object> testExplicitTypeArguments() {
-    return new Supplier<@Nullable Object>() {
-      @Override
-      public @Nullable Object get() {
-        return null;
-      }
-    };
   }
 
   public static void testImplicitTypeArguments_inferredFromParameters() {
@@ -96,48 +75,5 @@ public class AnonymousClassWithNullableTypeArgument {
         return null;
       }
     };
-  }
-
-  public static void testImplicitTypeArguments_inferredFromArgument() {
-    // In javac frontend it's inferred as Holder<String>
-    new Holder<>(nullableString()) {};
-  }
-
-  public static Holder<@Nullable String>
-      testImplicitTypeArguments_inferredFromArgumentAndReturnType() {
-    // In javac frontend it's inferred as Holder<String>
-    return new Holder<>("Supplier") {};
-  }
-
-  public static class ParameterizedEmptyClass<T extends @Nullable Object> {}
-
-  public interface ParameterizedEmptyInterface<T extends @Nullable Object> {}
-
-  public static <T extends @Nullable Object>
-      ParameterizedEmptyClass<@Nullable T> testExplicitSuperclassTypeArguments() {
-    new ParameterizedEmptyClass<@Nullable Void>() {};
-    return new ParameterizedEmptyClass<@Nullable T>() {};
-  }
-
-  public static <T extends @Nullable Object>
-      ParameterizedEmptyInterface<@Nullable T> testExplicitSuperInterfaceTypeArguments() {
-    new ParameterizedEmptyInterface<@Nullable Void>() {};
-    return new ParameterizedEmptyInterface<@Nullable T>() {};
-  }
-
-  public static @Nullable String nullableString() {
-    return null;
-  }
-
-  public static void acceptWildcardConsumer(Consumer<?> consumer) {
-    throw new RuntimeException();
-  }
-
-  public static void testAcceptWildcardConsumerOfNonNullString() {
-    acceptWildcardConsumer(
-        new Consumer<String>() {
-          @Override
-          public void accept(String string) {}
-        });
   }
 }

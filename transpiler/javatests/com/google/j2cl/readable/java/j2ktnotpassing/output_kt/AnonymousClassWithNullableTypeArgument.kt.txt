@@ -19,8 +19,6 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
-import java.lang.RuntimeException
-import java.lang.Void
 import kotlin.Any
 import kotlin.String
 import kotlin.Suppress
@@ -28,15 +26,6 @@ import kotlin.jvm.JvmStatic
 
 open class AnonymousClassWithNullableTypeArgument {
  companion object {
-  @JvmStatic
-  fun testExplicitTypeArguments(): Supplier<Any?> {
-   return object : Supplier<Any?> {
-    override fun get(): Any? {
-     return null
-    }
-   }
-  }
-  
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromParameters() {
    AnonymousClassWithNullableTypeArgument.accept<Supplier<Any?>>(
@@ -77,57 +66,10 @@ open class AnonymousClassWithNullableTypeArgument {
     }
    }
   }
-  
-  @JvmStatic
-  fun testImplicitTypeArguments_inferredFromArgument() {
-   object : Holder<String>(
-    AnonymousClassWithNullableTypeArgument.nullableString()!!,
-   ) {}
-  }
-  
-  @JvmStatic
-  fun testImplicitTypeArguments_inferredFromArgumentAndReturnType(): Holder<String?> {
-   return object : Holder<String>("Supplier") {} as Holder<String?>
-  }
-  
-  @JvmStatic
-  fun <T> testExplicitSuperclassTypeArguments(): ParameterizedEmptyClass<T?> {
-   object : ParameterizedEmptyClass<Void?>() {}
-   return object : ParameterizedEmptyClass<T?>() {}
-  }
-  
-  @JvmStatic
-  fun <T> testExplicitSuperInterfaceTypeArguments(): ParameterizedEmptyInterface<T?> {
-   object : ParameterizedEmptyInterface<Void?> {}
-   return object : ParameterizedEmptyInterface<T?> {}
-  }
-  
-  @JvmStatic
-  fun nullableString(): String? {
-   return null
-  }
-  
-  @JvmStatic
-  fun acceptWildcardConsumer(consumer: Consumer<*>) {
-   throw RuntimeException()
-  }
-  
-  @JvmStatic
-  fun testAcceptWildcardConsumerOfNonNullString() {
-   AnonymousClassWithNullableTypeArgument.acceptWildcardConsumer(
-    object : Consumer<String> {
-     override fun accept(string: String) {}
-    },
-   )
-  }
  }
  
  fun interface Supplier<V> {
   fun get(): V
- }
- 
- fun interface Consumer<V> {
-  fun accept(value: V)
  }
  
  abstract class AbstractHolder<V> {
@@ -135,16 +77,4 @@ open class AnonymousClassWithNullableTypeArgument {
   
   abstract fun get(): V
  }
- 
- open class Holder<V> {
-  constructor(value: V)
-  
-  open fun get(): V {
-   throw RuntimeException()
-  }
- }
- 
- open class ParameterizedEmptyClass<T>
- 
- interface ParameterizedEmptyInterface<T>
 }
