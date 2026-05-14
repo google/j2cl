@@ -65,6 +65,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         ],
         tags = ["j2cl_generate_jsunit_suite"] + (tags or []),
         generate_build_test = False,
+        generate_j2wasm_library = False,
     )
 
     native.filegroup(
