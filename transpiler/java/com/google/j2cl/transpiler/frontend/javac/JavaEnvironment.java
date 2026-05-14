@@ -332,8 +332,8 @@ public class JavaEnvironment {
       case UNION -> createUnionType((UnionClassType) typeMirror);
 
       default ->
-          // TypeKind has represents type with error as ERROR and other concepts like PACKAGE,
-          // EXECUTABLE, etc that we don't model as TypeDescriptors.
+          // TypeMirrors can represent concepts that we don't model as TypeDescriptors, e.g.
+          // packages have TypeKind.PACKAGE and method types have TypeKind.EXECUTABLE.
           throw new InternalCompilerError("Unexpected type kind: %s", typeMirror.getKind());
     };
   }
