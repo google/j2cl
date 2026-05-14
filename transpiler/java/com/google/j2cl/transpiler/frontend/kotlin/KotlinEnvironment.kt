@@ -726,6 +726,7 @@ internal class KotlinEnvironment(
         .setVisibility(visibility)
         .setConstructor(isConstructor)
         .setStatic(isStatic)
+        .setSynthetic(irFunction.isSynthetic)
         .setAbstract(irFunction.isAbstract)
         .setFinal(irFunction.isFinal)
         .setNative(isNative)
@@ -792,6 +793,7 @@ internal class KotlinEnvironment(
         // already enforced the final semantics.
         .setFinal(irField.isFinal && !irField.isNativeJsField)
         .setStatic(irField.isStatic || irField.parent !is IrDeclaration)
+        .setSynthetic(irField.isSynthetic)
         .setOriginalJsInfo(irField.getJsInfo())
         .setAnnotations(createAnnotations(irField))
         .setVolatile(isVolatile)

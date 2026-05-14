@@ -31,8 +31,6 @@ import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OVERLAY_A
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
-import org.jetbrains.kotlin.builtins.StandardNames.DATA_CLASS_COMPONENT_PREFIX
-import org.jetbrains.kotlin.builtins.StandardNames.DATA_CLASS_COPY
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
@@ -48,7 +46,6 @@ import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
-import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.util.getAnnotation
 import org.jetbrains.kotlin.ir.util.hasEqualFqName
@@ -171,27 +168,7 @@ val IrClass.isJsEnum: Boolean
   get() = getJsEnumAnnotation() != null
 
 val IrDeclaration.isJsIgnore: Boolean
-  get() =
-    getJsInteropAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null ||
-      // Default param function stubs should implicitly be considered as JsIgnore'd as they will
-      // otherwise conflict the "real" JS member.
-      origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
-      // Instance field of the Companion class should be marked as JsIgnore
-      isCompanionInstanceField ||
-      // Hide synthetic members of data classes from JS callers.
-      isDataClassSyntheticHelper
-
-private val IrDeclaration.isCompanionInstanceField: Boolean
-  get() =
-    this is IrField &&
-      type.getClass()?.isCompanion == true &&
-      origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE
-
-private val IrDeclaration.isDataClassSyntheticHelper: Boolean
-  get() =
-    this is IrFunction &&
-      origin == IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER &&
-      (name == DATA_CLASS_COPY || name.asString().startsWith(DATA_CLASS_COMPONENT_PREFIX))
+  get() = getJsInteropAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null || isSynthetic
 
 val IrProperty.isJsProperty: Boolean
   get() = getJsPropertyAnnotation() != null

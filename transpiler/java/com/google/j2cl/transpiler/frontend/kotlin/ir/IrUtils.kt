@@ -26,6 +26,8 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.getRequiresMangling
 import org.jetbrains.kotlin.backend.jvm.ir.getSingleAbstractMethod
+import org.jetbrains.kotlin.builtins.StandardNames.DATA_CLASS_COMPONENT_PREFIX
+import org.jetbrains.kotlin.builtins.StandardNames.DATA_CLASS_COPY
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.Modality
@@ -81,6 +83,7 @@ import org.jetbrains.kotlin.ir.types.classifierOrFail
 import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.extractTypeParameters
+import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.types.impl.buildSimpleType
 import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.types.impl.toBuilder
@@ -174,7 +177,7 @@ val IrDeclarationWithVisibility.j2clVisibility: Visibility
 val IrDeclarationContainer.methods: List<IrFunction>
   get() {
     val allMethods =
-      declarations.filterIsInstance<IrFunction>().filter { !it.isSynthetic } + gettersAndSetters
+      declarations.filterIsInstance<IrFunction>().filter { !it.isKotlinStub } + gettersAndSetters
     return if (this is IrClass && isAnnotationClass) {
       // Annotations are transpiled to interfaces (like Kotlin/JVM does), we do not include the
       // ctors in the result set.
@@ -189,7 +192,7 @@ private val IrDeclarationContainer.gettersAndSetters: List<IrFunction>
     properties
       // We only care about getter/setters for real properties, and only if it's not a @JvmField,
       // as they won't have these functions generated for them.
-      .filter { !it.isSynthetic && !it.backingField.isJvmField }
+      .filter { !it.isKotlinStub && !it.backingField.isJvmField }
       .flatMap { sequenceOf(it.getter, it.setter) }
       .filterNotNull()
       .toList()
@@ -594,6 +597,28 @@ inline fun <reified T> IrConstructorCall.getValueArgumentAsConst(name: Name): T?
   (getValueArgument(name) as? IrConst)?.value as T?
 
 val IrDeclaration.isSynthetic
+  get() =
+    origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
+      isCompanionInstanceField ||
+      isDataClassSyntheticHelper
+
+private val IrDeclaration.isCompanionInstanceField: Boolean
+  get() =
+    this is IrField &&
+      type.getClass()?.isCompanion == true &&
+      origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE
+
+private val IrDeclaration.isDataClassSyntheticHelper: Boolean
+  get() =
+    this is IrFunction &&
+      origin == IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER &&
+      (name == DATA_CLASS_COPY || name.asString().startsWith(DATA_CLASS_COMPONENT_PREFIX))
+
+/**
+ * Returns `true` for stub artifacts of the Kotlin frontend that shouldn't reach to J2CL AST or type
+ * model.
+ */
+val IrDeclaration.isKotlinStub
   get() =
     isFakeOverride ||
       // Lowered properties/typealiases with annotations get a synthetic stub function added to hold

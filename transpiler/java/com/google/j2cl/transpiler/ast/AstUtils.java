@@ -860,6 +860,7 @@ public final class AstUtils {
                 .addTypeParameterTypeDescriptors(
                     0, enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
                 .setStatic(true)
+                .setSynthetic(true)
                 .setConstructor(false)
                 .setAbstract(false)
                 .setDefaultMethod(false)

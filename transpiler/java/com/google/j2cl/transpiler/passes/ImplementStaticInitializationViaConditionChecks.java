@@ -185,6 +185,7 @@ public class ImplementStaticInitializationViaConditionChecks
   private static FieldDescriptor getInitializedField(DeclaredTypeDescriptor typeDescriptor) {
     return FieldDescriptor.newBuilder()
         .setStatic(true)
+        .setSynthetic(true)
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
         // Note that we are using an identifier that is not valid in Java.
