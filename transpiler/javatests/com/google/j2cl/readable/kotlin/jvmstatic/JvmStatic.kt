@@ -81,6 +81,10 @@ object KotlinObjectWithStaticMembers {
   @JvmStatic val staticProperty = 1
 
   @JvmStatic fun staticFunction() = 2
+
+  @JsProperty @JvmStatic val staticJsProperty = 2
+
+  @JsMethod @JvmStatic fun staticJsMethod() = 3
 }
 
 interface InterfaceWithCompanion {
@@ -101,8 +105,10 @@ fun testJvmStaticCalls() {
 
   val g = KotlinObjectWithStaticMembers.staticProperty
   val h = KotlinObjectWithStaticMembers.staticFunction()
+  val i = KotlinObjectWithStaticMembers.staticJsProperty
+  val j = KotlinObjectWithStaticMembers.staticJsMethod()
 
-  val i = InterfaceWithCompanion.staticMethod()
+  val k = InterfaceWithCompanion.staticMethod()
 
   class Foo : ClassWithCompanion() {
     fun f() {

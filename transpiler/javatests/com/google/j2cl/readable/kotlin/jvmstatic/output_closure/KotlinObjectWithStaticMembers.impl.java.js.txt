@@ -31,6 +31,16 @@ class KotlinObjectWithStaticMembers extends j_l_Object {
   KotlinObjectWithStaticMembers.$clinit();
   return 2;
  }
+ /** @return {number} */
+ static get staticJsProperty() {
+  KotlinObjectWithStaticMembers.$clinit();
+  return KotlinObjectWithStaticMembers.f_staticJsProperty__jvmstatic_KotlinObjectWithStaticMembers_;
+ }
+ /** @return {number} */
+ static staticJsMethod() {
+  KotlinObjectWithStaticMembers.$clinit();
+  return 3;
+ }
  /** @nodts @return {!KotlinObjectWithStaticMembers} */
  static get f_INSTANCE__jvmstatic_KotlinObjectWithStaticMembers() {
   return (KotlinObjectWithStaticMembers.$clinit(), KotlinObjectWithStaticMembers.$static_INSTANCE__jvmstatic_KotlinObjectWithStaticMembers);
@@ -42,6 +52,7 @@ class KotlinObjectWithStaticMembers extends j_l_Object {
   j_l_Object.$clinit();
   KotlinObjectWithStaticMembers.$static_INSTANCE__jvmstatic_KotlinObjectWithStaticMembers = KotlinObjectWithStaticMembers.$create__();
   KotlinObjectWithStaticMembers.f_staticProperty__jvmstatic_KotlinObjectWithStaticMembers_ = 1;
+  KotlinObjectWithStaticMembers.f_staticJsProperty__jvmstatic_KotlinObjectWithStaticMembers_ = 2;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -55,6 +66,8 @@ class KotlinObjectWithStaticMembers extends j_l_Object {
 KotlinObjectWithStaticMembers.$static_INSTANCE__jvmstatic_KotlinObjectWithStaticMembers;
 /**@type {number} @nodts*/
 KotlinObjectWithStaticMembers.f_staticProperty__jvmstatic_KotlinObjectWithStaticMembers_ = 0;
+/**@type {number} @nodts*/
+KotlinObjectWithStaticMembers.f_staticJsProperty__jvmstatic_KotlinObjectWithStaticMembers_ = 0;
 $Util.$setClassMetadata(KotlinObjectWithStaticMembers, 'jvmstatic.KotlinObjectWithStaticMembers');
 
 exports = KotlinObjectWithStaticMembers;
