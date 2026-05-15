@@ -319,10 +319,8 @@ public class JavaEnvironment {
               .build();
 
       case TYPEVAR ->
-          createTypeVariable(
-              (javax.lang.model.type.TypeVariable) typeMirror,
-              elementAnnotations,
-              inNullMarkedScope);
+          createTypeVariable((javax.lang.model.type.TypeVariable) typeMirror, inNullMarkedScope)
+              .withNullabilityAnnotation(getNullabilityAnnotation(typeMirror, elementAnnotations));
 
       case WILDCARD -> createWildcard((WildcardType) typeMirror, inNullMarkedScope);
 
@@ -389,9 +387,7 @@ public class JavaEnvironment {
   // TODO(b/408478800): Cleanup unique keys for type variables and provide a more meaningful
   // toString().
   private TypeVariable createTypeVariable(
-      javax.lang.model.type.TypeVariable typeVariable,
-      List<? extends AnnotationMirror> elementAnnotations,
-      boolean inNullMarkedScope) {
+      javax.lang.model.type.TypeVariable typeVariable, boolean inNullMarkedScope) {
 
     Supplier<TypeDescriptor> boundTypeDescriptorFactory =
         () -> createTypeDescriptor(typeVariable.getUpperBound(), inNullMarkedScope);
@@ -428,7 +424,6 @@ public class JavaEnvironment {
                     : ""))
         .setName(baseSymbol.getSimpleName().toString())
         .setCapture(isCapture)
-        .setNullabilityAnnotation(getNullabilityAnnotation(typeVariable, elementAnnotations))
         .build();
   }
 
@@ -472,8 +467,7 @@ public class JavaEnvironment {
       //   Enum<?>
       // the bounds in the wildcard is not present in WildcardType "?" but can be computed from the
       // type variable declaration "T extends Enum<T>" becoming "? extends Enum<?>".
-      var typeParameter =
-          createTypeVariable(declarationTypeParameter, ImmutableList.of(), inNullMarkedScope);
+      var typeParameter = createTypeVariable(declarationTypeParameter, inNullMarkedScope);
 
       // Compute the actual upper bound by using the upper bound in the type parameter declaration
       // "T" and replacing it by the wildcard we are creating here (passed as self).
@@ -774,7 +768,7 @@ public class JavaEnvironment {
         declarationMethodElement.getTypeParameters().stream()
             .map(TypeParameterElement::asType)
             .map(javax.lang.model.type.TypeVariable.class::cast)
-            .map(tv -> createTypeVariable(tv, ImmutableList.of(), inNullMarkedScope))
+            .map(tv -> createTypeVariable(tv, inNullMarkedScope))
             .collect(toImmutableList());
 
     var thrownExceptions =
@@ -1080,7 +1074,7 @@ public class JavaEnvironment {
           };
 
       typeArgumentByTypeVariable.put(
-          createTypeVariable(typeParameter, ImmutableList.of(), inNullMarkedScope).toDeclaration(),
+          createTypeVariable(typeParameter, inNullMarkedScope).toDeclaration(),
           typeArgumentDescriptor);
     }
     return ImmutableList.copyOf(typeArgumentByTypeVariable.values());
@@ -1259,7 +1253,7 @@ public class JavaEnvironment {
                 typeParameterElements.stream()
                     .map(TypeParameterElement::asType)
                     .map(javax.lang.model.type.TypeVariable.class::cast)
-                    .map(tv -> createTypeVariable(tv, ImmutableList.of(), isNullMarked))
+                    .map(tv -> createTypeVariable(tv, isNullMarked))
                     .collect(toImmutableList()))
             .setVisibility(getVisibility(typeElement))
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
