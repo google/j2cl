@@ -14,7 +14,6 @@ import org.jetbrains.kotlin.backend.jvm.ir.isEffectivelyInlineOnly
 import org.jetbrains.kotlin.backend.jvm.ir.isInlineFunctionCall
 import org.jetbrains.kotlin.backend.jvm.ir.replaceThisByStaticReference
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
-import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.*
@@ -253,20 +252,18 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
   private fun getStaticAndCompanionDeclaration(
     callee: IrSimpleFunction
   ): Pair<IrSimpleFunction, IrSimpleFunction> {
+    val originalVisibility = callee.visibility
+    // Convert the visibility to public to avoid mangling the name of the proxy.
+    callee.visibility = DescriptorVisibilities.PUBLIC
     val (static, companionFun) = context.cachedDeclarations.getStaticAndCompanionDeclaration(callee)
     // When the original function is external, it is moved as static function in the enclosed type
     // and the proxy is created on the companion. In all the other cases, the proxy is created
     // as a static function in the enclosing type.
     val proxy = if (callee.isExternal) companionFun else static
 
-    if (callee.visibility.delegate == Visibilities.Internal) {
-      // Restore name from the original method.
-      proxy.name = callee.name
-      // Because the name has been mangled, they changed the visibility of the function to public
-      // in order to avoid mangling at code generation time. We restore the visibility from the
-      // original method.
-      proxy.visibility = callee.visibility
-    }
+    // Restore the correct visibilities.
+    callee.visibility = originalVisibility
+    proxy.visibility = originalVisibility
 
     // The return type on the proxy was blindy copied from the original without remapping the
     // possible type parameters.
