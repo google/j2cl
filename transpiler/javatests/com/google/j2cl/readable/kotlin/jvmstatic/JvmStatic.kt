@@ -40,6 +40,8 @@ open class ClassWithCompanion {
 
     @JvmStatic fun staticFunction() = 2
 
+    @JvmStatic internal val staticInternalProperty = 3
+
     @JvmStatic
     internal fun staticInternalFunction() {
       val foo =
@@ -96,19 +98,20 @@ interface InterfaceWithCompanion {
 fun testJvmStaticCalls() {
   val a = ClassWithCompanion.staticProperty
   val b = ClassWithCompanion.staticFunction()
+  val c = ClassWithCompanion.staticInternalProperty
   ClassWithCompanion.staticInternalFunction()
 
-  val c = ClassWithCompanion.staticJsProperty
-  val d = ClassWithCompanion.staticJsPropertyWithGetter
-  val e = ClassWithCompanion.getStaticJsPropertyMethod()
-  val f = ClassWithCompanion.staticJsMethod()
+  val d = ClassWithCompanion.staticJsProperty
+  val e = ClassWithCompanion.staticJsPropertyWithGetter
+  val f = ClassWithCompanion.getStaticJsPropertyMethod()
+  val g = ClassWithCompanion.staticJsMethod()
 
-  val g = KotlinObjectWithStaticMembers.staticProperty
-  val h = KotlinObjectWithStaticMembers.staticFunction()
-  val i = KotlinObjectWithStaticMembers.staticJsProperty
-  val j = KotlinObjectWithStaticMembers.staticJsMethod()
+  val h = KotlinObjectWithStaticMembers.staticProperty
+  val i = KotlinObjectWithStaticMembers.staticFunction()
+  val j = KotlinObjectWithStaticMembers.staticJsProperty
+  val k = KotlinObjectWithStaticMembers.staticJsMethod()
 
-  val k = InterfaceWithCompanion.staticMethod()
+  val l = InterfaceWithCompanion.staticMethod()
 
   class Foo : ClassWithCompanion() {
     fun f() {
