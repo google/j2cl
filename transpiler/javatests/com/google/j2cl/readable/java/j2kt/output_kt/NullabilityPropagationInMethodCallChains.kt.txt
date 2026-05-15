@@ -1,0 +1,270 @@
+// Generated from "j2kt/NullabilityPropagationInMethodCallChains.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2kt
+
+import javaemul.lang.*
+import java.lang.UnsupportedOperationException
+import java.lang.Void
+import kotlin.Any
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+class NullabilityPropagationInMethodCallChains {
+ companion object {
+  @JvmStatic
+  private fun testFluent_length0(): Fluent<String> {
+   return Fluent.flatten<Any?>(
+    Fluent.of<String>("foo"),
+    Fluent.ofVoid(),
+   ).transform<String>(
+    Function { fluents: List<Any?> ->
+     return@Function fluents.get(0) as String
+    },
+   ).transformFluent<String>(
+    FluentFunction { string: String ->
+     return@FluentFunction Fluent.of<String>(
+      string + "!",
+     )
+    },
+   )
+  }
+  
+  @JvmStatic
+  private fun testFluent_length1(): Fluent<String> {
+   return Fluent.flatten<Any?>(
+    Fluent.of<String>("foo"),
+    Fluent.ofVoid(),
+   ).transform<List<Any>>(
+    Function { list: List<Any?> ->
+     return@Function list as List<Any>
+    },
+   ).transform<String>(
+    Function { fluents: List<Any> ->
+     return@Function fluents.get(0) as String
+    },
+   ).transformFluent<String>(
+    FluentFunction { string: String ->
+     return@FluentFunction Fluent.of<String>(
+      string + "!",
+     )
+    },
+   )
+  }
+  
+  @JvmStatic
+  private fun testFluent_length2(): Fluent<String> {
+   return Fluent.flatten<Any?>(
+    Fluent.of<String>("foo"),
+    Fluent.ofVoid(),
+   ).transform<List<Any>>(
+    Function { list: List<Any?> ->
+     return@Function list as List<Any>
+    },
+   ).transform<List<Any>>(
+    Function { list_1: List<Any> ->
+     return@Function list_1
+    },
+   ).transform<String>(
+    Function { fluents: List<Any> ->
+     return@Function fluents.get(0) as String
+    },
+   ).transformFluent<String>(
+    FluentFunction { string: String ->
+     return@FluentFunction Fluent.of<String>(
+      string + "!",
+     )
+    },
+   )
+  }
+  
+  @JvmStatic
+  private fun testFluent_veryLong(): Fluent<String> {
+   return Fluent.flatten<Any?>(
+    Fluent.of<String>("foo"),
+    Fluent.ofVoid(),
+   ).transform<List<Any>>(
+    Function { list: List<Any?> ->
+     return@Function list as List<Any>
+    },
+   ).transform<List<Any>>(
+    Function { list_1: List<Any> ->
+     return@Function list_1
+    },
+   ).transform<List<Any>>(
+    Function { list_2: List<Any> ->
+     return@Function list_2
+    },
+   ).transform<List<Any>>(
+    Function { list_3: List<Any> ->
+     return@Function list_3
+    },
+   ).transform<List<Any>>(
+    Function { list_4: List<Any> ->
+     return@Function list_4
+    },
+   ).transform<List<Any>>(
+    Function { list_5: List<Any> ->
+     return@Function list_5
+    },
+   ).transform<List<Any>>(
+    Function { list_6: List<Any> ->
+     return@Function list_6
+    },
+   ).transform<List<Any>>(
+    Function { list_7: List<Any> ->
+     return@Function list_7
+    },
+   ).transform<List<Any>>(
+    Function { list_8: List<Any> ->
+     return@Function list_8
+    },
+   ).transform<List<Any>>(
+    Function { list_9: List<Any> ->
+     return@Function list_9
+    },
+   ).transform<List<Any>>(
+    Function { list_10: List<Any> ->
+     return@Function list_10
+    },
+   ).transform<List<Any>>(
+    Function { list_11: List<Any> ->
+     return@Function list_11
+    },
+   ).transform<List<Any>>(
+    Function { list_12: List<Any> ->
+     return@Function list_12
+    },
+   ).transform<List<Any>>(
+    Function { list_13: List<Any> ->
+     return@Function list_13
+    },
+   ).transform<List<Any>>(
+    Function { list_14: List<Any> ->
+     return@Function list_14
+    },
+   ).transform<List<Any>>(
+    Function { list_15: List<Any> ->
+     return@Function list_15
+    },
+   ).transform<List<Any>>(
+    Function { list_16: List<Any> ->
+     return@Function list_16
+    },
+   ).transform<List<Any>>(
+    Function { list_17: List<Any> ->
+     return@Function list_17
+    },
+   ).transform<List<Any>>(
+    Function { list_18: List<Any> ->
+     return@Function list_18
+    },
+   ).transform<List<Any>>(
+    Function { list_19: List<Any> ->
+     return@Function list_19
+    },
+   ).transform<List<Any>>(
+    Function { list_20: List<Any> ->
+     return@Function list_20
+    },
+   ).transform<List<Any>>(
+    Function { list_21: List<Any> ->
+     return@Function list_21
+    },
+   ).transform<List<Any>>(
+    Function { list_22: List<Any> ->
+     return@Function list_22
+    },
+   ).transform<List<Any>>(
+    Function { list_23: List<Any> ->
+     return@Function list_23
+    },
+   ).transform<List<Any>>(
+    Function { list_24: List<Any> ->
+     return@Function list_24
+    },
+   ).transform<List<Any>>(
+    Function { list_25: List<Any> ->
+     return@Function list_25
+    },
+   ).transform<List<Any>>(
+    Function { list_26: List<Any> ->
+     return@Function list_26
+    },
+   ).transform<List<Any>>(
+    Function { list_27: List<Any> ->
+     return@Function list_27
+    },
+   ).transform<String>(
+    Function { fluents: List<Any> ->
+     return@Function fluents.get(0) as String
+    },
+   ).transformFluent<String>(
+    FluentFunction { string: String ->
+     return@FluentFunction Fluent.of<String>(
+      string + "!",
+     )
+    },
+   )
+  }
+ }
+ 
+ fun interface List<V> {
+  fun get(index: Int): V
+ }
+ 
+ fun interface Function<T, R> {
+  fun apply(t: T): R
+ }
+ 
+ fun interface FluentFunction<T, R> {
+  fun apply(t: T): Fluent<R>
+ }
+ 
+ interface Fluent<V> {
+  fun <R> transform(function: Function<V, R>): Fluent<R>
+  
+  fun <R> transformFluent(function: FluentFunction<in V, R>): Fluent<R>
+  
+  companion object {
+   @JvmStatic
+   fun <V> from(fluent: Fluent<V>): Fluent<V> {
+    return fluent
+   }
+   
+   @JvmStatic
+   fun ofVoid(): Fluent<Void?> {
+    throw UnsupportedOperationException()
+   }
+   
+   @JvmStatic
+   fun <V> of(value: V): Fluent<V> {
+    throw UnsupportedOperationException()
+   }
+   
+   @JvmStatic
+   fun <V> flatten(vararg fluents: Fluent<out V>): Fluent<List<V>> {
+    val fluents_1: Array<Fluent<out V>> = fluents as Array<Fluent<out V>>
+    throw UnsupportedOperationException()
+   }
+  }
+ }
+}
