@@ -306,6 +306,20 @@ open class Main {
   fun overlayMethod(): Int {
    return this@JsFunctionInterface.foo(42)
   }
+  
+  companion object {
+   @JsOverlay
+   const val CONSTANT: Int = 42
+   
+   @JsOverlay
+   val FIELD: Any? = Any()
+   
+   @JvmStatic
+   @JsOverlay
+   fun staticOverlayMethod(): Int {
+    return 42
+   }
+  }
  }
  
  class JsFunctionImplementation: JsFunctionInterface {

@@ -39,6 +39,14 @@ public class Main {
     default int overlayMethod() {
       return foo(42);
     }
+
+    @JsOverlay int CONSTANT = 42;
+    @JsOverlay Object FIELD = new Object();
+
+    @JsOverlay
+    static int staticOverlayMethod() {
+      return 42;
+    }
   }
 
   private static final class JsFunctionImplementation implements JsFunctionInterface {

@@ -36,6 +36,13 @@ fun interface JsFunctionInterface {
   fun overlayMethod(): Int {
     return foo(42)
   }
+
+  companion object {
+    @JsOverlay val constant = 42
+    @JsOverlay val field = Any()
+
+    @JsOverlay fun staticOverlayMethod() = 42
+  }
 }
 
 class JsFunctionImplementation : JsFunctionInterface {

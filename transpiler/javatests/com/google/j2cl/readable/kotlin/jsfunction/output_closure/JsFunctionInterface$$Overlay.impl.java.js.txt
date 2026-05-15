@@ -1,5 +1,7 @@
 goog.module('jsfunction.JsFunctionInterface.$Overlay$impl');
 
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 /** @nodts */
 class $Overlay {
  /** @nodts @return {number} */
@@ -7,15 +9,38 @@ class $Overlay {
   $Overlay.$clinit();
   return $thisArg(42);
  }
+ /** @final @nodts @return {number} */
+ static m_getConstant__int() {
+  $Overlay.$clinit();
+  return $Overlay.f_constant__jsfunction_JsFunctionInterface_$Overlay_;
+ }
+ /** @final @nodts @return {!*} */
+ static m_getField__java_lang_Object() {
+  $Overlay.$clinit();
+  return $Overlay.f_field__jsfunction_JsFunctionInterface_$Overlay_;
+ }
+ /** @final @nodts @return {number} */
+ static m_staticOverlayMethod__int() {
+  $Overlay.$clinit();
+  return 42;
+ }
  /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
+  $Overlay.f_constant__jsfunction_JsFunctionInterface_$Overlay_ = 42;
+  $Overlay.f_field__jsfunction_JsFunctionInterface_$Overlay_ = j_l_Object.$create__();
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+ }
 }
+/**@type {number} @nodts*/
+$Overlay.f_constant__jsfunction_JsFunctionInterface_$Overlay_ = 0;
+/**@type {!*} @nodts*/
+$Overlay.f_field__jsfunction_JsFunctionInterface_$Overlay_;
 
 exports = $Overlay;
 
