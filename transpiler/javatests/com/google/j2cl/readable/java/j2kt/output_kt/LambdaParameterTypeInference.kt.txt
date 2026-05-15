@@ -93,9 +93,7 @@ abstract class LambdaParameterTypeInference {
   fun testNullableTripleConsumer(nullableTripleConsumer: Consumer<Consumer<Consumer<String?>>>, nullableString: String?) {
    LambdaParameterTypeInference.processTripleConsumer<String?>(nullableTripleConsumer).accept(
     Consumer { nullableConsumer: Consumer<String?> ->
-     nullableConsumer.accept(
-      nullableString!!,
-     )
+     nullableConsumer.accept(nullableString)
     },
    )
   }

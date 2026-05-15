@@ -18,7 +18,6 @@ package nullability;
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import com.google.j2cl.integration.testing.TestUtils;
 import java.util.function.Function;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -318,23 +317,20 @@ public class Main {
   private static void testLambdaParameterTypeInference() {
     assertTrue(1 == Main.<Integer>applyToNull(value -> (value == null) ? 1 : value + 1));
 
-    // repro for b/454662844
-    if (!TestUtils.isJ2Kt()) {
-      nullableTripleConsumerAccept(
-          new Consumer<Consumer<Consumer<@Nullable String>>>() {
-            @Override
-            public void accept(Consumer<Consumer<@Nullable String>> doubleConsumer) {
-              doubleConsumer.accept(
-                  new Consumer<@Nullable String>() {
-                    @Override
-                    public void accept(@Nullable String string) {
-                      assertNull(string);
-                    }
-                  });
-            }
-          },
-          null);
-    }
+    nullableTripleConsumerAccept(
+        new Consumer<Consumer<Consumer<@Nullable String>>>() {
+          @Override
+          public void accept(Consumer<Consumer<@Nullable String>> doubleConsumer) {
+            doubleConsumer.accept(
+                new Consumer<@Nullable String>() {
+                  @Override
+                  public void accept(@Nullable String string) {
+                    assertNull(string);
+                  }
+                });
+          }
+        },
+        null);
   }
 
   private static <T> int applyToNull(Function<? super @Nullable T, Integer> function) {

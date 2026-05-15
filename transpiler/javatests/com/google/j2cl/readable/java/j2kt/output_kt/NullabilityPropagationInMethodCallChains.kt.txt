@@ -35,14 +35,14 @@ class NullabilityPropagationInMethodCallChains {
    return Fluent.flatten<Any?>(
     Fluent.of<String>("foo"),
     Fluent.ofVoid(),
-   ).transform<String>(
+   ).transform<String?>(
     Function { fluents: List<Any?> ->
-     return@Function fluents.get(0) as String
+     return@Function fluents.get(0) as String?
     },
    ).transformFluent<String>(
-    FluentFunction { string: String ->
+    FluentFunction { string: String? ->
      return@FluentFunction Fluent.of<String>(
-      string + "!",
+      "" + string + "!",
      )
     },
    )
@@ -53,18 +53,18 @@ class NullabilityPropagationInMethodCallChains {
    return Fluent.flatten<Any?>(
     Fluent.of<String>("foo"),
     Fluent.ofVoid(),
-   ).transform<List<Any>>(
+   ).transform<List<Any?>>(
     Function { list: List<Any?> ->
-     return@Function list as List<Any>
+     return@Function list
     },
-   ).transform<String>(
-    Function { fluents: List<Any> ->
-     return@Function fluents.get(0) as String
+   ).transform<String?>(
+    Function { fluents: List<Any?> ->
+     return@Function fluents.get(0) as String?
     },
    ).transformFluent<String>(
-    FluentFunction { string: String ->
+    FluentFunction { string: String? ->
      return@FluentFunction Fluent.of<String>(
-      string + "!",
+      "" + string + "!",
      )
     },
    )
@@ -75,22 +75,22 @@ class NullabilityPropagationInMethodCallChains {
    return Fluent.flatten<Any?>(
     Fluent.of<String>("foo"),
     Fluent.ofVoid(),
-   ).transform<List<Any>>(
+   ).transform<List<Any?>>(
     Function { list: List<Any?> ->
-     return@Function list as List<Any>
+     return@Function list
     },
-   ).transform<List<Any>>(
-    Function { list_1: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_1: List<Any?> ->
      return@Function list_1
     },
-   ).transform<String>(
-    Function { fluents: List<Any> ->
-     return@Function fluents.get(0) as String
+   ).transform<String?>(
+    Function { fluents: List<Any?> ->
+     return@Function fluents.get(0) as String?
     },
    ).transformFluent<String>(
-    FluentFunction { string: String ->
+    FluentFunction { string: String? ->
      return@FluentFunction Fluent.of<String>(
-      string + "!",
+      "" + string + "!",
      )
     },
    )
@@ -101,126 +101,126 @@ class NullabilityPropagationInMethodCallChains {
    return Fluent.flatten<Any?>(
     Fluent.of<String>("foo"),
     Fluent.ofVoid(),
-   ).transform<List<Any>>(
+   ).transform<List<Any?>>(
     Function { list: List<Any?> ->
-     return@Function list as List<Any>
+     return@Function list
     },
-   ).transform<List<Any>>(
-    Function { list_1: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_1: List<Any?> ->
      return@Function list_1
     },
-   ).transform<List<Any>>(
-    Function { list_2: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_2: List<Any?> ->
      return@Function list_2
     },
-   ).transform<List<Any>>(
-    Function { list_3: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_3: List<Any?> ->
      return@Function list_3
     },
-   ).transform<List<Any>>(
-    Function { list_4: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_4: List<Any?> ->
      return@Function list_4
     },
-   ).transform<List<Any>>(
-    Function { list_5: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_5: List<Any?> ->
      return@Function list_5
     },
-   ).transform<List<Any>>(
-    Function { list_6: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_6: List<Any?> ->
      return@Function list_6
     },
-   ).transform<List<Any>>(
-    Function { list_7: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_7: List<Any?> ->
      return@Function list_7
     },
-   ).transform<List<Any>>(
-    Function { list_8: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_8: List<Any?> ->
      return@Function list_8
     },
-   ).transform<List<Any>>(
-    Function { list_9: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_9: List<Any?> ->
      return@Function list_9
     },
-   ).transform<List<Any>>(
-    Function { list_10: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_10: List<Any?> ->
      return@Function list_10
     },
-   ).transform<List<Any>>(
-    Function { list_11: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_11: List<Any?> ->
      return@Function list_11
     },
-   ).transform<List<Any>>(
-    Function { list_12: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_12: List<Any?> ->
      return@Function list_12
     },
-   ).transform<List<Any>>(
-    Function { list_13: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_13: List<Any?> ->
      return@Function list_13
     },
-   ).transform<List<Any>>(
-    Function { list_14: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_14: List<Any?> ->
      return@Function list_14
     },
-   ).transform<List<Any>>(
-    Function { list_15: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_15: List<Any?> ->
      return@Function list_15
     },
-   ).transform<List<Any>>(
-    Function { list_16: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_16: List<Any?> ->
      return@Function list_16
     },
-   ).transform<List<Any>>(
-    Function { list_17: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_17: List<Any?> ->
      return@Function list_17
     },
-   ).transform<List<Any>>(
-    Function { list_18: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_18: List<Any?> ->
      return@Function list_18
     },
-   ).transform<List<Any>>(
-    Function { list_19: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_19: List<Any?> ->
      return@Function list_19
     },
-   ).transform<List<Any>>(
-    Function { list_20: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_20: List<Any?> ->
      return@Function list_20
     },
-   ).transform<List<Any>>(
-    Function { list_21: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_21: List<Any?> ->
      return@Function list_21
     },
-   ).transform<List<Any>>(
-    Function { list_22: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_22: List<Any?> ->
      return@Function list_22
     },
-   ).transform<List<Any>>(
-    Function { list_23: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_23: List<Any?> ->
      return@Function list_23
     },
-   ).transform<List<Any>>(
-    Function { list_24: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_24: List<Any?> ->
      return@Function list_24
     },
-   ).transform<List<Any>>(
-    Function { list_25: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_25: List<Any?> ->
      return@Function list_25
     },
-   ).transform<List<Any>>(
-    Function { list_26: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_26: List<Any?> ->
      return@Function list_26
     },
-   ).transform<List<Any>>(
-    Function { list_27: List<Any> ->
+   ).transform<List<Any?>>(
+    Function { list_27: List<Any?> ->
      return@Function list_27
     },
-   ).transform<String>(
-    Function { fluents: List<Any> ->
-     return@Function fluents.get(0) as String
+   ).transform<String?>(
+    Function { fluents: List<Any?> ->
+     return@Function fluents.get(0) as String?
     },
    ).transformFluent<String>(
-    FluentFunction { string: String ->
+    FluentFunction { string: String? ->
      return@FluentFunction Fluent.of<String>(
-      string + "!",
+      "" + string + "!",
      )
     },
    )

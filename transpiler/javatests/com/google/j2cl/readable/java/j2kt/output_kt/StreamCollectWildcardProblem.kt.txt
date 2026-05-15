@@ -128,8 +128,8 @@ open class StreamCollectWildcardProblem {
     },
    ).flatMap<String>(
     Function { stream: Stream<String>? ->
-     return@Function stream!!
-    },
+     return@Function stream
+    } as Function<in Stream<String>?, out Stream<out String>>,
    )
   }
  }

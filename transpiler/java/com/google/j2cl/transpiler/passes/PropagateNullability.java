@@ -130,17 +130,23 @@ import java.util.stream.Stream;
  * }</pre>
  */
 public class PropagateNullability extends AbstractJ2ktNormalizationPass {
+  // Max number of iterations to prevent infinite loop in case of bug.
+  private static final int MAX_PROPAGATE_NULLABILITY_ITERATIONS = 100;
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     fixVariableNullability(compilationUnit);
 
-    // Propagate nullability twice to ensure that we apply the effect of outward nullability
-    // propagation from the first pass is used in the inward nullability propagation in the
-    // second pass.
-    // TODO(b/406815802): See whether this can be refactored to avoid running twice if not needed.
-    propagateNullability(compilationUnit);
-    propagateNullability(compilationUnit);
+    // TODO(b/406815802): See whether this can be improved.
+    for (int i = 0; i < MAX_PROPAGATE_NULLABILITY_ITERATIONS; i++) {
+      // Propagate twice, since the first pass may introduce changes that are needed in the second
+      // pass, and only one of them will report changes.
+      boolean changed1 = propagateNullability(compilationUnit);
+      boolean changed2 = propagateNullability(compilationUnit);
+      if (!changed1 && !changed2) {
+        break;
+      }
+    }
   }
 
   /** Makes variables and lambda parameters nullable if they are compared to {@code null}. */
@@ -189,7 +195,9 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         });
   }
 
-  private static void propagateNullability(CompilationUnit compilationUnit) {
+  private static boolean propagateNullability(CompilationUnit compilationUnit) {
+    boolean[] changed = {false};
+
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -262,6 +270,10 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                     rewrittenMethodDescriptor.getParameterTypeDescriptors(),
                     PropagateNullability::propagateNullabilityToFunctionExpression);
 
+            if (!rewrittenMethodDescriptor.equals(methodDescriptor)) {
+              changed[0] = true;
+            }
+
             return MethodCall.Builder.from(methodCall)
                 .setTarget(rewrittenMethodDescriptor)
                 .setArguments(rewrittenArguments)
@@ -294,7 +306,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             if (fixedMethodDescriptor.equals(methodDescriptor)) {
               return newInstance;
             }
-
+            changed[0] = true;
             return NewInstance.Builder.from(newInstance).setTarget(fixedMethodDescriptor).build();
           }
 
@@ -328,6 +340,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             if (inferredFunctionalInterface.equals(functionalInterface)) {
               return functionExpression;
             }
+            changed[0] = true;
             return FunctionExpression.Builder.from(functionExpression)
                 .setTypeDescriptor(inferredFunctionalInterface)
                 .build();
@@ -343,6 +356,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             return castExpression;
           }
         });
+
+    return changed[0];
   }
 
   /**
