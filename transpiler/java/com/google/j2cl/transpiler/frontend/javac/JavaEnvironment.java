@@ -33,6 +33,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.AnnotationValue;
@@ -119,6 +120,7 @@ public class JavaEnvironment {
   private final Types internalTypes;
   private final JavacElements elements;
   private final Symtab symtab;
+  private final Problems problems;
 
   private final Map<TypeElement, TypeDeclaration> cachedTypeDeclarationByTypeElement =
       new HashMap<>();
@@ -139,11 +141,13 @@ public class JavaEnvironment {
 
   private final Map<FieldDescriptorKey, FieldDescriptor> cachedFieldDescriptors = new HashMap<>();
 
-  JavaEnvironment(Context context, Collection<String> wellKnownQualifiedBinaryNames) {
+  JavaEnvironment(
+      Context context, Collection<String> wellKnownQualifiedBinaryNames, Problems problems) {
     this.javacTypes = JavacTypes.instance(context);
     this.internalTypes = Types.instance(context);
     this.elements = JavacElements.instance(context);
     this.symtab = Symtab.instance(context);
+    this.problems = problems;
 
     initWellKnownTypes(wellKnownQualifiedBinaryNames);
   }
@@ -296,9 +300,15 @@ public class JavaEnvironment {
 
       case DECLARED, ERROR -> {
         // Allow ERROR which represents types that are not resolved and they are presented as
-        // ClassType with no members, etc. This situation can ocurr if there are missing classes
+        // ClassType with no members, etc. This situation can occur if there are missing classes
         // in the transitive dependencies and those were not needed to properly compile sources in
         // this library.
+        if (typeMirror.getKind() == TypeKind.ERROR) {
+          problems.warning(
+              "Unable to load type %s from dependencies. Treating it as a stub.",
+              typeMirror.toString());
+        }
+
         ClassType classType = (ClassType) typeMirror;
 
         boolean isNullable = isNullable(typeMirror, elementAnnotations, inNullMarkedScope);
