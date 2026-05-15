@@ -120,8 +120,13 @@ public class AnonymousClassWithNullableTypeArgument {
     return new ParameterizedEmptyInterface<@Nullable T>() {};
   }
 
-  public static void testAnonymousClass_implicitTypeArguments_fromAssignment() {
+  public static void testAnonymousClass_implicitTypeArguments_fromDeclaration() {
     ParameterizedEmptyClass<@Nullable String> emptyClass = new ParameterizedEmptyClass<>() {};
+  }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromAssignment() {
+    ParameterizedEmptyClass<@Nullable String> emptyClass;
+    emptyClass = new ParameterizedEmptyClass<>() {};
   }
 
   public static ParameterizedEmptyClass<@Nullable String>
@@ -135,9 +140,14 @@ public class AnonymousClassWithNullableTypeArgument {
 
   public static void acceptOfNullableString(ParameterizedEmptyClass<@Nullable String> emptyClass) {}
 
-  public static void testAnonymousInterface_implicitTypeArguments_fromAssignment() {
+  public static void testAnonymousInterface_implicitTypeArguments_fromDeclaration() {
     ParameterizedEmptyInterface<@Nullable String> emptyClass =
         new ParameterizedEmptyInterface<>() {};
+  }
+
+  public static void testAnonymousInterface_implicitTypeArguments_fromAssignment() {
+    ParameterizedEmptyInterface<@Nullable String> emptyClass;
+    emptyClass = new ParameterizedEmptyInterface<>() {};
   }
 
   public static ParameterizedEmptyInterface<@Nullable String>

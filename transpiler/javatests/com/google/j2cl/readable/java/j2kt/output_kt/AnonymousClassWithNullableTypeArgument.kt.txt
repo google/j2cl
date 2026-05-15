@@ -62,8 +62,14 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testAnonymousClass_implicitTypeArguments_fromAssignment() {
+  fun testAnonymousClass_implicitTypeArguments_fromDeclaration() {
    val emptyClass: ParameterizedEmptyClass<String?> = object : ParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>
+  }
+  
+  @JvmStatic
+  fun testAnonymousClass_implicitTypeArguments_fromAssignment() {
+   var emptyClass: ParameterizedEmptyClass<String?>? = null
+   emptyClass = object : ParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>?
   }
   
   @JvmStatic
@@ -82,8 +88,14 @@ open class AnonymousClassWithNullableTypeArgument {
   fun acceptOfNullableString(emptyClass: ParameterizedEmptyClass<String?>) {}
   
   @JvmStatic
-  fun testAnonymousInterface_implicitTypeArguments_fromAssignment() {
+  fun testAnonymousInterface_implicitTypeArguments_fromDeclaration() {
    val emptyClass: ParameterizedEmptyInterface<String?> = object : ParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>
+  }
+  
+  @JvmStatic
+  fun testAnonymousInterface_implicitTypeArguments_fromAssignment() {
+   var emptyClass: ParameterizedEmptyInterface<String?>? = null
+   emptyClass = object : ParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>?
   }
   
   @JvmStatic
