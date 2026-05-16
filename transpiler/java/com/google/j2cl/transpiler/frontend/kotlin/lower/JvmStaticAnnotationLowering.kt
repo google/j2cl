@@ -5,13 +5,11 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isStaticJsMember
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.CachedFieldsForObjectInstances
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.ir.isEffectivelyInlineOnly
-import org.jetbrains.kotlin.backend.jvm.ir.isInlineFunctionCall
 import org.jetbrains.kotlin.backend.jvm.ir.replaceThisByStaticReference
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.IrBuiltIns
@@ -279,13 +277,14 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
   // END OF MODIFICATIONS.
 
   private fun shouldReplaceWithStaticCall(callee: IrSimpleFunction) =
-    (callee.isJvmStaticInCompanion() &&
-      callee.visibility == DescriptorVisibilities.PROTECTED &&
-      !callee.isInlineFunctionCall(context)) ||
-      // MODIFIED BY GOOGLE.
-      // The static function on the enclosing type is the function that is transpiled as a JsMethod.
-      // Redirecting the call to this method avoid issue around spread operator and JS vararg.
-      (callee.isJvmStaticInCompanion() &&
-        getStaticAndCompanionDeclaration(callee).first.isStaticJsMember())
+    // MODIFIED BY GOOGLE.
+    // Redirect all companion @JvmStatic calls to the static proxy function created on the
+    // enclosing type. This simplifies dispatch and avoids JS-interop issues (such as with
+    // spread operators and JS vararg).
+    // Original code:
+    // (callee.isJvmStaticInCompanion() &&
+    //   callee.visibility == DescriptorVisibilities.PROTECTED &&
+    //   !callee.isInlineFunctionCall(context))
+    callee.isJvmStaticInCompanion()
   // END OF MODIFICATIONS
 }

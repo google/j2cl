@@ -337,11 +337,6 @@ private fun IrDeclaration.isJavaRecordComponentField(): Boolean =
 private fun IrDeclaration.isMemberOfJavaRecord(): Boolean =
   isFromJava() && parentAsClass.superClass?.hasEqualFqName(JAVA_LANG_RECORD_FQ_NAME) == true
 
-// Computing whether an instance method is a JsMethod requires looking at overridden methods, and
-// such computation is done in the J2CL type model. Therefore this method only checks whether a
-// static member is a JsMethod.
-fun IrFunction.isStaticJsMember() = isStatic && getJsMemberType() != JsMemberType.NONE
-
 private val JS_ASYNC_ANNOTATION_FQ_NAME: FqName = FqName(JS_ASYNC_ANNOTATION_NAME)
 private val JS_CONSTRUCTOR_ANNOTATION_FQ_NAME: FqName = FqName(JS_CONSTRUCTOR_ANNOTATION_NAME)
 private val JS_ENUM_ANNOTATION_FQ_NAME: FqName = FqName(JS_ENUM_ANNOTATION_NAME)
