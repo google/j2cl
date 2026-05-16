@@ -195,6 +195,14 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         });
   }
 
+  /**
+   * Runs one iteration of nullability propagation over the compilation unit.
+   *
+   * <p>It rewrites array literals, new array expressions, method calls, new instance expressions,
+   * functional expressions, and cast expressions to propagate nullability.
+   *
+   * @return {@code true} if any type descriptors were modified during this pass.
+   */
   private static boolean propagateNullability(CompilationUnit compilationUnit) {
     boolean[] changed = {false};
 
@@ -497,6 +505,10 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     };
   }
 
+  /**
+   * Propagates nullability from the value expressions of an array literal to the array's component
+   * type descriptor.
+   */
   private static ArrayLiteral propagateNullabilityFromValueExpressions(ArrayLiteral arrayLiteral) {
     ArrayTypeDescriptor arrayTypeDescriptor = arrayLiteral.getTypeDescriptor();
     TypeDescriptor componentTypeDescriptor =
@@ -544,6 +556,17 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         methodDescriptor, typeParameterDescriptors, inferredTypeArgumentDescriptors);
   }
 
+  /**
+   * Propagates nullability from the usage site type to a function expression.
+   *
+   * <p>If the expression is a {@link FunctionExpression} (lambda), this method propagates
+   * nullability from the type expected at the usage site ({@code fromTypeDescriptor}) to the
+   * lambda's functional interface type descriptor.
+   *
+   * <p>For example, if a lambda is passed as an argument to a method expecting {@code
+   * Consumer<@Nullable String>}, and the lambda has inferred type {@code Consumer<String>}, this
+   * method updates the lambda's type to {@code Consumer<@Nullable String>}.
+   */
   private static Expression propagateNullabilityToFunctionExpression(
       Expression toExpression, TypeDescriptor fromTypeDescriptor) {
     return switch (toExpression) {
@@ -557,7 +580,15 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     };
   }
 
-  // TODO(b/406815802): Add JavaDoc
+  /**
+   * Propagates nullability from the qualifier expression to the type arguments of the enclosing
+   * type of the method.
+   *
+   * <p>For example, if we have a call {@code qualifier.method()} where {@code qualifier} has type
+   * {@code Foo<@Nullable String>} and the method is declared in {@code Foo<T>}, this method will
+   * propagate the {@code @Nullable} from the qualifier's type argument to the method's enclosing
+   * type arguments.
+   */
   private static MethodDescriptor propagateNullabilityFromQualifier(
       MethodDescriptor methodDescriptor,
       ImmutableList<TypeVariable> typeParameterDescriptors,
@@ -581,7 +612,13 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         methodDescriptor, typeParameterDescriptors, inferredTypeArgumentDescriptors);
   }
 
-  // TODO(b/406815802): Add JavaDoc
+  /**
+   * Propagates nullability to a type argument of a functional interface based on the types of the
+   * expressions returned by the lambda body.
+   *
+   * <p>Visits all return statements in the lambda and propagates nullability from the returned
+   * expression types to the corresponding type argument of the functional interface.
+   */
   private static TypeDescriptor propagateTypeArgumentNullabilityFromReturnExpressions(
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
@@ -618,7 +655,12 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     return propagatedTypeArgumentDescriptorRef[0];
   }
 
-  // TODO(b/406815802): Add JavaDoc
+  /**
+   * Propagates nullability to a type argument from a list of inferred types.
+   *
+   * <p>Iterates over corresponding declaration and inferred types (e.g., parameter types and actual
+   * argument types) and propagates nullability to the type argument.
+   */
   private static TypeDescriptor propagateTypeArgumentNullabilityFromInferredTypes(
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
@@ -635,7 +677,13 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     return typeArgumentDescriptor;
   }
 
-  // TODO(b/406815802): Add JavaDoc comment.
+  /**
+   * Propagates nullability to a type argument from a single inferred type.
+   *
+   * <p>Uses the declaration type to determine how the type parameter is used, finds the
+   * corresponding parameterizations in the inferred type, and propagates their nullability to the
+   * type argument.
+   */
   private static TypeDescriptor propagateTypeArgumentNullabilityFromInferredType(
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor,
@@ -651,7 +699,13 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             (a, b) -> a);
   }
 
-  // TODO(b/406815802): Add JavaDoc comment.
+  /**
+   * Initializes or adjusts a type argument's nullability based on the type parameter's capability
+   * to be null.
+   *
+   * <p>If the type parameter cannot be null (e.g., it has a non-nullable bound), the type argument
+   * is forced to be non-nullable.
+   */
   private static TypeDescriptor propagateTypeArgument(
       TypeVariable typeParameter, TypeDescriptor typeArgument) {
     return typeParameter.canBeNull() ? typeArgument : typeArgument.toNonNullable();
@@ -680,6 +734,11 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     };
   }
 
+  /**
+   * Propagates nullability from a type descriptor to a declared type descriptor.
+   *
+   * <p>Handles propagation of outer nullability and nullability of type arguments.
+   */
   private static TypeDescriptor propagateNullabilityToDeclared(
       DeclaredTypeDescriptor toDeclared, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
     switch (from) {
@@ -721,6 +780,11 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     }
   }
 
+  /**
+   * Propagates nullability from a type descriptor to an array type descriptor.
+   *
+   * <p>Propagates nullability to the component type and outer nullability.
+   */
   private static TypeDescriptor propagateNullabilityToArray(
       ArrayTypeDescriptor toArray, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
     return switch (from) {
@@ -741,6 +805,11 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     };
   }
 
+  /**
+   * Propagates nullability from a type descriptor to a type variable.
+   *
+   * <p>Propagates nullability to the bounds if it is a wildcard, or to the variable itself.
+   */
   private static TypeDescriptor propagateNullabilityToVariable(
       TypeVariable toVariable, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
     if (seen.contains(toVariable)) {
@@ -774,6 +843,10 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     return toVariable.toNullable(toVariable.isNullable() || from.isNullable());
   }
 
+  /**
+   * Propagates nullability annotation from one type variable to another, choosing the most nullable
+   * annotation.
+   */
   private static TypeDescriptor propagateNullabilityAnnotationFrom(
       TypeVariable toTypeVariable, TypeVariable fromTypeVariable) {
     return toTypeVariable.withNullabilityAnnotation(
