@@ -38,6 +38,48 @@ function constructorProxy(id) {
       });
 }
 
+/**
+ * To be called in Wasm to invoke a JS function, for example when receiving
+ * a function from JS.
+ *
+ * @param {function(...?): ?} fn
+ * @param {...?} args
+ * @return {?}
+ */
+function invokeJsFunction(fn, ...args) {
+  return fn(...args);
+}
+
+/**
+ * To be called by Wasm to expose a function to JS.
+ *
+ * @param {function(!Object, ...?): ?} fn
+ * @param {!Object} adapter
+ * @return {function(...?): ?}
+ */
+function bindJsFunction(fn, adapter) {
+  const f = fn.bind(adapter);
+  f.adapter = adapter;
+  return f;
+}
+
+/**
+ * To be called by Wasm when receiving a function from JS.
+ *
+ * @param {function(...?): ?} fn
+ * @param {function(function(...?): ?): !Object} createAdapter
+ * @return {!Object}
+ */
+function adaptJsFunction(fn, createAdapter) {
+  if (!fn.adapter) {
+    fn.adapter = createAdapter(fn);
+  }
+  return fn.adapter;
+}
+
 exports = {
+  adaptJsFunction,
+  bindJsFunction,
   constructorProxy,
+  invokeJsFunction,
 };
