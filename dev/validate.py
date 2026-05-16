@@ -176,6 +176,19 @@ class GenValidationTest(ValidationTest):
     _j2("-p CLOSURE gen empty")
     _assert_output("No matching readables!")
 
+  def test_blaze_invalid_flag(self):
+    with tempfile.TemporaryDirectory() as temp_dir:
+      bad_blazerc_path = os.path.join(temp_dir, "bad_blazerc")
+      with open(bad_blazerc_path, "w") as f:
+        f.write("build --invalid_flag_for_testing\n")
+
+      env = os.environ.copy()
+      env["BLAZERC"] = bad_blazerc_path
+
+      _j2_expecting_failure("gen java/emptyclass", env=env)
+      _assert_output("Error invoking blaze!")
+      _assert_output("Unrecognized option: --invalid_flag_for_testing")
+
 
 EMPTYCLASS_ES5 = "transpiler/javatests/com/google/j2cl/integration/java/emptyclass:opt.es5"
 EMPTYCLASS_WASM = "transpiler/javatests/com/google/j2cl/integration/java/emptyclass:opt.wasm"
@@ -329,9 +342,9 @@ def _j2(args_str, out_stream=None, env=None):
     raise SystemExit(result.returncode)
 
 
-def _j2_expecting_failure(args_str):
+def _j2_expecting_failure(args_str, env=None):
   try:
-    _j2(args_str)
+    _j2(args_str, env=env)
     raise AssertionError(f"j2 {args_str} expected to fail but didn't.")
   except SystemExit:
     return

@@ -63,7 +63,7 @@ def blaze_test(readables):
         f"--build_event_json_file={bep_file_path}",
     ] + all_targets
     result = subprocess.run(cmd, check=False, capture_output=True, text=True)
-    if not os.path.exists(bep_file_path):
+    if not os.path.exists(bep_file_path) or os.path.getsize(bep_file_path) == 0:
       print("Error invoking blaze!")
       print(result.stderr)
       raise FileNotFoundError("BEP file not generated! See the error output.")
