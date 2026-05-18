@@ -139,11 +139,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
     // TODO(b/406815802): See whether this can be improved.
     for (int i = 0; i < MAX_PROPAGATE_NULLABILITY_ITERATIONS; i++) {
-      // Propagate twice, since the first pass may introduce changes that are needed in the second
-      // pass, and only one of them will report changes.
-      boolean changed1 = propagateNullability(compilationUnit);
-      boolean changed2 = propagateNullability(compilationUnit);
-      if (!changed1 && !changed2) {
+      if (!propagateNullability(compilationUnit)) {
+        // No changes were made in this iteration, exit the loop.
         break;
       }
     }
@@ -210,16 +207,30 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
-            return propagateNullabilityFromValueExpressions(arrayLiteral);
+            ArrayTypeDescriptor arrayTypeDescriptor = arrayLiteral.getTypeDescriptor();
+            TypeDescriptor componentTypeDescriptor =
+                propagateNullabilityFrom(
+                    arrayTypeDescriptor.getComponentTypeDescriptor(),
+                    arrayLiteral.getValueExpressions().stream().map(Expression::getTypeDescriptor));
+            if (componentTypeDescriptor.equals(arrayTypeDescriptor.getComponentTypeDescriptor())) {
+              return arrayLiteral;
+            }
+            changed[0] = true;
+            return arrayLiteral.toBuilder()
+                .setTypeDescriptor(
+                    arrayTypeDescriptor.withComponentTypeDescriptor(componentTypeDescriptor))
+                .build();
           }
 
           @Override
           public Node rewriteNewArray(NewArray newArray) {
             Expression initializer = newArray.getInitializer();
-            if (initializer == null) {
+            if (initializer == null
+                || initializer.getTypeDescriptor() == newArray.getTypeDescriptor()) {
               return newArray;
             }
             // Update type of NewArray expression from rewritten initializer.
+            changed[0] = true;
             return NewArray.Builder.from(newArray)
                 .setTypeDescriptor((ArrayTypeDescriptor) initializer.getTypeDescriptor())
                 .build();
@@ -271,17 +282,19 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                       methodCall.getArguments());
             }
 
-            // Propagate nullability from parameters to function expression arguments.
+            // Propagate nullability from parameters into arguments, this covers the cases where the
+            // expression is a lambda and its parameters are inferred from the surrounding context.
             ImmutableList<Expression> rewrittenArguments =
                 zip(
                     methodCall.getArguments(),
                     rewrittenMethodDescriptor.getParameterTypeDescriptors(),
-                    PropagateNullability::propagateNullabilityToFunctionExpression);
+                    PropagateNullability::propagateNullabilityToExpression);
 
-            if (!rewrittenMethodDescriptor.equals(methodDescriptor)) {
-              changed[0] = true;
+            if (rewrittenMethodDescriptor.equals(methodDescriptor)
+                && rewrittenArguments.equals(methodCall.getArguments())) {
+              return methodCall;
             }
-
+            changed[0] = true;
             return MethodCall.Builder.from(methodCall)
                 .setTarget(rewrittenMethodDescriptor)
                 .setArguments(rewrittenArguments)
@@ -341,11 +354,16 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                     .getSingleAbstractMethodDescriptor()
                     .getParameterTypeDescriptors()
                     .stream(),
-                (variable, typeDescriptor) ->
-                    variable.setTypeDescriptor(
-                        propagateNullabilityTo(
-                            variable.getTypeDescriptor(), typeDescriptor, ImmutableSet.of())));
-            if (inferredFunctionalInterface.equals(functionalInterface)) {
+                (variable, typeDescriptor) -> {
+                  var variableTypeDescriptor =
+                      propagateNullabilityTo(
+                          variable.getTypeDescriptor(), typeDescriptor, ImmutableSet.of());
+                  if (variableTypeDescriptor != variable.getTypeDescriptor()) {
+                    changed[0] = true;
+                    variable.setTypeDescriptor(variableTypeDescriptor);
+                  }
+                });
+            if (inferredFunctionalInterface == functionalInterface) {
               return functionExpression;
             }
             changed[0] = true;
@@ -356,7 +374,9 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
           @Override
           public CastExpression rewriteCastExpression(CastExpression castExpression) {
-            if (castExpression.getExpression().getTypeDescriptor().isNullable()) {
+            if (castExpression.getExpression().getTypeDescriptor().isNullable()
+                && !castExpression.getCastTypeDescriptor().isNullable()) {
+              changed[0] = true;
               return CastExpression.Builder.from(castExpression)
                   .setCastTypeDescriptor(castExpression.getCastTypeDescriptor().toNullable())
                   .build();
@@ -505,21 +525,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     };
   }
 
-  /**
-   * Propagates nullability from the value expressions of an array literal to the array's component
-   * type descriptor.
-   */
-  private static ArrayLiteral propagateNullabilityFromValueExpressions(ArrayLiteral arrayLiteral) {
-    ArrayTypeDescriptor arrayTypeDescriptor = arrayLiteral.getTypeDescriptor();
-    TypeDescriptor componentTypeDescriptor =
-        propagateNullabilityFrom(
-            arrayTypeDescriptor.getComponentTypeDescriptor(),
-            arrayLiteral.getValueExpressions().stream().map(Expression::getTypeDescriptor));
-    return arrayLiteral.toBuilder()
-        .setTypeDescriptor(arrayTypeDescriptor.withComponentTypeDescriptor(componentTypeDescriptor))
-        .build();
-  }
-
   /** Propagate nullability from one type argument to another, respecting parameter nullability. */
   private static TypeDescriptor propagateTypeArgumentNullabilityFrom(
       TypeVariable typeParameterDescriptor,
@@ -557,26 +562,29 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   }
 
   /**
-   * Propagates nullability from the usage site type to a function expression.
+   * Propagates nullability from the usage site type to an expression.
    *
    * <p>If the expression is a {@link FunctionExpression} (lambda), this method propagates
-   * nullability from the type expected at the usage site ({@code fromTypeDescriptor}) to the
-   * lambda's functional interface type descriptor.
+   * nullability from the type expected at the usage site ({@code expectedType}) to the expression's
+   * type descriptor.
    *
    * <p>For example, if a lambda is passed as an argument to a method expecting {@code
    * Consumer<@Nullable String>}, and the lambda has inferred type {@code Consumer<String>}, this
    * method updates the lambda's type to {@code Consumer<@Nullable String>}.
    */
-  private static Expression propagateNullabilityToFunctionExpression(
-      Expression toExpression, TypeDescriptor fromTypeDescriptor) {
-    return switch (toExpression) {
+  private static Expression propagateNullabilityToExpression(
+      Expression expression, TypeDescriptor expectedType) {
+    TypeDescriptor propagatedTypeDescriptor =
+        propagateNullabilityTo(expression.getTypeDescriptor(), expectedType, ImmutableSet.of());
+    if (propagatedTypeDescriptor == expression.getTypeDescriptor()) {
+      return expression;
+    }
+    return switch (expression) {
       case FunctionExpression functionExpression ->
           FunctionExpression.Builder.from(functionExpression)
-              .setTypeDescriptor(
-                  propagateNullabilityTo(
-                      toExpression.getTypeDescriptor(), fromTypeDescriptor, ImmutableSet.of()))
+              .setTypeDescriptor(propagatedTypeDescriptor)
               .build();
-      default -> toExpression;
+      default -> expression;
     };
   }
 
