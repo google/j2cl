@@ -1264,8 +1264,39 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .setAnonymousInnerClass(anonymousInnerClass)
         .setQualifier(qualifier)
         .setArguments(arguments)
-        .setTypeArguments(convertTypes(expression.getTypeArguments(), inNullMarkedScope()))
+        .setTypeArguments(
+            convertTypes(getNewInstanceTypeArguments(expression), inNullMarkedScope()))
         .build();
+  }
+
+  /** Returns the type arguments of the new instance expression. */
+  private List<? extends JCExpression> getNewInstanceTypeArguments(JCExpression expression) {
+    switch (expression) {
+      case JCNewClass newClass -> {
+        var classBody = newClass.getClassBody();
+        if (classBody == null) {
+          // This is a simple new instance expression without an anonymous inner class, the
+          // type arguments are directly in the JCNewClass node.
+          return newClass.getTypeArguments();
+        }
+
+        // Get the supertype to retrieve whether it is explicitly parameterized.
+        if (classBody.getExtendsClause() != null) {
+          return getNewInstanceTypeArguments(classBody.getExtendsClause());
+        }
+        return getNewInstanceTypeArguments(
+            Iterables.getOnlyElement(classBody.getImplementsClause()));
+      }
+      case JCTree.JCTypeApply typeApply -> {
+        // In the AST, a parametrized type is presented as a type application (the analogue of a
+        // method call where there is a target and arguments).
+        return typeApply.getTypeArguments();
+      }
+      default -> {
+        // The type is either not generic or has an implicit (diamond) parameterization.
+        return ImmutableList.of();
+      }
+    }
   }
 
   private Expression convertMethodInvocation(JCMethodInvocation methodInvocation) {
