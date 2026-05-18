@@ -1408,13 +1408,13 @@ public final class AstUtils {
       return false;
     }
 
-    // TODO(masonwu): Consider "@Wasm native ..." methods.
+    // TODO(b/481799839): Consider "@Wasm native ..." methods.
     if (memberDescriptor.isNative()) {
       return false;
     }
 
     // Exclude native js constructors.
-    // TODO(masonwu): Consider refactoring to have MethodDescriptor.isNative return true
+    // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true
     // for native constructors, or exposing isNativeConstructor from MethodDescriptor.
     if (memberDescriptor.isConstructor()
         && memberDescriptor.getEnclosingTypeDescriptor().isNative()) {
