@@ -1264,40 +1264,46 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .setAnonymousInnerClass(anonymousInnerClass)
         .setQualifier(qualifier)
         .setArguments(arguments)
-        .setTypeArguments(
-            convertTypes(getNewInstanceTypeArguments(expression), inNullMarkedScope()))
+        .setTypeArguments(convertTypes(getTypeArguments(expression), inNullMarkedScope()))
         .build();
   }
 
-  /** Returns the type arguments of the new instance expression. */
-  private List<? extends JCExpression> getNewInstanceTypeArguments(JCExpression expression) {
-    switch (expression) {
-      case JCNewClass newClass -> {
-        var classBody = newClass.getClassBody();
-        if (classBody == null) {
-          // This is a simple new instance expression without an anonymous inner class, the
-          // type arguments are directly in the JCNewClass node.
-          return newClass.getTypeArguments();
-        }
-
-        // Get the supertype to retrieve whether it is explicitly parameterized.
-        if (classBody.getExtendsClause() != null) {
-          return getNewInstanceTypeArguments(classBody.getExtendsClause());
-        }
-        return getNewInstanceTypeArguments(
-            Iterables.getOnlyElement(classBody.getImplementsClause()));
-      }
-      case JCTree.JCTypeApply typeApply -> {
-        // In the AST, a parametrized type is presented as a type application (the analogue of a
-        // method call where there is a target and arguments).
-        return typeApply.getTypeArguments();
-      }
-      default -> {
-        // The type is either not generic or has an implicit (diamond) parameterization.
-        return ImmutableList.of();
-      }
+  /**
+   * Returns the type arguments of the class in the new instance expression.
+   *
+   * <p>These are the type arguments of the class (e.g. {@code new A<X>()}), not the type arguments
+   * to the constructor declared type parameters.
+   */
+  private List<? extends JCExpression> getTypeArguments(JCNewClass newClass) {
+    var classBody = newClass.getClassBody();
+    if (classBody == null) {
+      return getClassTypeArguments(newClass.clazz);
     }
+
+    if (classBody.getExtendsClause() != null) {
+      return getClassTypeArguments(classBody.getExtendsClause());
+    }
+    return getClassTypeArguments(Iterables.getOnlyElement(classBody.getImplementsClause()));
   }
+
+  /**
+   * Returns the type arguments of a class in the AST.
+   *
+   * <p>In the javac AST class are represented syntactically, i.e. a class name might be an JCIndent
+   * (unqualified name), a JCFieldAccess for a qualified name (A.B) or a JCTypeApply for a
+   * parameterized type {@code A<A>}.
+   */
+  private List<? extends JCExpression> getClassTypeArguments(JCExpression expression) {
+    return switch (expression) {
+      // In the AST, a parametrized type is presented as a type application (the analogue of a
+      // method call where there is a target and arguments).
+      case JCTree.JCTypeApply typeApply -> typeApply.getTypeArguments();
+
+      // The type is either not generic or has an implicit (diamond) parameterization.
+      default -> ImmutableList.of();
+    };
+  }
+
 
   private Expression convertMethodInvocation(JCMethodInvocation methodInvocation) {
     MethodSymbol methodSymbol;
