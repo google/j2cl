@@ -1,0 +1,37 @@
+// Generated from "j2kt/NullabilityInferenceProblem12.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Suppress
+
+open class NullabilityInferenceProblem12<K> {
+ open fun test(): MyInterface<K> {
+  return Nested<K & Any>(
+   this@NullabilityInferenceProblem12 as NullabilityInferenceProblem12<K & Any>,
+  ) as MyInterface<K>
+ }
+ 
+ interface MyInterface<T>
+ 
+ internal open class Nested<N: Any>: MyInterface<N> {
+  internal constructor(outer: NullabilityInferenceProblem12<N>)
+ }
+}
