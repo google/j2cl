@@ -1,0 +1,62 @@
+// Generated from "j2ktnotpassing/NullabilityInferenceProblem11.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import java.lang.RuntimeException
+import kotlin.Any
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class NullabilityInferenceProblem11 {
+ companion object {
+  @JvmStatic
+  fun <X: Any> assertNotNull(ref: X?): X {
+   throw RuntimeException()
+  }
+  
+  @JvmStatic
+  internal fun <R> call_pp_j2ktnotpassing(callback: Callback<R>): R {
+   throw RuntimeException()
+  }
+  
+  @JvmStatic
+  fun <T: Any> test(): MyNode<T?> {
+   return NullabilityInferenceProblem11.call_pp_j2ktnotpassing<MyNode<T?>>(
+    Callback { node: MyNode<T?> ->
+     return@Callback NullabilityInferenceProblem11.assertNotNull<MyNode<T>>(
+      node.getChild(),
+     ) as MyNode<T?>
+    },
+   )
+  }
+ }
+ 
+ open class Node<T, N: Node<T, N>> {
+  open fun getChild(): N? {
+   return null
+  }
+ }
+ 
+ open class MyNode<T>: Node<T, MyNode<T>>()
+ 
+ fun interface Callback<R> {
+  fun run(arg: R): R
+ }
+}
