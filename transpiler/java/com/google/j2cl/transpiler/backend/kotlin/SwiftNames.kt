@@ -56,6 +56,11 @@ internal val MethodDescriptor.swiftName: String?
   }
 
 internal val TypeDeclaration.swiftName: String?
-  get() =
-    getAnnotation("com.google.j2objc.annotations.SwiftName")?.getStringValue("value")
-      ?: if (`package`.hasAnnotation("com.google.j2objc.annotations.SwiftName")) "" else null
+  get() {
+    val annotation = getAnnotation("com.google.j2objc.annotations.SwiftName")
+    return when {
+      annotation != null -> annotation.getStringValue("value") ?: ""
+      `package`.hasAnnotation("com.google.j2objc.annotations.SwiftName") -> ""
+      else -> null
+    }
+  }
