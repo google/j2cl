@@ -41,8 +41,8 @@ open class VoidType {
    val nullableVoidConsumer: Consumer<Void?> = Consumer { v_1: Void? ->
     v_1!!.hashCode()
    }
-   val nonNullVoidConsumerWildcard: Consumer<*> = Consumer { v_2: Void ->
-    v_2.hashCode()
+   val nonNullVoidConsumerWildcard: Consumer<*> = Consumer { v_2: Void? ->
+    v_2!!.hashCode()
    }
    val nullableVoidConsumerWildcard: Consumer<*> = Consumer { v_3: Void? ->
     v_3!!.hashCode()
