@@ -26,6 +26,13 @@ public final class NewInstanceWithImplicitNullableTypeArgument {
     public ParameterizedEmptyClass(T t) {}
   }
 
+  public static class SubParameterizedEmptyClass<T extends @Nullable Object>
+      extends ParameterizedEmptyClass<T> {
+    public SubParameterizedEmptyClass() {}
+
+    public SubParameterizedEmptyClass(T t) {}
+  }
+
   public static Object testFromArguments(@Nullable String nullableString) {
     return new ParameterizedEmptyClass<>(nullableString);
   }
@@ -48,4 +55,26 @@ public final class NewInstanceWithImplicitNullableTypeArgument {
   }
 
   public static void acceptOfNullableString(ParameterizedEmptyClass<@Nullable String> emptyClass) {}
+
+  public static void testFromSupertypeDeclaration() {
+    ParameterizedEmptyClass<@Nullable String> emptyClass = new SubParameterizedEmptyClass<>();
+  }
+
+  public static void testFromSupertypeAssignment() {
+    ParameterizedEmptyClass<@Nullable String> emptyClass;
+    emptyClass = new SubParameterizedEmptyClass<>();
+  }
+
+  public static ParameterizedEmptyClass<@Nullable String> testFromSupertypeReturnType() {
+    return new SubParameterizedEmptyClass<>();
+  }
+
+  public static void testFromSupertypeArgument() {
+    acceptOfNullableString(new SubParameterizedEmptyClass<>());
+  }
+
+  public static ParameterizedEmptyClass<@Nullable String> testFromSupertypeAndArguments(
+      @Nullable String nullableString) {
+    return new SubParameterizedEmptyClass<>(nullableString);
+  }
 }

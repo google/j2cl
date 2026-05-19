@@ -24,6 +24,13 @@ public class AnonymousClassWithNullableTypeArgument {
     V get();
   }
 
+  public static class SupplierImpl<V extends @Nullable Object> implements Supplier<V> {
+    @Override
+    public V get() {
+      throw new RuntimeException();
+    }
+  }
+
   public abstract static class AbstractHolder<V extends @Nullable Object> {
     public AbstractHolder(V value) {}
 
@@ -76,4 +83,47 @@ public class AnonymousClassWithNullableTypeArgument {
       }
     };
   }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierDeclaration() {
+    Supplier<@Nullable String> supplier =
+        new SupplierImpl<>() {
+          @Override
+          public @Nullable String get() {
+            return null;
+          }
+        };
+  }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierAssignment() {
+    Supplier<@Nullable String> supplier;
+    supplier =
+        new SupplierImpl<>() {
+          @Override
+          public @Nullable String get() {
+            return null;
+          }
+        };
+  }
+
+  public static Supplier<@Nullable String>
+      testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierReturnType() {
+    return new SupplierImpl<>() {
+      @Override
+      public @Nullable String get() {
+        return null;
+      }
+    };
+  }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierParameterType() {
+    acceptSupplierOfNullableString(
+        new SupplierImpl<>() {
+          @Override
+          public @Nullable String get() {
+            return null;
+          }
+        });
+  }
+
+  public static void acceptSupplierOfNullableString(Supplier<@Nullable String> supplier) {}
 }

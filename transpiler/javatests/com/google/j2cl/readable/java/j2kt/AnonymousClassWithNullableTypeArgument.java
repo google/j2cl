@@ -24,6 +24,13 @@ public class AnonymousClassWithNullableTypeArgument {
     V get();
   }
 
+  public static class SupplierImpl<V extends @Nullable Object> implements Supplier<V> {
+    @Override
+    public V get() {
+      throw new RuntimeException();
+    }
+  }
+
   public interface Consumer<V extends @Nullable Object> {
     void accept(V value);
   }
@@ -95,6 +102,52 @@ public class AnonymousClassWithNullableTypeArgument {
   //   };
   // }
 
+  // TODO(b/440316295): Uncomment when fixed
+  // public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierDeclaration()
+  // {
+  //   Supplier<@Nullable String> supplier =
+  //       new SupplierImpl<>() {
+  //         @Override
+  //         public @Nullable String get() {
+  //           return null;
+  //         }
+  //       };
+  // }
+  //
+  // public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierAssignment() {
+  //   Supplier<@Nullable String> supplier;
+  //   supplier =
+  //       new SupplierImpl<>() {
+  //         @Override
+  //         public @Nullable String get() {
+  //           return null;
+  //         }
+  //       };
+  // }
+  //
+  // public static Supplier<@Nullable String>
+  //     testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierReturnType() {
+  //   return new SupplierImpl<>() {
+  //     @Override
+  //     public @Nullable String get() {
+  //       return null;
+  //     }
+  //   };
+  // }
+  //
+  // public static void
+  // testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierParameterType() {
+  //   acceptSupplierOfNullableString(
+  //       new SupplierImpl<>() {
+  //         @Override
+  //         public @Nullable String get() {
+  //           return null;
+  //         }
+  //       });
+  // }
+  //
+  // public static void acceptSupplierOfNullableString(Supplier<@Nullable String> supplier) {}
+
   public static void testImplicitTypeArguments_inferredFromArgument() {
     new Holder<>(nullableString()) {};
   }
@@ -106,7 +159,13 @@ public class AnonymousClassWithNullableTypeArgument {
 
   public static class ParameterizedEmptyClass<T extends @Nullable Object> {}
 
+  public static class SubParameterizedEmptyClass<T extends @Nullable Object>
+      extends ParameterizedEmptyClass<T> {}
+
   public interface ParameterizedEmptyInterface<T extends @Nullable Object> {}
+
+  public interface SubParameterizedEmptyInterface<T extends @Nullable Object>
+      extends ParameterizedEmptyInterface<T> {}
 
   public static <T extends @Nullable Object>
       ParameterizedEmptyClass<@Nullable T> testExplicitSuperclassTypeArguments() {
@@ -176,5 +235,42 @@ public class AnonymousClassWithNullableTypeArgument {
           @Override
           public void accept(String string) {}
         });
+  }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeDeclaration() {
+    ParameterizedEmptyClass<@Nullable String> emptyClass = new SubParameterizedEmptyClass<>() {};
+  }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeAssignment() {
+    ParameterizedEmptyClass<@Nullable String> emptyClass;
+    emptyClass = new SubParameterizedEmptyClass<>() {};
+  }
+
+  public static ParameterizedEmptyClass<@Nullable String>
+      testAnonymousClass_implicitTypeArguments_fromSupertypeReturnType() {
+    return new SubParameterizedEmptyClass<>() {};
+  }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeParameterType() {
+    acceptOfNullableString(new SubParameterizedEmptyClass<>() {});
+  }
+
+  public static void testAnonymousInterface_implicitTypeArguments_fromSupertypeDeclaration() {
+    ParameterizedEmptyInterface<@Nullable String> emptyClass =
+        new SubParameterizedEmptyInterface<>() {};
+  }
+
+  public static void testAnonymousInterface_implicitTypeArguments_fromSupertypeAssignment() {
+    ParameterizedEmptyInterface<@Nullable String> emptyClass;
+    emptyClass = new SubParameterizedEmptyInterface<>() {};
+  }
+
+  public static ParameterizedEmptyInterface<@Nullable String>
+      testAnonymousInterface_implicitTypeArguments_fromSupertypeReturnType() {
+    return new SubParameterizedEmptyInterface<>() {};
+  }
+
+  public static void testAnonymousInterface_implicitTypeArguments_fromSupertypeParameterType() {
+    acceptOfNullableString(new SubParameterizedEmptyInterface<>() {});
   }
 }
