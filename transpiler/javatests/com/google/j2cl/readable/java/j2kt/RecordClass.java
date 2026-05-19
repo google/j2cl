@@ -16,38 +16,46 @@
 package j2kt;
 
 public final class RecordClass {
-
-  public static record RecordWithEmptyCopyMethod(int a, int b) {
+  public record RecordWithEmptyCopyMethod(int a, int b) {
     public RecordWithEmptyCopyMethod copy() {
       return new RecordWithEmptyCopyMethod(a, b);
     }
   }
 
-  public static record RecordWithPartialCopyMethod(int a, int b) {
+  public record RecordWithPartialCopyMethod(int a, int b) {
     public RecordWithPartialCopyMethod copy(int a) {
       return new RecordWithPartialCopyMethod(a, b);
     }
   }
 
-  public static record RecordWithFullCopyMethod(int a, int b) {
+  public record RecordWithFullCopyMethod(int a, int b) {
     public RecordWithFullCopyMethod copy(int a, int b) {
       return new RecordWithFullCopyMethod(a, b);
     }
   }
 
-  public static record RecordWithUnrelatedCopyMethod(int a, int b) {
+  public record RecordWithUnrelatedCopyMethod(int a, int b) {
     public RecordWithUnrelatedCopyMethod copy(String s) {
       return new RecordWithUnrelatedCopyMethod(s.length(), s.length());
     }
   }
 
-  public static record RecordWithComponentMethods(int a, int b) {
+  public record RecordWithComponentMethods(int a, int b) {
     public int component1() {
       return a;
     }
 
     public int component2() {
       return b;
+    }
+  }
+
+  public static final class FieldAccessTest {
+    public record SimpleRecord(int a) {}
+
+    public static void test(SimpleRecord r) {
+      // Field needs to be translated as `internal` to be accessible outside of the class.
+      int a = r.a;
     }
   }
 }

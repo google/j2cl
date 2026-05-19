@@ -26,6 +26,8 @@ import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 import kotlin.run
 
 class RecordClass {
@@ -274,6 +276,52 @@ class RecordClass {
    return this.getClass().getName() + Arrays.toString(
     arrayOf<Any?>(this.a, this.b),
    )
+  }
+ }
+ 
+ class FieldAccessTest {
+  companion object {
+   @JvmStatic
+   fun test(r: SimpleRecord?) {
+    val a: Int = r!!.a_private_3
+   }
+  }
+  
+  class SimpleRecord {
+   @JvmField
+   internal val a_private_3: Int
+   
+   constructor(a: Int) {
+    this.a_private_3 = a
+   }
+   
+   fun a(): Int {
+    return this.a_private_3
+   }
+   
+   override fun equals(arg0: Any?): Boolean {
+    var ___other: SimpleRecord? = null
+    if (!(arg0 is SimpleRecord && run {
+     ___other = arg0 as SimpleRecord?
+     true
+    })) return false
+    return Arrays.equals(
+     arrayOf<Any?>(this.a_private_3),
+     arrayOf<Any?>(___other!!.a_private_3),
+    )
+   }
+   
+   override fun hashCode(): Int {
+    return Arrays.hashCode(
+     arrayOf<Any?>(this.a_private_3),
+    )
+   }
+   
+   override fun toString(): String {
+    return this.getClass().getName() + Arrays.toString(
+     arrayOf<Any?>(this.a_private_3),
+    )
+   }
   }
  }
 }
