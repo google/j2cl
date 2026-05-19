@@ -27,7 +27,7 @@ open class TypeArgumentsInference {
  companion object {
   @JvmStatic
   fun <K> wildcardPair(): Pair<K, *> {
-   return Pair<K, Any>()
+   return Pair<K, Any?>()
   }
   
   @JvmStatic

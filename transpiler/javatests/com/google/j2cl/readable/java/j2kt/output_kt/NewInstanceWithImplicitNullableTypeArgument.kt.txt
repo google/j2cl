@@ -33,24 +33,24 @@ class NewInstanceWithImplicitNullableTypeArgument {
   
   @JvmStatic
   fun testFromDeclaration() {
-   val emptyClass: ParameterizedEmptyClass<String?> = ParameterizedEmptyClass<String>() as ParameterizedEmptyClass<String?>
+   val emptyClass: ParameterizedEmptyClass<String?> = ParameterizedEmptyClass<String?>()
   }
   
   @JvmStatic
   fun testFromAssignment() {
    var emptyClass: ParameterizedEmptyClass<String?>? = null
-   emptyClass = ParameterizedEmptyClass<String>() as ParameterizedEmptyClass<String?>?
+   emptyClass = ParameterizedEmptyClass<String?>()
   }
   
   @JvmStatic
   fun testFromReturnType(): ParameterizedEmptyClass<String?> {
-   return ParameterizedEmptyClass<String>() as ParameterizedEmptyClass<String?>
+   return ParameterizedEmptyClass<String?>()
   }
   
   @JvmStatic
   fun testImplicitTypeArguments_fromParameterType() {
    NewInstanceWithImplicitNullableTypeArgument.acceptOfNullableString(
-    ParameterizedEmptyClass<String>() as ParameterizedEmptyClass<String?>,
+    ParameterizedEmptyClass<String?>(),
    )
   }
   

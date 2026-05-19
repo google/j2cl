@@ -402,6 +402,44 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                 .setInitializer(rewrittenInitializer)
                 .build();
           }
+
+          @Override
+          public Node rewriteReturnStatement(ReturnStatement returnStatement) {
+            Expression expression = returnStatement.getExpression();
+            if (expression == null) {
+              return returnStatement;
+            }
+
+            MethodLike enclosingMethod = (MethodLike) getParent(MethodLike.class::isInstance);
+            Expression rewrittenExpression =
+                propagateNullabilityToExpression(
+                    expression, enclosingMethod.getDescriptor().getReturnTypeDescriptor());
+            if (rewrittenExpression.equals(expression)) {
+              return returnStatement;
+            }
+            changed[0] = true;
+            return ReturnStatement.Builder.from(returnStatement)
+                .setExpression(rewrittenExpression)
+                .build();
+          }
+
+          @Override
+          public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
+            if (!binaryExpression.getOperator().isSimpleAssignment()) {
+              return binaryExpression;
+            }
+            Expression rewrittenExpression =
+                propagateNullabilityToExpression(
+                    binaryExpression.getRightOperand(),
+                    binaryExpression.getLeftOperand().getTypeDescriptor());
+            if (rewrittenExpression.equals(binaryExpression.getRightOperand())) {
+              return binaryExpression;
+            }
+            changed[0] = true;
+            return BinaryExpression.Builder.from(binaryExpression)
+                .setRightOperand(rewrittenExpression)
+                .build();
+          }
         });
 
     return changed[0];
@@ -583,9 +621,9 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   /**
    * Propagates nullability from the usage site type to an expression.
    *
-   * <p>If the expression is a {@link FunctionExpression} (lambda), this method propagates
-   * nullability from the type expected at the usage site ({@code expectedType}) to the expression's
-   * type descriptor.
+   * <p>If the expression is a {@link FunctionExpression} (lambda) or {@link NewInstance}, this
+   * method propagates nullability from the type expected at the usage site ({@code expectedType})
+   * to the expression's type descriptor.
    *
    * <p>For example, if a lambda is passed as an argument to a method expecting {@code
    * Consumer<@Nullable String>}, and the lambda has inferred type {@code Consumer<String>}, this
@@ -602,6 +640,16 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       case FunctionExpression functionExpression ->
           FunctionExpression.Builder.from(functionExpression)
               .setTypeDescriptor(propagatedTypeDescriptor)
+              .build();
+      case NewInstance newInstance
+          when propagatedTypeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
+              && newInstance.getTypeArguments().isEmpty()
+              && newInstance.getAnonymousInnerClass() == null ->
+          NewInstance.Builder.from(newInstance)
+              .setTarget(
+                  MethodDescriptor.Builder.from(newInstance.getTarget())
+                      .setEnclosingTypeDescriptor(declaredTypeDescriptor)
+                      .build())
               .build();
       default -> expression;
     };
