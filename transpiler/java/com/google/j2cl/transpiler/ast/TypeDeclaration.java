@@ -815,11 +815,11 @@ public abstract class TypeDeclaration
   // - TODO(b/288145698): Native JsEnums are ignored (the annotation is removed on creation of
   // TypeDeclaration)
   // - The supertype of JsEnums is not modified (it is still Enum, not changed to Object).
-  private static final ThreadLocal<Boolean> implementWasmJsEnumSemantics =
+  private static final ThreadLocal<Boolean> implementWasmJsInteropSemantics =
       ThreadLocal.withInitial(() -> false);
 
-  public static void setImplementWasmJsEnumSemantics() {
-    implementWasmJsEnumSemantics.set(true);
+  public static void setImplementWasmJsInteropSemantics() {
+    implementWasmJsInteropSemantics.set(true);
   }
 
   TypeDeclaration acceptInternal(Processor processor) {
@@ -980,7 +980,7 @@ public abstract class TypeDeclaration
       }
 
       // TODO(b/181615162): Find a better way to expose different flavors of type models by backend.
-      if (getKind() == Kind.ENUM && isNative() && implementWasmJsEnumSemantics.get()) {
+      if (getKind() == Kind.ENUM && isNative() && implementWasmJsInteropSemantics.get()) {
         setJsEnumInfo(null);
         setNative(false);
       }
