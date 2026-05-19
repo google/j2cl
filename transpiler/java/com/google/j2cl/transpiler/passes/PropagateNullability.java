@@ -818,24 +818,70 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       DeclaredTypeDescriptor toDeclared, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
     switch (from) {
       case DeclaredTypeDescriptor fromDeclared -> {
-
-        // TODO(b/466683008): This should *always* find a supertype, but in some convoluted
-        // situations it doesn't. Move this down and checkNotNull once the bug is fixed.
-        DeclaredTypeDescriptor fromDeclaredSuper =
-            fromDeclared.findSupertype(toDeclared.getTypeDeclaration());
-
-        // For RAW type descriptors, propagate outer nullability only without type arguments.
-        if (toDeclared.isRaw() || fromDeclaredSuper == null || fromDeclaredSuper.isRaw()) {
+        if (toDeclared.isRaw()) {
           return toDeclared.toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
         }
 
+        DeclaredTypeDescriptor fromDeclaredSuper =
+            fromDeclared.findSupertype(toDeclared.getTypeDeclaration());
+
+        if (fromDeclaredSuper != null) {
+          if (fromDeclaredSuper.isRaw()) {
+            return toDeclared.toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
+          }
+
+          // Propagate nullability from a subtype to a supertype. This kind of situation happens,
+          // for example, when we inferring the type of a parameter from the type of the argument.
+          return toDeclared
+              .withTypeArguments(
+                  zip(
+                      toDeclared.getTypeDeclaration().getTypeParameterDescriptors(),
+                      toDeclared.getTypeArgumentDescriptors(),
+                      fromDeclaredSuper.getTypeArgumentDescriptors(),
+                      (a, b, c) -> propagateTypeArgumentNullabilityFrom(a, b, c, seen)))
+              .toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
+        }
+
+        // Find the supertype of the expression to see if we can propagate from a supertype. This
+        // kind of situation happens, for example, when inferring the type of a diamond
+        // instantiation from the type of the left-hand side of an assignment.
+        // Imagine this scenario:
+        //   Parent<String> parent = new Child<>();
+        DeclaredTypeDescriptor toDeclaredAsSuper =
+            toDeclared.findSupertype(fromDeclared.getTypeDeclaration());
+
+        if (toDeclaredAsSuper == null || toDeclaredAsSuper.isRaw()) {
+          return toDeclared.toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
+        }
+
+        // Propagate nullability from expected supertype (fromDeclared) to actual subtype viewed
+        // as supertype (toDeclaredAsSuper). Following the example above, from Child<...> we
+        // find Parent<...> and we can propagate now from Parent<String>.
+        DeclaredTypeDescriptor propagatedSuper =
+            (DeclaredTypeDescriptor) propagateNullabilityTo(toDeclaredAsSuper, fromDeclared, seen);
+
+        // Get the supertype of the type to propagate to starting from the declaration, to see what
+        // is the parameterization if the supertype.
+        DeclaredTypeDescriptor unparameterizedTo = toDeclared.getTypeDeclaration().toDescriptor();
+        // Retrieve the (potentially transitive) supertype, starting from the unparameterized type
+        // to deduce the parameterization
+        DeclaredTypeDescriptor inducedSupertype =
+            unparameterizedTo.findSupertype(fromDeclared.getTypeDeclaration());
+
+        ImmutableList<TypeVariable> typeParameters =
+            toDeclared.getTypeDeclaration().getTypeParameterDescriptors();
+        ImmutableList<TypeDescriptor> typeArguments = toDeclared.getTypeArgumentDescriptors();
+
+        ImmutableList<TypeDescriptor> newTypeArguments =
+            zip(
+                typeParameters,
+                typeArguments,
+                (typeParameter, typeArgument) ->
+                    propagateTypeArgumentNullabilityFromInferredType(
+                        typeParameter, typeArgument, inducedSupertype, propagatedSuper));
+
         return toDeclared
-            .withTypeArguments(
-                zip(
-                    toDeclared.getTypeDeclaration().getTypeParameterDescriptors(),
-                    toDeclared.getTypeArgumentDescriptors(),
-                    fromDeclaredSuper.getTypeArgumentDescriptors(),
-                    (a, b, c) -> propagateTypeArgumentNullabilityFrom(a, b, c, seen)))
+            .withTypeArguments(newTypeArguments)
             .toNullable(toDeclared.isNullable() || fromDeclared.isNullable());
       }
 

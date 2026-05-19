@@ -90,7 +90,7 @@ open class Main {
  private fun instanceMethod() {}
  
  open fun testJsFunctionErasureCasts() {
-  val list: MutableList<Function<String?, String?>?> = ArrayList<Function<String, String>>() as MutableList<Function<String?, String?>?>
+  val list: MutableList<Function<String?, String?>?> = ArrayList<Function<String?, String?>?>()
   Main.acceptsJsFunction(
    list.get(0),
   )
@@ -168,7 +168,7 @@ open class Main {
  
  internal open fun testFunctionExpressionTypeReplacement_pp_jsfunction() {
   val f: ParametricJsFunction<String?> = ParametricJsFunction { unused: String? ->
-   val l: MutableList<MutableList<*>?> = ArrayList<MutableList<*>>() as MutableList<MutableList<*>?>
+   val l: MutableList<MutableList<*>?> = ArrayList<MutableList<*>?>() as MutableList<MutableList<*>?>
    l.asMutableList().add(
     ArrayList<String>(),
    )

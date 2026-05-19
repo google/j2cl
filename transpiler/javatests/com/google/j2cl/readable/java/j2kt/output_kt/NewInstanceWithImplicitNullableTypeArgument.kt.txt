@@ -20,6 +20,7 @@ package j2kt
 
 import javaemul.lang.*
 import kotlin.Any
+import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
@@ -59,30 +60,39 @@ class NewInstanceWithImplicitNullableTypeArgument {
   
   @JvmStatic
   fun testFromSupertypeDeclaration() {
-   val emptyClass: ParameterizedEmptyClass<String?> = SubParameterizedEmptyClass<String>() as ParameterizedEmptyClass<String?>
+   val emptyClass: ParameterizedEmptyClass<String?> = SubParameterizedEmptyClass<String?>()
   }
   
   @JvmStatic
   fun testFromSupertypeAssignment() {
    var emptyClass: ParameterizedEmptyClass<String?>? = null
-   emptyClass = SubParameterizedEmptyClass<String>() as ParameterizedEmptyClass<String?>?
+   emptyClass = SubParameterizedEmptyClass<String?>()
   }
   
   @JvmStatic
   fun testFromSupertypeReturnType(): ParameterizedEmptyClass<String?> {
-   return SubParameterizedEmptyClass<String>() as ParameterizedEmptyClass<String?>
+   return SubParameterizedEmptyClass<String?>()
   }
   
   @JvmStatic
   fun testFromSupertypeArgument() {
    NewInstanceWithImplicitNullableTypeArgument.acceptOfNullableString(
-    SubParameterizedEmptyClass<String>() as ParameterizedEmptyClass<String?>,
+    SubParameterizedEmptyClass<String?>(),
    )
   }
   
   @JvmStatic
   fun testFromSupertypeAndArguments(nullableString: String?): ParameterizedEmptyClass<String?> {
    return SubParameterizedEmptyClass<String?>(nullableString)
+  }
+  
+  @JvmStatic
+  fun testWithMultpleTypeParameters() {
+   open class Parent<T> internal constructor()
+   open class Child<U, V>: Parent<V> {
+    internal constructor(u: U)
+   }
+   val parent: Parent<String> = Child<Int, String>(1)
   }
  }
  

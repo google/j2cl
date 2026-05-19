@@ -77,4 +77,12 @@ public final class NewInstanceWithImplicitNullableTypeArgument {
       @Nullable String nullableString) {
     return new SubParameterizedEmptyClass<>(nullableString);
   }
+
+  public static void testWithMultpleTypeParameters() {
+    class Parent<T extends @Nullable Object> {}
+    class Child<U extends @Nullable Object, V extends @Nullable Object> extends Parent<V> {
+      Child(U u) {}
+    }
+    Parent<String> parent = new Child<>(1);
+  }
 }
