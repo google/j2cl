@@ -90,6 +90,7 @@ internal data class AnnotationSources(val nameSources: NameSources) {
       setOf(
         "com.google.j2objc.annotations.ObjectiveCName",
         "com.google.j2objc.annotations.SwiftName",
+        "com.google.j2objc.annotations.ObjectiveCKmpMethod",
       )
 
     private fun hasGetTarget(annotation: Annotation, isProperty: Boolean): Boolean =
