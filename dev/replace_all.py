@@ -78,7 +78,8 @@ def blaze_test(readables):
       if not match: raise RuntimeError("Sponge link not found.")
       sponge_link = match.group(1)
       print(f"No test status for targets:\n {'\n '.join(broken_targets)}")
-      print(f"Sponge link: {sponge_link}")
+      print("\033[91mERROR:\033[0m Readables are stale.")
+      print(f"Check build results: \u001b[36m{sponge_link}\u001b[0m")
       sys.exit(1)
 
   return [target_to_readables[t] for t in failed_targets]
