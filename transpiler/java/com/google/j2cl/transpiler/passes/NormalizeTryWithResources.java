@@ -57,24 +57,24 @@ public class NormalizeTryWithResources extends NormalizationPass {
                 || !tryStatement.getCatchClauses().isEmpty()) {
               // See JLS 14.20.3.2
               TryStatement tryBlock =
-                  TryStatement.newBuilder()
+                  TryStatement.builder()
                       .setSourcePosition(sourcePosition)
                       .setResourceDeclarations(tryStatement.getResourceDeclarations())
                       .setBody(tryStatement.getBody())
                       .build();
               Block refactoredTryBlock =
-                  Block.newBuilder()
+                  Block.builder()
                       .setSourcePosition(tryBlock.getSourcePosition())
                       .setStatements(removeResourceDeclarations(tryBlock))
                       .build();
-              return TryStatement.newBuilder()
+              return TryStatement.builder()
                   .setSourcePosition(sourcePosition)
                   .setBody(refactoredTryBlock)
                   .setCatchClauses(tryStatement.getCatchClauses())
                   .setFinallyBlock(tryStatement.getFinallyBlock())
                   .build();
             }
-            return Block.newBuilder()
+            return Block.builder()
                 .setSourcePosition(sourcePosition)
                 .setStatements(removeResourceDeclarations(tryStatement))
                 .build();
@@ -116,14 +116,14 @@ public class NormalizeTryWithResources extends NormalizationPass {
   private static List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
     SourcePosition sourcePosition = tryStatement.getSourcePosition();
     Variable primaryException =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("$primaryExc")
             .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
 
     List<Statement> transformedStatements = new ArrayList<>();
     transformedStatements.add(
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclaration(
                 primaryException, primaryException.getTypeDescriptor().getNullValue())
             .build()
@@ -141,7 +141,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
       Variable originalVariable = originalResourceDeclaration.getVariable();
       originalVariable.setFinal(false);
       transformedStatements.add(
-          VariableDeclarationExpression.newBuilder()
+          VariableDeclarationExpression.builder()
               .addVariableDeclaration(
                   originalVariable, originalVariable.getTypeDescriptor().getNullValue())
               .build()
@@ -156,7 +156,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
     tryBlockBodyStatements.addAll(tryStatement.getBody().getStatements());
 
     Variable exceptionFromTry =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("$exceptionFromTry")
             .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
@@ -167,7 +167,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
                 .setRightOperand(exceptionFromTry)
                 .build()
                 .makeStatement(sourcePosition),
-            ThrowStatement.newBuilder()
+            ThrowStatement.builder()
                 .setSourcePosition(sourcePosition)
                 .setExpression(exceptionFromTry.createReference())
                 .build());
@@ -189,14 +189,14 @@ public class NormalizeTryWithResources extends NormalizationPass {
     }
 
     ThrowStatement throwPrimaryException =
-        ThrowStatement.newBuilder()
+        ThrowStatement.builder()
             .setSourcePosition(sourcePosition)
             .setExpression(primaryException.createReference())
             .build();
     Expression primaryExceptionNotEqualsNull =
         primaryException.createReference().infixNotEqualsNull();
     IfStatement primaryExceptionNullStatement =
-        IfStatement.newBuilder()
+        IfStatement.builder()
             .setSourcePosition(sourcePosition)
             .setConditionExpression(primaryExceptionNotEqualsNull)
             .setThenStatement(throwPrimaryException)
@@ -204,26 +204,26 @@ public class NormalizeTryWithResources extends NormalizationPass {
     finallyBlockStatements.add(primaryExceptionNullStatement);
 
     CatchClause catchTryException =
-        CatchClause.newBuilder()
+        CatchClause.builder()
             .setExceptionVariable(exceptionFromTry)
             .setBody(
-                Block.newBuilder()
+                Block.builder()
                     .setSourcePosition(sourcePosition)
                     .setStatements(catchBlockStatements)
                     .build())
             .build();
 
     transformedStatements.add(
-        TryStatement.newBuilder()
+        TryStatement.builder()
             .setSourcePosition(sourcePosition)
             .setBody(
-                Block.newBuilder()
+                Block.builder()
                     .setSourcePosition(sourcePosition)
                     .setStatements(tryBlockBodyStatements)
                     .build())
             .setCatchClauses(catchTryException)
             .setFinallyBlock(
-                Block.newBuilder()
+                Block.builder()
                     .setSourcePosition(sourcePosition)
                     .setStatements(finallyBlockStatements)
                     .build())

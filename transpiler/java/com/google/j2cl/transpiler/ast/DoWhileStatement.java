@@ -58,20 +58,16 @@ public class DoWhileStatement extends LoopStatement {
   }
 
   @Override
-  Builder toBuilder() {
+  public Builder toBuilder() {
     return new Builder(this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
   }
 
   /** A Builder for DoWhileStatement. */
   public static class Builder extends LoopStatement.Builder<Builder, DoWhileStatement> {
-
-    public static Builder from(DoWhileStatement doWhileStatement) {
-      return new Builder(doWhileStatement);
-    }
 
     private Builder() {}
 

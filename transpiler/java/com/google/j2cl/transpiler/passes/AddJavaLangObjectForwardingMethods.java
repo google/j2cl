@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
@@ -102,7 +101,7 @@ public class AddJavaLangObjectForwardingMethods extends NormalizationPass {
   // TODO(goktug): Refactor to reuse with other similar super forwarding helpers.
   private static Method createSuperForwardingMethod(Type type, MethodDescriptor targetMethod) {
     MethodDescriptor forwardingMethod =
-        MethodDescriptor.Builder.from(targetMethod)
+        targetMethod.toBuilder()
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .makeDeclaration()
             .setNative(false)

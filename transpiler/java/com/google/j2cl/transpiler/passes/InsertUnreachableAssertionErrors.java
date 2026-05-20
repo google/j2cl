@@ -91,7 +91,7 @@ public class InsertUnreachableAssertionErrors extends NormalizationPass {
               return functionExpression;
             }
 
-            return FunctionExpression.Builder.from(functionExpression)
+            return functionExpression.toBuilder()
                 .setStatements(
                     new ImmutableList.Builder<Statement>()
                         .addAll(functionExpression.getBody().getStatements())
@@ -112,7 +112,7 @@ public class InsertUnreachableAssertionErrors extends NormalizationPass {
             switchExpression
                 .getCases()
                 .add(
-                    SwitchCaseDefault.newBuilder()
+                    SwitchCaseDefault.builder()
                         .setStatements(createThrowStatement(switchExpression.getSourcePosition()))
                         .setCanFallthrough(false)
                         .build());
@@ -127,9 +127,9 @@ public class InsertUnreachableAssertionErrors extends NormalizationPass {
             .javaLangAssertionError
             .getMethodDescriptor("<init>", TypeDescriptors.get().javaLangObject);
 
-    return ThrowStatement.newBuilder()
+    return ThrowStatement.builder()
         .setExpression(
-            NewInstance.newBuilder()
+            NewInstance.builder()
                 .setTarget(errorConstructor)
                 .setArguments(new StringLiteral("Unreachable"))
                 .build())

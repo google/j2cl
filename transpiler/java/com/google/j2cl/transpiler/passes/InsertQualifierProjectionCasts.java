@@ -112,7 +112,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
                 describer.getDescription(typeDescriptor),
                 describer.getDescription(projectedTypeDescriptor));
 
-            return CastExpression.newBuilder()
+            return CastExpression.builder()
                 .setExpression(expression)
                 .setCastTypeDescriptor(projectedTypeDescriptor)
                 .build();
@@ -128,7 +128,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
               return fieldAccess;
             }
 
-            return FieldAccess.Builder.from(fieldAccess)
+            return fieldAccess.toBuilder()
                 .setQualifier(projectExpression(fieldAccess.getQualifier()))
                 .build();
           }
@@ -144,7 +144,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
               return invocation;
             }
 
-            return Invocation.Builder.from(invocation)
+            return invocation.toBuilder()
                 .setQualifier(projectExpression(invocation.getQualifier()))
                 .build();
           }

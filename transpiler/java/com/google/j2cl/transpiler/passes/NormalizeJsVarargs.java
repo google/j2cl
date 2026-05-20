@@ -124,17 +124,13 @@ public class NormalizeJsVarargs extends NormalizationPass {
 
       List<Expression> extractedVarargsArguments = extractVarargsArguments(lastArgument);
       if (extractedVarargsArguments != null) {
-        return MethodCall.Builder.from(invocation)
-            .replaceVarargsArgument(extractedVarargsArguments)
-            .build();
+        return invocation.toBuilder().replaceVarargsArgument(extractedVarargsArguments).build();
       }
 
       // Pass the array expression with a spread. Note that in Java such array expression can be
       // null and if the method does not dereference it there will be no error. But applying the
       // spread operator to null results in a JavaScript error.
-      return MethodCall.Builder.from(invocation)
-          .replaceVarargsArgument(lastArgument.prefixSpread())
-          .build();
+      return invocation.toBuilder().replaceVarargsArgument(lastArgument.prefixSpread()).build();
     }
   }
 
@@ -165,7 +161,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       if (numberLiteral.getValue().intValue() == 0) {
         // This is newArray of zero length, even if it didn't have an initializer we can provide
         // and empty array literal of the right type.
-        return ArrayLiteral.newBuilder().setTypeDescriptor(newArray.getTypeDescriptor()).build();
+        return ArrayLiteral.builder().setTypeDescriptor(newArray.getTypeDescriptor()).build();
       }
     }
 

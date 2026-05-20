@@ -91,7 +91,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
           @Override
           public Method rewriteMethod(Method method) {
             if (triggersClinit(method.getDescriptor(), type)) {
-              return Method.Builder.from(method)
+              return method.toBuilder()
                   .addStatement(
                       0,
                       createClinitCallStatement(
@@ -107,7 +107,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   /** Synthesize a static initializer block that calls the necessary super type clinits. */
   private static void synthesizeSuperClinitCalls(Type type) {
     Block.Builder staticInitializerBuilder =
-        Block.newBuilder().setSourcePosition(type.getSourcePosition());
+        Block.builder().setSourcePosition(type.getSourcePosition());
 
     if (implementsClinitMethod(type.getSuperTypeDescriptor())) {
       staticInitializerBuilder.addStatement(
@@ -154,7 +154,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   }
 
   static Expression createClinitCallExpression(DeclaredTypeDescriptor typeDescriptor) {
-    return MethodCall.Builder.from(typeDescriptor.getClinitMethodDescriptor()).build();
+    return MethodCall.builderFrom(typeDescriptor.getClinitMethodDescriptor()).build();
   }
 
   /**

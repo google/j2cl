@@ -67,7 +67,7 @@ public class SwitchStatement extends Statement implements SwitchConstruct<Switch
 
   @Override
   public SwitchStatement clone() {
-    return SwitchStatement.newBuilder()
+    return SwitchStatement.builder()
         .setSourcePosition(getSourcePosition())
         .setExpression(expression.clone())
         .setCases(AstUtils.clone(cases))
@@ -80,12 +80,20 @@ public class SwitchStatement extends Statement implements SwitchConstruct<Switch
     return Visitor_SwitchStatement.visit(processor, this);
   }
 
-  @Override
-  public Builder toBuilder() {
-    return Builder.from(this);
+  public static Builder builderFrom(SwitchConstruct<?> switchConstruct) {
+    return builder()
+        .setSourcePosition(switchConstruct.getSourcePosition())
+        .setExpression(switchConstruct.getExpression())
+        .setCases(switchConstruct.getCases())
+        .setAllowsNulls(switchConstruct.allowsNulls());
   }
 
-  public static Builder newBuilder() {
+  @Override
+  public Builder toBuilder() {
+    return builderFrom(this);
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -93,17 +101,8 @@ public class SwitchStatement extends Statement implements SwitchConstruct<Switch
   public static class Builder implements SwitchConstruct.Builder<SwitchStatement> {
     private Expression expression;
     private List<SwitchCase> switchCases = new ArrayList<>();
-
     private boolean allowsNulls;
     private SourcePosition sourcePosition;
-
-    public static <T extends SwitchConstruct<T>> Builder from(SwitchConstruct<T> switchConstruct) {
-      return newBuilder()
-          .setSourcePosition(switchConstruct.getSourcePosition())
-          .setExpression(switchConstruct.getExpression())
-          .setCases(switchConstruct.getCases())
-          .setAllowsNulls(switchConstruct.allowsNulls());
-    }
 
     @Override
     @CanIgnoreReturnValue

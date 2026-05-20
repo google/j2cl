@@ -277,7 +277,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return arrayAccess;
     }
 
-    return ArrayAccess.Builder.from(arrayAccess)
+    return arrayAccess.toBuilder()
         .setArrayExpression(arrayExpression)
         .setIndexExpression(indexExpression)
         .build();
@@ -295,7 +295,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return arrayLength;
     }
 
-    return ArrayLength.Builder.from(arrayLength).setArrayExpression(arrayExpression).build();
+    return arrayLength.toBuilder().setArrayExpression(arrayExpression).build();
   }
 
   @Override
@@ -322,7 +322,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return arrayLiteral;
     }
 
-    return ArrayLiteral.newBuilder()
+    return ArrayLiteral.builder()
         .setTypeDescriptor(typeDescriptor)
         .setValueExpressions(valueExpressions)
         .build();
@@ -343,10 +343,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return assertStatement;
     }
 
-    return AssertStatement.Builder.from(assertStatement)
-        .setExpression(expression)
-        .setMessage(message)
-        .build();
+    return assertStatement.toBuilder().setExpression(expression).setMessage(message).build();
   }
 
   @Override
@@ -419,7 +416,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         && rightOperand == binaryExpression.getRightOperand()) {
       return binaryExpression;
     }
-    return BinaryExpression.Builder.from(binaryExpression)
+    return binaryExpression.toBuilder()
         .setLeftOperand(leftOperand)
         .setRightOperand(rightOperand)
         .build();
@@ -451,7 +448,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         && falseExpression == conditionalExpression.getFalseExpression()) {
       return conditionalExpression;
     }
-    return ConditionalExpression.Builder.from(conditionalExpression)
+    return conditionalExpression.toBuilder()
         .setConditionExpression(conditionExpression)
         .setTrueExpression(trueExpression)
         .setFalseExpression(falseExpression)
@@ -476,7 +473,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return field;
     }
 
-    return Field.Builder.from(field).setInitializer(initializer).build();
+    return field.toBuilder().setInitializer(initializer).build();
   }
 
   @Nullable
@@ -513,9 +510,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return loopStatement;
     }
 
-    return LoopStatement.Builder.from(loopStatement)
-        .setConditionExpression(conditionExpression)
-        .build();
+    return loopStatement.toBuilder().setConditionExpression(conditionExpression).build();
   }
 
   @Override
@@ -529,9 +524,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return forEachStatement;
     }
 
-    return ForEachStatement.Builder.from(forEachStatement)
-        .setIterableExpression(iterableExpression)
-        .build();
+    return forEachStatement.toBuilder().setIterableExpression(iterableExpression).build();
   }
 
   @Override
@@ -545,9 +538,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return forInStatement;
     }
 
-    return JsForInStatement.Builder.from(forInStatement)
-        .setIterableExpression(iterableExpression)
-        .build();
+    return forInStatement.toBuilder().setIterableExpression(iterableExpression).build();
   }
 
   @Override
@@ -592,16 +583,14 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return ifStatement;
     }
 
-    return IfStatement.Builder.from(ifStatement)
-        .setConditionExpression(conditionExpression)
-        .build();
+    return ifStatement.toBuilder().setConditionExpression(conditionExpression).build();
   }
 
   @Override
   public MemberReference rewriteInvocation(Invocation invocation) {
     List<Expression> rewrittenArguments = rewriteMethodInvocationContextArguments(invocation);
     if (!rewrittenArguments.equals(invocation.getArguments())) {
-      invocation = Invocation.Builder.from(invocation).setArguments(rewrittenArguments).build();
+      invocation = invocation.toBuilder().setArguments(rewrittenArguments).build();
     }
     return rewriteMemberReference(invocation);
   }
@@ -614,12 +603,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     if (rewrittenQualifier == memberReference.getQualifier()) {
       return memberReference;
     }
-    return MemberReference.Builder.from(memberReference).setQualifier(rewrittenQualifier).build();
+    return memberReference.toBuilder().setQualifier(rewrittenQualifier).build();
   }
 
   @Override
   public Node rewriteMethodReference(MethodReference methodReference) {
-    return MethodReference.Builder.from(methodReference)
+    return methodReference.toBuilder()
         .setQualifier(
             rewriteInstanceQualifier(
                 methodReference.getQualifier(), methodReference.getReferencedMethodDescriptor()))
@@ -636,9 +625,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
               instanceOfExpression.getExpression());
 
       if (expression != instanceOfExpression.getExpression()) {
-        return InstanceOfExpression.Builder.from(instanceOfExpression)
-            .setExpression(expression)
-            .build();
+        return instanceOfExpression.toBuilder().setExpression(expression).build();
       }
     }
 
@@ -655,7 +642,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     if (dimensionExpressions.equals(newArray.getDimensionExpressions())) {
       return newArray;
     }
-    return NewArray.Builder.from(newArray).setDimensionExpressions(dimensionExpressions).build();
+    return newArray.toBuilder().setDimensionExpressions(dimensionExpressions).build();
   }
 
   @Override
@@ -674,7 +661,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     // TODO(b/206415539): Perform the appropriate rewriting for compound assignments.
-    return PostfixExpression.Builder.from(postfixExpression).setOperand(operand).build();
+    return postfixExpression.toBuilder().setOperand(operand).build();
   }
 
   @Override
@@ -693,7 +680,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     // TODO(b/206415539): Perform the appropriate rewriting for compound assignments.
-    return PrefixExpression.Builder.from(prefixExpression).setOperand(operand).build();
+    return prefixExpression.toBuilder().setOperand(operand).build();
   }
 
   @Override
@@ -717,7 +704,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return returnStatement;
     }
 
-    return ReturnStatement.Builder.from(returnStatement).setExpression(expression).build();
+    return returnStatement.toBuilder().setExpression(expression).build();
   }
 
   @Override
@@ -731,7 +718,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return yieldStatement;
     }
 
-    return YieldStatement.Builder.from(yieldStatement).setExpression(expression).build();
+    return yieldStatement.toBuilder().setExpression(expression).build();
   }
 
   @Override
@@ -778,7 +765,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public SynchronizedStatement rewriteSynchronizedStatement(
       SynchronizedStatement synchronizedStatement) {
     // unary numeric promotion
-    return SynchronizedStatement.Builder.from(synchronizedStatement)
+    return synchronizedStatement.toBuilder()
         .setExpression(
             contextRewriter.rewriteNonNullTypeConversionContext(
                 synchronizedStatement.getExpression().getTypeDescriptor(),
@@ -790,7 +777,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public ThrowStatement rewriteThrowStatement(ThrowStatement throwStatement) {
     Expression expression = throwStatement.getExpression();
-    return ThrowStatement.Builder.from(throwStatement)
+    return throwStatement.toBuilder()
         .setExpression(
             contextRewriter.rewriteNonNullTypeConversionContext(
                 TypeDescriptors.get().javaLangThrowable,
@@ -817,9 +804,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return variableDeclaration;
     }
 
-    return VariableDeclarationFragment.Builder.from(variableDeclaration)
-        .setInitializer(initializer)
-        .build();
+    return variableDeclaration.toBuilder().setInitializer(initializer).build();
   }
 
   private MethodLike getEnclosingMethodLike() {

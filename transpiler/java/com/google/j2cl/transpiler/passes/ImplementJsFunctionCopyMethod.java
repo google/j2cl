@@ -48,7 +48,7 @@ public class ImplementJsFunctionCopyMethod extends NormalizationPass {
   // TODO(b/80269359): may copy Objects methods (equals, hashCode, etc. ) as well.
   private static void synthesizeCopyMethod(Type type) {
     Variable fromParameter =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("from")
             .setTypeDescriptor(TypeDescriptors.getUnknownType())
             .setParameter(true)
@@ -56,7 +56,7 @@ public class ImplementJsFunctionCopyMethod extends NormalizationPass {
             .build();
 
     Variable toParameter =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("to")
             .setTypeDescriptor(TypeDescriptors.getUnknownType())
             .setParameter(true)
@@ -64,22 +64,22 @@ public class ImplementJsFunctionCopyMethod extends NormalizationPass {
             .build();
 
     Method.Builder methodBuilder =
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(type.getTypeDescriptor().getCopyMethodDescriptor())
             .setParameters(fromParameter, toParameter)
             .setSourcePosition(SourcePosition.NONE);
 
     for (Field field : type.getInstanceFields()) {
       methodBuilder.addStatements(
-          BinaryExpression.newBuilder()
+          BinaryExpression.builder()
               .setLeftOperand(
-                  FieldAccess.newBuilder()
+                  FieldAccess.builder()
                       .setQualifier(toParameter.createReference())
                       .setTarget(field.getDescriptor())
                       .build())
               .setOperator(BinaryOperator.ASSIGN)
               .setRightOperand(
-                  FieldAccess.newBuilder()
+                  FieldAccess.builder()
                       .setQualifier(fromParameter.createReference())
                       .setTarget(field.getDescriptor())
                       .build())
@@ -87,9 +87,9 @@ public class ImplementJsFunctionCopyMethod extends NormalizationPass {
               .makeStatement(SourcePosition.NONE));
     }
     methodBuilder.addStatements(
-        BinaryExpression.newBuilder()
+        BinaryExpression.builder()
             .setLeftOperand(
-                FieldAccess.newBuilder()
+                FieldAccess.builder()
                     .setQualifier(toParameter.createReference())
                     .setTarget(type.getTypeDescriptor().getIsInstanceMarkerField())
                     .build())

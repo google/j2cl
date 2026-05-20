@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -68,42 +69,47 @@ public class Field extends Member {
     return Visitor_Field.visit(processor, this);
   }
 
+  public Builder toBuilder() {
+    return builder()
+        .setDescriptor(this.getDescriptor())
+        .setInitializer(this.getInitializer())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static Builder builderFrom(FieldDescriptor fieldDescriptor) {
+    return builder().setDescriptor(fieldDescriptor);
+  }
+
   /** A Builder for Field. */
   public static class Builder {
     private FieldDescriptor fieldDescriptor;
     private Expression initializer;
     private SourcePosition sourcePosition;
 
-    public static Builder from(Field field) {
-      Builder builder = new Builder();
-      builder.fieldDescriptor = field.getDescriptor();
-      builder.initializer = field.getInitializer();
-      builder.sourcePosition = field.getSourcePosition();
-      return builder;
-    }
-
-    public static Builder from(FieldDescriptor fieldDescriptor) {
-      return new Builder().setDescriptor(fieldDescriptor);
-    }
-
+    @CanIgnoreReturnValue
     public Builder setDescriptor(FieldDescriptor fieldDescriptor) {
       this.fieldDescriptor = fieldDescriptor;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setInitializer(Expression initializer) {
       this.initializer = initializer;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setEnclosingClass(DeclaredTypeDescriptor enclosingTypeDescriptor) {
       this.fieldDescriptor =
-          FieldDescriptor.Builder.from(fieldDescriptor)
-              .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-              .build();
+          fieldDescriptor.toBuilder().setEnclosingTypeDescriptor(enclosingTypeDescriptor).build();
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;

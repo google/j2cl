@@ -45,7 +45,7 @@ public final class SwitchCaseDefault extends SwitchCase {
 
   @Override
   public SwitchCaseDefault clone() {
-    return newBuilder()
+    return builder()
         .setStatements(AstUtils.clone(statements))
         .setCanFallthrough(canFallthrough())
         .setSourcePosition(getSourcePosition())
@@ -53,28 +53,28 @@ public final class SwitchCaseDefault extends SwitchCase {
   }
 
   @Override
-  public Builder toBuilder() {
-    return Builder.from(this);
-  }
-
-  public static Builder newBuilder() {
-    return new Builder();
-  }
-
-  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_SwitchCaseDefault.visit(processor, this);
   }
 
-  /** A Builder for SwitchCase. */
-  public static class Builder extends SwitchCase.Builder<Builder, SwitchCaseDefault> {
+  @Override
+  public Builder toBuilder() {
+    return builderFrom(this);
+  }
 
-    public static Builder from(SwitchCase switchCase) {
-      return newBuilder()
-          .setStatements(switchCase.getStatements())
-          .setCanFallthrough(switchCase.canFallthrough())
-          .setSourcePosition(switchCase.getSourcePosition());
-    }
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static Builder builderFrom(SwitchCase switchCase) {
+    return builder()
+        .setStatements(switchCase.getStatements())
+        .setCanFallthrough(switchCase.canFallthrough())
+        .setSourcePosition(switchCase.getSourcePosition());
+  }
+
+  /** A Builder for SwitchCaseDefault. */
+  public static class Builder extends SwitchCase.Builder<Builder, SwitchCaseDefault> {
 
     @Override
     public SwitchCaseDefault build() {

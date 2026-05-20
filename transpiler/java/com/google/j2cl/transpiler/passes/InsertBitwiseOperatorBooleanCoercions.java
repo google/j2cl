@@ -44,7 +44,7 @@ public class InsertBitwiseOperatorBooleanCoercions extends NormalizationPass {
               checkArgument(!binaryExpression.getOperator().isCompoundAssignment());
               // Perform the following transformation:
               //   boolExp1 ^ boolExp2" -> "!!(+(boolExp1) ^ +(boolExp2))
-              return BinaryExpression.Builder.from(binaryExpression)
+              return binaryExpression.toBuilder()
                   .setLeftOperand(binaryExpression.getLeftOperand().prefixPlus())
                   .setRightOperand(binaryExpression.getRightOperand().prefixPlus())
                   .build()

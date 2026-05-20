@@ -37,7 +37,7 @@ public abstract class PackageDeclaration implements HasAnnotations {
   @Override
   public abstract ImmutableList<Annotation> getAnnotations();
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_PackageDeclaration.Builder().setAnnotations(ImmutableList.of());
   }
 

@@ -392,7 +392,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   /** Returns the class initializer method descriptor for a particular type. */
   @Memoized
   public MethodDescriptor getClinitMethodDescriptor() {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
         .setEnclosingTypeDescriptor(this)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
@@ -404,7 +404,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   /** Returns the class initializer property as a field for a particular type. */
   @Memoized
   public FieldDescriptor getClinitFieldDescriptor() {
-    return FieldDescriptor.newBuilder()
+    return FieldDescriptor.builder()
         .setEnclosingTypeDescriptor(this)
         .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
@@ -416,7 +416,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   /** Returns the instance initializer method descriptor for a particular type. */
   @Memoized
   public MethodDescriptor getInitMethodDescriptor() {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setName(MethodDescriptor.INIT_METHOD_NAME)
         .setEnclosingTypeDescriptor(this)
         .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
@@ -427,7 +427,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   /** Returns the method descriptor for $isInstance. */
   @Memoized
   public MethodDescriptor getIsInstanceMethodDescriptor() {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
         .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toDescriptor())
         .setParameterTypeDescriptors(TypeDescriptors.getUnknownType())
@@ -440,7 +440,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   /** Returns the method descriptor for $markImplementor. */
   @Memoized
   public MethodDescriptor getMarkImplementorMethodDescriptor() {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setName(MethodDescriptor.MARK_IMPLEMENTOR_METHOD_NAME)
         .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toDescriptor())
         .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
@@ -453,7 +453,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   /** Returns the field descriptor for the instanceof checking marker field. */
   public FieldDescriptor getIsInstanceMarkerField() {
     checkState(isInterface() || isJsFunctionImplementation());
-    return FieldDescriptor.newBuilder()
+    return FieldDescriptor.builder()
         .setName(isJsFunctionImplementation() ? "$is" : "$implements")
         .setEnclosingTypeDescriptor(this)
         .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
@@ -464,7 +464,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   /** Returns the method descriptor for $copy. */
   @Memoized
   public MethodDescriptor getCopyMethodDescriptor() {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setName(MethodDescriptor.COPY_METHOD_NAME)
         .setEnclosingTypeDescriptor(
             getMetadataConstructorReference().getReferencedTypeDeclaration().toDescriptor())
@@ -478,7 +478,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
 
   /** Returns the FieldDescriptor corresponding to the enclosing class instance. */
   public FieldDescriptor getFieldDescriptorForEnclosingInstance() {
-    return FieldDescriptor.newBuilder()
+    return FieldDescriptor.builder()
         .setEnclosingTypeDescriptor(getDeclarationDescriptor())
         .setName("$outer_this")
         .setTypeDescriptor(getEnclosingTypeDescriptor().toNonNullable())
@@ -1063,7 +1063,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     // TODO(b/271144313): Cleanup when a category EXPOSING_JSNAME_BRIDGE is added.
     boolean isFinal = origin == MethodOrigin.GENERALIZING_BRIDGE && !exposesJsMethod;
 
-    return MethodDescriptor.Builder.from(bridgeMethodDescriptor)
+    return bridgeMethodDescriptor.toBuilder()
         .setParameterDescriptors(
             computeParameterDescriptors(bridgeMethodDescriptor, targetMethodDescriptor))
         .setReturnTypeDescriptor(
@@ -1411,11 +1411,11 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
 
   abstract Builder toBuilder();
 
-  static Builder newBuilder() {
+  static Builder builder() {
     return new AutoValue_DeclaredTypeDescriptor.Builder();
   }
 
-  /** Builder for a TypeDescriptor. */
+  /** Builder for a DeclaredTypeDescriptor. */
   @AutoValue.Builder
   public abstract static class Builder {
 

@@ -73,9 +73,9 @@ public class AddAbstractMethodStubs extends NormalizationPass {
                 return;
               }
               type.addMember(
-                  Method.newBuilder()
+                  Method.builder()
                       .setMethodDescriptor(
-                          MethodDescriptor.Builder.from(m)
+                          m.toBuilder()
                               .setEnclosingTypeDescriptor(type.getTypeDescriptor())
                               .makeAbstractStub(m)
                               .build())

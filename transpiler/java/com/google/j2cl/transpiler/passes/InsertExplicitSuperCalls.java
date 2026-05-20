@@ -62,7 +62,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
   private static void synthesizeSuperCall(Method constructor, Type type) {
     MethodDescriptor superConstructor = getDefaultSuperConstructorTarget(type);
     MethodCall superMethodCall =
-        MethodCall.Builder.from(superConstructor)
+        MethodCall.builderFrom(superConstructor)
             .setArguments(AstUtils.maybePackageVarargs(superConstructor, ImmutableList.of()))
             .build();
     constructor

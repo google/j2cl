@@ -49,7 +49,7 @@ public final class InsertNumericCoercionsForAutoboxing extends NormalizationPass
                 if (expression.getTypeDescriptor().isPrimitive()
                     && inferredTypeDescriptor.isTypeVariable()
                     && !inferredTypeDescriptor.isWildcardOrCapture()) {
-                  return CastExpression.newBuilder()
+                  return CastExpression.builder()
                       .setCastTypeDescriptor(inferredTypeDescriptor)
                       .setExpression(expression)
                       .build();

@@ -74,7 +74,7 @@ public class InsertIntegerCoercions extends NormalizationPass {
                   // For example, a + b + c will become (a + b + c) | 0 instead of
                   // ((a + b) | 0) + c) | 0.
                   coerceToInt(
-                      BinaryExpression.Builder.from(binaryExpression)
+                      binaryExpression.toBuilder()
                           .setLeftOperand(removeCoercion(binaryExpression.getLeftOperand()))
                           .setRightOperand(removeCoercion(binaryExpression.getRightOperand()))
                           .build());

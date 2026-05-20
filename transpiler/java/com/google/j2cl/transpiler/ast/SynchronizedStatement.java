@@ -53,22 +53,22 @@ public class SynchronizedStatement extends Statement {
     return Visitor_SynchronizedStatement.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return new Builder()
+        .setSourcePosition(this.getSourcePosition())
+        .setExpression(this.getExpression())
+        .setBody(this.getBody());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
-  /** A Builder for synchronized statement. */
+  /** A Builder for SynchronizedStatement. */
   public static class Builder {
     private SourcePosition sourcePosition;
     private Expression expression;
     private Block body;
-
-    public static Builder from(SynchronizedStatement synchronizedStatement) {
-      return new Builder()
-          .setSourcePosition(synchronizedStatement.getSourcePosition())
-          .setExpression(synchronizedStatement.getExpression())
-          .setBody(synchronizedStatement.getBody());
-    }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;

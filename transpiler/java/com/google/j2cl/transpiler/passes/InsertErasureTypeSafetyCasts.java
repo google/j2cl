@@ -94,7 +94,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
         Expression expression = castExpression.getExpression();
         if (castExpression.getCastTypeDescriptor().isPrimitive()
             && !expression.getTypeDescriptor().isPrimitive()) {
-          return CastExpression.Builder.from(castExpression)
+          return castExpression.toBuilder()
               .setExpression(
                   maybeInsertErasureTypeSafetyCast(expression.getTypeDescriptor(), expression))
               .build();
@@ -168,11 +168,11 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
     }
     if (!fromTypeDescriptor.toRawTypeDescriptor().isAssignableTo(toTypeDescriptor)) {
       return isUncheckedCast(expression)
-          ? JsDocCastExpression.newBuilder()
+          ? JsDocCastExpression.builder()
               .setExpression(expression)
               .setCastTypeDescriptor(toTypeDescriptor)
               .build()
-          : CastExpression.newBuilder()
+          : CastExpression.builder()
               .setExpression(expression)
               .setCastTypeDescriptor(toTypeDescriptor)
               .build();

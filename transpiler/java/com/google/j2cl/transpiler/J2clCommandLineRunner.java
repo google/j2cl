@@ -196,7 +196,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
             .collect(toImmutableList());
     problems.abortIfCancelled();
 
-    return J2clTranspilerOptions.newBuilder()
+    return J2clTranspilerOptions.builder()
         .setSources(allSources)
         .setNativeSources(allNativeSources)
         .setClasspaths(this.classPath)

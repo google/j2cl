@@ -38,7 +38,7 @@ public class ImplementDivisionOperations extends NormalizationPass {
             TypeDescriptor expressionTypeDescriptor = binaryExpression.getTypeDescriptor();
             if (binaryExpression.getOperator() == BinaryOperator.DIVIDE
                 && TypeDescriptors.isIntegralPrimitiveType(expressionTypeDescriptor)) {
-              return MethodCall.Builder.from(
+              return MethodCall.builderFrom(
                       TypeDescriptors.get()
                           .javaemulInternalPrimitives
                           .getMethodDescriptor(

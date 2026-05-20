@@ -103,20 +103,20 @@ public class PrefixExpression extends UnaryExpression {
   }
 
   @Override
-  Builder createBuilder() {
-    return newBuilder();
+  public Builder toBuilder() {
+    return builderFrom(this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
+  }
+
+  public static Builder builderFrom(UnaryExpression expression) {
+    return builder().setOperand(expression.getOperand()).setOperator(expression.getOperator());
   }
 
   /** A Builder for prefix unary expressions. */
   public static class Builder extends UnaryExpression.Builder<Builder, PrefixExpression> {
-
-    public static Builder from(UnaryExpression expression) {
-      return newBuilder().setOperand(expression.getOperand()).setOperator(expression.getOperator());
-    }
 
     @Override
     PrefixExpression doBuild(Expression operand, Operator operator) {

@@ -78,7 +78,7 @@ public class ResolveImplicitInstanceQualifiers extends NormalizationPass {
               // This is an anonymous class instantiation with an implicit qualifier
               // happening in a constructor before the super/this call.
               // Pass null as the enclosing instance instead of a this reference.
-              return NewInstance.Builder.from(newInstance)
+              return newInstance.toBuilder()
                   .setQualifier(
                       constructor.getDescriptor().getEnclosingTypeDescriptor().getNullValue())
                   .build();

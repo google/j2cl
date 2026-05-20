@@ -60,14 +60,14 @@ public final class ImplementBitLevelOperatorsJ2kt extends NormalizationPass {
   private static Expression rewriteToMethodCall(
       BinaryExpression binaryExpression, String methodName) {
     MethodDescriptor methodDescriptor =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
             .setReturnTypeDescriptor(binaryExpression.getTypeDescriptor())
             .setName(methodName)
             .setParameterTypeDescriptors(binaryExpression.getRightOperand().getTypeDescriptor())
             .build();
 
-    return MethodCall.Builder.from(methodDescriptor)
+    return MethodCall.builderFrom(methodDescriptor)
         .setQualifier(binaryExpression.getLeftOperand())
         .setArguments(binaryExpression.getRightOperand())
         .build();
@@ -76,19 +76,19 @@ public final class ImplementBitLevelOperatorsJ2kt extends NormalizationPass {
   private static Expression rewriteToMethodCall(
       PrefixExpression prefixExpression, String methodName) {
     MethodDescriptor methodDescriptor =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
             .setReturnTypeDescriptor(prefixExpression.getTypeDescriptor())
             .setName(methodName)
             .build();
 
-    return MethodCall.Builder.from(methodDescriptor)
+    return MethodCall.builderFrom(methodDescriptor)
         .setQualifier(prefixExpression.getOperand())
         .build();
   }
 
   private static final DeclaredTypeDescriptor KOTLIN_BASIC_TYPE =
-      TypeDeclaration.newBuilder()
+      TypeDeclaration.builder()
           .setKind(Kind.CLASS)
           .setQualifiedSourceName("j2kt.BasicType")
           .build()

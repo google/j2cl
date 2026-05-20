@@ -105,7 +105,7 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
               return assertStatement;
             }
 
-            return AssertStatement.Builder.from(assertStatement)
+            return assertStatement.toBuilder()
                 .setMessage(insertElvisIfNeeded(message, new StringLiteral("null")))
                 .build();
           }
@@ -169,16 +169,16 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
       return nonNullExpression;
     }
 
-    MultiExpression.Builder elvisExpressionBuilder = MultiExpression.newBuilder();
+    MultiExpression.Builder elvisExpressionBuilder = MultiExpression.builder();
     if (!expression.isIdempotent()) {
       Variable elvisVariable =
-          Variable.newBuilder()
+          Variable.builder()
               .setName("tmp")
               .setFinal(true)
               .setTypeDescriptor(expression.getTypeDescriptor())
               .build();
       elvisExpressionBuilder.addExpressions(
-          VariableDeclarationExpression.newBuilder()
+          VariableDeclarationExpression.builder()
               .addVariableDeclaration(elvisVariable, expression)
               .build());
       expression = elvisVariable.createReference();
@@ -186,7 +186,7 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
 
     return elvisExpressionBuilder
         .addExpressions(
-            ConditionalExpression.newBuilder()
+            ConditionalExpression.builder()
                 .setConditionExpression(expression.infixEqualsNull())
                 .setTrueExpression(nonNullExpression)
                 .setFalseExpression(expression.clone().postfixNotNullAssertion())

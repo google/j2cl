@@ -57,7 +57,7 @@ public final class ArrayConstant implements AnnotationValue {
     return Objects.hash(typeDescriptor, valueExpressions);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new ArrayConstant.Builder();
   }
 

@@ -223,7 +223,7 @@ final class ExpressionTranspiler {
         // TODO(b/183661534): JsDocCastExpressions should not reach the output stage.
         // Render JsDoc casts as regular casts for now.
         return enterCastExpression(
-            CastExpression.newBuilder()
+            CastExpression.builder()
                 .setExpression(expression.getExpression())
                 .setCastTypeDescriptor(expression.getTypeDescriptor())
                 .build());

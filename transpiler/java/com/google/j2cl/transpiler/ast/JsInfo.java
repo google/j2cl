@@ -49,24 +49,22 @@ public abstract class JsInfo {
   // TODO(b/266614719): Remove when the annotation data is part of our model.
   public abstract boolean getHasJsMemberAnnotation();
 
-  abstract Builder toBuilder();
-
   /** Not a JS member. */
-  public static final JsInfo NONE = newBuilder().setJsMemberType(JsMemberType.NONE).build();
+  public static final JsInfo NONE = builder().setJsMemberType(JsMemberType.NONE).build();
 
   public static final JsInfo NONE_ASYNC =
-      newBuilder().setJsMemberType(JsMemberType.NONE).setJsAsync(true).build();
+      builder().setJsMemberType(JsMemberType.NONE).setJsAsync(true).build();
 
   public static final JsInfo OVERLAY =
-      newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(true).build();
+      builder().setJsMemberType(JsMemberType.NONE).setJsOverlay(true).build();
 
-  public static final JsInfo RAW = newBuilder().setJsMemberType(JsMemberType.METHOD).build();
-  public static final JsInfo RAW_CTOR =
-      newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build();
-  public static final JsInfo RAW_FIELD =
-      newBuilder().setJsMemberType(JsMemberType.PROPERTY).build();
+  public static final JsInfo RAW = builder().setJsMemberType(JsMemberType.METHOD).build();
+  public static final JsInfo RAW_CTOR = builder().setJsMemberType(JsMemberType.CONSTRUCTOR).build();
+  public static final JsInfo RAW_FIELD = builder().setJsMemberType(JsMemberType.PROPERTY).build();
 
-  public static Builder newBuilder() {
+  public abstract Builder toBuilder();
+
+  public static Builder builder() {
     return new AutoValue_JsInfo.Builder()
         // Default values.
         .setJsOverlay(false)
@@ -94,10 +92,6 @@ public abstract class JsInfo {
 
     public JsInfo build() {
       return interner.intern(autoBuild());
-    }
-
-    public static Builder from(JsInfo jsInfo) {
-      return jsInfo.toBuilder();
     }
 
     private static final ThreadLocalInterner<JsInfo> interner = new ThreadLocalInterner<>();

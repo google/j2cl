@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   public static final SourcePosition NONE =
-      newBuilder()
+      builder()
           .setStartFilePosition(FilePosition.NONE)
           .setEndFilePosition(FilePosition.NONE)
           .build();
@@ -72,7 +72,7 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   abstract Builder toBuilder();
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_SourcePosition.Builder();
   }
 

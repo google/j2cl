@@ -83,12 +83,12 @@ public class AddEnumImplicitMethods extends NormalizationPass {
     FieldDescriptor namesToValuesMapFieldDescriptor =
         getNamesToValuesMapFieldDescriptor(typeDescriptor);
     enumType.addMember(
-        Field.Builder.from(namesToValuesMapFieldDescriptor)
+        Field.builderFrom(namesToValuesMapFieldDescriptor)
             .setSourcePosition(enumType.getSourcePosition())
             .build());
 
     Variable nameParameter =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("name")
             .setTypeDescriptor(TypeDescriptors.get().javaLangString.toNonNullable())
             .setParameter(true)
@@ -96,16 +96,16 @@ public class AddEnumImplicitMethods extends NormalizationPass {
 
     // if (namesToValuesMap == null)
     Statement ifStatement =
-        IfStatement.newBuilder()
+        IfStatement.builder()
             .setSourcePosition(sourcePosition)
             .setConditionExpression(
-                FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build().infixEqualsNull())
+                FieldAccess.builderFrom(namesToValuesMapFieldDescriptor).build().infixEqualsNull())
             .setThenStatement(
                 //   namesToValuesMap = createMapFromValues(this.values());
                 BinaryExpression.Builder.asAssignmentTo(namesToValuesMapFieldDescriptor)
                     .setRightOperand(
                         RuntimeMethods.createEnumsCreateMapFromValuesMethodCall(
-                            MethodCall.Builder.from(
+                            MethodCall.builderFrom(
                                     typeDescriptor.getMethodDescriptor(VALUES_METHOD_NAME))
                                 .build()))
                     .build()
@@ -115,17 +115,17 @@ public class AddEnumImplicitMethods extends NormalizationPass {
 
     // return getValueFromNameAndMap(name, namesToValuesMap);
     Statement returnStatement =
-        ReturnStatement.newBuilder()
+        ReturnStatement.builder()
             .setExpression(
                 RuntimeMethods.createEnumsGetValueFromNameAndMapMethodCall(
                     typeDescriptor,
                     nameParameter.createReference(),
-                    FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build()))
+                    FieldAccess.builderFrom(namesToValuesMapFieldDescriptor).build()))
             .setSourcePosition(sourcePosition)
             .build();
 
     enumType.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(
                 typeDescriptor.getMethodDescriptor(
                     MethodDescriptor.VALUE_OF_METHOD_NAME, TypeDescriptors.get().javaLangString))
@@ -137,7 +137,7 @@ public class AddEnumImplicitMethods extends NormalizationPass {
 
   private FieldDescriptor getNamesToValuesMapFieldDescriptor(
       DeclaredTypeDescriptor enumTypeDescriptor) {
-    return FieldDescriptor.newBuilder()
+    return FieldDescriptor.builder()
         .setEnclosingTypeDescriptor(enumTypeDescriptor)
         .setName(NAMES_TO_VALUES_MAP_FIELD_NAME)
         .setTypeDescriptor(getEnumMapTypeDescriptor(enumTypeDescriptor.toNonNullable()))
@@ -176,22 +176,22 @@ public class AddEnumImplicitMethods extends NormalizationPass {
     // Create method body.
     ImmutableList<Expression> values =
         enumType.getEnumFields().stream()
-            .map(enumField -> FieldAccess.Builder.from(enumField.getDescriptor()).build())
+            .map(enumField -> FieldAccess.builderFrom(enumField.getDescriptor()).build())
             .collect(toImmutableList());
 
     ArrayTypeDescriptor arrayTypeDescriptor =
-        ArrayTypeDescriptor.newBuilder()
+        ArrayTypeDescriptor.builder()
             .setComponentTypeDescriptor(enumType.getTypeDescriptor().toNonNullable())
             .build();
 
     enumType.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(
                 enumType.getTypeDescriptor().getMethodDescriptor(VALUES_METHOD_NAME))
             .addStatements(
-                ReturnStatement.newBuilder()
+                ReturnStatement.builder()
                     .setExpression(
-                        ArrayLiteral.newBuilder()
+                        ArrayLiteral.builder()
                             .setTypeDescriptor(arrayTypeDescriptor)
                             .setValueExpressions(values)
                             .build())

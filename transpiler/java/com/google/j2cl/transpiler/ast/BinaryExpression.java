@@ -239,7 +239,7 @@ public class BinaryExpression extends Expression {
 
   @Override
   public BinaryExpression clone() {
-    return newBuilder()
+    return builder()
         .setLeftOperand(leftOperand.clone())
         .setOperator(operator)
         .setRightOperand(rightOperand.clone())
@@ -341,24 +341,22 @@ public class BinaryExpression extends Expression {
         || isJavaLangString(rightOperandType.toRawTypeDescriptor());
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setLeftOperand(this.getLeftOperand())
+        .setOperator(this.getOperator())
+        .setRightOperand(this.getRightOperand());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
-  /**
-   * A Builder for binary expressions.
-   */
+  /** A Builder for BinaryExpression. */
   public static class Builder {
     private BinaryOperator operator;
     private Expression leftOperand;
     private Expression rightOperand;
-
-    public static Builder from(BinaryExpression expression) {
-      return new Builder()
-          .setLeftOperand(expression.getLeftOperand())
-          .setOperator(expression.getOperator())
-          .setRightOperand(expression.getRightOperand());
-    }
 
     public static Builder asAssignmentTo(Expression lvalue) {
       return new Builder().setLeftOperand(lvalue).setOperator(BinaryOperator.ASSIGN);
@@ -369,10 +367,9 @@ public class BinaryExpression extends Expression {
     }
 
     public static Builder asAssignmentTo(FieldDescriptor fieldDescriptor) {
-
       return new Builder()
           .setLeftOperand(
-              FieldAccess.Builder.from(fieldDescriptor).setDefaultInstanceQualifier().build())
+              FieldAccess.builderFrom(fieldDescriptor).setDefaultInstanceQualifier().build())
           .setOperator(BinaryOperator.ASSIGN);
     }
 

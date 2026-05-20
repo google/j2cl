@@ -113,7 +113,7 @@ public class OptimizeXplatLogger extends NormalizationPass {
     if (replacementMethodDescriptor == null) {
       return methodCall;
     }
-    return MethodCall.Builder.from(replacementMethodDescriptor)
+    return MethodCall.builderFrom(replacementMethodDescriptor)
         .setQualifier(qualifierMethodCall.getQualifier())
         .setArguments(replacementArguments)
         .build();

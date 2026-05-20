@@ -34,7 +34,7 @@ public class RewriteShortcutOperators extends NormalizationPass {
             return switch (binaryExpression.getOperator()) {
               case CONDITIONAL_OR ->
                   // a || b => a ? true : b
-                  ConditionalExpression.newBuilder()
+                  ConditionalExpression.builder()
                       .setConditionExpression(binaryExpression.getLeftOperand())
                       .setTrueExpression(BooleanLiteral.get(true))
                       .setFalseExpression(binaryExpression.getRightOperand())
@@ -42,7 +42,7 @@ public class RewriteShortcutOperators extends NormalizationPass {
                       .build();
               case CONDITIONAL_AND ->
                   // a && b => a ? b : true
-                  ConditionalExpression.newBuilder()
+                  ConditionalExpression.builder()
                       .setConditionExpression(binaryExpression.getLeftOperand())
                       .setTrueExpression(binaryExpression.getRightOperand())
                       .setFalseExpression(BooleanLiteral.get(false))

@@ -70,7 +70,7 @@ public class ArrayAccess extends Expression {
 
   @Override
   public ArrayAccess clone() {
-    return ArrayAccess.newBuilder()
+    return ArrayAccess.builder()
         .setArrayExpression(arrayExpression.clone())
         .setIndexExpression(indexExpression.clone())
         .build();
@@ -81,7 +81,13 @@ public class ArrayAccess extends Expression {
     return Visitor_ArrayAccess.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setArrayExpression(this.getArrayExpression())
+        .setIndexExpression(this.getIndexExpression());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -89,12 +95,6 @@ public class ArrayAccess extends Expression {
   public static class Builder {
     private Expression arrayExpression;
     private Expression indexExpression;
-
-    public static Builder from(ArrayAccess arrayAccess) {
-      return newBuilder()
-          .setArrayExpression(arrayAccess.getArrayExpression())
-          .setIndexExpression(arrayAccess.getIndexExpression());
-    }
 
     public Builder setArrayExpression(Expression arrayExpression) {
       this.arrayExpression = arrayExpression;

@@ -95,9 +95,9 @@ public class OverrideKotlinAdditionalAbstractMethods extends NormalizationPass {
         type.getTypeDescriptor().getMethodDescriptor("intValue");
 
     MethodDescriptor methodDescriptor =
-        MethodDescriptor.Builder.from(intValueMethodDescriptor)
+        intValueMethodDescriptor.toBuilder()
             .setName(methodName)
-            .setOriginalKtInfo(KtInfo.newBuilder().setName(ktName).build())
+            .setOriginalKtInfo(KtInfo.builder().setName(ktName).build())
             .setReturnTypeDescriptor(returnType)
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setAbstract(false)
@@ -105,15 +105,14 @@ public class OverrideKotlinAdditionalAbstractMethods extends NormalizationPass {
             .build();
 
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(methodDescriptor)
             .setForcedJavaOverride(true)
             .addStatements(
-                ReturnStatement.newBuilder()
+                ReturnStatement.builder()
                     .setExpression(
-                        CastExpression.newBuilder()
-                            .setExpression(
-                                MethodCall.Builder.from(intValueMethodDescriptor).build())
+                        CastExpression.builder()
+                            .setExpression(MethodCall.builderFrom(intValueMethodDescriptor).build())
                             .setCastTypeDescriptor(returnType)
                             .build())
                     .setSourcePosition(type.getSourcePosition())
@@ -134,7 +133,7 @@ public class OverrideKotlinAdditionalAbstractMethods extends NormalizationPass {
     }
 
     MethodDescriptor removeMethodDescriptor =
-        MethodDescriptor.Builder.from(iteratorRemoveDescriptor)
+        iteratorRemoveDescriptor.toBuilder()
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setDefaultMethod(type.isInterface())
             .setAbstract(false)
@@ -142,19 +141,19 @@ public class OverrideKotlinAdditionalAbstractMethods extends NormalizationPass {
             .build();
 
     MethodDescriptor exceptionConstructor =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangUnsupportedOperationException)
             .setConstructor(true)
             .setReturnTypeDescriptor(PrimitiveTypes.VOID)
             .build();
 
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(removeMethodDescriptor)
             .setForcedJavaOverride(true)
             .addStatements(
-                ThrowStatement.newBuilder()
-                    .setExpression(NewInstance.Builder.from(exceptionConstructor).build())
+                ThrowStatement.builder()
+                    .setExpression(NewInstance.builderFrom(exceptionConstructor).build())
                     .setSourcePosition(type.getSourcePosition())
                     .build())
             .setSourcePosition(type.getSourcePosition())

@@ -63,9 +63,9 @@ public class NormalizeLabeledStatements extends NormalizationPass {
 
             // Introduce a `do { ... } while(false)` since labels that are targets of break need to
             // to be on loop statements.
-            return LabeledStatement.Builder.from(labeledStatement)
+            return labeledStatement.toBuilder()
                 .setStatement(
-                    DoWhileStatement.newBuilder()
+                    DoWhileStatement.builder()
                         .setSourcePosition(statement.getSourcePosition())
                         .setConditionExpression(BooleanLiteral.get(false))
                         .setBodyStatements(statement)

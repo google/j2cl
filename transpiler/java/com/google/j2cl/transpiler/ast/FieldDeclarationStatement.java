@@ -71,26 +71,24 @@ public class FieldDeclarationStatement extends Statement {
         getSourcePosition(), expression.clone(), fieldDescriptor, isPublic);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setExpression(this.getExpression())
+        .setFieldDescriptor(this.getFieldDescriptor())
+        .setPublic(this.isPublic())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
-  /** Builder for JsDocFieldDeclaration */
+  /** Builder for FieldDeclarationStatement. */
   public static class Builder {
     private Expression expression;
     private FieldDescriptor fieldDescriptor;
     private boolean isPublic;
     private SourcePosition sourcePosition;
-
-    public static Builder from(FieldDeclarationStatement fieldDeclaration) {
-      Builder builder = new Builder();
-      builder.expression = fieldDeclaration.getExpression();
-      builder.fieldDescriptor = fieldDeclaration.getFieldDescriptor();
-      builder.isPublic = fieldDeclaration.isPublic();
-      builder.sourcePosition = fieldDeclaration.getSourcePosition();
-
-      return builder;
-    }
 
     @CanIgnoreReturnValue
     public Builder setExpression(Expression initializer) {

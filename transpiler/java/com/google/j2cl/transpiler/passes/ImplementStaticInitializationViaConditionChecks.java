@@ -76,7 +76,7 @@ public class ImplementStaticInitializationViaConditionChecks
               // No need to call clinit when accessing the method from members in the enclosing
               // type.
               MethodDescriptor privateDescriptor = createPrivateDescriptor(target);
-              methodCall = MethodCall.Builder.from(methodCall).setTarget(privateDescriptor).build();
+              methodCall = methodCall.toBuilder().setTarget(privateDescriptor).build();
               neededPrivateMethodsByPublic.put(
                   target.getDeclarationDescriptor(), privateDescriptor.getDeclarationDescriptor());
             }
@@ -93,7 +93,7 @@ public class ImplementStaticInitializationViaConditionChecks
             }
 
             if (triggersClinit(target, type)) {
-              return MultiExpression.newBuilder()
+              return MultiExpression.builder()
                   .addExpressions(
                       createClinitCallExpression(target.getEnclosingTypeDescriptor()), fieldAccess)
                   .build();
@@ -123,7 +123,7 @@ public class ImplementStaticInitializationViaConditionChecks
               privateDescriptor,
               "Bridge to private");
       members.set(i, newPublicMethod);
-      members.add(++i, Method.Builder.from(method).setMethodDescriptor(privateDescriptor).build());
+      members.add(++i, method.toBuilder().setMethodDescriptor(privateDescriptor).build());
     }
     checkState(neededPrivateMethodsByPublic.isEmpty(), neededPrivateMethodsByPublic);
   }
@@ -144,16 +144,13 @@ public class ImplementStaticInitializationViaConditionChecks
 
     // Add the $isInitialized static field to the type.
     type.addMember(
-        Field.Builder.from(isInitializedFieldDescriptor).setSourcePosition(sourcePosition).build());
+        Field.builderFrom(isInitializedFieldDescriptor).setSourcePosition(sourcePosition).build());
 
     // if ($isInitialized) { return; }
     Statement checkInitialized =
-        IfStatement.newBuilder()
-            .setConditionExpression(FieldAccess.Builder.from(isInitializedFieldDescriptor).build())
-            .setThenStatement(
-                ReturnStatement.newBuilder()
-                    .setSourcePosition(sourcePosition)
-                    .build())
+        IfStatement.builder()
+            .setConditionExpression(FieldAccess.builderFrom(isInitializedFieldDescriptor).build())
+            .setThenStatement(ReturnStatement.builder().setSourcePosition(sourcePosition).build())
             .setSourcePosition(sourcePosition)
             .build();
 
@@ -171,7 +168,7 @@ public class ImplementStaticInitializationViaConditionChecks
             .collect(toImmutableList());
 
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(type.getTypeDescriptor().getClinitMethodDescriptor())
             .addStatements(checkInitialized, setInitialized)
             .addStatements(clinitStatements)
@@ -183,7 +180,7 @@ public class ImplementStaticInitializationViaConditionChecks
 
   /** Returns the class initializer property as a field for a particular type */
   private static FieldDescriptor getInitializedField(DeclaredTypeDescriptor typeDescriptor) {
-    return FieldDescriptor.newBuilder()
+    return FieldDescriptor.builder()
         .setStatic(true)
         .setSynthetic(true)
         .setEnclosingTypeDescriptor(typeDescriptor)

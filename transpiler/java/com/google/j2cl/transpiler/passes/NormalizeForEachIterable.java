@@ -61,7 +61,7 @@ public class NormalizeForEachIterable extends NormalizationPass {
     // type of the element. So use a helper that chooses a safe element type.
     TypeDescriptor targetElementType =
         computeTargetElementType(iterableType, loopVariable.getTypeDescriptor());
-    return ForEachStatement.Builder.from(forEachStatement)
+    return forEachStatement.toBuilder()
         .setIterableExpression(castToIterable(iterableExpression, targetElementType))
         .build();
   }
@@ -92,7 +92,7 @@ public class NormalizeForEachIterable extends NormalizationPass {
       Expression expression, TypeDescriptor iterableElementType) {
 
     DeclaredTypeDescriptor iterableType = TypeDescriptors.get().javaLangIterable;
-    return CastExpression.newBuilder()
+    return CastExpression.builder()
         .setCastTypeDescriptor(
             iterableType.specializeTypeVariables(
                 ImmutableMap.of(

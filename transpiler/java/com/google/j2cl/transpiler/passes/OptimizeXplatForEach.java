@@ -122,7 +122,7 @@ public class OptimizeXplatForEach extends NormalizationPass {
     // for..in loops in JS will always return string values. If the variable type is already String
     // then we don't need to do extra coercion work.
     if (loopVariableType.hasSameRawType(TypeDescriptors.get().javaLangString)) {
-      return JsForInStatement.Builder.from(forEachStatement)
+      return JsForInStatement.builderFrom(forEachStatement)
           .setLoopVariable(loopVariable)
           .setIterableExpression(jsIterableExpression)
           .build();
@@ -144,24 +144,24 @@ public class OptimizeXplatForEach extends NormalizationPass {
             || loopVariableType.hasSameRawType(PrimitiveTypes.INT));
 
     Variable propertyVariable =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("property")
             .setTypeDescriptor(TypeDescriptors.get().javaLangString)
             .build();
 
     // loopVariable = (int) Number(property)
     VariableDeclarationExpression coercedLoopVariable =
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclaration(
                 loopVariable,
-                JsDocCastExpression.newBuilder()
+                JsDocCastExpression.builder()
                     .setExpression(
                         RuntimeMethods.createNumberCall(propertyVariable.createReference()))
                     .setCastTypeDescriptor(PrimitiveTypes.INT)
                     .build())
             .build();
 
-    return JsForInStatement.Builder.from(forEachStatement)
+    return JsForInStatement.builderFrom(forEachStatement)
         .setLoopVariable(loopVariable)
         .setIterableExpression(jsIterableExpression)
         .setLoopVariable(propertyVariable)
@@ -204,11 +204,11 @@ public class OptimizeXplatForEach extends NormalizationPass {
     //
     // for (Object value : (Object[]) arrayLike) { ... }
     Expression target = iterableMethodCall.getQualifier();
-    return ForEachStatement.Builder.from(forEachStatement)
+    return forEachStatement.toBuilder()
         .setIterableExpression(
-            JsDocCastExpression.newBuilder()
+            JsDocCastExpression.builder()
                 .setCastTypeDescriptor(
-                    ArrayTypeDescriptor.newBuilder().setComponentTypeDescriptor(valueType).build())
+                    ArrayTypeDescriptor.builder().setComponentTypeDescriptor(valueType).build())
                 .setExpression(target)
                 .build())
         .build();

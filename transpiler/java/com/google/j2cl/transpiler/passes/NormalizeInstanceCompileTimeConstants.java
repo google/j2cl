@@ -31,9 +31,7 @@ public class NormalizeInstanceCompileTimeConstants extends NormalizationPass {
           @Override
           public Member rewriteField(Field field) {
             if (isInstanceCompileTimeConstant(field.getDescriptor())) {
-              return Field.Builder.from(field)
-                  .setDescriptor(toStatic(field.getDescriptor()))
-                  .build();
+              return field.toBuilder().setDescriptor(toStatic(field.getDescriptor())).build();
             }
             return field;
           }
@@ -41,9 +39,7 @@ public class NormalizeInstanceCompileTimeConstants extends NormalizationPass {
           @Override
           public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
             if (isInstanceCompileTimeConstant(fieldAccess.getTarget())) {
-              return FieldAccess.Builder.from(fieldAccess)
-                  .setTarget(toStatic(fieldAccess.getTarget()))
-                  .build();
+              return fieldAccess.toBuilder().setTarget(toStatic(fieldAccess.getTarget())).build();
             }
             return fieldAccess;
           }

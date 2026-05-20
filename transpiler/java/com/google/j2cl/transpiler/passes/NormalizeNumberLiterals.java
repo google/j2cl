@@ -39,7 +39,7 @@ public class NormalizeNumberLiterals extends NormalizationPass {
           public Node rewriteNumberLiteral(NumberLiteral numberLiteral) {
             PrimitiveTypeDescriptor literalTypeDescriptor = numberLiteral.getTypeDescriptor();
             return isPrimitiveByte(literalTypeDescriptor) || isPrimitiveShort(literalTypeDescriptor)
-                ? CastExpression.newBuilder()
+                ? CastExpression.builder()
                     .setExpression(NumberLiteral.fromInt(numberLiteral.getValue().intValue()))
                     .setCastTypeDescriptor(literalTypeDescriptor)
                     .build()

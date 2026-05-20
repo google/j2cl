@@ -128,7 +128,7 @@ private val IrField.canBeJsProperty: Boolean
 
 fun IrClass.getJsEnumInfo(): JsEnumInfo? {
   val annotation = getJsEnumAnnotation() ?: return null
-  return JsEnumInfo.newBuilder().run {
+  return JsEnumInfo.builder().run {
     val hasCustomValue =
       annotation.getValueArgumentAsConst<Boolean>(HAS_CUSTOM_VALUE_ANNOTATION_ATTRIBUTE) ?: false
     val isNative =
@@ -209,7 +209,7 @@ private fun IrDeclaration.getJsMemberAnnotation(): IrConstructorCall? =
   }
 
 fun IrDeclaration.getJsInfo(): JsInfo =
-  JsInfo.newBuilder()
+  JsInfo.builder()
     .setJsMemberType(getJsMemberType())
     .setJsOverlay(isJsOverlay)
     .setJsAsync(this is IrFunction && isJsAsync)

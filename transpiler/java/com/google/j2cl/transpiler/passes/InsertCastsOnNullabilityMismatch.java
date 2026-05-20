@@ -86,7 +86,7 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
                     describer.getDescription(expression.getTypeDescriptor()),
                     describer.getDescription(inferredTypeDescriptor));
 
-                return CastExpression.newBuilder()
+                return CastExpression.builder()
                     .setExpression(expression)
                     .setCastTypeDescriptor(castTypeDescriptor)
                     .build();

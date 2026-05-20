@@ -39,23 +39,23 @@ public class ContinueStatement extends BreakOrContinueStatement {
 
   @Override
   public Builder toBuilder() {
-    return Builder.from(this);
+    return builderFrom(this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
+  }
+
+  public static Builder builderFrom(BreakOrContinueStatement breakOrContinueStatement) {
+    return builder()
+        .setSourcePosition(breakOrContinueStatement.getSourcePosition())
+        .setLabelReference(breakOrContinueStatement.getLabelReference());
   }
 
   /** Builder for ContinueStatement. */
   public static class Builder extends BreakOrContinueStatement.Builder<ContinueStatement, Builder> {
     private LabelReference labelReference;
     private SourcePosition sourcePosition;
-
-    public static Builder from(BreakOrContinueStatement continueStatement) {
-      return newBuilder()
-          .setSourcePosition(continueStatement.getSourcePosition())
-          .setLabelReference(continueStatement.getLabelReference());
-    }
 
     @Override
     public Builder setSourcePosition(SourcePosition sourcePosition) {

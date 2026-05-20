@@ -35,7 +35,7 @@ public class ImplementSynchronizedStatements extends NormalizationPass {
           public Statement rewriteSynchronizedStatement(
               SynchronizedStatement synchronizedStatement) {
             SourcePosition sourcePosition = synchronizedStatement.getSourcePosition();
-            return Block.newBuilder()
+            return Block.builder()
                 .setSourcePosition(sourcePosition)
                 .setStatements(
                     ImmutableList.<Statement>builder()

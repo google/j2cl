@@ -70,7 +70,7 @@ public class TryStatement extends Statement {
 
   @Override
   public TryStatement clone() {
-    return TryStatement.newBuilder()
+    return TryStatement.builder()
         .setSourcePosition(getSourcePosition())
         .setResourceDeclarations(AstUtils.clone(resourceDeclarations))
         .setBody(body.clone())
@@ -84,7 +84,16 @@ public class TryStatement extends Statement {
     return Visitor_TryStatement.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setResourceDeclarations(this.getResourceDeclarations())
+        .setBody(this.getBody())
+        .setCatchClauses(this.getCatchClauses())
+        .setFinallyBlock(this.getFinallyBlock())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -95,15 +104,6 @@ public class TryStatement extends Statement {
     private Block body;
     private Block finallyBlock;
     private SourcePosition sourcePosition;
-
-    public static Builder from(TryStatement tryStatement) {
-      return newBuilder()
-          .setResourceDeclarations(tryStatement.getResourceDeclarations())
-          .setBody(tryStatement.getBody())
-          .setCatchClauses(tryStatement.getCatchClauses())
-          .setFinallyBlock(tryStatement.getFinallyBlock())
-          .setSourcePosition(tryStatement.getSourcePosition());
-    }
 
     public Builder setResourceDeclarations(
         List<VariableDeclarationExpression> resourceDeclarations) {
@@ -135,7 +135,7 @@ public class TryStatement extends Statement {
 
     @CanIgnoreReturnValue
     public Builder setBody(Statement... body) {
-      this.body = Block.newBuilder().setStatements(body).build();
+      this.body = Block.builder().setStatements(body).build();
       return this;
     }
 

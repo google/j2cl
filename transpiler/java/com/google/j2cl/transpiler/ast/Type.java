@@ -194,7 +194,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public void addInstanceInitializerBlock(Block instanceInitializer) {
     members.add(
-        InitializerBlock.newBuilder()
+        InitializerBlock.builder()
             .setBody(instanceInitializer)
             .setSourcePosition(instanceInitializer.getSourcePosition())
             .setDescriptor(getTypeDescriptor().getInitMethodDescriptor())
@@ -203,7 +203,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public void addStaticInitializerBlock(Block staticInitializer) {
     members.add(
-        InitializerBlock.newBuilder()
+        InitializerBlock.builder()
             .setBody(staticInitializer)
             .setSourcePosition(staticInitializer.getSourcePosition())
             .setDescriptor(getTypeDescriptor().getClinitMethodDescriptor())
@@ -213,7 +213,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   public void addStaticInitializerBlock(int index, Block staticInitializer) {
     members.add(
         index,
-        InitializerBlock.newBuilder()
+        InitializerBlock.builder()
             .setBody(staticInitializer)
             .setSourcePosition(staticInitializer.getSourcePosition())
             .setDescriptor(getTypeDescriptor().getClinitMethodDescriptor())
@@ -362,7 +362,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
     // Creates the member that will hold the value.
     addMember(
-        Field.Builder.from(holderFieldDescriptor).setSourcePosition(SourcePosition.NONE).build());
+        Field.builderFrom(holderFieldDescriptor).setSourcePosition(SourcePosition.NONE).build());
 
     // Synthesizes the getter:
     // $get<fieldName>() {
@@ -373,17 +373,15 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     //   return <fieldName>;
     // }
     addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(lazyFieldGetter)
             .addStatements(
-                IfStatement.newBuilder()
+                IfStatement.builder()
                     .setConditionExpression(
-                        FieldAccess.Builder.from(holderFieldDescriptor)
-                            .build()
-                            .infixNotEqualsNull())
+                        FieldAccess.builderFrom(holderFieldDescriptor).build().infixNotEqualsNull())
                     .setThenStatement(
-                        ReturnStatement.newBuilder()
-                            .setExpression(FieldAccess.Builder.from(holderFieldDescriptor).build())
+                        ReturnStatement.builder()
+                            .setExpression(FieldAccess.builderFrom(holderFieldDescriptor).build())
                             .setSourcePosition(SourcePosition.NONE)
                             .build())
                     .setSourcePosition(SourcePosition.NONE)
@@ -392,8 +390,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
                     .setRightOperand(initializationExpression)
                     .build()
                     .makeStatement(SourcePosition.NONE),
-                ReturnStatement.newBuilder()
-                    .setExpression(FieldAccess.Builder.from(holderFieldDescriptor).build())
+                ReturnStatement.builder()
+                    .setExpression(FieldAccess.builderFrom(holderFieldDescriptor).build())
                     .setSourcePosition(SourcePosition.NONE)
                     .build())
             .setSourcePosition(SourcePosition.NONE)
@@ -404,7 +402,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       TypeDescriptor fieldTypeDescriptor,
       String name) {
-    return FieldDescriptor.newBuilder()
+    return FieldDescriptor.builder()
         .setName(name)
         .setTypeDescriptor(fieldTypeDescriptor)
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)

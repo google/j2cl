@@ -118,7 +118,7 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
     if (newArray.getDimensionExpressions().size() == 1) {
       if (newArray.getTypeDescriptor().isNativeJsArray()) {
         // WasmExtern.createArray(size)
-        return MethodCall.Builder.from(
+        return MethodCall.builderFrom(
                 TypeDescriptors.get()
                     .javaemulInternalWasmExtern
                     .getMethodDescriptorByName("createArray"))
@@ -131,9 +131,9 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
     checkArgument(newArray.getInitializer() == null);
 
     Expression dimensionsParameter =
-        ArrayLiteral.newBuilder()
+        ArrayLiteral.builder()
             .setTypeDescriptor(
-                ArrayTypeDescriptor.newBuilder()
+                ArrayTypeDescriptor.builder()
                     .setComponentTypeDescriptor(PrimitiveTypes.INT)
                     .build())
             .setValueExpressions(
@@ -144,7 +144,7 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
 
     if (newArray.getTypeDescriptor().isNativeJsArray()) {
       // WasmExtern.createMultiDimensionalArray(new int[] { d1, d2 })
-      return MethodCall.Builder.from(
+      return MethodCall.builderFrom(
               TypeDescriptors.get()
                   .javaemulInternalWasmExtern
                   .getMethodDescriptorByName("createMultiDimensionalArray"))
@@ -182,15 +182,13 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
 
     // var nativeArray = new Array(size)
     Variable variable =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("nativeArray")
             .setTypeDescriptor(getWasmExernArrayType())
             .setFinal(true)
             .build();
     expressions.add(
-        VariableDeclarationExpression.newBuilder()
-            .addVariableDeclaration(variable, newArray)
-            .build());
+        VariableDeclarationExpression.builder().addVariableDeclaration(variable, newArray).build());
 
     // tmp[0] = literal_0
     // tmp[1] = literal_1
@@ -198,7 +196,7 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
     for (int i = 0; i < size; i++) {
       expressions.add(
           BinaryExpression.Builder.asAssignmentTo(
-                  ArrayAccess.newBuilder()
+                  ArrayAccess.builder()
                       .setArrayExpression(variable.createReference())
                       .setIndexExpression(NumberLiteral.fromInt(i))
                       .build())
@@ -208,12 +206,12 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
 
     // return tmp
     expressions.add(variable.createReference());
-    return MultiExpression.newBuilder().setExpressions(expressions).build();
+    return MultiExpression.builder().setExpressions(expressions).build();
   }
 
   private static NewArray newNativeJsTypeArrayCall(int size) {
     // new Array(size)
-    return NewArray.newBuilder()
+    return NewArray.builder()
         .setTypeDescriptor(getWasmExernArrayType())
         .setDimensionExpressions(ImmutableList.of(NumberLiteral.fromInt(size)))
         .setInitializer(null)
@@ -221,7 +219,7 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
   }
 
   private static ArrayTypeDescriptor getWasmExernArrayType() {
-    return ArrayTypeDescriptor.newBuilder()
+    return ArrayTypeDescriptor.builder()
         .setComponentTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmExtern)
         .build();
   }

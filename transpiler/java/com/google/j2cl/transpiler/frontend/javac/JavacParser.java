@@ -154,7 +154,7 @@ public class JavacParser {
                 sourcePath, cu, options.getGenerateKytheIndexingMetadata()));
         problems.abortIfCancelled();
       }
-      return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
+      return Library.builder().setCompilationUnits(compilationUnits.build()).build();
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       return null;

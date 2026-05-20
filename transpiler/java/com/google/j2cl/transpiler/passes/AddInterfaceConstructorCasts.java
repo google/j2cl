@@ -35,7 +35,7 @@ public final class AddInterfaceConstructorCasts extends NormalizationPass {
               return constructorReference;
             }
 
-            return JsDocCastExpression.newBuilder()
+            return JsDocCastExpression.builder()
                 .setCastTypeDescriptor(TypeDescriptors.get().nativeFunction)
                 .setExpression(constructorReference)
                 .build();

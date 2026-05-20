@@ -97,7 +97,7 @@ public class JdtParser {
     for (var e : jdtUnitsByFilePath.entrySet()) {
       compilationUnits.add(compilationUnitBuilder.buildCompilationUnit(e.getKey(), e.getValue()));
     }
-    return Library.newBuilder().setCompilationUnits(compilationUnits.build()).build();
+    return Library.builder().setCompilationUnits(compilationUnits.build()).build();
   }
 
   /** Returns a map from file paths to compilation units after JDT parsing. */

@@ -64,20 +64,18 @@ public class EmbeddedStatement extends Expression {
     return Visitor_EmbeddedStatement.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder().setStatement(this.getStatement()).setTypeDescriptor(this.getTypeDescriptor());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
-  /** Builder for LabeledStatement. */
+  /** Builder for EmbeddedStatement. */
   public static class Builder {
     private Statement statement;
     private TypeDescriptor typeDescriptor;
-
-    public static Builder from(EmbeddedStatement labeledStatement) {
-      return newBuilder()
-          .setStatement(labeledStatement.getStatement())
-          .setTypeDescriptor(labeledStatement.getTypeDescriptor());
-    }
 
     @CanIgnoreReturnValue
     public Builder setStatement(Statement statement) {

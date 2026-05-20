@@ -97,7 +97,7 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
             RewriteItem varargRewriteItem = getVarargRewriteItem(functionExpression);
             if (varargRewriteItem != null) {
               functionExpression =
-                  FunctionExpression.Builder.from(functionExpression)
+                  functionExpression.toBuilder()
                       .setStatements(
                           redeclareItems(
                                   functionExpression.getBody(), ImmutableList.of(varargRewriteItem))
@@ -106,7 +106,7 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
             }
 
             // Redeclare non-final parameters.
-            return FunctionExpression.Builder.from(functionExpression)
+            return functionExpression.toBuilder()
                 .setStatements(
                     redeclareItems(
                             functionExpression.getBody(),
@@ -127,7 +127,7 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
               return catchClause;
             }
 
-            return CatchClause.Builder.from(catchClause)
+            return catchClause.toBuilder()
                 .setBody(
                     redeclareItems(
                         catchClause.getBody(),
@@ -150,9 +150,9 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
                 rewriteItems.stream()
                     .map(
                         rewriteItem ->
-                            VariableDeclarationFragment.newBuilder()
+                            VariableDeclarationFragment.builder()
                                 .setVariable(
-                                    Variable.Builder.from(rewriteItem.variable)
+                                    rewriteItem.variable.toBuilder()
                                         .setTypeDescriptor(rewriteItem.rewrittenTypeDescriptor)
                                         .build())
                                 .setInitializer(rewriteItem.variable.createReference())
@@ -188,7 +188,7 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
                 variableDeclarationFragments.stream()
                     .map(
                         fragment ->
-                            VariableDeclarationExpression.newBuilder()
+                            VariableDeclarationExpression.builder()
                                 .setVariableDeclarationFragments(ImmutableList.of(fragment))
                                 .build()
                                 .makeStatement(fragment.getVariable().getSourcePosition()))
@@ -204,7 +204,7 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
                     .map(s -> replaceDeclarations(variablesToRewrite, replacementVariables, s))
                     .collect(toImmutableList());
 
-            return Block.newBuilder()
+            return Block.builder()
                 .addStatements(statementsUntilConstructorInvocation)
                 .addStatements(variableDeclarationStatements)
                 .addStatements(rewrittenStatementsAfterConstructorInvocation)

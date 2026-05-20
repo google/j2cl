@@ -124,10 +124,6 @@ public class Method extends Member implements MethodLike {
     this.hasSuppressNothingToOverrideAnnotation = hasSuppressNothingToOverrideAnnotation;
   }
 
-  public static Builder newBuilder() {
-    return new Builder();
-  }
-
   @Override
   public String getReadableDescription() {
     // TODO(b/138398080): Add name to the parameter abstraction in MethodDescriptor and just
@@ -176,6 +172,22 @@ public class Method extends Member implements MethodLike {
         || (statements.size() == 1 && isConstructor() && AstUtils.hasSuperCall(this));
   }
 
+  public Builder toBuilder() {
+    return builder()
+        .setMethodDescriptor(this.getDescriptor())
+        .setParameters(Lists.newArrayList(this.getParameters()))
+        .setStatements(Lists.newArrayList(this.getBody().getStatements()))
+        .setJsDocDescription(this.getJsDocDescription())
+        .setBodySourcePosition(this.getBody().getSourcePosition())
+        .setSourcePosition(this.getSourcePosition())
+        .setForcedJavaOverride(this.isForcedJavaOverride())
+        .setSuppressNothingToOverrideAnnotation(this.hasSuppressNothingToOverrideAnnotation());
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
   /**
    * A Builder for Method.
    *
@@ -183,7 +195,6 @@ public class Method extends Member implements MethodLike {
    * list in sync.
    */
   public static class Builder {
-
     private MethodDescriptor methodDescriptor;
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
@@ -192,20 +203,6 @@ public class Method extends Member implements MethodLike {
     private SourcePosition sourcePosition;
     @Nullable private Boolean isForcedJavaOverride;
     private boolean hasSuppressNothingToOverrideAnnotation;
-
-    public static Builder from(Method method) {
-      Builder builder = new Builder();
-      builder.methodDescriptor = method.getDescriptor();
-      builder.parameters = Lists.newArrayList(method.getParameters());
-      builder.statements = Lists.newArrayList(method.getBody().getStatements());
-      builder.jsDocDescription = method.getJsDocDescription();
-      builder.bodySourcePosition = method.getBody().getSourcePosition();
-      builder.sourcePosition = method.getSourcePosition();
-      builder.isForcedJavaOverride = method.isForcedJavaOverride();
-      builder.hasSuppressNothingToOverrideAnnotation =
-          method.hasSuppressNothingToOverrideAnnotation;
-      return builder;
-    }
 
     @CanIgnoreReturnValue
     public Builder addParameters(int index, Variable... parameters) {
@@ -216,7 +213,7 @@ public class Method extends Member implements MethodLike {
     public Builder addParameters(int index, Collection<Variable> newParameters) {
       parameters.addAll(index, newParameters);
       methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
+          methodDescriptor.toBuilder()
               .addParameterTypeDescriptors(
                   index,
                   newParameters.stream()
@@ -312,7 +309,7 @@ public class Method extends Member implements MethodLike {
 
     public Method build() {
       Block body =
-          Block.newBuilder()
+          Block.builder()
               .setSourcePosition(bodySourcePosition != null ? bodySourcePosition : sourcePosition)
               .setStatements(statements)
               .build();

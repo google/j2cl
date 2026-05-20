@@ -73,12 +73,12 @@ public class ArrayLiteral extends Expression {
   }
 
   public Builder toBuilder() {
-    return newBuilder()
+    return builder()
         .setTypeDescriptor(getTypeDescriptor())
         .setValueExpressions(getValueExpressions());
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
   }
 

@@ -171,11 +171,11 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
             }
 
             MethodCall asMutableCall =
-                MethodCall.Builder.from(asMutableMethod)
+                MethodCall.builderFrom(asMutableMethod)
                     .setQualifier(methodCall.getQualifier())
                     .build();
 
-            return MethodCall.Builder.from(methodCall).setQualifier(asMutableCall).build();
+            return methodCall.toBuilder().setQualifier(asMutableCall).build();
           }
         });
   }
@@ -270,7 +270,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
                   return expression;
                 }
 
-                return MethodCall.Builder.from(asMutableMethod).setQualifier(expression).build();
+                return MethodCall.builderFrom(asMutableMethod).setQualifier(expression).build();
               }
             }));
   }

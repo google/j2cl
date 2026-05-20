@@ -67,9 +67,9 @@ public class AddVisibilityMethodBridgesJ2kt extends NormalizationPass {
     ImmutableList<Expression> arguments =
         parameters.stream().map(Variable::createReference).collect(toImmutableList());
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(
-            MethodDescriptor.Builder.from(overriddenMethod)
+            overriddenMethod.toBuilder()
                 .makeDeclaration()
                 .setEnclosingTypeDescriptor(type.getTypeDescriptor())
                 // Use the parameter and return types from the target methods since it might have

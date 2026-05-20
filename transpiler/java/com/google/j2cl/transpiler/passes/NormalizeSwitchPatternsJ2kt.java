@@ -99,17 +99,17 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
 
     // Extract the evaluation of the selector if necessary to avoid evaluating the selector
     // multiple times.
-    var rewrittenSelector = MultiExpression.newBuilder();
+    var rewrittenSelector = MultiExpression.builder();
     var selectorExpression = switchConstruct.getExpression();
     if (!(selectorExpression instanceof VariableReference)) {
       var selectorVariable =
-          Variable.newBuilder()
+          Variable.builder()
               .setName("$selector")
               .setTypeDescriptor(selectorExpression.getTypeDescriptor())
               .setFinal(true)
               .build();
       rewrittenSelector.addExpressions(
-          VariableDeclarationExpression.newBuilder()
+          VariableDeclarationExpression.builder()
               .addVariableDeclaration(selectorVariable, selectorExpression)
               .build());
       selectorExpression = selectorVariable.createReference();
@@ -142,7 +142,7 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
 
     // selector instanceof Pattern
     var patternMatchExpression =
-        PatternMatchExpression.newBuilder()
+        PatternMatchExpression.builder()
             .setPattern(switchCase.getPattern())
             .setExpression(selectorExpression.clone())
             .build();
@@ -152,7 +152,7 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
             // Replace the variable by a dummy unnamed variable that will be ignored
             // in the backend.
             new BindingPattern(
-                Variable.newBuilder()
+                Variable.builder()
                     .setName("_")
                     .setTypeDescriptor(switchCase.getPattern().getTypeDescriptor())
                     .build()))
@@ -236,9 +236,7 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
       //      where A' = removeInstanceOf(A, variable, type)
       case BinaryExpression e when e.getOperator() == BinaryOperator.CONDITIONAL_AND -> {
         var lhs = removeLeftmostInstanceOf(e.getLeftOperand(), variable, type);
-        yield lhs == null
-            ? e.getRightOperand()
-            : BinaryExpression.Builder.from(e).setLeftOperand(lhs).build();
+        yield lhs == null ? e.getRightOperand() : e.toBuilder().setLeftOperand(lhs).build();
       }
       default -> expression;
     };

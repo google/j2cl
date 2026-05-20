@@ -104,7 +104,7 @@ public class NormalizeJsEnums extends NormalizationPass {
    * invocation.
    */
   private static Field createJsEnumConstant(Field field) {
-    return Field.Builder.from(field)
+    return field.toBuilder()
         .setDescriptor(AstUtils.createJsEnumConstantFieldDescriptor(field.getDescriptor()))
         .setInitializer(getJsEnumConstantValue(field))
         .build();
@@ -172,7 +172,7 @@ public class NormalizeJsEnums extends NormalizationPass {
 
               // Redirect the call to Comparable.compareTo(Object) since JsEnums don't actually
               // extend Enum.
-              return MethodCall.Builder.from(methodCall)
+              return methodCall.toBuilder()
                   .setTarget(
                       TypeDescriptors.get()
                           .javaLangComparable
@@ -185,7 +185,7 @@ public class NormalizeJsEnums extends NormalizationPass {
                   methodCall.getQualifier(), methodCall.getTypeDescriptor());
             }
 
-            return MethodCall.Builder.from(methodCall)
+            return methodCall.toBuilder()
                 .setTarget(fixEnumMethodDescriptor(methodDescriptor))
                 .build();
           }
@@ -217,7 +217,7 @@ public class NormalizeJsEnums extends NormalizationPass {
 
     // Reroute overridden methods to the super method they override.
     if (declarationMethodDescriptor.isOrOverridesJavaLangObjectMethod()) {
-      return MethodDescriptor.Builder.from(declarationMethodDescriptor)
+      return declarationMethodDescriptor.toBuilder()
           .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
           .build();
     }

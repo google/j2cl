@@ -53,7 +53,14 @@ public class AssertStatement extends Statement {
     return Visitor_AssertStatement.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setSourcePosition(this.getSourcePosition())
+        .setExpression(this.getExpression())
+        .setMessage(this.getMessage());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -62,13 +69,6 @@ public class AssertStatement extends Statement {
     private Expression expression;
     private Expression message;
     private SourcePosition sourcePosition;
-
-    public static Builder from(AssertStatement assertStatement) {
-      return newBuilder()
-          .setSourcePosition(assertStatement.getSourcePosition())
-          .setExpression(assertStatement.getExpression())
-          .setMessage(assertStatement.getMessage());
-    }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;

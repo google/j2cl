@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import com.google.common.base.Preconditions;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
@@ -60,11 +61,15 @@ public class JsDocExpression extends Expression {
 
   @Override
   public Expression clone() {
-    return Builder.from(this).build();
+    return toBuilder().build();
   }
 
-  public static JsDocExpression.Builder newBuilder() {
-    return new JsDocExpression.Builder();
+  public Builder toBuilder() {
+    return builder().setExpression(this.getExpression()).setAnnotation(this.getAnnotation());
+  }
+
+  public static Builder builder() {
+    return new Builder();
   }
 
   /** Builder for JsDocExpression */
@@ -72,18 +77,13 @@ public class JsDocExpression extends Expression {
     private Expression expression;
     private String annotation;
 
-    public static Builder from(JsDocExpression annotation) {
-      Builder builder = new Builder();
-      builder.expression = annotation.getExpression();
-      builder.annotation = annotation.getAnnotation();
-      return builder;
-    }
-
+    @CanIgnoreReturnValue
     public Builder setExpression(Expression expression) {
       this.expression = expression;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setAnnotation(String annotation) {
       this.annotation = annotation;
       return this;

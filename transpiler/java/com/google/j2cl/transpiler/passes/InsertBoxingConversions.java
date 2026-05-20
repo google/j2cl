@@ -76,7 +76,7 @@ public class InsertBoxingConversions extends NormalizationPass {
           // It's possible that casting a primitive type to a non-boxed reference type.
           // e.g. (Object) i; in this case, just keep the NOOP casting after boxing.
           if (!boxedExpression.getTypeDescriptor().isAssignableTo(toTypeDescriptor)) {
-            return CastExpression.newBuilder()
+            return CastExpression.builder()
                 .setExpression(boxedExpression)
                 .setCastTypeDescriptor(toTypeDescriptor)
                 .build();
@@ -108,7 +108,7 @@ public class InsertBoxingConversions extends NormalizationPass {
       boolean insertCast =
           toTypeDescriptor.isTypeVariable() && !toTypeDescriptor.isWildcardOrCapture();
       return insertCast
-          ? CastExpression.newBuilder()
+          ? CastExpression.builder()
               .setExpression(boxedExpression)
               .setCastTypeDescriptor(toTypeDescriptor)
               .build()
@@ -138,6 +138,6 @@ public class InsertBoxingConversions extends NormalizationPass {
         primitiveType
             .toBoxedType()
             .getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
-    return MethodCall.Builder.from(valueOfMethodDescriptor).setArguments(expression).build();
+    return MethodCall.builderFrom(valueOfMethodDescriptor).setArguments(expression).build();
   }
 }

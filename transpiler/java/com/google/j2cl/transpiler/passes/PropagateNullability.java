@@ -233,7 +233,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             }
             // Update type of NewArray expression from rewritten initializer.
             changed[0] = true;
-            return NewArray.Builder.from(newArray)
+            return newArray.toBuilder()
                 .setTypeDescriptor((ArrayTypeDescriptor) initializer.getTypeDescriptor())
                 .build();
           }
@@ -297,7 +297,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               return methodCall;
             }
             changed[0] = true;
-            return MethodCall.Builder.from(methodCall)
+            return methodCall.toBuilder()
                 .setTarget(rewrittenMethodDescriptor)
                 .setArguments(rewrittenArguments)
                 .build();
@@ -330,7 +330,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               return newInstance;
             }
             changed[0] = true;
-            return NewInstance.Builder.from(newInstance).setTarget(fixedMethodDescriptor).build();
+            return newInstance.toBuilder().setTarget(fixedMethodDescriptor).build();
           }
 
           @Override
@@ -369,7 +369,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               return functionExpression;
             }
             changed[0] = true;
-            return FunctionExpression.Builder.from(functionExpression)
+            return functionExpression.toBuilder()
                 .setTypeDescriptor(inferredFunctionalInterface)
                 .build();
           }
@@ -379,7 +379,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             if (castExpression.getExpression().getTypeDescriptor().isNullable()
                 && !castExpression.getCastTypeDescriptor().isNullable()) {
               changed[0] = true;
-              return CastExpression.Builder.from(castExpression)
+              return castExpression.toBuilder()
                   .setCastTypeDescriptor(castExpression.getCastTypeDescriptor().toNullable())
                   .build();
             }
@@ -399,9 +399,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               return fragment;
             }
             changed[0] = true;
-            return VariableDeclarationFragment.Builder.from(fragment)
-                .setInitializer(rewrittenInitializer)
-                .build();
+            return fragment.toBuilder().setInitializer(rewrittenInitializer).build();
           }
 
           @Override
@@ -419,9 +417,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               return returnStatement;
             }
             changed[0] = true;
-            return ReturnStatement.Builder.from(returnStatement)
-                .setExpression(rewrittenExpression)
-                .build();
+            return returnStatement.toBuilder().setExpression(rewrittenExpression).build();
           }
 
           @Override
@@ -437,9 +433,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               return binaryExpression;
             }
             changed[0] = true;
-            return BinaryExpression.Builder.from(binaryExpression)
-                .setRightOperand(rewrittenExpression)
-                .build();
+            return binaryExpression.toBuilder().setRightOperand(rewrittenExpression).build();
           }
         });
 
@@ -647,15 +641,13 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     }
     return switch (expression) {
       case FunctionExpression functionExpression ->
-          FunctionExpression.Builder.from(functionExpression)
-              .setTypeDescriptor(propagatedTypeDescriptor)
-              .build();
+          functionExpression.toBuilder().setTypeDescriptor(propagatedTypeDescriptor).build();
       case NewInstance newInstance
           when propagatedTypeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
               && newInstance.getTypeArguments().isEmpty() ->
-          NewInstance.Builder.from(newInstance)
+          newInstance.toBuilder()
               .setTarget(
-                  MethodDescriptor.Builder.from(newInstance.getTarget())
+                  newInstance.getTarget().toBuilder()
                       .setEnclosingTypeDescriptor(declaredTypeDescriptor)
                       .build())
               .build();
@@ -685,7 +677,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         anonymousClass.setSuperTypeDescriptor(newSuperClass);
         // Even though the type was updated directly in the AST, create a new NewInstance expression
         // to signal that propagation has made a change.
-        return NewInstance.Builder.from(newInstance).setAnonymousInnerClass(anonymousClass).build();
+        return newInstance.toBuilder().setAnonymousInnerClass(anonymousClass).build();
       }
     } else {
       // Propagate to interfaces
@@ -697,7 +689,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         anonymousClass.setSuperInterfaceTypeDescriptors(newSuperInterfaces);
         // Even though the type was updated directly in the AST, create a new NewInstance expression
         // to signal that propagation has made a change.
-        return NewInstance.Builder.from(newInstance).setAnonymousInnerClass(anonymousClass).build();
+        return newInstance.toBuilder().setAnonymousInnerClass(anonymousClass).build();
       }
     }
 
@@ -1047,7 +1039,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       TypeVariable typeParameterDescriptor,
       TypeDescriptor typeArgumentDescriptor) {
     MethodDescriptor declarationDescriptor = methodDescriptor.getDeclarationDescriptor();
-    return MethodDescriptor.Builder.from(methodDescriptor)
+    return methodDescriptor.toBuilder()
         .setReturnTypeDescriptor(
             reparameterize(
                 declarationDescriptor.getReturnTypeDescriptor(),
@@ -1207,7 +1199,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       case IntersectionTypeDescriptor declarationIntersectionTypeDescriptor -> {
         IntersectionTypeDescriptor intersectionTypeDescriptor =
             (IntersectionTypeDescriptor) typeDescriptor;
-        return IntersectionTypeDescriptor.newBuilder()
+        return IntersectionTypeDescriptor.builder()
             .setIntersectionTypeDescriptors(
                 zip(
                     declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors(),
@@ -1224,7 +1216,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
       case UnionTypeDescriptor declarationUnionTypeDescriptor -> {
         UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
-        return UnionTypeDescriptor.newBuilder()
+        return UnionTypeDescriptor.builder()
             .setUnionTypeDescriptors(
                 zip(
                     declarationUnionTypeDescriptor.getUnionTypeDescriptors(),

@@ -279,7 +279,7 @@ internal class CompilationUnitBuilder(
         convertExpression(initializerExpression)
       }
 
-    return Field.Builder.from(environment.getDeclaredFieldDescriptor(irEnumEntry))
+    return Field.builderFrom(environment.getDeclaredFieldDescriptor(irEnumEntry))
       .setSourcePosition(getNameSourcePosition(irEnumEntry))
       .setInitializer(initializer)
       .build()
@@ -315,7 +315,7 @@ internal class CompilationUnitBuilder(
       sourcePosition = getNameSourcePosition(irField)
     }
 
-    return Field.Builder.from(declaredFieldDescriptor)
+    return Field.builderFrom(declaredFieldDescriptor)
       .setSourcePosition(sourcePosition)
       .setInitializer(initializer)
       .build()
@@ -324,7 +324,7 @@ internal class CompilationUnitBuilder(
   private fun convertFunction(irFunction: IrFunction): Method {
     val parameters = convertParameters(irFunction)
     val methodDescriptor = environment.getDeclaredMethodDescriptor(irFunction)
-    return Method.newBuilder()
+    return Method.builder()
       .setMethodDescriptor(methodDescriptor)
       .setSourcePosition(getNameSourcePosition(irFunction))
       .setParameters(parameters)
@@ -341,7 +341,7 @@ internal class CompilationUnitBuilder(
       // Add the implicit continuation parameter as the first parameter. The call site will be
       // patched in a backend desugaring pass.
       add(
-        Variable.newBuilder()
+        Variable.builder()
           .setName("\$continuation")
           .setParameter(true)
           .setTypeDescriptor(
@@ -356,7 +356,7 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertBody(body: IrBody): Block =
-    Block.newBuilder()
+    Block.builder()
       .setSourcePosition(getSourcePosition(body))
       .addStatements(convertStatements(body.statements))
       .build()
@@ -364,7 +364,7 @@ internal class CompilationUnitBuilder(
   private fun convertAnonymousInitializer(
     irAnonymousInitializer: IrAnonymousInitializer
   ): InitializerBlock =
-    InitializerBlock.newBuilder()
+    InitializerBlock.builder()
       .setBody(convertBody(irAnonymousInitializer.body))
       .setDescriptor(
         environment
@@ -402,7 +402,7 @@ internal class CompilationUnitBuilder(
     LocalClassDeclarationStatement(convertClass(irClass), getNameSourcePosition(irClass))
 
   private fun convertLocalFunction(irFunction: IrFunction): Statement =
-    LocalFunctionDeclarationStatement.newBuilder()
+    LocalFunctionDeclarationStatement.builder()
       .setMethodDescriptor(environment.getDeclaredMethodDescriptor(irFunction))
       .setSourcePosition(getSourcePosition(irFunction))
       .setParameters(convertParameters(irFunction))
@@ -410,7 +410,7 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertContainer(irBlock: IrContainerExpression): Block =
-    Block.newBuilder()
+    Block.builder()
       .setSourcePosition(getSourcePosition(irBlock))
       .setStatements(convertStatements(irBlock.statements))
       .build()
@@ -425,7 +425,7 @@ internal class CompilationUnitBuilder(
         thenStatement: Statement,
         elseStatement: Statement?,
         position: SourcePosition ->
-        IfStatement.newBuilder()
+        IfStatement.builder()
           .setSourcePosition(position)
           .setConditionExpression(condition)
           .setThenStatement(thenStatement)
@@ -470,7 +470,7 @@ internal class CompilationUnitBuilder(
           throw IllegalStateException("IrLoop type not recognized ${irLoop::class.simpleName}")
       }
 
-    val label = irLoop.label?.let { Label.newBuilder().setName(it).build() }
+    val label = irLoop.label?.let { Label.builder().setName(it).build() }
 
     if (label != null) {
       // Labeled loop. Add the label to scope before creating the loop statement.
@@ -478,7 +478,7 @@ internal class CompilationUnitBuilder(
       val loopStatement = createLoopStatement()
       labelsInScope[label.name]!!.removeFirst()
 
-      return LabeledStatement.newBuilder()
+      return LabeledStatement.builder()
         .setSourcePosition(getSourcePosition(irLoop))
         .setLabel(label)
         .setStatement(loopStatement)
@@ -490,14 +490,14 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertWhileLoop(irWhileLoop: IrWhileLoop): Statement =
-    WhileStatement.newBuilder()
+    WhileStatement.builder()
       .setSourcePosition(getSourcePosition(irWhileLoop))
       .setConditionExpression(convertExpression(irWhileLoop.condition))
       .setBody(convertStatement(irWhileLoop.body!!))
       .build()
 
   private fun convertDoWhileLoop(irDoWhileLoop: IrDoWhileLoop): Statement =
-    DoWhileStatement.newBuilder()
+    DoWhileStatement.builder()
       .setSourcePosition(getSourcePosition(irDoWhileLoop))
       // Order matters here. We need to convert the body before the condition because the condition
       // can refer to variable created in the body.
@@ -506,7 +506,7 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertForLoop(irForLoop: IrForLoop): Statement =
-    ForStatement.newBuilder()
+    ForStatement.builder()
       .setInitializers(convertVariableDeclarations(irForLoop.initializers))
       .setConditionExpression(convertExpression(irForLoop.condition))
       .setUpdates(convertExpressions(irForLoop.updates))
@@ -515,7 +515,7 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertForInLoop(irForInLoop: IrForInLoop): Statement =
-    ForEachStatement.newBuilder()
+    ForEachStatement.builder()
       .setLoopVariable(createVariable(irForInLoop.variable))
       .setIterableExpression(
         convertExpression(irForInLoop.condition).also {
@@ -529,14 +529,14 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertReturnStatement(irReturn: IrReturn): Statement {
-    return ReturnStatement.newBuilder()
+    return ReturnStatement.builder()
       .setExpression(convertExpression(irReturn.value))
       .setSourcePosition(getSourcePosition(irReturn))
       .build()
   }
 
   private fun convertTryStatement(irTry: IrTry): Statement =
-    TryStatement.newBuilder()
+    TryStatement.builder()
       .setBody(convertContainer(irTry.tryResult as IrContainerExpression))
       .setCatchClauses(irTry.catches.map(::convertCatch))
       .setFinallyBlock(
@@ -546,19 +546,19 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertCatch(irCatch: IrCatch): CatchClause =
-    CatchClause.newBuilder()
+    CatchClause.builder()
       .setExceptionVariable(createVariable(irCatch.catchParameter))
       .setBody(convertContainer(irCatch.result as IrContainerExpression))
       .build()
 
   private fun convertThrowStatement(irThrow: IrThrow): Statement =
-    ThrowStatement.newBuilder()
+    ThrowStatement.builder()
       .setSourcePosition(getSourcePosition(irThrow))
       .setExpression(convertExpression(irThrow.value))
       .build()
 
   private fun convertBreakStatement(irBreak: IrBreak): Statement =
-    BreakStatement.newBuilder()
+    BreakStatement.builder()
       .setSourcePosition(getSourcePosition(irBreak))
       .setLabelReference(
         irBreak.resolveLabel()?.let { labelsInScope[it]!!.first().createReference() }
@@ -566,7 +566,7 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertContinueStatement(irContinue: IrContinue): Statement =
-    ContinueStatement.newBuilder()
+    ContinueStatement.builder()
       .setSourcePosition(getSourcePosition(irContinue))
       .setLabelReference(
         irContinue.resolveLabel()?.let { labelsInScope[it]!!.first().createReference() }
@@ -574,7 +574,7 @@ internal class CompilationUnitBuilder(
       .build()
 
   private fun convertSwitchCase(irSwitch: IrSwitch) =
-    SwitchStatement.newBuilder()
+    SwitchStatement.builder()
       .setExpression(convertExpression(irSwitch.expression))
       .setSourcePosition(getSourcePosition(irSwitch))
       .setCases(irSwitch.cases.map { convertCaseStatement(it) })
@@ -588,12 +588,12 @@ internal class CompilationUnitBuilder(
     }
 
     if (irSwitchCase.caseExpressions.isEmpty()) {
-      return SwitchCaseDefault.newBuilder()
+      return SwitchCaseDefault.builder()
         .setStatements(statements)
         .setSourcePosition(getSourcePosition(irSwitchCase))
         .build()
     } else {
-      return SwitchCaseExpressions.newBuilder()
+      return SwitchCaseExpressions.builder()
         .setCaseExpressions(convertExpressions(irSwitchCase.caseExpressions))
         .setStatements(statements)
         .setSourcePosition(getSourcePosition(irSwitchCase))
@@ -602,7 +602,7 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertSwitchBreakStatement(irSwitchBreak: IrSwitchBreak) =
-    BreakStatement.newBuilder().setSourcePosition(getSourcePosition(irSwitchBreak)).build()
+    BreakStatement.builder().setSourcePosition(getSourcePosition(irSwitchBreak)).build()
 
   private fun convertExpressionStatement(irExpression: IrExpression): Statement =
     convertExpression(irExpression).makeStatement(getSourcePosition(irExpression))
@@ -670,7 +670,7 @@ internal class CompilationUnitBuilder(
       // operation as an arithmetic operation.
       StringLiteral("")
     ) { accumulatedExpression, argument ->
-      BinaryExpression.newBuilder()
+      BinaryExpression.builder()
         .setLeftOperand(accumulatedExpression)
         .setOperator(BinaryOperator.PLUS)
         .setRightOperand(convertExpression(argument))
@@ -689,7 +689,7 @@ internal class CompilationUnitBuilder(
         // Kotlinc will always provide an else branch when `when` is used as an expression.
         requireNotNull(falseExpression)
 
-        ConditionalExpression.newBuilder()
+        ConditionalExpression.builder()
           .setTypeDescriptor(environment.getTypeDescriptor(irWhen.type))
           .setConditionExpression(condition)
           .setTrueExpression(trueExpression)
@@ -731,7 +731,7 @@ internal class CompilationUnitBuilder(
     // Wrap the original call in an unchecked cast. This is particularly useful when we're using
     // undefined to stand-in for a primitive type. Otherwise the the boxed type would be used and we
     // would attempt to auto unbox undefined.
-    JsDocCastExpression.newBuilder()
+    JsDocCastExpression.builder()
       .setCastTypeDescriptor(environment.getTypeDescriptor(irCall.type))
       .setExpression(convertFunctionCall(irCall))
       .build()
@@ -768,7 +768,7 @@ internal class CompilationUnitBuilder(
   ): Expression {
     val convertedReceiver = convertExpression(receiver)
     if (convertedReceiver.typeDescriptor.isPrimitive) {
-      return MultiExpression.newBuilder()
+      return MultiExpression.builder()
         .addExpressions(
           convertedReceiver,
           environment.createTypeLiteral(receiver.type, sourcePosition, wrapPrimitives),
@@ -802,23 +802,23 @@ internal class CompilationUnitBuilder(
         )
       // Since we're not getting the class from the result of the argument, construct a
       // MultiExpression that executes the argument. This is to ensure any side effects still occur.
-      return MultiExpression.newBuilder().addExpressions(argument, createKClassCall).build()
+      return MultiExpression.builder().addExpressions(argument, createKClassCall).build()
     }
 
     return RuntimeMethods.createKClassCall(argument)
   }
 
   private fun convertArraySizeCall(irCall: IrCall): Expression =
-    ArrayLength.newBuilder().setArrayExpression(convertQualifier(irCall)).build()
+    ArrayLength.builder().setArrayExpression(convertQualifier(irCall)).build()
 
   private fun convertArrayGetCall(irCall: IrCall): Expression =
-    ArrayAccess.newBuilder()
+    ArrayAccess.builder()
       .setArrayExpression(convertQualifier(irCall))
       .setIndexExpression(convertExpression(irCall.arguments[1]!!))
       .build()
 
   private fun convertArraySetCall(irCall: IrCall): Expression =
-    BinaryExpression.newBuilder()
+    BinaryExpression.builder()
       .setLeftOperand(
         // the index argument position of Array.get or Array.set is the same. We can reuse
         // convertArrayGetCall() to create the ArrayAccess.
@@ -837,12 +837,12 @@ internal class CompilationUnitBuilder(
 
   private fun convertIsArrayOfCall(irCall: IrCall): Expression =
     // Transforms `array.isArrayOf<String>()` to `array instanceof String[]`
-    InstanceOfExpression.newBuilder()
+    InstanceOfExpression.builder()
       // isArrayOf is defined as an extension method. The qualifier is the extension receiver.
       .setExpression(convertExpression(irCall.extensionReceiverOrFail))
       .setTestTypeDescriptor(
         // Type argument of the isArrayOf call is the component type of the array:
-        ArrayTypeDescriptor.newBuilder()
+        ArrayTypeDescriptor.builder()
           .setComponentTypeDescriptor(
             environment.getTypeDescriptor(requireNotNull(irCall.typeArguments[0]))
           )
@@ -858,14 +858,14 @@ internal class CompilationUnitBuilder(
       else TypeDescriptors.get().javaLangObjectArray
     val methodDescriptor =
       TypeDescriptors.get().javaUtilArrays.getMethodDescriptor(methodName, arrayTypeDescriptor)
-    return MethodCall.Builder.from(methodDescriptor)
+    return MethodCall.builderFrom(methodDescriptor)
       .setArguments(convertExpression(arrayArgument))
       .setSourcePosition(getSourcePosition(irCall))
       .build()
   }
 
   private fun convertAnyToStringCall(irCall: IrCall) =
-    MethodCall.Builder.from(
+    MethodCall.builderFrom(
         TypeDescriptors.get()
           .javaLangString
           .getMethodDescriptor("valueOf", TypeDescriptors.get().javaLangObject)
@@ -880,7 +880,7 @@ internal class CompilationUnitBuilder(
     val constructorSymbol = intrinsicMethods.getRangeToConstructor(irCall)
     val methodDescriptor =
       environment.getMethodDescriptor(constructorSymbol.owner, irCall.typeSubstitutionMap)
-    return NewInstance.Builder.from(methodDescriptor)
+    return NewInstance.builderFrom(methodDescriptor)
       .setArguments(
         listOf(
           checkNotNull(convertQualifier(irCall)),
@@ -944,14 +944,14 @@ internal class CompilationUnitBuilder(
           TypeDescriptors.get()
             .javaLangFloat
             .getMethodDescriptor("toDouble", TypeDescriptors.get().javaLangFloat)
-        return MethodCall.Builder.from(floatToNumberMethodDescriptor)
+        return MethodCall.builderFrom(floatToNumberMethodDescriptor)
           .setArguments(expression)
           .build()
       }
       // Cast primitive float to double to keep the AST consistent since their representations are
       // the same.
       TypeDescriptors.isPrimitiveFloat(typeDescriptor) ->
-        return CastExpression.newBuilder()
+        return CastExpression.builder()
           .setExpression(expression)
           .setCastTypeDescriptor(PrimitiveTypes.DOUBLE)
           .build()
@@ -971,13 +971,13 @@ internal class CompilationUnitBuilder(
     // a primitive. It will only compare primitives if both sides are primitive.
     if (lhs.typeDescriptor.isPrimitive && !rhs.typeDescriptor.isPrimitive) {
       lhs =
-        CastExpression.newBuilder()
+        CastExpression.builder()
           .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
           .setExpression(lhs)
           .build()
     } else if (rhs.typeDescriptor.isPrimitive && !lhs.typeDescriptor.isPrimitive) {
       rhs =
-        CastExpression.newBuilder()
+        CastExpression.builder()
           .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
           .setExpression(rhs)
           .build()
@@ -1026,9 +1026,9 @@ internal class CompilationUnitBuilder(
       // widening semantics, and preserve the original meaning.
 
       val primitiveType = operand.typeDescriptor.toUnboxedType()
-      return CastExpression.newBuilder()
+      return CastExpression.builder()
         .setExpression(
-          BinaryExpression.newBuilder()
+          BinaryExpression.builder()
             .setLeftOperand(operand)
             .setOperator(prefixOperator.underlyingBinaryOperator)
             .setRightOperand(NumberLiteral(primitiveType, 1))
@@ -1037,7 +1037,7 @@ internal class CompilationUnitBuilder(
         .setCastTypeDescriptor(primitiveType)
         .build()
     }
-    return PrefixExpression.newBuilder().setOperand(operand).setOperator(prefixOperator).build()
+    return PrefixExpression.builder().setOperand(operand).setOperator(prefixOperator).build()
   }
 
   private fun convertBinaryOperation(irCall: IrCall): Expression {
@@ -1049,7 +1049,7 @@ internal class CompilationUnitBuilder(
     val rhs = convertExpression(irCall.arguments[1]!!)
 
     // Create the appropriate expression with the same semantic of the intrinsic call.
-    return BinaryExpression.newBuilder()
+    return BinaryExpression.builder()
       .setLeftOperand(lhs)
       .setOperator(binaryOperator)
       .setRightOperand(rhs)
@@ -1067,7 +1067,7 @@ internal class CompilationUnitBuilder(
     if (irCall is IrConstructorCall && irCall.isNewArrayCall) {
       return createNewArray(irCall)
     }
-    return NewInstance.Builder.from(
+    return NewInstance.builderFrom(
         environment.getMethodDescriptor(irCall.symbol.owner, irCall.typeSubstitutionMap)
       )
       .setQualifier(convertQualifier(irCall))
@@ -1105,7 +1105,7 @@ internal class CompilationUnitBuilder(
         it.addAll(AstUtils.createListOfNullValues(arrayTypeDescriptor.dimensions - 1))
       }
 
-    return NewArray.newBuilder()
+    return NewArray.builder()
       .setDimensionExpressions(dimensionExpressions)
       .setTypeDescriptor(arrayTypeDescriptor)
       .apply {
@@ -1120,14 +1120,14 @@ internal class CompilationUnitBuilder(
     convertFieldAccessExpression(irGetField)
 
   private fun convertSetField(irSetField: IrSetField): Expression =
-    BinaryExpression.newBuilder()
+    BinaryExpression.builder()
       .setOperator(BinaryOperator.ASSIGN)
       .setLeftOperand(convertFieldAccessExpression(irSetField))
       .setRightOperand(convertExpression(irSetField.value))
       .build()
 
   private fun convertFieldAccessExpression(fieldAccess: IrFieldAccessExpression): FieldAccess =
-    FieldAccess.Builder.from(
+    FieldAccess.builderFrom(
         environment.getFieldDescriptor(
           fieldAccess.symbol.owner,
           fieldAccess.receiver?.type?.typeSubstitutionMap ?: mapOf(),
@@ -1170,7 +1170,7 @@ internal class CompilationUnitBuilder(
 
     val qualifier = convertQualifier(functionAccess)
     val isStaticDispatch = qualifier !is SuperReference && functionAccess.isSuperCall
-    return MethodCall.Builder.from(
+    return MethodCall.builderFrom(
         adjustEnumConstructorDescriptor(
           environment.getMethodDescriptor(callee, typeSubstitutionMap),
           functionAccess,
@@ -1202,7 +1202,8 @@ internal class CompilationUnitBuilder(
         functionAccess.nonDispatchArguments[1] == null
     )
 
-    return MethodDescriptor.Builder.from(methodDescriptor)
+    return methodDescriptor
+      .toBuilder()
       // Fix the inconsistency by removing the implicit parameters from the descriptor.
       .setParameterDescriptors(listOf())
       .makeDeclaration()
@@ -1244,7 +1245,7 @@ internal class CompilationUnitBuilder(
       }
     }
 
-    return BinaryExpression.newBuilder()
+    return BinaryExpression.builder()
       .setOperator(operator)
       .setLeftOperand(lhs)
       .setRightOperand(rhs)
@@ -1297,12 +1298,12 @@ internal class CompilationUnitBuilder(
           // An implicit cast guarantees that the type of the expression is already checked.
           // However, the boxing/unboxing conversion has not happened yet and in those cases
           // the cast can not be replaced by a JsDocCastExpression.
-          JsDocCastExpression.newBuilder()
+          JsDocCastExpression.builder()
             .setExpression(expression)
             .setCastTypeDescriptor(testTypeDescriptor)
             .build()
         } else {
-          CastExpression.newBuilder()
+          CastExpression.builder()
             .setExpression(expression)
             .setCastTypeDescriptor(testTypeDescriptor)
             .build()
@@ -1341,11 +1342,9 @@ internal class CompilationUnitBuilder(
         BooleanLiteral.get(
           expressionTypeDescriptor.toBoxedType().isAssignableTo(testTypeDescriptor)
         )
-      return MultiExpression.newBuilder()
-        .addExpressions(convertExpression(expression), result)
-        .build()
+      return MultiExpression.builder().addExpressions(convertExpression(expression), result).build()
     }
-    return InstanceOfExpression.newBuilder()
+    return InstanceOfExpression.builder()
       .setExpression(convertExpression(expression))
       .setTestTypeDescriptor(testTypeDescriptor)
       .setSourcePosition(sourcePosition)
@@ -1353,13 +1352,13 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertGetEnumValue(irGetEnumValue: IrGetEnumValue): Expression =
-    FieldAccess.newBuilder()
+    FieldAccess.builder()
       .setSourcePosition(getSourcePosition(irGetEnumValue))
       .setTarget(environment.getDeclaredFieldDescriptor(irGetEnumValue.symbol.owner))
       .build()
 
   private fun convertVararg(vararg: IrVararg): Expression =
-    ArrayLiteral.newBuilder()
+    ArrayLiteral.builder()
       .setTypeDescriptor(environment.getTypeDescriptor(vararg.type) as ArrayTypeDescriptor)
       .setValueExpressions(vararg.elements.map(::convertVarargElement))
       .build()
@@ -1367,7 +1366,7 @@ internal class CompilationUnitBuilder(
   private fun convertVarargElement(varargElement: IrVarargElement): Expression =
     when (varargElement) {
       is IrSpreadElement ->
-        PrefixExpression.newBuilder()
+        PrefixExpression.builder()
           .setOperator(PrefixOperator.SPREAD)
           .setOperand(convertExpression(varargElement.expression))
           .build()
@@ -1406,10 +1405,9 @@ internal class CompilationUnitBuilder(
       }
     }
 
-    val body =
-      irExpression.invokeFunction.body?.let { convertBody(it) } ?: Block.newBuilder().build()
+    val body = irExpression.invokeFunction.body?.let { convertBody(it) } ?: Block.builder().build()
 
-    return FunctionExpression.newBuilder()
+    return FunctionExpression.builder()
       .setTypeDescriptor(typeDescriptor)
       .setJsAsync(typeDescriptor.functionalInterface!!.singleAbstractMethodDescriptor!!.isJsAsync)
       .setParameters(parameters)
@@ -1457,7 +1455,7 @@ internal class CompilationUnitBuilder(
     irVariables: List<IrVariable>
   ): VariableDeclarationExpression {
 
-    return VariableDeclarationExpression.newBuilder()
+    return VariableDeclarationExpression.builder()
       .addVariableDeclarationFragments(
         irVariables.map { irVariable ->
           val initializer = irVariable.initializer
@@ -1465,7 +1463,7 @@ internal class CompilationUnitBuilder(
             if (initializer != null) {
               convertExpression(initializer)
             } else null
-          VariableDeclarationFragment.newBuilder()
+          VariableDeclarationFragment.builder()
             .setVariable(createVariable(irVariable))
             .setInitializer(initializerExpression)
             .build()
@@ -1476,7 +1474,7 @@ internal class CompilationUnitBuilder(
 
   private fun createVariable(irValueDeclaration: IrValueDeclaration): Variable {
     val variable =
-      Variable.newBuilder()
+      Variable.builder()
         .setName(irValueDeclaration.sanitizedName)
         .setTypeDescriptor(environment.getTypeDescriptor(irValueDeclaration.type))
         .setParameter(irValueDeclaration is IrValueParameter)

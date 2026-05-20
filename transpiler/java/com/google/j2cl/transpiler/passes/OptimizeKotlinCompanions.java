@@ -188,7 +188,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
             if (methodCall.getQualifier() instanceof SuperReference) {
               // Mark the super method call as and explicit static dispatch since the SuperReference
               // will be rewritten below.
-              return MethodCall.Builder.from(methodCall).setStaticDispatch(true).build();
+              return methodCall.toBuilder().setStaticDispatch(true).build();
             }
             return methodCall;
           }
@@ -206,7 +206,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
               return thisOrSuperReference;
             }
 
-            return FieldAccess.Builder.from(companionInstanceField).build();
+            return FieldAccess.builderFrom(companionInstanceField).build();
           }
         });
   }
@@ -283,7 +283,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
                 .removeIf(m -> m.getDescriptor().equals(staticMethodDescriptor));
 
             enclosingType.addMember(
-                Method.Builder.from(method).setMethodDescriptor(staticMethodDescriptor).build());
+                method.toBuilder().setMethodDescriptor(staticMethodDescriptor).build());
 
             // If the companion method is a custom `$isInstance` method, we do not want to create
             // a forwarding method on the companion to avoid conflicting with the static
@@ -343,7 +343,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
   private static void moveCompanionInstanceFieldToCompanionClass(
       Type enclosingType, Type companion, Field companionInstanceOnEnclosingType) {
     Field companionInstanceOnCompanion =
-        Field.Builder.from(
+        Field.builderFrom(
                 getCompanionInstanceFieldOnCompanion(
                     companionInstanceOnEnclosingType.getDescriptor()))
             .setSourcePosition(companionInstanceOnEnclosingType.getSourcePosition())
@@ -425,7 +425,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
               qualifier = null;
             }
 
-            return MethodCall.Builder.from(methodCall)
+            return methodCall.toBuilder()
                 .setQualifier(qualifier)
                 .setTarget(getCorrespondingStaticMethodDescriptor(methodCall.getTarget()))
                 .build();
@@ -474,7 +474,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
                 .setOriginalJsInfo(
                     companionEnclosingType.isNative()
                             || companionEnclosingType.isJsFunctionInterface()
-                        ? JsInfo.newBuilder()
+                        ? JsInfo.builder()
                             .setJsMemberType(JsMemberType.NONE)
                             .setJsOverlay(true)
                             .build()
@@ -495,7 +495,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
               return fieldAccess;
             }
 
-            return FieldAccess.Builder.from(fieldAccess)
+            return fieldAccess.toBuilder()
                 .setTarget(getCompanionInstanceFieldOnCompanion(fieldAccess.getTarget()))
                 .build();
           }
@@ -510,7 +510,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
       FieldDescriptor companionInstanceField) {
     checkState(companionInstanceField.isDeclaration());
 
-    return FieldDescriptor.Builder.from(companionInstanceField)
+    return companionInstanceField.toBuilder()
         .setEnclosingTypeDescriptor(
             (DeclaredTypeDescriptor) companionInstanceField.getTypeDescriptor())
         .setOriginalJsInfo(JsInfo.NONE)

@@ -58,7 +58,7 @@ public class ArrayLength extends Expression {
 
   @Override
   public ArrayLength clone() {
-    return ArrayLength.newBuilder().setArrayExpression(arrayExpression.clone()).build();
+    return ArrayLength.builder().setArrayExpression(arrayExpression.clone()).build();
   }
 
   @Override
@@ -66,17 +66,17 @@ public class ArrayLength extends Expression {
     return Visitor_ArrayLength.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder().setArrayExpression(this.getArrayExpression());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
   /** Builder for ArrayLength. */
   public static class Builder {
     private Expression arrayExpression;
-
-    public static Builder from(ArrayLength arrayLength) {
-      return newBuilder().setArrayExpression(arrayLength.getArrayExpression());
-    }
 
     public Builder setArrayExpression(Expression arrayExpression) {
       this.arrayExpression = arrayExpression;

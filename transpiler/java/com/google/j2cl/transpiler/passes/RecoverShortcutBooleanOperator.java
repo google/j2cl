@@ -39,7 +39,7 @@ public class RecoverShortcutBooleanOperator extends NormalizationPass {
           @Override
           public Node rewriteConditionalExpression(ConditionalExpression conditionalExpression) {
             if (conditionalExpression.getTrueExpression() == BooleanLiteral.get(true)) {
-              return BinaryExpression.newBuilder()
+              return BinaryExpression.builder()
                   .setOperator(BinaryOperator.CONDITIONAL_OR)
                   .setLeftOperand(conditionalExpression.getConditionExpression())
                   .setRightOperand(conditionalExpression.getFalseExpression())
@@ -47,7 +47,7 @@ public class RecoverShortcutBooleanOperator extends NormalizationPass {
             }
 
             if (conditionalExpression.getFalseExpression() == BooleanLiteral.get(false)) {
-              return BinaryExpression.newBuilder()
+              return BinaryExpression.builder()
                   .setOperator(BinaryOperator.CONDITIONAL_AND)
                   .setLeftOperand(conditionalExpression.getConditionExpression())
                   .setRightOperand(conditionalExpression.getTrueExpression())

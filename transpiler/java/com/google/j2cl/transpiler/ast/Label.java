@@ -39,22 +39,20 @@ public class Label extends NameDeclaration implements Cloneable<Label> {
 
   @Override
   public Label clone() {
-    return Label.Builder.from(this).build();
+    return toBuilder().build();
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder().setName(this.getName());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
   /** Builder for Label. */
   public static class Builder {
     private String name;
-
-    public static Builder from(Label variable) {
-      Builder builder = new Builder();
-      builder.name = variable.getName();
-      return builder;
-    }
 
     public Builder setName(String name) {
       this.name = name;

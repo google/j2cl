@@ -171,7 +171,7 @@ public class NormalizeConstructors extends NormalizationPass {
               return method;
             }
 
-            return Method.newBuilder()
+            return Method.builder()
                 .setMethodDescriptor(
                     ctorMethodDescriptorFromJavaConstructor(method.getDescriptor()))
                 .setParameters(method.getParameters())
@@ -193,7 +193,7 @@ public class NormalizeConstructors extends NormalizationPass {
                 methodCall.getQualifier() != null
                     ? methodCall.getQualifier()
                     : new ThisReference(methodCall.getTarget().getEnclosingTypeDescriptor());
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     ctorMethodDescriptorFromJavaConstructor(methodCall.getTarget()))
                 .setQualifier(qualifier)
                 .setArguments(methodCall.getArguments())
@@ -239,7 +239,7 @@ public class NormalizeConstructors extends NormalizationPass {
         ctorMethodDescriptorFromJavaConstructor(jsConstructor.getDescriptor());
 
     MethodCall ctorCall =
-        MethodCall.Builder.from(ctorMethodDescriptor)
+        MethodCall.builderFrom(ctorMethodDescriptor)
             .setDefaultInstanceQualifier()
             .setArguments(arguments)
             .build();
@@ -284,7 +284,7 @@ public class NormalizeConstructors extends NormalizationPass {
               .makeStatement(jsConstructorSourcePosition));
     }
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(jsConstructor.getDescriptor())
         .setParameters(jsConstructorParameters)
         .addStatements(body)
@@ -311,7 +311,7 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodDescriptor constructorDescriptor =
         getImplicitJavascriptConstructorDescriptor(type.getTypeDescriptor());
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(constructorDescriptor)
         .addStatements(body)
         .setSourcePosition(sourcePosition)
@@ -320,7 +320,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
   /** Synthesizes a "super" call to the constructor. */
   private static MethodCall synthesizeEmptySuperCall(DeclaredTypeDescriptor superType) {
-    return MethodCall.Builder.from(getImplicitJavascriptConstructorDescriptor(superType)).build();
+    return MethodCall.builderFrom(getImplicitJavascriptConstructorDescriptor(superType)).build();
   }
 
   private static MethodCall synthesizeAssertClinit(Type type) {
@@ -339,7 +339,7 @@ public class NormalizeConstructors extends NormalizationPass {
               return constructorInvocation;
             }
 
-            return MethodCall.Builder.from(factoryDescriptorForConstructor(originalConstructor))
+            return MethodCall.builderFrom(factoryDescriptorForConstructor(originalConstructor))
                 .setArguments(AstUtils.clone(constructorInvocation.getArguments()))
                 .build();
           }
@@ -385,7 +385,7 @@ public class NormalizeConstructors extends NormalizationPass {
    */
   private static Method synthesizeBoxedJsPrimitiveFactoryMethod(Type type, Method constructor) {
     Method factory =
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
             .setParameters(constructor.getParameters())
             .setSourcePosition(constructor.getSourcePosition())
@@ -393,18 +393,15 @@ public class NormalizeConstructors extends NormalizationPass {
 
     List<Statement> factoryStatements = factory.getBody().getStatements();
     Variable thisArg =
-        Variable.newBuilder()
-            .setName("$thisArg")
-            .setTypeDescriptor(type.getTypeDescriptor())
-            .build();
+        Variable.builder().setName("$thisArg").setTypeDescriptor(type.getTypeDescriptor()).build();
     factoryStatements.add(
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclarations(thisArg)
             .build()
             .makeStatement(constructor.getSourcePosition()));
     factoryStatements.addAll(constructor.getBody().getStatements());
     factoryStatements.add(
-        ReturnStatement.newBuilder()
+        ReturnStatement.builder()
             .setExpression(thisArg.createReference())
             .setSourcePosition(constructor.getSourcePosition())
             .build());
@@ -489,17 +486,17 @@ public class NormalizeConstructors extends NormalizationPass {
             constructor.getParameters(), factoryMethodParameters, javascriptConstructorArguments);
     // let $instance = new Class(<javascriptConstructorArguments>);
     Variable newInstance =
-        Variable.newBuilder().setName("$instance").setTypeDescriptor(enclosingType).build();
+        Variable.builder().setName("$instance").setTypeDescriptor(enclosingType).build();
 
     SourcePosition constructorSourcePosition = constructor.getSourcePosition();
     Statement newInstanceStatement =
         AstUtils.replaceDeclarations(
                 constructor.getParameters(),
                 factoryMethodParameters,
-                VariableDeclarationExpression.newBuilder()
+                VariableDeclarationExpression.builder()
                     .addVariableDeclaration(
                         newInstance,
-                        NewInstance.Builder.from(javascriptConstructor)
+                        NewInstance.builderFrom(javascriptConstructor)
                             .setArguments(javascriptConstructorArguments)
                             .build())
                     .build())
@@ -508,7 +505,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     // $instance.$ctor...();
     Statement ctorCallStatement =
-        MethodCall.Builder.from(constructor.getDescriptor())
+        MethodCall.builderFrom(constructor.getDescriptor())
             .setQualifier(newInstance.createReference())
             .setArguments(relayArguments)
             .build()
@@ -528,7 +525,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     // return $instance
     Statement returnStatement =
-        ReturnStatement.newBuilder()
+        ReturnStatement.builder()
             .setExpression(
                 enclosingType.isJsFunctionImplementation()
                     ? AstUtils.createLambdaInstance(enclosingType, newInstance.createReference())
@@ -537,7 +534,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .build();
     statements.add(returnStatement);
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
         .setParameters(factoryMethodParameters)
         .addStatements(statements)
@@ -553,8 +550,8 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static Expression newInstanceOfError(DeclaredTypeDescriptor type, Expression thisRef) {
-    return NewInstance.Builder.from(
-            MethodDescriptor.newBuilder()
+    return NewInstance.builderFrom(
+            MethodDescriptor.builder()
                 .setConstructor(true)
                 .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
                 .setEnclosingTypeDescriptor(type)
@@ -625,7 +622,7 @@ public class NormalizeConstructors extends NormalizationPass {
   /** Method descriptor for the implicit (parameterless) ES6 constructor */
   private static MethodDescriptor getImplicitJavascriptConstructorDescriptor(
       DeclaredTypeDescriptor enclosingType) {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setEnclosingTypeDescriptor(enclosingType)
         .setConstructor(true)
         .setVisibility(Visibility.PUBLIC)
@@ -639,16 +636,15 @@ public class NormalizeConstructors extends NormalizationPass {
 
     DeclaredTypeDescriptor enclosingType = constructorDescriptor.getEnclosingTypeDescriptor();
     MethodDescriptor javascriptConstructorDeclaration =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(enclosingType)
             .setConstructor(true)
             .setParameterDescriptors(
                 constructorDescriptor.getDeclarationDescriptor().getParameterDescriptors())
-            .setOriginalJsInfo(
-                JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build())
+            .setOriginalJsInfo(JsInfo.builder().setJsMemberType(JsMemberType.CONSTRUCTOR).build())
             .build();
 
-    return MethodDescriptor.Builder.from(javascriptConstructorDeclaration)
+    return javascriptConstructorDeclaration.toBuilder()
         .setDeclarationDescriptor(javascriptConstructorDeclaration)
         .setParameterDescriptors(constructorDescriptor.getParameterDescriptors())
         .build();

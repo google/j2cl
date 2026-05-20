@@ -58,14 +58,6 @@ public class Library extends Node implements AutoCloseable {
     return Visitor_Library.visit(processor, this);
   }
 
-  public static Library newEmpty() {
-    return new Builder().setCompilationUnits(ImmutableList.of()).build();
-  }
-
-  public static Builder newBuilder() {
-    return new Builder();
-  }
-
   @Override
   public void close() {
     if (disposableListener != null) {
@@ -73,14 +65,22 @@ public class Library extends Node implements AutoCloseable {
     }
   }
 
+  public static Library newEmpty() {
+    return builder().setCompilationUnits(ImmutableList.of()).build();
+  }
+
+  public Builder toBuilder() {
+    return builder().setCompilationUnits(this.getCompilationUnits());
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
   /** Builder for Library. */
   public static class Builder {
     private List<CompilationUnit> compilationUnits;
     private DisposableListener disposableListener;
-
-    public static Builder from(Library library) {
-      return newBuilder().setCompilationUnits(library.getCompilationUnits());
-    }
 
     @CanIgnoreReturnValue
     public Builder setCompilationUnits(List<CompilationUnit> compilationUnits) {

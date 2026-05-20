@@ -54,7 +54,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             }
 
             checkArgument(fieldAccess.getQualifier() == null);
-            return FieldAccess.Builder.from(createExternFieldDescriptor(fieldDescriptor)).build();
+            return FieldAccess.builderFrom(createExternFieldDescriptor(fieldDescriptor)).build();
           }
 
           @Override
@@ -65,7 +65,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             }
 
             checkArgument(methodCall.getQualifier() == null);
-            return MethodCall.Builder.from(createExternMethodDescriptor(methodDescriptor))
+            return MethodCall.builderFrom(createExternMethodDescriptor(methodDescriptor))
                 .setArguments(methodCall.getArguments())
                 .build();
           }

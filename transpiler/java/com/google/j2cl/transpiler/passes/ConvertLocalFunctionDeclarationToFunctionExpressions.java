@@ -87,7 +87,7 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
                     .toDescriptor();
 
             FunctionExpression functionExpression =
-                FunctionExpression.newBuilder()
+                FunctionExpression.builder()
                     .setParameters(localFunctionDeclarationStatement.getParameters())
                     .setStatements(localFunctionDeclarationStatement.getBody().getStatements())
                     .setTypeDescriptor(jsFunctionTypeDescriptor)
@@ -96,7 +96,7 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
                     .build();
 
             Variable variable =
-                Variable.newBuilder()
+                Variable.builder()
                     .setName(localFunctionMethodDescriptor.getName())
                     .setTypeDescriptor(jsFunctionTypeDescriptor)
                     .setFinal(true)
@@ -105,7 +105,7 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
             localFunctionVariableByMethodDescriptor.put(
                 localFunctionMethodDescriptor.getDeclarationDescriptor(), variable);
 
-            return VariableDeclarationExpression.newBuilder()
+            return VariableDeclarationExpression.builder()
                 .addVariableDeclaration(variable, functionExpression)
                 .build()
                 .makeStatement(localFunctionDeclarationStatement.getSourcePosition());
@@ -131,7 +131,7 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
                     ((DeclaredTypeDescriptor) variable.getTypeDescriptor())
                         .getJsFunctionMethodDescriptor());
 
-            return MethodCall.Builder.from(methodCall)
+            return methodCall.toBuilder()
                 .setQualifier(variable.createReference())
                 .setTarget(newTarget)
                 .build();
@@ -148,7 +148,7 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
 
     var classComponents = enclosingTypeDeclaration.synthesizeInnerClassComponents(typeName);
 
-    return TypeDeclaration.newBuilder()
+    return TypeDeclaration.builder()
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
         .setTypeParameterDescriptors(
             localFunctionMethodDescriptor.getTypeParameterTypeDescriptors())
@@ -169,13 +169,13 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
 
   private static MethodDescriptor createJsFunctionMethodDescriptor(
       DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
-    return MethodDescriptor.Builder.from(singleAbstractMethod)
+    return singleAbstractMethod.toBuilder()
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
         .setEnclosingMethodDescriptor(null)
         .setVisibility(Visibility.PUBLIC)
         .setOriginalJsInfo(
-            JsInfo.newBuilder()
+            JsInfo.builder()
                 .setJsMemberType(JsMemberType.NONE)
                 .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())
                 .build())

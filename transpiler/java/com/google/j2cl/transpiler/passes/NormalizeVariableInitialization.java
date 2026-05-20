@@ -41,7 +41,7 @@ public class NormalizeVariableInitialization extends NormalizationPass {
             // Make the variable non-final to allow for more than one assignment.
             variable.setFinal(false);
 
-            return VariableDeclarationFragment.Builder.from(variableDeclaration)
+            return variableDeclaration.toBuilder()
                 .setInitializer(variable.getTypeDescriptor().getDefaultValue())
                 .build();
           }

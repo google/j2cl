@@ -148,18 +148,18 @@ private fun IrFile.getSourcePosition(
 
   val sourceRange = fileEntry.getSourceRangeInfo(startOffset, endOffset)
 
-  return SourcePosition.newBuilder()
+  return SourcePosition.builder()
     .setFilePath(sourceRange.filePath)
     .setName(name)
     .setStartFilePosition(
-      FilePosition.newBuilder()
+      FilePosition.builder()
         .setLine(sourceRange.startLineNumber)
         .setColumn(sourceRange.startColumnNumber)
         .setByteOffset(sourceRange.startOffset)
         .build()
     )
     .setEndFilePosition(
-      FilePosition.newBuilder()
+      FilePosition.builder()
         .setLine(sourceRange.endLineNumber)
         .setColumn(sourceRange.endColumnNumber)
         .setByteOffset(sourceRange.endOffset)

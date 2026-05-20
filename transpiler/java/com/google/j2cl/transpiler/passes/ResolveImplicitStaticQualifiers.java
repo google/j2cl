@@ -35,7 +35,7 @@ public class ResolveImplicitStaticQualifiers extends NormalizationPass {
           public MemberReference rewriteMemberReference(MemberReference memberReference) {
             MemberDescriptor target = memberReference.getTarget();
             if (target.isStatic() && memberReference.getQualifier() == null) {
-              return MemberReference.Builder.from(memberReference)
+              return memberReference.toBuilder()
                   .setQualifier(
                       new JsConstructorReference(
                           target.getEnclosingTypeDescriptor().getTypeDeclaration()))

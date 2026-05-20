@@ -50,11 +50,7 @@ public class JsYieldExpression extends Expression {
 
   @Override
   public JsYieldExpression clone() {
-    return Builder.from(this).build();
-  }
-
-  public static Builder newBuilder() {
-    return new Builder();
+    return toBuilder().build();
   }
 
   @Override
@@ -62,16 +58,20 @@ public class JsYieldExpression extends Expression {
     return Visitor_JsYieldExpression.visit(processor, this);
   }
 
-  /** A builder for YieldExpressions. */
+  public Builder toBuilder() {
+    return builder()
+        .setExpression(this.getExpression())
+        .setTypeDescriptor(this.getTypeDescriptor());
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  /** A builder for JsYieldExpression. */
   public static class Builder {
     private Expression expression;
     private TypeDescriptor typeDescriptor;
-
-    public static Builder from(JsYieldExpression yieldExpression) {
-      return new Builder()
-          .setExpression(yieldExpression.getExpression())
-          .setTypeDescriptor(yieldExpression.getTypeDescriptor());
-    }
 
     @CanIgnoreReturnValue
     public Builder setExpression(Expression expression) {

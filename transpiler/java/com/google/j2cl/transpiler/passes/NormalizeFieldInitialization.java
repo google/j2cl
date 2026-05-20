@@ -44,7 +44,7 @@ public class NormalizeFieldInitialization extends NormalizationPass {
           @Override
           public Member rewriteField(Field field) {
             fieldDeclarations.add(
-                Field.Builder.from(field)
+                field.toBuilder()
                     .setInitializer(getDeclarationValue(field))
                     .setSourcePosition(field.getSourcePosition())
                     .build());
@@ -58,7 +58,7 @@ public class NormalizeFieldInitialization extends NormalizationPass {
             // ordering.
             DeclaredTypeDescriptor enclosingTypeDescriptor =
                 field.getDescriptor().getEnclosingTypeDescriptor();
-            return InitializerBlock.newBuilder()
+            return InitializerBlock.builder()
                 .setDescriptor(
                     field.isStatic()
                         ? enclosingTypeDescriptor.getClinitMethodDescriptor()

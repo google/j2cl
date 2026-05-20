@@ -56,16 +56,16 @@ public class NormalizeForEachStatementJ2kt extends NormalizationPass {
             // iterator but make it nullable since the nullability of the return type cannot
             // be trusted since it is obtained from a method call.
             Variable newLoopVariable =
-                Variable.Builder.from(loopVariable)
+                loopVariable.toBuilder()
                     .setTypeDescriptor(elementTypeDescriptor.toNullable())
                     .build();
             Statement body = forEachStatement.getBody();
-            return ForEachStatement.Builder.from(forEachStatement)
+            return forEachStatement.toBuilder()
                 .setLoopVariable(newLoopVariable)
                 .setBody(
-                    Block.newBuilder()
+                    Block.builder()
                         .addStatement(
-                            VariableDeclarationExpression.newBuilder()
+                            VariableDeclarationExpression.builder()
                                 .addVariableDeclaration(
                                     loopVariable, newLoopVariable.createReference())
                                 .build()

@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Invocation;
-import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
@@ -47,7 +46,7 @@ public class NormalizeVarargInvocationsJ2kt extends NormalizationPass {
             // If the last argument is an array literal, unwrap it and pass arguments directly.
             if (arrayExpression instanceof ArrayLiteral arrayLiteral) {
               if (canUnwrapVarargArgument(invocation, arrayLiteral)) {
-                return Invocation.Builder.from(invocation)
+                return invocation.toBuilder()
                     .replaceVarargsArgument(arrayLiteral.getValueExpressions())
                     .build();
               }
@@ -60,7 +59,7 @@ public class NormalizeVarargInvocationsJ2kt extends NormalizationPass {
               arrayExpression = arrayExpression.postfixNotNullAssertion();
             }
 
-            return MethodCall.Builder.from(invocation)
+            return invocation.toBuilder()
                 .replaceVarargsArgument(arrayExpression.prefixSpread())
                 .build();
           }

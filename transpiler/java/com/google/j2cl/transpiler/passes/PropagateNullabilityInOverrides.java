@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -48,7 +47,7 @@ public class PropagateNullabilityInOverrides extends AbstractJ2ktNormalizationPa
 
   private static Method propagateNullability(Method method) {
     method =
-        Method.Builder.from(method)
+        method.toBuilder()
             .setMethodDescriptor(propagateNullability(method.getDescriptor()))
             .build();
     updateParametersFromDescriptor(method);
@@ -69,7 +68,7 @@ public class PropagateNullabilityInOverrides extends AbstractJ2ktNormalizationPa
   private static MethodDescriptor propagateNullability(MethodDescriptor from, MethodDescriptor to) {
     Map<TypeVariable, TypeDescriptor> parametrization =
         to.getEnclosingTypeDescriptor().getParameterization();
-    return MethodDescriptor.Builder.from(to)
+    return to.toBuilder()
         .setReturnTypeDescriptor(
             propagateReturnTypeNullability(
                 specialize(parametrization, from.getReturnTypeDescriptor()),
@@ -108,7 +107,7 @@ public class PropagateNullabilityInOverrides extends AbstractJ2ktNormalizationPa
           ? toParameter
           : toParameter.toBuilder()
               .setTypeDescriptor(
-                  TypeVariable.Builder.from(toTypeVariable)
+                  toTypeVariable.toBuilder()
                       .setNullabilityAnnotation(fromTypeVariable.getNullabilityAnnotation())
                       .build())
               .build();

@@ -588,7 +588,7 @@ public class TypeDescriptors {
   private static DeclaredTypeDescriptor createSyntheticTypeDescriptor(
       Kind kind, String jsNamespace, String className, TypeDescriptor... typeArgumentDescriptors) {
 
-    return TypeDeclaration.newBuilder()
+    return TypeDeclaration.builder()
         .setClassComponents(className)
         // Mark bootstrap classes as non native so that the goog.require doesn't reference
         // overlay.
@@ -628,7 +628,7 @@ public class TypeDescriptors {
       // types are handwritten non native types.
       jsNamespace = "$synthetic." + jsNamespace;
     }
-    return PackageDeclaration.newBuilder().setName(jsNamespace).build();
+    return PackageDeclaration.builder().setName(jsNamespace).build();
   }
 
   /** Returns the declaration version of {@code typeDescriptors}. */
@@ -680,7 +680,7 @@ public class TypeDescriptors {
       }
       set(typeDescriptors);
       typeDescriptors.javaLangObjectArray =
-          ArrayTypeDescriptor.newBuilder()
+          ArrayTypeDescriptor.builder()
               .setComponentTypeDescriptor(typeDescriptors.javaLangObject)
               .build();
     }

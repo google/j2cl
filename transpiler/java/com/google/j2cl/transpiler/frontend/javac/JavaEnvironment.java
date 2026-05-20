@@ -245,7 +245,7 @@ public class JavaEnvironment {
     }
     boolean isFinal =
         isFinal(variableSymbol) || (variableSymbol.flags_field & Flags.EFFECTIVELY_FINAL) != 0L;
-    return Variable.newBuilder()
+    return Variable.builder()
         .setName(name)
         .setTypeDescriptor(typeDescriptor)
         .setFinal(isFinal)
@@ -321,7 +321,7 @@ public class JavaEnvironment {
       }
 
       case ARRAY ->
-          ArrayTypeDescriptor.newBuilder()
+          ArrayTypeDescriptor.builder()
               .setComponentTypeDescriptor(
                   createTypeDescriptor(
                       ((ArrayType) typeMirror).getComponentType(), inNullMarkedScope))
@@ -416,7 +416,7 @@ public class JavaEnvironment {
         typeVariable instanceof CapturedType || ((baseSymbol.flags() & Flags.SYNTHETIC) != 0);
     Type baseSymbolType = baseSymbol.asType();
     int id = getTypeVariableId(baseSymbolType);
-    return TypeVariable.newBuilder()
+    return TypeVariable.builder()
         .setUpperBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
         .setLowerBoundTypeDescriptor(lowerBound)
         .setAnnotations(createAnnotations(baseSymbol, inNullMarkedScope))
@@ -502,7 +502,7 @@ public class JavaEnvironment {
             return unravelWildCardsInUpperBound(specializedBound);
           };
     }
-    return TypeVariable.newBuilder()
+    return TypeVariable.builder()
         .setUpperBoundTypeDescriptorFactory(upperBoundFactory)
         .setLowerBoundTypeDescriptor(lowerBound)
         .setWildcard(true)
@@ -699,7 +699,7 @@ public class JavaEnvironment {
     boolean isFinal = isFinal(variableElement);
     boolean isVolatile = isVolatile(variableElement);
     var fieldDescriptor =
-        FieldDescriptor.newBuilder()
+        FieldDescriptor.builder()
             .setDeclarationDescriptor(declarationFieldDescriptor)
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
             .setName(fieldName)
@@ -800,7 +800,7 @@ public class JavaEnvironment {
 
     String methodName = declarationMethodElement.getSimpleName().toString();
     var md =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
             .setName(isConstructor ? null : methodName)
             .setParameterDescriptors((List<ParameterDescriptor>) parameterDescriptors)
@@ -847,7 +847,7 @@ public class JavaEnvironment {
                   declarationMethodElement.getParameters().get(i).asType()));
 
       parametersBuilder.add(
-          ParameterDescriptor.newBuilder()
+          ParameterDescriptor.builder()
               .setTypeDescriptor(parameterType)
               .setJsOptional(JsInteropUtils.isJsOptional(declarationMethodElement, i))
               .setVarargs(i == parameters.size() - 1 && declarationMethodElement.isVarArgs())
@@ -865,7 +865,7 @@ public class JavaEnvironment {
 
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return ArrayTypeDescriptor.newBuilder()
+      return ArrayTypeDescriptor.builder()
           .setComponentTypeDescriptor(
               arrayTypeDescriptor.getComponentTypeDescriptor().toNonNullable())
           .setNullable(false)
@@ -921,7 +921,7 @@ public class JavaEnvironment {
 
       case ArrayTypeDescriptor arrayTypeDescriptor
           when declarationTypeMirror instanceof ArrayType arrayType ->
-          ArrayTypeDescriptor.newBuilder()
+          ArrayTypeDescriptor.builder()
               .setComponentTypeDescriptor(
                   applyNullabilityAnnotations(
                       arrayTypeDescriptor.getComponentTypeDescriptor(),
@@ -1023,7 +1023,7 @@ public class JavaEnvironment {
     ImmutableList<TypeDescriptor> intersectedTypeDescriptors =
         createTypeDescriptors(
             intersectionType.getBounds(), inNullMarkedScope, TypeDescriptor.class);
-    return IntersectionTypeDescriptor.newBuilder()
+    return IntersectionTypeDescriptor.builder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
         .build();
   }
@@ -1031,7 +1031,7 @@ public class JavaEnvironment {
   private TypeDescriptor createUnionType(UnionClassType unionType) {
     ImmutableList<TypeDescriptor> unionTypeDescriptors =
         createTypeDescriptors(unionType.getAlternatives(), /* inNullMarkedScope= */ false);
-    return UnionTypeDescriptor.newBuilder().setUnionTypeDescriptors(unionTypeDescriptors).build();
+    return UnionTypeDescriptor.builder().setUnionTypeDescriptors(unionTypeDescriptors).build();
   }
 
   private DeclaredTypeDescriptor createDeclaredType(
@@ -1223,7 +1223,7 @@ public class JavaEnvironment {
 
     boolean isNullMarked = isNullMarked(typeElement);
     var td =
-        TypeDeclaration.newBuilder()
+        TypeDeclaration.builder()
             .setClassComponents(getClassComponents(typeElement))
             .setEnclosingTypeDeclaration(
                 createTypeDeclaration(getEnclosingTypeElement(typeElement)))
@@ -1303,7 +1303,7 @@ public class JavaEnvironment {
     // Caching is left to PackageDeclaration.Builder since construction is trivial.
     String packageName = packageElement.getQualifiedName().toString();
     boolean isNullMarked = isNullMarked(packageElement);
-    return PackageDeclaration.newBuilder()
+    return PackageDeclaration.builder()
         .setName(packageName)
         .setCustomizedJsNamespace(getJsNamespace(packageElement))
         .setAnnotations(createAnnotations(packageElement, isNullMarked))
@@ -1376,7 +1376,6 @@ public class JavaEnvironment {
           e, "Failed to find functional interface method for %s", type.toString());
     }
   }
-
 
   /** Return whether a type is annotated for nullability and which type of annotation it has. */
   private static NullabilityAnnotation getNullabilityAnnotation(
@@ -1512,7 +1511,7 @@ public class JavaEnvironment {
   private Annotation.Builder newAnnotationBuilder(
       Map<? extends ExecutableElement, ? extends javax.lang.model.element.AnnotationValue> values,
       boolean inNullMarkedScope) {
-    Annotation.Builder annotationBuilder = Annotation.newBuilder();
+    Annotation.Builder annotationBuilder = Annotation.builder();
     for (var valuePair : values.entrySet()) {
       TypeDescriptor elementType =
           createTypeDescriptor(valuePair.getKey().getReturnType(), inNullMarkedScope);
@@ -1557,7 +1556,7 @@ public class JavaEnvironment {
       if (values.contains(null)) {
         return null;
       }
-      return ArrayConstant.newBuilder()
+      return ArrayConstant.builder()
           .setTypeDescriptor((ArrayTypeDescriptor) elementType)
           .setValueExpressions(values)
           .build();

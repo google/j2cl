@@ -64,7 +64,7 @@ public class OptimizeEnums extends NormalizationPass {
             if (!field.isEnumField()) {
               return field;
             }
-            return Field.Builder.from(field)
+            return field.toBuilder()
                 .setDescriptor(markFieldDescriptorAsCompileTimeConstant(field.getDescriptor()))
                 .build();
           }
@@ -78,16 +78,14 @@ public class OptimizeEnums extends NormalizationPass {
             }
             // Rewrite accesses to enum fields inside the enum because they don't use getter method
             // and the name of the field changed as we made the enum fields compile time constant.
-            return FieldAccess.Builder.from(fieldAccess)
+            return fieldAccess.toBuilder()
                 .setTarget(markFieldDescriptorAsCompileTimeConstant(fieldAccess.getTarget()))
                 .build();
           }
 
           private FieldDescriptor markFieldDescriptorAsCompileTimeConstant(
               FieldDescriptor fieldDescriptor) {
-            return FieldDescriptor.Builder.from(fieldDescriptor)
-                .setCompileTimeConstant(true)
-                .build();
+            return fieldDescriptor.toBuilder().setCompileTimeConstant(true).build();
           }
         });
   }
@@ -106,7 +104,7 @@ public class OptimizeEnums extends NormalizationPass {
               return newInstance;
             }
 
-            return JsDocExpression.newBuilder()
+            return JsDocExpression.builder()
                 .setAnnotation("pureOrBreakMyCode")
                 .setExpression(newInstance)
                 .build();

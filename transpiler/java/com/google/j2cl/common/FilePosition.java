@@ -23,7 +23,7 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class FilePosition implements Comparable<FilePosition> {
 
-  static final FilePosition NONE = newBuilder().setLine(-1).setColumn(-1).setByteOffset(-1).build();
+  static final FilePosition NONE = builder().setLine(-1).setColumn(-1).setByteOffset(-1).build();
 
   /** Returns the line number of this position. */
   public abstract int getLine();
@@ -42,7 +42,7 @@ public abstract class FilePosition implements Comparable<FilePosition> {
     return getColumn() - other.getColumn();
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_FilePosition.Builder();
   }
 

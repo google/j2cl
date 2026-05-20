@@ -59,9 +59,7 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
               MethodDescriptor jsFunctionInterfaceMethodDescriptor =
                   enclosingTypeDescriptor.getJsFunctionMethodDescriptor();
               checkState(target.isOverride(jsFunctionInterfaceMethodDescriptor));
-              return MethodCall.Builder.from(methodCall)
-                  .setTarget(jsFunctionInterfaceMethodDescriptor)
-                  .build();
+              return methodCall.toBuilder().setTarget(jsFunctionInterfaceMethodDescriptor).build();
             }
             return methodCall;
           }

@@ -41,7 +41,7 @@ public class NormalizeJsYieldMethodInvocations extends NormalizationPass {
             checkArgument(
                 methodCall.getArguments().size() <= 1, "yield should have 0 or 1 arguments");
 
-            return JsYieldExpression.newBuilder()
+            return JsYieldExpression.builder()
                 .setTypeDescriptor(methodCall.getTypeDescriptor())
                 .setExpression(Iterables.getOnlyElement(methodCall.getArguments(), null))
                 .build();

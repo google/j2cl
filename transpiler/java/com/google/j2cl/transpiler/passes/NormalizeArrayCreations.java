@@ -66,14 +66,14 @@ public class NormalizeArrayCreations extends NormalizationPass {
             Iterables.getOnlyElement(newArrayExpression.getDimensionExpressions());
 
         MethodDescriptor nativeArrayConstructor =
-            MethodDescriptor.newBuilder()
+            MethodDescriptor.builder()
                 .setConstructor(true)
                 .setOriginalJsInfo(JsInfo.RAW_CTOR)
                 .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeArray)
                 .setParameterTypeDescriptors(dimensionExpression.getTypeDescriptor())
                 .build();
 
-        return NewInstance.Builder.from(nativeArrayConstructor)
+        return NewInstance.builderFrom(nativeArrayConstructor)
             .setArguments(dimensionExpression)
             .build();
       }
@@ -81,7 +81,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       return createNonNullableAnnotation(
           RuntimeMethods.createArraysMethodCall(
               "$createNative",
-              ArrayLiteral.newBuilder()
+              ArrayLiteral.builder()
                   .setTypeDescriptor(TypeDescriptors.get().javaLangObjectArray)
                   .setValueExpressions(newArrayExpression.getDimensionExpressions())
                   .build()),
@@ -92,7 +92,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
     return createNonNullableAnnotation(
         RuntimeMethods.createArraysMethodCall(
             "$create",
-            ArrayLiteral.newBuilder()
+            ArrayLiteral.builder()
                 .setTypeDescriptor(TypeDescriptors.get().javaLangObjectArray)
                 .setValueExpressions(newArrayExpression.getDimensionExpressions())
                 .build(),
@@ -163,7 +163,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
    */
   private static Expression createNonNullableAnnotation(
       Expression expression, TypeDescriptor typeDescriptor) {
-    return JsDocCastExpression.newBuilder()
+    return JsDocCastExpression.builder()
         .setExpression(expression)
         .setCastTypeDescriptor(typeDescriptor.toNonNullable())
         .build();

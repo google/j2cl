@@ -81,7 +81,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
             if (!field.getDescriptor().getTypeDescriptor().isArray()) {
               return field;
             }
-            return Field.Builder.from(field)
+            return field.toBuilder()
                 .setDescriptor(markFieldTypeDescriptorAsNative(field.getDescriptor()))
                 .build();
           }
@@ -91,7 +91,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
             if (!fieldAccess.getTypeDescriptor().isArray()) {
               return fieldAccess;
             }
-            return FieldAccess.Builder.from(fieldAccess)
+            return fieldAccess.toBuilder()
                 .setTarget(markFieldTypeDescriptorAsNative(fieldAccess.getTarget()))
                 .build();
           }
@@ -118,7 +118,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
           @Override
           public Expression rewriteNewArray(NewArray newArray) {
-            return NewArray.Builder.from(newArray)
+            return newArray.toBuilder()
                 .setTypeDescriptor(markArrayTypeDescriptorAsNative(newArray.getTypeDescriptor()))
                 .build();
           }
@@ -136,7 +136,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
             if (!conditionalExpression.getTypeDescriptor().isArray()) {
               return conditionalExpression;
             }
-            return ConditionalExpression.Builder.from(conditionalExpression)
+            return conditionalExpression.toBuilder()
                 .setTypeDescriptor(
                     maybeMarkTypeDescriptorAsNative(conditionalExpression.getTypeDescriptor()))
                 .build();
@@ -144,7 +144,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
           @Override
           public Expression rewriteCastExpression(CastExpression castExpression) {
-            return CastExpression.Builder.from(castExpression)
+            return castExpression.toBuilder()
                 .setCastTypeDescriptor(
                     maybeMarkTypeDescriptorAsNative(castExpression.getCastTypeDescriptor()))
                 .build();
@@ -185,7 +185,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
               return arrayLength;
             }
 
-            return ArrayLength.Builder.from(arrayLength)
+            return arrayLength.toBuilder()
                 .setArrayExpression(getInnerNativeArrayExpression(arrayLength.getArrayExpression()))
                 .build();
           }
@@ -196,7 +196,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
               return arrayAccess;
             }
 
-            return ArrayAccess.Builder.from(arrayAccess)
+            return arrayAccess.toBuilder()
                 .setArrayExpression(getInnerNativeArrayExpression(arrayAccess.getArrayExpression()))
                 .build();
           }
@@ -212,7 +212,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
             }
 
             // TODO(goktug): Consider allowing native arrays on return types as well.
-            return MethodCall.Builder.from(methodCall)
+            return methodCall.toBuilder()
                 .setArguments(
                     methodCall.getArguments().stream()
                         .map(
@@ -257,7 +257,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
             checkState(newArray.getDimensionExpressions().size() == 1);
 
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     TypeDescriptors.getWasmArrayType(newArray.getTypeDescriptor())
                         .getMethodDescriptor("newWithLength", PrimitiveTypes.INT))
                 .setArguments(newArray.getDimensionExpressions().getFirst())
@@ -276,7 +276,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
                     arrayTypeDescriptor.getComponentTypeDescriptor().isPrimitive()
                         ? arrayTypeDescriptor
                         : TypeDescriptors.get().javaLangObjectArray);
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     TypeDescriptors.getWasmArrayType(arrayTypeDescriptor)
                         .getMethodDescriptor("newWithLiteral", nativeArrayTypeDescriptor))
                 .setArguments(
@@ -287,21 +287,21 @@ public class ImplementArraysAsClasses extends NormalizationPass {
   }
 
   private static FieldDescriptor markFieldTypeDescriptorAsNative(FieldDescriptor original) {
-    return FieldDescriptor.Builder.from(original)
+    return original.toBuilder()
         .setTypeDescriptor(
             markArrayTypeDescriptorAsNative((ArrayTypeDescriptor) original.getTypeDescriptor()))
         .build();
   }
 
   private static Variable markVariableTypeDescriptorAsNative(Variable original) {
-    return Variable.Builder.from(original)
+    return original.toBuilder()
         .setTypeDescriptor(
             markArrayTypeDescriptorAsNative((ArrayTypeDescriptor) original.getTypeDescriptor()))
         .build();
   }
 
   private static ArrayTypeDescriptor markArrayTypeDescriptorAsNative(ArrayTypeDescriptor original) {
-    return ArrayTypeDescriptor.Builder.from(original).setMarkedAsNativeWasmArray(true).build();
+    return original.toBuilder().setMarkedAsNativeWasmArray(true).build();
   }
 
   private static TypeDescriptor maybeMarkTypeDescriptorAsNative(TypeDescriptor original) {
@@ -314,7 +314,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
   private static Expression getInnerNativeArrayExpression(Expression arrayExpression) {
     checkState(arrayExpression.getTypeDescriptor().isArray());
 
-    return FieldAccess.newBuilder()
+    return FieldAccess.builder()
         .setQualifier(arrayExpression)
         .setTarget(
             markFieldTypeDescriptorAsNative(

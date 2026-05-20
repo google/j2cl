@@ -74,7 +74,7 @@ public class AddBridgeMethods extends NormalizationPass {
     checkArgument(bridgeMethodDescriptor.isSynthetic());
     checkArgument(bridgeMethodDescriptor.isBridge());
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
         .addStatements(
@@ -102,7 +102,7 @@ public class AddBridgeMethods extends NormalizationPass {
     // that will handle the call, add a cast to perform the runtime type check.
     return parameter.getTypeDescriptor().isAssignableTo(requiredType)
         ? parameterReference
-        : CastExpression.newBuilder()
+        : CastExpression.builder()
             .setExpression(parameterReference)
             .setCastTypeDescriptor(requiredType)
             .build();

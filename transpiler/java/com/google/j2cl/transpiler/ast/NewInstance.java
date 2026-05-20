@@ -72,17 +72,21 @@ public class NewInstance extends Invocation {
   }
 
   @Override
-  Builder createBuilder() {
-    return new Builder(this);
-  }
-
-  public static Builder newBuilder() {
-    return new Builder();
+  Node acceptInternal(Processor processor) {
+    return Visitor_NewInstance.visit(processor, this);
   }
 
   @Override
-  Node acceptInternal(Processor processor) {
-    return Visitor_NewInstance.visit(processor, this);
+  public Builder toBuilder() {
+    return new Builder(this);
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static Builder builderFrom(MethodDescriptor constructorDescriptor) {
+    return builder().setTarget(constructorDescriptor);
   }
 
   /**
@@ -93,16 +97,6 @@ public class NewInstance extends Invocation {
    */
   public static class Builder extends Invocation.Builder<Builder, NewInstance> {
     private Type anonymousInnerClass;
-
-    public static Builder from(NewInstance newInstance) {
-      return new Builder(newInstance);
-    }
-
-    public static Builder from(MethodDescriptor constructorDescriptor) {
-      Builder builder = new Builder();
-      builder.setTarget(constructorDescriptor);
-      return builder;
-    }
 
     @CanIgnoreReturnValue
     public Builder setAnonymousInnerClass(Type anonymousInnerClass) {

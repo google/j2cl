@@ -38,7 +38,7 @@ public final class RemoveWasmAnnotatedMethodBodies extends NormalizationPass {
             if (!isAnnotatedWithWasm(method.getDescriptor())) {
               return method;
             }
-            return Method.Builder.from(method).setStatements(ImmutableList.of()).build();
+            return method.toBuilder().setStatements(ImmutableList.of()).build();
           }
         });
   }

@@ -55,7 +55,7 @@ public class VariableDeclarationExpression extends Expression {
 
   @Override
   public VariableDeclarationExpression clone() {
-    return VariableDeclarationExpression.newBuilder()
+    return VariableDeclarationExpression.builder()
         .setVariableDeclarationFragments(AstUtils.clone(fragments))
         .build();
   }
@@ -64,18 +64,18 @@ public class VariableDeclarationExpression extends Expression {
   Node acceptInternal(Processor processor) {
     return Visitor_VariableDeclarationExpression.visit(processor, this);
   }
-  public static Builder newBuilder() {
+
+  public Builder toBuilder() {
+    return builder().setVariableDeclarationFragments(this.getFragments());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
   /** Builder for VariableDeclarationExpression. */
   public static class Builder {
     private List<VariableDeclarationFragment> fragments = new ArrayList<>();
-
-    public static Builder from(VariableDeclarationExpression variableDeclarationExpression) {
-      return newBuilder()
-          .setVariableDeclarationFragments(variableDeclarationExpression.getFragments());
-    }
 
     @CanIgnoreReturnValue
     public Builder setVariableDeclarationFragments(
@@ -87,7 +87,7 @@ public class VariableDeclarationExpression extends Expression {
     @CanIgnoreReturnValue
     public Builder addVariableDeclaration(Variable variable, Expression initializer) {
       fragments.add(
-          VariableDeclarationFragment.newBuilder()
+          VariableDeclarationFragment.builder()
               .setVariable(variable)
               .setInitializer(initializer)
               .build());
@@ -103,7 +103,7 @@ public class VariableDeclarationExpression extends Expression {
     public Builder addVariableDeclarations(Collection<Variable> variables) {
       return addVariableDeclarationFragments(
           variables.stream()
-              .map(v -> VariableDeclarationFragment.newBuilder().setVariable(v).build())
+              .map(v -> VariableDeclarationFragment.builder().setVariable(v).build())
               .collect(toImmutableList()));
     }
 

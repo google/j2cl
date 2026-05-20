@@ -67,9 +67,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
               // The statement was not optimized.
               return ifStatement;
             }
-            return IfStatement.Builder.from(ifStatement)
-                .setThenStatement(optimizedThenStatement)
-                .build();
+            return ifStatement.toBuilder().setThenStatement(optimizedThenStatement).build();
           }
 
           @Override
@@ -83,7 +81,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
               // The expression was not optimized.
               return conditionalExpression;
             }
-            return ConditionalExpression.Builder.from(conditionalExpression)
+            return conditionalExpression.toBuilder()
                 .setTrueExpression(optimizedTrueExpression)
                 .build();
           }
@@ -115,7 +113,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
 
     // Replace the Java cast by a JsDoc cast to preserve the type of the expression.
     JsDocCastExpression jsDocCast =
-        JsDocCastExpression.newBuilder()
+        JsDocCastExpression.builder()
             .setExpression(castExpression.getExpression())
             .setCastTypeDescriptor(castExpression.getTypeDescriptor())
             .build();

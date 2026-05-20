@@ -62,7 +62,14 @@ public class InitializerBlock extends Member implements MethodLike {
     return Visitor_InitializerBlock.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setBody(this.getBody())
+        .setSourcePosition(this.getSourcePosition())
+        .setDescriptor(this.getDescriptor());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -71,13 +78,6 @@ public class InitializerBlock extends Member implements MethodLike {
     private Block body;
     private SourcePosition sourcePosition;
     private MethodDescriptor methodDescriptor;
-
-    public static Builder from(InitializerBlock initializerBlock) {
-      return newBuilder()
-          .setBody(initializerBlock.getBody())
-          .setSourcePosition(initializerBlock.getSourcePosition())
-          .setDescriptor(initializerBlock.getDescriptor());
-    }
 
     public Builder setDescriptor(MethodDescriptor methodDescriptor) {
       this.methodDescriptor = methodDescriptor;
@@ -93,7 +93,6 @@ public class InitializerBlock extends Member implements MethodLike {
       this.sourcePosition = sourcePosition;
       return this;
     }
-
 
     public InitializerBlock build() {
       checkState(body != null);

@@ -76,7 +76,14 @@ public class PatternMatchExpression extends Expression implements HasSourcePosit
     return sourcePosition;
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return new Builder()
+        .setExpression(this.getExpression())
+        .setPattern(this.getPattern())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -85,13 +92,6 @@ public class PatternMatchExpression extends Expression implements HasSourcePosit
     private Expression expression;
     private Pattern pattern;
     private SourcePosition sourcePosition;
-
-    public static Builder from(PatternMatchExpression patternMatchExpression) {
-      return new Builder()
-          .setExpression(patternMatchExpression.getExpression())
-          .setPattern(patternMatchExpression.getPattern())
-          .setSourcePosition(patternMatchExpression.getSourcePosition());
-    }
 
     @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {

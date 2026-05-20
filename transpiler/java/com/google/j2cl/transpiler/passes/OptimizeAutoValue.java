@@ -271,13 +271,9 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
           }
           return switch (m) {
             case Method newMethod ->
-                Method.Builder.from(newMethod)
-                    .setSourcePosition(oldMember.getSourcePosition())
-                    .build();
+                newMethod.toBuilder().setSourcePosition(oldMember.getSourcePosition()).build();
             case Field newField ->
-                Field.Builder.from(newField)
-                    .setSourcePosition(oldMember.getSourcePosition())
-                    .build();
+                newField.toBuilder().setSourcePosition(oldMember.getSourcePosition()).build();
             default -> m;
           };
         });
@@ -309,7 +305,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
           .getBody()
           .getStatements()
           .addFirst(
-              MethodCall.Builder.from(defaultCtor.getDescriptor())
+              MethodCall.builderFrom(defaultCtor.getDescriptor())
                   .build()
                   .makeStatement(fromCtor.getBody().getSourcePosition()));
     }
@@ -526,7 +522,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         TypeDescriptors.get().javaemulInternalValueType.getMethodDescriptorByName("mixin");
 
     MethodCall mixinCall =
-        MethodCall.Builder.from(mixinMethodDescriptor)
+        MethodCall.builderFrom(mixinMethodDescriptor)
             .setArguments(
                 new JsConstructorReference(autoValue.getDeclaration()),
                 new JsConstructorReference(
@@ -540,7 +536,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   private static void addExcludedFieldsDeclaration(
       Type autoValue, Collection<FieldDescriptor> excludedFields) {
     FieldDescriptor excludedFieldDescriptor =
-        FieldDescriptor.newBuilder()
+        FieldDescriptor.builder()
             .setOriginalJsInfo(JsInfo.RAW_FIELD)
             .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
@@ -553,7 +549,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     // treating class definition helpers separately.
     // TODO(b/435019132): Remove this annotation once the the JsCompiler handles the pattern.
     Expression propertyNameExpressions =
-        JsDocExpression.newBuilder()
+        JsDocExpression.builder()
             .setAnnotation("pureOrBreakMyCode")
             .setExpression(getPropertyNameExpressions(autoValue.getDeclaration(), excludedFields))
             .build();
@@ -570,7 +566,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       TypeDeclaration type, Collection<FieldDescriptor> fields) {
     // Note that ValueType.objectProperty is just a native proxy for goog.reflect.objectProperty.
     MethodCall.Builder objectPropertyCallBuilder =
-        MethodCall.Builder.from(
+        MethodCall.builderFrom(
             TypeDescriptors.get()
                 .javaemulInternalValueType
                 .getMethodDescriptorByName("objectProperty"));
@@ -580,7 +576,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     //   ValueType.objectProperty("<property2>", MyType),
     //   ...
     // ]
-    return ArrayLiteral.newBuilder()
+    return ArrayLiteral.builder()
         .setTypeDescriptor(TypeDescriptors.get().javaLangObjectArray)
         .setValueExpressions(
             fields.stream()
@@ -596,7 +592,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   }
 
   private static Expression createPrototypeFieldAccess(Type type, FieldDescriptor field) {
-    return FieldAccess.Builder.from(field)
+    return FieldAccess.builderFrom(field)
         .setQualifier(new JsConstructorReference(type.getDeclaration()).getPrototypeFieldAccess())
         .build();
   }

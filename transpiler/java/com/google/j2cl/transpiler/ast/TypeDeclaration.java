@@ -523,7 +523,7 @@ public abstract class TypeDeclaration
 
   @Memoized
   public TypeDeclaration getOverlayImplementationTypeDeclaration() {
-    return newBuilder()
+    return builder()
         .setEnclosingTypeDeclaration(this)
         .setOverlaidTypeDeclaration(this)
         .setClassComponents(synthesizeInnerClassComponents(OVERLAY_IMPLEMENTATION_CLASS_SUFFIX))
@@ -582,7 +582,6 @@ public abstract class TypeDeclaration
         Streams.concat(Stream.of(getPackageName()), getClassComponents().stream()));
   }
 
-
   @Memoized
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {
@@ -619,7 +618,7 @@ public abstract class TypeDeclaration
   /** Returns the usage site type descriptor with parameterization. */
   public DeclaredTypeDescriptor toDescriptor(
       Iterable<? extends TypeDescriptor> typeArgumentDescriptors) {
-    return DeclaredTypeDescriptor.newBuilder()
+    return DeclaredTypeDescriptor.builder()
         .setTypeDeclaration(this)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setNullable(true)
@@ -769,9 +768,34 @@ public abstract class TypeDeclaration
 
   abstract Supplier<ImmutableList<Annotation>> getAnnotationsFactory();
 
-  abstract Builder toBuilder();
+  // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
+  private static final ThreadLocal<Boolean> ignoreJsFunctionAnnotations =
+      ThreadLocal.withInitial(() -> false);
 
-  public static Builder newBuilder() {
+  public static void setIgnoreJsFunctionAnnotations() {
+    ignoreJsFunctionAnnotations.set(true);
+  }
+
+  // TODO(b/181615162): This is a temporary hack which allows Wasm to treat JsEnums differently from
+  // Closure.
+  // In Wasm:
+  // - TODO(b/288145698): Native JsEnums are ignored (the annotation is removed on creation of
+  // TypeDeclaration)
+  // - The supertype of JsEnums is not modified (it is still Enum, not changed to Object).
+  private static final ThreadLocal<Boolean> implementWasmJsInteropSemantics =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setImplementWasmJsInteropSemantics() {
+    implementWasmJsInteropSemantics.set(true);
+  }
+
+  TypeDeclaration acceptInternal(Processor processor) {
+    return Visitor_TypeDeclaration.visit(processor, this);
+  }
+
+  public abstract Builder toBuilder();
+
+  public static Builder builder() {
     return new AutoValue_TypeDeclaration.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
@@ -799,31 +823,6 @@ public abstract class TypeDeclaration
         .setEnclosingMethodDescriptorFactory(() -> null)
         .setSuperTypeDescriptorFactory(() -> null)
         .setRecordComponentAccessorsDescriptorFactory(() -> ImmutableList.of());
-  }
-
-  // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
-  private static final ThreadLocal<Boolean> ignoreJsFunctionAnnotations =
-      ThreadLocal.withInitial(() -> false);
-
-  public static void setIgnoreJsFunctionAnnotations() {
-    ignoreJsFunctionAnnotations.set(true);
-  }
-
-  // TODO(b/181615162): This is a temporary hack which allows Wasm to treat JsEnums differently from
-  // Closure.
-  // In Wasm:
-  // - TODO(b/288145698): Native JsEnums are ignored (the annotation is removed on creation of
-  // TypeDeclaration)
-  // - The supertype of JsEnums is not modified (it is still Enum, not changed to Object).
-  private static final ThreadLocal<Boolean> implementWasmJsInteropSemantics =
-      ThreadLocal.withInitial(() -> false);
-
-  public static void setImplementWasmJsInteropSemantics() {
-    implementWasmJsInteropSemantics.set(true);
-  }
-
-  TypeDeclaration acceptInternal(Processor processor) {
-    return Visitor_TypeDeclaration.visit(processor, this);
   }
 
   /** Builder for a TypeDeclaration. */
@@ -994,7 +993,7 @@ public abstract class TypeDeclaration
 
         int lastDot = qualifiedSourceName.lastIndexOf('.');
         setPackage(
-            PackageDeclaration.newBuilder()
+            PackageDeclaration.builder()
                 .setName(lastDot == -1 ? "" : qualifiedSourceName.substring(0, lastDot))
                 .build());
         setClassComponents(qualifiedSourceName.substring(lastDot + 1));
@@ -1026,10 +1025,6 @@ public abstract class TypeDeclaration
               .allMatch(Predicate.isEqual(NullabilityAnnotation.NONE)));
 
       return interner.intern(typeDeclaration);
-    }
-
-    public static Builder from(TypeDeclaration typeDeclaration) {
-      return typeDeclaration.toBuilder();
     }
   }
 }

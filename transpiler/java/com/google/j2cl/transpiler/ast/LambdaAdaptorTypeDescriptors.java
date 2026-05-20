@@ -128,7 +128,7 @@ public final class LambdaAdaptorTypeDescriptors {
             .flatMap(i -> i.getTypeDeclaration().getTypeParameterDescriptors().stream())
             .collect(toImmutableList());
 
-    return TypeDeclaration.newBuilder()
+    return TypeDeclaration.builder()
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
         .setClassComponents(classComponents)
@@ -150,7 +150,7 @@ public final class LambdaAdaptorTypeDescriptors {
   /** Returns the MethodDescriptor for the constructor of the LambdaAdaptor class. */
   private static MethodDescriptor getLambdaAdaptorConstructor(
       DeclaredTypeDescriptor jsFunctionInterface, DeclaredTypeDescriptor adaptorTypeDescriptor) {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         .setConstructor(true)
         .setOriginalJsInfo(JsInfo.RAW_CTOR)
@@ -171,7 +171,7 @@ public final class LambdaAdaptorTypeDescriptors {
 
     MethodDescriptor functionalInterfaceMethodDescriptor =
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
-    return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
+    return functionalInterfaceMethodDescriptor.toBuilder()
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         // Remove the method type parameters as they when moved to the adaptor type.
@@ -200,7 +200,7 @@ public final class LambdaAdaptorTypeDescriptors {
     ImmutableList<String> classComponents =
         typeDeclaration.synthesizeInnerClassComponents(FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME);
 
-    return TypeDeclaration.newBuilder()
+    return TypeDeclaration.builder()
         .setEnclosingTypeDeclaration(typeDeclaration)
         .setTypeParameterDescriptors(typeDeclaration.getTypeParameterDescriptors())
         .setClassComponents(classComponents)
@@ -234,17 +234,17 @@ public final class LambdaAdaptorTypeDescriptors {
             : singleAbstractMethod.getParameterDescriptors().stream()
                 .map(
                     parameterDescriptor ->
-                        ParameterDescriptor.newBuilder()
+                        ParameterDescriptor.builder()
                             .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
                             .build())
                 .collect(toImmutableList());
 
-    return MethodDescriptor.Builder.from(singleAbstractMethod)
+    return singleAbstractMethod.toBuilder()
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
         .setParameterDescriptors(parameterDescriptors)
         .setOriginalJsInfo(
-            JsInfo.newBuilder()
+            JsInfo.builder()
                 .setJsMemberType(JsMemberType.NONE)
                 .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())
                 .build())

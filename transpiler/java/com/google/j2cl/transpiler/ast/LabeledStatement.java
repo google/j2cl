@@ -65,7 +65,14 @@ public class LabeledStatement extends Statement {
     return Visitor_LabeledStatement.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setSourcePosition(this.getSourcePosition())
+        .setStatement(this.getStatement())
+        .setLabel(this.getLabel());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -74,13 +81,6 @@ public class LabeledStatement extends Statement {
     private Statement statement;
     private Label label;
     private SourcePosition sourcePosition;
-
-    public static Builder from(LabeledStatement labeledStatement) {
-      return newBuilder()
-          .setSourcePosition(labeledStatement.getSourcePosition())
-          .setStatement(labeledStatement.getStatement())
-          .setLabel(labeledStatement.getLabel());
-    }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;

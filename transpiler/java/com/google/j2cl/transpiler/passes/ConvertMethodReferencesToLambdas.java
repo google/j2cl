@@ -126,14 +126,14 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
       // reference appears, so here we introduce a temporary variable to store the evaluated
       // qualifier.
       Variable variable =
-          Variable.newBuilder()
+          Variable.builder()
               .setFinal(true)
               .setName("$$q")
               .setTypeDescriptor(qualifier.getTypeDescriptor())
               .build();
       // Declare the temporary variable and initialize to the evaluated qualifier.
       result.add(
-          VariableDeclarationExpression.newBuilder()
+          VariableDeclarationExpression.builder()
               .addVariableDeclaration(variable, qualifier)
               .build());
       // Use the newly introduced variable as a qualifier when forwarding the call within the
@@ -150,7 +150,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
             referencedMethodDescriptor,
             false));
 
-    return MultiExpression.newBuilder().setExpressions(result).build();
+    return MultiExpression.builder().setExpressions(result).build();
   }
 
   /**
@@ -225,7 +225,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
             isStaticDispatch,
             forwardedArguments,
             functionalMethodDescriptor.getReturnTypeDescriptor());
-    return FunctionExpression.newBuilder()
+    return FunctionExpression.builder()
         .setTypeDescriptor(expressionTypeDescriptor)
         .setJsAsync(targetMethodDescriptor.isJsAsync() || functionalMethodDescriptor.isJsAsync())
         .setParameters(parameters)
@@ -257,17 +257,17 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
             == parameters.size());
 
     NewInstance instantiation =
-        NewInstance.Builder.from(targetConstructorMethodDescriptor)
+        NewInstance.builderFrom(targetConstructorMethodDescriptor)
             .setQualifier(qualifier)
             .setArguments(
                 parameters.stream().map(Variable::createReference).collect(toImmutableList()))
             .build();
 
-    return FunctionExpression.newBuilder()
+    return FunctionExpression.builder()
         .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
         .setParameters(parameters)
         .setStatements(
-            ReturnStatement.newBuilder()
+            ReturnStatement.builder()
                 .setExpression(instantiation)
                 .setSourcePosition(sourcePosition)
                 .build())
@@ -303,13 +303,13 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
             .addAll(AstUtils.createListOfNullValues(arrayType.getDimensions() - 1))
             .build();
 
-    return FunctionExpression.newBuilder()
+    return FunctionExpression.builder()
         .setTypeDescriptor(targetFunctionalMethodDescriptor.getEnclosingTypeDescriptor())
         .setParameters(parameter)
         .setStatements(
-            ReturnStatement.newBuilder()
+            ReturnStatement.builder()
                 .setExpression(
-                    NewArray.newBuilder()
+                    NewArray.builder()
                         .setTypeDescriptor(arrayType)
                         .setDimensionExpressions(dimensionExpressions)
                         .build())

@@ -79,7 +79,7 @@ public class NormalizeForStatements extends NormalizationPass {
 
   private static Statement rewriteLabeledForStatement(Label forLabel, ForStatement forStatement) {
     Block.Builder rewrittenBlockBuilder =
-        Block.newBuilder().setSourcePosition(forStatement.getSourcePosition());
+        Block.builder().setSourcePosition(forStatement.getSourcePosition());
 
     forStatement
         .getInitializers()
@@ -94,12 +94,12 @@ public class NormalizeForStatements extends NormalizationPass {
         forConditionExpression != null ? forConditionExpression : BooleanLiteral.get(true);
 
     Block.Builder whileBlockBuilder =
-        Block.newBuilder().setSourcePosition(forStatement.getSourcePosition());
+        Block.builder().setSourcePosition(forStatement.getSourcePosition());
 
-    Label continueLabel = Label.newBuilder().setName(forLabel.getName() + "_CONTINUE").build();
+    Label continueLabel = Label.builder().setName(forLabel.getName() + "_CONTINUE").build();
 
     whileBlockBuilder.addStatement(
-        LabeledStatement.newBuilder()
+        LabeledStatement.builder()
             .setLabel(continueLabel)
             .setSourcePosition(forStatement.getSourcePosition())
             .setStatement(
@@ -115,14 +115,14 @@ public class NormalizeForStatements extends NormalizationPass {
                     update.makeStatement(forStatement.getSourcePosition())));
 
     Statement whileStatement =
-        WhileStatement.newBuilder()
+        WhileStatement.builder()
             .setSourcePosition(forStatement.getSourcePosition())
             .setConditionExpression(whileConditionExpression)
             .setBody(whileBlockBuilder.build())
             .build();
 
     Statement labeledWhileStatement =
-        LabeledStatement.newBuilder()
+        LabeledStatement.builder()
             .setSourcePosition(whileStatement.getSourcePosition())
             .setLabel(forLabel)
             .setStatement(whileStatement)
@@ -141,7 +141,7 @@ public class NormalizeForStatements extends NormalizationPass {
               @Override
               public Node rewriteContinueStatement(ContinueStatement continueStatement) {
                 return continueStatement.targetsLabel(continueLabel)
-                    ? BreakStatement.Builder.from(continueStatement)
+                    ? BreakStatement.builderFrom(continueStatement)
                         .setLabelReference(breakLabel.createReference())
                         .build()
                     : continueStatement;

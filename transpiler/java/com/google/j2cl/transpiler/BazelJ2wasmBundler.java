@@ -442,7 +442,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     var stringLiteralHolder =
         new com.google.j2cl.transpiler.ast.Type(
             SourcePosition.NONE,
-            TypeDeclaration.newBuilder()
+            TypeDeclaration.builder()
                 .setQualifiedSourceName("wasm.stringLiteral.StringLiteralHolder")
                 .setKind(Kind.CLASS)
                 .build());
@@ -506,7 +506,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     // Synthesize the forwarding logic.
     TypeDeclaration typeDeclaration =
-        TypeDeclaration.newBuilder()
+        TypeDeclaration.builder()
             .setQualifiedSourceName(enclosingTypeQualifiedSourceName)
             .setKind(Kind.CLASS)
             .build();
@@ -519,7 +519,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
   private static Method synthesizeForwardingMethod(
       MethodDescriptor literalGetter, TypeDeclaration fromType, String forwardingMethodName) {
     MethodDescriptor forwarderDescriptor =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(fromType.toDescriptor())
             .setName(forwardingMethodName)
             .setOrigin(MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER)
@@ -539,11 +539,11 @@ final class BazelJ2wasmBundler extends BazelWorker {
     var typeDeclaration = propertyGetter.getEnclosingTypeDescriptor().getTypeDeclaration();
     com.google.j2cl.transpiler.ast.Type type = getType(typeDeclaration);
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(propertyGetter)
             .setSourcePosition(SourcePosition.NONE)
             .setStatements(
-                ReturnStatement.newBuilder()
+                ReturnStatement.builder()
                     .setExpression(TypeDescriptors.get().javaLangString.getNullValue())
                     .setSourcePosition(SourcePosition.NONE)
                     .build())
@@ -555,7 +555,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
   /** Synthetic library all types synthesized at bundling time. */
   private final Library library =
-      Library.newBuilder().setCompilationUnits(ImmutableList.of(compilationUnit)).build();
+      Library.builder().setCompilationUnits(ImmutableList.of(compilationUnit)).build();
 
   private final Map<TypeDeclaration, com.google.j2cl.transpiler.ast.Type> typesByDeclaration =
       new LinkedHashMap<>();

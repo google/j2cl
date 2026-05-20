@@ -59,7 +59,7 @@ public class InsertCastForLowerBounds extends NormalizationPass {
                         && !isWildcardOrCaptureWithLowerBound(inferredTypeDescriptor)
                         && !isJavaLangObject(inferredTypeDescriptor);
                 return needsCast
-                    ? CastExpression.newBuilder()
+                    ? CastExpression.builder()
                         .setExpression(expression)
                         .setCastTypeDescriptor(inferredTypeDescriptor)
                         .build()

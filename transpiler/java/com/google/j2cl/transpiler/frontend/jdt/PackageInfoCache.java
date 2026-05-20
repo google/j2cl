@@ -66,7 +66,7 @@ public class PackageInfoCache {
       boolean isNullMarked) {
     packageReportByTypeName.put(
         packageName,
-        PackageInfo.newBuilder()
+        PackageInfo.builder()
             .setPackageName(packageName)
             .setJsNamespace(packageJsNamespace)
             .setNullMarked(isNullMarked)

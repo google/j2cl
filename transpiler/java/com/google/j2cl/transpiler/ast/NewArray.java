@@ -90,7 +90,7 @@ public class NewArray extends Expression {
 
   @Override
   public NewArray clone() {
-    return NewArray.newBuilder()
+    return builder()
         .setTypeDescriptor(typeDescriptor)
         .setDimensionExpressions(AstUtils.clone(dimensionExpressions))
         .setInitializer(AstUtils.clone(initializer))
@@ -102,19 +102,19 @@ public class NewArray extends Expression {
     return Visitor_NewArray.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setInitializer(this.getInitializer())
+        .setDimensionExpressions(this.getDimensionExpressions())
+        .setTypeDescriptor(this.getTypeDescriptor());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
   /** Builder for NewArray. */
   public static class Builder {
-    public static Builder from(NewArray newArray) {
-      return newBuilder()
-          .setInitializer(newArray.getInitializer())
-          .setDimensionExpressions(newArray.getDimensionExpressions())
-          .setTypeDescriptor(newArray.getTypeDescriptor());
-    }
-
     private ArrayTypeDescriptor typeDescriptor;
     private Expression initializer;
     private List<Expression> dimensionExpressions;

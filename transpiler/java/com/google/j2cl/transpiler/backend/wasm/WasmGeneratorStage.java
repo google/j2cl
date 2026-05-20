@@ -221,7 +221,6 @@ public class WasmGeneratorStage {
     output.write(filename, content);
   }
 
-
   private void copyJavaSources(Library library) {
     library.getCompilationUnits().stream()
         .filter(not(CompilationUnit::isSynthetic))
@@ -266,7 +265,7 @@ public class WasmGeneratorStage {
           type.addMember(m);
         });
     typesByDeclaration.values().forEach(cu::addType);
-    Library library = Library.newBuilder().setCompilationUnits(ImmutableList.of(cu)).build();
+    Library library = Library.builder().setCompilationUnits(ImmutableList.of(cu)).build();
     environment =
         new WasmGenerationEnvironment(
             library, JsImportsGenerator.collectImports(library, problems));

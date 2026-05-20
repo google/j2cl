@@ -51,7 +51,7 @@ public class YieldStatement extends Statement {
 
   @Override
   public YieldStatement clone() {
-    return YieldStatement.newBuilder()
+    return YieldStatement.builder()
         .setExpression(expression.clone())
         .setLabelReference(labelReference.clone())
         .setSourcePosition(getSourcePosition())
@@ -63,22 +63,22 @@ public class YieldStatement extends Statement {
     return Visitor_YieldStatement.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setExpression(this.getExpression())
+        .setLabelReference(this.getLabelReference())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
-  /** Builder for ReturnStatement. */
+  /** Builder for YieldStatement. */
   public static class Builder {
     private Expression expression;
     private SourcePosition sourcePosition;
     private LabelReference labelReference;
-
-    public static Builder from(YieldStatement yieldStatement) {
-      return newBuilder()
-          .setExpression(yieldStatement.getExpression())
-          .setLabelReference(yieldStatement.getLabelReference())
-          .setSourcePosition(yieldStatement.getSourcePosition());
-    }
 
     @CanIgnoreReturnValue
     public Builder setExpression(Expression expression) {

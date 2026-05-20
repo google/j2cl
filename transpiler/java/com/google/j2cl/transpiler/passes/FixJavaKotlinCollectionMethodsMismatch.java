@@ -224,7 +224,7 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
             .map(ParameterSignatureMapping::getKotlinTypeDescriptor)
             .collect(toImmutableList());
     MethodDescriptor kotlinMethodDescriptor =
-        MethodDescriptor.Builder.from(javaMethodDescriptor)
+        javaMethodDescriptor.toBuilder()
             .updateParameterTypeDescriptors(kotlinParameterTypeDescriptors)
             .setReturnTypeDescriptor(
                 kotlinReturnTypeDescriptor != null
@@ -292,9 +292,7 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
           TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
 
           Variable kotlinParameter =
-              Variable.Builder.from(parameter)
-                  .setTypeDescriptor(kotlinParameterTypeDescriptor)
-                  .build();
+              parameter.toBuilder().setTypeDescriptor(kotlinParameterTypeDescriptor).build();
           method.getParameters().set(i, kotlinParameter);
 
           Expression initializer = kotlinParameter.createReference();
@@ -302,19 +300,19 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
           // Insert cast from read-only to mutable if necessary.
           if (!kotlinParameterTypeDescriptor.isAssignableTo(parameterTypeDescriptor)) {
             initializer =
-                CastExpression.newBuilder()
+                CastExpression.builder()
                     .setExpression(initializer)
                     .setCastTypeDescriptor(parameterTypeDescriptor)
                     .build();
           }
 
           Statement declarationStatement =
-              VariableDeclarationExpression.newBuilder()
+              VariableDeclarationExpression.builder()
                   .addVariableDeclaration(parameter, initializer)
                   .build()
                   .makeStatement(parameter.getSourcePosition());
           body =
-              Block.Builder.from(body)
+              body.toBuilder()
                   .setStatements()
                   .addStatement(declarationStatement)
                   .addStatements(body.getStatements())
@@ -338,12 +336,12 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
               .specializeTypeVariables(parameterization);
 
       methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
+          methodDescriptor.toBuilder()
               .updateParameterTypeDescriptors(parameterTypeDescriptors)
               .setReturnTypeDescriptor(kotlinReturnTypeDescriptor)
               .build();
 
-      return Method.Builder.from(method)
+      return method.toBuilder()
           .setMethodDescriptor(methodDescriptor)
           .setBody(body)
           .setForcedJavaOverride(true)
@@ -360,9 +358,9 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
                 return returnStatement;
               }
 
-              return ReturnStatement.Builder.from(returnStatement)
+              return returnStatement.toBuilder()
                   .setExpression(
-                      CastExpression.newBuilder()
+                      CastExpression.builder()
                           .setExpression(returnStatement.getExpression())
                           .setCastTypeDescriptor(castTypeDescriptor)
                           .build())
@@ -405,7 +403,7 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
       } else {
         methodDescriptor =
             methodDescriptor.transform(builder -> builder.setName(getBridgeMethodName()));
-        return MethodCall.Builder.from(methodCall).setTarget(methodDescriptor).build();
+        return methodCall.toBuilder().setTarget(methodDescriptor).build();
       }
     }
 
@@ -416,7 +414,7 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
         Map<TypeVariable, TypeDescriptor> parameterization) {
       // TODO(b/380235439): Use generic-aware isAssignableTo() when it's implemented.
       if (!javaParameterTypeDescriptor.equals(kotlinParameterTypeDescriptor)) {
-        return CastExpression.newBuilder()
+        return CastExpression.builder()
             .setExpression(argument)
             .setCastTypeDescriptor(
                 kotlinParameterTypeDescriptor.specializeTypeVariables(parameterization))

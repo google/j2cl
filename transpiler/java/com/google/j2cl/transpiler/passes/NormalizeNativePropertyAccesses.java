@@ -75,7 +75,7 @@ public class NormalizeNativePropertyAccesses extends NormalizationPass {
             if (!fieldDescriptor.isNative()) {
               return expression;
             }
-            return MethodCall.Builder.from(AstUtils.getSetterMethodDescriptor(fieldDescriptor))
+            return MethodCall.builderFrom(AstUtils.getSetterMethodDescriptor(fieldDescriptor))
                 .setQualifier(fieldAccess.getQualifier())
                 .setArguments(expression.getRightOperand())
                 .build();
@@ -89,7 +89,7 @@ public class NormalizeNativePropertyAccesses extends NormalizationPass {
             if (!fieldDescriptor.isNative()) {
               return fieldAccess;
             }
-            return MethodCall.Builder.from(AstUtils.getGetterMethodDescriptor(fieldDescriptor))
+            return MethodCall.builderFrom(AstUtils.getGetterMethodDescriptor(fieldDescriptor))
                 .setQualifier(fieldAccess.getQualifier())
                 .build();
           }
@@ -100,7 +100,7 @@ public class NormalizeNativePropertyAccesses extends NormalizationPass {
     checkArgument(field.isNative());
     FieldDescriptor fieldDescriptor = field.getDescriptor();
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setSourcePosition(field.getSourcePosition())
             .setMethodDescriptor(AstUtils.getGetterMethodDescriptor(fieldDescriptor))
             .build());
@@ -110,13 +110,13 @@ public class NormalizeNativePropertyAccesses extends NormalizationPass {
     checkArgument(field.isNative());
     FieldDescriptor fieldDescriptor = field.getDescriptor();
     Variable parameter =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("value")
             .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
             .setParameter(true)
             .build();
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setSourcePosition(field.getSourcePosition())
             .setMethodDescriptor(AstUtils.getSetterMethodDescriptor(fieldDescriptor))
             .setParameters(parameter)

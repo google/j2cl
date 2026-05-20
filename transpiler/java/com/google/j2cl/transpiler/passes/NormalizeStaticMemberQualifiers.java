@@ -42,7 +42,7 @@ public class NormalizeStaticMemberQualifiers extends NormalizationPass {
                 multiExpressionBuilder.addExpressions(memberReference.getQualifier());
               }
               multiExpressionBuilder.addExpressions(
-                  MemberReference.Builder.from(memberReference).setQualifier(null).build());
+                  memberReference.toBuilder().setQualifier(null).build());
               return multiExpressionBuilder.build();
             }
             return memberReference;

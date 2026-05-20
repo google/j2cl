@@ -69,7 +69,7 @@ public class LocalFunctionDeclarationStatement extends Statement implements Meth
     var clonedParameters = AstUtils.clone(parameters);
     Block clonedBody = AstUtils.replaceDeclarations(parameters, clonedParameters, body.clone());
 
-    return LocalFunctionDeclarationStatement.newBuilder()
+    return LocalFunctionDeclarationStatement.builder()
         .setMethodDescriptor(methodDescriptor)
         .setParameters(clonedParameters)
         .setBody(clonedBody)
@@ -81,7 +81,15 @@ public class LocalFunctionDeclarationStatement extends Statement implements Meth
     return Visitor_LocalFunctionDeclarationStatement.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setMethodDescriptor(this.getDescriptor())
+        .setParameters(this.getParameters())
+        .setBody(this.getBody())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -91,14 +99,6 @@ public class LocalFunctionDeclarationStatement extends Statement implements Meth
     private Block body;
     private MethodDescriptor methodDescriptor;
     private SourcePosition sourcePosition;
-
-    public static Builder from(LocalFunctionDeclarationStatement expression) {
-      return new Builder()
-          .setMethodDescriptor(expression.getDescriptor())
-          .setParameters(expression.getParameters())
-          .setBody(expression.getBody())
-          .setSourcePosition(expression.getSourcePosition());
-    }
 
     @CanIgnoreReturnValue
     public Builder setBody(Block body) {

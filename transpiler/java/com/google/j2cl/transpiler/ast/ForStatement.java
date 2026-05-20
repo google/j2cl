@@ -69,7 +69,7 @@ public class ForStatement extends LoopStatement {
 
   @Override
   public ForStatement clone() {
-    return ForStatement.newBuilder()
+    return ForStatement.builder()
         .setConditionExpression(AstUtils.clone(conditionExpression))
         .setBody(body.clone())
         .setInitializers(AstUtils.clone(initializers))
@@ -84,11 +84,11 @@ public class ForStatement extends LoopStatement {
   }
 
   @Override
-  Builder toBuilder() {
+  public Builder toBuilder() {
     return new Builder(this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -96,10 +96,6 @@ public class ForStatement extends LoopStatement {
   public static class Builder extends LoopStatement.Builder<Builder, ForStatement> {
     private List<Expression> initializers = new ArrayList<>();
     private List<Expression> updates = new ArrayList<>();
-
-    public static Builder from(ForStatement forStatement) {
-      return new Builder(forStatement);
-    }
 
     private Builder() {}
 

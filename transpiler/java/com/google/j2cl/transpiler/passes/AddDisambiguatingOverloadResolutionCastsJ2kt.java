@@ -68,7 +68,7 @@ public class AddDisambiguatingOverloadResolutionCastsJ2kt extends AbstractJ2ktNo
             }
             // If it's a potentially ambiguous call, explicitly cast every argument to the
             // parameter's type.
-            return Invocation.Builder.from(invocation)
+            return invocation.toBuilder()
                 .setArguments(
                     zip(
                         invocation.getTarget().getParameterTypeDescriptors(),
@@ -84,7 +84,7 @@ public class AddDisambiguatingOverloadResolutionCastsJ2kt extends AbstractJ2ktNo
     if (!parameterTypeDescriptor.isDenotable()) {
       return argument;
     }
-    return CastExpression.newBuilder()
+    return CastExpression.builder()
         .setCastTypeDescriptor(parameterTypeDescriptor)
         .setExpression(argument)
         .build();

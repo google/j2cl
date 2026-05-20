@@ -339,15 +339,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.append(" ".repeat(firstNonWhitespaceColumn));
         // Only map the trimmed section of the line.
         sourceBuilder.emitWithMapping(
-            SourcePosition.newBuilder()
+            SourcePosition.builder()
                 .setStartFilePosition(
-                    FilePosition.newBuilder()
+                    FilePosition.builder()
                         .setLine(nativeSourceLine)
                         .setColumn(firstNonWhitespaceColumn)
                         .setByteOffset(currentByteOffset + firstNonWhitespaceColumn)
                         .build())
                 .setEndFilePosition(
-                    FilePosition.newBuilder()
+                    FilePosition.builder()
                         .setLine(nativeSourceLine)
                         .setColumn(trimmedLine.length())
                         .setByteOffset(currentByteOffset + trimmedLine.length())

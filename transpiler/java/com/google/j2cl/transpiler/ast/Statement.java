@@ -57,7 +57,7 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
   }
 
   public LabeledStatement encloseWithLabel(Label label) {
-    return LabeledStatement.newBuilder()
+    return LabeledStatement.builder()
         .setStatement(this)
         .setLabel(label)
         .setSourcePosition(getSourcePosition())
@@ -65,7 +65,7 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
   }
 
   public Block ensureBlock() {
-    return Block.newBuilder().setSourcePosition(getSourcePosition()).setStatements(this).build();
+    return Block.builder().setSourcePosition(getSourcePosition()).setStatements(this).build();
   }
 
   @Override
@@ -77,6 +77,6 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
   }
 
   public static Statement createNoopStatement() {
-    return Block.newBuilder().build();
+    return Block.builder().build();
   }
 }

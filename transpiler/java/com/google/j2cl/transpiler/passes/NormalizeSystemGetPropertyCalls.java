@@ -51,7 +51,7 @@ public class NormalizeSystemGetPropertyCalls extends NormalizationPass {
             boolean isRequired = arguments.size() != 2;
 
             MethodCall propertyGetterCall =
-                MethodCall.Builder.from(getSystemGetPropertyGetter(propertyKey, isRequired))
+                MethodCall.builderFrom(getSystemGetPropertyGetter(propertyKey, isRequired))
                     .setSourcePosition(methodCall.getSourcePosition())
                     .build();
 
@@ -61,24 +61,24 @@ public class NormalizeSystemGetPropertyCalls extends NormalizationPass {
 
             Expression defaultValue = arguments.get(1);
             Variable propertyValueVariable =
-                Variable.newBuilder()
+                Variable.builder()
                     .setName("$propertyValue")
                     .setFinal(true)
                     .setTypeDescriptor(TypeDescriptors.get().javaLangString)
                     .build();
             Variable defaultValueVariable =
-                Variable.newBuilder()
+                Variable.builder()
                     .setName("$defaultValue")
                     .setFinal(true)
                     .setTypeDescriptor(TypeDescriptors.get().javaLangString)
                     .build();
-            return MultiExpression.newBuilder()
+            return MultiExpression.builder()
                 .addExpressions(
-                    VariableDeclarationExpression.newBuilder()
+                    VariableDeclarationExpression.builder()
                         .addVariableDeclaration(propertyValueVariable, propertyGetterCall)
                         .addVariableDeclaration(defaultValueVariable, defaultValue)
                         .build(),
-                    ConditionalExpression.newBuilder()
+                    ConditionalExpression.builder()
                         .setTypeDescriptor(TypeDescriptors.get().javaLangString)
                         .setConditionExpression(
                             propertyValueVariable.createReference().infixEqualsNull())

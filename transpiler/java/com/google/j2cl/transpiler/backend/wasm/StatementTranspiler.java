@@ -441,7 +441,7 @@ final class StatementTranspiler {
           condition =
               condition == null
                   ? caseCondition
-                  : ConditionalExpression.newBuilder()
+                  : ConditionalExpression.builder()
                       .setConditionExpression(condition)
                       .setTrueExpression(BooleanLiteral.get(true))
                       .setFalseExpression(caseCondition)

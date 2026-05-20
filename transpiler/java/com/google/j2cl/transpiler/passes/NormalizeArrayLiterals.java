@@ -51,7 +51,7 @@ public class NormalizeArrayLiterals extends NormalizationPass {
               return arrayLiteral;
             }
 
-            return NewArray.newBuilder()
+            return NewArray.builder()
                 .setTypeDescriptor(arrayLiteral.getTypeDescriptor())
                 .setDimensionExpressions(
                     AstUtils.createListOfNullValues(
@@ -77,7 +77,7 @@ public class NormalizeArrayLiterals extends NormalizationPass {
               // Replace the empty literal with the explicit new Component[0].
               List<Expression> dimensions = Lists.newArrayList(NumberLiteral.fromInt(0));
               AstUtils.addNullPadding(dimensions, arrayTypeDescriptor.getDimensions());
-              return NewArray.newBuilder()
+              return NewArray.builder()
                   .setTypeDescriptor(newArray.getTypeDescriptor())
                   .setDimensionExpressions(dimensions)
                   .setInitializer(null)

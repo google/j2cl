@@ -219,7 +219,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
     problems.abortIfCancelled();
 
-    return J2clTranspilerOptions.newBuilder()
+    return J2clTranspilerOptions.builder()
         .setSources(allSources)
         .setNativeSources(allNativeSources)
         .setClasspaths(this.classpaths)

@@ -13,7 +13,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -140,7 +139,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //
               //  gets transformed so that it is JsFunctionInterface.apply instead.
               //
-              return MethodCall.Builder.from(methodCall)
+              return methodCall.toBuilder()
                   .setTarget(
                       targetTypeDescriptor
                           .getFunctionalInterface()
@@ -178,7 +177,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         type.getTypeDescriptor().getFunctionalInterface();
-    return FunctionExpression.newBuilder()
+    return FunctionExpression.builder()
         .setTypeDescriptor(jsFunctionTypeDescriptor)
         .setParameters(jsFunctionMethodImplementation.getParameters())
         .setStatements(jsFunctionMethodImplementation.getBody().getStatements())

@@ -45,7 +45,7 @@ public class ImplementFloatingPointRemainderOperation extends NormalizationPass 
                     ? "fmod"
                     : "dmod";
 
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     TypeDescriptors.get()
                         .javaemulInternalPrimitives
                         .getMethodDescriptorByName(modMethodName))

@@ -57,9 +57,9 @@ public class InsertNarrowingReferenceConversions extends NormalizationPass {
           //
           //   int i = (int) (Integer) o;
           //
-          return CastExpression.newBuilder()
+          return CastExpression.builder()
               .setExpression(
-                  CastExpression.newBuilder()
+                  CastExpression.builder()
                       .setExpression(castExpression.getExpression())
                       .setCastTypeDescriptor(toTypeDescriptor.toBoxedType())
                       .build())

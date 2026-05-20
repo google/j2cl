@@ -47,7 +47,7 @@ public class WasmExportBridgesUtils {
 
     TypeDescriptor returnType = methodDescriptor.getReturnTypeDescriptor();
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
         .addStatements(
@@ -67,13 +67,13 @@ public class WasmExportBridgesUtils {
       FieldDescriptor fieldDescriptor, SourcePosition sourcePosition) {
     MethodDescriptor bridgeMethodDescriptor = createGetterBridgeDescriptor(fieldDescriptor);
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .addStatements(
             convertReturnIfNeeded(
                 AstUtils.createReturnOrExpressionStatement(
                     sourcePosition,
-                    FieldAccess.Builder.from(fieldDescriptor).setDefaultInstanceQualifier().build(),
+                    FieldAccess.builderFrom(fieldDescriptor).setDefaultInstanceQualifier().build(),
                     fieldDescriptor.getTypeDescriptor()),
                 fieldDescriptor.getTypeDescriptor()))
         .setSourcePosition(sourcePosition)
@@ -92,7 +92,7 @@ public class WasmExportBridgesUtils {
         AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterTypeDescriptors())
             .get(0);
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(valueParameter)
         .addStatements(
@@ -119,7 +119,7 @@ public class WasmExportBridgesUtils {
       Statement statement, TypeDescriptor targetReturnTypeDescriptor) {
     if (TypeDescriptors.isJavaLangString(targetReturnTypeDescriptor)) {
       ReturnStatement returnStatement = (ReturnStatement) statement;
-      return ReturnStatement.Builder.from(returnStatement)
+      return returnStatement.toBuilder()
           .setExpression(
               RuntimeMethods.createJsStringFromStringMethodCall(returnStatement.getExpression()))
           .build();
@@ -135,9 +135,9 @@ public class WasmExportBridgesUtils {
     if (methodDescriptor.isConstructor()) {
       checkState(
           returnTypeDescriptor.isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
-      return ReturnStatement.newBuilder()
+      return ReturnStatement.builder()
           .setExpression(
-              NewInstance.Builder.from(methodDescriptor)
+              NewInstance.builderFrom(methodDescriptor)
                   .setArguments(AstUtils.maybePackageVarargs(methodDescriptor, arguments))
                   .build())
           .setSourcePosition(sourcePosition)
@@ -160,7 +160,7 @@ public class WasmExportBridgesUtils {
   private static MethodDescriptor createBridgeDescriptor(
       MethodDescriptor descriptor, MethodDescriptor.MethodOrigin origin) {
     MethodDescriptor.Builder builder =
-        MethodDescriptor.Builder.from(descriptor)
+        descriptor.toBuilder()
             .setOrigin(origin)
             .setReturnTypeDescriptor(
                 replaceStringWithNativeString(descriptor.getReturnTypeDescriptor()))
@@ -184,14 +184,14 @@ public class WasmExportBridgesUtils {
   }
 
   private static MethodDescriptor createGetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
-    return MethodDescriptor.Builder.from(AstUtils.getGetterMethodDescriptor(fieldDescriptor))
+    return AstUtils.getGetterMethodDescriptor(fieldDescriptor).toBuilder()
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT)
         .setReturnTypeDescriptor(replaceStringWithNativeString(fieldDescriptor.getTypeDescriptor()))
         .build();
   }
 
   private static MethodDescriptor createSetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
-    return MethodDescriptor.Builder.from(AstUtils.getSetterMethodDescriptor(fieldDescriptor))
+    return AstUtils.getSetterMethodDescriptor(fieldDescriptor).toBuilder()
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT)
         .setParameterTypeDescriptors(
             replaceStringWithNativeString(fieldDescriptor.getTypeDescriptor()))

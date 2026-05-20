@@ -125,7 +125,7 @@ public class FixAnonymousClassInstantiations extends NormalizationPass {
             if (parameterDescriptors.equals(methodDescriptor.getParameterDescriptors())) {
               return methodDescriptor;
             }
-            return MethodDescriptor.Builder.from(methodDescriptor)
+            return methodDescriptor.toBuilder()
                 .setParameterDescriptors(parameterDescriptors)
                 .build();
           }

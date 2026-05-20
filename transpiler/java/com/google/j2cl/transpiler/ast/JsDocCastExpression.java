@@ -66,7 +66,13 @@ public class JsDocCastExpression extends Expression {
     return new JsDocCastExpression(expression.clone(), castTypeDescriptor);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setExpression(this.getExpression())
+        .setCastTypeDescriptor(this.getTypeDescriptor());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -74,13 +80,6 @@ public class JsDocCastExpression extends Expression {
   public static class Builder {
     private Expression expression;
     private TypeDescriptor castTypeDescriptor;
-
-    public static Builder from(JsDocCastExpression annotation) {
-      Builder builder = new Builder();
-      builder.expression = annotation.getExpression();
-      builder.castTypeDescriptor = annotation.getTypeDescriptor();
-      return builder;
-    }
 
     @CanIgnoreReturnValue
     public Builder setExpression(Expression expression) {

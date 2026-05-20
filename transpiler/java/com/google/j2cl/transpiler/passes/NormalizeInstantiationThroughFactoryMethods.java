@@ -63,7 +63,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
             if (constructorInvocation.getTarget().getEnclosingTypeDescriptor().isNative()) {
               return constructorInvocation;
             }
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     getFactoryDescriptorForConstructor(constructorInvocation.getTarget()))
                 .setArguments(constructorInvocation.getArguments())
                 .build();
@@ -105,7 +105,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
               return method;
             }
 
-            return Method.newBuilder()
+            return Method.builder()
                 .setMethodDescriptor(getCtorMethodDescriptorForConstructor(method.getDescriptor()))
                 .setParameters(method.getParameters())
                 .addStatements(method.getBody().getStatements())
@@ -120,7 +120,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
               return methodCall;
             }
 
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     getCtorMethodDescriptorForConstructor(methodCall.getTarget()))
                 .setQualifier(
                     methodCall.getQualifier() == null
@@ -149,16 +149,16 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
     List<Variable> factoryMethodParameters = AstUtils.clone(constructor.getParameters());
 
     Variable newInstance =
-        Variable.newBuilder().setName("$instance").setTypeDescriptor(enclosingType).build();
+        Variable.builder().setName("$instance").setTypeDescriptor(enclosingType).build();
 
     SourcePosition constructorSourcePosition = constructor.getSourcePosition();
 
     // Type $instance = new Type();
     Statement newInstanceStatement =
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclaration(
                 newInstance,
-                NewInstance.Builder.from(constructor.getDescriptor())
+                NewInstance.builderFrom(constructor.getDescriptor())
                     .setArguments(
                         factoryMethodParameters.stream()
                             .map(Variable::createReference)
@@ -170,7 +170,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
 
     // $instance.$ctor...();
     Statement ctorCallStatement =
-        MethodCall.Builder.from(constructor.getDescriptor())
+        MethodCall.builderFrom(constructor.getDescriptor())
             .setQualifier(newInstance.createReference())
             .setArguments(AstUtils.getReferences(factoryMethodParameters))
             .build()
@@ -186,13 +186,13 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
 
     // return $instance
     Statement returnStatement =
-        ReturnStatement.newBuilder()
+        ReturnStatement.builder()
             .setExpression(newInstance.createReference())
             .setSourcePosition(constructorSourcePosition)
             .build();
     statements.add(returnStatement);
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(getFactoryDescriptorForConstructor(constructor.getDescriptor()))
         .setParameters(factoryMethodParameters)
         .addStatements(statements)
@@ -255,7 +255,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
   private static Expression newInstanceOfError(Expression thisRef) {
     return RuntimeMethods.createExceptionsMethodCall(
         "createJsError",
-        MethodCall.Builder.from(
+        MethodCall.builderFrom(
                 TypeDescriptors.get().javaLangObject.getMethodDescriptorByName("toString"))
             .setQualifier(thisRef)
             .build());

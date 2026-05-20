@@ -76,16 +76,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder toBuilder();
 
-    public static Builder newBuilder() {
+    public static Builder builder() {
       return new AutoValue_MethodDescriptor_ParameterDescriptor.Builder()
           .setVarargs(false)
           .setAnnotations(ImmutableList.of())
           .setOptional(false)
           .setJsOptional(false);
     }
-
-    private static final ThreadLocalInterner<ParameterDescriptor> interner =
-        new ThreadLocalInterner<>();
 
     /** A Builder for ParameterDescriptor. */
     @AutoValue.Builder
@@ -117,6 +114,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             !isOptional() || !isJsOptional(), "Parameters cannot be both optional and JsOptional");
         return interner.intern(autoBuild());
       }
+
+      private static final ThreadLocalInterner<ParameterDescriptor> interner =
+          new ThreadLocalInterner<>();
     }
   }
 
@@ -508,12 +508,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public MethodDescriptor withoutTypeParameters() {
 
     Set<TypeVariable> typeParameters = new HashSet<>(getTypeParameterTypeDescriptors());
-    return Builder.from(
-            specializeTypeVariables(
-                p ->
-                    typeParameters.contains(p)
-                        ? TypeVariable.createWildcardWithUpperBound(p.getUpperBoundTypeDescriptor())
-                        : p))
+    return specializeTypeVariables(
+            p ->
+                typeParameters.contains(p)
+                    ? TypeVariable.createWildcardWithUpperBound(p.getUpperBoundTypeDescriptor())
+                    : p)
+        .toBuilder()
         .setDeclarationDescriptor(
             isDeclaration() ? null : getDeclarationDescriptor().withoutTypeParameters())
         .setTypeParameterTypeDescriptors(ImmutableList.of())
@@ -597,7 +597,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       KtInfo overriddenKtInfo =
           overriddenMethodDescriptor.getDeclarationDescriptor().getOriginalKtInfo();
       ktInfo =
-          KtInfo.newBuilder()
+          KtInfo.builder()
               .setProperty(ktInfo.isProperty() || overriddenKtInfo.isProperty())
               .setName(ktInfo.getName() == null ? overriddenKtInfo.getName() : ktInfo.getName())
               .build();
@@ -622,7 +622,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (getEnclosingTypeDescriptor().getTypeDeclaration().isAnonymous()
         && isConstructor()
         && getEnclosingTypeDescriptor().getSuperTypeDescriptor().hasJsConstructor()) {
-      return JsInfo.Builder.from(originalJsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
+      return originalJsInfo.toBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
 
     // The original JsInfo for a record component is present only in the corresponding field.
@@ -665,7 +665,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // Found an overridden method of the same JsMember type one that customizes the name, done.
         // If there are any conflicts with other overrides they will be reported by
         // JsInteropRestrictionsChecker.
-        return JsInfo.Builder.from(inheritedJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
+        return inheritedJsInfo.toBuilder().setJsAsync(originalJsInfo.isJsAsync()).build();
       }
 
       if (defaultJsInfo == originalJsInfo && !hasExplicitJsMemberAnnotation) {
@@ -684,11 +684,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       // This is a Java override of a method that does not have the same signature and its
       // JsMethod annotation does not specify a name; in this case the method will not be considered
       // a JsMethod but instead it will be the target of a JsMethod bridge.
-      return JsInfo.Builder.from(JsInfo.NONE).setJsAsync(originalJsInfo.isJsAsync()).build();
+      return JsInfo.NONE.toBuilder().setJsAsync(originalJsInfo.isJsAsync()).build();
     }
 
     // Don't inherit @JsAsync annotation from overridden methods.
-    return JsInfo.Builder.from(defaultJsInfo)
+    return defaultJsInfo.toBuilder()
         .setJsAsync(originalJsInfo.isJsAsync())
         .setHasJsMemberAnnotation(hasExplicitJsMemberAnnotation)
         .build();
@@ -713,7 +713,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return null;
     }
 
-    return JsInfo.Builder.from(fieldJsInfo)
+    return fieldJsInfo.toBuilder()
         .setJsMemberType(JsMemberType.GETTER)
         // For inheritance purposes, we should consider always always as having a JsMember
         // annotation even if the component was not originally annotated since we don't want to
@@ -824,7 +824,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         && getParameterDescriptors().size() == 1
         && getName().equals(IS_INSTANCE_METHOD_NAME);
   }
-
 
   /** Returns true if this descriptor and {@code other} refer to the same method declaration. */
   // TODO(b/372055363): This should be equivalent to
@@ -1158,9 +1157,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return builder.build();
   }
 
-  abstract Builder toBuilder();
+  public abstract Builder toBuilder();
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_MethodDescriptor.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
@@ -1367,7 +1366,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return this;
     }
 
-    return MethodDescriptor.Builder.from(this)
+    return toBuilder()
         .setDeclarationDescriptor(getDeclarationDescriptor())
         .setTypeArgumentTypeDescriptors(specializedTypeArgumentDescriptors)
         .setReturnTypeDescriptor(specializedReturnTypeDescriptor)
@@ -1437,7 +1436,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     // The bound was specialized, introduce a new type variable and add it to the replacement
     // function.
     TypeVariable replacementTypeVariable =
-        TypeVariable.newBuilder()
+        TypeVariable.builder()
             .setName(typeVariable.getName())
             .setUniqueKey(
                 typeVariable.getUniqueKey()
@@ -1735,7 +1734,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return parameterTypeDescriptors.stream()
           .map(
               typeDescriptor ->
-                  ParameterDescriptor.newBuilder().setTypeDescriptor(typeDescriptor).build())
+                  ParameterDescriptor.builder().setTypeDescriptor(typeDescriptor).build())
           .collect(toImmutableList());
     }
 
@@ -1897,10 +1896,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       checkState(
           !methodDescriptor.isGeneralizingBridge()
               || methodDescriptor.isJsMethod() == methodDescriptor.getBridgeOrigin().isJsMethod());
-    }
-
-    public static Builder from(MethodDescriptor methodDescriptor) {
-      return methodDescriptor.toBuilder();
     }
 
     private static final ThreadLocalInterner<MethodDescriptor> interner =

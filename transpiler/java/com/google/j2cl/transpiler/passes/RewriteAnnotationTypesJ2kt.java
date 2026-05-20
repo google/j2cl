@@ -26,7 +26,6 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PackageDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 
@@ -53,9 +52,9 @@ public class RewriteAnnotationTypesJ2kt extends NormalizationPass {
               return method;
             }
 
-            return Method.Builder.from(method)
+            return method.toBuilder()
                 .setMethodDescriptor(
-                    MethodDescriptor.Builder.from(methodDescriptor)
+                    methodDescriptor.toBuilder()
                         .setReturnTypeDescriptor(
                             rewriteAnnotationTypeDescriptor(
                                 methodDescriptor.getReturnTypeDescriptor()))
@@ -69,8 +68,8 @@ public class RewriteAnnotationTypesJ2kt extends NormalizationPass {
     return switch (typeDescriptor) {
       case DeclaredTypeDescriptor declaredTypeDescriptor
           when isJavaLangClass(declaredTypeDescriptor) ->
-          TypeDeclaration.Builder.from(declaredTypeDescriptor.getTypeDeclaration())
-              .setPackage(PackageDeclaration.newBuilder().setName("kotlin.reflect").build())
+          declaredTypeDescriptor.getTypeDeclaration().toBuilder()
+              .setPackage(PackageDeclaration.builder().setName("kotlin.reflect").build())
               .setClassComponents("KClass")
               .build()
               .toDescriptor()

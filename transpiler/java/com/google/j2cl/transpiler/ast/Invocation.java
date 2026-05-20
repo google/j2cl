@@ -63,7 +63,7 @@ public abstract class Invocation extends MemberReference {
   }
 
   @Override
-  abstract Builder<?, ?> createBuilder();
+  public abstract Builder<?, ?> toBuilder();
 
   /**
    * Common logic for a builder to create method calls and new instances.
@@ -73,13 +73,8 @@ public abstract class Invocation extends MemberReference {
    */
   public abstract static class Builder<T extends Builder<T, I>, I extends Invocation>
       extends MemberReference.Builder<T, I, MethodDescriptor> {
-
     private List<Expression> arguments = new ArrayList<>();
     private List<TypeDescriptor> typeArguments = new ArrayList<>();
-
-    public static Builder<?, ?> from(Invocation invocation) {
-      return invocation.createBuilder();
-    }
 
     @CanIgnoreReturnValue
     public final T setArguments(Expression... arguments) {

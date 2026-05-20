@@ -51,25 +51,25 @@ public class JsAwaitExpression extends Expression {
     return new JsAwaitExpression(expression.clone(), typeDescriptor);
   }
 
-  public static Builder newBuilder() {
-    return new Builder();
-  }
-
   @Override
   Node acceptInternal(Processor processor) {
     return Visitor_JsAwaitExpression.visit(processor, this);
   }
 
-  /** A builder for AwaitExpressions. */
+  public Builder toBuilder() {
+    return new Builder()
+        .setExpression(this.getExpression())
+        .setTypeDescriptor(this.getTypeDescriptor());
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  /** A builder for JsAwaitExpression. */
   public static class Builder {
     private Expression expression;
     private TypeDescriptor typeDescriptor;
-
-    public static Builder from(JsAwaitExpression awaitExpression) {
-      return new Builder()
-          .setExpression(awaitExpression.getExpression())
-          .setTypeDescriptor(awaitExpression.getTypeDescriptor());
-    }
 
     public Builder setExpression(Expression expression) {
       this.expression = expression;

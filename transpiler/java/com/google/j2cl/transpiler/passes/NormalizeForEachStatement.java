@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
@@ -90,7 +89,7 @@ public class NormalizeForEachStatement extends NormalizationPass {
 
     // T[] array = exp.
     Variable arrayVariable =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("$array")
             .setTypeDescriptor(iterableExpression.getTypeDescriptor())
             .setFinal(true)
@@ -107,7 +106,7 @@ public class NormalizeForEachStatement extends NormalizationPass {
 
     // int $index = 0; or double $index = 0;
     Variable indexVariable =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("$index")
             .setTypeDescriptor(
                 useDoubleForIndexVariable ? PrimitiveTypes.DOUBLE : PrimitiveTypes.INT)
@@ -118,32 +117,30 @@ public class NormalizeForEachStatement extends NormalizationPass {
         indexVariable
             .createReference()
             .infixLessThan(
-                ArrayLength.newBuilder()
-                    .setArrayExpression(arrayVariable.createReference())
-                    .build());
+                ArrayLength.builder().setArrayExpression(arrayVariable.createReference()).build());
 
     // T t = $array[$index];
     SourcePosition sourcePosition = forEachStatement.getSourcePosition();
     ExpressionStatement forVariableDeclarationStatement =
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclaration(
                 loopVariable,
-                ArrayAccess.newBuilder()
+                ArrayAccess.builder()
                     .setArrayExpression(arrayVariable.createReference())
                     .setIndexExpression(indexVariable.createReference())
                     .build())
             .build()
             .makeStatement(sourcePosition);
 
-    return ForStatement.newBuilder()
+    return ForStatement.builder()
         .setInitializers(
-            VariableDeclarationExpression.newBuilder()
+            VariableDeclarationExpression.builder()
                 .addVariableDeclaration(arrayVariable, iterableExpression)
                 .addVariableDeclaration(indexVariable, NumberLiteral.fromInt(0))
                 .build())
         .setConditionExpression(condition)
         .setUpdates(
-            PostfixExpression.newBuilder()
+            PostfixExpression.builder()
                 .setOperand(indexVariable.createReference())
                 .setOperator(PostfixOperator.INCREMENT)
                 .build())
@@ -183,42 +180,42 @@ public class NormalizeForEachStatement extends NormalizationPass {
         iterableExpression.getTypeDescriptor().getMethodDescriptor("iterator");
 
     Expression iteratorExpression =
-        MethodCall.Builder.from(iteratorMethod).setQualifier(iterableExpression).build();
+        MethodCall.builderFrom(iteratorMethod).setQualifier(iterableExpression).build();
     TypeDescriptor iteratorType = iteratorMethod.getReturnTypeDescriptor();
 
     // Iterator<T> $iterator = (exp).iterator();
     Variable iteratorVariable =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("$iterator")
             .setTypeDescriptor(iteratorType)
             .setFinal(true)
             .build();
 
     VariableDeclarationExpression iteratorDeclaration =
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclaration(iteratorVariable, iteratorExpression)
             .build();
 
     // $iterator.hasNext();
     MethodDescriptor hasNextMethod = iteratorType.getMethodDescriptor("hasNext");
     Expression condition =
-        MethodCall.Builder.from(hasNextMethod)
+        MethodCall.builderFrom(hasNextMethod)
             .setQualifier(iteratorVariable.createReference())
             .build();
 
     // T v = $iterator.next();
     MethodDescriptor nextMethod = iteratorType.getMethodDescriptor("next");
     ExpressionStatement forVariableDeclarationStatement =
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclaration(
                 loopVariable,
-                MethodCall.Builder.from(nextMethod)
+                MethodCall.builderFrom(nextMethod)
                     .setQualifier(iteratorVariable.createReference())
                     .build())
             .build()
             .makeStatement(forEachStatement.getSourcePosition());
 
-    return ForStatement.newBuilder()
+    return ForStatement.builder()
         .setInitializers(iteratorDeclaration)
         .setConditionExpression(condition)
         .setBodyStatements(forVariableDeclarationStatement, forEachStatement.getBody())

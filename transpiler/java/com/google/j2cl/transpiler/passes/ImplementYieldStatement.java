@@ -66,7 +66,7 @@ public class ImplementYieldStatement extends NormalizationPass {
 
           @Override
           public ReturnStatement rewriteYieldStatement(YieldStatement yieldStatement) {
-            return ReturnStatement.newBuilder()
+            return ReturnStatement.builder()
                 .setExpression(yieldStatement.getExpression())
                 .setSourcePosition(yieldStatement.getSourcePosition())
                 .build();

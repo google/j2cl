@@ -42,7 +42,7 @@ public class J2ktAstUtils {
       }
     }
 
-    return KtInfo.newBuilder()
+    return KtInfo.builder()
         .setProperty(isProperty)
         .setName(name)
         .setDisabled(isDisabled)
@@ -83,7 +83,6 @@ public class J2ktAstUtils {
         && (descriptor.isSubtypeOf(TypeDescriptors.get().javaLangClass)
             || isSubtypeOfJ2ktMonitor(descriptor));
   }
-
 
   private J2ktAstUtils() {}
 }

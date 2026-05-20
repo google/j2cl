@@ -78,7 +78,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
             if (statement.getCatchClauses().isEmpty()) {
               return statement;
             }
-            return TryStatement.newBuilder()
+            return TryStatement.builder()
                 .setSourcePosition(statement.getSourcePosition())
                 .setResourceDeclarations(statement.getResourceDeclarations())
                 .setBody(statement.getBody())
@@ -95,19 +95,16 @@ public class NormalizeCatchClauses extends NormalizationPass {
     SourcePosition sourcePosition = clauses.getFirst().getBody().getSourcePosition();
     // Create a temporary exception variable.
     Variable exceptionVariable =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("__$exc")
             .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
 
     Statement body = bodyBuilder(sourcePosition, clauses, exceptionVariable);
-    return CatchClause.newBuilder()
+    return CatchClause.builder()
         .setExceptionVariable(exceptionVariable)
         .setBody(
-            Block.newBuilder()
-                .setSourcePosition(body.getSourcePosition())
-                .setStatements(body)
-                .build())
+            Block.builder().setSourcePosition(body.getSourcePosition()).setStatements(body).build())
         .build();
   }
 
@@ -117,7 +114,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
       Variable exceptionVariable) {
     // Base case. If no more clauses left the last statement throws the exception.
     if (clauses.isEmpty()) {
-      return ThrowStatement.newBuilder()
+      return ThrowStatement.builder()
           .setSourcePosition(firstClauseSourcePosition)
           .setExpression(exceptionVariable.createReference())
           .build()
@@ -140,7 +137,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
       return transformedCatchBody;
     }
 
-    return IfStatement.newBuilder()
+    return IfStatement.builder()
         .setSourcePosition(clause.getBody().getSourcePosition())
         .setConditionExpression(condition)
         .setThenStatement(transformedCatchBody)
@@ -162,7 +159,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
         typeDescriptors.stream()
             .map(
                 t ->
-                    InstanceOfExpression.newBuilder()
+                    InstanceOfExpression.builder()
                         .setExpression(exceptionVariable.createReference())
                         .setTestTypeDescriptor(t)
                         .build())
@@ -177,17 +174,17 @@ public class NormalizeCatchClauses extends NormalizationPass {
     }
 
     ExpressionStatement assignment =
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclaration(
                 catchVariable,
-                JsDocCastExpression.newBuilder()
+                JsDocCastExpression.builder()
                     .setExpression(exceptionVariable.createReference())
                     .setCastTypeDescriptor(catchVariable.getTypeDescriptor())
                     .build())
             .build()
             .makeStatement(catchBody.getSourcePosition());
 
-    return Block.newBuilder()
+    return Block.builder()
         .setSourcePosition(catchBody.getSourcePosition())
         .addStatement(assignment)
         .addStatements(catchBody.getStatements())

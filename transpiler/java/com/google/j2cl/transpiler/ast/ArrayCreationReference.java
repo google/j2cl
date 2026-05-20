@@ -69,7 +69,7 @@ public class ArrayCreationReference extends Expression {
 
   @Override
   public ArrayCreationReference clone() {
-    return ArrayCreationReference.newBuilder()
+    return ArrayCreationReference.builder()
         .setTargetTypeDescriptor(targetTypeDescriptor)
         .setInterfaceMethodDescriptor(interfaceMethodDescriptor)
         .setSourcePosition(sourcePosition)
@@ -81,22 +81,22 @@ public class ArrayCreationReference extends Expression {
     return Visitor_ArrayCreationReference.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setTargetTypeDescriptor(this.getTargetTypeDescriptor())
+        .setInterfaceMethodDescriptor(this.getInterfacedMethodDescriptor())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
-  /** A Builder for FunctionExpression. */
+  /** A Builder for ArrayCreationReference. */
   public static class Builder {
     private ArrayTypeDescriptor targetTypeDescriptor;
     private MethodDescriptor interfaceMethodDescriptor;
     private SourcePosition sourcePosition;
-
-    public static Builder from(ArrayCreationReference expression) {
-      return new Builder()
-          .setTargetTypeDescriptor(expression.getTargetTypeDescriptor())
-          .setInterfaceMethodDescriptor(expression.getInterfacedMethodDescriptor())
-          .setSourcePosition(expression.getSourcePosition());
-    }
 
     @CanIgnoreReturnValue
     public Builder setTargetTypeDescriptor(ArrayTypeDescriptor targetTypeDescriptor) {

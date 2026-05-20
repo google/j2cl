@@ -78,7 +78,7 @@ public class NormalizeOverlayMembers extends NormalizationPass {
         Field field = (Field) member;
         checkState(field.getDescriptor().isStatic());
         overlayClass.addMember(
-            Field.Builder.from(field)
+            field.toBuilder()
                 .setInitializer(AstUtils.clone(field.getInitializer()))
                 .setEnclosingClass(overlayTypeDescriptor)
                 .build());
@@ -130,10 +130,8 @@ public class NormalizeOverlayMembers extends NormalizationPass {
               checkArgument(target.isStatic());
               DeclaredTypeDescriptor overlayTypeDescriptor =
                   target.getEnclosingTypeDescriptor().getOverlayImplementationTypeDescriptor();
-              return FieldAccess.Builder.from(
-                      FieldDescriptor.Builder.from(target)
-                          .setEnclosingTypeDescriptor(overlayTypeDescriptor)
-                          .build())
+              return FieldAccess.builderFrom(
+                      target.toBuilder().setEnclosingTypeDescriptor(overlayTypeDescriptor).build())
                   .build();
             }
             return fieldAccess;
@@ -144,7 +142,7 @@ public class NormalizeOverlayMembers extends NormalizationPass {
   private static MethodCall redirectCall(MethodCall methodCall, DeclaredTypeDescriptor targetType) {
     MethodDescriptor methodDescriptor = methodCall.getTarget();
     if (methodDescriptor.isStatic()) {
-      return MethodCall.Builder.from(methodCall)
+      return methodCall.toBuilder()
           .setTarget(
               AstUtils.createStaticOverlayMethodDescriptor(
                   methodDescriptor, targetType.getTypeDeclaration()))

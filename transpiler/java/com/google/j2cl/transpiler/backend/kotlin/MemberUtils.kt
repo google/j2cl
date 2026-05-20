@@ -52,7 +52,7 @@ internal val Method.includedStatements: List<Statement>
     }
 
     return listOf(
-      ReturnStatement.newBuilder()
+      ReturnStatement.builder()
         .setSourcePosition(sourcePosition)
         .setExpression(descriptor.returnTypeDescriptor.defaultValue)
         .build()

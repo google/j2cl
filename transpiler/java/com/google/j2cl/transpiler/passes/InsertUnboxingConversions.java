@@ -110,7 +110,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
       // ...optionally followed by a widening primitive conversion.
       if (!fromTypeDescriptor.equals(toTypeDescriptor)) {
         resultExpression =
-            CastExpression.newBuilder()
+            CastExpression.builder()
                 .setExpression(resultExpression)
                 .setCastTypeDescriptor(toTypeDescriptor)
                 .build();

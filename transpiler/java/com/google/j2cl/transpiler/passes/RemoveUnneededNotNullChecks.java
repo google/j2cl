@@ -38,7 +38,7 @@ public class RemoveUnneededNotNullChecks extends NormalizationPass {
             if (!isPostfixNotNullExpression(qualifier)) {
               return arrayAccess;
             }
-            return ArrayAccess.Builder.from(arrayAccess)
+            return arrayAccess.toBuilder()
                 .setArrayExpression(((PostfixExpression) qualifier).getOperand())
                 .build();
           }
@@ -49,7 +49,7 @@ public class RemoveUnneededNotNullChecks extends NormalizationPass {
             if (!isPostfixNotNullExpression(qualifier)) {
               return arrayLength;
             }
-            return ArrayLength.Builder.from(arrayLength)
+            return arrayLength.toBuilder()
                 .setArrayExpression(((PostfixExpression) qualifier).getOperand())
                 .build();
           }
@@ -60,7 +60,7 @@ public class RemoveUnneededNotNullChecks extends NormalizationPass {
             if (!isPostfixNotNullExpression(iterableExpression)) {
               return forEachStatement;
             }
-            return ForEachStatement.Builder.from(forEachStatement)
+            return forEachStatement.toBuilder()
                 .setIterableExpression(((PostfixExpression) iterableExpression).getOperand())
                 .build();
           }
@@ -71,7 +71,7 @@ public class RemoveUnneededNotNullChecks extends NormalizationPass {
             if (!isPostfixNotNullExpression(qualifier)) {
               return memberReference;
             }
-            return MemberReference.Builder.from(memberReference)
+            return memberReference.toBuilder()
                 .setQualifier(((PostfixExpression) qualifier).getOperand())
                 .build();
           }

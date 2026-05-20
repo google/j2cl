@@ -143,7 +143,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
 
   /** Returns expression prefixed with unary operator {@code prefixOperator}. */
   public Expression prefix(PrefixOperator prefixOperator) {
-    return PrefixExpression.newBuilder().setOperator(prefixOperator).setOperand(this).build();
+    return PrefixExpression.builder().setOperator(prefixOperator).setOperand(this).build();
   }
 
   /** Returns expression with not-null assertion operator. */
@@ -153,7 +153,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
 
   /** Returns expression postfixed with unary operator {@code postfixOperator}. */
   public Expression postfix(PostfixOperator postfixOperator) {
-    return PostfixExpression.newBuilder().setOperator(postfixOperator).setOperand(this).build();
+    return PostfixExpression.builder().setOperator(postfixOperator).setOperand(this).build();
   }
 
   /** Return the logical or of this expression and {@code rhs}. */
@@ -219,7 +219,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   }
 
   private static BinaryExpression infix(BinaryOperator operator, Expression lhs, Expression rhs) {
-    return BinaryExpression.newBuilder()
+    return BinaryExpression.builder()
         .setOperator(operator)
         .setLeftOperand(lhs)
         .setRightOperand(rhs)
@@ -229,13 +229,13 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   /** Returns a member reference to the prototype field using this expression as its qualifier. */
   public Expression getPrototypeFieldAccess() {
     FieldDescriptor prototypeFieldDescriptor =
-        FieldDescriptor.newBuilder()
+        FieldDescriptor.builder()
             .setOriginalJsInfo(JsInfo.RAW_FIELD)
             .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .setName("prototype")
             .build();
-    return FieldAccess.Builder.from(prototypeFieldDescriptor).setQualifier(this).build();
+    return FieldAccess.builderFrom(prototypeFieldDescriptor).setQualifier(this).build();
   }
 
   /**

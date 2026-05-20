@@ -77,7 +77,7 @@ public class AddSwitchExpressionsExhaustivenessCheck extends NormalizationPass {
             var checkMethodCall =
                 RuntimeMethods.createCheckCriticalExhaustiveCall(isCritical)
                     .makeStatement(sourcePosition);
-            cases.add(SwitchCaseDefault.newBuilder().setStatements(checkMethodCall).build());
+            cases.add(SwitchCaseDefault.builder().setStatements(checkMethodCall).build());
           }
         });
   }

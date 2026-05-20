@@ -121,7 +121,7 @@ public final class LambdaImplementorTypeDescriptors {
         enclosingTypeDeclaration.synthesizeInnerClassComponents(
             LAMBDA_IMPLEMENTOR_CLASS_NAME, uniqueId);
 
-    return TypeDeclaration.newBuilder()
+    return TypeDeclaration.builder()
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
         .setSuperTypeDescriptorFactory(
             () -> getImplementorSupertype(interfaceTypeDescriptors, extendsAbstractAdaptor))
@@ -167,7 +167,7 @@ public final class LambdaImplementorTypeDescriptors {
 
     MethodDescriptor functionalInterfaceMethodDescriptor =
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
-    return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
+    return functionalInterfaceMethodDescriptor.toBuilder()
         .setNative(false)
         .makeDeclaration()
         // This is the declaration.

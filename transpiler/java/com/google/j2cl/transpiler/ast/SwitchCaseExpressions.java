@@ -54,7 +54,7 @@ public final class SwitchCaseExpressions extends SwitchCase {
 
   @Override
   public SwitchCaseExpressions clone() {
-    return newBuilder()
+    return builder()
         .setCaseExpressions(AstUtils.clone(caseExpressions))
         .setStatements(AstUtils.clone(getStatements()))
         .setCanFallthrough(canFallthrough())
@@ -63,30 +63,26 @@ public final class SwitchCaseExpressions extends SwitchCase {
   }
 
   @Override
-  public Builder toBuilder() {
-    return Builder.from(this);
-  }
-
-  public static Builder newBuilder() {
-    return new Builder();
-  }
-
-  @Override
   Node acceptInternal(Processor processor) {
     return Visitor_SwitchCaseExpressions.visit(processor, this);
   }
 
-  /** A Builder for ExpressionsSwitchCase. */
+  @Override
+  public Builder toBuilder() {
+    return builder()
+        .setCaseExpressions(this.getCaseExpressions())
+        .setStatements(this.getStatements())
+        .setCanFallthrough(this.canFallthrough())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  /** A Builder for SwitchCaseExpressions. */
   public static class Builder extends SwitchCase.Builder<Builder, SwitchCaseExpressions> {
     private List<Expression> caseExpressions = new ArrayList<>();
-
-    public static Builder from(SwitchCaseExpressions switchCase) {
-      return newBuilder()
-          .setCaseExpressions(switchCase.getCaseExpressions())
-          .setStatements(switchCase.getStatements())
-          .setCanFallthrough(switchCase.canFallthrough())
-          .setSourcePosition(switchCase.getSourcePosition());
-    }
 
     @CanIgnoreReturnValue
     public Builder setCaseExpressions(Collection<Expression> caseExpressions) {

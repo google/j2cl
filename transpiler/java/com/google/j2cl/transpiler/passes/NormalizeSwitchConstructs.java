@@ -79,9 +79,9 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
 
           @Override
           public Expression rewriteSwitchExpression(SwitchExpression switchExpression) {
-            return EmbeddedStatement.newBuilder()
+            return EmbeddedStatement.builder()
                 .setStatement(
-                    SwitchStatement.Builder.from(switchExpression)
+                    SwitchStatement.builderFrom(switchExpression)
                         .build()
                         .encloseWithLabel(getLabel(switchExpression)))
                 .setTypeDescriptor(switchExpression.getTypeDescriptor())
@@ -92,14 +92,14 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
           public Node rewriteYieldStatement(YieldStatement yieldStatement) {
             SwitchExpression enclosingSwitchExpression =
                 (SwitchExpression) getParent(SwitchExpression.class::isInstance);
-            return YieldStatement.Builder.from(yieldStatement)
+            return yieldStatement.toBuilder()
                 .setLabelReference(getLabel(enclosingSwitchExpression).createReference())
                 .build();
           }
 
           private Label getLabel(SwitchExpression switchExpression) {
             return assignedLabelBySwitchExpression.computeIfAbsent(
-                checkNotNull(switchExpression), s -> Label.newBuilder().setName("SWITCH").build());
+                checkNotNull(switchExpression), s -> Label.builder().setName("SWITCH").build());
           }
         });
   }
@@ -139,7 +139,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
                       isBoxedType(expressionTypeDescriptor)
                               && isNumericPrimitive(expressionTypeDescriptor.toUnboxedType())
                           // Trigger unboxing which will also implicitly accomplish the null check.
-                          ? CastExpression.newBuilder()
+                          ? CastExpression.builder()
                               .setCastTypeDescriptor(PrimitiveTypes.INT)
                               .setExpression(expression)
                               .build()
@@ -227,14 +227,14 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
               // No need to rewrite the default case.
               ? switchCase
               // Rewrite the corresponding `case Pattern when guard` into `case index`.
-              : SwitchCaseExpressions.newBuilder()
+              : SwitchCaseExpressions.builder()
                   .setCaseExpressions(ImmutableList.of(NumberLiteral.fromInt(i)))
                   .setStatements(switchCase.getStatements())
                   .setCanFallthrough(switchCase.canFallthrough())
                   .build());
     }
 
-    return Block.newBuilder()
+    return Block.builder()
         // T $selector = <selector expression>;
         .addStatements(initializationStatements)
         .addStatements(caseIndexSelectionLogic)
@@ -242,7 +242,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
         //   ...rewritten cases ...
         // }
         .addStatements(
-            SwitchStatement.Builder.from(switchStatement)
+            switchStatement.toBuilder()
                 .setAllowsNulls(false)
                 .setExpression(caseIndexVariable.createReference())
                 .build())
@@ -256,13 +256,9 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
       Expression initializer,
       List<Statement> initializationStatements) {
     var selectorVariable =
-        Variable.newBuilder()
-            .setName(name)
-            .setTypeDescriptor(typeDescriptor)
-            .setFinal(true)
-            .build();
+        Variable.builder().setName(name).setTypeDescriptor(typeDescriptor).setFinal(true).build();
     initializationStatements.add(
-        VariableDeclarationExpression.newBuilder()
+        VariableDeclarationExpression.builder()
             .addVariableDeclaration(selectorVariable, initializer)
             .build()
             .makeStatement(sourcePosition));
@@ -294,7 +290,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
     }
 
     SwitchCase switchCase = cases.get(currentIndex);
-    return IfStatement.newBuilder()
+    return IfStatement.builder()
         .setConditionExpression(createCaseCondition(selector, switchCase))
         .setThenStatement(caseIndexAssignment)
         .setElseStatement(
@@ -333,7 +329,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
   private static Expression createPatternCondition(Expression selector, SwitchCasePattern s) {
     Expression condition =
         // $selector instanceof Pattern p
-        PatternMatchExpression.newBuilder()
+        PatternMatchExpression.builder()
             .setExpression(selector.clone())
             .setPattern(s.getPattern())
             .build();
@@ -356,7 +352,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
   private static SwitchStatement convertEnumSwitchStatement(SwitchStatement switchStatement) {
     boolean hasCaseNull = switchStatement.allowsNulls();
 
-    var switchExpression = MultiExpression.newBuilder();
+    var switchExpression = MultiExpression.builder();
 
     Expression expression = switchStatement.getExpression();
     if (hasCaseNull && !expression.isIdempotent()) {
@@ -364,13 +360,13 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
       //
       // ($switchExpr = expression, ...)
       Variable tempVariable =
-          Variable.newBuilder()
+          Variable.builder()
               .setTypeDescriptor(expression.getTypeDescriptor())
               .setFinal(true)
               .setName("$switchExpression")
               .build();
       switchExpression.addExpressions(
-          VariableDeclarationExpression.newBuilder()
+          VariableDeclarationExpression.builder()
               .addVariableDeclaration(tempVariable, expression)
               .build());
       expression = tempVariable.createReference();
@@ -379,7 +375,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
     switchExpression.addExpressions(
         hasCaseNull
             // ($switchExpr == null ? -1 : $switchExpr.ordinal())
-            ? ConditionalExpression.newBuilder()
+            ? ConditionalExpression.builder()
                 .setConditionExpression(expression.clone().infixEqualsNull())
                 .setTypeDescriptor(PrimitiveTypes.INT)
                 .setTrueExpression(NumberLiteral.fromInt(NULL_ENUM_ORDINAL))
@@ -400,8 +396,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
   private static final int NULL_ENUM_ORDINAL = -1;
 
   private static MethodCall getOrdinalMethodCall(Expression expression) {
-    return MethodCall.Builder.from(
-            TypeDescriptors.get().javaLangEnum.getMethodDescriptor("ordinal"))
+    return MethodCall.builderFrom(TypeDescriptors.get().javaLangEnum.getMethodDescriptor("ordinal"))
         .setQualifier(expression)
         .build();
   }
@@ -411,7 +406,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
       Expression caseExpression = switchCase.getCaseExpressions().get(i);
       if (caseExpression instanceof FieldAccess enumFieldAccess) {
         caseExpression =
-            FieldAccess.Builder.from(enumFieldAccess)
+            enumFieldAccess.toBuilder()
                 .setTarget(
                     AstUtils.getEnumOrdinalConstantFieldDescriptor(enumFieldAccess.getTarget()))
                 .build();

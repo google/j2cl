@@ -60,7 +60,7 @@ class KlibsKotlinParser(private val problems: Problems) {
       problems.registerForCancellation()
       val compilationUnits = parseFiles(arguments, kotlincDisposable, options.targetLabel)
 
-      return Library.newBuilder()
+      return Library.builder()
         .setCompilationUnits(compilationUnits)
         .setDisposableListener { Disposer.dispose(kotlincDisposable) }
         .build()

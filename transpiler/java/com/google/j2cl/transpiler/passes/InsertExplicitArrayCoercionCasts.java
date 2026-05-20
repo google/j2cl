@@ -41,7 +41,7 @@ public class InsertExplicitArrayCoercionCasts extends NormalizationPass {
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 return needsCast(inferredTypeDescriptor, expression.getTypeDescriptor())
-                    ? CastExpression.newBuilder()
+                    ? CastExpression.builder()
                         .setExpression(expression)
                         .setCastTypeDescriptor(inferredTypeDescriptor)
                         .build()

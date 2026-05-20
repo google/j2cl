@@ -203,7 +203,7 @@ public class JdtEnvironment {
     }
     boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
-    return Variable.newBuilder()
+    return Variable.builder()
         .setName(name)
         .setTypeDescriptor(typeDescriptor)
         .setFinal(isFinal)
@@ -215,10 +215,10 @@ public class JdtEnvironment {
 
   public Expression createFieldAccess(Expression qualifier, IVariableBinding fieldBinding) {
     if (isArrayLengthBinding(fieldBinding)) {
-      return ArrayLength.newBuilder().setArrayExpression(qualifier).build();
+      return ArrayLength.builder().setArrayExpression(qualifier).build();
     }
 
-    return FieldAccess.Builder.from(createFieldDescriptor(fieldBinding))
+    return FieldAccess.builderFrom(createFieldDescriptor(fieldBinding))
         .setQualifier(qualifier)
         .build();
   }
@@ -304,7 +304,7 @@ public class JdtEnvironment {
     if (typeBinding.isArray()) {
       TypeDescriptor componentTypeDescriptor =
           createTypeDescriptor(typeBinding.getComponentType(), inNullMarkedScope);
-      return ArrayTypeDescriptor.newBuilder()
+      return ArrayTypeDescriptor.builder()
           .setComponentTypeDescriptor(componentTypeDescriptor)
           .setNullable(isNullable)
           .build();
@@ -343,7 +343,7 @@ public class JdtEnvironment {
                   .findFirst()
                   .get();
     }
-    return TypeVariable.newBuilder()
+    return TypeVariable.builder()
         .setUpperBoundTypeDescriptorFactory(upperBoundTypeDescriptorFactory)
         .setLowerBoundTypeDescriptor(getLowerBoundTypeDescriptor(typeBinding, inNullMarkedScope))
         .setWildcard(typeBinding.isWildcardType())
@@ -758,7 +758,7 @@ public class JdtEnvironment {
     boolean isFinal = isFinal(variableBinding);
     boolean isVolatile = isVolatile(variableBinding);
     fieldDescriptor =
-        FieldDescriptor.newBuilder()
+        FieldDescriptor.builder()
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
             .setName(fieldName)
             .setTypeDescriptor(thisTypeDescriptor)
@@ -855,7 +855,7 @@ public class JdtEnvironment {
             .collect(toImmutableList());
 
     methodDescriptor =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
             .setName(isConstructor ? null : methodName)
             .setParameterDescriptors(parameterDescriptors)
@@ -902,7 +902,7 @@ public class JdtEnvironment {
                   parameterTypes[i], parameterAnnotations, inNullMarkedScope));
 
       parameterDescriptorBuilder.add(
-          ParameterDescriptor.newBuilder()
+          ParameterDescriptor.builder()
               .setTypeDescriptor(parameterTypeDescriptor)
               .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
               .setVarargs(i == parameterTypes.length - 1 && methodBinding.isVarargs())
@@ -927,7 +927,7 @@ public class JdtEnvironment {
 
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return ArrayTypeDescriptor.newBuilder()
+      return ArrayTypeDescriptor.builder()
           .setComponentTypeDescriptor(
               arrayTypeDescriptor.getComponentTypeDescriptor().toNonNullable())
           .setNullable(false)
@@ -983,7 +983,7 @@ public class JdtEnvironment {
     // can be ignored.
     ImmutableList<TypeDescriptor> intersectedTypeDescriptors =
         createTypeDescriptors(typeBinding.getTypeBounds(), inNullMarkedScope, TypeDescriptor.class);
-    return IntersectionTypeDescriptor.newBuilder()
+    return IntersectionTypeDescriptor.builder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
         .build();
   }
@@ -1046,7 +1046,6 @@ public class JdtEnvironment {
     throw new InternalCompilerError("Type binding %s not handled", typeBinding);
   }
 
-
   @Nullable
   public TypeDeclaration createDeclarationForType(final ITypeBinding typeBinding) {
     if (typeBinding == null) {
@@ -1074,7 +1073,7 @@ public class JdtEnvironment {
     IBinding declaringMemberBinding = getDeclaringMethodOrFieldBinding(typeBinding);
 
     typeDeclaration =
-        TypeDeclaration.newBuilder()
+        TypeDeclaration.builder()
             .setClassComponents(getClassComponents(typeBinding))
             .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
             .setEnclosingMethodDescriptorFactory(
@@ -1135,7 +1134,7 @@ public class JdtEnvironment {
     // Caching is left to PackageDeclaration.Builder since construction is trivial.
     String packageName = packageBinding.getName();
     boolean isNullMarked = packageAnnotationsResolver.isNullMarked(packageName);
-    return PackageDeclaration.newBuilder()
+    return PackageDeclaration.builder()
         .setName(packageName)
         .setCustomizedJsNamespace(packageAnnotationsResolver.getJsNameSpace(packageName))
         .setAnnotations(createAnnotations(packageBinding, isNullMarked))
@@ -1211,7 +1210,7 @@ public class JdtEnvironment {
 
   private Annotation.Builder newAnnotationBuilder(
       IMemberValuePairBinding[] valuePairs, boolean inNullMarkedScope) {
-    Annotation.Builder annotationBuilder = Annotation.newBuilder();
+    Annotation.Builder annotationBuilder = Annotation.builder();
     for (IMemberValuePairBinding valuePair : valuePairs) {
       TypeDescriptor elementType =
           createTypeDescriptor(valuePair.getMethodBinding().getReturnType(), inNullMarkedScope);
@@ -1255,7 +1254,7 @@ public class JdtEnvironment {
       if (values.contains(null)) {
         return null;
       }
-      return ArrayConstant.newBuilder()
+      return ArrayConstant.builder()
           .setTypeDescriptor((ArrayTypeDescriptor) elementType)
           .setValueExpressions(values)
           .build();

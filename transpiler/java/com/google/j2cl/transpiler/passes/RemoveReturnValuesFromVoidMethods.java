@@ -53,18 +53,18 @@ public final class RemoveReturnValuesFromVoidMethods extends NormalizationPass {
               // This is extremely common in Kotlin code so it's best to not leave it to have to be
               // cleaned up later.
               if (isKotlinUnitInstanceAccess(returnStatement.getExpression())) {
-                return ReturnStatement.newBuilder()
+                return ReturnStatement.builder()
                     .setSourcePosition(returnStatement.getSourcePosition())
                     .build();
               }
 
-              return Block.newBuilder()
+              return Block.builder()
                   .addStatement(
                       returnStatement
                           .getExpression()
                           .makeStatement(returnStatement.getSourcePosition()))
                   .addStatement(
-                      ReturnStatement.newBuilder()
+                      ReturnStatement.builder()
                           .setSourcePosition(returnStatement.getSourcePosition())
                           .build())
                   .build();

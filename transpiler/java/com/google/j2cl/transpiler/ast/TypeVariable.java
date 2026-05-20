@@ -106,9 +106,7 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     if (isAnnotatedNullable()) {
       return this;
     }
-    return TypeVariable.Builder.from(this)
-        .setNullabilityAnnotation(NullabilityAnnotation.NULLABLE)
-        .build();
+    return toBuilder().setNullabilityAnnotation(NullabilityAnnotation.NULLABLE).build();
   }
 
   @Override
@@ -120,9 +118,7 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
       // types.
       return this;
     }
-    return TypeVariable.Builder.from(this)
-        .setNullabilityAnnotation(NullabilityAnnotation.NOT_NULLABLE)
-        .build();
+    return toBuilder().setNullabilityAnnotation(NullabilityAnnotation.NOT_NULLABLE).build();
   }
 
   /** Returns the type variable without any nullability annotation. */
@@ -131,9 +127,7 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     if (getNullabilityAnnotation() == NullabilityAnnotation.NONE) {
       return this;
     }
-    return TypeVariable.Builder.from(this)
-        .setNullabilityAnnotation(NullabilityAnnotation.NONE)
-        .build();
+    return toBuilder().setNullabilityAnnotation(NullabilityAnnotation.NONE).build();
   }
 
   /** Returns the declaration version of the type variable. */
@@ -210,7 +204,7 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     TypeDescriptor newLowerBound =
         lowerBound != null ? replaceTypeDescriptors(lowerBound, fn, seen) : null;
     if (upperBound != newUpperBound || lowerBound != newLowerBound) {
-      return Builder.from(this)
+      return toBuilder()
           .setUpperBoundTypeDescriptorFactory(() -> newUpperBound)
           .setLowerBoundTypeDescriptor(newLowerBound)
           .setUniqueKey("<Auto>" + getUniqueId())
@@ -285,17 +279,6 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     return getUpperBoundTypeDescriptor().hasReferenceTo(this, ImmutableSet.of());
   }
 
-  abstract Builder toBuilder();
-
-  public static Builder newBuilder() {
-    return new AutoValue_TypeVariable.Builder()
-        .setWildcard(false)
-        .setCapture(false)
-        .setUnbound(false)
-        .setAnnotations(ImmutableList.of())
-        .setNullabilityAnnotation(NullabilityAnnotation.NONE);
-  }
-
   /** Creates a wildcard type variable with a specific upper bound. */
   public static TypeVariable createWildcardWithUpperBound(TypeDescriptor bound) {
     return createWildcard(
@@ -338,7 +321,7 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
       name += " extends " + upperBound.getReadableDescription();
     }
 
-    return TypeVariable.newBuilder()
+    return TypeVariable.builder()
         .setWildcard(true)
         // TODO(b/407362826): Reconsider whether the nullability annotation is kept in the wildcard
         // or whether it needs to be applied to the bounds and disallowed here.
@@ -496,6 +479,17 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     return " extends " + upperBoundTypeDescriptor.toStringInternal(seen);
   }
 
+  public abstract Builder toBuilder();
+
+  public static Builder builder() {
+    return new AutoValue_TypeVariable.Builder()
+        .setWildcard(false)
+        .setCapture(false)
+        .setUnbound(false)
+        .setAnnotations(ImmutableList.of())
+        .setNullabilityAnnotation(NullabilityAnnotation.NONE);
+  }
+
   /** Builder for a TypeVariableDeclaration. */
   @AutoValue.Builder
   public abstract static class Builder {
@@ -534,10 +528,6 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
           typeVariable.isWildcardOrCapture() || typeVariable.getLowerBoundTypeDescriptor() == null,
           "Only wildcard type variables can have lower bounds.");
       return interner.intern(typeVariable);
-    }
-
-    public static Builder from(TypeVariable typeVariable) {
-      return typeVariable.toBuilder();
     }
   }
 }

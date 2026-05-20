@@ -45,20 +45,15 @@ public abstract class MemberReference extends Expression {
     return Precedence.MEMBER_ACCESS;
   }
 
-  abstract Builder<?, ?, ?> createBuilder();
+  public abstract Builder<?, ?, ?> toBuilder();
 
   /** Common logic for a builder to create method calls, new instances and field accesses. */
   public abstract static class Builder<
       T extends MemberReference.Builder<T, R, D>,
       R extends MemberReference,
       D extends MemberDescriptor> {
-
     private Expression qualifier;
     private D target;
-
-    public static MemberReference.Builder<?, ?, ?> from(MemberReference memberReference) {
-      return memberReference.createBuilder();
-    }
 
     @CanIgnoreReturnValue
     public final T setQualifier(Expression qualifier) {

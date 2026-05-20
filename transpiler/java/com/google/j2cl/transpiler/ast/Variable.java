@@ -79,25 +79,6 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
     return isExplicitlyTyped;
   }
 
-  @Override
-  Node acceptInternal(Processor processor) {
-    return Visitor_Variable.visit(processor, this);
-  }
-
-  @Override
-  public VariableReference createReference() {
-    return new VariableReference(this);
-  }
-
-  @Override
-  public Variable clone() {
-    return Variable.Builder.from(this).build();
-  }
-
-  public static Builder newBuilder() {
-    return new Builder();
-  }
-
   public SourcePosition getSourcePosition() {
     return sourcePosition;
   }
@@ -107,9 +88,38 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
     return annotations;
   }
 
+  @Override
+  public VariableReference createReference() {
+    return new VariableReference(this);
+  }
+
+  @Override
+  Node acceptInternal(Processor processor) {
+    return Visitor_Variable.visit(processor, this);
+  }
+
+  @Override
+  public Variable clone() {
+    return toBuilder().build();
+  }
+
+  public Builder toBuilder() {
+    return builder()
+        .setName(this.getName())
+        .setTypeDescriptor(this.getTypeDescriptor())
+        .setFinal(this.isFinal())
+        .setParameter(this.isParameter)
+        .setExplicitlyTyped(this.isExplicitlyTyped)
+        .setSourcePosition(this.sourcePosition)
+        .setAnnotations(this.annotations);
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
   /** Builder for Variable. */
   public static class Builder {
-
     private String name;
     private TypeDescriptor typeDescriptor;
     private boolean isFinal;
@@ -117,18 +127,6 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
     private boolean isExplicitlyTyped = true;
     private SourcePosition sourcePosition = SourcePosition.NONE;
     private ImmutableList<Annotation> annotations = ImmutableList.of();
-
-    public static Builder from(Variable variable) {
-      Builder builder = new Builder();
-      builder.name = variable.getName();
-      builder.typeDescriptor = variable.getTypeDescriptor();
-      builder.isFinal = variable.isFinal();
-      builder.isParameter = variable.isParameter;
-      builder.isExplicitlyTyped = variable.isExplicitlyTyped;
-      builder.sourcePosition = variable.sourcePosition;
-      builder.annotations = variable.annotations;
-      return builder;
-    }
 
     @CanIgnoreReturnValue
     public Builder setName(String name) {

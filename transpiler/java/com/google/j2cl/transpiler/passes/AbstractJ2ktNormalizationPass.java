@@ -124,7 +124,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
       }
 
       case IntersectionTypeDescriptor descriptor ->
-          IntersectionTypeDescriptor.newBuilder()
+          IntersectionTypeDescriptor.builder()
               .setIntersectionTypeDescriptors(
                   descriptor.getIntersectionTypeDescriptors().stream()
                       .map(it -> projectCaptures(it, /* isTypeArgument= */ false, seen))
@@ -132,7 +132,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
               .build();
 
       case UnionTypeDescriptor descriptor ->
-          UnionTypeDescriptor.newBuilder()
+          UnionTypeDescriptor.builder()
               .setUnionTypeDescriptors(
                   descriptor.getUnionTypeDescriptors().stream()
                       .map(it -> projectCaptures(it, /* isTypeArgument= */ false, seen))
@@ -174,7 +174,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
 
   /** Returns synthetic type parameter for kotlin.Array class. */
   static TypeVariable getArrayComponentTypeParameterDescriptor() {
-    return TypeVariable.newBuilder()
+    return TypeVariable.builder()
         .setName("T")
         .setUniqueKey("kotlin.Array:T")
         .setUpperBoundTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
@@ -208,7 +208,7 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
     if (typeDescriptor instanceof TypeVariable typeVariable) {
       if (typeVariable.getNullabilityAnnotation() == NullabilityAnnotation.NOT_NULLABLE
           && !typeVariable.getUpperBoundTypeDescriptor().canBeNull()) {
-        return TypeVariable.Builder.from(typeVariable)
+        return typeVariable.toBuilder()
             .setNullabilityAnnotation(NullabilityAnnotation.NONE)
             .build();
       }

@@ -76,14 +76,14 @@ public class NormalizeEnumClasses extends NormalizationPass {
             }
 
             Variable nameParameter =
-                Variable.newBuilder()
+                Variable.builder()
                     .setName(VALUE_NAME_PARAMETER_NAME)
                     .setTypeDescriptor(TypeDescriptors.get().javaLangString)
                     .setParameter(true)
                     .build();
 
             Variable ordinalParameter =
-                Variable.newBuilder()
+                Variable.builder()
                     .setName(ORDINAL_PARAMETER_NAME)
                     .setTypeDescriptor(PrimitiveTypes.INT)
                     .setParameter(true)
@@ -101,7 +101,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
                           return methodCall;
                         }
 
-                        return MethodCall.Builder.from(methodCall)
+                        return methodCall.toBuilder()
                             .addArgumentsAndUpdateDescriptor(
                                 0,
                                 nameParameter.createReference(),
@@ -118,9 +118,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
               initJavaLangEnumField(method, "name", nameParameter.createReference());
             }
 
-            return Method.Builder.from(method)
-                .addParameters(0, nameParameter, ordinalParameter)
-                .build();
+            return method.toBuilder().addParameters(0, nameParameter, ordinalParameter).build();
           }
         });
   }
@@ -129,7 +127,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
       Method method, String fieldName, VariableReference variableReference) {
 
     FieldDescriptor fieldDescriptor =
-        FieldDescriptor.newBuilder()
+        FieldDescriptor.builder()
             .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangEnum)
             .setName(fieldName)
             .setVisibility(Visibility.PRIVATE)
@@ -158,7 +156,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
           // These fields need to be defined at the beginning because they can be referenced by enum
           // constant initializers that are already part of the load time statements.
           0,
-          Field.Builder.from(AstUtils.getEnumOrdinalConstantFieldDescriptor(enumFieldDescriptor))
+          Field.builderFrom(AstUtils.getEnumOrdinalConstantFieldDescriptor(enumFieldDescriptor))
               .setSourcePosition(enumField.getSourcePosition())
               .setInitializer(enumFieldDescriptor.getEnumOrdinalValue())
               .build());
@@ -213,11 +211,11 @@ public class NormalizeEnumClasses extends NormalizationPass {
 
             // Add the name and ordinal as first and second parameters when instantiating
             // the enum value.
-            return NewInstance.Builder.from(newInstance)
+            return newInstance.toBuilder()
                 .addArgumentsAndUpdateDescriptor(
                     0,
                     enumReplaceStringMethodCall(new StringLiteral(enumFieldDescriptor.getName())),
-                    FieldAccess.Builder.from(ordinalConstantFieldDescriptor).build())
+                    FieldAccess.builderFrom(ordinalConstantFieldDescriptor).build())
                 .build();
           }
         });

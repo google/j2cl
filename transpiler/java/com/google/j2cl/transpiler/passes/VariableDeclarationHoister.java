@@ -183,7 +183,7 @@ public class VariableDeclarationHoister extends NormalizationPass {
             if (assignments.isEmpty()) {
               return TypeDescriptors.get().javaLangObject.getNullValue();
             }
-            return MultiExpression.newBuilder().addExpressions(assignments).build();
+            return MultiExpression.builder().addExpressions(assignments).build();
           }
         });
 
@@ -202,7 +202,7 @@ public class VariableDeclarationHoister extends NormalizationPass {
               // Note: since we insert all the variables in a single declaration there is no need
               // to adjust insertion points.
               insertionPointInBlock,
-              VariableDeclarationExpression.newBuilder()
+              VariableDeclarationExpression.builder()
                   .addVariableDeclarations(variablesToRelocate)
                   .build()
                   .makeStatement(block.getSourcePosition()));

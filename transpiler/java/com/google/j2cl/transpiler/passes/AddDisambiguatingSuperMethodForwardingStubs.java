@@ -108,9 +108,9 @@ public class AddDisambiguatingSuperMethodForwardingStubs extends NormalizationPa
         parameters.stream().map(Variable::createReference).collect(toImmutableList());
 
     Method.Builder builder =
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(
-                MethodDescriptor.Builder.from(targetMethod)
+                targetMethod.toBuilder()
                     .makeDeclaration()
                     .setEnclosingTypeDescriptor(type.getTypeDescriptor())
                     .setNative(false)

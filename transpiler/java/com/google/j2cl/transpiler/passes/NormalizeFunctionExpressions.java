@@ -76,16 +76,15 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
         TypeVariable targetType =
             TypeVariable.createWildcardWithUpperBound(declaredParameterTypeDescriptor);
 
-        Variable newParameter =
-            Variable.Builder.from(parameter).setTypeDescriptor(targetType).build();
+        Variable newParameter = parameter.toBuilder().setTypeDescriptor(targetType).build();
         parameter.setParameter(false);
 
         // InferredType oldPar = (InferredType) newPar;
         Statement castToOldParameter =
-            VariableDeclarationExpression.newBuilder()
+            VariableDeclarationExpression.builder()
                 .addVariableDeclaration(
                     parameter,
-                    CastExpression.newBuilder()
+                    CastExpression.builder()
                         .setCastTypeDescriptor(parameter.getTypeDescriptor())
                         .setExpression(newParameter.createReference())
                         .build())
@@ -96,7 +95,7 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
         prologue.add(castToOldParameter);
       }
     }
-    return FunctionExpression.Builder.from(functionExpression)
+    return functionExpression.toBuilder()
         .setParameters(newParameters)
         .setStatements(
             ImmutableList.<Statement>builder()

@@ -39,7 +39,7 @@ public class InsertCastOnArrayAccess extends NormalizationPass {
             }
 
             if (AstUtils.isExpressionResultUsed(arrayAccess, getParent())) {
-              return CastExpression.newBuilder()
+              return CastExpression.builder()
                   .setCastTypeDescriptor(arrayAccess.getTypeDescriptor())
                   .setExpression(arrayAccess)
                   .build();

@@ -158,7 +158,7 @@ public class StatementTranspiler {
             () -> {
               builder.append("for(");
               renderExpression(
-                  VariableDeclarationExpression.newBuilder()
+                  VariableDeclarationExpression.builder()
                       .addVariableDeclarations(jsForInStatement.getLoopVariable())
                       .build());
               builder.append(" in ");

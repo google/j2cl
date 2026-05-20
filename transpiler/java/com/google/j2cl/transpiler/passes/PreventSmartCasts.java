@@ -119,7 +119,7 @@ public class PreventSmartCasts extends NormalizationPass {
             if (targetsTriggeringSmartCasts.contains(target)
                 && needsToPreventSmartCasts(expression)) {
               // Add cast to prevent smart cast.
-              return CastExpression.newBuilder()
+              return CastExpression.builder()
                   .setCastTypeDescriptor(expression.getTypeDescriptor())
                   .setExpression(expression)
                   .build();

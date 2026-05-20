@@ -189,12 +189,12 @@ internal class KotlinEnvironment(
         // Add mappings for primitive arrays types.
         val arrayType = pluginContext.irBuiltIns.primitiveArrayForType[it.key]!!.defaultType
         typeDescriptorByIrType[arrayType] =
-          ArrayTypeDescriptor.newBuilder()
+          ArrayTypeDescriptor.builder()
             .setComponentTypeDescriptor(it.value)
             .setNullable(false)
             .build()
         typeDescriptorByIrType[arrayType.makeNullable()] =
-          ArrayTypeDescriptor.newBuilder()
+          ArrayTypeDescriptor.builder()
             .setComponentTypeDescriptor(it.value)
             .setNullable(true)
             .build()
@@ -230,7 +230,7 @@ internal class KotlinEnvironment(
     irClass ?: return null
 
     return typeDeclarationByIrClass.getOrPut(irClass) {
-      TypeDeclaration.newBuilder()
+      TypeDeclaration.builder()
         .setClassComponents(irClass.getClassComponents())
         .setKind(irClass.j2clKind)
         .setAnnotation(irClass.isAnnotationClass)
@@ -318,7 +318,7 @@ internal class KotlinEnvironment(
             continue
           }
           add(
-            Annotation.newBuilder()
+            Annotation.builder()
               .setTypeDescriptor(typeDescriptor)
               .addAnnotationValues(annotationCtorCall)
               .build()
@@ -338,7 +338,7 @@ internal class KotlinEnvironment(
         if (translatedValues.contains(null)) {
           return null
         }
-        return ArrayConstant.newBuilder()
+        return ArrayConstant.builder()
           .setTypeDescriptor(createArrayTypeDescriptor(type))
           .setValueExpressions(translatedValues)
           .build()
@@ -375,7 +375,7 @@ internal class KotlinEnvironment(
 
   private fun createPackageDeclaration(packageName: String) =
     // Caching is left to PackageDeclaration.Builder since construction is trivial.
-    PackageDeclaration.newBuilder()
+    PackageDeclaration.builder()
       .setName(packageName)
       .setCustomizedJsNamespace(packageInfoCache.getJsNamespace(packageName))
       .build()
@@ -468,7 +468,7 @@ internal class KotlinEnvironment(
         { createIntersectionTypeDescriptor(irTypeParameter.superTypes) }
       }
 
-    return TypeVariable.newBuilder()
+    return TypeVariable.builder()
       .setName(irTypeParameter.sanitizedName)
       .setUniqueKey(irTypeParameter.uniqueKey)
       .setUpperBoundTypeDescriptorFactory(upperBoundFactory)
@@ -479,12 +479,12 @@ internal class KotlinEnvironment(
   }
 
   private fun createIntersectionTypeDescriptor(types: List<IrType>): IntersectionTypeDescriptor =
-    IntersectionTypeDescriptor.newBuilder()
+    IntersectionTypeDescriptor.builder()
       .setIntersectionTypeDescriptors(types.map(::getReferenceTypeDescriptor))
       .build()
 
   private fun createArrayTypeDescriptor(arrayType: IrType) =
-    ArrayTypeDescriptor.newBuilder()
+    ArrayTypeDescriptor.builder()
       .setComponentTypeDescriptor(
         getReferenceTypeDescriptor(arrayType.getArrayElementType(pluginContext.irBuiltIns))
       )
@@ -642,7 +642,7 @@ internal class KotlinEnvironment(
       if (irFunction.isSuspend) {
         // Add the implicit continuation parameter so our type model is correct.
         parameterDescriptorsBuilder.add(
-          MethodDescriptor.ParameterDescriptor.newBuilder()
+          MethodDescriptor.ParameterDescriptor.builder()
             .setTypeDescriptor(
               TypeDescriptors.get()
                 .kotlinCoroutinesContinuation!!
@@ -666,7 +666,7 @@ internal class KotlinEnvironment(
           type = substitutedType?.eraseToScope(visibleTypeParameters) ?: type.eraseTypeParameters()
         }
         parameterDescriptorsBuilder.add(
-          MethodDescriptor.ParameterDescriptor.newBuilder()
+          MethodDescriptor.ParameterDescriptor.builder()
             .setTypeDescriptor(getTypeDescriptor(type))
             // A parameter is only considered optional if it has a default initializer AND it's
             // default bridge function, or is its own dispatch function.
@@ -703,7 +703,7 @@ internal class KotlinEnvironment(
             it.name.asString() == name && irFunction.returnType == it.type
           }
 
-      MethodDescriptor.newBuilder()
+      MethodDescriptor.builder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setEnclosingMethodDescriptor(enclosingMethodDescriptor)
         .setName(name)
@@ -779,7 +779,7 @@ internal class KotlinEnvironment(
       }
       val isVolatile = irField.annotations.hasAnnotation(FqName("kotlin.concurrent.Volatile"))
 
-      FieldDescriptor.newBuilder()
+      FieldDescriptor.builder()
         .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irField))
         .setName(irField.sanitizedName)
         .setTypeDescriptor(fieldTypeDescriptor)
@@ -802,7 +802,7 @@ internal class KotlinEnvironment(
   }
 
   fun getDeclaredFieldDescriptor(irEnumEntry: IrEnumEntry): FieldDescriptor =
-    FieldDescriptor.newBuilder()
+    FieldDescriptor.builder()
       .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irEnumEntry))
       .setName(irEnumEntry.sanitizedName)
       .setTypeDescriptor(getEnclosingTypeDescriptor(irEnumEntry)!!.toNonNullable())

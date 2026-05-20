@@ -56,20 +56,17 @@ public class WhileStatement extends LoopStatement {
   }
 
   @Override
-  Builder toBuilder() {
+  public Builder toBuilder() {
     return new Builder(this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
   }
 
   /** A Builder for WhileStatement. */
   public static class Builder
       extends LoopStatement.Builder<WhileStatement.Builder, WhileStatement> {
-    public static Builder from(WhileStatement whileStatement) {
-      return new Builder(whileStatement);
-    }
 
     private Builder() {}
 

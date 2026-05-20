@@ -31,9 +31,9 @@ public abstract class JsEnumInfo {
 
   public abstract boolean supportsOrdinal();
 
-  abstract Builder toBuilder();
+  public abstract Builder toBuilder();
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_JsEnumInfo.Builder().setHasCustomValue(false).setSupportsComparable(true);
   }
 
@@ -56,10 +56,6 @@ public abstract class JsEnumInfo {
     public JsEnumInfo build() {
       checkState(!supportsOrdinal() || !hasCustomValue());
       return interner.intern(autoBuild());
-    }
-
-    public static Builder from(JsEnumInfo jsEnumInfo) {
-      return jsEnumInfo.toBuilder();
     }
 
     private static final ThreadLocalInterner<JsEnumInfo> interner = new ThreadLocalInterner<>();

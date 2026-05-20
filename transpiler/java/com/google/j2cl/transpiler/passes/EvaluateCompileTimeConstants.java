@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -48,7 +47,7 @@ public class EvaluateCompileTimeConstants extends NormalizationPass {
           public Node rewriteField(Field field) {
             Expression initializer = field.getInitializer();
             if (initializer != null && field.isCompileTimeConstant()) {
-              return Field.Builder.from(field)
+              return field.toBuilder()
                   .setInitializer(field.getDescriptor().getConstantValue())
                   .build();
             }

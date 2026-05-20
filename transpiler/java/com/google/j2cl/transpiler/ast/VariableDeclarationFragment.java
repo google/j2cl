@@ -69,7 +69,11 @@ public class VariableDeclarationFragment extends Node
         variable, AstUtils.clone(initializer));
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder().setVariable(this.getVariable()).setInitializer(this.getInitializer());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -77,12 +81,6 @@ public class VariableDeclarationFragment extends Node
   public static class Builder {
     private Variable variable;
     private Expression initializer;
-
-    public static Builder from(VariableDeclarationFragment variableDeclarationFragment) {
-      return newBuilder()
-          .setVariable(variableDeclarationFragment.getVariable())
-          .setInitializer(variableDeclarationFragment.getInitializer());
-    }
 
     public Builder setVariable(Variable variable) {
       this.variable = variable;

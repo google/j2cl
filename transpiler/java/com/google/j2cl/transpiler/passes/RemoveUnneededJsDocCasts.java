@@ -61,7 +61,7 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
             // Remove JsDoc casts from all the expressions. Except for the last expression, the
             // result of each expression is not used, so any JsDoc cast on those is not relevant.
             Expression multiExpressionWithoutJsDocCasts =
-                MultiExpression.newBuilder()
+                MultiExpression.builder()
                     .setExpressions(
                         multiExpression.getExpressions().stream()
                             .map(AstUtils::removeJsDocCastIfPresent)
@@ -73,7 +73,7 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
             Expression lastExpression = Iterables.getLast(multiExpression.getExpressions());
             return lastExpression instanceof JsDocCastExpression jsDocCastExpression
                 // Move the JsDoc cast outwards if any.
-                ? JsDocCastExpression.Builder.from(jsDocCastExpression)
+                ? jsDocCastExpression.toBuilder()
                     .setExpression(multiExpressionWithoutJsDocCasts)
                     .build()
                 : multiExpressionWithoutJsDocCasts;
@@ -90,7 +90,7 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
             Expression innerExpressionWithoutTypeAnnotation =
                 AstUtils.removeJsDocCastIfPresent(expression.getExpression());
             if (innerExpressionWithoutTypeAnnotation != expression.getExpression()) {
-              return JsDocCastExpression.Builder.from(expression)
+              return expression.toBuilder()
                   .setExpression(innerExpressionWithoutTypeAnnotation)
                   .build();
             }

@@ -82,7 +82,7 @@ public final class JsInteropUtils {
       boolean memberOfNativeType = isJsNativeType(declaringType) && !isJsEnum(declaringType);
       if (memberAnnotation != null
           || ((implicitJsMember || isJsEnumConstant || memberOfNativeType) && !jsOverlay)) {
-        return JsInfo.newBuilder()
+        return JsInfo.builder()
             .setJsMemberType(getJsMemberType(member, isAccessor))
             .setJsName(JsInteropAnnotationUtils.getJsName(memberAnnotation))
             .setJsNamespace(JsInteropAnnotationUtils.getJsNamespace(memberAnnotation))
@@ -93,7 +93,7 @@ public final class JsInteropUtils {
       }
     }
 
-    return JsInfo.newBuilder()
+    return JsInfo.builder()
         .setJsMemberType(JsMemberType.NONE)
         .setJsOverlay(jsOverlay)
         .setJsAsync(jsAsync)
@@ -137,7 +137,7 @@ public final class JsInteropUtils {
       return null;
     }
     boolean hasCustomValue = JsInteropAnnotationUtils.hasCustomValue(annotatedConstruct);
-    return JsEnumInfo.newBuilder()
+    return JsEnumInfo.builder()
         .setHasCustomValue(hasCustomValue)
         .setSupportsComparable(!hasCustomValue || isJsNativeType(annotatedConstruct))
         .setSupportsOrdinal(!hasCustomValue && !isJsNativeType(annotatedConstruct))

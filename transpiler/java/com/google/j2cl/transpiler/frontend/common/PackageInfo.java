@@ -33,7 +33,7 @@ public abstract class PackageInfo {
    * When nothing is known about a particular package in a particular class path entry the answers
    * to questions about package properties are taken from this instance.
    */
-  public static final PackageInfo DEFAULT = PackageInfo.newBuilder().setPackageName("").build();
+  public static final PackageInfo DEFAULT = PackageInfo.builder().setPackageName("").build();
 
   public static PackageInfo read(InputStream packageInfoStream) throws IOException {
     var annotations = new HashMap<String, String>();
@@ -66,7 +66,7 @@ public abstract class PackageInfo {
     var reader = new ClassReader(packageInfoStream);
     reader.accept(visitor, ClassReader.SKIP_CODE);
     var packageName = reader.getClassName().replace("/package-info", "").replace('/', '.');
-    return PackageInfo.newBuilder()
+    return PackageInfo.builder()
         .setPackageName(packageName)
         .setJsNamespace(annotations.get(FrontendConstants.JS_PACKAGE_ANNOTATION_NAME))
         .setNullMarked(annotations.get(FrontendConstants.NULL_MARKED_ANNOTATION_NAME) != null)
@@ -80,7 +80,7 @@ public abstract class PackageInfo {
 
   public abstract boolean isNullMarked();
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_PackageInfo.Builder().setNullMarked(false);
   }
 

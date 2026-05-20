@@ -24,7 +24,6 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
@@ -188,7 +187,7 @@ final class JsExternsGenerator {
           getter != null
               ? getter.getDescriptor().getReturnTypeDescriptor()
               : setter.getDescriptor().getParameterTypeDescriptors().get(0);
-      return FieldDescriptor.newBuilder()
+      return FieldDescriptor.builder()
           .setEnclosingTypeDescriptor(primary.getEnclosingTypeDescriptor())
           .setName(primary.getSimpleJsName())
           .setTypeDescriptor(typeDescriptor)
@@ -198,7 +197,7 @@ final class JsExternsGenerator {
           // read-only properties.
           .setCompileTimeConstant(setter == null)
           .setOriginalJsInfo(
-              JsInfo.Builder.from(primary.getJsInfo())
+              primary.getJsInfo().toBuilder()
                   .setJsName(primary.getSimpleJsName())
                   .setJsMemberType(JsMemberType.PROPERTY)
                   .build())
@@ -235,7 +234,7 @@ final class JsExternsGenerator {
             .filter(AstUtils::needsWasmJsExport)
             .map(
                 accidentalOverride ->
-                    Method.newBuilder()
+                    Method.builder()
                         .setMethodDescriptor(accidentalOverride)
                         .setParameters(
                             AstUtils.createParameterVariables(

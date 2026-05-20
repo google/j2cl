@@ -222,7 +222,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       return this;
     }
 
-    return FieldDescriptor.Builder.from(this)
+    return toBuilder()
         // Ensure that declaration descriptor is set to original since we are modifying the types.
         .setDeclarationDescriptor(getDeclarationDescriptor())
         .setTypeDescriptor(
@@ -239,9 +239,20 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return builder.build();
   }
 
-  abstract Builder toBuilder();
+  /** Returns a description that is useful for error messages. */
+  @Override
+  public String getReadableDescription() {
+    return String.format("%s.%s", getEnclosingTypeDescriptor().getReadableDescription(), getName());
+  }
 
-  public static Builder newBuilder() {
+  @Override
+  MemberDescriptor acceptInternal(Processor processor) {
+    return Visitor_FieldDescriptor.visit(processor, this);
+  }
+
+  public abstract Builder toBuilder();
+
+  public static Builder builder() {
     return new AutoValue_FieldDescriptor.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
@@ -254,17 +265,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setSynthetic(false)
         .setEnumConstant(false)
         .setOrigin(FieldOrigin.SOURCE);
-  }
-
-  /** Returns a description that is useful for error messages. */
-  @Override
-  public String getReadableDescription() {
-    return String.format("%s.%s", getEnclosingTypeDescriptor().getReadableDescription(), getName());
-  }
-
-  @Override
-  MemberDescriptor acceptInternal(Processor processor) {
-    return Visitor_FieldDescriptor.visit(processor, this);
   }
 
   /** A Builder for FieldDescriptors. */
@@ -348,10 +348,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       FieldDescriptor fieldDescriptor = autoBuild();
 
       return interner.intern(fieldDescriptor);
-    }
-
-    public static Builder from(FieldDescriptor fieldDescriptor) {
-      return fieldDescriptor.toBuilder();
     }
 
     private static final ThreadLocalInterner<FieldDescriptor> interner =

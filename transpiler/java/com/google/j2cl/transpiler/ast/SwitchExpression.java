@@ -81,7 +81,7 @@ public class SwitchExpression extends Expression implements SwitchConstruct<Swit
 
   @Override
   public SwitchExpression clone() {
-    return SwitchExpression.newBuilder()
+    return SwitchExpression.builder()
         .setTypeDescriptor(typeDescriptor)
         .setExpression(expression.clone())
         .setCases(AstUtils.clone(cases))
@@ -94,12 +94,21 @@ public class SwitchExpression extends Expression implements SwitchConstruct<Swit
     return Visitor_SwitchExpression.visit(processor, this);
   }
 
-  @Override
-  public Builder toBuilder() {
-    return Builder.from(this);
+  public static Builder builderFrom(SwitchConstruct<?> switchConstruct) {
+    return builder()
+        .setExpression(switchConstruct.getExpression())
+        .setCases(switchConstruct.getCases())
+        .setTypeDescriptor(switchConstruct.getTypeDescriptor())
+        .setAllowsNulls(switchConstruct.allowsNulls())
+        .setSourcePosition(switchConstruct.getSourcePosition());
   }
 
-  public static Builder newBuilder() {
+  @Override
+  public Builder toBuilder() {
+    return builderFrom(this);
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -110,15 +119,6 @@ public class SwitchExpression extends Expression implements SwitchConstruct<Swit
     private List<SwitchCase> switchCases = new ArrayList<>();
     private boolean allowsNulls;
     private SourcePosition sourcePosition = SourcePosition.NONE;
-
-    public static <T extends SwitchConstruct<T>> Builder from(SwitchConstruct<T> switchConstruct) {
-      return newBuilder()
-          .setExpression(switchConstruct.getExpression())
-          .setCases(switchConstruct.getCases())
-          .setTypeDescriptor(switchConstruct.getTypeDescriptor())
-          .setAllowsNulls(switchConstruct.allowsNulls())
-          .setSourcePosition(switchConstruct.getSourcePosition());
-    }
 
     @Override
     @CanIgnoreReturnValue

@@ -152,7 +152,7 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
     if (!type.isInterface && type.constructors.isEmpty()) {
       addAll(
         functionDependentSources(
-          Method.newBuilder()
+          Method.builder()
             .setMethodDescriptor(createImplicitConstructorDescriptor(type.typeDescriptor))
             .setSourcePosition(type.sourcePosition)
             .build()

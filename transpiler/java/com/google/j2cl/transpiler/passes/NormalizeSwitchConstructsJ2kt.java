@@ -133,7 +133,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
             // point all potential targets of breaks are assumed labeled). At the end it will be
             // enclosed into an embedded statement to handle the return value.
             var switchStatement =
-                SwitchStatement.Builder.from(switchExpression)
+                SwitchStatement.builderFrom(switchExpression)
                     .build()
                     .encloseWithLabel(getLabel(switchExpression));
 
@@ -142,9 +142,9 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
             // To avoid the issue add `throw new AssertionError();` after the `switch statement`
             // to help kotlinc to determine that all the exits are within the switch statement.
             var throwStatement =
-                ThrowStatement.newBuilder()
+                ThrowStatement.builder()
                     .setExpression(
-                        NewInstance.newBuilder()
+                        NewInstance.builder()
                             .setTarget(
                                 TypeDescriptors.get()
                                     .javaLangAssertionError
@@ -153,9 +153,9 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
                     .setSourcePosition(switchExpression.getSourcePosition())
                     .build();
 
-            return EmbeddedStatement.newBuilder()
+            return EmbeddedStatement.builder()
                 .setStatement(
-                    Block.newBuilder().setStatements(switchStatement, throwStatement).build())
+                    Block.builder().setStatements(switchStatement, throwStatement).build())
                 .setTypeDescriptor(switchExpression.getTypeDescriptor())
                 .build();
           }
@@ -172,14 +172,14 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
             // but the label is on the switch.
 
             // Add the target label for correctness.
-            return YieldStatement.Builder.from(yieldStatement)
+            return yieldStatement.toBuilder()
                 .setLabelReference(getLabel(enclosingSwitchExpression).createReference())
                 .build();
           }
 
           private Label getLabel(SwitchExpression switchExpression) {
             return assignedLabelBySwitchExpression.computeIfAbsent(
-                checkNotNull(switchExpression), s -> Label.newBuilder().setName("SWITCH").build());
+                checkNotNull(switchExpression), s -> Label.builder().setName("SWITCH").build());
           }
         });
   }
@@ -218,7 +218,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
             i,
             caseExpression instanceof NullLiteral
                 ? caseExpression
-                : CastExpression.newBuilder()
+                : CastExpression.builder()
                     .setExpression(caseExpression)
                     .setCastTypeDescriptor(targetTypeDescriptor.toNonNullable())
                     .build());
@@ -232,7 +232,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
       return;
     }
 
-    switchStatement.getCases().add(SwitchCaseDefault.newBuilder().build());
+    switchStatement.getCases().add(SwitchCaseDefault.builder().build());
   }
 
   /**
@@ -246,7 +246,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
           @Override
           public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
             if (canConvertDirectlyToWhen(switchStatement)) {
-              return SwitchExpression.Builder.from(switchStatement)
+              return SwitchExpression.builderFrom(switchStatement)
                   .build()
                   .makeStatement(switchStatement.getSourcePosition());
             }
@@ -275,7 +275,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
         .map(
             switchCase ->
                 new AutoValue_NormalizeSwitchConstructsJ2kt_SwitchCaseWithLabel(
-                    switchCase, Label.newBuilder().setName("CASE").build()))
+                    switchCase, Label.builder().setName("CASE").build()))
         .collect(toImmutableList());
   }
 
@@ -309,17 +309,17 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
             .collect(toImmutableList());
 
     Expression whenExpression =
-        SwitchExpression.newBuilder()
+        SwitchExpression.builder()
             .setTypeDescriptor(PrimitiveTypes.VOID)
             .setExpression(expression)
             .setCases(cases)
             .setSourcePosition(sourcePosition)
             .build();
 
-    return Block.newBuilder()
+    return Block.builder()
         .addStatement(whenExpression.makeStatement(sourcePosition))
         .addStatement(
-            BreakStatement.newBuilder()
+            BreakStatement.builder()
                 .setSourcePosition(sourcePosition)
                 .setLabelReference(switchLabel.createReference())
                 .build())
@@ -334,7 +334,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
       SwitchCase switchCase, Label label, SourcePosition sourcePosition) {
     return switchCase.toBuilder()
         .setStatements(
-            BreakStatement.newBuilder()
+            BreakStatement.builder()
                 .setLabelReference(label.createReference())
                 .setSourcePosition(sourcePosition)
                 .build())
@@ -365,9 +365,9 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
       SourcePosition sourcePosition) {
     for (SwitchCaseWithLabel switchCaseWithLabel : switchCaseWithLabels) {
       dispatchStatement =
-          Block.newBuilder()
+          Block.builder()
               .addStatement(
-                  LabeledStatement.newBuilder()
+                  LabeledStatement.builder()
                       .setLabel(switchCaseWithLabel.getLabel())
                       .setStatement(dispatchStatement)
                       .setSourcePosition(sourcePosition)

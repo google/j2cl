@@ -210,8 +210,7 @@ abstract class WasmTypeLayout {
 
   private static MethodDescriptor getGetClassMethodDescriptor(
       DeclaredTypeDescriptor typeDescriptor) {
-    return MethodDescriptor.Builder.from(
-            TypeDescriptors.get().javaLangObject.getMethodDescriptor("$getClassImpl"))
+    return TypeDescriptors.get().javaLangObject.getMethodDescriptor("$getClassImpl").toBuilder()
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setSynthetic(true)
         .build();

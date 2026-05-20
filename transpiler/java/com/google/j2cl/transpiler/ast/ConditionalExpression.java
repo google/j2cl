@@ -89,7 +89,15 @@ public class ConditionalExpression extends Expression {
     return Visitor_ConditionalExpression.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setTypeDescriptor(this.getTypeDescriptor())
+        .setConditionExpression(this.getConditionExpression())
+        .setTrueExpression(this.getTrueExpression())
+        .setFalseExpression(this.getFalseExpression());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -99,14 +107,6 @@ public class ConditionalExpression extends Expression {
     private Expression conditionExpression;
     private Expression trueExpression;
     private Expression falseExpression;
-
-    public static Builder from(ConditionalExpression conditionalExpression) {
-      return new Builder()
-          .setTypeDescriptor(conditionalExpression.getTypeDescriptor())
-          .setConditionExpression(conditionalExpression.getConditionExpression())
-          .setTrueExpression(conditionalExpression.getTrueExpression())
-          .setFalseExpression(conditionalExpression.getFalseExpression());
-    }
 
     public Builder setConditionExpression(Expression conditionExpression) {
       this.conditionExpression = conditionExpression;

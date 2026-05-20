@@ -55,7 +55,7 @@ public class Block extends Statement {
 
   @Override
   public Block clone() {
-    return Block.newBuilder()
+    return Block.builder()
         .setSourcePosition(getSourcePosition())
         .setStatements(AstUtils.clone(statements))
         .build();
@@ -66,7 +66,13 @@ public class Block extends Statement {
     return Visitor_Block.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setSourcePosition(this.getSourcePosition())
+        .setStatements(this.getStatements());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -76,12 +82,6 @@ public class Block extends Statement {
     // Ok to have blocks without source position, since there is not code that they directly
     // execute.
     private SourcePosition sourcePosition = SourcePosition.NONE;
-
-    public static Builder from(Block block) {
-      return newBuilder()
-          .setSourcePosition(block.getSourcePosition())
-          .setStatements(block.getStatements());
-    }
 
     @CanIgnoreReturnValue
     public Builder setStatements(Statement... statements) {

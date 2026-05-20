@@ -60,7 +60,7 @@ public final class SwitchCasePattern extends SwitchCase {
 
   @Override
   public SwitchCasePattern clone() {
-    return newBuilder()
+    return builder()
         .setPattern(AstUtils.clone(pattern))
         .setGuard(AstUtils.clone(guard))
         .setStatements(AstUtils.clone(statements))
@@ -70,32 +70,28 @@ public final class SwitchCasePattern extends SwitchCase {
   }
 
   @Override
-  public Builder toBuilder() {
-    return Builder.from(this);
-  }
-
-  public static Builder newBuilder() {
-    return new Builder();
+  Node acceptInternal(Processor processor) {
+    return Visitor_SwitchCasePattern.visit(processor, this);
   }
 
   @Override
-  Node acceptInternal(Processor processor) {
-    return Visitor_SwitchCasePattern.visit(processor, this);
+  public Builder toBuilder() {
+    return builder()
+        .setPattern(this.getPattern())
+        .setGuard(this.getGuard())
+        .setStatements(this.getStatements())
+        .setCanFallthrough(this.canFallthrough())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
+    return new Builder();
   }
 
   /** A Builder for SwitchCasePattern. */
   public static class Builder extends SwitchCase.Builder<Builder, SwitchCasePattern> {
     private Pattern pattern;
     private Expression guard;
-
-    public static Builder from(SwitchCasePattern switchCase) {
-      return newBuilder()
-          .setPattern(switchCase.getPattern())
-          .setGuard(switchCase.getGuard())
-          .setStatements(switchCase.getStatements())
-          .setCanFallthrough(switchCase.canFallthrough())
-          .setSourcePosition(switchCase.getSourcePosition());
-    }
 
     @CanIgnoreReturnValue
     public Builder setPattern(Pattern pattern) {

@@ -77,7 +77,7 @@ public class NormalizeMultiExpressions extends NormalizationPass {
           // If there are multiple expressions then turn it into a block so that any var creation
           // appears immediately before its use rather than being hoisted to the top of the
           // enclosing block.
-          return Block.newBuilder()
+          return Block.builder()
               .setSourcePosition(statement.getSourcePosition())
               .setStatements(
                   expressions.stream()
@@ -111,7 +111,7 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         }
       }
 
-      return MultiExpression.newBuilder().setExpressions(flattenedExpressions).build();
+      return MultiExpression.builder().setExpressions(flattenedExpressions).build();
     }
   }
 
@@ -123,8 +123,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         List<Expression> lhsExpressions = leftOperand.getExpressions();
         Expression rightMostLhsExpression = Iterables.getLast(lhsExpressions);
         Expression innerExpression =
-            BinaryExpression.Builder.from(expression).setLeftOperand(rightMostLhsExpression).build();
-        return MultiExpression.newBuilder()
+            expression.toBuilder().setLeftOperand(rightMostLhsExpression).build();
+        return MultiExpression.builder()
             .addExpressions(lhsExpressions.subList(0, lhsExpressions.size() - 1))
             .addExpressions(innerExpression)
             .build();
@@ -138,9 +138,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
           && expression.getOperand() instanceof MultiExpression operand) {
         List<Expression> expressions = operand.getExpressions();
         Expression rightMostExpression = Iterables.getLast(expressions);
-        Expression innerExpression =
-            UnaryExpression.Builder.from(expression).setOperand(rightMostExpression).build();
-        return MultiExpression.newBuilder()
+        Expression innerExpression = expression.toBuilder().setOperand(rightMostExpression).build();
+        return MultiExpression.builder()
             .addExpressions(expressions.subList(0, expressions.size() - 1))
             .addExpressions(innerExpression)
             .build();

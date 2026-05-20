@@ -78,18 +78,18 @@ public class NormalizeJsFunctionPropertyInvocations extends NormalizationPass {
             }
 
             Variable qualifierVariable =
-                Variable.newBuilder()
+                Variable.builder()
                     .setFinal(true)
                     .setName("$function")
                     .setTypeDescriptor(qualifier.getTypeDescriptor())
                     .build();
-            return MultiExpression.newBuilder()
+            return MultiExpression.builder()
                 .setExpressions(
                     // Declare the temporary variable and initialize to the evaluated qualifier.
-                    VariableDeclarationExpression.newBuilder()
+                    VariableDeclarationExpression.builder()
                         .addVariableDeclaration(qualifierVariable, qualifier)
                         .build(),
-                    MethodCall.Builder.from(methodCall)
+                    methodCall.toBuilder()
                         .setQualifier(qualifierVariable.createReference())
                         .build())
                 .build();

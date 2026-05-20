@@ -47,17 +47,17 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
             if (!expression.isIdempotent()
                 && instanceOfExpression.getTestTypeDescriptor().isInterface()) {
               Variable qualifierVariable =
-                  Variable.newBuilder()
+                  Variable.builder()
                       .setName("$expression")
                       .setFinal(true)
                       .setTypeDescriptor(expression.getTypeDescriptor())
                       .build();
-              return MultiExpression.newBuilder()
+              return MultiExpression.builder()
                   .setExpressions(
-                      VariableDeclarationExpression.newBuilder()
+                      VariableDeclarationExpression.builder()
                           .addVariableDeclaration(qualifierVariable, expression)
                           .build(),
-                      InstanceOfExpression.Builder.from(instanceOfExpression)
+                      instanceOfExpression.toBuilder()
                           .setExpression(qualifierVariable.createReference())
                           .build())
                   .build();
@@ -71,17 +71,17 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
 
             if (methodCall.isPolymorphic() && !qualifier.isIdempotent()) {
               Variable qualifierVariable =
-                  Variable.newBuilder()
+                  Variable.builder()
                       .setName("$qualifier")
                       .setFinal(true)
                       .setTypeDescriptor(qualifier.getTypeDescriptor())
                       .build();
-              return MultiExpression.newBuilder()
+              return MultiExpression.builder()
                   .setExpressions(
-                      VariableDeclarationExpression.newBuilder()
+                      VariableDeclarationExpression.builder()
                           .addVariableDeclaration(qualifierVariable, qualifier)
                           .build(),
-                      MethodCall.Builder.from(methodCall)
+                      methodCall.toBuilder()
                           .setQualifier(qualifierVariable.createReference())
                           .build())
                   .build();
@@ -94,18 +94,18 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
             Expression expression = switchStatement.getExpression();
             if (!expression.isIdempotent()) {
               Variable switchVariable =
-                  Variable.newBuilder()
+                  Variable.builder()
                       .setName("$expression")
                       .setFinal(true)
                       .setTypeDescriptor(expression.getTypeDescriptor())
                       .build();
-              return Block.newBuilder()
+              return Block.builder()
                   .setStatements(
-                      VariableDeclarationExpression.newBuilder()
+                      VariableDeclarationExpression.builder()
                           .addVariableDeclaration(switchVariable, expression)
                           .build()
                           .makeStatement(switchStatement.getSourcePosition()),
-                      SwitchStatement.Builder.from(switchStatement)
+                      switchStatement.toBuilder()
                           .setExpression(switchVariable.createReference())
                           .build())
                   .build();

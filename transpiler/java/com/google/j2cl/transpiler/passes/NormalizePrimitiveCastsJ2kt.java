@@ -88,7 +88,7 @@ public class NormalizePrimitiveCastsJ2kt extends NormalizationPass {
   }
 
   private static final DeclaredTypeDescriptor KOTLIN_BASIC_TYPE =
-      TypeDeclaration.newBuilder()
+      TypeDeclaration.builder()
           .setKind(Kind.CLASS)
           .setQualifiedSourceName("j2kt.BasicType")
           .build()
@@ -96,24 +96,24 @@ public class NormalizePrimitiveCastsJ2kt extends NormalizationPass {
 
   private static Expression convertCharCode(Expression expression) {
     FieldDescriptor castToFieldDescriptor =
-        FieldDescriptor.newBuilder()
+        FieldDescriptor.builder()
             .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
             .setName("code")
             .setTypeDescriptor(PrimitiveTypes.INT)
             .build();
 
-    return FieldAccess.Builder.from(castToFieldDescriptor).setQualifier(expression).build();
+    return FieldAccess.builderFrom(castToFieldDescriptor).setQualifier(expression).build();
   }
 
   private static Expression convertTo(
       Expression expression, PrimitiveTypeDescriptor primitiveType) {
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
             .setName("to" + LOWER_CAMEL.to(UPPER_CAMEL, primitiveType.getSimpleSourceName()))
             .setReturnTypeDescriptor(primitiveType)
             .build();
 
-    return MethodCall.Builder.from(castToMethodDescriptor).setQualifier(expression).build();
+    return MethodCall.builderFrom(castToMethodDescriptor).setQualifier(expression).build();
   }
 }

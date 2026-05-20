@@ -57,6 +57,6 @@ public class NormalizeFieldInitializationJ2kt extends NormalizationPass {
   private static Field fieldWithDefaultInitializer(Field field) {
     TypeDescriptor typeDescriptor = field.getDescriptor().getTypeDescriptor();
     Expression initializer = typeDescriptor.getDefaultValue();
-    return Field.Builder.from(field).setInitializer(initializer).build();
+    return field.toBuilder().setInitializer(initializer).build();
   }
 }

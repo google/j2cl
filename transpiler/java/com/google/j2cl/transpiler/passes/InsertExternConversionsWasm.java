@@ -48,7 +48,7 @@ public class InsertExternConversionsWasm extends NormalizationPass {
                   .getParameters()
                   .forEach(
                       p -> p.setTypeDescriptor(replaceTypeWithExternalType(p.getTypeDescriptor())));
-              method = Method.Builder.from(method).setMethodDescriptor(newDescriptor).build();
+              method = method.toBuilder().setMethodDescriptor(newDescriptor).build();
             }
             return method;
           }
@@ -66,7 +66,7 @@ public class InsertExternConversionsWasm extends NormalizationPass {
   private static Expression insertWasmExternConversions(Invocation invocation) {
     MethodDescriptor methodDescriptor = invocation.getTarget().getDeclarationDescriptor();
     Invocation newInvocation =
-        Invocation.Builder.from(invocation)
+        invocation.toBuilder()
             .setArguments(
                 Streams.zip(
                         methodDescriptor.getParameterTypeDescriptors().stream(),

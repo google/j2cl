@@ -49,7 +49,7 @@ public class InsertCastsForTypeLiteralsJ2kt extends AbstractJ2ktNormalizationPas
               return typeLiteral;
             }
 
-            return CastExpression.newBuilder()
+            return CastExpression.builder()
                 .setExpression(typeLiteral)
                 .setCastTypeDescriptor(
                     TypeDescriptors.get()

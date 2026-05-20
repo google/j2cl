@@ -48,7 +48,7 @@ public final class RemoveUnreachableCode extends NormalizationPass {
             if (filteredStatements.size() == block.getStatements().size()) {
               return block;
             }
-            return Block.Builder.from(block).setStatements(filteredStatements).build();
+            return block.toBuilder().setStatements(filteredStatements).build();
           }
         });
   }

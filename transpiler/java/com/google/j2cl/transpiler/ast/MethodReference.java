@@ -90,7 +90,7 @@ public class MethodReference extends Expression {
 
   @Override
   public MethodReference clone() {
-    return MethodReference.newBuilder()
+    return MethodReference.builder()
         .setTypeDescriptor(typeDescriptor)
         .setReferencedMethodDescriptor(referencedMethodDescriptor)
         .setInterfaceMethodDescriptor(interfaceMethodDescriptor)
@@ -104,11 +104,21 @@ public class MethodReference extends Expression {
     return Visitor_MethodReference.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setTypeDescriptor(this.getTypeDescriptor())
+        .setReferencedMethodDescriptor(this.getReferencedMethodDescriptor())
+        .setInterfaceMethodDescriptor(this.getInterfacedMethodDescriptor())
+        .setQualifier(this.getQualifier())
+        .setTypeArguments(this.getTypeArguments())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
-  /** A Builder for FunctionExpression. */
+  /** A Builder for MethodReference. */
   public static class Builder {
     private TypeDescriptor typeDescriptor;
     private MethodDescriptor referencedMethodDescriptor;
@@ -116,16 +126,6 @@ public class MethodReference extends Expression {
     private Expression qualifier;
     private final List<TypeDescriptor> typeArguments = new ArrayList<>();
     private SourcePosition sourcePosition;
-
-    public static Builder from(MethodReference expression) {
-      return new Builder()
-          .setTypeDescriptor(expression.getTypeDescriptor())
-          .setReferencedMethodDescriptor(expression.getReferencedMethodDescriptor())
-          .setInterfaceMethodDescriptor(expression.getInterfacedMethodDescriptor())
-          .setQualifier(expression.getQualifier())
-          .setTypeArguments(expression.getTypeArguments())
-          .setSourcePosition(expression.getSourcePosition());
-    }
 
     @CanIgnoreReturnValue
     public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {

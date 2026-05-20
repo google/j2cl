@@ -32,7 +32,7 @@ public abstract class KtTypeInfo {
 
   public abstract Builder toBuilder();
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_KtTypeInfo.Builder();
   }
 

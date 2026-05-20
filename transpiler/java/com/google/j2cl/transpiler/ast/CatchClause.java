@@ -60,7 +60,11 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
     return new CatchClause(clonedExceptionVariable, clonedBody);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder().setExceptionVariable(this.getExceptionVariable()).setBody(this.getBody());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -68,12 +72,6 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
   public static class Builder {
     private Variable exceptionVariable;
     private Block body;
-
-    public static Builder from(CatchClause catchClause) {
-      return newBuilder()
-          .setExceptionVariable(catchClause.getExceptionVariable())
-          .setBody(catchClause.getBody());
-    }
 
     public Builder setExceptionVariable(Variable exceptionVariable) {
       this.exceptionVariable = exceptionVariable;

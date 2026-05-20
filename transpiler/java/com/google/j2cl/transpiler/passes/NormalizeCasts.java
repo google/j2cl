@@ -168,7 +168,7 @@ public class NormalizeCasts extends NormalizationPass {
       // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
       castTypeDescriptor = TypeDescriptors.getEnumBoxType(castTypeDescriptor);
     }
-    return JsDocCastExpression.newBuilder()
+    return JsDocCastExpression.builder()
         .setCastTypeDescriptor(castTypeDescriptor)
         .setExpression(expression)
         .build();
@@ -239,7 +239,7 @@ public class NormalizeCasts extends NormalizationPass {
     expression = AstUtils.removeJsDocCastIfPresent(expression);
 
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.newBuilder()
+        MethodDescriptor.builder()
             .setOriginalJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setEnclosingTypeDescriptor(BootstrapType.CASTS.getDescriptor())
@@ -250,7 +250,7 @@ public class NormalizeCasts extends NormalizationPass {
             .build();
 
     // Casts.$to(expr, TypeName);
-    return MethodCall.Builder.from(castToMethodDescriptor)
+    return MethodCall.builderFrom(castToMethodDescriptor)
         .setArguments(expression, toTypeDescriptor.getMetadataConstructorReference())
         .build();
   }

@@ -71,7 +71,7 @@ public class JsForInStatement extends LoopStatement {
             ImmutableList.of(loopVariable),
             ImmutableList.of(clonedLoopVariable),
             getBody().clone());
-    return JsForInStatement.newBuilder()
+    return JsForInStatement.builder()
         .setLoopVariable(clonedLoopVariable)
         .setIterableExpression(iterableExpression.clone())
         .setBody(clonedBody)
@@ -85,30 +85,26 @@ public class JsForInStatement extends LoopStatement {
   }
 
   @Override
-  Builder toBuilder() {
-    return Builder.from(this);
+  public Builder toBuilder() {
+    return new Builder(this)
+        .setLoopVariable(this.getLoopVariable())
+        .setIterableExpression(this.getIterableExpression());
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
+  }
+
+  public static Builder builderFrom(ForEachStatement forEachStatement) {
+    return new Builder(forEachStatement)
+        .setLoopVariable(forEachStatement.getLoopVariable())
+        .setIterableExpression(forEachStatement.getIterableExpression());
   }
 
   /** Builder for JsForInStatement. */
   public static class Builder extends LoopStatement.Builder<Builder, JsForInStatement> {
     private Variable loopVariable;
     private Expression iterableExpression;
-
-    public static Builder from(JsForInStatement forInStatement) {
-      return new Builder(forInStatement)
-          .setLoopVariable(forInStatement.getLoopVariable())
-          .setIterableExpression(forInStatement.getIterableExpression());
-    }
-
-    public static Builder from(ForEachStatement forEachStatement) {
-      return new Builder(forEachStatement)
-          .setLoopVariable(forEachStatement.getLoopVariable())
-          .setIterableExpression(forEachStatement.getIterableExpression());
-    }
 
     private Builder() {}
 

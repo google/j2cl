@@ -54,7 +54,7 @@ public class InsertNarrowingPrimitiveConversionsJ2kt extends NormalizationPass {
                 }
 
                 return shouldNarrow(fromTypeDescriptor, toTypeDescriptor)
-                    ? CastExpression.newBuilder()
+                    ? CastExpression.builder()
                         .setExpression(expression)
                         .setCastTypeDescriptor(toTypeDescriptor)
                         .build()

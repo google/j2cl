@@ -102,7 +102,7 @@ public class MultiExpression extends Expression {
 
   @Override
   public Expression clone() {
-    return MultiExpression.newBuilder().setExpressions(AstUtils.clone(expressions)).build();
+    return MultiExpression.builder().setExpressions(AstUtils.clone(expressions)).build();
   }
 
   @Override
@@ -110,7 +110,7 @@ public class MultiExpression extends Expression {
     return Visitor_MultiExpression.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
   }
 

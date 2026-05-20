@@ -55,9 +55,9 @@ public class RemoveNameFromJsEnums extends NormalizationPass {
     checkArgument(field.isEnumField());
     checkState(field.getInitializer() instanceof NewInstance);
     NewInstance enumFieldInitializer = (NewInstance) field.getInitializer();
-    return Field.Builder.from(field)
+    return field.toBuilder()
         .setInitializer(
-            NewInstance.Builder.from(enumFieldInitializer)
+            enumFieldInitializer.toBuilder()
                 .setArguments(
                     // Replace the first argument with null.
                     Stream.concat(

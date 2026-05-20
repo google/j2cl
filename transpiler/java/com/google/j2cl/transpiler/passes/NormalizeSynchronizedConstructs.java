@@ -99,13 +99,12 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
             if (!methodDescriptor.isSynchronized()) {
               return method;
             }
-            methodDescriptor =
-                MethodDescriptor.Builder.from(methodDescriptor).setSynchronized(false).build();
+            methodDescriptor = methodDescriptor.toBuilder().setSynchronized(false).build();
             SourcePosition sourcePosition = method.getBody().getSourcePosition();
-            return Method.Builder.from(method)
+            return method.toBuilder()
                 .setMethodDescriptor(methodDescriptor)
                 .setStatements(
-                    SynchronizedStatement.newBuilder()
+                    SynchronizedStatement.builder()
                         .setExpression(
                             methodDescriptor.isStatic()
                                 ? new TypeLiteral(
@@ -120,5 +119,4 @@ public final class NormalizeSynchronizedConstructs extends NormalizationPass {
         });
   }
 }
-
 

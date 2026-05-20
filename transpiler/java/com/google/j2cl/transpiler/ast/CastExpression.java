@@ -105,7 +105,13 @@ public class CastExpression extends Expression {
     return Visitor_CastExpression.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return builder()
+        .setExpression(this.getExpression())
+        .setCastTypeDescriptor(this.getCastTypeDescriptor());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -113,12 +119,6 @@ public class CastExpression extends Expression {
   public static class Builder {
     private Expression expression;
     private TypeDescriptor castTypeDescriptor;
-
-    public static Builder from(CastExpression cast) {
-      return new Builder()
-          .setExpression(cast.getExpression())
-          .setCastTypeDescriptor(cast.getCastTypeDescriptor());
-    }
 
     public Builder setExpression(Expression expression) {
       this.expression = expression;

@@ -35,7 +35,7 @@ public class RemoveNestedBlocks extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteBlock(Block block) {
-            return Block.Builder.from(block).setStatements(flatten(block.getStatements())).build();
+            return block.toBuilder().setStatements(flatten(block.getStatements())).build();
           }
 
           @Override

@@ -43,9 +43,9 @@ public class InsertStringConversionsJ2kt extends NormalizationPass {
               return binaryExpression;
             }
 
-            return BinaryExpression.Builder.from(binaryExpression)
+            return binaryExpression.toBuilder()
                 .setLeftOperand(
-                    BinaryExpression.newBuilder()
+                    BinaryExpression.builder()
                         .setLeftOperand(new StringLiteral(""))
                         .setOperator(BinaryOperator.PLUS)
                         .setRightOperand(binaryExpression.getLeftOperand())

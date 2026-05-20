@@ -35,7 +35,7 @@ public class ProjectCapturesInLambdaParameters extends AbstractJ2ktNormalization
             DeclaredTypeDescriptor declaredTypeDescriptor =
                 functionExpression.getTypeDescriptor().getFunctionalInterface();
             functionExpression =
-                FunctionExpression.Builder.from(functionExpression)
+                functionExpression.toBuilder()
                     .setTypeDescriptor(
                         declaredTypeDescriptor.withTypeArguments(
                             declaredTypeDescriptor.getTypeArgumentDescriptors().stream()

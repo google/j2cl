@@ -38,11 +38,17 @@ public class BreakStatement extends BreakOrContinueStatement {
 
   @Override
   public Builder toBuilder() {
-    return Builder.from(this);
+    return builderFrom(this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
+  }
+
+  public static Builder builderFrom(BreakOrContinueStatement breakOrContinueStatement) {
+    return builder()
+        .setSourcePosition(breakOrContinueStatement.getSourcePosition())
+        .setLabelReference(breakOrContinueStatement.getLabelReference());
   }
 
   /** Builder for BreakStatement. */
@@ -50,12 +56,6 @@ public class BreakStatement extends BreakOrContinueStatement {
       extends BreakOrContinueStatement.Builder<BreakStatement, BreakStatement.Builder> {
     private LabelReference labelReference;
     private SourcePosition sourcePosition;
-
-    public static Builder from(BreakOrContinueStatement breakStatement) {
-      return newBuilder()
-          .setSourcePosition(breakStatement.getSourcePosition())
-          .setLabelReference(breakStatement.getLabelReference());
-    }
 
     @Override
     public Builder setSourcePosition(SourcePosition sourcePosition) {

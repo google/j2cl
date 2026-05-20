@@ -77,7 +77,7 @@ public class NormalizeEquality extends NormalizationPass {
               // explicitly handled.
               return switchStatement.toBuilder()
                   .setExpression(
-                      MethodCall.Builder.from(
+                      MethodCall.builderFrom(
                               TypeDescriptors.get()
                                   .javaemulInternalJsUtils
                                   .getMethodDescriptorByName("coerceToNull"))
@@ -94,7 +94,7 @@ public class NormalizeEquality extends NormalizationPass {
   private static Expression hideNonComformingTypes(Expression expression) {
     if (expression.getTypeDescriptor() instanceof DeclaredTypeDescriptor declaredTypeDescriptor
         && declaredTypeDescriptor.getQualifiedJsName().equals("gbigint")) {
-      return JsDocCastExpression.newBuilder()
+      return JsDocCastExpression.builder()
           .setExpression(expression)
           .setCastTypeDescriptor(TypeDescriptors.getUnknownType())
           .build();

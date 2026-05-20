@@ -90,7 +90,7 @@ public class StringLiteralGettersCreator {
   /** Returns the descriptor for the getter of the string literal. */
   private static MethodDescriptor getLazyStringLiteralGettterMethodDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor, String name) {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setName(name)
         .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)

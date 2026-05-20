@@ -44,7 +44,7 @@ public class RemoveUnneededCastsJ2kt extends NormalizationPass {
               return castExpression;
             }
 
-            return CastExpression.Builder.from(castExpression)
+            return castExpression.toBuilder()
                 .setExpression(innerCastExpression.getExpression())
                 .build();
           }

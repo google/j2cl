@@ -115,7 +115,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
     //       (patternVariable = (T) exp, true),    // cast exp and assign to pattern variable
     //    )
 
-    var resultBuilder = MultiExpression.newBuilder();
+    var resultBuilder = MultiExpression.builder();
     // Always use a variable for the expression that needs to be evaluated twice to
     // prevent increasing code size and make the code more readable.
     Variable expressionVariable;
@@ -125,13 +125,13 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
     } else {
       // Create a new variable to avoid evaluating expression twice.
       expressionVariable =
-          Variable.newBuilder()
+          Variable.builder()
               .setName("exp")
               .setFinal(true)
               .setTypeDescriptor(expression.getTypeDescriptor())
               .build();
       resultBuilder.addExpressions(
-          VariableDeclarationExpression.newBuilder()
+          VariableDeclarationExpression.builder()
               .addVariableDeclaration(expressionVariable, expression)
               .build());
     }
@@ -139,7 +139,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
     //  exp instanceof T && (T patternVariable = (T) exp, nextTerm)
     return resultBuilder
         .addExpressions(
-            InstanceOfExpression.newBuilder()
+            InstanceOfExpression.builder()
                 .setExpression(expressionVariable.createReference())
                 .setTestTypeDescriptor(patternVariable.getTypeDescriptor())
                 .setSourcePosition(sourcePosition)
@@ -147,7 +147,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
                 .infixAnd(
                     assignPatternVariableReturningNextTerm(
                         patternVariable,
-                        CastExpression.newBuilder()
+                        CastExpression.builder()
                             .setExpression(expressionVariable.createReference())
                             .setCastTypeDescriptor(
                                 patternVariable.getTypeDescriptor().toNonNullable())
@@ -163,9 +163,9 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
   private static Expression assignPatternVariableReturningNextTerm(
       Variable patternVariable, Expression expression, Expression nextTerm) {
     // (Type var = (Type) expression, true)
-    return MultiExpression.newBuilder()
+    return MultiExpression.builder()
         .addExpressions(
-            VariableDeclarationExpression.newBuilder()
+            VariableDeclarationExpression.builder()
                 .addVariableDeclaration(patternVariable, expression)
                 .build(),
             nextTerm)
@@ -181,7 +181,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
     // `e instanceof R r &&  <nested pattern expressions>`.
 
     Variable patternVariable =
-        Variable.newBuilder()
+        Variable.builder()
             .setName("pattern" + recordPattern.getTypeDescriptor().getSimpleSourceName())
             .setTypeDescriptor(recordPattern.getTypeDescriptor())
             .setFinal(true)
@@ -214,7 +214,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
     MethodDescriptor accessor = accessors.getFirst();
     Pattern nestedPattern = componentPattern.getFirst();
     MethodCall accessorCall =
-        MethodCall.Builder.from(accessor).setQualifier(patternVariable.createReference()).build();
+        MethodCall.builderFrom(accessor).setQualifier(patternVariable.createReference()).build();
 
     Expression rest =
         deconstructComponents(
@@ -229,7 +229,7 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
       // pattern with an unnamed variable of the same type as the component.
       nestedPattern =
           new BindingPattern(
-              Variable.newBuilder()
+              Variable.builder()
                   .setName("_")
                   .setTypeDescriptor(accessorCall.getTypeDescriptor())
                   .build());

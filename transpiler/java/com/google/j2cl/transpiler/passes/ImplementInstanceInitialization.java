@@ -48,7 +48,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
             .collect(toImmutableList());
 
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(type.getTypeDescriptor().getInitMethodDescriptor())
             .addStatements(statements)
             .setSourcePosition(type.getSourcePosition())
@@ -83,7 +83,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
 
     constructorStatements.add(
         insertIndex,
-        MethodCall.Builder.from(initMethodDescriptor)
+        MethodCall.builderFrom(initMethodDescriptor)
             .setDefaultInstanceQualifier()
             .build()
             .makeStatement(sourcePosition));

@@ -59,7 +59,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
         (DeclaredTypeDescriptor) instanceOfExpression.getTestTypeDescriptor();
 
     // TypeName.$isInstance(expr);
-    return MethodCall.Builder.from(checkTypeDescriptor.getIsInstanceMethodDescriptor())
+    return MethodCall.builderFrom(checkTypeDescriptor.getIsInstanceMethodDescriptor())
         .setArguments(instanceOfExpression.getExpression())
         .build();
   }

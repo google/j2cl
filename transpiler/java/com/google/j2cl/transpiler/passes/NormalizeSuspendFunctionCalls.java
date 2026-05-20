@@ -41,7 +41,7 @@ public class NormalizeSuspendFunctionCalls extends NormalizationPass {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
             if (methodCall.getTarget().isSuspendFunction()) {
-              return MethodCall.Builder.from(methodCall)
+              return methodCall.toBuilder()
                   .setArguments(
                       new ImmutableList.Builder<Expression>()
                           .add(getContinuationParameterInScope().createReference())

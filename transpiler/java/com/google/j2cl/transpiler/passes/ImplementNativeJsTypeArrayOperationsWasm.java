@@ -61,7 +61,7 @@ public class ImplementNativeJsTypeArrayOperationsWasm extends NormalizationPass 
               return binaryExpression;
             }
 
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     TypeDescriptors.get()
                         .javaemulInternalWasmExtern
                         .getMethodDescriptorByName("setArrayAt"))
@@ -84,7 +84,7 @@ public class ImplementNativeJsTypeArrayOperationsWasm extends NormalizationPass 
               return arrayLength;
             }
 
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     TypeDescriptors.get()
                         .javaemulInternalWasmExtern
                         .getMethodDescriptorByName("getArrayLength"))
@@ -98,9 +98,9 @@ public class ImplementNativeJsTypeArrayOperationsWasm extends NormalizationPass 
               return arrayAccess;
             }
 
-            return CastExpression.newBuilder()
+            return CastExpression.builder()
                 .setExpression(
-                    MethodCall.Builder.from(
+                    MethodCall.builderFrom(
                             TypeDescriptors.get()
                                 .javaemulInternalWasmExtern
                                 .getMethodDescriptorByName("getArrayAt"))

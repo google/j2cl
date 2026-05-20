@@ -107,7 +107,7 @@ public class InsertWideningPrimitiveConversionsJ2kt extends NormalizationPass {
     if (expression instanceof NumberLiteral literal) {
       return new NumberLiteral(toTypeDescriptor.toUnboxedType(), literal.getValue());
     }
-    return CastExpression.newBuilder()
+    return CastExpression.builder()
         .setExpression(expression)
         .setCastTypeDescriptor(toTypeDescriptor)
         .build();

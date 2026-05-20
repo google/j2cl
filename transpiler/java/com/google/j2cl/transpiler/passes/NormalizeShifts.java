@@ -55,15 +55,13 @@ public class NormalizeShifts extends NormalizationPass {
                         ? PrimitiveTypes.INT
                         : binaryExpression.getLeftOperand().getTypeDescriptor().toUnboxedType());
 
-            return BinaryExpression.Builder.from(binaryExpression)
-                .setRightOperand(rightOperand)
-                .build();
+            return binaryExpression.toBuilder().setRightOperand(rightOperand).build();
           }
         });
   }
 
   private static Expression castTo(Expression expression, TypeDescriptor toTypeDescriptor) {
-    return CastExpression.newBuilder()
+    return CastExpression.builder()
         .setExpression(expression)
         .setCastTypeDescriptor(toTypeDescriptor)
         .build();

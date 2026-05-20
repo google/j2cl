@@ -134,7 +134,7 @@ public abstract non-sealed class UnionTypeDescriptor extends TypeDescriptor {
       return this;
     }
 
-    return UnionTypeDescriptor.newBuilder()
+    return UnionTypeDescriptor.builder()
         .setUnionTypeDescriptors(
             getUnionTypeDescriptors().stream()
                 .map(TypeDescriptor::toNullable)
@@ -148,7 +148,7 @@ public abstract non-sealed class UnionTypeDescriptor extends TypeDescriptor {
       return this;
     }
 
-    return UnionTypeDescriptor.newBuilder()
+    return UnionTypeDescriptor.builder()
         .setUnionTypeDescriptors(
             getUnionTypeDescriptors().stream()
                 .map(TypeDescriptor::toNonNullable)
@@ -166,7 +166,7 @@ public abstract non-sealed class UnionTypeDescriptor extends TypeDescriptor {
     ImmutableList<TypeDescriptor> unionTypes = getUnionTypeDescriptors();
     ImmutableList<TypeDescriptor> newUnionTypes = replaceTypeDescriptors(unionTypes, fn, seen);
     if (!unionTypes.equals(newUnionTypes)) {
-      return UnionTypeDescriptor.newBuilder().setUnionTypeDescriptors(newUnionTypes).build();
+      return UnionTypeDescriptor.builder().setUnionTypeDescriptors(newUnionTypes).build();
     }
     return this;
   }
@@ -187,7 +187,7 @@ public abstract non-sealed class UnionTypeDescriptor extends TypeDescriptor {
                         replacementTypeArgumentByTypeVariable, seen))
             .collect(ImmutableList.toImmutableList());
 
-    return newBuilder().setUnionTypeDescriptors(specializedUnionTypes).build();
+    return builder().setUnionTypeDescriptors(specializedUnionTypes).build();
   }
 
   @Override
@@ -229,7 +229,7 @@ public abstract non-sealed class UnionTypeDescriptor extends TypeDescriptor {
     return Visitor_UnionTypeDescriptor.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_UnionTypeDescriptor.Builder();
   }
 

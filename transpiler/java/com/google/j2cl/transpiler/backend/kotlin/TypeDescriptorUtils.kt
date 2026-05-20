@@ -120,7 +120,7 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
           // for wildcards and captures should also be done by `toNonNullable()`. The only
           // kotlin output specific piece is the handling of `*`.
           if (hasNullableBounds) {
-            TypeVariable.Builder.from(this).setNullabilityAnnotation(NOT_NULLABLE).build()
+            toBuilder().setNullabilityAnnotation(NOT_NULLABLE).build()
           } else {
             withoutNullabilityAnnotations()
           }
@@ -128,7 +128,7 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
           // Ignore type variables which will be transpiled as star (unbounded wildcard).
           this
         } else {
-          TypeVariable.Builder.from(this)
+          toBuilder()
             .setUpperBoundTypeDescriptorFactory { _ -> upperBoundTypeDescriptor.makeNonNull() }
             // Set some unique ID to avoid conflict with other type variables.
             // TODO(b/246332093): Remove when the bug is fixed, and uniqueId reflects bounds
@@ -141,11 +141,11 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
             .build()
         }
       is IntersectionTypeDescriptor ->
-        IntersectionTypeDescriptor.newBuilder()
+        IntersectionTypeDescriptor.builder()
           .setIntersectionTypeDescriptors(intersectionTypeDescriptors + anyTypeDescriptor)
           .build()
       is UnionTypeDescriptor ->
-        UnionTypeDescriptor.newBuilder()
+        UnionTypeDescriptor.builder()
           .setUnionTypeDescriptors(unionTypeDescriptors.map { it.makeNonNull() })
           .build()
       is PrimitiveTypeDescriptor -> toNonNullable()
@@ -182,7 +182,7 @@ internal val TypeDescriptor.variableHasAmpersandAny: Boolean
 
 internal val arrayComponentTypeParameter: TypeVariable
   get() =
-    TypeVariable.newBuilder()
+    TypeVariable.builder()
       .setName("T")
       .setUpperBoundTypeDescriptorFactory { _ -> nullableAnyTypeDescriptor }
       .setUniqueKey("kotlin.Array:T")

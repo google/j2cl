@@ -48,7 +48,7 @@ public class InsertJsFunctionImplementationConversionCasts extends Normalization
                         && expression.getTypeDescriptor().isJsFunctionImplementation())
                     || (inferredTypeDescriptor.isJsFunctionImplementation()
                         && expression.getTypeDescriptor().isJsFunctionInterface())) {
-                  return JsDocCastExpression.newBuilder()
+                  return JsDocCastExpression.builder()
                       .setCastTypeDescriptor(inferredTypeDescriptor)
                       .setExpression(expression)
                       .build();

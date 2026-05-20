@@ -97,9 +97,7 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
                   // TODO(b/117431082): When information about super interfaces is represented
                   // accurately in the JsEnum type descriptor these casts are statically decidable.
                   // (Comparable) myJsEnum => (Comparable) box(myJsEnum);
-                  return CastExpression.Builder.from(castExpression)
-                      .setExpression(box(innerExpression))
-                      .build();
+                  return castExpression.toBuilder().setExpression(box(innerExpression)).build();
                 }
 
                 return castExpression;
@@ -112,7 +110,7 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
   }
 
   private static Expression unbox(TypeDescriptor toTypeDescriptor, Expression expression) {
-    return JsDocCastExpression.newBuilder()
+    return JsDocCastExpression.builder()
         .setExpression(RuntimeMethods.createEnumsUnboxMethodCall(expression, toTypeDescriptor))
         .setCastTypeDescriptor(toTypeDescriptor)
         .build();

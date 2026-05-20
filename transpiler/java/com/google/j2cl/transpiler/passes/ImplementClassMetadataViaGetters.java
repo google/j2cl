@@ -71,10 +71,10 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
 
     // return Type.class;
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(getGetClassImplMethodDescriptor(type.getTypeDescriptor()))
             .addStatements(
-                ReturnStatement.newBuilder()
+                ReturnStatement.builder()
                     .setExpression(
                         getTypeLiteral(type.getSourcePosition(), type.getTypeDescriptor()))
                     .setSourcePosition(SourcePosition.NONE)
@@ -92,8 +92,10 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
 
   private static MethodDescriptor getGetClassImplMethodDescriptor(
       DeclaredTypeDescriptor typeDescriptor) {
-    return MethodDescriptor.Builder.from(
-            TypeDescriptors.get().javaLangObject.getMethodDescriptor(GET_CLASS_IMPL_METHOD_NAME))
+    return TypeDescriptors.get()
+        .javaLangObject
+        .getMethodDescriptor(GET_CLASS_IMPL_METHOD_NAME)
+        .toBuilder()
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setSynthetic(true)
         .build();
@@ -137,7 +139,7 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
     }
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return MethodCall.Builder.from(
+      return MethodCall.builderFrom(
               TypeDescriptors.get()
                   .javaLangClass
                   .getMethodDescriptor("getArrayType", PrimitiveTypes.INT))
@@ -153,7 +155,7 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
   }
 
   private Expression getClassLiteralMethodCall(TypeDescriptor typeDescriptor) {
-    return MethodCall.Builder.from(getLazyClassMetadataGetterMethodDescriptor(typeDescriptor))
+    return MethodCall.builderFrom(getLazyClassMetadataGetterMethodDescriptor(typeDescriptor))
         .build();
   }
 
@@ -212,7 +214,7 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
   /** Creates expression that instantiates the class object for {@code typeDescriptor}. */
   private Expression getClassObjectCreationExpression(
       String creationMethodName, Expression... arguments) {
-    return MethodCall.Builder.from(
+    return MethodCall.builderFrom(
             TypeDescriptors.get().javaLangClass.getMethodDescriptorByName(creationMethodName))
         .setArguments(arguments)
         .build();
@@ -235,7 +237,7 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
    */
   private static MethodDescriptor getLazyClassMetadataGetterMethodDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor, String name) {
-    return MethodDescriptor.newBuilder()
+    return MethodDescriptor.builder()
         .setName(name)
         .setReturnTypeDescriptor(TypeDescriptors.get().javaLangClass)
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)

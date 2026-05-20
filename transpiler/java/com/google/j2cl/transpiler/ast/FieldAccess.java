@@ -116,33 +116,26 @@ public class FieldAccess extends MemberReference {
   }
 
   @Override
-  Builder createBuilder() {
+  public Builder toBuilder() {
     return new Builder(this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
+  }
+
+  public static Builder builderFrom(FieldDescriptor fieldDescriptor) {
+    return builder().setTarget(fieldDescriptor);
+  }
+
+  public static Builder builderFrom(Field field) {
+    return builderFrom(field.getDescriptor());
   }
 
   /** Builder for FieldAccess. */
   public static class Builder
       extends MemberReference.Builder<Builder, FieldAccess, FieldDescriptor> {
     private SourcePosition sourcePosition = SourcePosition.NONE;
-
-    public static Builder from(FieldDescriptor targetFieldDescriptor) {
-      return newBuilder().setTarget(targetFieldDescriptor);
-    }
-
-    public static Builder from(Field targetField) {
-      return from(targetField.getDescriptor());
-    }
-
-    public static Builder from(FieldAccess fieldAccess) {
-      return newBuilder()
-          .setTarget(fieldAccess.getTarget())
-          .setQualifier(fieldAccess.getQualifier())
-          .setSourcePosition(fieldAccess.getSourcePosition());
-    }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;

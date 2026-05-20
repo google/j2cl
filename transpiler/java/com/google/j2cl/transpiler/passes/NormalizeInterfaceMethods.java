@@ -69,9 +69,9 @@ public class NormalizeInterfaceMethods extends NormalizationPass {
 
   private static Method createInterfaceMethodDeclaration(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(
-            MethodDescriptor.Builder.from(methodDescriptor)
+            methodDescriptor.toBuilder()
                 .setAbstract(true)
                 .setFinal(false)
                 .setDefaultMethod(false)

@@ -38,7 +38,7 @@ public abstract class Annotation {
     return null;
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_Annotation.Builder();
   }
 

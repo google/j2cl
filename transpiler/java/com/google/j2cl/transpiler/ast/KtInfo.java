@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 /** Kotlin member information. */
 @AutoValue
 public abstract class KtInfo {
-  public static final KtInfo NONE = KtInfo.newBuilder().build();
+  public static final KtInfo NONE = KtInfo.builder().build();
 
   public abstract boolean isProperty();
 
@@ -37,7 +37,7 @@ public abstract class KtInfo {
 
   public abstract Builder toBuilder();
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new AutoValue_KtInfo.Builder().setProperty(false).setDisabled(false).setThrows(false);
   }
 

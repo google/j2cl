@@ -71,7 +71,7 @@ public class ForEachStatement extends LoopStatement {
             ImmutableList.of(loopVariable),
             ImmutableList.of(clonedLoopVariable),
             getBody().clone());
-    return ForEachStatement.newBuilder()
+    return ForEachStatement.builder()
         .setLoopVariable(clonedLoopVariable)
         .setIterableExpression(iterableExpression.clone())
         .setBody(clonedBody)
@@ -85,11 +85,11 @@ public class ForEachStatement extends LoopStatement {
   }
 
   @Override
-  Builder toBuilder() {
+  public Builder toBuilder() {
     return new Builder(this);
   }
 
-  public static Builder newBuilder() {
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -97,10 +97,6 @@ public class ForEachStatement extends LoopStatement {
   public static class Builder extends LoopStatement.Builder<Builder, ForEachStatement> {
     private Variable loopVariable;
     private Expression iterableExpression;
-
-    public static Builder from(ForEachStatement forEachStatement) {
-      return new Builder(forEachStatement);
-    }
 
     private Builder() {}
 

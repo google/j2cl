@@ -94,7 +94,7 @@ public class SourceBuilder {
     if (endPosition.equals(startPosition)) {
       return SourcePosition.NONE;
     }
-    return SourcePosition.newBuilder()
+    return SourcePosition.builder()
         .setStartFilePosition(startPosition)
         .setEndFilePosition(endPosition)
         .build();
@@ -111,11 +111,11 @@ public class SourceBuilder {
     // Emit eof marker
     if (sb.length() != 0 || !outputs.isEmpty()) {
       emitWithMapping(
-          SourcePosition.newBuilder()
+          SourcePosition.builder()
               .setStartFilePosition(
-                  FilePosition.newBuilder().setLine(0).setColumn(0).setByteOffset(0).build())
+                  FilePosition.builder().setLine(0).setColumn(0).setByteOffset(0).build())
               .setEndFilePosition(
-                  FilePosition.newBuilder().setLine(0).setColumn(0).setByteOffset(0).build())
+                  FilePosition.builder().setLine(0).setColumn(0).setByteOffset(0).build())
               .build(),
           () -> {});
     }
@@ -240,7 +240,7 @@ public class SourceBuilder {
   }
 
   private FilePosition getCurrentPosition() {
-    return FilePosition.newBuilder()
+    return FilePosition.builder()
         .setLine(currentLine)
         .setColumn(currentColumn)
         .setByteOffset(currentLength)

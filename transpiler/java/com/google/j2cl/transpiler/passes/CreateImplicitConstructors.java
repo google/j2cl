@@ -37,7 +37,7 @@ public class CreateImplicitConstructors extends NormalizationPass {
         AstUtils.createImplicitConstructorDescriptor(type.getTypeDescriptor());
     type.addMember(
         0,
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(methodDescriptor)
             .setSourcePosition(type.getSourcePosition())
             .build());

@@ -140,7 +140,7 @@ public class FunctionExpression extends Expression implements MethodLike {
     List<Variable> clonedParameters = AstUtils.clone(parameters);
     Block clonedBody = AstUtils.replaceDeclarations(parameters, clonedParameters, body.clone());
 
-    return FunctionExpression.newBuilder()
+    return FunctionExpression.builder()
         .setTypeDescriptor(typeDescriptor)
         .setParameters(clonedParameters)
         .setStatements(clonedBody.getStatements())
@@ -154,7 +154,16 @@ public class FunctionExpression extends Expression implements MethodLike {
     return Visitor_FunctionExpression.visit(processor, this);
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return new Builder()
+        .setTypeDescriptor(this.getTypeDescriptor())
+        .setParameters(this.getParameters())
+        .setStatements(this.getBody().getStatements())
+        .setJsAsync(this.isJsAsync)
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -165,15 +174,6 @@ public class FunctionExpression extends Expression implements MethodLike {
     private TypeDescriptor typeDescriptor;
     private boolean isJsAsync;
     private SourcePosition sourcePosition;
-
-    public static Builder from(FunctionExpression expression) {
-      return new Builder()
-          .setTypeDescriptor(expression.getTypeDescriptor())
-          .setParameters(expression.getParameters())
-          .setStatements(expression.getBody().getStatements())
-          .setJsAsync(expression.isJsAsync)
-          .setSourcePosition(expression.getSourcePosition());
-    }
 
     public Builder setStatements(List<Statement> statements) {
       this.statements = new ArrayList<>(statements);
@@ -214,7 +214,7 @@ public class FunctionExpression extends Expression implements MethodLike {
           sourcePosition,
           typeDescriptor,
           parameters,
-          Block.newBuilder().setSourcePosition(sourcePosition).setStatements(statements).build(),
+          Block.builder().setSourcePosition(sourcePosition).setStatements(statements).build(),
           isJsAsync);
     }
   }

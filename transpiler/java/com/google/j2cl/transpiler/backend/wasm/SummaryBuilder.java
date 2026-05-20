@@ -203,7 +203,7 @@ public final class SummaryBuilder {
         new AbstractRewriter() {
           @Override
           public Expression rewriteStringLiteral(StringLiteral stringLiteral) {
-            return MethodCall.Builder.from(
+            return MethodCall.builderFrom(
                     stringLiteralGetterCreator.getOrCreateLiteralMethod(
                         getCurrentType(), stringLiteral, /* synthesizeMethod= */ false))
                 .build();

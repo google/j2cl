@@ -44,8 +44,7 @@ public abstract class BreakOrContinueStatement extends Statement {
     return true;
   }
 
-  public abstract <S extends BreakOrContinueStatement, B extends Builder<S, B>>
-      Builder<S, B> toBuilder();
+  public abstract Builder<?, ?> toBuilder();
 
   /** Abstract builder class for BreakOrContinueStatement. */
   public abstract static class Builder<

@@ -94,7 +94,7 @@ class KotlinParser(private val problems: Problems) {
       val compilationUnits =
         parseFiles(compilerConfiguration, kotlincDisposable, options.targetLabel)
 
-      return Library.newBuilder()
+      return Library.builder()
         .setCompilationUnits(compilationUnits)
         .setDisposableListener { Disposer.dispose(kotlincDisposable) }
         .build()

@@ -76,7 +76,14 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
     return sourcePosition;
   }
 
-  public static Builder newBuilder() {
+  public Builder toBuilder() {
+    return new Builder()
+        .setExpression(this.getExpression())
+        .setTestTypeDescriptor(this.getTestTypeDescriptor())
+        .setSourcePosition(this.getSourcePosition());
+  }
+
+  public static Builder builder() {
     return new Builder();
   }
 
@@ -86,13 +93,6 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
     private TypeDescriptor testTypeDescriptor;
     private SourcePosition sourcePosition;
 
-    public static Builder from(InstanceOfExpression instanceOfExpression) {
-      return new Builder()
-          .setExpression(instanceOfExpression.getExpression())
-          .setTestTypeDescriptor(instanceOfExpression.getTestTypeDescriptor())
-          .setSourcePosition(instanceOfExpression.getSourcePosition());
-    }
-    
     @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;

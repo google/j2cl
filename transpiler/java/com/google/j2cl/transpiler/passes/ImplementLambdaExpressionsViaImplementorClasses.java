@@ -13,7 +13,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -98,7 +97,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
                     extendAbstractLambdaAdaptorClass);
 
             // new A$$LambdaImplementor(...)
-            return NewInstance.newBuilder()
+            return NewInstance.builder()
                 // Set the qualifier since it is expected that expressions after the early
                 // qualifier resolution be explicitly qualified.
                 .setQualifier(
@@ -150,7 +149,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
               // super classes of outer classes are normalized to have static dispatch and the
               // qualifier is changed to ThisReference. So here we reestablish the invariant that
               // has been set in NormalizeSuperMemberReferences.
-              return MethodCall.Builder.from(methodCall)
+              return methodCall.toBuilder()
                   .setQualifier(new ThisReference(typeDescriptor, true))
                   .setStaticDispatch(true)
                   .build();
@@ -226,16 +225,14 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
         parameters.add(lambdaParameter);
       } else {
         Variable newParameter =
-            Variable.Builder.from(lambdaParameter)
-                .setTypeDescriptor(functionalMethodParameterType)
-                .build();
+            lambdaParameter.toBuilder().setTypeDescriptor(functionalMethodParameterType).build();
         parameters.add(newParameter);
         lambdaParameter.setParameter(false);
         body.add(
-            VariableDeclarationExpression.newBuilder()
+            VariableDeclarationExpression.builder()
                 .addVariableDeclaration(
                     lambdaParameter,
-                    CastExpression.newBuilder()
+                    CastExpression.builder()
                         .setExpression(newParameter.createReference())
                         .setCastTypeDescriptor(functionalMethodParameterType)
                         .build())
@@ -246,7 +243,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
 
     body.addAll(functionExpression.getBody().getStatements());
 
-    return Method.newBuilder()
+    return Method.builder()
         .setMethodDescriptor(lambdaMethodDescriptor)
         .setParameters(parameters)
         .addStatements(body)

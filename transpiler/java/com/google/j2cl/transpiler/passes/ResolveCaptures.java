@@ -210,14 +210,14 @@ public class ResolveCaptures extends NormalizationPass {
                     originalVariable.getTypeDescriptor(), initialValue);
 
             Variable referenceWrapperVariable =
-                Variable.Builder.from(originalVariable)
+                originalVariable.toBuilder()
                     .setTypeDescriptor(refWrappingCall.getTypeDescriptor())
                     .build();
             checkState(
                 referenceVariableByVariable.put(originalVariable, referenceWrapperVariable)
                     == null);
 
-            return VariableDeclarationFragment.newBuilder()
+            return VariableDeclarationFragment.builder()
                 .setVariable(referenceWrapperVariable)
                 .setInitializer(refWrappingCall)
                 .build();
@@ -235,7 +235,7 @@ public class ResolveCaptures extends NormalizationPass {
             }
             Variable referenceWrapperVariable = referenceVariableByVariable.get(originalVariable);
 
-            return FieldAccess.newBuilder()
+            return FieldAccess.builder()
                 .setQualifier(referenceWrapperVariable.createReference())
                 .setTarget(
                     ((DeclaredTypeDescriptor) referenceWrapperVariable.getTypeDescriptor())
@@ -268,9 +268,8 @@ public class ResolveCaptures extends NormalizationPass {
             for (Variable variable :
                 capturedVariablesByTypeDeclaration.get(type.getDeclaration())) {
               type.addMember(
-                  Field.Builder.from(
-                          FieldDescriptor.Builder.from(
-                                  getFieldDescriptorForCapture(type.getDeclaration(), variable))
+                  Field.builderFrom(
+                          getFieldDescriptorForCapture(type.getDeclaration(), variable).toBuilder()
                               .build())
                       .setSourcePosition(type.getSourcePosition())
                       .build());
@@ -278,7 +277,7 @@ public class ResolveCaptures extends NormalizationPass {
             if (type.getDeclaration().isCapturingEnclosingInstance()) {
               type.addMember(
                   0,
-                  Field.Builder.from(
+                  Field.builderFrom(
                           type.getTypeDescriptor().getFieldDescriptorForEnclosingInstance())
                       .setSourcePosition(type.getSourcePosition())
                       .build());
@@ -309,7 +308,7 @@ public class ResolveCaptures extends NormalizationPass {
 
             // Pass the captured variables.
             Invocation.Builder<?, ?> invocationBuilder =
-                Invocation.Builder.from(invocation)
+                invocation.toBuilder()
                     .addArgumentsAndUpdateDescriptor(
                         0,
                         captures.stream()
@@ -345,7 +344,7 @@ public class ResolveCaptures extends NormalizationPass {
             }
 
             TypeDeclaration typeDeclaration = getCurrentType().getDeclaration();
-            Method.Builder methodBuilder = Method.Builder.from(method);
+            Method.Builder methodBuilder = method.toBuilder();
             boolean isDelegatingConstructor = AstUtils.hasThisCall(method);
             Map<Variable, Variable> parameterByCapturedVariable = new HashMap<>();
 
@@ -485,7 +484,7 @@ public class ResolveCaptures extends NormalizationPass {
               return variableReference;
             }
 
-            return FieldAccess.newBuilder()
+            return FieldAccess.builder()
                 .setTarget(
                     getFieldDescriptorForCapture(getCurrentType().getDeclaration(), variable))
                 .setQualifier(new ThisReference(getCurrentType().getTypeDescriptor()))
@@ -519,7 +518,7 @@ public class ResolveCaptures extends NormalizationPass {
         (DeclaredTypeDescriptor) currentExpression.getTypeDescriptor();
     while (!currentTypeDescriptor.hasSameRawType(targetTypeDescriptor)) {
       currentExpression =
-          FieldAccess.newBuilder()
+          FieldAccess.builder()
               .setTarget(currentTypeDescriptor.getFieldDescriptorForEnclosingInstance())
               .setQualifier(currentExpression)
               .build();
@@ -532,7 +531,7 @@ public class ResolveCaptures extends NormalizationPass {
   /** Returns the FieldDescriptor corresponding to the captured variable. */
   private static FieldDescriptor getFieldDescriptorForCapture(
       TypeDeclaration typeDeclaration, Variable capturedVariable) {
-    return FieldDescriptor.newBuilder()
+    return FieldDescriptor.builder()
         .setEnclosingTypeDescriptor(typeDeclaration.toDescriptor())
         .setName("$captured_" + capturedVariable.getName())
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
@@ -545,7 +544,7 @@ public class ResolveCaptures extends NormalizationPass {
 
   /** Creates a variable that matches a field definition. */
   private static Variable createParameterMatchingField(FieldDescriptor fieldDescriptor) {
-    return Variable.newBuilder()
+    return Variable.builder()
         .setName(fieldDescriptor.getOrigin().getPrefix() + fieldDescriptor.getName())
         .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
         .setParameter(true)

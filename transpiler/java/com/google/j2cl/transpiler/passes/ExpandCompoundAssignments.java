@@ -58,7 +58,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
                 || !needsExpansion(expression)) {
               return expression;
             }
-            return PrefixExpression.Builder.from(expression)
+            return PrefixExpression.builderFrom(expression)
                 .setOperator(expression.getOperator().toPrefixOperator())
                 .build();
           }

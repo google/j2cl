@@ -60,13 +60,13 @@ public class InsertExceptionConversions extends NormalizationPass {
           @Override
           public Node rewriteCatchClause(CatchClause catchClause) {
             Variable jsExceptionVariable =
-                Variable.newBuilder()
+                Variable.builder()
                     .setName("__$jsexc")
                     .setTypeDescriptor(TypeDescriptors.get().nativeObject)
                     .build();
 
             CatchClause newCatchClause =
-                CatchClause.newBuilder()
+                CatchClause.builder()
                     .setExceptionVariable(jsExceptionVariable)
                     .setBody(catchClause.getBody())
                     .build();
@@ -77,7 +77,7 @@ public class InsertExceptionConversions extends NormalizationPass {
                       "toJava", jsExceptionVariable.createReference());
               Variable javaExceptionVariable = catchClause.getExceptionVariable();
               VariableDeclarationExpression declaration =
-                  VariableDeclarationExpression.newBuilder()
+                  VariableDeclarationExpression.builder()
                       .addVariableDeclaration(javaExceptionVariable, toJavaCall)
                       .build();
               newCatchClause
@@ -94,7 +94,7 @@ public class InsertExceptionConversions extends NormalizationPass {
             MethodCall toJsCall =
                 RuntimeMethods.createExceptionsMethodCall("toJs", throwStatement.getExpression());
 
-            return ThrowStatement.Builder.from(throwStatement).setExpression(toJsCall).build();
+            return throwStatement.toBuilder().setExpression(toJsCall).build();
           }
         });
   }

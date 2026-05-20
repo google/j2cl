@@ -45,7 +45,7 @@ public class NormalizeControlStatements extends NormalizationPass {
                     ? elseStatement
                     : elseStatement.ensureBlock();
 
-            return IfStatement.newBuilder()
+            return IfStatement.builder()
                 .setSourcePosition(ifStatement.getSourcePosition())
                 .setConditionExpression(ifStatement.getConditionExpression())
                 .setThenStatement(thenStatement)
@@ -60,7 +60,7 @@ public class NormalizeControlStatements extends NormalizationPass {
               return loopStatement;
             }
 
-            return LoopStatement.Builder.from(loopStatement).setBody(body.ensureBlock()).build();
+            return loopStatement.toBuilder().setBody(body.ensureBlock()).build();
           }
         });
   }

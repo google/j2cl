@@ -64,7 +64,7 @@ public final class AddNothingReturnStatements extends NormalizationPass {
               return expressionStatement;
             }
 
-            return ReturnStatement.newBuilder()
+            return ReturnStatement.builder()
                 .setExpression(expressionStatement.getExpression())
                 .setSourcePosition(expressionStatement.getSourcePosition())
                 .build();

@@ -108,7 +108,7 @@ public class ImplementRecordClasses extends NormalizationPass {
           .anyMatch(f -> f.getDescriptor().getName().equals(field.getName()))) {
         continue;
       }
-      type.addMember(Field.Builder.from(field).setSourcePosition(type.getSourcePosition()).build());
+      type.addMember(Field.builderFrom(field).setSourcePosition(type.getSourcePosition()).build());
     }
   }
 
@@ -124,12 +124,12 @@ public class ImplementRecordClasses extends NormalizationPass {
         continue;
       }
       type.addMember(
-          Method.newBuilder()
+          Method.builder()
               .setMethodDescriptor(fieldAccessorDescriptor)
               .addStatements(
-                  ReturnStatement.newBuilder()
+                  ReturnStatement.builder()
                       .setExpression(
-                          FieldAccess.Builder.from(field)
+                          FieldAccess.builderFrom(field)
                               .setQualifier(new ThisReference(type.getTypeDescriptor()))
                               .build())
                       .setSourcePosition(SourcePosition.NONE)
@@ -157,7 +157,7 @@ public class ImplementRecordClasses extends NormalizationPass {
             .orElse(null);
     if (canonicalConstructor == null) {
       canonicalConstructor =
-          Method.newBuilder()
+          Method.builder()
               .setMethodDescriptor(canonicalConstructorDescriptor)
               .setParameters(createParameters(recordFields))
               .setSourcePosition(type.getSourcePosition())
@@ -221,7 +221,7 @@ public class ImplementRecordClasses extends NormalizationPass {
   }
 
   private static Variable createParameter(FieldDescriptor fieldDescriptor) {
-    return Variable.newBuilder()
+    return Variable.builder()
         .setName(fieldDescriptor.getName())
         .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
         .setParameter(true)
@@ -242,10 +242,10 @@ public class ImplementRecordClasses extends NormalizationPass {
         () -> {
           Expression qualifier =
               RuntimeMethods.createGetClassMethodCall(new ThisReference(type.getTypeDescriptor()));
-          return BinaryExpression.newBuilder()
+          return BinaryExpression.builder()
               .setOperator(BinaryOperator.PLUS)
               .setLeftOperand(
-                  MethodCall.Builder.from(
+                  MethodCall.builderFrom(
                           TypeDescriptors.get().javaLangClass.getMethodDescriptor("getName"))
                       .setQualifier(qualifier)
                       .build())
@@ -262,28 +262,28 @@ public class ImplementRecordClasses extends NormalizationPass {
         parameters -> {
           Variable parameter = parameters.get(0);
           Variable otherVariable =
-              Variable.newBuilder()
+              Variable.builder()
                   .setName("$other")
                   .setTypeDescriptor(type.getTypeDescriptor())
                   .build();
           return ImmutableList.<Statement>of(
               // if (!(other instanceof RecordClassType $other)) return false;
-              IfStatement.newBuilder()
+              IfStatement.builder()
                   .setConditionExpression(
-                      PatternMatchExpression.newBuilder()
+                      PatternMatchExpression.builder()
                           .setExpression(parameter.createReference())
                           .setPattern(new BindingPattern(otherVariable))
                           .build()
                           .prefixNot())
                   .setThenStatement(
-                      ReturnStatement.newBuilder()
+                      ReturnStatement.builder()
                           .setExpression(BooleanLiteral.get(false))
                           .setSourcePosition(SourcePosition.NONE)
                           .build())
                   .setSourcePosition(SourcePosition.NONE)
                   .build(),
               // return Arrays.equals({this.a, this.b}, {$other.a, $other.b});
-              ReturnStatement.newBuilder()
+              ReturnStatement.builder()
                   .setExpression(
                       RuntimeMethods.createArraysEqualsMethodCall(
                           createRecordFieldAccessList(type),
@@ -301,7 +301,7 @@ public class ImplementRecordClasses extends NormalizationPass {
         methodName,
         unusedParameters ->
             ImmutableList.of(
-                ReturnStatement.newBuilder()
+                ReturnStatement.builder()
                     .setExpression(returnExpression.get())
                     .setSourcePosition(SourcePosition.NONE)
                     .build()));
@@ -322,7 +322,7 @@ public class ImplementRecordClasses extends NormalizationPass {
     // synthetic because the usage sites have to agree, and they don't have the information of
     // whether they are synthesized or not.
     MethodDescriptor generatedMethodDescriptor =
-        MethodDescriptor.Builder.from(methodDescriptor)
+        methodDescriptor.toBuilder()
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setDeclarationDescriptor(null)
             .setNative(false)
@@ -330,7 +330,7 @@ public class ImplementRecordClasses extends NormalizationPass {
     List<Variable> parameters =
         AstUtils.createParameterVariables(methodDescriptor.getParameterTypeDescriptors());
     type.addMember(
-        Method.newBuilder()
+        Method.builder()
             .setMethodDescriptor(generatedMethodDescriptor)
             .setParameters(parameters)
             .setSourcePosition(type.getSourcePosition())
@@ -346,7 +346,7 @@ public class ImplementRecordClasses extends NormalizationPass {
     DeclaredTypeDescriptor recordTypeDescriptor =
         (DeclaredTypeDescriptor) qualifier.getTypeDescriptor();
     return getRecordFields(recordTypeDescriptor).stream()
-        .map(field -> FieldAccess.Builder.from(field).setQualifier(qualifier.clone()).build())
+        .map(field -> FieldAccess.builderFrom(field).setQualifier(qualifier.clone()).build())
         .collect(toImmutableList());
   }
 

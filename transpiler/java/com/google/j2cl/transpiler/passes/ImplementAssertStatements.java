@@ -50,7 +50,7 @@ public class ImplementAssertStatements extends NormalizationPass {
             if (!useWasmDebugFlag) {
               return assertMethodCall;
             }
-            return IfStatement.newBuilder()
+            return IfStatement.builder()
                 .setConditionExpression(RuntimeMethods.createAreWasmAssertionsEnabledMethodCall())
                 .setThenStatement(assertMethodCall)
                 .setSourcePosition(sourcePosition)

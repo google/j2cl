@@ -88,7 +88,7 @@ public class InsertCastsForBoxedTypes extends NormalizationPass {
                                 inferredParameterTypeDescriptors.get(i),
                                 arguments.get(i)))
                     .collect(toImmutableList());
-            return Invocation.Builder.from(invocation).setArguments(rewrittenArguments).build();
+            return invocation.toBuilder().setArguments(rewrittenArguments).build();
           }
         });
   }
@@ -103,7 +103,7 @@ public class InsertCastsForBoxedTypes extends NormalizationPass {
     return declaredParameterTypeDescriptor instanceof DeclaredTypeDescriptor
             && isBoxed(argumentTypeDescriptor)
             && !argumentTypeDescriptor.equals(inferredParameterTypeDescriptor)
-        ? CastExpression.newBuilder()
+        ? CastExpression.builder()
             .setExpression(argument)
             .setCastTypeDescriptor(inferredParameterTypeDescriptor)
             .build()
