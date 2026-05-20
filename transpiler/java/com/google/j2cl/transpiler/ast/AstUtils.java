@@ -55,7 +55,7 @@ public final class AstUtils {
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setName(MethodDescriptor.LOAD_MODULES_METHOD_NAME)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
-        .setOriginalJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(typeDescriptor.isNative() ? JsInfo.OVERLAY : JsInfo.RAW)
         .build();
   }
 

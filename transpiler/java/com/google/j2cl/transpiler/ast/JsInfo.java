@@ -57,11 +57,10 @@ public abstract class JsInfo {
   public static final JsInfo NONE_ASYNC =
       newBuilder().setJsMemberType(JsMemberType.NONE).setJsAsync(true).build();
 
+  public static final JsInfo OVERLAY =
+      newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(true).build();
+
   public static final JsInfo RAW = newBuilder().setJsMemberType(JsMemberType.METHOD).build();
-  // Used to prevent name mangling in a couple of special methods that are considered overlays
-  // (e.g. clints in native types)
-  public static final JsInfo RAW_OVERLAY =
-      newBuilder().setJsMemberType(JsMemberType.METHOD).setJsOverlay(true).build();
   public static final JsInfo RAW_CTOR =
       newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build();
   public static final JsInfo RAW_FIELD =

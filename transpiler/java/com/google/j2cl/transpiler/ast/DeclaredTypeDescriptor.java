@@ -396,7 +396,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
         .setEnclosingTypeDescriptor(this)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
-        .setOriginalJsInfo(isNative() || isJsFunctionInterface() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(isNative() || isJsFunctionInterface() ? JsInfo.OVERLAY : JsInfo.RAW)
         .setStatic(true)
         .build();
   }
@@ -408,7 +408,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         .setEnclosingTypeDescriptor(this)
         .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
-        .setOriginalJsInfo(isNative() || isJsFunctionInterface() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(isNative() || isJsFunctionInterface() ? JsInfo.OVERLAY : JsInfo.RAW)
         .setStatic(true)
         .build();
   }

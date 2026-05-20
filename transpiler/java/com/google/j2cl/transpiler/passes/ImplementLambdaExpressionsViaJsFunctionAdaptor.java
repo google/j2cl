@@ -219,7 +219,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
       DeclaredTypeDescriptor enclosingTypeDescriptor, TypeDescriptor jsFunctionTypeDescriptor) {
     return MethodDescriptor.newBuilder()
         .setName("$adapt")
-        .setOriginalJsInfo(enclosingTypeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(enclosingTypeDescriptor.isNative() ? JsInfo.OVERLAY : JsInfo.RAW)
         .setStatic(true)
         .setParameterTypeDescriptors(jsFunctionTypeDescriptor)
         .setTypeParameterTypeDescriptors(jsFunctionTypeDescriptor.getAllTypeVariables())
