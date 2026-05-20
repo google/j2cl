@@ -58,29 +58,27 @@ public class AnonymousClassWithNullableTypeArgument {
     };
   }
 
-  // TODO(b/440316295): Uncomment when fixed
-  // public static void testImplicitTypeArguments_inferredFromParameters() {
-  //   AnonymousClassWithNullableTypeArgument.<Supplier<@Nullable Object>>accept(
-  //       new Supplier<>() {
-  //         @Override
-  //         public @Nullable Object get() {
-  //           return null;
-  //         }
-  //       });
-  // }
+  public static void testImplicitTypeArguments_inferredFromParameters() {
+    AnonymousClassWithNullableTypeArgument.<Supplier<@Nullable Object>>accept(
+        new Supplier<>() {
+          @Override
+          public @Nullable Object get() {
+            return null;
+          }
+        });
+  }
 
-  // private static <T extends @Nullable Object> void accept(T t) {}
+  private static <T extends @Nullable Object> void accept(T t) {}
 
-  // TODO(b/440316295): Uncomment when fixed
-  // public static Supplier<@Nullable Object>
-  //     testImplicitTypeArguments_inferredFromMembersAndReturnType() {
-  //   return new Supplier<>() {
-  //     @Override
-  //     public @Nullable Object get() {
-  //       return null;
-  //     }
-  //   };
-  // }
+  public static Supplier<@Nullable Object>
+      testImplicitTypeArguments_inferredFromMembersAndReturnType() {
+    return new Supplier<>() {
+      @Override
+      public @Nullable Object get() {
+        return null;
+      }
+    };
+  }
 
   // TODO(b/440316295): Uncomment when fixed
   // public static void testImplicitTypeArguments_inferredFromMembers() {
@@ -102,51 +100,48 @@ public class AnonymousClassWithNullableTypeArgument {
   //   };
   // }
 
-  // TODO(b/440316295): Uncomment when fixed
-  // public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierDeclaration()
-  // {
-  //   Supplier<@Nullable String> supplier =
-  //       new SupplierImpl<>() {
-  //         @Override
-  //         public @Nullable String get() {
-  //           return null;
-  //         }
-  //       };
-  // }
-  //
-  // public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierAssignment() {
-  //   Supplier<@Nullable String> supplier;
-  //   supplier =
-  //       new SupplierImpl<>() {
-  //         @Override
-  //         public @Nullable String get() {
-  //           return null;
-  //         }
-  //       };
-  // }
-  //
-  // public static Supplier<@Nullable String>
-  //     testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierReturnType() {
-  //   return new SupplierImpl<>() {
-  //     @Override
-  //     public @Nullable String get() {
-  //       return null;
-  //     }
-  //   };
-  // }
-  //
-  // public static void
-  // testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierParameterType() {
-  //   acceptSupplierOfNullableString(
-  //       new SupplierImpl<>() {
-  //         @Override
-  //         public @Nullable String get() {
-  //           return null;
-  //         }
-  //       });
-  // }
-  //
-  // public static void acceptSupplierOfNullableString(Supplier<@Nullable String> supplier) {}
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierDeclaration() {
+    Supplier<@Nullable String> supplier =
+        new SupplierImpl<>() {
+          @Override
+          public @Nullable String get() {
+            return null;
+          }
+        };
+  }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierAssignment() {
+    Supplier<@Nullable String> supplier;
+    supplier =
+        new SupplierImpl<>() {
+          @Override
+          public @Nullable String get() {
+            return null;
+          }
+        };
+  }
+
+  public static Supplier<@Nullable String>
+      testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierReturnType() {
+    return new SupplierImpl<>() {
+      @Override
+      public @Nullable String get() {
+        return null;
+      }
+    };
+  }
+
+  public static void testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierParameterType() {
+    acceptSupplierOfNullableString(
+        new SupplierImpl<>() {
+          @Override
+          public @Nullable String get() {
+            return null;
+          }
+        });
+  }
+
+  public static void acceptSupplierOfNullableString(Supplier<@Nullable String> supplier) {}
 
   public static void testImplicitTypeArguments_inferredFromArgument() {
     new Holder<>(nullableString()) {};

@@ -44,6 +44,7 @@ import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
@@ -631,6 +632,14 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
    */
   private static Expression propagateNullabilityToExpression(
       Expression expression, TypeDescriptor expectedType) {
+    if (expression instanceof NewInstance newInstance
+        && newInstance.getTypeArguments().isEmpty()
+        && newInstance.getAnonymousInnerClass() != null) {
+      // Propagate nullability to the anonymous class independently of the propagation to the
+      // NewInstance expression.
+      return propagateNullabilityToAnonymousClass(newInstance, expectedType);
+    }
+
     TypeDescriptor propagatedTypeDescriptor =
         propagateNullabilityTo(expression.getTypeDescriptor(), expectedType, ImmutableSet.of());
     if (propagatedTypeDescriptor == expression.getTypeDescriptor()) {
@@ -643,8 +652,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               .build();
       case NewInstance newInstance
           when propagatedTypeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
-              && newInstance.getTypeArguments().isEmpty()
-              && newInstance.getAnonymousInnerClass() == null ->
+              && newInstance.getTypeArguments().isEmpty() ->
           NewInstance.Builder.from(newInstance)
               .setTarget(
                   MethodDescriptor.Builder.from(newInstance.getTarget())
@@ -653,6 +661,47 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
               .build();
       default -> expression;
     };
+  }
+
+  /**
+   * Propagates nullability to an anonymous class's superclass and interfaces from the expected
+   * type.
+   */
+  private static NewInstance propagateNullabilityToAnonymousClass(
+      NewInstance newInstance, TypeDescriptor expectedType) {
+    if (!(expectedType instanceof DeclaredTypeDescriptor expectedDeclaredType)) {
+      return newInstance;
+    }
+
+    Type anonymousClass = newInstance.getAnonymousInnerClass();
+    List<DeclaredTypeDescriptor> superInterfaces =
+        anonymousClass.getSuperInterfaceTypeDescriptors();
+    if (superInterfaces.isEmpty()) {
+      // Propagate to superclass
+      DeclaredTypeDescriptor superClass = anonymousClass.getSuperTypeDescriptor();
+      DeclaredTypeDescriptor newSuperClass =
+          propagateNullabilityTo(superClass, expectedDeclaredType, ImmutableSet.of());
+      if (!newSuperClass.equals(superClass)) {
+        anonymousClass.setSuperTypeDescriptor(newSuperClass);
+        // Even though the type was updated directly in the AST, create a new NewInstance expression
+        // to signal that propagation has made a change.
+        return NewInstance.Builder.from(newInstance).setAnonymousInnerClass(anonymousClass).build();
+      }
+    } else {
+      // Propagate to interfaces
+      ImmutableList<DeclaredTypeDescriptor> newSuperInterfaces =
+          superInterfaces.stream()
+              .map(it -> propagateNullabilityTo(it, expectedDeclaredType, ImmutableSet.of()))
+              .collect(toImmutableList());
+      if (!newSuperInterfaces.equals(superInterfaces)) {
+        anonymousClass.setSuperInterfaceTypeDescriptors(newSuperInterfaces);
+        // Even though the type was updated directly in the AST, create a new NewInstance expression
+        // to signal that propagation has made a change.
+        return NewInstance.Builder.from(newInstance).setAnonymousInnerClass(anonymousClass).build();
+      }
+    }
+
+    return newInstance;
   }
 
   /**
@@ -790,19 +839,22 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
    * Propagates nullability from {@code fromTypeDescriptor} to {@code toTypeDescriptor} assuming
    * that {@code fromTypeDescriptor} is assignable to {@code toTypeDescriptor}.
    */
-  private static TypeDescriptor propagateNullabilityTo(
-      TypeDescriptor to, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
+  @SuppressWarnings("unchecked")
+  private static <T extends TypeDescriptor> T propagateNullabilityTo(
+      T to, TypeDescriptor from, ImmutableSet<TypeVariable> seen) {
     if (to.equals(from)) {
       return to;
     }
 
     return switch (to) {
       case DeclaredTypeDescriptor descriptor ->
-          propagateNullabilityToDeclared(descriptor, from, seen);
+          (T) propagateNullabilityToDeclared(descriptor, from, seen);
 
-      case ArrayTypeDescriptor descriptor -> propagateNullabilityToArray(descriptor, from, seen);
+      case ArrayTypeDescriptor descriptor ->
+          (T) propagateNullabilityToArray(descriptor, from, seen);
 
-      case TypeVariable typeVariable -> propagateNullabilityToVariable(typeVariable, from, seen);
+      case TypeVariable typeVariable ->
+          (T) propagateNullabilityToVariable(typeVariable, from, seen);
 
       // TODO(b/406815802): Handle intersection and union type descriptors, if necessary.
       default -> to;
@@ -858,7 +910,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
         // as supertype (toDeclaredAsSuper). Following the example above, from Child<...> we
         // find Parent<...> and we can propagate now from Parent<String>.
         DeclaredTypeDescriptor propagatedSuper =
-            (DeclaredTypeDescriptor) propagateNullabilityTo(toDeclaredAsSuper, fromDeclared, seen);
+            propagateNullabilityTo(toDeclaredAsSuper, fromDeclared, seen);
 
         // Get the supertype of the type to propagate to starting from the declaration, to see what
         // is the parameterization if the supertype.

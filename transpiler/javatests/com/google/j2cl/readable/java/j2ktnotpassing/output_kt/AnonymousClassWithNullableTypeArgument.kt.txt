@@ -19,7 +19,6 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
-import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.String
 import kotlin.Suppress
@@ -27,29 +26,6 @@ import kotlin.jvm.JvmStatic
 
 open class AnonymousClassWithNullableTypeArgument {
  companion object {
-  @JvmStatic
-  fun testImplicitTypeArguments_inferredFromParameters() {
-   AnonymousClassWithNullableTypeArgument.accept<Supplier<Any?>>(
-    object : Supplier<Any> {
-     override fun get(): Any? {
-      return null
-     }
-    } as Supplier<Any?>,
-   )
-  }
-  
-  @JvmStatic
-  private fun <T> accept(t: T) {}
-  
-  @JvmStatic
-  fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> {
-   return object : Supplier<Any> {
-    override fun get(): Any? {
-     return null
-    }
-   } as Supplier<Any?>
-  }
-  
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromMembers() {
    object : Supplier<Any> {
@@ -67,58 +43,10 @@ open class AnonymousClassWithNullableTypeArgument {
     }
    }
   }
-  
-  @JvmStatic
-  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierDeclaration() {
-   val supplier: Supplier<String?> = object : SupplierImpl<String>() {
-    override fun get(): String? {
-     return null
-    }
-   } as Supplier<String?>
-  }
-  
-  @JvmStatic
-  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierAssignment() {
-   var supplier: Supplier<String?>? = null
-   supplier = object : SupplierImpl<String>() {
-    override fun get(): String? {
-     return null
-    }
-   } as Supplier<String?>?
-  }
-  
-  @JvmStatic
-  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierReturnType(): Supplier<String?> {
-   return object : SupplierImpl<String>() {
-    override fun get(): String? {
-     return null
-    }
-   } as Supplier<String?>
-  }
-  
-  @JvmStatic
-  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierParameterType() {
-   AnonymousClassWithNullableTypeArgument.acceptSupplierOfNullableString(
-    object : SupplierImpl<String>() {
-     override fun get(): String? {
-      return null
-     }
-    } as Supplier<String?>,
-   )
-  }
-  
-  @JvmStatic
-  fun acceptSupplierOfNullableString(supplier: Supplier<String?>) {}
  }
  
  fun interface Supplier<V> {
   fun get(): V
- }
- 
- open class SupplierImpl<V>: Supplier<V> {
-  override fun get(): V {
-   throw RuntimeException()
-  }
  }
  
  abstract class AbstractHolder<V> {

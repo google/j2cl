@@ -38,6 +38,71 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
+  fun testImplicitTypeArguments_inferredFromParameters() {
+   AnonymousClassWithNullableTypeArgument.accept<Supplier<Any?>>(
+    object : Supplier<Any?> {
+     override fun get(): Any? {
+      return null
+     }
+    } as Supplier<Any?>,
+   )
+  }
+  
+  @JvmStatic
+  private fun <T> accept(t: T) {}
+  
+  @JvmStatic
+  fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> {
+   return object : Supplier<Any?> {
+    override fun get(): Any? {
+     return null
+    }
+   } as Supplier<Any?>
+  }
+  
+  @JvmStatic
+  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierDeclaration() {
+   val supplier: Supplier<String?> = object : SupplierImpl<String?>() {
+    override fun get(): String? {
+     return null
+    }
+   } as Supplier<String?>
+  }
+  
+  @JvmStatic
+  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierAssignment() {
+   var supplier: Supplier<String?>? = null
+   supplier = object : SupplierImpl<String?>() {
+    override fun get(): String? {
+     return null
+    }
+   } as Supplier<String?>?
+  }
+  
+  @JvmStatic
+  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierReturnType(): Supplier<String?> {
+   return object : SupplierImpl<String?>() {
+    override fun get(): String? {
+     return null
+    }
+   } as Supplier<String?>
+  }
+  
+  @JvmStatic
+  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierParameterType() {
+   AnonymousClassWithNullableTypeArgument.acceptSupplierOfNullableString(
+    object : SupplierImpl<String?>() {
+     override fun get(): String? {
+      return null
+     }
+    } as Supplier<String?>,
+   )
+  }
+  
+  @JvmStatic
+  fun acceptSupplierOfNullableString(supplier: Supplier<String?>) {}
+  
+  @JvmStatic
   fun testImplicitTypeArguments_inferredFromArgument() {
    object : Holder<String>(
     AnonymousClassWithNullableTypeArgument.nullableString()!!,
@@ -46,7 +111,7 @@ open class AnonymousClassWithNullableTypeArgument {
   
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromArgumentAndReturnType(): Holder<String?> {
-   return object : Holder<String>("Supplier") {} as Holder<String?>
+   return object : Holder<String?>("Supplier") {} as Holder<String?>
   }
   
   @JvmStatic
@@ -63,24 +128,24 @@ open class AnonymousClassWithNullableTypeArgument {
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromDeclaration() {
-   val emptyClass: ParameterizedEmptyClass<String?> = object : ParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>
+   val emptyClass: ParameterizedEmptyClass<String?> = object : ParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>
   }
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromAssignment() {
    var emptyClass: ParameterizedEmptyClass<String?>? = null
-   emptyClass = object : ParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>?
+   emptyClass = object : ParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>?
   }
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromReturnType(): ParameterizedEmptyClass<String?> {
-   return object : ParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>
+   return object : ParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>
   }
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromParameterType() {
    AnonymousClassWithNullableTypeArgument.acceptOfNullableString(
-    object : ParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>,
+    object : ParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>,
    )
   }
   
@@ -89,24 +154,24 @@ open class AnonymousClassWithNullableTypeArgument {
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromDeclaration() {
-   val emptyClass: ParameterizedEmptyInterface<String?> = object : ParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>
+   val emptyClass: ParameterizedEmptyInterface<String?> = object : ParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>
   }
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromAssignment() {
    var emptyClass: ParameterizedEmptyInterface<String?>? = null
-   emptyClass = object : ParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>?
+   emptyClass = object : ParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>?
   }
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromReturnType(): ParameterizedEmptyInterface<String?> {
-   return object : ParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>
+   return object : ParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>
   }
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromParameterType() {
    AnonymousClassWithNullableTypeArgument.acceptOfNullableString(
-    object : ParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>,
+    object : ParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>,
    )
   }
   
@@ -134,47 +199,47 @@ open class AnonymousClassWithNullableTypeArgument {
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeDeclaration() {
-   val emptyClass: ParameterizedEmptyClass<String?> = object : SubParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>
+   val emptyClass: ParameterizedEmptyClass<String?> = object : SubParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>
   }
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeAssignment() {
    var emptyClass: ParameterizedEmptyClass<String?>? = null
-   emptyClass = object : SubParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>?
+   emptyClass = object : SubParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>?
   }
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeReturnType(): ParameterizedEmptyClass<String?> {
-   return object : SubParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>
+   return object : SubParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>
   }
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeParameterType() {
    AnonymousClassWithNullableTypeArgument.acceptOfNullableString(
-    object : SubParameterizedEmptyClass<String>() {} as ParameterizedEmptyClass<String?>,
+    object : SubParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>,
    )
   }
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromSupertypeDeclaration() {
-   val emptyClass: ParameterizedEmptyInterface<String?> = object : SubParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>
+   val emptyClass: ParameterizedEmptyInterface<String?> = object : SubParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>
   }
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromSupertypeAssignment() {
    var emptyClass: ParameterizedEmptyInterface<String?>? = null
-   emptyClass = object : SubParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>?
+   emptyClass = object : SubParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>?
   }
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromSupertypeReturnType(): ParameterizedEmptyInterface<String?> {
-   return object : SubParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>
+   return object : SubParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>
   }
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromSupertypeParameterType() {
    AnonymousClassWithNullableTypeArgument.acceptOfNullableString(
-    object : SubParameterizedEmptyInterface<String> {} as ParameterizedEmptyInterface<String?>,
+    object : SubParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>,
    )
   }
  }
