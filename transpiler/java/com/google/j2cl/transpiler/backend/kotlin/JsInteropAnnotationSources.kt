@@ -109,19 +109,19 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
       annotation(
         nameSources.topLevelQualifiedNameSource(annotationQualifiedName),
         nameParameterSource(jsAnnotationNameParameterValue(member)),
-        namespaceParameterSource(member.descriptor.originalJsInfo.jsNamespace),
+        namespaceParameterSource(member.descriptor.declarationJsInfo.jsNamespace),
       )
     }
 
   private fun hasJsInteropAnnotation(member: Member): Boolean =
-    member.descriptor.originalJsInfo.hasJsMemberAnnotation ||
+    member.descriptor.declarationJsInfo.hasJsMemberAnnotation ||
       // If the name is mangled but it overrides a member (which means that one was already
       // mangled) then the annotation is already emitted in the overridden member.
       (environment.isKtNameMangled(member.descriptor) &&
         (member !is Method || !member.isJavaOverride))
 
   private fun jsAnnotationNameParameterValue(member: Member): String? =
-    member.descriptor.originalJsInfo.jsName
+    member.descriptor.declarationJsInfo.jsName
       // if there is no name specified in the original annotation but the name is mangled in
       // Kotlin, use the simpleJsName otherwise do not emit any name.
       ?: member.simpleJsName.takeIf { environment.isKtNameMangled(member.descriptor) }
@@ -186,7 +186,7 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
       enclosingTypeDescriptor.isJsType &&
         !enclosingTypeDescriptor.isNative &&
         environment.ktVisibility(this).isPublic &&
-        originalJsInfo.jsMemberType == JsMemberType.NONE
+        declarationJsInfo.jsMemberType == JsMemberType.NONE
 
   companion object {
     private fun nameParameterSource(typeDeclaration: TypeDeclaration): Source =
@@ -207,6 +207,6 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
     ): Source = emptyIf(value == defaultValue) { assignment(source(name), literal(value)) }
 
     private val MethodDescriptor.hasJsConstructorAnnotation
-      get() = originalJsInfo.hasJsMemberAnnotation && isJsConstructor
+      get() = declarationJsInfo.hasJsMemberAnnotation && isJsConstructor
   }
 }

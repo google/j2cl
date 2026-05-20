@@ -43,6 +43,15 @@ public abstract class MemberDescriptor
   /** Return JsInfo from the member's annotation. */
   public abstract JsInfo getOriginalJsInfo();
 
+  /**
+   * Return JsInfo from the member's declaration.
+   *
+   * <p>For record component accessors, it's the original JsInfo from the corresponding field. For
+   * record component fields, it's JsInfo.NONE. For all other members it's the same as the original
+   * JsInfo.
+   */
+  public abstract JsInfo getDeclarationJsInfo();
+
   public abstract JsInfo getJsInfo();
 
   @Nullable

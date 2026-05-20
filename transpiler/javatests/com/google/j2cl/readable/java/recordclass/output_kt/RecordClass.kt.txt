@@ -855,12 +855,12 @@ open class RecordClass {
    this.isFoo = isFoo
   }
   
-  @JsIgnore
+  @JsProperty(name = "customVal")
   fun value(): Int {
    return this.value
   }
   
-  @JsIgnore
+  @JsProperty
   fun text(): String? {
    return this.text
   }
@@ -870,7 +870,7 @@ open class RecordClass {
    return this.ignored
   }
   
-  @JsIgnore
+  @JsProperty
   fun isFoo(): Boolean {
    return this.isFoo
   }
@@ -917,12 +917,12 @@ open class RecordClass {
    this.ignored = ignored
   }
   
-  @JsIgnore
+  @JsProperty(name = "customVal")
   fun value(): Int {
    return this.value
   }
   
-  @JsIgnore
+  @JsProperty
   fun text(): String? {
    return this.text
   }
@@ -992,12 +992,12 @@ open class RecordClass {
    this.ignored2 = ignored2
   }
   
-  @JsIgnore
+  @JsProperty(name = "customVal")
   override fun value(): Int {
    return this.value
   }
   
-  @JsIgnore
+  @JsProperty
   override fun text(): String? {
    return this.text
   }
@@ -1048,7 +1048,7 @@ open class RecordClass {
    this.value = value
   }
   
-  @JsIgnore
+  @JsProperty
   fun value(): Int {
    return this.value
   }

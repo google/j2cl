@@ -158,7 +158,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
-  public JsInfo getJsInfo() {
+  public JsInfo getDeclarationJsInfo() {
     if (isRecordComponent()) {
       // The record field itself should not be considered JsMember. The corresponding record
       // component accessor will inherit the JsInfo from the 'originalJsInfo' and will become a
@@ -166,6 +166,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       return JsInfo.NONE;
     }
     return getOriginalJsInfo();
+  }
+
+  @Override
+  public JsInfo getJsInfo() {
+    return getDeclarationJsInfo();
   }
 
   private boolean isRecordComponent() {
