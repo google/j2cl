@@ -158,7 +158,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
   public void testThrowsInBeforeClass() throws Exception {
     String testName = "ThrowsInBeforeClassTest";
     TestResult testResult = newTestResultBuilder().testClassName(testName).build();
-    if (testMode.isJvm()) {
+    if (testMode.isJvm() || testMode.isJ2kt()) {
       // In JUnit 4, if there is exception in BeforeClass, the log will show 0 test run regardless
       // of failures number.
       testResult =

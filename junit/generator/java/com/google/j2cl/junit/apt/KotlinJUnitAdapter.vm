@@ -18,9 +18,9 @@ $classOrInstance.${testMethod.javaMethodName()}();
 @file:Suppress("PackageName")
 package ${testClass.jsUnitPackageName()}
 
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
+import com.google.testing.kotlin.AfterTest
+import com.google.testing.kotlin.BeforeTest
+import com.google.testing.kotlin.Test
 
 private var times = 0
 private fun beforeClass() {
@@ -33,7 +33,7 @@ private fun afterClass() {
 
 class ${testClass.jsUnitAdapterClassName()} {
 
-  val actualTest: ${testClass.qualifiedName()}
+  lateinit var actualTest: ${testClass.qualifiedName()}
   var skipAllTests = false
   var skipCurrentTest = false
 
@@ -51,14 +51,13 @@ class ${testClass.jsUnitAdapterClassName()} {
       afterClass()
       throw e
     }
-
-    actualTest = ${testClass.qualifiedName()}()
   }
 
   @BeforeTest
   fun setUp() {
     if (skipAllTests) return
     try {
+      actualTest = ${testClass.qualifiedName()}()
       #if($testClass.isJUnit3())
       junit.framework.TestCaseViolator.callSetUp(actualTest);
       #end

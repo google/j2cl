@@ -82,6 +82,10 @@ public class TestAsserter {
       // "Failures" instead of "Errors".
       fails += errors;
       errors = 0;
+      if (testResult.failedToInstantiateTest()) {
+        testCount = 0;
+        fails = 1;
+      }
     } else if (testMode.isJvm()) {
       if (testResult.failedToInstantiateTest()) {
         // In JUnit 4, if the test fails to instantiate, the log will show 0 test run.
