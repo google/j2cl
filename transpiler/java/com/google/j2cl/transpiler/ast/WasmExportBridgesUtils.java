@@ -96,10 +96,11 @@ public class WasmExportBridgesUtils {
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(valueParameter)
         .addStatements(
-            BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
-                .setRightOperand(
-                    convertArgumentIfNeeded(valueParameter, fieldDescriptor.getTypeDescriptor()))
+            FieldAccess.builderFrom(fieldDescriptor)
+                .setDefaultInstanceQualifier()
                 .build()
+                .infixAssign(
+                    convertArgumentIfNeeded(valueParameter, fieldDescriptor.getTypeDescriptor()))
                 .makeStatement(sourcePosition))
         .setSourcePosition(sourcePosition)
         .build();

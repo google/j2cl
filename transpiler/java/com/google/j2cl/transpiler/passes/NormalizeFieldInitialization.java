@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -86,9 +85,8 @@ public class NormalizeFieldInitialization extends NormalizationPass {
   }
 
   private static Block createInitializerBlockFromFieldInitializer(Field field) {
-    return BinaryExpression.Builder.asAssignmentTo(field.getDescriptor())
-        .setRightOperand(field.getInitializer())
-        .build()
+    return field
+        .infixAssign(field.getInitializer())
         .makeStatement(field.getSourcePosition())
         .ensureBlock();
   }

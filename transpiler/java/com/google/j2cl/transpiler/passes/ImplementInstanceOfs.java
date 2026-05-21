@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -228,12 +227,10 @@ public class ImplementInstanceOfs extends NormalizationPass {
     // And finally add the marker corresponding to the current interface type.
     /** ctor.prototype.$implements_Type = true. */
     methodBuilder.addStatements(
-        BinaryExpression.Builder.asAssignmentTo(
-                FieldAccess.builderFrom(type.getTypeDescriptor().getIsInstanceMarkerField())
-                    .setQualifier(ctorParameter.createReference().getPrototypeFieldAccess())
-                    .build())
-            .setRightOperand(BooleanLiteral.get(true))
+        FieldAccess.builderFrom(type.getTypeDescriptor().getIsInstanceMarkerField())
+            .setQualifier(ctorParameter.createReference().getPrototypeFieldAccess())
             .build()
+            .infixAssign(BooleanLiteral.get(true))
             .makeStatement(SourcePosition.NONE));
 
     type.addMember(methodBuilder.build());

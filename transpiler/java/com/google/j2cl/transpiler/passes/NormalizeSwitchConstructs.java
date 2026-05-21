@@ -26,7 +26,6 @@ import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -279,9 +278,8 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
       List<SwitchCase> cases, Expression selector, Variable caseIndexVariable, int currentIndex) {
 
     Statement caseIndexAssignment =
-        BinaryExpression.Builder.asAssignmentTo(caseIndexVariable)
-            .setRightOperand(NumberLiteral.fromInt(currentIndex))
-            .build()
+        caseIndexVariable
+            .infixAssign(NumberLiteral.fromInt(currentIndex))
             .makeStatement(SourcePosition.NONE)
             .ensureBlock();
 

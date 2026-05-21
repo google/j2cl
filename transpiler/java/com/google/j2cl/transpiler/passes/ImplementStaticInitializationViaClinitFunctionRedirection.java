@@ -22,7 +22,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -171,9 +170,9 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
                 MultiExpression.builder()
                     .addExpressions(
                         createClinitCallExpression(fieldDescriptor.getEnclosingTypeDescriptor()),
-                        BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
-                            .setRightOperand(parameter)
-                            .build())
+                        FieldAccess.builderFrom(fieldDescriptor)
+                            .build()
+                            .infixAssign(parameter.createReference()))
                     .build()
                     .makeStatement(field.getSourcePosition()))
             .build());
@@ -208,13 +207,13 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
 
     // Class.$clinit = () => {};
     Statement noopClinitFunction =
-        BinaryExpression.Builder.asAssignmentTo(clinitMethodFieldDescriptor)
-            .setRightOperand(
+        FieldAccess.builderFrom(clinitMethodFieldDescriptor)
+            .build()
+            .infixAssign(
                 FunctionExpression.builder()
                     .setTypeDescriptor(runnableJsFunctionDescriptor)
                     .setSourcePosition(sourcePosition)
                     .build())
-            .build()
             .makeStatement(sourcePosition);
 
     // Class.$loadModules();

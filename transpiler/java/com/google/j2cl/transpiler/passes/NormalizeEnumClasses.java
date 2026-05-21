@@ -19,7 +19,6 @@ import static java.util.stream.Collectors.toMap;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -138,9 +137,10 @@ public class NormalizeEnumClasses extends NormalizationPass {
         .getBody()
         .getStatements()
         .addFirst(
-            BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
-                .setRightOperand(variableReference)
+            FieldAccess.builderFrom(fieldDescriptor)
+                .setDefaultInstanceQualifier()
                 .build()
+                .infixAssign(variableReference)
                 .makeStatement(method.getSourcePosition()));
   }
 

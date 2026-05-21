@@ -206,9 +206,10 @@ public class ImplementRecordClasses extends NormalizationPass {
             recordFields.stream(),
             parameters.stream(),
             (field, parameter) ->
-                BinaryExpression.Builder.asAssignmentTo(field)
-                    .setRightOperand(parameter.createReference())
+                FieldAccess.builderFrom(field)
+                    .setDefaultInstanceQualifier()
                     .build()
+                    .infixAssign(parameter.createReference())
                     .makeStatement(sourcePosition))
         .collect(toImmutableList());
   }

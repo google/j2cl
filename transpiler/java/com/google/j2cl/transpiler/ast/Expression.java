@@ -218,6 +218,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return infix(BinaryOperator.MINUS, this, rhs);
   }
 
+  /** Returns an expression representing {@code this = value}. */
+  public BinaryExpression infixAssign(Expression value) {
+    return infix(BinaryOperator.ASSIGN, this, value);
+  }
+
   private static BinaryExpression infix(BinaryOperator operator, Expression lhs, Expression rhs) {
     return BinaryExpression.builder()
         .setOperator(operator)

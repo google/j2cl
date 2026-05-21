@@ -485,10 +485,7 @@ public final class AstUtils {
             .build();
 
     if (field.getInitializer() != null) {
-      declarationExpression =
-          BinaryExpression.Builder.asAssignmentTo(declarationExpression)
-              .setRightOperand(field.getInitializer())
-              .build();
+      declarationExpression = declarationExpression.infixAssign(field.getInitializer());
     }
 
     return FieldDeclarationStatement.builder()

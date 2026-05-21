@@ -64,6 +64,10 @@ public class Field extends Member {
     return getDescriptor().isEnumConstant();
   }
 
+  public BinaryExpression infixAssign(Expression value) {
+    return FieldAccess.builderFrom(this).setDefaultInstanceQualifier().build().infixAssign(value);
+  }
+
   @Override
   Node acceptInternal(Processor processor) {
     return Visitor_Field.visit(processor, this);

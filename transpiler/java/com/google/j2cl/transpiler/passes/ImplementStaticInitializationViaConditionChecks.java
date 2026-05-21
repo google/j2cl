@@ -21,7 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -156,9 +155,9 @@ public class ImplementStaticInitializationViaConditionChecks
 
     // $isInitialized = true;
     Statement setInitialized =
-        BinaryExpression.Builder.asAssignmentTo(isInitializedFieldDescriptor)
-            .setRightOperand(BooleanLiteral.get(true))
+        FieldAccess.builderFrom(isInitializedFieldDescriptor)
             .build()
+            .infixAssign(BooleanLiteral.get(true))
             .makeStatement(sourcePosition);
 
     // Code from static initializer blocks.

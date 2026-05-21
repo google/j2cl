@@ -28,7 +28,6 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -173,11 +172,7 @@ public class VariableDeclarationHoister extends NormalizationPass {
             ImmutableList<Expression> assignments =
                 variableDeclarationExpression.getFragments().stream()
                     .filter(fragment -> fragment.getInitializer() != null)
-                    .map(
-                        fragment ->
-                            BinaryExpression.Builder.asAssignmentTo(fragment.getVariable())
-                                .setRightOperand(fragment.getInitializer())
-                                .build())
+                    .map(fragment -> fragment.getVariable().infixAssign(fragment.getInitializer()))
                     .collect(toImmutableList());
 
             if (assignments.isEmpty()) {

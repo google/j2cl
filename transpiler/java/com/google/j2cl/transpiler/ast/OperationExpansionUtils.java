@@ -221,9 +221,7 @@ public class OperationExpansionUtils {
       newRhs = returnedVariable.createReference();
     }
     return constructReturnedExpression(
-        temporaryVariables,
-        BinaryExpression.Builder.asAssignmentTo(newLhs).setRightOperand(newRhs).build(),
-        returnedVariable.createReference());
+        temporaryVariables, newLhs.infixAssign(newRhs), returnedVariable.createReference());
   }
 
   /** Returns number literal with value 1. */
@@ -236,16 +234,14 @@ public class OperationExpansionUtils {
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
 
     checkArgument(leftOperand.isIdempotent());
-    return BinaryExpression.Builder.asAssignmentTo(leftOperand)
-        .setRightOperand(
-            maybeCast(
-                leftOperand.getTypeDescriptor(),
-                BinaryExpression.builder()
-                    .setLeftOperand(leftOperand.clone())
-                    .setOperator(operator)
-                    .setRightOperand(rightOperand)
-                    .build()))
-        .build();
+    return leftOperand.infixAssign(
+        maybeCast(
+            leftOperand.getTypeDescriptor(),
+            BinaryExpression.builder()
+                .setLeftOperand(leftOperand.clone())
+                .setOperator(operator)
+                .setRightOperand(rightOperand)
+                .build()));
   }
 
   // When expanding compound assignments (and prefix/postfix operations) there is an implicit

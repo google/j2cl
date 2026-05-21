@@ -19,7 +19,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -148,9 +147,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
               .makeStatement(sourcePosition));
 
       Expression assignResourceInitializer =
-          BinaryExpression.Builder.asAssignmentTo(originalVariable)
-              .setRightOperand(originalResourceDeclaration.getInitializer())
-              .build();
+          originalVariable.infixAssign(originalResourceDeclaration.getInitializer());
       tryBlockBodyStatements.add(assignResourceInitializer.makeStatement(sourcePosition));
     }
     tryBlockBodyStatements.addAll(tryStatement.getBody().getStatements());
@@ -163,9 +160,8 @@ public class NormalizeTryWithResources extends NormalizationPass {
 
     ImmutableList<Statement> catchBlockStatements =
         ImmutableList.of(
-            BinaryExpression.Builder.asAssignmentTo(primaryException)
-                .setRightOperand(exceptionFromTry)
-                .build()
+            primaryException
+                .infixAssign(exceptionFromTry.createReference())
                 .makeStatement(sourcePosition),
             ThrowStatement.builder()
                 .setSourcePosition(sourcePosition)
@@ -180,10 +176,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
               declaration.getFragments().getFirst().getVariable().createReference(),
               primaryException.createReference());
 
-      Expression assignExceptionFromSafeCloseCall =
-          BinaryExpression.Builder.asAssignmentTo(primaryException)
-              .setRightOperand(safeCloseCall)
-              .build();
+      Expression assignExceptionFromSafeCloseCall = primaryException.infixAssign(safeCloseCall);
 
       finallyBlockStatements.add(assignExceptionFromSafeCloseCall.makeStatement(sourcePosition));
     }

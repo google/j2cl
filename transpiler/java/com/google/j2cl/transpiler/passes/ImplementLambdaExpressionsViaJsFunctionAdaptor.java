@@ -19,7 +19,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
@@ -358,9 +357,10 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
         .addStatements(
             // Store the JsFunction lambda in the corresponding field.
             // this.fn = fn;
-            BinaryExpression.Builder.asAssignmentTo(jsFunctionFieldDescriptor)
-                .setRightOperand(jsFunctionParameter)
+            FieldAccess.builderFrom(jsFunctionFieldDescriptor)
+                .setDefaultInstanceQualifier()
                 .build()
+                .infixAssign(jsFunctionParameter.createReference())
                 .makeStatement(sourcePosition))
         .setSourcePosition(sourcePosition)
         .build();

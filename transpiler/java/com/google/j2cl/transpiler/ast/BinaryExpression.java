@@ -358,27 +358,6 @@ public class BinaryExpression extends Expression {
     private Expression leftOperand;
     private Expression rightOperand;
 
-    public static Builder asAssignmentTo(Expression lvalue) {
-      return new Builder().setLeftOperand(lvalue).setOperator(BinaryOperator.ASSIGN);
-    }
-
-    public static Builder asAssignmentTo(Field field) {
-      return asAssignmentTo(field.getDescriptor());
-    }
-
-    public static Builder asAssignmentTo(FieldDescriptor fieldDescriptor) {
-      return new Builder()
-          .setLeftOperand(
-              FieldAccess.builderFrom(fieldDescriptor).setDefaultInstanceQualifier().build())
-          .setOperator(BinaryOperator.ASSIGN);
-    }
-
-    public static Builder asAssignmentTo(Variable variable) {
-      return new Builder()
-          .setLeftOperand(variable.createReference())
-          .setOperator(BinaryOperator.ASSIGN);
-    }
-
     @CanIgnoreReturnValue
     public Builder setLeftOperand(Expression operand) {
       this.leftOperand = operand;

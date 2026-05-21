@@ -24,7 +24,6 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -195,13 +194,11 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
     // ...
     for (int i = 0; i < size; i++) {
       expressions.add(
-          BinaryExpression.Builder.asAssignmentTo(
-                  ArrayAccess.builder()
-                      .setArrayExpression(variable.createReference())
-                      .setIndexExpression(NumberLiteral.fromInt(i))
-                      .build())
-              .setRightOperand(arrayLiteral.getValueExpressions().get(i))
-              .build());
+          ArrayAccess.builder()
+              .setArrayExpression(variable.createReference())
+              .setIndexExpression(NumberLiteral.fromInt(i))
+              .build()
+              .infixAssign(arrayLiteral.getValueExpressions().get(i)));
     }
 
     // return tmp

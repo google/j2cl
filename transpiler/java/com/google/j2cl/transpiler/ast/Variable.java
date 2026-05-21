@@ -93,6 +93,10 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
     return new VariableReference(this);
   }
 
+  public BinaryExpression infixAssign(Expression value) {
+    return createReference().infixAssign(value);
+  }
+
   @Override
   Node acceptInternal(Processor processor) {
     return Visitor_Variable.visit(processor, this);

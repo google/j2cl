@@ -30,7 +30,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
@@ -556,9 +555,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
     // Adds load time statement MyFoo.prototype.$excluded_fields = [ ... ]
     autoValue.addLoadTimeStatement(
-        BinaryExpression.Builder.asAssignmentTo(excludedFieldAccess)
-            .setRightOperand(propertyNameExpressions)
-            .build()
+        excludedFieldAccess
+            .infixAssign(propertyNameExpressions)
             .makeStatement(SourcePosition.NONE));
   }
 

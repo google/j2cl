@@ -23,7 +23,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
@@ -102,13 +101,13 @@ public class AddEnumImplicitMethods extends NormalizationPass {
                 FieldAccess.builderFrom(namesToValuesMapFieldDescriptor).build().infixEqualsNull())
             .setThenStatement(
                 //   namesToValuesMap = createMapFromValues(this.values());
-                BinaryExpression.Builder.asAssignmentTo(namesToValuesMapFieldDescriptor)
-                    .setRightOperand(
+                FieldAccess.builderFrom(namesToValuesMapFieldDescriptor)
+                    .build()
+                    .infixAssign(
                         RuntimeMethods.createEnumsCreateMapFromValuesMethodCall(
                             MethodCall.builderFrom(
                                     typeDescriptor.getMethodDescriptor(VALUES_METHOD_NAME))
                                 .build()))
-                    .build()
                     .makeStatement(sourcePosition)
                     .ensureBlock())
             .build();

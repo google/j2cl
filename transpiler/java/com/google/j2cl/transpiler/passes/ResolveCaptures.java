@@ -26,7 +26,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -413,9 +412,10 @@ public class ResolveCaptures extends NormalizationPass {
       // Assign the parameter to the backing field.
       methodBuilder.addStatement(
           statementOffsetPosition + position,
-          BinaryExpression.Builder.asAssignmentTo(captureBackingField)
-              .setRightOperand(parameter.createReference())
+          FieldAccess.builderFrom(captureBackingField)
+              .setDefaultInstanceQualifier()
               .build()
+              .infixAssign(parameter.createReference())
               .makeStatement(sourcePosition));
     }
     return parameter;

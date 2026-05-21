@@ -386,9 +386,9 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
                             .build())
                     .setSourcePosition(SourcePosition.NONE)
                     .build(),
-                BinaryExpression.Builder.asAssignmentTo(holderFieldDescriptor)
-                    .setRightOperand(initializationExpression)
+                FieldAccess.builderFrom(holderFieldDescriptor)
                     .build()
+                    .infixAssign(initializationExpression)
                     .makeStatement(SourcePosition.NONE),
                 ReturnStatement.builder()
                     .setExpression(FieldAccess.builderFrom(holderFieldDescriptor).build())

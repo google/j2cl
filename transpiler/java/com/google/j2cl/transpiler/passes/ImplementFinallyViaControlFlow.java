@@ -22,7 +22,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BreakOrContinueStatement;
 import com.google.j2cl.transpiler.ast.BreakStatement;
@@ -280,9 +279,8 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
                   // Save the return expression value. Since this assignment will be executed at
                   // the location where the return was, it preserves the evaluation order by
                   // keeping the evaluation of the return expression in the original place.
-                  BinaryExpression.Builder.asAssignmentTo(savedReturnValueVariable)
-                      .setRightOperand(returnStatement.getExpression())
-                      .build()
+                  savedReturnValueVariable
+                      .infixAssign(returnStatement.getExpression())
                       .makeStatement(returnStatement.getSourcePosition()),
                   // At the finally exit, the saved value will be returned.
                   returnStatement.toBuilder()
@@ -325,9 +323,8 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
               .setBody(
                   rewriteExit(
                       // Code to save the thrown exception to rethrow after finally.
-                      BinaryExpression.Builder.asAssignmentTo(savedThrownVariable)
-                          .setRightOperand(throwableVariable.createReference())
-                          .build()
+                      savedThrownVariable
+                          .infixAssign(throwableVariable.createReference())
                           .makeStatement(sourcePosition),
                       // Code to execute after finally: throw the saved exception.
                       ThrowStatement.builder()
@@ -361,9 +358,8 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
       return Block.builder()
           .setStatements(
               saveValueStatement,
-              BinaryExpression.Builder.asAssignmentTo(exitSelectorVariable)
-                  .setRightOperand(NumberLiteral.fromInt(exitSelector))
-                  .build()
+              exitSelectorVariable
+                  .infixAssign(NumberLiteral.fromInt(exitSelector))
                   .makeStatement(exitStatement.getSourcePosition()),
               BreakStatement.builder()
                   .setLabelReference(finallyLabel.createReference())
