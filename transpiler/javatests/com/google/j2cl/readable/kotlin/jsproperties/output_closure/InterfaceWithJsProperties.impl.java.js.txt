@@ -1,0 +1,72 @@
+goog.module('jsproperties.InterfaceWithJsProperties$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class InterfaceWithJsProperties {
+ /** @abstract @return {number} */
+ get x() {}
+ /** @abstract @return {number} */
+ get y() {}
+ /** @abstract */
+ set y(/** number */ set__) {}
+ /** @abstract @return {number} */
+ get zz() {}
+ /** @abstract @return {number} */
+ get rr() {}
+ /** @abstract */
+ set rr(/** number */ set__) {}
+ /** @abstract @return {number} */
+ get ss() {}
+ /** @abstract @return {number} */
+ get tt() {}
+ /** @abstract @nodts */
+ m_setT__int__void(/** number */ set__) {}
+ /** @abstract @return {number} */
+ get u() {}
+ /** @abstract @return {number} */
+ get v() {}
+ /** @abstract @nodts */
+ m_setV__int__void(/** number */ set__) {}
+ /** @abstract @return {number} */
+ get ww() {}
+ /** @abstract @return {number} */
+ get cc() {}
+ /** @abstract @return {number} */
+ get dd() {}
+ /** @abstract */
+ set dd2(/** number */ set__) {}
+ /** @abstract @return {number} */
+ get e() {}
+ /** @abstract */
+ set e(/** number */ set__) {}
+ /** @nodts @return {number} */
+ static m_getC__$default__jsproperties_InterfaceWithJsProperties__int(/** !InterfaceWithJsProperties */ $thisArg) {
+  InterfaceWithJsProperties.$clinit();
+  return 10;
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithJsProperties.$clinit = () =>{};
+  InterfaceWithJsProperties.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsproperties_InterfaceWithJsProperties = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsproperties_InterfaceWithJsProperties;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithJsProperties.$markImplementor(/**@type {Function}*/ (InterfaceWithJsProperties));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceWithJsProperties), 'jsproperties.InterfaceWithJsProperties');
+
+exports = InterfaceWithJsProperties;
+
+//# sourceMappingURL=InterfaceWithJsProperties.js.map

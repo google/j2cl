@@ -119,6 +119,33 @@ fun getD(): Int {
 val nativeProperty: Double
   @JsProperty(name = "Math.E", namespace = JsPackage.GLOBAL) external get
 
+interface InterfaceWithJsProperties {
+  @JsProperty val x: Int
+  @JsProperty var y: Int
+  @JsProperty(name = "zz") val z: Int
+  @JsProperty(name = "rr") var r: Int
+  @get:JsProperty(name = "ss") val s: Int
+  @get:JsProperty(name = "tt") var t: Int
+
+  val u: Int
+    @JsProperty get
+
+  var v: Int
+    @JsProperty get
+
+  val w: Int
+    @JsProperty(name = "ww") get
+
+  val c: Int
+    @JsProperty(name = "cc") get() = 10
+
+  @get:JsProperty(name = "dd") @set:JsProperty(name = "dd2") var d: Int
+
+  var e: Int
+    @JsProperty get
+    @JsProperty set
+}
+
 interface InterfaceWithDefaultJsProperties {
   @JsProperty
   var m: Int
