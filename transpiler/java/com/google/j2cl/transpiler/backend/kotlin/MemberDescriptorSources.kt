@@ -20,6 +20,8 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.backend.kotlin.AnnotationSources.Companion.annotationTargetSource
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.ast.Keywords
 import com.google.j2cl.transpiler.backend.kotlin.common.inBackTicks
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -52,7 +54,10 @@ internal data class MemberDescriptorSources(val nameSources: NameSources) {
       .takeIf { it.isNotEmpty() }
       ?.let { thrownTypeDescriptors ->
         KotlinSource.annotation(
-          nameSources.topLevelQualifiedNameSource("kotlin.jvm.Throws"),
+          annotationName(
+            annotationTargetSource(methodDescriptor),
+            nameSources.topLevelQualifiedNameSource("kotlin.jvm.Throws"),
+          ),
           thrownTypeDescriptors.map {
             KotlinSource.classLiteral(
               nameSources.typeDescriptorSource(it.toRawTypeDescriptor().toNonNullable())
@@ -67,7 +72,10 @@ internal data class MemberDescriptorSources(val nameSources: NameSources) {
       .takeIf { it.isThrows && SHOULD_INCLUDE_NATIVE_THROWS }
       ?.let {
         KotlinSource.annotation(
-          nameSources.topLevelQualifiedNameSource("javaemul.lang.NativeThrows"),
+          annotationName(
+            annotationTargetSource(methodDescriptor),
+            nameSources.topLevelQualifiedNameSource("javaemul.lang.NativeThrows"),
+          ),
           KotlinSource.classLiteral(
             nameSources.typeDescriptorSource(
               TypeDescriptors.get().javaLangThrowable.toNonNullable()

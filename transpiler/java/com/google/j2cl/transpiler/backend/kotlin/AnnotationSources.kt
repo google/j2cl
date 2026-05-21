@@ -20,6 +20,8 @@ import com.google.j2cl.transpiler.ast.Annotation
 import com.google.j2cl.transpiler.ast.AnnotationValue
 import com.google.j2cl.transpiler.ast.HasAnnotations
 import com.google.j2cl.transpiler.ast.Literal
+import com.google.j2cl.transpiler.ast.MemberDescriptor
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
@@ -95,6 +97,15 @@ internal data class AnnotationSources(val nameSources: NameSources) {
 
     private fun hasGetTarget(annotation: Annotation, isProperty: Boolean): Boolean =
       isProperty && PROPERTY_GET_ANNOTATIONS.contains(annotation.typeDescriptor.qualifiedSourceName)
+
+    fun annotationTargetSource(memberDescriptor: MemberDescriptor): Source =
+      when (memberDescriptor) {
+        is MethodDescriptor -> annotationTargetSource(memberDescriptor)
+        else -> Source.EMPTY
+      }
+
+    fun annotationTargetSource(methodDescriptor: MethodDescriptor): Source =
+      Source.emptyUnless(methodDescriptor.isKtProperty) { KotlinSource.GET_KEYWORD }
 
     fun annotationTargetSource(annotation: Annotation, isProperty: Boolean): Source =
       Source.emptyUnless(hasGetTarget(annotation, isProperty)) { KotlinSource.GET_KEYWORD }

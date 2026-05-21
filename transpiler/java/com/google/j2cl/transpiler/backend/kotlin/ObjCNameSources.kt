@@ -21,7 +21,9 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.backend.kotlin.AnnotationSources.Companion.annotationTargetSource
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
@@ -68,11 +70,14 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       else -> typeDeclaration.swiftName?.let { swiftNameAnnotationSource(it) }.orEmpty()
     }
 
-  fun hiddenFromObjCAnnotationSource(): Source =
+  fun hiddenFromObjCAnnotationSource(memberDescriptor: MemberDescriptor): Source =
     annotation(
-      nameSources.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
-        topLevelQualifiedNameSource("kotlin.native.HiddenFromObjC")
-      }
+      annotationName(
+        annotationTargetSource(memberDescriptor),
+        nameSources.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
+          topLevelQualifiedNameSource("kotlin.native.HiddenFromObjC")
+        },
+      )
     )
 
   fun objCEnumAnnotationSource(name: String, swiftName: String? = null): Source =
@@ -110,14 +115,14 @@ internal class ObjCNameSources(val nameSources: NameSources) {
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
       method.descriptor.isConstructor -> Source.EMPTY
-      isHiddenFromObjC(method.descriptor) -> hiddenFromObjCAnnotationSource()
+      isHiddenFromObjC(method.descriptor) -> hiddenFromObjCAnnotationSource(method.descriptor)
       else -> Source.EMPTY
     }
 
   fun objCAnnotationSource(field: Field): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
-      isHiddenFromObjC(field.descriptor) -> hiddenFromObjCAnnotationSource()
+      isHiddenFromObjC(field.descriptor) -> hiddenFromObjCAnnotationSource(field.descriptor)
       needsObjCNameAnnotation(field.descriptor) ->
         objCNameAnnotationSource(field.descriptor.objCName)
       else -> Source.EMPTY

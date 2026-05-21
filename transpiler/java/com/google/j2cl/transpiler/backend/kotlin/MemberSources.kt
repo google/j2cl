@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
+import com.google.j2cl.transpiler.backend.kotlin.AnnotationSources.Companion.annotationTargetSource
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.COMPANION_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONST_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
@@ -40,6 +41,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAL_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VARARG_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAR_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
 import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorSources.Companion.enumValueDeclarationNameSource
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
@@ -251,7 +253,10 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
   private fun suppressNothingToOverrideSource(method: Method): Source =
     Source.emptyUnless(method.hasSuppressNothingToOverrideAnnotation()) {
       return annotation(
-        memberDescriptorSources.nameSources.topLevelQualifiedNameSource("kotlin.Suppress"),
+        annotationName(
+          annotationTargetSource(method.descriptor),
+          memberDescriptorSources.nameSources.topLevelQualifiedNameSource("kotlin.Suppress"),
+        ),
         KotlinSource.literal("NOTHING_TO_OVERRIDE"),
       )
     }

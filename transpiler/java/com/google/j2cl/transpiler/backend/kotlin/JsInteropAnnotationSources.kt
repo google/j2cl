@@ -24,7 +24,9 @@ import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.backend.kotlin.AnnotationSources.Companion.annotationTargetSource
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -107,7 +109,10 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
   private fun jsInteropAnnotationSource(member: Member, annotationQualifiedName: String): Source =
     emptyUnless(hasJsInteropAnnotation(member)) {
       annotation(
-        nameSources.topLevelQualifiedNameSource(annotationQualifiedName),
+        annotationName(
+          annotationTargetSource(member.descriptor),
+          nameSources.topLevelQualifiedNameSource(annotationQualifiedName),
+        ),
         nameParameterSource(jsAnnotationNameParameterValue(member)),
         namespaceParameterSource(member.descriptor.declarationJsInfo.jsNamespace),
       )
