@@ -680,7 +680,7 @@ private fun IrFunction.getLocalSuffix(): String {
   return "_$$index"
 }
 
-fun IrSimpleFunction.resolveName(jvmBackendContext: JvmBackendContext): String {
+private fun IrSimpleFunction.resolveName(jvmBackendContext: JvmBackendContext): String {
   // Pretend the function is public when mapping the signature. We want to avoid internal name
   // mangling for now.
   // TODO(b/236236685): Revisit this if we decide to mangle internal names.
@@ -707,7 +707,7 @@ fun IrSimpleFunction.resolveName(jvmBackendContext: JvmBackendContext): String {
     } else {
       name
     }
-  return sanitizeName(resolvedName)
+  return resolvedName.sanitizeName()
 }
 
 private fun <R> IrSimpleFunction.runAsIfNonInternalFunction(block: IrSimpleFunction.() -> R): R {
@@ -727,16 +727,7 @@ val IrDeclarationWithName.sanitizedName: String
     if (this is IrFunction) {
       throw IllegalStateException("Use IrFunction.resolveName(jvmBackendContext) instead")
     }
-    return sanitizeName()
-  }
-
-private fun IrDeclarationWithName.sanitizeName(name: Name = this.name) =
-  if (isJsMember()) {
-    // We don't sanitize name for JsMember. Instead, we pass the original name through to the
-    // backend, and let the JsInteropRestriction checker validate if it's a valid JS identifier.
-    name.asString()
-  } else {
-    name.sanitizeName()
+    return name.sanitizeName()
   }
 
 fun Name.sanitizeName() = JsUtils.sanitizeJsIdentifier(this.asStringStripSpecialMarkers())
