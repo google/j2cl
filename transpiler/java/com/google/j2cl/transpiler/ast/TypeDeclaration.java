@@ -42,16 +42,10 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /**
- * A declaration-site reference to a type.
+ * Represents a declared type.
  *
- * <p>This class is mostly a bag of precomputed properties, and the details of how those properties
- * are created live in several creation functions in JdtUtils and TypeDeclarations.
- *
- * <p>A couple of properties are lazily calculated via the DescriptorFactory and interface, since
- * eagerly calculating them would lead to infinite loops of Descriptor creation.
- *
- * <p>Since these are all declaration-site references, when there are type variables they are always
- * thought of as type parameters.
+ * <p>This is different from a DeclaredTypeDescriptor which represents a type reference and can be
+ * parameterized.
  */
 @Visitable
 @AutoValue

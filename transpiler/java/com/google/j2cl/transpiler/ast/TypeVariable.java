@@ -330,8 +330,7 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
         .setLowerBoundTypeDescriptor(lowerBound)
         .setUnbound(isUnbound)
         // Create an unique key that does not conflict with the keys used for other types nor for
-        // type variables coming from JDT, which follow "<declaring_type>:<name>...".
-        // {@see org.eclipse.jdt.core.BindingKey}.
+        // type variables coming directly from the frontend.
         .setUniqueKey(upperBoundKey + lowerBoundKey)
         .setName(name)
         .build();
