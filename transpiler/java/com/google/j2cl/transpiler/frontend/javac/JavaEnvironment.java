@@ -786,9 +786,10 @@ public class JavaEnvironment {
             .map(this::createTypeDescriptor)
             .collect(toImmutableList());
 
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(declarationMethodElement);
     boolean isNative =
         isNative(declarationMethodElement)
-            || (!JsInteropUtils.getJsInfo(declarationMethodElement).isJsOverlay()
+            || (!jsInfo.isJsOverlay()
                 && enclosingTypeDescriptor.isNative()
                 && isAbstract(declarationMethodElement));
     boolean isConstructor = declarationMethodElement.getKind() == ElementKind.CONSTRUCTOR;
@@ -809,7 +810,7 @@ public class JavaEnvironment {
             .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
             .setTypeArgumentTypeDescriptors(typeArguments)
             .setThrownTypeDescriptors(thrownExceptions)
-            .setOriginalJsInfo(JsInteropUtils.getJsInfo(declarationMethodElement))
+            .setOriginalJsInfo(jsInfo)
             .setVisibility(getVisibility(declarationMethodElement))
             .setStatic(isStatic(declarationMethodElement))
             .setConstructor(isConstructor)
@@ -1492,6 +1493,10 @@ public class JavaEnvironment {
   }
 
   private ImmutableList<Annotation> createAnnotations(Element element, boolean inNullMarkedScope) {
+    if (!AnnotationUtils.shouldReadAnnotations(element)) {
+      return ImmutableList.of();
+    }
+
     return createAnnotations(element.getAnnotationMirrors(), inNullMarkedScope);
   }
 
