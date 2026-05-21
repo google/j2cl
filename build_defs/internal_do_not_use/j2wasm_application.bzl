@@ -313,7 +313,6 @@ def _impl_j2wasm_application(ctx):
             ]),
             data_runfiles = ctx.runfiles(files = runfiles, symlinks = symlinks),
         ),
-        OutputGroupInfo(_validation = _trigger_javac_build(deps)),
     ]
 
 def _get_j2cl_infos_for_feature_set(deps, feature_set):
@@ -337,10 +336,6 @@ def _extract_stages(args):
         else:
             current_stage_args.append(arg)
     return stages
-
-# Trigger a parallel Javac build to provide better error messages than JDT.
-def _trigger_javac_build(j2cl_infos):
-    return depset(transitive = [d._private_.java_info.transitive_runtime_jars for d in j2cl_infos])
 
 def _remap_symbol_map(ctx, transpile_out, binaryen_symbolmap):
     ctx.actions.run_shell(
