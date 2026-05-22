@@ -727,10 +727,6 @@ public class JsTypeTest {
   }
 
   private static void testNamedBridge() {
-    // Bridges are sorted by signature in the JDT. Make sure that the bridge method appears second.
-    // GWT specific test.
-    // assertTrue(
-    //  SomeConcreteSubclass.class.getName().compareTo(SomeZAbstractSubclass.class.getName()) < 0);
     SomeConcreteSubclass o = new SomeConcreteSubclass();
     assertEquals(o, o.m());
   }
