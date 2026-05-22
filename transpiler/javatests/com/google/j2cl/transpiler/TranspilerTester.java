@@ -69,7 +69,6 @@ public class TranspilerTester {
   /** Creates a new transpiler tester initialized with Kotlin (frontend) defaults. */
   public static TranspilerTester newTesterWithKotlinDefaults() {
     return newTester()
-        .addArgs("-frontend", "KOTLIN")
         .addArgs("-kotlincOptions", "-Xmulti-platform")
         // J2CL Koltin frontend is based on Koltin/JVM compiler that requires that deps and the
         // current compilation use the same JVM target in order to inline bytecode. Even we don't
@@ -705,8 +704,6 @@ public class TranspilerTester {
     assertThat(delayedCalls).isEmpty();
 
     final String[] knownSlightlyDelayedCalls = {
-      // Jdt is slow to do the check and we can't do much about it.
-      "org.eclipse.core.runtime.SubMonitor.isCanceled",
       // Javac parsing occasionally exceeds the delay.
       "com.sun.tools.javac.main.JavaCompiler.parseFiles",
     };

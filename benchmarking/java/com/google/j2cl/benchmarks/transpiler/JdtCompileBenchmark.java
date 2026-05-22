@@ -39,7 +39,6 @@ public class JdtCompileBenchmark extends AbstractBenchmark {
 
   private static TranspileResult compile() throws Exception {
     return newTesterWithDefaults()
-        .addArgs("-frontend", "JDT")
         .addNullableAnnotation()
         .addSourcePathArg("samples/box2d/src/main/java/libbox2d_library-j2cl-src.jar")
         .assertTranspileSucceeds();
