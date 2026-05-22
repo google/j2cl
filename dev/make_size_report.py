@@ -143,6 +143,7 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   print(f"  Closing report ({size_report_file.name})")
   size_report_file.close()
+  repo_util.refresh_source_control(path_name)
 
 
 def get_files(test):
@@ -202,6 +203,7 @@ def make_optimized_test_list(optimized_tests):
 
   optimized_tests_file.close()
   print(f"  Generated test file list ({optimized_tests_file.name})")
+  repo_util.refresh_source_control(repo_util.TEST_LIST)
 
 
 def main(unused_argv):

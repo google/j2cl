@@ -22,7 +22,8 @@ import tempfile
 import repo_util
 
 
-READABLE_TARGET_PATTERN = "transpiler/javatests/com/google/j2cl/readable/..."
+READABLE_ROOT_DIR = "transpiler/javatests/com/google/j2cl/readable"
+READABLE_TARGET_PATTERN = f"{READABLE_ROOT_DIR}/..."
 
 
 def get_readables(name_filter, output_postfix):
@@ -182,6 +183,8 @@ def main(argv):
   if stale_readables:
     print("    Refreshing readables...")
     _replace_readable_outputs(stale_readables)
+    print("    Updating source control...")
+    repo_util.refresh_source_control(READABLE_ROOT_DIR)
 
 
 def _print_readables(readables):

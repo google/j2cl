@@ -128,7 +128,7 @@ class GenValidationTest(ValidationTest):
 
     _j2_expecting_failure("gen java/emptyclass")
     _assert_output("No test status for targets")
-    _assert_output("Sponge link:")
+    _assert_output("Check build results:")
 
   def test_broken_build_file(self):
     with open(BUILD_FILE, "w") as f:
@@ -148,7 +148,7 @@ class GenValidationTest(ValidationTest):
 
     _j2_expecting_failure("gen java/emptyclass")
     _assert_output("No test status for targets")
-    _assert_output("Sponge link:")
+    _assert_output("Check build results:")
 
   def test_platform_filtering(self):
     _j2("-p CLOSURE gen java/emptyclass")

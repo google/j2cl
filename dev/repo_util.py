@@ -264,3 +264,7 @@ def run_cmd(cmd_args, cwd=None, shell=False):
     sys.exit(1)
 
   return output[0].decode("utf-8")
+
+
+def refresh_source_control(path):
+  """Refreshes source control tracking for the given path."""
