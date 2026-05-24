@@ -58,8 +58,7 @@ public final class NullabilityPropagationWithMethodReferences {
     return apply(Foo[]::new);
   }
 
-  // TODO(b/496081420): Enable once the update to jvm 26 is complete.
-  // public static Foo.ArrayFactory<@Nullable Foo> testNullableNewArray() {
-  //   return apply(@Nullable Foo[]::new);
-  // }
+  public static Foo.ArrayFactory<@Nullable Foo> testNullableNewArray() {
+    return apply(@Nullable Foo[]::new);
+  }
 }

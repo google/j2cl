@@ -26,6 +26,7 @@ import javaemul.lang.uninitializedArrayOf
 import kotlin.Array
 import kotlin.Int
 import kotlin.Suppress
+import kotlin.arrayOfNulls
 import kotlin.jvm.JvmStatic
 
 class NullabilityPropagationWithMethodReferences {
@@ -67,6 +68,15 @@ class NullabilityPropagationWithMethodReferences {
    return NullabilityPropagationWithMethodReferences.apply<ArrayFactory<Foo>>(
     ArrayFactory { arg0: Int ->
      return@ArrayFactory uninitializedArrayOf<Foo>(arg0)
+    },
+   )
+  }
+  
+  @JvmStatic
+  fun testNullableNewArray(): ArrayFactory<Foo?> {
+   return NullabilityPropagationWithMethodReferences.apply<ArrayFactory<Foo?>>(
+    ArrayFactory { arg0: Int ->
+     return@ArrayFactory arrayOfNulls<Foo>(arg0)
     },
    )
   }
