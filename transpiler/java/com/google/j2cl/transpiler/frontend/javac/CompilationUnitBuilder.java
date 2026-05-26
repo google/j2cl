@@ -639,7 +639,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private CatchClause convertCatchClause(JCCatch catchClause) {
     // Order is important here, exception declaration must be converted before body.
     return CatchClause.builder()
-        .setExceptionVariable(createVariable(catchClause.getParameter(), false))
+        .setExceptionVariable(createVariable(catchClause.getParameter(), /* isParameter= */ false))
         .setBody(convertBlock(catchClause.getBlock()))
         .build();
   }
@@ -964,7 +964,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             .setSourcePosition(sourcePosition)
             .setExpression(expression)
             .setTestTypeDescriptor(
-                environment.createTypeDescriptor(instanceofExpression.getType().type))
+                environment.createTypeDescriptor(
+                    instanceofExpression.getType().type, /* inNullMarkedScope= */ false))
             .build()
         : PatternMatchExpression.builder()
             .setSourcePosition(sourcePosition)
@@ -1145,7 +1146,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private NumberLiteral convertNumberLiteral(JCLiteral literal) {
     return new NumberLiteral(
-        (PrimitiveTypeDescriptor) environment.createTypeDescriptor(literal.type),
+        (PrimitiveTypeDescriptor)
+            environment.createTypeDescriptor(literal.type, inNullMarkedScope()),
         (Number) literal.getValue());
   }
 
@@ -1185,7 +1187,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       // with its qualifier being the type accessible through `expression.type`.
       case "class" -> {
         return new TypeLiteral(
-            getSourcePosition(fieldAccess), environment.createTypeDescriptor(expression.type));
+            getSourcePosition(fieldAccess),
+            environment.createTypeDescriptor(expression.type, inNullMarkedScope()));
       }
 
       // The `length` field is special, but only in array types.
@@ -1635,7 +1638,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       case STRING_LITERAL:
         return convertStringLiteral((JCLiteral) jcExpression);
       case NULL_LITERAL:
-        return environment.createTypeDescriptor(jcExpression.type).getNullValue();
+        return environment
+            .createTypeDescriptor(jcExpression.type, inNullMarkedScope())
+            .getNullValue();
       case AND:
       case CONDITIONAL_AND:
       case CONDITIONAL_OR:

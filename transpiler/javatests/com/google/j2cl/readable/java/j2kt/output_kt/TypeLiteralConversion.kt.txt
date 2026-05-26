@@ -91,7 +91,7 @@ open class TypeLiteralConversion {
  }
  
  open fun testArrayToUnboundWildcard(): Class<*> {
-  return Array::class.javaObjectType as Class<Array<String?>>
+  return Array::class.javaObjectType as Class<Array<String>>
  }
  
  open fun testPrimitiveArrayToRaw(): Class<Any> {
@@ -126,9 +126,9 @@ open class TypeLiteralConversion {
   
   @JvmStatic
   fun testGetArrayInstance(): Array<String> {
-   return TypeLiteralConversion.getInstance<Array<String?>>(
-    Array::class.javaObjectType as Class<Array<String?>>,
-   ) as Array<String>
+   return TypeLiteralConversion.getInstance<Array<String>>(
+    Array::class.javaObjectType as Class<Array<String>>,
+   )
   }
   
   @JvmStatic

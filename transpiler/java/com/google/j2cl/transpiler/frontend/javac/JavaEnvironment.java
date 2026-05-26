@@ -271,11 +271,6 @@ public class JavaEnvironment {
   }
 
   /** Creates a TypeDescriptor from a TypeMirror. */
-  TypeDescriptor createTypeDescriptor(TypeMirror typeMirror) {
-    return createTypeDescriptor(typeMirror, /* inNullMarkedScope= */ false);
-  }
-
-  /** Creates a TypeDescriptor from a TypeMirror. */
   TypeDescriptor createTypeDescriptor(TypeMirror typeMirror, boolean inNullMarkedScope) {
     return createTypeDescriptorWithNullability(typeMirror, ImmutableList.of(), inNullMarkedScope);
   }
@@ -336,7 +331,7 @@ public class JavaEnvironment {
       case INTERSECTION ->
           createIntersectionType((IntersectionClassType) typeMirror, inNullMarkedScope);
 
-      case UNION -> createUnionType((UnionClassType) typeMirror);
+      case UNION -> createUnionType((UnionClassType) typeMirror, inNullMarkedScope);
 
       default ->
           // TypeMirrors can represent concepts that we don't model as TypeDescriptors, e.g.
@@ -766,7 +761,7 @@ public class JavaEnvironment {
 
     var thrownExceptions =
         declarationMethodElement.getThrownTypes().stream()
-            .map(this::createTypeDescriptor)
+            .map(t -> createTypeDescriptor(t, inNullMarkedScope))
             .collect(toImmutableList());
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(declarationMethodElement);
@@ -1012,9 +1007,9 @@ public class JavaEnvironment {
         .build();
   }
 
-  private TypeDescriptor createUnionType(UnionClassType unionType) {
+  private TypeDescriptor createUnionType(UnionClassType unionType, boolean inNullMarkedScope) {
     ImmutableList<TypeDescriptor> unionTypeDescriptors =
-        createTypeDescriptors(unionType.getAlternatives(), /* inNullMarkedScope= */ false);
+        createTypeDescriptors(unionType.getAlternatives(), inNullMarkedScope);
     return UnionTypeDescriptor.builder().setUnionTypeDescriptors(unionTypeDescriptors).build();
   }
 
