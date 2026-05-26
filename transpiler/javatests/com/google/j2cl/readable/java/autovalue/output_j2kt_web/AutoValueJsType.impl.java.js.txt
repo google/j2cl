@@ -8,9 +8,11 @@ class AutoValueJsType extends ValueType {
  constructor() {
   super();
   /**@type {number} @nodts*/
-  this.f_field__autovalue_AutoValue_AutoValueJsType_ = 0;
+  this.f_getField__autovalue_AutoValue_AutoValueJsType_ = 0;
   /**@type {number} @nodts*/
-  this.f_withJsMethod__autovalue_AutoValue_AutoValueJsType_ = 0;
+  this.f_getWithJsMethod__autovalue_AutoValue_AutoValueJsType_ = 0;
+  /**@type {number} @nodts*/
+  this.f_ignored__autovalue_AutoValue_AutoValueJsType_ = 0;
  }
  /** @nodts @return {!AutoValueJsType} */
  static $create__() {
@@ -22,28 +24,33 @@ class AutoValueJsType extends ValueType {
  /** @nodts */
  $ctor__autovalue_AutoValueJsType__void() {
   this.$ctor__javaemul_internal_ValueType__void();
-  $J2CL_PRESERVE$(this.f_field__autovalue_AutoValue_AutoValueJsType_, this.f_withJsMethod__autovalue_AutoValue_AutoValueJsType_);
+  $J2CL_PRESERVE$(this.f_getField__autovalue_AutoValue_AutoValueJsType_, this.f_getWithJsMethod__autovalue_AutoValue_AutoValueJsType_, this.f_ignored__autovalue_AutoValue_AutoValueJsType_);
  }
  /** @nodts @return {!AutoValueJsType} */
- static $create__int__int(/** number */ field, /** number */ withJsMethod) {
+ static $create__int__int__int(/** number */ getField, /** number */ getWithJsMethod, /** number */ ignored) {
   AutoValueJsType.$clinit();
   let $instance = new AutoValueJsType();
-  $instance.$ctor__autovalue_AutoValueJsType__int__int__void(field, withJsMethod);
+  $instance.$ctor__autovalue_AutoValueJsType__int__int__int__void(getField, getWithJsMethod, ignored);
   return $instance;
  }
  /** @nodts */
- $ctor__autovalue_AutoValueJsType__int__int__void(/** number */ field, /** number */ withJsMethod) {
+ $ctor__autovalue_AutoValueJsType__int__int__int__void(/** number */ getField, /** number */ getWithJsMethod, /** number */ ignored) {
   this.$ctor__autovalue_AutoValueJsType__void();
-  this.f_field__autovalue_AutoValue_AutoValueJsType_ = field;
-  this.f_withJsMethod__autovalue_AutoValue_AutoValueJsType_ = withJsMethod;
+  this.f_getField__autovalue_AutoValue_AutoValueJsType_ = getField;
+  this.f_getWithJsMethod__autovalue_AutoValue_AutoValueJsType_ = getWithJsMethod;
+  this.f_ignored__autovalue_AutoValue_AutoValueJsType_ = ignored;
  }
  /** @return {number} */
  getField() {
-  return this.f_field__autovalue_AutoValue_AutoValueJsType_;
+  return this.f_getField__autovalue_AutoValue_AutoValueJsType_;
  }
  /** @return {number} */
  getField2() {
-  return this.f_withJsMethod__autovalue_AutoValue_AutoValueJsType_;
+  return this.f_getWithJsMethod__autovalue_AutoValue_AutoValueJsType_;
+ }
+ /** @nodts @return {number} */
+ m_ignored__int() {
+  return this.f_ignored__autovalue_AutoValue_AutoValueJsType_;
  }
  /** @nodts */
  static $clinit() {

@@ -16,6 +16,7 @@
 package autovalue;
 
 import com.google.auto.value.AutoValue;
+import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
@@ -24,9 +25,12 @@ import jsinterop.annotations.JsType;
 public abstract class AutoValueJsType {
   protected AutoValueJsType() {}
 
-  // Intentionnaly public so the name is not mangled.
+  // Intentionaly public so it is a js member.
   public abstract int getField();
 
   @JsMethod(name = "getField2")
   abstract int getWithJsMethod();
+
+  @JsIgnore
+  public abstract int ignored();
 }

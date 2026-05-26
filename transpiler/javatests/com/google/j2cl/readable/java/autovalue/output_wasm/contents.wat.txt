@@ -290,6 +290,7 @@
   (ref.func $m_toString__java_lang_String@autovalue.AutoValue_AutoValueJsType)
   (ref.func $m_getField__int@autovalue.AutoValue_AutoValueJsType)
   (ref.func $m_getWithJsMethod__int_$pp_autovalue@autovalue.AutoValue_AutoValueJsType)
+  (ref.func $m_ignored__int@autovalue.AutoValue_AutoValueJsType)
  )
 )
 (global $autovalue.AutoValue_AutoValueWithBuilder.vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.vtable)
@@ -605,27 +606,27 @@
 ;;; void AutoValueJsType.$ctor()
 (func $$ctor__void_$p_autovalue_AutoValueJsType@autovalue.AutoValueJsType
  (param $this (ref null $autovalue.AutoValueJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:25:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:26:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:25:30
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:26:30
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void AutoValueJsType.$clinit()
 (func $$clinit__void_<once>_@autovalue.AutoValueJsType
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:24:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:25:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:24:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:25:22
   (if (global.get $$class-initialized@autovalue.AutoValueJsType)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:24:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:25:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:24:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:25:22
   (global.set $$class-initialized@autovalue.AutoValueJsType (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:24:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValueJsType.java:25:22
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2079,38 +2080,42 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValue_ArrayField.Builder)
 
-;;; AutoValue_AutoValueJsType AutoValue_AutoValueJsType.$create(int field, int withJsMethod)
-(func $$create__int__int@autovalue.AutoValue_AutoValueJsType
- (param $field i32)
- (param $withJsMethod i32)
+;;; AutoValue_AutoValueJsType AutoValue_AutoValueJsType.$create(int getField, int getWithJsMethod, int ignored)
+(func $$create__int__int__int@autovalue.AutoValue_AutoValueJsType
+ (param $getField i32)
+ (param $getWithJsMethod i32)
+ (param $ignored i32)
  (result (ref null $autovalue.AutoValue_AutoValueJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:17:2
  (local $$instance (ref null $autovalue.AutoValue_AutoValueJsType))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:17:2
   (call $$clinit__void_<once>_@autovalue.AutoValue_AutoValueJsType )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueJsType (global.get $autovalue.AutoValue_AutoValueJsType.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
-  (call $$ctor__int__int__void_$p_autovalue_AutoValue_AutoValueJsType@autovalue.AutoValue_AutoValueJsType (ref.as_non_null (local.get $$instance))(local.get $field)(local.get $withJsMethod))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:17:2
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueJsType (global.get $autovalue.AutoValue_AutoValueJsType.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:17:2
+  (call $$ctor__int__int__int__void_$p_autovalue_AutoValue_AutoValueJsType@autovalue.AutoValue_AutoValueJsType (ref.as_non_null (local.get $$instance))(local.get $getField)(local.get $getWithJsMethod)(local.get $ignored))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:17:2
   (return (local.get $$instance))
  )
 )
 
-;;; void AutoValue_AutoValueJsType.$ctor(int field, int withJsMethod)
-(func $$ctor__int__int__void_$p_autovalue_AutoValue_AutoValueJsType@autovalue.AutoValue_AutoValueJsType
+;;; void AutoValue_AutoValueJsType.$ctor(int getField, int getWithJsMethod, int ignored)
+(func $$ctor__int__int__int__void_$p_autovalue_AutoValue_AutoValueJsType@autovalue.AutoValue_AutoValueJsType
  (param $this (ref null $autovalue.AutoValue_AutoValueJsType))
- (param $field i32)
- (param $withJsMethod i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:14:2
+ (param $getField i32)
+ (param $getWithJsMethod i32)
+ (param $ignored i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:17:2
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:16:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:20:19
   (call $$ctor__void_$p_autovalue_AutoValueJsType@autovalue.AutoValueJsType (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:17:4
-  (struct.set $autovalue.AutoValue_AutoValueJsType $field@autovalue.AutoValue_AutoValueJsType (local.get $this) (local.get $field))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:18:4
-  (struct.set $autovalue.AutoValue_AutoValueJsType $withJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this) (local.get $withJsMethod))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:21:4
+  (struct.set $autovalue.AutoValue_AutoValueJsType $getField@autovalue.AutoValue_AutoValueJsType (local.get $this) (local.get $getField))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:22:4
+  (struct.set $autovalue.AutoValue_AutoValueJsType $getWithJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this) (local.get $getWithJsMethod))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:23:4
+  (struct.set $autovalue.AutoValue_AutoValueJsType $ignored@autovalue.AutoValue_AutoValueJsType (local.get $this) (local.get $ignored))
  )
 )
 
@@ -2119,12 +2124,12 @@
  (type $function.m_getField__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:22:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:27:13
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:23:4
-  (return (struct.get $autovalue.AutoValue_AutoValueJsType $field@autovalue.AutoValue_AutoValueJsType (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:28:4
+  (return (struct.get $autovalue.AutoValue_AutoValueJsType $getField@autovalue.AutoValue_AutoValueJsType (local.get $this)))
  )
 )
 (elem declare func $m_getField__int@autovalue.AutoValue_AutoValueJsType)
@@ -2134,27 +2139,42 @@
  (type $function.m_getWithJsMethod__int_$pp_autovalue)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:28:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:33:6
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:29:4
-  (return (struct.get $autovalue.AutoValue_AutoValueJsType $withJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:34:4
+  (return (struct.get $autovalue.AutoValue_AutoValueJsType $getWithJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this)))
  )
 )
 (elem declare func $m_getWithJsMethod__int_$pp_autovalue@autovalue.AutoValue_AutoValueJsType)
+
+;;; int AutoValue_AutoValueJsType.ignored()
+(func $m_ignored__int@autovalue.AutoValue_AutoValueJsType
+ (type $function.m_ignored__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:39:13
+ (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
+ (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:40:4
+  (return (struct.get $autovalue.AutoValue_AutoValueJsType $ignored@autovalue.AutoValue_AutoValueJsType (local.get $this)))
+ )
+)
+(elem declare func $m_ignored__int@autovalue.AutoValue_AutoValueJsType)
 
 ;;; String AutoValue_AutoValueJsType.toString()
 (func $m_toString__java_lang_String@autovalue.AutoValue_AutoValueJsType
  (type $function.m_toString__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:33:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:44:16
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:34:4
-  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $autovalue.AutoValue_AutoValueJsType $field@autovalue.AutoValue_AutoValueJsType (local.get $this))))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions ))(call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $autovalue.AutoValue_AutoValueJsType $withJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this))))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:45:4
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|_|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )(call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $autovalue.AutoValue_AutoValueJsType $getField@autovalue.AutoValue_AutoValueJsType (local.get $this))))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions ))(call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $autovalue.AutoValue_AutoValueJsType $getWithJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this))))(call $$getString_|__|__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions ))(call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $autovalue.AutoValue_AutoValueJsType $ignored@autovalue.AutoValue_AutoValueJsType (local.get $this))))(call $$getString_|_|_1__java_lang_String_<once>_@autovalue.$$AutoValue_AutoValueWithExtensions )))
  )
 )
 (elem declare func $m_toString__java_lang_String@autovalue.AutoValue_AutoValueJsType)
@@ -2165,32 +2185,32 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:41:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:53:17
  (local $that (ref null $autovalue.AutoValueJsType))
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:42:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:54:4
   (if (ref.eq (local.get $o) (local.get $this))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:43:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:55:6
      (return (i32.const 1))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:45:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:57:4
   (if (ref.test (ref $autovalue.AutoValueJsType) (local.get $o))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:46:6
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:58:6
      (local.set $that (ref.cast (ref null $autovalue.AutoValueJsType) (local.get $o)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:47:6
-     (return (if (result i32) (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $field@autovalue.AutoValue_AutoValueJsType (local.get $this)) (call_ref $function.m_getField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_getField__int (struct.get $autovalue.AutoValueJsType $vtable(local.get $that))))) (then (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $withJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this)) (call_ref $function.m_getWithJsMethod__int_$pp_autovalue (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_getWithJsMethod__int_$pp_autovalue (struct.get $autovalue.AutoValueJsType $vtable(local.get $that)))))) (else (i32.const 0))))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:59:6
+     (return (if (result i32) (if (result i32) (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $getField@autovalue.AutoValue_AutoValueJsType (local.get $this)) (call_ref $function.m_getField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_getField__int (struct.get $autovalue.AutoValueJsType $vtable(local.get $that))))) (then (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $getWithJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this)) (call_ref $function.m_getWithJsMethod__int_$pp_autovalue (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_getWithJsMethod__int_$pp_autovalue (struct.get $autovalue.AutoValueJsType $vtable(local.get $that)))))) (else (i32.const 0))) (then (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $ignored@autovalue.AutoValue_AutoValueJsType (local.get $this)) (call_ref $function.m_ignored__int (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_ignored__int (struct.get $autovalue.AutoValueJsType $vtable(local.get $that)))))) (else (i32.const 0))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:50:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:63:4
   (return (i32.const 0))
  )
 )
@@ -2201,22 +2221,26 @@
  (type $function.m_hashCode__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:54:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:67:13
  (local $h$ i32)
  (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
  (local.set $this (ref.cast (ref $autovalue.AutoValue_AutoValueJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:55:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:68:4
   (local.set $h$ (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:56:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:69:4
   (local.set $h$ (i32.mul (local.get $h$) (i32.const 1000003)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:57:4
-  (local.set $h$ (i32.xor (local.get $h$) (struct.get $autovalue.AutoValue_AutoValueJsType $field@autovalue.AutoValue_AutoValueJsType (local.get $this))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:58:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:70:4
+  (local.set $h$ (i32.xor (local.get $h$) (struct.get $autovalue.AutoValue_AutoValueJsType $getField@autovalue.AutoValue_AutoValueJsType (local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:71:4
   (local.set $h$ (i32.mul (local.get $h$) (i32.const 1000003)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:59:4
-  (local.set $h$ (i32.xor (local.get $h$) (struct.get $autovalue.AutoValue_AutoValueJsType $withJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:60:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:72:4
+  (local.set $h$ (i32.xor (local.get $h$) (struct.get $autovalue.AutoValue_AutoValueJsType $getWithJsMethod@autovalue.AutoValue_AutoValueJsType (local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:73:4
+  (local.set $h$ (i32.mul (local.get $h$) (i32.const 1000003)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:74:4
+  (local.set $h$ (i32.xor (local.get $h$) (struct.get $autovalue.AutoValue_AutoValueJsType $ignored@autovalue.AutoValue_AutoValueJsType (local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:75:4
   (return (local.get $h$))
  )
 )
@@ -2224,18 +2248,18 @@
 
 ;;; void AutoValue_AutoValueJsType.$clinit()
 (func $$clinit__void_<once>_@autovalue.AutoValue_AutoValueJsType
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:8:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:9:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:8:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:9:12
   (if (global.get $$class-initialized@autovalue.AutoValue_AutoValueJsType)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:8:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:9:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:8:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:9:12
   (global.set $$class-initialized@autovalue.AutoValue_AutoValueJsType (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:8:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/AutoValue_AutoValueJsType.java:9:12
   (call $$clinit__void_<once>_@autovalue.AutoValueJsType )
  )
 )
