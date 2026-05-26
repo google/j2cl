@@ -16,18 +16,26 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -146,8 +154,7 @@ public class FixAnonymousClassInstantiations extends NormalizationPass {
                   }
 
                   var updatedParameterType =
-                      AstUtils.propagateNullability(
-                              declarationTypeDescriptor, parameterTypeDescriptor)
+                      propagateNullability(declarationTypeDescriptor, parameterTypeDescriptor)
                           .toNullable(
                               declarationTypeDescriptor.isNullable()
                                   || parameterTypeDescriptor.isNullable());
@@ -163,5 +170,63 @@ public class FixAnonymousClassInstantiations extends NormalizationPass {
             return parameterDescriptors;
           }
         });
+  }
+
+  /**
+   * Applies the nullability annotation present in type variables from the declaration to the
+   * corresponding substituted type in the reference.
+   */
+  // TODO(b/406815802): Centralize the mechanism for propagating nullability in the passes.
+  private static TypeDescriptor propagateNullability(
+      TypeDescriptor declarationTypeDescriptor, TypeDescriptor referenceTypeDescriptor) {
+
+    return switch (declarationTypeDescriptor) {
+
+      // If the declaration is type variable, apply its nullability annotation if there is one.
+      case TypeVariable typeVariable -> {
+        if (typeVariable.isAnnotatedNonNullable()) {
+          yield referenceTypeDescriptor.toNonNullable();
+        } else if (typeVariable.isAnnotatedNullable()) {
+          yield referenceTypeDescriptor.toNullable();
+        } else {
+          yield referenceTypeDescriptor;
+        }
+      }
+
+      // If the declaration is an array, propagate the nullability on its component.
+      case ArrayTypeDescriptor declaration -> {
+        var fromRereference = (ArrayTypeDescriptor) referenceTypeDescriptor;
+        var declarationComponentTypeDescriptor = declaration.getComponentTypeDescriptor();
+        var resultingComponentTypeDescriptor =
+            propagateNullability(
+                declarationComponentTypeDescriptor, fromRereference.getComponentTypeDescriptor());
+        yield fromRereference.toBuilder()
+            .setComponentTypeDescriptor(resultingComponentTypeDescriptor)
+            .build();
+      }
+
+      // If the declaration is a declared type, propagate the nullability on its type arguments.
+      case DeclaredTypeDescriptor declaration -> {
+        // TODO(b/483755859): The assumption made here is that referenceTypeDescriptor is the same
+        // type as declaration type descriptor which might not be true.
+        var fromReference = (DeclaredTypeDescriptor) referenceTypeDescriptor;
+        var rewrittenArguments =
+            Streams.zip(
+                    declaration.getTypeArgumentDescriptors().stream(),
+                    fromReference.getTypeArgumentDescriptors().stream(),
+                    FixAnonymousClassInstantiations::propagateNullability)
+                .collect(toImmutableList());
+        yield ((DeclaredTypeDescriptor) referenceTypeDescriptor)
+            .getTypeDeclaration()
+            .toDescriptor(rewrittenArguments)
+            .toNullable(fromReference.isNullable());
+      }
+
+      // Nothing to propagate for primitives.
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> referenceTypeDescriptor;
+      default ->
+          throw new InternalCompilerError(
+              "Unexpected type in declaration: " + declarationTypeDescriptor.getClass());
+    };
   }
 }

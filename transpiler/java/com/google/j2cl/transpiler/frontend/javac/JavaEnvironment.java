@@ -39,7 +39,6 @@ import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.AnnotationValue;
 import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -662,8 +661,10 @@ public class JavaEnvironment {
       TypeMirror type) {
     boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     TypeDescriptor thisTypeDescriptor =
-        createTypeDescriptorWithNullability(
-            type, variableElement.getAnnotationMirrors(), inNullMarkedScope);
+        applyNullabilityAnnotations(
+            createTypeDescriptorWithNullability(
+                type, variableElement.getAnnotationMirrors(), inNullMarkedScope),
+            variableElement.asType());
     var key = new FieldDescriptorKey(enclosingTypeDescriptor, thisTypeDescriptor, variableElement);
     if (cachedFieldDescriptors.containsKey(key)) {
       return cachedFieldDescriptors.get(key);
@@ -682,8 +683,6 @@ public class JavaEnvironment {
       // Field references might be parameterized, and when they are we set the declaration
       // descriptor.
       declarationFieldDescriptor = createFieldDescriptor(variableElement);
-      thisTypeDescriptor =
-          AstUtils.propagateNullability(declarationTypeDescriptor, thisTypeDescriptor);
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
