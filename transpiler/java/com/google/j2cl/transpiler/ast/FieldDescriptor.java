@@ -147,6 +147,10 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return !isStatic();
   }
 
+  public boolean isRecordComponentField() {
+    return !isStatic() && getEnclosingTypeDescriptor().getTypeDeclaration().isJavaRecord();
+  }
+
   @Override
   public boolean isJsFunction() {
     return false;
@@ -159,7 +163,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   @Override
   public JsInfo getDeclarationJsInfo() {
-    if (isRecordComponent()) {
+    if (isRecordComponentField()) {
       // The record field itself should not be considered JsMember. The corresponding record
       // component accessor will inherit the JsInfo from the 'originalJsInfo' and will become a
       // JsMember.
@@ -173,11 +177,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return getDeclarationJsInfo();
   }
 
-  private boolean isRecordComponent() {
-    return !isStatic() && getEnclosingTypeDescriptor().getTypeDeclaration().isJavaRecord();
-  }
-
-  @Override
   public KtInfo getKtInfo() {
     return getOriginalKtInfo();
   }

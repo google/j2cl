@@ -541,6 +541,31 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return specializeMembers(getTypeDeclaration().getRecordComponentAccessorDescriptors());
   }
 
+  /**
+   * The list of component field descriptors declared in the record type returned in the order the
+   * components are declared.
+   */
+  @Memoized
+  public ImmutableList<FieldDescriptor> getRecordComponentFieldDescriptors() {
+    // Per JLS 8.10.1 (all components have a private instance field) and JLS 8.10.2 (a record class
+    // cannot declare an instance field) all instance fields in a record class are component backing
+    // fields.
+    //
+    // There is no guarantee that a compiler will not insert synthetic instance fields (although it
+    // is pretty safe to assume that) nor whether the tooling will preserve private fields in the
+    // header jars.
+    //
+    // We assume here that all instance fields are backing fields of record components, that they
+    // are preserved in the class files and that the order in the type model corresponds to the
+    // component ordering.
+    // TODO(b/516726204): Reconsider alternative ways to implement this.
+    return !getTypeDeclaration().isJavaRecord()
+        ? ImmutableList.of()
+        : getDeclaredFieldDescriptors().stream()
+            .filter(FieldDescriptor::isInstanceMember)
+            .collect(toImmutableList());
+  }
+
   /** Retrieves the field descriptor named {@code name} if it exists, {@code null} otherwise. */
   @Nullable
   public FieldDescriptor getFieldDescriptor(String name) {

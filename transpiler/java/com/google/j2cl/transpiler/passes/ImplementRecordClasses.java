@@ -103,7 +103,7 @@ public class ImplementRecordClasses extends NormalizationPass {
    * <p>Record fields are present in the type model but not in the AST.
    */
   private static void addFieldDeclarations(Type type) {
-    for (FieldDescriptor field : getRecordFields(type.getTypeDescriptor())) {
+    for (FieldDescriptor field : type.getTypeDescriptor().getRecordComponentFieldDescriptors()) {
       if (type.getInstanceFields().stream()
           .anyMatch(f -> f.getDescriptor().getName().equals(field.getName()))) {
         continue;
@@ -114,7 +114,7 @@ public class ImplementRecordClasses extends NormalizationPass {
 
   private static void addFieldAccessors(Type type) {
     var typeDescriptor = type.getTypeDescriptor();
-    for (FieldDescriptor field : getRecordFields(typeDescriptor)) {
+    for (FieldDescriptor field : typeDescriptor.getRecordComponentFieldDescriptors()) {
       var fieldAccessorDescriptor =
           typeDescriptor.getRecordComponentAccessors().stream()
               .filter(m -> m.getName().equals(field.getName()))
@@ -140,7 +140,8 @@ public class ImplementRecordClasses extends NormalizationPass {
   }
 
   private static void normalizeConstructors(Type type) {
-    ImmutableList<FieldDescriptor> recordFields = getRecordFields(type.getTypeDescriptor());
+    ImmutableList<FieldDescriptor> recordFields =
+        type.getTypeDescriptor().getRecordComponentFieldDescriptors();
 
     MethodDescriptor canonicalConstructorDescriptor =
         type.getTypeDescriptor()
@@ -346,15 +347,8 @@ public class ImplementRecordClasses extends NormalizationPass {
   private static ImmutableList<Expression> createRecordFieldAccessList(Expression qualifier) {
     DeclaredTypeDescriptor recordTypeDescriptor =
         (DeclaredTypeDescriptor) qualifier.getTypeDescriptor();
-    return getRecordFields(recordTypeDescriptor).stream()
+    return recordTypeDescriptor.getRecordComponentFieldDescriptors().stream()
         .map(field -> FieldAccess.builderFrom(field).setQualifier(qualifier.clone()).build())
-        .collect(toImmutableList());
-  }
-
-  private static ImmutableList<FieldDescriptor> getRecordFields(
-      DeclaredTypeDescriptor recordTypeDescriptor) {
-    return recordTypeDescriptor.getDeclaredFieldDescriptors().stream()
-        .filter(FieldDescriptor::isInstanceMember)
         .collect(toImmutableList());
   }
 
