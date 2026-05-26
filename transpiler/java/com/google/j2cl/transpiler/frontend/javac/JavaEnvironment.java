@@ -731,28 +731,12 @@ public class JavaEnvironment {
     if (cachedMethodDescriptors.containsKey(key)) {
       return cachedMethodDescriptors.get(key);
     }
-
-    // TODO(b/380911302): Remove redundancy in the creation of method descriptors.
-    // The enclosing type descriptor might be a subclass of the actual type descriptor, hence
-    // traverse the supertypes to find the actual enclosing type descriptor without loosing the
-    // parameterization.
-    var enclosingElement =
-        ((MethodSymbol) declarationMethodElement).baseSymbol().getEnclosingElement();
-    DeclaredTypeDescriptor unparameterizedEnclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(enclosingElement.asType());
-
-    enclosingTypeDescriptor =
-        enclosingTypeDescriptor.getAllSuperTypesIncludingSelf().stream()
-            .filter(unparameterizedEnclosingTypeDescriptor::isSameBaseType)
-            .findFirst()
-            .get();
-
-    MethodDescriptor declarationMethodDescriptor = null;
+    checkArgument(declarationMethodElement == ((Symbol) declarationMethodElement).baseSymbol());
 
     ImmutableList<TypeMirror> parameters =
         methodType.getParameterTypes().stream().collect(toImmutableList());
-
     TypeMirror returnType = methodType.getReturnType();
+    MethodDescriptor declarationMethodDescriptor = null;
     if (!typeArguments.isEmpty()
         || isSpecialized(
             enclosingTypeDescriptor, declarationMethodElement, parameters, returnType)) {

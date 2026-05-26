@@ -1045,7 +1045,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
    * <pre> {@code A::m}    into    {@code  (par1, ..., parN) -> A.m(par1, ..., parN) } </pre>
    */
   private Expression convertMemberReference(JCMemberReference memberReference) {
-    var methodSymbol = (MethodSymbol) memberReference.sym;
+    var methodSymbol = (MethodSymbol) memberReference.sym.baseSymbol();
 
     var expressionTypeDescriptor =
         environment.createTypeDescriptor(memberReference.type, inNullMarkedScope());
