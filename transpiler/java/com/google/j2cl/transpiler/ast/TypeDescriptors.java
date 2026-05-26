@@ -106,6 +106,34 @@ public class TypeDescriptors {
   @QualifiedBinaryName("java.util.Map$Entry")
   public DeclaredTypeDescriptor javaUtilMapEntry;
 
+  @Nullable
+  @QualifiedBinaryName("java.util.MutableCollection")
+  public DeclaredTypeDescriptor javaUtilMutableCollection;
+
+  @Nullable
+  @QualifiedBinaryName("java.util.MutableIterator")
+  public DeclaredTypeDescriptor javaUtilMutableIterator;
+
+  @Nullable
+  @QualifiedBinaryName("java.util.MutableList")
+  public DeclaredTypeDescriptor javaUtilMutableList;
+
+  @Nullable
+  @QualifiedBinaryName("java.util.MutableListIterator")
+  public DeclaredTypeDescriptor javaUtilMutableListIterator;
+
+  @Nullable
+  @QualifiedBinaryName("java.util.MutableMap")
+  public DeclaredTypeDescriptor javaUtilMutableMap;
+
+  @Nullable
+  @QualifiedBinaryName("java.util.MutableMap$MutableEntry")
+  public DeclaredTypeDescriptor javaUtilMutableMapMutableEntry;
+
+  @Nullable
+  @QualifiedBinaryName("java.util.MutableSet")
+  public DeclaredTypeDescriptor javaUtilMutableSet;
+
   public DeclaredTypeDescriptor javaUtilList;
   public DeclaredTypeDescriptor javaUtilObjects;
   public DeclaredTypeDescriptor javaUtilOptional;

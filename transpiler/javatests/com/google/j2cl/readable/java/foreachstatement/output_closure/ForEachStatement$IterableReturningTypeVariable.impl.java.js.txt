@@ -10,6 +10,7 @@ let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
 /**
+ * @abstract
  * @template U, T
  * @implements {j_l_Iterable<Integer>}
  */
@@ -17,13 +18,6 @@ class IterableReturningTypeVariable extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
- }
- /** @nodts @template U, T @return {!IterableReturningTypeVariable<U, T>} */
- static $create__() {
-  IterableReturningTypeVariable.$clinit();
-  let $instance = new IterableReturningTypeVariable();
-  $instance.$ctor__foreachstatement_ForEachStatement_IterableReturningTypeVariable__void();
-  return $instance;
  }
  /** @nodts */
  $ctor__foreachstatement_ForEachStatement_IterableReturningTypeVariable__void() {

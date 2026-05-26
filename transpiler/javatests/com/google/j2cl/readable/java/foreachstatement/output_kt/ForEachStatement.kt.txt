@@ -121,36 +121,32 @@ open class ForEachStatement {
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception1 internal constructor(): java.lang.Exception(), MutableIterableJvm<Number?> {
   override fun iterator(): MutableIterator<Number?> {
-   return null!!
+   return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception2 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int?> {
   override fun iterator(): MutableIterator<Int?> {
-   return null!!
+   return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception3 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int> {
   override fun iterator(): MutableIterator<Int> {
-   return null!!
+   return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception4 internal constructor(): java.lang.Exception(), MutableIterableJvm<Any?> {
   override fun iterator(): MutableIterator<Any?> {
-   return null!!
+   return null!!.asMutableIterator()
   }
  }
  
- open class IterableReturningTypeVariable<U, T: MutableIterator<Int?>> internal constructor(): MutableIterableJvm<Int?> {
-  override fun iterator(): T {
-   return null!!
-  }
- }
+ abstract class IterableReturningTypeVariable<U, T: MutableIterator<Int?>> internal constructor(): MutableIterableJvm<Int?>
  
  fun interface StringIterable: MutableIterableJvm<String?> {
   override fun iterator(): StringIterator
@@ -161,4 +157,6 @@ open class ForEachStatement {
    throw UnsupportedOperationException()
   }
  }
+ 
+ annotation class J2ktIncompatible
 }

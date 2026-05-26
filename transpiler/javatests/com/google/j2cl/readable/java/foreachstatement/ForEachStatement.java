@@ -72,8 +72,9 @@ public class ForEachStatement {
     }
   }
 
-  static class IterableReturningTypeVariable<U, T extends @JsNonNull Iterator<Integer>>
+  abstract static class IterableReturningTypeVariable<U, T extends @JsNonNull Iterator<Integer>>
       implements Iterable<Integer> {
+    @J2ktIncompatible // J2kt needs to be able to rewrite the return type of iterator() overrides.
     public T iterator() {
       return null;
     }
@@ -131,4 +132,6 @@ public class ForEachStatement {
   private void testOverriddenIterator(StringIterable i) {
     for (String s : i) {}
   }
+
+  public @interface J2ktIncompatible {}
 }

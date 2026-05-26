@@ -689,7 +689,7 @@ open class Collections {
   fun testIterableLambda() {
    val list: MutableList<String> = ArrayList<String>()
    val it: MutableIterable<String> = MutableIterableJvm {
-    return@MutableIterableJvm list.iterator()
+    return@MutableIterableJvm list.iterator().asMutableIterator()
    }
   }
   
@@ -697,14 +697,14 @@ open class Collections {
   fun testCustomIterableLambda() {
    val list: MutableList<String> = ArrayList<String>()
    val it: CustomIterable<String> = CustomIterable {
-    return@CustomIterable list.iterator()
+    return@CustomIterable list.iterator().asMutableIterator()
    }
   }
  }
  
  open class CustomCollection<T>: AbstractCollection<T>() {
   override fun iterator(): MutableIterator<T> {
-   return java.util.Collections.emptyIterator<T>()
+   return java.util.Collections.emptyIterator<T>().asMutableIterator()
   }
   
   override val size: Int
@@ -788,11 +788,11 @@ open class Collections {
   }
   
   override fun listIterator(): MutableListIterator<T> {
-   return java.util.Collections.emptyListIterator<T>()
+   return java.util.Collections.emptyListIterator<T>().asMutableListIterator()
   }
   
   override fun subList(fromIndex: Int, toIndex: Int): MutableList<T> {
-   return java.util.Collections.emptyList<T>()
+   return java.util.Collections.emptyList<T>().asMutableList()
   }
   
   override val size: Int
@@ -848,32 +848,32 @@ open class Collections {
    }
   
   override fun iterator(): MutableIterator<T> {
-   return super<ArrayList>.iterator()
+   return super<ArrayList>.iterator().asMutableIterator()
   }
   
   override fun listIterator(): MutableListIterator<T> {
-   return super<ArrayList>.listIterator()
+   return super<ArrayList>.listIterator().asMutableListIterator()
   }
   
   override fun subList(fromIndex: Int, toIndex: Int): MutableList<T> {
-   return super<ArrayList>.subList(fromIndex, toIndex)
+   return super<ArrayList>.subList(fromIndex, toIndex).asMutableList()
   }
  }
  
  open class CustomMap<K, V>: AbstractMap<K, V>() {
   override val entries: MutableSet<MutableEntry<K, V>>
    get() {
-    return java.util.Collections.emptySet<MutableEntry<K, V>>()
+    return (java.util.Collections.emptySet<MutableEntry<K, V>>() as MutableSet<MutableEntry<K, V>>).asMutableSet()
    }
   
   override val keys: MutableSet<K>
    get() {
-    return java.util.Collections.emptySet<K>()
+    return java.util.Collections.emptySet<K>().asMutableSet()
    }
   
   override val values: MutableCollection<V>
    get() {
-    return java.util.Collections.emptyList<V>()
+    return java.util.Collections.emptyList<V>().asMutableList()
    }
   
   override fun containsKey(key: K): Boolean {
@@ -949,24 +949,24 @@ open class Collections {
  open class CustomMapWithSuperCalls<K, V>: HashMap<K, V>() {
   override val entries: MutableSet<MutableEntry<K, V>>
    get() {
-    return super<HashMap>.entries
+    return (super<HashMap>.entries as MutableSet<MutableEntry<K, V>>).asMutableSet()
    }
   
   override val keys: MutableSet<K>
    get() {
-    return super<HashMap>.keys
+    return super<HashMap>.keys.asMutableSet()
    }
   
   override val values: MutableCollection<V>
    get() {
-    return super<HashMap>.values
+    return super<HashMap>.values.asMutableCollection()
    }
  }
  
  open class CustomMapSetValues<K, V>: CustomMap<K, V>() {
   override val values: MutableSet<V>
    get() {
-    return java.util.Collections.emptySet<V>()
+    return java.util.Collections.emptySet<V>().asMutableSet()
    }
  }
  
@@ -980,7 +980,7 @@ open class Collections {
     val s: Supplier<MutableCollection<V>> = Supplier {
      return@Supplier java.util.Collections.emptySet<Any>() as MutableCollection<V>
     }
-    return java.util.Collections.emptyList<Any>() as MutableCollection<V>
+    return (java.util.Collections.emptyList<Any>() as MutableCollection<V>).asMutableCollection()
    }
  }
  
@@ -1111,7 +1111,7 @@ open class Collections {
  
  open class SpecificEntrySet: AbstractSet<MutableEntry<String, Int>>() {
   override fun iterator(): MutableIterator<MutableEntry<String, Int>> {
-   return null!!
+   return null!!.asMutableIterator()
   }
   
   override val size: Int
@@ -1123,7 +1123,7 @@ open class Collections {
  open class CustomMapWithSpecificEntrySet: AbstractMap<String, Int>() {
   override val entries: MutableSet<MutableEntry<String, Int>>
    get() {
-    return SpecificEntrySet()
+    return SpecificEntrySet() as AbstractSet<MutableEntry<String, Int>>
    }
  }
  

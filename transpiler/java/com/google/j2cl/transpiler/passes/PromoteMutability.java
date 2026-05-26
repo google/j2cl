@@ -15,16 +15,24 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+import static com.google.j2cl.transpiler.passes.PromoteMutability.ReturnRewriteKind.MUTABLE_ENTRYSET_REWRITE;
+import static com.google.j2cl.transpiler.passes.PromoteMutability.ReturnRewriteKind.MUTABLE_REWRITE;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -33,8 +41,11 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
 import javax.annotation.Nullable;
 
 /**
- * Promotes mutability for base collection types in J2KT by replacing calls to mutation methods with
- * calls to the corresponding asMutable...() method.
+ * The Kotlin backend will typically translate Java JRE collection interface types to their
+ * read-only Kotlin equivalents.
+ *
+ * <p>This pass promotes them to their mutable Kotlin equivalents in situations where using
+ * read-only collections would not be legal.
  */
 public class PromoteMutability extends AbstractJ2ktNormalizationPass {
 
@@ -42,6 +53,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
 
   private final ImmutableSet<MethodDescriptor> mutationMethods;
   private final ImmutableMap<TypeDeclaration, MethodDescriptor> asMutableMethodsByTypeDeclaration;
+  private final ImmutableMap<MethodDescriptor, ReturnRewriteKind> overrideReturnMappings;
 
   public PromoteMutability() {
     ImmutableSet.Builder<MethodDescriptor> mutationMethodsBuilder = ImmutableSet.builder();
@@ -128,8 +140,34 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
 
     this.mutationMethods = mutationMethodsBuilder.build();
     this.asMutableMethodsByTypeDeclaration = asMutableMethodsBuilder.buildOrThrow();
+
+    ImmutableMap.Builder<MethodDescriptor, ReturnRewriteKind> returnMappingsBuilder =
+        ImmutableMap.builder();
+
+    addReturnRewrite(returnMappingsBuilder, types.javaLangIterable, "iterator", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, types.javaUtilList, "subList", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, types.javaUtilList, "listIterator", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, types.javaUtilMap, "keySet", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, types.javaUtilMap, "values", MUTABLE_REWRITE);
+    addReturnRewrite(
+        returnMappingsBuilder, types.javaUtilMap, "entrySet", MUTABLE_ENTRYSET_REWRITE);
+
+    this.overrideReturnMappings = returnMappingsBuilder.buildOrThrow();
   }
 
+  /**
+   * Registers the converter method to obtain a mutable view of a collection type, and the methods
+   * that mutate that collection type.
+   *
+   * <p>For a given collection type (e.g., {@code Collection}), this associates the type's
+   * declaration with its corresponding {@code asMutable...} converter method (e.g., {@code
+   * asMutableCollection}) in {@code asMutableMethodsBuilder}.
+   *
+   * <p>It also registers all declared methods with the specified names (including all overloads) as
+   * mutating methods in {@code mutationMethodsBuilder}. Calls to these mutating methods on
+   * read-only collection types will trigger mutability promotion by inserting a call to the
+   * registered converter method.
+   */
   private static void addMutatingMethods(
       ImmutableMap.Builder<TypeDeclaration, MethodDescriptor> asMutableMethodsBuilder,
       ImmutableSet.Builder<MethodDescriptor> mutationMethodsBuilder,
@@ -147,10 +185,33 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     }
   }
 
+  /**
+   * Registers a return rewrite mapping for all declared methods with the specified name (i.e. all
+   * overloads with that name) in the enclosing type.
+   *
+   * <p>These mappings are used to rewrite return types of overridden methods to ensure they return
+   * mutable types when implemented in mutable collection types (e.g., {@code subList} in {@code
+   * MutableList} must return {@code MutableList}) when they would otherwise return read-only
+   * collection types.
+   */
+  private static void addReturnRewrite(
+      ImmutableMap.Builder<MethodDescriptor, ReturnRewriteKind> builder,
+      DeclaredTypeDescriptor enclosingType,
+      String methodName,
+      ReturnRewriteKind kind) {
+    for (MethodDescriptor method :
+        enclosingType.getTypeDeclaration().getDeclaredMethodDescriptors()) {
+      if (method.getName().equals(methodName)) {
+        builder.put(method.getDeclarationDescriptor(), kind);
+      }
+    }
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     rewriteMutationCalls(compilationUnit);
     rewriteLowerBoundedCollectionExpressions(compilationUnit);
+    rewriteOverrideReturnStatements(compilationUnit);
   }
 
   private void rewriteMutationCalls(CompilationUnit compilationUnit) {
@@ -275,6 +336,119 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
             }));
   }
 
+  private void rewriteOverrideReturnStatements(CompilationUnit compilationUnit) {
+
+    // `java.util.List` will generally be translated as `kotlin.collection.List`. `implements List`
+    // however will become `: MutableList` because all Java List implementations override mutations.
+    //
+    // Implementing MutableList forces us to rewrite the return values of some method overrides to
+    // also be mutable, for example `subList` of `MutableList` must return `MutableList`.
+    // Other collection interfaces also have such methods.
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteReturnStatement(ReturnStatement returnStatement) {
+            // Method_Like_ because we could be in a lambda implementing a collection interface.
+            MethodLike methodLike = (MethodLike) getParent(MethodLike.class::isInstance);
+
+            Expression expression = returnStatement.getExpression();
+            if (expression == null) {
+              return returnStatement;
+            }
+
+            MethodDescriptor methodDescriptor = methodLike.getDescriptor();
+            ReturnRewriteKind kind = getReturnRewriteKind(methodDescriptor);
+            if (kind == null) {
+              return returnStatement;
+            }
+
+            if (kind == MUTABLE_ENTRYSET_REWRITE) {
+              expression = castEntrySetToMutableEntrySet(expression);
+            }
+
+            MethodDescriptor asMutableMethod =
+                getAsMutableMethodIfReadonly(expression.getTypeDescriptor());
+            if (asMutableMethod != null) {
+              expression = MethodCall.builderFrom(asMutableMethod).setQualifier(expression).build();
+            }
+
+            return ReturnStatement.builder()
+                .setSourcePosition(returnStatement.getSourcePosition())
+                .setExpression(expression)
+                .build();
+          }
+        });
+  }
+
+  /**
+   * Cast {@code Set<Entry<K,V>>} to {@code Set<MutableEntry<K,V>>}. Does not cast the outer Set
+   * type but preserves it.
+   */
+  private Expression castEntrySetToMutableEntrySet(Expression expression) {
+    TypeDescriptor expressionType = expression.getTypeDescriptor();
+
+    checkState(
+        expressionType.isAssignableTo(types.javaUtilSet), "Expected Set, got: %s", expressionType);
+
+    if (!(expressionType instanceof DeclaredTypeDescriptor declaredExpressionType)) {
+      return expression;
+    }
+
+    // Look for a supertype where the Entry type is a type parameter. So
+    // MyCustomSet<Entry<K,V>> but not MyCustomEntrySet<K,V>. We want to insert a cast to
+    // MyCustomSet<MutableEntry<K,V>>. We can't do that with MyCustomEntrySet<K,V>.
+    DeclaredTypeDescriptor targetType =
+        declaredExpressionType.getAllSuperTypesIncludingSelf().stream()
+            .filter(t -> t.isAssignableTo(types.javaUtilSet))
+            .filter(t -> t.getTypeArgumentDescriptors().size() == 1)
+            .filter(
+                t -> t.getTypeArgumentDescriptors().get(0).isSameBaseType(types.javaUtilMapEntry))
+            .findFirst()
+            .orElse(null);
+
+    checkNotNull(
+        targetType,
+        "Expected to find at least Set<Entry<K,V>> as a supertype of entrySet() return"
+            + " expression.");
+
+    ImmutableList<TypeDescriptor> typeArguments = targetType.getTypeArgumentDescriptors();
+    TypeDescriptor typeArgument = typeArguments.get(0);
+    DeclaredTypeDescriptor entryType = (DeclaredTypeDescriptor) typeArgument;
+
+    TypeDescriptor mutableEntryType =
+        types
+            .javaUtilMutableMapMutableEntry
+            .withTypeArguments(entryType.getTypeArgumentDescriptors())
+            .toNullable(entryType.isNullable());
+
+    DeclaredTypeDescriptor newExpressionType =
+        targetType.withTypeArguments(ImmutableList.of(mutableEntryType));
+
+    return CastExpression.builder()
+        .setExpression(expression)
+        .setCastTypeDescriptor(newExpressionType)
+        .build();
+  }
+
+  @Nullable
+  private ReturnRewriteKind getReturnRewriteKind(MethodDescriptor methodDescriptor) {
+    if (!methodDescriptor.isPolymorphic()) {
+      return null;
+    }
+    ReturnRewriteKind kind =
+        overrideReturnMappings.get(methodDescriptor.getDeclarationDescriptor());
+    if (kind != null) {
+      return kind;
+    }
+    for (MethodDescriptor overridden : methodDescriptor.getJavaOverriddenMethodDescriptors()) {
+      kind = overrideReturnMappings.get(overridden.getDeclarationDescriptor());
+      if (kind != null) {
+        return kind;
+      }
+    }
+    return null;
+  }
+
   /**
    * Returns the asMutable() method for a type if it is a collection base interface that will be
    * translated as a readonly Kotlin type, null otherwise.
@@ -303,5 +477,10 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
       }
     }
     return null;
+  }
+
+  enum ReturnRewriteKind {
+    MUTABLE_REWRITE,
+    MUTABLE_ENTRYSET_REWRITE
   }
 }

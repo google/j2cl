@@ -289,7 +289,7 @@ open class Lambdas {
   @JvmStatic
   fun <T> testIterable(iterable: MutableIterable<T>?) {
    val lambda: MutableIterable<T> = MutableIterableJvm {
-    return@MutableIterableJvm iterable!!.iterator()
+    return@MutableIterableJvm iterable!!.iterator().asMutableIterator()
    }
   }
   
