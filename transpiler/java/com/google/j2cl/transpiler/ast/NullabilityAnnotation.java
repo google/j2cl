@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import com.google.common.collect.Ordering;
+
 /** Represents nullability annotations or the absence of. */
 public enum NullabilityAnnotation {
   NONE,
@@ -28,4 +30,17 @@ public enum NullabilityAnnotation {
       case NONE -> "";
     };
   }
+
+  public static NullabilityAnnotation mostNullable(
+      NullabilityAnnotation first, NullabilityAnnotation second) {
+    return ORDERING.max(first, second);
+  }
+
+  public static NullabilityAnnotation leastNullable(
+      NullabilityAnnotation first, NullabilityAnnotation second) {
+    return ORDERING.min(first, second);
+  }
+
+  private static final Ordering<NullabilityAnnotation> ORDERING =
+      Ordering.explicit(NOT_NULLABLE, NONE, NULLABLE);
 }

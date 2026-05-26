@@ -17,11 +17,11 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.NullabilityAnnotation.mostNullable;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Ordering;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -1015,7 +1015,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
   private static TypeDescriptor propagateNullabilityAnnotationFrom(
       TypeVariable toTypeVariable, TypeVariable fromTypeVariable) {
     return toTypeVariable.withNullabilityAnnotation(
-        mostNullableOf(
+        mostNullable(
             toTypeVariable.getNullabilityAnnotation(),
             fromTypeVariable.getNullabilityAnnotation()));
   }
@@ -1233,17 +1233,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
       default -> throw new AssertionError();
     }
-  }
-
-  private static final Ordering<NullabilityAnnotation> NULLABILITY_ANNOTATION_ORDERING =
-      Ordering.explicit(
-          NullabilityAnnotation.NOT_NULLABLE,
-          NullabilityAnnotation.NONE,
-          NullabilityAnnotation.NULLABLE);
-
-  private static NullabilityAnnotation mostNullableOf(
-      NullabilityAnnotation first, NullabilityAnnotation second) {
-    return NULLABILITY_ANNOTATION_ORDERING.max(first, second);
   }
 
   /** Returns non-RAW type descriptor, by using RAW type parameters as type arguments. */
