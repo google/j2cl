@@ -476,17 +476,17 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
     if (!seen.add(new DescriptorPair(declarationTypeDescriptor, typeDescriptor))) {
       // This pair of declaration and descriptor has already been processed.
-      return Stream.of();
+      return Stream.empty();
     }
     // TODO(b/406815802): Investigate how is it possible. The problem is reproduced in
     //  PropagateNullabilityProblem readable.
     if (!typeDescriptor.isAssignableTo(declarationTypeDescriptor)) {
-      return Stream.of();
+      return Stream.empty();
     }
 
     return switch (declarationTypeDescriptor) {
       // Primitive type descriptors are never parameterized.
-      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> Stream.of();
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> Stream.empty();
 
       case ArrayTypeDescriptor declarationArrayTypeDescriptor ->
           switch (typeDescriptor) {
@@ -503,10 +503,10 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
       case DeclaredTypeDescriptor declarationDeclaredTypeDescriptor ->
           switch (typeDescriptor) {
-            case PrimitiveTypeDescriptor primitiveTypeDescriptor -> Stream.of();
+            case PrimitiveTypeDescriptor primitiveTypeDescriptor -> Stream.empty();
 
             // Array -> Object / Cloneable / Serializable
-            case ArrayTypeDescriptor arrayTypeDescriptor -> Stream.of();
+            case ArrayTypeDescriptor arrayTypeDescriptor -> Stream.empty();
 
             // Look for the parameterized instance of the declared parameter type
             case DeclaredTypeDescriptor declaredTypeDescriptor ->
@@ -565,7 +565,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
                   ? typeDescriptor.toNonNullable()
                   : typeDescriptor);
 
-      case TypeVariable declarationTypeVariable -> Stream.of();
+      case TypeVariable declarationTypeVariable -> Stream.empty();
 
       case IntersectionTypeDescriptor declarationIntersectionTypeDescriptor ->
           declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
