@@ -145,7 +145,7 @@ public final class JsInteropUtils {
   }
 
   private static JsMemberType getJsMemberType(Element member, boolean isPropertyAccessor) {
-    if (member.getKind() == ElementKind.FIELD || member.getKind() == ElementKind.ENUM_CONSTANT) {
+    if (member.getKind().isField()) {
       return JsMemberType.PROPERTY;
     }
     if (member.getKind() == ElementKind.CONSTRUCTOR) {

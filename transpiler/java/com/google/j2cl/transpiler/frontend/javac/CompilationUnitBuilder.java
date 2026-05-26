@@ -180,7 +180,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
@@ -1554,7 +1553,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // `baseSymbol()`.
     Symbol symbol = identifier.sym.baseSymbol();
     if (symbol instanceof VarSymbol varSymbol) {
-      if (symbol.getKind() == ElementKind.FIELD || symbol.getKind() == ElementKind.ENUM_CONSTANT) {
+      if (symbol.getKind().isField()) {
         // An unqualified field access in a subclass might have a different type than its
         // declaration:
         //
