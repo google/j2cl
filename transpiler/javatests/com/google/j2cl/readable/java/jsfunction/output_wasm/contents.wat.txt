@@ -3588,7 +3588,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.JsFunctionImplementation) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:74:6
-  (return (i32.add (i32.add (local.get $a) (call $m_bar__int@jsfunction.Main.JsFunctionImplementation (ref.as_non_null (local.get $this)))) (struct.get $jsfunction.Main.JsFunctionImplementation $field@jsfunction.Main.JsFunctionImplementation (local.get $this))))
+  (return (i32.add (i32.add (i32.add (local.get $a) (call $m_bar__int@jsfunction.Main.JsFunctionImplementation (ref.as_non_null (local.get $this)))) (struct.get $jsfunction.Main.JsFunctionImplementation $field@jsfunction.Main.JsFunctionImplementation (local.get $this))) (call_ref $function.m_overlayMethod__int (ref.as_non_null (local.get $this))(struct.get $jsfunction.Main.JsFunctionImplementation.vtable $m_overlayMethod__int (struct.get $jsfunction.Main.JsFunctionImplementation $vtable(local.get $this))))))
  )
 )
 (elem declare func $m_foo__int__int@jsfunction.Main.JsFunctionImplementation)

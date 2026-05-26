@@ -71,7 +71,7 @@ public class Main {
 
     @Override
     public int foo(int a) {
-      return a + this.bar() + this.field;
+      return a + this.bar() + this.field + overlayMethod();
     }
   }
 

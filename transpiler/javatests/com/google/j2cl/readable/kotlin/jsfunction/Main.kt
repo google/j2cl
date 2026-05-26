@@ -66,7 +66,7 @@ class JsFunctionImplementation : JsFunctionInterface {
   }
 
   override fun foo(a: Int): Int {
-    return a + bar() + field
+    return a + bar() + field + overlayMethod()
   }
 }
 
