@@ -19,22 +19,10 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
-import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
 import com.google.j2cl.transpiler.frontend.kotlin.KotlinParser;
 
 /** Drives the frontend to parse, type check and resolve Java source code. */
 public enum Frontend {
-  JDT {
-    @Override
-    public Library parse(FrontendOptions options, Problems problems) {
-      return new JdtParser(problems).parseFiles(options);
-    }
-
-    @Override
-    public boolean isJavaFrontend() {
-      return true;
-    }
-  },
   JAVAC {
     @Override
     public Library parse(FrontendOptions options, Problems problems) {

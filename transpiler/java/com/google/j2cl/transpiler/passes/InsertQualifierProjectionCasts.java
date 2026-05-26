@@ -219,8 +219,7 @@ public final class InsertQualifierProjectionCasts extends AbstractJ2ktNormalizat
   }
 
   private static boolean needsCast(TypeDescriptor typeDescriptor) {
-    // Javac frontend appears to produce wildcards for recursive types in places where JDT produces
-    // captures, so it requires special treatment.
+    // Javac frontend produces wildcards for recursive types that require special treatment.
     return isWildcardWithoutLowerBound(typeDescriptor)
         || containsCaptureWithoutLowerBound(typeDescriptor);
   }

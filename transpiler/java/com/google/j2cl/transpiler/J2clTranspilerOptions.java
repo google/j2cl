@@ -36,7 +36,6 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class J2clTranspilerOptions implements FrontendOptions, BackendOptions {
 
-  @Nullable
   public abstract Frontend getFrontend();
 
   public abstract Backend getBackend();
@@ -90,7 +89,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setOptimizeAutoValue(boolean b);
 
-    public abstract Builder setFrontend(@Nullable Frontend frontend);
+    abstract Builder setFrontend(Frontend frontend);
 
     public abstract Builder setBackend(Backend backend);
 
@@ -126,9 +125,6 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     abstract Output getOutput();
 
-    @Nullable
-    abstract Frontend getFrontend();
-
     abstract Backend getBackend();
 
     abstract boolean getEmitReadableSourceMap();
@@ -162,14 +158,10 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
             "Transpilation of Java and Kotlin files together is not supported yet.");
       }
 
+      boolean hasKotlinSources = !allKotlinSources.isEmpty();
       // Set the sources explicitly since original sources can include non-java/kotlin files.
-      setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources);
-
-      Frontend frontend = getFrontend();
-      if (frontend == null) {
-        setFrontend(
-            !allKotlinSources.isEmpty() ? Frontend.KOTLIN : getBackend().getDefaultFrontend());
-      }
+      setSources(hasKotlinSources ? allKotlinSources : allJavaSources);
+      setFrontend(hasKotlinSources ? Frontend.KOTLIN : Frontend.JAVAC);
 
       setSourceGenPath(getOutput().createTempDirectory("_sourcegen"));
 

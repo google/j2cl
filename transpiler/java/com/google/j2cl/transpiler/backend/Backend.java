@@ -21,7 +21,6 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
-import com.google.j2cl.transpiler.frontend.Frontend;
 import com.google.j2cl.transpiler.passes.AddAbstractLambdaAdaptorClasses;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddBridgeMethods;
@@ -775,9 +774,5 @@ public enum Backend {
 
   public boolean isClosure() {
     return false;
-  }
-
-  public Frontend getDefaultFrontend() {
-    return Frontend.JAVAC;
   }
 }

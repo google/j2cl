@@ -26,7 +26,6 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.Backend;
-import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -104,13 +103,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
           "Generates Kythe indexing metadata and appends it onto the generated JavaScript files.",
       hidden = true)
   boolean generateKytheIndexingMetadata = false;
-
-  @Option(
-      name = "-frontend",
-      metaVar = "(JDT | JAVAC)",
-      usage = "Select the frontend to use: JDT (default), JAVAC (experimental).",
-      hidden = true)
-  Frontend frontend = null;
 
   @Option(
       name = "-backend",
@@ -209,7 +201,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
-        .setFrontend(this.frontend)
+
         .setBackend(this.backend)
         .setWasmEntryPointStrings(wasmEntryPoints)
         .setEnableWasmCustomDescriptorsJsInterop(this.enableWasmCustomDescriptorsJsInterop)

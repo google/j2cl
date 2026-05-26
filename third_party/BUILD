@@ -59,14 +59,6 @@ alias(
     actual = "@maven//:args4j_args4j",
 )
 
-java_library(
-    name = "jdt-core",
-    exports = [
-        "@maven//:org_eclipse_jdt_org_eclipse_jdt_core",
-        "@maven//:org_eclipse_platform_org_eclipse_equinox_common",
-    ],
-)
-
 alias(
     name = "binaryen",
     actual = "@com_google_binaryen//:wasm-opt",

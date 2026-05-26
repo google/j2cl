@@ -14,6 +14,7 @@ java_library(
     ],
     deps = [
         "//third_party:auto_value",
+        "//third_party:error_prone_annotations",
         "//third_party:guava",
         "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/common",
@@ -36,7 +37,6 @@ java_library(
         "//third_party:guava",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler/backend",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend",
     ],
 )
 
@@ -61,7 +61,6 @@ java_library(
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/common/bazel",
         "//transpiler/java/com/google/j2cl/transpiler/backend",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend",
     ],
 )
 

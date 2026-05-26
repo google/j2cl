@@ -415,10 +415,6 @@ def _j2cl_transpile(
     args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
 
-    java_frontend = ctx.attr.experimental_java_frontend or ctx.attr._java_frontend[BuildSettingInfo].value
-    if java_frontend:
-        args.add("-experimentalJavaFrontend", java_frontend)
-
     args.add("-experimentalBackend", backend)
 
     if backend == "WASM":

@@ -23,7 +23,6 @@ import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.transpiler.backend.Backend;
-import com.google.j2cl.transpiler.frontend.Frontend;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,12 +120,6 @@ final class BazelJ2clBuilder extends BazelWorker {
               + " products.",
       hidden = true)
   boolean enableJSpecifySupport = false;
-
-  @Option(
-      name = "-experimentalJavaFrontend",
-      usage = "Select the java frontend to use: JDT (default), JAVAC (experimental).",
-      hidden = true)
-  Frontend javaFrontend = null;
 
   @Option(
       name = "-experimentalBackend",
@@ -234,7 +227,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setSourceMappingPathPrefix(this.sourceMappingPathPrefix)
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
-        .setFrontend(this.javaFrontend)
+
         .setBackend(this.backend)
         .setWasmEntryPointStrings(this.wasmEntryPoints)
         .setEnableWasmCustomDescriptors(this.enableWasmCustomDescriptors)
