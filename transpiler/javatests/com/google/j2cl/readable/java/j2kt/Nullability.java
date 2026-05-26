@@ -15,6 +15,7 @@
  */
 package j2kt;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 import jsinterop.annotations.JsNonNull;
 import org.jspecify.annotations.NonNull;
@@ -38,6 +39,14 @@ public class Nullability {
     void testBoxedHolder(Holder<Integer> holder) {
       holder.acceptNullableConsumer(s -> {});
     }
+
+    void testSwitchExpression_inNullMarkedScope() {
+      var s =
+          switch (1) {
+            case 1 -> new ArrayList<String>();
+            default -> null;
+          };
+    }
   }
 
   // TODO(b/451682710): Remove this when it becomes a compile error.
@@ -48,4 +57,12 @@ public class Nullability {
       NonNullInterface unannotated,
       @NonNull NonNullInterface annotatedNonNull,
       @Nullable NonNullInterface annotatedNullable) {}
+
+  void testSwitchExpression_inNonNullMarkedScope() {
+    var s =
+        switch (1) {
+          case 1 -> new ArrayList<String>();
+          default -> null;
+        };
+  }
 }
