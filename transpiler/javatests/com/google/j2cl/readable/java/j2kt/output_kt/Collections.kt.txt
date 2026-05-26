@@ -665,9 +665,9 @@ open class Collections {
   
   @JvmStatic
   private fun testCustomMapWithCustomSetEntry(map: CustomMapWithCustomSetEntry<String, String>) {
-   var entrySet: MutableSet<MutableEntry<String, String>> = map.entries
+   val entrySet: AbstractSet<MutableEntry<String, String>> = map.entries as AbstractSet<MutableEntry<String, String>>
    val regularMap: MutableMap<String, String> = map
-   entrySet = regularMap.entries
+   val regularEntrySet: MutableSet<MutableEntry<String, String>> = regularMap.entries
   }
   
   @JvmStatic

@@ -50,6 +50,8 @@ import javax.annotation.Nullable;
 public class PromoteMutability extends AbstractJ2ktNormalizationPass {
 
   private final TypeDescriptors types = TypeDescriptors.get();
+  private final MethodDescriptor mapEntrySet =
+      types.javaUtilMap.getMethodDescriptorByName("entrySet");
 
   private final ImmutableSet<MethodDescriptor> mutationMethods;
   private final ImmutableMap<TypeDeclaration, MethodDescriptor> asMutableMethodsByTypeDeclaration;
@@ -210,6 +212,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     rewriteMutationCalls(compilationUnit);
+    rewriteCallsToOverriddenEntrySet(compilationUnit);
     rewriteLowerBoundedCollectionExpressions(compilationUnit);
     rewriteOverrideReturnStatements(compilationUnit);
   }
@@ -293,6 +296,40 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     return methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
         .map(MethodDescriptor::getDeclarationDescriptor)
         .anyMatch(mutationMethods::contains);
+  }
+
+  private void rewriteCallsToOverriddenEntrySet(CompilationUnit compilationUnit) {
+    // Overrides of entrySet with a refined return type, e.g. ConcreteSet<Entry<...>> are
+    // rewritten by rewriteOverrideReturnTypes to return ConcreteSet<MutableEntry<...>>. This
+    // would not be assignable to ConcreteSet<Entry<...>> so we add casts. There is no need to do
+    // this for Set<Entry<...>> because Kotlin's Set is covariant in the element type.
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            MethodDescriptor target = methodCall.getTarget();
+
+            if (!target.getDeclarationDescriptor().isOverride(mapEntrySet)) {
+              return methodCall;
+            }
+
+            if (target.getJavaOverriddenMethodDescriptors().stream()
+                .noneMatch(it -> it.getDeclarationDescriptor().equals(mapEntrySet))) {
+              return methodCall;
+            }
+
+            TypeDescriptor returnType = target.getReturnTypeDescriptor();
+
+            if (returnType.isSameBaseType(types.javaUtilSet)) {
+              return methodCall;
+            }
+
+            return CastExpression.builder()
+                .setExpression(methodCall)
+                .setCastTypeDescriptor(returnType)
+                .build();
+          }
+        });
   }
 
   private void rewriteLowerBoundedCollectionExpressions(CompilationUnit compilationUnit) {

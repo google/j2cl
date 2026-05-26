@@ -736,9 +736,9 @@ public class Collections {
 
   private static void testCustomMapWithCustomSetEntry(
       CustomMapWithCustomSetEntry<String, String> map) {
-    Set<Map.Entry<String, String>> entrySet = map.entrySet();
+    AbstractSet<Map.Entry<String, String>> entrySet = map.entrySet();
     Map<String, String> regularMap = map;
-    entrySet = regularMap.entrySet();
+    Set<Map.Entry<String, String>> regularEntrySet = regularMap.entrySet();
   }
 
   public interface CustomMapWithCustomSetEntry<
