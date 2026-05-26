@@ -109,8 +109,7 @@ public class FixAnonymousClassInstantiations extends NormalizationPass {
       MethodDescriptor superConstructor,
       Map<Integer, Integer> parameterMapping) {
 
-    var superConstructorParameterTypes =
-        superConstructor.getDeclarationDescriptor().getParameterTypeDescriptors();
+    var superConstructorParameterTypes = superConstructor.getParameterTypeDescriptors();
 
     newInstance.accept(
         new AbstractRewriter() {
