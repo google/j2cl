@@ -60,13 +60,13 @@ open class Nullability {
    val s: ArrayList<String>? = run {
     when (1) {
      1 -> {
-      return@run ArrayList<String>() as ArrayList<String?>?
+      return@run ArrayList<String>()
      }
      else -> {
       return@run null
      }
     }
-   } as ArrayList<String>?
+   }
   }
   
   internal open inner class Holder<T: Any> internal constructor() {

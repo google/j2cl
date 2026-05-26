@@ -494,7 +494,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertSwitchExpression(JCSwitchExpression expression) {
-    TypeDescriptor typeDescriptor = environment.createTypeDescriptor(expression.type);
+    // Create the result type descriptor for the switch expression with the right nullability scope
+    // but make it nullable to since a branch might return null or other nullable value.
+    TypeDescriptor typeDescriptor =
+        environment.createTypeDescriptor(expression.type, inNullMarkedScope()).toNullable();
     return SwitchExpression.builder()
         .setSourcePosition(getSourcePosition(expression))
         .setExpression(convertExpressionOrNull(expression.getExpression()))
