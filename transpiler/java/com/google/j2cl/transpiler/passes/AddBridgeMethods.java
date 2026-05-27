@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.function.Predicate.not;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -45,6 +46,9 @@ public class AddBridgeMethods extends NormalizationPass {
     // Create bridges
     type.getTypeDescriptor().getPolymorphicMethods().stream()
         .filter(MethodDescriptor::isBridge)
+        // Exclude overlay methods. Overlay methods are devirtualized elsewhere and any bridge
+        // generated here would not be called.
+        .filter(not(MethodDescriptor::isJsOverlay))
         .filter(m -> m.isMemberOf(type.getDeclaration()))
         .forEach(m -> type.addMember(createBridgeMethod(type, m)));
   }
