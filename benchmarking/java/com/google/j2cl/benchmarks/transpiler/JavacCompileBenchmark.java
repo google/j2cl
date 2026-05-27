@@ -39,7 +39,6 @@ public class JavacCompileBenchmark extends AbstractBenchmark {
 
   private static TranspileResult compile() throws Exception {
     return newTesterWithDefaults()
-        .addArgs("-frontend", "JAVAC")
         .addNullableAnnotation()
         .addSourcePathArg("samples/box2d/src/main/java/libbox2d_library-j2cl-src.jar")
         .assertTranspileSucceeds();
