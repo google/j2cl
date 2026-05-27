@@ -54,7 +54,7 @@ exports.createMyJsInterfaceWithProtectedNames = function() {
 };
 
 /**
- * @param {*} value
+ * @param {?} value
  * @return {boolean}
  * @public
  */
@@ -63,8 +63,8 @@ exports.isUndefined = function(value) {
 };
 
 /**
- * @param {*} object
- * @param {*} fieldName
+ * @param {?} object
+ * @param {string} fieldName
  * @return {boolean}
  * @public
  */
@@ -73,8 +73,8 @@ exports.hasField = function(object, fieldName) {
 };
 
 /**
- * @param {*} object
- * @param {*} name
+ * @param {?} object
+ * @param {string} name
  * @return {number}
  * @public
  */
@@ -83,9 +83,9 @@ exports.getProperty = function(object, name) {
 };
 
 /**
- * @param {*} object
- * @param {*} name
- * @param {*} value
+ * @param {?} object
+ * @param {string} name
+ * @param {?} value
  * @public
  */
 exports.setProperty = function(object, name, value) {

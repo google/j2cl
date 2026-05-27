@@ -21,7 +21,7 @@ goog.module('jsinteroptests.ConcreteJsTypeHelper');
 
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasPublicMethod = function(obj) {
@@ -29,7 +29,7 @@ exports.hasPublicMethod = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasPublicStaticMethod = function(obj) {
@@ -37,7 +37,7 @@ exports.hasPublicStaticMethod = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasPrivateMethod = function(obj) {
@@ -45,7 +45,7 @@ exports.hasPrivateMethod = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasProtectedMethod = function(obj) {
@@ -53,7 +53,7 @@ exports.hasProtectedMethod = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasPackageMethod = function(obj) {
@@ -61,7 +61,7 @@ exports.hasPackageMethod = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasPublicField = function(obj) {
@@ -69,7 +69,7 @@ exports.hasPublicField = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasPublicStaticField = function(obj) {
@@ -77,7 +77,7 @@ exports.hasPublicStaticField = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasPrivateField = function(obj) {
@@ -85,7 +85,7 @@ exports.hasPrivateField = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasProtectedField = function(obj) {
@@ -93,7 +93,7 @@ exports.hasProtectedField = function(obj) {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasPackageField = function(obj) {

@@ -14,11 +14,6 @@
 
 goog.module('jsinteroptests.JsTypeArrayTestHelper');
 
-/**
- * @fileoverview
- * @suppress {strictMissingProperties}
- */
-
 
 /**
  * @return {Array<*>}
@@ -35,14 +30,14 @@ exports.returnJsTypeWithIdsFromNative = function() {
 };
 
 /**
- * @param {*} holder
+ * @param {?} holder
  */
 exports.fillArrayField = function(holder) {
   holder.arrayField = [{}, {}];
 };
 
 /**
- * @param {*} holder
+ * @param {?} holder
  */
 exports.fillArrayParam = function(holder) {
   holder.setArrayParam([{}, {}]);

@@ -14,11 +14,6 @@
 
 goog.module('jsinteroptests.JsFunctionTestHelper');
 
-/**
- * @fileoverview
- * @suppress {strictMissingProperties}
- */
-
 
 /**
  * @return {Function}
@@ -30,7 +25,7 @@ exports.createFunctionThatReturnsThis = function() {
 };
 
 /**
- * @param {*} fn
+ * @param {?} fn
  * @return {*}
  * @public
  */
@@ -39,7 +34,7 @@ exports.callAsFunctionNoArgument = function(fn) {
 };
 
 /**
- * @param {*} fn
+ * @param {?} fn
  * @param {number} arg
  * @return {number}
  * @public
@@ -49,7 +44,7 @@ exports.callAsFunction = function(fn, arg) {
 };
 
 /**
- * @param {*} fn
+ * @param {?} fn
  * @param {number} arg
  * @return {number}
  * @public
@@ -59,7 +54,7 @@ exports.callWithFunctionApply = function(fn, arg) {
 };
 
 /**
- * @param {*} fn
+ * @param {?} fn
  * @param {number} arg
  * @return {number}
  * @public
@@ -69,7 +64,7 @@ exports.callWithFunctionCall = function(fn, arg) {
 };
 
 /**
- * @param {*} object
+ * @param {?} object
  * @param {string} fieldName
  * @param {number} value
  * @public
@@ -79,7 +74,7 @@ exports.setField = function(object, fieldName, value) {
 };
 
 /**
- * @param {*} object
+ * @param {?} object
  * @param {string} fieldName
  * @return {number}
  * @public
@@ -89,7 +84,7 @@ exports.getField = function(object, fieldName) {
 };
 
 /**
- * @param {*} object
+ * @param {?} object
  * @param {string} functionName
  * @return {number}
  * @public
@@ -137,8 +132,8 @@ exports.createObject = function() {
 };
 
 /**
- * @param {*} object
- * @param {?string} fieldName
+ * @param {?} object
+ * @param {string} fieldName
  * @return {boolean}
  * @public
  */

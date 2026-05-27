@@ -14,11 +14,6 @@
 
 goog.module('jsinteroptests.JsTypeTestHelper');
 
-/**
- * @fileoverview
- * @suppress {strictMissingProperties}
- */
-
 
 /**
  * @return {*}
@@ -37,7 +32,7 @@ exports.createObject = function() {
 };
 
 /**
- * @param {*} object
+ * @param {?} object
  * @return {number}
  */
 exports.callPublicMethod = function(object) {
@@ -45,7 +40,7 @@ exports.callPublicMethod = function(object) {
 };
 
 /**
- * @param {*} value
+ * @param {?} value
  * @return {boolean}
  */
 exports.isUndefined = function(value) {
@@ -53,16 +48,16 @@ exports.isUndefined = function(value) {
 };
 
 /**
- * @param {*} obj
- * @param {*} value
+ * @param {?} obj
+ * @param {?} value
  */
 exports.setTheField = function(obj, value) {
   obj.notTypeTightenedField = value;
 };
 
 /**
- * @param {*} obj
- * @param {*} param
+ * @param {?} obj
+ * @param {?} param
  * @return {*}
  */
 exports.callFoo = function(obj, param) {
@@ -70,8 +65,8 @@ exports.callFoo = function(obj, param) {
 };
 
 /**
- * @param {*} obj
- * @param {*} param
+ * @param {?} obj
+ * @param {?} param
  * @return {*}
  */
 exports.callBar = function(obj, param) {
@@ -79,8 +74,8 @@ exports.callBar = function(obj, param) {
 };
 
 /**
- * @param {*} obj
- * @param {*} param
+ * @param {?} obj
+ * @param {?} param
  * @return {*}
  */
 exports.callM = function(obj, param) {
@@ -88,7 +83,7 @@ exports.callM = function(obj, param) {
 };
 
 /**
- * @param {*} jstype
+ * @param {?} jstype
  */
 exports.fillJsTypeField = function(jstype) {
   jstype.someField = {};
@@ -109,7 +104,7 @@ exports.nativeJsFunction = function() {
 };
 
 /**
- * @param {*} obj
+ * @param {?} obj
  * @return {boolean}
  */
 exports.hasFieldRun = function(obj) {
@@ -117,7 +112,7 @@ exports.hasFieldRun = function(obj) {
 };
 
 /**
- * @param {*} enumeration
+ * @param {?} enumeration
  * @return {number}
  */
 exports.callPublicMethodFromEnumeration = function(enumeration) {
@@ -125,7 +120,7 @@ exports.callPublicMethodFromEnumeration = function(enumeration) {
 };
 
 /**
- * @param {*} enumeration
+ * @param {?} enumeration
  * @return {number}
  */
 exports.callPublicMethodFromEnumerationSubclass = function(enumeration) {

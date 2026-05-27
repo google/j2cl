@@ -14,11 +14,6 @@
 
 goog.module('jsinteroptests.JsTypeObjectMethodsTestHelper');
 
-/**
- * @fileoverview
- * @suppress {strictMissingProperties}
- */
-
 
 
 /**
@@ -60,7 +55,7 @@ exports.createWithoutEqualsAndHashCode = function(a, b) {
 };
 
 /**
- * @param {*} a
+ * @param {?} a
  * @return {number}
  */
 exports.callHashCode = function(a) {
