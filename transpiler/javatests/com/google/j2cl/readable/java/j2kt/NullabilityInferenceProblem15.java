@@ -30,10 +30,10 @@ public class NullabilityInferenceProblem15 {
 
   public interface SpacersTable<T extends SpacersCell<T>> extends ArrayTable<@Nullable T> {}
 
-  // TODO(b/464077965): Uncomment when the bug is fixed.
-  // public static void test(SpacersTable<? extends SpacersCell<?>> table) {
-  //   JsArray<? extends SpacersCell<?>> cells = table.getCellsInRow();
-  // }
+  // repro for b/464077965
+  public static void test(SpacersTable<? extends SpacersCell<?>> table) {
+    JsArray<? extends SpacersCell<?>> cells = table.getCellsInRow();
+  }
 
   // Workaround
   public static void testWorkaround(SpacersTable<? extends SpacersCell<?>> table) {

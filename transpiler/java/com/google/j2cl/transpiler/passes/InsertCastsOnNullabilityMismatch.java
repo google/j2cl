@@ -251,7 +251,8 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
         } else {
           TypeVariable fromVariable = (TypeVariable) fromTypeDescriptor;
           TypeDescriptor fromUpperBound = fromVariable.getUpperBoundTypeDescriptor();
-          return isNullabilityAssignableTo(fromUpperBound, toUpperBound, newSeenTo);
+          return isNullableAssignableTo(fromVariable.isNullable(), toVariable.isNullable())
+              && isNullabilityAssignableTo(fromUpperBound, toUpperBound, newSeenTo);
         }
       }
     }

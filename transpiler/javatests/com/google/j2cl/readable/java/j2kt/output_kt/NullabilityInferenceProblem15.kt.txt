@@ -25,6 +25,11 @@ import kotlin.jvm.JvmStatic
 open class NullabilityInferenceProblem15 {
  companion object {
   @JvmStatic
+  fun test(table: SpacersTable<out SpacersCell<*>>) {
+   val cells: JsArray<out SpacersCell<*>> = table.getCellsInRow() as JsArray<out SpacersCell<*>>
+  }
+  
+  @JvmStatic
   fun testWorkaround(table: SpacersTable<out SpacersCell<*>>) {
    val cells: JsArray<out SpacersCell<*>> = NullabilityInferenceProblem15.getCellsInRow(table)
   }
