@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
@@ -56,6 +57,8 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
   private final ImmutableSet<MethodDescriptor> mutationMethods;
   private final ImmutableMap<TypeDeclaration, MethodDescriptor> asMutableMethodsByTypeDeclaration;
   private final ImmutableMap<MethodDescriptor, ReturnRewriteKind> overrideReturnMappings;
+  private final ImmutableMap<TypeDeclaration, DeclaredTypeDescriptor>
+      mutableTypesByBaseTypeDeclaration;
 
   public PromoteMutability() {
     ImmutableSet.Builder<MethodDescriptor> mutationMethodsBuilder = ImmutableSet.builder();
@@ -155,6 +158,17 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
         returnMappingsBuilder, types.javaUtilMap, "entrySet", MUTABLE_ENTRYSET_REWRITE);
 
     this.overrideReturnMappings = returnMappingsBuilder.buildOrThrow();
+
+    this.mutableTypesByBaseTypeDeclaration =
+        ImmutableMap.<TypeDeclaration, DeclaredTypeDescriptor>builder()
+            .put(types.javaUtilCollection.getTypeDeclaration(), types.javaUtilMutableCollection)
+            .put(types.javaUtilList.getTypeDeclaration(), types.javaUtilMutableList)
+            .put(types.javaUtilSet.getTypeDeclaration(), types.javaUtilMutableSet)
+            .put(types.javaUtilMap.getTypeDeclaration(), types.javaUtilMutableMap)
+            .put(types.javaUtilIterator.getTypeDeclaration(), types.javaUtilMutableIterator)
+            .put(types.javaUtilListIterator.getTypeDeclaration(), types.javaUtilMutableListIterator)
+            .put(types.javaUtilMapEntry.getTypeDeclaration(), types.javaUtilMutableMapMutableEntry)
+            .buildOrThrow();
   }
 
   /**
@@ -215,6 +229,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     rewriteCallsToOverriddenEntrySet(compilationUnit);
     rewriteLowerBoundedCollectionExpressions(compilationUnit);
     rewriteOverrideReturnStatements(compilationUnit);
+    rewriteOverrideReturnTypes(compilationUnit);
   }
 
   private void rewriteMutationCalls(CompilationUnit compilationUnit) {
@@ -465,6 +480,94 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
         .setExpression(expression)
         .setCastTypeDescriptor(newExpressionType)
         .build();
+  }
+
+  private void rewriteOverrideReturnTypes(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteMethod(Method method) {
+            MethodDescriptor methodDescriptor = method.getDescriptor();
+            ReturnRewriteKind kind = getReturnRewriteKind(methodDescriptor);
+
+            if (kind == null) {
+              return method;
+            }
+
+            TypeDescriptor currentReturnType = methodDescriptor.getReturnTypeDescriptor();
+            if (!(currentReturnType instanceof DeclaredTypeDescriptor declaredCurrentReturnType)) {
+              return method;
+            }
+
+            TypeDescriptor newReturnType =
+                promoteOverrideReturnType(declaredCurrentReturnType, kind);
+
+            if (newReturnType == currentReturnType) { // descriptors are interned
+              return method;
+            }
+
+            MethodDescriptor newDescriptor =
+                methodDescriptor.toBuilder().setReturnTypeDescriptor(newReturnType).build();
+
+            return method.toBuilder()
+                .setMethodDescriptor(newDescriptor)
+                .setForcedJavaOverride(true)
+                .build();
+          }
+        });
+  }
+
+  /**
+   * Rewrites the return type for overrides of the methods in {@link #overrideReturnMappings}. These
+   * methods must always have a mutable return type in Kotlin.
+   *
+   * <p>If {@code kind} is {@link ReturnRewriteKind#MUTABLE_REWRITE}, the return type is rewritten
+   * to the mutable counterpart of the base type. This is not a recursive rewrite.
+   *
+   * <p>If {@code kind} is {@link ReturnRewriteKind#MUTABLE_ENTRYSET_REWRITE}, the return type is
+   * rewritten to a mutable set of {@code MutableEntry<K,V>} (i.e. recurse one level).
+   *
+   * <p>If the type is not a base collection type but a subtype, that type does not need to be
+   * rewritten (either it was transpiled with J2kt which guarantees that it implements a mutable
+   * interface or it is a Java interop type which can always be treated like a mutable type).
+   */
+  private TypeDescriptor promoteOverrideReturnType(
+      DeclaredTypeDescriptor declaredTypeDescriptor, ReturnRewriteKind kind) {
+    DeclaredTypeDescriptor mappedMutableBaseType =
+        mutableTypesByBaseTypeDeclaration.get(declaredTypeDescriptor.getTypeDeclaration());
+
+    return switch (kind) {
+      case MUTABLE_REWRITE ->
+          mappedMutableBaseType == null // Not a mapped base collection type (so already mutable).
+              ? declaredTypeDescriptor
+              : mappedMutableBaseType
+                  .withTypeArguments(declaredTypeDescriptor.getTypeArgumentDescriptors())
+                  .toNullable(declaredTypeDescriptor.isNullable());
+      case MUTABLE_ENTRYSET_REWRITE -> {
+        DeclaredTypeDescriptor baseTypeToUse =
+            mappedMutableBaseType != null ? mappedMutableBaseType : declaredTypeDescriptor;
+
+        ImmutableList<TypeDescriptor> oldTypeArguments =
+            declaredTypeDescriptor.getTypeArgumentDescriptors();
+        // We need to rewrite return type SomeSet<Entry> to SomePotentiallyOtherSet<MutableEntry>.
+        // That is not possible if the Set's element type is fixed, e.g.
+        // CustomEntrySet<K,V> implements Set<Entry<K,V>>.
+        checkState(
+            oldTypeArguments.size() == 1
+                && oldTypeArguments.get(0).isSameBaseType(types.javaUtilMapEntry),
+            "Can only transpile entrySet() overrides where the return type has an Map.Entry type"
+                + " parameter. Please file a J2KT bug if this is a problem for you.");
+
+        ImmutableList<TypeDescriptor> newTypeArguments =
+            ImmutableList.of(
+                promoteOverrideReturnType(
+                    (DeclaredTypeDescriptor) oldTypeArguments.get(0), MUTABLE_REWRITE));
+
+        yield baseTypeToUse
+            .withTypeArguments(newTypeArguments)
+            .toNullable(declaredTypeDescriptor.isNullable());
+      }
+    };
   }
 
   @Nullable
