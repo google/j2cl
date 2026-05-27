@@ -48,39 +48,122 @@ class PrivateVisibility {
  }
  
  class Outer {
-  fun testMemberReference() {
-   Outer.outerField = 0
-   Outer.outerMethod()
-   Inner.innerField_outerReference_private_2 = 0
-   Inner.innerMethod_outerReference_private_2()
+  private var outerField_outerReference: Int = 0
+  
+  private var outerField_staticInnerReference: Int = 0
+  
+  private var outerField_innerReference: Int = 0
+  
+  private fun outerMethod_outerReference() {}
+  
+  private fun outerMethod_staticInnerReference() {}
+  
+  private fun outerMethod_innerReference() {}
+  
+  fun testMemberReference(outer: Outer, staticInner: StaticInner, inner: Outer.Inner) {
+   Outer.outerStaticField_outerReference = 0
+   Outer.outerStaticMethod_outerReference()
+   outer.outerField_outerReference = 0
+   outer.outerMethod_outerReference()
+   StaticInner.staticInnerStaticField_outerReference_private_2 = 0
+   StaticInner.staticInnerStaticMethod_outerReference_private_2()
+   staticInner.staticInnerField_outerReference_private_2 = 0
+   staticInner.staticInnerMethod_outerReference_private_2()
+   inner.innerField_outerReference_private_2 = 0
+   inner.innerMethod_outerReference_private_2()
   }
   
   companion object {
-   private var outerField: Int = 0
+   private var outerStaticField_outerReference: Int = 0
+   
+   private var outerStaticField_staticInnerReference: Int = 0
+   
+   private var outerStaticField_innerReference: Int = 0
    
    @JvmStatic
-   private fun outerMethod() {}
+   private fun outerStaticMethod_outerReference() {}
+   
+   @JvmStatic
+   private fun outerStaticMethod_staticInnerReference() {}
+   
+   @JvmStatic
+   private fun outerStaticMethod_innerReference() {}
   }
   
-  class Inner {
-   fun testMemberReference() {
-    Outer.outerField = 0
-    Outer.outerMethod()
-    Inner.innerField_innerReference = 0
-    Inner.innerMethod_innerReference()
+  class StaticInner {
+   @JvmField
+   internal var staticInnerField_outerReference_private_2: Int = 0
+   
+   private var staticInnerField_staticInnerReference: Int = 0
+   
+   @JvmField
+   internal var staticInnerField_innerReference_private_2: Int = 0
+   
+   internal fun staticInnerMethod_outerReference_private_2() {}
+   
+   private fun staticInnerMethod_staticInnerReference() {}
+   
+   internal fun staticInnerMethod_innerReference_private_2() {}
+   
+   fun testMemberReference(outer: Outer, staticInner: StaticInner, inner: Outer.Inner) {
+    Outer.outerStaticField_staticInnerReference = 0
+    Outer.outerStaticMethod_staticInnerReference()
+    outer.outerField_staticInnerReference = 0
+    outer.outerMethod_staticInnerReference()
+    StaticInner.staticInnerStaticField_staticInnerReference = 0
+    StaticInner.staticInnerStaticMethod_staticInnerReference()
+    staticInner.staticInnerField_staticInnerReference = 0
+    staticInner.staticInnerMethod_staticInnerReference()
+    inner.innerField_staticInnerReference_private_2 = 0
+    inner.innerMethod_staticInnerReference_private_2()
    }
    
    companion object {
-    private var innerField_innerReference: Int = 0
+    @JvmField
+    internal var staticInnerStaticField_outerReference_private_2: Int = 0
+    
+    private var staticInnerStaticField_staticInnerReference: Int = 0
     
     @JvmField
-    internal var innerField_outerReference_private_2: Int = 0
+    internal var staticInnerStaticField_innerReference_private_2: Int = 0
     
     @JvmStatic
-    private fun innerMethod_innerReference() {}
+    internal fun staticInnerStaticMethod_outerReference_private_2() {}
     
     @JvmStatic
-    internal fun innerMethod_outerReference_private_2() {}
+    private fun staticInnerStaticMethod_staticInnerReference() {}
+    
+    @JvmStatic
+    internal fun staticInnerStaticMethod_innerReference_private_2() {}
+   }
+  }
+  
+  inner class Inner {
+   @JvmField
+   internal var innerField_outerReference_private_2: Int = 0
+   
+   @JvmField
+   internal var innerField_staticInnerReference_private_2: Int = 0
+   
+   private var innerField_innerReference: Int = 0
+   
+   internal fun innerMethod_outerReference_private_2() {}
+   
+   internal fun innerMethod_staticInnerReference_private_2() {}
+   
+   private fun innerMethod_innerReference() {}
+   
+   fun testMemberReference(outer: Outer, staticInner: StaticInner, inner: Outer.Inner) {
+    Outer.outerStaticField_innerReference = 0
+    Outer.outerStaticMethod_innerReference()
+    outer.outerField_innerReference = 0
+    outer.outerMethod_innerReference()
+    StaticInner.staticInnerStaticField_innerReference_private_2 = 0
+    StaticInner.staticInnerStaticMethod_innerReference_private_2()
+    staticInner.staticInnerField_innerReference_private_2 = 0
+    staticInner.staticInnerMethod_innerReference_private_2()
+    inner.innerField_innerReference = 0
+    inner.innerMethod_innerReference()
    }
   }
  }

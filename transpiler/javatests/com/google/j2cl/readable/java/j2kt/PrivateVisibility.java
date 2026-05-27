@@ -36,31 +36,120 @@ public final class PrivateVisibility {
   }
 
   public static final class Outer {
-    private static int outerField;
+    private static int outerStaticField_outerReference;
+    private static int outerStaticField_staticInnerReference;
+    private static int outerStaticField_innerReference;
 
-    private static void outerMethod() {}
+    private int outerField_outerReference;
+    private int outerField_staticInnerReference;
+    private int outerField_innerReference;
 
-    public static final class Inner {
-      private static int innerField_innerReference;
-      private static int innerField_outerReference;
+    private static void outerStaticMethod_outerReference() {}
 
-      private static void innerMethod_innerReference() {}
+    private static void outerStaticMethod_staticInnerReference() {}
 
-      private static void innerMethod_outerReference() {}
+    private static void outerStaticMethod_innerReference() {}
 
-      public void testMemberReference() {
-        outerField = 0;
-        outerMethod();
-        innerField_innerReference = 0;
-        innerMethod_innerReference();
+    private void outerMethod_outerReference() {}
+
+    private void outerMethod_staticInnerReference() {}
+
+    private void outerMethod_innerReference() {}
+
+    public static final class StaticInner {
+      private static int staticInnerStaticField_outerReference;
+      private static int staticInnerStaticField_staticInnerReference;
+      private static int staticInnerStaticField_innerReference;
+
+      private int staticInnerField_outerReference;
+      private int staticInnerField_staticInnerReference;
+      private int staticInnerField_innerReference;
+
+      private static void staticInnerStaticMethod_outerReference() {}
+
+      private static void staticInnerStaticMethod_staticInnerReference() {}
+
+      private static void staticInnerStaticMethod_innerReference() {}
+
+      private void staticInnerMethod_outerReference() {}
+
+      private void staticInnerMethod_staticInnerReference() {}
+
+      private void staticInnerMethod_innerReference() {}
+
+      public void testMemberReference(Outer outer, StaticInner staticInner, Inner inner) {
+        outerStaticField_staticInnerReference = 0;
+        outerStaticMethod_staticInnerReference();
+        outer.outerField_staticInnerReference = 0;
+        outer.outerMethod_staticInnerReference();
+
+        staticInnerStaticField_staticInnerReference = 0;
+        staticInnerStaticMethod_staticInnerReference();
+        staticInner.staticInnerField_staticInnerReference = 0;
+        staticInner.staticInnerMethod_staticInnerReference();
+
+        // Inner.innerStaticField_staticInnerReference = 0;
+        // Inner.innerStaticMethod_staticInnerReference();
+        inner.innerField_staticInnerReference = 0;
+        inner.innerMethod_staticInnerReference();
       }
     }
 
-    public void testMemberReference() {
-      outerField = 0;
-      outerMethod();
-      Inner.innerField_outerReference = 0;
-      Inner.innerMethod_outerReference();
+    public final class Inner {
+      // TODO(b/517165652): Static members are not allowed in non-static nested classes.
+      // private static int innerStaticField_outerReference;
+      // private static int innerStaticField_staticInnerReference;
+      // private static int innerStaticField_innerReference;
+
+      private int innerField_outerReference;
+      private int innerField_staticInnerReference;
+      private int innerField_innerReference;
+
+      // private static void innerStaticMethod_outerReference() {}
+
+      // private static void innerStaticMethod_staticInnerReference() {}
+
+      // private static void innerStaticMethod_innerReference() {}
+
+      private void innerMethod_outerReference() {}
+
+      private void innerMethod_staticInnerReference() {}
+
+      private void innerMethod_innerReference() {}
+
+      public void testMemberReference(Outer outer, StaticInner staticInner, Inner inner) {
+        outerStaticField_innerReference = 0;
+        outerStaticMethod_innerReference();
+        outer.outerField_innerReference = 0;
+        outer.outerMethod_innerReference();
+
+        StaticInner.staticInnerStaticField_innerReference = 0;
+        StaticInner.staticInnerStaticMethod_innerReference();
+        staticInner.staticInnerField_innerReference = 0;
+        staticInner.staticInnerMethod_innerReference();
+
+        // innerStaticField_innerReference = 0;
+        // innerStaticMethod_innerReference();
+        inner.innerField_innerReference = 0;
+        inner.innerMethod_innerReference();
+      }
+    }
+
+    public void testMemberReference(Outer outer, StaticInner staticInner, Inner inner) {
+      outerStaticField_outerReference = 0;
+      outerStaticMethod_outerReference();
+      outer.outerField_outerReference = 0;
+      outer.outerMethod_outerReference();
+
+      StaticInner.staticInnerStaticField_outerReference = 0;
+      StaticInner.staticInnerStaticMethod_outerReference();
+      staticInner.staticInnerField_outerReference = 0;
+      staticInner.staticInnerMethod_outerReference();
+
+      // Inner.innerStaticField_outerReference = 0;
+      // Inner.innerStaticMethod_outerReference();
+      inner.innerField_outerReference = 0;
+      inner.innerMethod_outerReference();
     }
   }
 }
