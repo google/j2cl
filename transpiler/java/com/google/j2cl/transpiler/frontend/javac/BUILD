@@ -19,7 +19,6 @@ java_library(
     name = "javac",
     srcs = glob(["*.java"]),
     add_exports = [
-        "jdk.compiler/com.sun.source.tree",
         "jdk.compiler/com.sun.tools.javac.api",
         "jdk.compiler/com.sun.tools.javac.code",
         "jdk.compiler/com.sun.tools.javac.comp",
@@ -27,6 +26,7 @@ java_library(
         "jdk.compiler/com.sun.tools.javac.main",
         "jdk.compiler/com.sun.tools.javac.model",
         "jdk.compiler/com.sun.tools.javac.parser",
+        "jdk.compiler/com.sun.tools.javac.processing",
         "jdk.compiler/com.sun.tools.javac.tree",
         "jdk.compiler/com.sun.tools.javac.util",
     ],
