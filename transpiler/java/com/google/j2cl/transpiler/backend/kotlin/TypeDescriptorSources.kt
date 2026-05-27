@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CAPTURE_KEYWORD
@@ -130,10 +131,13 @@ internal data class TypeDescriptorSources(
     val typeDeclaration = declaredTypeDescriptor.typeDeclaration
     val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
     val isStatic = !typeDeclaration.isCapturingEnclosingInstance
+    val renderMutableComment =
+      !asSuperType &&
+        (declaredTypeDescriptor.typeDeclaration.qualifiedBinaryName.startsWith(
+          "java.util.Mutable"
+        ) || declaredTypeDescriptor.hasBaseCollectionLowerBound)
     return join(
-      Source.emptyUnless(
-        declaredTypeDescriptor.typeDeclaration.qualifiedBinaryName.startsWith("java.util.Mutable")
-      ) {
+      Source.emptyUnless(renderMutableComment) {
         // TODO b/501031824 - Remove this once we emit readonly Kotlin types
         join(blockComment(source("@mutable")), source(" "))
       },
@@ -149,6 +153,28 @@ internal data class TypeDescriptorSources(
       nullableSuffixSource(declaredTypeDescriptor),
     )
   }
+
+  private val DeclaredTypeDescriptor.hasBaseCollectionLowerBound: Boolean
+    get() {
+      val typeDescriptors = TypeDescriptors.get()
+      return when {
+        isSameBaseType(typeDescriptors.javaLangIterable) ||
+          isSameBaseType(typeDescriptors.javaUtilIterator) ||
+          isSameBaseType(typeDescriptors.javaUtilListIterator) ||
+          isSameBaseType(typeDescriptors.javaUtilCollection) ||
+          isSameBaseType(typeDescriptors.javaUtilList) ||
+          isSameBaseType(typeDescriptors.javaUtilSet) ->
+          typeArgumentDescriptors.firstOrNull()?.hasLowerBound ?: false
+        isSameBaseType(typeDescriptors.javaUtilMap) ->
+          typeArgumentDescriptors.getOrNull(1)?.hasLowerBound ?: false
+        isSameBaseType(typeDescriptors.javaUtilMapEntry) ->
+          typeArgumentDescriptors.any { it.hasLowerBound }
+        else -> false
+      }
+    }
+
+  private val TypeDescriptor.hasLowerBound: Boolean
+    get() = this is TypeVariable && lowerBoundTypeDescriptor != null
 
   private fun typeBindingsSource(declaredTypeDescriptor: DeclaredTypeDescriptor): Source =
     declaredTypeDescriptor

@@ -520,13 +520,13 @@ open class Collections {
   
   @JvmStatic
   fun testLowerBoundAssignment(collection: MutableCollection<String>, list: MutableList<String>, set: MutableSet<String>, map: MutableMap<String, String>, mapEntry: MutableEntry<String, String>, customCollection: CustomCollection<String>) {
-   var lowerC: MutableCollection<in String> = collection.asMutableCollection()
-   var lowerL: MutableList<in String> = list.asMutableList()
-   var lowerS: MutableSet<in String> = set.asMutableSet()
-   var lowerM: MutableMap<in String, in String> = map.asMutableMap()
-   var lowerMe: MutableEntry<String, in String> = mapEntry.asMutableEntry()
-   val lowerC2: MutableCollection<in String> = customCollection
-   val lowerC3: MutableCollection<in String> = lowerC
+   var lowerC: /* @mutable */ MutableCollection<in String> = collection.asMutableCollection()
+   var lowerL: /* @mutable */ MutableList<in String> = list.asMutableList()
+   var lowerS: /* @mutable */ MutableSet<in String> = set.asMutableSet()
+   var lowerM: /* @mutable */ MutableMap<in String, in String> = map.asMutableMap()
+   var lowerMe: /* @mutable */ MutableEntry<String, in String> = mapEntry.asMutableEntry()
+   val lowerC2: /* @mutable */ MutableCollection<in String> = customCollection
+   val lowerC3: /* @mutable */ MutableCollection<in String> = lowerC
    lowerC = collection.asMutableCollection()
    lowerL = list.asMutableList()
    lowerS = set.asMutableSet()
@@ -547,64 +547,64 @@ open class Collections {
    Collections.passLowerBoundMapEntry(
     mapEntry.asMutableEntry(),
    )
-   val nestedList: MutableList<MutableList<in String>> = ArrayList<MutableList<in String>>()
+   val nestedList: MutableList</* @mutable */ MutableList<in String>> = ArrayList</* @mutable */ MutableList<in String>>()
    nestedList.asMutableList().add(
     ArrayList<String>(),
    )
    nestedList.asMutableList().add(
     ArrayList<Any>(),
    )
-   val nestedMap: MutableList<MutableMap<String, in String>> = ArrayList<MutableMap<String, in String>>()
+   val nestedMap: MutableList</* @mutable */ MutableMap<String, in String>> = ArrayList</* @mutable */ MutableMap<String, in String>>()
    val innerMap: MutableMap<String, String> = HashMap<String, String>()
    nestedMap.asMutableList().add(innerMap)
    Collections.testNestedLowerBounds(
-    Consumer { l: MutableList<in String> ->
+    Consumer { l: /* @mutable */ MutableList<in String> ->
     },
-    nestedList as MutableList<MutableList<in String>>,
-    nestedMap as MutableList<MutableMap<String, in String>>,
+    nestedList as MutableList</* @mutable */ MutableList<in String>>,
+    nestedMap as MutableList</* @mutable */ MutableMap<String, in String>>,
    )
   }
   
   @JvmStatic
-  private fun testNestedLowerBounds(consumer: Consumer<MutableList<in String>>, nestedList: MutableList<MutableList<in String>>, nestedMap: MutableList<MutableMap<String, in String>>) {}
+  private fun testNestedLowerBounds(consumer: Consumer</* @mutable */ MutableList<in String>>, nestedList: MutableList</* @mutable */ MutableList<in String>>, nestedMap: MutableList</* @mutable */ MutableMap<String, in String>>) {}
   
   @JvmStatic
-  private fun passLowerBoundCollection(collection: MutableCollection<in String>) {}
+  private fun passLowerBoundCollection(collection: /* @mutable */ MutableCollection<in String>) {}
   
   @JvmStatic
-  private fun passLowerBoundList(list: MutableList<in String>) {}
+  private fun passLowerBoundList(list: /* @mutable */ MutableList<in String>) {}
   
   @JvmStatic
-  private fun passLowerBoundSet(set: MutableSet<in String>) {}
+  private fun passLowerBoundSet(set: /* @mutable */ MutableSet<in String>) {}
   
   @JvmStatic
-  private fun passLowerBoundMap(map: MutableMap<in String, in String>) {}
+  private fun passLowerBoundMap(map: /* @mutable */ MutableMap<in String, in String>) {}
   
   @JvmStatic
-  private fun passLowerBoundMapEntry(mapEntry: MutableEntry<String, in String>) {}
+  private fun passLowerBoundMapEntry(mapEntry: /* @mutable */ MutableEntry<String, in String>) {}
   
   @JvmStatic
-  private fun returnLowerBoundCollection(collection: MutableCollection<String>): MutableCollection<in String> {
+  private fun returnLowerBoundCollection(collection: MutableCollection<String>): /* @mutable */ MutableCollection<in String> {
    return collection.asMutableCollection()
   }
   
   @JvmStatic
-  private fun returnLowerBoundList(list: MutableList<String>): MutableList<in String> {
+  private fun returnLowerBoundList(list: MutableList<String>): /* @mutable */ MutableList<in String> {
    return list.asMutableList()
   }
   
   @JvmStatic
-  private fun returnLowerBoundSet(set: MutableSet<String>): MutableSet<in String> {
+  private fun returnLowerBoundSet(set: MutableSet<String>): /* @mutable */ MutableSet<in String> {
    return set.asMutableSet()
   }
   
   @JvmStatic
-  private fun returnLowerBoundMap(map: MutableMap<String, String>): MutableMap<in String, in String> {
+  private fun returnLowerBoundMap(map: MutableMap<String, String>): /* @mutable */ MutableMap<in String, in String> {
    return map.asMutableMap()
   }
   
   @JvmStatic
-  private fun returnLowerBoundMapEntry(mapEntry: MutableEntry<String, String>): MutableEntry<String, in String> {
+  private fun returnLowerBoundMapEntry(mapEntry: MutableEntry<String, String>): /* @mutable */ MutableEntry<String, in String> {
    return mapEntry.asMutableEntry()
   }
   
@@ -676,7 +676,7 @@ open class Collections {
   }
   
   @JvmStatic
-  fun <L: MutableList<in String>> testTypeVariableMutationWithLowerBound(list: L) {
+  fun <L: /* @mutable */ MutableList<in String>> testTypeVariableMutationWithLowerBound(list: L) {
    list.add("foo")
   }
   
