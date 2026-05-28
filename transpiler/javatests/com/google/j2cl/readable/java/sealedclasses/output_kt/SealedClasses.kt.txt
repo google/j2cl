@@ -52,7 +52,7 @@ open class SealedClasses {
   override fun changeName(updatedName: String?) {}
  }
  
- class Whale internal constructor(): Mammal() {
+ class Whale private constructor(): Mammal() {
   override fun changeName(updatedName: String?) {}
  }
  

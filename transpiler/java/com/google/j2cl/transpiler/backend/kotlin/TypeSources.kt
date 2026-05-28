@@ -128,7 +128,7 @@ internal data class TypeSources(val nameSources: NameSources) {
         // Implicit constructors needs to follow the visiblity transpilation rules for members that
         // are different than the visibility transpilation rules for the class.
         spaceSeparated(
-          type.declaration.visibility.defaultMemberKtVisibility.source,
+          environment.ktVisibility(type.typeDescriptor.defaultConstructorMethodDescriptor).source,
           join(KotlinSource.CONSTRUCTOR_KEYWORD, inParentheses(Source.EMPTY)),
         )
       else -> Source.EMPTY

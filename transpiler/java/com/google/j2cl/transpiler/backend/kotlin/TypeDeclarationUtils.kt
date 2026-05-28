@@ -71,11 +71,8 @@ internal val Visibility.defaultMemberKtVisibility: KtVisibility
       Visibility.PUBLIC -> KtVisibility.PUBLIC
       // Map protected to public, to allow access within the same package across different types.
       Visibility.PROTECTED -> KtVisibility.PUBLIC
-      // Map package-private to internal.
       Visibility.PACKAGE_PRIVATE -> KtVisibility.INTERNAL
-      // Map private to internal, to allow access to members in the same file across different
-      // types.
-      Visibility.PRIVATE -> KtVisibility.INTERNAL
+      Visibility.PRIVATE -> KtVisibility.PRIVATE
     }
 
 internal val TypeDeclaration.defaultKtVisibility: KtVisibility

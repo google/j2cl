@@ -334,7 +334,7 @@ open class Lambdas {
   }
  }
  
- open class Wrapper<T> internal constructor() {
+ open class Wrapper<T> private constructor() {
   @JvmField
   internal var wrapped_pp_lambdas: T = null as T
  }
@@ -350,7 +350,7 @@ open class Lambdas {
   open fun funInParent() {}
  }
  
- open class LambdaInSubClass internal constructor(): Parent() {
+ open class LambdaInSubClass private constructor(): Parent() {
   open fun testLambdaInSubclass() {
    val l: FunctionalInterface = FunctionalInterface { i: Int ->
     this.funInParent()

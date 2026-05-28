@@ -23,7 +23,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class StaticNestedClassParent {
- open class StaticNestedClass internal constructor() {
+ open class StaticNestedClass private constructor() {
   companion object {
    @JvmStatic
    fun foo() {}

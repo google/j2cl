@@ -459,11 +459,11 @@ open class Main {
   internal fun sort_pp_jsfunction(func: JsFunctionInterface?) {}
  }
  
- class RecursiveParametricJsFunctionImplementation<T: ParametricJsFunction<T>?> internal constructor(): ParametricJsFunction<T> {
+ class RecursiveParametricJsFunctionImplementation<T: ParametricJsFunction<T>?> private constructor(): ParametricJsFunction<T> {
   override fun call(t: T) {}
  }
  
- class RecursiveJsFunctionImplementation internal constructor(): ParametricJsFunction<RecursiveJsFunctionImplementation?> {
+ class RecursiveJsFunctionImplementation private constructor(): ParametricJsFunction<RecursiveJsFunctionImplementation?> {
   override fun call(t: RecursiveJsFunctionImplementation?) {}
  }
 }

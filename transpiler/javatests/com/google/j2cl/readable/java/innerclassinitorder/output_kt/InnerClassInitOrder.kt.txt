@@ -180,7 +180,7 @@ open class InnerClassInitOrder {
   }
  }
  
- open class ESOuter internal constructor() {
+ open class ESOuter private constructor() {
   open fun newESInner(): ESOuter.ESInner? {
    return ESInner()
   }
@@ -199,7 +199,7 @@ open class InnerClassInitOrder {
   }
  }
  
- open class ESWGOuter<T> internal constructor() {
+ open class ESWGOuter<T> private constructor() {
   open fun newESWGInner(): ESWGOuter<T>.ESWGInner? {
    return ESWGInner()
   }

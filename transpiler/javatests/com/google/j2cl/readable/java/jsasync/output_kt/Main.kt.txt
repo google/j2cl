@@ -156,7 +156,7 @@ open class Main {
  }
  
  @JsType(namespace = JsPackage.GLOBAL, isNative = true)
- open class Promise<T> internal constructor(): IThenable<T> {
+ open class Promise<T> private constructor(): IThenable<T> {
   companion object {
    @JvmStatic
    external fun <T> resolve(value: T): Promise<T>?

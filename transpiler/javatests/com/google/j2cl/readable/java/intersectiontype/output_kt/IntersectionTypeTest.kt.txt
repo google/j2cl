@@ -168,13 +168,13 @@ open class IntersectionTypeTest<U> {
   }
  }
  
- open class A internal constructor()
+ open class A private constructor()
  
  interface EmptyA
  
  interface EmptyB
  
- open class SomeConcreteType internal constructor()
+ open class SomeConcreteType private constructor()
  
  open class GenericType<T> internal constructor() {
   internal open fun doSomething_pp_intersectiontype(t: T) {}

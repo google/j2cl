@@ -182,12 +182,12 @@ open class Arrays {
   return array!!.clone()
  }
  
- open inner class SomeObject internal constructor()
+ open inner class SomeObject private constructor()
  
  @JsType(name = "String", namespace = JsPackage.GLOBAL, isNative = true)
- open class NativeType internal constructor()
+ open class NativeType private constructor()
  
- open class ArrayContainer<T> internal constructor() {
+ open class ArrayContainer<T> private constructor() {
   @JvmField
   internal var data_pp_array: Array<T>? = null
  }

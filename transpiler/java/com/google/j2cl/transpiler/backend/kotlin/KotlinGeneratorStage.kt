@@ -110,8 +110,8 @@ class KotlinGeneratorStage(
       Environment(
         nameToIdentifierMap = nameToIdentifierMap,
         identifierSet = nameToIdentifierMap.values.toSet(),
-        privateAsKtInternalDeclarationMemberDescriptorSet =
-          compilationUnit.buildPrivateKtInternalMemberDescriptorSet(),
+        forcedKtInternalDeclarationMemberDescriptorSet =
+          compilationUnit.buildForcedKtInternalDeclarationMemberDescriptorSet(),
         isJ2ObjCInteropEnabled = isJ2ObjCInteropEnabled,
       )
 
@@ -149,38 +149,38 @@ private fun CompilationUnit.buildForbiddenIdentifierSet(): Set<String> = buildSe
  * Build a set of private member descriptors in this compilation unit which should be translated as
  * internal in Kotlin.
  */
-private fun CompilationUnit.buildPrivateKtInternalMemberDescriptorSet(): Set<MemberDescriptor> =
-  buildSet {
-    accept(
-      object : AbstractVisitor() {
-        override fun exitType(type: Type) {
-          // If the type is not enclosed inside its super-type, convert all private constructors in
-          // a super-type to internal to make them accessible from this type.
-          // TODO(b/352547776): Let it be driven by the presence of super-calls.
-          val superTypeDeclaration = type.declaration.superTypeDeclaration
-          val currentTypeDeclaration = currentType.declaration
-          if (
-            superTypeDeclaration != null &&
-              !currentTypeDeclaration.equalsOrEnclosedIn(superTypeDeclaration)
-          ) {
-            superTypeDeclaration.declaredMethodDescriptors
-              .asSequence()
-              .filter { it.isConstructor && it.visibility.isPrivate }
-              .forEach { add(it) }
-          }
+private fun CompilationUnit.buildForcedKtInternalDeclarationMemberDescriptorSet():
+  Set<MemberDescriptor> = buildSet {
+  accept(
+    object : AbstractVisitor() {
+      override fun exitType(type: Type) {
+        // If the type is not enclosed inside its super-type, convert all private constructors in
+        // a super-type to internal to make them accessible from this type.
+        // TODO(b/352547776): Let it be driven by the presence of super-calls.
+        val superTypeDeclaration = type.declaration.superTypeDeclaration
+        val currentTypeDeclaration = currentType.declaration
+        if (
+          superTypeDeclaration != null &&
+            !currentTypeDeclaration.equalsOrEnclosedIn(superTypeDeclaration)
+        ) {
+          superTypeDeclaration.declaredMethodDescriptors
+            .asSequence()
+            .filter { it.isConstructor && it.visibility.isPrivate }
+            .forEach { add(it) }
         }
+      }
 
-        override fun exitMemberReference(memberReference: MemberReference) {
-          // Add declared member if it's referenced outside its enclosing type.
-          val memberDescriptor = memberReference.target.declarationDescriptor
-          val currentTypeDeclaration = currentType.declaration
-          if (memberDescriptor.visibility.isPrivate) {
-            val enclosingTypeDeclaration = memberDescriptor.enclosingTypeDescriptor.typeDeclaration
-            if (!currentTypeDeclaration.equalsOrEnclosedIn(enclosingTypeDeclaration)) {
-              add(memberDescriptor)
-            }
+      override fun exitMemberReference(memberReference: MemberReference) {
+        // Add declared member if it's referenced outside its enclosing type.
+        val memberDescriptor = memberReference.target.declarationDescriptor
+        val currentTypeDeclaration = currentType.declaration
+        if (memberDescriptor.visibility.isPrivate) {
+          val enclosingTypeDeclaration = memberDescriptor.enclosingTypeDescriptor.typeDeclaration
+          if (!currentTypeDeclaration.equalsOrEnclosedIn(enclosingTypeDeclaration)) {
+            add(memberDescriptor)
           }
         }
       }
-    )
-  }
+    }
+  )
+}

@@ -38,8 +38,8 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.withWidestScopeOrNull
  *   [@OptIn] annotation, filled-in during code generation
  * @property topLevelQualifiedNamesSet top-level qualified names, which will be translated as simple
  *   name without import
- * @property privateAsKtInternalDeclarationMemberDescriptorSet a set of private declaration member
- *   descriptors which should be translated as internal in Kotlin.
+ * @property forcedKtInternalDeclarationMemberDescriptorSet a set of declaration member descriptors
+ *   which should be translated as internal in Kotlin.
  * @property captureIndices mutable map of capture indices, used for translating capture types
  * @property isJ2ObjCInteropEnabled whether to enable J2ObjC interop
  */
@@ -49,7 +49,7 @@ internal data class Environment(
   private val importedSimpleNameToQualifiedNameMutableMap: MutableMap<String, String> =
     mutableMapOf(),
   private val importedOptInQualifiedNamesMutableSet: MutableSet<String> = mutableSetOf(),
-  private val privateAsKtInternalDeclarationMemberDescriptorSet: Set<MemberDescriptor> = setOf(),
+  private val forcedKtInternalDeclarationMemberDescriptorSet: Set<MemberDescriptor> = setOf(),
   private val captureIndices: MutableMap<TypeVariable, Int> = mutableMapOf(),
   internal val isJ2ObjCInteropEnabled: Boolean = false,
 ) {
@@ -111,10 +111,10 @@ internal data class Environment(
     }
   }
 
-  /** Returns whether the given member descriptor should be translated as private in Kotlin. */
-  private fun isKtPrivate(memberDescriptor: MemberDescriptor): Boolean =
+  /** Returns whether the given member descriptor should translated as internal in Kotlin. */
+  private fun isForcedKtInternal(memberDescriptor: MemberDescriptor): Boolean =
     memberDescriptor.declarationDescriptor.let {
-      it.visibility.isPrivate && !privateAsKtInternalDeclarationMemberDescriptorSet.contains(it)
+      it.visibility.isPrivate && forcedKtInternalDeclarationMemberDescriptorSet.contains(it)
     }
 
   /** Returns Kotlin member visibility. */
@@ -127,8 +127,8 @@ internal data class Environment(
       memberDescriptor.isInterfaceMethod -> KtVisibility.PUBLIC
       // TODO(b/483489173): Remove when visibility problem in Dagger is solved differently.
       memberDescriptor.isConstructor && memberDescriptor.hasInjectAnnotation -> KtVisibility.PUBLIC
-      // Explicit private members.
-      isKtPrivate(memberDescriptor) -> KtVisibility.PRIVATE
+      // Explicit private members translated as internal
+      isForcedKtInternal(memberDescriptor) -> KtVisibility.INTERNAL
       // Use default visibility for everything else.
       else -> memberDescriptor.visibility!!.defaultMemberKtVisibility
     }

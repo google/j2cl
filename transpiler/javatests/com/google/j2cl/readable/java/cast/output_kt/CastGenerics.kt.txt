@@ -147,13 +147,13 @@ open class CastGenerics<T, E: Number?> {
  
  abstract class BaseImplementor internal constructor(): A, B
  
- open class Implementor internal constructor(): BaseImplementor() {
+ open class Implementor private constructor(): BaseImplementor() {
   override fun mA() {}
   
   override fun mB() {}
  }
  
- open class Container<T> internal constructor() {
+ open class Container<T> private constructor() {
   internal open fun get_pp_cast(): T {
    return null as T
   }
