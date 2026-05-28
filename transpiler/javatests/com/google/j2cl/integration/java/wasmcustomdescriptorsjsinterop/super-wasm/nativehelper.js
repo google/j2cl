@@ -147,7 +147,7 @@ function setReadWriteProperty(someJsType, value) {
 
 /**
  * @param {!SomeJsType} someJsType
- * @return {string}
+ * @return {?string}
  * @public
  */
 function callPackagePrivateMethod(someJsType) {

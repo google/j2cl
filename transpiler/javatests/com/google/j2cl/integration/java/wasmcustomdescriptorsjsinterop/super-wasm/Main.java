@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -101,6 +102,7 @@ public final class Main {
       return 11;
     }
 
+    @JsNonNull
     public String getString() {
       return "str";
     }
