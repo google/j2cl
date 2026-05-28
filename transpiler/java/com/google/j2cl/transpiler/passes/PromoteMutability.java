@@ -369,7 +369,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
 
-                if (!isMutableDueToVariance(declaredTypeDescriptor)) {
+                if (!isMutableDueToVariance(inferredTypeDescriptor)) {
                   return expression;
                 }
 

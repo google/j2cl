@@ -556,7 +556,9 @@ open class Collections {
    )
    val nestedMap: MutableList</* @mutable */ MutableMap<String, in String>> = ArrayList</* @mutable */ MutableMap<String, in String>>()
    val innerMap: MutableMap<String, String> = HashMap<String, String>()
-   nestedMap.asMutableList().add(innerMap)
+   nestedMap.asMutableList().add(
+    innerMap.asMutableMap(),
+   )
    Collections.testNestedLowerBounds(
     Consumer { l: /* @mutable */ MutableList<in String> ->
     },
