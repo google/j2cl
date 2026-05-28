@@ -100,7 +100,7 @@ class GenValidationTest(ValidationTest):
     _j2("gen java/emptyclass", out_stream=localout)
     _assert_in("Number of stale readables: 0", localout.getvalue())
 
-  def test_golden_file_updates(self):
+  def test_gen_golden_file_updates(self):
     with open(GOLDEN_CLOSURE, "a") as f:
       f.write("\n// STALE COMMENT\n")
     with open(GOLDEN_WASM, "a") as f:
@@ -122,7 +122,7 @@ class GenValidationTest(ValidationTest):
     with open(GOLDEN_KT_WEB, "r") as f:
       _assert_not_in("// STALE COMMENT", f.read())
 
-  def test_failed_compilation(self):
+  def test_gen_failed_compilation(self):
     with open(SOURCE_FILE, "w") as f:
       f.write("INVALID JAVA CODE")
 
@@ -130,7 +130,7 @@ class GenValidationTest(ValidationTest):
     _assert_output("No test status for targets")
     _assert_output("Check build results:")
 
-  def test_broken_build_file(self):
+  def test_gen_broken_build_file(self):
     with open(BUILD_FILE, "w") as f:
       f.write("INVALID BAZEL SYNTAX")
 
@@ -138,7 +138,7 @@ class GenValidationTest(ValidationTest):
     _assert_output("Error while running command")
     _assert_output("blaze query filter")
 
-  def test_missing_file_in_srcs(self):
+  def test_gen_missing_file_in_srcs(self):
     original_build = self._backup[BUILD_FILE]
     _assert_in('glob(["*.java"])', original_build)
 
@@ -150,33 +150,33 @@ class GenValidationTest(ValidationTest):
     _assert_output("No test status for targets")
     _assert_output("Check build results:")
 
-  def test_platform_filtering(self):
+  def test_gen_platform_filtering(self):
     _j2("-p CLOSURE gen java/emptyclass")
     _assert_output("Blaze building Wasm:\n    No matches")
 
-  def test_pattern(self):
+  def test_gen_pattern(self):
     _j2("-p CLOSURE gen empty.*")
     _assert_not_output("No matching readables!")
     _assert_output(READABLE_DIR)
     _assert_output(READABLE_DIR_KT)
 
-  def test_pattern2(self):
+  def test_gen_pattern2(self):
     _j2("-p CLOSURE gen java/empty.*")
     _assert_not_output("No matching readables!")
     _assert_output(READABLE_DIR)
     _assert_not_output(READABLE_DIR_KT)
 
-  def test_pattern3(self):
+  def test_gen_pattern3(self):
     _j2("-p CLOSURE gen kotlin/empty.*")
     _assert_not_output("No matching readables!")
     _assert_not_output(READABLE_DIR)
     _assert_output(READABLE_DIR_KT)
 
-  def test_pattern_no_matches(self):
+  def test_gen_pattern_no_matches(self):
     _j2("-p CLOSURE gen empty")
     _assert_output("No matching readables!")
 
-  def test_blaze_invalid_flag(self):
+  def test_gen_blaze_invalid_flag(self):
     with tempfile.TemporaryDirectory() as temp_dir:
       bad_blazerc_path = os.path.join(temp_dir, "bad_blazerc")
       with open(bad_blazerc_path, "w") as f:
