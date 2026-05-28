@@ -201,6 +201,20 @@ public abstract non-sealed class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  Stream<TypeDescriptor> getParameterizationsInImpl(
+      TypeVariable typeParameter, TypeDescriptor parameterizedType, Set<DescriptorPair> seen) {
+    return switch (parameterizedType) {
+      case ArrayTypeDescriptor arrayTypeDescriptor ->
+          getComponentTypeDescriptor()
+              .getParameterizationsIn(
+                  typeParameter, arrayTypeDescriptor.getComponentTypeDescriptor(), seen);
+
+      // Non-arrays are not assignable to arrays.
+      default -> throw new IllegalStateException();
+    };
+  }
+
+  @Override
   TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     TypeDescriptor component = getComponentTypeDescriptor();
     TypeDescriptor newComponent = replaceTypeDescriptors(component, fn, seen);

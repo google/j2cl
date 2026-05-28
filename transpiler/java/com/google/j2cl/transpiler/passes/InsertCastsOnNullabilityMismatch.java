@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
+import org.jspecify.annotations.Nullable;
 
 /** Inserts casts in places where necessary due to nullability differences in type arguments. */
 // TODO(b/392084555): Clean-up this pass, as right now it's quite messy.
@@ -110,9 +111,11 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
     }
 
     // Handle conversion to wildcard or capture with lower bound.
-    TypeDescriptor toLowerBound = getNormalizedLowerBoundTypeDescriptor(toTypeDescriptor);
+    TypeDescriptor toLowerBound =
+        getLowerBoundTypeDescriptorWithAppliedNullability(toTypeDescriptor);
     if (toLowerBound != null) {
-      TypeDescriptor fromLowerBound = getNormalizedLowerBoundTypeDescriptor(fromTypeDescriptor);
+      TypeDescriptor fromLowerBound =
+          getLowerBoundTypeDescriptorWithAppliedNullability(fromTypeDescriptor);
       if (fromLowerBound != null) {
         // ? super A is assignable to ? super B if B is assignable to A
         return isNullabilityAssignableTo(fromLowerBound, toLowerBound, seenTo);
@@ -183,12 +186,14 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
                   fromVariable.getNullabilityAnnotation(), toVariable.getNullabilityAnnotation())
               // wildcard -> T
               : isNullabilityAssignableTo(
-                  getNormalizedUpperBoundTypeDescriptor(fromVariable), toVariable, seenTo);
+                  fromVariable.getUpperBoundTypeDescriptorWithAppliedNullability(),
+                  toVariable,
+                  seenTo);
 
       case TypeVariable fromVariable -> {
         // TypeVariable -> not TypeVariable
         yield isNullabilityAssignableTo(
-            getNormalizedUpperBoundTypeDescriptor(fromVariable), to, seenTo);
+            fromVariable.getUpperBoundTypeDescriptorWithAppliedNullability(), to, seenTo);
       }
 
       case IntersectionTypeDescriptor fromIntersection -> {
@@ -203,6 +208,13 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
             .allMatch(it -> isNullabilityAssignableTo(it, toTarget, seenTo));
       }
     };
+  }
+
+  private static @Nullable TypeDescriptor getLowerBoundTypeDescriptorWithAppliedNullability(
+      TypeDescriptor typeDescriptor) {
+    return typeDescriptor instanceof TypeVariable typeVariable && typeVariable.isWildcardOrCapture()
+        ? typeVariable.getLowerBoundTypeDescriptorWithAppliedNullability()
+        : null;
   }
 
   /**
@@ -224,14 +236,15 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
         return true;
       }
 
-      TypeDescriptor toLowerBound = getNormalizedLowerBoundTypeDescriptor(toVariable);
+      TypeDescriptor toLowerBound = toVariable.getLowerBoundTypeDescriptorWithAppliedNullability();
       if (toLowerBound != null) {
         if (!fromTypeDescriptor.isWildcardOrCapture()) {
           // T -> ? super V
           return isNullabilityAssignableTo(toLowerBound, fromTypeDescriptor, seenTo);
         } else {
           TypeVariable fromVariable = (TypeVariable) fromTypeDescriptor;
-          TypeDescriptor fromLowerBound = getNormalizedLowerBoundTypeDescriptor(fromVariable);
+          TypeDescriptor fromLowerBound =
+              fromVariable.getLowerBoundTypeDescriptorWithAppliedNullability();
           if (fromLowerBound != null) {
             // ? super T -> ? super V
             return isNullabilityAssignableTo(toLowerBound, fromLowerBound, seenTo);
@@ -241,7 +254,8 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
           }
         }
       } else /* toLowerBound == null */ {
-        TypeDescriptor toUpperBound = getNormalizedUpperBoundTypeDescriptor(toVariable);
+        TypeDescriptor toUpperBound =
+            toVariable.getUpperBoundTypeDescriptorWithAppliedNullability();
         ImmutableSet<TypeVariable> newSeenTo =
             ImmutableSet.<TypeVariable>builder().addAll(seenTo).add(toVariable).build();
 
@@ -275,7 +289,8 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
 
       case TypeVariable typeVariable ->
           typeVariable.isWildcardOrCapture()
-              ? getAssignableTarget(getNormalizedUpperBoundTypeDescriptor(typeVariable))
+              ? getAssignableTarget(
+                  typeVariable.getUpperBoundTypeDescriptorWithAppliedNullability())
               : typeVariable;
 
       case IntersectionTypeDescriptor intersectionTypeDescriptor ->

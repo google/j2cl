@@ -34,7 +34,6 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import java.util.List;
 import java.util.function.BiFunction;
-import javax.annotation.Nullable;
 
 /**
  * Abstract base class for Kotlin passes, providing shared functionality:
@@ -109,11 +108,13 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
             ImmutableSet.<TypeVariable>builder().addAll(seen).add(typeVariable).build();
 
         if (!isTypeArgument) {
-          TypeDescriptor lowerBound = getNormalizedLowerBoundTypeDescriptor(typeVariable);
+          TypeDescriptor lowerBound =
+              typeVariable.getLowerBoundTypeDescriptorWithAppliedNullability();
           if (lowerBound != null) {
             yield projectCaptures(lowerBound, /* isTypeArgument= */ false, newSeen);
           } else {
-            TypeDescriptor upperBound = getNormalizedUpperBoundTypeDescriptor(typeVariable);
+            TypeDescriptor upperBound =
+                typeVariable.getUpperBoundTypeDescriptorWithAppliedNullability();
             yield projectCaptures(upperBound, /* isTypeArgument= */ false, newSeen);
           }
         } else {
@@ -214,31 +215,6 @@ public abstract class AbstractJ2ktNormalizationPass extends NormalizationPass {
       }
     }
     return typeDescriptor;
-  }
-
-  static TypeDescriptor getNormalizedUpperBoundTypeDescriptor(TypeVariable typeVariable) {
-    return typeVariable
-        .getUpperBoundTypeDescriptor()
-        .withNullabilityAnnotation(typeVariable.getNullabilityAnnotation());
-  }
-
-  @Nullable
-  static TypeDescriptor getNormalizedLowerBoundTypeDescriptor(TypeVariable typeVariable) {
-    TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
-    if (lowerBound != null) {
-      return lowerBound.withNullabilityAnnotation(typeVariable.getNullabilityAnnotation());
-    }
-    return null;
-  }
-
-  @Nullable
-  static TypeDescriptor getNormalizedLowerBoundTypeDescriptor(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof TypeVariable typeVariable) {
-      if (typeVariable.isWildcardOrCapture()) {
-        return getNormalizedLowerBoundTypeDescriptor(typeVariable);
-      }
-    }
-    return null;
   }
 
   static <A, B, R> ImmutableList<R> zip(

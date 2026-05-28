@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.NullabilityAnnotation.mostNullable;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangVoid;
@@ -41,7 +40,6 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
-import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Type;
@@ -51,10 +49,7 @@ import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -440,143 +435,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     return changed[0];
   }
 
-  /**
-   * Returns all the different type assignments to {@code typeParameter} from the declaration {@code
-   * declarationTypeDescriptor} as parameterized in {@code typeDescriptor}.
-   *
-   * <p>Example:
-   *
-   * <ul>
-   *   <li>declaration type descriptor: {@code Foo<T, V, Bar<T>>}
-   *   <li>type parameter: {@code T}
-   *   <li>given type descriptor: {@code Foo<String, Number, Bar<@Nullable String>>}
-   *   <li>results: {@code String, @Nullable String}
-   * </ul>
-   *
-   * @param declarationTypeDescriptor declaration (unparameterized) type descriptor
-   * @param typeParameter type parameter to get parameterizations for
-   * @param typeDescriptor type descriptor to look for parameterizations in
-   * @return a stream with parameterizations
-   */
-  private static Stream<TypeDescriptor> getParameterizationsIn(
-      TypeDescriptor declarationTypeDescriptor,
-      TypeVariable typeParameter,
-      TypeDescriptor typeDescriptor) {
-    return getParameterizationsIn(
-        declarationTypeDescriptor, typeParameter, typeDescriptor, new HashSet<>());
-  }
-
-  private record DescriptorPair(TypeDescriptor declaration, TypeDescriptor parameterized) {}
-
-  private static Stream<TypeDescriptor> getParameterizationsIn(
-      TypeDescriptor declarationTypeDescriptor,
-      TypeVariable typeParameter,
-      TypeDescriptor typeDescriptor,
-      Set<DescriptorPair> seen) {
-
-    if (!seen.add(new DescriptorPair(declarationTypeDescriptor, typeDescriptor))) {
-      // This pair of declaration and descriptor has already been processed.
-      return Stream.empty();
-    }
-    // TODO(b/406815802): Investigate how is it possible. The problem is reproduced in
-    //  PropagateNullabilityProblem readable.
-    if (!typeDescriptor.isAssignableTo(declarationTypeDescriptor)) {
-      return Stream.empty();
-    }
-
-    return switch (declarationTypeDescriptor) {
-      // Primitive type descriptors are never parameterized.
-      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> Stream.empty();
-
-      case ArrayTypeDescriptor declarationArrayTypeDescriptor ->
-          switch (typeDescriptor) {
-            case ArrayTypeDescriptor arrayTypeDescriptor ->
-                getParameterizationsIn(
-                    declarationArrayTypeDescriptor.getComponentTypeDescriptor(),
-                    typeParameter,
-                    arrayTypeDescriptor.getComponentTypeDescriptor(),
-                    seen);
-
-            // Non-arrays are not assignable to arrays.
-            default -> throw new IllegalStateException();
-          };
-
-      case DeclaredTypeDescriptor declarationDeclaredTypeDescriptor ->
-          switch (typeDescriptor) {
-            case PrimitiveTypeDescriptor primitiveTypeDescriptor -> Stream.empty();
-
-            // Array -> Object / Cloneable / Serializable
-            case ArrayTypeDescriptor arrayTypeDescriptor -> Stream.empty();
-
-            // Look for the parameterized instance of the declared parameter type
-            case DeclaredTypeDescriptor declaredTypeDescriptor ->
-                Streams.zip(
-                        declarationDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
-                        checkNotNull(
-                            declaredTypeDescriptor.findSupertype(
-                                declarationDeclaredTypeDescriptor.getTypeDeclaration()))
-                            .getTypeArgumentDescriptors()
-                            .stream(),
-                        (typeArgument, targetTypeArgument) ->
-                            getParameterizationsIn(
-                                typeArgument, typeParameter, targetTypeArgument, seen))
-                    .flatMap(Function.identity());
-
-            case TypeVariable typeVariable ->
-                getParameterizationsIn(
-                    declarationTypeDescriptor,
-                    typeParameter,
-                    getNormalizedUpperBoundTypeDescriptor(typeVariable),
-                    seen);
-
-            case IntersectionTypeDescriptor intersectionTypeDescriptor ->
-                intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-                    .filter(it -> it.isAssignableTo(declarationTypeDescriptor))
-                    .flatMap(
-                        it ->
-                            getParameterizationsIn(
-                                declarationTypeDescriptor, typeParameter, it, seen));
-
-            // For a union to be assignable to a type, all of its components have to be assignable
-            // to that type, so collect these parameterizations from all the types in the union
-            case UnionTypeDescriptor unionTypeDescriptor ->
-                unionTypeDescriptor.getUnionTypeDescriptors().stream()
-                    .flatMap(
-                        it ->
-                            getParameterizationsIn(
-                                declarationTypeDescriptor, typeParameter, it, seen));
-          };
-
-      case TypeVariable declarationTypeVariable
-          when declarationTypeVariable.isWildcardOrCapture() ->
-          getParameterizationsIn(
-              getNormalizedUpperBoundTypeDescriptor(declarationTypeVariable),
-              typeParameter,
-              typeDescriptor instanceof TypeVariable typeVariable
-                      && typeVariable.isWildcardOrCapture()
-                  ? getNormalizedUpperBoundTypeDescriptor(typeVariable)
-                  : typeDescriptor,
-              seen);
-      case TypeVariable declarationTypeVariable
-          when declarationTypeVariable.toDeclaration().equals(typeParameter) ->
-          Stream.of(
-              declarationTypeVariable.getNullabilityAnnotation() == NullabilityAnnotation.NULLABLE
-                      || !declarationTypeVariable.canBeNull()
-                  ? typeDescriptor.toNonNullable()
-                  : typeDescriptor);
-
-      case TypeVariable declarationTypeVariable -> Stream.empty();
-
-      case IntersectionTypeDescriptor declarationIntersectionTypeDescriptor ->
-          declarationIntersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-              .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor, seen));
-
-      case UnionTypeDescriptor declarationUnionTypeDescriptor ->
-          declarationUnionTypeDescriptor.getUnionTypeDescriptors().stream()
-              .flatMap(it -> getParameterizationsIn(it, typeParameter, typeDescriptor, seen));
-    };
-  }
-
   /** Propagate nullability from one type argument to another, respecting parameter nullability. */
   private static TypeDescriptor propagateTypeArgumentNullabilityFrom(
       TypeVariable typeParameterDescriptor,
@@ -805,8 +663,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       TypeDescriptor typeArgumentDescriptor,
       TypeDescriptor declarationTypeDescriptor,
       TypeDescriptor inferredTypeDescriptor) {
-    return getParameterizationsIn(
-            declarationTypeDescriptor, typeParameterDescriptor, inferredTypeDescriptor)
+    return declarationTypeDescriptor
+        .getParameterizationsIn(typeParameterDescriptor, inferredTypeDescriptor)
         .reduce(
             propagateTypeArgument(typeParameterDescriptor, typeArgumentDescriptor),
             (typeArgument, typeDescriptor) ->
@@ -932,10 +790,10 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
       case TypeVariable fromVariable -> {
         if (fromVariable.getLowerBoundTypeDescriptor() == null) {
           return PropagateNullability.propagateNullabilityToDeclared(
-              toDeclared, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
+              toDeclared, fromVariable.getUpperBoundTypeDescriptorWithAppliedNullability(), seen);
         } else {
           return PropagateNullability.propagateNullabilityToDeclared(
-              toDeclared, getNormalizedLowerBoundTypeDescriptor(fromVariable), seen);
+              toDeclared, fromVariable.getLowerBoundTypeDescriptorWithAppliedNullability(), seen);
         }
       }
 
@@ -964,7 +822,7 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
       case TypeVariable fromVariable ->
           PropagateNullability.propagateNullabilityToArray(
-              toArray, getNormalizedUpperBoundTypeDescriptor(fromVariable), seen);
+              toArray, fromVariable.getUpperBoundTypeDescriptorWithAppliedNullability(), seen);
 
       default -> toArray;
     };

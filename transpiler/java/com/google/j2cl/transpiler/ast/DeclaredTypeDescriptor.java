@@ -1286,6 +1286,46 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return specializedTypeArgumentByTypeParameters;
   }
 
+  @Override
+  public Stream<TypeDescriptor> getParameterizationsInImpl(
+      TypeVariable typeParameter, TypeDescriptor parameterizedType, Set<DescriptorPair> seen) {
+    return switch (parameterizedType) {
+      case PrimitiveTypeDescriptor primitiveTypeDescriptor -> Stream.empty();
+
+      // Array -> Object / Cloneable / Serializable
+      case ArrayTypeDescriptor arrayTypeDescriptor -> Stream.empty();
+
+      // Look for the parameterized instance of the declared parameter type
+      case DeclaredTypeDescriptor declaredTypeDescriptor ->
+          Streams.zip(
+                  getTypeArgumentDescriptors().stream(),
+                  declaredTypeDescriptor
+                      .findSupertype(getTypeDeclaration())
+                      .getTypeArgumentDescriptors()
+                      .stream(),
+                  (typeArgument, targetTypeArgument) ->
+                      typeArgument.getParameterizationsIn(typeParameter, targetTypeArgument, seen))
+              .flatMap(Function.identity());
+
+      case TypeVariable typeVariable ->
+          getParameterizationsIn(
+              typeParameter,
+              typeVariable.getUpperBoundTypeDescriptorWithAppliedNullability(),
+              seen);
+
+      case IntersectionTypeDescriptor intersectionTypeDescriptor ->
+          intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+              .filter(it -> it.isAssignableTo(this))
+              .flatMap(it -> getParameterizationsIn(typeParameter, it, seen));
+
+      // For a union to be assignable to a type, all of its components have to be assignable
+      // to that type, so collect these parameterizations from all the types in the union
+      case UnionTypeDescriptor unionTypeDescriptor ->
+          unionTypeDescriptor.getUnionTypeDescriptors().stream()
+              .flatMap(it -> getParameterizationsIn(typeParameter, it, seen));
+    };
+  }
+
   /** Returns a stream with all the direct supertypes of this type. */
   public Stream<DeclaredTypeDescriptor> getSuperTypesStream() {
     DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();

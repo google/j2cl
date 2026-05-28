@@ -22,10 +22,12 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** A usage-site reference to a type. */
@@ -299,6 +301,42 @@ public abstract sealed class TypeDescriptor
   /** Replaces all occurrences of a type variable for the type specified by the mapping function. */
   public abstract TypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable);
+
+  /**
+   * Returns all the different type assignments to {@code typeParameter} from a declaration {@code
+   * this} as parameterized in {@code typeDescriptor}.
+   *
+   * <p>Example:
+   *
+   * <ul>
+   *   <li>this: {@code Foo<T, V, Bar<T>>}
+   *   <li>type parameter: {@code T}
+   *   <li>given type descriptor: {@code Foo<String, Number, Bar<@Nullable String>>}
+   *   <li>results: {@code String, @Nullable String}
+   * </ul>
+   */
+  public final Stream<TypeDescriptor> getParameterizationsIn(
+      TypeVariable typeVariable, TypeDescriptor parameterizedType) {
+    return getParameterizationsIn(typeVariable, parameterizedType, new HashSet<>());
+  }
+
+  final Stream<TypeDescriptor> getParameterizationsIn(
+      TypeVariable typeVariable, TypeDescriptor parameterizedType, Set<DescriptorPair> seen) {
+    if (!seen.add(new DescriptorPair(this, parameterizedType))) {
+      // This pair of declaration and descriptor has already been processed.
+      return Stream.empty();
+    }
+
+    if (!parameterizedType.isAssignableTo(this)) {
+      return Stream.empty();
+    }
+    return getParameterizationsInImpl(typeVariable, parameterizedType, seen);
+  }
+
+  abstract Stream<TypeDescriptor> getParameterizationsInImpl(
+      TypeVariable typeVariable, TypeDescriptor parameterizedType, Set<DescriptorPair> seen);
+
+  record DescriptorPair(TypeDescriptor declaration, TypeDescriptor parameterized) {}
 
   /**
    * Finds the supertype of this type (or this type itself) that has the same base type as given.

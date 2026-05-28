@@ -21,7 +21,9 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** A primitive type. */
@@ -181,6 +183,12 @@ public final class PrimitiveTypeDescriptor extends TypeDescriptor {
   @Override
   public TypeDeclaration getMetadataTypeDeclaration() {
     return TypeDescriptors.createPrimitiveMetadataTypeDescriptor(this).getTypeDeclaration();
+  }
+
+  @Override
+  Stream<TypeDescriptor> getParameterizationsInImpl(
+      TypeVariable typeParameter, TypeDescriptor parameterizedType, Set<DescriptorPair> seen) {
+    return Stream.empty();
   }
 
   @Override

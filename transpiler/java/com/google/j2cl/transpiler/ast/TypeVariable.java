@@ -28,6 +28,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /**
@@ -185,9 +186,54 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     return toRawTypeDescriptor().toUnboxedType();
   }
 
+  /**
+   * Returns the upper bound type descriptor with the nullability implied by the nullability
+   * annotation of the type variable.
+   */
+  @Memoized
+  public TypeDescriptor getUpperBoundTypeDescriptorWithAppliedNullability() {
+    return getUpperBoundTypeDescriptor().withNullabilityAnnotation(getNullabilityAnnotation());
+  }
+
+  /**
+   * Returns the lower bound type descriptor with the nullability implied by the nullability
+   * annotation of the type variable.
+   */
+  @Nullable
+  @Memoized
+  public TypeDescriptor getLowerBoundTypeDescriptorWithAppliedNullability() {
+    TypeDescriptor lowerBound = getLowerBoundTypeDescriptor();
+    if (lowerBound != null) {
+      return lowerBound.withNullabilityAnnotation(getNullabilityAnnotation());
+    }
+    return null;
+  }
+
   @Override
   public boolean canBeReferencedExternally() {
     return toRawTypeDescriptor().canBeReferencedExternally();
+  }
+
+  @Override
+  Stream<TypeDescriptor> getParameterizationsInImpl(
+      TypeVariable typeParameter, TypeDescriptor parameterizedType, Set<DescriptorPair> seen) {
+    if (isWildcard() || isCapture()) {
+      TypeDescriptor targetParameterizedType =
+          parameterizedType instanceof TypeVariable typeVariable
+                  && (typeVariable.isWildcard() || typeVariable.isCapture())
+              ? typeVariable.getUpperBoundTypeDescriptorWithAppliedNullability()
+              : parameterizedType;
+      return getUpperBoundTypeDescriptor()
+          .getParameterizationsIn(typeParameter, targetParameterizedType, seen);
+    }
+
+    if (toDeclaration() != typeParameter.toDeclaration()) {
+      return Stream.empty();
+    }
+    return Stream.of(
+        getNullabilityAnnotation() == NullabilityAnnotation.NULLABLE || !canBeNull()
+            ? parameterizedType.toNonNullable()
+            : parameterizedType);
   }
 
   @Override

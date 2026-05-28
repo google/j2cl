@@ -28,6 +28,7 @@ import com.google.j2cl.common.visitor.Visitable;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /**
@@ -159,6 +160,15 @@ public abstract non-sealed class UnionTypeDescriptor extends TypeDescriptor {
   @Override
   public boolean canBeReferencedExternally() {
     return false;
+  }
+
+  @Override
+  Stream<TypeDescriptor> getParameterizationsInImpl(
+      TypeVariable typeParameter, TypeDescriptor parameterizedType, Set<DescriptorPair> seen) {
+    return getUnionTypeDescriptors().stream()
+        .flatMap(
+            typeDescriptor ->
+                typeDescriptor.getParameterizationsIn(typeParameter, parameterizedType, seen));
   }
 
   @Override
