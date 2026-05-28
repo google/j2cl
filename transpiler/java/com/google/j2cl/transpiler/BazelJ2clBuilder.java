@@ -156,8 +156,12 @@ final class BazelJ2clBuilder extends BazelWorker {
       hidden = true)
   boolean enableWasmCustomDescriptorsJsInterop = false;
 
-  @Option(name = "-forbiddenAnnotation", hidden = true)
-  List<String> forbiddenAnnotations = new ArrayList<>();
+  @Option(
+      name = "-stripAnnotationName",
+      metaVar = "<annotation>",
+      usage = "The name(s) of annotations to strip.",
+      hidden = true)
+  List<String> strippedAnnotationNames = new ArrayList<>();
 
   @Option(
       name = "-klibs",
@@ -227,7 +231,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setSourceMappingPathPrefix(this.sourceMappingPathPrefix)
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
-
         .setBackend(this.backend)
         .setWasmEntryPointStrings(this.wasmEntryPoints)
         .setEnableWasmCustomDescriptors(this.enableWasmCustomDescriptors)
@@ -235,7 +238,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
-        .setForbiddenAnnotations(forbiddenAnnotations)
+        .setStrippedAnnotationNames(strippedAnnotationNames)
         .setEnableKlibs(enableKlibs)
         .setDependencyKlibs(dependencyKlibs)
         .setFriendKlibs(friendKlibs)

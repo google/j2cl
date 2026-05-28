@@ -23,6 +23,15 @@
 (global $$class@gwtincompatible.Implementor.SomeEnum (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $namesToValuesMap@gwtincompatible.Implementor.OneMemberEnum (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@gwtincompatible.Implementor.OneMemberEnum (mut i32)
+ (i32.const 0)
+)
+(global $$class@gwtincompatible.Implementor.OneMemberEnum (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $gwtincompatible.Implementor.vtable (ref $gwtincompatible.Implementor.vtable)
  (struct.new $gwtincompatible.Implementor.vtable
   (ref.func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor)
@@ -60,21 +69,40 @@
  (struct.new $java.io.Serializable.vtable
  )
 )
+(global $gwtincompatible.Implementor.OneMemberEnum.vtable (ref $gwtincompatible.Implementor.OneMemberEnum.vtable)
+ (struct.new $gwtincompatible.Implementor.OneMemberEnum.vtable
+  (ref.func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.OneMemberEnum)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
+  (ref.func $m_hashCode__int@java.lang.Enum)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+ )
+)
+(global $java.lang.Comparable.vtable@$gwtincompatible.Implementor.OneMemberEnum (ref $java.lang.Comparable.vtable)
+ (struct.new $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+)
+(global $java.io.Serializable.vtable@$gwtincompatible.Implementor.OneMemberEnum (ref $java.io.Serializable.vtable)
+ (struct.new $java.io.Serializable.vtable
+ )
+)
 
 
 ;;; Implementor Implementor.$create()
 (func $$create__@gwtincompatible.Implementor
  (result (ref null $gwtincompatible.Implementor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
  (local $$instance (ref null $gwtincompatible.Implementor))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
   (call $$clinit__void_<once>_@gwtincompatible.Implementor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
   (local.set $$instance (struct.new $gwtincompatible.Implementor (global.get $gwtincompatible.Implementor.vtable) (global.get $gwtincompatible.Implementor.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
   (call $$ctor__void_$p_gwtincompatible_Implementor@gwtincompatible.Implementor (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
   (return (local.get $$instance))
  )
 )
@@ -82,9 +110,9 @@
 ;;; void Implementor.$ctor()
 (func $$ctor__void_$p_gwtincompatible_Implementor@gwtincompatible.Implementor
  (param $this (ref null $gwtincompatible.Implementor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
   (call $$ctor__void_$p_gwtincompatible_Interface_ClassWithAbstractMethod@gwtincompatible.Interface.ClassWithAbstractMethod (ref.as_non_null (local.get $this)))
  )
 )
@@ -93,12 +121,12 @@
 (func $m_compatibleMethod__void@gwtincompatible.Implementor
  (type $function.m_compatibleMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:32:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:14
  (local $a i32)
  (local $this (ref null $gwtincompatible.Implementor))
  (local.set $this (ref.cast (ref $gwtincompatible.Implementor) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:33:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
   (local.set $a (i32.const 4))
  )
 )
@@ -106,18 +134,18 @@
 
 ;;; void Implementor.$clinit()
 (func $$clinit__void_<once>_@gwtincompatible.Implementor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
   (if (global.get $$class-initialized@gwtincompatible.Implementor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
   (global.set $$class-initialized@gwtincompatible.Implementor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:18:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:22:13
   (call $$clinit__void_<once>_@gwtincompatible.Interface.ClassWithAbstractMethod )
  )
 )
@@ -154,13 +182,13 @@
  (param $this (ref null $gwtincompatible.Implementor.SomeEnum))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -169,20 +197,20 @@
 (func $m_valueOf__java_lang_String__gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
  (param $name (ref null $java.lang.String))
  (result (ref null $gwtincompatible.Implementor.SomeEnum))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (if (ref.is_null (global.get $namesToValuesMap@gwtincompatible.Implementor.SomeEnum))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
      (global.set $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum )))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (return (ref.cast (ref null $gwtincompatible.Implementor.SomeEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@gwtincompatible.Implementor.SomeEnum))))
  )
 )
@@ -190,11 +218,11 @@
 ;;; SomeEnum[] SomeEnum.values()
 (func $m_values__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (return (call $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum ))
  )
 )
@@ -202,29 +230,29 @@
 ;;; SomeEnum[] SomeEnum.values_$private()
 (func $m_values_$private__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (global.get $COMPATIBLE@gwtincompatible.Implementor.SomeEnum))))
  )
 )
 
 ;;; void SomeEnum.$clinit()
 (func $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (if (global.get $$class-initialized@gwtincompatible.Implementor.SomeEnum)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (global.set $$class-initialized@gwtincompatible.Implementor.SomeEnum (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:36:7
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:40:7
   (call $$clinit__void_<once>_@java.lang.Enum )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:4
   (global.set $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (call $$create__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1 (call $$getString_|COMPATIBLE|__java_lang_String_<once>_@gwtincompatible.Implementor.SomeEnum )(i32.const 0)))
  )
 )
@@ -256,21 +284,143 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.SomeEnum)
 
+;;; OneMemberEnum OneMemberEnum.$create(String $name, int $ordinal)
+(func $$create__java_lang_String__int@gwtincompatible.Implementor.OneMemberEnum
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (result (ref null $gwtincompatible.Implementor.OneMemberEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+ (local $$instance (ref null $gwtincompatible.Implementor.OneMemberEnum))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (local.set $$instance (struct.new $gwtincompatible.Implementor.OneMemberEnum (global.get $gwtincompatible.Implementor.OneMemberEnum.vtable) (global.get $gwtincompatible.Implementor.OneMemberEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (call $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_OneMemberEnum@gwtincompatible.Implementor.OneMemberEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (return (local.get $$instance))
+ )
+)
+
+;;; void OneMemberEnum.$ctor(String $name, int $ordinal)
+(func $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_OneMemberEnum@gwtincompatible.Implementor.OneMemberEnum
+ (param $this (ref null $gwtincompatible.Implementor.OneMemberEnum))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+ )
+)
+
+;;; OneMemberEnum OneMemberEnum.valueOf(String name)
+(func $m_valueOf__java_lang_String__gwtincompatible_Implementor_OneMemberEnum@gwtincompatible.Implementor.OneMemberEnum
+ (param $name (ref null $java.lang.String))
+ (result (ref null $gwtincompatible.Implementor.OneMemberEnum))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.OneMemberEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (if (ref.is_null (global.get $namesToValuesMap@gwtincompatible.Implementor.OneMemberEnum))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+     (global.set $namesToValuesMap@gwtincompatible.Implementor.OneMemberEnum (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values_$private__arrayOf_gwtincompatible_Implementor_OneMemberEnum@gwtincompatible.Implementor.OneMemberEnum )))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (return (ref.cast (ref null $gwtincompatible.Implementor.OneMemberEnum) (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $namesToValuesMap@gwtincompatible.Implementor.OneMemberEnum))))
+ )
+)
+
+;;; OneMemberEnum[] OneMemberEnum.values()
+(func $m_values__arrayOf_gwtincompatible_Implementor_OneMemberEnum@gwtincompatible.Implementor.OneMemberEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (call $$clinit__void_<once>_@gwtincompatible.Implementor.OneMemberEnum )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (return (call $m_values_$private__arrayOf_gwtincompatible_Implementor_OneMemberEnum@gwtincompatible.Implementor.OneMemberEnum ))
+ )
+)
+
+;;; OneMemberEnum[] OneMemberEnum.values_$private()
+(func $m_values_$private__arrayOf_gwtincompatible_Implementor_OneMemberEnum@gwtincompatible.Implementor.OneMemberEnum
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (return (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
+ )
+)
+
+;;; void OneMemberEnum.$clinit()
+(func $$clinit__void_<once>_@gwtincompatible.Implementor.OneMemberEnum
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (if (global.get $$class-initialized@gwtincompatible.Implementor.OneMemberEnum)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (global.set $$class-initialized@gwtincompatible.Implementor.OneMemberEnum (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:54:7
+  (call $$clinit__void_<once>_@java.lang.Enum )
+ )
+)
+
+;;; Class<T> OneMemberEnum.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor.OneMemberEnum
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@gwtincompatible.Implementor.OneMemberEnum)))
+   (then
+    (return (global.get $$class@gwtincompatible.Implementor.OneMemberEnum))
+   )
+  )
+  (global.set $$class@gwtincompatible.Implementor.OneMemberEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|gwtincompati...|__java_lang_String_<once>_@gwtincompatible.Implementor.OneMemberEnum )))
+  (return (global.get $$class@gwtincompatible.Implementor.OneMemberEnum))
+ )
+)
+
+;;; Class<?> OneMemberEnum.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.OneMemberEnum
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $gwtincompatible.Implementor.OneMemberEnum))
+ (local.set $this (ref.cast (ref $gwtincompatible.Implementor.OneMemberEnum) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@gwtincompatible.Implementor.OneMemberEnum ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@gwtincompatible.Implementor.OneMemberEnum)
+
 ;;; <anonymous> extends SomeEnum <anonymous> extends SomeEnum.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $gwtincompatible.Implementor.SomeEnum.1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:4
  (local $$instance (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:4
   (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum.1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:4
   (local.set $$instance (struct.new $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (global.get $gwtincompatible.Implementor.SomeEnum.1.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:4
   (call $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum_1@gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:4
   (return (local.get $$instance))
  )
 )
@@ -280,9 +430,9 @@
  (param $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:4
   (call $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
@@ -291,7 +441,7 @@
 (func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
  (type $function.m_method__void_$pp_gwtincompatible)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:39:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:43:11
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (local.set $this (ref.cast (ref $gwtincompatible.Implementor.SomeEnum.1) (local.get $this.untyped)))
  (block
@@ -301,18 +451,18 @@
 
 ;;; void <anonymous> extends SomeEnum.$clinit()
 (func $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:15
   (if (global.get $$class-initialized@gwtincompatible.Implementor.SomeEnum.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:15
   (global.set $$class-initialized@gwtincompatible.Implementor.SomeEnum.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:37:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/gwtincompatible/readable-j2wasm.js/gwtincompatible/Implementor.java:41:15
   (call $$clinit__void_<once>_@gwtincompatible.Implementor.SomeEnum )
  )
 )

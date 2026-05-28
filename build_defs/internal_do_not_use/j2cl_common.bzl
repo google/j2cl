@@ -55,7 +55,7 @@ def _compile(
 
     if not has_kotlin_srcs:
         # Avoid Kotlin toolchain for java targets.
-        jvm_provider, stripped_java_srcs = _java_compile(
+        jvm_provider = _java_compile(
             ctx,
             name,
             java_toolchain,
@@ -108,7 +108,9 @@ def _compile(
             is_j2kt_web_enabled = is_j2kt_web_enabled,
         )
 
-        stripped_java_srcs = jvm_provider.source_jars
+        # Override with the source_jars that include generated sources since J2CL does not process
+        # KAPT/KSP itself.
+        jvm_srcs = jvm_provider.source_jars
 
     klib_provider = klib_common.compile_header_klibs(
         ctx = ctx,
@@ -135,7 +137,7 @@ def _compile(
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
         _j2cl_transpile(
             ctx,
-            stripped_java_srcs,
+            jvm_srcs,
             jvm_provider,
             jvm_deps,
             get_jdk_system(java_toolchain, javac_opts),
@@ -223,7 +225,7 @@ def _java_compile(
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     stripped_java_srcs = [_strip_incompatible_annotation(ctx, name, srcs, mnemonic, strip_annotations)] if srcs else []
 
-    java_info = java_common.compile(
+    return java_common.compile(
         ctx,
         source_jars = stripped_java_srcs,
         deps = deps,
@@ -234,7 +236,6 @@ def _java_compile(
         java_toolchain = java_toolchain,
         javac_opts = javac_opts,
     )
-    return java_info, stripped_java_srcs
 
 def _kt_compile(
         ctx,
@@ -373,7 +374,8 @@ def _j2cl_transpile(
         javac_opts,
         kotlincopts,
         klib_provider,
-        klib_friends):
+        klib_friends,
+        strip_annotations = ["GwtIncompatible"]):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
     mnemonic = "J2cl" if backend == "CLOSURE" else "J2wasm"
     is_klibs_enabled = klib_common.is_klibs_experiment_enabled(ctx) and (kt_srcs or kt_common_srcs)
@@ -425,6 +427,7 @@ def _j2cl_transpile(
     args.add(ctx.label, format = "-targetLabel=%s")
     args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
+    args.add_all(strip_annotations, format_each = "-stripAnnotationName=%s")
 
     args.add("-experimentalBackend", backend)
 
@@ -442,7 +445,6 @@ def _j2cl_transpile(
         # side).
         kotlincopts = kotlincopts + KOTLIN_SERIALIZE_IR_FLAGS
     args.add_all(kotlincopts, format_each = "-kotlincOptions=%s")
-    args.add("-forbiddenAnnotation", "GwtIncompatible")
 
     transitive_inputs = [classpath]
 

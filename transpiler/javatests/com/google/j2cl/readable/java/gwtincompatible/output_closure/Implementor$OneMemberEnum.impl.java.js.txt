@@ -1,0 +1,68 @@
+goog.module('gwtincompatible.Implementor.OneMemberEnum$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @final
+ * @extends {Enum<OneMemberEnum>}
+ */
+class OneMemberEnum extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!OneMemberEnum} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new OneMemberEnum();
+  $instance.$ctor__gwtincompatible_Implementor_OneMemberEnum__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__gwtincompatible_Implementor_OneMemberEnum__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!OneMemberEnum} */
+ static m_valueOf__java_lang_String__gwtincompatible_Implementor_OneMemberEnum(/** string */ name) {
+  OneMemberEnum.$clinit();
+  if ($Equality.$same(OneMemberEnum.f_namesToValuesMap__gwtincompatible_Implementor_OneMemberEnum_, null)) {
+   OneMemberEnum.f_namesToValuesMap__gwtincompatible_Implementor_OneMemberEnum_ = (/**@type {Map<?string, !OneMemberEnum>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap(OneMemberEnum.m_values__arrayOf_gwtincompatible_Implementor_OneMemberEnum())));
+  }
+  return /**@type {OneMemberEnum}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, OneMemberEnum.f_namesToValuesMap__gwtincompatible_Implementor_OneMemberEnum_));
+ }
+ /** @nodts @return {!Array<!OneMemberEnum>} */
+ static m_values__arrayOf_gwtincompatible_Implementor_OneMemberEnum() {
+  OneMemberEnum.$clinit();
+  return /**@type {!Array<!OneMemberEnum>}*/ ($Arrays.$create([0], OneMemberEnum));
+ }
+ /** @nodts */
+ static $clinit() {
+  OneMemberEnum.$clinit = () =>{};
+  OneMemberEnum.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OneMemberEnum;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+/**@type {Map<?string, !OneMemberEnum>} @nodts*/
+OneMemberEnum.f_namesToValuesMap__gwtincompatible_Implementor_OneMemberEnum_;
+$Util.$setClassMetadataForEnum(OneMemberEnum, 'gwtincompatible.Implementor$OneMemberEnum');
+
+exports = OneMemberEnum;
+
+//# sourceMappingURL=Implementor$OneMemberEnum.js.map

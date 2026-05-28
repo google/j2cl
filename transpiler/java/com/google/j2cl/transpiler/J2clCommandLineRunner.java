@@ -141,8 +141,12 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-experimentalEnableWasmCustomDescriptorsJsInterop", hidden = true)
   boolean enableWasmCustomDescriptorsJsInterop = false;
 
-  @Option(name = "-forbiddenAnnotation", hidden = true)
-  List<String> forbiddenAnnotations = new ArrayList<>();
+  @Option(
+      name = "-stripAnnotationName",
+      metaVar = "<annotation>",
+      usage = "The name(s) of annotations to strip.",
+      hidden = true)
+  List<String> strippedAnnotationNames = new ArrayList<>();
 
   @Option(name = "-objCNamePrefix", hidden = true)
   String objCNamePrefix = "J2kt";
@@ -201,14 +205,13 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
-
         .setBackend(this.backend)
         .setWasmEntryPointStrings(wasmEntryPoints)
         .setEnableWasmCustomDescriptorsJsInterop(this.enableWasmCustomDescriptorsJsInterop)
         .setNullMarkedSupported(this.enableJSpecifySupport)
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
-        .setForbiddenAnnotations(forbiddenAnnotations)
+        .setStrippedAnnotationNames(strippedAnnotationNames)
         .setDependencyKlibs(ImmutableList.of())
         .setFriendKlibs(ImmutableList.of())
         .setEnableKlibs(false)

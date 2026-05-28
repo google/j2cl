@@ -46,7 +46,6 @@ public class CommandLineInvocationTest extends TestCase {
                 + "use -help for a list of possible options");
   }
 
-
   public void testSyntaxError() {
     newTesterWithDefaults()
         .addCompilationUnit(
@@ -421,48 +420,35 @@ public class CommandLineInvocationTest extends TestCase {
     }
   }
 
-  public void testForbiddenAnnotations() {
+  public void testCodeStripping() {
     newTesterWithDefaults()
-        .addArgs("-forbiddenAnnotation", "GwtIncompatible")
-        .addCompilationUnit(
-            "annotation.GwtIncompatible",
+        .addArgs("-stripAnnotationName", "MyIncompatible")
+        .assertWithInlineMessages(
+            "annotation.MyIncompatible",
             """
             import java.lang.annotation.*;
             @Retention(RetentionPolicy.CLASS)
             @Target({ElementType.METHOD})
-            @interface GwtIncompatible {}
-            """)
-        .addCompilationUnit(
-            "annotation.ClassWithForbiddenAnnotation",
+            @interface MyIncompatible {}
+            """,
+            "annotation.ClassCallingIncompatibleMethod",
             """
             import jsinterop.annotations.*;
-            public class ClassWithForbiddenAnnotation {
-              @GwtIncompatible public  void nativeInstanceMethod() {}
-            }
-            """)
-        .assertTranspileFails()
-        .assertErrorsWithoutSourcePosition(
-            "Unexpected @GwtIncompatible annotation found. Please run this library through the"
-                + " incompatible annotated code stripper tool.");
+            // Tests that non-existent imports are also stripped.
+            import non.existent.type.NonExistentType;
 
-    newTesterWithDefaults()
-        .addArgs("-forbiddenAnnotation", "Foo")
-        .addCompilationUnit(
-            "annotation.GwtIncompatible",
-            """
-            import java.lang.annotation.*;
-            @Retention(RetentionPolicy.CLASS)
-            @Target({ElementType.METHOD})
-            @interface GwtIncompatible {}
-            """)
-        .addCompilationUnit(
-            "annotation.ClassWithForbiddenAnnotation",
-            """
-            import jsinterop.annotations.*;
-            public class ClassWithForbiddenAnnotation {
-              @GwtIncompatible public void nativeInstanceMethod() {}
+            class SuperClass {
             }
-            """)
-        .assertTranspileSucceeds();
+            public class ClassCallingIncompatibleMethod {
+              public void callIncompatibleMethod() {
+                incompatibleMethod();
+            > Error: cannot find symbol
+            >   symbol:   method incompatibleMethod()
+            >   location: class annotation.ClassCallingIncompatibleMethod
+              }
+
+              @MyIncompatible public void incompatibleMethod() {}
+            }
+            """);
   }
 }

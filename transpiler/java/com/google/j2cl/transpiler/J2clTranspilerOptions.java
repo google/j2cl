@@ -53,7 +53,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
   public abstract ImmutableList<EntryPointPattern> getWasmEntryPointPatterns();
 
   @Override
-  public abstract ImmutableList<String> getForbiddenAnnotations();
+  public abstract ImmutableList<String> getStrippedAnnotationNames();
 
   /** A Builder for J2clTranspilerOptions. */
   @AutoValue.Builder
@@ -117,7 +117,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setFriendKlibs(List<Path> friendKlibs);
 
-    public abstract Builder setForbiddenAnnotations(List<String> forbiddenAnnotations);
+    public abstract Builder setStrippedAnnotationNames(List<String> annotations);
 
     public abstract Builder setObjCNamePrefix(String objCNamePrefix);
 

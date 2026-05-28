@@ -55,5 +55,5 @@ public interface FrontendOptions {
 
   ImmutableList<Path> getFriendKlibs();
 
-  ImmutableList<String> getForbiddenAnnotations();
+  ImmutableList<String> getStrippedAnnotationNames();
 }

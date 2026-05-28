@@ -15,6 +15,10 @@
  */
 package gwtincompatible;
 
+import static java.text.DateFormat.getDateInstance; // Non-emulated jre class.
+
+import java.text.SimpleDateFormat; // Non-emulated jre class.
+
 public class Implementor extends Interface.ClassWithAbstractMethod
     implements Interface, Interface.NestedInterface {
   @GwtIncompatible
@@ -45,5 +49,16 @@ public class Implementor extends Interface.ClassWithAbstractMethod
     };
 
     abstract void method();
+  }
+
+  enum OneMemberEnum {
+    @GwtIncompatible
+    @J2ktIncompatible
+    INCOMPATIBLE_MEMBER {
+      {
+        getDateInstance();
+        new SimpleDateFormat();
+      }
+    };
   }
 }

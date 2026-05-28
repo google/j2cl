@@ -32,13 +32,13 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.sun.source.tree.CompilationUnitTree;
-import com.sun.source.tree.Tree;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import com.sun.tools.javac.api.JavacTaskImpl;
 import com.sun.tools.javac.api.JavacTool;
 import com.sun.tools.javac.file.JavacFileManager;
 import com.sun.tools.javac.tree.JCTree;
+import com.sun.tools.javac.tree.JCTree.JCCompilationUnit;
 import com.sun.tools.javac.util.Context;
 import java.io.File;
 import java.io.IOException;
@@ -120,11 +120,24 @@ public class JavacParser {
               if (taskEvent.getKind() == TaskEvent.Kind.PARSE) {
                 // Collect parsed compilation units; these include compilation units for the
                 // provided source files and source file that might be generated during compilation.
-                javacCompilationUnits.add(checkNotNull(taskEvent.getCompilationUnit()));
 
-                // Compilation unit might have been generated; add it to the map.
-                var sourcePath = taskEvent.getCompilationUnit().getSourceFile().getName();
-                targetPathBySourcePath.computeIfAbsent(sourcePath, s -> getJavaPath(s));
+                var cu = (JCCompilationUnit) taskEvent.getCompilationUnit();
+                var sourcePath = cu.getSourceFile().getName();
+                var isGenerated = !targetPathBySourcePath.containsKey(sourcePath);
+
+                if (isGenerated) {
+                  // Generators are not supposed to emit code with annotation that need stripping.
+                  // Note that this is not the only tool that strips annotations and in other
+                  // parts of the pipeline, the stripper is run before running APTs.
+                  checkForbiddenAnnotations(cu, options.getStrippedAnnotationNames(), problems);
+                  // Add the generated compilation unit to the map.
+                  targetPathBySourcePath.put(sourcePath, getJavaPath(sourcePath));
+                } else {
+                  // Remove incompatible nodes and unused imports only from provided source files.
+                  AnnotatedNodeStripper.strip(cu, options.getStrippedAnnotationNames());
+                }
+
+                javacCompilationUnits.add(checkNotNull(cu));
               }
             }
           });
@@ -133,7 +146,6 @@ public class JavacParser {
       task.parse();
       task.analyze();
 
-      checkForbiddenAnnotations(javacCompilationUnits, options.getForbiddenAnnotations(), problems);
       reportDiagnosticErrors(diagnostics, problems);
       problems.abortIfHasErrors();
 
@@ -302,26 +314,23 @@ public class JavacParser {
   }
 
   private static void checkForbiddenAnnotations(
-      List<CompilationUnitTree> javacCompilationUnits,
+      CompilationUnitTree compilationUnit,
       ImmutableList<String> forbiddenAnnotations,
       Problems problems) {
     // Here we check for instances of forbidden annotations in the ast. If that is the case, we
     // throw an error since these should have been stripped by the build system already.
-    for (var compilationUnit : javacCompilationUnits) {
-      AnnotatedNodeCollector annotatedNodeCollector =
-          new AnnotatedNodeCollector(forbiddenAnnotations, /* stopTraversalOnMatch= */ false);
-      annotatedNodeCollector.visitCompilationUnit(compilationUnit, null);
-      for (var forbiddenAnnotation : forbiddenAnnotations) {
-        ImmutableSet<Tree> nodesWithForbiddenAnnotations =
-            annotatedNodeCollector.getNodesWithAnnotation(forbiddenAnnotation);
-        if (!nodesWithForbiddenAnnotations.isEmpty()) {
-          JCTree sampleNode = ((JCTree) Iterables.getFirst(nodesWithForbiddenAnnotations, null));
-          problems.fatal(
-              (int) (compilationUnit.getLineMap().getLineNumber(sampleNode.getStartPosition()) - 1),
-              compilationUnit.getSourceFile().getName(),
-              FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
-              forbiddenAnnotation);
-        }
+    var collector =
+        new AnnotatedNodeCollector(forbiddenAnnotations, /* stopTraversalOnMatch= */ false);
+    collector.visitCompilationUnit(compilationUnit, null);
+    for (var forbiddenAnnotation : forbiddenAnnotations) {
+      var nodesWithForbiddenAnnotations = collector.getNodesWithAnnotation(forbiddenAnnotation);
+      if (!nodesWithForbiddenAnnotations.isEmpty()) {
+        var sampleNode = (JCTree) Iterables.getFirst(nodesWithForbiddenAnnotations, null);
+        problems.fatal(
+            (int) (compilationUnit.getLineMap().getLineNumber(sampleNode.getStartPosition()) - 1),
+            compilationUnit.getSourceFile().getName(),
+            FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
+            forbiddenAnnotation);
       }
     }
   }
