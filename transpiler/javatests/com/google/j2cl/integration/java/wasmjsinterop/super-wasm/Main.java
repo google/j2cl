@@ -17,7 +17,9 @@ package wasmjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -28,6 +30,7 @@ public final class Main {
     testJsString();
     testGlobalJsType();
     testNonglobalJsType();
+    testJsFunction();
   }
 
   public static void testJsString() {
@@ -89,4 +92,32 @@ public final class Main {
 
   @JsMethod(namespace = "test")
   private static native String appendInJs(String a, String b);
+
+  /** Sanity check for JsFunction interfaces to ensure lambdas still work as expected. */
+  private static void testJsFunction() {
+    MyJsFunction impl = new MyJsFunctionImpl();
+    assertEquals(15, impl.foo(5));
+    assertEquals(1, impl.myOverlay());
+
+    MyJsFunction lambda = a -> a + 20;
+    assertEquals(25, lambda.foo(5));
+    assertEquals(1, lambda.myOverlay());
+  }
+
+  @JsFunction
+  interface MyJsFunction {
+    int foo(int a);
+
+    @JsOverlay
+    default int myOverlay() {
+      return 1;
+    }
+  }
+
+  static final class MyJsFunctionImpl implements MyJsFunction {
+    @Override
+    public int foo(int a) {
+      return a + 10;
+    }
+  }
 }

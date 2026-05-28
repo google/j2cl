@@ -505,7 +505,12 @@ public abstract class TypeDeclaration
       return getOverlayImplementationTypeDeclaration();
     }
 
-    if (isJsFunctionInterface()) {
+    if (isJsFunctionInterface() && !implementWasmJsInteropSemantics.get()) {
+      // In Closure, JsFunction interfaces are represented by plain JavaScript functions. Class
+      // metadata calls, such as `instanceOf`, are handled by `vmbootstrap.JavaScriptFunction`.
+      //
+      // In Wasm, JsFunction interfaces are modeled with a concrete adapter class
+      // (vmbootstrap.JavaScriptFunction does not exist).
       return BootstrapType.JAVA_SCRIPT_FUNCTION.getDeclaration();
     }
 

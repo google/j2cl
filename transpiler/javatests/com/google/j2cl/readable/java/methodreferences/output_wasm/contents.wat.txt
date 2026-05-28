@@ -38,22 +38,22 @@
 (global $$class@methodreferences.MethodReferences.BiFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor (mut i32)
+(global $$class-initialized@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (mut i32)
  (i32.const 0)
 )
-(global $$class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor (mut (ref null $java.lang.Class))
+(global $$class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor (mut i32)
+(global $$class-initialized@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (mut i32)
  (i32.const 0)
 )
-(global $$class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+(global $$class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor (mut i32)
+(global $$class-initialized@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (mut i32)
  (i32.const 0)
 )
-(global $$class@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
+(global $$class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$1 (mut i32)
@@ -331,6 +331,48 @@
   (ref.func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences)
   (ref.func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences)
   (ref.func $m_t__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences)
+ )
+)
+(global $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor.vtable (ref $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor.vtable)
+ (struct.new $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_produce__java_lang_Object@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
+ )
+)
+(global $methodreferences.MethodReferences.JsProducer.vtable@$methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (ref $methodreferences.MethodReferences.JsProducer.vtable)
+ (struct.new $methodreferences.MethodReferences.JsProducer.vtable
+  (ref.func $m_produce__java_lang_Object@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
+ )
+)
+(global $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor.vtable (ref $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor.vtable)
+ (struct.new $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
+ )
+)
+(global $methodreferences.MethodReferences.JsFunctionInterface.vtable@$methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (ref $methodreferences.MethodReferences.JsFunctionInterface.vtable)
+ (struct.new $methodreferences.MethodReferences.JsFunctionInterface.vtable
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
+ )
+)
+(global $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor.vtable (ref $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor.vtable)
+ (struct.new $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor)
+ )
+)
+(global $methodreferences.MethodReferences.JsBiFunction.vtable@$methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (ref $methodreferences.MethodReferences.JsBiFunction.vtable)
+ (struct.new $methodreferences.MethodReferences.JsBiFunction.vtable
+  (ref.func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor)
  )
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$1.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$1.vtable)
@@ -705,7 +747,7 @@
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$26.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$26.vtable)
  (struct.new $methodreferences.MethodReferences.$LambdaImplementor$26.vtable
-  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -719,7 +761,7 @@
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$27.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$27.vtable)
  (struct.new $methodreferences.MethodReferences.$LambdaImplementor$27.vtable
-  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -733,7 +775,7 @@
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$28.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$28.vtable)
  (struct.new $methodreferences.MethodReferences.$LambdaImplementor$28.vtable
-  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -747,7 +789,7 @@
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$29.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$29.vtable)
  (struct.new $methodreferences.MethodReferences.$LambdaImplementor$29.vtable
-  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -762,7 +804,7 @@
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$30.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$30.vtable)
  (struct.new $methodreferences.MethodReferences.$LambdaImplementor$30.vtable
-  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -777,7 +819,7 @@
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$31.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$31.vtable)
  (struct.new $methodreferences.MethodReferences.$LambdaImplementor$31.vtable
-  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -792,7 +834,7 @@
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$32.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$32.vtable)
  (struct.new $methodreferences.MethodReferences.$LambdaImplementor$32.vtable
-  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -807,7 +849,7 @@
 )
 (global $methodreferences.MethodReferences.$LambdaImplementor$33.vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$33.vtable)
  (struct.new $methodreferences.MethodReferences.$LambdaImplementor$33.vtable
-  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -1676,9 +1718,26 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.BiFunction.$LambdaAdaptor)
 
-;;; void $LambdaAdaptor.$ctor()
-(func $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$LambdaAdaptor@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor
- (param $this (ref null $methodreferences.MethodReferences.JsProducer.$LambdaAdaptor))
+;;; $JsFunctionAdaptor<T> $JsFunctionAdaptor.$create()
+(func $$create__@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor
+ (result (ref null $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+ (local $$instance (ref null $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (global.get $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor.vtable) (global.get $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$JsFunctionAdaptor@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor()
+(func $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$JsFunctionAdaptor@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor
+ (param $this (ref null $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
@@ -1686,54 +1745,116 @@
  )
 )
 
-;;; void $LambdaAdaptor.$clinit()
-(func $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor
+;;; $JsFunctionAdaptor<T> $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
+(func $$create__javaemul_internal_WasmExtern@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor
+ (param $jsFuncref (ref null extern))
+ (result (ref null $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+ (local $$instance (ref null $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (global.get $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor.vtable) (global.get $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (call $$ctor__javaemul_internal_WasmExtern__void_$p_methodreferences_MethodReferences_JsProducer_$JsFunctionAdaptor@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
+(func $$ctor__javaemul_internal_WasmExtern__void_$p_methodreferences_MethodReferences_JsProducer_$JsFunctionAdaptor@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor
+ (param $this (ref null $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
+ (param $jsFuncref (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
-  (if (global.get $$class-initialized@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor)
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (struct.set $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor $jsFuncref@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (local.get $this) (local.get $jsFuncref))
+ )
+)
+
+;;; T $JsFunctionAdaptor.produce()
+(func $m_produce__java_lang_Object@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor
+ (type $function.m_produce__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+ (local $this (ref null $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor) (local.get $this.untyped)))
+ (block
+ )
+ (unreachable)
+)
+(elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
+
+;;; void $JsFunctionAdaptor.$clinit()
+(func $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
+  (if (global.get $$class-initialized@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
-  (global.set $$class-initialized@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor (i32.const 1))
+  (global.set $$class-initialized@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:53:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
-;;; Class<T> $LambdaAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor
+;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor)))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)))
    (then
-    (return (global.get $$class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor))
+    (return (global.get $$class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor))
+  (global.set $$class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
  )
 )
 
-;;; Class<?> $LambdaAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor
+;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $methodreferences.MethodReferences.JsProducer.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsProducer.$LambdaAdaptor) (local.get $this.untyped)))
+ (local $this (ref null $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor)
+(elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor)
 
-;;; void $LambdaAdaptor.$ctor()
-(func $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$LambdaAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor
- (param $this (ref null $methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor))
+;;; $JsFunctionAdaptor<T, U> $JsFunctionAdaptor.$create()
+(func $$create__@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor
+ (result (ref null $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+ (local $$instance (ref null $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (global.get $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor.vtable) (global.get $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$JsFunctionAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor()
+(func $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$JsFunctionAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor
+ (param $this (ref null $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
@@ -1741,54 +1862,117 @@
  )
 )
 
-;;; void $LambdaAdaptor.$clinit()
-(func $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor
+;;; $JsFunctionAdaptor<T, U> $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
+(func $$create__javaemul_internal_WasmExtern@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor
+ (param $jsFuncref (ref null extern))
+ (result (ref null $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+ (local $$instance (ref null $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (global.get $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor.vtable) (global.get $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (call $$ctor__javaemul_internal_WasmExtern__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$JsFunctionAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
+(func $$ctor__javaemul_internal_WasmExtern__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$JsFunctionAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor
+ (param $this (ref null $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
+ (param $jsFuncref (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
-  (if (global.get $$class-initialized@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor)
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (struct.set $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor $jsFuncref@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (local.get $this) (local.get $jsFuncref))
+ )
+)
+
+;;; U $JsFunctionAdaptor.apply(T arg0)
+(func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+ (local $this (ref null $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor) (local.get $this.untyped)))
+ (block
+ )
+ (unreachable)
+)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
+
+;;; void $JsFunctionAdaptor.$clinit()
+(func $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
+  (if (global.get $$class-initialized@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
-  (global.set $$class-initialized@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor (i32.const 1))
+  (global.set $$class-initialized@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:58:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
-;;; Class<T> $LambdaAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor
+;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor)))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)))
    (then
-    (return (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor))
+    (return (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor))
+  (global.set $$class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
  )
 )
 
-;;; Class<?> $LambdaAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor
+;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (local $this (ref null $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor)
+(elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor)
 
-;;; void $LambdaAdaptor.$ctor()
-(func $$ctor__void_$p_methodreferences_MethodReferences_JsBiFunction_$LambdaAdaptor@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor
- (param $this (ref null $methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor))
+;;; $JsFunctionAdaptor<T, U, V> $JsFunctionAdaptor.$create()
+(func $$create__@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor
+ (result (ref null $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+ (local $$instance (ref null $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (global.get $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor.vtable) (global.get $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsBiFunction_$JsFunctionAdaptor@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor()
+(func $$ctor__void_$p_methodreferences_MethodReferences_JsBiFunction_$JsFunctionAdaptor@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor
+ (param $this (ref null $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
@@ -1796,50 +1980,97 @@
  )
 )
 
-;;; void $LambdaAdaptor.$clinit()
-(func $$clinit__void_<once>_@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor
+;;; $JsFunctionAdaptor<T, U, V> $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
+(func $$create__javaemul_internal_WasmExtern@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor
+ (param $jsFuncref (ref null extern))
+ (result (ref null $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+ (local $$instance (ref null $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (global.get $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor.vtable) (global.get $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (call $$ctor__javaemul_internal_WasmExtern__void_$p_methodreferences_MethodReferences_JsBiFunction_$JsFunctionAdaptor@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
+(func $$ctor__javaemul_internal_WasmExtern__void_$p_methodreferences_MethodReferences_JsBiFunction_$JsFunctionAdaptor@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor
+ (param $this (ref null $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
+ (param $jsFuncref (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
-  (if (global.get $$class-initialized@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor)
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (struct.set $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor $jsFuncref@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (local.get $this) (local.get $jsFuncref))
+ )
+)
+
+;;; V $JsFunctionAdaptor.apply(T arg0, U arg1)
+(func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor
+ (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+ (local $this (ref null $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
+ (block
+ )
+ (unreachable)
+)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor)
+
+;;; void $JsFunctionAdaptor.$clinit()
+(func $$clinit__void_<once>_@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
+  (if (global.get $$class-initialized@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
-  (global.set $$class-initialized@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor (i32.const 1))
+  (global.set $$class-initialized@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:63:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
-;;; Class<T> $LambdaAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor
+;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor)))
+  (if (i32.eqz (ref.is_null (global.get $$class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor)))
    (then
-    (return (global.get $$class@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor))
+    (return (global.get $$class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor))
+  (global.set $$class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
  )
 )
 
-;;; Class<?> $LambdaAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor
+;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor) (local.get $this.untyped)))
+ (local $this (ref null $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor)
+(elem declare func $$getClassImpl__java_lang_Class@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor)
 
 ;;; ObjectCapturingOuter<T> ObjectCapturingOuter.$create(MethodReferences<T> $outer_this)
 (func $$create__methodreferences_MethodReferences@methodreferences.MethodReferences.ObjectCapturingOuter
@@ -4151,7 +4382,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:145:41
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$26 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:145:41
-  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$26 (global.get $methodreferences.MethodReferences.$LambdaImplementor$26.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$26.itable) (i32.const 0)))
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$26 (global.get $methodreferences.MethodReferences.$LambdaImplementor$26.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$26.itable) (i32.const 0) (ref.null extern)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:145:41
   (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$26@methodreferences.MethodReferences.$LambdaImplementor$26 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:145:41
@@ -4165,7 +4396,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:145:41
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:145:41
-  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$LambdaAdaptor@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$JsFunctionAdaptor@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -4198,7 +4429,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:145:41
   (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$26 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:145:41
-  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )
  )
 )
 
@@ -4211,7 +4442,7 @@
     (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$26))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$26 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$26 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )))
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$26 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$26 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$26))
  )
 )
@@ -4225,7 +4456,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:146:22
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$27 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:146:22
-  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$27 (global.get $methodreferences.MethodReferences.$LambdaImplementor$27.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$27.itable) (i32.const 0)))
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$27 (global.get $methodreferences.MethodReferences.$LambdaImplementor$27.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$27.itable) (i32.const 0) (ref.null extern)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:146:22
   (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$27@methodreferences.MethodReferences.$LambdaImplementor$27 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:146:22
@@ -4239,7 +4470,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:146:22
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:146:22
-  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$LambdaAdaptor@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$JsFunctionAdaptor@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -4272,7 +4503,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:146:22
   (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$27 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:146:22
-  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )
  )
 )
 
@@ -4285,7 +4516,7 @@
     (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$27))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$27 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$27 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )))
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$27 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$27 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$27))
  )
 )
@@ -4300,7 +4531,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:148:22
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$28 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:148:22
-  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$28 (global.get $methodreferences.MethodReferences.$LambdaImplementor$28.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$28.itable) (i32.const 0) (ref.null $methodreferences.MethodReferences)))
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$28 (global.get $methodreferences.MethodReferences.$LambdaImplementor$28.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$28.itable) (i32.const 0) (ref.null extern) (ref.null $methodreferences.MethodReferences)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:148:22
   (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$28@methodreferences.MethodReferences.$LambdaImplementor$28 (ref.as_non_null (local.get $$instance))(local.get $$captured_$$q))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:148:22
@@ -4316,7 +4547,7 @@
  (block
   (struct.set $methodreferences.MethodReferences.$LambdaImplementor$28 $$captured_$$q@methodreferences.MethodReferences.$LambdaImplementor$28 (local.get $this) (local.get $$captured_$$q))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:148:22
-  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$LambdaAdaptor@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$JsFunctionAdaptor@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -4349,7 +4580,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:148:22
   (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$28 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:148:22
-  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )
  )
 )
 
@@ -4362,7 +4593,7 @@
     (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$28))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$28 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$28 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )))
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$28 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$28 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$28))
  )
 )
@@ -4376,7 +4607,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$29 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
-  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$29 (global.get $methodreferences.MethodReferences.$LambdaImplementor$29.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$29.itable) (i32.const 0)))
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$29 (global.get $methodreferences.MethodReferences.$LambdaImplementor$29.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$29.itable) (i32.const 0) (ref.null extern)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
   (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$29@methodreferences.MethodReferences.$LambdaImplementor$29 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
@@ -4390,7 +4621,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
-  (call $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$LambdaAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$JsFunctionAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -4440,7 +4671,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
   (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$29 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
-  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )
  )
 )
 
@@ -4453,7 +4684,7 @@
     (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$29))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$29 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$29 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor )))
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$29 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$29 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$29))
  )
 )
@@ -4467,7 +4698,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$30 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
-  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$30 (global.get $methodreferences.MethodReferences.$LambdaImplementor$30.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$30.itable) (i32.const 0)))
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$30 (global.get $methodreferences.MethodReferences.$LambdaImplementor$30.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$30.itable) (i32.const 0) (ref.null extern)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
   (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$30@methodreferences.MethodReferences.$LambdaImplementor$30 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
@@ -4481,7 +4712,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
-  (call $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$LambdaAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$JsFunctionAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -4531,7 +4762,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
   (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$30 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
-  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )
  )
 )
 
@@ -4544,7 +4775,7 @@
     (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$30))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$30 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$30 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor )))
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$30 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$30 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$30))
  )
 )
@@ -4559,7 +4790,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:154:49
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$31 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:154:49
-  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$31 (global.get $methodreferences.MethodReferences.$LambdaImplementor$31.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$31.itable) (i32.const 0) (ref.null $methodreferences.MethodReferences)))
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$31 (global.get $methodreferences.MethodReferences.$LambdaImplementor$31.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$31.itable) (i32.const 0) (ref.null extern) (ref.null $methodreferences.MethodReferences)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:154:49
   (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$31@methodreferences.MethodReferences.$LambdaImplementor$31 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:154:49
@@ -4576,7 +4807,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:154:49
   (struct.set $methodreferences.MethodReferences.$LambdaImplementor$31 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$31 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:154:49
-  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$LambdaAdaptor@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsProducer_$JsFunctionAdaptor@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -4624,7 +4855,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:154:49
   (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$31 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:154:49
-  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )
  )
 )
 
@@ -4637,7 +4868,7 @@
     (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$31))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$31 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$31 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$LambdaAdaptor )))
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$31 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$31 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsProducer.$JsFunctionAdaptor )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$31))
  )
 )
@@ -4651,7 +4882,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$32 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
-  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$32 (global.get $methodreferences.MethodReferences.$LambdaImplementor$32.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$32.itable) (i32.const 0)))
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$32 (global.get $methodreferences.MethodReferences.$LambdaImplementor$32.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$32.itable) (i32.const 0) (ref.null extern)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
   (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$32@methodreferences.MethodReferences.$LambdaImplementor$32 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
@@ -4665,7 +4896,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
-  (call $$ctor__void_$p_methodreferences_MethodReferences_JsBiFunction_$LambdaAdaptor@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsBiFunction_$JsFunctionAdaptor@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -4717,7 +4948,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
   (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$32 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
-  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor )
  )
 )
 
@@ -4730,7 +4961,7 @@
     (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$32))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$32 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$32 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsBiFunction.$LambdaAdaptor )))
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$32 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$32 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsBiFunction.$JsFunctionAdaptor )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$32))
  )
 )
@@ -4745,7 +4976,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.$LambdaImplementor$33 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
-  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$33 (global.get $methodreferences.MethodReferences.$LambdaImplementor$33.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$33.itable) (i32.const 0) (ref.null $methodreferences.MethodReferences)))
+  (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$33 (global.get $methodreferences.MethodReferences.$LambdaImplementor$33.vtable) (global.get $methodreferences.MethodReferences.$LambdaImplementor$33.itable) (i32.const 0) (ref.null extern) (ref.null $methodreferences.MethodReferences)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
   (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$33@methodreferences.MethodReferences.$LambdaImplementor$33 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
@@ -4762,7 +4993,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
   (struct.set $methodreferences.MethodReferences.$LambdaImplementor$33 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$33 (local.get $this) (local.get $$outer_this))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
-  (call $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$LambdaAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_JsFunctionInterface_$JsFunctionAdaptor@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -4812,7 +5043,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
   (global.set $$class-initialized@methodreferences.MethodReferences.$LambdaImplementor$33 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
-  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )
  )
 )
 
@@ -4825,7 +5056,7 @@
     (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$33))
    )
   )
-  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$33 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$33 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$LambdaAdaptor )))
+  (global.set $$class@methodreferences.MethodReferences.$LambdaImplementor$33 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|methodrefere...|__java_lang_String_<once>_@methodreferences.MethodReferences.$LambdaImplementor$33 )(call $$getClassMetadata__java_lang_Class_<once>_@methodreferences.MethodReferences.JsFunctionInterface.$JsFunctionAdaptor )))
   (return (global.get $$class@methodreferences.MethodReferences.$LambdaImplementor$33))
  )
 )

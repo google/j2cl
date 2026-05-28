@@ -11,10 +11,10 @@
 (global $$class@nullability.Marker (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@nullability.Nullability.MyFunction.$LambdaAdaptor (mut i32)
+(global $$class-initialized@nullability.Nullability.MyFunction.$JsFunctionAdaptor (mut i32)
  (i32.const 0)
 )
-(global $$class@nullability.Nullability.MyFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
+(global $$class@nullability.Nullability.MyFunction.$JsFunctionAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor (mut i32)
@@ -562,6 +562,20 @@
   (ref.func $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String@nullability.Nullability)
   (ref.func $m_m4__nullability_Nullability_MyFunction__void@nullability.Nullability)
   (ref.func $m_testNonNullOnType__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__nullability_Nullability_NonNullInterface__void_$pp_nullability@nullability.Nullability)
+ )
+)
+(global $nullability.Nullability.MyFunction.$JsFunctionAdaptor.vtable (ref $nullability.Nullability.MyFunction.$JsFunctionAdaptor.vtable)
+ (struct.new $nullability.Nullability.MyFunction.$JsFunctionAdaptor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nullability.Nullability.MyFunction.$JsFunctionAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_x__java_lang_String__java_lang_String@nullability.Nullability.MyFunction.$JsFunctionAdaptor)
+ )
+)
+(global $nullability.Nullability.MyFunction.vtable@$nullability.Nullability.MyFunction.$JsFunctionAdaptor (ref $nullability.Nullability.MyFunction.vtable)
+ (struct.new $nullability.Nullability.MyFunction.vtable
+  (ref.func $m_x__java_lang_String__java_lang_String@nullability.Nullability.MyFunction.$JsFunctionAdaptor)
  )
 )
 (global $nullability.Nullability.Foo.vtable (ref $nullability.Nullability.Foo.vtable)
@@ -2148,9 +2162,26 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability)
 
-;;; void $LambdaAdaptor.$ctor()
-(func $$ctor__void_$p_nullability_Nullability_MyFunction_$LambdaAdaptor@nullability.Nullability.MyFunction.$LambdaAdaptor
- (param $this (ref null $nullability.Nullability.MyFunction.$LambdaAdaptor))
+;;; $JsFunctionAdaptor $JsFunctionAdaptor.$create()
+(func $$create__@nullability.Nullability.MyFunction.$JsFunctionAdaptor
+ (result (ref null $nullability.Nullability.MyFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+ (local $$instance (ref null $nullability.Nullability.MyFunction.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (call $$clinit__void_<once>_@nullability.Nullability.MyFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (local.set $$instance (struct.new $nullability.Nullability.MyFunction.$JsFunctionAdaptor (global.get $nullability.Nullability.MyFunction.$JsFunctionAdaptor.vtable) (global.get $nullability.Nullability.MyFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (call $$ctor__void_$p_nullability_Nullability_MyFunction_$JsFunctionAdaptor@nullability.Nullability.MyFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor()
+(func $$ctor__void_$p_nullability_Nullability_MyFunction_$JsFunctionAdaptor@nullability.Nullability.MyFunction.$JsFunctionAdaptor
+ (param $this (ref null $nullability.Nullability.MyFunction.$JsFunctionAdaptor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
@@ -2158,50 +2189,96 @@
  )
 )
 
-;;; void $LambdaAdaptor.$clinit()
-(func $$clinit__void_<once>_@nullability.Nullability.MyFunction.$LambdaAdaptor
+;;; $JsFunctionAdaptor $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
+(func $$create__javaemul_internal_WasmExtern@nullability.Nullability.MyFunction.$JsFunctionAdaptor
+ (param $jsFuncref (ref null extern))
+ (result (ref null $nullability.Nullability.MyFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+ (local $$instance (ref null $nullability.Nullability.MyFunction.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (call $$clinit__void_<once>_@nullability.Nullability.MyFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (local.set $$instance (struct.new $nullability.Nullability.MyFunction.$JsFunctionAdaptor (global.get $nullability.Nullability.MyFunction.$JsFunctionAdaptor.vtable) (global.get $nullability.Nullability.MyFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (call $$ctor__javaemul_internal_WasmExtern__void_$p_nullability_Nullability_MyFunction_$JsFunctionAdaptor@nullability.Nullability.MyFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
+(func $$ctor__javaemul_internal_WasmExtern__void_$p_nullability_Nullability_MyFunction_$JsFunctionAdaptor@nullability.Nullability.MyFunction.$JsFunctionAdaptor
+ (param $this (ref null $nullability.Nullability.MyFunction.$JsFunctionAdaptor))
+ (param $jsFuncref (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
-  (if (global.get $$class-initialized@nullability.Nullability.MyFunction.$LambdaAdaptor)
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (struct.set $nullability.Nullability.MyFunction.$JsFunctionAdaptor $jsFuncref@nullability.Nullability.MyFunction.$JsFunctionAdaptor (local.get $this) (local.get $jsFuncref))
+ )
+)
+
+;;; String $JsFunctionAdaptor.x(String arg0)
+(func $m_x__java_lang_String__java_lang_String@nullability.Nullability.MyFunction.$JsFunctionAdaptor
+ (type $function.m_x__java_lang_String__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+ (local $this (ref null $nullability.Nullability.MyFunction.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $nullability.Nullability.MyFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
+ (block
+ )
+ (unreachable)
+)
+(elem declare func $m_x__java_lang_String__java_lang_String@nullability.Nullability.MyFunction.$JsFunctionAdaptor)
+
+;;; void $JsFunctionAdaptor.$clinit()
+(func $$clinit__void_<once>_@nullability.Nullability.MyFunction.$JsFunctionAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
+  (if (global.get $$class-initialized@nullability.Nullability.MyFunction.$JsFunctionAdaptor)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
-  (global.set $$class-initialized@nullability.Nullability.MyFunction.$LambdaAdaptor (i32.const 1))
+  (global.set $$class-initialized@nullability.Nullability.MyFunction.$JsFunctionAdaptor (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/Nullability.java:83:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
-;;; Class<T> $LambdaAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.MyFunction.$LambdaAdaptor
+;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.MyFunction.$JsFunctionAdaptor
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@nullability.Nullability.MyFunction.$LambdaAdaptor)))
+  (if (i32.eqz (ref.is_null (global.get $$class@nullability.Nullability.MyFunction.$JsFunctionAdaptor)))
    (then
-    (return (global.get $$class@nullability.Nullability.MyFunction.$LambdaAdaptor))
+    (return (global.get $$class@nullability.Nullability.MyFunction.$JsFunctionAdaptor))
    )
   )
-  (global.set $$class@nullability.Nullability.MyFunction.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nullability....|__java_lang_String_<once>_@nullability.Nullability.MyFunction.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@nullability.Nullability.MyFunction.$LambdaAdaptor))
+  (global.set $$class@nullability.Nullability.MyFunction.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nullability....|__java_lang_String_<once>_@nullability.Nullability.MyFunction.$JsFunctionAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nullability.Nullability.MyFunction.$JsFunctionAdaptor))
  )
 )
 
-;;; Class<?> $LambdaAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@nullability.Nullability.MyFunction.$LambdaAdaptor
+;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nullability.Nullability.MyFunction.$JsFunctionAdaptor
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $nullability.Nullability.MyFunction.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $nullability.Nullability.MyFunction.$LambdaAdaptor) (local.get $this.untyped)))
+ (local $this (ref null $nullability.Nullability.MyFunction.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $nullability.Nullability.MyFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.MyFunction.$LambdaAdaptor ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nullability.Nullability.MyFunction.$JsFunctionAdaptor ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability.MyFunction.$LambdaAdaptor)
+(elem declare func $$getClassImpl__java_lang_Class@nullability.Nullability.MyFunction.$JsFunctionAdaptor)
 
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor@nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor

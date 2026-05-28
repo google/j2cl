@@ -31,12 +31,24 @@ import java.util.Optional;
 public final class LambdaAdaptorTypeDescriptors {
   private static final String FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME = "JsFunction";
   private static final String FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME = "LambdaAdaptor";
+  private static final String WASM_JS_FUNCTION_ADAPTOR_CLASS_NAME = "JsFunctionAdaptor";
 
-  /** Returns the TypeDescriptor for an abstract lambda implementor super class. */
-  public static DeclaredTypeDescriptor createAbstractLambdaAdaptorTypeDescriptor(
+  private enum AdaptorKind {
+    CONCRETE,
+    ABSTRACT,
+    WASM_JS_FUNCTION,
+  }
+
+  /** Returns the TypeDescriptor for a Wasm base lambda adaptor class. */
+  public static DeclaredTypeDescriptor createFunctionalInterfaceAdaptorTypeDescriptor(
       TypeDescriptor typeDescriptor) {
     return createLambdaAdaptorTypeDescriptor(
-        typeDescriptor, (DeclaredTypeDescriptor) typeDescriptor, true, Optional.empty());
+        typeDescriptor,
+        (DeclaredTypeDescriptor) typeDescriptor,
+        typeDescriptor.getFunctionalInterface().isJsFunctionInterface()
+            ? AdaptorKind.WASM_JS_FUNCTION
+            : AdaptorKind.ABSTRACT,
+        Optional.empty());
   }
 
   /** Returns the TypeDescriptor for a LambdaAdaptor class. */
@@ -52,23 +64,27 @@ public final class LambdaAdaptorTypeDescriptors {
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       Optional<Integer> uniqueId) {
     return createLambdaAdaptorTypeDescriptor(
-        typeDescriptor, enclosingTypeDescriptor, false, uniqueId);
+        typeDescriptor, enclosingTypeDescriptor, AdaptorKind.CONCRETE, uniqueId);
   }
 
   /** Returns the TypeDescriptor for lambda instances of the functional interface. */
   private static DeclaredTypeDescriptor createLambdaAdaptorTypeDescriptor(
       TypeDescriptor typeDescriptor,
       DeclaredTypeDescriptor enclosingTypeDescriptor,
-      boolean isAbstract,
+      AdaptorKind adaptorKind,
       Optional<Integer> uniqueId) {
 
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
         typeDescriptor.getFunctionalInterface();
 
-    checkArgument(!functionalInterfaceTypeDescriptor.isJsFunctionInterface());
+    checkArgument(
+        !functionalInterfaceTypeDescriptor.isJsFunctionInterface()
+            || adaptorKind == AdaptorKind.WASM_JS_FUNCTION);
 
     DeclaredTypeDescriptor jsFunctionInterface =
-        createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
+        functionalInterfaceTypeDescriptor.isJsFunctionInterface()
+            ? functionalInterfaceTypeDescriptor
+            : createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
 
     // Lambdas that implement several types, e.g. from an intersection cast, require that all
     // those types be declared type descriptors.
@@ -90,7 +106,7 @@ public final class LambdaAdaptorTypeDescriptors {
             enclosingTypeDescriptor.getDeclarationDescriptor(),
             TypeDescriptors.getDeclarationDescriptors(interfaceTypeDescriptors),
             jsFunctionInterface.getDeclarationDescriptor(),
-            isAbstract,
+            adaptorKind,
             uniqueId);
 
     return adaptorDeclaration.toDescriptor(typeArgumentDescriptors);
@@ -110,18 +126,38 @@ public final class LambdaAdaptorTypeDescriptors {
         getAdaptorForwardingMethod(adaptorTypeDescriptor));
   }
 
+  /**
+   * Returns the method descriptors for methods in a Wasm JS function adaptor class.
+   *
+   * <p>The Wasm JS function adaptor has these methods:
+   * <li>a constructor taking a JS function reference (an externref) to be used when receiving a
+   *     function from JavaScript.
+   * <li>a default constructor to be used by subclasses when creating an instance in Wasm.
+   * <li>a SAM method implementation.
+   */
+  private static ImmutableList<MethodDescriptor> getWasmJsFunctionAdaptorMethodDescriptors(
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+    return ImmutableList.of(
+        getLambdaAdaptorDefaultConstructor(adaptorTypeDescriptor),
+        getWasmJsFunctionAdaptorConstructor(adaptorTypeDescriptor),
+        getAdaptorForwardingMethod(adaptorTypeDescriptor));
+  }
+
   /** Returns the TypeDeclaration for the LambdaAdaptor class. */
   private static TypeDeclaration createLambdaAdaptorTypeDeclaration(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
       DeclaredTypeDescriptor jsFunctionInterface,
-      boolean isAbstract,
+      AdaptorKind adaptorKind,
       Optional<Integer> uniqueId) {
 
     TypeDeclaration enclosingTypeDeclaration = enclosingTypeDescriptor.getTypeDeclaration();
     ImmutableList<String> classComponents =
         enclosingTypeDeclaration.synthesizeInnerClassComponents(
-            FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME, uniqueId.orElse(null));
+            adaptorKind == AdaptorKind.WASM_JS_FUNCTION
+                ? WASM_JS_FUNCTION_ADAPTOR_CLASS_NAME
+                : FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME,
+            uniqueId.orElse(null));
 
     ImmutableList<TypeVariable> typeParameterDescriptors =
         interfaceTypeDescriptors.stream()
@@ -134,16 +170,40 @@ public final class LambdaAdaptorTypeDescriptors {
         .setClassComponents(classComponents)
         .setDeclaredMethodDescriptorsFactory(
             adaptorTypeDeclaration ->
-                isAbstract
-                    ? ImmutableList.of()
-                    : getLambdaAdaptorMethodDescriptors(
-                        jsFunctionInterface, adaptorTypeDeclaration.toDescriptor()))
+                switch (adaptorKind) {
+                  case CONCRETE ->
+                      getLambdaAdaptorMethodDescriptors(
+                          jsFunctionInterface, adaptorTypeDeclaration.toDescriptor());
+                  case ABSTRACT -> ImmutableList.of();
+                  case WASM_JS_FUNCTION ->
+                      getWasmJsFunctionAdaptorMethodDescriptors(
+                          adaptorTypeDeclaration.toDescriptor());
+                })
+        .setDeclaredFieldDescriptorsFactory(
+            adaptorTypeDeclaration ->
+                switch (adaptorKind) {
+                  case CONCRETE, ABSTRACT -> ImmutableList.of();
+                  case WASM_JS_FUNCTION ->
+                      ImmutableList.of(
+                          getWasmJsFunctionAdaptorJsFuncrefField(
+                              adaptorTypeDeclaration.toDescriptor()));
+                })
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameterDescriptors)
-        .setHasAbstractModifier(isAbstract)
+        .setHasAbstractModifier(adaptorKind == AdaptorKind.ABSTRACT)
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.CLASS)
         .setOrigin(Origin.LAMBDA_ABSTRACT_ADAPTOR)
+        .build();
+  }
+
+  /** Returns the MethodDescriptor for the default constructor of an adaptor class. */
+  public static MethodDescriptor getLambdaAdaptorDefaultConstructor(
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+    return MethodDescriptor.builder()
+        .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
+        .setConstructor(true)
+        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
         .build();
   }
 
@@ -156,6 +216,36 @@ public final class LambdaAdaptorTypeDescriptors {
         .setOriginalJsInfo(JsInfo.RAW_CTOR)
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
         .setParameterTypeDescriptors(jsFunctionInterface)
+        .build();
+  }
+
+  /**
+   * Returns the FieldDescriptor for the JavaScript function reference field in a Wasm JS function
+   * adaptor class.
+   */
+  public static FieldDescriptor getWasmJsFunctionAdaptorJsFuncrefField(
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+    return FieldDescriptor.builder()
+        .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
+        .setName("jsFuncref")
+        .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmExtern)
+        .setVisibility(Visibility.PRIVATE)
+        .build();
+  }
+
+  /**
+   * Returns the MethodDescriptor for the constructor of the Wasm JS function adaptor class which
+   * takes a JS function reference (an {@code externref}).
+   *
+   * <p>This constructor is used for JS-originating js functions.
+   */
+  public static MethodDescriptor getWasmJsFunctionAdaptorConstructor(
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+    return MethodDescriptor.builder()
+        .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
+        .setConstructor(true)
+        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
+        .setParameterTypeDescriptors(TypeDescriptors.get().javaemulInternalWasmExtern)
         .build();
   }
 

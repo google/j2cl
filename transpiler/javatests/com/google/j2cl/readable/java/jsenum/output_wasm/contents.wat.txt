@@ -17,16 +17,16 @@
 (global $$class@jsenum.Main.Consumer.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (mut i32)
+(global $$class-initialized@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (mut i32)
  (i32.const 0)
 )
-(global $$class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (mut (ref null $java.lang.Class))
+(global $$class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (mut i32)
+(global $$class-initialized@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (mut i32)
  (i32.const 0)
 )
-(global $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
+(global $$class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@jsenum.Main.$LambdaImplementor$1 (mut i32)
@@ -250,6 +250,34 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
+(global $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor.vtable (ref $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor.vtable)
+ (struct.new $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_get__java_lang_Object@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)
+ )
+)
+(global $jsenum.Main.JsFunctionSuppiler.vtable@$jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (ref $jsenum.Main.JsFunctionSuppiler.vtable)
+ (struct.new $jsenum.Main.JsFunctionSuppiler.vtable
+  (ref.func $m_get__java_lang_Object@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)
+ )
+)
+(global $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor.vtable (ref $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor.vtable)
+ (struct.new $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)
+ )
+)
+(global $jsenum.Main.SpecializedJsFunction.vtable@$jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (ref $jsenum.Main.SpecializedJsFunction.vtable)
+ (struct.new $jsenum.Main.SpecializedJsFunction.vtable
+  (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)
+ )
+)
 (global $jsenum.Main.$LambdaImplementor$1.vtable (ref $jsenum.Main.$LambdaImplementor$1.vtable)
  (struct.new $jsenum.Main.$LambdaImplementor$1.vtable
   (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.Supplier.$LambdaAdaptor)
@@ -282,7 +310,7 @@
 )
 (global $jsenum.Main.$LambdaImplementor$3.vtable (ref $jsenum.Main.$LambdaImplementor$3.vtable)
  (struct.new $jsenum.Main.$LambdaImplementor$3.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -327,7 +355,7 @@
 )
 (global $jsenum.Main.$LambdaImplementor$6.vtable (ref $jsenum.Main.$LambdaImplementor$6.vtable)
  (struct.new $jsenum.Main.$LambdaImplementor$6.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -1637,9 +1665,26 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.Consumer.$LambdaAdaptor)
 
-;;; void $LambdaAdaptor.$ctor()
-(func $$ctor__void_$p_jsenum_Main_JsFunctionSuppiler_$LambdaAdaptor@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor
- (param $this (ref null $jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor))
+;;; $JsFunctionAdaptor<T> $JsFunctionAdaptor.$create()
+(func $$create__@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
+ (result (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+ (local $$instance (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (call $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (local.set $$instance (struct.new $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (global.get $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor.vtable) (global.get $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (call $$ctor__void_$p_jsenum_Main_JsFunctionSuppiler_$JsFunctionAdaptor@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor()
+(func $$ctor__void_$p_jsenum_Main_JsFunctionSuppiler_$JsFunctionAdaptor@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
+ (param $this (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
@@ -1647,54 +1692,116 @@
  )
 )
 
-;;; void $LambdaAdaptor.$clinit()
-(func $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor
+;;; $JsFunctionAdaptor<T> $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
+(func $$create__javaemul_internal_WasmExtern@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
+ (param $jsFuncref (ref null extern))
+ (result (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+ (local $$instance (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (call $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (local.set $$instance (struct.new $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (global.get $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor.vtable) (global.get $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (call $$ctor__javaemul_internal_WasmExtern__void_$p_jsenum_Main_JsFunctionSuppiler_$JsFunctionAdaptor@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
+(func $$ctor__javaemul_internal_WasmExtern__void_$p_jsenum_Main_JsFunctionSuppiler_$JsFunctionAdaptor@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
+ (param $this (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
+ (param $jsFuncref (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
-  (if (global.get $$class-initialized@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor)
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (struct.set $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor $jsFuncref@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (local.get $this) (local.get $jsFuncref))
+ )
+)
+
+;;; T $JsFunctionAdaptor.get()
+(func $m_get__java_lang_Object@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
+ (type $function.m_get__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+ (local $this (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor) (local.get $this.untyped)))
+ (block
+ )
+ (unreachable)
+)
+(elem declare func $m_get__java_lang_Object@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)
+
+;;; void $JsFunctionAdaptor.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (if (global.get $$class-initialized@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
-  (global.set $$class-initialized@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (i32.const 1))
+  (global.set $$class-initialized@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
-;;; Class<T> $LambdaAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor
+;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor)))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)))
    (then
-    (return (global.get $$class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor))
+    (return (global.get $$class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
    )
   )
-  (global.set $$class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor))
+  (global.set $$class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
  )
 )
 
-;;; Class<?> $LambdaAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor
+;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor) (local.get $this.untyped)))
+ (local $this (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor)
+(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)
 
-;;; void $LambdaAdaptor.$ctor()
-(func $$ctor__void_$p_jsenum_Main_SpecializedJsFunction_$LambdaAdaptor@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor
- (param $this (ref null $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor))
+;;; $JsFunctionAdaptor<T> $JsFunctionAdaptor.$create()
+(func $$create__@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
+ (result (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+ (local $$instance (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (call $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (local.set $$instance (struct.new $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (global.get $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor.vtable) (global.get $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (call $$ctor__void_$p_jsenum_Main_SpecializedJsFunction_$JsFunctionAdaptor@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor()
+(func $$ctor__void_$p_jsenum_Main_SpecializedJsFunction_$JsFunctionAdaptor@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
+ (param $this (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
@@ -1702,50 +1809,96 @@
  )
 )
 
-;;; void $LambdaAdaptor.$clinit()
-(func $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor
+;;; $JsFunctionAdaptor<T> $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
+(func $$create__javaemul_internal_WasmExtern@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
+ (param $jsFuncref (ref null extern))
+ (result (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+ (local $$instance (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (call $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (local.set $$instance (struct.new $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (global.get $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor.vtable) (global.get $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (call $$ctor__javaemul_internal_WasmExtern__void_$p_jsenum_Main_SpecializedJsFunction_$JsFunctionAdaptor@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
+(func $$ctor__javaemul_internal_WasmExtern__void_$p_jsenum_Main_SpecializedJsFunction_$JsFunctionAdaptor@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
+ (param $this (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
+ (param $jsFuncref (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
-  (if (global.get $$class-initialized@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor)
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (struct.set $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor $jsFuncref@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (local.get $this) (local.get $jsFuncref))
+ )
+)
+
+;;; T $JsFunctionAdaptor.get(T arg0)
+(func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
+ (type $function.m_get__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+ (local $this (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
+ (block
+ )
+ (unreachable)
+)
+(elem declare func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)
+
+;;; void $JsFunctionAdaptor.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (if (global.get $$class-initialized@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
     (return )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
-  (global.set $$class-initialized@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (i32.const 1))
+  (global.set $$class-initialized@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
 
-;;; Class<T> $LambdaAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor
+;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor)))
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)))
    (then
-    (return (global.get $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor))
+    (return (global.get $$class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
    )
   )
-  (global.set $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor))
+  (global.set $$class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
  )
 )
 
-;;; Class<?> $LambdaAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor
+;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
  (type $function.$getClassImpl__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $jsenum.Main.SpecializedJsFunction.$LambdaAdaptor) (local.get $this.untyped)))
+ (local $this (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor ))
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor ))
  )
 )
-(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor)
+(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)
 
 ;;; TemplatedField<T> TemplatedField.$create(T value)
 (func $$create__java_lang_Object@jsenum.Main.TemplatedField
@@ -2304,7 +2457,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$3 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
-  (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$3 (global.get $jsenum.Main.$LambdaImplementor$3.vtable) (global.get $jsenum.Main.$LambdaImplementor$3.itable) (i32.const 0)))
+  (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$3 (global.get $jsenum.Main.$LambdaImplementor$3.vtable) (global.get $jsenum.Main.$LambdaImplementor$3.itable) (i32.const 0) (ref.null extern)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$3@jsenum.Main.$LambdaImplementor$3 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
@@ -2318,7 +2471,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
-  (call $$ctor__void_$p_jsenum_Main_JsFunctionSuppiler_$LambdaAdaptor@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_jsenum_Main_JsFunctionSuppiler_$JsFunctionAdaptor@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -2369,7 +2522,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$3 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
-  (call $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor )
  )
 )
 
@@ -2382,7 +2535,7 @@
     (return (global.get $$class@jsenum.Main.$LambdaImplementor$3))
    )
   )
-  (global.set $$class@jsenum.Main.$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$3 )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.JsFunctionSuppiler.$LambdaAdaptor )))
+  (global.set $$class@jsenum.Main.$LambdaImplementor$3 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$3 )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor )))
   (return (global.get $$class@jsenum.Main.$LambdaImplementor$3))
  )
 )
@@ -2577,7 +2730,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$6 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
-  (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$6 (global.get $jsenum.Main.$LambdaImplementor$6.vtable) (global.get $jsenum.Main.$LambdaImplementor$6.itable) (i32.const 0)))
+  (local.set $$instance (struct.new $jsenum.Main.$LambdaImplementor$6 (global.get $jsenum.Main.$LambdaImplementor$6.vtable) (global.get $jsenum.Main.$LambdaImplementor$6.itable) (i32.const 0) (ref.null extern)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$6@jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
@@ -2591,7 +2744,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
-  (call $$ctor__void_$p_jsenum_Main_SpecializedJsFunction_$LambdaAdaptor@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor (ref.as_non_null (local.get $this)))
+  (call $$ctor__void_$p_jsenum_Main_SpecializedJsFunction_$JsFunctionAdaptor@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -2641,7 +2794,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
   (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$6 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
-  (call $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor )
+  (call $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor )
  )
 )
 
@@ -2654,7 +2807,7 @@
     (return (global.get $$class@jsenum.Main.$LambdaImplementor$6))
    )
   )
-  (global.set $$class@jsenum.Main.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$6 )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$LambdaAdaptor )))
+  (global.set $$class@jsenum.Main.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$6 )(call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor )))
   (return (global.get $$class@jsenum.Main.$LambdaImplementor$6))
  )
 )

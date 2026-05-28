@@ -140,19 +140,23 @@ public final class LambdaImplementorTypeDescriptors {
   }
 
   private static DeclaredTypeDescriptor getImplementorSupertype(
-      List<DeclaredTypeDescriptor> interfaceTypeDescriptors, boolean extendsAbstractAdaptor) {
-    return extendsAbstractAdaptor
-        ? LambdaAdaptorTypeDescriptors.createAbstractLambdaAdaptorTypeDescriptor(
-            // It is ok to choose any of its functional interfaces to create an abstract super type.
-            // this accomplishes the main goal of inheriting class metadata. However the choice of
-            // interface might have optimization implications that should be further explored.
-            // TODO(b/360407114): See the effect of choosing a different one. In particular if
-            // the interfaces are related it will be beneficial to choose the subtype.
-            interfaceTypeDescriptors.stream()
-                .filter(DeclaredTypeDescriptor::isFunctionalInterface)
-                .findFirst()
-                .get())
-        : TypeDescriptors.get().javaLangObject;
+      List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
+      boolean extendsCommonAdaptorSupertype) {
+    if (!extendsCommonAdaptorSupertype) {
+      return TypeDescriptors.get().javaLangObject;
+    }
+    // It is ok to choose any of its functional interfaces to create a supertype.
+    // This accomplishes the main goal of inheriting class metadata. However the choice of
+    // interface might have optimization implications that should be further explored.
+    // TODO(b/360407114): See the effect of choosing a different one. In particular if
+    // the interfaces are related it will be beneficial to choose the subtype.
+    DeclaredTypeDescriptor functionalInterface =
+        interfaceTypeDescriptors.stream()
+            .filter(DeclaredTypeDescriptor::isFunctionalInterface)
+            .findFirst()
+            .get();
+    return LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
+        functionalInterface);
   }
 
   /** Returns the MethodDescriptor for the SAM implementation in the LambdaImplementor class. */

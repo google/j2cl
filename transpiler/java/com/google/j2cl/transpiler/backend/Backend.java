@@ -21,12 +21,12 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
-import com.google.j2cl.transpiler.passes.AddAbstractLambdaAdaptorClasses;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddBridgeMethods;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingOverloadResolutionCastsJ2kt;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
 import com.google.j2cl.transpiler.passes.AddEnumImplicitMethods;
+import com.google.j2cl.transpiler.passes.AddFunctionalInterfaceAdaptors;
 import com.google.j2cl.transpiler.passes.AddInterfaceConstructorCasts;
 import com.google.j2cl.transpiler.passes.AddJavaLangObjectForwardingMethods;
 import com.google.j2cl.transpiler.passes.AddJsExportBridgesWasm;
@@ -480,7 +480,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           ImplementLambdaExpressionsViaImplementorClasses::new,
-          AddAbstractLambdaAdaptorClasses::new,
+          AddFunctionalInterfaceAdaptors::new,
 
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,

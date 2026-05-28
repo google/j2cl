@@ -339,7 +339,9 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       checkState(getName().isPresent());
       checkState(getConstantValue() == null || isCompileTimeConstant());
 
-      boolean isNative = getEnclosingTypeDescriptor().isNative();
+      boolean isNative =
+          getEnclosingTypeDescriptor().isNative()
+              || getEnclosingTypeDescriptor().isJsFunctionInterface();
       if (!isNative && ignoreNonNativeJsInfo.get()) {
         setOriginalJsInfo(JsInfo.NONE);
       }

@@ -1651,6 +1651,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
+    abstract JsInfo getOriginalJsInfo();
+
     abstract Builder setOriginalKtInfoInternal(KtInfo ktInfo);
 
     @CanIgnoreReturnValue
@@ -1791,7 +1793,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         setName(CONSTRUCTOR_METHOD_NAME);
       }
 
-      boolean isNative = isNative() || getEnclosingTypeDescriptor().isNative();
+      boolean isNative =
+          isNative()
+              || getEnclosingTypeDescriptor().isNative()
+              || getEnclosingTypeDescriptor().isJsFunctionInterface();
       if (!isNative && ignoreNonNativeJsInfo.get()) {
         setOriginalJsInfo(JsInfo.NONE);
       }

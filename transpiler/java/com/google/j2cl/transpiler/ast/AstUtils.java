@@ -1404,7 +1404,7 @@ public final class AstUtils {
     }
 
     // TODO(b/481799839): Consider "@Wasm native ..." methods.
-    if (memberDescriptor.isNative()) {
+    if (memberDescriptor.isNative() || memberDescriptor.isJsFunction()) {
       return false;
     }
 

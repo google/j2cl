@@ -52,8 +52,6 @@ class J2clTranspiler {
         FieldDescriptor.setIgnoreNonNativeJsInfo();
         MethodDescriptor.setIgnoreNonNativeJsInfo();
       }
-      // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
-      TypeDeclaration.setIgnoreJsFunctionAnnotations();
       // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in Wasm.
       AstUtils.setIgnoreDoNotAutoboxAnnotations();
     } else if (options.getBackend().isClosure()) {
