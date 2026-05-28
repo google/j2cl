@@ -1594,110 +1594,83 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   @Nullable
   private Expression convertExpression(JCExpression jcExpression) {
-    switch (jcExpression.getKind()) {
-      case ARRAY_ACCESS:
-        return convertArrayAccess((JCArrayAccess) jcExpression);
-      case ASSIGNMENT:
-        return convertAssignment((JCAssign) jcExpression);
-      case CONDITIONAL_EXPRESSION:
-        return convertConditional((JCConditional) jcExpression);
-      case IDENTIFIER:
-        return convertIdent((JCIdent) jcExpression);
-      case PARAMETERIZED_TYPE:
-        return null;
-      case INSTANCE_OF:
-        return convertInstanceOf((JCInstanceOf) jcExpression);
-      case LAMBDA_EXPRESSION:
-        return convertLambda((JCLambda) jcExpression);
-      case MEMBER_REFERENCE:
-        return convertMemberReference((JCMemberReference) jcExpression);
-      case MEMBER_SELECT:
-        return convertFieldAccess((JCFieldAccess) jcExpression);
-      case METHOD_INVOCATION:
-        return convertMethodInvocation((JCMethodInvocation) jcExpression);
-      case NEW_ARRAY:
-        return convertNewArray((JCNewArray) jcExpression);
-      case NEW_CLASS:
-        return convertNewClass((JCNewClass) jcExpression);
-      case PARENTHESIZED:
-        return convertParens((JCParens) jcExpression);
-      case SWITCH_EXPRESSION:
-        return convertSwitchExpression((JCSwitchExpression) jcExpression);
-      case TYPE_CAST:
-        return convertCast((JCTypeCast) jcExpression);
-      case BOOLEAN_LITERAL:
-        return convertBooleanLiteral((JCLiteral) jcExpression);
-      case CHAR_LITERAL:
-        return convertCharLiteral((JCLiteral) jcExpression);
-      case DOUBLE_LITERAL:
-      case FLOAT_LITERAL:
-      case INT_LITERAL:
-      case LONG_LITERAL:
-        // fallthrough
-        return convertNumberLiteral((JCLiteral) jcExpression);
-      case STRING_LITERAL:
-        return convertStringLiteral((JCLiteral) jcExpression);
-      case NULL_LITERAL:
-        return environment
-            .createTypeDescriptor(jcExpression.type, inNullMarkedScope())
-            .getNullValue();
-      case AND:
-      case CONDITIONAL_AND:
-      case CONDITIONAL_OR:
-      case DIVIDE:
-      case EQUAL_TO:
-      case GREATER_THAN:
-      case GREATER_THAN_EQUAL:
-      case LEFT_SHIFT:
-      case LESS_THAN:
-      case LESS_THAN_EQUAL:
-      case MINUS:
-      case MULTIPLY:
-      case NOT_EQUAL_TO:
-      case OR:
-      case PLUS:
-      case REMAINDER:
-      case RIGHT_SHIFT:
-      case UNSIGNED_RIGHT_SHIFT:
-      case XOR:
-        return convertBinary((JCBinary) jcExpression);
+    return switch (jcExpression.getKind()) {
+      case ARRAY_ACCESS -> convertArrayAccess((JCArrayAccess) jcExpression);
+      case ASSIGNMENT -> convertAssignment((JCAssign) jcExpression);
+      case CONDITIONAL_EXPRESSION -> convertConditional((JCConditional) jcExpression);
+      case IDENTIFIER -> convertIdent((JCIdent) jcExpression);
+      case PARAMETERIZED_TYPE -> null;
+      case INSTANCE_OF -> convertInstanceOf((JCInstanceOf) jcExpression);
+      case LAMBDA_EXPRESSION -> convertLambda((JCLambda) jcExpression);
+      case MEMBER_REFERENCE -> convertMemberReference((JCMemberReference) jcExpression);
+      case MEMBER_SELECT -> convertFieldAccess((JCFieldAccess) jcExpression);
+      case METHOD_INVOCATION -> convertMethodInvocation((JCMethodInvocation) jcExpression);
+      case NEW_ARRAY -> convertNewArray((JCNewArray) jcExpression);
+      case NEW_CLASS -> convertNewClass((JCNewClass) jcExpression);
+      case PARENTHESIZED -> convertParens((JCParens) jcExpression);
+      case SWITCH_EXPRESSION -> convertSwitchExpression((JCSwitchExpression) jcExpression);
+      case TYPE_CAST -> convertCast((JCTypeCast) jcExpression);
+      case BOOLEAN_LITERAL -> convertBooleanLiteral((JCLiteral) jcExpression);
+      case CHAR_LITERAL -> convertCharLiteral((JCLiteral) jcExpression);
+      case DOUBLE_LITERAL, FLOAT_LITERAL, INT_LITERAL, LONG_LITERAL ->
+          convertNumberLiteral((JCLiteral) jcExpression);
+      case STRING_LITERAL -> convertStringLiteral((JCLiteral) jcExpression);
+      case NULL_LITERAL ->
+          environment.createTypeDescriptor(jcExpression.type, inNullMarkedScope()).getNullValue();
+      case AND,
+          CONDITIONAL_AND,
+          CONDITIONAL_OR,
+          DIVIDE,
+          EQUAL_TO,
+          GREATER_THAN,
+          GREATER_THAN_EQUAL,
+          LEFT_SHIFT,
+          LESS_THAN,
+          LESS_THAN_EQUAL,
+          MINUS,
+          MULTIPLY,
+          NOT_EQUAL_TO,
+          OR,
+          PLUS,
+          REMAINDER,
+          RIGHT_SHIFT,
+          UNSIGNED_RIGHT_SHIFT,
+          XOR ->
+          convertBinary((JCBinary) jcExpression);
 
-      case BITWISE_COMPLEMENT:
-      case LOGICAL_COMPLEMENT:
-      case PREFIX_DECREMENT:
-      case PREFIX_INCREMENT:
-      case UNARY_MINUS:
-      case UNARY_PLUS:
-        return convertPrefixUnary((JCUnary) jcExpression);
+      case BITWISE_COMPLEMENT,
+          LOGICAL_COMPLEMENT,
+          PREFIX_DECREMENT,
+          PREFIX_INCREMENT,
+          UNARY_MINUS,
+          UNARY_PLUS ->
+          convertPrefixUnary((JCUnary) jcExpression);
 
-      case POSTFIX_DECREMENT:
-      case POSTFIX_INCREMENT:
-        return convertPostfixUnary((JCUnary) jcExpression);
+      case POSTFIX_DECREMENT, POSTFIX_INCREMENT -> convertPostfixUnary((JCUnary) jcExpression);
 
-      case AND_ASSIGNMENT:
-      case DIVIDE_ASSIGNMENT:
-      case LEFT_SHIFT_ASSIGNMENT:
-      case MINUS_ASSIGNMENT:
-      case MULTIPLY_ASSIGNMENT:
-      case OR_ASSIGNMENT:
-      case PLUS_ASSIGNMENT:
-      case REMAINDER_ASSIGNMENT:
-      case RIGHT_SHIFT_ASSIGNMENT:
-      case UNSIGNED_RIGHT_SHIFT_ASSIGNMENT:
-      case XOR_ASSIGNMENT:
-        return convertAssignment((JCAssignOp) jcExpression);
+      case AND_ASSIGNMENT,
+          DIVIDE_ASSIGNMENT,
+          LEFT_SHIFT_ASSIGNMENT,
+          MINUS_ASSIGNMENT,
+          MULTIPLY_ASSIGNMENT,
+          OR_ASSIGNMENT,
+          PLUS_ASSIGNMENT,
+          REMAINDER_ASSIGNMENT,
+          RIGHT_SHIFT_ASSIGNMENT,
+          UNSIGNED_RIGHT_SHIFT_ASSIGNMENT,
+          XOR_ASSIGNMENT ->
+          convertAssignment((JCAssignOp) jcExpression);
 
-      case OTHER:
+      default -> {
         if (jcExpression.hasTag(Tag.NULLCHK)) {
           // This is an expression with an implicit null check.
-          return RuntimeMethods.createCheckNotNullCall(
+          yield RuntimeMethods.createCheckNotNullCall(
               convertExpression(((JCUnary) jcExpression).arg));
         }
-      // fall through
-      default:
         throw new AssertionError(
             "Unknown expression " + jcExpression + " (node type: " + jcExpression.getKind() + ")");
-    }
+      }
+    };
   }
 
   @Nullable
