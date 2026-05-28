@@ -306,7 +306,7 @@ public class JavaEnvironment {
         ClassType classType = (ClassType) typeMirror;
 
         boolean isNullable = isNullable(typeMirror, elementAnnotations, inNullMarkedScope);
-        if (isSyntheticArrayClass(classType.asElement())) {
+        if (isSyntheticArrayClass(classType)) {
           // For callers that don't need to handle the special cases we return `java.lang.Object` as
           // the supertype of all array types.
           yield withNullability(TypeDescriptors.get().javaLangObject, isNullable);
@@ -347,8 +347,8 @@ public class JavaEnvironment {
    * the array specialised members like `length` and `clone()` (`clone` to specialize the return
    * type).
    */
-  private boolean isSyntheticArrayClass(Element element) {
-    return symtab.arrayClass == element;
+  private boolean isSyntheticArrayClass(ClassType classType) {
+    return symtab.arrayClass == classType.asElement();
   }
 
   /**
@@ -1419,15 +1419,17 @@ public class JavaEnvironment {
   }
 
   public static Visibility getVisibility(Element element) {
-    if (element.getModifiers().contains(Modifier.PUBLIC)) {
+    var modifiers = element.getModifiers();
+    if (modifiers.contains(Modifier.PUBLIC)) {
       return Visibility.PUBLIC;
-    } else if (element.getModifiers().contains(Modifier.PROTECTED)) {
-      return Visibility.PROTECTED;
-    } else if (element.getModifiers().contains(Modifier.PRIVATE)) {
-      return Visibility.PRIVATE;
-    } else {
-      return Visibility.PACKAGE_PRIVATE;
     }
+    if (modifiers.contains(Modifier.PROTECTED)) {
+      return Visibility.PROTECTED;
+    }
+    if (modifiers.contains(Modifier.PRIVATE)) {
+      return Visibility.PRIVATE;
+    }
+    return Visibility.PACKAGE_PRIVATE;
   }
 
   private static boolean isDefaultMethod(Element element) {
@@ -1520,10 +1522,12 @@ public class JavaEnvironment {
     if (TypeDescriptors.isBoxedOrPrimitiveType(elementType)
         || TypeDescriptors.isJavaLangString(elementType)) {
       return Literal.fromValue(value, elementType);
-    } else if (TypeDescriptors.isJavaLangClass(elementType)) {
+    }
+    if (TypeDescriptors.isJavaLangClass(elementType)) {
       return new TypeLiteral(
           SourcePosition.NONE, createTypeDescriptor((TypeMirror) value, inNullMarkedScope));
-    } else if (elementType.isArray()) {
+    }
+    if (elementType.isArray()) {
       List<AnnotationValue> values =
           ((List<?>) value)
               .stream()
