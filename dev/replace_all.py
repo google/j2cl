@@ -22,8 +22,8 @@ import tempfile
 import repo_util
 
 
-READABLE_ROOT_DIR = "transpiler/javatests/com/google/j2cl/readable"
-READABLE_TARGET_PATTERN = f"{READABLE_ROOT_DIR}/..."
+READABLE_ROOT_DIR = "transpiler/javatests/com/google/j2cl/readable/"
+READABLE_TARGET_PATTERN = f"{READABLE_ROOT_DIR}..."
 
 
 def get_readables(name_filter, output_postfix):
