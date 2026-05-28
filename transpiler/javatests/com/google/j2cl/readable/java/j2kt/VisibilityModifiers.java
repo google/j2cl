@@ -18,13 +18,45 @@ package j2kt;
 import com.google.auto.value.AutoValue;
 
 public final class VisibilityModifiers {
-  public static class Public {}
+  public static class Public {
+    public void publicMethod() {}
 
-  static class PackagePrivate {}
+    void packagePrivateMethod() {}
 
-  protected static class Protected {}
+    protected void protectedMethod() {}
 
-  private static class Private {}
+    private void privateMethod() {}
+  }
+
+  static class PackagePrivate {
+    public void publicMethod() {}
+
+    void packagePrivateMethod() {}
+
+    protected void protectedMethod() {}
+
+    private void privateMethod() {}
+  }
+
+  protected static class Protected {
+    public void publicMethod() {}
+
+    void packagePrivateMethod() {}
+
+    protected void protectedMethod() {}
+
+    private void privateMethod() {}
+  }
+
+  private static class Private {
+    public void publicMethod() {}
+
+    void packagePrivateMethod() {}
+
+    protected void protectedMethod() {}
+
+    private void privateMethod() {}
+  }
 
   @AutoValue
   abstract static class Value {
@@ -47,4 +79,67 @@ public final class VisibilityModifiers {
   abstract static class NotAutoConverter_Converter {}
 
   abstract static class NotAutoEnumConverter_EnumConverter {}
+
+  @SuppressWarnings("j2kt:visibility")
+  public static class VisibilityWarningsSuppressed {
+    public static class Public {
+      public void publicMethod() {}
+
+      void packagePrivateMethod() {}
+
+      protected void protectedMethod() {}
+
+      private void privateMethod() {}
+    }
+
+    static class PackagePrivate {
+      public void publicMethod() {}
+
+      void packagePrivateMethod() {}
+
+      protected void protectedMethod() {}
+
+      private void privateMethod() {}
+
+      public void publicWithPackagePrivateParameter(PackagePrivate param) {}
+
+      public PackagePrivate publicReturnsPackagePrivate() {
+        throw new UnsupportedOperationException();
+      }
+
+      public <T extends PackagePrivate> void publicWithPackagePrivateTypeParameter(T param) {
+        throw new UnsupportedOperationException();
+      }
+    }
+
+    protected static class Protected {
+      public void publicMethod() {}
+
+      void packagePrivateMethod() {}
+
+      protected void protectedMethod() {}
+
+      private void privateMethod() {}
+    }
+
+    private static class Private {
+      public void publicMethod() {}
+
+      void packagePrivateMethod() {}
+
+      protected void protectedMethod() {}
+
+      private void privateMethod() {}
+    }
+
+    public static class PublicExtendsPackagePrivate extends PackagePrivate {
+      public void publicMethod() {}
+
+      void packagePrivateMethod() {}
+
+      protected void protectedMethod() {}
+
+      private void privateMethod() {}
+    }
+  }
 }

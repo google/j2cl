@@ -53,4 +53,7 @@ private val TypeDeclaration.useActualKtVisibilityForPackage: Boolean
 /** Returns whether J2KT should translate actual visibility for the given type declaration. */
 // TODO(b/206898384): Remove this once the bug is fixed.
 internal val TypeDeclaration.useActualKtVisibility: Boolean
-  get() = useActualKtVisibilityForPackage && (!isAutoConverter || hasAutoValueOrBuilderSuperType)
+  get() =
+    useActualKtVisibilityForPackage &&
+      (!isAutoConverter || hasAutoValueOrBuilderSuperType) &&
+      !isVisibilityWarningSuppressed

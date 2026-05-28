@@ -19,17 +19,50 @@
 package j2kt
 
 import javaemul.lang.*
+import java.lang.UnsupportedOperationException
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Suppress
 
 class VisibilityModifiers {
- open class Public
+ open class Public {
+  open fun publicMethod() {}
+  
+  internal open fun packagePrivateMethod_pp_j2kt() {}
+  
+  open fun protectedMethod() {}
+  
+  private fun privateMethod() {}
+ }
  
- internal open class PackagePrivate internal constructor()
+ internal open class PackagePrivate internal constructor() {
+  open fun publicMethod() {}
+  
+  internal open fun packagePrivateMethod_pp_j2kt() {}
+  
+  open fun protectedMethod() {}
+  
+  private fun privateMethod() {}
+ }
  
- protected open class Protected
+ protected open class Protected {
+  open fun publicMethod() {}
+  
+  internal open fun packagePrivateMethod_pp_j2kt() {}
+  
+  open fun protectedMethod() {}
+  
+  private fun privateMethod() {}
+ }
  
- private open class Private private constructor()
+ private open class Private private constructor() {
+  open fun publicMethod() {}
+  
+  internal open fun packagePrivateMethod_pp_j2kt() {}
+  
+  open fun protectedMethod() {}
+  
+  private fun privateMethod() {}
+ }
  
  @WasAutoValue
  internal abstract class Value internal constructor() {
@@ -50,4 +83,66 @@ class VisibilityModifiers {
  internal abstract class NotAutoConverter_Converter internal constructor()
  
  internal abstract class NotAutoEnumConverter_EnumConverter internal constructor()
+ 
+ open class VisibilityWarningsSuppressed {
+  open class Public {
+   open fun publicMethod() {}
+   
+   internal open fun packagePrivateMethod_pp_j2kt() {}
+   
+   open fun protectedMethod() {}
+   
+   private fun privateMethod() {}
+  }
+  
+  open class PackagePrivate internal constructor() {
+   open fun publicMethod() {}
+   
+   internal open fun packagePrivateMethod_pp_j2kt() {}
+   
+   open fun protectedMethod() {}
+   
+   private fun privateMethod() {}
+   
+   open fun publicWithPackagePrivateParameter(param: PackagePrivate?) {}
+   
+   open fun publicReturnsPackagePrivate(): PackagePrivate? {
+    throw UnsupportedOperationException()
+   }
+   
+   open fun <T: PackagePrivate?> publicWithPackagePrivateTypeParameter(param: T) {
+    throw UnsupportedOperationException()
+   }
+  }
+  
+  open class Protected {
+   open fun publicMethod() {}
+   
+   internal open fun packagePrivateMethod_pp_j2kt() {}
+   
+   open fun protectedMethod() {}
+   
+   private fun privateMethod() {}
+  }
+  
+  open class Private private constructor() {
+   open fun publicMethod() {}
+   
+   internal open fun packagePrivateMethod_pp_j2kt() {}
+   
+   open fun protectedMethod() {}
+   
+   private fun privateMethod() {}
+  }
+  
+  open class PublicExtendsPackagePrivate: PackagePrivate() {
+   override fun publicMethod() {}
+   
+   override fun packagePrivateMethod_pp_j2kt() {}
+   
+   override fun protectedMethod() {}
+   
+   private fun privateMethod() {}
+  }
+ }
 }
