@@ -17,6 +17,8 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 
 internal val MemberDescriptor.isEnumConstructor: Boolean
   get() = enclosingTypeDescriptor.isEnum && isConstructor
@@ -31,3 +33,13 @@ internal val MethodDescriptor.isOpen: Boolean
       !isConstructor &&
       !isStatic &&
       !visibility.isPrivate
+
+internal val MemberDescriptor.ktVisibility: KtVisibility
+  get() =
+    when (visibility) {
+      Visibility.PUBLIC -> KtVisibility.PUBLIC
+      // Map protected to public, to allow access within the same package across different types.
+      Visibility.PROTECTED -> KtVisibility.PUBLIC
+      Visibility.PACKAGE_PRIVATE -> KtVisibility.INTERNAL
+      Visibility.PRIVATE -> KtVisibility.PRIVATE
+    }

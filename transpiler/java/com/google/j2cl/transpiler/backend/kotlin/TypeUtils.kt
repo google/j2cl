@@ -84,9 +84,6 @@ internal val Type.jvmFieldsAreIllegal
         fields.any { it.isCompileTimeConstant } && fields.any { !it.isCompileTimeConstant }
       }
 
-internal val Type.needExplicitPrimaryConstructor: Boolean
-  get() = isClass && !hasConstructors && !declaration.visibility.defaultMemberKtVisibility.isPublic
-
 internal val Type.needsCompanionSupplierInterface: Boolean
   get() =
     typeDescriptor.isCollection &&

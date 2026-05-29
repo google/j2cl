@@ -28,7 +28,7 @@ open class ConstructorFieldAccess {
  internal val field_pp_j2kt: String
  
  constructor() {
-  open class Inner internal constructor() {
+  open class Inner {
    init {
     val f: String = this@ConstructorFieldAccess.field_pp_j2kt
    }

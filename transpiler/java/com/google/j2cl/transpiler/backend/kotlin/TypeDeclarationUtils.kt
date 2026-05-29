@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeVariable
-import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 
 // TODO(b/216796920): Remove when the bug is fixed.
@@ -64,16 +63,6 @@ internal val TypeDeclaration.isTestClass: Boolean
   get() =
     hasAnnotation("org.junit.runner.RunWith") ||
       hasAnnotation("com.google.apps.xplat.testing.parameterized.RunParameterized")
-
-internal val Visibility.defaultMemberKtVisibility: KtVisibility
-  get() =
-    when (this) {
-      Visibility.PUBLIC -> KtVisibility.PUBLIC
-      // Map protected to public, to allow access within the same package across different types.
-      Visibility.PROTECTED -> KtVisibility.PUBLIC
-      Visibility.PACKAGE_PRIVATE -> KtVisibility.INTERNAL
-      Visibility.PRIVATE -> KtVisibility.PRIVATE
-    }
 
 internal val TypeDeclaration.defaultKtVisibility: KtVisibility
   get() = KtVisibility.PUBLIC

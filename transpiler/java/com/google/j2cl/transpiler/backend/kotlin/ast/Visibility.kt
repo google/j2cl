@@ -36,6 +36,8 @@ enum class Visibility {
   val isPrivate
     get() = this === PRIVATE
 
+  fun hasWiderScopeThan(other: Visibility): Boolean = ordinal < other.ordinal
+
   companion object {
     fun from(javaVisibility: JavaVisibility): Visibility =
       when (javaVisibility) {

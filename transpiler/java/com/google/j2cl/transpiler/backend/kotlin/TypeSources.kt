@@ -124,7 +124,7 @@ internal data class TypeSources(val nameSources: NameSources) {
             join(KotlinSource.CONSTRUCTOR_KEYWORD, methodParametersSource(ktPrimaryConstructor)),
           )
         }
-      type.needExplicitPrimaryConstructor ->
+      environment.needExplicitPrimaryConstructor(type) ->
         // Implicit constructors needs to follow the visiblity transpilation rules for members that
         // are different than the visibility transpilation rules for the class.
         spaceSeparated(

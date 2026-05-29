@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
@@ -130,15 +131,17 @@ internal data class Environment(
       // Explicit private members translated as internal
       isForcedKtInternal(memberDescriptor) -> KtVisibility.INTERNAL
       // Use default visibility for everything else.
-      else -> memberDescriptor.visibility!!.defaultMemberKtVisibility
+      else -> memberDescriptor.ktVisibility
     }
 
   /** Returns Kotlin type visibility. */
-  fun ktVisibility(typeDeclaration: TypeDeclaration): KtVisibility =
-    // Translate all types as public, to allow extending with wider visibility which is legal in
-    // Java, but illegal in Kotlin.
-    // TODO(b/358052247): Translate private types as private if possible
-    KtVisibility.PUBLIC
+  fun ktVisibility(typeDeclaration: TypeDeclaration): KtVisibility = typeDeclaration.ktVisibility
+
+  internal fun needExplicitPrimaryConstructor(type: Type): Boolean =
+    type.isClass &&
+      !type.hasConstructors &&
+      ktVisibility(type.declaration)
+        .hasWiderScopeThan(ktVisibility(type.typeDescriptor.defaultConstructorMethodDescriptor))
 
   /**
    * Inferred visibility, which does not require explicit visibility modifier in the source code.

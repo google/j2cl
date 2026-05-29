@@ -34,7 +34,7 @@ class VisibilityModifiers {
   private fun privateMethod() {}
  }
  
- internal open class PackagePrivate internal constructor() {
+ internal open class PackagePrivate {
   open fun publicMethod() {}
   
   internal open fun packagePrivateMethod_pp_j2kt() {}
@@ -54,7 +54,7 @@ class VisibilityModifiers {
   private fun privateMethod() {}
  }
  
- private open class Private private constructor() {
+ private open class Private {
   open fun publicMethod() {}
   
   internal open fun packagePrivateMethod_pp_j2kt() {}
@@ -65,9 +65,9 @@ class VisibilityModifiers {
  }
  
  @WasAutoValue
- internal abstract class Value internal constructor() {
+ internal abstract class Value {
   @javaemul.lang.annotations.WasAutoValue.Builder
-  internal abstract class Builder internal constructor() {
+  internal abstract class Builder {
    internal abstract fun build_pp_j2kt(): Value?
   }
  }
@@ -80,9 +80,9 @@ class VisibilityModifiers {
  
  class EnumConverter: AutoEnumConverter_EnumConverter()
  
- internal abstract class NotAutoConverter_Converter internal constructor()
+ internal abstract class NotAutoConverter_Converter
  
- internal abstract class NotAutoEnumConverter_EnumConverter internal constructor()
+ internal abstract class NotAutoEnumConverter_EnumConverter
  
  open class VisibilityWarningsSuppressed {
   open class Public {
