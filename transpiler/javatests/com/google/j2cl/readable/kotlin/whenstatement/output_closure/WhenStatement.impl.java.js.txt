@@ -3,12 +3,15 @@ goog.module('whenstatement.WhenStatement$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
 let Numbers = goog.forwardDeclare('whenstatement.Numbers$impl');
 
 /**
@@ -324,6 +327,35 @@ class WhenStatement extends j_l_Object {
   }
   return;
  }
+ /** @final @nodts @return {number} */
+ m_whenWithGuardConditions__java_lang_Object__boolean__int(/** !* */ any, /** boolean */ bool) {
+  let tmp0_subject = any;
+  let /** number */ tmp;
+  let /** boolean */ tmp_1;
+  if (j_l_String.$isInstance(tmp0_subject)) {
+   tmp_1 = $CharSequences.m_length__java_lang_CharSequence__int(/**@type {!(CharSequence|string)}*/ (any)) == 0;
+  } else {
+   tmp_1 = false;
+  }
+  if (tmp_1) {
+   tmp = 0;
+  } else {
+   if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(tmp0_subject, Numbers.f_THREE__whenstatement_Numbers) && bool) {
+    tmp = 2;
+   } else {
+    if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(tmp0_subject, Integer.valueOf(1)) && bool) {
+     tmp = 3;
+    } else {
+     if (bool) {
+      tmp = 4;
+     } else {
+      tmp = 5;
+     }
+    }
+   }
+  }
+  return tmp;
+ }
  /** @nodts */
  static $clinit() {
   WhenStatement.$clinit = () =>{};
@@ -339,10 +371,12 @@ class WhenStatement extends j_l_Object {
  static $loadModules() {
   Exception = goog.module.get('java.lang.Exception$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
   Objects = goog.module.get('java.util.Objects$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
   Numbers = goog.module.get('whenstatement.Numbers$impl');
  }
 }

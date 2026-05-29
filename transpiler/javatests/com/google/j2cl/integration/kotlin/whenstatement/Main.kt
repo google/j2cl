@@ -31,6 +31,7 @@ fun main(vararg unused: String) {
   testWhenWithOneBranch()
   testWhenExpressionWithStatements()
   testDataFlowBasedExhaustivenessCheckOnWhenStatement()
+  testWhenWithGuardConditions()
 }
 
 private fun testSwitchValues() {
@@ -314,5 +315,32 @@ private fun dataFlowBasedExhaustivenessCheckOnWhenStatement(number: Numbers): In
   return when (number) {
     Numbers.TWO -> return 2
     Numbers.THREE -> return 3
+  }
+}
+
+private fun testWhenWithGuardConditions() {
+  assertEquals(0, whenWithGuardConditions(""))
+  assertEquals(1, whenWithGuardConditions("foo"))
+  // TODO(dramaix) : uncomment after the bug is fixed.
+  // assertEquals(2, whenWithGuardConditions(1))
+  assertEquals(3, whenWithGuardConditions(Numbers.THREE))
+  assertEquals(6, whenWithGuardConditions(Numbers.THREE, false))
+  assertEquals(4, whenWithGuardConditions(10))
+  assertEquals(6, whenWithGuardConditions(10, false))
+  assertEquals(5, whenWithGuardConditions(-1))
+  assertEquals(6, whenWithGuardConditions(-1, false))
+}
+
+@Suppress("WhenIsSubtype") // TODO(b/517327212): Remove suppression once bug is fixed.
+private fun whenWithGuardConditions(any: Any, bool: Boolean = true): Int {
+  return when (any) {
+    is String if any.isEmpty() -> 0
+    is String -> 1
+    // TODO(b/517444476) : uncomment after the bug is fixed.
+    // is Int if any > 0 -> 2
+    Numbers.THREE if bool -> 3
+    10 if bool -> 4
+    else if bool -> 5
+    else -> 6
   }
 }

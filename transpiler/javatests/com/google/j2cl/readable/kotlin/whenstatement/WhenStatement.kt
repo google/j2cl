@@ -246,4 +246,16 @@ class WhenStatement {
       else -> value = 3
     }
   }
+
+  fun whenWithGuardConditions(any: Any, bool: Boolean): Int {
+    return when (any) {
+      is String if any.isEmpty() -> 0
+      // TODO(b/517444476) : uncomment after the bug is fixed.
+      // is Int if any > 0 -> 1
+      Numbers.THREE if bool -> 2
+      1 if bool -> 3
+      else if bool -> 4
+      else -> 5
+    }
+  }
 }
