@@ -142,7 +142,8 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
     val fieldDescriptor = field.descriptor
     val isFinal = fieldDescriptor.isFinal
     val typeDescriptor = fieldDescriptor.typeDescriptor
-    val isConst = field.isCompileTimeConstant && field.isStatic
+    val isConst =
+      field.isCompileTimeConstant && field.isStatic && !enclosingType.hasMixedInterfaceFields
     val isJvmField =
       !jvmFieldsAreIllegal &&
         !isConst &&

@@ -77,11 +77,23 @@ private fun Sequence<Member>.moveAfterFields(member: Member): Sequence<Member> =
 // TODO(b/310160330): Remove this restriction once Kotlin allows for that:
 // https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-field-annotation-in-interface-companion.md#open-questions
 /** Returns whether it's illegal to include [@JvmField] annotations in this type. */
-internal val Type.jvmFieldsAreIllegal
+internal val Type.jvmFieldsAreIllegal: Boolean
   get() =
     isInterface &&
-      members.filterIsInstance<Field>().let { fields ->
-        fields.any { it.isCompileTimeConstant } && fields.any { !it.isCompileTimeConstant }
+      fields.let { f ->
+        f.any { it.isCompileTimeConstant } &&
+          f.any { !it.isCompileTimeConstant } &&
+          !f.any { it.descriptor.isJsMember }
+      }
+
+/** Returns whether this type has mixed constant and non-constant fields that are JS members. */
+internal val Type.hasMixedInterfaceFields: Boolean
+  get() =
+    isInterface &&
+      fields.let { f ->
+        f.any { it.isCompileTimeConstant } &&
+          f.any { !it.isCompileTimeConstant } &&
+          f.any { it.descriptor.isJsMember }
       }
 
 internal val Type.needsCompanionSupplierInterface: Boolean

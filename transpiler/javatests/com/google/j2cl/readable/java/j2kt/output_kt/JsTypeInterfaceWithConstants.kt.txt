@@ -23,12 +23,15 @@ import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmField
 
 @JsType
 interface JsTypeInterfaceWithConstants {
  companion object {
-  const val compileTimeConstant: String = "constant"
+  @JvmField
+  val compileTimeConstant: String = "constant"
   
+  @JvmField
   val nonCompileTimeConstant: Any = "non-constant"
  }
 }
