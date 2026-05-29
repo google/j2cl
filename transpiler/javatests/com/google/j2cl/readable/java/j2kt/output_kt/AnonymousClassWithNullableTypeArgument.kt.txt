@@ -61,6 +61,24 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
+  fun testImplicitTypeArguments_inferredFromMembers() {
+   object : Supplier<Any?> {
+    override fun get(): Any? {
+     return null
+    }
+   }
+  }
+  
+  @JvmStatic
+  fun testImplicitTypeArguments_inferredFromMembersAndArgument() {
+   object : AbstractHolder<String?>("Supplier") {
+    override fun get(): String? {
+     return null
+    }
+   }
+  }
+  
+  @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierDeclaration() {
    val supplier: Supplier<String?> = object : SupplierImpl<String?>() {
     override fun get(): String? {

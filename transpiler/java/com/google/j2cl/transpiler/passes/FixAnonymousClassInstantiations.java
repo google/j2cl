@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
@@ -34,6 +35,7 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.VariableReference;
@@ -41,6 +43,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /** Fixes the nullability mismatches in anonymous class constructors. */
 public class FixAnonymousClassInstantiations extends NormalizationPass {
@@ -67,6 +70,7 @@ public class FixAnonymousClassInstantiations extends NormalizationPass {
                 superConstructorCall.getTarget(),
                 constructorParameterMapping);
 
+            propagateFromMethods(newInstance);
             return newInstance;
           }
         });
@@ -170,6 +174,112 @@ public class FixAnonymousClassInstantiations extends NormalizationPass {
             return parameterDescriptors;
           }
         });
+  }
+
+  /** Propagates nullability from the overridden methods of the anonymous class to its supertype. */
+  private static void propagateFromMethods(NewInstance newInstance) {
+    Type anonymousInnerClass = newInstance.getAnonymousInnerClass();
+    if (!newInstance.getTypeArguments().isEmpty() || anonymousInnerClass == null) {
+      return;
+    }
+
+    var superInterfaces = anonymousInnerClass.getSuperInterfaceTypeDescriptors();
+    if (superInterfaces.isEmpty()) {
+      // Propagate to superclass
+      DeclaredTypeDescriptor superClass = anonymousInnerClass.getSuperTypeDescriptor();
+      DeclaredTypeDescriptor newSuperClass =
+          propagateFromMethods(anonymousInnerClass.getDeclaration(), superClass);
+      if (!newSuperClass.equals(superClass)) {
+        anonymousInnerClass.setSuperTypeDescriptor(newSuperClass);
+      }
+    } else {
+      // Propagate to interfaces
+      ImmutableList<DeclaredTypeDescriptor> newSuperInterfaces =
+          superInterfaces.stream()
+              .map(i -> propagateFromMethods(anonymousInnerClass.getDeclaration(), i))
+              .collect(toImmutableList());
+      if (!newSuperInterfaces.equals(superInterfaces)) {
+        anonymousInnerClass.setSuperInterfaceTypeDescriptors(newSuperInterfaces);
+      }
+    }
+  }
+
+  /**
+   * Propagates nullability from the methods of the anonymous class to the type arguments of the
+   * given supertype descriptor.
+   */
+  private static DeclaredTypeDescriptor propagateFromMethods(
+      TypeDeclaration anonymousClass, DeclaredTypeDescriptor superTypeDescriptor) {
+    if (superTypeDescriptor.isRaw() || superTypeDescriptor.getTypeArgumentDescriptors().isEmpty()) {
+      return superTypeDescriptor;
+    }
+
+    var typeParameterDescriptors =
+        superTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors();
+    var typeArgumentDescriptors = superTypeDescriptor.getTypeArgumentDescriptors();
+
+    return superTypeDescriptor.withTypeArguments(
+        Streams.zip(
+                typeParameterDescriptors.stream(),
+                typeArgumentDescriptors.stream(),
+                (typeParameter, typeArgument) ->
+                    propagateTypeArgumentNullabilityFromMethods(
+                        typeParameter, typeArgument, anonymousClass))
+            .collect(toImmutableList()));
+  }
+
+  /**
+   * Propagates nullability to a specific type argument from the parameterizations found in the
+   * methods of the anonymous class.
+   */
+  private static TypeDescriptor propagateTypeArgumentNullabilityFromMethods(
+      TypeVariable typeParameterDescriptor,
+      TypeDescriptor typeArgumentDescriptor,
+      TypeDeclaration typeDeclaration) {
+    return getParameterizationsFromMethods(typeDeclaration, typeParameterDescriptor)
+        .reduce(
+            typeParameterDescriptor.canBeNull()
+                ? typeArgumentDescriptor
+                : typeArgumentDescriptor.toNonNullable(),
+            (typeArgument, typeDescriptor) ->
+                propagateNullability(typeDescriptor, typeArgument)
+                    .toNullable(typeArgument.isNullable() || typeDescriptor.isNullable()));
+  }
+
+  /**
+   * Returns a stream of all parameterizations of the given type parameter found in the methods
+   * overridden by the anonymous class.
+   */
+  private static Stream<TypeDescriptor> getParameterizationsFromMethods(
+      TypeDeclaration typeDeclaration, TypeVariable typeParameter) {
+    return typeDeclaration.getDeclaredMethodDescriptors().stream()
+        .flatMap(
+            m ->
+                m.getJavaOverriddenMethodDescriptors().stream()
+                    .flatMap(
+                        overridden ->
+                            getParameterizationsInMethod(
+                                typeParameter, overridden.getDeclarationDescriptor(), m)));
+  }
+
+  /**
+   * Returns a stream of parameterizations of the given type parameter found in a specific method
+   * override (matching return type and parameter types).
+   */
+  private static Stream<TypeDescriptor> getParameterizationsInMethod(
+      TypeVariable typeParameter,
+      MethodDescriptor declarationMethodDescriptor,
+      MethodDescriptor methodDescriptor) {
+    return Stream.concat(
+        Streams.zip(
+                declarationMethodDescriptor.getParameterTypeDescriptors().stream(),
+                methodDescriptor.getParameterTypeDescriptors().stream(),
+                (declarationType, parameterizedType) ->
+                    declarationType.getParameterizationsIn(typeParameter, parameterizedType))
+            .flatMap(t -> t),
+        declarationMethodDescriptor
+            .getReturnTypeDescriptor()
+            .getParameterizationsIn(typeParameter, methodDescriptor.getReturnTypeDescriptor()));
   }
 
   /**
