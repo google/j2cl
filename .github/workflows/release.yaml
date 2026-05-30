@@ -42,7 +42,7 @@ jobs:
       version: ${{ steps.get_version.outputs.version }}
       base_rc_version: ${{ steps.get_version.outputs.base_rc_version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: get_version
         run: |
           if [ -f "oss_version.txt" ]; then
