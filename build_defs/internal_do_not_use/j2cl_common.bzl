@@ -550,15 +550,11 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "exec",
         executable = True,
     ),
-    "_java_frontend": attr.label(
-        default = Label("//:experimental_java_frontend"),
-    ),
     "_zip": attr.label(
         executable = True,
         cfg = "exec",
         default = Label("@bazel_tools//tools/zip:zipper"),
     ),
-    "experimental_java_frontend": attr.string(values = ["", "jdt", "javac"]),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
 

@@ -65,18 +65,6 @@ alias(
     actual = "//tools/java/com/google/j2cl/tools/minifier",
 )
 
-# TODO(b/135123615): Temporary support for selecting frontend. Once javac becomes the frontend for
-# J2CL this will be removed.
-string_flag(
-    name = "experimental_java_frontend",
-    build_setting_default = "",
-    values = [
-        "",  # Default: let compiler itself decide.
-        "jdt",
-        "javac",
-    ],
-)
-
 # Flag to configure j2kt-web experiment. Please talk to j2cl-team@ before using it.
 string_flag(
     name = "j2kt_web_environment",
