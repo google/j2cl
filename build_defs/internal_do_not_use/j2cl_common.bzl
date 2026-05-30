@@ -380,9 +380,6 @@ def _j2cl_transpile(
     mnemonic = "J2cl" if backend == "CLOSURE" else "J2wasm"
     is_klibs_enabled = klib_common.is_klibs_experiment_enabled(ctx) and (kt_srcs or kt_common_srcs)
 
-    # Annotation processors to be run by J2CL's Java frontend.
-    annotation_processor_classnames = []
-    annotation_processor_classpath = depset()
     if "-Xstdlib-compilation" in kotlincopts:
         # The stdlib compilation is sensitive to the naming of inputs so we
         # avoid using the srcjar emitted by the Kotlin/JVM compilation and
@@ -394,12 +391,6 @@ def _j2cl_transpile(
     else:
         # Source files are passed directly to the transpiler.
         srcs = java_srcs + js_srcs
-
-        # Collect annotation processors and classpaths from the Java frontend so that they can
-        # be passed to the J2CL Transpiler.
-        if jvm_provider.annotation_processing:
-            annotation_processor_classnames = jvm_provider.annotation_processing.processor_classnames
-            annotation_processor_classpath = jvm_provider.annotation_processing.processor_classpath
 
     if is_klibs_enabled:
         compilation_classpath = [klib_provider.compilation_classpath]
@@ -448,9 +439,9 @@ def _j2cl_transpile(
 
     transitive_inputs = [classpath]
 
-    if annotation_processor_classnames:
-        # Pass the necessary options for J2CL to run annotation processing.
-        args.add_joined("-processor", annotation_processor_classnames, join_with = ",")
+    if jvm_provider.annotation_processing:
+        annotation_processor_classpath = jvm_provider.annotation_processing.processor_classpath
+        args.add_joined("-processor", jvm_provider.annotation_processing.processor_classnames, join_with = ",")
         args.add_joined("-processorpath", annotation_processor_classpath, join_with = ctx.configuration.host_path_separator)
         transitive_inputs.append(annotation_processor_classpath)
 
