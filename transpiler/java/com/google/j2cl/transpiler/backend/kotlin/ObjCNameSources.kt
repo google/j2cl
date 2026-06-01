@@ -70,15 +70,26 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       else -> typeDeclaration.swiftName?.let { swiftNameAnnotationSource(it) }.orEmpty()
     }
 
-  fun hiddenFromObjCAnnotationSource(memberDescriptor: MemberDescriptor): Source =
+  private fun hiddenFromObjCAnnotationSource(targetSource: Source = Source.EMPTY): Source =
     annotation(
       annotationName(
-        annotationTargetSource(memberDescriptor),
+        targetSource,
         nameSources.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCRefinement") {
           topLevelQualifiedNameSource("kotlin.native.HiddenFromObjC")
         },
       )
     )
+
+  fun hiddenFromObjCAnnotationSource(memberDescriptor: MemberDescriptor): Source =
+    hiddenFromObjCAnnotationSource(annotationTargetSource(memberDescriptor))
+
+  fun hiddenFromObjCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+    when {
+      !isJ2ObjCInteropEnabled -> Source.EMPTY
+      typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") ->
+        hiddenFromObjCAnnotationSource()
+      else -> Source.EMPTY
+    }
 
   fun objCEnumAnnotationSource(name: String, swiftName: String? = null): Source =
     annotation(

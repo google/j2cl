@@ -480,7 +480,8 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
   private fun shouldInclude(typeDeclaration: TypeDeclaration): Boolean =
     shouldIncludeDescriptor(typeDeclaration) &&
       !typeDeclaration.isProtobuf &&
-      !typeDeclaration.isAnnotation
+      !typeDeclaration.isAnnotation &&
+      !typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC")
 
   private fun shouldIncludeDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&

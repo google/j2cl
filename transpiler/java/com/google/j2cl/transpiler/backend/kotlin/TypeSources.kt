@@ -74,6 +74,7 @@ internal data class TypeSources(val nameSources: NameSources) {
           objCNameSources.objCEnumAnnotationSource(typeDeclaration),
           objCNameSources.objectiveCAnnotationSource(typeDeclaration),
           objCNameSources.swiftNameAnnotationSource(typeDeclaration),
+          objCNameSources.hiddenFromObjCAnnotationSource(typeDeclaration),
           jsInteropAnnotationSources.jsInteropAnnotationsSource(typeDeclaration),
           autoValueAnnotationsSource(typeDeclaration),
           suppressIncompatibleObjCNameOverrideSource(type),
