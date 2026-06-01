@@ -35,7 +35,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
-import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.NewArray;
@@ -233,8 +233,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
           }
 
           @Override
-          public Node rewriteMethodCall(MethodCall methodCall) {
-            MethodDescriptor methodDescriptor = methodCall.getTarget();
+          public Node rewriteInvocation(Invocation invocation) {
+            MethodDescriptor methodDescriptor = invocation.getTarget();
             MethodDescriptor declarationMethodDescriptor =
                 methodDescriptor.getDeclarationDescriptor();
             MethodDescriptor rewrittenMethodDescriptor = methodDescriptor;
@@ -243,9 +243,9 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             // processed in one go instead of first rewriting for the qualifier and then
             // for the parameters.
 
-            // Propagate nullability from qualifier to method enclosing type descriptor.
-            Expression qualifier = methodCall.getQualifier();
-            if (qualifier != null && !methodDescriptor.isConstructor()) {
+            Expression qualifier = invocation.getQualifier();
+            if (qualifier != null && methodDescriptor.isInstanceMember()) {
+              // Propagate nullability from qualifier to method enclosing type descriptor.
               ImmutableList<TypeVariable> typeParameterTypeDescriptors =
                   declarationMethodDescriptor
                       .getEnclosingTypeDescriptor()
@@ -265,17 +265,32 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             }
 
             // Propagate nullability from arguments to method type arguments.
-            ImmutableList<TypeVariable> typeParameterTypeDescriptors =
-                declarationMethodDescriptor.getTypeParameterTypeDescriptors();
-            ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors =
-                methodDescriptor.getTypeArgumentTypeDescriptors();
+            ImmutableList<TypeVariable> typeParameterTypeDescriptors;
+            ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors;
+            if (invocation instanceof NewInstance newInstance) {
+              // For invocations, get the parameterization of the type to be instantiated.
+              DeclaredTypeDescriptor typeDescriptor = newInstance.getTypeDescriptor();
+              typeParameterTypeDescriptors =
+                  typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors();
+              typeArgumentTypeDescriptors =
+                  toNonRawTypeDescriptor(typeDescriptor).getTypeArgumentDescriptors();
+            } else {
+              // For method calls, get the parameterization of the method.
+              typeParameterTypeDescriptors =
+                  rewrittenMethodDescriptor
+                      .getDeclarationDescriptor()
+                      .getTypeParameterTypeDescriptors();
+              typeArgumentTypeDescriptors =
+                  rewrittenMethodDescriptor.getTypeArgumentTypeDescriptors();
+            }
+
             if (!typeArgumentTypeDescriptors.isEmpty()) {
               rewrittenMethodDescriptor =
                   propagateNullabilityFromArguments(
                       rewrittenMethodDescriptor,
                       typeParameterTypeDescriptors,
                       typeArgumentTypeDescriptors,
-                      methodCall.getArguments().stream()
+                      invocation.getArguments().stream()
                           .map(Expression::getTypeDescriptor)
                           .collect(toImmutableList()));
             }
@@ -284,51 +299,19 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             // expression is a lambda and its parameters are inferred from the surrounding context.
             ImmutableList<Expression> rewrittenArguments =
                 zip(
-                    methodCall.getArguments(),
+                    invocation.getArguments(),
                     rewrittenMethodDescriptor.getParameterTypeDescriptors(),
                     PropagateNullability::propagateNullabilityToExpression);
 
             if (rewrittenMethodDescriptor.equals(methodDescriptor)
-                && rewrittenArguments.equals(methodCall.getArguments())) {
-              return methodCall;
+                && rewrittenArguments.equals(invocation.getArguments())) {
+              return invocation;
             }
             changed[0] = true;
-            return methodCall.toBuilder()
+            return invocation.toBuilder()
                 .setTarget(rewrittenMethodDescriptor)
                 .setArguments(rewrittenArguments)
                 .build();
-          }
-
-          // TODO(b/406815802): See if rewriteInvocation can be refactored to seamlessly
-          // handle this case since instantiations are very similar to static method calls.
-          @Override
-          public Node rewriteNewInstance(NewInstance newInstance) {
-            // Propagate nullability from arguments to type arguments of the enclosing type
-            // descriptor.
-            MethodDescriptor methodDescriptor = newInstance.getTarget();
-            DeclaredTypeDescriptor typeDescriptor = newInstance.getTypeDescriptor();
-            ImmutableList<TypeVariable> typeParameterDescriptors =
-                typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors();
-            ImmutableList<TypeDescriptor> typeArgumentDescriptors =
-                toNonRawTypeDescriptor(typeDescriptor).getTypeArgumentDescriptors();
-            if (typeArgumentDescriptors.isEmpty()) {
-              return newInstance;
-            }
-
-            MethodDescriptor fixedMethodDescriptor =
-                propagateNullabilityFromArguments(
-                    methodDescriptor,
-                    typeParameterDescriptors,
-                    typeArgumentDescriptors,
-                    newInstance.getArguments().stream()
-                        .map(Expression::getTypeDescriptor)
-                        .collect(toImmutableList()));
-
-            if (fixedMethodDescriptor.equals(methodDescriptor)) {
-              return newInstance;
-            }
-            changed[0] = true;
-            return newInstance.toBuilder().setTarget(fixedMethodDescriptor).build();
           }
 
           @Override
@@ -437,8 +420,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
     return changed[0];
   }
 
-
-
   /**
    * Propagates nullability from the usage site type to an expression.
    *
@@ -521,7 +502,6 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
 
     return newInstance;
   }
-
 
   /**
    * Propagates nullability to a type argument of a functional interface based on the types of the
