@@ -17,7 +17,7 @@ set -ex
 
 function bazel_workspace() {
   # Test in its own workspace with local (head) j2cl version.
-  (cd $2 &&  bazel $1 --override_module=j2cl=../.. ...)
+  (cd $2 &&  bazel $1 --override_module=j2cl=../.. ... && bazel shutdown)
 }
 
 # Build and test Hello World sample in its own workspace
