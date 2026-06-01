@@ -15,13 +15,14 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import com.google.common.collect.Ordering;
+import com.google.common.collect.Comparators;
 
 /** Represents nullability annotations or the absence of. */
 public enum NullabilityAnnotation {
+  // Ordered from least to most nullable for comparison purposes.
+  NOT_NULLABLE,
   NONE,
-  NULLABLE,
-  NOT_NULLABLE;
+  NULLABLE;
 
   public final String toTypeModifierString() {
     return switch (this) {
@@ -33,14 +34,15 @@ public enum NullabilityAnnotation {
 
   public static NullabilityAnnotation mostNullable(
       NullabilityAnnotation first, NullabilityAnnotation second) {
-    return ORDERING.max(first, second);
+    return Comparators.max(first, second);
   }
 
   public static NullabilityAnnotation leastNullable(
       NullabilityAnnotation first, NullabilityAnnotation second) {
-    return ORDERING.min(first, second);
+    return Comparators.min(first, second);
   }
 
-  private static final Ordering<NullabilityAnnotation> ORDERING =
-      Ordering.explicit(NOT_NULLABLE, NONE, NULLABLE);
+  public boolean isAssignableTo(NullabilityAnnotation other) {
+    return compareTo(other) <= 0;
+  }
 }
