@@ -18,9 +18,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsIgnore
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsProperty
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.backend.jvm.CachedFieldsForObjectInstances
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -140,20 +137,6 @@ class J2ClCachedDeclarations(private val context: J2clBackendContext) {
             } else {
               oldField.annotations
             }
-          // Set the visibility of the backing field to public if the underlining property is a
-          // public JsProperty.
-          // This is a workaround for a Kotlin limitation where @JvmField cannot be used on
-          // companion properties if any of the properties is const or var.
-          // See: https://youtrack.jetbrains.com/issue/KT-64878
-          // TODO(b/319293520): Remove this when Kotlin lifts this restriction.
-          if (
-            irProperty.isJsProperty ||
-              (oldParent.parentAsClass.isJsType &&
-                irProperty.visibility == DescriptorVisibilities.PUBLIC &&
-                !irProperty.isJsIgnore)
-          ) {
-            visibility = DescriptorVisibilities.PUBLIC
-          }
           // END OF MODIFICATIONS.
 
           initializer = oldField.initializer?.patchDeclarationParents(this)
