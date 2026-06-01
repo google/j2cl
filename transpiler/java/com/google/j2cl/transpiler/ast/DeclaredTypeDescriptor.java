@@ -1500,22 +1500,26 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     public DeclaredTypeDescriptor build() {
       DeclaredTypeDescriptor typeDescriptor = autoBuild();
 
-      checkState(
-          typeDescriptor.isClass() || typeDescriptor.isInterface() || typeDescriptor.isEnum());
-
       DeclaredTypeDescriptor internedTypeDescriptor = interner.intern(typeDescriptor);
 
-      // Some native standard TypeDescriptors are created BEFORE TypeDescriptors is initialized.
-      if (TypeDescriptors.isInitialized()) {
-        // Make sure there is only one global namespace TypeDescriptor (see b/32903150).
-        checkArgument(
-            internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName() == null
-                || !internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName().isEmpty()
-                || TypeDescriptors.get().globalNamespace == null
-                || internedTypeDescriptor == TypeDescriptors.get().globalNamespace,
-            "Attempt to build type descriptor %s for the global scope that is not %s.",
-            internedTypeDescriptor,
-            TypeDescriptors.get().globalNamespace);
+      if (internedTypeDescriptor == typeDescriptor) {
+        // This descriptor is seen for the first time, make sure that it has been constructed
+        // properly.
+        checkState(
+            typeDescriptor.isClass() || typeDescriptor.isInterface() || typeDescriptor.isEnum());
+
+        // Some native standard TypeDescriptors are created BEFORE TypeDescriptors is initialized.
+        if (TypeDescriptors.isInitialized()) {
+          // Make sure there is only one global namespace TypeDescriptor (see b/32903150).
+          checkArgument(
+              internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName() == null
+                  || !internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName().isEmpty()
+                  || TypeDescriptors.get().globalNamespace == null
+                  || internedTypeDescriptor == TypeDescriptors.get().globalNamespace,
+              "Attempt to build type descriptor %s for the global scope that is not %s.",
+              internedTypeDescriptor,
+              TypeDescriptors.get().globalNamespace);
+        }
       }
       return internedTypeDescriptor;
     }

@@ -1787,6 +1787,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     abstract MethodDescriptor autoBuild();
 
+    @SuppressWarnings("ReferenceEquality")
     public MethodDescriptor build() {
       if (isConstructor()) {
         setReturnTypeDescriptor(getEnclosingTypeDescriptor().toNonNullable());
@@ -1807,15 +1808,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       }
 
       MethodDescriptor methodDescriptor = autoBuild();
-
-      if (methodDescriptor.isDeclaration()) {
-        checkState(methodDescriptor.getTypeArgumentTypeDescriptors().isEmpty());
-      }
-
       MethodDescriptor internedMethodDescriptor = interner.intern(methodDescriptor);
+
       if (internedMethodDescriptor == methodDescriptor) {
         // This method descriptor is seen for the first time, make sure that it has been constructed
         // properly.
+        if (methodDescriptor.isDeclaration()) {
+          checkState(methodDescriptor.getTypeArgumentTypeDescriptors().isEmpty());
+        }
 
         // Bridge methods cannot be abstract nor native,
         checkState(

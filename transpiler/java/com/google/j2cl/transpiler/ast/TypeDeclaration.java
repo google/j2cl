@@ -972,6 +972,7 @@ public abstract class TypeDeclaration
 
     abstract TypeDeclaration autoBuild();
 
+    @SuppressWarnings("ReferenceEquality")
     public TypeDeclaration build() {
       if (isJsFunctionInterface() && ignoreJsFunctionAnnotations.get()) {
         setJsFunctionInterface(false);
@@ -1007,23 +1008,27 @@ public abstract class TypeDeclaration
         setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents().get()));
       }
 
-      checkState(!isAnnotation() || getKind() == Kind.INTERFACE);
-
       TypeDeclaration typeDeclaration = autoBuild();
+      TypeDeclaration internedTypeDeclaration = interner.intern(typeDeclaration);
 
-      // Has to be an interface to be a functional interface.
-      checkState(typeDeclaration.isInterface() || !typeDeclaration.isFunctionalInterface());
+      if (internedTypeDeclaration == typeDeclaration) {
+        // This declaration is seen for the first time, make sure that it has been constructed
+        // properly.
+        checkState(!isAnnotation() || getKind() == Kind.INTERFACE);
 
-      checkState(
-          typeDeclaration.getTypeParameterDescriptors().stream()
-              .noneMatch(TypeVariable::isWildcardOrCapture));
+        // Has to be an interface to be a functional interface.
+        checkState(typeDeclaration.isInterface() || !typeDeclaration.isFunctionalInterface());
 
-      checkState(
-          typeDeclaration.getTypeParameterDescriptors().stream()
-              .map(TypeVariable::getNullabilityAnnotation)
-              .allMatch(Predicate.isEqual(NullabilityAnnotation.NONE)));
+        checkState(
+            typeDeclaration.getTypeParameterDescriptors().stream()
+                .noneMatch(TypeVariable::isWildcardOrCapture));
 
-      return interner.intern(typeDeclaration);
+        checkState(
+            typeDeclaration.getTypeParameterDescriptors().stream()
+                .map(TypeVariable::getNullabilityAnnotation)
+                .allMatch(Predicate.isEqual(NullabilityAnnotation.NONE)));
+      }
+      return internedTypeDeclaration;
     }
   }
 }
