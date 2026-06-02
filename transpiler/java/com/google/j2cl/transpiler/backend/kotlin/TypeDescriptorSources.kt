@@ -21,7 +21,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CAPTURE_KEYWORD
@@ -151,23 +151,21 @@ internal data class TypeDescriptorSources(
   }
 
   private val DeclaredTypeDescriptor.hasBaseCollectionLowerBound: Boolean
-    get() {
-      val typeDescriptors = TypeDescriptors.get()
-      return when {
-        isSameBaseType(typeDescriptors.javaLangIterable) ||
-          isSameBaseType(typeDescriptors.javaUtilIterator) ||
-          isSameBaseType(typeDescriptors.javaUtilListIterator) ||
-          isSameBaseType(typeDescriptors.javaUtilCollection) ||
-          isSameBaseType(typeDescriptors.javaUtilList) ||
-          isSameBaseType(typeDescriptors.javaUtilSet) ->
+    get() =
+      when {
+        isSameBaseType(getTypeDescriptor("java.lang.Iterable")) ||
+          isSameBaseType(getTypeDescriptor("java.util.Iterator")) ||
+          isSameBaseType(getTypeDescriptor("java.util.ListIterator")) ||
+          isSameBaseType(getTypeDescriptor("java.util.Collection")) ||
+          isSameBaseType(getTypeDescriptor("java.util.List")) ||
+          isSameBaseType(getTypeDescriptor("java.util.Set")) ->
           typeArgumentDescriptors.firstOrNull()?.hasLowerBound ?: false
-        isSameBaseType(typeDescriptors.javaUtilMap) ->
+        isSameBaseType(getTypeDescriptor("java.util.Map")) ->
           typeArgumentDescriptors.getOrNull(1)?.hasLowerBound ?: false
-        isSameBaseType(typeDescriptors.javaUtilMapEntry) ->
+        isSameBaseType(getTypeDescriptor("java.util.Map\$Entry")) ->
           typeArgumentDescriptors.any { it.hasLowerBound }
         else -> false
       }
-    }
 
   private val TypeDescriptor.hasLowerBound: Boolean
     get() = this is TypeVariable && lowerBoundTypeDescriptor != null

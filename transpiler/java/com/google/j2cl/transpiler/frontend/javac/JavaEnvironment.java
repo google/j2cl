@@ -154,13 +154,14 @@ public class JavaEnvironment {
   private void initWellKnownTypes(Collection<String> wellKnownQualifiedBinaryNames) {
     checkState(!TypeDescriptors.isInitialized());
 
-    TypeDescriptors.SingletonBuilder builder = new TypeDescriptors.SingletonBuilder();
+    TypeDescriptors.SingletonBuilder builder =
+        new TypeDescriptors.SingletonBuilder(this::getTypeDescriptor);
     // Add well-known, non-primitive types.
     wellKnownQualifiedBinaryNames.forEach(
         binaryName -> {
-          TypeElement element = binaryNameToTypeElement(binaryName);
-          if (element != null) {
-            builder.addReferenceType(createDeclaredTypeDescriptor(element.asType()));
+          var typeDescriptor = getTypeDescriptor(binaryName);
+          if (typeDescriptor != null) {
+            builder.addReferenceType(typeDescriptor);
           }
         });
     builder.buildSingleton();
@@ -257,6 +258,12 @@ public class JavaEnvironment {
 
   DeclaredTypeDescriptor createDeclaredTypeDescriptor(TypeMirror typeMirror) {
     return createDeclaredTypeDescriptor(typeMirror, /* inNullMarkedScope= */ false);
+  }
+
+  @Nullable
+  public DeclaredTypeDescriptor getTypeDescriptor(String qualifiedBinaryName) {
+    TypeElement element = binaryNameToTypeElement(qualifiedBinaryName);
+    return element == null ? null : createDeclaredTypeDescriptor(element.asType());
   }
 
   DeclaredTypeDescriptor createDeclaredTypeDescriptor(

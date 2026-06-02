@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.PrimitiveTypes.INT;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor;
 import static com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithUpperBound;
 
 import com.google.auto.value.AutoValue;
@@ -52,16 +53,14 @@ import javax.annotation.Nullable;
  */
 public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
 
-  private final TypeDescriptors types = TypeDescriptors.get();
-
-  private final DeclaredTypeDescriptor object = types.javaLangObject;
-  private final DeclaredTypeDescriptor collection = types.javaUtilCollection;
-  private final DeclaredTypeDescriptor map = types.javaUtilMap;
-  private final DeclaredTypeDescriptor list = types.javaUtilList;
+  private final DeclaredTypeDescriptor object = TypeDescriptors.get().javaLangObject;
+  private final DeclaredTypeDescriptor collection = getTypeDescriptor("java.util.Collection");
+  private final DeclaredTypeDescriptor map = getTypeDescriptor("java.util.Map");
+  private final DeclaredTypeDescriptor list = getTypeDescriptor("java.util.List");
 
   private final DeclaredTypeDescriptor readonlyCollection =
-      checkNotNull(types.javaUtilReadonlyCollection);
-  private final DeclaredTypeDescriptor readonlyMap = checkNotNull(types.javaUtilReadonlyMap);
+      getTypeDescriptor("java.util.ReadonlyCollection");
+  private final DeclaredTypeDescriptor readonlyMap = getTypeDescriptor("java.util.ReadonlyMap");
 
   private final TypeVariable collectionElement = typeParameter(collection, 0);
   private final TypeVariable listElement = typeParameter(list, 0);

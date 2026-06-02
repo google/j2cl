@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.NullabilityAnnotation.NOT_NULLABLE
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf
@@ -211,4 +212,4 @@ internal val TypeDescriptor.isCollection: Boolean
   get() = collectionTypeDescriptors.any { isAssignableTo(it) }
 
 private val collectionTypeDescriptors: Set<TypeDescriptor>
-  get() = setOf(typeDescriptors.javaUtilCollection, typeDescriptors.javaUtilMap)
+  get() = setOf(getTypeDescriptor("java.util.Collection"), getTypeDescriptor("java.util.Map"))

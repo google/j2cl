@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor;
+
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -75,8 +77,8 @@ public class OverrideKotlinAdditionalAbstractMethods extends NormalizationPass {
   }
 
   private static boolean implementsIterator(Type type) {
-    return type.getTypeDescriptor().isSubtypeOf(TypeDescriptors.get().javaUtilIterator)
-        || type.getTypeDescriptor().isSubtypeOf(TypeDescriptors.get().javaUtilListIterator);
+    return type.getTypeDescriptor().isSubtypeOf(getTypeDescriptor("java.util.Iterator"))
+        || type.getTypeDescriptor().isSubtypeOf(getTypeDescriptor("java.util.ListIterator"));
   }
 
   private void synthesizeNumberOverrides(Type type) {
@@ -123,7 +125,7 @@ public class OverrideKotlinAdditionalAbstractMethods extends NormalizationPass {
 
   private void synthesizeIteratorRemoveOverride(Type type) {
     MethodDescriptor iteratorRemoveDescriptor =
-        TypeDescriptors.get().javaUtilIterator.getMethodDescriptor("remove");
+        getTypeDescriptor("java.util.Iterator").getMethodDescriptor("remove");
 
     MethodDescriptor existingRemove = type.getTypeDescriptor().getMethodDescriptor("remove");
     if (existingRemove != null && !existingRemove.isSameMethod(iteratorRemoveDescriptor)) {
@@ -142,7 +144,8 @@ public class OverrideKotlinAdditionalAbstractMethods extends NormalizationPass {
 
     MethodDescriptor exceptionConstructor =
         MethodDescriptor.builder()
-            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangUnsupportedOperationException)
+            .setEnclosingTypeDescriptor(
+                getTypeDescriptor("java.lang.UnsupportedOperationException"))
             .setConstructor(true)
             .setReturnTypeDescriptor(PrimitiveTypes.VOID)
             .build();

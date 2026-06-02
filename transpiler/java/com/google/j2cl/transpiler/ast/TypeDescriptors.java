@@ -72,14 +72,10 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangEnum;
   public DeclaredTypeDescriptor javaLangIterable;
 
-  @QualifiedBinaryName("java.lang.annotation.Annotation")
-  public DeclaredTypeDescriptor javaLangAnnotation;
+  public DeclaredTypeDescriptor javaLangAnnotationAnnotation;
 
   @QualifiedBinaryName("java.lang.NullPointerException")
   public DeclaredTypeDescriptor javaLangNullPointerException;
-
-  @QualifiedBinaryName("java.lang.UnsupportedOperationException")
-  public DeclaredTypeDescriptor javaLangUnsupportedOperationException;
 
   @QualifiedBinaryName("java.lang.AssertionError")
   public DeclaredTypeDescriptor javaLangAssertionError;
@@ -94,57 +90,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangRecord;
 
   public DeclaredTypeDescriptor javaUtilArrays;
-  public DeclaredTypeDescriptor javaUtilCollection;
-  public DeclaredTypeDescriptor javaUtilIterator;
-
-  @QualifiedBinaryName("java.util.ListIterator")
-  public DeclaredTypeDescriptor javaUtilListIterator;
-
-  public DeclaredTypeDescriptor javaUtilMap;
-  public DeclaredTypeDescriptor javaUtilSet;
-
-  @QualifiedBinaryName("java.util.Map$Entry")
-  public DeclaredTypeDescriptor javaUtilMapEntry;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.MutableCollection")
-  public DeclaredTypeDescriptor javaUtilMutableCollection;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.MutableIterator")
-  public DeclaredTypeDescriptor javaUtilMutableIterator;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.MutableList")
-  public DeclaredTypeDescriptor javaUtilMutableList;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.MutableListIterator")
-  public DeclaredTypeDescriptor javaUtilMutableListIterator;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.MutableMap")
-  public DeclaredTypeDescriptor javaUtilMutableMap;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.MutableMap$MutableEntry")
-  public DeclaredTypeDescriptor javaUtilMutableMapMutableEntry;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.MutableSet")
-  public DeclaredTypeDescriptor javaUtilMutableSet;
-
-  public DeclaredTypeDescriptor javaUtilList;
   public DeclaredTypeDescriptor javaUtilObjects;
-  public DeclaredTypeDescriptor javaUtilOptional;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.ReadonlyCollection")
-  public DeclaredTypeDescriptor javaUtilReadonlyCollection;
-
-  @Nullable
-  @QualifiedBinaryName("java.util.ReadonlyMap")
-  public DeclaredTypeDescriptor javaUtilReadonlyMap;
 
   public DeclaredTypeDescriptor javaIoSerializable;
 
@@ -313,6 +259,22 @@ public class TypeDescriptors {
     return get().boxedTypeByPrimitiveType.inverse().get(boxType.toNullable());
   }
 
+  public static DeclaredTypeDescriptor getTypeDescriptor(String qualifiedBinaryName) {
+    return get().getTypeDescriptorImpl(qualifiedBinaryName);
+  }
+
+  private final Map<String, DeclaredTypeDescriptor> typeDescriptorsByBinaryName = new HashMap<>();
+
+  private DeclaredTypeDescriptor getTypeDescriptorImpl(String qualifiedBinaryName) {
+    DeclaredTypeDescriptor type = typeDescriptorsByBinaryName.get(qualifiedBinaryName);
+    if (type == null) {
+      // All type descriptors loaded lazily must be resolvable.
+      type = checkNotNull(typeDescriptorResolver.apply(qualifiedBinaryName));
+      typeDescriptorsByBinaryName.put(qualifiedBinaryName, type);
+    }
+    return type;
+  }
+
   public static boolean isBoxedType(TypeDescriptor typeDescriptor) {
     return get()
             .boxedTypeByPrimitiveType
@@ -452,8 +414,8 @@ public class TypeDescriptors {
     return typeDescriptor.isSameBaseType(get().javaLangRecord);
   }
 
-  public static boolean isJavaLangAnnotation(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.isSameBaseType(get().javaLangAnnotation);
+  public static boolean isJavaLangAnnotationAnnotation(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isSameBaseType(get().javaLangAnnotationAnnotation);
   }
 
   public static boolean isJavaLangIterable(TypeDescriptor typeDescriptor) {
@@ -585,8 +547,12 @@ public class TypeDescriptors {
     }
   }
 
+  private final Function<String, DeclaredTypeDescriptor> typeDescriptorResolver;
+
   // Not externally instantiable.
-  private TypeDescriptors() {}
+  private TypeDescriptors(Function<String, DeclaredTypeDescriptor> typeDescriptorResolver) {
+    this.typeDescriptorResolver = typeDescriptorResolver;
+  }
 
   public static DeclaredTypeDescriptor createPrimitiveMetadataTypeDescriptor(
       PrimitiveTypeDescriptor primitiveTypeDescriptor) {
@@ -691,12 +657,16 @@ public class TypeDescriptors {
   /** Builder for TypeDescriptors. */
   public static class SingletonBuilder {
 
-    private final TypeDescriptors typeDescriptors = new TypeDescriptors();
+    private final TypeDescriptors typeDescriptors;
     private final Map<String, DeclaredTypeDescriptor> knownTypesByQualifiedName = new HashMap<>();
     private final Set<String> requiredTypes = new HashSet<>(requiredWellKnownTypes);
 
+    public SingletonBuilder(Function<String, DeclaredTypeDescriptor> typeDescriptorResolver) {
+      this.typeDescriptors = new TypeDescriptors(typeDescriptorResolver);
+    }
+
     public void buildSingleton() {
-      // All the wellknown reference types are loaded, add the primitive <-> boxed types mapping.
+      // All the well-known reference types are loaded, add the primitive <-> boxed types mapping.
       for (PrimitiveTypeDescriptor primitiveTypeDescriptor : PrimitiveTypes.TYPES) {
         addBoxedTypeMapping(
             primitiveTypeDescriptor,

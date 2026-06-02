@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor;
 import static com.google.j2cl.transpiler.passes.PromoteMutability.ReturnRewriteKind.MUTABLE_ENTRYSET_REWRITE;
 import static com.google.j2cl.transpiler.passes.PromoteMutability.ReturnRewriteKind.MUTABLE_REWRITE;
 
@@ -36,7 +37,6 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 import javax.annotation.Nullable;
@@ -50,9 +50,8 @@ import javax.annotation.Nullable;
  */
 public class PromoteMutability extends AbstractJ2ktNormalizationPass {
 
-  private final TypeDescriptors types = TypeDescriptors.get();
   private final MethodDescriptor mapEntrySet =
-      types.javaUtilMap.getMethodDescriptorByName("entrySet");
+      getTypeDescriptor("java.util.Map").getMethodDescriptorByName("entrySet");
 
   private final ImmutableSet<MethodDescriptor> mutationMethods;
   private final ImmutableMap<TypeDeclaration, MethodDescriptor> asMutableMethodsByTypeDeclaration;
@@ -69,7 +68,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     addMutatingMethods(
         asMutableMethodsBuilder,
         mutationMethodsBuilder,
-        types.javaUtilCollection,
+        "java.util.Collection",
         "asMutableCollection",
         "add",
         "addAll",
@@ -83,7 +82,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     addMutatingMethods(
         asMutableMethodsBuilder,
         mutationMethodsBuilder,
-        types.javaUtilList,
+        "java.util.List",
         "asMutableList",
         "add",
         "addAll",
@@ -98,13 +97,13 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
 
     // Set
     addMutatingMethods(
-        asMutableMethodsBuilder, mutationMethodsBuilder, types.javaUtilSet, "asMutableSet");
+        asMutableMethodsBuilder, mutationMethodsBuilder, "java.util.Set", "asMutableSet");
 
     // Map
     addMutatingMethods(
         asMutableMethodsBuilder,
         mutationMethodsBuilder,
-        types.javaUtilMap,
+        "java.util.Map",
         "asMutableMap",
         "put",
         "putAll",
@@ -122,7 +121,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     addMutatingMethods(
         asMutableMethodsBuilder,
         mutationMethodsBuilder,
-        types.javaUtilIterator,
+        "java.util.Iterator",
         "asMutableIterator",
         "remove");
 
@@ -130,7 +129,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     addMutatingMethods(
         asMutableMethodsBuilder,
         mutationMethodsBuilder,
-        types.javaUtilListIterator,
+        "java.util.ListIterator",
         "asMutableListIterator",
         "add",
         "set");
@@ -139,7 +138,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     addMutatingMethods(
         asMutableMethodsBuilder,
         mutationMethodsBuilder,
-        types.javaUtilMapEntry,
+        "java.util.Map$Entry",
         "asMutableEntry",
         "setValue");
 
@@ -149,25 +148,38 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     ImmutableMap.Builder<MethodDescriptor, ReturnRewriteKind> returnMappingsBuilder =
         ImmutableMap.builder();
 
-    addReturnRewrite(returnMappingsBuilder, types.javaLangIterable, "iterator", MUTABLE_REWRITE);
-    addReturnRewrite(returnMappingsBuilder, types.javaUtilList, "subList", MUTABLE_REWRITE);
-    addReturnRewrite(returnMappingsBuilder, types.javaUtilList, "listIterator", MUTABLE_REWRITE);
-    addReturnRewrite(returnMappingsBuilder, types.javaUtilMap, "keySet", MUTABLE_REWRITE);
-    addReturnRewrite(returnMappingsBuilder, types.javaUtilMap, "values", MUTABLE_REWRITE);
-    addReturnRewrite(
-        returnMappingsBuilder, types.javaUtilMap, "entrySet", MUTABLE_ENTRYSET_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, "java.lang.Iterable", "iterator", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, "java.util.List", "subList", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, "java.util.List", "listIterator", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, "java.util.Map", "keySet", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, "java.util.Map", "values", MUTABLE_REWRITE);
+    addReturnRewrite(returnMappingsBuilder, "java.util.Map", "entrySet", MUTABLE_ENTRYSET_REWRITE);
 
     this.overrideReturnMappings = returnMappingsBuilder.buildOrThrow();
 
     this.mutableTypesByBaseTypeDeclaration =
         ImmutableMap.<TypeDeclaration, DeclaredTypeDescriptor>builder()
-            .put(types.javaUtilCollection.getTypeDeclaration(), types.javaUtilMutableCollection)
-            .put(types.javaUtilList.getTypeDeclaration(), types.javaUtilMutableList)
-            .put(types.javaUtilSet.getTypeDeclaration(), types.javaUtilMutableSet)
-            .put(types.javaUtilMap.getTypeDeclaration(), types.javaUtilMutableMap)
-            .put(types.javaUtilIterator.getTypeDeclaration(), types.javaUtilMutableIterator)
-            .put(types.javaUtilListIterator.getTypeDeclaration(), types.javaUtilMutableListIterator)
-            .put(types.javaUtilMapEntry.getTypeDeclaration(), types.javaUtilMutableMapMutableEntry)
+            .put(
+                getTypeDescriptor("java.util.Collection").getTypeDeclaration(),
+                getTypeDescriptor("java.util.MutableCollection"))
+            .put(
+                getTypeDescriptor("java.util.List").getTypeDeclaration(),
+                getTypeDescriptor("java.util.MutableList"))
+            .put(
+                getTypeDescriptor("java.util.Set").getTypeDeclaration(),
+                getTypeDescriptor("java.util.MutableSet"))
+            .put(
+                getTypeDescriptor("java.util.Map").getTypeDeclaration(),
+                getTypeDescriptor("java.util.MutableMap"))
+            .put(
+                getTypeDescriptor("java.util.Iterator").getTypeDeclaration(),
+                getTypeDescriptor("java.util.MutableIterator"))
+            .put(
+                getTypeDescriptor("java.util.ListIterator").getTypeDeclaration(),
+                getTypeDescriptor("java.util.MutableListIterator"))
+            .put(
+                getTypeDescriptor("java.util.Map$Entry").getTypeDeclaration(),
+                getTypeDescriptor("java.util.MutableMap$MutableEntry"))
             .buildOrThrow();
   }
 
@@ -187,9 +199,10 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
   private static void addMutatingMethods(
       ImmutableMap.Builder<TypeDeclaration, MethodDescriptor> asMutableMethodsBuilder,
       ImmutableSet.Builder<MethodDescriptor> mutationMethodsBuilder,
-      DeclaredTypeDescriptor type,
+      String qualifiedBinaryTypeName,
       String asMutableMethodName,
       String... mutatingMethodNames) {
+    DeclaredTypeDescriptor type = getTypeDescriptor(qualifiedBinaryTypeName);
     MethodDescriptor asMutableMethod = type.getMethodDescriptorByName(asMutableMethodName);
     asMutableMethodsBuilder.put(type.getTypeDeclaration(), asMutableMethod);
     ImmutableSet<String> names = ImmutableSet.copyOf(mutatingMethodNames);
@@ -212,11 +225,11 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
    */
   private static void addReturnRewrite(
       ImmutableMap.Builder<MethodDescriptor, ReturnRewriteKind> builder,
-      DeclaredTypeDescriptor enclosingType,
+      String qualifiedBinaryTypeName,
       String methodName,
       ReturnRewriteKind kind) {
-    for (MethodDescriptor method :
-        enclosingType.getTypeDeclaration().getDeclaredMethodDescriptors()) {
+    DeclaredTypeDescriptor type = getTypeDescriptor(qualifiedBinaryTypeName);
+    for (MethodDescriptor method : type.getTypeDeclaration().getDeclaredMethodDescriptors()) {
       if (method.getName().equals(methodName)) {
         builder.put(method.getDeclarationDescriptor(), kind);
       }
@@ -287,7 +300,8 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
       // covariance (except the first ("Key") type parameter of Map). That means they cannot be
       // instantiated with a lower type-bound (=contravariant). So the Kotlin backend will never
       // render collection interface types with lower bounds as readonly, but always as mutable.
-      int startIndex = declaredTypeDescriptor.isSameBaseType(types.javaUtilMap) ? 1 : 0;
+      int startIndex =
+          declaredTypeDescriptor.isSameBaseType(getTypeDescriptor("java.util.Map")) ? 1 : 0;
       for (int i = startIndex; i < typeArguments.size(); i++) {
         TypeDescriptor arg = typeArguments.get(i);
         if (arg instanceof TypeVariable typeVariable
@@ -335,7 +349,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
 
             TypeDescriptor returnType = target.getReturnTypeDescriptor();
 
-            if (returnType.isSameBaseType(types.javaUtilSet)) {
+            if (returnType.isSameBaseType(getTypeDescriptor("java.util.Set"))) {
               return methodCall;
             }
 
@@ -440,7 +454,9 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     TypeDescriptor expressionType = expression.getTypeDescriptor();
 
     checkState(
-        expressionType.isAssignableTo(types.javaUtilSet), "Expected Set, got: %s", expressionType);
+        expressionType.isAssignableTo(getTypeDescriptor("java.util.Set")),
+        "Expected Set, got: %s",
+        expressionType);
 
     if (!(expressionType instanceof DeclaredTypeDescriptor declaredExpressionType)) {
       return expression;
@@ -451,10 +467,13 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     // MyCustomSet<MutableEntry<K,V>>. We can't do that with MyCustomEntrySet<K,V>.
     DeclaredTypeDescriptor targetType =
         declaredExpressionType.getAllSuperTypesIncludingSelf().stream()
-            .filter(t -> t.isAssignableTo(types.javaUtilSet))
+            .filter(t -> t.isAssignableTo(getTypeDescriptor("java.util.Set")))
             .filter(t -> t.getTypeArgumentDescriptors().size() == 1)
             .filter(
-                t -> t.getTypeArgumentDescriptors().get(0).isSameBaseType(types.javaUtilMapEntry))
+                t ->
+                    t.getTypeArgumentDescriptors()
+                        .get(0)
+                        .isSameBaseType(getTypeDescriptor("java.util.Map$Entry")))
             .findFirst()
             .orElse(null);
 
@@ -468,8 +487,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
     DeclaredTypeDescriptor entryType = (DeclaredTypeDescriptor) typeArgument;
 
     TypeDescriptor mutableEntryType =
-        types
-            .javaUtilMutableMapMutableEntry
+        getTypeDescriptor("java.util.MutableMap$MutableEntry")
             .withTypeArguments(entryType.getTypeArgumentDescriptors())
             .toNullable(entryType.isNullable());
 
@@ -554,7 +572,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
         // CustomEntrySet<K,V> implements Set<Entry<K,V>>.
         checkState(
             oldTypeArguments.size() == 1
-                && oldTypeArguments.get(0).isSameBaseType(types.javaUtilMapEntry),
+                && oldTypeArguments.get(0).isSameBaseType(getTypeDescriptor("java.util.Map$Entry")),
             "Can only transpile entrySet() overrides where the return type has an Map.Entry type"
                 + " parameter. Please file a J2KT bug if this is a problem for you.");
 

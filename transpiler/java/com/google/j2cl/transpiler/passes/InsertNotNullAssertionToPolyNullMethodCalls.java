@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor;
+
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -28,8 +30,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
  */
 public class InsertNotNullAssertionToPolyNullMethodCalls extends NormalizationPass {
   private final MethodDescriptor javaUtilOptionalOrElse =
-      TypeDescriptors.get()
-          .javaUtilOptional
+      getTypeDescriptor("java.util.Optional")
           .getMethodDescriptor("orElse", TypeDescriptors.get().javaLangObject);
 
   @Override

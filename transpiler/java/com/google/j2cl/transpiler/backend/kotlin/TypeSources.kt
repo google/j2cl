@@ -20,7 +20,7 @@ import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangAnnotation
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangAnnotationAnnotation
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangRecord
@@ -148,7 +148,7 @@ internal data class TypeSources(val nameSources: NameSources) {
       .filter { !isJavaLangObject(it) }
       .filter { !isJavaLangEnum(it) }
       .filter { !isJavaLangRecord(it) }
-      .filter { !isJavaLangAnnotation(it) || !type.declaration.isAnnotation }
+      .filter { !isJavaLangAnnotationAnnotation(it) || !type.declaration.isAnnotation }
       .map { superTypeSource(type, it) }
       .toList()
       .let { commaSeparated(it) }

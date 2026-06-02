@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor;
+
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Method;
@@ -64,6 +66,6 @@ public class FixJavaKotlinMethodOverrideMismatch extends NormalizationPass {
             .allMatch(
                 it ->
                     it.getDeclarationDescriptor()
-                        .isMemberOf(TypeDescriptors.get().javaUtilCollection));
+                        .isMemberOf(getTypeDescriptor("java.util.Collection")));
   }
 }

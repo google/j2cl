@@ -204,10 +204,10 @@ internal class KotlinEnvironment(
   private fun initWellKnownTypes() {
     check(!TypeDescriptors.isInitialized())
 
-    val builder = SingletonBuilder()
+    val builder = SingletonBuilder(this::getTypeDescriptor)
 
     for (name in TypeDescriptors.getWellKnownTypeNames()) {
-      val typeDescriptor = getWellKnownTypeDescriptor(name)
+      val typeDescriptor = getTypeDescriptor(name)
       if (typeDescriptor != null) {
         builder.addReferenceType(typeDescriptor)
       }
@@ -216,7 +216,7 @@ internal class KotlinEnvironment(
     builder.buildSingleton()
   }
 
-  private fun getWellKnownTypeDescriptor(qualifiedBinaryName: String): DeclaredTypeDescriptor? {
+  private fun getTypeDescriptor(qualifiedBinaryName: String): DeclaredTypeDescriptor? {
     // Note: We disable declaration-site variance when resolving type descriptors of the well
     // known types because the variance is not needed we creating a reference to a type and using
     // variance would require resolving java.lang.Object via TypeDescriptors.get() during

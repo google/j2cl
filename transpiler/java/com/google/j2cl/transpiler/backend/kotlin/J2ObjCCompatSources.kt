@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
@@ -345,9 +346,9 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
           typeDescriptors.javaLangNumber.typeDeclaration
         } else {
           listOf(
-              typeDescriptors.javaUtilList,
-              typeDescriptors.javaUtilSet,
-              typeDescriptors.javaUtilMap,
+              getTypeDescriptor("java.util.List"),
+              getTypeDescriptor("java.util.Set"),
+              getTypeDescriptor("java.util.Map"),
               typeDescriptors.javaLangNumber,
             )
             .find { declaredType.isAssignableTo(it) }
