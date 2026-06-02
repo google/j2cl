@@ -74,12 +74,12 @@ public class JavacParser {
   public Library parseFiles(FrontendOptions options) {
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable
-    final Map<String, String> targetPathBySourcePath =
+    final Map<String, String> originalPathBySourcePath =
         options.getSources().stream()
             .collect(
                 toMap(
                     FileInfo::sourcePath,
-                    FileInfo::targetPath,
+                    FileInfo::originalPath,
                     (u, v) -> {
                       throw new IllegalStateException("Duplicate source path: " + u);
                     },
@@ -100,7 +100,7 @@ public class JavacParser {
               options.getSystem(),
               options.getAnnotationProcessorPath(),
               getJavacOptions(options),
-              targetPathBySourcePath.keySet().stream().map(Path::of).collect(toImmutableList()),
+              originalPathBySourcePath.keySet().stream().map(Path::of).collect(toImmutableList()),
               diagnostics,
               sourceGenPath,
               problems,
@@ -123,7 +123,7 @@ public class JavacParser {
 
                 var cu = (JCCompilationUnit) taskEvent.getCompilationUnit();
                 var sourcePath = cu.getSourceFile().getName();
-                var isGenerated = !targetPathBySourcePath.containsKey(sourcePath);
+                var isGenerated = !originalPathBySourcePath.containsKey(sourcePath);
 
                 if (isGenerated) {
                   // Generators are not supposed to emit code with annotation that need stripping.
@@ -131,7 +131,7 @@ public class JavacParser {
                   // parts of the pipeline, the stripper is run before running APTs.
                   checkForbiddenAnnotations(cu, options.getStrippedAnnotationNames(), problems);
                   // Add the generated compilation unit to the map.
-                  targetPathBySourcePath.put(sourcePath, getJavaPath(sourcePath));
+                  originalPathBySourcePath.put(sourcePath, getJavaPath(sourcePath));
                 } else {
                   // Remove incompatible nodes and unused imports only from provided source files.
                   AnnotatedNodeStripper.strip(cu, options.getStrippedAnnotationNames());
@@ -158,8 +158,8 @@ public class JavacParser {
       for (var cu : javacCompilationUnits) {
         String sourcePath = cu.getSourceFile().getName();
         if (options.getGenerateKytheIndexingMetadata()) {
-          // If Kythe metadata is being requested, use the target path.
-          sourcePath = targetPathBySourcePath.get(sourcePath);
+          // If Kythe metadata is being requested, use the original path.
+          sourcePath = originalPathBySourcePath.get(sourcePath);
         }
         compilationUnits.add(
             compilationUnitBuilder.buildCompilationUnit(
