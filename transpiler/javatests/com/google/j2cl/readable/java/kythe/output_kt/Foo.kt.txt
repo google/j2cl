@@ -1,0 +1,43 @@
+// Generated from "kythe/Foo.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package kythe
+
+import javaemul.lang.*
+import kotlin.Int
+import kotlin.Suppress
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+
+open class Foo {
+ @JvmField
+ var someField: Int = 1
+ 
+ open fun someMethod() {}
+ 
+ companion object {
+  @JvmField
+  var SOME_CONSTANT: Int = 1
+  
+  @JvmField
+  var instance: Foo? = Foo()
+  
+  @JvmStatic
+  fun someStaticMethod() {}
+ }
+}

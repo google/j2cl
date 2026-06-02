@@ -1,0 +1,76 @@
+goog.module('kythe.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Foo extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_someField__kythe_Foo = 0;
+ }
+ /** @nodts @return {!Foo} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__kythe_Foo__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__kythe_Foo__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_kythe_Foo();
+ }
+ /** @nodts */
+ m_someMethod__void() {}
+ /** @nodts */
+ static m_someStaticMethod__void() {
+  Foo.$clinit();
+ }
+ /** @private @nodts */
+ $init__void_$p_kythe_Foo() {
+  this.f_someField__kythe_Foo = 1;
+ }
+ /** @nodts @return {number} */
+ static get f_SOME_CONSTANT__kythe_Foo() {
+  return (Foo.$clinit(), Foo.$static_SOME_CONSTANT__kythe_Foo);
+ }
+ /** @nodts */
+ static set f_SOME_CONSTANT__kythe_Foo(/** number */ value) {
+  (Foo.$clinit(), Foo.$static_SOME_CONSTANT__kythe_Foo = value);
+ }
+ /** @nodts @return {Foo} */
+ static get f_instance__kythe_Foo() {
+  return (Foo.$clinit(), Foo.$static_instance__kythe_Foo);
+ }
+ /** @nodts */
+ static set f_instance__kythe_Foo(/** Foo */ value) {
+  (Foo.$clinit(), Foo.$static_instance__kythe_Foo = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+  Foo.$static_SOME_CONSTANT__kythe_Foo = 1;
+  Foo.$static_instance__kythe_Foo = Foo.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {number} @nodts*/
+Foo.$static_SOME_CONSTANT__kythe_Foo = 0;
+/**@private {Foo} @nodts*/
+Foo.$static_instance__kythe_Foo;
+$Util.$setClassMetadata(Foo, 'kythe.Foo');
+
+exports = Foo;
+
+// Kythe Indexing Metadata:
+// {"type":"KYTHE0","meta":[{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":154,"target_end":157,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":206,"target_end":217,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":224,"target_end":232,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":235,"target_end":296,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":746,"source_end":755,"target_begin":269,"target_end":291,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":723,"source_end":726,"target_begin":338,"target_end":347,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":723,"source_end":726,"target_begin":354,"target_end":368,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":723,"source_end":726,"target_begin":371,"target_end":397,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":723,"source_end":726,"target_begin":400,"target_end":435,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":723,"source_end":726,"target_begin":438,"target_end":455,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":723,"source_end":726,"target_begin":475,"target_end":497,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":729,"source_end":730,"target_begin":504,"target_end":541,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":729,"source_end":731,"target_begin":544,"target_end":576,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":776,"source_end":786,"target_begin":596,"target_end":614,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":814,"source_end":830,"target_begin":643,"target_end":667,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":814,"source_end":830,"target_begin":674,"target_end":688,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":717,"target_end":741,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":746,"source_end":755,"target_begin":748,"target_end":780,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":651,"source_end":664,"target_begin":828,"target_end":854,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":651,"source_end":664,"target_begin":861,"target_end":922,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":651,"source_end":664,"target_begin":953,"target_end":979,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":651,"source_end":664,"target_begin":1005,"target_end":1067,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":691,"source_end":699,"target_begin":1112,"target_end":1133,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":691,"source_end":699,"target_begin":1140,"target_end":1196,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":691,"source_end":699,"target_begin":1227,"target_end":1248,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":691,"source_end":699,"target_begin":1271,"target_end":1328,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":1355,"target_end":1362,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":1369,"target_end":1391,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":1394,"target_end":1413,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":1416,"target_end":1437,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":651,"source_end":664,"target_begin":1440,"target_end":1481,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":691,"source_end":699,"target_begin":1484,"target_end":1534,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":1694,"target_end":1765,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":651,"source_end":664,"target_begin":1728,"target_end":1760,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":625,"source_end":628,"target_begin":1766,"target_end":1825,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}},{"type":"ANCHOR_ANCHOR","source_begin":691,"source_end":699,"target_begin":1797,"target_end":1824,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"com/google/j2cl/readable/java/kythe/Foo.java"}}]}
