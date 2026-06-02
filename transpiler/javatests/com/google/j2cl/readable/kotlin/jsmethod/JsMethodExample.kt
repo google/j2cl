@@ -42,6 +42,10 @@ class JsMethodExample {
 
   interface I {
     @JsMethod(name = "mString") fun m(s: String)
+
+    companion object {
+      @JvmStatic @JsMethod fun s() {}
+    }
   }
 
   // Regression test for b/124227197

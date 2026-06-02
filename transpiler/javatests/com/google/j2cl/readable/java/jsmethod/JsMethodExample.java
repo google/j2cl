@@ -43,6 +43,9 @@ public class JsMethodExample {
   interface I {
     @JsMethod(name = "mString")
     void m(String s);
+
+    @JsMethod
+    public static void s() {}
   }
 
   // Regression test for b/124227197

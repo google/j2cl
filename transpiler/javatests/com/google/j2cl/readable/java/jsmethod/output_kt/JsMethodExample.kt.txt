@@ -43,6 +43,12 @@ open class JsMethodExample {
  fun interface I {
   @JsMethod(name = "mString")
   fun m(s: String?)
+  
+  companion object {
+   @JvmStatic
+   @JsMethod
+   fun s() {}
+  }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")

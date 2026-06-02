@@ -8,6 +8,10 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 class I {
  /** @abstract */
  mString(/** string */ s) {}
+ 
+ static s() {
+  I.$clinit();
+ }
  /** @nodts */
  static $clinit() {
   I.$clinit = () =>{};
