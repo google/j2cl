@@ -28,7 +28,7 @@ import kotlin.jvm.Throws
 open class Cloneables {
  open class WithoutCloneable {
   @Throws(CloneNotSupportedException::class)
-  open fun clone(): Any {
+  public open fun clone(): Any {
    return WithoutCloneable()
   }
  }
@@ -36,7 +36,7 @@ open class Cloneables {
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class WithCloneable: Cloneable {
   @Throws(CloneNotSupportedException::class)
-  override fun clone(): Any {
+  public override fun clone(): Any {
    return WithCloneable()
   }
  }

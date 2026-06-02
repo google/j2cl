@@ -293,7 +293,7 @@ internal open class TypeWildCards {
  }
  
  abstract inner class IndexBasedTestCase<M: Any> {
-  abstract fun newOtTester(): OtTester<*, M>
+  protected abstract fun newOtTester(): OtTester<*, M>
  }
  
  abstract inner class AbstractAnimationCommandTransformerTestCases: TypeWildCards.IndexBasedTestCase<String>() {

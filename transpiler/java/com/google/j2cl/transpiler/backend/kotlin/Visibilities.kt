@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 
 /** List containing package prefixes for which J2KT should translate actual visibility. */
@@ -57,3 +58,7 @@ internal val TypeDeclaration.useActualKtVisibility: Boolean
     useActualKtVisibilityForPackage &&
       (!isAutoConverter || hasAutoValueOrBuilderSuperType) &&
       !isVisibilityWarningSuppressed
+
+internal val MemberDescriptor.useActualKtVisibility: Boolean
+  get() =
+    enclosingTypeDescriptor.typeDeclaration.useActualKtVisibility && !isVisibilityWarningSuppressed

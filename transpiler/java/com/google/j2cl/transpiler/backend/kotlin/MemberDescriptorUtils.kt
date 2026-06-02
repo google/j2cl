@@ -36,10 +36,14 @@ internal val MethodDescriptor.isOpen: Boolean
 
 internal val MemberDescriptor.ktVisibility: KtVisibility
   get() =
-    when (visibility) {
-      Visibility.PUBLIC -> KtVisibility.PUBLIC
-      // Map protected to public, to allow access within the same package across different types.
-      Visibility.PROTECTED -> KtVisibility.PUBLIC
-      Visibility.PACKAGE_PRIVATE -> KtVisibility.INTERNAL
-      Visibility.PRIVATE -> KtVisibility.PRIVATE
+    if (useActualKtVisibility) {
+      KtVisibility.from(visibility)
+    } else {
+      when (visibility) {
+        Visibility.PUBLIC -> KtVisibility.PUBLIC
+        // Map protected to public, to allow access within the same package across different types.
+        Visibility.PROTECTED -> KtVisibility.PUBLIC
+        Visibility.PACKAGE_PRIVATE -> KtVisibility.INTERNAL
+        Visibility.PRIVATE -> KtVisibility.PRIVATE
+      }
     }
