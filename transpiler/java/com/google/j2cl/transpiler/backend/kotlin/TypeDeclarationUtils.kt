@@ -119,3 +119,6 @@ internal val TypeDeclaration.ktBridgeQualifiedName: String?
 
 internal val TypeDeclaration.ktCompanionQualifiedName: String?
   get() = getAnnotation("javaemul.internal.annotations.KtNative")?.getStringValue("companionName")
+
+internal val TypeDeclaration.ktMutableQualifiedName: String?
+  get() = getAnnotation("javaemul.internal.annotations.KtNative")?.getStringValue("mutableName")

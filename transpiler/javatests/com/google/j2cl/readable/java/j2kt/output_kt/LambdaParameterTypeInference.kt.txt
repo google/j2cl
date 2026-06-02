@@ -27,7 +27,7 @@ import kotlin.Any
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
-import kotlin.collections.MutableMap
+import kotlin.collections.Map
 import kotlin.jvm.JvmStatic
 
 abstract class LambdaParameterTypeInference {
@@ -65,7 +65,7 @@ abstract class LambdaParameterTypeInference {
   }
   
   @JvmStatic
-  fun testInference(map: MutableMap<String, Int>) {
+  fun testInference(map: Map<String, Int>) {
    map.asMutableMap().compute(
     "",
     BiFunction { key: String, value: Int? ->

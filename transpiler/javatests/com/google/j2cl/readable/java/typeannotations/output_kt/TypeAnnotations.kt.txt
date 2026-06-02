@@ -22,7 +22,7 @@ import javaemul.lang.*
 import java.util.ArrayList
 import kotlin.String
 import kotlin.Suppress
-import kotlin.collections.MutableList
+import kotlin.collections.List
 import kotlin.jvm.JvmStatic
 import typeannotations.ParametricType
 
@@ -35,7 +35,7 @@ open class Parent internal constructor() {
   return c
  }
  
- open fun m(l: MutableList<String>?, c: Parent?): MutableList<Parent>? {
+ open fun m(l: List<String>?, c: Parent?): List<Parent>? {
   return ArrayList<Parent>()
  }
 }
@@ -50,7 +50,7 @@ open class TypeAnnotations {
  companion object {
   @JvmStatic
   fun main() {
-   val list: MutableList<String> = ArrayList<String>()
+   val list: List<String> = ArrayList<String>()
   }
  }
 }

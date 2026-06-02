@@ -61,4 +61,12 @@ public @interface KtNative {
    * a companion object to add the extension functions to.
    */
   String companionName() default "<auto>";
+
+  /**
+   * Sets the custom name of the mutable Kotlin type to use whenever transpiled Java code references
+   * the annotated type in a context where it is determined to be mutable.
+   *
+   * <p>The name must be fully-qualified. If the name is not specified, the original name is used.
+   */
+  String mutableName() default "<auto>";
 }

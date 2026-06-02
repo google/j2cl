@@ -30,7 +30,7 @@ import kotlin.Int
 import kotlin.IntArray
 import kotlin.Suppress
 import kotlin.arrayOf
-import kotlin.collections.MutableList
+import kotlin.collections.List
 import kotlin.intArrayOf
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
@@ -233,15 +233,15 @@ open class Main {
   
   @JvmStatic
   @JsMethod
-  fun parameterizedType(vararg elements: MutableList<Main?>?): Main? {
-   val elements_1: Array<MutableList<Main?>?>? = elements as Array<MutableList<Main?>?>?
+  fun parameterizedType(vararg elements: List<Main?>?): Main? {
+   val elements_1: Array<List<Main?>?>? = elements as Array<List<Main?>?>?
    return elements_1!![0]!!.get(0)
   }
   
   @JvmStatic
   @JsMethod
-  fun <T> parameterizedByT(vararg elements: MutableList<T>?): T {
-   val elements_1: Array<MutableList<T>?>? = elements as Array<MutableList<T>?>?
+  fun <T> parameterizedByT(vararg elements: List<T>?): T {
+   val elements_1: Array<List<T>?>? = elements as Array<List<T>?>?
    return elements_1!![0]!!.get(0)
   }
  }

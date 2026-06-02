@@ -21,18 +21,18 @@ package j2kt
 import javaemul.lang.*
 import kotlin.String
 import kotlin.Suppress
-import kotlin.collections.MutableList
+import kotlin.collections.List
 import kotlin.jvm.JvmStatic
 
 open class NullabilityInferenceProblem13 {
  companion object {
   @JvmStatic
-  fun test(param: MutableList<String>) {
+  fun test(param: List<String>) {
    object : NullableHolder<String>(param) {}
   }
  }
  
  open class NullableHolder<V> {
-  constructor(value: MutableList<V>)
+  constructor(value: List<V>)
  }
 }

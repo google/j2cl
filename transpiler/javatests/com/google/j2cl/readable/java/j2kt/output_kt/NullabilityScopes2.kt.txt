@@ -26,36 +26,36 @@ import java.util.stream.Collector
 import java.util.stream.Stream
 import kotlin.Any
 import kotlin.Suppress
-import kotlin.collections.MutableList
+import kotlin.collections.List
 import kotlin.jvm.JvmStatic
 
 internal open class NullabilityScopes2 {
  internal open class NullMarkedScope {
   companion object {
    @JvmStatic
-   fun <E> toList(): Collector<E, *, MutableList<E>> {
+   fun <E> toList(): Collector<E, *, List<E>> {
     throw RuntimeException()
    }
   }
   
   internal fun interface Recursive<M: Recursive<M>> {
-   fun toList(): MutableList<Recursive<M>>
+   fun toList(): List<Recursive<M>>
   }
  }
  
  internal open class NonNullMarkedScope<T: Recursive<T>> {
-  open fun flatten(recursive: Recursive<T>?): MutableList<Any?>? {
-   return recursive!!.toList().stream().map<MutableList<Any?>?>(
+  open fun flatten(recursive: Recursive<T>?): List<Any?>? {
+   return recursive!!.toList().stream().map<List<Any?>?>(
     Function { arg0: Recursive<T>? ->
      return@Function this.flatten(arg0)
     },
    ).flatMap<Any?>(
-    Function { arg0_1: MutableList<Any?>? ->
+    Function { arg0_1: List<Any?>? ->
      return@Function arg0_1!!.stream()
-    } as Function<in MutableList<Any?>?, out Stream<*>>,
+    } as Function<in List<Any?>?, out Stream<*>>,
    ).collect(
-    NullMarkedScope.toList<Any>() as Collector<in Any?, out Any, MutableList<Any>>,
-   ) as MutableList<Any?>?
+    NullMarkedScope.toList<Any>() as Collector<in Any?, out Any, List<Any>>,
+   ) as List<Any?>?
   }
  }
 }

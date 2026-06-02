@@ -29,7 +29,7 @@ import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
 import kotlin.Suppress
-import kotlin.collections.MutableList
+import kotlin.collections.List
 import kotlin.jvm.JvmStatic
 
 open class StreamCollectWildcardProblem {
@@ -74,7 +74,7 @@ open class StreamCollectWildcardProblem {
    StreamCollectWildcardProblem.accept(
     list.collect(
      Collectors.toList<Foo<*>>(),
-    ) as MutableList<Foo<*>>,
+    ) as List<Foo<*>>,
    )
   }
   
@@ -87,7 +87,7 @@ open class StreamCollectWildcardProblem {
      },
     ).collect(
      Collectors.toList<Foo<*>>(),
-    ) as MutableList<Foo<*>>,
+    ) as List<Foo<*>>,
    )
   }
   
@@ -100,12 +100,12 @@ open class StreamCollectWildcardProblem {
      },
     ).collect(
      Collectors.toList<Foo<*>>(),
-    ) as MutableList<Foo<*>>,
+    ) as List<Foo<*>>,
    )
   }
   
   @JvmStatic
-  fun accept(list: MutableList<Foo<*>>) {
+  fun accept(list: List<Foo<*>>) {
    throw RuntimeException()
   }
   

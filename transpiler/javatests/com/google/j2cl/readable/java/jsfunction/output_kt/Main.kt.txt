@@ -37,7 +37,7 @@ import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
-import kotlin.collections.MutableList
+import kotlin.collections.List
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
@@ -90,7 +90,7 @@ open class Main {
  private fun instanceMethod() {}
  
  open fun testJsFunctionErasureCasts() {
-  val list: MutableList<Function<String?, String?>?> = ArrayList<Function<String?, String?>?>()
+  val list: List<Function<String?, String?>?> = ArrayList<Function<String?, String?>?>()
   Main.acceptsJsFunction(
    list.get(0),
   )
@@ -129,7 +129,7 @@ open class Main {
  
  internal open fun <T> acceptsVarargsJsFunctionWithTypeVariable_pp_jsfunction(x: JsFunctionVarargsGenerics<T>?) {}
  
- internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedType_pp_jsfunction(x: JsFunctionVarargsGenerics<MutableList<T>?>?) {}
+ internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedType_pp_jsfunction(x: JsFunctionVarargsGenerics<List<T>?>?) {}
  
  @JsMethod(name = "acceptsVarargsJsFunctionWithTypeVariableInVarargs")
  internal open fun <T> acceptsVarargsJsFunctionWithTypeVariableInVarargs_pp_jsfunction(vararg x: JsFunctionVarargsGenerics<T>?) {
@@ -137,8 +137,8 @@ open class Main {
  }
  
  @JsMethod(name = "acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs")
- internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs_pp_jsfunction(vararg x: JsFunctionVarargsGenerics<MutableList<T>?>?) {
-  val x_1: Array<JsFunctionVarargsGenerics<MutableList<T>?>?>? = x as Array<JsFunctionVarargsGenerics<MutableList<T>?>?>?
+ internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs_pp_jsfunction(vararg x: JsFunctionVarargsGenerics<List<T>?>?) {
+  val x_1: Array<JsFunctionVarargsGenerics<List<T>?>?>? = x as Array<JsFunctionVarargsGenerics<List<T>?>?>?
  }
  
  @JsMethod(name = "acceptsJsFunctionInVarargs")
@@ -168,7 +168,7 @@ open class Main {
  
  internal open fun testFunctionExpressionTypeReplacement_pp_jsfunction() {
   val f: ParametricJsFunction<String?> = ParametricJsFunction { unused: String? ->
-   val l: MutableList<MutableList<*>?> = ArrayList<MutableList<*>?>() as MutableList<MutableList<*>?>
+   val l: List<List<*>?> = ArrayList<List<*>?>() as List<List<*>?>
    l.asMutableList().add(
     ArrayList<String>(),
    )

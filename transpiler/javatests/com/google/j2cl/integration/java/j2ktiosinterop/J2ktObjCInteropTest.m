@@ -314,8 +314,7 @@
 }
 
 - (void)testCollectionTypes {
-  id<GKOTKotlinMutableIterator> iterator =
-      [J2ktiosinteropCollectionTypesCompanion.shared getIterator];
+  id<GKOTKotlinIterator> iterator = [J2ktiosinteropCollectionTypesCompanion.shared getIterator];
   J2ktiosinteropCollectionTypes_CustomIterator *customIterator =
       [J2ktiosinteropCollectionTypesCompanion.shared getCustomIterator];
 
@@ -324,7 +323,7 @@
   //     [J2ktiosinteropCollectionTypes_CustomIteratorCompanion.shared builder];
   // customIterator = [customIteratorBuilder build];
 
-  id<GKOTKotlinMutableListIterator> listIterator =
+  id<GKOTKotlinListIterator> listIterator =
       [J2ktiosinteropCollectionTypesCompanion.shared getListIterator];
   J2ktiosinteropCollectionTypes_CustomListIterator *customListIterator =
       [J2ktiosinteropCollectionTypesCompanion.shared getCustomListIterator];
@@ -354,7 +353,7 @@
   //     [J2ktiosinteropCollectionTypes_CustomCollectionCompanion.shared builder];
   // customCollection = [customCollectionBuilder build];
 
-  NSMutableArray<id> *list = [J2ktiosinteropCollectionTypesCompanion.shared getList];
+  NSArray<id> *list = [J2ktiosinteropCollectionTypesCompanion.shared getList];
   NSMutableArray<id> *arraylist = [J2ktiosinteropCollectionTypesCompanion.shared getArrayList];
   NSMutableArray<id> *linkedList = [J2ktiosinteropCollectionTypesCompanion.shared getLinkedList];
   NSMutableArray<id> *abstractList =
@@ -366,7 +365,7 @@
   //     [J2ktiosinteropCollectionTypes_CustomListCompanion.shared builder];
   // customList = [customListBuilder build];
 
-  GKOTMutableSet<id> *set = [J2ktiosinteropCollectionTypesCompanion.shared getSet];
+  NSSet<id> *set = [J2ktiosinteropCollectionTypesCompanion.shared getSet];
   GKOTMutableSet<id> *hashSet = [J2ktiosinteropCollectionTypesCompanion.shared getHashSet];
   GKOTMutableSet<id> *abstractSet = [J2ktiosinteropCollectionTypesCompanion.shared getAbstractSet];
   GKOTMutableSet<id> *customSet = [J2ktiosinteropCollectionTypesCompanion.shared getCustomSet];
@@ -376,7 +375,7 @@
   //     [J2ktiosinteropCollectionTypes_CustomSetCompanion.shared builder];
   // customSet = [customSetBuilder build];
 
-  GKOTMutableDictionary<id, id> *map = [J2ktiosinteropCollectionTypesCompanion.shared getMap];
+  NSDictionary<id, id> *map = [J2ktiosinteropCollectionTypesCompanion.shared getMap];
   GKOTMutableDictionary<id, id> *hashMap =
       [J2ktiosinteropCollectionTypesCompanion.shared getHashMap];
   GKOTMutableDictionary<id, id> *linkedHashMap =

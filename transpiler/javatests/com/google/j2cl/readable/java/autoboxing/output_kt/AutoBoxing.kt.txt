@@ -36,7 +36,7 @@ import kotlin.Short
 import kotlin.String
 import kotlin.Suppress
 import kotlin.assert
-import kotlin.collections.MutableIterable
+import kotlin.collections.Iterable
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.let
@@ -142,7 +142,7 @@ open class AutoBoxing {
   return sum
  }
  
- open fun sumWithUnboxing(boxedDoubles: MutableIterable<Double?>?): Double {
+ open fun sumWithUnboxing(boxedDoubles: Iterable<Double?>?): Double {
   var sum: Double = 0.0
   for (d in boxedDoubles!!) {
    val d_1: Double = d!!.toDouble()

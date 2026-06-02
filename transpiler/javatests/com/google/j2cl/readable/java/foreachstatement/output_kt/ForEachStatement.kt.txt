@@ -33,12 +33,13 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.Throwable
 import kotlin.arrayOfNulls
-import kotlin.collections.MutableIterable
+import kotlin.collections.Iterable
+import kotlin.collections.Iterator
 import kotlin.collections.MutableIterator
 import kotlin.jvm.Throws
 
 open class ForEachStatement {
- open fun test(iterable: MutableIterable<Throwable?>?) {
+ open fun test(iterable: Iterable<Throwable?>?) {
   for (t in iterable!!) {
    t!!.toString()
   }
@@ -52,28 +53,28 @@ open class ForEachStatement {
   try {
    throw java.lang.Exception()
   } catch (e: Exception1) {
-   for (o in (e as MutableIterable<Number?>?)!!) {}
+   for (o in (e as Iterable<Number?>?)!!) {}
   } catch (e: Exception2) {
-   for (o in (e as MutableIterable<Number?>?)!!) {}
+   for (o in (e as Iterable<Number?>?)!!) {}
   } catch (e_1: Exception3) {
-   for (o_1 in (e_1 as MutableIterable<Any?>?)!!) {}
+   for (o_1 in (e_1 as Iterable<Any?>?)!!) {}
   } catch (e_1: Exception4) {
-   for (o_1 in (e_1 as MutableIterable<Any?>?)!!) {}
+   for (o_1 in (e_1 as Iterable<Any?>?)!!) {}
   }
   try {
    throw java.lang.Exception()
   } catch (e_2: Exception2) {
-   for (o_2 in (e_2 as MutableIterable<Int?>?)!!) {
+   for (o_2 in (e_2 as Iterable<Int?>?)!!) {
     val o_3: Long = o_2!!.toInt().toLong()
    }
   } catch (e_2: Exception3) {
-   for (o_2 in (e_2 as MutableIterable<Int?>?)!!) {
+   for (o_2 in (e_2 as Iterable<Int?>?)!!) {
     val o_3: Long = o_2!!.toInt().toLong()
    }
   }
  }
  
- private fun <T: MutableIterable<String?>?, U: T, V: MutableIterable<Int?>?> testTypeVariable() {
+ private fun <T: Iterable<String?>?, U: T, V: Iterable<Int?>?> testTypeVariable() {
   val iterable: U? = null
   for (s in iterable!!) {}
   val anotherIterable: IterableReturningTypeVariable<*, *>? = null
@@ -87,14 +88,14 @@ open class ForEachStatement {
   for (i_2 in integerIterable!!) {
    val i_3: Long = i_2!!.toInt().toLong()
   }
-  val charIterable: MutableIterable<Char?>? = null
+  val charIterable: Iterable<Char?>? = null
   for (c in charIterable!!) {
    val c_1: Int = c!!.toChar().code
   }
  }
  
  private fun testSideEffects() {
-  val iterable: MutableIterable<Int?>? = null
+  val iterable: Iterable<Int?>? = null
   val primitiveArray: IntArray? = null
   for (i in iterable!!) {
    var i_1: Int? = i
@@ -120,33 +121,33 @@ open class ForEachStatement {
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception1 internal constructor(): java.lang.Exception(), MutableIterableJvm<Number?> {
-  override fun iterator(): /* @mutable */ MutableIterator<Number?> {
+  override fun iterator(): MutableIterator<Number?> {
    return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception2 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int?> {
-  override fun iterator(): /* @mutable */ MutableIterator<Int?> {
+  override fun iterator(): MutableIterator<Int?> {
    return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception3 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int> {
-  override fun iterator(): /* @mutable */ MutableIterator<Int> {
+  override fun iterator(): MutableIterator<Int> {
    return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class Exception4 internal constructor(): java.lang.Exception(), MutableIterableJvm<Any?> {
-  override fun iterator(): /* @mutable */ MutableIterator<Any?> {
+  override fun iterator(): MutableIterator<Any?> {
    return null!!.asMutableIterator()
   }
  }
  
- abstract class IterableReturningTypeVariable<U, T: MutableIterator<Int?>> internal constructor(): MutableIterableJvm<Int?>
+ abstract class IterableReturningTypeVariable<U, T: Iterator<Int?>> internal constructor(): MutableIterableJvm<Int?>
  
  fun interface StringIterable: MutableIterableJvm<String?> {
   override fun iterator(): StringIterator

@@ -131,18 +131,14 @@ internal data class TypeDescriptorSources(
     val typeDeclaration = declaredTypeDescriptor.typeDeclaration
     val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
     val isStatic = !typeDeclaration.isCapturingEnclosingInstance
-    val renderMutableComment =
-      !asSuperType &&
-        (declaredTypeDescriptor.typeDeclaration.qualifiedBinaryName.startsWith(
-          "java.util.Mutable"
-        ) || declaredTypeDescriptor.hasBaseCollectionLowerBound)
+
     return join(
-      Source.emptyUnless(renderMutableComment) {
-        // TODO b/501031824 - Remove this once we emit readonly Kotlin types
-        join(blockComment(source("@mutable")), source(" "))
-      },
       if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic) {
-        nameSources.qualifiedNameSource(declaredTypeDescriptor, asSuperType = asSuperType)
+        nameSources.qualifiedNameSource(
+          declaredTypeDescriptor,
+          asSuperType = asSuperType,
+          isMutable = declaredTypeDescriptor.hasBaseCollectionLowerBound,
+        )
       } else {
         dotSeparated(
           child.declaredSource(enclosingTypeDescriptor.toNonNullable()),

@@ -28,6 +28,9 @@ public abstract class KtTypeInfo {
   public abstract String getBridgeQualifiedName();
 
   @Nullable
+  public abstract String getMutableQualifiedName();
+
+  @Nullable
   public abstract String getCompanionQualifiedName();
 
   public abstract Builder toBuilder();
@@ -42,6 +45,8 @@ public abstract class KtTypeInfo {
     public abstract Builder setQualifiedName(@Nullable String qualifiedName);
 
     public abstract Builder setBridgeQualifiedName(@Nullable String bridgeQualifiedName);
+
+    public abstract Builder setMutableQualifiedName(@Nullable String mutableQualifiedName);
 
     public abstract Builder setCompanionQualifiedName(@Nullable String companionQualifiedName);
 

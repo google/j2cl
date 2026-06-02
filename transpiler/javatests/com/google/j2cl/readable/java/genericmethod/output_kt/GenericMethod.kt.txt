@@ -29,7 +29,7 @@ import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
-import kotlin.collections.MutableList
+import kotlin.collections.List
 import kotlin.jvm.JvmStatic
 
 open class GenericMethod<T> {
@@ -103,19 +103,19 @@ open class GenericMethod<T> {
   
   @JvmStatic
   fun testErasureCast_wildcard() {
-   val list: MutableList<Container<*>?> = ArrayList<Container<*>?>() as MutableList<Container<*>?>
+   val list: List<Container<*>?> = ArrayList<Container<*>?>() as List<Container<*>?>
    val content: Content? = list.get(0)!!.get_pp_genericmethod()
    GenericMethod.acceptsString(
     content!!.getProp_pp_genericmethod(),
    )
    GenericMethod.acceptsContent(content)
-   val nestedWildcardList: MutableList<SuperContainer<out Container<*>?>?> = ArrayList<SuperContainer<out Container<*>?>?>() as MutableList<SuperContainer<out Container<*>?>?>
+   val nestedWildcardList: List<SuperContainer<out Container<*>?>?> = ArrayList<SuperContainer<out Container<*>?>?>() as List<SuperContainer<out Container<*>?>?>
    val nestedContent: Content? = nestedWildcardList.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(
     nestedContent!!.getProp_pp_genericmethod(),
    )
    GenericMethod.acceptsContent(nestedContent)
-   val deepWildcardList: MutableList<SuperContainer<Container<*>?>?> = ArrayList<SuperContainer<Container<*>?>?>() as MutableList<SuperContainer<Container<*>?>?>
+   val deepWildcardList: List<SuperContainer<Container<*>?>?> = ArrayList<SuperContainer<Container<*>?>?>() as List<SuperContainer<Container<*>?>?>
    val deepContent: Content? = deepWildcardList.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(
     deepContent!!.getProp_pp_genericmethod(),
@@ -125,19 +125,19 @@ open class GenericMethod<T> {
   
   @JvmStatic
   fun <CT: Container<C>?, C: Content?> testErasureCast_typeVariable() {
-   val list: MutableList<Container<C>?> = ArrayList<Container<C>?>()
+   val list: List<Container<C>?> = ArrayList<Container<C>?>()
    val content: Content? = list.get(0)!!.get_pp_genericmethod()
    GenericMethod.acceptsString(
     content!!.getProp_pp_genericmethod(),
    )
    GenericMethod.acceptsContent(content)
-   val nestedTypeVariableList: MutableList<SuperContainer<CT>?> = ArrayList<SuperContainer<CT>?>()
+   val nestedTypeVariableList: List<SuperContainer<CT>?> = ArrayList<SuperContainer<CT>?>()
    val nestedContent: Content? = nestedTypeVariableList.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(
     nestedContent!!.getProp_pp_genericmethod(),
    )
    GenericMethod.acceptsContent(nestedContent)
-   val deepTypeVariableList: MutableList<SuperContainer<Container<C>?>?> = ArrayList<SuperContainer<Container<C>?>?>()
+   val deepTypeVariableList: List<SuperContainer<Container<C>?>?> = ArrayList<SuperContainer<Container<C>?>?>()
    val deepContent: Content? = deepTypeVariableList.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(
     deepContent!!.getProp_pp_genericmethod(),

@@ -35,6 +35,7 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.arrayOfNulls
+import kotlin.collections.List
 import kotlin.collections.MutableList
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
@@ -46,13 +47,13 @@ open class ExplicitNotNullable {
  
  private var f3: String? = null
  
- private var f4: MutableList<String> = ArrayList<String>()
+ private var f4: List<String> = ArrayList<String>()
  
- private var f5: MutableList<String>? = ArrayList<String>()
+ private var f5: List<String>? = ArrayList<String>()
  
- private var f6: MutableList<String?> = ArrayList<String>() as MutableList<String?>
+ private var f6: List<String?> = ArrayList<String>() as List<String?>
  
- private var f7: MutableList<String?>? = null
+ private var f7: List<String?>? = null
  
  private var f8: Array<String> = arrayOf<String>()
  
@@ -104,11 +105,11 @@ open class ExplicitNotNullable {
   this.f13 = Any()
  }
  
- open fun m1(a: String, b: MutableList<Double>): String {
+ open fun m1(a: String, b: List<Double>): String {
   return ""
  }
  
- open fun m2(a: String?, b: MutableList<Double?>): String? {
+ open fun m2(a: String?, b: List<Double?>): String? {
   return null
  }
  
@@ -122,13 +123,13 @@ open class ExplicitNotNullable {
  internal open fun <T: NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_explicitnotnullable() {}
  
  open fun casts() {
-  val listOfString: MutableList<String>? = null as MutableList<String>?
-  val nullableListOfString: MutableList<String>? = null as MutableList<String>?
-  val listOfNullableString: MutableList<String?>? = null as MutableList<String?>?
-  val nullableListOfNullableString: MutableList<String?>? = null as MutableList<String?>?
-  val nonNullListOfString: MutableList<String>? = null as MutableList<String>?
-  val listOfNonNullString: MutableList<String>? = null as MutableList<String>?
-  val nonNullListOfNonNullString: MutableList<String>? = null as MutableList<String>?
+  val listOfString: List<String>? = null as List<String>?
+  val nullableListOfString: List<String>? = null as List<String>?
+  val listOfNullableString: List<String?>? = null as List<String?>?
+  val nullableListOfNullableString: List<String?>? = null as List<String?>?
+  val nonNullListOfString: List<String>? = null as List<String>?
+  val listOfNonNullString: List<String>? = null as List<String>?
+  val nonNullListOfNonNullString: List<String>? = null as List<String>?
  }
  
  @JvmField
@@ -257,55 +258,55 @@ open class ExplicitNotNullable {
   }
   
   @JvmStatic
-  internal fun testListOfWildcard_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
+  internal fun testListOfWildcard_pp_nullability_explicitnotnullable(l: List<*>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardExtendsDefaultNullabilityObject_pp_nullability_explicitnotnullable(l: MutableList<out Any>) {}
+  internal fun testListOfWildcardExtendsDefaultNullabilityObject_pp_nullability_explicitnotnullable(l: List<out Any>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardExtendsNullableObject_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
+  internal fun testListOfWildcardExtendsNullableObject_pp_nullability_explicitnotnullable(l: List<*>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardExtendsNonNullObject_pp_nullability_explicitnotnullable(l: MutableList<out Any>) {}
+  internal fun testListOfWildcardExtendsNonNullObject_pp_nullability_explicitnotnullable(l: List<out Any>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardExtendsDefaultNullabilityString_pp_nullability_explicitnotnullable(l: MutableList<out String>) {}
+  internal fun testListOfWildcardExtendsDefaultNullabilityString_pp_nullability_explicitnotnullable(l: List<out String>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardExtendsNullableString_pp_nullability_explicitnotnullable(l: MutableList<out String?>) {}
+  internal fun testListOfWildcardExtendsNullableString_pp_nullability_explicitnotnullable(l: List<out String?>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardExtendsNonNullString_pp_nullability_explicitnotnullable(l: MutableList<out String>) {}
+  internal fun testListOfWildcardExtendsNonNullString_pp_nullability_explicitnotnullable(l: List<out String>) {}
   
   @JvmStatic
-  internal fun <T: Any> testListOfWildcardExtendsDefaultNullabilityVariable_pp_nullability_explicitnotnullable(l: MutableList<out T>) {}
+  internal fun <T: Any> testListOfWildcardExtendsDefaultNullabilityVariable_pp_nullability_explicitnotnullable(l: List<out T>) {}
   
   @JvmStatic
-  internal fun <T: Any> testListOfWildcardExtendsNullableVariable_pp_nullability_explicitnotnullable(l: MutableList<out T?>) {}
+  internal fun <T: Any> testListOfWildcardExtendsNullableVariable_pp_nullability_explicitnotnullable(l: List<out T?>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardSuperDefaultNullabilityObject_pp_nullability_explicitnotnullable(l: /* @mutable */ MutableList<in Any>) {}
+  internal fun testListOfWildcardSuperDefaultNullabilityObject_pp_nullability_explicitnotnullable(l: MutableList<in Any>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardSuperNullableObject_pp_nullability_explicitnotnullable(l: /* @mutable */ MutableList<in Any?>) {}
+  internal fun testListOfWildcardSuperNullableObject_pp_nullability_explicitnotnullable(l: MutableList<in Any?>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardSuperNonNullObject_pp_nullability_explicitnotnullable(l: /* @mutable */ MutableList<in Any>) {}
+  internal fun testListOfWildcardSuperNonNullObject_pp_nullability_explicitnotnullable(l: MutableList<in Any>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardSuperDefaultNullabilityString_pp_nullability_explicitnotnullable(l: /* @mutable */ MutableList<in String>) {}
+  internal fun testListOfWildcardSuperDefaultNullabilityString_pp_nullability_explicitnotnullable(l: MutableList<in String>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardSuperNullableString_pp_nullability_explicitnotnullable(l: /* @mutable */ MutableList<in String?>) {}
+  internal fun testListOfWildcardSuperNullableString_pp_nullability_explicitnotnullable(l: MutableList<in String?>) {}
   
   @JvmStatic
-  internal fun testListOfWildcardSuperNonNullString_pp_nullability_explicitnotnullable(l: /* @mutable */ MutableList<in String>) {}
+  internal fun testListOfWildcardSuperNonNullString_pp_nullability_explicitnotnullable(l: MutableList<in String>) {}
   
   @JvmStatic
-  internal fun <T: Any> testListOfWildcardSuperDefaultNullabilityVariable_pp_nullability_explicitnotnullable(l: /* @mutable */ MutableList<in T>) {}
+  internal fun <T: Any> testListOfWildcardSuperDefaultNullabilityVariable_pp_nullability_explicitnotnullable(l: MutableList<in T>) {}
   
   @JvmStatic
-  internal fun <T: Any> testListOfWildcardSuperNullableVariable_pp_nullability_explicitnotnullable(l: /* @mutable */ MutableList<in T?>) {}
+  internal fun <T: Any> testListOfWildcardSuperNullableVariable_pp_nullability_explicitnotnullable(l: MutableList<in T?>) {}
   
   @JvmStatic
   internal fun testLambdaNullability_pp_nullability_explicitnotnullable() {

@@ -24,7 +24,7 @@ import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
 import kotlin.Suppress
-import kotlin.collections.MutableIterable
+import kotlin.collections.Iterable
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
@@ -74,19 +74,19 @@ open class DefinitelyNotNull {
  open class ImmutableList<E: Any> {
   companion object {
    @JvmStatic
-   fun <E: Any> copyOf(iterable: MutableIterable<E>): ImmutableList<E> {
+   fun <E: Any> copyOf(iterable: Iterable<E>): ImmutableList<E> {
     throw RuntimeException()
    }
    
    @JvmStatic
-   fun <E> copyOfNullableWithInvalidBounds(iterable: MutableIterable<E>): ImmutableList<E & Any> {
+   fun <E> copyOfNullableWithInvalidBounds(iterable: Iterable<E>): ImmutableList<E & Any> {
     return ImmutableList.copyOf<E & Any>(
-     iterable as MutableIterable<E & Any>,
+     iterable as Iterable<E & Any>,
     )
    }
    
    @JvmStatic
-   fun <E> copyOfNullableWithCorrectBounds(iterable: MutableIterable<E & Any>): ImmutableList<E & Any> {
+   fun <E> copyOfNullableWithCorrectBounds(iterable: Iterable<E & Any>): ImmutableList<E & Any> {
     return ImmutableList.copyOf<E & Any>(iterable)
    }
   }

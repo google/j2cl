@@ -31,20 +31,20 @@ import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
-import kotlin.collections.MutableList
+import kotlin.collections.List
 
 open class Main {
  private var f1: String = "Hello"
  
  private var f2: String? = null
  
- private var f4: MutableList<String> = ArrayList<String>()
+ private var f4: List<String> = ArrayList<String>()
  
- private var f5: MutableList<String>? = ArrayList<String>()
+ private var f5: List<String>? = ArrayList<String>()
  
- private var f6: MutableList<String?> = ArrayList<String>() as MutableList<String?>
+ private var f6: List<String?> = ArrayList<String>() as List<String?>
  
- private var f7: MutableList<String?>? = null
+ private var f7: List<String?>? = null
  
  private var f8: Array<String> = arrayOf<String>()
  
@@ -52,16 +52,16 @@ open class Main {
  
  private var f10: Array<String>? = arrayOf<String>()
  
- private var f12: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
+ private var f12: List<String?>? = ArrayList<String>() as List<String?>?
  
  @JsConstructor
  constructor(a: String)
  
- open fun m1(a: String, b: MutableList<Double>, c: String?): String {
+ open fun m1(a: String, b: List<Double>, c: String?): String {
   return ""
  }
  
- open fun m2(a: String?, b: MutableList<Double>): String? {
+ open fun m2(a: String?, b: List<Double>): String? {
   return ""
  }
  

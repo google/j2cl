@@ -35,7 +35,7 @@ import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Throwable
-import kotlin.collections.MutableIterable
+import kotlin.collections.Iterable
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.let
@@ -287,8 +287,8 @@ open class Lambdas {
   }
   
   @JvmStatic
-  fun <T> testIterable(iterable: MutableIterable<T>?) {
-   val lambda: MutableIterable<T> = MutableIterableJvm {
+  fun <T> testIterable(iterable: Iterable<T>?) {
+   val lambda: Iterable<T> = MutableIterableJvm {
     return@MutableIterableJvm iterable!!.iterator().asMutableIterator()
    }
   }

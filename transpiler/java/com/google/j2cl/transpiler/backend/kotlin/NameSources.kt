@@ -122,11 +122,16 @@ private constructor(
    * @param typeDescriptor the type descriptor to get the source for
    * @param asSuperType whether to use bridge name for the super-type
    */
-  fun qualifiedNameSource(typeDescriptor: TypeDescriptor, asSuperType: Boolean = false): Source =
+  fun qualifiedNameSource(
+    typeDescriptor: TypeDescriptor,
+    asSuperType: Boolean = false,
+    isMutable: Boolean = false,
+  ): Source =
     if (typeDescriptor is DeclaredTypeDescriptor) {
       val typeDeclaration = typeDescriptor.typeDeclaration
       val nativeQualifiedName = typeDeclaration.ktNativeQualifiedName
       val bridgeQualifiedName = typeDeclaration.ktBridgeQualifiedName
+      val mutableQualifiedName = typeDeclaration.ktMutableQualifiedName
       when {
         asSuperType ->
           // Use fully-qualified bridge name if present
@@ -135,6 +140,9 @@ private constructor(
         typeDeclaration.isLocal ->
           // Use simple name for local types
           identifierSource(typeDescriptor.typeDeclaration.ktSimpleName())
+        isMutable && mutableQualifiedName != null ->
+          // Use fully-qualified mutable name if present
+          topLevelQualifiedNameSource(mutableQualifiedName)
         nativeQualifiedName != null ->
           // Use fully-qualified native name if present
           topLevelQualifiedNameSource(nativeQualifiedName)

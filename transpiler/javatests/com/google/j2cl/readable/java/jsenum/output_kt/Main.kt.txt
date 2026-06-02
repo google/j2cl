@@ -35,7 +35,7 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.arrayOfNulls
-import kotlin.collections.MutableList
+import kotlin.collections.List
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.run
@@ -258,7 +258,7 @@ open class Main {
    nestedArr[0] = arrayOf<IntJsEnum?>(IntJsEnum.TWENTY)
    val arrayWithNull: Array<IntJsEnum?> = arrayOf<IntJsEnum?>(null)
    arrayWithNull[0] = null
-   val list: MutableList<IntJsEnum?> = ArrayList<IntJsEnum>() as MutableList<IntJsEnum?>
+   val list: List<IntJsEnum?> = ArrayList<IntJsEnum>() as List<IntJsEnum?>
    obj = list.toArray()
    Main.nonNativeJsEnumVarargs(
     IntJsEnum.MINUSONE,

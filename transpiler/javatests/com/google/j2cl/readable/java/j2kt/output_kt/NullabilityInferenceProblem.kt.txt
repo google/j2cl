@@ -27,13 +27,13 @@ import kotlin.Any
 import kotlin.Comparator
 import kotlin.String
 import kotlin.Suppress
-import kotlin.collections.MutableIterable
+import kotlin.collections.Iterable
 import kotlin.jvm.JvmStatic
 
 internal open class NullabilityInferenceProblem {
  companion object {
   @JvmStatic
-  private fun <E: Any> sortedCopyOf(comparator: Comparator<in E>, elements: MutableIterable<E>): ImmutableList<E> {
+  private fun <E: Any> sortedCopyOf(comparator: Comparator<in E>, elements: Iterable<E>): ImmutableList<E> {
    throw RuntimeException()
   }
   
@@ -43,7 +43,7 @@ internal open class NullabilityInferenceProblem {
   }
   
   @JvmStatic
-  private fun testImplicitTypeArguments(users: MutableIterable<User>): ImmutableList<User> {
+  private fun testImplicitTypeArguments(users: Iterable<User>): ImmutableList<User> {
    return NullabilityInferenceProblem.sortedCopyOf<User>(
     java.util.Comparator.comparing<User, String>(
      Function { user: User ->
@@ -55,7 +55,7 @@ internal open class NullabilityInferenceProblem {
   }
   
   @JvmStatic
-  private fun testExplicitTypeArguments(users: MutableIterable<User>): ImmutableList<User> {
+  private fun testExplicitTypeArguments(users: Iterable<User>): ImmutableList<User> {
    return NullabilityInferenceProblem.sortedCopyOf<User>(
     java.util.Comparator.comparing<User, String>(
      Function { user: User ->
@@ -67,7 +67,7 @@ internal open class NullabilityInferenceProblem {
   }
   
   @JvmStatic
-  private fun testCheckNotNull(users: MutableIterable<User>): ImmutableList<User> {
+  private fun testCheckNotNull(users: Iterable<User>): ImmutableList<User> {
    return NullabilityInferenceProblem.sortedCopyOf<User>(
     java.util.Comparator.comparing<User, String>(
      Function { user: User ->
