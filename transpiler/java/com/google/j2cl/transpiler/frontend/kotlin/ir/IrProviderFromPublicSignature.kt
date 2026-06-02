@@ -13,7 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-@file:OptIn(UnsafeDuringIrConstructionAPI::class)
+@file:OptIn(
+  UnsafeDuringIrConstructionAPI::class,
+  org.jetbrains.kotlin.backend.common.extensions.FirIncompatiblePluginAPI::class,
+)
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
@@ -87,7 +90,7 @@ class IrProviderFromPublicSignature(val pluginContext: IrPluginContext) : IrProv
   private fun IrSymbol.resolveOwner(): IrDeclaration =
     when (this) {
       is IrClassSymbol -> pluginContext.referenceClass(classId)!!.owner
-      is IrTypeAliasSymbol -> pluginContext.referenceTypeAlias(classId)!!.owner
+      is IrTypeAliasSymbol -> pluginContext.referenceTypeAlias(classId.asSingleFqName())!!.owner
       is IrConstructorSymbol ->
         pluginContext
           .referenceConstructors(enclosingClassId)

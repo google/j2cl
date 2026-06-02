@@ -41,6 +41,8 @@ import org.jetbrains.kotlin.ir.util.SymbolTable
 import org.jetbrains.kotlin.ir.util.classId
 import org.jetbrains.kotlin.ir.util.fileOrNull
 import org.jetbrains.kotlin.name.CallableId
+import org.jetbrains.kotlin.name.ClassId
+import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.types.expressions.OperatorConventions
 
 // TODO(b/374966022): Remove this file once we don't rely on IR serialization anymore for inlining.
@@ -61,7 +63,8 @@ fun SymbolTable.populate(irBuiltIns: IrBuiltIns) {
     fun getNumericConversionsFunctionSymbols(): List<IrSymbol> {
       val symbols = arrayListOf<IrSymbol>()
       for (type in PrimitiveType.NUMBER_TYPES) {
-        val typeClass = symbolFinder.findClass(type.typeName)!!
+        val typeClass =
+          symbolFinder.findClass(ClassId(StandardClassIds.BASE_KOTLIN_PACKAGE, type.typeName))!!
         for (name in OperatorConventions.NUMBER_CONVERSIONS) {
           symbolFinder
             .findFunctions(CallableId(typeClass.owner.classId!!, name))

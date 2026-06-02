@@ -127,7 +127,9 @@ internal class AnnotationLowering(private val context: JvmBackendContext) :
         }
       }
       this is IrSimpleType && isArray() && arguments.single().typeOrNull != null ->
-        context.symbols.array.typeWith(arguments.single().typeOrFail.kClassToJClassIfNeeded())
+        context.irBuiltIns.arrayClass.typeWith(
+          arguments.single().typeOrFail.kClassToJClassIfNeeded()
+        )
       else -> this
     }
 }

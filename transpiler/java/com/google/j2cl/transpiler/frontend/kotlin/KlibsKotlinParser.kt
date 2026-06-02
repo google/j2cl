@@ -14,6 +14,7 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
+@file:OptIn(org.jetbrains.kotlin.K1Deprecation::class)
 
 package com.google.j2cl.transpiler.frontend.kotlin
 

@@ -143,10 +143,9 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
           }
           irClass.declarations.add(
             stub.apply {
-              parameters =
-                parameters.map {
-                  it.copyWithCustomTypeSubstitution(this) { context.irBuiltIns.anyNType }
-                }
+              parameters = parameters.map {
+                it.copyWithCustomTypeSubstitution(this) { context.irBuiltIns.anyNType }
+              }
             }
           )
         }
@@ -238,9 +237,9 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
   private fun liftStubMethodReturnType(function: IrSimpleFunction): IrType {
     val klass =
       when (function.name.asString()) {
-        "iterator" -> context.symbols.iterator
-        "listIterator" -> context.symbols.listIterator
-        "subList" -> context.symbols.list
+        "iterator" -> context.irBuiltIns.iteratorClass
+        "listIterator" -> context.irBuiltIns.listIteratorClass
+        "subList" -> context.irBuiltIns.listClass
         else -> return function.returnType
       }
     return klass.typeWithArguments((function.returnType as IrSimpleType).arguments)

@@ -84,16 +84,16 @@ class CollectionStubComputer(val context: JvmBackendContext) {
   }
 
   private val preComputedStubs: Collection<StubsForCollectionClass> by lazy {
-    with(context.symbols) {
+    with(context.irBuiltIns) {
       listOf(
-        LazyStubsForCollectionClass(collection, mutableCollection),
-        LazyStubsForCollectionClass(set, mutableSet),
-        LazyStubsForCollectionClass(list, mutableList),
-        LazyStubsForCollectionClass(map, mutableMap),
-        LazyStubsForCollectionClass(mapEntry, mutableMapEntry),
-        LazyStubsForCollectionClass(iterable, mutableIterable),
-        LazyStubsForCollectionClass(iterator, mutableIterator),
-        LazyStubsForCollectionClass(listIterator, mutableListIterator),
+        LazyStubsForCollectionClass(collectionClass, mutableCollectionClass),
+        LazyStubsForCollectionClass(setClass, mutableSetClass),
+        LazyStubsForCollectionClass(listClass, mutableListClass),
+        LazyStubsForCollectionClass(mapClass, mutableMapClass),
+        LazyStubsForCollectionClass(mapEntryClass, mutableMapEntryClass),
+        LazyStubsForCollectionClass(iterableClass, mutableIterableClass),
+        LazyStubsForCollectionClass(iteratorClass, mutableIteratorClass),
+        LazyStubsForCollectionClass(listIteratorClass, mutableListIteratorClass),
       )
     }
   }
@@ -105,11 +105,10 @@ class CollectionStubComputer(val context: JvmBackendContext) {
 
   private fun computeStubsForCollectionClasses(irClass: IrClass): List<StubsForCollectionClass> {
     if (irClass.isFromJava()) return emptyList()
-    val stubs =
-      preComputedStubs.filter {
-        irClass.symbol.isStrictSubtypeOfClass(it.readOnlyClass) &&
-          !irClass.symbol.isSubtypeOfClass(it.mutableClass)
-      }
+    val stubs = preComputedStubs.filter {
+      irClass.symbol.isStrictSubtypeOfClass(it.readOnlyClass) &&
+        !irClass.symbol.isSubtypeOfClass(it.mutableClass)
+    }
     return stubs.filter {
       stubs.none { other ->
         it.readOnlyClass != other.readOnlyClass &&

@@ -157,11 +157,11 @@ private class LoopTransformer(
 ) : IrElementTransformerVoidWithContext() {
 
   private val iterableIteratorFunction: IrSimpleFunction by lazy {
-    context.symbols.iterable.getSimpleFunction("iterator")!!.owner
+    context.irBuiltIns.iterableClass.getSimpleFunction("iterator")!!.owner
   }
 
   private val iteratorHasNextFunction: IrSimpleFunction by lazy {
-    context.symbols.iterator.getSimpleFunction("hasNext")!!.owner
+    context.irBuiltIns.iteratorClass.getSimpleFunction("hasNext")!!.owner
   }
 
   override fun visitBlock(expression: IrBlock): IrExpression {

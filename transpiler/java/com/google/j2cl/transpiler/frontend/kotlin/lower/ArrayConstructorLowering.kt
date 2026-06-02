@@ -264,7 +264,7 @@ private class ArrayConstructorTransformer(
       return when {
         !irConstructor.hasShape(regularParameters = 2) -> null
         clazz == context.irBuiltIns.arrayClass ->
-          context.symbols
+          context.irBuiltIns
             .arrayOfNulls // Array<T> has no unary constructor: it can only exist for Array<T?>
         context.irBuiltIns.primitiveArraysToPrimitiveTypes.contains(clazz) ->
           clazz.constructors.single {

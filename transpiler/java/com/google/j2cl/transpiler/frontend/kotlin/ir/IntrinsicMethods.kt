@@ -46,6 +46,7 @@ import org.jetbrains.kotlin.ir.util.isEnumClass
 import org.jetbrains.kotlin.ir.util.isFileClass
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
+import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
@@ -130,24 +131,29 @@ class IntrinsicMethods(private val pluginContext: IrPluginContext) {
   fun isDataClassArrayMemberHashCode(irCall: IrCall): Boolean =
     irCall.symbol.toKey() == irBuiltIns.dataClassArrayMemberHashCodeSymbol.toKey()
 
-  // TODO(b/448872338): replace with irBuiltIns.extensionToString when bug is fixed.
+  // TODO(b/448872338): replace with extensionToString from
+  // `org.jetbrains.kotlin.backend.common.ir.Symbols`
   val extensionToStringSymbol: IrSimpleFunctionSymbol by lazy {
     irBuiltIns.symbolFinder
-      .topLevelFunctions(
-        StandardClassIds.BASE_KOTLIN_PACKAGE,
-        OperatorNameConventions.TO_STRING.asString(),
+      .findFunctions(
+        CallableId(StandardClassIds.BASE_KOTLIN_PACKAGE, OperatorNameConventions.TO_STRING)
       )
       .single { !it.owner.isExpect }
   }
 
-  // TODO(b/448872338): replace with irBuiltIns.extensionStringPlus when bug is fixed.
+  // TODO(b/448872338): replace with extensionStringPlus from
+  // `org.jetbrains.kotlin.backend.common.ir.Symbols`
   val extensionStringPlus: IrSimpleFunctionSymbol by lazy {
     irBuiltIns.symbolFinder
-      .topLevelFunctions(
-        StandardClassIds.BASE_KOTLIN_PACKAGE,
-        OperatorNameConventions.PLUS.asString(),
-      )
+      .findFunctions(CallableId(StandardClassIds.BASE_KOTLIN_PACKAGE, OperatorNameConventions.PLUS))
       .single { !it.owner.isExpect }
+  }
+  // TODO(b/448872338): replace with memberStringPlus from
+  // `org.jetbrains.kotlin.backend.common.ir.Symbols`
+  val memberStringPlusSymbol: IrSimpleFunctionSymbol by lazy {
+    irBuiltIns.symbolFinder
+      .findFunctions(CallableId(StandardClassIds.String, OperatorNameConventions.PLUS))
+      .single()
   }
 
   fun isAnyToString(irCall: IrCall) = irCall.symbol.toKey() == extensionToStringSymbol.toKey()
@@ -206,7 +212,7 @@ class IntrinsicMethods(private val pluginContext: IrPluginContext) {
   @OptIn(InternalSymbolFinderAPI::class)
   fun getRangeToConstructor(irCall: IrCall): IrConstructorSymbol {
     val fqName = irCall.type.classFqName!!
-    val classSymbol = irBuiltIns.symbolFinder.findClass(fqName.shortName(), fqName.parent())!!
+    val classSymbol = irBuiltIns.symbolFinder.findClass(ClassId.topLevel(fqName))!!
     return classSymbol.constructors.single { it.owner.hasShape(regularParameters = 2) }
   }
 
@@ -229,20 +235,28 @@ class IntrinsicMethods(private val pluginContext: IrPluginContext) {
     }
 
   private val coroutineContextGetterSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder.findTopLevelPropertyGetter(
-      StandardClassIds.BASE_COROUTINES_PACKAGE,
-      "coroutineContext",
-    )
+    irBuiltIns.symbolFinder
+      .findProperties(
+        CallableId(StandardClassIds.BASE_COROUTINES_PACKAGE, Name.identifier("coroutineContext"))
+      )
+      .single()
+      .owner
+      .getter!!
+      .symbol
   }
 
   fun isCoroutineContextGetterCall(symbol: IrFunctionSymbol): Boolean =
     symbol.toKey() == coroutineContextGetterSymbol.toKey()
 
   val getContinuationSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder.topLevelFunction(
-      StandardClassIds.BASE_COROUTINES_INTRINSICS_PACKAGE,
-      "getContinuation",
-    )
+    irBuiltIns.symbolFinder
+      .findFunctions(
+        CallableId(
+          StandardClassIds.BASE_COROUTINES_INTRINSICS_PACKAGE,
+          Name.identifier("getContinuation"),
+        )
+      )
+      .single()
   }
 
   private val prefixOperatorByIntrinsicSymbolKey =
@@ -279,7 +293,7 @@ class IntrinsicMethods(private val pluginContext: IrPluginContext) {
         ) +
         listOf(
           extensionStringPlus.toKey() to BinaryOperator.PLUS,
-          irBuiltIns.memberStringPlus.toKey() to BinaryOperator.PLUS,
+          memberStringPlusSymbol.toKey() to BinaryOperator.PLUS,
         ))
       .toMap()
 
@@ -376,10 +390,9 @@ class IntrinsicMethods(private val pluginContext: IrPluginContext) {
     leftSide: List<IrClassifierSymbol>,
     rightSide: List<IrClassifierSymbol>,
     methodName: String,
-  ): List<Key> =
-    leftSide.flatMap { left ->
-      rightSide.map { right -> Key(left.fqnOrFail, methodName, listOf(right.fqnOrFail)) }
-    }
+  ): List<Key> = leftSide.flatMap { left ->
+    rightSide.map { right -> Key(left.fqnOrFail, methodName, listOf(right.fqnOrFail)) }
+  }
 
   /**
    * A unique key for an `IrFunction` to be used for identification. The key is composed of the

@@ -14,6 +14,7 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
+@file:OptIn(org.jetbrains.kotlin.K1Deprecation::class)
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
@@ -133,7 +134,7 @@ class KotlinParser(private val problems: Problems) {
 
     val module = compilerConfiguration.get(MODULES)!![0]
     val messageCollector = compilerConfiguration.get(MESSAGE_COLLECTOR_KEY)!!
-    val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter(messageCollector)
+    val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
     val sources = collectSources(compilerConfiguration, environment.project, messageCollector)
     problems.abortIfCancelled()
 
