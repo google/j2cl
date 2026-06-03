@@ -17,9 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.j2cl.transpiler.ast.PrimitiveTypes.INT;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor;
-import static com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithUpperBound;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
@@ -58,30 +56,16 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
   private final DeclaredTypeDescriptor map = getTypeDescriptor("java.util.Map");
   private final DeclaredTypeDescriptor list = getTypeDescriptor("java.util.List");
 
-  private final DeclaredTypeDescriptor readonlyCollection =
-      getTypeDescriptor("java.util.ReadonlyCollection");
-  private final DeclaredTypeDescriptor readonlyMap = getTypeDescriptor("java.util.ReadonlyMap");
-
   private final TypeVariable collectionElement = typeParameter(collection, 0);
   private final TypeVariable listElement = typeParameter(list, 0);
   private final TypeVariable mapKey = typeParameter(map, 0);
   private final TypeVariable mapValue = typeParameter(map, 1);
 
-  private final TypeDescriptor readonlyCollectionOfElements =
-      readonlyCollection.withTypeArguments(ImmutableList.of(collectionElement)).toNonNullable();
-
-  private final TypeDescriptor readonlyMapOfWildcardKeysAndValues =
-      readonlyMap
-          .withTypeArguments(ImmutableList.of(createWildcardWithUpperBound(mapKey), mapValue))
-          .toNonNullable();
+  private final TypeDescriptor collectionOfElements =
+      collection.withTypeArguments(ImmutableList.of(collectionElement)).toNonNullable();
 
   private final ImmutableList<MethodMapping> methodMappings =
       ImmutableList.of(
-          methodMapping(
-              collection,
-              "addAll",
-              // parameters
-              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
           methodMapping(
               collection,
               "contains",
@@ -96,17 +80,17 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
               collection,
               "containsAll",
               // parameters
-              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
+              parameterSignatureMapping(collection, collectionOfElements)),
           methodMapping(
               collection,
               "removeAll",
               // parameters
-              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
+              parameterSignatureMapping(collection, collectionOfElements)),
           methodMapping(
               collection,
               "retainAll",
               // parameters
-              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
+              parameterSignatureMapping(collection, collectionOfElements)),
           methodMapping(
               map,
               "containsKey",
@@ -131,11 +115,6 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
               parameterSignatureMapping(object, mapValue)),
           methodMapping(
               map,
-              "putAll",
-              // parameters
-              parameterSignatureMapping(map, readonlyMapOfWildcardKeysAndValues)),
-          methodMapping(
-              map,
               "remove",
               // parameters
               parameterSignatureMapping(object, mapKey)),
@@ -145,12 +124,6 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
               // parameters
               parameterSignatureMapping(object, mapKey),
               parameterSignatureMapping(object, mapValue)),
-          methodMapping(
-              list,
-              "addAll",
-              // parameters
-              parameterSignatureMapping(INT, INT),
-              parameterSignatureMapping(collection, readonlyCollectionOfElements)),
           methodMapping(
               list,
               "indexOf",

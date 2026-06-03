@@ -76,7 +76,7 @@ open class Collections {
    collection.java_containsAll(
     Collections.genericCollection<T>(),
    )
-   collection.asMutableCollection().java_addAll(
+   collection.asMutableCollection().addAll(
     Collections.genericCollection<T>(),
    )
    collection.asMutableCollection().java_removeAll(
@@ -113,7 +113,7 @@ open class Collections {
    collection.java_containsAll(
     Collections.collectionOfString(),
    )
-   collection.asMutableCollection().java_addAll(
+   collection.asMutableCollection().addAll(
     Collections.collectionOfString(),
    )
    collection.asMutableCollection().java_removeAll(
@@ -150,7 +150,7 @@ open class Collections {
    collection.java_containsAll(
     Collections.collectionOfString(),
    )
-   collection.java_addAll(
+   collection.addAll(
     Collections.collectionOfString(),
    )
    collection.java_removeAll(
@@ -178,7 +178,7 @@ open class Collections {
   
   @JvmStatic
   fun <T> testList_generic(list: List<T>) {
-   list.asMutableList().java_addAll(
+   list.asMutableList().addAll(
     0,
     Collections.genericCollection<T>(),
    )
@@ -198,7 +198,7 @@ open class Collections {
   
   @JvmStatic
   fun testList_parameterized(list: List<String>) {
-   list.asMutableList().java_addAll(
+   list.asMutableList().addAll(
     0,
     Collections.collectionOfString(),
    )
@@ -218,7 +218,7 @@ open class Collections {
   
   @JvmStatic
   fun testList_specialized(list: ListOfString) {
-   list.java_addAll(
+   list.addAll(
     0,
     Collections.collectionOfString(),
    )
@@ -251,7 +251,7 @@ open class Collections {
    map.java_containsValue(
     Collections.generic<V>(),
    )
-   map.asMutableMap().java_putAll(
+   map.asMutableMap().putAll(
     Collections.genericMap<K, V>(),
    )
    map.asMutableMap().java_remove(
@@ -298,7 +298,7 @@ open class Collections {
    map.java_containsValue(
     Collections.string(),
    )
-   map.asMutableMap().java_putAll(
+   map.asMutableMap().putAll(
     Collections.mapOfString(),
    )
    map.asMutableMap().java_remove(
@@ -345,7 +345,7 @@ open class Collections {
    map.java_containsValue(
     Collections.string(),
    )
-   map.java_putAll(
+   map.putAll(
     Collections.mapOfString(),
    )
    map.java_remove(
@@ -384,7 +384,7 @@ open class Collections {
    listIterator.asMutableListIterator().set("foo")
    listIterator.asMutableListIterator().remove()
    collection.asMutableCollection().add("foo")
-   collection.asMutableCollection().java_addAll(list)
+   collection.asMutableCollection().addAll(list)
    collection.asMutableCollection().java_remove("foo")
    collection.asMutableCollection().java_removeAll(list)
    collection.asMutableCollection().removeIf(
@@ -395,7 +395,7 @@ open class Collections {
    collection.asMutableCollection().java_retainAll(list)
    collection.asMutableCollection().clear()
    list.asMutableList().add(0, "foo")
-   list.asMutableList().java_addAll(list)
+   list.asMutableList().addAll(list)
    list.asMutableList().set(0, "foo")
    list.asMutableList().sort(null)
    list.asMutableList().removeAt(0)
@@ -413,7 +413,7 @@ open class Collections {
    genericList2.asMutableList().removeAt(0)
    genericList2.asMutableList().sort(null)
    set.asMutableSet().add("foo")
-   set.asMutableSet().java_addAll(list)
+   set.asMutableSet().addAll(list)
    set.asMutableSet().java_remove("foo")
    set.asMutableSet().java_removeAll(list)
    set.asMutableSet().removeIf(
@@ -424,7 +424,7 @@ open class Collections {
    set.asMutableSet().java_retainAll(list)
    set.asMutableSet().clear()
    map.asMutableMap().put("foo", "bar")
-   map.asMutableMap().java_putAll(map)
+   map.asMutableMap().putAll(map)
    map.asMutableMap().putIfAbsent("foo", "bar")
    map.asMutableMap().java_remove("foo")
    map.asMutableMap().replace("foo", "bar")
@@ -465,7 +465,7 @@ open class Collections {
   @JvmStatic
   fun testMutability_subtypes(collection: CustomCollection<String>, list: CustomList<String>, map: CustomMap<String, String>) {
    collection.add("foo")
-   collection.java_addAll(list)
+   collection.addAll(list)
    collection.java_remove("foo")
    collection.java_removeAll(list)
    collection.removeIf(
@@ -476,7 +476,7 @@ open class Collections {
    collection.java_retainAll(list)
    collection.clear()
    list.add(0, "foo")
-   list.java_addAll(list)
+   list.addAll(list)
    list.set(0, "foo")
    list.sort(null)
    list.removeAt(0)
@@ -486,7 +486,7 @@ open class Collections {
     },
    )
    map.put("foo", "bar")
-   map.java_putAll(map)
+   map.putAll(map)
    map.putIfAbsent("foo", "bar")
    map.java_remove("foo")
    map.replace("foo", "bar")
@@ -737,17 +737,14 @@ open class Collections {
    )
   }
   
-  override fun addAll(c: Collection<T>): Boolean {
-   val c_1: Collection<out T> = c as Collection<out T>
-   var c_2: Collection<out T> = c_1
-   c_2 = Collections.convertCollection(c_2)
-   return super<AbstractCollection>.addAll(
-    c_2 as Collection<T>,
-   )
+  override fun addAll(c: Collection<out T>): Boolean {
+   var c_1: Collection<out T> = c
+   c_1 = Collections.convertCollection(c_1)
+   return super<AbstractCollection>.addAll(c_1)
   }
   
   override fun containsAll(c: Collection<T>): Boolean {
-   val c_1: Collection<*> = c as Collection<*>
+   val c_1: Collection<*> = c
    var c_2: Collection<*> = c_1
    c_2 = Collections.convertCollection(c_2)
    return super<AbstractCollection>.containsAll(
@@ -756,7 +753,7 @@ open class Collections {
   }
   
   override fun removeAll(c: Collection<T>): Boolean {
-   val c_1: Collection<*> = c as Collection<*>
+   val c_1: Collection<*> = c
    var c_2: Collection<*> = c_1
    c_2 = Collections.convertCollection(c_2)
    return super<AbstractCollection>.removeAll(
@@ -765,7 +762,7 @@ open class Collections {
   }
   
   override fun retainAll(c: Collection<T>): Boolean {
-   val c_1: Collection<*> = c as Collection<*>
+   val c_1: Collection<*> = c
    var c_2: Collection<*> = c_1
    c_2 = Collections.convertCollection(c_2)
    return super<AbstractCollection>.retainAll(
@@ -807,14 +804,10 @@ open class Collections {
     return 0
    }
   
-  override fun addAll(index: Int, c: Collection<T>): Boolean {
-   val c_1: Collection<out T> = c as Collection<out T>
-   var c_2: Collection<out T> = c_1
-   c_2 = Collections.convertCollection(c_2)
-   return super<AbstractList>.addAll(
-    index,
-    c_2 as Collection<T>,
-   )
+  override fun addAll(index: Int, c: Collection<out T>): Boolean {
+   var c_1: Collection<out T> = c
+   c_1 = Collections.convertCollection(c_1)
+   return super<AbstractList>.addAll(index, c_1)
   }
   
   override fun indexOf(o: T): Int {
@@ -943,13 +936,10 @@ open class Collections {
    ) as V
   }
   
-  override fun putAll(m: Map<out K, V>) {
-   val m_1: Map<out K, out V> = m as Map<out K, out V>
-   var m_2: Map<out K, out V> = m_1
-   m_2 = Collections.convertMap(m_2)
-   super<AbstractMap>.putAll(
-    m_2 as Map<out K, V>,
-   )
+  override fun putAll(m: Map<out K, out V>) {
+   var m_1: Map<out K, out V> = m
+   m_1 = Collections.convertMap(m_1)
+   super<AbstractMap>.putAll(m_1)
   }
  }
  
