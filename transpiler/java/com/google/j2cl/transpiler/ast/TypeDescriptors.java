@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.lang.String.format;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
@@ -29,8 +28,6 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -41,11 +38,8 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
@@ -259,18 +253,22 @@ public class TypeDescriptors {
     return get().boxedTypeByPrimitiveType.inverse().get(boxType.toNullable());
   }
 
-  public static DeclaredTypeDescriptor getTypeDescriptor(String qualifiedBinaryName) {
-    return get().getTypeDescriptorImpl(qualifiedBinaryName);
-  }
-
   private final Map<String, DeclaredTypeDescriptor> typeDescriptorsByBinaryName = new HashMap<>();
 
-  private DeclaredTypeDescriptor getTypeDescriptorImpl(String qualifiedBinaryName) {
+  public static DeclaredTypeDescriptor getTypeDescriptor(String qualifiedBinaryName) {
+    return get().getTypeDescriptor(qualifiedBinaryName, /* optional= */ false);
+  }
+
+  @Nullable
+  private DeclaredTypeDescriptor getTypeDescriptor(String qualifiedBinaryName, boolean optional) {
     DeclaredTypeDescriptor type = typeDescriptorsByBinaryName.get(qualifiedBinaryName);
     if (type == null) {
       // All type descriptors loaded lazily must be resolvable.
-      type = checkNotNull(typeDescriptorResolver.apply(qualifiedBinaryName));
-      typeDescriptorsByBinaryName.put(qualifiedBinaryName, type);
+      type = typeDescriptorResolver.apply(qualifiedBinaryName);
+      if (optional && type == null) {
+        return null;
+      }
+      typeDescriptorsByBinaryName.put(qualifiedBinaryName, checkNotNull(type));
     }
     return type;
   }
@@ -547,13 +545,6 @@ public class TypeDescriptors {
     }
   }
 
-  private final Function<String, DeclaredTypeDescriptor> typeDescriptorResolver;
-
-  // Not externally instantiable.
-  private TypeDescriptors(Function<String, DeclaredTypeDescriptor> typeDescriptorResolver) {
-    this.typeDescriptorResolver = typeDescriptorResolver;
-  }
-
   public static DeclaredTypeDescriptor createPrimitiveMetadataTypeDescriptor(
       PrimitiveTypeDescriptor primitiveTypeDescriptor) {
     // Prepend "$" so that internal aliases start with "$".
@@ -654,81 +645,47 @@ public class TypeDescriptors {
     };
   }
 
-  /** Builder for TypeDescriptors. */
-  public static class SingletonBuilder {
+  public static void initialize(Function<String, DeclaredTypeDescriptor> typeDescriptorResolver) {
+    checkArgument(!isInitialized());
+    var typeDescriptors = new TypeDescriptors(typeDescriptorResolver);
 
-    private final TypeDescriptors typeDescriptors;
-    private final Map<String, DeclaredTypeDescriptor> knownTypesByQualifiedName = new HashMap<>();
-    private final Set<String> requiredTypes = new HashSet<>(requiredWellKnownTypes);
-
-    public SingletonBuilder(Function<String, DeclaredTypeDescriptor> typeDescriptorResolver) {
-      this.typeDescriptors = new TypeDescriptors(typeDescriptorResolver);
-    }
-
-    public void buildSingleton() {
-      // All the well-known reference types are loaded, add the primitive <-> boxed types mapping.
-      for (PrimitiveTypeDescriptor primitiveTypeDescriptor : PrimitiveTypes.TYPES) {
-        addBoxedTypeMapping(
-            primitiveTypeDescriptor,
-            knownTypesByQualifiedName.get(primitiveTypeDescriptor.getBoxedClassName()));
-      }
-
-      if (!requiredTypes.isEmpty()) {
-        throw new InternalCompilerError(format("Missing well known types %s.", requiredTypes));
-      }
-      set(typeDescriptors);
-      typeDescriptors.javaLangObjectArray =
-          ArrayTypeDescriptor.builder()
-              .setComponentTypeDescriptor(typeDescriptors.javaLangObject)
-              .build();
-    }
-
-    @CanIgnoreReturnValue
-    public SingletonBuilder addReferenceType(DeclaredTypeDescriptor referenceType) {
-      checkArgument(
-          !referenceType.isPrimitive(),
-          "%s is not a reference type",
-          referenceType.getQualifiedSourceName());
-      String name = referenceType.getQualifiedBinaryName();
-      knownTypesByQualifiedName.put(name, referenceType);
-      Field field = checkNotNull(wellKnownTypeFieldsByQualifiedName.get(name));
-      try {
-        field.set(typeDescriptors, referenceType);
-        requiredTypes.remove(name);
-      } catch (IllegalAccessException e) {
-        throw new InternalCompilerError(
-            e, format("Could not set field for well known type '%s'.", name));
-      }
-      return this;
-    }
-
-    private void addBoxedTypeMapping(
-        PrimitiveTypeDescriptor primitiveType, DeclaredTypeDescriptor boxedType) {
-      typeDescriptors.boxedTypeByPrimitiveType.put(primitiveType, boxedType);
-    }
-  }
-
-  static final Map<String, Field> wellKnownTypeFieldsByQualifiedName = new LinkedHashMap<>();
-  static final Set<String> requiredWellKnownTypes = new HashSet<>();
-
-  public static Set<String> getWellKnownTypeNames() {
-    return wellKnownTypeFieldsByQualifiedName.keySet();
-  }
-
-  static {
-    // Iterate over the public non final fields.
+    // Load all the well-known types.
     stream(TypeDescriptors.class.getDeclaredFields())
         .sorted(Comparator.comparing(Field::getName))
-        .filter(f -> (f.getModifiers() & Modifier.FINAL) == 0)
-        .filter(f -> f.getType().equals(DeclaredTypeDescriptor.class))
+        .filter(field -> (field.getModifiers() & Modifier.FINAL) == 0)
+        .filter(field -> field.getType().equals(DeclaredTypeDescriptor.class))
         .forEach(
-            f -> {
-              String name = getClassBinaryName(f);
-              checkState(wellKnownTypeFieldsByQualifiedName.put(name, f) == null);
-              if (f.getDeclaredAnnotation(Nullable.class) == null) {
-                requiredWellKnownTypes.add(name);
+            field -> {
+              var qualifiedBinaryName = getClassBinaryName(field);
+              var optional = field.getDeclaredAnnotation(Nullable.class) != null;
+              var typeDescriptor = typeDescriptors.getTypeDescriptor(qualifiedBinaryName, optional);
+              try {
+                field.set(typeDescriptors, typeDescriptor);
+              } catch (IllegalAccessException e) {
+                throw new AssertionError("Impossible", e);
               }
             });
+
+    // All the well-known reference types are loaded, add the primitive <-> boxed types mapping.
+    for (PrimitiveTypeDescriptor primitiveTypeDescriptor : PrimitiveTypes.TYPES) {
+      typeDescriptors.boxedTypeByPrimitiveType.put(
+          primitiveTypeDescriptor,
+          typeDescriptors.getTypeDescriptor(
+              primitiveTypeDescriptor.getBoxedClassName(), /* optional= */ false));
+    }
+    typeDescriptors.javaLangObjectArray =
+        ArrayTypeDescriptor.builder()
+            .setComponentTypeDescriptor(typeDescriptors.javaLangObject)
+            .build();
+
+    set(typeDescriptors);
+  }
+
+  private final Function<String, DeclaredTypeDescriptor> typeDescriptorResolver;
+
+  // Not externally instantiable.
+  private TypeDescriptors(Function<String, DeclaredTypeDescriptor> typeDescriptorResolver) {
+    this.typeDescriptorResolver = typeDescriptorResolver;
   }
 
   /**

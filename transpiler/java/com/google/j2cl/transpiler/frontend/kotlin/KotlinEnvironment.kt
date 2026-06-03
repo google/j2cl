@@ -37,7 +37,6 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage.JAVA
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage.KOTLIN
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
-import com.google.j2cl.transpiler.ast.TypeDescriptors.SingletonBuilder
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
@@ -129,7 +128,6 @@ import org.jetbrains.kotlin.ir.util.classId
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.eraseTypeParameters
-import org.jetbrains.kotlin.ir.util.fields
 import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotation
@@ -169,7 +167,7 @@ internal class KotlinEnvironment(
   private val fieldDescriptorByIrField: MutableMap<IrField, FieldDescriptor> = HashMap()
 
   init {
-    initWellKnownTypes()
+    TypeDescriptors.initialize(this::getTypeDescriptor)
 
     mapOf(
         pluginContext.irBuiltIns.booleanType to PrimitiveTypes.BOOLEAN,
@@ -199,21 +197,6 @@ internal class KotlinEnvironment(
             .setNullable(true)
             .build()
       }
-  }
-
-  private fun initWellKnownTypes() {
-    check(!TypeDescriptors.isInitialized())
-
-    val builder = SingletonBuilder(this::getTypeDescriptor)
-
-    for (name in TypeDescriptors.getWellKnownTypeNames()) {
-      val typeDescriptor = getTypeDescriptor(name)
-      if (typeDescriptor != null) {
-        builder.addReferenceType(typeDescriptor)
-      }
-    }
-
-    builder.buildSingleton()
   }
 
   private fun getTypeDescriptor(qualifiedBinaryName: String): DeclaredTypeDescriptor? {

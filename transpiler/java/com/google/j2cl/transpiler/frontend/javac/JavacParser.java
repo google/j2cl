@@ -29,7 +29,6 @@ import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.util.TaskEvent;
@@ -149,8 +148,7 @@ public class JavacParser {
       reportDiagnosticErrors(diagnostics, problems);
       problems.abortIfHasErrors();
 
-      JavaEnvironment javaEnvironment =
-          new JavaEnvironment(task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
+      JavaEnvironment javaEnvironment = new JavaEnvironment(task.getContext(), problems);
       CompilationUnitBuilder compilationUnitBuilder =
           new CompilationUnitBuilder(javaEnvironment, problems);
 
@@ -192,8 +190,7 @@ public class JavacParser {
               problems,
               new Context());
       reportDiagnosticErrors(diagnostics, problems);
-      return new JavaEnvironment(
-          task.getContext(), TypeDescriptors.getWellKnownTypeNames(), problems);
+      return new JavaEnvironment(task.getContext(), problems);
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       return null;

@@ -140,32 +140,16 @@ public class JavaEnvironment {
 
   private final Map<FieldDescriptorKey, FieldDescriptor> cachedFieldDescriptors = new HashMap<>();
 
-  JavaEnvironment(
-      Context context, Collection<String> wellKnownQualifiedBinaryNames, Problems problems) {
+  JavaEnvironment(Context context, Problems problems) {
     this.javacTypes = JavacTypes.instance(context);
     this.internalTypes = Types.instance(context);
     this.elements = JavacElements.instance(context);
     this.symtab = Symtab.instance(context);
     this.problems = problems;
 
-    initWellKnownTypes(wellKnownQualifiedBinaryNames);
+    TypeDescriptors.initialize(this::getTypeDescriptor);
   }
 
-  private void initWellKnownTypes(Collection<String> wellKnownQualifiedBinaryNames) {
-    checkState(!TypeDescriptors.isInitialized());
-
-    TypeDescriptors.SingletonBuilder builder =
-        new TypeDescriptors.SingletonBuilder(this::getTypeDescriptor);
-    // Add well-known, non-primitive types.
-    wellKnownQualifiedBinaryNames.forEach(
-        binaryName -> {
-          var typeDescriptor = getTypeDescriptor(binaryName);
-          if (typeDescriptor != null) {
-            builder.addReferenceType(typeDescriptor);
-          }
-        });
-    builder.buildSingleton();
-  }
 
   @Nullable
   static PrefixOperator getPrefixOperator(com.sun.source.tree.Tree.Kind operator) {
