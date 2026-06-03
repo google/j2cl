@@ -54,7 +54,7 @@ public final class CommandLineParser extends CmdLineParser {
     protected Path parse(String argument) throws CmdLineException {
       Path workdir = ((CommandLineParser) this.owner).workdir;
       try {
-        return workdir.resolve(argument);
+        return workdir.resolve(argument).normalize();
       } catch (Exception e) {
         throw new CmdLineException(owner, Messages.ILLEGAL_PATH, argument);
       }

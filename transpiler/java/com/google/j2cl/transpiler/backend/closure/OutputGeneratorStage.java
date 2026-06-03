@@ -38,7 +38,6 @@ import com.google.j2cl.transpiler.backend.common.SourceMapGenerator;
 import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfoBuilder;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
@@ -221,17 +220,13 @@ public class OutputGeneratorStage {
         continue;
       }
 
-      // Normalize the file path to ensure any . and ..  references are resolved.
-      String normalizedFilePath =
-          Paths.get(javaSourcePosition.getFilePath()).normalize().toString();
-
       metadata.addAnchorAnchor(
           javaSourcePosition.getStartFilePosition().getByteOffset(),
           javaSourcePosition.getEndFilePosition().getByteOffset(),
           javaScriptSourcePosition.getStartFilePosition().getByteOffset(),
           javaScriptSourcePosition.getEndFilePosition().getByteOffset(),
           /* sourceCorpus= */ null,
-          normalizedFilePath,
+          javaSourcePosition.getFilePath(),
           /* sourceRoot= */ null);
     }
 
