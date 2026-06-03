@@ -58,6 +58,13 @@ public final class VisibilityModifiers {
     private void privateMethod() {}
   }
 
+  // TODO(b/519538678): Uncomment when fixed.
+  // public static class ProtectedOverrideOfVisibilityWarningsSuppressed
+  //     extends VisibilityWarningsSuppressed.Public {
+  //   @Override
+  //   protected void protectedMethod() {}
+  // }
+
   @AutoValue
   abstract static class Value {
     @AutoValue.Builder
