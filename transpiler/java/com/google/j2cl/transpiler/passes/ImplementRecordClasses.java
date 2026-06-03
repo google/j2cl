@@ -29,7 +29,6 @@ import com.google.j2cl.transpiler.ast.BindingPattern;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IfStatement;
@@ -78,7 +77,6 @@ public class ImplementRecordClasses extends NormalizationPass {
       return;
     }
 
-    addFieldDeclarations(type);
     normalizeConstructors(type);
     addFieldAccessors(type);
     if (isValueTypeBasedImplementation(type)) {
@@ -95,21 +93,6 @@ public class ImplementRecordClasses extends NormalizationPass {
         TypeDescriptors.get().javaemulInternalValueType;
     return javaemulInternalValueType != null
         && type.getDeclaration().isSubtypeOf(javaemulInternalValueType.getTypeDeclaration());
-  }
-
-  /**
-   * Adds field declarations for record fields.
-   *
-   * <p>Record fields are present in the type model but not in the AST.
-   */
-  private static void addFieldDeclarations(Type type) {
-    for (FieldDescriptor field : type.getTypeDescriptor().getRecordComponentFieldDescriptors()) {
-      if (type.getInstanceFields().stream()
-          .anyMatch(f -> f.getDescriptor().getName().equals(field.getName()))) {
-        continue;
-      }
-      type.addMember(Field.builderFrom(field).setSourcePosition(type.getSourcePosition()).build());
-    }
   }
 
   private static void addFieldAccessors(Type type) {
