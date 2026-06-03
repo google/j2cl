@@ -39,7 +39,7 @@ open class RawTypes {
   )
  }
  
- open inner class Parent<T: Any> internal constructor()
+ internal open inner class Parent<T: Any>
  
- open inner class Child<T: RawTypes.Child<T>> internal constructor(): RawTypes.Parent<T>()
+ internal open inner class Child<T: RawTypes.Child<T>>: RawTypes.Parent<T>()
 }

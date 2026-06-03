@@ -27,6 +27,7 @@ private val ACTUAL_VISIBILITY_PACKAGE_PREFIXES: List<String> =
     "j2kt.",
     "j2ktiosinterop.",
     "j2ktjvminterop.",
+    "j2ktnotpassing.",
     "j2ktobjcweak.",
     // copybara:strip_begin
     // Packages which should be hidden in Open Source project.

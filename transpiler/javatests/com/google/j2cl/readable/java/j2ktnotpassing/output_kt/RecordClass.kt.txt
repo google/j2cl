@@ -29,12 +29,12 @@ import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.run
 
-open class RecordClass internal constructor() {
+internal open class RecordClass {
  internal open fun testVarargsRecord_pp_j2ktnotpassing() {
   val r: VarargsRecord = VarargsRecord("a", "b")
  }
  
- class VarargsRecord {
+ internal class VarargsRecord {
   private val values: Array<String?>?
   
   internal constructor(vararg values: String?) {

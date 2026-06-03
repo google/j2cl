@@ -22,12 +22,12 @@ import javaemul.lang.*
 import kotlin.String
 import kotlin.Suppress
 
-interface Parent {
+internal interface Parent {
  fun <T: String> test(t: T)
 }
 
-fun interface Child: Parent {
+internal fun interface Child: Parent {
  override fun test(s: String)
 }
 
-open class AccidentalOverrides internal constructor()
+internal open class AccidentalOverrides

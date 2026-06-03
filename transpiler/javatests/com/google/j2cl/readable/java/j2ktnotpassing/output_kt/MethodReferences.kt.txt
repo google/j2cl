@@ -89,15 +89,15 @@ open class MethodReferences {
   fun accept(a: A, b: B)
  }
  
- open class Container<V> internal constructor() {
+ internal open class Container<V> {
   open fun apply(callback: Consumer<V>) {}
  }
  
- interface Collection<T: Any>
+ internal interface Collection<T: Any>
  
- open class ArrayList<T: Any> internal constructor(): Collection<T>
+ internal open class ArrayList<T: Any>: Collection<T>
  
- fun interface Supplier<T: Any> {
+ internal fun interface Supplier<T: Any> {
   fun get(): T
  }
 }

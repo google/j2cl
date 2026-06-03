@@ -56,7 +56,7 @@ open class NullabilityInferenceProblem11 {
  
  open class MyNode<T>: Node<T, MyNode<T>>()
  
- fun interface Callback<R> {
+ internal fun interface Callback<R> {
   fun run(arg: R): R
  }
 }
