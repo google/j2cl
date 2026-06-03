@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithWasm;
-import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -97,12 +96,10 @@ public class InsertExternConversionsWasm extends NormalizationPass {
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
     }
-    if (isWasmJsExportedType(typeDescriptor)) {
-      return TypeDescriptors.get()
-          .javaemulInternalWasmExtern
-          .toNullable(typeDescriptor.isNullable());
+    if (typeDescriptor.isNative() || typeDescriptor.isPrimitive()) {
+      return typeDescriptor;
     }
-    return typeDescriptor;
+    return TypeDescriptors.get().javaemulInternalWasmExtern.toNullable(typeDescriptor.isNullable());
   }
 
   private static Expression convertArgumentIfNeeded(
@@ -110,10 +107,10 @@ public class InsertExternConversionsWasm extends NormalizationPass {
     if (TypeDescriptors.isJavaLangString(targetArgumentTypeDescriptor)) {
       return RuntimeMethods.createJsStringFromStringMethodCall(argument);
     }
-    if (isWasmJsExportedType(targetArgumentTypeDescriptor)) {
-      return RuntimeMethods.createWasmExternalizeMethodCall(argument);
+    if (targetArgumentTypeDescriptor.isNative() || targetArgumentTypeDescriptor.isPrimitive()) {
+      return argument;
     }
-    return argument;
+    return RuntimeMethods.createWasmExternalizeMethodCall(argument);
   }
 
   private static Expression convertReturnIfNeeded(
@@ -121,11 +118,11 @@ public class InsertExternConversionsWasm extends NormalizationPass {
     if (TypeDescriptors.isJavaLangString(targetReturnTypeDescriptor)) {
       return RuntimeMethods.createStringFromJsStringMethodCall(invocationExpression);
     }
-    if (isWasmJsExportedType(targetReturnTypeDescriptor)) {
-      return RuntimeMethods.createWasmInternalizeMethodCall(
-          invocationExpression, targetReturnTypeDescriptor);
+    if (targetReturnTypeDescriptor.isNative() || targetReturnTypeDescriptor.isPrimitive()) {
+      return invocationExpression;
     }
-    return invocationExpression;
+    return RuntimeMethods.createWasmInternalizeMethodCall(
+        invocationExpression, targetReturnTypeDescriptor);
   }
 
   private static boolean isJavaScriptMethod(MethodDescriptor descriptor) {

@@ -80,6 +80,8 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Return type of 'C Buggy.getField()' cannot be of type 'C'.
           @JsProperty native void setField(C c);
         > Error: Parameter 'c' in 'void Buggy.setField(C c)' cannot be of type 'C'.
+          native void testBoxed(Double d);
+        > Error: Parameter 'd' in 'void Buggy.testBoxed(Double d)' cannot be of type 'Double'.
         }
         class C {}
         """);
