@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
 // TODO(b/397636459): Remove when all test cases in the corresponding `j2kt` readable are passing.
 @NullMarked
 public class UnboundWildcards {
-  interface Foo<T extends @Nullable Object> {}
+  public interface Foo<T extends @Nullable Object> {}
 
   public static void test111(Foo<? extends @Nullable Object> extendsNullableObject) {
     acceptTExtendsNullableObject(extendsNullableObject);

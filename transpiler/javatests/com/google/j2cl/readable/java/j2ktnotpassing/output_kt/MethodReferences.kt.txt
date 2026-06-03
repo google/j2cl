@@ -51,7 +51,7 @@ open class MethodReferences {
   }
   
   @JvmStatic
-  internal fun testMemberReferenceParameterNullabilty_pp_j2ktnotpassing() {
+  fun testMemberReferenceParameterNullabilty() {
    val consumerFn: Consumer<Container<Any>>? = null
    val container: Container<Container<Any>>? = null
    container!!.apply(
@@ -89,15 +89,15 @@ open class MethodReferences {
   fun accept(a: A, b: B)
  }
  
- internal open class Container<V> {
+ open class Container<V> {
   open fun apply(callback: Consumer<V>) {}
  }
  
- internal interface Collection<T: Any>
+ interface Collection<T: Any>
  
- internal open class ArrayList<T: Any>: Collection<T>
+ open class ArrayList<T: Any>: Collection<T>
  
- internal fun interface Supplier<T: Any> {
+ fun interface Supplier<T: Any> {
   fun get(): T
  }
 }

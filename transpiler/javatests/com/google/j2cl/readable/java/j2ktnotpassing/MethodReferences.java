@@ -53,21 +53,21 @@ public class MethodReferences {
     throw new RuntimeException();
   }
 
-  static class Container<V extends @Nullable Object> {
+  public static class Container<V extends @Nullable Object> {
     public void apply(Consumer<V> callback) {}
   }
 
-  static void testMemberReferenceParameterNullabilty() {
+  public static void testMemberReferenceParameterNullabilty() {
     Consumer<Container<Object>> consumerFn = null;
     Container<Container<Object>> container = null;
     container.apply(consumerFn::accept);
   }
 
-  interface Collection<T> {}
+  public interface Collection<T> {}
 
-  static class ArrayList<T> implements Collection<T> {}
+  public static class ArrayList<T> implements Collection<T> {}
 
-  interface Supplier<T> {
+  public interface Supplier<T> {
     T get();
   }
 
