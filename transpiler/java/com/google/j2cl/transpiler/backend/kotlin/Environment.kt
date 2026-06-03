@@ -121,13 +121,6 @@ internal data class Environment(
   /** Returns Kotlin member visibility. */
   fun ktVisibility(memberDescriptor: MemberDescriptor): KtVisibility =
     when {
-      // Enum constructors are implicitly private in Kotlin
-      memberDescriptor.isEnumConstructor -> KtVisibility.PRIVATE
-      // All interface methods are public in Kotlin, and Java allows non-public static members, so
-      // we map them to public.
-      memberDescriptor.isInterfaceMethod -> KtVisibility.PUBLIC
-      // TODO(b/483489173): Remove when visibility problem in Dagger is solved differently.
-      memberDescriptor.isConstructor && memberDescriptor.hasInjectAnnotation -> KtVisibility.PUBLIC
       // Explicit private members translated as internal
       isForcedKtInternal(memberDescriptor) -> KtVisibility.INTERNAL
       // Use default visibility for everything else.

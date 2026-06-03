@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
-import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 
 internal val MemberDescriptor.isEnumConstructor: Boolean
@@ -36,14 +35,18 @@ internal val MethodDescriptor.isOpen: Boolean
 
 internal val MemberDescriptor.ktVisibility: KtVisibility
   get() =
-    if (useActualKtVisibility) {
-      KtVisibility.from(visibility)
-    } else {
-      when (visibility) {
-        Visibility.PUBLIC -> KtVisibility.PUBLIC
-        // Map protected to public, to allow access within the same package across different types.
-        Visibility.PROTECTED -> KtVisibility.PUBLIC
-        Visibility.PACKAGE_PRIVATE -> KtVisibility.INTERNAL
-        Visibility.PRIVATE -> KtVisibility.PRIVATE
-      }
+    when {
+      // Enum constructors are implicitly private in Kotlin
+      isEnumConstructor -> KtVisibility.PRIVATE
+      // All interface methods are public in Kotlin, and Java allows non-public static members, so
+      // we map them to public.
+      isInterfaceMethod -> KtVisibility.PUBLIC
+      // TODO(b/483489173): Remove when visibility problem in Dagger (fastinit) is solved
+      // differently.
+      isConstructor && hasInjectAnnotation -> KtVisibility.PUBLIC
+      // When not translating actual visibilites, map protected to public, to allow access within
+      // the same package across different types.
+      !useActualKtVisibility && visibility.isProtected -> KtVisibility.PUBLIC
+      // For all other cases, use the default visibility mapping.
+      else -> KtVisibility.from(visibility)
     }
