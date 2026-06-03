@@ -69,10 +69,12 @@ internal val TypeDeclaration.defaultKtVisibility: KtVisibility
 
 internal val TypeDeclaration.ktVisibility: KtVisibility
   get() =
-    if (useActualKtVisibility) {
-      KtVisibility.from(visibility)
-    } else {
-      KtVisibility.PUBLIC
+    when {
+      // TODO(b/483489173): Remove when visibility problem in Dagger-generated Factory classes is
+      // solved differently.
+      hasInjectAnnotatedMethod -> KtVisibility.PUBLIC
+      !useActualKtVisibility -> KtVisibility.PUBLIC
+      else -> KtVisibility.from(visibility)
     }
 
 internal val TypeDeclaration.declaredKtVisibility: KtVisibility?
@@ -122,3 +124,6 @@ internal val TypeDeclaration.ktCompanionQualifiedName: String?
 
 internal val TypeDeclaration.ktMutableQualifiedName: String?
   get() = getAnnotation("javaemul.internal.annotations.KtNative")?.getStringValue("mutableName")
+
+internal val TypeDeclaration.hasInjectAnnotatedMethod: Boolean
+  get() = declaredMethodDescriptors.any { it.hasInjectAnnotation }
