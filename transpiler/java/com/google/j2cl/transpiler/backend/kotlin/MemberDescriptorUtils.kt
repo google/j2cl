@@ -46,7 +46,17 @@ internal val MemberDescriptor.ktVisibility: KtVisibility
       isConstructor && hasInjectAnnotation -> KtVisibility.PUBLIC
       // When not translating actual visibilites, map protected to public, to allow access within
       // the same package across different types.
-      !useActualKtVisibility && visibility.isProtected -> KtVisibility.PUBLIC
+      isProtectedTranslatedAsPublic -> KtVisibility.PUBLIC
+      // Overrides of protected methods translated as public needs to be public.
+      this is MethodDescriptor && overridesProtectedAsPublic -> KtVisibility.PUBLIC
       // For all other cases, use the default visibility mapping.
       else -> KtVisibility.from(visibility)
     }
+
+internal val MemberDescriptor.isProtectedTranslatedAsPublic: Boolean
+  get() = !useActualKtVisibility && visibility.isProtected
+
+internal val MethodDescriptor.overridesProtectedAsPublic: Boolean
+  get() = javaOverriddenMethodDescriptors.any {
+    it.isProtectedTranslatedAsPublic || it.overridesProtectedAsPublic
+  }

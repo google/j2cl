@@ -64,6 +64,10 @@ class VisibilityModifiers {
   private fun privateMethod() {}
  }
  
+ open class ProtectedOverrideOfVisibilityWarningsSuppressed: j2kt.VisibilityModifiers.VisibilityWarningsSuppressed.Public() {
+  override fun protectedMethod() {}
+ }
+ 
  @WasAutoValue
  internal abstract class Value {
   @javaemul.lang.annotations.WasAutoValue.Builder
