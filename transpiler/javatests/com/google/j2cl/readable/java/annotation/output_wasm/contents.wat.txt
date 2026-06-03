@@ -131,7 +131,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:70:4
   (local.set $intConstant (i32.const 123))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:71:4
-  (local.set $stringConstant (call $$getString_|foo|__java_lang_String_<once>_@annotation.Main ))
+  (local.set $stringConstant (call $$getString_|foo|__java_lang_String_<once>_@annotation.Main.$StringLiterals ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:73:4
   (local.set $booleanValue (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_booleanValue__boolean (ref.cast (ref $annotation.Main.Foo.vtable) (call $get.itable.$annotation.Main.Foo (local.get $foo))))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:74:4
@@ -233,7 +233,7 @@
     (return (global.get $$class@annotation.Main))
    )
   )
-  (global.set $$class@annotation.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.Main|__java_lang_String_<once>_@annotation.Main )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (global.set $$class@annotation.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.Main|__java_lang_String_<once>_@annotation.Main.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@annotation.Main))
  )
 )
@@ -276,7 +276,7 @@
     (return (global.get $$class@annotation.Main.Foo))
    )
   )
-  (global.set $$class@annotation.Main.Foo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Foo )))
+  (global.set $$class@annotation.Main.Foo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Foo.$StringLiterals )))
   (return (global.get $$class@annotation.Main.Foo))
  )
 )
@@ -306,7 +306,7 @@
     (return (global.get $$class@annotation.Main.Zoo))
    )
   )
-  (global.set $$class@annotation.Main.Zoo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Zoo )))
+  (global.set $$class@annotation.Main.Zoo (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.Zoo.$StringLiterals )))
   (return (global.get $$class@annotation.Main.Zoo))
  )
 )
@@ -351,7 +351,7 @@
     (return (global.get $$class@annotation.Main.ClassImplementingAnnotation))
    )
   )
-  (global.set $$class@annotation.Main.ClassImplementingAnnotation (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.ClassImplementingAnnotation )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (global.set $$class@annotation.Main.ClassImplementingAnnotation (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.ClassImplementingAnnotation.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@annotation.Main.ClassImplementingAnnotation))
  )
 )
@@ -394,7 +394,7 @@
     (return (global.get $$class@annotation.Main.InterfaceExtendingAnnotation))
    )
   )
-  (global.set $$class@annotation.Main.InterfaceExtendingAnnotation (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.InterfaceExtendingAnnotation )))
+  (global.set $$class@annotation.Main.InterfaceExtendingAnnotation (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.InterfaceExtendingAnnotation.$StringLiterals )))
   (return (global.get $$class@annotation.Main.InterfaceExtendingAnnotation))
  )
 )
@@ -436,7 +436,7 @@
     (return (global.get $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor))
    )
   )
-  (global.set $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (global.set $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@annotation.Main.InterfaceExtendingAnnotation.$LambdaAdaptor))
  )
 )
@@ -547,9 +547,9 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:58:7
   (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:59:4
-  (global.set $ZERO@annotation.Main.SomeEnum (call $$create__java_lang_String__int@annotation.Main.SomeEnum (call $$getString_|ZERO|__java_lang_String_<once>_@annotation.Main.SomeEnum )(i32.const 0)))
+  (global.set $ZERO@annotation.Main.SomeEnum (call $$create__java_lang_String__int@annotation.Main.SomeEnum (call $$getString_|ZERO|__java_lang_String_<once>_@annotation.Main.SomeEnum.$StringLiterals )(i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/annotation/readable-j2wasm.js/annotation/Main.java:60:4
-  (global.set $ONE@annotation.Main.SomeEnum (call $$create__java_lang_String__int@annotation.Main.SomeEnum (call $$getString_|ONE|__java_lang_String_<once>_@annotation.Main.SomeEnum )(i32.const 1)))
+  (global.set $ONE@annotation.Main.SomeEnum (call $$create__java_lang_String__int@annotation.Main.SomeEnum (call $$getString_|ONE|__java_lang_String_<once>_@annotation.Main.SomeEnum.$StringLiterals )(i32.const 1)))
  )
 )
 
@@ -562,7 +562,7 @@
     (return (global.get $$class@annotation.Main.SomeEnum))
    )
   )
-  (global.set $$class@annotation.Main.SomeEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.SomeEnum )))
+  (global.set $$class@annotation.Main.SomeEnum (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|annotation.M...|__java_lang_String_<once>_@annotation.Main.SomeEnum.$StringLiterals )))
   (return (global.get $$class@annotation.Main.SomeEnum))
  )
 )

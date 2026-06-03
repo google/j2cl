@@ -107,11 +107,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:36:21
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:37:4
-  (local.set $list (call $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $$getString_|foo|__java_lang_String_<once>_@inferreturn.InferReturn )))
+  (local.set $list (call $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $$getString_|foo|__java_lang_String_<once>_@inferreturn.InferReturn.$StringLiterals )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:39:4
   (call $m_acceptsArrayListOfObject_$private__java_util_ArrayList__void@inferreturn.InferReturn (local.get $list))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:41:4
-  (local.set $array (call $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $$getString_|foo|__java_lang_String_<once>_@inferreturn.InferReturn )))
+  (local.set $array (call $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $$getString_|foo|__java_lang_String_<once>_@inferreturn.InferReturn.$StringLiterals )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:43:4
   (call $m_acceptsArrayOfObject_$private__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $array))
  )
@@ -232,7 +232,7 @@
     (return (global.get $$class@inferreturn.InferReturn))
    )
   )
-  (global.set $$class@inferreturn.InferReturn (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|inferreturn....|__java_lang_String_<once>_@inferreturn.InferReturn )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (global.set $$class@inferreturn.InferReturn (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|inferreturn....|__java_lang_String_<once>_@inferreturn.InferReturn.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@inferreturn.InferReturn))
  )
 )

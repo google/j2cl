@@ -24,6 +24,7 @@ import static java.util.function.Predicate.not;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -35,6 +36,7 @@ import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteralGettersCreator;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
 import java.util.Arrays;
@@ -205,7 +207,9 @@ public final class SummaryBuilder {
           public Expression rewriteStringLiteral(StringLiteral stringLiteral) {
             return MethodCall.builderFrom(
                     stringLiteralGetterCreator.getOrCreateLiteralMethod(
-                        getCurrentType(), stringLiteral, /* synthesizeMethod= */ false))
+                        getStringLiteralHolderTypeStub(getCurrentType().getDeclaration()),
+                        stringLiteral,
+                        /* synthesizeMethod= */ false))
                 .build();
           }
         });
@@ -221,6 +225,27 @@ public final class SummaryBuilder {
                             m.getEnclosingTypeDescriptor().getQualifiedSourceName())
                         .setMethodName(m.getName())
                         .build()));
+  }
+
+  private final Map<TypeDeclaration, Type> stringLiteralHolderByTypeDeclaration = new HashMap<>();
+
+  /**
+   * Returns a stub type for the string literal holder type for the given type.
+   *
+   * <p>This synthetic type only exists so that the string literal getters have a place to be
+   * attached to in the summary. The type itself does not exist in the generated code.
+   */
+  private Type getStringLiteralHolderTypeStub(TypeDeclaration typeDeclaration) {
+    return stringLiteralHolderByTypeDeclaration.computeIfAbsent(
+        typeDeclaration,
+        t ->
+            new Type(
+                SourcePosition.NONE,
+                TypeDeclaration.builder()
+                    .setPackage(t.getPackage())
+                    .setClassComponents(t.synthesizeInnerClassComponents("StringLiterals"))
+                    .setKind(Kind.CLASS)
+                    .build()));
   }
 
   private Summary build() {

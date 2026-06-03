@@ -95,19 +95,19 @@
   (block $SWITCH.BREAK
    (block
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:27:4
-    (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $$getString_|one|__java_lang_String_<once>_@switchstatement.SwitchStatement )))
+    (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $$getString_|one|__java_lang_String_<once>_@switchstatement.SwitchStatement.$StringLiterals )))
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:27:4
     (block
      (block
       (block
        (block ;; evaluate expression and jump
-        (br_if 0 (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (call $$getString_|one|__java_lang_String_<once>_@switchstatement.SwitchStatement ))(local.get $$expression)))
-        (br_if 1 (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (call $$getString_|two|__java_lang_String_<once>_@switchstatement.SwitchStatement ))(local.get $$expression)))
+        (br_if 0 (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (call $$getString_|one|__java_lang_String_<once>_@switchstatement.SwitchStatement.$StringLiterals ))(local.get $$expression)))
+        (br_if 1 (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (call $$getString_|two|__java_lang_String_<once>_@switchstatement.SwitchStatement.$StringLiterals ))(local.get $$expression)))
         (br 2)
        )
-       ;; case switchstatement.SwitchStatement.$getString_|one|():
+       ;; case switchstatement.SwitchStatement.$StringLiterals.$getString_|one|():
       )
-      ;; case switchstatement.SwitchStatement.$getString_|two|():
+      ;; case switchstatement.SwitchStatement.$StringLiterals.$getString_|two|():
       ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:30:8
       (br $SWITCH.BREAK)
      )
@@ -1438,7 +1438,7 @@
     (return (global.get $$class@switchstatement.SwitchStatement))
    )
   )
-  (global.set $$class@switchstatement.SwitchStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|switchstatem...|__java_lang_String_<once>_@switchstatement.SwitchStatement )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (global.set $$class@switchstatement.SwitchStatement (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|switchstatem...|__java_lang_String_<once>_@switchstatement.SwitchStatement.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@switchstatement.SwitchStatement))
  )
 )
@@ -1549,11 +1549,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:19:2
-  (global.set $ONE@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $$getString_|ONE|__java_lang_String_<once>_@switchstatement.Numbers )(i32.const 0)))
+  (global.set $ONE@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $$getString_|ONE|__java_lang_String_<once>_@switchstatement.Numbers.$StringLiterals )(i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:20:2
-  (global.set $TWO@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $$getString_|TWO|__java_lang_String_<once>_@switchstatement.Numbers )(i32.const 1)))
+  (global.set $TWO@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $$getString_|TWO|__java_lang_String_<once>_@switchstatement.Numbers.$StringLiterals )(i32.const 1)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchstatement/readable-j2wasm.js/switchstatement/SwitchStatement.java:21:2
-  (global.set $THREE@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $$getString_|THREE|__java_lang_String_<once>_@switchstatement.Numbers )(i32.const 2)))
+  (global.set $THREE@switchstatement.Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $$getString_|THREE|__java_lang_String_<once>_@switchstatement.Numbers.$StringLiterals )(i32.const 2)))
  )
 )
 
@@ -1566,7 +1566,7 @@
     (return (global.get $$class@switchstatement.Numbers))
    )
   )
-  (global.set $$class@switchstatement.Numbers (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|switchstatem...|__java_lang_String_<once>_@switchstatement.Numbers )))
+  (global.set $$class@switchstatement.Numbers (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|switchstatem...|__java_lang_String_<once>_@switchstatement.Numbers.$StringLiterals )))
   (return (global.get $$class@switchstatement.Numbers))
  )
 )

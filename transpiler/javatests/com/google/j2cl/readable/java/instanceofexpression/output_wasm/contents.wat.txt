@@ -258,7 +258,7 @@
  (local.set $this (ref.cast (ref $instanceofexpression.InstanceofExpressions) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:91:4
-  (local.set $b (ref.test (ref $java.lang.String) (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $$getString_|foo|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions )) (else (call $$getString_|bar|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions )))))
+  (local.set $b (ref.test (ref $java.lang.String) (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $$getString_|foo|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.$StringLiterals )) (else (call $$getString_|bar|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.$StringLiterals )))))
  )
 )
 (elem declare func $m_testPrecedence__void@instanceofexpression.InstanceofExpressions)
@@ -370,7 +370,7 @@
     (return (global.get $$class@instanceofexpression.InstanceofExpressions))
    )
   )
-  (global.set $$class@instanceofexpression.InstanceofExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (global.set $$class@instanceofexpression.InstanceofExpressions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@instanceofexpression.InstanceofExpressions))
  )
 )
@@ -446,7 +446,7 @@
     (return (global.get $$class@instanceofexpression.InstanceofExpressions.1))
    )
   )
-  (global.set $$class@instanceofexpression.InstanceofExpressions.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (global.set $$class@instanceofexpression.InstanceofExpressions.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.1.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
   (return (global.get $$class@instanceofexpression.InstanceofExpressions.1))
  )
 )

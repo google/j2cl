@@ -254,9 +254,9 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:20:12
   (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:21:2
-  (global.set $V1@enums.Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $$getString_|V1|__java_lang_String_<once>_@enums.Enum1 )(i32.const 0)))
+  (global.set $V1@enums.Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $$getString_|V1|__java_lang_String_<once>_@enums.Enum1.$StringLiterals )(i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:22:2
-  (global.set $V2@enums.Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $$getString_|V2|__java_lang_String_<once>_@enums.Enum1 )(i32.const 1)))
+  (global.set $V2@enums.Enum1 (call $$create__java_lang_String__int@enums.Enum1 (call $$getString_|V2|__java_lang_String_<once>_@enums.Enum1.$StringLiterals )(i32.const 1)))
  )
 )
 
@@ -269,7 +269,7 @@
     (return (global.get $$class@enums.Enum1))
    )
   )
-  (global.set $$class@enums.Enum1 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum1|__java_lang_String_<once>_@enums.Enum1 )))
+  (global.set $$class@enums.Enum1 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum1|__java_lang_String_<once>_@enums.Enum1.$StringLiterals )))
   (return (global.get $$class@enums.Enum1))
  )
 )
@@ -434,7 +434,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:52:4
   (local.set $o1 (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (ref.null $java.lang.String)))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:53:4
-  (local.set $o2 (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2 )))))
+  (local.set $o2 (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2.$StringLiterals )))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:54:4
   (local.set $l (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (call $m_values_$private__arrayOf_enums_Enum2@enums.Enum2 ))))
  )
@@ -525,16 +525,16 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:26:2
-  (global.set $VALUE1@enums.Enum2 (call $$create__java_lang_String__int__int@enums.Enum2 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2 )(i32.const 0)(i32.const 2)))
+  (global.set $VALUE1@enums.Enum2 (call $$create__java_lang_String__int__int@enums.Enum2 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2.$StringLiterals )(i32.const 0)(i32.const 2)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:27:2
-  (global.set $VALUE2@enums.Enum2 (call $$create__java_lang_String__int__java_lang_Enum@enums.Enum2 (call $$getString_|VALUE2|__java_lang_String_<once>_@enums.Enum2 )(i32.const 1)(block (result (ref null $enums.Enum1))
+  (global.set $VALUE2@enums.Enum2 (call $$create__java_lang_String__int__java_lang_Enum@enums.Enum2 (call $$getString_|VALUE2|__java_lang_String_<once>_@enums.Enum2.$StringLiterals )(i32.const 1)(block (result (ref null $enums.Enum1))
    (call $$clinit__void_<once>_@enums.Enum1 )
    (global.get $V1@enums.Enum1)
   )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:28:2
-  (global.set $VALUE3@enums.Enum2 (call $$create__java_lang_String__int__arrayOf_java_lang_Object@enums.Enum2 (call $$getString_|VALUE3|__java_lang_String_<once>_@enums.Enum2 )(i32.const 2)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))))
+  (global.set $VALUE3@enums.Enum2 (call $$create__java_lang_String__int__arrayOf_java_lang_Object@enums.Enum2 (call $$getString_|VALUE3|__java_lang_String_<once>_@enums.Enum2.$StringLiterals )(i32.const 2)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 ))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:29:2
-  (global.set $VALUE4@enums.Enum2 (call $$create__java_lang_String__int__int@enums.Enum2.1 (call $$getString_|VALUE4|__java_lang_String_<once>_@enums.Enum2 )(i32.const 3)(i32.const 5)))
+  (global.set $VALUE4@enums.Enum2 (call $$create__java_lang_String__int__int@enums.Enum2.1 (call $$getString_|VALUE4|__java_lang_String_<once>_@enums.Enum2.$StringLiterals )(i32.const 3)(i32.const 5)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:49:15
   (global.set $C@enums.Enum2 (call $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2 (call $$create__@java.lang.Object )))
  )
@@ -549,7 +549,7 @@
     (return (global.get $$class@enums.Enum2))
    )
   )
-  (global.set $$class@enums.Enum2 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum2|__java_lang_String_<once>_@enums.Enum2 )))
+  (global.set $$class@enums.Enum2 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum2|__java_lang_String_<once>_@enums.Enum2.$StringLiterals )))
   (return (global.get $$class@enums.Enum2))
  )
 )
@@ -662,7 +662,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:58:5
   (call $$clinit__void_<once>_@java.lang.Enum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:59:2
-  (global.set $VALUE1@enums.Enum3 (call $$create__java_lang_String__int__java_util_function_Function@enums.Enum3 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2 )(i32.const 0)(call $$create__@enums.Enum3.$LambdaImplementor$1 )))
+  (global.set $VALUE1@enums.Enum3 (call $$create__java_lang_String__int__java_util_function_Function@enums.Enum3 (call $$getString_|VALUE1|__java_lang_String_<once>_@enums.Enum2.$StringLiterals )(i32.const 0)(call $$create__@enums.Enum3.$LambdaImplementor$1 )))
  )
 )
 
@@ -675,7 +675,7 @@
     (return (global.get $$class@enums.Enum3))
    )
   )
-  (global.set $$class@enums.Enum3 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum3|__java_lang_String_<once>_@enums.Enum3 )))
+  (global.set $$class@enums.Enum3 (call $m_createForEnum__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum3|__java_lang_String_<once>_@enums.Enum3.$StringLiterals )))
   (return (global.get $$class@enums.Enum3))
  )
 )
@@ -781,7 +781,7 @@
     (return (global.get $$class@enums.Enum3.$LambdaImplementor$1))
    )
   )
-  (global.set $$class@enums.Enum3.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum3_...|__java_lang_String_<once>_@enums.Enum3.$LambdaImplementor$1 )(call $$getClassMetadata__java_lang_Class_<once>_@java.util.function.Function.$LambdaAdaptor )))
+  (global.set $$class@enums.Enum3.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum3_...|__java_lang_String_<once>_@enums.Enum3.$LambdaImplementor$1.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.util.function.Function.$LambdaAdaptor )))
   (return (global.get $$class@enums.Enum3.$LambdaImplementor$1))
  )
 )
@@ -846,7 +846,7 @@
     (return (global.get $$class@enums.Enum2.1))
    )
   )
-  (global.set $$class@enums.Enum2.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum2_1|__java_lang_String_<once>_@enums.Enum2.1 )(call $$getClassMetadata__java_lang_Class_<once>_@enums.Enum2 )))
+  (global.set $$class@enums.Enum2.1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|enums.Enum2_1|__java_lang_String_<once>_@enums.Enum2.1.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@enums.Enum2 )))
   (return (global.get $$class@enums.Enum2.1))
  )
 )
