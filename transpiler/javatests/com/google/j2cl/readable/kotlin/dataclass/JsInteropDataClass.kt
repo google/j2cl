@@ -35,7 +35,7 @@ data class JsTypeJvmRecordDataClass(
   @JsIgnore val ignored: String,
 )
 
-fun main() {
+fun testDataClassWithJsInterop() {
   val foo1 = JsTypeDataClass(1).foo
   val (foo2) = JsTypeDataClassWithJsIgnore(1)
   val foo3 = DataClassWithJsProperty(1).foo

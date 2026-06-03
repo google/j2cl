@@ -67,7 +67,7 @@ data class JvmRecordDataClassOverridingEquals(val s: String) {
   }
 }
 
-fun main() {
+fun testDataClass() {
   val (foo) = BasicDataClass(1)
   val (a, b, c) = PolymorphicDataType(1, 2, 3)
   IntValueHolder(10).backingValue
