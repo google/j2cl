@@ -40,7 +40,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
-import com.google.j2cl.transpiler.frontend.common.SupportedAnnotations
 import com.google.j2cl.transpiler.frontend.kotlin.ir.enumEntries
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
@@ -75,6 +74,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.sanitizedName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.simpleSourceName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.singleAbstractMethod
 import com.google.j2cl.transpiler.frontend.kotlin.ir.typeSubstitutionMap
+import java.util.function.Predicate
 import org.jetbrains.kotlin.backend.common.defaultArgumentsDispatchFunction
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -159,6 +159,7 @@ internal class KotlinEnvironment(
   private val pluginContext: IrPluginContext,
   private val packageInfoCache: PackageInfoCache,
   private val jvmBackendContext: JvmBackendContext,
+  private val supportedAnnotationFilter: Predicate<String>,
 ) {
   private val builtinsResolver = BuiltinsResolver(pluginContext, jvmBackendContext)
   private val typeDescriptorByIrType: MutableMap<IrType, TypeDescriptor> = HashMap()
@@ -297,7 +298,7 @@ internal class KotlinEnvironment(
             checkNotNull(getEnclosingTypeDescriptor(ctor)) {
               "No enclosing type for ${ctor.dump()}"
             }
-          if (!SupportedAnnotations.isSupportedAnnotation(typeDescriptor.qualifiedSourceName)) {
+          if (!supportedAnnotationFilter.test(typeDescriptor.qualifiedSourceName)) {
             continue
           }
           add(

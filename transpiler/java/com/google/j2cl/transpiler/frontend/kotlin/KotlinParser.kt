@@ -30,6 +30,7 @@ import com.intellij.openapi.Disposable
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Disposer
 import java.io.File
+import java.util.function.Predicate
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.builtins.DefaultBuiltIns
@@ -93,7 +94,12 @@ class KotlinParser(private val problems: Problems) {
       problems.registerForCancellation()
 
       val compilationUnits =
-        parseFiles(compilerConfiguration, kotlincDisposable, options.targetLabel)
+        parseFiles(
+          compilerConfiguration,
+          kotlincDisposable,
+          options.supportedAnnotationFilter,
+          options.targetLabel,
+        )
 
       return Library.builder()
         .setCompilationUnits(compilationUnits)
@@ -109,6 +115,7 @@ class KotlinParser(private val problems: Problems) {
   private fun parseFiles(
     compilerConfiguration: CompilerConfiguration,
     disposable: Disposable,
+    supportedAnnotationFilter: Predicate<String>,
     currentTarget: String?,
   ): List<CompilationUnit> {
 
@@ -174,6 +181,7 @@ class KotlinParser(private val problems: Problems) {
         state,
         packageInfoCache,
         irDeserializer,
+        supportedAnnotationFilter,
       )
     problems.abortIfCancelled()
 
@@ -196,6 +204,7 @@ class KotlinParser(private val problems: Problems) {
     state: GenerationState,
     packageInfoCache: PackageInfoCache,
     irDeserializer: J2clIrDeserializer,
+    supportedAnnotationFilter: Predicate<String>,
   ): CompilationUnitBuilderExtension {
     // Lower the IR tree before to convert it to a j2cl ast
     val lowerings = LoweringPasses(state, compilerConfiguration, irDeserializer)
@@ -208,7 +217,12 @@ class KotlinParser(private val problems: Problems) {
         override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
           compilationUnits =
             CompilationUnitBuilder(
-                KotlinEnvironment(pluginContext, packageInfoCache, lowerings.jvmBackendContext),
+                KotlinEnvironment(
+                  pluginContext,
+                  packageInfoCache,
+                  lowerings.jvmBackendContext,
+                  supportedAnnotationFilter,
+                ),
                 IntrinsicMethods(pluginContext),
               )
               .convert(moduleFragment)

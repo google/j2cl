@@ -49,6 +49,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
@@ -148,7 +149,8 @@ public class JavacParser {
       reportDiagnosticErrors(diagnostics, problems);
       problems.abortIfHasErrors();
 
-      JavaEnvironment javaEnvironment = new JavaEnvironment(task.getContext(), problems);
+      JavaEnvironment javaEnvironment =
+          new JavaEnvironment(task.getContext(), options.getSupportedAnnotationFilter(), problems);
       CompilationUnitBuilder compilationUnitBuilder =
           new CompilationUnitBuilder(javaEnvironment, problems);
 
@@ -172,7 +174,10 @@ public class JavacParser {
   }
 
   public static JavaEnvironment createEnvironment(
-      List<Path> classpaths, Path system, Problems problems) {
+      List<Path> classpaths,
+      Path system,
+      Predicate<String> supportedAnnotationFilter,
+      Problems problems) {
     try {
       var diagnostics = new DiagnosticCollector<JavaFileObject>();
       var task =
@@ -190,7 +195,7 @@ public class JavacParser {
               problems,
               new Context());
       reportDiagnosticErrors(diagnostics, problems);
-      return new JavaEnvironment(task.getContext(), problems);
+      return new JavaEnvironment(task.getContext(), supportedAnnotationFilter, problems);
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
       return null;

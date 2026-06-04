@@ -19,6 +19,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 /** Configuration for frontend. */
@@ -56,4 +57,6 @@ public interface FrontendOptions {
   ImmutableList<Path> getFriendKlibs();
 
   ImmutableList<String> getStrippedAnnotationNames();
+
+  Predicate<String> getSupportedAnnotationFilter();
 }

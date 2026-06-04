@@ -49,6 +49,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import com.google.j2cl.transpiler.backend.common.SupportedAnnotations;
 import com.google.j2cl.transpiler.backend.wasm.ItableAllocator;
 import com.google.j2cl.transpiler.backend.wasm.JsImportsGenerator;
 import com.google.j2cl.transpiler.backend.wasm.JsMemberInfo;
@@ -143,7 +144,9 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     // Create an environment to initialize the well known type descriptors to be able to synthesize
     // code.
-    var unused = JavacParser.createEnvironment(classpaths, system, problems);
+    var unused =
+        JavacParser.createEnvironment(
+            classpaths, system, SupportedAnnotations.COMMON_ANNOTATIONS::contains, problems);
 
     var referencedSystemProperties =
         getSummaries()

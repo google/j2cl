@@ -75,7 +75,7 @@ java_library(
         "//transpiler/java/com/google/j2cl/common/bazel",
         "//transpiler/java/com/google/j2cl/transpiler/ast",
         "//transpiler/java/com/google/j2cl/transpiler/backend/wasm",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/common",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/common",
         # TODO(b/294284380): Make this independent of the frontend.
         "//transpiler/java/com/google/j2cl/transpiler/frontend/javac",
     ],

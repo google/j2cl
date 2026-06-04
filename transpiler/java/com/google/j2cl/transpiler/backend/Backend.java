@@ -19,6 +19,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
+import com.google.j2cl.transpiler.backend.common.SupportedAnnotations;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
@@ -753,6 +754,11 @@ public enum Backend {
     public boolean isKotlin() {
       return true;
     }
+
+    @Override
+    public boolean isSupportedAnnotation(String qualifiedName) {
+      return SupportedAnnotations.J2KT_ANNOTATIONS.contains(qualifiedName);
+    }
   };
 
   public abstract ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories();
@@ -774,5 +780,9 @@ public enum Backend {
 
   public boolean isClosure() {
     return false;
+  }
+
+  public boolean isSupportedAnnotation(String qualifiedName) {
+    return SupportedAnnotations.COMMON_ANNOTATIONS.contains(qualifiedName);
   }
 }

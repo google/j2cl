@@ -27,6 +27,7 @@ import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.WasmEntryPointBridgesCreator;
+import com.google.j2cl.transpiler.backend.common.SupportedAnnotations;
 import com.google.j2cl.transpiler.backend.wasm.WasmGeneratorStage;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import java.io.IOException;
@@ -77,7 +78,9 @@ final class BazelJ2wasmExportsGenerator extends BazelWorker {
 
       // TODO(b/294284380): Make this independent of the frontend.
       // Create a parser just to resolve binary names, with no sources to parse.
-      var environment = JavacParser.createEnvironment(classpaths, system, problems);
+      var environment =
+          JavacParser.createEnvironment(
+              classpaths, system, SupportedAnnotations.COMMON_ANNOTATIONS::contains, problems);
       var typeDescriptors =
           getBinaryNamesOfClassesWithExports(classpaths, entryPointPatterns).stream()
               .map(environment::createTypeDescriptor)

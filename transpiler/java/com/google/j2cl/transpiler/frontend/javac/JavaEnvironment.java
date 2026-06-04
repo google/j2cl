@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.onlyElement;
-import static com.google.j2cl.transpiler.frontend.common.SupportedAnnotations.isSupportedAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
@@ -90,6 +89,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
@@ -140,11 +140,14 @@ public class JavaEnvironment {
 
   private final Map<FieldDescriptorKey, FieldDescriptor> cachedFieldDescriptors = new HashMap<>();
 
-  JavaEnvironment(Context context, Problems problems) {
+  private final Predicate<String> supportedAnnotationFilter;
+
+  JavaEnvironment(Context context, Predicate<String> supportedAnnotationFilter, Problems problems) {
     this.javacTypes = JavacTypes.instance(context);
     this.internalTypes = Types.instance(context);
     this.elements = JavacElements.instance(context);
     this.symtab = Symtab.instance(context);
+    this.supportedAnnotationFilter = supportedAnnotationFilter;
     this.problems = problems;
 
     TypeDescriptors.initialize(this::getTypeDescriptor);
@@ -1474,7 +1477,8 @@ public class JavaEnvironment {
   private ImmutableList<Annotation> createAnnotations(
       List<? extends AnnotationMirror> annotations, boolean inNullMarkedScope) {
     return annotations.stream()
-        .filter(annotationMirror -> isSupportedAnnotation(getAnnotationName(annotationMirror)))
+        .filter(
+            annotationMirror -> supportedAnnotationFilter.test(getAnnotationName(annotationMirror)))
         .map(
             annotationMirror ->
                 newAnnotationBuilder(annotationMirror.getElementValues(), inNullMarkedScope)

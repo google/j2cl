@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.frontend.Frontend;
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 /** Configuration for the transpiler. */
@@ -54,6 +55,11 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
   @Override
   public abstract ImmutableList<String> getStrippedAnnotationNames();
+
+  @Override
+  public Predicate<String> getSupportedAnnotationFilter() {
+    return getBackend()::isSupportedAnnotation;
+  }
 
   /** A Builder for J2clTranspilerOptions. */
   @AutoValue.Builder

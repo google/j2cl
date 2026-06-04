@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.util.Disposer
 import java.io.File
+import java.util.function.Predicate
 import org.jetbrains.kotlin.analyzer.CompilationErrorException
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
@@ -59,7 +60,13 @@ class KlibsKotlinParser(private val problems: Problems) {
     val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
     try {
       problems.registerForCancellation()
-      val compilationUnits = parseFiles(arguments, kotlincDisposable, options.targetLabel)
+      val compilationUnits =
+        parseFiles(
+          arguments,
+          kotlincDisposable,
+          options.supportedAnnotationFilter,
+          options.targetLabel,
+        )
 
       return Library.builder()
         .setCompilationUnits(compilationUnits)
@@ -80,6 +87,7 @@ class KlibsKotlinParser(private val problems: Problems) {
   private fun parseFiles(
     arguments: K2JKlibCompilerArguments,
     disposable: Disposable,
+    supportedAnnotationFilter: Predicate<String>,
     currentTarget: String?,
   ): List<CompilationUnit> {
 
@@ -158,7 +166,12 @@ class KlibsKotlinParser(private val problems: Problems) {
 
     val compilationUnits =
       CompilationUnitBuilder(
-          KotlinEnvironment(pluginContext, packageInfoCache, lowerings.jvmBackendContext),
+          KotlinEnvironment(
+            pluginContext,
+            packageInfoCache,
+            lowerings.jvmBackendContext,
+            supportedAnnotationFilter,
+          ),
           IntrinsicMethods(pluginContext),
         )
         .convert(moduleFragment)
