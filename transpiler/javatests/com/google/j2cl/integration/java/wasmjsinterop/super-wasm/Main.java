@@ -93,7 +93,10 @@ public final class Main {
   @JsMethod(namespace = "test")
   private static native String appendInJs(String a, String b);
 
-  /** Sanity check for JsFunction interfaces to ensure lambdas still work as expected. */
+  // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
+  // @JsMethod(namespace = "test.functions", name = "getFunction")
+  // private static native MyJsFunction getFunctionFromJs();
+
   private static void testJsFunction() {
     MyJsFunction impl = new MyJsFunctionImpl();
     assertEquals(15, impl.foo(5));
@@ -102,6 +105,10 @@ public final class Main {
     MyJsFunction lambda = a -> a + 20;
     assertEquals(25, lambda.foo(5));
     assertEquals(1, lambda.myOverlay());
+
+    // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
+    // MyJsFunction jsFunction = getFunctionFromJs();
+    // assertEquals(42, jsFunction.foo(10));
   }
 
   @JsFunction

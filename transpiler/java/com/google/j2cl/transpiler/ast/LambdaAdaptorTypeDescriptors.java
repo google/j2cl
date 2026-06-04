@@ -140,6 +140,7 @@ public final class LambdaAdaptorTypeDescriptors {
     return ImmutableList.of(
         getLambdaAdaptorDefaultConstructor(adaptorTypeDescriptor),
         getWasmJsFunctionAdaptorConstructor(adaptorTypeDescriptor),
+        getWasmJsFunctionInvokeMethod(adaptorTypeDescriptor),
         getAdaptorForwardingMethod(adaptorTypeDescriptor));
   }
 
@@ -246,6 +247,43 @@ public final class LambdaAdaptorTypeDescriptors {
         .setConstructor(true)
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
         .setParameterTypeDescriptors(TypeDescriptors.get().javaemulInternalWasmExtern)
+        .build();
+  }
+
+  /**
+   * Returns the MethodDescriptor for the static native invoke method of the Wasm JS function
+   * adaptor class.
+   *
+   * <p>This method imports j2wasm.JsInteropRuntime > invokeJsFunction for the particular adapter.
+   */
+  @SuppressWarnings("ReferenceEquality")
+  public static MethodDescriptor getWasmJsFunctionInvokeMethod(
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
+        adaptorTypeDescriptor.getFunctionalInterface();
+    checkState(
+        functionalInterfaceTypeDescriptor.getFunctionalInterface()
+            == functionalInterfaceTypeDescriptor);
+
+    MethodDescriptor functionalInterfaceMethodDescriptor =
+        functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
+    return MethodDescriptor.builder()
+        .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
+        .setName("$invoke")
+        .setStatic(true)
+        .setNative(true)
+        .setOriginalJsInfo(
+            JsInfo.builder()
+                .setJsMemberType(JsMemberType.METHOD)
+                .setJsName("invokeJsFunction")
+                .setJsNamespace("j2wasm.JsInteropRuntime")
+                .build())
+        .setParameterTypeDescriptors(
+            ImmutableList.<TypeDescriptor>builder()
+                .add(TypeDescriptors.get().javaemulInternalWasmExtern)
+                .addAll(functionalInterfaceMethodDescriptor.getParameterTypeDescriptors())
+                .build())
+        .setReturnTypeDescriptor(functionalInterfaceMethodDescriptor.getReturnTypeDescriptor())
         .build();
   }
 

@@ -6,6 +6,11 @@
  (result i32)
 )
 
+;;; void $JsFunctionAdaptor.$invoke(WasmExtern arg0)
+(func $$invoke__javaemul_internal_WasmExtern__void@jsoverlay.Main.Intf.$JsFunctionAdaptor (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction") 
+ (param $arg0 (ref null extern))
+)
+
 ;;; NativeJsTypeWithOverlay()
 (func $m_<init>__@jsoverlay.Main.NativeJsTypeWithOverlay (import "imports" "test.foo.NativeJsTypeWithOverlay.constructor") 
  (result (ref null extern))

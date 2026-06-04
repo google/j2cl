@@ -18,11 +18,14 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -92,6 +95,7 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
               addDefaultConstructor(adaptorType);
               addJsFuncrefField(adaptorType);
               addJsFuncrefConstructor(adaptorType);
+              addJsFunctionInvokeMethod(adaptorType);
               addJsFunctionForwardingMethod(adaptorType);
             }
 
@@ -166,13 +170,46 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
             .build());
   }
 
+  /**
+   * Adds a native invoke method to the JsFunction adaptor class to call the underlying JavaScript
+   * function.
+   */
+  private static void addJsFunctionInvokeMethod(Type adaptorType) {
+    DeclaredTypeDescriptor adaptorTypeDescriptor = adaptorType.getTypeDescriptor();
+    MethodDescriptor invokeMethodDescriptor =
+        LambdaAdaptorTypeDescriptors.getWasmJsFunctionInvokeMethod(adaptorTypeDescriptor);
+
+    // Generates:
+    // @JsMethod(namespace = "j2wasm.JsInteropRuntime", name = "invokeJsFunction")
+    // native R invoke(WasmExtern jsFuncref, A a, B b, ...);
+    adaptorType.addMember(
+        Method.builder()
+            .setMethodDescriptor(invokeMethodDescriptor)
+            .setParameters(
+                AstUtils.createParameterVariables(
+                    invokeMethodDescriptor.getParameterTypeDescriptors()))
+            .setSourcePosition(adaptorType.getSourcePosition())
+            .build());
+  }
+
   /** Adds a method to the JsFunction adaptor class to forward to the JavaScript function. */
   private static void addJsFunctionForwardingMethod(Type adaptorType) {
     DeclaredTypeDescriptor adaptorTypeDescriptor = adaptorType.getTypeDescriptor();
+    SourcePosition sourcePosition = adaptorType.getSourcePosition();
     MethodDescriptor forwardingMethodDescriptor =
         LambdaAdaptorTypeDescriptors.getAdaptorForwardingMethod(adaptorTypeDescriptor);
+    List<Variable> forwardedVariables =
+        AstUtils.createParameterVariables(forwardingMethodDescriptor.getParameterTypeDescriptors());
 
-    // TODO(b/512546420): Delegate to the JavaScript function.
+    List<Expression> invokeArguments = new ArrayList<>();
+    invokeArguments.add(
+        FieldAccess.builderFrom(
+                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorJsFuncrefField(
+                    adaptorTypeDescriptor))
+            .setQualifier(new ThisReference(adaptorTypeDescriptor))
+            .build());
+    forwardedVariables.forEach(param -> invokeArguments.add(param.createReference()));
+
     // R method(A a, B b, ...) {
     //   // Call the JavaScript function using an imported helper.
     //   return invoke(this.jsFuncref, a, b, ...);
@@ -180,10 +217,17 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
     adaptorType.addMember(
         Method.builder()
             .setMethodDescriptor(forwardingMethodDescriptor)
-            .setParameters(
-                AstUtils.createParameterVariables(
-                    forwardingMethodDescriptor.getParameterTypeDescriptors()))
-            .setSourcePosition(adaptorType.getSourcePosition())
+            .setParameters(forwardedVariables)
+            .addStatements(
+                AstUtils.createReturnOrExpressionStatement(
+                    sourcePosition,
+                    MethodCall.builderFrom(
+                            LambdaAdaptorTypeDescriptors.getWasmJsFunctionInvokeMethod(
+                                adaptorTypeDescriptor))
+                        .setArguments(invokeArguments)
+                        .build(),
+                    forwardingMethodDescriptor.getReturnTypeDescriptor()))
+            .setSourcePosition(sourcePosition)
             .build());
   }
 }

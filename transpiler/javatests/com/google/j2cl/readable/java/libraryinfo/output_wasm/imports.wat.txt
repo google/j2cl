@@ -4,3 +4,9 @@
 (func $m_log__int__void@libraryinfo.Main (import "imports" "console.log") 
  (param $o i32)
 )
+
+;;; void $JsFunctionAdaptor.$invoke(WasmExtern arg0, NativeString arg1)
+(func $$invoke__javaemul_internal_WasmExtern__java_lang_String_NativeString__void@libraryinfo.Main.Function.$JsFunctionAdaptor (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction") 
+ (param $arg0 (ref null extern))
+ (param $arg1 (ref null string))
+)
