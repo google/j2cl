@@ -1508,6 +1508,11 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         checkState(
             typeDescriptor.isClass() || typeDescriptor.isInterface() || typeDescriptor.isEnum());
 
+        var typeArgumentCount = typeDescriptor.getTypeArgumentDescriptors().size();
+        var typeParameterCount =
+            typeDescriptor.getTypeDeclaration().getTypeParameterDescriptors().size();
+        checkState(typeArgumentCount == 0 || typeArgumentCount == typeParameterCount);
+
         // Some native standard TypeDescriptors are created BEFORE TypeDescriptors is initialized.
         if (TypeDescriptors.isInitialized()) {
           // Make sure there is only one global namespace TypeDescriptor (see b/32903150).

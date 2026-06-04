@@ -854,6 +854,8 @@ public final class AstUtils {
                     0, enclosingTypeDescriptor.getDeclarationDescriptor().toNonNullable())
                 .addTypeParameterTypeDescriptors(
                     0, enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
+                .addTypeArgumentTypeDescriptors(
+                    0, enclosingTypeDescriptor.getTypeArgumentDescriptors())
                 .setStatic(true)
                 .setSynthetic(true)
                 .setConstructor(false)

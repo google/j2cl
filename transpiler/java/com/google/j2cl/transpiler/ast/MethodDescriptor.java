@@ -1732,6 +1732,21 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setTypeArgumentTypeDescriptors(List<TypeDescriptor> typeArguments);
 
+    @CanIgnoreReturnValue
+    public Builder addTypeArgumentTypeDescriptors(
+        int index, TypeDescriptor... typeArgumentTypeDescriptors) {
+      return addTypeArgumentTypeDescriptors(index, Arrays.asList(typeArgumentTypeDescriptors));
+    }
+
+    @CanIgnoreReturnValue
+    public Builder addTypeArgumentTypeDescriptors(
+        int index, List<TypeDescriptor> typeArgumentTypeDescriptors) {
+      List<TypeDescriptor> newTypeArgumentTypeDescriptors =
+          new ArrayList<>(getTypeArgumentTypeDescriptors());
+      newTypeArgumentTypeDescriptors.addAll(index, typeArgumentTypeDescriptors);
+      return setTypeArgumentTypeDescriptors(newTypeArgumentTypeDescriptors);
+    }
+
     abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
     public ImmutableList<TypeDescriptor> getParameterTypeDescriptors() {
@@ -1805,6 +1820,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       if (getDeclarationDescriptorOrNullIfSelf() == null) {
         // Use a canonical version of the enclosing type descriptor in method declarations.
         setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().getDeclarationDescriptor());
+        setTypeArgumentTypeDescriptors(ImmutableList.of());
       }
 
       MethodDescriptor methodDescriptor = autoBuild();
@@ -1813,9 +1829,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       if (internedMethodDescriptor == methodDescriptor) {
         // This method descriptor is seen for the first time, make sure that it has been constructed
         // properly.
-        if (methodDescriptor.isDeclaration()) {
-          checkState(methodDescriptor.getTypeArgumentTypeDescriptors().isEmpty());
-        }
+        checkState(
+            !methodDescriptor.isDeclaration()
+                || methodDescriptor.getTypeArgumentTypeDescriptors().isEmpty());
+
+        var typeArgumentCount = methodDescriptor.getTypeArgumentTypeDescriptors().size();
+        var typeParameterCount =
+            methodDescriptor.getDeclarationDescriptor().getTypeParameterTypeDescriptors().size();
+        checkState(typeArgumentCount == 0 || typeArgumentCount == typeParameterCount);
 
         // Bridge methods cannot be abstract nor native,
         checkState(

@@ -42,8 +42,10 @@ public class NormalizeOverlayMembers extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    createOverlayImplementationTypes(compilationUnit);
+    // Normalize references before moving members to the overlay implementation types, so that
+    // the devirtualization logic sees the correct enclosing type.
     normalizeMemberReferences(compilationUnit);
+    createOverlayImplementationTypes(compilationUnit);
   }
 
   private void createOverlayImplementationTypes(CompilationUnit compilationUnit) {
