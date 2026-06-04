@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.function.Predicate.isEqual;
 
 import com.google.common.collect.Streams;
@@ -70,10 +71,12 @@ public class AddDisambiguatingOverloadResolutionCastsJ2kt extends AbstractJ2ktNo
             // parameter's type.
             return invocation.toBuilder()
                 .setArguments(
-                    zip(
-                        invocation.getTarget().getParameterTypeDescriptors(),
-                        invocation.getArguments(),
-                        AddDisambiguatingOverloadResolutionCastsJ2kt::castArgumentToParameterType))
+                    Streams.zip(
+                            invocation.getTarget().getParameterTypeDescriptors().stream(),
+                            invocation.getArguments().stream(),
+                            AddDisambiguatingOverloadResolutionCastsJ2kt
+                                ::castArgumentToParameterType)
+                        .collect(toImmutableList()))
                 .build();
           }
         });

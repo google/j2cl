@@ -298,10 +298,11 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             // Propagate nullability from parameters into arguments, this covers the cases where the
             // expression is a lambda and its parameters are inferred from the surrounding context.
             ImmutableList<Expression> rewrittenArguments =
-                zip(
-                    invocation.getArguments(),
-                    rewrittenMethodDescriptor.getParameterTypeDescriptors(),
-                    PropagateNullability::propagateNullabilityToExpression);
+                Streams.zip(
+                        invocation.getArguments().stream(),
+                        rewrittenMethodDescriptor.getParameterTypeDescriptors().stream(),
+                        PropagateNullability::propagateNullabilityToExpression)
+                    .collect(toImmutableList());
 
             if (rewrittenMethodDescriptor.equals(methodDescriptor)
                 && rewrittenArguments.equals(invocation.getArguments())) {
@@ -323,12 +324,15 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
             ImmutableList<TypeDescriptor> typeArgumentDescriptors =
                 toNonRawTypeDescriptor(functionalInterface).getTypeArgumentDescriptors();
             ImmutableList<TypeDescriptor> inferredTypeArgumentDescriptors =
-                zip(
-                    typeParameterDescriptors,
-                    typeArgumentDescriptors,
-                    (typeParameterDescriptor, typeArgumentDescriptor) ->
-                        propagateTypeArgumentNullabilityFromReturnExpressions(
-                            typeParameterDescriptor, typeArgumentDescriptor, functionExpression));
+                Streams.zip(
+                        typeParameterDescriptors.stream(),
+                        typeArgumentDescriptors.stream(),
+                        (typeParameterDescriptor, typeArgumentDescriptor) ->
+                            propagateTypeArgumentNullabilityFromReturnExpressions(
+                                typeParameterDescriptor,
+                                typeArgumentDescriptor,
+                                functionExpression))
+                    .collect(toImmutableList());
             DeclaredTypeDescriptor inferredFunctionalInterface =
                 functionalInterface.withTypeArguments(inferredTypeArgumentDescriptors);
             Streams.forEachPair(
