@@ -15,6 +15,21 @@
 goog.module('j2wasm.JsInteropRuntime');
 
 /**
+ * @param {string} id
+ * @return {!Function}
+ */
+function getWasmConstructor(id) {
+  const ctors = /** @type {!Object<string, !Function>|undefined} */ (globalThis.j2wasmJsConstructors);
+  if (goog.DEBUG) {
+    if (!ctors || !ctors[id]) {
+      throw new Error(
+          `Attempted to use WASM type '${id}' before it has been loaded.`);
+    }
+  }
+  return ctors[id];
+}
+
+/**
  * Creates a proxy for the given exported constructor that intercepts
  * instantiation and static calls.
  *
@@ -30,13 +45,13 @@ function constructorProxy(id) {
           if (newTarget !== proxy) {
             throw new TypeError('WASM types cannot be subtyped');
           }
-          return new globalThis.j2wasmJsConstructors[id](...args);
+          return new (getWasmConstructor(id))(...args);
         },
         get(target, property, receiver) {
-          return Reflect.get(globalThis.j2wasmJsConstructors[id], property, receiver);
+          return Reflect.get(getWasmConstructor(id), property, receiver);
         },
         set(target, property, value, receiver) {
-          return Reflect.set(globalThis.j2wasmJsConstructors[id], property, value, receiver);
+          return Reflect.set(getWasmConstructor(id), property, value, receiver);
         },
       });
   return proxy;
