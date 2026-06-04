@@ -23,10 +23,13 @@ goog.module('j2wasm.JsInteropRuntime');
  * @template T
  */
 function constructorProxy(id) {
-  return new Proxy(
+  const proxy = new Proxy(
       function() {},
       {
-        construct(target, args) {
+        construct(target, args, newTarget) {
+          if (newTarget !== proxy) {
+            throw new TypeError('WASM types cannot be subtyped');
+          }
           return new globalThis.j2wasmJsConstructors[id](...args);
         },
         get(target, property, receiver) {
@@ -36,6 +39,7 @@ function constructorProxy(id) {
           return Reflect.set(globalThis.j2wasmJsConstructors[id], property, value, receiver);
         },
       });
+  return proxy;
 }
 
 /**

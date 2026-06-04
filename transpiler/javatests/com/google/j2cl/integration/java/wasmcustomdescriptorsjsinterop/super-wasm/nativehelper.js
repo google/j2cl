@@ -208,6 +208,13 @@ function callAccidentalDefaultMethod(impl) {
   return impl.m();
 }
 
+/**
+ * @return {!SomeJsType}
+ */
+function createJsSubtype() {
+  return new class extends SomeJsType {}();
+}
+
 exports = {
   newBaseJsType,
   newSomeJsType,
@@ -230,4 +237,5 @@ exports = {
   callInterfaceDefaultMethod,
   callAccidentalMethod,
   callAccidentalDefaultMethod,
+  createJsSubtype,
 };

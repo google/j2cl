@@ -16,6 +16,7 @@
 package wasmcustomdescriptorsjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
@@ -31,6 +32,7 @@ public final class Main {
     testProperty();
     testInheritedMethod();
     testInterfaceMethod();
+    testJsSubtyping();
   }
 
   private static void testConstructor() {
@@ -240,6 +242,14 @@ public final class Main {
   static class JsInterfaceAccidentalDefaultMethodImpl extends NonJsBase
       implements JsInterfaceDefaultMethod {}
 
+  private static void testJsSubtyping() {
+    try {
+      createJsSubtype();
+      fail("JS shuold throw when constructing a subtype");
+    } catch (Exception expected) {
+    }
+  }
+
   @JsMethod(namespace = "nativehelper")
   static native BaseJsType newBaseJsType();
 
@@ -302,4 +312,7 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native int callAccidentalDefaultMethod(JsInterfaceAccidentalDefaultMethodImpl impl);
+
+  @JsMethod(namespace = "nativehelper")
+  static native SomeJsType createJsSubtype();
 }
