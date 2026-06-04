@@ -31,6 +31,7 @@ private val ACTUAL_VISIBILITY_PACKAGE_PREFIXES: List<String> =
     "j2ktobjcweak.",
     // copybara:strip_begin
     // Packages which should be hidden in Open Source project.
+    "com.google.apps.xplat.collect.intervaltree.",
     // copybara:strip_end
   )
 
