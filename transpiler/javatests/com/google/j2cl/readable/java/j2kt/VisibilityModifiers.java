@@ -16,7 +16,9 @@
 package j2kt;
 
 import com.google.auto.value.AutoValue;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public final class VisibilityModifiers {
   public static class Public {
     public void publicMethod() {}
@@ -26,6 +28,19 @@ public final class VisibilityModifiers {
     protected void protectedMethod() {}
 
     private void privateMethod() {}
+
+    // TODO(b/206898384): Re-enable once J2KT narrows visibility from referenced types.
+    // public void publicWithPackagePrivateParameter(PackagePrivate param) {}
+
+    // public void publicWithTransitivePackagePrivateParameter(PackagePrivate.Public param) {}
+
+    // public PackagePrivate publicReturnsPackagePrivate() {
+    //   throw new UnsupportedOperationException();
+    // }
+
+    // public <T extends PackagePrivate> void publicWithPackagePrivateTypeParameter(T param) {
+    //   throw new UnsupportedOperationException();
+    // }
   }
 
   static class PackagePrivate {
@@ -36,6 +51,8 @@ public final class VisibilityModifiers {
     protected void protectedMethod() {}
 
     private void privateMethod() {}
+
+    static class Public {}
   }
 
   protected static class Protected {
@@ -58,8 +75,35 @@ public final class VisibilityModifiers {
     private void privateMethod() {}
   }
 
+  public static final class Parameterized {
+    public static class PublicOfPublic<T extends Public> {
+      public void publicMethod() {}
+
+      void packagePrivateMethod() {}
+
+      protected void protectedMethod() {}
+
+      private void privateMethod() {}
+    }
+
+    // TODO(b/206898384): Re-enable once J2KT narrows visibility from referenced types.
+    // public static class PublicOfPackagePrivate<T extends PackagePrivate> {
+    //   public void publicMethod() {}
+    //   void packagePrivateMethod() {}
+    //   protected void protectedMethod() {}
+    //   private void privateMethod() {}
+    // }
+
+    // public static class PublicOfTransitivePackagePrivate<T extends PackagePrivate.Public> {
+    //   public void publicMethod() {}
+    //   void packagePrivateMethod() {}
+    //   protected void protectedMethod() {}
+    //   private void privateMethod() {}
+    // }
+  }
+
   public static class ProtectedOverrideOfVisibilityWarningsSuppressed
-      extends VisibilityWarningsSuppressed.Public {
+      extends VisibilityWarningsSuppressed.NonFinal.Public {
     @Override
     protected void protectedMethod() {}
   }
@@ -88,64 +132,158 @@ public final class VisibilityModifiers {
 
   @SuppressWarnings("j2kt:visibility")
   public static class VisibilityWarningsSuppressed {
-    public static class Public {
-      public void publicMethod() {}
+    public static final class NonFinal {
+      public static class Public {
+        public void publicMethod() {}
 
-      void packagePrivateMethod() {}
+        void packagePrivateMethod() {}
 
-      protected void protectedMethod() {}
+        protected void protectedMethod() {}
 
-      private void privateMethod() {}
-    }
-
-    static class PackagePrivate {
-      public void publicMethod() {}
-
-      void packagePrivateMethod() {}
-
-      protected void protectedMethod() {}
-
-      private void privateMethod() {}
-
-      public void publicWithPackagePrivateParameter(PackagePrivate param) {}
-
-      public PackagePrivate publicReturnsPackagePrivate() {
-        throw new UnsupportedOperationException();
+        private void privateMethod() {}
       }
 
-      public <T extends PackagePrivate> void publicWithPackagePrivateTypeParameter(T param) {
-        throw new UnsupportedOperationException();
+      static class PackagePrivate {
+        public void publicMethod() {}
+
+        void packagePrivateMethod() {}
+
+        protected void protectedMethod() {}
+
+        private void privateMethod() {}
+
+        public void publicWithPackagePrivateParameter(PackagePrivate param) {}
+
+        public void publicWithTransitivePackagePrivateParameter(PackagePrivate.Public param) {}
+
+        public PackagePrivate publicReturnsPackagePrivate() {
+          throw new UnsupportedOperationException();
+        }
+
+        public <T extends PackagePrivate> void publicWithPackagePrivateTypeParameter(T param) {
+          throw new UnsupportedOperationException();
+        }
+
+        public class Public {}
+      }
+
+      protected static class Protected {
+        public void publicMethod() {}
+
+        void packagePrivateMethod() {}
+
+        protected void protectedMethod() {}
+
+        private void privateMethod() {}
+      }
+
+      private static class Private {
+        public void publicMethod() {}
+
+        void packagePrivateMethod() {}
+
+        protected void protectedMethod() {}
+
+        private void privateMethod() {}
+      }
+
+      public static class PublicExtendsPackagePrivate extends PackagePrivate {
+        public void publicMethod() {}
+
+        void packagePrivateMethod() {}
+
+        protected void protectedMethod() {}
+
+        private void privateMethod() {}
+      }
+
+      public static final class Parameterized {
+        public static class PublicOfPublic<T extends Public> {
+          public void publicMethod() {}
+
+          void packagePrivateMethod() {}
+
+          protected void protectedMethod() {}
+
+          private void privateMethod() {}
+        }
+
+        public static class PublicOfPackagePrivate<T extends PackagePrivate> {
+          public void publicMethod() {}
+
+          void packagePrivateMethod() {}
+
+          protected void protectedMethod() {}
+
+          private void privateMethod() {}
+        }
+
+        public static class PublicOfTransitivePackagePrivate<T extends PackagePrivate.Public> {
+          public void publicMethod() {}
+
+          void packagePrivateMethod() {}
+
+          protected void protectedMethod() {}
+
+          private void privateMethod() {}
+        }
       }
     }
 
-    protected static class Protected {
-      public void publicMethod() {}
+    public static final class Final {
+      public static final class Public {
+        public void publicMethod() {}
 
-      void packagePrivateMethod() {}
+        void packagePrivateMethod() {}
 
-      protected void protectedMethod() {}
+        protected void protectedMethod() {}
 
-      private void privateMethod() {}
-    }
+        private void privateMethod() {}
+      }
 
-    private static class Private {
-      public void publicMethod() {}
+      static final class PackagePrivate {
+        public void publicMethod() {}
 
-      void packagePrivateMethod() {}
+        void packagePrivateMethod() {}
 
-      protected void protectedMethod() {}
+        protected void protectedMethod() {}
 
-      private void privateMethod() {}
-    }
+        private void privateMethod() {}
 
-    public static class PublicExtendsPackagePrivate extends PackagePrivate {
-      public void publicMethod() {}
+        public void publicWithPackagePrivateParameter(PackagePrivate param) {}
 
-      void packagePrivateMethod() {}
+        public void publicWithTransitivePackagePrivateParameter(PackagePrivate.Public param) {}
 
-      protected void protectedMethod() {}
+        public PackagePrivate publicReturnsPackagePrivate() {
+          throw new UnsupportedOperationException();
+        }
 
-      private void privateMethod() {}
+        public <T extends PackagePrivate> void publicWithPackagePrivateTypeParameter(T param) {
+          throw new UnsupportedOperationException();
+        }
+
+        public final class Public {}
+      }
+
+      protected static final class Protected {
+        public void publicMethod() {}
+
+        void packagePrivateMethod() {}
+
+        protected void protectedMethod() {}
+
+        private void privateMethod() {}
+      }
+
+      private static final class Private {
+        public void publicMethod() {}
+
+        void packagePrivateMethod() {}
+
+        protected void protectedMethod() {}
+
+        private void privateMethod() {}
+      }
     }
   }
 }

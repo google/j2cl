@@ -1,0 +1,73 @@
+// Generated from "j2ktnotpassing/VisibilityModifiers.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import java.lang.UnsupportedOperationException
+import kotlin.Suppress
+
+class VisibilityModifiers {
+ open class Public {
+  open fun publicWithPackagePrivateParameter(param: PackagePrivate) {}
+  
+  open fun publicWithTransitivePackagePrivateParameter(param: j2ktnotpassing.VisibilityModifiers.PackagePrivate.Public) {}
+  
+  open fun publicReturnsPackagePrivate(): PackagePrivate {
+   throw UnsupportedOperationException()
+  }
+  
+  open fun <T: PackagePrivate> publicWithPackagePrivateTypeParameter(param: T) {
+   throw UnsupportedOperationException()
+  }
+ }
+ 
+ internal open class PackagePrivate {
+  open fun publicMethod() {}
+  
+  internal open fun packagePrivateMethod_pp_j2ktnotpassing() {}
+  
+  protected open fun protectedMethod() {}
+  
+  private fun privateMethod() {}
+  
+  internal open class Public
+ }
+ 
+ class Parameterized {
+  open class PublicOfPackagePrivate<T: PackagePrivate> {
+   open fun publicMethod() {}
+   
+   internal open fun packagePrivateMethod_pp_j2ktnotpassing() {}
+   
+   protected open fun protectedMethod() {}
+   
+   private fun privateMethod() {}
+  }
+  
+  open class PublicOfTransitivePackagePrivate<T: j2ktnotpassing.VisibilityModifiers.PackagePrivate.Public> {
+   open fun publicMethod() {}
+   
+   internal open fun packagePrivateMethod_pp_j2ktnotpassing() {}
+   
+   protected open fun protectedMethod() {}
+   
+   private fun privateMethod() {}
+  }
+ }
+}
