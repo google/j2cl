@@ -29,7 +29,7 @@ def _j2cl_maven_import_external(repository_ctx):
     coordinates = _decode_maven_coordinates(repository_ctx.attr.artifact, default_packaging = "jar")
     artifact_urls = _convert_coordinates_to_urls(coordinates, repository_ctx.attr.server_urls)
     additional_attrs = dict(repository_ctx.attr.additional_rule_attrs)
-    additional_attrs["tags"] = repository_ctx.attr.tags + [
+    additional_attrs["tags"] = getattr(repository_ctx.attr, "tags", []) + [
         "maven_coordinates=" + repository_ctx.attr.artifact,
     ]
 
@@ -39,6 +39,7 @@ def _j2cl_maven_import_external(repository_ctx):
 def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs):
     lines = [
         "load('@j2cl//build_defs:rules.bzl', 'j2cl_library', 'j2cl_import')",
+        "load('@rules_java//java:defs.bzl', 'java_import')",
         "",
         "package(default_visibility = %s)" % repository_ctx.attr.default_visibility,
         "",
