@@ -36,10 +36,10 @@ private val ACTUAL_VISIBILITY_PACKAGE_PREFIXES: List<String> =
   )
 
 /**
- * List containing package prefixes for which J2KT should not translate actual visibility. This list
- * is used to override the ACTUAL_VISIBILITY_PACKAGE_PREFIXES list.
+ * List containing packages for which J2KT should not translate actual visibility. This list is used
+ * to override the ACTUAL_VISIBILITY_PACKAGE_PREFIXES list.
  */
-private val EXCLUDED_VISIBILITY_PACKAGE_PREFIXES: List<String> =
+private val EXCLUDED_VISIBILITY_PACKAGES: List<String> =
   listOf(
     // copybara:strip_begin
     // Packages which should be hidden in Open Source project.
@@ -47,11 +47,10 @@ private val EXCLUDED_VISIBILITY_PACKAGE_PREFIXES: List<String> =
   )
 
 private val TypeDeclaration.useActualKtVisibilityForPackage: Boolean
-  get() =
-    packageName.plus(".").let { packageNamePrefix ->
-      ACTUAL_VISIBILITY_PACKAGE_PREFIXES.any { packageNamePrefix.startsWith(it) } &&
-        EXCLUDED_VISIBILITY_PACKAGE_PREFIXES.none { packageNamePrefix.startsWith(it) }
-    }
+  get() = packageName.let { packageName ->
+    ACTUAL_VISIBILITY_PACKAGE_PREFIXES.any { packageName.plus(".").startsWith(it) } &&
+      EXCLUDED_VISIBILITY_PACKAGES.none { packageName == it }
+  }
 
 /** Returns whether J2KT should translate actual visibility for the given type declaration. */
 // TODO(b/206898384): Remove this once the bug is fixed.
