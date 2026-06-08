@@ -38,6 +38,8 @@ enum class Visibility {
 
   fun hasWiderScopeThan(other: Visibility): Boolean = ordinal < other.ordinal
 
+  fun hasNarrowerScopeThan(other: Visibility): Boolean = ordinal > other.ordinal
+
   companion object {
     fun from(javaVisibility: JavaVisibility): Visibility =
       when (javaVisibility) {
@@ -49,5 +51,18 @@ enum class Visibility {
   }
 }
 
+fun Visibility.widenUp(other: Visibility?) = if (other == null) this else minOf(this, other)
+
+fun Visibility.narrowDown(other: Visibility?) = if (other == null) this else maxOf(this, other)
+
 /** Returns visibility with the widest scope of [visibilities] or null if none were given. */
 fun Iterable<Visibility>.withWidestScopeOrNull(): Visibility? = minOrNull()
+
+/** Returns visibility with the narrowest scope of [visibilities] or null if none were given. */
+fun Iterable<Visibility>.withNarrowestScopeOrNull(): Visibility? = maxOrNull()
+
+fun Visibility.widenUp(others: Iterable<Visibility?>) =
+  others.fold(this) { acc, element -> acc.widenUp(element) }
+
+fun Visibility.narrowDown(others: Iterable<Visibility?>) =
+  others.fold(this) { acc, element -> acc.narrowDown(element) }

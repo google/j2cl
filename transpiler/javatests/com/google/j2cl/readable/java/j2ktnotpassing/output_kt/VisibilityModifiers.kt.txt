@@ -24,11 +24,11 @@ import kotlin.Suppress
 
 class VisibilityModifiers {
  open class Public {
-  open fun publicWithPackagePrivateParameter(param: PackagePrivate) {}
+  internal open fun publicWithPackagePrivateParameter(param: PackagePrivate) {}
   
-  open fun publicWithTransitivePackagePrivateParameter(param: j2ktnotpassing.VisibilityModifiers.PackagePrivate.Public) {}
+  internal open fun publicWithTransitivePackagePrivateParameter(param: j2ktnotpassing.VisibilityModifiers.PackagePrivate.Public) {}
   
-  open fun publicReturnsPackagePrivate(): PackagePrivate {
+  internal open fun publicReturnsPackagePrivate(): PackagePrivate {
    throw UnsupportedOperationException()
   }
   

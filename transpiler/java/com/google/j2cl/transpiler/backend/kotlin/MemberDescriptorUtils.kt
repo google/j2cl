@@ -15,9 +15,21 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.narrowDown
+import com.google.j2cl.transpiler.backend.kotlin.ast.widenUp
+import com.google.j2cl.transpiler.backend.kotlin.ast.withNarrowestScopeOrNull
+import com.google.j2cl.transpiler.backend.kotlin.ast.withWidestScopeOrNull
 
 internal val MemberDescriptor.isEnumConstructor: Boolean
   get() = enclosingTypeDescriptor.isEnum && isConstructor
@@ -41,16 +53,22 @@ internal val MemberDescriptor.ktVisibility: KtVisibility
       // All interface methods are public in Kotlin, and Java allows non-public static members, so
       // we map them to public.
       isInterfaceMethod -> KtVisibility.PUBLIC
-      // TODO(b/483489173): Remove when visibility problem in Dagger (fastinit) is solved
-      // differently.
-      isConstructor && hasInjectAnnotation -> KtVisibility.PUBLIC
-      // When not translating actual visibilites, map protected to public, to allow access within
-      // the same package across different types.
-      isProtectedTranslatedAsPublic -> KtVisibility.PUBLIC
-      // Overrides of protected methods translated as public needs to be public.
-      this is MethodDescriptor && overridesProtectedAsPublic -> KtVisibility.PUBLIC
-      // For all other cases, use the default visibility mapping.
-      else -> KtVisibility.from(visibility)
+      else ->
+        // Use heuristics below to calculate a "base"visibility, then clamp down based on type
+        // visibility, so more restricted type visibilites don't cause errors just because of
+        // (presumbably accidental) wide method visibility.
+        narrowDownVisibility(
+          when {
+            // TODO(b/483489173): Remove when visibility problem in Dagger (fastinit) is solved
+            // differently.
+            isConstructor && hasInjectAnnotation -> KtVisibility.PUBLIC
+            // When not translating actual visibilites, map protected to public, to allow access
+            // within the same package across different types.
+            isProtectedTranslatedAsPublic -> KtVisibility.PUBLIC
+            // For all other cases, use the default visibility mapping.
+            else -> KtVisibility.from(visibility)
+          }
+        )
     }
 
 internal val MemberDescriptor.isProtectedTranslatedAsPublic: Boolean
@@ -60,3 +78,70 @@ internal val MethodDescriptor.overridesProtectedAsPublic: Boolean
   get() = javaOverriddenMethodDescriptors.any {
     it.isProtectedTranslatedAsPublic || it.overridesProtectedAsPublic
   }
+
+/**
+ * Narrows down the visibility based on argument type visibility. The point is to simplyfy type
+ * visibility restrictions. Kotlin forbids that members reference types that are more visible than
+ * the method. So we automatically restrict method visibility accordingly, unless there are obvious
+ * reasons why this won't work. Note that this will still not allow restricting type visibility to
+ * match Java if something else relies on wider member visibility.
+ */
+private fun MemberDescriptor.narrowDownVisibility(baseVisibility: KtVisibility): KtVisibility {
+  // Can't narrow down if it's already private.
+  if (baseVisibility == KtVisibility.PRIVATE) {
+    return KtVisibility.PRIVATE
+  }
+  val widestOverriddenVisibility = computeWidestOverriddenVisibility
+  // Can't narrow down below widestOverridenVisibility
+  if (
+    widestOverriddenVisibility == KtVisibility.PUBLIC ||
+      widestOverriddenVisibility == baseVisibility
+  ) {
+    return widestOverriddenVisibility
+  }
+  // TODO(b/206898384): The next line alone describes the behaviour; the lines above just skip
+  // trivial cases for performance reasons.
+  return baseVisibility
+    .narrowDown(computeReferencedKtVisibilities)
+    .widenUp(widestOverriddenVisibility)
+}
+
+val MemberDescriptor.computeReferencedKtVisibilities: List<KtVisibility>
+  get() =
+    when (this) {
+        is MethodDescriptor ->
+          parameterTypeDescriptors.map { it.inferredKtVisibility } +
+            listOf(returnTypeDescriptor.inferredKtVisibility)
+        is FieldDescriptor -> listOf(typeDescriptor.inferredKtVisibility)
+        else -> emptyList()
+      }
+      // TODO(b/206898384): Where are PRIVATE cases coming from and why does code still compile
+      // currently?
+      .filterNotNull()
+      .filter { it != KtVisibility.PRIVATE }
+
+val MemberDescriptor.computeWidestOverriddenVisibility: KtVisibility?
+  get() =
+    if (this is MethodDescriptor) {
+      javaOverriddenMethodDescriptors.map { it.ktVisibility }.withWidestScopeOrNull()
+    } else {
+      null
+    }
+
+private val TypeDescriptor.inferredKtVisibility: KtVisibility?
+  get() =
+    when (this) {
+      is ArrayTypeDescriptor -> componentTypeDescriptor.inferredKtVisibility
+      is DeclaredTypeDescriptor ->
+        (listOf(typeDeclaration.ktVisibility) +
+            typeArgumentDescriptors.map { it.inferredKtVisibility })
+          .filterNotNull()
+          .withNarrowestScopeOrNull()
+      // TODO(b/206898384): For now we are interested primarily in narrowing down "regular" types,
+      // so we skip these exceptional cases in signatures here, which can in some cases cause
+      // infinite recursion. We may want to reconsider some of them as we go ahead.
+      is IntersectionTypeDescriptor,
+      is PrimitiveTypeDescriptor,
+      is TypeVariable,
+      is UnionTypeDescriptor -> null
+    }

@@ -44,7 +44,7 @@ internal open class NullabilityScopes2 {
  }
  
  internal open class NonNullMarkedScope<T: Recursive<T>> {
-  open fun flatten(recursive: Recursive<T>?): List<Any?>? {
+  internal open fun flatten(recursive: Recursive<T>?): List<Any?>? {
    return recursive!!.toList().stream().map<List<Any?>?>(
     Function { arg0: Recursive<T>? ->
      return@Function this.flatten(arg0)
