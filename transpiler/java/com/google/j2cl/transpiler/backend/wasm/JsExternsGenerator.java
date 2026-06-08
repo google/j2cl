@@ -15,10 +15,10 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.collect.MoreCollectors.toOptional;
 import static com.google.j2cl.transpiler.ast.AstUtils.findSuperTypeWithWasmJsExportsIncludingSelf;
 import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
-import com.google.common.collect.Streams;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -33,7 +33,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.stream.Stream;
 
 /**
@@ -103,14 +103,13 @@ final class JsExternsGenerator {
   /** Appends the constructor extern for the given type. */
   private void appendConstructor(SourceBuilder sb, Type type) {
     String jsDoc = closureEnvironment.getJsDocForType(type, /* isWasmExtern= */ true);
-    Method constructor =
-        type.getMethods().stream()
-            .filter(m -> m.getDescriptor().isJsConstructor())
-            .findFirst()
-            .orElse(null);
+    var constructor =
+        streamExportedMethods(type)
+            .filter(m -> m.getDescriptor().getOrigin().isWasmJsConstructorExport())
+            .collect(toOptional());
 
     sb.appendln("");
-    if (constructor == null) {
+    if (constructor.isEmpty()) {
       // If no constructor, we still have to emit a constructor function so that type JSDoc
       // annotations and members can be added.
       sb.appendln("/**");
@@ -133,33 +132,12 @@ final class JsExternsGenerator {
     sb.appendln(" */");
     sb.append(
         String.format("var %s = function", closureEnvironment.aliasForType(type.getDeclaration())));
-    closureEnvironment.emitParameters(sb, constructor);
+    closureEnvironment.emitParameters(sb, constructor.get());
     sb.appendln("{};");
   }
 
   private void appendFields(SourceBuilder sb, Type type) {
-    // Collect fields from getter/setter methods.
-    var getterSetters = new HashMap<String, GetterSetterPair>();
-    streamExportedMethods(type)
-        .forEach(
-            method -> {
-              if (!method.getDescriptor().isJsProperty()) {
-                return;
-              }
-
-              GetterSetterPair getterSetterPair =
-                  getterSetters.computeIfAbsent(
-                      method.getDescriptor().getSimpleJsName(), k -> new GetterSetterPair());
-              if (method.getDescriptor().isJsPropertyGetter()) {
-                getterSetterPair.getter = method;
-              } else if (method.getDescriptor().isJsPropertySetter()) {
-                getterSetterPair.setter = method;
-              }
-            });
-
-    Streams.concat(
-            type.getFields().stream().map(Field::getDescriptor).filter(AstUtils::needsWasmJsExport),
-            getterSetters.values().stream().map(GetterSetterPair::asFieldDescriptor))
+    streamExportedFields(type)
         .forEach(
             fieldDescriptor -> {
               sb.appendln("");
@@ -205,6 +183,41 @@ final class JsExternsGenerator {
     }
   }
 
+  private static Stream<FieldDescriptor> streamExportedFields(Type type) {
+    // Collect fields from getter/setter methods.
+    var getterSetters = new LinkedHashMap<String, GetterSetterPair>();
+    streamExportedMethods(type)
+        .forEach(
+            method -> {
+              if (!method.getDescriptor().isJsProperty()) {
+                return;
+              }
+
+              GetterSetterPair getterSetterPair =
+                  getterSetters.computeIfAbsent(
+                      method.getDescriptor().getSimpleJsName(), k -> new GetterSetterPair());
+              if (method.getDescriptor().isJsPropertyGetter()) {
+                getterSetterPair.getter = method;
+              } else if (method.getDescriptor().isJsPropertySetter()) {
+                getterSetterPair.setter = method;
+              }
+            });
+
+    Stream<FieldDescriptor> fieldDescriptors =
+        getterSetters.values().stream().map(GetterSetterPair::asFieldDescriptor);
+    // Classes are processed by AddJsExportBridgesWasm and so will have bridges available for
+    // all properties. For interfaces, we must also add JsProperty-annotated fields.
+    if (type.isInterface()) {
+      fieldDescriptors =
+          Stream.concat(
+              type.getFields().stream()
+                  .map(Field::getDescriptor)
+                  .filter(AstUtils::needsWasmJsExport),
+              fieldDescriptors);
+    }
+    return fieldDescriptors;
+  }
+
   private void appendMethods(SourceBuilder sb, Type type) {
     streamExportedMethods(type)
         .forEach(
@@ -228,19 +241,16 @@ final class JsExternsGenerator {
   }
 
   private static Stream<Method> streamExportedMethods(Type type) {
-    return Streams.concat(
-        type.getMethods().stream().filter(m -> AstUtils.needsWasmJsExport(m.getDescriptor())),
-        type.getTypeDescriptor().getAccidentalOverrides().stream()
-            .filter(AstUtils::needsWasmJsExport)
-            .map(
-                accidentalOverride ->
-                    Method.builder()
-                        .setMethodDescriptor(accidentalOverride)
-                        .setParameters(
-                            AstUtils.createParameterVariables(
-                                accidentalOverride.getParameterTypeDescriptors()))
-                        .setSourcePosition(type.getSourcePosition())
-                        .build()));
+    if (type.isInterface()) {
+      // For interfaces, explicitly traverse the members that are exported, since there are no
+      // concrete export bridges for polymorphic methods.
+      // TODO(b/517589573): Revisit when static JS methods on interfaces are supported. Possibly
+      // make it consistent with classes (using .isWasmJsExport()).
+      return type.getMethods().stream().filter(m -> AstUtils.needsWasmJsExport(m.getDescriptor()));
+    }
+    // Every exported method in a class has an export bridge. Either in the class itself or a
+    // supertype.
+    return type.getMethods().stream().filter(m -> m.getDescriptor().getOrigin().isWasmJsExport());
   }
 
   private String getMemberOwner(MemberDescriptor memberDescriptor) {

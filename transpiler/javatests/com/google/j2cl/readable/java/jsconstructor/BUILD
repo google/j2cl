@@ -10,5 +10,6 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
+    generate_wasm_externs = True,
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
