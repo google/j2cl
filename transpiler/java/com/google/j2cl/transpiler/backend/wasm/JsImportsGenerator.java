@@ -116,7 +116,7 @@ public final class JsImportsGenerator {
   private static String createGoogRequire(String importedModule) {
     return String.format(
         "const %s = goog.require('%s');",
-        JsTypeNameResolver.computeJsAlias(importedModule), importedModule);
+        JsTypeNameResolver.computeJsAliasWithoutPrefix(importedModule), importedModule);
   }
 
   /**

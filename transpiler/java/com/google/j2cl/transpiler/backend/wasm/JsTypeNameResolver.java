@@ -66,10 +66,11 @@ final class JsTypeNameResolver extends ClosureGenerationEnvironment {
     if (typeDeclaration.isExtern()) {
       return typeDeclaration.getQualifiedJsName();
     }
-    return computeJsAlias(typeDeclaration.getQualifiedJsName());
+    String prefix = typeDeclaration.isNative() ? "" : "$j2wasm$externs_";
+    return prefix + computeJsAliasWithoutPrefix(typeDeclaration.getQualifiedJsName());
   }
 
-  public static String computeJsAlias(String name) {
+  public static String computeJsAliasWithoutPrefix(String name) {
     return name.replace('.', '_');
   }
 
