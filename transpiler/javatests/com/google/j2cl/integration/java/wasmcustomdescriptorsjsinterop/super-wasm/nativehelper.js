@@ -17,6 +17,9 @@ goog.module('nativehelper');
 
 const BaseJsType = goog.require('wasmcustomdescriptorsjsinterop.BaseJsType');
 const JsInterface = goog.require('wasmcustomdescriptorsjsinterop.JsInterface');
+const JsInterfaceAccidentalDefaultMethodImpl = goog.require('wasmcustomdescriptorsjsinterop.Main.JsInterfaceAccidentalDefaultMethodImpl');
+const JsInterfaceAccidentalImpl = goog.require('wasmcustomdescriptorsjsinterop.Main.JsInterfaceAccidentalImpl');
+const JsInterfaceDefaultMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceDefaultMethod');
 const JsInterfaceGetNumber = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceGetNumber');
 const JsInterfaceRenamedMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceRenamedMethod');
 const SomeJsType = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType');
@@ -212,7 +215,7 @@ function callAccidentalDefaultMethod(impl) {
  * @return {!SomeJsType}
  */
 function createJsSubtype() {
-  return new class extends SomeJsType {}();
+  return new class extends SomeJsType {}(123);
 }
 
 exports = {
