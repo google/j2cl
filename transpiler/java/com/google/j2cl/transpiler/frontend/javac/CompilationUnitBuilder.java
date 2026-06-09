@@ -180,10 +180,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 
 /** Creates a J2CL Java AST from the AST provided by JavaC. */
@@ -192,7 +189,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private final JavaEnvironment environment;
   private final Problems problems;
 
-  private final Map<VariableElement, Variable> variableByVariableElement = new HashMap<>();
+  private final Map<VarSymbol, Variable> variableByVarSymbol = new HashMap<>();
   // Keeps track of labels that are currently in scope. Even though labels cannot have the
   // same name if they are nested in the same method body, labels with the same name could
   // be lexically nested by being in different methods bodies, e.g. from local or anonymous
@@ -213,8 +210,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
    * @return The created {@link Type}.
    */
   private Type convertType(
-      ClassSymbol typeElement, List<JCTree> bodyDeclarations, JCTree sourcePositionNode) {
-    Type type = createType(typeElement, sourcePositionNode);
+      ClassSymbol classSymbol, List<JCTree> bodyDeclarations, JCTree sourcePositionNode) {
+    Type type = createType(classSymbol, sourcePositionNode);
     return processEnclosedBy(
         type,
         () -> {
@@ -224,11 +221,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   @Nullable
-  private Type createType(ClassSymbol typeElement, JCTree sourcePositionNode) {
-    if (typeElement == null) {
+  private Type createType(ClassSymbol classSymbol, JCTree sourcePositionNode) {
+    if (classSymbol == null) {
       return null;
     }
-    TypeDeclaration typeDeclaration = environment.createTypeDeclaration(typeElement);
+    TypeDeclaration typeDeclaration = environment.createTypeDeclaration(classSymbol);
 
     return new Type(
         typeDeclaration.isAnonymous()
@@ -289,9 +286,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private Field convertFieldDeclaration(JCVariableDecl fieldDeclaration) {
     Expression initializer;
-    VariableElement variableElement = fieldDeclaration.sym;
+    VarSymbol varSymbol = fieldDeclaration.sym;
     initializer = convertExpressionOrNull(fieldDeclaration.getInitializer());
-    return Field.builderFrom(environment.createFieldDescriptor(variableElement))
+    return Field.builderFrom(environment.createFieldDescriptor(varSymbol))
         .setInitializer(initializer)
         .setSourcePosition(getNamePosition(fieldDeclaration))
         .build();
@@ -328,26 +325,23 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Variable createVariable(JCVariableDecl variableDeclaration, boolean isParameter) {
-    VarSymbol variableElement = variableDeclaration.sym;
-    String name =
-        variableElement.getSimpleName().isEmpty()
-            ? "_"
-            : variableElement.getSimpleName().toString();
+    VarSymbol varSymbol = variableDeclaration.sym;
+    String name = varSymbol.getSimpleName().isEmpty() ? "_" : varSymbol.getSimpleName().toString();
     boolean isExplicitlyTyped =
         !variableDeclaration.isImplicitlyTyped() && !variableDeclaration.declaredUsingVar();
     Variable variable =
         environment.createVariable(
             getNamePosition(name, variableDeclaration),
             name,
-            variableElement,
+            varSymbol,
             isParameter,
             isExplicitlyTyped,
             inNullMarkedScope());
-    variableByVariableElement.put(variableElement, variable);
+    variableByVarSymbol.put(varSymbol, variable);
     return variable;
   }
 
-  private Method.Builder newMethodBuilder(ExecutableElement methodElement) {
+  private Method.Builder newMethodBuilder(MethodSymbol methodElement) {
     MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodElement);
     return Method.builder().setMethodDescriptor(methodDescriptor);
   }
@@ -1199,17 +1193,17 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       }
     }
 
-    if (fieldAccess.sym.baseSymbol() instanceof VariableElement variableElement) {
+    if (fieldAccess.sym.baseSymbol() instanceof VarSymbol varSymbol) {
       Expression qualifier = convertExpression(expression);
       DeclaredTypeDescriptor parameterizedEnclosingType =
           getParameterizedEnclosingType(
               environment.createDeclaredTypeDescriptor(
-                  JavaEnvironment.getEnclosingTypeElement(variableElement).asType()),
+                  JavaEnvironment.getEnclosingClass(varSymbol).asType()),
               qualifier);
 
       FieldDescriptor fieldDescriptor =
           environment.createFieldDescriptor(
-              parameterizedEnclosingType, variableElement, fieldAccess.type);
+              parameterizedEnclosingType, varSymbol, fieldAccess.type);
       return FieldAccess.builder().setQualifier(qualifier).setTarget(fieldDescriptor).build();
     }
 
@@ -1228,8 +1222,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     var constructorSymbol = (MethodSymbol) expression.constructor.baseSymbol();
     // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
     // descriptor and the MethodDescriptor are created in the right context.
-    var typeElement = (TypeElement) expression.type.asElement();
-    var inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
+    var classSymbol = (ClassSymbol) expression.type.asElement();
+    var inNullMarkedScope = environment.createTypeDeclaration(classSymbol).isNullMarked();
     var enclosingTypeDescriptor =
         environment.createDeclaredTypeDescriptor(expression.type, inNullMarkedScope);
 
@@ -1469,11 +1463,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodSymbol methodSymbol, MethodType methodType, TypeDescriptor qualifierTypeDescriptor) {
     // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
     // descriptor and the MethodDescriptor are created in the right context.
-    TypeElement typeElement = (TypeElement) methodSymbol.getEnclosingElement();
-    boolean inNullMarkedScope = environment.createTypeDeclaration(typeElement).isNullMarked();
+    ClassSymbol classSymbol = (ClassSymbol) methodSymbol.getEnclosingElement();
+    boolean inNullMarkedScope = environment.createTypeDeclaration(classSymbol).isNullMarked();
     DeclaredTypeDescriptor unparameterizedEnclosingTypeDescriptor =
-        environment.createDeclaredTypeDescriptor(
-            methodSymbol.getEnclosingElement().asType(), inNullMarkedScope);
+        environment.createDeclaredTypeDescriptor(classSymbol.asType(), inNullMarkedScope);
 
     if (qualifierTypeDescriptor != null) {
       return getParameterizedEnclosingType(
@@ -1578,7 +1571,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         return FieldAccess.builder().setTarget(fieldDescriptor).build();
       }
 
-      Variable variable = variableByVariableElement.get(symbol);
+      Variable variable = variableByVarSymbol.get(varSymbol);
       return variable.createReference();
     }
 

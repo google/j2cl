@@ -104,7 +104,6 @@ import javax.lang.model.element.Parameterizable;
 import javax.lang.model.element.RecordComponentElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
-import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.ExecutableType;
@@ -121,13 +120,13 @@ public class JavaEnvironment {
   private final Symtab symtab;
   private final Problems problems;
 
-  private final Map<TypeElement, TypeDeclaration> cachedTypeDeclarationByTypeElement =
+  private final Map<ClassSymbol, TypeDeclaration> cachedTypeDeclarationByClassSymbol =
       new HashMap<>();
 
   private record MethodDescriptorKey(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       ExecutableType methodType,
-      ExecutableElement declarationMethodElement,
+      MethodSymbol methodSymbol,
       List<TypeDescriptor> typeArguments) {}
 
   private final Map<MethodDescriptorKey, MethodDescriptor> cachedMethodDescriptors =
@@ -136,7 +135,7 @@ public class JavaEnvironment {
   private record FieldDescriptorKey(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       TypeDescriptor fieldType,
-      VariableElement variableElement) {}
+      VarSymbol variableElement) {}
 
   private final Map<FieldDescriptorKey, FieldDescriptor> cachedFieldDescriptors = new HashMap<>();
 
@@ -249,8 +248,8 @@ public class JavaEnvironment {
 
   @Nullable
   public DeclaredTypeDescriptor getTypeDescriptor(String qualifiedBinaryName) {
-    TypeElement element = binaryNameToTypeElement(qualifiedBinaryName);
-    return element == null ? null : createDeclaredTypeDescriptor(element.asType());
+    var classSymbol = binaryNameToClassSymbol(qualifiedBinaryName);
+    return classSymbol == null ? null : createDeclaredTypeDescriptor(classSymbol.asType());
   }
 
   DeclaredTypeDescriptor createDeclaredTypeDescriptor(
@@ -565,11 +564,11 @@ public class JavaEnvironment {
   }
 
   private ImmutableList<String> getClassComponents(Element element) {
-    if (!(element instanceof TypeElement typeElement)) {
+    if (!element.getKind().isClass() && !element.getKind().isInterface()) {
       return ImmutableList.of();
     }
     List<String> classComponents = new ArrayList<>();
-    TypeElement currentType = typeElement;
+    ClassSymbol currentType = (ClassSymbol) element;
     while (currentType != null) {
       String simpleName;
       if (currentType.getNestingKind() == NestingKind.LOCAL
@@ -577,50 +576,49 @@ public class JavaEnvironment {
         // JavaC binary name for local class is like package.components.EnclosingClass$1SimpleName
         // Extract the generated name by taking the part after the binary name of the declaring
         // class.
-        String binaryName = getBinaryNameFromTypeBinding(currentType);
-        String declaringClassPrefix =
-            getBinaryNameFromTypeBinding(getEnclosingTypeElement(currentType)) + "$";
+        String binaryName = getBinaryName(currentType);
+        String declaringClassPrefix = getBinaryName(getEnclosingClass(currentType)) + "$";
         simpleName = binaryName.substring(declaringClassPrefix.length());
       } else {
         simpleName = asElement(erasure(currentType.asType())).getSimpleName().toString();
       }
       classComponents.addFirst(simpleName);
       Element enclosingElement = currentType.getEnclosingElement();
-      while (enclosingElement != null && !(enclosingElement instanceof TypeElement)) {
+      while (enclosingElement != null && !(enclosingElement instanceof ClassSymbol)) {
         enclosingElement = enclosingElement.getEnclosingElement();
       }
-      currentType = (TypeElement) enclosingElement;
+      currentType = (ClassSymbol) enclosingElement;
     }
     return ImmutableList.copyOf(classComponents);
   }
 
-  /** Returns the binary name for a type element. */
-  private static String getBinaryNameFromTypeBinding(TypeElement typeElement) {
-    return ((ClassSymbol) typeElement).flatName().toString();
+  /** Returns the binary name for a class symbol. */
+  private static String getBinaryName(ClassSymbol classSymbol) {
+    return classSymbol.flatName().toString();
   }
 
-  private boolean isEnumSyntheticMethod(ExecutableElement methodElement) {
+  private boolean isEnumSyntheticMethod(MethodSymbol methodSymbol) {
     // Enum synthetic methods are not marked as such because per JLS 13.1 these methods are
     // implicitly declared but are not marked as synthetic.
-    return isEnum(getEnclosingTypeElement(methodElement))
-        && (isValuesMethod(methodElement) || isValueOfMethod(methodElement));
+    return isEnum(getEnclosingClass(methodSymbol))
+        && (isValuesMethod(methodSymbol) || isValueOfMethod(methodSymbol));
   }
 
-  private static boolean isValuesMethod(ExecutableElement methodElement) {
-    return methodElement.getSimpleName().contentEquals("values")
-        && methodElement.getParameters().isEmpty();
+  private static boolean isValuesMethod(MethodSymbol methodSymbol) {
+    return methodSymbol.getSimpleName().contentEquals("values")
+        && methodSymbol.getParameters().isEmpty();
   }
 
-  private boolean isValueOfMethod(ExecutableElement methodElement) {
-    return methodElement.getSimpleName().contentEquals("valueOf")
-        && methodElement.getParameters().size() == 1
-        && asTypeElement(methodElement.getParameters().getFirst().asType())
+  private boolean isValueOfMethod(MethodSymbol methodSymbol) {
+    return methodSymbol.getSimpleName().contentEquals("valueOf")
+        && methodSymbol.getParameters().size() == 1
+        && asClassSymbol(methodSymbol.getParameters().getFirst().asType())
             .getQualifiedName()
             .contentEquals("java.lang.String");
   }
 
-  private static boolean isAnnotationMethod(ExecutableElement executableElement) {
-    return executableElement.getEnclosingElement().getKind() == ElementKind.ANNOTATION_TYPE;
+  private static boolean isAnnotationMethod(MethodSymbol methodSymbol) {
+    return methodSymbol.getEnclosingElement().getKind() == ElementKind.ANNOTATION_TYPE;
   }
 
   /**
@@ -634,58 +632,56 @@ public class JavaEnvironment {
     return classSymbol.hasOuterInstance();
   }
 
-  FieldDescriptor createFieldDescriptor(VariableElement variableElement) {
-    return createFieldDescriptor(variableElement, variableElement.asType());
+  FieldDescriptor createFieldDescriptor(VarSymbol varSymbol) {
+    return createFieldDescriptor(varSymbol, varSymbol.asType());
   }
 
-  FieldDescriptor createFieldDescriptor(VariableElement variableElement, TypeMirror type) {
+  FieldDescriptor createFieldDescriptor(VarSymbol varSymbol, TypeMirror type) {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(getEnclosingTypeElement(variableElement).asType());
-    return createFieldDescriptor(enclosingTypeDescriptor, variableElement, type);
+        createDeclaredTypeDescriptor(getEnclosingClass(varSymbol).asType());
+    return createFieldDescriptor(enclosingTypeDescriptor, varSymbol, type);
   }
 
   FieldDescriptor createFieldDescriptor(
-      DeclaredTypeDescriptor enclosingTypeDescriptor,
-      VariableElement variableElement,
-      TypeMirror type) {
+      DeclaredTypeDescriptor enclosingTypeDescriptor, VarSymbol varSymbol, TypeMirror type) {
     boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     TypeDescriptor thisTypeDescriptor =
         applyNullabilityAnnotations(
             createTypeDescriptorWithNullability(
-                type, variableElement.getAnnotationMirrors(), inNullMarkedScope),
-            variableElement.asType());
-    var key = new FieldDescriptorKey(enclosingTypeDescriptor, thisTypeDescriptor, variableElement);
+                type, varSymbol.getAnnotationMirrors(), inNullMarkedScope),
+            varSymbol.asType());
+    var key = new FieldDescriptorKey(enclosingTypeDescriptor, thisTypeDescriptor, varSymbol);
     if (cachedFieldDescriptors.containsKey(key)) {
       return cachedFieldDescriptors.get(key);
     }
 
-    boolean isStatic = isStatic(variableElement);
-    Visibility visibility = getVisibility(variableElement);
-    String fieldName = variableElement.getSimpleName().toString();
+    boolean isStatic = isStatic(varSymbol);
+    Visibility visibility = getVisibility(varSymbol);
+    String fieldName = varSymbol.getSimpleName().toString();
 
     TypeDescriptor declarationTypeDescriptor =
         createTypeDescriptorWithNullability(
-            variableElement.asType(), variableElement.getAnnotationMirrors(), inNullMarkedScope);
+            varSymbol.asType(), varSymbol.getAnnotationMirrors(), inNullMarkedScope);
 
     FieldDescriptor declarationFieldDescriptor = null;
     if (declarationTypeDescriptor != thisTypeDescriptor || isSpecialized(enclosingTypeDescriptor)) {
       // Field references might be parameterized, and when they are we set the declaration
       // descriptor.
-      declarationFieldDescriptor = createFieldDescriptor(variableElement);
+      declarationFieldDescriptor = createFieldDescriptor(varSymbol);
     }
 
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
-    Object constantValue = variableElement.getConstantValue();
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(varSymbol);
+    Object constantValue = varSymbol.getConstantValue();
     boolean isCompileTimeConstant = constantValue != null;
-    boolean isEnumConstant = ((VarSymbol) variableElement).isEnum();
+    boolean isEnumConstant = varSymbol.isEnum();
 
     if (isCompileTimeConstant || isEnumConstant) {
       // Enum and compile-time constant fields are always non-nullable.
       thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
     }
 
-    boolean isFinal = isFinal(variableElement);
-    boolean isVolatile = isVolatile(variableElement);
+    boolean isFinal = isFinal(varSymbol);
+    boolean isVolatile = isVolatile(varSymbol);
     var fieldDescriptor =
         FieldDescriptor.builder()
             .setDeclarationDescriptor(declarationFieldDescriptor)
@@ -696,7 +692,7 @@ public class JavaEnvironment {
             .setVisibility(visibility)
             .setOriginalJsInfo(jsInfo)
             .setFinal(isFinal)
-            .setAnnotations(createAnnotations(variableElement, inNullMarkedScope))
+            .setAnnotations(createAnnotations(varSymbol, inNullMarkedScope))
             .setCompileTimeConstant(isCompileTimeConstant)
             .setConstantValue(
                 constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
@@ -707,29 +703,28 @@ public class JavaEnvironment {
     return fieldDescriptor;
   }
 
-  /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
+  /** Create a MethodDescriptor directly based on the given JavaC MethodSymbol. */
+  @SuppressWarnings("ReferenceEquality")
   MethodDescriptor createMethodDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       ExecutableType methodType,
-      ExecutableElement declarationMethodElement,
+      MethodSymbol methodSymbol,
       List<TypeDescriptor> typeArguments) {
 
     var key =
-        new MethodDescriptorKey(
-            enclosingTypeDescriptor, methodType, declarationMethodElement, typeArguments);
+        new MethodDescriptorKey(enclosingTypeDescriptor, methodType, methodSymbol, typeArguments);
     if (cachedMethodDescriptors.containsKey(key)) {
       return cachedMethodDescriptors.get(key);
     }
-    checkArgument(declarationMethodElement == ((Symbol) declarationMethodElement).baseSymbol());
+    checkArgument(methodSymbol == methodSymbol.baseSymbol());
 
     ImmutableList<TypeMirror> parameters =
         methodType.getParameterTypes().stream().collect(toImmutableList());
     TypeMirror returnType = methodType.getReturnType();
     MethodDescriptor declarationMethodDescriptor = null;
     if (!typeArguments.isEmpty()
-        || isSpecialized(
-            enclosingTypeDescriptor, declarationMethodElement, parameters, returnType)) {
-      declarationMethodDescriptor = createMethodDescriptor(declarationMethodElement);
+        || isSpecialized(enclosingTypeDescriptor, methodSymbol, parameters, returnType)) {
+      declarationMethodDescriptor = createMethodDescriptor(methodSymbol);
     } else {
       typeArguments = ImmutableList.of();
     }
@@ -737,41 +732,41 @@ public class JavaEnvironment {
     boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     TypeDescriptor returnTypeDescriptor =
         adjustForSyntheticEnumOrAnnotationMethod(
-            declarationMethodElement,
+            methodSymbol,
             applyNullabilityAnnotations(
                 createTypeDescriptorWithNullability(
-                    returnType, declarationMethodElement.getAnnotationMirrors(), inNullMarkedScope),
-                declarationMethodElement.getReturnType()));
+                    returnType, methodSymbol.getAnnotationMirrors(), inNullMarkedScope),
+                methodSymbol.getReturnType()));
 
     ImmutableList<ParameterDescriptor> parameterDescriptors =
-        convertParameterDescriptors(enclosingTypeDescriptor, declarationMethodElement, parameters);
+        convertParameterDescriptors(enclosingTypeDescriptor, methodSymbol, parameters);
 
     ImmutableList<TypeVariable> typeParameterTypeDescriptors =
-        declarationMethodElement.getTypeParameters().stream()
+        methodSymbol.getTypeParameters().stream()
             .map(TypeParameterElement::asType)
             .map(javax.lang.model.type.TypeVariable.class::cast)
             .map(tv -> createTypeVariable(tv, inNullMarkedScope))
             .collect(toImmutableList());
 
     var thrownExceptions =
-        declarationMethodElement.getThrownTypes().stream()
+        methodSymbol.getThrownTypes().stream()
             .map(t -> createTypeDescriptor(t, inNullMarkedScope))
             .collect(toImmutableList());
 
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(declarationMethodElement);
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(methodSymbol);
     boolean isNative =
-        isNative(declarationMethodElement)
+        isNative(methodSymbol)
             || (!jsInfo.isJsOverlay()
                 && enclosingTypeDescriptor.isNative()
-                && isAbstract(declarationMethodElement));
-    boolean isConstructor = declarationMethodElement.getKind() == ElementKind.CONSTRUCTOR;
-    var enclosingClass = (ClassSymbol) declarationMethodElement.getEnclosingElement();
+                && isAbstract(methodSymbol));
+    boolean isConstructor = methodSymbol.getKind() == ElementKind.CONSTRUCTOR;
+    var enclosingClass = (ClassSymbol) methodSymbol.getEnclosingElement();
     boolean isRecordComponentAccessor =
         isRecord(enclosingClass)
             && enclosingClass.getRecordComponents().stream()
-                .anyMatch(c -> c.getAccessor() == declarationMethodElement);
+                .anyMatch(c -> c.getAccessor() == methodSymbol);
 
-    String methodName = declarationMethodElement.getSimpleName().toString();
+    String methodName = methodSymbol.getSimpleName().toString();
     var md =
         MethodDescriptor.builder()
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
@@ -783,18 +778,18 @@ public class JavaEnvironment {
             .setTypeArgumentTypeDescriptors(typeArguments)
             .setThrownTypeDescriptors(thrownExceptions)
             .setOriginalJsInfo(jsInfo)
-            .setVisibility(getVisibility(declarationMethodElement))
-            .setStatic(isStatic(declarationMethodElement))
+            .setVisibility(getVisibility(methodSymbol))
+            .setStatic(isStatic(methodSymbol))
             .setConstructor(isConstructor)
             .setRecordComponentAccessor(isRecordComponentAccessor)
             .setNative(isNative)
-            .setAnnotations(createAnnotations(declarationMethodElement, inNullMarkedScope))
-            .setFinal(isFinal(declarationMethodElement))
-            .setDefaultMethod(isDefaultMethod(declarationMethodElement))
-            .setAbstract(isAbstract(declarationMethodElement))
-            .setSynchronized(isSynchronized(declarationMethodElement))
-            .setSynthetic(isSynthetic(declarationMethodElement))
-            .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
+            .setAnnotations(createAnnotations(methodSymbol, inNullMarkedScope))
+            .setFinal(isFinal(methodSymbol))
+            .setDefaultMethod(isDefaultMethod(methodSymbol))
+            .setAbstract(isAbstract(methodSymbol))
+            .setSynchronized(isSynchronized(methodSymbol))
+            .setSynthetic(isSynthetic(methodSymbol))
+            .setEnumSyntheticMethod(isEnumSyntheticMethod(methodSymbol))
             .build();
     cachedMethodDescriptors.put(key, md);
     return md;
@@ -802,28 +797,27 @@ public class JavaEnvironment {
 
   private ImmutableList<ParameterDescriptor> convertParameterDescriptors(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
-      ExecutableElement declarationMethodElement,
+      MethodSymbol methodSymbol,
       ImmutableList<TypeMirror> parameters) {
     boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     ImmutableList.Builder<ParameterDescriptor> parametersBuilder = ImmutableList.builder();
 
     for (int i = 0; i < parameters.size(); i++) {
-      var parameterAnnotations =
-          declarationMethodElement.getParameters().get(i).getAnnotationMirrors();
+      var parameterAnnotations = methodSymbol.getParameters().get(i).getAnnotationMirrors();
 
       TypeDescriptor parameterType =
           adjustForSyntheticEnumOrAnnotationMethod(
-              declarationMethodElement,
+              methodSymbol,
               applyNullabilityAnnotations(
                   createTypeDescriptorWithNullability(
                       parameters.get(i), parameterAnnotations, inNullMarkedScope),
-                  declarationMethodElement.getParameters().get(i).asType()));
+                  methodSymbol.getParameters().get(i).asType()));
 
       parametersBuilder.add(
           ParameterDescriptor.builder()
               .setTypeDescriptor(parameterType)
-              .setJsOptional(JsInteropUtils.isJsOptional(declarationMethodElement, i))
-              .setVarargs(i == parameters.size() - 1 && declarationMethodElement.isVarArgs())
+              .setJsOptional(JsInteropUtils.isJsOptional(methodSymbol, i))
+              .setVarargs(i == parameters.size() - 1 && methodSymbol.isVarArgs())
               .setAnnotations(createAnnotations(parameterAnnotations, inNullMarkedScope))
               .build());
     }
@@ -831,7 +825,7 @@ public class JavaEnvironment {
   }
 
   private TypeDescriptor adjustForSyntheticEnumOrAnnotationMethod(
-      ExecutableElement methodSymbol, TypeDescriptor typeDescriptor) {
+      MethodSymbol methodSymbol, TypeDescriptor typeDescriptor) {
     if (!isEnumSyntheticMethod(methodSymbol) && !isAnnotationMethod(methodSymbol)) {
       return typeDescriptor;
     }
@@ -847,19 +841,19 @@ public class JavaEnvironment {
     return typeDescriptor.toNonNullable();
   }
 
-  /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
-  MethodDescriptor createMethodDescriptor(ExecutableElement methodElement) {
+  /** Create a MethodDescriptor directly based on the given JavaC MethodSymbol. */
+  MethodDescriptor createMethodDescriptor(MethodSymbol methodSymbol) {
     // Obtain @NullMarked scope from the enclosing type declaration so that both the enclosing type
     // descriptor and the MethodDescriptor are created in the right context.
-    TypeElement typeElement = (TypeElement) methodElement.getEnclosingElement();
-    boolean inNullMarkedScope = createTypeDeclaration(typeElement).isNullMarked();
+    methodSymbol = (MethodSymbol) methodSymbol.baseSymbol();
+    ClassSymbol classSymbol = (ClassSymbol) methodSymbol.getEnclosingElement();
+    boolean inNullMarkedScope = createTypeDeclaration(classSymbol).isNullMarked();
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(
-            methodElement.getEnclosingElement().asType(), inNullMarkedScope);
+        createDeclaredTypeDescriptor(classSymbol.asType(), inNullMarkedScope);
     return createMethodDescriptor(
         enclosingTypeDescriptor,
-        (ExecutableType) methodElement.asType(),
-        methodElement,
+        (ExecutableType) methodSymbol.asType(),
+        methodSymbol,
         ImmutableList.of());
   }
 
@@ -923,13 +917,13 @@ public class JavaEnvironment {
    */
   private boolean isSpecialized(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
-      ExecutableElement declarationMethodElement,
+      MethodSymbol methodSymbol,
       List<? extends TypeMirror> parameters,
       TypeMirror returnType) {
-    return !isSameType(returnType, declarationMethodElement.getReturnType())
+    return !isSameType(returnType, methodSymbol.getReturnType())
         || !Streams.zip(
                 parameters.stream(),
-                declarationMethodElement.getParameters().stream(),
+                methodSymbol.getParameters().stream(),
                 (thisType, thatType) -> isSameType(thisType, thatType.asType()))
             .allMatch(equals -> equals)
         || isSpecialized(enclosingTypeDescriptor);
@@ -946,7 +940,7 @@ public class JavaEnvironment {
   }
 
   public DeclaredTypeDescriptor createTypeDescriptor(String qualifiedBinaryName) {
-    TypeElement element = binaryNameToTypeElement(qualifiedBinaryName);
+    var element = binaryNameToClassSymbol(qualifiedBinaryName);
     return element != null ? createDeclaredTypeDescriptor(element.asType()) : null;
   }
 
@@ -964,7 +958,7 @@ public class JavaEnvironment {
         .collect(toImmutableList());
   }
 
-  private TypeElement binaryNameToTypeElement(String qualifiedBinaryName) {
+  private ClassSymbol binaryNameToClassSymbol(String qualifiedBinaryName) {
     String qualifiedSourcEName = qualifiedBinaryName.replace('$', '.');
     return elements.getTypeElement(qualifiedSourcEName);
   }
@@ -979,8 +973,8 @@ public class JavaEnvironment {
     return javacTypes.asElement(typeMirror);
   }
 
-  private TypeElement asTypeElement(TypeMirror typeMirror) {
-    return (TypeElement) asElement(typeMirror);
+  private ClassSymbol asClassSymbol(TypeMirror typeMirror) {
+    return (ClassSymbol) asElement(typeMirror);
   }
 
   private TypeMirror erasure(TypeMirror typeMirror) {
@@ -1016,13 +1010,13 @@ public class JavaEnvironment {
       return cachedTypeDescriptor;
     }
 
-    TypeElement typeElement = (TypeElement) classType.asElement();
+    ClassSymbol classSymbol = (ClassSymbol) classType.asElement();
     DeclaredTypeDescriptor typeDescriptor =
-        createTypeDeclaration(typeElement)
+        createTypeDeclaration(classSymbol)
             .toDescriptor(
                 createTypeArgumentDescriptors(
                     getTypeArguments(classType),
-                    getTypeParameters(typeElement),
+                    getTypeParameters(classSymbol),
                     inNullMarkedScope));
     putTypeDescriptorInCache(inNullMarkedScope, classType, typeDescriptor);
     return typeDescriptor;
@@ -1068,9 +1062,9 @@ public class JavaEnvironment {
       return true;
     }
     Element element = asElement(upperbound);
-    return element instanceof TypeElement typeElement
-        && typeElement.getQualifiedName().contentEquals("java.lang.Object")
-        && typeElement.getAnnotationMirrors().isEmpty();
+    return element instanceof ClassSymbol classSymbol
+        && classSymbol.getQualifiedName().contentEquals("java.lang.Object")
+        && classSymbol.getAnnotationMirrors().isEmpty();
   }
 
   private final Map<DeclaredType, DeclaredTypeDescriptor>
@@ -1113,42 +1107,42 @@ public class JavaEnvironment {
     return typeArguments;
   }
 
-  private static Kind getKind(TypeElement typeElement) {
-    return switch (typeElement.getKind()) {
+  private static Kind getKind(ClassSymbol classSymbol) {
+    return switch (classSymbol.getKind()) {
       case ENUM ->
           // Do not consider the anonymous classes that constitute enum values as Enums, only the
           // enum "class" itself is considered Kind.ENUM.
-          isAnonymous(typeElement) ? Kind.CLASS : Kind.ENUM;
+          isAnonymous(classSymbol) ? Kind.CLASS : Kind.ENUM;
       case CLASS, RECORD -> Kind.CLASS;
       case INTERFACE, ANNOTATION_TYPE -> Kind.INTERFACE;
-      default -> throw new InternalCompilerError("Type binding %s not handled.", typeElement);
+      default -> throw new InternalCompilerError("Type binding %s not handled.", classSymbol);
     };
   }
 
   @Nullable
-  TypeDeclaration createTypeDeclaration(final TypeElement typeElement) {
-    if (typeElement == null) {
+  TypeDeclaration createTypeDeclaration(final ClassSymbol classSymbol) {
+    if (classSymbol == null) {
       return null;
     }
 
-    if (cachedTypeDeclarationByTypeElement.containsKey(typeElement)) {
-      return cachedTypeDeclarationByTypeElement.get(typeElement);
+    if (cachedTypeDeclarationByClassSymbol.containsKey(classSymbol)) {
+      return cachedTypeDeclarationByClassSymbol.get(classSymbol);
     }
 
     // Compute these first since they're reused in other calculations.
-    boolean isAbstract = isAbstract(typeElement) && !isInterface(typeElement);
-    Kind kind = getKind(typeElement);
-    boolean isFinal = isFinal(typeElement);
+    boolean isAbstract = isAbstract(classSymbol) && !isInterface(classSymbol);
+    Kind kind = getKind(classSymbol);
+    boolean isFinal = isFinal(classSymbol);
 
     Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
         () -> {
           ImmutableList.Builder<MethodDescriptor> listBuilder = ImmutableList.builder();
-          for (MethodSymbol methodElement :
-              typeElement.getEnclosedElements().stream()
+          for (MethodSymbol methodSymbol :
+              classSymbol.getEnclosedElements().stream()
                   .filter(JavaEnvironment::isMethod)
                   .map(MethodSymbol.class::cast)
                   .collect(toImmutableList())) {
-            MethodDescriptor methodDescriptor = createMethodDescriptor(methodElement);
+            MethodDescriptor methodDescriptor = createMethodDescriptor(methodSymbol);
             listBuilder.add(methodDescriptor);
           }
           return listBuilder.build();
@@ -1162,7 +1156,7 @@ public class JavaEnvironment {
 
           // Get the actual abstract method from the frontend; which will return the unparameterized
           // declaration possibly from a supertype.
-          var functionalInterfaceMethodDecl = getFunctionalInterfaceMethod(typeElement.asType());
+          var functionalInterfaceMethodDecl = getFunctionalInterfaceMethod(classSymbol.asType());
 
           if (functionalInterfaceMethodDecl == null) {
             return null;
@@ -1184,92 +1178,92 @@ public class JavaEnvironment {
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
-            typeElement.getEnclosedElements().stream()
+            classSymbol.getEnclosedElements().stream()
                 .filter(JavaEnvironment::isField)
-                .map(VariableElement.class::cast)
+                .map(VarSymbol.class::cast)
                 .map(this::createFieldDescriptor)
                 .collect(toImmutableList());
 
-    JsEnumInfo jsEnumInfo = JsInteropUtils.getJsEnumInfo(typeElement);
+    JsEnumInfo jsEnumInfo = JsInteropUtils.getJsEnumInfo(classSymbol);
 
-    List<TypeParameterElement> typeParameterElements = getTypeParameters(typeElement);
+    List<TypeParameterElement> typeParameterElements = getTypeParameters(classSymbol);
 
-    boolean isNullMarked = isNullMarked(typeElement);
+    boolean isNullMarked = isNullMarked(classSymbol);
     var td =
         TypeDeclaration.builder()
-            .setClassComponents(getClassComponents(typeElement))
-            .setEnclosingTypeDeclaration(
-                createTypeDeclaration(getEnclosingTypeElement(typeElement)))
-            .setEnclosingMethodDescriptorFactory(() -> getEnclosingMethodDescriptor(typeElement))
+            .setClassComponents(getClassComponents(classSymbol))
+            .setEnclosingTypeDeclaration(createTypeDeclaration(getEnclosingClass(classSymbol)))
+            .setEnclosingMethodDescriptorFactory(() -> getEnclosingMethodDescriptor(classSymbol))
             .setSuperTypeDescriptorFactory(
-                () -> createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked))
+                () -> createDeclaredTypeDescriptor(classSymbol.getSuperclass(), isNullMarked))
             .setInterfaceTypeDescriptorsFactory(
                 () ->
                     createTypeDescriptors(
-                        typeElement.getInterfaces(), isNullMarked, DeclaredTypeDescriptor.class))
+                        classSymbol.getInterfaces(), isNullMarked, DeclaredTypeDescriptor.class))
             .setHasAbstractModifier(isAbstract)
             .setKind(kind)
-            .setAnnotation(isAnnotation(typeElement))
-            .setCapturingEnclosingInstance(capturesEnclosingInstance((ClassSymbol) typeElement))
+            .setAnnotation(isAnnotation(classSymbol))
+            .setCapturingEnclosingInstance(capturesEnclosingInstance(classSymbol))
             .setFinal(isFinal)
-            .setSealed(isSealed(typeElement))
-            .setFunctionalInterface(isFunctionalInterface(typeElement.asType()))
-            .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeElement))
-            .setAnnotationsFactory(() -> createAnnotations(typeElement, isNullMarked))
+            .setSealed(isSealed(classSymbol))
+            .setFunctionalInterface(isFunctionalInterface(classSymbol.asType()))
+            .setJsFunctionInterface(JsInteropUtils.isJsFunction(classSymbol))
+            .setAnnotationsFactory(() -> createAnnotations(classSymbol, isNullMarked))
             .setSourceLanguage(
-                isAnnotatedWithKotlinMetadata(typeElement)
+                isAnnotatedWithKotlinMetadata(classSymbol)
                     ? SourceLanguage.KOTLIN
                     : SourceLanguage.JAVA)
-            .setJsType(JsInteropUtils.isJsType(typeElement))
+            .setJsType(JsInteropUtils.isJsType(classSymbol))
             .setJsEnumInfo(jsEnumInfo)
-            .setNative(JsInteropUtils.isJsNativeType(typeElement))
-            .setAnonymous(isAnonymous(typeElement))
+            .setNative(JsInteropUtils.isJsNativeType(classSymbol))
+            .setAnonymous(isAnonymous(classSymbol))
             // Keep parity with jdt where anonymous classes are also considered local.
-            .setLocal(isLocal(typeElement) || isAnonymous(typeElement))
-            .setSimpleJsName(JsInteropAnnotationUtils.getJsName(typeElement))
-            .setCustomizedJsNamespace(getJsNamespace(typeElement))
+            .setLocal(isLocal(classSymbol) || isAnonymous(classSymbol))
+            .setSimpleJsName(JsInteropAnnotationUtils.getJsName(classSymbol))
+            .setCustomizedJsNamespace(getJsNamespace(classSymbol))
             .setNullMarked(isNullMarked)
             .setOriginalSimpleSourceName(
-                typeElement.getSimpleName() != null ? typeElement.getSimpleName().toString() : null)
-            .setPackage(createPackageDeclaration(getPackageOf(typeElement)))
+                classSymbol.getSimpleName() != null ? classSymbol.getSimpleName().toString() : null)
+            .setPackage(createPackageDeclaration(getPackageOf(classSymbol)))
             .setTypeParameterDescriptors(
                 typeParameterElements.stream()
                     .map(TypeParameterElement::asType)
                     .map(javax.lang.model.type.TypeVariable.class::cast)
                     .map(tv -> createTypeVariable(tv, isNullMarked))
                     .collect(toImmutableList()))
-            .setVisibility(getVisibility(typeElement))
+            .setVisibility(getVisibility(classSymbol))
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
             .setSingleAbstractMethodDescriptorFactory(singleAbstractMethod)
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setMemberTypeDeclarationsFactory(
                 () ->
-                    typeElement.getEnclosedElements().stream()
-                        .filter(TypeElement.class::isInstance)
-                        .map(TypeElement.class::cast)
+                    classSymbol.getEnclosedElements().stream()
+                        .filter(ClassSymbol.class::isInstance)
+                        .map(ClassSymbol.class::cast)
                         .map(this::createTypeDeclaration)
                         .collect(toImmutableList()))
             .setRecordComponentAccessorsDescriptorFactory(
                 () ->
-                    !isRecord(typeElement)
+                    !isRecord(classSymbol)
                         ? ImmutableList.of()
-                        : typeElement.getRecordComponents().stream()
+                        : classSymbol.getRecordComponents().stream()
                             .map(RecordComponentElement::getAccessor)
+                            .map(MethodSymbol.class::cast)
                             .map(this::createMethodDescriptor)
                             .collect(toImmutableList()))
             .build();
-    cachedTypeDeclarationByTypeElement.put(typeElement, td);
+    cachedTypeDeclarationByClassSymbol.put(classSymbol, td);
     return td;
   }
 
   @Nullable
-  private MethodDescriptor getEnclosingMethodDescriptor(TypeElement typeElement) {
-    Element enclosingElement = typeElement.getEnclosingElement();
+  private MethodDescriptor getEnclosingMethodDescriptor(ClassSymbol classSymbol) {
+    Element enclosingElement = classSymbol.getEnclosingElement();
     if (enclosingElement == null || !isMethod(enclosingElement)) {
       return null;
     }
 
-    return createMethodDescriptor((ExecutableElement) enclosingElement);
+    return createMethodDescriptor((MethodSymbol) enclosingElement);
   }
 
   private PackageDeclaration createPackageDeclaration(PackageElement packageElement) {
@@ -1291,19 +1285,20 @@ public class JavaEnvironment {
 
     Element enclosingElement = element.getEnclosingElement();
     while (enclosingElement != null
-        && !(enclosingElement instanceof TypeElement
-            || enclosingElement instanceof PackageElement)) {
+        && !(enclosingElement.getKind().isClass()
+            || enclosingElement.getKind().isInterface()
+                | enclosingElement.getKind() == ElementKind.PACKAGE)) {
       enclosingElement = enclosingElement.getEnclosingElement();
     }
 
     return enclosingElement != null && isNullMarked(enclosingElement);
   }
 
-  private static List<TypeParameterElement> getTypeParameters(TypeElement typeElement) {
+  private static List<TypeParameterElement> getTypeParameters(ClassSymbol classSymbol) {
     List<TypeParameterElement> typeParameterElements =
-        new ArrayList<>(typeElement.getTypeParameters());
-    Element currentElement = typeElement;
-    Element enclosingElement = typeElement.getEnclosingElement();
+        new ArrayList<>(classSymbol.getTypeParameters());
+    Element currentElement = classSymbol;
+    Element enclosingElement = classSymbol.getEnclosingElement();
     while (enclosingElement != null) {
       if (isStatic(currentElement)) {
         break;
@@ -1321,12 +1316,12 @@ public class JavaEnvironment {
     return typeParameterElements;
   }
 
-  public static TypeElement getEnclosingTypeElement(Element typeElement) {
-    Element enclosing = typeElement.getEnclosingElement();
-    while (enclosing != null && !(enclosing instanceof TypeElement)) {
+  public static ClassSymbol getEnclosingClass(Element element) {
+    var enclosing = element.getEnclosingElement();
+    while (enclosing != null && !(enclosing instanceof ClassSymbol)) {
       enclosing = enclosing.getEnclosingElement();
     }
-    return (TypeElement) enclosing;
+    return (ClassSymbol) enclosing;
   }
 
   @Nullable
