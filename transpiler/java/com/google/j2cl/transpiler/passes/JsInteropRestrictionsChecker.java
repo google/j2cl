@@ -1720,13 +1720,7 @@ public class JsInteropRestrictionsChecker {
       }
       case PROPERTY -> {
         Field field = (Field) member;
-        if (field.getDescriptor().isFinal()) {
-          problems.error(
-              field.getSourcePosition(),
-              "Native JsType field '%s' cannot be final.",
-              member.getReadableDescription());
-          return;
-        } else if (field.hasInitializer()) {
+        if (field.hasInitializer()) {
           problems.error(
               field.getSourcePosition(),
               "Native JsType field '%s' cannot have initializer.",

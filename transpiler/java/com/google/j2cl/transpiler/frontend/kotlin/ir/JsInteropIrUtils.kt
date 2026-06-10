@@ -285,9 +285,6 @@ private val IrField.isCompanionFieldOfNativeJsTypeOrJsFunction: Boolean
 
 private fun IrDeclaration.isMemberOfNativeJsType(): Boolean = parentClassOrNull?.isNative ?: false
 
-val IrField.isNativeJsField: Boolean
-  get() = isMemberOfNativeJsType() && !isJsOverlay
-
 private fun IrDeclaration.isJsEnumEntry(): Boolean {
   return this is IrEnumEntry && parentClassOrNull?.isJsEnum == true
 }

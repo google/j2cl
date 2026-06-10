@@ -3901,11 +3901,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         }
         @JsType(isNative=true) abstract class Buggy {
           public static final int s = 42;
-        > Error: Native JsType field 'Buggy.s' cannot be final.
+        > Error: Native JsType field 'Buggy.s' cannot have initializer.
           public static int t = 42;
         > Error: Native JsType field 'Buggy.t' cannot have initializer.
           public final int f = 42;
-        > Error: Native JsType field 'Buggy.f' cannot be final.
+        > Error: Native JsType field 'Buggy.f' cannot have initializer.
           public int g = 42;
         > Error: Native JsType field 'Buggy.g' cannot have initializer.
           @JsIgnore public Buggy() { }

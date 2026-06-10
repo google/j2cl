@@ -59,7 +59,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNative
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isNativeJsField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
@@ -770,12 +769,7 @@ internal class KotlinEnvironment(
         .setVisibility(irField.j2clVisibility)
         .setCompileTimeConstant(constantValue != null)
         .setConstantValue(constantValue)
-        // Kotlin has stricter requirements for val properties than exists for Java final fields;
-        // thus  we allow val properties to be native JS members, but we pretend like it's non-final
-        // in the  J2CL AST to not fail JsInterop restriction checks later on. Weaken the final
-        // semantics here should cause a practical problem as the JVM compilations would have
-        // already enforced the final semantics.
-        .setFinal(irField.isFinal && !irField.isNativeJsField)
+        .setFinal(irField.isFinal)
         .setStatic(irField.isStatic || irField.parent !is IrDeclaration)
         .setSynthetic(irField.isSynthetic)
         .setOriginalJsInfo(irField.getJsInfo())
