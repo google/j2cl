@@ -41,7 +41,7 @@ class Equality {
    * @return {boolean}
    */
   static $sameNumber(left, right) {
-    return left == right;
+    return left === right;
   }
 }
 
