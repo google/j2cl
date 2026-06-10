@@ -52,11 +52,11 @@ class BoundsWithVariance internal constructor() {
  
  internal fun <E: Any> accept_pp_nativekttypes(o: ListIterator<out E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: Collection<out E>) {}
+ internal fun <E: Any> accept_pp_nativekttypes(o: Collection<E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: List<out E>) {}
+ internal fun <E: Any> accept_pp_nativekttypes(o: List<E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: Set<out E>) {}
+ internal fun <E: Any> accept_pp_nativekttypes(o: Set<E>) {}
  
  internal fun <E: Any> accept_pp_nativekttypes(o: AbstractCollection<out E>) {}
  
@@ -64,9 +64,9 @@ class BoundsWithVariance internal constructor() {
  
  internal fun <E: Any> accept_pp_nativekttypes(o: AbstractSet<out E>) {}
  
- internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: Map<in K, out V>) {}
+ internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: Map<in K, V>) {}
  
  internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: AbstractMap<in K, out V>) {}
  
- internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: Entry<out K, out V>) {}
+ internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: Entry<K, V>) {}
 }

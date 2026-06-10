@@ -688,7 +688,7 @@ open class Collections {
   }
   
   @JvmStatic
-  fun testWildcardMutation(lists: List<out List<String>>) {
+  fun testWildcardMutation(lists: List<List<String>>) {
    lists.get(0)!!.asMutableList().add("foo")
   }
   
@@ -737,8 +737,8 @@ open class Collections {
    )
   }
   
-  override fun addAll(c: Collection<out T>): Boolean {
-   var c_1: Collection<out T> = c
+  override fun addAll(c: Collection<T>): Boolean {
+   var c_1: Collection<T> = c
    c_1 = Collections.convertCollection(c_1)
    return super<AbstractCollection>.addAll(c_1)
   }
@@ -804,8 +804,8 @@ open class Collections {
     return 0
    }
   
-  override fun addAll(index: Int, c: Collection<out T>): Boolean {
-   var c_1: Collection<out T> = c
+  override fun addAll(index: Int, c: Collection<T>): Boolean {
+   var c_1: Collection<T> = c
    c_1 = Collections.convertCollection(c_1)
    return super<AbstractList>.addAll(index, c_1)
   }
@@ -936,8 +936,8 @@ open class Collections {
    ) as V
   }
   
-  override fun putAll(m: Map<out K, out V>) {
-   var m_1: Map<out K, out V> = m
+  override fun putAll(m: Map<out K, V>) {
+   var m_1: Map<out K, V> = m
    m_1 = Collections.convertMap(m_1)
    super<AbstractMap>.putAll(m_1)
   }

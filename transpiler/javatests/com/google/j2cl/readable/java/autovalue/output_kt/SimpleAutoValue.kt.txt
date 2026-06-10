@@ -65,7 +65,7 @@ abstract class SimpleAutoValue {
  }
  
  abstract class GenericType internal constructor(): AbstractCollection<AutoValue_SimpleAutoValue?>() {
-  internal open fun <T: AutoValue_SimpleAutoValue?> foo_pp_autovalue(o1: List<out AutoValue_SimpleAutoValue?>?, o2: List<AutoValue_SimpleAutoValue?>?): T {
+  internal open fun <T: AutoValue_SimpleAutoValue?> foo_pp_autovalue(o1: List<AutoValue_SimpleAutoValue?>?, o2: List<AutoValue_SimpleAutoValue?>?): T {
    this.foo_pp_autovalue<AutoValue_SimpleAutoValue?>(null, null)!!.getIntField()
    val o: AutoValue_SimpleAutoValue? = o1!!.get(0)
    return null as T
