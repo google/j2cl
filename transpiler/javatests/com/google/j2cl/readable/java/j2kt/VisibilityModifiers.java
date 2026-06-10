@@ -103,6 +103,12 @@ public final class VisibilityModifiers {
     // }
   }
 
+  // TODO(b/206898384): Re-enable once J2KT renders contains() override as public, and not internal.
+  // abstract static class PackagePrivateCollection implements Collection<PackagePrivate> {
+  //   @Override
+  //   public abstract boolean contains(Object o);
+  // }
+
   public static class ProtectedOverrideOfVisibilityWarningsSuppressed
       extends VisibilityWarningsSuppressed.NonFinal.Public {
     @Override

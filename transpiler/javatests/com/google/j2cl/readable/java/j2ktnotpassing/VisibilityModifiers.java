@@ -15,6 +15,7 @@
  */
 package j2ktnotpassing;
 
+import java.util.Collection;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -26,6 +27,12 @@ public final class VisibilityModifiers {
     public <T extends PackagePrivate> void publicWithPackagePrivateTypeParameter(T param) {
       throw new UnsupportedOperationException();
     }
+  }
+
+  abstract static class PackagePrivateCollection implements Collection<PackagePrivate> {
+    // TODO(b/206898384): J2KT translates it as internal, but it should remain public.
+    @Override
+    public abstract boolean contains(Object o);
   }
 
   static class PackagePrivate {

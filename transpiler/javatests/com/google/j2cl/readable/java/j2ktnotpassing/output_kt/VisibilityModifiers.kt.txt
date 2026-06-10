@@ -20,6 +20,8 @@ package j2ktnotpassing
 
 import javaemul.lang.*
 import java.lang.UnsupportedOperationException
+import javaemul.lang.MutableCollectionJvm
+import kotlin.Boolean
 import kotlin.Suppress
 
 class VisibilityModifiers {
@@ -29,6 +31,10 @@ class VisibilityModifiers {
   open fun <T: PackagePrivate> publicWithPackagePrivateTypeParameter(param: T) {
    throw UnsupportedOperationException()
   }
+ }
+ 
+ internal abstract class PackagePrivateCollection: MutableCollectionJvm<PackagePrivate> {
+  internal abstract override fun contains(o: PackagePrivate): Boolean
  }
  
  internal open class PackagePrivate {
