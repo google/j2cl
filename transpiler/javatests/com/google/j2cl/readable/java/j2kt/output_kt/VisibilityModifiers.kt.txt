@@ -32,6 +32,12 @@ class VisibilityModifiers {
   protected open fun protectedMethod() {}
   
   private fun privateMethod() {}
+  
+  internal open fun publicWithPackagePrivateParameter(param: PackagePrivate) {}
+  
+  internal open fun publicReturnsPackagePrivate(): PackagePrivate {
+   throw UnsupportedOperationException()
+  }
  }
  
  internal open class PackagePrivate {

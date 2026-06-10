@@ -21,13 +21,7 @@ import org.jspecify.annotations.NullMarked;
 public final class VisibilityModifiers {
   public static class Public {
     // TODO(b/206898384): Remove once J2KT narrows visibility from referenced types.
-    public void publicWithPackagePrivateParameter(PackagePrivate param) {}
-
     public void publicWithTransitivePackagePrivateParameter(PackagePrivate.Public param) {}
-
-    public PackagePrivate publicReturnsPackagePrivate() {
-      throw new UnsupportedOperationException();
-    }
 
     public <T extends PackagePrivate> void publicWithPackagePrivateTypeParameter(T param) {
       throw new UnsupportedOperationException();
