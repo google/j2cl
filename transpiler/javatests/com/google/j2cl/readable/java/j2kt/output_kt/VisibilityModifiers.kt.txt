@@ -20,7 +20,9 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.UnsupportedOperationException
+import javaemul.lang.MutableCollectionJvm
 import javaemul.lang.annotations.WasAutoValue
+import kotlin.Boolean
 import kotlin.Suppress
 
 class VisibilityModifiers {
@@ -82,6 +84,10 @@ class VisibilityModifiers {
    
    private fun privateMethod() {}
   }
+ }
+ 
+ internal abstract class PackagePrivateCollection: MutableCollectionJvm<PackagePrivate> {
+  abstract override fun contains(o: PackagePrivate): Boolean
  }
  
  open class ProtectedOverrideOfVisibilityWarningsSuppressed: j2kt.VisibilityModifiers.VisibilityWarningsSuppressed.NonFinal.Public() {

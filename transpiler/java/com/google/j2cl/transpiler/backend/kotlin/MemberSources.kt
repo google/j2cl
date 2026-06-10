@@ -211,7 +211,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
 
   private fun methodModifiersSource(method: Method): Source =
     spaceSeparated(
-      memberDescriptorSources.visibilityModifierSource(method.descriptor),
+      visibilityModifierSource(method),
       Source.emptyIf(method.descriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
         spaceSeparated(
           Source.emptyUnless(method.descriptor.isNative) { KotlinSource.EXTERNAL_KEYWORD },
@@ -220,6 +220,16 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
       },
       Source.emptyUnless(method.isJavaOverride) { KotlinSource.OVERRIDE_KEYWORD },
     )
+
+  private fun visibilityModifierSource(method: Method): Source =
+    if (method.isForcedJavaOverride == true) {
+      // Don't emit visibility modifier for forced Java overrides like Collection.contains(Object),
+      // as the visibility modifier from the method descriptor is not inferred correcty because of
+      // signature mismatch between Java and Kotlin.
+      Source.EMPTY
+    } else {
+      memberDescriptorSources.visibilityModifierSource(method.descriptor)
+    }
 
   private fun methodKindAndNameSource(method: Method): Source =
     if (method.descriptor.isConstructor) {
