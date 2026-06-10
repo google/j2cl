@@ -15,7 +15,9 @@ goog.module('nativejstypes.Bar');
 
 class Bar {
   constructor(a, b) {
+    /** @public {number} */
     this.x = a;
+    /** @public {number} */
     this.y = b;
   }
 
