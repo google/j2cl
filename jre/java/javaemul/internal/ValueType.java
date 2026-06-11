@@ -128,7 +128,7 @@ public abstract class ValueType {
   }
 
   @JsMethod
-  private static native String[] filteredkeys(ValueType type);
+  private static native String[] filteredkeys(@SuppressWarnings("unusable-by-js") ValueType type);
 
   @JsMethod
   static native void mixin(Constructor target, Constructor source, int mask, String... excludes);

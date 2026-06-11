@@ -1225,6 +1225,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     }
 
     if (isJsType()
+        || isJsEnum()
         || isJsFunctionInterface()
         || TypeDescriptors.isBoxedTypeAsJsPrimitives(this)
         || TypeDescriptors.isJavaLangObject(this)) {
@@ -1235,11 +1236,9 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
       return true;
     }
 
-    // TODO(b/79210574): reconsider whether types with only static JsMembers are actually
-    // referenceable externally.
     return getDeclaredMemberDescriptors().stream()
         .filter(Predicates.not(MemberDescriptor::isOrOverridesJavaLangObjectMethod))
-        .anyMatch(MemberDescriptor::isJsMember);
+        .anyMatch(m -> m.isJsMember() && !m.isStatic());
   }
 
   private boolean isParameterizedByNonNativeJsEnum() {
