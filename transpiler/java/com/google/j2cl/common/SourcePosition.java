@@ -19,7 +19,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import java.io.File;
+import com.google.j2cl.common.SourceUtils.FileInfo;
+import java.nio.file.Path;
 import javax.annotation.Nullable;
 
 /**
@@ -44,7 +45,7 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
   }
 
   @Nullable
-  public abstract String getFilePath();
+  public abstract FileInfo getFileInfo();
 
   @Nullable
   public abstract String getName();
@@ -54,8 +55,8 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   @Override
   public int compareTo(SourcePosition o) {
-    if (getFilePath() != null) {
-      int pathComparisonResult = getFilePath().compareTo(o.getFilePath());
+    if (getFileInfo() != null) {
+      int pathComparisonResult = getFileInfo().compareTo(o.getFileInfo());
       if (pathComparisonResult != 0) {
         return pathComparisonResult;
       }
@@ -66,8 +67,11 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
   @Memoized
   @Nullable
   public String getFileName() {
-    String filePath = getFilePath();
-    return filePath == null ? filePath : new File(filePath).getName();
+    if (getFileInfo() == null) {
+      return null;
+    }
+    String filePath = getFileInfo().sourcePath();
+    return filePath == null ? filePath : Path.of(filePath).getFileName().toString();
   }
 
   abstract Builder toBuilder();
@@ -84,7 +88,7 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
     public abstract Builder setEndFilePosition(FilePosition filePosition);
 
-    public abstract Builder setFilePath(String filePath);
+    public abstract Builder setFileInfo(FileInfo filePath);
 
     public abstract Builder setPackageRelativePath(String packageRelativePath);
 

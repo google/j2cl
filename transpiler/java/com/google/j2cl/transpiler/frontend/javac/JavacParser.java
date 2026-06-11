@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.j2cl.common.SourceUtils.getJavaPath;
 import static java.util.stream.Collectors.toMap;
 
 import com.google.common.collect.ImmutableList;
@@ -49,6 +48,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import javax.tools.Diagnostic;
@@ -74,12 +74,12 @@ public class JavacParser {
   public Library parseFiles(FrontendOptions options) {
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable
-    final Map<String, String> originalPathBySourcePath =
+    final Map<String, FileInfo> fileInfoBySourcePath =
         options.getSources().stream()
             .collect(
                 toMap(
                     FileInfo::sourcePath,
-                    FileInfo::originalPath,
+                    Function.identity(),
                     (u, v) -> {
                       throw new IllegalStateException("Duplicate source path: " + u);
                     },
@@ -100,7 +100,7 @@ public class JavacParser {
               options.getSystem(),
               options.getAnnotationProcessorPath(),
               getJavacOptions(options),
-              originalPathBySourcePath.keySet().stream().map(Path::of).collect(toImmutableList()),
+              fileInfoBySourcePath.keySet().stream().map(Path::of).collect(toImmutableList()),
               diagnostics,
               sourceGenPath,
               problems,
@@ -123,7 +123,7 @@ public class JavacParser {
 
                 var cu = (JCCompilationUnit) taskEvent.getCompilationUnit();
                 var sourcePath = cu.getSourceFile().getName();
-                var isGenerated = !originalPathBySourcePath.containsKey(sourcePath);
+                var isGenerated = !fileInfoBySourcePath.containsKey(sourcePath);
 
                 if (isGenerated) {
                   // Generators are not supposed to emit code with annotation that need stripping.
@@ -131,7 +131,7 @@ public class JavacParser {
                   // parts of the pipeline, the stripper is run before running APTs.
                   checkForbiddenAnnotations(cu, options.getStrippedAnnotationNames(), problems);
                   // Add the generated compilation unit to the map.
-                  originalPathBySourcePath.put(sourcePath, getJavaPath(sourcePath));
+                  fileInfoBySourcePath.put(sourcePath, FileInfo.create(sourcePath));
                 } else {
                   // Remove incompatible nodes and unused imports only from provided source files.
                   AnnotatedNodeStripper.strip(cu, options.getStrippedAnnotationNames());
@@ -157,13 +157,11 @@ public class JavacParser {
       ImmutableList.Builder<CompilationUnit> compilationUnits = ImmutableList.builder();
       for (var cu : javacCompilationUnits) {
         String sourcePath = cu.getSourceFile().getName();
-        if (options.getGenerateKytheIndexingMetadata()) {
-          // If Kythe metadata is being requested, use the original path.
-          sourcePath = originalPathBySourcePath.get(sourcePath);
-        }
         compilationUnits.add(
             compilationUnitBuilder.buildCompilationUnit(
-                sourcePath, cu, options.getGenerateKytheIndexingMetadata()));
+                checkNotNull(fileInfoBySourcePath.get(sourcePath)),
+                cu,
+                options.getGenerateKytheIndexingMetadata()));
         problems.abortIfCancelled();
       }
       return Library.builder().setCompilationUnits(compilationUnits.build()).build();

@@ -146,7 +146,7 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
   }
 
   private static boolean isNonNullAssertionOnNullAllowed(SourcePosition sourcePosition) {
-    String sourcePath = sourcePosition.getFilePath();
+    String sourcePath = sourcePosition.getFileInfo().sourcePath();
     if (sourcePath != null) {
       for (String path : J2ktAllowLists.NONNULL_ASSERTION_ON_NULL_PATHS) {
         if (sourcePath.contains(path)) {

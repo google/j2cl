@@ -20,6 +20,7 @@ package com.google.j2cl.transpiler.frontend.kotlin
 
 import com.google.common.collect.ImmutableList
 import com.google.j2cl.common.SourcePosition
+import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.ArrayAccess
 import com.google.j2cl.transpiler.ast.ArrayLength
 import com.google.j2cl.transpiler.ast.ArrayLiteral
@@ -88,6 +89,7 @@ import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrNull
+import com.google.j2cl.transpiler.frontend.kotlin.ir.fileInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getNameSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getSourcePosition
@@ -196,15 +198,29 @@ internal class CompilationUnitBuilder(
   private lateinit var currentIrFile: IrFile
   private val labelsInScope: MutableMap<String, ArrayDeque<Label>> = mutableMapOf()
 
-  fun convert(irModuleFragment: IrModuleFragment): List<CompilationUnit> =
-    irModuleFragment.files.filter { !it.isBytecodeGenerationSuppressed }.map(::convertFile)
+  fun convert(
+    irModuleFragment: IrModuleFragment,
+    fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
+  ): List<CompilationUnit> {
+    return buildList {
+      for (irFile in irModuleFragment.files) {
+        // Associate each IrFile with its corresponding FileInfo.
+        irFile.fileInfo = fileInfoByAbsoluteSourcePath[irFile.fileEntry.name]
+        if (!irFile.isBytecodeGenerationSuppressed) {
+          add(convertFile(irFile))
+        }
+      }
+    }
+  }
 
   private fun convertFile(irFile: IrFile): CompilationUnit {
     currentIrFile = irFile
     val compilationUnit =
-      if (irFile.fileEntry is MultifileFacadeFileEntry)
+      if (irFile.fileEntry is MultifileFacadeFileEntry) {
         CompilationUnit.createSynthetic(irFile.packageFqName.asString())
-      else CompilationUnit.createForFile(irFile.fileEntry.name, irFile.packageFqName.asString())
+      } else {
+        CompilationUnit.createForFile(irFile.fileInfo!!, irFile.packageFqName.asString())
+      }
 
     require(irFile.declarations.all { it is IrClass }) {
       "IrFile nodes should only contain IrClass members"

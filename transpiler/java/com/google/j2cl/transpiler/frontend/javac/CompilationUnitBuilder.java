@@ -29,6 +29,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.AnyPattern;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayCreationReference;
@@ -750,7 +751,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             ? byteOffsetConverter.getByteOffset(endCharacterPosition)
             : endCharacterPosition;
     return SourcePosition.builder()
-        .setFilePath(getCurrentCompilationUnit().getFilePath())
+        .setFileInfo(getCurrentCompilationUnit().getFileInfo())
         .setPackageRelativePath(getCurrentCompilationUnit().getPackageRelativePath())
         .setName(name)
         .setStartFilePosition(
@@ -1676,11 +1677,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   public CompilationUnit buildCompilationUnit(
-      String sourcePath, CompilationUnitTree javacUnit, boolean generateKytheIndexingMetadata) {
+      FileInfo fileInfo, CompilationUnitTree javacUnit, boolean generateKytheIndexingMetadata) {
     this.javacUnit = (JCCompilationUnit) javacUnit;
     setCurrentCompilationUnit(
         CompilationUnit.createForFile(
-            sourcePath,
+            fileInfo,
             javacUnit.getPackageName() == null ? "" : javacUnit.getPackageName().toString()));
 
     // We only use byte offsets for Kythe indexing metadata, so we can skip this work if it's not

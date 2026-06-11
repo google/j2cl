@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.common;
 
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,19 +27,19 @@ public interface SourceFile {
 
   List<String> getLines() throws IOException;
 
-  static SourceFile fromPath(String relativePath) {
+  static SourceFile from(FileInfo fileInfo) {
     return new SourceFile() {
       private List<String> lines;
 
       @Override
       public String getRelativeFilePath() {
-        return relativePath;
+        return fileInfo.sourcePath();
       }
 
       @Override
       public List<String> getLines() throws IOException {
         if (lines == null) {
-          lines = Files.readAllLines(Paths.get(relativePath));
+          lines = Files.readAllLines(Paths.get(fileInfo.sourcePath()));
         }
         return lines;
       }

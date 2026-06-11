@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.closure;
 
 import com.google.common.base.Splitter;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.common.SourceFile;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,14 +27,18 @@ import java.util.List;
  * native code during the javascript generation stage.
  */
 public class NativeJavaScriptFile implements SourceFile {
-  private final String relativePath;
+  private final FileInfo fileInfo;
   private final String content;
 
   public static final String NATIVE_EXTENSION = ".native.js";
 
-  public NativeJavaScriptFile(String relativePath, String content) {
-    this.relativePath = relativePath;
+  public NativeJavaScriptFile(FileInfo fileInfo, String content) {
+    this.fileInfo = fileInfo;
     this.content = content;
+  }
+
+  public FileInfo getSourcePositionFileInfo() {
+    return FileInfo.create(getRelativeFilePath());
   }
 
   /** Returns the path for the native file relative to the root. */
@@ -45,7 +50,7 @@ public class NativeJavaScriptFile implements SourceFile {
   }
 
   public String getRelativePathWithoutExtension() {
-    return relativePath.substring(0, relativePath.lastIndexOf(NATIVE_EXTENSION));
+    return fileInfo.targetPath().substring(0, fileInfo.targetPath().lastIndexOf(NATIVE_EXTENSION));
   }
 
   /** Returns the FQN if the filename appears to be of the form "<package>.<class>.native.js". */
@@ -64,6 +69,6 @@ public class NativeJavaScriptFile implements SourceFile {
 
   @Override
   public String toString() {
-    return relativePath;
+    return fileInfo.targetPath();
   }
 }

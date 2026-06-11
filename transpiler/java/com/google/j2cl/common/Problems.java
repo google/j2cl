@@ -163,7 +163,7 @@ public class Problems {
           severity,
           // SourcePosition lines are 0 based.
           sourcePosition.getStartFilePosition().getLine() + 1,
-          sourcePosition.getFilePath(),
+          sourcePosition.getFileInfo().originalPath(),
           detailMessage,
           args);
     }

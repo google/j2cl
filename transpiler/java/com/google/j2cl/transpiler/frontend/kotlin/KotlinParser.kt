@@ -31,6 +31,8 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Disposer
 import java.io.File
 import java.util.function.Predicate
+import kotlin.io.path.Path
+import kotlin.io.path.absolutePathString
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.builtins.DefaultBuiltIns
@@ -83,8 +85,10 @@ class KotlinParser(private val problems: Problems) {
     if (options.enableKlibs) {
       return KlibsKotlinParser(problems).parseFiles(options)
     }
+    val fileInfoByAbsoluteSourcePath =
+      options.sources.associateBy { Path(it.sourcePath()).absolutePathString() }
 
-    val compilerConfiguration = createCompilerConfiguration(options)
+    val compilerConfiguration = createCompilerConfiguration(options, fileInfoByAbsoluteSourcePath)
     problems.abortIfCancelled()
 
     check(compilerConfiguration.getBoolean(USE_FIR)) { "Kotlin/Closure only supports > K2" }
@@ -98,6 +102,7 @@ class KotlinParser(private val problems: Problems) {
           compilerConfiguration,
           kotlincDisposable,
           options.supportedAnnotationFilter,
+          fileInfoByAbsoluteSourcePath,
           options.targetLabel,
         )
 
@@ -116,6 +121,7 @@ class KotlinParser(private val problems: Problems) {
     compilerConfiguration: CompilerConfiguration,
     disposable: Disposable,
     supportedAnnotationFilter: Predicate<String>,
+    fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
     currentTarget: String?,
   ): List<CompilationUnit> {
 
@@ -182,6 +188,7 @@ class KotlinParser(private val problems: Problems) {
         packageInfoCache,
         irDeserializer,
         supportedAnnotationFilter,
+        fileInfoByAbsoluteSourcePath,
       )
     problems.abortIfCancelled()
 
@@ -205,6 +212,7 @@ class KotlinParser(private val problems: Problems) {
     packageInfoCache: PackageInfoCache,
     irDeserializer: J2clIrDeserializer,
     supportedAnnotationFilter: Predicate<String>,
+    fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
   ): CompilationUnitBuilderExtension {
     // Lower the IR tree before to convert it to a j2cl ast
     val lowerings = LoweringPasses(state, compilerConfiguration, irDeserializer)
@@ -225,7 +233,7 @@ class KotlinParser(private val problems: Problems) {
                 ),
                 IntrinsicMethods(pluginContext),
               )
-              .convert(moduleFragment)
+              .convert(moduleFragment, fileInfoByAbsoluteSourcePath)
         }
       }
 
@@ -237,8 +245,11 @@ class KotlinParser(private val problems: Problems) {
     val compilationUnits: List<CompilationUnit>
   }
 
-  private fun createCompilerConfiguration(options: FrontendOptions): CompilerConfiguration {
-    val arguments = createCompilerArguments(options)
+  private fun createCompilerConfiguration(
+    options: FrontendOptions,
+    fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
+  ): CompilerConfiguration {
+    val arguments = createCompilerArguments(options, fileInfoByAbsoluteSourcePath)
     val configuration = CompilerConfiguration()
 
     val messageCollector = problems.createMessageCollector()
@@ -271,16 +282,23 @@ class KotlinParser(private val problems: Problems) {
     return configuration
   }
 
-  private fun createCompilerArguments(options: FrontendOptions) =
+  private fun createCompilerArguments(
+    options: FrontendOptions,
+    fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
+  ) =
     K2JVMCompilerArguments().also { arguments ->
       parseCommandLineArguments(options.kotlincOptions, arguments)
       arguments.classpath = options.classpaths.joinToString(File.pathSeparator)
+
+      // Note: kotlinc internally converts all paths to become absolute, since we've already done
+      // that conversion when creating the fileInfoByAbsoluteSourcePath map, we reuse the paths
+      // from there.
       arguments.commonSources =
-        options.sources
-          .filter { it.originalPath().startsWith("common-srcs/") }
-          .map(FileInfo::sourcePath)
+        fileInfoByAbsoluteSourcePath.entries
+          .filter { it.value.originalPath().startsWith("common-srcs/") }
+          .map { it.key }
           .toTypedArray()
-      arguments.freeArgs = options.sources.map(FileInfo::sourcePath)
+      arguments.freeArgs = fileInfoByAbsoluteSourcePath.keys.toList()
     }
 
   private fun PendingDiagnosticsCollectorWithSuppress.maybeReportErrorsAndAbort(

@@ -352,7 +352,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
                         .setColumn(trimmedLine.length())
                         .setByteOffset(currentByteOffset + trimmedLine.length())
                         .build())
-                .setFilePath(nativeSource.getRelativeFilePath())
+                .setFileInfo(nativeSource.getSourcePositionFileInfo())
                 .setName(type.getDeclaration().getQualifiedBinaryName() + ".<native>")
                 .build(),
             () -> sourceBuilder.append(trimmedLine.substring(firstNonWhitespaceColumn)));

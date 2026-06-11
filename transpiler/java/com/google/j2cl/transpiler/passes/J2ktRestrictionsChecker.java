@@ -323,8 +323,8 @@ public final class J2ktRestrictionsChecker {
             // TODO(b/470146353): Allow JsType on records when all Xplat infra is ready to rollout.
             if (typeDeclaration.isJavaRecord()
                 && typeDeclaration.isJsType()
-                && !type.getSourcePosition().getFilePath().contains("/test/")
-                && !type.getSourcePosition().getFilePath().contains("/javatests/")) {
+                && !type.getSourcePosition().getFileInfo().sourcePath().contains("/test/")
+                && !type.getSourcePosition().getFileInfo().sourcePath().contains("/javatests/")) {
               problems.error(
                   type.getSourcePosition(),
                   "Record class '%s' cannot be a JsType. (b/470146353)",
@@ -429,7 +429,7 @@ public final class J2ktRestrictionsChecker {
   }
 
   private static boolean isFromJ2clReadableOrIntegrationTest(Type type) {
-    String sourceFilePath = type.getSourcePosition().getFilePath();
+    String sourceFilePath = type.getSourcePosition().getFileInfo().sourcePath();
     return sourceFilePath != null
         && (sourceFilePath.contains("javatests/com/google/j2cl/integration")
             || sourceFilePath.contains("javatests/com/google/j2cl/readable"));

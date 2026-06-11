@@ -68,7 +68,6 @@ class KotlinGeneratorStage(
 
   /** Generate Kotlin outputs for a compilation unit. */
   private fun generateKtOutputs(compilationUnit: CompilationUnit) {
-    val filePath = compilationUnit.filePath
     val packageRelativePath = compilationUnit.packageRelativePath
     val sourcePath = packageRelativePath.replace(".java", ".kt")
     val sourceMapPath = packageRelativePath.replace(".java", ".kt.map")
@@ -86,7 +85,7 @@ class KotlinGeneratorStage(
         ReadableSourceMapGenerator.generate(
           mappings,
           source,
-          Collections.singleton(SourceFile.fromPath(filePath)),
+          Collections.singleton(SourceFile.from(compilationUnit.fileInfo)),
           problems,
         ),
       )

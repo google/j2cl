@@ -19,7 +19,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin
 
 import com.google.j2cl.common.Problems
-import com.google.j2cl.common.SourceUtils
 import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
@@ -32,6 +31,8 @@ import com.intellij.openapi.Disposable
 import com.intellij.openapi.util.Disposer
 import java.io.File
 import java.util.function.Predicate
+import kotlin.io.path.Path
+import kotlin.io.path.absolutePathString
 import org.jetbrains.kotlin.analyzer.CompilationErrorException
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
@@ -54,7 +55,9 @@ class KlibsKotlinParser(private val problems: Problems) {
   fun parseFiles(options: FrontendOptions): Library {
     check(options.enableKlibs) { "This parser only supports Klibs" }
 
-    val arguments = createCompilerArguments(options)
+    val fileInfoByAbsoluteSourcePath =
+      options.sources.associateBy { Path(it.sourcePath()).absolutePathString() }
+    val arguments = createCompilerArguments(options, fileInfoByAbsoluteSourcePath)
     problems.abortIfCancelled()
 
     val kotlincDisposable = Disposer.newDisposable("J2CL Root Disposable")
@@ -65,6 +68,7 @@ class KlibsKotlinParser(private val problems: Problems) {
           arguments,
           kotlincDisposable,
           options.supportedAnnotationFilter,
+          fileInfoByAbsoluteSourcePath,
           options.targetLabel,
         )
 
@@ -88,6 +92,7 @@ class KlibsKotlinParser(private val problems: Problems) {
     arguments: K2JKlibCompilerArguments,
     disposable: Disposable,
     supportedAnnotationFilter: Predicate<String>,
+    fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
     currentTarget: String?,
   ): List<CompilationUnit> {
 
@@ -174,29 +179,36 @@ class KlibsKotlinParser(private val problems: Problems) {
           ),
           IntrinsicMethods(pluginContext),
         )
-        .convert(moduleFragment)
+        .convert(moduleFragment, fileInfoByAbsoluteSourcePath)
     problems.abortIfCancelled()
 
     return compilationUnits
   }
 
-  fun createCompilerArguments(options: FrontendOptions): K2JKlibCompilerArguments {
+  fun createCompilerArguments(
+    options: FrontendOptions,
+    fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
+  ): K2JKlibCompilerArguments {
     return K2JKlibCompilerArguments().also { arguments ->
       parseCommandLineArguments(options.kotlincOptions, arguments)
       arguments.classpath = options.classpaths.joinToString(File.pathSeparator)
       arguments.klibLibraries = options.dependencyKlibs.joinToString(File.pathSeparator)
       arguments.friendModules = options.friendKlibs.joinToString(File.pathSeparator)
+
+      // Note: kotlinc internally converts all paths to become absolute, since we've already done
+      // that conversion when creating the fileInfoByAbsoluteSourcePath map, we reuse the paths
+      // from there.
       arguments.commonSources =
-        options.sources
-          .filter { it.originalPath().startsWith("common-srcs/") }
-          .map(FileInfo::sourcePath)
+        fileInfoByAbsoluteSourcePath.entries
+          .filter { it.value.originalPath().startsWith("common-srcs/") }
+          .map { it.key }
           .toTypedArray()
+      arguments.freeArgs = fileInfoByAbsoluteSourcePath.keys.toList()
 
       // TODO(b/505790341): Remove temporary file once once everything is done in memory.
       // Temporary file used to store the intermediate klib file.
       var klibDirectory = options.output.createTempDirectory("_klib")
       arguments.destination = klibDirectory.resolve("tmp.klib").toString()
-      arguments.freeArgs = options.sources.map(SourceUtils.FileInfo::sourcePath)
     }
   }
 }

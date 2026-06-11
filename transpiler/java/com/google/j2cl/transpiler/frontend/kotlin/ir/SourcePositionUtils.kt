@@ -142,14 +142,15 @@ private fun IrFile.getSourcePosition(
   name: String?,
 ): SourcePosition {
   // The node is not part of the original code source.
-  if (startOffset < 0 || endOffset < 0 || fileEntry.name.isEmpty()) {
+  if (startOffset < 0 || endOffset < 0) {
     return SourcePosition.NONE
   }
 
+  val fileInfo = fileInfo ?: return SourcePosition.NONE
   val sourceRange = fileEntry.getSourceRangeInfo(startOffset, endOffset)
 
   return SourcePosition.builder()
-    .setFilePath(sourceRange.filePath)
+    .setFileInfo(fileInfo)
     .setName(name)
     .setStartFilePosition(
       FilePosition.builder()

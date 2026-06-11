@@ -42,7 +42,7 @@ public abstract class NormalizationPass {
       if (compilationUnit.isSynthetic()) {
         filePath = "[Synthetic CompilationUnit]";
       } else {
-        filePath = compilationUnit.getFilePath();
+        filePath = compilationUnit.getFileInfo().sourcePath();
       }
       throw new ProcessorError(filePath, filePath, e);
     }

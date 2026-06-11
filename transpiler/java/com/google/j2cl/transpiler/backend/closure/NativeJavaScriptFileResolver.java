@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
@@ -48,7 +49,7 @@ final class NativeJavaScriptFileResolver {
       checkArgument(file.sourcePath().endsWith(NativeJavaScriptFile.NATIVE_EXTENSION));
       try {
         String content = MoreFiles.asCharSource(Paths.get(file.sourcePath()), UTF_8).read();
-        NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file.targetPath(), content);
+        NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file, content);
         byRelativePath.put(nativeFile.getRelativePathWithoutExtension(), nativeFile);
 
         // Only resolve files by qualified name if it has at least one package segment. Otherwise
@@ -147,6 +148,8 @@ final class NativeJavaScriptFileResolver {
   /** Returns the absolute binary path for a given type. */
   private static String getAbsolutePath(
       CompilationUnit compilationUnit, TypeDeclaration typeDeclaration) {
-    return compilationUnit.getDirectoryPath() + '/' + typeDeclaration.getSimpleBinaryName();
+    return Path.of(compilationUnit.getFileInfo().sourcePath())
+        .resolveSibling(typeDeclaration.getSimpleBinaryName())
+        .toString();
   }
 }

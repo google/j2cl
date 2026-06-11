@@ -227,7 +227,8 @@ public class WasmGeneratorStage {
         .forEach(
             compilationUnit ->
                 output.copyFile(
-                    compilationUnit.getFilePath(), compilationUnit.getPackageRelativePath()));
+                    compilationUnit.getFileInfo().sourcePath(),
+                    compilationUnit.getPackageRelativePath()));
   }
 
   public static void generateWasmExportMethods(

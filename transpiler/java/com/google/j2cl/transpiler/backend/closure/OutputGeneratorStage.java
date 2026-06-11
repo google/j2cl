@@ -178,7 +178,8 @@ public class OutputGeneratorStage {
 
       if (!generateKytheIndexingMetadata && !compilationUnit.isSynthetic()) {
         // Copy java sources to output.
-        output.copyFile(compilationUnit.getFilePath(), compilationUnit.getPackageRelativePath());
+        output.copyFile(
+            compilationUnit.getFileInfo().sourcePath(), compilationUnit.getPackageRelativePath());
       }
     }
     problems.abortIfCancelled();
@@ -210,8 +211,8 @@ public class OutputGeneratorStage {
       SourcePosition javaScriptSourcePosition = entry.getKey();
 
       // Skip if the source position is not in the compilation unit.
-      if (javaSourcePosition.getFilePath() == null
-          || !javaSourcePosition.getFilePath().equals(compilationUnit.getFilePath())) {
+      if (javaSourcePosition.getFileInfo() == null
+          || !javaSourcePosition.getFileInfo().equals(compilationUnit.getFileInfo())) {
         continue;
       }
 
@@ -226,7 +227,7 @@ public class OutputGeneratorStage {
           javaScriptSourcePosition.getStartFilePosition().getByteOffset(),
           javaScriptSourcePosition.getEndFilePosition().getByteOffset(),
           /* sourceCorpus= */ null,
-          javaSourcePosition.getFilePath(),
+          javaSourcePosition.getFileInfo().originalPath(),
           /* sourceRoot= */ null);
     }
 
@@ -255,7 +256,7 @@ public class OutputGeneratorStage {
     checkArgument(
         !j2clUnit.isSynthetic(), "Cannot generate sourcemap for synthetic CompilationUnit");
     var sourceFilesBuilder =
-        ImmutableSet.<SourceFile>builder().add(SourceFile.fromPath(j2clUnit.getFilePath()));
+        ImmutableSet.<SourceFile>builder().add(SourceFile.from(j2clUnit.getFileInfo()));
     if (nativeJavaScriptFile != null) {
       sourceFilesBuilder.add(nativeJavaScriptFile);
     }

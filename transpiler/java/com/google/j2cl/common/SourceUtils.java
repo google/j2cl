@@ -38,6 +38,10 @@ public class SourceUtils {
   @AutoValue
   public abstract static class FileInfo implements Comparable<FileInfo> {
 
+    public static FileInfo create(String sourcePath) {
+      return create(sourcePath, getJavaPath(sourcePath));
+    }
+
     static FileInfo create(String sourcePath, String originalPath) {
       return create(sourcePath, originalPath, originalPath);
     }
