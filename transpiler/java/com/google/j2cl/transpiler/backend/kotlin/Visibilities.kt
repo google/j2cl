@@ -18,25 +18,35 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 
+/** Set containing packages for which J2KT should translate actual visibility. */
+private val ACTUAL_VISIBILITY_PACKAGES: Set<String> =
+  setOf(
+    "j2kt",
+    "j2ktiosinterop",
+    "j2ktjvminterop",
+    "j2ktnotpassing",
+    "j2ktnotpassing.nullmarked",
+    "j2ktobjcweak",
+    // copybara:strip_begin
+    // Packages which should be hidden in Open Source project.
+    "com.google.apps.xplat.collect.intervaltree",
+    // copybara:strip_end
+  )
+
 /** List containing package prefixes for which J2KT should translate actual visibility. */
+// Keep this list small as lookup time is linear.
 private val ACTUAL_VISIBILITY_PACKAGE_PREFIXES: List<String> =
   listOf(
     "java.",
     "javaemul.",
     "javax.",
-    "j2kt.",
-    "j2ktiosinterop.",
-    "j2ktjvminterop.",
-    "j2ktnotpassing.",
-    "j2ktobjcweak.",
     // copybara:strip_begin
     // Packages which should be hidden in Open Source project.
-    "com.google.apps.xplat.collect.intervaltree.",
     // copybara:strip_end
   )
 
 /**
- * List containing packages for which J2KT should not translate actual visibility. This list is used
+ * Set containing packages for which J2KT should not translate actual visibility. This list is used
  * to override the ACTUAL_VISIBILITY_PACKAGE_PREFIXES list.
  */
 private val EXCLUDED_VISIBILITY_PACKAGES: Set<String> =
@@ -48,8 +58,11 @@ private val EXCLUDED_VISIBILITY_PACKAGES: Set<String> =
 
 private val TypeDeclaration.useActualKtVisibilityForPackage: Boolean
   get() = packageName.let { packageName ->
-    ACTUAL_VISIBILITY_PACKAGE_PREFIXES.any { packageName.plus(".").startsWith(it) } &&
-      packageName !in EXCLUDED_VISIBILITY_PACKAGES
+    packageName in ACTUAL_VISIBILITY_PACKAGES ||
+      packageName.plus(".").let { packageNamePlusDot ->
+        ACTUAL_VISIBILITY_PACKAGE_PREFIXES.any { packageNamePlusDot.startsWith(it) } &&
+          packageName !in EXCLUDED_VISIBILITY_PACKAGES
+      }
   }
 
 /** Returns whether J2KT should translate actual visibility for the given type declaration. */
