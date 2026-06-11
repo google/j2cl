@@ -80,7 +80,7 @@ def _create_target_info(target):
     blaze_target = blaze_target[2:]
   else:
     # Check for size_report format: (test)/(java|kotlin).(variant)
-    match = re.fullmatch(r"(\w+)/(java|kotlin)\.(\w+)", blaze_target)
+    match = re.fullmatch(r"(\w+)/(java|kotlin)\.(.+)", blaze_target)
     if match:
       test, lang, variant = match.groups()
       blaze_target = f"{lang}/{test}.{variant}"
