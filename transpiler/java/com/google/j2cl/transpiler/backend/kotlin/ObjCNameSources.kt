@@ -112,13 +112,17 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )
 
-  // We append "_" to the enum type name because the @ObjcEnum annotation does not insert an
-  // underscore between the type name and the literal name. We use a typedef to remove it again.
+  // We prepend the ObjC prefix to the enum type to avoid collisions with J2Objc and
+  // we append "_" to the enum type name because the @ObjcEnum annotation does not insert an
+  // underscore between the type name and the literal name. We use a typedef to remove these again
+  // in the J2ObjC compatibility layer.
   fun objCEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
       typeDeclaration.isEnumWithNonEmptyValues ->
-        objCEnumAnnotationSource("${typeDeclaration.objCNameWithoutPrefix}_Enum_")
+        objCEnumAnnotationSource(
+          "${typeDeclaration.objCName(prefix = nameSources.objCNamePrefix)}_Enum_"
+        )
       else -> Source.EMPTY
     }
 

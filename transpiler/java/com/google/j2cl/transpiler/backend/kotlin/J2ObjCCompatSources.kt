@@ -143,6 +143,7 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
 
     if (type.isEnum && type.enumFields.isNotEmpty()) {
       add(nsEnumTypedefDependentSource(type))
+      addAll(type.enumFields.map(::nsEnumEntryDefineDependentSource))
     }
 
     addAll(type.fields.map(::fieldConstantDefineDependentSource))
@@ -180,12 +181,43 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
   private fun objCAlias(companionDeclaration: CompanionDeclaration): String =
     companionDeclaration.objCNameWithoutPrefix
 
-  // We append "_" to the enum type name because the @ObjcEnum does not insert an underscore
-  // between the type name and the literal name. Hence we use a typedef to remove it again.
+  // We prepend the ObjC prefix to the enum type to avoid collisions with J2objC and
+  // we append "_" to the enum type name because the @ObjcEnum does not insert an underscore
+  // between the type name and the literal name. Here we use a typedef to remove these again.
   private fun nsEnumTypedefDependentSource(type: Type): Dependent<Source> =
     objCEnumName(type.declaration).let { enumName ->
-      typedef(enumName + "_", dependentSource(enumName))
+      typedef("${objCNamePrefix}${enumName}_", dependentSource(enumName))
     }
+
+  private fun nsEnumEntryDefineDependentSource(field: Field): Dependent<Source> =
+    field.descriptor.let { fieldDescriptor ->
+      objCEnumName(fieldDescriptor.enclosingTypeDescriptor.typeDeclaration).let { enumName ->
+        fieldDescriptor.objCName.fieldNameAsEnumEntryName.let { entryName ->
+          dependent(
+            macroDefine(
+              spaceSeparated(
+                source("${enumName}_${entryName}"),
+                source("${objCNamePrefix}${enumName}_${entryName}"),
+              )
+            )
+          )
+        }
+      }
+    }
+
+  // Note that Kotlin shouldn't need to escape the distinguishing "suffix" of an ObjC enum entry
+  // name as the qualified type name is prepended, avoiding clashes. For some reason, it does it
+  // anyway in these cases (which don't seem to match regular escaping -- neither FILE nor
+  // OVERFLOW seem to be in the list).
+  // TODO(b/479223091): If this is still needed after cl/929792796, let's apply this only to the
+  //   source to fix the referenced bug.
+  private val String.fieldNameAsEnumEntryName: String
+    get() =
+      when (this) {
+        "FILE",
+        "OVERFLOW" -> "${this}__"
+        else -> this
+      }
 
   private fun propertyQualifierDependentSource(
     fieldDescriptor: FieldDescriptor
