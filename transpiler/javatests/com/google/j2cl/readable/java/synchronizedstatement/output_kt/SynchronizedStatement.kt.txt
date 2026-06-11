@@ -82,7 +82,19 @@ open class SynchronizedStatement: J2ktMonitor() {
   }
  }
  
- open fun testBreakAndContinue() {}
+ open fun testBreakAndContinue() {
+  synchronized<Unit>(this) {
+   while (true) {
+    synchronized<Unit>(this) {
+     if (this.a < 10) {
+      this.a = this.a + 1
+      continue
+     }
+     break
+    }
+   }
+  }
+ }
  
  open fun testInitialization(): Int {
   var a: Int = 0

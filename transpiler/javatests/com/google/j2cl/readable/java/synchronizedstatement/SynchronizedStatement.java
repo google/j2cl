@@ -15,7 +15,6 @@
  */
 package synchronizedstatement;
 
-import javaemul.internal.annotations.KtDisabled;
 import javaemul.lang.J2ktMonitor;
 
 public class SynchronizedStatement {
@@ -75,8 +74,6 @@ public class SynchronizedStatement {
     return b--;
   }
 
-  // It should be possible since Kotlin 2.1: https://youtrack.jetbrains.com/issue/KT-1436
-  @KtDisabled
   public synchronized void testBreakAndContinue() {
     while (true) {
       synchronized (this) {
