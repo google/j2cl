@@ -93,7 +93,9 @@ internal class ObjCNameSources(val nameSources: NameSources) {
 
   fun objCEnumAnnotationSource(name: String, swiftName: String? = null): Source =
     annotation(
-      nameSources.topLevelQualifiedNameSource("javaemul.lang.ObjCEnum"),
+      nameSources.sourceWithOptInQualifiedName("kotlin.experimental.ExperimentalObjCEnum") {
+        topLevelQualifiedNameSource("kotlin.native.ObjCEnum")
+      },
       literal(name),
       swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
     )
