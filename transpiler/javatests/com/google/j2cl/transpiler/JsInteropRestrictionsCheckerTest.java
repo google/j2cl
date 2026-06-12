@@ -4492,6 +4492,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public T get() { return null; }
             }
             @JsEnum(isNative = true) enum NativeEnum { A; }
+            class F {  // non-JsType class with >=1 instance JsMembers
+              @JsMethod
+              public void instanceMethod() {} // instance JsMethod
+
+              @JsMethod
+              public static void staticMethod() {} // static JsMethod
+            }
             @JsType class MyJsType implements I<Void> {
               public void f1(boolean a, int b, double c) {} // primitive types work fine.
               public void f2(Boolean a, Double b, String c, Long l) {} // unboxed types work fine.
@@ -4511,6 +4518,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               private void f17(Integer a) { new A() { { f7(a); } }; }
               public void f18(List<NativeEnum> l) {} // Type parameterized by native JsEnum
               // succeeds
+              public NativeEnum f19(NativeEnum e) { return null; } // Native JsEnum succeeds.
+              public F f20() { return null; } // non-JsType class with JsMembers succeeds.
               public void trigger(Void v) {} // Void succeeds.
             }
             class Outer {
@@ -4558,6 +4567,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsProperty
               public static A a; // JsProperty
             }
+            class E { // non-jstype class with only static JsMembers
+              @JsProperty
+              public static I i; // JsProperty
+              @JsMethod
+              public static void f(I i) {} // JsMethod
+            }
             @JsFunction interface FI  { void f(A a); } // JsFunction method is checked.
             class List<T> {
               @JsMethod
@@ -4574,6 +4589,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public void f5(List<MyJsEnum> l) { } // parameterized by JsEnum fails
               public void f6(List<List<MyJsEnum>> l) {} // parameterized by List<JsEnum> fails
               public void f7() { new Object() { @JsMethod void b(A a){} }; }
+              public E f8(E e) { return null; } // non-JsType class with only static jsmember fails.
             }
             """)
         .addFileToZipFile("native.zip", "test/C.native.js", "// empty")
@@ -4609,7 +4625,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "[unusable-by-js] Type of parameter 'l' in 'void Buggy.f6(List<List<MyJsEnum>> l)' is "
                 + "not usable by but exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'a' in 'void <anonymous> extends Object.b(A a)' is"
-                + " not usable by but exposed to JavaScript.")
+                + " not usable by but exposed to JavaScript.",
+            "[unusable-by-js] Return type of 'E Buggy.f8(E e)' is not usable by but exposed to"
+                + " JavaScript.",
+            "[unusable-by-js] Type of parameter 'e' in 'E Buggy.f8(E e)' is not usable by but"
+                + " exposed to JavaScript.")
         .assertLastMessage(
             "Suppress \"[unusable-by-js]\" warnings by adding a "
                 + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the "
