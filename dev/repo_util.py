@@ -194,7 +194,7 @@ def get_compressed_size(file_name):
   if not os.path.exists(file_name):
     return -1
 
-  if file_name.endswith(".wasm"):
+  if ".wasm" in file_name:
     with open(file_name, "rb") as f:
       contents = f.read()
   else:
