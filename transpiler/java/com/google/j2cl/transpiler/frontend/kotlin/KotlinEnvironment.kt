@@ -668,9 +668,6 @@ internal class KotlinEnvironment(
       val jsInfo = irFunction.getJsInfo()
       val visibility = irFunction.j2clVisibility
       val isStatic = (irFunction.isStatic || irFunction.parent !is IrDeclaration) && !isConstructor
-      val isNative =
-        irFunction.isExternal ||
-          (!jsInfo.isJsOverlay && enclosingTypeDescriptor.isNative && irFunction.isAbstract)
       val isLocal = irFunction.visibility.delegate == Visibilities.Local
       val enclosingMethodDescriptor =
         if (isLocal) getDeclaredMethodDescriptor(irFunction.parent as IrFunction) else null
@@ -712,7 +709,7 @@ internal class KotlinEnvironment(
         .setSynthetic(irFunction.isSynthetic)
         .setAbstract(irFunction.isAbstract)
         .setFinal(irFunction.isFinal)
-        .setNative(isNative)
+        .setNative(irFunction.isExternal)
         .setDefaultMethod(
           enclosingTypeDescriptor.isInterface &&
             !irFunction.isAbstract &&

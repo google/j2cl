@@ -1798,6 +1798,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     abstract boolean isConstructor();
 
+    abstract boolean isAbstract();
+
     abstract boolean isNative();
 
     abstract MethodDescriptor autoBuild();
@@ -1811,9 +1813,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
       boolean isNative =
           isNative()
-              || getEnclosingTypeDescriptor().isNative()
-              || getEnclosingTypeDescriptor().isJsFunctionInterface();
-      if (!isNative && ignoreNonNativeJsInfo.get()) {
+              || (!getOriginalJsInfo().isJsOverlay()
+                  && getEnclosingTypeDescriptor().isNative()
+                  && isAbstract());
+      setNative(isNative);
+
+      if (ignoreNonNativeJsInfo.get()
+          && !isNative
+          && !getEnclosingTypeDescriptor().isNative()
+          && !getEnclosingTypeDescriptor().isJsFunctionInterface()) {
         setOriginalJsInfo(JsInfo.NONE);
       }
 

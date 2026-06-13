@@ -754,11 +754,6 @@ public class JavaEnvironment {
             .collect(toImmutableList());
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(methodSymbol);
-    boolean isNative =
-        isNative(methodSymbol)
-            || (!jsInfo.isJsOverlay()
-                && enclosingTypeDescriptor.isNative()
-                && isAbstract(methodSymbol));
     boolean isConstructor = methodSymbol.getKind() == ElementKind.CONSTRUCTOR;
     var enclosingClass = (ClassSymbol) methodSymbol.getEnclosingElement();
     boolean isRecordComponentAccessor =
@@ -782,7 +777,7 @@ public class JavaEnvironment {
             .setStatic(isStatic(methodSymbol))
             .setConstructor(isConstructor)
             .setRecordComponentAccessor(isRecordComponentAccessor)
-            .setNative(isNative)
+            .setNative(isNative(methodSymbol))
             .setAnnotations(createAnnotations(methodSymbol, inNullMarkedScope))
             .setFinal(isFinal(methodSymbol))
             .setDefaultMethod(isDefaultMethod(methodSymbol))
