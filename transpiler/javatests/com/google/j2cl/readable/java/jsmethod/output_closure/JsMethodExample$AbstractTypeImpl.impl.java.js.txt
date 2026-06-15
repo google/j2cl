@@ -1,0 +1,42 @@
+goog.module('jsmethod.JsMethodExample.AbstractTypeImpl$impl');
+
+const AbstractTypeExposingJsMethod = goog.require('jsmethod.JsMethodExample.AbstractTypeExposingJsMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class AbstractTypeImpl extends AbstractTypeExposingJsMethod {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AbstractTypeImpl} */
+ static $create__() {
+  AbstractTypeImpl.$clinit();
+  let $instance = new AbstractTypeImpl();
+  $instance.$ctor__jsmethod_JsMethodExample_AbstractTypeImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_AbstractTypeImpl__void() {
+  this.$ctor__jsmethod_JsMethodExample_AbstractTypeExposingJsMethod__void();
+ }
+ /** @override */
+ abstractJsMethod(/** ?string */ s) {}
+ /** @nodts */
+ static $clinit() {
+  AbstractTypeImpl.$clinit = () =>{};
+  AbstractTypeImpl.$loadModules();
+  AbstractTypeExposingJsMethod.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractTypeImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractTypeImpl, 'jsmethod.JsMethodExample$AbstractTypeImpl');
+
+exports = AbstractTypeImpl;
+
+//# sourceMappingURL=JsMethodExample$AbstractTypeImpl.js.map

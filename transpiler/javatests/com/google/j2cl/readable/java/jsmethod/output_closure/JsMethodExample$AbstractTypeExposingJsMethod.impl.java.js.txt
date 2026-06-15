@@ -1,0 +1,38 @@
+goog.module('jsmethod.JsMethodExample.AbstractTypeExposingJsMethod$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AbstractTypeExposingJsMethod extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_AbstractTypeExposingJsMethod__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @abstract */
+ abstractJsMethod(/** ?string */ s) {}
+ /** @nodts */
+ static $clinit() {
+  AbstractTypeExposingJsMethod.$clinit = () =>{};
+  AbstractTypeExposingJsMethod.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractTypeExposingJsMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractTypeExposingJsMethod, 'jsmethod.JsMethodExample$AbstractTypeExposingJsMethod');
+
+exports = AbstractTypeExposingJsMethod;
+
+//# sourceMappingURL=JsMethodExample$AbstractTypeExposingJsMethod.js.map

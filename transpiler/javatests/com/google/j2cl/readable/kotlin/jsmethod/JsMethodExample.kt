@@ -101,4 +101,12 @@ class JsMethodExample {
   // contracts and js contracts.
   class ExposesOverrideableJsMethod internal constructor() :
     SuperClassWithFinalMethod(), InterfaceExposingJsMethods {}
+
+  abstract class AbstractTypeExposingJsMethod {
+    @JsMethod abstract fun abstractJsMethod(s: String)
+  }
+
+  class AbstractTypeImpl internal constructor() : AbstractTypeExposingJsMethod() {
+    override fun abstractJsMethod(s: String) {}
+  }
 }

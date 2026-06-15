@@ -77,6 +77,18 @@
 (global $$class@jsmethod.JsMethodExample.ExposesOverrideableJsMethod (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jsmethod.JsMethodExample.AbstractTypeImpl (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmethod.JsMethodExample.AbstractTypeImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $jsmethod.JsMethodExample.vtable (ref (exact $jsmethod.JsMethodExample.vtable))
  (struct.new $jsmethod.JsMethodExample.vtable
   (ref.null extern)
@@ -166,6 +178,16 @@
  )
 )
 (global $jsmethod.JsMethodExample.InterfaceWithMethod.vtable@$jsmethod.JsMethodExample.ExposesOverrideableJsMethod (ref $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable) (global.get $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable@$jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
+(global $jsmethod.JsMethodExample.AbstractTypeImpl.vtable (ref (exact $jsmethod.JsMethodExample.AbstractTypeImpl.vtable))
+ (struct.new $jsmethod.JsMethodExample.AbstractTypeImpl.vtable
+  (global.get $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod.proto)
+  (ref.func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.AbstractTypeImpl)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_abstractJsMethod__java_lang_String__void@jsmethod.JsMethodExample.AbstractTypeImpl)
+ )
+)
 
 
 ;;; void I.s()
@@ -582,6 +604,76 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.SuperClassWithFinalMethod)
+
+;;; void AbstractTypeExposingJsMethod.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample_AbstractTypeExposingJsMethod@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
+ (param $this (ref null $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void AbstractTypeExposingJsMethod.abstractJsMethod(NativeString arg0)
+(func $js_export_abstractJsMethod__java_lang_String_NativeString__void@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
+ (type $function.js_export_abstractJsMethod__java_lang_String_NativeString__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null string))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:104:25
+ (local $this (ref null $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:104:25
+  (call_ref $function.m_abstractJsMethod__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod.vtable $m_abstractJsMethod__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod(local.get $this))))
+ )
+)
+(elem declare func $js_export_abstractJsMethod__java_lang_String_NativeString__void@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)
+
+;;; void AbstractTypeExposingJsMethod.$clinit()
+(func $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+  (if (global.get $$class-initialized@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+  (global.set $$class-initialized@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> AbstractTypeExposingJsMethod.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)))
+   (then
+    (return (global.get $$class@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
+   )
+  )
+  (global.set $$class@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmethod.JsM...|__java_lang_String_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
+ )
+)
+
+;;; Class<?> AbstractTypeExposingJsMethod.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)
 
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_InterfaceExposingJsMethods_$LambdaAdaptor@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
@@ -1248,3 +1340,88 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
+
+;;; AbstractTypeImpl AbstractTypeImpl.$create()
+(func $$create__@jsmethod.JsMethodExample.AbstractTypeImpl
+ (result (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+ (local $$instance (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  (call $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeImpl )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.AbstractTypeImpl (global.get $itable.empty) (i32.const 0) (global.get $jsmethod.JsMethodExample.AbstractTypeImpl.vtable)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  (call $$ctor__void_$p_jsmethod_JsMethodExample_AbstractTypeImpl@jsmethod.JsMethodExample.AbstractTypeImpl (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AbstractTypeImpl.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample_AbstractTypeImpl@jsmethod.JsMethodExample.AbstractTypeImpl
+ (param $this (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  (call $$ctor__void_$p_jsmethod_JsMethodExample_AbstractTypeExposingJsMethod@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void AbstractTypeImpl.abstractJsMethod(String s)
+(func $m_abstractJsMethod__java_lang_String__void@jsmethod.JsMethodExample.AbstractTypeImpl
+ (type $function.m_abstractJsMethod__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:109:16
+ (local $this (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.AbstractTypeImpl) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_abstractJsMethod__java_lang_String__void@jsmethod.JsMethodExample.AbstractTypeImpl)
+
+;;; void AbstractTypeImpl.$clinit()
+(func $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeImpl
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  (if (global.get $$class-initialized@jsmethod.JsMethodExample.AbstractTypeImpl)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  (global.set $$class-initialized@jsmethod.JsMethodExample.AbstractTypeImpl (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  (call $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod )
+ )
+)
+
+;;; Class<T> AbstractTypeImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.AbstractTypeImpl
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmethod.JsMethodExample.AbstractTypeImpl)))
+   (then
+    (return (global.get $$class@jsmethod.JsMethodExample.AbstractTypeImpl))
+   )
+  )
+  (global.set $$class@jsmethod.JsMethodExample.AbstractTypeImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmethod.JsM...|__java_lang_String_<once>_@jsmethod.JsMethodExample.AbstractTypeImpl.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod )))
+  (return (global.get $$class@jsmethod.JsMethodExample.AbstractTypeImpl))
+ )
+)
+
+;;; Class<?> AbstractTypeImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.AbstractTypeImpl
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.AbstractTypeImpl) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.AbstractTypeImpl ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.AbstractTypeImpl)

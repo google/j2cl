@@ -98,4 +98,14 @@ public class JsMethodExample {
   // contracts and js contracts.
   static class ExposesOverrideableJsMethod extends SuperClassWithFinalMethod
       implements InterfaceExposingJsMethods {}
+
+  abstract static class AbstractTypeExposingJsMethod {
+    @JsMethod
+    public abstract void abstractJsMethod(String s);
+  }
+
+  static class AbstractTypeImpl extends AbstractTypeExposingJsMethod {
+    @Override
+    public void abstractJsMethod(String s) {}
+  }
 }

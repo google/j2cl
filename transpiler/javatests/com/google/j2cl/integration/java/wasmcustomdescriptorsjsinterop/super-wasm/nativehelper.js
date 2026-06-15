@@ -15,6 +15,7 @@
  */
 goog.module('nativehelper');
 
+const AbstractJsType = goog.require('wasmcustomdescriptorsjsinterop.AbstractJsType');
 const BaseJsType = goog.require('wasmcustomdescriptorsjsinterop.BaseJsType');
 const JsInterface = goog.require('wasmcustomdescriptorsjsinterop.JsInterface');
 const JsInterfaceAccidentalDefaultMethodImpl = goog.require('wasmcustomdescriptorsjsinterop.Main.JsInterfaceAccidentalDefaultMethodImpl');
@@ -158,6 +159,15 @@ function callPackagePrivateMethod(someJsType) {
 }
 
 /**
+ * @param {!AbstractJsType} someJsType
+ * @return {number}
+ * @public
+ */
+function callAbstractMethod(someJsType) {
+  return someJsType.abstractMethod();
+}
+
+/**
  * @param {!JsInterface} i
  * @return {number}
  * @public
@@ -234,6 +244,7 @@ exports = {
   getReadWriteProperty,
   setReadWriteProperty,
   callPackagePrivateMethod,
+  callAbstractMethod,
   callInterfaceMethod,
   callInterfaceGetNumber,
   callInterfaceRenamedMethod,

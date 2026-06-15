@@ -1410,17 +1410,18 @@ public final class AstUtils {
       return false;
     }
 
-    // Exclude native js constructors.
-    // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true
-    // for native constructors, or exposing isNativeConstructor from MethodDescriptor.
-    if (memberDescriptor.isConstructor()
-        && memberDescriptor.getEnclosingTypeDescriptor().isNative()) {
-      return false;
-    }
-
     if (memberDescriptor instanceof MethodDescriptor methodDescriptor) {
       // Exclude generated export bridges themselves.
       if (methodDescriptor.getOrigin().isWasmJsExport()) {
+        return false;
+      }
+
+      // Exclude native js constructors and constructors of abstract types.
+      // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true
+      // for native constructors, or exposing isNativeConstructor from MethodDescriptor.
+      if (methodDescriptor.isConstructor()
+          && (methodDescriptor.getEnclosingTypeDescriptor().isNative()
+              || methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAbstract())) {
         return false;
       }
 

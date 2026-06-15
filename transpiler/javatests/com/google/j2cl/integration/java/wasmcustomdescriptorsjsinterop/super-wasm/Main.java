@@ -75,6 +75,9 @@ public final class Main {
     assertTrue(subJsType.field == 12);
     assertTrue(callGetNumber(subJsType) == 22);
     assertTrue(callGetString(subJsType).equals("str"));
+
+    AbstractJsTypeImpl abstractJsType = new AbstractJsTypeImpl();
+    assertTrue(callAbstractMethod(abstractJsType) == 23);
   }
 
   @JsType(namespace = "wasmcustomdescriptorsjsinterop")
@@ -146,6 +149,19 @@ public final class Main {
     @Override
     public int getNumber() {
       return 22;
+    }
+  }
+
+  @JsType(namespace = "wasmcustomdescriptorsjsinterop")
+  abstract static class AbstractJsType {
+    public abstract int abstractMethod();
+  }
+
+  @JsType(namespace = "wasmcustomdescriptorsjsinterop")
+  static class AbstractJsTypeImpl extends AbstractJsType {
+    @Override
+    public int abstractMethod() {
+      return 23;
     }
   }
 
@@ -294,6 +310,9 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native String callPackagePrivateMethod(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callAbstractMethod(AbstractJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
   static native int callInterfaceMethod(JsInterface jsInterface);
