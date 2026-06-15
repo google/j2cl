@@ -121,7 +121,8 @@ public class OutputGeneratorStage {
           }
 
           // Copy native js file to output.
-          output.write(matchingNativeFile.getRelativeFilePath(), matchingNativeFile.getContent());
+          output.write(
+              matchingNativeFile.getFileInfo().targetPath(), matchingNativeFile.getContent());
         }
 
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();

@@ -81,7 +81,7 @@ public final class ReadableSourceMapGenerator {
     try {
       for (var file : sourceFiles) {
         contentsByFileNameBuilder.put(
-            new File(file.getRelativeFilePath()).getName(), file.getLines());
+            new File(file.getFileInfo().sourcePath()).getName(), file.getLines());
       }
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());

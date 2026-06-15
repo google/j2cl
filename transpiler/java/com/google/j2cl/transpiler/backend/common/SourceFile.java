@@ -23,7 +23,7 @@ import java.util.List;
 
 /** Represents a source file. */
 public interface SourceFile {
-  String getRelativeFilePath();
+  FileInfo getFileInfo();
 
   List<String> getLines() throws IOException;
 
@@ -32,8 +32,8 @@ public interface SourceFile {
       private List<String> lines;
 
       @Override
-      public String getRelativeFilePath() {
-        return fileInfo.sourcePath();
+      public FileInfo getFileInfo() {
+        return fileInfo;
       }
 
       @Override

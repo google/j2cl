@@ -50,15 +50,19 @@ final class NativeJavaScriptFileResolver {
       try {
         String content = MoreFiles.asCharSource(Paths.get(file.sourcePath()), UTF_8).read();
         NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file, content);
-        byRelativePath.put(nativeFile.getRelativePathWithoutExtension(), nativeFile);
+        String simpleOrQualifiedName = nativeFile.getSimpleOrQualifiedName();
+        String pathWithoutExtension =
+            Path.of(nativeFile.getFileInfo().targetPath())
+                .resolveSibling(simpleOrQualifiedName)
+                .toString();
+        byRelativePath.put(pathWithoutExtension, nativeFile);
 
         // Only resolve files by qualified name if it has at least one package segment. Otherwise
         // we are not able to differentiate resolving a fully qualified name vs resolving a relative
         // path (ex. imagine if we had foo/bar/Platform.native.js and baz/qux/Platform.native.js in
         // same compilation unit).
-        String qualifiedName = nativeFile.getFullyQualifiedName();
-        if (qualifiedName.indexOf('.') > 0) {
-          byFullyQualifiedName.put(nativeFile.getFullyQualifiedName(), nativeFile);
+        if (simpleOrQualifiedName.indexOf('.') > 0) {
+          byFullyQualifiedName.put(simpleOrQualifiedName, nativeFile);
         }
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.getMessage());
@@ -134,7 +138,8 @@ final class NativeJavaScriptFileResolver {
     // no longer holds true we should use the union of all the map values.
     Set<NativeJavaScriptFile> allPotentialFiles = new HashSet<>(byRelativePath.values());
     Set<NativeJavaScriptFile> unusedFiles = Sets.difference(allPotentialFiles, usedFiles);
-    unusedFiles.forEach(file -> problems.error("Unused native file '%s'.", file));
+    unusedFiles.forEach(
+        file -> problems.error("Unused native file '%s'.", file.getFileInfo().originalPath()));
   }
 
   private Optional<NativeJavaScriptFile> resolveByRelativePath(String relativePath) {

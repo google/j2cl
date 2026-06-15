@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Splitter;
+import com.google.common.io.Files;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.common.SourceFile;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -31,35 +33,28 @@ public class NativeJavaScriptFile implements SourceFile {
   private final String content;
 
   public static final String NATIVE_EXTENSION = ".native.js";
+  public static final String NON_JS_NATIVE_EXTENSION = ".native_js";
 
   public NativeJavaScriptFile(FileInfo fileInfo, String content) {
-    this.fileInfo = fileInfo;
+    checkArgument(fileInfo.targetPath().endsWith(NATIVE_EXTENSION));
+    // Replace .native.js with .native_js so that the file is not seen as a JavaScript source
+    // by jscompiler.
+    this.fileInfo = fileInfo.withTargetPath(toNonJsExtension(fileInfo.targetPath()));
     this.content = content;
   }
 
-  public FileInfo getSourcePositionFileInfo() {
-    return FileInfo.create(getRelativeFilePath());
-  }
-
-  /** Returns the path for the native file relative to the root. */
   @Override
-  public String getRelativeFilePath() {
-    // Replace .native.js by .native_js so that the file is not seen as a JavaScript source
-    // by jscompiler.
-    return getRelativePathWithoutExtension() + ".native_js";
-  }
-
-  public String getRelativePathWithoutExtension() {
-    return fileInfo.targetPath().substring(0, fileInfo.targetPath().lastIndexOf(NATIVE_EXTENSION));
-  }
-
-  /** Returns the FQN if the filename appears to be of the form "<package>.<class>.native.js". */
-  public String getFullyQualifiedName() {
-    return Path.of(getRelativePathWithoutExtension()).getFileName().toString();
+  public FileInfo getFileInfo() {
+    return fileInfo;
   }
 
   public String getContent() {
     return content;
+  }
+
+  /** Returns the simple or qualified name of the type the native.js file is associated with. */
+  public String getSimpleOrQualifiedName() {
+    return Files.getNameWithoutExtension(getFileInfo().targetPath());
   }
 
   @Override
@@ -67,8 +62,7 @@ public class NativeJavaScriptFile implements SourceFile {
     return Splitter.on('\n').splitToList(getContent());
   }
 
-  @Override
-  public String toString() {
-    return fileInfo.targetPath();
+  private static String toNonJsExtension(String path) {
+    return path.substring(0, path.lastIndexOf(NATIVE_EXTENSION)) + NON_JS_NATIVE_EXTENSION;
   }
 }

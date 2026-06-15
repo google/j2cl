@@ -70,7 +70,7 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
     if (getFileInfo() == null) {
       return null;
     }
-    String filePath = getFileInfo().sourcePath();
+    String filePath = getFileInfo().targetPath();
     return filePath == null ? filePath : Path.of(filePath).getFileName().toString();
   }
 

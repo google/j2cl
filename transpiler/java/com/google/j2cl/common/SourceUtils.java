@@ -67,6 +67,10 @@ public class SourceUtils {
      */
     public abstract String targetPath();
 
+    public final FileInfo withTargetPath(String targetPath) {
+      return create(sourcePath(), originalPath(), targetPath);
+    }
+
     @Override
     public int compareTo(FileInfo o) {
       return targetPath().compareTo(o.targetPath());
