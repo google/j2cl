@@ -99,6 +99,7 @@ closure_js_library(
     name = "jre_externs",
     srcs = glob(
         ["**/externs.js"],
+        exclude = ["super-wasm/**"],
     ),
 )
 
