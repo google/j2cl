@@ -181,6 +181,9 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (typeDeclaration.isJsEnum() || typeDeclaration.isJsType()) {
+      if (!checkNestedNativeType(type)) {
+        return;
+      }
       checkQualifiedJsName(type);
     }
     problems.abortIfCancelled();
@@ -1482,6 +1485,23 @@ public class JsInteropRestrictionsChecker {
                     m.getEnclosingTypeDescriptor().getQualifiedSourceName()))
         // The condition to enter this method ensures that we should always have a value here.
         .get();
+  }
+
+  private boolean checkNestedNativeType(Type type) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    TypeDeclaration enclosingTypeDeclaration = typeDeclaration.getEnclosingTypeDeclaration();
+    if (typeDeclaration.hasCustomizedJsNamespace()
+        || enclosingTypeDeclaration == null
+        || !JsUtils.isSpecialJsType(enclosingTypeDeclaration.getQualifiedJsName())) {
+      return true;
+    }
+
+    problems.error(
+        type.getSourcePosition(),
+        "Native JsType '%s' cannot be nested under namespace '%s'.",
+        typeDeclaration.getReadableDescription(),
+        enclosingTypeDeclaration.getQualifiedJsName());
+    return false;
   }
 
   private void checkQualifiedJsName(Type type) {

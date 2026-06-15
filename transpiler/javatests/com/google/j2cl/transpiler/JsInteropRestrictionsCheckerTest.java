@@ -1614,6 +1614,53 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testNativeJsTypeWithSpecialNativeEnclosingJsTypeFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+         import jsinterop.annotations.*;
+         @JsType(isNative=true, namespace=JsPackage.GLOBAL, name="*") interface Star {
+           @JsType(isNative=true) class C {}
+           > Error: Native JsType 'C' cannot be nested under namespace '*'.
+           @JsType(isNative=true) interface I {}
+           > Error: Native JsType 'I' cannot be nested under namespace '*'.
+           @JsEnum(isNative=true) enum E { V }
+           > Error: Native JsType 'E' cannot be nested under namespace '*'.
+         }
+         @JsType(isNative=true, namespace=JsPackage.GLOBAL, name="number") class Num {
+           @JsType(isNative=true) static class C {}
+           > Error: Native JsType 'C' cannot be nested under namespace 'number'.
+         }
+         @JsType(isNative=true, namespace=JsPackage.GLOBAL, name="gbigint") interface GBInt {
+           @JsType(isNative=true) class C {}
+           > Error: Native JsType 'C' cannot be nested under namespace 'gbigint'.
+         }
+         class Buggy {}
+        """);
+  }
+
+  public void testNativeJsTypeWithNativeEnclosingJsTypeSucceeds() {
+    assertTranspileSucceeds(
+            "test.Buggy",
+            """
+             import jsinterop.annotations.*;
+             // Outer type has a custom namespace, so it's not a special type in JS
+             @JsType(isNative = true, namespace = "my.package", name = "number")
+             interface Num {
+               @JsType(isNative = true)
+               interface A {}
+             }
+             // Inner type explicitly "unnests" itself into the global namespace
+             @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")
+             interface Star {
+               @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "inner")
+               interface Inner {}
+             }
+             class Buggy {}
+            """)
+        .assertNoWarnings();
+  }
+
   public void testJsFunctionSucceeds() {
     assertTranspileSucceeds(
             "test.Buggy",

@@ -18,6 +18,8 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.ImmutableSet;
+
 /** Some JavaScript related utility functions. */
 public final class JsUtils {
   private static final String VALID_JS_IDENTIFIER_START_CHARS = "a-zA-Z_$";
@@ -62,6 +64,27 @@ public final class JsUtils {
   /** Returns whether a type should be considered global based on its namespace. */
   public static boolean isGlobal(String jsNamespace) {
     return JS_PACKAGE_GLOBAL.equals(jsNamespace) || "<window>".equals(jsNamespace);
+  }
+
+  private static final ImmutableSet<String> SPECIAL_JS_TYPES =
+      ImmutableSet.of(
+          "*", // All / Any wildcard
+          "?", // Unknown wildcard
+          "string", // Primitive string
+          "number", // Primitive number
+          "boolean", // Primitive boolean
+          "symbol", // Primitive symbol
+          "bigint", // Native primitive bigint
+          "gbigint", // Google-internal bigint polyfill, although not a real JS type, we treat it
+          // as one.
+          "void", // Void type
+          "undefined", // Undefined value/type
+          "null" // Null value/type
+          );
+
+  /** Returns whether a type should be considered a special closure type. */
+  public static boolean isSpecialJsType(String jsType) {
+    return SPECIAL_JS_TYPES.contains(jsType);
   }
 
   private JsUtils() {}
