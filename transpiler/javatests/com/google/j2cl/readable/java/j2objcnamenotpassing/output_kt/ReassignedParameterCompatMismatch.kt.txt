@@ -1,0 +1,42 @@
+// Generated from "j2objcnamenotpassing/ReassignedParameterCompatMismatch.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2objcnamenotpassing
+
+import javaemul.lang.*
+import kotlin.Suppress
+import kotlin.Throwable
+import kotlin.jvm.JvmStatic
+import kotlin.run
+
+open class ReassignedParameterCompatMismatch {
+ companion object {
+  @JvmStatic
+  fun getRootCause(throwable: Throwable): Throwable {
+   var throwable_1: Throwable? = throwable
+   var cause: Throwable? = null
+   while (run {
+    cause = throwable_1!!.cause
+    cause
+   } != null) {
+    throwable_1 = cause
+   }
+   return throwable_1!!
+  }
+ }
+}
