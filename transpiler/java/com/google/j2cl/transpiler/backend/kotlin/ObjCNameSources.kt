@@ -86,10 +86,8 @@ internal class ObjCNameSources(val nameSources: NameSources) {
   fun hiddenFromObjCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
-      typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") ||
-        typeDeclaration.annotations.any {
-          it.typeDescriptor.qualifiedSourceName == "com.google.j2kt.annotations.HidesFromObjC"
-        } -> hiddenFromObjCAnnotationSource()
+      typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") ->
+        hiddenFromObjCAnnotationSource()
       else -> Source.EMPTY
     }
 
