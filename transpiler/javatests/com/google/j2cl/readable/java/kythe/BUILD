@@ -10,6 +10,4 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/519272858): j2wasm backend fails when kythe is enabled.
-    generate_wasm_readables = False,
 )
