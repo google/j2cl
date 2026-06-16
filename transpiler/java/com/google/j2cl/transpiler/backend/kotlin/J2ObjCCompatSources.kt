@@ -441,12 +441,21 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
       modifiers = listOf(nsInline),
       returnType = method.descriptor.returnTypeDescriptor.objCKmpDependentSource(),
       name = objectiveCKmpMethodFunctionName(method.descriptor, selector, prefix),
-      parameters = method.parameters.map(::variableKmpDependentSource),
+      parameters =
+        method.parameters.mapIndexed { index, variable ->
+          variableKmpDependentSource(
+            variable.name,
+            method.descriptor.parameterTypeDescriptors[index],
+          )
+        },
       statements = objectiveCKmpMethodStatementDependentSources(method, selector),
     )
 
-  private fun variableKmpDependentSource(variable: Variable): Dependent<Source> =
-    spaceSeparated(variable.typeDescriptor.objCKmpDependentSource(), nameDependentSource(variable))
+  private fun variableKmpDependentSource(
+    name: String,
+    typeDescriptor: TypeDescriptor,
+  ): Dependent<Source> =
+    spaceSeparated(typeDescriptor.objCKmpDependentSource(), dependentSource(name.objCVariableName))
 
   private fun objectiveCKmpMethodFunctionName(
     methodDescriptor: MethodDescriptor,
@@ -549,7 +558,10 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
       modifiers = listOf(nsInline),
       returnType = objCDependentSource(method.descriptor.returnTypeDescriptor),
       name = functionName(method.descriptor, objCNames, prefix),
-      parameters = method.parameters.map(::variableDependentSource),
+      parameters =
+        method.parameters.mapIndexed { index, variable ->
+          variableDependentSource(variable.name, method.descriptor.parameterTypeDescriptors[index])
+        },
       statements =
         statementDependentSources(method, objCNames.escapeObjCMethod(method.isConstructor)),
     )
@@ -625,15 +637,18 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
         .joinToString("")
     )
 
-  private fun variableDependentSource(variable: Variable): Dependent<Source> =
-    combine(objCDependentSource(variable.typeDescriptor), nameDependentSource(variable)) {
+  private fun variableDependentSource(
+    name: String,
+    typeDescriptor: TypeDescriptor,
+  ): Dependent<Source> =
+    combine(objCDependentSource(typeDescriptor), dependentSource(name.objCVariableName)) {
       typeSource,
       nameSource ->
       spaceSeparated(typeSource, nameSource)
     }
 
   private fun nameDependentSource(variable: Variable): Dependent<Source> =
-    dependentSource(variable.name.objCName.escapeObjCKeyword.escapeJ2ObjCKeyword)
+    dependentSource(variable.name.objCVariableName)
 
   private fun objCNameDependentSource(
     companionDeclaration: CompanionDeclaration

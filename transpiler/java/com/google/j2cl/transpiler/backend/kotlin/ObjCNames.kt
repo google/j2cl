@@ -173,6 +173,9 @@ internal val String.qualifiedNameToObjCName: String
 internal val String.objCName
   get() = replace('$', '_')
 
+internal val String.objCVariableName: String
+  get() = objCName.escapeObjCKeyword.escapeJ2ObjCKeyword
+
 private const val ID_OBJC_NAME = "id"
 
 internal fun TypeDescriptor.objCName(useId: Boolean): String =
