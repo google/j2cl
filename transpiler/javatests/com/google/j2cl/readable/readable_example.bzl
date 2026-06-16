@@ -147,7 +147,7 @@ def readable_example(
             kt_ios_build_test(
                 name = "readable_j2kt_native_build_test",
                 targets = [":readable-j2kt-native"] + extra_build_test_targets,
-                minimum_os_version = "12.0",
+                minimum_os_version = "15.0",
                 tags = ["manual", "j2kt", "ios"],
             )
 
