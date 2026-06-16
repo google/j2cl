@@ -159,9 +159,7 @@ public class JavacParser {
         String sourcePath = cu.getSourceFile().getName();
         compilationUnits.add(
             compilationUnitBuilder.buildCompilationUnit(
-                checkNotNull(fileInfoBySourcePath.get(sourcePath)),
-                cu,
-                options.getGenerateKytheIndexingMetadata()));
+                checkNotNull(fileInfoBySourcePath.get(sourcePath)), cu));
         problems.abortIfCancelled();
       }
       return Library.builder().setCompilationUnits(compilationUnits.build()).build();

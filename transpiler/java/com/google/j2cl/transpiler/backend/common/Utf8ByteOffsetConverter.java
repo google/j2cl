@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.frontend.common;
+package com.google.j2cl.transpiler.backend.common;
 
 /** Converts character offsets to UTF-8 byte offsets. */
 public final class Utf8ByteOffsetConverter {

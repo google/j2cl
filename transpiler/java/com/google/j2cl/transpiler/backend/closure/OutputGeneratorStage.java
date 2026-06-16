@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -35,8 +36,10 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.common.ReadableSourceMapGenerator;
 import com.google.j2cl.transpiler.backend.common.SourceFile;
 import com.google.j2cl.transpiler.backend.common.SourceMapGenerator;
+import com.google.j2cl.transpiler.backend.common.Utf8ByteOffsetConverter;
 import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfoBuilder;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
@@ -134,10 +137,29 @@ public class OutputGeneratorStage {
         if (generateKytheIndexingMetadata) {
           // Inline metadata so that Kythe can create edges between these files and the Java source
           // file.
+          Utf8ByteOffsetConverter inputSourceByteOffsetConverter = null;
+          if (!compilationUnit.isSynthetic()) {
+            try {
+              inputSourceByteOffsetConverter =
+                  Utf8ByteOffsetConverter.create(
+                      Files.readString(Path.of(compilationUnit.getFileInfo().sourcePath()), UTF_8));
+            } catch (IOException exception) {
+              problems.fatal(
+                  FatalError.CANNOT_OPEN_FILE, compilationUnit.getFileInfo().sourcePath());
+            }
+          }
           javaScriptHeaderSource +=
-              renderKytheIndexingMetadata(compilationUnit, jsHeaderGenerator.getSourceMappings());
+              renderKytheIndexingMetadata(
+                  compilationUnit,
+                  jsHeaderGenerator.getSourceMappings(),
+                  inputSourceByteOffsetConverter,
+                  Utf8ByteOffsetConverter.create(javaScriptHeaderSource));
           javaScriptImplementationSource +=
-              renderKytheIndexingMetadata(compilationUnit, jsImplGenerator.getSourceMappings());
+              renderKytheIndexingMetadata(
+                  compilationUnit,
+                  jsImplGenerator.getSourceMappings(),
+                  inputSourceByteOffsetConverter,
+                  Utf8ByteOffsetConverter.create(javaScriptImplementationSource));
         } else {
           String sourceMap = renderSourceMap(type, jsImplGenerator.getSourceMappings());
 
@@ -203,32 +225,56 @@ public class OutputGeneratorStage {
 
   private String renderKytheIndexingMetadata(
       CompilationUnit compilationUnit,
-      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
+      Map<SourcePosition, SourcePosition> inputSourcePositionByOutputSourcePosition,
+      Utf8ByteOffsetConverter inputSourceByteOffsetConverter,
+      Utf8ByteOffsetConverter javascriptByteOffsetConverter) {
     KytheIndexingMetadata metadata = new KytheIndexingMetadata();
 
-    for (var entry : javaSourcePositionByOutputSourcePosition.entrySet()) {
+    for (var entry : inputSourcePositionByOutputSourcePosition.entrySet()) {
 
-      SourcePosition javaSourcePosition = entry.getValue();
+      SourcePosition inputSourcePosition = entry.getValue();
       SourcePosition javaScriptSourcePosition = entry.getKey();
 
       // Skip if the source position is not in the compilation unit.
-      if (javaSourcePosition.getFileInfo() == null
-          || !javaSourcePosition.getFileInfo().equals(compilationUnit.getFileInfo())) {
+      if (inputSourcePosition.getFileInfo() == null
+          || !inputSourcePosition.getFileInfo().equals(compilationUnit.getFileInfo())) {
         continue;
       }
 
-      if (!javaSourcePosition.hasValidPositions()
+      if (!inputSourcePosition.hasValidPositions()
           || !javaScriptSourcePosition.hasValidPositions()) {
         continue;
       }
 
+      int inputStartOffset = inputSourcePosition.getStartFilePosition().getCharOffset();
+      int inputEndOffset = inputSourcePosition.getEndFilePosition().getCharOffset();
+
+      // The FilePositions only give us the char offsets, but Kythe expects byte offsets. If we have
+      // a converter available, we'll convert the char offsets to byte offsets. If we don't have one
+      // then this is likely a synthetic file, in which case we'll just resort to using the char
+      // offsets.
+      if (inputSourceByteOffsetConverter != null) {
+        try {
+          inputStartOffset = inputSourceByteOffsetConverter.getByteOffset(inputStartOffset);
+          inputEndOffset = inputSourceByteOffsetConverter.getByteOffset(inputEndOffset);
+        } catch (IndexOutOfBoundsException ex) {
+          // TODO(b/267492636): This is coming from inlined Kotlin code. The source file positions
+          //   are relative to the file it was inlined _from_ but we're trying to map the position
+          //   using the file we're inline _into_. Whether we convert the char offset to byte offset
+          //   or not, the position is going to be wrong. For now we'll just skip emitting these.
+          continue;
+        }
+      }
+
       metadata.addAnchorAnchor(
-          javaSourcePosition.getStartFilePosition().getByteOffset(),
-          javaSourcePosition.getEndFilePosition().getByteOffset(),
-          javaScriptSourcePosition.getStartFilePosition().getByteOffset(),
-          javaScriptSourcePosition.getEndFilePosition().getByteOffset(),
+          inputStartOffset,
+          inputEndOffset,
+          javascriptByteOffsetConverter.getByteOffset(
+              javaScriptSourcePosition.getStartFilePosition().getCharOffset()),
+          javascriptByteOffsetConverter.getByteOffset(
+              javaScriptSourcePosition.getEndFilePosition().getCharOffset()),
           /* sourceCorpus= */ null,
-          javaSourcePosition.getFileInfo().originalPath(),
+          inputSourcePosition.getFileInfo().originalPath(),
           /* sourceRoot= */ null);
     }
 

@@ -11,6 +11,6 @@ java_test(
     deps = [
         "//third_party:junit",
         "//third_party:truth",
-        "//transpiler/java/com/google/j2cl/transpiler/frontend/common",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/common",
     ],
 )

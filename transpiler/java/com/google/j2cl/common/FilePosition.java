@@ -23,7 +23,7 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class FilePosition implements Comparable<FilePosition> {
 
-  static final FilePosition NONE = builder().setLine(-1).setColumn(-1).setByteOffset(-1).build();
+  static final FilePosition NONE = builder().setLine(-1).setColumn(-1).setCharOffset(-1).build();
 
   /** Returns the line number of this position. */
   public abstract int getLine();
@@ -31,8 +31,8 @@ public abstract class FilePosition implements Comparable<FilePosition> {
   /** Returns the character index on the line of this position, with the first column being 0. */
   public abstract int getColumn();
 
-  /** Returns the byte offset of this position. */
-  public abstract int getByteOffset();
+  /** Returns the character offset of this position in the file. */
+  public abstract int getCharOffset();
 
   @Override
   public int compareTo(FilePosition other) {
@@ -54,7 +54,7 @@ public abstract class FilePosition implements Comparable<FilePosition> {
 
     public abstract Builder setColumn(int column);
 
-    public abstract Builder setByteOffset(int byteOffset);
+    public abstract Builder setCharOffset(int byteOffset);
 
     public abstract FilePosition build();
   }
@@ -68,7 +68,7 @@ public abstract class FilePosition implements Comparable<FilePosition> {
     boolean result =
         getLine() == thatFilePosition.getLine() && getColumn() == thatFilePosition.getColumn();
     checkState(
-        result == (getByteOffset() == thatFilePosition.getByteOffset()),
+        result == (getCharOffset() == thatFilePosition.getCharOffset()),
         "Line/column position does not match byte offset.");
     return result;
   }

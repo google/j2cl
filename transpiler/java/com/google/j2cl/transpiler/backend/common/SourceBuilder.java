@@ -113,9 +113,9 @@ public class SourceBuilder {
       emitWithMapping(
           SourcePosition.builder()
               .setStartFilePosition(
-                  FilePosition.builder().setLine(0).setColumn(0).setByteOffset(0).build())
+                  FilePosition.builder().setLine(0).setColumn(0).setCharOffset(0).build())
               .setEndFilePosition(
-                  FilePosition.builder().setLine(0).setColumn(0).setByteOffset(0).build())
+                  FilePosition.builder().setLine(0).setColumn(0).setCharOffset(0).build())
               .build(),
           () -> {});
     }
@@ -243,7 +243,7 @@ public class SourceBuilder {
     return FilePosition.builder()
         .setLine(currentLine)
         .setColumn(currentColumn)
-        .setByteOffset(currentLength)
+        .setCharOffset(currentLength)
         .build();
   }
 }

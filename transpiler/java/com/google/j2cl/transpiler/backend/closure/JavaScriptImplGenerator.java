@@ -329,7 +329,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     int nativeSourceLine = 0;
-    int currentByteOffset = 0;
+    int currentCharOffset = 0;
     String content = nativeSource.getContent();
     for (String line : Splitter.on('\n').split(content)) {
       String trimmedLine = CharMatcher.whitespace().trimTrailingFrom(line);
@@ -344,13 +344,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
                     FilePosition.builder()
                         .setLine(nativeSourceLine)
                         .setColumn(firstNonWhitespaceColumn)
-                        .setByteOffset(currentByteOffset + firstNonWhitespaceColumn)
+                        .setCharOffset(currentCharOffset + firstNonWhitespaceColumn)
                         .build())
                 .setEndFilePosition(
                     FilePosition.builder()
                         .setLine(nativeSourceLine)
                         .setColumn(trimmedLine.length())
-                        .setByteOffset(currentByteOffset + trimmedLine.length())
+                        .setCharOffset(currentCharOffset + trimmedLine.length())
                         .build())
                 .setFileInfo(nativeSource.getFileInfo())
                 .setName(type.getDeclaration().getQualifiedBinaryName() + ".<native>")
@@ -359,7 +359,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       }
       sourceBuilder.newLine();
       nativeSourceLine++;
-      currentByteOffset += line.length() + 1;
+      currentCharOffset += line.length() + 1;
     }
   }
 

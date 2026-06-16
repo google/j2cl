@@ -105,7 +105,6 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
-import com.google.j2cl.transpiler.frontend.common.Utf8ByteOffsetConverter;
 import com.sun.source.tree.CaseTree.CaseKind;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.DefaultCaseLabelTree;
@@ -197,7 +196,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   // classes or lambdas.
   private final Map<String, Deque<Label>> labelsInScope = new HashMap<>();
   private JCCompilationUnit javacUnit;
-  private Utf8ByteOffsetConverter byteOffsetConverter;
 
   CompilationUnitBuilder(JavaEnvironment environment, Problems problems) {
     this.environment = environment;
@@ -738,18 +736,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       String name, int startCharacterPosition, int endCharacterPosition) {
     int startLine = javacUnit.getLineMap().getLineNumber(startCharacterPosition) - 1;
     int startColumn = javacUnit.getLineMap().getColumnNumber(startCharacterPosition) - 1;
-    // TODO(b/505900609): remove this and just store character positions.
-    int startByteOffset =
-        byteOffsetConverter != null
-            ? byteOffsetConverter.getByteOffset(startCharacterPosition)
-            : startCharacterPosition;
     int endLine = javacUnit.getLineMap().getLineNumber(endCharacterPosition) - 1;
     int endColumn = javacUnit.getLineMap().getColumnNumber(endCharacterPosition) - 1;
-    // TODO(b/505900609): remove this and just store character positions.
-    int endByteOffset =
-        byteOffsetConverter != null
-            ? byteOffsetConverter.getByteOffset(endCharacterPosition)
-            : endCharacterPosition;
     return SourcePosition.builder()
         .setFileInfo(getCurrentCompilationUnit().getFileInfo())
         .setPackageRelativePath(getCurrentCompilationUnit().getPackageRelativePath())
@@ -758,14 +746,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             FilePosition.builder()
                 .setLine(startLine)
                 .setColumn(startColumn)
-                .setByteOffset(startByteOffset)
+                .setCharOffset(startCharacterPosition)
                 .build())
         .setEndFilePosition(
             FilePosition.builder()
                 .setLine(endLine)
                 // TODO(b/92372836): Document which character this should point to
                 .setColumn(endColumn)
-                .setByteOffset(endByteOffset)
+                .setCharOffset(endCharacterPosition)
                 .build())
         .build();
   }
@@ -1676,27 +1664,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return expressions.stream().map(this::convertExpression).collect(toCollection(ArrayList::new));
   }
 
-  public CompilationUnit buildCompilationUnit(
-      FileInfo fileInfo, CompilationUnitTree javacUnit, boolean generateKytheIndexingMetadata) {
+  public CompilationUnit buildCompilationUnit(FileInfo fileInfo, CompilationUnitTree javacUnit) {
     this.javacUnit = (JCCompilationUnit) javacUnit;
     setCurrentCompilationUnit(
         CompilationUnit.createForFile(
             fileInfo,
             javacUnit.getPackageName() == null ? "" : javacUnit.getPackageName().toString()));
-
-    // We only use byte offsets for Kythe indexing metadata, so we can skip this work if it's not
-    // enabled.
-    if (generateKytheIndexingMetadata) {
-      try {
-        byteOffsetConverter =
-            Utf8ByteOffsetConverter.create(this.javacUnit.sourcefile.getCharContent(true));
-      } catch (IOException e) {
-        throw internalCompilerError(e, "Error reading source file.");
-      }
-    } else {
-      byteOffsetConverter = null;
-    }
-
     for (Tree tree : javacUnit.getTypeDecls()) {
       if (tree instanceof JCClassDecl classDeclaration) {
         getCurrentCompilationUnit().addType(convertClassDeclaration(classDeclaration));
