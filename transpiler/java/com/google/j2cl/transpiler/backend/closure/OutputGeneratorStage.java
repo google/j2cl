@@ -177,7 +177,7 @@ public class OutputGeneratorStage {
         }
       }
 
-      if (!generateKytheIndexingMetadata && !compilationUnit.isSynthetic()) {
+      if (!compilationUnit.isSynthetic()) {
         // Copy java sources to output.
         output.copyFile(
             compilationUnit.getFileInfo().sourcePath(), compilationUnit.getPackageRelativePath());
