@@ -124,26 +124,29 @@ def readable_example(
             )
 
         if build_kt_native_readables:
-            # Generate a objective library to force parsing of the header file.
-            write_file(
-                name = "ParseHeaders_m",
-                out = "ParseHeaders.m",
-                content = ["""#import "%s/%s.h" """ % (native.package_name(), src[:-5]) for src in srcs if src.endswith(".java")],
-                tags = ["j2kt", "ios", "manual"],
-            )
-            objc_library(
-                name = "ios_parse_headers",
-                testonly = 1,
-                srcs = ["ParseHeaders.m"],
-                tags = ["j2kt", "ios", "manual"],
-                deps = [
-                    ":readable-j2kt-native",
-                ],
-            )
+            extra_build_test_targets = []
+            if j2kt_j2objc_interop_enabled:
+                # Generate an Objective-C library to force parsing of the interop header file.
+                write_file(
+                    name = "ParseHeaders_m",
+                    out = "ParseHeaders.m",
+                    content = ["""#import "%s/%s.h" """ % (native.package_name(), src[:-5]) for src in srcs if src.endswith(".java")],
+                    tags = ["j2kt", "ios", "manual"],
+                )
+                objc_library(
+                    name = "ios_parse_headers",
+                    testonly = 1,
+                    srcs = ["ParseHeaders.m"],
+                    tags = ["j2kt", "ios", "manual"],
+                    deps = [
+                        ":readable-j2kt-native",
+                    ],
+                )
+                extra_build_test_targets = [":ios_parse_headers"]
 
             kt_ios_build_test(
                 name = "readable_j2kt_native_build_test",
-                targets = [":ios_parse_headers"],
+                targets = [":readable-j2kt-native"] + extra_build_test_targets,
                 minimum_os_version = "12.0",
                 tags = ["manual", "j2kt", "ios"],
             )
