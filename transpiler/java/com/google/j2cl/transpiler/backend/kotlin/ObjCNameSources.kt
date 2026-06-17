@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
+import com.google.j2cl.transpiler.backend.kotlin.common.lowerCamelCased
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
@@ -112,16 +113,14 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )
 
-  // We prepend the ObjC prefix to the enum type to avoid collisions with J2Objc and
-  // we append "_" to the enum type name because the @ObjcEnum annotation does not insert an
-  // underscore between the type name and the literal name. We use a typedef to remove these again
-  // in the J2ObjC compatibility layer.
+  // We prepend the ObjC prefix to the enum type to avoid collisions with J2Objc.
+  // We use a typedef to remove these again in the J2ObjC compatibility layer.
   fun objCEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
       typeDeclaration.isEnumWithNonEmptyValues ->
         objCEnumAnnotationSource(
-          "${typeDeclaration.objCName(prefix = nameSources.objCNamePrefix)}_Enum_"
+          "${typeDeclaration.objCName(prefix = nameSources.objCNamePrefix)}_Enum"
         )
       else -> Source.EMPTY
     }
@@ -138,10 +137,28 @@ internal class ObjCNameSources(val nameSources: NameSources) {
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
       isHiddenFromObjC(field.descriptor) -> hiddenFromObjCAnnotationSource(field.descriptor)
+      field.descriptor.isEnumConstant -> {
+        Source.newLineSeparated(
+          objCEnumEntryNameAnnotationSource(
+            name = "_${field.descriptor.name!!}",
+            swiftName = field.descriptor.name!!.lowerCamelCased,
+          ),
+          Source.emptyUnless(needsObjCNameAnnotation(field.descriptor)) {
+            objCNameAnnotationSource(field.descriptor.objCName)
+          },
+        )
+      }
       needsObjCNameAnnotation(field.descriptor) ->
         objCNameAnnotationSource(field.descriptor.objCName)
       else -> Source.EMPTY
     }
+
+  fun objCEnumEntryNameAnnotationSource(name: String, swiftName: String): Source =
+    annotation(
+      nameSources.topLevelQualifiedNameSource("javaemul.lang.ObjCEnumEntryName"),
+      parameterSource("name", literal(name)),
+      parameterSource("swiftName", literal(swiftName)),
+    )
 
   private fun needsObjCNameAnnotation(
     typeDeclaration: TypeDeclaration,

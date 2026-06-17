@@ -26,6 +26,15 @@ fun String.camelCaseStartsWith(prefix: String): Boolean =
 val String.titleCased: String
   get() = replaceFirstChar { it.uppercase() }
 
+/** Returns lower-camel-cased version of this string, treating underscores as word boundaries. */
+val String.lowerCamelCased: String
+  get() =
+    split('_')
+      .mapIndexed { index, s ->
+        if (index == 0) s.lowercase() else s.lowercase().replaceFirstChar { it.uppercase() }
+      }
+      .joinToString("")
+
 /** Returns this string in single quotes. */
 val String.inSingleQuotes: String
   get() = "'$this'"
