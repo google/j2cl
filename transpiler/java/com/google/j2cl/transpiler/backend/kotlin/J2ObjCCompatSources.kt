@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangCharacter
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.TypeVariable
@@ -778,6 +779,7 @@ internal class J2ObjCCompatSources(private val objCNamePrefix: String) {
   ): Dependent<Source> =
     when {
       isJavaLangObject(declaredTypeDescriptor) -> id
+      isJavaLangCharacter(declaredTypeDescriptor) -> id
       declaredTypeDescriptor.isInterface -> interfaceObjCDependentSource(declaredTypeDescriptor)
       else -> objCNameDependentSource(declaredTypeDescriptor.typeDeclaration).toPointer()
     }
