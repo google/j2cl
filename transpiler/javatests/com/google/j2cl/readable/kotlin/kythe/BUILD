@@ -9,6 +9,6 @@ package(
 )
 
 readable_example(
-    srcs = glob(["*.java"]),
+    srcs = glob(["*.kt"]),
     j2cl_library_tags = ["force_kythe_generation"],
 )

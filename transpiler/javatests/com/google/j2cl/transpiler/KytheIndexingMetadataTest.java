@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithKotlinDefaults;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
@@ -32,7 +33,7 @@ public class KytheIndexingMetadataTest {
   private static final Pattern PATH_PATTERN = Pattern.compile("\"path\":\"([^\"]+)\"");
 
   @Test
-  public void testKytheIndexingMetadata() throws Exception {
+  public void javaSource() throws Exception {
     TranspileResult result =
         newTesterWithDefaults()
             .addFile(
@@ -60,7 +61,7 @@ public class KytheIndexingMetadataTest {
   }
 
   @Test
-  public void testKytheIndexingMetadata_multibyteChars() throws Exception {
+  public void javaSource_multibyteChars() throws Exception {
     TranspileResult result =
         newTesterWithDefaults()
             .addFile(
@@ -86,6 +87,63 @@ public class KytheIndexingMetadataTest {
         /* targetEnd= */ 192);
   }
 
+  @Test
+  public void kotlinSource() throws Exception {
+    TranspileResult result =
+        newTesterWithKotlinDefaults()
+            .addFile(
+                "test/KytheIndexingMetadata.kt",
+                """
+                package test
+                class KytheIndexingMetadata {}
+                """)
+            .addArgs("-generatekytheindexingmetadata")
+            .assertTranspileSucceeds()
+            .assertNoWarnings();
+
+    assertKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.java.js"));
+
+    String kytheMetadata =
+        assertKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.impl.java.js"));
+
+    // Ensures there's an anchor on the name of the class declaration.
+    assertImputesEdgeExists(
+        kytheMetadata,
+        /* sourceBegin= */ 19,
+        /* sourceEnd= */ 40,
+        /* targetBegin= */ 189,
+        /* targetEnd= */ 210);
+  }
+
+  @Test
+  public void kotlinSource_multibyteChars() throws Exception {
+    TranspileResult result =
+        newTesterWithKotlinDefaults()
+            .addFile(
+                "test/KytheIndexingMetadata.kt",
+                """
+                package test
+                // °
+                class KytheIndexingMetadata {}
+                """)
+            .addArgs("-generatekytheindexingmetadata")
+            .assertTranspileSucceeds()
+            .assertNoWarnings();
+
+    assertKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.java.js"));
+
+    String kytheMetadata =
+        assertKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.impl.java.js"));
+
+    // Ensures there's an anchor on the name of the class declaration.
+    assertImputesEdgeExists(
+        kytheMetadata,
+        /* sourceBegin= */ 25,
+        /* sourceEnd= */ 46,
+        /* targetBegin= */ 189,
+        /* targetEnd= */ 210);
+  }
+
   @CanIgnoreReturnValue
   private static String assertKytheMetadata(List<String> lines) {
     assertThat(lines.size()).isGreaterThan(1);
@@ -93,9 +151,9 @@ public class KytheIndexingMetadataTest {
     String kytheMetadataLine = lines.getLast();
     assertThat(kytheMetadataLine).startsWith("// {\"type\":\"KYTHE0\"");
     // return the JSON string without the "// " prefix.
-    String kytheMedataJson = kytheMetadataLine.substring(3);
+    String kytheMetadataJson = kytheMetadataLine.substring(3);
     // Snip out paths as they are not stable across different runs/evironments.
-    return PATH_PATTERN.matcher(kytheMedataJson).replaceAll("\"path\":\"<snip>\"");
+    return PATH_PATTERN.matcher(kytheMetadataJson).replaceAll("\"path\":\"<snip>\"");
   }
 
   private static void assertImputesEdgeExists(

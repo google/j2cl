@@ -85,7 +85,10 @@ java_test(
 java_test(
     name = "KytheIndexingMetadataTest",
     srcs = ["KytheIndexingMetadataTest.java"],
-    data = [":jre_bundle_files"],
+    data = [
+        ":jre_bundle_files",
+        ":ktstdlib_bundle_deploy.jar",
+    ],
     deps = [
         ":tester_lib",
         "//third_party:junit",

@@ -1,0 +1,74 @@
+goog.module('kythe.Foo.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Foo = goog.forwardDeclare('kythe.Foo$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__kythe_Foo_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__kythe_Foo_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getSOME_CONSTANT__int() {
+  return Foo.m_getSOME_CONSTANT__int();
+ }
+ /** @final @nodts */
+ m_setSOME_CONSTANT__int__void(/** number */ arg0) {
+  Foo.m_setSOME_CONSTANT__int__void(arg0);
+ }
+ /** @final @nodts @return {!Foo} */
+ m_getInstance__kythe_Foo() {
+  return Foo.m_getInstance__kythe_Foo();
+ }
+ /** @final @nodts */
+ m_setInstance__kythe_Foo__void(/** !Foo */ arg0) {
+  Foo.m_setInstance__kythe_Foo__void(arg0);
+ }
+ /** @final @nodts */
+ m_someStaticMethod__void() {
+  Foo.m_someStaticMethod__void();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__kythe_Foo_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__kythe_Foo_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__kythe_Foo_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Foo = goog.module.get('kythe.Foo$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__kythe_Foo_Companion;
+$Util.$setClassMetadata(Companion, 'kythe.Foo$Companion');
+
+exports = Companion;
+
+// Kythe Indexing Metadata:
+// {"type":"KYTHE0","meta":[{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":232,"target_end":241,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":290,"target_end":301,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":308,"target_end":316,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":364,"target_end":373,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":380,"target_end":412,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":415,"target_end":460,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":463,"target_end":480,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":500,"target_end":532,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":789,"target_begin":539,"target_end":576,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":701,"source_end":714,"target_begin":620,"target_end":643,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":701,"source_end":714,"target_begin":650,"target_end":687,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":701,"source_end":714,"target_begin":714,"target_end":743,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":701,"source_end":714,"target_begin":768,"target_end":808,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":733,"source_end":741,"target_begin":850,"target_end":874,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":733,"source_end":741,"target_begin":881,"target_end":919,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":733,"source_end":741,"target_begin":946,"target_end":976,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":733,"source_end":741,"target_begin":999,"target_end":1040,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":764,"source_end":780,"target_begin":1067,"target_end":1091,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":764,"source_end":780,"target_begin":1098,"target_end":1129,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":1181,"target_end":1213,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":1220,"target_end":1299,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":1326,"target_end":1333,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":1340,"target_end":1368,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":1371,"target_end":1396,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":1399,"target_end":1420,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":1707,"target_end":1790,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}},{"type":"ANCHOR_ANCHOR","source_begin":674,"source_end":683,"target_begin":1751,"target_end":1789,"edge":"/kythe/edge/imputes","source_vname":{"corpus":"google3","path":"kythe/Foo.kt"}}]}
