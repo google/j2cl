@@ -274,11 +274,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
   public void testAssumptionBeforeClass() throws Exception {
     String testName = "AssumptionBeforeClassTest";
     var testResultBuilder = newTestResultBuilder().testClassName(testName);
-    // On the JVM, short-circuiting in @BeforeClass causes the entire test to pass, but it will list
-    // zero run.
-    if (!testMode.isJvm()) {
-      testResultBuilder.addTestSkip("testShouldNotRun");
-    }
+    // Short-circuiting in @BeforeClass causes the entire test to pass, but it will list zero run.
     TestResult testResult =
         testResultBuilder
             .addBlackListedWord("should_not_be_in_log")

@@ -1,15 +1,24 @@
 #macro( methodExecution $classOrInstance $testMethod)
 ## TODO(b/270609553) to revisit this once j2cl (j2kt web) and j2cl kotlin tests support coroutines.
-  #if($testMethod.isAsync())
+#if($testMethod.isAsync())
 $classOrInstance.${testMethod.javaMethodName()}().get(${testMethod.timeout()}.toLong(), java.util.concurrent.TimeUnit.MILLISECONDS);
-  #else
+#else
 $classOrInstance.${testMethod.javaMethodName()}();
-  #end
 #end
-#macro( methodExecutions $classOrInstance $testMethods)
-  #foreach($testMethod in $testMethods )
-#methodExecution( $classOrInstance $testMethod )
-  #end
+#end
+#macro( callMethod $testClass $method)
+#if(${method.isStatic()})
+#methodExecution( ${testClass.qualifiedName()} $method )
+#else
+#methodExecution( "actualTest" $method )
+#end
+#end
+#macro( annotatedMethodDelegate $annotation $testClass $method)
+@$annotation
+fun ${method.javaMethodName()}() {
+  #callMethod($testClass $method)
+}
+
 #end
 
 /**
@@ -18,93 +27,60 @@ $classOrInstance.${testMethod.javaMethodName()}();
 @file:Suppress("PackageName")
 package ${testClass.jsUnitPackageName()}
 
+import com.google.testing.kotlin.AfterClass
 import com.google.testing.kotlin.AfterTest
+import com.google.testing.kotlin.BeforeClass
 import com.google.testing.kotlin.BeforeTest
 import com.google.testing.kotlin.Test
 
-private var times = 0
-private fun beforeClass() {
-  #methodExecutions(${testClass.qualifiedName()} $testClass.beforeClassMethods())
-}
-
-private fun afterClass() {
-  #methodExecutions(${testClass.qualifiedName()} ${testClass.afterClassMethods()})
-}
-
 class ${testClass.jsUnitAdapterClassName()} {
 
-  lateinit var actualTest: ${testClass.qualifiedName()}
-  var skipAllTests = false
-  var skipCurrentTest = false
+  val actualTest = ${testClass.qualifiedName()}()
 
-  init {
-    try {
-      if (times++ == 0) {
-        beforeClass()
-      }
-    } catch (e: org.junit.AssumptionViolatedException) {
-      skipAllTests = true
-    ## Add try catch here for afterClass is guaranteed to run even if the
-    ## BeforeClass method throws an exception, in this case, AfterTest does not
-    ## run so we throw an exception here
-    } catch (e: Throwable) {
-      afterClass()
-      throw e
-    }
-  }
-
+#if($testClass.isJUnit3())
   @BeforeTest
-  fun setUp() {
-    if (skipAllTests) return
-    try {
-      actualTest = ${testClass.qualifiedName()}()
-      #if($testClass.isJUnit3())
-      junit.framework.TestCaseViolator.callSetUp(actualTest);
-      #end
-      #methodExecutions( "actualTest" $testClass.beforeMethods() )
-    } catch (e: org.junit.AssumptionViolatedException) {
-      skipCurrentTest = true
-    }
+  fun junit3SetUp() {
+    junit.framework.TestCaseViolator.callSetUp(actualTest)
   }
 
+#end
+#foreach($beforeMethod in ${testClass.beforeMethods()})
+#annotatedMethodDelegate( "BeforeTest" $testClass $beforeMethod )
+#end
+#foreach($afterMethod in ${testClass.afterMethods()})
+#annotatedMethodDelegate( "AfterTest" $testClass $afterMethod )
+#end
+#if($testClass.isJUnit3())
   @AfterTest
-  fun tearDown() {
-    try {
-      if (skipAllTests) return
-      if (skipCurrentTest) {
-        skipCurrentTest = false
-      }
-    #if($testClass.isJUnit3())
-      junit.framework.TestCaseViolator.callTearDown(actualTest)
-    #end
-    #methodExecutions( "actualTest" $testClass.afterMethods() )
-    } finally {
-      if (times == ${testClass.numberOfTestMethods()}) {
-        afterClass()
-      }
-    }
+  fun junit3TearDown() {
+    junit.framework.TestCaseViolator.callTearDown(actualTest)
   }
 
+#end
 #foreach($testMethod in ${testClass.testMethods()})
   @Test
   fun ${testMethod.javaMethodName()}()  {
-    if (skipAllTests || skipCurrentTest) return
+    #if ($testMethod.expectedExceptionQualifiedName())
     try {
-      #if(${testMethod.isStatic()})
-      #methodExecution( ${testClass.qualifiedName()} $testMethod )
-      #else
-      #methodExecution( "actualTest" $testMethod )
-      #end
-    } catch (e: org.junit.AssumptionViolatedException) {
-      return
-#if ($testMethod.expectedExceptionQualifiedName())
+      #callMethod( $testClass $testMethod )
     } catch (e: ${testMethod.expectedExceptionQualifiedName()}) {
       return
     }
     throw Exception("expected exception was not thrown")
 #else
-    }
+    #callMethod( $testClass $testMethod )
 #end
   }
 #end
+
+  companion object {
+#foreach($beforeClassMethod in ${testClass.beforeClassMethods()})
+    #annotatedMethodDelegate( "BeforeClass" $testClass $beforeClassMethod )
+
+#end
+#foreach($afterClassMethod in ${testClass.afterClassMethods()})
+    #annotatedMethodDelegate( "AfterClass" $testClass $afterClassMethod )
+
+#end
+  }
 }
