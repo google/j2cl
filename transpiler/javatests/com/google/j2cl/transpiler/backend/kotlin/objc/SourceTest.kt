@@ -45,8 +45,26 @@ class SourceTest {
   }
 
   @Test
+  fun sourceMacroIfndef() {
+    macroIfndef(source("foo")).assertBuilds("#ifndef foo")
+  }
+
+  @Test
+  fun sourceMacroEndif() {
+    macroEndif(source("!defined(foo)")).assertBuilds("#endif  // !defined(foo)")
+  }
+
+  @Test
   fun sourceDefineAlias() {
-    defineAlias(source("alias"), source("target")).assertBuilds("#define alias target")
+    defineAlias(source("alias"), source("target"))
+      .assertBuilds(
+        """
+        #ifndef alias
+        #define alias target
+        #endif  // !defined(alias)
+        """
+          .trimIndent()
+      )
   }
 
   @Test

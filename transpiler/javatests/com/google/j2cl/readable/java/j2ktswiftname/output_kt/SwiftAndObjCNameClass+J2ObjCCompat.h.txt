@@ -6,7 +6,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#ifndef ObjCClass
 #define ObjCClass J2ktObjCClass
+#endif  // !defined(ObjCClass)
 
 NS_INLINE J2ktObjCClass* create_ObjCClass_init(void) {
  return [[J2ktObjCClass alloc] init];

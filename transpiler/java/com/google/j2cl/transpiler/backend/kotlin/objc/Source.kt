@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inDoubleQuotes
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.join
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -32,10 +33,20 @@ fun macroDeclaration(source: Source) = join(source("#"), source)
 
 fun macroDefine(source: Source) = macroDeclaration(spaceSeparated(source("define"), source))
 
+fun macroIfndef(source: Source) = macroDeclaration(spaceSeparated(source("ifndef"), source))
+
+fun macroEndif(condition: Source) =
+  join(macroDeclaration(source("endif")), source("  "), comment(condition))
+
 fun compatibilityAlias(alias: Source, target: Source) =
   spaceSeparated(source("@compatibility_alias"), alias, target)
 
-fun defineAlias(alias: Source, target: Source) = macroDefine(spaceSeparated(alias, target))
+fun defineAlias(alias: Source, target: Source) =
+  newLineSeparated(
+    macroIfndef(alias),
+    macroDefine(spaceSeparated(alias, target)),
+    macroEndif(join(source("!defined"), inParentheses(alias))),
+  )
 
 fun dependenciesSource(dependencies: Iterable<Dependency>): Source =
   emptyLineSeparated(

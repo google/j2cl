@@ -8,7 +8,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#ifndef ProtobufProtobuf
 #define ProtobufProtobuf J2ktProtobufProtobuf
+#endif  // !defined(ProtobufProtobuf)
 
 NS_INLINE J2ktProtobufProtobuf* create_ProtobufProtobuf_init(void) {
  return [[J2ktProtobufProtobuf alloc] init];
@@ -18,9 +20,13 @@ NS_INLINE J2ktProtobufProtobuf* new_ProtobufProtobuf_init(void) {
  return [[J2ktProtobufProtobuf alloc] init];
 }
 
+#ifndef ProtobufProtobuf_Test
 #define ProtobufProtobuf_Test J2ktProtobufProtobuf_Test
+#endif  // !defined(ProtobufProtobuf_Test)
 
+#ifndef ProtobufProtobuf_TestCompanion
 #define ProtobufProtobuf_TestCompanion J2ktProtobufProtobuf_TestCompanion
+#endif  // !defined(ProtobufProtobuf_TestCompanion)
 
 NS_INLINE void ProtobufProtobuf_Test_acceptStaticWithMyMessage_(id myMessage) {
  [J2ktProtobufProtobuf_TestCompanion.shared acceptStaticWithMyMessage:myMessage];
