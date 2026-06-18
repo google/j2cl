@@ -281,8 +281,10 @@ public class Main {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   interface Accessor {
+    @Wasm("nop")
     int getField();
 
+    @Wasm("nop")
     int getField2();
   }
 
