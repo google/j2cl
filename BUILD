@@ -89,7 +89,7 @@ bool_flag(
 
 bool_flag(
     name = "disable_graalified_header_klib_compiler",
-    build_setting_default = True,
+    build_setting_default = False,
     scope = "universal",
 )
 
