@@ -48,6 +48,12 @@ public class HeaderKlibCompiler() {
     val arguments =
       K2JKlibCompilerArguments().apply {
         parseCommandLineArguments(kotlincOptions, this)
+        // The compiler attempts to locate the compiler jar resource, which fails in the GraalVM
+        // native image environment. Since kotlinHome is not actually used by the header compiler,
+        // setting it to a temporary directory is sufficient to bypass this check.
+        if (kotlinHome == null) {
+          kotlinHome = System.getProperty("java.io.tmpdir")
+        }
         freeArgs = sources
       }
 
