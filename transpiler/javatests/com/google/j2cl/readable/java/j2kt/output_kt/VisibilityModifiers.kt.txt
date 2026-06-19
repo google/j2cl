@@ -86,6 +86,10 @@ class VisibilityModifiers {
   }
  }
  
+ open class PackagePrivateWithJ2ktPublic internal constructor()
+ 
+ open class PublicExtendsPackagePrivateWithJ2ktPublic: PackagePrivateWithJ2ktPublic()
+ 
  internal abstract class PackagePrivateCollection: MutableCollectionJvm<PackagePrivate> {
   abstract override fun contains(o: PackagePrivate): Boolean
  }

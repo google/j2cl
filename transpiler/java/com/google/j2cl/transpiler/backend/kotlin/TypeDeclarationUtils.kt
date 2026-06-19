@@ -70,6 +70,7 @@ internal val TypeDeclaration.defaultKtVisibility: KtVisibility
 internal val TypeDeclaration.ktVisibility: KtVisibility
   get() =
     when {
+      hasJ2ktPublicAnnotation -> KtVisibility.PUBLIC
       // TODO(b/483489173): Remove when visibility problem in Dagger-generated Factory classes is
       // solved differently.
       hasInjectAnnotatedMethod -> KtVisibility.PUBLIC
@@ -127,3 +128,6 @@ internal val TypeDeclaration.ktMutableQualifiedName: String?
 
 internal val TypeDeclaration.hasInjectAnnotatedMethod: Boolean
   get() = declaredMethodDescriptors.any { it.hasInjectAnnotation }
+
+internal val TypeDeclaration.hasJ2ktPublicAnnotation: Boolean
+  get() = hasAnnotation("com.google.common.annotations.J2ktPublic")

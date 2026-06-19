@@ -47,6 +47,7 @@ public class SupportedAnnotations {
           .add("dagger.Inject")
           .add("javax.inject.Inject")
           .add("org.junit.runner.RunWith")
+          .add("com.google.common.annotations.J2ktPublic")
           .add("com.google.j2kt.annotations.HiddenFromObjC")
           .add("com.google.j2kt.annotations.KtNative")
           .add("com.google.j2kt.annotations.Throws")

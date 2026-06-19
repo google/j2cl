@@ -16,6 +16,7 @@
 package j2kt;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.annotations.J2ktPublic;
 import java.util.Collection;
 import org.jspecify.annotations.NullMarked;
 
@@ -103,6 +104,12 @@ public final class VisibilityModifiers {
     //   private void privateMethod() {}
     // }
   }
+
+  @J2ktPublic
+  static class PackagePrivateWithJ2ktPublic {}
+
+  public static class PublicExtendsPackagePrivateWithJ2ktPublic
+      extends PackagePrivateWithJ2ktPublic {}
 
   abstract static class PackagePrivateCollection implements Collection<PackagePrivate> {
     @Override
