@@ -200,7 +200,7 @@ class KlibsKotlinParser(private val problems: Problems) {
       // from there.
       arguments.commonSources =
         fileInfoByAbsoluteSourcePath.entries
-          .filter { it.value.originalPath().startsWith("common-srcs/") }
+          .filter { "/common-srcs/" in it.value.sourcePath() }
           .map { it.key }
           .toTypedArray()
       arguments.freeArgs = fileInfoByAbsoluteSourcePath.keys.toList()

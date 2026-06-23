@@ -18,6 +18,7 @@ package com.google.j2cl.common;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.jar.JarFile.MANIFEST_NAME;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
@@ -29,6 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -67,9 +70,14 @@ public class ZipFiles {
     ImmutableList.Builder<FileInfo> results = new ImmutableList.Builder<>();
     final ZipFile zipFileObj = new ZipFile(zipFile);
     try {
+      Manifest manifest = readManifestFromZip(zipFileObj);
       for (ZipEntry entry : entries(zipFileObj)) {
         problems.abortIfCancelled();
         checkName(entry.getName());
+        // Skip extracting the manifest.
+        if (manifest != null && entry.getName().equals(MANIFEST_NAME)) {
+          continue;
+        }
         File targetFile = new File(targetDirectory, entry.getName());
         if (entry.isDirectory()) {
           if (!targetFile.isDirectory() && !targetFile.mkdirs()) {
@@ -84,13 +92,32 @@ public class ZipFiles {
           }
           // Write the file to the destination.
           asByteSource(zipFileObj, entry).copyTo(Files.asByteSink(targetFile));
-          results.add(FileInfo.create(targetFile.toString(), entry.getName()));
+          results.add(
+              FileInfo.create(targetFile.toString(), getOriginalPathForEntry(entry, manifest)));
         }
       }
     } finally {
       zipFileObj.close();
     }
     return results.build();
+  }
+
+  private static Manifest readManifestFromZip(ZipFile file) throws IOException {
+    ZipEntry entry = file.getEntry(MANIFEST_NAME);
+    return entry != null ? new Manifest(file.getInputStream(entry)) : null;
+  }
+
+  private static String getOriginalPathForEntry(ZipEntry entry, Manifest manifest) {
+    String entryName = entry.getName();
+    if (manifest == null) {
+      return entryName;
+    }
+    Attributes attributes = manifest.getAttributes(entryName);
+    if (attributes == null) {
+      return entryName;
+    }
+    String originalPath = attributes.getValue("Target-Source");
+    return originalPath != null ? originalPath : entryName;
   }
 
   /**
