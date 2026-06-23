@@ -140,6 +140,7 @@ public final class LambdaAdaptorTypeDescriptors {
     return ImmutableList.of(
         getLambdaAdaptorDefaultConstructor(adaptorTypeDescriptor),
         getWasmJsFunctionAdaptorConstructor(adaptorTypeDescriptor),
+        getWasmJsFunctionAdaptMethod(adaptorTypeDescriptor),
         getWasmJsFunctionInvokeMethod(adaptorTypeDescriptor),
         getAdaptorForwardingMethod(adaptorTypeDescriptor));
   }
@@ -247,6 +248,23 @@ public final class LambdaAdaptorTypeDescriptors {
         .setConstructor(true)
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
         .setParameterTypeDescriptors(TypeDescriptors.get().javaemulInternalWasmExtern)
+        .build();
+  }
+
+  /**
+   * Returns the MethodDescriptor for the static adapt method of the Wasm JS function adaptor class
+   * to convert an incoming JavaScript function reference to the adaptor type.
+   *
+   * <p>This static method invokes adaptJsFunction and returns the result.
+   */
+  public static MethodDescriptor getWasmJsFunctionAdaptMethod(
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+    return MethodDescriptor.builder()
+        .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
+        .setName("$adapt")
+        .setStatic(true)
+        .setParameterTypeDescriptors(TypeDescriptors.get().javaemulInternalWasmExtern)
+        .setReturnTypeDescriptor(adaptorTypeDescriptor)
         .build();
   }
 

@@ -23,7 +23,9 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Invocation;
+import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -117,6 +119,15 @@ public class InsertExternConversionsWasm extends NormalizationPass {
       Expression invocationExpression, TypeDescriptor targetReturnTypeDescriptor) {
     if (TypeDescriptors.isJavaLangString(targetReturnTypeDescriptor)) {
       return RuntimeMethods.createStringFromJsStringMethodCall(invocationExpression);
+    }
+    if (targetReturnTypeDescriptor.isJsFunctionInterface()) {
+      MethodDescriptor adaptMethodDescriptor =
+          LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptMethod(
+              LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
+                  targetReturnTypeDescriptor));
+      return MethodCall.builderFrom(adaptMethodDescriptor)
+          .setArguments(invocationExpression)
+          .build();
     }
     if (targetReturnTypeDescriptor.isNative() || targetReturnTypeDescriptor.isPrimitive()) {
       return invocationExpression;

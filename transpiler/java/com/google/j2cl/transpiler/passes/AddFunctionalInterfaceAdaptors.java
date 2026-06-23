@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -95,6 +96,7 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
               addDefaultConstructor(adaptorType);
               addJsFuncrefField(adaptorType);
               addJsFuncrefConstructor(adaptorType);
+              addJsFunctionAdaptMethod(adaptorType);
               addJsFunctionInvokeMethod(adaptorType);
               addJsFunctionForwardingMethod(adaptorType);
             }
@@ -166,6 +168,41 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
                     .build()
                     .infixAssign(wasmExternParameter.createReference())
                     .makeStatement(sourcePosition))
+            .setSourcePosition(sourcePosition)
+            .build());
+  }
+
+  /**
+   * Adds a static adapt method to the JsFunction adaptor class to convert an incoming JavaScript
+   * function reference to JsFunction adaptor.
+   */
+  private static void addJsFunctionAdaptMethod(Type adaptorType) {
+    DeclaredTypeDescriptor adaptorTypeDescriptor = adaptorType.getTypeDescriptor();
+    SourcePosition sourcePosition = adaptorType.getSourcePosition();
+    Variable wasmExternParameter =
+        Variable.builder()
+            .setFinal(true)
+            .setParameter(true)
+            .setName("jsFuncref")
+            .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmExtern)
+            .build();
+
+    // TODO(b/516900958): Implement once we decide the exact mechanism to link the adaptor and the
+    // js function. Update the example.
+    // Generates:
+    // static JsFunctionAdaptor adapt(WasmExtern jsFuncref) {
+    //   return null;
+    // }
+    adaptorType.addMember(
+        Method.builder()
+            .setMethodDescriptor(
+                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptMethod(adaptorTypeDescriptor))
+            .setParameters(wasmExternParameter)
+            .addStatements(
+                ReturnStatement.builder()
+                    .setExpression(adaptorTypeDescriptor.getNullValue())
+                    .setSourcePosition(sourcePosition)
+                    .build())
             .setSourcePosition(sourcePosition)
             .build());
   }
