@@ -87,8 +87,7 @@ internal class ObjCNameSources(val nameSources: NameSources) {
   fun hiddenFromObjCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
-      typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") ->
-        hiddenFromObjCAnnotationSource()
+      typeDeclaration.isHiddenFromObjC() -> hiddenFromObjCAnnotationSource()
       else -> Source.EMPTY
     }
 
@@ -188,6 +187,12 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       needsObjCNameAnnotation(enclosingTypeDeclaration, forceObjCNameAnnotation = true) &&
         environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
     }
+
+  private fun TypeDeclaration.isHiddenFromObjC(): Boolean =
+    hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") ||
+      annotations.any {
+        it.typeDescriptor.qualifiedSourceName == "com.google.j2kt.annotations.HidesFromObjC"
+      }
 
   private fun isHiddenFromObjC(methodDescriptor: MethodDescriptor): Boolean =
     hasHiddenFromObjCAnnotation(methodDescriptor)
