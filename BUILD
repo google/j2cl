@@ -87,19 +87,6 @@ bool_flag(
     build_setting_default = False,
 )
 
-bool_flag(
-    name = "disable_graalified_header_klib_compiler",
-    build_setting_default = False,
-    scope = "universal",
-)
-
-config_setting(
-    name = "disable_graalified_header_klib_compiler_config",
-    flag_values = {
-        ":disable_graalified_header_klib_compiler": "true",
-    },
-)
-
 # Flag to enable profiling for particular targets.
 # Example usage:
 #   blaze build <my_binary> --//:profiling_filter=<target_pattern>
