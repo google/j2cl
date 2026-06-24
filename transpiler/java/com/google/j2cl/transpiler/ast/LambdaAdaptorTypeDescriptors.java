@@ -42,6 +42,7 @@ public final class LambdaAdaptorTypeDescriptors {
   /** Returns the TypeDescriptor for a Wasm base lambda adaptor class. */
   public static DeclaredTypeDescriptor createFunctionalInterfaceAdaptorTypeDescriptor(
       TypeDescriptor typeDescriptor) {
+    checkArgument(typeDescriptor.isFunctionalInterface());
     return createLambdaAdaptorTypeDescriptor(
         typeDescriptor,
         (DeclaredTypeDescriptor) typeDescriptor,
